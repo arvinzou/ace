@@ -1,3 +1,4 @@
+var editor;
 jQuery(function($) {
 	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 		_title : function(title) {
@@ -45,6 +46,13 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
+								editor=CKEDITOR.replace('docText');
+                                editor.on( 'change', function( event ) {
+                                    var data = this.getData();//内容
+
+                                    $("textarea[name=docText]").val(data);
+
+                                });
 							}
 						})
 			});
@@ -70,6 +78,9 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
+                                var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
+                                var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
+                                loadText(gd.id);
 							}
 						})
 			});
@@ -146,6 +157,30 @@ function loadView(id) {
                 }
 				$("#dialog-message-view").find('#' + key).html(value);
 			});
+		},
+		error : function() {
+			alert("加载错误！");
+		}
+	});
+}
+function loadText(id) {
+	$.ajax({
+		type : "post",
+		url : cfg.view_load_data_url,
+		data : {
+			id : id
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+		    editor=CKEDITOR.replace('docText');
+            editor.on( 'change', function( event ) {
+                var data = this.getData();//内容
+                $("textarea[name=docText]").val(data);
+            });
+            $("textarea[name=docText]").val(rst.value.docText);
+            editor.setData(rst.value.docText);
+
 		},
 		error : function() {
 			alert("加载错误！");

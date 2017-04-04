@@ -47,12 +47,12 @@ jQuery(function($) {
 										'<div class="widget-header" />')
 								style_edit_form(form);
 								editor=CKEDITOR.replace('docText');
-                                						editor.on( 'change', function( event ) {
-                                                            var data = this.getData();//内容
+                                editor.on( 'change', function( event ) {
+                                    var data = this.getData();//内容
 
-                                                            $("textarea[name=docText]").val(data);
+                                    $("textarea[name=docText]").val(data);
 
-                                                        });
+                                });
 							}
 						})
 
@@ -79,9 +79,9 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
-                                    var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
-                                    var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
-                                    loadText(gd.id);
+                                var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
+                                var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
+                                loadText(gd.id);
 
 
 							}

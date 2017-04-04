@@ -70,7 +70,7 @@ public class ActivityPhotosServiceImpl implements ActivityPhotosService {
         }
         o.setCreateDate(new Date());
         o.setStatus("0");
-        o.setCreateUserName(userProp.getCorpName());
+        o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.activityPhotosDao.insert(o);
         this.dataBaseLogService.log("添加意见反馈", "意见反馈", "", o.getName(),

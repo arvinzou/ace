@@ -30,7 +30,7 @@
 				类别：<input
 							class="easyui-combobox" style="width: 200px" name="payType"
 							data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=85&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
@@ -87,14 +87,11 @@
     </div>
 
     <div id="dialog-message-view" class="hide">
-<div class="profile-user-info profile-user-info-striped">
+
+<div class="profile-user-info profile-user-info-striped profile-bg">
+<div class="profile-group-title">基本信息</div>
 <div class="profile-info-row">
-<div class="profile-info-name">
-主键</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="id">
-</span>
-</div>
+
 <div class="profile-info-name">
 主题名称</div>
 <div class="profile-info-value">
@@ -107,52 +104,29 @@
 <span class="editable editable-click" id="activityLocation">
 </span>
 </div>
-</div>
-<div class="profile-info-row">
-<div class="profile-info-name">
-分类</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="category">
-</span>
-</div>
 <div class="profile-info-name">
 活动日期</div>
 <div class="profile-info-value">
 <span class="editable editable-click" id="activityDate">
 </span>
 </div>
-<div class="profile-info-name">
-活动详细情况</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="docText">
-</span>
 </div>
+
+
 </div>
+<div class="profile-user-info profile-user-info-striped profile-bg">
+<div class="profile-group-title">详细情况</div>
+</div>
+<div  id="docText" class="profile-longtext">
+</div>
+
+<div class="profile-user-info profile-user-info-striped profile-bg">
+<div class="profile-group-title">操作信息</div>
 <div class="profile-info-row">
-<div class="profile-info-name">
-状态</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="status">
-</span>
-</div>
-<div class="profile-info-name">
-创建人编号</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="createUserId">
-</span>
-</div>
 <div class="profile-info-name">
 创建人姓名</div>
 <div class="profile-info-value">
 <span class="editable editable-click" id="createUserName">
-</span>
-</div>
-</div>
-<div class="profile-info-row">
-<div class="profile-info-name">
-阅读量</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="reading">
 </span>
 </div>
 <div class="profile-info-name">
@@ -162,19 +136,14 @@
 </span>
 </div>
 <div class="profile-info-name">
-最后更新人编号</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="lastModifyUserId">
-</span>
-</div>
-</div>
-<div class="profile-info-row">
-<div class="profile-info-name">
 最后更新人姓名</div>
 <div class="profile-info-value">
 <span class="editable editable-click" id="lastModifyUserName">
 </span>
 </div>
+</div>
+<div class="profile-info-row">
+
 <div class="profile-info-name">
 最后更新时间</div>
 <div class="profile-info-value">
@@ -194,6 +163,7 @@
 		src="${pageContext.request.contextPath}/content/service/activityPhotos/controller.js?version=${cfg.version}"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/service/activityPhotos/view.js?version=${cfg.version}"></script>
+	<script type="text/javascript" src="${portalPath}/ckeditor/ckeditor.js?t=B37D54V"></script>
 	<jsp:include page="../../common/footer-2.jsp" />
 	<script type="text/javascript">
 window.onresize = function () {
