@@ -1,8 +1,6 @@
 package com.huacainfo.ace.workflow.dao;
 
 import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.workflow.model.$!{bean.name};
 import com.huacainfo.ace.workflow.vo.$!{bean.name}QVo;
@@ -26,6 +24,5 @@ public interface $!{bean.name}Dao {
 	int findCount(@Param("condition") $!{bean.name}QVo condition);
 
 	int isExit($!{bean.name} record);
-	
-	List<Map<String,Object>> selectTreeList();
+
 }

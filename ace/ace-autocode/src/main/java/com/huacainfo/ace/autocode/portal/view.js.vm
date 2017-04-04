@@ -43,7 +43,7 @@ jQuery(function($) {
 		multiselect : false,
 		// multikey: "ctrlKey",
 		multiboxonly : true,
-		shrinkToFit:false,
+		shrinkToFit:true,
 		autoScroll: false,
 		loadComplete : function() {
 			$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
@@ -161,13 +161,7 @@ jQuery(function($) {
 					.wrap('<div class="widget-header" />')
 		}
 	})
-    jQuery(cfg.grid_selector).jqGrid('navButtonAdd','#grid-pager',{
-	    caption: "设置列可见",
-	    title: "设置列可见",
-	    onClickButton : function (){
-	        jQuery(cfg.grid_selector).jqGrid('columnChooser');
-	    }
-	});
+
 	function style_delete_form(form) {
 		var buttons = form.next().find('.EditButton .fm-button');
 		buttons.addClass('btn btn-sm btn-white btn-round')
@@ -177,7 +171,13 @@ jQuery(function($) {
 		buttons.eq(1).addClass('btn-default')
 				.prepend('<i class="ace-icon fa fa-times"></i>')
 	}
-
+	jQuery(cfg.grid_selector).jqGrid('navButtonAdd','#grid-pager',{
+	    caption: "设置列可见",
+	    title: "设置列可见",
+	    onClickButton : function (){
+	        jQuery(cfg.grid_selector).jqGrid('columnChooser');
+	    }
+	});
 	function style_search_filters(form) {
 		form.find('.delete-rule').val('X');
 		form.find('.add-rule').addClass('btn btn-xs btn-primary');

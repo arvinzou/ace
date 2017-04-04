@@ -1,4 +1,5 @@
 var cfg = {};
+cfg.view_load_data_url = contextPath + '/$!{bean.lowerName}/select$!{bean.name}ByPrimaryKey.do';
 cfg.grid_load_data_url = contextPath + '/$!{bean.lowerName}/find$!{bean.name}List.do';
 cfg.grid_add_data_url = contextPath + '/$!{bean.lowerName}/insert$!{bean.name}.do';
 cfg.grid_edit_data_url = contextPath + '/$!{bean.lowerName}/update$!{bean.name}.do';

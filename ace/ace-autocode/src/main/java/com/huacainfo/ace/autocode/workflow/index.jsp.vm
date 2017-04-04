@@ -27,7 +27,7 @@
 				<div class="widget-main padding-6">
 					<form action="#" id="fm-search">
 					
-				类型：<input
+				类别：<input
 							class="easyui-combobox" style="width: 200px" name="payType"
 							data-options="
                     url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
@@ -35,6 +35,9 @@
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
+
+                     名称： <input name="name" type="text"
+                                        							style="width: 200px;" />
 						<button class="btn btn-info" id="btn-search"
 							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/find$!{bean.name}List.do">
 							 <i
@@ -74,6 +77,18 @@
 		
 		
 	</div>
+	<div id="dialog-message" class="hide">
+        		<div id="uploader">
+        			<p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+        		</div>
+    </div>
+    <div id="dialog-message-file" class="hide">
+        <div id="load" class="loading"></div>
+    </div>
+
+    <div id="dialog-message-view" class="hide">
+$!{bean.view}
+    </div>
 	<jsp:include page="../../common/footer-1.jsp" />
 	<script
 		src="${pageContext.request.contextPath}/content/service/$!{bean.lowerName}/config.js?version=${cfg.version}"></script>

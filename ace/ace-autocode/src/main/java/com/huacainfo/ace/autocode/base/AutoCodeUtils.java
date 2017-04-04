@@ -100,9 +100,11 @@ public class AutoCodeUtils {
         this.CRON_JS_PATH = this.getProperty("CRON_JS_PATH");
 
         if (this.getProperty("local").equals("true")) {
-            this.clientws = this.getProperty("clientws");
-            this.serverws = this.getProperty("serverws");
-            this.webws = this.getProperty("webws");
+            String userDir=System.getProperty("user.dir");
+            System.out.println(userDir);
+            this.clientws =userDir+ this.getProperty("clientws");
+            this.serverws =userDir+ this.getProperty("serverws");
+            this.webws =userDir+ this.getProperty("webws");
 
         }
     }

@@ -87,6 +87,102 @@
     </div>
 
     <div id="dialog-message-view" class="hide">
+<div class="profile-user-info profile-user-info-striped">
+<div class="profile-info-row">
+<div class="profile-info-name">
+主键</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="id">
+</span>
+</div>
+<div class="profile-info-name">
+主题名称</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="name">
+</span>
+</div>
+<div class="profile-info-name">
+活动地点</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="activityLocation">
+</span>
+</div>
+</div>
+<div class="profile-info-row">
+<div class="profile-info-name">
+分类</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="category">
+</span>
+</div>
+<div class="profile-info-name">
+活动日期</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="activityDate">
+</span>
+</div>
+<div class="profile-info-name">
+活动详细情况</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="docText">
+</span>
+</div>
+</div>
+<div class="profile-info-row">
+<div class="profile-info-name">
+状态</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="status">
+</span>
+</div>
+<div class="profile-info-name">
+创建人编号</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="createUserId">
+</span>
+</div>
+<div class="profile-info-name">
+创建人姓名</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="createUserName">
+</span>
+</div>
+</div>
+<div class="profile-info-row">
+<div class="profile-info-name">
+阅读量</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="reading">
+</span>
+</div>
+<div class="profile-info-name">
+入库日期</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="createDate">
+</span>
+</div>
+<div class="profile-info-name">
+最后更新人编号</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="lastModifyUserId">
+</span>
+</div>
+</div>
+<div class="profile-info-row">
+<div class="profile-info-name">
+最后更新人姓名</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="lastModifyUserName">
+</span>
+</div>
+<div class="profile-info-name">
+最后更新时间</div>
+<div class="profile-info-value">
+<span class="editable editable-click" id="lastModifyDate">
+</span>
+</div>
+</div>
+</div>
 
     </div>
 	<jsp:include page="../../common/footer-1.jsp" />

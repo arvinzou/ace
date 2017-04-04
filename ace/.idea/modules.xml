@@ -10,11 +10,8 @@
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-client/ace-kernel-client (1).iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-client/ace-kernel-client (1).iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-service/ace-kernel-service (1).iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-service/ace-kernel-service (1).iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-web/ace-kernel-web.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-web/ace-kernel-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-web/ace-kernel-web (1).iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-web/ace-kernel-web (1).iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />
