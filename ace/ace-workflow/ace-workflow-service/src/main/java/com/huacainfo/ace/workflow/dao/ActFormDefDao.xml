@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.ActFormDefDao">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.workflow.model.ActFormDef">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="category" jdbcType="VARCHAR" property="category" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="discribtion" jdbcType="VARCHAR" property="discribtion" />
+		<result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+		<result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+		<result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+		<result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+		<result column="lastModifyUserName" jdbcType="VARCHAR"
+			property="lastModifyUserName" />
+		<result column="status" jdbcType="CHAR" property="status" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="BaseResultMapVo"
+		type="com.huacainfo.ace.workflow.vo.ActFormDefVo">
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, category, name, discribtion, createDate, createUserId,
+		createUserName, lastModifyDate,
+		lastModifyUserId, lastModifyUserName, status
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from act_form_def
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from act_form_def
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.workflow.model.ActFormDef">
+		insert into act_form_def (id, category, name,
+		discribtion, createDate, createUserId,
+		createUserName, lastModifyDate, lastModifyUserId,
+		lastModifyUserName, status)
+		values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{discribtion,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+		#{createUserName,jdbcType=VARCHAR},
+		#{lastModifyDate,jdbcType=TIMESTAMP},
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		#{lastModifyUserName,jdbcType=VARCHAR}, #{status,jdbcType=CHAR})
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.workflow.model.ActFormDef">
+		update act_form_def
+		set category = #{category,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		discribtion = #{discribtion,jdbcType=VARCHAR},
+		lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+		lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+		lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="isExit" resultType="int">
+		select count(1) from
+		act_form_def
+		where name=#{name}
+	</select>
+	<sql id="whereCondition">
+		from act_form_def t left join act_form_category a
+		on t.category=a.id
+		where t.status='1'
+		
+		<if test="condition.category!=null and condition.category!=&quot;&quot;">
+			and t.category =#{condition.category,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+	select t.* from(
+		select
+		t.id, t.category, t.name, t.discribtion, t.createDate, t.createUserId,
+		t.createUserName, t.lastModifyDate,
+		t.lastModifyUserId, t.lastModifyUserName, t.status,a.name categoryName
+		<include refid="whereCondition" />
+		) t
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.createDate
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<select id="selectFormDefList" resultType="map">
+	select model_key code,name from activiti.act_de_model t where t.model_type='2'
+	
+<!-- 		<if test='params.q !=null and params.q!=""'> -->
+<!-- 			and (t.model_key=#{params.q} or t.name like -->
+<!-- 			concat('%',#{params.q},'%')) -->
+<!-- 		</if> -->
+		order by t.name limit 0,2000
+	</select>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="cacheEnabled" value="false" />
+	</settings>
+	<plugins>
+		<plugin
+			interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+			<property name="dialectClass"
+				value="com.huacainfo.ace.common.mybatis.AspireMySQLDialect" />
+			<property name="asyncTotalCount" value="true" />
+		</plugin>
+		<plugin interceptor="com.huacainfo.ace.common.mybatis.SQLTimerInterceptor" />
+		<plugin interceptor="com.huacainfo.ace.common.mybatis.ResultSetRowLimitInterceptor">
+			<property name="rowsLimit" value="10000" />
+		</plugin>
+	</plugins>
+</configuration>

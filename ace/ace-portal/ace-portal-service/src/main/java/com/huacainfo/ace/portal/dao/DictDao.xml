@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.DictDao">
+	<select id="init" resultType="int">
+		select 1 from dual
+	</select>
+	<select id="selectAllDictList" resultType="map">
+		select t.* from
+		dict_category t where (syid ='sys' or syid=#{syid})
+	</select>
+	<select id="selectSyidBydc" resultType="map">
+		select syid from dict_category where syid!='sys' group by syid
+	</select>
+</mapper>

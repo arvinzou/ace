@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.ActFormDataDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.workflow.model.ActFormData">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="appId" jdbcType="VARCHAR" property="appId" />
+    <result column="instId" jdbcType="VARCHAR" property="instId" />
+    <result column="taskId" jdbcType="VARCHAR" property="taskId" />
+    <result column="formId" jdbcType="VARCHAR" property="formId" />
+    <result column="fieldId" jdbcType="VARCHAR" property="fieldId" />
+    <result column="textValue" jdbcType="VARCHAR" property="textValue" />
+    <result column="longValue" jdbcType="BIGINT" property="longValue" />
+    <result column="doubleValue" jdbcType="DOUBLE" property="doubleValue" />
+    <result column="dateValue" jdbcType="TIMESTAMP" property="dateValue" />
+    <result column="auditResult" jdbcType="VARCHAR" property="auditResult" />
+    <result column="auditRemark" jdbcType="VARCHAR" property="auditRemark" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="status" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.workflow.model.ActFormData">
+    <result column="longTextValue" jdbcType="LONGVARCHAR" property="longTextValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, appId, instId, taskId, formId, fieldId, textValue, longValue, doubleValue, dateValue, 
+    auditResult, auditRemark, createDate, createUserId, createUserName, lastModifyDate, 
+    lastModifyUserId, lastModifyUserName, status
+  </sql>
+  <sql id="Blob_Column_List">
+    longTextValue
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from act_form_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from act_form_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.workflow.model.ActFormData">
+    insert into act_form_data (id, appId, instId, 
+      taskId, formId, fieldId, 
+      textValue, longValue, doubleValue, 
+      dateValue, auditResult, auditRemark, 
+      createDate, createUserId, createUserName, 
+      lastModifyDate, lastModifyUserId, lastModifyUserName, 
+      status, longTextValue)
+    values (#{id,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{instId,jdbcType=VARCHAR}, 
+      #{taskId,jdbcType=VARCHAR}, #{formId,jdbcType=VARCHAR}, #{fieldId,jdbcType=VARCHAR}, 
+      #{textValue,jdbcType=VARCHAR}, #{longValue,jdbcType=BIGINT}, #{doubleValue,jdbcType=DOUBLE}, 
+      #{dateValue,jdbcType=TIMESTAMP}, #{auditResult,jdbcType=VARCHAR}, #{auditRemark,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{longTextValue,jdbcType=LONGVARCHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.workflow.model.ActFormData">
+    update act_form_data
+    set 
+      textValue = #{textValue,jdbcType=VARCHAR},
+      longValue = #{longValue,jdbcType=BIGINT},
+      doubleValue = #{doubleValue,jdbcType=DOUBLE},
+      longTextValue = #{longTextValue,jdbcType=LONGVARCHAR},
+      dateValue = #{dateValue,jdbcType=TIMESTAMP},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR}
+    where instId=#{instId} and fieldId=#{fieldId} 
+  </update>
+  
+   <select id="isExit" resultType="int">
+		select count(1) from
+		act_form_data 
+		where instId=#{instId} and fieldId=#{fieldId} 
+	</select>
+	
+	<select id="selectListByInstId" resultType="map">
+	SELECT
+	a.label,
+	a.row,
+	a.colum,
+	a.orders,
+	a.dataType,
+	a.fieldType,
+	t.fieldId,
+	a.required,
+	a.dictId,
+	ifnull(
+		ifnull(
+			ifnull(
+				ifnull(t.textValue, t.longTextValue),
+				t.longValue
+			),
+			t.doubleValue
+		),
+		t.dateValue
+	)
+value
+
+FROM
+	(
+		SELECT
+			label,
+			row,
+			colum,
+			orders,
+			dataType,
+			fieldType,
+			fieldId,
+			required,
+			dictId
+		FROM
+			act_form_items
+		WHERE
+			formId = (
+				SELECT
+					max(formId)
+				FROM
+					act_form_data
+				WHERE
+					instId = #{instId}
+				AND taskId IS NULL
+			)
+	) a
+LEFT JOIN (
+	SELECT
+		fieldId,
+		textValue,
+		longTextValue,
+		longValue,
+		doubleValue,
+		dateValue,
+		createDate
+	FROM
+		act_form_data
+	WHERE
+		instId = #{instId}
+) t ON a.fieldId = t.fieldId
+ORDER BY
+	t.createDate,
+	a.orders
+	
+	</select>
+	<select id="selectModelByAppId" resultType="map">
+SELECT
+	a.fieldId,
+	a.label,
+	a.fieldType,
+	a.dataType,
+	a.required,
+	a.dictId
+FROM
+	act_form_items a
+WHERE
+	a.formId IN (
+		SELECT
+			t.formId
+		FROM
+			act_form_data t
+		WHERE
+			t.appId = #{appId}
+			group by t.formId
+	)
+AND a.fieldType != 'grouptitle'
+ORDER BY
+	a.formId,
+	a.orders
+	</select>
+</mapper>

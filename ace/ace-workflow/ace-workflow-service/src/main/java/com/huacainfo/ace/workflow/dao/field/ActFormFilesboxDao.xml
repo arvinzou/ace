@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.field.ActFormFilesboxDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.workflow.model.field.ActFormFilesbox">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="required" jdbcType="VARCHAR" property="required" />
+    <result column="demoUrl" jdbcType="VARCHAR" property="demoUrl" />
+    <result column="discribtion" jdbcType="VARCHAR" property="discribtion" />
+    <result column="formId" jdbcType="VARCHAR" property="formId" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="fileTypes" jdbcType="VARCHAR" property="fileTypes" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="status" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, label, required, demoUrl, discribtion, formId, icon, fileTypes, createDate, 
+    createUserId, createUserName, lastModifyDate, lastModifyUserId, lastModifyUserName, 
+    status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="map">
+    select 
+   id, name, label, required, demoUrl, discribtion, formId, icon, fileTypes
+    from act_form_filesbox
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from act_form_filesbox
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.workflow.model.field.ActFormFilesbox">
+    insert into act_form_filesbox (id, name, label, 
+      required, demoUrl, discribtion, 
+      formId, icon, fileTypes, 
+      createDate, createUserId, createUserName, 
+      lastModifyDate, lastModifyUserId, lastModifyUserName, 
+      status)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, 
+      #{required,jdbcType=VARCHAR}, #{demoUrl,jdbcType=VARCHAR}, #{discribtion,jdbcType=VARCHAR}, 
+      #{formId,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{fileTypes,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.workflow.model.field.ActFormFilesbox">
+    update act_form_filesbox
+    set name = #{name,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      required = #{required,jdbcType=VARCHAR},
+      demoUrl = #{demoUrl,jdbcType=VARCHAR},
+      discribtion = #{discribtion,jdbcType=VARCHAR},
+      formId = #{formId,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      fileTypes = #{fileTypes,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="isExit" resultType="int">
+		select count(1) from
+		act_form_filesbox
+		where id=#{id}
+	</select>
+</mapper>

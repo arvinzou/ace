@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.kernel.dao.WriterDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.kernel.model.Writer">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="pcode" jdbcType="VARCHAR" property="pcode" />
+    <result column="reading" jdbcType="BIGINT" property="reading" />
+    <result column="intro" jdbcType="LONGVARCHAR" property="intro" />
+    <result column="descri" jdbcType="LONGVARCHAR" property="descri" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.kernel.vo.WriterVo">
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, sex, birthday, photo, category, pcode, reading, status, createUserId, createUserName, 
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+  <sql id="Blob_Column_List">
+    intro, descri
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from writer
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from writer
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.kernel.model.Writer">
+    insert into writer (id, name, sex, birthday, 
+      photo, category, pcode, 
+      reading, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate, intro, 
+      descri)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, 
+      #{photo,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{pcode,jdbcType=VARCHAR}, 
+      #{reading,jdbcType=BIGINT}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{intro,jdbcType=LONGVARCHAR}, 
+      #{descri,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.kernel.model.Writer">
+    update writer
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      photo = #{photo,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      intro = #{intro,jdbcType=LONGVARCHAR},
+      descri = #{descri,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <sql id="whereCondition">
+    from writer where 0=0
+    <if test='condition.name!=null and condition.name!=""'>
+      and name like
+      concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="condition.category!=null and condition.category!=&quot;&quot;">
+      and t.category =#{condition.category,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition" />
+  </select>
+  <select id="findList" resultMap="BaseResultMapVo">
+
+    select
+    <include refid="Base_Column_List" />
+    <include refid="whereCondition" />
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY createDate
+      </otherwise>
+    </choose>
+
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+  </select>
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    writer where
+    name=#{name}
+  </select>
+</mapper>

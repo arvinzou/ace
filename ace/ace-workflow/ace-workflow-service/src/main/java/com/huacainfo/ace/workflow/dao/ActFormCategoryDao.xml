@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.ActFormCategoryDao">
+	<resultMap id="BaseResultMap"
+		type="com.huacainfo.ace.workflow.model.ActFormCategory">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="pid" jdbcType="VARCHAR" property="pid" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+		<result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+		<result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+		<result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+		<result column="lastModifyUserName" jdbcType="VARCHAR"
+			property="lastModifyUserName" />
+		<result column="status" jdbcType="CHAR" property="status" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="BaseResultMapVo"
+		type="com.huacainfo.ace.workflow.vo.ActFormCategoryVo">
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, pid, name, createDate, createUserId, createUserName,
+		lastModifyDate,
+		lastModifyUserId,
+		lastModifyUserName, status
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from act_form_category
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		act_form_category
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.workflow.model.ActFormCategory">
+		insert into act_form_category
+		(id, pid, name,
+		createDate, createUserId, createUserName,
+		lastModifyDate, lastModifyUserId, lastModifyUserName,
+		status)
+		values
+		(#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+		#{lastModifyDate,jdbcType=TIMESTAMP},
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		#{lastModifyUserName,jdbcType=VARCHAR},
+		#{status,jdbcType=CHAR})
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.workflow.model.ActFormCategory">
+		update
+		act_form_category
+		set pid = #{pid,jdbcType=VARCHAR},
+		name =
+		#{name,jdbcType=VARCHAR},
+		createDate =
+		#{createDate,jdbcType=TIMESTAMP},
+		createUserId =
+		#{createUserId,jdbcType=VARCHAR},
+		createUserName =
+		#{createUserName,jdbcType=VARCHAR},
+		lastModifyDate =
+		#{lastModifyDate,jdbcType=TIMESTAMP},
+		lastModifyUserId =
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		lastModifyUserName =
+		#{lastModifyUserName,jdbcType=VARCHAR},
+		status =
+		#{status,jdbcType=CHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+	<select id="isExit" resultType="int">
+		select count(1) from
+		act_form_category
+		where name=#{name}
+	</select>
+	<sql id="whereCondition">
+		from act_form_category
+		where status='1'
+
+		<if test="condition.pid!=null and condition.pid!=&quot;&quot;">
+			and pid =#{condition.pid,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and name like
+			concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+		select
+		id, pid, name, createDate, createUserId, createUserName,
+		lastModifyDate,
+		lastModifyUserId,
+		lastModifyUserName, status
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY createDate
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+
+	<select id="selectTreeList" resultType="map">
+		SELECT
+	t.id ID,
+	t.pid PID,
+	'closed' STATE,
+	t.name TEXT,
+	 '' ICON,
+	'' HREF,
+	'' SRC,
+	(
+		SELECT
+			COUNT(*)
+		FROM
+			act_form_category a
+		WHERE
+			a.pid = t.id
+		AND a. STATUS = '1'
+	) CHILD_COUNT
+FROM
+	act_form_category t
+WHERE
+	STATUS = '1'
+	</select>
+</mapper>

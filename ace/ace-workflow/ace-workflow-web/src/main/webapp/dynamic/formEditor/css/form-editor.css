@@ -1,0 +1,73 @@
+@CHARSET "UTF-8";
+.left {
+	width: 100%;
+}
+
+.left table {
+	background: #E0ECFF;
+}
+
+.left td {
+	background: #fafafa;
+	color: #444;
+	text-align: center;
+	padding: 2px;
+}
+.right {
+	width: 100%;
+}
+
+.right table {
+	background: #E0ECFF;
+	width: 100%;
+}
+
+.right td {
+	background: #fafafa;
+	color: #444;
+	text-align: center;
+	padding: 2px;
+}
+
+.right td {
+	background: #E0ECFF;
+}
+
+.right td.drop {
+	background: #fafafa;
+	width: 100px;
+}
+
+.right td.over {
+	background: #FBEC88;
+}
+
+.right td.activeFiled {
+	border: 2px dashed blue;
+}
+
+.item {
+	text-align: center;
+	border: 1px solid #999999;
+	background: #ffcc66;
+	color: #000000;
+}
+
+.assigned {
+	border: 1px solid #999999;
+	background: #ffcc66;
+}
+
+.trash {
+	background-color: red;
+}
+.profile-group-title{
+	padding:2px;
+	font-weight:800;
+}
+.profile-bg{
+	background: #fafafa;
+}
+.profile-info-value{
+	background: #FFFFFF;
+}

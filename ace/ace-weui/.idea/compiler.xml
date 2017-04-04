@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ace-kernel-client" />
+        <module name="ace-kernel-service" />
+        <module name="ace-kernel-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ace-kernel-client" target="1.7" />
+      <module name="ace-kernel-service" target="1.7" />
+      <module name="ace-kernel-web" target="1.7" />
+      <module name="ace-weui" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

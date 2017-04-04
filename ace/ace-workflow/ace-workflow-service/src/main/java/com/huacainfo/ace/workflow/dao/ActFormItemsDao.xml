@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.ActFormItemsDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.workflow.model.ActFormItems">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="formId" jdbcType="VARCHAR" property="formId" />
+    <result column="fieldId" jdbcType="VARCHAR" property="fieldId" />
+    <result column="orders" jdbcType="INTEGER" property="order" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="fieldType" jdbcType="VARCHAR" property="fieldType" />
+    <result column="row" jdbcType="INTEGER" property="row" />
+    <result column="colum" jdbcType="INTEGER" property="colum" />
+    <result column="dataType" jdbcType="VARCHAR" property="dataType" />
+    <result column="required" jdbcType="VARCHAR" property="required" />
+    <result column="dictId" jdbcType="VARCHAR" property="dictId" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="status" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, formId, fieldId, orders, label, fieldType, row, colum, dataType, required, dictId, 
+createDate, createUserId, createUserName, 
+    lastModifyDate, lastModifyUserId, lastModifyUserName, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from act_form_items
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from act_form_items
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.workflow.model.ActFormItems">
+    insert into act_form_items (id, formId, fieldId, 
+      orders, label, fieldType, 
+      row, colum, dataType, required, dictId,
+      createDate, createUserId, createUserName,
+      status)
+    values (#{id,jdbcType=VARCHAR}, #{formId,jdbcType=VARCHAR}, #{fieldId,jdbcType=VARCHAR}, 
+      #{order,jdbcType=INTEGER}, #{label,jdbcType=VARCHAR}, #{fieldType,jdbcType=VARCHAR}, 
+      #{row,jdbcType=INTEGER}, #{colum,jdbcType=INTEGER}, #{dataType,jdbcType=VARCHAR},  #{required,jdbcType=VARCHAR},
+       #{dictId,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.workflow.model.ActFormItems">
+    update act_form_items
+    set
+      orders = #{order,jdbcType=INTEGER},
+      label = #{label,jdbcType=VARCHAR},
+      fieldType = #{fieldType,jdbcType=VARCHAR},
+      dataType = #{dataType,jdbcType=VARCHAR},
+       required = #{required,jdbcType=VARCHAR},
+       dictId = #{dictId,jdbcType=VARCHAR},
+      row = #{row,jdbcType=INTEGER},
+      colum = #{colum,jdbcType=INTEGER},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="isExit" resultType="int">
+		select count(1) from
+		act_form_items
+		where id=#{id}
+	</select>
+	<select id="selectListByFormId" resultType="map">
+		select  id, orders 'order', label, fieldType, row, colum, dataType, required, dictId from act_form_items
+		where formId=#{formId} order by orders
+	</select>
+	
+	
+</mapper>

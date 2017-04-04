@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.field.ActFormTextboxDao">
+	<resultMap id="BaseResultMap"
+		type="com.huacainfo.ace.workflow.model.field.ActFormTextbox">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="label" jdbcType="VARCHAR" property="label" />
+		<result column="required" jdbcType="VARCHAR" property="required" />
+		<result column="validatorType" jdbcType="VARCHAR" property="validatorType" />
+		<result column="minlength" jdbcType="INTEGER" property="minlength" />
+		<result column="maxlength" jdbcType="INTEGER" property="maxlength" />
+		<result column="placeholder" jdbcType="VARCHAR" property="placeholder" />
+		<result column="defaultValue" jdbcType="VARCHAR" property="defaultValue" />
+		<result column="multiline" jdbcType="VARCHAR" property="multiline" />
+		<result column="styleWidth" jdbcType="VARCHAR" property="styleWidth" />
+		<result column="styleHeight" jdbcType="VARCHAR" property="styleHeight" />
+		<result column="formId" jdbcType="VARCHAR" property="formId" />
+		<result column="icon" jdbcType="VARCHAR" property="icon" />
+		<result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+		<result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+		<result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+		<result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+		<result column="lastModifyUserName" jdbcType="VARCHAR"
+			property="lastModifyUserName" />
+		<result column="status" jdbcType="CHAR" property="status" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, label, required, validatorType, minlength, maxlength,
+		placeholder, defaultValue,
+		multiline, styleWidth, styleHeight, formId, icon, createDate, createUserId,
+		createUserName,
+		lastModifyDate, lastModifyUserId, lastModifyUserName, status
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultType="map">
+		select
+		id, name, label, required, validatorType, minlength, maxlength,
+		placeholder, defaultValue,
+		multiline, styleWidth, styleHeight, formId, icon
+		from act_form_textbox
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from act_form_textbox
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.huacainfo.ace.workflow.model.field.ActFormTextbox">
+		insert into act_form_textbox (id, name, label,
+		required, validatorType, minlength,
+		maxlength, placeholder, defaultValue,
+		multiline, styleWidth, styleHeight,
+		formId, icon, createDate,
+		createUserId, createUserName, lastModifyDate,
+		lastModifyUserId, lastModifyUserName, status
+		)
+		values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{label,jdbcType=VARCHAR},
+		#{required,jdbcType=VARCHAR}, #{validatorType,jdbcType=VARCHAR}, #{minlength,jdbcType=INTEGER},
+		#{maxlength,jdbcType=INTEGER}, #{placeholder,jdbcType=VARCHAR},
+		#{defaultValue,jdbcType=VARCHAR},
+		#{multiline,jdbcType=VARCHAR}, #{styleWidth,jdbcType=VARCHAR}, #{styleHeight,jdbcType=VARCHAR},
+		#{formId,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+		#{lastModifyDate,jdbcType=TIMESTAMP},
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		#{lastModifyUserName,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}
+		)
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.huacainfo.ace.workflow.model.field.ActFormTextbox">
+		update act_form_textbox
+		set name = #{name,jdbcType=VARCHAR},
+		label = #{label,jdbcType=VARCHAR},
+		required = #{required,jdbcType=VARCHAR},
+		validatorType = #{validatorType,jdbcType=VARCHAR},
+		minlength = #{minlength,jdbcType=INTEGER},
+		maxlength = #{maxlength,jdbcType=INTEGER},
+		placeholder = #{placeholder,jdbcType=VARCHAR},
+		defaultValue = #{defaultValue,jdbcType=VARCHAR},
+		multiline = #{multiline,jdbcType=VARCHAR},
+		styleWidth = #{styleWidth,jdbcType=VARCHAR},
+		styleHeight = #{styleHeight,jdbcType=VARCHAR},
+		formId = #{formId,jdbcType=VARCHAR},
+		icon = #{icon,jdbcType=VARCHAR},
+		lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+		lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+		lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+		status = #{status,jdbcType=CHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="isExit" resultType="int">
+		select count(1) from
+		act_form_textbox
+		where id=#{id}
+	</select>
+</mapper>

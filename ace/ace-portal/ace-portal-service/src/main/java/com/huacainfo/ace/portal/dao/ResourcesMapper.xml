@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.portal.dao.ResourcesMapper">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Resources">
+		<id column="RESOURCES_ID" property="resourcesId" jdbcType="VARCHAR" />
+		<result column="PARENT_RESOURCES_ID" property="parentResourcesId"
+			jdbcType="VARCHAR" />
+		<result column="RESOURCES_NAME" property="resourcesName"
+			jdbcType="VARCHAR" />
+		<result column="RESOURCES_URL" property="resourcesUrl"
+			jdbcType="VARCHAR" />
+		<result column="RESOURCES_PATH" property="resourcesPath"
+			jdbcType="VARCHAR" />
+		<result column="RESOURCES_ICON" property="resourcesIcon"
+			jdbcType="VARCHAR" />
+		<result column="RESOURCES_TYPE" property="resourcesType"
+			jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="CREATE_USER_ID" property="createUserId"
+			jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="STAUTS" property="stauts" jdbcType="VARCHAR" />
+		<result column="SEQUENCE" property="sequence" jdbcType="INTEGER" />
+		<result column="syid" property="syid" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="BaseResultMapVo" extends="BaseResultMap"
+		type="com.huacainfo.ace.portal.vo.ResourcesVo">
+		<result column="CREATE_USER_NAME" property="userName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		RESOURCES_ID, PARENT_RESOURCES_ID, RESOURCES_NAME, RESOURCES_URL, RESOURCES_PATH,
+		RESOURCES_ICON, RESOURCES_TYPE, CREATE_TIME, CREATE_USER_ID, REMARK,
+		STAUTS,SEQUENCE,syid
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from resources
+		where RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from resources
+		where RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.portal.model.Resources">
+		insert into resources (RESOURCES_ID, PARENT_RESOURCES_ID,
+		RESOURCES_NAME,
+		RESOURCES_URL, RESOURCES_PATH, RESOURCES_ICON,
+		RESOURCES_TYPE, CREATE_TIME, CREATE_USER_ID,
+		REMARK, STAUTS,SEQUENCE,syid)
+		values (#{resourcesId,jdbcType=VARCHAR},
+		#{parentResourcesId,jdbcType=VARCHAR},
+		#{resourcesName,jdbcType=VARCHAR},
+		#{resourcesUrl,jdbcType=VARCHAR}, #{resourcesPath,jdbcType=VARCHAR}, #{resourcesIcon,jdbcType=VARCHAR},
+		#{resourcesType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{stauts,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER},#{syid})
+	</insert>
+	<insert id="insertSelective" parameterType="com.huacainfo.ace.portal.model.Resources">
+		insert into resources
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="resourcesId != null">
+				RESOURCES_ID,
+			</if>
+			<if test="parentResourcesId != null">
+				PARENT_RESOURCES_ID,
+			</if>
+			<if test="resourcesName != null">
+				RESOURCES_NAME,
+			</if>
+			<if test="resourcesUrl != null">
+				RESOURCES_URL,
+			</if>
+			<if test="resourcesPath != null">
+				RESOURCES_PATH,
+			</if>
+			<if test="resourcesIcon != null">
+				RESOURCES_ICON,
+			</if>
+			<if test="resourcesType != null">
+				RESOURCES_TYPE,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="stauts != null">
+				STAUTS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="resourcesId != null">
+				#{resourcesId,jdbcType=VARCHAR},
+			</if>
+			<if test="parentResourcesId != null">
+				#{parentResourcesId,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesName != null">
+				#{resourcesName,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesUrl != null">
+				#{resourcesUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesPath != null">
+				#{resourcesPath,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesIcon != null">
+				#{resourcesIcon,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesType != null">
+				#{resourcesType,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				#{createUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="stauts != null">
+				#{stauts,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.portal.model.Resources">
+		update resources
+		<set>
+			<if test="parentResourcesId != null">
+				PARENT_RESOURCES_ID = #{parentResourcesId,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesName != null">
+				RESOURCES_NAME = #{resourcesName,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesUrl != null">
+				RESOURCES_URL = #{resourcesUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesPath != null">
+				RESOURCES_PATH = #{resourcesPath,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesIcon != null">
+				RESOURCES_ICON = #{resourcesIcon,jdbcType=VARCHAR},
+			</if>
+			<if test="resourcesType != null">
+				RESOURCES_TYPE = #{resourcesType,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createUserId != null">
+				CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="stauts != null">
+				STAUTS = #{stauts,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Resources">
+		update resources
+		set PARENT_RESOURCES_ID = #{parentResourcesId,jdbcType=VARCHAR},
+		RESOURCES_NAME = #{resourcesName,jdbcType=VARCHAR},
+		RESOURCES_URL = #{resourcesUrl,jdbcType=VARCHAR},
+		RESOURCES_PATH = #{resourcesPath,jdbcType=VARCHAR},
+		RESOURCES_ICON = #{resourcesIcon,jdbcType=VARCHAR},
+		RESOURCES_TYPE = #{resourcesType,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		STAUTS = #{stauts,jdbcType=VARCHAR},
+		syid= #{syid,jdbcType=VARCHAR},
+		SEQUENCE=#{sequence,jdbcType=INTEGER}
+		where RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+	</update>
+
+	<sql id="whereCondition">
+		from resources , users where resources.create_user_id=users.user_id
+
+		<if
+			test="condition.resourcesName!=null and condition.resourcesName!=&quot;&quot;">
+			and resources_name like
+			concat(#{condition.resourcesName,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="condition.resourcesType!=null and condition.resourcesType!=&quot;&quot;">
+			and resources_type =#{condition.resourcesType,jdbcType=VARCHAR}
+		</if>
+		<if
+			test="condition.resourcesId!=null and condition.resourcesId!=&quot;&quot;">
+			and resources_id =#{condition.resourcesId,jdbcType=VARCHAR}
+		</if>
+		<if
+			test="condition.parentResourcesId!=null and condition.parentResourcesId!=&quot;&quot;">
+			and parent_resources_id
+			=#{condition.parentResourcesId,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+
+		select
+		resources.RESOURCES_ID, resources.SEQUENCE,resources.PARENT_RESOURCES_ID,
+		resources.RESOURCES_NAME, resources.RESOURCES_URL,
+		resources.RESOURCES_PATH,
+		resources.RESOURCES_ICON, resources.RESOURCES_TYPE, resources.CREATE_TIME,
+		resources.CREATE_USER_ID, resources.REMARK,
+		resources.STAUTS,users.name CREATE_USER_NAME,resources.syid
+
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY RESOURCES_ID 
+			</otherwise>
+		</choose>
+
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+	</select>
+	<select id="selectResourcesTreeList" resultType="map">
+		SELECT
+		t.resources_id ID,
+		t.SEQUENCE,
+		t.parent_resources_id PID,
+		t.resources_name TEXT,
+		'' SRC,
+		'' HREF,
+		(SELECT
+		COUNT(*) 
+		FROM
+		resources
+		WHERE
+		resources.parent_resources_id = t.resources_id) CHILD_COUNT
+		FROM
+		resources t
+		ORDER BY t.SEQUENCE,t.RESOURCES_ID 
+	</select>
+
+	<select id="isExitByName" resultType="int">
+		select count(*) from resources where resources_name
+		=#{name,jdbcType=VARCHAR}
+	</select>
+	<select id="isExit" resultType="int">
+		select count(*) from resources where resources_id
+		=#{resourcesId,jdbcType=VARCHAR}
+	</select>
+	<select id="loadResourceDefine" resultType="map">
+		select
+		m.resources_url RESOURCES, group_concat(m.role_id) ROLES
+		from
+		(select
+		a.resources_url, concat('ROLE_' , ifnull(t.role_id, '0')) role_id
+		from
+		resources a left join ROLE_RESOURCES t
+		on
+		a.resources_id = t.resources_id) m
+		where
+		m.resources_url is not null
+		and m.role_id is not null
+		group by m.resources_url
+	</select>
+</mapper>

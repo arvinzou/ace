@@ -1,0 +1,4 @@
+insert into act_id_user  select vu.account as id_, 1 as rev_, vu.name as first_, '' as last_, vu.email as email, vu.password  as pwd_, '' as picture_id_ from ace.users vu where vu.account<>'admin';
+insert into act_id_group  select role_id as id_, 1 as rev_, role_name as name_, 'assignment' as type_ from  ace.role;
+insert into act_id_membership  select t.account as user_id_,  role_id as group_id_ from  ace.users_role inner join ace.users t on ace.users_role.user_id=t.user_id;
+insert into act_id_info  select vu.account as id_, 1 as rev_, 'assignment' as type_, '' as key_, '' as value_, vu.password  as PASSWORD_, '' as PARENT_ID_ from ace.users vu where vu.account<>'admin';

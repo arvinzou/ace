@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ace-portal-web">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="ace-common-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ace-common/ace-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ace-common-web-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ace-common-web/ace-common-web">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ace-portal-client-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ace-portal-client/ace-portal-client">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="ace-portal-web"/>
+        <property name="java-output-path" value="/ace-portal-web/target/classes"/>
+        <property name="component.exclusion.patterns" value="WEB-INF/lib/ace-portal-service-*.jar,WEB-INF/lib/ace-common-dao-*.jar"/>
+    </wb-module>
+</project-modules>

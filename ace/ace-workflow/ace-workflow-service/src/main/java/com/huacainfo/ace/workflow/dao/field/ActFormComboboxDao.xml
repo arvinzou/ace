@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.field.ActFormComboboxDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.workflow.model.field.ActFormCombobox">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="required" jdbcType="VARCHAR" property="required" />
+    <result column="selected" jdbcType="VARCHAR" property="selected" />
+    <result column="defaultValue" jdbcType="VARCHAR" property="defaultValue" />
+    <result column="multiple" jdbcType="VARCHAR" property="multiple" />
+    <result column="styleWidth" jdbcType="VARCHAR" property="styleWidth" />
+    <result column="dictId" jdbcType="VARCHAR" property="dictId" />
+    <result column="dataUrl" jdbcType="VARCHAR" property="dataUrl" />
+    <result column="valueField" jdbcType="VARCHAR" property="valueField" />
+    <result column="textField" jdbcType="VARCHAR" property="textField" />
+    <result column="panelHeight" jdbcType="VARCHAR" property="panelHeight" />
+    <result column="formId" jdbcType="VARCHAR" property="formId" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="status" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, label, required, selected, defaultValue, multiple, styleWidth, dictId, 
+    dataUrl, valueField, textField, panelHeight, formId, icon, createDate, createUserId, 
+    createUserName, lastModifyDate, lastModifyUserId, lastModifyUserName, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="map">
+    select 
+    id, name, label, required, selected, defaultValue, multiple, styleWidth, dictId, 
+    dataUrl, valueField, textField, panelHeight, formId, icon
+    from act_form_combobox
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from act_form_combobox
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.workflow.model.field.ActFormCombobox">
+    insert into act_form_combobox (id, name, label, 
+      required, selected, defaultValue, 
+      multiple, styleWidth, dictId, 
+      dataUrl, valueField, textField, 
+      panelHeight, formId, icon, 
+      createDate, createUserId, createUserName, 
+      lastModifyDate, lastModifyUserId, lastModifyUserName, 
+      status)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, 
+      #{required,jdbcType=VARCHAR}, #{selected,jdbcType=VARCHAR}, #{defaultValue,jdbcType=VARCHAR}, 
+      #{multiple,jdbcType=VARCHAR}, #{styleWidth,jdbcType=VARCHAR}, #{dictId,jdbcType=VARCHAR}, 
+      #{dataUrl,jdbcType=VARCHAR}, #{valueField,jdbcType=VARCHAR}, #{textField,jdbcType=VARCHAR}, 
+      #{panelHeight,jdbcType=VARCHAR}, #{formId,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR})
+  </insert>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.workflow.model.field.ActFormCombobox">
+    update act_form_combobox
+    set name = #{name,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      required = #{required,jdbcType=VARCHAR},
+      selected = #{selected,jdbcType=VARCHAR},
+      defaultValue = #{defaultValue,jdbcType=VARCHAR},
+      multiple = #{multiple,jdbcType=VARCHAR},
+      styleWidth = #{styleWidth,jdbcType=VARCHAR},
+      dictId = #{dictId,jdbcType=VARCHAR},
+      dataUrl = #{dataUrl,jdbcType=VARCHAR},
+      valueField = #{valueField,jdbcType=VARCHAR},
+      textField = #{textField,jdbcType=VARCHAR},
+      panelHeight = #{panelHeight,jdbcType=VARCHAR},
+      formId = #{formId,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="isExit" resultType="int">
+		select count(1) from
+		act_form_combobox
+		where id=#{id}
+	</select>
+</mapper>

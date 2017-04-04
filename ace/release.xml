@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>all</id>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<formats>
+		<format>dir</format>
+		<!--<format>zip</format> -->
+	</formats>
+
+	<fileSets>
+		
+		<fileSet>
+			<directory>ace-kernel/ace-kernel-backend/target</directory>
+			<outputDirectory>release/kernel</outputDirectory>
+			<includes>
+				<include>*.zip</include>
+			</includes>
+		</fileSet>
+		
+		
+		<fileSet>
+			<directory>ace-kernel/ace-kernel-service/target</directory>
+			<outputDirectory>release/kernel</outputDirectory>
+			<includes>
+				<include>*.zip</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>ace-kernel/ace-kernel-web/target</directory>
+			<outputDirectory>release/kernel</outputDirectory>
+			<includes>
+				<include>*.war</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>ace-portal/ace-portal-service/target</directory>
+			<outputDirectory>release/portal</outputDirectory>
+			<includes>
+				<include>*.zip</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>ace-portal/ace-portal-web/target</directory>
+			<outputDirectory>release/portal</outputDirectory>
+			<includes>
+				<include>*.war</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>

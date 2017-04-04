@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ace-weui-client/ace-kernel-client.iml" filepath="$PROJECT_DIR$/ace-weui-client/ace-kernel-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-weui-service/ace-kernel-service.iml" filepath="$PROJECT_DIR$/ace-weui-service/ace-kernel-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-weui-web/ace-kernel-web.iml" filepath="$PROJECT_DIR$/ace-weui-web/ace-kernel-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-weui.iml" filepath="$PROJECT_DIR$/ace-weui.iml" />
+    </modules>
+  </component>
+</project>

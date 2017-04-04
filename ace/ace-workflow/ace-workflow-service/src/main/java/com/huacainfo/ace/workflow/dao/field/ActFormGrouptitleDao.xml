@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.field.ActFormGrouptitleDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.workflow.model.field.ActFormGrouptitle">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="formId" jdbcType="VARCHAR" property="formId" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="status" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, label, formId, createDate, createUserId, createUserName, lastModifyDate, lastModifyUserId, 
+    lastModifyUserName, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="map">
+    select 
+    id, label, formId
+    from act_form_grouptitle
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from act_form_grouptitle
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.workflow.model.field.ActFormGrouptitle">
+    insert into act_form_grouptitle (id, label, formId, 
+      createDate, createUserId, createUserName, 
+      lastModifyDate, lastModifyUserId, lastModifyUserName, 
+      status)
+    values (#{id,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, #{formId,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.workflow.model.field.ActFormGrouptitle">
+    update act_form_grouptitle
+    set label = #{label,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="isExit" resultType="int">
+		select count(1) from
+		act_form_grouptitle
+		where id=#{id}
+	</select>
+</mapper>

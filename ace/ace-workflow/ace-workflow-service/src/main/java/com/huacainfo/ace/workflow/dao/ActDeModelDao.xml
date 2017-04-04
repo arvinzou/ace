@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.ActDeModelDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.workflow.model.ActDeModel">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="model_key" jdbcType="VARCHAR" property="modelKey" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="model_comment" jdbcType="VARCHAR" property="modelComment" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="last_updated" jdbcType="TIMESTAMP" property="lastUpdated" />
+    <result column="last_updated_by" jdbcType="VARCHAR" property="lastUpdatedBy" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="model_type" jdbcType="INTEGER" property="modelType" />
+  </resultMap>
+  
+  <delete id="deleteByPrimaryKey">
+    delete from activiti.act_de_model
+    where model_key = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.workflow.model.ActDeModel">
+    insert into activiti.act_de_model (id, name, model_key, 
+      description, model_comment, created, 
+      created_by, last_updated, last_updated_by, 
+      version, model_type)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{modelKey,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{modelComment,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=VARCHAR}, #{lastUpdated,jdbcType=TIMESTAMP}, #{lastUpdatedBy,jdbcType=VARCHAR}, 
+      #{version,jdbcType=INTEGER}, #{modelType,jdbcType=INTEGER})
+  </insert>
+ 
+ 
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.workflow.model.ActDeModel">
+    update activiti.act_de_model
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      model_comment = #{modelComment,jdbcType=VARCHAR},
+      last_updated = #{lastUpdated,jdbcType=TIMESTAMP},
+      last_updated_by = #{lastUpdatedBy,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      model_type = #{modelType,jdbcType=INTEGER}
+    where model_key = #{modelKey,jdbcType=BIGINT}
+  </update>
+  
+  <select id="isExit" resultType="int">
+		select count(1) from
+		activiti.act_de_model
+		where model_key=#{modelKey}
+	</select>
+</mapper>

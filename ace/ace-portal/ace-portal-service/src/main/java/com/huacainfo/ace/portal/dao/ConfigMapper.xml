@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.portal.dao.ConfigMapper">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Config">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="dept_id" property="deptId" jdbcType="VARCHAR" />
+		<result column="config_key" property="configKey" jdbcType="VARCHAR" />
+		<result column="category" property="category" jdbcType="VARCHAR" />
+		<result column="config_name" property="configName" jdbcType="VARCHAR" />
+		<result column="config_value" property="configValue" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="syid" property="syid" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.ConfigVo"
+		extends="BaseResultMap">
+		<result column="CATEGORY_NAME" jdbcType="VARCHAR" property="categoryName" />
+		<result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,dept_id,config_key, category, config_name, config_value, remark, create_time,syid
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from config
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from config
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.portal.model.Config">
+		insert into config (id,dept_id,config_key, category, config_name,
+		config_value, remark, create_time,syid
+		)
+		values (#{id},#{deptId},#{configKey,jdbcType=VARCHAR},
+		#{category,jdbcType=VARCHAR}, #{configName,jdbcType=VARCHAR},
+		#{configValue,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{syid,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Config">
+		update config
+		set category = #{category,jdbcType=VARCHAR},
+		config_name = #{configName,jdbcType=VARCHAR},
+		config_value = #{configValue,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		syid = #{syid,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<sql id="whereCondition">
+		from config t left join department a on t.dept_id=a.department_id
+		where (syid='sys' or syid =#{condition.syid})
+        <choose>  
+            <when test="condition.deptId==5">   
+            </when>  
+            <otherwise>
+				and t.dept_id=#{condition.deptId}
+            </otherwise>
+        </choose> 
+		<if test="condition.category!=null and condition.category!=&quot;&quot;">
+			and t.category =#{condition.category,jdbcType=VARCHAR}
+		</if>
+		<if
+			test="condition.configName!=null and condition.configName!=&quot;&quot;">
+			and t.config_name like
+			concat(#{condition.configName,jdbcType=VARCHAR},'%')
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+
+		select
+		t.id,dept_id, t.config_key, t.category, t.config_name, t.config_value, t.remark,t.syid,
+		t.create_time,
+		ifnull(a.department_name,'平台') department_name
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.create_time
+			</otherwise>
+		</choose>
+
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+	</select>
+
+	<select id="isExitByName" resultType="int">
+		select count(*)
+		from
+		config
+		where config_name=#{name} and dept_id=#{deptId}
+	</select>
+	<select id="selectBasicConfigListByCategory" resultMap="BaseResultMap">
+	select id,dept_id,config_key, category, config_name, config_value, remark, create_time
+	from config where dept_id='0' and category=#{category}
+	</select>
+</mapper>

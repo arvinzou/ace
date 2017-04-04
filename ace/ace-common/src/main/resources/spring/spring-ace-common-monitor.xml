@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-4.0.xsd "
+	default-autowire="byName">
+	<bean id="executeTimeMonitor" class="com.huacainfo.ace.common.monitor.ExecuteTimeMonitor" />
+	<bean id="executeTimeMonitorAdvisor"
+		class="com.huacainfo.ace.common.monitor.AspireRegexpMethodPointcutAdvisor">
+		<property name="advice" ref="executeTimeMonitor" />
+		<property name="pattern">
+			<value>${aop.monitor.executetime.pattern}</value>
+		</property>
+	</bean>
+	<bean id="executeParamMonitor" class="com.huacainfo.ace.common.monitor.ExecuteParamMonitor" />
+	<bean id="executeParamMonitorAdvisor"
+		class="com.huacainfo.ace.common.monitor.AspireRegexpMethodPointcutAdvisor">
+		<property name="advice" ref="executeParamMonitor" />
+		<property name="pattern">
+			<value>
+				${aop.monitor.executeparam.pattern}
+			</value>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+	<bean class="com.huacainfo.ace.common.tools.SpringUtils" />
+	<bean id="log4jConfigReload" class="com.huacainfo.ace.common.log4j.Log4jConfigReload" />
+</beans>

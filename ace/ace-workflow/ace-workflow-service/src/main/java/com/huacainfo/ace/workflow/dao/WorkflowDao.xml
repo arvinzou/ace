@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.workflow.dao.WorkflowDao">
+
+	<sql id="whereCondition">
+		from activiti.act_hi_procinst t left join users a
+		on
+		t.start_user_id_=a.user_id
+		left join department b on
+		a.department_id=b.department_id
+		where t.proc_def_id_=#{condition.appId}
+
+		and EXISTS(
+		select p.instId from act_form_data p where
+		p.createUserId=#{condition.userId} and t.PROC_INST_ID_=p.instId and
+		p.appId=#{condition.appId}
+		)
+
+		<if test="condition.deptId!=null and condition.deptId!=&quot;&quot;">
+			and a.department_id =#{condition.deptId,jdbcType=VARCHAR}
+		</if>
+		<if test='condition.startDate!=null and condition.startDate!=""'>
+			<![CDATA[
+			and t.START_TIME_>=str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
+			]]>
+		</if>
+		<if test='condition.endDate!=null and condition.endDate!=""'>
+			 <![CDATA[
+				and t.START_TIME_<=str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S')   
+				]]>
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultType="map">
+		select t.* from(
+		select
+		t.PROC_INST_ID_ id,
+		date_format(t.START_TIME_, '%Y-%m-%d %H:%i') startDate,
+		date_format(t.END_TIME_ , '%Y-%m-%d %H:%i') endDate,
+		b.department_name deptName,
+		a. NAME userName,
+		(
+		CASE t.END_TIME_
+		WHEN NULL THEN
+		'0'
+		ELSE
+		'1'
+		END
+		) 'status'
+		<include refid="whereCondition" />
+		) t
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.startDate
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<update id="updateStartUser">
+		update activiti.act_hi_procinst t set
+		t.START_USER_ID_=#{userId} where t.PROC_INST_ID_=#{instId}
+	</update>
+	<select id="selectDataByInstId" resultType="map">
+		SELECT
+		t.fieldId,
+		ifnull(
+		ifnull(
+		ifnull(
+		ifnull(t.textValue, t.longTextValue),
+		t.longValue
+		),
+		t.doubleValue
+		),
+		t.dateValue
+		)
+		'value'
+
+		FROM
+		act_form_data t
+		WHERE
+		t.instId = #{instId}
+	</select>
+</mapper>

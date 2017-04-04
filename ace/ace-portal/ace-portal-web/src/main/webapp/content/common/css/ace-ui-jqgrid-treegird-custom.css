@@ -1,0 +1,49 @@
+
+.ui-jqgrid .treeclick {
+    cursor: pointer;
+}
+.ui-jqgrid .tree-plus {
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    overflow: hidden;
+}
+.ui-widget-content .ui-icon {
+    background-image: url(images/ui-icons_469bdd_256x240.png);
+}
+.ui-icon-triangle-1-e {
+    background-position: -32px -16px;
+}
+.ui-icon {
+    width: 16px;
+    height: 16px;
+    background-image: url(images/ui-icons_469bdd_256x240.png);
+}
+.ui-icon {
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+user agent stylesheetdiv {
+    display: block;
+}
+.ui-jqgrid .tree-wrap {
+    float: left;
+    position: relative;
+    height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.ui-icon-triangle-1-s {
+    background-position: -64px -16px;
+}
+.ui-jqgrid .tree-minus {
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    overflow: hidden;
+}
+.ui-icon-radio-off {
+    background-position: -96px -144px;
+}

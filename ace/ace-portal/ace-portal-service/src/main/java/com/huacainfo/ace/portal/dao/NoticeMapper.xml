@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.portal.dao.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Notice" >
+    <id column="notice_id" property="noticeId" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="CHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+    <result column="top" property="top" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="deadline" property="deadline" jdbcType="TIMESTAMP" />
+    <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+    <result column="groups_id" property="groupsId" jdbcType="VARCHAR" />
+    <result column="syid" property="syid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.huacainfo.ace.portal.model.Notice" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+   <resultMap extends="BaseResultMap" id="BaseResultMapVo"
+		type="com.huacainfo.ace.portal.vo.NoticeVo">
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+	</resultMap>
+  <sql id="Base_Column_List" > 
+    notice_id, category, title, publisher, top, status, create_time, publish_time, deadline, 
+    department_id, groups_id,syid
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notice
+    where notice_id = #{noticeId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectVoByPrimaryKey" resultMap="BaseResultMapVo" parameterType="java.lang.String" >
+    select a.syid,
+     a.notice_id, a.category, a.title, a.publisher, a.top, a.status, a.create_time, a.publish_time, a.deadline, 
+    a.department_id, a.groups_id,a.content,b.name,c.department_name
+    from notice a left join users b on a.publisher=b.user_id
+    left join department c on b.department_id=c.department_id
+    where a.notice_id = #{noticeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  delete from attach where notice_id = #{noticeId,jdbcType=VARCHAR};
+    delete from notice
+    where notice_id = #{noticeId,jdbcType=VARCHAR};
+    
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.Notice" >
+    insert into notice (notice_id, category, title, 
+      publisher, top, status, create_time, 
+      publish_time, deadline, department_id, 
+      groups_id, content,syid)
+    values (#{noticeId,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, 
+      #{publisher,jdbcType=VARCHAR}, #{top,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{publishTime,jdbcType=DATE}, #{deadline,jdbcType=DATE}, #{departmentId,jdbcType=VARCHAR}, 
+      #{groupsId,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR},#{syid})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.portal.model.Notice" >
+    insert into notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noticeId != null" >
+        notice_id,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="publisher != null" >
+        publisher,
+      </if>
+      <if test="top != null" >
+        top,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="deadline != null" >
+        deadline,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="groupsId != null" >
+        groups_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noticeId != null" >
+        #{noticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=CHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="top != null" >
+        #{top,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=DATE},
+      </if>
+      <if test="deadline != null" >
+        #{deadline,jdbcType=DATE},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsId != null" >
+        #{groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.portal.model.Notice" >
+    update notice
+    <set >
+      <if test="category != null" >
+        category = #{category,jdbcType=CHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="top != null" >
+        top = #{top,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=DATE},
+      </if>
+      <if test="deadline != null" >
+        deadline = #{deadline,jdbcType=DATE},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsId != null" >
+        groups_id = #{groupsId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where notice_id = #{noticeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.portal.model.Notice" >
+    update notice
+    set 
+   	  category = #{category,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      top = #{top,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      publish_time = #{publishTime,jdbcType=DATE},
+      deadline = #{deadline,jdbcType=DATE},
+      department_id = #{departmentId,jdbcType=VARCHAR},
+      groups_id = #{groupsId,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where notice_id = #{noticeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Notice" >
+    update notice
+    set category = #{category,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      top = #{top,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      publish_time = #{publishTime,jdbcType=DATE},
+      deadline = #{deadline,jdbcType=DATE},
+      department_id = #{departmentId,jdbcType=VARCHAR},
+      groups_id = #{groupsId,jdbcType=VARCHAR}
+    where notice_id = #{noticeId,jdbcType=VARCHAR}
+  </update>
+   <select id="isExitByTitle" resultType="int">
+  select count(*) from notice where title=#{title}
+  </select>
+   <sql id="whereCondition">
+
+		from notice left join users on notice.publisher=users.user_id 
+		where notice.department_id=#{condition.departmentId}
+
+		and (syid='sys' or syid =#{condition.syid})
+		<if test="condition.title!=null and condition.title!=&quot;&quot;">
+
+			and
+			title like concat('%',concat(#{condition.title,jdbcType=VARCHAR},'%'))
+		</if>
+		<if test="condition.category!=null and condition.category!=&quot;&quot;">
+
+			and
+			category = #{condition.category,jdbcType=VARCHAR}
+		</if>
+
+	</sql>
+
+	<select id="findCount" resultType="int">
+
+		SELECT COUNT(*)
+
+		<include refid="whereCondition" />
+
+	</select>
+
+	<select id="findList" resultMap="BaseResultMapVo">
+		select
+		 notice_id,syid, category, title, publisher, top, status, notice.create_time, publish_time, deadline, 
+    notice.department_id, notice.groups_id,users.name
+
+		<include refid="whereCondition" />
+
+		<choose>
+
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+
+				ORDER BY ${orderBy}
+
+			</when>
+
+			<otherwise>
+
+				ORDER BY create_time desc
+
+			</otherwise>
+
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<update id="updateForTopByPrimaryKey" >
+    update notice
+    set 
+      top = '0' where category=#{category,jdbcType=CHAR};
+      update notice
+    set 
+      top = '1'
+    where notice_id = #{noticeId,jdbcType=VARCHAR};
+  </update>
+  <update id="updateForStatusByPrimaryKey" >
+   
+      update notice
+    set 
+      status = #{status,jdbcType=CHAR},
+       department_id = #{departmentId,jdbcType=VARCHAR},
+        publish_time = now()
+    where notice_id = #{noticeId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectUserIdByDepartmentId" resultType="map">
+  select user_id ID,mobile TEL,NAME from users where department_id like concat(#{departmentId,jdbcType=VARCHAR},'%')
+  </select>
+  <select id="selectSqlTextByGroupId" resultType="string">
+  select sql_text from groups where group_id=#{groupId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectDictNameByCategoryIdAndCode" resultType="string">
+    select name from dict where category_id=#{categoryId,jdbcType=VARCHAR} and code=#{code,jdbcType=VARCHAR} 
+  </select>
+<select id="findListTop" resultMap="BaseResultMapVo">
+		SELECT 
+    a.notice_id,
+    s.name category,
+    a.title,
+    a.publisher,
+    a.top,
+    a.status,
+    a.create_time,
+    a.publish_time,
+    a.deadline,
+    a.department_id,
+    a.groups_id,
+    a.content,
+    b.name,
+    c.department_name,
+    a.syid
+FROM
+    notice a
+        LEFT JOIN
+    users b ON a.publisher = b.user_id
+        LEFT JOIN
+    department c ON b.department_id = c.department_id
+        LEFT JOIN
+    (SELECT 
+        *
+    FROM
+        dict
+    WHERE
+        category_id = '21') s ON a.category = s.code
+WHERE a.syid=#{syid} and
+    a.status = '1' and a.category=#{categoryId} AND a.deadline >= DATE_FORMAT(NOW(),'%Y-%m-%d')
+ORDER BY top DESC, create_time DESC
+LIMIT 0 , 5
+	</select>
+</mapper>

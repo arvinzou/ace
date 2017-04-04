@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
+<mycat:schema xmlns:mycat="http://io.mycat/">
+    <schema name="audit" checkSQLschema="false">
+	    <!--基础权限相关-->
+		
+		<table name="config"             primaryKey="config_key"   dataNode="portal" /> 
+		<table name="dict_category"      primaryKey="category_id"  dataNode="portal" /> 
+		<table name="files"              primaryKey="file_path"    dataNode="portal" /> 
+		<table name="task"               primaryKey="task_id"      dataNode="portal" />
+		<table name="notice"             primaryKey="notice_id"    dataNode="portal" /> 
+		<table name="persistent_logins"  primaryKey="token"        dataNode="portal" /> 
+		<table name="province"           primaryKey="CODE"         dataNode="portal" /> 
+		<table name="resources"          primaryKey="RESOURCES_ID" dataNode="portal" /> 
+		<table type="global" name="role"               primaryKey="ROLE_ID"      dataNode="portal,auditrule" />  
+		<table name="location"           primaryKey="location_id"  autoIncrement="true" dataNode="portal" /> 
+		<table name="logs"               primaryKey="id"           autoIncrement="true" dataNode="portal" /> 
+		<table name="dict"               primaryKey="id"           autoIncrement="true" dataNode="portal" /> 
+		<table name="role_resources"     primaryKey="id"           autoIncrement="true" dataNode="portal" /> 
+		<table name="attach"             primaryKey="attach_id"    autoIncrement="true" dataNode="portal" /> 
+		<table name="users_role"         primaryKey="id"           autoIncrement="true" dataNode="portal" />
+        <table name="msp_sydept_cfg"     primaryKey="id"           autoIncrement="true" dataNode="portal" />		
+		
+		<table type="global" name="province"           primaryKey="CODE"         dataNode="portal,auditrule,dict,audit0000,audit$6201-6230" />
+	    <table type="global" name="users" primaryKey="USER_ID" dataNode="portal,auditrule,dict,audit0000,audit$6201-6230"/>
+		<table type="global" name="department" primaryKey="DEPARTMENT_ID" autoIncrement="true"  dataNode="portal,auditrule,dict,audit0000,audit$6201-6230"/>
+		<!--审核规则定义-->
+	    <table name="msp_audit_folder"                primaryKey="code"  dataNode="auditrule"/>
+		<table name="msp_audit_item"                  primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_item_param"            primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_level"                 primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule"                  primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_activelog"        primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_area"             primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_attr"             primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_auditlog"         primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_branch"           primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_condition"        primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_condition_values" primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_log"              primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_node"             primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_right"            primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_testlog"          primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<table name="msp_audit_rule_version"          primaryKey="id" autoIncrement="true" dataNode="auditrule"/>
+		<!--字典表--> 
+		<table name="msp_dict_catalog_std"        primaryKey="code" dataNode="dict"/> 
+		<table name="msp_dict_icd_std"            primaryKey="code" dataNode="dict"/>  
+		<table name="msp_dict_knowledge"          primaryKey="code" dataNode="dict"/>  		
+		<table name="msp_dict_drug_book"          primaryKey="id" autoIncrement="true" dataNode="dict"/>  
+		<table name="msp_dict_drug_detail"        primaryKey="id" autoIncrement="true" dataNode="dict"/>  
+		<table name="msp_dict_icd_area"           primaryKey="id" autoIncrement="true" dataNode="dict"/> 
+		<table type="global"  name="msp_dict_knowledge_abstract" primaryKey="id" autoIncrement="true" dataNode="dict,auditrule"/>
+		<table name="msp_dict_catalog_area"       primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230"/>
+		<!--审核业务表-->
+	    <table name="msp_clinic_audit"             primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_audit_detail"      primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_autoaudit"         primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_autoaudit_detail"  primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_clarify"           primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_firstaudit"        primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_firstaudit_detail" primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_info"              primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_info_detail"       primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_reaudit"           primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_clinic_reaudit_detail"    primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_audit"               primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_audit_detail"        primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_autoaudit"           primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_autoaudit_detail"    primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_clarify"             primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_diagnose"            primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_firstaudit"          primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_firstaudit_detail"   primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_info"                primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_info_detail"         primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_operation"           primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_reaudit"             primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" />
+		<table name="msp_hosp_reaudit_detail"      primaryKey="id" autoIncrement="true" rule="areaPrefix" dataNode="audit0000,audit$6201-6230" /> 
+	</schema> 
+	<dataNode name="seqdb" dataHost="seqhost" database="seqdb" />
+	<dataNode name="portal" dataHost="audithost" database="portal" />
+	<dataNode name="auditrule" dataHost="audithost" database="auditrule" />
+	<dataNode name="dict" dataHost="audithost" database="dict" /> 
+	<dataNode name="audit0000" dataHost="audithost" database="audit0000" />
+	<dataNode name="audit$6201-6230" dataHost="audithost" database="audit$6201-6230" /> 
+	 
+	<dataHost name="audithost" maxCon="1000" minCon="10" balance="0" writeType="1" dbType="mysql" dbDriver="native" switchType="3"  slaveThreshold="100">  
+		<heartbeat>show status like 'wsrep%'</heartbeat>
+		<writeHost host="hostM1" url="10.12.8.111:3306" user="msp" password="msp"/>
+		<writeHost host="hostM2" url="10.12.8.112:3306" user="msp" password="msp"/> 
+		<writeHost host="hostM3" url="10.12.8.113:3306" user="msp" password="msp"/> 
+	</dataHost> 
+	<dataHost name="seqhost" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">  
+		<heartbeat>select 1;</heartbeat>
+		<writeHost host="hostM1" url="10.12.8.111:3306" user="msp" password="msp"/>
+		<writeHost host="hostM2" url="10.12.8.112:3306" user="msp" password="msp"/> 
+		<writeHost host="hostM3" url="10.12.8.113:3306" user="msp" password="msp"/> 
+	</dataHost> 
+	 
+</mycat:schema>
