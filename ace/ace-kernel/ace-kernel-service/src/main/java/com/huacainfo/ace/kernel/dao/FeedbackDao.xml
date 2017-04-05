@@ -66,7 +66,7 @@
 
   <sql id="whereCondition">
     from feedback where 0=0
-    <if test='condition.name!=null and condition.name!=""'>
+    <if test='condition.title!=null and condition.title!=""'>
       and title like
       concat('%',#{condition.title,jdbcType=VARCHAR},'%')
     </if>

@@ -27,16 +27,9 @@
 				<div class="widget-main padding-6">
 					<form action="#" id="fm-search">
 					
-				类别：<input
-							class="easyui-combobox" style="width: 200px" name="payType"
-							data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
 
-                     名称： <input name="name" type="text"
+
+                     名称： <input name="title" type="text"
                                         							style="width: 200px;" />
 						<button class="btn btn-info" id="btn-search"
 							authority="${pageContext.request.contextPath}/feedback/findFeedbackList.do">
@@ -87,47 +80,21 @@
     </div>
 
     <div id="dialog-message-view" class="hide">
-<div class="profile-user-info profile-user-info-striped">
-<div class="profile-info-row">
-<div class="profile-info-name">
-主键</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="id">
-</span>
+
+
+
+<div class="profile-user-info profile-user-info-striped profile-bg">
+<div class="profile-group-title">标题</div>
 </div>
-<div class="profile-info-name">
-主题</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="title">
-</span>
+<div  id="title" class="profile-longtext">
 </div>
-<div class="profile-info-name">
-分类</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="category">
-</span>
+<div class="profile-user-info profile-user-info-striped profile-bg">
+<div class="profile-group-title">内容</div>
 </div>
+<div  id="docText" class="profile-longtext">
 </div>
-<div class="profile-info-row">
-<div class="profile-info-name">
-内容</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="docText">
-</span>
-</div>
-<div class="profile-info-name">
-状态</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="status">
-</span>
-</div>
-<div class="profile-info-name">
-创建人编号</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="createUserId">
-</span>
-</div>
-</div>
+<div class="profile-user-info profile-user-info-striped profile-bg">
+<div class="profile-group-title">操作信息</div>
 <div class="profile-info-row">
 <div class="profile-info-name">
 创建人姓名</div>
@@ -136,23 +103,9 @@
 </span>
 </div>
 <div class="profile-info-name">
-阅读量</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="reading">
-</span>
-</div>
-<div class="profile-info-name">
 入库日期</div>
 <div class="profile-info-value">
 <span class="editable editable-click" id="createDate">
-</span>
-</div>
-</div>
-<div class="profile-info-row">
-<div class="profile-info-name">
-最后更新人编号</div>
-<div class="profile-info-value">
-<span class="editable editable-click" id="lastModifyUserId">
 </span>
 </div>
 <div class="profile-info-name">
@@ -161,14 +114,15 @@
 <span class="editable editable-click" id="lastModifyUserName">
 </span>
 </div>
+</div>
+<div class="profile-info-row">
+
 <div class="profile-info-name">
 最后更新时间</div>
 <div class="profile-info-value">
 <span class="editable editable-click" id="lastModifyDate">
 </span>
 </div>
-</div>
-<div class="profile-info-row">
 </div>
 </div>
 
@@ -187,7 +141,7 @@
 window.onresize = function () {
 	console.log('autoWidthJqgrid');
 	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
+	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight+30);
 	parent.autoWidth();
 }
 </script>
