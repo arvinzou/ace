@@ -30,7 +30,7 @@
 				类别：<input
 							class="easyui-combobox" style="width: 200px" name="payType"
 							data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=84&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',

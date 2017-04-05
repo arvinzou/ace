@@ -8,6 +8,8 @@ import com.huacainfo.ace.kernel.model.Writer;
 import com.huacainfo.ace.kernel.vo.WriterQVo;
 import com.huacainfo.ace.kernel.vo.WriterVo;
 
+import java.util.Map;
+
 public interface WriterService {
 
     public abstract PageResult<WriterVo> findWriterList(WriterQVo condition, int start, int limit, String orderBy) throws Exception;
@@ -19,6 +21,8 @@ public interface WriterService {
     public abstract SingleResult<Writer> selectWriterByPrimaryKey(String id) throws Exception;
 
     public abstract MessageResponse deleteWriterByWriterId(String id, UserProp userProp) throws Exception;
+
+    public Map<String, Object> selectAuthor(Map<String, Object> params) throws Exception;
 
 
 }

@@ -20,7 +20,7 @@
     <result column="docText" jdbcType="LONGVARCHAR" property="docText" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.kernel.vo.WritingVo">
-
+    <result column="authorName" jdbcType="VARCHAR" property="authorName" />
   </resultMap>
   <sql id="Base_Column_List">
     id, name, author, category, dateOfPublication, everPublished, reading, status, createUserId, 
@@ -86,7 +86,7 @@
   </select>
   <select id="findList" resultMap="BaseResultMapVo">
     select
-    t.id, t.name, a.name author, t.category, t.dateOfPublication, t.everPublished, t.reading, t.status, t.createUserId,
+    t.id, t.name, t.author,a.name authorName, t.category, t.dateOfPublication, t.everPublished, t.reading, t.status, t.createUserId,
     t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     <include refid="whereCondition" />
     <choose>

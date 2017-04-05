@@ -46,12 +46,14 @@ public class WritingServiceImpl implements WritingService {
     public MessageResponse insertWriting(Writing o, UserProp userProp)
             throws Exception {
         o.setId(UUID.randomUUID().toString());
-        o.setAuthor(userProp.getUserId());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "作品名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getAuthor())) {
+            return new MessageResponse(1, "作者不能为空！");
         }
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "分类不能为空！");

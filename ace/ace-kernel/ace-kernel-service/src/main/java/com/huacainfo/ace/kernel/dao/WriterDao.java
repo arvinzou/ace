@@ -26,6 +26,8 @@ public interface WriterDao {
 	int findCount(@Param("condition") WriterQVo condition);
 
 	int isExit(Writer record);
-	
-	List<Map<String,Object>> selectListByDeptId(String deptId);
+
+
+    List<Map<String, String>> selectAuthor(
+            @Param("params") Map<String, Object> params);
 }

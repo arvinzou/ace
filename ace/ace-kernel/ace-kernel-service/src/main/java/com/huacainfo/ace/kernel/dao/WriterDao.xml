@@ -111,4 +111,18 @@
     writer where
     name=#{name}
   </select>
+
+  <select id="selectAuthor" resultType="map">
+    select t.id,
+    t.name,
+    t.sex
+    from writer t  where 0=0
+
+    <if test='params.q !=null and params.q!=""'>
+      and (t.id=#{params.q} or t.name like
+      concat('%',#{params.q},'%'))
+    </if>
+    order by t.createDate
+    limit 0,20
+  </select>
 </mapper>

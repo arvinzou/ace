@@ -1,4 +1,5 @@
 package com.huacainfo.ace.kernel.web.controller;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import com.huacainfo.ace.kernel.model.Writer;
 import com.huacainfo.ace.kernel.service.WriterService;
 import com.huacainfo.ace.kernel.vo.WriterVo;
 import com.huacainfo.ace.kernel.vo.WriterQVo;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/writer")
@@ -75,5 +79,17 @@ public class WriterController extends KernelBaseController {
 		String id = json.getString("id");
 		return this.writerService.deleteWriterByWriterId(id,
 				this.getCurUserProp());
+	}
+
+	@RequestMapping(value = "/selectAuthor.do")
+	@ResponseBody
+	public Map<String,Object> selectAuthor(String q, String id)throws Exception {
+		Map<String,Object> params=new HashMap<String,Object>();
+		params.put("q", id);
+		if(!CommonUtils.isBlank(q)){
+			params.put("q", q);
+		}
+		this.logger.info("",params);
+		return this.writerService.selectAuthor(params);
 	}
 }

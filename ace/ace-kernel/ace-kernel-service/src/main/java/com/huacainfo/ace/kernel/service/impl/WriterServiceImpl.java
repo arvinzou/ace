@@ -1,9 +1,7 @@
 package com.huacainfo.ace.kernel.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -141,5 +139,12 @@ public class WriterServiceImpl implements WriterService {
         this.dataBaseLogService.log("删除作家", "作家", String.valueOf(id),
                 String.valueOf(id), "作家", userProp);
         return new MessageResponse(0, "作家删除完成！");
+    }
+    public Map<String, Object> selectAuthor(Map<String, Object> params) throws Exception{
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, String>> list = this.writerDao.selectAuthor(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+        return rst;
     }
 }

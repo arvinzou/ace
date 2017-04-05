@@ -156,7 +156,7 @@ function loadView(id) {
                 }
                 if (key == 'status') {
                     value = value=="1"?"YES":"";
-                }if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
+                }if (key.indexOf('date')!=-1||key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
                  	value = Common.DateFormatter(value);
                 }
 				$("#dialog-message-view").find('#' + key).html(value);
