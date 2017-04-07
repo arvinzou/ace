@@ -14,7 +14,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.weui.service.AnalysisService;
 
 @Controller
-@RequestMapping("/anslysis")
+@RequestMapping("/www/anslysis")
 public class AnalysisController extends WeuiBaseController {
 	private static final long serialVersionUID = 1L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -24,12 +24,15 @@ public class AnalysisController extends WeuiBaseController {
 	@RequestMapping(value = "/query.do")
 	@ResponseBody
 	public ListResult<Map<String,Object>> query(
-			 String reportId)
+			 String reportId,int start,int limit)
 			throws Exception {
 		Map<String,Object> condition=this.getParams();
-		if (CommonUtils.isBlank(condition.get("deptId"))) {
-			condition.put("deptId",this.getCurUserProp().getCorpId());
-		}		
-		return analysisService.query(condition, reportId);
+		if(CommonUtils.isBlank(start)){
+			start=0;
+		}
+		if(CommonUtils.isBlank(limit)){
+			limit=10;
+		}
+		return analysisService.query(condition, reportId,start,limit);
 	}	
 }

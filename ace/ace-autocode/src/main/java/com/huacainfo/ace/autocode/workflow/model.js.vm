@@ -7,6 +7,7 @@ var _colModel = function() {
                 width: 100,
                 hidden:false,
                 editable: false,
+                sortable:false,
                 renderer:function(value, cur){
                     return renderBtn(cur);
                 }
