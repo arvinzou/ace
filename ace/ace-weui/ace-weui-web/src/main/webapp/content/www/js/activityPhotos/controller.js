@@ -6,11 +6,10 @@ function loadText(name,start,limit) {
 		type : "post",
 		url : contextPath+"/www/anslysis/query.do",
 		data : {
-			category : category,
 			name : name,
 			start:start,
 			limit:limit,
-			reportId:'writer'
+			reportId:'activityPhotos'
 		},
 		beforeSend : function(XMLHttpRequest) {
              $.showLoading();
@@ -22,12 +21,9 @@ function loadText(name,start,limit) {
             var c=0;
             $(rst.value).each(function(n,o){
                 html.push(' <a href="preview.jsp?id='+o.id+'" class="weui-media-box weui-media-box_appmsg">');
-                html.push(' <div class="weui-media-box__hd">');
-                html.push(' <img class="weui-media-box__thumb" src="'+fastdfs_server+o.photo+'" alt=""> ');
-                html.push(' </div>');
                 html.push(' <div class="weui-media-box__bd">');
                 html.push(' <h4 class="weui-media-box__title">'+o.name+'</h4>');
-                html.push(' <p class="weui-media-box__desc">'+o.intro+'</p>');
+                html.push(' <p class="weui-media-box__desc">'+o.activityDate+' '+o.activityLocation+' 阅读:'+o.reading+'</p>');
                 html.push(' </div>');
                 html.push(' </a>');
                 c++;

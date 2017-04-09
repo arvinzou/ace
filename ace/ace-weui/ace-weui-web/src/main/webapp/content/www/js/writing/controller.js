@@ -1,16 +1,24 @@
 jQuery(function($) {
-    loadText(null,0,10);
+    loadText(null,author,0,99999);
 });
-function loadText(name,start,limit) {
+function t_query(){
+   start=0;
+   $(".weui-panel__bd").html("");
+   var name=$("#searchInput").val();
+   loadText(name,author,0,99999);
+   return false;
+}
+function loadText(name,author,start,limit) {
 	$.ajax({
 		type : "post",
 		url : contextPath+"/www/anslysis/query.do",
 		data : {
+			author : author,
 			category : category,
 			name : name,
 			start:start,
 			limit:limit,
-			reportId:'writer'
+			reportId:'writing'
 		},
 		beforeSend : function(XMLHttpRequest) {
              $.showLoading();
@@ -22,12 +30,12 @@ function loadText(name,start,limit) {
             var c=0;
             $(rst.value).each(function(n,o){
                 html.push(' <a href="preview.jsp?id='+o.id+'" class="weui-media-box weui-media-box_appmsg">');
-                html.push(' <div class="weui-media-box__hd">');
-                html.push(' <img class="weui-media-box__thumb" src="'+fastdfs_server+o.photo+'" alt=""> ');
-                html.push(' </div>');
+                //html.push(' <div class="weui-media-box__hd">');
+               // html.push(' <img class="weui-media-box__thumb" src="'+fastdfs_server+o.photo+'" alt=""> ');
+               // html.push(' </div>');
                 html.push(' <div class="weui-media-box__bd">');
-                html.push(' <h4 class="weui-media-box__title">'+o.name+'</h4>');
-                html.push(' <p class="weui-media-box__desc">'+o.intro+'</p>');
+                html.push(' <h4 class="weui-media-box__title">【'+o.category+'】'+o.name+'</h4>');
+                html.push(' <p class="weui-media-box__desc">'+o.dateOfPublication+'  '+o.author+' 阅读：'+o.reading+'</p>');
                 html.push(' </div>');
                 html.push(' </a>');
                 c++;
@@ -47,9 +55,4 @@ function loadText(name,start,limit) {
 }
 
 
-function t_query(){
-    start=0;
-     $(".weui-panel__bd").html("");
-    loadText($("#searchInput").val(),0,10);
-    return false;
-}
+

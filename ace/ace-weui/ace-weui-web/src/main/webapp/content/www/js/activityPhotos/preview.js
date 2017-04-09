@@ -10,7 +10,7 @@ function loadText(id) {
 			id : id,
 			start:0,
 			limit:0,
-			reportId:'loadWriter'
+			reportId:'loadActivityPhotos'
 		},
 		beforeSend : function(XMLHttpRequest) {
              $.showLoading();
@@ -60,13 +60,14 @@ function loadText(id) {
 	});
 }
 
+
 function updateReading(id) {
 	$.ajax({
 		type : "post",
 		url : contextPath+"/www/anslysis/updateReading.do",
 		data : {
 			id : id,
-			reportId:'loadWriter'
+			reportId:'loadActivityPhotos'
 		}
 	});
 }

@@ -70,6 +70,7 @@ public class ActivityPhotosServiceImpl implements ActivityPhotosService {
         }
         o.setCreateDate(new Date());
         o.setStatus("0");
+        o.setReading(CommonUtils.getRandomNum(100));
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.activityPhotosDao.insert(o);

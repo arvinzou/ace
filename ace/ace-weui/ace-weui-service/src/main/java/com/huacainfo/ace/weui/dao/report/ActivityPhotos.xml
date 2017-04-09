@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.weui.dao.report.ActivityPhotos">
+  <select id="query" resultType="map">
+    select id,name,activityLocation, DATE_FORMAT(activityDate, '%Y-%m-%d') activityDate,ifnull(reading,0) reading
+    from activity_photos where status='1'
+    <if test='condition.name!=null and condition.name!=""'>
+      and name like
+      concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="condition.category!=null and condition.category!=&quot;&quot;">
+      and category =#{condition.category,jdbcType=VARCHAR}
+    </if>
+    ORDER BY createDate desc
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+</mapper>

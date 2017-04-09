@@ -6,11 +6,8 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<title>作家</title>
+<title>活动剪影</title>
 <jsp:include page="../../common/common-www.jsp" />
-<script>
-            var category='param.category';
-  </script>
 </head>
 <body ontouchstart>
  <div class="weui-pull-to-refresh__layer">
@@ -36,7 +33,7 @@
      </div>
     <div class="page__bd">
       <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__hd">作家列表</div>
+        <div class="weui-panel__hd">活动剪影</div>
         <div class="weui-panel__bd">
 
         </div>
@@ -49,12 +46,12 @@
 
 <jsp:include page="../../common/footer-1-www.jsp" />
  <script src="${pageContext.request.contextPath}/content/common/lib/fastclick.js"></script>
-  <script src="${pageContext.request.contextPath}/content/www/js/writer/controller.js"></script>
+  <script src="${pageContext.request.contextPath}/content/www/js/activityPhotos/controller.js"></script>
   <script>
             $(function() {
               FastClick.attach(document.body);
             });
-  </script>
+          </script>
 <script>
       var start=0;
       $(document.body).pullToRefresh().on("pull-to-refresh", function() {

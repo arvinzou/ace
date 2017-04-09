@@ -10,7 +10,7 @@ function loadText(id) {
 			id : id,
 			start:0,
 			limit:0,
-			reportId:'loadWriter'
+			reportId:'loadWriting'
 		},
 		beforeSend : function(XMLHttpRequest) {
              $.showLoading();
@@ -66,7 +66,7 @@ function updateReading(id) {
 		url : contextPath+"/www/anslysis/updateReading.do",
 		data : {
 			id : id,
-			reportId:'loadWriter'
+			reportId:'loadWriting'
 		}
 	});
 }

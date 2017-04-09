@@ -28,7 +28,7 @@ function loadText(name,author,start,limit) {
              var html=[];
             var c=0;
             $(rst.value).each(function(n,o){
-                html.push(' <a href="preview-text.jsp?id='+o.id+'" class="weui-media-box weui-media-box_appmsg">');
+                html.push(' <a href="../writing/preview.jsp?id='+o.id+'" class="weui-media-box weui-media-box_appmsg">');
                 //html.push(' <div class="weui-media-box__hd">');
                // html.push(' <img class="weui-media-box__thumb" src="'+fastdfs_server+o.photo+'" alt=""> ');
                // html.push(' </div>');

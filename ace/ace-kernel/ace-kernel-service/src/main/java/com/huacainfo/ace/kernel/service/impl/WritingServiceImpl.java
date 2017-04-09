@@ -76,6 +76,7 @@ public class WritingServiceImpl implements WritingService {
         }
         o.setCreateDate(new Date());
         o.setStatus("1");
+        o.setReading(CommonUtils.getRandomNum(100));
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.writingDao.insert(o);

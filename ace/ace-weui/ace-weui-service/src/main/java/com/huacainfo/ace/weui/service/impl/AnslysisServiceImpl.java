@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.huacainfo.ace.common.result.MessageResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,12 @@ public class AnslysisServiceImpl implements AnalysisService {
 		}
 		rst.setValue(p);
 		return rst;
+	}
+	public  MessageResponse updateReading(
+			Map<String,Object> condition,String reportId)
+			throws Exception{
+		ReportDao dao = (ReportDao) SpringUtils.getBean(reportId);
+		dao.updateReading(condition);
+		return new MessageResponse(0,"成功！");
 	}
 }

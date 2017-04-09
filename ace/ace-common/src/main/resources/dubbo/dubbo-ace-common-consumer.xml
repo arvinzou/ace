@@ -14,6 +14,7 @@
 	<!-- 使用zookeeper注册中心暴露服务地址 -->
 	<dubbo:registry protocol="${dubbo.registry.protocol}"
 		address="${dubbo.registry.address}" check="${dubbo.registry.check}" />
+
 	<dubbo:consumer loadbalance="${dubbo.consumer.loadbalance}" timeout="${dubbo.consumer.timeout}"
 		check="${dubbo.consumer.check}" retries="${dubbo.consumer.retries}"
 		version="${dubbo.consumer.version}" />

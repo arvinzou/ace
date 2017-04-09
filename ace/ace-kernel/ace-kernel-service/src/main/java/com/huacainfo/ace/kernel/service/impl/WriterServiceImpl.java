@@ -76,7 +76,7 @@ public class WriterServiceImpl implements WriterService {
         if (temp > 0) {
             return new MessageResponse(1, "作家名称重复！");
         }
-        o.setReading(0L);
+        o.setReading(CommonUtils.getRandomNum(100));
         o.setPcode(CommonUtils.getPinYinHeadChar(o.getName()));
         o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());

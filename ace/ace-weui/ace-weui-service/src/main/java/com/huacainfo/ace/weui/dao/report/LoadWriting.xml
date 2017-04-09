@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.weui.dao.report.LoadWriting">
+  <select id="query" resultType="map">
+    SELECT
+    t.id,
+    a.name author,
+    t. name,
+    b. name category,
+    t.intro,
+    t.docText,
+    ifnull(t.reading,0) reading,
+    DATE_FORMAT(t.dateOfPublication, '%Y-%m-%d') dateOfPublication
+    FROM
+    writing t
+    LEFT JOIN (
+    SELECT
+    CODE,
+    NAME
+    FROM
+    portal.dict
+    WHERE
+    category_id = '84'
+    ) b ON t.category = b. CODE
+    left join writer a on t.author=a.id
+    WHERE
+    t.id=#{condition.id}
+  </select>
+  <update id="updateReading">
+    update writing set reading=reading+1 where id=#{condition.id}
+  </update>
+</mapper>

@@ -375,6 +375,11 @@ public class CommonUtils extends StringUtils {
         return pwd.toString();
     }
 
+    public static long getRandomNum(int maxNum){
+        Random r = new Random();
+        return Long.valueOf(r.nextInt(maxNum));
+    }
+
     public static String getStringByExpression(String expression,
                                                Map<String, Object> valueMap) {
         String regex = "\\$\\{[^\\}]+\\}";

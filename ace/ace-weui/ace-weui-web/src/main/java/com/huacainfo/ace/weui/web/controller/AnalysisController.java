@@ -2,6 +2,7 @@ package com.huacainfo.ace.weui.web.controller;
 
 import java.util.Map;
 
+import com.huacainfo.ace.common.result.MessageResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +17,30 @@ import com.huacainfo.ace.weui.service.AnalysisService;
 @Controller
 @RequestMapping("/www/anslysis")
 public class AnalysisController extends WeuiBaseController {
-	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired
-	private AnalysisService analysisService;
+    private static final long serialVersionUID = 1L;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private AnalysisService analysisService;
 
-	@RequestMapping(value = "/query.do")
-	@ResponseBody
-	public ListResult<Map<String,Object>> query(
-			 String reportId,int start,int limit)
-			throws Exception {
-		Map<String,Object> condition=this.getParams();
-		if(CommonUtils.isBlank(start)){
-			start=0;
-		}
-		if(CommonUtils.isBlank(limit)){
-			limit=10;
-		}
-		return analysisService.query(condition, reportId,start,limit);
-	}	
+    @RequestMapping(value = "/query.do")
+    @ResponseBody
+    public ListResult<Map<String, Object>> query(
+            String reportId, int start, int limit)
+            throws Exception {
+        Map<String, Object> condition = this.getParams();
+        if (CommonUtils.isBlank(start)) {
+            start = 0;
+        }
+        if (CommonUtils.isBlank(limit)) {
+            limit = 10;
+        }
+        return analysisService.query(condition, reportId, start, limit);
+    }
+
+    @RequestMapping(value = "/updateReading.do")
+    @ResponseBody
+    public MessageResponse updateReading(String reportId) throws Exception {
+        Map<String, Object> condition = this.getParams();
+        return analysisService.updateReading(condition, reportId);
+    }
 }
