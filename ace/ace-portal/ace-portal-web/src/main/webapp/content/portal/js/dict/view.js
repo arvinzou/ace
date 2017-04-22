@@ -38,6 +38,8 @@ jQuery(function($) {
 		rowList : default_page_list,
 		pager : cfg.pager_selector,
 		altRows : true,
+        shrinkToFit:true,
+        autoScroll: true,
 		// toppager: true,
 		multiselect : false,
 		// multikey: "ctrlKey",

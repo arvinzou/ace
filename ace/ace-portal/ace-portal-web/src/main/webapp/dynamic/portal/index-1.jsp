@@ -12,6 +12,7 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <script type="text/javascript">
 	var contextPath = '${pageContext.request.contextPath}';
+	var portalType='${SESSION_USERPROP_KEY.cfg.portalType}';
 </script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/system/getUserProp.do"></script>

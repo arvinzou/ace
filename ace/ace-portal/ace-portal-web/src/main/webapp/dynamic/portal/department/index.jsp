@@ -150,6 +150,9 @@
 				setTimeout("autoResize()", 1000);
 			});
 			var h = window.innerHeight - 130;
+            if(portalType=='2'){
+                h=window.innerHeight-250;
+            }
 			$('#cc').layout('resize', {
 				width : '100%',
 				height : h
@@ -159,10 +162,10 @@
 			var display = $('#cc-west').css('display');
 			console.log(display)
 			if (display == 'none') {
-				$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width()-26);
+				$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width()-25);
 			} else {
 				$(cfg.grid_selector).jqGrid('setGridWidth',
-						$(".page-content").width() - 200);
+						$(".page-content").width() - 185);
 			}
 			console.log('autoResize:' + h);
 			parent.autoWidth();

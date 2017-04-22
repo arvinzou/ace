@@ -3,7 +3,7 @@ var _colModel = function() {
 	return [ {
 		name : 'id',
 		index : 'id',
-		width : 80,
+		width : 100,
 		sortable : false,
 		editable : true,
 		editoptions : {
@@ -30,7 +30,7 @@ var _colModel = function() {
 	}, {
 		name : 'categoryId',
 		index : 'categoryId',
-		width :60,
+		width :100,
 		editable : true,
 		edittype : "combobox",
 		dataoptions:{
@@ -96,13 +96,13 @@ var _colModel = function() {
 		}
 	}, {
 		name : 'createTime',
-		width :  120,
+		width :  150,
 		sortable : true,
 		editable : false
 	}, {
 		name : 'remark',
 		index : 'remark',
-		width : 120,
+		width : 150,
 		editable : true,
 		editoptions : {
 			size : "20",
