@@ -600,7 +600,7 @@ body {
 			</script>
 
 			<!-- #section:basics/sidebar.horizontal -->
-			<div id="sidebar" class="sidebar      h-sidebar                navbar-collapse collapse">
+			<div id="sidebar" class="sidebar h-sidebar navbar-collapse collapse">
 				<script type="text/javascript">
 					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 				</script>
@@ -776,6 +776,14 @@ body {
 }
 .panel-body {
     padding: 1px;
+}
+.sidebar.h-sidebar {
+    position: relative;
+    float: none !important;
+    width: auto !important;
+    margin-top: 7px;
+    border-width: 0 !important;
+    box-shadow: none;
 }
 </style>
 </body>

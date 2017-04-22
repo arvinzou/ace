@@ -16,7 +16,7 @@ $.ajax({
 function addPanel(title, src, closable) {
 	var screenHeight = window.innerHeight - 76;
 	if(portalType=='2'){
-        screenHeight=window.innerHeight - 40;
+        screenHeight=window.innerHeight - 30;
     }
 	var iframe = '<iframe name="mainFrame" id="ifr" src="' + src
 			+ '" width="100%" height="' + screenHeight

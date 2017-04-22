@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/dict/model.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/dict/model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/dict/view.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/dict/view.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/department/index.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/department/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/dict/index.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/dict/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -110,7 +107,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index-1.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index-1.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
@@ -120,11 +117,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="portal.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="portal.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="220">
-              <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+              <caret line="18" column="43" lean-forward="false" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -133,8 +130,8 @@
       <file leaf-file-name="index-2.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="60" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="60" />
+            <state relative-caret-position="462">
+              <caret line="783" column="17" lean-forward="false" selection-start-line="783" selection-start-column="17" selection-end-line="783" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -241,14 +238,14 @@
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/service/userCfg/controller.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/common/common.jsp" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/service/syCfg/index.jsp" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/base.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/dict/model.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/dict/view.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/department/index.jsp" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/dict/index.jsp" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js" />
       </list>
     </option>
   </component>
@@ -1451,7 +1448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492848859576</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="增加新导航模式后调整字典和机构管理的布局">
+      <created>1492850016538</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1492850016538</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1534,7 +1538,8 @@
     <MESSAGE value="活动剪影调整" />
     <MESSAGE value="意见反馈调整" />
     <MESSAGE value="增加portal个性化配置，两种导航方式" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加portal个性化配置，两种导航方式" />
+    <MESSAGE value="增加新导航模式后调整字典和机构管理的布局" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加新导航模式后调整字典和机构管理的布局" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1891,14 +1896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/base.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
@@ -1947,18 +1944,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="60" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="60" lean-forward="false" selection-start-line="14" selection-start-column="60" selection-end-line="14" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="783" column="17" lean-forward="false" selection-start-line="783" selection-start-column="17" selection-end-line="783" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="18" column="43" lean-forward="false" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
           <folding />
         </state>
       </provider>
