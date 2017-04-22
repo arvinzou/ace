@@ -65,6 +65,8 @@
 							 <i
 								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
 						</button>
+
+
 						
 					</div>
 				</div>
@@ -191,9 +193,11 @@
 		src="${pageContext.request.contextPath}/content/service/writing/controller.js?version=${cfg.version}"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/service/writing/view.js?version=${cfg.version}"></script>
+
+
 		<script type="text/javascript" src="${portalPath}/ckeditor/ckeditor.js?t=B37D54V"></script>
 	<jsp:include page="../../common/footer-2.jsp" />
-	<script type="text/javascript">
+<script type="text/javascript">
 window.onresize = function () {
 	console.log('autoWidthJqgrid');
 	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
@@ -201,5 +205,6 @@ window.onresize = function () {
 	parent.autoWidth();
 }
 </script>
+
 </body>
 </html>

@@ -23,6 +23,7 @@ import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.dao.SystemDao;
 import com.huacainfo.ace.portal.dao.UsersDao;
+import com.huacainfo.ace.portal.dao.UserCfgDao;
 import com.huacainfo.ace.portal.model.Config;
 import com.huacainfo.ace.portal.model.Resources;
 import com.huacainfo.ace.portal.model.Users;
@@ -49,6 +50,8 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 	private String key = "C0001";
 	@Autowired
 	private SysInfoService sysInfoService;
+	@Autowired
+	private UserCfgDao userCfgDao;
 
 	public List<Resources> getResourcesByUserId(String id) {
 		return this.systemDao.selectResourcesByUserId(id, "ace");
@@ -345,4 +348,13 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 		 this.usersDao.updateCurSyid(syid, userId);
 		 return new MessageResponse(0, "成功！");
 	 }
+
+	public Map<String,Object> selectUserCfgByUserId(String userId){
+		Map<String, Object> cfg = new HashMap<String, Object>();
+		List<Map<String,Object>> list=userCfgDao.selectUserCfgByUserId(userId);
+		for(Map<String,Object> o:list){
+			cfg.put((String)o.get("cfgKey"),o.get("value"));
+		}
+		return cfg;
+	}
 }

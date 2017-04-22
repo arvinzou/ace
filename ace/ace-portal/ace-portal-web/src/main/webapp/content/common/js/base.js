@@ -26,7 +26,9 @@ if (!window.innerWidth) {
 	}
 	window.innerWidth = width;
 }
-
+if(portalType=='2'){
+    layoutTopHeight=300;
+}
 if(winis()){
 	window.innerHeight= window.innerHeight - 10;
 	layoutTopHeight=layoutTopHeight-8;

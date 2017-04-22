@@ -9,7 +9,7 @@
 <title>作家</title>
 <jsp:include page="../../common/common-www.jsp" />
 <script>
-            var category='param.category';
+            var category='${param.category}';
   </script>
 </head>
 <body ontouchstart>

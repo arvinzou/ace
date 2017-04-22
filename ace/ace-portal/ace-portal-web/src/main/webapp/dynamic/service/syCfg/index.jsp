@@ -14,7 +14,7 @@
 
 
 </script>
-<body>
+<body style="background:red" >
 	<div class="page-content">
 		<div class="widget-box" id="widget-box">
 			<div class="widget-header">

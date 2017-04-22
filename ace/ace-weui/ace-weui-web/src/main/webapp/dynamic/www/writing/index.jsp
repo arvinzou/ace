@@ -11,7 +11,7 @@
 </head>
 <script>
 var author='${param.id}';
-var category='param.category';
+ var category='${param.category}';
  </script>
 <body ontouchstart>
  <div class="weui-pull-to-refresh__layer">

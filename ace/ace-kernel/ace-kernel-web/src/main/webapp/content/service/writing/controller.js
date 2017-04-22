@@ -38,6 +38,7 @@ jQuery(function($) {
 						'new',
 						{
 							closeAfterAdd : true,
+							modal:false,
 							recreateForm : true,
 							viewPagerButtons : false,
 							beforeShowForm : function(e) {
@@ -46,7 +47,7 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
-								editor=CKEDITOR.replace('docText');
+								editor=CKEDITOR.replace('docText',{ allowedContent: true });
                                 editor.on( 'change', function( event ) {
                                     var data = this.getData();//内容
 
@@ -55,6 +56,7 @@ jQuery(function($) {
                                 });
 							}
 						})
+show135Editor();
 
 			});
 	$('#btn-view-edit').on(
@@ -71,6 +73,7 @@ jQuery(function($) {
 						gr,
 						{
 							closeAfterAdd : true,
+							modal:false,
 							recreateForm : true,
 							viewPagerButtons : true,
 							beforeShowForm : function(e) {
@@ -112,6 +115,13 @@ jQuery(function($) {
 							}
 						})
 			});
+
+
+			$('#btn-view-135editor').on(
+            			'click',
+            			function() {
+                    show135Editor();
+            });
 });
 
 function preview(id,title){
@@ -152,7 +162,7 @@ function loadView(id) {
 		success : function(rst, textStatus) {
 			$.each(rst.value, function(key, value) {
 				if (key == 'category') {
-                	value = rsd(value, '83');
+                	value = rsd(value, '84');
                 }
                 if (key == 'status') {
                     value = value=="1"?"YES":"";
@@ -177,7 +187,7 @@ function loadText(id) {
 		beforeSend : function(XMLHttpRequest) {
 		},
 		success : function(rst, textStatus) {
-		    editor=CKEDITOR.replace('docText');
+		    editor=CKEDITOR.replace('docText',{ allowedContent: true });
             editor.on( 'change', function( event ) {
                 var data = this.getData();//内容
                 $("textarea[name=docText]").val(data);
@@ -191,4 +201,24 @@ function loadText(id) {
 			alert("加载错误！");
 		}
 	});
+}
+function show135Editor(){
+    var url = 'http://www.135editor.com/beautify_editor?callback=get_135editor_content';
+    window.open(url);
+}
+function get_135editor_content($html) {
+    editor.setData($html); // ueditor.setContent($html);
+}
+
+var onMessage = function(e){
+    parent.window.opener.get_135editor_content(e.data);
+    document.write("<iframe style=\"display:none;\" src=\"http://www.135editor.com/pages/closeWindow.html\"></iframe>");
+}
+
+if (window.addEventListener) {  // all browsers except IE before version 9
+    window.addEventListener("message", onMessage, false);
+} else {
+    if (window.attachEvent) {   // IE before version 9
+        window.attachEvent("onmessage", onMessage);
+    }
 }

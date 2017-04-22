@@ -3,6 +3,7 @@ package com.huacainfo.ace.common.security.spring;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,7 +32,7 @@ public class BasicUsers extends UserProp implements UserDetails {
 			String areaCode, boolean accountNonExpired,
 			boolean accountNonLocked, boolean credentialsNonExpired,
 			boolean enabled, Collection<GrantedAuthority> authorities,
-			List<String> roleType, String parentCorpId,String email,String account,List<String> role, String[] syid, String activeSyId) {
+			List<String> roleType, String parentCorpId,String email,String account,List<String> role, String[] syid, String activeSyId,Map<String,Object> cfg) {
 		super();
 		this.password = password;
 		this.username = username;
@@ -54,6 +55,7 @@ public class BasicUsers extends UserProp implements UserDetails {
 		setRole(role);
 		setSyid(syid);
 		setActiveSyId(activeSyId);
+		setCfg(cfg);
 	}
 
 	public String getPassword() {

@@ -73,7 +73,7 @@
                   <div class="pull-left">
                     <i class="fa fa-user-circle-o"></i>
                   </div>
-                  <div class="pull-right number" id="memberCount">1135</div>
+                  <div class="pull-right number" id="writer">1135</div>
                 </div>
                  <div class="mini-widget-footer center-align-text">
                   <span>总数／人</span>
@@ -88,9 +88,9 @@
                 </div>
                 <div class="mini-widget-body clearfix">
                   <div class="pull-left">
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-book"></i>
                   </div>
-                  <div class="pull-right number" id="deptCount">8757</div>
+                  <div class="pull-right number" id="writing">8757</div>
                 </div>
                <div class="mini-widget-footer center-align-text">
                   <span>总数／个</span>
@@ -107,7 +107,7 @@
                   <div class="pull-left">
                     <i class="fa fa-id-card"></i>
                   </div>
-                  <div class="pull-right number" id="dirverCount">3780</div>
+                  <div class="pull-right number" id="activity_photos">3780</div>
                 </div>
                 <div class="mini-widget-footer center-align-text">
                   <span>总数／次</span>
@@ -122,9 +122,9 @@
                 </div>
                 <div class="mini-widget-body clearfix">
                   <div class="pull-left">
-                    <i class="fa fa-car"></i>
+                    <i class="fa fa-comment-o"></i>
                   </div>
-                  <div class="pull-right number" id="carCount">12658</div>
+                  <div class="pull-right number" id="feedback">12658</div>
                 </div>
                 <div class="mini-widget-footer center-align-text">
                   <span>总数／次</span>

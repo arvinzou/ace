@@ -23,11 +23,18 @@ var id='${param.id}';
         <div class="weui-panel__bd">
           <div class="weui-media-box weui-media-box_text">
             <h4 class="weui-media-box__title">简介</h4>
-            <p class="weui-media-box__desc" id="intro"></p>
+            <p class="weui-media-box__desc" ></p>
           </div>
+        </div>
+</div>
+<div id="intro" style="padding:12px">
+</div>
+<div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd">
           <div class="weui-media-box weui-media-box_text">
-              <h4 class="weui-media-box__title">正文</h4>
-           </div>
+            <h4 class="weui-media-box__title">正文</h4>
+            <p class="weui-media-box__desc" ></p>
+          </div>
         </div>
 </div>
 <div id="docText" style="padding:12px">

@@ -1,6 +1,6 @@
 function initData() {
-	chart1();
-	chart2();
+	//chart1();
+	//chart2();
 	chart3();
 }
 function initMyChar1() {
@@ -66,10 +66,11 @@ function chart1() {
 function chart3() {
 	$.ajax({
 		type : "post",
-		url : contextPath + '/homeChart/selectInfobox.do',
+		url : contextPath + '/anslysis/query.do',
+		data:{reportId:"portal"},
 		success : function(rst) {
-			$.each(rst.value, function(key, value) {
-				$('#' + key).html(value);
+			$.each(rst.value, function(i,o) {
+				$('#' + o.id).html(o.value);
 			});
 		}
 	});

@@ -46,13 +46,13 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
-								editor=CKEDITOR.replace('intro');
-                                                                						editor.on( 'change', function( event ) {
+								//editor=CKEDITOR.replace('intro');
+                                                                						/*editor.on( 'change', function( event ) {
                                                                                             var data = this.getData();//内容
 
                                                                                             $("textarea[name=intro]").val(data);
 
-                                                                                        });
+                                                                                        });*/
 							}
 						})
 						appendUploadBtn();
@@ -186,15 +186,15 @@ function loadText(id) {
 		beforeSend : function(XMLHttpRequest) {
 		},
 		success : function(rst, textStatus) {
-			editor=CKEDITOR.replace('intro');
-            editor.on( 'change', function( event ) {
+			//editor=CKEDITOR.replace('intro');
+           /* editor.on( 'change', function( event ) {
                 var data = this.getData();//内容
                 $("textarea[name=intro]").val(data);
-            });
+            });*/
             $("textarea[name=intro]").val(rst.value.intro);
             $("textarea[name=descri]").val(rst.value.descri);
             //alert(rst.value.intro);
-            editor.setData(rst.value.intro);
+            //editor.setData(rst.value.intro);
 		},
 		error : function() {
 			alert("加载错误！");

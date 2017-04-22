@@ -2,6 +2,7 @@ package com.huacainfo.ace.common.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 
@@ -59,6 +60,8 @@ public class UserProp implements Serializable {
 
 	private String activeSyId;
 
+	private Map<String,Object> cfg;
+
 	public Long getUserIdLong() {
 		return Long.valueOf(getUserId());
 	}
@@ -69,7 +72,7 @@ public class UserProp implements Serializable {
 
 	public UserProp(String userId, String name, String nickName, String corpId,
 			String corpName, String areaCode, List<String> roleType,
-			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId) {
+			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg) {
 		this.userId = userId;
 		this.name = name;
 		this.nickName = nickName;
@@ -83,13 +86,14 @@ public class UserProp implements Serializable {
 		this.syid=syid;
 		this.roleType=roleType;
 		this.activeSyId=activeSyId;
+		this.cfg=cfg;
 	}
 
 	public UserProp(String userId, String name, String nickName, String corpId,
 			String corpName, String areaCode, String ip, List<String> roleType,
-			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId) {
+			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg) {
 		this(userId, name, nickName, corpId, corpName, areaCode, roleType,
-				parentCorpId, role, email, account,syid, activeSyId);
+				parentCorpId, role, email, account,syid, activeSyId,cfg);
 		this.ip = ip;
 	}
 
@@ -258,5 +262,12 @@ public class UserProp implements Serializable {
 	public void setActiveSyId(String activeSyId) {
 		this.activeSyId = activeSyId;
 	}
-	
+
+	public Map<String, Object> getCfg() {
+		return cfg;
+	}
+
+	public void setCfg(Map<String, Object> cfg) {
+		this.cfg = cfg;
+	}
 }

@@ -1,13 +1,6 @@
 package com.huacainfo.ace.kernel.service.impl;
 
 
-import java.util.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -15,10 +8,17 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.kernel.dao.WriterDao;
 import com.huacainfo.ace.kernel.model.Writer;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.kernel.service.WriterService;
-import com.huacainfo.ace.kernel.vo.WriterVo;
 import com.huacainfo.ace.kernel.vo.WriterQVo;
+import com.huacainfo.ace.kernel.vo.WriterVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.FilesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
 @Service("writerService")
 public class WriterServiceImpl implements WriterService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -26,6 +26,9 @@ public class WriterServiceImpl implements WriterService {
     private WriterDao writerDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private FilesService filesService;
 
     public PageResult<WriterVo> findWriterList(WriterQVo condition, int start,
                                                int limit, String orderBy) throws Exception {
@@ -82,6 +85,7 @@ public class WriterServiceImpl implements WriterService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         o.setStatus("1");
+        filesService.updateFiles(o.getPhoto(),userProp);
         this.writerDao.insert(o);
         this.dataBaseLogService.log("添加作家", "作家", "", o.getName(),
                 o.getName(), userProp);

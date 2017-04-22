@@ -176,7 +176,7 @@ jQuery(function($) {
 			function() {
 				$('#imageF').hide().attr(
 						'src',
-						'${pageContext.request.contextPath}/captcha/image.do'
+						contextPath+'/captcha/image.do'
 								+ '?' + Math.floor(Math.random() * 100))
 						.fadeIn();
 			});
@@ -196,7 +196,6 @@ jQuery(function($) {
 			j_submit();
 		}
 	});
-	var sys_name=['运输协会政企服务平台-协会','运输协会政企服务平台-会员','运输协会政企服务平台-企业'];
 	$(":radio").click(function(){
 			$("#id-text2").html(sys_name[$(this).val()]);
 	});

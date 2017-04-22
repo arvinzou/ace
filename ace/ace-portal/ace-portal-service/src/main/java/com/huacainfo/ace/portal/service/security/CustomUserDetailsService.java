@@ -56,6 +56,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			if(CommonUtils.isBlank(syUser.getCurSyid())){
 				syUser.setCurSyid(syid[0]);
 			}
+			Map<String,Object> cfg=this.systemService.selectUserCfgByUserId(syUser.getUserId());
 			this.logger.info("授予用户：{}的角色列表：{} 归属社保类型 {} 系统 {}",
 					syUser.getAccount(), auths, roleType, syid);
 			this.logger
@@ -66,14 +67,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 					syUser.getDepartmentId(), syUser.getCorpName(),
 					syUser.getAreaCode(), syUser.getStauts().equals("1"), true,
 					true, true, auths, roleType, syUser.getParentCorpId(),
-					syUser.getEmail(), syUser.getAccount(), role, syid, syUser.getCurSyid());
+					syUser.getEmail(), syUser.getAccount(), role, syid, syUser.getCurSyid(),cfg);
 			logger.info("加载用户信息:{}", o);
 			return o;
 		} else {
 			return new BasicUsers("0", "default", "default", "default",
 					"default", "default", "default", "default", false, true,
 					true, false, auths, null, "default", null, null, null,
-					null, null);
+					null, null,null);
 		}
 	}
 }

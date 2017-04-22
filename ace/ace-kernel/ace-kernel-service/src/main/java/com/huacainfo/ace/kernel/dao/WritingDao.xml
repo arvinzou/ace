@@ -62,6 +62,7 @@
       dateOfPublication = #{dateOfPublication,jdbcType=DATE},
       everPublished = #{everPublished,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
+    author= #{author,jdbcType=VARCHAR},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},

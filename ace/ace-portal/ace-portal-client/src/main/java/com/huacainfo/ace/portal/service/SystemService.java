@@ -241,4 +241,6 @@ public interface SystemService extends WebContextParamService {
 
     public MessageResponse updateCurSyid(String syid, String userId);
 
+	public Map<String,Object> selectUserCfgByUserId(String userId);
+
 }

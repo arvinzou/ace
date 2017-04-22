@@ -54,4 +54,7 @@
 	<dubbo:service interface="com.huacainfo.ace.portal.service.SyCfgService"
 		ref="syCfgService" />
 
+	<dubbo:service interface="com.huacainfo.ace.portal.service.UserCfgService"
+				   ref="userCfgService" />
+
 </beans>

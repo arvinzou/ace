@@ -22,7 +22,7 @@ var echarts;
 jQuery(function($) {
 	require.config({
         paths: {
-            echarts: contextPath+'/content/common/js/echarts-2.27'
+            echarts: portalPath+'/content/common/js/echarts-2.27'
         }
     });
 	

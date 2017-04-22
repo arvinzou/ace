@@ -24,7 +24,7 @@
 		<form-login login-page="/dynamic/portal/security/login.jsp"
 			login-processing-url="/j_spring_security_check"
 			authentication-failure-url="/dynamic/portal/security/login.jsp"
-			default-target-url="/dynamic/portal/index.jsp"
+			default-target-url="/index.jsp"
 			always-use-default-target="true" password-parameter="j_password"  
             username-parameter="j_username"/>
 		<logout invalidate-session="true" logout-url="/dynamic/portal/security/loginOut.jsp"
