@@ -257,6 +257,48 @@ jQuery(function($) {
 		});
 		
 	});
+
+		$( "#btn-view-sort" ).on('click', function(e) {
+    		e.preventDefault();
+    		var dialog = $( "#dialog-sort" ).removeClass('hide').dialog({
+    			modal: false,
+    			width:600,
+    			title: "<div class='widget-header widget-header-small'><h4 class='smaller'>排序</h4></div>",
+    			title_html: true,
+    			buttons: [
+
+    				/*{
+    					html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 重置",
+    					"class" : "btn btn-info btn-xs",
+    					id:'ajax_button',
+    					click: function() {
+    						reset_uploader();
+
+    					}
+    				},*/
+    				{
+    					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 关闭",
+    					"class" : "btn btn-xs",
+    					click: function() {
+    						$( this ).dialog( "close" );
+    					}
+    				}
+    			]
+    		});
+    		Travel("tt");
+    		$( ".sortable" ).sortable({
+                      cursor: "move",
+                      items :"li",                        //只是li可以拖动
+                      opacity: 0.6,                       //拖动时，透明度为0.6
+                      revert: true,                       //释放时，增加动画
+                      stop : function(event, ui){       //更新排序之后
+                          updateSequence($(this).sortable("toArray"));
+                      }
+            });
+
+
+
+    	});
 });
 function autotreeq(node){
 	//$('#fm-search').find(":input[name='resourcesId']").val(node.id);
@@ -392,4 +434,60 @@ function clearQparams(){
 		page : 1,
 		postData : {parentResourcesId:'',resourcesId:''}
 	}).trigger("reloadGrid");
+}
+function Travel(treeID){//参数为树的ID，注意不要添加#
+
+   var node = $('#'+treeID).tree('getSelected');
+   var html=[];
+   if(node){
+        var children = $('#'+treeID).tree('getChildren', node.target);
+        for (var i = 0; i < children.length; i++) {
+            html.push('<li class="dd-handle"  id="'+children[i].id+'">'+children[i].text+'</li>');
+        }
+   }else{
+        var roots=$('#'+treeID).tree('getRoots');
+        for(i=0;i<roots.length;i++){
+            html.push('<li class="dd-handle"  id="'+roots[i].id+'">'+roots[i].text+'</li>');
+        }
+   }
+    $(".sortable").html(html.join(""));
+}
+function updateSequence(arr){
+    var data=[];
+    for(var i=0;i<arr.length;i++){
+        data.push({resourcesId:arr[i],sequence:i});
+    }
+    $.ajax({
+        type : "post",
+        url : contextPath +"/resources/updateSequence.do",
+        data:{jsons:JSON.stringify(data)},
+        beforeSend : function(XMLHttpRequest) {
+        },
+        success : function(rst, textStatus) {
+            if (!rst.state) {
+                bootbox.dialog({
+                    title:'系统提示',
+                    message:rst.errorMessage,
+                    detail:rst.detail,
+                    buttons:
+                    {
+                        "success" :
+                         {
+                            "label" : "<i class='ace-icon fa fa-check'></i>确定",
+                            "className" : "btn-sm btn-success",
+                            "callback": function() {
+                            }
+                        }
+                    }
+                });
+
+            }
+        },
+        complete : function(XMLHttpRequest, textStatus) {
+
+        },
+        error : function() {
+
+        }
+    });
 }

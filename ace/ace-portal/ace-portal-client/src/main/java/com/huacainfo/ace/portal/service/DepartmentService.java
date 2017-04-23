@@ -126,7 +126,16 @@ public interface DepartmentService {
 	 */
 	
 	public abstract ListResult<Map<String,String>>  selectUsersListByDepartmentId(String departmentId) throws Exception;
-	
-	
-	
+
+	/**
+	 * @Description:部门数据导入
+	 * @param list
+	 * @param userProp
+	 * @return
+	 * @throws Exception
+	 */
+	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception;
+
+
+
 }

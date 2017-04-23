@@ -43,7 +43,7 @@ jQuery(function($) {
 		multiselect : false,
 		// multikey: "ctrlKey",
 		multiboxonly : true,
-		shrinkToFit:false,
+		shrinkToFit:true,
 		autoScroll: false,
 		loadComplete : function() {
 			autoResize();

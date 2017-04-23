@@ -40,7 +40,7 @@ jQuery(function($) {
 		altRows : true,
 		// toppager: true,
 		shrinkToFit:true,
-		autoScroll: true,
+		autoScroll: false,
 		multiselect : false,
 		// multikey: "ctrlKey",
 		multiboxonly : true,

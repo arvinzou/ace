@@ -121,4 +121,8 @@ public interface ResourcesService extends SecurityLoadResouceDefine {
 	 */
 	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp)
 			throws Exception;
+
+
+	public MessageResponse updateSequence(List<Map<String, Object>> list, UserProp userProp)
+			throws Exception;
 }

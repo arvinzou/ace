@@ -43,4 +43,12 @@ public interface ResourcesMapper {
 	 * @createDate: 2012-12-15
 	 */
 	public abstract List<Map<String, String>> loadResourceDefine();
+
+	/**
+	 * 更新菜单显示顺序
+	 * @param sequence
+	 * @param resourcesId
+	 * @return
+	 */
+	int updateSequence(@Param("sequence") int sequence,@Param("resourcesId") String resourcesId);
 }

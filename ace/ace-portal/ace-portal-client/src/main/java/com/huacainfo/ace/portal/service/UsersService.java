@@ -1,5 +1,6 @@
 package com.huacainfo.ace.portal.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.huacainfo.ace.common.model.UserProp;
@@ -200,5 +201,14 @@ public interface UsersService {
 	 * @return
 	 */
 	public abstract MessageResponse deleteConUsers(String id, UserProp curUserProp) throws Exception;
+
+	/**
+	 * @Description:员工数据导入
+	 * @param list
+	 * @param userProp
+	 * @return
+	 * @throws Exception
+	 */
+	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception;
 
 }

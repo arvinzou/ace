@@ -18,6 +18,12 @@
 	margin: 1px 1px 1px;
 }
 </style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+<style type="text/css">
+		.excel{ background-color:#999; font-size:13px;}
+		.excel td{ background-color:#fff; white-space:nowrap;}
+		.excel th{ background-color:#E7E7E7; font-weight:normal;}
+</style>
 <body>
 	<div class="page-content">
 		<div class="widget-box" id="widget-box">
@@ -37,12 +43,12 @@
 							style='width: 200px; line-height: 25px; height: 25px;'> <a
 							href="javascript:clearAreaCode()">清除</a> 
 							
-						上级机构： <input id="cc1" name="parentDepartmentId"
+						上级部门： <input id="cc1" name="parentDepartmentId"
 							class="easyui-combotree"
 							data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do',method:'get',animate: true,
                 lines:false,"
 							style='width: 200px; line-height: 25px; height: 25px;'> <a
-							href="javascript:clearQparams()">清除</a> 机构名称： <input
+							href="javascript:clearQparams()">清除</a> 部门名称： <input
 							name="departmentName" type="text" maxlength="20"
 							style="width: 200px; height: 25px;" />
 						<button class="btn btn-info" id="btn-search"
@@ -76,6 +82,11 @@
 							<i
 								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
 						</button>
+                        <button class="btn btn-info" id="btn-view-import"
+                            authority="${pageContext.request.contextPath}/department/importXls.do">
+                            <i
+                                class="ace-icon glyphicon glyphicon-upload  align-middle bigger-125 icon-on-right"></i>
+                        </button>
 					</div>
 				</div>
 			</div>
@@ -178,7 +189,7 @@
 		});
 	</script>
 	
-	<div id="dialog-message" class="hide">
+	<div id="dialog-message2" class="hide">
 <!-- 		<select class="easyui-combogrid" -->
 <!-- 			style="width: 585px; height: 30px; line-height: 30px;" -->
 <!-- 			id="combogrid-tmp" -->
@@ -189,7 +200,7 @@
 <!-- 			{field:'USER_ID',title:'用户编号',width:150}, -->
 <!-- 			{field:'NAME',title:'姓名',width:100}, -->
 <!-- 			{field:'MOBILE',title:'手机号',width:150,align:'right'}, -->
-<!-- 			{field:'DEPARTMENT_NAME',title:'所属机构',width:250,align:'right'} -->
+<!-- 			{field:'DEPARTMENT_NAME',title:'所属部门',width:250,align:'right'} -->
 <%-- 			 ]]"></select> --%>
 
 		<div style="height: 5px"></div>
@@ -247,7 +258,7 @@
 			html.push('</div>');
 			if(!isExit){
 				if(r.DEPARTMENT_NAME&&r.DEPARTMENT_NAME!=''){
-					if(confirm("已分配过的人员，确定要更改机构吗？")){
+					if(confirm("已分配过的人员，确定要更改部门吗？")){
 						$('#task-content-tmp').html($('#task-content-tmp').html()+html.join(''));
 					}
 				}else{
@@ -263,5 +274,27 @@
 	}
 	</script>
 	</div>
+
+	<div id="dialog-message" class="hide">
+
+    		<div id="uploader">
+        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+    </div>
+
+     <div style="margin:5px">
+
+    		           <a href="rs.xls" style="color:red">下载模板</a>.<br>
+
+
+     </div>
+
+
+
+    		</div>
+    <script
+    		src="${pageContext.request.contextPath}/content/portal/js/department/upload.js?version=${cfg.version}"></script>
+    		<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+    			<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+    	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 </body>
 </html>

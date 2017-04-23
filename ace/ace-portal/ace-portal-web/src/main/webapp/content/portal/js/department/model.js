@@ -1,4 +1,4 @@
-var _colNames = [ '机构编号', '父级编号', '机构名称', '简称', '联系人姓名', '联系人Email','法定联系人','法人证件类型','法定人证件号','经济性质','营业执照号','企业类型','机构类型', '地区',
+var _colNames = [ '部门编号', '归属部门编号', '部门名称', '简称', '联系人姓名', '联系人Email','法定联系人','法人证件类型','法定人证件号','经济性质','营业执照号','企业类型','机构类型', '地区',
 		'创建时间', '状态' ];
 var _colModel = function() {
 	return [ {
@@ -6,7 +6,7 @@ var _colModel = function() {
 		index : 'id',
 		width : 150,
 		sortable : false,
-		editable : true,
+		editable : false,
 		editoptions : {
 			readonly : true,
 			style:'width:175px;line-height: 25px;height: 25px;'
@@ -50,7 +50,7 @@ var _colModel = function() {
 		index : 'shortName',
 		width : 150,
 		hidden:true,
-		editable : true,
+		editable : false,
 		editoptions : {
 			size : "20",
 			maxlength : "250",
@@ -67,8 +67,8 @@ var _colModel = function() {
 		name : 'contactName',
 		index : 'contactName',
 		width : 150,
-		hidden:false,
-		editable : true,
+		hidden:true,
+		editable : false,
 		editoptions : {
 			size : "20",
 			maxlength : "50",
@@ -88,8 +88,8 @@ var _colModel = function() {
 		name : 'contactEmail',
 		index : 'contactEmail',
 		width : 150,
-		hidden:false,
-		editable : true,
+		hidden:true,
+		editable : false,
 		editoptions : {
 			size : "20",
 			maxlength : "50",
@@ -109,8 +109,8 @@ var _colModel = function() {
 		name : 'legalPersonName',
 		index : 'legalPersonName',
 		width : 150,
-		hidden:false,
-		editable : true,
+		hidden:true,
+		editable : false,
 		editoptions : {
 			size : "20",
 			maxlength : "50",
@@ -127,8 +127,8 @@ var _colModel = function() {
 		name : 'legalPersonIdType',
 		index : 'legalPersonIdType',
 		width : 100,
-		hidden:false,
-		editable : true,
+		hidden:true,
+		editable : false,
 		edittype : "select",
 		renderer : function(value) {
 			return rsd(value, "70");
@@ -148,8 +148,8 @@ var _colModel = function() {
 		name : 'legalPersonIdNo',
 		index : 'legalPersonIdNo',
 		width : 150,
-		hidden:false,
-		editable : true,
+		hidden:true,
+		editable : false,
 		editoptions : {
 			size : "20",
 			maxlength : "50",
@@ -166,8 +166,8 @@ var _colModel = function() {
 		name : 'nature',
 		index : 'nature',
 		width : 80,
-		hidden:false,
-		editable : true,
+		hidden:true,
+		editable : false,
 		edittype : "select",
 		renderer : function(value) {
 			return rsd(value, "03");
@@ -188,7 +188,7 @@ var _colModel = function() {
 		index : 'bussLicenseNo',
 		width : 150,
 		hidden:true,
-		editable : true,
+		editable : false,
 		editoptions : {
 			size : "20",
 			maxlength : "50",
@@ -204,7 +204,8 @@ var _colModel = function() {
 	}, {
 		name : 'type',
 		width : 60,
-		editable : true,
+		hidden:true,
+		editable : false,
 		edittype : "select",
 		renderer : function(value) {
 			return rsd(value, "04");
@@ -216,7 +217,8 @@ var _colModel = function() {
 	}, {
 		name : 'category',
 		width : 60,
-		editable : true,
+		hidden:true,
+		editable : false,
 		edittype : "select",
 		renderer : function(value) {
 			return rsd(value, "66");
@@ -228,8 +230,8 @@ var _colModel = function() {
 	}, {
 		name : 'areaCode',
 		width : 100,
-		
-		editable : true,
+		hidden:true,
+		editable : false,
 		edittype : "combotree",
 		editoptions : {
 			style:'width:175px;line-height: 25px;height: 25px;'

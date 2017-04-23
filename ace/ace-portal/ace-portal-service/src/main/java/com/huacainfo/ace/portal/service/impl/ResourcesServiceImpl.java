@@ -157,4 +157,14 @@ public class ResourcesServiceImpl implements ResourcesService,
 				"rs.xls", userProp);
 		return new MessageResponse(0, "资源导入完成！");
 	}
+
+	public MessageResponse updateSequence(List<Map<String, Object>> list, UserProp userProp)
+			throws Exception{
+		for(Map<String, Object> o:list){
+			this.resourcesMapper.updateSequence((int)o.get("sequence"),(String)o.get("resourcesId"));
+		}
+		this.dataBaseLogService.log("排序", "资源", "", "",
+				"", userProp);
+		return new MessageResponse(0, "完成！");
+	}
 }

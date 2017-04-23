@@ -10,6 +10,12 @@
 <title>user</title>
 </head>
 <jsp:include page="../../common/common.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+<style type="text/css">
+		.excel{ background-color:#999; font-size:13px;}
+		.excel td{ background-color:#fff; white-space:nowrap;}
+		.excel th{ background-color:#E7E7E7; font-weight:normal;}
+</style>
 <body>
 	<div class="page-content">
 		<div class="widget-box" id="widget-box">
@@ -28,8 +34,8 @@
                 lines:false,"
 							style='width: 200px; line-height: 25px; height: 25px;'> <a
 							href="javascript:clearAreaCode()">清除</a>  --%>
-						用户名称： <input name="name" type="text" style="width: 200px;height:25px" />
-						所属机构：
+						姓名： <input name="name" type="text" style="width: 200px;height:25px" />
+						归属部门：
 						<input name="departmentId" class="easyui-combotree"
 				data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do?id=01',method:'get',animate: true,
                 lines:false,"
@@ -69,7 +75,11 @@
 							<i
 								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
 						</button>
-
+                        <button class="btn btn-info" id="btn-view-import"
+                            authority="${pageContext.request.contextPath}/users/importXls.do">
+                            <i
+                                class="ace-icon glyphicon glyphicon-upload  align-middle bigger-125 icon-on-right"></i>
+                        </button>
 					</div>
 				</div>
 			</div>
@@ -166,5 +176,27 @@ function autoSize(){
 
 }
 </script>
+
+<div id="dialog-message-upload" class="hide">
+
+		<div id="uploader">
+    <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+</div>
+
+ <div style="margin:5px">
+
+		           <a href="rs.xls" style="color:red">下载模板</a>.<br>
+
+
+ </div>
+
+
+
+		</div>
+<script
+		src="${pageContext.request.contextPath}/content/portal/js/users/upload.js?version=${cfg.version}"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+			<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 </body>
 </html>

@@ -1,12 +1,30 @@
-var _colNames = [ '用户编号', '账户','密码', '性别', '身份证号', '用户名', '所属机构','所属地区', '出生日期', '状态',
+var _colNames = ['姓名', '用户编号', '账户','密码', '性别', '身份证号',  '归属部门','所属地区', '出生日期', '状态',
 		'最后登录时间', '手机号', '电子邮箱', '职务', '座位', '创建时间' ];
 var _colModel = function() {
 	return [
-			{
+            {
+                name : 'name',
+                //width : 100,
+                editable : true,
+                editoptions : {
+
+                    size : "20",
+                    maxlength : "25"
+                },
+                formoptions : {
+                    elmprefix : "",
+                    elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+                },
+                editrules : {
+                    required : true
+                }
+            },
+            {
 				name : 'userId',
 				//width : 120,
 				sorttype : "int",
-				editable : true,
+				editable : false,
+				hidden:true,
 				editoptions : {
 					readonly : true
 				}
@@ -41,16 +59,17 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 				},
 				editrules : {
-					required : true
+					required : false
 				}
 			},
 			{
 				name : 'sex',
 				//width : 60,
 				editable : true,
+				hidden:true,
 				edittype : "select",
 				renderer : function(value) {
 					return rsd(value, "01");
@@ -67,23 +86,6 @@ var _colModel = function() {
 				editoptions : {
 					size : "20",
 					maxlength : "18"
-				}
-			},
-			{
-				name : 'name',
-				//width : 100,
-				editable : true,
-				editoptions : {
-					
-					size : "20",
-					maxlength : "25"
-				},
-				formoptions : {
-					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
-				},
-				editrules : {
-					required : true
 				}
 			},
 			{
@@ -206,10 +208,10 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 				},
 				editrules : {
-					required : true
+					required : false
 				}
 			}, {
 				name : 'email',
@@ -222,10 +224,10 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 				},
 				editrules : {
-					required : true
+					required : false
 				}
 			}, {
 				name : 'userLevel',

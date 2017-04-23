@@ -272,4 +272,10 @@
 		and m.role_id is not null
 		group by m.resources_url
 	</select>
+
+	<update id="updateSequence">
+		update resources
+		set SEQUENCE=#{sequence,jdbcType=INTEGER}
+		where RESOURCES_ID = #{resourcesId,jdbcType=VARCHAR}
+	</update>
 </mapper>

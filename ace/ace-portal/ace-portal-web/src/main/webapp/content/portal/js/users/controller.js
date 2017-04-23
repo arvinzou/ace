@@ -379,7 +379,36 @@ jQuery(function($) {
 			btn.removeAttr("disabled");
 		}
 	}
-	
+		$( "#btn-view-import" ).on('click', function(e) {
+    		e.preventDefault();
+    		reset_uploader();
+    		var dialog = $( "#dialog-message-upload" ).removeClass('hide').dialog({
+    			modal: true,
+    			width:750,
+    			title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-cog'></i> 导入</h4></div>",
+    			title_html: true,
+    			buttons: [
+
+    				/*{
+    					html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 重置",
+    					"class" : "btn btn-info btn-xs",
+    					id:'ajax_button',
+    					click: function() {
+    						reset_uploader();
+
+    					}
+    				},*/
+    				{
+    					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 关闭",
+    					"class" : "btn btn-xs",
+    					click: function() {
+    						$( this ).dialog( "close" );
+    					}
+    				}
+    			]
+    		});
+
+    	});
 });
 function clearAreaCode(){
 	$('#cc2').combotree('setValue', '');

@@ -8,7 +8,7 @@ public class Department implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 1007838995037364699L;
 
-	
+	private String id;
 	private String departmentId;
 
     private String parentDepartmentId;
@@ -507,8 +507,12 @@ public class Department implements java.io.Serializable{
 	public void setCheckCode(String checkCode) {
 		this.checkCode = checkCode;
 	}
-    
-    
-	
-    
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

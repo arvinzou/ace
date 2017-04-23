@@ -59,6 +59,11 @@
 							<i
 								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
 						</button>
+						<button class="btn btn-info" id="btn-view-sort"
+                            authority="false">
+                            排序<i
+                                class="ace-icon fa fa-sort  align-middle bigger-125 icon-on-right"></i>
+                        </button>
 						<button class="btn btn-info" id="btn-view-import"
 							authority="${pageContext.request.contextPath}/resources/insertResources.do">
 							Excel导入<i
@@ -137,6 +142,9 @@ function autoResize(){
 		setTimeout("autoResize()",1000);
 	});
 	var h=window.innerHeight-130;
+	if(portalType=='2'){
+                    h=window.innerHeight-250;
+    }
 	$('#cc').layout('resize', {
 		width:$(".page-content").width(),
 		height:h
@@ -146,9 +154,9 @@ function autoResize(){
 	var display=$('#cc-west').css('display');
 	console.log(display)
 	if(display=='none'){
-		$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width()-26);
+		$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width()-10);
 	}else{
-		$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width()-200);
+		$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width()-183);
 	}
 	console.log('autoResize:'+h);
 	parent.autoWidth();
@@ -178,10 +186,19 @@ jQuery(function($) {
 
 
 		</div>
+		<div id="dialog-sort" class="hide">
+		      <div class="sortable">
+                <li class="dd-handle"  id="1">第1项</li>
+                <li class="dd-handle"  id="2" >第2项</li>
+                <li class="dd-handle"  id="3">第3项</li>
+              </div>
+        </div>
+
 <script
 		src="${pageContext.request.contextPath}/content/portal/js/resources/upload.js?version=${cfg.version}"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
 			<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
 </body>
 </html>

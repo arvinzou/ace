@@ -1,11 +1,22 @@
 package com.huacainfo.ace.portal.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.view.Tree;
+import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult ;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonTreeUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.portal.dao.DepartmentDao;
+import com.huacainfo.ace.portal.model.Department;
+import com.huacainfo.ace.portal.service.CacheService;
+import com.huacainfo.ace.portal.service.ConfigService;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.DepartmentService;
+import com.huacainfo.ace.portal.vo.DepartmentVo;
 import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,24 +24,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
-import com.huacainfo.ace.common.kafka.KafkaProducerService;
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.model.view.Tree;
-import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.CommonTreeUtils;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.portal.dao.DepartmentDao;
-import com.huacainfo.ace.portal.model.Department;
-import com.huacainfo.ace.portal.model.Users;
-import com.huacainfo.ace.portal.service.CacheService;
-import com.huacainfo.ace.portal.service.ConfigService;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.portal.service.DepartmentService;
-import com.huacainfo.ace.portal.vo.DepartmentVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("deprecation")
 @Service("departmentService")
@@ -74,7 +71,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		if (CommonUtils.isBlank(o.getDepartmentName())) {
 			return new MessageResponse(1, "企业名称不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getShortName())) {
+		/*if (CommonUtils.isBlank(o.getShortName())) {
 			return new MessageResponse(1, "简称不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getCategory())) {
@@ -117,10 +114,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 		if (CommonUtils.isBlank(o.getCreateTime())) {
 			return new MessageResponse(1, "创建时间不能为空！");
 		}
-		int t = this.departmentDao.isExit(o);
-		if (t > 0) {
-			return new MessageResponse(1, "已存在的企业名称！");
-		}
 		t = this.departmentDao.isExitEmail(o.getContactEmail());
 		if (t > 0) {
 			return new MessageResponse(1, "已存在的联系人邮箱！");
@@ -129,8 +122,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 		if (t > 0) {
 			return new MessageResponse(1, "已存在的营业执照号！");
 		}
+		*/
+		int t = this.departmentDao.isExit(o);
+		if (t > 0) {
+			return new MessageResponse(1, "已存在的部门名称！");
+		}
+
 		this.departmentDao.insertDepartment(o);
-		String password=CommonUtils.genRandomNum(6);
+		/*String password=CommonUtils.genRandomNum(6);
 		String seat=UUID.randomUUID().toString();
 		Users users=new Users();
 		users.setAccount(o.getContactEmail());
@@ -154,7 +153,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		model.put("password", password);
 		model.put("seat", seat);
 		this.regSendEamil(model);
-		
+		*/
 		this.dataBaseLogService.log("添加新机构", "机构", "企业名称："+o.getDepartmentName()+"营业执照号："+o.getBussLicenseNo()+",企业编号："+o.getDepartmentId(), "",
 				o.getDepartmentName(), userProp);
 		return new MessageResponse(0, "添加新机构完成！");
@@ -171,9 +170,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 		}
 		if (CommonUtils.isBlank(o.getDepartmentName())) {
 			return new MessageResponse(1, "机构名称不能为空！");
-		}
-		if (CommonUtils.isBlank(o.getAreaCode())) {
-			return new MessageResponse(1, "地区不能为空！");
 		}
 		o.setCreateUserId(userProp.getUserId());
 		o.setCreateTime(new Date());
@@ -257,5 +253,36 @@ public class DepartmentServiceImpl implements DepartmentService {
 		data.put("content", content);
 		data.put("to", (String)model.get("contactEmail"));
 		this.kafkaProducerService.sendMsg("GESP_SYS_INFO", data);
+	}
+
+	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
+		int i = 1;
+		for (Map<String, Object> row : list) {
+			Department o = new Department();
+			CommonBeanUtils.copyMap2Bean(o,row);
+			o.setCreateTime(new Date());
+			o.setCreateUserId(userProp.getUserId());
+			o.setStatus("1");
+			this.logger.info(o.toString());
+			if (CommonUtils.isBlank(o.getDepartmentId())) {
+				return new MessageResponse(1,"行"+i+ ",部门编号不能为空！");
+			}
+			if (CommonUtils.isBlank(o.getParentDepartmentId())) {
+				return new MessageResponse(1, "行"+i+ ",上级门编号不能为空！");
+			}
+			if (CommonUtils.isBlank(o.getDepartmentName())) {
+				return new MessageResponse(1, "行"+i+ ",部门名称不能为空！");
+			}
+			int t = departmentDao.isExit(o);
+			if (t > 0) {
+				this.departmentDao.updateDepartmentByPrimaryKey(o);
+			} else {
+				this.departmentDao.insertDepartment(o);
+			}
+			i++;
+		}
+		this.dataBaseLogService.log("部门导入", "部门管理", "", "rs.xls",
+				"rs.xls", userProp);
+		return new MessageResponse(0, "导入完成！");
 	}
 }

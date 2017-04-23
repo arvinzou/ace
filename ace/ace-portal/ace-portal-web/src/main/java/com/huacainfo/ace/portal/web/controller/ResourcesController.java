@@ -1,9 +1,11 @@
 package com.huacainfo.ace.portal.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
 import com.huacainfo.ace.common.model.PageParam;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -199,5 +202,31 @@ public class ResourcesController extends PortalBaseController {
 			}
 		}
 		return this.resourcesService.importXls(list, this.getCurUserProp());
+	}
+	@RequestMapping(value = "/updateSequence.do")
+	@ResponseBody
+	public MessageResponse updateSequence(String jsons)
+			throws Exception {
+		JSONArray jsonArray=JSON.parseArray(jsons);
+		List<Map<String, Object>> list=	this.handleJSONArray(jsonArray);
+		return this.resourcesService.updateSequence(list,
+				this.getCurUserProp());
+	}
+
+	private  List<Map<String, Object>> handleJSONArray(JSONArray jsonArray){
+		List list = new ArrayList();
+		for (Object object : jsonArray) {
+			JSONObject jsonObject = (JSONObject) object;
+			Map map = new HashMap<String, Object>();
+			for (Map.Entry entry : jsonObject.entrySet()) {
+				if(entry.getValue() instanceof  JSONArray){
+					map.put((String)entry.getKey(), handleJSONArray((JSONArray)entry.getValue()));
+				}else{
+					map.put((String)entry.getKey(), entry.getValue());
+				}
+			}
+			list.add(map);
+		}
+		return list;
 	}
 }

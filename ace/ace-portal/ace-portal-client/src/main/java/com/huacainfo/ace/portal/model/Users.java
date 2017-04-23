@@ -53,6 +53,8 @@ public class Users implements java.io.Serializable{
 	private String qq;
 	
 	private String curSyid;
+
+	private String id;
 	
 	
 	public String getCurSyid() {
@@ -190,6 +192,15 @@ public class Users implements java.io.Serializable{
 	public void setCorpName(String corpName) {
 		this.corpName = corpName;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", account=" + account
