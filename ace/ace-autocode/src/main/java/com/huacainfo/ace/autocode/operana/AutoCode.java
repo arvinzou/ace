@@ -1,4 +1,4 @@
-package com.huacainfo.ace.autocode.kernel;
+package com.huacainfo.ace.autocode.operana;
 
 import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 
