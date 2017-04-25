@@ -442,7 +442,11 @@ function Travel(treeID){//参数为树的ID，注意不要添加#
    if(node){
         var children = $('#'+treeID).tree('getChildren', node.target);
         for (var i = 0; i < children.length; i++) {
-            html.push('<li class="dd-handle"  id="'+children[i].id+'">'+children[i].text+'</li>');
+            //console.log(children[i].cls=='folder');
+            if(children[i].cls=='folder'){
+                html.push('<li class="dd-handle"  id="'+children[i].id+'">'+children[i].text+'</li>');
+            }
+
         }
    }else{
         var roots=$('#'+treeID).tree('getRoots');

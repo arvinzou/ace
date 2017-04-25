@@ -2,8 +2,9 @@
 <project version="4">
   <component name="EclipseCodeFormatter">
     <option name="defaultSettings" value="true" />
-    <option name="disabledFileTypes" value="jsp;html,js" />
+    <option name="disabledFileTypes" value="jsp;html,js;" />
     <option name="enableJSFormatting" value="true" />
+    <option name="formatter" value="ECLIPSE" />
     <option name="id" value="1491144074434" />
     <option name="name" value="default" />
     <option name="pathToConfigFileJS" value="$PROJECT_DIR$/../../../../prefs/org.eclipse.core.resources.prefs" />

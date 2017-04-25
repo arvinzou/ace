@@ -642,6 +642,9 @@ body {
 			<div class="main-content" >
 				<script type="text/javascript">
                 				var screenHeight = window.innerHeight - 46;
+                				if(portalType=='2'){
+                                        screenHeight=window.innerHeight - 30;
+                                    }
                 				console.log(screenHeight);
                 				document
                 						.write('<div id="tt" class="easyui-tabs"  style="height:'+screenHeight+'px" fit="true"></div>');
@@ -714,6 +717,9 @@ body {
 		function autosize(){
 			var h = window.innerHeight - 36;
 			var w = window.innerWidth - 150;
+			if(portalType=='2'){
+              w = window.innerWidth
+            }
 			$('#tt').css("height", h);
 			$('#tt').css("width", w);
 

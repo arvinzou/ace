@@ -10,10 +10,9 @@
 <title>config</title>
 </head>
 <jsp:include page="../../common/common.jsp" />
-<script type="text/javascript">
-
-
-</script>
+<table>
+	<tr><td></td></tr>
+</table>
 <body>
 	<div class="page-content">
 		<div class="widget-box" id="widget-box">

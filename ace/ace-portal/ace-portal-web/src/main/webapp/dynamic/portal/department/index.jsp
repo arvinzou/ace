@@ -36,12 +36,12 @@
 			<div class="widget-body">
 				<div class="widget-main padding-6">
 					<form action="#" id="fm-search">
-					地区： <input id="cc2" name="areaCode"
+					<!--地区： <input id="cc2" name="areaCode"
 							class="easyui-combotree"
 							data-options="url:'${pageContext.request.contextPath}/system/selectProvinceTreeList.do',method:'get',animate: true,
                 lines:false,"
 							style='width: 200px; line-height: 25px; height: 25px;'> <a
-							href="javascript:clearAreaCode()">清除</a> 
+							href="javascript:clearAreaCode()">清除</a> -->
 							
 						上级部门： <input id="cc1" name="parentDepartmentId"
 							class="easyui-combotree"
