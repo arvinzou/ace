@@ -20,7 +20,7 @@ import com.huacainfo.ace.operana.vo.$!{bean.name}QVo;
 
 @Controller
 @RequestMapping("/$!{bean.lowerName}")
-public class $!{bean.name}Controller extends KernelBaseController {
+public class $!{bean.name}Controller extends OperanaBaseController {
 
 	/**
 	 * 

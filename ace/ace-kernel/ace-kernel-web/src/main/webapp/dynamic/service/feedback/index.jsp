@@ -95,6 +95,7 @@
 </div>
 <div class="profile-user-info profile-user-info-striped profile-bg">
 <div class="profile-group-title">操作信息</div>
+
 <div class="profile-info-row">
 <div class="profile-info-name">
 创建人姓名</div>

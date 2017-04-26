@@ -43,7 +43,8 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 
 	public MessageResponse insert$!{bean.name}($!{bean.name} o, UserProp userProp)
 			throws Exception {
-		o.setId(UUID.randomUUID().toString());
+		//o.setId(UUID.randomUUID().toString());
+		o.setId(String.valueOf(new Date().getTime()));
 		$!{bean.validate}
 		int temp = this.$!{bean.lowerName}Dao.isExit(o);
 		if (temp > 0) {

@@ -44,7 +44,7 @@
 		<repository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
-			<url>http://10.1.5.34:8088/nexus/content/groups/public</url>
+			<url>http://http://211.139.191.248//nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 
@@ -52,7 +52,7 @@
 		<pluginRepository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
-			<url>http://10.1.5.34:8088/nexus/content/groups/public</url>
+			<url>http://http://211.139.191.248//nexus/content/groups/public</url>
 		</pluginRepository>
 	</pluginRepositories>
 	<modules>

@@ -29,7 +29,7 @@ public class DBHelpInfo {
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String pwd = "123456";
     private static final String user = "root";
-    private static final String url = "jdbc:mysql://127.0.0.1/weui"
+    private static final String url = "jdbc:mysql://127.0.0.1/scc"
             + "?user=" + user + "&password=" + pwd
             + "&useUnicode=true&characterEncoding=UTF-8";
     private static Connection getConnection = null;
@@ -135,7 +135,9 @@ public class DBHelpInfo {
     public static String getPreviewJs(String tableName) {
         List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
         StringBuffer html = new StringBuffer();
-        html.append("<div class=\"profile-user-info profile-user-info-striped\">");
+        html.append("<div class=\"profile-user-info profile-user-info-striped  profile-bg \">");
+        html.append("\r\n");
+        html.append("<div class=\"profile-group-title\">基本信息</div>");
         html.append("\r\n");
         html.append("<div class=\"profile-info-row\">");
         html.append("\r\n");

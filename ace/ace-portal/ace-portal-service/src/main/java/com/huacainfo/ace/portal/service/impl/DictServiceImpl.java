@@ -243,6 +243,24 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 				sqlRunner.closeConnection();
 			}
 		}
+		List<Map<String,Object>> years =new ArrayList<Map<String,Object>>();
+		Calendar a=Calendar.getInstance();
+		int year=a.get(Calendar.YEAR);
+		for(int i=year;i>=year-5;i--){
+			Map<String,Object> o=new HashMap<String,Object>();
+			o.put("CODE",String.valueOf(i));
+			o.put("NAME",String.valueOf(i));
+			years.add(o);
+		}
+		rst.put("year",years);
+		List<Map<String,Object>> months =new ArrayList<Map<String,Object>>();
+		for(int i=1;i<=12;i++){
+			Map<String,Object> o=new HashMap<String,Object>();
+			o.put("CODE",String.valueOf(i));
+			o.put("NAME",String.valueOf(i));
+			months.add(o);
+		}
+		rst.put("month",months);
 		return rst;
 	}
 	public  List<Tree>  selectDictTreeList(String pid) throws Exception{

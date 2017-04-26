@@ -366,15 +366,15 @@
 }
 
 .tabs-scroller-left {
-	background: #f3f3f3 url('images/tabs_icons.png') no-repeat 1px center;
+	background: #f3f3f3 url('${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/themes/gray/images/tabs_icons.png') no-repeat 1px center;
 }
 
 .tabs-scroller-right {
-	background: #f3f3f3 url('images/tabs_icons.png') no-repeat -15px center;
+	background: #f3f3f3 url('${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/themes/gray/images/tabs_icons.png') no-repeat -15px center;
 }
 
 .tabs li a.tabs-close {
-	background: url('images/tabs_icons.png') no-repeat -34px center;
+	background: url('${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/themes/gray/images/tabs_icons.png') no-repeat -34px center;
 }
 
 .tabs li a.tabs-inner:hover {

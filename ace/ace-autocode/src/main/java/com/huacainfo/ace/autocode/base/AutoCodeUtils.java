@@ -118,7 +118,7 @@ public class AutoCodeUtils {
         if (c != null) {
             String cName = c.getName();
             bean.setName(getLastChar(cName));
-            bean.setTableChineseName("个性化配置");
+            bean.setTableChineseName("议题");
             bean.setLowerName(getLowercaseChar(getLastChar(cName)));
 
             annotation.setAuthorName("陈晓克");
@@ -264,7 +264,7 @@ public class AutoCodeUtils {
         }
         List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
         for (ColumsInfo o : list) {
-            if (o.getIsNullAble().equals("NO")) {
+            if (o.getIsNullAble().equals("NO")&&(!o.getColumName().equals("createUserId"))&&(!o.getColumName().equals("createUserName"))&&(!o.getColumName().equals("createDate"))) {
                 validate.append("if (CommonUtils.isBlank(o.get"
                         + CommonUtils.firstToUpper(CommonUtils.getJavaName(o
                         .getColumName())) + "())) {\r");
@@ -354,18 +354,25 @@ public class AutoCodeUtils {
             _colModel.append("{\r");
             _colModel.append("name : '"
                     + CommonUtils.getJavaName(o.getColumName()) + "',\r");
-            if (o.getColumName().equals("lastModifyUserName") || o.getColumName().equals("lastModifyDate") || o.getColumName().equals("createUserId") || o.getColumName().equals("lastModifyUserId")|| o.getColumName().equals("createUserName")|| o.getColumName().equals("createDate")) {
+            boolean status=o.getColumName().equals("lastModifyUserName") || o.getColumName().equals("lastModifyDate") || o.getColumName().equals("createUserId") || o.getColumName().equals("lastModifyUserId")|| o.getColumName().equals("createUserName")|| o.getColumName().equals("createDate");
+            if (status) {
                 _colModel.append("hidden : true,\r");
                 _colModel.append("editable : false,\r");
+                _colModel.append("width : 100\r");
             } else {
                 _colModel.append("editable : true,\r");
+                _colModel.append("width : 100,\r");
             }
-            _colModel.append("width : 100,\r");
-            _colModel.append("editoptions : {\r");
-            _colModel.append("size : \"20\",\r");
-            _colModel.append("maxlength : \"50\"\r");
-            _colModel.append("}");
-            if (o.getIsNullAble().equals("NO")) {
+
+            if(!status){
+                _colModel.append("editoptions : {\r");
+                _colModel.append("size : \"20\",\r");
+                _colModel.append("maxlength : \"50\"\r");
+                _colModel.append("}");
+            }
+
+
+            if (o.getIsNullAble().equals("NO")&&(!status)) {
                 _colModel.append(",\rformoptions : {\r");
                 _colModel.append("elmprefix : \"\",\r");
                 _colModel
