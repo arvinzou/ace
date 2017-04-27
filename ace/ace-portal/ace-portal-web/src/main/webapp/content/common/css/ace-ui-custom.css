@@ -137,3 +137,68 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     width: calc(100% - 24px);
     margin: 0 auto;
 }
+/**dataTable*/
+.checkboxitem {
+	width: 120px;
+	height: 20px;
+	float: left;
+	margin: 2px 2px 2px;
+}
+.dataTables_wrapper .row:first-child {
+     padding-top: 1px;
+     padding-bottom: 0px;
+    background-color: #FFFFFF;
+}
+.dataTables_wrapper .row:last-child {
+     border-bottom: 0px;
+     padding-top: 1px;
+     padding-bottom: 1px;
+     background-color: #FFFFFF;
+}
+.dataTables_paginate {
+    text-align: right;
+}
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 1px 2px;
+    line-height: 1.42857143;
+    /*text-decoration: none;*/
+    color: blue;
+    background-color: #ffffff;
+    border: 0px solid #ddd;
+    margin-left: -1px;
+}
+.dataTables_info {
+    font-size: 12px;
+}
+.pagination>li.disabled>a, .pager>li.disabled>a, .pagination>li.disabled>a:hover, .pager>li.disabled>a:hover {
+    background-color: #FFFFFF;
+    border-color: #d9d9d9;
+    z-index: auto;
+}
+.pagination>li.active>a, .pagination>li.active>a:hover {
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    color: blue;
+    text-shadow: null;
+    z-index: 2;
+}
+.dataTables_wrapper label {
+    display: inline-block;
+    font-size: 12px;
+}
+.input-sm {
+    height: 20px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 20px;
+    border-radius: 3px;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 4px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+/*****end dataTable***/

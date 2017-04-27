@@ -1,113 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.operana.dao.NormDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.operana.model.Norm">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="category" jdbcType="VARCHAR" property="category" />
-    <result column="groups" jdbcType="VARCHAR" property="groups" />
-    <result column="deptId" jdbcType="VARCHAR" property="deptId" />
-    <result column="calType" jdbcType="CHAR" property="calType" />
-    <result column="pcode" jdbcType="VARCHAR" property="pcode" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.operana.vo.NormVo">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.operana.model.Norm">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="groups" jdbcType="VARCHAR" property="groups"/>
+        <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
+        <result column="calType" jdbcType="CHAR" property="calType"/>
+        <result column="pcode" jdbcType="VARCHAR" property="pcode"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="remark" jdbcType="LONGVARCHAR" property="remark"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.operana.vo.NormVo">
 
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, name, category, groups, deptId, calType, pcode, status, createUserId, createUserName, 
-    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,remark
-  </sql>
-  <sql id="Blob_Column_List">
-    remark
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from norm
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from norm
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.operana.model.Norm">
-    insert into norm (id, name, category, 
-      groups, deptId, calType, 
-      pcode, status, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate, remark
-      )
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
-      #{groups,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{calType,jdbcType=CHAR}, 
-      #{pcode,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.Norm">
-    update norm
-    set name = #{name,jdbcType=VARCHAR},
-      category = #{category,jdbcType=VARCHAR},
-      groups = #{groups,jdbcType=VARCHAR},
-      deptId = #{deptId,jdbcType=VARCHAR},
-      calType = #{calType,jdbcType=CHAR},
-      pcode = #{pcode,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      remark = #{remark,jdbcType=LONGVARCHAR},
-      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, category, groups, deptId, calType, pcode, status, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,remark
+    </sql>
+    <sql id="Blob_Column_List">
+        remark
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from norm
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from norm
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.operana.model.Norm">
+        insert into norm (id, name, category,
+        groups, deptId, calType,
+        pcode, status, createUserId,
+        createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate, remark
+        )
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+        #{groups,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{calType,jdbcType=CHAR},
+        #{pcode,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.Norm">
+        update norm
+        set name = #{name,jdbcType=VARCHAR},
+        category = #{category,jdbcType=VARCHAR},
+        groups = #{groups,jdbcType=VARCHAR},
+        deptId = #{deptId,jdbcType=VARCHAR},
+        calType = #{calType,jdbcType=CHAR},
+        pcode = #{pcode,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        remark = #{remark,jdbcType=LONGVARCHAR},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 
 
-  <sql id="whereCondition">
-    from norm where 0=0
-    <if test='condition.name!=null and condition.name!=""'>
-      and name like
-      concat('%',#{condition.name,jdbcType=VARCHAR},'%')
-    </if>
-    <if test="condition.category!=null and condition.category!=&quot;&quot;">
-      and category =#{condition.category,jdbcType=VARCHAR}
-    </if>
-  </sql>
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*)
-    <include refid="whereCondition" />
-  </select>
-  <select id="findList" resultMap="BaseResultMapVo">
+    <sql id="whereCondition">
+        from norm where 0=0
+        <if test='condition.name!=null and condition.name!=""'>
+            and name like
+            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and category =#{condition.category,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMapVo">
 
-    select
-    <include refid="Base_Column_List" />
-    <include refid="whereCondition" />
-    <choose>
-      <when test='orderBy!=null and orderBy!=""'>
-        ORDER BY ${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY createDate
-      </otherwise>
-    </choose>
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate
+            </otherwise>
+        </choose>
 
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
 
-  </select>
+    </select>
 
-  <select id="isExit" resultType="int">
-    select count(*)
-    from
-    norm where
-    name=#{name}
-  </select>
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        norm where
+        name=#{name}
+    </select>
 
+    <select id="selectAllNormCategory" resultType="map">
+        select code,name from portal.dict where category_id='86'
+    </select>
+    <select id="selectNormByCategory" resultType="map">
+        select t.id,t.name,a.id value from norm t left join (select
+        id,normId from topic_norm where topicId=#{topicId})a on t.id=a.normId where category=#{category} and
+        status='1'
+    </select>
+    <select id="selectNormByTopicId" resultType="map">
+        SELECT @rownum := @rownum+1 AS rownum, t.* FROM (SELECT @rownum:=0) r,(select t.id, t.name, t.category, t.groups, t.deptId, t.calType,t.remark from norm t inner join topic_norm a on
+        t.id=a.normId where a.topicId=#{topicId} and t.status='1') as t
+
+    </select>
 </mapper>
