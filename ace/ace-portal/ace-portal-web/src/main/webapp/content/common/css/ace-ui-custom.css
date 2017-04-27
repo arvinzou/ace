@@ -161,9 +161,9 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .pagination>li>a, .pagination>li>span {
     position: relative;
     float: left;
-    padding: 1px 2px;
+    padding: 1px 5px 1px 5px;
     line-height: 1.42857143;
-    /*text-decoration: none;*/
+    text-decoration: underline;
     color: blue;
     background-color: #ffffff;
     border: 0px solid #ddd;
@@ -196,9 +196,12 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     border-radius: 3px;
 }
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
-    padding: 4px;
+    padding: 3px;
     line-height: 1.42857143;
     vertical-align: top;
     border-top: 1px solid #ddd;
+}
+.center{
+    text-align:center;
 }
 /*****end dataTable***/
