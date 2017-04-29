@@ -22,4 +22,8 @@
 
     <dubbo:reference interface="com.huacainfo.ace.operana.service.TopicService"
                      id="topicService"></dubbo:reference>
+
+
+    <dubbo:reference interface="com.huacainfo.ace.operana.service.MeetingService"
+                     id="meetingService"></dubbo:reference>
 </beans>

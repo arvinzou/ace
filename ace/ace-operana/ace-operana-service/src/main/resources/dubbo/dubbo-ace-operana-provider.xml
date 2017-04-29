@@ -28,4 +28,8 @@
             interface="com.huacainfo.ace.operana.service.TopicService"
             ref="topicService"/>
 
+    <dubbo:service
+            interface="com.huacainfo.ace.operana.service.MeetingService"
+            ref="meetingService"/>
+
 </beans>
