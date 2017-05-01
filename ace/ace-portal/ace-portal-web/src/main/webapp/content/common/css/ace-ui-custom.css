@@ -210,3 +210,10 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     padding: 2px 3px;
 }
 /*****end dataTable***/
+.header-title {
+    line-height: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #CCC;
+}
