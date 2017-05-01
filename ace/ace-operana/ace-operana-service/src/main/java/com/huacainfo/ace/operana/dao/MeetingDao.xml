@@ -27,10 +27,14 @@
         id, name, discribtion, meetingDate, site, division, comment, pcode, note, owner,
         createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,status
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
-        <include refid="Base_Column_List"/>
-        from meeting
+        t.id, t.name, t.discribtion, t.meetingDate, t.site, t.division, t.comment, t.pcode, t.note, t.owner,t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
+        a.name ownerName,b.department_name divisionName
+        from meeting t
+        left join portal.users a on t.owner=a.user_id
+        left join portal.department b on t.division=b.department_id
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -81,7 +85,7 @@
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.division!=null and condition.division!=&quot;&quot;">
-            and t.division =#{condition.category,jdbcType=VARCHAR}
+            and t.division =#{condition.division,jdbcType=VARCHAR}
         </if>
         <if test="condition.owner!=null and condition.owner!=&quot;&quot;">
             and t.owner =#{condition.owner,jdbcType=VARCHAR}
@@ -129,5 +133,39 @@
         from
         meeting where
         name=#{name}
+    </select>
+
+    <select id="selectAllTopicCategory" resultType="map">
+        select code,name from portal.dict where category_id='90'
+    </select>
+    <select id="selectTopicByCategory" resultType="map">
+        select t.id,t.name,a.id value from topic t left join (select
+        id,topicId from meeting_topic where meetingId=#{meetingId})a on t.id=a.topicId where category=#{category} and
+        status='1'
+    </select>
+    <select id="selectTopicByName" resultType="map">
+        select t.id,t.name,a.id value from topic t left join (select
+        id,topicId from meeting_topic where meetingId=#{meetingId})a on t.id=a.topicId where t.name like =concat('%',#{name,jdbcType=VARCHAR},'%') and
+        status='1'
+    </select>
+    <select id="selectTopicByMeetingId" resultType="map">
+        SELECT
+        @rownum := @rownum + 1 AS rownum,
+        t.*
+        FROM
+        (SELECT @rownum := 0) r,
+        (
+        SELECT
+        t.name,
+        ifnull(b.name,'待设置') owner,t.id
+        FROM
+        topic t
+        INNER JOIN meeting_topic a ON t.id = a.topicId
+        left join portal.users b on a.owner=b.user_id
+        WHERE
+        a.meetingId = #{meetingId}
+        AND t. STATUS = '1'
+        ) AS t
+
     </select>
 </mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.operana.dao.MeetingTopicDao">
+
+  <delete id="deleteByMeetingId" parameterType="java.lang.String">
+    delete from meeting_topic
+    where meetingId = #{meetingId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.operana.model.MeetingTopic">
+    insert into meeting_topic (id, meetingId, topicId, 
+      owner, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{meetingId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}, 
+      #{owner,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateTopicOwner">
+
+    update meeting_topic set owner=#{userId} where meetingId = #{meetingId,jdbcType=VARCHAR} and topicId = #{topicId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>
