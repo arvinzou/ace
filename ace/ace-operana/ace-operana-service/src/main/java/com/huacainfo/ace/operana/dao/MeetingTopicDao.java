@@ -9,4 +9,6 @@ public interface MeetingTopicDao {
     int insert(MeetingTopic record);
 
     int updateTopicOwner(@Param("userId")String userId,@Param("meetingId")String meetingId,@Param("topicId")String topicId);
+
+    int deleteByMeetingIdAndTopicId(@Param("meetingId")String meetingId,@Param("topicId")String topicId);
 }

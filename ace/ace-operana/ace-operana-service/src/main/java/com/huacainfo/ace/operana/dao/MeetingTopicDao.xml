@@ -21,4 +21,9 @@
     update meeting_topic set owner=#{userId} where meetingId = #{meetingId,jdbcType=VARCHAR} and topicId = #{topicId,jdbcType=VARCHAR}
   </update>
 
+  <delete id="deleteByMeetingIdAndTopicId" parameterType="java.lang.String">
+    delete from meeting_topic
+    where meetingId = #{meetingId,jdbcType=VARCHAR} and topicId=#{topicId,jdbcType=VARCHAR}
+  </delete>
+
 </mapper>

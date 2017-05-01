@@ -145,7 +145,7 @@
     </select>
     <select id="selectTopicByName" resultType="map">
         select t.id,t.name,a.id value from topic t left join (select
-        id,topicId from meeting_topic where meetingId=#{meetingId})a on t.id=a.topicId where t.name like =concat('%',#{name,jdbcType=VARCHAR},'%') and
+        id,topicId from meeting_topic where meetingId=#{meetingId})a on t.id=a.topicId where t.name like concat('%',#{name,jdbcType=VARCHAR},'%') and
         status='1'
     </select>
     <select id="selectTopicByMeetingId" resultType="map">
