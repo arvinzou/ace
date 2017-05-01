@@ -217,3 +217,13 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     padding-bottom: 4px;
     border-bottom: 1px solid #CCC;
 }
+.labelItem{
+	width: 180px;
+	height: 30px;
+	float: left;
+	margin: 4px 4px 4px;
+}
+.labelItemHeader{
+	font-weight:800;
+	font-size:14px;
+}
