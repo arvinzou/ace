@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.operana.dao.MeetingUserDao">
+
+
+
+  <delete id="deleteByMeetingId">
+    delete from meeting_user
+    where  meetingId= #{meetingId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.operana.model.MeetingUser">
+    insert into meeting_user (id, meetingId, userId, 
+      mandatory, present, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{meetingId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{mandatory,jdbcType=VARCHAR}, #{present,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <delete id="deleteByMeetingIdAndUserId">
+    delete from meeting_user
+    where  meetingId= #{id,jdbcType=VARCHAR} and userId=#{userId,jdbcType=VARCHAR}
+  </delete>
+
+</mapper>

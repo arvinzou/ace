@@ -168,4 +168,38 @@
         ) AS t
 
     </select>
+    <!--与会人员设置-->
+
+    <select id="selectAllUserDeptId" resultType="map">
+        select t.department_id code,t.department_name name from portal.department t where t.parent_department_id!='0'
+    </select>
+    <select id="selectUserByDeptId" resultType="map">
+        select t.user_id id,t.name,a.id value from portal.users t left join (select
+        id,userId from meeting_user where meetingId=#{meetingId})a on t.user_id=a.userId where t.department_id=#{deptId}
+    </select>
+    <select id="selectUserByName" resultType="map">
+        select t.user_id id,t.name,a.id value from portal.users t left join (select
+        id,userId from meeting_user where meetingId=#{meetingId})a on t.user_id=a.userId where t.name like concat('%',#{name,jdbcType=VARCHAR},'%')
+    </select>
+    <select id="selectUserByMeetingId" resultType="map">
+        SELECT
+        @rownum := @rownum + 1 AS rownum,
+        t.*
+        FROM
+        (SELECT @rownum := 0) r,
+        (
+        SELECT
+        b.name roleName,
+        t.name,
+        a.mandatory,
+        t.user_id
+        FROM
+        portal.users t
+        INNER JOIN meeting_user a ON t.user_id = a.userId
+        left join (select code ,name from portal.dict where category_id='05') b on t.user_level=b.code
+        WHERE
+        a.meetingId = #{meetingId}
+        ) AS t
+
+    </select>
 </mapper>
