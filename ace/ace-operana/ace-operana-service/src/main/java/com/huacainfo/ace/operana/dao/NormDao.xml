@@ -123,4 +123,10 @@
         t.id=a.normId where a.topicId=#{topicId} and t.status='1') as t
 
     </select>
+
+    <select id="selectNormByName" resultType="map">
+        select t.id,t.name,a.id value from norm t left join (select
+        id,normId from topic_norm where topicId=#{topicId})a on t.id=a.normId where t.name like concat('%',#{name,jdbcType=VARCHAR},'%') and
+        status='1'
+    </select>
 </mapper>

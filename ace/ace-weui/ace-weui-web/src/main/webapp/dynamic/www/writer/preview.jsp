@@ -22,7 +22,7 @@ var id='${param.id}';
       <div class="weui-form-preview__hd">
         <div class="weui-form-preview__item">
           <label class="weui-form-preview__label">姓名</label>
-          <em class="weui-form-preview__value" id="name"></em>
+          <span class="weui-form-preview__value" id="name" style="font-weight:800;font-size:18px"></span>
         </div>
       </div>
 
@@ -36,7 +36,7 @@ var id='${param.id}';
           <span class="weui-form-preview__value" id="birthday"></span>
         </div>
         <div class="weui-form-preview__item">
-          <label class="weui-form-preview__label">作家类别</label>
+          <label class="weui-form-preview__label">类别</label>
           <span class="weui-form-preview__value" id="category"></span>
         </div>
 
@@ -51,19 +51,28 @@ var id='${param.id}';
 </div>
 
 <a href="index-writing.jsp?id=${param.id}" class="weui-btn weui-btn_primary">作品列表</a>
+<div class="weui-panel weui-panel_access">
+    <div class="weui-panel__bd">
+        <div class="weui-media-box weui-media-box_text">
+            <h4 class="weui-media-box__title">简介</h4>
+            <p class="weui-media-box__desc" ></p>
+        </div>
+    </div>
+</div>
+<div id="intro" style="padding:12px">
+</div>
 
 <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-          <div class="weui-media-box weui-media-box_text">
-            <h4 class="weui-media-box__title">简介</h4>
-            <p class="weui-media-box__desc" id="intro"></p>
-          </div>
-          <div class="weui-media-box weui-media-box_text">
-              <h4 class="weui-media-box__title">公开发布与奖励情况</h4>
-              <p class="weui-media-box__desc" id="descri"></p>
-           </div>
+    <div class="weui-panel__bd">
+        <div class="weui-media-box weui-media-box_text">
+            <h4 class="weui-media-box__title">公开发布与奖励情况</h4>
+            <p class="weui-media-box__desc" ></p>
         </div>
+    </div>
 </div>
+<div id="descri" style="padding:12px">
+</div>
+
  <jsp:include page="../../common/footer-1-www.jsp" />
  <script src="${pageContext.request.contextPath}/content/common/lib/fastclick.js"></script>
  <script src="${pageContext.request.contextPath}/content/www/js/writer/preview.js"></script>
