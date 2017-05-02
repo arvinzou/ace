@@ -23,7 +23,11 @@
 
   <delete id="deleteByMeetingIdAndUserId">
     delete from meeting_user
-    where  meetingId= #{id,jdbcType=VARCHAR} and userId=#{userId,jdbcType=VARCHAR}
+    where  meetingId= #{meetingId,jdbcType=VARCHAR} and userId=#{userId,jdbcType=VARCHAR}
   </delete>
+  <update id="updateMandatory">
+   update meeting_user set  mandatory=#{mandatory,jdbcType=VARCHAR} where  meetingId= #{meetingId,jdbcType=VARCHAR} and userId=#{userId,jdbcType=VARCHAR}
+
+  </update>
 
 </mapper>
