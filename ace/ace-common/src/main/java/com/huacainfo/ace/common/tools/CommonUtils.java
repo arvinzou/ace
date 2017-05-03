@@ -788,4 +788,17 @@ public class CommonUtils extends StringUtils {
 
 
     }
+
+    public static boolean isNumber(String str){
+        String reg = "^[0-9]+(.[0-9]+)?$";
+        return str.matches(reg);
+    }
+
+    public static void main(String args[]){
+        System.out.println(CommonUtils.isNumber("abc"));
+        System.out.println(CommonUtils.isNumber("100"));
+        System.out.println(CommonUtils.isNumber("100.031"));
+        System.out.println(CommonUtils.isNumber("a100.03"));
+
+    }
 }
