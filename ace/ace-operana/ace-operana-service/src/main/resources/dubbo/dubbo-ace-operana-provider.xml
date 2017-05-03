@@ -31,5 +31,7 @@
     <dubbo:service
             interface="com.huacainfo.ace.operana.service.MeetingService"
             ref="meetingService"/>
-
+    <dubbo:service
+            interface="com.huacainfo.ace.operana.service.NormDataService"
+            ref="normDataService"/>
 </beans>
