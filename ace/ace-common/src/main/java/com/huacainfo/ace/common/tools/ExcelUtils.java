@@ -76,6 +76,37 @@ public class ExcelUtils {
 		return list;
 	}
 
+	public List<Map<String, Object>> readExcelByJXL(InputStream is, int startRow,String sheetName)
+			throws BiffException, IOException {
+		Map<Object, String> header = new HashMap<Object, String>();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		WorkbookSettings workbookSettings = new WorkbookSettings();
+		workbookSettings.setEncoding("GBK"); //解决中文乱码，或GBK
+		Workbook workbook = Workbook.getWorkbook(is,workbookSettings);
+
+		Sheet sheet = workbook.getSheet(sheetName);
+		int cols = sheet.getColumns();
+		int rows = sheet.getRows();
+		this.logger.info(cols);
+		this.logger.info(rows);
+		for (int i = 0; i < cols; i++) {
+			Cell c = sheet.getCell(i, 0);
+			header.put(i, c.getContents());
+		}
+		for (int r = startRow; r < rows; r++) {
+			Map<String, Object> row = new HashMap<String, Object>();
+			for (int c = 0; c < cols; c++) {
+				Cell cell = sheet.getCell(c, r);
+				row.put(header.get(c), cell.getContents());
+			}
+			list.add(row);
+		}
+		for (Map<String, Object> row : list) {
+			logger.info(row);
+		}
+		return list;
+	}
+
 	public List<Map<String, Object>> readExcelByPOI(InputStream is, int startRow)
 			throws Exception {
 		Map<Object, Object> header = new HashMap<Object, Object>();
@@ -143,6 +174,88 @@ public class ExcelUtils {
 				default:
 					content = null;
 					break;
+				}
+				row.put(String.valueOf(header.get(k)), content);
+				k++;
+			}
+			list.add(row);
+		}
+		if (workbook != null) {
+			workbook.close();
+		}
+		for (Map<String, Object> row : list) {
+			logger.info(row);
+		}
+		return list;
+	}
+
+	public List<Map<String, Object>> readExcelByPOI(InputStream is, int startRow,String sheetName)
+			throws Exception {
+		Map<Object, Object> header = new HashMap<Object, Object>();
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		org.apache.poi.ss.usermodel.Workbook workbook = null;
+		try {
+			//workbook = new XSSFWorkbook(is);
+			workbook = new HSSFWorkbook(is);
+		} catch (Exception e) {
+			//workbook = new HSSFWorkbook(is);
+		}
+		org.apache.poi.ss.usermodel.Sheet sheet = workbook.getSheet(sheetName);
+		Iterator<Row> rows = sheet.rowIterator();
+		Row row0 = null;
+		while (rows.hasNext()) {
+			row0 = rows.next();
+			break;
+		}
+		Iterator<org.apache.poi.ss.usermodel.Cell> cells = row0.cellIterator();
+		Object content = null;
+		int i = 0;
+		while (cells.hasNext()) {
+			org.apache.poi.ss.usermodel.Cell cell = cells.next();
+			switch (cell.getCellType()) { // 根据cell中的类型来输出数据
+				case HSSFCell.CELL_TYPE_NUMERIC:
+					content = String.valueOf(cell.getNumericCellValue());
+					break;
+				case HSSFCell.CELL_TYPE_STRING:
+					content = cell.getStringCellValue();
+					break;
+				case HSSFCell.CELL_TYPE_BOOLEAN:
+					content = String.valueOf(cell.getBooleanCellValue());
+					break;
+				case HSSFCell.CELL_TYPE_FORMULA:
+					content = String.valueOf(cell.getCellFormula());
+					break;
+				default:
+					content = String.valueOf("");
+					break;
+			}
+			header.put(i, content);
+			i++;
+		}
+		this.logger.info(header);
+		while (rows.hasNext()) {
+			row0 = rows.next();
+			cells = row0.cellIterator();
+			Map<String, Object> row = new HashMap<String, Object>();
+			int k = 0;
+			while (cells.hasNext()) {
+				org.apache.poi.ss.usermodel.Cell cell = cells.next();
+				switch (cell.getCellType()) { // 根据cell中的类型来输出数据
+					case HSSFCell.CELL_TYPE_NUMERIC:
+						content = cell.getNumericCellValue();
+						break;
+					case HSSFCell.CELL_TYPE_STRING:
+						content = cell.getStringCellValue();
+						break;
+					case HSSFCell.CELL_TYPE_BOOLEAN:
+						content = cell.getBooleanCellValue();
+						break;
+					case HSSFCell.CELL_TYPE_FORMULA:
+						content = cell.getCellFormula();
+						break;
+					default:
+						content = null;
+						break;
 				}
 				row.put(String.valueOf(header.get(k)), content);
 				k++;
