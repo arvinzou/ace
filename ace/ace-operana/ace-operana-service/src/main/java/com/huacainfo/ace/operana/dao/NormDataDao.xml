@@ -356,4 +356,10 @@
         topicId= #{topicId,jdbcType=VARCHAR}
         and normId= #{normId,jdbcType=VARCHAR}
     </select>
+    <select id="selectNormByMeetingAndTopicId" resultType="map">
+        select t.id normIds, t.name,t.calType,b.* from norm t inner join topic_norm a on
+        t.id=a.normId
+        left join (select * from norm_data where meetingId=#{meetingId} and topicId=#{topicId})  b on t.id=b.normId
+        where a.topicId=#{topicId}
+    </select>
 </mapper>

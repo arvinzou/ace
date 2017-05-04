@@ -1,6 +1,7 @@
 package com.huacainfo.ace.operana.dao;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.operana.model.NormData;
 import com.huacainfo.ace.operana.vo.NormDataQVo;
@@ -17,5 +18,7 @@ public interface NormDataDao {
 	int updateByPrimaryKey(NormData record);
 
 	int isExit(NormData record);
+
+	List<Map<String,Object>> selectNormByMeetingAndTopicId(@Param("meetingId") String meetingId,@Param("topicId") String topicId);
 
 }
