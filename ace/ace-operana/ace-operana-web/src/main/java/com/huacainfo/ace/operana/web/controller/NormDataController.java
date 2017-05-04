@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-
+import java.util.HashMap;
 import javax.servlet.http.HttpServletResponse;
 
 import com.huacainfo.ace.common.tools.CommonUtils;
@@ -75,7 +75,9 @@ public class NormDataController extends OperanaBaseController {
 	@ResponseBody
 	public MessageResponse importXls(@RequestParam MultipartFile[] file,
 									 String meetingId) throws Exception {
-	    Map<String,Object> params=this.getParams();
+	    Map<String,Object> params=new HashMap<String,Object>();
+        params.put("meetingId",meetingId);
+        this.logger.info("meetingId->",meetingId);
         Map<String,String> dict=this.normDataService.selectTopicDictByMeetingId(meetingId);
 		ExcelUtils utils = new ExcelUtils();
 		List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();
@@ -98,11 +100,12 @@ public class NormDataController extends OperanaBaseController {
 			if (ext.equals(".xls")) {
                 WorkbookSettings workbookSettings = new WorkbookSettings();
                 workbookSettings.setEncoding("GBK"); //解决中文乱码，或GBK
-                Workbook workbook = Workbook.getWorkbook(obj.getInputStream(),workbookSettings);
+                Workbook workbook = Workbook.getWorkbook(o.getInputStream(),workbookSettings);
                 String [] sheetNames=workbook.getSheetNames();
                 for(String sheetName:sheetNames){
                     params.put("topicId",dict.get(sheetName));
-                    list = utils.readExcelByJXL(obj.getInputStream(), 2,sheetName);
+                    this.logger.info("sheetName->{}",sheetName);
+                    list = utils.readExcelByJXL(o.getInputStream(), 2,sheetName);
                     MessageResponse rst=this.normDataService.importXls(list,params,sheetName, this.getCurUserProp());
                     if(rst.getStatus()==1){
                         return rst;
@@ -111,11 +114,11 @@ public class NormDataController extends OperanaBaseController {
 
 			}
 			if (ext.equals(".xlsx")) {
-                org.apache.poi.ss.usermodel.Workbook workbook =  new HSSFWorkbook(obj.getInputStream());;
+                org.apache.poi.ss.usermodel.Workbook workbook =  new HSSFWorkbook(o.getInputStream());;
                 int nn=workbook.getNumberOfNames();
                 for(int k=0;k<nn;k++){
                     String sheetName= workbook.getSheetName(k);
-                    list = utils.readExcelByPOI(obj.getInputStream(), 2,sheetName);
+                    list = utils.readExcelByPOI(o.getInputStream(), 2,sheetName);
                     params.put("topicId",dict.get(sheetName));
                     MessageResponse rst=this.normDataService.importXls(list,params,sheetName, this.getCurUserProp());
                     if(rst.getStatus()==1){

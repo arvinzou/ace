@@ -360,6 +360,6 @@
         select t.id normIds, t.name,t.calType,b.* from norm t inner join topic_norm a on
         t.id=a.normId
         left join (select * from norm_data where meetingId=#{meetingId} and topicId=#{topicId})  b on t.id=b.normId
-        where a.topicId=#{topicId}
+        where a.topicId=#{topicId} order by t.id
     </select>
 </mapper>

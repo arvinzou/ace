@@ -20,6 +20,9 @@ pageEncoding="utf-8"%>
 			.ulinput{margin-left:50px;}
 
 </style>
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen" />
 <body>
 <div class="page-content">
     <div class="widget-box" id="widget-box">
@@ -175,6 +178,12 @@ pageEncoding="utf-8"%>
 <div id="dialog-meeting-user" class="hide">
 
 </div>
+<div id="dialog-upload" class="hide">
+    <div id="uploader">
+        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+    </div>
+
+</div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
         src="${portalPath}/content/common/js/xcheck/XCheck.js?version=${cfg.version}"></script>
@@ -193,6 +202,16 @@ pageEncoding="utf-8"%>
         src="${portalPath}/content/common/js/dataTable/dataTables.bootstrap.min.js?version=${cfg.version}"></script>
 <script
         src="${portalPath}/content/common/js/easyui-draggable.js?version=${cfg.version}"></script>
+
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script
+        src="${pageContext.request.contextPath}/content/service/meeting/upload.js"></script>
+
 <script type="text/javascript">
 window.onresize = function () {
 	console.log('autoWidthJqgrid');

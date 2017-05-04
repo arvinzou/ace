@@ -50,7 +50,11 @@ public class NormDataServiceImpl implements NormDataService {
 		int i = 1;
 		for (Map<String, Object> row : list) {
 			NormData o = new NormData();
-			CommonBeanUtils.copyMap2Bean(o, row);
+			o.setNormId((String)row.get("normId"));
+			if(CommonUtils.isNotEmpty(row.get("lastYear"))){
+				o.setLastYear(new java.math.BigDecimal((String)row.get("lastYear")));
+			}
+
 			CommonBeanUtils.copyMap2Bean(o, params);
 			Calendar a=Calendar.getInstance();
 			int year=a.get(Calendar.YEAR);
@@ -61,16 +65,16 @@ public class NormDataServiceImpl implements NormDataService {
 				return new MessageResponse(1, sheetName+"第" + i + "行会议编码不能为空！");
 			}
 			if (CommonUtils.isBlank(o.getTopicId())) {
-				return new MessageResponse(1, sheetName+"第" + i + "议题编码不能为空！");
+				return new MessageResponse(1, sheetName+"第" + i + "行议题编码不能为空！");
 			}
 			if (CommonUtils.isBlank(o.getNormId())) {
-				return new MessageResponse(1, sheetName+"第" + i + "指标编码不能为空！");
+				return new MessageResponse(1, sheetName+"第" + i + "行指标编码不能为空！");
 			}
 			if (CommonUtils.isBlank(o.getYear())) {
-				return new MessageResponse(1, sheetName+"第" + i + "年度不能为空！");
+				return new MessageResponse(1, sheetName+"第" + i + "行年度不能为空！");
 			}
 			if (CommonUtils.isBlank(o.getLastYear())) {
-				return new MessageResponse(1, sheetName+"第" + i + "上年度指标不能为空！");
+				//return new MessageResponse(1, sheetName+"第" + i + "上年度指标不能为空！");
 			}
 			Norm p = normDao.selectByPrimaryKey(o.getNormId());
 			if (CommonUtils.isBlank(p)) {
@@ -79,22 +83,17 @@ public class NormDataServiceImpl implements NormDataService {
 			Map<String, Object> t = new HashMap<String, Object>();
 			if (p.getCalType().equals("1")) {
 				for (int k : wk) {
-					if(CommonUtils.isBlank(row.get("wk" + k))){
-						t.put("wkt" + k, null);
-					}else {
+					if(!CommonUtils.isBlank(row.get("wk" + k))){
 						if (!CommonUtils.isNumber((String) row.get("wk" + k))) {
 							return new MessageResponse(1, sheetName+"第" + i + "行wk" + k + "数据格式不正确，必须为数值！");
 						}
-						t.put("wkt" + k, row.get("wk" + k));
+						t.put("wkt" + k, new java.math.BigDecimal((String) row.get("wk" + k)));
 					}
 
 				}
 			} else {
 				for (int k : wk) {
-					if(CommonUtils.isBlank(row.get("wk" + k))){
-						t.put("wkc" + k, null);
-						t.put("wkt" + k, null);
-					}else {
+					if(!CommonUtils.isBlank(row.get("wk" + k))){
 						String e = (String) row.get("wk" + k);
 						if (e.indexOf("/") == -1) {
 							return new MessageResponse(1, sheetName+"第" + i + "行wk" + k + "数据格式不正确，必须为'数字/数字'！");
@@ -105,12 +104,13 @@ public class NormDataServiceImpl implements NormDataService {
 						if (!CommonUtils.isNumber((String) e.split("/")[1])) {
 							return new MessageResponse(1, sheetName+"第" + i + "行wk" + k + "数据格式不正确，必须为数值！");
 						}
-						t.put("wkc" + k, e.split("/")[0]);
-						t.put("wkt" + k, e.split("/")[1]);
+						t.put("wkc" + k, new java.math.BigDecimal(e.split("/")[0]));
+						t.put("wkt" + k, new java.math.BigDecimal(e.split("/")[1]));
 					}
 
 				}
 			}
+			this.logger.info("----------->",t);
 			CommonBeanUtils.copyMap2Bean(o, t);
 			int m = normDataDao.isExit(o);
 			if (m > 0) {
