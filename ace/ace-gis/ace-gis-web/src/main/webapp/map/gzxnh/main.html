@@ -1,0 +1,443 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>è´µå·ç§»å¨æ°ååå¤§æ°æ®åæå¹³å°</title>
+</head>
+<link href="css/mu.css" rel="stylesheet" type="text/css">
+	<link href="css/css.css" rel="stylesheet" type="text/css">
+
+		<style type="text/css">
+/*åç¹ä¸éªä¸éª*/
+.radius {
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	background-color: #fff;
+}
+
+@
+-webkit-keyframes ChangeCycle {from { -webkit-border-radius:50%;
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+50%{
+border-radius
+
+
+:
+
+ 
+
+50%;
+-webkit-border-radius
+
+
+:
+
+ 
+
+50%;
+width
+
+
+:
+
+ 
+
+4
+px
+
+
+;
+height
+
+
+:
+
+ 
+
+4
+px
+
+
+;
+background
+
+
+:rgba
+
+
+(255
+,
+255,255,0);
+}
+100%{
+border-radius
+
+
+:
+
+ 
+
+5
+px
+
+
+;
+-webkit-border-radius
+
+
+:
+
+ 
+
+25
+px
+
+
+;
+width
+
+
+:
+
+ 
+
+10
+px
+
+
+;
+height
+
+
+:
+
+ 
+
+10
+px
+
+
+;
+background
+
+
+:rgba
+
+
+(255
+,
+255,255
+.1
+
+
+);
+}
+}
+#radius {
+	-webkit-animation: ChangeCycle 2s ease-in-out infinite;
+}
+
+.icon-spin {
+	-moz-animation: spin 10s infinite linear;
+	-o-animation: spin 10s infinite linear;
+	-webkit-animation: spin 10s infinite linear;
+	animation: spin 10s infinite linear;
+}
+
+@
+-moz-keyframes spin { 0% {
+	-moz-transform: rotate(0deg);
+}
+
+100%
+{
+-moz-transform
+
+
+:
+
+ 
+
+rotate
+
+
+(360
+deg
+);
+
+ 
+
+}
+}
+@
+-webkit-keyframes spin { 0% {
+	-webkit-transform: rotate(0deg);
+}
+
+100%
+{
+-webkit-transform
+
+
+:
+
+ 
+
+rotate
+
+
+(360
+deg
+);
+
+ 
+
+}
+}
+@
+-o-keyframes spin { 0% {
+	-o-transform: rotate(0deg);
+}
+
+100%
+{
+-o-transform
+
+
+:
+
+ 
+
+rotate
+
+
+(360
+deg
+);
+
+ 
+
+}
+}
+@
+-ms-keyframes spin { 0% {
+	-ms-transform: rotate(0deg);
+}
+
+100%
+{
+-ms-transform
+
+
+:
+
+ 
+
+rotate
+
+
+(360
+deg
+);
+
+ 
+
+}
+}
+@
+keyframes spin { 0% {
+	transform: rotate(0deg);
+}
+100%
+{
+transform
+
+
+:
+
+ 
+
+rotate
+
+
+(360
+deg
+);
+
+ 
+
+}
+}
+</style>
+
+		<script>
+			function fundSurveyOut() {
+				document.getElementById('fundLine').style.display = "none";
+				document.getElementById('fundSurvey').style.display = "none";
+			}
+
+			function fundSurveyOver() {
+				document.getElementById('fundLine').style.display = "block";
+				document.getElementById('fundSurvey').style.display = "block";
+			}
+
+			function diseaseOver() {
+				document.getElementById('diseaseLine').style.display = "block";
+				document.getElementById('diseaseSurvey').style.display = "block";
+			}
+
+			function diseaseOut() {
+				document.getElementById('diseaseLine').style.display = "none";
+				document.getElementById('diseaseSurvey').style.display = "none";
+			}
+
+			function onlineOver() {
+				document.getElementById('onlineLine').style.display = "block";
+				document.getElementById('onlineSurvey').style.display = "block";
+			}
+
+			function onlineOut() {
+				document.getElementById('onlineLine').style.display = "none";
+				document.getElementById('onlineSurvey').style.display = "none";
+			}
+
+			function systemOver() {
+				document.getElementById('systemLine').style.display = "block";
+				document.getElementById('systemSurvey').style.display = "block";
+			}
+
+			function systemOut() {
+				document.getElementById('systemLine').style.display = "none";
+				document.getElementById('systemSurvey').style.display = "none";
+			}
+		</script>
+
+		</head>
+
+		<body class="bg">
+
+			<div align="center" class="title">
+				<a>æ°ååå¤§æ°æ®åæå¹³å°</a>
+			</div>
+
+			<div id="Main" class="main"></div>
+			<div class="zhuan">
+				<img id="img" class="icon-spin" src="pic2/æ¤­å-2-æ·è´-2.png"">
+			</div>
+
+			<div align="center" class="cet">
+				<img src="pic2/5066229_115506329190_2.png" width="88" height="89" />
+			</div>
+			<div onmouseover="onlineOver()" onmouseout="onlineOut()"
+				align="center" class="user">
+				<a href="index.jsp"> <img class="ur" src="pic2/user.png"
+					width="69" height="65" /></a>
+			</div>
+			<div onmouseover="fundSurveyOver()" onmouseout="fundSurveyOut()"
+				align="center" class="money">
+				<a href="money.jsp">
+				<img class="mon" src="pic2/stack-of-three-coins.png" width="59"
+					height="48" /></a>
+			</div>
+			<div onmouseover="diseaseOver()" onmouseout="diseaseOut()"
+				align="center" class="yao">
+				<a href="disease.jsp">
+				<img class="jiyao" src="pic2/pill-outline.png" width="63"
+					height="63" /></a>
+			</div>
+			<div onmouseover="systemOver()" onmouseout="systemOut()"
+				align="center" class="xitong">
+				<a href="system.jsp"><img class="xit" src="pic2/empty-terminal-window.png" width="51"
+					height="44" /></a>
+			</div>
+
+
+			<div id="fundLine" class="line1">
+				<img src="pic2/å½¢ç¶-2.png" width="392" height="50" />
+			</div>
+			<div id="fundSurvey" class="daokuang1">
+				<div class="juli">
+					<div>
+						<a class="zi">èµéè¿è¡æåµ</a>
+					</div>
+					<div class="juli2">
+						<a class="zi">èµéä½¿ç¨ï¼</a> </br> <a class="zi2">(åä½ï¼ç¾ä¸)</a>
+					</div>
+					<div align="center" class="juli2">
+						<a class="zi3">5238</a>
+					</div>
+				</div>
+			</div>
+
+
+			<div id="diseaseLine" class="line2">
+				<img src="pic2/å½¢ç¶-2_1.png" width="392" height="50" />
+			</div>
+			<div id="diseaseSurvey" class="daokuang1">
+				<div class="juli">
+					<div>
+						<a class="zi">ç¾çç¨è¯åæ</a>
+					</div>
+					<div class="juli2">
+						<a class="zi">ç¨è¯éé¢ï¼</a> </br> <a class="zi2">(åä½ï¼ç¾ä¸)</a>
+					</div>
+					<div align="center" class="juli2">
+						<a class="zi3">218</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="systemLine" class="line3">
+				<img src="pic2/å½¢ç¶-2_2.png" width="258" height="50" />
+			</div>
+			<div id="systemSurvey" class="daokuang2">
+				<div class="juli">
+					<div>
+						<a class="zi">ç³»ç»è¿è¡æåµ</a>
+					</div>
+					<div class="juli2">
+						<a class="zi">è®¿é®äººæ°ï¼</a> </br> <a class="zi2">(åä½ï¼ä¸äºº)</a>
+					</div>
+					<div align="center" class="juli2">
+						<a class="zi3">3234</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="onlineLine" class="line4">
+				<img src="pic2/å½¢ç¶-2_1.png" width="106" height="38" />
+			</div>
+			<div id="onlineSurvey" class="daokuang2">
+				<div class="juli">
+					<div>
+						<a class="zi">åå&amp;èµéä½¿ç¨æåµ</a>
+					</div>
+					<div class="juli2">
+						<a class="zi">ååäººæ°ï¼</a> </br> <a class="zi2">(åä½ï¼ä¸äºº)</a>
+					</div>
+					<div align="center" class="juli2">
+						<a class="zi3">2504</a>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="logo">
+				<img src="pic2/76u58picfig.png" width="183" height="56" />
+			</div>
+
+		</body>
+</html>
+
+

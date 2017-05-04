@@ -2,7 +2,852 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/fonts/fontawesome-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/fonts/fontawesome-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/fonts/fontawesome-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/K线图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/favicon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/treemap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/仪表盘.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/力导向图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/和弦图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/地图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/折线图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/散点图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/柱状图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/漏斗图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/雷达图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/韦恩图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/ico/饼状图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/HelloWorld1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/HelloWorld2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/chenwei.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/denghongqi.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/echarts1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/erik.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/huangyue.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/huangzhimin.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/huyao.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/jaroslav.benc.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/linfeng.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/lizhan.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/loutongbing.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/shenhao.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/shenyi.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/sushuang.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/tanhe.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/wangjunting.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/weitaiyun.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/xieshiwei.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/yangji.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/yaofeifei.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/zhangyanru.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/zhouyang.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/zrender1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/about/zuming.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/architecture.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/banner1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/banner2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/banner3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/banner4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/bannerStudy.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/bannerX.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/bg_direction_nav.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/blacktocat.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/connect.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/creativity.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/custom.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/dataDancing.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/dataRange.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/dataView.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/datazoom.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/device.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/axisBoundaryGap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/axisBoundaryGap1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/axisDetail.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/axisDetail.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/axisScale1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/axisScale2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/barTheme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/charts.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/chordTheme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/dataRange.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/dataZoom.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/forceTheme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/grid.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/kTheme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/legend.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/lineTheme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/mapTheme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/multiControl.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/pieTheme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/radarTheme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/roamController.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/scatterTheme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/timeline.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/title.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/toolbox.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/tooltip1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/doc/tooltip2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/draggable.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/dynamic1.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/dynamic2.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/echarts-logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/echarts-logo2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/effect.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/EChartsTheme.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/axis.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar10.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar11.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar12.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar13.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar14.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar15.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar6.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar7.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar8.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bar9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bmap1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/bmap2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/cache.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/chord.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/chord1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/chord2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/chord3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/chord4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/dataRange.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/dataRange1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/dataRange2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/dataZoom.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/dataZoom1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/dynamicLineBar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/dynamicPieRadar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/dynamicScatterK.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/event.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/eventRiver1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/eventRiver2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/force.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/force1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/force2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/force4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/funnel.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/funnel1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/funnel2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/funnel3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/funnel4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/gauge.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/gauge1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/gauge2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/gauge3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/gauge4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/gauge5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/import.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/k.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/k1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/lasagna.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line6.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line7.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line8.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/line9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/loading.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map10.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map11.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map12.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map13.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map14.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map15.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map16.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map17.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map18.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map19.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map20.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map21.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map22.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map6.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map7.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map8.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/map9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix10.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix11.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix12.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix6.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix7.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix8.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/mix9.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/pie.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/pie1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/pie2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/pie3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/pie4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/pie5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/pie6.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/pie7.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/radar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/radar1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/radar2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/radar3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/scatter.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/scatter1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/scatter2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/scatter3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/scatter4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/scatter5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/scatter6.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/theme.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/tooltip.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/tree.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/tree1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/tree2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/treemap.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/treemap1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/treemap2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/venn.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/webkit-dep.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/webkit-dep2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/wordCloud.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/example/wormhole.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/explorer.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/feature1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/feature2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/feature3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/fork.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/glyphicons-halflings-white.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/glyphicons-halflings.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/groovepaper.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/icon-bar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/legendSelected.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/adm_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/admaster_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/caixin_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/health_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/huawei_logo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/hui_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/jinjiang_logo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/picc_logo.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/qqnews_logo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/renqi_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/sd_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/shujubang_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/shujuguan_logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/sinopec_logo.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/xinhuanet_logo.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/logo/yongyou_logo.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/magicType.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/mark.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/mix.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/multiStack.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/scatter.gif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/slide-01.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/slide-02.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/slide-03.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/slide-04.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/slide-05.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/subMapType.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/ticks.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/tweed.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/why-echarts-m-cn.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/why-echarts-m-en.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/img/zrender.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/font/DS-DIGI.TTF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/font/msyh.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/icon-jingzhun.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/icon-shenhe.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/logo.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/logo_head.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/map.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/pic_1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/pic_2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/pic_3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/pic_4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/pic_5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/img/pic_6.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/ch.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/check-mark.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/empty-terminal-window.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/icon-jingzhun.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/icon-shenhe.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/left-1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/left-2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/magnifying-glass-finder.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/pill-outline.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/right-navigation-button.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/stack-of-three-coins.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/under.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/user.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/yibiaopan.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/yuan2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/yuan3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/yuan4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/zb_2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/人员.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/大地图.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/大地图4.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/大地图_1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/大地图_3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/形状-33_1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/椭圆-2-副本-2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/系统.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/5066229_115506329190_2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/76u58picfig.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/bei2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/dabg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/empty-terminal-window.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/pill-outline.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/stack-of-three-coins.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/user.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/形状-2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/形状-2_1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/形状-2_2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/形状-2_3.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/椭圆-2-拷贝-2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic2/组-29_1.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-client/ace-gis-client.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/model/GpsChian.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/GpsChianDatajzjzService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/GpsChianDataznshService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/GpsChianService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/vo/GpsChianQVo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/vo/GpsChianVo.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/ace-gis-service.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianDatajzjzMapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianDatajzjzMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianDataznshMapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianDataznshMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianMapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianMapper.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/ReportDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/GpsChianDatajzjzServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/GpsChianDataznshServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/GpsChianServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/ace-gis-web.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GpsChianAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GpsChianDatajzjzAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GpsChianDataznshAction.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/bootstrap-responsive.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/bootstrap-theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/bootstrap-theme.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/bootstrap-theme.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/bootstrap.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/carousel.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/codemirror.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/echartsHome.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/flexslider.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/font-awesome.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/google-code-prettify.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/css/monokai.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/fonts/fontawesome-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/application.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-affix.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-alert.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-button.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-carousel.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-collapse.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-dropdown.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-modal.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-popover.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-scrollspy.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-tab.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-tooltip.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-transition.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap-typeahead.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/codemirror.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/dataDancing.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/echartsConfig.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/echartsDoc.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/echartsExample.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/echartsHome.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/echartsTheme.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/echartsThemeDesigner.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/esl/css.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/esl/esl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/esl/js.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/google-code-prettify.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/html5shiv.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/javascript.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/jquery-1.10.2.min.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/jquery.flexslider.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/jquery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/jquery.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/jquery.min.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/01/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/01/controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/01/model.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/01/view.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/02/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/02/controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/02/model.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/02/view.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/03/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/03/controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/03/model.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/03/view.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/04/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/04/controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/04/model.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/04/view.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/05/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/05/controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/05/model.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/05/view.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/06/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/06/controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/06/model.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/06/view.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/cityMap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/css/css.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/css/mu.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/data.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/data/migration.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/data/webkit-dep.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/disease.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/GUANGZHOU_geo.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/HK_geo.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/UK_geo.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/USA_geo.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/110100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/120100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/130100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/130200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/130300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/130400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/130500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/130600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/130700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/130800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/130900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/131000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/131100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/140100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/140200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/140300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/140400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/140500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/140600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/140700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/140800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/140900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/141000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/141100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/150100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/150200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/150300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/150400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/150500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/150600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/150700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/150800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/150900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/152200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/152500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/152900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/210100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/210200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/210300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/210400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/210500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/210600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/210700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/210800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/210900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/211000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/211100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/211200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/211300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/211400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/220100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/220200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/220300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/220400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/220500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/220600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/220700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/220800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/222400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/230100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/230200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/230300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/230400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/230500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/230600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/230700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/230800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/230900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/231000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/231100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/231200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/232700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/310100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/310200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/320100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/320200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/320300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/320400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/320500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/320600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/320700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/320800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/320900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/321000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/321100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/321200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/321300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/330100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/330200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/330300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/330400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/330500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/330600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/330700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/330800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/330900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/331000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/331100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/340100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/340200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/340300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/340400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/340500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/340600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/340700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/340800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/341000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/341100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/341200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/341300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/341500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/341600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/341700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/341800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/350100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/350200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/350300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/350400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/350500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/350600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/350700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/350800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/350900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/360100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/360200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/360300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/360400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/360500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/360600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/360700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/360800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/360900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/361000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/361100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/370100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/370200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/370300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/370400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/370500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/370600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/370700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/370800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/370900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/371000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/371100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/371200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/371300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/371400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/371500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/371600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/371700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/410100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/410200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/410300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/410400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/410500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/410600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/410700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/410800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/410900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/411000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/411100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/411200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/411300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/411400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/411500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/411600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/411700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/420100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/420200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/420300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/420500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/420600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/420700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/420800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/420900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/421000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/421100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/421200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/421300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/422800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/429000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/430100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/430200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/430300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/430400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/430500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/430600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/430700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/430800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/430900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/431000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/431100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/431200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/431300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/433100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/440100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/440200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/440300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/440400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/440500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/440600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/440700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/440800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/440900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/441200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/441300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/441400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/441500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/441600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/441700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/441800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/441900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/442000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/445100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/445200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/445300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/450100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/450200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/450300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/450400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/450500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/450600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/450700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/450800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/450900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/451000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/451100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/451200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/451300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/451400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/460100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/460200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/460300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/469000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/500100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/510100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/510300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/510400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/510500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/510600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/510700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/510800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/510900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/511000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/511100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/511300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/511400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/511500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/511600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/511700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/511800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/511900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/512000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/513200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/513300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/513400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/520100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/520200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/520300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/520400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/520500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/522200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/522300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/522600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/522700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/530100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/530300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/530400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/530500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/530600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/530700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/530800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/530900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/532300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/532500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/532600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/532800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/532900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/533100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/533300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/533400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/540100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/542100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/542200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/542300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/542400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/542500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/542600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/610100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/610200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/610300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/610400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/610500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/610600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/610700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/610800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/610900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/611000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/620100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/620200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/620300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/620400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/620500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/620600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/620700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/620800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/620900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/621000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/621100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/621200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/622900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/623000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/630100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/632100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/632200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/632300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/632500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/632600.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/632700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/632800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/640100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/640200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/640300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/640400.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/640500.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/650100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/650200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/652100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/652200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/652300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/652700.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/652800.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/652900.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/653000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/653100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/653200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/654000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/654200.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/654300.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/659000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/710000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/810100.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/820000.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/china-main-city/china-main-city-map.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/geoJson/continent_geo.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/gis.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/index.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/jibing.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/jzjz.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/jzjz.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/main.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/main.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/menu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/menu.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/money.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/money.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/peple.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/scr.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/svg/baidu-building.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/svg/body-female.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/svg/body-male.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/svg/football.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/system.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/system.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/table.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/test.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/blue.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/dark.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/default.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/gray.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/green.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/helianthus.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/infographic.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/macarons.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/macarons2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/mint.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/red.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/roma.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/sakura.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/theme/shine.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/bar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/chord.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/eventRiver.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/force.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/funnel.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/gauge.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/k.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/line.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/map.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/pie.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/radar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/scatter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/tree.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/treemap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/venn.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/chart/wordCloud.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www/js/echarts.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www2/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/www2/js/echarts-all.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/znsh.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/znsh.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-gis/ace-gis.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/CommonUtils.java" afterPath="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/CommonUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -26,6 +871,10 @@
     <ignored path="$PROJECT_DIR$/ace-operana/target/" />
     <ignored path="$PROJECT_DIR$/ace-operana/ace-operana-client/target/" />
     <ignored path="$PROJECT_DIR$/ace-operana/ace-operana-service/target/" />
+    <ignored path="$PROJECT_DIR$/ace-gis/ace-gis-service/target/" />
+    <ignored path="$PROJECT_DIR$/ace-gis/ace-gis-client/target/" />
+    <ignored path="$PROJECT_DIR$/ace-gis/ace-gis-web/target/" />
+    <ignored path="$PROJECT_DIR$/ace-gis/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,138 +887,24 @@
     <favorites_list name="ace" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MeetingServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/MeetingServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="33" column="34" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="33" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MeetingDao.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingDao.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="44" column="27" lean-forward="false" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NormDataDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDataDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NormDataDao.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDataDao.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5340">
-              <caret line="356" column="46" lean-forward="false" selection-start-line="356" selection-start-column="46" selection-end-line="356" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NormData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/model/NormData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9150">
-              <caret line="977" column="35" lean-forward="false" selection-start-line="977" selection-start-column="25" selection-end-line="977" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NormDataController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/NormDataController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="98" column="75" lean-forward="true" selection-start-line="98" selection-start-column="75" selection-end-line="98" selection-end-column="75" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NormDataService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/NormDataService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="19" column="92" lean-forward="false" selection-start-line="19" selection-start-column="92" selection-end-line="19" selection-end-column="92" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NormDataServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/NormDataServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1320">
-              <caret line="105" column="68" lean-forward="false" selection-start-line="105" selection-start-column="68" selection-end-line="105" selection-end-column="68" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExcelUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/ExcelUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1290">
-              <caret line="116" column="44" lean-forward="false" selection-start-line="116" selection-start-column="22" selection-end-line="116" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NormDao.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDao.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1815">
-              <caret line="121" column="79" lean-forward="false" selection-start-line="121" selection-start-column="79" selection-end-line="122" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
         <option value="HTML File" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tabs-close</find>
-      <find>tabs-icon</find>
-      <find>button</find>
-      <find>所属部门</find>
-      <find>用户名</find>
       <find>用户</find>
       <find>机构</find>
       <find>部门</find>
       <find>员工</find>
       <find>red</find>
-      <find>portal</find>
       <find>tabs_icons.png</find>
       <find>${portalPath}</find>
       <find>getName</find>
@@ -189,6 +924,12 @@
       <find>&lt;div class=&quot;profile-info-value&quot;&gt;</find>
       <find>header smaller lighter</find>
       <find>Topic</find>
+      <find>SnailUtils</find>
+      <find>SnailBeanUtils</find>
+      <find>org.platform.snail.portal</find>
+      <find>portal</find>
+      <find>&quot;/gis</find>
+      <find>指标</find>
     </findStrings>
     <replaceStrings>
       <replace>$PROJECT_DIR$</replace>
@@ -214,6 +955,11 @@
       <replace>labelItemHeader</replace>
       <replace>header-title</replace>
       <replace>User</replace>
+      <replace>CommonUtils</replace>
+      <replace>CommonBeanUtils</replace>
+      <replace>com.huacainfo.ace.gis</replace>
+      <replace>gis</replace>
+      <replace>contextPath+&quot;</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -232,36 +978,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/model/Meeting.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/config.js" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/model/MeetingTopic.java" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/jquery-easyui-1.3.6/themes/gray/gz/easyui.css" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingTopicDao.xml" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingTopicDao.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/topic/index.jsp" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/norm/index.jsp" />
-        <option value="$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/autocode/base/DBHelpInfo.java" />
-        <option value="$PROJECT_DIR$/ace-weui/ace-weui-web/src/main/webapp/content/www/js/writer/preview.js" />
-        <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-web/src/main/webapp/content/service/writer/controller.js" />
-        <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-web/src/main/webapp/content/service/writer/model.js" />
-        <option value="$PROJECT_DIR$/ace-weui/ace-weui-web/src/main/webapp/dynamic/www/writer/preview.jsp" />
-        <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-web/src/main/webapp/content/service/writing/model.js" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDao.xml" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDao.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/NormService.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/NormServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/NormController.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingDao.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/model/MeetingUser.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/TopicService.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/TopicServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/TopicController.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/topic/controller.js" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingUserDao.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/MeetingService.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/MeetingServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/MeetingController.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/meeting/index.jsp" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingUserDao.xml" />
@@ -275,7 +991,6 @@
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/resources/dubbo/dubbo-ace-operana-consumer.xml" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/resources/dubbo/dubbo-ace-operana-provider.xml" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/model/NormData.java" />
-        <option value="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/CommonUtils.java" />
         <option value="$PROJECT_DIR$/ace-common/pom.xml" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDataDao.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDataDao.xml" />
@@ -283,6 +998,37 @@
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/NormDataService.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/NormDataServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/NormDataController.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/resources/dubbo/dubbo-ace-gis-consumer.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/model/GpsChian.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/vo/GpsChianQVo.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/vo/GpsChianVo.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianDatajzjzMapper.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianDatajzjzMapper.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianDataznshMapper.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianMapper.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/GpsChianDatajzjzService.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/GpsChianDataznshService.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/GpsChianService.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/AnslysisServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/ReportDao.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/AnalysisService.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/GpsChianDatajzjzServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/CommonUtils.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/GpsChianServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/GpsChianDataznshServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GisBaseController.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GpsChianAction.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GpsChianDatajzjzAction.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GpsChianDataznshAction.java" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/resources/spring/applicationContext.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/resources/spring/spring-ace-gis-service.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/resources/dubbo/dubbo-ace-weui-provider.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/resources/spring/spring-mvc-servlet.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/resources/special.properties" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/02/controller.js" />
+        <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/money.jsp" />
       </list>
     </option>
   </component>
@@ -323,21 +1069,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -366,7 +1098,35 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-gis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -389,11 +1149,11 @@
       <recent name="com.huacainfo.ace.weui.web.controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao" />
-      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/xcheck" />
-      <recent name="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/common" />
-      <recent name="$PROJECT_DIR$/ace-autocode/src/main/resources" />
-      <recent name="$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/autocode/operana" />
+      <recent name="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp" />
+      <recent name="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis" />
+      <recent name="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www" />
+      <recent name="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller" />
+      <recent name="$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -408,7 +1168,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.ace-install-all">
+  <component name="RunManager" selected="Maven.ace-portal-web">
     <configuration default="false" name="PortalServiceApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1023,7 +1783,31 @@
       </MavenSettings>
       <method />
     </configuration>
-    <list size="17">
+    <configuration default="false" name="ace-gis-web" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="tomcat:run" />
+              </list>
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/ace-gis" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <list size="18">
       <item index="0" class="java.lang.String" itemvalue="Maven.ace-install-all" />
       <item index="1" class="java.lang.String" itemvalue="Maven.ace-clean-all" />
       <item index="2" class="java.lang.String" itemvalue="Maven.ace-portal-web" />
@@ -1036,16 +1820,17 @@
       <item index="9" class="java.lang.String" itemvalue="Maven.ace-portal-clean" />
       <item index="10" class="java.lang.String" itemvalue="Maven.ace-operana-web" />
       <item index="11" class="java.lang.String" itemvalue="Maven.ace-operana-install" />
-      <item index="12" class="java.lang.String" itemvalue="Application.PortalServiceApp" />
-      <item index="13" class="java.lang.String" itemvalue="Application.AutoCode (2)" />
-      <item index="14" class="java.lang.String" itemvalue="Application.OperanaServiceApp" />
-      <item index="15" class="java.lang.String" itemvalue="Application.DBHelpInfo" />
-      <item index="16" class="java.lang.String" itemvalue="Application.CommonUtils" />
+      <item index="12" class="java.lang.String" itemvalue="Maven.ace-gis-web" />
+      <item index="13" class="java.lang.String" itemvalue="Application.PortalServiceApp" />
+      <item index="14" class="java.lang.String" itemvalue="Application.AutoCode (2)" />
+      <item index="15" class="java.lang.String" itemvalue="Application.OperanaServiceApp" />
+      <item index="16" class="java.lang.String" itemvalue="Application.DBHelpInfo" />
+      <item index="17" class="java.lang.String" itemvalue="Application.CommonUtils" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.OperanaServiceApp" />
-        <item index="1" class="java.lang.String" itemvalue="Application.PortalServiceApp" />
+        <item index="0" class="java.lang.String" itemvalue="Application.PortalServiceApp" />
+        <item index="1" class="java.lang.String" itemvalue="Application.OperanaServiceApp" />
         <item index="2" class="java.lang.String" itemvalue="Application.CommonUtils" />
         <item index="3" class="java.lang.String" itemvalue="Application.AutoCode (2)" />
         <item index="4" class="java.lang.String" itemvalue="Application.DBHelpInfo" />
@@ -1339,7 +2124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493870220471</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="导出电子表格模板">
+      <created>1493870377593</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1493870377593</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1353,7 +2145,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="35" width="1366" height="634" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1363,19 +2154,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3512605" sideWeight="0.28330892" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4920354" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28141594" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31259152" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38360175" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2877013" sideWeight="0.3019608" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1406,10 +2197,10 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28141594" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4920354" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31259152" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38360175" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2877013" sideWeight="0.3019608" order="6" side_tool="true" content_ui="tabs" />
@@ -1441,390 +2232,304 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/operana/model/MeetingUser.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-169">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianDatajzjzMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1019">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianDataznshMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-737">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/GpsChianMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5554">
+          <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/GpsChianDatajzjzService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/operana/model/MeetingTopic.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/GpsChianDataznshService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="165">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/model/MeetingTopic.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/GpsChianService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="52" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="5" selection-end-column="52" />
-          <folding />
+        <state relative-caret-position="120">
+          <caret line="8" column="42" lean-forward="true" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/model/MeetingUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="52" lean-forward="false" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingTopicDao.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/dao/ReportDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="10" column="90" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="90" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/NormService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="45" lean-forward="false" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/NormCfgService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/TopicService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="20" column="98" lean-forward="false" selection-start-line="20" selection-start-column="98" selection-end-line="20" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/NormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="830">
-          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="289" column="51" lean-forward="false" selection-start-line="289" selection-start-column="38" selection-end-line="289" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/topic/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="303" column="26" lean-forward="false" selection-start-line="303" selection-start-column="26" selection-end-line="303" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/TopicController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="82" column="22" lean-forward="true" selection-start-line="82" selection-start-column="22" selection-end-line="82" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/MeetingService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="45" column="51" lean-forward="false" selection-start-line="45" selection-start-column="36" selection-end-line="45" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingUserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="127" lean-forward="false" selection-start-line="12" selection-start-column="127" selection-end-line="12" selection-end-column="127" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingUserDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/meeting/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1874">
-          <caret line="163" column="56" lean-forward="true" selection-start-line="163" selection-start-column="56" selection-end-line="163" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/role/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="125" column="64" lean-forward="true" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normCfg/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1813">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/MeetingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="75" column="54" lean-forward="false" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="813" column="40" lean-forward="false" selection-start-line="813" selection-start-column="40" selection-end-line="813" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-autocode/src/main/resources/generatorConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="47" column="66" lean-forward="false" selection-start-line="47" selection-start-column="66" selection-end-line="47" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/operana/model/NormCfg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="52" lean-forward="true" selection-start-line="4" selection-start-column="21" selection-end-line="5" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/operana/model/NormData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10588">
-          <caret line="6" column="52" lean-forward="false" selection-start-line="6" selection-start-column="52" selection-end-line="6" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/model/NormData.java" />
-    <entry file="file://$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/autocode/base/AutoCodeUtils.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/AnslysisServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="120" column="40" lean-forward="false" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="40" />
+          <caret line="18" column="54" lean-forward="false" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/autocode/operana/AutoCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/resources/dubbo/dubbo-ace-operana-consumer.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="30" column="26" lean-forward="false" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/resources/dubbo/dubbo-ace-operana-provider.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="36" column="8" lean-forward="true" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/ResourcesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="122" column="29" lean-forward="true" selection-start-line="121" selection-start-column="4" selection-end-line="122" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/ResourcesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="204" column="5" lean-forward="true" selection-start-line="174" selection-start-column="4" selection-end-line="204" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/ResourcesServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="968">
-          <caret line="156" column="36" lean-forward="true" selection-start-line="125" selection-start-column="8" selection-end-line="156" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDao.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-client/src/main/java/com/huacainfo/ace/gis/service/AnalysisService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="8" />
-          <folding />
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.5/commons-lang-2.5-sources.jar!/org/apache/commons/lang/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="116" column="24" lean-forward="true" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/GpsChianDatajzjzServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1765">
+          <caret line="38" column="40" lean-forward="false" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/CommonUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="800" column="50" lean-forward="false" selection-start-line="800" selection-start-column="50" selection-end-line="800" selection-end-column="50" />
+        <state relative-caret-position="410">
+          <caret line="829" column="5" lean-forward="false" selection-start-line="829" selection-start-column="5" selection-end-line="829" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/FilesController.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/GpsChianServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-297">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        <state relative-caret-position="-2200">
+          <caret line="346" column="5" lean-forward="false" selection-start-line="346" selection-start-column="5" selection-end-line="346" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/SyCfgController.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/java/com/huacainfo/ace/gis/service/impl/GpsChianDataznshServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-477">
-          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        <state relative-caret-position="220">
+          <caret line="27" column="39" lean-forward="false" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/AttachController.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GisBaseController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-942">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        <state relative-caret-position="90">
+          <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-common-web/pom.xml">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GpsChianAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1835">
+        <state relative-caret-position="-1165">
+          <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GpsChianDatajzjzAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="7" lean-forward="false" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/java/com/huacainfo/ace/gis/web/controller/GpsChianDataznshAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="51" column="48" lean-forward="false" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/asset/js/esl/js.js" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis/gis.jsp" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis/disease.jsp" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis/menu.jsp" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/resources/spring/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="29" column="68" lean-forward="false" selection-start-line="29" selection-start-column="68" selection-end-line="29" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/resources/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="26" lean-forward="false" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/resources/dubbo/dubbo-ace-gis-provider.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="19" column="40" lean-forward="false" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-service/src/main/resources/spring/spring-ace-gis-service.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="22" column="29" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/resources/spring/spring-mvc-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="26" column="18" lean-forward="false" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/resources/mvc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/resources/special.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="68" lean-forward="false" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-common/pom.xml">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis/www/js/echarts.js" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="95" column="24" lean-forward="false" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/DictServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="167" column="46" lean-forward="true" selection-start-line="166" selection-start-column="16" selection-end-line="167" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1815">
-          <caret line="121" column="79" lean-forward="false" selection-start-line="121" selection-start-column="79" selection-end-line="122" selection-end-column="48" />
+        <state relative-caret-position="75">
+          <caret line="9" column="31" lean-forward="false" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/model/NormData.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/asset/js/esl/js.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9150">
-          <caret line="977" column="35" lean-forward="false" selection-start-line="977" selection-start-column="25" selection-end-line="977" selection-end-column="35" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis/index.jsp" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis/01/config.js" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis/01/controller.js" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis/01/model.js" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/dynamic/www/gis/01/view.js" />
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/menu.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3207">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/cityMap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1455">
+          <caret line="97" column="7" lean-forward="true" selection-start-line="93" selection-start-column="4" selection-end-line="97" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/01/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6093">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/01/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3303">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/disease.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDataDao.xml">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/03/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5340">
-          <caret line="356" column="46" lean-forward="false" selection-start-line="356" selection-start-column="46" selection-end-line="356" selection-end-column="46" />
+        <state relative-caret-position="2610">
+          <caret line="174" column="26" lean-forward="false" selection-start-line="174" selection-start-column="14" selection-end-line="174" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/TopicServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/02/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="117" column="20" lean-forward="true" selection-start-line="117" selection-start-column="20" selection-end-line="117" selection-end-column="20" />
+        <state relative-caret-position="1680">
+          <caret line="112" column="31" lean-forward="false" selection-start-line="112" selection-start-column="31" selection-end-line="112" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/NormServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/pic/zb_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/money.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1245">
-          <caret line="24" column="28" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="24" selection-end-column="28" />
+        <state relative-caret-position="202">
+          <caret line="53" column="28" lean-forward="false" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="28" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/MeetingServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="33" column="34" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="33" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" column="27" lean-forward="false" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/ExcelUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="116" column="44" lean-forward="false" selection-start-line="116" selection-start-column="22" selection-end-line="116" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDataDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/NormDataService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="19" column="92" lean-forward="false" selection-start-line="19" selection-start-column="92" selection-end-line="19" selection-end-column="92" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/NormDataServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="105" column="68" lean-forward="false" selection-start-line="105" selection-start-column="68" selection-end-line="105" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/NormDataController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="98" column="75" lean-forward="true" selection-start-line="98" selection-start-column="75" selection-end-line="98" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

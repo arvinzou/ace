@@ -61,6 +61,7 @@
 		<module>ace-common-web</module>
 		<module>ace-portal</module>
 		<module>ace-operana</module>
+		<module>ace-gis</module>
  		<module>ace-autocode</module>
 
 	</modules>

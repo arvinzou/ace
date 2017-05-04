@@ -10,6 +10,9 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
+        <module name="ace-gis-client" />
+        <module name="ace-gis-service" />
+        <module name="ace-gis-web" />
         <module name="ace-operana-client" />
         <module name="ace-operana-service" />
         <module name="ace-operana-web" />
@@ -24,6 +27,10 @@
       <module name="ace-common" target="1.7" />
       <module name="ace-common-dao" target="1.7" />
       <module name="ace-common-web" target="1.7" />
+      <module name="ace-gis" target="1.7" />
+      <module name="ace-gis-client" target="1.7" />
+      <module name="ace-gis-service" target="1.7" />
+      <module name="ace-gis-web" target="1.7" />
       <module name="ace-kernel" target="1.7" />
       <module name="ace-kernel-backend" target="1.7" />
       <module name="ace-kernel-client" target="1.7" />

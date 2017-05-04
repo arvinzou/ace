@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.gis.dao.GpsChianMapper">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.gis.model.GpsChian">
+        <result column="area_code" property="areaCode" jdbcType="VARCHAR"/>
+        <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
+        <result column="gps_y" property="gpsY" jdbcType="VARCHAR"/>
+        <result column="gps_x" property="gpsX" jdbcType="VARCHAR"/>
+        <result column="pcode" property="pcode" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <select id="selectListByPAreaName01" resultType="map">
+
+
+        SELECT
+        area_code,
+        area_name,
+        gps_y,
+        round(t_chsj.chrs/10000,2) chrs,
+        t_zj.zj,
+        gps_x,
+        pcode,
+        level
+        FROM
+        gps_chian,
+        t_chsj,
+        (SELECT
+        xzqh, round(CONVERT(
+        SUM((IFNULL(t.hsbcfy, 0))) , DECIMAL)/10000,2) zj
+        FROM
+        (SELECT
+        hsbcfy,
+        xzqh
+        FROM
+        t_mzsj
+        WHERE
+        hsbcfy > 0 UNION ALL SELECT
+        hsbcfy, xzqh
+        FROM
+        t_zysj
+        WHERE
+        hsbcfy > 0) t
+        GROUP BY xzqh) t_zj
+        WHERE
+        pcode = (SELECT
+        AREA_CODE
+        FROM
+        gps_chian
+        WHERE
+        area_name = #{name})
+        AND gps_chian.area_code =
+        t_chsj.xzqh
+        AND gps_chian.area_code = t_zj.xzqh
+    </select>
+    <select id="selectListByPAreaName02" resultType="map">
+        SELECT
+        round(t.chrs/10000,2) chrs,
+        round(convert(z.hsbcfy + m.hsbcfy,
+        decimal)/10000,2) zjsy,
+        convert((t.chrs / t.nyrks) * 100, decimal) chl,
+        FORMAT((z.hsbcfy + m.hsbcfy) / t.dncjzj * 100,
+        2) zjsyl,
+        FORMAT((z.hsbcfy + m.hsbcfy) / (z.bnfy+m.bnfy) * 100,
+        2) zcfwnbxbl,
+        round(t.dncjzj/10000,2) dncjzj
+        FROM
+        t_chsj
+        t,
+        (SELECT
+        s1.xzqh, SUM(s1.hsbcfy) hsbcfy,sum(s1.bnfy) bnfy
+        FROM
+        t_mzsj s1
+        WHERE
+        s1.xzqh = (select AREA_CODE from gps_chian where
+        area_name=#{name})
+        GROUP BY s1.xzqh) m,
+        (SELECT
+        s2.xzqh, SUM(s2.hsbcfy)
+        hsbcfy,sum(s2.bnfy) bnfy
+        FROM
+        t_zysj s2
+        WHERE
+        s2.xzqh = (select AREA_CODE
+        from gps_chian where area_name=#{name})
+        GROUP BY s2.xzqh) z
+        WHERE
+        t.xzqh
+        = m.xzqh AND t.xzqh = z.xzqh
+
+
+    </select>
+    <select id="selectListByPAreaName03" resultType="map">
+
+        SELECT
+        area_name, round(s.chrs/10000,2) chrs
+        FROM
+        gps_chian t,
+        t_chsj s
+        WHERE
+        s.xzqh = t.area_code
+        AND t.pcode = (select AREA_CODE from gps_chian
+        where area_name=#{name})
+
+    </select>
+    <select id="selectListByPAreaName04" resultType="map">
+        select
+        area_code, area_name, gps_y,
+        gps_x, pcode, level from gps_chian where
+        pcode=
+        (select AREA_CODE from gps_chian where area_name=#{name})
+    </select>
+    <select id="selectListByPAreaName05" resultType="map">
+        SELECT
+        convert(sum((IFNULL(t.hsbcfy, 0)))/10000, decimal) nh,
+        convert(SUM(IFNULL(t.yfbcfy, 0))/10000, decimal) mz,
+        convert(SUM(IFNULL(t.sbbcfy, 0))/10000, decimal) sb
+        FROM
+        (SELECT
+        hsbcfy, yfbcfy, sbbcfy
+        FROM
+        t_mzsj
+        WHERE
+        xzqh = (select AREA_CODE from gps_chian where area_name=#{name}) UNION ALL
+        SELECT
+        hsbcfy, yfbcfy, sbbcfy
+        FROM
+        t_zysj
+        WHERE
+        xzqh = (select AREA_CODE from gps_chian where area_name=#{name})) t
+
+    </select>
+    <select id="selectListByPAreaName06" resultType="map">
+        SELECT
+        area_code,
+        area_name,
+        gps_y,
+        t_chsj.chrs,
+        t_zj.zj,
+        gps_x,
+        pcode,
+        level
+        FROM
+        gps_chian,
+        t_chsj,
+        (SELECT
+        xzqh, round(CONVERT( SUM((IFNULL(t.hsbcfy, 0))) , DECIMAL)/1000000,2) zj
+        FROM
+        (SELECT
+        hsbcfy, xzqh
+        FROM
+        t_mzsj
+        WHERE
+        hsbcfy > 0 UNION ALL SELECT
+        hsbcfy, xzqh
+        FROM
+        t_zysj
+        WHERE
+        hsbcfy > 0) t
+        GROUP BY xzqh) t_zj
+        WHERE
+        pcode = (SELECT
+        AREA_CODE
+        FROM
+        gps_chian
+        WHERE
+        area_name = #{name})
+        AND gps_chian.area_code = t_chsj.xzqh
+        AND gps_chian.area_code = t_zj.xzqh
+
+    </select>
+
+    <select id="selectListByPAreaName07" resultType="map">
+        select zt,
+        round(CONVERT( SUM((IFNULL(rc, 0))) , DECIMAL)/10000,2)
+        COUNT from (
+        SELECT
+        xzqh,rc,zt
+        FROM
+        t_mzsh
+        WHERE
+        zt in ('2','3')
+        and xzqh = (SELECT AREA_CODE FROM gps_chian WHERE area_name =#{name})
+        UNION ALL
+
+        SELECT
+        xzqh,rc,zt
+        FROM
+        t_zysh
+        WHERE
+        zt in ('2','3')
+        and xzqh = (SELECT AREA_CODE FROM gps_chian WHERE area_name =#{name})
+        ) s
+        GROUP BY zt
+    </select>
+
+    <select id="selectListByPAreaName08" resultType="map">
+        select zt,
+        round(CONVERT( SUM((IFNULL(hsbcfy, 0))) , DECIMAL)/1000000,2) COUNT
+        from (
+        SELECT
+        hsbcfy,xzqh,rc,zt
+        FROM
+        t_mzsh
+        WHERE
+        zt in ('2','3')
+        and xzqh = (SELECT AREA_CODE FROM gps_chian WHERE area_name =#{name})
+        UNION ALL
+
+        SELECT
+        hsbcfy,xzqh,rc,zt
+        FROM
+        t_zysh
+        WHERE
+        zt in ('2','3')
+        and xzqh = (SELECT AREA_CODE FROM gps_chian WHERE area_name =#{name})
+        ) s
+        GROUP BY zt
+
+    </select>
+
+    <select id="selectListByPAreaName99" resultType="map">
+        select
+        xzqh,
+        truncate(SUM(sjbcfy)/SUM(bnfy)*100,2) count,
+        truncate(SUM(zfy)/SUM(rc),2) moneyAve
+        from t_mzsj where xzqh = (SELECT AREA_CODE FROM gps_chian WHERE area_name =#{name})
+        union ALL
+
+        select
+        xzqh,
+        truncate(SUM(sjbcfy)/SUM(bnfy)*100,2) count,
+        truncate(SUM(zfy)/SUM(rc),2) moneyAve
+        from t_zysj where xzqh = (SELECT AREA_CODE FROM gps_chian WHERE area_name =#{name})
+    </select>
+
+
+    <select id="selectListByPAreaName09" resultType="map">
+        SELECT
+        round(CONVERT( SUM((IFNULL(hsbcfy, 0))) , DECIMAL)/1000000,2) COUNT,
+        xzqh
+        FROM
+        t_mzsj
+        WHERE
+        xzqh = (SELECT AREA_CODE FROM gps_chian WHERE area_name =#{name})
+        UNION ALL
+
+        SELECT
+        round(CONVERT( SUM((IFNULL(hsbcfy, 0))) , DECIMAL)/1000000,2) COUNT,
+        xzqh
+        FROM
+        t_zysj
+        WHERE
+        xzqh = (SELECT AREA_CODE FROM gps_chian WHERE area_name =#{name})
+
+    </select>
+    <select id="selectListByPAreaName10" resultType="map">
+        SELECT
+        t.area_name,
+        round( a.hsbcfy/10000 , 2) jbfy,
+        round( b.je/10000 , 2)
+        ypfy
+        FROM
+        t_zyjb a,
+        t_zyyp b,
+        gps_chian t
+        WHERE
+        a.xzqh = b.xzqh AND
+        t.area_code = a.xzqh
+        AND t.pcode = (SELECT
+        AREA_CODE
+        FROM
+        gps_chian
+        WHERE
+        area_name =
+        #{params.areaName})
+        AND a.jbmc =#{params.nameSuba}
+        and b.ypmc
+        =#{params.nameSubb}
+    </select>
+
+    <select id="selectPersonByDateAndAreaCode" resultType="map">
+
+        SELECT
+        t.rc,a.area_name FROM t_zykq t,gps_chian a where xzqh=#{areaCode} and
+        bcrq=#{date}
+        and a.area_code=t.yyxzqh
+
+    </select>
+
+    <select id="selectListAll" resultType="map">
+
+
+        select area_code,
+        area_name, gps_y,
+        gps_x, pcode, level from gps_chian where area_code
+        like '52%'
+    </select>
+    <select id="selectListByPAreaName11" resultType="map">
+        SELECT
+        a.xzqh,
+        a.jbmc,
+        b.ypmc,
+        round(a.rc/10000,2) fbcs,
+        round(b.je/10000,2) yyje,
+        round(a.hsbcfy / c.allbcfy,4)*100 syzjzb1,
+        round(b.je /
+        c.allbcfy,4)*100 syzjzb2
+        FROM
+        t_zyjb a,
+        t_zyyp b,
+        (SELECT
+        t.xzqh,
+        SUM(IFNULL(t.hsbcfy, 0)) allbcfy
+        FROM
+        t_zysj t
+        WHERE
+        t.hsbcfy > 0
+        GROUP BY
+        t.xzqh) c
+        WHERE
+        a.xzqh = b.xzqh AND a.xzqh = c.xzqh
+        AND a.xzqh =(SELECT
+        AREA_CODE
+        FROM
+        gps_chian
+        WHERE
+        area_name =
+        #{params.areaName})
+        AND a.jbmc
+        =#{params.nameSuba}
+        and b.ypmc =#{params.nameSubb}
+    </select>
+    <select id="selectListByPAreaName12" resultType="map">
+        SELECT
+        jbmc,
+        round(hsbcfy/10000,2) hsbcfy
+        FROM
+        t_zyjb
+        WHERE
+        xzqh = (SELECT
+        AREA_CODE
+        FROM
+        gps_chian
+        WHERE
+        area_name = #{params.areaName})
+        ORDER BY hsbcfy DESC
+        LIMIT
+        #{params.page},10
+    </select>
+    <select id="selectListByPAreaName13" resultType="map">
+        SELECT
+        ypmc,
+        round(je/10000,2) je
+        FROM
+        t_zyyp
+        WHERE
+        xzqh = (SELECT
+        AREA_CODE
+        FROM
+        gps_chian
+        WHERE
+        area_name = #{params.areaName})
+        ORDER BY je DESC
+        LIMIT
+        #{params.page},10
+    </select>
+    <select id="selectListByPAreaName14" resultType="map">
+        SELECT
+        jbmc name,
+        round(rc/10000,2) value,round(hsbcfy/10000,0) value2
+        FROM
+        t_zyjb
+        WHERE
+        xzqh = (select AREA_CODE from gps_chian where
+        area_name=#{params.areaName})
+        ORDER BY rc DESC
+        LIMIT 10
+    </select>
+    <select id="selectListByPAreaName15" resultType="map">
+        SELECT
+        ypmc name,
+        round(sl/10000,2) value,round(je/10000,0) value2
+        FROM
+        t_zyyp
+        WHERE
+        xzqh =
+        (select AREA_CODE from gps_chian where
+        area_name=#{params.areaName})
+        ORDER BY sl DESC
+        LIMIT 10
+
+    </select>
+    <select id="selectListByPAreaName16" resultType="map">
+        SELECT
+        a.area_name, t.yhzh, t.yhmc, t.cs
+        FROM
+        t_yh t,
+        gps_chian a
+        WHERE
+        t.xzqh = a.area_code
+        LIMIT #{params.page}, 16
+
+    </select>
+</mapper>

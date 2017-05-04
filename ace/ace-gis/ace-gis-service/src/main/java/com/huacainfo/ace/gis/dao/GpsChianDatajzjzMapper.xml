@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.gis.dao.GpsChianDatajzjzMapper">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.gis.model.GpsChian">
+		<result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+		<result column="area_name" property="areaName" jdbcType="VARCHAR" />
+		<result column="gps_y" property="gpsY" jdbcType="VARCHAR" />
+		<result column="gps_x" property="gpsX" jdbcType="VARCHAR" />
+		<result column="pcode" property="pcode" jdbcType="VARCHAR" />
+		<result column="level" property="level" jdbcType="INTEGER" />
+	</resultMap>
+
+
+	<select id="selectListByPAreaName01" resultType="map">
+		SELECT
+		area_code,
+		area_name,
+		gps_y,
+		round(t_jzjz.hdrc,2) chrs,
+		round((t_jzjz.dbfy+t_jzjz.jzfy),2) zj,
+		gps_x,
+		pcode
+		FROM
+		gps_chian,
+		t_jzjz
+		WHERE
+		pcode = (SELECT
+		AREA_CODE
+		FROM
+		gps_chian
+		WHERE
+		area_name = #{name})
+		AND gps_chian.area_code =
+		t_jzjz.xzqh
+		AND gps_chian.area_code = t_jzjz.xzqh
+	</select>
+	
+	<select id="selectListByPAreaName03" resultType="map">
+
+		SELECT
+		area_name, round(s.hdrc/10000,2) chrs
+		FROM
+		gps_chian t,
+		t_jzjz s
+		WHERE
+		s.xzqh = t.area_code
+		AND t.pcode = (select AREA_CODE from gps_chian
+		where area_name=#{name})
+
+	</select>
+	
+	<select id="selectListByPAreaName05" resultType="map">
+		SELECT
+		round(t_jzjz.bcfy,2) nh,
+		round(t_jzjz.jzfy,2) mz,
+		round(t_jzjz.dbfy,2) sb
+		FROM
+		t_jzjz
+		WHERE
+		xzqh = (select AREA_CODE from gps_chian where area_name=#{name}) 
+
+	</select>
+		
+
+	
+
+	<select id="selectPersonByDateAndAreaCode" resultType="map">
+
+		SELECT
+		t.rc,a.area_name FROM t_zykq t,gps_chian a where xzqh=#{areaCode} and
+		bcrq=#{date}
+		and a.area_code=t.yyxzqh
+
+	</select>
+
+	<select id="selectListAll" resultType="map">
+
+
+		select area_code,
+		area_name, gps_y,
+		gps_x, pcode, level from gps_chian where area_code
+		like '52%'
+	</select>
+	
+	<select id="selectListByPAreaName12" resultType="map">
+		SELECT
+		t_jzlx.name jbmc,
+		t_jzfb.rc hsbcfy
+		FROM
+		t_jzfb,t_jzlx
+		WHERE
+        t_jzfb.lx=t_jzlx.code
+        and
+		xzqh = (SELECT
+		AREA_CODE
+		FROM
+		gps_chian
+		WHERE
+		area_name = #{params.areaName})
+		ORDER BY hsbcfy DESC
+		LIMIT
+		#{params.page},8
+	</select>
+	
+	<select id="selectListByPAreaName14" resultType="map">
+	SELECT 
+    month.name name,
+    ifnull(t_jzbc.rc,0) value,
+    ifnull(ROUND(t_jzbc.je / 10000, 2),0) value2
+FROM
+    month
+        LEFT JOIN
+    (SELECT 
+        *
+    FROM
+        t_jzbc
+    WHERE
+        t_jzbc.xzqh = (select AREA_CODE from gps_chian where
+		area_name=#{params.areaName})) t_jzbc ON t_jzbc.yf = month.code
+		
+		order by month.code 
+		 
+		
+	</select>
+	
+</mapper>
