@@ -90,6 +90,7 @@ show135Editor();
 							}
 						})
 
+
 			});
     $('#btn-view-del').on(
 			'click',
@@ -195,7 +196,7 @@ function loadText(id) {
 			$("textarea[name=intro]").val(rst.value.intro);
             $("textarea[name=docText]").val(rst.value.docText);
             editor.setData(rst.value.docText);
-
+            show135Editor();
 		},
 		error : function() {
 			alert("加载错误！");
@@ -203,22 +204,13 @@ function loadText(id) {
 	});
 }
 function show135Editor(){
-    var url = 'http://www.135editor.com/beautify_editor?callback=get_135editor_content';
+    var url = 'http://www.135editor.com/';
     window.open(url);
 }
-function get_135editor_content($html) {
-    editor.setData($html); // ueditor.setContent($html);
+function setContent(data){
+    $("textarea[name=docText]").val(data);
+     editor.setData(data);
 }
-
-var onMessage = function(e){
-    parent.window.opener.get_135editor_content(e.data);
-    document.write("<iframe style=\"display:none;\" src=\"http://www.135editor.com/pages/closeWindow.html\"></iframe>");
-}
-
-if (window.addEventListener) {  // all browsers except IE before version 9
-    window.addEventListener("message", onMessage, false);
-} else {
-    if (window.attachEvent) {   // IE before version 9
-        window.attachEvent("onmessage", onMessage);
-    }
+function getContent(){
+   return $("textarea[name=docText]").val();
 }

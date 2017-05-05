@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.weui.dao.report.ActivityPhotos">
   <select id="query" resultType="map">
     select id,name,activityLocation, DATE_FORMAT(activityDate, '%Y-%m-%d') activityDate,ifnull(reading,0) reading
-    from activity_photos where status='1'
+    from activity_photos where 0=0
     <if test='condition.name!=null and condition.name!=""'>
       and name like
       concat('%',#{condition.name,jdbcType=VARCHAR},'%')

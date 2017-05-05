@@ -60,6 +60,8 @@
 		<module>ace-common-dao</module>
 		<module>ace-common-web</module>
 		<module>ace-portal</module>
+		<module>ace-kernel</module>
+		<module>ace-weui</module>
 		<module>ace-operana</module>
 		<module>ace-gis</module>
  		<module>ace-autocode</module>

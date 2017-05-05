@@ -65,7 +65,7 @@ var id='${param.id}';
 <div class="weui-panel weui-panel_access">
     <div class="weui-panel__bd">
         <div class="weui-media-box weui-media-box_text">
-            <h4 class="weui-media-box__title">公开发布与奖励情况</h4>
+            <h4 class="weui-media-box__title">详情</h4>
             <p class="weui-media-box__desc" ></p>
         </div>
     </div>

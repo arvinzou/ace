@@ -3,7 +3,8 @@ package com.huacainfo.ace.operana.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class NormData {
+public class NormData implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
 
     private String meetingId;
