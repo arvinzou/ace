@@ -8,6 +8,7 @@
         <result column="normId" jdbcType="VARCHAR" property="normId"/>
         <result column="year" jdbcType="INTEGER" property="year"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="productId" jdbcType="VARCHAR" property="productId"/>
         <result column="wk1" jdbcType="DECIMAL" property="wk1"/>
         <result column="wk2" jdbcType="DECIMAL" property="wk2"/>
         <result column="wk3" jdbcType="DECIMAL" property="wk3"/>
@@ -88,7 +89,7 @@
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.operana.model.NormDetail">
         insert into norm_detail (id, meetingId, topicId,
-        normId, year, name,
+        normId, year, name,productId,
         wk1, wk2, wk3, wk4,
         wk5, wk6, wk7, wk8,
         wk9, wk10, wk11, wk12,
@@ -106,7 +107,7 @@
         createDate, lastModifyUserId, lastModifyUserName,
         lastModifyDate)
         values (#{id,jdbcType=VARCHAR}, #{meetingId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR},
-        #{normId,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{normId,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{productId,jdbcType=VARCHAR},
         #{wk1,jdbcType=DECIMAL}, #{wk2,jdbcType=DECIMAL}, #{wk3,jdbcType=DECIMAL}, #{wk4,jdbcType=DECIMAL},
         #{wk5,jdbcType=DECIMAL}, #{wk6,jdbcType=DECIMAL}, #{wk7,jdbcType=DECIMAL}, #{wk8,jdbcType=DECIMAL},
         #{wk9,jdbcType=DECIMAL}, #{wk10,jdbcType=DECIMAL}, #{wk11,jdbcType=DECIMAL}, #{wk12,jdbcType=DECIMAL},
@@ -130,6 +131,7 @@
         set
         year = #{year,jdbcType=INTEGER},
         name = #{name,jdbcType=VARCHAR},
+        productId= #{productId,jdbcType=VARCHAR},
         wk1 = #{wk1,jdbcType=DECIMAL},
         wk2 = #{wk2,jdbcType=DECIMAL},
         wk3 = #{wk3,jdbcType=DECIMAL},
@@ -193,7 +195,7 @@
         and
         normId = #{normId,jdbcType=VARCHAR}
         and
-        namd= #{name,jdbcType=VARCHAR}
+        name= #{name,jdbcType=VARCHAR}
     </update>
 
     <select id="isExit" resultType="int">
@@ -204,12 +206,12 @@
         and
         topicId= #{topicId,jdbcType=VARCHAR}
         and
-        namd= #{name,jdbcType=VARCHAR}
+        name= #{name,jdbcType=VARCHAR}
         and normId= #{normId,jdbcType=VARCHAR}
     </select>
 
     <select id="selectNormDetailByMeetingAndTopicIdAndNormId" resultType="map">
-        select id, meetingId, topicId, normId, year, name, wk1, wk2, wk3, wk4, wk5, wk6, wk7, wk8,
+        select id, meetingId, topicId, normId, year,productId, name, wk1, wk2, wk3, wk4, wk5, wk6, wk7, wk8,
         wk9, wk10, wk11, wk12, wk13, wk14, wk15, wk16, wk17, wk18, wk19, wk20, wk21, wk22,
         wk23, wk24, wk25, wk26, wk27, wk28, wk29, wk30, wk31, wk32, wk33, wk34, wk35, wk36,
         wk37, wk38, wk39, wk40, wk41, wk42, wk43, wk44, wk45, wk46, wk47, wk48, wk49, wk50,

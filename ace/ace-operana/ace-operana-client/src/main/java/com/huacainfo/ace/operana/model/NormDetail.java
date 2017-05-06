@@ -12,6 +12,8 @@ public class NormDetail implements java.io.Serializable {
 
     private String normId;
 
+    private String productId;
+
     private Integer year;
 
     private String name;
@@ -652,5 +654,85 @@ public class NormDetail implements java.io.Serializable {
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    @Override
+    public String toString() {
+        return "NormDetail{" +
+                "id='" + id + '\'' +
+                ", meetingId='" + meetingId + '\'' +
+                ", topicId='" + topicId + '\'' +
+                ", normId='" + normId + '\'' +
+                ", productId='" + productId + '\'' +
+                ", year=" + year +
+                ", name='" + name + '\'' +
+                ", wk1=" + wk1 +
+                ", wk2=" + wk2 +
+                ", wk3=" + wk3 +
+                ", wk4=" + wk4 +
+                ", wk5=" + wk5 +
+                ", wk6=" + wk6 +
+                ", wk7=" + wk7 +
+                ", wk8=" + wk8 +
+                ", wk9=" + wk9 +
+                ", wk10=" + wk10 +
+                ", wk11=" + wk11 +
+                ", wk12=" + wk12 +
+                ", wk13=" + wk13 +
+                ", wk14=" + wk14 +
+                ", wk15=" + wk15 +
+                ", wk16=" + wk16 +
+                ", wk17=" + wk17 +
+                ", wk18=" + wk18 +
+                ", wk19=" + wk19 +
+                ", wk20=" + wk20 +
+                ", wk21=" + wk21 +
+                ", wk22=" + wk22 +
+                ", wk23=" + wk23 +
+                ", wk24=" + wk24 +
+                ", wk25=" + wk25 +
+                ", wk26=" + wk26 +
+                ", wk27=" + wk27 +
+                ", wk28=" + wk28 +
+                ", wk29=" + wk29 +
+                ", wk30=" + wk30 +
+                ", wk31=" + wk31 +
+                ", wk32=" + wk32 +
+                ", wk33=" + wk33 +
+                ", wk34=" + wk34 +
+                ", wk35=" + wk35 +
+                ", wk36=" + wk36 +
+                ", wk37=" + wk37 +
+                ", wk38=" + wk38 +
+                ", wk39=" + wk39 +
+                ", wk40=" + wk40 +
+                ", wk41=" + wk41 +
+                ", wk42=" + wk42 +
+                ", wk43=" + wk43 +
+                ", wk44=" + wk44 +
+                ", wk45=" + wk45 +
+                ", wk46=" + wk46 +
+                ", wk47=" + wk47 +
+                ", wk48=" + wk48 +
+                ", wk49=" + wk49 +
+                ", wk50=" + wk50 +
+                ", wk51=" + wk51 +
+                ", wk52=" + wk52 +
+                ", wk53=" + wk53 +
+                ", createUserId='" + createUserId + '\'' +
+                ", createUserName='" + createUserName + '\'' +
+                ", createDate=" + createDate +
+                ", lastModifyUserId='" + lastModifyUserId + '\'' +
+                ", lastModifyUserName='" + lastModifyUserName + '\'' +
+                ", lastModifyDate=" + lastModifyDate +
+                '}';
     }
 }

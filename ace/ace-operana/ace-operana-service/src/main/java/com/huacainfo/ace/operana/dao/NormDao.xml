@@ -120,7 +120,7 @@
     </select>
     <select id="selectNormByTopicId" resultType="map">
         SELECT @rownum := @rownum+1 AS rownum, t.* FROM (SELECT @rownum:=0) r,(select t.id, t.name, t.category, t.groups, t.deptId, t.calType,t.remark from norm t inner join topic_norm a on
-        t.id=a.normId where a.topicId=#{topicId} and t.status='1') as t
+        t.id=a.normId where a.topicId=#{topicId} and t.status='1') as t order by t.id
 
     </select>
 

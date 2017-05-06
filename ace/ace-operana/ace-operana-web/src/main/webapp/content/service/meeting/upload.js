@@ -1,14 +1,14 @@
 jQuery(function($) {
-	init_uploader();
+	init_uploader(null,null);
 });
 
-function init_uploader(meetingId) {
+function init_uploader(params,url) {
 	$("#uploader").pluploadQueue(
 			{
 				runtimes : 'html5,flash,silverlight,html4',
 				chunk_size : '1mb',
 				unique_names : true,
-				multipart_params : {meetingId:meetingId},
+				multipart_params : params,
 				filters : {
 					max_file_size : '10mb',
 					mime_types : [{
@@ -26,7 +26,7 @@ function init_uploader(meetingId) {
 					quality : 90
 				},
 
-				url : contextPath + '/normData/importXls.do',
+				url : url,
 				flash_swf_url : portalPath
 						+ '/content/plupload-2.1.2/js/Moxie.swf',
 				silverlight_xap_url : portalPath
@@ -63,14 +63,14 @@ function init_uploader(meetingId) {
 	});
 }
 
-function reset_uploader(meetingId) {
-	var uploader = $('#uploader').pluploadQueue();
-	uploader.splice();
-	uploader.refresh();
-	init_uploader(meetingId);
+function reset_uploader(params,url) {
+	//var uploader = $('#uploader').pluploadQueue();
+	//uploader.splice();
+	//uploader.refresh();
+	init_uploader(params,url);
 }
-function upload(meetingId) {
-	reset_uploader(meetingId);
+function upload(params,url) {
+	reset_uploader(params,url);
 	$("#dialog-upload")
 			.removeClass('hide')
 			.dialog(
@@ -92,14 +92,11 @@ function upload(meetingId) {
 									"class" : "btn btn-info btn-xs",
 									id : 'ajax_button',
 									click : function() {
-										reset_uploader(meetingId);
+										reset_uploader(params,url);
 									}
 								}
 
 						]
 					});
 
-}
-function t_export(meetingId){
-   location.href=contextPath+"/normData/exportXls.do?meetingId="+meetingId;
 }

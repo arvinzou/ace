@@ -374,10 +374,13 @@ function viewTopic(meetingId, name) {
 									+ '\')"><span class="badge badge-info">'
 									+ data.owner + '</span></a>');
 					$(row).children('td').eq(3).html(
-                    							'<a href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id
+                    							'<div class="hidden-sm hidden-xs action-buttons"><a class="red" href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id
                     									+ '\',\'' + data.name + '\',\'' + meetingId
-                    									+ '\')"><span class="badge badge-danger">删除</span></a>');
-
+                    									+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>'+'<a class="blue" href="javascript:upload2(\'' + meetingId
+                                                                           									+ '\',\'' + data.id
+                                                                           									+ '\')"><i class="ace-icon fa fa-cloud-upload bigger-130"></i></a>'+'<a class="blue" href="javascript:export2(\'' + meetingId
+                                                                           									+ '\',\'' + data.id
+                                                                           									+ '\')"><i class="ace-icon fa fa-cloud-download bigger-130"></i></a></div>');
 				},
 				"aLengthMenu" : [5, 10, 15, 20],
 				"oLanguage" : {
@@ -822,4 +825,24 @@ $.ajax({
 		}
 	});
 }
+}
+
+function upload1(meetingId){
+    var url=contextPath + '/normData/importXls.do';
+    var params={meetingId:meetingId};
+    upload(params,url)
+}
+
+function upload2(meetingId,topicId){
+    var url=contextPath + '/normDetail/importXls.do';
+    var params={meetingId:meetingId,topicId:topicId};
+    upload(params,url)
+}
+function export1(meetingId){
+   location.href=contextPath+"/normData/exportXls.do?meetingId="+meetingId;
+    alert("正在导出，请稍后.......")
+}
+function export2(meetingId,topicId){
+   location.href=contextPath+"/normDetail/exportXls.do?meetingId="+meetingId+"&topicId="+topicId;
+   alert("正在导出，请稍后.......")
 }
