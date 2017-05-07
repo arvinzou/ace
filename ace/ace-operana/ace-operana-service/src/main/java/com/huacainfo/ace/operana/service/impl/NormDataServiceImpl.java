@@ -161,6 +161,7 @@ public class NormDataServiceImpl implements NormDataService {
 			String calType=(String) o.get("calType");
 			Map<String,Object> tmp=new HashMap<String,Object>();
 			for(int k:wk){
+				cont="";
 				BigDecimal t=(BigDecimal) o.get("wkt"+k);
 				BigDecimal c=(BigDecimal) o.get("wkc"+k);
 				if(calType.equals("1")){
