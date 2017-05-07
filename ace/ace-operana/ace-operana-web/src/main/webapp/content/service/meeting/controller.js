@@ -946,10 +946,10 @@ function userSetting(){
 }
 
 function dataSetting1(_meetingId,_topicId,title){
-    parent.addPanel(title,contextPath+'/dynamic/service/normData/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId,true);
+    parent.addPanel(title+" 指标数据",contextPath+'/dynamic/service/normData/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId,true);
 }
 function dataSetting2(_meetingId,_topicId,title){
-previewNorm(_meetingId,_topicId, title)
+previewNorm(_meetingId,_topicId, title+" 指标列表")
 }
 
 function dataSetting3(_meetingId,_topicId,_normId,title){
@@ -957,6 +957,6 @@ function dataSetting3(_meetingId,_topicId,_normId,title){
     console.log(_topicId);
     console.log(_normId);
     console.log(title);
-    parent.addPanel(title,contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId,true);
+    parent.addPanel(title+" 不良现象",contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId,true);
 }
 
