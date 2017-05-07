@@ -9845,9 +9845,10 @@ $.jgrid.extend({
 						case 'text':
 						case 'password':
 						case 'textarea':
+                            tmp[nm]=$("input,textarea",this).val();
+                            break;
 						case "button" :
-							tmp[nm]=$("input, textarea",this).val();
-							break;
+
 						case 'select':
 							if(!cm.editoptions.multiple) {
 								tmp[nm] = $("select option:selected",this).val();

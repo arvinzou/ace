@@ -376,14 +376,14 @@ function viewTopic(meetingId, name) {
 									+ '\',\'' + data.name + '\',\'' + meetingId
 									+ '\')"><span class="badge badge-info">'
 									+ data.owner + '</span></a>');
-					$(row).children('td').eq(3).html(
-                    							'<div class="hidden-sm hidden-xs action-buttons" style="text-align:right"><a class="red" href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id
-                    									+ '\',\'' + data.name + '\',\'' + meetingId
-                    									+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>'+'<a class="blue" href="javascript:upload2(\'' + meetingId
-                                                                           									+ '\',\'' + data.id
-                                                                           									+ '\')"><i class="ace-icon fa fa-cloud-upload bigger-130"></i></a>'+'<a class="blue" href="javascript:export2(\'' + meetingId
-                                                                           									+ '\',\'' + data.id
-                                                                           									+ '\')"><i class="ace-icon fa fa-cloud-download bigger-130"></i></a></div>');
+					var btn=[];
+					btn.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
+					btn.push('<a class="red" href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id+ '\',\'' + data.name + '\',\'' + meetingId+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>');
+					btn.push('<a class="blue" href="javascript:upload2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-cloud-upload bigger-130"></i></a>');
+					btn.push('<a class="blue" href="javascript:export2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-cloud-download bigger-130"></i></a>');
+					btn.push('<a class="blue" href="javascript:dataSetting(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-cog bigger-130"></i></a>');
+					btn.push('</div>');
+					$(row).children('td').eq(3).html(btn.join(''));
 				},
 				"aLengthMenu" : [5, 10, 15, 20],
 				"oLanguage" : {
@@ -856,4 +856,8 @@ function topicSetting(){
 }
 function userSetting(){
     attendanceCfg(meetingId,_title);
+}
+
+function dataSetting(_meetingId,_topicId){
+    parent.addPanel(_title,contextPath+'/dynamic/service/normData/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId,true);
 }

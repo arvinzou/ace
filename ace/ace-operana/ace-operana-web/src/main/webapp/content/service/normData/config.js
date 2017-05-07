@@ -1,13 +1,13 @@
 var cfg = {};
 cfg.view_load_data_url = contextPath + '/normData/selectNormDataByPrimaryKey.do';
-cfg.grid_load_data_url = contextPath + '/normData/findNormDataList.do';
-cfg.grid_add_data_url = contextPath + '/normData/insertNormData.do';
-cfg.grid_edit_data_url = contextPath + '/normData/updateNormData.do';
+cfg.grid_load_data_url = contextPath + '/normData/findNormDataList.do?meetingId='+meetingId+"&topicId="+topicId;
+cfg.grid_add_data_url = contextPath + '/normData/saveOrUpdateNormData.do';
+cfg.grid_edit_data_url = contextPath + '/normData/saveOrUpdateNormData.do';
 cfg.grid_delete_data_url = contextPath + '/normData/deleteNormDataByNormDataId.do';
 cfg.grid_selector= "#grid-table";
 cfg.pager_selector= "#grid-pager";
 //cfg.caption= "参数";
-cfg.rowNum= default_page_list[0];
+cfg.rowNum= 99999
 cfg.dataId= 'id';
 cfg.gridHeight=window.innerHeight-layoutTopHeight;
 cfg.jgridEditWinWidth=550;

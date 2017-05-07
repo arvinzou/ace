@@ -35,7 +35,7 @@ jQuery(function($) {
 		rownumbers : true,
 		viewrecords : true,
 		rowNum : cfg.rowNum,
-		rowList : default_page_list,
+		rowList : [99999],
 		pager : cfg.pager_selector,
 		altRows : true,
 		// toppager: true,
@@ -43,8 +43,8 @@ jQuery(function($) {
 		multiselect : false,
 		// multikey: "ctrlKey",
 		multiboxonly : true,
-		shrinkToFit:true,
-		autoScroll: false,
+		shrinkToFit:false,
+		autoScroll: true,
 		loadComplete : function() {
 		    $("#grid-pager_left").removeAttr("style");
         	$("#grid-pager_center").removeAttr("style");

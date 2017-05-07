@@ -2,17 +2,10 @@ package com.huacainfo.ace.operana.web.controller;
 
 import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
+
 import javax.servlet.http.HttpServletResponse;
 
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.operana.model.Meeting;
-import com.huacainfo.ace.operana.service.MeetingService;
-import jxl.WorkbookSettings;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +16,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.operana.model.Meeting;
+import com.huacainfo.ace.operana.model.NormData;
+import com.huacainfo.ace.operana.service.MeetingService;
 import com.huacainfo.ace.operana.service.NormDataService;
+import com.huacainfo.ace.operana.vo.NormDataQVo;
+import com.huacainfo.ace.operana.vo.NormDataVo;
 import com.huacainfo.ace.portal.vo.MongoFile;
+import com.huacainfo.ace.common.result.PageResult;
 
 import jxl.CellView;
 import jxl.Workbook;
+import jxl.WorkbookSettings;
 import jxl.format.Colour;
 import jxl.format.UnderlineStyle;
 import jxl.write.*;
@@ -300,5 +303,24 @@ public class NormDataController extends OperanaBaseController {
             row++;
         }
     }
+    @RequestMapping(value = "/findNormDataList.do")
+    @ResponseBody
+    public PageResult<NormDataVo> findNormDataList(NormDataQVo condition,
+                                                   PageParamNoChangeSord page) throws Exception {
+        PageResult<NormDataVo> rst = this.normDataService
+                .findNormDataList(condition, page.getStart(), page.getLimit(),
+                        page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
 
+        return rst;
+    }
+
+    @RequestMapping(value = "/saveOrUpdateNormData.do")
+    @ResponseBody
+    public MessageResponse saveOrUpdateNormData( NormDataVo obj) throws Exception {
+        return this.normDataService
+                .saveOrUpdateNormData(obj, this.getCurUserProp());
+    }
 }

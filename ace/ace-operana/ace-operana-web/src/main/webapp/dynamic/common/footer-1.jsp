@@ -18,14 +18,14 @@
 	src="${portalPath}/content/common/assets/js/gz/jquery-ui.min.js?version=${cfg.version}"></script>
 <script
 	src="${portalPath}/content/common/assets/js/date-time/bootstrap-datepicker.min.js?version=${cfg.version}"></script>
-  
+
 <script
 	src="${portalPath}/content/common/assets/js/gz/jquery.jqGrid.js?version=${cfg.version}"></script>
 
- <!--	
+ <!--
 <script
 	src="${portalPath}/content/common/assets/js/uncompressed/jqGrid/jquery.jqGrid.js?version=6"></script>
-	-->	
+	-->
 <script
 	src="${portalPath}/content/common/assets/js/uncompressed/jqGrid/ui.multiselect.js?version=${cfg.version}"></script>
 	

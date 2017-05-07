@@ -1,8 +1,8 @@
 package com.huacainfo.ace.operana.service.impl;
 
+import java.math.BigDecimal;
 import java.util.*;
 
-import com.huacainfo.ace.operana.dao.MeetingDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +10,17 @@ import org.springframework.stereotype.Service;
 
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.operana.dao.MeetingDao;
 import com.huacainfo.ace.operana.dao.NormDao;
 import com.huacainfo.ace.operana.dao.NormDataDao;
 import com.huacainfo.ace.operana.model.Norm;
 import com.huacainfo.ace.operana.model.NormData;
 import com.huacainfo.ace.operana.service.NormDataService;
+import com.huacainfo.ace.operana.vo.NormDataQVo;
+import com.huacainfo.ace.operana.vo.NormDataVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 @Service("normDataService")
 public class NormDataServiceImpl implements NormDataService {
@@ -144,5 +148,121 @@ public class NormDataServiceImpl implements NormDataService {
 			rst.put((String)o.get("name"),(String)o.get("id"));
 		}
 		return rst;
+	}
+
+	public PageResult<NormDataVo> findNormDataList(NormDataQVo condition, int start, int limit, String orderBy)
+			throws Exception {
+		PageResult<NormDataVo> rst = new PageResult<NormDataVo>();
+		List<NormDataVo> list =new ArrayList<>();
+		List<Map<String,Object>> e=this.normDataDao.findList(condition, start, start + limit, orderBy);
+		for(Map<String,Object> o:e){
+
+			String cont="";
+			String calType=(String) o.get("calType");
+			Map<String,Object> tmp=new HashMap<String,Object>();
+			for(int k:wk){
+				BigDecimal t=(BigDecimal) o.get("wkt"+k);
+				BigDecimal c=(BigDecimal) o.get("wkc"+k);
+				if(calType.equals("1")){
+					if(!CommonUtils.isBlank(t)){
+						cont=t.toString();
+					}
+				}else{
+					if(CommonUtils.isBlank(t)||CommonUtils.isBlank(c)){
+						cont="";
+					}else{
+						cont=c.toString()+"/"+t.toString();
+					}
+				}
+				tmp.put("wk"+k,cont);
+			}
+			NormDataVo vo=new NormDataVo();
+			vo.setId(UUID.randomUUID().toString());
+			CommonBeanUtils.copyMap2Bean(vo,o);
+			CommonBeanUtils.copyMap2Bean(vo,tmp);
+			list.add(vo);
+		}
+
+
+		rst.setRows(list);
+		if (start <= 1) {
+			int allRows = this.normDataDao.findCount(condition);
+			rst.setTotal(allRows);
+		}
+		return rst;
+	}
+
+	public MessageResponse saveOrUpdateNormData(NormDataVo e, UserProp userProp) throws Exception {
+
+		Map<String,Object> row=new HashMap<String,Object>();
+		CommonBeanUtils.copyBean2Map(e,row);
+
+		NormData o=new NormData();
+		o.setId(UUID.randomUUID().toString());
+
+		CommonBeanUtils.copyMap2Bean(o,row);
+		Calendar a=Calendar.getInstance();
+		int year=a.get(Calendar.YEAR);
+		o.setYear(year);
+		this.logger.info(o.toString());
+
+		if (CommonUtils.isBlank(o.getMeetingId())) {
+			return new MessageResponse(1, "会议编码不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getTopicId())) {
+			return new MessageResponse(1, "议题编码不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getNormId())) {
+			return new MessageResponse(1,"指标编码不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getYear())) {
+			return new MessageResponse(1, "年度不能为空！");
+		}
+		Map<String, Object> t = new HashMap<String, Object>();
+		if (e.getCalType().equals("1")) {
+			for (int k : wk) {
+				if(!CommonUtils.isBlank(row.get("wk" + k))){
+					if (!CommonUtils.isNumber((String) row.get("wk" + k))) {
+						return new MessageResponse(1, "wk" + k + "数据格式不正确，必须为数值！");
+					}
+					t.put("wkt" + k, new java.math.BigDecimal((String) row.get("wk" + k)));
+				}
+
+			}
+		} else {
+			for (int k : wk) {
+				if(!CommonUtils.isBlank(row.get("wk" + k))){
+					String s = (String) row.get("wk" + k);
+					if (s.indexOf("/") == -1) {
+						return new MessageResponse(1, "wk" + k + "数据格式不正确，必须为'数字/数字'！");
+					}
+					if (!CommonUtils.isNumber((String) s.split("/")[0])) {
+						return new MessageResponse(1, "wk" + k + "数据格式不正确，必须为数值！");
+					}
+					if (!CommonUtils.isNumber((String) s.split("/")[1])) {
+						return new MessageResponse(1, "wk" + k + "数据格式不正确，必须为数值！");
+					}
+					t.put("wkc" + k, new java.math.BigDecimal(s.split("/")[0]));
+					t.put("wkt" + k, new java.math.BigDecimal(s.split("/")[1]));
+				}
+
+			}
+		}
+		this.logger.info("----------->",t);
+		CommonBeanUtils.copyMap2Bean(o, t);
+		int temp = this.normDataDao.isExit(o);
+		if (temp > 0) {
+			o.setLastModifyDate(new Date());
+			o.setLastModifyUserName(userProp.getName());
+			o.setLastModifyUserId(userProp.getUserId());
+			this.normDataDao.updateByPrimaryKey(o);
+		}else{
+			o.setCreateDate(new Date());
+			o.setCreateUserName(userProp.getName());
+			o.setCreateUserId(userProp.getUserId());
+			this.normDataDao.insert(o);
+		}
+		this.dataBaseLogService.log("更新数据", "会议", "", o.getId(), o.getId(), userProp);
+		return new MessageResponse(0, "跟新数据完成！");
 	}
 }

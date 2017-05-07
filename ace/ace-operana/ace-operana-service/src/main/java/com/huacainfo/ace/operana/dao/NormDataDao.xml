@@ -122,6 +122,9 @@
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.operana.vo.NormDataVo">
+
+    </resultMap>
     <sql id="Base_Column_List">
         id, meetingId, topicId, normId, productId, year, lastYear, wkt1, wkt2, wkt3, wkt4,
         wkt5, wkt6, wkt7, wkt8, wkt9, wkt10, wkt11, wkt12, wkt13, wkt14, wkt15, wkt16, wkt17,
@@ -361,5 +364,29 @@
         t.id=a.normId
         left join (select * from norm_data where meetingId=#{meetingId} and topicId=#{topicId})  b on t.id=b.normId
         where a.topicId=#{topicId} order by t.id
+    </select>
+    <sql id="whereCondition">
+        from norm t inner join topic_norm a on
+        t.id=a.normId
+        left join (select * from norm_data where meetingId=#{condition.meetingId} and topicId=#{condition.topicId})  b on t.id=b.normId
+        where a.topicId=#{condition.topicId}
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultType="map">
+        select * from(
+        select t.id normIds, t.name,t.calType,b.*
+        <include refid="whereCondition"/>) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.id
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 </mapper>
