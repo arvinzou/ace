@@ -319,7 +319,10 @@ public class NormDataController extends OperanaBaseController {
 
     @RequestMapping(value = "/saveOrUpdateNormData.do")
     @ResponseBody
-    public MessageResponse saveOrUpdateNormData( NormDataVo obj) throws Exception {
+    public MessageResponse saveOrUpdateNormData( NormDataVo obj,String oper) throws Exception {
+	    if(oper.equals("del")){
+	        return this.normDataService.deleteNormDataByNormDataId(obj.getId(),this.getCurUserProp());
+        }
         return this.normDataService
                 .saveOrUpdateNormData(obj, this.getCurUserProp());
     }
