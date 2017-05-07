@@ -216,6 +216,8 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     margin-top: 5px;
     padding-bottom: 4px;
     border-bottom: 1px solid #CCC;
+    font-weight:800;
+    font-size:14px;
 }
 .labelItem{
 	width: 180px;

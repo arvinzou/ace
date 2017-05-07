@@ -1,3 +1,4 @@
+var meetingId,topicId,normId,_title;
 jQuery(function($) {
 	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 		_title : function(title) {
@@ -90,6 +91,7 @@ jQuery(function($) {
 });
 
 function preview(id, title) {
+    meetingId=id,_title=title;
 	var dialog = $("#dialog-message-view")
 			.removeClass('hide')
 			.dialog(
@@ -321,6 +323,7 @@ function inertMeetingTopic(id, p) {
 			$("#btn-submit").attr('disabled', true);
 		},
 		success : function(rst, textStatus) {
+		    viewTopic(id, p._q)
 			$("#btn-submit").removeAttr("disabled");
 			alert(rst.errorMessage);
 		},
@@ -374,7 +377,7 @@ function viewTopic(meetingId, name) {
 									+ '\')"><span class="badge badge-info">'
 									+ data.owner + '</span></a>');
 					$(row).children('td').eq(3).html(
-                    							'<div class="hidden-sm hidden-xs action-buttons"><a class="red" href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id
+                    							'<div class="hidden-sm hidden-xs action-buttons" style="text-align:right"><a class="red" href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id
                     									+ '\',\'' + data.name + '\',\'' + meetingId
                     									+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>'+'<a class="blue" href="javascript:upload2(\'' + meetingId
                                                                            									+ '\',\'' + data.id
@@ -670,6 +673,7 @@ function insertMeetingUser(id, p) {
 			$("#btn-submit").attr('disabled', true);
 		},
 		success : function(rst, textStatus) {
+		    viewUser(id);
 			$("#btn-submit").removeAttr("disabled");
 			alert(rst.errorMessage);
 		},
@@ -845,4 +849,11 @@ function export1(meetingId){
 function export2(meetingId,topicId){
    location.href=contextPath+"/normDetail/exportXls.do?meetingId="+meetingId+"&topicId="+topicId;
    alert("正在导出，请稍后.......")
+}
+
+function topicSetting(){
+    topicCfg(meetingId,_title);
+}
+function userSetting(){
+    attendanceCfg(meetingId,_title);
 }

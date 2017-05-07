@@ -19,10 +19,11 @@ pageEncoding="utf-8"%>
 			ul li{list-style:none;}
 			.ulinput{margin-left:50px;}
 
+
 </style>
 <link rel="stylesheet"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
-      type="text/css" media="screen" />
+      type="text/css" media="screen"/>
 <body>
 <div class="page-content">
     <div class="widget-box" id="widget-box">
@@ -134,7 +135,12 @@ pageEncoding="utf-8"%>
             <span id="note"> </span>
         </div>
     </div>
-    <h5 class="header-title">议题</h5>
+    <div>
+        <div class="div-left header-title">议题</div>
+        <div class="div-right header-title">
+            <div style="text-align:right"><a class="blue" href="javascript:topicSetting()"><i class="ace-icon fa fa-cog"></i></a></div>
+        </div>
+    </div>
     <div class="row">
         <form id="fm3">
             <table id="detail"
@@ -145,7 +151,7 @@ pageEncoding="utf-8"%>
 
                     <th>议题名称</th>
                     <th>负责人</th>
-                    <th >操作</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -153,7 +159,12 @@ pageEncoding="utf-8"%>
             </table>
         </form>
     </div>
-    <h5 class="header-title">与会人员</h5>
+    <div>
+        <div class="div-left header-title">与会人员</div>
+        <div class="div-right header-title">
+            <div style="text-align:right"><a class="blue" href="javascript:userSetting()"><i class="ace-icon fa fa-cog"></i></a></div>
+        </div>
+    </div>
     <div class="row">
         <form id="fm4">
             <table id="detail1"
@@ -220,6 +231,7 @@ window.onresize = function () {
 	parent.autoWidth();
 }
 
+
 </script>
 <style>
 .checkboxitem {
@@ -238,6 +250,8 @@ window.onresize = function () {
 	font-weight:800;
 	font-size:14px;
 }
+.div-left{ float:left;width:90%;}
+.div-right{ float:right;width:10%;}
 
 </style>
 </body>
