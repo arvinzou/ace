@@ -58,7 +58,7 @@
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="286">
-              <caret line="951" column="45" lean-forward="false" selection-start-line="951" selection-start-column="45" selection-end-line="951" selection-end-column="45" />
+              <caret line="951" column="38" lean-forward="false" selection-start-line="951" selection-start-column="38" selection-end-line="951" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -2374,13 +2374,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00008" summary="意见反馈调整">
-      <created>1491707101144</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1491707101144</updated>
-    </task>
     <task id="LOCAL-00009" summary="增加portal个性化配置，两种导航方式">
       <created>1492848859576</created>
       <option name="number" value="00009" />
@@ -2717,7 +2710,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494167129215</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="运营数据处理">
+      <created>1494167267972</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1494167267973</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TodoView">
@@ -3495,7 +3495,7 @@
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="951" column="45" lean-forward="false" selection-start-line="951" selection-start-column="45" selection-end-line="951" selection-end-column="45" />
+          <caret line="951" column="38" lean-forward="false" selection-start-line="951" selection-start-column="38" selection-end-line="951" selection-end-column="38" />
           <folding />
         </state>
       </provider>

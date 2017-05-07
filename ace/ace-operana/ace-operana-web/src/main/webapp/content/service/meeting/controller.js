@@ -949,7 +949,7 @@ function dataSetting1(_meetingId,_topicId,title){
     parent.addPanel(title+" 指标数据",contextPath+'/dynamic/service/normData/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId,true);
 }
 function dataSetting2(_meetingId,_topicId,title){
-previewNorm(_meetingId,_topicId, title+" 指标列表")
+previewNorm(_meetingId,_topicId, title)
 }
 
 function dataSetting3(_meetingId,_topicId,_normId,title){
