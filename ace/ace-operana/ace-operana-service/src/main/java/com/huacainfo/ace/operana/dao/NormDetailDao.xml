@@ -218,4 +218,31 @@
         wk51, wk52, wk53 from norm_detail where meetingId=#{meetingId} and topicId=#{topicId} and normId=#{normId} order
         by id
     </select>
+
+    <sql id="whereCondition">
+        from norm_detail  where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
+        and  normId=#{condition.normId}
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultType="map">
+        select * from(
+        select id, meetingId, topicId, normId, year,productId, name, wk1, wk2, wk3, wk4, wk5, wk6, wk7, wk8,
+        wk9, wk10, wk11, wk12, wk13, wk14, wk15, wk16, wk17, wk18, wk19, wk20, wk21, wk22,
+        wk23, wk24, wk25, wk26, wk27, wk28, wk29, wk30, wk31, wk32, wk33, wk34, wk35, wk36,
+        wk37, wk38, wk39, wk40, wk41, wk42, wk43, wk44, wk45, wk46, wk47, wk48, wk49, wk50,
+        wk51, wk52, wk53
+        <include refid="whereCondition"/>) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.id
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 </mapper>

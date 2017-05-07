@@ -378,12 +378,14 @@ function viewTopic(meetingId, name) {
 									+ data.owner + '</span></a>');
 					var btn=[];
 					btn.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
-					btn.push('<a class="red" href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id+ '\',\'' + data.name + '\',\'' + meetingId+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>');
-					btn.push('<a class="blue" href="javascript:upload2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-cloud-upload bigger-130"></i></a>');
-					btn.push('<a class="blue" href="javascript:export2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-cloud-download bigger-130"></i></a>');
-					btn.push('<a class="blue" href="javascript:dataSetting(\'' + meetingId+ '\',\'' + data.id+ '\',\''+ data.name + '\')"><i class="ace-icon fa fa-cog bigger-130"></i></a>');
+					btn.push('<a data-rel="tooltip" data-placement="top" title="删除" class="red" href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id+ '\',\'' + data.name + '\',\'' + meetingId+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>');
+					btn.push('<a data-rel="tooltip" data-placement="top" title="数据导入" class="blue" href="javascript:upload2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-cloud-upload bigger-130"></i></a>');
+					btn.push('<a data-rel="tooltip" data-placement="top" title="数据导出" class="blue" href="javascript:export2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-cloud-download bigger-130"></i></a>');
+					btn.push('<a data-rel="tooltip" data-placement="top" title="编辑指标数据" class="blue" href="javascript:dataSetting1(\'' + meetingId+ '\',\'' + data.id+ '\',\''+ data.name + '\')"><i class="ace-icon fa fa-cog bigger-130"></i></a>');
+					btn.push('<a data-rel="tooltip" data-placement="top" title="编辑异常现象明细数据" class="blue" href="javascript:dataSetting2(\'' + meetingId+ '\',\'' + data.id+ '\',\''+ data.name + '\')"><i class="ace-icon fa fa-cog bigger-130"></i></a>');
 					btn.push('</div>');
 					$(row).children('td').eq(3).html(btn.join(''));
+					$('[data-rel=tooltip]').tooltip();
 				},
 				"aLengthMenu" : [5, 10, 15, 20],
 				"oLanguage" : {
@@ -831,6 +833,91 @@ $.ajax({
 }
 }
 
+function previewNorm(meetingId,topicId, title) {
+	var dialog = $("#dialog-norm")
+			.removeClass('hide')
+			.dialog(
+					{
+						modal : false,
+						width : 800,
+						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
+								+ title + "</div></div>",
+						title_html : true,
+						buttons : [
+
+						{
+							html : "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 关闭",
+							"class" : "btn btn-info btn-xs",
+							click : function() {
+								$(this).dialog("close");
+							}
+						}]
+					});
+	viewNorm(meetingId,topicId,title);
+}
+function viewNorm(meetingId,topicId,title) {
+	var tableId = "detail4";
+	if ($('#' + tableId).hasClass('dataTable')) {
+		dttable = $('#' + tableId).dataTable();
+		dttable.fnClearTable(); // 清空一下table
+		dttable.fnDestroy(); // 还原初始化了的datatable
+	}
+	$('#' + tableId).DataTable(
+			{
+				ajax : {
+					url : contextPath + '/norm/selectNormByTopicId.do?topicId='
+							+ topicId,
+					dataSrc : 'data'
+				},
+				columns : [{
+					data : 'rownum'
+				}, {
+					data : 'name'
+				}, {
+					data : 'remark'
+				}, {
+                 					data : 'remark'
+                 				}],
+				bAutoWidth : false,
+				"fnInitComplete" : function() {
+					this.fnAdjustColumnSizing(true);
+				},
+				"createdRow" : function(row, data, dataIndex) {
+					$(row).children('td').eq(0).attr('style',
+							'text-align: center;font-weight:800');
+					var btn=[];
+                    btn.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
+                    btn.push('<a data-rel="tooltip" data-placement="top" title="编辑异常现象明细数据" class="blue" href="javascript:dataSetting3(\'' + meetingId+ '\',\'' + topicId+ '\',\'' + data.id+ '\',\''+ title + '\')"><i class="ace-icon fa fa-cog bigger-130"></i></a>');
+                    btn.push('</div>');
+
+                    $(row).children('td').eq(3).html(btn.join(''));
+                    $('[data-rel=tooltip]').tooltip();
+
+				},
+				"aLengthMenu" : [5, 10, 15, 20],
+				"oLanguage" : {
+					"sLengthMenu" : "每页显示 _MENU_ 条记录",
+					"sZeroRecords" : "对不起，查询不到任何相关数据",
+					"sInfo" : "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+					"sInfoEmpty" : "第 0 到 0 条记录，共 0 条",
+					"sInfoFiltered" : "数据表中共为 _MAX_ 条记录)",
+					"sProcessing" : "正在加载中...",
+					"sSearch" : "搜索 ",
+					"sUrl" : "",
+					"oPaginate" : {
+						"sFirst" : "",
+						"sPrevious" : "",
+						"sNext" : "",
+						"sLast" : ""
+					},
+					"oAria" : {
+						"sSortAscending" : ": 升序排列",
+						"sSortDescending" : ": 降序排列"
+					}
+				}
+			});
+
+}
 function upload1(meetingId){
     var url=contextPath + '/normData/importXls.do';
     var params={meetingId:meetingId};
@@ -858,6 +945,18 @@ function userSetting(){
     attendanceCfg(meetingId,_title);
 }
 
-function dataSetting(_meetingId,_topicId,title){
+function dataSetting1(_meetingId,_topicId,title){
     parent.addPanel(title,contextPath+'/dynamic/service/normData/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId,true);
 }
+function dataSetting2(_meetingId,_topicId,title){
+previewNorm(_meetingId,_topicId, title)
+}
+
+function dataSetting3(_meetingId,_topicId,_normId,title){
+    console.log(_meetingId);
+    console.log(_topicId);
+    console.log(_normId);
+    console.log(title);
+    parent.addPanel(title,contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId,true);
+}
+

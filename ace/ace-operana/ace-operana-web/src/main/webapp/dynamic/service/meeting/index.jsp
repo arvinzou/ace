@@ -195,6 +195,22 @@ pageEncoding="utf-8"%>
     </div>
 
 </div>
+<div id="dialog-norm" class="hide">
+    <h5 class="header-title">指标</h5>
+    <table id="detail4"
+           class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+            <th class="center" style="width:80px;">序号</th>
+            <th>指标名称</th>
+            <th>说明</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
         src="${portalPath}/content/common/js/xcheck/XCheck.js?version=${cfg.version}"></script>

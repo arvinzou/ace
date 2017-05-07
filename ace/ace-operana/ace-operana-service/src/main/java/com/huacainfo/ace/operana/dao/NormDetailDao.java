@@ -27,7 +27,7 @@ public interface NormDetailDao {
 
     List<Map<String,Object>> selectNormDetailByMeetingAndTopicIdAndNormId(@Param("meetingId") String meetingId, @Param("topicId") String topicId, @Param("normId") String normId);
 
-    List<NormDetailVo> findList(@Param("condition") NormDetailQVo condition, @Param("start") int start,
+    List<Map<String,Object>> findList(@Param("condition") NormDetailQVo condition, @Param("start") int start,
                               @Param("limit") int limit, @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") NormDetailQVo condition);
