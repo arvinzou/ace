@@ -138,7 +138,7 @@ pageEncoding="utf-8"%>
     <div>
         <div class="div-left header-title">议题</div>
         <div class="div-right header-title">
-            <div style="text-align:right"><a class="blue" href="javascript:topicSetting()"><i class="ace-icon fa fa-cog"></i></a></div>
+            <div style="text-align:right"><a data-rel="tooltip" data-placement="top" title="议题设置" class="blue" href="javascript:topicSetting()"><i class="ace-icon fa fa-cog"></i></a></div>
         </div>
     </div>
     <div class="row">
@@ -162,7 +162,7 @@ pageEncoding="utf-8"%>
     <div>
         <div class="div-left header-title">与会人员</div>
         <div class="div-right header-title">
-            <div style="text-align:right"><a class="blue" href="javascript:userSetting()"><i class="ace-icon fa fa-cog"></i></a></div>
+            <div style="text-align:right"><a data-rel="tooltip" data-placement="top" title="与会人员设置" class="blue" href="javascript:userSetting()"><i class="ace-icon fa fa-cog"></i></a></div>
         </div>
     </div>
     <div class="row">

@@ -121,6 +121,7 @@ function preview(id, title) {
 	loadView(id);
 	viewTopic(id);
 	viewUser(id);
+	$('[data-rel=tooltip]').tooltip();
 }
 function loadView(id) {
 	$.ajax({
@@ -364,6 +365,7 @@ function viewTopic(meetingId, name) {
 				bAutoWidth : false,
 				"fnInitComplete" : function() {
 					this.fnAdjustColumnSizing(true);
+					$('[data-rel=tooltip]').tooltip();
 				},
 				"createdRow" : function(row, data, dataIndex) {
 					$(row).children('td').eq(0).attr('style',
@@ -385,7 +387,7 @@ function viewTopic(meetingId, name) {
 					btn.push('<a data-rel="tooltip" data-placement="top" title="编辑异常现象明细数据" class="blue" href="javascript:dataSetting2(\'' + meetingId+ '\',\'' + data.id+ '\',\''+ data.name + '\')"><i class="ace-icon fa fa-cog bigger-130"></i></a>');
 					btn.push('</div>');
 					$(row).children('td').eq(3).html(btn.join(''));
-					$('[data-rel=tooltip]').tooltip();
+
 				},
 				"aLengthMenu" : [5, 10, 15, 20],
 				"oLanguage" : {
@@ -715,6 +717,7 @@ function viewUser(meetingId) {
 				bAutoWidth : false,
 				"fnInitComplete" : function() {
 					this.fnAdjustColumnSizing(true);
+					$('[data-rel=tooltip]').tooltip();
 				},
 				"createdRow" : function(row, data, dataIndex) {
 					$(row).children('td').eq(0).attr('style',
@@ -881,6 +884,7 @@ function viewNorm(meetingId,topicId,title) {
 				bAutoWidth : false,
 				"fnInitComplete" : function() {
 					this.fnAdjustColumnSizing(true);
+					$('[data-rel=tooltip]').tooltip();
 				},
 				"createdRow" : function(row, data, dataIndex) {
 					$(row).children('td').eq(0).attr('style',
@@ -891,7 +895,7 @@ function viewNorm(meetingId,topicId,title) {
                     btn.push('</div>');
 
                     $(row).children('td').eq(3).html(btn.join(''));
-                    $('[data-rel=tooltip]').tooltip();
+
 
 				},
 				"aLengthMenu" : [5, 10, 15, 20],
@@ -916,6 +920,7 @@ function viewNorm(meetingId,topicId,title) {
 					}
 				}
 			});
+
 
 }
 function upload1(meetingId){

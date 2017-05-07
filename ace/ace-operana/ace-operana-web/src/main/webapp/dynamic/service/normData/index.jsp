@@ -19,7 +19,7 @@ var topicId='${param.topicId}';
     <div>
         <div class="div-left header-title-custom">指标数据</div>
         <div class="div-right header-title-custom">
-            <div style="text-align:right"><a class="blue"  href="javascript:reload()" data-rel="tooltip" data-placement="top" title=""><i class="ace-icon glyphicon glyphicon-refresh"></i></a></div>
+            <div style="text-align:right"><a class="blue"  href="javascript:reload()" data-rel="tooltip" data-placement="top" title="刷新"><i class="ace-icon glyphicon glyphicon-refresh"></i></a></div>
         </div>
     </div>
     <div class="action-buttons" >

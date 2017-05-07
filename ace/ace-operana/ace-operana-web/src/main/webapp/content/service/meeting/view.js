@@ -49,6 +49,7 @@ jQuery(function($) {
 		    $("#grid-pager_left").removeAttr("style");
         	$("#grid-pager_center").removeAttr("style");
 			$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
+			$('[data-rel=tooltip]').tooltip();
 			var table = this;
 			setTimeout(function() {
 						styleCheckbox(table);

@@ -4,6 +4,12 @@
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/view.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/view.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/view.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/view.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/view.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/view.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/meeting/index.jsp" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/meeting/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normData/index.jsp" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normData/index.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -44,33 +50,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="74" lean-forward="false" selection-start-line="2" selection-start-column="74" selection-end-line="2" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="951" column="38" lean-forward="false" selection-start-line="951" selection-start-column="38" selection-end-line="951" selection-end-column="38" />
+            <state relative-caret-position="163">
+              <caret line="886" column="54" lean-forward="false" selection-start-line="886" selection-start-column="54" selection-end-line="886" selection-end-column="54" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/meeting/index.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="164" column="98" lean-forward="false" selection-start-line="164" selection-start-column="98" selection-end-line="164" selection-end-column="98" />
+              <folding>
+                <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#form#0;n#div#2;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#4;n#tr#0;n#thead#0;n#table#0;n#form#0;n#div#4;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#6;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normDetail/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="25" column="78" lean-forward="false" selection-start-line="25" selection-start-column="78" selection-end-line="25" selection-end-column="78" />
+            <state relative-caret-position="375">
+              <caret line="27" column="108" lean-forward="false" selection-start-line="27" selection-start-column="108" selection-end-line="27" selection-end-column="108" />
               <folding>
-                <marker date="1494167058000" expanded="true" signature="1362:1466" ph="..." />
+                <marker date="1494169911000" expanded="true" signature="1364:1468" ph="..." />
               </folding>
             </state>
           </provider>
@@ -79,8 +89,28 @@
       <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normData/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="21" column="191" lean-forward="false" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="191" />
+            <state relative-caret-position="1373">
+              <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/view.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="58" column="54" lean-forward="false" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/view.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="57" column="54" lean-forward="false" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -89,7 +119,7 @@
       <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
+            <state relative-caret-position="2400">
               <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="164" selection-end-column="1" />
               <folding />
             </state>
@@ -106,41 +136,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ace-ui-custom.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="225" column="21" lean-forward="false" selection-start-line="225" selection-start-column="21" selection-end-line="225" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="model.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="253" column="49" lean-forward="false" selection-start-line="253" selection-start-column="49" selection-end-line="253" selection-end-column="49" />
+            <state relative-caret-position="417">
+              <caret line="302" column="0" lean-forward="false" selection-start-line="302" selection-start-column="0" selection-end-line="302" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="view.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/view.js">
+        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/view.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="43" column="75" lean-forward="true" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="75" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="model.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/model.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1590">
-              <caret line="106" column="13" lean-forward="false" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="13" />
+            <state relative-caret-position="168">
+              <caret line="51" column="46" lean-forward="false" selection-start-line="51" selection-start-column="46" selection-end-line="51" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -239,7 +249,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/resources/spring/applicationContext.xml" />
         <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-web/src/main/webapp/dynamic/service/writer/index.jsp" />
         <option value="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-web/src/main/webapp/content/service/writer/model.js" />
@@ -270,7 +279,6 @@
         <option value="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/CommonUtils.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/NormDataController.java" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/base.js" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/view.js" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/model.js" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/NormDataServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/vo/NormDetailVo.java" />
@@ -280,16 +288,18 @@
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/NormDetailDao.xml" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/model.js" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/NormDetailController.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/view.js" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/config.js" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/meeting/index.jsp" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/controller.js" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normData/index.jsp" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normDetail/index.jsp" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/controller.js" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/view.js" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/meeting/index.jsp" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normData/index.jsp" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/view.js" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/view.js" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normDetail/index.jsp" />
       </list>
     </option>
   </component>
@@ -2374,13 +2384,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00009" summary="增加portal个性化配置，两种导航方式">
-      <created>1492848859576</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1492848859576</updated>
-    </task>
     <task id="LOCAL-00010" summary="增加新导航模式后调整字典和机构管理的布局">
       <created>1492850016538</created>
       <option name="number" value="00010" />
@@ -2717,7 +2720,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494167267973</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="运营数据处理">
+      <created>1494167342456</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1494167342457</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2821,14 +2831,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/TopicService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/NormService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -2989,14 +2991,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/view.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -3414,26 +3408,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/view.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="43" column="75" lean-forward="true" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1590">
           <caret line="106" column="13" lean-forward="false" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="253" column="49" lean-forward="false" selection-start-line="253" selection-start-column="49" selection-end-line="253" selection-end-column="49" />
           <folding />
         </state>
       </provider>
@@ -3446,10 +3424,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="169" column="16" lean-forward="false" selection-start-line="169" selection-start-column="16" selection-end-line="169" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="302" column="0" lean-forward="false" selection-start-line="302" selection-start-column="0" selection-end-line="302" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/view.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="51" column="46" lean-forward="false" selection-start-line="51" selection-start-column="46" selection-end-line="51" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/meeting/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1798">
-          <caret line="268" column="0" lean-forward="false" selection-start-line="268" selection-start-column="0" selection-end-line="269" selection-end-column="35" />
+        <state relative-caret-position="102">
+          <caret line="164" column="98" lean-forward="false" selection-start-line="164" selection-start-column="98" selection-end-line="164" selection-end-column="98" />
           <folding>
             <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#form#0;n#div#2;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#th#4;n#tr#0;n#thead#0;n#table#0;n#form#0;n#div#4;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -3460,43 +3462,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
+        <state relative-caret-position="2400">
           <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="164" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normData/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="21" column="191" lean-forward="false" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="191" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normDetail/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="25" column="78" lean-forward="false" selection-start-line="25" selection-start-column="78" selection-end-line="25" selection-end-column="78" />
-          <folding>
-            <marker date="1494167058000" expanded="true" signature="1362:1466" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="169" column="16" lean-forward="false" selection-start-line="169" selection-start-column="16" selection-end-line="169" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="951" column="38" lean-forward="false" selection-start-line="951" selection-start-column="38" selection-end-line="951" selection-end-column="38" />
+        <state relative-caret-position="163">
+          <caret line="886" column="54" lean-forward="false" selection-start-line="886" selection-start-column="54" selection-end-line="886" selection-end-column="54" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normDetail/view.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="58" column="54" lean-forward="false" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/normData/view.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="57" column="54" lean-forward="false" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normData/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1373">
+          <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/normDetail/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="27" column="108" lean-forward="false" selection-start-line="27" selection-start-column="108" selection-end-line="27" selection-end-column="108" />
+          <folding>
+            <marker date="1494169911000" expanded="true" signature="1364:1468" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

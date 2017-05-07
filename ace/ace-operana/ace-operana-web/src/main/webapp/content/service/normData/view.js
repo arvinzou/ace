@@ -55,6 +55,7 @@ jQuery(function($) {
 				loadComplete : function() {
 					$("#grid-pager_left").removeAttr("style");
 					$("#grid-pager_center").removeAttr("style");
+					$('[data-rel=tooltip]').tooltip();
 					hideCol();
 					$(cfg.grid_selector).jqGrid('setGridWidth',
 							$(".page-content").width());
