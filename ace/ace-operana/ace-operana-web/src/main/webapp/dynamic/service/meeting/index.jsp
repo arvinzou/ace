@@ -145,7 +145,7 @@ pageEncoding="utf-8"%>
 
                     <th>议题名称</th>
                     <th>负责人</th>
-                    <th style="width:200px;">操作</th>
+                    <th >操作</th>
                 </tr>
                 </thead>
                 <tbody>
