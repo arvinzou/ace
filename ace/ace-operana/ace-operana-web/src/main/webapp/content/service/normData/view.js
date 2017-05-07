@@ -48,7 +48,9 @@ jQuery(function($) {
 		loadComplete : function() {
 		    $("#grid-pager_left").removeAttr("style");
         	$("#grid-pager_center").removeAttr("style");
+        	hideCol();
 			$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
+
 			var table = this;
 			setTimeout(function() {
 						styleCheckbox(table);
@@ -57,6 +59,7 @@ jQuery(function($) {
 						updatePagerIcons(table);
 						enableTooltips(table);
 					}, 0);
+
 		},
 
 		editurl : cfg.grid_edit_data_url,// nothing is saved
@@ -74,6 +77,8 @@ jQuery(function($) {
 			 */
 
 		});
+			 jQuery(cfg.grid_selector).jqGrid('setFrozenColumns');
+
 	$(window).triggerHandler('resize.jqGrid');// trigger window resize to make
 	// the grid get the correct size
 

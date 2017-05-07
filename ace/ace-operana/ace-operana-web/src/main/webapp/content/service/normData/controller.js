@@ -73,10 +73,10 @@ jQuery(function($) {
 							}
 						})
 			});
-    $('#btn-view-del').on(
+	$('#btn-view-del').on(
 			'click',
 			function() {
-				
+
 				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
 						'selrow');
 				if (!gr) {
@@ -99,31 +99,34 @@ jQuery(function($) {
 			});
 });
 
-function preview(id,title){
-        var dialog = $( "#dialog-message-view" ).removeClass('hide').dialog({
-			modal: false,
-			width:800,
-			title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"+title+"</div></div>",
-			title_html: true,
-			buttons: [
+function preview(id, title) {
+	var dialog = $("#dialog-message-view")
+			.removeClass('hide')
+			.dialog(
+					{
+						modal : false,
+						width : 800,
+						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
+								+ title + "</div></div>",
+						title_html : true,
+						buttons : [
 
-				{
-					html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-					"class" : "btn btn-info btn-xs",
-					click: function() {
-                       $( this ).dialog( "close" );
-					}
-				},
-				{
-					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-					"class" : "btn btn-xs",
-					click: function() {
-						$( this ).dialog( "close" );
-					}
-				}
-			]
-		});
-		loadView(id);
+								{
+									html : "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+									"class" : "btn btn-info btn-xs",
+									click : function() {
+										$(this).dialog("close");
+									}
+								},
+								{
+									html : "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
+									"class" : "btn btn-xs",
+									click : function() {
+										$(this).dialog("close");
+									}
+								}]
+					});
+	loadView(id);
 }
 function loadView(id) {
 	$.ajax({
@@ -137,13 +140,16 @@ function loadView(id) {
 		success : function(rst, textStatus) {
 			$.each(rst.value, function(key, value) {
 				if (key == 'category') {
-                	value = rsd(value, '83');
-                }
-                if (key == 'status') {
-                    value = value=="1"?"on":"off";
-                }if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
-                 	value = Common.DateFormatter(value);
-                }
+					value = rsd(value, '83');
+				}
+				if (key == 'status') {
+					value = value == "1" ? "on" : "off";
+				}
+				if (key.indexOf('Date') != -1 || key.indexOf('time') != -1
+						|| key.indexOf('Time') != -1
+						|| key.indexOf('birthday') != -1) {
+					value = Common.DateFormatter(value);
+				}
 				$("#dialog-message-view").find('#' + key).html(value);
 			});
 		},
@@ -151,4 +157,13 @@ function loadView(id) {
 			alert("加载错误！");
 		}
 	});
+}
+function hideCol() {
+    var cwk=theWeek();
+    var c=[];
+    for(var k=(cwk+1);k<=53;k++){
+        c.push("wk"+k)
+    }
+    jQuery(cfg.grid_selector).jqGrid('hideCol',c);
+
 }

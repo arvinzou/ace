@@ -73,7 +73,7 @@ var topicId='${param.topicId}';
 <script
         src="${pageContext.request.contextPath}/content/service/normData/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/normData/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/normData/view.js?version=${cfg.version}&t=1"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
 window.onresize = function () {
