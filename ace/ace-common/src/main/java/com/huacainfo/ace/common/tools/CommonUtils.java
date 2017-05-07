@@ -1,11 +1,5 @@
 package com.huacainfo.ace.common.tools;
 
-import org.apache.commons.lang.CharUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
 import java.io.*;
 import java.lang.reflect.Field;
 import java.security.MessageDigest;
@@ -16,6 +10,13 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.math.BigDecimal;
+
+import org.apache.commons.lang.CharUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -845,11 +846,12 @@ public class CommonUtils extends StringUtils {
             return "";
         }
     }
+    public static String getPrettyNumber(String number) {
+        return BigDecimal.valueOf(Double.parseDouble(number))
+                .stripTrailingZeros().toPlainString();
+    }
     public static void main(String args[]){
-        System.out.println(CommonUtils.isNumber("abc"));
-        System.out.println(CommonUtils.isNumber("100"));
-        System.out.println(CommonUtils.isNumber("100.031"));
-        System.out.println(CommonUtils.isNumber("a100.03"));
+        System.out.println(CommonUtils.getPrettyNumber("8711.1900"));
 
     }
 }

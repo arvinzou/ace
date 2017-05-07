@@ -287,13 +287,13 @@ public class NormDataController extends OperanaBaseController {
                 String cont="";
                 if(calType.equals("1")){
                     if(!CommonUtils.isBlank(t)){
-                        cont=t.toString();
+                        cont=CommonUtils.getPrettyNumber(t.toString());
                     }
                 }else{
                     if(CommonUtils.isBlank(t)||CommonUtils.isBlank(c)){
                         cont="";
                     }else{
-                        cont=c.toString()+"/"+t.toString();
+                        cont=CommonUtils.getPrettyNumber(c.toString())+"/"+CommonUtils.getPrettyNumber(t.toString());
                     }
                 }
                 Label e = new Label(col,row,cont,wcf_grid);
