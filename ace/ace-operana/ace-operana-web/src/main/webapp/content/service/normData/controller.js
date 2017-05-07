@@ -159,11 +159,16 @@ function loadView(id) {
 	});
 }
 function hideCol() {
-    var cwk=theWeek();
-    var c=[];
-    for(var k=(cwk+1);k<=53;k++){
-        c.push("wk"+k)
-    }
-    jQuery(cfg.grid_selector).jqGrid('hideCol',c);
+	var cwk = theWeek();
+	var c = [];
+	for (var k = (cwk + 1); k <= 53; k++) {
+		c.push("wk" + k)
+	}
+	jQuery(cfg.grid_selector).jqGrid('hideCol', c);
+	var ids = $(cfg.grid_selector).getDataIDs();
+	for (var i = 0; i < ids.length; i++) {
+		var rowData = $(cfg.grid_selector).getRowData(ids[i]);
+		$('#' + ids[i]).find("td").addClass("SelectBG");
+	}
 
 }

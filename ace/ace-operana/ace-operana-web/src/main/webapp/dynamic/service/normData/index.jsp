@@ -84,5 +84,16 @@ window.onresize = function () {
 }
 
 </script>
+<style>
+.ui-jqgrid-btable .ui-widget-content.ui-priority-secondary {
+    background-image: none;
+    background-color: #eeeeee;
+    opacity: 1;
+}
+.ui-jqgrid tr.jqgrow, .ui-jqgrid tr.ui-row-ltr, .ui-jqgrid tr.ui-row-rtl {
+    border: none;
+     background-color: #FFFFFF;
+}
+</style>
 </body>
 </html>
