@@ -9,24 +9,10 @@ jQuery(function($) {
 				title.text($title);
 		}
 	}));
-	$('#btn-search').on('click', function() {
-		$('#fm-search').ajaxForm({
-			beforeSubmit : function(formData, jqForm, options) {
-				var params = {};
-				$.each(formData, function(n, obj) {
-					params[obj.name] = obj.value;
-				});
-				$.extend(params, {
-					time : new Date()
-				});
-				// console.log(params);
-				jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-					page : 1,
-					postData : params
-				}).trigger("reloadGrid");
-				return false;
-			}
-		});
+	$('#btn-view-reload').on('click', function() {
+		jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+			page : 1
+		}).trigger("reloadGrid");
 	});
 
 	$('#btn-view-add').on(
@@ -171,4 +157,9 @@ function hideCol() {
 		$('#' + ids[i]).find("td").addClass("SelectBG");
 	}
 
+}
+function reload() {
+	jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+		page : 1
+	}).trigger("reloadGrid");
 }

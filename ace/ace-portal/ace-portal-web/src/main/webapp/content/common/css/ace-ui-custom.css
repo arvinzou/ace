@@ -219,6 +219,15 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     font-weight:800;
     font-size:14px;
 }
+.header-title-custom {
+    line-height: 20px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #CCC;
+    font-weight:800;
+    font-size:14px;
+}
 .labelItem{
 	width: 180px;
 	height: 30px;
@@ -229,3 +238,5 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 	font-weight:800;
 	font-size:14px;
 }
+.div-left{ float:left;width:90%;}
+.div-right{ float:right;width:10%;}

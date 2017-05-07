@@ -29,13 +29,15 @@ jQuery(function($) {
 		});
 	});
 
-	$('#btn-view-add').on(
-			'click',
-			function() {
+	$('#btn-view-add').on('click', function() {
 
-
-						jQuery(cfg.grid_selector).jqGrid('addRowData',uuid(),{id:uuid(),meetingId:meetingId,topicId:topicId,normId:normId});
-			});
+		jQuery(cfg.grid_selector).jqGrid('addRowData', uuid(), {
+			id : uuid(),
+			meetingId : meetingId,
+			topicId : topicId,
+			normId : normId
+		});
+	});
 	$('#btn-view-edit').on(
 			'click',
 			function() {
@@ -159,4 +161,17 @@ function hideCol() {
 		$('#' + ids[i]).find("td").addClass("SelectBG");
 	}
 
+}
+function reload() {
+	jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+		page : 1
+	}).trigger("reloadGrid");
+}
+function add() {
+	jQuery(cfg.grid_selector).jqGrid('addRowData', uuid(), {
+		id : uuid(),
+		meetingId : meetingId,
+		topicId : topicId,
+		normId : normId
+	});
 }
