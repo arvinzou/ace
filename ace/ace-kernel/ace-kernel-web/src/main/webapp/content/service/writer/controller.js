@@ -39,6 +39,7 @@ jQuery(function($) {
 						{
 							closeAfterAdd : true,
 							recreateForm : true,
+							modal:false,
 							viewPagerButtons : false,
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
@@ -74,6 +75,7 @@ jQuery(function($) {
 						{
 							closeAfterAdd : true,
 							recreateForm : true,
+							modal:false,
 							viewPagerButtons : true,
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
