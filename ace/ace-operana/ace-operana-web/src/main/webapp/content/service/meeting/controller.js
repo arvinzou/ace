@@ -892,7 +892,7 @@ function viewNorm(meetingId,topicId,title) {
 					var btn=[];
                     btn.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
                     btn.push('<a data-rel="tooltip" data-placement="top" title="编辑异常现象明细数据" class="blue" href="javascript:dataSetting3(\'' + meetingId+ '\',\'' + topicId+ '\',\'' + data.id+ '\',\''+ title + '\')"><i class="ace-icon fa fa-plus-circle bigger-130"></i></a>');
-                    btn.push('<a data-rel="tooltip" data-placement="top" title="预览" class="blue" href="javascript:previewChart(\'' + meetingId+ '\',\'' + data.id+ '\',\''+ data.name + '\')"><i class="ace-icon fa fa-play bigger-130"></i></a>');
+                    btn.push('<a data-rel="tooltip" data-placement="top" title="预览" class="blue" href="javascript:previewChart(\'' + meetingId+ '\',\'' + topicId+ '\',\''+ data.id + '\')"><i class="ace-icon fa fa-play bigger-130"></i></a>');
                     btn.push('</div>');
 
                     $(row).children('td').eq(3).html(btn.join(''));
@@ -963,5 +963,6 @@ function dataSetting3(_meetingId,_topicId,_normId,title){
     parent.addPanel(title+" 不良现象",contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId,true);
 }
 function previewChart(_meetingId,_topicId,_normId,title){
-    parent.addPanel(title+" 预览",contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId,true);
+    var url=contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId;
+    window.open(url);
 }

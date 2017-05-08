@@ -75,8 +75,8 @@
       <file leaf-file-name="controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="964" column="57" lean-forward="false" selection-start-line="964" selection-start-column="57" selection-end-line="964" selection-end-column="57" />
+            <state relative-caret-position="235">
+              <caret line="894" column="161" lean-forward="false" selection-start-line="894" selection-start-column="161" selection-end-line="894" selection-end-column="161" />
               <folding />
             </state>
           </provider>
@@ -1400,13 +1400,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00013" summary="电桩运营项目初始化">
-      <created>1493096097838</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1493096097838</updated>
-    </task>
     <task id="LOCAL-00014" summary="电桩运营项目初始化">
       <created>1493096166979</created>
       <option name="number" value="00014" />
@@ -1743,7 +1736,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494241342512</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="优化会议建立图标">
+      <created>1494241815481</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1494241815481</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2526,8 +2526,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="964" column="57" lean-forward="false" selection-start-line="964" selection-start-column="57" selection-end-line="964" selection-end-column="57" />
+        <state relative-caret-position="235">
+          <caret line="894" column="161" lean-forward="false" selection-start-line="894" selection-start-column="161" selection-end-line="894" selection-end-column="161" />
           <folding />
         </state>
       </provider>
