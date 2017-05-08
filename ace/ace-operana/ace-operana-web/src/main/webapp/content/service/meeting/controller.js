@@ -963,6 +963,6 @@ function dataSetting3(_meetingId,_topicId,_normId,title){
     parent.addPanel(title+" 不良现象",contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId,true);
 }
 function previewChart(_meetingId,_topicId,_normId,title){
-    var url=contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId;
+    var url=contextPath+'/dynamic/service/preview/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId;
     window.open(url);
 }

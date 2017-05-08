@@ -37,6 +37,9 @@ public class Meeting implements java.io.Serializable{
 
     private Date lastModifyDate;
 
+    private String category;
+    private int cvalue;
+
     public String getId() {
         return id;
     }
@@ -171,5 +174,21 @@ public class Meeting implements java.io.Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getCvalue() {
+        return cvalue;
+    }
+
+    public void setCvalue(int cvalue) {
+        this.cvalue = cvalue;
     }
 }

@@ -180,6 +180,13 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 					o.setName(String.valueOf(i)+"月");
 					list.add(o);
 				}
+			}else if(categoryId.equals("week")){
+				for(int i=1;i<=53;i++){
+					Dict o=new Dict();
+					o.setCode(String.valueOf(i));
+					o.setName(String.valueOf(i)+"周");
+					list.add(o);
+				}
 			}else{
 				list = this.dictMapper.findListByCategoryId(categoryId);
 			}
@@ -261,6 +268,14 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 			months.add(o);
 		}
 		rst.put("month",months);
+		List<Map<String,Object>> week =new ArrayList<Map<String,Object>>();
+		for(int i=1;i<=53;i++){
+			Map<String,Object> o=new HashMap<String,Object>();
+			o.put("CODE",String.valueOf(i));
+			o.put("NAME",String.valueOf(i)+"周");
+			week.add(o);
+		}
+		rst.put("week",week);
 		return rst;
 	}
 	public  List<Tree>  selectDictTreeList(String pid) throws Exception{
