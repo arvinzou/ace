@@ -1,6 +1,6 @@
 var option1 = {
 	title : {
-		x : 'left',
+		x : 'center',
 		text : '',
 		subtext : '',
 		textStyle : {
@@ -43,6 +43,7 @@ var option1 = {
 		}
 	},
 	legend : {
+	x : 'right',
 		data : ['指标值', {
 			name : '目标值',
 			textStyle : {
@@ -103,13 +104,13 @@ var option1 = {
 			},
 			data : [[{
 				name : 'A',
-				value : 0.03,
+				value:0,
 				xAxis : -1,
-				yAxis : 0.03
+				yAxis : 0
 			}, {
 				name : 'B',
-				xAxis : '2017年累计',
-				yAxis : 0.03
+				xAxis : '',
+				yAxis : 0
 			}]]
 		},
 	}, {

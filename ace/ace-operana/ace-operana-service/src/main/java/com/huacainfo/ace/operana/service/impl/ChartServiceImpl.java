@@ -97,6 +97,8 @@ public class ChartServiceImpl implements ChartService {
 		rst.put("index",index);
 		rst.put("name",norm.getName());
 		rst.put("calType",calType);
+		rst.put("xAxis",year+"年累计");
+		rst.put("yAxis",normIndex);
 		return rst;
 	}
 
