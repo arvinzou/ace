@@ -95,8 +95,8 @@ public class ChartServiceImpl implements ChartService {
 		rst.put("dataX",x);
 		rst.put("dataY",y);
 		rst.put("index",index);
-		rst.put("meeting",meeting);
-		rst.put("norm",norm);
+		rst.put("name",norm.getName());
+		rst.put("calType",calType);
 		return rst;
 	}
 
