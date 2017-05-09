@@ -291,5 +291,5 @@ function theWeek() {
     }
     //得到第几周
     var week = Math.round(totalDays / 7);
-    return week;
+    return week+2;
 }
