@@ -21,8 +21,8 @@ var option1 = {
 	grid : {
 		borderWidth : 1,
 		// borderColor:'blue',
-		y : 70,
-		y2 : 70
+		y : 30,
+		y2 : 40
 	},
 	toolbox : {
 		feature : {
@@ -44,12 +44,7 @@ var option1 = {
 	},
 	legend : {
 	x : 'right',
-		data : ['指标值', {
-			name : '目标值',
-			textStyle : {
-				color : '#000000'
-			}
-		}]
+		data : []
 	},
 	xAxis : [{
 		type : 'category',
@@ -113,10 +108,10 @@ var option1 = {
 				yAxis : 0
 			}]]
 		},
-	}, {
+	}/*, {
 		name : '目标值',
 		type : 'line',
 		yAxisIndex : 1,
 		data : []
-	}]
+	}*/]
 };

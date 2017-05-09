@@ -15,11 +15,27 @@ var meetingId='${param.meetingId}';
 var topicId='${param.topicId}';
 var normId='${param.normId}';
 
+
 </script>
 <body>
 <div class="page-content">
-    <div class="row"><div class="col-md-6" id="ct1">ct1</div><div class="col-md-6" id="ct2">ct2</div></div>
-    <div class="row"><div class="col-md-6" id="ct3">ct3</div><div class="col-md-6" id="ct4">ct4</div></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="ct1" class="row"></div>
+            <div class="row">
+                <table id="grid1" class="table" style="width:80%;margin-left:20px;text-align:left">
+
+
+                </table>
+            </div>
+
+        </div>
+        <div class="col-md-6" id="ct2">ct2</div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" id="ct3">ct3</div>
+        <div class="col-md-6" id="ct4">ct4</div>
+    </div>
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script

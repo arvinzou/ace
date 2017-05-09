@@ -63,14 +63,45 @@ function chart1() {
 			option1.xAxis[0].data = rst.dataX;
 			option1.series[0].data = rst.dataY;
 			//option1.series[1].data = rst.index;
-			option1.title.text=rst.name;
-			option1.legend.data[0]=rst.name;
-			option1.series[0].name=rst.name;
-			option1.series[0].markLine.data[0][1].xAxis=rst.xAxis;
-			option1.series[0].markLine.data[0][0].yAxis=rst.yAxis;
-			option1.series[0].markLine.data[0][0].value=rst.yAxis;
-			option1.series[0].markLine.data[0][1].yAxis=rst.yAxis;
-
+			option1.title.text = rst.name;
+			//option1.legend.data[0] = rst.name;
+			option1.series[0].name = rst.name;
+			option1.series[0].markLine.data[0][1].xAxis = rst.xAxis;
+			option1.series[0].markLine.data[0][0].yAxis = rst.yAxis;
+			option1.series[0].markLine.data[0][0].value = rst.yAxis;
+			option1.series[0].markLine.data[0][1].yAxis = rst.yAxis;
+			var html = [];
+			/*html.push("<tr>");
+			html.push("<td style='width:50px'>");
+			html.push('时间');
+			html.push("</td>");
+			$(rst.dataX).each(function(i, o) {
+				html.push("<td>");
+				html.push(o);
+				html.push("</td>");
+			});
+			html.push("</tr>");*/
+			html.push("<tr>");
+            			html.push("<td style='width:100px'>");
+            			html.push(rst.name);
+            			html.push("</td>");
+            			$(rst.dataY).each(function(i, o) {
+            				html.push("<td>");
+            				html.push(o);
+            				html.push("</td>");
+            			});
+            			html.push("</tr>");
+			html.push("<tr>");
+			html.push("<td>");
+			html.push('目标值');
+			html.push("</td>");
+			$(rst.index).each(function(i, o) {
+				html.push("<td>");
+				html.push(o);
+				html.push("</td>");
+			});
+			html.push("</tr>");
+			$("#grid1").html(html.join(""));
 			initMyChar1();
 		}
 	});
@@ -105,6 +136,7 @@ function autosize() {
 	$('#ct1').css("width", charw);
 	$('#ct2').css("height", charh);
 	$('#ct2').css("width", charw);
+
 	if (myChart1) {
 		myChart1.resize();
 	}
