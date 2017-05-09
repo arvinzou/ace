@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.operana.dao.ChartDao">
     <select id="selectNormDataByMeetingIdTopicIdNormId" resultType="map">
-        select id, meetingId, topicId, normId, productId, year, lastYear, wkt1, wkt2, wkt3, wkt4,
+        select lastYear, wkt1, wkt2, wkt3, wkt4,
         wkt5, wkt6, wkt7, wkt8, wkt9, wkt10, wkt11, wkt12, wkt13, wkt14, wkt15, wkt16, wkt17,
         wkt18, wkt19, wkt20, wkt21, wkt22, wkt23, wkt24, wkt25, wkt26, wkt27, wkt28, wkt29,
         wkt30, wkt31, wkt32, wkt33, wkt34, wkt35, wkt36, wkt37, wkt38, wkt39, wkt40, wkt41,
@@ -15,6 +15,11 @@
         meetingId=#{meetingId,jdbcType=VARCHAR}
         and
         topicId= #{topicId,jdbcType=VARCHAR}
+        and normId= #{normId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectNormIndex" resultType="java.math.BigDecimal">
+        select indexValue from norm_cfg where year=#{year}
         and normId= #{normId,jdbcType=VARCHAR}
     </select>
 </mapper>
