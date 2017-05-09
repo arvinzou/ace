@@ -39,7 +39,7 @@ function chart2() {
     			option2.series[0].data = rst.dataY1;
     			option2.series[1].data = rst.dataY2;
     			if(rst.dataX.length<=8){
-    			    option1.series[0].barWidth=40;
+    			   // option1.series[0].barWidth=40;
     			}
     			initMyChar2();
     		}
@@ -70,7 +70,7 @@ function chart1() {
 			    option1.series[0].barWidth=40;
 			}
 			var html = [];
-			/*html.push("<tr>");
+			html.push("<tr>");
 			html.push("<td style='width:50px'>");
 			html.push('时间');
 			html.push("</td>");
@@ -79,7 +79,7 @@ function chart1() {
 				html.push(o);
 				html.push("</td>");
 			});
-			html.push("</tr>");*/
+			html.push("</tr>");
 			html.push("<tr>");
             			html.push("<td style='width:100px'>");
             			html.push(rst.name);

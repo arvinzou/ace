@@ -19,11 +19,11 @@ var option2 = {
 	},
 	calculable : true,
 	grid : {
-		borderWidth : 1,
+		x : 60,
+		x2 : 40,
 		// borderColor:'blue',
-		x : 40,
-		y : 40,
-		y2 : 70
+		y : 30,
+		y2 : 60
 	},
 	toolbox : {
 		feature : {
@@ -68,7 +68,7 @@ var option2 = {
 		type : 'value',
 		name : '',
 		axisLabel : {
-			formatter : '{value} '
+			formatter : '{value}% '
 		},
 		splitLine : {
 			show : false

@@ -22,18 +22,22 @@ var normId='${param.normId}';
     <div class="row">
         <div class="col-md-6">
             <div id="ct1" class="row"></div>
-            <div class="row">
-                <table id="grid1" class="table" style="width:80%;margin-left:20px;text-align:left">
 
-
-                </table>
-            </div>
 
         </div>
         <div class="col-md-6" id="ct2">ct2</div>
     </div>
     <div class="row">
-        <div class="col-md-6" id="ct3">ct3</div>
+        <div class="col-md-6">
+            <div class="row">
+                <table id="grid1" class="table" style="margin-left:20px;text-align:left">
+
+
+                </table>
+            </div>
+            <div class="row" id="ct3"></div>
+
+        </div>
         <div class="col-md-6" id="ct4">ct4</div>
     </div>
 </div>

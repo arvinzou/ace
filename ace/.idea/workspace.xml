@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/common/DataCalUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/01/controller.js" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/01/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/06/config.js" afterPath="$PROJECT_DIR$/ace-gis/ace-gis-web/src/main/webapp/map/gzxnh/06/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/ChartDao.java" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/ChartDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/ChartDao.xml" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/ChartDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/ChartServiceImpl.java" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/ChartServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-1.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-1.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-2.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-2.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/controller.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/controller.js" />
@@ -63,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config-1.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config-1.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-1.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+              <caret line="23" column="14" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -76,8 +70,8 @@
       <file leaf-file-name="config-2.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="23" column="4" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="15" />
+            <state relative-caret-position="277">
+              <caret line="70" column="33" lean-forward="false" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -86,20 +80,20 @@
       <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="129" column="30" lean-forward="true" selection-start-line="129" selection-start-column="30" selection-end-line="129" selection-end-column="30" />
+            <state relative-caret-position="314">
+              <caret line="81" column="31" lean-forward="true" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/preview/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="45" column="80" lean-forward="false" selection-start-line="45" selection-start-column="80" selection-end-line="45" selection-end-column="80" />
+            <state relative-caret-position="169">
+              <caret line="32" column="55" lean-forward="false" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
               <folding>
-                <element signature="n#style#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -296,11 +290,11 @@
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/DataCalUtils.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/common/DataCalUtils.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/ChartDao.xml" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/preview/index.jsp" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/ChartServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/controller.js" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-2.js" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-1.js" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-2.js" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/controller.js" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/preview/index.jsp" />
       </list>
     </option>
   </component>
@@ -1689,13 +1683,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00025" summary="电装运营会议建立">
-      <created>1493629466628</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1493629466628</updated>
-    </task>
     <task id="LOCAL-00026" summary="电装运营会议建立">
       <created>1493630089423</created>
       <option name="number" value="00026" />
@@ -2032,7 +2019,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494316072134</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="四版图趋势图">
+      <created>1494339565092</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1494339565097</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2558,16 +2552,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/preview/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="45" column="80" lean-forward="false" selection-start-line="45" selection-start-column="80" selection-end-line="45" selection-end-column="80" />
-          <folding>
-            <element signature="n#style#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/ChartServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -2589,27 +2573,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/controller.js">
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="129" column="30" lean-forward="true" selection-start-line="129" selection-start-column="30" selection-end-line="129" selection-end-column="30" />
+        <state relative-caret-position="136">
+          <caret line="23" column="14" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="4" lean-forward="true" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="15" />
+        <state relative-caret-position="277">
+          <caret line="70" column="33" lean-forward="false" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/config-1.js">
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/preview/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+        <state relative-caret-position="314">
+          <caret line="81" column="31" lean-forward="true" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/preview/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="32" column="55" lean-forward="false" selection-start-line="32" selection-start-column="55" selection-end-line="32" selection-end-column="55" />
+          <folding>
+            <element signature="n#style#0;n#table#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
