@@ -22,4 +22,12 @@
         select indexValue from norm_cfg where year=#{year}
         and normId= #{normId,jdbcType=VARCHAR}
     </select>
+    <select id="selectTop10Problem" resultType="map">
+        SELECT name,wk${cwk}  'values' from norm_detail
+        where
+        meetingId=#{meetingId,jdbcType=VARCHAR}
+        and
+        topicId= #{topicId,jdbcType=VARCHAR}
+        and normId= #{normId,jdbcType=VARCHAR} order by wk${cwk} desc limit 0,10
+    </select>
 </mapper>

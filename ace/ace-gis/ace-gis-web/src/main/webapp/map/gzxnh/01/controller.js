@@ -202,7 +202,7 @@ function initDataBar(isInit) {
 			// console.log(rst.datax);
 			optionBar.xAxis[0].data = rst.datax;
 			optionBar.series[0].data = rst.datay;
-			optionBar.title.text = areaName + "贵州参合情况统计(单位：万人)";
+			optionBar.title.text = areaName + "参合情况统计(单位：万人)";
 			optionBar.title.subtext = new Date().Format("yyyy-MM-dd h:mm");
 			if (isInit) {
 				if (myChartBar && myChartBar.dispose) {

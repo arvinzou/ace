@@ -43,6 +43,8 @@ var normId='${param.normId}';
 <script
         src="${pageContext.request.contextPath}/content/service/preview/config-1.js?version=${cfg.version}"></script>
 <script
+        src="${pageContext.request.contextPath}/content/service/preview/config-2.js?version=${cfg.version}"></script>
+<script
         src="${pageContext.request.contextPath}/content/service/preview/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/preview/view.js?version=${cfg.version}&t=1"></script>

@@ -20,6 +20,8 @@ var option1 = {
 	calculable : true,
 	grid : {
 		borderWidth : 1,
+			x : 60,
+			x2 : 20,
 		// borderColor:'blue',
 		y : 30,
 		y2 : 40

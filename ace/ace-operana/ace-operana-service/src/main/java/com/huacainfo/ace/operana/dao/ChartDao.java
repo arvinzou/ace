@@ -12,4 +12,6 @@ public interface ChartDao {
     Map<String,java.math.BigDecimal> selectNormDataByMeetingIdTopicIdNormId(@Param("meetingId") String meetingId, @Param("topicId") String topicId, @Param("normId") String normId);
 
     java.math.BigDecimal selectNormIndex( @Param("year") int year, @Param("normId") String normId);
+
+    List<Map<String,Object>> selectTop10Problem(@Param("meetingId") String meetingId, @Param("topicId") String topicId, @Param("normId") String normId, @Param("cwk") String cwk);
 }

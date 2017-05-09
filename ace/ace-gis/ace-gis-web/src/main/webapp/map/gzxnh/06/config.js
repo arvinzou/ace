@@ -340,7 +340,7 @@ var optionPieolds = {
 var optionBar = {
 	title : {
 		x : 'center',
-		text : '违规情况统计(单位：人次)',
+		text : '违规情况统计(单位：万元)',
 		subtext : '2015年9月',
 		textStyle : {
 			color : '#FFFFFF'
@@ -421,7 +421,7 @@ var optionBar = {
 		}
 	} ],
 	series : [ {
-		name : '审核违规情况（单位：人次）',
+		name : '审核违规情况（单位：万元）',
 		type : 'bar',
 		barWidth : 25,
 		itemStyle : {

@@ -3,7 +3,7 @@ jQuery(function($) {
 });
 function initData() {
 	chart1();
-	//chart2();
+    chart2();
 	//chart3();
 }
 function initMyChar1() {
@@ -15,39 +15,35 @@ function initMyChar1() {
 	myChart1.setOption(option1, true);
 	myChart1.hideLoading();
 }
+function initMyChar2() {
+	if (myChart2 && myChart2.dispose) {
+		myChart2.dispose();
+	}
+	myChart2 = echarts.init(document.getElementById('ct2'), curTheme);
+	window.onresize = myChart2.resize;
+	myChart2.setOption(option2, true);
+	myChart2.hideLoading();
+}
 
 function chart2() {
-	$
-			.ajax({
-				type : "post",
-				url : contextPath + '/homeChart/selectWorkData.do',
-				success : function(rst) {
-					var html = new Array();
-					var k = 0;
-					for ( var i in rst.value) {
-						var o = rst.value[i];
-						k++;
-
-						html.push('<tr>');
-						html.push('<td width="60px">');
-						html.push('<span class="badge badge-info">' + (k)
-								+ '</span> ');
-
-						html.push('</td>');
-						html.push('<td align="left">')
-						html.push(o.name);
-						html.push('</td>');
-						html.push('<td>');
-						html.push('<span class="badge badge-danger">');
-						html.push(o.value);
-						html.push('</span>  ');
-						html.push('</td>');
-						html.push('</tr>');
-					}
-					$('#work-list-grid').html(html.join(''));
-
-				}
-			});
+	$.ajax({
+    		type : "post",
+    		url : contextPath + '/chart/chart2.do',
+    		data : {
+    			meetingId : meetingId,
+    			topicId : topicId,
+    			normId : normId
+    		},
+    		success : function(rst) {
+    			option2.xAxis[0].data = rst.dataX;
+    			option2.series[0].data = rst.dataY1;
+    			option2.series[1].data = rst.dataY2;
+    			if(rst.dataX.length<=8){
+    			    option1.series[0].barWidth=40;
+    			}
+    			initMyChar2();
+    		}
+    	});
 }
 
 function chart1() {
@@ -132,8 +128,8 @@ window.onresize = function() {
 function autosize() {
 	var h = window.innerHeight;
 	var w = window.innerWidth;
-	var charh = 250;
-	var charw = parseInt($(".page-content").width() / 2) - 40;
+	var charh = 300;
+	var charw = parseInt(w / 2) - 20;
 	charh = parseInt(charw * 0.5);
 	$('#ct1').css("height", charh);
 	$('#ct1').css("width", charw);
