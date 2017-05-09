@@ -63,6 +63,9 @@ function chart1() {
 			option1.xAxis[0].data = rst.dataX;
 			option1.series[0].data = rst.dataY;
 			//option1.series[1].data = rst.index;
+			option1.title.text=rst.name;
+			option1.legend.data[0]=rst.name;
+			option1.series[0].name=rst.name;
 
 			initMyChar1();
 		}
