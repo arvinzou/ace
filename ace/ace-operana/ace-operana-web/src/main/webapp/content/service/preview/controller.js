@@ -70,6 +70,9 @@ function chart1() {
 			option1.series[0].markLine.data[0][0].yAxis = rst.yAxis;
 			option1.series[0].markLine.data[0][0].value = rst.yAxis;
 			option1.series[0].markLine.data[0][1].yAxis = rst.yAxis;
+			if(rst.dataX.length<=8){
+			    option1.series[0].barWidth=40;
+			}
 			var html = [];
 			/*html.push("<tr>");
 			html.push("<td style='width:50px'>");

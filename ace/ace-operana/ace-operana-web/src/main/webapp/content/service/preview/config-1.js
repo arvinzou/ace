@@ -66,7 +66,7 @@ var option1 = {
 	series : [{
 		name : '指标值',
 		type : 'bar',
-		barWidth : 40,
+		//barWidth : 40,
 		data : [],
 		itemStyle : {
 			normal : {
