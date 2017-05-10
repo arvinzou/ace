@@ -2,22 +2,25 @@ package com.huacainfo.ace.operana.model;
 
 import java.util.Date;
 
-public class Norm implements java.io.Serializable {
+public class Tpa implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
-
     private String id;
 
-    private String name;
+    private String meetingId;
 
-    private String category;
+    private String topicId;
 
-    private String groups;
+    private String normId;
 
-    private String deptId;
+    private String productId;
 
-    private String calType;
+    private String probDiscri;
 
-    private String pcode;
+    private String probAnsys;
+
+    private String actions;
+
+    private String liable;
 
     private String status;
 
@@ -33,8 +36,6 @@ public class Norm implements java.io.Serializable {
 
     private Date lastModifyDate;
 
-    private String remark;
-
     public String getId() {
         return id;
     }
@@ -43,52 +44,68 @@ public class Norm implements java.io.Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getName() {
-        return name;
+    public String getMeetingId() {
+        return meetingId;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setMeetingId(String meetingId) {
+        this.meetingId = meetingId == null ? null : meetingId.trim();
     }
 
-    public String getCategory() {
-        return category;
+    public String getTopicId() {
+        return topicId;
     }
 
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
+    public void setTopicId(String topicId) {
+        this.topicId = topicId == null ? null : topicId.trim();
     }
 
-    public String getGroups() {
-        return groups;
+    public String getNormId() {
+        return normId;
     }
 
-    public void setGroups(String groups) {
-        this.groups = groups == null ? null : groups.trim();
+    public void setNormId(String normId) {
+        this.normId = normId == null ? null : normId.trim();
     }
 
-    public String getDeptId() {
-        return deptId;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setDeptId(String deptId) {
-        this.deptId = deptId == null ? null : deptId.trim();
+    public void setProductId(String productId) {
+        this.productId = productId == null ? null : productId.trim();
     }
 
-    public String getCalType() {
-        return calType;
+    public String getProbDiscri() {
+        return probDiscri;
     }
 
-    public void setCalType(String calType) {
-        this.calType = calType == null ? null : calType.trim();
+    public void setProbDiscri(String probDiscri) {
+        this.probDiscri = probDiscri == null ? null : probDiscri.trim();
     }
 
-    public String getPcode() {
-        return pcode;
+    public String getProbAnsys() {
+        return probAnsys;
     }
 
-    public void setPcode(String pcode) {
-        this.pcode = pcode == null ? null : pcode.trim();
+    public void setProbAnsys(String probAnsys) {
+        this.probAnsys = probAnsys == null ? null : probAnsys.trim();
+    }
+
+    public String getActions() {
+        return actions;
+    }
+
+    public void setActions(String actions) {
+        this.actions = actions == null ? null : actions.trim();
+    }
+
+    public String getLiable() {
+        return liable;
+    }
+
+    public void setLiable(String liable) {
+        this.liable = liable == null ? null : liable.trim();
     }
 
     public String getStatus() {
@@ -145,13 +162,5 @@ public class Norm implements java.io.Serializable {
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
     }
 }

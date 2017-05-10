@@ -26,7 +26,7 @@ var normId='${param.normId}';
 
 
         </div>
-        <div class="col-md-6" id="ct2">ct2</div>
+        <div class="col-md-6" id="ct2"></div>
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -45,7 +45,7 @@ var normId='${param.normId}';
             </div>
 
         </div>
-        <div class="col-md-6" id="ct4">ct4</div>
+        <div class="col-md-6" id="ct4"></div>
     </div>
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>

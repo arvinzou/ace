@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.operana.dao.TpaDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.operana.model.Tpa">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="meetingId" jdbcType="VARCHAR" property="meetingId" />
+    <result column="topicId" jdbcType="VARCHAR" property="topicId" />
+    <result column="normId" jdbcType="VARCHAR" property="normId" />
+    <result column="productId" jdbcType="VARCHAR" property="productId" />
+    <result column="probDiscri" jdbcType="VARCHAR" property="probDiscri" />
+    <result column="probAnsys" jdbcType="VARCHAR" property="probAnsys" />
+    <result column="actions" jdbcType="VARCHAR" property="actions" />
+    <result column="liable" jdbcType="VARCHAR" property="liable" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.operana.vo.TpaVo">
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable,
+    status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+    lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tpa
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tpa
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    insert into tpa (id, meetingId, topicId,
+      normId, productId, probDiscri,
+      probAnsys, actions, liable,
+      status, createUserId, createUserName,
+      createDate, lastModifyUserId, lastModifyUserName,
+      lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{meetingId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR},
+      #{normId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{probDiscri,jdbcType=VARCHAR},
+      #{probAnsys,jdbcType=VARCHAR}, #{actions,jdbcType=VARCHAR}, #{liable,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    update tpa
+    set meetingId = #{meetingId,jdbcType=VARCHAR},
+      topicId = #{topicId,jdbcType=VARCHAR},
+      normId = #{normId,jdbcType=VARCHAR},
+      productId = #{productId,jdbcType=VARCHAR},
+      probDiscri = #{probDiscri,jdbcType=VARCHAR},
+      probAnsys = #{probAnsys,jdbcType=VARCHAR},
+      actions = #{actions,jdbcType=VARCHAR},
+      liable = #{liable,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where  probDiscri=#{probDiscri} and meetingId=#{meetingId} and topicId=#{topicId}
+    and  normId=#{normId}
+  </update>
+  <sql id="whereCondition">
+    from (select meetingId, topicId, normId,productId, name,${orderBy} from norm_detail  where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
+    and  normId=#{condition.normId}) t left join (select meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable,
+    status from tpa where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
+    and  normId=#{condition.normId})a on (t.meetingId=a.meetingId and t.topicId=a.topicId and t.normId=a.normId and t.name=a.probDiscri)
+    left join portal.users b on a.liable=b.user_id
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+  <select id="findList" resultMap="BaseResultMapVo">
+
+    select
+    t.meetingId, t.topicId, t.normId, t.productId, t.name probDiscri, a.probAnsys, a.actions, a.liable,
+    a.status,t.${orderBy},ifnull(b.name,'') userName
+    <include refid="whereCondition"/>
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY t.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.${orderBy}
+      </otherwise>
+    </choose>
+
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+  </select>
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    tpa where
+    probDiscri=#{probDiscri} and meetingId=#{meetingId} and topicId=#{topicId}
+    and  normId=#{normId}
+  </select>
+</mapper>

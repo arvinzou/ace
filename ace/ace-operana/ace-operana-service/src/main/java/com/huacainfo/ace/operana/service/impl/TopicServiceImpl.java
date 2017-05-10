@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.huacainfo.ace.operana.dao.MeetingDao;
+import com.huacainfo.ace.operana.model.Meeting;
 import com.huacainfo.ace.operana.model.TopicNorm;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -32,12 +34,14 @@ public class TopicServiceImpl implements TopicService {
 	private TopicDao topicDao;
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
-
+	@Autowired
+	private MeetingDao meetingDao;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	public PageResult<TopicVo> findTopicList(TopicQVo condition, int start, int limit, String orderBy)
 			throws Exception {
+
 		PageResult<TopicVo> rst = new PageResult<TopicVo>();
 		List<TopicVo> list = this.topicDao.findList(condition, start, start + limit, orderBy);
 		rst.setRows(list);

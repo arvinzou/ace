@@ -204,7 +204,7 @@ pageEncoding="utf-8"%>
             <th class="center" style="width:80px;">序号</th>
             <th>指标名称</th>
             <th>说明</th>
-            <th style="width:50px;">操作</th>
+            <th style="width:100px;">操作</th>
         </tr>
         </thead>
         <tbody>
