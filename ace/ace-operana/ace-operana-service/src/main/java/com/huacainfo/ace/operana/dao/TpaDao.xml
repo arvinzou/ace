@@ -83,7 +83,7 @@
   <select id="findList" resultMap="BaseResultMapVo">
 
     select
-    t.meetingId, t.topicId, t.normId, t.productId, t.name probDiscri, a.probAnsys, a.actions, a.liable,
+    t.meetingId, t.topicId, t.normId, ifnull(a.productId,t.productId) productId, t.name probDiscri, a.probAnsys, a.actions, a.liable,
     a.status,t.${orderBy},ifnull(b.name,'') userName
     <include refid="whereCondition"/>
     <choose>

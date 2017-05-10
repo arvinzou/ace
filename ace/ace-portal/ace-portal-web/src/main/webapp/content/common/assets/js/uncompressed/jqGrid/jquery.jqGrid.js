@@ -9620,7 +9620,7 @@ $.jgrid.extend({
 
 		// End compatible
 		return this.each(function(){
-			var $t = this, nm, tmp, editable, cnt=0, focus=null, svr={}, ind,cm, bfer,_id;
+			var $t = this, nm, tmp, editable, cnt=0, focus=null, svr={}, ind,cm, bfer,_id,vl;
 			if (!$t.grid ) { return; }
 			ind = $($t).jqGrid("getInd",rowid,true);
 			if( ind === false ) {return;}
@@ -9636,6 +9636,7 @@ $.jgrid.extend({
 					nm = cm[i].name;
 					//扩充行编辑器
 					_id='#'+rowid+"_"+nm;
+
 					var treeg = $t.p.treeGrid===true && nm === $t.p.ExpandColumn;
 					if(treeg) { tmp = $("span:first",this).html();}
 					else {
@@ -9656,64 +9657,9 @@ $.jgrid.extend({
 							if(!cm[i].edittype) { cm[i].edittype = "text"; }
 							if(tmp === "&nbsp;" || tmp === "&#160;" || (tmp.length===1 && tmp.charCodeAt(0)===160) ) {tmp='';}
 							var elc = $.jgrid.createEl.call($t,cm[i].edittype,opt,tmp,true,$.extend({},$.jgrid.ajaxOptions,$t.p.ajaxSelectOptions || {}));
-							//
-							if( $.inArray(cm[i].edittype, ['combotree','combogrid','datetimebox','datebox','combobox']) > -1) {
-								switch (cm[i].edittype) {
-									case "combogrid":
-										if(cm[i].dataoptions){
-											if(cm[i].dataoptions.url&&p.selrow){
-												//var r=$($t).jqGrid("getRowData",p.selrow);
-												//console.log(r);
-												if(cm[i].dataoptions.url.indexOf("?")>-1){
-													cm[i].dataoptions.url=cm[i].dataoptions.url.split("?")[0]+"?id="+vl;
-												}else{
-													cm[i].dataoptions.url=cm[i].dataoptions.url+"?id="+vl
-												}
-												console.log(this.dataoptions.url);
-											}
-										}
-										$(_id).combogrid(
-												cm[i].dataoptions	
-										);
-										if(vl.indexOf(',')!=-1){
-											$(_id).combogrid(
-													'setValues',vl.split(',')
-											);
-										}
-									break;
-									case "combotree":
-										$(_id).combotree(
-												cm[i].dataoptions	
-										);
-										if(vl.indexOf(',')!=-1){
-											$(_id).combotree(
-													'setValues',vl.split(',')
-											);
-										}
-										
-									break;
-									case "datebox":
-										$(_id).datebox(
-												cm[i].dataoptions	
-										);
-									break;
-									case "datetimebox":
-										$(_id).datetimebox(
-												cm[i].dataoptions	
-										);
-									break;
-									case "combobox":
-										$(_id).combobox(
-												cm[i].dataoptions	
-										);
-										if(vl.indexOf(',')!=-1){
-											$(_id).combobox(
-													'setValues',vl.split(',')
-											);
-										}
-									break;
-								}
-							}
+
+							vl=tmp;
+
 							//---------------
 							$(elc).addClass("editable");
 							if(treeg) { $("span:first",this).append(elc); }
@@ -9723,6 +9669,65 @@ $.jgrid.extend({
 							if(cm[i].edittype === "select" && cm[i].editoptions!==undefined && cm[i].editoptions.multiple===true  && cm[i].editoptions.dataUrl===undefined && $.jgrid.msie) {
 								$(elc).width($(elc).width());
 							}
+							if( $.inArray(cm[i].edittype, ['combotree','combogrid','datetimebox','datebox','combobox']) > -1) {
+                            								console.log(cm[i].edittype);
+                            								switch (cm[i].edittype) {
+                            									case "combogrid":
+                            										if(cm[i].dataoptions){
+                            											if(cm[i].dataoptions.url&&$t.p.selrow){
+                            												//var r=$($t).jqGrid("getRowData",p.selrow);
+                            												if(cm[i].dataoptions.url.indexOf("?")>-1){
+                            													cm[i].dataoptions.url=cm[i].dataoptions.url.split("?")[0]+"?id="+vl;
+                            												}else{
+                            													cm[i].dataoptions.url=cm[i].dataoptions.url+"?id="+vl
+                            												}
+                            												console.log(cm[i].dataoptions.url);
+                            											}
+                            										}
+                            										console.log(_id);
+                            										console.log(cm[i].dataoptions);
+                            										$(_id).combogrid(
+                            												cm[i].dataoptions
+                            										);
+                            										if(vl.indexOf(',')!=-1){
+                            											$(_id).combogrid(
+                            													'setValues',vl.split(',')
+                            											);
+                            										}
+                            									break;
+                            									case "combotree":
+                            										$(_id).combotree(
+                            												cm[i].dataoptions
+                            										);
+                            										if(vl.indexOf(',')!=-1){
+                            											$(_id).combotree(
+                            													'setValues',vl.split(',')
+                            											);
+                            										}
+
+                            									break;
+                            									case "datebox":
+                            										$(_id).datebox(
+                            												cm[i].dataoptions
+                            										);
+                            									break;
+                            									case "datetimebox":
+                            										$(_id).datetimebox(
+                            												cm[i].dataoptions
+                            										);
+                            									break;
+                            									case "combobox":
+                            										$(_id).combobox(
+                            												cm[i].dataoptions
+                            										);
+                            										if(vl.indexOf(',')!=-1){
+                            											$(_id).combobox(
+                            													'setValues',vl.split(',')
+                            											);
+                            										}
+                            									break;
+                            								}
+                            							}
 							cnt++;
 						}
 					}
@@ -9966,6 +9971,7 @@ $.jgrid.extend({
 				$("#lui_"+$.jgrid.jqID($t.p.id)).show();
 				tmp3 = $.extend({},tmp,tmp3);
 				tmp3[idname] = $.jgrid.stripPref($t.p.idPrefix, tmp3[idname]);
+				$.extend(tmp3,$t.p.formData);
 				$.ajax($.extend({
 					url:o.url,
 					data: $.isFunction($t.p.serializeRowData) ? $t.p.serializeRowData.call($t, tmp3) : tmp3,
