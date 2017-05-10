@@ -258,3 +258,10 @@ function autosize() {
 	}
 
 }
+function reload() {
+	chart4();
+}
+function add() {
+	var url=contextPath+'/dynamic/service/tpa/index.jsp?meetingId='+meetingId+'&topicId='+topicId+'&normId='+normId;
+    window.open(url);
+}

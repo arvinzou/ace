@@ -46,7 +46,20 @@ var normId='${param.normId}';
 
         </div>
         <div class="col-md-6" id="ct4">
-
+            <div style="padding-left:30px">
+                <div class="div-left header-title-custom">TOP问题分析</div>
+                <div class="div-right header-title-custom">
+                    <div style="text-align:right"><a class="blue" href="javascript:add()" data-rel="tooltip" data-placement="top"
+                                                     title="任务分配"><i class="ace-icon fa fa-plus-square"></i></a>
+                        <a class="blue" href="javascript:reload()" data-rel="tooltip" data-placement="top" title="刷新"><i
+                                class="ace-icon glyphicon glyphicon-refresh"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <a>
+                </a>
+            </div>
             <table id="grid3" class="table table-bordered table-hover" style="margin-left:20px;text-align:left">
 
 
@@ -67,6 +80,8 @@ var normId='${param.normId}';
         src="${pageContext.request.contextPath}/content/service/preview/view.js?version=${cfg.version}&t=1"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <style>
+.div-left{ float:left;width:90%;}
+.div-right{ float:right;width:10%;}
 </style>
 
 </body>

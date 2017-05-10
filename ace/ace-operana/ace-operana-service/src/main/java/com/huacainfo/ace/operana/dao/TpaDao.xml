@@ -72,7 +72,7 @@
   <sql id="whereCondition">
     from (select meetingId, topicId, normId,productId, name,${orderBy} from norm_detail  where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
     and  normId=#{condition.normId}) t left join (select meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable,
-    status,lastModifyDate from tpa where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
+    status,lastModifyDate,id from tpa where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
     and  normId=#{condition.normId})a on (t.meetingId=a.meetingId and t.topicId=a.topicId and t.normId=a.normId and t.name=a.probDiscri)
     left join portal.users b on a.liable=b.user_id
   </sql>
@@ -84,7 +84,7 @@
 
     select
     t.meetingId, t.topicId, t.normId, ifnull(a.productId,t.productId) productId, t.name probDiscri, a.probAnsys, a.actions, a.liable,
-    a.status,t.${orderBy},ifnull(b.name,'') userName,a.lastModifyDate
+    a.status,t.${orderBy},ifnull(b.name,'') userName,a.lastModifyDate,a.id
     <include refid="whereCondition"/>
     <choose>
       <when test='orderBy!=null and orderBy!=""'>
