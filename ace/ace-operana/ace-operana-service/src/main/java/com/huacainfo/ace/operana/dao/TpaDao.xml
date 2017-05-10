@@ -63,9 +63,6 @@
       actions = #{actions,jdbcType=VARCHAR},
       liable = #{liable,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}

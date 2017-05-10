@@ -8171,6 +8171,9 @@ $.jgrid.extend({
 					}
 					var aftersavefunc=$($t).jqGrid('getGridParam','aftersavefunc');
 					console.log(_operurl);
+					//chenxiaoke add postData
+					$.extend(postdata,$($t).jqGrid('getGridParam','formData'));
+
 					var ajaxOptions = $.extend({
 						url: _operurl,
 						type: rp_ge[$t.p.id].mtype,
@@ -9806,18 +9809,18 @@ $.jgrid.extend({
 				if ( nm !== 'cb' && nm !== 'subgrid' && cm.editable===true && nm !== 'rn' && !$(this).hasClass('not-editable-cell')) {
 					switch (cm.edittype) {
 					case "combogrid":
-						var tmp=$(_id).combogrid('getValues');
-						if(tmp&&tmp.length>1){
-							tmp[nm]=tmp.join(',');
+						var t=$(_id).combogrid('getValues');
+						if(t&&t.length>1){
+							tmp[nm]=t.join(',');
 						}else{
 							tmp[nm]=$(_id).combogrid('getValue');
 						}
 						tmp2[nm]=$(_id).combogrid('getText');
 					break;
 					case "combotree":
-						var tmp=$(_id).combotree('getValues');
-						if(tmp&&tmp.length>1){
-							tmp[nm]=tmp.join(',');
+						var t=$(_id).combotree('getValues');
+						if(t&&t.length>1){
+							tmp[nm]=t.join(',');
 							
 						}else{
 							tmp[nm]=$(_id).combotree('getValue');
