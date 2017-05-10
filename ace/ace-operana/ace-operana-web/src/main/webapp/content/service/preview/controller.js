@@ -5,6 +5,7 @@ function initData() {
 	chart1();
 	chart2();
 	chart3();
+	chart4();
 }
 function initMyChar1() {
 	if (myChart1 && myChart1.dispose) {
@@ -171,7 +172,73 @@ function chart3() {
 				}
 			});
 }
-
+function chart4() {
+	$
+			.ajax({
+				type : "post",
+				url : contextPath + '/chart/chart4.do',
+				data : {
+					meetingId : meetingId,
+					topicId : topicId,
+					normId : normId
+				},
+				success : function(rst) {
+					var html = [];
+					html
+							.push("<tr style='background:#3D7878;text-align:center;font-weight:800;'>");
+					html.push("<td colspan='" + (rst.item.length)
+							+ "' style='color:#FFFFFF'>");
+					html.push("TOP问题分析");
+					html.push("</td>");
+					html
+							.push("<tr style='background:#336666;text-align:center;font-weight:800;'>");
+					$(rst.itemName)
+							.each(
+									function(i, o) {
+										html
+												.push("<td style='color:#FFFFFF;font-weight:800'>");
+										html.push(o);
+										html.push("</td>");
+									});
+					html.push("</tr>");
+					$(rst.data)
+							.each(
+									function(i, e) {
+										html.push("<tr>");
+										$(rst.item)
+												.each(
+														function(i, o) {
+															var background = "";
+															if (o == rst.cwk) {
+																background = "background:#006000;color:#FFFFFF;";
+															}
+															if (o == 'probDiscri') {
+																background = "background:#FFFF6F";
+															}
+															if (o == 'status') {
+																if (e[o] == 'OPEN') {
+																	background = "background:red";
+																}
+																if (e[o] == 'CLOSED') {
+																	background = "background:green";
+																}
+																if (e[o] == 'NODOING') {
+																	background = "background:#FFFF6F";
+																}
+															}
+															html
+																	.push("<td style='font-weight:800;"
+																			+ background
+																			+ "'>");
+															html.push(e[o]);
+															html.push("</td>");
+														});
+										html.push("</tr>");
+									});
+					$("#grid3").html(html.join(""));
+				}
+			});
+}
 window.onresize = function() {
 	autosize()
 }

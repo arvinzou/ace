@@ -180,7 +180,38 @@ public class ChartServiceImpl implements ChartService {
 
 	@Override
 	public Map<String,Object> chart4(String meetingId,String topicId,String normId) throws Exception {
-		return null;
+		Meeting meeting=this.meetingDao.selectByPrimaryKey(meetingId);
+		int cwk=meeting.getCvalue();
+		List<String> item=new ArrayList<String>();
+		List<String> itemName=new ArrayList<String>();
+		List<Map<String,Object>> e=this.chartDao.selectTpa(meetingId,topicId,normId,"wk"+cwk);
+		Map<String,Object> rst=new HashMap<String,Object>();
+		item.add("probDiscri");
+		itemName.add("问题");
+
+		item.add("productId");
+		itemName.add("产品编码");
+
+		item.add("probAnsys");
+		itemName.add("原因分析");
+
+		item.add("actions");
+		itemName.add("改善措施");
+
+		item.add("userName");
+		itemName.add("责任人");
+
+		item.add("lastModifyDate");
+		itemName.add("完成日期");
+
+		item.add("status");
+		itemName.add("状态");
+
+		rst.put("data",e);
+		rst.put("item",item);
+		rst.put("itemName",itemName);
+		rst.put("cwk","wk"+cwk);
+		return rst;
 	}
 
 

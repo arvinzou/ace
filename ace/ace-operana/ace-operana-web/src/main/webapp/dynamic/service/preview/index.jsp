@@ -45,7 +45,13 @@ var normId='${param.normId}';
             </div>
 
         </div>
-        <div class="col-md-6" id="ct4"></div>
+        <div class="col-md-6" id="ct4">
+
+            <table id="grid3" class="table table-bordered table-hover" style="margin-left:20px;text-align:left">
+
+
+            </table>
+        </div>
     </div>
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>

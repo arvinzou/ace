@@ -44,4 +44,16 @@
         topicId= #{topicId,jdbcType=VARCHAR}
         and normId= #{normId,jdbcType=VARCHAR} order by wk${cwk} desc
     </select>
+    <select id="selectTpa" resultType="map">
+        select
+        t.meetingId, t.topicId, t.normId, ifnull(a.productId,t.productId) productId, t.name probDiscri, a.probAnsys, a.actions, a.liable,
+        c.name status,t.${cwk},ifnull(b.name,'') userName,DATE_FORMAT(a.lastModifyDate,'%Y-%m-%d') lastModifyDate
+        from (select meetingId, topicId, normId,productId, name,${cwk} from norm_detail  where meetingId=#{meetingId} and topicId=#{topicId}
+        and  normId=#{normId}) t left join (select meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable,
+        status,lastModifyDate from tpa where meetingId=#{meetingId} and topicId=#{topicId}
+        and  normId=#{normId})a on (t.meetingId=a.meetingId and t.topicId=a.topicId and t.normId=a.normId and t.name=a.probDiscri)
+        left join portal.users b on a.liable=b.user_id
+        left join (select code,name from portal.dict where category_id='92') c on a.status=c.code
+        ORDER BY t.${cwk} desc
+    </select>
 </mapper>
