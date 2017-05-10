@@ -1,7 +1,7 @@
 var option2 = {
 	title : {
 		x : 'center',
-		text : 'TOP问题分析',
+		text : 'TOP10问题分析',
 		subtext : '',
 		textStyle : {
 			color : '#000000'

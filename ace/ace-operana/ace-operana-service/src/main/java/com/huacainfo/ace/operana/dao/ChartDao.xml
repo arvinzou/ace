@@ -30,4 +30,18 @@
         topicId= #{topicId,jdbcType=VARCHAR}
         and normId= #{normId,jdbcType=VARCHAR} order by wk${cwk} desc limit 0,10
     </select>
+
+    <select id="selectTop10ProblemDetail" resultType="map">
+        SELECT
+        <foreach collection="list" item="item" index="index"
+                 separator="," open="" close="">
+            ${item}
+        </foreach>
+        from norm_detail
+        where
+        meetingId=#{meetingId,jdbcType=VARCHAR}
+        and
+        topicId= #{topicId,jdbcType=VARCHAR}
+        and normId= #{normId,jdbcType=VARCHAR} order by wk${cwk} desc
+    </select>
 </mapper>

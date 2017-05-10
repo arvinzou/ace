@@ -16,6 +16,7 @@ var topicId='${param.topicId}';
 var normId='${param.normId}';
 
 
+
 </script>
 <body>
 <div class="page-content">
@@ -30,12 +31,18 @@ var normId='${param.normId}';
     <div class="row">
         <div class="col-md-6">
             <div class="row">
-                <table id="grid1" class="table" style="margin-left:20px;text-align:left">
+                <table id="grid1" class="table table-bordered" style="margin-left:20px;text-align:left">
 
 
                 </table>
             </div>
-            <div class="row" id="ct3"></div>
+            <div class="row" id="ct3">
+                <table id="grid2" class="table table-bordered table-hover" style="margin-left:20px;text-align:left">
+
+
+                </table>
+
+            </div>
 
         </div>
         <div class="col-md-6" id="ct4">ct4</div>
@@ -53,6 +60,8 @@ var normId='${param.normId}';
 <script
         src="${pageContext.request.contextPath}/content/service/preview/view.js?version=${cfg.version}&t=1"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
+<style>
+</style>
 
 </body>
 </html>

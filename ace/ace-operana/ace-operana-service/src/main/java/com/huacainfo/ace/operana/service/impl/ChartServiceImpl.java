@@ -139,7 +139,43 @@ public class ChartServiceImpl implements ChartService {
 
 	@Override
 	public Map<String,Object> chart3(String meetingId,String topicId,String normId) throws Exception {
-		return null;
+		Meeting meeting=this.meetingDao.selectByPrimaryKey(meetingId);
+		int cwk=meeting.getCvalue();
+		List<String> item=new ArrayList<String>();
+		List<String> itemName=new ArrayList<String>();
+		Map<String,Object> rst=new HashMap<String,Object>();
+		int a=cwk-12;
+		if(a<=0){
+			a=1;
+		}
+		item.add("name");
+		itemName.add("不良现象");
+		for(int i=a;i<=cwk;i++){
+			item.add("wk"+i);
+			itemName.add("WK"+i);
+		}
+		List<Map<String,Object>> e=this.chartDao.selectTop10ProblemDetail(meetingId,topicId,normId,String.valueOf(cwk),item);
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+
+		for(Map<String,Object> o:e){
+			java.math.BigDecimal total=new java.math.BigDecimal(0);
+			for(String m:item){
+				if(!m.equals("name")){
+					java.math.BigDecimal s=(java.math.BigDecimal)o.get(m);
+					total=total.add(s);
+				}
+
+			}
+			o.put("total",total);
+			list.add(o);
+		}
+		item.add("total");
+		itemName.add("累计");
+		rst.put("item",item);
+		rst.put("itemName",itemName);
+		rst.put("data",list);
+		rst.put("cwk","wk"+cwk);
+		return rst;
 	}
 
 	@Override
