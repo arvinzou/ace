@@ -11,4 +11,6 @@ public interface MeetingUserDao {
     int deleteByMeetingIdAndUserId(@Param("userId")String userId, @Param("meetingId")String meetingId);
 
     int updateMandatory(@Param("userId")String userId, @Param("meetingId")String meetingId, @Param("mandatory")String mandatory);
+
+    int updatePresent(@Param("userId")String userId, @Param("meetingId")String meetingId, @Param("present")String present);
 }

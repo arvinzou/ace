@@ -46,5 +46,8 @@ public interface MeetingService {
 	public abstract MessageResponse updateMandatory(String userId,String meetingId,String mandatory, UserProp userProp)throws Exception;
 
 	public abstract MessageResponse deleteByMeetingIdAndUserId(String meetingId,String userId, UserProp userProp)throws Exception;
+
+
+	public abstract MessageResponse updatePresent(String meetingId,List<Map<String,Object>> list, UserProp userProp)throws Exception;
 	
 }

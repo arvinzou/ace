@@ -309,4 +309,14 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 
+	public  MessageResponse updatePresent(String meetingId,List<Map<String,Object>> list, UserProp userProp)throws Exception{
+		for(Map<String,Object> o:list){
+			this.meetingUserDao.updatePresent((String) o.get("userId"),meetingId,(String) o.get("present"));
+		}
+		this.dataBaseLogService.log("签到", "会议", "", meetingId, meetingId, userProp);
+		return new MessageResponse(0, "成功！");
+
+	}
+
+
 }

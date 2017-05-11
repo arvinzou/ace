@@ -1,5 +1,6 @@
 package com.huacainfo.ace.operana.web.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.operana.model.MeetingTopic;
 import com.huacainfo.ace.operana.model.MeetingUser;
@@ -21,6 +22,8 @@ import com.huacainfo.ace.operana.service.MeetingService;
 import com.huacainfo.ace.operana.vo.MeetingVo;
 import com.huacainfo.ace.operana.vo.MeetingQVo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -151,6 +154,26 @@ public class MeetingController extends OperanaBaseController {
 	@ResponseBody
 	public  MessageResponse deleteByMeetingIdAndUserId(String meetingId,String userId) throws Exception{
 		return this.meetingService.deleteByMeetingIdAndUserId(meetingId,userId,this.getCurUserProp());
+	}
+
+	@RequestMapping(value = "/updatePresent.do")
+	@ResponseBody
+	public  MessageResponse updatePresent(String text) throws Exception{
+		this.logger.info("{}",text);
+		JSONObject o=JSON.parseObject(text);
+		String meetingId=o.getString("meetingId");
+		JSONArray list=o.getJSONArray("list");
+		List<Map<String,Object>> item=new ArrayList<Map<String,Object>>();
+		for(Object e:list){
+			JSONObject json=(JSONObject)e;
+			Map<String,Object> map=new HashMap<String,Object>();
+			String userId=json.getString("userId");
+			String present=json.getString("present");
+			map.put("userId",userId);
+			map.put("present",present);
+			item.add(map);
+		}
+		return this.meetingService.updatePresent(meetingId,item,this.getCurUserProp());
 	}
 
 }

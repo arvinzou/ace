@@ -665,17 +665,30 @@ function viewUser(meetingId) {
 													+ '\')"><span class="badge badge-info">'
 													+ data.mandatory
 													+ '</span></a>');
-							$(row)
-									.children('td')
-									.eq(4)
-									.html(
-											'<a href="javascript:deleteByMeetingIdAndUserId(\''
-													+ data.user_id
-													+ '\',\''
-													+ data.name
-													+ '\',\''
-													+ meetingId
-													+ '\')"><span class="badge badge-danger">删除</span></a>');
+
+							var html=[];
+							var present="checked";
+							var absent="";
+							var justified="";
+							//alert(data.present);
+							if(data.present=='Present'){
+							    present="checked";
+							}
+							if(data.present=='Absent'){
+                            	absent="checked";
+                            }if(data.present=='Justified'){
+                                justified="checked";
+                            }
+							html.push('<input type="radio" id="'+data.user_id+'Present" name="'+data.user_id+'" value="Present" '+present+'/>');
+							html.push('<lable for="'+data.user_id+'Present">Present</lable>  ');
+
+							html.push('<input type="radio" id="'+data.user_id+'Absent" name="'+data.user_id+'" value="Absent" '+absent+'/>');
+                            html.push('<lable for="'+data.user_id+'Absent">Absent</lable>  ');
+
+                            html.push('<input type="radio" id="'+data.user_id+'Justified" name="'+data.user_id+'" value="Justified" '+justified+'/>');
+                            html.push('<lable for="'+data.user_id+'Justified">Justified</lable>');
+
+							$(row).children('td').eq(4).html(html.join(''));
 
 						},
 						"aLengthMenu" : [5, 10, 15, 20],
@@ -700,6 +713,26 @@ function viewUser(meetingId) {
 							}
 						}
 					});
+
+					$('#fm4').ajaxForm({
+                    			beforeSubmit : function(formData, jqForm, options) {
+                    				var params = {};
+                    				var list = [];
+                    				$.each(formData, function(n, obj) {
+                    				    if(obj.name!='detail1_length'){
+                    				        params[obj.name] = obj.value;
+                    				        list.push({userId:obj.name,present:obj.value});
+                    				    }
+
+                    				});
+                    				var data={};
+                    				data.meetingId=meetingId;
+                    				data.list=list;
+                    				console.log(data);
+                                    updatePresent(data);
+                    				return false;
+                    			}
+                    		});
 
 }
 function updateMandatory(userId, mandatory, meetingId) {
@@ -1032,4 +1065,29 @@ $.ajax({
 }
 function act3(){
 viewMeeting($('#nav-search-input').val());
+}
+function updatePresent(data) {
+
+	$.ajax({
+		type : "post",
+		url : contextPath + "/meeting/updatePresent.do",
+		data : {text:JSON.stringify(data)
+		},
+		beforeSend : function(XMLHttpRequest) {
+
+		},
+		success : function(rst, textStatus) {
+		    viewUser(data.meetingId);
+			alert(rst.errorMessage);
+
+
+		},
+		error : function() {
+
+			alert("加载错误！");
+		}
+	});
+}
+function presentSetting(){
+    $("#fm4").submit();
 }

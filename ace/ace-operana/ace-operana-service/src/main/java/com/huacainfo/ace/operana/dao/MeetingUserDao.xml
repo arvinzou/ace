@@ -29,5 +29,9 @@
    update meeting_user set  mandatory=#{mandatory,jdbcType=VARCHAR} where  meetingId= #{meetingId,jdbcType=VARCHAR} and userId=#{userId,jdbcType=VARCHAR}
 
   </update>
+  <update id="updatePresent">
+    update meeting_user set  present=#{present,jdbcType=VARCHAR} where  meetingId= #{meetingId,jdbcType=VARCHAR} and userId=#{userId,jdbcType=VARCHAR}
+
+  </update>
 
 </mapper>

@@ -124,7 +124,7 @@
                 ORDER BY m.${orderBy}
             </when>
             <otherwise>
-                ORDER BY m.createDate
+                ORDER BY m.meetingDate desc
             </otherwise>
         </choose>
 
@@ -195,6 +195,7 @@
         SELECT
         b.name roleName,
         t.name,
+        a.present,
         a.mandatory,
         t.user_id
         FROM

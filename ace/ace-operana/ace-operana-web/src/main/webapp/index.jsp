@@ -129,13 +129,15 @@ pageEncoding="utf-8"%>
                 <div>
                     <div class="div-left header-title">与会人员</div>
                     <div class="div-right header-title">
-                        <div style="text-align:right"><a data-rel="tooltip" data-placement="top" title="与会人员设置"
+                        <div style="text-align:right"><a data-rel="tooltip" data-placement="top" title="保存签到信息"
+                                                         class="blue" href="javascript:presentSetting()"><i
+                                class="ace-icon fa fa-save"></i></a>  <a data-rel="tooltip" data-placement="top" title="与会人员设置"
                                                          class="blue" href="javascript:userSetting()"><i
                                 class="ace-icon fa fa-plus-circle"></i></a></div>
                     </div>
                 </div>
                 <div class="row">
-                    <form id="fm4">
+                    <form id="fm4" onsubmit="return false">
                         <table id="detail1"
                                class="table table-striped table-bordered table-hover">
                             <thead>
@@ -145,7 +147,7 @@ pageEncoding="utf-8"%>
                                 <th>职务</th>
                                 <th>姓名</th>
                                 <th>是否必须</th>
-                                <th style="width:80px;">操作</th>
+                                <th style="width:200px;">Present</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -178,6 +180,9 @@ pageEncoding="utf-8"%>
                     <tbody>
                     </tbody>
                 </table>
+            </div>
+            <div id="dialog-meeting-singin" class="hide">
+
             </div>
 
         </div>
