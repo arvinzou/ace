@@ -20,6 +20,8 @@ pageEncoding="utf-8"%>
 
 
 
+
+
 </style>
 <link rel="stylesheet"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
@@ -32,13 +34,22 @@ pageEncoding="utf-8"%>
     <div class="row">
         <div class="col-md-3">
 
-            <div class="div-left header-title-custom">即将进行的会议</div>
-            <div class="div-right header-title-custom">
-                <div style="text-align:right">
-                    <a class="blue" href="javascript:viewMeeting()" data-rel="tooltip" data-placement="top" title="刷新"><i
-                            class="ace-icon glyphicon glyphicon-refresh"></i></a>
+
+                <div class="div-left header-title-custom">即将进行的会议</div>
+                <div class="div-right header-title-custom">
+                    <div style="text-align:right">
+                        <a class="blue" href="javascript:viewMeeting()" data-rel="tooltip" data-placement="top"
+                           title="刷新"><i
+                                class="ace-icon glyphicon glyphicon-refresh"></i></a>
+                    </div>
                 </div>
+
+            <div style="padding-bottom:5px;margin-top:5px">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
+                       autocomplete="off"/>
+                <a class="green" href="javascript:act3()"><i class="ace-icon fa fa-search nav-search-icon"></i></a>
             </div>
+
             <table id="meeting-grid" class="table table-bordered">
 
 
@@ -249,6 +260,8 @@ font-weight:800;
 .nav-search-input{
     width: 90%;
 }
+
+
 </style>
 </body>
 </html>

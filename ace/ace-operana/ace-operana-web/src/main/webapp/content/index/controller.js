@@ -963,10 +963,7 @@ function viewMeeting(name) {
 		},
 		success : function(rst) {
 			var html = [];
-			html.push("<tr><td style='height:30px'>");
-                        html.push(' <input type="text" placeholder="搜索 ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />');
-                        html.push('  <a class="green" href="javascript:act3()"><i class="ace-icon fa fa-search nav-search-icon"></i></a>');
-            			html.push("</td></tr>");
+
 
 			$(rst.rows).each(function(i, o) {
 			    if(i==0){
