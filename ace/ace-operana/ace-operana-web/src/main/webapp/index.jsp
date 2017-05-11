@@ -229,15 +229,15 @@ font-weight:800;
 font-size:16px;
 }
 .meeting2{
-font-size:14px;
+font-size:12px;
 }
 .meeting3{
-font-size:14px;
+font-size:12px;
 font-weight:800;
 }
 .meeting4{
-	margin: 5px;
-	padding: 5px;
+	margin: 2px;
+	padding: 2px;
 }
 .nav-search-input{
     width: 90%;

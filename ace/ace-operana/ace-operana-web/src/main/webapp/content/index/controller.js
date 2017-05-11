@@ -962,7 +962,7 @@ function viewMeeting() {
 		success : function(rst) {
 			var html = [];
 			$(rst.rows).each(function(i, o) {
-				html.push("<tr><td style='height:80px'>");
+				html.push("<tr><td style='height:60px'>");
                 html.push("<div class='row'>");
 
 				html.push("<div class='col-md-8'>");
@@ -987,10 +987,10 @@ function viewMeeting() {
                 html.push("<div class='col-md-4'><div class='meeting4'>");
 
                 html.push('<a class="green" href="javascript:ac1()" data-rel="tooltip" data-placement="top" title="Lanuch"><i class="ace-icon fa fa-play bigger-180"></i></a>');
-               html.push('   <a class="blue" href="javascript:ac2()" data-rel="tooltip" data-placement="top" title="View"><i class="ace-icon fa fa-chevron-circle-down bigger-180"></i></a>');
+               html.push('<br> Lanuch');
                html.push('<br>');
                html.push('<a class="red" href="javascript:ac3()" data-rel="tooltip" data-placement="top" title="Stop"><i class="ace-icon fa fa-stop bigger-180"></i></a>');
-               html.push('   <a class="green" href="javascript:ac4()" data-rel="tooltip" data-placement="top" title="Actions"><i class="ace-icon fa fa-chevron-circle-right bigger-180"></i></a>');
+               html.push('<br> Stop  ');
                 html.push("</div></div>");
                 html.push("</div>");
 
