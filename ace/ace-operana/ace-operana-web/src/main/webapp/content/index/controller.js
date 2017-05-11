@@ -955,20 +955,63 @@ function previewTpa(_meetingId, _topicId, _normId, title) {
 function viewMeeting() {
 	$.ajax({
 		type : "post",
-		url : contextPath + '/chart/chart4.do',
+		url : contextPath + '/meeting/findMeetingList.do',
 		data : {
-		meetingId : '1493463925789',
-        topicId : '1493192488266',
-        normId : '1493176260925'
+			name : ''
 		},
 		success : function(rst) {
 			var html = [];
-			$(rst.itemName).each(function(i, o) {
-				html.push("<tr><td>");
-				html.push(o);
+			$(rst.rows).each(function(i, o) {
+				html.push("<tr><td style='height:80px'>");
+                html.push("<div class='row'>");
+
+				html.push("<div class='col-md-8'>");
+				html.push("<div class='meeting1'>");
+				html.push(o.meetingDate);
+				html.push("</div>");
+				html.push("<div class='meeting2'>");
+                html.push(o.divisionName);
+                html.push(' ');
+                html.push(o.site);
+                html.push("</div>");
+                html.push("<div class='meeting2'>");
+                html.push('<a class="blue" href="javascript:previewMeeting()"');
+                html.push(' data-rel="tooltip" data-placement="right" title="'+o.discribtion+'">');
+                html.push(o.name);
+                html.push("</a>");
+                html.push("</div>");
+                html.push("<div class='meeting3'>");
+                html.push(o.ownerName);
+                html.push("</div>");
+                html.push("</div>");
+                html.push("<div class='col-md-4'><div class='meeting4'>");
+
+                html.push('<a class="green" href="javascript:ac1()" data-rel="tooltip" data-placement="top" title="Lanuch"><i class="ace-icon fa fa-play bigger-180"></i></a>');
+               html.push('   <a class="blue" href="javascript:ac2()" data-rel="tooltip" data-placement="top" title="View"><i class="ace-icon fa fa-chevron-circle-down bigger-180"></i></a>');
+               html.push('<br>');
+               html.push('<a class="red" href="javascript:ac3()" data-rel="tooltip" data-placement="top" title="Stop"><i class="ace-icon fa fa-stop bigger-180"></i></a>');
+               html.push('   <a class="green" href="javascript:ac4()" data-rel="tooltip" data-placement="top" title="Actions"><i class="ace-icon fa fa-chevron-circle-right bigger-180"></i></a>');
+                html.push("</div></div>");
+                html.push("</div>");
+
+
+
+
 				html.push("</td></tr>");
 			});
+			html.push("<tr><td style='height:30px'>");
+
+
+
+            html.push(' <input type="text" placeholder="搜索 ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />');
+            html.push('<i class="ace-icon fa fa-search nav-search-icon"></i>');
+
+
+
+
+			html.push("</td></tr>");
 			$("#meeting-grid").html(html.join(""));
+			$('[data-rel=tooltip]').tooltip();
 		}
 	});
 }

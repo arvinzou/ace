@@ -19,6 +19,7 @@ pageEncoding="utf-8"%>
 
 
 
+
 </style>
 <link rel="stylesheet"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
@@ -223,7 +224,24 @@ pageEncoding="utf-8"%>
 }
 .div-left{ float:left;width:90%;}
 .div-right{ float:right;width:10%;}
-
+.meeting1{
+font-weight:800;
+font-size:16px;
+}
+.meeting2{
+font-size:14px;
+}
+.meeting3{
+font-size:14px;
+font-weight:800;
+}
+.meeting4{
+	margin: 5px;
+	padding: 5px;
+}
+.nav-search-input{
+    width: 90%;
+}
 </style>
 </body>
 </html>
