@@ -4,9 +4,6 @@
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/service/meeting/model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_operana.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_operana.js" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -60,8 +57,8 @@
       <file leaf-file-name="controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="997" column="130" lean-forward="false" selection-start-line="997" selection-start-column="130" selection-end-line="997" selection-end-column="130" />
+            <state relative-caret-position="122">
+              <caret line="967" column="37" lean-forward="false" selection-start-line="967" selection-start-column="37" selection-end-line="967" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -1672,13 +1669,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00042" summary="大数据展台">
-      <created>1493893260632</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1493893260632</updated>
-    </task>
     <task id="LOCAL-00043" summary="大数据展台">
       <created>1493893676556</created>
       <option name="number" value="00043" />
@@ -2015,7 +2005,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494482768001</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="会议面板设计">
+      <created>1494494789362</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1494494789365</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2560,8 +2557,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="997" column="130" lean-forward="false" selection-start-line="997" selection-start-column="130" selection-end-line="997" selection-end-column="130" />
+        <state relative-caret-position="122">
+          <caret line="967" column="37" lean-forward="false" selection-start-line="967" selection-start-column="37" selection-end-line="967" selection-end-column="37" />
           <folding />
         </state>
       </provider>

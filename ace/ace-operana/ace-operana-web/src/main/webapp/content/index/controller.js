@@ -963,6 +963,10 @@ function viewMeeting(name) {
 		},
 		success : function(rst) {
 			var html = [];
+			html.push("<tr><td style='height:30px'>");
+                        html.push(' <input type="text" placeholder="搜索 ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />');
+                        html.push('  <a class="green" href="javascript:act3()"><i class="ace-icon fa fa-search nav-search-icon"></i></a>');
+            			html.push("</td></tr>");
 
 			$(rst.rows).each(function(i, o) {
 			    if(i==0){
@@ -1005,17 +1009,7 @@ function viewMeeting(name) {
 
 				html.push("</td></tr>");
 			});
-			html.push("<tr><td style='height:30px'>");
 
-
-
-            html.push(' <input type="text" placeholder="搜索 ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />');
-            html.push('<i class="ace-icon fa fa-search nav-search-icon"></i>');
-
-
-
-
-			html.push("</td></tr>");
 			$("#meeting-grid").html(html.join(""));
 			$('[data-rel=tooltip]').tooltip();
 			$('#nav-search-input').bind('keypress', function(event) {
@@ -1038,4 +1032,7 @@ $.ajax({
             viewMeeting();
 		}
 	});
+}
+function act3(){
+viewMeeting($('#nav-search-input').val());
 }
