@@ -58,8 +58,8 @@
       <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="965" column="0" lean-forward="false" selection-start-line="965" selection-start-column="0" selection-end-line="965" selection-end-column="0" />
+            <state relative-caret-position="161">
+              <caret line="995" column="42" lean-forward="false" selection-start-line="995" selection-start-column="42" selection-end-line="995" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -108,11 +108,19 @@
       <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="47" column="54" lean-forward="false" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
+            <state relative-caret-position="280">
+              <caret line="260" column="13" lean-forward="false" selection-start-line="260" selection-start-column="13" selection-end-line="260" selection-end-column="13" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#5;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1494504420000" expanded="false" signature="2173:2185" ph="..." />
+                <marker date="1494504420000" expanded="false" signature="3925:3941" ph="..." />
+                <marker date="1494504420000" expanded="false" signature="4564:4575" ph="..." />
+                <marker date="1494504420000" expanded="false" signature="4720:4732" ph="..." />
+                <marker date="1494504420000" expanded="false" signature="5151:5167" ph="..." />
+                <marker date="1494504420000" expanded="false" signature="5792:5803" ph="..." />
+                <marker date="1494504420000" expanded="false" signature="5991:6002" ph="..." />
+                <marker date="1494504420000" expanded="false" signature="6869:6880" ph="..." />
               </folding>
             </state>
           </provider>
@@ -131,7 +139,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>profile-info-name</find>
       <find>class=&quot;editable editable-click&quot;</find>
       <find>&lt;div class=&quot;profile-info-value&quot;&gt;</find>
       <find>header smaller lighter</find>
@@ -161,9 +168,9 @@
       <find>JSON</find>
       <find>elc</find>
       <find>异常</find>
+      <find>green</find>
     </findStrings>
     <replaceStrings>
-      <replace>员工</replace>
       <replace>用户</replace>
       <replace>${pageContext.request.contextPath}</replace>
       <replace>getNormId</replace>
@@ -193,6 +200,7 @@
       <replace>Map&lt;String,Object&gt;</replace>
       <replace>#3D7878</replace>
       <replace>不良</replace>
+      <replace>blue</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -1671,13 +1679,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00044" summary="运营数据处理">
-      <created>1493905588844</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1493905588844</updated>
-    </task>
     <task id="LOCAL-00045" summary="运营数据处理">
       <created>1493992274406</created>
       <option name="number" value="00045" />
@@ -2014,7 +2015,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494495065496</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="会议面板设计">
+      <created>1494495928953</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1494495928953</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2539,6 +2547,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="995" column="42" lean-forward="false" selection-start-line="995" selection-start-column="42" selection-end-line="995" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/tpa/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="684">
@@ -2547,21 +2563,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="965" column="0" lean-forward="false" selection-start-line="965" selection-start-column="0" selection-end-line="965" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="47" column="54" lean-forward="false" selection-start-line="47" selection-start-column="54" selection-end-line="47" selection-end-column="54" />
+        <state relative-caret-position="280">
+          <caret line="260" column="13" lean-forward="false" selection-start-line="260" selection-start-column="13" selection-end-line="260" selection-end-column="13" />
           <folding>
             <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#5;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1494504420000" expanded="false" signature="2173:2185" ph="..." />
+            <marker date="1494504420000" expanded="false" signature="3925:3941" ph="..." />
+            <marker date="1494504420000" expanded="false" signature="4564:4575" ph="..." />
+            <marker date="1494504420000" expanded="false" signature="4720:4732" ph="..." />
+            <marker date="1494504420000" expanded="false" signature="5151:5167" ph="..." />
+            <marker date="1494504420000" expanded="false" signature="5792:5803" ph="..." />
+            <marker date="1494504420000" expanded="false" signature="5991:6002" ph="..." />
+            <marker date="1494504420000" expanded="false" signature="6869:6880" ph="..." />
           </folding>
         </state>
       </provider>

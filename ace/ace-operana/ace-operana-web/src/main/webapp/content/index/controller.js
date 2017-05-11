@@ -993,7 +993,7 @@ function viewMeeting(name) {
                 html.push("</div>");
                 html.push("<div class='col-md-4'><div class='meeting4'>");
 
-                html.push('<a class="green" href="javascript:act1(\''+o.id+'\')" data-rel="tooltip" data-placement="top" title="Lanuch"><i class="ace-icon fa fa-play bigger-150"></i></a>');
+                html.push('<a class="blue" href="javascript:act1(\''+o.id+'\')" data-rel="tooltip" data-placement="top" title="Lanuch"><i class="ace-icon fa fa-play bigger-150"></i></a>');
                html.push('<br> Lanuch');
                html.push('<br>');
                html.push('<a class="red" href="javascript:act2(\''+o.id+'\')" data-rel="tooltip" data-placement="top" title="Close"><i class="ace-icon fa fa-stop bigger-150"></i></a>');

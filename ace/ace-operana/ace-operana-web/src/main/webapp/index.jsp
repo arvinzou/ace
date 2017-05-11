@@ -47,7 +47,7 @@ pageEncoding="utf-8"%>
             <div style="padding-bottom:5px;margin-top:5px">
                 <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
                        autocomplete="off"/>
-                <a class="green" href="javascript:act3()"><i class="ace-icon fa fa-search nav-search-icon"></i></a>
+                <a class="blue" href="javascript:act3()"><i class="ace-icon fa fa-search nav-search-icon"></i></a>
             </div>
 
             <table id="meeting-grid" class="table table-bordered">
@@ -258,7 +258,7 @@ font-weight:800;
 	padding: 2px;
 }
 .nav-search-input{
-    width: 90%;
+    width: 92%;
 }
 
 
