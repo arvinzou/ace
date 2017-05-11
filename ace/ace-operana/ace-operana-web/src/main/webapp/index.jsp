@@ -30,6 +30,7 @@ pageEncoding="utf-8"%>
 
     <div class="row">
         <div class="col-md-3">
+            <h5 class="header-title">即将进行的会议</h5>
             <table id="meeting-grid" class="table table-bordered">
 
 
@@ -161,7 +162,9 @@ pageEncoding="utf-8"%>
             </div>
 
         </div>
-        <div class="col-md-2">3</div>
+        <div class="col-md-2">
+            <h5 class="header-title">代办任务</h5>
+        </div>
 
     </div>
 
