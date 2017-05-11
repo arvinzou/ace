@@ -1,261 +1,226 @@
 <%@page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta charset="utf-8" />
-<meta name="description" content="overview &amp; stats" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>走向公众号管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <meta name="description" content="overview &amp; stats"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <title>运营分析</title>
 
 </head>
-<jsp:include page="/dynamic/common/common.jsp" />
-<link rel="stylesheet" href="${portalPath}/content/common/css/new.css?version=${cfg.version}" />
-<style>
-.layout-user {
-	width: 170px;
-	height: 35px;
-	float: left;
-	margin: 5px 5px 5px;
-}
+<jsp:include page="/dynamic/common/common.jsp"/>
+<style type="text/css">
+			*{padding:0;margin:0;}
+			ul li{list-style:none;}
+			.ulinput{margin-left:50px;}
 
-.infobox-text-north {
-	font-size: 30px
-}
 
-.infobox-text-sourth {
-	font-size: 14px
-}
 
-.infobox-small {
-	width: 149px;
-	height: 82px;
-	text-align: left;
-	padding-bottom: 5px;
-}
-
-.infobox-dark {
-	margin: 1px 10px 0 0;
-}
-
-.infobox-portal {
-	text-align: right;
-	margin: 5px
-}
-
-.charts-portal-ct1 {
-	width: 500px;
-	height: 300px
-}
-
-.charts-portal-ct2 {
-	width: 500px;
-	height: 300px
-}
 </style>
-
-
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
 <body>
-	<!-- /section:basics/sidebar -->
-	<div class="page-content">
-		<!-- PAGE CONTENT BEGINS -->
-		 <!-- Row starts -->
-          <div class="row">
-           <div class="col-lg-3 col-md-3 col-sm-6">
-              <div class="mini-widget">
-                <div class="mini-widget-heading clearfix">
-                  <div class="pull-left">作家</div>
-                  <div class="pull-right"> </div>
-                </div>
-                <div class="mini-widget-body clearfix">
-                  <div class="pull-left">
-                    <i class="fa fa-user-circle-o"></i>
-                  </div>
-                  <div class="pull-right number" id="writer">1135</div>
-                </div>
-                 <div class="mini-widget-footer center-align-text">
-                  <span>总数／人</span>
-                </div> 
-              </div>
+<!-- /section:basics/sidebar -->
+<div class="page-content">
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <table id="meeting-grid" class="table table-bordered">
+
+
+            </table>
+        </div>
+        <div class="col-md-7">
+            <div id="dialog-message" class="hide">
+
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-              <div class="mini-widget mini-widget-green">
-                <div class="mini-widget-heading clearfix">
-                  <div class="pull-left">作品</div>
-                  <div class="pull-right"> </div>
-                </div>
-                <div class="mini-widget-body clearfix">
-                  <div class="pull-left">
-                    <i class="fa fa-book"></i>
-                  </div>
-                  <div class="pull-right number" id="writing">8757</div>
-                </div>
-               <div class="mini-widget-footer center-align-text">
-                  <span>总数／个</span>
-                </div> 
-              </div>
+            <div id="dialog-user" class="hide">
+                <input type="text" name="_user" id="_user">
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-              <div class="mini-widget mini-widget-red">
-                <div class="mini-widget-heading clearfix">
-                  <div class="pull-left">活动剪影</div>
-                  <div class="pull-right"></div>
+
+            <div id="dialog-message-view">
+
+                <h5 class="header-title">基本信息</h5>
+
+                <div style="padding:10px" class="row">
+                    <div class="labelItem">
+                        <span class="labelItemHeader">会议名称</span><br>
+                        <span id="name"> </span>
+                    </div>
+                    <div class="labelItem">
+                        <span class="labelItemHeader">会议描述</span><br>
+                        <span id="discribtion"> </span>
+                    </div>
+                    <div class="labelItem">
+                        <span class="labelItemHeader">会议时间</span><br>
+                        <span id="meetingDate"> </span>
+                    </div>
+                    <div class="labelItem">
+                        <span class="labelItemHeader">会议地点</span><br> <span id="site"> </span>
+                    </div>
+                    <div class="labelItem">
+                        <span class="labelItemHeader">会议部门</span><br>
+                        <span id="divisionName"> </span>
+                    </div>
+                    <div class="labelItem">
+                        <span class="labelItemHeader">说明</span><br>
+                        <span id="comment"> </span>
+                    </div>
+                    <div class="labelItem">
+                        <span class="labelItemHeader">主持人</span><br>
+                        <span id="ownerName"> </span>
+                    </div>
+                    <div class="labelItem">
+                        <span class="labelItemHeader">注意事项</span><br>
+                        <span id="note"> </span>
+                    </div>
                 </div>
-                <div class="mini-widget-body clearfix">
-                  <div class="pull-left">
-                    <i class="fa fa-id-card"></i>
-                  </div>
-                  <div class="pull-right number" id="activity_photos">3780</div>
+                <div>
+                    <div class="div-left header-title">议题</div>
+                    <div class="div-right header-title">
+                        <div style="text-align:right"><a data-rel="tooltip" data-placement="top" title="议题设置"
+                                                         class="blue" href="javascript:topicSetting()"><i
+                                class="ace-icon fa fa-plus-circle"></i></a></div>
+                    </div>
                 </div>
-                <div class="mini-widget-footer center-align-text">
-                  <span>总数／次</span>
-                </div> 
-              </div>
+                <div class="row">
+                    <form id="fm3">
+                        <table id="detail"
+                               class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th class="center" style="width:80px;">序号</th>
+
+                                <th>议题名称</th>
+                                <th>负责人</th>
+                                <th style="width:120px;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <div>
+                    <div class="div-left header-title">与会人员</div>
+                    <div class="div-right header-title">
+                        <div style="text-align:right"><a data-rel="tooltip" data-placement="top" title="与会人员设置"
+                                                         class="blue" href="javascript:userSetting()"><i
+                                class="ace-icon fa fa-plus-circle"></i></a></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <form id="fm4">
+                        <table id="detail1"
+                               class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th class="center" style="width:80px;">序号</th>
+
+                                <th>职务</th>
+                                <th>姓名</th>
+                                <th>是否必须</th>
+                                <th style="width:80px;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-              <div class="mini-widget">
-                <div class="mini-widget-heading clearfix">
-                  <div class="pull-left">意见反馈</div>
-                  <div class="pull-right"> </div>
-                </div>
-                <div class="mini-widget-body clearfix">
-                  <div class="pull-left">
-                    <i class="fa fa-comment-o"></i>
-                  </div>
-                  <div class="pull-right number" id="feedback">12658</div>
-                </div>
-                <div class="mini-widget-footer center-align-text">
-                  <span>总数／次</span>
-                </div> 
-              </div>
+
+            <div id="dialog-meeting-user" class="hide">
+
             </div>
-           
-          </div>
-          <!-- Row ends -->
-		
+            <div id="dialog-upload" class="hide">
+                <div id="uploader">
+                    <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+                </div>
+            </div>
+            <div id="dialog-norm" class="hide">
+                <h5 class="header-title">指标</h5>
+                <table id="detail4"
+                       class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="center" style="width:80px;">序号</th>
+                        <th>指标名称</th>
+                        <th>说明</th>
+                        <th style="width:100px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-md-2">3</div>
+
+    </div>
 
 
-
-
-
-
-
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 widget-container-col">
-				<!-- #section:custom/widget-box -->
-				<div class="widget-box transparent" id="recent-box">
-					<div class="widget-header">
-						<h4 class="widget-title lighter smaller">
-							<i class="ace-icon glyphicon glyphicon-th-large green"></i>系统公告
-						</h4>
-
-						<div class="widget-toolbar no-border"></div>
-					</div>
-
-					<div class="widget-body">
-						<div class="widget-main padding-4">
-							<table width="100%">
-
-
-								<tbody id="notice-list-grid">
-
-								</tbody>
-							</table>
-						</div>
-						<!-- /.widget-main -->
-					</div>
-					<!-- /.widget-body -->
-				</div>
-				<!-- /.widget-box -->
-
-				<!-- /section:custom/widget-box -->
-			</div>
-
-			<div class="col-xs-12 col-sm-6 widget-container-col">
-
-			</div>
-			<!-- /.span -->
-		</div>
-		<!-- /.row -->
-
-
-
-
-
-
-
-	</div>
-	<!-- /.page-content -->
-
-
-
-
-	<jsp:include page="/dynamic/common/footer-1.jsp" />
-
-	<script
-		src="${portalPath}/content/common/js/echarts-2.27/echarts.js?version=${cfg.version}"></script>
-
-	<script
-		src="${pageContext.request.contextPath}/content/index/config-1.js?version=${cfg.version}"></script>
-	<script
-		src="${pageContext.request.contextPath}/content/index/config-2.js?version=${cfg.version}"></script>
-	<script
-		src="${pageContext.request.contextPath}/content/index/controller.js?version=${cfg.version}"></script>
-	<script
-		src="${pageContext.request.contextPath}/content/index/view.js?version=${cfg.version}"></script>
+</div>
+<!-- /.page-content -->
+<jsp:include page="/dynamic/common/footer-1.jsp"/>
 <script
-		src="${portalPath}/content/common/js/jquery.stamper.js?version=${cfg.version}"></script>
-		
-	<jsp:include page="/dynamic/common/footer-2.jsp" />
+        src="${portalPath}/content/common/js/xcheck/XCheck.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/index/controller.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/index/view.js?version=${cfg.version}"></script>
 
-	<script type="text/javascript">
-		parent.onresize = function() {
-			autosize()
-		}
-		window.onresize = function() {
-			autosize()
-		}
-		function autosize() {
-			parent.autoWidth();
-			var h = window.innerHeight;
-			var w = window.innerWidth;
+<jsp:include page="/dynamic/common/footer-2.jsp"/>
+<script
+        src="${portalPath}/content/common/js/dataTable/jquery.dataTables.min.js?version=${cfg.version}"></script>
+<script
+        src="${portalPath}/content/common/js/dataTable/dataTables.bootstrap.min.js?version=${cfg.version}"></script>
+<script
+        src="${portalPath}/content/common/js/easyui-draggable.js?version=${cfg.version}"></script>
 
-			var ww = parseInt($(".page-content").width() / 4) - 13;
-			var hh = parseInt(ww * 0.45);
-			$('.infobox-small').css("height", hh);
-			$('.infobox-small').css("width", ww);
-			if (hh < 80) {
-				$('.infobox-text-north').css("font-size", 55);
-			} else {
-				$('.infobox-text-north').css("font-size", 55);
-			}
-			var charh = 250;
-			var charw = parseInt($(".page-content").width() / 2) - 40;
-			charh = parseInt(charw * 0.5);
-			$('.charts-portal-ct1').css("height", charh);
-			$('.charts-portal-ct1').css("width", charw);
-			$('.charts-portal-ct2').css("height", charh);
-			$('.charts-portal-ct2').css("width", charw);
-			if (myChart1) {
-				myChart1.resize();
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script
+        src="${pageContext.request.contextPath}/content/service/meeting/upload.js"></script>
+<script type="text/javascript">
 
-			}
-
-		}
-	</script>
-	<script
-		src="${pageContext.request.contextPath}/content/index/index.js?version=${cfg.version}"></script>
-	<style>
+</script>
+<style>
 .page-content {
 	background-color: #fff;
 	position: relative;
 	margin: 0;
-	padding: 10px 20px 20px;
+	padding: 10px 10px 10px;
 }
-		.stamper{padding-top:10px;height:100px;}
-	.stamper span{float:right;display:inline-block;height:100%;width:200px;}
-	</style>
+.checkboxitem {
+	width: 250px;
+	height: 20px;
+	float: left;
+	margin: 2px 2px 2px;
+}
+.labelItem{
+	width: 180px;
+	height: 30px;
+	float: left;
+	margin: 4px 4px 4px;
+}
+.labelItemHeader{
+	font-weight:800;
+	font-size:14px;
+}
+.div-left{ float:left;width:90%;}
+.div-right{ float:right;width:10%;}
+
+</style>
 </body>
 </html>
