@@ -1,15 +1,16 @@
 var meetingId, topicId, normId, _title = 'CAC';
 jQuery(function($) {
-	preview('1493463925789');
+	//preview('1493463925789');
+	viewMeeting();
 });
 
-function preview(id) {
+function act1(id) {
 	meetingId = id;
 	loadView(id);
 	viewTopic(id);
 	viewUser(id);
 	$('[data-rel=tooltip]').tooltip();
-	viewMeeting();
+
 }
 function loadView(id) {
 	$.ajax({
@@ -952,16 +953,21 @@ function previewTpa(_meetingId, _topicId, _normId, title) {
 	window.open(url);
 }
 
-function viewMeeting() {
+function viewMeeting(name) {
 	$.ajax({
 		type : "post",
 		url : contextPath + '/meeting/findMeetingList.do',
 		data : {
-			name : ''
+			name : name,
+			status:'2'
 		},
 		success : function(rst) {
 			var html = [];
+
 			$(rst.rows).each(function(i, o) {
+			    if(i==0){
+			        act1(o.id);
+			    }
 				html.push("<tr><td style='height:60px'>");
                 html.push("<div class='row'>");
 
@@ -986,11 +992,11 @@ function viewMeeting() {
                 html.push("</div>");
                 html.push("<div class='col-md-4'><div class='meeting4'>");
 
-                html.push('<a class="green" href="javascript:ac1()" data-rel="tooltip" data-placement="top" title="Lanuch"><i class="ace-icon fa fa-play bigger-150"></i></a>');
+                html.push('<a class="green" href="javascript:act1(\''+o.id+'\')" data-rel="tooltip" data-placement="top" title="Lanuch"><i class="ace-icon fa fa-play bigger-150"></i></a>');
                html.push('<br> Lanuch');
                html.push('<br>');
-               html.push('<a class="red" href="javascript:ac3()" data-rel="tooltip" data-placement="top" title="Stop"><i class="ace-icon fa fa-stop bigger-150"></i></a>');
-               html.push('<br> Stop  ');
+               html.push('<a class="red" href="javascript:act2(\''+o.id+'\')" data-rel="tooltip" data-placement="top" title="Close"><i class="ace-icon fa fa-stop bigger-150"></i></a>');
+               html.push('<br> Close  ');
                 html.push("</div></div>");
                 html.push("</div>");
 
@@ -1012,6 +1018,24 @@ function viewMeeting() {
 			html.push("</td></tr>");
 			$("#meeting-grid").html(html.join(""));
 			$('[data-rel=tooltip]').tooltip();
+			$('#nav-search-input').bind('keypress', function(event) {
+            				if (event.keyCode == "13") {
+            					viewMeeting($('#nav-search-input').val());
+            				}
+            			});
+            			$('#nav-search-input').val(name)
+		}
+	});
+}
+function act2(id){
+$.ajax({
+		type : "post",
+		url : contextPath + '/meeting/deleteMeetingByMeetingId.do',
+		data : {
+			jsons:JSON.stringify({id:id})
+		},
+		success : function(rst) {
+            viewMeeting();
 		}
 	});
 }

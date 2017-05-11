@@ -31,7 +31,14 @@ pageEncoding="utf-8"%>
 
     <div class="row">
         <div class="col-md-3">
-            <h5 class="header-title">即将进行的会议</h5>
+
+            <div class="div-left header-title-custom">即将进行的会议</div>
+            <div class="div-right header-title-custom">
+                <div style="text-align:right">
+                    <a class="blue" href="javascript:viewMeeting()" data-rel="tooltip" data-placement="top" title="刷新"><i
+                            class="ace-icon glyphicon glyphicon-refresh"></i></a>
+                </div>
+            </div>
             <table id="meeting-grid" class="table table-bordered">
 
 
