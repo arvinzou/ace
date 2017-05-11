@@ -308,7 +308,7 @@ function viewTopic(meetingId, name) {
 											+ data.name
 											+ '\')"><i class="ace-icon fa fa-plus-circle bigger-130"></i></a>');
 							btn
-									.push('<a data-rel="tooltip" data-placement="top" title="不良现象明细数据" class="blue" href="javascript:dataSetting2(\''
+									.push('<a data-rel="tooltip" data-placement="top" title="指标列表" class="blue" href="javascript:dataSetting2(\''
 											+ meetingId
 											+ '\',\''
 											+ data.id
