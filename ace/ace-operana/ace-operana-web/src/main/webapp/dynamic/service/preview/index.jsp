@@ -30,13 +30,27 @@ var normId='${param.normId}';
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="row">
+           <!-- <div class="row">
                 <table id="grid1" class="table table-bordered" style="margin-left:20px;text-align:left">
 
 
                 </table>
-            </div>
+            </div>-->
             <div class="row" id="ct3">
+                <div style="padding-left:30px">
+                    <div class="div-left header-title-custom">不良现象明细</div>
+                    <div class="div-right header-title-custom">
+                        <div style="text-align:right"><a class="blue" href="javascript:add2()" data-rel="tooltip" data-placement="top"
+                                                         title="不良现象明细"><i class="ace-icon fa fa-plus-square"></i></a>
+                            <a class="blue" href="javascript:reload2()" data-rel="tooltip" data-placement="top" title="刷新"><i
+                                    class="ace-icon glyphicon glyphicon-refresh"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a>
+                    </a>
+                </div>
                 <table id="grid2" class="table table-bordered table-hover" style="margin-left:20px;text-align:left">
 
 

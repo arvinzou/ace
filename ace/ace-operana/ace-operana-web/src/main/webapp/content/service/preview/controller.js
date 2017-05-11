@@ -109,7 +109,7 @@ function chart1() {
 						html.push("</td>");
 					});
 					html.push("</tr>");*/
-					$("#grid1").html(html.join(""));
+					//$("#grid1").html(html.join(""));
 					initMyChar1();
 				}
 			});
@@ -128,12 +128,13 @@ function chart3() {
 				},
 				success : function(rst) {
 					var html = [];
-					html
+					/*html
 							.push("<tr style='background:#3D7878;text-align:center;font-weight:800;'>");
 					html.push("<td colspan='" + (rst.item.length)
 							+ "' style='color:#FFFFFF'>");
 					html.push("不良现象明细");
-					html.push("</td>");
+					html.push("</td></tr>");
+					*/
 					html
 							.push("<tr style='background:#336666;text-align:center;font-weight:800;'>");
 					$(rst.itemName)
@@ -184,12 +185,13 @@ function chart4() {
 				},
 				success : function(rst) {
 					var html = [];
-					html
+					/*html
 							.push("<tr style='background:#3D7878;text-align:center;font-weight:800;'>");
 					html.push("<td colspan='" + (rst.item.length)
 							+ "' style='color:#FFFFFF'>");
 					html.push("TOP问题分析");
-					html.push("</td>");
+					html.push("</td></tr>");
+					*/
 					html
 							.push("<tr style='background:#336666;text-align:center;font-weight:800;'>");
 					$(rst.itemName)
@@ -263,5 +265,12 @@ function reload() {
 }
 function add() {
 	var url=contextPath+'/dynamic/service/tpa/index.jsp?meetingId='+meetingId+'&topicId='+topicId+'&normId='+normId;
+    window.open(url);
+}
+function reload2() {
+	chart3();
+}
+function add2() {
+	var url=contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+meetingId+'&topicId='+topicId+'&normId='+normId;
     window.open(url);
 }
