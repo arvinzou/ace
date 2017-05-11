@@ -61,7 +61,7 @@ var normId='${param.normId}';
         </div>
         <div class="col-md-6" id="ct4">
             <div style="padding-left:30px">
-                <div class="div-left header-title-custom">TOP问题分析</div>
+                <div class="div-left header-title-custom">TOP10问题分析</div>
                 <div class="div-right header-title-custom">
                     <div style="text-align:right"><a class="blue" href="javascript:add()" data-rel="tooltip" data-placement="top"
                                                      title="任务分配"><i class="ace-icon fa fa-plus-square"></i></a>
