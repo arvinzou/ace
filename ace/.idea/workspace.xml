@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/MeetingService.java" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-client/src/main/java/com/huacainfo/ace/operana/service/MeetingService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingDao.xml" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingUserDao.java" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingUserDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingUserDao.xml" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingUserDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/MeetingServiceImpl.java" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/MeetingServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/MeetingController.java" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/java/com/huacainfo/ace/operana/web/controller/MeetingController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/index.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -54,8 +47,8 @@
       <file leaf-file-name="controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="1080" column="36" lean-forward="true" selection-start-line="1080" selection-start-column="36" selection-end-line="1080" selection-end-column="36" />
+            <state relative-caret-position="198">
+              <caret line="688" column="94" lean-forward="false" selection-start-line="688" selection-start-column="94" selection-end-line="688" selection-end-column="94" />
               <folding />
             </state>
           </provider>
@@ -1583,13 +1576,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00046" summary="运营数据处理">
-      <created>1494078695612</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1494078695612</updated>
-    </task>
     <task id="LOCAL-00047" summary="运营数据处理">
       <created>1494116026882</created>
       <option name="number" value="00047" />
@@ -1926,7 +1912,14 @@
       <option name="project" value="LOCAL" />
       <updated>1494504443506</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="会议面板设计">
+      <created>1494512208153</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1494512208153</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2476,8 +2469,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="1080" column="36" lean-forward="true" selection-start-line="1080" selection-start-column="36" selection-end-line="1080" selection-end-column="36" />
+        <state relative-caret-position="198">
+          <caret line="688" column="94" lean-forward="false" selection-start-line="688" selection-start-column="94" selection-end-line="688" selection-end-column="94" />
           <folding />
         </state>
       </provider>

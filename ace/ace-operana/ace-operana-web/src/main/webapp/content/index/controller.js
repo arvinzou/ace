@@ -680,13 +680,13 @@ function viewUser(meetingId) {
                                 justified="checked";
                             }
 							html.push('<input type="radio" id="'+data.user_id+'Present" name="'+data.user_id+'" value="Present" '+present+'/>');
-							html.push('<lable for="'+data.user_id+'Present">Present</lable>  ');
+							html.push('<label for="'+data.user_id+'Present">Present</label>  ');
 
 							html.push('<input type="radio" id="'+data.user_id+'Absent" name="'+data.user_id+'" value="Absent" '+absent+'/>');
-                            html.push('<lable for="'+data.user_id+'Absent">Absent</lable>  ');
+                            html.push('<label for="'+data.user_id+'Absent">Absent</label>  ');
 
                             html.push('<input type="radio" id="'+data.user_id+'Justified" name="'+data.user_id+'" value="Justified" '+justified+'/>');
-                            html.push('<lable for="'+data.user_id+'Justified">Justified</lable>');
+                            html.push('<label for="'+data.user_id+'Justified">Justified</label>');
 
 							$(row).children('td').eq(4).html(html.join(''));
 
