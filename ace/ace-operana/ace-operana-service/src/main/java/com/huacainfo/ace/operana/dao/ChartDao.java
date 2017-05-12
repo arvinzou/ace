@@ -17,4 +17,6 @@ public interface ChartDao {
     List<Map<String,Object>> selectTop10ProblemDetail(@Param("meetingId") String meetingId, @Param("topicId") String topicId, @Param("normId") String normId, @Param("cwk") String cwk, @Param("list")List<String> list);
 
     List<Map<String,Object>> selectTpa(@Param("meetingId") String meetingId, @Param("topicId") String topicId, @Param("normId") String normId, @Param("cwk") String cwk);
+
+    List<Map<String,Object>> selectChart1();
 }

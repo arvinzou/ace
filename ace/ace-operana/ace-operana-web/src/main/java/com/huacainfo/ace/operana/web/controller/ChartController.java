@@ -47,4 +47,5 @@ public class ChartController extends OperanaBaseController {
 	public Map<String,Object> chart4(String meetingId, String topicId, String normId) throws Exception {
 		return this.chartService.chart4(meetingId, topicId, normId);
 	}
+
 }
