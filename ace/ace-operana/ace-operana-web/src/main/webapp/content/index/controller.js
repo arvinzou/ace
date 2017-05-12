@@ -1091,3 +1091,36 @@ function updatePresent(data) {
 function presentSetting(){
     $("#fm4").submit();
 }
+
+jQuery(function($) {
+	launchExample();
+});
+function initData() {
+	chart1();
+}
+function initMyChar1() {
+	if (myChart1 && myChart1.dispose) {
+		myChart1.dispose();
+	}
+	myChart1 = echarts.init(document.getElementById('ct1'), curTheme);
+	window.onresize = myChart1.resize;
+	myChart1.setOption(option1, true);
+	myChart1.hideLoading();
+}
+
+function chart1() {
+	$.ajax({
+		type : "post",
+		url : contextPath + '/anslysis/query.do',
+		data : {
+		    reportId:'portal'
+		},
+		success : function(rst) {
+            option1.series[0].data=rst.value;
+            $(rst.value).each(function(i,o){
+             option1.legend.data.push(o.name);
+            });
+			initMyChar1();
+		}
+	});
+}

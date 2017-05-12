@@ -55,7 +55,7 @@ pageEncoding="utf-8"%>
 
             </table>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div id="dialog-message" class="hide">
 
             </div>
@@ -186,8 +186,9 @@ pageEncoding="utf-8"%>
             </div>
 
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <h5 class="header-title">会议统计</h5>
+            <div id="ct1" style="width:300px;height:200px"></div>
         </div>
 
     </div>
@@ -197,17 +198,23 @@ pageEncoding="utf-8"%>
 <!-- /.page-content -->
 <jsp:include page="/dynamic/common/footer-1.jsp"/>
 <script
-        src="${portalPath}/content/common/js/xcheck/XCheck.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/index/controller.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/index/view.js?version=${cfg.version}"></script>
-
-<jsp:include page="/dynamic/common/footer-2.jsp"/>
-<script
         src="${portalPath}/content/common/js/dataTable/jquery.dataTables.min.js?version=${cfg.version}"></script>
 <script
         src="${portalPath}/content/common/js/dataTable/dataTables.bootstrap.min.js?version=${cfg.version}"></script>
+<script
+        src="${portalPath}/content/common/js/echarts-2.27/echarts.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/index/view.js?version=${cfg.version}&t=1"></script>
+<script
+        src="${pageContext.request.contextPath}/content/index/config-1.js?version=${cfg.version}"></script>
+<script
+        src="${portalPath}/content/common/js/xcheck/XCheck.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/index/controller.js?version=${cfg.version}"></script>
+
+
+<jsp:include page="/dynamic/common/footer-2.jsp"/>
+
 <script
         src="${portalPath}/content/common/js/easyui-draggable.js?version=${cfg.version}"></script>
 
