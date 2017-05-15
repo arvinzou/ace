@@ -1060,6 +1060,7 @@ $.ajax({
 		},
 		success : function(rst) {
             viewMeeting();
+            chart1();
 		}
 	});
 }
@@ -1078,6 +1079,7 @@ function updatePresent(data) {
 		},
 		success : function(rst, textStatus) {
 		    viewUser(data.meetingId);
+
 			alert(rst.errorMessage);
 
 

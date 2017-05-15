@@ -69,6 +69,7 @@
     where  probDiscri=#{probDiscri} and meetingId=#{meetingId} and topicId=#{topicId}
     and  normId=#{normId}
   </update>
+
   <sql id="whereCondition">
     from (select meetingId, topicId, normId,productId, name,${orderBy} from norm_detail  where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
     and  normId=#{condition.normId}) t left join (select meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable,
@@ -106,4 +107,39 @@
     probDiscri=#{probDiscri} and meetingId=#{meetingId} and topicId=#{topicId}
     and  normId=#{normId}
   </select>
+
+  <sql id="whereConditionUserTask">
+    from tpa t
+    left join portal.users b on t.liable=b.user_id where t.liable=#{condition.liable} and t.status=#{condition.status}
+  </sql>
+  <select id="findCountUserTask" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereConditionUserTask"/>
+  </select>
+  <select id="findListUserTask" resultMap="BaseResultMapVo">
+    select m.* from(
+    select
+    t.meetingId, t.topicId, t.normId, t.productId, t.probDiscri, t.probAnsys, t.actions, t.liable,
+    t.status,ifnull(b.name,'') userName,t.lastModifyDate,t.id,t.createDate
+    <include refid="whereConditionUserTask"/>) m
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY m.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY m.lastModifyDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+  <update id="updateById" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    update tpa
+    set
+    productId = #{productId,jdbcType=VARCHAR},
+    probDiscri = #{probDiscri,jdbcType=VARCHAR},
+    probAnsys = #{probAnsys,jdbcType=VARCHAR},
+    status = #{status,jdbcType=VARCHAR},
+    createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id=#{id}
+  </update>
 </mapper>

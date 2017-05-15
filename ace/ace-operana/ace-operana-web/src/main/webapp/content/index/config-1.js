@@ -1,18 +1,40 @@
+
+
 var option1 = {
-    tooltip : {
+    tooltip: {
         trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
     },
     legend: {
-        left: 'left',
-        data: []
+        orient: 'vertical',
+        x: 'left',
+        data:[]
     },
-    series : [
+    series: [
         {
-            name: '会议',
-            type: 'pie',
+            name:'会议统计',
+            type:'pie',
+            //radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
             data:[
-                {value:335, name:'直接访问'}
             ]
         }
     ]

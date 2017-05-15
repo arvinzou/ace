@@ -243,7 +243,7 @@ pageEncoding="utf-8"%>
 	margin: 2px 2px 2px;
 }
 .labelItem{
-	width: 180px;
+	width: 150px;
 	height: 30px;
 	float: left;
 	margin: 4px 4px 4px;
