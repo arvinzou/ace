@@ -56,4 +56,7 @@
     <dubbo:reference interface="com.huacainfo.ace.portal.service.UserCfgService"
                      id="userCfgService"/>
 
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.AuthorityService"
+                     id="authorityService"/>
+
 </beans>

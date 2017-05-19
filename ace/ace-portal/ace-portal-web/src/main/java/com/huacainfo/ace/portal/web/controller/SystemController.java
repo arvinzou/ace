@@ -31,7 +31,7 @@ public class SystemController extends PortalBaseController{
 	
 	
 	
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(SystemController.class);
 	/**
 	 * 
 	    * @Title:updatePassword 

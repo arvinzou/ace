@@ -183,7 +183,7 @@ public class HttpUtils {
 	/**
 	 * 发送Get请求Https
 	 * 
-	 * @param httpPost
+	 * @param httpGet
 	 * @return
 	 * @throws IOException
 	 * @throws MalformedURLException
@@ -221,7 +221,6 @@ public class HttpUtils {
 
 	public static void main(String args[]) throws URISyntaxException,
 			MalformedURLException, IOException {
-		System.out.println(HttpUtils.httpsGet("https://www.baidu.com", 60, 30,
-				"UTF-8"));
+		System.out.println(HttpUtils.httpsGet("https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code"));
 	}
 }
