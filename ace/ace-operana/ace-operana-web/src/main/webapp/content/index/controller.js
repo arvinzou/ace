@@ -4,14 +4,7 @@ jQuery(function($) {
 	viewMeeting();
 });
 
-function act1(id) {
-	meetingId = id;
-	loadView(id);
-	viewTopic(id);
-	viewUser(id);
-	$('[data-rel=tooltip]').tooltip();
 
-}
 function loadView(id) {
 	$.ajax({
 		type : "post",
@@ -999,10 +992,14 @@ function viewMeeting(name) {
 
 
 			$(rst.rows).each(function(i, o) {
+
+			    var bg="#FFFFFF";
 			    if(i==0){
+
+			        bg="#eeeeee";
 			        act1(o.id);
 			    }
-				html.push("<tr><td style='height:60px'>");
+				html.push("<tr><td style='height:60px;background-color:"+bg+"' id='"+o.id+"'>");
                 html.push("<div class='row'>");
 
 				html.push("<div class='col-md-8'>");
@@ -1050,6 +1047,24 @@ function viewMeeting(name) {
             			$('#nav-search-input').val(name)
 		}
 	});
+}
+function act1(id) {
+	meetingId = id;
+	loadView(id);
+	viewTopic(id);
+	viewUser(id);
+	$('[data-rel=tooltip]').tooltip();
+	var list=$("#meeting-grid").find("td");
+	$(list).each(function(i,o){
+	    console.log(o);
+	    if($(o).attr("id")==id){
+	        $(o).css("background-color","#eeeeee");
+	    }else{
+	        $(o).css("background-color","#FFFFFF");
+	    }
+	});
+
+
 }
 function act2(id){
 $.ajax({
