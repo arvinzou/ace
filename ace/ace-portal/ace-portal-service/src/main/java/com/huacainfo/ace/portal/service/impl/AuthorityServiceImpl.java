@@ -10,6 +10,8 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.portal.model.WxUser;
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.Arrays;
@@ -26,6 +28,8 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.Encryptor;
 import com.huacainfo.ace.common.tools.HttpUtils;
 import com.huacainfo.ace.portal.service.AuthorityService;
+import com.huacainfo.ace.portal.dao.WxUserDao;
+
 /**
  * Created by chenxiaoke on 2017/5/18.
  */
@@ -35,13 +39,14 @@ public class AuthorityServiceImpl implements AuthorityService {
 	private static final Logger logger = LoggerFactory.getLogger(AuthorityServiceImpl.class);
 
 	@Autowired
-	RedisOperations<String, Object> redisTemplate;
+	private RedisOperations<String, Object> redisTemplate;
+	@Autowired
+	private WxUserDao wxUserDao;
 
 	public SingleResult<Map<String, String>> authority(String appid, String appsecret, String code,
 			String encryptedData, String iv) throws Exception {
 		// appid wxa09a5be5fd228680
 		// appsecret d520d29f8c26c7e3885d80b1812a8d91
-
 		SingleResult<Map<String, String>> rst = new SingleResult<Map<String, String>>(0, "OK");
 		StringBuffer url = new StringBuffer("");
 		url.append("https://api.weixin.qq.com");
@@ -63,23 +68,35 @@ public class AuthorityServiceImpl implements AuthorityService {
 		String session_key = json.getString("session_key");
 		String openid = json.getString("openid");
 		String expires_in = json.getString("expires_in");
-		String key = UUID.randomUUID().toString();
-		Map<String, String> o = new HashMap<String, String>();
-		o.put("session_key", session_key);
-		o.put("openid", openid);
-		o.put("expires_in", expires_in);
-		o.put("3rd_session", key);
-		redisTemplate.opsForValue().set(key + "openid", openid);
-		redisTemplate.opsForValue().set(key + "session_key", session_key);
-
         JSONObject userinfo = this.getUserInfo(encryptedData,session_key,iv);
 		logger.info("session_key -> {} openid -> {} expires_in -> {} userinfo ->{}", session_key, openid, expires_in,
 				userinfo);
-		redisTemplate.opsForValue().set(key, userinfo);
+        String _3rd_session =userinfo.getString("unionId");
+        if(CommonUtils.isBlank(_3rd_session)){
+			_3rd_session=userinfo.getString("openId");
+			userinfo.put("unionId",_3rd_session);
+		}
+        Map<String, String> o = new HashMap<String, String>();
+        o.put("session_key", session_key);
+        o.put("openid", openid);
+        o.put("expires_in", expires_in);
+        o.put("3rd_session", _3rd_session);
+        redisTemplate.opsForValue().set(_3rd_session + "openid", openid);
+        redisTemplate.opsForValue().set(_3rd_session + "session_key", session_key);
+		redisTemplate.opsForValue().set(_3rd_session, userinfo);
+		WxUser wxUser= JSON.parseObject(userinfo.toString(),WxUser.class);
+		this.saveOrUpdateWxUser(wxUser);
 		rst.setValue(o);
 		return rst;
 	}
-
+	private void saveOrUpdateWxUser(WxUser o){
+		int t=this.wxUserDao.isExit(o);
+		if(t>0){
+			wxUserDao.updateByPrimaryKey(o);
+		}else{
+			wxUserDao.insert(o);
+		}
+	}
 	public JSONObject getUserInfo(String encryptedData, String sessionKey, String iv) throws Exception {
         logger.info("encryptedData: {} sessionKey: {} iv:{}",encryptedData,sessionKey,iv);
 		// 被加密的数据

@@ -162,6 +162,7 @@ public class HttpUtils {
 		String responseContent = null;
 		try {
 			httpClient = HttpClients.createDefault();
+
 			response = httpClient.execute(httpPost);
 			entity = response.getEntity();
 			responseContent = EntityUtils.toString(entity, encoding);
@@ -201,6 +202,7 @@ public class HttpUtils {
 					publicSuffixMatcher);
 			httpClient = HttpClients.custom()
 					.setSSLHostnameVerifier(hostnameVerifier).build();
+			httpGet.addHeader("WX-SESSION-ID","oCjYM0Ux6pr9MoumsfZITuMW5lE8");
 			response = httpClient.execute(httpGet);
 			entity = response.getEntity();
 			responseContent = EntityUtils.toString(entity, encoding);
@@ -221,6 +223,6 @@ public class HttpUtils {
 
 	public static void main(String args[]) throws URISyntaxException,
 			MalformedURLException, IOException {
-		System.out.println(HttpUtils.httpsGet("https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code"));
+		System.out.println(HttpUtils.httpsGet("http://127.0.0.1/portal/www/request.do"));
 	}
 }

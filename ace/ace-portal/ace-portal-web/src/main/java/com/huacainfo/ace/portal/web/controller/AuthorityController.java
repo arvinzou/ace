@@ -2,11 +2,14 @@ package com.huacainfo.ace.portal.web.controller;
 
 import java.util.*;
 
+import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.service.AuthorityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +34,8 @@ public class AuthorityController extends PortalBaseController{
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+
 	@RequestMapping(value = "/authority.do")
 	@ResponseBody
 	public SingleResult<Map<String,String>> authority(String appid,String appsecret,String code,String encryptedData,String iv)throws Exception {
@@ -45,5 +50,13 @@ public class AuthorityController extends PortalBaseController{
 			rst.getValue().remove("openid");
 		}
 		return rst;
+	}
+
+	@RequestMapping(value = "/request.do")
+	@ResponseBody
+	public WxUser request()throws Exception {
+		WxUser wxUser=this.getCurWxUser();
+		logger.info("wxUser : {}",wxUser);
+		return wxUser;
 	}
 }

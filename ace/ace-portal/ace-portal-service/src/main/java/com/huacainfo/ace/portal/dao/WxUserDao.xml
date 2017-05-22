@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.WxUserDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.WxUser">
+    <id column="unionId" jdbcType="VARCHAR" property="unionId" />
+    <result column="openId" jdbcType="VARCHAR" property="openId" />
+    <result column="nickName" jdbcType="VARCHAR" property="nickName" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    unionId, openId, nickName, gender, city, province, country, avatarUrl, mobile, addr, 
+    email, name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wx_user
+    where unionId = #{unionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wx_user
+    where unionId = #{unionId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.WxUser">
+    insert into wx_user (unionId, openId, nickName, 
+      gender, city, province, 
+      country, avatarUrl, mobile, 
+      addr, email, name)
+    values (#{unionId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{addr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.WxUser">
+    update wx_user
+    set openId = #{openId,jdbcType=VARCHAR},
+      nickName = #{nickName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      avatarUrl = #{avatarUrl,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
+    where unionId = #{unionId,jdbcType=VARCHAR}
+  </update>
+  <select id="isExit" resultType="int">
+    select count(*) from wx_user where unionId=#{unionId}
+  </select>
+</mapper>

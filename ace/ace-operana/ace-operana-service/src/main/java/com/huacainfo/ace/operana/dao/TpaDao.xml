@@ -110,7 +110,30 @@
 
   <sql id="whereConditionUserTask">
     from tpa t
-    left join portal.users b on t.liable=b.user_id where t.liable=#{condition.liable} and t.status=#{condition.status}
+    left join portal.users b on t.liable=b.user_id
+    left join meeting c on t.meetingId=c.id
+    left join topic d on t.topicId=d.id
+    left join norm e on t.normId=e.id
+    where 0=0
+    <if test="condition.liable!=null and condition.liable!=&quot;&quot;">
+      and t.liable=#{condition.liable}
+    </if>
+    <if test="condition.status!=null and condition.status!=&quot;&quot;">
+      and t.status=#{condition.status}
+    </if>
+    <if test="condition.deptId!=null and condition.deptId!=&quot;&quot;">
+      and b.department_id=#{condition.deptId}
+    </if>
+    <if test='condition.startDate!=null and condition.startDate!=""'>
+      <![CDATA[
+			and t.lastModifyDate>=str_to_date(#{condition.startDate},'%Y-%m-%d')
+			]]>
+    </if>
+    <if test='condition.endDate!=null and condition.endDate!=""'>
+      <![CDATA[
+				and t.lastModifyDate<=str_to_date(#{condition.endDate},'%Y-%m-%d')
+				]]>
+    </if>
   </sql>
   <select id="findCountUserTask" resultType="int">
     SELECT COUNT(*)
@@ -120,7 +143,8 @@
     select m.* from(
     select
     t.meetingId, t.topicId, t.normId, t.productId, t.probDiscri, t.probAnsys, t.actions, t.liable,
-    t.status,ifnull(b.name,'') userName,t.lastModifyDate,t.id,t.createDate
+    t.status,ifnull(b.name,'') userName,t.lastModifyDate,t.id,t.createDate,e.name meetingName,
+    d.name topicName,e.name normName
     <include refid="whereConditionUserTask"/>) m
     <choose>
       <when test='orderBy!=null and orderBy!=""'>
