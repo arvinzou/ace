@@ -22,6 +22,7 @@ pageEncoding="utf-8"%>
 
 
 
+
 </style>
 <link rel="stylesheet"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
@@ -35,14 +36,14 @@ pageEncoding="utf-8"%>
         <div class="col-md-3">
 
 
-                <div class="div-left header-title-custom">即将进行的会议</div>
-                <div class="div-right header-title-custom">
-                    <div style="text-align:right">
-                        <a class="blue" href="javascript:viewMeeting()" data-rel="tooltip" data-placement="top"
-                           title="刷新"><i
-                                class="ace-icon glyphicon glyphicon-refresh"></i></a>
-                    </div>
+            <div class="div-left header-title-custom">即将进行的会议</div>
+            <div class="div-right header-title-custom">
+                <div style="text-align:right">
+                    <a class="blue" href="javascript:viewMeeting()" data-rel="tooltip" data-placement="top"
+                       title="刷新"><i
+                            class="ace-icon glyphicon glyphicon-refresh"></i></a>
                 </div>
+            </div>
 
             <div style="padding-bottom:5px;margin-top:5px">
                 <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
@@ -131,8 +132,9 @@ pageEncoding="utf-8"%>
                     <div class="div-right header-title">
                         <div style="text-align:right"><a data-rel="tooltip" data-placement="top" title="保存签到信息"
                                                          class="blue" href="javascript:presentSetting()"><i
-                                class="ace-icon fa fa-save"></i></a>  <a data-rel="tooltip" data-placement="top" title="与会人员设置"
-                                                         class="blue" href="javascript:userSetting()"><i
+                                class="ace-icon fa fa-save"></i></a> <a data-rel="tooltip" data-placement="top"
+                                                                        title="与会人员设置"
+                                                                        class="blue" href="javascript:userSetting()"><i
                                 class="ace-icon fa fa-plus-circle"></i></a></div>
                     </div>
                 </div>
@@ -187,8 +189,21 @@ pageEncoding="utf-8"%>
 
         </div>
         <div class="col-md-3">
-            <h5 class="header-title">会议统计</h5>
-            <div id="ct1" style="width:300px;height:200px"></div>
+            <div class="row">
+                <h5 class="header-title">会议统计</h5>
+                <div id="ct1" style="width:300px;height:200px"></div>
+            </div>
+            <div class="row" style="m">
+                <div class="div-left header-title-custom">我的任务</div>
+                <div class="div-right header-title-custom">
+                    <div style="text-align:right">
+                        <a class="blue" href="javascript:myTask()" data-rel="tooltip" data-placement="top"
+                           title="执行我的任务"><i
+                                class="ace-icon fa fa-plus-circle"></i></a>
+                    </div>
+                </div>
+                <div id="ct2" style="width:300px;height:200px"></div>
+            </div>
         </div>
 
     </div>
@@ -207,6 +222,8 @@ pageEncoding="utf-8"%>
         src="${pageContext.request.contextPath}/content/index/view.js?version=${cfg.version}&t=1"></script>
 <script
         src="${pageContext.request.contextPath}/content/index/config-1.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/index/config-2.js?version=${cfg.version}"></script>
 <script
         src="${portalPath}/content/common/js/xcheck/XCheck.js?version=${cfg.version}"></script>
 <script
@@ -272,6 +289,7 @@ font-weight:800;
 .nav-search-input{
     width: 92%;
 }
+
 
 
 </style>

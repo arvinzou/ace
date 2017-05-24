@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.operana.dao.report.Task">
+  <select id="query" resultType="map">
+    SELECT
+    a.`name`,
+    count(1) 'value'
+    FROM
+    tpa t
+    LEFT JOIN (
+    SELECT
+    CODE,
+    NAME
+    FROM
+    portal.dict
+    WHERE
+    category_id = '92'
+    ) a ON t.`status` = a.`code`
+    where t.liable=#{userId}
+    GROUP BY
+    a.`name`
+  </select>
+</mapper>

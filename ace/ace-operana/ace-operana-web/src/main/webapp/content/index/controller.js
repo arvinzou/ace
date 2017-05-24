@@ -1114,6 +1114,7 @@ jQuery(function($) {
 });
 function initData() {
 	chart1();
+	chart2();
 }
 function initMyChar1() {
 	if (myChart1 && myChart1.dispose) {
@@ -1124,7 +1125,15 @@ function initMyChar1() {
 	myChart1.setOption(option1, true);
 	myChart1.hideLoading();
 }
-
+function initMyChar2() {
+	if (myChart2 && myChart2.dispose) {
+		myChart2.dispose();
+	}
+	myChart2 = echarts.init(document.getElementById('ct2'), curTheme);
+	window.onresize = myChart2.resize;
+	myChart2.setOption(option2, true);
+	myChart2.hideLoading();
+}
 function chart1() {
 	$.ajax({
 		type : "post",
@@ -1140,4 +1149,27 @@ function chart1() {
 			initMyChar1();
 		}
 	});
+}
+function chart2() {
+	$.ajax({
+		type : "post",
+		url : contextPath + '/anslysis/query.do',
+		data : {
+		    reportId:'task',
+		    userId:userProp.userId
+		},
+		success : function(rst) {
+
+            $(rst.value).each(function(i,o){
+                option2.xAxis[0].data.push(o.name);
+            });
+            $(rst.value).each(function(i,o){
+                            option2.series[0].data.push(o.value);
+                   });
+			initMyChar2();
+		}
+	});
+}
+function myTask(){
+    parent.addPanel("任务执行", contextPath+"/dynamic/service/tpaUserTask/index.jsp", true);
 }
