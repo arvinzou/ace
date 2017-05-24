@@ -30,6 +30,7 @@ public class AnalysisController extends OperanaBaseController {
 		if (CommonUtils.isBlank(condition.get("deptId"))) {
 			condition.put("deptId",this.getCurUserProp().getCorpId());
 		}
+		this.logger.info("condition ->{}",condition);
 		return analysisService.query(condition, reportId);
 	}	
 }
