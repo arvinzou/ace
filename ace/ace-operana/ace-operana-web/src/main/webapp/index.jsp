@@ -189,11 +189,8 @@ pageEncoding="utf-8"%>
 
         </div>
         <div class="col-md-3">
+
             <div class="row">
-                <h5 class="header-title">会议统计</h5>
-                <div id="ct1" style="width:300px;height:200px"></div>
-            </div>
-            <div class="row" style="m">
                 <div class="div-left header-title-custom">我的任务</div>
                 <div class="div-right header-title-custom">
                     <div style="text-align:right">
@@ -203,6 +200,10 @@ pageEncoding="utf-8"%>
                     </div>
                 </div>
                 <div id="ct2" style="width:300px;height:200px"></div>
+            </div>
+            <div class="row">
+                <h5 class="header-title">会议统计</h5>
+                <div id="ct1" style="width:300px;height:200px"></div>
             </div>
         </div>
 
