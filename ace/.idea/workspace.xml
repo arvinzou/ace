@@ -1266,13 +1266,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00061" summary="优化会议建立图标">
-      <created>1494241342512</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1494241342512</updated>
-    </task>
     <task id="LOCAL-00062" summary="优化会议建立图标">
       <created>1494241815481</created>
       <option name="number" value="00062" />
@@ -1609,7 +1602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495599929135</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="统计分析">
+      <created>1496289221001</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1496289221003</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
