@@ -63,7 +63,7 @@
 		<module>ace-kernel</module>
 		<module>ace-weui</module>
 		<module>ace-operana</module>
-		<module>ace-gis</module>
+		<module>ace-luohua</module>
  		<module>ace-autocode</module>
 
 	</modules>
