@@ -23,9 +23,9 @@
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />
-        <module name="ace-weui-client" />
-        <module name="ace-weui-service" />
-        <module name="ace-weui-web" />
+        <module name="ace-weuiluohua-client" />
+        <module name="ace-weuiluohua-service" />
+        <module name="ace-weuiluohua-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -59,6 +59,10 @@
       <module name="ace-weui-client" target="1.7" />
       <module name="ace-weui-service" target="1.7" />
       <module name="ace-weui-web" target="1.7" />
+      <module name="ace-weuiluohua" target="1.7" />
+      <module name="ace-weuiluohua-client" target="1.7" />
+      <module name="ace-weuiluohua-service" target="1.7" />
+      <module name="ace-weuiluohua-web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

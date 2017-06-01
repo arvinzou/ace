@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.weuiluohua.dao.report.Writing">
+  <select id="query" resultType="map">
+    select t.id,t.name,a.name author,DATE_FORMAT(t.dateOfPublication, '%Y-%m-%d') dateOfPublication,
+    b.name category,ifnull(t.reading,0) reading
+    from writing t
+    left join writer a on t.author=a.id
+    left join ( SELECT
+    CODE,
+    NAME
+    FROM
+    portal.dict
+    WHERE
+    category_id = '84') b  on t.category=b.code
+
+    where t.status='1'
+    <if test='condition.name!=null and condition.name!=""'>
+      and t.name like
+      concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="condition.category!=null and condition.category!=&quot;&quot;">
+      and t.category =#{condition.category,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.author!=null and condition.author!=&quot;&quot;">
+      and t.author =#{condition.author,jdbcType=VARCHAR}
+    </if>
+    ORDER BY t.dateOfPublication desc
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+</mapper>

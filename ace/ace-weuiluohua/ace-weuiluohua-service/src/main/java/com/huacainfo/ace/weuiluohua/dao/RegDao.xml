@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.weuiluohua.dao.RegDao">
+  <resultMap id="usersVo" type="com.huacainfo.ace.weuiluohua.vo.UsersVo">
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+    <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+    <result column="SEX" property="sex" jdbcType="CHAR"/>
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+    <result column="NAME" property="name" jdbcType="VARCHAR"/>
+    <result column="DEPARTMENT_ID" property="departmentId"
+            jdbcType="VARCHAR"/>
+    <result column="DEPARTMENT_NAME" property="departmentName"
+            jdbcType="VARCHAR"/>
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR"/>
+    <result column="AREA_NAME" property="areaName" jdbcType="VARCHAR"/>
+    <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
+    <result column="STAUTS" property="stauts" jdbcType="CHAR"/>
+    <result column="LAST_LOGIN_TIME" property="lastLoginTime"
+            jdbcType="TIMESTAMP"/>
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+    <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+    <result column="TELPHONE" property="telphone" jdbcType="VARCHAR"/>
+    <result column="FAX" property="fax" jdbcType="VARCHAR"/>
+    <result column="QQ" property="qq" jdbcType="VARCHAR"/>
+    <result column="SEAT" property="seat" jdbcType="VARCHAR"/>
+    <result column="USER_LEVEL" property="userLevel" jdbcType="VARCHAR"/>
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="DEPARTMENT_NAME" property="departmentName"
+            jdbcType="VARCHAR"/>
+  </resultMap>
+  <insert id="insertUsers" parameterType="com.huacainfo.ace.weuiluohua.model.Users">
+    insert into users (
+    user_id, account, password,
+    sex, id_card, name, department_id,
+    area_code, birthday, stauts,
+    last_login_time, mobile, email,
+    seat, user_level, create_time,telphone,qq,fax
+    )
+    values (#{userId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR},
+    #{password,jdbcType=VARCHAR},
+    #{sex,jdbcType=CHAR}, #{idCard,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    #{departmentId,jdbcType=VARCHAR},
+    #{areaCode,jdbcType=CHAR}, #{birthday,jdbcType=TIMESTAMP},
+    #{stauts,jdbcType=CHAR},
+    now(), #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+    #{seat,jdbcType=VARCHAR},
+    #{userLevel,jdbcType=VARCHAR},now(),
+    #{telphone,jdbcType=VARCHAR},
+    #{qq,jdbcType=VARCHAR},
+    #{fax,jdbcType=VARCHAR}
+    )
+  </insert>
+  <select id="selectUsersByAccount" resultMap="usersVo">
+    select t.user_id,
+    t.account,
+    t.sex,
+    t.id_card,
+    t.name,
+    t.department_id,
+    s.department_name,
+    t.area_code,
+    s2.name area_name,
+    t.birthday,
+    t.stauts,
+    t.last_login_time,
+    t.mobile,
+    t.email,
+    t.telphone,
+    t.qq,
+    t.fax,
+    t.seat,
+    t.user_level,
+    t.create_time from users t left join department s
+    on t.department_id=s.department_id
+    left join province s2
+    on t.area_code=s2.code
+    where t.account = #{account}
+  </select>
+  <select id="isExitUsersByAccount" resultType="int">
+    select count(*) from
+    users where account=#{account}
+  </select>
+</mapper>

@@ -24,10 +24,10 @@
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-client/ace-weui-client.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-client/ace-weui-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-service/ace-weui-service.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-service/ace-weui-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-web/ace-weui-web.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-web/ace-weui-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua.iml" filepath="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-client/ace-weuiluohua-client.iml" filepath="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-client/ace-weuiluohua-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-service/ace-weuiluohua-service.iml" filepath="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-service/ace-weuiluohua-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-web/ace-weuiluohua-web.iml" filepath="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-web/ace-weuiluohua-web.iml" />
     </modules>
   </component>
 </project>
