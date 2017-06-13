@@ -29,7 +29,7 @@ pageEncoding="utf-8"%>
                     类别：<input
                         class="easyui-combobox" style="width: 200px" name="category"
                         data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=83&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=94&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',

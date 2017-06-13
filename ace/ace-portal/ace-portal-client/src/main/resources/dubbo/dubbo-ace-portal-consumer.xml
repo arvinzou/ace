@@ -58,5 +58,7 @@
 
     <dubbo:reference interface="com.huacainfo.ace.portal.service.AuthorityService"
                      id="authorityService"/>
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.ProvinceService"
+                     id="provinceService"/>
 
 </beans>

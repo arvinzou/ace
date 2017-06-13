@@ -57,4 +57,6 @@
                    ref="userCfgService"/>
     <dubbo:service interface="com.huacainfo.ace.portal.service.AuthorityService"
                    ref="authorityService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.ProvinceService"
+                   ref="provinceService"/>
 </beans>

@@ -130,7 +130,9 @@ public class ResourcesServiceImpl implements ResourcesService,
 			o.setCreateTime(new Date());
 			o.setCreateUserId(userProp.getUserId());
 			o.setStauts("1");
-			o.setSyid(userProp.getActiveSyId());
+			if(CommonUtils.isBlank(o.getSyid())){
+				o.setSyid(userProp.getActiveSyId());
+			}
 			this.logger.info(o.toString());
 			if (CommonUtils.isBlank(o.getResourcesId())) {
 				return new MessageResponse(1,"行"+i+ ",编号不能为空！");

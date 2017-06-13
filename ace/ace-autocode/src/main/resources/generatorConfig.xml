@@ -45,7 +45,7 @@
 
 	<!--与原来mybatis-generator不一样，这个table标签不是必须的。只有对生成的映射有复杂要求时，才需要在这里详细配置-->
 	
-	<table tableName="wx_user" schema="portal" mapperName="WxUserDao"
+	<table tableName="province" schema="portal" mapperName="ProvinceDao"
 	enableCountByExample="false" enableUpdateByExample="false"
 
 	enableDeleteByExample="false" enableSelectByExample="false"
@@ -53,7 +53,5 @@
 	selectByExampleQueryId="false">
 	<property name="useActualColumnNames" value="true"/>
 	</table>
-
-
       </context>  
 </generatorConfiguration> 

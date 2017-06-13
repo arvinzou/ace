@@ -61,12 +61,8 @@ public class WritingServiceImpl implements WritingService {
         if (CommonUtils.isBlank(o.getDateOfPublication())) {
             return new MessageResponse(1, "发表日期不能为空！");
         }
-
-        if (CommonUtils.isBlank(o.getIntro())) {
-            return new MessageResponse(1, "简介不能为空！");
-        }
         if (CommonUtils.isBlank(o.getDocText())) {
-            return new MessageResponse(1, "正文不能为空！");
+            return new MessageResponse(1, "作品不能为空！");
         }
         int temp = this.writingDao.isExit(o);
         if (temp > 0) {
@@ -97,13 +93,9 @@ public class WritingServiceImpl implements WritingService {
         if (CommonUtils.isBlank(o.getDateOfPublication())) {
             return new MessageResponse(1, "发表日期不能为空！");
         }
-
-        if (CommonUtils.isBlank(o.getIntro())) {
-            return new MessageResponse(1, "简介不能为空！");
-        }
         if (CommonUtils.isBlank(o.getDocText())) {
 
-            return new MessageResponse(1, "正文不能为空！");
+            return new MessageResponse(1, "作品不能为空！");
         }
         this.logger.info(o.getDocText());
         o.setLastModifyDate(new Date());

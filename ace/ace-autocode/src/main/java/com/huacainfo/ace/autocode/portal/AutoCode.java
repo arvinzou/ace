@@ -38,7 +38,7 @@ public class AutoCode {
 
 	public static void main(String[] args) {
 		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("portal");
-		Class<?> c=com.huacainfo.ace.portal.model.UserCfg.class;
+		Class<?> c=com.huacainfo.ace.portal.model.Province.class;
 		autoCodeUtils.init(c);
 		try {
 			autoCodeUtils.createVO(c);

@@ -47,16 +47,11 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
-								editor=CKEDITOR.replace('docText',{ allowedContent: true });
-                                editor.on( 'change', function( event ) {
-                                    var data = this.getData();//内容
-
-                                    $("textarea[name=docText]").val(data);
-
-                                });
 							}
 						})
-show135Editor();
+$("#dateOfPublication").datebox("setValue",now);
+appendUploadBtn();
+
 
 			});
 	$('#btn-view-edit').on(
@@ -82,9 +77,10 @@ show135Editor();
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
-                                var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
-                                var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
-                                loadText(gd.id);
+                                appendUploadBtn();
+                                 var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
+                                                                var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
+                                                                loadText(gd.id);
 
 
 							}
@@ -118,11 +114,7 @@ show135Editor();
 			});
 
 
-			$('#btn-view-135editor').on(
-            			'click',
-            			function() {
-                    show135Editor();
-            });
+
 });
 
 function preview(id,title){
@@ -188,29 +180,11 @@ function loadText(id) {
 		beforeSend : function(XMLHttpRequest) {
 		},
 		success : function(rst, textStatus) {
-		    editor=CKEDITOR.replace('docText',{ allowedContent: true });
-            editor.on( 'change', function( event ) {
-                var data = this.getData();//内容
-                $("textarea[name=docText]").val(data);
-            });
 			$("textarea[name=intro]").val(rst.value.intro);
-            $("textarea[name=docText]").val(rst.value.docText);
-            editor.setData(rst.value.docText);
-            show135Editor();
+            $("input[name=docText]").val(rst.value.docText);
 		},
 		error : function() {
 			alert("加载错误！");
 		}
 	});
-}
-function show135Editor(){
-    var url = 'http://www.135editor.com/';
-    window.open(url);
-}
-function setContent(data){
-    $("textarea[name=docText]").val(data);
-     editor.setData(data);
-}
-function getContent(){
-   return $("textarea[name=docText]").val();
 }

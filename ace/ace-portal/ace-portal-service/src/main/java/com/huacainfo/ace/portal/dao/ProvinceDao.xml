@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.ProvinceDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Province">
+    <id column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="parent_code" jdbcType="VARCHAR" property="parent_code" />
+  </resultMap>
+  <resultMap id="BaseResultMapVo" extends="BaseResultMap"
+             type="com.huacainfo.ace.portal.vo.ProvinceVo">
+    <result column="parentName" property="parentName"
+            jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    code, name, type, parent_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from province
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from province
+    where code = #{code,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.Province">
+    <selectKey keyProperty="code" resultType="string"
+               order="BEFORE">
+      SELECT
+      lpad(ifnull(max(code),concat(#{parent_code,jdbcType=VARCHAR},'00'))+1,length(#{parent_code,jdbcType=VARCHAR})+2,'0')
+      FROM province where
+      parent_code=#{parent_code,jdbcType=VARCHAR}
+    </selectKey>
+    insert into province (code, name, type, 
+      parent_code)
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{parent_code,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Province">
+    update province
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      parent_code = #{parent_code,jdbcType=VARCHAR}
+    where code = #{code,jdbcType=VARCHAR}
+  </update>
+
+  <sql id="whereCondition">
+    from province t left join province a on t.parent_code=a.code
+    where 0=0
+
+    <if test="condition.name!=null and condition.name!=&quot;&quot;">
+      and t.name like
+      concat(#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.code!=null and condition.code!=""'>
+      and t.code =
+      #{condition.code,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.parent_code!=null and condition.parent_code!=""'>
+      and t.parent_code =
+      #{condition.parent_code,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition" />
+  </select>
+  <select id="findList" resultMap="BaseResultMapVo">
+
+    select
+    t.code,t.name, a.name parentName,t.parent_code
+    <include refid="whereCondition" />
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY t.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.code
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    province
+    where name=#{name}
+  </select>
+</mapper>

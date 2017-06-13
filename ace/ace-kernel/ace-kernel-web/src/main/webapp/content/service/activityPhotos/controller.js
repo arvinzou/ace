@@ -38,6 +38,7 @@ jQuery(function($) {
 						'new',
 						{
 							closeAfterAdd : true,
+							modal:false,
 							recreateForm : true,
 							viewPagerButtons : false,
 							beforeShowForm : function(e) {
@@ -55,6 +56,7 @@ jQuery(function($) {
                                 });
 							}
 						})
+						show135Editor();
 			});
 	$('#btn-view-edit').on(
 			'click',
@@ -70,6 +72,7 @@ jQuery(function($) {
 						gr,
 						{
 							closeAfterAdd : true,
+							modal:false,
 							recreateForm : true,
 							viewPagerButtons : true,
 							beforeShowForm : function(e) {
@@ -83,6 +86,7 @@ jQuery(function($) {
                                 loadText(gd.id);
 							}
 						})
+						show135Editor();
 			});
     $('#btn-view-del').on(
 			'click',
@@ -186,4 +190,8 @@ function loadText(id) {
 			alert("加载错误！");
 		}
 	});
+}
+function show135Editor(){
+    var url = 'http://www.135editor.com/';
+    window.open(url);
 }

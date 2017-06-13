@@ -10,22 +10,12 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
-        <module name="ace-kernel-backend" />
-        <module name="ace-kernel-client" />
-        <module name="ace-kernel-service" />
-        <module name="ace-kernel-web" />
-        <module name="ace-luohua-client" />
-        <module name="ace-luohua-service" />
-        <module name="ace-luohua-web" />
-        <module name="ace-operana-client" />
-        <module name="ace-operana-service" />
-        <module name="ace-operana-web" />
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />
-        <module name="ace-weuiluohua-client" />
-        <module name="ace-weuiluohua-service" />
-        <module name="ace-weuiluohua-web" />
+        <module name="ace-uf-client" />
+        <module name="ace-uf-service" />
+        <module name="ace-uf-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -55,6 +45,10 @@
       <module name="ace-portal-client" target="1.7" />
       <module name="ace-portal-service" target="1.7" />
       <module name="ace-portal-web" target="1.7" />
+      <module name="ace-uf" target="1.7" />
+      <module name="ace-uf-client" target="1.7" />
+      <module name="ace-uf-service" target="1.7" />
+      <module name="ace-uf-web" target="1.7" />
       <module name="ace-weui" target="1.7" />
       <module name="ace-weui-client" target="1.7" />
       <module name="ace-weui-service" target="1.7" />

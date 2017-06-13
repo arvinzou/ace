@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.weuiluohua.dao.report.Writing">
   <select id="query" resultType="map">
     select t.id,t.name,a.name author,DATE_FORMAT(t.dateOfPublication, '%Y-%m-%d') dateOfPublication,
-    b.name category,ifnull(t.reading,0) reading
+    b.name category,ifnull(t.reading,0) reading,t.docText,t.intro
     from writing t
     left join writer a on t.author=a.id
     left join ( SELECT
@@ -12,7 +12,7 @@
     FROM
     portal.dict
     WHERE
-    category_id = '84') b  on t.category=b.code
+    category_id = '95') b  on t.category=b.code
 
     where t.status='1'
     <if test='condition.name!=null and condition.name!=""'>

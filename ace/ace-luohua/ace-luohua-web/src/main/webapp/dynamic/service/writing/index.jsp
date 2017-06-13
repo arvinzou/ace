@@ -10,6 +10,9 @@
 <title>意见反馈</title>
 </head>
 <jsp:include page="../../common/common.jsp" />
+<link rel="stylesheet"
+	  href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+	  type="text/css" media="screen"/>
 <script type="text/javascript">
 
 
@@ -30,7 +33,7 @@
 				类别：<input
 							class="easyui-combobox" style="width: 200px" name="payType"
 							data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=84&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=95&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
@@ -186,6 +189,8 @@
     </div>
 	<jsp:include page="../../common/footer-1.jsp" />
 	<script
+			src="${pageContext.request.contextPath}/content/service/writing/upload.js?version=${cfg.version}"></script>
+	<script
 		src="${pageContext.request.contextPath}/content/service/writing/config.js?version=${cfg.version}"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/service/writing/model.js?version=${cfg.version}"></script>
@@ -193,9 +198,14 @@
 		src="${pageContext.request.contextPath}/content/service/writing/controller.js?version=${cfg.version}"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/service/writing/view.js?version=${cfg.version}"></script>
+	<script type="text/javascript"
+			src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+	<script type="text/javascript"
+			src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+	<script type="text/javascript"
+			src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 
 
-		<script type="text/javascript" src="${portalPath}/ckeditor/ckeditor.js?t=B37D54V"></script>
 	<jsp:include page="../../common/footer-2.jsp" />
 <script type="text/javascript">
 window.onresize = function () {
