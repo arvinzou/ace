@@ -59,7 +59,31 @@ function init_uploader(config) {
 			});
 
 		} else {
-			$('input[name='+config.target+']').val(rst.value);
+
+			if(config.target){
+			    $('input[name='+config.target+']').val(rst.value);
+			}else{
+			    bootbox.dialog({
+                				title : '系统提示',
+                				message : rst.errorMessage,
+                				detail : rst.detail,
+                				buttons : {
+                					"success" : {
+                						"label" : "<i class='ace-icon fa fa-check'></i>确定",
+                						"className" : "btn-sm btn-success",
+                						"callback" : function() {
+                							$("#dialog-message").dialog("close");
+                						}
+                					}
+                				}
+                			});
+			    jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+            		page : 1,
+            		postData : {
+            			areaCode : ''
+            		}
+            	}).trigger("reloadGrid");
+			}
 			$("#dialog-message").dialog("close");
 		}
 	});
