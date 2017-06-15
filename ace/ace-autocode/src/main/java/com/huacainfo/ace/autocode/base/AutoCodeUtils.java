@@ -430,6 +430,28 @@ public class AutoCodeUtils {
                     combox=true;
                 }
             }
+            if(o.getColumName().equals("status")){
+                _colModel.append("edittype : \"checkbox\",\r");
+                _colModel.append("editoptions : {\r");
+                _colModel.append("value : \"1:0\"\r");
+                _colModel.append("},\r");
+                _colModel.append("unformat : aceSwitch,\r");
+                _colModel.append("renderer : function(value) {\r");
+                _colModel.append("var rst = \"\";\r");
+                _colModel.append("switch (value) {\r");
+                _colModel.append("case '1' :\r");
+                _colModel.append("rst = \"ON\";\r");
+                _colModel.append("break;\r");
+                _colModel.append("case '0' :\r");
+                _colModel.append("rst = \"OFF\";\r");
+                _colModel.append("break;\r");
+                _colModel.append("default :\r");
+                _colModel.append("rst = \"N/A\";\r");
+                _colModel.append("}\r");
+                _colModel.append("return rst;\r");
+                _colModel.append("},\r");
+                combox=true;
+            }
             if(!status&&(!combox)){
                 _colModel.append("editoptions : {\r");
                 _colModel.append("size : \"20\",\r");
