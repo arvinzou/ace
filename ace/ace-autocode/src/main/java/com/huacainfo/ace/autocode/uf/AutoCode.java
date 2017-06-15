@@ -12,11 +12,13 @@ public class AutoCode {
 		autoCodeUtils.createDAO(c);
 		autoCodeUtils.createService(c);
 		autoCodeUtils.createServiceImpl(c);
-		autoCodeUtils.createAction(c);*/
+		autoCodeUtils.createAction(c);
 		autoCodeUtils.createJsp(c);
 		autoCodeUtils.createJsConfig(c);
 		autoCodeUtils.createJsView(c);
-		autoCodeUtils.createModel(c);
 		autoCodeUtils.createJsController(c);
+		*/
+		autoCodeUtils.createModel(c);
+
 	}
 }

@@ -6,6 +6,7 @@ public class ColumsInfo implements java.io.Serializable {
 	private String remarks;
 	private String typeName;
 	private String isNullAble;
+	private String len;
 	public String getColumName() {
 		return columName;
 	}
@@ -30,10 +31,23 @@ public class ColumsInfo implements java.io.Serializable {
 	public void setIsNullAble(String isNullAble) {
 		this.isNullAble = isNullAble;
 	}
+
+	public String getLen() {
+		return len;
+	}
+
+	public void setLen(String len) {
+		this.len = len;
+	}
+
 	@Override
 	public String toString() {
-		return "ColumsInfo [columName=" + columName + ", remarks=" + remarks
-				+ ", typeName=" + typeName + ", isNullAble=" + isNullAble + "]";
+		return "ColumsInfo{" +
+				"columName='" + columName + '\'' +
+				", remarks='" + remarks + '\'' +
+				", typeName='" + typeName + '\'' +
+				", isNullAble='" + isNullAble + '\'' +
+				", len='" + len + '\'' +
+				'}';
 	}
-	
 }

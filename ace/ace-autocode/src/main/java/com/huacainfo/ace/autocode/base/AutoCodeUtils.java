@@ -363,17 +363,85 @@ public class AutoCodeUtils {
                 _colModel.append("editable : true,\r");
                 _colModel.append("width : 100,\r");
             }
+            if(o.getTypeName().equals("date")||o.getTypeName().equals("datetime")){
+                if(!status) {
+                    _colModel.append("edittype : \"datebox\",\r");
+                    _colModel.append("dataoptions : {\r");
+                    _colModel.append("    formatter : function(date) {\r");
+                    _colModel.append("var y = date.getFullYear();\r");
+                    _colModel.append("var m = date.getMonth() + 1;\r");
+                    _colModel.append("var d = date.getDate();\r");
+                    _colModel.append("return y + '-' + (m < 10 ? ('0' + m) : m) + '-'\r");
+                    _colModel.append(" + (d < 10 ? ('0' + d) : d);\r");
+                    _colModel.append("},\r");
+                    _colModel.append("parser : function(s) {\r");
+                    _colModel.append("if (!s)\r");
+                    _colModel.append("return new Date();\r");
+                    _colModel.append("var ss = (s.split('-'));\r");
+                    _colModel.append("var y = parseInt(ss[0], 10);\r");
+                    _colModel.append("var m = parseInt(ss[1], 10);\r");
+                    _colModel.append("var d = parseInt(ss[2], 10);\r");
+                    _colModel.append("if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {\r");
+                    _colModel.append("return new Date(y, m - 1, d);\r");
+                    _colModel.append("} else {\r");
+                    _colModel.append("return new Date();\r");
+                    _colModel.append("}\r");
+                    _colModel.append("}\r");
+                    _colModel.append("},\r");
+                }
+            }
 
-            if(!status){
+            boolean combox=false;
+            if(o.getTypeName().equals("varchar")&&o.getLen()!=null){
+               if(o.getLen().equals("20")){
+                   _colModel.append("edittype : \"select\",\r");
+                   _colModel.append("renderer : function(value) {\r");
+                   _colModel.append("return rsd(value, \"01\");\r");
+                   _colModel.append("},\r");
+                   _colModel.append("editoptions : {\r");
+                   _colModel.append("value : odparse(\"01\")\r");
+                   _colModel.append("},\r");
+                   combox=true;
+               }
+            }
+            if(o.getTypeName().equals("varchar")&&o.getLen()!=null){
+                if(o.getLen().equals("12")){
+                    _colModel.append("edittype : \"combotree\",\r");
+                    _colModel.append("dataoptions : {\r");
+                    _colModel.append("url : portalPath + '/system/selectProvinceTreeList.do',\r");
+                    _colModel.append("required : false\r");
+                    _colModel.append("},\r");
+                    _colModel.append("renderer : function(value, cur) {\r");
+                    _colModel.append("return $.jgrid.getAccessor(cur, 'areaName');\r");
+                    _colModel.append("},\r");
+                    combox=true;
+                }
+            }
+            if(o.getTypeName().equals("varchar")&&o.getLen()!=null){
+                if(o.getLen().equals("16")){
+                    _colModel.append("edittype : \"combotree\",\r");
+                    _colModel.append("dataoptions : {\r");
+                    _colModel.append("url : portalPath + '/system/selectDepartmentTreeList.do',\r");
+                    _colModel.append("required : false\r");
+                    _colModel.append("},\r");
+                    _colModel.append("renderer : function(value, cur) {\r");
+                    _colModel.append("return $.jgrid.getAccessor(cur, 'areaName');\r");
+                    _colModel.append("},\r");
+                    combox=true;
+                }
+            }
+            if(!status&&(!combox)){
                 _colModel.append("editoptions : {\r");
                 _colModel.append("size : \"20\",\r");
                 _colModel.append("maxlength : \"50\"\r");
-                _colModel.append("}");
+                _colModel.append("},");
             }
 
 
+
+
             if (o.getIsNullAble().equals("NO")&&(!status)) {
-                _colModel.append(",\rformoptions : {\r");
+                _colModel.append("\rformoptions : {\r");
                 _colModel.append("elmprefix : \"\",\r");
                 _colModel
                         .append("elmsuffix : \"<span style='color:red;font-size:16px;font-weight:800\'>*</span>\"\r");
