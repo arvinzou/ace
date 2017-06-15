@@ -40,14 +40,13 @@
   
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Dict">
     update dict
-    set CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+    set
       CODE = #{code,jdbcType=VARCHAR},
       PCODE= #{pcode,jdbcType=VARCHAR},
       SPELL= #{spell,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
-      REMARK = #{remark,jdbcType=VARCHAR},
-      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
-    where ID = #{id,jdbcType=INTEGER}
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where CATEGORY_ID = #{categoryId,jdbcType=VARCHAR} and  CODE = #{code,jdbcType=VARCHAR}
   </update>
   <sql id="whereCondition">
 		from dict ,dict_category where dict.category_id=dict_category.category_id
@@ -134,5 +133,12 @@ FROM
     ORDER BY t.code) b
 	 	
 	</select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        dict where
+        code=#{code} and category_id = #{categoryId,jdbcType=VARCHAR}
+    </select>
 
 </mapper>

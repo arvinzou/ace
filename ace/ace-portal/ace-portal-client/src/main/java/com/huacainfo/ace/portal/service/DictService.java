@@ -132,4 +132,7 @@ public interface DictService extends WebContextDictService {
 	
 	public List<Map<String,String>> selectSyidBydc() throws Exception;
 
+	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp)
+			throws Exception;
+
 }

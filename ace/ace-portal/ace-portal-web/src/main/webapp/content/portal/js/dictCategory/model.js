@@ -12,7 +12,7 @@ var _colModel = function() {
 	}, {
 		name : 'syid',
 		index : 'syid',
-		width : 60,
+		width : 6,
 		editable : false,
 		edittype : "select",
 		renderer : function(value) {

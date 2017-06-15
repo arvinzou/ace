@@ -20,8 +20,8 @@ function init_uploader() {
 
         // Resize images on clientside if we can
         resize: {
-            width: 1024,
-            height: 1024,
+            width: 600,
+            height: 600,
             quality: 90
         },
 
@@ -56,7 +56,7 @@ function init_uploader() {
             });
 
         } else {
-            $('input[name=docText]').val(rst.value);
+            $('input[name=photo]').val(rst.value);
             $("#dialog-message").dialog("close");
         }
     });
@@ -72,7 +72,7 @@ function appendUploadBtn() {
     var html = new Array();
     html.push("<a id='btn-upload-add' class='ace-icon glyphicon glyphicon-upload bigger-110' href='javascript:false'>上传</a>");
     html.push("<a id='btn-upload-view' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
-    $("#docText").after(html.join(''));
+    $("#photo").after(html.join(''));
     $("#btn-upload-add").on('click',
     function(e) {
         e.preventDefault();
@@ -121,7 +121,7 @@ function appendUploadBtn() {
 
             ]
         });
-        var fileName = $('input[name=docText]').val();
+        var fileName = $('input[name=photo]').val();
         if (!fileName || fileName == '') {
             return;
         }

@@ -6,7 +6,7 @@ var _colModel = function() {
 				index : 'id',
 				width : 100,
 				sortable : false,
-				editable : true,
+				editable : false,
 				editoptions : {
 					readonly : true
 				}
@@ -16,7 +16,7 @@ var _colModel = function() {
 				index : 'pcode',
 				width : 100,
 				sortable : false,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -24,7 +24,7 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 				},
 				editrules : {
 					required : false
@@ -89,17 +89,17 @@ var _colModel = function() {
 				name : 'spell',
 				index : 'spell',
 				width : 100,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "30"
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 				},
 				editrules : {
-					required : true
+					required : false
 				}
 			}, {
 				name : 'createTime',

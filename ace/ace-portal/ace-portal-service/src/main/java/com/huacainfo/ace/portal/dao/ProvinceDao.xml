@@ -40,9 +40,8 @@
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Province">
     update province
-    set name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      parent_code = #{parent_code,jdbcType=VARCHAR}
+    set name = #{name,jdbcType=VARCHAR}
+
     where code = #{code,jdbcType=VARCHAR}
   </update>
 

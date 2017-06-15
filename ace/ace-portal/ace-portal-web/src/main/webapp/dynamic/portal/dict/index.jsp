@@ -10,10 +10,12 @@
 <title>dict</title>
 </head>
 <jsp:include page="../../common/common.jsp" />
-<script type="text/javascript">
-
-
-</script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+<style type="text/css">
+		.excel{ background-color:#999; font-size:13px;}
+		.excel td{ background-color:#fff; white-space:nowrap;}
+		.excel th{ background-color:#E7E7E7; font-weight:normal;}
+</style>
 <body>
 	<div class="page-content">
 		<div class="widget-box" id="widget-box">
@@ -68,6 +70,11 @@
 							 <i
 								class="ace-icon glyphicon glyphicon-refresh  align-middle bigger-125 icon-on-right"></i>
 						</button>
+						<button class="btn btn-info" id="btn-view-import"
+								authority="false">
+							Excel导入<i
+								class="ace-icon glyphicon glyphicon-upload  align-middle bigger-125 icon-on-right"></i>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -116,8 +123,19 @@
         <div onclick="expand()">展开</div>
         <div onclick="collapse()">收回</div>
     </div>
-		
-		
+
+	<div id="dialog-message" class="hide">
+
+		<div id="uploader">
+			<p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+		</div>
+
+		<div style="margin:5px">
+
+			<a href="rs.xls" style="color:red">下载模板</a>.<br>
+
+
+		</div>
 	<jsp:include page="../../common/footer-1.jsp" />
 	<script
 		src="${pageContext.request.contextPath}/content/portal/js/dict/config.js?version=${cfg.version}"></script>
@@ -166,5 +184,12 @@ jQuery(function($) {
 	});
 });
 </script>
+
+	<script
+			src="${pageContext.request.contextPath}/content/portal/js/dict/upload.js?version=${cfg.version}"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
 </body>
 </html>

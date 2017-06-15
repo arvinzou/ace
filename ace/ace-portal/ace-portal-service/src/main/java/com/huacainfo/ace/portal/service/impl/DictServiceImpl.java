@@ -2,11 +2,7 @@ package com.huacainfo.ace.portal.service.impl;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,6 +19,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.service.WebContextDictService;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.dao.DictCategoryMapper;
@@ -74,7 +71,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 
 			o.setPcode("0");
 		}
-
+		o.setSpell(CommonUtils.getPinYinHeadChar(o.getName()));
 		int temp = this.dictMapper.isExitByNameAndCategoryId(
 				o.getName(), o.getCategoryId());
 		if (temp > 0) {
@@ -103,6 +100,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		if (CommonUtils.isBlank(o.getPcode())) {
 			o.setPcode("0");
 		}
+		o.setSpell(CommonUtils.getPinYinHeadChar(o.getName()));
 		this.dictMapper.updateByPrimaryKey(o);
 		this.dataBaseLogService.log("变更字典", "字典", "", o.getName(),
 				o.getName(), userProp);
@@ -220,7 +218,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 					category = row.get("CATEGORY_ID".toLowerCase());
 					remark = row.get("REMARK".toLowerCase());
 					if (CommonUtils.isBlank(remark)) {
-						sql = "select * from dict where category_id= '"
+						sql = "select CODE,NAME from dict where category_id= '"
 								+ category + "'";
 					} else {
 						sql = remark;
@@ -307,5 +305,42 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 	
 	public List<Map<String,String>> selectSyidBydc(){
 		return this.dictDao.selectSyidBydc();
+	}
+
+
+	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
+		int i = 1;
+		for (Map<String, Object> row : list) {
+			Dict o = new Dict();
+			CommonBeanUtils.copyMap2Bean(o,row);
+			if(CommonUtils.isNotEmpty(o.getCategoryId())){
+				o.setCreateTime(new Date());
+				this.logger.info(o.toString());
+				if (CommonUtils.isBlank(o.getCategoryId())) {
+					return new MessageResponse(1,"行"+i+ ",类别不能为空！");
+				}
+				if (CommonUtils.isBlank(o.getCode())) {
+					return new MessageResponse(1, "行"+i+ ",编码不能为空！");
+				}
+				if (CommonUtils.isBlank(o.getName())) {
+					return new MessageResponse(1, "行"+i+ ",名称不能为空！");
+				}
+				if (CommonUtils.isBlank(o.getPcode())) {
+					o.setPcode("0");
+				}
+				o.setSpell(CommonUtils.getPinYinHeadChar(o.getName()));
+				int t = dictMapper.isExit(o);
+				if (t > 0) {
+					this.dictMapper.updateByPrimaryKey(o);
+
+				} else {
+					this.dictMapper.insert(o);
+				}
+				i++;
+			}
+		}
+		this.dataBaseLogService.log("字典导入", "字典", "", "rs.xls",
+				"rs.xls", userProp);
+		return new MessageResponse(0, "字典导入完成！");
 	}
 }

@@ -1,0 +1,89 @@
+package com.huacainfo.ace.uf.service.impl;
+
+
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.uf.dao.$!{bean.name}Dao;
+import com.huacainfo.ace.uf.model.$!{bean.name};
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.uf.service.$!{bean.name}Service;
+import com.huacainfo.ace.uf.vo.$!{bean.name}Vo;
+import com.huacainfo.ace.uf.vo.$!{bean.name}QVo;
+@Service("$!{bean.lowerName}Service")
+public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private $!{bean.name}Dao $!{bean.lowerName}Dao;
+	@Autowired
+	private DataBaseLogService dataBaseLogService;
+
+	public PageResult<$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start,
+			int limit, String orderBy) throws Exception {
+		PageResult<$!{bean.name}Vo> rst = new PageResult<$!{bean.name}Vo>();
+		List<$!{bean.name}Vo> list = this.$!{bean.lowerName}Dao.findList(condition,
+				start, start + limit, orderBy);
+		rst.setRows(list);
+		if (start <= 1) {
+			int allRows = this.$!{bean.lowerName}Dao.findCount(condition);
+			rst.setTotal(allRows);
+		}
+		return rst;
+	}
+
+	public MessageResponse insert$!{bean.name}($!{bean.name} o, UserProp userProp)
+			throws Exception {
+		//o.setId(UUID.randomUUID().toString());
+		o.setId(String.valueOf(new Date().getTime()));
+		$!{bean.validate}
+		int temp = this.$!{bean.lowerName}Dao.isExit(o);
+		if (temp > 0) {
+			return new MessageResponse(1, "$!{bean.tableChineseName}名称重复！");
+		}
+		o.setCreateDate(new Date());
+		o.setStatus("1");
+		o.setCreateUserName(userProp.getName());
+		o.setCreateUserId(userProp.getUserId());
+		this.$!{bean.lowerName}Dao.insert(o);
+		this.dataBaseLogService.log("添加$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "", o.getName(),
+				o.getName(), userProp);
+		return new MessageResponse(0, "添加$!{bean.tableChineseName}完成！");
+	}
+
+	public MessageResponse update$!{bean.name}($!{bean.name} o, UserProp userProp)
+			throws Exception {
+		$!{bean.validate}
+		
+		o.setLastModifyDate(new Date());
+		o.setLastModifyUserName(userProp.getName());
+		o.setLastModifyUserId(userProp.getUserId());
+		this.$!{bean.lowerName}Dao.updateByPrimaryKey(o);
+		this.dataBaseLogService.log("变更$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "", o.getName(),
+				o.getName(), userProp);
+		return new MessageResponse(0, "变更$!{bean.tableChineseName}完成！");
+	}
+
+	public SingleResult<$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception {
+		SingleResult<$!{bean.name}Vo> rst = new SingleResult<$!{bean.name}Vo>();
+		rst.setValue(this.$!{bean.lowerName}Dao.selectByPrimaryKey(id));
+		return rst;
+	}
+
+	public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,
+			UserProp userProp) throws Exception {
+		this.$!{bean.lowerName}Dao.deleteByPrimaryKey(id);
+		this.dataBaseLogService.log("删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}", String.valueOf(id),
+				String.valueOf(id), "$!{bean.tableChineseName}", userProp);
+		return new MessageResponse(0, "$!{bean.tableChineseName}删除完成！");
+	}
+}

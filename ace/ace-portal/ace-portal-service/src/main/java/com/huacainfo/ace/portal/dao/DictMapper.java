@@ -28,4 +28,6 @@ public interface DictMapper {
 	
 	int isExitByNameAndCategoryId(@Param("name")String name,@Param("categoryId")String categoryId);
 	List<Map<String,Object>>selectDictTreeList(@Param("pid")String pid);
+
+	int isExit(Dict record);
 }

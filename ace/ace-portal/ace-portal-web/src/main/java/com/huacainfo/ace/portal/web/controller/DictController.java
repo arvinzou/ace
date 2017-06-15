@@ -1,18 +1,18 @@
 package com.huacainfo.ace.portal.web.controller;
 
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.portal.vo.MongoFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -28,6 +28,7 @@ import com.huacainfo.ace.common.tools.DictUtils;
 import com.huacainfo.ace.portal.model.Dict;
 import com.huacainfo.ace.portal.service.DictService;
 import com.huacainfo.ace.portal.vo.DictVo;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/dict")
@@ -77,6 +78,7 @@ public class DictController extends PortalBaseController {
 	@RequestMapping(value = "/insertDict.do")
 	@ResponseBody
 	public MessageResponse insertDict(String jsons) throws Exception {
+		jsons=jsons.replaceAll("_empty","");
 		Dict obj = JSON.parseObject(jsons, Dict.class);
 		MessageResponse rst = this.dictService.insertDict(obj,
 				this.getCurUserProp());
@@ -227,5 +229,39 @@ public class DictController extends PortalBaseController {
 		dictJsonListString = dictJsonListString.replaceAll("\t", "");
 		dictJsonListString = "var staticDictObject=" + dictJsonListString;
 		return dictJsonListString;
+	}
+
+	@RequestMapping(value = "/importXls.do")
+	@ResponseBody
+	public MessageResponse importXls(@RequestParam MultipartFile[] file,
+									 String jsons) throws Exception {
+		ExcelUtils utils = new ExcelUtils();
+		List<Map<String, Object>> list=new ArrayList<Map<String, Object>>();
+		MongoFile[] files = new MongoFile[file.length];
+		int i = 0;
+		for (MultipartFile o : file) {
+			MongoFile obj = new MongoFile();
+			obj.setInputStream(o.getInputStream());
+			obj.setFilename(o.getOriginalFilename());
+			obj.setLength(o.getSize());
+			files[i] = obj;
+			i++;
+			String ext = obj
+					.getFilename()
+					.toLowerCase()
+					.substring(
+							obj.getFilename().toLowerCase()
+									.lastIndexOf("."));
+			this.logger.info(ext);
+			if (ext.equals(".xls")) {
+				List<Map<String, Object>> t = utils.readExcelByJXL(obj.getInputStream(), 1);
+				list.addAll(t);
+			}
+			if (ext.equals(".xlsx")) {
+				List<Map<String, Object>> t  = utils.readExcelByPOI(obj.getInputStream(), 1);
+				list.addAll(t);
+			}
+		}
+		return this.dictService.importXls(list, this.getCurUserProp());
 	}
 }

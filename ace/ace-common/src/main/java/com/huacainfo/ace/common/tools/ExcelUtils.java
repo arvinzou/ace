@@ -52,6 +52,7 @@ public class ExcelUtils {
 		 WorkbookSettings workbookSettings = new WorkbookSettings();
 		   workbookSettings.setEncoding("GBK"); //解决中文乱码，或GBK
 		Workbook workbook = Workbook.getWorkbook(is,workbookSettings);
+
 		
 		Sheet sheet = workbook.getSheet(0);
 		int cols = sheet.getColumns();
