@@ -6188,6 +6188,7 @@ $.extend($.jgrid,{
 				case "combobox" :
 				case "datebox" :
 				case "datetimebox" :
+				case "timespinner" :
 				case "combogrid" :
 					elem = document.createElement("input");
 					setAttributes(elem, options);
@@ -7653,7 +7654,7 @@ $.jgrid.extend({
 					vl=r[nm];
 				}
 				if ( nm !== 'cb' && nm !== 'subgrid' && this.editable===true && nm !== 'rn') {
-					if( $.inArray(this.edittype, ['combotree','combogrid','datetimebox','datebox','combobox']) > -1) {
+					if( $.inArray(this.edittype, ['combotree','combogrid','datetimebox','datebox','combobox','timespinner']) > -1) {
 						switch (this.edittype) {
 							case "combogrid":
 								if(this.dataoptions){
@@ -7708,6 +7709,11 @@ $.jgrid.extend({
 									);
 								}
 							break;
+							case "timespinner":
+                                $(_id).timespinner(
+                                    this.dataoptions
+                                );
+                            break;
 						}
 					}
 				}
@@ -7804,7 +7810,7 @@ $.jgrid.extend({
 					var nm = this.name;
 					var val='',_id='#'+nm;
 					if ( nm !== 'cb' && nm !== 'subgrid' && this.editable===true && nm !== 'rn') {
-						if( $.inArray(this.edittype, ['combotree','combogrid','datetimebox','datebox','combobox']) > -1) {
+						if( $.inArray(this.edittype, ['combotree','combogrid','datetimebox','datebox','combobox','timespinner']) > -1) {
 							var val='';
 							switch (this.edittype) {
 								case "combogrid":
@@ -7832,6 +7838,9 @@ $.jgrid.extend({
 								case "combobox":
 									val=$(_id).combobox('getValue');
 								break;
+								case "timespinner":
+                                	val=$(_id).timespinner('getValue');
+                                break;
 							}
 							postdata[nm]=val;
 						}
@@ -9669,7 +9678,7 @@ $.jgrid.extend({
 							if(cm[i].edittype === "select" && cm[i].editoptions!==undefined && cm[i].editoptions.multiple===true  && cm[i].editoptions.dataUrl===undefined && $.jgrid.msie) {
 								$(elc).width($(elc).width());
 							}
-							if( $.inArray(cm[i].edittype, ['combotree','combogrid','datetimebox','datebox','combobox']) > -1) {
+							if( $.inArray(cm[i].edittype, ['combotree','combogrid','datetimebox','datebox','combobox','timespinner']) > -1) {
                             								console.log(cm[i].edittype);
                             								switch (cm[i].edittype) {
                             									case "combogrid":
@@ -9716,6 +9725,11 @@ $.jgrid.extend({
                             												cm[i].dataoptions
                             										);
                             									break;
+                            									case "timespinner":
+                                                                    $(_id).timespinner(
+                                                                            cm[i].dataoptions
+                                                                    );
+                                                                break;
                             									case "combobox":
                             										$(_id).combobox(
                             												cm[i].dataoptions
@@ -9840,6 +9854,10 @@ $.jgrid.extend({
 						tmp[nm]=$(_id).datetimebox('getValue');
 						tmp2[nm]=$(_id).datetimebox('getText');
 					break;
+					case "timespinner":
+                        tmp[nm]=$(_id).timespinner('getValue');
+                        tmp2[nm]=$(_id).timespinner('getValue');
+                    break;
 					case "combobox":
 						tmp[nm]=$(_id).combobox('getValue');
 						tmp2[nm]=$(_id).combobox('getText');
@@ -10406,7 +10424,7 @@ $.jgrid.extend({
 				}
 				console.log(vl);
 				//扩展编辑器
-				if( $.inArray(cm.edittype, ['combotree','combogrid','datetimebox','datebox','combobox']) > -1) {
+				if( $.inArray(cm.edittype, ['combotree','combogrid','datetimebox','datebox','combobox','timespinner']) > -1) {
 					switch (cm.edittype) {
 						case "combogrid":
 							if(cm.dataoptions){
@@ -10448,6 +10466,11 @@ $.jgrid.extend({
 						case "datetimebox":
 							$(_id).datetimebox(
 								cm.dataoptions	
+							);
+						break;
+						case "timespinner":
+							$(_id).timespinner(
+								cm.dataoptions
 							);
 						break;
 						case "combobox":
@@ -10546,6 +10569,10 @@ $.jgrid.extend({
 				case "datetimebox":
 					v=$(_id).datetimebox('getValue');
 					v2=$(_id).datetimebox('getText');
+				break;
+				case "timespinner":
+					v=$(_id).timespinner('getValue');
+					v2=$(_id).timespinner('getValue');
 				break;
 				case "combobox":
 					v=$(_id).combobox('getValue');

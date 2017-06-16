@@ -5,9 +5,9 @@ import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 public class AutoCode {
 	public static void main(String[] args) throws Exception{
 		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("uf");
-		Class<?> c=com.huacainfo.ace.uf.model.Personage.class;
+		Class<?> c=com.huacainfo.ace.uf.model.Organization.class;
 		autoCodeUtils.init(c);
-		/*autoCodeUtils.createVO(c);
+		autoCodeUtils.createVO(c);
 		autoCodeUtils.createQVO(c);
 		autoCodeUtils.createDAO(c);
 		autoCodeUtils.createService(c);
@@ -17,7 +17,7 @@ public class AutoCode {
 		autoCodeUtils.createJsConfig(c);
 		autoCodeUtils.createJsView(c);
 		autoCodeUtils.createJsController(c);
-		*/
+
 		autoCodeUtils.createModel(c);
 
 	}

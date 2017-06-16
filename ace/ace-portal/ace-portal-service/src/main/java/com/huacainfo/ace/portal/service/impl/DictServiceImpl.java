@@ -274,6 +274,15 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 			week.add(o);
 		}
 		rst.put("week",week);
+
+		List<Map<String,Object>> hours =new ArrayList<Map<String,Object>>();
+		for(int i=1;i<=24;i++){
+			Map<String,Object> o=new HashMap<String,Object>();
+			o.put("CODE",String.valueOf(i));
+			o.put("NAME",String.valueOf(i));
+			hours.add(o);
+		}
+		rst.put("hours",hours);
 		return rst;
 	}
 	public  List<Tree>  selectDictTreeList(String pid) throws Exception{

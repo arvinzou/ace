@@ -1,177 +1,178 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.uf.dao.PersonageDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.Personage">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
-    <result column="deptId" jdbcType="VARCHAR" property="deptId" />
-    <result column="category" jdbcType="VARCHAR" property="category" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="sex" jdbcType="CHAR" property="sex" />
-    <result column="birthday" jdbcType="DATE" property="birthday" />
-    <result column="photo" jdbcType="VARCHAR" property="photo" />
-    <result column="placeOfOrigin" jdbcType="VARCHAR" property="placeOfOrigin" />
-    <result column="nation" jdbcType="VARCHAR" property="nation" />
-    <result column="degreee" jdbcType="VARCHAR" property="degreee" />
-    <result column="academicTitle" jdbcType="VARCHAR" property="academicTitle" />
-    <result column="rank" jdbcType="VARCHAR" property="rank" />
-    <result column="party" jdbcType="VARCHAR" property="party" />
-    <result column="joinDate" jdbcType="TIMESTAMP" property="joinDate" />
-    <result column="administrativeDuty" jdbcType="VARCHAR" property="administrativeDuty" />
-    <result column="currentPostDate" jdbcType="TIMESTAMP" property="currentPostDate" />
-    <result column="currentRankDate" jdbcType="TIMESTAMP" property="currentRankDate" />
-    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-    <result column="tel" jdbcType="VARCHAR" property="tel" />
-    <result column="pcode" jdbcType="VARCHAR" property="pcode" />
-    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
-    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.uf.model.Personage">
-    <result column="intro" jdbcType="LONGVARCHAR" property="intro" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.uf.vo.PersonageVo">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.Personage">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="photo" jdbcType="VARCHAR" property="photo"/>
+        <result column="placeOfOrigin" jdbcType="VARCHAR" property="placeOfOrigin"/>
+        <result column="nation" jdbcType="VARCHAR" property="nation"/>
+        <result column="degreee" jdbcType="VARCHAR" property="degreee"/>
+        <result column="academicTitle" jdbcType="VARCHAR" property="academicTitle"/>
+        <result column="rank" jdbcType="VARCHAR" property="rank"/>
+        <result column="party" jdbcType="VARCHAR" property="party"/>
+        <result column="joinDate" jdbcType="TIMESTAMP" property="joinDate"/>
+        <result column="administrativeDuty" jdbcType="VARCHAR" property="administrativeDuty"/>
+        <result column="currentPostDate" jdbcType="TIMESTAMP" property="currentPostDate"/>
+        <result column="currentRankDate" jdbcType="TIMESTAMP" property="currentRankDate"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="tel" jdbcType="VARCHAR" property="tel"/>
+        <result column="pcode" jdbcType="VARCHAR" property="pcode"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.uf.model.Personage">
+        <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.uf.vo.PersonageVo">
 
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, areaCode, deptId, category, name, sex, birthday, photo, placeOfOrigin, nation, 
-    degreee, academicTitle, rank, party, joinDate, administrativeDuty, currentPostDate, 
-    currentRankDate, mobile, tel, pcode, latitude, longitude, remark, status, createUserId, 
-    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
-  </sql>
-  <sql id="Blob_Column_List">
-    intro
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
-    select
-    t.id, t.areaCode, t.deptId, t.category, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
-    t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
-    t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark, t.status, t.createUserId,
-    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-    t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName
-    from personage t
-    left join portal.province a on t.areaCode=a.code
-    left join portal.department b on t.deptId=b.department_id
-    left join portal.province c on t.placeOfOrigin=c.code
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, areaCode, deptId, category, name, sex, birthday, photo, placeOfOrigin, nation,
+        degreee, academicTitle, rank, party, joinDate, administrativeDuty, currentPostDate,
+        currentRankDate, mobile, tel, pcode, latitude, longitude, remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <sql id="Blob_Column_List">
+        intro
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        t.id, t.areaCode, t.deptId, t.category, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
+        t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
+        t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark, t.status, t.createUserId,
+        t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
+        t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName
+        from personage t
+        left join portal.province a on t.areaCode=a.code
+        left join portal.department b on t.deptId=b.department_id
+        left join portal.province c on t.placeOfOrigin=c.code
 
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from personage
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.uf.model.Personage">
-    insert into personage (id, areaCode, deptId, 
-      category, name, sex, birthday, 
-      photo, placeOfOrigin, nation, 
-      degreee, academicTitle, rank, 
-      party, joinDate, administrativeDuty, 
-      currentPostDate, currentRankDate, mobile, 
-      tel, pcode, latitude, 
-      longitude, remark, status, 
-      createUserId, createUserName, createDate, 
-      lastModifyUserId, lastModifyUserName, lastModifyDate, 
-      intro)
-    values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, 
-      #{category,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, 
-      #{photo,jdbcType=VARCHAR}, #{placeOfOrigin,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
-      #{degreee,jdbcType=VARCHAR}, #{academicTitle,jdbcType=VARCHAR}, #{rank,jdbcType=VARCHAR}, 
-      #{party,jdbcType=VARCHAR}, #{joinDate,jdbcType=TIMESTAMP}, #{administrativeDuty,jdbcType=VARCHAR}, 
-      #{currentPostDate,jdbcType=TIMESTAMP}, #{currentRankDate,jdbcType=TIMESTAMP}, #{mobile,jdbcType=VARCHAR}, 
-      #{tel,jdbcType=VARCHAR}, #{pcode,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, 
-      #{longitude,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
-      #{intro,jdbcType=LONGVARCHAR})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.Personage">
-    update personage
-    set areaCode = #{areaCode,jdbcType=VARCHAR},
-    deptId = #{deptId,jdbcType=VARCHAR},
-    category = #{category,jdbcType=VARCHAR},
-    name = #{name,jdbcType=VARCHAR},
-    sex = #{sex,jdbcType=CHAR},
-    birthday = #{birthday,jdbcType=DATE},
-    photo = #{photo,jdbcType=VARCHAR},
-    placeOfOrigin = #{placeOfOrigin,jdbcType=VARCHAR},
-    nation = #{nation,jdbcType=VARCHAR},
-    degreee = #{degreee,jdbcType=VARCHAR},
-    academicTitle = #{academicTitle,jdbcType=VARCHAR},
-    rank = #{rank,jdbcType=VARCHAR},
-    party = #{party,jdbcType=VARCHAR},
-    joinDate = #{joinDate,jdbcType=TIMESTAMP},
-    administrativeDuty = #{administrativeDuty,jdbcType=VARCHAR},
-    currentPostDate = #{currentPostDate,jdbcType=TIMESTAMP},
-    currentRankDate = #{currentRankDate,jdbcType=TIMESTAMP},
-    mobile = #{mobile,jdbcType=VARCHAR},
-    tel = #{tel,jdbcType=VARCHAR},
-    pcode = #{pcode,jdbcType=VARCHAR},
-    latitude = #{latitude,jdbcType=DECIMAL},
-    longitude = #{longitude,jdbcType=DECIMAL},
-    remark = #{remark,jdbcType=VARCHAR},
-    status = #{status,jdbcType=CHAR},
-    lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-    lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-    lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-    intro = #{intro,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <sql id="whereCondition">
-    from personage t
-    left join portal.province a on t.areaCode=a.code
-    left join portal.department b on t.deptId=b.department_id
-    left join portal.province c on t.placeOfOrigin=c.code
-    where 0=0
-    <if test='condition.name!=null and condition.name!=""'>
-      and t.name like
-      concat('%',#{condition.name,jdbcType=VARCHAR},'%')
-    </if>
-    <if test="condition.category!=null and condition.category!=&quot;&quot;">
-      and t.category =#{condition.category,jdbcType=VARCHAR}
-    </if>
-    <if test="condition.mobile!=null and condition.mobile!=&quot;&quot;">
-      and t.mobile =#{condition.mobile,jdbcType=VARCHAR}
-    </if>
-  </sql>
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*)
-    <include refid="whereCondition"/>
-  </select>
-  <select id="findList" resultMap="BaseResultMapVo">
-select m.* from(
-    select
-    t.id, t.areaCode, t.deptId, t.category, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
-    t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
-    t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark, t.status, t.createUserId,
-    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-    t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from personage
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.uf.model.Personage">
+        insert into personage (id, areaCode, deptId,
+        category, name, sex, birthday,
+        photo, placeOfOrigin, nation,
+        degreee, academicTitle, rank,
+        party, joinDate, administrativeDuty,
+        currentPostDate, currentRankDate, mobile,
+        tel, pcode, latitude,
+        longitude, remark, status,
+        createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate,
+        intro)
+        values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR},
+        #{category,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE},
+        #{photo,jdbcType=VARCHAR}, #{placeOfOrigin,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR},
+        #{degreee,jdbcType=VARCHAR}, #{academicTitle,jdbcType=VARCHAR}, #{rank,jdbcType=VARCHAR},
+        #{party,jdbcType=VARCHAR}, #{joinDate,jdbcType=TIMESTAMP}, #{administrativeDuty,jdbcType=VARCHAR},
+        #{currentPostDate,jdbcType=TIMESTAMP}, #{currentRankDate,jdbcType=TIMESTAMP}, #{mobile,jdbcType=VARCHAR},
+        #{tel,jdbcType=VARCHAR}, #{pcode,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL},
+        #{longitude,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{intro,jdbcType=LONGVARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.Personage">
+        update personage
+        set areaCode = #{areaCode,jdbcType=VARCHAR},
+        deptId = #{deptId,jdbcType=VARCHAR},
+        category = #{category,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=CHAR},
+        birthday = #{birthday,jdbcType=DATE},
+        photo = #{photo,jdbcType=VARCHAR},
+        placeOfOrigin = #{placeOfOrigin,jdbcType=VARCHAR},
+        nation = #{nation,jdbcType=VARCHAR},
+        degreee = #{degreee,jdbcType=VARCHAR},
+        academicTitle = #{academicTitle,jdbcType=VARCHAR},
+        rank = #{rank,jdbcType=VARCHAR},
+        party = #{party,jdbcType=VARCHAR},
+        joinDate = #{joinDate,jdbcType=TIMESTAMP},
+        administrativeDuty = #{administrativeDuty,jdbcType=VARCHAR},
+        currentPostDate = #{currentPostDate,jdbcType=TIMESTAMP},
+        currentRankDate = #{currentRankDate,jdbcType=TIMESTAMP},
+        mobile = #{mobile,jdbcType=VARCHAR},
+        tel = #{tel,jdbcType=VARCHAR},
+        pcode = #{pcode,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+        intro = #{intro,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <sql id="whereCondition">
+        from personage t
+        left join portal.province a on t.areaCode=a.code
+        left join portal.department b on t.deptId=b.department_id
+        left join portal.province c on t.placeOfOrigin=c.code
+        where 0=0
+        <if test='condition.name!=null and condition.name!=""'>
+            and t.name like
+            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and t.areaCode like
+            concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and t.category =#{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.mobile!=null and condition.mobile!=&quot;&quot;">
+            and t.mobile =#{condition.mobile,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        t.id, t.areaCode, t.deptId, t.category, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
+        t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
+        t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark, t.status, t.createUserId,
+        t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
+        t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName
 
-    <include refid="whereCondition"/>
-    ) m
-    <choose>
-      <when test='orderBy!=null and orderBy!=""'>
-        ORDER BY m.${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY m.createDate
-      </otherwise>
-    </choose>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-
-  </select>
-
-  <select id="isExit" resultType="int">
-    select count(*)
-    from
-    personage where
-    name=#{name} and areaCode=#{areaCode} and mobile=#{mobile}
-  </select>
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        personage where
+        name=#{name} and areaCode=#{areaCode} and mobile=#{mobile}
+    </select>
 </mapper>
