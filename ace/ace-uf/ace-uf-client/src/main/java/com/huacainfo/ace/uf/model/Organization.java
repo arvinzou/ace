@@ -3,7 +3,7 @@ package com.huacainfo.ace.uf.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Organization {
+public class Organization implements java.io.Serializable{
     private static final long serialVersionUID = 1L;
     private String id;
 

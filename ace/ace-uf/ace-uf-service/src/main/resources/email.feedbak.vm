@@ -1,0 +1,12 @@
+<html>
+<body>
+<h3>您好 $!{name}!</h3>
+
+<div style="font-size:16px">
+    感谢您的留言建议，答复如下：<span><strong> $!{replyText}</strong></span><br>
+    本Email是系统自动发送，请勿回复！<br>
+    $!{sysDate}<br>
+    留言内容： $!{docText}，
+</div>
+</body>
+</html>
