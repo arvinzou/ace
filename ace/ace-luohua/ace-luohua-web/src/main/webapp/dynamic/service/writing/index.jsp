@@ -204,7 +204,7 @@
 			src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
 	<script type="text/javascript"
 			src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
-
+	<script type="text/javascript" src="${portalPath}/ckeditor/ckeditor.js?t=B37D54V"></script>
 
 	<jsp:include page="../../common/footer-2.jsp" />
 <script type="text/javascript">

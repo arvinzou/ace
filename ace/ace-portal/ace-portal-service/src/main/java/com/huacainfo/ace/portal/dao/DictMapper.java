@@ -30,4 +30,5 @@ public interface DictMapper {
 	List<Map<String,Object>>selectDictTreeList(@Param("pid")String pid);
 
 	int isExit(Dict record);
+	List<Map<String,String>> selectAreaCode();
 }

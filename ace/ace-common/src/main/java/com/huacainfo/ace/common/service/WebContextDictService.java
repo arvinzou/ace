@@ -7,4 +7,5 @@ public interface WebContextDictService {
 	
 	public Map<String, List<Map<String,Object>>> flushJavaScriptFile(String syid) ;
 	public List<Map<String,String>> selectSyidBydc() throws Exception;
+	public List<Map<String,String>> selectAreaCode() throws Exception;
 }

@@ -115,6 +115,24 @@ public class WebContextParamListener implements ServletContextListener {
 			CommonUtils.writeStringToFile(path + fileName,
 					preDealDictJSONString(dictJsonListString));
 		}
+		try {
+			String areafileName = "content/common/js/areaCode.js";
+			List<Map<String, String>> e = webContextDictService.selectAreaCode();
+			StringBuffer area = new StringBuffer("var area={};\r");
+			for (Map<String, String> o : e) {
+				area.append("area['");
+				area.append(o.get("code"));
+				area.append("']=");
+				area.append("'");
+				area.append(o.get("name"));
+				area.append("'");
+				area.append(";\r");
+			}
+			CommonUtils.writeStringToFile(path + areafileName,
+					area.toString());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 	private String preDealDictJSONString(String dictJsonListString) {
 		dictJsonListString = dictJsonListString.replaceAll(" ", "");

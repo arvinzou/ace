@@ -352,4 +352,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 				"rs.xls", userProp);
 		return new MessageResponse(0, "字典导入完成！");
 	}
+	public List<Map<String,String>> selectAreaCode() throws Exception{
+		return this.dictMapper.selectAreaCode();
+	}
 }

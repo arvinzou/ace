@@ -200,6 +200,21 @@ public class DictController extends PortalBaseController {
 			CommonUtils.writeStringToFile(path + fileName,
 					preDealDictJSONString(dictJsonListString));
 		}
+
+		String areafileName = "content/common/js/areaCode.js";
+		List<Map<String, String>> e =this.dictService.selectAreaCode();
+		StringBuffer area=new StringBuffer("var area={};\r");
+		for(Map<String, String> o:e){
+			area.append("area['");
+			area.append(o.get("code"));
+			area.append("']=");
+			area.append("'");
+			area.append(o.get("name"));
+			area.append("'");
+			area.append(";\r");
+		}
+		CommonUtils.writeStringToFile(path + areafileName,
+				area.toString());
 		return new MessageResponse(1, "发布成功！");
 	}
 	/**

@@ -47,6 +47,13 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
+								editor=CKEDITOR.replace('intro',{ allowedContent: true });
+                                                                editor.on( 'change', function( event ) {
+                                                                    var data = this.getData();//内容
+
+                                                                    $("textarea[name=intro]").val(data);
+
+                                                                });
 							}
 						})
 $("#dateOfPublication").datebox("setValue",now);
@@ -164,6 +171,7 @@ function loadView(id) {
                 }
 				$("#dialog-message-view").find('#' + key).html(value);
 			});
+
 		},
 		error : function() {
 			alert("加载错误！");
@@ -182,6 +190,12 @@ function loadText(id) {
 		success : function(rst, textStatus) {
 			$("textarea[name=intro]").val(rst.value.intro);
             $("input[name=docText]").val(rst.value.docText);
+            editor=CKEDITOR.replace('intro',{ allowedContent: true });
+                                    editor.on( 'change', function( event ) {
+                                        var data = this.getData();//内容
+                                        $("textarea[name=intro]").val(data);
+                                    });
+                                    editor.setData(rst.value.intro);
 		},
 		error : function() {
 			alert("加载错误！");

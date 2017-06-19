@@ -141,4 +141,8 @@ FROM
         code=#{code} and category_id = #{categoryId,jdbcType=VARCHAR}
     </select>
 
+    <select id="selectAreaCode" resultType="map">
+        select code,name from province
+    </select>
+
 </mapper>
