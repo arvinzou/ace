@@ -47,7 +47,7 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
-								editor=CKEDITOR.replace('docText');
+								editor=CKEDITOR.replace('docText',{ allowedContent: true });
                                 editor.on( 'change', function( event ) {
                                     var data = this.getData();//内容
 
@@ -177,7 +177,7 @@ function loadText(id) {
 		beforeSend : function(XMLHttpRequest) {
 		},
 		success : function(rst, textStatus) {
-		    editor=CKEDITOR.replace('docText');
+		    editor=CKEDITOR.replace('docText',{ allowedContent: true });
             editor.on( 'change', function( event ) {
                 var data = this.getData();//内容
                 $("textarea[name=docText]").val(data);
