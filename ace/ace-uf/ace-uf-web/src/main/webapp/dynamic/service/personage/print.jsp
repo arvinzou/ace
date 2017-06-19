@@ -29,7 +29,7 @@ params.limit=9999999
 <style type="text/css">
 .print table{border-right:1px solid #000000;border-bottom:1px solid #000000}
 .print table td{border-left:1px solid #000000;border-top:1px solid #000000}
-.print table th{border-left:1px solid #000000;border-top:1px solid #000000}
+.print table th{border-left:1px solid #000000;border-top:1px solid #000000;text-align:center}
 </style>
 <body>
 <div class="page-content">
