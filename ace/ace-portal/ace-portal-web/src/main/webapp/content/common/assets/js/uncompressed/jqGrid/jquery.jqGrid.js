@@ -6063,7 +6063,7 @@ $.extend($.jgrid,{
 	},
 	info_dialog : function(caption, content,c_b, modalopt,detail) {
 		var mopt = {
-			width:cfg.jgrdInfoDialogWidth||400,
+			width:400,
 			height:'auto',
 			dataheight: 'auto',
 			drag: true,
@@ -7595,11 +7595,11 @@ $.jgrid.extend({
 			top : (window.innerHeight/2)-150,
 			left: (window.innerWidth/2)-((cfg.jgridEditWinWidth||600)/2),
 			width: cfg.jgridEditWinWidth||600,
-			zIndex : 1,
+			zIndex :1,
 			datawidth: 'auto',
 			height: 'auto',
 			dataheight: 'auto',
-			modal: cfg.modal||true,
+			modal:false,
 			overlay : 30,
 			drag: true,
 			resize: true,
@@ -7631,6 +7631,7 @@ $.jgrid.extend({
 			navkeys: [false,38,40],
 			checkOnSubmit : false,
 			checkOnUpdate : false,
+			position : "center",
 			_savedData : {},
 			processing : false,
 			onClose : null,
@@ -7639,7 +7640,9 @@ $.jgrid.extend({
 			viewPagerButtons : true,
 			overlayClass : 'ui-widget-overlay'
 		}, $.jgrid.edit, p || {});
+			//console.log(p);
 		rp_ge[$(this)[0].p.id] = p;
+
 		p.afterShowForm=function(){
 			var nm;
 			p=this.p;
@@ -7905,7 +7908,7 @@ $.jgrid.extend({
 						}
 						trdata = $(tb).find("tr[rowpos="+rp+"]");
 						var scl=true;
-						if(cfg.jgridEditWinWidth>550||obj.p.colModel.length>6){
+						if(obj.p.colModel.length>6){
 							scl=(t%2==0);
 							if(opt.colspan){
                                 scl=true;
@@ -7944,7 +7947,7 @@ $.jgrid.extend({
                             $(tb).find('tr:last').find("td:eq(2)").html(frmopt.label === undefined ? obj.p.colNames[i]: frmopt.label);
                             $(tb).find('tr:last').find("td:eq(3)").append(frmopt.elmprefix).append(elc).append(frmopt.elmsuffix);
 						}
-						console.log(tb);
+						//console.log(tb);
 						
 						if(this.edittype==='custom' && $.isFunction(opt.custom_value) ) {
 							opt.custom_value.call($t, $("#"+nm,"#"+frmgr),'set',tmp);
@@ -9216,7 +9219,7 @@ $.jgrid.extend({
 			beforeRefresh : null,
 			afterRefresh : null,
 			cloneToTop : false,
-			alertwidth : cfg.jgridAlertWidth||400,
+			alertwidth : 400,
 			alertheight : 'auto',
 			alerttop: null,
 			alertleft: null,
