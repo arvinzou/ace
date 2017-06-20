@@ -37,5 +37,5 @@ public interface NoticeMapper {
 	 List<Map<String,String>> selectUserIdByDepartmentId(@Param("departmentId") String departmentId);
 	 String selectSqlTextByGroupId(@Param("groupId") String groupId);
 	 String selectDictNameByCategoryIdAndCode(@Param("categoryId") String categoryId,@Param("code") String code);
-	 List<NoticeVo> findListTop(@Param("categoryId") String categoryId,@Param("departmentId") String departmentId);
+	 List<NoticeVo> findListTop(@Param("categoryId") String categoryId,@Param("departmentId") String departmentId,@Param("syid") String syid);
 }

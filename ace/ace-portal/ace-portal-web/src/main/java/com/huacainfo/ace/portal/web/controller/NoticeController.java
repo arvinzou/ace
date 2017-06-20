@@ -215,6 +215,7 @@ public class NoticeController extends PortalBaseController {
 	public ListResult<NoticeVo> findListTop(String category) throws Exception {
 		ListResult<NoticeVo> rst = this.noticeService.findListTop(this
 				.getCurUserProp(),category);
+
 		return rst;
 	}
 }

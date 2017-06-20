@@ -223,7 +223,7 @@ public class NoticeServiceImpl implements NoticeService, Serializable {
 	 */
 	public ListResult<NoticeVo> findListTop(UserProp userProp,String category) throws Exception {
 		ListResult<NoticeVo> rst = new ListResult<NoticeVo>();
-		List<NoticeVo> list = this.noticeMapper.findListTop(category,userProp.getCorpId());
+		List<NoticeVo> list = this.noticeMapper.findListTop(category,userProp.getCorpId(),userProp.getActiveSyId());
 		rst.setValue(list);
 		return rst;
 	}
