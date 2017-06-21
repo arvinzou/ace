@@ -145,7 +145,10 @@
         id 'id',
         name 'name',
         category,
-        icon
+        icon,
+        addr,
+        tel,serviceTimeStart,
+        serviceTimeEnd
         FROM
         organization
         WHERE

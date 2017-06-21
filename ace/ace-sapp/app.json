@@ -1,7 +1,7 @@
 {
   "pages": [
-    "page/service/index",
     "page/help/index",
+    "page/service/index",
     "page/feedback/index"
   ],
   "window": {

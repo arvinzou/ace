@@ -1,4 +1,7 @@
 var app = getApp();
+var util = require("../../util/util.js");
+
+
 Page({
   data: {
     hasLocation: false,
@@ -223,54 +226,3 @@ Page({
 })
 
 
-
-function request(url, data, success, fail, complete) {
-  var _url = url,
-    _data = data,
-    _success = success,
-    _fail = fail,
-    _complete = complete;
-
-  wx.request({
-    url: url,
-    data: data,
-    method: "POST",
-    dataType: "json",
-    header: {
-      'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志
-    },
-    success: function (res) {
-      if (res.data.code == "-9999") { //会话失效重新登录
-        requestLogin(function () {
-          constant['NUM_TRY_LOGIN']++;
-          //设置请求上限，防止重复提交并死循环
-          if (constant['NUM_TRY_LOGIN'] < constant['LIMIT_NUM_TRY_LOGIN']) {
-            request(_url, _data, _success, _fail, _complete);
-          }
-        });
-        return;
-      }
-      if (res.data.status == "0") {
-        if (typeof _success == "function") {
-          _success(res.data);
-        }
-      } else {
-        wx.showToast({ title: res.data.msg, icon: 'loading', duration: 2000 });
-        return;
-      }
-    },
-    fail: function (res) {
-      if (typeof _fail == "function") {
-        _fail(res);
-      }
-      if (typeof _fail == "string") { //请求失败的弹框提示
-        wx.showToast({ title: _fail, icon: 'loading', duration: 2000 });
-      }
-    },
-    complete: function (res) {
-      if (typeof _complete == "function") {
-        _complete(res);
-      }
-    }
-  });
-}

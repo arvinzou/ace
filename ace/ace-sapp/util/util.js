@@ -30,7 +30,46 @@ function formatLocation(longitude, latitude) {
   }
 }
 
+
+
+
+
+function request(url, data, success, fail, complete) {
+  console.log('request url-->', url);
+  var _url = url,
+    _data = data,
+    _success = success,
+    _fail = fail,
+    _complete = complete;
+
+  wx.request({
+    url: url,
+    data: data,
+    method: "POST",
+    dataType: "json",
+    header: {
+      'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志
+    },
+    success: function (res) {
+      console.log( res);
+      if (typeof _success == "function") {
+        _success(res.data);
+      }
+    },
+    fail: function (res) {
+      if (typeof _fail == "function") {
+        _fail(res);
+      }
+    },
+    complete: function (res) {
+      if (typeof _complete == "function") {
+        _complete(res);
+      }
+    }
+  });
+}
 module.exports = {
   formatTime: formatTime,
-  formatLocation: formatLocation
+  formatLocation: formatLocation,
+  request: request
 }

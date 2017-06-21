@@ -95,7 +95,7 @@ function doDraw() {
         $(this).parent().wrap("<figure/>");
         DrawImage(this)
 	});
-	initPhotoSwipeFromDOM('.my-gallery');
+	initPhotoSwipeFromDOM('figure');
 }
 function DrawImage(ImgD) {
 	var image = new Image();
