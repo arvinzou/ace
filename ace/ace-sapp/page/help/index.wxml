@@ -13,7 +13,7 @@
           <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
               <block wx:for-items="{{item.list}}" wx:for-item="o" wx:key="*item">
-                <navigator url="pages/{{o.id}}" class="navigator">
+                <navigator url="../organization/index?id={{o.id}}" class="navigator">
                   <view  class="navigator-text" style="flex-direction:column;">
                     <view>{{o.name}}</view>
                     <view style="font-size:12px">地址：{{o.addr}}</view>

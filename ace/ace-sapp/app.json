@@ -2,7 +2,8 @@
   "pages": [
     "page/help/index",
     "page/service/index",
-    "page/feedback/index"
+    "page/feedback/index",
+    "page/organization/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
