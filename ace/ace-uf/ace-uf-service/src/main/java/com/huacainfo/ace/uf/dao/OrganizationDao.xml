@@ -128,4 +128,39 @@
         organization where
         name=#{name} and areaCode=#{areaCode}
     </select>
+
+    <select id="selectOrganizationCategoryList" resultType="map">
+        SELECT
+        CODE 'id',
+        NAME 'name',
+        remark 'icon'
+        FROM
+        portal.dict
+        WHERE
+        category_id = '97'
+    </select>
+
+    <select id="selectOrganizationList" resultType="map">
+        SELECT
+        id 'id',
+        name 'name',
+        category,
+        icon
+        FROM
+        organization
+        WHERE
+        STATUS = '1'
+    </select>
+
+    <select id="selectOrganizationById" resultType="map">
+        select
+        t.id, t.category, t.areaCode, t.name, t.addr, t.tel, t.serviceWay, t.latitude, t.longitude, t.serviceTimeStart,
+        t.serviceTimeEnd, t.icon, t.remark,a.name areaName
+        from organization t left join portal.province a on t.areaCode=a.code
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectOrganizationImagesById" resultType="map">
+        select name, url, remark from organization_sub where
+        organizationId =#{id,jdbcType=VARCHAR}
+    </select>
 </mapper>

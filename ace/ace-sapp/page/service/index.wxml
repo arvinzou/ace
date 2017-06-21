@@ -1,0 +1,15 @@
+<view class="index">
+  <map id="map"  longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindtap="bindtap" bindmarkertap="markertap" polyline="{{polyline}}" circles="{{circles}}" bindregionchange="regionchange" show-location="true" style="width: 100%; height: {{view.height}}; ">
+</map>
+ 
+<view class="attr_box"  wx:if="{{showModalStatus}}">
+<text style="font-size:20px;">
+{{deptName}} 
+latitude: {{latitude}}  
+longitude: {{longitude}}
+</text>
+
+<button type="primary" bindtap="hideModal" style="width:85%">进入商铺</button>
+</view>
+
+</view>
