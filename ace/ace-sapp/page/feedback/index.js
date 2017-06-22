@@ -1,73 +1,108 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    grids: [0, 1, 2, 3, 4, 5, 6, 7, 8]
-  },
+    showTopTips: false,
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
+    radioItems: [
+      { name: 'cell standard', value: '0' },
+      { name: 'cell standard', value: '1', checked: true }
+    ],
+    checkboxItems: [
+      { name: 'standard is dealt for u.', value: '0', checked: true },
+      { name: 'standard is dealicient for u.', value: '1' }
+    ],
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
+    date: "2016-09-01",
+    time: "12:01",
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
+    countryCodes: ["+86", "+80", "+84", "+87"],
+    countryCodeIndex: 0,
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
+    countries: ["中国", "美国", "英国"],
+    countryIndex: 0,
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
+    accounts: ["微信号", "QQ", "Email"],
+    accountIndex: 0,
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
+    isAgree: false
   },
+  showTopTips: function () {
+    var that = this;
+    this.setData({
+      showTopTips: true
+    });
+    setTimeout(function () {
+      that.setData({
+        showTopTips: false
+      });
+    }, 3000);
+  },
+  radioChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value);
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
+    var radioItems = this.data.radioItems;
+    for (var i = 0, len = radioItems.length; i < len; ++i) {
+      radioItems[i].checked = radioItems[i].value == e.detail.value;
+    }
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    this.setData({
+      radioItems: radioItems
+    });
   },
-  formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  checkboxChange: function (e) {
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
+
+    var checkboxItems = this.data.checkboxItems, values = e.detail.value;
+    for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
+      checkboxItems[i].checked = false;
+
+      for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
+        if (checkboxItems[i].value == values[j]) {
+          checkboxItems[i].checked = true;
+          break;
+        }
+      }
+    }
+
+    this.setData({
+      checkboxItems: checkboxItems
+    });
   },
-  formReset: function () {
-    console.log('form发生了reset事件')
+  bindDateChange: function (e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
+  bindTimeChange: function (e) {
+    this.setData({
+      time: e.detail.value
+    })
+  },
+  bindCountryCodeChange: function (e) {
+    console.log('picker country code 发生选择改变，携带值为', e.detail.value);
+
+    this.setData({
+      countryCodeIndex: e.detail.value
+    })
+  },
+  bindCountryChange: function (e) {
+    console.log('picker country 发生选择改变，携带值为', e.detail.value);
+
+    this.setData({
+      countryIndex: e.detail.value
+    })
+  },
+  bindAccountChange: function (e) {
+    console.log('picker account 发生选择改变，携带值为', e.detail.value);
+
+    this.setData({
+      accountIndex: e.detail.value
+    })
+  },
+  bindAgreeChange: function (e) {
+    this.setData({
+      isAgree: !!e.detail.value.length
+    });
   }
-})
+});
