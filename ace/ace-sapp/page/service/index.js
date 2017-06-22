@@ -18,6 +18,7 @@ Page({
         pages: ['view', 'scroll-view', 'swiper']
       }
     ],
+    
     latitude: 29.031673,
     longitude: 111.698497,
     markers: [{
