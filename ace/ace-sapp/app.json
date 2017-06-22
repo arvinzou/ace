@@ -30,7 +30,7 @@
         "text": "周边服务"
       },
       {
-        "pagePath": "page/feedback/",
+        "pagePath": "page/feedback/index",
         "iconPath": "image/message_159.18367346939px_1192837_easyicon.net.png",
         "selectedIconPath": "image/message_159.18367346939px_1192837_easyicon.net.png",
         "text": "建言献策"

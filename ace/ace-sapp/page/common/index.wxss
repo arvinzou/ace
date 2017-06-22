@@ -112,3 +112,7 @@
 .map{
   height: 400rpx;
 }
+.body{
+  padding:10rpx;
+  background: #FFFFFF
+}

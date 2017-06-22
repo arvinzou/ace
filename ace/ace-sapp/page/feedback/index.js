@@ -1,11 +1,12 @@
-// page/feedback/index.js
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    grids: [0, 1, 2, 3, 4, 5, 6, 7, 8]
   },
 
   /**
@@ -62,5 +63,11 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  formSubmit: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  },
+  formReset: function () {
+    console.log('form发生了reset事件')
   }
 })
