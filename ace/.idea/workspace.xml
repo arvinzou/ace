@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/app.json" afterPath="$PROJECT_DIR$/ace-sapp/app.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/help/index.wxml" afterPath="$PROJECT_DIR$/ace-sapp/page/help/index.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/config.js" afterPath="$PROJECT_DIR$/ace-sapp/config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/common/index.wxss" afterPath="$PROJECT_DIR$/ace-sapp/page/common/index.wxss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/help/index.wxss" afterPath="$PROJECT_DIR$/ace-sapp/page/help/index.wxss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/util/util.js" afterPath="$PROJECT_DIR$/ace-sapp/util/util.js" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -65,8 +67,8 @@
       <file leaf-file-name="OrganizationDao.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/OrganizationDao.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="152" column="20" lean-forward="false" selection-start-line="152" selection-start-column="8" selection-end-line="152" selection-end-column="20" />
+            <state relative-caret-position="1490">
+              <caret line="160" column="42" lean-forward="false" selection-start-line="160" selection-start-column="36" selection-end-line="160" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -75,11 +77,21 @@
       <file leaf-file-name="OrganizationServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/service/impl/OrganizationServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="131" column="35" lean-forward="false" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
+            <state relative-caret-position="108">
+              <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
               <folding>
                 <element signature="e#5269#5289#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WWWController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/WWWController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-75">
+              <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1492,13 +1504,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00083" summary="四版图TOP10问题分析">
-      <created>1494460816774</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1494460816775</updated>
-    </task>
     <task id="LOCAL-00084" summary="四版图TOP10问题分析">
       <created>1494461434516</created>
       <option name="number" value="00084" />
@@ -1835,7 +1840,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498036732576</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="统战小程序-我要帮助">
+      <created>1498037370645</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1498037370648</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1861,12 +1873,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3512605" sideWeight="0.28330892" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20593081" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44481054" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3396779" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3396779" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.54022986" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1917,7 +1929,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="增加portal个性化配置，两种导航方式" />
     <MESSAGE value="增加新导航模式后调整字典和机构管理的布局" />
     <MESSAGE value="电桩运营项目初始化" />
     <MESSAGE value="电桩运营指标管理、目标配置、议题管理" />
@@ -1942,7 +1953,8 @@
     <MESSAGE value="统战人士花名册" />
     <MESSAGE value="统战人士统计分析" />
     <MESSAGE value="社会资源图片管理" />
-    <option name="LAST_COMMIT_MESSAGE" value="社会资源图片管理" />
+    <MESSAGE value="统战小程序-我要帮助" />
+    <option name="LAST_COMMIT_MESSAGE" value="统战小程序-我要帮助" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2313,14 +2325,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/WWWController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="35" column="52" lean-forward="false" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-weui/ace-weui-web/src/main/webapp/content/www/js/activityPhotos/preview.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
@@ -2350,7 +2354,7 @@
         <state relative-caret-position="495">
           <caret line="34" column="1" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2363,10 +2367,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/WWWController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-75">
+          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/service/impl/OrganizationServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="131" column="35" lean-forward="false" selection-start-line="131" selection-start-column="35" selection-end-line="131" selection-end-column="35" />
+        <state relative-caret-position="108">
+          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
           <folding>
             <element signature="e#5269#5289#0" expanded="true" />
           </folding>
@@ -2375,8 +2387,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/OrganizationDao.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="152" column="20" lean-forward="false" selection-start-line="152" selection-start-column="8" selection-end-line="152" selection-end-column="20" />
+        <state relative-caret-position="1490">
+          <caret line="160" column="42" lean-forward="false" selection-start-line="160" selection-start-column="36" selection-end-line="160" selection-end-column="42" />
           <folding />
         </state>
       </provider>

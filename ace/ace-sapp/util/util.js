@@ -36,6 +36,7 @@ function formatLocation(longitude, latitude) {
 
 function request(url, data, success, fail, complete) {
   console.log('request url-->', url);
+  console.log('request data-->',data);
   var _url = url,
     _data = data,
     _success = success,
@@ -45,7 +46,7 @@ function request(url, data, success, fail, complete) {
   wx.request({
     url: url,
     data: data,
-    method: "POST",
+    method: "GET",
     dataType: "json",
     header: {
       'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志

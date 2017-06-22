@@ -7,14 +7,16 @@
 
 var host = "14592619.qcloud.la";
 var server = "https://demo.huacainfo.com"
-
+var serverfile = "http://zx.huacainfo.com/"
 var config = {
     // 下面的地址配合云端 Server 工作
     host,
     server,
+    serverfile,
     // 登录地址，用于建立会话
     loginUrl: `https://${host}/login`,
-    selectOrganizationList: `${server}/uf/www/selectOrganizationList.do`
+    selectOrganizationList: `${server}/uf/www/selectOrganizationList.do`,
+    selectOrganization: `${server}/uf/www/selectOrganization.do`
 };
 
 module.exports = config
