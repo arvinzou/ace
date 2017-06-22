@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/config.js" afterPath="$PROJECT_DIR$/ace-sapp/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/common/index.wxss" afterPath="$PROJECT_DIR$/ace-sapp/page/common/index.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/help/index.wxss" afterPath="$PROJECT_DIR$/ace-sapp/page/help/index.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/util/util.js" afterPath="$PROJECT_DIR$/ace-sapp/util/util.js" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -1504,13 +1500,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00084" summary="四版图TOP10问题分析">
-      <created>1494461434516</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1494461434516</updated>
-    </task>
     <task id="LOCAL-00085" summary="四版图TOP10问题分析">
       <created>1494461791972</created>
       <option name="number" value="00085" />
@@ -1847,7 +1836,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498037370648</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="统战小程序-我要帮助">
+      <created>1498104024649</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1498104024653</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
