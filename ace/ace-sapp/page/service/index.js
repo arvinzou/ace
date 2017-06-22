@@ -197,7 +197,7 @@ Page({
         var markers=[];
         for(var i=0;i<data.length;i++){
          var o=data[i];
-          o.iconPath= "../../image/location.png",
+         o.iconPath = "../../image/location_96px_1175814_easyicon.net.png",
           o.width= 35,
           o.height= 35,
             o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#0000FF", padding:5, display: 'ALWAYS' }
