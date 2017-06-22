@@ -197,9 +197,9 @@ Page({
         var markers=[];
         for(var i=0;i<data.length;i++){
          var o=data[i];
-         o.iconPath = "../../image/location_96px_1175814_easyicon.net.png",
-          o.width= 35,
-          o.height= 35,
+         o.iconPath = "../../image/general_house_help_96px_1167237_easyicon.net.png",
+          o.width= 45,
+          o.height= 45,
             o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#0000FF", padding:5, display: 'ALWAYS' }
           markers.push(o);
           console.log(o);
