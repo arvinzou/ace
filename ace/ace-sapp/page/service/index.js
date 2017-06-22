@@ -200,7 +200,7 @@ Page({
           o.iconPath= "../../image/location.png",
           o.width= 35,
           o.height= 35,
-            o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#006400", padding:5, display: 'ALWAYS' }
+            o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#0000FF", padding:5, display: 'ALWAYS' }
           markers.push(o);
           console.log(o);
         }
