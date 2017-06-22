@@ -74,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/service/impl/OrganizationServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
-              <caret line="151" column="5" lean-forward="true" selection-start-line="151" selection-start-column="5" selection-end-line="151" selection-end-column="5" />
+              <caret line="151" column="5" lean-forward="false" selection-start-line="151" selection-start-column="5" selection-end-line="151" selection-end-column="5" />
               <folding>
                 <element signature="e#5419#5439#0" expanded="true" />
               </folding>
@@ -1521,13 +1521,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00090" summary="会议面板设计">
-      <created>1494482768001</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1494482768001</updated>
-    </task>
     <task id="LOCAL-00091" summary="会议面板设计">
       <created>1494494789362</created>
       <option name="number" value="00091" />
@@ -1864,7 +1857,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498124092032</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="统战小程序-周边服务">
+      <created>1498125150767</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1498125150768</updated>
+    </task>
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1946,7 +1946,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="增加新导航模式后调整字典和机构管理的布局" />
     <MESSAGE value="电桩运营项目初始化" />
     <MESSAGE value="电桩运营指标管理、目标配置、议题管理" />
     <MESSAGE value="电装运营会议建立" />
@@ -1971,7 +1970,8 @@
     <MESSAGE value="统战人士统计分析" />
     <MESSAGE value="社会资源图片管理" />
     <MESSAGE value="统战小程序-我要帮助" />
-    <option name="LAST_COMMIT_MESSAGE" value="统战小程序-我要帮助" />
+    <MESSAGE value="统战小程序-周边服务" />
+    <option name="LAST_COMMIT_MESSAGE" value="统战小程序-周边服务" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2385,7 +2385,7 @@
     <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/service/impl/OrganizationServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
-          <caret line="151" column="5" lean-forward="true" selection-start-line="151" selection-start-column="5" selection-end-line="151" selection-end-column="5" />
+          <caret line="151" column="5" lean-forward="false" selection-start-line="151" selection-start-column="5" selection-end-line="151" selection-end-column="5" />
           <folding>
             <element signature="e#5419#5439#0" expanded="true" />
           </folding>

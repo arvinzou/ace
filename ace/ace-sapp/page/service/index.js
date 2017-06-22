@@ -48,7 +48,7 @@ Page({
       radius: 400,
       strokeWidth: 2
     }],
-    controls: [{
+    controls: [/*{
       id: 1,
       iconPath: '../../image/record.png',
       position: {
@@ -58,7 +58,7 @@ Page({
         height: 50
       },
       clickable: true
-    }]
+    }*/]
   },
   controltap: function (e) {
     console.log(e.controlId);
@@ -190,6 +190,7 @@ Page({
   },
   onLoad: function () {
     console.log('onLoad');
+    this.getLocation();
     this.getUserInfo();
     var that = this;
     util.request(cfg.selectOrganizationListMap, {},
