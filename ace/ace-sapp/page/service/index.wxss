@@ -13,11 +13,11 @@
 }
 .attr_box {
   width: 100%;
-  height: 400rpx;
+  height: 300rpx;
   overflow: hidden;
   position: fixed;
   bottom: 0;
   background: #fff;
   flex-direction:colum;
-  text-align: center;
+  text-align: left;
 }

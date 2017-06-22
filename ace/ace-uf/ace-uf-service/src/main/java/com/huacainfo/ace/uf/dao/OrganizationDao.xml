@@ -147,6 +147,8 @@
         category,
         icon,
         addr,
+        latitude,
+        longitude,
         tel,serviceTimeStart,
         serviceTimeEnd
         FROM

@@ -16,6 +16,7 @@ var config = {
     // 登录地址，用于建立会话
     loginUrl: `https://${host}/login`,
     selectOrganizationList: `${server}/uf/www/selectOrganizationList.do`,
+    selectOrganizationListMap: `${server}/uf/www/selectOrganizationListMap.do`,
     selectOrganization: `${server}/uf/www/selectOrganization.do`
 };
 

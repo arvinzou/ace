@@ -39,6 +39,12 @@ public class WWWController extends UfBaseController {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.organizationService.selectOrganizationList(this.getCurWxUser());
 	}
+	@RequestMapping(value = "/selectOrganizationListMap.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectOrganizationListMap() throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.organizationService.selectOrganizationListMap(this.getCurWxUser());
+	}
 
 	@RequestMapping(value = "/selectOrganization.do")
 	@ResponseBody

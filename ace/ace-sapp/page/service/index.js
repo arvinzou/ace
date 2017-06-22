@@ -1,6 +1,6 @@
 var app = getApp();
 var util = require("../../util/util.js");
-
+var cfg = require("../../config.js");
 
 Page({
   data: {
@@ -11,14 +11,8 @@ Page({
       height: '100vh'
     },
     list: [
-      {
-        id: 'view',
-        name: '视图容器',
-        open: false,
-        pages: ['view', 'scroll-view', 'swiper']
-      }
     ],
-    
+
     latitude: 29.031673,
     longitude: 111.698497,
     markers: [{
@@ -27,7 +21,9 @@ Page({
       latitude: 29.031673,
       longitude: 111.698497,
       width: 35,
-      height: 45
+      height: 45,
+      callout: { content: "久久鸭脖中心店", color:"#000000", fontSize: 14, borderRadius: 5, bgColor: "", padding: 10, display:'ALWAYS'}
+      //label: { color: "#000000", fontSize: 20, content:"久久鸭脖中心店", x:2, y:3}
     }],
     polyline: [{
       points: [{
@@ -76,9 +72,16 @@ Page({
   },
   markertap: function (e) {
     var that = this;
-    that.setData({
-      deptName: e.markerId
-    });
+    var data = that.data.markers;
+    for (var i = 0; i < data.length; i++) {
+      var o = data[i];
+      if (o.id == e.markerId){
+        that.setData({
+          o: o
+        });
+      }
+    }
+    
     that.showModal();
     console.log(e)
   },
@@ -92,10 +95,6 @@ Page({
         var longitude = res.longitude
         var speed = res.speed
         var accuracy = res.accuracy
-        console.log("latitude:" + latitude)
-        console.log("longitude:" + longitude)
-        console.log("speed:" + speed)
-        console.log("accuracy:" + accuracy)
         that.setData({
           latitude: latitude,
           longitude: longitude,
@@ -136,19 +135,6 @@ Page({
         // complete  
       }
     })
-  },
-  kindToggle: function (e) {
-    var id = e.currentTarget.id, list = this.data.list;
-    for (var i = 0, len = list.length; i < len; ++i) {
-      if (list[i].id == id) {
-        list[i].open = !list[i].open
-      } else {
-        list[i].open = false
-      }
-    }
-    this.setData({
-      list: list
-    });
   },
   getUserInfo: function () {
     var that = this
@@ -205,13 +191,31 @@ Page({
   onLoad: function () {
     console.log('onLoad');
     this.getUserInfo();
+    var that = this;
+    util.request(cfg.selectOrganizationListMap, {},
+      function (data) {
+        var markers=[];
+        for(var i=0;i<data.length;i++){
+         var o=data[i];
+          o.iconPath= "../../image/location.png",
+          o.width= 35,
+          o.height= 35,
+            o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#006400", padding:5, display: 'ALWAYS' }
+          markers.push(o);
+          console.log(o);
+        }
+        that.setData({
+          markers: markers
+        });
+      }
+    );
   },
   showModal: function () {
     // 显示遮罩层
     this.setData({
       showModalStatus: true,
       view: {
-        height: '60vh'
+        height: '80vh'
       }
     })
   },
@@ -223,6 +227,15 @@ Page({
         height: '100vh'
       }
     });
+  },
+  navigator: function () {
+   
+    var that=this;
+    console.log('../organization/index?id=' + that.data.o.id);
+    wx.navigateTo({
+      url: '../organization/index?id=' + that.data.o.id
+    });
+     this.hideModal();
   }
 })
 

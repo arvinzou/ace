@@ -3,13 +3,18 @@
 </map>
  
 <view class="attr_box"  wx:if="{{showModalStatus}}">
-<text style="font-size:20px;">
-{{deptName}} 
-latitude: {{latitude}}  
-longitude: {{longitude}}
-</text>
 
-<button type="primary" bindtap="hideModal" style="width:85%">进入商铺</button>
+ <navigator url="../organization/index?id={{o.id}}" class="navigator">
+                  <view  class="navigator-text" style="flex-direction:column;">
+                    <view>{{o.name}}</view>
+                    <view style="font-size:12px">地址：{{o.addr}}</view>
+                    <view style="font-size:12px">电话：{{o.tel}} 服务时间：{{o.serviceTimeStart}}-{{o.serviceTimeEnd}}                        </view>
+                  </view>
+                  <view class="navigator-arrow"></view>
+</navigator>
+              
+
+<button type="primary" bindtap="navigator" style="width:95%">详细</button>
 </view>
 
 </view>
