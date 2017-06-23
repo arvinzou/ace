@@ -4,20 +4,26 @@ Page({
   data: {
     countries: [],
     countryIndex: 0,
+    max:0
   },
   formSubmit: function (e) {
     var that=this;
-    that.navigator('../info/index');
     console.log('form发生了submit事件，携带数据为：', e.detail.value);
     util.request(cfg.insertFeedback, e.detail.value,
       function (data) {
-        wx.showModal({
-          title: '提示',
-          content: data.errorMessage,
-          success: function (res) {
-            that.navigator('../info/index');
-          }
-        })
+        if(data.status=='0'){
+          that.navigator('../info/index');
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: data.errorMessage,
+            success: function (res) {
+              if (res.confirm) {
+              }
+            }
+          })
+        }
+        
       }
     );
   },
@@ -50,5 +56,14 @@ Page({
     wx.navigateTo({
       url: url
     });
-  }
+  },
+   //事件
+  valueChange: function (e) {
+   console.log(e);
+    if (e.detail && e.detail.value.length > 0) {
+      this.setData({
+        max: e.detail.value.length
+      });
+    }
+  },
 });
