@@ -6,7 +6,6 @@ Page({
   data: {
     hasLocation: false,
     showModalStatus: false,
-    deptName: '老街中心店',
     view: {
       height: '100vh'
     },
@@ -145,10 +144,10 @@ Page({
           wx.getUserInfo({
             success: function (res) {
               wx.request({
-                url: 'https://demo.huacainfo.com/portal/www/authority.do',
+                url: cfg.loginUrl,
                 data: {
-                  appid: 'wxa09a5be5fd228680',
-                  appsecret: 'd520d29f8c26c7e3885d80b1812a8d91',
+                  appid: cfg.appid,
+                  appsecret: cfg.appsecret,
                   code: o.code,
                   encryptedData: res.encryptedData,
                   iv: res.iv
@@ -230,7 +229,6 @@ Page({
     });
   },
   navigator: function () {
-   
     var that=this;
     console.log('../organization/index?id=' + that.data.o.id);
     wx.navigateTo({

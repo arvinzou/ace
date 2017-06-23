@@ -14,10 +14,12 @@ var config = {
     server,
     serverfile,
     // 登录地址，用于建立会话
-    loginUrl: `https://${host}/login`,
+    loginUrl: `${server}/portal/www/authority.do`,
     selectOrganizationList: `${server}/uf/www/selectOrganizationList.do`,
     selectOrganizationListMap: `${server}/uf/www/selectOrganizationListMap.do`,
-    selectOrganization: `${server}/uf/www/selectOrganization.do`
+    selectOrganization: `${server}/uf/www/selectOrganization.do`,
+    appid: 'wxa09a5be5fd228680',
+    appsecret: 'd520d29f8c26c7e3885d80b1812a8d91'
 };
 
 module.exports = config
