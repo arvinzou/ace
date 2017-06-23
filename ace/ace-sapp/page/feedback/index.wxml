@@ -14,7 +14,6 @@
                     </picker>
                 </view>
             </view>
-
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
                     <view class="weui-label">姓名</view>

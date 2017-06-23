@@ -3,7 +3,8 @@
     "page/help/index",
     "page/service/index",
     "page/feedback/index",
-    "page/organization/index"
+    "page/organization/index",
+    "page/info/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
