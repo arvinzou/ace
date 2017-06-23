@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/feedback/index.js" afterPath="$PROJECT_DIR$/ace-sapp/page/feedback/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/feedback/index.wxml" afterPath="$PROJECT_DIR$/ace-sapp/page/feedback/index.wxml" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -105,8 +103,8 @@
       <file leaf-file-name="FeedbackServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/service/impl/FeedbackServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="75" column="8" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="77" selection-end-column="9" />
+            <state relative-caret-position="319">
+              <caret line="87" column="5" lean-forward="true" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
               <folding>
                 <marker date="1498233284000" expanded="false" signature="3775:3790" ph="&lt;~&gt;" />
                 <marker date="1498233284000" expanded="false" signature="4387:4403" ph="&lt;~&gt;" />
@@ -1688,13 +1686,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00098" summary="会议面板设计">
-      <created>1494560359738</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1494560359740</updated>
-    </task>
     <task id="LOCAL-00099" summary="会议面板设计">
       <created>1494561918323</created>
       <option name="number" value="00099" />
@@ -2031,7 +2022,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498232559069</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="统战小程序-建言献策">
+      <created>1498234353678</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1498234353684</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2574,8 +2572,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/service/impl/FeedbackServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="75" column="8" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="77" selection-end-column="9" />
+        <state relative-caret-position="319">
+          <caret line="87" column="5" lean-forward="true" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
           <folding>
             <marker date="1498233284000" expanded="false" signature="3775:3790" ph="&lt;~&gt;" />
             <marker date="1498233284000" expanded="false" signature="4387:4403" ph="&lt;~&gt;" />

@@ -69,10 +69,9 @@
                     <image class="weui-vcode-img" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width: 108px"></image>
                 </view>
             </view>
+            <button class="weui-btn" style="width:98%" type="primary" formType="submit">提交</button>
         </view>
-        <view class="weui-btn-area">
-            <button class="weui-btn" type="primary" formType="submit">提交</button>
-        </view>
+       
     </view>
     </form>
 </view>
