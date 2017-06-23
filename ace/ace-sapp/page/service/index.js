@@ -138,33 +138,7 @@ Page({
   getUserInfo: function () {
     var that = this
     if (app.globalData.hasLogin === false) {
-      wx.login({
-        success: function (o) {
-          _getUserInfo();
-          wx.getUserInfo({
-            success: function (res) {
-              wx.request({
-                url: cfg.loginUrl,
-                data: {
-                  appid: cfg.appid,
-                  appsecret: cfg.appsecret,
-                  code: o.code,
-                  encryptedData: res.encryptedData,
-                  iv: res.iv
-                },
-                success: function (res) {
-                  wx.setStorageSync('WX-SESSION-ID', res.data.value['3rd_session']);
-                  console.log('request success', result);
-                  that.getLocation();
-                },
-                fail: function ({errMsg}) {
-                  console.log('request fail', errMsg)
-                }
-              })
-            }
-          })
-        }
-      })
+   
     } else {
       _getUserInfo()
     }

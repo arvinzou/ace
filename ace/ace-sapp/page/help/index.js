@@ -19,13 +19,45 @@ Page({
     });
   },
   onLoad: function () {
-    var that=this;
-    util.request(cfg.selectOrganizationList,{},
+    this.autoLogin();
+  },
+  initData:function(){
+    var that = this;
+    util.request(cfg.selectOrganizationList, {},
       function (data) {
         that.setData({
           list: data
         });
       }
     );
+  },
+  autoLogin:function () {
+    var that = this;
+    wx.login({
+      success: function (o) {
+        wx.getUserInfo({
+          success: function (res) {
+            wx.request({
+              url: cfg.loginUrl,
+              data: {
+                appid: cfg.appid,
+                appsecret: cfg.appsecret,
+                code: o.code,
+                encryptedData: res.encryptedData,
+                iv: res.iv
+              },
+              success: function (res) {
+                wx.setStorageSync('WX-SESSION-ID', res.data.value['3rd_session']);
+                console.log('login success', result);
+                that.initData();
+              },
+              fail: function ({errMsg}) {
+                console.log('request fail', errMsg)
+              }
+            })
+          }
+        })
+      }
+    })
   }
 })

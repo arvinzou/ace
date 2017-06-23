@@ -168,4 +168,13 @@
         select name, url, remark from organization_sub where
         organizationId =#{id,jdbcType=VARCHAR}
     </select>
+    <select id="selectAreaCodeList" resultType="map">
+        SELECT
+        CODE 'id',
+        NAME 'name'
+        FROM
+        portal.province
+        WHERE
+        parent_code = #{areaCode}
+    </select>
 </mapper>
