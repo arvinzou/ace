@@ -9,7 +9,7 @@ function init_uploader() {
         unique_names: true,
         multipart_params: {},
         filters: {
-            max_file_size: '10mb',
+            max_file_size: '100mb',
             mime_types: [{
                 title: "Image files",
                 extensions: "jpg,gif,png,pdf,bmp"

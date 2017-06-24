@@ -16,7 +16,8 @@ Page({
     longitude: 111.698497,
     markers: [{
       iconPath: "../../image/location.png",
-      id: '久久鸭脖中心店',
+      id: '977577',
+      title:'久久鸭脖中心店',
       latitude: 29.031673,
       longitude: 111.698497,
       width: 35,
@@ -65,11 +66,18 @@ Page({
     that.showModal();
   },
   bindtap: function (e) {
-    console.debug("bindtap click");
+    console.log("bindtap click");
     var that = this;
     that.hideModal();
   },
+  regionchange:function(e){
+    console.log("regionchange click");
+  },
+  callouttap: function (e) {
+    console.log("callouttap click");
+  },
   markertap: function (e) {
+    console.log("markertap click");
     var that = this;
     var data = that.data.markers;
     for (var i = 0; i < data.length; i++) {
@@ -82,7 +90,7 @@ Page({
     }
     
     that.showModal();
-    console.log(e)
+    
   },
   //获取经纬度  
   getLocation: function (e) {
@@ -166,15 +174,18 @@ Page({
     this.getLocation();
     this.getUserInfo();
     var that = this;
+
     util.request(cfg.selectOrganizationListMap, {},
       function (data) {
         var markers=[];
         for(var i=0;i<data.length;i++){
          var o=data[i];
-         o.iconPath = "../../image/general_house_help_96px_1167237_easyicon.net.png",
-          o.width= 45,
-          o.height= 45,
-            o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#0000FF", padding:5, display: 'ALWAYS' }
+         o.iconPath = "../../image/general_house_help_96px_1167237_easyicon.net.png";
+         o.width = 45;
+         o.title = o.name;
+         o.height = 45;
+         o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#0000FF", padding: 5/*, display: 'ALWAYS' */};
+         o.label = { color: "#0000CD", fontSize: 14, content:o.name, x:-40, y:-62 };
           markers.push(o);
           console.log(o);
         }
@@ -189,7 +200,7 @@ Page({
     this.setData({
       showModalStatus: true,
       view: {
-        height: '80vh'
+        height: '70vh'
       }
     })
   },

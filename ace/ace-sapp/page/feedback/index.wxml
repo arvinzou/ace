@@ -28,7 +28,7 @@
                     <view class="weui-label">手机号</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" name="tel" type="number" maxlength="11" placeholder="请输入联系电话"/>
+                    <input class="weui-input" name="tel" type="number" maxlength="11" placeholder="请输入手机号"/>
                 </view>
             </view>
 

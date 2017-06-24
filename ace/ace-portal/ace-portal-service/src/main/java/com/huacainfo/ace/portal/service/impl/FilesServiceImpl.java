@@ -74,7 +74,7 @@ public class FilesServiceImpl implements FilesService {
 		List<Files> list=filesMapper.selectListByStatus("0");
 		for(Files o:list){
 			try {
-				fileSaver.deleteFile(o.getFilePath());
+				//fileSaver.deleteFile(o.getFilePath());
 			} catch (Exception e) {
 				logger.error("系统错误：", e);
 			}

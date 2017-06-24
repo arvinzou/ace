@@ -1,5 +1,5 @@
 <view class="index">
-  <map id="map"  longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindtap="bindtap" bindmarkertap="markertap" polyline="{{polyline}}" circles="{{circles}}" bindregionchange="regionchange" show-location="true" style="width: 100%; height: {{view.height}}; ">
+  <map id="map"  longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindcallouttap="callouttap" bindtap="bindtap" bindmarkertap="markertap" polyline="{{polyline}}" circles="{{circles}}" bindregionchange="regionchange" show-location="true" style="width: 100%; height: {{view.height}}; ">
 </map>
  
 <view class="attr_box"  wx:if="{{showModalStatus}}">
