@@ -1,14 +1,14 @@
 <view class="index">
   <view class="index-hd">
-  
   </view>
+  
   <view class="index-bd">
     <view class="kind-list">
       <block wx:for-items="{{list}}" wx:key="{{item.id}}">
         <view class="kind-list-item">
           <view id="{{item.id}}" class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
             <view class="kind-list-text">{{item.name}}</view>
-            <image class="kind-list-img" src="resources/kind/{{item.icon}}"></image>
+            <image class="kind-list-img" src="../../image/{{item.icon}}"></image>
           </view>
           <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
@@ -16,8 +16,8 @@
                 <navigator url="../organization/index?id={{o.id}}" class="navigator">
                   <view  class="navigator-text" style="flex-direction:column;">
                     <view>{{o.name}}</view>
-                    <view style="font-size:12px">地址：{{o.addr}}</view>
-                    <view style="font-size:12px">电话：{{o.tel}} 服务时间：{{o.serviceTimeStart}}-{{o.serviceTimeEnd}}</view>
+                    <view style="font-size:14px;"> <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit"/>{{o.addr}}</view>
+                    <view style="font-size:14px"><image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit"/>{{o.tel}} <image class="iconList"  src="../../image/time_71.003460207612px_1195888_easyicon.net.png" mode="aspectFit"/> {{o.serviceTimeStart}}-{{o.serviceTimeEnd}}</view>
                   </view>
                   <view class="navigator-arrow"></view>
                 </navigator>

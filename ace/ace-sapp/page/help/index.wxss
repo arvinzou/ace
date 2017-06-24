@@ -1,2 +1,8 @@
 @import "../common/index.wxss";
 @import "../common/lib/weui.wxss";
+.iconList{
+  width:16px; height: 16px;
+  padding-right: 10rpx;
+  vertical-align: middle;
+  
+}

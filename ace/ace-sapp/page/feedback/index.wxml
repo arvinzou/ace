@@ -63,7 +63,7 @@
                     <view  class="weui-label">验证码</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input name="captcha" class="weui-input" placeholder="请输入验证码" />
+                    <input name="captcha" type="number" class="weui-input" placeholder="请输入验证码" />
                 </view>
                 <view class="weui-cell__ft">
                     <image class="weui-vcode-img" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width: 108px"></image>

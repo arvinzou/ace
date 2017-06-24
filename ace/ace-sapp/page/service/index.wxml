@@ -1,5 +1,5 @@
 <view class="index">
-  <map id="map"  longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindcallouttap="callouttap" bindtap="bindtap" bindmarkertap="markertap" polyline="{{polyline}}" circles="{{circles}}" bindregionchange="regionchange" show-location="true" style="width: 100%; height: {{view.height}}; ">
+  <map id="map"  longitude="{{longitude}}" latitude="{{latitude}}" scale="16" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindcallouttap="callouttap" bindtap="bindtap" bindmarkertap="markertap" polyline="{{polyline}}" circles="{{circles}}" bindregionchange="regionchange" show-location="true" style="width: 100%; height: {{view.height}}; ">
 </map>
  
 <view class="attr_box"  wx:if="{{showModalStatus}}">
@@ -7,8 +7,8 @@
  <navigator url="../organization/index?id={{o.id}}" class="navigator">
                   <view  class="navigator-text" style="flex-direction:column;">
                     <view>{{o.name}}</view>
-                    <view style="font-size:12px">地址：{{o.addr}}</view>
-                    <view style="font-size:12px">电话：{{o.tel}} 服务时间：{{o.serviceTimeStart}}-{{o.serviceTimeEnd}}                        </view>
+                    <view style="font-size:14px;"> <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit"/>{{o.addr}}</view>
+                    <view style="font-size:14px"><image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit"/>{{o.tel}} <image class="iconList"  src="../../image/time_71.003460207612px_1195888_easyicon.net.png" mode="aspectFit"/> {{o.serviceTimeStart}}-{{o.serviceTimeEnd}}</view>
                   </view>
                   <view class="navigator-arrow"></view>
 </navigator>

@@ -20,20 +20,20 @@
     "list": [
       {
         "pagePath": "page/help/index",
-        "iconPath": "image/help_72px_1172994_easyicon.net.png",
-        "selectedIconPath": "image/help_72px_1172994_easyicon.net.png",
+        "iconPath": "image/bangzhu.png",
+        "selectedIconPath": "image/bangzhu.png",
         "text": "我要帮助"
       },
       {
         "pagePath": "page/service/index",
-        "iconPath": "image/location_72px_1157983_easyicon.net.png",
-        "selectedIconPath": "image/location_72px_1157983_easyicon.net.png",
+        "iconPath": "image/zhoubian.png",
+        "selectedIconPath": "image/zhoubian.png",
         "text": "周边服务"
       },
       {
         "pagePath": "page/feedback/index",
-        "iconPath": "image/message_159.18367346939px_1192837_easyicon.net.png",
-        "selectedIconPath": "image/message_159.18367346939px_1192837_easyicon.net.png",
+        "iconPath": "image/liuyan.png",
+        "selectedIconPath": "image/liuyan.png",
         "text": "建言献策"
       }
     ]

@@ -15,7 +15,7 @@ Page({
     latitude: 29.031673,
     longitude: 111.698497,
     markers: [{
-      iconPath: "../../image/location.png",
+      iconPath: "../../image/jigou.png",
       id: '977577',
       title:'久久鸭脖中心店',
       latitude: 29.031673,
@@ -174,18 +174,17 @@ Page({
     this.getLocation();
     this.getUserInfo();
     var that = this;
-
     util.request(cfg.selectOrganizationListMap, {},
       function (data) {
         var markers=[];
         for(var i=0;i<data.length;i++){
          var o=data[i];
-         o.iconPath = "../../image/general_house_help_96px_1167237_easyicon.net.png";
+         o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
          o.width = 45;
          o.title = o.name;
          o.height = 45;
-         o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#0000FF", padding: 5/*, display: 'ALWAYS' */};
-         o.label = { color: "#0000CD", fontSize: 14, content:o.name, x:-40, y:-62 };
+         o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5/*, display: 'ALWAYS' */};
+         o.label = { color: "#808000", fontSize: 12, content:o.name, x:-40, y:-62 };
           markers.push(o);
           console.log(o);
         }

@@ -89,8 +89,8 @@
   flex: 1;
 }
 .kind-list-img {
-  width: 60rpx;
-  height: 60rpx;
+  width: 50rpx;
+  height: 50rpx;
 }
 .kind-list-item-hd {
   padding: 30rpx;
@@ -116,3 +116,10 @@
   padding:10rpx;
   background: #FFFFFF
 }
+.iconList{
+  width:16px; height: 16px;
+  padding-right: 10rpx;
+  vertical-align: middle;
+  
+}
+
