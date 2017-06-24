@@ -4,13 +4,23 @@ Page({
   data: {
     countries: [],
     countryIndex: 0,
-    max:0
+    max:0,
+    loading: false,
+    disabled: false
   },
   formSubmit: function (e) {
     var that=this;
+    this.setData({
+      loading: true,
+      disabled: true
+    })
     console.log('form发生了submit事件，携带数据为：', e.detail.value);
     util.request(cfg.insertFeedback, e.detail.value,
       function (data) {
+        that.setData({
+          loading: false,
+          disabled: false
+        })
         if(data.status=='0'){
           that.navigator('../info/index');
         }else{

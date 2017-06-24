@@ -1,4 +1,10 @@
 <view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+<!--<view class="list-group">
+      <view class="list-group-item">
+                    <input  name="name" maxlength="10" placeholder="请输入姓名"/>
+      </view>
+    </view>
+    -->
      <form catchsubmit="formSubmit" catchreset="formReset">
     <view class="page__bd">
 
@@ -69,7 +75,7 @@
                     <image class="weui-vcode-img" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width: 108px"></image>
                 </view>
             </view>
-            <button class="weui-btn" style="width:98%" type="primary" formType="submit">提交</button>
+            <button class="weui-btn" disabled="{{disabled}}"  loading="{{loading}}" style="width:98%" type="primary" formType="submit">提交</button>
         </view>
        
     </view>
