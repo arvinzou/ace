@@ -48,22 +48,22 @@ Page({
       radius: 400,
       strokeWidth: 2
     }],
-    controls: [/*{
+    controls: [{
       id: 1,
-      iconPath: '../../image/record.png',
+      iconPath: '../../image/locationto.png',
       position: {
-        top: 250,
-        left: 320,
+        top: 10,
+        left: 10,
         width: 50,
         height: 50
       },
+
       clickable: true
-    }*/]
+    }]
   },
   controltap: function (e) {
     console.log(e.controlId);
-    var that = this;
-    that.showModal();
+    this.getLocation();
   },
   bindtap: function (e) {
     console.log("bindtap click");
@@ -105,7 +105,7 @@ Page({
         that.setData({
           latitude: latitude,
           longitude: longitude,
-          scale: 28
+          scale: 16
         })
       }
     })

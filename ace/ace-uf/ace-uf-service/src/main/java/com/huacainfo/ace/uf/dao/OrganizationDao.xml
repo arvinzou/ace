@@ -153,8 +153,12 @@
         serviceTimeEnd
         FROM
         organization
-        WHERE
-        STATUS = '1'
+        WHERE 0=0
+        <if test='q!=null and q!=""'>
+            and name like
+            concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
+        and STATUS = '1'
     </select>
 
     <select id="selectOrganizationById" resultType="map">

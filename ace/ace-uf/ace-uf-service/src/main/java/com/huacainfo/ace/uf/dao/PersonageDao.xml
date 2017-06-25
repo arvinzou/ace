@@ -61,7 +61,7 @@
         left join portal.department b on t.deptId=b.department_id
         left join portal.province c on t.placeOfOrigin=c.code
 
-        where id = #{id,jdbcType=VARCHAR}
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from personage

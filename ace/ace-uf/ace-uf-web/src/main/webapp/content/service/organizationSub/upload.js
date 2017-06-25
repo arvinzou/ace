@@ -62,6 +62,13 @@ function init_uploader(config) {
 
 			if(config.target){
 			    $('input[name='+config.target+']').val(rst.value);
+			    if(config.target=='grid'){
+			        jQuery(cfgsub.grid_selector).jqGrid('setGridParam', {
+                                		page : 1,
+                                		postData : {
+                                		}
+                                	}).trigger("reloadGrid");
+			    }
 			}else{
 			    bootbox.dialog({
                 				title : '系统提示',
@@ -95,13 +102,13 @@ function reset_uploader(config) {
 	uploader.refresh();
 	init_uploader(config);
 }
-function appendUploadBtn() {
+function appendUploadBtn(id) {
 	var html = new Array();
 	html
 			.push("<a id='btn-upload-add' class='ace-icon glyphicon glyphicon-upload bigger-110' href='javascript:false'>上传</a>");
 	html
 			.push("<a id='btn-upload-view' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
-	$("#url").after(html.join(''));
+	$("#"+id).after(html.join(''));
 	$("#btn-upload-add")
 			.on(
 					'click',
@@ -110,7 +117,7 @@ function appendUploadBtn() {
 						var config={
                             		extensions : "jpg,gif,png,bmp",
                             		url : portalPath + '/files/uploadFile.do',
-                            		target : "url",
+                            		target : id,
                             		multipart_params : {}
                             	};
 						reset_uploader(config);
@@ -160,7 +167,7 @@ function appendUploadBtn() {
 
 											]
 										});
-						var fileName = $('input[name=photo]').val();
+						var fileName = $('input[name='+id+']').val();
 						if (!fileName || fileName == '') {
 							return;
 						}

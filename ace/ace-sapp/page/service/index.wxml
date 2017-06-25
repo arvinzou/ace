@@ -6,7 +6,7 @@
 
  <navigator url="../organization/index?id={{o.id}}" class="navigator">
                   <view  class="navigator-text" style="flex-direction:column;">
-                    <view>{{o.name}}</view>
+                    <view class="title-strong-big2">{{o.name}}</view>
                     <view style="font-size:14px;"> <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit"/>{{o.addr}}</view>
                     <view style="font-size:14px"><image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit"/>{{o.tel}} <image class="iconList"  src="../../image/time_71.003460207612px_1195888_easyicon.net.png" mode="aspectFit"/> {{o.serviceTimeStart}}-{{o.serviceTimeEnd}}</view>
                   </view>

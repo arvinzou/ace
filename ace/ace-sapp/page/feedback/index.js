@@ -21,6 +21,7 @@ Page({
           loading: false,
           disabled: false
         })
+        
         if(data.status=='0'){
           that.navigator('../info/index');
         }else{
@@ -63,7 +64,7 @@ Page({
     );
   },
   navigator: function (url) {
-    wx.navigateTo({
+    wx.redirectTo({
       url: url
     });
   },

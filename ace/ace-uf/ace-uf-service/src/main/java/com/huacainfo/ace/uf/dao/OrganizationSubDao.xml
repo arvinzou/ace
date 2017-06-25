@@ -48,12 +48,10 @@
 
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.OrganizationSub">
     update organization_sub
-    set organizationId = #{organizationId,jdbcType=VARCHAR},
-      areaCode = #{areaCode,jdbcType=VARCHAR},
+    set
       name = #{name,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}

@@ -2,7 +2,7 @@ jQuery(function($) {
 	init_uploader({
 		extensions : "jpg,gif,png,bmp",
 		url : portalPath + '/files/uploadFile.do',
-		target : "photo",
+		target : "url",
 		multipart_params : {}
 	});
 });
@@ -62,6 +62,13 @@ function init_uploader(config) {
 
 			if(config.target){
 			    $('input[name='+config.target+']').val(rst.value);
+			    if(config.target=='grid'){
+			        jQuery(cfgsub.grid_selector).jqGrid('setGridParam', {
+                                		page : 1,
+                                		postData : {
+                                		}
+                                	}).trigger("reloadGrid");
+			    }
 			}else{
 			    bootbox.dialog({
                 				title : '系统提示',
@@ -95,14 +102,14 @@ function reset_uploader(config) {
 	uploader.refresh();
 	init_uploader(config);
 }
-function appendUploadBtn() {
+function appendUploadBtn(id) {
 	var html = new Array();
 	html
-			.push("<a id='btn-upload-add' class='ace-icon glyphicon glyphicon-upload bigger-110' href='javascript:false'>上传</a>");
+			.push("<a id='btn-upload-add"+id+"' class='ace-icon glyphicon glyphicon-upload bigger-110' href='javascript:false'>上传</a>");
 	html
-			.push("<a id='btn-upload-view' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
-	$("#photo").after(html.join(''));
-	$("#btn-upload-add")
+			.push("<a id='btn-upload-view"+id+"' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
+	$("#"+id).after(html.join(''));
+	$("#btn-upload-add"+id)
 			.on(
 					'click',
 					function(e) {
@@ -110,7 +117,7 @@ function appendUploadBtn() {
 						var config={
                             		extensions : "jpg,gif,png,bmp",
                             		url : portalPath + '/files/uploadFile.do',
-                            		target : "photo",
+                            		target : id,
                             		multipart_params : {}
                             	};
 						reset_uploader(config);
@@ -137,7 +144,7 @@ function appendUploadBtn() {
 
 					});
 
-	$("#btn-upload-view")
+	$("#btn-upload-view"+id)
 			.on(
 					'click',
 					function(e) {
@@ -160,7 +167,7 @@ function appendUploadBtn() {
 
 											]
 										});
-						var fileName = $('input[name=photo]').val();
+						var fileName = $('input[name='+id+']').val();
 						if (!fileName || fileName == '') {
 							return;
 						}

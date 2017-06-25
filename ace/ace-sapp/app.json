@@ -4,7 +4,8 @@
     "page/service/index",
     "page/feedback/index",
     "page/organization/index",
-    "page/info/index"
+    "page/info/index",
+    "page/me/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -21,19 +22,19 @@
       {
         "pagePath": "page/help/index",
         "iconPath": "image/bangzhu.png",
-        "selectedIconPath": "image/bangzhu.png",
+        "selectedIconPath": "image/bangzhu_selected.png",
         "text": "我要帮助"
       },
       {
         "pagePath": "page/service/index",
         "iconPath": "image/zhoubian.png",
-        "selectedIconPath": "image/zhoubian.png",
+        "selectedIconPath": "image/zhoubian_selected.png",
         "text": "周边服务"
       },
       {
         "pagePath": "page/feedback/index",
         "iconPath": "image/liuyan.png",
-        "selectedIconPath": "image/liuyan.png",
+        "selectedIconPath": "image/liuyan_selected.png",
         "text": "建言献策"
       }
     ]

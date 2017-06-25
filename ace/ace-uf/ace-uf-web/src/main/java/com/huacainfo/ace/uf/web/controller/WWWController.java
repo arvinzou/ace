@@ -45,9 +45,9 @@ public class WWWController extends UfBaseController {
 
 	@RequestMapping(value = "/selectOrganizationList.do")
 	@ResponseBody
-	public List<Map<String,Object>> selectOrganizationList() throws Exception {
+	public List<Map<String,Object>> selectOrganizationList(String q) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
-		return this.organizationService.selectOrganizationList(this.getCurWxUser());
+		return this.organizationService.selectOrganizationList(q,this.getCurWxUser());
 	}
 	@RequestMapping(value = "/selectOrganizationListMap.do")
 	@ResponseBody

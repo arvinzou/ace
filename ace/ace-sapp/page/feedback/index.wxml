@@ -1,83 +1,58 @@
-<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
-<!--<view class="list-group">
-      <view class="list-group-item">
-                    <input  name="name" maxlength="10" placeholder="请输入姓名"/>
-      </view>
-    </view>
-    -->
-     <form catchsubmit="formSubmit" catchreset="formReset">
-    <view class="page__bd">
+<view class="page">
+ <form catchsubmit="formSubmit" catchreset="formReset">
 
-    <view class="weui-cells weui-cells_after-title">
-           
-            <view class="weui-cell weui-cell_select">
-                <view class="weui-cell__hd weui-cell__hd_in-select-after">
-                    <view class="weui-label">辖区</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <picker name="areaCode" value="{{countryIndex}}" range="{{countries}}">
-                        <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+
+  <view class="list-group">
+   <view class="list-group-item weui-flex">
+            <view class="weui-flex__item-icon">
+            <image class="iconList20" src="../../image/pin_location_50.04px_1189687_easyicon.net.png"/>
+            </view>
+             <picker name="areaCode" class="weui-flex__item-body" value="{{countryIndex}}" range="{{countries}}">
+                        <view >{{countries[countryIndex]}}</view>
                     </picker>
-                </view>
-            </view>
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">姓名</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" name="name" maxlength="10" placeholder="请输入姓名"/>
-                </view>
-            </view>
-
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">手机号</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" name="tel" type="number" maxlength="11" placeholder="请输入手机号"/>
-                </view>
-            </view>
-
-             <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">Email</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" name="email" maxlength="30" placeholder="请输入Email号"/>
-                </view>
-            </view>
-
- <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">标题</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" name="title" maxlength="50" placeholder="请输入标题"/>
-                </view>
-            </view>
-           
-       
-            <view class="weui-cell">
-                <view class="weui-cell__bd">
-                    <textarea name="docText" bindinput="valueChange"  maxlength="500" class="weui-textarea" placeholder="请输入留言建议" style="height: 300rpx" />
-                    <view class="weui-textarea-counter">{{max}}/500</view>
-                </view>
-            </view>
-
-             <view class="weui-cell weui-cell_input weui-cell_vcode">
-                <view class="weui-cell__hd">
-                    <view  class="weui-label">验证码</view>
-                </view>
-                <view class="weui-cell__bd">
-                    <input name="captcha" type="number" class="weui-input" placeholder="请输入验证码" />
-                </view>
-                <view class="weui-cell__ft">
-                    <image class="weui-vcode-img" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width: 108px"></image>
-                </view>
-            </view>
-            <button class="weui-btn" disabled="{{disabled}}"  loading="{{loading}}" style="width:98%" type="primary" formType="submit">提交</button>
         </view>
-       
-    </view>
-    </form>
+
+        <view class="list-group-item weui-flex">
+            <view class="weui-flex__item-icon">
+            <image class="iconList20" src="../../image/me.png"/>
+            </view>
+            <input  name="name" class="weui-flex__item-body" maxlength="10" placeholder="姓名"/>
+        </view>
+        <view class="list-group-item weui-flex">
+            <view class="weui-flex__item-icon">
+            <image class="iconList20" src="../../image/tel.png"/>
+            </view>
+            <input  name="tel" type="number" class="weui-flex__item-body" maxlength="11" placeholder="电话"/>
+        </view>  
+        <view class="list-group-item weui-flex">
+            <view class="weui-flex__item-icon">
+            <image class="iconList20" src="../../image/email.png"/>
+            </view>
+            <input  name="email" maxlength="30" class="weui-flex__item-body" maxlength="30" placeholder="邮箱"/>
+        </view>  
+        <view class="list-group-item weui-flex">
+            <view class="weui-flex__item-icon">
+            <image class="iconList20" src="../../image/title.png"/>
+            </view>
+            <input  name="title" maxlength="50" class="weui-flex__item-body" maxlength="10" placeholder="标题"/>
+        </view>  
+        <view class="list-group-item">
+             <textarea name="docText" bindinput="valueChange"  maxlength="500" class="weui-textarea" placeholder="请输入留言建议" style="height: 300rpx" />
+                    <view class="weui-textarea-counter">{{max}}/500</view>
+        </view>  
+        <view class="list-group-item weui-flex">
+            <view class="weui-flex__item-icon">
+            <image class="iconList20" src="../../image/checkcode.png"/>
+            </view>
+            <input name="captcha" type="number" class="weui-flex__item-body" maxlength="10" placeholder="验证码"/>
+            <image class="weui-vcode-img weui-flex__item-body" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width:90px;height:30px;text-align:right"></image>
+        </view>  
+
+        <view  class="list-group-item weui-flex">
+          <button class="weui-btn" disabled="{{disabled}}"  loading="{{loading}}" style="width:98%" type="primary" formType="submit">提交</button>
+        </view> 
+  </view>
+
+
+  </form>
 </view>
