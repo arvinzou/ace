@@ -54,6 +54,7 @@ jQuery(function($) {
 							}
 						})
 						initForm();
+						appendUploadBtn("remark");
 			});
 	$('#btn-view-edit').on(
 			'click',
@@ -79,6 +80,7 @@ jQuery(function($) {
 								style_edit_form(form);
 							}
 						})
+						appendUploadBtn("remark");
 			});
 	
 	
@@ -167,7 +169,11 @@ jQuery(function($) {
 	}));
 $( "#btn-view-import" ).on('click', function(e) {
 		e.preventDefault();
-		reset_uploader();
+		reset_uploader({
+                                extensions : "xls,xlsx",
+                                url : contextPath+'/dict/importXls.do',
+                                multipart_params : {}
+                                          });
 		var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
 			modal: true,
 			width:750,

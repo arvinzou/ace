@@ -20,6 +20,8 @@ var config = {
     selectOrganization: `${server}/uf/www/selectOrganization.do`,
     selectAreaCodeList: `${server}/uf/www/selectAreaCodeList.do`,
     insertFeedback: `${server}/uf/www/insertFeedback.do`,
+    selectOrganizationCategoryList: `${server}/uf/www/selectOrganizationCategoryList.do`,
+    selectOrganizationByCategory: `${server}/uf/www/selectOrganizationByCategory.do`,
     checkImageUrl: `${server}/uf/www/captcha/image.do`,
     appid: 'wxa09a5be5fd228680',
     appsecret: 'd520d29f8c26c7e3885d80b1812a8d91',

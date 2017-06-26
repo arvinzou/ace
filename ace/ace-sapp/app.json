@@ -5,7 +5,9 @@
     "page/feedback/index",
     "page/organization/index",
     "page/info/index",
-    "page/me/index"
+    "page/me/index",
+    "page/map/index",
+    "page/grid/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

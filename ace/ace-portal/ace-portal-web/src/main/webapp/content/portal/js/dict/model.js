@@ -1,4 +1,4 @@
-var _colNames = ['编号', '父编号', '类型', '编码', '名称', '拼音码', '创建时间', '备注'];
+var _colNames = ['编号', '父编号', '类型', '编码', '名称', '拼音码', '创建时间', '图标'];
 var _colModel = function() {
 	return [
 			{
@@ -112,8 +112,9 @@ var _colModel = function() {
 				width : 150,
 				editable : true,
 				editoptions : {
-					size : "20",
-					maxlength : "30"
+					style : 'width:300px;',
+					maxlength : "200",
+					colspan : true
 				}
 			}];
 }

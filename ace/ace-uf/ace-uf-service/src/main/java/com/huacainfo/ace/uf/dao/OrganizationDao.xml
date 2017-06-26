@@ -181,4 +181,21 @@
         WHERE
         parent_code = #{areaCode}
     </select>
+    <select id="selectOrganizationByCategory" resultType="map">
+        SELECT
+        id 'id',
+        name 'name',
+        category,
+        icon,
+        addr,
+        latitude,
+        longitude,
+        tel,serviceTimeStart,
+        serviceTimeEnd
+        FROM
+        organization
+        WHERE category=#{category}
+
+        and STATUS = '1'
+    </select>
 </mapper>

@@ -43,6 +43,8 @@ public class WWWController extends UfBaseController {
 	@Autowired
 	private RedisOperations<String, Object> redisTemplate;
 
+	private String[] areas;
+
 	@RequestMapping(value = "/selectOrganizationList.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectOrganizationList(String q) throws Exception {
@@ -67,7 +69,14 @@ public class WWWController extends UfBaseController {
 	@ResponseBody
 	public List<Map<String,Object>> selectAreaCodeList(String areaCode) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
-		return this.organizationService.selectAreaCodeList(areaCode,this.getCurWxUser());
+		List<Map<String,Object>> list=this.organizationService.selectAreaCodeList(areaCode,this.getCurWxUser());
+				areas=new String[list.size()];
+		int i=0;
+		for(Map<String,Object> e:list){
+			areas[i]=(String) e.get("id");
+			i++;
+		}
+		return list;
 	}
 
 	@RequestMapping(value = "/insertFeedback.do")
@@ -78,6 +87,7 @@ public class WWWController extends UfBaseController {
 		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
 		this.logger.info("captcha->{}",captcha);
 		this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+		obj.setAreaCode(areas[Integer.valueOf(obj.getAreaCode())]);
 		if(CommonUtils.isBlank(captcha)){
 			return new MessageResponse(1,"验证码不能为空！");
 		}
@@ -86,5 +96,19 @@ public class WWWController extends UfBaseController {
 		}
 		return this.feedbackService
 				.insertFeedback(obj, this.getCurUserProp());
+	}
+
+	@RequestMapping(value = "/selectOrganizationCategoryList.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectOrganizationCategoryList() throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.organizationService.selectOrganizationCategoryList(this.getCurWxUser());
+	}
+
+	@RequestMapping(value = "/selectOrganizationByCategory.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectOrganizationByCategory(String category) throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.organizationService.selectOrganizationByCategory(category,this.getCurWxUser());
 	}
 }

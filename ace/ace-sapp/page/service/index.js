@@ -6,12 +6,15 @@ Page({
   data: {
     hasLocation: false,
     showModalStatus: false,
+    showBarStatus:true,
+    category:'01',
+    serverfile: cfg.serverfile,
     view: {
       height: '100vh'
     },
     list: [
     ],
-
+    listCategory:[],
     latitude: 29.031673,
     longitude: 111.698497,
     markers: [{
@@ -75,20 +78,35 @@ Page({
   },
   callouttap: function (e) {
     console.log("callouttap click");
-  },
-  markertap: function (e) {
-    console.log("markertap click");
+    console.log(e);
     var that = this;
     var data = that.data.markers;
     for (var i = 0; i < data.length; i++) {
       var o = data[i];
-      if (o.id == e.markerId){
+      if (o.id == e.markerId) {
         that.setData({
           o: o
         });
       }
     }
-    
+
+    that.showModal();
+  },
+  markertap: function (e) {
+    console.log("markertap click");
+    console.log("callouttap click");
+    console.log(e);
+    var that = this;
+    var data = that.data.markers;
+    for (var i = 0; i < data.length; i++) {
+      var o = data[i];
+      if (o.id == e.markerId) {
+        that.setData({
+          o: o
+        });
+      }
+    }
+
     that.showModal();
     
   },
@@ -143,48 +161,43 @@ Page({
       }
     })
   },
-  getUserInfo: function () {
-    var that = this
-    if (app.globalData.hasLogin === false) {
-   
-    } else {
-      _getUserInfo()
-    }
-
-    function _getUserInfo() {
-      wx.getUserInfo({
-        success: function (res) {
-          that.setData({
-            hasUserInfo: true,
-            userInfo: res.userInfo
-          })
-          //that.update()
-        }
-      })
-    }
-  },
   clear: function () {
     this.setData({
       hasUserInfo: false,
       userInfo: {}
     })
   },
-  onLoad: function () {
-    console.log('onLoad');
-    this.getLocation();
-    this.getUserInfo();
+  onLoad: function (options) {
     var that = this;
-    util.request(cfg.selectOrganizationListMap, {},
+    console.log('onLoad');
+    that.showBar()
+    that.getLocation();
+    that.initData('01');
+    util.request(cfg.selectOrganizationCategoryList, {},
       function (data) {
-        var markers=[];
-        for(var i=0;i<data.length;i++){
-         var o=data[i];
-         o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
-         o.width = 45;
-         o.title = o.name;
-         o.height = 45;
-         o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5/*, display: 'ALWAYS' */};
-         o.label = { color: "#CE0000", fontSize: 12, content:o.name, x:-40, y:-62 };
+        that.setData({
+          listCategory: data
+        });
+      }
+    );
+  },
+  query:function(e){
+    console.log(e.currentTarget.id);
+    this.initData(e.currentTarget.id);
+  },
+  initData:function(category){
+    var that = this;
+    util.request(cfg.selectOrganizationByCategory, { category: category},
+      function (data) {
+        var markers = [];
+        for (var i = 0; i < data.length; i++) {
+          var o = data[i];
+           o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
+          o.width = 45;
+          o.title = o.name;
+          o.height = 45;
+          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5/*, display: 'ALWAYS' */ };
+          o.label = { content: o.name };
           markers.push(o);
           console.log(o);
         }
@@ -198,6 +211,7 @@ Page({
     // 显示遮罩层
     this.setData({
       showModalStatus: true,
+      showBarStatus: false,
       view: {
         height: '70vh'
       }
@@ -205,12 +219,14 @@ Page({
   },
   hideModal: function () {
     // 隐藏遮罩层
+    var that=this;
     this.setData({
       showModalStatus: false,
       view: {
         height: '100vh'
       }
     });
+    that.showBar();
   },
   navigator: function () {
     var that=this;
@@ -219,6 +235,24 @@ Page({
       url: '../organization/index?id=' + that.data.o.id
     });
      this.hideModal();
+  },
+  showBar: function () {
+    // 显示遮罩层
+    this.setData({
+      showBarStatus: true,
+      view: {
+        height: '75vh'
+      }
+    })
+  },
+  hideBar: function () {
+    // 隐藏遮罩层
+    this.setData({
+      showBarStatus: false,
+      view: {
+        height: '100vh'
+      }
+    });
   }
 })
 

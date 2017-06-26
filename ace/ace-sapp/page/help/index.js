@@ -3,7 +3,8 @@ var cfg = require("../../config.js");
 Page({
   data: {
     list: [
-    ]
+    ],
+    serverfile: cfg.serverfile
   },
   showInput: function () {
     this.setData({
