@@ -38,6 +38,7 @@ app.controller('myCtrl', function($scope, $http) {
 			$.hideLoading();
 			$scope.list = res.data.value;
 			$("body").removeClass("refreshing");
+
 		}, function errorCallback(response) {
 			$.hideLoading();
 		});
@@ -50,3 +51,4 @@ function scope(ctrl) {
 	var $scope = angular.element(appElement).scope();
 	return $scope;
 }
+

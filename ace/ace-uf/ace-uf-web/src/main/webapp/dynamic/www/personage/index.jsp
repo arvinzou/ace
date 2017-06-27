@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html lang="cn">
+<html lang="cn" ng-app="myApp" >
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,7 @@ pageEncoding="utf-8"%>
             var category='${param.category}';
     </script>
 </head>
-<body ontouchstart>
+<body ontouchstart ng-controller="myCtrl">
 <div class="weui-pull-to-refresh__layer">
     <div class='weui-pull-to-refresh__arrow'></div>
     <div class='weui-pull-to-refresh__preloader'></div>
@@ -20,7 +20,7 @@ pageEncoding="utf-8"%>
     <div class="up">释放刷新</div>
     <div class="refresh">正在刷新</div>
 </div>
-<div ng-app="myApp" ng-controller="myCtrl">
+<div >
 
     <div class="weui-search-bar" id="searchBar">
         <form class="weui-search-bar__form" onsubmit="return t_query()">
