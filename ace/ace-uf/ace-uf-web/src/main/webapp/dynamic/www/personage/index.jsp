@@ -28,7 +28,7 @@ pageEncoding="utf-8"%>
                 <i class="weui-icon-search"></i>
                 <input type="search" ng-model="name" class="weui-search-bar__input"
                        placeholder="搜索" required="">
-                <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                <a href="javascript:" class="weui-icon-clear" id="searchClear" ng-click="clear()"></a>
             </div>
             <label class="weui-search-bar__label" id="searchText"
                    style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
@@ -36,7 +36,7 @@ pageEncoding="utf-8"%>
                 <span>搜索</span>
             </label>
         </form>
-        <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+        <a href="javascript:" class="weui-search-bar__cancel-btn" ng-click="clear()" id="searchCancel">取消</a>
     </div>
     <div class="page__bd">
         <div class="weui-panel weui-panel_access">
@@ -92,6 +92,7 @@ pageEncoding="utf-8"%>
   vertical-align: middle;
 
 }
+
 </style>
 </body>
 </html>

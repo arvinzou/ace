@@ -18,6 +18,10 @@ function t_query() {
 }
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
+    $scope.clear=function(){
+       $scope.name="";
+       $scope.query();
+    }
 	$scope.query = function() {
 		$.showLoading();
 		$http({
