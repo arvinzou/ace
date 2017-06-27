@@ -115,9 +115,15 @@ public class WWWController extends UfBaseController {
 	@RequestMapping(value = "/query.do")
 	@ResponseBody
 	public ListResult<Map<String,Object>> query(
-			String reportId)
+			String reportId, int start, int limit)
 			throws Exception {
 		Map<String,Object> condition=this.getParams();
-		return analysisService.query(condition, reportId);
+		if (CommonUtils.isBlank(start)) {
+			start = 0;
+		}
+		if (CommonUtils.isBlank(limit)) {
+			limit = 10;
+		}
+		return analysisService.query(condition, reportId, start, limit);
 	}
 }

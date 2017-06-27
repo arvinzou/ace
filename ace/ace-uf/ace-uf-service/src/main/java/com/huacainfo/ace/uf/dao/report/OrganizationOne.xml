@@ -8,6 +8,6 @@
     t.lastModifyUserId,
     t.lastModifyUserName, t.lastModifyDate,a.name areaName
     from organization t left join portal.province a on t.areaCode=a.code
-    where t.id=#{condition.id}
+    where t.id=#{id}
   </select>
 </mapper>

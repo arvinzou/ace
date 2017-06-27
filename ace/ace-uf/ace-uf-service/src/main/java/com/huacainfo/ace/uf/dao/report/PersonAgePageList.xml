@@ -3,18 +3,19 @@
 <mapper namespace="com.huacainfo.ace.uf.dao.report.PersonAgePageList">
   <select id="query" resultType="map">
     select t.id, t.name, t.sex, t.birthday, t.photo, t.mobile, t.tel, t.remark,
-    t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName
+    t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName,dict.name categoryName
     from personage t
     left join portal.province a on t.areaCode=a.code
     left join portal.department b on t.deptId=b.department_id
     left join portal.province c on t.placeOfOrigin=c.code
+    left join (select code,name from portal.dict where category_id='98') dict on t.category=dict.code
     where t.status='1'
-    <if test='condition.name!=null and condition.name!=""'>
+    <if test='name!=null and name!=""'>
       and t.name like
-      concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+      concat('%',#{name,jdbcType=VARCHAR},'%')
     </if>
-    <if test="condition.category!=null and condition.category!=&quot;&quot;">
-      and t.category =#{condition.category,jdbcType=VARCHAR}
+    <if test='category!=null and category!=""'>
+      and t.category =#{category,jdbcType=VARCHAR}
     </if>
     ORDER BY t.pcode
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
