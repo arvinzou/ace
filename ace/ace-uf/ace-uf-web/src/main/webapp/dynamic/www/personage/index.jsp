@@ -44,7 +44,7 @@ pageEncoding="utf-8"%>
             <div class="weui-panel__bd">
                 <a ng-repeat="o in list" href="preview.jsp?id={{o.id}}" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" src="{{fastdfs_server+ o.photo}}" alt="">
+                        <img class="photo" src="{{fastdfs_server+ o.photo}}" alt="">
                     </div>
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">{{o.name}}</h4>
@@ -77,7 +77,7 @@ pageEncoding="utf-8"%>
   display: inline-block;
   height: 18px;
   width: 18px;
-  border-width: 2px 2px 0 0;
+  border-width: 1px 1px 0 0;
   border-color: #888888;
   border-style: solid;
   transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
@@ -92,7 +92,11 @@ pageEncoding="utf-8"%>
   vertical-align: middle;
 
 }
-
+.photo {
+    height: 70px;
+    max-height:70px;
+    max-width:70px;
+}
 </style>
 </body>
 </html>
