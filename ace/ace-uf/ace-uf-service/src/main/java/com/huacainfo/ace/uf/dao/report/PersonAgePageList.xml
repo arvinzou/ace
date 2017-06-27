@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.report.PersonAgePageList">
+  <select id="query" resultType="map">
+    select t.id, t.name, t.sex, t.birthday, t.photo, t.mobile, t.tel, t.remark,
+    t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName
+    from personage t
+    left join portal.province a on t.areaCode=a.code
+    left join portal.department b on t.deptId=b.department_id
+    left join portal.province c on t.placeOfOrigin=c.code
+    where t.status='1'
+    <if test='condition.name!=null and condition.name!=""'>
+      and t.name like
+      concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="condition.category!=null and condition.category!=&quot;&quot;">
+      and t.category =#{condition.category,jdbcType=VARCHAR}
+    </if>
+    ORDER BY t.pcode
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+</mapper>

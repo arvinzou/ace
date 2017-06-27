@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.report.PersonAgeOne">
+  <select id="query" resultType="map">
+    select t.id, t.areaCode, t.deptId, t.category, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
+    t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
+    t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark,
+    t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName
+    from personage t
+    left join portal.province a on t.areaCode=a.code
+    left join portal.department b on t.deptId=b.department_id
+    left join portal.province c on t.placeOfOrigin=c.code
+    where t.id=#{condition.id}
+  </select>
+</mapper>

@@ -893,6 +893,8 @@ qq.maps.event.addDomListener(btnSearch, 'click', function () {
     query_city = curCity.children[0].innerHTML;
     url = encodeURI("http://apis.map.qq.com/ws/place/v1/search?keyword=" + value + "&boundary=region(" + query_city + ",0)&page_size=9&page_index=1&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB&output=jsonp&&callback=?");
     $.getJSON(url, function (result) {
+    console.log(url);
+     console.log(result);
 
         if (result.count) {
             isNoValue = false;

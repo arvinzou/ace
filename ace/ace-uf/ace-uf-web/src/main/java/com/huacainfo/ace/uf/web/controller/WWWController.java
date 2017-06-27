@@ -1,8 +1,9 @@
 package com.huacainfo.ace.uf.web.controller;
 
-import com.huacainfo.ace.common.model.WxUser;
-import com.huacainfo.ace.uf.model.Feedback;
-import com.huacainfo.ace.uf.service.FeedbackService;
+import java.util.List;
+import java.util.Map;
+
+import com.huacainfo.ace.common.result.ListResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.uf.model.Organization;
+import com.huacainfo.ace.uf.model.Feedback;
+import com.huacainfo.ace.uf.service.AnalysisService;
+import com.huacainfo.ace.uf.service.FeedbackService;
 import com.huacainfo.ace.uf.service.OrganizationService;
-import com.huacainfo.ace.uf.vo.OrganizationQVo;
-import com.huacainfo.ace.uf.vo.OrganizationVo;
-
-import java.util.List;
-import java.util.Map;
+import com.huacainfo.ace.uf.service.PersonageService;
 
 @Controller
 @RequestMapping("/www/")
@@ -39,6 +33,13 @@ public class WWWController extends UfBaseController {
 
 	@Autowired
 	private FeedbackService feedbackService;
+
+	@Autowired
+	private PersonageService personageService;
+
+
+	@Autowired
+	private AnalysisService analysisService;
 
 	@Autowired
 	private RedisOperations<String, Object> redisTemplate;
@@ -110,5 +111,13 @@ public class WWWController extends UfBaseController {
 	public List<Map<String,Object>> selectOrganizationByCategory(String category) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.organizationService.selectOrganizationByCategory(category,this.getCurWxUser());
+	}
+	@RequestMapping(value = "/query.do")
+	@ResponseBody
+	public ListResult<Map<String,Object>> query(
+			String reportId)
+			throws Exception {
+		Map<String,Object> condition=this.getParams();
+		return analysisService.query(condition, reportId);
 	}
 }
