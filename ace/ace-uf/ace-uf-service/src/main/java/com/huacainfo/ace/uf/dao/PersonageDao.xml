@@ -55,7 +55,7 @@
         t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
         t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-        t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName
+        t.intro,a.fullname areaName,b.department_name deptName,c.fullname placeOfOriginName
         from personage t
         left join portal.province a on t.areaCode=a.code
         left join portal.department b on t.deptId=b.department_id
@@ -154,7 +154,7 @@
         t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
         t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-        t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName
+        t.intro,a.fullname areaName,b.department_name deptName,c.fullname placeOfOriginName
 
         <include refid="whereCondition"/>
         ) m

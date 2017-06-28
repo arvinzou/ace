@@ -28,7 +28,7 @@ var id='${param.id}';
                 {{o.name}}
             </div>
         </div>
-        <div class="weui-flex__item">
+        <div class="weui-flex__item1">
             <div class="weui-form-preview__bd">
 
                 <div class="weui-form-preview__item item-text-min">
@@ -209,13 +209,12 @@ var id='${param.id}';
     font-size:14px;
 }
 .item-text {
-    line-height: 40px;
+    line-height: 60px;
     margin-bottom: 5px;
     margin-top: 5px;
     padding-bottom: 4px;
     border-bottom: 1px solid #e5e5e5;
-    font-weight:800;
-    font-size:14px;
+    font-size: 1.2em;
 }
 .weui-form-preview__bd {
     padding: 10px 15px;
@@ -231,6 +230,11 @@ var id='${param.id}';
     text-align-last: justify;
 }
 
+.weui-flex__item1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 2;
+}
 
 </style>
 </body>

@@ -142,7 +142,7 @@ FROM
     </select>
 
     <select id="selectAreaCode" resultType="map">
-        select code,name from province
+        select code,fullname name from province
     </select>
 
 </mapper>

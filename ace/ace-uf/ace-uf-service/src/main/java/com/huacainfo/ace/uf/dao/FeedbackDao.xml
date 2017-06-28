@@ -23,7 +23,7 @@
         select
         t.id, t.title, t.category, t.status, t.areaCode, t.name, t.tel, t.email, t.createDate, t.replyTime,
         t.replyUserId,
-        t.replyUserName,t.docText, t.replyText,a.name areaName
+        t.replyUserName,t.docText, t.replyText,a.fullname areaName
         from feedback t left join portal.province a on t.areaCode=a.code
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
@@ -91,7 +91,7 @@
         select m.* from(
         select t.id, t.title, t.category, t.status, t.areaCode, t.name, t.tel, t.email, t.createDate, t.replyTime,
         t.replyUserId,
-        t.replyUserName,t.docText, t.replyText,a.name areaName
+        t.replyUserName,t.docText, t.replyText,a.fullname areaName
 
         <include refid="whereCondition"/>
         ) m

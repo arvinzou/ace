@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.uf.dao.report.PersonAgePageList">
   <select id="query" resultType="map">
     select t.id, t.name, t.sex, t.birthday, t.photo, t.mobile, t.tel, t.remark,
-    t.intro,a.name areaName,b.department_name deptName,c.name placeOfOriginName,dict.name categoryName
+    t.intro,a.fullname areaName,b.department_name deptName,c.fullname placeOfOriginName,dict.name categoryName
     from personage t
     left join portal.province a on t.areaCode=a.code
     left join portal.department b on t.deptId=b.department_id

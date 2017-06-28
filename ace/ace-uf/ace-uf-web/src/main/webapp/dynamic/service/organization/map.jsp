@@ -796,22 +796,7 @@ pageEncoding="utf-8"%>
             </div>
 
         </div>
-        <div id="bside_left">
-            <div id="txt_pannel">
-                <h3>功能简介：</h3>
 
-                <p>1、支持地址 精确/模糊 查询；</p>
-
-                <p>2、支持POI点坐标显示；</p>
-
-                <p>3、坐标鼠标跟随显示；</p>
-
-                <h3>使用说明：</h3>
-
-                <p>在搜索框搜索关键词后，地图上会显示相应poi点，同时左侧显示对应该点的信息，点击某点或某信息，右上角会显示相应该点的坐标和地址。</p>
-            </div>
-
-        </div>
         <div id="bside_rgiht">
             <div id="container"></div>
         </div>

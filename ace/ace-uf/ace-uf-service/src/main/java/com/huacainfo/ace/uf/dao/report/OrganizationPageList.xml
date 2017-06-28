@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.uf.dao.report.OrganizationPageList">
     <select id="query" resultType="map">
        select t.id, t.category, t.areaCode, t.name, t.addr, t.tel, t.serviceWay, t.latitude, t.longitude, t.serviceTimeStart,
-        t.serviceTimeEnd, t.icon, t.remark,a.name areaName
+        t.serviceTimeEnd, t.icon, t.remark,a.fullname areaName
         from organization t
         left join portal.province a on t.areaCode=a.code
         where t.status='1'

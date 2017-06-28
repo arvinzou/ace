@@ -53,9 +53,9 @@ pageEncoding="utf-8"%>
                         </div>
                         <div style="font-size:14px">
                             辖区： {{o.areaName}}
-
-                            联系电话：
-                            {{o.tel}}
+                        </div>
+                        <div style="font-size:14px">
+                            联系电话：{{o.tel}}
                         </div>
                     </div>
 
@@ -95,9 +95,17 @@ pageEncoding="utf-8"%>
 
 }
 .photo {
-    height: 70px;
-    max-height:70px;
-    max-width:70px;
+    height: 90px;
+    max-height:90px;
+    max-width:90px;
+     vertical-align: middle;
+}
+.weui-media-box_appmsg .weui-media-box__hd {
+    margin-right: .8em;
+    width: 60px;
+    height: 90px;
+    line-height: 60px;
+    text-align: center;
 }
 </style>
 </body>
