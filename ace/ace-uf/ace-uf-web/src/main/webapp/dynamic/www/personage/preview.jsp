@@ -20,7 +20,7 @@ var id='${param.id}';
         <div class="weui-flex__item" style="text-align: center;">
             <div data-pswp-uid="1" class="my-gallery">
 
-                <img class="photo"
+                <img class="photo" ng-if="o.photo"
                      src="{{fastdfs_server+ o.photo}}"/>
 
             </div>
@@ -108,9 +108,9 @@ var id='${param.id}';
     </div>
 
 
-    <div style="padding:12px">
+    <div style="padding:12px" ng-if="o.remark">
         <img class="photo" src="{{fastdfs_server+ o.remark}}"/>
-        <div ng-if="o.remark" style="text-align: center;padding:2px;font-weight:800;font-size:14px">二维码</div>
+        <div  style="text-align: center;padding:2px;font-weight:800;font-size:14px">二维码</div>
     </div>
 
 </div>
@@ -119,6 +119,81 @@ var id='${param.id}';
 
 <jsp:include page="../../common/footer-1-www.jsp"/>
 
+
+<script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+<script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
+<link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+<link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
+<script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+<script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script
+        src="${portalPath}/content/common/angularjs/angular.min.js"></script>
 <script src="${pageContext.request.contextPath}/content/www/personage/preview.js"></script>
 <style>
 .photo{

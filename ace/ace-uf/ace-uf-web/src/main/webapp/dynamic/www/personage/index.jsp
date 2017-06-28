@@ -49,22 +49,24 @@ pageEncoding="utf-8"%>
                     <div class="weui-media-box__bd">
                         <h4 class="weui-media-box__title">{{o.name}}</h4>
                         <div style="font-size:14px">
-                            <img class="iconList" src="${portalPath}/content/common/weui/image/org.png"/> {{o.deptName}}
+                            单位： {{o.deptName}}
                         </div>
                         <div style="font-size:14px">
-                            <img class="iconList" src="${portalPath}/content/common/weui/image/zhoubian.png"/> {{o.areaName}}
-                            <img class="iconList" src="${portalPath}/content/common/weui/image/rylx.png"/> {{o.categoryName}}
-                            <img class="iconList" src="${portalPath}/content/common/weui/image/phone_32.088397790055px_1187704_easyicon.net.png"/>
+                            辖区： {{o.areaName}}
+
+                            联系电话：
                             {{o.tel}}
                         </div>
                     </div>
-                    <div class="navigator-arrow"></div>
+
                 </a>
             </div>
         </div>
     </div>
 </div>
 <jsp:include page="../../common/footer-1-www.jsp"/>
+<script
+        src="${portalPath}/content/common/angularjs/angular.min.js"></script>
 <script src="${portalPath}/content/common/weui/fastclick.js"></script>
 <script src="${pageContext.request.contextPath}/content/www/personage/controller.js"></script>
 <style>

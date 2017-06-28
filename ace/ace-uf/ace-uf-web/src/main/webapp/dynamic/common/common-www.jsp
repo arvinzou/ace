@@ -8,7 +8,7 @@ session.setAttribute("portalPath", "/portal");
 	var contextPath = '${pageContext.request.contextPath}';
 	var portalPath = '${portalPath}';
 	var fastdfs_server = 'http://zx.huacainfo.com/';
-
 </script>
 <link rel="stylesheet" href="${portalPath}/content/common/weui/weui.min.css" />
 <link rel="stylesheet" href="${portalPath}/content/common/weui/jquery-weui.min.css" />
+<link rel="stylesheet" href="${portalPath}/content/common/weui/common.css" />
