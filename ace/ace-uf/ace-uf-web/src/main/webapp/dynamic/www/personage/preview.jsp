@@ -18,10 +18,10 @@ var id='${param.id}';
 <div>
     <div class="weui-flex">
         <div class="weui-flex__item" style="text-align: center;">
-            <div data-pswp-uid="1" class="my-gallery">
+            <div data-pswp-uid="1" class="my-gallery" >
 
                 <img class="photo" ng-if="o.photo"
-                     src="{{fastdfs_server+ o.photo}}"/>
+                     src="{{fastdfs_server+ o.photo}}" on-finish-render-filters/>
 
             </div>
             <div style="text-align: center;padding:2px;font-weight:800;font-size:14px">

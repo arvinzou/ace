@@ -42,17 +42,28 @@ app.controller('myCtrl', function($scope, $http) {
 			if (key == 'birthday') {
 				$scope.o[key] = value.substring(0, 10);
 			}
-			if (key == 'currentPostDate'||key == 'currentRankDate') {
-				$scope.o[key] =new Date(value).pattern("yyyy-MM-dd");
+			if (key == 'currentPostDate' || key == 'currentRankDate') {
+				$scope.o[key] = new Date(value).pattern("yyyy-MM-dd");
 			}
 		});
-		setTimeout("photoview()", 500)
-
 	}, function errorCallback(response) {
 		$.hideLoading();
 	});
+	$scope.$on('load', function(e) {
+		console.log("load");
+		photoview();
+	});
 });
-
+app.directive('onFinishRenderFilters', function($timeout) {
+	return {
+		restrict : 'A',
+		link : function(scope, element, attr) {
+			$timeout(function() {
+				scope.$emit('load');
+			});
+		}
+	};
+});
 function photoview() {
 	$("img").each(
 			function() {
