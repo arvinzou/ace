@@ -42,7 +42,7 @@ app.controller('myCtrl', function($scope, $http) {
 			if (key == 'birthday') {
 				$scope.o[key] = value.substring(0, 10);
 			}
-			if (key == 'currentPostDate' || key == 'currentRankDate') {
+			if (key == 'currentPostDate' || key == 'currentRankDate'||key == 'joinDate') {
 				$scope.o[key] = new Date(value).pattern("yyyy-MM-dd");
 			}
 		});
