@@ -120,8 +120,6 @@ var id='${param.id}';
 <jsp:include page="../../common/footer-1-www.jsp"/>
 
 
-<script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
-<script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
 <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
 <script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
