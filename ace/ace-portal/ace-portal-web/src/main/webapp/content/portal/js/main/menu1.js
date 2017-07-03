@@ -6,42 +6,41 @@ var buildMenu = function(menus) {
 				.each(
 						menus,
 						function(i, menu) {
-							html.push('<li class="">');
+							html.push('<li class="nav-item">');
 							html
-									.push('<a class="dropdown-toggle" href="#"><i class="menu-icon '
+									.push('<a class="nav-link nav-toggle" href="#"><i class="'
 											+ menu.icon
-											+ '"></i><span class="menu-text">'
+											+ '"></i><span class="title">'
 											+ menu.text + ' </span>');
 							if (menu.leaf != true && menu.leaf != 'true') {
 								html
-										.push('<b class="arrow fa fa-angle-down"></b>');
+										.push('<span class="arrow open"></span>');
 							}
 							html.push('</a>');
 							var initSubMenu = function(menu) {
 								if (menu.leaf != true && menu.leaf != 'true') {
 									var childrens = menu.children, len = childrens.length;
-									html.push('<ul class="submenu">');
+									html.push('<ul class="sub-menu">');
 									for (var i = 0; i < len; i++) {
-										html.push('<li class="">');
+										html.push('<li class="nav-item">');
 										if (childrens[i].href) {
-											html
-													.push('<a  href="#" title="'
+											html.push('<a class="nav-link"  href="#" title="'
 															+ childrens[i].text
 															+ '" url="'
 															// + contextPath
 															+ childrens[i].href
-															+ '" ><i class="menu-icon '
+															+ '" ><i class1="'
 															+ childrens[i].icon
-															+ '"></i>'
+															+ '"></i><span class="title">'
 															+ childrens[i].text
-															+ '</a><b class="arrow"></b>');
+															+ '</span></a><b class="arrow"></b>');
 										} else {
 											html
-													.push('<a class="dropdown-toggle" href="#"><i class="menu-icon '
+													.push('<a class="nav-link nav-toggle" href="#"><i class1="'
 															+ childrens[i].icon
-															+ '"></i>'
+															+ '"></i><span class="title">'
 															+ childrens[i].text
-															+ '<b class="arrow fa fa-angle-down"></b></a>');
+															+ '</span><span class="arrow open"></span></a>');
 										}
 										initSubMenu(childrens[i]);
 										html.push('</li>');
@@ -61,7 +60,8 @@ var buildMenu = function(menus) {
 	$('#menu a[url]').bind('click', function() {
 		var url = $(this).attr("url");
 		$('#menu a[url]').parent('li').removeClass("active")
-		$(this).parent('li').addClass("active");
+		$(this).parent('li').addClass("active open");
+
 		if (url) {
 			if(url.indexOf("/")!=-1){
 				//普通地址

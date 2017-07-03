@@ -573,7 +573,8 @@ body {
                     								href="${pageContext.request.contextPath}/dynamic/portal/security/loginOut.jsp">
                     									<i class="ace-icon fa fa-power-off"></i> 安全退出
                     							</a></li>
-                    						</ul></li>
+                    						</ul>
+										</li>
 
                     					<!-- /section:basics/navbar.user_menu -->
                     				</ul>
