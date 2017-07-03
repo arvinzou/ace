@@ -165,9 +165,9 @@
 	white-space: nowrap;
 	border-width: 1px;
 	border-style: solid;
-	-moz-border-radius: 5px 5px 0 0;
-	-webkit-border-radius: 5px 5px 0 0;
-	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 0px 0px 0 0;
+	-webkit-border-radius: 0px 0px 0 0;
+	border-radius: 0px 0px 0 0;
 }
 
 .tabs li.tabs-selected a.tabs-inner {

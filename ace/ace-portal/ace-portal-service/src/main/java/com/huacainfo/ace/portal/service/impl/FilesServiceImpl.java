@@ -37,12 +37,16 @@ public class FilesServiceImpl implements FilesService {
 			throws Exception {
 		Files obj=new Files();
 		obj.setFilePath(filePath);
-		obj.setCreateUser(userProp.getUserId());
+		if(CommonUtils.isNotEmpty(userProp)){
+			obj.setCreateUser(userProp.getUserId());
+		}
 		obj.setCreateTime(new Date());
 		obj.setStatus("0");
 		this.filesMapper.insert(obj);
-		this.dataBaseLogService.log("上传文件", "上传文件", "", obj.getCreateUser(),
-				obj.getCreateUser(), userProp);
+		if(CommonUtils.isNotEmpty(userProp)){
+			this.dataBaseLogService.log("上传文件", "上传文件", "", obj.getCreateUser(),
+					obj.getCreateUser(), userProp);
+		}
 		return new MessageResponse(0,"成功！");
 	}
 

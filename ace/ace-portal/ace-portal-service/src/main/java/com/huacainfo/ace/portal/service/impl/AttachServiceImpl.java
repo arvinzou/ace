@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,9 @@ public class AttachServiceImpl implements AttachService {
         for (Attach o : file) {
             list.add(o);
             this.attachMapper.insert(o);
-            this.dataBaseLogService.log("附件上传", "附件上传", "", o.getFileName(), o.getFileName(), userProp);
+            if(CommonUtils.isNotEmpty(userProp)){
+                this.dataBaseLogService.log("附件上传", "附件上传", "", o.getFileName(), o.getFileName(), userProp);
+            }
         }
         rst.setErrorMessage("上传成功");
         rst.setValue(list);

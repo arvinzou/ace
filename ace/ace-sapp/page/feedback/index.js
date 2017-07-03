@@ -1,12 +1,21 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
+var fileList=[];
 Page({
   data: {
     countries: [],
     countryIndex: 0,
     max:0,
     loading: false,
-    disabled: false
+    disabled: false,
+    id: util.uuid(),
+    files: []
+  },
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      countryIndex: e.detail.value
+    })
   },
   formSubmit: function (e) {
     var that=this;
@@ -15,6 +24,7 @@ Page({
       disabled: true
     })
     console.log('form发生了submit事件，携带数据为：', e.detail.value);
+    e.detail.value["id"]=this.data.id;
     util.request(cfg.insertFeedback, e.detail.value,
       function (data) {
         that.setData({
@@ -46,7 +56,8 @@ Page({
   },
   onLoad: function () {
     this.setData({
-      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID')
+      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
+      fileList: []
     });
     var that = this;
     util.request(cfg.selectAreaCodeList, {areaCode:cfg.areaCode},
@@ -77,4 +88,76 @@ Page({
       });
     }
   },
+  chooseWxImage: function (type) {
+    var that = this;
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'], 
+      sourceType: [type], 
+      success: function (res) {
+       
+        for (var i= 0; i < res.tempFilePaths.length;i++){
+          wx.showLoading({ title: "正在上传" });
+          console.log(res.tempFilePaths[i]);
+          wx.uploadFile({
+            url: cfg.uploadUrl,
+            filePath: res.tempFilePaths[i],
+            name: 'file',
+
+            header: {
+              'content-type': 'multipart/form-data'
+            },
+            formData: {id: that.data.id, collectionName:"app" },
+            success: function (resp) {
+              console.log(resp);
+              wx.hideLoading();
+              var obj = JSON.parse(resp.data);
+              console.log(obj);
+              var list = obj.value;
+              fileList.push(cfg.serverfile + list[0].fileUrl);
+              that.setData({
+                files: fileList
+              });
+            },
+            fail: function (res) {
+              wx.hideLoading();
+              wx.showModal({ title: "提示", content: "上传失败" })
+            }
+          })
+        }
+        
+        
+      }
+    })
+  },
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.files // 需要预览的图片http链接列表
+    })
+  },
+  chooseImage: function () {
+    let that = this;
+    wx.showActionSheet({
+      itemList: ['从相册中选择', '拍照'],
+      itemColor: "#f7982a",
+      success: function (res) {
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            that.chooseWxImage('album')
+          } else if (res.tapIndex == 1) {
+            that.chooseWxImage('camera')
+          }
+        }
+      }
+    })
+  },
+  formReset:function(e){
+    console.log("clear");
+    fileList=[];
+    this.setData({
+      files: fileList,
+      id: util.uuid()
+    });
+  }
+
 });

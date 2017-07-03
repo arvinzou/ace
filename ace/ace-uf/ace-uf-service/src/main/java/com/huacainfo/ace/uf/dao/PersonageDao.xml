@@ -142,6 +142,9 @@
         <if test="condition.mobile!=null and condition.mobile!=&quot;&quot;">
             and t.mobile =#{condition.mobile,jdbcType=VARCHAR}
         </if>
+        <if test='condition.deptId!=null and condition.deptId!=""'>
+            and t.deptId =#{condition.deptId,jdbcType=VARCHAR}
+        </if>
     </sql>
     <select id="findCount" resultType="int">
         SELECT COUNT(*)

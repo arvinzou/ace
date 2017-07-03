@@ -106,6 +106,17 @@
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 	<!-- spring mvc filter end -->
+
+	<servlet>
+		<servlet-name>FileUploadServlet</servlet-name>
+		<servlet-class>
+			com.huacainfo.ace.portal.web.servlet.FileUploadServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileUploadServlet</servlet-name>
+		<url-pattern>/www/fileUpload.act</url-pattern>
+	</servlet-mapping>
 	
 	<!-- ckeditor start -->
 	<servlet>

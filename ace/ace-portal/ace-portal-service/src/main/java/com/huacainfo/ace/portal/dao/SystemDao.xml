@@ -312,7 +312,7 @@
 
 	<select id="loadConfig" resultMap="config">
 		select config_key, category,
-		config_name, config_value from config where (syid='sys' or
+		config_name, config_value from config where (
 		syid=#{syid})
 	</select>
 	<select id="selectSyidByUserId" resultType="map">

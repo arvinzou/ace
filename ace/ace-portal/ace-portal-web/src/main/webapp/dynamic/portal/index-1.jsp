@@ -76,6 +76,63 @@ body {
 	font-family: "微软雅黑";
 	font-size: 12px;
 }
+.ace-nav>li>a {
+     background-color: #272727;
+    color: #FFF;
+    display: block;
+    line-height: inherit;
+    text-align: center;
+    height: 100%;
+    width: auto;
+    min-width: 50px;
+    padding: 0 8px;
+    position: relative;
+}
+.ace-nav>li.light-blue>a {
+    background-color: #272727;
+}
+.ace-nav>li>a {
+    background-color: #272727;
+    color: #FFF;
+    display: block;
+    line-height: inherit;
+    text-align: center;
+    height: 100%;
+    width: auto;
+    min-width: 50px;
+    padding: 0 8px;
+    position: relative;
+}
+.navbar {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border-width: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    min-height: 45px;
+    background: #272727;
+}
+
+.ace-nav>li.light-blue>a:hover, .ace-nav>li.light-blue>a:focus, .ace-nav>li.open.light-blue>a {
+    background-color: #272727;
+}
+.ace-nav>li.light-blue>a {
+    background-color: #272727;
+}
+.ace-nav>li.light-blue>a {
+    background-color: #272727;
+}
+.ace-nav>li>a:hover, .ace-nav>li>a:focus, .ace-nav>li.open>a {
+    background-color: #272727;
+    color: #FFF;
+}
+.tabs li a.tabs-inner {
+    -moz-border-radius: 0px 0px 0 0;
+     -webkit-border-radius: 0px 0px 0 0;
+     border-radius: 0px 0px 0 0;
+}
 </style>
 </head>
 

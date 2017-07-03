@@ -38,12 +38,6 @@
         "iconPath": "image/liuyan.png",
         "selectedIconPath": "image/liuyan_selected.png",
         "text": "建言献策"
-      },
-      {
-        "pagePath": "page/me/index",
-        "iconPath": "image/bangzhu.png",
-        "selectedIconPath": "image/bangzhu_selected.png",
-        "text": "遮罩"
       }
     ]
   },

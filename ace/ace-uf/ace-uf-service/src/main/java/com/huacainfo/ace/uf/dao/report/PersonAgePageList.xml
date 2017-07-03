@@ -5,14 +5,13 @@
     select t.id, t.name, t.sex, t.birthday, t.photo, t.mobile, t.tel, t.remark,
     t.intro,a.fullname areaName,b.department_name deptName,c.fullname placeOfOriginName,dict.name categoryName
     from personage t
-    left join portal.province a on t.areaCode=a.code
+    inner join portal.province a on t.areaCode=a.code
     left join portal.department b on t.deptId=b.department_id
     left join portal.province c on t.placeOfOrigin=c.code
     left join (select code,name from portal.dict where category_id='98') dict on t.category=dict.code
     where t.status='1'
     <if test='name!=null and name!=""'>
-      and t.name like
-      concat('%',#{name,jdbcType=VARCHAR},'%')
+      and (t.name like concat('%',#{name,jdbcType=VARCHAR},'%') or a.name like concat('%',#{name,jdbcType=VARCHAR},'%'))
     </if>
     <if test='category!=null and category!=""'>
       and t.category =#{category,jdbcType=VARCHAR}

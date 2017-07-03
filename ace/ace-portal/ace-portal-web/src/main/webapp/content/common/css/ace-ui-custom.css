@@ -240,3 +240,33 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 .div-left{ float:left;width:90%;}
 .div-right{ float:right;width:10%;}
+
+.ui-jqgrid .ui-jqgrid-pager {
+    background-color: #ffffff !important;
+}
+.EditTable {
+   background-color: #ffffff;
+}
+.widget-header {
+    background: #ffffff;
+     background-image: -webkit-linear-gradient();
+     background-image: linear-gradient();
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient();
+}
+.ui-jqdialog-content .FormData {
+     border-bottom: 0px dotted #E8E8E8;
+}
+.ui-jqgrid .ui-jqgrid-labels {
+    background: #ffffff;
+    background-image: -webkit-linear-gradient();
+   background-image: linear-gradient();
+     background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient();
+}
+.ui-jqgrid tr.ui-row-ltr td, .ui-jqgrid tr.ui-row-rtl td {
+    border-color: #f5f1f1;
+}
+.ui-jqgrid-btable .ui-widget-content.ui-priority-secondary {
+    background-color: #ffffff;
+}

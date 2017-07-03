@@ -26,7 +26,7 @@ pageEncoding="utf-8"%>
         <form class="weui-search-bar__form" onsubmit="return t_query()">
             <div class="weui-search-bar__box">
                 <i class="weui-icon-search"></i>
-                <input type="search" ng-model="name" class="weui-search-bar__input"
+                <input type="search" ng-model="name" ng-change="query()" class="weui-search-bar__input"
                        placeholder="搜索" required="">
                 <a href="javascript:" class="weui-icon-clear" id="searchClear" ng-click="clear()"></a>
             </div>
