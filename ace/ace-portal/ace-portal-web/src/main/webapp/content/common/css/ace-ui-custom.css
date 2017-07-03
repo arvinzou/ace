@@ -274,3 +274,11 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     background-color: #ffffff;
     border-top: 1px solid #e4e9ee;
 }
+.panel-header {
+    background-color: #ffffff;
+     background: -webkit-linear-gradient();
+    background: -moz-linear-gradient();
+    background: -o-linear-gradient();
+     background: linear-gradient();
+    filter: progid:DXImageTransform.Microsoft.gradient();
+}

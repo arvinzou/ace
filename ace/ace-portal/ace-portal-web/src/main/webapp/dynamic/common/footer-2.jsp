@@ -13,4 +13,3 @@
 	src="${pageContext.request.contextPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/content/common/js/authority.js?version=${cfg.version}"></script>
-
