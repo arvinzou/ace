@@ -67,7 +67,7 @@ function loadView(params) {
 				html.push(o.mobile);
 				html.push("</td>");
 				html.push("<td>");
-				html.push(o.remark);
+				html.push("");
 				html.push("</td>");
 				html.push("</tr>");
 

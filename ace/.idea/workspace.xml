@@ -3,22 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/SystemDao.xml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/SystemDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/AttachServiceImpl.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/AttachServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/FilesServiceImpl.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/FilesServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-kernel/ace-kernel-web/src/main/webapp/dynamic/common/common.jsp" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-web/src/main/webapp/dynamic/common/common.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/app.json" afterPath="$PROJECT_DIR$/ace-sapp/app.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/config.js" afterPath="$PROJECT_DIR$/ace-sapp/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/feedback/index.js" afterPath="$PROJECT_DIR$/ace-sapp/page/feedback/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/feedback/index.wxml" afterPath="$PROJECT_DIR$/ace-sapp/page/feedback/index.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/util/util.js" afterPath="$PROJECT_DIR$/ace-sapp/util/util.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PersonageDao.xml" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PersonageDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/PersonAgePageList.xml" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/PersonAgePageList.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/common/footer-1-www.jsp" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/common/footer-1-www.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/www/personage/index.jsp" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/www/personage/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/base.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/base.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/content/service/personage/print.js" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/content/service/personage/print.js" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -76,26 +64,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WebContextParamListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/listener/WebContextParamListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="63" column="17" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomAccessDecisionManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/security/spring/CustomAccessDecisionManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="40" column="13" lean-forward="false" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CustomFilterSecurityInterceptor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/security/spring/CustomFilterSecurityInterceptor.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -146,7 +114,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="180">
@@ -156,11 +124,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="base.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/base.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-459">
+              <caret line="261" column="17" lean-forward="true" selection-start-line="261" selection-start-column="17" selection-end-line="261" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="common.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/common/common.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="53" column="16" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+            <state relative-caret-position="150">
+              <caret line="10" column="37" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="53" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -169,8 +147,18 @@
       <file leaf-file-name="ace-ui-custom.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="272" column="0" lean-forward="true" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
+            <state relative-caret-position="457">
+              <caret line="273" column="29" lean-forward="false" selection-start-line="273" selection-start-column="29" selection-end-line="273" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="print.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/content/service/personage/print.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="69" column="27" lean-forward="false" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -272,9 +260,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/organization/index.jsp" />
-        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/PersonAgeList.java" />
-        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/PersonAgePageList.java" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/PersonAgeOne.java" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/OrganizationPageList.java" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/OrganizationOne.java" />
@@ -318,11 +303,14 @@
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/www/organization/index.jsp" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/www/personage/index.jsp" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/SystemDao.xml" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-2.jsp" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/common/common.jsp" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/index.jsp" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/base.js" />
+        <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-web/src/main/webapp/dynamic/common/common.jsp" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/content/service/personage/print.js" />
       </list>
     </option>
   </component>
@@ -434,6 +422,120 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="personage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1422,13 +1524,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00116" summary="统战人士管理">
-      <created>1497521037019</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1497521037019</updated>
-    </task>
     <task id="LOCAL-00117" summary="统战人士管理">
       <created>1497527312242</created>
       <option name="number" value="00117" />
@@ -1765,7 +1860,14 @@
       <option name="project" value="LOCAL" />
       <updated>1498632166779</updated>
     </task>
-    <option name="localTasksCounter" value="165" />
+    <task id="LOCAL-00165" summary="ACE扁平化优化">
+      <created>1499054648088</created>
+      <option name="number" value="00165" />
+      <option name="presentableId" value="LOCAL-00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1499054648090</updated>
+    </task>
+    <option name="localTasksCounter" value="166" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1779,6 +1881,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1366" height="673" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1795,7 +1898,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29941434" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29941434" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1846,7 +1949,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="会议与会人员设置" />
     <MESSAGE value="导出电子表格模板" />
     <MESSAGE value="大数据展台" />
     <MESSAGE value="运营数据处理" />
@@ -1871,7 +1973,8 @@
     <MESSAGE value="统战公众号后台查询" />
     <MESSAGE value="统战公众号统战人士查询" />
     <MESSAGE value="统战公众号UI优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="统战公众号UI优化" />
+    <MESSAGE value="ACE扁平化优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="ACE扁平化优化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1899,20 +2002,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/PersonAgeOne.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/OrganizationOne.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="53" lean-forward="false" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/report/OrganizationPageList.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1969,13 +2058,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="240" column="0" lean-forward="false" selection-start-line="240" selection-start-column="0" selection-end-line="252" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/NoticeController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1987,6 +2069,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1755">
           <caret line="117" column="40" lean-forward="false" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2043,6 +2126,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="62" column="49" lean-forward="false" selection-start-line="62" selection-start-column="49" selection-end-line="62" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2057,6 +2141,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
           <caret line="151" column="13" lean-forward="false" selection-start-line="151" selection-start-column="13" selection-end-line="151" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2099,6 +2184,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2233,14 +2319,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="272" column="0" lean-forward="true" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -2257,18 +2335,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/common/common.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="53" column="16" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-459">
+          <caret line="261" column="17" lean-forward="true" selection-start-line="261" selection-start-column="17" selection-end-line="261" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-kernel/ace-kernel-web/src/main/webapp/dynamic/common/common.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/common/common.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="37" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="53" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="273" column="29" lean-forward="false" selection-start-line="273" selection-start-column="29" selection-end-line="273" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/content/service/personage/print.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="69" column="27" lean-forward="false" selection-start-line="69" selection-start-column="27" selection-end-line="69" selection-end-column="27" />
           <folding />
         </state>
       </provider>
