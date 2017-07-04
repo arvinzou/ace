@@ -20,7 +20,8 @@ jQuery(function($) {
 			}
 			console.log($(obj).attr("authority"));
 			console.log(obj.disabled==true?'FAIL':'OK');
-			if(isIE()&&isIE8()){
+			var agent = navigator.userAgent.toLowerCase() ;
+			if(agent.indexOf("chrome") == -1){
 				if($(obj).text()==null||$(obj).text()==""||$(obj).text()==" "||$(obj).text()=="  "){
 					$(obj).prepend(authorConfig[$(obj).attr("authority")])
 					//$(obj).text(authorConfig[$(obj).attr("authority")]);

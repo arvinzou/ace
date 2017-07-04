@@ -17,9 +17,14 @@ function addPanel(title, src, closable) {
 	if (portalType == '2') {
 		screenHeight = window.innerHeight - 30;
 	}
+	var scrolling="auto";
+	if(title=='首页'){
+	    scrolling="no";
+	}
 	var iframe = '<iframe name="mainFrame" id="ifr" src="' + src
 			+ '" width="100%" height="' + screenHeight
-			+ 'px" frameborder="0"  scrolling="auto"></iframe>';
+			+ 'px" frameborder="0"  scrolling="'+scrolling+'"></iframe>';
+
 	var isExit = $('#tt').tabs('exists', title);
 	if (!isExit) {
 		$('#tt').tabs('add', {

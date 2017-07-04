@@ -19,6 +19,8 @@ pageEncoding="utf-8"%>
     <script type="text/javascript">
 	var contextPath = '${pageContext.request.contextPath}';
 	var portalType='${SESSION_USERPROP_KEY.cfg.portalType}';
+	var layoutTopHeight=0;
+	var activeSyId ='${SESSION_USERPROP_KEY.activeSyId}';
     </script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
@@ -193,7 +195,7 @@ pageEncoding="utf-8"%>
         src="${pageContext.request.contextPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
 
 <script type="text/javascript">
-	var activeSyId ='${SESSION_USERPROP_KEY.activeSyId}';
+
 		window.onresize = function() {
 			autosize();
 		}
@@ -216,7 +218,7 @@ pageEncoding="utf-8"%>
 			$('.panel-body-noborder').css("width", w);
 
 			$('iframe').height(h - 20);
-			$('iframe').width(w);
+			//$('iframe').width(w);
 			autoWidth();
 		}
 
@@ -231,7 +233,7 @@ pageEncoding="utf-8"%>
 
 			$('.tabs-panels').css("width", w);
 			$('.panel-body-noborder').css("width", w);
-			$('iframe').width(w);
+			//$('iframe').width(w);
 
 			//setTimeout("autobell()", 1000);
 
