@@ -29,9 +29,40 @@ if (!window.innerWidth) {
 if(portalType=='2'){
     layoutTopHeight=300;
 }
+function detectOS() {
+    var sUserAgent = navigator.userAgent;
+    var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");
+    var isMac = (navigator.platform == "Mac68K") || (navigator.platform == "MacPPC") || (navigator.platform == "Macintosh") || (navigator.platform == "MacIntel");
+    if (isMac) return "Mac";
+    var isUnix = (navigator.platform == "X11") && !isWin && !isMac;
+    if (isUnix) return "Unix";
+    var isLinux = (String(navigator.platform).indexOf("Linux") > -1);
+    if (isLinux) return "Linux";
+    if (isWin) {
+        var isWin2K = sUserAgent.indexOf("Windows NT 5.0") > -1 || sUserAgent.indexOf("Windows 2000") > -1;
+        if (isWin2K) return "Win2000";
+        var isWinXP = sUserAgent.indexOf("Windows NT 5.1") > -1 || sUserAgent.indexOf("Windows XP") > -1;
+        if (isWinXP) return "WinXP";
+        var isWin2003 = sUserAgent.indexOf("Windows NT 5.2") > -1 || sUserAgent.indexOf("Windows 2003") > -1;
+        if (isWin2003) return "Win2003";
+        var isWinVista= sUserAgent.indexOf("Windows NT 6.0") > -1 || sUserAgent.indexOf("Windows Vista") > -1;
+        if (isWinVista) return "WinVista";
+        var isWin7 = sUserAgent.indexOf("Windows NT 6.1") > -1 || sUserAgent.indexOf("Windows 7") > -1;
+        if (isWin7) return "Win7";
+    }
+    return "Win10";
+}
+function winis(){
+	var osName=detectOS();
+	if(osName.indexOf("Win")>-1){
+		return true;
+	}
+	return false;
+}
 if(winis()){
-	window.innerHeight= window.innerHeight - 10;
+	window.innerHeight= window.innerHeight - 15;
 	layoutTopHeight=layoutTopHeight-8;
+	window.innerWidth=window.innerWidth-15;
 }
 function isIE() {
 	return navigator.appName.indexOf("Microsoft Internet Explorer") != -1;
@@ -214,29 +245,7 @@ function winis(){
 	}
 	return false;
 }
-function detectOS() {
-    var sUserAgent = navigator.userAgent;
-    var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");
-    var isMac = (navigator.platform == "Mac68K") || (navigator.platform == "MacPPC") || (navigator.platform == "Macintosh") || (navigator.platform == "MacIntel");
-    if (isMac) return "Mac";
-    var isUnix = (navigator.platform == "X11") && !isWin && !isMac;
-    if (isUnix) return "Unix";
-    var isLinux = (String(navigator.platform).indexOf("Linux") > -1);
-    if (isLinux) return "Linux";
-    if (isWin) {
-        var isWin2K = sUserAgent.indexOf("Windows NT 5.0") > -1 || sUserAgent.indexOf("Windows 2000") > -1;
-        if (isWin2K) return "Win2000";
-        var isWinXP = sUserAgent.indexOf("Windows NT 5.1") > -1 || sUserAgent.indexOf("Windows XP") > -1;
-        if (isWinXP) return "WinXP";
-        var isWin2003 = sUserAgent.indexOf("Windows NT 5.2") > -1 || sUserAgent.indexOf("Windows 2003") > -1;
-        if (isWin2003) return "Win2003";
-        var isWinVista= sUserAgent.indexOf("Windows NT 6.0") > -1 || sUserAgent.indexOf("Windows Vista") > -1;
-        if (isWinVista) return "WinVista";
-        var isWin7 = sUserAgent.indexOf("Windows NT 6.1") > -1 || sUserAgent.indexOf("Windows 7") > -1;
-        if (isWin7) return "Win7";
-    }
-    return "Win10";
-}
+
 function uuid() {
     var s = [];
     var hexDigits = "0123456789abcdef";

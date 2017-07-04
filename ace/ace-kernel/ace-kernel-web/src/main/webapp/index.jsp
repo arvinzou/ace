@@ -304,7 +304,7 @@
 	padding: 0px 10px 10px 10px;
 }
 .background {
-	background-color: #eef1f5;
+	background-color: #BFCAD1;
 }
 .background-white {
 	background-color: #fff;

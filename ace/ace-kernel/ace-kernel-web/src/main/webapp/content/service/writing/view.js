@@ -1,18 +1,7 @@
 jQuery(function($) {
-
-	// resize to fit page size
 	$(window).on('resize.jqGrid', function() {
 		$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
 	})
-	// resize on sidebar collapse/expand
-	var parent_column = $(cfg.grid_selector).closest('[class*="col-"]');
-	$(document).on('settings.ace.jqGrid', function(ev, event_name, collapsed) {
-		if (event_name === 'sidebar_collapsed'
-				|| event_name === 'main_container_fixed') {
-			$(cfg.grid_selector).jqGrid('setGridWidth', parent_column.width());
-		}
-	})
-
 	jQuery(cfg.grid_selector).jqGrid({
 		prmNames : {
 			totalRecord : "totalRecord",
@@ -38,14 +27,14 @@ jQuery(function($) {
 		rowList : default_page_list,
 		pager : cfg.pager_selector,
 		altRows : true,
-		// toppager: true,
-
+		autowidth:true,
 		multiselect : false,
-		// multikey: "ctrlKey",
-		multiboxonly : true,
+		multiboxonly : false,
 		shrinkToFit:true,
-		autoScroll: false,
+		autoScroll: true,
 		loadComplete : function() {
+		   // $("#grid-pager_left").removeAttr("style");
+           // $("#grid-pager_center").removeAttr("style");
 			$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
 			var table = this;
 			setTimeout(function() {
