@@ -97,6 +97,7 @@ public class UsersServiceImpl implements UsersService {
 		String id=String.valueOf(new Date().getTime());
 		users.setUserId(id);
 		users.setCreateTime(new Date());
+		users.setCurSyid(userProp.getActiveSyId());
 		this.usersDao.insertUsers(users);
 		this.logger.debug("", users.toString());
 		this.dataBaseLogService.log("员工添加成功", flag, "",
@@ -190,9 +191,9 @@ public class UsersServiceImpl implements UsersService {
 		return new MessageResponse(0, "角色分配完成！");
 	}
 
-	public PageResult<Role> selectRoleList() throws Exception {
+	public PageResult<Role> selectRoleList(UserProp userProp) throws Exception {
 		PageResult<Role> rst = new PageResult<Role>();
-		List<Role> list = this.usersDao.selectRoleList();
+		List<Role> list = this.usersDao.selectRoleList(userProp.getActiveSyId());
 		rst.setRows(list);
 		rst.setTotal(list.size());
 		return rst;

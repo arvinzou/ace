@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -31,7 +33,9 @@ public class WebAccessDecisionSecurityFilter implements Filter {
 
 	private Long localResourceAndRoleClearedTime = 0l;
 	private Long localClearInterval = 0l;
-	private boolean cachable = false;
+	private boolean cachable = true;
+
+	private static Logger LOGGER = LoggerFactory.getLogger(WebAccessDecisionSecurityFilter.class);
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -98,15 +102,16 @@ public class WebAccessDecisionSecurityFilter implements Filter {
 	private String getRoleStringByUri(String uri) {
 		checkReflush();
 		String roleString = null;
-		if (cachable && RESOURCE_AND_ROLE_MAP.containsKey(uri)) {
+		if (RESOURCE_AND_ROLE_MAP.containsKey(uri)) {
 			roleString = RESOURCE_AND_ROLE_MAP.get(uri);
 		} else {
 			String resourceKey = WebUtils.getRoleResourceRedisKey(uri);
 			roleString = redisTemplateString.opsForValue().get(resourceKey);
-			if (cachable && uri != null && roleString != null) {
+			if (uri != null && roleString != null) {
 				RESOURCE_AND_ROLE_MAP.put(uri, roleString);
 			}
 		}
+		LOGGER.info("{}={}",uri,roleString);
 		return roleString;
 	}
 

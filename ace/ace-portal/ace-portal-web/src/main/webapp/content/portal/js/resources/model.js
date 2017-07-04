@@ -3,6 +3,7 @@ var _colModel = function() {
 	return [ {
 		name : 'resourcesId',
 		index : 'id',
+		hidden:true,
 		width : 80,
 		sortable : false,
 		editable : true,
@@ -21,6 +22,7 @@ var _colModel = function() {
 		width : 80,
 		editable : true,
 		sorttype : "int",
+		hidden:true,
 		formoptions : {
 			elmprefix : "",
 			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
@@ -32,6 +34,7 @@ var _colModel = function() {
 	}, {
 		name : 'syid',
 		index : 'syid',
+		hidden:true,
 		width : 150,
 		editable : false,
 		edittype : "select",
@@ -71,6 +74,7 @@ var _colModel = function() {
 		index : 'remark',
 		width : 100,
 		editable : true,
+		hidden:true,
 		editoptions : {
 			size : "20",
 			maxlength : "250"
@@ -79,6 +83,7 @@ var _colModel = function() {
 		name : 'resourcesType',
 		width : 60,
 		editable : true,
+		hidden:true,
 		edittype : "select",
 		renderer : function(value) {
 			return rsd(value,"06");
@@ -96,6 +101,7 @@ var _colModel = function() {
 	}, {
 		name : 'stauts',
 		index:'stauts',
+		hidden:true,
 		width : 60,
 		editable : true,
 		edittype : "checkbox",

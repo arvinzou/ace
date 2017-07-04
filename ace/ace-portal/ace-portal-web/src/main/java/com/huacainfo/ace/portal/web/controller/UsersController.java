@@ -82,15 +82,7 @@ public class UsersController extends PortalBaseController {
 	@ResponseBody
 	public PageResult<UsersVo> findUsersList(Users condition, PageParam page)
 			throws Exception {
-		/*if(CommonUtils.isBlank(condition.getAreaCode())){
-			int corpId = this.getCurUserProp().getCorpId().length();
-			if(corpId>6){
-				condition.setAreaCode(this.getCurUserProp().getAreaCode());
-			}
-		}
-		if(CommonUtils.isBlank(condition.getDepartmentId())){
-			condition.setDepartmentId(this.getCurUserProp().getCorpId());
-		}*/
+		condition.setCurSyid(this.getCurUserProp().getActiveSyId());
 		PageResult<UsersVo> rst = this.usersService.findUsersList(condition,
 				page.getStart(), page.getLimit(), page.getOrderBy());
 		if (rst.getTotal() == 0) {
@@ -312,7 +304,7 @@ public class UsersController extends PortalBaseController {
 	@RequestMapping(value = "/selectRoleList.do")
 	@ResponseBody
 	public PageResult<Role> selectRoleList() throws Exception {
-		return this.usersService.selectRoleList();
+		return this.usersService.selectRoleList(this.getCurUserProp());
 	}
 	/**
 	 * 

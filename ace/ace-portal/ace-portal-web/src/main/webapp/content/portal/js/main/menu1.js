@@ -6,21 +6,22 @@ var buildMenu = function(menus) {
 				.each(
 						menus,
 						function(i, menu) {
-							html.push('<li class="nav-item">');
+							html.push('<li class="nav-item" id="menu'+i+'">');
 							html
 									.push('<a class="nav-link nav-toggle" href="#"><i class="'
 											+ menu.icon
 											+ '"></i><span class="title">'
 											+ menu.text + ' </span>');
+							html.push('<span id="selected"></span>');
 							if (menu.leaf != true && menu.leaf != 'true') {
-								html
-										.push('<span class="arrow open"></span>');
+
+								html.push('<span class="arrow"></span>');
 							}
 							html.push('</a>');
 							var initSubMenu = function(menu) {
 								if (menu.leaf != true && menu.leaf != 'true') {
 									var childrens = menu.children, len = childrens.length;
-									html.push('<ul class="sub-menu">');
+									html.push('<ul class="sub-menu" style="display: none;">');
 									for (var i = 0; i < len; i++) {
 										html.push('<li class="nav-item">');
 										if (childrens[i].href) {
@@ -33,14 +34,14 @@ var buildMenu = function(menus) {
 															+ childrens[i].icon
 															+ '"></i><span class="title">'
 															+ childrens[i].text
-															+ '</span></a><b class="arrow"></b>');
+															+ '</span></a><span class="arrow"></span>');
 										} else {
 											html
 													.push('<a class="nav-link nav-toggle" href="#"><i class1="'
 															+ childrens[i].icon
 															+ '"></i><span class="title">'
 															+ childrens[i].text
-															+ '</span><span class="arrow open"></span></a>');
+															+ '</span><span class="arrow"></span></a>');
 										}
 										initSubMenu(childrens[i]);
 										html.push('</li>');
@@ -57,10 +58,10 @@ var buildMenu = function(menus) {
 
 	var htmlFrame = buildMenuHtml(menus);
 	$('#menu').empty().append(htmlFrame);
+
 	$('#menu a[url]').bind('click', function() {
 		var url = $(this).attr("url");
-		$('#menu a[url]').parent('li').removeClass("active")
-		$(this).parent('li').addClass("active open");
+
 
 		if (url) {
 			if(url.indexOf("/")!=-1){
@@ -76,6 +77,16 @@ var buildMenu = function(menus) {
 			// $("#mainFrame").attr("src",url);
 		}
 	});
+	$('.nav-item').bind('click', function() {
+    		 $('.nav-item').removeClass("active");
+    		 $('.nav-item').find("#selected").removeClass("selected");
+            $(this).addClass("active");
+            $(this).find("#selected").addClass("selected");
+
+   });
+
+               $("#menu0").addClass("active");
+               $("#menu0").find("#selected").addClass("selected");
 
 }
 

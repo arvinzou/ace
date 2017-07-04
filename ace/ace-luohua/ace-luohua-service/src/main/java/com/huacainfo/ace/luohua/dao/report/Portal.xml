@@ -26,5 +26,19 @@
     feedback
     WHERE
     STATUS = '1'
+    union all
+    SELECT
+    'user' id,
+    count(1) user
+    FROM
+    portal.users
+    WHERE
+    cur_syid = 'luohua'
+    union all
+    SELECT
+    'wxUser' id,
+    count(1) wxUser
+    FROM
+    portal.wx_user
   </select>
 </mapper>

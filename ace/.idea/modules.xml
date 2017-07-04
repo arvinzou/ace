@@ -12,6 +12,10 @@
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-web/ace-kernel-web.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-web/ace-kernel-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-luohua/ace-luohua.iml" filepath="$PROJECT_DIR$/ace-luohua/ace-luohua.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-luohua/ace-luohua-client/ace-luohua-client.iml" filepath="$PROJECT_DIR$/ace-luohua/ace-luohua-client/ace-luohua-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-luohua/ace-luohua-service/ace-luohua-service.iml" filepath="$PROJECT_DIR$/ace-luohua/ace-luohua-service/ace-luohua-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-luohua/ace-luohua-web/ace-luohua-web.iml" filepath="$PROJECT_DIR$/ace-luohua/ace-luohua-web/ace-luohua-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />

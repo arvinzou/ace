@@ -50,7 +50,6 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 	public PageResult<DictVo> findDictList(Dict condition, int start, int limit,
 			String orderBy) throws Exception {
 		PageResult<DictVo> rst = new PageResult<DictVo>();
-
 		List<DictVo> list = this.dictMapper.findList(condition, start, start
 				+ limit, orderBy);
 		rst.setRows(list);
@@ -285,9 +284,9 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		rst.put("hours",hours);
 		return rst;
 	}
-	public  List<Tree>  selectDictTreeList(String pid) throws Exception{
+	public  List<Tree>  selectDictTreeList(String pid,String syid) throws Exception{
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
-				this.dictMapper.selectDictTreeList(pid));
+				this.dictMapper.selectDictTreeList(pid,syid));
 		return commonTreeUtils.getTreeList(pid);
 	}
 

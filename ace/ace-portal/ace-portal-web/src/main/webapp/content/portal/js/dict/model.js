@@ -3,7 +3,7 @@ var _colModel = function() {
 	return [
 			{
 				name : 'id',
-				index : 'id',
+				hidden:true,
 				width : 100,
 				sortable : false,
 				editable : false,
@@ -17,6 +17,7 @@ var _colModel = function() {
 				width : 100,
 				sortable : false,
 				editable : false,
+				hidden:true,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -35,6 +36,7 @@ var _colModel = function() {
 				index : 'categoryId',
 				width : 100,
 				editable : true,
+				hidden:true,
 				edittype : "combobox",
 				dataoptions : {
 					url : contextPath
@@ -88,6 +90,7 @@ var _colModel = function() {
 			{
 				name : 'spell',
 				index : 'spell',
+				hidden:true,
 				width : 100,
 				editable : false,
 				editoptions : {
@@ -109,6 +112,7 @@ var _colModel = function() {
 			}, {
 				name : 'remark',
 				index : 'remark',
+				hidden:true,
 				width : 150,
 				editable : true,
 				editoptions : {

@@ -267,8 +267,14 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .ui-jqgrid tr.ui-row-ltr td, .ui-jqgrid tr.ui-row-rtl td {
     border-color: #f5f1f1;
 }
-.ui-jqgrid-btable .ui-widget-content.ui-priority-secondary {
+
+.ui-jqgrid-btable .ui-widget-content.ui-priority-secondary{
+    background-image: none;
     background-color: #ffffff;
+    opacity: 1;
+}
+.ui-jqgrid-btable .ui-widget-content.ui-state-highlight {
+    background-color: #eeeeee;
 }
 .ui-dialog .ui-dialog-buttonpane, .ui-jqdialog .ui-dialog-buttonpane, .ui-dialog .ui-jqdialog-buttonpane, .ui-jqdialog .ui-jqdialog-buttonpane {
     background-color: #ffffff;

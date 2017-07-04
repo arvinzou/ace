@@ -54,6 +54,7 @@ public class DictController extends PortalBaseController {
 	@ResponseBody
 	public PageResult<DictVo> findDictList(Dict condition, PageParam page)
 			throws Exception {
+		condition.setSyid(this.getCurUserProp().getActiveSyId());
 		PageResult<DictVo> rst = this.dictService.findDictList(condition,
 				page.getStart(), page.getLimit(), page.getOrderBy());
 		if (rst.getTotal() == 0) {
@@ -235,7 +236,7 @@ public class DictController extends PortalBaseController {
 		if(CommonUtils.isBlank(id)){
 			id="0";
 		}
-		List<Tree> list=this.dictService.selectDictTreeList(id);
+		List<Tree> list=this.dictService.selectDictTreeList(id,this.getCurUserProp().getActiveSyId());
 		return list;
 	}
 	private String preDealDictJSONString(String dictJsonListString) {

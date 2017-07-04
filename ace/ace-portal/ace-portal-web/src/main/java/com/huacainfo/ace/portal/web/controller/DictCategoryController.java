@@ -126,7 +126,7 @@ public class DictCategoryController extends PortalBaseController {
 	@RequestMapping(value = "/findDictCategoryListAll.do")
 	@ResponseBody
 	public List<DictCategory> findDictCategoryListAll() throws Exception {
-		return this.dictCategoryService.findDictCategoryListAll();
+		return this.dictCategoryService.findDictCategoryListAll(this.getCurUserProp());
 	}
 
 }

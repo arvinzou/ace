@@ -124,9 +124,6 @@
             <if test="users.account!=null and users.account!=&quot;&quot;">
                 account=#{users.account,jdbcType=VARCHAR},
             </if>
-            <if test="users.password!=null and users.password!=&quot;&quot;">
-                password=#{users.password,jdbcType=VARCHAR},
-            </if>
             <if test="users.idCard!=null and users.idCard!=&quot;&quot;">
                 ID_CARD = #{users.idCard,jdbcType=VARCHAR},
             </if>
@@ -193,7 +190,7 @@
         on USERS.department_id=s.department_id
         left join province s2
         on users.area_code=s2.code
-        where USERS.STAUTS='1'
+        where USERS.STAUTS='1' and USERS.cur_syid=#{condition.curSyid}
 
         <if test='condition.name!=null and condition.name!=""'>
             and USERS.name like
@@ -309,7 +306,7 @@
 
     </insert>
     <select id="selectRoleList" resultMap="role">
-        select * from ROLE t
+        select * from ROLE t where syid=#{syid}
     </select>
     <select id="selectRoleListByUserId" resultMap="role">
         select *

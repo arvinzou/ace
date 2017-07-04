@@ -23,7 +23,7 @@ public interface DictCategoryMapper {
 	
 	int findCount (@Param("condition")DictCategory condition);
 	
-	List<DictCategory> findListAll();
+	List<DictCategory> findListAll(@Param("syid")String syid);
 	
 	int isExitByName(@Param("name")String name);
 	

@@ -50,6 +50,7 @@ public class WebUtils {
 		for (Map<String, String> map : list) {
 			String resource = map.get("RESOURCES");
 			String keyString = getRoleResourceRedisKey(resource);
+			LOGGER.info("{}={}",keyString,"," + map.get("ROLES") + ",");
 			redisTemplateString.opsForValue().set(keyString,
 					"," + map.get("ROLES") + ",");
 		}

@@ -142,7 +142,7 @@ public interface UsersService {
 	    * @author: chenxiaoke 
 	    * @version: 2016年11月17日 下午1:32:15
 	 */
-	public abstract PageResult<Role> selectRoleList() throws Exception;
+	public abstract PageResult<Role> selectRoleList(UserProp userProp) throws Exception;
 	/**
 	 * 
 	    * @Title:selectRoleListByUserId 

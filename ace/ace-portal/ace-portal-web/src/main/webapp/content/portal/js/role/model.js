@@ -2,7 +2,7 @@ var _colNames = [ '角色编号', '所属系统','角色名称','类型', '创�
 var _colModel = function() {
 	return [ {
 		name : 'roleId',
-		index : 'id',
+		index : 'roleId',
 		width : 8,
 		hidden:true,
 		sortable : false,

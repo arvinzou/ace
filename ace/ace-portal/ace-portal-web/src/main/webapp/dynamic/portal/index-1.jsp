@@ -238,6 +238,16 @@ pageEncoding="utf-8"%>
 		}
 
 </script>
+<script type="text/javascript">
+		function checkPwd() {
+			var passwd = '${SystemUser.users.password}';
+			if (passwd == '4297F44B13955235245B2497399D7A93'
+					|| passwd == '4297f44b13955235245b2497399d7a93') {
+				alert("${SystemUser.users.name}，你好！您目前使用的是默认密码为了确保安全，请您及时更换密码！");
+				$('#stack1').modal('show')
+			}
+		}
+	</script>
 <style>
     .page-content-wrapper .page-content {
     margin-left: 200px;

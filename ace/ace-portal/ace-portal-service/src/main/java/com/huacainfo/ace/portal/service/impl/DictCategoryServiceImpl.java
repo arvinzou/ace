@@ -87,8 +87,8 @@ public class DictCategoryServiceImpl implements DictCategoryService {
 		return rst;
 	}
 
-	public List<DictCategory> findDictCategoryListAll() throws Exception {
-		return this.dictCategoryMapper.findListAll();
+	public List<DictCategory> findDictCategoryListAll(UserProp userProp) throws Exception {
+		return this.dictCategoryMapper.findListAll(userProp.getActiveSyId());
 	}
 
 }

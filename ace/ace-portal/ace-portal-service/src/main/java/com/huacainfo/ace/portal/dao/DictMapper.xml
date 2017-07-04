@@ -50,6 +50,8 @@
   </update>
   <sql id="whereCondition">
 		from dict ,dict_category where dict.category_id=dict_category.category_id
+      and dict_category.syid=#{condition.syid}
+
 		<if test="condition.categoryId!=null and condition.categoryId!=&quot;&quot;">
 			and (dict.category_id =#{condition.categoryId,jdbcType=VARCHAR} or dict.id=#{condition.categoryId,jdbcType=VARCHAR})
 		</if>
@@ -108,7 +110,7 @@ FROM
     FROM
         dict_category t
     WHERE
-        0 = 0
+        t.syid=#{syid}
     ORDER BY t.category_id) a
 WHERE
     a.PID = #{pid}

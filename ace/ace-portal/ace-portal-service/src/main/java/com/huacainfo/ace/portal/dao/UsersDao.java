@@ -51,7 +51,7 @@ public interface UsersDao {
 	public abstract int insertUsersRole(@Param("userId") String userId,
 			@Param("roleId") String[] roleId);
 
-	public abstract List<Role> selectRoleList();
+	public abstract List<Role> selectRoleList(@Param("syid") String syid);
 
 	public abstract List<Role> selectRoleListByUserId(
 			@Param("userId") String userId);

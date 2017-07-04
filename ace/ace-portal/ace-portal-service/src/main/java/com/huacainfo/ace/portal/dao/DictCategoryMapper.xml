@@ -47,7 +47,7 @@
 	</update>
 
 	<sql id="whereCondition">
-		from dict_category where (syid='sys' or syid =#{condition.syid})
+		from dict_category where (syid =#{condition.syid})
 		<if test='condition.name!=null and condition.name!=""'>
 			and name like
 			concat(#{condition.name,jdbcType=VARCHAR},'%')
@@ -78,7 +78,7 @@
 
 		select
 		<include refid="Base_Column_List" />
-		from dict_category order by create_time
+		from dict_category where syid = #{syid,jdbcType=VARCHAR} order by create_time
 
 	</select>
 	<select id="isExitByName" resultType="int">

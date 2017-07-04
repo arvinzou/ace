@@ -1,4 +1,4 @@
-var option2 = {
+var option4 = {
 	tooltip : {
 		trigger : 'axis'
 	},

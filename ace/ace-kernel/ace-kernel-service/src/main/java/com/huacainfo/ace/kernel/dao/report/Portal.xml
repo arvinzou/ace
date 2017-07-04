@@ -23,8 +23,6 @@
     count(1) activity_photos
     FROM
     activity_photos
-    WHERE
-    STATUS = '1'
     union all
     SELECT
     'feedback' id,
@@ -33,5 +31,13 @@
     feedback
     WHERE
     STATUS = '1'
+    union all
+    SELECT
+    'user' id,
+    count(1) user
+    FROM
+    portal.users
+    WHERE
+    cur_syid = 'kernel'
   </select>
 </mapper>

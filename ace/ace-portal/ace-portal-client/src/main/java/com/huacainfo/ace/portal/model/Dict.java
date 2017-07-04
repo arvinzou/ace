@@ -16,6 +16,7 @@ public class Dict implements java.io.Serializable{
 	private String name;
 	private String remark;
 	private String spell;
+	private String syid;
 	private Date createTime;
 	
 	private boolean selected;
@@ -91,5 +92,12 @@ public class Dict implements java.io.Serializable{
 	public void setSpell(String spell) {
 		this.spell = spell;
 	}
-	
+
+	public String getSyid() {
+		return syid;
+	}
+
+	public void setSyid(String syid) {
+		this.syid = syid;
+	}
 }

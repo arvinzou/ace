@@ -163,7 +163,7 @@ public class WebContextParamListener implements ServletContextListener {
 				}
 				logger.info("刷新字典文件和系统参数成功");
 			} catch (Exception e) {
-				// logger.error("刷新字典文件和系统参数成功", e);
+				 logger.error("刷新字典文件和系统参数失败", e);
 			}
 
 		}

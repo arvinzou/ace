@@ -46,7 +46,7 @@
 	</update>
 
 	<sql id="rolePagingWhereCondition">
-		from Role,USERS where Role.CREATE_USER_ID=USERS.USER_ID and (syid='sys' or syid =#{condition.syid})
+		from Role,USERS where Role.CREATE_USER_ID=USERS.USER_ID and (syid =#{condition.syid})
 
 		<if test='condition.roleName!=null and condition.roleName!=""'>
 			and Role.role_name like

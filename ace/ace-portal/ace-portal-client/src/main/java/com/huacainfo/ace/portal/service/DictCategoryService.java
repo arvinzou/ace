@@ -91,6 +91,6 @@ public interface DictCategoryService {
 	    * @author: chenxiaoke 
 	    * @version: 2016年11月17日 上午9:07:39
 	 */
-	public abstract List<DictCategory> findDictCategoryListAll() throws Exception;
+	public abstract List<DictCategory> findDictCategoryListAll(UserProp userProp) throws Exception;
 
 }

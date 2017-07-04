@@ -128,7 +128,7 @@ public interface DictService extends WebContextDictService {
 	 * @author: chenxiaoke
 	 * @version: 2016年11月17日 上午11:31:10
 	 */
-	public abstract List<Tree> selectDictTreeList(String pid) throws Exception;
+	public abstract List<Tree> selectDictTreeList(String pid,String syid) throws Exception;
 	
 	public List<Map<String,String>> selectSyidBydc() throws Exception;
 

@@ -231,7 +231,7 @@ var _colModel = function() {
 		name : 'areaCode',
 		width : 100,
 		hidden:true,
-		editable : false,
+		editable : true,
 		edittype : "combotree",
 		editoptions : {
 			style:'width:175px;line-height: 25px;height: 25px;'
