@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huacainfo.ace.gesp.dao.SmsTemplateMapper">
+<!-- 
+	<![CDATA[  ]]>
+	LIKE CONCAT(CONCAT('%', #{}),'%')
+-->
+<sql id="allcolumns">id,code,templateCode,name,content,isEnable,remark,createDate,createUserId,createUserName,lastModifyDate,lastModifyUserId,lasttModifyUserName</sql>
+
+<sql id="findListWhereCondition">
+<if test="condition.id!=null and condition.id!=''">and t.id=#{condition.id}</if>
+	 <if test="condition.code!=null and condition.code!=''">and t.code=#{condition.code}</if>
+	 <if test="condition.templateCode!=null and condition.templateCode!=''">and t.templateCode=#{condition.templateCode}</if>
+	 <if test="condition.name!=null and condition.name!=''">and t.name=#{condition.name}</if>
+	 <if test="condition.content!=null and condition.content!=''">and t.content=#{condition.content}</if>
+	 <if test="condition.isEnable!=null and condition.isEnable!=''">and t.isEnable=#{condition.isEnable}</if>
+	 <if test="condition.remark!=null and condition.remark!=''">and t.remark=#{condition.remark}</if>
+	 <if test="condition.createDate!=null">and t.createDate=#{condition.createDate}</if>
+	 <if test="condition.createUserId!=null and condition.createUserId!=''">and t.createUserId=#{condition.createUserId}</if>
+	 <if test="condition.createUserName!=null and condition.createUserName!=''">and t.createUserName=#{condition.createUserName}</if>
+	 <if test="condition.lastModifyDate!=null">and t.lastModifyDate=#{condition.lastModifyDate}</if>
+	 <if test="condition.lastModifyUserId!=null and condition.lastModifyUserId!=''">and t.lastModifyUserId=#{condition.lastModifyUserId}</if>
+	 <if test="condition.lasttModifyUserName!=null and condition.lasttModifyUserName!=''">and t.lasttModifyUserName=#{condition.lasttModifyUserName}</if>
+</sql>
+
+<select id="findList" resultType="java.util.HashMap">
+select * from sys_smstemplate t where 1=1
+ <include refid="findListWhereCondition" />
+ <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		 
+  limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+</select>
+
+<select id="findCount" resultType="int">
+ select count(*) from sys_smstemplate t where 1=1
+ <include refid="findListWhereCondition" />
+</select>
+
+<select id="findListTop" resultType="java.util.HashMap">
+  select * from sys_smstemplate t where  1=1 and isEnable='1'
+  <include refid="findListWhereCondition" />
+  <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		
+</select>
+
+<select id="selectByPrimaryKey" resultType="java.util.HashMap">
+  select * from sys_smstemplate t where  id=#{id}
+</select>
+
+<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.SmsTemplate">
+    insert into sys_smstemplate (
+    <include refid="allcolumns"/>
+    )
+    values (
+    #{id,jdbcType=VARCHAR}
+	,#{code,jdbcType=VARCHAR}
+	,#{templateCode,jdbcType=VARCHAR}
+	,#{name,jdbcType=VARCHAR}
+	,#{content,jdbcType=VARCHAR}
+	,#{isEnable,jdbcType=VARCHAR}
+	,#{remark,jdbcType=VARCHAR}
+	,#{createDate,jdbcType=TIMESTAMP}
+	,#{createUserId,jdbcType=VARCHAR}
+	,#{createUserName,jdbcType=VARCHAR}
+	,#{lastModifyDate,jdbcType=TIMESTAMP}
+	,#{lastModifyUserId,jdbcType=VARCHAR}
+	,#{lasttModifyUserName,jdbcType=VARCHAR}
+    )
+</insert>
+
+<insert id="insertSelective" parameterType="com.huacainfo.ace.gesp.model.SmsTemplate">
+    insert into sys_smstemplate (
+    <trim prefix="" prefixOverrides=",">
+    <if test="code!=null and code!=''">code</if>
+	 <if test="templateCode!=null and templateCode!=''">,templateCode</if>
+	 <if test="name!=null and name!=''">,name</if>
+	 <if test="content!=null and content!=''">,content</if>
+	 <if test="isEnable!=null and isEnable!=''">,isEnable</if>
+	 <if test="remark!=null and remark!=''">,remark</if>
+	 <if test="createDate!=null">,createDate</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId</if>
+	 <if test="createUserName!=null and createUserName!=''">,createUserName</if>
+	 <if test="lastModifyDate!=null">,lastModifyDate</if>
+	 <if test="lastModifyUserId!=null and lastModifyUserId!=''">,lastModifyUserId</if>
+	 <if test="lasttModifyUserName!=null and lasttModifyUserName!=''">,lasttModifyUserName</if>
+    </trim>
+    )
+    values (
+     <trim prefix="" prefixOverrides=",">
+    <if test="code!=null and code!=''">code=#{code,jdbcType=VARCHAR}</if>
+	 <if test="templateCode!=null and templateCode!=''">,templateCode=#{templateCode,jdbcType=VARCHAR}</if>
+	 <if test="name!=null and name!=''">,name=#{name,jdbcType=VARCHAR}</if>
+	 <if test="content!=null and content!=''">,content=#{content,jdbcType=VARCHAR}</if>
+	 <if test="isEnable!=null and isEnable!=''">,isEnable=#{isEnable,jdbcType=VARCHAR}</if>
+	 <if test="remark!=null and remark!=''">,remark=#{remark,jdbcType=VARCHAR}</if>
+	 <if test="createDate!=null">,createDate=#{createDate,jdbcType=TIMESTAMP}</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId=#{createUserId,jdbcType=VARCHAR}</if>
+	 <if test="createUserName!=null and createUserName!=''">,createUserName=#{createUserName,jdbcType=VARCHAR}</if>
+	 <if test="lastModifyDate!=null">,lastModifyDate=#{lastModifyDate,jdbcType=TIMESTAMP}</if>
+	 <if test="lastModifyUserId!=null and lastModifyUserId!=''">,lastModifyUserId=#{lastModifyUserId,jdbcType=VARCHAR}</if>
+	 <if test="lasttModifyUserName!=null and lasttModifyUserName!=''">,lasttModifyUserName=#{lasttModifyUserName,jdbcType=VARCHAR}</if>
+	</trim>
+    )
+</insert>
+
+<update id="update" parameterType="com.huacainfo.ace.gesp.model.SmsTemplate" >
+    update  sys_smstemplate  set 
+    code=#{code,jdbcType=VARCHAR}
+	 ,templateCode=#{templateCode,jdbcType=VARCHAR}
+	 ,name=#{name,jdbcType=VARCHAR}
+	 ,content=#{content,jdbcType=VARCHAR}
+	 ,isEnable=#{isEnable,jdbcType=VARCHAR}
+	 ,remark=#{remark,jdbcType=VARCHAR}
+	 ,createDate=#{createDate,jdbcType=TIMESTAMP}
+	 ,createUserId=#{createUserId,jdbcType=VARCHAR}
+	 ,createUserName=#{createUserName,jdbcType=VARCHAR}
+	 ,lastModifyDate=#{lastModifyDate,jdbcType=TIMESTAMP}
+	 ,lastModifyUserId=#{lastModifyUserId,jdbcType=VARCHAR}
+	 ,lasttModifyUserName=#{lasttModifyUserName,jdbcType=VARCHAR}
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<update id="updateSelective" parameterType="com.huacainfo.ace.gesp.model.SmsTemplate" >
+ update  sys_smstemplate  
+	<trim prefix="set" prefixOverrides=",">
+    <if test="code!=null and code!=''">code=#{code,jdbcType=VARCHAR}</if>
+	 <if test="templateCode!=null and templateCode!=''">,templateCode=#{templateCode,jdbcType=VARCHAR}</if>
+	 <if test="name!=null and name!=''">,name=#{name,jdbcType=VARCHAR}</if>
+	 <if test="content!=null and content!=''">,content=#{content,jdbcType=VARCHAR}</if>
+	 <if test="isEnable!=null and isEnable!=''">,isEnable=#{isEnable,jdbcType=VARCHAR}</if>
+	 <if test="remark!=null and remark!=''">,remark=#{remark,jdbcType=VARCHAR}</if>
+	 <if test="createDate!=null">,createDate=#{createDate,jdbcType=TIMESTAMP}</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId=#{createUserId,jdbcType=VARCHAR}</if>
+	 <if test="createUserName!=null and createUserName!=''">,createUserName=#{createUserName,jdbcType=VARCHAR}</if>
+	 <if test="lastModifyDate!=null">,lastModifyDate=#{lastModifyDate,jdbcType=TIMESTAMP}</if>
+	 <if test="lastModifyUserId!=null and lastModifyUserId!=''">,lastModifyUserId=#{lastModifyUserId,jdbcType=VARCHAR}</if>
+	 <if test="lasttModifyUserName!=null and lasttModifyUserName!=''">,lasttModifyUserName=#{lasttModifyUserName,jdbcType=VARCHAR}</if>
+	</trim>
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<delete id="deleteByPrimaryKey">
+  delete from sys_smstemplate   where  id=#{id}
+</delete>
+
+ 
+ 
+</mapper>
+ 
+

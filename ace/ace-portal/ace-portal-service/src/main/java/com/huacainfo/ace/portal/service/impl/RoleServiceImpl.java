@@ -127,7 +127,6 @@ public class RoleServiceImpl implements RoleService {
 		AspireRedisTemplate redisTemplateString = (AspireRedisTemplate) SpringUtils
 				.getBean("redisTemplateString");
 		WebUtils.flushRoleResourceCache(redisTemplateString, list);
-		WebAccessDecisionSecurityFilter.RESOURCE_AND_ROLE_MAP.clear();
 		this.logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>RESOURCE_AND_ROLE_MAP.clear()>>>>>>>>>>>>>>>>>>>>>>>>>");
 		this.dataBaseLogService.log("角色权限变更", "角色权限", "", "", roleId, userProp);
 		return new MessageResponse(0, "权限分配完成！");

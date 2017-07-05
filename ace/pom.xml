@@ -52,7 +52,7 @@
 		<pluginRepository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
-			<url>http://211.139.191.248//nexus/content/groups/public</url>
+			<url>http://211.139.191.248/nexus/content/groups/public</url>
 		</pluginRepository>
 	</pluginRepositories>
 	<modules>
@@ -60,15 +60,18 @@
 		<module>ace-common-dao</module>
 		<module>ace-common-web</module>
 		<module>ace-portal</module>
-		<module>ace-kernel</module>
-		<module>ace-luohua</module>
+		<module>ace-gesp</module>
+
 		<!--
+                <module>ace-kernel</module>
+                <module>ace-luohua</module>
 
-		<module>ace-weuiluohua</module>
-		<module>ace-operana</module>
+                <module>ace-weuiluohua</module>
+                <module>ace-operana</module>
+                <module>ace-uf</module>
 
-		-->
-		<module>ace-uf</module>
+                -->
+
  		<module>ace-autocode</module>
 
 	</modules>

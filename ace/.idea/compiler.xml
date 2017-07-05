@@ -10,19 +10,12 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
-        <module name="ace-kernel-backend" />
-        <module name="ace-kernel-client" />
-        <module name="ace-kernel-service" />
-        <module name="ace-kernel-web" />
-        <module name="ace-luohua-client" />
-        <module name="ace-luohua-service" />
-        <module name="ace-luohua-web" />
+        <module name="ace-gesp-client" />
+        <module name="ace-gesp-service" />
+        <module name="ace-gesp-web" />
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />
-        <module name="ace-uf-client" />
-        <module name="ace-uf-service" />
-        <module name="ace-uf-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -31,6 +24,10 @@
       <module name="ace-common" target="1.7" />
       <module name="ace-common-dao" target="1.7" />
       <module name="ace-common-web" target="1.7" />
+      <module name="ace-gesp" target="1.7" />
+      <module name="ace-gesp-client" target="1.7" />
+      <module name="ace-gesp-service" target="1.7" />
+      <module name="ace-gesp-web" target="1.7" />
       <module name="ace-gis" target="1.7" />
       <module name="ace-gis-client" target="1.7" />
       <module name="ace-gis-service" target="1.7" />

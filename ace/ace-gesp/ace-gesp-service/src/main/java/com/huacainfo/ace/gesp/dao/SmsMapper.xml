@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huacainfo.ace.gesp.dao.SmsMapper">
+<!-- 
+	<![CDATA[  ]]>
+	LIKE CONCAT(CONCAT('%', #{}),'%')
+-->
+<sql id="allcolumns">id,templateCode,mobile,content,sendTime,sendStatus,sendCount,remark,createDate,createUserId,createUserName,lastModifyDate,lastModifyUserId,lasttModifyUserName,resultId,bussId</sql>
+<sql id="findListWhereCondition">  
+<if test="condition.id!=null and condition.id!=''">and t.id=#{condition.id}</if>
+	 <if test="condition.templateCode!=null and condition.templateCode!=''">and t.templateCode=#{condition.templateCode}</if>
+	 <if test="condition.mobile!=null and condition.mobile!=''">and t.mobile=#{condition.mobile}</if>
+	 <if test="condition.content!=null and condition.content!=''">and t.content=#{condition.content}</if>
+	 <if test="condition.sendTime!=null">and t.sendTime=#{condition.sendTime}</if>
+	 <if test="condition.sendStatus!=null and condition.sendStatus!=''">and t.sendStatus=#{condition.sendStatus}</if>
+	 <if test="condition.sendCount!=null">and t.sendCount=#{condition.sendCount}</if>
+	 <if test="condition.remark!=null and condition.remark!=''">and t.remark=#{condition.remark}</if>
+	 <if test="condition.createDate!=null">and t.createDate=#{condition.createDate}</if>
+	 <if test="condition.createUserId!=null and condition.createUserId!=''">and t.createUserId=#{condition.createUserId}</if>
+	 <if test="condition.createUserName!=null and condition.createUserName!=''">and t.createUserName=#{condition.createUserName}</if>
+	 <if test="condition.lastModifyDate!=null">and t.lastModifyDate=#{condition.lastModifyDate}</if>
+	 <if test="condition.lastModifyUserId!=null and condition.lastModifyUserId!=''">and t.lastModifyUserId=#{condition.lastModifyUserId}</if>
+	 <if test="condition.lasttModifyUserName!=null and condition.lasttModifyUserName!=''">and t.lasttModifyUserName=#{condition.lasttModifyUserName}</if>
+	  <if test="condition.resultId!=null and condition.resultId!=''">and t.resultId=#{condition.resultId}</if>
+	 <if test="condition.bussId!=null and condition.bussId!=''">and t.bussId=#{condition.bussId}</if>
+</sql>
+
+<select id="findList" resultType="java.util.HashMap">
+select * from sys_sms t where 1=1
+ <include refid="findListWhereCondition" />
+ <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		 
+  limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+</select>
+
+<select id="findCount" resultType="int">
+ select count(*) from sys_sms t where 1=1
+ <include refid="findListWhereCondition" />
+</select>
+
+<select id="findListTop" resultType="java.util.HashMap">
+  select * from sys_sms t where  1=1
+  <include refid="findListWhereCondition" />
+  <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		
+</select>
+
+<select id="selectByPrimaryKey" resultType="java.util.HashMap">
+  select * from sys_sms t where  id=#{id}
+</select>
+
+<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.Sms">
+    insert into sys_sms (
+    <include refid="allcolumns"/>
+    )
+    values (
+    #{id,jdbcType=VARCHAR}
+	,#{templateCode,jdbcType=VARCHAR}
+	,#{mobile,jdbcType=VARCHAR}
+	,#{content,jdbcType=VARCHAR}
+	,#{sendTime,jdbcType=TIMESTAMP}
+	,#{sendStatus,jdbcType=VARCHAR}
+	,#{sendCount,jdbcType=INTEGER}
+	,#{remark,jdbcType=VARCHAR}
+	,#{createDate,jdbcType=TIMESTAMP}
+	,#{createUserId,jdbcType=VARCHAR}
+	,#{createUserName,jdbcType=VARCHAR}
+	,#{lastModifyDate,jdbcType=TIMESTAMP}
+	,#{lastModifyUserId,jdbcType=VARCHAR}
+	,#{lasttModifyUserName,jdbcType=VARCHAR}
+	,#{resultId,jdbcType=VARCHAR}
+	,#{bussId,jdbcType=VARCHAR}
+    )
+</insert>
+
+<insert id="insertSelective" parameterType="com.huacainfo.ace.gesp.model.Sms">
+    insert into sys_sms (
+    <trim prefix="" prefixOverrides=",">
+    <if test="templateCode!=null and templateCode!=''">templateCode</if>
+	 <if test="mobile!=null and mobile!=''">,mobile</if>
+	 <if test="content!=null and content!=''">,content</if>
+	 <if test="sendTime!=null">,sendTime</if>
+	 <if test="sendStatus!=null and sendStatus!=''">,sendStatus</if>
+	 <if test="sendCount!=null">,sendCount</if>
+	 <if test="remark!=null and remark!=''">,remark</if>
+	 <if test="createDate!=null">,createDate</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId</if>
+	 <if test="createUserName!=null and createUserName!=''">,createUserName</if>
+	 <if test="lastModifyDate!=null">,lastModifyDate</if>
+	 <if test="lastModifyUserId!=null and lastModifyUserId!=''">,lastModifyUserId</if>
+	 <if test="lasttModifyUserName!=null and lasttModifyUserName!=''">,lasttModifyUserName</if>
+	  <if test="resultId!=null and resultId!=''">,resultId</if>
+	 <if test="bussId!=null and bussId!=''">,bussId</if>
+    </trim>
+    )
+    values (
+     <trim prefix="" prefixOverrides=",">
+    <if test="templateCode!=null and templateCode!=''">templateCode=#{templateCode,jdbcType=VARCHAR}</if>
+	 <if test="mobile!=null and mobile!=''">,mobile=#{mobile,jdbcType=VARCHAR}</if>
+	 <if test="content!=null and content!=''">,content=#{content,jdbcType=VARCHAR}</if>
+	 <if test="sendTime!=null">,sendTime=#{sendTime,jdbcType=TIMESTAMP}</if>
+	 <if test="sendStatus!=null and sendStatus!=''">,sendStatus=#{sendStatus,jdbcType=VARCHAR}</if>
+	 <if test="sendCount!=null">,sendCount=#{sendCount,jdbcType=INTEGER}</if>
+	 <if test="remark!=null and remark!=''">,remark=#{remark,jdbcType=VARCHAR}</if>
+	 <if test="createDate!=null">,createDate=#{createDate,jdbcType=TIMESTAMP}</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId=#{createUserId,jdbcType=VARCHAR}</if>
+	 <if test="createUserName!=null and createUserName!=''">,createUserName=#{createUserName,jdbcType=VARCHAR}</if>
+	 <if test="lastModifyDate!=null">,lastModifyDate=#{lastModifyDate,jdbcType=TIMESTAMP}</if>
+	 <if test="lastModifyUserId!=null and lastModifyUserId!=''">,lastModifyUserId=#{lastModifyUserId,jdbcType=VARCHAR}</if>
+	 <if test="lasttModifyUserName!=null and lasttModifyUserName!=''">,lasttModifyUserName=#{lasttModifyUserName,jdbcType=VARCHAR}</if>
+	  <if test="resultId!=null and resultId!=''">,resultId=#{resultId,jdbcType=VARCHAR}</if>
+	 <if test="bussId!=null and bussId!=''">,bussId=#{bussId,jdbcType=VARCHAR}</if>
+	</trim>
+    )
+</insert>
+
+<update id="update" parameterType="com.huacainfo.ace.gesp.model.Sms" >
+    update  sys_sms  set 
+    templateCode=#{templateCode,jdbcType=VARCHAR}
+	 ,mobile=#{mobile,jdbcType=VARCHAR}
+	 ,content=#{content,jdbcType=VARCHAR}
+	 ,sendTime=#{sendTime,jdbcType=TIMESTAMP}
+	 ,sendStatus=#{sendStatus,jdbcType=VARCHAR}
+	 ,sendCount=#{sendCount,jdbcType=INTEGER}
+	 ,remark=#{remark,jdbcType=VARCHAR}
+	 ,createDate=#{createDate,jdbcType=TIMESTAMP}
+	 ,createUserId=#{createUserId,jdbcType=VARCHAR}
+	 ,createUserName=#{createUserName,jdbcType=VARCHAR}
+	 ,lastModifyDate=#{lastModifyDate,jdbcType=TIMESTAMP}
+	 ,lastModifyUserId=#{lastModifyUserId,jdbcType=VARCHAR}
+	 ,lasttModifyUserName=#{lasttModifyUserName,jdbcType=VARCHAR}
+	  ,resultId=#{resultId,jdbcType=VARCHAR}
+	 ,bussId=#{bussId,jdbcType=VARCHAR}
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<update id="updateSelective" parameterType="com.huacainfo.ace.gesp.model.Sms" >
+ update  sys_sms  
+	<trim prefix="set" prefixOverrides=",">
+    <if test="templateCode!=null and templateCode!=''">templateCode=#{templateCode,jdbcType=VARCHAR}</if>
+	 <if test="mobile!=null and mobile!=''">,mobile=#{mobile,jdbcType=VARCHAR}</if>
+	 <if test="content!=null and content!=''">,content=#{content,jdbcType=VARCHAR}</if>
+	 <if test="sendTime!=null">,sendTime=#{sendTime,jdbcType=TIMESTAMP}</if>
+	 <if test="sendStatus!=null and sendStatus!=''">,sendStatus=#{sendStatus,jdbcType=VARCHAR}</if>
+	 <if test="sendCount!=null">,sendCount=#{sendCount,jdbcType=INTEGER}</if>
+	 <if test="remark!=null and remark!=''">,remark=#{remark,jdbcType=VARCHAR}</if>
+	 <if test="createDate!=null">,createDate=#{createDate,jdbcType=TIMESTAMP}</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId=#{createUserId,jdbcType=VARCHAR}</if>
+	 <if test="createUserName!=null and createUserName!=''">,createUserName=#{createUserName,jdbcType=VARCHAR}</if>
+	 <if test="lastModifyDate!=null">,lastModifyDate=#{lastModifyDate,jdbcType=TIMESTAMP}</if>
+	 <if test="lastModifyUserId!=null and lastModifyUserId!=''">,lastModifyUserId=#{lastModifyUserId,jdbcType=VARCHAR}</if>
+	 <if test="lasttModifyUserName!=null and lasttModifyUserName!=''">,lasttModifyUserName=#{lasttModifyUserName,jdbcType=VARCHAR}</if>
+	  <if test="resultId!=null and resultId!=''">,resultId=#{resultId,jdbcType=VARCHAR}</if>
+	 <if test="bussId!=null and bussId!=''">,bussId=#{bussId,jdbcType=VARCHAR}</if>
+	</trim>
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<delete id="deleteByPrimaryKey">
+  delete from sys_sms   where  id=#{id}
+</delete>
+
+
+<select id="selectUnSendSMS" resultType="java.util.HashMap">
+	SELECT t.*,b.content as templateContent from sys_sms t inner join sys_smstemplate b on t.templateCode=b.templateCode
+	where t.sendStatus='0'  and b.isEnable='1'
+</select>
+
+ <insert id="insertSelectiveByBussId"  >
+    INSERT INTO `sys_sms` (
+  `id`,
+  `templateCode`,
+  `mobile`,
+  `content`,
+  `sendTime`,
+  `sendStatus`,
+  `sendCount`,
+  `remark`,
+  `createDate`,
+  `createUserId`,
+  `createUserName`,
+  `lastModifyDate`,
+  `lastModifyUserId`,
+  `lasttModifyUserName`,
+  `resultId`,
+  `bussId`
+) 
+SELECT UUID(),
+  `templateCode`,
+  `mobile`,
+  `content`,
+   NOW(),
+  '0',
+  `sendCount`,
+  `remark`,
+   NOW(),
+  `createUserId`,
+  `createUserName`,
+  `lastModifyDate`,
+  `lastModifyUserId`,
+  `lasttModifyUserName`,
+  `resultId`,
+   '${newTaskId}'
+   FROM  
+   sys_sms
+   WHERE bussid=#{oldTaskId}
+     
+</insert>
+ 
+</mapper>
+ 
+

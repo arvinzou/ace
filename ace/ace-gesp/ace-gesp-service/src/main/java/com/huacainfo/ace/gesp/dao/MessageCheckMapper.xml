@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huacainfo.ace.gesp.dao.MessageCheckMapper">
+<!-- 
+	<![CDATA[  ]]>
+	LIKE CONCAT(CONCAT('%', #{}),'%')
+-->
+<sql id="allcolumns">id,messageId,recUserId,viewTimes,firstViewTime,lastViewTime</sql>
+
+<sql id="findListWhereCondition">
+<if test="condition.id!=null and condition.id!=''">and t.id=#{condition.id}</if>
+	 <if test="condition.messageId!=null and condition.messageId!=''">and t.messageId=#{condition.messageId}</if>
+	 <if test="condition.recUserId!=null and condition.recUserId!=''">and t.recUserId=#{condition.recUserId}</if>
+	 <if test="condition.viewTimes!=null">and t.viewTimes=#{condition.viewTimes}</if>
+	 <if test="condition.firstViewTime!=null">and t.firstViewTime=#{condition.firstViewTime}</if>
+	 <if test="condition.lastViewTime!=null">and t.lastViewTime=#{condition.lastViewTime}</if>
+</sql>
+
+<select id="findList" resultType="java.util.HashMap">
+select * from sys_messagecheck t where 1=1
+ <include refid="findListWhereCondition" />
+ <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		 
+  limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+</select>
+
+<select id="findCount" resultType="int">
+ select count(*) from sys_messagecheck t where 1=1
+ <include refid="findListWhereCondition" />
+</select>
+
+<select id="findListTop" resultType="java.util.HashMap">
+  select * from sys_messagecheck t where  1=1
+  <include refid="findListWhereCondition" />
+  <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		
+</select>
+
+<select id="selectByPrimaryKey" resultType="java.util.HashMap">
+  select * from sys_messagecheck t where  id=#{id}
+</select>
+
+<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.MessageCheck">
+    insert into sys_messagecheck (
+    <include refid="allcolumns"/>
+    )
+    values (
+    #{id,jdbcType=VARCHAR}
+	,#{messageId,jdbcType=VARCHAR}
+	,#{recUserId,jdbcType=VARCHAR}
+	,#{viewTimes,jdbcType=INTEGER}
+	,#{firstViewTime,jdbcType=TIMESTAMP}
+	,#{lastViewTime,jdbcType=TIMESTAMP}
+    )
+</insert>
+
+<insert id="insertSelective" parameterType="com.huacainfo.ace.gesp.model.MessageCheck">
+    insert into sys_messagecheck (
+    <trim prefix="" prefixOverrides=",">
+    <if test="messageId!=null and messageId!=''">messageId</if>
+	 <if test="recUserId!=null and recUserId!=''">,recUserId</if>
+	 <if test="viewTimes!=null">,viewTimes</if>
+	 <if test="firstViewTime!=null">,firstViewTime</if>
+	 <if test="lastViewTime!=null">,lastViewTime</if>
+    </trim>
+    )
+    values (
+     <trim prefix="" prefixOverrides=",">
+    <if test="messageId!=null and messageId!=''">messageId=#{messageId,jdbcType=VARCHAR}</if>
+	 <if test="recUserId!=null and recUserId!=''">,recUserId=#{recUserId,jdbcType=VARCHAR}</if>
+	 <if test="viewTimes!=null">,viewTimes=#{viewTimes,jdbcType=INTEGER}</if>
+	 <if test="firstViewTime!=null">,firstViewTime=#{firstViewTime,jdbcType=TIMESTAMP}</if>
+	 <if test="lastViewTime!=null">,lastViewTime=#{lastViewTime,jdbcType=TIMESTAMP}</if>
+	</trim>
+    )
+</insert>
+
+<update id="update" parameterType="com.huacainfo.ace.gesp.model.MessageCheck" >
+    update  sys_messagecheck  set 
+    messageId=#{messageId,jdbcType=VARCHAR}
+	 ,recUserId=#{recUserId,jdbcType=VARCHAR}
+	 ,viewTimes=#{viewTimes,jdbcType=INTEGER}
+	 ,firstViewTime=#{firstViewTime,jdbcType=TIMESTAMP}
+	 ,lastViewTime=#{lastViewTime,jdbcType=TIMESTAMP}
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<update id="updateSelective" parameterType="com.huacainfo.ace.gesp.model.MessageCheck" >
+ update  sys_messagecheck  
+	<trim prefix="set" prefixOverrides=",">
+    <if test="messageId!=null and messageId!=''">messageId=#{messageId,jdbcType=VARCHAR}</if>
+	 <if test="recUserId!=null and recUserId!=''">,recUserId=#{recUserId,jdbcType=VARCHAR}</if>
+	 <if test="viewTimes!=null">,viewTimes=#{viewTimes,jdbcType=INTEGER}</if>
+	 <if test="firstViewTime!=null">,firstViewTime=#{firstViewTime,jdbcType=TIMESTAMP}</if>
+	 <if test="lastViewTime!=null">,lastViewTime=#{lastViewTime,jdbcType=TIMESTAMP}</if>
+	</trim>
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<delete id="deleteByPrimaryKey">
+  delete from sys_messagecheck   where  id=#{id}
+</delete>
+
+ 
+ 
+</mapper>
+ 
+

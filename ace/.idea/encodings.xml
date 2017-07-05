@@ -6,6 +6,10 @@
     <file url="file://$PROJECT_DIR$/ace-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-common-dao" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-common-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gesp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gis" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gis/ace-gis-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gis/ace-gis-service" charset="UTF-8" />

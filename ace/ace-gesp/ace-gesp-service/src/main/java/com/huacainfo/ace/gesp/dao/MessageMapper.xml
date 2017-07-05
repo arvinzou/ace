@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huacainfo.ace.gesp.dao.MessageMapper">
+<!-- 
+	<![CDATA[  ]]>
+	LIKE CONCAT(CONCAT('%', #{}),'%')    
+-->
+<sql id="allcolumns">id,name,content,sender,statusType,messageType,sortCode,isEnable,isTop,column5,column4,column3,column2,column1,expireDate,viewTimes,remark,createDate,createUserId,createUserName,lastModifyDate,lastModifyUserId,lasttModifyUserName</sql>
+    
+<sql id="findListWhereCondition">       
+<if test="condition.id!=null and condition.id!=''"> and t.id=#{condition.id}</if>
+	 
+	 <if test="condition.name!=null and condition.name!=''"> and t.name=#{condition.name}</if>
+	 <if test="condition.content!=null and condition.content!=''"> and t.content=#{condition.content}</if>
+	 <if test="condition.sender!=null and condition.sender!=''">and t.sender=#{condition.sender}</if>
+	 <if test="condition.statusType!=null and condition.statusType!=''"> and t.statusType=#{condition.statusType}</if>
+	 <if test="condition.messageType!=null and condition.messageType!=''"> and t.messageType=#{condition.messageType}</if>
+	 <if test="condition.sortCode!=null"> and t.sortCode=#{condition.sortCode}</if>
+	 <if test="condition.isEnable!=null and condition.isEnable!=''"> and t.isEnable=#{condition.isEnable}</if>
+	 <if test="condition.isTop!=null and condition.isTop!=''"> and t.isTop=#{condition.isTop}</if>
+	 <if test="condition.column5!=null and condition.column5!=''"> and t.column5=#{condition.column5}</if>
+	 <if test="condition.column4!=null and condition.column4!=''"> and t.column4=#{condition.column4}</if>
+	 <if test="condition.column3!=null and condition.column3!=''"> and t.column3=#{condition.column3}</if>
+	 <if test="condition.column2!=null and condition.column2!=''"> and t.column2=#{condition.column2}</if>
+	 <if test='condition.column1==null or condition.column1==""'>
+	 and (t.sender=#{condition.userId} or t.sender=#{condition.departId})
+	 </if>
+	 <if test='condition.column1!=null and condition.column1=="1"'> and t.column1=#{condition.column1} and t.sender=#{condition.userId}</if>
+	 <if test='condition.column1!=null and condition.column1=="2"'> and t.column1=#{condition.column1} and t.sender=#{condition.departId}</if>
+	 <if test="condition.expireDate!=null"> and t.expireDate=#{condition.expireDate}</if>
+	 <if test="condition.viewTimes!=null"> and t.viewTimes=#{condition.viewTimes}</if>
+	 <if test="condition.remark!=null and condition.remark!=''">and t.remark=#{condition.remark}</if>
+	 <if test="condition.createDate!=null"> and t.createDate=#{condition.createDate}</if>
+	 <if test="condition.createUserId!=null and condition.createUserId!=''"> and t.createUserId=#{condition.createUserId}</if>
+	 <if test="condition.createUserName!=null and condition.createUserName!=''"> and t.createUserName=#{condition.createUserName}</if>
+	 <if test="condition.lastModifyDate!=null"> and t.lastModifyDate=#{condition.lastModifyDate}</if>
+	 <if test="condition.lastModifyUserId!=null and condition.lastModifyUserId!=''"> and t.lastModifyUserId=#{condition.lastModifyUserId}</if>
+	 <if test="condition.lasttModifyUserName!=null and condition.lasttModifyUserName!=''"> and t.lasttModifyUserName=#{condition.lasttModifyUserName}</if>
+</sql>
+
+<select id="findList" resultType="java.util.HashMap">
+select * from sys_message t where 1=1
+ <include refid="findListWhereCondition" />
+ <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		 
+  limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+</select>
+
+<select id="findCount" resultType="int">
+ select count(*) from sys_message t where 1=1
+ <include refid="findListWhereCondition" />
+</select>
+
+<select id="findListTop" resultType="java.util.HashMap">
+  select * from sys_message t where  1=1
+  <include refid="findListWhereCondition" />  
+  <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		
+</select>  
+ 
+<select id="selectByPrimaryKey" resultType="java.util.HashMap">
+  select * from sys_message t where  id=#{id}  
+</select>
+ 
+<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.Message">
+    insert into sys_message (
+    <include refid="allcolumns"/>
+    )
+    values (
+    #{id,jdbcType=VARCHAR}
+	,#{name,jdbcType=VARCHAR}
+	,#{content,jdbcType=VARCHAR}
+	,#{sender,jdbcType=VARCHAR}
+	,#{statusType,jdbcType=VARCHAR}
+	,#{messageType,jdbcType=VARCHAR}
+	,#{sortCode,jdbcType=INTEGER}
+	,#{isEnable,jdbcType=VARCHAR}
+	,#{isTop,jdbcType=VARCHAR}
+	,#{column5,jdbcType=VARCHAR}
+	,#{column4,jdbcType=VARCHAR}
+	,#{column3,jdbcType=VARCHAR}
+	,#{column2,jdbcType=VARCHAR}
+	,#{column1,jdbcType=VARCHAR}
+	,#{expireDate,jdbcType=TIMESTAMP}
+	,#{viewTimes,jdbcType=INTEGER}
+	,#{remark,jdbcType=VARCHAR}
+	,#{createDate,jdbcType=TIMESTAMP}
+	,#{createUserId,jdbcType=VARCHAR}
+	,#{createUserName,jdbcType=VARCHAR}
+	,#{lastModifyDate,jdbcType=TIMESTAMP}
+	,#{lastModifyUserId,jdbcType=VARCHAR}
+	,#{lasttModifyUserName,jdbcType=VARCHAR}
+    )
+</insert>
+
+<insert id="insertSelective" parameterType="com.huacainfo.ace.gesp.model.Message">
+    insert into sys_message (
+    <trim prefix="" prefixOverrides=",">
+    <if test="name!=null and name!=''">name</if>
+	 <if test="content!=null and content!=''">,content</if>
+	 <if test="sender!=null and sender!=''">,sender</if>
+	 <if test="statusType!=null and statusType!=''">,statusType</if>
+	 <if test="messageType!=null and messageType!=''">,messageType</if>
+	 <if test="sortCode!=null">,sortCode</if>
+	 <if test="isEnable!=null and isEnable!=''">,isEnable</if>
+	 <if test="isTop!=null and isTop!=''">,isTop</if>
+	 <if test="column5!=null and column5!=''">,column5</if>
+	 <if test="column4!=null and column4!=''">,column4</if>
+	 <if test="column3!=null and column3!=''">,column3</if>
+	 <if test="column2!=null and column2!=''">,column2</if>
+	 <if test="column1!=null and column1!=''">,column1</if>
+	 <if test="expireDate!=null">,expireDate</if>
+	 <if test="viewTimes!=null">,viewTimes</if>
+	 <if test="remark!=null and remark!=''">,remark</if>
+	 <if test="createDate!=null">,createDate</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId</if>
+	 <if test="createUserName!=null and createUserName!=''">,createUserName</if>
+	 <if test="lastModifyDate!=null">,lastModifyDate</if>
+	 <if test="lastModifyUserId!=null and lastModifyUserId!=''">,lastModifyUserId</if>
+	 <if test="lasttModifyUserName!=null and lasttModifyUserName!=''">,lasttModifyUserName</if>
+    </trim>
+    )
+    values (
+     <trim prefix="" prefixOverrides=",">
+    <if test="name!=null and name!=''">name=#{name,jdbcType=VARCHAR}</if>
+	 <if test="content!=null and content!=''">,content=#{content,jdbcType=VARCHAR}</if>
+	 <if test="sender!=null and sender!=''">,sender=#{sender,jdbcType=VARCHAR}</if>
+	 <if test="statusType!=null and statusType!=''">,statusType=#{statusType,jdbcType=VARCHAR}</if>
+	 <if test="messageType!=null and messageType!=''">,messageType=#{messageType,jdbcType=VARCHAR}</if>
+	 <if test="sortCode!=null">,sortCode=#{sortCode,jdbcType=INTEGER}</if>
+	 <if test="isEnable!=null and isEnable!=''">,isEnable=#{isEnable,jdbcType=VARCHAR}</if>
+	 <if test="isTop!=null and isTop!=''">,isTop=#{isTop,jdbcType=VARCHAR}</if>
+	 <if test="column5!=null and column5!=''">,column5=#{column5,jdbcType=VARCHAR}</if>
+	 <if test="column4!=null and column4!=''">,column4=#{column4,jdbcType=VARCHAR}</if>
+	 <if test="column3!=null and column3!=''">,column3=#{column3,jdbcType=VARCHAR}</if>
+	 <if test="column2!=null and column2!=''">,column2=#{column2,jdbcType=VARCHAR}</if>
+	 <if test="column1!=null and column1!=''">,column1=#{column1,jdbcType=VARCHAR}</if>
+	 <if test="expireDate!=null">,expireDate=#{expireDate,jdbcType=TIMESTAMP}</if>
+	 <if test="viewTimes!=null">,viewTimes=#{viewTimes,jdbcType=INTEGER}</if>
+	 <if test="remark!=null and remark!=''">,remark=#{remark,jdbcType=VARCHAR}</if>
+	 <if test="createDate!=null">,createDate=#{createDate,jdbcType=TIMESTAMP}</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId=#{createUserId,jdbcType=VARCHAR}</if>
+	 <if test="createUserName!=null and createUserName!=''">,createUserName=#{createUserName,jdbcType=VARCHAR}</if>
+	 <if test="lastModifyDate!=null">,lastModifyDate=#{lastModifyDate,jdbcType=TIMESTAMP}</if>
+	 <if test="lastModifyUserId!=null and lastModifyUserId!=''">,lastModifyUserId=#{lastModifyUserId,jdbcType=VARCHAR}</if>
+	 <if test="lasttModifyUserName!=null and lasttModifyUserName!=''">,lasttModifyUserName=#{lasttModifyUserName,jdbcType=VARCHAR}</if>
+	</trim>
+    )
+</insert>
+
+<update id="update" parameterType="com.huacainfo.ace.gesp.model.Message" >
+    update  sys_message  set 
+    name=#{name,jdbcType=VARCHAR}
+	 ,content=#{content,jdbcType=VARCHAR}
+	 ,sender=#{sender,jdbcType=VARCHAR}
+	 ,statusType=#{statusType,jdbcType=VARCHAR}
+	 ,messageType=#{messageType,jdbcType=VARCHAR}
+	 ,sortCode=#{sortCode,jdbcType=INTEGER}
+	 ,isEnable=#{isEnable,jdbcType=VARCHAR}
+	 ,isTop=#{isTop,jdbcType=VARCHAR}
+	 ,column5=#{column5,jdbcType=VARCHAR}
+	 ,column4=#{column4,jdbcType=VARCHAR}
+	 ,column3=#{column3,jdbcType=VARCHAR}
+	 ,column2=#{column2,jdbcType=VARCHAR}
+	 ,column1=#{column1,jdbcType=VARCHAR}
+	 ,expireDate=#{expireDate,jdbcType=TIMESTAMP}
+	 ,viewTimes=#{viewTimes,jdbcType=INTEGER}
+	 ,remark=#{remark,jdbcType=VARCHAR}
+	 ,createDate=#{createDate,jdbcType=TIMESTAMP}
+	 ,createUserId=#{createUserId,jdbcType=VARCHAR}
+	 ,createUserName=#{createUserName,jdbcType=VARCHAR}
+	 ,lastModifyDate=#{lastModifyDate,jdbcType=TIMESTAMP}
+	 ,lastModifyUserId=#{lastModifyUserId,jdbcType=VARCHAR}
+	 ,lasttModifyUserName=#{lasttModifyUserName,jdbcType=VARCHAR}
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<update id="updateSelective" parameterType="com.huacainfo.ace.gesp.model.Message" >
+ update  sys_message  
+	<trim prefix="set" prefixOverrides=",">
+    <if test="name!=null and name!=''">name=#{name,jdbcType=VARCHAR}</if>
+	 <if test="content!=null and content!=''">,content=#{content,jdbcType=VARCHAR}</if>
+	 <if test="sender!=null and sender!=''">,sender=#{sender,jdbcType=VARCHAR}</if>
+	 <if test="statusType!=null and statusType!=''">,statusType=#{statusType,jdbcType=VARCHAR}</if>
+	 <if test="messageType!=null and messageType!=''">,messageType=#{messageType,jdbcType=VARCHAR}</if>
+	 <if test="sortCode!=null">,sortCode=#{sortCode,jdbcType=INTEGER}</if>
+	 <if test="isEnable!=null and isEnable!=''">,isEnable=#{isEnable,jdbcType=VARCHAR}</if>
+	 <if test="isTop!=null and isTop!=''">,isTop=#{isTop,jdbcType=VARCHAR}</if>
+	 <if test="column5!=null and column5!=''">,column5=#{column5,jdbcType=VARCHAR}</if>
+	 <if test="column4!=null and column4!=''">,column4=#{column4,jdbcType=VARCHAR}</if>
+	 <if test="column3!=null and column3!=''">,column3=#{column3,jdbcType=VARCHAR}</if>
+	 <if test="column2!=null and column2!=''">,column2=#{column2,jdbcType=VARCHAR}</if>
+	 <if test="column1!=null and column1!=''">,column1=#{column1,jdbcType=VARCHAR}</if>
+	 <if test="expireDate!=null">,expireDate=#{expireDate,jdbcType=TIMESTAMP}</if>
+	 <if test="viewTimes!=null">,viewTimes=#{viewTimes,jdbcType=INTEGER}</if>
+	 <if test="remark!=null and remark!=''">,remark=#{remark,jdbcType=VARCHAR}</if>
+	 <if test="createDate!=null">,createDate=#{createDate,jdbcType=TIMESTAMP}</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId=#{createUserId,jdbcType=VARCHAR}</if>
+	 <if test="createUserName!=null and createUserName!=''">,createUserName=#{createUserName,jdbcType=VARCHAR}</if>
+	 <if test="lastModifyDate!=null">,lastModifyDate=#{lastModifyDate,jdbcType=TIMESTAMP}</if>
+	 <if test="lastModifyUserId!=null and lastModifyUserId!=''">,lastModifyUserId=#{lastModifyUserId,jdbcType=VARCHAR}</if>
+	 <if test="lasttModifyUserName!=null and lasttModifyUserName!=''">,lasttModifyUserName=#{lasttModifyUserName,jdbcType=VARCHAR}</if>
+	</trim>
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<delete id="deleteByPrimaryKey">
+  delete from sys_message  where  id=#{id}
+</delete>
+
+ 
+ 
+</mapper>
+ 
+
