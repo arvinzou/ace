@@ -2,396 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/AnalysisService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/report/Portal.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/report/Portal.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/report/ReportDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/AnslysisServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/AnalysisController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/index/config-1.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/index/config-2.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/index/config-3.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/index/config-4.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/index/controller.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/index/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/index/view.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/build/pdf.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/build/pdf.worker.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/78-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/78-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/78-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/78-RKSJ-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/78-RKSJ-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/78-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/78ms-RKSJ-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/78ms-RKSJ-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/83pv-RKSJ-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/90ms-RKSJ-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/90ms-RKSJ-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/90msp-RKSJ-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/90msp-RKSJ-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/90pv-RKSJ-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/90pv-RKSJ-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Add-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Add-RKSJ-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Add-RKSJ-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Add-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-CNS1-0.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-CNS1-1.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-CNS1-2.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-CNS1-3.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-CNS1-4.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-CNS1-5.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-CNS1-6.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-CNS1-UCS2.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-GB1-0.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-GB1-1.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-GB1-2.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-GB1-3.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-GB1-4.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-GB1-5.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-GB1-UCS2.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Japan1-0.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Japan1-1.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Japan1-2.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Japan1-3.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Japan1-4.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Japan1-5.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Japan1-6.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Japan1-UCS2.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Korea1-0.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Korea1-1.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Korea1-2.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Adobe-Korea1-UCS2.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/B5pc-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/B5pc-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/CNS-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/CNS-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/CNS1-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/CNS1-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/CNS2-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/CNS2-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/ETHK-B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/ETHK-B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/ETen-B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/ETen-B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/ETenms-B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/ETenms-B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Ext-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Ext-RKSJ-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Ext-RKSJ-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Ext-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GB-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GB-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GB-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GB-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBK-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBK-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBK2K-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBK2K-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBKp-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBKp-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBT-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBT-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBT-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBT-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBTpc-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBTpc-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBpc-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/GBpc-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKdla-B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKdla-B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKdlb-B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKdlb-B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKgccs-B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKgccs-B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKm314-B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKm314-B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKm471-B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKm471-B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKscs-B5-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/HKscs-B5-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Hankaku.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Hiragana.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSC-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSC-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSC-Johab-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSC-Johab-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSCms-UHC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSCms-UHC-HW-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSCms-UHC-HW-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSCms-UHC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSCpc-EUC-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/KSCpc-EUC-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Katakana.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/NWP-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/NWP-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/RKSJ-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/RKSJ-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/Roman.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniCNS-UCS2-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniCNS-UCS2-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniCNS-UTF16-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniCNS-UTF16-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniCNS-UTF32-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniCNS-UTF32-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniCNS-UTF8-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniCNS-UTF8-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniGB-UCS2-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniGB-UCS2-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniGB-UTF16-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniGB-UTF16-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniGB-UTF32-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniGB-UTF32-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniGB-UTF8-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniGB-UTF8-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UCS2-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UCS2-HW-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UCS2-HW-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UCS2-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UTF16-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UTF16-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UTF32-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UTF32-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UTF8-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS-UTF8-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS2004-UTF16-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS2004-UTF16-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS2004-UTF32-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS2004-UTF32-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS2004-UTF8-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJIS2004-UTF8-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJISPro-UCS2-HW-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJISPro-UCS2-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJISPro-UTF8-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJISX0213-UTF32-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJISX0213-UTF32-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJISX02132004-UTF32-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniJISX02132004-UTF32-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniKS-UCS2-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniKS-UCS2-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniKS-UTF16-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniKS-UTF16-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniKS-UTF32-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniKS-UTF32-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniKS-UTF8-H.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/UniKS-UTF8-V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/V.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/cmaps/WP-Symbol.bcmap" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/compatibility.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/debugger.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/annotation-check.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/annotation-comment.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/annotation-help.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/annotation-insert.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/annotation-key.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/annotation-newparagraph.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/annotation-noicon.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/annotation-note.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/annotation-paragraph.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/findbarButton-next-rtl.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/findbarButton-next-rtl@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/findbarButton-next.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/findbarButton-next@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/findbarButton-previous-rtl.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/findbarButton-previous-rtl@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/findbarButton-previous.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/findbarButton-previous@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/grab.cur" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/grabbing.cur" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/loading-icon.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/loading-small.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/loading-small@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-documentProperties.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-documentProperties@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-firstPage.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-firstPage@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-handTool.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-handTool@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-lastPage.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-lastPage@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-rotateCcw.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-rotateCcw@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-rotateCw.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/secondaryToolbarButton-rotateCw@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/shadow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/texture.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-bookmark.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-bookmark@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-download.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-download@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-menuArrows.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-menuArrows@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-openFile.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-openFile@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-pageDown-rtl.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-pageDown-rtl@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-pageDown.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-pageDown@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-pageUp-rtl.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-pageUp-rtl@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-pageUp.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-pageUp@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-presentationMode.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-presentationMode@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-print.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-print@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-search.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-search@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-secondaryToolbarToggle-rtl.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-secondaryToolbarToggle-rtl@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-secondaryToolbarToggle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-secondaryToolbarToggle@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-sidebarToggle-rtl.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-sidebarToggle-rtl@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-sidebarToggle.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-sidebarToggle@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-viewAttachments.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-viewAttachments@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-viewOutline-rtl.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-viewOutline-rtl@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-viewOutline.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-viewOutline@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-viewThumbnail.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-viewThumbnail@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-zoomIn.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-zoomIn@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-zoomOut.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/images/toolbarButton-zoomOut@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/l10n.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ach/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/af/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ak/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/an/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ar/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/as/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ast/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/az/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/be/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/bg/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/bn-BD/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/bn-IN/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/br/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/bs/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ca/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/cs/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/csb/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/cy/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/da/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/de/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/el/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/en-GB/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/en-US/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/en-ZA/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/eo/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/es-AR/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/es-CL/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/es-ES/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/es-MX/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/et/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/eu/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/fa/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ff/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/fi/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/fr/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/fy-NL/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ga-IE/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/gd/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/gl/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/gu-IN/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/he/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/hi-IN/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/hr/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/hu/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/hy-AM/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/id/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/is/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/it/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ja/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ka/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/kk/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/km/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/kn/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ko/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ku/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/lg/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/lij/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/locale.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/lt/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/lv/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/mai/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/mk/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ml/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/mn/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/mr/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ms/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/my/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/nb-NO/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/nl/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/nn-NO/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/nso/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/oc/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/or/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/pa-IN/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/pl/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/pt-BR/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/pt-PT/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/rm/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ro/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ru/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/rw/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/sah/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/si/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/sk/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/sl/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/son/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/sq/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/sr/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/sv-SE/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/sw/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ta-LK/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ta/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/te/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/th/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/tl/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/tn/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/tr/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/uk/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/ur/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/vi/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/wo/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/xh/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/zh-CN/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/zh-TW/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/locale/zu/viewer.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/viewer.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/viewer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/plugin/pdfJs/generic/web/viewer.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/security/spring/CustomInvocationSecurityMetadataSource.java" afterPath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/security/spring/CustomInvocationSecurityMetadataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/resources/dubbo/dubbo-ace-portal-consumer.xml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/resources/dubbo/dubbo-ace-portal-consumer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/DictDao.xml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/DictDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/RoleDao.xml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/RoleDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/RoleServiceImpl.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/RoleServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/resources/dubbo/dubbo-ace-portal-provider.xml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/resources/dubbo/dubbo-ace-portal-provider.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/RoleController.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/RoleController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/listener/WebContextParamListener.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/listener/WebContextParamListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/authority.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/authority.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/role/controller.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/role/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/role/model.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/role/model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/users/controller.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/users/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/users/view.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/users/view.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/main.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/main.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -476,8 +88,8 @@
       <file leaf-file-name="ace-ui-custom.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="54" column="17" lean-forward="false" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
+            <state relative-caret-position="170">
+              <caret line="42" column="16" lean-forward="false" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -1947,13 +1559,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00126" summary="统战人士统计分析">
-      <created>1497950400634</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1497950400634</updated>
-    </task>
     <task id="LOCAL-00127" summary="社会资源图片管理">
       <created>1497953183914</created>
       <option name="number" value="00127" />
@@ -2290,7 +1895,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499258990695</updated>
     </task>
-    <option name="localTasksCounter" value="175" />
+    <task id="LOCAL-00175" summary="扁平化风格优化">
+      <created>1499316745530</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1499316745532</updated>
+    </task>
+    <option name="localTasksCounter" value="176" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2372,7 +1984,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="大数据展台" />
     <MESSAGE value="运营数据处理" />
     <MESSAGE value="客户端验证" />
     <MESSAGE value="优化会议建立图标" />
@@ -2397,7 +2008,8 @@
     <MESSAGE value="统战公众号UI优化" />
     <MESSAGE value="ACE扁平化优化" />
     <MESSAGE value="政企服务平台框架" />
-    <option name="LAST_COMMIT_MESSAGE" value="政企服务平台框架" />
+    <MESSAGE value="扁平化风格优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="扁平化风格优化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2842,8 +2454,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="54" column="17" lean-forward="false" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="17" />
+        <state relative-caret-position="170">
+          <caret line="42" column="16" lean-forward="false" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
           <folding />
         </state>
       </provider>
