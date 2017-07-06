@@ -37,23 +37,30 @@ body {
   padding-bottom: 5px;
 }
 .widget-header {
-  font-size: 12px;
   min-height: 30px;
   height: 30px;
-   color:#000000
+  font-size: 14px;
+  color:#000000;
+  font-weight:800
 }
 .widget-header>.widget-title {
     line-height: 30px;
-    color:#000000
+    font-size: 14px;
+      color:#000000;
+      font-weight:800
 }
 /*表格编辑窗口标题栏高度*/
 .ui-jqdialog .ui-widget-header {
     min-height: 30px;
-    color:#000000
+    font-size: 14px;
+      color:#000000;
+      font-weight:800
 }
 .ui-jqdialog .ui-widget-header .ui-jqdialog-title {
     line-height: 30px;
-    color:#000000
+   font-size: 14px;
+     color:#000000;
+     font-weight:800
 }
 .ui-jqdialog-content td.EditButton {
     padding: 5px;
@@ -321,7 +328,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 
 .profile-user-info-striped .profile-info-value {
      border-top: 0px dotted #ddd;
-    padding-left: 12px;
+    padding-left: 1px;
 }
 .profile-info-value {
      background: #FFFFFF;
@@ -382,15 +389,14 @@ input[readonly] {
     min-height: 25px;
 }
 .ui-dialog, .ui-jqdialog {
-    z-index: 1050 !important;
-       position: relative;
-       background-color: #fff;
-       -webkit-background-clip: padding-box;
-       background-clip: padding-box;
        border: 1px solid #999;
        border: 1px solid rgba(0,0,0,.2);
        border-radius: 6px;
-       outline: 0;
        -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
        box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+th[aria-selected=true] {
+    background-image: -webkit-linear-gradient(top, #fff 0, #fff 100%);
+    background-image: linear-gradient(to bottom, #fff 0, #fff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient();
 }

@@ -88,8 +88,8 @@
       <file leaf-file-name="ace-ui-custom.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="42" column="16" lean-forward="false" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+            <state relative-caret-position="491">
+              <caret line="401" column="1" lean-forward="true" selection-start-line="401" selection-start-column="1" selection-end-line="401" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -168,7 +168,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>view</find>
       <find>org.</find>
       <find>../../image</find>
       <find>class=&quot;div</find>
@@ -198,6 +197,7 @@
       <find>analysisService</find>
       <find>selectSyidBydc</find>
       <find>ui-dialog, .ui-jqdialog\</find>
+      <find>profile-info-value</find>
     </findStrings>
     <replaceStrings>
       <replace>track</replace>
@@ -1559,13 +1559,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00127" summary="社会资源图片管理">
-      <created>1497953183914</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1497953183914</updated>
-    </task>
     <task id="LOCAL-00128" summary="社会资源图片管理">
       <created>1497953529424</created>
       <option name="number" value="00128" />
@@ -1902,7 +1895,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499316745532</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="扁平化风格优化">
+      <created>1499316911162</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1499316911162</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2454,8 +2454,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="42" column="16" lean-forward="false" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+        <state relative-caret-position="491">
+          <caret line="401" column="1" lean-forward="true" selection-start-line="401" selection-start-column="1" selection-end-line="401" selection-end-column="1" />
           <folding />
         </state>
       </provider>
