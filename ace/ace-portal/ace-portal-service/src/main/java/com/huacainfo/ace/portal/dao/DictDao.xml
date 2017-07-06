@@ -9,6 +9,6 @@
 		dict_category t where (syid ='sys' or syid=#{syid})
 	</select>
 	<select id="selectSyidBydc" resultType="map">
-		select syid from dict_category where syid!='sys' group by syid
+		select id syid from sy_cfg
 	</select>
 </mapper>

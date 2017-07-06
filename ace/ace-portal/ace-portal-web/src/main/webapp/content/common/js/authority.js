@@ -21,18 +21,16 @@ jQuery(function($) {
 			console.log($(obj).attr("authority"));
 			console.log(obj.disabled==true?'FAIL':'OK');
 			var agent = navigator.userAgent.toLowerCase() ;
-			if(agent.indexOf("chrome") == -1){
-				if($(obj).text()==null||$(obj).text()==""||$(obj).text()==" "||$(obj).text()=="  "){
-					$(obj).prepend(authorConfig[$(obj).attr("authority")])
-					//$(obj).text(authorConfig[$(obj).attr("authority")]);
-				}
-			}else{
+			console.log(agent);
+			if(agent.indexOf("chrome") != -1||agent.indexOf("safari") != -1){
 				if($(obj).text()==null||$(obj).text().trim()==""){
-					$(obj).prepend(authorConfig[$(obj).attr("authority")])
-					//$(obj).text(authorConfig[$(obj).attr("authority")]);
-				}
+                	$(obj).prepend(authorConfig[$(obj).attr("authority")])
+                }
+			}else{
+				if($(obj).text()==null||$(obj).text()==""||$(obj).text()==" "||$(obj).text()=="  "){
+                	$(obj).prepend(authorConfig[$(obj).attr("authority")])
+                }
 			}
-			
 			if(obj.disabled&&$(obj).attr("authority")){
 				$(obj).hide();
 			}else{

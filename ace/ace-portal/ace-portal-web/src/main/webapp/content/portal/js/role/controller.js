@@ -129,7 +129,7 @@ jQuery(function($) {
 		var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
 			modal: true,
 			width:380,
-			title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >"+r.roleName+r.roleId+" 分配权限</div></div>",
+			title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >"+r.roleName+"</div></div>",
 			title_html: true,
 			buttons: [ 
 				

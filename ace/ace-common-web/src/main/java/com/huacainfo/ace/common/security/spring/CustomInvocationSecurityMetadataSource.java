@@ -21,26 +21,22 @@ import org.springframework.util.AntPathMatcher;
  * 
  */
 @Service("customSecurityMetadataSource")
-public class CustomInvocationSecurityMetadataSource implements
-		FilterInvocationSecurityMetadataSource {
+public class CustomInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 	private SecurityLoadResouceDefine securityLoadResouceDefine;
 
-	//private UrlMatcher urlMatcher = new AntUrlPathMatcher();
-	
-	private AntPathMatcher urlMatcher=new AntPathMatcher();
-	
-	
+	// private UrlMatcher urlMatcher = new AntUrlPathMatcher();
+
+	private AntPathMatcher urlMatcher = new AntPathMatcher();
+
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private Map<String, Collection<ConfigAttribute>> resource;
 
 	public void loadResourceDefine() {
-		this.logger
-				.info("================start loadResourceDefine====================");
+		this.logger.info("================start loadResourceDefine====================");
 		// 在Web服务器启动时，提取系统中的所有权限。
 		this.resource = new ConcurrentHashMap<String, Collection<ConfigAttribute>>();
-		List<Map<String, String>> list = securityLoadResouceDefine
-				.loadResourceDefine();
+		List<Map<String, String>> list = securityLoadResouceDefine.loadResourceDefine();
 
 		for (Map<String, String> map : list) {
 			Collection<ConfigAttribute> atts = new ArrayList<ConfigAttribute>();
@@ -57,17 +53,14 @@ public class CustomInvocationSecurityMetadataSource implements
 	}
 
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
-		this.logger
-				.info("================start getAllConfigAttributes====================");
+		this.logger.info("================start getAllConfigAttributes====================");
 		return null;
 	}
 
 	// 根据URL，找到相关的权限配置。
 
-	public Collection<ConfigAttribute> getAttributes(Object object)
-			throws IllegalArgumentException {
-		String url = this.getRequestRi(((FilterInvocation) object)
-				.getFullRequestUrl());
+	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
+		String url = this.getRequestRi(((FilterInvocation) object).getFullRequestUrl());
 		int firstQuestionMarkIndex = url.indexOf("?");
 		if (firstQuestionMarkIndex != -1) {
 			url = url.substring(0, firstQuestionMarkIndex);
@@ -110,8 +103,7 @@ public class CustomInvocationSecurityMetadataSource implements
 		return securityLoadResouceDefine;
 	}
 
-	public void setSecurityLoadResouceDefine(
-			SecurityLoadResouceDefine securityLoadResouceDefine) {
+	public void setSecurityLoadResouceDefine(SecurityLoadResouceDefine securityLoadResouceDefine) {
 		this.securityLoadResouceDefine = securityLoadResouceDefine;
 	}
 

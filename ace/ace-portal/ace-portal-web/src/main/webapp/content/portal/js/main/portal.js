@@ -7,7 +7,12 @@ $.ajax({
 	success : function(data) {
 		buildMenu(data);
 		//initWorkflowList();
-		addPanel('首页', '/' + activeSyId + '/index.jsp', false);
+		if(activeSyId=='sys'){
+		    addPanel('首页', '/portal/dynamic/portal/main.jsp', false);
+		}else{
+		    addPanel('首页', '/' + activeSyId + '/index.jsp', false);
+		}
+
 		console.log(userProp.roleType);
 		initSysPan();
 	}

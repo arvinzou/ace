@@ -317,16 +317,17 @@ jQuery(cfg.grid_selector).jqGrid('navButtonAdd','#grid-pager',{
 				rowNum : 100,
 				rowList : [10, 20, 30, 50],
 				height : 200,
-				// width:350,
+				width:350,
 				colNames : ['角色编号', '角色名称'],
 				colModel : [{
 							name : 'roleId',
+							hidden:true,
 							width : 90
 						}, {
 							name : 'roleName',
 							width : 200
 						}],
-				caption : '所有角色',
+				caption : '可分配',
 				loadComplete:function(){
 					$("#allrole-grid-table").jqGrid('setGridWidth', $("#allrole-grid-table").width());
 				}
@@ -356,16 +357,17 @@ jQuery(cfg.grid_selector).jqGrid('navButtonAdd','#grid-pager',{
 				rowNum : 10,
 				rowList : [10, 20, 30, 50],
 				height : 200,
-				// width:350,
+				width:350,
 				colNames : ['角色编号', '角色名称'],
 				colModel : [{
 							name : 'roleId',
+							hidden:true,
 							width : 90
 						}, {
 							name : 'roleName',
 							width : 200
 						}],
-				caption : '已有角色',
+				caption : '已分配',
 				loadComplete:function(){
 					$("#myrole-grid-table").jqGrid('setGridWidth', $("#myrole-grid-table").width());
 				}

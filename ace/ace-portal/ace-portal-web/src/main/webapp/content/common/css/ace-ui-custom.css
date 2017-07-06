@@ -26,6 +26,8 @@ body {
   padding-bottom: 2px !important;
   border-bottom: 1px solid #E1E1E1 !important;
   border-top: 1px solid #E1E1E1 !important;
+  border-left: 1px solid #E1E1E1 !important;
+  border-right: 1px solid #E1E1E1 !important;
 }
 .ui-jqgrid .ui-jqgrid-htable th span.ui-jqgrid-resize {
   height: 29px !important;
@@ -41,13 +43,16 @@ body {
 }
 .widget-header>.widget-title {
     line-height: 30px;
+    color:#000000
 }
 /*表格编辑窗口标题栏高度*/
 .ui-jqdialog .ui-widget-header {
     min-height: 30px;
+    color:#000000
 }
 .ui-jqdialog .ui-widget-header .ui-jqdialog-title {
     line-height: 30px;
+    color:#000000
 }
 .ui-jqdialog-content td.EditButton {
     padding: 5px;
@@ -119,23 +124,27 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
      font-size: 12px; 
 }
 .profile-group-title {
-	padding: 2px;
-	font-weight: 800;
+	line-height: 20px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #CCC;
+        font-weight:800;
+        font-size:14px;
 }
 
 .profile-bg {
-	background: #fafafa;
+	background: #fff;
 }
 
 .profile-info-value {
 	background: #FFFFFF;
 }
 .profile-longtext {
-    border: 1px solid #DCEBF7;
-    display: table;
-    width: 98%;
-    width: calc(100% - 24px);
-    margin: 0 auto;
+    border: 0px solid #fff;
+}
+.editable-click {
+    border-bottom: 0px dashed #fff;
 }
 /**dataTable*/
 .checkboxitem {
@@ -351,4 +360,36 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     background-image: linear-gradient();
     background-repeat: null;
     filter: progid:DXImageTransform.Microsoft.gradient();
+}
+input[readonly] {
+    color: #000000;
+    background: #fff !important;
+    border: 0px solid #fff;
+    cursor: default;
+}
+.ui-jqgrid-view>.ui-jqgrid-titlebar {
+    height: 25px;
+    line-height: 25px;
+    padding: 0;
+    font-size: 14px;
+     background-image: -webkit-linear-gradient();
+   background-image: linear-gradient(rgb(255, 255, 255) 0px, rgb(255, 255, 255) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient();
+    border-bottom: 1px solid solid;
+    color: #000000;
+    min-height: 25px;
+}
+.ui-dialog, .ui-jqdialog {
+    z-index: 1050 !important;
+       position: relative;
+       background-color: #fff;
+       -webkit-background-clip: padding-box;
+       background-clip: padding-box;
+       border: 1px solid #999;
+       border: 1px solid rgba(0,0,0,.2);
+       border-radius: 6px;
+       outline: 0;
+       -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+       box-shadow: 0 3px 9px rgba(0,0,0,.5);
 }

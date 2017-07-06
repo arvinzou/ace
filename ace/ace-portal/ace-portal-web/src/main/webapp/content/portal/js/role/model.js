@@ -1,4 +1,4 @@
-var _colNames = [ '角色编号', '所属系统','角色名称','类型', '创建时间', '备注' ];
+var _colNames = [ '角色编号', '所属系统','角色名称','类型', '创建时间', '备注','系统' ];
 var _colModel = function() {
 	return [ {
 		name : 'roleId',
@@ -63,7 +63,18 @@ var _colModel = function() {
 			size : "20",
 			maxlength : "30"
 		}
-	} ];
+	} ,{
+      		name : 'syid',
+      		width : 5,
+      		editable : true,
+      		edittype : "select",
+      		renderer : function(value) {
+      			return rsd(value, "08");
+      		},
+      		editoptions : {
+      			value : odparse("08")
+      		}
+      	}];
 }
 function aceSwitch(cellvalue, options, cell) {
 	console.log('aceSwitch');

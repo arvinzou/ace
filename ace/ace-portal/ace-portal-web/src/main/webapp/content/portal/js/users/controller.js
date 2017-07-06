@@ -113,12 +113,12 @@ jQuery(function($) {
 		var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
 			modal: true,
 			width:750,
-			title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-cog'></i> "+r.name+r.userId+" 分配角色</h4></div>",
+			title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' > "+r.name+"</div></div>",
 			title_html: true,
 			buttons: [ 
 				
 				{
-					html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 保存分配的角色",
+					html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 提交",
 					"class" : "btn btn-info btn-xs",
 					id:'ajax_button',
 					click: function() {
@@ -137,7 +137,7 @@ jQuery(function($) {
 							title_html: true,
 							buttons: [
 								{
-									html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 保存分配的角色",
+									html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 提交",
 									"class" : "btn btn-info btn-xs",
 									click: function() {
 										$( this ).dialog( "close" ); 

@@ -114,6 +114,7 @@ public class WebContextParamListener implements ServletContextListener {
 					new String[] { "TABLE_NAME" });
 			CommonUtils.writeStringToFile(path + fileName,
 					preDealDictJSONString(dictJsonListString));
+			this.logger.info("create dict file at ",path +fileName);
 		}
 		try {
 			String areafileName = "content/common/js/areaCode.js";

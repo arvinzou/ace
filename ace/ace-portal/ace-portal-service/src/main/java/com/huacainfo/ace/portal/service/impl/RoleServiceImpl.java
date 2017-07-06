@@ -92,7 +92,9 @@ public class RoleServiceImpl implements RoleService {
 
 			return new MessageResponse(1, "角色名称不能为空！");
 		}
-		role.setSyid(userProp.getActiveSyId());
+		if(CommonUtils.isBlank(role.getSyid())){
+			role.setSyid(userProp.getActiveSyId());
+		}
 		this.roleDao.updateRoleByPrimaryKey(role);
 
 		this.dataBaseLogService.log("角色信息变更", "角色", "", role.getRoleName(),
@@ -127,7 +129,7 @@ public class RoleServiceImpl implements RoleService {
 		AspireRedisTemplate redisTemplateString = (AspireRedisTemplate) SpringUtils
 				.getBean("redisTemplateString");
 		WebUtils.flushRoleResourceCache(redisTemplateString, list);
-		this.logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>RESOURCE_AND_ROLE_MAP.clear()>>>>>>>>>>>>>>>>>>>>>>>>>");
+		this.logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>flushRoleResourceCache>>>>>>>>>>>>>>>>>>>>>>>>>");
 		this.dataBaseLogService.log("角色权限变更", "角色权限", "", "", roleId, userProp);
 		return new MessageResponse(0, "权限分配完成！");
 	}

@@ -40,6 +40,7 @@
 		set ROLE_NAME = #{role.roleName,jdbcType=VARCHAR},
 		REMARK =
 		#{role.remark,jdbcType=VARCHAR},
+		syid=#{role.syid},
 		TYPE =
 		#{role.type,jdbcType=VARCHAR}
 		where ROLE_ID = #{role.roleId,jdbcType=VARCHAR}

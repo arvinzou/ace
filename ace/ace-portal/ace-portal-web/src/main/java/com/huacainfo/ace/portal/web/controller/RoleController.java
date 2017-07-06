@@ -2,6 +2,8 @@ package com.huacainfo.ace.portal.web.controller;
 
 import java.util.List;
 
+import com.huacainfo.ace.common.security.filter.WebAccessDecisionSecurityFilter;
+import com.huacainfo.ace.common.security.spring.CustomInvocationSecurityMetadataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParam;
+
 import com.huacainfo.ace.common.model.view.CheckTree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -26,6 +29,8 @@ public class RoleController extends PortalBaseController{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private CustomInvocationSecurityMetadataSource customSecurityMetadataSource;
 	/**
 	 * 
 	    * @Title:findRoleList 
@@ -111,7 +116,12 @@ public class RoleController extends PortalBaseController{
 		if(temp!=null&&temp.indexOf(",")==-1){
 			resourcesIds=new String[]{temp};
 		}
-		return   this.roleService.insertRoleResources(roleId,resourcesIds,this.getCurUserProp());
+		MessageResponse rst=this.roleService.insertRoleResources(roleId,resourcesIds,this.getCurUserProp());
+		this.logger.info(">>>>>>>>>>>>>>>>>>>WEB.RESOURCE_AND_ROLE_MAP.clear()<<<<<<<<<<<<<<<<<<<");
+		WebAccessDecisionSecurityFilter.RESOURCE_AND_ROLE_MAP.clear();
+		customSecurityMetadataSource.loadResourceDefine();
+		this.logger.info(">>>>>>>>>>>>>>>>>>>WEB.customSecurityMetadataSource.loadResourceDefine()<<<<<<<<<<<<<<<<<<<");
+		return rst;
 	}
 	/**
 	 * 

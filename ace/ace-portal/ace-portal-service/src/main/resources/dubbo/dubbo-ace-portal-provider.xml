@@ -59,4 +59,7 @@
                    ref="authorityService"/>
     <dubbo:service interface="com.huacainfo.ace.portal.service.ProvinceService"
                    ref="provinceService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.AnalysisService"
+                   ref="analysisPortalService"/>
 </beans>
