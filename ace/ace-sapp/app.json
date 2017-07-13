@@ -7,7 +7,8 @@
     "page/info/index",
     "page/me/index",
     "page/map/index",
-    "page/grid/index"
+    "page/grid/index",
+    "page/video/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -38,6 +39,12 @@
         "iconPath": "image/liuyan.png",
         "selectedIconPath": "image/liuyan_selected.png",
         "text": "建言献策"
+      },
+      {
+        "pagePath": "page/video/index",
+        "iconPath": "image/liuyan.png",
+        "selectedIconPath": "image/liuyan_selected.png",
+        "text": "直播"
       }
     ]
   },

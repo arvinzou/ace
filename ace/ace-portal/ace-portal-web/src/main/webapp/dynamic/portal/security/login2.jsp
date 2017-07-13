@@ -54,7 +54,7 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
           type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="${pageContext.request.contextPath}/content/common/assets/pages/css/login-3.min.css" rel="stylesheet"
+    <link href="${pageContext.request.contextPath}/content/common/assets/pages/css/login-2.min.css" rel="stylesheet"
           type="text/css"/>
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
@@ -71,10 +71,10 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
 <body class=" login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-    <h3>
+    <h1>
 
         <span  style="color:#FFFFFF">华彩${cfg.sys_name}</span>
-    </h3>
+    </h1>
     <div style="color: red;font-size:16px">
         ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}
         ${sessionScope['j_captcha_error']}
@@ -99,32 +99,22 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">账号</label>
-            <div class="input-icon">
-                <i class="fa fa-user"></i>
-            <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
-                   placeholder="账号" name="j_username" id="j_username" value="${username}"/>
-            </div>
-            </div>
-
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off"
+                   placeholder="账号" name="j_username" id="j_username" value="${username}"/></div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">密码</label>
-            <div class="input-icon">
-                <i class="fa fa-lock"></i>
-            <input class="form-control  placeholder-no-fix" type="password" autocomplete="off"
-                   placeholder="密码" name="j_password" id="j_password" value="${password}"/>
-            </div>
-
-            </div>
+            <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off"
+                   placeholder="密码" name="j_password" id="j_password" value="${password}"/></div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">验证码</label>
-            <input class="form-control  placeholder-no-fix" type="text" name="j_captcha"
+            <input class="form-control form-control-solid placeholder-no-fix" type="text" name="j_captcha"
                    autocomplete="off" id="j_captcha"
                    placeholder="验证码" value=""/>
 
 
             </label>
         </div>
-        <div class="form-group-captcha">
+        <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">验证码</label>
 
 
@@ -135,12 +125,13 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
 
             </label>
         </div>
-
         <div class="form-actions">
-            <label class="rememberme mt-checkbox mt-checkbox-outline">
-                <input type="checkbox" name="ch" ${ch} value="true"/> 两周之内记住我
-                <span></span>
-            </label>
+            <div class="pull-left">
+                <label class="rememberme mt-checkbox mt-checkbox-outline">
+                    <input type="checkbox" name="ch" ${ch} value="true"/> 两周之内记住我
+                    <span></span>
+                </label>
+            </div>
             <div class="pull-right forget-password-block">
                 <a data-target="#stack1" data-toggle="modal" class="forget-password">忘记密码了</a>
             </div>
@@ -167,7 +158,9 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
 
 <div id="progress-bar-box"
      class="logo hide">
-
+    <h4 class="header red lighter bigger">
+        <i class="ace-icon fa fa-key"></i> 系统提示
+    </h4>
 
     <div class="space-6"></div>
 
@@ -176,7 +169,7 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
     </p>
 
 </div>
-<div id="stack1" class="modal fade" tabindex="-1" data-width="250">
+<div id="stack1" class="modal fade" tabindex="-1" data-width="300">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -372,6 +365,7 @@ jQuery(function($) {
 
 }
     .login .content {
+    width: 400px;
     margin: 10px auto;
 }
 a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
@@ -379,24 +373,6 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     -moz-border-radius: 0!important;
     border-radius: 2px!important;
 }
-.login .content .form-actions {
-    background-color: #fff;
-    clear: both;
-    border: 0;
-    border-bottom: 1px solid #eee;
-    padding: 15px 35px 15px;
-    margin-left: -30px;
-    margin-right: -30px;
-}
-.login .content .form-actions .rememberme {
-     margin-top: 0px;
-    display: inline-block;
-}
-.mt-checkbox, .mt-radio {
-    margin-bottom: 0px;
-}
-.form-group-captcha {
-    margin-bottom: 5px;
-}
+
 </style>
 </html>

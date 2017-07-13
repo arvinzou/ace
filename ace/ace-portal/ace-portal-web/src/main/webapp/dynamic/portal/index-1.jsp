@@ -13,7 +13,7 @@ pageEncoding="utf-8"%>
     <title>${cfg.sys_name}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="Preview page of Metronic Admin Theme #1 for color variants for metronic and bootstrap custom elements and components"
+    <meta content="${cfg.sys_name}"
           name="description"/>
     <meta content="" name="author"/>
     <script type="text/javascript">
@@ -21,6 +21,7 @@ pageEncoding="utf-8"%>
 	var portalType='${SESSION_USERPROP_KEY.cfg.portalType}';
 	var layoutTopHeight=0;
 	var activeSyId ='${SESSION_USERPROP_KEY.activeSyId}';
+
     </script>
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
@@ -30,7 +31,7 @@ pageEncoding="utf-8"%>
 
 
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}" />
+          href="${pageContext.request.contextPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}"/>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
           type="text/css"/>
     <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css"
@@ -96,7 +97,7 @@ pageEncoding="utf-8"%>
                                 个性化配置
                             </a></li>
                             <li>
-                                <a  data-target="#stack1" data-toggle="modal">
+                                <a data-target="#stack1" data-toggle="modal">
                                     <i class="ace-icon fa fa-key"></i> 密码修改
                                 </a>
                             </li>
@@ -113,11 +114,13 @@ pageEncoding="utf-8"%>
         </div>
     </div>
     <div class="clearfix"></div>
+
     <div class="page-container">
         <div class="page-sidebar-wrapper">
 
             <div class="page-sidebar navbar-collapse collapse">
-                <ul id="menu" class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true"
+                <ul id="menu" class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false"
+                    data-auto-scroll="true"
                     data-slide-speed="200" style="padding-top: 0px">
 
                 </ul>
@@ -130,7 +133,8 @@ pageEncoding="utf-8"%>
 				console.log(screenHeight);
 				document
 						.write('<div id="tt" class="easyui-tabs"  style="height:'+screenHeight+'px" fit="true"></div>');
-			</script>
+
+                </script>
                 <!-- 陈晓克-->
             </div>
 
@@ -161,7 +165,7 @@ pageEncoding="utf-8"%>
 
             </div>
             <div class="modal-footer">
-                <button type="button"  class="btn blue" onclick="submitform()">提交</button>
+                <button type="button" class="btn blue" onclick="submitform()">提交</button>
                 <button type="button" data-dismiss="modal" class="btn red">取消</button>
             </div>
         </div>
@@ -180,7 +184,8 @@ pageEncoding="utf-8"%>
         type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/content/common/assets/layouts/layout/scripts/layout.min.js"
         type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/ui-modals.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/ui-modals.min.js"
+        type="text/javascript"></script>
 <script
         src="${pageContext.request.contextPath}/content/common/assets/js/gz/jquery-ui.min.js?version=${cfg.version}"></script>
 <script type="text/javascript"
@@ -239,6 +244,7 @@ pageEncoding="utf-8"%>
 
 		}
 
+
 </script>
 <script type="text/javascript">
 		function checkPwd() {
@@ -249,9 +255,10 @@ pageEncoding="utf-8"%>
 				$('#stack1').modal('show')
 			}
 		}
-	</script>
+
+</script>
 <style>
-    .page-content-wrapper .page-content {
+ .page-content-wrapper .page-content {
     margin-left: 200px;
     margin-top: 0;
     min-height: 600px;
@@ -271,6 +278,7 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     -moz-border-radius: 0!important;
     border-radius: 2px!important;
 }
+
 </style>
 </body>
 
