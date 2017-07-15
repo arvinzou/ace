@@ -23,7 +23,7 @@ var buildMenu = function(menus) {
 									var childrens = menu.children, len = childrens.length;
 									html.push('<ul class="sub-menu" style="display: none;">');
 									for (var i = 0; i < len; i++) {
-										html.push('<li class="nav-item">');
+										html.push('<li class="nav-item" id="menu'+childrens[i].id+'">');
 										if (childrens[i].href) {
 											html.push('<a class="nav-link"  href="#" title="'
 															+ childrens[i].text
@@ -78,17 +78,24 @@ var buildMenu = function(menus) {
 		}
 	});
 	$('.nav-item').bind('click', function() {
-    		$('.nav-item').removeClass("active");
-    		$('.nav-item').find("#selected").removeClass("selected");
-    		$(this).siblings().removeClass("open");
+    		 $('.nav-item').removeClass("active");
+    		 $('.nav-item').find("#selected").removeClass("selected");
+    		 $(this).siblings().removeClass("open");
             $(this).addClass("active open");
             $(this).find("#selected").addClass("selected");
+
    });
 
+    activeMenu($("#menu"+cmenu));
+    $("#menu"+cmenu).addClass("active open");
+}
 
-
-                   $("#menu0").addClass("active");
-                              $("#menu0").find("#selected").addClass("selected");
-
+function activeMenu(o){
+    var tagName=$(o)[0].tagName;
+    if($(o).parent()&&(tagName=='LI'||tagName=='UL')){
+        $(o).parent().addClass("active open");
+        $(o).find(".sub-menu").css("display","display");
+        activeMenu($(o).parent());
+    }
 }
 

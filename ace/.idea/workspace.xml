@@ -2,167 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/SewisePlayer.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/plugins/AudioPlayer.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/plugins/SubtitlesPlayer.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/liveOrange.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/liveRadio.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/liveWhite.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/vodFlowPlayer.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/vodFoream.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/vodMobileTransparent.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/vodMobileWhite.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/vodOrange.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/vodTransparent.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/vodVspaas.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/flash/skins/vodWhite.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveOrange/big_play_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveOrange/buffer.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveOrange/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveOrange/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveRadio/bg.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveRadio/buffer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveRadio/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveRadio/controlbarbg.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveWhite/big_play_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveWhite/buffer.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveWhite/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveWhite/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFlowPlayer/big_play_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFlowPlayer/buffer.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFlowPlayer/clarity_btn_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFlowPlayer/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFlowPlayer/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFoream/big_play_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFoream/buffer.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFoream/clarity_btn_bg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFoream/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFoream/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileTransparent/big_play_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileTransparent/buffer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileTransparent/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileTransparent/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileWhite/big_play_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileWhite/buffer.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileWhite/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileWhite/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodOrange/big_play_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodOrange/buffer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodOrange/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodOrange/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodTransparent/big_play_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodTransparent/buffer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodTransparent/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodTransparent/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodWhite/big_play_btn.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodWhite/buffer.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodWhite/controlbar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodWhite/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/eclipseCodeFormatter.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs/angular-ui-router.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs/ocLazyLoad.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/add_remove_player.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/ads_banner.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/api_setduration.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/api_toplay.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/audio.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/bootstrap.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/bootstrap_json_url.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/color_skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/div_100_percent.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/fallback_url.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/flash_fallback_html5.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/flash_m3u8.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/flash_m3u8_aes_128.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/fullscreen_control.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/json_url.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/live_api.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/live_m3u8.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/live_pid.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/live_radio.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/live_streamurl_http.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/live_streamurl_rtmp.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/m3u8_cross_platform.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/m3u8_https.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/m3u8_src_embed.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/multiplay.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/play_piece_time.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/play_statistics.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/poster.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/primary.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/request_m3u8_path.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/rtmp_fallback_m3u8.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/selection_playing.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/selector_support.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/setup_parameters.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/subtitles.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/videourl_encode.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_api.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_api_flash.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_foream.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_hide_topbar.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_simple.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_skin_flowplayer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_sourceid.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_transparent.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_videourl_flv.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/vod_videourl_mp4.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/例子说明.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/play.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveOrange/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveOrange/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveOrange/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveOrange/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveRadio/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveRadio/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveRadio/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveRadio/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveWhite/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveWhite/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveWhite/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/liveWhite/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFlowPlayer/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFlowPlayer/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFlowPlayer/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFlowPlayer/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFoream/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFoream/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFoream/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodFoream/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileTransparent/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileTransparent/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileTransparent/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileTransparent/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileWhite/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileWhite/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileWhite/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodMobileWhite/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodOrange/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodOrange/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodOrange/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodOrange/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodTransparent/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodTransparent/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodTransparent/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodTransparent/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodWhite/skin.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodWhite/skin.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodWhite/skin.html.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/html/skins/vodWhite/skin.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/js/jquery.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/js/swfobject.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/live.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/sewise.player.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/player/vod.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/security/login2.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/users/index-1.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-app/ios/Portal/App" afterPath="$PROJECT_DIR$/ace-app/ios/Portal/App" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/security/login.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/security/login.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/app.json" afterPath="$PROJECT_DIR$/ace-sapp/app.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu1.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu1.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/dict/index.jsp" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/dict/index.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -223,7 +69,70 @@
     <favorites_list name="ace" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index-1.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="109">
+              <caret line="260" column="0" lean-forward="false" selection-start-line="260" selection-start-column="0" selection-end-line="279" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index-1.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/users/index-1.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="100" column="0" lean-forward="true" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu1.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="82" column="51" lean-forward="true" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tuple.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/model/Tuple.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TreeUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/tools/TreeUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -319,11 +228,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-client/src/main/java/com/huacainfo/ace/gesp/vo/SmsVO.java" />
-        <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-client/src/main/java/com/huacainfo/ace/gesp/service/SmsTemplateService.java" />
-        <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-client/src/main/java/com/huacainfo/ace/gesp/vo/SmsTemplateVO.java" />
-        <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-service/src/main/java/com/huacainfo/ace/gesp/dao/SmsTemplateMapper.java" />
-        <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-service/src/main/java/com/huacainfo/ace/gesp/dao/MessageMapper.java" />
         <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-web/src/main/java/com/huacainfo/ace/gesp/web/controller/CompanyUserCenterController.java" />
         <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-service/src/main/java/com/huacainfo/ace/gesp/service/impl/SmsServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-service/src/main/java/com/huacainfo/ace/gesp/service/impl/SmsTemplateServiceImpl.java" />
@@ -343,7 +247,6 @@
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/users/controller.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/users/view.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/role/controller.js" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/AnalysisService.java" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/report/Portal.xml" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/main.jsp" />
@@ -358,7 +261,6 @@
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/RoleDao.xml" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/role/model.js" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/DictDao.xml" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
         <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-web/src/main/webapp/content/common/js/common.js" />
         <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-web/src/main/webapp/content/www/js/reg/controller.js" />
         <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-web/src/main/webapp/content/service/chargingItem/controller.js" />
@@ -370,13 +272,20 @@
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/live_m3u8.html" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise/demos/live_streamurl_rtmp.html" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/dict/index.jsp" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/common/footer-2.jsp" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/users/index-1.jsp" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu1.js" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1366" />
-    <option name="height" value="678" />
+    <option name="height" value="680" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -410,6 +319,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -456,7 +366,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -583,192 +492,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="tmp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dynamic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dynamic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dynamic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dynamic" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="role" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="content" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -852,6 +575,14 @@
               <option name="myItemId" value="portal" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -887,49 +618,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="content" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="angularjs" />
+              <option name="myItemId" value="portal" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -973,12 +662,15 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/" />
-      <recent name="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/report" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.huacainfo.ace.weui.dao" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main" />
+      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/users" />
+      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs" />
+      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs/ui-router" />
+      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.huacainfo.ace.portal.web.controller" />
@@ -987,12 +679,9 @@
       <recent name="com.huacainfo.ace.uf.model" />
       <recent name="com.huacainfo.ace.portal.model" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs" />
-      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs/ui-router" />
-      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/sewise" />
-      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/security" />
-      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/" />
+      <recent name="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/report" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -1915,13 +1604,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00130" summary="社会资源图片管理">
-      <created>1498030584397</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1498030584400</updated>
-    </task>
     <task id="LOCAL-00131" summary="社会资源图片管理">
       <created>1498036732575</created>
       <option name="number" value="00131" />
@@ -2258,7 +1940,14 @@
       <option name="project" value="LOCAL" />
       <updated>1499436402333</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="扁平化风格优化">
+      <created>1499953994703</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1499953994704</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2271,23 +1960,25 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1366" height="678" extended-state="6" />
+    <frame x="0" y="23" width="1366" height="680" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5223141" sideWeight="0.49707174" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3512605" sideWeight="0.28330892" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40425533" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21603929" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34626648" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20863836" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2298,7 +1989,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5223141" sideWeight="0.49707174" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985073" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.538843" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2325,11 +2015,11 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5190083" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40425533" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985073" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3081991" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13103953" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.538843" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2877013" sideWeight="0.3019608" order="6" side_tool="true" content_ui="tabs" />
@@ -2392,83 +2082,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/security/filter/WebAccessDecisionSecurityFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="26" column="44" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/DictMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-26">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/service/WebContextDictService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/resources/spring/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-133">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/resources/dubbo/dubbo-ace-portal-consumer.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="63" column="46" lean-forward="false" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/resources/dubbo/dubbo-ace-portal-provider.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="63" column="45" lean-forward="false" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/AnalysisController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="35" column="36" lean-forward="false" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/AnslysisServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="16" column="31" lean-forward="false" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/ResourcesServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1783">
-          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/security/spring/SecurityLoadResouceDefine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.2.RELEASE/spring-aop-4.3.2.RELEASE.jar!/org/springframework/aop/framework/AopInfrastructureBean.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/4.0.4.RELEASE/spring-security-core-4.0.4.RELEASE-sources.jar!/org/springframework/security/access/SecurityMetadataSource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -2557,13 +2170,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="402" column="0" lean-forward="true" selection-start-line="402" selection-start-column="0" selection-end-line="402" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2686,27 +2292,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="117" column="32" lean-forward="true" selection-start-line="117" selection-start-column="32" selection-end-line="117" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-296">
-          <caret line="28" column="50" lean-forward="false" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-889">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/role/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -2714,27 +2299,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs/1.4.8/angular/angular.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs/ui-router/release/angular-ui-router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs/1.4.8/angular/angular.js" />
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs/ui-router/release/angular-ui-router.js" />
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/angularjs/angular.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2742,7 +2312,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2750,6 +2319,127 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/dict/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="34" lean-forward="false" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/portal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-461">
+          <caret line="12" column="12" lean-forward="true" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/users/view.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="82" lean-forward="true" selection-start-line="48" selection-start-column="82" selection-end-line="48" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/common/footer-2.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="14" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/common/footer-1.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="17" lean-forward="true" selection-start-line="2" selection-start-column="8" selection-end-line="8" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/users/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="173" column="76" lean-forward="true" selection-start-line="173" selection-start-column="4" selection-end-line="173" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/common/common.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="132" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/index-1.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="260" column="0" lean-forward="false" selection-start-line="260" selection-start-column="0" selection-end-line="279" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/model/Tuple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/model/view/Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/tools/TreeUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/dynamic/portal/users/index-1.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="82" column="51" lean-forward="true" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/main/menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="100" column="0" lean-forward="true" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding />
         </state>
       </provider>
