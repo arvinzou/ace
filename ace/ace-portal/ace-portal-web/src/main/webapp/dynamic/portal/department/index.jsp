@@ -105,7 +105,7 @@
 				style="width: 200px;">
 				<ul id="tt" class="easyui-tree"
 					data-options="
-               url: '${pageContext.request.contextPath}/department/selectDepartmentTreeList.do',
+               url: '${pageContext.request.contextPath}/system/selectDepartmentTreeList.do',
                 method: 'get',
                 animate: true,
                 lines:false,

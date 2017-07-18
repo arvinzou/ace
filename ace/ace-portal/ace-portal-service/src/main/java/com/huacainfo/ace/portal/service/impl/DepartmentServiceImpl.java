@@ -206,9 +206,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	public List<Tree> selectDepartmentTreeList(String id) throws Exception {
-		if(CommonUtils.isBlank(id)){
-			id="0";
-		}
+
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
 				this.departmentDao.selectDepartmentTreeList( id));
 		return commonTreeUtils.getTreeList(id);

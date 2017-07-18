@@ -53,12 +53,12 @@ public class DepartmentController extends PortalBaseController {
 	public PageResult<DepartmentVo> findDepartmentList(Department condition,
 			PageParam page) throws Exception {
 		PageResult<DepartmentVo> rst;
-		/*if(CommonUtils.isBlank(condition.getAreaCode())){
+		if(CommonUtils.isBlank(condition.getAreaCode())){
 			condition.setAreaCode(this.getCurUserProp().getAreaCode());
 		}
 		if(CommonUtils.isBlank(condition.getParentDepartmentId())){
 			condition.setParentDepartmentId(this.getCurUserProp().getCorpId());
-		}*/
+		}
 		rst = this.departmentService.findDepartmentList(condition,
 				page.getStart(), page.getLimit(), page.getOrderBy());
 		if (rst.getTotal() == 0) {
@@ -160,6 +160,9 @@ public class DepartmentController extends PortalBaseController {
 	@RequestMapping(value = "/selectDepartmentTreeList.do")
 	@ResponseBody
 	public List<Tree> selectDepartmentTreeList(String id) throws Exception {
+		if(CommonUtils.isBlank(id)){
+			id=this.getCurUserProp().getCorpId();
+		}
 		List<Tree> list = this.departmentService.selectDepartmentTreeList(id);
 		return list;
 	}
