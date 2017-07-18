@@ -233,9 +233,21 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     margin-bottom: 5px;
     margin-top: 5px;
     padding-bottom: 4px;
-    border-bottom: 1px solid #CCC;
+    border-bottom: 1px solid #ddd;
     font-weight:800;
     font-size:14px;
+}
+.header-title-jqgrid {
+    line-height: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #ddd;
+    font-weight:800;
+    font-size:14px;
+    color:#000000;
+    margin-right: 30px;
+
 }
 .header-title-custom {
     line-height: 20px;
