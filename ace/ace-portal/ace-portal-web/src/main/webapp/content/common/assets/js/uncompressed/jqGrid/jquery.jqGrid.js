@@ -7592,7 +7592,7 @@ $.jgrid.extend({
 	},
 	editGridRow : function(rowid, p){
 		p = $.extend(true, {
-			top : (window.innerHeight/2)-150,
+			top : 0,
 			left: (window.innerWidth/2)-((cfg.jgridEditWinWidth||600)/2),
 			width: cfg.jgridEditWinWidth||600,
 			zIndex :1,
@@ -8405,8 +8405,10 @@ $.jgrid.extend({
 			}
 
 			var dh = isNaN(rp_ge[$(this)[0].p.id].dataheight) ? rp_ge[$(this)[0].p.id].dataheight : rp_ge[$(this)[0].p.id].dataheight+"px",
+			//cxk
+
 			dw = isNaN(rp_ge[$(this)[0].p.id].datawidth) ? rp_ge[$(this)[0].p.id].datawidth : rp_ge[$(this)[0].p.id].datawidth+"px",
-			frm = $("<form name='FormPost' id='"+frmgr+"' class='FormGrid' onSubmit='return false;' style='width:"+dw+";overflow:auto;position:relative;height:"+dh+";'></form>").data("disabled",false),
+			frm = $("<form name='FormPost' id='"+frmgr+"' class='FormGrid' onSubmit='return false;' style='width:"+dw+";overflow:auto;position:relative;max-height:"+($(document).height()-120)+"px;'></form>").data("disabled",false),
 			tbl = $("<table id='"+frmtborg+"' class='EditTable' cellspacing='0' cellpadding='0' border='0'><tbody></tbody></table>");
 			showFrm = $($t).triggerHandler("jqGridAddEditBeforeInitData", [$("#"+frmgr), frmoper]);
 			if(showFrm === undefined) {

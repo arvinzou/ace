@@ -26,6 +26,7 @@ function addPanel(title, src, closable) {
 	if(title=='首页'){
 	    scrolling="no";
 	}
+	scrolling="no";
 	var iframe = '<iframe name="mainFrame" id="ifr" src="' + src
 			+ '" width="100%" height="' + screenHeight
 			+ 'px" frameborder="0"  scrolling="'+scrolling+'"></iframe>';
