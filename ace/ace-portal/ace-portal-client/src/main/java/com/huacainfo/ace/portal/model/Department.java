@@ -1,5 +1,6 @@
 package com.huacainfo.ace.portal.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Department implements java.io.Serializable{
@@ -107,6 +108,10 @@ public class Department implements java.io.Serializable{
     private String complaintsRemark;
     
     private String checkCode;
+
+	private BigDecimal latitude;
+
+	private BigDecimal longitude;
 
 	public String getDepartmentId() {
 		return departmentId;
@@ -514,5 +519,21 @@ public class Department implements java.io.Serializable{
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public BigDecimal getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
+
+	public BigDecimal getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
 	}
 }

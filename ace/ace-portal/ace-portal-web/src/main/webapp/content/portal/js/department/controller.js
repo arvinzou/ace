@@ -47,6 +47,7 @@ jQuery(function($) {
 					$('#parentDepartmentId').val(r.departmentId);
 					$('#departmentLevel').val(parseInt(r.departmentLevel)+1);
 				}
+				appendMapBtn("regAddr");
 			});
 	$('#btn-view-edit').on(
 			'click',
@@ -72,6 +73,7 @@ jQuery(function($) {
 								style_edit_form(form);
 							}
 						})
+						appendMapBtn("regAddr");
 			});
 	
 	$('#btn-view-del').on(
@@ -404,4 +406,24 @@ function insertMemberInfo(departmentId){
 		error : function() {
 		}
 	});
+}
+function appendMapBtn(id) {
+	var html = new Array();
+	html
+			.push("<a id='btn-map-add-"
+					+ id
+					+ "' class='ace-icon fa fa-location-arrow bigger-110' href='javascript:false'>选取</a>");
+	$("#" + id).after(html.join(''));
+	$('#btn-map-add-'+id).on('click', function() {
+            window.open("map.jsp");
+    	});
+}
+function latitude(latitude){
+    $("#latitude").val(latitude);
+}
+function longitude(longitude){
+    $("#longitude").val(longitude);
+}
+function addr(addr){
+    $("#regAddr").val(addr);
 }

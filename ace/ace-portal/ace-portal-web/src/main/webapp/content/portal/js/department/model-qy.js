@@ -76,10 +76,10 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 		},
 		editrules : {
-			required : true
+			required : false
 		},
 		dataoptions:{
 			validType:['chinese','length[0,30]']
@@ -97,13 +97,13 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 		},
 		dataoptions:{
 			validType:['email','length[0,30]']
 		},
 		editrules : {
-			required : true
+			required : false
 		}
 	},{
 		name : 'legalPersonName',
@@ -118,10 +118,10 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 		},
 		editrules : {
-			required : true
+			required : false
 		}
 	},{
 		name : 'legalPersonIdType',
@@ -139,10 +139,10 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 		},
 		editrules : {
-			required : true
+			required : false
 		}
 	},{
 		name : 'legalPersonIdNo',
@@ -157,10 +157,10 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 		},
 		editrules : {
-			required : true
+			required : false
 		}
 	},{
 		name : 'nature',
@@ -178,10 +178,10 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 		},
 		editrules : {
-			required : true
+			required : false
 		}
 	},{
 		name : 'bussLicenseNo',
@@ -196,10 +196,10 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 		},
 		editrules : {
-			required : true
+			required : false
 		}
 	}, {
 		name : 'type',
