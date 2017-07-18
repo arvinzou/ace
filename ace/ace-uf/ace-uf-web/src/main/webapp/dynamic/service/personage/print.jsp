@@ -11,9 +11,6 @@
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
 var params={};
-params.areaCode='${param.areaCode}';
-params.category='${param.category}';
-params.limit=9999999
 
 </script>
 <style>
@@ -43,6 +40,7 @@ params.limit=9999999
     </div>
     <div style="text-align:center">
         <h1>统战人士花名册</h1>
+        <h4></h4>
         <table width="80%" border="0" align="center" cellpadding="0"
                cellspacing="0">
             <tr>

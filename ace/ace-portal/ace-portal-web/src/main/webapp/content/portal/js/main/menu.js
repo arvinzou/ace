@@ -66,7 +66,8 @@ var buildMenu = function(menus) {
 		if (url) {
 			if(url.indexOf("/")!=-1){
 				//普通地址
-				addPanel($(this).attr("title"), url, true)
+				//addPanel($(this).attr("title"), url, true);
+				location.href=url;
 			}else{
 				//工作流
 				var key=url.split('?')[0];

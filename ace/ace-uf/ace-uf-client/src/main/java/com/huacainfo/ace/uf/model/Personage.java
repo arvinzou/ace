@@ -13,6 +13,8 @@ public class Personage implements java.io.Serializable{
 
     private String category;
 
+    private String careerType;
+
     private String name;
 
     private String sex;
@@ -323,5 +325,13 @@ public class Personage implements java.io.Serializable{
 
     public void setIntro(String intro) {
         this.intro = intro == null ? null : intro.trim();
+    }
+
+    public String getCareerType() {
+        return careerType;
+    }
+
+    public void setCareerType(String careerType) {
+        this.careerType = careerType;
     }
 }

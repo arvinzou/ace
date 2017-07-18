@@ -6,6 +6,7 @@
         <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
         <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
         <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="careerType" jdbcType="VARCHAR" property="careerType"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="sex" jdbcType="CHAR" property="sex"/>
         <result column="birthday" jdbcType="DATE" property="birthday"/>
@@ -41,7 +42,7 @@
 
     </resultMap>
     <sql id="Base_Column_List">
-        id, areaCode, deptId, category, name, sex, birthday, photo, placeOfOrigin, nation,
+        id, areaCode, deptId, category,careerType, name, sex, birthday, photo, placeOfOrigin, nation,
         degreee, academicTitle, rank, party, joinDate, administrativeDuty, currentPostDate,
         currentRankDate, mobile, tel, pcode, latitude, longitude, remark, status, createUserId,
         createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
@@ -51,7 +52,7 @@
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
-        t.id, t.areaCode, t.deptId, t.category, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
+        t.id, t.areaCode, t.deptId, t.category,t.careerType, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
         t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
         t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
@@ -69,7 +70,7 @@
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.uf.model.Personage">
         insert into personage (id, areaCode, deptId,
-        category, name, sex, birthday,
+        category,careerType, name, sex, birthday,
         photo, placeOfOrigin, nation,
         degreee, academicTitle, rank,
         party, joinDate, administrativeDuty,
@@ -80,7 +81,7 @@
         lastModifyUserId, lastModifyUserName, lastModifyDate,
         intro)
         values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR},
-        #{category,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE},
+        #{category,jdbcType=VARCHAR},#{careerType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE},
         #{photo,jdbcType=VARCHAR}, #{placeOfOrigin,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR},
         #{degreee,jdbcType=VARCHAR}, #{academicTitle,jdbcType=VARCHAR}, #{rank,jdbcType=VARCHAR},
         #{party,jdbcType=VARCHAR}, #{joinDate,jdbcType=TIMESTAMP}, #{administrativeDuty,jdbcType=VARCHAR},
@@ -97,6 +98,7 @@
         set areaCode = #{areaCode,jdbcType=VARCHAR},
         deptId = #{deptId,jdbcType=VARCHAR},
         category = #{category,jdbcType=VARCHAR},
+        careerType = #{careerType,jdbcType=VARCHAR},
         name = #{name,jdbcType=VARCHAR},
         sex = #{sex,jdbcType=CHAR},
         birthday = #{birthday,jdbcType=DATE},
@@ -145,6 +147,18 @@
         <if test='condition.deptId!=null and condition.deptId!=""'>
             and t.deptId =#{condition.deptId,jdbcType=VARCHAR}
         </if>
+        <if test='condition.careerType!=null and condition.careerType!=""'>
+            and t.careerType =#{condition.careerType,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.nation!=null and condition.nation!=""'>
+            and t.deptId =#{condition.deptId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.degreee!=null and condition.degreee!=""'>
+            and t.degreee =#{condition.degreee,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.party!=null and condition.party!=""'>
+            and t.party =#{condition.party,jdbcType=VARCHAR}
+        </if>
     </sql>
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
@@ -153,7 +167,7 @@
     <select id="findList" resultMap="BaseResultMapVo">
         select m.* from(
         select
-        t.id, t.areaCode, t.deptId, t.category, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
+        t.id, t.areaCode, t.deptId, t.category,t.careerType, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
         t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
         t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,

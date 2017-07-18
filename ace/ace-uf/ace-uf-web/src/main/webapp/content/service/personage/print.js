@@ -13,6 +13,11 @@ jQuery(function($) {
 	$('#btn-print').on('click', function() {
 		window.print();
 	});
+	params = window.opener.params;
+	params.limit = 9999999;
+	if (params.areaCode == null || params.areaCode == '') {
+		params.areaCode = userProp.areaCode;
+	}
 
 	loadView(params);
 
@@ -24,7 +29,8 @@ function loadView(params) {
 		url : contextPath + '/personage/findPersonageList.do',
 		data : params,
 		beforeSend : function(XMLHttpRequest) {
-		    $("#content").html("<tr><td colspan='12'><h2>加载中......</h2></td></tr>");
+			$("#content").html(
+					"<tr><td colspan='12'><h2>加载中......</h2></td></tr>");
 		},
 		success : function(rst, textStatus) {
 			var html = [];
@@ -73,10 +79,28 @@ function loadView(params) {
 
 			});
 			$("#content").html(html.join(""));
-			$("h1").html(area[params.areaCode]+rsd(params.category, '98')+"统战人士花名册");
+			var title = [];
+			if (params.category) {
+				title.push(rsd(params.category, '98'));
+				title.push("、");
+			}
+			if (params.careerType) {
+				title.push(rsd(params.careerType, '102'));
+				title.push("、");
+			}
+			if (params.party) {
+				title.push(rsd(params.party, '101'));
+				title.push("、");
+			}
+			if (params.nation) {
+				title.push(rsd(params.nation, '09'));
+				title.push("、");
+			}
+            var t2=title.join('');
+			$("h1").html(area[params.areaCode] + "统战人士花名册");
+			$("h4").html(t2.substring(0,t2.length-1));
 			$("#deptName").html(userProp.corpName);
 			$("#date").html(new Date().pattern("yyyy-MM-dd"));
-
 
 		},
 		error : function() {

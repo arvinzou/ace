@@ -73,7 +73,7 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
 <div class="logo">
     <h3>
 
-        <span  style="color:#FFFFFF">华彩${cfg.sys_name}</span>
+        <span  style="color:#FFFFFF">${cfg.sys_name}</span>
     </h3>
     <div style="color: red;font-size:16px">
         ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}

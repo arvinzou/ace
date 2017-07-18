@@ -101,6 +101,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     position: relative;
     height: 28px;
 }
+
 .ui-jqgrid .tree-plus {
 
 }
@@ -289,7 +290,13 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     text-align: left !important;
 }
 .ui-jqgrid-btable .ui-widget-content.ui-priority-secondary{
-    background-color: #ffffff;
+    background-color: #fff;
+
+}
+.ui-jqgrid .ui-jqgrid-bdiv {
+    border-top: 1px solid #E1E1E1;
+    border-left: 1px solid #E1E1E1;
+    border-right: 1px solid #E1E1E1;
 }
 .ui-jqgrid-btable .ui-widget-content.ui-state-highlight {
     background-color: #C8D046;

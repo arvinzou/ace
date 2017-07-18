@@ -30,6 +30,7 @@ request.setAttribute("now", CommonUtils.formatDate(new Date()));
 	href="${pageContext.request.contextPath}/content/common/assets/css/jquery-ui.min.css?version=${cfg.version}" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/content/common/assets/css/datepicker.css?version=${cfg.version}" />
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/content/common/assets/css/ui.jqgrid.css?version=${cfg.version}" />
 <link rel="stylesheet"
