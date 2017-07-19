@@ -283,7 +283,7 @@ var _colModel = function() {
 					style : 'width:175px;line-height: 25px;height: 25px;'
 				},
 				dataoptions : {
-					url : contextPath + '/system/selectProvinceTreeList.do',
+					url : portalPath + '/system/selectProvinceTreeList.do',
 					required : false
 				},
 				renderer : function(value, cur) {

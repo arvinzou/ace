@@ -13,7 +13,7 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "统战小程序",
+    "navigationBarTitleText": "掌上统战",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
@@ -45,7 +45,7 @@
         "pagePath": "page/service/index",
         "iconPath": "image/zhoubian.png",
         "selectedIconPath": "image/zhoubian_selected.png",
-        "text": "周边服务"
+        "text": "GIS统战"
       },
       {
         "pagePath": "page/feedback/index",
