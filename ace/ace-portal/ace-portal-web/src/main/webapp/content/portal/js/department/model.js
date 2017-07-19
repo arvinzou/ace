@@ -1,7 +1,7 @@
-var _colNames = ['基本信息', '部门编号', '归属部门编号', '部门名称', '简称', '注册日期', '注册资本',
+var _colNames = ['基本信息', '编号', '归属单位编号', '单位名称', '简称', '注册日期', '注册资本',
 		'注册辖区', '注册地址', '维度', '经度', '经济性质', '营业执照号', '企业类型', '机构类型', '运营地区',
 		'机构状态', '联系人信息', '联系人姓名', '联系人电话', '联系人手机号', '联系人QQ', '联系人邮箱', '法人信息',
-		'法定联系人', '法人证件类型', '法定人证件号', '法定人电话', '法定人手机号', '法定人地址', '创建时间'];
+		'法定联系人', '法人证件类型', '法定人证件号', '法定人电话', '法定人手机号', '法定人地址', '创建时间','图片资源'];
 var _colModel = function() {
 	return [
 			{
@@ -187,7 +187,8 @@ var _colModel = function() {
 				width : 100,
 				editoptions : {
 					size : "20",
-					maxlength : "50"
+					maxlength : "50",
+					style : 'width:175px;line-height: 25px;height: 25px;'
 				}
 			},
 			{
@@ -197,7 +198,8 @@ var _colModel = function() {
 				width : 100,
 				editoptions : {
 					size : "20",
-					maxlength : "50"
+					maxlength : "50",
+					style : 'width:175px;line-height: 25px;height: 25px;'
 				}
 			},
 			{
@@ -262,10 +264,10 @@ var _colModel = function() {
 				editable : true,
 				edittype : "select",
 				renderer : function(value) {
-					return rsd(value, "66");
+					return rsd(value, "102");
 				},
 				editoptions : {
-					value : odparse("66"),
+					value : odparse("102"),
 					style : 'width:175px;line-height: 25px;height: 25px;'
 				}
 			},
@@ -558,7 +560,8 @@ var _colModel = function() {
 				editoptions : {
 					size : "20",
 					maxlength : "50",
-					style : 'width:175px;line-height: 25px;height: 25px;'
+					style : 'width:550px;line-height: 25px;height: 25px;',
+					colspan:true
 				},
 				formoptions : {
 					elmprefix : "",
@@ -575,7 +578,14 @@ var _colModel = function() {
 				width : 150,
 				sortable : true,
 				editable : false
-			}];
+			},{
+              				name : 'title5',
+              				editable : true,
+              				hidden : true,
+              				editoptions : {
+              					title : true
+              				}
+              			}];
 }
 function aceSwitch(cellvalue, options, cell) {
 	console.log('aceSwitch');
