@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.report.DeptOne">
+  <select id="query" resultType="map">
+    select
+    t.department_id,
+    t.parent_department_id,
+    t.department_name,
+    t.short_name,
+    t.create_time,
+    t.create_user_id,
+    t.status,
+    t.category,
+    t.area_code,
+    a.fullname area_name,
+    t.pcode, t.contact_name, t.contact_tel,
+    t.contact_mobile, t.contact_qq, t.contact_email,
+    t.contact_fax,
+    t.legal_person_name, t.legal_person_id_type, t.legal_person_id_no,
+    t.legal_person_tel,
+    t.legal_person_mobile,
+    t.legal_person_addr,
+    t.reg_date,
+    t.reg_capital, t.reg_area_code, t.reg_addr, t.nature,
+    t.buss_license_no,
+    t.buss_addr, t.buss_area_code, t.fax, t.email,
+    t.trans_depart_approval_no,
+    t.trans_buss_license_no,
+    t.trans_buss_license_valid_date, t.trans_buss_scope,
+    t.employees_num,
+    t.driver_num, t.unlicensed_driver_num,
+    t.licensed_driver_num,
+    t.type,
+    t.simage, t.bimage, t.create_user_id,
+    t.create_user_name,
+    t.last_modify_time, t.last_modify_user_id,
+    t.last_modify_user_name,
+    t.latitude,
+    t.longitude,
+    t.serviceTimeStart,
+    t.serviceTimeEnd,
+    t.qrcode,
+    t.serviceWay
+    from
+    department t
+    left join
+    province a on
+    t.area_code = a.code
+    where
+    t.department_id =#{id}
+  </select>
+</mapper>

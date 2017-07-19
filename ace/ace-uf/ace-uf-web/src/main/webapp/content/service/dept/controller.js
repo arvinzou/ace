@@ -48,6 +48,7 @@ jQuery(function($) {
 					$('#departmentLevel').val(parseInt(r.departmentLevel) + 1);
 				}
 				appendMapBtn("regAddr");
+				appendUploadBtn("qrcode");
 			});
 	$('#btn-view-edit').on(
 			'click',
@@ -74,6 +75,7 @@ jQuery(function($) {
 							}
 						})
 				appendMapBtn("regAddr");
+				appendUploadBtn("qrcode");
 				initSubGrid();
 			});
 

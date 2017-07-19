@@ -68,6 +68,12 @@
 			property="accidentOfYear" />
 		<result column="complaints_remark" jdbcType="LONGVARCHAR"
 			property="complaintsRemark" />
+
+		<result column="serviceTimeStart" jdbcType="VARCHAR" property="serviceTimeStart" />
+		<result column="serviceTimeEnd" jdbcType="VARCHAR" property="serviceTimeEnd" />
+		<result column="qrcode" jdbcType="VARCHAR" property="qrcode" />
+		<result column="serviceWay" jdbcType="VARCHAR" property="serviceWay" />
+
 	</resultMap>
 	<resultMap id="BaseResultMapVo" extends="BaseResultMap"
 		type="com.huacainfo.ace.portal.vo.DepartmentVo">
@@ -108,7 +114,7 @@
 		create_time, last_modify_time,
 		last_modify_user_id,
 		last_modify_user_name, accident_of_year,
-		complaints_remark,latitude, longitude)
+		complaints_remark,latitude, longitude,serviceTimeStart,serviceTimeEnd,qrcode,serviceWay)
 		values
 		(#{departmentId,jdbcType=VARCHAR},
 		#{parentDepartmentId,jdbcType=VARCHAR},
@@ -147,7 +153,7 @@
 		#{lastModifyUserId,jdbcType=VARCHAR},
 		#{lastModifyUserName,jdbcType=VARCHAR},
 		#{accidentOfYear,jdbcType=LONGVARCHAR},
-		#{complaintsRemark,jdbcType=LONGVARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL})
+		#{complaintsRemark,jdbcType=LONGVARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL},#{serviceTimeStart,jdbcType=VARCHAR},#{serviceTimeEnd,jdbcType=VARCHAR},#{qrcode,jdbcType=VARCHAR},#{serviceWay,jdbcType=VARCHAR})
 	</insert>
 	<update id="updateDepartmentByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Department">
 
@@ -317,6 +323,22 @@
 				longitude =
 				#{longitude,jdbcType=DECIMAL},
 			</if>
+			<if test="serviceTimeStart != null">
+				serviceTimeStart =
+				#{serviceTimeStart,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceTimeEnd != null">
+				serviceTimeEnd =
+				#{serviceTimeEnd,jdbcType=VARCHAR},
+			</if>
+			<if test="qrcode != null">
+				qrcode =
+				#{qrcode,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceWay != null">
+				serviceWay =
+				#{serviceWay,jdbcType=VARCHAR},
+			</if>
 		</set>
 		where department_id = #{departmentId,jdbcType=VARCHAR}
 	</update>
@@ -400,7 +422,11 @@
 		t.last_modify_time, t.last_modify_user_id,
 		t.last_modify_user_name,
 		t.latitude,
-		t.longitude
+		t.longitude,
+		t.serviceTimeStart,
+		t.serviceTimeEnd,
+		t.qrcode,
+		t.serviceWay
 		<include refid="departmentPagingWhereCondition" />
 		<choose>
 			<when test='orderBy!=null and orderBy!=""'>
@@ -417,21 +443,50 @@
 		parameterType="java.lang.String">
 		select
 		t.department_id,
-		t.area_code,
 		t.parent_department_id,
-		ifnull(s1.department_name, '公司')
-		parent_department_name,
 		t.department_name,
+		t.short_name,
 		t.create_time,
 		t.create_user_id,
-		t.status
+		t.status,
+		t.category,
+		t.area_code,
+		a.fullname area_name,
+		t.pcode, t.contact_name, t.contact_tel,
+		t.contact_mobile, t.contact_qq, t.contact_email,
+		t.contact_fax,
+		t.legal_person_name, t.legal_person_id_type, t.legal_person_id_no,
+		t.legal_person_tel,
+		t.legal_person_mobile,
+		t.legal_person_addr,
+		t.reg_date,
+		t.reg_capital, t.reg_area_code, t.reg_addr, t.nature,
+		t.buss_license_no,
+		t.buss_addr, t.buss_area_code, t.fax, t.email,
+		t.trans_depart_approval_no,
+		t.trans_buss_license_no,
+		t.trans_buss_license_valid_date, t.trans_buss_scope,
+		t.employees_num,
+		t.driver_num, t.unlicensed_driver_num,
+		t.licensed_driver_num,
+		t.type,
+		t.simage, t.bimage, t.create_user_id,
+		t.create_user_name,
+		t.last_modify_time, t.last_modify_user_id,
+		t.last_modify_user_name,
+		t.latitude,
+		t.longitude,
+		t.serviceTimeStart,
+		t.serviceTimeEnd,
+		t.qrcode,
+		t.serviceWay
 		from
 		department t
 		left join
-		department s1 on
-		t.parent_department_id = s1.department_id
+		province a on
+		t.area_code = a.code
 		where
-		t.department_ID =
+		t.department_id =
 		#{departmentId,jdbcType=VARCHAR}
 	</select>
 	<select id="selectDepartmentTreeList" resultType="map">

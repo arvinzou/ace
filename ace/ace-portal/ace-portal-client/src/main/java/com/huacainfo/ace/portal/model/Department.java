@@ -113,6 +113,13 @@ public class Department implements java.io.Serializable{
 
 	private BigDecimal longitude;
 
+	private String serviceTimeStart;
+
+	private String serviceTimeEnd;
+
+	private String qrcode;
+	private String serviceWay;
+
 	public String getDepartmentId() {
 		return departmentId;
 	}
@@ -535,5 +542,37 @@ public class Department implements java.io.Serializable{
 
 	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
+	}
+
+	public String getServiceTimeStart() {
+		return serviceTimeStart;
+	}
+
+	public void setServiceTimeStart(String serviceTimeStart) {
+		this.serviceTimeStart = serviceTimeStart;
+	}
+
+	public String getServiceTimeEnd() {
+		return serviceTimeEnd;
+	}
+
+	public void setServiceTimeEnd(String serviceTimeEnd) {
+		this.serviceTimeEnd = serviceTimeEnd;
+	}
+
+	public String getQrcode() {
+		return qrcode;
+	}
+
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
+	}
+
+	public String getServiceWay() {
+		return serviceWay;
+	}
+
+	public void setServiceWay(String serviceWay) {
+		this.serviceWay = serviceWay;
 	}
 }

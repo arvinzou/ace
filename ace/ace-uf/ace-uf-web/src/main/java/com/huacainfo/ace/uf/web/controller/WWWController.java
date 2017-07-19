@@ -19,7 +19,7 @@ import com.huacainfo.ace.uf.service.AnalysisService;
 import com.huacainfo.ace.uf.service.FeedbackService;
 import com.huacainfo.ace.uf.service.OrganizationService;
 import com.huacainfo.ace.uf.service.PersonageService;
-
+import com.huacainfo.ace.uf.service.DeptService;
 @Controller
 @RequestMapping("/www/")
 public class WWWController extends UfBaseController {
@@ -40,6 +40,9 @@ public class WWWController extends UfBaseController {
 
 	@Autowired
 	private AnalysisService analysisService;
+
+	@Autowired
+	private DeptService deptService;
 
 	@Autowired
 	private RedisOperations<String, Object> redisTemplate;
@@ -125,5 +128,43 @@ public class WWWController extends UfBaseController {
 			limit = 10;
 		}
 		return analysisService.query(condition, reportId, start, limit);
+	}
+
+	/*
+	* 统战机构****************/
+	@RequestMapping(value = "/selectDeptList.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectDeptList(String q,String areaCode) throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.deptService.selectDeptList(q,this.getCurWxUser(),areaCode);
+	}
+	@RequestMapping(value = "/selectDeptListMap.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectDeptListMap() throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.deptService.selectDeptListMap(this.getCurWxUser());
+	}
+
+	@RequestMapping(value = "/selectDept.do")
+	@ResponseBody
+	public Map<String,Object> selectDept(String id) throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.deptService.selectDept(id,this.getCurWxUser());
+	}
+
+
+
+	@RequestMapping(value = "/selectDeptCategoryList.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectDeptCategoryList(String areaCode) throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.deptService.selectDeptCategoryList(this.getCurWxUser(),areaCode);
+	}
+
+	@RequestMapping(value = "/selectDeptByCategory.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectDeptByCategory(String category) throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.deptService.selectDeptByCategory(category,this.getCurWxUser());
 	}
 }
