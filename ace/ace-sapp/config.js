@@ -29,6 +29,7 @@ var config = {
     selectDeptListMap: `${server}/uf/www/selectDeptListMap.do`,
     selectDept: `${server}/uf/www/selectDept.do`,
     selectDeptCategoryList: `${server}/uf/www/selectDeptCategoryList.do`,
-    selectDeptByCategory: `${server}/uf/www/selectDeptByCategory.do`
+    selectDeptByCategory: `${server}/uf/www/selectDeptByCategory.do`,
+    selectPersonage: `${server}/uf/www/query.do`
 };
 module.exports = config
