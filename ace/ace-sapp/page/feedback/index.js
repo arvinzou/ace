@@ -2,6 +2,22 @@ var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 var fileList=[];
 Page({
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '我发现了掌上统战小程序，一起看看吧',
+      path: '/page/feedback/index',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
   data: {
     countries: [],
     countryIndex: 0,

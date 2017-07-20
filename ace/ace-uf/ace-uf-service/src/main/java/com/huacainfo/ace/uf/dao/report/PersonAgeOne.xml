@@ -2,14 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.uf.dao.report.PersonAgeOne">
   <select id="query" resultType="map">
-    select t.id, t.areaCode, t.deptId, t.category, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
-    t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
-    t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark,
-    t.intro,a.fullname areaName,b.department_name deptName,c.fullname placeOfOriginName
-    from personage t
-    left join portal.province a on t.areaCode=a.code
-    left join portal.department b on t.deptId=b.department_id
-    left join portal.province c on t.placeOfOrigin=c.code
+    SELECT
+    t.id,
+    t.areaCode,
+    t.deptId,
+    d.name categoryName,
+    t.category,
+    t. NAME 'name',
+    t.sex,
+    t.birthday,
+    date_format(t.birthday, '%Y-%m-%d') birthdayName,
+    t.photo,
+    t.placeOfOrigin,
+    t.nation,
+    f.name partyName,
+    e.name nationName,
+    t.degreee,
+    t.academicTitle,
+    t.rank,
+    t.party,
+    t.joinDate,
+    date_format(t.joinDate, '%Y-%m-%d') joinDateName,
+    t.administrativeDuty,
+    t.currentPostDate,
+    date_format(t.currentPostDate, '%Y-%m-%d') currentPostDateName,
+    t.currentRankDate,
+    date_format(t.currentRankDate, '%Y-%m-%d') currentRankDateName,
+    t.mobile,
+    t.tel,
+    t.pcode,
+    t.latitude,
+    t.longitude,
+    t.remark,
+    t.intro,
+    a. NAME areaName,
+    b.department_name deptName,
+    c.fullname placeOfOriginName,
+    t.careerType,
+    g.`name` careerTypeName,
+    h.`name` degreeeName,
+    i.`name` academicTitleName,
+    j.`name` rankName
+    FROM
+    personage t
+    LEFT JOIN portal.province a ON t.areaCode = a. CODE
+    LEFT JOIN portal.department b ON t.deptId = b.department_id
+    LEFT JOIN portal.province c ON t.placeOfOrigin = c. CODE
+    LEFT JOIN (select code,name from portal.dict where category_id='98')  d ON t.category = d. CODE
+    LEFT JOIN (select code,name from portal.dict where category_id='09')  e ON t.nation = e. CODE
+    LEFT JOIN (select code,name from portal.dict where category_id='101')  f ON t.party = f. CODE
+    LEFT JOIN (select code,name from portal.dict where category_id='102')  g ON t.careerType = g. CODE
+    LEFT JOIN (select code,name from portal.dict where category_id='10')  h ON t.degreee = h. CODE
+    LEFT JOIN (select code,name from portal.dict where category_id='99')  i ON t.academicTitle = i. CODE
+    LEFT JOIN (select code,name from portal.dict where category_id='100')  j ON t.rank = j. CODE
     where t.id=#{id}
   </select>
 </mapper>
