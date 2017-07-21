@@ -42,7 +42,6 @@ icon {
   margin-bottom: .3em;
   padding-left: 15px;
   padding-right: 15px;
-  color: #999999;
   font-size: 14px;
 }
 .weui-cells_after-title {
@@ -50,7 +49,6 @@ icon {
 }
 .weui-cells__tips {
   margin-top: .3em;
-  color: #999999;
   padding-left: 15px;
   padding-right: 15px;
   font-size: 14px;
@@ -189,7 +187,6 @@ icon {
   width: 100%;
 }
 .weui-textarea-counter {
-  color: #B2B2B2;
   text-align: right;
 }
 .weui-textarea-counter_warn {
@@ -210,7 +207,6 @@ icon {
   right: 0;
   height: 1px;
   border-top: 1rpx solid #D9D9D9;
-  color: #D9D9D9;
 }
 .weui-form-preview:after {
   content: " ";
@@ -220,13 +216,14 @@ icon {
   right: 0;
   height: 1px;
   border-bottom: 1rpx solid #D9D9D9;
-  color: #D9D9D9;
 }
 .weui-form-preview__value {
   font-size: 14px;
+  color: #000000;
 }
 .weui-form-preview__value_in-hd {
   font-size: 26px;
+  
 }
 .weui-form-preview__hd {
   position: relative;
@@ -276,14 +273,13 @@ icon {
   float: left;
   margin-right: 1em;
   min-width: 4em;
-  color: #000000;
   text-align: justify;
   text-align-last: justify;
+  color: #000000;
 }
 .weui-form-preview__value {
   display: block;
   overflow: hidden;
-  color: #000000;
   word-break: normal;
   word-wrap: break-word;
 }
@@ -293,7 +289,6 @@ icon {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
-  color: #3CC51F;
   text-align: center;
 }
 .weui-form-preview__btn:after {
@@ -313,10 +308,8 @@ icon {
   background-color: #EEEEEE;
 }
 .weui-form-preview__btn_default {
-  color: #999999;
 }
 .weui-form-preview__btn_primary {
-  color: #0BB20C;
 }
 .weui-cell_select {
   padding: 0;

@@ -1,8 +1,11 @@
-
+.index{
+  color: #000000;
+}
 .index-hd {
   padding: 5rpx;
   text-align: center;
 }
+
 .index-bd {
   padding: 0 5rpx 5rpx;
 }
@@ -16,7 +19,7 @@
 }
 .index-desc {
   margin-top: 20rpx;
-  color: #888888;
+  
   font-size: 28rpx;
 }
 

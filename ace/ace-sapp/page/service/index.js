@@ -152,7 +152,7 @@ Page({
       orgColor: 'red',
       showOrgBarStatus:true,
       view: {
-        height: '90vh'
+        height: '93vh'
       }
     });
     this.initOrgData('01');
