@@ -184,7 +184,15 @@ Page({
         that.setData({
           latitude: latitude,
           longitude: longitude,
-          scale: 16
+          scale: 16,
+          circles: [{
+            latitude: res.latitude,
+            longitude: res.longitude,
+            color: '#FF0000DD',
+            fillColor: '#7cb5ec88',
+            radius: 500,
+            strokeWidth: 1
+          }]
         })
       }
     })
@@ -257,8 +265,8 @@ Page({
           o.width = 45;
           o.title = o.name;
           o.height = 45;
-          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5/*, display: 'ALWAYS' */ };
-          o.label = { content: o.name };
+          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS'  };
+          //o.label = { content: o.name, color: "#696969", fontSize:14 };
           markers.push(o);
           console.log(o);
         }

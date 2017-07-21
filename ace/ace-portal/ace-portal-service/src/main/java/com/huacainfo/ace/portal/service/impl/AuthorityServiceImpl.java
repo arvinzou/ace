@@ -44,7 +44,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 	private WxUserDao wxUserDao;
 
 	public SingleResult<Map<String, String>> authority(String appid, String appsecret, String code,
-			String encryptedData, String iv) throws Exception {
+			String encryptedData, String iv,String latitude,String longitude) throws Exception {
 		// appid wxa09a5be5fd228680
 		// appsecret d520d29f8c26c7e3885d80b1812a8d91
 		SingleResult<Map<String, String>> rst = new SingleResult<Map<String, String>>(0, "OK");
@@ -85,6 +85,12 @@ public class AuthorityServiceImpl implements AuthorityService {
         redisTemplate.opsForValue().set(_3rd_session + "session_key", session_key);
 		redisTemplate.opsForValue().set(_3rd_session, userinfo);
 		WxUser wxUser= JSON.parseObject(userinfo.toString(),WxUser.class);
+		if(CommonUtils.isNotEmpty(latitude)){
+			wxUser.setLatitude(new java.math.BigDecimal(latitude));
+		}
+		if(CommonUtils.isNotEmpty(longitude)){
+			wxUser.setLongitude(new java.math.BigDecimal(longitude));
+		}
 		this.saveOrUpdateWxUser(wxUser);
 		rst.setValue(o);
 		return rst;

@@ -14,10 +14,12 @@
     <result column="addr" jdbcType="VARCHAR" property="addr" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
   </resultMap>
   <sql id="Base_Column_List">
     unionId, openId, nickName, gender, city, province, country, avatarUrl, mobile, addr, 
-    email, name
+    email, name,latitude, longitude
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -33,11 +35,11 @@
     insert into wx_user (unionId, openId, nickName, 
       gender, city, province, 
       country, avatarUrl, mobile, 
-      addr, email, name)
+      addr, email, name,latitude, longitude)
     values (#{unionId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
       #{country,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{addr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+      #{addr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.WxUser">
     update wx_user
@@ -51,7 +53,9 @@
       mobile = #{mobile,jdbcType=VARCHAR},
       addr = #{addr,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR}
+      name = #{name,jdbcType=VARCHAR},
+      latitude =#{latitude,jdbcType=DECIMAL},
+      longitude =#{longitude,jdbcType=DECIMAL}
     where unionId = #{unionId,jdbcType=VARCHAR}
   </update>
   <select id="isExit" resultType="int">

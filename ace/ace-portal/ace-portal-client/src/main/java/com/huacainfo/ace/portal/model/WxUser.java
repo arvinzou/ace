@@ -1,5 +1,7 @@
 package com.huacainfo.ace.portal.model;
 
+import java.math.BigDecimal;
+
 public class WxUser implements java.io.Serializable {
 	private static final long serialVersionUID = 1302490874428907510L;
 	private String unionId;
@@ -25,6 +27,10 @@ public class WxUser implements java.io.Serializable {
 	private String email;
 
 	private String name;
+
+	private BigDecimal latitude;
+
+	private BigDecimal longitude;
 
 	public String getUnionId() {
 		return unionId;
@@ -120,5 +126,21 @@ public class WxUser implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name == null ? null : name.trim();
+	}
+
+	public BigDecimal getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
+
+	public BigDecimal getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
 	}
 }
