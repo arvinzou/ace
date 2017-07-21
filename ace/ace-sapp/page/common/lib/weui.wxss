@@ -276,13 +276,14 @@ icon {
   float: left;
   margin-right: 1em;
   min-width: 4em;
-  color: #999999;
+  color: #000000;
   text-align: justify;
   text-align-last: justify;
 }
 .weui-form-preview__value {
   display: block;
   overflow: hidden;
+  color: #000000;
   word-break: normal;
   word-wrap: break-word;
 }

@@ -105,10 +105,15 @@
         longitude,
         contact_tel tel,
         serviceTimeStart,
-        serviceTimeEnd
+        serviceTimeEnd,
+        'deptSub' types
         from
         portal.department
-        WHERE category=#{category}
+        WHERE 0=0
+        <if test='category!=null and category!=""'>
+            category=#{category}
+        </if>
+
         and STATUS = '1'
     </select>
 </mapper>

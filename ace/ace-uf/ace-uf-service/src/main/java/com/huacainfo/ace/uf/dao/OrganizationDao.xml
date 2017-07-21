@@ -191,7 +191,8 @@
         latitude,
         longitude,
         tel,serviceTimeStart,
-        serviceTimeEnd
+        serviceTimeEnd,
+        'organization' types
         FROM
         organization
         WHERE category=#{category}

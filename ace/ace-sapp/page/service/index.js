@@ -12,7 +12,6 @@ Page({
       title: '我发现了掌上统战小程序，一起看看吧',
       path: '/page/service/index',
       success: function (res) {
-        // 转发成功
       },
       fail: function (res) {
         // 转发失败
@@ -21,8 +20,14 @@ Page({
   },
   data: {
     hasLocation: false,
+    scale:16,
     showModalStatus: false,
-    showBarStatus:true,
+    showBarStatus:false,
+    showOrgBarStatus: false,
+    showFloatBoxStatus: true,
+    showMapStatus: true,
+    deptColor:'red',
+    orgColor:'#000000',
     category:'01',
     serverfile: cfg.serverfile,
     view: {
@@ -33,10 +38,12 @@ Page({
     listCategory:[],
     latitude: 29.031673,
     longitude: 111.698497,
+
     markers: [{
       iconPath: "../../image/jigou.png",
       id: '977577',
       title:'久久鸭脖中心店',
+      types:'1',
       latitude: 29.031673,
       longitude: 111.698497,
       width: 35,
@@ -67,7 +74,7 @@ Page({
       radius: 400,
       strokeWidth: 2
     }],
-    controls: [{
+    controls: [/*{
       id: 1,
       iconPath: '../../image/locationto.png',
       position: {
@@ -78,7 +85,7 @@ Page({
       },
 
       clickable: true
-    }]
+    }*/]
   },
   controltap: function (e) {
     console.log(e.controlId);
@@ -125,6 +132,44 @@ Page({
 
     that.showModal();
     
+  },
+  tabdept:function(e){
+    console.log(e);
+    this.setData({
+      deptColor: 'red',
+      orgColor: '#000000',
+      showOrgBarStatus: false,
+      view: {
+        height: '100vh'
+      }
+    });
+    this.initDeptData('');
+  },
+  taborg: function (e) {
+    console.log(e);
+    this.setData({
+      deptColor: '#000000',
+      orgColor: 'red',
+      showOrgBarStatus:true,
+      view: {
+        height: '90vh'
+      }
+    });
+    this.initOrgData('01');
+  },
+  tabscaleadd: function (e) {
+    console.log(e);
+    var that = this;
+    that.setData({
+      scale: that.data.scale + 1
+    });
+  },
+  tabscale: function (e) {
+    console.log(e);
+    var that = this;
+    that.setData({
+      scale: that.data.scale - 1
+    });
   },
   //获取经纬度  
   getLocation: function (e) {
@@ -186,9 +231,9 @@ Page({
   onLoad: function (options) {
     var that = this;
     console.log('onLoad');
-    that.showBar()
+    //that.showBar()
     that.getLocation();
-    that.initData('01');
+    that.initDeptData('');
     util.request(cfg.selectOrganizationCategoryList, {},
       function (data) {
         that.setData({
@@ -199,9 +244,9 @@ Page({
   },
   query:function(e){
     console.log(e.currentTarget.id);
-    this.initData(e.currentTarget.id);
+    this.initOrgData(e.currentTarget.id);
   },
-  initData:function(category){
+  initOrgData:function(category){
     var that = this;
     util.request(cfg.selectOrganizationByCategory, { category: category},
       function (data) {
@@ -222,14 +267,36 @@ Page({
         });
       }
     );
+  }, initDeptData: function (category) {
+    var that = this;
+    util.request(cfg.selectDeptByCategory, { category: category },
+      function (data) {
+        var markers = [];
+        for (var i = 0; i < data.length; i++) {
+          var o = data[i];
+          o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
+          o.width = 45;
+          o.title = o.name;
+          o.height = 45;
+          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5/*, display: 'ALWAYS' */ };
+          o.label = { content: o.name };
+          markers.push(o);
+          console.log(o);
+        }
+        that.setData({
+          markers: markers
+        });
+      }
+    );
   },
   showModal: function () {
     // 显示遮罩层
     this.setData({
       showModalStatus: true,
       showBarStatus: false,
+      showOrgBarStatus: false,
       view: {
-        height: '70vh'
+        height: '82vh'
       }
     })
   },
@@ -238,17 +305,18 @@ Page({
     var that=this;
     this.setData({
       showModalStatus: false,
+      showOrgBarStatus: true,
       view: {
         height: '100vh'
       }
     });
-    that.showBar();
+    //that.showBar();
   },
   navigator: function () {
     var that=this;
-    console.log('../organization/index?id=' + that.data.o.id);
+    console.log('../' + that.data.o.types + '/index?id=' + that.data.o.id);
     wx.navigateTo({
-      url: '../organization/index?id=' + that.data.o.id
+      url: '../' + that.data.o.types+'/index?id=' + that.data.o.id
     });
      this.hideModal();
   },
@@ -256,15 +324,23 @@ Page({
     // 显示遮罩层
     this.setData({
       showBarStatus: true,
+      showFloatBoxStatus: false,
+      showOrgBarStatus: false,
+      showMapStatus: false,
       view: {
-        height: '75vh'
+        height: '0vh'
       }
     })
   },
-  hideBar: function () {
+  hideBar: function (e) {
+    console.log(e.currentTarget.id);
+    this.initOrgData(e.currentTarget.id);
     // 隐藏遮罩层
     this.setData({
       showBarStatus: false,
+      showFloatBoxStatus: true,
+      showOrgBarStatus: true,
+      showMapStatus: true,
       view: {
         height: '100vh'
       }
