@@ -152,6 +152,13 @@ public class WWWController extends UfBaseController {
 		return this.deptService.selectDept(id,this.getCurWxUser());
 	}
 
+	@RequestMapping(value = "/selectPersonageListMap.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectPersonageListMap() throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.personageService.selectPersonageListMap();
+	}
+
 
 
 	@RequestMapping(value = "/selectDeptCategoryList.do")

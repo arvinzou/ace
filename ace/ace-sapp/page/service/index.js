@@ -29,6 +29,7 @@ Page({
     showMapStatus: true,
     deptColor:'red',
     orgColor:'#000000',
+    personageColor: '#000000',
     category:'01',
     serverfile: cfg.serverfile,
     view: {
@@ -139,6 +140,7 @@ Page({
     this.setData({
       deptColor: 'red',
       orgColor: '#000000',
+      personageColor: '#000000',
       showOrgBarStatus: false,
       view: {
         height: '100vh'
@@ -151,12 +153,26 @@ Page({
     this.setData({
       deptColor: '#000000',
       orgColor: 'red',
+      personageColor: '#000000',
       showOrgBarStatus:true,
       view: {
         height: '93vh'
       }
     });
     this.initOrgData('01');
+  },
+  tabpersonage: function (e) {
+    console.log(e);
+    this.setData({
+      deptColor: '#000000',
+      orgColor: '#000000',
+      personageColor: 'red',
+      showOrgBarStatus: false,
+      view: {
+        height: '93vh'
+      }
+    });
+    this.initPersonageData();
   },
   tabscaleadd: function (e) {
     console.log(e);
@@ -311,7 +327,29 @@ Page({
           o.title = o.name;
           o.height = 45;
           o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5/*, display: 'ALWAYS' */ };
-          o.label = { content: o.name };
+          //o.label = { content: o.name };
+          markers.push(o);
+          console.log(o);
+        }
+        that.setData({
+          markers: markers
+        });
+      }
+    );
+  },
+  initPersonageData: function () {
+    var that = this;
+    util.request(cfg.selectPersonAgetListMap, {},
+      function (data) {
+        var markers = [];
+        for (var i = 0; i < data.length; i++) {
+          var o = data[i];
+          o.iconPath = "../../image/person.png";
+          o.width = 45;
+          o.title = o.name;
+          o.height = 45;
+          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5/*, display: 'ALWAYS' */ };
+          //o.label = { content: o.name };
           markers.push(o);
           console.log(o);
         }

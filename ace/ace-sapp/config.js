@@ -28,6 +28,7 @@ var config = {
     regUrl: `${server}/portal/www/reg.do`,
     selectDeptList: `${server}/uf/www/selectDeptList.do`,
     selectDeptListMap: `${server}/uf/www/selectDeptListMap.do`,
+    selectPersonAgetListMap: `${server}/uf/www/selectPersonageListMap.do`,
     selectDept: `${server}/uf/www/selectDept.do`,
     selectDeptCategoryList: `${server}/uf/www/selectDeptCategoryList.do`,
     selectDeptByCategory: `${server}/uf/www/selectDeptByCategory.do`,

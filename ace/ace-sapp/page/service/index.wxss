@@ -66,18 +66,17 @@
 }
 .controls {
   position: relative;
-  height: 20px;
-  width: auto;
+  height: 30px;
+  width:  20px;
   padding: 3px;
-  margin-top: 50rpx;
-  margin-left: 550rpx;
+  margin-top: 5px;
+  margin-left: 675rpx;
   margin-right: 20rpx;
-  display: flex;
   background-color: #fff;
   border: 1px solid #fff;
   border-radius: 2px;
-  justify-content: center;
-  opacity: 0.9
+  opacity: 0.9;
+  font-size: 14px;
 }
 .controls-box-a {
   position: relative;

@@ -1,11 +1,11 @@
 <view class="index">
   <map id="map" wx:if="{{showMapStatus}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindcallouttap="callouttap" bindtap="bindtap" bindmarkertap="markertap" polyline="{{polyline}}" circles="{{circles}}"
     bindregionchange="regionchange" show-location="true" style="width: 100%; height: {{view.height}}; ">
-  <cover-view class="controls" wx:if="{{showFloatBoxStatus}}">
-  <cover-view style="color:{{deptColor}}" bindtap="tabdept">统战</cover-view>
-  <cover-view style="padding-left:5px;padding-right:5px"> / </cover-view>
-  <cover-view style="color:{{orgColor}}" bindtap="taborg">服务</cover-view>
-  </cover-view>
+
+  <cover-view class="controls"  wx:if="{{showFloatBoxStatus}}" style="color:{{deptColor}}; writing-mode: vertical-rl;" bindtap="tabdept">单位</cover-view>
+  <cover-view class="controls" wx:if="{{showFloatBoxStatus}}" style="color:{{personageColor}}; writing-mode: vertical-rl;" bindtap="tabpersonage">人士</cover-view>
+  <cover-view class="controls"  wx:if="{{showFloatBoxStatus}}" style="color:{{orgColor}}; writing-mode: vertical-rl;" bindtap="taborg">服务</cover-view>
+
 
   <cover-view class="controls-box-a" bindtap="tabscaleadd" wx:if="{{showFloatBoxStatus}}">
     <cover-image  class="center-img" src="../../image/jiahao.png" mode="aspectFit" />
@@ -30,9 +30,11 @@
         <view style="font-size:14px;" wx:if="{{o.addr.length>0}}">
           <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" />{{o.addr}}
         </view>
-        <view style="font-size:14px" wx:if="{{o.tel.length>0&&o.serviceTimeStart.length>0}}">
-          <image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit" />{{o.tel}}
-          <image class="iconList" src="../../image/time_71.003460207612px_1195888_easyicon.net.png" mode="aspectFit" /> {{o.serviceTimeStart}}-{{o.serviceTimeEnd}}</view>
+        <view style="font-size:14px" >
+          <image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit" wx:if="{{o.tel.length>0}}"/>{{o.tel}}
+          <image class="iconList" src="../../image/time_71.003460207612px_1195888_easyicon.net.png" mode="aspectFit" wx:if="{{o.serviceTimeStart.length>0}}"/> 
+          {{o.serviceTimeStart}}<text wx:if="{{o.serviceTimeStart.length>0}}">-</text>{{o.serviceTimeEnd}}
+       </view>
       </view>
       <view class="navigator-arrow"></view>
     </navigator>

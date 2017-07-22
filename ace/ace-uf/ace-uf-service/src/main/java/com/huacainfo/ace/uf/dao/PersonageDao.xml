@@ -192,5 +192,20 @@
         personage where
         name=#{name} and areaCode=#{areaCode} and mobile=#{mobile}
     </select>
+    <select id="selectPersonageList" resultType="map">
+        SELECT
+        t.id 'id',
+        t.name 'name',
+        b.department_name addr,
+        wx.latitude,
+        wx.longitude,
+        t.mobile tel,
+        'personageSub' types
+        from personage t
+        inner join portal.province a on t.areaCode=a.code
+        inner join portal.department b on t.deptId=b.department_id
+        inner join portal.wx_user wx on t.mobile=wx.mobile
+        where t.status='1'
+    </select>
 
 </mapper>
