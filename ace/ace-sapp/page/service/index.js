@@ -27,9 +27,9 @@ Page({
     showOrgBarStatus: false,
     showFloatBoxStatus: true,
     showMapStatus: true,
-    deptColor:'red',
-    orgColor:'#000000',
-    personageColor: '#000000',
+    deptIcon:'tongzhandw_selected.png',
+    orgIcon:'bangzhu.png',
+    personageIcon: 'tongzhanrs.png',
     category:'01',
     serverfile: cfg.serverfile,
     view: {
@@ -138,9 +138,9 @@ Page({
   tabdept:function(e){
     console.log(e);
     this.setData({
-      deptColor: 'red',
-      orgColor: '#000000',
-      personageColor: '#000000',
+      deptIcon: 'tongzhandw_selected.png',
+      orgIcon: 'bangzhu.png',
+      personageIcon: 'tongzhanrs.png',
       showOrgBarStatus: false,
       view: {
         height: '100vh'
@@ -151,9 +151,9 @@ Page({
   taborg: function (e) {
     console.log(e);
     this.setData({
-      deptColor: '#000000',
-      orgColor: 'red',
-      personageColor: '#000000',
+      deptIcon: 'tongzhandw.png',
+      orgIcon: 'bangzhu_selected.png',
+      personageIcon: 'tongzhanrs.png',
       showOrgBarStatus:true,
       view: {
         height: '93vh'
@@ -164,12 +164,12 @@ Page({
   tabpersonage: function (e) {
     console.log(e);
     this.setData({
-      deptColor: '#000000',
-      orgColor: '#000000',
-      personageColor: 'red',
+      deptIcon: 'tongzhandw.png',
+      orgIcon: 'bangzhu.png',
+      personageIcon: 'tongzhanrs_selected.png',
       showOrgBarStatus: false,
       view: {
-        height: '93vh'
+        height: '100vh'
       }
     });
     this.initPersonageData();
