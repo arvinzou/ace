@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.portal.dao.WxUserDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.WxUser">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.common.model.WxUser">
     <id column="unionId" jdbcType="VARCHAR" property="unionId" />
     <result column="openId" jdbcType="VARCHAR" property="openId" />
     <result column="nickName" jdbcType="VARCHAR" property="nickName" />
@@ -31,7 +31,7 @@
     delete from wx_user
     where unionId = #{unionId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.WxUser">
+  <insert id="insert" parameterType="com.huacainfo.ace.common.model.WxUser">
     insert into wx_user (unionId, openId, nickName, 
       gender, city, province, 
       country, avatarUrl, mobile, 
@@ -41,7 +41,7 @@
       #{country,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{addr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.WxUser">
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.common.model.WxUser">
     update wx_user
     set openId = #{openId,jdbcType=VARCHAR},
       nickName = #{nickName,jdbcType=VARCHAR},
@@ -50,12 +50,17 @@
       province = #{province,jdbcType=VARCHAR},
       country = #{country,jdbcType=VARCHAR},
       avatarUrl = #{avatarUrl,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=VARCHAR},
-      addr = #{addr,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
       latitude =#{latitude,jdbcType=DECIMAL},
       longitude =#{longitude,jdbcType=DECIMAL}
+    where unionId = #{unionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateReg" parameterType="com.huacainfo.ace.common.model.WxUser">
+    update wx_user
+    set
+    mobile = #{mobile,jdbcType=VARCHAR},
+    addr = #{addr,jdbcType=VARCHAR},
+    email = #{email,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR}
     where unionId = #{unionId,jdbcType=VARCHAR}
   </update>
   <select id="isExit" resultType="int">

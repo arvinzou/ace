@@ -42,7 +42,8 @@
     g.`name` careerTypeName,
     h.`name` degreeeName,
     i.`name` academicTitleName,
-    j.`name` rankName
+    j.`name` rankName,
+    wx.mobile bindStatus
     FROM
     personage t
     LEFT JOIN portal.province a ON t.areaCode = a. CODE
@@ -55,6 +56,7 @@
     LEFT JOIN (select code,name from portal.dict where category_id='10')  h ON t.degreee = h. CODE
     LEFT JOIN (select code,name from portal.dict where category_id='99')  i ON t.academicTitle = i. CODE
     LEFT JOIN (select code,name from portal.dict where category_id='100')  j ON t.rank = j. CODE
+    left join portal.wx_user wx on t.mobile=wx.mobile
     where t.id=#{id}
   </select>
 </mapper>

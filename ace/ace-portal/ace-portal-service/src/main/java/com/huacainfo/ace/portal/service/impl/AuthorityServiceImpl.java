@@ -10,8 +10,9 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.portal.model.WxUser;
+import com.huacainfo.ace.common.model.WxUser;
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.Arrays;
@@ -134,6 +135,17 @@ public class AuthorityServiceImpl implements AuthorityService {
 		}
 
 		return null;
+	}
+
+	public  MessageResponse reg(com.huacainfo.ace.common.model.WxUser wxUser) throws Exception{
+		int t=this.wxUserDao.updateReg(wxUser);
+		if(CommonUtils.isBlank(wxUser.getMobile())){
+			return new MessageResponse(1,"手机号不能为空。");
+		}
+		if(CommonUtils.isBlank(wxUser.getName())){
+			return new MessageResponse(1,"姓名不能为空。");
+		}
+		return new MessageResponse(0,"成功。");
 	}
 
 	public static void main(String args[]) throws Exception {

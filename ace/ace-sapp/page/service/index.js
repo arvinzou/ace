@@ -20,6 +20,7 @@ Page({
   },
   data: {
     hasLocation: false,
+    circlesStatus:false,
     scale:16,
     showModalStatus: false,
     showBarStatus:false,
@@ -184,16 +185,39 @@ Page({
         that.setData({
           latitude: latitude,
           longitude: longitude,
-          scale: 16,
-          circles: [{
-            latitude: res.latitude,
-            longitude: res.longitude,
-            color: '#FF0000DD',
-            fillColor: '#7cb5ec88',
-            radius: 500,
-            strokeWidth: 1
-          }]
+          scale: 16
         })
+      }
+    })
+  },
+  getCircles: function (e) {
+    console.log(e)
+    var that = this
+    wx.getLocation({
+      success: function (res) {
+        var latitude = res.latitude;
+        var longitude = res.longitude;
+        var speed = res.speed;
+        var accuracy = res.accuracy;
+        var cir = [{
+          latitude: res.latitude,
+          longitude: res.longitude,
+          color: '#FF0000DD',
+          fillColor: '#7cb5ec88',
+          radius: 500,
+          strokeWidth: 1
+        }];
+        if (!that.data.circlesStatus){
+          cir=[];
+        }
+        that.setData({
+          latitude: latitude,
+          longitude: longitude,
+          scale: 16,
+          circles: cir,
+          circlesStatus: !that.data.circlesStatus
+        })
+
       }
     })
   },

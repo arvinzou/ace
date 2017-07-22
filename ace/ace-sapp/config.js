@@ -25,6 +25,7 @@ var config = {
     appsecret: 'd520d29f8c26c7e3885d80b1812a8d91',
     areaCode:'430702',
     uploadUrl: `${server}/portal/www/uploadFile.do`,
+    regUrl: `${server}/portal/www/reg.do`,
     selectDeptList: `${server}/uf/www/selectDeptList.do`,
     selectDeptListMap: `${server}/uf/www/selectDeptListMap.do`,
     selectDept: `${server}/uf/www/selectDept.do`,

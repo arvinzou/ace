@@ -10,7 +10,9 @@
     "page/me/index",
     "page/map/index",
     "page/deptSub/index",
-    "page/personageSub/index"
+    "page/personageSub/index",
+    "page/reg/index",
+    "page/regInfo/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

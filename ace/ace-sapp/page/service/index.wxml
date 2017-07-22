@@ -17,7 +17,9 @@
  <cover-view class="controls-box-c" bindtap="getLocation" wx:if="{{showFloatBoxStatus}}">
      <cover-image  class="center-img" src="../../image/mylocation.png" mode="aspectFit" />
   </cover-view>
-
+ <cover-view class="controls-box-d" bindtap="getCircles" wx:if="{{showFloatBoxStatus}}">
+     <cover-image  class="center-img" src="../../image/cir.png" mode="aspectFit" />
+  </cover-view>
   </map>
 
   <view class="attr_box" wx:if="{{showModalStatus}}">
