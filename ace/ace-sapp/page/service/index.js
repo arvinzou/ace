@@ -326,7 +326,7 @@ Page({
           o.width = 45;
           o.title = o.name;
           o.height = 45;
-          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5/*, display: 'ALWAYS' */ };
+          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS' };
           //o.label = { content: o.name };
           markers.push(o);
           console.log(o);
@@ -348,7 +348,7 @@ Page({
           o.width = 45;
           o.title = o.name;
           o.height = 45;
-          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5/*, display: 'ALWAYS' */ };
+          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS'  };
           //o.label = { content: o.name };
           markers.push(o);
           console.log(o);

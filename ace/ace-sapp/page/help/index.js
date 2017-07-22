@@ -68,7 +68,7 @@ Page({
     });
   },
   onLoad: function () {
-    this.autoLogin();
+    this.initData('');
   },
   initData: function (inputVal){
     var that = this;
@@ -79,34 +79,5 @@ Page({
         });
       }
     );
-  },
-  autoLogin:function () {
-    var that = this;
-    wx.login({
-      success: function (o) {
-        wx.getUserInfo({
-          success: function (res) {
-            wx.request({
-              url: cfg.loginUrl,
-              data: {
-                appid: cfg.appid,
-                appsecret: cfg.appsecret,
-                code: o.code,
-                encryptedData: res.encryptedData,
-                iv: res.iv
-              },
-              success: function (res) {
-                wx.setStorageSync('WX-SESSION-ID', res.data.value['3rd_session']);
-                console.log('login success', result);
-                that.initData('');
-              },
-              fail: function ({errMsg}) {
-                console.log('request fail', errMsg)
-              }
-            })
-          }
-        })
-      }
-    })
   }
 })
