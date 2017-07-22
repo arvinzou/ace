@@ -4,6 +4,8 @@
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-app/ios/Portal/App" afterPath="$PROJECT_DIR$/ace-app/ios/Portal/App" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/service/index.wxml" afterPath="$PROJECT_DIR$/ace-sapp/page/service/index.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/service/index.wxss" afterPath="$PROJECT_DIR$/ace-sapp/page/service/index.wxss" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -1522,13 +1524,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00149" summary="统战小程序-建言献策">
-      <created>1498299211131</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1498299211132</updated>
-    </task>
     <task id="LOCAL-00150" summary="统战小程序-建言献策">
       <created>1498312373339</created>
       <option name="number" value="00150" />
@@ -1865,7 +1860,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500720117064</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="统战机构">
+      <created>1500720905619</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1500720905619</updated>
+    </task>
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">

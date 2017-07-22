@@ -3,28 +3,36 @@
     bindregionchange="regionchange" show-location="true" style="width: 100%; height: {{view.height}}; ">
 
   <cover-view class="controls"  wx:if="{{showFloatBoxStatus}}" bindtap="tabdept">
-  <cover-image  class="center-img" src="../../image/{{deptIcon}}" mode="aspectFit" />
+    <cover-image  class="center-img" src="../../image/{{deptIcon}}" mode="aspectFit" />
+    <cover-view class="center-text">单位</cover-view>
   </cover-view>
+
   <cover-view class="controls" wx:if="{{showFloatBoxStatus}}"  bindtap="tabpersonage">
   <cover-image  class="center-img" src="../../image/{{personageIcon}}" mode="aspectFit" />
+   <cover-view class="center-text">人士</cover-view>
   </cover-view>
   <cover-view class="controls"  wx:if="{{showFloatBoxStatus}}" bindtap="taborg">
   <cover-image  class="center-img" src="../../image/{{orgIcon}}" mode="aspectFit" />
+   <cover-view class="center-text">服务</cover-view>
   </cover-view>
 
 
-  <cover-view class="controls-box-a" bindtap="tabscaleadd" wx:if="{{showFloatBoxStatus}}">
+  <cover-view class="controls" bindtap="tabscaleadd" wx:if="{{showFloatBoxStatus}}">
     <cover-image  class="center-img" src="../../image/jiahao.png" mode="aspectFit" />
+     <cover-view class="center-text">放大</cover-view>
    </cover-view>
    
-  <cover-view class="controls-box-b" bindtap="tabscale" wx:if="{{showFloatBoxStatus}}">
+  <cover-view class="controls" bindtap="tabscale" wx:if="{{showFloatBoxStatus}}">
     <cover-image  class="center-img" src="../../image/jianhao.png" mode="aspectFit" />
+     <cover-view class="center-text">缩小</cover-view>
   </cover-view>
- <cover-view class="controls-box-c" bindtap="getLocation" wx:if="{{showFloatBoxStatus}}">
+ <cover-view class="controls" bindtap="getLocation" wx:if="{{showFloatBoxStatus}}">
      <cover-image  class="center-img" src="../../image/mylocation.png" mode="aspectFit" />
+      <cover-view class="center-text">定位</cover-view>
   </cover-view>
- <cover-view class="controls-box-d" bindtap="getCircles" wx:if="{{showFloatBoxStatus}}">
+ <cover-view class="controls" bindtap="getCircles" wx:if="{{showFloatBoxStatus}}">
      <cover-image  class="center-img" src="../../image/cir.png" mode="aspectFit" />
+      <cover-view class="center-text">周边</cover-view>
   </cover-view>
   </map>
 
