@@ -18,39 +18,45 @@ Page({
       }
     }
   },
+  onReady: function (e) {    // 使用 wx.createMapContext 获取 map 上下文 
+    this.mapCtx = wx.createMapContext('myMap')
+  },
   data: {
     hasLocation: false,
-    circlesStatus:false,
-    scale:16,
+    circlesStatus: false,
+    scale: 16,
+    includePointsStatus:true,
     showModalStatus: false,
-    showBarStatus:false,
+    showBarStatus: false,
     showOrgBarStatus: false,
     showFloatBoxStatus: true,
     showMapStatus: true,
-    deptIcon:'tongzhandw_selected.png',
-    orgIcon:'bangzhu.png',
+    activeTarget:'dept',
+    deptIcon: 'tongzhandw_selected.png',
+    orgIcon: 'bangzhu.png',
     personageIcon: 'tongzhanrs.png',
-    category:'01',
+    category: '01',
     serverfile: cfg.serverfile,
+    lastChange: new Date().getTime(),
     view: {
       height: '100vh'
     },
     list: [
     ],
-    listCategory:[],
+    listCategory: [],
     latitude: 29.031673,
     longitude: 111.698497,
-
+    includePoints: [],
     markers: [{
       iconPath: "../../image/jigou.png",
       id: '977577',
-      title:'久久鸭脖中心店',
-      types:'1',
+      title: '久久鸭脖中心店',
+      types: '1',
       latitude: 29.031673,
       longitude: 111.698497,
       width: 35,
       height: 45,
-      callout: { content: "久久鸭脖中心店", color:"#000000", fontSize: 14, borderRadius: 5, bgColor: "", padding: 10, display:'ALWAYS'}
+      callout: { content: "久久鸭脖中心店", color: "#000000", fontSize: 14, borderRadius: 5, bgColor: "", padding: 10, display: 'ALWAYS' }
       //label: { color: "#000000", fontSize: 20, content:"久久鸭脖中心店", x:2, y:3}
     }],
     polyline: [{
@@ -76,18 +82,7 @@ Page({
       radius: 400,
       strokeWidth: 2
     }],
-    controls: [/*{
-      id: 1,
-      iconPath: '../../image/locationto.png',
-      position: {
-        top: 10,
-        left: 10,
-        width: 50,
-        height: 50
-      },
-
-      clickable: true
-    }*/]
+    controls: []
   },
   controltap: function (e) {
     console.log(e.controlId);
@@ -98,9 +93,54 @@ Page({
     var that = this;
     that.hideModal();
   },
-  regionchange:function(e){
-    console.log("regionchange click");
+  regionchange: function (e) {
+    var that = this;
+   
+    var now = new Date();
+    var lastChange = that.data.lastChange;
+    console.log(lastChange);
+    var av = now.getTime() - lastChange  //时间差的毫秒数
+    //移动结束，找到视野中心点重新加载
+    console.log(av);
+    if(av>1000){
+      that.getCenterLocation();
+    }
+    that.setData({
+      lastChange: new Date().getTime()
+    })
   },
+  getCenterLocation: function () {
+    var that = this;
+    this.mapCtx.getCenterLocation({
+      success: function (res) {
+        console.log(res.longitude);
+        console.log(res.latitude);
+        if (res.latitude != that.data.latitude){
+          that.setData({
+            latitude: res.latitude,
+            longitude: res.longitude,
+            includePointsStatus:false
+          })
+          that.reloadData();
+         
+        }
+        
+      }
+    })
+  },
+  reloadData:function(){
+    var that=this;
+    if (that.data.activeTarget == 'dept') {
+      that.initDeptData();
+    }
+    if (that.data.activeTarget == 'org') {
+      that.initOrgData();
+    }
+    if (that.data.activeTarget == 'personage') {
+      that.initPersonageData();
+    }
+  }
+  ,
   callouttap: function (e) {
     console.log("callouttap click");
     console.log(e);
@@ -131,22 +171,22 @@ Page({
         });
       }
     }
-
     that.showModal();
-    
   },
-  tabdept:function(e){
+  tabdept: function (e) {
     console.log(e);
     this.setData({
       deptIcon: 'tongzhandw_selected.png',
       orgIcon: 'bangzhu.png',
       personageIcon: 'tongzhanrs.png',
       showOrgBarStatus: false,
+      activeTarget: 'dept',
+      includePointsStatus:true,
       view: {
         height: '100vh'
       }
     });
-    this.initDeptData('');
+    this.initDeptData();
   },
   taborg: function (e) {
     console.log(e);
@@ -154,12 +194,14 @@ Page({
       deptIcon: 'tongzhandw.png',
       orgIcon: 'bangzhu_selected.png',
       personageIcon: 'tongzhanrs.png',
-      showOrgBarStatus:true,
+      activeTarget: 'org',
+      showOrgBarStatus: true,
+      includePointsStatus: true,
       view: {
         height: '93vh'
       }
     });
-    this.initOrgData('01');
+    this.initOrgData();
   },
   tabpersonage: function (e) {
     console.log(e);
@@ -168,6 +210,8 @@ Page({
       orgIcon: 'bangzhu.png',
       personageIcon: 'tongzhanrs_selected.png',
       showOrgBarStatus: false,
+      includePointsStatus: true,
+      activeTarget: 'personage',
       view: {
         height: '100vh'
       }
@@ -203,6 +247,7 @@ Page({
           longitude: longitude,
           scale: 16
         })
+        that.reloadData();
       }
     })
   },
@@ -223,8 +268,8 @@ Page({
           radius: 500,
           strokeWidth: 1
         }];
-        if (!that.data.circlesStatus){
-          cir=[];
+        if (!that.data.circlesStatus) {
+          cir = [];
         }
         that.setData({
           latitude: latitude,
@@ -263,10 +308,8 @@ Page({
         })
       },
       fail: function () {
-        // fail  
       },
       complete: function () {
-        // complete  
       }
     })
   },
@@ -279,9 +322,8 @@ Page({
   onLoad: function (options) {
     var that = this;
     console.log('onLoad');
-    //that.showBar()
     that.getLocation();
-    that.initDeptData('');
+    that.initDeptData();
     util.request(cfg.selectOrganizationCategoryList, {},
       function (data) {
         that.setData({
@@ -290,34 +332,42 @@ Page({
       }
     );
   },
-  query:function(e){
-    console.log(e.currentTarget.id);
-    this.initOrgData(e.currentTarget.id);
-  },
-  initOrgData:function(category){
+  initOrgData: function () {
     var that = this;
-    util.request(cfg.selectOrganizationByCategory, { category: category},
+    util.request(cfg.selectOrganizationByCategory, { category: that.data.category, longitude: that.data.longitude, latitude: that.data.latitude },
       function (data) {
         var markers = [];
+        var includePoints = [];
         for (var i = 0; i < data.length; i++) {
           var o = data[i];
-           o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
+          o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
           o.width = 45;
           o.title = o.name;
           o.height = 45;
-          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS'  };
+          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS' };
           //o.label = { content: o.name, color: "#696969", fontSize:14 };
           markers.push(o);
+          includePoints.push({
+            longitude: o.longitude,
+            latitude: o.latitude
+          });
           console.log(o);
         }
+        if (!that.data.includePointsStatus){
+          includePoints.length = 0;
+        }
         that.setData({
-          markers: markers
+          markers: markers,
+          includePoints: includePoints
         });
       }
     );
-  }, initDeptData: function (category) {
+  },
+  
+  initDeptData: function () {
     var that = this;
-    util.request(cfg.selectDeptByCategory, { category: category },
+    var includePoints = [];
+    util.request(cfg.selectDeptListMap, { longitude: that.data.longitude, latitude: that.data.latitude },
       function (data) {
         var markers = [];
         for (var i = 0; i < data.length; i++) {
@@ -329,17 +379,29 @@ Page({
           o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS' };
           //o.label = { content: o.name };
           markers.push(o);
-          console.log(o);
+          includePoints.push({
+            longitude: o.longitude,
+            latitude: o.latitude
+          });
+          console.log({
+            longitude: o.longitude,
+            latitude: o.latitude
+          });
+        }
+        if (!that.data.includePointsStatus) {
+          includePoints.length = 0;
         }
         that.setData({
-          markers: markers
+          markers: markers,
+          includePoints: includePoints
         });
       }
     );
   },
   initPersonageData: function () {
     var that = this;
-    util.request(cfg.selectPersonAgetListMap, {},
+    var includePoints = [];
+    util.request(cfg.selectPersonAgetListMap, { longitude: that.data.longitude, latitude: that.data.latitude },
       function (data) {
         var markers = [];
         for (var i = 0; i < data.length; i++) {
@@ -348,13 +410,21 @@ Page({
           o.width = 45;
           o.title = o.name;
           o.height = 45;
-          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS'  };
+          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS' };
           //o.label = { content: o.name };
           markers.push(o);
+          includePoints.push({
+            longitude: o.longitude,
+            latitude: o.latitude
+          });
           console.log(o);
         }
+        if (!that.data.includePointsStatus) {
+          includePoints.length = 0;
+        }
         that.setData({
-          markers: markers
+          markers: markers,
+          includePoints: includePoints
         });
       }
     );
@@ -372,7 +442,7 @@ Page({
   },
   hideModal: function () {
     // 隐藏遮罩层
-    var that=this;
+    var that = this;
     this.setData({
       showModalStatus: false,
       showOrgBarStatus: true,
@@ -383,12 +453,12 @@ Page({
     //that.showBar();
   },
   navigator: function () {
-    var that=this;
+    var that = this;
     console.log('../' + that.data.o.types + '/index?id=' + that.data.o.id);
     wx.navigateTo({
-      url: '../' + that.data.o.types+'/index?id=' + that.data.o.id
+      url: '../' + that.data.o.types + '/index?id=' + that.data.o.id
     });
-     this.hideModal();
+    this.hideModal();
   },
   showBar: function () {
     // 显示遮罩层
@@ -404,17 +474,21 @@ Page({
   },
   hideBar: function (e) {
     console.log(e.currentTarget.id);
-    this.initOrgData(e.currentTarget.id);
     // 隐藏遮罩层
     this.setData({
       showBarStatus: false,
       showFloatBoxStatus: true,
       showOrgBarStatus: true,
       showMapStatus: true,
+      category: e.currentTarget.id,
       view: {
         height: '100vh'
       }
     });
+    this.initOrgData();
+  },
+  bindregionchange: function (e) {
+    console.log(e);
   }
 })
 

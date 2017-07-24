@@ -200,12 +200,103 @@
         wx.latitude,
         wx.longitude,
         t.mobile tel,
-        'personageSub' types
+        'personageSub' types,
+        (POWER(MOD(ABS(wx.longitude - #{longitude,jdbcType=DECIMAL}),360),2) + POWER(ABS(wx.latitude - #{latitude,jdbcType=DECIMAL}),2)) AS distance
         from personage t
         inner join portal.province a on t.areaCode=a.code
         inner join portal.department b on t.deptId=b.department_id
         inner join portal.wx_user wx on t.mobile=wx.mobile
+        where t.status='1' and wx.latitude is not null and wx.longitude is not null
+        ORDER BY distance LIMIT 50
+    </select>
+
+    <select id="selectPersonageCategoryList" resultType="map">
+        SELECT
+        CODE 'id',
+        NAME 'name',
+        remark 'icon'
+        FROM
+        portal.dict
+        WHERE
+        category_id = '98'
+    </select>
+
+    <select id="selectPersonageListByText" resultType="map">
+        select t.id, t.name, t.category,t.photo, t.mobile,
+        a.name areaName,b.department_name deptName,c.fullname placeOfOriginName,dict.name categoryName,
+        IFNULL(wx.mobile,'0') bindStatus
+        from personage t
+        inner join portal.province a on t.areaCode=a.code
+        inner join portal.department b on t.deptId=b.department_id
+        left join portal.province c on t.placeOfOrigin=c.code
+        inner join (select code,name from portal.dict where category_id='98') dict on t.category=dict.code
+        left join portal.wx_user wx on t.mobile=wx.mobile
         where t.status='1'
+        <if test='q!=null and q!=""'>
+            and t.name like
+            concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+
+    <select id="selectPersonageById" resultType="map">
+        SELECT
+        t.id,
+        t.areaCode,
+        t.deptId,
+        d.name categoryName,
+        t.category,
+        t. NAME 'name',
+        t.sex,
+        t.birthday,
+        date_format(t.birthday, '%Y-%m-%d') birthdayName,
+        t.photo,
+        t.placeOfOrigin,
+        t.nation,
+        f.name partyName,
+        e.name nationName,
+        t.degreee,
+        t.academicTitle,
+        t.rank,
+        t.party,
+        t.joinDate,
+        date_format(t.joinDate, '%Y-%m-%d') joinDateName,
+        t.administrativeDuty,
+        t.currentPostDate,
+        date_format(t.currentPostDate, '%Y-%m-%d') currentPostDateName,
+        t.currentRankDate,
+        date_format(t.currentRankDate, '%Y-%m-%d') currentRankDateName,
+        t.mobile,
+        t.tel,
+        t.pcode,
+        t.latitude,
+        t.longitude,
+        t.remark,
+        t.intro,
+        a. NAME areaName,
+        b.department_name deptName,
+        c.fullname placeOfOriginName,
+        t.careerType,
+        g.`name` careerTypeName,
+        h.`name` degreeeName,
+        i.`name` academicTitleName,
+        j.`name` rankName,
+        wx.mobile bindStatus,
+        wx.avatarUrl,
+        wx.nickName
+        FROM
+        personage t
+        LEFT JOIN portal.province a ON t.areaCode = a. CODE
+        LEFT JOIN portal.department b ON t.deptId = b.department_id
+        LEFT JOIN portal.province c ON t.placeOfOrigin = c. CODE
+        LEFT JOIN (select code,name from portal.dict where category_id='98')  d ON t.category = d. CODE
+        LEFT JOIN (select code,name from portal.dict where category_id='09')  e ON t.nation = e. CODE
+        LEFT JOIN (select code,name from portal.dict where category_id='101')  f ON t.party = f. CODE
+        LEFT JOIN (select code,name from portal.dict where category_id='102')  g ON t.careerType = g. CODE
+        LEFT JOIN (select code,name from portal.dict where category_id='10')  h ON t.degreee = h. CODE
+        LEFT JOIN (select code,name from portal.dict where category_id='99')  i ON t.academicTitle = i. CODE
+        LEFT JOIN (select code,name from portal.dict where category_id='100')  j ON t.rank = j. CODE
+        left join portal.wx_user wx on t.mobile=wx.mobile
+        where t.id=#{id}
     </select>
 
 </mapper>

@@ -150,6 +150,29 @@
         latitude,
         longitude,
         tel,serviceTimeStart,
+        serviceTimeEnd,
+        (POWER(MOD(ABS(longitude - #{longitude,jdbcType=DECIMAL}),360),2) + POWER(ABS(latitude - #{latitude,jdbcType=DECIMAL}),2)) AS distance,
+        'organization' types
+        FROM
+        organization
+        WHERE latitude is not null and longitude is not null
+        <if test='q!=null and q!=""'>
+            and name like
+            concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
+        and STATUS = '1'
+        ORDER BY distance LIMIT 50
+    </select>
+    <select id="selectOrganizationListByText" resultType="map">
+        SELECT
+        id 'id',
+        name 'name',
+        category,
+        icon,
+        addr,
+        latitude,
+        longitude,
+        tel,serviceTimeStart,
         serviceTimeEnd
         FROM
         organization

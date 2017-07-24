@@ -11,7 +11,7 @@ public interface DeptService {
 
 	public  Map<String,Object> selectDept(String id, WxUser user) throws Exception;
 
-	public  List<Map<String,Object>> selectDeptListMap(WxUser user) throws Exception;
+	public  List<Map<String,Object>> selectDeptListMap(WxUser user,String longitude,String latitude) throws Exception;
 
 	public  List<Map<String,Object>> selectAreaCodeList(String areaCode, WxUser user) throws Exception;
 

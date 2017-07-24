@@ -161,11 +161,11 @@
     border: 1px solid #ddd;
 }
 .title-strong-big1{
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 800;
 }
 .title-strong-big2{
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
 }
 .weui-flex__item_icon {

@@ -1,7 +1,6 @@
 <view class="index">
-  <map id="map" wx:if="{{showMapStatus}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindcallouttap="callouttap" bindtap="bindtap" bindmarkertap="markertap" polyline="{{polyline}}" circles="{{circles}}"
-    bindregionchange="regionchange" show-location="true" style="width: 100%; height: {{view.height}}; ">
-
+  <map id="myMap" wx:if="{{showMapStatus}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindcallouttap="callouttap" bindtap="bindtap" bindmarkertap="markertap" polyline="{{polyline}}" circles="{{circles}}"
+    bindregionchange="regionchange" show-location style="width: 100%; height: {{view.height}}; " include-points="{{includePoints}}">
   <cover-view class="controls"  wx:if="{{showFloatBoxStatus}}" bindtap="tabdept">
     <cover-image  class="center-img" src="../../image/{{deptIcon}}" mode="aspectFit" />
     <cover-view class="center-text">单位</cover-view>
@@ -34,6 +33,11 @@
      <cover-image  class="center-img" src="../../image/cir.png" mode="aspectFit" />
       <cover-view class="center-text">周边</cover-view>
   </cover-view>
+  <!--
+   <cover-view class="controls-center">
+      <cover-view>{{longitude}},{{latitude}}</cover-view>
+  </cover-view>
+  -->
   </map>
 
   <view class="attr_box" wx:if="{{showModalStatus}}">

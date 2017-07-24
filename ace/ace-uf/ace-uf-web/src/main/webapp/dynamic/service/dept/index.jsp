@@ -52,7 +52,7 @@
 							name="departmentName" type="text" maxlength="20"
 							style="width: 200px; height: 25px;" />
 						<button class="btn btn-info" id="btn-search"
-							authority="${pageContext.request.contextPath}/department/findDepartmentList.do">
+							authority="${portalPath}/department/findDepartmentList.do">
 							<i
 								class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
 						</button>

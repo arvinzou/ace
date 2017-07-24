@@ -2,13 +2,11 @@
   "pages": [
     "page/dept/index",
     "page/personage/index",
-    "page/help/index",
+    "page/activity/index",
     "page/service/index",
     "page/feedback/index",
     "page/organization/index",
     "page/info/index",
-    "page/me/index",
-    "page/map/index",
     "page/deptSub/index",
     "page/personageSub/index",
     "page/reg/index",
@@ -39,16 +37,16 @@
         "text": "统战人士"
       },
       {
-        "pagePath": "page/help/index",
-        "iconPath": "image/bangzhu.png",
-        "selectedIconPath": "image/bangzhu_selected.png",
-        "text": "统战服务"
+        "pagePath": "page/activity/index",
+        "iconPath": "image/huodong.png",
+        "selectedIconPath": "image/huodong_selected.png",
+        "text": "统战活动"
       },
       {
         "pagePath": "page/service/index",
         "iconPath": "image/zhoubian.png",
         "selectedIconPath": "image/zhoubian_selected.png",
-        "text": "GIS统战"
+        "text": "统战GIS"
       },
       {
         "pagePath": "page/feedback/index",

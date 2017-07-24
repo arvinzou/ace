@@ -48,7 +48,7 @@ public class WWWController extends UfBaseController {
 	private RedisOperations<String, Object> redisTemplate;
 
 	private String[] areas;
-
+	/*统战服务*/
 	@RequestMapping(value = "/selectOrganizationList.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectOrganizationList(String q) throws Exception {
@@ -57,18 +57,28 @@ public class WWWController extends UfBaseController {
 	}
 	@RequestMapping(value = "/selectOrganizationListMap.do")
 	@ResponseBody
-	public List<Map<String,Object>> selectOrganizationListMap() throws Exception {
+	public List<Map<String,Object>> selectOrganizationListMap(String longitude,String latitude) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
-		return this.organizationService.selectOrganizationListMap(this.getCurWxUser());
+		return this.organizationService.selectOrganizationListMap(this.getCurWxUser(),longitude,latitude);
 	}
-
+	@RequestMapping(value = "/selectOrganizationCategoryList.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectOrganizationCategoryList() throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.organizationService.selectOrganizationCategoryList(this.getCurWxUser());
+	}
 	@RequestMapping(value = "/selectOrganization.do")
 	@ResponseBody
 	public Map<String,Object> selectOrganization(String id) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.organizationService.selectOrganization(id,this.getCurWxUser());
 	}
-
+	@RequestMapping(value = "/selectOrganizationByCategory.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectOrganizationByCategory(String category) throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.organizationService.selectOrganizationByCategory(category,this.getCurWxUser());
+	}
 	@RequestMapping(value = "/selectAreaCodeList.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectAreaCodeList(String areaCode) throws Exception {
@@ -82,7 +92,7 @@ public class WWWController extends UfBaseController {
 		}
 		return list;
 	}
-
+	/*建言献策*/
 	@RequestMapping(value = "/insertFeedback.do")
 	@ResponseBody
 	public MessageResponse insertFeedback(Feedback obj,String captcha) throws Exception {
@@ -101,20 +111,6 @@ public class WWWController extends UfBaseController {
 		return this.feedbackService
 				.insertFeedback(obj, this.getCurUserProp());
 	}
-
-	@RequestMapping(value = "/selectOrganizationCategoryList.do")
-	@ResponseBody
-	public List<Map<String,Object>> selectOrganizationCategoryList() throws Exception {
-		this.logger.debug("{}",this.getCurWxUser());
-		return this.organizationService.selectOrganizationCategoryList(this.getCurWxUser());
-	}
-
-	@RequestMapping(value = "/selectOrganizationByCategory.do")
-	@ResponseBody
-	public List<Map<String,Object>> selectOrganizationByCategory(String category) throws Exception {
-		this.logger.debug("{}",this.getCurWxUser());
-		return this.organizationService.selectOrganizationByCategory(category,this.getCurWxUser());
-	}
 	@RequestMapping(value = "/query.do")
 	@ResponseBody
 	public ListResult<Map<String,Object>> query(
@@ -130,8 +126,7 @@ public class WWWController extends UfBaseController {
 		return analysisService.query(condition, reportId, start, limit);
 	}
 
-	/*
-	* 统战机构****************/
+	/*统战机构*/
 	@RequestMapping(value = "/selectDeptList.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectDeptList(String q,String areaCode) throws Exception {
@@ -140,11 +135,10 @@ public class WWWController extends UfBaseController {
 	}
 	@RequestMapping(value = "/selectDeptListMap.do")
 	@ResponseBody
-	public List<Map<String,Object>> selectDeptListMap() throws Exception {
+	public List<Map<String,Object>> selectDeptListMap(String longitude,String latitude) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
-		return this.deptService.selectDeptListMap(this.getCurWxUser());
+		return this.deptService.selectDeptListMap(this.getCurWxUser(),longitude,latitude);
 	}
-
 	@RequestMapping(value = "/selectDept.do")
 	@ResponseBody
 	public Map<String,Object> selectDept(String id) throws Exception {
@@ -152,26 +146,23 @@ public class WWWController extends UfBaseController {
 		return this.deptService.selectDept(id,this.getCurWxUser());
 	}
 
+	/*统战人士*/
 	@RequestMapping(value = "/selectPersonageListMap.do")
 	@ResponseBody
-	public List<Map<String,Object>> selectPersonageListMap() throws Exception {
+	public List<Map<String,Object>> selectPersonageListMap(String longitude,String latitude) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
-		return this.personageService.selectPersonageListMap();
+		return this.personageService.selectPersonageListMap(longitude,latitude);
 	}
-
-
-
-	@RequestMapping(value = "/selectDeptCategoryList.do")
+	@RequestMapping(value = "/selectPersonageList.do")
 	@ResponseBody
-	public List<Map<String,Object>> selectDeptCategoryList(String areaCode) throws Exception {
+	public List<Map<String,Object>> selectPersonageList(String q) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
-		return this.deptService.selectDeptCategoryList(this.getCurWxUser(),areaCode);
+		return this.personageService.selectPersonageList(q,this.getCurWxUser());
 	}
-
-	@RequestMapping(value = "/selectDeptByCategory.do")
+	@RequestMapping(value = "/selectPersonage.do")
 	@ResponseBody
-	public List<Map<String,Object>> selectDeptByCategory(String category) throws Exception {
+	public Map<String,Object> selectPersonage(String id) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
-		return this.deptService.selectDeptByCategory(category,this.getCurWxUser());
+		return this.personageService.selectPersonageById(id);
 	}
 }

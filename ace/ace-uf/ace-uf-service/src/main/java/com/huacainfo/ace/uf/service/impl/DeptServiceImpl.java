@@ -29,7 +29,7 @@ public class DeptServiceImpl implements DeptService {
 	public  List<Map<String,Object>> selectDeptList(String q,WxUser user,String areaCode) throws Exception{
 
 		List<Map<String,Object>> category=this.deptDao.selectDeptCategoryList(areaCode);
-		List<Map<String,Object>> list=this.deptDao.selectDeptList(q);
+		List<Map<String,Object>> list=this.deptDao.selectDeptListByText(q);
 		int i=0;
 		if(CommonUtils.isNotBlank(q)){
 			category=new ArrayList<Map<String,Object>>();
@@ -54,8 +54,8 @@ public class DeptServiceImpl implements DeptService {
 		}
 		return category;
 	}
-	public  List<Map<String,Object>> selectDeptListMap(WxUser user) throws Exception{
-		return this.deptDao.selectDeptList("");
+	public  List<Map<String,Object>> selectDeptListMap(WxUser user,String longitude,String latitude) throws Exception{
+		return this.deptDao.selectDeptList("",longitude,latitude);
 	}
 	private List<Map<String,Object>> getGroupDept(String category,List<Map<String,Object>> list){
 		List<Map<String,Object>> rst=new ArrayList<Map<String,Object>>();

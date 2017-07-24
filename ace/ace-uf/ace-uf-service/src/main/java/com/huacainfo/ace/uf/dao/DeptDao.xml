@@ -6,11 +6,11 @@
         SELECT
         CODE 'id',
         NAME 'name',
-        null   'icon'
+        remark 'icon'
         FROM
-        portal.province
+        portal.dict
         WHERE
-        parent_code = #{areaCode}
+        category_id = '04'
     </select>
 
     <select id="selectDeptList" resultType="map">
@@ -23,10 +23,33 @@
         longitude,
         contact_tel tel,
         serviceTimeStart,
+        serviceTimeEnd,
+        (POWER(MOD(ABS(longitude - #{longitude,jdbcType=DECIMAL}),360),2) + POWER(ABS(latitude - #{latitude,jdbcType=DECIMAL}),2)) AS distance,
+        'deptSub' types
+        from
+        portal.department
+        WHERE latitude is not null and longitude is not null
+        <if test='q!=null and q!=""'>
+            and department_name like
+            concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
+        and status = '1'
+        ORDER BY distance LIMIT 50
+    </select>
+    <select id="selectDeptListByText" resultType="map">
+        select
+        department_id 'id',
+        department_name 'name',
+        type category,
+        reg_addr addr,
+        latitude,
+        longitude,
+        contact_tel tel,
+        serviceTimeStart,
         serviceTimeEnd
         from
         portal.department
-        WHERE 0=0
+        WHERE department_id like '00010002%'
         <if test='q!=null and q!=""'>
             and department_name like
             concat('%',#{q,jdbcType=VARCHAR},'%')
@@ -99,7 +122,7 @@
         select
         department_id 'id',
         department_name 'name',
-        category,
+        type category,
         reg_addr addr,
         latitude,
         longitude,
@@ -110,10 +133,6 @@
         from
         portal.department
         WHERE 0=0
-        <if test='category!=null and category!=""'>
-            category=#{category}
-        </if>
-
         and STATUS = '1'
     </select>
 </mapper>

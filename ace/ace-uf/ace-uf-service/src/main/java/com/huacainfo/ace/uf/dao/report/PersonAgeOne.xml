@@ -43,7 +43,9 @@
     h.`name` degreeeName,
     i.`name` academicTitleName,
     j.`name` rankName,
-    wx.mobile bindStatus
+    wx.mobile bindStatus,
+    wx.avatarUrl,
+    wx.nickName
     FROM
     personage t
     LEFT JOIN portal.province a ON t.areaCode = a. CODE
