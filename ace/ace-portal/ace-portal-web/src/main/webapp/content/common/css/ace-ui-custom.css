@@ -439,3 +439,7 @@ input[type="checkbox"].ace.ace-switch + .lbl::after {
     border-radius: 100%;
     transition: left 0.3s ease;
 }
+.ui-jqdialog-content, .ui-jqdialog .ui-jqdialog-content {
+    font-size: 13px;
+    padding: 15px 15px 15px 15px;
+}

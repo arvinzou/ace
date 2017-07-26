@@ -8,6 +8,7 @@
     <result column="latitude" jdbcType="DECIMAL" property="latitude" />
     <result column="longitude" jdbcType="DECIMAL" property="longitude" />
     <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
     <result column="activityDate" jdbcType="DATE" property="activityDate" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
@@ -26,7 +27,7 @@
     select
     id, name, activityLocation, latitude, longitude, category, activityDate, status,
     createUserId, createUserName, reading, createDate, lastModifyUserId, lastModifyUserName,
-    lastModifyDate,docText
+    lastModifyDate,docText,photo
     from activity
     where id = #{id,jdbcType=VARCHAR}
   </select>
@@ -40,13 +41,13 @@
       activityDate, status, createUserId, 
       createUserName, reading, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
-      docText)
+      docText,photo)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{activityLocation,jdbcType=VARCHAR}, 
       #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{category,jdbcType=VARCHAR}, 
       #{activityDate,jdbcType=DATE}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{reading,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
-      #{docText,jdbcType=LONGVARCHAR})
+      #{docText,jdbcType=LONGVARCHAR},#{photo,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.Activity">
     update activity
@@ -56,6 +57,7 @@
       latitude = #{latitude,jdbcType=DECIMAL},
       longitude = #{longitude,jdbcType=DECIMAL},
       category = #{category,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
       activityDate = #{activityDate,jdbcType=DATE},
       status = #{status,jdbcType=CHAR},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
@@ -81,8 +83,7 @@
   <select id="findList" resultMap="BaseResultMapVo">
     select m.* from(
     select id, name, activityLocation, latitude, longitude, category, activityDate, status,
-    createUserId, createUserName, reading, createDate, lastModifyUserId, lastModifyUserName,
-    lastModifyDate
+    createUserId, createUserName, reading, createDate, photo
 
     <include refid="whereCondition"/>
     ) m

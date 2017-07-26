@@ -16,6 +16,7 @@ public class Activity implements java.io.Serializable{
     private BigDecimal longitude;
 
     private String category;
+    private String photo;
 
     private Date activityDate;
 
@@ -163,5 +164,13 @@ public class Activity implements java.io.Serializable{
 
     public void setDocText(String docText) {
         this.docText = docText == null ? null : docText.trim();
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
