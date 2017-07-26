@@ -299,4 +299,19 @@
         where t.id=#{id}
     </select>
 
+    <select id="selectPersonage" resultType="map">
+        select t.id,
+        t.name,
+        t.mobile,
+        a.department_name deptName
+        from personage t inner join portal.department a
+        on t.deptId =a.department_id where 0=0
+        <if test='q!=null and q!=""'>
+            and (t.id=#{q} or t.name like
+            concat('%',#{q},'%') or a.department_name like concat('%',#{q},'%') )
+        </if>
+        order by t.name
+        limit 0,20
+    </select>
+
 </mapper>
