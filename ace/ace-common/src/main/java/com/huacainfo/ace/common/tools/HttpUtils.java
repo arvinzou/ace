@@ -33,7 +33,7 @@ import org.apache.http.util.EntityUtils;
 
 public class HttpUtils {
 
-	public static String httpPost(String url, Map<String, String> params)
+	public static String httpPost(String url, Map<String, Object> params)
 			throws Exception {
 		return httpPost(url, params, 30 * 1000, 30 * 1000, "UTF-8");
 	}
@@ -43,7 +43,7 @@ public class HttpUtils {
 		return httpPost(url, params, fileLists, 120 * 1000, 120 * 1000, "UTF-8");
 	}
 
-	public static String httpPost(String url, Map<String, String> params,
+	public static String httpPost(String url, Map<String, Object> params,
 			int timeoutMillseconds, int requestTimeoutMillseconds,
 			String encoding) throws Exception {
 		HttpPost httpPost = new HttpPost(url);
@@ -63,6 +63,7 @@ public class HttpUtils {
 		httpPost.setEntity(new UrlEncodedFormEntity(httpParams, encoding));
 		return sendHttpPost(httpPost, encoding);
 	}
+
 
 	public static String httpPost(String httpUrl, Map<String, String> params,
 			List<File> fileLists, int timeoutMillseconds,
@@ -223,6 +224,6 @@ public class HttpUtils {
 
 	public static void main(String args[]) throws URISyntaxException,
 			MalformedURLException, IOException {
-		System.out.println(HttpUtils.httpsGet("http://127.0.0.1/portal/www/request.do"));
+		System.out.println(HttpUtils.httpsGet("https://api.map.baidu.com/place/v2/search?query=%E9%85%92%E5%BA%97&scope=1&filter=&coord_type=2&page_size=10&page_num=0&output=json&ak=cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB&sn=&timestamp=&radius=2000&ret_coordtype=gcj02ll&location=29.031673%2C111.698497"));
 	}
 }

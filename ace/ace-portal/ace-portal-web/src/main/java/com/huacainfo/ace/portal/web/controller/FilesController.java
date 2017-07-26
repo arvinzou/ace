@@ -1,7 +1,8 @@
 package com.huacainfo.ace.portal.web.controller;
 
 import java.io.File;
-
+import java.util.HashMap;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,37 @@ public class FilesController extends PortalBaseController {
 			i++;
 		}
 		rst.setValue(fileNames);
+		return rst;
+	}
+
+	@RequestMapping(value = "/uploadImage.do")
+	@ResponseBody
+	public Map<String,Object> uploadImage(@RequestParam MultipartFile[] file, String collectionName)
+			throws Exception {
+
+		Map<String,Object> rst = new HashMap<String,Object>();
+		String fastdfs_server=((Map)this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
+		String[] fileNames = new String[file.length];
+		String dir = this.getRequest().getSession().getServletContext()
+				.getRealPath(File.separator)
+				+ "tmp";
+		File tmp = new File(dir);
+		if (!tmp.exists()) {
+			tmp.mkdirs();
+		}
+		int i = 0;
+		for (MultipartFile o : file) {
+			File dest = new File(dir + File.separator + o.getName());
+			o.transferTo(dest);
+			fileNames[i] = this.fileSaver.saveFile(dest,
+					o.getOriginalFilename());
+			dest.delete();
+			filesService.insertFiles(fileNames[i], this.getCurUserProp());
+			i++;
+			rst.put("success",true);
+			rst.put("msg","成功");
+			rst.put("file_path",fastdfs_server+fileNames[i]);
+		}
 		return rst;
 	}
 }

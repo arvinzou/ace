@@ -5,7 +5,7 @@ import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 public class AutoCode {
 	public static void main(String[] args) throws Exception{
 		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("uf");
-		Class<?> c=com.huacainfo.ace.uf.model.OrganizationSub.class;
+		Class<?> c=com.huacainfo.ace.uf.model.ActivityComment.class;
 		autoCodeUtils.init(c);
 		autoCodeUtils.createVO(c);
 		autoCodeUtils.createQVO(c);

@@ -10,7 +10,9 @@
     "page/deptSub/index",
     "page/personageSub/index",
     "page/reg/index",
-    "page/regInfo/index"
+    "page/regInfo/index",
+    "page/me/index",
+    "page/map/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -47,12 +49,6 @@
         "iconPath": "image/zhoubian.png",
         "selectedIconPath": "image/zhoubian_selected.png",
         "text": "统战GIS"
-      },
-      {
-        "pagePath": "page/feedback/index",
-        "iconPath": "image/liuyan.png",
-        "selectedIconPath": "image/liuyan_selected.png",
-        "text": "建言献策"
       }
     ]
   },

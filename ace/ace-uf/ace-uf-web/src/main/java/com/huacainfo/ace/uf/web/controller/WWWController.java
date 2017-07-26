@@ -3,6 +3,7 @@ package com.huacainfo.ace.uf.web.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.dubbo.common.json.JSON;
 import com.huacainfo.ace.common.result.ListResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,8 @@ import com.huacainfo.ace.uf.service.FeedbackService;
 import com.huacainfo.ace.uf.service.OrganizationService;
 import com.huacainfo.ace.uf.service.PersonageService;
 import com.huacainfo.ace.uf.service.DeptService;
+import com.huacainfo.ace.common.tools.HttpUtils;
+import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/www/")
 public class WWWController extends UfBaseController {
@@ -165,4 +168,12 @@ public class WWWController extends UfBaseController {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.personageService.selectPersonageById(id);
 	}
+	@RequestMapping(value = "/search.do")
+	public void search(HttpServletResponse response) throws Exception{
+		this.getParams().put("query","酒店");
+		String body=HttpUtils.httpPost("https://api.map.baidu.com/place/v2/search",this.getParams());
+		response.getOutputStream().write(body.getBytes());
+	}
+
+
 }
