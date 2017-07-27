@@ -89,10 +89,10 @@ public class FilesController extends PortalBaseController {
 					o.getOriginalFilename());
 			dest.delete();
 			filesService.insertFiles(fileNames[i], this.getCurUserProp());
-			i++;
 			rst.put("success",true);
 			rst.put("msg","成功");
 			rst.put("file_path",fastdfs_server+fileNames[i]);
+			i++;
 		}
 		return rst;
 	}

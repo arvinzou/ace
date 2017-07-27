@@ -12,7 +12,9 @@
     "page/reg/index",
     "page/regInfo/index",
     "page/me/index",
-    "page/map/index"
+    "page/map/index",
+    "page/activitySec/index",
+    "page/activityPreview/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
