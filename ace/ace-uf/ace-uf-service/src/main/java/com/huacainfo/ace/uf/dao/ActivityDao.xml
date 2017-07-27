@@ -121,7 +121,7 @@
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
   </select>
   <select id="selectActivityById" resultType="map">
-    select id, name, activityLocation, latitude, longitude,docText, category,date_format(t.activityDate, '%Y-%m-%d %H:%i') activityDate,,ifnull(reading,0) reading,date_format(t.createDate, '%Y-%m-%d %H:%i') createDate, photo
+    select id, name, activityLocation, latitude, longitude,docText, category,date_format(t.activityDate, '%Y-%m-%d %H:%i') activityDate,ifnull(reading,0) reading,date_format(t.createDate, '%Y-%m-%d %H:%i') createDate, photo
     from activity t where t.id =#{id,jdbcType=VARCHAR}
   </select>
   <select id="selectPhotoListById" resultType="map">

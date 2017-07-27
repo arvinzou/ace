@@ -12,7 +12,7 @@
     #{createDate,jdbcType=TIMESTAMP})
   </insert>
   <select id="selectListByActivityId" resultType="map">
-    select  t.userId, t.activityId, t.createDate,a.name from activity_user t inner join personage a on t.userId=a.id
+    select  t.userId, t.activityId, t.createDate,a.name,a.photo from activity_user t inner join personage a on t.userId=a.id
     where activityId =#{activityId,jdbcType=VARCHAR}
         ORDER BY t.createDate
   </select>

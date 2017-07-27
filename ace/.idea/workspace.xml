@@ -4,9 +4,8 @@
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-app/ios/Portal/App" afterPath="$PROJECT_DIR$/ace-app/ios/Portal/App" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/FilesController.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/FilesController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/app.json" afterPath="$PROJECT_DIR$/ace-sapp/app.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityDao.xml" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityDao.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityUserDao.xml" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityUserDao.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -67,7 +66,28 @@
     <favorites_list name="ace" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ActivityUserDao.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityUserDao.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="20" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ActivityDao.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityDao.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="393">
+              <caret line="123" column="135" lean-forward="false" selection-start-line="123" selection-start-column="135" selection-end-line="123" selection-end-column="135" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -179,7 +199,6 @@
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityUserDao.java" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PersonageDao.xml" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/service/impl/ActivityUserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityUserDao.xml" />
         <option value="$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/autocode/uf/controller.js.vm" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/content/service/personage/controller.js" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/content/service/feedback/controller.js" />
@@ -213,6 +232,7 @@
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/organization/index.jsp" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityDao.java" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/service/impl/ActivityServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityUserDao.xml" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityDao.xml" />
       </list>
     </option>
@@ -451,6 +471,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1409,13 +1433,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00164" summary="统战公众号UI优化">
-      <created>1498632166778</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1498632166779</updated>
-    </task>
     <task id="LOCAL-00165" summary="ACE扁平化优化">
       <created>1499054648088</created>
       <option name="number" value="00165" />
@@ -1752,7 +1769,14 @@
       <option name="project" value="LOCAL" />
       <updated>1501131405802</updated>
     </task>
-    <option name="localTasksCounter" value="213" />
+    <task id="LOCAL-00213" summary="统战活动">
+      <created>1501166159147</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1501166159147</updated>
+    </task>
+    <option name="localTasksCounter" value="214" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1766,6 +1790,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1366" height="673" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1886,14 +1911,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/content/service/feedback/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="126" column="82" lean-forward="false" selection-start-line="126" selection-start-column="82" selection-end-line="126" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="602">
@@ -2267,14 +2284,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="126" column="52" lean-forward="true" selection-start-line="126" selection-start-column="52" selection-end-line="126" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -2303,6 +2312,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="11" column="35" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="123" column="135" lean-forward="false" selection-start-line="123" selection-start-column="135" selection-end-line="123" selection-end-column="135" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/ActivityUserDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="20" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="20" />
           <folding />
         </state>
       </provider>
