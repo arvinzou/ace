@@ -34,21 +34,19 @@ jQuery(function($) {
 							viewPagerButtons : false,
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
+								form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
 								style_edit_form(form);
+								var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
+                                if (gr) {
+                                    var r = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+                                    $('#parentDepartmentId').val(r.departmentId);
+                                    $('#departmentLevel').val(parseInt(r.departmentLevel) + 1);
+                                }
+                                appendMapBtn("regAddr");
+                                appendUploadBtn("qrcode");
 							}
 						})
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-				if (gr) {
-					var r = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-					$('#parentDepartmentId').val(r.departmentId);
-					$('#departmentLevel').val(parseInt(r.departmentLevel) + 1);
-				}
-				appendMapBtn("regAddr");
-				appendUploadBtn("qrcode");
+
 			});
 	$('#btn-view-edit').on(
 			'click',
@@ -72,11 +70,17 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
+								$("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
+								var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
+                                if (gr) {
+                                    var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+                                     initPhoto(gd.departmentId);
+                                }
+                                appendMapBtn("regAddr");
+                                appendUploadBtn("qrcode");
 							}
 						})
-				appendMapBtn("regAddr");
-				appendUploadBtn("qrcode");
-				initSubGrid();
+
 			});
 
 	$('#btn-view-del').on(

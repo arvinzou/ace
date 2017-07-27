@@ -9,7 +9,7 @@ cfg.pager_selector= "#grid-pager";
 cfg.rowNum= default_page_list[0];
 cfg.dataId= 'departmentId';
 cfg.gridHeight=window.innerHeight-layoutTopHeight;
-cfg.jgridEditWinWidth=800;
+cfg.jgridEditWinWidth=950;
 cfg.jgridAlertWidth=400;
 cfg.jgrdInfoDialogWidth=500;
 if(cfg.gridHeight<100){

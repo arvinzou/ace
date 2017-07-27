@@ -10,6 +10,7 @@
 <title>deparment</title>
 </head>
 <jsp:include page="../../common/common.jsp" />
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css" />
 <style>
 .layout-user {
 	width: 60px;
@@ -135,6 +136,7 @@
 	
 
 	<jsp:include page="../../common/footer-1.jsp" />
+	<script src="${portalPath}/content/common/assets/js/uncompressed/jquery.colorbox.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/service/dept/config.js?version=${cfg.version}"></script>
 	<script
@@ -143,16 +145,6 @@
 		src="${pageContext.request.contextPath}/content/service/dept/controller.js?version=${cfg.version}"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/service/dept/view.js?version=${cfg.version}"></script>
-
-	<script
-			src="${pageContext.request.contextPath}/content/service/organizationSub/config.js?version=${cfg.version}"></script>
-	<script
-			src="${pageContext.request.contextPath}/content/service/organizationSub/model.js?version=${cfg.version}"></script>
-	<script
-			src="${pageContext.request.contextPath}/content/service/organizationSub/controller-dept.js?version=${cfg.version}"></script>
-	<script
-			src="${pageContext.request.contextPath}/content/service/organizationSub/view-dept.js?version=${cfg.version}"></script>
-
 
 	<jsp:include page="../../common/footer-2.jsp" />
 
@@ -301,7 +293,35 @@
     			<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
     	<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 	<script
-			src="${pageContext.request.contextPath}/content/service/personage/upload.js?version=${cfg.version}"></script>
+			src="${pageContext.request.contextPath}/content/service/dept/upload.js?version=${cfg.version}"></script>
+	<style>
+        .photo {
+            height: 90px;
+            max-height:90px;
+            max-width:90px;
+            vertical-align: middle;
+        }
+        #cboxContent {
+            background-color: rgb(255, 255, 255);
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
+            padding: 5px;
+        }
+        .ace-thumbnails > li {
+			float: left;
+			display: block;
+			position: relative;
+			overflow: hidden;
+			margin: 2px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: #ddd;
+			border-image: initial;
+		}
 
+
+    </style>
 </body>
 </html>
