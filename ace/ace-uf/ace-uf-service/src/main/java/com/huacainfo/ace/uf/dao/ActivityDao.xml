@@ -110,4 +110,22 @@
   <update id="updateReading">
     update activity set reading=ifnull(reading,0)+1 where id=#{id}
   </update>
+  <select id="selectActivityPageList" resultType="map">
+    select id, name, activityLocation, latitude, longitude, category, activityDate,reading, createDate, photo
+    from activity t where t.category =#{p.category,jdbcType=VARCHAR}
+    <if test='p.name!=null and p.name!=""'>
+      and t.name like
+      concat('%',#{p.name,jdbcType=VARCHAR},'%')
+    </if>
+    ORDER BY t.activityDate desc
+    limit #{p.start,jdbcType=DECIMAL}, #{p.limit,jdbcType=DECIMAL}
+  </select>
+  <select id="selectActivityById" resultType="map">
+    select id, name, activityLocation, latitude, longitude, category, activityDate,reading,date_format(t.createDate, '%Y-%m-%d %H:%i') createDate, photo
+    from activity t where t.id =#{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectPhotoListById" resultType="map">
+   select name,url,remark from organization_sub where  organizationId=#{id}
+  </select>
+
 </mapper>

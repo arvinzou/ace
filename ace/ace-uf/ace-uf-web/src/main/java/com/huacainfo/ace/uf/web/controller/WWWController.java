@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.alibaba.dubbo.common.json.JSON;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.uf.model.ActivityComment;
+import com.huacainfo.ace.uf.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.uf.model.Feedback;
-import com.huacainfo.ace.uf.service.AnalysisService;
-import com.huacainfo.ace.uf.service.FeedbackService;
-import com.huacainfo.ace.uf.service.OrganizationService;
-import com.huacainfo.ace.uf.service.PersonageService;
-import com.huacainfo.ace.uf.service.DeptService;
 import com.huacainfo.ace.common.tools.HttpUtils;
 import javax.servlet.http.HttpServletResponse;
 @Controller
@@ -46,6 +43,15 @@ public class WWWController extends UfBaseController {
 
 	@Autowired
 	private DeptService deptService;
+
+	@Autowired
+	private ActivityService activityService;
+
+	@Autowired
+	private ActivityUserService activityUserService;
+
+	@Autowired
+	private ActivityCommentService activityCommentService;
 
 	@Autowired
 	private RedisOperations<String, Object> redisTemplate;
@@ -174,6 +180,38 @@ public class WWWController extends UfBaseController {
 		String body=HttpUtils.httpPost("https://api.map.baidu.com/place/v2/search",this.getParams());
 		response.getOutputStream().write(body.getBytes());
 	}
+	@RequestMapping(value = "/selectActivityPageList.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectActivityPageList(){
+		return this.activityService.selectActivityPageList(this.getParams());
+	}
+	@RequestMapping(value = "/selectPhotoListById.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectPhotoListById(String id){
+		return this.activityService.selectPhotoListById(id);
+	}
+	@RequestMapping(value = "/selectActivityById.do")
+	@ResponseBody
+	public Map<String,Object> selectActivityById(String id){
+		return this.activityService.selectActivityById(id);
+	}
 
+	@RequestMapping(value = "/selectUserListByActivityId.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectUserListByActivityId(String id) throws Exception {
+		return this.activityUserService.selectListByActivityId(id);
+	}
+
+	@RequestMapping(value = "/selectCommentListByActivityId.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectCommentListByActivityId(String id) throws Exception {
+		return this.activityCommentService.selectListByActivityId(id);
+	}
+
+	@RequestMapping(value = "/insertActivityComment.do")
+	@ResponseBody
+	public MessageResponse insertActivityComment(ActivityComment obj) throws Exception {
+		return this.activityCommentService.insertActivityComment(obj, this.getCurWxUser());
+	}
 
 }
