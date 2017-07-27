@@ -36,6 +36,12 @@ var config = {
     selectPersonage: `${server}/uf/www/selectPersonage.do`,
     selectPersonageList: `${server}/uf/www/selectPersonageList.do`,
     selectDeptByCategory: `${server}/uf/www/selectDeptByCategory.do`,
+    selectActivityPageList: `${server}/uf/www/selectActivityPageList.do`,
+    selectPhotoListById: `${server}/uf/www/selectPhotoListById.do`,
+    selectActivityById: `${server}/uf/www/selectActivityById.do`,
+    selectUserListByActivityId: `${server}/uf/www/selectUserListByActivityId.do`,
+    selectCommentListByActivityId: `${server}/uf/www/selectCommentListByActivityId.do`,
+    insertActivityComment: `${server}/uf/www/insertActivityComment.do`
 
 };
 module.exports = config
