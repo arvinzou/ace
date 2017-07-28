@@ -13,19 +13,19 @@
   </resultMap>
   <insert id="insert" parameterType="com.huacainfo.ace.uf.model.ActivityComment">
     insert into activity_comment (id, activityId, userId,
-    docText, createDate)
+    docText, createDate,commentType)
     values (#{id,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
-    #{docText,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+    #{docText,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},#{commentType,jdbcType=VARCHAR})
   </insert>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from activity_comment
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <select id="selectListByActivityId" resultType="map">
-    select  t.id, t.activityId, t.userId, t.docText, t.createDate,a.unionId, a.openId, a.nickName, a.gender, a.city, a.province, a.country, a.avatarUrl, a.mobile, a.addr,
-    a.email, a.name,a.latitude, a.longitude
+    select  t.id, t.activityId, t.userId, t.docText,date_format(t.createDate, '%Y-%m-%d %H:%i') createDate,a.unionId, a.openId, a.nickName, a.gender, a.city, a.province, a.country, a.avatarUrl, a.mobile, a.addr,
+    a.email, a.name,a.latitude, a.longitude,date_format(t.answerDate, '%Y-%m-%d %H:%i') answerDate,t.answerText,t.answerUser,t.commentType
     from activity_comment  t inner join portal.wx_user a on t.userId=a.unionId
-    where and t.activityId =#{activityId,jdbcType=VARCHAR}
+    where  t.activityId =#{activityId,jdbcType=VARCHAR}
         ORDER BY t.createDate
   </select>
 </mapper>

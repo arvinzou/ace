@@ -110,6 +110,12 @@
   <update id="updateReading">
     update activity set reading=ifnull(reading,0)+1 where id=#{id}
   </update>
+  <update id="updateUp">
+    update activity set up=ifnull(up,0)+1 where id=#{id}
+  </update>
+  <update id="updateComplain">
+    update activity set complain=ifnull(complain,0)+1 where id=#{id}
+  </update>
   <select id="selectActivityPageList" resultType="map">
     select id, name, activityLocation, latitude, longitude, category, date_format(t.activityDate, '%Y-%m-%d %H:%i') activityDate,ifnull(reading,0) reading, createDate, photo
     from activity t where t.category =#{p.category,jdbcType=VARCHAR}
@@ -121,7 +127,8 @@
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
   </select>
   <select id="selectActivityById" resultType="map">
-    select id, name, activityLocation, latitude, longitude,docText, category,date_format(t.activityDate, '%Y-%m-%d %H:%i') activityDate,ifnull(reading,0) reading,date_format(t.createDate, '%Y-%m-%d %H:%i') createDate, photo
+    select id, name, activityLocation, latitude, longitude,docText, category,date_format(t.activityDate, '%Y-%m-%d %H:%i') activityDate,ifnull(reading,0) reading,date_format(t.createDate, '%Y-%m-%d %H:%i') createDate,
+    photo,ifnull(up,0) up,ifnull(complain,0) complain
     from activity t where t.id =#{id,jdbcType=VARCHAR}
   </select>
   <select id="selectPhotoListById" resultType="map">

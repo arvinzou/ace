@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.dubbo.common.json.JSON;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.uf.model.ActivityComment;
 import com.huacainfo.ace.uf.service.*;
@@ -176,8 +177,7 @@ public class WWWController extends UfBaseController {
 	}
 	@RequestMapping(value = "/search.do")
 	public void search(HttpServletResponse response) throws Exception{
-		this.getParams().put("query","酒店");
-		String body=HttpUtils.httpPost("https://api.map.baidu.com/place/v2/search",this.getParams());
+		String body=HttpUtils.httpsGet("https://api.map.baidu.com/place/v2/search?"+this.getUrlParamsByMap(this.getParams()));
 		response.getOutputStream().write(body.getBytes());
 	}
 	@RequestMapping(value = "/selectActivityPageList.do")
@@ -210,8 +210,40 @@ public class WWWController extends UfBaseController {
 
 	@RequestMapping(value = "/insertActivityComment.do")
 	@ResponseBody
-	public MessageResponse insertActivityComment(ActivityComment obj) throws Exception {
+	public MessageResponse insertActivityComment(ActivityComment obj,String captcha) throws Exception {
+		this.logger.info("{}",obj);
+		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
+		this.logger.info("captcha->{}",captcha);
+		this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+		if(CommonUtils.isBlank(captcha)){
+			return new MessageResponse(1,"验证码不能为空！");
+		}
+		if(!captcha.equals(j_captcha_weui)){
+			return new MessageResponse(1,"验证码错误！");
+		}
 		return this.activityCommentService.insertActivityComment(obj, this.getCurWxUser());
+	}
+	@RequestMapping(value = "/updateActivity.do")
+	@ResponseBody
+	public MessageResponse updateActivity(String id,String type) throws Exception {
+		return this.activityService.updateActivity(id,type,this.getCurWxUser());
+	}
+
+	public  String getUrlParamsByMap(Map<String, Object> map) {
+		if (map == null) {
+			return "";
+		}
+		StringBuffer sb = new StringBuffer();
+		for (Map.Entry<String, Object> entry : map.entrySet()) {
+			sb.append(entry.getKey() + "=" + entry.getValue());
+			sb.append("&");
+		}
+		String s = sb.toString();
+		if (s.endsWith("&")) {
+			s = org.apache.commons.lang.StringUtils.substringBeforeLast(s, "&");
+		}
+		return s;
 	}
 
 }

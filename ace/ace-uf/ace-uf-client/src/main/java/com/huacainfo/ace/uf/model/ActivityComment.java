@@ -14,6 +14,15 @@ public class ActivityComment implements java.io.Serializable{
 
     private Date createDate;
 
+    private Date answerDate;
+
+    private String answerText;
+
+    private String commentType;
+
+    private String answerUser;
+
+
     public String getId() {
         return id;
     }
@@ -52,5 +61,38 @@ public class ActivityComment implements java.io.Serializable{
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Date getAnswerDate() {
+        return answerDate;
+    }
+
+    public void setAnswerDate(Date answerDate) {
+        this.answerDate = answerDate;
+    }
+
+    public String getAnswerText() {
+        return answerText;
+    }
+
+    public void setAnswerText(String answerText) {
+        this.answerText = answerText;
+    }
+
+
+    public String getAnswerUser() {
+        return answerUser;
+    }
+
+    public void setAnswerUser(String answerUser) {
+        this.answerUser = answerUser;
+    }
+
+    public String getCommentType() {
+        return commentType;
+    }
+
+    public void setCommentType(String commentType) {
+        this.commentType = commentType;
     }
 }

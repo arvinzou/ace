@@ -41,7 +41,8 @@ var config = {
     selectActivityById: `${server}/uf/www/selectActivityById.do`,
     selectUserListByActivityId: `${server}/uf/www/selectUserListByActivityId.do`,
     selectCommentListByActivityId: `${server}/uf/www/selectCommentListByActivityId.do`,
-    insertActivityComment: `${server}/uf/www/insertActivityComment.do`
+    insertActivityComment: `${server}/uf/www/insertActivityComment.do`,
+    updateActivity: `${server}/uf/www/updateActivity.do`
 
 };
 module.exports = config

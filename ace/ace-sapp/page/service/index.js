@@ -1,7 +1,9 @@
 var app = getApp();
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
-
+//引入百度地图api
+var bmap = require('../../util/bmap-wx.js');
+var BMap = {};
 Page({
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
@@ -19,7 +21,8 @@ Page({
     }
   },
   onReady: function (e) {    // 使用 wx.createMapContext 获取 map 上下文 
-    this.mapCtx = wx.createMapContext('myMap')
+    this.mapCtx = wx.createMapContext('myMap');
+    
   },
   data: {
     hasLocation: false,
@@ -183,7 +186,7 @@ Page({
       activeTarget: 'dept',
       includePointsStatus:true,
       view: {
-        height: '100vh'
+        height: '90vh'
       }
     });
     this.initDeptData();
@@ -198,7 +201,7 @@ Page({
       showOrgBarStatus: true,
       includePointsStatus: true,
       view: {
-        height: '93vh'
+        height: '83vh'
       }
     });
     this.initOrgData();
@@ -284,11 +287,13 @@ Page({
   },
   //根据经纬度在地图上显示  
   openLocation: function (e) {
-    console.log("openLocation" + e)
-    var value = e.detail.value
+    console.log(e.currentTarget.dataset)
+    var o = e.currentTarget.dataset;
     wx.openLocation({
-      longitude: Number(value.longitude),
-      latitude: Number(value.latitude)
+      longitude: Number(o.longitude),
+      latitude: Number(o.latitude),
+      name: o.name,
+      address: o.address
     })
   },
   //选择位置位置  
@@ -331,6 +336,10 @@ Page({
         });
       }
     );
+    //构造百度地图api实例
+    BMap = new bmap.BMapWX({
+      ak: 'cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB'
+    })
   },
   initOrgData: function () {
     var that = this;
@@ -357,7 +366,7 @@ Page({
           includePoints.length = 0;
         }
         that.setData({
-          markers: markers,
+          markers: that.data.markers.concat(markers),
           includePoints: includePoints
         });
       }
@@ -436,7 +445,7 @@ Page({
       showBarStatus: false,
       showOrgBarStatus: false,
       view: {
-        height: '82vh'
+        height: '62vh'
       }
     })
   },
@@ -447,7 +456,7 @@ Page({
       showModalStatus: false,
       showOrgBarStatus: true,
       view: {
-        height: '100vh'
+        height: '90vh'
       }
     });
     //that.showBar();
@@ -472,23 +481,97 @@ Page({
       }
     })
   },
-  hideBar: function (e) {
-    console.log(e.currentTarget.id);
+  hideBar: function () {
     // 隐藏遮罩层
     this.setData({
       showBarStatus: false,
       showFloatBoxStatus: true,
       showOrgBarStatus: true,
       showMapStatus: true,
-      category: e.currentTarget.id,
       view: {
-        height: '100vh'
+        height: '90vh'
       }
     });
-    this.initOrgData();
+    //this.initOrgData();
   },
   bindregionchange: function (e) {
     console.log(e);
+  },
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
+    console.log("showInput");
+  },
+  hideInput: function () {
+    console.log("hideInput");
+    this.setData({
+      inputVal: "",
+      inputShowed: false
+    });
+    this.hideBar();
+  },
+  clearInput: function () {
+    console.log("clearInput");
+    this.setData({
+      inputVal: ""
+    });
+    
+  },
+  inputTyping: function (e) {
+    var that = this;
+    console.log(e.detail.value);
+    if (e.detail.value.length<2){
+      return;
+    }
+    that.searchService(e.detail.value);
+  },
+  bindtapType: function (e) {
+    var that = this;
+    var o = e.currentTarget.dataset;
+    if (o.name.length < 2) {
+      return;
+    }
+    that.searchService(o.name);
+  },
+  searchService:function(q){
+    var that = this;
+    BMap.search({
+      query: q,
+      success: function (res) {
+        var data = res.wxMarkerData;
+        console.log(data);
+        var markers = [];
+        var includePoints = [];
+        for (var i = 0; i < data.length; i++) {
+          var o = data[i];
+          o.name = data[i].title;
+          o.types = "www";
+          o.addr = data[i].address;
+          o.tel = data[i].telephone;
+
+         // o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
+          //o.width = 30;
+          o.title = o.name;
+         // o.height = 30;
+          //o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS' };
+          markers.push(o);
+          includePoints.push({
+            longitude: o.longitude,
+            latitude: o.latitude
+          });
+          console.log(o);
+        }
+        if (markers.length>0){
+          that.setData({
+            markers: markers,
+            includePoints: includePoints
+          });
+        }
+        that.showBar();
+        
+      }
+    })
   }
 })
 

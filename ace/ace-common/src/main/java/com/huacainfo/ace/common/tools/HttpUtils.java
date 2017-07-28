@@ -224,6 +224,6 @@ public class HttpUtils {
 
 	public static void main(String args[]) throws URISyntaxException,
 			MalformedURLException, IOException {
-		System.out.println(HttpUtils.httpsGet("https://api.map.baidu.com/place/v2/search?query=%E9%85%92%E5%BA%97&scope=1&filter=&coord_type=2&page_size=10&page_num=0&output=json&ak=cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB&sn=&timestamp=&radius=2000&ret_coordtype=gcj02ll&location=29.031673%2C111.698497"));
+		System.out.println(HttpUtils.httpsGet("https://api.map.baidu.com/place/v2/search?query=酒店&scope=1&filter=&coord_type=2&page_size=10&page_num=0&output=json&ak=cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB&sn=&timestamp=&radius=2000&ret_coordtype=gcj02ll&location=29.031673%2C111.698497"));
 	}
 }
