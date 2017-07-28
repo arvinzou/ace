@@ -42,7 +42,7 @@ Page({
     serverfile: cfg.serverfile,
     lastChange: new Date().getTime(),
     view: {
-      height: '100vh'
+      height: '90vh'
     },
     list: [
     ],
@@ -201,7 +201,7 @@ Page({
       showOrgBarStatus: true,
       includePointsStatus: true,
       view: {
-        height: '83vh'
+        height: '85vh'
       }
     });
     this.initOrgData();
@@ -216,7 +216,7 @@ Page({
       includePointsStatus: true,
       activeTarget: 'personage',
       view: {
-        height: '100vh'
+        height: '90vh'
       }
     });
     this.initPersonageData();
