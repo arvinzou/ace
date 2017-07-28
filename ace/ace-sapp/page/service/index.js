@@ -445,7 +445,7 @@ Page({
       showBarStatus: false,
       showOrgBarStatus: false,
       view: {
-        height: '62vh'
+        height: '75vh'
       }
     })
   },
