@@ -202,7 +202,7 @@ Page({
       showOrgBarStatus: true,
       includePointsStatus: true,
       view: {
-        height: '82vh'
+        height: '83vh'
       }
     });
     this.initOrgData('');
