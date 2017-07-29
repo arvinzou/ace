@@ -83,11 +83,11 @@
         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class=" title-strong-big2">{{o.name}}</view>
           <view style="flex-direction:column;">
-            <view style="font-size:14px;">
-                 单位：{{o.deptName}}
+            <view class="title-strong-big">
+                {{o.deptName}}
               </view>
               <view style="font-size:14px">
-            辖区：{{o.areaName}}  类别：{{o.categoryName}}
+            {{o.areaName}}{{o.categoryName}}
             </view>
           </view>
         </view>
@@ -169,11 +169,11 @@
         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class=" title-strong-big2">{{o.name}}</view>
           <view style="flex-direction:column;">
-            <view style="font-size:14px;">
-                 单位：{{o.deptName}}
+            <view class="title-strong-big">
+                 {{o.deptName}}
               </view>
               <view style="font-size:14px">
-            辖区：{{o.areaName}}  类别：{{o.categoryName}}
+            {{o.areaName}}{{o.categoryName}}
             </view>
           </view>
         </view>
