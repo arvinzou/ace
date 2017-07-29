@@ -25,6 +25,7 @@ Page({
     
   },
   data: {
+    showSearchRsPanel: false,
     hasLocation: false,
     circlesStatus: false,
     scale: 16,
@@ -42,7 +43,7 @@ Page({
     serverfile: cfg.serverfile,
     lastChange: new Date().getTime(),
     view: {
-      height: '90vh'
+      height: '93vh'
     },
     list: [
     ],
@@ -134,13 +135,13 @@ Page({
   reloadData:function(){
     var that=this;
     if (that.data.activeTarget == 'dept') {
-      that.initDeptData();
+      that.initDeptData('');
     }
     if (that.data.activeTarget == 'org') {
-      that.initOrgData();
+      that.initOrgData('');
     }
     if (that.data.activeTarget == 'personage') {
-      that.initPersonageData();
+      that.initPersonageData('');
     }
   }
   ,
@@ -186,10 +187,10 @@ Page({
       activeTarget: 'dept',
       includePointsStatus:true,
       view: {
-        height: '90vh'
+        height: '93vh'
       }
     });
-    this.initDeptData();
+    this.initDeptData('');
   },
   taborg: function (e) {
     console.log(e);
@@ -201,10 +202,10 @@ Page({
       showOrgBarStatus: true,
       includePointsStatus: true,
       view: {
-        height: '85vh'
+        height: '82vh'
       }
     });
-    this.initOrgData();
+    this.initOrgData('');
   },
   tabpersonage: function (e) {
     console.log(e);
@@ -216,10 +217,10 @@ Page({
       includePointsStatus: true,
       activeTarget: 'personage',
       view: {
-        height: '90vh'
+        height: '93vh'
       }
     });
-    this.initPersonageData();
+    this.initPersonageData('');
   },
   tabscaleadd: function (e) {
     console.log(e);
@@ -328,7 +329,7 @@ Page({
     var that = this;
     console.log('onLoad');
     that.getLocation();
-    that.initDeptData();
+    that.initDeptData('');
     util.request(cfg.selectOrganizationCategoryList, {},
       function (data) {
         that.setData({
@@ -341,9 +342,9 @@ Page({
       ak: 'cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB'
     })
   },
-  initOrgData: function () {
+  initOrgData: function (text) {
     var that = this;
-    util.request(cfg.selectOrganizationByCategory, { category: that.data.category, longitude: that.data.longitude, latitude: that.data.latitude },
+    util.request(cfg.selectOrganizationByCategory, { category: that.data.category, longitude: that.data.longitude, latitude: that.data.latitude,q:text },
       function (data) {
         var markers = [];
         var includePoints = [];
@@ -373,10 +374,10 @@ Page({
     );
   },
   
-  initDeptData: function () {
+  initDeptData: function (text) {
     var that = this;
     var includePoints = [];
-    util.request(cfg.selectDeptListMap, { longitude: that.data.longitude, latitude: that.data.latitude },
+    util.request(cfg.selectDeptListMap, { longitude: that.data.longitude, latitude: that.data.latitude,q:text },
       function (data) {
         var markers = [];
         for (var i = 0; i < data.length; i++) {
@@ -404,13 +405,16 @@ Page({
           markers: markers,
           includePoints: includePoints
         });
+        if (that.data.showSearchRsPanel) {
+          that.showBar();
+        }
       }
     );
   },
-  initPersonageData: function () {
+  initPersonageData: function (text) {
     var that = this;
     var includePoints = [];
-    util.request(cfg.selectPersonAgetListMap, { longitude: that.data.longitude, latitude: that.data.latitude },
+    util.request(cfg.selectPersonAgetListMap, { longitude: that.data.longitude, latitude: that.data.latitude,q:text},
       function (data) {
         var markers = [];
         for (var i = 0; i < data.length; i++) {
@@ -435,6 +439,9 @@ Page({
           markers: markers,
           includePoints: includePoints
         });
+        if (that.data.showSearchRsPanel) {
+          that.showBar();
+        }
       }
     );
   },
@@ -445,7 +452,7 @@ Page({
       showBarStatus: false,
       showOrgBarStatus: false,
       view: {
-        height: '75vh'
+        height: '72vh'
       }
     })
   },
@@ -456,7 +463,7 @@ Page({
       showModalStatus: false,
       showOrgBarStatus: true,
       view: {
-        height: '90vh'
+        height: '93vh'
       }
     });
     //that.showBar();
@@ -489,10 +496,12 @@ Page({
       showOrgBarStatus: true,
       showMapStatus: true,
       view: {
-        height: '90vh'
+        height: '93vh'
       }
     });
-    //this.initOrgData();
+    this.setData({
+      showSearchRsPanel: false
+    });
   },
   bindregionchange: function (e) {
     console.log(e);
@@ -521,10 +530,23 @@ Page({
   inputTyping: function (e) {
     var that = this;
     console.log(e.detail.value);
+    console.log(that.data.activeTarget);
     if (e.detail.value.length<2){
       return;
     }
-    that.searchService(e.detail.value);
+    that.setData({
+      showSearchRsPanel:true
+    });
+    if (that.data.activeTarget=='org'){
+      that.searchService(e.detail.value);
+    }
+    if (that.data.activeTarget == 'dept') {
+      that.initDeptData(e.detail.value);
+    }
+    if (that.data.activeTarget == 'personage') {
+      that.initPersonageData(e.detail.value);
+    }
+    
   },
   bindtapType: function (e) {
     var that = this;
@@ -532,6 +554,9 @@ Page({
     if (o.name.length < 2) {
       return;
     }
+    that.setData({
+      showSearchRsPanel: true
+    });
     that.searchService(o.name);
   },
   searchService:function(q){
@@ -568,7 +593,10 @@ Page({
             includePoints: includePoints
           });
         }
-        that.showBar();
+        if (that.data.showSearchRsPanel){
+          that.showBar();
+        }
+       
         
       }
     })

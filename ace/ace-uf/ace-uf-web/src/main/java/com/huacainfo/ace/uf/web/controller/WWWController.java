@@ -145,9 +145,9 @@ public class WWWController extends UfBaseController {
 	}
 	@RequestMapping(value = "/selectDeptListMap.do")
 	@ResponseBody
-	public List<Map<String,Object>> selectDeptListMap(String longitude,String latitude) throws Exception {
+	public List<Map<String,Object>> selectDeptListMap(String longitude,String latitude,String q) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
-		return this.deptService.selectDeptListMap(this.getCurWxUser(),longitude,latitude);
+		return this.deptService.selectDeptListMap(this.getCurWxUser(),longitude,latitude,q);
 	}
 	@RequestMapping(value = "/selectDept.do")
 	@ResponseBody
@@ -159,9 +159,9 @@ public class WWWController extends UfBaseController {
 	/*统战人士*/
 	@RequestMapping(value = "/selectPersonageListMap.do")
 	@ResponseBody
-	public List<Map<String,Object>> selectPersonageListMap(String longitude,String latitude) throws Exception {
+	public List<Map<String,Object>> selectPersonageListMap(String longitude,String latitude,String q) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
-		return this.personageService.selectPersonageListMap(longitude,latitude);
+		return this.personageService.selectPersonageListMap(this.getCurWxUser(),longitude,latitude,q);
 	}
 	@RequestMapping(value = "/selectPersonageList.do")
 	@ResponseBody

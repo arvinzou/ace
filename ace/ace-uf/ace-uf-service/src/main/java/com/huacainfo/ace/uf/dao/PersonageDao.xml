@@ -196,6 +196,8 @@
         SELECT
         t.id 'id',
         t.name 'name',
+        t.photo,
+        a.name areaName,b.department_name deptName,c.fullname placeOfOriginName,dict.name categoryName,
         b.department_name addr,
         wx.latitude,
         wx.longitude,
@@ -206,7 +208,13 @@
         inner join portal.province a on t.areaCode=a.code
         inner join portal.department b on t.deptId=b.department_id
         inner join portal.wx_user wx on t.mobile=wx.mobile
+        inner join portal.province c on t.placeOfOrigin=c.code
+        inner join (select code,name from portal.dict where category_id='98') dict on t.category=dict.code
         where t.status='1' and wx.latitude is not null and wx.longitude is not null
+        <if test='q!=null and q!=""'>
+            and t.name like
+            concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
         ORDER BY distance LIMIT 50
     </select>
 

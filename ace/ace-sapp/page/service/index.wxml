@@ -60,7 +60,7 @@
 
   <view class="attr_box" wx:if="{{showModalStatus}}">
 
-    <navigator wx:if="{{o.types=='deptSub'||o.types=='personageSub'||o.types=='organization'}}" url="../{{o.types}}/index?id={{o.id}}" class="navigator">
+    <navigator wx:if="{{o.types=='deptSub'||o.types=='organization'}}" url="../{{o.types}}/index?id={{o.id}}" class="navigator">
       <view class="navigator-text" style="flex-direction:column;">
         <view class="title-strong-big2">{{o.name}}</view>
         <view style="font-size:14px;" wx:if="{{o.addr.length>0}}">
@@ -74,6 +74,26 @@
       </view>
       <view class="navigator-arrow"></view>
     </navigator>
+    <navigator wx:if="{{o.types=='personageSub'}}" url="../{{o.types}}/index?id={{o.id}}" class="navigator">
+       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image wx:if="{{o.photo.length>0}}" class="photo" mode="aspectFill" src="{{serverfile}}{{o.photo}}" />
+
+   <image wx:if="{{o.photo.length==0}}" class="photo" src="../../image/tongzhanrs.png" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class=" title-strong-big2">{{o.name}}</view>
+          <view style="flex-direction:column;">
+            <view style="font-size:14px;">
+                 单位：{{o.deptName}}
+              </view>
+              <view style="font-size:14px">
+            辖区：{{o.areaName}}  类别：{{o.categoryName}}
+            </view>
+          </view>
+        </view>
+        <view class="navigator-arrow"></view>
+    </navigator>
+
    <view  class="navigator" wx:if="{{o.types=='www'}}" bindtap="openLocation" data-name="{{o.name}}" data-address="{{o.addr}}" data-latitude="{{o.latitude}}" data-longitude="{{o.longitude}}">
       <view class="navigator-text" style="flex-direction:column;">
         <view class="title-strong-big2">{{o.name}}</view>
@@ -98,7 +118,7 @@
         <view style="flex:1"></view>
         <image bindtap="hideBar" style="text-align: right;padding:10px;width:20px;height:20px" src="../../image/close2.png" />
       </view>
-    <view class="weui-grids-nav">
+    <view class="weui-grids-nav" wx:if="{{activeTarget=='org'}}">
       <block wx:for="{{listCategory}}" wx:key="{{item.id}}">
 
         <view bindtap="bindtapType" id="{{item.id}}" data-name="{{item.name}}" class="weui-grid-nav" hover-class="weui-grid_active-nav">
@@ -110,21 +130,58 @@
 
       </block>
     </view>
-    <block wx:for="{{markers}}" wx:for-item="o" wx:key="*item">
-    <view  class="navigator" bindtap="openLocation" data-name="{{o.name}}" data-address="{{o.addr}}" data-latitude="{{o.latitude}}" data-longitude="{{o.longitude}}">
+    <scroll-view scroll-y="true" style="height:70vh">
+        <block wx:for="{{markers}}" wx:for-item="o" wx:key="*item">
+
+          <view  class="navigator" wx:if="{{o.types=='www'}}" bindtap="openLocation" data-name="{{o.name}}" data-address="{{o.addr}}" data-latitude="{{o.latitude}}" data-longitude="{{o.longitude}}">
+            <view class="navigator-text" style="flex-direction:column;">
+              <view class="title-strong-big2">{{o.name}}</view>
+              <view style="font-size:14px; width:90%" wx:if="{{o.addr.length>0}}">
+                <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" />
+                {{o.addr}}
+              </view>
+              <view style="font-size:14px" >
+                <image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit" wx:if="{{o.tel.length>0}}"/>{{o.tel}}
+            </view>
+            </view>
+            <view class="navigator-arrow"></view>
+          </view>
+
+          <navigator wx:if="{{o.types=='deptSub'||o.types=='organization'}}" url="../{{o.types}}/index?id={{o.id}}" class="navigator">
       <view class="navigator-text" style="flex-direction:column;">
         <view class="title-strong-big2">{{o.name}}</view>
-        <view style="font-size:14px; width:90%" wx:if="{{o.addr.length>0}}">
-          <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" />
-          {{o.addr}}
+        <view style="font-size:14px;" wx:if="{{o.addr.length>0}}">
+          <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" />{{o.addr}}
         </view>
         <view style="font-size:14px" >
           <image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit" wx:if="{{o.tel.length>0}}"/>{{o.tel}}
+          <image class="iconList" src="../../image/time_71.003460207612px_1195888_easyicon.net.png" mode="aspectFit" wx:if="{{o.serviceTimeStart.length>0}}"/> 
+          {{o.serviceTimeStart}}<text wx:if="{{o.serviceTimeStart.length>0}}">-</text>{{o.serviceTimeEnd}}
        </view>
       </view>
       <view class="navigator-arrow"></view>
-    </view>
- </block>
+    </navigator>
+    <navigator wx:if="{{o.types=='personageSub'}}" url="../{{o.types}}/index?id={{o.id}}" class="navigator">
+       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image wx:if="{{o.photo.length>0}}" class="photo" mode="aspectFill" src="{{serverfile}}{{o.photo}}" />
+            <image wx:if="{{o.photo.length==0}}" class="photo" src="../../image/tongzhanrs.png" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class=" title-strong-big2">{{o.name}}</view>
+          <view style="flex-direction:column;">
+            <view style="font-size:14px;">
+                 单位：{{o.deptName}}
+              </view>
+              <view style="font-size:14px">
+            辖区：{{o.areaName}}  类别：{{o.categoryName}}
+            </view>
+          </view>
+        </view>
+        <view class="navigator-arrow"></view>
+    </navigator>
+
+        </block>
+    </scroll-view>
   </view>
   <view class="controls-box-bottom" wx:if="{{showOrgBarStatus}}">
            <navigator bindtap="showBar" class="navigator">

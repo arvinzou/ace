@@ -54,8 +54,8 @@ public class DeptServiceImpl implements DeptService {
 		}
 		return category;
 	}
-	public  List<Map<String,Object>> selectDeptListMap(WxUser user,String longitude,String latitude) throws Exception{
-		return this.deptDao.selectDeptList("",longitude,latitude);
+	public  List<Map<String,Object>> selectDeptListMap(WxUser user,String longitude,String latitude,String q) throws Exception{
+		return this.deptDao.selectDeptList(q,longitude,latitude);
 	}
 	private List<Map<String,Object>> getGroupDept(String category,List<Map<String,Object>> list){
 		List<Map<String,Object>> rst=new ArrayList<Map<String,Object>>();
