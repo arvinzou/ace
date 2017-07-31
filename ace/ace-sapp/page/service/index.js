@@ -119,7 +119,7 @@ Page({
       that.initDeptData('');
     }
     if (that.data.activeTarget == 'org') {
-      //that.initOrgData('');
+      
     }
     if (that.data.activeTarget == 'personage') {
       that.initPersonageData('');
@@ -182,11 +182,12 @@ Page({
       activeTarget: 'org',
       showOrgBarStatus: true,
       includePointsStatus: true,
+      markers: [],
+      includePoints: [],
       view: {
         height: '83vh'
       }
     });
-    this.initOrgData('');
   },
   tabpersonage: function (e) {
     console.log(e);
@@ -325,38 +326,6 @@ Page({
     
   
   },
-  initOrgData: function (text) {
-    var that = this;
-    util.request(cfg.selectOrganizationByCategory, { category: that.data.category, longitude: that.data.longitude, latitude: that.data.latitude,q:text },
-      function (data) {
-        var markers = [];
-        var includePoints = [];
-        for (var i = 0; i < data.length; i++) {
-          var o = data[i];
-          o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
-          o.width = 45;
-          o.title = o.name;
-          o.height = 45;
-          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS' };
-          //o.label = { content: o.name, color: "#696969", fontSize:14 };
-          markers.push(o);
-          includePoints.push({
-            longitude: o.longitude,
-            latitude: o.latitude
-          });
-          console.log(o);
-        }
-        if (!that.data.includePointsStatus){
-          includePoints.length = 0;
-        }
-        that.setData({
-          markers: markers,
-          includePoints: includePoints
-        });
-      }
-    );
-  },
-  
   initDeptData: function (text) {
     var that = this;
     var includePoints = [];
