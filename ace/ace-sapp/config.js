@@ -1,7 +1,6 @@
 /**
  * 小程序配置文件
  */
-
 // 此处主机域名是腾讯云解决方案分配的域名
 // 小程序后台服务解决方案：https://www.qcloud.com/solution/la
 var host = "14592619.qcloud.la";
@@ -13,6 +12,8 @@ var config = {
     server,
     serverfile,
     // 登录地址，用于建立会话
+    frontColor: '#ffffff',
+    backgroundColor: "#3C3C3C",
     loginUrl: `${server}/portal/www/authority.do`,
     selectOrganizationList: `${server}/uf/www/selectOrganizationList.do`,
     selectOrganizationListMap: `${server}/uf/www/selectOrganizationListMap.do`,
@@ -23,7 +24,9 @@ var config = {
     selectOrganizationByCategory: `${server}/uf/www/selectOrganizationByCategory.do`,
     checkImageUrl: `${server}/uf/www/captcha/image.do`,
     appid: 'wxa09a5be5fd228680',
+    //appid:'wx6b6434c7e0e627f5',
     appsecret: 'd520d29f8c26c7e3885d80b1812a8d91',
+    //appsecret: '9f202bd7483d888e220d7ee3cce40d6e',
     areaCode:'430702',
     uploadUrl: `${server}/portal/www/uploadFile.do`,
     regUrl: `${server}/portal/www/reg.do`,

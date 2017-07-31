@@ -25,7 +25,31 @@ Page({
     loading: false,
     disabled: false,
     id: util.uuid(),
-    files: []
+    files: [],
+    tabActiveLeft: "tab-active",
+    tabActiveRight: "",
+  },
+  onReady: function (res) {
+    wx.setNavigationBarColor({
+      frontColor: cfg.frontColor,
+      backgroundColor: cfg.backgroundColor,
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    });
+  },
+  tableft: function (e) {
+    this.setData({
+      tabActiveLeft: "tab-active",
+      tabActiveRight: "",
+    })
+  },
+  tabright: function (e) {
+    this.setData({
+      tabActiveLeft: "",
+      tabActiveRight: "tab-active",
+    })
   },
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)

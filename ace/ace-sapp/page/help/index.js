@@ -6,6 +6,16 @@ Page({
     ],
     serverfile: cfg.serverfile
   },
+  onReady: function (res) {
+    wx.setNavigationBarColor({
+      frontColor: cfg.frontColor,
+      backgroundColor: cfg.backgroundColor,
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    });
+  },
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮

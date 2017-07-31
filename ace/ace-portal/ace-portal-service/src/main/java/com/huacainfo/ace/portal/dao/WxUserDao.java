@@ -13,4 +13,6 @@ public interface WxUserDao {
 	int updateReg(WxUser record);
 
 	int isExit(WxUser record);
+
+	java.util.Map<String,Object> selectPersonageByMobile(String mobile);
 }

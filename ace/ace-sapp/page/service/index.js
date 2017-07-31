@@ -21,6 +21,14 @@ Page({
     }
   },
   onReady: function (e) {    // 使用 wx.createMapContext 获取 map 上下文 
+    wx.setNavigationBarColor({
+      frontColor: cfg.frontColor,
+      backgroundColor: cfg.backgroundColor,
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    });
     this.mapCtx = wx.createMapContext('myMap');
     
   },
@@ -51,42 +59,15 @@ Page({
     latitude: 29.031673,
     longitude: 111.698497,
     includePoints: [],
-    markers: [{
-      iconPath: "../../image/jigou.png",
-      id: '977577',
-      title: '久久鸭脖中心店',
-      types: '1',
-      latitude: 29.031673,
-      longitude: 111.698497,
-      width: 35,
-      height: 45,
-      callout: { content: "久久鸭脖中心店", color: "#000000", fontSize: 14, borderRadius: 5, bgColor: "", padding: 10, display: 'ALWAYS' }
-      //label: { color: "#000000", fontSize: 20, content:"久久鸭脖中心店", x:2, y:3}
-    }],
-    polyline: [{
-      points: [{
-        longitude: '116.481451',
-        latitude: '40.006822'
-      }, {
-        longitude: '116.487847',
-        latitude: '40.002607'
-      }, {
-        longitude: '116.496507',
-        latitude: '40.006103'
-      }],
-      color: "#FF0000DD",
-      width: 3,
-      dottedLine: true
-    }],
-    circles: [{
-      latitude: '40.007153',
-      longitude: '116.491081',
-      color: '#FF0000DD',
-      fillColor: '#7cb5ec88',
-      radius: 400,
-      strokeWidth: 2
-    }],
+    markers: [],
+    polyline: [],
+    circles: [],
     controls: []
+  },
+  reg: function () {
+    wx.navigateTo({
+      url: '../reg/index?redirectTo=/page/service/index'
+    })
   },
   controltap: function (e) {
     console.log(e.controlId);
@@ -138,7 +119,7 @@ Page({
       that.initDeptData('');
     }
     if (that.data.activeTarget == 'org') {
-      that.initOrgData('');
+      //that.initOrgData('');
     }
     if (that.data.activeTarget == 'personage') {
       that.initPersonageData('');
@@ -340,7 +321,9 @@ Page({
     //构造百度地图api实例
     BMap = new bmap.BMapWX({
       ak: 'cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB'
-    })
+    });
+    
+  
   },
   initOrgData: function (text) {
     var that = this;
@@ -367,7 +350,7 @@ Page({
           includePoints.length = 0;
         }
         that.setData({
-          markers: that.data.markers.concat(markers),
+          markers: markers,
           includePoints: includePoints
         });
       }
@@ -413,6 +396,22 @@ Page({
   },
   initPersonageData: function (text) {
     var that = this;
+    console.log("initData");
+    console.log("getStorage -> userInfo start")
+    var o = wx.getStorageSync('userInfo');
+    if (!o) {
+      that.setData({
+        userLogin: false
+      });
+      that.reg();
+      return;
+    } else {
+      that.setData({
+        userLogin: true
+      });
+     
+    }
+   
     var includePoints = [];
     util.request(cfg.selectPersonAgetListMap, { longitude: that.data.longitude, latitude: that.data.latitude,q:text},
       function (data) {
@@ -574,10 +573,9 @@ Page({
           o.types = "www";
           o.addr = data[i].address;
           o.tel = data[i].telephone;
-
+         // o.label = { color: "#6C6C6C", fontSize: 14, content: data[i].title,x:5,y:-50};
          // o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
           //o.width = 30;
-          o.title = o.name;
          // o.height = 30;
           //o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS' };
           markers.push(o);

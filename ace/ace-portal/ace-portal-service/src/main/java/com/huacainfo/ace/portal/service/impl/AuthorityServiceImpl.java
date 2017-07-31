@@ -70,12 +70,29 @@ public class AuthorityServiceImpl implements AuthorityService {
 		String openid = json.getString("openid");
 		String expires_in = json.getString("expires_in");
         JSONObject userinfo = this.getUserInfo(encryptedData,session_key,iv);
+
+
 		logger.info("session_key -> {} openid -> {} expires_in -> {} userinfo ->{}", session_key, openid, expires_in,
 				userinfo);
         String _3rd_session =userinfo.getString("unionId");
         if(CommonUtils.isBlank(_3rd_session)){
 			_3rd_session=userinfo.getString("openId");
 			userinfo.put("unionId",_3rd_session);
+		}
+		WxUser user=this.wxUserDao.selectByPrimaryKey(_3rd_session);
+		if(CommonUtils.isNotEmpty(user)){
+			userinfo.put("areaCode",user.getAreaCode());
+			userinfo.put("category",user.getCategory());
+			if(CommonUtils.isNotEmpty(user)){
+				if(CommonUtils.isNotEmpty(user.getRole())){
+					if(user.getRole().equals("admin")){
+
+						userinfo.put("category","");
+						logger.info("admin in login");
+					}
+				}
+
+			}
 		}
         Map<String, String> o = new HashMap<String, String>();
         o.put("session_key", session_key);
@@ -138,13 +155,18 @@ public class AuthorityServiceImpl implements AuthorityService {
 	}
 
 	public  MessageResponse reg(com.huacainfo.ace.common.model.WxUser wxUser) throws Exception{
+
+		Map<String,Object> p=this.wxUserDao.selectPersonageByMobile(wxUser.getMobile());
+		if(p==null||p.isEmpty()){
+			return new MessageResponse(1,"手机号不正确，还未被统战人士信息绑定。");
+		}
+		if(!((String)p.get("name")).equals(wxUser.getName())){
+			return new MessageResponse(1,"姓名在统战人士信息中不存在。");
+		}
+		wxUser.setAreaCode((String) p.get("areaCode"));
+		wxUser.setCategory((String) p.get("category"));
 		int t=this.wxUserDao.updateReg(wxUser);
-		if(CommonUtils.isBlank(wxUser.getMobile())){
-			return new MessageResponse(1,"手机号不能为空。");
-		}
-		if(CommonUtils.isBlank(wxUser.getName())){
-			return new MessageResponse(1,"姓名不能为空。");
-		}
+
 		return new MessageResponse(0,"成功。");
 	}
 

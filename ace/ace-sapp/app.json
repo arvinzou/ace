@@ -17,9 +17,9 @@
     "page/activityPreview/index"
   ],
   "window": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "#fff",
     "navigationBarTitleText": "掌上统战",
-    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarBackgroundColor": "#3C3C3C",
     "backgroundColor": "#F8F8F8"
   },
   "tabBar": {

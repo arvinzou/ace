@@ -19,7 +19,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     unionId, openId, nickName, gender, city, province, country, avatarUrl, mobile, addr, 
-    email, name,latitude, longitude
+    email, name,latitude, longitude,areaCode,category,role
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -60,10 +60,15 @@
     mobile = #{mobile,jdbcType=VARCHAR},
     addr = #{addr,jdbcType=VARCHAR},
     email = #{email,jdbcType=VARCHAR},
-    name = #{name,jdbcType=VARCHAR}
+    name = #{name,jdbcType=VARCHAR},
+    areaCode = #{areaCode,jdbcType=VARCHAR},
+    category = #{category,jdbcType=VARCHAR}
     where unionId = #{unionId,jdbcType=VARCHAR}
   </update>
   <select id="isExit" resultType="int">
     select count(*) from wx_user where unionId=#{unionId}
+  </select>
+  <select id="selectPersonageByMobile" resultType="map">
+    select areaCode,category,name from uf.personage where mobile=#{mobile} limit 0,1
   </select>
 </mapper>

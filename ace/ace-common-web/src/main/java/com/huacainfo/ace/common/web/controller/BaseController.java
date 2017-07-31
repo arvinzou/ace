@@ -61,6 +61,9 @@ public class BaseController implements Serializable {
 			return null;
 		}
 		JSONObject userinfo=(JSONObject)this.redisTemplate.opsForValue().get(_3rd_session);
+		if(CommonUtils.isBlank(userinfo)){
+			return null;
+		}
 		WxUser wxUser = JSON.parseObject(userinfo.toString(),WxUser.class);
 		return wxUser;
 	}

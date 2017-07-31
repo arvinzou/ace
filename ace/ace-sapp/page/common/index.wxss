@@ -1,5 +1,5 @@
 .index{
-  color: #000000;
+  color: 	#7A7E83;
 }
 .index-hd {
   padding: 5rpx;
@@ -91,7 +91,7 @@
   border-radius: 4rpx;
   overflow: hidden;
   opacity: 1;
-  background-color: #EFEFF4;
+  background-color: #fff;
 }
 .kind-list-item:first-child {
   margin-top: 0;

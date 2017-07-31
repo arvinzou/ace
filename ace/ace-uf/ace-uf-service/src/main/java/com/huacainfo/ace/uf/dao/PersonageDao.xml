@@ -215,6 +215,10 @@
             and t.name like
             concat('%',#{q,jdbcType=VARCHAR},'%')
         </if>
+        <if test='user.category!=null and user.category!=""'>
+            and t.category =#{user.category,jdbcType=VARCHAR}
+        </if>
+        and t.areaCode like concat(#{user.areaCode,jdbcType=VARCHAR},'%')
         ORDER BY distance LIMIT 50
     </select>
 
@@ -227,6 +231,10 @@
         portal.dict
         WHERE
         category_id = '98'
+
+        <if test='user.category!=null and user.category!=""'>
+            and code =#{user.category,jdbcType=VARCHAR}
+        </if>
     </select>
 
     <select id="selectPersonageListByText" resultType="map">
@@ -244,6 +252,10 @@
             and t.name like
             concat('%',#{q,jdbcType=VARCHAR},'%')
         </if>
+        <if test='user.category!=null and user.category!=""'>
+            and t.category =#{user.category,jdbcType=VARCHAR}
+        </if>
+        and t.areaCode like concat(#{user.areaCode,jdbcType=VARCHAR},'%')
     </select>
 
     <select id="selectPersonageById" resultType="map">

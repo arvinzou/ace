@@ -27,6 +27,11 @@ public class WxUser implements java.io.Serializable {
 	private String email;
 
 	private String name;
+	private String role;
+
+	private String areaCode;
+
+	private String category;
 
 	private BigDecimal latitude;
 
@@ -160,5 +165,29 @@ public class WxUser implements java.io.Serializable {
 				", email='" + email + '\'' +
 				", name='" + name + '\'' +
 				'}';
+	}
+
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

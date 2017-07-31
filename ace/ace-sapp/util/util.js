@@ -42,7 +42,7 @@ function request(url, data, success, fail, complete) {
     _success = success,
     _fail = fail,
     _complete = complete;
-
+  wx.showNavigationBarLoading();
   wx.request({
     url: url,
     data: data,
@@ -53,11 +53,13 @@ function request(url, data, success, fail, complete) {
     },
     success: function (res) {
       console.log( res);
+      wx.hideNavigationBarLoading() //完成停止加载
       if (typeof _success == "function") {
         _success(res.data);
       }
     },
     fail: function (res) {
+      wx.hideNavigationBarLoading() //完成停止加载
       if (typeof _fail == "function") {
         _fail(res);
       }
