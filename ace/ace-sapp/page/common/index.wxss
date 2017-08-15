@@ -108,15 +108,19 @@
   display: flex;
   align-items: center;
   transition: opacity .3s;
+ 
 }
 .kind-list-item-hd-show {
   opacity: 1;
   font-weight: 800;
   font-size: 16px;
+ 
 }
 .kind-list-item-bd {
   height: 0;
   overflow: hidden;
+
+
 }
 .kind-list-item-bd-show {
   height: auto;
