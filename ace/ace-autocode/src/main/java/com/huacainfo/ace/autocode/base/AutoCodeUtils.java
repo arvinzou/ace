@@ -118,7 +118,7 @@ public class AutoCodeUtils {
         if (c != null) {
             String cName = c.getName();
             bean.setName(getLastChar(cName));
-            bean.setTableChineseName("活动评论");
+            bean.setTableChineseName("微信用户");
             bean.setLowerName(getLowercaseChar(getLastChar(cName)));
 
             annotation.setAuthorName("陈晓克");

@@ -83,11 +83,13 @@ public class AuthorityServiceImpl implements AuthorityService {
 		if(CommonUtils.isNotEmpty(user)){
 			userinfo.put("areaCode",user.getAreaCode());
 			userinfo.put("category",user.getCategory());
+			userinfo.put("party",user.getParty());
 			if(CommonUtils.isNotEmpty(user)){
 				if(CommonUtils.isNotEmpty(user.getRole())){
 					if(user.getRole().equals("admin")){
 
 						userinfo.put("category","");
+						userinfo.put("party","");
 						logger.info("admin in login");
 					}
 				}
@@ -165,6 +167,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 		}
 		wxUser.setAreaCode((String) p.get("areaCode"));
 		wxUser.setCategory((String) p.get("category"));
+		wxUser.setParty((String) p.get("party"));
 		int t=this.wxUserDao.updateReg(wxUser);
 
 		return new MessageResponse(0,"成功。");

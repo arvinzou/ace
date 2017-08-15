@@ -62,4 +62,7 @@
 
     <dubbo:service interface="com.huacainfo.ace.portal.service.AnalysisService"
                    ref="analysisPortalService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.WxUserService"
+                   ref="wxUserService"/>
 </beans>

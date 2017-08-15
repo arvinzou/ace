@@ -22,25 +22,19 @@ pageEncoding="utf-8"%>
 
 #main {
     height: 553px;
-    border: 1px solid #5688CB;
+    border: 1px solid #000000;
     border-top: 0px;
 }
 
 #tooles {
     height: 23px;
-    background: #5688CB;
+    background: #000000;
     position: relative;
     z-index: 100;
     color:white;
 }
 
-#bside_left {
-    width: 260px;
-    height: 510px;
-    padding: 10px 0px 10px 10px;
-    float: left;
-    overflow: auto;
-}
+
 
 #cur_city, #no_value {
     height: 20px;
@@ -95,14 +89,14 @@ pageEncoding="utf-8"%>
     line-height: 24px;
     font-size: 14px;
     float: left;
-    background: url(http://lbs.qq.com/tool/getpoint//img/btn.png);
+    background: url(http://lbs.qq.com/tool/getpoint/img/btn.png);
     margin-top: 14px;
     text-align: center;
     cursor: pointer;
 }
 
 .btn_active {
-    background: url(http://lbs.qq.com/tool/getpoint//img/btn.png) -49px 0px;
+    background: url(http://lbs.qq.com/tool/getpoint/img/btn.png) -49px 0px;
 }
 
 .poi {
@@ -228,13 +222,19 @@ pageEncoding="utf-8"%>
 .hide {
     display: none;
 }
-
+#bside_left {
+    width: 300px;
+    height: 500px;
+    padding: 10px 0px 10px 10px;
+    float: left;
+    overflow: auto;
+}
 #bside_rgiht {
-    width: 1024px;
+    width: 900px;
     height: 530px;
     margin-left: 10px;
-    border-left: 1px solid #5688CB;
-    float: left;
+    border-left: 1px solid #000000;
+    float: right;
     font-size: 12px;
 }
 
@@ -252,6 +252,8 @@ pageEncoding="utf-8"%>
 
 <body>
 <div style="height:727px;position:relative;">
+
+
     <div style="height:53px;">
         <div class="search">
             <div class="search_c"><input type="text" class="search_t" onKeyPress="if(event.keyCode==13) {btnSearch.click();return false;}"/></div>
@@ -265,6 +267,7 @@ pageEncoding="utf-8"%>
         </div>
     </div>
     <div id="main">
+
         <div id="tooles">
             <div id="cur_city">
                 <strong>北京市</strong><span class="change_city">[<span style="text-decoration:underline;">更换城市</span>]<span id="level">当前缩放等级：10</span></span>
@@ -796,9 +799,14 @@ pageEncoding="utf-8"%>
             </div>
 
         </div>
+        <div style="width:100%">
 
-        <div id="bside_rgiht">
-            <div id="container"></div>
+            <div id="bside_left">
+
+            </div>
+            <div id="bside_rgiht">
+                <div id="container"></div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 var cfg = {};
+cfg.view_load_data_url = portalPath + '/department/selectDepartmentByPrimaryKey.do';
 cfg.grid_load_data_url = portalPath + '/department/findDepartmentList.do';
 cfg.grid_add_data_url = portalPath + '/department/insertDepartment.do';
 cfg.grid_edit_data_url = portalPath + '/department/updateDepartment.do';
@@ -9,7 +10,7 @@ cfg.pager_selector= "#grid-pager";
 cfg.rowNum= default_page_list[0];
 cfg.dataId= 'departmentId';
 cfg.gridHeight=window.innerHeight-layoutTopHeight;
-cfg.jgridEditWinWidth=950;
+cfg.jgridEditWinWidth=1050;
 cfg.jgridAlertWidth=400;
 cfg.jgrdInfoDialogWidth=500;
 if(cfg.gridHeight<100){

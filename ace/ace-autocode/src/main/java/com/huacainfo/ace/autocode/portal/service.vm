@@ -11,7 +11,7 @@ public interface $!{bean.name}Service {
 	public abstract PageResult<$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start, int limit, String orderBy) throws Exception;
 	public abstract MessageResponse insert$!{bean.name}($!{bean.name} obj,UserProp userProp) throws Exception;
 	public abstract MessageResponse update$!{bean.name}($!{bean.name} obj,UserProp userProp) throws Exception;
-	public abstract SingleResult<$!{bean.name}> select$!{bean.name}ByPrimaryKey(String id) throws Exception;
+	public abstract SingleResult<$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception;
 	public abstract MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,UserProp userProp) throws Exception;
 
 	

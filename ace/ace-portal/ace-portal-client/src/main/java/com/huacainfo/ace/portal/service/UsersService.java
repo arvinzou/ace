@@ -211,4 +211,6 @@ public interface UsersService {
 	 */
 	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception;
 
+	public abstract MessageResponse insertReg(Users obj) throws Exception;
+
 }

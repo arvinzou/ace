@@ -2,7 +2,7 @@
 <view class="reg-top">
   <view class="reg-logo-panel">
       <image src="../../image/liuyan_selected.png" mode="aspectFit" class="reg-icon"/>
-      <view class="reg-logo-text">建议献策</view>
+      <view class="reg-logo-text">建言献策</view>
   </view>
 </view>
 <view class="reg-tabbar">
@@ -72,7 +72,7 @@
         <input name="title" maxlength="50" class="weui-flex__item-body" maxlength="10" placeholder="标题" />
       </view>
       <view class="kind-list-item">
-        <textarea name="docText" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入留言建议" style="height: 300rpx" />
+        <textarea name="docText" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入建言" style="height: 300rpx" />
         <view class="weui-textarea-counter">{{max}}/500</view>
       </view>
       <view class="kind-list-item weui-flex">

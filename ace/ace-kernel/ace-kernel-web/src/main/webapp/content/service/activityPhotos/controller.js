@@ -41,19 +41,18 @@ jQuery(function($) {
 							modal:false,
 							recreateForm : true,
 							viewPagerButtons : false,
+							beforeSubmit : function(postdata) {
+                                postdata.docText=editor.getValue();
+                                return [true,"",""];
+
+                            },
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
 								form.closest('.ui-jqdialog').find(
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
-								editor=CKEDITOR.replace('docText',{ allowedContent: true });
-                                editor.on( 'change', function( event ) {
-                                    var data = this.getData();//内容
-
-                                    $("textarea[name=docText]").val(data);
-
-                                });
+								initSimditor($("textarea[name=docText]"),null);
 							}
 						})
 						show135Editor();
@@ -75,6 +74,11 @@ jQuery(function($) {
 							modal:false,
 							recreateForm : true,
 							viewPagerButtons : true,
+							beforeSubmit : function(postdata) {
+                                postdata.docText=editor.getValue();
+                                return [true,"",""];
+
+                            },
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
 								form.closest('.ui-jqdialog').find(
@@ -138,6 +142,8 @@ function preview(id,title){
 				}
 			]
 		});
+		$(dialog).parent().css("top","1px");
+        $(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
 		loadView(id);
 }
 function loadView(id) {
@@ -177,13 +183,7 @@ function loadText(id) {
 		beforeSend : function(XMLHttpRequest) {
 		},
 		success : function(rst, textStatus) {
-		    editor=CKEDITOR.replace('docText',{ allowedContent: true });
-            editor.on( 'change', function( event ) {
-                var data = this.getData();//内容
-                $("textarea[name=docText]").val(data);
-            });
-            $("textarea[name=docText]").val(rst.value.docText);
-            editor.setData(rst.value.docText);
+             initSimditor($("textarea[name=docText]"),rst.value.docText);
 
 		},
 		error : function() {
@@ -194,4 +194,21 @@ function loadText(id) {
 function show135Editor(){
     var url = 'http://www.135editor.com/';
     window.open(url);
+}
+function initSimditor(textarea,text){
+            editor = new Simditor({
+                 textarea:textarea,
+                 params :{},
+                 toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough','fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
+                             upload: {
+                                 url: portalPath+'/files/uploadImage.do', //文件上传的接口地址
+                                 params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+                                 fileKey: 'file', //服务器端获取文件数据的参数名
+                                 connectionCount: 3,
+                                 leaveConfirm: '正在上传文件'
+                             }
+             });
+             if(text){
+                   editor.setValue(text);
+             }
 }

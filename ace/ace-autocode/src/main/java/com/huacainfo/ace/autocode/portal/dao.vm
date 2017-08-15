@@ -12,7 +12,7 @@ public interface $!{bean.name}Dao {
     int insert($!{bean.name} record);
 
 
-    $!{bean.name} selectByPrimaryKey(String $!{bean.name}Id);
+    $!{bean.name}Vo selectByPrimaryKey(String $!{bean.name}Id);
 
 
     int updateByPrimaryKey($!{bean.name} record);

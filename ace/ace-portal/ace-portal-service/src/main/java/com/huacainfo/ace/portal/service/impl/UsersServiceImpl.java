@@ -104,6 +104,44 @@ public class UsersServiceImpl implements UsersService {
 				"账号:"+users.getAccount()+",姓名:"+users.getName(), "01", userProp);
 		return new MessageResponse(0,"添加员工户完成！");
 	}
+	public MessageResponse insertReg(Users users)
+			throws Exception {
+		if (CommonUtils.isBlank(users.getDepartmentId())) {
+			return new MessageResponse(1, "归属部门不能为空!");
+		}
+		if (CommonUtils.isBlank(users.getAccount())) {
+
+			return new MessageResponse(1, "账户不能为空!");
+		}
+		if (this.usersDao.isExitUsersAccount(users.getAccount()) > 0) {
+
+			return new MessageResponse(1, "账户已存在!");
+		}
+		if (CommonUtils.isBlank(users.getPassword())) {
+
+			return new MessageResponse(1, "密码不能为空!");
+		}
+		if (CommonUtils.isBlank(users.getSex())) {
+
+			return new MessageResponse(1, "性别不能为空!");
+		}
+		DepartmentVo dept=departmentDao.selectDepartmentVoByPrimaryKey(users.getDepartmentId());
+		if(CommonUtils.isBlank(dept)){
+			return new MessageResponse(1, "归属部门不存在!");
+		}
+		if (CommonUtils.isBlank(users.getName())) {
+			return new MessageResponse(1, "姓名不能为空!");
+		}
+		users.setAreaCode(dept.getAreaCode());
+		users.setStauts("1");
+		users.setPassword(CommonUtils.getMd5(users.getPassword()));
+		String id=String.valueOf(new Date().getTime());
+		users.setUserId(id);
+		users.setCreateTime(new Date());
+		users.setCurSyid("uf");
+		this.usersDao.insertUsers(users);
+		return new MessageResponse(0,"注册成功！");
+	}
 
 	public MessageResponse updateUsers(Users users, UserProp userProp, String flag)
 			throws Exception {
@@ -271,13 +309,7 @@ public class UsersServiceImpl implements UsersService {
 		return rst;
 	}
 	
-	/**
-	 * 更新联系人的状态
-	 * 
-	 * @param id
-	 * @param curUserProp
-	 * @return
-	 */
+
 	public MessageResponse deleteConUsers(String id, UserProp userProp) throws Exception {
 		if (CommonUtils.isBlank(id)) {
 			return new MessageResponse(1, "编号不能为空！");

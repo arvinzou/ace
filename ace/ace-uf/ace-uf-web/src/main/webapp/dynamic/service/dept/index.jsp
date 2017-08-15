@@ -146,6 +146,13 @@
 	<script
 		src="${pageContext.request.contextPath}/content/service/dept/view.js?version=${cfg.version}"></script>
 
+	<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+
+	<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+	<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+	<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+	<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+
 	<jsp:include page="../../common/footer-2.jsp" />
 
 	<script type="text/javascript">

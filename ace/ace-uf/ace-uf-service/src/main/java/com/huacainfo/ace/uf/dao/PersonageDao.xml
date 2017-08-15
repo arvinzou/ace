@@ -224,11 +224,14 @@
 
     <select id="selectPersonageCategoryList" resultType="map">
         SELECT
-        CODE 'id',
-        NAME 'name',
-        remark 'icon'
+        t.CODE 'id',
+        t.NAME 'name',
+        t.remark 'icon',
+        'category' type,
+        ifnull(a.num,0) num
         FROM
-        portal.dict
+        portal.dict t
+        left join (select category,count(1) num from personage where status='1' group by category) a on t.code=a.category
         WHERE
         category_id = '98'
 
@@ -236,11 +239,29 @@
             and code =#{user.category,jdbcType=VARCHAR}
         </if>
     </select>
+    <select id="selectPersonagePartyList" resultType="map">
+        SELECT
+        t.CODE 'id',
+        t.NAME 'name',
+        t.remark 'icon',
+        ifnull(a.num,0) num,
+        'category' type
+        FROM
+        portal.dict t
+        left join (select party,count(1) num from personage where status='1' and category='01' group by party) a on t.code=a.party
+        WHERE
+        category_id = '101'
+        <if test='user.party!=null and user.party!=""'>
+            and code =#{user.party,jdbcType=VARCHAR}
+        </if>
+    </select>
 
     <select id="selectPersonageListByText" resultType="map">
         select t.id, t.name, t.category,t.photo, t.mobile,
         a.name areaName,b.department_name deptName,c.fullname placeOfOriginName,dict.name categoryName,
-        IFNULL(wx.mobile,'0') bindStatus
+        IFNULL(wx.mobile,'0') bindStatus,
+        'person' type,
+        t.party
         from personage t
         inner join portal.province a on t.areaCode=a.code
         inner join portal.department b on t.deptId=b.department_id

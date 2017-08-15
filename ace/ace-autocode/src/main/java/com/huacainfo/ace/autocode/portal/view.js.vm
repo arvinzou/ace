@@ -46,6 +46,8 @@ jQuery(function($) {
 		shrinkToFit:true,
 		autoScroll: false,
 		loadComplete : function() {
+		    $("#grid-pager_left").removeAttr("style");
+        	$("#grid-pager_center").removeAttr("style");
 			$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
 			var table = this;
 			setTimeout(function() {

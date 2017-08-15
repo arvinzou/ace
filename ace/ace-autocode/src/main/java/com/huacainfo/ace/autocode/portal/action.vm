@@ -20,7 +20,7 @@ import com.huacainfo.ace.portal.vo.$!{bean.name}QVo;
 
 @Controller
 @RequestMapping("/$!{bean.lowerName}")
-public class $!{bean.name}Controller extends PortalBaseController {
+public class $!{bean.name}Controller extends UfBaseController {
 
 	/**
 	 * 
@@ -62,7 +62,7 @@ public class $!{bean.name}Controller extends PortalBaseController {
 
 	@RequestMapping(value = "/select$!{bean.name}ByPrimaryKey.do")
 	@ResponseBody
-	public SingleResult<$!{bean.name}> select$!{bean.name}ByPrimaryKey(String id)
+	public SingleResult<$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id)
 			throws Exception {
 		return this.$!{bean.lowerName}Service.select$!{bean.name}ByPrimaryKey(id);
 	}

@@ -17,11 +17,15 @@
     <result column="latitude" jdbcType="DECIMAL" property="latitude" />
     <result column="longitude" jdbcType="DECIMAL" property="longitude" />
   </resultMap>
+  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.WxUserVo"
+             extends="BaseResultMap">
+
+  </resultMap>
   <sql id="Base_Column_List">
     unionId, openId, nickName, gender, city, province, country, avatarUrl, mobile, addr, 
-    email, name,latitude, longitude,areaCode,category,role
+    email, name,latitude, longitude,areaCode,category,role,party
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select 
     <include refid="Base_Column_List" />
     from wx_user
@@ -60,6 +64,7 @@
     mobile = #{mobile,jdbcType=VARCHAR},
     addr = #{addr,jdbcType=VARCHAR},
     email = #{email,jdbcType=VARCHAR},
+    party = #{party,jdbcType=VARCHAR},
     name = #{name,jdbcType=VARCHAR},
     areaCode = #{areaCode,jdbcType=VARCHAR},
     category = #{category,jdbcType=VARCHAR}
@@ -69,6 +74,71 @@
     select count(*) from wx_user where unionId=#{unionId}
   </select>
   <select id="selectPersonageByMobile" resultType="map">
-    select areaCode,category,name from uf.personage where mobile=#{mobile} limit 0,1
+    select areaCode,category,name,party from uf.personage where mobile=#{mobile} limit 0,1
   </select>
+
+  <sql id="whereCondition">
+    from wx_user where 0=0
+    <if test='condition.name!=null and condition.name!=""'>
+      and name like
+      concat(#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.mobile!=null and condition.mobile!=""'>
+      and mobile =#{condition.mobile,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.nickName!=null and condition.nickName!=""'>
+      and nickName like
+      concat(#{condition.nickName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.role!=null and condition.role!=""'>
+      and role =#{condition.role,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition" />
+  </select>
+  <select id="findList" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    <include refid="whereCondition" />
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY unionId
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <update id="updateRole">
+    update wx_user
+    set
+    role = #{role,jdbcType=VARCHAR}
+    where unionId = #{unionId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectWxUser" resultType="map">
+    select  unionId, openId, nickName, gender, city, province, country, avatarUrl, mobile, addr,
+    email, name,latitude, longitude,areaCode,category,role,party from wx_user
+    where 0=0
+    <if test='condition.name!=null and condition.name!=""'>
+      and name like
+      concat(#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.mobile!=null and condition.mobile!=""'>
+      and mobile =#{condition.mobile,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.nickName!=null and condition.nickName!=""'>
+      and nickName like
+      concat(#{condition.nickName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.role!=null and condition.role!=""'>
+      and role =#{condition.role,jdbcType=VARCHAR}
+    </if>
+    ORDER BY unionId
+  </select>
+
 </mapper>

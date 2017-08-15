@@ -1,3 +1,4 @@
+var editor;
 jQuery(function($) {
 	$('#btn-search').on('click', function() {
 		$('#fm-search').ajaxForm({
@@ -32,6 +33,11 @@ jQuery(function($) {
 							closeAfterAdd : true,
 							recreateForm : true,
 							viewPagerButtons : false,
+							beforeSubmit : function(postdata) {
+                                postdata.serviceWay=editor.getValue();
+                                return [true,"",""];
+
+                            },
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
 								form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
@@ -44,6 +50,7 @@ jQuery(function($) {
                                 }
                                 appendMapBtn("regAddr");
                                 appendUploadBtn("qrcode");
+                                initSimditor($("textarea[name=serviceWay]"),null);
 							}
 						})
 
@@ -64,6 +71,11 @@ jQuery(function($) {
 							closeAfterAdd : true,
 							recreateForm : true,
 							viewPagerButtons : true,
+							beforeSubmit : function(postdata) {
+                                postdata.serviceWay=editor.getValue();
+                                return [true,"",""];
+
+                            },
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
 								form.closest('.ui-jqdialog').find(
@@ -75,9 +87,11 @@ jQuery(function($) {
                                 if (gr) {
                                     var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
                                      initPhoto(gd.departmentId);
+
                                 }
                                 appendMapBtn("regAddr");
                                 appendUploadBtn("qrcode");
+                                 loadText(gd.departmentId);
 							}
 						})
 
@@ -475,7 +489,7 @@ function appendMapBtn(id) {
 					+ "' class='ace-icon fa fa-location-arrow bigger-110' href='javascript:false'>选取</a>");
 	$("#" + id).after(html.join(''));
 	$('#btn-map-add-' + id).on('click', function() {
-		window.open("map.jsp");
+		window.open(portalPath+"/dynamic/common/map.jsp");
 	});
 }
 function latitude(latitude) {
@@ -486,4 +500,38 @@ function longitude(longitude) {
 }
 function addr(addr) {
 	$("#regAddr").val(addr);
+}
+function initSimditor(textarea,text){
+            editor = new Simditor({
+                 textarea:textarea,
+                 params :{},
+                 toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough','fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
+                             upload: {
+                                 url: portalPath+'/files/uploadImage.do', //文件上传的接口地址
+                                 params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+                                 fileKey: 'file', //服务器端获取文件数据的参数名
+                                 connectionCount: 3,
+                                 leaveConfirm: '正在上传文件'
+                             }
+             });
+             if(text){
+                   editor.setValue(text);
+             }
+}
+function loadText(id) {
+	$.ajax({
+		type : "post",
+		url : cfg.view_load_data_url,
+		data : {
+			departmentId : id
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+            initSimditor($("textarea[name=serviceWay]"),rst.value.serviceWay);
+		},
+		error : function() {
+			alert("加载错误！");
+		}
+	});
 }

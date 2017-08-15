@@ -33,6 +33,8 @@ public class WxUser implements java.io.Serializable {
 
 	private String category;
 
+	private String party;
+
 	private BigDecimal latitude;
 
 	private BigDecimal longitude;
@@ -189,5 +191,13 @@ public class WxUser implements java.io.Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getParty() {
+		return party;
+	}
+
+	public void setParty(String party) {
+		this.party = party;
 	}
 }
