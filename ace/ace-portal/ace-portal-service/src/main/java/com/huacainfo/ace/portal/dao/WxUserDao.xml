@@ -11,6 +11,7 @@
     <result column="country" jdbcType="VARCHAR" property="country" />
     <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -23,9 +24,9 @@
   </resultMap>
   <sql id="Base_Column_List">
     unionId, openId, nickName, gender, city, province, country, avatarUrl, mobile, addr, 
-    email, name,latitude, longitude,areaCode,category,role,party
+    email, name,latitude, longitude,areaCode,category,role,party,deptId
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from wx_user
@@ -65,6 +66,7 @@
     addr = #{addr,jdbcType=VARCHAR},
     email = #{email,jdbcType=VARCHAR},
     party = #{party,jdbcType=VARCHAR},
+    deptId = #{deptId,jdbcType=VARCHAR},
     name = #{name,jdbcType=VARCHAR},
     areaCode = #{areaCode,jdbcType=VARCHAR},
     category = #{category,jdbcType=VARCHAR}
@@ -74,7 +76,7 @@
     select count(*) from wx_user where unionId=#{unionId}
   </select>
   <select id="selectPersonageByMobile" resultType="map">
-    select areaCode,category,name,party from uf.personage where mobile=#{mobile} limit 0,1
+    select areaCode,category,name,party,deptId from uf.personage where mobile=#{mobile} limit 0,1
   </select>
 
   <sql id="whereCondition">

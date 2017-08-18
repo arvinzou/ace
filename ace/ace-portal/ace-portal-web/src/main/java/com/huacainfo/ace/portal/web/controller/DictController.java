@@ -236,8 +236,14 @@ public class DictController extends PortalBaseController {
 		if(CommonUtils.isBlank(id)){
 			id="0";
 		}
+		logger.info("=================getDictTreeList===>{}",id);
 		List<Tree> list=this.dictService.selectDictTreeList(id,this.getCurUserProp().getActiveSyId());
 		return list;
+	}
+	@RequestMapping(value = "/selectDictAllTreeByCategoryId.do")
+	@ResponseBody
+	public  List<Tree> selectDictAllTreeByCategoryId(String id) throws Exception{
+		return  this.dictService.selectDictAllTreeByCategoryId(id);
 	}
 	private String preDealDictJSONString(String dictJsonListString) {
 		dictJsonListString = dictJsonListString.replaceAll(" ", "");

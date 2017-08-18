@@ -14,7 +14,8 @@
     "page/me/index",
     "page/map/index",
     "page/activitySec/index",
-    "page/activityPreview/index"
+    "page/activityPreview/index",
+    "page/notice/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",
@@ -51,6 +52,12 @@
         "iconPath": "image/zhoubian.png",
         "selectedIconPath": "image/zhoubian_selected.png",
         "text": "统战GIS"
+      },
+      {
+        "pagePath": "page/notice/index",
+        "iconPath": "image/msg.png",
+        "selectedIconPath": "image/msg_selected.png",
+        "text": "统战飞讯"
       }
     ]
   },

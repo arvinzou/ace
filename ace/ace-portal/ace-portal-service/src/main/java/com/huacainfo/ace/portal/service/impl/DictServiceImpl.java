@@ -74,7 +74,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		int temp = this.dictMapper.isExitByNameAndCategoryId(
 				o.getName(), o.getCategoryId());
 		if (temp > 0) {
-			return new MessageResponse(1, "名称已存在！");
+			//return new MessageResponse(1, "名称已存在！");
 		}
 		this.dictMapper.insert(o);
 		this.dataBaseLogService.log("添加字典", "字典", "", o.getName(),
@@ -285,6 +285,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		return rst;
 	}
 	public  List<Tree>  selectDictTreeList(String pid,String syid) throws Exception{
+		logger.info("=================getDictTreeList-pid===>{}",pid);
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
 				this.dictMapper.selectDictTreeList(pid,syid));
 		return commonTreeUtils.getTreeList(pid);
@@ -353,5 +354,12 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 	}
 	public List<Map<String,String>> selectAreaCode() throws Exception{
 		return this.dictMapper.selectAreaCode();
+	}
+
+	public  List<Tree> selectDictAllTreeByCategoryId(String id) throws Exception{
+		logger.info("=================selectDictAllTreeByCategoryId-pid===>{}",id);
+		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
+				this.dictMapper.selectDictAllTreeByCategoryId(id));
+		return commonTreeUtils.getTreeList("0");
 	}
 }

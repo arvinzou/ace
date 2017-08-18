@@ -54,6 +54,7 @@ public class Personage implements java.io.Serializable{
     private BigDecimal longitude;
 
     private String remark;
+    private String qrcode;
 
     private String status;
 
@@ -333,5 +334,13 @@ public class Personage implements java.io.Serializable{
 
     public void setCareerType(String careerType) {
         this.careerType = careerType;
+    }
+
+    public String getQrcode() {
+        return qrcode;
+    }
+
+    public void setQrcode(String qrcode) {
+        this.qrcode = qrcode;
     }
 }

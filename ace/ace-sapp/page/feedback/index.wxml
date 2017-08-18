@@ -40,11 +40,9 @@
     <view class="kind-list" wx:if="{{tabActiveLeft=='tab-active'}}">
       <view class="kind-list-item weui-flex">
         <view class="weui-flex__item-icon">
-          <image class="iconList20" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" />
+          <image class="iconList20" src="../../image/dept.png" />
         </view>
-        <picker name="areaCode" bindchange="bindPickerChange" class="weui-flex__item-body" value="{{countryIndex}}" range="{{countries}}">
-          <view>{{countries[countryIndex]}}</view>
-        </picker>
+        <input name="dept" class="weui-flex__item-body" maxlength="10" placeholder="单位" />
       </view>
 
       <view class="kind-list-item weui-flex">

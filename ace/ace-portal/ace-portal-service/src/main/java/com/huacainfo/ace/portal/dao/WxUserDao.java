@@ -14,7 +14,7 @@ public interface WxUserDao {
     int insert(WxUser record);
 
 
-    WxUserVo selectByPrimaryKey(String WxUserId);
+    WxUser selectByPrimaryKey(String WxUserId);
 
 
     int updateByPrimaryKey(WxUser record);

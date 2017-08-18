@@ -275,11 +275,14 @@ function treeappend(){
 							'.ui-jqdialog-titlebar').wrapInner(
 							'<div class="widget-header" />')
 					style_edit_form(form);
+					var form=$("#fm-search");
+                    var re=$(form).find("input[name=categoryId]").val();
 					var FormPost=$("form[name=FormPost]");
-					$(FormPost).find("input[name=categoryId]").val(node.id);
+					$(FormPost).find("input[name=categoryId]").val(re);
+                    $(FormPost).find("input[name=pcode]").val(node.id);
 				}
 			})
-	$('#categoryId').val(node.id);
+
 }
 function treeedit(){
 	if(!authorConfig.hasOwnProperty(cfg.grid_edit_data_url)){

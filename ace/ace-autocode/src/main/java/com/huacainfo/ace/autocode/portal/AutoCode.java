@@ -5,7 +5,7 @@ import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 public class AutoCode {
 	public static void main(String[] args) throws Exception{
 		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("portal");
-		Class<?> c=com.huacainfo.ace.portal.model.WxUser.class;
+		Class<?> c=com.huacainfo.ace.portal.model.WxCfg.class;
 		autoCodeUtils.init(c);
 		autoCodeUtils.createVO(c);
 		autoCodeUtils.createQVO(c);

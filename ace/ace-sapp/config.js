@@ -15,6 +15,7 @@ var config = {
     frontColor: '#ffffff',
     backgroundColor: "#3C3C3C",
     loginUrl: `${server}/portal/www/authority.do`,
+    saveFormId: `${server}/portal/www/saveFormId.do`,
     selectOrganizationList: `${server}/uf/www/selectOrganizationList.do`,
     selectOrganizationListMap: `${server}/uf/www/selectOrganizationListMap.do`,
     selectOrganization: `${server}/uf/www/selectOrganization.do`,
@@ -45,7 +46,8 @@ var config = {
     selectUserListByActivityId: `${server}/uf/www/selectUserListByActivityId.do`,
     selectCommentListByActivityId: `${server}/uf/www/selectCommentListByActivityId.do`,
     insertActivityComment: `${server}/uf/www/insertActivityComment.do`,
-    updateActivity: `${server}/uf/www/updateActivity.do`
+    updateActivity: `${server}/uf/www/updateActivity.do`,
+    getPersonageTreeList: `${server}/uf/www/getPersonageTreeList.do`
 
 };
 module.exports = config

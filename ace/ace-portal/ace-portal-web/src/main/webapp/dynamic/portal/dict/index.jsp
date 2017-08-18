@@ -92,7 +92,8 @@
 		</div>
 		<div id="cc-west" class="easyui-west" data-options="region:'west',split:true" title="我的树" style="width:200px;">
 		 <ul id="tt" class="easyui-tree" data-options="
-               url: '${pageContext.request.contextPath}/dict/getDictTreeList.do',
+
+               url:'${pageContext.request.contextPath}/dict/getDictTreeList.do',
                 method: 'get',
                 animate: true,
                 lines:true,

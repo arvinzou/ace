@@ -14,6 +14,8 @@ public class Feedback implements java.io.Serializable{
 
     private String areaCode;
 
+    private String dept;
+
     private String name;
 
     private String tel;
@@ -142,5 +144,13 @@ public class Feedback implements java.io.Serializable{
 
     public void setReplyUserName(String replyUserName) {
         this.replyUserName = replyUserName == null ? null : replyUserName.trim();
+    }
+
+    public String getDept() {
+        return dept;
+    }
+
+    public void setDept(String dept) {
+        this.dept = dept;
     }
 }

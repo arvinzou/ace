@@ -1,0 +1,25 @@
+{
+  "touser": "oCjYM0R4q48UxJjl2wRBNS1kh_wA",
+  "template_id": "dsBQ3naiq3wxhXil3NLfop9chuMo6pxgCZ77IkEylJA",
+  "page": "/page/dept/index",
+  "form_id": "3a51fd7648f99c326d89094d9798360c",
+  "data": {
+    "keyword1": {
+      "value": "万网企业云会议",
+      "color": "#4a4a4a"
+    },
+    "keyword2": {
+      "value": "2017-08-21",
+      "color": "#9b9b9b"
+    },
+    "keyword3": {
+      "value": "武陵区互联网工业园",
+      "color": "#9b9b9b"
+    },
+    "keyword4": {
+      "value": "余跃辉",
+      "color": "#9b9b9b"
+    }
+  },
+  "emphasis_keyword": "keyword1.DATA"
+}

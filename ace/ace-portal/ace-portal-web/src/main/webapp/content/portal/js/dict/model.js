@@ -16,12 +16,12 @@ var _colModel = function() {
 				index : 'pcode',
 				width : 100,
 				sortable : false,
-				editable : false,
-				hidden:true,
+				editable : true,
+				hidden:false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
-					readonly : true
+					readonly : false
 				},
 				formoptions : {
 					elmprefix : "",

@@ -22,7 +22,7 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         t.id, t.title, t.category, t.status, t.areaCode, t.name, t.tel, t.email, t.createDate, t.replyTime,
-        t.replyUserId,
+        t.replyUserId,t.dept,
         t.replyUserName,t.docText, t.replyText,a.fullname areaName
         from feedback t left join portal.province a on t.areaCode=a.code
         where t.id = #{id,jdbcType=VARCHAR}
@@ -33,12 +33,12 @@
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.uf.model.Feedback">
         insert into feedback (id, title, category,
-        status, areaCode, name,
+        status, dept,areaCode, name,
         tel, email, createDate,
         replyTime, replyUserId, replyUserName,
         docText, replyText)
         values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
-        #{status,jdbcType=CHAR}, #{areaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR},  #{dept,jdbcType=VARCHAR},#{areaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
         #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
         #{replyTime,jdbcType=TIMESTAMP}, #{replyUserId,jdbcType=VARCHAR}, #{replyUserName,jdbcType=VARCHAR},
         #{docText,jdbcType=LONGVARCHAR}, #{replyText,jdbcType=LONGVARCHAR})
@@ -89,7 +89,7 @@
     </select>
     <select id="findList" resultMap="BaseResultMapVo">
         select m.* from(
-        select t.id, t.title, t.category, t.status, t.areaCode, t.name, t.tel, t.email, t.createDate, t.replyTime,
+        select t.id, t.title, t.category, t.status,t.dept, t.areaCode, t.name, t.tel, t.email, t.createDate, t.replyTime,
         t.replyUserId,
         t.replyUserName,t.docText, t.replyText,a.fullname areaName
 

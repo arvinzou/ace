@@ -22,6 +22,8 @@ import com.huacainfo.ace.portal.service.CacheService;
 import com.huacainfo.ace.portal.service.FilesService;
 import com.huacainfo.ace.portal.service.ResourcesService;
 
+import com.huacainfo.ace.portal.service.impl.TokenThread;
+
 public class WebContextParamListener implements ServletContextListener {
 	private ServletContext servletContext;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -44,6 +46,7 @@ public class WebContextParamListener implements ServletContextListener {
 		reflushDictFileThread.start();
 		initFilesService();
 		cleanFileThread.start();
+		new Thread(new TokenThread()).start();
 		
 	}
 

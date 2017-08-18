@@ -55,6 +55,8 @@ public class Users implements java.io.Serializable{
 	private String curSyid;
 
 	private String id;
+
+	private String formId;
 	
 	
 	public String getCurSyid() {
@@ -199,6 +201,14 @@ public class Users implements java.io.Serializable{
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getFormId() {
+		return formId;
+	}
+
+	public void setFormId(String formId) {
+		this.formId = formId;
 	}
 
 	@Override

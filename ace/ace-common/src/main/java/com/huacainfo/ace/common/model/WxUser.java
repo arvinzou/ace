@@ -27,11 +27,14 @@ public class WxUser implements java.io.Serializable {
 	private String email;
 
 	private String name;
+
 	private String role;
 
 	private String areaCode;
 
 	private String category;
+
+	private String deptId;
 
 	private String party;
 
@@ -166,6 +169,12 @@ public class WxUser implements java.io.Serializable {
 				", addr='" + addr + '\'' +
 				", email='" + email + '\'' +
 				", name='" + name + '\'' +
+				", role='" + role + '\'' +
+				", areaCode='" + areaCode + '\'' +
+				", category='" + category + '\'' +
+				", party='" + party + '\'' +
+				", latitude=" + latitude +
+				", longitude=" + longitude +
 				'}';
 	}
 
@@ -199,5 +208,13 @@ public class WxUser implements java.io.Serializable {
 
 	public void setParty(String party) {
 		this.party = party;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
 	}
 }

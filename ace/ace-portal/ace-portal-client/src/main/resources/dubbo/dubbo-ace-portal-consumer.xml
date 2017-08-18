@@ -65,4 +65,7 @@
     <dubbo:reference interface="com.huacainfo.ace.portal.service.WxUserService"
                      id="wxUserService"/>
 
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.WxCfgService"
+                     id="wxCfgService"/>
+
 </beans>

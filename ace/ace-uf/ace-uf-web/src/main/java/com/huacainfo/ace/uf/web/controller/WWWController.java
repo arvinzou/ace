@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.alibaba.dubbo.common.json.JSON;
 import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.uf.model.ActivityComment;
 import com.huacainfo.ace.uf.service.*;
@@ -111,7 +112,8 @@ public class WWWController extends UfBaseController {
 		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
 		this.logger.info("captcha->{}",captcha);
 		this.logger.info("j_captcha_weui->{}",j_captcha_weui);
-		obj.setAreaCode(areas[Integer.valueOf(obj.getAreaCode())]);
+		//obj.setAreaCode(areas[Integer.valueOf(obj.getAreaCode())]);
+		obj.setAreaCode(null);
 		if(CommonUtils.isBlank(captcha)){
 			return new MessageResponse(1,"验证码不能为空！");
 		}
@@ -244,6 +246,13 @@ public class WWWController extends UfBaseController {
 			s = org.apache.commons.lang.StringUtils.substringBeforeLast(s, "&");
 		}
 		return s;
+	}
+
+	@RequestMapping(value = "/getPersonageTreeList.do")
+	@ResponseBody
+	public List<Tree> getPersonageTreeList(String q)throws Exception {
+		List<Tree> list=this.personageService.selectPersonageTreeList(q,this.getCurWxUser());
+		return list;
 	}
 
 }

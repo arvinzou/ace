@@ -93,48 +93,76 @@
 		from
 		dict where name=#{name} and category_id=#{categoryId}
 	</select>
+
+
+
 	<select id="selectDictTreeList" resultType="map">
-		 	
-SELECT 
-    *
-FROM
-    (SELECT 
-        t.category_id ID,
-            '0' PID,
-            t.name TEXT,
-            'closed' STATE,
-            '' SRC,
-            '' ICON,
-            '' HREF,
-            '1' CHILD_COUNT
-    FROM
-        dict_category t
-    WHERE
-        t.syid=#{syid}
-    ORDER BY t.category_id) a
-WHERE
-    a.PID = #{pid}
-UNION ALL SELECT 
-    *
-FROM
-    (SELECT 
-     t.ID,
-            category_id PID,
-            t.name TEXT,
-            'closed' STATE,
-            '' SRC,
-            '' ICON,
-            '' HREF,
-            (select count(*)  from dict  where
-		pcode=t.code and category_id=t.category_id) CHILD_COUNT
-		FROM
-        dict t
-    WHERE
-        t.category_id = #{pid}
-        and t.pcode='0'
-    ORDER BY t.code) b
-	 	
-	</select>
+
+
+
+
+
+            <if test="pid==0">
+                SELECT
+                *
+                FROM
+                (SELECT
+                t.category_id ID,
+                '0' PID,
+                t.name TEXT,
+                'closed' STATE,
+                '' SRC,
+                '' ICON,
+                '' HREF,
+                '1' CHILD_COUNT
+                FROM
+                dict_category t
+                WHERE
+                t.syid=#{syid}
+                ORDER BY t.category_id) a
+                WHERE
+                a.PID = #{pid}
+            </if>
+            <if test="pid!=0">
+                SELECT
+                *
+                FROM
+                (SELECT
+                t.ID,
+                category_id PID,
+                t.name TEXT,
+                'closed' STATE,
+                '' SRC,
+                '' ICON,
+                '' HREF,
+                (select count(*)  from dict  where
+                category_id=#{pid} and pcode=t.id) CHILD_COUNT
+                FROM
+                dict t
+                WHERE
+                t.category_id = #{pid} and t.pcode='0'
+                ORDER BY t.code) b
+                UNION ALL SELECT
+                *
+                FROM
+                (SELECT
+                t.ID,
+                t.pcode PID,
+                t.name TEXT,
+                'closed' STATE,
+                '' SRC,
+                '' ICON,
+                '' HREF,
+                (select count(*)  from dict  where
+                category_id=t.category_id and pcode=t.id) CHILD_COUNT
+                FROM
+                dict t
+                WHERE
+                t.pcode = #{pid}
+                ORDER BY t.code) c
+            </if>
+
+    </select>
 
     <select id="isExit" resultType="int">
         select count(*)
@@ -145,6 +173,32 @@ FROM
 
     <select id="selectAreaCode" resultType="map">
         select code,fullname name from province
+    </select>
+
+    <select id="selectDictAllTreeByCategoryId" resultType="map">
+        SELECT
+        t.ID,
+        t.pcode PID,
+        t. NAME TEXT,
+        'closed' STATE,
+        '' SRC,
+        '' ICON,
+        '' HREF,
+        (
+        SELECT
+        count(*)
+        FROM
+        dict
+        WHERE
+        category_id = #{id}
+        AND pcode = t.id
+        ) CHILD_COUNT
+        FROM
+        dict t
+        WHERE
+        t.category_id = #{id}
+        ORDER BY
+        t. CODE
     </select>
 
 </mapper>

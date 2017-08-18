@@ -8,6 +8,6 @@ import java.util.Map;
 public interface AuthorityService {
 
 	public abstract SingleResult<Map<String,String>> authority(String appid,String appsecret,String code,String encryptedData,String iv,String latitude,String longitude) throws Exception;
-	public abstract MessageResponse reg(WxUser wxUser) throws Exception;
+	public abstract SingleResult<WxUser> reg(WxUser wxUser) throws Exception;
 	
 }

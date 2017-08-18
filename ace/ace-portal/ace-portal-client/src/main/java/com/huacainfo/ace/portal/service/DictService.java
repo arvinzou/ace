@@ -135,4 +135,6 @@ public interface DictService extends WebContextDictService {
 	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp)
 			throws Exception;
 
+	public abstract List<Tree> selectDictAllTreeByCategoryId(String id) throws Exception;
+
 }

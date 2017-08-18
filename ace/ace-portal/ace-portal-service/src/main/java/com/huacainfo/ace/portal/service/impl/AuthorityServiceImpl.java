@@ -44,6 +44,12 @@ public class AuthorityServiceImpl implements AuthorityService {
 	@Autowired
 	private WxUserDao wxUserDao;
 
+
+
+	private String access_token;
+	//获取到的access_token
+	private int  expires_in; //有效时间（两个小时，7200s）
+
 	public SingleResult<Map<String, String>> authority(String appid, String appsecret, String code,
 			String encryptedData, String iv,String latitude,String longitude) throws Exception {
 		// appid wxa09a5be5fd228680
@@ -84,6 +90,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 			userinfo.put("areaCode",user.getAreaCode());
 			userinfo.put("category",user.getCategory());
 			userinfo.put("party",user.getParty());
+			userinfo.put("role",user.getRole());
 			if(CommonUtils.isNotEmpty(user)){
 				if(CommonUtils.isNotEmpty(user.getRole())){
 					if(user.getRole().equals("admin")){
@@ -156,31 +163,36 @@ public class AuthorityServiceImpl implements AuthorityService {
 		return null;
 	}
 
-	public  MessageResponse reg(com.huacainfo.ace.common.model.WxUser wxUser) throws Exception{
+
+
+	public  SingleResult<WxUser> reg(com.huacainfo.ace.common.model.WxUser wxUser) throws Exception{
 
 		Map<String,Object> p=this.wxUserDao.selectPersonageByMobile(wxUser.getMobile());
 		if(p==null||p.isEmpty()){
-			return new MessageResponse(1,"手机号不正确，还未被统战人士信息绑定。");
+			return new SingleResult(1,"手机号不正确，还未被统战人士信息绑定。");
 		}
 		if(!((String)p.get("name")).equals(wxUser.getName())){
-			return new MessageResponse(1,"姓名在统战人士信息中不存在。");
+			return new SingleResult(1,"姓名在统战人士信息中不存在。");
 		}
+
 		wxUser.setAreaCode((String) p.get("areaCode"));
 		wxUser.setCategory((String) p.get("category"));
 		wxUser.setParty((String) p.get("party"));
+		wxUser.setDeptId((String) p.get("deptId"));
 		int t=this.wxUserDao.updateReg(wxUser);
-
-		return new MessageResponse(0,"成功。");
+		WxUser o=this.wxUserDao.selectByPrimaryKey(wxUser.getUnionId());
+		logger.info("==============>WxUser=====>{}",o);
+		SingleResult<WxUser> rst=new SingleResult(0,"成功。");
+		rst.setValue(o);
+		return rst;
 	}
 
 	public static void main(String args[]) throws Exception {
-		String  encryptedData="SYAdGMhP/fhE3Y34qegb8JhhXzF1T6wI4Ot/FMSS5Q89YFR2I4kxo/VYreX5sseluKHuCIT/V6LFV+HiOpwMB7pIIqxKEQNvcePIjvlgQ8hCsU5eiFKJZUGGOiXSLqlAvQw5X4HUHXrKni3584NgeAfsKTPBgHPcGQNNzOslUNxceGiNCrf2lk/gJmUwptxqh71+xtRQnmSl0fh8rlS0TtrGFkAL6chbp7j0IKtu/UiQY0BhzWYsoRYxzFFVKmjdEDmq2Y1J9UhDEtkzNdQi4aVXrmiJLzaLiPUlIM1NpB5jsyWzGLj8v5c5Fbt3kvO/yRGyTrJDgdUfK6+qBooJuG6HStV/lg+mExqjLhC9VMqqgFox+XerpZY+tmlfLGDJ+t9yVDyoFyK4hQv50JnwupCLi+4yN6bARyWVJ5TZvmeQU6g/SGhyIzhlTbyXEHRuUK6979ok5wxkWaSiqHo2eAzTYV6jKCh59b6SUmbILzc=";
-		String sessionKey="cmpPe9ZcdB7PxNC9p/OoMQ==";
-        String iv="pzHZnbzIMfdfgI87K3DtIw==";
+		String  encryptedData="ZKXxLGHy1CUHN4I97dXN47ozaVSVoYf83QXelurq956orVrLxyzXF10haIwgskFYT2mQ4h5ugIUhR1OFGl+uuUOmjh5JH0BGOKweUPpfmRew9lWEPXqHGILraeVRUWwdeGfei1Yx78YK1MyKEtRWP7FfgiEAkAl3Ue1lOpL/Dz0fv28I3e2+rAjHX/hhYO+9qyuAGftgIGZgut2XkdCEwlJX1dSTTPQrOcTxh8hToKEM+4ddnX+DBUALNRrIpn6NxHcrFgWNkOuo4CHBPc5098POfzRuI8bG6mIrVNNEjfIEa6WO4KPvfSqdENEjAGUDvTcBOz2S0uADq7CF/J5yMzc+FGB7WRaGcLyw7YnF5lG3GNHv3hXoTOW73ilvs6jJq/lt4JgOv5B3/gheRImziL7I/SRYcVznk/sQ6UAeneGVBGiJc8zlygLLCBArbFpEBFW0CywikoYF5ef9e1/D9BgAaSYcKbdIjfMaReM7Tis=";
+		String sessionKey="YOv6rGoBAjb\\/2Z3RQWqmMw==";
+        String iv="R3eMNcQVlXJS82s1RQE0lw==";
         AuthorityServiceImpl o=new AuthorityServiceImpl();
         JSONObject userinfo= o.getUserInfo(encryptedData,sessionKey,iv);
-
-
 		System.out.println(userinfo.toString());
 	}
 }
