@@ -1,6 +1,7 @@
 /**
  * @Title: ConfigVo.java
- * @Package org.platform.snail.portal.vo
+ * @Package com.huacainfo.ace.portal.vo
+ *
  * @Description: TODO
  * Copyright: Copyright (c) 2014
  * Company:snail

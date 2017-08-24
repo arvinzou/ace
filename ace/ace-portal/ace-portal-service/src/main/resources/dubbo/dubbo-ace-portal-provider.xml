@@ -68,4 +68,19 @@
 
     <dubbo:service interface="com.huacainfo.ace.portal.service.WxCfgService"
                    ref="wxCfgService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.QueueCmccHisService"
+                   ref="queueCmccHisService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.QueueCmccWaitService"
+                   ref="queueCmccWaitService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.TaskCmccService"
+                   ref="taskCmccService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.TemplateCmccService"
+                   ref="templateCmccService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.GroupService"
+                   ref="groupService"/>
 </beans>

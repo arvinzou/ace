@@ -4,9 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.dubbo.common.json.JSON;
+import com.huacainfo.ace.common.model.PageParam;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.portal.model.TaskCmcc;
+import com.huacainfo.ace.portal.service.GroupService;
+import com.huacainfo.ace.portal.service.TaskCmccService;
+import com.huacainfo.ace.portal.vo.TaskCmccQVo;
+import com.huacainfo.ace.portal.vo.TaskCmccVo;
 import com.huacainfo.ace.uf.model.ActivityComment;
 import com.huacainfo.ace.uf.service.*;
 import org.slf4j.Logger;
@@ -59,6 +66,29 @@ public class WWWController extends UfBaseController {
 	private RedisOperations<String, Object> redisTemplate;
 
 	private String[] areas;
+
+	@Autowired
+	private TaskCmccService taskCmccService;
+
+	@Autowired
+	private GroupService groupService;
+
+	@RequestMapping(value = "/findTaskCmccList.do")
+	@ResponseBody
+	public PageResult<TaskCmccVo> findTaskCmccList(TaskCmccQVo condition, PageParam page) throws Exception{
+		PageResult<TaskCmccVo> rst = this.taskCmccService.findTaskCmccList(condition,page.getStart(), page.getLimit(), page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+		return rst;
+	}
+	@RequestMapping(value = "/insertTaskCmcc.do")
+	@ResponseBody
+	public  MessageResponse insertTaskCmcc(String jsons) throws Exception{
+		TaskCmcc o= com.alibaba.fastjson.JSON.parseObject(jsons, TaskCmcc.class);
+		o.setCreateUserId(this.getCurWxUser().getName());
+		return this.taskCmccService.insertTaskCmcc(o, this.getCurUserProp());
+	}
 	/*统战服务*/
 	@RequestMapping(value = "/selectOrganizationList.do")
 	@ResponseBody
@@ -253,6 +283,24 @@ public class WWWController extends UfBaseController {
 	public List<Tree> getPersonageTreeList(String q)throws Exception {
 		List<Tree> list=this.personageService.selectPersonageTreeList(q,this.getCurWxUser());
 		return list;
+	}
+
+
+	@RequestMapping(value = "/queryPersonage.do")
+	@ResponseBody
+	public Map<String,Object> queryPersonage(String q)throws Exception {
+		return this.personageService.selectPersonage(q);
+	}
+
+	@RequestMapping(value = "/selectFreeGroupTreeRoot.do")
+	@ResponseBody
+	public List<Tree> selectFreeGroupTreeRoot() throws Exception {
+		return this.groupService.selectFreeGroupTreeRoot("uf");
+	}
+	@RequestMapping(value = "/selectFreeGroupTreeByPid.do")
+	@ResponseBody
+	public List<Tree> selectFreeGroupTreeByPid(String pid) throws Exception {
+		return this.groupService.selectFreeGroupTreeByPid(pid);
 	}
 
 }

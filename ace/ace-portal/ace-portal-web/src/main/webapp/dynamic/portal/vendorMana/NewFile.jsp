@@ -616,7 +616,7 @@ body {
 		src="${pageContext.request.contextPath}/content/jquery-easyui-1.3.6/gz/jquery.easyui.min.js"></script>
 
 	<script
-		src="${pageContext.request.contextPath}/content/js/console/main/portal.js"></script>
+		src="${pageContext.request.contextPath}/content/service/main/portal.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/js/common/dict.js"></script>
 

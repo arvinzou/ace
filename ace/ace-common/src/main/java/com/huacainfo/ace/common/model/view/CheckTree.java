@@ -10,6 +10,11 @@ public class CheckTree implements java.io.Serializable{
 	private String cls="x-btn-text";
 	private String icon;
 	private Boolean checked;
+
+	private String iconCls;
+	private String href;
+	private String src;
+
 	private List<CheckTree> children ;
 	
 	public String getId() {
@@ -54,5 +59,29 @@ public class CheckTree implements java.io.Serializable{
 	}
 	public void setChildren(List<CheckTree> children) {
 		this.children = children;
+	}
+
+	public String getIconCls() {
+		return iconCls;
+	}
+
+	public void setIconCls(String iconCls) {
+		this.iconCls = iconCls;
+	}
+
+	public String getHref() {
+		return href;
+	}
+
+	public void setHref(String href) {
+		this.href = href;
+	}
+
+	public String getSrc() {
+		return src;
+	}
+
+	public void setSrc(String src) {
+		this.src = src;
 	}
 }

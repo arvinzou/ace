@@ -1,6 +1,6 @@
 /**
  * @Title: NoticeVo.java
- * @Package org.platform.snail.edu.vo
+ * @Package com.huacainfo.ace.edu.vo
  * @Description: TODO
  * Copyright: Copyright (c) 2014
  * Company:snail

@@ -347,12 +347,11 @@
         select t.id,
         t.name,
         t.mobile,
-        a.department_name deptName
-        from personage t inner join portal.department a
-        on t.deptId =a.department_id where 0=0
+        t.deptId deptName
+        from personage t where 0=0
         <if test='q!=null and q!=""'>
             and (t.id=#{q} or t.name like
-            concat('%',#{q},'%') or a.department_name like concat('%',#{q},'%') )
+            concat('%',#{q},'%') or t.deptId like concat('%',#{q},'%') )
         </if>
         order by t.name
         limit 0,20
@@ -463,6 +462,108 @@
             and t.name like
             concat('%',#{q,jdbcType=VARCHAR},'%')
         </if>
+
+        ORDER BY convert(t.name using gbk) asc
+        ) b
+    </select>
+
+    <select id="selectPersonageCheckTreeList" resultType="map">
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        t.ID,
+        t.pcode PID,
+        t. NAME TEXT,
+        'closed' STATE,
+        t. CODE SRC,
+        '' ICON,
+        '' HREF,
+        (
+        SELECT
+        count(1)
+        FROM
+        personage
+        WHERE
+        STATUS = '1'
+        AND category LIKE CONCAT(t. CODE, '%')
+        ) ICONCLS,
+        (
+        SELECT
+        count(*)
+        FROM
+        (
+        SELECT
+        pcode
+        FROM
+        portal.dict
+        UNION ALL
+        SELECT
+        f.id AS pcode
+        FROM
+        personage
+        INNER JOIN (
+        SELECT
+        id,
+        CODE
+        FROM
+        portal.dict
+
+        WHERE
+        category_id = '98'
+        ) f ON category = f. CODE
+
+        ) dict
+        WHERE
+        pcode = t.id
+        ) CHILD_COUNT
+        FROM
+        portal.dict t
+        WHERE
+        t.category_id = '98'
+
+
+        ORDER BY
+        t. CODE
+        ) a
+        UNION ALL
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        t.id ID,
+        a.id PID,
+        t. NAME TEXT,
+        'closed' STATE,
+        t.photo SRC,
+        t.deptId ICON,
+        t.mobile HREF,
+        0 ICONCLS,
+        0 CHILD_COUNT
+        FROM
+        personage t
+
+        INNER JOIN (
+        SELECT
+        id,
+        CODE
+        FROM
+        portal.dict
+        WHERE
+        category_id = '98'
+        ) a ON t.category = a. CODE
+        left JOIN (
+        SELECT
+        CODE,
+        NAME
+        FROM
+        portal.dict
+        WHERE
+        category_id = '09'
+        ) m ON t.nation = m. CODE
+        where 0=0
 
         ORDER BY convert(t.name using gbk) asc
         ) b

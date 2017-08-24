@@ -133,6 +133,8 @@ public class HttpRuquest {
 		}
 		System.out.println(returnStr);
 	}
+
+
 	
 	/**
 	 * 发送短信的方法
@@ -142,11 +144,11 @@ public class HttpRuquest {
 	public static void sendSms(int type) {
 		String url = "https://www.stongnet.com/sdkhttp/sendsms.aspx";
 		
-		String regCode = "101100-WEB-HUAX-116815"; // 华兴软通注册码，请在这里填写您从客服那得到的注册码
-		String regPasswod = "QWERTYUI"; // 华兴软通注册码对应的密码，请在这里填写您从客服那得到的注册码
+		String regCode = "101100-WEB-HUAX-135086"; // 华兴软通注册码，请在这里填写您从客服那得到的注册码
+		String regPasswod = "YTHYNYZA"; // 华兴软通注册码对应的密码，请在这里填写您从客服那得到的注册码
 		String sourceAdd = null;		//子通道号（最长10位，可为空
 		String phone = "13922861673";		//手机号码（最多1000个），多个用英文逗号(,)隔开，不可为空
-		String content = "华兴软通注册码对应的密码，请在这里填写您从客服那得到的注册码【坪山高中】";	//短信内容
+		String content = "本次投票验证码为168691，请及时输入。【武陵区教育局】";	//短信内容
 		String param = "reg=" + regCode + "&pwd=" + regPasswod + "&sourceadd=" + sourceAdd + "&phone=" + phone + "&content=" + content;
 		
 		String returnStr = null;
@@ -156,6 +158,7 @@ public class HttpRuquest {
 			returnStr = requestPost(url, param);
 		}
 		System.out.println(returnStr);
+		System.out.println(new java.util.Date());
 	}
 	public static void main(String args[]){
 		HttpRuquest.sendSms(1);

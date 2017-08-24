@@ -42,7 +42,7 @@
         <view class="weui-flex__item-icon">
           <image class="iconList20" src="../../image/dept.png" />
         </view>
-        <input name="dept" class="weui-flex__item-body" maxlength="10" placeholder="单位" />
+        <input name="dept" class="weui-flex__item-body" maxlength="50" placeholder="单位" />
       </view>
 
       <view class="kind-list-item weui-flex">

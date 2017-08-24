@@ -23,7 +23,7 @@ public class MyX509TrustManager implements X509TrustManager {
 
 	MyX509TrustManager() throws Exception {
 		// create a "default" JSSE X509TrustManager.
-		InputStream ins = MyX509TrustManager.class.getResourceAsStream("/Users/chenxiaoke/Documents/github/ace/ace/ace/ace-common/src/main/resources/cacert.pem");		//读取根证书，相对路径和绝对路径均可,推荐绝对路径
+		InputStream ins = MyX509TrustManager.class.getResourceAsStream("/cacert.pem");		//读取根证书，相对路径和绝对路径均可,推荐绝对路径
         CertificateFactory cerFactory = CertificateFactory.getInstance("X.509");
         Certificate cer = cerFactory.generateCertificate(ins);
 		KeyStore ks = KeyStore.getInstance("JKS");
