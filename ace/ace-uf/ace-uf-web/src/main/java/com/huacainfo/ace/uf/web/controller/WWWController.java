@@ -84,10 +84,20 @@ public class WWWController extends UfBaseController {
 	}
 	@RequestMapping(value = "/insertTaskCmcc.do")
 	@ResponseBody
-	public  MessageResponse insertTaskCmcc(String jsons) throws Exception{
-		TaskCmcc o= com.alibaba.fastjson.JSON.parseObject(jsons, TaskCmcc.class);
+	public  MessageResponse insertTaskCmcc(TaskCmcc o,String captcha) throws Exception{
 		o.setCreateUserId(this.getCurWxUser().getName());
-		return this.taskCmccService.insertTaskCmcc(o, this.getCurUserProp());
+		this.logger.info("{}",o);
+		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
+		this.logger.info("captcha->{}",captcha);
+		this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+		if(CommonUtils.isBlank(captcha)){
+			return new MessageResponse(1,"验证码不能为空！");
+		}
+		if(!captcha.equals(j_captcha_weui)){
+			return new MessageResponse(1,"验证码错误！");
+		}
+		return this.taskCmccService.insertTaskCmcc(o);
 	}
 	/*统战服务*/
 	@RequestMapping(value = "/selectOrganizationList.do")

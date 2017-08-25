@@ -431,7 +431,7 @@
         t.photo SRC,
         t.deptId ICON,
         m. NAME HREF,
-        0 ICONCLS,
+        t.mobile ICONCLS,
         0 CHILD_COUNT
         FROM
         personage t
@@ -540,7 +540,7 @@
         t.photo SRC,
         t.deptId ICON,
         t.mobile HREF,
-        0 ICONCLS,
+        t.mobile ICONCLS,
         0 CHILD_COUNT
         FROM
         personage t

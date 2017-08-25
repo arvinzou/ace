@@ -47,7 +47,8 @@ var config = {
     selectCommentListByActivityId: `${server}/uf/www/selectCommentListByActivityId.do`,
     insertActivityComment: `${server}/uf/www/insertActivityComment.do`,
     updateActivity: `${server}/uf/www/updateActivity.do`,
-    getPersonageTreeList: `${server}/uf/www/getPersonageTreeList.do`
+    getPersonageTreeList: `${server}/uf/www/getPersonageTreeList.do`,
+    insertTaskCmcc: `${server}/uf/www/insertTaskCmcc.do`
 
 };
 module.exports = config
