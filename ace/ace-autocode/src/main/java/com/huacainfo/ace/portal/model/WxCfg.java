@@ -1,0 +1,53 @@
+package com.huacainfo.ace.portal.model;
+
+public class WxCfg {
+    private String appId;
+
+    private String appScret;
+
+    private String accessToken;
+
+    private Integer expiresIn;
+
+    private String name;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId == null ? null : appId.trim();
+    }
+
+    public String getAppScret() {
+        return appScret;
+    }
+
+    public void setAppScret(String appScret) {
+        this.appScret = appScret == null ? null : appScret.trim();
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken == null ? null : accessToken.trim();
+    }
+
+    public Integer getExpiresIn() {
+        return expiresIn;
+    }
+
+    public void setExpiresIn(Integer expiresIn) {
+        this.expiresIn = expiresIn;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+}

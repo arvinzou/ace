@@ -350,13 +350,16 @@ Page({
       for (var i in list) {
         that.checkChild(list[i]);
       }
-      that.checkChild(data.children);
+      //that.checkChild(data.children);
     } 
   },
   findNodeById: function (data, id) {
+    console.log('findNodeById:', id)
     var that = this;
     for (var i in data) {
       if (data[i].id == id) {
+        console.log("findNodeById->");
+        console.log(data[i]);
         that.checkChild(data[i]);
         var list = that.data.list;
         that.setData({
@@ -365,6 +368,7 @@ Page({
         break;
       } else {
         if (data[i].children) {
+          console.log('findNodeChildren')
           that.findNodeById(data[i].children, id);
         }
       }
@@ -374,6 +378,7 @@ Page({
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
   },
   bindchange:function(e){
+    console.log(e)
     var that = this;
     var list = that.data.list;
     that.findNodeById(list, e.target.id);
