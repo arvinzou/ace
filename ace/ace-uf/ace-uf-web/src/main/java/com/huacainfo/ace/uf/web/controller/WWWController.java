@@ -1,5 +1,7 @@
 package com.huacainfo.ace.uf.web.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +11,8 @@ import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.service.GroupService;
 import com.huacainfo.ace.portal.service.TaskCmccService;
@@ -85,7 +89,7 @@ public class WWWController extends UfBaseController {
 	@RequestMapping(value = "/insertTaskCmcc.do")
 	@ResponseBody
 	public  MessageResponse insertTaskCmcc(TaskCmcc o,String captcha) throws Exception{
-		o.setCreateUserId(this.getCurWxUser().getName());
+		o.setCreateUserId(this.getCurWxUser().getUnionId());
 		this.logger.info("{}",o);
 		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
 		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
@@ -98,6 +102,11 @@ public class WWWController extends UfBaseController {
 			return new MessageResponse(1,"验证码错误！");
 		}
 		return this.taskCmccService.insertTaskCmcc(o);
+	}
+	@RequestMapping(value = "/selectTaskCmccById.do")
+	@ResponseBody
+	public SingleResult<TaskCmcc> selectTaskCmccById(String id) throws Exception{
+		return taskCmccService.selectBYId(id);
 	}
 	/*统战服务*/
 	@RequestMapping(value = "/selectOrganizationList.do")
@@ -298,19 +307,38 @@ public class WWWController extends UfBaseController {
 
 	@RequestMapping(value = "/queryPersonage.do")
 	@ResponseBody
-	public Map<String,Object> queryPersonage(String q)throws Exception {
+	public Map<String, Object> queryPersonage(String q)throws Exception {
 		return this.personageService.selectPersonage(q);
 	}
 
-	@RequestMapping(value = "/selectFreeGroupTreeRoot.do")
+	@RequestMapping(value = "/selectFreeGroupTree.do")
 	@ResponseBody
-	public List<Tree> selectFreeGroupTreeRoot() throws Exception {
-		return this.groupService.selectFreeGroupTreeRoot("uf");
+	public List<Tree> selectFreeGroupTree() throws Exception {
+		return this.groupService.selectFreeGroupTree("uf");
 	}
-	@RequestMapping(value = "/selectFreeGroupTreeByPid.do")
+
+	@RequestMapping(value = "/selectPersonageTree.do")
 	@ResponseBody
-	public List<Tree> selectFreeGroupTreeByPid(String pid) throws Exception {
-		return this.groupService.selectFreeGroupTreeByPid(pid);
+	public List<Tree> selectPersonageTree(String q)throws Exception {
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+		Map<String,Object> p=this.personageService.selectPersonage(q);
+		List<Map<String,Object>> items=(List<Map<String,Object>>)p.get("rows");
+		Map<String,Object> o=new HashMap<String,Object>();
+		o.put("ID","01");
+		o.put("PID","0");
+		o.put("TEXT","搜索");
+		list.add(o);
+		for(Map<String,Object> e:items){
+			Map<String,Object> m=new HashMap<String,Object>();
+			m.put("ID",e.get("id"));
+			m.put("PID","01");
+			m.put("TEXT",e.get("name"));
+			m.put("HREF",e.get("name"));
+			m.put("ICONCLS",e.get("mobile"));
+			list.add(m);
+		}
+		CommonTreeUtils ctu=new CommonTreeUtils(list);
+		return ctu.getTreeList("0");
 	}
 
 }

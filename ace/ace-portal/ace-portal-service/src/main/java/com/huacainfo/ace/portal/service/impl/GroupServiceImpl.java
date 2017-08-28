@@ -108,6 +108,53 @@ public class GroupServiceImpl implements GroupService {
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(this.groupMapper.selectFreeGroupTreeRoot(syid));
 		return commonTreeUtils.getTreeList("0");
 	}
+	public List<Tree> selectFreeGroupTree(String syid) {
+		List<Map<String,Object>> e=this.groupMapper.selectFreeGroupTreeRoot(syid);
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+		list.addAll(e);
+		for(Map<String,Object> o:e){
+			list.addAll(this.selectFreeGroupChildByPid((String) o.get("ID")));
+		}
+		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(list);
+		return commonTreeUtils.getTreeList("0");
+	}
+
+	public List<Map<String,Object>> selectFreeGroupChildByPid(String pid) {
+		Connection conn = null;
+		SqlRunner sqlRunner = null;
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		try {
+			conn = sqlSessionFactory.getConfiguration().getEnvironment().getDataSource().getConnection();
+			sqlRunner = new SqlRunner(conn);
+			Group o = this.groupMapper.selectByPrimaryKey(pid);
+			if (CommonUtils.isNotBlank(o.getSqlText())) {
+				List<Map<String, Object>> items = sqlRunner.selectAll(o.getSqlText());
+				for (Map<String, Object> p : items) {
+					Map<String, Object> tmp = new HashMap<String, Object>();
+					CommonBeanUtils.copyMap2Bean(tmp, p);
+					tmp.put("PID", pid);
+					this.logger.info(tmp);
+					list.add(tmp);
+				}
+			} else {
+				List<Map<String, Object>> items = this.groupMapper.selectFreeGroupUsersTreeByGorupId(pid);
+				for (Map<String, Object> p : items) {
+					p.put("PID", pid);
+					this.logger.info(p);
+					list.add(p);
+				}
+			}
+
+		} catch (SQLException e) {
+			this.logger.info(e);
+			return null;
+		} finally {
+			if (sqlRunner != null) {
+				sqlRunner.closeConnection();
+			}
+		}
+		return list;
+	}
 	public List<Tree> selectFreeGroupTreeByPid(String pid) {
 		Connection conn = null;
 		SqlRunner sqlRunner = null;

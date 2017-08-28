@@ -15,7 +15,8 @@
     "page/map/index",
     "page/activitySec/index",
     "page/activityPreview/index",
-    "page/notice/index"
+    "page/notice/index",
+    "page/noticePreview/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",

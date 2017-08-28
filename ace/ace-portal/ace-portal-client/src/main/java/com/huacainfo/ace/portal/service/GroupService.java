@@ -27,4 +27,6 @@ public interface GroupService {
 	public abstract ListResult selectFreeGroupUsersListByGorupId(String groupId) throws Exception;
 	public abstract MessageResponse batchSaveGroupUsersByUserIds(Map<String,Object> obj,UserProp userProp) throws Exception;
 
+	public List<Tree> selectFreeGroupTree(String syid) throws Exception;
+
 }

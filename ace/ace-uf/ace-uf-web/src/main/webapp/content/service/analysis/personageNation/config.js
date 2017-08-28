@@ -1,16 +1,16 @@
-var option4 = {
+var option = {
 	tooltip : {
 		trigger : 'item',
-		formatter : "{a} <br/>{b} : {c}%"
+		formatter : "{a} <br/>{b} : {c}人"
 	},
 	legend : {
 		orient : 'vertical',
-		x : 'left',
+		x : 'top',
 		data : []
 	},
 	calculable : false,
 	series : [{
-	    height: '70%',
+		height : '70%',
 		name : '漏斗图',
 		type : 'funnel',
 		data : [

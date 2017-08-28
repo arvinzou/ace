@@ -61,7 +61,7 @@ function chart2() {
 		type : "post",
 		url : contextPath + '/anslysis/query.do',
 		data : {
-			reportId : 'personageArea'
+			reportId : 'personageNation'
 		},
 		success : function(rst) {
 			$.each(rst.value, function(i,o) {
@@ -97,12 +97,12 @@ function chart4() {
 		type : "post",
 		url : contextPath + '/anslysis/query.do',
 		data : {
-			reportId : 'personageDept'
+			reportId : 'personageParty'
 		},
 		success : function(rst) {
 			$.each(rst.value, function(i,o) {
-				option4.series[0].data.push(o.value);
-				option4.xAxis[0].data.push(o.name);
+				option4.series[0].data.push(o);
+				option4.legend.data.push(o.name);
 			});
 			initMyChar4();
 		}

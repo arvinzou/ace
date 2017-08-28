@@ -41,13 +41,13 @@
       activityDate, status, createUserId, 
       createUserName, reading, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
-      docText,photo)
+      docText,photo,reading)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{activityLocation,jdbcType=VARCHAR}, 
       #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{category,jdbcType=VARCHAR}, 
       #{activityDate,jdbcType=DATE}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{reading,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
-      #{docText,jdbcType=LONGVARCHAR},#{photo,jdbcType=VARCHAR})
+      #{docText,jdbcType=LONGVARCHAR},#{photo,jdbcType=VARCHAR},#{reading})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.Activity">
     update activity

@@ -12822,7 +12822,7 @@ $.jgrid.extend({
 				regional =  $.jgrid.getRegional(this[0], 'col');
 
 			if ($("#colchooser_" + $.jgrid.jqID(self[0].p.id)).length) { return; }
-			selector = $('<div id="colchooser_'+self[0].p.id+'" style="position:relative;overflow:hidden"><div><select multiple="multiple"></select></div></div>');
+			selector = $('<div id="colchooser_'+self[0].p.id+'" style="position:relative;overflow:scroll;max-height:100px"><div><select multiple="multiple"></select></div></div>');
 			select = $('select', selector);
 
 			function insert(perm,i,v) {
@@ -12849,7 +12849,7 @@ $.jgrid.extend({
 
 			opts = $.extend({
 				width : 400,
-				height : 240,
+				height : 140,
 				title_html: true,
 				classname : null,
 				done : function(perm) { if (perm) { self.jqGrid("remapColumns", perm, true); } },
@@ -13019,8 +13019,8 @@ $.jgrid.extend({
 			multiselectData.availableList.css("height", "auto");
 			listHeight = Math.max(multiselectData.selectedList.height(), multiselectData.availableList.height());
 			listHeight = Math.min(listHeight, $(window).height());
-			multiselectData.selectedList.css("height", listHeight);
-			multiselectData.availableList.css("height", listHeight);
+			multiselectData.selectedList.css("height", 200);
+			multiselectData.availableList.css("height", 200);
 			$(".ui-dialog-title").addClass("ui-jqdialog-title");
 			$(".ui-dialog-buttonset").find("button").removeClass("ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
 			$(".ui-dialog-buttonset").find("button").addClass("fm-button ui-state-default ui-corner-all fm-button-icon-left btn btn-sm btn-primary");

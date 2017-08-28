@@ -48,7 +48,12 @@ var config = {
     insertActivityComment: `${server}/uf/www/insertActivityComment.do`,
     updateActivity: `${server}/uf/www/updateActivity.do`,
     getPersonageTreeList: `${server}/uf/www/getPersonageTreeList.do`,
-    insertTaskCmcc: `${server}/uf/www/insertTaskCmcc.do`
+    insertTaskCmcc: `${server}/uf/www/insertTaskCmcc.do`,
+    findTaskCmccList: `${server}/uf/www/findTaskCmccList.do`,
+    selectTaskCmccById: `${server}/uf/www/selectTaskCmccById.do`,
+    selectFreeGroupTree: `${server}/uf/www/selectFreeGroupTree.do`,
+    selectPersonageTree: `${server}/uf/www/selectPersonageTree.do`
+    
 
 };
 module.exports = config

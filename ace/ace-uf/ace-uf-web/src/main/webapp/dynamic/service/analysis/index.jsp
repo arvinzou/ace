@@ -111,7 +111,7 @@ pageEncoding="utf-8"%>
             <!-- #section:custom/widget-box -->
             <div class="widget-box">
                 <div class="widget-header">
-                    <h5 class="widget-title">统战人士分布</h5>
+                    <h5 class="widget-title">民族构成</h5>
 
                     <!-- #section:custom/widget-box.toolbar -->
                     <div class="widget-toolbar">
@@ -185,7 +185,7 @@ pageEncoding="utf-8"%>
             <!-- #section:custom/widget-box -->
             <div class="widget-box">
                 <div class="widget-header">
-                    <h5 class="widget-title">统战人士所属机构</h5>
+                    <h5 class="widget-title">党派构成</h5>
 
                     <!-- #section:custom/widget-box.toolbar -->
                     <div class="widget-toolbar">
