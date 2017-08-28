@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.RemttanceInfoDao">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.gesp.model.RemttanceInfo">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="deptId" jdbcType="VARCHAR" property="deptId" />
+		<result column="memberCode" jdbcType="VARCHAR" property="memberCode" />
+		<result column="chargingItemId" jdbcType="VARCHAR" property="chargingItemId" />
+		<result column="bankName" jdbcType="VARCHAR" property="bankName" />
+		<result column="bankAcc" jdbcType="VARCHAR" property="bankAcc" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="amount" jdbcType="DECIMAL" property="amount" />
+		<result column="remDate" jdbcType="TIMESTAMP" property="remDate" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="fileAddr" jdbcType="VARCHAR" property="fileAddr" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="status" jdbcType="CHAR" property="status" />
+		<result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+		<result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+		<result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+		<result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+		<result column="lastModifyUserName" jdbcType="VARCHAR"
+			property="lastModifyUserName" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="BaseResultMapVo"
+		type="com.huacainfo.ace.gesp.vo.RemttanceInfoVo">
+		<result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, deptId, memberCode, chargingItemId, bankName, bankAcc, name, amount,
+		remDate,
+		mobile, fileAddr, remark, status, createDate, createUserId, createUserName,
+		lastModifyDate,
+		lastModifyUserId, lastModifyUserName
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from remttance_info
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from remttance_info
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.RemttanceInfo">
+		insert into remttance_info (id, deptId, memberCode,
+		chargingItemId, bankName, bankAcc,
+		name, amount, remDate,
+		mobile, fileAddr, remark,
+		status, createDate, createUserId,
+		createUserName, lastModifyDate, lastModifyUserId,
+		lastModifyUserName)
+		values (#{id,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR},
+		#{memberCode,jdbcType=VARCHAR},
+		#{chargingItemId,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankAcc,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL},
+		#{remDate,jdbcType=TIMESTAMP},
+		#{mobile,jdbcType=VARCHAR}, #{fileAddr,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=VARCHAR},
+		#{createUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		#{lastModifyUserName,jdbcType=VARCHAR})
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.gesp.model.RemttanceInfo">
+		update remttance_info
+		set deptId = #{deptId,jdbcType=VARCHAR},
+		memberCode = #{memberCode,jdbcType=VARCHAR},
+		chargingItemId = #{chargingItemId,jdbcType=VARCHAR},
+		bankName = #{bankName,jdbcType=VARCHAR},
+		bankAcc = #{bankAcc,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		amount = #{amount,jdbcType=DECIMAL},
+		remDate = #{remDate,jdbcType=TIMESTAMP},
+		mobile = #{mobile,jdbcType=VARCHAR},
+		fileAddr = #{fileAddr,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+		lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+		lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="isExit" resultType="int">
+		select count(1) from
+		remttance_info
+		where memberCode=#{memberCode} and chargingItemId =
+		#{chargingItemId,jdbcType=VARCHAR}
+		and DATE_FORMAT(remDate,
+		'%Y-%m-%d')=DATE_FORMAT(now(), '%Y-%m-%d')
+	</select>
+
+
+	<sql id="whereCondition">
+		from remttance_info t left join department a on
+		t.memberCode=a.department_id
+		left join department b on
+		t.deptId=b.department_id
+		left join
+		charging_item c on
+		t.chargingItemId=c.id
+		where t.memberCode like concat(#{condition.memberCode,jdbcType=VARCHAR},'%')
+		<if
+			test="condition.chargingItemId!=null and condition.chargingItemId!=&quot;&quot;">
+			 <![CDATA[
+				and t.chargingItemId=#{condition.chargingItemId}  
+				]]>
+		</if>
+		
+		<if test="condition.status!=null and condition.status!=&quot;&quot;">
+			 <![CDATA[
+				and t.status=#{condition.status}  
+				]]>
+		</if>
+		<if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
+			<![CDATA[
+			and t.remDate>=str_to_date(#{condition.startDate},'%Y-%m-%d')
+			]]>
+		</if>
+		<if test="condition.endsDate!=null and condition.endsDate!=&quot;&quot;">
+			 <![CDATA[
+				and t.remDate<=str_to_date(#{condition.endsDate},'%Y-%m-%d')   
+				]]>
+		</if>
+
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+select m.* from(
+		select
+		t.id, t.memberCode, b.department_name deptName,c.name
+		chargingItemName,  t.amount,t.deptId,
+		t.chargingItemId,
+		t.createDate,
+		t.createUserId,
+		t.createUserName,
+		t.lastModifyDate,
+		t.lastModifyUserId,
+		t.lastModifyUserName,a.department_name,
+		t.bankName, t.bankAcc, t.name,
+		 t.remDate,t.status,
+		t.mobile, t.fileAddr, t.remark
+		<include refid="whereCondition" />
+		) m
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY m.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY m.createDate
+			</otherwise>
+		</choose>
+
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+	</select>
+</mapper>

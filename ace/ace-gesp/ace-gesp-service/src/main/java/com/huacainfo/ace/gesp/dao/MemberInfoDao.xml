@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.MemberInfoDao">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.gesp.model.MemberInfo">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="memberCode" jdbcType="VARCHAR" property="memberCode" />
+		<result column="joinDate" jdbcType="TIMESTAMP" property="joinDate" />
+		<result column="endDate" jdbcType="TIMESTAMP" property="endDate" />
+		<result column="memberLevel" jdbcType="VARCHAR" property="memberLevel" />
+		<result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+		<result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+		<result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+		<result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+		<result column="lastModifyUserName" jdbcType="VARCHAR"
+			property="lastModifyUserName" />
+		<result column="status" jdbcType="CHAR" property="status" />
+		<result column="auditUserId" jdbcType="VARCHAR" property="auditUserId" />
+		<result column="auditUserName" jdbcType="VARCHAR" property="auditUserName" />
+		<result column="auditDate" jdbcType="TIMESTAMP" property="auditDate" />
+		<result column="auditRemark" jdbcType="VARCHAR" property="auditRemark" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="BaseResultMapVo"
+		type="com.huacainfo.ace.gesp.vo.MemberInfoVo">
+	
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, memberCode, joinDate, endDate, memberLevel, createDate,
+		createUserId,
+		createUserName,
+		lastModifyDate, lastModifyUserId,
+		lastModifyUserName, status, auditUserId,
+		auditUserName,
+		auditDate,
+		auditRemark
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMapVo">
+		select
+		<include refid="Base_Column_List" />
+		from member_info
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		member_info
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.MemberInfo">
+		insert into member_info (
+		memberCode,memberRemark, joinDate,
+		endDate, memberLevel,memberNo, createDate,
+		createUserId,status,
+		createUserName, lastModifyDate,
+		lastModifyUserId, lastModifyUserName)
+		values (#{memberCode,jdbcType=VARCHAR}, #{memberRemark,jdbcType=VARCHAR},
+		#{joinDate,jdbcType=TIMESTAMP},
+		#{endDate,jdbcType=TIMESTAMP},
+		#{memberLevel,jdbcType=VARCHAR},
+		#{memberNo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{createUserId,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+		#{lastModifyDate,jdbcType=TIMESTAMP},
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		#{lastModifyUserName,jdbcType=VARCHAR})
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.gesp.model.MemberInfo">
+		update member_info
+		set status = #{status,jdbcType=CHAR},
+		auditUserId =
+		#{auditUserId,jdbcType=VARCHAR},
+		memberNo =
+		#{memberNo,jdbcType=VARCHAR},
+		auditUserName =
+		#{auditUserName,jdbcType=VARCHAR},
+		auditDate =
+		#{auditDate,jdbcType=TIMESTAMP},
+		auditRemark =
+		#{auditRemark,jdbcType=VARCHAR}
+		where id =
+		#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateMemberBaseByPrimaryKey" parameterType="com.huacainfo.ace.gesp.model.MemberInfo">
+		update member_info
+		<set>
+			<if test="memberNo!=null and memberNo!=&quot;&quot;">
+				memberNo = #{memberNo,jdbcType=VARCHAR},
+			</if>
+			<if test="joinDate!=null">
+				joinDate = #{joinDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endDate!=null">
+				endDate = #{endDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="memberLevel!=null and memberLevel!=&quot;&quot;">
+				memberLevel = #{memberLevel,jdbcType=VARCHAR},
+			</if>
+			<if test="status!=null and status!=&quot;&quot;">
+				status = #{status,jdbcType=CHAR}
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 退会 -->
+	<update id="updateState" parameterType="com.huacainfo.ace.gesp.model.MemberInfo">
+		update member_info
+		set
+			status = #{status,jdbcType=CHAR},
+			remark = #{remark,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="isExit" resultType="int">
+		select count(1) from member_info
+		where memberCode=#{memberCode}
+	</select>
+	<select id="isExitMemberNo" resultType="int">
+		select count(1) from member_info t inner join department a on t.memberCode=a.department_id
+		where t.`status` =1 and memberNo=#{memberNo} and a.parent_department_id=#{ownerId} and t.id !=#{id}
+	</select>
+	<select id="isExitMemberLevelId" resultType="int">
+		select count(1) from member_info
+		where memberLevel = #{memberLevel} and memberRemark = #{memberRemark}
+	</select>
+
+	<sql id="whereCondition">
+		from member_info t
+		inner join department a on
+		t.memberCode=a.department_id 
+		left join member_level b on t.memberLevel=b.id
+		left join pay_cfg c on (a.parent_department_id=c.memberCode and t.memberLevel=c.memberLevelId and c.chargingItemId=#{condition.chargingItemId})
+		where 1=1
+        <choose>  
+            <when test="condition.memberCode==5">   
+            </when>  
+            <otherwise>
+				and t.memberRemark=#{condition.memberCode}
+            </otherwise>
+        </choose> 
+        <choose>  
+            <when test="condition.createUserId!=null and condition.createUserId!=&quot;&quot;">  
+            	<choose>
+					<when test="condition.status!=null and condition.status!=&quot;&quot;">
+						 <![CDATA[
+							and t.status=#{condition.status}  
+							]]>
+					</when> 
+					<otherwise>
+						 <![CDATA[
+							and t.status in (1,8)
+						]]>
+					</otherwise>
+				</choose>
+            </when >  
+            <otherwise>
+				<if test="condition.status!=null and condition.status!=&quot;&quot;">
+					 <![CDATA[
+						and t.status=#{condition.status}  
+					]]>
+				</if> 
+            </otherwise>
+        </choose> 
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and a.department_name like
+			concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
+			<![CDATA[
+			and t.joinDate>=str_to_date(#{condition.startDate},'%Y-%m-%d')
+			]]>
+		</if>
+		<if test="condition.endsDate!=null and condition.endsDate!=&quot;&quot;">
+			 <![CDATA[
+				and t.joinDate<=str_to_date(#{condition.endsDate},'%Y-%m-%d')   
+				]]>
+		</if>
+		<if test="condition.outDate!=null and condition.outDate!=&quot;&quot;">
+			 <![CDATA[
+				and t.endDate<str_to_date(#{condition.outDate},'%Y-%m-%d')   
+				]]>
+		</if>
+		<if test="condition.memberNo!=null and condition.memberNo!=&quot;&quot;">
+			 <![CDATA[
+				and t.memberNo=#{condition.memberNo}  
+				]]>
+		</if>
+		
+		<if test="condition.payStatus!=&quot;&quot; and condition.payStatus==0">
+			 <![CDATA[
+				and DATEDIFF(t.endDate, SYSDATE())>=10
+				]]>
+		</if>
+		<if test="condition.payStatus!=&quot;&quot; and condition.payStatus==1">
+			 <![CDATA[
+				and (DATEDIFF(t.endDate, SYSDATE())>=0 and DATEDIFF(t.endDate, SYSDATE())<=10) 
+				]]>
+		</if>
+		<if test="condition.payStatus!=&quot;&quot; and condition.payStatus==2">
+			 <![CDATA[
+				and DATEDIFF(t.endDate, SYSDATE())<0
+				]]>
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+	<![CDATA[
+	select t.* from(
+		select
+			t.id, t.memberCode, t.joinDate, t.endDate, t.memberLevel,IFNULL(b.name,"") memberLevelName,
+			t.createDate,
+			t.createUserId,
+			t.createUserName,
+			t.lastModifyDate,
+			t.lastModifyUserId,
+			t.lastModifyUserName,
+			a.department_name departmentName, t.status,
+			t.auditUserId, t.auditUserName,
+			t.auditDate,
+			t.auditRemark,a.buss_license_no bussLicenseNo,a.legal_person_name
+			legalPersonName,a.legal_person_id_no legalPersonIdNo,t.memberNo,a.contact_name contactName,
+			a.contact_mobile contactMobile,c.payNum,datediff(t.endDate,sysdate()) leftDates,(case  
+			when (select count(*) from member_pay_info q LEFT JOIN pay_cfg w on q.chargingItemId=w.id
+				left join charging_item r on w.chargingItemId = r.id and r.itemType = '1'
+				where q.memberCode = t.memberCode and q.`status`=0)>0 then '0'
+			when DATEDIFF(t.endDate, SYSDATE())>30
+		    then '1'
+		    when (DATEDIFF(t.endDate, SYSDATE())>=0 and DATEDIFF(t.endDate, SYSDATE())<=30)
+		    then '2'
+		    else
+		    '3'
+		    end) payStatus,
+	    	(select count(*) from member_pay_info q LEFT JOIN pay_cfg w on q.chargingItemId=w.id
+				left join charging_item r on w.chargingItemId = r.id and r.itemType = '1'
+			where q.memberCode = t.memberCode and q.`status`=0) ]]>
+			<include refid="whereCondition" />
+		) t
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.`status`,t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY  t.`status`, t.joinDate desc
+			</otherwise>
+		</choose>
+
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+	</select>
+
+	<select id="selectByMemberCode" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from member_info
+		where memberCode = #{memberCode,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

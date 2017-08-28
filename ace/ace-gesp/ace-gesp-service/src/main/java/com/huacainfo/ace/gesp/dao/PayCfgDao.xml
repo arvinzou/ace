@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.PayCfgDao">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.gesp.model.PayCfg">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="memberCode" jdbcType="VARCHAR" property="memberCode" />
+		<result column="memberLevelId" jdbcType="VARCHAR" property="memberLevelId" />
+		<result column="chargingItemId" jdbcType="VARCHAR" property="chargingItemId" />
+		<result column="payType" jdbcType="CHAR" property="payType" />
+		<result column="payNum" jdbcType="DECIMAL" property="payNum" />
+		<result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+		<result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+		<result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+		<result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+		<result column="lastModifyUserName" jdbcType="VARCHAR"
+			property="lastModifyUserName" />
+	</resultMap>
+
+	<resultMap extends="BaseResultMap" id="BaseResultMapVo"
+		type="com.huacainfo.ace.gesp.vo.PayCfgVo">
+		<result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, memberCode, memberLevelId, chargingItemId, payType, payNum,
+		createDate, createUserId, customType,
+		createUserName, lastModifyDate, lastModifyUserId, lastModifyUserName
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from pay_cfg
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		pay_cfg
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.PayCfg">
+		insert into pay_cfg (id, memberCode, memberLevelId,
+		chargingItemId, payType, payNum, customType,
+		createDate, createUserId, createUserName,
+		lastModifyDate, lastModifyUserId, lastModifyUserName
+		)
+		values (#{id,jdbcType=VARCHAR}, #{memberCode,jdbcType=VARCHAR},
+		#{memberLevelId,jdbcType=VARCHAR},
+		#{chargingItemId,jdbcType=VARCHAR}, #{payType,jdbcType=CHAR}, #{payNum,jdbcType=DECIMAL},
+		 #{customType,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+		#{createUserName,jdbcType=VARCHAR},
+		#{lastModifyDate,jdbcType=TIMESTAMP},
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		#{lastModifyUserName,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.gesp.model.PayCfg">
+		update pay_cfg
+		set
+		memberLevelId = #{memberLevelId,jdbcType=VARCHAR},
+		chargingItemId = #{chargingItemId,jdbcType=VARCHAR},
+		payType = #{payType,jdbcType=CHAR},
+		payNum = #{payNum,jdbcType=DECIMAL},
+		lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+		lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+		lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="isExit" resultType="map">
+		select id,chargingItemId, memberLevelId,memberCode from pay_cfg
+		where memberCode=#{memberCode} 
+		and chargingItemId =
+		#{chargingItemId,jdbcType=VARCHAR}
+		<if test="memberLevelId!=null and memberLevelId!=&quot;&quot;">
+			and memberLevelId = #{memberLevelId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="selectPayCfgList" resultMap="BaseResultMap">
+		select chargingItemId, memberLevelId from
+		pay_cfg  where memberCode =(select parent_department_id from department
+		where department_id=#{memberCode,jdbcType=VARCHAR})
+
+	</select>
+
+	<sql id="whereCondition">
+		from pay_cfg t left join department a on t.memberCode=a.department_id
+		left join member_level b on t.memberLevelId=b.id
+		left join
+		charging_item c on t.chargingItemId=c.id
+		where 1=1
+        <choose>  
+            <when test="condition.memberCode==5">   
+            </when>  
+            <otherwise>
+				and t.memberCode = #{condition.memberCode,jdbcType=VARCHAR}
+            </otherwise>
+        </choose>
+		<if test="condition.payType!=null and condition.payType!=&quot;&quot;">
+			 <![CDATA[
+				and t.payType=#{condition.payType}  
+				]]>
+		</if>
+		<if test="condition.chargingItemId!=null and condition.chargingItemId!=&quot;&quot;">
+			 <![CDATA[
+				and t.chargingItemId=#{condition.chargingItemId}  
+				]]>
+		</if>
+		<if test="condition.memberLevelId!=null and condition.memberLevelId!=&quot;&quot;">
+			 <![CDATA[
+				and t.memberLevelId=#{condition.memberLevelId}  
+				]]>
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+
+		select
+		t.id, t.memberCode, b.name memberLevelName,c.name
+		chargingItemName, t.payType, t.payNum,t.memberLevelId,
+		t.chargingItemId,t.customType,
+		t.createDate,
+		t.createUserId,
+		t.createUserName,
+		t.lastModifyDate,
+		t.lastModifyUserId,
+		t.lastModifyUserName,a.department_name
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.createDate
+			</otherwise>
+		</choose>
+
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+	</select>
+
+
+	<select id="selectByCodeAndMemberCode" resultMap="BaseResultMap">
+		select
+			a.id, a.memberCode, a.memberLevelId, a.chargingItemId, a.payType, a.payNum,
+			a.createDate, a.createUserId, a.customType,
+			a.createUserName, a.lastModifyDate, a.lastModifyUserId, a.lastModifyUserName
+		from pay_cfg a
+		LEFT join charging_item  c on a.chargingItemId = c.id
+		where a.memberCode = #{deptId} <!-- (SELECT t.memberRemark from member_info t where t.memberCode=#{memberCode} and t.memberRemark=#{deptId} ) -->
+		<if test="memberLevelId!=null and memberLevelId!=&quot;&quot;">
+			and a.memberLevelId = #{memberLevelId,jdbcType=VARCHAR}
+		</if>
+		<choose>
+			<when test="chargingItemId==&quot;1&quot;">
+				and c.itemType=#{chargingItemId}
+			</when>
+			<otherwise>
+				 and a.chargingItemId=#{chargingItemId}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<!-- 根据协会编号和项目编号查询 -->
+	<select id="selectByChargindItemAndMemberCode" resultType="map">
+		select
+			a.id, a.memberCode, a.memberLevelId, a.chargingItemId, a.payType, a.payNum,
+			a.createDate, a.createUserId, a.customType,
+			a.createUserName, a.lastModifyDate, a.lastModifyUserId, a.lastModifyUserName
+		from pay_cfg a
+		LEFT join charging_item  c on a.chargingItemId = c.id
+		where a.memberCode = #{memberCode} 
+		<choose>
+			<when test="chargingItemId==1">
+				and c.itemType=#{chargingItemId}
+			</when>
+			<otherwise>
+				 and a.chargingItemId=#{chargingItemId}
+			</otherwise>
+		</choose>
+	</select>
+	
+</mapper>

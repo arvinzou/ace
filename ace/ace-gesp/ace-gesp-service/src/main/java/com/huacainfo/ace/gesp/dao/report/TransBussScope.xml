@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.report.TransBussScope">
+	<select id="query" resultType="map">
+	<![CDATA[
+SELECT
+	sum(
+		CASE
+		WHEN t.employees_num < 50 THEN
+			1
+		ELSE
+			0
+		END
+	) '0-50人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 100
+			AND t.employees_num >= 50
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '50-100人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 200
+			AND t.employees_num >= 100
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '100-200人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 300
+			AND t.employees_num >= 200
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '200-300人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 400
+			AND t.employees_num >= 300
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '300-400人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 500
+			AND t.employees_num >= 400
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '400-500人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 600
+			AND t.employees_num >= 500
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '500-600人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 700
+			AND t.employees_num >= 600
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '600-700人',
+	sum(
+		CASE
+		WHEN (t.employees_num > 800) THEN
+			1
+		ELSE
+			0
+		END
+	) '800人以上'
+FROM
+	department t
+WHERE
+	t.parent_department_id = #{deptId}
+
+union ALL
+
+SELECT
+	sum(
+		CASE
+		WHEN t.employees_num < 50 THEN
+			1
+		ELSE
+			0
+		END
+	) '0-50人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 100
+			AND t.employees_num >= 50
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '50-100人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 200
+			AND t.employees_num >= 100
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '100-200人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 300
+			AND t.employees_num >= 200
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '200-300人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 400
+			AND t.employees_num >= 300
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '300-400人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 500
+			AND t.employees_num >= 400
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '400-500人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 600
+			AND t.employees_num >= 500
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '500-600人',
+	sum(
+		CASE
+		WHEN (
+			t.employees_num < 700
+			AND t.employees_num >= 600
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '600-700人',
+	sum(
+		CASE
+		WHEN (t.employees_num > 800) THEN
+			1
+		ELSE
+			0
+		END
+	) '800人以上'
+FROM
+	department t
+WHERE
+	t.parent_department_id = #{deptId}
+and EXISTS (
+			SELECT
+				id
+			FROM
+				member_info a
+			WHERE
+				a.memberRemark = #{deptId}
+				and a.memberCode=t.department_id
+				and a.status='1'
+		)
+]]>
+	</select>
+</mapper>

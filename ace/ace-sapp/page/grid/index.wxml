@@ -1,0 +1,10 @@
+<view class="page">
+ <view class="weui-grids-nav">
+            <block wx:for="{{list}}" wx:key="{{item.id}}">
+                <navigator open-type="switchTab" url="../service/index?category={{item.id}}" class="weui-grid-nav" hover-class="weui-grid_active-nav">
+                    <image class="weui-grid__icon-nav" src="../../image/{{item.icon}}" />
+                    <view class="weui-grid__label-nav">{{item.name}}</view>
+                </navigator>
+            </block>
+        </view>
+</view>

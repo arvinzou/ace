@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.report.EnterpriseArea">
+	<select id="query" resultType="map">
+SELECT
+	m.area_code,
+	province. name,
+	ifnull(a.num,0) memberCount,
+	ifnull(m.num,0) deptCount
+FROM
+	(
+		SELECT
+			area_code,
+			count(1) num
+		FROM
+			department
+		WHERE
+			parent_department_id = #{deptId}
+		GROUP BY
+			area_code
+	) m
+INNER JOIN province ON m.area_code = province. CODE
+LEFT JOIN (
+	SELECT
+		count(1) num,
+		area_code
+	FROM
+		department
+	WHERE
+		parent_department_id =  #{deptId}
+	AND EXISTS (
+		SELECT
+			id
+		FROM
+			member_info a
+		WHERE
+			a.memberRemark =  #{deptId}
+		AND a.memberCode = department.department_id
+		AND a. STATUS = '1'
+	)
+	GROUP BY
+		area_code
+) a ON a.area_code = m.area_code
+
+	</select>
+</mapper>

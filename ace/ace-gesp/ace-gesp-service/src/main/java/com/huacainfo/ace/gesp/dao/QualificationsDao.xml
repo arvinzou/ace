@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.QualificationsDao">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.gesp.model.Qualifications">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="category" jdbcType="VARCHAR" property="category" />
+		<result column="deptId" jdbcType="VARCHAR" property="deptId" />
+		<result column="fileSrc" jdbcType="VARCHAR" property="fileSrc" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+		<result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+		<result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+		<result column="lastModifyUserName" jdbcType="VARCHAR"
+			property="lastModifyUserName" />
+		<result column="lastModifyTime" jdbcType="TIMESTAMP" property="lastModifyTime" />
+		<result column="status" jdbcType="CHAR" property="status" />
+		<result column="auditUserId" jdbcType="VARCHAR" property="auditUserId" />
+		<result column="auditUserName" jdbcType="VARCHAR" property="auditUserName" />
+		<result column="auditDate" jdbcType="TIMESTAMP" property="auditDate" />
+		<result column="auditDiscribtion" jdbcType="VARCHAR" property="auditDiscribtion" />
+	</resultMap>
+	<resultMap id="BaseResultMapVo" type="com.huacainfo.ace.gesp.vo.QualificationsVo">
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, category, deptId, fileSrc, remark, createUserId,
+		createUserName,
+		createTime,
+		lastModifyUserId, lastModifyUserName,
+		lastModifyTime, status, auditUserId,
+		auditUserName,
+		auditDate,
+		auditDiscribtion
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from qualifications
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		qualifications
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.Qualifications">
+		insert into qualifications
+		(id, category, deptId,
+		fileSrc, remark, createUserId,
+		createUserName,
+		createTime, lastModifyUserId,
+		lastModifyUserName, lastModifyTime,
+		status,
+		auditUserId, auditUserName, auditDate,
+		auditDiscribtion)
+		values
+		(#{id,jdbcType=VARCHAR}, #{category,jdbcType=CHAR},
+		#{deptId,jdbcType=VARCHAR},
+		#{fileSrc,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR},
+		#{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		#{lastModifyUserName,jdbcType=VARCHAR},
+		#{lastModifyTime,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR},
+		#{auditUserId,jdbcType=VARCHAR}, #{auditUserName,jdbcType=VARCHAR},
+		#{auditDate,jdbcType=TIMESTAMP},
+		#{auditDiscribtion,jdbcType=VARCHAR})
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.gesp.model.Qualifications">
+		update qualifications
+		<set>
+			<if test="fileSrc!=null">
+				fileSrc = #{fileSrc,jdbcType=VARCHAR},
+			</if>
+			<if test="remark!=null and remark!=&quot;&quot;">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status!=null and status!=&quot;&quot;">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="lastModifyUserId!=null and lastModifyUserId!=&quot;&quot;">
+				lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="lastModifyUserName!=null and lastModifyUserName!=&quot;&quot;">
+				lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="status!=null">
+				lastModifyTime = #{lastModifyTime,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where category = #{category,jdbcType=VARCHAR} and
+			deptId = #{deptId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="isExit" resultType="int">
+		select count(*) from
+		qualifications
+		where deptId=#{deptId} and category =
+		#{category,jdbcType=VARCHAR}
+	</select>
+	<select id="selectQualificationsList" resultType="map">
+		SELECT
+			t.id code,
+			t.fileName name,
+			t.filePath path,
+			t.remark,
+			t.isMust,
+			a.fileSrc,
+			a.createTime,
+			IFNULL(a.status,'0') status,
+			ifNull(a.id, t.id) id,
+			a.createUserName,
+			a.auditDiscribtion,
+			a.auditDate
+		FROM
+		(
+			select 
+				id,
+				fileName,
+				filePath,
+				isMust,
+				remark
+			from material_list 
+			where category = 1 and status =1
+				and departmentId = #{parentDeptId}
+			ORDER BY sort 
+		) t
+		LEFT JOIN (
+			SELECT
+				id,
+				category,
+				fileSrc,
+				auditDiscribtion,
+				auditDate,
+				status,
+				createTime,
+				createUserName
+			FROM
+				qualifications
+			WHERE
+				deptId = #{deptId}
+				<if test="status!=null and status!=&quot;&quot;">
+					and status = #{status,jdbcType=VARCHAR}
+				</if>
+		) a ON t.id = a.category
+		where 1=1 
+		<if test="status!=null and status!=&quot;&quot;">
+			and a.`status` is not NULL
+		</if>
+	</select>
+
+	<sql id="whereCondition">
+		from department t
+		left join department a on
+		t.parent_department_id=a.department_id
+		left join province on
+		t.area_code =province.code
+		
+		where  exists(select c.id from qualifications c where t.department_id=c.deptId and c.status='2' )
+		<if test="condition.deptName!=null and condition.deptName!=&quot;&quot;">
+			and t.department_name like
+			concat('%',#{condition.deptName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="condition.deptId!=null and condition.deptId!=&quot;&quot;">
+			and t.department_id like
+			concat(#{condition.deptId,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="condition.bussLicenseNo!=null and condition.bussLicenseNo!=&quot;&quot;">
+			and t.buss_license_no =#{condition.bussLicenseNo}
+		</if>
+		<if test='condition.areaCode!=null and condition.areaCode!=""'>
+			and t.area_code like
+			concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultType="map">
+		select
+		t.department_id departmentId, a.department_name deptName,
+		t.department_name
+		departmentName,t.buss_license_no
+		bussLicenseNo,t.legal_person_name
+		legalPersonName,t.legal_person_id_no
+		legalPersonIdNo,province.name
+		areaName,
+		t.contact_name contactName,
+		t.contact_tel contactTel,
+		t.contact_mobile contactMobile,
+		(select MIN(f.status) from qualifications f where f.deptId=t.department_id) `status`
+		<include refid="whereCondition" />
+		ORDER BY t.create_time
+		limit #{start,jdbcType=DECIMAL},
+		#{limit,jdbcType=DECIMAL}
+
+	</select>
+	<update id="updateAudit">
+		update qualifications
+		set status =
+		#{status,jdbcType=CHAR},
+		auditUserId = #{auditUserId,jdbcType=VARCHAR},
+		auditUserName = #{auditUserName,jdbcType=VARCHAR},
+		auditDate =
+		#{auditDate,jdbcType=TIMESTAMP},
+		auditDiscribtion =
+		#{auditDiscribtion,jdbcType=VARCHAR}
+		where id =
+		#{id,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateQualiByFileSrc" >
+		update qualifications
+		set 
+			fileSrc = #{fileSrc,jdbcType=CHAR},
+			auditUserId = #{auditUserId,jdbcType=VARCHAR},
+			auditUserName = #{auditUserName,jdbcType=VARCHAR},
+			auditDate = #{auditDate,jdbcType=TIMESTAMP},
+			auditDiscribtion = #{auditDiscribtion,jdbcType=VARCHAR},
+			status = 0
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectByDeptIdAndCategory" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from qualifications
+		where deptId=#{deptId} and category =
+		#{category,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="updateBystatus">
+		update qualifications
+		set status = 2
+		where deptId=#{deptId} and status=#{status}
+	</update>
+	
+	<select id="selectCountByDeptID" resultType="map">
+		SELECT
+			COUNT(*) as qtoal,
+			(select 
+				COUNT(*)
+			from material_list c 
+			where c.category = 1 and c.`status` = 1
+				and c.isMust = 1 and departmentId = #{parentDeptId}) as mtotal
+		FROM
+			(select category from qualifications f where deptId = #{deptId}  group by category) a 
+		LEFT JOIN material_list b on a.category= b.id
+		where b.isMust = 1
+	</select>
+	
+</mapper>

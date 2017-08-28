@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.MemberLevelDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.gesp.model.MemberLevel">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="memberCode" jdbcType="VARCHAR" property="memberCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.gesp.vo.MemberLevelVo">
+  	<result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+ </resultMap>
+  <sql id="Base_Column_List">
+    id, memberCode, name, remark, status, createDate, createUserId, createUserName, lastModifyDate, 
+    lastModifyUserId, lastModifyUserName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member_level
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from member_level
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.gesp.model.MemberLevel">
+    insert into member_level (id, memberCode, name, 
+      remark, status, createDate, 
+      createUserId, createUserName, lastModifyDate, 
+      lastModifyUserId, lastModifyUserName)
+    values (#{id,jdbcType=VARCHAR}, #{memberCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.gesp.model.MemberLevel">
+    update member_level
+    set memberCode = #{memberCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="isExit" resultType="int">
+		select count(1) from member_level
+		where memberCode=#{memberCode} and name = #{name,jdbcType=VARCHAR}
+	</select>
+	<select id="selectListByDeptId" resultType="map">
+		select id code,name from
+		member_level t where memberCode =#{deptId}
+		
+	</select>
+
+	<sql id="whereCondition">
+		from member_level t left join department a on t.memberCode=a.department_id
+		where 1=1
+        <choose>  
+            <when test="condition.memberCode==5">   
+            </when>  
+            <otherwise>
+				and t.memberCode = #{condition.memberCode,jdbcType=VARCHAR}
+            </otherwise>
+        </choose> 
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			 <![CDATA[
+				and t.name  like concat('%',#{condition.name},'%')
+				]]>
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+
+		select
+		t.id, t.memberCode, t.name,t.createDate,t.status,
+		t.createUserId, t.createUserName,
+		t.lastModifyDate, t.lastModifyUserId,
+		t.lastModifyUserName,a.department_name
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.createDate
+			</otherwise>
+		</choose>
+
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+	</select>
+</mapper>

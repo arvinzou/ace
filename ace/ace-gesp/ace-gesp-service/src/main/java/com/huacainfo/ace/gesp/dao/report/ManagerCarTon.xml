@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.report.ManagerCarTon">
+	<select id="query" resultType="map">
+	 <![CDATA[
+		select 
+			t.name,
+			t.value 
+		from  ((select 
+					'[1吨以下]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon<=1)
+			UNION
+				(select 
+					'(1吨,2吨]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon>1 and a.approvedTon<=2)
+			UNION
+				(select 
+					'(2吨,3吨]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon>2 and a.approvedTon<=3)
+			UNION
+				(select 
+					'(3吨,5吨]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon>3 and a.approvedTon<=5)
+			UNION
+				(select 
+					'(5吨,8吨]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon>5 and a.approvedTon<=8)
+			UNION
+				(select 
+					'(8吨,10吨]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon>8 and a.approvedTon<=10)
+			UNION
+				(select 
+					'(10吨,12吨]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon>10 and a.approvedTon<=12)
+			UNION
+				(select 
+					'(12吨,20吨]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon>12 and a.approvedTon<=20)
+			UNION
+				(select 
+					'(20吨,25吨]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.approvedTon>20 and a.approvedTon<=25)
+			UNION
+				(select 
+					'(25吨,30吨]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon>25 and a.approvedTon<=30)
+			UNION
+				(select 
+					'[30吨以上]' as name,count(*) as value 
+				from bs_car_base a 
+				inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+				where a.managementStatus in ('营运','过户') and a.approvedTon>30)) t ]]>
+	</select>
+</mapper>

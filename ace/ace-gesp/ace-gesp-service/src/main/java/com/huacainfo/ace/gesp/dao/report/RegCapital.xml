@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.report.RegCapital">
+	<select id="query" resultType="map">
+	<![CDATA[
+
+SELECT
+	sum(
+		CASE
+		WHEN t.reg_capital < 50 THEN
+			1
+		ELSE
+			0
+		END
+	) 'a【0-50万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 100
+			AND t.reg_capital >= 50
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'b【50-500万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 500
+			AND t.reg_capital >= 100
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'c【100-200万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 1000
+			AND t.reg_capital >= 500
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'd【500-1000万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 400
+			AND t.reg_capital >= 300
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'e【300-400万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 5000
+			AND t.reg_capital >= 1000
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'f【1000-5000万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 600
+			AND t.reg_capital >= 500
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'g【500-600万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 10000
+			AND t.reg_capital >= 5000
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'h【5000万-1亿】',
+sum(
+		CASE
+		WHEN (t.reg_capital > 10000) THEN
+			1
+		ELSE
+			0
+		END
+	) 'i【1亿以上】'
+FROM
+	department t
+WHERE
+	t.parent_department_id =#{deptId}
+AND   EXISTS (
+			SELECT
+				id
+			FROM
+				member_info a
+			WHERE
+				a.memberRemark = #{deptId}
+				and a.memberCode=t.department_id
+				and a.status='1'
+		)
+
+union all
+
+SELECT
+	sum(
+		CASE
+		WHEN t.reg_capital < 50 THEN
+			1
+		ELSE
+			0
+		END
+	) 'a【0-50万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 100
+			AND t.reg_capital >= 50
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'b【50-500万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 500
+			AND t.reg_capital >= 100
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'c【100-200万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 1000
+			AND t.reg_capital >= 500
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'd【500-1000万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 400
+			AND t.reg_capital >= 300
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'e【300-400万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 5000
+			AND t.reg_capital >= 1000
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'f【1000-5000万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 600
+			AND t.reg_capital >= 500
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'g【500-600万】',
+	sum(
+		CASE
+		WHEN (
+			t.reg_capital < 10000
+			AND t.reg_capital >= 5000
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) 'h【5000万-1亿】',
+sum(
+		CASE
+		WHEN (t.reg_capital > 10000) THEN
+			1
+		ELSE
+			0
+		END
+	) 'i【1亿以上】'
+FROM
+	department t
+WHERE
+	t.parent_department_id = #{deptId}
+]]>
+	</select>
+</mapper>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.SelfPayInfoDao">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.gesp.model.MemberPayInfo">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="memberCode" jdbcType="VARCHAR" property="memberCode" />
+		<result column="chargingItemId" jdbcType="VARCHAR" property="chargingItemId" />
+		<result column="chargingItemName" jdbcType="VARCHAR" property="chargingItemName" />
+		<result column="memberLevelId" jdbcType="VARCHAR" property="memberLevelId" />
+		<result column="payDate" jdbcType="TIMESTAMP" property="payDate" />
+		<result column="endDate" jdbcType="TIMESTAMP" property="endDate" />
+		<result column="payAmount" jdbcType="DECIMAL" property="payAmount" />
+		<result column="status" jdbcType="CHAR" property="status" />
+		<result column="auditUserName" jdbcType="VARCHAR" property="auditUserName" />
+		<result column="auditUserId" jdbcType="VARCHAR" property="auditUserId" />
+		<result column="auditDate" jdbcType="TIMESTAMP" property="auditDate" />
+		<result column="auditRemark" jdbcType="VARCHAR" property="auditRemark" />
+		<result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+		<result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+		<result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+		<result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+		<result column="lastModifyUserName" jdbcType="VARCHAR"
+			property="lastModifyUserName" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="BaseResultMapVo"
+		type="com.huacainfo.ace.gesp.vo.MemberPayInfoVo">
+		<result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+	</resultMap>
+	
+	<sql id="whereCondition">
+		from member_pay_info t 
+		inner join member_info d on t.memberCode = d.memberCode
+		inner join department a on
+		t.memberCode=a.department_id
+		left join member_level b on
+		t.memberLevelId=b.id
+		inner join
+		charging_item c on t.chargingItemId=c.id
+
+		where d.memberRemark =
+		#{condition.memberCode,jdbcType=VARCHAR}
+
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and a.department_name like
+			concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="condition.payType!=null and condition.payType!=&quot;&quot;">
+			 <![CDATA[
+				and t.payType=#{condition.payType}  
+				]]>
+		</if>
+		<if test="condition.year!=null and condition.year!=&quot;&quot;">
+			 <![CDATA[
+				and  DATE_FORMAT(t.payDate, '%Y')=#{condition.year}
+				]]>
+		</if>
+		
+		<if
+			test="condition.chargingItemId!=null and condition.chargingItemId!=&quot;&quot;">
+			 <![CDATA[
+				and t.chargingItemId=#{condition.chargingItemId}  
+				]]>
+		</if>
+		<if
+			test="condition.memberLevelId!=null and condition.memberLevelId!=&quot;&quot;">
+			 <![CDATA[
+				and t.memberLevelId=#{condition.memberLevelId}  
+				]]>
+		</if>
+		<if test="condition.status!=null and condition.status!=&quot;&quot;">
+			 <![CDATA[
+				and t.status=#{condition.status}  
+				]]>
+		</if>
+		<if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
+			<![CDATA[
+			and t.payDate>=str_to_date(#{condition.startDate},'%Y-%m-%d')
+			]]>
+		</if>
+		<if test="condition.endsDate!=null and condition.endsDate!=&quot;&quot;">
+			 <![CDATA[
+				and t.payDate<=str_to_date(#{condition.endsDate},'%Y-%m-%d')   
+				]]>
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+select t.* from(
+		select
+		t.id, t.memberCode, b.name memberLevelName,c.name chargingItemName,
+		t.payAmount,t.memberLevelId,t.endDate,t.status,
+		t.auditUserId, t.auditUserName,
+		t.auditDate,
+		t.auditRemark,
+		t.chargingItemId,
+		t.createDate,
+		t.createUserId,
+		t.createUserName,
+		t.lastModifyDate,
+		t.lastModifyUserId,
+		t.lastModifyUserName,a.department_name departmentName,a.buss_license_no
+		bussLicenseNo,a.legal_person_name
+		legalPersonName,a.legal_person_id_no
+		legalPersonIdNo
+		<include refid="whereCondition" />
+		) t
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.createDate
+			</otherwise>
+		</choose>
+
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+	</select>
+	<select id="selectAnaysePayMentByMonth" resultType="map">
+	SELECT 
+    m.name, ifnull(n.payAmount,0) value
+FROM
+    (SELECT 
+        code, name
+    FROM
+        dict
+    WHERE
+        category_id = '07') m
+        LEFT JOIN
+    (SELECT 
+        SUM(ifnull(payAmount,0)) payAmount, DATE_FORMAT(payDate, '%m') months
+    FROM
+        member_pay_info t inner join department a on t.memberCode=a.department_id
+    WHERE
+        a.department_id=#{deptId} and DATE_FORMAT(payDate, '%Y')=#{year}
+        <if test="chargingItemId!=null and chargingItemId!=&quot;&quot;">
+			<![CDATA[
+			and t.chargingItemId=#{chargingItemId}
+			]]>
+		</if>
+    GROUP BY DATE_FORMAT(payDate, '%m')) n ON m.code = n.months
+    
+    order by m.code
+	</select>
+	
+</mapper>

@@ -1,0 +1,98 @@
+var option1 = {
+	    title : {
+	        text: '',
+	        subtext: '',
+	        x:'center'
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient : 'vertical',
+	        x : 'left',
+	        data:[]
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: true, readOnly: false},
+	            magicType : {
+	                show: true, 
+	                type: ['pie', 'funnel'],
+	                option: {
+	                    funnel: {
+	                        x: '25%',
+	                        width: '50%',
+	                        funnelAlign: 'left',
+	                        max: 1548
+	                    }
+	                }
+	            },
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    calculable : true,
+	    series : [
+	        {
+	            name:'车辆类型',
+	            type:'pie',
+	            radius : '55%',
+	            center: ['50%', '60%'],
+	            data:[
+	               
+	            ]
+	        }
+	    ]
+	};
+	                    
+
+var ecConfig = {
+	EVENT : {
+		// -------全局通用
+		REFRESH : 'refresh',
+		RESTORE : 'restore',
+		RESIZE : 'resize',
+		CLICK : 'click',
+		DBLCLICK : 'dblclick',
+		HOVER : 'hover',
+		MOUSEOUT : 'mouseout',
+		// MOUSEWHEEL: 'mousewheel',
+		// -------业务交互逻辑
+		DATA_CHANGED : 'dataChanged',
+		DATA_ZOOM : 'dataZoom',
+		DATA_RANGE : 'dataRange',
+		DATA_RANGE_SELECTED : 'dataRangeSelected',
+		DATA_RANGE_HOVERLINK : 'dataRangeHoverLink',
+		LEGEND_SELECTED : 'legendSelected',
+		LEGEND_HOVERLINK : 'legendHoverLink',
+		MAP_SELECTED : 'mapSelected',
+		PIE_SELECTED : 'pieSelected',
+		MAGIC_TYPE_CHANGED : 'magicTypeChanged',
+		DATA_VIEW_CHANGED : 'dataViewChanged',
+		TIMELINE_CHANGED : 'timelineChanged',
+		MAP_ROAM : 'mapRoam',
+		FORCE_LAYOUT_END : 'forceLayoutEnd',
+		// -------内部通信
+		TOOLTIP_HOVER : 'tooltipHover',
+		TOOLTIP_IN_GRID : 'tooltipInGrid',
+		TOOLTIP_OUT_GRID : 'tooltipOutGrid',
+		ROAMCONTROLLER : 'roamController'
+	}
+};
+function eConsole(param) {
+	var mes = '【' + param.type + '】';
+	if (typeof param.seriesIndex != 'undefined') {
+		mes += '  seriesIndex : ' + param.seriesIndex;
+		mes += '  dataIndex : ' + param.dataIndex;
+	}
+	if (param.type == 'hover') {
+		document.getElementById('hover-console').innerHTML = 'Event Console : '
+				+ mes;
+	} else {
+		document.getElementById('console').innerHTML = mes;
+	}
+	console.log(param);
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-4.0.xsd "
+	default-autowire="byName">
+	<util:properties id="configProps" location="classpath:config.properties" />	<util:properties id="specialProps" location="classpath:special.properties" />
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+				<value>classpath:special.properties</value>
+				<value>classpath:dubbo.properties</value>
+			</list>
+		</property>
+	</bean>
+	<import resource="classpath:spring/spring-ace-common-monitor.xml" />
+	<import resource="classpath:spring/spring-ace-common-fastdfs.xml" />
+	<import resource="classpath:spring/spring-ace-common-redis.xml" />
+	<import resource="classpath:spring/spring-ace-common-kafka.xml" />
+	<import resource="classpath:spring/spring-ace-common-session.xml" />
+	<import resource="classpath:spring/spring-ace-gis-service.xml" />
+	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
+	<!--<import resource="classpath:dubbo/dubbo-ace-gis-consumer.xml" />-->
+</beans>

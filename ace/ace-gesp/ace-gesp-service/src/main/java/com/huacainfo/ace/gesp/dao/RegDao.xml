@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.RegDao">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.gesp.model.Department">
+		<id column="department_id" jdbcType="VARCHAR" property="departmentId" />
+		<result column="parent_department_id" jdbcType="VARCHAR"
+			property="parentDepartmentId" />
+		<result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+		<result column="short_name" jdbcType="VARCHAR" property="shortName" />
+		<result column="category" jdbcType="CHAR" property="category" />
+		<result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+		<result column="pcode" jdbcType="VARCHAR" property="pcode" />
+		<result column="contact_name" jdbcType="VARCHAR" property="contactName" />
+		<result column="contact_tel" jdbcType="VARCHAR" property="contactTel" />
+		<result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile" />
+		<result column="contact_qq" jdbcType="VARCHAR" property="contactQq" />
+		<result column="contact_email" jdbcType="VARCHAR" property="contactEmail" />
+		<result column="contact_fax" jdbcType="VARCHAR" property="contactFax" />
+		<result column="contact_post" jdbcType="VARCHAR" property="contactPost" />
+		<result column="legal_person_name" jdbcType="VARCHAR" property="legalPersonName" />
+		<result column="legal_person_id_type" jdbcType="VARCHAR"
+			property="legalPersonIdType" />
+		<result column="legal_person_id_no" jdbcType="VARCHAR"
+			property="legalPersonIdNo" />
+		<result column="legal_person_tel" jdbcType="VARCHAR" property="legalPersonTel" />
+		<result column="legal_person_mobile" jdbcType="VARCHAR"
+			property="legalPersonMobile" />
+		<result column="legal_person_addr" jdbcType="VARCHAR" property="legalPersonAddr" />
+		<result column="reg_date" jdbcType="TIMESTAMP" property="regDate" />
+		<result column="reg_capital" jdbcType="VARCHAR" property="regCapital" />
+		<result column="reg_area_code" jdbcType="VARCHAR" property="regAreaCode" />
+		<result column="reg_addr" jdbcType="VARCHAR" property="regAddr" />
+		<result column="nature" jdbcType="CHAR" property="nature" />
+		<result column="buss_license_no" jdbcType="VARCHAR" property="bussLicenseNo" />
+		<result column="buss_addr" jdbcType="VARCHAR" property="bussAddr" />
+		<result column="reg_pro" jdbcType="VARCHAR" property="regPro" />
+		<result column="reg_city" jdbcType="VARCHAR" property="regCity" />
+		<result column="buss_pro" jdbcType="VARCHAR" property="bussPro" />
+		<result column="buss_city" jdbcType="VARCHAR" property="bussCity" />
+		<result column="buss_area_code" jdbcType="VARCHAR" property="bussAreaCode" />
+		<result column="business_classify" jdbcType="VARCHAR" property="businessClassify" />
+		<result column="fax" jdbcType="VARCHAR" property="fax" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="telphone" jdbcType="VARCHAR" property="telphone" />
+		<result column="trans_depart_approval_no" jdbcType="VARCHAR"
+			property="transDepartApprovalNo" />
+		<result column="trans_buss_license_no" jdbcType="VARCHAR"
+			property="transBussLicenseNo" />
+		<result column="trans_buss_license_valid_date" jdbcType="TIMESTAMP"
+			property="transBussLicenseValidDate" />
+		<result column="trans_buss_scope" jdbcType="VARCHAR" property="transBussScope" />
+		<result column="employees_num" jdbcType="INTEGER" property="employeesNum" />
+		<result column="driver_num" jdbcType="INTEGER" property="driverNum" />
+		<result column="unlicensed_driver_num" jdbcType="INTEGER"
+			property="unlicensedDriverNum" />
+		<result column="licensed_driver_num" jdbcType="INTEGER"
+			property="licensedDriverNum" />
+		<result column="status" jdbcType="CHAR" property="status" />
+		<result column="type" jdbcType="CHAR" property="type" />
+		<result column="simage" jdbcType="VARCHAR" property="simage" />
+		<result column="bimage" jdbcType="VARCHAR" property="bimage" />
+		<result column="create_user_id" jdbcType="VARCHAR" property="createUserId" />
+		<result column="create_user_name" jdbcType="VARCHAR" property="createUserName" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="last_modify_time" jdbcType="TIMESTAMP"
+			property="lastModifyTime" />
+		<result column="last_modify_user_id" jdbcType="VARCHAR"
+			property="lastModifyUserId" />
+		<result column="last_modify_user_name" jdbcType="VARCHAR"
+			property="lastModifyUserName" />
+		<result column="accident_of_year" jdbcType="LONGVARCHAR"
+			property="accidentOfYear" />
+		<result column="complaints_remark" jdbcType="LONGVARCHAR"
+			property="complaintsRemark" />
+		<result column="buss_num" jdbcType="VARCHAR" property="bussNum" />
+		<result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+		<result column="asset_total" jdbcType="VARCHAR" property="assetTotal" />
+		<result column="net_asset" jdbcType="VARCHAR" property="netAsset" />
+		<result column="year_sale" jdbcType="VARCHAR" property="yearSale" />
+		<result column="year_shall" jdbcType="VARCHAR" property="yearShall" />
+		<result column="owner_vehicle" jdbcType="VARCHAR" property="ownerVehicle" />
+		<result column="vehicle_num" jdbcType="VARCHAR" property="vehicleNum" />
+		<result column="depart_type" jdbcType="VARCHAR" property="departType" />
+		<result column="own_storage_area" jdbcType="VARCHAR" property="ownStorageArea" />
+		<result column="storage_area" jdbcType="VARCHAR" property="storageArea" />
+		<result column="intnet_num" jdbcType="VARCHAR" property="intnetNum" />
+		<result column="company_ip" jdbcType="VARCHAR" property="companyIp" />
+		<result column="ruote" jdbcType="VARCHAR" property="ruote" />
+		<result column="scope_buss" jdbcType="VARCHAR" property="scopeBuss" />
+		<result column="main_peo" jdbcType="VARCHAR" property="mainPeo" />
+		<result column="main_post" jdbcType="VARCHAR" property="mainPost" />
+		<result column="main_phone" jdbcType="VARCHAR" property="mainPhone" />
+		<result column="main_email" jdbcType="VARCHAR" property="mainEmail" />
+		<result column="main_tel" jdbcType="VARCHAR" property="mainTel" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="BaseResultMapVo"
+		type="com.huacainfo.ace.gesp.vo.DepartmentVo">
+		<result column="parement_department_name" jdbcType="VARCHAR"
+			property="parementDepartmentName" />
+		<result column="categoryName" jdbcType="VARCHAR" property="categoryName" />
+		<result column="areaName" jdbcType="VARCHAR" property="areaName" />
+		<result column="joinDate" jdbcType="TIMESTAMP" property="joinDate" />
+		<result column="endDate" jdbcType="TIMESTAMP" property="endDate" />
+		<result column="memberLevel" jdbcType="VARCHAR" property="memberLevel" />
+		<result column="memberLevelName" jdbcType="VARCHAR" property="memberLevelName" />
+		<result column="memberNo" jdbcType="VARCHAR" property="memberNo" />
+		<result column="memberId" jdbcType="VARCHAR" property="memberId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		department_id, parent_department_id, department_name,
+		short_name, category,
+		area_code,
+		pcode, contact_name, contact_tel,
+		contact_mobile, contact_qq, contact_email,
+		contact_fax,
+		legal_person_name, legal_person_id_type, legal_person_id_no,
+		legal_person_tel,
+		legal_person_mobile,
+		legal_person_addr, DATE_FORMAT(reg_date,'%Y-%m-%d') reg_date,
+		reg_capital, reg_area_code, reg_addr, nature,
+		buss_license_no,business_classify,
+		buss_addr, buss_area_code, fax,telphone,
+		email, trans_depart_approval_no,
+		trans_buss_license_no,
+		DATE_FORMAT(trans_buss_license_valid_date,'%Y-%m-%d')
+		trans_buss_license_valid_date, trans_buss_scope,
+		employees_num,
+		driver_num, unlicensed_driver_num,
+		licensed_driver_num,
+		status, type,
+		simage, bimage, create_user_id,
+		create_user_name,
+		create_time,
+		last_modify_time, last_modify_user_id,
+		last_modify_user_name
+	</sql>
+	<sql id="Blob_Column_List">
+		accident_of_year, complaints_remark
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMapVo">
+		select
+		t.department_id, f.parent_department_id,
+		t.department_name,
+		t.short_name, t.category,
+		t.area_code,
+		t.pcode,t.contact_name, t.contact_tel,
+		t.contact_mobile, t.contact_qq,
+		t.contact_email,
+		t.contact_fax,
+		t.legal_person_name,
+		t.legal_person_id_type, t.legal_person_id_no,
+		t.legal_person_tel,
+		t.legal_person_mobile,
+		t.legal_person_addr, DATE_FORMAT(t.reg_date,'%Y-%m-%d') reg_date,
+		t.reg_capital,t.business_classify,
+		d.`name` reg_area_code, t.reg_addr,
+		t.nature,t.telphone,
+		t.buss_license_no,
+		t.buss_addr,
+		e.`name` buss_area_code, t.fax,
+		t.email, t.trans_depart_approval_no,
+		t.trans_buss_license_no,
+		t.trans_buss_license_valid_date,
+		t.trans_buss_scope,
+		t.employees_num,
+		t.driver_num,
+		t.unlicensed_driver_num,
+		t.licensed_driver_num,
+		t.status,
+		t.type,
+		t.simage, t.bimage, t.create_user_id,
+		t.create_user_name,
+		t.create_time, t.last_modify_time, t.last_modify_user_id,
+		t.last_modify_user_name,t.accident_of_year, t.complaints_remark,
+		a.name areaName,
+		ifnull(b.department_name,'平台') parementDepartmentName,c.memberNo, c.id memberId,c.memberLevel as memberLevelName,
+		DATE_FORMAT(c.joinDate, '%Y-%m-%d') joinDate, DATE_FORMAT(c.endDate, '%Y-%m-%d') endDate, 
+		ifnull(h.`name`,'行业用户') memberLevel,t.business_classify,t.buss_num,
+		t.org_Code,t.asset_total,t.net_asset
+		,t.year_sale,t.year_shall,t.owner_vehicle,t.vehicle_num,
+		t.depart_type,t.own_storage_area,t.storage_area,
+		t.intnet_num,t.company_ip,t.ruote,t.scope_buss,
+		t.main_peo,t.main_post,t.main_phone,t.main_email,t.main_tel,
+		LEFT(t.reg_area_code,2) reg_pro,LEFT(t.reg_area_code,4) reg_city,
+		LEFT(t.buss_area_code,2) buss_pro,LEFT(t.buss_area_code,4) buss_city
+		from
+		department_society f
+		left join department t on f.department_id =
+		t.department_id
+		left join province a on t.area_code=a.code
+		left join
+		department b on f.parent_department_id=b.department_id
+		left join
+		member_info c on t.department_id=c.memberCode and c.status='1'
+		left join province d on
+		d.`code`= t.reg_area_code
+		left join province e on e.`code` =
+		t.buss_area_code
+		left join member_level h on c.memberLevel = h.id
+		where
+		f.department_id = #{departmentId,jdbcType=VARCHAR} and
+		f.parent_department_id = #{parentDepartmentId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		department
+		where department_id = #{departmentId,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.Department" >
+		<selectKey keyProperty="departmentId" resultType="string" order="BEFORE">
+			SELECT
+			lpad(ifnull(max(department_ID),concat(#{parentDepartmentId,jdbcType=VARCHAR},'0000'))+1,length(#{parentDepartmentId,jdbcType=VARCHAR})+4,'0')
+			FROM department where
+			PARENT_department_ID=#{parentDepartmentId,jdbcType=VARCHAR}
+		</selectKey>
+		insert into department (department_id, parent_department_id,
+		department_name, short_name, category,
+		area_code, pcode, contact_name,
+		contact_tel, contact_mobile, contact_qq,
+		contact_email, contact_fax,
+		legal_person_name,
+		legal_person_id_type, legal_person_id_no,
+		legal_person_tel,
+		legal_person_mobile, legal_person_addr, reg_date,
+		reg_capital, reg_area_code, reg_addr,
+		nature, buss_license_no,
+		buss_addr,
+		buss_area_code, fax, email,
+		trans_depart_approval_no,
+		trans_buss_license_no,
+		trans_buss_license_valid_date, trans_buss_scope,
+		employees_num, driver_num, unlicensed_driver_num,
+		licensed_driver_num,
+		status, type,
+		simage, bimage, create_user_id,
+		create_user_name,
+		create_time, last_modify_time,
+		last_modify_user_id,
+		last_modify_user_name, accident_of_year,
+		complaints_remark,business_classify,telphone)
+		values
+		(#{departmentId,jdbcType=VARCHAR},
+		#{parentDepartmentId,jdbcType=VARCHAR},
+		#{departmentName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
+		#{category,jdbcType=CHAR},
+		#{areaCode,jdbcType=VARCHAR},
+		#{pcode,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR},
+		#{contactTel,jdbcType=VARCHAR}, #{contactMobile,jdbcType=VARCHAR},
+		#{contactQq,jdbcType=VARCHAR},
+		#{contactEmail,jdbcType=VARCHAR},
+		#{contactFax,jdbcType=VARCHAR}, #{legalPersonName,jdbcType=VARCHAR},
+		#{legalPersonIdType,jdbcType=VARCHAR},
+		#{legalPersonIdNo,jdbcType=VARCHAR},
+		#{legalPersonTel,jdbcType=VARCHAR},
+		#{legalPersonMobile,jdbcType=VARCHAR},
+		#{legalPersonAddr,jdbcType=VARCHAR}, #{regDate,jdbcType=TIMESTAMP},
+		#{regCapital,jdbcType=VARCHAR}, #{regAreaCode,jdbcType=VARCHAR},
+		#{regAddr,jdbcType=VARCHAR},
+		#{nature,jdbcType=CHAR},
+		#{bussLicenseNo,jdbcType=VARCHAR}, #{bussAddr,jdbcType=VARCHAR},
+		#{bussAreaCode,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{transDepartApprovalNo,jdbcType=VARCHAR},
+		#{transBussLicenseNo,jdbcType=VARCHAR},
+		#{transBussLicenseValidDate,jdbcType=TIMESTAMP},
+		#{transBussScope,jdbcType=VARCHAR},
+		#{employeesNum,jdbcType=INTEGER},
+		#{driverNum,jdbcType=INTEGER},
+		#{unlicensedDriverNum,jdbcType=INTEGER},
+		#{licensedDriverNum,jdbcType=INTEGER}, #{status,jdbcType=CHAR},
+		#{type,jdbcType=CHAR},
+		#{simage,jdbcType=VARCHAR},
+		#{bimage,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR},
+		#{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{lastModifyTime,jdbcType=TIMESTAMP},
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		#{lastModifyUserName,jdbcType=VARCHAR},
+		#{accidentOfYear,jdbcType=LONGVARCHAR},
+		#{complaintsRemark,jdbcType=LONGVARCHAR},#{businessClassify,jdbcType=VARCHAR},
+		#{telphone,jdbcType=VARCHAR})
+		
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.gesp.model.Department">
+		update department
+		<set>
+			<if test="parentDepartmentId != null">
+				parent_department_id =
+				#{parentDepartmentId,jdbcType=VARCHAR},
+			</if>
+			<if test="departmentName != null">
+				department_name = #{departmentName,jdbcType=VARCHAR},
+			</if>
+			<if test="shortName != null">
+				short_name = #{shortName,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				category = #{category,jdbcType=CHAR},
+			</if>
+			<if test="areaCode != null">
+				area_code = #{areaCode,jdbcType=VARCHAR},
+			</if>
+			<if test="pcode != null">
+				pcode = #{pcode,jdbcType=VARCHAR},
+			</if>
+			<if test="contactName != null">
+				contact_name = #{contactName,jdbcType=VARCHAR},
+			</if>
+			<if test="contactTel != null">
+				contact_tel = #{contactTel,jdbcType=VARCHAR},
+			</if>
+			<if test="contactMobile != null">
+				contact_mobile = #{contactMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="contactQq != null">
+				contact_qq = #{contactQq,jdbcType=VARCHAR},
+			</if>
+			<if test="contactEmail != null">
+				contact_email = #{contactEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="contactFax != null">
+				contact_fax = #{contactFax,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPost !=null">
+				contact_post = #{contactPost,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPersonName != null">
+				legal_person_name = #{legalPersonName,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPersonIdType != null">
+				legal_person_id_type =
+				#{legalPersonIdType,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPersonIdNo != null">
+				legal_person_id_no = #{legalPersonIdNo,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPersonTel != null">
+				legal_person_tel = #{legalPersonTel,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPersonMobile != null">
+				legal_person_mobile =
+				#{legalPersonMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPersonAddr != null">
+				legal_person_addr = #{legalPersonAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="regDate != null">
+				reg_date = #{regDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="regCapital != null">
+				reg_capital = #{regCapital,jdbcType=VARCHAR},
+			</if>
+			<if test="regAreaCode != null">
+				reg_area_code = #{regAreaCode,jdbcType=VARCHAR},
+			</if>
+			<if test="regAddr != null">
+				reg_addr = #{regAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="nature != null">
+				nature = #{nature,jdbcType=CHAR},
+			</if>
+			<if test="bussLicenseNo != null">
+				buss_license_no = #{bussLicenseNo,jdbcType=VARCHAR},
+			</if>
+			<if test="bussAddr != null">
+				buss_addr = #{bussAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="bussAreaCode != null">
+				buss_area_code = #{bussAreaCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				fax = #{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="telphone !=null and telphone!=&quot;&quot;">
+				telphone=#{telphone,jdbcType=VARCHAR}
+			</if>
+			<if test="transDepartApprovalNo != null">
+				trans_depart_approval_no =
+				#{transDepartApprovalNo,jdbcType=VARCHAR},
+			</if>
+			<if test="transBussLicenseNo != null">
+				trans_buss_license_no =
+				#{transBussLicenseNo,jdbcType=VARCHAR},
+			</if>
+			<if test="transBussLicenseValidDate != null">
+				trans_buss_license_valid_date =
+				#{transBussLicenseValidDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="transBussScope != null">
+				trans_buss_scope = #{transBussScope,jdbcType=VARCHAR},
+			</if>
+			<if test="employeesNum != null">
+				employees_num = #{employeesNum,jdbcType=INTEGER},
+			</if>
+			<if test="driverNum != null">
+				driver_num = #{driverNum,jdbcType=INTEGER},
+			</if>
+			<if test="unlicensedDriverNum != null">
+				unlicensed_driver_num =
+				#{unlicensedDriverNum,jdbcType=INTEGER},
+			</if>
+			<if test="licensedDriverNum != null">
+				licensed_driver_num =
+				#{licensedDriverNum,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=CHAR},
+			</if>
+			<if test="simage != null">
+				simage = #{simage,jdbcType=VARCHAR},
+			</if>
+			<if test="bimage != null">
+				bimage = #{bimage,jdbcType=VARCHAR},
+			</if>
+			<if test="createUserId != null">
+				create_user_id = #{createUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="createUserName != null">
+				create_user_name = #{createUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyTime != null">
+				last_modify_time = #{lastModifyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastModifyUserId != null">
+				last_modify_user_id =
+				#{lastModifyUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="lastModifyUserName != null">
+				last_modify_user_name =
+				#{lastModifyUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="accidentOfYear != null">
+				accident_of_year =
+				#{accidentOfYear,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="complaintsRemark != null">
+				complaints_remark =
+				#{complaintsRemark,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="businessClassify != null">
+				business_classify =
+				#{businessClassify,jdbcType=VARCHAR},
+			</if>
+			<if test="bussNum !=null">
+				buss_num=#{bussNum,jdbcType=VARCHAR},
+			</if>
+			<if test="orgCode !=null">org_Code=#{orgCode,jdbcType=VARCHAR},
+			</if>
+			<if test="assetTotal !=null">asset_total=#{assetTotal,jdbcType=VARCHAR},</if>
+			<if test="netAsset !=null">net_asset=#{netAsset,jdbcType=VARCHAR},</if>
+			<if test="yearSale !=null">year_sale=#{yearSale,jdbcType=VARCHAR},</if>
+			<if test="yearShall !=null">year_shall=#{yearShall,jdbcType=VARCHAR},</if>
+			<if test="ownerVehicle !=null">owner_vehicle=#{ownerVehicle,jdbcType=VARCHAR},</if>
+			<if test="vehicleNum !=null">vehicle_num=#{vehicleNum,jdbcType=VARCHAR},</if>
+			<if test="departType !=null">depart_type=#{departType,jdbcType=VARCHAR},</if>
+			<if test="ownStorageArea !=null">own_storage_area=#{ownStorageArea,jdbcType=VARCHAR},</if>
+			<if test="storageArea !=null">storage_area=#{storageArea,jdbcType=VARCHAR},</if>
+			<if test="intnetNum !=null">intnet_num=#{intnetNum,jdbcType=VARCHAR},</if>
+			<if test="companyIp !=null">company_ip=#{companyIp,jdbcType=VARCHAR},</if>
+			<if test="ruote !=null">ruote=#{ruote,jdbcType=VARCHAR},</if>
+			<if test="scopeBuss !=null">scope_buss=#{scopeBuss,jdbcType=VARCHAR},</if>
+			<if test="mainPeo !=null">
+				main_peo=#{mainPeo,jdbcType=VARCHAR},
+			</if>
+			<if test="mainPost !=null">
+				main_post=#{mainPost,jdbcType=VARCHAR},
+			</if>
+			<if test="mainPhone !=null">
+				main_phone=#{mainPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="mainEmail !=null">
+				main_email=#{mainEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="mainTel !=null">
+				main_tel=#{mainTel,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where department_id = #{departmentId,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.gesp.model.Department">
+		update department
+		set parent_department_id = #{parentDepartmentId,jdbcType=VARCHAR},
+		department_name = #{departmentName,jdbcType=VARCHAR},
+		short_name =
+		#{shortName,jdbcType=VARCHAR},
+		category = #{category,jdbcType=CHAR},
+		area_code = #{areaCode,jdbcType=VARCHAR},
+		pcode =
+		#{pcode,jdbcType=VARCHAR},
+		contact_name =
+		#{contactName,jdbcType=VARCHAR},
+		contact_tel =
+		#{contactTel,jdbcType=VARCHAR},
+		contact_mobile =
+		#{contactMobile,jdbcType=VARCHAR},
+		contact_qq =
+		#{contactQq,jdbcType=VARCHAR},
+		contact_email =
+		#{contactEmail,jdbcType=VARCHAR},
+		contact_fax =
+		#{contactFax,jdbcType=VARCHAR},
+		legal_person_name =
+		#{legalPersonName,jdbcType=VARCHAR},
+		legal_person_id_type =
+		#{legalPersonIdType,jdbcType=VARCHAR},
+		legal_person_id_no =
+		#{legalPersonIdNo,jdbcType=VARCHAR},
+		legal_person_tel =
+		#{legalPersonTel,jdbcType=VARCHAR},
+		legal_person_mobile =
+		#{legalPersonMobile,jdbcType=VARCHAR},
+		legal_person_addr =
+		#{legalPersonAddr,jdbcType=VARCHAR},
+		reg_date =
+		#{regDate,jdbcType=TIMESTAMP},
+		reg_capital =
+		#{regCapital,jdbcType=VARCHAR},
+		reg_area_code =
+		#{regAreaCode,jdbcType=VARCHAR},
+		reg_addr =
+		#{regAddr,jdbcType=VARCHAR},
+		nature = #{nature,jdbcType=CHAR},
+		buss_license_no = #{bussLicenseNo,jdbcType=VARCHAR},
+		buss_addr =
+		#{bussAddr,jdbcType=VARCHAR},
+		buss_area_code =
+		#{bussAreaCode,jdbcType=VARCHAR},
+		fax = #{fax,jdbcType=VARCHAR},
+		email =
+		#{email,jdbcType=VARCHAR},
+		telphone = #{telphone,jdbcType=VARCHAR},
+		trans_depart_approval_no =
+		#{transDepartApprovalNo,jdbcType=VARCHAR},
+		trans_buss_license_no =
+		#{transBussLicenseNo,jdbcType=VARCHAR},
+		trans_buss_license_valid_date =
+		#{transBussLicenseValidDate,jdbcType=TIMESTAMP},
+		trans_buss_scope =
+		#{transBussScope,jdbcType=VARCHAR},
+		employees_num =
+		#{employeesNum,jdbcType=INTEGER},
+		driver_num =
+		#{driverNum,jdbcType=INTEGER},
+		unlicensed_driver_num =
+		#{unlicensedDriverNum,jdbcType=INTEGER},
+		licensed_driver_num =
+		#{licensedDriverNum,jdbcType=INTEGER},
+		status =
+		#{status,jdbcType=CHAR},
+		type = #{type,jdbcType=CHAR},
+		simage =
+		#{simage,jdbcType=VARCHAR},
+		bimage = #{bimage,jdbcType=VARCHAR},
+		create_user_id = #{createUserId,jdbcType=VARCHAR},
+		create_user_name =
+		#{createUserName,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		last_modify_time =
+		#{lastModifyTime,jdbcType=TIMESTAMP},
+		last_modify_user_id =
+		#{lastModifyUserId,jdbcType=VARCHAR},
+		last_modify_user_name =
+		#{lastModifyUserName,jdbcType=VARCHAR}，
+		accident_of_year =
+		#{accidentOfYear,jdbcType=LONGVARCHAR},
+		business_classify =
+		#{businessClassify,jdbcType=VARCHAR},
+		complaints_remark =
+		#{complaintsRemark,jdbcType=LONGVARCHAR}
+		where department_id =
+		#{departmentId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="isExit" resultType="int">
+		select
+		count(1)
+		from department
+		where department_name = #{departmentName,jdbcType=VARCHAR} and status
+		= '1'
+	</select>
+
+	<select id="isExitEmail" resultType="int">
+		select
+		count(1)
+		from
+			users
+		where email = #{email,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectDepartNameById"  parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+			department_id,parent_department_id,area_code,department_name
+		from department
+		where department_name = #{departmentName,jdbcType=VARCHAR}
+	</select>
+
+	<select id="isExitBussLicenseNo" resultType="int">
+		select
+		count(1)
+		from
+		department
+		where buss_license_no = #{bussLicenseNo,jdbcType=VARCHAR}
+	</select>
+	<insert id="insertUsersAndRole">
+		<selectKey keyProperty="userId" resultType="string" order="BEFORE">
+			select MAX(CAST(user_id as UNSIGNED INTEGER))+1 from users 
+		</selectKey>
+		insert into users (user_id, account, password,
+		sex, id_card, name,
+		department_id,
+		area_code, birthday, stauts,
+		last_login_time, mobile,
+		email,
+		seat, user_level, create_time,TELPHONE,QQ,FAX
+		)
+		values
+		(#{userId,jdbcType=VARCHAR},
+		#{users.account,jdbcType=VARCHAR},
+		#{users.password,jdbcType=VARCHAR},
+		#{users.sex,jdbcType=CHAR},
+		#{users.idCard,jdbcType=VARCHAR},
+		#{users.name,jdbcType=VARCHAR},
+		#{users.departmentId,jdbcType=VARCHAR},
+		#{users.areaCode,jdbcType=CHAR},
+		#{users.birthday,jdbcType=TIMESTAMP},
+		#{users.stauts,jdbcType=CHAR},
+		now(),
+		#{users.mobile,jdbcType=VARCHAR},
+		#{users.email,jdbcType=VARCHAR},
+		#{users.seat,jdbcType=VARCHAR},
+		#{users.userLevel,jdbcType=VARCHAR},now(),
+		#{users.telphone,jdbcType=VARCHAR},
+		#{users.qq,jdbcType=VARCHAR},
+		#{users.fax,jdbcType=VARCHAR}
+		);
+		insert into users_role
+		(user_id, role_id, create_time)
+		values
+		(#{userId,jdbcType=VARCHAR}, '9', now());
+	</insert>
+	
+	<update id="updateActivateBySeat">
+		update users set stauts='1' where seat=#{seat}
+	</update>
+	
+	<select id="selectDepartInfoByPrimaryKey"  parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+			t.department_id, 
+			t.department_name,
+			t.short_name, t.category,
+			t.area_code,
+			t.pcode,t.contact_name, t.contact_tel,
+			t.contact_mobile, t.contact_qq,
+			t.contact_email,
+			t.contact_fax,
+			t.legal_person_name,
+			t.legal_person_id_type, t.legal_person_id_no,
+			t.legal_person_tel,
+			t.legal_person_mobile,
+			t.legal_person_addr, DATE_FORMAT(t.reg_date,'%Y-%m-%d') reg_date,
+			t.reg_capital,t.business_classify,
+			t.reg_area_code, t.reg_addr,
+			t.nature,t.telphone,
+			t.buss_license_no,
+			t.buss_addr,
+			t.buss_area_code, t.fax,
+			t.email, t.trans_depart_approval_no,
+			t.trans_buss_license_no,
+			t.trans_buss_license_valid_date,
+			t.trans_buss_scope,
+			t.employees_num,
+			t.driver_num,
+			t.unlicensed_driver_num,
+			t.licensed_driver_num,
+			t.status,
+			t.type,
+			t.simage, t.bimage, t.create_user_id,
+			t.create_user_name,
+			t.create_time, t.last_modify_time, t.last_modify_user_id,
+			t.last_modify_user_name,t.accident_of_year, t.complaints_remark,
+			a.name areaName,t.business_classify,t.buss_num,
+			t.org_Code,t.asset_total,t.net_asset,
+			t.year_sale,t.year_shall,t.owner_vehicle,t.vehicle_num,
+			t.depart_type,t.own_storage_area,t.storage_area,
+			t.intnet_num,t.company_ip,t.ruote,t.scope_buss,
+			t.main_peo,t.main_post,t.main_phone,t.main_email,t.main_tel,
+			LEFT(t.reg_area_code,2) reg_pro,LEFT(t.reg_area_code,4) reg_city,
+			LEFT(t.reg_area_code,2) buss_pro,LEFT(t.reg_area_code,4) buss_city,t.contact_post
+		from department t
+		left join province a on t.area_code=a.code
+		where t.department_id = #{departmentId}
+	</select>
+	
+	<insert id="insertUsers">
+		<selectKey keyProperty="userId" resultType="string" order="BEFORE">
+			select MAX(CAST(user_id as UNSIGNED INTEGER))+1 from users 
+		</selectKey>
+		insert into users (user_id, account, password,
+		sex, id_card, name,
+		department_id,
+		area_code, birthday, stauts, mobile,
+		email,
+		seat, user_level, create_time,TELPHONE,QQ,FAX
+		)
+		values
+		(#{userId,jdbcType=VARCHAR},
+		#{account,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{sex,jdbcType=CHAR},
+		#{idCard,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{departmentId,jdbcType=VARCHAR},
+		#{areaCode,jdbcType=CHAR},
+		#{birthday,jdbcType=TIMESTAMP},
+		#{stauts,jdbcType=CHAR},
+		#{mobile,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{seat,jdbcType=VARCHAR},
+		#{userLevel,jdbcType=VARCHAR},
+		now(),
+		#{telphone,jdbcType=VARCHAR},
+		#{qq,jdbcType=VARCHAR},
+		#{fax,jdbcType=VARCHAR}
+		);
+	</insert>
+	<insert id="insertTransBuss">
+		insert into department_scope(department_id,trans_buss_scope)
+		values(#{departmentId,jdbcType=VARCHAR},
+		#{transBussScope,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertDepartmentSociety">
+		insert into department_society(department_id,parent_department_id)
+		values(#{departmentId,jdbcType=VARCHAR},
+			#{parentDepartmentId,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="selectDicby" resultType="map">
+		select 
+			id,`code`,pcode,`name`,spell,remark,category_id categoryId 
+		from dict 
+		where category_id=#{categoryId,jdbcType=VARCHAR} and `code`=#{code,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectInfoByDepartName" resultType="map">
+		select 
+			a.id,a.`code`,
+			a.fullName,a.businessLicense,
+			a.companyLicense,a.businessScope,
+			a.bussinessStatus,a.companyRegCity,
+			a.companyRegAddress,a.zipCode,
+			a.complaintCall,a.fax,
+			a.economicType,a.contactCall,
+			a.legalUserName,a.datafrom
+		from bs_company_info a
+		where a.fullName=#{departmentName}
+	</select>
+	
+	<select id="loadResourceDefine" resultType="map">
+		select
+		m.resources_url RESOURCES, group_concat(m.role_id) ROLES
+		from
+		(select
+		a.resources_url, concat('ROLE_' , ifnull(t.role_id, '0')) role_id
+		from
+		resources a left join ROLE_RESOURCES t
+		on
+		a.resources_id = t.resources_id) m
+		where
+		m.resources_url is not null
+		and m.role_id is not null
+		group by m.resources_url
+	</select>
+	
+	<select id="findUsersSearchList" resultType="map">
+	
+		select
+			USERS.user_id code,
+			USERS.name name
+		from USERS where 1=1
+		<choose>
+	      <when test='condition.stauts!=null and condition.stauts!=""'>
+	       	and USERS.STAUTS=#{condition.stauts}
+	      </when>
+	      <otherwise>
+	        and USERS.STAUTS='1'
+	      </otherwise>
+		</choose>
+		<if test='condition.name!=null and condition.name!=""'>
+			and USERS.name like
+			concat(#{condition.name,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="condition.account!=null and condition.account!=&quot;&quot;">
+			and USERS.account=#{condition.account,jdbcType=VARCHAR}
+		</if>
+		<if test='condition.departmentId!=null and condition.departmentId!=""'>
+			and USERS.department_id = #{condition.departmentId,jdbcType=VARCHAR}
+		</if>
+		limit #{start,jdbcType=DECIMAL},#{limit,jdbcType=DECIMAL}
+	</select>
+	
+	<insert id="insertUsersRole">
+		
+		update USERS_ROLE set role_id='0' where 0=1;
+		<if test="userId!=null and userId!=''">
+			delete from users_role where user_id=#{userId};
+		</if>
+		<if test='roleId!=null and userId!=null and userId!="" and roleId!=""'>
+			<foreach item="item" index="index" collection="roleId" open=""
+				separator="" close="">
+				insert into users_role
+				(user_id, role_id, create_time)
+				values
+				(#{userId,jdbcType=VARCHAR}, #{item,jdbcType=VARCHAR}, now());
+			</foreach>
+		</if>
+		
+	</insert>
+	
+	<select id="isExitUsersAccount" resultType="int">
+		select count(*) from
+		users where account=#{account}
+	</select>
+	
+	<delete id="deleteByDepartment" >
+		delete from bs_company_info
+		where fullName=#{fullName}
+	</delete>
+	
+	<insert id="insertCompanyInfo">
+		INSERT INTO bs_company_info(
+			id,code,fullName,businessLicense,companyLicense,
+			businessScope,bussinessStatus,companyRegCity,
+			companyRegAddress,zipCode,complaintCall,
+			fax,economicType,contactCall,legalUserName,datafrom)
+		VALUES(
+			#{id,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR},#{fullName,jdbcType=VARCHAR},
+			#{businessLicense,jdbcType=VARCHAR},#{companyLicense,jdbcType=VARCHAR},
+			#{businessScope,jdbcType=VARCHAR},#{bussinessStatus,jdbcType=VARCHAR},
+			#{companyRegCity,jdbcType=VARCHAR},#{companyRegAddress,jdbcType=VARCHAR},
+			#{zipCode,jdbcType=VARCHAR},#{complaintCall,jdbcType=VARCHAR},
+			#{fax,jdbcType=VARCHAR},#{economicType,jdbcType=VARCHAR},#{contactCall,jdbcType=VARCHAR},
+			#{legalUserName,jdbcType=VARCHAR},#{datafrom,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+</mapper>

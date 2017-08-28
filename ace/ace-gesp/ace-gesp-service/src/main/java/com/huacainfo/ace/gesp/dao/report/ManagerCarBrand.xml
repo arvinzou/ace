@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.report.ManagerCarBrand">
+	<select id="query" resultType="map">
+	 <![CDATA[
+	 	select t.name,t.value from 
+	 	(
+			select 
+				a.brandName as name,
+				COUNT(*) as value
+			from bs_car_base a
+			inner join department b on a.companyLicense = b.trans_buss_license_no 
+						and b.parent_department_id = #{deptId}
+			where a.managementStatus in ('营运' , '过户')
+			group by a.brandName
+		) t 
+		where 1=1
+		order by t.value desc
+		LIMIT 0,10]]>
+	</select>
+</mapper>

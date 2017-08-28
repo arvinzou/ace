@@ -1,0 +1,12 @@
+<html>
+<body>
+<h3>$!{contactName}您好!</h3>
+
+<div style="font-size:16px">
+    $!{o.departmentName}注册成功，账号$!{o.contactEmail}，密码$!{o.password}，激活地址<a href="http://www.wegzoom.com/gesp/www/reg/activate.do?account=$!{o.contactEmail}">http://www.wegzoom.com/gesp/www/reg/activate.do?account=$!{o.contactEmail}</a><span><strong></strong></span><br>
+    本Email是系统自动发送，请勿回复！<br>
+    $!{o.sysDate}
+</div>
+</body>
+
+</html>

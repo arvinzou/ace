@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.report.ManagerCarIllegal">
+	<select id="query" resultType="map">
+	 <![CDATA[
+		select 
+			p.`name`,IFNULL(u.`value`,0) as value,IFNULL(t.`value`,0) as tvalue
+		from (select 
+				b.companyName as name
+			from bs_car_illegal a 
+			inner join bs_car_base b on a.plateNo = b.plateNo and a.color = b.color 
+			inner join department c on b.companyLicense = c.trans_buss_license_no 
+						and c.parent_department_id = #{deptId}
+			where b.managementStatus in ('营运','过户') 
+			GROUP BY b.companyName) p
+		LEFT JOIN (select 
+				b.companyName as name,a.Type,COUNT(*) as value
+			from bs_car_illegal a 
+			inner join bs_car_base b on a.plateNo = b.plateNo and a.color = b.color 
+			inner join department c on b.companyLicense = c.trans_buss_license_no 
+						and c.parent_department_id = #{deptId}
+			where b.managementStatus in ('营运','过户') and a.Type = '道路运政'
+			GROUP BY b.companyName,a.Type) u on u.`name` = p.`name`
+		left JOIN (select 
+				b.companyName as name,a.Type,COUNT(*) as value
+			from bs_car_illegal a 
+			inner join bs_car_base b on a.plateNo = b.plateNo and a.color = b.color 
+			inner join department c on b.companyLicense = c.trans_buss_license_no 
+						and c.parent_department_id = #{deptId}
+			where b.managementStatus in ('营运','过户') and a.Type = '公路路政'
+			GROUP BY b.companyName,a.Type) t on t.`name` = p.`name`
+		where 1=1
+		order by t.`value` DESC,u.`value` desc
+		LIMIT 0,10]]>
+	</select>
+</mapper>

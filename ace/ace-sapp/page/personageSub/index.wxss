@@ -1,0 +1,77 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+.body {
+  padding: 20rpx;
+}
+.navigator-text:before {
+  content: " ";
+  position: absolute;
+  left: 30rpx;
+  top: 0;
+  right: 30rpx;
+  height: 1px;
+  border-top: 0rpx solid #fff;
+  color: #D8D8D8;
+}
+.iconList{
+  width:22px; height: 22px;
+  padding-right: 10rpx;
+}
+.photo{
+    max-width: 100px;
+    max-height: 100px;
+
+}
+.qrcode{
+    max-width: 150px;
+    max-height: 150px;
+
+}
+.header-title {
+    line-height: 40px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e5e5e5;
+    font-weight:800;
+    font-size:14px;
+}
+.item-text {
+    line-height: 60px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 1em;
+}
+.weui-form-preview__bd {
+    padding: 10px 15px;
+    font-size: .9em;
+    text-align: right;
+    line-height: 2;
+}
+.weui-form-preview__label {
+    float: left;
+    margin-right: 1em;
+    min-width: 1em;
+    text-align: justify;
+    text-align-last: justify;
+}
+.weui-flex__item1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 2;
+}
+.page-body-info {
+  padding-bottom: 0;
+  height: 200px;
+}
+.userinfo-avatar {
+  border-radius: 128rpx;
+  width: 128rpx;
+  height: 128rpx;
+}
+.userinfo-nickname {
+  margin-top: 20rpx;
+  font-size: 38rpx;
+}

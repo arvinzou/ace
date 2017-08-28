@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.report.DriverDriArea">
+	<select id="query" resultType="map">
+SELECT
+	dict. NAME name,
+	count(1) value
+FROM
+	driver_info t
+INNER JOIN (
+	SELECT
+		department_id
+	FROM
+		department a
+	WHERE
+		a.parent_department_id =#{deptId}
+) a ON t.deptId = a.department_id
+INNER JOIN (
+	SELECT
+		CODE,
+		NAME
+	FROM
+		dict
+	WHERE
+		category_id = '76'
+) dict ON t.certCompanyName = dict. CODE
+GROUP BY
+	dict. NAME
+
+	</select>
+</mapper>

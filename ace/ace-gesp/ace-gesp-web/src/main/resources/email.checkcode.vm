@@ -1,0 +1,12 @@
+<html>
+<body>
+<h3>您好!</h3>
+
+<div style="font-size:16px">
+    验证码为：<span><strong> $!{checkCode}</strong></span><br>
+    本Email是系统自动发送，请勿回复！<br>
+    $!{sysDate}
+</div>
+</body>
+
+</html>

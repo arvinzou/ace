@@ -1,0 +1,99 @@
+<view class="index">
+<view wx:if="{{!userLogin}}">
+          <view class="reg-top">
+            <view class="reg-logo-panel" >
+                <image src="../../image/登录.png" mode="aspectFit" bindtap="onLoad" class="reg-icon"/>
+                <view class="reg-logo-text">请先登录</view>
+            </view>
+          <view class="reg-title">
+            武陵掌上统战
+          </view>
+           
+          </view>
+          <view class="kind-list">
+           <button  style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;"  bindtap="onLoad">确定</button>
+          </view>
+    </view>
+<view style="flex-direction:column;"  style="background:#FFFFFF;" wx:if="{{userLogin}}">
+  <swiper wx:if="{{org.list.length > 0}}" indicator-color="#ddd" indicator-active-color="green" class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="width:100%">
+    <block wx:for="{{org.list}}" wx:for-item="item" wx:key="*item">
+      <swiper-item>
+        <image src="{{config.serverfile}}{{item.url}}" class="slide-image" mode="aspectFill" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view style="flex-direction:column;">
+    <navigator class="navigator">
+      <view class="title-strong-big1"> {{org.department_name}}</view>
+    </navigator>
+    <navigator bindtap="openLocation" class="navigator">
+      <view class="navigator-text">
+        <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" /> {{org.reg_addr}}
+      </view>
+      <view class="navigator-arrow"></view>
+    </navigator>
+    <navigator bindtap="makePhoneCall" wx:if="{{org.contact_tel.length > 0}}" class="navigator">
+      <view class="navigator-text">
+        <image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit" /> {{org.contact_tel}} </view>
+      <view class="navigator-arrow"></view>
+    </navigator>
+    <navigator class="navigator" wx:if="{{org.serviceTimeStart.length > 0}}">
+      <image class="iconList" src="../../image/time_71.003460207612px_1195888_easyicon.net.png" mode="aspectFit" /> {{org.serviceTimeStart}}-{{org.serviceTimeEnd}}
+    </navigator>
+  </view>
+</view>
+
+<view class="index-bd" style="padding-top:20rpx" wx:if="{{userLogin}}">
+      <view class="kind-list" >
+
+          <view class="kind-list-item" wx:if="{{org.contact_name.length>0}}">
+            <view class="kind-list-item-hd">
+              <view class="kind-list-text">联系人</view>
+              <view>{{org.contact_name}}</view>
+            </view>
+          </view>
+
+          <view class="kind-list-item" wx:if="{{org.contact_mobile.length>0}}">
+            <view class="kind-list-item-hd">
+              <view class="kind-list-text">联系电话</view>
+              <view bindtap="makePhoneCall2">{{org.contact_mobile}}</view>
+            </view>
+          </view>
+
+           <view class="kind-list-item" wx:if="{{org.contact_qq.length>0}}">
+            <view class="kind-list-item-hd">
+              <view class="kind-list-text">联系QQ</view>
+              <view>{{org.contact_qq}}</view>
+            </view>
+          </view>
+
+           <view class="kind-list-item" wx:if="{{org.contact_email.length>0}}">
+            <view class="kind-list-item-hd">
+              <view class="kind-list-text">电子邮箱</view>
+              <view>{{org.contact_email}}</view>
+            </view>
+          </view>
+
+          <view bindtap="previewQrcode" class="kind-list-item" style="text-align: center;padding:2px;" wx:if="{{org.qrcode.length>0}}">
+          <view style="text-align: center;padding:2px;font-weight:800;font-size:18px">二维码 </view>
+           <image style="width: {{scaleWidth}}px; height: {{scaleHeight}}px;" src="{{config.serverfile}}{{org.qrcode}}" bindload="imageLoad"></image>
+          </view>
+
+          <view class="kind-list-item" style="text-align: center;padding:10px;" wx:if="{{org.serviceWay.length>0}}">
+           
+            <view style="text-align: center;padding:2px;font-weight:800;font-size:18px;">单位介绍 </view>
+              <rich-text nodes="{{org.serviceWay}}" style="text-align:left;line-height:30px;padding:20px"></rich-text>
+           
+          </view>
+
+          <view class="kind-list-item" style="text-align: center;padding:2px;" wx:if="{{org.remark.length>0}}">
+            
+            <view style="text-align: center;padding:2px;font-weight:800;font-size:18px">备注 </view>
+             
+              <rich-text nodes="{{org.remark}}"></rich-text>
+           
+          </view>
+
+      </view>
+    </view>
+    </view>

@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.IndustryResourceDao">
+	<sql id="whereConditionDept">
+		from department t
+		INNER JOIN department_society d on t.department_id = d.department_id
+		inner join department a on d.parent_department_id=a.department_id
+		left join province on t.area_code =province.code
+		left join member_info on d.department_id=member_info.memberCode 
+			and d.parent_department_id=member_info.memberRemark 
+			and member_info.`status`=1
+		where 1=1
+        <choose>  
+            <when test="condition.deptId==5">   
+            </when>  
+            <otherwise>
+				and d.parent_department_id=#{condition.deptId}
+            </otherwise>
+        </choose> 
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and t.department_name like
+			concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+		</if>
+		<if
+			test="condition.bussLicenseNo!=null and condition.bussLicenseNo!=&quot;&quot;">
+			and t.buss_license_no =#{condition.bussLicenseNo}
+		</if>
+		<if test='condition.status!=null and condition.status=="0"'>
+			and not exists(select c.id from member_info c where d.department_id=c.memberCode and c.memberRemark=#{condition.deptId})
+		</if>
+		<if test='condition.status!=null and condition.status=="1"'>
+			and exists(select c.id from member_info c where d.department_id=c.memberCode and c.memberRemark=#{condition.deptId})
+		</if>
+		<if test='condition.areaCode!=null and condition.areaCode!=""'>
+			and t.area_code like
+			concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+		</if>
+	</sql>
+	<select id="findCountDept" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereConditionDept" />
+	</select>
+	<select id="findListDept" resultType="map">
+		select
+		t.department_id departmentId,a.department_name deptName, t.department_name
+		departmentName,t.buss_license_no
+		bussLicenseNo,t.legal_person_name
+		legalPersonName,t.legal_person_id_no
+		legalPersonIdNo,province.name
+		areaName,t.employees_num employeesNum,t.trans_buss_license_no transBussLicenseNo,t.driver_num driverNum,t.reg_capital regCapital,DATE_FORMAT(t.reg_date,'%Y-%m-%d') regDate,
+		t.contact_name contactName, t.contact_tel contactTel,
+		t.contact_mobile contactMobile,ifnull(member_info.status,'0') status,IF(member_info.id!='','是','否') AS type
+		<include refid="whereConditionDept" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.create_time
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL},#{limit,jdbcType=DECIMAL}
+	</select>
+
+	<sql id="whereConditionCar">
+		from car_info t inner join department a on t.ownerId=a.department_id
+		left join driver_info b on t.dirverId=b.id and b.status=0
+		where a.parent_department_id=#{condition.deptId}
+		<if test="condition.plateNumber!=null and condition.plateNumber!=&quot;&quot;">
+			and t.plateNumber =#{condition.plateNumber}
+		</if>
+		<if test="condition.transportMode!=null and condition.transportMode!=&quot;&quot;">
+			and t.transportMode =#{condition.transportMode}
+		</if>
+	</sql>
+	<select id="findCountCar" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereConditionCar" />
+	</select>
+	<select id="findListCar" resultType="map">
+		select
+		t.id,
+		t.plateNumber,
+		t.plateColor,
+			DATE_FORMAT(t.drivingLicCreatetime,'%Y-%m-%d') drivingLicCreatetime,
+		t.drivingLicNo,
+		t.carType,
+		t.vin,
+		t.batteryGroupNo,
+		t.motorNo,
+		t.transportNo,
+		t.passNo,
+		t.bussType,
+		t.bussStatus,
+		t.IsGAT,
+		t.gATNo,
+		t.ownerId,
+		t.ownerName,
+		t.insuranceCompany,
+		t.coverage,
+		DATE_FORMAT(t.insuranceDate,'%Y-%m-%d') insuranceDate,
+		DATE_FORMAT(t.lastComperformCheckDate,'%Y-%m-%d') lastComperformCheckDate,
+		DATE_FORMAT(t.lastClassIIDate,'%Y-%m-%d') lastClassIIDate,
+		t.dirverId,
+		t.IsInstallOBD,
+		t.odbDeviceId,
+		t.IsInstallGPS,
+		t.fuelType,
+		t.makerName,
+		t.ownerIdCardNo,
+		t.ownerPhone,
+		DATE_FORMAT(t.initRegDate,'%Y-%m-%d') initRegDate,
+		DATE_FORMAT(t.validEndDate,'%Y-%m-%d') validEndDate,
+		DATE_FORMAT(t.ScrapEndDate,'%Y-%m-%d') ScrapEndDate,
+		t.transportMode,
+		t.createDate,
+		t.createUserId,
+		t.createUserName,
+		t.modifyDate,
+		t.modifyUserId,
+		t.modifyUserName,
+		a.department_name departmentName,
+		b.name
+
+		<include refid="whereConditionCar" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.createDate
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+
+	<sql id="whereConditionDriver">
+		from driver_info t inner join department a on t.deptId=a.department_id
+		 where t.status=0
+        <choose>  
+            <when test="condition.deptId==5">   
+            </when>  
+            <otherwise>
+				and a.parent_department_id=#{condition.deptId}
+            </otherwise>
+        </choose> 
+		<if test="condition.idCard!=null and condition.idCard!=&quot;&quot;">
+			and t.idCard like
+			concat(#{condition.idCard},'%')
+		</if>
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and t.name like
+			concat('%',#{condition.name},'%')
+		</if>
+		<if test="condition.driverLicNo!=null and condition.driverLicNo!=&quot;&quot;">
+			and t.driverLicNo =#{condition.driverLicNo}
+		</if>
+	</sql>
+	<select id="findCountDriver" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereConditionDriver" />
+	</select>
+	<select id="findListDriver" resultType="map">
+		SELECT t.id,
+		t.name,
+		t.sex,
+		t.idCard,
+		t.status,
+		t.deptId,
+		t.birthdate,
+		DATE_FORMAT(t.initDrivingLicDate,'%Y-%m-%d') initDrivingLicDate,
+		t.certNumber,
+		t.certPersonType,
+		t.certType,
+		t.filingCertType,
+		t.driverLicNo,
+		t.driverLicCarType,
+		t.entryTime,
+		t.certCompanyName,
+		t.cooperationMode,
+		t.tel,
+		t.recordTime,
+		t.remark,
+		t.createDate,
+		t.createUserId,
+		t.createUserName,
+		t.lastModifyDate,
+		t.lastModifyUserId,
+		t.lastModifyUserName,
+		a.department_name departmentName
+		<include refid="whereConditionDriver" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.createDate
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<select id="selectCarInfoById" resultType="com.huacainfo.ace.gesp.model.CarInfo">
+		SELECT t.*,a.name dirverName FROM car_info t left join driver_info a on t.dirverId=a.id and a.status=0 where t.id=#{id}
+	</select>
+	<select id="selectCarTypeInfoById" resultType="com.huacainfo.ace.gesp.model.CarType">
+		SELECT * FROM car_type where id=#{id}
+	</select>
+	<select id="selectCarProductionInfoById" resultType="com.huacainfo.ace.gesp.model.CarProduction">
+		SELECT * FROM car_production where id=#{id}
+	</select>
+	<select id="selectDriverInfoById" resultType="com.huacainfo.ace.gesp.model.DriverInfo">
+		SELECT a.id,a.`name`,a.sex,a.idCard,a.`status`,b.department_name as deptId,a.birthdate,a.initDrivingLicDate,
+       		   a.certNumber,a.certPersonType,a.certType,a.filingCertType,a.driverLicNo,a.driverLicCarType,
+			   a.entryTime,a.certCompanyName,a.cooperationMode,a.tel,a.recordTime,a.remark,a.createDate,a.createUserId,
+			   a.createUserName,a.lastModifyDate,a.lastModifyUserId,a.lastModifyUserName
+        FROM driver_info a
+        LEFT JOIN department b on a.deptId = b.department_id 
+        where a.id=#{id}
+	</select>
+	
+	<!-- 修改车辆基本信息 -->
+	<update id="updateCarTypeInfoById">
+		update car_info
+		set 
+			modifyDate = #{modifyDate, jdbcType=TIMESTAMP},
+			modifyUserId = #{modifyUserId, jdbcType=VARCHAR},
+			modifyUserName = #{modifyUserName, jdbcType=VARCHAR},
+			plateNumber= #{plateNumber,jdbcType=VARCHAR},
+			plateColor= #{plateColor,jdbcType=VARCHAR},
+			drivingLicCreatetime= #{drivingLicCreatetime,jdbcType=DATE},
+			drivingLicNo= #{drivingLicNo,jdbcType=VARCHAR},
+			carType= #{carType,jdbcType=VARCHAR},
+			vin= #{vin,jdbcType=VARCHAR},
+			batteryGroupNo= #{batteryGroupNo,jdbcType=VARCHAR},
+			motorNo= #{motorNo,jdbcType=VARCHAR},
+			transportNo= #{transportNo,jdbcType=VARCHAR},
+			passNo= #{passNo,jdbcType=VARCHAR},
+			bussType= #{bussType,jdbcType=VARCHAR},
+			bussStatus= #{bussStatus,jdbcType=VARCHAR},
+			isGAT= #{isGAT,jdbcType=VARCHAR},
+			gATNo= #{gATNo,jdbcType=VARCHAR},
+			ownerName= #{ownerName,jdbcType=VARCHAR},
+			insuranceCompany= #{insuranceCompany,jdbcType=VARCHAR},
+			coverage= #{coverage,jdbcType=VARCHAR},
+			insuranceDate= #{insuranceDate,jdbcType=DATE},
+			lastComperformCheckDate= #{lastComperformCheckDate,jdbcType=DATE},
+			lastClassIIDate= #{lastClassIIDate,jdbcType=DATE},
+			isInstallOBD= #{isInstallOBD,jdbcType=VARCHAR},
+			odbDeviceId= #{odbDeviceId,jdbcType=VARCHAR},
+			isInstallGPS= #{isInstallGPS,jdbcType=VARCHAR},
+			fuelType= #{fuelType,jdbcType=VARCHAR},
+			makerName= #{makerName,jdbcType=VARCHAR},
+			validEndDate= #{validEndDate,jdbcType=DATE},
+			scrapEndDate= #{scrapEndDate,jdbcType=DATE}
+		where id=#{id}
+	</update>
+	
+	<!-- 修改车辆基本信息 -->
+	<update id="updateCarProductionInfoById">
+		update car_production
+		set 
+			modifyDate = #{modifyDate, jdbcType=TIMESTAMP},
+			modifyUserId = #{modifyUserId, jdbcType=VARCHAR},
+			modifyUserName = #{modifyUserName, jdbcType=VARCHAR},
+			identiCode= #{identiCode,jdbcType=VARCHAR},
+			carCategory= #{carCategory,jdbcType=VARCHAR},
+			carType= #{carType,jdbcType=VARCHAR},
+			carUseType= #{carUseType,jdbcType=VARCHAR},
+			vin= #{vin,jdbcType=VARCHAR},
+			subsidyId= #{subsidyId,jdbcType=VARCHAR},
+			overallSize= #{overallSize,jdbcType=VARCHAR},
+			totalMass= #{totalMass,jdbcType=VARCHAR},
+			factoryTime= #{factoryTime,jdbcType=DATE},
+			bodySize= #{bodySize,jdbcType=VARCHAR},
+			batteryGroupNo= #{batteryGroupNo,jdbcType=VARCHAR},
+			batteryUnitTypeNo= #{batteryUnitTypeNo,jdbcType=VARCHAR},
+			batteryUnitMakerName= #{batteryUnitMakerName,jdbcType=VARCHAR},
+			batteryBoxTypeNo= #{batteryBoxTypeNo,jdbcType=VARCHAR},
+			batteryGroupTotalCapacity= #{batteryGroupTotalCapacity,jdbcType=VARCHAR},
+			batteryGroupMakerName= #{batteryGroupMakerName,jdbcType=VARCHAR},
+			batteryKeepYears= #{batteryKeepYears,jdbcType=VARCHAR},
+			motorNo= #{motorNo,jdbcType=VARCHAR},
+			motorTypeNo= #{motorTypeNo,jdbcType=VARCHAR},
+			motorRatedPower= #{motorRatedPower,jdbcType=VARCHAR},
+			motorKeepYears= #{motorKeepYears,jdbcType=VARCHAR},
+			bodyColor= #{bodyColor,jdbcType=VARCHAR},
+			carStatus= #{carStatus,jdbcType=VARCHAR},
+			makerName= #{makerName,jdbcType=VARCHAR}
+		where id=#{id}
+	</update>
+
+	<!-- 修改司机信息 -->
+	<update id="updateDriverInfoById">
+		update driver_info
+		set 
+			lastModifyDate = #{lastModifyDate, jdbcType=TIMESTAMP},
+			lastModifyUserId = #{lastModifyUserId, jdbcType=VARCHAR},
+			lastModifyUserName = #{lastModifyUserName, jdbcType=VARCHAR},
+			name= #{name,jdbcType=VARCHAR},
+			sex= #{sex,jdbcType=VARCHAR},
+			idCard= #{idCard,jdbcType=VARCHAR},
+			birthdate= #{birthdate,jdbcType=DATE},
+			initDrivingLicDate= #{initDrivingLicDate,jdbcType=DATE},
+			certNumber= #{certNumber,jdbcType=VARCHAR},
+			certPersonType= #{certPersonType,jdbcType=VARCHAR},
+			certType= #{certType,jdbcType=VARCHAR},
+			filingCertType= #{filingCertType,jdbcType=VARCHAR},
+			driverLicNo= #{driverLicNo,jdbcType=VARCHAR},
+			driverLicCarType= #{driverLicCarType,jdbcType=VARCHAR},
+			entryTime= #{entryTime,jdbcType=DATE},
+			certCompanyName= #{certCompanyName,jdbcType=VARCHAR},
+			cooperationMode= #{cooperationMode,jdbcType=VARCHAR},
+			tel= #{tel,jdbcType=VARCHAR},
+			recordTime= #{recordTime,jdbcType=VARCHAR}
+		where id=#{id}
+	</update>
+	
+	
+	<sql id="whereConditionOwnerCar">
+		from car_info t 
+		left join driver_info b on t.dirverId=b.id and b.status=0
+		where t.ownerId=#{condition.deptId}
+		<if
+			test="condition.plateNumber!=null and condition.plateNumber!=&quot;&quot;">
+			and t.plateNumber =#{condition.plateNumber}
+		</if>
+		<if test="condition.transportMode!=null and condition.transportMode!=&quot;&quot;">
+			and t.transportMode =#{condition.transportMode}
+		</if>	
+	</sql>
+	
+	<select id="findOwnerCarList" resultType="map">
+		select
+			t.id,
+			t.plateNumber,
+			t.plateColor,
+			DATE_FORMAT(t.drivingLicCreatetime,'%Y-%m-%d') drivingLicCreatetime,
+			t.drivingLicNo,
+			t.carType,
+			t.vin,
+			t.batteryGroupNo,
+			t.motorNo,
+			t.transportNo,
+			t.passNo,
+			t.bussType,
+			t.bussStatus,
+			t.IsGAT,
+			t.gATNo,
+			t.ownerId,
+			t.ownerName,
+			t.insuranceCompany,
+			t.coverage,
+			DATE_FORMAT(t.insuranceDate,'%Y-%m-%d') insuranceDate,
+			DATE_FORMAT(t.lastComperformCheckDate,'%Y-%m-%d') lastComperformCheckDate,
+			DATE_FORMAT(t.lastClassIIDate,'%Y-%m-%d') lastClassIIDate,
+			t.dirverId,
+			t.IsInstallOBD,
+			t.odbDeviceId,
+			t.IsInstallGPS,
+			t.fuelType,
+			t.makerName,
+			t.ownerIdCardNo,
+			t.ownerPhone,
+			DATE_FORMAT(t.initRegDate,'%Y-%m-%d') initRegDate,
+			DATE_FORMAT(t.validEndDate,'%Y-%m-%d') validEndDate,
+			DATE_FORMAT(t.ScrapEndDate,'%Y-%m-%d') ScrapEndDate,
+			t.transportMode,
+			t.createDate,
+			t.createUserId,
+			t.createUserName,
+			t.modifyDate,
+			t.modifyUserId,
+			t.modifyUserName,
+			b.name
+		<include refid="whereConditionOwnerCar" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.createDate
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	
+	<select id="findOwnerCarCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereConditionOwnerCar" />
+	</select>
+	
+	
+	<sql id="whereConditionOwnerDriver">
+		 from driver_info t 
+		 where t.deptId=#{condition.deptId} and t.status=0
+		<if test="condition.idCard!=null and condition.idCard!=&quot;&quot;">
+			and t.idCard like
+			concat(#{condition.idCard},'%')
+		</if>
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and t.name like
+			concat('%',#{condition.name},'%')
+		</if>
+		<if test="condition.driverLicNo!=null and condition.driverLicNo!=&quot;&quot;">
+			and t.driverLicNo =#{condition.driverLicNo}
+		</if>
+	</sql>
+	<select id="findOwnerDriverCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereConditionOwnerDriver" />
+	</select>
+	<select id="findOwnerDriverList" resultType="map">
+		SELECT t.id,
+		t.name,
+		t.sex,
+		t.idCard,
+		t.status,
+		t.deptId,
+		t.birthdate,
+		DATE_FORMAT(t.initDrivingLicDate,'%Y-%m-%d') initDrivingLicDate,
+		t.certNumber,
+		t.certPersonType,
+		t.certType,
+		t.filingCertType,
+		t.driverLicNo,
+		t.driverLicCarType,
+		t.entryTime,
+		t.certCompanyName,
+		t.cooperationMode,
+		t.tel,
+		t.recordTime,
+		t.remark,
+		t.createDate,
+		t.createUserId,
+		t.createUserName,
+		t.lastModifyDate,
+		t.lastModifyUserId,
+		t.lastModifyUserName
+		<include refid="whereConditionOwnerDriver" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.createDate
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	
+	
+	<select id="findAllDeptList" resultType="map">
+		select 
+			t.department_id code,
+			t.department_name name
+		from department_society f
+		left join department t on f.department_id = t.department_id
+		where f.parent_department_id = #{pdeptId} and t.`status` not in (0,2)
+	</select>
+	
+	
+	<select id="findCar_BaseByNumberColor" resultType="java.util.HashMap">
+	 select * from BS_Car_Base where plateNo=#{plateNo} and color=#{color} order by  changeDate asc
+	</select>
+	<select id="findCar_plateNoChangeByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_plateNoChange where plateNo=#{plateNo} and color=#{color} order by  changeDate asc
+	</select>
+	<select id="findCar_OwnerChangeByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_OwnerChange where plateNo=#{plateNo} and color=#{color} order by  changeDate asc
+	</select>
+	<select id="findCar_otherChangeByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_otherChange where plateNo=#{plateNo} and color=#{color} order by  changeDate asc
+	</select>
+	<select id="findCar_MainPartsChangeByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_MainPartsChange where plateNo=#{plateNo} and color=#{color} order by  changeDate asc
+	</select>
+	<select id="findCar_useRecordByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_useRecord where plateNo=#{plateNo} and color=#{color} order by  useDate asc
+	</select>
+	<select id="findCar_trafficAccidentByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_trafficAccident where plateNo=#{plateNo} and color=#{color} order by  occurDate asc
+	</select>
+	<select id="findCar_TechParamByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_TechParam where plateNo=#{plateNo} and color=#{color}  
+	</select>
+	<select id="findCar_RepairByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_Repair where plateNo=#{plateNo} and color=#{color}  order by  repairDate asc
+	</select>
+	<select id="findCar_GradeEvaluationByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_GradeEvaluation where plateNo=#{plateNo} and color=#{color} order by  checkDate asc 
+	</select>
+	<select id="findCar_illegalByNumberColor" resultType="java.util.HashMap">
+	select * from BS_Car_illegal where plateNo=#{plateNo} and color=#{color} order by  `Time` asc 
+	</select>
+	<select id="findCar_OwerDriverByNumberColor" resultType="java.util.HashMap">
+	SELECT b.*,
+    CASE b.`certType` WHEN '1' THEN 'J-货运' WHEN '2' THEN 'J-客运/货运' WHEN '3' THEN '道路货物运输驾驶员'   ELSE '-' END AS  certType2,
+    CASE b.`driverLicCarType` WHEN '1' THEN 'A1' WHEN '2' THEN 'A2' WHEN '3' THEN 'B1' WHEN '4' THEN 'B2' WHEN '5' THEN 'C1' ELSE '-' END AS driverLicCarType2 
+    FROM car_info a INNER JOIN  driver_info b ON a.`dirverId`=b.`id`
+ 	WHERE a.`plateNumber`=#{plateNo}  
+	</select>
+	
+	
+</mapper>

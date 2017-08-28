@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.ManagerCarDao">
+
+	<!-- 查询车辆的基本信息 的条件 -->
+	<sql id="whereConditionCarInfo">
+		from bs_car_base a 
+		inner join department b on b.parent_department_id = #{condition.deptId} and 
+			a.companyLicense =  b.trans_buss_license_no
+		where a.managementStatus in ('营运','过户')
+		<if test="condition.companyName!=null and condition.companyName!=&quot;&quot;">
+			and a.companyName like
+			concat('%',#{condition.companyName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="condition.carBigType!=null and condition.carBigType!=&quot;&quot;">
+			and a.carBigType like concat('%',#{condition.carBigType},'%')
+		</if>
+		<if test="condition.pdeptId!=null and condition.pdeptId!=&quot;&quot;">
+			and b.department_id = #{condition.pdeptId}
+		</if>
+		<if test='condition.plateNo!=null and condition.plateNo!=""'>
+			and a.plateNo = #{condition.plateNo,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.checkValidityDate!=null">
+			<choose>
+				<when test="condition.checkValidityDate==30">
+					and (DATEDIFF(a.checkValidityDate,NOW())&lt;=30 and DATEDIFF(a.checkValidityDate,NOW())&gt;=15)
+				</when>
+				<when test="condition.checkValidityDate==15">
+					and (DATEDIFF(a.checkValidityDate,NOW())&lt;=15 and DATEDIFF(a.checkValidityDate,NOW())&gt;=0)
+				</when>
+				<when test="condition.checkValidityDate==3">
+					and DATEDIFF(a.checkValidityDate,NOW())&lt;=0
+				</when> 
+				<otherwise></otherwise>
+			</choose>
+		</if>
+	</sql>
+	<!-- 根据条件查询车辆的基本信息总条数 -->
+	<select id="findCarInfoCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereConditionCarInfo" />
+	</select>
+	<!-- 根据条件查询车辆的基本信息 -->
+	<select id="findCarInfoList" resultType="map">
+		select 
+			a.id,
+			a.collectSiteCarId,
+			a.companyName,
+			a.companyLicense,
+			a.plateNo,
+			a.color,
+			a.carBigType,
+			a.brandModel,
+			a.brandName,
+			a.approvedTon,
+			DATE_FORMAT(a.checkValidityDate,'%Y-%m-%d') checkValidityDate,
+			(case  when DATEDIFF(a.checkValidityDate, SYSDATE())&gt;30
+			    then '0'
+			    when (DATEDIFF(a.checkValidityDate, SYSDATE())&gt;=0 and DATEDIFF(a.checkValidityDate, SYSDATE())&lt;=30)
+			    then '1'
+			    else
+			    '2'
+			    end) checkValidityStatus,
+			DATE_FORMAT(a.changeDate,'%Y-%m-%d') changeDate,
+			a.roadTransportCertificate,
+			a.managementScope,
+			a.managementStatus,
+			a.carAddress,
+			a.remark
+		<include refid="whereConditionCarInfo" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.changeDate desc
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL},#{limit,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 查询车辆的违规违章信息的条件 -->
+	<sql id="whereConditionCarIllegal">
+		from bs_car_illegal a 
+		inner join  bs_car_base c on a.plateNo = c.plateNo and a.color = c.color
+		inner join department b on b.parent_department_id = #{condition.deptId} and 
+			c.companyLicense =  b.trans_buss_license_no
+		where c.managementStatus in ('营运','过户')
+		<if test="condition.companyName!=null and condition.companyName!=&quot;&quot;">
+			and c.companyName like
+			concat('%',#{condition.companyName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="condition.color!=null and condition.color!=&quot;&quot;">
+			and a.color =#{condition.color}
+		</if>
+		<if test='condition.plateNo!=null and condition.plateNo!=""'>
+			and a.plateNo = #{condition.plateNo,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.pdeptId!=null and condition.pdeptId!=&quot;&quot;">
+			and b.department_id = #{condition.pdeptId}
+		</if>
+		<if test='condition.Type!=null and condition.Type!=""'>
+			and a.Type = #{condition.Type,jdbcType=VARCHAR}
+		</if>
+		<if test='condition.Organizationid!=null and condition.Organizationid!=""'>
+			and a.Organizationid = #{condition.Organizationid,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	<!-- 根据条件查询车辆的违规违章信息的总条数 -->
+	<select id="findCarIllegalCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereConditionCarIllegal" />
+	</select>
+	<!-- 根据条件查询车辆的违规违章信息 -->
+	<select id="findCarIllegalList" resultType="map">
+		select 
+			a.id,
+			a.Organization,
+			a.Organizationid,
+			a.PuniNo,
+			c.companyName,
+			a.plateNo,
+			a.color,
+			a.`Name`,
+			a.Amerce,
+			a.Time,
+			a.Address,
+			a.Tache,
+			a.Type,
+			a.`Code`,
+			a.NotiNo,
+			a.Party,
+			a.BriefOfCase,
+			a.Category2,
+			a.OverHeight,
+			a.OverLength,
+			a.InvoiceNo,
+			a.PunishmentContent,	
+			a.IllegalLaws,
+			a.PunishLaws,
+			a.Source,
+			a.State,
+			a.PrveCaller,
+			a.Address2,
+			a.Telephone,
+			a.Identity,
+			a.BelongPlace,
+			a.Model,
+			a.FrameNumber,
+			a.EngineNumber
+		<include refid="whereConditionCarIllegal" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.Time desc
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL},#{limit,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 查询车辆的二级维护信息的条件 -->
+	<sql id="whereConditionCarTwoLeMain">
+		from bs_car_repair a 
+		inner join bs_car_base c on a.plateNo = c.plateNo and a.color = c.color
+		inner join department b on b.parent_department_id = #{condition.deptId} and 
+			c.companyLicense =  b.trans_buss_license_no
+		where c.managementStatus in ('营运','过户') and a.repairType = '二级维护'
+		<if test="condition.companyName!=null and condition.companyName!=&quot;&quot;">
+			and c.companyName like
+			concat('%',#{condition.companyName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="condition.color!=null and condition.color!=&quot;&quot;">
+			and a.color =#{condition.color}
+		</if>
+		<if test="condition.pdeptId!=null and condition.pdeptId!=&quot;&quot;">
+			and b.department_id = #{condition.pdeptId}
+		</if>
+		<if test='condition.plateNo!=null and condition.plateNo!=""'>
+			and a.plateNo = #{condition.plateNo,jdbcType=VARCHAR}
+		</if>
+		<if test='condition.repairDate!=null and condition.repairDate!=""'>
+			and a.repairDate = #{condition.repairDate,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	<!-- 根据条件查询车辆的二级维护信息的总条数 -->
+	<select id="findCarTwoLeMainCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereConditionCarTwoLeMain" />
+	</select>
+	<!-- 根据条件查询车辆的二级维护信息 -->
+	<select id="findCarTwoLeMainList" resultType="map">
+		select 
+			a.id,
+			a.plateNo,
+			a.color,
+			DATE_FORMAT(a.repairDate,'%Y-%m-%d') repairDate,	
+			a.repairType,
+			a.repairCompany,
+			a.repairUserName,
+			a.repairTicketsNo,
+			a.repairResult,
+			a.auditResult,
+			a.auditUserName,
+			a.auditDepartment,
+			c.companyName,
+			DATE_FORMAT(a.auditDate,'%Y-%m-%d') auditDate,
+			a.remark
+		<include refid="whereConditionCarTwoLeMain" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.repairDate desc
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL},#{limit,jdbcType=DECIMAL}
+	</select>
+
+	
+	<!-- 查询车辆的综合性能检测信息的条件 -->
+	<sql id="whereConditionCarPerTest">
+		from bs_car_gradeevaluation a 
+		inner join  bs_car_base c on a.plateNo = c.plateNo and a.color = c.color
+		inner join department b on b.parent_department_id = #{condition.deptId} and 
+			c.companyLicense =  b.trans_buss_license_no
+		where c.managementStatus in ('营运','过户')
+		<if test="condition.companyName!=null and condition.companyName!=&quot;&quot;">
+			and c.companyName like
+			concat('%',#{condition.companyName,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="condition.color!=null and condition.color!=&quot;&quot;">
+			and a.color =#{condition.color,jdbcType=VARCHAR}
+		</if>
+		<if test='condition.plateNo!=null and condition.plateNo!=""'>
+			and a.plateNo = #{condition.plateNo,jdbcType=VARCHAR}
+		</if>
+		<if test="condition.pdeptId!=null and condition.pdeptId!=&quot;&quot;">
+			and b.department_id = #{condition.pdeptId}
+		</if>
+		<if test="condition.checkDate!=null">
+			<choose>
+				<when test="condition.checkDate==30">
+					and (DATEDIFF(a.checkDate,NOW())&lt;=30 and DATEDIFF(a.checkDate,NOW())&gt;=15)
+				</when>
+				<when test="condition.checkDate==15">
+					and (DATEDIFF(a.checkDate,NOW())&lt;=15 and DATEDIFF(a.checkDate,NOW())&gt;=0)
+				</when>
+				<when test="condition.checkDate==3">
+					and DATEDIFF(a.checkDate,NOW())&lt;=0
+				</when>
+				<otherwise></otherwise>
+			</choose>
+		</if>
+	</sql>
+	<!-- 根据条件查询车辆的综合性能检测信息的总条数 -->
+	<select id="findCarPerTestCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereConditionCarPerTest" />
+	</select>
+	<!-- 根据条件查询车辆的综合性能检测信息 -->
+	<select id="findCarPerTestList" resultType="map">
+		select 
+			a.id,
+			a.plateNo,
+			a.color,
+			DATE_FORMAT(a.checkDate,'%Y-%m-%d') checkDate,
+			a.checkType,
+			a.mileageRecord,
+			a.otherCheckRemark,
+			a.techGrade,
+			a.BusTypeAndGrade,
+			a.checkCompany,
+			a.checkUserName,
+			a.checkTicketsNo,
+			a.checkResult,
+			a.auditResult,
+			a.auditUserName,
+			a.auditDepartment,
+			c.companyName,
+			DATE_FORMAT(a.auditDate,'%Y-%m-%d') auditDate,
+			a.remark
+		<include refid="whereConditionCarPerTest" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.checkDate desc
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL},#{limit,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 根据车牌号码和颜色查询车辆的基本信息 -->
+	<select id="selectByCarInfo" resultType="map">
+		select 
+			a.id,
+			a.collectSiteCarId,
+			a.companyName,
+			a.companyLicense,
+			a.plateNo,
+			a.color,
+			a.carBigType,
+			a.brandModel,
+			a.brandName,
+			a.approvedTon,
+			a.checkValidityDate,
+			DATE_FORMAT(a.changeDate,'%Y-%m-%d')changeDate,
+			a.roadTransportCertificate,
+			a.managementScope,
+			a.managementStatus,
+			a.carAddress,
+			a.remark,
+			b.dateOrigin,
+			CONCAT('***',RIGHT(b.vin,6)) as vin,
+			b.chassisBrandModel,
+			b.busTypeClass,
+			b.dimensions,
+			b.totalMass,
+			b.seatBerthArrange,
+			b.approvedQualityCrew,
+			b.approvedTotalMass,
+			b.axlesNumber,
+			b.engineBrandModel,
+			CONCAT('***',RIGHT(b.engineNumber,6)) as engineNumber,
+			b.fuelType,
+			b.enginePower,
+			b.engineDisplacement,
+			b.driveForm,
+			b.tyreNumberSpeci,
+			b.headlamp,
+			b.transmissionType,
+			b.retarder,
+			b.diverter,
+			b.brakeForm,
+			b.SuspensionForm
+		from bs_car_base a 
+		left JOIN bs_car_techparam b on a.plateNo = b.plateNo and a.color = b.color
+		where a.id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	
+	<!-- 根据车牌号码和颜色查询车辆的综合性能检测信息 -->
+	<select id="selectByCarPerTest" resultType="map">
+		select 
+			a.id,
+			a.plateNo,
+			a.color,
+			DATE_FORMAT(a.checkDate,'%Y-%m-%d') checkDate,
+			a.checkType,
+			a.mileageRecord,
+			a.otherCheckRemark,
+			a.techGrade,
+			a.BusTypeAndGrade,
+			a.checkCompany,
+			a.checkUserName,
+			a.checkTicketsNo,
+			a.checkResult,
+			a.auditResult,
+			a.auditUserName,
+			a.auditDepartment,
+			DATE_FORMAT(a.auditDate,'%Y-%m-%d') auditDate,
+			a.remark
+		from bs_car_gradeevaluation a
+		where a.plateNo = #{plateNo,jdbcType=VARCHAR} and a.color=#{color,jdbcType=VARCHAR}
+	</select>
+	
+	
+	<!-- 根据车牌号码和颜色查询车辆的二级维护信息 -->
+	<select id="selectByCarTwoLeMain" resultType="map">
+		select 
+			a.id,
+			a.plateNo,
+			a.color,
+			DATE_FORMAT(a.repairDate,'%Y-%m-%d') repairDate,	
+			a.repairType,
+			a.repairCompany,
+			a.repairUserName,
+			a.repairTicketsNo,
+			a.repairResult,
+			a.auditResult,
+			a.auditUserName,
+			a.auditDepartment,
+			DATE_FORMAT(a.auditDate,'%Y-%m-%d') auditDate,
+			a.remark
+		from bs_car_repair a 
+		where a.plateNo = #{plateNo,jdbcType=VARCHAR} and a.color=#{color,jdbcType=VARCHAR}
+	</select>
+	
+	
+	<!-- 根据车牌号码和颜色查询车辆的违规违章信息 -->
+	<select id="selectByCarIllegal" resultType="map">
+		select 
+			a.id,
+			a.Organization,
+			a.Organizationid,
+			a.PuniNo,
+			a.plateNo,
+			a.color,
+			a.`Name`,
+			a.Amerce,
+			a.Time,
+			a.Address,
+			a.Tache,
+			a.`Code`,
+			a.NotiNo,
+			a.Party,
+			a.BriefOfCase,
+			a.Category2,
+			a.OverHeight,
+			a.OverLength,
+			a.InvoiceNo,
+			a.PunishmentContent,	
+			a.IllegalLaws,
+			a.PunishLaws,
+			a.Source,
+			a.State,
+			a.PrveCaller,
+			a.Address2,
+			a.Telephone,
+			a.Identity,
+			a.BelongPlace,
+			a.Model,
+			a.FrameNumber,
+			a.EngineNumber
+		from bs_car_illegal a 
+		where a.plateNo = #{plateNo,jdbcType=VARCHAR} and a.color=#{color,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

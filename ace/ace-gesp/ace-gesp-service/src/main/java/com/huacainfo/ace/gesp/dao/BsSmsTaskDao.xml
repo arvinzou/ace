@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huacainfo.ace.gesp.dao.BsSmsTaskDao">
+<!-- 
+	<![CDATA[  ]]>
+	LIKE CONCAT(CONCAT('%', #{}),'%')
+-->
+<sql id="allcolumns">id,name,content,createTime,sendTime,isEnable,departmentId,createUserId</sql>
+
+<sql id="findListWhereCondition">
+<if test="condition.id!=null and condition.id!=''">and t.id=#{condition.id}</if>
+	 <if test="condition.name!=null and condition.name!=''">and t.name like concat('%',#{condition.name},'%')</if>
+	 <if test="condition.content!=null and condition.content!=''">and t.content=#{condition.content}</if>
+	 <if test="condition.createTime!=null">and t.createTime=#{condition.createTime}</if>
+	 <if test="condition.sendTime!=null">and t.sendTime=#{condition.sendTime}</if>
+	 <if test="condition.isEnable!=null and condition.isEnable!=''">and t.isEnable=#{condition.isEnable}</if>
+	 <if test="condition.departmentId!=null and condition.departmentId!=''">and t.departmentId=#{condition.departmentId}</if>
+	 <if test="condition.createUserId!=null and condition.createUserId!=''">and t.createUserId=#{condition.createUserId}</if>
+</sql>
+
+<select id="findListForSendSMS" resultType="java.util.HashMap">
+select * from (SELECT a.*,b.mobile,b.sendStatus,b.remark AS smsRemark,c.name AS templateName,c.content AS templateContent FROM bs_sms_task a INNER JOIN  sys_sms b ON a.id=b.`bussId`
+LEFT JOIN  sys_smstemplate c ON b.templateCode=c.templateCode) t where 1=1
+<if test="condition.id!=null and condition.id!=''">and t.id=#{condition.id}</if>
+<if test="condition.sendStatus!=null and condition.sendStatus!=''">and t.sendStatus=#{condition.sendStatus}</if>
+</select>
+
+<select id="findListForSendSMSCount" resultType="int">
+select count(*) from (SELECT a.*,b.mobile,b.sendStatus,c.name AS templateName,c.content AS templateContent FROM bs_sms_task a INNER JOIN  sys_sms b ON a.id=b.`bussId`
+LEFT JOIN  sys_smstemplate c ON b.templateCode=c.templateCode) t where 1=1
+<if test="condition.id!=null and condition.id!=''">and t.id=#{condition.id}</if>
+<if test="condition.sendStatus!=null and condition.sendStatus!=''">and t.sendStatus=#{condition.sendStatus}</if>
+</select>
+
+<select id="findListByMember" resultType="java.util.HashMap">
+select * from ( 
+ SELECT b.parent_department_id, a.department_id,a.`department_name`,a.`area_code`,d.name AS username,d.`mobile`,  c.`memberCode`,a.driver_num   
+FROM department a INNER JOIN `department_society` b ON  a.`department_id`=b.`department_id`
+INNER JOIN users d ON a.`department_id`=d.`department_id`
+LEFT JOIN member_info c  ON c.`memberCode`=a.`department_id`
+WHERE   d.`parent_user_id`='0') t where 1=1 
+<if test="condition.parent_department_id!=null and condition.parent_department_id!=''">and t.parent_department_id=#{condition.parent_department_id}</if>
+<if test='condition.driver_num!=null  and condition.driver_num=="less10"'><![CDATA[ and t.driver_num<10]]></if>
+<if test='condition.driver_num!=null  and condition.driver_num=="more10"'><![CDATA[ and t.driver_num>=10]]></if>
+<if test="condition.area_code!=null and condition.area_code!=''">and t.area_code like concat(#{condition.area_code},'%')</if>
+<if test='condition.isMember!=null and condition.isMember=="1"'>and t.memberCode is not null</if>
+<if test='condition.isMember!=null and condition.isMember=="0"'>and t.memberCode is null</if>
+ 
+</select>
+
+
+<select id="findList" resultType="java.util.HashMap">
+select * from (SELECT a.* 
+,IFNULL(unSendCount,0) AS unSendCount,
+IFNULL(successCount,0) AS successCount,
+IFNULL(sendingCount,0) AS sendingCount,
+IFNULL(failCount,0) AS failCount FROM bs_sms_task a LEFT JOIN  
+ (SELECT bussid,   
+ SUM(CASE sendStatus WHEN  '0' THEN 1  ELSE 0 END) AS unSendCount,
+ SUM(CASE sendStatus WHEN  '1' THEN 1  ELSE 0 END) AS successCount,
+ SUM(CASE sendStatus WHEN  '2' THEN 1  ELSE 0 END) AS sendingCount,
+  SUM(CASE sendStatus WHEN  '3' THEN 1  ELSE 0 END) AS failCount 
+  FROM  sys_sms GROUP BY bussid) b ON a.id=b.bussid where a.isEnable='1') t where 1=1
+ <include refid="findListWhereCondition" />
+ <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		 
+  limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+</select>
+
+<select id="findCount" resultType="int">
+ select count(*) from (SELECT a.* 
+,IFNULL(unSendCount,0) AS unSendCount,
+IFNULL(successCount,0) AS successCount,
+IFNULL(sendingCount,0) AS sendingCount,
+IFNULL(failCount,0) AS failCount FROM bs_sms_task a LEFT JOIN  
+ (SELECT bussid,   
+ SUM(CASE sendStatus WHEN  '0' THEN 1  ELSE 0 END) AS unSendCount,
+ SUM(CASE sendStatus WHEN  '1' THEN 1  ELSE 0 END) AS successCount,
+ SUM(CASE sendStatus WHEN  '2' THEN 1  ELSE 0 END) AS sendingCount,
+  SUM(CASE sendStatus WHEN  '3' THEN 1  ELSE 0 END) AS failCount 
+  FROM  sys_sms GROUP BY bussid) b ON a.id=b.bussid where a.isEnable='1') t where 1=1
+ <include refid="findListWhereCondition" />
+</select>
+
+<select id="findListTop" resultType="java.util.HashMap">
+  select * from bs_sms_task t where  1=1
+  <include refid="findListWhereCondition" />
+  <if test="orderBy!=null and orderBy!=''"> ORDER BY ${orderBy}</if>		
+</select>
+
+<select id="selectByPrimaryKey" resultType="java.util.HashMap">
+  select * from bs_sms_task t where  id=#{id}
+</select>
+
+<insert id="insert" parameterType="com.huacainfo.ace.gesp.model.BsSmsTask">
+    insert into bs_sms_task (
+    <include refid="allcolumns"/>
+    )
+    values (
+    #{id,jdbcType=VARCHAR}
+	,#{name,jdbcType=VARCHAR}
+	,#{content,jdbcType=VARCHAR}
+	,#{createTime,jdbcType=TIMESTAMP}
+	,#{sendTime,jdbcType=TIMESTAMP}
+	,#{isEnable,jdbcType=VARCHAR}
+	,#{departmentId,jdbcType=VARCHAR}
+	,#{createUserId,jdbcType=VARCHAR}
+    )
+</insert>
+
+<insert id="insertSelective" parameterType="com.huacainfo.ace.gesp.model.BsSmsTask">
+    insert into bs_sms_task (
+    <trim prefix="" prefixOverrides=",">
+    <if test="name!=null and name!=''">name</if>
+	 <if test="content!=null and content!=''">,content</if>
+	 <if test="createTime!=null">,createTime</if>
+	 <if test="sendTime!=null">,sendTime</if>
+	 <if test="isEnable!=null and isEnable!=''">,isEnable</if>
+	 <if test="departmentId!=null and departmentId!=''">,departmentId</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId</if>
+    </trim>
+    )
+    values (
+     <trim prefix="" prefixOverrides=",">
+    <if test="name!=null and name!=''">name=#{name,jdbcType=VARCHAR}</if>
+	 <if test="content!=null and content!=''">,content=#{content,jdbcType=VARCHAR}</if>
+	 <if test="createTime!=null">,createTime=#{createTime,jdbcType=TIMESTAMP}</if>
+	 <if test="sendTime!=null">,sendTime=#{sendTime,jdbcType=TIMESTAMP}</if>
+	 <if test="isEnable!=null and isEnable!=''">,isEnable=#{isEnable,jdbcType=VARCHAR}</if>
+	 <if test="departmentId!=null and departmentId!=''">,departmentId=#{departmentId,jdbcType=VARCHAR}</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId=#{createUserId,jdbcType=VARCHAR}</if>
+	</trim>
+    )
+</insert>
+
+<update id="update" parameterType="com.huacainfo.ace.gesp.model.BsSmsTask" >
+    update  bs_sms_task  set 
+    name=#{name,jdbcType=VARCHAR}
+	 ,content=#{content,jdbcType=VARCHAR}
+	 ,createTime=#{createTime,jdbcType=TIMESTAMP}
+	 ,sendTime=#{sendTime,jdbcType=TIMESTAMP}
+	 ,isEnable=#{isEnable,jdbcType=VARCHAR}
+	 ,departmentId=#{departmentId,jdbcType=VARCHAR}
+	 ,createUserId=#{createUserId,jdbcType=VARCHAR}
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<update id="updateSelective" parameterType="com.huacainfo.ace.gesp.model.BsSmsTask" >
+ update  bs_sms_task  
+	<trim prefix="set" prefixOverrides=",">
+    <if test="name!=null and name!=''">name=#{name,jdbcType=VARCHAR}</if>
+	 <if test="content!=null and content!=''">,content=#{content,jdbcType=VARCHAR}</if>
+	 <if test="createTime!=null">,createTime=#{createTime,jdbcType=TIMESTAMP}</if>
+	 <if test="sendTime!=null">,sendTime=#{sendTime,jdbcType=TIMESTAMP}</if>
+	 <if test="isEnable!=null and isEnable!=''">,isEnable=#{isEnable,jdbcType=VARCHAR}</if>
+	 <if test="departmentId!=null and departmentId!=''">,departmentId=#{departmentId,jdbcType=VARCHAR}</if>
+	 <if test="createUserId!=null and createUserId!=''">,createUserId=#{createUserId,jdbcType=VARCHAR}</if>
+	</trim>
+    where  id=#{id,jdbcType=VARCHAR}
+</update>
+
+
+<delete id="deleteByPrimaryKey">
+  delete from bs_sms_task   where  id=#{id}
+</delete>
+
+ 
+ 
+</mapper>
+ 
+

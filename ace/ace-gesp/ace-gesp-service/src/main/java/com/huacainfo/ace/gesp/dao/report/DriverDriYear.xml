@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.report.DriverDriYear">
+	<select id="query" resultType="map">
+	 <![CDATA[
+SELECT
+	sum(
+		CASE
+		WHEN TIMESTAMPDIFF(
+			YEAR,
+			t.initDrivingLicDate,
+			now()
+		) <= 1 THEN
+			1
+		ELSE
+			0
+		END
+	) '0-1年',
+	sum(
+		CASE
+		WHEN (
+			TIMESTAMPDIFF(
+				YEAR,
+				t.initDrivingLicDate,
+				now()
+			) <= 3
+			AND TIMESTAMPDIFF(
+				YEAR,
+				t.initDrivingLicDate,
+				now()
+			) >= 2
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '2-3年',
+	sum(
+		CASE
+		WHEN (
+			TIMESTAMPDIFF(
+				YEAR,
+				t.initDrivingLicDate,
+				now()
+			) <= 5
+			AND TIMESTAMPDIFF(
+				YEAR,
+				t.initDrivingLicDate,
+				now()
+			) >= 4
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '4-5年',
+	sum(
+		CASE
+		WHEN (
+			TIMESTAMPDIFF(
+				YEAR,
+				t.initDrivingLicDate,
+				now()
+			) <= 7
+			AND TIMESTAMPDIFF(
+				YEAR,
+				t.initDrivingLicDate,
+				now()
+			) >= 6
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '6-7年',
+	sum(
+		CASE
+		WHEN (
+			TIMESTAMPDIFF(
+				YEAR,
+				t.initDrivingLicDate,
+				now()
+			) >= 7
+		) THEN
+			1
+		ELSE
+			0
+		END
+	) '7年以上'
+FROM
+	driver_info t
+INNER JOIN department a ON t.deptId = a.department_id
+WHERE
+	a.parent_department_id = #{deptId}]]>
+	</select>
+</mapper>

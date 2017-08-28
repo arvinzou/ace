@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.report.EnterpriseServiceScope">
+	<select id="query" resultType="map">
+SELECT
+	p. name,
+	p.
+value
+	,
+	q.
+VALUE
+	value2
+FROM
+	(
+		SELECT
+			NAME NAME,
+			ifnull(m.num, 0)
+		VALUE
+
+		FROM
+			(
+				SELECT
+					CODE,
+					NAME
+				FROM
+					dict
+				WHERE
+					category_id = '81'
+			) a
+		LEFT JOIN (
+			SELECT
+				count(1) num,
+				t.trans_buss_scope
+			FROM
+				department_scope t
+			INNER JOIN department a ON t.department_id = a.department_id
+			WHERE
+				a.parent_department_id =#{deptId}
+			AND EXISTS (
+				SELECT
+					id
+				FROM
+					member_info b
+				WHERE
+					b.memberRemark = #{deptId}
+				AND b.memberCode = a.department_id
+				AND b. STATUS = '1'
+			)
+			GROUP BY
+				t.trans_buss_scope
+		) m ON a. CODE = m.trans_buss_scope
+	) p
+INNER JOIN (
+	SELECT
+		NAME NAME,
+		ifnull(m.num, 0)
+	VALUE
+
+	FROM
+		(
+			SELECT
+				CODE,
+				NAME
+			FROM
+				dict
+			WHERE
+				category_id = '81'
+		) a
+	LEFT JOIN (
+		SELECT
+			count(1) num,
+			t.trans_buss_scope
+		FROM
+			department_scope t
+		INNER JOIN department a ON t.department_id = a.department_id
+		WHERE
+			a.parent_department_id = #{deptId}
+		GROUP BY
+			t.trans_buss_scope
+	) m ON a. CODE = m.trans_buss_scope
+) q ON p. NAME = q. NAME
+
+	</select>
+</mapper>

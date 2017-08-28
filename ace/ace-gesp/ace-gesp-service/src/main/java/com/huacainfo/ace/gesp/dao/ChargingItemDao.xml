@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.gesp.dao.ChargingItemDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.gesp.model.ChargingItem">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="memberCode" jdbcType="VARCHAR" property="memberCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="itemType" jdbcType="VARCHAR" property="itemType" /><!-- 项目类别 -->
+    <result column="whetherMemberlevel" jdbcType="VARCHAR" property="whetherMemberlevel" /><!-- 是否按会员等级收费 -->
+    <result column="whetherPeriod" jdbcType="VARCHAR" property="whetherPeriod" /><!-- 是否按次收费 -->
+    <result column="year" jdbcType="INTEGER" property="year" /><!-- 是否按次收费 -->
+    <result column="times" jdbcType="VARCHAR" property="times" /><!-- 是否按次收费 -->
+    <result column="period" jdbcType="CHAR" property="period" /><!-- 是否按次收费 -->
+    <result column="whetherCustom" jdbcType="VARCHAR" property="whetherCustom" /><!-- 是否按自定义方式收费 -->
+    <result column="custom" jdbcType="VARCHAR" property="custom" /><!-- 自定义类型-->
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+  </resultMap>
+   <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.gesp.vo.ChargingItemVo">
+  	<result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+ </resultMap>
+  <sql id="Base_Column_List">
+    id,pid, memberCode, name, itemType, whetherMemberlevel, whetherPeriod, year, times, period, whetherCustom,custom,
+    remark, status, createDate, createUserId, createUserName, lastModifyDate, lastModifyUserId, lastModifyUserName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from charging_item
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from charging_item
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.gesp.model.ChargingItem">
+    insert into charging_item (id,pid, memberCode, name, 
+      itemType, whetherMemberlevel, whetherPeriod,year, times, period, 
+      whetherCustom,custom, remark, status, createDate, 
+      createUserId, createUserName, lastModifyDate, 
+      lastModifyUserId, lastModifyUserName)
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR},#{memberCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{itemType,jdbcType=VARCHAR}, #{whetherMemberlevel,jdbcType=CHAR},
+      #{whetherPeriod,jdbcType=CHAR},#{year,jdbcType=INTEGER}, #{times,jdbcType=VARCHAR}, #{period,jdbcType=CHAR},
+      #{whetherCustom,jdbcType=CHAR},#{custom,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.gesp.model.ChargingItem">
+    update charging_item
+    set memberCode = #{memberCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      itemType = #{itemType,jdbcType=VARCHAR}, 
+      whetherMemberlevel = #{whetherMemberlevel,jdbcType=CHAR},
+      whetherPeriod = #{whetherPeriod,jdbcType=CHAR},
+	  year = #{year,jdbcType=INTEGER}, 
+	  times = #{times,jdbcType=VARCHAR}, 
+	  period = #{period,jdbcType=CHAR},
+      whetherCustom = #{whetherCustom,jdbcType=CHAR},
+      custom = #{custom,jdbcType=VARCHAR}, 
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="isExit" resultType="int">
+		select count(1) from charging_item
+		where memberCode=#{memberCode} and name = #{name,jdbcType=VARCHAR}
+		<if test="itemType!=null and itemType!=&quot;&quot;">
+			and itemType = #{itemType,jdbcType=VARCHAR}
+		</if>
+	</select>
+  <select id="isExitItemType" resultType="map">
+		select <include refid="Base_Column_List" /> from charging_item
+		where memberCode=#{memberCode} and itemType = #{itemType,jdbcType=VARCHAR}
+	</select>
+	<select id="selectListByDeptId" resultType="map">
+		select id code,name from
+		charging_item t 
+		where memberCode =#{deptId} and status='1'
+		order by createDate
+	</select>
+
+	<sql id="whereCondition">
+		from charging_item t left join department a on t.memberCode=a.department_id
+		where 1=1
+        <choose>  
+            <when test="condition.memberCode==0001">   
+            </when>  
+            <otherwise>
+				and t.memberCode = #{condition.memberCode,jdbcType=VARCHAR}
+            </otherwise>
+        </choose> 
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			 <![CDATA[
+				and t.name  like concat('%',#{condition.name},'%')
+				]]>
+		</if>
+		<if test="condition.pid!=null and condition.pid!=&quot;&quot;">
+			 <![CDATA[
+				and (t.pid  =#{condition.pid} or t.id  =#{condition.pid})
+				]]>
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+		select t.* from(
+			select
+			t.id,t.pid, t.memberCode, t.name,t.createDate,t.status,
+			t.itemType, t.whetherMemberlevel, t.whetherPeriod,t.year, t.times, t.period,
+			t.whetherCustom,t.custom,
+			t.createUserId, t.createUserName,
+			t.lastModifyDate, t.lastModifyUserId,
+			t.lastModifyUserName,a.department_name departmentName
+		<include refid="whereCondition" />
+		) t
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.createDate
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	
+	<select id="selectChargingItemTreeList" resultType="map">
+		SELECT
+		t.id ID,
+		t.pid PID,
+		t.name TEXT,
+		'' SRC,
+		'' HREF,
+		 'closed' STATE,
+		(SELECT
+		COUNT(*) 
+		FROM
+		charging_item
+		WHERE
+		charging_item.pid = t.id ) CHILD_COUNT
+		FROM
+		charging_item t where status=1 and pid=#{pid} and  memberCode=#{memberCode}
+		ORDER BY t.pid
+	</select>
+</mapper>

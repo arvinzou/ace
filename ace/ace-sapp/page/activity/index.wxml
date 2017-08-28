@@ -1,0 +1,30 @@
+<view class="b1">
+  <view class="t_w">
+    <view class="t_image">
+      <image class="t_image1" src="../../image/huodong-title.png"></image>
+    </view>
+    <view class="b2">
+      <view class="v1">展示统战部门活动，记录活动内容、参与人员、留言建议，让各界人士参政议政。</view>
+      <navigator open-type="navigate" url="../activitySec/index?category=1">
+      <view class="btn1">
+        <p class="p1">统战管理</p>
+        <p class="p2">统战职能部门的活动计划，活动内容，活动成果</p>
+      </view>
+      </navigator>
+      <navigator open-type="navigate" url="../activitySec/index?category=2">
+      <view class="btn2" bindtap="b">
+        <p class="p1">同心行动</p>
+        <p class="p2">记录、展示非职能部门的活动内容</p>
+      </view>
+      </navigator>
+      <navigator open-type="navigate" url="../feedback/index">
+       <view class="btn3" bindtap="b">
+        <p class="p1">建言献策</p>
+        <p class="p2">参政议政，提出政治见解</p>
+      </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+<view bindtap="a" style="height:100vh;background-color: deepskyblue;">
+</view>
