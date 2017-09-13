@@ -6,7 +6,7 @@ pageEncoding="utf-8"%>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>走向发表作品</title>
+    <title>走向佳文</title>
     <jsp:include page="../../common/common-www.jsp" />
 </head>
 <script>

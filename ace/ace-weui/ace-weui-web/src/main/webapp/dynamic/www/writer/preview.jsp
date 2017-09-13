@@ -31,7 +31,10 @@ var id='${param.id}';
           <label class="weui-form-preview__label">性别</label>
           <span class="weui-form-preview__value" id="sex"></span>
         </div>
-
+        <div class="weui-form-preview__item">
+          <label class="weui-form-preview__label">生日</label>
+          <span class="weui-form-preview__value" id="birthday"></span>
+        </div>
         <div class="weui-form-preview__item">
           <label class="weui-form-preview__label">类别</label>
           <span class="weui-form-preview__value" id="category"></span>
@@ -48,8 +51,28 @@ var id='${param.id}';
 </div>
 
 <a href="../writing/index.jsp?id=${param.id}" class="weui-btn weui-btn_primary">作品列表</a>
-<a href="../article/index.jsp?id=${param.id}" class="weui-btn weui-btn_primary">走向发表作品</a>
 
+<a href="../article/index.jsp?id=${param.id}" class="weui-btn weui-btn_default">走向发表作品</a>
+
+<div class="weui-panel weui-panel_access">
+    <div class="weui-panel__bd">
+        <div class="weui-media-box weui-media-box_text">
+            <h4 class="weui-media-box__title">简介</h4>
+            <p class="weui-media-box__desc" ></p>
+        </div>
+    </div>
+</div>
+<div id="intro" class="my-gallery" data-pswp-uid="2" style="padding:12px">
+</div>
+
+<div class="weui-panel weui-panel_access">
+    <div class="weui-panel__bd">
+        <div class="weui-media-box weui-media-box_text">
+            <h4 class="weui-media-box__title">详情</h4>
+            <p class="weui-media-box__desc" ></p>
+        </div>
+    </div>
+</div>
 <div id="descri" class="my-gallery" data-pswp-uid="1" style="padding:12px">
 </div>
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -124,6 +147,5 @@ var id='${param.id}';
  <jsp:include page="../../common/footer-1-www.jsp" />
  <script src="${pageContext.request.contextPath}/content/common/lib/fastclick.js"></script>
  <script src="${pageContext.request.contextPath}/content/www/js/writer/preview.js"></script>
-
 </body>
 </html>
