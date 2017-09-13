@@ -31,10 +31,7 @@ var id='${param.id}';
           <label class="weui-form-preview__label">性别</label>
           <span class="weui-form-preview__value" id="sex"></span>
         </div>
-        <div class="weui-form-preview__item">
-          <label class="weui-form-preview__label">生日</label>
-          <span class="weui-form-preview__value" id="birthday"></span>
-        </div>
+
         <div class="weui-form-preview__item">
           <label class="weui-form-preview__label">类别</label>
           <span class="weui-form-preview__value" id="category"></span>
@@ -51,7 +48,7 @@ var id='${param.id}';
 </div>
 
 <a href="../writing/index.jsp?id=${param.id}" class="weui-btn weui-btn_primary">作品列表</a>
-
+<a href="../article/index.jsp?id=${param.id}" class="weui-btn weui-btn_primary">走向发表作品</a>
 
 <div id="descri" class="my-gallery" data-pswp-uid="1" style="padding:12px">
 </div>

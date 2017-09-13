@@ -30,7 +30,7 @@ function loadText(name,start,limit) {
             });
             $(".weui-panel__bd").append(html.join(" "));
             if(c==0){
-                 $.alert("没有找到数据！", "很抱歉！");
+                // $.alert("没有找到数据！", "很抱歉！");
             }
             $("#time").text(new Date);
             $(document.body).pullToRefreshDone();

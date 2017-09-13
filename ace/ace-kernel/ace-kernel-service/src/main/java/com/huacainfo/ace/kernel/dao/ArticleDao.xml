@@ -56,22 +56,23 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="whereCondition">
-    from article where 0=0
+    from article t left join writer a on t.name=a.id where 0=0
+
     <if test='condition.title!=null and condition.title!=""'>
-      and title like
+      and t.title like
       concat('%',#{condition.title,jdbcType=VARCHAR},'%')
     </if>
     <if test='condition.category!=null and condition.category!=""'>
-      and category =#{condition.category,jdbcType=VARCHAR}
+      and t.category =#{condition.category,jdbcType=VARCHAR}
     </if>
     <if test='condition.startDate!=null and condition.startDate!=""'>
       <![CDATA[
-			and createDate>=str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
+			and t.createDate>=str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
 			]]>
     </if>
     <if test='condition.endDate!=null and condition.endDate!=""'>
       <![CDATA[
-				and createDate<=str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S')
+				and t.createDate<=str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S')
 				]]>
     </if>
   </sql>
@@ -82,14 +83,15 @@
   <select id="findList" resultMap="BaseResultMapVo">
 
     select
-    <include refid="Base_Column_List" />
+    t.id, t.title, t.name,t.url, t.category, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
+    t.lastModifyUserName, t.lastModifyDate,a.name authorName
     <include refid="whereCondition" />
     <choose>
       <when test='orderBy!=null and orderBy!=""'>
-        ORDER BY ${orderBy}
+        ORDER BY t.${orderBy}
       </when>
       <otherwise>
-        ORDER BY createDate
+        ORDER BY t.createDate
       </otherwise>
     </choose>
 

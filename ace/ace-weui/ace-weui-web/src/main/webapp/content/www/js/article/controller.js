@@ -15,10 +15,10 @@ function loadText(name,author,start,limit) {
 		data : {
 			author : author,
 			category : category,
-			name : name,
+			title : name,
 			start:start,
 			limit:limit,
-			reportId:'writing'
+			reportId:'article'
 		},
 		beforeSend : function(XMLHttpRequest) {
              $.showLoading();
@@ -30,7 +30,7 @@ function loadText(name,author,start,limit) {
             var c=0;
             $(rst.value).each(function(n,o){
                 html.push('<div class="kind-list-item">');
-                            html.push('<a href="preview.jsp?id='+o.id+'" class="weui-media-box weui-media-box_appmsg">');
+                            html.push('<a href="'+o.url+'" class="weui-media-box weui-media-box_appmsg">');
                               html.push('<div style="flex-direction:column;">');
                               if(o.image){
                                 html.push('<image src="'+fastdfs_server+o.image+'" class="swiper"/>');
@@ -38,8 +38,8 @@ function loadText(name,author,start,limit) {
 
                                 html.push('<div class="text-line"></div>');
                                 html.push('<div class="text-content" style="flex-direction:column;">');
-                                  html.push('<div class="title-strong-big2"> '+o.name+'</div>');
-                                  html.push('<div class="item-text"> '+o.dateOfPublication+'  '+o.author+' 阅读：'+o.reading+'</div>');
+                                  html.push('<div class="title-strong-big2"> '+o.title+'</div>');
+                                  html.push('<div class="item-text">'+o.authorName+' '+o.createDate+'</div>');
                                 html.push('</div>');
                                html.push('</div>');
                             html.push('</a>');
@@ -48,7 +48,7 @@ function loadText(name,author,start,limit) {
             });
             $(".weui-panel__bd").append(html.join(" "));
             if(c==0){
-                 //$.alert("没有找到数据！", "很抱歉！");
+                // $.alert("没有找到数据！", "很抱歉！");
             }
             $("#time").text(new Date);
             $(document.body).pullToRefreshDone();
