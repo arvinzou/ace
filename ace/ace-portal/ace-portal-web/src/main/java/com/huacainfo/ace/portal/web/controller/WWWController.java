@@ -4,11 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.util.Map;
+import java.util.HashMap;
 import com.alibaba.fastjson.JSON;
+import java.util.Random;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.model.view.Tree;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.model.WxFormid;
 import com.huacainfo.ace.portal.service.SystemService;
@@ -21,12 +25,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.redis.core.RedisOperations;
 
 import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.portal.model.Attach;
 import com.huacainfo.ace.portal.service.AttachService;
+import com.huacainfo.ace.portal.service.TaskCmccService;
 import com.huacainfo.ace.portal.service.FilesService;
 import com.huacainfo.ace.portal.service.WxCfgService;
 import com.huacainfo.ace.portal.vo.AttachQVo;
@@ -53,6 +59,12 @@ public class WWWController extends PortalBaseController {
 	private SystemService systemService;
 	@Autowired
 	private WxCfgService wxCfgService;
+	@Autowired
+	private  TaskCmccService taskCmccService;
+
+	@Autowired
+	private RedisOperations<String, Object> redisTemplate;
+
 	/**
 	 * 
 	 * @Title:uploadFile
@@ -128,6 +140,18 @@ public class WWWController extends PortalBaseController {
 			}
 		}
 		return this.wxCfgService.insertFormIds(list);
+	}
+
+	private String getRandCode() {
+		Random random = new Random();
+		String sRand = "";
+		for (int i = 0; i < 4; i++) {
+			String rand = String.valueOf(random.nextInt(10));
+			sRand += rand;
+		}
+		// 保存进session
+		this.getRequest().getSession().setAttribute("j_captcha_cmcc", sRand);
+		return sRand;
 	}
 
 }

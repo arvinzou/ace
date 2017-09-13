@@ -1,10 +1,6 @@
 package com.huacainfo.ace.common.tools;
 
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -143,14 +139,20 @@ public class HttpRuquest {
 	 */
 	public static void sendSms(int type) {
 		String url = "https://www.stongnet.com/sdkhttp/sendsms.aspx";
-		
+
+
 		String regCode = "101100-WEB-HUAX-135086"; // 华兴软通注册码，请在这里填写您从客服那得到的注册码
 		String regPasswod = "YTHYNYZA"; // 华兴软通注册码对应的密码，请在这里填写您从客服那得到的注册码
 		String sourceAdd = null;		//子通道号（最长10位，可为空
 		String phone = "13922861673";		//手机号码（最多1000个），多个用英文逗号(,)隔开，不可为空
 		String content = "本次投票验证码为168691，请及时输入。【武陵区教育局】";	//短信内容
-		String param = "reg=" + regCode + "&pwd=" + regPasswod + "&sourceadd=" + sourceAdd + "&phone=" + phone + "&content=" + content;
-		
+		String param = null;
+		try {
+			param = "reg=" + regCode + "&pwd=" + regPasswod + "&sourceadd=" + sourceAdd + "&phone=" + phone + "&content=" + HttpSend.paraTo16(content);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
 		String returnStr = null;
 		if (type == 1) {
 			returnStr = requestGet(url, param);

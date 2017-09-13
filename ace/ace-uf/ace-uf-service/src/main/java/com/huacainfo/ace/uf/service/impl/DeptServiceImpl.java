@@ -30,6 +30,16 @@ public class DeptServiceImpl implements DeptService {
 
 		List<Map<String,Object>> category=this.deptDao.selectDeptCategoryList(areaCode);
 		List<Map<String,Object>> list=this.deptDao.selectDeptListByText(q);
+		for(Map<String,Object> p:list){
+			if(String.valueOf(p.get("category")).equals("4")){
+				p.put("tel","");
+			}
+			if(p.get("tel")!=null){
+				if(String.valueOf(p.get("tel")).length()==11){
+					p.put("tel","");
+				}
+			}
+		}
 		int i=0;
 		if(CommonUtils.isNotBlank(q)){
 			category=new ArrayList<Map<String,Object>>();

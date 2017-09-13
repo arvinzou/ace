@@ -186,6 +186,38 @@ public class AuthorityServiceImpl implements AuthorityService {
 		rst.setValue(o);
 		return rst;
 	}
+	public  SingleResult<Map<String,String>> getPhoneNumber(String appid,String appsecret,String code,String encryptedData,String iv) throws Exception{
+		SingleResult<Map<String, String>> rst = new SingleResult<Map<String, String>>(0, "OK");
+		StringBuffer url = new StringBuffer("");
+		url.append("https://api.weixin.qq.com");
+		url.append("/sns/jscode2session?");
+		url.append("appid=");
+		url.append(appid);
+		url.append("&secret=");
+		url.append(appsecret);
+		url.append("&js_code=");
+		url.append(code);
+		url.append("&grant_type=authorization_code");
+		//logger.info("url -> {}", url.toString());
+		String res = HttpUtils.httpGet(url.toString());
+		logger.info("res -> {}", res);
+		JSONObject json = JSON.parseObject(res);
+		if (CommonUtils.isNotBlank(json.getString("errcode"))) {
+			return new SingleResult<Map<String, String>>(1, json.getString("errmsg"));
+		}
+		String session_key = json.getString("session_key");
+		String openid = json.getString("openid");
+		String expires_in = json.getString("expires_in");
+		JSONObject phoneNumber = this.getUserInfo(encryptedData,session_key,iv);
+		Map<String, String> e=new HashMap<String, String>();
+		e.put("phoneNumber",phoneNumber.getString("phoneNumber"));
+		e.put("purePhoneNumber",phoneNumber.getString("purePhoneNumber"));
+		e.put("countryCode",phoneNumber.getString("countryCode"));
+		logger.info("session_key -> {} openid -> {} expires_in -> {} userinfo ->{}", session_key, openid, expires_in,
+				phoneNumber);
+		rst.setValue(e);
+		return rst;
+	}
 
 	public static void main(String args[]) throws Exception {
 		String  encryptedData="ZKXxLGHy1CUHN4I97dXN47ozaVSVoYf83QXelurq956orVrLxyzXF10haIwgskFYT2mQ4h5ugIUhR1OFGl+uuUOmjh5JH0BGOKweUPpfmRew9lWEPXqHGILraeVRUWwdeGfei1Yx78YK1MyKEtRWP7FfgiEAkAl3Ue1lOpL/Dz0fv28I3e2+rAjHX/hhYO+9qyuAGftgIGZgut2XkdCEwlJX1dSTTPQrOcTxh8hToKEM+4ddnX+DBUALNRrIpn6NxHcrFgWNkOuo4CHBPc5098POfzRuI8bG6mIrVNNEjfIEa6WO4KPvfSqdENEjAGUDvTcBOz2S0uADq7CF/J5yMzc+FGB7WRaGcLyw7YnF5lG3GNHv3hXoTOW73ilvs6jJq/lt4JgOv5B3/gheRImziL7I/SRYcVznk/sQ6UAeneGVBGiJc8zlygLLCBArbFpEBFW0CywikoYF5ef9e1/D9BgAaSYcKbdIjfMaReM7Tis=";
@@ -194,5 +226,25 @@ public class AuthorityServiceImpl implements AuthorityService {
         AuthorityServiceImpl o=new AuthorityServiceImpl();
         JSONObject userinfo= o.getUserInfo(encryptedData,sessionKey,iv);
 		System.out.println(userinfo.toString());
+	}
+
+	public  MessageResponse updateForExperienceUser(String id) throws Exception{
+		WxUser wxUser=this.wxUserDao.selectByPrimaryKey(id);
+		wxUser.setAreaCode("430702");
+		wxUser.setCategory("01");
+		wxUser.setParty("");
+		wxUser.setDeptId("");
+		wxUser.setRole("admin");
+		wxUser.setName("体验者");
+		wxUser.setMobile("13922861673");
+		int t=this.wxUserDao.updateReg(wxUser);
+		return new MessageResponse(0,"成功。");
+	}
+	public  SingleResult<WxUser> selectForExperienceUser(String id) throws Exception{
+		WxUser o=this.wxUserDao.selectByPrimaryKey(id);
+		logger.info("==============>WxUser=====>{}",o);
+		SingleResult<WxUser> rst=new SingleResult(0,"成功。");
+		rst.setValue(o);
+		return rst;
 	}
 }

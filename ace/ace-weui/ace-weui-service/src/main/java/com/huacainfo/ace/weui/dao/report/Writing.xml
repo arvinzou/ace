@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.weui.dao.report.Writing">
   <select id="query" resultType="map">
-    select t.id,t.name,a.name author,DATE_FORMAT(t.dateOfPublication, '%Y-%m-%d') dateOfPublication,
+    select t.id,t.name,t.image,a.name author,DATE_FORMAT(t.dateOfPublication, '%Y-%m-%d') dateOfPublication,
     b.name category,ifnull(t.reading,0) reading
     from writing t
     left join writer a on t.author=a.id

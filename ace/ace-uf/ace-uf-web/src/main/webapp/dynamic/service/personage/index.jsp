@@ -35,10 +35,8 @@ pageEncoding="utf-8"%>
                 lines:false,"
                                style='width: 200px;'>
 
-                    单位：<input name="deptId" class="easyui-combotree"
-                           data-options="url:'${portalPath}/system/selectDepartmentTreeList.do',method:'get',animate: true,
-                lines:false,"
-                           style='width:200px;'>
+                    单位：<input name="deptId" type="text"
+                              style="width: 200px;"/>
 
 
 

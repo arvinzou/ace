@@ -6,6 +6,7 @@
     t.id,
     a.name author,
     t. name,
+    t.image,
     b. name category,
     t.intro,
     t.docText,

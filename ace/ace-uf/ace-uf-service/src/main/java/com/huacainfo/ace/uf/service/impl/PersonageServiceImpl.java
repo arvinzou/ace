@@ -36,6 +36,7 @@ public class PersonageServiceImpl implements PersonageService {
 
 	public PageResult<PersonageVo> findPersonageList(PersonageQVo condition, int start, int limit, String orderBy)
 			throws Exception {
+		condition.setCategory(this.getDictCodeBYId(condition.getCategory()));
 		PageResult<PersonageVo> rst = new PageResult<PersonageVo>();
 		List<PersonageVo> list = this.personageDao.findList(condition, start, start + limit, orderBy);
 		rst.setRows(list);
@@ -58,8 +59,9 @@ public class PersonageServiceImpl implements PersonageService {
 		if (CommonUtils.isBlank(o.getCategory())) {
 			return new MessageResponse(1, "类别不能为空！");
 		}
+		o.setCategory(this.getDictCodeBYId(o.getCategory()));
 		if (CommonUtils.isBlank(o.getCareerType())) {
-			return new MessageResponse(1, "职业类别不能为空！");
+			//return new MessageResponse(1, "职业类别不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getName())) {
 			return new MessageResponse(1, "姓名不能为空！");
@@ -101,10 +103,12 @@ public class PersonageServiceImpl implements PersonageService {
 			return new MessageResponse(1, "所属辖区不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getCategory())) {
+
 			return new MessageResponse(1, "类别不能为空！");
 		}
+		o.setCategory(this.getDictCodeBYId(o.getCategory()));
 		if (CommonUtils.isBlank(o.getCareerType())) {
-			return new MessageResponse(1, "职业类别不能为空！");
+			//return new MessageResponse(1, "职业类别不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getName())) {
 			return new MessageResponse(1, "姓名不能为空！");
@@ -183,7 +187,7 @@ public class PersonageServiceImpl implements PersonageService {
 					return new MessageResponse(1, "行" + i + ",类别不能为空！");
 				}
 				if (CommonUtils.isBlank(o.getCareerType())) {
-					return new MessageResponse(1, "行" + i + ",职业类别不能为空！");
+					//return new MessageResponse(1, "行" + i + ",职业类别不能为空！");
 				}
 				if (CommonUtils.isBlank(o.getName())) {
 					return new MessageResponse(1, "行" + i + ",姓名不能为空！");
@@ -308,5 +312,19 @@ public class PersonageServiceImpl implements PersonageService {
 	public List<CheckTree> selectPersonageCheckTreeList() throws Exception{
 		CheckTreeUtils commonTreeUtils = new CheckTreeUtils(this.personageDao.selectPersonageCheckTreeList());
 		return commonTreeUtils.getCheckTreeList("0");
+	}
+
+	private String getDictCodeBYId(String id){
+		if(CommonUtils.isBlank(id)){
+			return null;
+		}
+		Map<String,String> p=this.personageDao.selectDictCodeBYId( id);
+		if(CommonUtils.isNotEmpty(p)){
+			return p.get("code");
+		}
+		return id;
+	}
+	public int isExitPersonageByMobile(String mobile){
+		return this.personageDao.isExitPersonageByMobile(mobile);
 	}
 }

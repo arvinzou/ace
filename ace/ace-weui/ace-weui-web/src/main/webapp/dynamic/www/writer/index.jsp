@@ -66,6 +66,14 @@
       });
     </script>
 
-
+<style>
+    .weui-media-box__thumb2{
+        width:60px;
+        height:60px;
+        object-fit: cover;
+        margin-bottom:5px;
+        padding-bottom:5px;
+    }
+</style>
 </body>
 </html>

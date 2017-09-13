@@ -52,6 +52,7 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
+								appendUploadBtn("image");
 							    initSimditor($("textarea[name=docText]"),null);
 
 							}
@@ -87,6 +88,7 @@ show135Editor();
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
+								appendUploadBtn("image");
                                 var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
                                 var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
                                 loadText(gd.id);
@@ -197,6 +199,7 @@ function loadText(id) {
 		success : function(rst, textStatus) {
 
             $("textarea[name=docText]").val(rst.value.docText);
+            $("textarea[name=intro]").val(rst.value.intro);
             initSimditor($("textarea[name=docText]"),rst.value.docText);
             show135Editor();
 		},
@@ -207,7 +210,7 @@ function loadText(id) {
 }
 function show135Editor(){
     var url = 'http://www.135editor.com/';
-    window.open(url);
+    //window.open(url);
 }
 function setContent(data){
     $("textarea[name=docText]").val(data);

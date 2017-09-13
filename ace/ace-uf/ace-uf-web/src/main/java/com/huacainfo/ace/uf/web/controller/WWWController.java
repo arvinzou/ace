@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Random;
 import com.alibaba.dubbo.common.json.JSON;
 import com.huacainfo.ace.common.model.PageParam;
 import com.huacainfo.ace.common.model.WxUser;
@@ -32,6 +32,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.uf.model.Feedback;
 import com.huacainfo.ace.common.tools.HttpUtils;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/www/")
@@ -90,6 +91,7 @@ public class WWWController extends UfBaseController {
 	@ResponseBody
 	public  MessageResponse insertTaskCmcc(TaskCmcc o,String captcha) throws Exception{
 		o.setCreateUserId(this.getCurWxUser().getUnionId());
+		o.setMsg(o.getMsg()+"【武陵区委统战部】");
 		this.logger.info("{}",o);
 		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
 		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
@@ -339,6 +341,50 @@ public class WWWController extends UfBaseController {
 		}
 		CommonTreeUtils ctu=new CommonTreeUtils(list);
 		return ctu.getTreeList("0");
+	}
+	@RequestMapping(value = "/sendCmccByMobile.do")
+	@ResponseBody
+	public MessageResponse sendCmccByMobile(String mobile) throws Exception {
+		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+		String j_captcha_cmcc=this.getRandCode();
+		TaskCmcc o=new TaskCmcc();
+		if(CommonUtils.isBlank(mobile)){
+			return new MessageResponse(1,"手机号不能为空");
+		}
+		if(!CommonUtils.isValidMobile(mobile)){
+			return new MessageResponse(1,"手机号格式错误");
+		}
+		int t=this.personageService.isExitPersonageByMobile(mobile);
+		if(t==0){
+			return new MessageResponse(1,"非统战人士手机号或统战人士手机号信息错误。");
+		}
+		Map<String, Object> msg = new HashMap<String, Object>();
+		msg.put("taskName", "验证码" + mobile);
+		msg.put("msg", "本次提交验证码为" + j_captcha_cmcc + "，请及时输入。【武陵区委统战部】");
+		msg.put("tel", mobile + "," + mobile);
+		CommonBeanUtils.copyMap2Bean(o,msg);
+		redisTemplate.opsForValue().set(_3rd_session+"j_captcha_weui", j_captcha_cmcc);
+		return this.taskCmccService.insertTaskCmcc(o);
+	}
+	private String getRandCode() {
+		Random random = new Random();
+		String sRand = "";
+		for (int i = 0; i < 4; i++) {
+			String rand = String.valueOf(random.nextInt(10));
+			sRand += rand;
+		}
+		return sRand;
+	}
+	@RequestMapping(value = "/insertWWWTaskCmcc.do")
+	@ResponseBody
+	public  MessageResponse insertWWWTaskCmcc(String mobile,String j_captcha_cmcc) throws Exception{
+		Map<String, Object> msg = new HashMap<String, Object>();
+		msg.put("taskName", "验证码" + mobile);
+		msg.put("msg", "本次投票验证码为" + j_captcha_cmcc + "，请及时输入。【武陵区教育局】");
+		msg.put("tel", mobile + "," + mobile);
+		TaskCmcc o=new TaskCmcc();
+		CommonBeanUtils.copyMap2Bean(o,msg);
+		return this.taskCmccService.insertTaskCmcc(o);
 	}
 
 }

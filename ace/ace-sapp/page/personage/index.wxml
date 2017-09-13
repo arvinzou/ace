@@ -46,16 +46,14 @@
 
                 <navigator wx:if="{{o.href}}" url="../personageSub/index?id={{o.id}}" class="navigator" hover-class="weui-cell_active">
         <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-          <image wx:if="{{o.src.length>4}}" class="photo" bindload="imageLoad" data-index="{{ index }}" 
-style="width:{{ images[index].width }}rpx; height:{{ images[index].height }}rpx;" src="{{serverfile}}{{o.photo}}" />
-
-   <image wx:if="{{o.src.length>4}}" class="photo" src="../../image/tongzhanrs.png" />
+          <image wx:if="{{o.src.length>4}}" class="photo"mode="aspectFill"  src="{{serverfile}}{{o.src}}" />
+          <image wx:if="{{o.src.length<=4}}" class="photo"mode="aspectFill"  src="../../image/照片.png" />
         </view>
         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class=" title-strong-big2">{{o.text}}</view>
           <view style="flex-direction:column;">
             <view style="font-size:14px;">
-                 单位：{{o.icon}}
+                 单位及职务：{{o.icon}}
               </view>
               <view style="font-size:14px">
            民族：{{o.href}}
@@ -76,16 +74,15 @@ style="width:{{ images[index].width }}rpx; height:{{ images[index].height }}rpx;
 
                 <navigator wx:if="{{p.href}}" url="../personageSub/index?id={{p.id}}" class="navigator" hover-class="weui-cell_active">
         <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-          <image wx:if="{{p.src.length>4}}" class="photo" bindload="imageLoad" data-index="{{ index }}" 
-style="width:{{ images[index].width }}rpx; height:{{ images[index].height }}rpx;" src="{{serverfile}}{{p.photo}}" />
+          <image wx:if="{{p.src.length>4}}" class="photo"  mode="aspectFill" src="{{serverfile}}{{p.src}}" />
+          <image wx:if="{{p.src.length<=4}}" class="photo"mode="aspectFill"  src="../../image/照片.png" />
 
-   <image wx:if="{{p.src.length>4}}" class="photo" src="../../image/tongzhanrs.png" />
         </view>
         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class=" title-strong-big2">{{p.text}}</view>
           <view style="flex-direction:column;">
             <view style="font-size:14px;">
-                 单位：{{p.icon}}
+                 单位及职务：{{p.icon}}
               </view>
               <view style="font-size:14px">
            民族：{{p.href}}
@@ -106,16 +103,16 @@ style="width:{{ images[index].width }}rpx; height:{{ images[index].height }}rpx;
               <block wx:for-items="{{p.children}}" wx:for-item="m" wx:key="*item">
                 <navigator wx:if="{{m.href}}" url="../personageSub/index?id={{m.id}}" class="navigator" hover-class="weui-cell_active">
         <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-          <image wx:if="{{m.src.length>4}}" class="photo" bindload="imageLoad" data-index="{{ index }}" 
-style="width:{{ images[index].width }}rpx; height:{{ images[index].height }}rpx;" src="{{serverfile}}{{m.photo}}" />
+         
 
-   <image wx:if="{{m.src.length>4}}" class="photo" src="../../image/tongzhanrs.png" />
+   <image wx:if="{{m.src.length>4}}" class="photo" mode="aspectFill" src="{{serverfile}}{{m.src}}" />
+   <image wx:if="{{m.src.length<=4}}" class="photo"mode="aspectFill"  src="../../image/照片.png" />
         </view>
         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class=" title-strong-big2">{{m.text}}</view>
           <view style="flex-direction:column;">
             <view style="font-size:14px;">
-                 单位：{{m.icon}}
+                 单位及职务：{{m.icon}}
               </view>
               <view style="font-size:14px">
            民族：{{m.href}}
@@ -136,16 +133,16 @@ style="width:{{ images[index].width }}rpx; height:{{ images[index].height }}rpx;
 
                 <navigator wx:if="{{n.href}}" url="../personageSub/index?id={{n.id}}" class="navigator" hover-class="weui-cell_active">
         <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-          <image wx:if="{{n.src.length>4}}" class="photo" bindload="imageLoad" data-index="{{ index }}" 
-style="width:{{ images[index].width }}rpx; height:{{ images[index].height }}rpx;" src="{{serverfile}}{{n.photo}}" />
+          
 
-   <image wx:if="{{n.src.length>4}}" class="photo" src="../../image/tongzhanrs.png" />
+   <image wx:if="{{n.src.length>4}}" class="photo" mode="aspectFill" src="{{serverfile}}{{n.src}}" />
+   <image wx:if="{{n.src.length<=4}}" class="photo"mode="aspectFill"  src="../../image/照片.png" />
         </view>
         <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
           <view class=" title-strong-big2">{{n.text}}</view>
           <view style="flex-direction:column;">
             <view style="font-size:14px;">
-                 单位：{{n.icon}}
+                 单位及职务：{{n.icon}}
               </view>
               <view style="font-size:14px">
            民族：{{n.href}}
@@ -191,4 +188,5 @@ style="width:{{ images[index].width }}rpx; height:{{ images[index].height }}rpx;
       </block>
     </view>
   </view>
+  
 </view>

@@ -11,7 +11,9 @@ Page({
     interval: 5000,
     duration: 1000,
     scaleWidth: 0,//缩放后的宽 
-    scaleHeight: 0,//缩放后的高
+    scaleHeight: 0,
+    title: "单位主要职责",
+    showTel:false
   },
   onReady: function (res) {
     wx.setNavigationBarColor({
@@ -59,9 +61,21 @@ Page({
     }),
       util.request(cfg.selectDept, { id: options.id },
         function (data) {
+          var title="";
+          if(data.type=='1'){
+            title = "单位主要职责";
+          }else{
+            title = "单位介绍";
+          }
+          var showTel=false;
+          if (data.type == '1') {
+            showTel = true;
+          }
           that.setData({
             org: data,
-            config: cfg
+            showTel: showTel,
+            config: cfg,
+            title:title
           });
         }
       );
@@ -73,7 +87,7 @@ Page({
       that.setData({
         userLogin: false
       });
-      that.reg();
+     // that.reg();
     } else {
 
       if (o.role && (o.role == 'admin')) {
@@ -87,7 +101,7 @@ Page({
             userLogin: true
           });
         }else{
-          that.reg();
+          //that.reg();
         }
       }
     }

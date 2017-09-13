@@ -1,9 +1,11 @@
 /**
  * 小程序配置文件
  */
+
 // 此处主机域名是腾讯云解决方案分配的域名
 // 小程序后台服务解决方案：https://www.qcloud.com/solution/la
 var host = "14592619.qcloud.la";
+
 var server = "https://zx.huacainfo.com"
 var serverfile = "https://zx.huacainfo.com/"
 var config = {
@@ -52,7 +54,8 @@ var config = {
     findTaskCmccList: `${server}/uf/www/findTaskCmccList.do`,
     selectTaskCmccById: `${server}/uf/www/selectTaskCmccById.do`,
     selectFreeGroupTree: `${server}/uf/www/selectFreeGroupTree.do`,
-    selectPersonageTree: `${server}/uf/www/selectPersonageTree.do`
+    selectPersonageTree: `${server}/uf/www/selectPersonageTree.do`,
+    sendCmccByMobile: `${server}/uf/www/sendCmccByMobile.do`
     
 
 };

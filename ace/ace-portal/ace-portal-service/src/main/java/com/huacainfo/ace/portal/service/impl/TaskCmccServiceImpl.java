@@ -113,7 +113,7 @@ public class TaskCmccServiceImpl implements TaskCmccService, ThreadProcess {
 			return new MessageResponse(1, "短信不能为空！");
 		}
 		this.taskCmccMapper.insert(o);
-		return new MessageResponse(0, "添加短信任务完成！");
+		return new MessageResponse(0, "成功！");
 	}
 
 	public MessageResponse updateTaskCmcc(TaskCmcc o, UserProp userProp) throws Exception {
@@ -211,12 +211,11 @@ public class TaskCmccServiceImpl implements TaskCmccService, ThreadProcess {
 		params.put("sourceadd", sourceadd);
 		params.put("phone", o.getTel());
 		params.put("content", o.getMsg());
-		String qm = suffix;
 		String strSmsParam = null;
 		try {
 			strSmsParam = "reg=" + params.get("req") + "&pwd=" + params.get("pwd") + "&sourceadd="
 					+ params.get("sourceadd") + "&phone=" + params.get("phone") + "&content="
-					+ HttpSend.paraTo16(params.get("content") + qm);
+					+ HttpSend.paraTo16(params.get("content") );
 		} catch (UnsupportedEncodingException e) {
 			this.logger.error(e);
 		}

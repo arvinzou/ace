@@ -2,25 +2,19 @@ package com.huacainfo.ace.kernel.model;
 
 import java.util.Date;
 
-public class Writing implements java.io.Serializable{
-
+public class Article implements java.io.Serializable{
+    
     private static final long serialVersionUID = 1L;
+
     private String id;
+
+    private String title;
 
     private String name;
 
-    private String author;
+    private String url;
 
     private String category;
-
-    private Date dateOfPublication;
-
-    private String everPublished;
-
-    private Long reading;
-    private String image;
-
-    private String status;
 
     private String createUserId;
 
@@ -34,15 +28,20 @@ public class Writing implements java.io.Serializable{
 
     private Date lastModifyDate;
 
-    private String intro;
-
-    private String docText;
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     public String getName() {
@@ -53,52 +52,12 @@ public class Writing implements java.io.Serializable{
         this.name = name == null ? null : name.trim();
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author == null ? null : author.trim();
-    }
-
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category == null ? null : category.trim();
-    }
-
-    public Date getDateOfPublication() {
-        return dateOfPublication;
-    }
-
-    public void setDateOfPublication(Date dateOfPublication) {
-        this.dateOfPublication = dateOfPublication;
-    }
-
-    public String getEverPublished() {
-        return everPublished;
-    }
-
-    public void setEverPublished(String everPublished) {
-        this.everPublished = everPublished == null ? null : everPublished.trim();
-    }
-
-    public Long getReading() {
-        return reading;
-    }
-
-    public void setReading(Long reading) {
-        this.reading = reading;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
     }
 
     public String getCreateUserId() {
@@ -149,27 +108,11 @@ public class Writing implements java.io.Serializable{
         this.lastModifyDate = lastModifyDate;
     }
 
-    public String getIntro() {
-        return intro;
+    public String getUrl() {
+        return url;
     }
 
-    public void setIntro(String intro) {
-        this.intro = intro == null ? null : intro.trim();
-    }
-
-    public String getDocText() {
-        return docText;
-    }
-
-    public void setDocText(String docText) {
-        this.docText = docText == null ? null : docText.trim();
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

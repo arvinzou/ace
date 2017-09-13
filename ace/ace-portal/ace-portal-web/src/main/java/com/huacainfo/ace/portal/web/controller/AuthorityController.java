@@ -92,4 +92,22 @@ public class AuthorityController extends PortalBaseController{
 		this.wxCfgService.insertFormIds(list);
 		return this.authorityService.reg(wxUser);
 	}
+
+	@RequestMapping(value = "/getPhoneNumber.do")
+	@ResponseBody
+	public SingleResult<Map<String,String>> getPhoneNumber(String appid,String appsecret,String code,String encryptedData,String iv)throws Exception {
+		SingleResult<Map<String,String>> rst= this.authorityService.getPhoneNumber(appid,appsecret,code,encryptedData,iv);
+		return rst;
+	}
+	@RequestMapping(value = "/updateForExperienceUser.do")
+	@ResponseBody
+	public  MessageResponse updateForExperienceUser(String id) throws Exception{
+		return this.authorityService.updateForExperienceUser(id);
+	}
+
+	@RequestMapping(value = "/selectForExperienceUser.do")
+	@ResponseBody
+	public  SingleResult<WxUser> selectForExperienceUser(String id) throws Exception{
+		return this.authorityService.selectForExperienceUser(id);
+	}
 }

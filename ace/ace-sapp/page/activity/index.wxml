@@ -4,23 +4,24 @@
       <image class="t_image1" src="../../image/huodong-title.png"></image>
     </view>
     <view class="b2">
-      <view class="v1">展示统战部门活动，记录活动内容、参与人员、留言建议，让各界人士参政议政。</view>
+      <view class="v1">发布统战工作信息、展示统战工作风采、报道统战工作典型、提供建言献策平台
+。</view>
       <navigator open-type="navigate" url="../activitySec/index?category=1">
       <view class="btn1">
         <p class="p1">统战管理</p>
-        <p class="p2">统战职能部门的活动计划，活动内容，活动成果</p>
+        <p class="p2">区委、统战系统单位关于统战相关工作的研究、部署、安排和贯彻落实等工作动态的展示</p>
       </view>
       </navigator>
       <navigator open-type="navigate" url="../activitySec/index?category=2">
       <view class="btn2" bindtap="b">
         <p class="p1">同心行动</p>
-        <p class="p2">记录、展示非职能部门的活动内容</p>
+        <p class="p2">全区统一战线围绕全区经济社会发展的主题、主线和中心任务，开展的各类公益性活动</p>
       </view>
       </navigator>
       <navigator open-type="navigate" url="../feedback/index">
        <view class="btn3" bindtap="b">
         <p class="p1">建言献策</p>
-        <p class="p2">参政议政，提出政治见解</p>
+        <p class="p2">社会各界人士提出意见建议、反映社情民意的平台</p>
       </view>
       </navigator>
     </view>

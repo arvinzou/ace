@@ -45,5 +45,6 @@ public interface PersonageDao {
 
     List<Map<String,Object>> selectPersonageTreeList(@Param("q")String q,@Param("user")WxUser user);
     List<Map<String,Object>> selectPersonageCheckTreeList();
-
+    Map<String,String> selectDictCodeBYId(String id);
+    int isExitPersonageByMobile(@Param("mobile")String mobile);
 }

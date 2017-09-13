@@ -23,7 +23,7 @@ function loadText(name,start,limit) {
             $(rst.value).each(function(n,o){
                 html.push(' <a href="preview.jsp?id='+o.id+'" class="weui-media-box weui-media-box_appmsg">');
                 html.push(' <div class="weui-media-box__hd">');
-                html.push(' <img class="weui-media-box__thumb" src="'+fastdfs_server+o.photo+'" alt=""> ');
+                html.push(' <img class="weui-media-box__thumb2" src="'+fastdfs_server+o.photo+'" alt=""> ');
                 html.push(' </div>');
                 html.push(' <div class="weui-media-box__bd">');
                 html.push(' <h4 class="weui-media-box__title">'+o.name+'</h4>');

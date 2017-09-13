@@ -10,12 +10,19 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
+        <module name="ace-kernel-backend" />
+        <module name="ace-kernel-client" />
+        <module name="ace-kernel-service" />
+        <module name="ace-kernel-web" />
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />
         <module name="ace-uf-client" />
         <module name="ace-uf-service" />
         <module name="ace-uf-web" />
+        <module name="ace-weui-client" />
+        <module name="ace-weui-service" />
+        <module name="ace-weui-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

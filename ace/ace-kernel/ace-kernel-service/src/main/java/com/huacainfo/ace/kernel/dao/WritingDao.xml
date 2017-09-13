@@ -18,6 +18,7 @@
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
     <result column="intro" jdbcType="LONGVARCHAR" property="intro" />
     <result column="docText" jdbcType="LONGVARCHAR" property="docText" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.kernel.vo.WritingVo">
     <result column="authorName" jdbcType="VARCHAR" property="authorName" />
@@ -31,7 +32,7 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-    t.id, t.name, a.name author, t.category, t.dateOfPublication, t.everPublished, t.reading, t.status, t.createUserId,
+    t.id, t.name,t.image, a.name author, t.category, t.dateOfPublication, t.everPublished, t.reading, t.status, t.createUserId,
     t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.intro, t.docText
     from writing t left join writer a on t.author=a.id
     where t.id = #{id,jdbcType=VARCHAR}
@@ -46,13 +47,13 @@
       reading, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate, intro, 
-      docText)
+      docText,image)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
       #{category,jdbcType=VARCHAR}, #{dateOfPublication,jdbcType=DATE}, #{everPublished,jdbcType=VARCHAR}, 
       #{reading,jdbcType=BIGINT}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{intro,jdbcType=LONGVARCHAR}, 
-      #{docText,jdbcType=LONGVARCHAR})
+      #{docText,jdbcType=LONGVARCHAR},#{image,jdbcType=VARCHAR})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.kernel.model.Writing">
@@ -66,6 +67,7 @@
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      image=#{image,jdbcType=VARCHAR},
       intro = #{intro,jdbcType=LONGVARCHAR},
       docText = #{docText,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
@@ -87,7 +89,7 @@
   </select>
   <select id="findList" resultMap="BaseResultMapVo">
     select
-    t.id, t.name, t.author,a.name authorName, t.category, t.dateOfPublication, t.everPublished, t.reading, t.status, t.createUserId,
+    t.id, t.name,t.image, t.author,a.name authorName, t.category, t.dateOfPublication, t.everPublished, t.reading, t.status, t.createUserId,
     t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     <include refid="whereCondition" />
     <choose>

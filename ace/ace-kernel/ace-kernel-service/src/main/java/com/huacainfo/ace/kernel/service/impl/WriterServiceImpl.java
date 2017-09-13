@@ -57,7 +57,7 @@ public class WriterServiceImpl implements WriterService {
             return new MessageResponse(1, "性别不能为空！");
         }
         if (CommonUtils.isBlank(o.getBirthday())) {
-            return new MessageResponse(1, "出生日期不能为空！");
+            //return new MessageResponse(1, "出生日期不能为空！");
         }
         if (CommonUtils.isBlank(o.getPhoto())) {
             return new MessageResponse(1, "形象照片不能为空！");
@@ -67,7 +67,7 @@ public class WriterServiceImpl implements WriterService {
         }
 
         if (CommonUtils.isBlank(o.getDescri())) {
-            return new MessageResponse(1, "公开发表与获奖情况不能为空！");
+           // return new MessageResponse(1, "公开发表与获奖情况不能为空！");
         }
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "分类不能为空！");
@@ -104,7 +104,7 @@ public class WriterServiceImpl implements WriterService {
             return new MessageResponse(1, "性别不能为空！");
         }
         if (CommonUtils.isBlank(o.getBirthday())) {
-            return new MessageResponse(1, "出生日期不能为空！");
+           // return new MessageResponse(1, "出生日期不能为空！");
         }
         if (CommonUtils.isBlank(o.getPhoto())) {
             return new MessageResponse(1, "形象照片不能为空！");
@@ -113,7 +113,7 @@ public class WriterServiceImpl implements WriterService {
             return new MessageResponse(1, "个人简介不能为空！");
         }
         if (CommonUtils.isBlank(o.getDescri())) {
-            return new MessageResponse(1, "公开发表与获奖情况不能为空！");
+           // return new MessageResponse(1, "公开发表与获奖情况不能为空！");
         }
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "分类不能为空！");

@@ -62,10 +62,10 @@ public class WritingServiceImpl implements WritingService {
             return new MessageResponse(1, "发表日期不能为空！");
         }
         if (CommonUtils.isBlank(o.getEverPublished())) {
-            return new MessageResponse(1, "曾发表所在不能为空！");
+           // return new MessageResponse(1, "曾发表所在不能为空！");
         }
         if (CommonUtils.isBlank(o.getIntro())) {
-            return new MessageResponse(1, "简介不能为空！");
+            //return new MessageResponse(1, "简介不能为空！");
         }
         if (CommonUtils.isBlank(o.getDocText())) {
             return new MessageResponse(1, "正文不能为空！");
@@ -100,10 +100,10 @@ public class WritingServiceImpl implements WritingService {
             return new MessageResponse(1, "发表日期不能为空！");
         }
         if (CommonUtils.isBlank(o.getEverPublished())) {
-            return new MessageResponse(1, "曾发表所在不能为空！");
+            //return new MessageResponse(1, "曾发表所在不能为空！");
         }
         if (CommonUtils.isBlank(o.getIntro())) {
-            return new MessageResponse(1, "简介不能为空！");
+           // return new MessageResponse(1, "简介不能为空！");
         }
         if (CommonUtils.isBlank(o.getDocText())) {
 

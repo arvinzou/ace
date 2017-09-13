@@ -83,8 +83,8 @@
   margin: 0rpx auto;
   -webkit-appearance: none;
   -moz-appearance: none;
-  height: 88rpx;
-  line-height: 88rpx;
+  height: 120rpx;
+  line-height: 120rpx;
   width: 630rpx;
   border-radius: 10rpx;
   font-family: '微软雅黑';
@@ -102,8 +102,8 @@
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  height: 88rpx;
-  line-height: 88rpx;
+  height: 120rpx;
+  line-height: 120rpx;
   width: 630rpx;
   border-radius: 10rpx;
   font-family: '微软雅黑';
@@ -120,8 +120,8 @@
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  height: 88rpx;
-  line-height: 88rpx;
+  height: 120rpx;
+  line-height: 120rpx;
   width: 630rpx;
   border-radius: 10rpx;
   font-family: '微软雅黑';

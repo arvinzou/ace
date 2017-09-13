@@ -14,29 +14,17 @@ var id='${param.id}';
 </head>
 <body ontouchstart style="padding:5px">
 <a href="javascript:return false" class="weui-media-box weui-media-box_appmsg">
+    <div class="text-line"></div>
     <div class="weui-media-box__bd">
+
         <h4 class="weui-media-box__title" id="name"></h4>
         <p class="weui-media-box__desc"><span id="dateOfPublication"></span>  作者：<span id="author"></span>  阅读：<span id="reading"><span></p>
+
     </div>
 </a>
-<div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-          <div class="weui-media-box weui-media-box_text">
-            <h4 class="weui-media-box__title">简介</h4>
-            <p class="weui-media-box__desc" ></p>
-          </div>
-        </div>
-</div>
-<div id="intro" style="padding:12px">
-</div>
-<div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-          <div class="weui-media-box weui-media-box_text">
-            <h4 class="weui-media-box__title">正文</h4>
-            <p class="weui-media-box__desc" ></p>
-          </div>
-        </div>
-</div>
+
+
+
 <div id="docText" class="my-gallery" data-pswp-uid="1" style="padding:12px">
 </div>
 <!-- Root element of PhotoSwipe. Must have class pswp. -->
@@ -104,6 +92,15 @@ var id='${param.id}';
     </div>
 
 </div>
+<style>
+.swiper {
+  height: 160px;
+  object-fit: fill;
+  width: 100%;
+  margin:2px;
+  padding:5px;
+}
+</style>
 
 <link rel="stylesheet prefetch" href="${pageContext.request.contextPath}/content/common/photoview/photoswipe.css">
 <link rel="stylesheet prefetch" href="${pageContext.request.contextPath}/content/common/photoview/default-skin/default-skin.css">

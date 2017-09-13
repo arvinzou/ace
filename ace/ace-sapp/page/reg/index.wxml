@@ -48,7 +48,10 @@
         <view class="weui-flex__item-icon">
           <image class="iconList20" src="../../image/tel.png" />
         </view>
-        <input name="mobile" value="{{formData.mobile}}" type="number" class="weui-flex__item-body" maxlength="11" placeholder="电话" />
+
+        <input name="mobile" bindinput="bindinputMobile" value="{{formData.mobile}}" type="number" class="weui-flex__item-body" maxlength="11" placeholder="手机号" />
+
+        
       </view>
       <view class="kind-list-item weui-flex">
         <view class="weui-flex__item-icon">
@@ -60,8 +63,8 @@
         <view class="weui-flex__item-icon">
           <image class="iconList20" src="../../image/checkcode.png" />
         </view>
-        <input name="captcha" type="number" class="weui-flex__item-body" maxlength="10" placeholder="验证码" />
-        <image class="weui-vcode-img weui-flex__item-body" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width:90px;height:30px;text-align:right"></image>
+        <input name="captcha" type="number"  class="weui-flex__item-body" maxlength="10" placeholder="短信验证码" />
+        <button  size="mini" disabled="{{!stop}}" bindtap="getPhoneNumber" style="color:#fff;background-color:green; border-radius: 2px;margin-left:0px">{{btnName}}</button>
       </view>
 
      

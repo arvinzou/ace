@@ -41,19 +41,21 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
+		<!--<repository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
 			<url>http://211.139.191.248//nexus/content/groups/public</url>
-		</repository>
+		</repository>-->
 	</repositories>
 
 	<pluginRepositories>
+		<!--
 		<pluginRepository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
 			<url>http://211.139.191.248/nexus/content/groups/public</url>
 		</pluginRepository>
+		-->
 	</pluginRepositories>
 	<modules>
 		<module>ace-common</module>
@@ -62,16 +64,18 @@
 		<module>ace-portal</module>
 
 		<module>ace-uf</module>
-		<!--
+
                 <module>ace-kernel</module>
-                <module>ace-luohua</module>
+		<module>ace-weui</module>
 
-                <module>ace-weuiluohua</module>
-                <module>ace-operana</module>
+		<!-- <module>ace-luohua</module>
 
-                <module>ace-gesp</module>
+     <module>ace-weuiluohua</module>
+     <module>ace-operana</module>
 
-                -->
+     <module>ace-gesp</module>
+
+     -->
 
  		<module>ace-autocode</module>
 

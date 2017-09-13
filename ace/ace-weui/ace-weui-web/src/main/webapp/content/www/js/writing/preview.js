@@ -23,18 +23,18 @@ function loadText(id) {
 			$(rst.value).each(function(n, o) {
 				$.each(o, function(key, value) {
 
-					if (key == 'photo') {
+					if (key == 'image'&&value) {
 						var src = fastdfs_server + value;
 						var img = new Image();
 						$(img).attr("src", "");
-						$(img).css("width", "140");
-						$(img).css("height", "170");
+
 						//图片加载加载后执行
 						$(img).load(function() {
 							//图片默认隐藏
 							$(this).hide();
 							//移除小动画
 							$(".loading").removeClass("loading").append(this);
+							$(img).addClass("swiper");
 							//使用fadeIn特效
 							$(this).fadeIn("slow");
 						}).error(function() {

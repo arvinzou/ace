@@ -1,10 +1,9 @@
 <view class="index">
   <view class="weui-flex" style="background:#FFFFFF;">
-    <view class="weui-flex__item" style="text-align: center;">
+    <view class="weui-flex__item" style="text-align: center;justify-content: bottom;">
       <view wx:if="{{o.photo.length>0}}">
 
-        <image   bindload="imageLoad" 
-style="width:{{ images.width }}rpx; height:{{ images.height }}rpx;"  src="{{serverfile}}{{o.photo}}" bindtap="previewPhoto"/>
+        <image class="photo"  src="{{serverfile}}{{o.photo}}" bindtap="previewPhoto"/>
 
       </view>
       <view wx:if="{{!o.photo}}">
@@ -24,7 +23,7 @@ style="width:{{ images.width }}rpx; height:{{ images.height }}rpx;"  src="../../
           <view class="weui-form-preview__value">{{o.areaName}}</view>
         </view>
         <view class="weui-form-preview__item ">
-          <view class="weui-form-preview__label">单位</view>
+          <view class="weui-form-preview__label">单位及职务</view>
           <view class="weui-form-preview__value">{{o.deptName}}</view>
         </view>
         <view class="weui-form-preview__item ">

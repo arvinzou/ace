@@ -52,14 +52,14 @@
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
-        t.id, t.areaCode, t.deptId, t.category,t.careerType, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
+        t.id, t.areaCode, t.category,t.careerType, t.name, t.sex, t.birthday, t.photo, t.placeOfOrigin, t.nation,
         t.degreee, t.academicTitle, t.rank, t.party, t.joinDate, t.administrativeDuty, t.currentPostDate,
         t.currentRankDate, t.mobile, t.tel, t.pcode, t.latitude, t.longitude, t.remark, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-        t.intro,a.fullname areaName,b.department_name deptName,c.fullname placeOfOriginName,t.qrcode
+        t.intro,a.fullname areaName,t.deptId deptName,c.fullname placeOfOriginName,t.qrcode
         from personage t
         left join portal.province a on t.areaCode=a.code
-        left join portal.department b on t.deptId=b.department_id
+
         left join portal.province c on t.placeOfOrigin=c.code
 
         where t.id = #{id,jdbcType=VARCHAR}
@@ -140,7 +140,7 @@
             concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.category!=null and condition.category!=&quot;&quot;">
-            and t.category =#{condition.category,jdbcType=VARCHAR}
+            and t.category  like   concat(#{condition.category,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.mobile!=null and condition.mobile!=&quot;&quot;">
             and t.mobile =#{condition.mobile,jdbcType=VARCHAR}
@@ -198,8 +198,8 @@
         t.id 'id',
         t.name 'name',
         t.photo,
-        a.name areaName,b.department_name deptName,c.fullname placeOfOriginName,dict.name categoryName,
-        b.department_name addr,
+        a.name areaName,t.deptId deptName,c.fullname placeOfOriginName,dict.name categoryName,
+        t.deptId addr,
         wx.latitude,
         wx.longitude,
         t.mobile tel,
@@ -207,7 +207,7 @@
         (POWER(MOD(ABS(wx.longitude - #{longitude,jdbcType=DECIMAL}),360),2) + POWER(ABS(wx.latitude - #{latitude,jdbcType=DECIMAL}),2)) AS distance
         from personage t
         inner join portal.province a on t.areaCode=a.code
-        inner join portal.department b on t.deptId=b.department_id
+
         inner join portal.wx_user wx on t.mobile=wx.mobile
         inner join portal.province c on t.placeOfOrigin=c.code
         inner join (select code,name from portal.dict where category_id='98') dict on t.category=dict.code
@@ -260,13 +260,12 @@
 
     <select id="selectPersonageListByText" resultType="map">
         select t.id, t.name, t.category,t.photo, t.mobile,
-        a.name areaName,b.department_name deptName,c.fullname placeOfOriginName,dict.name categoryName,
+        a.name areaName,t.deptId deptName,c.fullname placeOfOriginName,dict.name categoryName,
         IFNULL(wx.mobile,'0') bindStatus,
         'person' type,
         t.party
         from personage t
         inner join portal.province a on t.areaCode=a.code
-        inner join portal.department b on t.deptId=b.department_id
         left join portal.province c on t.placeOfOrigin=c.code
         inner join (select code,name from portal.dict where category_id='98') dict on t.category=dict.code
         left join portal.wx_user wx on t.mobile=wx.mobile
@@ -286,7 +285,6 @@
         SELECT
         t.id,
         t.areaCode,
-        t.deptId,
         d.name categoryName,
         t.category,
         t. NAME 'name',
@@ -317,7 +315,7 @@
         t.remark,
         t.intro,
         a. NAME areaName,
-        b.department_name deptName,
+        t.deptId deptName,
         c.fullname placeOfOriginName,
         t.careerType,
         g.`name` careerTypeName,
@@ -330,7 +328,7 @@
         FROM
         personage t
         LEFT JOIN portal.province a ON t.areaCode = a. CODE
-        LEFT JOIN portal.department b ON t.deptId = b.department_id
+
         LEFT JOIN portal.province c ON t.placeOfOrigin = c. CODE
         LEFT JOIN (select code,name from portal.dict where category_id='98')  d ON t.category = d. CODE
         LEFT JOIN (select code,name from portal.dict where category_id='09')  e ON t.nation = e. CODE
@@ -430,7 +428,7 @@
         'closed' STATE,
         t.photo SRC,
         t.deptId ICON,
-        m. NAME HREF,
+        ifnull(m. NAME,'待补充') HREF,
         t.mobile ICONCLS,
         0 CHILD_COUNT
         FROM
@@ -567,5 +565,11 @@
 
         ORDER BY convert(t.name using gbk) asc
         ) b
+    </select>
+    <select id="selectDictCodeBYId" resultType="map">
+        select code from portal.dict where id=#{id}
+    </select>
+    <select id="isExitPersonageByMobile" resultType="int">
+        select count(1) from personage where mobile=#{mobile}
     </select>
 </mapper>

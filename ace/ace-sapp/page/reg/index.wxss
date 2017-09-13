@@ -94,4 +94,9 @@
 .userinfo-nickname {
   margin-top: 20rpx;
 }
+button {
+margin-top:0rpx;
+margin-bottom:0rpx;
+}
+
 

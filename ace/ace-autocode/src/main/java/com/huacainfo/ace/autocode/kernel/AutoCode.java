@@ -37,8 +37,8 @@ public class AutoCode {
 	 */
 
 	public static void main(String[] args) {
-		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("operana");
-		Class<?> c=com.huacainfo.ace.kernel.model.ActivityPhotos.class;
+		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("kernel");
+		Class<?> c=com.huacainfo.ace.kernel.model.Article.class;
 		autoCodeUtils.init(c);
 		try {
 			/*autoCodeUtils.createVO(c);
@@ -52,8 +52,9 @@ public class AutoCode {
 			autoCodeUtils.createJsConfig(c);
 			autoCodeUtils.createJsView(c);
 			autoCodeUtils.createModel(c);
-			autoCodeUtils.createJsController(c);
-			*/
+			autoCodeUtils.createJsController(c);*/
+			autoCodeUtils.createModel(c);
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -27,8 +27,11 @@ function loadText(id) {
                          var src = fastdfs_server + value;
                                 var img = new Image();
                                 $(img).attr("src", "");
-                                $(img).css("width", "170");
-                                $(img).css("height", "170");
+                                $(img).css("width", "150px");
+                                $(img).css("height", "150px");
+                                $(img).css("object-fit", "cover");
+
+
                                 //图片加载加载后执行
                                 $(img).load(function() {
                                     //图片默认隐藏

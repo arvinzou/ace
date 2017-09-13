@@ -1,5 +1,8 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
+var countdown = 30;
+var stop = true;
+var mobile="";
 Page({
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
@@ -21,11 +24,13 @@ Page({
     loading: false,
     disabled: false,
     disabledReg: true,
-    hasUserInfo:false,
-    tabActiveLeft:"tab-active",
-    tabActiveRight:"",
+    hasUserInfo: false,
+    tabActiveLeft: "tab-active",
+    tabActiveRight: "",
     id: util.uuid(),
-    formData:{}
+    formData: {},
+    stop: true,
+    btnName: "获取验证码"
   },
   onReady: function (res) {
     wx.setNavigationBarColor({
@@ -37,7 +42,7 @@ Page({
       }
     });
   },
-  tableft:function(e){
+  tableft: function (e) {
     this.setData({
       tabActiveLeft: "tab-active",
       tabActiveRight: "",
@@ -49,9 +54,9 @@ Page({
       tabActiveRight: "tab-active",
     })
   },
-  getUserInfo:function(e){
+  getUserInfo: function (e) {
     console.log(e);
-    var that=this;
+    var that = this;
     that.setData({
       loading: true,
       disabled: true
@@ -64,7 +69,7 @@ Page({
           success: function (o) {
             wx.getUserInfo({
               success: function (res) {
-                
+
                 wx.request({
                   url: cfg.loginUrl,
                   data: {
@@ -78,9 +83,11 @@ Page({
                   },
                   success: function (r) {
                     wx.setStorageSync('WX-SESSION-ID', r.data.value['3rd_session']);
-                  
-                   
+
+
                     that.setData({
+                      tabActiveLeft: "",
+                      tabActiveRight: "tab-active",
                       loading: false,
                       disabled: false,
                       userInfo: res.userInfo,
@@ -88,7 +95,10 @@ Page({
                       disabledReg: false,
                       WXSESSIONID: r.data.value['3rd_session']
                     });
-                    
+                    wx.showModal({
+                      title: '提示',
+                      content: '获取成功请绑定身份'
+                    })
                     console.log(res);
                     console.log(r.data.value['3rd_session']);
                   },
@@ -108,6 +118,53 @@ Page({
     this.setData({
       countryIndex: e.detail.value
     })
+  },
+  settime: function () {
+    var that = this;
+    var btnName = "获取验证码";
+    if (countdown == 0) {
+      btnName = "获取验证码";
+      countdown = 30;
+      stop = true;
+    } else {
+      stop = false;
+      btnName = "重新发送 " + countdown + "";
+      countdown--;
+    }
+    that.setData({
+      countdown: countdown,
+      btnName: btnName,
+      stop: stop
+    })
+    if (!stop) {
+      setTimeout(function () {
+        that.settime()
+      }, 1000)
+    }
+
+  },
+  getPhoneNumber: function (e) {
+    console.log(e);
+    var that = this;
+    that.sendCmccByMobile();
+    that.settime();
+  },
+  bindinputMobile: function (e) {
+    console.log(e);
+    mobile = e.detail.value;
+  },
+  sendCmccByMobile: function () {
+    util.request(cfg.sendCmccByMobile, { mobile: mobile },
+      function (data) {
+        wx.showModal({
+          title: '提示',
+          content: data.errorMessage,
+          success: function (res) {
+
+          }
+        })
+      }
+    );
   },
   formSubmit: function (e) {
     console.log(e);
@@ -134,7 +191,7 @@ Page({
             title: '提示',
             content: '绑定成功',
             success: function (res) {
-                that.navigator(that.data.redirectTo);
+              that.navigator(that.data.redirectTo);
             }
           })
         } else {

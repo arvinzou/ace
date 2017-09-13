@@ -32,4 +32,6 @@ public interface PersonageService {
 
 	public  List<Tree>  selectPersonageTreeList(String q,WxUser user) throws Exception;
 	public  List<CheckTree>  selectPersonageCheckTreeList() throws Exception;
+
+	public int isExitPersonageByMobile(String mobile);
 }
