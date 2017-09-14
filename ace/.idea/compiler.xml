@@ -14,6 +14,9 @@
         <module name="ace-kernel-client" />
         <module name="ace-kernel-service" />
         <module name="ace-kernel-web" />
+        <module name="ace-operana-client" />
+        <module name="ace-operana-service" />
+        <module name="ace-operana-web" />
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />

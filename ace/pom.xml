@@ -71,11 +71,12 @@
 		<!-- <module>ace-luohua</module>
 
      <module>ace-weuiluohua</module>
-     <module>ace-operana</module>
+
 
      <module>ace-gesp</module>
 
      -->
+		<module>ace-operana</module>
 
  		<module>ace-autocode</module>
 

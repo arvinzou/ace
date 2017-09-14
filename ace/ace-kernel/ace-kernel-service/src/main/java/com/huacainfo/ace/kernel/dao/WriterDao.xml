@@ -113,14 +113,15 @@
   </select>
 
   <select id="selectAuthor" resultType="map">
-    select t.id,
+    select t.id,a.name category,
     t.name,
     t.sex
-    from writer t  where 0=0
+    from writer t left join (select code,name from portal.dict where category_id='83') a on t.category=a.code
+    where 0=0
 
     <if test='params.q !=null and params.q!=""'>
       and (t.id=#{params.q} or t.name like
-      concat('%',#{params.q},'%'))
+      concat('%',#{params.q},'%') or t.pcode like concat(#{params.q},'%'))
     </if>
     order by t.createDate
     limit 0,20

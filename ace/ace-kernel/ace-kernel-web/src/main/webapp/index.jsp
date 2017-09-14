@@ -72,7 +72,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-green-sharp">
-                            <span data-counter="counterup" data-value="" id="writer">7800</span>
+                            <span data-counter="counterup" data-value="" id="writer">0</span>
                             <small class="font-green-sharp">人</small>
                         </h3>
                         <small>作家</small>
@@ -99,7 +99,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-red-haze">
-                            <span data-counter="counterup" data-value="0" id="writing">1349</span>
+                            <span data-counter="counterup" data-value="0" id="writing">0</span>
                         </h3>
                         <small>作品</small>
                     </div>

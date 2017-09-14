@@ -12,6 +12,5 @@
       and category =#{condition.category,jdbcType=VARCHAR}
     </if>
     ORDER BY pcode
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
   </select>
 </mapper>

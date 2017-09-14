@@ -37,7 +37,7 @@
         from meeting t
         left join portal.users a on t.owner=a.user_id
         left join portal.department b on t.division=b.department_id
-        where id = #{id,jdbcType=VARCHAR}
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         update meeting set status='3'

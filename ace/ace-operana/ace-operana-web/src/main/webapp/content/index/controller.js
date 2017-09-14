@@ -1171,5 +1171,5 @@ function chart2() {
 	});
 }
 function myTask(){
-    parent.addPanel("任务执行", contextPath+"/dynamic/service/tpaUserTask/index.jsp", true);
+    parent.addPanel("任务执行", contextPath+"/dynamic/service/myTask/index.jsp", true);
 }

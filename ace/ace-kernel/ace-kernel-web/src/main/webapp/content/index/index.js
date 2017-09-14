@@ -2,7 +2,7 @@
 jQuery(function($) {
 			initNoticeTopList1();
 			initNoticeTopList2();
-			launchExample();
+			chart3();
 			
 			$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 				_title: function(title) {
