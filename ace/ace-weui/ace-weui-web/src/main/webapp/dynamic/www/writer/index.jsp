@@ -84,7 +84,7 @@ pageEncoding="utf-8"%>
     padding-left: 1.5rem;
 }
 .sliderNav>li>a{
-    font-size: 1rem;
+    font-size: 16px;
     color: #18a2ff;
 }
 .slider-content{
@@ -92,7 +92,7 @@ pageEncoding="utf-8"%>
     width: 100%;
 }
 .slider-content>div{
-    font-size: 20px;
+    font-size: 16px;
     padding-left: 1.5rem;
     height: 50px;
     line-height: 50px;

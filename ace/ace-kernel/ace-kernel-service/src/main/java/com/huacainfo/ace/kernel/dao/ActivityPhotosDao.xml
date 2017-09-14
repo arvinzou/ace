@@ -59,7 +59,6 @@
       category = #{category,jdbcType=VARCHAR},
       activityDate = #{activityDate,jdbcType=DATE},
       status = #{status,jdbcType=CHAR},
-      reading = #{reading,jdbcType=BIGINT},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
