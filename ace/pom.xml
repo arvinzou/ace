@@ -41,21 +41,21 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<!--<repository>
+		<repository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
-			<url>http://211.139.191.248//nexus/content/groups/public</url>
-		</repository>-->
+			<url>http://zx.huacainfo.com/nexus/content/groups/public</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
-		<!--
+
 		<pluginRepository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
-			<url>http://211.139.191.248/nexus/content/groups/public</url>
+			<url>http://zx.huacainfo.com/nexus/content/groups/public</url>
 		</pluginRepository>
-		-->
+
 	</pluginRepositories>
 	<modules>
 		<module>ace-common</module>
