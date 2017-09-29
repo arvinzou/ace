@@ -85,10 +85,10 @@ public interface SystemDao {
 			@Param("userId") String userId);
 
 	public abstract List<Map<String, String>> selectDepartment(
-			@Param("params") Map<String, String> params);
+			@Param("params") Map<String, String> params,@Param("syid") String syid);
 
 	public abstract List<Map<String, String>> selectUsers(
-			@Param("params") Map<String, Object> params);
+			@Param("params") Map<String, Object> params,@Param("syid") String syid);
 
 	/**
 	 * @description: 根据Email获取用户基本信息
@@ -102,7 +102,7 @@ public interface SystemDao {
 	public abstract Users selectUsersByEmail(@Param("email") String email);
 
 	public abstract List<Map<String, Object>> selectDepartmentTreeList(
-			@Param("pid") String pid);
+			@Param("pid") String pid,@Param("syid") String syid);
 
 	public List<Config> loadConfig(String syid);
 

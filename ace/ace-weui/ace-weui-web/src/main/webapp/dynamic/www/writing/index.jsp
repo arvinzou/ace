@@ -6,7 +6,7 @@ pageEncoding="utf-8"%>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>作品列表</title>
+    <title>常德优秀文艺作品展</title>
     <jsp:include page="../../common/common-www.jsp" />
 </head>
 <script>
@@ -34,6 +34,9 @@ var author='${param.id}';
         </label>
     </form>
     <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+</div>
+<div class="topdiv">
+    本“作品库”由常德本土纯文艺微信公众号《走向》收集、整理和维护，联系邮箱：cdwyxzx@163.com
 </div>
 <div class="weui-panel__bd" style="background-color: #F8F8F8">
 </div>
@@ -103,6 +106,16 @@ var author='${param.id}';
 
 .index-bd {
   padding: 0 5px 5rpx;
+}
+
+p{
+    text-indent:35px;
+    font-size:14px;
+}
+.topdiv{
+width: 100%; padding: 5px ;
+ font-size: 12px;
+ color: #999;
 }
 </style>
 

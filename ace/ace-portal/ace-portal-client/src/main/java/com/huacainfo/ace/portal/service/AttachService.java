@@ -11,7 +11,7 @@ public interface AttachService {
 	/**
 	 * 
 	    * @Title:findAttachList 
-	    * @Description:  TODO(附件分页查询) 
+	    * @Description:  附件分页查询
 	 		* @param:        @param condition
 	 		* @param:        @return
 	 		* @param:        @throws Exception    
@@ -24,7 +24,7 @@ public interface AttachService {
 	/**
 	 * 
 	    * @Title:deleteAttachByFileName 
-	    * @Description:  TODO(附件删除) 
+	    * @Description:  附件删除
 	 		* @param:        @param id
 	 		* @param:        @param userProp
 	 		* @param:        @return
@@ -38,7 +38,7 @@ public interface AttachService {
 	/**
 	 * 
 	    * @Title:upload 
-	    * @Description:  TODO(附件文件信息保存) 
+	    * @Description:  附件文件信息保存
 	 		* @param:        @param file
 	 		* @param:        @param noticeId
 	 		* @param:        @param userProp

@@ -235,7 +235,7 @@
 		a.name AREANAME
 		from DEPARTMENT t left join province a
 		on t.parent_department_id =
-		a.code where 0=0
+		a.code where t.syid=#{syid}
 		<if test='params.q !=null and params.q!=""'>
 			and (t.department_id=#{params.q} or t.department_name like
 			concat('%',#{params.q},'%'))
@@ -252,7 +252,7 @@
 		t.MOBILE
 		from users t left join department a
 		on t.department_id =
-		a.department_id where 0=0
+		a.department_id where a.syid=#{syid}
 		<if test='params.departmentId !=null and params.departmentId!=""'>
 			and t.department_id=#{params.departmentId}
 		</if>
@@ -300,9 +300,9 @@
 		department
 		WHERE
 		department.parent_department_id = t.department_id and
-		department.status='1') CHILD_COUNT
+		department.status='1' and department.syid=#{syid}) CHILD_COUNT
 		FROM
-		department t where t.status='1'
+		department t where t.status='1' and t.syid=#{syid}
 		and (t.department_id =#{pid} or t.parent_department_id=#{pid})
 
 		ORDER BY

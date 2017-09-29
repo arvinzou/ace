@@ -221,7 +221,7 @@ Page({
   },
   navigator: function (url) {
     console.log(url)
-    wx.reLaunch({
+    wx.navigateTo({
       url: url
     });
   },

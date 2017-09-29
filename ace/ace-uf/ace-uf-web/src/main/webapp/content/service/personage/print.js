@@ -52,23 +52,16 @@ function loadView(params) {
 				html.push("<td>");
 				html.push(new Date(o.birthday).pattern("yyyy-MM"));
 				html.push("</td>");
-				html.push("<td>");
-				html.push(new Date(o.joinDate).pattern("yyyy-MM"));
-				html.push("</td>");
+
 				html.push("<td>");
 				html.push(rsd(o.degreee, '10'));
 				html.push("</td>");
 				html.push("<td>");
-				html.push(o.deptName + o.administrativeDuty
-						+ rsd(o.academicTitle, '99'));
-				html.push("</td>");
-				html.push("<td>");
-				html.push(new Date(o.currentPostDate).pattern("yyyy-MM-dd"));
+				html.push(o.deptId);
 				html.push("</td>");
 
-				html.push("<td>");
-				html.push(o.administrativeDuty);
-				html.push("</td>");
+
+	;
 				html.push("<td>");
 				html.push(o.mobile);
 				html.push("</td>");

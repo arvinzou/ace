@@ -65,6 +65,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		o.setRegDate(new Date());
 		o.setCreateTime(new Date());
 		o.setStatus("1");
+		o.setSyid(userProp.getActiveSyId());
 		if (CommonUtils.isBlank(o.getParentDepartmentId())) {
 			return new MessageResponse(1, "所属协会不能为空！");
 		}
@@ -205,10 +206,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 		return rst;
 	}
 
-	public List<Tree> selectDepartmentTreeList(String id) throws Exception {
+	public List<Tree> selectDepartmentTreeList(String id,String syid) throws Exception {
 
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
-				this.departmentDao.selectDepartmentTreeList( id));
+				this.departmentDao.selectDepartmentTreeList(id,syid));
 		return commonTreeUtils.getTreeList(id);
 	}
 
@@ -261,6 +262,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 			o.setCreateTime(new Date());
 			o.setCreateUserId(userProp.getUserId());
 			o.setStatus("1");
+			o.setSyid(userProp.getActiveSyId());
 			this.logger.info(o.toString());
 			if (CommonUtils.isBlank(o.getDepartmentId())) {
 				return new MessageResponse(1,"行"+i+ ",部门编号不能为空！");

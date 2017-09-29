@@ -893,7 +893,7 @@ function viewNorm(meetingId,topicId,title) {
                     btn.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
                     btn.push('<a data-rel="tooltip" data-placement="top" title="编辑不良现象明细数据" class="blue" href="javascript:dataSetting3(\'' + meetingId+ '\',\'' + topicId+ '\',\'' + data.id+ '\',\''+ title + '\')"><i class="ace-icon fa fa-plus-circle bigger-130"></i></a>');
                     btn.push('<a data-rel="tooltip" data-placement="top" title="预览" class="blue" href="javascript:previewChart(\'' + meetingId+ '\',\'' + topicId+ '\',\''+ data.id + '\')"><i class="ace-icon fa fa-play bigger-130"></i></a>');
-                    btn.push('<a data-rel="tooltip" data-placement="top" title="任务" class="blue" href="javascript:previewTpa(\'' + meetingId+ '\',\'' + topicId+ '\',\''+ data.id + '\')"><i class="ace-icon fa fa-play bigger-130"></i></a>');
+                    btn.push('<a data-rel="tooltip" data-placement="top" title="任务" class="blue" href="javascript:previewTpa(\'' + meetingId+ '\',\'' + topicId+ '\',\''+ data.id + '\')"><i class="ace-icon fa fa-tasks bigger-130"></i></a>');
                     btn.push('</div>');
 
                     $(row).children('td').eq(3).html(btn.join(''));

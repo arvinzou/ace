@@ -22,7 +22,11 @@ function loadText(id) {
             var c=0;
             $(rst.value).each(function(n,o){
                 $.each(o, function(key, value) {
+                    if(key=='name'){
+                        $("#"+key).html(value);
+                        $("title").html(" 常德文艺人才名录【"+value+"】");
 
+                    }
                     if(key=='photo'){
                          var src = fastdfs_server + value;
                                 var img = new Image();

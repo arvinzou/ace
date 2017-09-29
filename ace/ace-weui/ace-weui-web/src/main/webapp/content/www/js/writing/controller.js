@@ -33,7 +33,7 @@ function loadText(name,author,start,limit) {
                             html.push('<a href="preview.jsp?id='+o.id+'" class="weui-media-box weui-media-box_appmsg">');
                               html.push('<div style="flex-direction:column;">');
                               if(o.image){
-                               // html.push('<image src="'+fastdfs_server+o.image+'" class="swiper"/>');
+                                html.push('<image src="'+fastdfs_server+o.image+'" class="swiper"/>');
                               }
 
                                 html.push('<div class="text-line"></div>');

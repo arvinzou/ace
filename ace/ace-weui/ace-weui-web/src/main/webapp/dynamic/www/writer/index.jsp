@@ -6,7 +6,7 @@ pageEncoding="utf-8"%>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>作家</title>
+    <title>常德文艺人才名录</title>
     <jsp:include page="../../common/common-www.jsp" />
     <script>
             var category='${param.category}';
@@ -35,7 +35,9 @@ pageEncoding="utf-8"%>
     <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
 </div>
 
-
+<div class="topdiv">
+    本“名录”由常德本土纯文艺微信公众号《走向》收集、整理和维护，联系邮箱：cdwyxzx@163.com
+</div>
 <div class="slider" id="slider">
     <div class="slider-content" id="sliderContent"></div>
     <ul class="sliderNav" id="sliderNav"></ul>
@@ -71,12 +73,11 @@ pageEncoding="utf-8"%>
         margin-bottom:5px;
         padding-bottom:5px;
     }
-
-    a,ul,li{
+a,ul,li{
     list-style: none;
     text-decoration: none;
 }
-.slider{width: 100%;height: 100%;position: relative ; padding-top: 1.5rem }
+.slider{width: 100%;height: 100%;position: relative ; padding-top: 5px }
 .sliderNav{width: 10%;position: fixed;right: 0;height: 100%;text-align: center;top: 1.5rem;}
 .slider>h2{
     font-size: 2rem;
@@ -110,7 +111,11 @@ pageEncoding="utf-8"%>
 }
 .slider-content>ul>li{
 }
-
+.topdiv{
+width: 100%; padding: 5px ;
+ font-size: 12px;
+ color: #999;
+}
 </style>
 </body>
 </html>

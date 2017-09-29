@@ -168,18 +168,18 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 		return new MessageResponse(0, "密码修改完成！");
 	}
 
-	public Map<String, Object> selectDepartment(Map<String, String> params) {
+	public Map<String, Object> selectDepartment(Map<String, String> params,String syid) {
 		Map<String, Object> rst = new HashMap<String, Object>();
 		List<Map<String, String>> list = this.systemDao
-				.selectDepartment(params);
+				.selectDepartment(params,syid);
 		rst.put("total", list.size());
 		rst.put("rows", list);
 		return rst;
 	}
 
-	public Map<String, Object> selectUsers(Map<String, Object> params) {
+	public Map<String, Object> selectUsers(Map<String, Object> params,String syid) {
 		Map<String, Object> rst = new HashMap<String, Object>();
-		List<Map<String, String>> list = this.systemDao.selectUsers(params);
+		List<Map<String, String>> list = this.systemDao.selectUsers(params,syid);
 		rst.put("total", list.size());
 		rst.put("rows", list);
 		return rst;
@@ -224,9 +224,9 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 		return new MessageResponse(0, "密码已重新设置，请查收 " + email);
 	}
 
-	public List<Tree> selectDepartmentTreeList(String id) {
+	public List<Tree> selectDepartmentTreeList(String id,String syid) {
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
-				this.systemDao.selectDepartmentTreeList(id));
+				this.systemDao.selectDepartmentTreeList(id,syid));
 		return commonTreeUtils.getTreeListCaseSelf(id);
 	}
 

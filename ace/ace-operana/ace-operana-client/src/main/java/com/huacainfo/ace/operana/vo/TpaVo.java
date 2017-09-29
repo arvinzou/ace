@@ -13,6 +13,8 @@ public class TpaVo extends Tpa {
 	private String topicName;
 	private String normName;
 
+	private String deptName;
+
 	public String getUserName() {
 		return userName;
 	}
@@ -43,5 +45,13 @@ public class TpaVo extends Tpa {
 
 	public void setNormName(String normName) {
 		this.normName = normName;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 }

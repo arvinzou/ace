@@ -37,7 +37,7 @@
       <block wx:for-items="{{list}}" wx:key="{{item.id}}">
         <view class="{{item.state=='open' ? 'kind-list-item-open' : 'kind-list-item'}}">
           <view id="{{item.id}}" class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
-            <view class="kind-list-text">{{item.text}}【{{item.iconCls}}人】</view>
+            <view class="kind-list-text bold">{{item.text}}【{{item.iconCls}}人】</view>
             <image class="kind-list-img" src="../../image/{{item.state=='open' ? 'open-icon' : 'close-icon'}}.png"></image>
           </view>
           <view class="kind-list-item-bd {{item.state=='open' ? 'kind-list-item-bd-show' : ''}}">

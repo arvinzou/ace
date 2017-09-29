@@ -59,6 +59,7 @@ public class DepartmentController extends PortalBaseController {
 		if(CommonUtils.isBlank(condition.getParentDepartmentId())){
 			condition.setParentDepartmentId(this.getCurUserProp().getCorpId());
 		}
+		condition.setSyid(this.getCurUserProp().getActiveSyId());
 		rst = this.departmentService.findDepartmentList(condition,
 				page.getStart(), page.getLimit(), page.getOrderBy());
 		if (rst.getTotal() == 0) {
@@ -163,7 +164,7 @@ public class DepartmentController extends PortalBaseController {
 		if(CommonUtils.isBlank(id)){
 			id=this.getCurUserProp().getCorpId();
 		}
-		List<Tree> list = this.departmentService.selectDepartmentTreeList(id);
+		List<Tree> list = this.departmentService.selectDepartmentTreeList(id,this.getCurUserProp().getActiveSyId());
 		return list;
 	}
 	/**

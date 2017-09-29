@@ -889,7 +889,7 @@ function viewNorm(meetingId, topicId, title) {
 											+ topicId
 											+ '\',\''
 											+ data.id
-											+ '\')"><i class="ace-icon fa fa-play bigger-130"></i></a>');
+											+ '\')"><i class="ace-icon fa fa-tasks bigger-130"></i></a>');
 							btn.push('</div>');
 
 							$(row).children('td').eq(3).html(btn.join(''));

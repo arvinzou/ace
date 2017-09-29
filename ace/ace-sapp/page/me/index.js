@@ -2,15 +2,30 @@ var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 var app = getApp()
 Page({
-  data: {
-    flag: false,
-    latitude: 29.031673,
-    longitude: 111.698497
+  onReady: function (res) {
+    wx.setNavigationBarColor({
+      frontColor: cfg.frontColor,
+      backgroundColor: cfg.backgroundColor,
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    });
   },
-  a: function () {
-    this.setData({ flag: false })
+  onLoad: function () {
+    this.getUserInfo();
   },
-  b: function () {
-    this.setData({ flag: true })
+  getUserInfo:function () {
+    var that=this;
+    wx.getUserInfo({
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          hasUserInfo: true,
+          userInfo: res.userInfo
+        })
+        that.update()
+      }
+    })
   }
 })

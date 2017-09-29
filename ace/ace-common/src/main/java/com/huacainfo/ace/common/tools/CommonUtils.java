@@ -853,5 +853,6 @@ public class CommonUtils extends StringUtils {
     public static void main(String args[]){
         System.out.println(CommonUtils.getPrettyNumber("8711.1900"));
 
+
     }
 }

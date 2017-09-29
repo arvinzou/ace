@@ -115,7 +115,7 @@ Page({
     );
   },
   navigator: function (url) {
-    wx.redirectTo({
+    wx.navigateTo({
       url: url
     });
   },

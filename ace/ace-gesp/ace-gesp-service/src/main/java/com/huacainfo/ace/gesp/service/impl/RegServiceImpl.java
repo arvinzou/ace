@@ -611,7 +611,7 @@ public class RegServiceImpl implements RegService {
 		params.put("JingYingXuKeZhengHao", "");
 		params.put("submit", "");
 		try {
-			String httpPost = HttpUtils.httpPost(ph_url, params, 10000, 10000, "gb2312");
+			String httpPost = null;
 			Document doc = Jsoup.parse(httpPost);
 			Elements trs = doc.select("table[bordercolorlight='#777777'] tr[class='td2']");
 			if (trs != null && trs.size() > 0)// 找到
@@ -733,7 +733,7 @@ public class RegServiceImpl implements RegService {
 		params.put("DiZhi", "");
 		params.put("submit", "");
 		try {
-			String httpPost = HttpUtils.httpPost(ph_url, params, 10000, 10000, "gb2312");
+			String httpPost = null;
 			Document doc = Jsoup.parse(httpPost);
 			Elements trs = doc.select("table[bordercolorlight='#777777'] tr[class='td2']");
 			if (trs != null && trs.size() > 0)// 找到

@@ -1,12 +1,30 @@
+
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+pageEncoding="utf-8"%>
+
+<%@page import="com.huacainfo.ace.weui.service.*"%>
+<%@page import="com.huacainfo.ace.common.result.ListResult"%>
+<%@ page import="java.util.*"%>
+<%
+javax.servlet.ServletContext servletContext = request.getSession()
+.getServletContext();
+org.springframework.web.context.WebApplicationContext webApplicationContext = org.springframework.web.context.support.WebApplicationContextUtils
+.getRequiredWebApplicationContext(servletContext);
+
+AnalysisService analysisService = (AnalysisService) webApplicationContext
+.getBean("analysisService");
+Map<String,Object> params=new HashMap<String,Object>();
+params.put("id",request.getParameter("id"));
+ListResult rst=analysisService.query(params,"loadWriter",1,1);
+request.setAttribute("o", rst.getValue().get(0));
+%>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<title>作家</title>
+<title>常德文艺人才名录【${o.name}】</title>
 <jsp:include page="../../common/common-www.jsp" />
 <script>
 var id='${param.id}';

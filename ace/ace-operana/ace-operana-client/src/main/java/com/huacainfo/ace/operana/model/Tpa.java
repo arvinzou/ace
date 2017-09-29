@@ -22,6 +22,8 @@ public class Tpa implements java.io.Serializable {
 
     private String liable;
 
+    private String deptId;
+
     private String status;
 
     private String createUserId;
@@ -162,5 +164,13 @@ public class Tpa implements java.io.Serializable {
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 }

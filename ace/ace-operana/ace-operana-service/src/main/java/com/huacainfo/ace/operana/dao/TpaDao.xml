@@ -11,6 +11,7 @@
     <result column="probAnsys" jdbcType="VARCHAR" property="probAnsys" />
     <result column="actions" jdbcType="VARCHAR" property="actions" />
     <result column="liable" jdbcType="VARCHAR" property="liable" />
+    <result column="deptId" jdbcType="VARCHAR" property="deptId" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
     <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
@@ -23,7 +24,7 @@
 
   </resultMap>
   <sql id="Base_Column_List">
-    id, meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable,
+    id, meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable,deptId,
     status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
     lastModifyDate
   </sql>
@@ -40,13 +41,13 @@
   <insert id="insert" parameterType="com.huacainfo.ace.operana.model.Tpa">
     insert into tpa (id, meetingId, topicId,
       normId, productId, probDiscri,
-      probAnsys, actions, liable,
+      probAnsys, actions, liable,deptId,
       status, createUserId, createUserName,
       createDate, lastModifyUserId, lastModifyUserName,
       lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{meetingId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR},
       #{normId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{probDiscri,jdbcType=VARCHAR},
-      #{probAnsys,jdbcType=VARCHAR}, #{actions,jdbcType=VARCHAR}, #{liable,jdbcType=VARCHAR},
+      #{probAnsys,jdbcType=VARCHAR}, #{actions,jdbcType=VARCHAR}, #{liable,jdbcType=VARCHAR},#{deptId,jdbcType=VARCHAR},
       #{status,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
       #{lastModifyDate,jdbcType=TIMESTAMP})
@@ -62,6 +63,7 @@
       probAnsys = #{probAnsys,jdbcType=VARCHAR},
       actions = #{actions,jdbcType=VARCHAR},
       liable = #{liable,jdbcType=VARCHAR},
+      deptId = #{deptId,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
@@ -73,9 +75,10 @@
   <sql id="whereCondition">
     from (select meetingId, topicId, normId,productId, name,${orderBy} from norm_detail  where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
     and  normId=#{condition.normId}) t left join (select meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable,
-    status,lastModifyDate,id from tpa where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
+    status,lastModifyDate,id,deptId from tpa where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
     and  normId=#{condition.normId})a on (t.meetingId=a.meetingId and t.topicId=a.topicId and t.normId=a.normId and t.name=a.probDiscri)
     left join portal.users b on a.liable=b.user_id
+    left join portal.department c on a.deptId=c.department_id
   </sql>
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
@@ -85,7 +88,7 @@
 
     select
     t.meetingId, t.topicId, t.normId, ifnull(a.productId,t.productId) productId, t.name probDiscri, a.probAnsys, a.actions, a.liable,
-    a.status,t.${orderBy},ifnull(b.name,'') userName,a.lastModifyDate,a.id
+    a.status,t.${orderBy},ifnull(b.name,'') userName,a.lastModifyDate,a.id,ifnull(c.department_name,'') deptName
     <include refid="whereCondition"/>
     <choose>
       <when test='orderBy!=null and orderBy!=""'>

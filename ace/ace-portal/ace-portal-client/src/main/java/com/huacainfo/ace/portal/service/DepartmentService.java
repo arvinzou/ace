@@ -96,7 +96,7 @@ public interface DepartmentService {
 	    * @author: chenxiaoke 
 	    * @version: 2016年11月16日 下午3:59:15
 	 */
-	public abstract List<Tree>  selectDepartmentTreeList(String id) throws Exception;
+	public abstract List<Tree>  selectDepartmentTreeList(String id,String syid) throws Exception;
 	/**
 	 * 
 	    * @Title:delDepartmentByPrimaryKey 

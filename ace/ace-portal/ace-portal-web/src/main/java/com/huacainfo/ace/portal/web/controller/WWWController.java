@@ -125,7 +125,7 @@ public class WWWController extends PortalBaseController {
 	@RequestMapping(value = "/selectDepartmentTreeList.do")
 	@ResponseBody
 	public List<Tree> selectDepartmentTreeList(String deptId)throws Exception {
-		List<Tree>	list=this.systemService.selectDepartmentTreeList(deptId);
+		List<Tree>	list=this.systemService.selectDepartmentTreeList(deptId,"sys");
 		return list;
 	}
 

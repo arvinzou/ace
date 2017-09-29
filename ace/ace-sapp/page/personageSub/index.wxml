@@ -125,19 +125,12 @@ style="width:{{ images.width }}rpx; height:{{ images.height }}rpx;"  src="../../
 
       <view class="kind-list-item" style="text-align: center;padding:2px;" wx:if="{{o.intro.length>0}}">
            
-            <view style="text-align: center;padding:2px;font-weight:800;font-size:18px">个人介绍 </view>
+            <view style="text-align: center;padding:2px;font-weight:800;font-size:18px">简历 </view>
               <rich-text nodes="{{o.intro}}" style="text-align:left"></rich-text>
            
       </view>
 
-      <view class="kind-list-item" wx:if="{{!o.bindStatus}}">
-          <navigator url="../reg/index?name={{o.name}}&mobile=&email={{o.email}}" class="navigator">
-           <view  class="navigator-text" style="flex-direction:row;">
-          <image class="iconList" mode="aspectFit" src="../../image/bangding.png"  />我要绑定手机号
-          </view>
-           <view class="navigator-arrow"></view>
-          </navigator>
-      </view>
+    
       <view class="kind-list-item" style="flex-direction:colum;" wx:if="{{o.bindStatus.length>0}}">
      
       <view class="page-body-info">
@@ -148,12 +141,7 @@ style="width:{{ images.width }}rpx; height:{{ images.height }}rpx;"  src="../../
       
       </view>
 
-        <navigator url="../reg/index" class="navigator">
-           <view  class="navigator-text" style="flex-direction:row;">
-          <image class="iconList" mode="aspectFit" src="../../image/jiechubd.png" mode="aspectFit" />绑定新手机号
-          </view>
-           <view class="navigator-arrow"></view>
-          </navigator>
+      
       </view>
     </view>
   </view>

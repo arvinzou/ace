@@ -60,3 +60,34 @@ var config = {
 
 };
 module.exports = config
+
+/*
+{
+  "pagePath": "page/dept/index",
+  "iconPath": "image/tongzhandw.png",
+  "selectedIconPath": "image/tongzhandw_selected.png",
+  "text": "统战单位"
+}{
+  "pagePath": "page/personage/index",
+  "iconPath": "image/tongzhanrs.png",
+  "selectedIconPath": "image/tongzhanrs_selected.png",
+  "text": "统战人士"
+},
+      {
+        "pagePath": "page/activity/index",
+        "iconPath": "image/huodong.png",
+        "selectedIconPath": "image/huodong_selected.png",
+        "text": "统战活动"
+      },
+      {
+        "pagePath": "page/service/index",
+        "iconPath": "image/zhoubian.png",
+        "selectedIconPath": "image/zhoubian_selected.png",
+        "text": "统战GIS"
+      },
+      {
+        "pagePath": "page/notice/index",
+        "iconPath": "image/msg.png",
+        "selectedIconPath": "image/msg_selected.png",
+        "text": "统战飞讯"
+      } */

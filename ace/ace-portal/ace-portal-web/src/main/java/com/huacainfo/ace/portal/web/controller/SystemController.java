@@ -246,7 +246,7 @@ public class SystemController extends PortalBaseController{
 		if(!CommonUtils.isBlank(q)){
 			params.put("q", q);
 		}
-		return this.systemService.selectDepartment(params);
+		return this.systemService.selectDepartment(params,this.getCurUserProp().getActiveSyId());
 	}
 	/**
 	 * 
@@ -291,7 +291,7 @@ public class SystemController extends PortalBaseController{
 		}
 		
 		this.logger.info("",params);
-		return this.systemService.selectUsers(params);
+		return this.systemService.selectUsers(params,this.getCurUserProp().getActiveSyId());
 	}
 	/**
 	 * 
@@ -327,7 +327,7 @@ public class SystemController extends PortalBaseController{
 	@ResponseBody
 	public List<Tree> selectDepartmentTreeList(String id)throws Exception {
 		
-		List<Tree>	list=this.systemService.selectDepartmentTreeList(this.getCurUserProp().getCorpId());
+		List<Tree>	list=this.systemService.selectDepartmentTreeList(this.getCurUserProp().getCorpId(),this.getCurUserProp().getActiveSyId());
 		return list;
 	}
 	/**

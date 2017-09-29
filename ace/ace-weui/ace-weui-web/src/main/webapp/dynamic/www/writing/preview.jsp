@@ -1,29 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+
+<%@page import="com.huacainfo.ace.weui.service.*"%>
+<%@page import="com.huacainfo.ace.common.result.ListResult"%>
+<%@ page import="java.util.*"%>
+<%
+javax.servlet.ServletContext servletContext = request.getSession()
+.getServletContext();
+org.springframework.web.context.WebApplicationContext webApplicationContext = org.springframework.web.context.support.WebApplicationContextUtils
+.getRequiredWebApplicationContext(servletContext);
+
+AnalysisService analysisService = (AnalysisService) webApplicationContext
+.getBean("analysisService");
+Map<String,Object> params=new HashMap<String,Object>();
+params.put("id",request.getParameter("id"));
+ListResult rst=analysisService.query(params,"loadWriting",1,1);
+request.setAttribute("o", rst.getValue().get(0));
+%>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
 <meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<title>作品</title>
+<title>常德优秀文艺作品展【${o.author} ${o.name}】</title>
+
 <jsp:include page="../../common/common-www.jsp" />
 <script>
 var id='${param.id}';
 </script>
+
 </head>
 <body ontouchstart style="padding:5px">
+
+
 <a href="javascript:return false" class="weui-media-box weui-media-box_appmsg">
     <div class="text-line"></div>
     <div class="weui-media-box__bd">
 
-        <h4 class="weui-media-box__title" id="name"></h4>
+        <h2 class="weui-media-box__title" id="name"></h2>
         <p class="weui-media-box__desc"><span id="dateOfPublication"></span>  作者：<span id="author"></span>  阅读：<span id="reading"><span></p>
 
     </div>
 </a>
 
-
+<div class="topdiv">
+    本“作品库”由常德本土纯文艺微信公众号《走向》收集、整理和维护，联系邮箱：cdwyxzx@163.com
+</div>
 
 <div id="docText" class="my-gallery" data-pswp-uid="1" style="padding:12px">
 </div>
@@ -100,6 +126,11 @@ var id='${param.id}';
   margin:2px;
   padding:5px;
 }
+.topdiv{
+width: 100%; padding: 5px ;
+ font-size: 12px;
+ color: #999;
+}
 </style>
 
 <link rel="stylesheet prefetch" href="${pageContext.request.contextPath}/content/common/photoview/photoswipe.css">
@@ -109,5 +140,8 @@ var id='${param.id}';
  <jsp:include page="../../common/footer-1-www.jsp" />
  <script src="${pageContext.request.contextPath}/content/common/lib/fastclick.js"></script>
  <script src="${pageContext.request.contextPath}/content/www/js/writing/preview.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+
 </body>
 </html>

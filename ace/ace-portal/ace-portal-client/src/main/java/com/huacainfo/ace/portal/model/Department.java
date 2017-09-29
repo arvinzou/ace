@@ -120,6 +120,8 @@ public class Department implements java.io.Serializable{
 	private String qrcode;
 	private String serviceWay;
 
+	private String syid;
+
 	public String getDepartmentId() {
 		return departmentId;
 	}
@@ -574,5 +576,13 @@ public class Department implements java.io.Serializable{
 
 	public void setServiceWay(String serviceWay) {
 		this.serviceWay = serviceWay;
+	}
+
+	public String getSyid() {
+		return syid;
+	}
+
+	public void setSyid(String syid) {
+		this.syid = syid;
 	}
 }

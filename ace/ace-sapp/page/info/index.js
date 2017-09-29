@@ -14,7 +14,7 @@ Page({
     });
   },
   navigator: function (url) {
-    wx.switchTab({
+    wx.navigateTo({
       url: url
     });
   },

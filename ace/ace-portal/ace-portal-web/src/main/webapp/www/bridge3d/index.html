@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>桥梁3D模型展示</title>
+    <script type="text/javascript" src="./js/three.min.js"></script>
+    <script src="./js/BinaryLoader.js"></script>
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script src="./js/TrackballControls.js"></script>
+    <script src="./js/Detector.js"></script>
+    <script src="./js/water-material.js"></script>
+    <script src="./js/Car.js"></script>
+    <script src="./js/bridge3d.js"></script>
+    <style>
+		body{background: #FFF; margin:0; padding:0; overflow:hidden;}
+		.body{width:100%; height:100% margin:0 auto;}
+		ul{font-size: 12px;list-style: none;margin: 0;padding: 0;color:#416e89;}
+		.menu{position: absolute;z-index: 99; width:100%;}
+		.nav li{display:block;position: relative;float: left;}
+		.dropdown{ padding:20px 15px;}
+		.dropdown li span a{ text-decoration:none;}
+		.dropdown .list_first{-moz-border-radius:5px 0 0 0;-webkit-border-radius:5px 0 0 0;border-radius:5px 0 0 0; text-align:center; width:166px; }
+		.dropdown .list_last{-moz-border-radius:0 5px 0 0;-webkit-border-radius:0 5px 0 0;border-radius:0 5px 0 0; text-align:center; width:166px; border-right:0; }
+		.dropdown ul li {display: block; width:216px;line-height:36px; text-decoration: none; font-weight:bold;  font-size:12px;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;border-right:0;}
+		.dropdown ul li.divider{height: 10px;border: none;border-top: 1px dashed #0066CC;}
+		.dropdown ul li span{padding-right: 20px;}
+		.dropdown ul li span.info{ color:#999;}
+		.dropdown-menu{ display: none;-webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);-moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);font-size: 14px;font-family: "Segoe UI",Helvetica, Arial, sans-serif;border: 1px solid #ddd;float: left;overflow: hidden;position: absolute; padding:8px 20px; background-color:#FFF;}
+		.dropdown:hover ul {display: block;}
+		.dropdown:hover li {font-size: 12px; }
+		.dropdown:hover a {  color:#416e89;}
+		.dropdown:hover li a:hover { color:#243D4C;}
+
+		li [class^="pic-"], li [class*=" pic-"]{display: inline-block;width: 32px;text-align: center; height:36px;}
+		.pic-bridge{background:url(image/bridge.png) no-repeat;}
+		.pic-hiking{background:url(image/hiking.png) no-repeat;}
+		.pic-weather{background:url(image/weather1.png) no-repeat;background-position:0 4px;}
+		.dropdownLi .dropdown-toggle i{ background-position:0 0;}
+		.dropdownLi .dropdown-toggle:hover i{ background-position:0 -36px;}
+		.activeLi .dropdown-toggle i{ background-position:0 -36px;}
+    </style>
+</head>
+<body>
+
+<div class="body">
+    <!--    <video id="video" controls="controls" loop style="display:none">
+            <source src="./image/try.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        </video>-->
+    <div class="menu">
+        <ul class="nav">
+            <li class="dropdown dropdownLi dropdownLiBridge activeLi">
+                <a href='javascript:bbb.resetMode("defaultEnabled");' class="dropdown-toggle "><i class="pic-bridge"></i></a>
+                <ul class="dropdown-menu">
+                    <li>
+
+                        <span><a href='javascript:bbb.resetMode("defaultEnabled");bbb.resetvisio({"camera_x":-240,"camera_y":-5,"camera_z":25,"target_x":-219,"target_y":18,"target_z":-3});'>副拱</a></span><span><a href='javascript:bbb.resetMode("defaultEnabled");bbb.resetvisio({"camera_x":24,"camera_y":0,"camera_z":41,"target_x":26,"target_y":38,"target_z":-6});'>钢横梁</a></span>
+
+                    </li>
+                    <li>
+                        <span><a href='javascript:showHideAll(!showAll);showAll = !showAll;'>显示/隐藏数据</a></span>
+                    </li>
+                    <li>
+                        <span><a href="javascript:onOff(!on);on = !on">获取/停止数据</a></span>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+                        <span class="info">操作：鼠标左右键，滚轮</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown dropdownLi dropdownLiHiking">
+                <a href='javascript:bbb.resetMode("carEnabled");' class="dropdown-toggle"><i class="pic-hiking"></i></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <span class="info">操作：<br>行走F2（WASD,Shift,↑↓←→），<br>飞行F3（WASDQERF,Shift,↑↓←→），<br>驾车F4（WASD）</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle"><i class="pic-weather"></i></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <span class="info"><a id="weather" class="weather" href="javascript:bbb.initWeather(weaurl);">获取当前天气信息</a></span>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <div class="b" id="bridge3d">
+    </div>
+
+</div>
+</body>
+<script>
+$(document).ready(function(){
+	$(".ab button").click(function(){
+
+		if(210 == $(".aa").height()){
+			$(".aa").animate({height:'0'},300);
+		}else{
+			$(".aa").animate({height:'210px'},300);
+		}
+	});
+	$('.dropdownLi').click(function(){
+		$('.dropdownLi').removeClass('activeLi');
+		$(this).addClass('activeLi');
+	});
+});
+</script>
+<script type="text/javascript">
+
+    function GetRandomNum(Min, Max) {
+        var Range = Max - Min;
+        var Rand = Math.random();
+        return (Min + Math.round(Rand * Range));
+    }
+	//返回垂点，todo：
+	function verticalPoint(x,y,z){
+
+		var point = [];
+
+		point.x = parseFloat(x);
+
+		point.y = parseFloat(y);
+
+		point.z = parseFloat(z);
+
+		//point.x = point.x > 292 ? 292 : point.x;
+
+		//point.x = point.x < -268? -268 : point.x;
+
+		point.x = point.x > 792 ? 792 : point.x;
+
+		point.x = point.x < -764? -764 : point.x;
+
+		point.z = point.z > 14 ? 14 : point.z;
+
+		point.z = point.z < -14? -14 : point.z;
+
+		//point.y = 22.5;
+		if(point.x < 191.5 && point.x > -168.5){
+			point.y = 22;
+		}else if(point.x > 191.5){
+			point.y = 22 - (point.x-191.5)*0.024;
+		}else{
+			point.y = 22 + (point.x+168.5)*0.024;
+		}
+
+		return point;
+
+	}
+
+
+	//传入新建对象：容器id、宽、高，桥梁js文件路径，待开发：环境，天气，
+
+	var div = 'bridge3d';
+	var width = 'auto';
+	var height = 'auto';
+	var objurl = './obj/082608.js';
+	var bbb = new bridge3d(div,width,height,objurl);
+
+	function initmouse(){bbb.initMouseDown();}
+
+	//初始化模型
+	bbb.init();
+
+	//初始化天气
+	var weaurl = 'http://59.41.70.142:5353/x/WeatherServlet';
+	//bbb.initWeather(weaurl);
+
+
+	//初始化传感器
+
+	var sensors = {
+
+		"A0":{"po":{"x":-90.55,"y":19,"z":18.5},},
+		"A1":{"po":{"x":13.5,"y":19,"z":18.5},"type":"cylinder"},
+		"A2":{"po":{"x":117.55,"y":19,"z":18.5},"type":"cylinder"},
+		"A3":{"po":{"x":-90.55,"y":19,"z":-18.5},"type":"cylinder"},
+		"A4":{"po":{"x":13.5,"y":19,"z":-18.5},"type":"cylinder"},
+		"A5":{"po":{"x":117.55,"y":19,"z":-18.5},"type":"cylinder"}
+
+	};
+
+	bbb.initSensors(sensors);
+
+	//设置传感器数据
+
+	/*var sensorsData = {
+
+		"A0":{"value":["666","666"],"color":"green"},
+		"A1":{"value":["6666666666","请确认网络链接正常"],"color":"green"},
+		"A2":{"value":["未能获取到服务器的数据","请确认网络链接正常"],"color":"green"},
+		"A3":{"value":["666666666","请确认网络链接正常"],"color":"green"},
+		"A4":{"value":["未能获取到服务器的数据","请确认网络链接正常"],"color":"green"},
+		"A5":{"value":["未能获取到服务器的数据","请确认网络链接正常"],"color":"red"}
+
+	};*/
+
+
+	setInterval(function () {
+
+	    var sDic = {};
+	    for(var i=0;i<6;i++)
+	    {
+	        var randNum = GetRandomNum(1, 30000) / 100.0;
+	        var sNum = randNum;
+	        var eNum = GetRandomNum(1, 30000) / 100.0;
+	        var max = Math.max(sNum, eNum);
+	        var min = Math.min(sNum, eNum);
+	        var desc = "正常";
+	        var color = "green";
+	        if (max - min > 150)
+	        {
+	            desc = "告警";
+	            color = "red";
+	        }
+	        sDic["A" + i] = { "value": [min + '  ' + max, desc], "color": color };
+	    }
+
+	   /* var sensorsData = {
+	        "A0": { "value": ["666", "666"], "color": "green" },
+	        "A1": { "value": ["6666666666", "请确认网络链接正常"], "color": "green" },
+	        "A2": { "value": ["未能获取到服务器的数据", "请确认网络链接正常"], "color": "green" },
+	        "A3": { "value": ["666666666", "请确认网络链接正常"], "color": "green" },
+	        "A4": { "value": ["未能获取到服务器的数据", "请确认网络链接正常"], "color": "green" },
+	        "A5": { "value": ["未能获取到服务器的数据", "请确认网络链接正常"], "color": "red" }
+	    };*/
+	    bbb.setSensors(sDic);
+
+	}, 1000);
+
+
+
+	//后台更新ajax 接口
+	//var url="./sdata5.json";
+	//var url="./sdata.php";
+	var url = "http://59.41.70.142:5353/x/SensorServlet";
+
+	//增加传感器
+	function add(){
+		var id = ''==document.getElementById("id").value?'A0':document.getElementById("id").value;
+		var x = ''==document.getElementById("x").value?13.5:document.getElementById("x").value;
+		var y = ''==document.getElementById("y").value?19:document.getElementById("y").value;
+		var z = ''==document.getElementById("z").value?18.5:document.getElementById("z").value;
+
+		var three = [];
+		three[id] = {"po":{"x":x,"y":y,"z":z}};
+
+		bbb.initSensors(three);
+
+	}
+
+	function hideone(){
+		var id = ''==document.getElementById("id").value?'A0':document.getElementById("id").value;
+		bbb.hideshow(id);
+	}
+
+	//删除传感器
+	function removeone(){
+		var id = ''==document.getElementById("id").value?'A0':document.getElementById("id").value;
+		bbb.remove(id);
+	}
+
+	//改变某id传感器位置
+	function setp(){
+
+		var id = ''==document.getElementById("id").value?'A0':document.getElementById("id").value;
+		var x = ''==document.getElementById("x").value?13.5:document.getElementById("x").value;
+		var y = ''==document.getElementById("y").value?19:document.getElementById("y").value;
+		var z = ''==document.getElementById("z").value?18.5:document.getElementById("z").value;
+
+		bbb.setPo(id,parseFloat(x),parseFloat(y),parseFloat(z));
+
+	}
+
+	//改变观测角度
+	function set(){
+
+		var cx = ''==document.getElementById("cx").value?50:document.getElementById("cx").value;
+		var cy = ''==document.getElementById("cy").value?200:document.getElementById("cy").value;
+		var cz = ''==document.getElementById("cz").value?200:document.getElementById("cz").value;
+
+		var tx = ''==document.getElementById("tx").value?0:document.getElementById("tx").value;
+		var ty = ''==document.getElementById("ty").value?0:document.getElementById("ty").value;
+		var tz = ''==document.getElementById("tz").value?0:document.getElementById("tz").value;
+
+		bbb.resetvisio({"camera_x":parseFloat(cx),"camera_y":parseFloat(cy),"camera_z":parseFloat(cz),"target_x":parseFloat(tx),"target_y":parseFloat(ty),"target_z":parseFloat(tz)});
+		//bbb.resetvisio({"camera_x":-240,"camera_y":-5,"camera_z":25,"target_x":-219,"target_y":18,"target_z":-3});
+
+	}
+
+	//显隐藏ALL传感器
+	var showAll = true;
+	function showHideAll(showAll){
+
+		if(showAll){
+			bbb.showall();
+		}else{
+			bbb.hideall();
+		}
+	}
+
+	//播放视频
+	function playVideo(videoOn){
+
+		if(videoOn){
+
+			document.getElementById("video").play();
+
+		}else{
+
+			document.getElementById("video").pause();
+
+		}
+
+	}
+
+	//周期获取传感器数据
+	var timer;
+	var on = true;
+	onOff(on);
+	function onOff(on){
+		/*if(on){
+			window.clearInterval(timer);
+			bbb.update(url);
+			timer = setInterval(function(){bbb.update(url);},'1000');
+		}else{
+			window.clearInterval(timer);
+		}*/
+	}
+
+	//var loading = document.getElementById("Loading");
+	//loading.parentNode.removeChild(loading);
+
+</script>
+</html>

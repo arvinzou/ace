@@ -54,4 +54,7 @@
 .navigator {
   background-color:#fff;
 }
+.bold{
+  font-weight: 800
+}
 

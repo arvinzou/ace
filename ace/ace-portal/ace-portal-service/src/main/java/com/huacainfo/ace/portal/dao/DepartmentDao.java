@@ -40,7 +40,7 @@ public interface DepartmentDao {
 	public DepartmentVo selectDepartmentVoByPrimaryKey(
 			@Param("departmentId") String departmentId);
 
-	public List<Map<String, Object>> selectDepartmentTreeList(String pid);
+	public List<Map<String, Object>> selectDepartmentTreeList(@Param("pid")String pid,@Param("syid")String syid);
 
 	public int delDepartmentByPrimaryKey(
 			@Param("departmentId") String departmentId);

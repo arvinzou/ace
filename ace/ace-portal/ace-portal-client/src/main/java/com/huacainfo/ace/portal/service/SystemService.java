@@ -114,7 +114,7 @@ public interface SystemService extends WebContextParamService {
 	 * @version: 2016年11月17日 下午1:23:48
 	 */
 	public abstract Map<String, Object> selectDepartment(
-			Map<String, String> params);
+			Map<String, String> params,String syid);
 
 	/**
 	 * 
@@ -127,7 +127,7 @@ public interface SystemService extends WebContextParamService {
 	 * @author: chenxiaoke
 	 * @version: 2016年11月17日 下午1:24:14
 	 */
-	public Map<String, Object> selectUsers(Map<String, Object> params);
+	public Map<String, Object> selectUsers(Map<String, Object> params,String syid);
 
 	/**
 	 * 
@@ -156,7 +156,7 @@ public interface SystemService extends WebContextParamService {
 	 * @author: chenxiaoke
 	 * @version: 2016年11月17日 下午1:25:15
 	 */
-	public abstract List<Tree> selectDepartmentTreeList(String pid);
+	public abstract List<Tree> selectDepartmentTreeList(String pid,String syid);
 
 	/**
 	 * 加载系统参数，用于系统初始化

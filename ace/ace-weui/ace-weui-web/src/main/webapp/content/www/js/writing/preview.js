@@ -23,7 +23,7 @@ function loadText(id) {
 			$(rst.value).each(function(n, o) {
 				$.each(o, function(key, value) {
 
-					if (key == 'image'&&value) {
+					if (key == 'image' && value) {
 						var src = fastdfs_server + value;
 						var img = new Image();
 						$(img).attr("src", "");
@@ -78,16 +78,19 @@ window.onresize = function() {
 function doDraw() {
 	var clientWidth = document.body.offsetWidth;
 	var clientHeight = document.body.offsetHeight;
-	$("img").each(function() {
-		$(this).removeAttr("width");
-		$(this).removeAttr("height");
-		$(this).css("width", "100%");
-		$(this).css("max-width", clientWidth+"px");
-		$(this).css("max-height", clientWidth+"px");
-		$(this).wrap("<a href='" + $(this).attr("src")+ "'  data-size='600x600'/>");
-        $(this).parent().wrap("<figure/>");
-        DrawImage(this)
-	});
+	$("img").each(
+			function() {
+				$(this).removeAttr("width");
+				$(this).removeAttr("height");
+				$(this).css("width", "100%");
+				$(this).css("max-width", clientWidth + "px");
+				$(this).css("max-height", clientWidth + "px");
+				$(this).wrap(
+						"<a href='" + $(this).attr("src")
+								+ "'  data-size='600x600'/>");
+				$(this).parent().wrap("<figure/>");
+				DrawImage(this)
+			});
 	initPhotoSwipeFromDOM('figure');
 }
 function DrawImage(ImgD) {
@@ -104,10 +107,10 @@ function DrawImage(ImgD) {
 				ImgD.height = image.height;
 			}
 		}
-		$(ImgD).parent().attr("data-size",(ImgD.width * 2) + "x" + (ImgD.height * 2));
+		$(ImgD).parent().attr("data-size",
+				(ImgD.width * 2) + "x" + (ImgD.height * 2));
 	}
 }
-
 
 var initPhotoSwipeFromDOM = function(gallerySelector) {
 
@@ -236,7 +239,7 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 				bottom : 100
 			},
 			fullscreenEl : false, // 是否支持全屏按钮
-			shareButtons : [ {
+			shareButtons : [{
 				id : 'download',
 				label : '保存图片',
 				url : '{{raw_image_url}}',
@@ -310,3 +313,4 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 				true);
 	}
 };
+
