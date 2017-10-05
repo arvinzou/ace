@@ -45,16 +45,19 @@ pageEncoding="utf-8"%>
                 </div>
             </div>
 
-            <div style="padding-bottom:5px;margin-top:5px">
-                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
-                       autocomplete="off"/>
-                <a class="blue" href="javascript:act3()"><i class="ace-icon fa fa-search nav-search-icon"></i></a>
-            </div>
+
 
             <table id="meeting-grid" class="table table-bordered">
 
 
             </table>
+
+            <div style="margin-top:5px;background:#eeeeee">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input"
+                       autocomplete="off"/>
+
+                <a class="blue" href="javascript:act3()"><i class="ace-icon fa fa-search nav-search-icon"></i></a>
+            </div>
         </div>
         <div class="col-md-6">
             <div id="dialog-message" class="hide">
@@ -66,7 +69,14 @@ pageEncoding="utf-8"%>
 
             <div id="dialog-message-view">
 
-                <h5 class="header-title">基本信息</h5>
+                <div class="div-left header-title-custom">基本信息</div>
+                <div class="div-right header-title-custom">
+                    <div style="text-align:right">
+                        <a class="blue" href="javascript:viewMeeting()" data-rel="tooltip" data-placement="top"
+                           title="刷新"><i
+                                class="ace-icon glyphicon glyphicon-refresh"></i></a>
+                    </div>
+                </div>
 
                 <div style="padding:10px" class="row">
                     <div class="labelItem">
@@ -112,7 +122,7 @@ pageEncoding="utf-8"%>
                 <div class="row">
                     <form id="fm3">
                         <table id="detail"
-                               class="table table-striped table-bordered table-hover">
+                               class="table  table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th class="center" style="width:80px;">序号</th>
@@ -141,7 +151,7 @@ pageEncoding="utf-8"%>
                 <div class="row">
                     <form id="fm4" onsubmit="return false">
                         <table id="detail1"
-                               class="table table-striped table-bordered table-hover">
+                               class="table  table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th class="center" style="width:80px;">序号</th>
@@ -170,7 +180,7 @@ pageEncoding="utf-8"%>
             <div id="dialog-norm" class="hide">
                 <h5 class="header-title">指标</h5>
                 <table id="detail4"
-                       class="table table-striped table-bordered table-hover">
+                       class="table  table-bordered table-hover">
                     <thead>
                     <tr>
                         <th class="center" style="width:80px;">序号</th>

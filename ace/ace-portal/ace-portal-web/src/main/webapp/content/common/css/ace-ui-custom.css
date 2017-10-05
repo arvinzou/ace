@@ -443,3 +443,9 @@ input[type="checkbox"].ace.ace-switch + .lbl::after {
     margin: 0;
     padding: 15px 15px 15px 15px;
 }
+.dataTable>thead>tr>th.sorting_desc, .dataTable>thead>tr>th.sorting_asc {
+     background-image: -webkit-linear-gradient(top, #fff 0, #fff 100%);
+    background-image: linear-gradient(to bottom, #fff 0, #fff 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient();
+}
