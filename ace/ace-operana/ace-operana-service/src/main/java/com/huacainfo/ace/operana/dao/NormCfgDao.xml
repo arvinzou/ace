@@ -18,7 +18,8 @@
 
     </resultMap>
     <sql id="Base_Column_List">
-        id, normId, year, indexValue, status, createUserId, createUserName, createDate, lastModifyUserId,
+        id, normId, year, indexValue,value1,value2,value3,value4, status, createUserId, createUserName, createDate,
+        lastModifyUserId,
         lastModifyUserName, lastModifyDate
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -33,18 +34,24 @@
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.operana.model.NormCfg">
         insert into norm_cfg (id, normId, year,
-        indexValue, status, createUserId,
+        indexValue,value1,value2,value3,value4, status, createUserId,
         createUserName, createDate, lastModifyUserId,
         lastModifyUserName, lastModifyDate)
         values (#{id,jdbcType=VARCHAR}, #{normId,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},
-        #{indexValue,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{indexValue,jdbcType=DECIMAL},#{value1,jdbcType=DECIMAL},#{value2,jdbcType=DECIMAL},#{value3,jdbcType=DECIMAL},#{value4,jdbcType=DECIMAL},
+        #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
         #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.NormCfg">
         update norm_cfg
         set
-        indexValue = #{indexValue,jdbcType=DECIMAL} where
+        indexValue = #{indexValue,jdbcType=DECIMAL} ,
+        value1 = #{value1,jdbcType=DECIMAL},
+        value2 = #{value2,jdbcType=DECIMAL},
+        value3 = #{value3,jdbcType=DECIMAL},
+        value4 = #{value4,jdbcType=DECIMAL}
+        where
         normId = #{normId,jdbcType=VARCHAR} and
         year = #{year,jdbcType=VARCHAR}
     </update>
@@ -71,7 +78,7 @@
         select
         t.id, t.name, t.category, t.groups, t.deptId, t.calType, t.pcode, t.status, a.createUserId, a.createUserName,
         a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate,t.remark,
-        t.id normId, a.year, a.indexValue
+        t.id normId, a.year, a.indexValue,a.value1,a.value2,a.value3,a.value4
         <include refid="whereCondition"/>
         ) m
         <choose>
