@@ -317,6 +317,27 @@ public class MeetingServiceImpl implements MeetingService {
 		return new MessageResponse(0, "成功！");
 
 	}
+	public  MessageResponse insertMeetingCopy(String meetingId, UserProp userProp)throws Exception{
+		String newMeetingId=UUID.randomUUID().toString();
+		Meeting m=this.meetingDao.selectByPrimaryKey(meetingId);
+		m.setId(newMeetingId);
+		m.setName(m.getName()+"副本");
+		this.meetingDao.insert(m);
+		List<MeetingTopic> list=this.meetingTopicDao.selectTopicByMeetingId(meetingId);
+		for(MeetingTopic o:list){
+			o.setId(UUID.randomUUID().toString());
+			o.setMeetingId(newMeetingId);
+			this.meetingTopicDao.insert(o);
+		}
+		List<MeetingUser> listUser=this.meetingUserDao.selectUserByMeetingId(meetingId);
+		for(MeetingUser e:listUser){
+			e.setId(UUID.randomUUID().toString());
+			e.setMeetingId(newMeetingId);
+			this.meetingUserDao.insert(e);
+		}
+
+		return new MessageResponse(0, "成功！");
+	}
 
 
 }

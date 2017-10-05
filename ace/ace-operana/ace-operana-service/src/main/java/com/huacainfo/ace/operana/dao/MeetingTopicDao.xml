@@ -25,5 +25,7 @@
     delete from meeting_topic
     where meetingId = #{meetingId,jdbcType=VARCHAR} and topicId=#{topicId,jdbcType=VARCHAR}
   </delete>
-
+<select id="selectTopicByMeetingId" resultType="com.huacainfo.ace.operana.model.MeetingTopic">
+  select * from meeting_topic where meetingId = #{meetingId,jdbcType=VARCHAR}
+</select>
 </mapper>

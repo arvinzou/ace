@@ -525,9 +525,7 @@ public class AutoCodeUtils {
         velocityEngine.setProperty("input.encoding", "UTF-8");
         velocityEngine.setProperty("output.encoding", "UTF-8");
         velocityEngine.setProperty("resource.loader", "class");
-        velocityEngine
-                .setProperty("class.resource.loader.class",
-                        "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        velocityEngine.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         velocityEngine.init();
         Template template = velocityEngine.getTemplate(fileVMPath);
         VelocityContext velocityContext = new VelocityContext();

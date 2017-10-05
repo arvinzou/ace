@@ -88,6 +88,21 @@ jQuery(function($) {
 				var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
 				delMeetingById(r.name,r.id);
 			});
+
+			$('#btn-view-copy').on(
+            			'click',
+            			function() {
+
+            				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
+            						'selrow');
+            				if (!gr) {
+            					$.jgrid.info_dialog($.jgrid.nav.alertcap,
+            							$.jgrid.nav.alerttext);
+            					return;
+            				}
+            				var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
+            				copyMeetingById(r.name,r.id);
+            			});
 });
 
 function preview(id, title) {
@@ -970,4 +985,27 @@ function previewChart(_meetingId,_topicId,_normId,title){
 function previewTpa(_meetingId,_topicId,_normId,title){
     var url=contextPath+'/dynamic/service/tpa/index.jsp?meetingId='+_meetingId+'&topicId='+_topicId+'&normId='+_normId;
     window.open(url);
+}
+function copyMeetingById(name,id){
+    if(confirm("确定要复制"+name+"吗？")){
+        $.ajax({
+                type : "post",
+                url : contextPath + "/meeting/insertMeetingCopy.do",
+                data : {
+                    meetingId : id
+                },
+                beforeSend : function(XMLHttpRequest) {
+
+                },
+                success : function(rst, textStatus) {
+                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                                        page : 1
+                                    }).trigger("reloadGrid");
+
+                },
+                error : function() {
+                    alert("加载错误！");
+                }
+            });
+    }
 }

@@ -7,10 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/ace-common/ace-common.iml" filepath="$PROJECT_DIR$/ace-common/ace-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-web/ace-common-web.iml" filepath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gesp/ace-gesp.iml" filepath="$PROJECT_DIR$/ace-gesp/ace-gesp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gesp/ace-gesp-client/ace-gesp-client.iml" filepath="$PROJECT_DIR$/ace-gesp/ace-gesp-client/ace-gesp-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gesp/ace-gesp-service/ace-gesp-service.iml" filepath="$PROJECT_DIR$/ace-gesp/ace-gesp-service/ace-gesp-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gesp/ace-gesp-web/ace-gesp-web.iml" filepath="$PROJECT_DIR$/ace-gesp/ace-gesp-web/ace-gesp-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" />

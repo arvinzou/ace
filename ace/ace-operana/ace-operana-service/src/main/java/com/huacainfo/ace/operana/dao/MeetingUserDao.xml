@@ -33,5 +33,9 @@
     update meeting_user set  present=#{present,jdbcType=VARCHAR} where  meetingId= #{meetingId,jdbcType=VARCHAR} and userId=#{userId,jdbcType=VARCHAR}
 
   </update>
+  <select id="selectUserByMeetingId" resultType="com.huacainfo.ace.operana.model.MeetingUser">
+    select *  from meeting_user
+    where  meetingId= #{meetingId,jdbcType=VARCHAR}
+  </select>
 
 </mapper>

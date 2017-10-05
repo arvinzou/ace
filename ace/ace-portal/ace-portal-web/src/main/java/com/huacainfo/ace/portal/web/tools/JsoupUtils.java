@@ -162,12 +162,13 @@ public class JsoupUtils {
         java.util.Date dd  = Calendar.getInstance().getTime();
         Integer day = rightNow.get(rightNow.DAY_OF_MONTH);
         Integer hour=rightNow.get(Calendar.HOUR_OF_DAY);
-        if(hour<12){
+       /* File file=new File("/data/wwwroot/zx.huacainfo.com/portal/www/cdrb/"+sdf.format(dd)+"/"+day);
+        if(!file.exists()){
             day=day-1;
             if(day<=0){
                 day=1;
             }
-        }
+        }*/
         String date=sdf.format(dd)+"/"+day;
         return date;
     }

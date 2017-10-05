@@ -34,8 +34,7 @@ public interface MeetingService {
 	public abstract MessageResponse deleteByMeetingIdAndTopicId(String meetingId,String topicId, UserProp userProp)throws Exception;
 
 
-	/*
-	* */
+
 	public abstract List<Map<String,Object>> selectAllUserDeptId(String meetingId,String name);
 
 	public abstract Map<String, Object> selectUserByMeetingId(String meetingId) throws Exception;
@@ -49,5 +48,7 @@ public interface MeetingService {
 
 
 	public abstract MessageResponse updatePresent(String meetingId,List<Map<String,Object>> list, UserProp userProp)throws Exception;
+
+	public abstract MessageResponse insertMeetingCopy(String meetingId, UserProp userProp)throws Exception;
 	
 }

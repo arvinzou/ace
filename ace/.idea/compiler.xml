@@ -10,9 +10,6 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
-        <module name="ace-gesp-client" />
-        <module name="ace-gesp-service" />
-        <module name="ace-gesp-web" />
         <module name="ace-kernel-backend" />
         <module name="ace-kernel-client" />
         <module name="ace-kernel-service" />

@@ -26,6 +26,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 @Controller
 @RequestMapping("/meeting")
@@ -175,5 +178,22 @@ public class MeetingController extends OperanaBaseController {
 		}
 		return this.meetingService.updatePresent(meetingId,item,this.getCurUserProp());
 	}
-
+	@RequestMapping(value = "/insertMeetingCopy.do")
+	@ResponseBody
+	public  MessageResponse insertMeetingCopy(String meetingId) throws Exception{
+		return this.meetingService.insertMeetingCopy(meetingId,this.getCurUserProp());
+	}
+	@RequestMapping(value = "/currentWeekOfYear.do")
+	@ResponseBody
+	public SingleResult<Integer> currentWeekOfYear(String today) throws Exception{
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = format.parse(today);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setFirstDayOfWeek(Calendar.MONDAY);
+		calendar.setTime(date);
+		int week=calendar.get(Calendar.WEEK_OF_YEAR);
+		SingleResult<Integer> rst=new SingleResult<Integer>(0,"OK");
+		rst.setValue(week);
+		return rst;
+	}
 }

@@ -52,6 +52,11 @@ pageEncoding="utf-8"%>
 
                     名称： <input name="name" type="text"
                                style="width: 200px;"/>
+
+                    时间：
+                    <input class="easyui-datetimebox" name="startDate" style="width:150px;height:25px;line-height: 25px;">
+                    至
+                    <input class="easyui-datetimebox" name="endDate" style="width:150px;height:25px;line-height: 25px;">
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/meeting/findMeetingList.do">
                         <i
@@ -73,6 +78,11 @@ pageEncoding="utf-8"%>
                             authority="${pageContext.request.contextPath}/meeting/updateMeeting.do">
                         <i
                                 class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-purple" id="btn-view-copy"
+                            authority="${pageContext.request.contextPath}/meeting/insertMeetingCopy.do">
+                        <i
+                                class="ace-icon fa fa-files-o align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/meeting/deleteMeetingByMeetingId.do">
