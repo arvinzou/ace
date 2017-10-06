@@ -39,7 +39,7 @@ public class ChartServiceImpl implements ChartService {
 		}
 	}
 	@Override
-	public Map<String,Object> chart1(String meetingId,String topicId,String normId) throws Exception {
+	public Map<String,Object> chart1(String meetingId,String topicId,String normId,String viewType) throws Exception {
 		Map<String,Object> rst=new HashMap<String,Object>();
         Calendar a=Calendar.getInstance();
         int year=a.get(Calendar.YEAR);
@@ -62,7 +62,7 @@ public class ChartServiceImpl implements ChartService {
         List<Integer> quarters=new ArrayList<Integer>();
 		List<Integer> months=new ArrayList<Integer>();
 		List<Integer> weeks=new ArrayList<Integer>();
-		DataCalUtils.calX(cwk,quarters,months,weeks);
+		DataCalUtils.calX(cwk,quarters,months,weeks,viewType);
 		logger.info("quarters->{}",quarters);
 		logger.info("months->{}",months);
 		logger.info("weeks->{}",weeks);

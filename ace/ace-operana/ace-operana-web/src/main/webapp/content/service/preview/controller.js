@@ -2,7 +2,7 @@ jQuery(function($) {
 	launchExample();
 });
 function initData() {
-	chart1();
+	chart1("1");
 	chart2();
 	chart3();
 	chart4();
@@ -47,7 +47,7 @@ function chart2() {
 	});
 }
 
-function chart1() {
+function chart1(viewType) {
 	$
 			.ajax({
 				type : "post",
@@ -55,7 +55,8 @@ function chart1() {
 				data : {
 					meetingId : meetingId,
 					topicId : topicId,
-					normId : normId
+					normId : normId,
+					viewType:viewType
 				},
 				success : function(rst) {
 					option1.xAxis[0].data = rst.dataX;
@@ -273,4 +274,7 @@ function reload2() {
 function add2() {
 	var url=contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+meetingId+'&topicId='+topicId+'&normId='+normId;
     window.open(url);
+}
+function setViewType(viewType){
+chart1(viewType);
 }

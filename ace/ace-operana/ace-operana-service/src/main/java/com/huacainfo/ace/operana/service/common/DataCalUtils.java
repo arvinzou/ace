@@ -3,6 +3,7 @@ package com.huacainfo.ace.operana.service.common;
 import java.math.BigDecimal;
 import java.util.*;
 
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -89,7 +90,17 @@ public class DataCalUtils {
 		return rst;
 	}
 
-    public static void calX(int cwk, List<Integer> quarters, List<Integer> months, List<Integer> weeks) {
+    public static void calX(int cwk, List<Integer> quarters, List<Integer> months, List<Integer> weeks,String viewType) {
+		if(CommonUtils.isBlank(viewType)||viewType.equals("1")){
+			calXDefault(cwk,quarters,months,weeks);
+		}else if(viewType.equals("2")){
+			calXMonth(cwk,quarters,months,weeks);
+		}else if(viewType.equals("3")){
+			calXWeek(cwk,quarters,months,weeks);
+		}
+
+	}
+	public static void calXDefault(int cwk, List<Integer> quarters, List<Integer> months, List<Integer> weeks) {
 		int wkl = 0;
 		int month = (int) (cwk / fl);
 		wkl = cwk - (int) (month * fl);
@@ -112,6 +123,32 @@ public class DataCalUtils {
 		}
 		if (wkl > 0) {
 			for (int k = (cwk - wkl + 1); k <= cwk; k++) {
+				weeks.add(k);
+				logger.info("第{}周", k);
+			}
+		}
+	}
+	public static void calXMonth(int cwk, List<Integer> quarters, List<Integer> months, List<Integer> weeks) {
+		int wkl = 0;
+		int month = (int) (cwk / fl);
+		wkl = cwk - (int) (month * fl);
+		if (month > 0) {
+			for (int j = 1; j <= month; j++) {
+				months.add((j));
+				logger.info("{}月", ( j));
+			}
+		}
+		if (wkl > 0) {
+			for (int k = (cwk - wkl + 1); k <= cwk; k++) {
+				weeks.add(k);
+				logger.info("第{}周", k);
+			}
+		}
+	}
+	public static void calXWeek(int cwk, List<Integer> quarters, List<Integer> months, List<Integer> weeks) {
+
+		if (cwk > 0) {
+			for (int k = 1; k <= cwk; k++) {
 				weeks.add(k);
 				logger.info("第{}周", k);
 			}
@@ -168,7 +205,7 @@ public class DataCalUtils {
         List<Integer> months=new ArrayList<Integer>();
         List<Integer> weeks=new ArrayList<Integer>();
 
-        DataCalUtils.calX(cwk,quarters,months,weeks);
+        DataCalUtils.calX(cwk,quarters,months,weeks,"1");
         x.add(lastYear+"年");
         y.add(row.get("lastYear"));
         for(Integer e:quarters){

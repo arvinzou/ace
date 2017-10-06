@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface ChartService {
 
-	public Map<String,Object> chart1(String meetingId,String topicId,String normId) throws Exception;
+	public Map<String,Object> chart1(String meetingId,String topicId,String normId,String viewType) throws Exception;
 
 	public Map<String,Object> chart2(String meetingId,String topicId,String normId) throws Exception;
 

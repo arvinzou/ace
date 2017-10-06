@@ -25,8 +25,8 @@ public class ChartController extends OperanaBaseController {
 
 	@RequestMapping(value = "/chart1.do")
 	@ResponseBody
-	public Map<String,Object> chart1(String meetingId, String topicId, String normId) throws Exception {
-		return this.chartService.chart1(meetingId, topicId, normId);
+	public Map<String,Object> chart1(String meetingId, String topicId, String normId,String viewType) throws Exception {
+		return this.chartService.chart1(meetingId, topicId, normId,viewType);
 
 	}
 
