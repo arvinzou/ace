@@ -177,8 +177,8 @@
 
     <select id="selectDictAllTreeByCategoryId" resultType="map">
         SELECT
-        t.ID,
-        t.pcode PID,
+        t. CODE ID,
+        substr(t. CODE, 1, length(t. CODE) - 2) PID,
         t. NAME TEXT,
         'closed' STATE,
         '' SRC,

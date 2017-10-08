@@ -78,9 +78,7 @@ public class PersonageServiceImpl implements PersonageService {
 		if (CommonUtils.isBlank(o.getNation())) {
 			return new MessageResponse(1, "民族不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getMobile())) {
-			return new MessageResponse(1, "移动电话不能为空！");
-		}
+
 		int temp = this.personageDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "统战人士名称重复！");
@@ -125,9 +123,7 @@ public class PersonageServiceImpl implements PersonageService {
 		if (CommonUtils.isBlank(o.getNation())) {
 			return new MessageResponse(1, "民族不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getMobile())) {
-			return new MessageResponse(1, "移动电话不能为空！");
-		}
+
 		if (CommonUtils.isBlank(o.getStatus())) {
 			return new MessageResponse(1, "状态不能为空！");
 		}
@@ -315,13 +311,13 @@ public class PersonageServiceImpl implements PersonageService {
 	}
 
 	private String getDictCodeBYId(String id){
-		if(CommonUtils.isBlank(id)){
+		/*if(CommonUtils.isBlank(id)){
 			return null;
 		}
 		Map<String,String> p=this.personageDao.selectDictCodeBYId( id);
 		if(CommonUtils.isNotEmpty(p)){
 			return p.get("code");
-		}
+		}*/
 		return id;
 	}
 	public int isExitPersonageByMobile(String mobile){

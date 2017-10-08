@@ -23,7 +23,7 @@ var normId='${param.normId}';
     <div class="row">
         <div class="col-md-6">
             <div style="padding-left:30px">
-                <a class="blue" href="javascript:setViewType('1')" data-rel="tooltip" data-placement="top" title="月视图">默认</a>
+                <a class="blue" href="javascript:setViewType('1')" data-rel="tooltip" data-placement="top" title="默认视图">默认</a>
                 <a class="blue" href="javascript:setViewType('2')" data-rel="tooltip" data-placement="top" title="月视图">月视图</a>
                 <a class="blue" href="javascript:setViewType('3')" data-rel="tooltip" data-placement="top" title="周视图">周视图</a>
             </div>
@@ -31,7 +31,16 @@ var normId='${param.normId}';
 
 
         </div>
-        <div class="col-md-6" id="ct2"></div>
+        <div class="col-md-6">
+
+            <div style="padding-left:30px">
+                <a class="blue" href="javascript:" data-rel="tooltip" data-placement="top" title="默认视图">默认</a>
+            </div>
+            <div id="ct2" class="row">
+
+
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-6">

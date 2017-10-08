@@ -4512,7 +4512,8 @@ ImageButton = (function(superClass) {
   ImageButton.prototype._status = function() {
     return this._disableStatus();
   };
-
+ //width: $img.width(),
+  // height: $img.height()
   ImageButton.prototype.loadImage = function($img, src, callback) {
     var $mask, img, positionMask;
     positionMask = (function(_this) {
@@ -4520,11 +4521,13 @@ ImageButton = (function(superClass) {
         var imgOffset, wrapperOffset;
         imgOffset = $img.offset();
         wrapperOffset = _this.editor.wrapper.offset();
+        $img.attr({
+                  width: "100%",
+                  height: "auto"
+                })
         return $mask.css({
           top: imgOffset.top - wrapperOffset.top,
-          left: imgOffset.left - wrapperOffset.left,
-          width: $img.width(),
-          height: $img.height()
+          left: imgOffset.left - wrapperOffset.left
         }).show();
       };
     })(this);
@@ -4545,6 +4548,7 @@ ImageButton = (function(superClass) {
         }
         width = img.width;
         height = img.height;
+
         $img.attr({
           src: src,
           width: width,

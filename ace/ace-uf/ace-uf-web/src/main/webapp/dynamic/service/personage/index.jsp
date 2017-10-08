@@ -153,17 +153,12 @@ pageEncoding="utf-8"%>
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-所属单位</span>
+单位&职务</span>
             <br>
             <span id="deptName">
 </span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-人士类别</span>
-            <br>
-            <span id="category">
-</span>
-        </div>
+
 
         <div class="labelItem"><span class="labelItemHeader">
 职业类别</span>
@@ -266,12 +261,7 @@ pageEncoding="utf-8"%>
 
 
 
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
-            <br>
-            <span id="status">
-</span>
-        </div>
+
     </div>
 
     <h5 class="header-title">个人简介</h5>

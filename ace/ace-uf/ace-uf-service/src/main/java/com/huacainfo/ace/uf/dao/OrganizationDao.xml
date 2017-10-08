@@ -193,7 +193,7 @@
     </select>
     <select id="selectOrganizationImagesById" resultType="map">
         select name, url, remark from organization_sub where
-        organizationId =#{id,jdbcType=VARCHAR}
+        organizationId =#{id,jdbcType=VARCHAR} order by createDate
     </select>
     <select id="selectAreaCodeList" resultType="map">
         SELECT

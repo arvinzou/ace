@@ -197,7 +197,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		}else{
 			Dict e=new Dict();
 			e.setCode("");
-			e.setName("--请选择--");
+			e.setName("");
 			e.setSelected(true);
 			list.add(0, e);
 		}
@@ -232,6 +232,10 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 						this.logger.info(sql);
 						try {
 							value = sqlRunner.selectAll(sql);
+							Map<String,Object> e=new HashMap<String,Object>();
+							e.put("CODE","");
+							e.put("NAME","");
+							value.add(0, e);
 						} catch (SQLException e) {
 
 							e.printStackTrace();
@@ -256,6 +260,10 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 			o.put("NAME",String.valueOf(i));
 			years.add(o);
 		}
+		Map<String,Object> e=new HashMap<String,Object>();
+		e.put("CODE","");
+		e.put("NAME","");
+		years.add(0, e);
 		rst.put("year",years);
 		List<Map<String,Object>> months =new ArrayList<Map<String,Object>>();
 		for(int i=1;i<=12;i++){
@@ -264,6 +272,10 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 			o.put("NAME",String.valueOf(i));
 			months.add(o);
 		}
+		e=new HashMap<String,Object>();
+		e.put("CODE","");
+		e.put("NAME","");
+		months.add(0, e);
 		rst.put("month",months);
 		List<Map<String,Object>> week =new ArrayList<Map<String,Object>>();
 		for(int i=1;i<=53;i++){
@@ -272,6 +284,10 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 			o.put("NAME",String.valueOf(i)+"周");
 			week.add(o);
 		}
+		e=new HashMap<String,Object>();
+		e.put("CODE","");
+		e.put("NAME","");
+		week.add(0, e);
 		rst.put("week",week);
 
 		List<Map<String,Object>> hours =new ArrayList<Map<String,Object>>();
@@ -281,6 +297,10 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 			o.put("NAME",String.valueOf(i));
 			hours.add(o);
 		}
+		e=new HashMap<String,Object>();
+		e.put("CODE","");
+		e.put("NAME","");
+		hours.add(0, e);
 		rst.put("hours",hours);
 		return rst;
 	}
@@ -358,8 +378,16 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 
 	public  List<Tree> selectDictAllTreeByCategoryId(String id) throws Exception{
 		logger.info("=================selectDictAllTreeByCategoryId-pid===>{}",id);
+
+		List<Map<String,Object>>  list=this.dictMapper.selectDictAllTreeByCategoryId(id);
+		for(Map<String,Object> o:list){
+			String PID=(String) o.get("PID");
+			if(CommonUtils.isBlank(PID)){
+				o.put("PID","0");
+			}
+		}
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
-				this.dictMapper.selectDictAllTreeByCategoryId(id));
+				list);
 		return commonTreeUtils.getTreeList("0");
 	}
 }

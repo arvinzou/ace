@@ -64,6 +64,10 @@ Page({
           var title="";
           if(data.type=='1'){
             title = "单位主要职责";
+          } else if (data.type == '3'){
+            title = "公司介绍";
+          } else if (data.type == '4') {
+            title = "场所介绍";
           }else{
             title = "单位介绍";
           }

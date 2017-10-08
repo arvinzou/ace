@@ -42,7 +42,7 @@
           <view class="kind-list-item" wx:if="{{org.contact_mobile.length>0}}">
             <view class="kind-list-item-hd">
               <view class="kind-list-text">联系电话</view>
-              <view bindtap="makePhoneCall2">{{org.contact_mobile&&showTel}}</view>
+              <view bindtap="makePhoneCall2">{{org.contact_mobile}}</view>
             </view>
           </view>
 

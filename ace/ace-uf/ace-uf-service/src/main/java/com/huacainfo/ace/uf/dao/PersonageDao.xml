@@ -191,7 +191,7 @@
         select count(*)
         from
         personage where
-        name=#{name} and areaCode=#{areaCode} and mobile=#{mobile}
+        name=#{name} and areaCode=#{areaCode} and mobile=#{mobile} and deptId=#{deptId}
     </select>
     <select id="selectPersonageList" resultType="map">
         SELECT

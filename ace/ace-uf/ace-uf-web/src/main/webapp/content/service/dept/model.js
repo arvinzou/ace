@@ -257,6 +257,13 @@ var _colModel = function() {
 				editoptions : {
 					value : odparse("04"),
 					style : 'width:175px;line-height: 25px;height: 25px;'
+				},
+				formoptions : {
+					elmprefix : "",
+					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+				},
+				editrules : {
+					required : true
 				}
 			},
 			{
