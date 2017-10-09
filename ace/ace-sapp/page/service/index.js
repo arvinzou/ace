@@ -334,11 +334,11 @@ Page({
         var markers = [];
         for (var i = 0; i < data.length; i++) {
           var o = data[i];
-          o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
-          o.width = 45;
+          //o.iconPath = "../../image/location_96px_1175814_easyicon.net.png";
+         // o.width = 45;
           o.title = o.name;
-          o.height = 45;
-          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5, display: 'ALWAYS' };
+         // o.height = 45;
+          o.callout = { content: o.name, color: "#FFFFFF", fontSize: 14, borderRadius: 5, bgColor: "#d81e06", padding: 5 };
           //o.label = { content: o.name };
           markers.push(o);
           includePoints.push({

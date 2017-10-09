@@ -22,6 +22,23 @@ Page({
       }
     });
   },
+  onShareAppMessage: function (res) {
+    var that = this;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: that.data.o.name,
+      path: '/page/personageSub/index?id=' + that.data.o.id,
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
   imageLoad: function (e) {
     var $width = e.detail.width,    //获取图片真实宽度
       $height = e.detail.height,

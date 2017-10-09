@@ -30,6 +30,23 @@ Page({
       }
     });
   },
+  onShareAppMessage: function (res) {
+    var that = this;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: that.data.o.name,
+      path: '/page/activityPreview/index?id=' + that.data.o.id,
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
   openLocation: function () {
     var o = this.data.o;
 

@@ -4523,7 +4523,8 @@ ImageButton = (function(superClass) {
         wrapperOffset = _this.editor.wrapper.offset();
         $img.attr({
                   width: "100%",
-                  height: "auto"
+                  height: "auto",
+                  style:  "display:block"
                 })
         return $mask.css({
           top: imgOffset.top - wrapperOffset.top,

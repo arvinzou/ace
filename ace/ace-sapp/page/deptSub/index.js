@@ -15,6 +15,23 @@ Page({
     title: "单位主要职责",
     showTel:false
   },
+  onShareAppMessage: function (res) {
+    var that=this;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: that.data.org.department_name,
+      path: '/page/deptSub/index?id='+that.data.org.department_id,
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
+  },
   onReady: function (res) {
     wx.setNavigationBarColor({
       frontColor: cfg.frontColor,
@@ -75,6 +92,7 @@ Page({
           if (data.type == '1') {
             showTel = true;
           }
+          wx.setNavigationBarTitle({ title: data.department_name });
           that.setData({
             org: data,
             showTel: showTel,

@@ -126,7 +126,7 @@ style="width:{{ images.width }}rpx; height:{{ images.height }}rpx;"  src="../../
       <view class="kind-list-item" style="text-align: center;padding:2px;" wx:if="{{o.intro.length>0}}">
            
             <view style="text-align: center;padding:2px;font-weight:800;font-size:18px">简历 </view>
-              <rich-text nodes="{{o.intro}}" style="text-align:left"></rich-text>
+              <rich-text nodes="{{o.intro}}" style="text-align:left;text-indent:40px;"></rich-text>
            
       </view>
 

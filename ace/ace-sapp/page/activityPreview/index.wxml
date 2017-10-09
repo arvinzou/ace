@@ -19,7 +19,7 @@
             <image src="{{serverfile}}{{o.photo}}" wx:if="{{o.photo.length>0}}" class="swiper" mode="aspectFill" bindtap="previewImage" data-url="{{serverfile}}{{o.photo}}" />
            <view class="text-line"></view>
           <view class="text-content">
-          <rich-text nodes="{{o.docText}}"></rich-text>
+          <rich-text style="text-indent:40px;" nodes="{{o.docText}}"></rich-text>
           </view>
         </view>
       </view>

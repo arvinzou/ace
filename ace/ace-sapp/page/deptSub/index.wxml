@@ -69,13 +69,13 @@
             <view style="text-align: center;padding:2px;font-weight:800;font-size:18px;">{{title}}</view>
            
 
-              <rich-text nodes="{{org.serviceWay}}" style="text-align:left;line-height:30px;padding:20px"></rich-text>
+              <rich-text nodes="{{org.serviceWay}}" style="text-align:left;line-height:30px;padding:20px;text-indent:40px;"></rich-text>
            
           </view>
 
           <view class="kind-list-item" style="text-align: center;padding:2px;" wx:if="{{org.remark.length>0}}">
             
-            <view style="text-align: center;padding:2px;font-weight:800;font-size:18px">备注 </view>
+            <view style="text-align: center;padding:2px;font-weight:800;font-size:18px;text-indent:40px;">备注 </view>
              
               <rich-text nodes="{{org.remark}}"></rich-text>
            
