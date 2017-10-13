@@ -61,14 +61,16 @@ function chart1(viewType) {
 				success : function(rst) {
 					option1.xAxis[0].data = rst.dataX;
 					option1.series[0].data = rst.dataY;
-					//option1.series[1].data = rst.index;
+					option1.series[1].data = rst.index;
 					option1.title.text = rst.name;
 					//option1.legend.data[0] = rst.name;
 					option1.series[0].name = rst.name;
-					option1.series[0].markLine.data[0][1].xAxis = rst.xAxis;
+
+					/*option1.series[0].markLine.data[0][1].xAxis = rst.xAxis;
 					option1.series[0].markLine.data[0][0].yAxis = rst.yAxis;
 					option1.series[0].markLine.data[0][0].value = rst.yAxis;
 					option1.series[0].markLine.data[0][1].yAxis = rst.yAxis;
+					*/
 					if (rst.dataX.length <= 8) {
 						option1.series[0].barWidth = 40;
 					}

@@ -7,7 +7,9 @@ var option2 = {
 			color : '#000000'
 		}
 	},
-	color : ['#3398DB'],
+	 legend: {
+            data:['任务','已关闭']
+        },
 	tooltip : {
 		trigger : 'axis',
 		axisPointer : {
@@ -66,8 +68,23 @@ var option2 = {
 		}
 	}],
 	series : [{
-		name : '数量',
+		name : '任务',
 		type : 'bar',
+		markPoint : {
+			data : [{
+				type : 'max',
+				name : '最大值'
+			}, {
+				type : 'min',
+				name : '最小值'
+			}]
+		},
+		markLine : {
+			data : [{
+				type : 'average',
+				name : '平均值'
+			}]
+		},
 		//barWidth : 40,
 		data : [],
 		itemStyle : {
@@ -82,5 +99,37 @@ var option2 = {
 				}
 			}
 		}
-	}]
+	},{
+      		name : '已关闭',
+      		type : 'bar',
+      		markPoint : {
+      			data : [{
+      				type : 'max',
+      				name : '最大值'
+      			}, {
+      				type : 'min',
+      				name : '最小值'
+      			}]
+      		},
+      		markLine : {
+      			data : [{
+      				type : 'average',
+      				name : '平均值'
+      			}]
+      		},
+      		//barWidth : 40,
+      		data : [],
+      		itemStyle : {
+      			normal : {
+      				label : {
+      					show : true,
+      					position : 'top',
+      					formatter : '{c}',
+      					textStyle : {
+      						color : '#000000'
+      					}
+      				}
+      			}
+      		}
+      	}]
 };

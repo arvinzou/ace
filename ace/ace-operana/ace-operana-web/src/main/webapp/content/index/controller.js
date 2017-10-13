@@ -938,12 +938,12 @@ function upload2(meetingId, topicId) {
 function export1(meetingId) {
 	location.href = contextPath + "/normData/exportXls.do?meetingId="
 			+ meetingId;
-	alert("正在导出，请稍后.......")
+	//alert("正在导出，请稍后.......")
 }
 function export2(meetingId, topicId) {
 	location.href = contextPath + "/normDetail/exportXls.do?meetingId="
 			+ meetingId + "&topicId=" + topicId;
-	alert("正在导出，请稍后.......")
+	//alert("正在导出，请稍后.......")
 }
 
 function topicSetting() {
@@ -1164,8 +1164,11 @@ function chart2() {
                 option2.xAxis[0].data.push(o.name);
             });
             $(rst.value).each(function(i,o){
-                            option2.series[0].data.push(o.value);
+                            option2.series[1].data.push(o.value1);
                    });
+                   $(rst.value).each(function(i,o){
+                                               option2.series[0].data.push(o.value2);
+                                      });
 			initMyChar2();
 		}
 	});

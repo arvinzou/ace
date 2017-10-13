@@ -53,14 +53,7 @@
 	</update>
 	<sql id="whereCondition">
 		from config t left join department a on t.dept_id=a.department_id
-		where (syid='sys' or syid =#{condition.syid})
-        <choose>  
-            <when test="condition.deptId==5">   
-            </when>  
-            <otherwise>
-				and t.dept_id=#{condition.deptId}
-            </otherwise>
-        </choose> 
+		where (t.syid =#{condition.syid})
 		<if test="condition.category!=null and condition.category!=&quot;&quot;">
 			and t.category =#{condition.category,jdbcType=VARCHAR}
 		</if>

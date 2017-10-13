@@ -53,12 +53,7 @@ public class DepartmentController extends PortalBaseController {
 	public PageResult<DepartmentVo> findDepartmentList(Department condition,
 			PageParam page) throws Exception {
 		PageResult<DepartmentVo> rst;
-		if(CommonUtils.isBlank(condition.getAreaCode())){
-			condition.setAreaCode(this.getCurUserProp().getAreaCode());
-		}
-		if(CommonUtils.isBlank(condition.getParentDepartmentId())){
-			condition.setParentDepartmentId(this.getCurUserProp().getCorpId());
-		}
+
 		condition.setSyid(this.getCurUserProp().getActiveSyId());
 		rst = this.departmentService.findDepartmentList(condition,
 				page.getStart(), page.getLimit(), page.getOrderBy());

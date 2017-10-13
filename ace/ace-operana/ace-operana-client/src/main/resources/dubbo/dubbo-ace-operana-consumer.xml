@@ -16,17 +16,30 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 	http://code.alibabatech.com/schema/dubbo  http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <dubbo:reference interface="com.huacainfo.ace.operana.service.NormService"
-                     id="normService"></dubbo:reference>
+                     id="normService"/>
     <dubbo:reference interface="com.huacainfo.ace.operana.service.NormCfgService"
-                     id="normCfgService"></dubbo:reference>
+                     id="normCfgService"/>
 
     <dubbo:reference interface="com.huacainfo.ace.operana.service.TopicService"
-                     id="topicService"></dubbo:reference>
+                     id="topicService"/>
 
 
     <dubbo:reference interface="com.huacainfo.ace.operana.service.MeetingService"
-                     id="meetingService"></dubbo:reference>
+                     id="meetingService"/>
 
     <dubbo:reference interface="com.huacainfo.ace.operana.service.NormDataService"
-                     id="normDataService"></dubbo:reference>
+                     id="normDataService"/>
+
+    <dubbo:reference interface="com.huacainfo.ace.operana.service.AnalysisService"
+                     id="analysisService"/>
+
+    <dubbo:reference interface="com.huacainfo.ace.operana.service.ChartService"
+                     id="chartService"/>
+
+    <dubbo:reference interface="com.huacainfo.ace.operana.service.NormDetailService"
+                     id="normDetailService"/>
+    <dubbo:reference interface="com.huacainfo.ace.operana.service.TpaService"
+                     id="tpaService"/>
+    <dubbo:reference interface="com.huacainfo.ace.operana.service.TaskOperanaService"
+                     id="taskOperanaService"/>
 </beans>

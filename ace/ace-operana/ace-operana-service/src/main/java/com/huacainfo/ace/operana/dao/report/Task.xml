@@ -3,21 +3,27 @@
 <mapper namespace="com.huacainfo.ace.operana.dao.report.Task">
   <select id="query" resultType="map">
     SELECT
-    a.`name`,
-    count(1) 'value'
+    a.department_name 'name',
+    t.closed 'value1',
+    t.total  'value2'
     FROM
-    tpa t
-    LEFT JOIN (
+    (
     SELECT
-    CODE,
-    NAME
+    count(1) total,
+    sum(
+    CASE
+    WHEN status = '2' THEN
+    1
+    ELSE
+    0
+    END
+    ) closed,
+    deptId
     FROM
-    portal.dict
-    WHERE
-    category_id = '92'
-    ) a ON t.`status` = a.`code`
-    where t.liable=#{userId}
+    tpa
     GROUP BY
-    a.`name`
+    deptId
+    ) t
+    LEFT JOIN portal.department a ON t.deptId = a.department_id
   </select>
 </mapper>

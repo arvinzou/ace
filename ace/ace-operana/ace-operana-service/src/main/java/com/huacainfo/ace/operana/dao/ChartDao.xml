@@ -22,6 +22,11 @@
         select indexValue from norm_cfg where year=#{year}
         and normId= #{normId,jdbcType=VARCHAR}
     </select>
+    <select id="selectNormIndexMap" resultType="java.util.Map">
+        select indexValue,value1,value2,value3,value4 from norm_cfg where year=#{year}
+        and normId= #{normId,jdbcType=VARCHAR}
+
+    </select>
     <select id="selectTop10Problem" resultType="map">
         SELECT name,wk${cwk}  'values' from norm_detail
         where

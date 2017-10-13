@@ -953,11 +953,11 @@ function upload2(meetingId,topicId){
 }
 function export1(meetingId){
    location.href=contextPath+"/normData/exportXls.do?meetingId="+meetingId;
-    alert("正在导出，请稍后.......")
+    //alert("正在导出，请稍后.......")
 }
 function export2(meetingId,topicId){
    location.href=contextPath+"/normDetail/exportXls.do?meetingId="+meetingId+"&topicId="+topicId;
-   alert("正在导出，请稍后.......")
+   //alert("正在导出，请稍后.......")
 }
 
 function topicSetting(){

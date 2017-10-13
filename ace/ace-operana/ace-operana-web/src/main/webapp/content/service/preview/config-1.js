@@ -64,7 +64,16 @@ var option1 = {
 		axisLabel : {
 			formatter : '{value} '
 		}
-	}],
+	}, {
+     		type : 'value',
+     		name : '',
+     		axisLabel : {
+     			formatter : '{value} '
+     		},
+     		splitLine : {
+     			show : false
+     		}
+     	}],
 	series : [{
 		name : '指标值',
 		type : 'bar',
@@ -110,10 +119,10 @@ var option1 = {
 				yAxis : 0
 			}]]
 		},
-	}/*, {
+	}, {
 		name : '目标值',
 		type : 'line',
 		yAxisIndex : 1,
 		data : []
-	}*/]
+	}]
 };

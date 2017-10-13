@@ -207,4 +207,45 @@
         ) AS t
 
     </select>
+    <select id="selectTaskForEmail" resultType="map">
+        <![CDATA[
+        SELECT
+        a.department_name 'name',
+        t.opened,
+        t.closed,
+        t.total
+        FROM
+        (
+        SELECT
+        count(1) total,
+        sum(
+        CASE
+        WHEN STATUS = '2' THEN
+        1
+        ELSE
+        0
+        END
+        ) closed,
+        sum(
+        CASE
+        WHEN STATUS = '1' THEN
+        1
+        ELSE
+        0
+        END
+        ) opened,
+        deptId
+        FROM
+        tpa where hour(timediff(lastModifyDate,now()))<=24
+        GROUP BY
+        deptId
+        ) t
+        LEFT JOIN portal.department a ON t.deptId = a.department_id
+        ORDER BY
+        t.opened
+        ]]>
+    </select>
+    <select id="selectEmailForNotice" resultType="map">
+        select email,name from portal.users t where t.user_level='5' and email is not null
+    </select>
 </mapper>

@@ -46,14 +46,7 @@ public class ConfigController extends PortalBaseController {
 	@ResponseBody
 	public PageResult<ConfigVo> findConfigList(ConfigQVo condition,
 			PageParam page) throws Exception {
-		if(CommonUtils.isBlank(condition.getDeptId())){
-			condition.setDeptId(this.getCurUserProp().getCorpId());
-		}
 		condition.setSyid(this.getCurUserProp().getActiveSyId());
-		String code = condition.getDeptId();
-		if(code.length()<5){
-			condition.setDeptId("5");
-		}
 		PageResult<ConfigVo> rst = this.configService.findConfigList(
 				condition, page.getStart(), page.getLimit(), page.getOrderBy());
 		if (rst.getTotal() == 0) {

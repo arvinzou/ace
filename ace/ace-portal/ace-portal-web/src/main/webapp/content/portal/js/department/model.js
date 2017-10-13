@@ -1,12 +1,12 @@
-var _colNames = ['基本信息', '编号', '归属单位编号', '单位名称', '简称', '注册日期', '注册资本',
+var _colNames = ['基本信息', '编号', '归属部门编号', '部门名称', '简称', '注册日期', '注册资本',
 		'注册辖区', '注册地址', '维度', '经度', '经济性质', '营业执照号', '企业类型', '机构类型', '运营地区',
-		'机构状态', '联系人信息', '联系人姓名', '联系人电话', '联系人手机号', '联系人QQ', '联系人邮箱', '法人信息',
+		'状态', '联系人信息', '联系人姓名', '联系人电话', '联系人手机号', '联系人QQ', '联系人邮箱', '法人信息',
 		'法定联系人', '法人证件类型', '法定人证件号', '法定人电话', '法定人手机号', '法定人地址', '创建时间','图片资源'];
 var _colModel = function() {
 	return [
 			{
 				name : 'title1',
-				editable : true,
+				editable : false,
 				hidden : true,
 				editoptions : {
 					title : true
@@ -17,7 +17,7 @@ var _colModel = function() {
 				index : 'id',
 				width : 150,
 				sortable : false,
-				editable : true,
+				editable : false,
 				editoptions : {
 					readonly : true,
 					style : 'width:175px;line-height: 25px;height: 25px;'
@@ -64,7 +64,7 @@ var _colModel = function() {
 				index : 'shortName',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "250",
@@ -72,16 +72,16 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 				},
 				editrules : {
-					required : true
+					required : false
 				}
 			},
 			{
 				name : 'regDate',
 				//width : 120,
-				editable : true,
+				editable : false,
 				hidden : true,
 				edittype : "datebox",
 				editoptions : {
@@ -121,7 +121,7 @@ var _colModel = function() {
 				index : 'regCapital',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -140,7 +140,7 @@ var _colModel = function() {
 			},
 			{
 				name : 'regAreaCode',
-				editable : true,
+				editable : false,
 				hidden : true,
 				width : 100,
 				edittype : "combotree",
@@ -159,12 +159,12 @@ var _colModel = function() {
 					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
 				},
 				editrules : {
-					required : true
+					required : false
 				}
 			},
 			{
 				name : 'regAddr',
-				editable : true,
+				editable : false,
 				hidden : true,
 				width : 100,
 				editoptions : {
@@ -182,7 +182,7 @@ var _colModel = function() {
 			},
 			{
 				name : 'latitude',
-				editable : true,
+				editable : false,
 				hidden : true,
 				width : 100,
 				editoptions : {
@@ -193,7 +193,7 @@ var _colModel = function() {
 			},
 			{
 				name : 'longitude',
-				editable : true,
+				editable : false,
 				hidden : true,
 				width : 100,
 				editoptions : {
@@ -207,7 +207,7 @@ var _colModel = function() {
 				index : 'nature',
 				width : 80,
 				hidden : true,
-				editable : true,
+				editable : false,
 				edittype : "select",
 				renderer : function(value) {
 					return rsd(value, "03");
@@ -229,7 +229,7 @@ var _colModel = function() {
 				index : 'bussLicenseNo',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -247,7 +247,7 @@ var _colModel = function() {
 				name : 'type',
 				width : 60,
 				hidden : true,
-				editable : true,
+				editable : false,
 				edittype : "select",
 				renderer : function(value) {
 					return rsd(value, "04");
@@ -261,7 +261,7 @@ var _colModel = function() {
 				name : 'category',
 				width : 60,
 				hidden : true,
-				editable : true,
+				editable : false,
 				edittype : "select",
 				renderer : function(value) {
 					return rsd(value, "102");
@@ -275,7 +275,7 @@ var _colModel = function() {
 				name : 'areaCode',
 				width : 100,
 				hidden : true,
-				editable : true,
+				editable : false,
 				edittype : "combotree",
 				editoptions : {
 					style : 'width:175px;line-height: 25px;height: 25px;'
@@ -292,14 +292,14 @@ var _colModel = function() {
 					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
 				},
 				editrules : {
-					required : true
+					required : false
 				}
 			},
 			{
 				name : 'status',
 				index : 'status',
 				width : 90,
-				editable : true,
+				editable : false,
 				edittype : "checkbox",
 				editoptions : {
 					value : "1:0"
@@ -323,7 +323,7 @@ var _colModel = function() {
 			},
 			{
 				name : 'title3',
-				editable : true,
+				editable : false,
 				hidden : true,
 				editoptions : {
 					title : true
@@ -334,7 +334,7 @@ var _colModel = function() {
 				index : 'contactName',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -356,7 +356,7 @@ var _colModel = function() {
 				index : 'contactTel',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -378,7 +378,7 @@ var _colModel = function() {
 				index : 'contactMobile',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -400,7 +400,7 @@ var _colModel = function() {
 				index : 'contactQQ',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -422,7 +422,7 @@ var _colModel = function() {
 				index : 'contactEmail',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -441,7 +441,7 @@ var _colModel = function() {
 			},
 			{
 				name : 'title2',
-				editable : true,
+				editable : false,
 				hidden : true,
 				editoptions : {
 					title : true
@@ -452,7 +452,7 @@ var _colModel = function() {
 				index : 'legalPersonName',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -471,7 +471,7 @@ var _colModel = function() {
 				index : 'legalPersonIdType',
 				width : 100,
 				hidden : true,
-				editable : true,
+				editable : false,
 				edittype : "select",
 				renderer : function(value) {
 					return rsd(value, "70");
@@ -493,7 +493,7 @@ var _colModel = function() {
 				index : 'legalPersonIdNo',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -512,7 +512,7 @@ var _colModel = function() {
 				index : 'legalPersonTel',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -534,7 +534,7 @@ var _colModel = function() {
 				index : 'legalPersonMobile',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -556,7 +556,7 @@ var _colModel = function() {
 				index : 'legalPersonAddr',
 				width : 150,
 				hidden : true,
-				editable : true,
+				editable : false,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -580,7 +580,7 @@ var _colModel = function() {
 				editable : false
 			},{
               				name : 'title5',
-              				editable : true,
+              				editable : false,
               				hidden : true,
               				editoptions : {
               					title : true

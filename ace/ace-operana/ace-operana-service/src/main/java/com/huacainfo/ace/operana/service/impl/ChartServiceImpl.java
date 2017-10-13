@@ -54,6 +54,9 @@ public class ChartServiceImpl implements ChartService {
         int cwk=meeting.getCvalue();
         String calType=norm.getCalType();
         java.math.BigDecimal normIndex=this.chartDao.selectNormIndex(year,normId);
+
+		Map<String,java.math.BigDecimal> normIndexMap=this.chartDao.selectNormIndexMap(year,normId);
+
         if(CommonUtils.isBlank(normIndex)){
 			normIndex=new java.math.BigDecimal("0");
 		}
@@ -72,11 +75,13 @@ public class ChartServiceImpl implements ChartService {
 		for(Integer e:quarters){
 			x.add(e+"季度");
 			y.add(DataCalUtils.calQuarterY(e,row,calType));
+			normIndex=DataCalUtils.getNormInex(normIndexMap,e,"quarters",normIndex);
 			index.add(normIndex);
 		}
 		for(Integer e:months){
 			x.add(e+"月");
 			y.add(DataCalUtils.calMonthY(e,row,calType));
+			normIndex=DataCalUtils.getNormInex(normIndexMap,e,"months",normIndex);
 			index.add(normIndex);
 		}
 		for(Integer e:weeks){

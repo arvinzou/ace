@@ -27,11 +27,7 @@
 					<form action="#" id="fm-search">
 						参数名称： <input name="configName" type="text"
 							style="width: 200px;height:25px" />
-				所属机构：
-						<input name="deptId" class="easyui-combotree"
-				data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do',method:'get',animate: true,
-                lines:false,"
-				style='width: 200px; line-height: 25px; height: 25px;'>
+
 						<button class="btn btn-info" id="btn-search"
 							authority="${pageContext.request.contextPath}/config/findConfigList.do">
 							 <i

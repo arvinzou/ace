@@ -19,4 +19,7 @@ public interface ChartDao {
     List<Map<String,Object>> selectTpa(@Param("meetingId") String meetingId, @Param("topicId") String topicId, @Param("normId") String normId, @Param("cwk") String cwk);
 
     List<Map<String,Object>> selectChart1();
+
+
+    Map<String,java.math.BigDecimal> selectNormIndexMap( @Param("year") int year, @Param("normId") String normId);
 }
