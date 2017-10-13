@@ -28,7 +28,7 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
     private MeetingDao meetingDao;
 
 
-    @Scheduled(fixedDelay = 20000)
+    @Scheduled(cron="0 49 08 ? * *")
     public  void autoSendEmail() throws Exception{
         this.logger.info("autoSendEmail executed");
         List<Map<String,Object>> emails=meetingDao.selectEmailForNotice();
