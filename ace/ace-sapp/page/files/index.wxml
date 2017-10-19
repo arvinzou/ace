@@ -1,0 +1,17 @@
+<view class="page" style="height:100%">
+   <view class="reg-top">
+  <view class="reg-logo-panel">
+      <image src="../../image/logo.jpeg" mode="aspectFit" class="reg-icon"/>
+      
+  </view>
+  <view class="reg-title">
+    拼命建设中
+  </view>
+</view>
+    
+       
+    <view class='bottom'>
+    <image class="iconList" src="../../image/党徽.png" mode="aspectFit"/>
+    <view>中共常德市武陵区委统战部</view>
+    </view>
+</view>
