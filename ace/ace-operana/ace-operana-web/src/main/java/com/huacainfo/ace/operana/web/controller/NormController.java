@@ -61,7 +61,7 @@ public class NormController extends OperanaBaseController {
 
 	@RequestMapping(value = "/selectNormByPrimaryKey.do")
 	@ResponseBody
-	public SingleResult<Norm> selectNormByPrimaryKey(String id) throws Exception {
+	public SingleResult<NormVo> selectNormByPrimaryKey(String id) throws Exception {
 		return this.normService.selectNormByPrimaryKey(id);
 	}
 

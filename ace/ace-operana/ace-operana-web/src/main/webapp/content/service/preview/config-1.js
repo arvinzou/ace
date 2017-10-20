@@ -45,7 +45,7 @@ var option1 = {
 		}
 	},
 	legend : {
-	x : 'right',
+		x : 'right',
 		data : []
 	},
 	xAxis : [{
@@ -65,64 +65,76 @@ var option1 = {
 			formatter : '{value} '
 		}
 	}, {
-     		type : 'value',
-     		name : '',
-     		axisLabel : {
-     			formatter : '{value} '
-     		},
-     		splitLine : {
-     			show : false
-     		}
-     	}],
-	series : [{
-		name : '指标值',
-		type : 'bar',
-		//barWidth : 40,
-		data : [],
-		itemStyle : {
-			normal : {
-				label : {
-					show : true,
-					position : 'top',
-					formatter : '{c}',
-					textStyle : {
-						color : '#000000'
-					}
-				}
-			}
+		type : 'value',
+		name : '',
+		axisLabel : {
+			formatter : '{value} '
 		},
-		markLine : {
-			itemStyle : {
-				normal : {
-					lineStyle : {
-						type : 'solid',
-						color : 'red'
-					},
-					label : {
-						show : true,
-						position : 'right',
-						formatter : '目标值{c}',
-						textStyle : {
-							color : 'red'
+		splitLine : {
+			show : false
+		}
+	}],
+	series : [
+			{
+				name : '指标值',
+				type : 'bar',
+				barWidth : 'auto',
+				data : [],
+				itemStyle : {
+					normal : {
+						label : {
+							show : true,
+							position : 'top',
+							formatter : '{c}',
+							textStyle : {
+								color : '#000000'
+							}
+						},
+						color : function(params) {
+							var colorList = ['#EA0000', '#FF9797', '#2894FF',
+									'#F9F900', '#00E3E3', '#00A600', '#6F00D2',
+									'#EA0000', '#FF9797', '#2894FF', '#F9F900',
+									'#00E3E3', '#00A600', '#6F00D2', '#EA0000',
+									'#FF9797', '#2894FF', '#F9F900', '#00E3E3',
+									'#00A600', '#6F00D2', '#EA0000', '#FF9797',
+									'#2894FF', '#F9F900', '#00E3E3', '#00A600',
+									'#6F00D2'];
+							return colorList[params.dataIndex];
 						}
 					}
-				}
-			},
-			data : [[{
-				name : 'A',
-				value:0,
-				xAxis : -1,
-				yAxis : 0
+				},
+				markLine : {
+					itemStyle : {
+						normal : {
+							lineStyle : {
+								type : 'solid',
+								color : 'red'
+							},
+							label : {
+								show : true,
+								position : 'right',
+								formatter : '目标值{c}',
+								textStyle : {
+									color : 'red'
+								}
+							}
+						}
+					},
+					data : [[{
+						name : 'A',
+						value : 0,
+						xAxis : -1,
+						yAxis : 0
+					}, {
+						name : 'B',
+						xAxis : '',
+						yAxis : 0
+					}]]
+				},
 			}, {
-				name : 'B',
-				xAxis : '',
-				yAxis : 0
-			}]]
-		},
-	}, {
-		name : '目标值',
-		type : 'line',
-		yAxisIndex : 1,
-		data : []
-	}]
+				name : '目标值',
+				type : 'line',
+				yAxisIndex : 1,
+				data : []
+			}]
 };

@@ -138,17 +138,24 @@ function chart3() {
 					html.push("不良现象明细");
 					html.push("</td></tr>");
 					*/
+					html.push("<thead>");
 					html
 							.push("<tr style='background:#336666;text-align:center;font-weight:800;'>");
 					$(rst.itemName)
 							.each(
 									function(i, o) {
-										html
-												.push("<td style='color:#FFFFFF;font-weight:800'>");
+									    if(i==0){
+									        html.push("<td style='color:#FFFFFF;font-weight:800' class='wt600'>");
+									    }else{
+									        html.push("<td style='color:#FFFFFF;font-weight:800' class='wt60'>");
+									    }
+
 										html.push(o);
 										html.push("</td>");
 									});
 					html.push("</tr>");
+					html.push("</thead>");
+					html.push("<tbody>");
 					$(rst.data)
 							.each(
 									function(i, e) {
@@ -163,15 +170,18 @@ function chart3() {
 															if (o == 'name') {
 																background = "background:#FFFF6F";
 															}
-															html
-																	.push("<td style='font-weight:800;"
-																			+ background
-																			+ "'>");
+															if(i==0){
+                                                                html.push("<td style='font-weight:800;"+ background+ "' class='wt600'>");
+                                                            }else{
+                                                                html.push("<td style='font-weight:800;"+ background+ "' class='wt60'>");
+                                                            }
+
 															html.push(e[o]);
 															html.push("</td>");
 														});
 										html.push("</tr>");
 									});
+									html.push("</tbody>");
 					$("#grid2").html(html.join(""));
 				}
 			});
@@ -194,18 +204,22 @@ function chart4() {
 							+ "' style='color:#FFFFFF'>");
 					html.push("TOP问题分析");
 					html.push("</td></tr>");
+
 					*/
+					html.push("<thead>");
 					html
 							.push("<tr style='background:#336666;text-align:center;font-weight:800;'>");
 					$(rst.itemName)
 							.each(
 									function(i, o) {
 										html
-												.push("<td style='color:#FFFFFF;font-weight:800'>");
+												.push("<td style='color:#FFFFFF;font-weight:800' class='wt80'>");
 										html.push(o);
 										html.push("</td>");
 									});
 					html.push("</tr>");
+					html.push("</thead>");
+					html.push("<tbody>");
 					$(rst.data)
 							.each(
 									function(i, e) {
@@ -214,32 +228,57 @@ function chart4() {
 												.each(
 														function(i, o) {
 															var background = "";
+
 															if (o == rst.cwk) {
 																background = "background:#006000;color:#FFFFFF;";
 															}
 															if (o == 'probDiscri') {
+															    var text=e[o];
+															    if(text){
+															     e[o]=text.replace(/\b(\S+)\b/g, function($0){
+                                                                if(typeof $0 !== 'undefined'){
+                                                                    return $0 + '';
+                                                                }
+                                                                }).replace(/\s+/g, '<br/>');
+															    }
+
 																background = "background:#FFFF6F";
 															}
+															if (o == 'actions') {
+															    var text=e[o];
+                                                                if(text){
+                                                                 e[o]=text.replace(/\b(\S+)\b/g, function($0){
+                                                                          if(typeof $0 !== 'undefined'){
+                                                                              return $0 + '';
+                                                                          }
+                                                                          }).replace(/\s+/g, '<br/>');
+                                                                }
+                                                            }
 															if (o == 'status') {
-																if (e[o] == 'OPEN') {
+																if (e[o] == 'Open') {
 																	background = "background:red";
 																}
-																if (e[o] == 'CLOSED') {
+																if (e[o] == 'Closed') {
 																	background = "background:green";
 																}
-																if (e[o] == 'NODOING') {
-																	background = "background:#FFFF6F";
+																if (e[o] == 'Ongoing') {
+																	background = "background:#FFFF37";
 																}
+																if (e[o] == 'Track') {
+                                                                	background = "background:#FFA042";
+                                                                }
+
 															}
 															html
 																	.push("<td style='font-weight:800;"
 																			+ background
-																			+ "'>");
+																			+ "' class='wt80'>");
 															html.push(e[o]);
 															html.push("</td>");
 														});
 										html.push("</tr>");
 									});
+									html.push("</tbody>");
 					$("#grid3").html(html.join(""));
 				}
 			});

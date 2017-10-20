@@ -197,7 +197,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		}else{
 			Dict e=new Dict();
 			e.setCode("");
-			e.setName("");
+			e.setName("--请选择--");
 			e.setSelected(true);
 			list.add(0, e);
 		}

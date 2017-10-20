@@ -1,18 +1,20 @@
 package com.huacainfo.ace.operana.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
+
 import com.huacainfo.ace.operana.model.Norm;
 import com.huacainfo.ace.operana.vo.NormQVo;
 import com.huacainfo.ace.operana.vo.NormVo;
-import java.util.Map;
 public interface NormDao {
 
 	int deleteByPrimaryKey(String NormId);
 
 	int insert(Norm record);
 
-	Norm selectByPrimaryKey(String NormId);
+	NormVo selectByPrimaryKey(String NormId);
 
 	int updateByPrimaryKey(Norm record);
 

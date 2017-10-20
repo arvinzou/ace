@@ -175,7 +175,7 @@
     <!--与会人员设置-->
 
     <select id="selectAllUserDeptId" resultType="map">
-        select t.department_id code,t.department_name name from portal.department t where t.parent_department_id!='0'
+        select t.department_id code,t.department_name name from portal.department t where t.syid='operana'
     </select>
     <select id="selectUserByDeptId" resultType="map">
         select t.user_id id,t.name,a.id value from portal.users t left join (select
@@ -184,6 +184,7 @@
     <select id="selectUserByName" resultType="map">
         select t.user_id id,t.name,a.id value from portal.users t left join (select
         id,userId from meeting_user where meetingId=#{meetingId})a on t.user_id=a.userId where t.name like concat('%',#{name,jdbcType=VARCHAR},'%')
+
     </select>
     <select id="selectUserByMeetingId" resultType="map">
         SELECT

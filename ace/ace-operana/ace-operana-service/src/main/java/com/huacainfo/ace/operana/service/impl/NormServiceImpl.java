@@ -94,8 +94,8 @@ public class NormServiceImpl implements NormService {
 		return new MessageResponse(0, "变更指标完成！");
 	}
 
-	public SingleResult<Norm> selectNormByPrimaryKey(String id) throws Exception {
-		SingleResult<Norm> rst = new SingleResult<Norm>();
+	public SingleResult<NormVo> selectNormByPrimaryKey(String id) throws Exception {
+		SingleResult<NormVo> rst = new SingleResult<NormVo>();
 		rst.setValue(this.normDao.selectByPrimaryKey(id));
 		return rst;
 	}

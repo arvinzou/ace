@@ -15,6 +15,7 @@ var _colModel = function() {
 			{
 				name : 'departmentId',
 				index : 'id',
+				hidden : true,
 				width : 150,
 				sortable : false,
 				editable : false,

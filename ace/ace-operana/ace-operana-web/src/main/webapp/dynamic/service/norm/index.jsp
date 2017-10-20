@@ -125,19 +125,12 @@ pageEncoding="utf-8"%>
 					</span>
         </div>
 
-        <div class="labelItem">
-				<span class="labelItemHeader">
-					指标分组</span>
-            <br>
-            <span id="groups">
-				</span>
-        </div>
 
         <div class="labelItem">
 				<span class="labelItemHeader">
 					归属部门</span>
             <br>
-            <span id="deptId">
+            <span id="deptName">
 				</span>
         </div>
         <div class="labelItem">
@@ -148,21 +141,8 @@ pageEncoding="utf-8"%>
 					</span>
         </div>
 
-        <div class="labelItem">
-				<span class="labelItemHeader">
-					拼音码</span>
-            <br>
-            <span id="pcode">
-				</span>
-        </div>
-        <div class="labelItem">
 
-				<span class="labelItemHeader">
-					状态</span>
-            <br>
-            <span id="status">
-					</span>
-        </div>
+
 
 
     </div>

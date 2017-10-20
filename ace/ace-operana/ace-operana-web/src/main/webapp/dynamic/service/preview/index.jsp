@@ -110,6 +110,30 @@ var normId='${param.normId}';
 <style>
 .div-left{ float:left;width:90%;}
 .div-right{ float:right;width:10%;}
+thead {
+           display:block
+}
+tbody {
+           height:300px;
+           overflow-y:scroll;
+           display:block;
+           width:100%;
+ }
+      .wt60{
+          width:45px;
+          min-width:45px;
+          max-width:45px;
+      }
+      .wt80{
+          width:105px;
+          min-width:105px;
+          max-width:105px;
+      }
+      .wt600{
+          width:140px;
+          min-width:140px;
+          max-width:140px;
+      }
 </style>
 
 </body>

@@ -46,9 +46,14 @@ pageEncoding="utf-8"%>
                             href="javascript:clearQparams()">清除</a>
 
                     状态：
-                    <input type="radio" name="status" id="r1" value="1"/><label for="r1">准备中</label>
-                    <input type="radio" name="status" id="r2" value="2"/><label for="r2">打开</label>
-                    <input type="radio" name="status" id="r3" value="3"/><label for="r3">关闭</label>
+                    <input
+                            class="easyui-combobox" style="width: 200px" name="status"
+                            data-options="
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=93&selected=false',
+                    method:'get',
+                    valueField:'code',
+                    textField:'name',
+                    panelHeight:'auto'"/>
 
                     名称： <input name="name" type="text"
                                style="width: 200px;"/>

@@ -14,7 +14,7 @@ public interface NormService {
 			throws Exception;
 	public abstract MessageResponse insertNorm(Norm obj, UserProp userProp) throws Exception;
 	public abstract MessageResponse updateNorm(Norm obj, UserProp userProp) throws Exception;
-	public abstract SingleResult<Norm> selectNormByPrimaryKey(String id) throws Exception;
+	public abstract SingleResult<NormVo> selectNormByPrimaryKey(String id) throws Exception;
 	public abstract MessageResponse deleteNormByNormId(String id, UserProp userProp) throws Exception;
 
 	public abstract List<Map<String,Object>> selectAllNorm(String topicId,String name);

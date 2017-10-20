@@ -448,6 +448,7 @@ function attendanceCfg(id, title) {
 					{
 						modal : false,
 						width : 800,
+						height:300,
 						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
 								+ title + "</div></div>",
 						title_html : true,
