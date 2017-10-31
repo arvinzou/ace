@@ -23,6 +23,7 @@
 			<artifactId>ace-workflow-client</artifactId>
 			<version>1.0</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.huacainfo</groupId>
 			<artifactId>ace-common-web</artifactId>

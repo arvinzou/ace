@@ -7,11 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/ace-common/ace-common.iml" filepath="$PROJECT_DIR$/ace-common/ace-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-web/ace-common-web.iml" filepath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-web/ace-kernel-web.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-web/ace-kernel-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana-client/ace-operana-client.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana-client/ace-operana-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana-service/ace-operana-service.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana-service/ace-operana-service.iml" />
@@ -24,10 +19,10 @@
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-client/ace-weui-client.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-client/ace-weui-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-service/ace-weui-service.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-service/ace-weui-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-web/ace-weui-web.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-web/ace-weui-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-client/ace-workflow-client.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-client/ace-workflow-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-service/ace-workflow-service.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-service/ace-workflow-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-web/ace-workflow-web.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-web/ace-workflow-web.iml" />
     </modules>
   </component>
 </project>

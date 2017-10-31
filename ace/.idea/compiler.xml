@@ -10,10 +10,6 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
-        <module name="ace-kernel-backend" />
-        <module name="ace-kernel-client" />
-        <module name="ace-kernel-service" />
-        <module name="ace-kernel-web" />
         <module name="ace-operana-client" />
         <module name="ace-operana-service" />
         <module name="ace-operana-web" />
@@ -23,9 +19,9 @@
         <module name="ace-uf-client" />
         <module name="ace-uf-service" />
         <module name="ace-uf-web" />
-        <module name="ace-weui-client" />
-        <module name="ace-weui-service" />
-        <module name="ace-weui-web" />
+        <module name="ace-workflow-client" />
+        <module name="ace-workflow-service" />
+        <module name="ace-workflow-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -71,6 +67,10 @@
       <module name="ace-weuiluohua-client" target="1.7" />
       <module name="ace-weuiluohua-service" target="1.7" />
       <module name="ace-weuiluohua-web" target="1.7" />
+      <module name="ace-workflow" target="1.7" />
+      <module name="ace-workflow-client" target="1.7" />
+      <module name="ace-workflow-service" target="1.7" />
+      <module name="ace-workflow-web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

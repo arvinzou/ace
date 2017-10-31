@@ -44,5 +44,9 @@
     <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-workflow" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-web" charset="UTF-8" />
   </component>
 </project>
