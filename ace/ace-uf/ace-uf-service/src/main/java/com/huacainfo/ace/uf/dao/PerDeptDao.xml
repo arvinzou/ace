@@ -48,4 +48,36 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.uf.vo.PerDeptVo">
+  </resultMap>
+  <sql id="whereCondition">
+    from per_dept
+    where personageId = #{personageId,jdbcType=VARCHAR}
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+  <select id="findList" resultMap="BaseResultMapVo">
+    select m.* from(
+    select id, personageId, deptId,createDate
+    <include refid="whereCondition"/>
+    ) m
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY m.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY m.createDate
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    per_dept where
+    personageId = #{personageId,jdbcType=VARCHAR} and  deptId = #{deptId,jdbcType=VARCHAR}
+  </select>
 </mapper>

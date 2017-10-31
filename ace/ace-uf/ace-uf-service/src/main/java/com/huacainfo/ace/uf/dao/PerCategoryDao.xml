@@ -12,6 +12,7 @@
     <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, personageId, categoryId, createUserId, createUserName, createDate, lastModifyUserId, 
     lastModifyUserName, lastModifyDate
@@ -48,4 +49,36 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.uf.vo.PerCategoryVo">
+  </resultMap>
+  <sql id="whereCondition">
+    from per_category
+    where personageId = #{personageId,jdbcType=VARCHAR}
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+  <select id="findList" resultMap="BaseResultMapVo">
+    select m.* from(
+    select id, personageId, categoryId,createDate
+    <include refid="whereCondition"/>
+    ) m
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY m.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY m.createDate
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    per_category where
+    personageId = #{personageId,jdbcType=VARCHAR} and categoryId = #{categoryId,jdbcType=VARCHAR}
+  </select>
 </mapper>
