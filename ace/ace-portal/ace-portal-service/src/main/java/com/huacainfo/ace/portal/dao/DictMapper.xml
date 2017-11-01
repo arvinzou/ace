@@ -85,7 +85,7 @@
 
 		select
 		<include refid="Base_Column_List" />
-		from dict where category_id=#{categoryId} order by create_time
+		from dict where category_id=#{categoryId} order by code
 
 	</select>
 	<select id="isExitByNameAndCategoryId" resultType="int">

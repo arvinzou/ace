@@ -19,10 +19,15 @@ pageEncoding="utf-8"%>
 </script>
 <body>
 
+<div class="page-content">
 
-
-<select id="languages" class="multiselect" style="width: 460px;	height: 350px;" multiple="multiple" name="languages">
+<select id="languages" class="multiselect" value="[a,b,c]" style="width: 800px;	height: 150px;" multiple="multiple" name="languages">
 </select>
+    <a href="javascript:initData()">initData</a>
+<a href="javascript:getValue()">getValue</a>
+    <a href="javascript:setValue()">setValue</a>
+    <div id="console"></div>
+</div>
 
 <jsp:include page="../../common/footer-1.jsp"/>
 
@@ -39,10 +44,31 @@ pageEncoding="utf-8"%>
 <script>
 
         $(function(){
-			$("#languages").multiselect({
-				remoteUrl: "ajax.jsp"
-			});
+			$("#languages").multiselect();
 		});
+		function initData(){
+		    var dict=parent.staticDictObject;
+		    var data=dict["98"];
+		    var data2=[];
+		    $(data).each(function(i,o){
+		        if(o.CODE!=""){
+		            data2.push({CODE:o.CODE,NAME:"["+o.CODE+"]"+o.NAME});
+		        }
+		    });
+		    $("#languages").multiselect("addOptions",data2);
+		}
+		function getValue(){
+            var o=$("#languages").multiselect("selectedValues");
+		    console.log(o);
+		    $("#console").append(JSON.stringify(o)+"<br>");
+		}
+		function setValue(){
+		    var data=[{"CODE":"h","NAME":"H"},{"CODE":"j","NAME":"J"},{"CODE":"k","NAME":"K"}];
+		     $("#languages").multiselect("selectList",data);
+		    $(data).each(function(i,o){
+               // $("#languages").multiselect("select",o.NAME);
+		    });
+		}
     </script>
 
 </body>

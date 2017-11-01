@@ -218,7 +218,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 					remark = row.get("REMARK".toLowerCase());
 					if (CommonUtils.isBlank(remark)) {
 						sql = "select CODE,NAME from dict where category_id= '"
-								+ category + "'";
+								+ category + "' order by code";
 					} else {
 						sql = remark;
 					}

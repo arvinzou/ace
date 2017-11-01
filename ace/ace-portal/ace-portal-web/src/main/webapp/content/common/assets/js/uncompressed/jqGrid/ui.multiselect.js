@@ -81,9 +81,12 @@ var defaultDataParser = function(data) {
 				};
 			}
 		}
-	} else {
-		this._messages($.ui.multiselect.constante.MESSAGE_ERROR, $.ui.multiselect.locale.errorDataFormat);
-		data = false;
+	} else if(typeof data == 'object'){
+		var rst = {};
+		$(data).each(function(i,o){
+		    rst[o.CODE]={selected: true,value:o.NAME};
+		});
+		return rst;
 	}
 	return data;
 };
@@ -230,6 +233,20 @@ $.widget("ui.multiselect", {
 			}
 		}
 	},
+	selectList: function(data) {
+	    var that=this;
+	    that.addOptions(data);
+	    that._setBusy(false);
+	    if(this.enabled()){
+            $(data).each(function(i,o){
+                var available = that._findItem(o.NAME, that.availableList);
+                if ( available ) {
+                    that._setSelected(available, true);
+                }
+            });
+        }
+
+    },
 	deselect: function(text) {
 		if (this.enabled()) {
 			var selected = this._findItem(text, this.selectedList);
@@ -450,6 +467,7 @@ $.widget("ui.multiselect", {
 		var _addNodeRetry = 0;
 		var _addNode = function() {
 			var succ = (that.options.nodeComparator ? that._getSuccessorNode(node, list) : null);
+			succ=false;
 			try {
 				if (succ) {
 					node.insertBefore(succ);
@@ -908,7 +926,7 @@ $.extend($.ui.multiselect, {
         removeAll:'删除全部',
 		itemsCount:'#{count}项已选择',
 		itemsTotal:'共#{count}项目',
-		busy:'please wait...',
+		busy:'请等待...',
 		errorDataFormat:"Cannot add options, unknown data format",
 		errorInsertNode:"There was a problem trying to add the item:\n\n\t[#{key}] => #{value}\n\nThe operation was aborted.",
 		errorReadonly:"The option #{option} is readonly",
