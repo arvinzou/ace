@@ -2,156 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A0.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A1.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A2.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A3.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A4.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A5.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A6.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A7.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A8.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A9.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/A9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-0.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-4.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-6.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-7.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-8.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/28/index-9.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A0.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A1.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A2.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A3.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A4.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A5.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A6.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A7.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A8.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A9.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/A9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-0.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-4.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-6.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-7.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-8.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/29/index-9.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/30/A0.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/30/A0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/30/A1.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/30/A1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/30/A2.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/30/A2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/30/index-0.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/30/index-1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdrb/2017-09/30/index-2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A0.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A1.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A10.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A10.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A11.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A11.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A12.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A12.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A13.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A13.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A14.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A14.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A2.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A3.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A4.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A5.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A6.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A7.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A8.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A8.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A9.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/A9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-0.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-10.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-11.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-12.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-13.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-14.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-4.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-6.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-7.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-8.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/28/index-9.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A0.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A1.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A2.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A3.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A4.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A5.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A6.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A7.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/A7.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/index-0.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/index-1.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/index-2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/index-3.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/index-4.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/index-5.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/index-6.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/cdwb/2017-09/30/index-7.html" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/ajax.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-app/ios/Portal/App" afterPath="$PROJECT_DIR$/ace-app/ios/Portal/App" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/AuthorityService.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/AuthorityService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/AuthorityServiceImpl.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/AuthorityServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/AuthorityController.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/AuthorityController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/app.json" afterPath="$PROJECT_DIR$/ace-sapp/app.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/config.js" afterPath="$PROJECT_DIR$/ace-sapp/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/files/index.js" afterPath="$PROJECT_DIR$/ace-sapp/page/files/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/files/index.wxml" afterPath="$PROJECT_DIR$/ace-sapp/page/files/index.wxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/files/index.wxss" afterPath="$PROJECT_DIR$/ace-sapp/page/files/index.wxss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/reg/index.js" afterPath="$PROJECT_DIR$/ace-sapp/page/reg/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-sapp/page/reg/index.wxml" afterPath="$PROJECT_DIR$/ace-sapp/page/reg/index.wxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerHpDao.xml" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerHpDao.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerResumeDao.xml" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerResumeDao.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/index.jsp" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/index.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -217,22 +73,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AuthorityController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/AuthorityController.java">
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="118" column="28" lean-forward="false" selection-start-line="118" selection-start-column="28" selection-end-line="118" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="1088">
+              <caret line="346" column="0" lean-forward="true" selection-start-line="346" selection-start-column="0" selection-end-line="346" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="top.jpg" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/tz/top.jpg">
-          <provider selected="true" editor-type-id="images">
-            <state />
+      <file leaf-file-name="PerHpDao.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerHpDao.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PerResumeDao.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerResumeDao.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-105">
+              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ajax.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/ajax.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -333,8 +210,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/resources/email.task.vm" />
-        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/service/impl/TaskOperanaServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/java/com/huacainfo/ace/operana/dao/MeetingDao.xml" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/content/index/controller.js" />
@@ -378,12 +253,14 @@
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerCategoryDao.xml" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerDeptDao.xml" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerHobbyDao.xml" />
-        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerHpDao.xml" />
-        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerResumeDao.xml" />
         <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerJobDao.xml" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/AuthorityService.java" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/AuthorityServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/AuthorityController.java" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/ajax.jsp" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/index.jsp" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerHpDao.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerResumeDao.xml" />
       </list>
     </option>
   </component>
@@ -397,7 +274,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1366" />
-    <option name="height" value="680" />
+    <option name="height" value="676" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -454,7 +331,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-uf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -468,33 +345,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-uf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="ace-uf-web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -508,11 +363,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-uf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
+              <option name="myItemId" value="ace-uf-web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -538,49 +393,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-uf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="webapp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tz" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
+              <option name="myItemId" value="ace-uf-web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -596,11 +413,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cdwb" />
+              <option name="myItemId" value="dynamic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -614,11 +427,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-uf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
+              <option name="myItemId" value="ace-uf-web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -634,11 +447,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
+              <option name="myItemId" value="dynamic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cdrb" />
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="personage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -652,11 +469,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-uf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
+              <option name="myItemId" value="ace-uf-web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -672,11 +489,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
+              <option name="myItemId" value="dynamic" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="bridge3d" />
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -690,11 +507,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-uf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
+              <option name="myItemId" value="ace-uf-web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -703,6 +520,122 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf-service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf-service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf-service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-uf-service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uf" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -735,15 +668,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/ace-portal" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/" />
+      <recent name="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/report" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.huacainfo.ace.weui.dao" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao" />
-      <recent name="$PROJECT_DIR$/ace-uf/ace-uf-client/src/main/java/com/huacainfo/ace/uf/model" />
-      <recent name="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/resources" />
-      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/tz" />
-      <recent name="$PROJECT_DIR$/ace-autocode/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.huacainfo.ace.autocode.cdrb" />
@@ -752,9 +682,12 @@
       <recent name="com.huacainfo.ace.kernel.model" />
       <recent name="com.huacainfo.ace.uf.dao.report" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/" />
-      <recent name="$PROJECT_DIR$/ace-operana/ace-operana-web/src/main/webapp/dynamic/service/report" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage" />
+      <recent name="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao" />
+      <recent name="$PROJECT_DIR$/ace-uf/ace-uf-client/src/main/java/com/huacainfo/ace/uf/model" />
+      <recent name="$PROJECT_DIR$/ace-operana/ace-operana-service/src/main/resources" />
+      <recent name="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/tz" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -769,7 +702,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.ace-portal-install">
+  <component name="RunManager" selected="Maven.ace-uf-web-run">
     <configuration default="false" name="PortalServiceApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1752,13 +1685,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00207" summary="统战活动">
-      <created>1501080507440</created>
-      <option name="number" value="00207" />
-      <option name="presentableId" value="LOCAL-00207" />
-      <option name="project" value="LOCAL" />
-      <updated>1501080507440</updated>
-    </task>
     <task id="LOCAL-00208" summary="统战活动">
       <created>1501087766245</created>
       <option name="number" value="00208" />
@@ -2095,7 +2021,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509420276636</updated>
     </task>
-    <option name="localTasksCounter" value="256" />
+    <task id="LOCAL-00256" summary="掌上统战二期人士档案扩展">
+      <created>1509506809122</created>
+      <option name="number" value="00256" />
+      <option name="presentableId" value="LOCAL-00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1509506809127</updated>
+    </task>
+    <option name="localTasksCounter" value="257" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2108,7 +2041,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1366" height="680" extended-state="6" />
+    <frame x="0" y="23" width="1366" height="676" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2119,13 +2052,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3502455" sideWeight="0.28330892" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33224222" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3937397" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27598828" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27598828" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2162,11 +2095,11 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3937397" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33278146" sideWeight="0.7166911" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985073" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31991217" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27598828" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1767594" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2877013" sideWeight="0.3019608" order="6" side_tool="true" content_ui="tabs" />
@@ -2223,24 +2156,11 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/DeptDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/uf/model/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="6" column="52" lean-forward="true" selection-start-line="5" selection-start-column="22" selection-end-line="6" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-autocode/src/main/java/com/huacainfo/ace/uf/model/PerDept.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12">
           <caret line="5" column="52" lean-forward="false" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2248,6 +2168,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="52" lean-forward="false" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2255,6 +2176,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="52" lean-forward="false" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2262,6 +2184,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="52" lean-forward="false" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2269,6 +2192,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="52" lean-forward="false" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2297,6 +2221,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2402,6 +2327,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="325" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2416,6 +2342,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="325" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2430,13 +2357,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="69" column="29" lean-forward="true" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerHpDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="262" column="11" lean-forward="true" selection-start-line="227" selection-start-column="0" selection-end-line="262" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2444,6 +2365,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="431">
           <caret line="84" column="11" lean-forward="true" selection-start-line="52" selection-start-column="0" selection-end-line="84" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2451,6 +2373,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="431">
           <caret line="81" column="11" lean-forward="true" selection-start-line="50" selection-start-column="2" selection-end-line="81" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2458,6 +2381,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="431">
           <caret line="82" column="11" lean-forward="true" selection-start-line="51" selection-start-column="2" selection-end-line="82" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2468,17 +2392,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerResumeDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="255" column="14" lean-forward="false" selection-start-line="255" selection-start-column="14" selection-end-line="255" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/FeedbackDao.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="443">
           <caret line="115" column="13" lean-forward="true" selection-start-line="56" selection-start-column="3" selection-end-line="115" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2528,6 +2446,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2535,6 +2454,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
           <caret line="238" column="38" lean-forward="true" selection-start-line="238" selection-start-column="38" selection-end-line="238" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2567,6 +2487,11 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/tz/top.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/AuthorityController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -2577,9 +2502,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/www/tz/top.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/ajax.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/webapp/dynamic/service/personage/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1088">
+          <caret line="346" column="0" lean-forward="true" selection-start-line="346" selection-start-column="0" selection-end-line="346" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerHpDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/java/com/huacainfo/ace/uf/dao/PerResumeDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-105">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

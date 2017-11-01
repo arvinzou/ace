@@ -301,6 +301,9 @@ pageEncoding="utf-8"%>
         </div>
     </div>
 
+    <select id="languages" class="multiselect" multiple="multiple" name="languages">
+    </select>
+
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
@@ -332,5 +335,15 @@ window.onresize = function () {
 }
 
 </script>
+
+<style>
+        .multiselect{width: 460px;	height: 150px;}
+    </style>
+<script>
+        $("#languages").multiselect({
+				remoteUrl: "ajax.jsp"
+		});
+    </script>
+
 </body>
 </html>
