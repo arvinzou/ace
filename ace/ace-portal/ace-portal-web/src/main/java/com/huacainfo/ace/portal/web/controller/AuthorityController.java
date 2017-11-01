@@ -1,7 +1,8 @@
 package com.huacainfo.ace.portal.web.controller;
 
 import java.util.*;
-
+import java.util.Date;
+import java.util.Calendar;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -101,13 +102,41 @@ public class AuthorityController extends PortalBaseController{
 	}
 	@RequestMapping(value = "/updateForExperienceUser.do")
 	@ResponseBody
-	public  MessageResponse updateForExperienceUser(String id) throws Exception{
-		return this.authorityService.updateForExperienceUser(id);
+	public  SingleResult<WxUser> updateForExperienceUser(String code,String name) throws Exception{
+		WxUser user=this.getCurWxUser();
+		if(user==null){
+			return new SingleResult<WxUser>(1,"未注册的微信用户。");
+		}
+		if(CommonUtils.isBlank(name)){
+			return new SingleResult<WxUser>(1,"姓名不能为空。");
+		}
+		if(CommonUtils.isBlank(code)){
+			return new SingleResult<WxUser>(1,"验证码不能为空。");
+		}
+		if(!code.equals(this.getNatiaveCode())){
+			return new SingleResult<WxUser>(1,"验证码错误。");
+		}
+		this.authorityService.updateForExperienceUser(user.getUnionId(),name);
+		return this.authorityService.selectForExperienceUser(user.getUnionId());
 	}
 
 	@RequestMapping(value = "/selectForExperienceUser.do")
 	@ResponseBody
 	public  SingleResult<WxUser> selectForExperienceUser(String id) throws Exception{
 		return this.authorityService.selectForExperienceUser(id);
+	}
+
+	private String getNatiaveCode(){
+		Calendar c = Calendar.getInstance();
+		int date = c.get(Calendar.DATE);
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		return hour+""+date;
+	}
+
+	public static void main(String args[]){
+		Calendar c = Calendar.getInstance();
+		int date = c.get(Calendar.DATE);
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		System.out.println(hour+""+date) ;
 	}
 }

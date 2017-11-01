@@ -228,14 +228,17 @@ public class AuthorityServiceImpl implements AuthorityService {
 		System.out.println(userinfo.toString());
 	}
 
-	public  MessageResponse updateForExperienceUser(String id) throws Exception{
+	public  MessageResponse updateForExperienceUser(String id,String name) throws Exception{
 		WxUser wxUser=this.wxUserDao.selectByPrimaryKey(id);
 		wxUser.setAreaCode("430702");
 		wxUser.setCategory("01");
 		wxUser.setParty("");
 		wxUser.setDeptId("");
 		wxUser.setRole("admin");
-		wxUser.setName("体验者");
+		wxUser.setName(name);
+		if(CommonUtils.isBlank(name)){
+			wxUser.setName("体验者");
+		}
 		wxUser.setMobile("13922861673");
 		int t=this.wxUserDao.updateReg(wxUser);
 		return new MessageResponse(0,"成功。");

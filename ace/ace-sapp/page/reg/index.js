@@ -30,7 +30,9 @@ Page({
     id: util.uuid(),
     formData: {},
     stop: true,
-    btnName: "获取验证码"
+    btnName: "获取验证码",
+    loadingWhiteList: false,
+    disabledWhiteList: false
   },
   onReady: function (res) {
     wx.setNavigationBarColor({
@@ -232,5 +234,54 @@ Page({
       files: fileList,
       id: util.uuid()
     });
+  },
+  whiteList: function (e) {
+    console.log(e);
+    var that = this;
+    that.setData({
+      loadingWhiteList: true,
+      disabledWhiteList: true
+    });
+    wx.getLocation({
+      type: 'gcj02',
+      success: function (data) {
+        console.log(data);
+        wx.login({
+          success: function (o) {
+            wx.getUserInfo({
+              success: function (res) {
+                wx.request({
+                  url: cfg.loginUrl,
+                  data: {
+                    appid: cfg.appid,
+                    appsecret: cfg.appsecret,
+                    code: o.code,
+                    encryptedData: res.encryptedData,
+                    iv: res.iv,
+                    latitude: data.latitude,
+                    longitude: data.longitude
+                  },
+                  success: function (r) {
+                    wx.setStorageSync('WX-SESSION-ID', r.data.value['3rd_session']);
+                    that.setData({
+                      loadingWhiteList: false,
+                      disabledWhiteList: false
+                    });
+                    that.navigator("../whiteList/index?redirectTo=" + that.data.redirectTo);
+                    console.log(res);
+                    console.log(r.data.value['3rd_session']);
+                  },
+                  fail: function ({ errMsg }) {
+                    console.log('request fail', errMsg)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    });
   }
+
+
 });

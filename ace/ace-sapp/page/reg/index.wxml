@@ -5,7 +5,7 @@
       <view class="reg-logo-text">验证登录</view>
   </view>
   <view class="reg-title">
-    武陵掌上统战
+    掌上统战
   </view>
 </view>
 <view class="reg-tabbar">
@@ -21,13 +21,14 @@
             <text class="userinfo-nickname">{{userInfo.nickName}}</text>
             </view>
         </block>
-      
-
-
       <view >
         <button disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;"  bindtap="getUserInfo">申请授权</button>
-        <view class="reg-remark">注：微信授权请确认接受，有失败情况请进行第二次授权</view>
 
+       
+
+        <view class="reg-remark">注：微信授权请确认接受，有失败情况请进行第二次授权</view>
+ <button disabled="{{disabledWhiteList}}" loading="{{loadingWhiteList}}" style="width:98%;color:#000000;background-color:#FFDC35; border-radius: 2px;"  bindtap="whiteList">申请白名单</button>
+  <view class="reg-remark">注：申请白名单为临时体验系统用户，使用期限为一周</view>
       </view>
 
   </view>

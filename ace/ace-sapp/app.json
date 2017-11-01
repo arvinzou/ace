@@ -18,7 +18,8 @@
     "page/activityPreview/index",
     "page/notice/index",
     "page/noticePreview/index",
-    "page/files/index"
+    "page/files/index",
+    "page/whiteList/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",
@@ -32,7 +33,6 @@
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
-      
       {
         "pagePath": "page/index/index",
         "iconPath": "image/tongzhandw.png",
@@ -55,4 +55,3 @@
   },
   "debug": false
 }
-

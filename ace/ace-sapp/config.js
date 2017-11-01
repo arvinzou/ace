@@ -33,6 +33,7 @@ var config = {
     areaCode:'430702',
     uploadUrl: `${server}/portal/www/uploadFile.do`,
     regUrl: `${server}/portal/www/reg.do`,
+    whiteListUrl: `${server}/portal/www/updateForExperienceUser.do`,
     selectDeptList: `${server}/uf/www/selectDeptList.do`,
     selectDeptListMap: `${server}/uf/www/selectDeptListMap.do`,
     selectPersonAgetListMap: `${server}/uf/www/selectPersonageListMap.do`,
