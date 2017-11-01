@@ -112,7 +112,7 @@ pageEncoding="utf-8"%>
                         打印花名册<i
                             class="ace-icon fa fa-print  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
+<a href="demo.jsp">demo</a>
                 </div>
                 </form>
             </div>
@@ -301,10 +301,11 @@ pageEncoding="utf-8"%>
         </div>
     </div>
 
-    <select id="languages" class="multiselect" multiple="multiple" name="languages">
-    </select>
+
 
 </div>
+
+
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
         src="${pageContext.request.contextPath}/content/service/personage/config.js?version=${cfg.version}"></script>
@@ -336,14 +337,7 @@ window.onresize = function () {
 
 </script>
 
-<style>
-        .multiselect{width: 460px;	height: 150px;}
-    </style>
-<script>
-        $("#languages").multiselect({
-				remoteUrl: "ajax.jsp"
-		});
-    </script>
+
 
 </body>
 </html>
