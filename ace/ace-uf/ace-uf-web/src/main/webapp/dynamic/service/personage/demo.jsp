@@ -21,7 +21,7 @@ pageEncoding="utf-8"%>
 
 <div class="page-content">
 
-<select id="languages" class="multiselect" value="[a,b,c]" style="width: 800px;	height: 150px;" multiple="multiple" name="languages">
+<select id="languages" class="multiselect" value="[a,b,c]" style="width:100%;	height: 150px;" multiple="multiple" name="languages">
 </select>
     <a href="javascript:initData()">initData</a>
 <a href="javascript:getValue()">getValue</a>

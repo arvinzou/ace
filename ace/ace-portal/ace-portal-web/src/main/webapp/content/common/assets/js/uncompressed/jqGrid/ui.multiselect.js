@@ -250,6 +250,14 @@ $.widget("ui.multiselect", {
         }
 
     },
+    setValue:function(data){
+         var that=this;
+         that.selectList(data);
+    },
+    getValue:function(){
+         var that=this;
+         return that.selectedValues();
+    },
 	deselect: function(text) {
 		if (this.enabled()) {
 			var selected = this._findItem(text, this.selectedList);
