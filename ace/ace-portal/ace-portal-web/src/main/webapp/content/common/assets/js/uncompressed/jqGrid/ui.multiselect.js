@@ -238,12 +238,15 @@ $.widget("ui.multiselect", {
 	    that.addOptions(data);
 	    that._setBusy(false);
 	    if(this.enabled()){
-            $(data).each(function(i,o){
-                var available = that._findItem(o.NAME, that.availableList);
-                if ( available ) {
-                    that._setSelected(available, true);
-                }
-            });
+	        setTimeout(function() {
+                $(data).each(function(i,o){
+                     var available = that._findItem(o.NAME, that.availableList);
+                     if ( available ) {
+                         that._setSelected(available, true);
+                     }
+                 });
+	         }, 100);
+
         }
 
     },
