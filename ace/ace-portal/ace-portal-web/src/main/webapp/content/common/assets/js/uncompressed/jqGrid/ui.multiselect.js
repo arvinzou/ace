@@ -465,8 +465,6 @@ $.widget("ui.multiselect", {
 
 				that._insertToList(item, list);
 		    }));
-
-			// update count
 			that._setBusy(false);
 			that._updateCount();
 		}, 1);

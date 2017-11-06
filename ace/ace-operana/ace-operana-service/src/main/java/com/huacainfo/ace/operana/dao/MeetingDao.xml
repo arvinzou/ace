@@ -214,14 +214,15 @@
         a.department_name 'name',
         t.opened,
         t.closed,
-        t.total
+        t.total,
+		t.normName
         FROM
         (
         SELECT
         count(1) total,
         sum(
         CASE
-        WHEN STATUS = '2' THEN
+        WHEN k.STATUS = '2' THEN
         1
         ELSE
         0
@@ -229,17 +230,18 @@
         ) closed,
         sum(
         CASE
-        WHEN STATUS = '1' THEN
+        WHEN k.STATUS = '1' THEN
         1
         ELSE
         0
         END
         ) opened,
-        deptId
+        k.deptId,
+		group_concat(distinct(b.name) separator ',') normName
         FROM
-        tpa where hour(timediff(lastModifyDate,now()))<=24
+        tpa k left join  norm b on k.normId=b.id where hour(timediff(k.lastModifyDate,now()))<=24
         GROUP BY
-        deptId
+        k.deptId
         ) t
         LEFT JOIN portal.department a ON t.deptId = a.department_id
         ORDER BY

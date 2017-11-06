@@ -59,6 +59,10 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
         html.append("打开任务数");
         html.append("</th>");
 
+        html.append("<th>");
+        html.append("KPI");
+        html.append("</th>");
+
         html.append("</tr>");
         int i=1;
         for(Map<String,Object> e:tasks){
@@ -81,6 +85,10 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
 
             html.append("<td>");
             html.append(e.get("opened"));
+            html.append("</td>");
+
+            html.append("<td>");
+            html.append(e.get("normName"));
             html.append("</td>");
 
             html.append("</tr>");

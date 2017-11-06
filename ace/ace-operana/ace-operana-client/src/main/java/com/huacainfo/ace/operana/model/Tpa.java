@@ -24,6 +24,8 @@ public class Tpa implements java.io.Serializable {
 
     private String deptId;
 
+    private String category;
+
     private String status;
 
     private String createUserId;
@@ -172,5 +174,13 @@ public class Tpa implements java.io.Serializable {
 
     public void setDeptId(String deptId) {
         this.deptId = deptId;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

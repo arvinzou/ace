@@ -63,11 +63,8 @@ pageEncoding="utf-8"%>
 		    $("#console").append(JSON.stringify(o)+"<br>");
 		}
 		function setValue(){
-		    var data=[{"CODE":"h","NAME":"H"},{"CODE":"j","NAME":"J"},{"CODE":"k","NAME":"K"}];
-		     $("#languages").multiselect("selectList",data);
-		    $(data).each(function(i,o){
-               // $("#languages").multiselect("select",o.NAME);
-		    });
+		    var data=[{"CODE":"h","NAME":"香港"},{"CODE":"j","NAME":"日本"},{"CODE":"k","NAME":"中国"}];
+		     $("#languages").multiselect("setValue",data);
 		}
     </script>
 
