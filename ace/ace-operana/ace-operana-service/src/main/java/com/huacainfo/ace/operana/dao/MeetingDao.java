@@ -45,7 +45,7 @@ public interface MeetingDao {
 	List<Map<String, Object>> selectUserByName(@Param("name")String name,@Param("meetingId") String meetingId);
 
 
-	List<Map<String, Object>> selectTaskForEmail();
+	List<Map<String, Object>> selectTaskForEmail(@Param("tasktime")Integer tasktime);
 
 	List<Map<String, Object>> selectEmailForNotice();
 

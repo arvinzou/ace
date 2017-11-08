@@ -239,7 +239,7 @@
         k.deptId,
 		group_concat(distinct(b.name) separator ',') normName
         FROM
-        tpa k left join  norm b on k.normId=b.id where hour(timediff(k.lastModifyDate,now()))<=24
+        tpa k left join  norm b on k.normId=b.id where hour(timediff(k.lastModifyDate,now()))<=#{tasktime}
         GROUP BY
         k.deptId
         ) t

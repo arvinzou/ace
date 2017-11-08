@@ -190,7 +190,7 @@
   <select id="selectTaskBByUserId" resultType="map">
     select  <include refid="sqlCommon"/>
     <![CDATA[
-    where t.liable=#{userId} and hour(timediff(t.lastModifyDate,now()))<=24
+    where t.liable=#{userId} and hour(timediff(t.lastModifyDate,now()))<=#{tasktime}
      ]]>
   </select>
 </mapper>

@@ -31,6 +31,6 @@ public interface TpaDao {
 	int updateById(Tpa record);
 
 	List<Map<String,Object>> selectTaskAByUserId( @Param("userId") String userId);
-	List<Map<String,Object>> selectTaskBByUserId( @Param("userId") String userId);
+	List<Map<String,Object>> selectTaskBByUserId( @Param("userId") String userId,@Param("tasktime")Integer tasktime);
 
 }

@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
-
+import org.springframework.beans.factory.annotation.Value;
 /**
  * Created by chenxiaoke on 2017/10/9.
  */
@@ -32,11 +32,15 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
     private TpaDao tpaDao;
 
 
+    @Value("#{config[tasktime]}")
+    private Integer tasktime;
+
+
     @Scheduled(cron="0 49 08 ? * *")
     public  void autoSendEmailLeader() throws Exception{
         this.logger.info("autoSendEmail executed");
         List<Map<String,Object>> emails=meetingDao.selectEmailForNotice();
-        List<Map<String,Object>> tasks=meetingDao.selectTaskForEmail();
+        List<Map<String,Object>> tasks=meetingDao.selectTaskForEmail(this.tasktime);
         if(CommonUtils.isBlank(tasks)){
             this.logger.info("{}","没有符合条件的任务检查");
             return;
@@ -123,32 +127,34 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
 
     }
 
-    @Scheduled(cron="0 46 10 ? * *")
+    @Scheduled(cron="0 50 10 ? * *")
     public  void autoSendEmailLiableLongTime() throws Exception{
         this.logger.info("autoSendEmailLiableLongTime executed");
-        List<Map<String,Object>> emails=meetingDao.selectEmailForNotice();
+        List<Map<String,Object>> emails=meetingDao.selectLiableEmailForNotice();
         for( Map<String,Object> e:emails) {
-            List<Map<String,Object>> tasks=this.tpaDao.selectTaskBByUserId((String)e.get("userId"));
-            if(!CommonUtils.isBlank(tasks)){
+            List<Map<String,Object>> tasks=this.tpaDao.selectTaskAByUserId((String)e.get("userId"));
+            if(CommonUtils.isNotEmpty(tasks)&&tasks.size()>0){
                 Map<String,Object> model=new HashMap<String,Object>();
                 model.put("tasklist", this.getTableContent(tasks));
                 model.put("sysDate", CommonUtils.formatDate(new Date()));
+                model.put("to", e.get("email"));
                 this.sendEmail(model);
             }
         }
 
     }
 
-    @Scheduled(cron="0 46 10 ? * *")
+    @Scheduled(cron="0 23 11 ? * *")
     public  void autoSendEmailLiableShotTime() throws Exception{
         this.logger.info("autoSendEmailLiableShotTime executed");
-        List<Map<String,Object>> emails=meetingDao.selectEmailForNotice();
+        List<Map<String,Object>> emails=meetingDao.selectLiableEmailForNotice();
         for( Map<String,Object> e:emails) {
-            List<Map<String,Object>> tasks=this.tpaDao.selectTaskAByUserId((String)e.get("userId"));
-            if(!CommonUtils.isBlank(tasks)){
+            List<Map<String,Object>> tasks=this.tpaDao.selectTaskBByUserId((String)e.get("userId"),this.tasktime);
+            if(CommonUtils.isNotEmpty(tasks)&&tasks.size()>0){
                 Map<String,Object> model=new HashMap<String,Object>();
                 model.put("tasklist", this.getTableContent(tasks));
                 model.put("sysDate", CommonUtils.formatDate(new Date()));
+                model.put("to", e.get("email"));
                 this.sendEmail(model);
             }
         }
@@ -156,12 +162,12 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
 
     private void sendEmail( Map<String,Object> model) throws Exception{
         this.logger.info("{}",model);
-        String subject =CommonUtils.getStringByTemplate("email.liablesubject.task.vm", model);
+        String subject =CommonUtils.getStringByTemplate("email.subject.liabletask.vm", model);
         String content=CommonUtils.getStringByTemplate("email.liabletask.vm", model);
         Map<String, String> data = new HashMap<String, String>();
         data.put("subject", subject);
         data.put("content", content);
-        data.put("to", (String) model.get("email"));
+        data.put("to", (String) model.get("to"));
         this.logger.info("{}",data);
         this.kafkaProducerService.sendMsg("GESP_SYS_INFO", data);
     }
@@ -250,4 +256,6 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
         html.append("</table>");
         return  html.toString();
     }
+
+
 }

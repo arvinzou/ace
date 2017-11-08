@@ -12,7 +12,6 @@ $!{o.tasklist}
 table.hovertable {
 	font-family: verdana,arial,sans-serif;
 	font-size:14px;
-	width:600px;
 	color:#333333;
 	border-width: 1px;
 	border-color: #6699FF;
