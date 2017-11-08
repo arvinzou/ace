@@ -13,9 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 /**
  * Created by chenxiaoke on 2017/10/9.
  */
+
+@PropertySource("classpath:config.properties")
 @Service("taskOperanaService")
 public class TaskOperanaServiceImpl implements TaskOperanaService{
 
@@ -32,11 +35,13 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
     private TpaDao tpaDao;
 
 
-    @Value("#{config[tasktime]}")
+    @Value("#{config[jobs.tasktime]}")
     private Integer tasktime;
 
 
-    @Scheduled(cron="0 49 08 ? * *")
+
+
+    @Scheduled(cron="${jobs.autoSendEmailLeader}")
     public  void autoSendEmailLeader() throws Exception{
         this.logger.info("autoSendEmail executed");
         List<Map<String,Object>> emails=meetingDao.selectEmailForNotice();
@@ -74,7 +79,7 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
         html.append("</tr>");
         int i=1;
         for(Map<String,Object> e:tasks){
-            html.append("<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">");
+            html.append("<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#fff';\">");
             html.append("<td>");
             html.append(i);
             html.append("</td>");
@@ -127,7 +132,7 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
 
     }
 
-    @Scheduled(cron="0 50 10 ? * *")
+    @Scheduled(cron="${jobs.autoSendEmailLiableLongTime}")
     public  void autoSendEmailLiableLongTime() throws Exception{
         this.logger.info("autoSendEmailLiableLongTime executed");
         List<Map<String,Object>> emails=meetingDao.selectLiableEmailForNotice();
@@ -144,7 +149,7 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
 
     }
 
-    @Scheduled(cron="0 23 11 ? * *")
+    @Scheduled(cron="${jobs.autoSendEmailLiableShotTime}")
     public  void autoSendEmailLiableShotTime() throws Exception{
         this.logger.info("autoSendEmailLiableShotTime executed");
         List<Map<String,Object>> emails=meetingDao.selectLiableEmailForNotice();
@@ -212,7 +217,7 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
         html.append("</tr>");
         int i=1;
         for(Map<String,Object> e:tasks){
-            html.append("<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#d4e3e5';\">");
+            html.append("<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#fff';\">");
             html.append("<td>");
             html.append(i);
             html.append("</td>");

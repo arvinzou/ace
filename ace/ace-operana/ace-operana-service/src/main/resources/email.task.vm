@@ -6,7 +6,7 @@ $!{o.tasklist}
     抄送：$!{o.userlist}
 </div>
 <div style="font-size:16px">
-    $!{o.sysDate}
+    <h3>$!{o.sysDate}</h3>
 </div>
 <style type="text/css">
 table.hovertable {
@@ -23,6 +23,7 @@ table.hovertable th {
 	padding: 4px;
 	border-style: solid;
 	border-color: #6699FF;
+	color:#fff
 }
 table.hovertable tr {
 	background-color:#fff;

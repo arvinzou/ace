@@ -3,7 +3,7 @@
 <h1>电装运行会议任务处理进度提示</h1>
 $!{o.tasklist}
 <div style="font-size:16px">
-    $!{o.sysDate}
+   <h3>$!{o.sysDate}</h3>
 </div>
 <style type="text/css">
 table.hovertable {
@@ -20,6 +20,7 @@ table.hovertable th {
 	padding: 4px;
 	border-style: solid;
 	border-color: #6699FF;
+	color:#fff
 }
 table.hovertable tr {
 	background-color:#fff;
