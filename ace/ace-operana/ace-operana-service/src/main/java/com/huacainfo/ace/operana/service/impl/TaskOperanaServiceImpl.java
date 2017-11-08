@@ -35,7 +35,7 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
     private TpaDao tpaDao;
 
 
-    @Value("#{config[jobs.tasktime]}")
+    @Value("#{config[tasktime]}")
     private Integer tasktime;
 
 
