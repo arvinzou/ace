@@ -186,7 +186,7 @@ function preview(id, title) {
 								}]
 					});
 					$(dialog).parent().css("top","1px");
-                    		$(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
+                    $(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
 	loadView(id);
 }
 function loadView(id) {

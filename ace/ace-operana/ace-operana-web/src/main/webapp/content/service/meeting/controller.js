@@ -136,7 +136,10 @@ function preview(id, title) {
 	loadView(id);
 	viewTopic(id);
 	viewUser(id);
+	viewFiles(id);
 	$('[data-rel=tooltip]').tooltip();
+	$(dialog).parent().css("top","1px");
+    $(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
 }
 function loadView(id) {
 	$.ajax({
@@ -1008,4 +1011,95 @@ function copyMeetingById(name,id){
                 }
             });
     }
+}
+
+
+function viewFiles(meetingId) {
+	var tableId = "detail5";
+	if ($('#' + tableId).hasClass('dataTable')) {
+		dttable = $('#' + tableId).dataTable();
+		dttable.fnClearTable(); // 清空一下table
+		dttable.fnDestroy(); // 还原初始化了的datatable
+	}
+	var table = $('#' + tableId).DataTable(
+			{
+				ajax : {
+					url : contextPath
+							+ '/meetingFiles/selectFilesByMeetingId.do?meetingId='
+							+ meetingId,
+					dataSrc : 'data'
+				},
+				columns : [{
+					data : 'rownum'
+				}, {
+					data : 'name'
+				}, {
+					data : 'remark'
+				}, {
+                 					data : 'opt'
+                 				}],
+				bAutoWidth : false,
+				"fnInitComplete" : function() {
+					this.fnAdjustColumnSizing(true);
+					$('[data-rel=tooltip]').tooltip();
+				},
+				"createdRow" : function(row, data, dataIndex) {
+					$(row).children('td').eq(0).attr('style',
+							'text-align: center;font-weight:800');
+					$(row).children('td').eq(1).html(
+							'<a href="'+ fastdfs_server+data.url + '" target="_blank"><span class="badge badge-info">'
+									+ data.name + '</span></a>');
+					$(row).children('td').eq(3).html(
+                    							'<a href="javascript:deleteFileByMeetingId(\''  + data.name + '\',\'' + meetingId
+                    									+ '\')"><span class="badge badge-danger">删除</span></a>');
+
+				},
+				"aLengthMenu" : [5, 10, 15, 20],
+				"oLanguage" : {
+					"sLengthMenu" : "每页显示 _MENU_ 条记录",
+					"sZeroRecords" : "对不起，查询不到任何相关数据",
+					"sInfo" : "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+					"sInfoEmpty" : "第 0 到 0 条记录，共 0 条",
+					"sInfoFiltered" : "数据表中共为 _MAX_ 条记录)",
+					"sProcessing" : "正在加载中...",
+					"sSearch" : "搜索 ",
+					"sUrl" : "",
+					"oPaginate" : {
+						"sFirst" : "",
+						"sPrevious" : "",
+						"sNext" : "",
+						"sLast" : ""
+					},
+					"oAria" : {
+						"sSortAscending" : ": 升序排列",
+						"sSortDescending" : ": 降序排列"
+					}
+				}
+			});
+
+}
+function deleteFileByMeetingId(name,id){
+    if(confirm("确定要删除"+name+"吗？")){
+        $.ajax({
+                type : "post",
+                url : contextPath + "/meetingFiles/deleteMeetingFilesByMeetingFilesId.do",
+                data : {
+                    id : id
+                },
+                beforeSend : function(XMLHttpRequest) {
+
+                },
+                success : function(rst, textStatus) {
+                    viewFiles(id);
+                },
+                error : function() {
+                    alert("加载错误！");
+                }
+            });
+    }
+}
+function filesSetting(){
+    var url=contextPath + '/meetingFiles/uploadFile.do';
+        var params={id:meetingId};
+        upload(params,url)
 }

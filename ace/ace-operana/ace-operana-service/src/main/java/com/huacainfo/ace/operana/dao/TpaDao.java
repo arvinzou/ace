@@ -1,6 +1,7 @@
 package com.huacainfo.ace.operana.dao;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.operana.model.Tpa;
 import com.huacainfo.ace.operana.vo.TpaQVo;
@@ -28,5 +29,8 @@ public interface TpaDao {
 	int isExit(Tpa record);
 
 	int updateById(Tpa record);
+
+	List<Map<String,Object>> selectTaskAByUserId( @Param("userId") String userId);
+	List<Map<String,Object>> selectTaskBByUserId( @Param("userId") String userId);
 
 }

@@ -167,6 +167,32 @@ pageEncoding="utf-8"%>
                         </table>
                     </form>
                 </div>
+
+                <div>
+                    <div class="div-left header-title">会议文件</div>
+                    <div class="div-right header-title">
+                        <div style="text-align:right"> <a data-rel="tooltip" data-placement="top"
+                                                                        title="会议文件"
+                                                                        class="blue" href="javascript:filesSetting()"><i
+                                class="ace-icon fa fa-plus-circle"></i></a></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <table id="detail5"
+                           class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="center" style="width:80px;">序号</th>
+                            <th>文档名称</th>
+                            <th>说明</th>
+                            <th style="width:100px;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
 
             <div id="dialog-meeting-user" class="hide">

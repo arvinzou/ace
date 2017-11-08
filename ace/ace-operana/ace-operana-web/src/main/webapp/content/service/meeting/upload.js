@@ -10,10 +10,10 @@ function init_uploader(params,url) {
 				unique_names : true,
 				multipart_params : params,
 				filters : {
-					max_file_size : '10mb',
+					max_file_size : '50mb',
 					mime_types : [{
 						title : "Excel files",
-						extensions : "xls,xlsx"
+						extensions : "xls,xlsx,ppt,pptx,doc,docx,zip,rar"
 					}
 
 					]

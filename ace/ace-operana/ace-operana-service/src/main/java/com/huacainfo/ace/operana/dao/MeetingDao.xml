@@ -251,4 +251,7 @@
     <select id="selectEmailForNotice" resultType="map">
         select email,name from portal.users t where t.user_level='5' and email is not null
     </select>
+    <select id="selectLiableEmailForNotice" resultType="map">
+        select user_id userId,email,name from portal.users t where t.user_id in(select DISTINCT(liable) from tpa where status !='2') and email is not null
+    </select>
 </mapper>

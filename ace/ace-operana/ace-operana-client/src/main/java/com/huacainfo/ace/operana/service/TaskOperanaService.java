@@ -5,5 +5,7 @@ package com.huacainfo.ace.operana.service;
  */
 public interface TaskOperanaService {
 
-    public abstract void autoSendEmail() throws Exception;
+    public abstract void autoSendEmailLeader() throws Exception;
+    public abstract void autoSendEmailLiableLongTime() throws Exception;
+    public abstract void autoSendEmailLiableShotTime() throws Exception;
 }

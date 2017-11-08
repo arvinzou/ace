@@ -49,4 +49,6 @@ public interface MeetingDao {
 
 	List<Map<String, Object>> selectEmailForNotice();
 
+	List<Map<String, Object>> selectLiableEmailForNotice();
+
 }
