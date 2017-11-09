@@ -71,10 +71,7 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
 <body class=" login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-    <h3>
 
-        <span  style="color:#FFFFFF">${cfg.sys_name}</span>
-    </h3>
     <div style="color: red;font-size:16px">
         ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}
         ${sessionScope['j_captcha_error']}
@@ -366,9 +363,10 @@ jQuery(function($) {
 </body>
 <style>
     .login .logo {
-    margin: 20px auto 0;
+    margin: 0px auto 0;
     padding: 15px;
-    text-align: center;
+    text-align: left;
+    height:200px;
 
 }
     .login .content {
@@ -387,6 +385,7 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     padding: 15px 35px 15px;
     margin-left: -30px;
     margin-right: -30px;
+
 }
 .login .content .form-actions .rememberme {
      margin-top: 0px;
@@ -397,6 +396,13 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
 }
 .form-group-captcha {
     margin-bottom: 5px;
+}
+body{
+  background-image: url(${cfg.sys_login_bg_img});
+  background-size:cover;
+}
+.content{
+    border: 1px solid #eee;
 }
 </style>
 </html>
