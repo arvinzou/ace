@@ -1199,9 +1199,7 @@ function viewFiles(meetingId) {
 				}, {
 					data : 'name'
 				}, {
-					data : 'remark'
-				}, {
-                 					data : 'opt'
+                 					data : 'createDate'
                  				}],
 				bAutoWidth : false,
 				"fnInitComplete" : function() {
@@ -1214,7 +1212,7 @@ function viewFiles(meetingId) {
 					$(row).children('td').eq(1).html(
 							'<a href="'+ fastdfs_server+data.url + '" target="_blank"><span class="badge badge-info">'
 									+ data.name + '</span></a>');
-					$(row).children('td').eq(3).html(
+					$(row).children('td').eq(2).html(
                     							'<a href="javascript:deleteFileByMeetingId(\''  + data.name + '\',\'' + meetingId
                     									+ '\')"><span class="badge badge-danger">删除</span></a>');
 

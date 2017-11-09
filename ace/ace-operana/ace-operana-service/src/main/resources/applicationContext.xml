@@ -38,10 +38,11 @@
     </bean>
 
     <!-- 计划任务配置，用 @Service @Lazy(false)标注类，用@Scheduled(cron = "0 0 2 * * ?")标注方法 -->
+    <!--
     <task:executor id="executor" pool-size="5" />
     <task:scheduler id="scheduler" pool-size="10" />
     <task:annotation-driven executor="executor" scheduler="scheduler" />
-
+-->
     <import resource="classpath:spring/spring-ace-common-fastdfs.xml"/>
     <import resource="classpath:spring/spring-ace-common-kafka.xml"/>
     <import resource="classpath:spring/spring-ace-common-redis.xml"/>

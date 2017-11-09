@@ -184,7 +184,7 @@ pageEncoding="utf-8"%>
                         <tr>
                             <th class="center" style="width:80px;">序号</th>
                             <th>文档名称</th>
-                            <th>说明</th>
+
                             <th style="width:100px;">操作</th>
                         </tr>
                         </thead>

@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
  * Created by chenxiaoke on 2017/5/9.
  */
 public class DataCalUtils {
+
+
 	private static final Logger logger = LoggerFactory.getLogger(DataCalUtils.class);
 	private static final double fl = 4.3482;
 	public static java.math.BigDecimal calQuarterY(int quarter, Map<String, BigDecimal> row, String calType) {
