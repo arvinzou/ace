@@ -1,0 +1,37 @@
+html,body,#main {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+#wrapper{ margin:0 auto;position:relative;width:1000px;height:800px;}
+.box1{ position:absolute; width:250px; height:300px; left:30px; top:15px;background:#fff}
+.box2{position:absolute; width:250px; height:400px; left:30px; bottom:17px;background:#fff}
+.box3{position:absolute; width:300px; height:800px; left:30px; top:15px;background:#fff}
+.box4{ position:absolute; width:400px; height:800px; left:15px; top:15px;background:#fff}
+table td, table th {
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: Verdana;
+    font-weight: bold;
+}
+.table1 {border:1px solid #FF9900;width:100%}
+.table2 {border:1px solid #663399;width:100%}
+.table3 {border:1px solid #3399FF;width:100%}
+.bglefta{
+    background:#FF9933
+}
+.bgrighta{
+    background:#FFCC99
+}
+.bgleftb{
+    background:#9933CC
+}
+.bgrightb{
+    background:#9966CC
+}
+.bgleftc{
+    background:#3399FF
+}
+.bgrightc{
+    background:#99CCFF
+}

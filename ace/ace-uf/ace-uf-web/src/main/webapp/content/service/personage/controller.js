@@ -245,6 +245,9 @@ function loadView(id) {
 					}
 
 				}
+				if (key == 'name') {
+                	value = "<a href='"+contextPath+"/www/wordCloud/index.jsp?id="+id+"' target='_blank'>"+value+"</a>";
+                }
 				$("#dialog-message-view").find('#' + key).html(value);
 			});
 		},

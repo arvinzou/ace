@@ -1,4 +1,7 @@
 <view class="page" style="height:100%">
+  <web-view src="https://zx.huacainfo.com/portal/" style='width:100%;height:100%'>
+  
+  </web-view>
   <view class="swiper-tab">
     <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">11</view>
     <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">22</view>
@@ -14,7 +17,9 @@
     </swiper-item>
     <!-- 我是呵呵 -->
     <swiper-item>
-      <view>我是呵呵</view>
+     
+    <view>我是呵呵</view>
+      
     </swiper-item>
     <!-- 我是嘿嘿 -->
     <swiper-item>

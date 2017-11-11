@@ -34,4 +34,6 @@ public interface PersonageService {
 	public  List<CheckTree>  selectPersonageCheckTreeList() throws Exception;
 
 	public int isExitPersonageByMobile(String mobile);
+
+	public Map<String, Object> selectPersonageCfgById(String id);
 }

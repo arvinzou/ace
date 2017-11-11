@@ -572,4 +572,98 @@
     <select id="isExitPersonageByMobile" resultType="int">
         select count(1) from personage where mobile=#{mobile}
     </select>
+
+
+    <select id="selectPersonageCfgById" resultType="map">
+        SELECT
+        t. NAME 姓名,
+        e. NAME 性别,
+        date_format(t.birthday, '%Y-%m')  出生年月,
+        f. NAME  民族,
+        a.fullname  地区,
+        t.deptId  单位名称,
+        c.fullname 籍贯,
+        d. NAME 统战类型,
+        t.careerType 职业类型,
+        g. NAME  学历,
+        h. NAME 职称,
+        i. NAME 职级,
+        j. NAME 党派,
+        date_format(t.joinDate, '%Y-%m-%d') 加入时间,
+        date_format(t.currentPostDate, '%Y-%m-%d') 现任职务时间,
+        t.mobile 手机号,
+        t.tel 电话,
+        t.remark 备注,
+        t.intro 简介
+
+        FROM
+        personage t
+        LEFT JOIN portal.province a ON t.areaCode = a. CODE
+        LEFT JOIN portal.province c ON t.placeOfOrigin = c. CODE
+        LEFT JOIN (
+        SELECT
+        CODE,
+        NAME
+        FROM
+        portal.dict
+        WHERE
+        category_id = '98'
+        ) d ON t.category = d. CODE
+        LEFT JOIN (
+        SELECT
+        CODE,
+        NAME
+        FROM
+        portal.dict
+        WHERE
+        category_id = '01'
+        ) e ON t.sex = e. CODE
+        LEFT JOIN (
+        SELECT
+        CODE,
+        NAME
+        FROM
+        portal.dict
+        WHERE
+        category_id = '09'
+        ) f ON t.nation = f. CODE
+        LEFT JOIN (
+        SELECT
+        CODE,
+        NAME
+        FROM
+        portal.dict
+        WHERE
+        category_id = '10'
+        ) g ON t.degreee = g. CODE
+        LEFT JOIN (
+        SELECT
+        CODE,
+        NAME
+        FROM
+        portal.dict
+        WHERE
+        category_id = '99'
+        ) h ON t.academicTitle = h. CODE
+        LEFT JOIN (
+        SELECT
+        CODE,
+        NAME
+        FROM
+        portal.dict
+        WHERE
+        category_id = '100'
+        ) i ON t.rank = i. CODE
+        LEFT JOIN (
+        SELECT
+        CODE,
+        NAME
+        FROM
+        portal.dict
+        WHERE
+        category_id = '101'
+        ) j ON t.party = j. CODE
+
+        where t.id=#{id}
+    </select>
 </mapper>

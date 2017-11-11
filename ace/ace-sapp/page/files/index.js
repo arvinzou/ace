@@ -1,4 +1,5 @@
-// page/files/index.js
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
   /**
    * 页面的初始数据

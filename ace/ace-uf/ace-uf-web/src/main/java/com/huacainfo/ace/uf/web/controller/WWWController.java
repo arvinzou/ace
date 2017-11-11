@@ -387,4 +387,12 @@ public class WWWController extends UfBaseController {
 		return this.taskCmccService.insertTaskCmcc(o);
 	}
 
+
+	@RequestMapping(value = "/selectPersonageCfgById.do")
+	@ResponseBody
+	public Map<String,Object> selectPersonageCfgById(String id) throws Exception {
+		this.logger.debug("{}",this.getCurWxUser());
+		return this.personageService.selectPersonageCfgById(id);
+	}
+
 }

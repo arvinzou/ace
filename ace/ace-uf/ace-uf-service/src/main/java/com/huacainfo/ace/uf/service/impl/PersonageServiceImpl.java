@@ -288,6 +288,7 @@ public class PersonageServiceImpl implements PersonageService {
 		return  this.personageDao.selectPersonageById(id);
 	}
 
+
 	public Map<String, Object> selectPersonage(String q){
 		Map<String, Object> rst = new HashMap<String, Object>();
 		List<Map<String, Object>> list = this.personageDao.selectPersonage(q);
@@ -322,5 +323,10 @@ public class PersonageServiceImpl implements PersonageService {
 	}
 	public int isExitPersonageByMobile(String mobile){
 		return this.personageDao.isExitPersonageByMobile(mobile);
+	}
+
+
+	public Map<String,Object> selectPersonageCfgById(String id){
+		return  this.personageDao.selectPersonageCfgById(id);
 	}
 }
