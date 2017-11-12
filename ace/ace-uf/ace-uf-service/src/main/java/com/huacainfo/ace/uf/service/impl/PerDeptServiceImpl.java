@@ -71,6 +71,7 @@ public class PerDeptServiceImpl implements PerDeptService {
 		return rst;
 	}
 
+	@Override
 	public MessageResponse deletePerDeptByPerDeptId(String id, UserProp userProp) throws Exception {
 		this.perDeptDao.deleteByPrimaryKey(id);
 		this.dataBaseLogService.log("删除单位", "单位", String.valueOf(id), String.valueOf(id), "单位", userProp);

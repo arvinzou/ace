@@ -155,6 +155,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 	public  List<Map<String,Object>> selectOrganizationListMap(WxUser user,String longitude,String latitude) throws Exception{
 		return this.organizationDao.selectOrganizationList("",longitude,latitude);
 	}
+
 	private List<Map<String,Object>> getGroupOrganization(String category,List<Map<String,Object>> list){
 		List<Map<String,Object>> rst=new ArrayList<Map<String,Object>>();
 		for(Map<String,Object> e:list){
