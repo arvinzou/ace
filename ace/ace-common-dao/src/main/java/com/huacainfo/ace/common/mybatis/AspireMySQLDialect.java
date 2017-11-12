@@ -1,4 +1,7 @@
 package com.huacainfo.ace.common.mybatis;
+/**
+ *
+ */
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

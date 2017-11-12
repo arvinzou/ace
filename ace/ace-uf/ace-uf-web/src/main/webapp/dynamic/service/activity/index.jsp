@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
@@ -11,11 +11,9 @@ pageEncoding="utf-8"%>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 
-<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css" />
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
 
 <script type="text/javascript">
-
-
 </script>
 <body>
 <div class="page-content">
@@ -55,29 +53,21 @@ pageEncoding="utf-8"%>
 
                     <button class="btn btn-info" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/activity/insertActivity.do">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-edit"
                             authority="${pageContext.request.contextPath}/activity/updateActivity.do">
-                        <i
-                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-info" id="btn-view-multi"
-                            authority="${pageContext.request.contextPath}/activityUser/insertActivityUser.do">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/activity/deleteActivityByActivityId.do">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
                 </div>
             </div>
         </div>
     </div>
+
 
     <table id="grid-table"></table>
 
@@ -142,35 +132,35 @@ pageEncoding="utf-8"%>
 
     </div>
 
-<h5 class="header-title">操作信息</h5>
-<div class="row" style="padding:10px">
+    <h5 class="header-title">操作信息</h5>
+    <div class="row" style="padding:10px">
 
-    <div class="labelItem"><span class="labelItemHeader">
+        <div class="labelItem"><span class="labelItemHeader">
 创建人姓名</span>
-        <br>
-        <span id="createUserName">
+            <br>
+            <span id="createUserName">
 </span>
-    </div>
-    <div class="labelItem"><span class="labelItemHeader">
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">
 入库日期</span>
-        <br>
-        <span id="createDate">
+            <br>
+            <span id="createDate">
 </span>
-    </div>
+        </div>
 
-    <div class="labelItem"><span class="labelItemHeader">
+        <div class="labelItem"><span class="labelItemHeader">
 最后更新人姓名</span>
-        <br>
-        <span id="lastModifyUserName">
+            <br>
+            <span id="lastModifyUserName">
 </span>
-    </div>
-    <div class="labelItem"><span class="labelItemHeader">
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">
 最后更新时间</span>
-        <br>
-        <span id="lastModifyDate">
+            <br>
+            <span id="lastModifyDate">
 </span>
+        </div>
     </div>
-</div>
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
@@ -207,14 +197,12 @@ pageEncoding="utf-8"%>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
-window.onresize = function () {
-	console.log('autoWidthJqgrid');
-	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
-	parent.autoWidth();
-}
-
-
+    window.onresize = function () {
+        console.log('autoWidthJqgrid');
+        $(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
+        $(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight - layoutTopHeight);
+        parent.autoWidth();
+    }
 </script>
 
 <div id="dialog-multi" class="hide">
@@ -251,39 +239,39 @@ window.onresize = function () {
          style="padding: 5px; width: 585px; height: 200px"></div>
 
     <script type="text/javascript">
-	jQuery(function($) {
-		$( "#btn-add" ).on('click', function(e) {
-			e.preventDefault();
-			getComponent();
-		});
-		$('#multiComponent').combogrid({
-			onSelect: function(index,row){
-				getComponent();
-			}
-		});
-		$( "#btn-del" ).on('click', function(e) {
-			e.preventDefault();
-			$('#multi-content').html('');
-		});
-	});
-	function getComponent(){
-		var html = new Array();
-		var g = $('#multiComponent').combogrid('grid');
-		var r = g.datagrid('getSelected');	// get the selected row
-		$.each($('user'),function(i,obj){
-            if($(obj).attr("id")==r.id){
-                alert("重复。");
-                return;
-            }
-		});
-        html.push('<div class="layout-user" >');
-        html.push('<user id="'+r.id+'" class="badge badge-'+cssColor9[0]+'">');
-        html.push(r.name);
-        html.push('</user>');
-        html.push('</div>');
-        $('#multi-content').html($('#multi-content').html()+html.join(''));
-	}
+        jQuery(function ($) {
+            $("#btn-add").on('click', function (e) {
+                e.preventDefault();
+                getComponent();
+            });
+            $('#multiComponent').combogrid({
+                onSelect: function (index, row) {
+                    getComponent();
+                }
+            });
+            $("#btn-del").on('click', function (e) {
+                e.preventDefault();
+                $('#multi-content').html('');
+            });
+        });
 
+        function getComponent() {
+            var html = new Array();
+            var g = $('#multiComponent').combogrid('grid');
+            var r = g.datagrid('getSelected');	// get the selected row
+            $.each($('user'), function (i, obj) {
+                if ($(obj).attr("id") == r.id) {
+                    alert("重复。");
+                    return;
+                }
+            });
+            html.push('<div class="layout-user" >');
+            html.push('<user id="' + r.id + '" class="badge badge-' + cssColor9[0] + '">');
+            html.push(r.name);
+            html.push('</user>');
+            html.push('</div>');
+            $('#multi-content').html($('#multi-content').html() + html.join(''));
+        }
     </script>
     <style>
         .layout-user {
@@ -292,12 +280,14 @@ window.onresize = function () {
             float: left;
             margin: 1px 1px 1px;
         }
+
         .photo {
             height: 90px;
-            max-height:90px;
-            max-width:90px;
+            max-height: 90px;
+            max-width: 90px;
             vertical-align: middle;
         }
+
         #cboxContent {
             background-color: rgb(255, 255, 255);
             border-width: 1px;
@@ -306,19 +296,18 @@ window.onresize = function () {
             border-image: initial;
             padding: 5px;
         }
+
         .ace-thumbnails > li {
-    float: left;
-    display: block;
-    position: relative;
-    overflow: hidden;
-    margin: 2px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ddd;
-    border-image: initial;
-}
-
-
+            float: left;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            margin: 2px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
+        }
     </style>
 
 </div>

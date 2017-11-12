@@ -12,29 +12,38 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util-4.0.xsd "
 	default-autowire="byName">
+	<!--配置数据库连接池-->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
+		<!--驱动-->
 		<property name="driverClass">
 			<value>${dao.db.driverClassName}</value>
 		</property>
+		<!--数据库地址-->
 		<property name="jdbcUrl">
 			<value>${dao.db.url}</value>
 		</property>
+		<!--登陆名-->
 		<property name="user">
 			<value>${dao.db.username}</value>
 		</property>
+		<!--密码-->
 		<property name="password">
 			<value>${dao.db.password}</value>
 		</property>
+		<!--默认连接数量-->
 		<property name="initialPoolSize">
 			<value>${dao.db.initialPoolSize}</value>
 		</property>
+		<!--最大连接数量-->
 		<property name="maxPoolSize">
 			<value>${dao.db.maxActive}</value>
 		</property>
+		<!--检测数据库是否能连接成功-->
 		<property name="preferredTestQuery">
 			<value>${dao.db.preferredTestQuery}</value>
 		</property>
+		<!--隔多少秒检查所有连接池中的空闲连接，默认为0表示不检查-->
 		<property name="idleConnectionTestPeriod">
 			<value>${dao.db.idleConnectionTestPeriod}</value>
 		</property>
@@ -45,14 +54,15 @@
 		<property name="processPropertyPlaceHolders" value="true" />
 		<property name="basePackage" value="${dao.mybatis.scanner.basePackage}" />
 	</bean>
+
+	<!--事务管理-->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="sqlSessionFactoryName" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation"
-			value="${dao.mybatis.sqlSessionFactory.configLocation}" />
+		<property name="configLocation" value="${dao.mybatis.sqlSessionFactory.configLocation}" />
 	</bean>
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactoryName"></constructor-arg>

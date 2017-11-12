@@ -54,11 +54,19 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 	private UserCfgDao userCfgDao;
 
 	public List<Resources> getResourcesByUserId(String id) {
+		System.out.println("UserId=========================================="+id);
+		this.logger.info("UserId=========================================="+id);
 		return this.systemDao.selectResourcesByUserId(id, "ace");
 	}
 
-	public List<Tree> getTreeList(List<Resources> resources, String id,
-			boolean loadButton) {
+	/**
+	 *获取菜单目录
+	 * @param resources
+	 * @param id
+	 * @param loadButton
+	 * @return
+	 */
+	public List<Tree> getTreeList(List<Resources> resources, String id, boolean loadButton) {
 		TreeUtils treeUtils = new TreeUtils(resources, loadButton);
 		return treeUtils.getTreeList(id);
 	}

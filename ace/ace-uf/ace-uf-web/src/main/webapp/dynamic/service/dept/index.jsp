@@ -78,11 +78,6 @@
 							<i
 								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
 						</button>
-                        <button class="btn btn-info" id="btn-view-import"
-                            authority="${portalPath}/department/importXls.do">
-                            <i
-                                class="ace-icon glyphicon glyphicon-upload  align-middle bigger-125 icon-on-right"></i>
-                        </button>
 					</div>
 				</div>
 			</div>

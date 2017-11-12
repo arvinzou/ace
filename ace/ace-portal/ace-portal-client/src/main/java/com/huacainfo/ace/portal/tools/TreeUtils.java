@@ -30,6 +30,12 @@ public class TreeUtils {
 		}
 		return list;
 	}
+
+	/**
+	 *
+	 * @param id=0;
+	 * @return
+	 */
 	public  List<Resources> getChildResourcesList(String id){
 		List<Resources> list=new ArrayList<Resources>();
 		if(this.resources!=null){

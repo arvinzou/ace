@@ -17,7 +17,6 @@ public class SpringUtils implements ApplicationContextAware {
 			return obj;
 		}
 		return null;
-
 	}
 
 	public static ApplicationContext getContext() {

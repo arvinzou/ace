@@ -855,4 +855,11 @@ public class CommonUtils extends StringUtils {
 
 
     }
+    /**
+     *获取文件后缀。
+     */
+    public static String getSuffix(String url){
+        int index=url.lastIndexOf(".");
+        return url.substring(index+1,url.length());
+    }
 }

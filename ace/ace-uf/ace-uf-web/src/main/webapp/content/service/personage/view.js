@@ -1,18 +1,22 @@
 jQuery(function($) {
 
 	// resize to fit page size
+	//重新调整页面大小
 	$(window).on('resize.jqGrid', function() {
+		//$("#grid-table")
 		$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
 	})
-	// resize on sidebar collapse/expand
+	// resize on sidebar collapse/expand 调整工具栏
 	var parent_column = $(cfg.grid_selector).closest('[class*="col-"]');
+
 	$(document).on('settings.ace.jqGrid', function(ev, event_name, collapsed) {
-		if (event_name === 'sidebar_collapsed'
-				|| event_name === 'main_container_fixed') {
+		if (event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed') {
 			$(cfg.grid_selector).jqGrid('setGridWidth', parent_column.width());
 		}
 	})
 
+
+	//$("#grid-table")
 	jQuery(cfg.grid_selector).jqGrid({
 		prmNames : {
 			totalRecord : "totalRecord",
@@ -20,29 +24,29 @@ jQuery(function($) {
 			page : "page",
 			rows : "limit"
 		},
-		datatype : "json",
-		url : cfg.grid_load_data_url,
-		jsonReader : {
-			root : "rows",
-			page : "page",
-			total : "totalPages",
-			records : "total",
-			id : cfg.dataId
+		datatype : "json",//数据库返回数据类型
+		url : cfg.grid_load_data_url, // /personage/findPersonageList.do'.
+	jsonReader : { //描述Json数据格式
+			root : "rows",//包含实际数据的数组
+			page : "page",//当前页数
+			total : "totalPages",//总页数
+			records : "total",  //查询出的记录数
+			id : cfg.dataId //行ID
 		},
 		height : cfg.gridHeight,
-		colNames : _colNames,
-		colModel : _colModel(),
-		rownumbers : true,
-		viewrecords : true,
-		rowNum : cfg.rowNum,
-		rowList : default_page_list,
-		pager : cfg.pager_selector,
-		altRows : true,
+		colNames : _colNames,//显示列名
+		colModel : _colModel(),//设置表格列的属性
+		rownumbers : true,//显示顺序号
+		viewrecords : true,//显示总记录数
+		rowNum : cfg.rowNum,//显示的记录条数
+		rowList : default_page_list,//设置显示条数。
+		pager : cfg.pager_selector, //翻页用的导航显示位置 "#grid-pager"
+		altRows : true, //设置表格 zebra-striped 值
 		// toppager: true,
 
-		multiselect : false,
+		multiselect : false,//定义是否可以多选
 		// multikey: "ctrlKey",
-		multiboxonly : true,
+		multiboxonly : true,//只有当multiselect = true.起作用，当multiboxonly 为ture时只有选择checkbox才会起作用
 		shrinkToFit:true,
 		autoScroll: false,
 		loadComplete : function() {
@@ -287,8 +291,7 @@ function style_edit_form(form) {
 			.after('<span class="lbl"></span>');
 	var buttons = form.next().find('.EditButton .fm-button');
 	buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();// ui-icon,
-	buttons.eq(0).addClass('btn-primary')
-			.prepend('<i class="ace-icon fa fa-check"></i>');
+	buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
 	buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
 	buttons = form.next().find('.navButton a');
 	buttons.find('.ui-icon').hide();

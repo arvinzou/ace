@@ -11,14 +11,19 @@
               http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
 
-	<!-- 登录页面和忘记密码页面不过滤 -->
+	<!-- 登录页面和忘记密码页面不过滤  Start-->
+	<!--登录页面-->
 	<http pattern="/dynamic/portal/security/**" security="none" />
+	<!--验证码请求-->
 	<http pattern="/captcha/image.do" security="none" />
+	<!--找回密码请求-->
 	<http pattern="/system/retrievePassword.do" security="none" />
+	<!---->
 	<http pattern="/dict/findListByCategoryId.do" security="none" />
 	<http pattern="/system/selectProvinceTreeList.do" security="none" />
 	<http pattern="/content/**" security="none" />
 	<http pattern="/www/**" security="none" />
+	<!--end-->
 	<http auto-config="true" use-expressions="false">
 
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/> 
@@ -32,10 +37,10 @@
 			logout-success-url="/dynamic/portal/security/login.jsp" />
 		<!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中） -->
 		<remember-me data-source-ref="${security.dataSource}" />
-		<http-basic />
+		<http-basic/>
 		<headers>
-			<frame-options disabled="true"></frame-options>
-		</headers>
+		<frame-options disabled="true"></frame-options>
+	</headers>
 		<!-- <csrf token-repository-ref="csrfTokenRepository" /> -->
 		<csrf disabled="true" />
 		<session-management
@@ -52,6 +57,8 @@
 		<!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前， 实现用户、角色、权限、资源的数据库管理 -->
 		<custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
 	</http>
+
+
 	<beans:bean id="sessionRegistry"
 		class="org.springframework.security.core.session.SessionRegistryImpl" />
 	<beans:bean id="requestDataValueProcessor"

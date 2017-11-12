@@ -61,8 +61,7 @@ public class OrganizationSubController extends UfBaseController {
 	@ResponseBody
 	public MessageResponse insertOrganizationSub(String jsons) throws Exception {
 		OrganizationSub obj = JSON.parseObject(jsons, OrganizationSub.class);
-		return this.organizationSubService
-				.insertOrganizationSub(obj, this.getCurUserProp());
+		return this.organizationSubService.insertOrganizationSub(obj, this.getCurUserProp());
 	}
 
 	@RequestMapping(value = "/updateOrganizationSub.do")

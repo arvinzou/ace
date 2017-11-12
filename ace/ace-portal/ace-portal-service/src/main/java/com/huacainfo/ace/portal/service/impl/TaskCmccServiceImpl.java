@@ -172,7 +172,7 @@ public class TaskCmccServiceImpl implements TaskCmccService, ThreadProcess {
 	}
 	@Scheduled(fixedDelay = 5000)
 	public void queueTaskDetail() throws Exception {
-		this.logger.info("start dispatch for task");
+		this.logger.info("===============================start dispatch for task queueTaskDetail=================================");
 		this.logger.info("threadPool.dataSize:" + threadPool.dataSize());
 		if (threadPool.dataSize() < 1) {
 			List<QueueCmccWait> list = this.taskCmccMapper.selectQueueByTask();

@@ -1,4 +1,7 @@
 package com.huacainfo.ace.common.mybatis;
+/**
+ *
+ */
 
 import java.io.InputStream;
 import java.sql.Statement;

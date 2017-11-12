@@ -16,7 +16,5 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 	http://code.alibabatech.com/schema/dubbo  http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	<import resource="classpath:dubbo/dubbo-ace-common-provider.xml" />
-		<dubbo:service
-		interface="com.huacainfo.ace.uf.service.AnalysisService"
-		ref="analysisService" />
+		<dubbo:service interface="com.huacainfo.ace.uf.service.AnalysisService" ref="analysisService" />
 </beans>

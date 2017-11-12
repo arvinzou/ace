@@ -3,6 +3,7 @@ jQuery(function($) {
 			initNoticeTopList1();
 			initNoticeTopList2();
 			launchExample();
+
 			
 			$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 				_title: function(title) {
@@ -14,6 +15,7 @@ jQuery(function($) {
 			}));
 			
 		});
+
 
 
 function initNoticeTopList1() {
@@ -83,8 +85,7 @@ function initNoticeTopList1() {
 		}
 function initNoticeTopList2() {
 	
-	$
-			.ajax({
+	$.ajax({
 				type : "post",
 				url : portalPath+"/notice/findListTop.do?category=2",
 				data : {},

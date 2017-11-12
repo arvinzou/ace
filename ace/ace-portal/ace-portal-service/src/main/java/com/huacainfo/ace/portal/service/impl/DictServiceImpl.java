@@ -47,6 +47,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
 
+	@Override
 	public PageResult<DictVo> findDictList(Dict condition, int start, int limit,
 			String orderBy) throws Exception {
 		PageResult<DictVo> rst = new PageResult<DictVo>();
@@ -60,6 +61,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		return rst;
 	}
 
+	@Override
 	public MessageResponse insertDict(Dict o, UserProp userProp)
 			throws Exception {
 		if (CommonUtils.isBlank(o.getName())) {
@@ -82,6 +84,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		return new MessageResponse(0, "添加字典完成！");
 	}
 
+	@Override
 	public MessageResponse updateDict(Dict o, UserProp userProp)
 			throws Exception {
 		if (CommonUtils.isBlank(o.getCode())) {
@@ -106,12 +109,14 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		return new MessageResponse(0, "字典变更完成！");
 	}
 
+	@Override
 	public SingleResult<Dict> selectDictByPrimaryKey(int id) throws Exception {
 		SingleResult<Dict> rst = new SingleResult<Dict>();
 		rst.setValue(this.dictMapper.selectByPrimaryKey(id));
 		return rst;
 	}
 
+	@Override
 	public MessageResponse deleteDictByDictId(int id, UserProp userProp)
 			throws Exception {
 		MessageResponse rst = new MessageResponse();
@@ -120,6 +125,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 				String.valueOf(id), "字典", userProp);
 		return rst;
 	}
+
 	private String getContentByTemplate(String expression, String regex,
 			Map<String, Object> valueMap) {
 		Pattern p = Pattern.compile(regex);
@@ -134,11 +140,12 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		}
 		return expression;
 	}
+
+	@Override
 	public List<Dict> findListByCategoryId(String categoryId,String selected,Map<String,Object> params) throws Exception {
-		DictCategory dictCategory = dictCategoryMapper
-				.selectByPrimaryKey(categoryId);
+		DictCategory dictCategory = dictCategoryMapper.selectByPrimaryKey(categoryId);
 		List<Dict> list = new ArrayList<Dict>();
-		;
+
 		if (CommonUtils.isNotEmpty(dictCategory)&&CommonUtils.isNotEmpty(dictCategory.getRemark())) {
 			SqlRunner sqlRunner = this.getSqlRunner();
 			try {
@@ -189,6 +196,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 			}
 			
 		}
+		this.logger.info("=========================================="+selected);
 		if(CommonUtils.isBlank(selected)){
 			for (Dict dict : list) {
 				dict.setSelected(true);
@@ -304,6 +312,8 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		rst.put("hours",hours);
 		return rst;
 	}
+
+	@Override
 	public  List<Tree>  selectDictTreeList(String pid,String syid) throws Exception{
 		logger.info("=================getDictTreeList-pid===>{}",pid);
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
@@ -325,18 +335,21 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		return sqlRunner;
 	}
 
-	
-	
+
+
+	@Override
 	public Map<String, List<Map<String,Object>>> flushJavaScriptFile(String syid) {
 		Map<String, List<Map<String,Object>>> dictMap = this.loadAutoLoadDicts( syid);
 		return dictMap;
 	}
-	
+
+	@Override
 	public List<Map<String,String>> selectSyidBydc(){
 		return this.dictDao.selectSyidBydc();
 	}
 
 
+	@Override
 	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
 		int i = 1;
 		for (Map<String, Object> row : list) {
@@ -372,10 +385,13 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 				"rs.xls", userProp);
 		return new MessageResponse(0, "字典导入完成！");
 	}
+
+	@Override
 	public List<Map<String,String>> selectAreaCode() throws Exception{
 		return this.dictMapper.selectAreaCode();
 	}
 
+	@Override
 	public  List<Tree> selectDictAllTreeByCategoryId(String id) throws Exception{
 		logger.info("=================selectDictAllTreeByCategoryId-pid===>{}",id);
 

@@ -98,6 +98,8 @@ function init_uploader(config) {
 
 function reset_uploader(config) {
 	var uploader = $('#uploader').pluploadQueue();
+    console.log("==================$('#uploader')"+$('#uploader').html());
+    console.log("uploader="+uploader);
 	uploader.splice();
 	uploader.refresh();
 	init_uploader(config);
@@ -109,8 +111,7 @@ function appendUploadBtn(id) {
 	html
 			.push("<a id='btn-upload-view"+id+"' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
 	$("#"+id).after(html.join(''));
-	$("#btn-upload-add"+id)
-			.on(
+	$("#btn-upload-add"+id).on(
 					'click',
 					function(e) {
 						e.preventDefault();
@@ -123,24 +124,24 @@ function appendUploadBtn(id) {
 						reset_uploader(config);
 						$("#tt").addClass('hide');
 						var dialog = $("#dialog-message")
-								.removeClass('hide')
-								.dialog(
-										{
-											modal : true,
-											width : 750,
-											title : "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件上传</div></div>",
-											title_html : true,
-											buttons : [
-													{
-														html : "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-														"class" : "btn btn-info btn-xs",
-														click : function() {
-															$(this).dialog(
-																	"close");
-														}
-													}
-											]
-										});
+						.removeClass('hide')
+						.dialog(
+								{
+									modal : true,
+									width : 750,
+									title : "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件上传</div></div>",
+									title_html : true,
+									buttons : [
+											{
+												html : "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+												"class" : "btn btn-info btn-xs",
+												click : function() {
+													$(this).dialog(
+															"close");
+												}
+											}
+									]
+								});
 
 					});
 

@@ -1,5 +1,5 @@
 <%@page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+        pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,14 +17,15 @@ pageEncoding="utf-8"%>
 <link href="${portalPath}/content/common/assets/global/css/components.min.css" rel="stylesheet"
       id="style_components" type="text/css"/>
 <style>
-.charts-portal-ct1 {
-	width: 500px;
-	height: 300px
-}
-.charts-portal-ct2 {
-	width: 500px;
-	height: 300px
-}
+    .charts-portal-ct1 {
+        width: 500px;
+        height: 300px
+    }
+
+    .charts-portal-ct2 {
+        width: 500px;
+        height: 300px
+    }
 </style>
 
 <body>
@@ -50,13 +51,14 @@ pageEncoding="utf-8"%>
                 </div>
                 <div class="progress-info">
                     <div class="progress">
-                                            <span style="width: 100%;" class="progress-bar progress-bar-success red-haze">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success red-haze">
                                                 <span class="sr-only"></span>
                                             </span>
                     </div>
                     <div class="status">
-                        <div class="status-title">  </div>
-                        <div class="status-number">  </div>
+                        <div class="status-title"></div>
+                        <div class="status-number"></div>
                     </div>
                 </div>
             </div>
@@ -78,13 +80,14 @@ pageEncoding="utf-8"%>
                 </div>
                 <div class="progress-info">
                     <div class="progress">
-                                            <span style="width: 100%;" class="progress-bar progress-bar-success green-sharp">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success green-sharp">
                                                 <span class="sr-only"></span>
                                             </span>
                     </div>
                     <div class="status">
-                        <div class="status-title">  </div>
-                        <div class="status-number"> </div>
+                        <div class="status-title"></div>
+                        <div class="status-number"></div>
                     </div>
                 </div>
             </div>
@@ -106,13 +109,14 @@ pageEncoding="utf-8"%>
                 </div>
                 <div class="progress-info">
                     <div class="progress">
-                                            <span style="width: 100%;" class="progress-bar progress-bar-success blue-sharp">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success blue-sharp">
                                                 <span class="sr-only"></span>
                                             </span>
                     </div>
                     <div class="status">
-                        <div class="status-title">  </div>
-                        <div class="status-number"> </div>
+                        <div class="status-title"></div>
+                        <div class="status-number"></div>
                     </div>
                 </div>
             </div>
@@ -133,23 +137,19 @@ pageEncoding="utf-8"%>
                 </div>
                 <div class="progress-info">
                     <div class="progress">
-                                            <span style="width: 100%;" class="progress-bar progress-bar-success purple-soft">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success purple-soft">
                                                 <span class="sr-only"></span>
                                             </span>
                     </div>
                     <div class="status">
-                        <div class="status-title">  </div>
-                        <div class="status-number"> </div>
+                        <div class="status-title"></div>
+                        <div class="status-number"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
 
 
 </div>
@@ -243,36 +243,50 @@ pageEncoding="utf-8"%>
 <jsp:include page="/dynamic/common/footer-2.jsp"/>
 
 <script type="text/javascript">
-window.onresize = function () {
-	parent.autoWidth();
-}
+    window.onresize = function () {
+        parent.autoWidth();
+    }
 </script>
 <script
         src="${pageContext.request.contextPath}/content/index/index.js?version=${cfg.version}"></script>
 <style>
-.padding1{
-    padding: 15px 15px 15px 15px;
-}
-.page-content {
-	background-color: #fff;
-	position: relative;
-	margin: 0;
-	padding: 10px 10px 0px 10px;
-}
-.page-content-2 {
-	background-color: #fff;
-	position: relative;
-	margin: 0;
-	padding: 0px 10px 10px 10px;
-}
-.background {
-	background-color: #BFCAD1;
-}
-.background-white {
-	background-color: #fff;
-}
-.stamper{padding-top:10px;height:100px;}
-.stamper span{float:right;display:inline-block;height:100%;width:200px;}
+    .padding1 {
+        padding: 15px 15px 15px 15px;
+    }
+
+    .page-content {
+        background-color: #fff;
+        position: relative;
+        margin: 0;
+        padding: 10px 10px 0px 10px;
+    }
+
+    .page-content-2 {
+        background-color: #fff;
+        position: relative;
+        margin: 0;
+        padding: 0px 10px 10px 10px;
+    }
+
+    .background {
+        background-color: #BFCAD1;
+    }
+
+    .background-white {
+        background-color: #fff;
+    }
+
+    .stamper {
+        padding-top: 10px;
+        height: 100px;
+    }
+
+    .stamper span {
+        float: right;
+        display: inline-block;
+        height: 100%;
+        width: 200px;
+    }
 
 </style>
 </body>

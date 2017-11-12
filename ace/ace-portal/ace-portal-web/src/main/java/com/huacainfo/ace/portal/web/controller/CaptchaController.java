@@ -28,7 +28,7 @@ public class CaptchaController extends PortalBaseController {
 	/**
 	 * 
 	 * @Title:findConfigList
-	 * @Description: TODO(系统参数分页查询)
+	 * @Description: TODO(系统参数分页查询)验证码
 	 * @param: @param condition
 	 * @param: @param page
 	 * @param: @return

@@ -153,8 +153,7 @@
 		t.SEQUENCE,t.RESOURCES_ID
 	</select>
 	<select id="selectProvinceTreeList" resultType="map">
-		SELECT
-		t.code ID,
+		SELECT	t.code ID,
 		t.parent_code PID,
 		t.name TEXT,
 		'' SRC,
@@ -171,6 +170,7 @@
 		province t
 		where 0=0
 		ORDER BY t.code
+
 	</select>
 	<insert id="insertFiles" parameterType="com.huacainfo.ace.portal.model.Files">
 		insert into files

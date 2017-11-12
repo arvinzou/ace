@@ -9,16 +9,14 @@ public abstract class MybatisInterceptorAbstract implements Interceptor {
 	protected static final String FIELD_DELEGATE = "delegate";
 	protected static final String FIELD_MAPPEDSTATEMENT = "mappedStatement";
 
-	protected void writeDeclaredField(Object target, String fieldName,
-			Object value) throws IllegalAccessException {
+	protected void writeDeclaredField(Object target, String fieldName, Object value) throws IllegalAccessException {
 		if (target == null) {
 			throw new IllegalArgumentException("target object must not be null");
 		}
 		Class<?> cls = target.getClass();
 		Field field = getField(cls, fieldName);
 		if (field == null) {
-			throw new IllegalArgumentException("Cannot locate declared field "
-					+ cls.getName() + "." + fieldName);
+			throw new IllegalArgumentException("Cannot locate declared field " + cls.getName() + "." + fieldName);
 		}
 		field.set(target, value);
 	}
