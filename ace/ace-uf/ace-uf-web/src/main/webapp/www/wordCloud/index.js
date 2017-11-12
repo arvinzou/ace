@@ -4,7 +4,7 @@ var list1=[{"用户活跃度":"核心用户"},{"用户影响力":"引领者"},{"
 var list2=[{"基础信息":"年龄，性别"},{"位置信息":"家庭住址，单位地址"},{"用户价值":"用户活跃度，用户影响力"},{"人群属性":"年龄阶段，文化属性"},{"经济实力":"消费能力等级，月收入"},{"购物习惯":"品牌偏好，支付方式"},{"美妆标签":"美妆分类，美妆常用关键词式"},{"品牌标签":"经典品牌，一线品牌"},{"上网习惯":"终端类型，上网时段"},{"互动行为":"日收藏次数，日点赞次数"},{"购买行为":"订阅渠道，订阅产品"}];
 var list3=[{"人口属性":"基础信息，位置信息"},{"用户分类":"用户价值，人群属性"},{"商业属性":"经济实力，购物习惯"},{"内容标签":"美妆标签，品牌标签"},{"行为标签":"上网习惯，互动行为，购买行为"}];
 presents=[];
-
+var fileName="1.png";
 jQuery(function($) {
     loadView(id);
 });
@@ -19,15 +19,36 @@ function loadView(id) {
 		beforeSend : function(XMLHttpRequest) {
 		},
 		success : function(rst, textStatus) {
+		    list.push({"姓名":rst["姓名"]});
+		    if(rst["性别"]=='女'){
+		        fileName="1.png";
+		    }else{
+		        fileName="2.png";
+		    }
 		    $.each(rst, function(i, o) {
 		        var e={};
 		        e[i]=o;
-                list.push(e);
+		        if(i=='姓名'){
+
+		        }else{
+		            list.push(e);
+		        }
+
         	});
         	$.each(list1, function(i, o) {
                 list.push(o);
              });
             createGrid();
+            $.each(rst, function(i, o) {
+            		        var e={};
+            		        e[i]=o;
+            		        if(i=='姓名'){
+
+            		        }else{
+            		            list.push(e);
+            		        }
+
+                    	});
             createWordCloud();
 		},
 		error : function() {
@@ -109,5 +130,5 @@ function createWordCloud(){
             }]
         });
     }
-    maskImage.src = "image/1.png";
+    maskImage.src = "image/"+fileName;
 }
