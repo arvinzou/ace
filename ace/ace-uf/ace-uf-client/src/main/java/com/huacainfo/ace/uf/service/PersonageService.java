@@ -19,7 +19,7 @@ public interface PersonageService {
 	 * @param obj
 	 * @param userProp
 	 */
-	//public abstract MessageResponse insertPerJc(PerJiangCheng obj,UserProp userProp);
+	public abstract MessageResponse insertPerJc(PerJiangCheng obj,UserProp userProp);
 
 	/**
 	 * 【奖惩信息】删除统战人士的一条奖惩信息
@@ -27,7 +27,7 @@ public interface PersonageService {
 	 * @param userProp
 	 * @return
 	 */
-	//public abstract MessageResponse deletePerJCById(String id,UserProp userProp);
+	public abstract MessageResponse deletePerJCById(String id,UserProp userProp);
 
 	/**
 	 * 【奖惩信息】更新统战人士的奖惩信息
@@ -35,13 +35,13 @@ public interface PersonageService {
 	 * @param userProp
 	 * @return
 	 */
-	//public  abstract MessageResponse updatePerJC(PerJiangCheng obj,UserProp userProp);
+	public  abstract MessageResponse updatePerJC(PerJiangCheng obj,UserProp userProp);
 	/**
 	 * 【奖惩信息】获取统战人士的奖惩信息
 	 * @param id
 	 * @return
 	 */
-	//public abstract  List<PerJiangCheng> selectPerJCById(String id);
+	public abstract  List<PerJiangCheng> selectPerJCById(String id);
 
 /**************************************************************************************************************************/
 
@@ -50,7 +50,7 @@ public interface PersonageService {
 	 * @param obj
 	 * @param userProp
 	 */
-	//public abstract MessageResponse insertPerZw(PerZhiWu obj, UserProp userProp);
+	public abstract MessageResponse insertPerZw(PerZhiWu obj, UserProp userProp);
 
 	/**
 	 * 【社会职务】删除统战人士的一条社会职务
@@ -58,7 +58,7 @@ public interface PersonageService {
 	 * @param userProp
 	 * @return
 	 */
-	//public abstract MessageResponse deletePerZwById(String id,UserProp userProp);
+	public abstract MessageResponse deletePerZwById(String id,UserProp userProp);
 
 	/**
 	 * 【社会职务】更新统战人士的社会职务
@@ -66,13 +66,13 @@ public interface PersonageService {
 	 * @param userProp
 	 * @return
 	 */
-	//public  abstract MessageResponse updatePerZwById(PerZhiWu obj,UserProp userProp);
+	public  abstract MessageResponse updatePerZwById(PerZhiWu obj,UserProp userProp);
 	/**
 	 * 【社会职务】获取统战人士的社会职务
 	 * @param id
 	 * @return
 	 */
-	//public abstract  List<PerZhiWu> selectPerZwById(String id);
+	public abstract  List<PerZhiWu> selectPerZwById(String id);
 
 /**************************************************************************************************************************/
 	/**
@@ -80,7 +80,7 @@ public interface PersonageService {
 	 * @param obj
 	 * @param userProp
 	 */
-	//public abstract MessageResponse insertPerCategory(PerCategory obj, UserProp userProp);
+	public abstract MessageResponse insertPerCategory(PerCategory obj, UserProp userProp);
 
 	/**
 	 * 【人士类型】删除统战人士的一条人士类型
@@ -88,7 +88,7 @@ public interface PersonageService {
 	 * @param userProp
 	 * @return
 	 */
-	//public abstract MessageResponse deletePerCategoryById(String id,UserProp userProp);
+	public abstract MessageResponse deletePerCategoryById(String id,UserProp userProp);
 
 	/**
 	 * 【人士类型】更新统战人士的人士类型
@@ -96,13 +96,13 @@ public interface PersonageService {
 	 * @param userProp
 	 * @return
 	 */
-	//public  abstract MessageResponse updatePerCategoryById(PerCategory obj,UserProp userProp);
+	public  abstract MessageResponse updatePerCategoryById(PerCategory obj,UserProp userProp);
 	/**
 	 * 【人士类型】获取统战人士的人士类型
 	 * @param id
 	 * @return
 	 */
-	//public abstract  List<PerCategory> selectPerCategoryById(String id);
+	public abstract  List<PerCategory> selectPerCategoryById(String id);
 
 /**************************************************************************************************************************/
 
@@ -111,7 +111,7 @@ public interface PersonageService {
 	 * @param obj
 	 * @param userProp
 	 */
-	//public abstract MessageResponse insertInterest(interest obj, UserProp userProp);
+	public abstract MessageResponse insertInterest(interest obj, UserProp userProp);
 
 	/**
 	 * 【兴趣爱好】删除统战人士的一条兴趣爱好
@@ -119,7 +119,7 @@ public interface PersonageService {
 	 * @param userProp
 	 * @return
 	 */
-	//public abstract MessageResponse deleteInterestById(String id,UserProp userProp);
+	public abstract MessageResponse deleteInterestById(String id,UserProp userProp);
 
 	/**
 	 * 【兴趣爱好】更新统战人士的兴趣爱好
@@ -127,13 +127,13 @@ public interface PersonageService {
 	 * @param userProp
 	 * @return
 	 */
-	//public  abstract MessageResponse updateInterestById(interest obj, UserProp userProp);
+	public  abstract MessageResponse updateInterestById(interest obj, UserProp userProp);
 	/**
 	 * 【兴趣爱好】获取统战人士的兴趣爱好
 	 * @param id
 	 * @return
 	 */
-	//public abstract  List<interest> selectInterestById(String id);
+	public abstract  List<interest> selectInterestById(String id);
 
 
 
