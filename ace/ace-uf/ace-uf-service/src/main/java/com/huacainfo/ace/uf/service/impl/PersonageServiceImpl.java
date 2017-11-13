@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CheckTreeUtils;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.portal.model.Resources;
+import com.huacainfo.ace.uf.model.interest;
 import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,7 @@ public class PersonageServiceImpl implements PersonageService {
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
 
+	@Override
 	public PageResult<PersonageVo> findPersonageList(PersonageQVo condition, int start, int limit, String orderBy)
 			throws Exception {
 		condition.setCategory(this.getDictCodeBYId(condition.getCategory()));
@@ -47,9 +49,9 @@ public class PersonageServiceImpl implements PersonageService {
 		return rst;
 	}
 
+	@Override
 	public MessageResponse insertPersonage(Personage o, UserProp userProp) throws Exception {
 		o.setId(UUID.randomUUID().toString());
-		// o.setId(String.valueOf(new Date().getTime()));
 		if (CommonUtils.isBlank(o.getId())) {
 			return new MessageResponse(1, "主键不能为空！");
 		}
@@ -93,6 +95,8 @@ public class PersonageServiceImpl implements PersonageService {
 		return new MessageResponse(0, "添加统战人士完成！");
 	}
 
+
+	@Override
 	public MessageResponse updatePersonage(Personage o, UserProp userProp) throws Exception {
 		if (CommonUtils.isBlank(o.getId())) {
 			return new MessageResponse(1, "主键不能为空！");
@@ -136,18 +140,21 @@ public class PersonageServiceImpl implements PersonageService {
 		return new MessageResponse(0, "变更统战人士完成！");
 	}
 
+	@Override
 	public SingleResult<PersonageVo> selectPersonageByPrimaryKey(String id) throws Exception {
 		SingleResult<PersonageVo> rst = new SingleResult<PersonageVo>();
 		rst.setValue(this.personageDao.selectByPrimaryKey(id));
 		return rst;
 	}
 
+	@Override
 	public MessageResponse deletePersonageByPersonageId(String id, UserProp userProp) throws Exception {
 		this.personageDao.deleteByPrimaryKey(id);
 		this.dataBaseLogService.log("删除统战人士", "统战人士", String.valueOf(id), String.valueOf(id), "统战人士", userProp);
 		return new MessageResponse(0, "统战人士删除完成！");
 	}
 
+	@Override
 	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
 		int i = 1;
 		for (Map<String, Object> row : list) {
@@ -217,10 +224,14 @@ public class PersonageServiceImpl implements PersonageService {
 		this.dataBaseLogService.log("统战人士导入", "统战人士", "", "rs.xls", "rs.xls", userProp);
 		return new MessageResponse(0, "导入完成！");
 	}
+
+	@Override
 	public List<Map<String,Object>> selectPersonageListMap(WxUser user,String longitude,String latitude,String q){
 		return this.personageDao.selectPersonageList(longitude,latitude,q,user);
 	}
 
+
+	@Override
 	public  List<Map<String,Object>> selectPersonageList(String q,WxUser user) throws Exception{
 
 		List<Map<String,Object>> category=this.personageDao.selectPersonageCategoryList(user);
@@ -284,11 +295,14 @@ public class PersonageServiceImpl implements PersonageService {
 		return partyList;
 	}
 
+
+	@Override
 	public Map<String,Object> selectPersonageById(String id){
 		return  this.personageDao.selectPersonageById(id);
 	}
 
 
+	@Override
 	public Map<String, Object> selectPersonage(String q){
 		Map<String, Object> rst = new HashMap<String, Object>();
 		List<Map<String, Object>> list = this.personageDao.selectPersonage(q);
@@ -297,6 +311,8 @@ public class PersonageServiceImpl implements PersonageService {
 		return rst;
 	}
 
+
+	@Override
 	public  List<Tree>  selectPersonageTreeList(String q,WxUser user) throws Exception{
 		if(user.getCategory()!=null){
 			if(user.getCategory().length()>2){
@@ -306,6 +322,8 @@ public class PersonageServiceImpl implements PersonageService {
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(this.personageDao.selectPersonageTreeList(q,user));
 		return commonTreeUtils.getTreeList("0");
 	}
+
+	@Override
 	public List<CheckTree> selectPersonageCheckTreeList() throws Exception{
 		CheckTreeUtils commonTreeUtils = new CheckTreeUtils(this.personageDao.selectPersonageCheckTreeList());
 		return commonTreeUtils.getCheckTreeList("0");
@@ -321,12 +339,17 @@ public class PersonageServiceImpl implements PersonageService {
 		}*/
 		return id;
 	}
+
+	@Override
 	public int isExitPersonageByMobile(String mobile){
 		return this.personageDao.isExitPersonageByMobile(mobile);
 	}
 
 
+
+	@Override
 	public Map<String,Object> selectPersonageCfgById(String id){
 		return  this.personageDao.selectPersonageCfgById(id);
 	}
+
 }

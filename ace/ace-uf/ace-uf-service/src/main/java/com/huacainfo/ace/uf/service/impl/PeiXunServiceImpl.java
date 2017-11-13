@@ -4,6 +4,7 @@ package com.huacainfo.ace.uf.service.impl;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.uf.dao.PeiXunDao;
 import com.huacainfo.ace.uf.model.PeiXun;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -41,10 +41,11 @@ public class PeiXunServiceImpl implements PeiXunService {
 		return rst;
 	}
 
+	@Override
 	public MessageResponse insertPeiXun(PeiXun o, UserProp userProp)
 			throws Exception {
-		//o.setId(UUID.randomUUID().toString());
-		o.setId(String.valueOf(new Date().getTime()));
+		o.setId(UUID.randomUUID().toString());
+
 		
 		int temp = this.peiXunDao.isExit(o);
 		if (temp > 0) {
@@ -59,7 +60,7 @@ public class PeiXunServiceImpl implements PeiXunService {
 				o.getName(), userProp);
 		return new MessageResponse(0, "添加推文完成！");
 	}
-
+	@Override
 	public MessageResponse updatePeiXun(PeiXun o, UserProp userProp)
 			throws Exception {
 		
@@ -73,12 +74,14 @@ public class PeiXunServiceImpl implements PeiXunService {
 		return new MessageResponse(0, "变更推文完成！");
 	}
 
+	@Override
 	public SingleResult<PeiXunVo> selectPeiXunByPrimaryKey(String id) throws Exception {
 		SingleResult<PeiXunVo> rst = new SingleResult<PeiXunVo>();
-		rst.setValue(this.peiXunDao.selectByPrimaryKey(id));
+		rst.setValue((PeiXunVo) this.peiXunDao.selectPeiXunByPrimaryKey(id));
 		return rst;
 	}
 
+	@Override
 	public MessageResponse deletePeiXunByPeiXunId(String id,
 			UserProp userProp) throws Exception {
 		this.peiXunDao.deleteByPrimaryKey(id);

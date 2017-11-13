@@ -17,11 +17,17 @@
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.uf.vo.PeiXunVo">
+
+    </resultMap>
+
     <sql id="Base_Column_List">
     id, name, address, dept, teacher, status, time, content, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Base_Column_List"/>
         from tz.peixun
@@ -31,6 +37,7 @@
     delete from tz.peixun
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
     <insert id="insert" parameterType="com.huacainfo.ace.uf.model.PeiXun">
     insert into tz.peixun (id, name, address,
       dept, teacher, status, 
