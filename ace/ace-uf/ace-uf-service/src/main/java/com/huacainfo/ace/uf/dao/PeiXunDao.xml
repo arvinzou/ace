@@ -7,7 +7,6 @@
         <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="dept" jdbcType="VARCHAR" property="dept"/>
         <result column="teacher" jdbcType="VARCHAR" property="teacher"/>
-        <result column="status" jdbcType="CHAR" property="status"/>
         <result column="time" jdbcType="TIMESTAMP" property="time"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -23,7 +22,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, name, address, dept, teacher, status, time, content, createUserId, createUserName,
+    id, name, address, dept, teacher,  time, content, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
@@ -40,12 +39,11 @@
 
     <insert id="insert" parameterType="com.huacainfo.ace.uf.model.PeiXun">
     insert into tz.peixun (id, name, address,
-      dept, teacher, status, 
-      time, content, createUserId, 
+      dept, teacher,time, content, createUserId,
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
-      #{dept,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{dept,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR},
       #{time,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
@@ -57,7 +55,6 @@
       address = #{address,jdbcType=VARCHAR},
       dept = #{dept,jdbcType=VARCHAR},
       teacher = #{teacher,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
       time = #{time,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=VARCHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -87,7 +84,6 @@
         </if>
     </sql>
 
-
     <select id="findList" resultMap="BaseResultMapVo">
         select m.* from(
         select
@@ -105,12 +101,10 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
         <include refid="whereCondition"/>
     </select>
-
 
     <select id="isExit" resultType="int">
     select count(*)
@@ -118,5 +112,4 @@
     where
     name=#{name}
   </select>
-
 </mapper>

@@ -96,11 +96,12 @@ var _colModel = function () {
         },
 
 
+
         {
             name: 'published',
             editable: true,
             width: 100,
-            edittype: "datebox",
+            edittype: "datetimebox",
             dataoptions: {
                 formatter: function (date) {
                     var y = date.getFullYear();
