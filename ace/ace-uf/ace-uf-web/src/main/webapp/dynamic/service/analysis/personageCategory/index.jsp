@@ -15,7 +15,7 @@ pageEncoding="utf-8"%>
 <style>
 
 .charts{
-	width: 485px;
+	width: 600px;
 	height: 350px
 }
 </style>

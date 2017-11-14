@@ -21,6 +21,10 @@ import com.huacainfo.ace.uf.service.$!{bean.name}Service;
 import com.huacainfo.ace.uf.vo.$!{bean.name}Vo;
 import com.huacainfo.ace.uf.vo.$!{bean.name}QVo;
 @Service("$!{bean.lowerName}Service")
+/*
+ * @author 陈晓克
+ * @date 2011/10/31
+ */
 public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired

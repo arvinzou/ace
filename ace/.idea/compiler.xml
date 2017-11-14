@@ -24,29 +24,12 @@
         <module name="ace-workflow-web" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
       <module name="ace" target="1.7" />
       <module name="ace-autocode" target="1.7" />
       <module name="ace-common" target="1.7" />
       <module name="ace-common-dao" target="1.7" />
       <module name="ace-common-web" target="1.7" />
-      <module name="ace-gesp" target="1.7" />
-      <module name="ace-gesp-client" target="1.7" />
-      <module name="ace-gesp-service" target="1.7" />
-      <module name="ace-gesp-web" target="1.7" />
-      <module name="ace-gis" target="1.7" />
-      <module name="ace-gis-client" target="1.7" />
-      <module name="ace-gis-service" target="1.7" />
-      <module name="ace-gis-web" target="1.7" />
-      <module name="ace-kernel" target="1.7" />
-      <module name="ace-kernel-backend" target="1.7" />
-      <module name="ace-kernel-client" target="1.7" />
-      <module name="ace-kernel-service" target="1.7" />
-      <module name="ace-kernel-web" target="1.7" />
-      <module name="ace-luohua" target="1.7" />
-      <module name="ace-luohua-client" target="1.7" />
-      <module name="ace-luohua-service" target="1.7" />
-      <module name="ace-luohua-web" target="1.7" />
       <module name="ace-operana" target="1.7" />
       <module name="ace-operana-client" target="1.7" />
       <module name="ace-operana-service" target="1.7" />
@@ -59,14 +42,6 @@
       <module name="ace-uf-client" target="1.7" />
       <module name="ace-uf-service" target="1.7" />
       <module name="ace-uf-web" target="1.7" />
-      <module name="ace-weui" target="1.7" />
-      <module name="ace-weui-client" target="1.7" />
-      <module name="ace-weui-service" target="1.7" />
-      <module name="ace-weui-web" target="1.7" />
-      <module name="ace-weuiluohua" target="1.7" />
-      <module name="ace-weuiluohua-client" target="1.7" />
-      <module name="ace-weuiluohua-service" target="1.7" />
-      <module name="ace-weuiluohua-web" target="1.7" />
       <module name="ace-workflow" target="1.7" />
       <module name="ace-workflow-client" target="1.7" />
       <module name="ace-workflow-service" target="1.7" />

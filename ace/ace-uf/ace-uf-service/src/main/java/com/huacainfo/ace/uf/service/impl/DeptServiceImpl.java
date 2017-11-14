@@ -15,17 +15,18 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.uf.dao.DeptDao;
 import com.huacainfo.ace.uf.service.DeptService;
-
-
 @Service("deptService")
+/*
+ * @author 陈晓克
+ * @date 2011/10/31
+ */
 public class DeptServiceImpl implements DeptService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private DeptDao deptDao;
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
-
-
+	@Override
 	public  List<Map<String,Object>> selectDeptList(String q,WxUser user,String areaCode) throws Exception{
 
 		List<Map<String,Object>> category=this.deptDao.selectDeptCategoryList(areaCode);
@@ -64,9 +65,11 @@ public class DeptServiceImpl implements DeptService {
 		}
 		return category;
 	}
+	@Override
 	public  List<Map<String,Object>> selectDeptListMap(WxUser user,String longitude,String latitude,String q) throws Exception{
 		return this.deptDao.selectDeptList(q,longitude,latitude);
 	}
+
 	private List<Map<String,Object>> getGroupDept(String category,List<Map<String,Object>> list){
 		List<Map<String,Object>> rst=new ArrayList<Map<String,Object>>();
 		for(Map<String,Object> e:list){
@@ -76,23 +79,25 @@ public class DeptServiceImpl implements DeptService {
 		}
 		return  rst;
 	}
-
+	@Override
 	public  Map<String,Object> selectDept(String id,WxUser user) throws Exception{
 		Map<String,Object> rst=this.deptDao.selectDeptById(id);
 		List<Map<String,String>> list=this.deptDao.selectDeptImagesById(id);
 		rst.put("list",list);
 		return rst;
 	}
+	@Override
 	public  List<Map<String,Object>> selectAreaCodeList(String areaCode,WxUser user) throws Exception{
 		List<Map<String,Object>> list=this.deptDao.selectAreaCodeList(areaCode);
 
 		return list;
 	}
-
+	@Override
 	public  List<Map<String,Object>> selectDeptCategoryList(WxUser user,String areaCode) throws Exception{
 		List<Map<String,Object>> list=this.deptDao.selectDeptCategoryList(areaCode);
 		return list;
 	}
+	@Override
 	public  List<Map<String,Object>> selectDeptByCategory(String category,WxUser user) throws Exception{
 		List<Map<String,Object>> list=this.deptDao.selectDeptByCategory(category);
 		return list;

@@ -17,7 +17,7 @@ import com.huacainfo.ace.uf.service.AnalysisService;
 @Service("analysisService")
 public class AnslysisServiceImpl implements AnalysisService {
 	private static final Logger logger = LoggerFactory.getLogger(AnslysisServiceImpl.class);
-
+	@Override
 	public ListResult<Map<String, Object>> query(Map<String, Object> condition,
 			String reportId,int start,int limit) throws Exception {
 		ListResult<Map<String, Object>> rst = new ListResult<Map<String, Object>>();

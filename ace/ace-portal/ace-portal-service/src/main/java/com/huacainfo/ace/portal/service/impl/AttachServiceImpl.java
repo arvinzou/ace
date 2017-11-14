@@ -29,15 +29,14 @@ public class AttachServiceImpl implements AttachService {
     private IFile fileSaver;
     @Autowired
     private DataBaseLogService dataBaseLogService;
-
+    @Override
     public ListResult<AttachVo> findAttachList(AttachQVo condition) throws Exception {
         ListResult<AttachVo> rst = new ListResult<AttachVo>();
         List<AttachVo> list = this.attachMapper.findList(condition);
         rst.setValue(list);
         return rst;
     }
-
-
+    @Override
     public MessageResponse deleteAttachByFileName(String id, UserProp userProp) throws Exception {
         MessageResponse rst = new MessageResponse();
         Attach o = attachMapper.selectByPrimaryKey(Integer.valueOf(id));
@@ -47,7 +46,7 @@ public class AttachServiceImpl implements AttachService {
                 "上传附件", userProp);
         return rst;
     }
-
+    @Override
     public ListResult<Attach> upload(Attach[] file, String noticeId, UserProp userProp) throws Exception {
         ListResult<Attach> rst = new ListResult<Attach>();
         List<Attach> list = new ArrayList<Attach>();

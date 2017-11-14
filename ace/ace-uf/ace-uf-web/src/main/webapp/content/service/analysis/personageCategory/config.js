@@ -9,6 +9,13 @@ var option = {
 		x : 'left',
 		data : []
 	},
+	 lable:{
+            normal:{
+                textStyle:{
+                    fontsize:30
+                }
+            }
+        },
 	series : [{
 		name : '',
 		type : 'pie',
@@ -22,7 +29,7 @@ var option = {
 			emphasis : {
 				show : true,
 				textStyle : {
-					fontSize : '30',
+					fontSize : 30,
 					fontWeight : 'bold'
 				}
 			}
