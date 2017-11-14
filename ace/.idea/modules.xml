@@ -15,14 +15,14 @@
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-rvc/ace-rvc.iml" filepath="$PROJECT_DIR$/ace-rvc/ace-rvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-rvc/ace-rvc-client/ace-rvc-client.iml" filepath="$PROJECT_DIR$/ace-rvc/ace-rvc-client/ace-rvc-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-rvc/ace-rvc-service/ace-rvc-service.iml" filepath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/ace-rvc-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-rvc/ace-rvc-web/ace-rvc-web.iml" filepath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/ace-rvc-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-client/ace-workflow-client.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-client/ace-workflow-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-service/ace-workflow-service.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-service/ace-workflow-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-web/ace-workflow-web.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-web/ace-workflow-web.iml" />
     </modules>
   </component>
 </project>

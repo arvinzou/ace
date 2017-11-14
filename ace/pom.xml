@@ -64,11 +64,11 @@
 		<module>ace-portal</module>
 		<module>ace-uf</module>
 
-		<module>ace-workflow</module>
 
+		<module>ace-rvc</module>
 		<!-- <module>ace-luohua</module>
 		<module>ace-kernel</module>
-
+<module>ace-workflow</module>
      <module>ace-weuiluohua</module>
 
 

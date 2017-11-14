@@ -16,12 +16,12 @@
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />
+        <module name="ace-rvc-client" />
+        <module name="ace-rvc-service" />
+        <module name="ace-rvc-web" />
         <module name="ace-uf-client" />
         <module name="ace-uf-service" />
         <module name="ace-uf-web" />
-        <module name="ace-workflow-client" />
-        <module name="ace-workflow-service" />
-        <module name="ace-workflow-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
@@ -38,6 +38,10 @@
       <module name="ace-portal-client" target="1.7" />
       <module name="ace-portal-service" target="1.7" />
       <module name="ace-portal-web" target="1.7" />
+      <module name="ace-rvc" target="1.7" />
+      <module name="ace-rvc-client" target="1.7" />
+      <module name="ace-rvc-service" target="1.7" />
+      <module name="ace-rvc-web" target="1.7" />
       <module name="ace-uf" target="1.7" />
       <module name="ace-uf-client" target="1.7" />
       <module name="ace-uf-service" target="1.7" />
