@@ -20,16 +20,31 @@ import com.huacainfo.ace.portal.vo.$!{bean.name}QVo;
 
 @Controller
 @RequestMapping("/$!{bean.lowerName}")
-public class $!{bean.name}Controller extends UfBaseController {
+/**
+ * @author: $!{annotation.authorName}
+ * @version: $!{annotation.version}
+ * @Description:  TODO($!{bean.tableChineseName})
+ */
+public class $!{bean.name}Controller extends PortalBaseController {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private $!{bean.name}Service $!{bean.lowerName}Service;
-
+     /**
+	 *
+	    * @Title:find!{bean.name}List
+	    * @Description:  TODO($!{bean.tableChineseName}分页查询)
+	 		* @param:        @param condition
+	 		* @param:        @param page
+	 		* @param:        @return
+	 		* @param:        @throws Exception
+	 		* @return:       PageResult<$!{bean.name}Vo>
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
 	@RequestMapping(value = "/find$!{bean.name}List.do")
 	@ResponseBody
 	public PageResult<$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition,
@@ -43,7 +58,17 @@ public class $!{bean.name}Controller extends UfBaseController {
 	
 		return rst;
 	}
-
+    /**
+	 *
+	    * @Title:insert$!{bean.name}
+	    * @Description:  TODO(添加$!{bean.tableChineseName})
+	 		* @param:        @param jsons
+	 		* @param:        @throws Exception
+	 		* @return:       MessageResponse
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
 	@RequestMapping(value = "/insert$!{bean.name}.do")
 	@ResponseBody
 	public MessageResponse insert$!{bean.name}(String jsons) throws Exception {
@@ -51,7 +76,17 @@ public class $!{bean.name}Controller extends UfBaseController {
 		return this.$!{bean.lowerName}Service
 				.insert$!{bean.name}(obj, this.getCurUserProp());
 	}
-
+    /**
+	 *
+	    * @Title:update$!{bean.name}
+	    * @Description:  TODO(更新$!{bean.tableChineseName})
+	 		* @param:        @param jsons
+	 		* @param:        @throws Exception
+	 		* @return:       MessageResponse
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
 	@RequestMapping(value = "/update$!{bean.name}.do")
 	@ResponseBody
 	public MessageResponse update$!{bean.name}(String jsons) throws Exception {
@@ -59,14 +94,34 @@ public class $!{bean.name}Controller extends UfBaseController {
 		return this.$!{bean.lowerName}Service
 				.update$!{bean.name}(obj, this.getCurUserProp());
 	}
-
+    /**
+	 *
+	    * @Title:select$!{bean.name}ByPrimaryKey
+	    * @Description:  TODO(获取$!{bean.tableChineseName})
+	 		* @param:        @param id
+	 		* @param:        @throws Exception
+	 		* @return:       SingleResult<$!{bean.name}>
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
 	@RequestMapping(value = "/select$!{bean.name}ByPrimaryKey.do")
 	@ResponseBody
 	public SingleResult<$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id)
 			throws Exception {
 		return this.$!{bean.lowerName}Service.select$!{bean.name}ByPrimaryKey(id);
 	}
-
+    /**
+	 *
+	    * @Title:delete$!{bean.name}By$!{bean.name}Id
+	    * @Description:  TODO(删除$!{bean.tableChineseName})
+	 		* @param:        @param jsons
+	 		* @param:        @throws Exception
+	 		* @return:       MessageResponse
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
 	@RequestMapping(value = "/delete$!{bean.name}By$!{bean.name}Id.do")
 	@ResponseBody
 	public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String jsons)

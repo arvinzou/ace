@@ -20,6 +20,10 @@ import com.huacainfo.ace.portal.vo.ConfigVo;
 
 @Controller
 @RequestMapping("/config")
+
+/**
+ *
+ */
 public class ConfigController extends PortalBaseController {
 
 	/**

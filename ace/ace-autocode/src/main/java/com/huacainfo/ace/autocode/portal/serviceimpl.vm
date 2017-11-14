@@ -21,6 +21,11 @@ import com.huacainfo.ace.portal.service.$!{bean.name}Service;
 import com.huacainfo.ace.portal.vo.$!{bean.name}Vo;
 import com.huacainfo.ace.portal.vo.$!{bean.name}QVo;
 @Service("$!{bean.lowerName}Service")
+/**
+ * @author: $!{annotation.authorName}
+ * @version: $!{annotation.version}
+ * @Description:  TODO($!{bean.tableChineseName})
+ */
 public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
@@ -28,6 +33,20 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
 
+    /**
+	 *
+	    * @Title:find!{bean.name}List
+	    * @Description:  TODO($!{bean.tableChineseName}分页查询)
+	 		* @param:        @param condition
+	 		* @param:        @param page
+	 		* @param:        @return
+	 		* @param:        @throws Exception
+	 		* @return:       PageResult<$!{bean.name}Vo>
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
+    @Override
 	public PageResult<$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start,
 			int limit, String orderBy) throws Exception {
 		PageResult<$!{bean.name}Vo> rst = new PageResult<$!{bean.name}Vo>();
@@ -40,11 +59,24 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 		}
 		return rst;
 	}
-
+    /**
+	 *
+	    * @Title:insert$!{bean.name}
+	    * @Description:  TODO(添加$!{bean.tableChineseName})
+	 		* @param:        @param $!{bean.name} o
+	 		* @param:        @param UserProp userProp
+	 		* @param:        @return
+	 		* @param:        @throws Exception
+	 		* @return:       MessageResponse
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
+    @Override
 	public MessageResponse insert$!{bean.name}($!{bean.name} o, UserProp userProp)
 			throws Exception {
-		//o.setId(UUID.randomUUID().toString());
-		o.setId(String.valueOf(new Date().getTime()));
+		o.setId(UUID.randomUUID().toString());
+		//o.setId(String.valueOf(new Date().getTime()));
 		$!{bean.validate}
 		int temp = this.$!{bean.lowerName}Dao.isExit(o);
 		if (temp > 0) {
@@ -59,7 +91,20 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 				o.getName(), userProp);
 		return new MessageResponse(0, "添加$!{bean.tableChineseName}完成！");
 	}
-
+    /**
+	 *
+	    * @Title:update$!{bean.name}
+	    * @Description:  TODO(更新$!{bean.tableChineseName})
+	 		* @param:        @param $!{bean.name} o
+	 		* @param:        @param UserProp userProp
+	 		* @param:        @return
+	 		* @param:        @throws Exception
+	 		* @return:       MessageResponse
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
+    @Override
 	public MessageResponse update$!{bean.name}($!{bean.name} o, UserProp userProp)
 			throws Exception {
 		$!{bean.validate}
@@ -73,12 +118,38 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 		return new MessageResponse(0, "变更$!{bean.tableChineseName}完成！");
 	}
 
+    /**
+	 *
+	    * @Title:select$!{bean.name}ByPrimaryKey
+	    * @Description:  TODO(获取$!{bean.tableChineseName})
+	 		* @param:        @param id
+	 		* @param:        @return
+	 		* @param:        @throws Exception
+	 		* @return:       SingleResult<$!{bean.name}>
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
+    @Override
 	public SingleResult<$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception {
 		SingleResult<$!{bean.name}Vo> rst = new SingleResult<$!{bean.name}Vo>();
 		rst.setValue(this.$!{bean.lowerName}Dao.selectByPrimaryKey(id));
 		return rst;
 	}
-
+    /**
+	 *
+	    * @Title:delete$!{bean.name}By$!{bean.name}Id
+	    * @Description:  TODO(删除$!{bean.tableChineseName})
+	 		* @param:        @param id
+	 		* @param:        @param UserProp userProp
+	 		* @param:        @return
+	 		* @param:        @throws Exception
+	 		* @return:       MessageResponse
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
+    @Override
 	public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,
 			UserProp userProp) throws Exception {
 		this.$!{bean.lowerName}Dao.deleteByPrimaryKey(id);

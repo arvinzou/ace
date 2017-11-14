@@ -68,10 +68,25 @@ public class AutoCodeUtils {
 
     private static Bean bean = new Bean();
     private String cfg;
+    private String name;
+    private String author;
     private static Annotation annotation = new Annotation();
 
     public AutoCodeUtils(String cfg) {
         this.cfg = cfg;
+        this.name="XXX";
+        this.author="陈晓克";
+        this.initCfg();
+    }
+
+    public AutoCodeUtils(String cfg,String name,String author) {
+        this.cfg = cfg;
+        this.name=name;
+        this.author=author;
+        this.initCfg();
+    }
+
+    private void initCfg(){
         this.BEAN_ACTION_TEMPLATE_VM_PATH = this
                 .getProperty("BEAN_ACTION_TEMPLATE_VM_PATH");
         this.BEAN_SERVICE_TEMPLATE_VM_PATH = this
@@ -118,15 +133,15 @@ public class AutoCodeUtils {
         if (c != null) {
             String cName = c.getName();
             bean.setName(getLastChar(cName));
-            bean.setTableChineseName("会议文件");
+            bean.setTableChineseName(name);
             bean.setLowerName(getLowercaseChar(getLastChar(cName)));
 
-            annotation.setAuthorName("陈晓克");
+            annotation.setAuthorName(this.author);
             annotation.setAuthorMail("249134995@qq.com");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
                     "yyyy-MM-dd");
             annotation.setDate(simpleDateFormat.format(new Date()));
-            annotation.setVersion("1.0");
+            annotation.setVersion(simpleDateFormat.format(new Date()));
         }
     }
 
