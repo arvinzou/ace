@@ -42,7 +42,6 @@ public class $!{bean.name}Controller extends UfBaseController {
     	    * @Description:  TODO($!{bean.tableChineseName}分页查询)
     	 		* @param:        @param condition
     	 		* @param:        @param page
-    	 		* @param:        @return
     	 		* @param:        @throws Exception
     	 		* @return:       PageResult<$!{bean.name}Vo>
     	 		* @throws
@@ -67,7 +66,6 @@ public class $!{bean.name}Controller extends UfBaseController {
     	    * @Title:insert$!{bean.name}
     	    * @Description:  TODO(添加$!{bean.tableChineseName})
     	 		* @param:        @param jsons
-    	 		* @param:        @return
     	 		* @param:        @throws Exception
     	 		* @return:       MessageResponse
     	 		* @throws
@@ -86,7 +84,6 @@ public class $!{bean.name}Controller extends UfBaseController {
     	    * @Title:update$!{bean.name}
     	    * @Description:  TODO(更新$!{bean.tableChineseName})
     	 		* @param:        @param jsons
-    	 		* @param:        @return
     	 		* @param:        @throws Exception
     	 		* @return:       MessageResponse
     	 		* @throws
@@ -105,7 +102,6 @@ public class $!{bean.name}Controller extends UfBaseController {
     	    * @Title:select$!{bean.name}ByPrimaryKey
     	    * @Description:  TODO(获取$!{bean.tableChineseName})
     	 		* @param:        @param id
-    	 		* @param:        @return
     	 		* @param:        @throws Exception
     	 		* @return:       SingleResult<$!{bean.name}>
     	 		* @throws
@@ -122,8 +118,7 @@ public class $!{bean.name}Controller extends UfBaseController {
     	 *
     	    * @Title:delete$!{bean.name}By$!{bean.name}Id
     	    * @Description:  TODO(删除$!{bean.tableChineseName})
-    	 		* @param:        @param id
-    	 		* @param:        @return
+    	 		* @param:        @param jsons
     	 		* @param:        @throws Exception
     	 		* @return:       MessageResponse
     	 		* @throws

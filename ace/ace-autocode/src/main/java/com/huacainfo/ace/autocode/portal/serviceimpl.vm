@@ -38,8 +38,9 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 	    * @Title:find!{bean.name}List
 	    * @Description:  TODO($!{bean.tableChineseName}分页查询)
 	 		* @param:        @param condition
-	 		* @param:        @param page
-	 		* @param:        @return
+	 		* @param:        @param start
+	 		* @param:        @param limit
+	 		* @param:        @param orderBy
 	 		* @param:        @throws Exception
 	 		* @return:       PageResult<$!{bean.name}Vo>
 	 		* @throws
@@ -63,9 +64,8 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 	 *
 	    * @Title:insert$!{bean.name}
 	    * @Description:  TODO(添加$!{bean.tableChineseName})
-	 		* @param:        @param $!{bean.name} o
-	 		* @param:        @param UserProp userProp
-	 		* @param:        @return
+	 		* @param:        @param o
+	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
 	 		* @return:       MessageResponse
 	 		* @throws
@@ -95,9 +95,8 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 	 *
 	    * @Title:update$!{bean.name}
 	    * @Description:  TODO(更新$!{bean.tableChineseName})
-	 		* @param:        @param $!{bean.name} o
-	 		* @param:        @param UserProp userProp
-	 		* @param:        @return
+	 		* @param:        @param o
+	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
 	 		* @return:       MessageResponse
 	 		* @throws
@@ -123,7 +122,6 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 	    * @Title:select$!{bean.name}ByPrimaryKey
 	    * @Description:  TODO(获取$!{bean.tableChineseName})
 	 		* @param:        @param id
-	 		* @param:        @return
 	 		* @param:        @throws Exception
 	 		* @return:       SingleResult<$!{bean.name}>
 	 		* @throws
@@ -141,8 +139,7 @@ public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
 	    * @Title:delete$!{bean.name}By$!{bean.name}Id
 	    * @Description:  TODO(删除$!{bean.tableChineseName})
 	 		* @param:        @param id
-	 		* @param:        @param UserProp userProp
-	 		* @param:        @return
+	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
 	 		* @return:       MessageResponse
 	 		* @throws
