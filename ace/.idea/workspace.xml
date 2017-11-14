@@ -5,6 +5,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/ActivityCommentController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/ActivityController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/ActivityUserController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/AnalysisController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/CaptchaController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/DiaoYanController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/FeedbackController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/FileController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/FuPinController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/OrganizationController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/OrganizationSubController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/PeiXunController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerCategoryController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerDeptController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerHobbyController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerHpController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerJobController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerResumeController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/PersonageController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/TongXinController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/UfBaseController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/WWWController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/XinXiController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/uf/web/controller/XuanChuanController.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/uf/dao/report/Portal.java" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/rvc/dao/report/Portal.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/uf/dao/report/Portal.xml" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/rvc/dao/report/Portal.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/uf/dao/report/ReportDao.java" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/rvc/dao/report/ReportDao.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/uf/service/RVCServiceApp.java" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/rvc/service/RVCServiceApp.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/ActivityCommentController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/ActivityCommentController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/ActivityController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/ActivityController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/ActivityUserController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/ActivityUserController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/AnalysisController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/AnalysisController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/CaptchaController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/CaptchaController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/DiaoYanController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/DiaoYanController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/FeedbackController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/FeedbackController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/FileController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/FileController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/FuPinController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/FuPinController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/OrganizationController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/OrganizationController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/OrganizationSubController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/OrganizationSubController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/PeiXunController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/PeiXunController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerCategoryController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/PerCategoryController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerDeptController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/PerDeptController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerHobbyController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/PerHobbyController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerHpController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/PerHpController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerJobController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/PerJobController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/PerResumeController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/PerResumeController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/PersonageController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/PersonageController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/TongXinController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/TongXinController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/UfBaseController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/UfBaseController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/WWWController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/WWWController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/XinXiController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/XinXiController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/uf/web/controller/XuanChuanController.java" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/java/com/huacainfo/ace/rvc/web/controller/XuanChuanController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-app/ios/Portal/App" afterPath="$PROJECT_DIR$/ace-app/ios/Portal/App" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -342,6 +394,80 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="ace-rvc-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-rvc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-rvc-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-rvc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-rvc-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-rvc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="ace-rvc-service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -401,12 +527,22 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="uf" />
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
+              <option name="myItemId" value="ace-rvc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-rvc-client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -424,7 +560,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-rvc-service" />
+              <option name="myItemId" value="ace-rvc-client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dubbo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-rvc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-rvc-client" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -440,7 +610,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="uf" />
+              <option name="myItemId" value="rvc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -454,11 +624,69 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-rvc" />
+              <option name="myItemId" value="ace-operana" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-rvc-service" />
+              <option name="myItemId" value="ace-operana" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-operana-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-operana" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-operana-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-operana" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-operana-web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -470,7 +698,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assembly" />
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1642,13 +1874,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00230" summary="统战活动">
-      <created>1503889744665</created>
-      <option name="number" value="00230" />
-      <option name="presentableId" value="LOCAL-00230" />
-      <option name="project" value="LOCAL" />
-      <updated>1503889744665</updated>
-    </task>
     <task id="LOCAL-00231" summary="统战活动">
       <created>1503892429244</created>
       <option name="number" value="00231" />
@@ -1985,7 +2210,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510625684287</updated>
     </task>
-    <option name="localTasksCounter" value="279" />
+    <task id="LOCAL-00279" summary="远程视频会议系统架构创建">
+      <created>1510625704282</created>
+      <option name="number" value="00279" />
+      <option name="presentableId" value="LOCAL-00279" />
+      <option name="project" value="LOCAL" />
+      <updated>1510625704283</updated>
+    </task>
+    <option name="localTasksCounter" value="280" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2531,7 +2763,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/uf/service/RVCServiceApp.java">
+    <entry file="file://$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/main/java/com/huacainfo/ace/rvc/service/RVCServiceApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
