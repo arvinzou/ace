@@ -21,7 +21,7 @@ var _colModel = function() {
         },
 
         {
-            name : 'type',
+            name : 'category',
             editable : true,
             width : 100,
             edittype : "select",
@@ -190,6 +190,9 @@ var _colModel = function() {
                         return new Date();
                     }
                 }
+            },
+            renderer: function (value) {
+                return value == null ? "" : value.substring(0, 10);
             },
             editoptions : {
                 size : "20",

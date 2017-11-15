@@ -67,7 +67,7 @@ public class TongXinServiceImpl implements TongXinService {
 		if (CommonUtils.isBlank(o.getContent())) {
 			return new MessageResponse(1, "工程内容不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getType())) {
+		if (CommonUtils.isBlank(o.getCategory())) {
 			return new MessageResponse(1, "工程分类不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getCreateTime())) {
@@ -109,16 +109,13 @@ public class TongXinServiceImpl implements TongXinService {
 		if (CommonUtils.isBlank(o.getContent())) {
 			return new MessageResponse(1, "工程内容不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getType())) {
+		if (CommonUtils.isBlank(o.getCategory())) {
 			return new MessageResponse(1, "工程分类不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getCreateTime())) {
 			return new MessageResponse(1, "创建时间不能为空！");
 		}
-		int temp = this.tongXinDao.isExit(o);
-		if (temp > 0) {
-			return new MessageResponse(1, "推文名称重复！");
-		}
+
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());

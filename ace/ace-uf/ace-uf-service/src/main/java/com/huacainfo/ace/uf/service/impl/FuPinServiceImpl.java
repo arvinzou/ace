@@ -55,7 +55,7 @@ public class FuPinServiceImpl implements FuPinService {
 			return new MessageResponse(1, "扶贫地址不能为空");
 		}
 
-		if (CommonUtils.isBlank(o.getSchedule())) {
+		if (CommonUtils.isBlank(o.getCategory())) {
 			return new MessageResponse(1, "扶贫进程不能为空");
 		}
 		if (CommonUtils.isBlank(o.getContent())) {
@@ -86,7 +86,7 @@ public class FuPinServiceImpl implements FuPinService {
 			return new MessageResponse(1, "扶贫地址不能为空");
 		}
 
-		if (CommonUtils.isBlank(o.getSchedule())) {
+		if (CommonUtils.isBlank(o.getCategory())) {
 			return new MessageResponse(1, "扶贫进程不能为空");
 		}
 		if (CommonUtils.isBlank(o.getContent())) {

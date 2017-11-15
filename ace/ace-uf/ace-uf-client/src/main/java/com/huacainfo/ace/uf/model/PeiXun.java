@@ -13,7 +13,7 @@ public class PeiXun {
 
     private String teacher;
 
-    private String status;
+    private String category;
 
     private Date time;
 
@@ -71,12 +71,12 @@ public class PeiXun {
         this.teacher = teacher == null ? null : teacher.trim();
     }
 
-    public String getStatus() {
-        return status;
+    public String getCategory() {
+        return category;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setCategory(String category) {
+        this.category = category == null ? null : category.trim();
     }
 
     public Date getTime() {
@@ -152,7 +152,7 @@ public class PeiXun {
                 ", address='" + address + '\'' +
                 ", dept='" + dept + '\'' +
                 ", teacher='" + teacher + '\'' +
-                ", status='" + status + '\'' +
+                ", category='" + category + '\'' +
                 ", time=" + time +
                 ", content='" + content + '\'' +
                 ", createUserId='" + createUserId + '\'' +

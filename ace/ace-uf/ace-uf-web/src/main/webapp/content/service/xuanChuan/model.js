@@ -40,7 +40,7 @@ var _colModel = function () {
         {
             name: 'author',
             editable: true,
-            width: 300,
+            width: 200,
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "50",
@@ -51,7 +51,7 @@ var _colModel = function () {
         {
             name: 'dept',
             editable: true,
-            width: 300,
+            width: 200,
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "50",
@@ -62,7 +62,7 @@ var _colModel = function () {
         {
             name: 'media',
             editable: true,
-            width: 300,
+            width: 200,
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "50",
@@ -100,8 +100,8 @@ var _colModel = function () {
         {
             name: 'published',
             editable: true,
-            width: 100,
-            edittype: "datetimebox",
+            width: 200,
+            edittype: "datebox",
             dataoptions: {
                 formatter: function (date) {
                     var y = date.getFullYear();
@@ -123,6 +123,9 @@ var _colModel = function () {
                         return new Date();
                     }
                 }
+            },
+            renderer: function (value) {
+                return value == null ? "" : value.substring(0, 10);
             },
             editoptions: {
                 size: "20",

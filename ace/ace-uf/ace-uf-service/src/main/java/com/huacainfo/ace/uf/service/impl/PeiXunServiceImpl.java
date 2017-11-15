@@ -20,6 +20,10 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.uf.service.PeiXunService;
 import com.huacainfo.ace.uf.vo.PeiXunVo;
 import com.huacainfo.ace.uf.vo.PeiXunQVo;
+
+/**
+ * @author AFOC
+ */
 @Service("peiXunService")
 public class PeiXunServiceImpl implements PeiXunService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -28,6 +32,7 @@ public class PeiXunServiceImpl implements PeiXunService {
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
 
+	@Override
 	public PageResult<PeiXunVo> findPeiXunList(PeiXunQVo condition, int start,
 			int limit, String orderBy) throws Exception {
 		PageResult<PeiXunVo> rst = new PageResult<PeiXunVo>();
@@ -52,7 +57,6 @@ public class PeiXunServiceImpl implements PeiXunService {
 			return new MessageResponse(1, "推文名称重复！");
 		}
 		o.setCreateDate(new Date());
-		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
 		this.peiXunDao.insert(o);
@@ -60,17 +64,14 @@ public class PeiXunServiceImpl implements PeiXunService {
 				o.getName(), userProp);
 		return new MessageResponse(0, "添加推文完成！");
 	}
+
 	@Override
-	public MessageResponse updatePeiXun(PeiXun o, UserProp userProp)
-			throws Exception {
-		
-		
+	public MessageResponse updatePeiXun(PeiXun o, UserProp userProp) throws Exception {
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
 		this.peiXunDao.updateByPrimaryKey(o);
-		this.dataBaseLogService.log("变更推文", "推文", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("变更推文", "推文", "", o.getName(), o.getName(), userProp);
 		return new MessageResponse(0, "变更推文完成！");
 	}
 

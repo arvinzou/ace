@@ -8,7 +8,7 @@ public class FuPin {
 
     private String name;
 
-    private String schedule;
+    private String category;
 
     private String addr;
 
@@ -48,12 +48,12 @@ public class FuPin {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getSchedule() {
-        return schedule;
+    public String getCategory() {
+        return category;
     }
 
-    public void setSchedule(String schedule) {
-        this.schedule = schedule == null ? null : schedule.trim();
+    public void setCategory(String category) {
+        this.category = category == null ? null : category.trim();
     }
 
     public String getAddr() {

@@ -131,7 +131,7 @@ function loadView(id) {
 		beforeSend : function(XMLHttpRequest) {},
 		success : function(rst, textStatus) {
 			$.each(rst.value, function(key, value) {
-				if (key == 'schedule'){
+				if (key == 'category'){
                 	value = rsd(value, '106');
                 }
                 if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {

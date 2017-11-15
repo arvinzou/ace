@@ -186,11 +186,9 @@
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 
-<script
-        src="${pageContext.request.contextPath}/content/service/activity/upload.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/activity/upload.js?version=${cfg.version}"></script>
 
 <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
-
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>

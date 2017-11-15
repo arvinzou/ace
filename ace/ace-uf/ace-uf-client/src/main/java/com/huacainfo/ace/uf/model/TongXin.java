@@ -24,7 +24,7 @@ public class TongXin {
 
     private String content;
 
-    private String type;
+    private String category;
 
     private String createUserId;
 
@@ -38,10 +38,10 @@ public class TongXin {
 
     private Date lastModifyDate;
 
-    public String getType() { return type;
+    public String getCategory() { return category;
     }
 
-    public void setType(String type) { this.type = type;
+    public void setCategory(String category) { this.category = category;
     }
 
     public String getId() {
@@ -186,7 +186,7 @@ public class TongXin {
                 ", createTime=" + createTime +
                 ", status='" + status + '\'' +
                 ", content='" + content + '\'' +
-                ", type='" + type + '\'' +
+                ", category='" + category + '\'' +
                 ", createUserId='" + createUserId + '\'' +
                 ", createUserName='" + createUserName + '\'' +
                 ", createDate=" + createDate +

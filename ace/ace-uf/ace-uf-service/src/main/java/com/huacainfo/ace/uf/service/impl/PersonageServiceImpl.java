@@ -352,4 +352,6 @@ public class PersonageServiceImpl implements PersonageService {
 		return  this.personageDao.selectPersonageCfgById(id);
 	}
 
+
+
 }

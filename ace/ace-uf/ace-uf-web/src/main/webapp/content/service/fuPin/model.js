@@ -78,7 +78,7 @@ var _colModel = function() {
         },
 
         {
-            name : 'schedule',
+            name : 'category',
             editable : true,
             edittype : "select",
             renderer : function(value) {
@@ -128,6 +128,9 @@ var _colModel = function() {
                         return new Date();
                     }
                 }
+            },
+            renderer: function (value) {
+                return value == null ? "" : value.substring(0, 10);
             },
             editrules : {
                 required : true

@@ -26,18 +26,7 @@
 			<div class="widget-body">
 				<div class="widget-main padding-6">
 					<form action="#" id="fm-search">
-					
-				类别：<input
-							class="easyui-combobox" style="width: 200px" name="category"
-							data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
-
-                     名称： <input name="name" type="text"
-                                        							style="width: 200px;" />
+                     名称： <input name="name" type="text" style="width: 200px;" />
 						<button class="btn btn-info" id="btn-search"
 							authority="${pageContext.request.contextPath}/peiXun/findPeiXunList.do">
 							 <i
@@ -87,10 +76,50 @@
     </div>
 
     <div id="dialog-message-view" class="hide">
-<h5 class="header-title">基本信息</h5><div  class="row"  style="padding:10px">
-</div>
-<h5 class="header-title">操作信息</h5><div  class="row"  style="padding:10px">
-</div>
+		<h5 class="header-title">基本信息</h5>
+		<div class="row" style="padding:10px">
+			<div class="labelItem"><span class="labelItemHeader">培训课程</span><br>
+				<span id="name"></span>
+			</div>
+			<div class="labelItem"><span class="labelItemHeader">培训地点</span><br>
+				<span id="address"></span>
+			</div>
+			<div class="labelItem"><span class="labelItemHeader">培训单位</span><br>
+				<span id="dept"></span>
+			</div>
+			<div class="labelItem"><span class="labelItemHeader">培训老师</span><br>
+				<span id="teacher"></span>
+			</div>
+			<div class="labelItem"><span class="labelItemHeader">培训时间</span><br>
+				<span id="time"></span>
+			</div>
+			<div class="labelItem"><span class="labelItemHeader">培训进度</span><br>
+				<span id="category"></span>
+			</div>
+		</div>
+
+		<h5 class="header-title">培训内容</h5>
+		<div class="row" style="padding:10px" id="content">
+		</div>
+		<h5 class="header-title">培训资料</h5>
+		<div class="row" style="padding:10px" id="custom-dia">
+
+		</div>
+		<h5 class="header-title">操作信息</h5>
+		<div class="row" style="padding:10px">
+			<div class="labelItem"><span class="labelItemHeader">创建人姓名</span><br>
+				<span id="createUserName"></span>
+			</div>
+			<div class="labelItem"><span class="labelItemHeader">入库日期</span><br>
+				<span id="createDate"></span>
+			</div>
+			<div class="labelItem"><span class="labelItemHeader">最后更新人姓名</span><br>
+				<span id="lastModifyUserName"></span>
+			</div>
+			<div class="labelItem"><span class="labelItemHeader">最后更新时间</span><br>
+				<span id="lastModifyDate"></span>
+			</div>
+		</div>
 
     </div>
 	<jsp:include page="../../common/footer-1.jsp" />

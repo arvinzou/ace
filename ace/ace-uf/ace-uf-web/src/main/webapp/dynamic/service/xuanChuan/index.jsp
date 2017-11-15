@@ -17,7 +17,6 @@
       type="text/css" media="screen"/>
 <script type="text/javascript">
 
-
 </script>
 <body>
 <div class="page-content">
@@ -47,18 +46,15 @@
                 <div id="toolbar" class="toolbar">
                     <button class="btn btn-info" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/xuanChuan/insertXuanChuan.do">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-edit"
                             authority="${pageContext.request.contextPath}/xuanChuan/updateXuanChuan.do">
-                        <i
-                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/xuanChuan/deleteXuanChuanByXuanChuanId.do">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
                 </div>
             </div>
@@ -165,7 +161,8 @@ url</span>
 
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
