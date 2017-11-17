@@ -6,15 +6,17 @@
 // 小程序后台服务解决方案：https://www.qcloud.com/solution/la
 var host = "14592619.qcloud.la";
 
-var server = "https://zx.huacainfo.com"
-var serverfile = "https://zx.huacainfo.com/"
+var server = "http://127.0.0.1"
+var serverfile = "http://127.0.0.1"
 var config = {
     // 下面的地址配合云端 Server 工作
     host,
     server,
     serverfile,
     // 登录地址，用于建立会话
+    //手机顶部文字显示颜色
     frontColor: '#ffffff',
+    //手机顶部背景颜色
     backgroundColor: "#3C3C3C",
     loginUrl: `${server}/portal/www/authority.do`,
     saveFormId: `${server}/portal/www/saveFormId.do`,
@@ -56,7 +58,9 @@ var config = {
     selectTaskCmccById: `${server}/uf/www/selectTaskCmccById.do`,
     selectFreeGroupTree: `${server}/uf/www/selectFreeGroupTree.do`,
     selectPersonageTree: `${server}/uf/www/selectPersonageTree.do`,
-    sendCmccByMobile: `${server}/uf/www/sendCmccByMobile.do`
+    sendCmccByMobile: `${server}/uf/www/sendCmccByMobile.do`,
+    // 统战文件的请求路径。
+    findFilesList: `${server}/uf/www/findFilesList.do`,
     
 
 };

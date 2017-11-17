@@ -12,7 +12,7 @@
         <result column="createTime" jdbcType="DATE" property="createTime"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
-        <result column="type" jdbcType="CHAR" property="type"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
@@ -27,7 +27,7 @@
 
     <sql id="Base_Column_List">
     id, name, address, latitude, longitude, linkman, tel, createTime, status,
-    content, type,createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+    content, category,createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
     lastModifyDate
   </sql>
 
@@ -47,13 +47,13 @@
     insert into tz.tongxin (id, name, address,
       latitude, longitude, linkman, 
       tel, createTime, status,
-      content, type,createUserId, createUserName,
+      content, category,createUserId, createUserName,
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
       #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{linkman,jdbcType=VARCHAR}, 
       #{tel,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{status,jdbcType=CHAR}, 
-      #{content,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+      #{content,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
       #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
@@ -67,9 +67,11 @@
         linkman = #{linkman,jdbcType=VARCHAR},
         tel = #{tel,jdbcType=VARCHAR},
         createTime = #{createTime,jdbcType=DATE},
-        status = #{status,jdbcType=CHAR},
+        <if test='status!=null and status!=""'>
+            status = #{status,jdbcType=CHAR},
+        </if>
         content = #{content,jdbcType=VARCHAR},
-        type = #{type,jdbcType=CHAR},
+        category = #{category,jdbcType=CHAR},
         <if test='createUserId!=null and createUserId!=""'>
             createUserId=#{createUserId,jdbcType=VARCHAR},
         </if>
@@ -96,8 +98,8 @@
             and name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.type!=null and condition.type!=&quot;&quot;">
-            and type =#{condition.type,jdbcType=VARCHAR}
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and category =#{condition.category,jdbcType=VARCHAR}
         </if>
     </sql>
 

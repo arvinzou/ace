@@ -22,11 +22,11 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, name, address, dept, teacher,  time, content, createUserId, createUserName,
+    id, name, address, dept, teacher,  time,if(sysdate()>time,'1','0') as category, content, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    <select id="selectPeiXunByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Base_Column_List"/>
         from tz.peixun
@@ -50,21 +50,27 @@
   </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.PeiXun">
-    update tz.peixun
-    set name = #{name,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      dept = #{dept,jdbcType=VARCHAR},
-      teacher = #{teacher,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=VARCHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+        update tz.peixun
+        set name = #{name,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
+        dept = #{dept,jdbcType=VARCHAR},
+        teacher = #{teacher,jdbcType=VARCHAR},
+        time = #{time,jdbcType=TIMESTAMP},
+        content = #{content,jdbcType=VARCHAR},
+        <if test='createUserId!=null and createUserId!=""'>
+            createUserId=#{createUserId,jdbcType=VARCHAR},
+        </if>
+        <if test='createUserName!=null and createUserName!=""'>
+            createUserName=#{createUserName,jdbcType=VARCHAR},
+        </if>
+        <if test='createDate!=null and createDate!=""'>
+            createDate=#{createDate,jdbcType=TIMESTAMP},
+        </if>
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 
     <sql id="whereCondition">
         from tz.peixun

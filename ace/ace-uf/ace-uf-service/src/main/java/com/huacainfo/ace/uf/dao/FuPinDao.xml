@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.FuPin">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="schedule" jdbcType="VARCHAR" property="schedule" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
     <result column="addr" jdbcType="VARCHAR" property="addr" />
     <result column="latitude" jdbcType="DECIMAL" property="latitude" />
     <result column="longitude" jdbcType="DECIMAL" property="longitude" />
@@ -22,7 +22,7 @@
 
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, schedule, addr, latitude, longitude, time, content, createUserId, createUserName, 
+    id, name, category, addr, latitude, longitude, time, content, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
@@ -39,12 +39,12 @@
   </delete>
 
   <insert id="insert" parameterType="com.huacainfo.ace.uf.model.FuPin">
-    insert into tz.fupin (id, name, schedule,
+    insert into tz.fupin (id, name, category,
       addr, latitude, longitude, 
       time, content, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{schedule,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
       #{addr,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, 
       #{time,jdbcType=DATE}, #{content,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
@@ -54,7 +54,7 @@
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.FuPin">
     update tz.fupin
     set name = #{name,jdbcType=VARCHAR},
-      schedule = #{schedule,jdbcType=VARCHAR},
+    category = #{category,jdbcType=VARCHAR},
       addr = #{addr,jdbcType=VARCHAR},
       latitude = #{latitude,jdbcType=DECIMAL},
       longitude = #{longitude,jdbcType=DECIMAL},
@@ -84,8 +84,8 @@
       and name like
       concat('%',#{condition.name,jdbcType=VARCHAR},'%')
     </if>
-    <if test="condition.schedule!=null and condition.schedule!=&quot;&quot;">
-      and schedule =#{condition.schedule,jdbcType=VARCHAR}
+    <if test="condition.category!=null and condition.category!=&quot;&quot;">
+      and category =#{condition.categorycategory,jdbcType=VARCHAR}
     </if>
   </sql>
 

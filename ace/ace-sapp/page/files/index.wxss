@@ -1,6 +1,10 @@
 @import "../common/index.wxss";
 @import "../common/lib/weui.wxss";
 
+/* view{
+  border: red solid 1px;
+}  */
+
 .center {
   width: 100%;
   display: flex;
@@ -91,22 +95,28 @@
 
 .swiper-tab {
   width: 100%;
-  border-bottom: 2rpx solid #7A7E83;
+  border-bottom: 1rpx solid #e5e5e5;
   text-align: center;
   line-height: 82rpx;
-   height: 7%;
+  height: 7%;
 }
 
 .swiper-tab-list {
-  font-size: 40rpx;
+  width: 50%;
+  font-size: 32rpx;
   display: inline-block;
-  width: 20%;
-  color: #7A7E83;
+  color: #666;
+  font-weight: bold;
 }
 
 .on {
-  color: green;
-  border-bottom: 5rpx solid green;
+  color: #d83e3f;
+  font-size: 34rpx;
+}
+
+.on .bottom1 {
+  border-bottom: 0rpx solid #d83e3f;
+  border-bottom-width: 4rpx;
 }
 
 .swiper-box {
@@ -114,4 +124,46 @@
   height: 93%;
   width: 100%;
   overflow: hidden;
+}
+
+.image {
+  width: 55rpx;
+  height: 68rpx;
+}
+
+.fileContent {
+  display: table;
+  font-size: 26rpx;
+  color: #999;
+  margin: 0rpx 34rpx;
+  padding: 48rpx 0;
+  border-bottom: #e5e5e5 solid 1rpx;
+}
+
+.imgLeft {
+  float: left;
+  width: 80rpx;
+  margin-top: 40rpx;
+}
+
+.fontRight {
+  float: left;
+  width: 588rpx;
+  margin-top: 32rpx;
+}
+
+.fileName {
+  font-size: 30rpx;
+  color: #222;
+}
+
+.remark {
+  padding-top: 15rpx;
+  color: #d83e3f;
+}
+
+.bottom1 {
+  margin: 0 auto;
+  width: 80rpx;
+  height: 3rpx;
 }

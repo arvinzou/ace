@@ -15,7 +15,7 @@ Page({
     autoplay: false,
     interval: 5000,
     duration: 1000,
-    category:'1'
+    category: '1'
   },
   onReady: function (res) {
     wx.setNavigationBarColor({
@@ -82,7 +82,7 @@ Page({
     this.setData({
       inputVal: e.detail.value,
       start: 0,
-      list:[]
+      list: []
     });
     if (that.data.inputVal.length >= 2) {
       console.log(that.data.inputVal);
@@ -93,8 +93,8 @@ Page({
     }
   },
   onLoad: function (options) {
-    this.setData({ category: options.category});
-    if (this.data.category=='1'){
+    this.setData({ category: options.category });
+    if (this.data.category == '1') {
       wx.setNavigationBarTitle({ title: "统战管理" });
     }
     if (this.data.category == '2') {
@@ -106,7 +106,7 @@ Page({
     console.log("initData");
     var that = this;
     util.request(cfg.selectActivityPageList, {
-      name: inputVal,category:that.data.category,start:that.data.start,limit:that.data.limit
+      name: inputVal, category: that.data.category, start: that.data.start, limit: that.data.limit
     },
       function (data) {
         wx.hideNavigationBarLoading() //完成停止加载

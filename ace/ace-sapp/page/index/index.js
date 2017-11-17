@@ -14,6 +14,7 @@ Page({
     ]
   },
   onReady: function (res) {
+    console.log('index.js.onReady')
     wx.setNavigationBarColor({
       frontColor: cfg.frontColor,
       backgroundColor: cfg.backgroundColor,
@@ -29,7 +30,7 @@ Page({
     });
   },
   onLoad: function () {
-
+      console.log('index.js.onLoad');
   },
   next: function () {
     this.navigator('../dept/index');

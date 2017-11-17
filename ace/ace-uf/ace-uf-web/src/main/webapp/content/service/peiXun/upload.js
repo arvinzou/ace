@@ -57,9 +57,8 @@ function init_uploader(config) {
                     }
                 }
             });
-
-        } else {
-
+        }
+        else {
             if (config.target) {
                 $('input[name=' + config.target + ']').val(rst.value);
                 if (config.target == 'grid') {
@@ -253,7 +252,7 @@ function initPhotoDom(rst, id) {
         }
     };
 
-    $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+    //$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
     $('#btn-image-upload').on('click', function () {
         var config = {
             extensions: "jpg,gif,png,bmp,jpeg",

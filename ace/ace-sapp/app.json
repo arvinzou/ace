@@ -19,7 +19,8 @@
     "page/notice/index",
     "page/noticePreview/index",
     "page/files/index",
-    "page/whiteList/index"
+    "page/whiteList/index",
+    "page/px/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",

@@ -279,7 +279,6 @@ function initPhotoDom(rst, id) {
                 }
             }]
         });
-
     });
 }
 
