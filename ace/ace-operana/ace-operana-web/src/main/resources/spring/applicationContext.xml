@@ -23,26 +23,15 @@
 		</property>
 	</bean>
 
-	<!-- 使用注解注入properties中的值 -->
-	<bean id="config"
-		  class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-		<property name="locations">
-			<list>
-				<value>classpath:config.properties</value>
-			</list>
-		</property>
-		<!-- 设置编码格式 -->
-		<property name="fileEncoding" value="UTF-8"></property>
-	</bean>
-	<import resource="classpath:spring/spring-ace-common-monitor.xml" />
+
 	<import resource="classpath:spring/spring-ace-common-fastdfs.xml" />
-	<import resource="classpath:spring/spring-ace-common-redis.xml" />
+	<import resource="classpath:spring/spring-ace-common-monitor.xml" />
 	<import resource="classpath:spring/spring-ace-common-kafka.xml" />
-	<import resource="classpath:spring/spring-ace-common-dao.xml" />
+	<import resource="classpath:spring/spring-ace-common-redis.xml" />
 	<import resource="classpath:spring/spring-ace-common-session.xml" />
-	<import resource="classpath:spring/spring-ace-operana-service.xml" />
+	<import resource="classpath:dubbo/dubbo-ace-operana-consumer.xml" />
 	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
-	<!--<import resource="classpath:dubbo/dubbo-ace-operana-consumer.xml" />-->
+
 
 
 </beans>
