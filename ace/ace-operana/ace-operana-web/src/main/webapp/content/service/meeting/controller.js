@@ -544,6 +544,7 @@ var dialog = $("#dialog-meeting-user")
 					{
 						modal : false,
 						width : 800,
+						height:500,
 						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
 								+ title + "</div></div>",
 						title_html : true,
@@ -566,6 +567,7 @@ var dialog = $("#dialog-meeting-user")
 									}
 								}]
 					});
+ $(dialog).css("max-height", 400);
 	selectAllUserDeptId(id);
 }
 

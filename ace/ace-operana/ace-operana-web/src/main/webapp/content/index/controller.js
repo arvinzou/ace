@@ -448,7 +448,7 @@ function attendanceCfg(id, title) {
 					{
 						modal : false,
 						width : 800,
-						height:300,
+						height:500,
 						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
 								+ title + "</div></div>",
 						title_html : true,
@@ -471,6 +471,7 @@ function attendanceCfg(id, title) {
 									}
 								}]
 					});
+					 $(dialog).css("max-height", 400);
 	selectAllUserDeptId(id);
 }
 

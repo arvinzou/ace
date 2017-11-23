@@ -99,7 +99,7 @@
         SEX, ID_CARD, NAME, DEPARTMENT_ID,
         AREA_CODE, BIRTHDAY, STAUTS,
         LAST_LOGIN_TIME, MOBILE, EMAIL,
-        SEAT, USER_LEVEL, CREATE_TIME,TELPHONE,QQ,FAX
+        SEAT, USER_LEVEL, CREATE_TIME,TELPHONE,QQ,FAX,cur_syid
         )
         values (#{users.userId,jdbcType=VARCHAR}, #{users.account,jdbcType=VARCHAR},
         #{users.password,jdbcType=VARCHAR},
@@ -112,7 +112,7 @@
         #{users.userLevel,jdbcType=VARCHAR},now(),
         #{users.telphone,jdbcType=VARCHAR},
         #{users.qq,jdbcType=VARCHAR},
-        #{users.fax,jdbcType=VARCHAR}
+        #{users.fax,jdbcType=VARCHAR}, #{users.curSyid,jdbcType=VARCHAR}
         )
     </insert>
     <update id="updateUsersByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Users">
