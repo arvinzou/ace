@@ -99,7 +99,8 @@ var option1 = {
 									'#00A600', '#6F00D2', '#EA0000', '#FF9797',
 									'#2894FF', '#F9F900', '#00E3E3', '#00A600',
 									'#6F00D2'];
-							return colorList[params.dataIndex];
+							//return colorList[params.dataIndex];
+							return '#3398DB';
 						}
 					}
 				},

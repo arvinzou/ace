@@ -399,8 +399,8 @@ function viewTopic(meetingId, name) {
 					var btn=[];
 					btn.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
 					btn.push('<a data-rel="tooltip" data-placement="top" title="删除" class="red" href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id+ '\',\'' + data.name + '\',\'' + meetingId+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>');
-					btn.push('<a data-rel="tooltip" data-placement="top" title="数据导入" class="blue" href="javascript:upload2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-upload bigger-130"></i></a>');
-					btn.push('<a data-rel="tooltip" data-placement="top" title="数据导出" class="blue" href="javascript:export2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-download bigger-130"></i></a>');
+					btn.push('<a data-rel="tooltip" data-placement="top" title="不良数据导入" class="blue" href="javascript:upload2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-upload bigger-130"></i></a>');
+					btn.push('<a data-rel="tooltip" data-placement="top" title="不良数据导出" class="blue" href="javascript:export2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-download bigger-130"></i></a>');
 					btn.push('<a data-rel="tooltip" data-placement="top" title="指标数据" class="blue" href="javascript:dataSetting1(\'' + meetingId+ '\',\'' + data.id+ '\',\''+ data.name + '\')"><i class="ace-icon fa fa-plus-circle bigger-130"></i></a>');
 					btn.push('<a data-rel="tooltip" data-placement="top" title="指标" class="blue" href="javascript:dataSetting2(\'' + meetingId+ '\',\'' + data.id+ '\',\''+ data.name + '\')"><i class="ace-icon fa fa-play bigger-130"></i></a>');
 					btn.push('</div>');

@@ -281,13 +281,13 @@ function viewTopic(meetingId, name) {
 											+ meetingId
 											+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>');
 							btn
-									.push('<a data-rel="tooltip" data-placement="top" title="数据导入" class="blue" href="javascript:upload2(\''
+									.push('<a data-rel="tooltip" data-placement="top" title="不良数据导入" class="blue" href="javascript:upload2(\''
 											+ meetingId
 											+ '\',\''
 											+ data.id
 											+ '\')"><i class="ace-icon fa fa-upload bigger-130"></i></a>');
 							btn
-									.push('<a data-rel="tooltip" data-placement="top" title="数据导出" class="blue" href="javascript:export2(\''
+									.push('<a data-rel="tooltip" data-placement="top" title="不良数据导出" class="blue" href="javascript:export2(\''
 											+ meetingId
 											+ '\',\''
 											+ data.id
