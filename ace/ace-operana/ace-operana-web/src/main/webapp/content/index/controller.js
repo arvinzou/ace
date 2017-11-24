@@ -19,6 +19,10 @@ function loadView(id) {
 				if (key == 'category') {
 					value = rsd(value, '83');
 				}
+				if (key == 'site') {
+                					value = rsd(value, '106');
+                				}
+
 				if (key == 'status') {
 					value = value == "1" ? "on" : "off";
 				}
@@ -1011,7 +1015,7 @@ function viewMeeting(name) {
 				html.push("<div class='meeting2'>");
                 html.push(o.divisionName);
                 html.push(' ');
-                html.push(o.site);
+                html.push(rsd(o.site, "106"));
                 html.push("</div>");
                 html.push("<div class='meeting2'>");
                 html.push('<a class="blue" href="javascript:previewMeeting()"');
