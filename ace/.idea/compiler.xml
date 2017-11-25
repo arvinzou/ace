@@ -10,10 +10,9 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
-        <module name="ace-kernel-backend" />
-        <module name="ace-kernel-client" />
-        <module name="ace-kernel-service" />
-        <module name="ace-kernel-web" />
+        <module name="ace-face-client" />
+        <module name="ace-face-service" />
+        <module name="ace-face-web" />
         <module name="ace-operana-client" />
         <module name="ace-operana-service" />
         <module name="ace-operana-web" />
@@ -28,6 +27,10 @@
       <module name="ace-common" target="1.7" />
       <module name="ace-common-dao" target="1.7" />
       <module name="ace-common-web" target="1.7" />
+      <module name="ace-face" target="1.7" />
+      <module name="ace-face-client" target="1.7" />
+      <module name="ace-face-service" target="1.7" />
+      <module name="ace-face-web" target="1.7" />
       <module name="ace-kernel" target="1.7" />
       <module name="ace-kernel-backend" target="1.7" />
       <module name="ace-kernel-client" target="1.7" />

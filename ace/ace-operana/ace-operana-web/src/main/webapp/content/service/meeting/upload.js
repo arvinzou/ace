@@ -57,6 +57,7 @@ function init_uploader(params,url) {
 
 		} else {
 			//$('input[name=photo]').val(rst.value);
+			viewFiles(meetingId);
 			alert(rst.errorMessage);
 			$("#dialog-upload").dialog("close");
 		}
