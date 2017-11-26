@@ -106,6 +106,26 @@ pageEncoding="utf-8"%>
     text-indent: 1em;
     float: right;
 }
+.result-box {
+    width: 100%;
+    border: 1px solid #cacaca;
+    padding: 20px;
+    margin: 5px;
+    text-align: left;
+}
+.btn-ck {
+    transition: all .3s ease 0s;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    color: #fff;
+    border: 1px solid #379edf;
+    background-color: #379edf;
+    font-size: 14px;
+    width: 200px;
+    height: 40px;
+    margin: 10px;
+}
 </style>
 <body>
 <div class="page-content">
@@ -134,7 +154,7 @@ pageEncoding="utf-8"%>
             <div class="search-box search-box-one">
                 <input type="file" accept="image/png,image/jpeg" id="file-uploader-one" class="file-uploader-one">
                 <div id="file-uploader-btn-one" class="upload-img"><i class="icons icon-upload"></i><span>本地上传</span></div>
-                <button class="search-btn search-btn-one">检测</button>
+                <button class="search-btn search-btn-one" id="btn-ck-one">检测</button>
                 <input placeholder="图片URL" class="search-input search-input-one">
             </div>
         </div>
@@ -158,7 +178,7 @@ pageEncoding="utf-8"%>
             <div class="search-box search-box-one">
                 <input type="file" accept="image/png,image/jpeg" id="file-uploader-two" class="file-uploader-one">
                 <div id="file-uploader-btn-two" class="upload-img"><i class="icons icon-upload"></i><span>本地上传</span></div>
-                <button class="search-btn search-btn-one">检测</button>
+                <button class="search-btn search-btn-one" id="btn-ck-two">检测</button>
                 <input placeholder="图片URL" class="search-input search-input-one">
             </div>
         </div>
@@ -166,9 +186,7 @@ pageEncoding="utf-8"%>
     <div class="row center">
 
     </div>
-    <div class="row center">
 
-    </div>
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
