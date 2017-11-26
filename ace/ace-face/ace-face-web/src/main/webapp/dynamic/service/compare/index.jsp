@@ -126,9 +126,18 @@ pageEncoding="utf-8"%>
     height: 40px;
     margin: 10px;
 }
+.padding{
+    margin: 10px;
+}
 </style>
 <body>
 <div class="page-content">
+    <div class="row center padding">
+
+        <h3>功能演示</h3>
+        <span style="font-size:14px">即刻体验人脸比对能力。请上传本地图片或提供图片URL。
+        该功能演示是基于Compare API搭建的。</span>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-sm-6 center photo" id="box1"></div>
         <div class="col-xs-12 col-sm-6 center photo" id="box2"></div>
@@ -136,7 +145,7 @@ pageEncoding="utf-8"%>
     <div class="row">
         <div class="col-xs-12 col-sm-6 center">
             <div class="swiper-container1">
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper" id="swiper1">
                     <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/1" style="background-image:url(http://lorempixel.com/600/600/nature/1)"></div>
                     <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/2" style="background-image:url(http://lorempixel.com/600/600/nature/2)"></div>
                     <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/3" style="background-image:url(http://lorempixel.com/600/600/nature/3)"></div>
@@ -160,7 +169,7 @@ pageEncoding="utf-8"%>
         </div>
         <div class="col-xs-12 col-sm-6 center">
             <div class="swiper-container2">
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper" id="swiper2">
                     <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/1" style="background-image:url(http://lorempixel.com/600/600/nature/1)"></div>
                     <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/2" style="background-image:url(http://lorempixel.com/600/600/nature/2)"></div>
                     <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/3" style="background-image:url(http://lorempixel.com/600/600/nature/3)"></div>
@@ -200,55 +209,11 @@ pageEncoding="utf-8"%>
         src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script
+        src="${pageContext.request.contextPath}/content/service/compare/controller.js?version=${cfg.version}"></script>
 <script  src="${pageContext.request.contextPath}/content/service/person/face.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/swiper/js/swiper.min.js"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
-<script>
-  var swiper1 = new Swiper('.swiper-container1', {
-      effect: 'coverflow',
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 'auto',
-      coverflowEffect: {
-        rotate: 50,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows : true,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-      },
-      on: {
-        transitionEnd: function () {
-          var image_url=$(".swiper-container1").find(".swiper-slide-active").attr("data");
-          $("#box1").html("<img src='"+image_url+"' class='photo'/>");
-        }
-      }
-    });
 
-    var swiper2 = new Swiper('.swiper-container2', {
-      effect: 'coverflow',
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 'auto',
-      coverflowEffect: {
-        rotate: 50,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows : true,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-      },
-      on: {
-        transitionEnd: function () {
-             var image_url=$(".swiper-container2").find(".swiper-slide-active").attr("data");
-          $("#box2").html("<img src='"+image_url+"' class='photo'/>");
-        }
-      }
-    });
-</script>
 </body>
 </html>
