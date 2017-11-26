@@ -32,10 +32,80 @@ pageEncoding="utf-8"%>
         text-align:center
     }
     .photo{
-        max-height:300px;
-        min-height:300px;
+        max-height:250px;
+        min-height:250px;
     }
+.btn-sm {
+    border-width: 4px;
+    font-size: 13px;
+    padding: 4px 9px;
+    line-height: 1.39;
+}
 
+.search-box {
+    zoom: 1;
+    position: relative;
+    margin: 20px 0 24px;
+}
+.file-uploader-one {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    opacity: 0;
+    width: 137px;
+    height: 42px;
+    cursor: pointer;
+}
+.upload-img {
+    position: relative;
+    width: 135px;
+    height: 40px;
+    line-height: 36px;
+    transition: all .3s ease 0s;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    color: #4c4c4c;
+    border: 1px solid #cacaca;
+    background-color: #fff;
+    font-size: 14px;
+    float: left;
+}
+
+.icon-upload {
+    margin-right: 10px;
+}
+.icons.icon-upload {
+    width: 20px;
+    height: 24px;
+    background-image: url(https://www.faceplusplus.com.cn/images/icons/icon-upload.png);
+}
+.icons {
+    display: inline-block;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+.search-box button {
+    transition: all .3s ease 0s;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    color: #fff;
+    border: 1px solid #379edf;
+    background-color: #379edf;
+    font-size: 14px;
+    width: 66px;
+    height: 40px;
+    float: right;
+}
+.search-box input.search-input {
+    border: 1px solid #59b1f5;
+    width: 60%;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 1em;
+    float: right;
+}
 </style>
 <body>
 <div class="page-content">
@@ -61,7 +131,12 @@ pageEncoding="utf-8"%>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
             </div>
-
+            <div class="search-box search-box-one">
+                <input type="file" accept="image/png,image/jpeg" id="file-uploader-one" class="file-uploader-one">
+                <div id="file-uploader-btn-one" class="upload-img"><i class="icons icon-upload"></i><span>本地上传</span></div>
+                <button class="search-btn search-btn-one">检测</button>
+                <input placeholder="图片URL" class="search-input search-input-one">
+            </div>
         </div>
         <div class="col-xs-12 col-sm-6 center">
             <div class="swiper-container2">
@@ -80,7 +155,12 @@ pageEncoding="utf-8"%>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
             </div>
-
+            <div class="search-box search-box-one">
+                <input type="file" accept="image/png,image/jpeg" id="file-uploader-two" class="file-uploader-one">
+                <div id="file-uploader-btn-two" class="upload-img"><i class="icons icon-upload"></i><span>本地上传</span></div>
+                <button class="search-btn search-btn-one">检测</button>
+                <input placeholder="图片URL" class="search-input search-input-one">
+            </div>
         </div>
     </div>
     <div class="row center">
