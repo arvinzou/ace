@@ -82,6 +82,7 @@ function addface(face_token){
 		        alert(rst["error_message"]);
 		        return;
 		    }
+		    updatePersonStatus(face_token,"3");
 		    alert("添加成功，目前数量："+rst["face_count"]);
 		},
 		error : function(rst) {

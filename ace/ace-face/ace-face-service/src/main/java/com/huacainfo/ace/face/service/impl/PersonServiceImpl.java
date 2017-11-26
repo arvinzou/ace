@@ -237,4 +237,25 @@ public class PersonServiceImpl implements PersonService {
                 String.valueOf(id), "人脸建档", userProp);
         return new MessageResponse(0, "更新检测结果成功！");
     }
+
+    /**
+     *
+     * @Title:updatePersonStatus
+     * @Description:  TODO(更新状态)
+     * @param:        @param id
+     * @param:        @param status
+     * @param:        @param  userProp
+     * @param:        @throws Exception
+     * @return:       MessageResponse
+     * @throws
+     * @author: 陈晓克
+     * @version: 2017-11-25
+     */
+    @Override
+    public  MessageResponse updatePersonStatus(String id,String status,UserProp userProp) throws Exception{
+        this.personDao.updatePersonStatus(id,status);
+        this.dataBaseLogService.log("更新状态", "人脸建档", String.valueOf(id),
+                String.valueOf(id), "人脸建档", userProp);
+        return new MessageResponse(0, "更新状态成功！");
+    }
 }

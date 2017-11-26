@@ -25,6 +25,8 @@ public interface PersonDao {
 
 	int isExit(Person record);
 
+	int updatePersonStatus(@Param("id") String id,@Param("status") String status);
+
 	int updatePersonFaceToken(@Param("id") String id,@Param("faceFoken") String faceFoken);
 
     int updatePersonAttributes(@Param("id") String id,@Param("attributes") String attributes);

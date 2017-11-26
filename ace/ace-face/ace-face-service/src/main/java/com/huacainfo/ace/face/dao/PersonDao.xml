@@ -60,7 +60,6 @@
       birthday = #{birthday,jdbcType=DATE},
       dept = #{dept,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
@@ -121,7 +120,15 @@
     update person
     set
     faceFoken = #{faceFoken,jdbcType=VARCHAR},
+    status = '2',
     attributes = #{attributes,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updatePersonStatus">
+    update person
+    set
+    status = #{status,jdbcType=VARCHAR}
+    where (id = #{id,jdbcType=VARCHAR} or faceFoken = #{id,jdbcType=VARCHAR})
   </update>
 </mapper>

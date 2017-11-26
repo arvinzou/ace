@@ -123,5 +123,21 @@ public interface PersonService {
 			*/
 	public abstract MessageResponse updatePersonFaceTokenAttributes(String id,String faceFoken,String attributes,UserProp userProp) throws Exception;
 
+
+	/**
+	 *
+	 * @Title:updatePersonStatus
+	 * @Description:  TODO(更新状态)
+	 * @param:        @param id
+	 * @param:        @param status
+	 * @param:        @param  userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	public abstract MessageResponse updatePersonStatus(String id,String status,UserProp userProp) throws Exception;
+
 	
 }

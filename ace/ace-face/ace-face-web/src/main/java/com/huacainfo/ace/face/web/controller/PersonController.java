@@ -154,7 +154,7 @@ public class PersonController extends FaceBaseController {
 	/**
 	 *
 	 * @Title:updatePersonAttributes
-	 * @Description:  TODO(跟新检测结果)
+	 * @Description:  TODO(更新检测结果)
 	 * @param:        @param id
 	 * @param:        @param attributes
 	 * @param:        @throws Exception
@@ -172,7 +172,7 @@ public class PersonController extends FaceBaseController {
 	/**
 	 *
 	 * @Title:updatePersonAttributes
-	 * @Description:  TODO(跟新检测结果)
+	 * @Description:  TODO(更新检测结果)
 	 * @param:        @param id
 	 * @param:        @param attributes
 	 * @param:        @throws Exception
@@ -208,5 +208,24 @@ public class PersonController extends FaceBaseController {
 		}else{
 			return JSON.parseObject("{status:1}");
 		}
+	}
+
+	/**
+	 *
+	 * @Title:updatePersonStatus
+	 * @Description:  TODO(更新状态)
+	 * @param:        @param id
+	 * @param:        @param status
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	@RequestMapping(value = "/updatePersonStatus.do")
+	@ResponseBody
+	public  MessageResponse updatePersonStatus(String id,String status) throws Exception{
+		return this.personService.updatePersonStatus(id,status,this.getCurUserProp());
+
 	}
 }

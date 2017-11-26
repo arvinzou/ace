@@ -282,3 +282,24 @@ function updatePersonFaceTokenAttributes(id,faceToken,attributes){
 		}
 	});
 }
+
+function updatePersonStatus(id,status){
+    console.log(id);
+	$.ajax({
+		type : "post",
+		url : contextPath+'/person/updatePersonStatus.do',
+		data : {
+			id : id,
+			status:status
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+		    console.log(rst);
+		    alert(rst["errorMessage"]);
+		},
+		error : function() {
+			alert("HTTP错误！");
+		}
+	});
+}
