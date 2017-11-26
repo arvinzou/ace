@@ -1,5 +1,7 @@
 package com.huacainfo.ace.face.web.controller;
 
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,5 +132,81 @@ public class PersonController extends FaceBaseController {
 		String id = json.getString("id");
 		return this.personService.deletePersonByPersonId(id,
 				this.getCurUserProp());
+	}
+
+	/**
+	 *
+	 * @Title:updatePersonFaceToken
+	 * @Description:  TODO(更新faceToken)
+	 * @param:        @param id
+	 * @param:        @param faceFoken
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	@RequestMapping(value = "/updatePersonFaceToken.do")
+	@ResponseBody
+	public  MessageResponse updatePersonFaceToken(String id,String faceFoken) throws Exception{
+		return this.personService.updatePersonFaceToken(id,faceFoken,this.getCurUserProp());
+	}
+	/**
+	 *
+	 * @Title:updatePersonAttributes
+	 * @Description:  TODO(跟新检测结果)
+	 * @param:        @param id
+	 * @param:        @param attributes
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	@RequestMapping(value = "/updatePersonFaceTokenAttributes.do")
+	@ResponseBody
+	public  MessageResponse updatePersonFaceTokenAttributes(String id,String  faceToken,String attributes) throws Exception{
+		return this.personService.updatePersonFaceTokenAttributes(id,faceToken,attributes,this.getCurUserProp());
+
+	}
+	/**
+	 *
+	 * @Title:updatePersonAttributes
+	 * @Description:  TODO(跟新检测结果)
+	 * @param:        @param id
+	 * @param:        @param attributes
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	@RequestMapping(value = "/updatePersonAttributes.do")
+	@ResponseBody
+	public  MessageResponse updatePersonAttributes(String id,String attributes) throws Exception{
+		return this.personService.updatePersonAttributes(id,attributes,this.getCurUserProp());
+
+	}
+	/**
+	 *
+	 * @Title:selectPersonAttributes
+	 * @Description:  TODO(获取检测结果)
+	 * @param:        @param id
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	@RequestMapping(value = "/selectPersonAttributes.do")
+	@ResponseBody
+	public  JSONObject selectPersonAttributes(String id) throws Exception{
+		SingleResult<PersonVo> rst=this.personService.selectPersonByPrimaryKey(id);
+		PersonVo o=rst.getValue();
+		if(CommonUtils.isNotEmpty(o)&&CommonUtils.isNotEmpty(o.getAttributes())){
+			return JSON.parseObject(o.getAttributes());
+		}else{
+			return JSON.parseObject("{status:1}");
+		}
 	}
 }

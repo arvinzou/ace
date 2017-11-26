@@ -25,4 +25,10 @@ public interface PersonDao {
 
 	int isExit(Person record);
 
+	int updatePersonFaceToken(@Param("id") String id,@Param("faceFoken") String faceFoken);
+
+    int updatePersonAttributes(@Param("id") String id,@Param("attributes") String attributes);
+
+    int updatePersonFaceTokenAttributes(@Param("id") String id,@Param("faceFoken") String faceFoken,@Param("attributes") String attributes);
+
 }

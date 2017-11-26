@@ -90,12 +90,6 @@ public class PersonServiceImpl implements PersonService {
         if (CommonUtils.isBlank(o.getBirthday())) {
             return new MessageResponse(1, "出生日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
         int temp = this.personDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "人脸建档名称重复！");
@@ -136,16 +130,10 @@ public class PersonServiceImpl implements PersonService {
         if (CommonUtils.isBlank(o.getBirthday())) {
             return new MessageResponse(1, "出生日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
+        o.setStatus("1");
         this.personDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更人脸建档", "人脸建档", "", o.getName(),
                 o.getName(), userProp);
@@ -187,5 +175,66 @@ public class PersonServiceImpl implements PersonService {
         this.dataBaseLogService.log("删除人脸建档", "人脸建档", String.valueOf(id),
                 String.valueOf(id), "人脸建档", userProp);
         return new MessageResponse(0, "人脸建档删除完成！");
+    }
+    /**
+     *
+     * @Title:updatePersonFaceToken
+     * @Description:  TODO(更新faceToken)
+     * @param:        @param id
+     * @param:        @param faceFoken
+     * @param:        @param  userProp
+     * @param:        @throws Exception
+     * @return:       MessageResponse
+     * @throws
+     * @author: 陈晓克
+     * @version: 2017-11-25
+     */
+    @Override
+    public  MessageResponse updatePersonFaceToken(String id,String faceFoken,UserProp userProp) throws Exception{
+        this.personDao.updatePersonFaceToken(id,faceFoken);
+        this.dataBaseLogService.log("更新faceToken", "人脸建档", String.valueOf(id),
+                String.valueOf(id), "人脸建档", userProp);
+        return new MessageResponse(0, "更新faceToken成功！");
+    }
+    /**
+     *
+     * @Title:updatePersonAttributes
+     * @Description:  TODO(跟新检测结果)
+     * @param:        @param id
+     * @param:        @param attributes
+     * @param:        @param  userProp
+     * @param:        @throws Exception
+     * @return:       MessageResponse
+     * @throws
+     * @author: 陈晓克
+     * @version: 2017-11-25
+     */
+    @Override
+    public  MessageResponse updatePersonAttributes(String id,String attributes,UserProp userProp) throws Exception{
+        this.personDao.updatePersonAttributes(id,attributes);
+        this.dataBaseLogService.log("更新检测结果", "人脸建档", String.valueOf(id),
+                String.valueOf(id), "人脸建档", userProp);
+        return new MessageResponse(0, "更新检测结果成功！");
+    }
+
+    /**
+     *
+     * @Title:updatePersonAttributes
+     * @Description:  TODO(跟新检测结果)
+     * @param:        @param id
+     * @param:        @param attributes
+     * @param:        @param  userProp
+     * @param:        @throws Exception
+     * @return:       MessageResponse
+     * @throws
+     * @author: 陈晓克
+     * @version: 2017-11-25
+     */
+    @Override
+    public  MessageResponse updatePersonFaceTokenAttributes(String id,String faceFoken,String attributes,UserProp userProp) throws Exception{
+        this.personDao.updatePersonFaceTokenAttributes(id,faceFoken,attributes);
+        this.dataBaseLogService.log("更新检测结果", "人脸建档", String.valueOf(id),
+                String.valueOf(id), "人脸建档", userProp);
+        return new MessageResponse(0, "更新检测结果成功！");
     }
 }

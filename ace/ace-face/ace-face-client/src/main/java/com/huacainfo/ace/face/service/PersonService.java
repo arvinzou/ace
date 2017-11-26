@@ -81,5 +81,47 @@ public interface PersonService {
 	 */
 	public abstract MessageResponse deletePersonByPersonId(String id,UserProp userProp) throws Exception;
 
+	/**
+	 *
+	 * @Title:updatePersonFaceToken
+	 * @Description:  TODO(更新faceToken)
+	 * @param:        @param id
+	 * @param:        @param faceFoken
+	 * @param:        @param  userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	public abstract MessageResponse updatePersonFaceToken(String id,String faceFoken,UserProp userProp) throws Exception;
+	/**
+	 *
+	 * @Title:updatePersonAttributes
+	 * @Description:  TODO(跟新检测结果)
+	 * @param:        @param id
+	 * @param:        @param attributes
+	 * @param:        @param  userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	public abstract MessageResponse updatePersonAttributes(String id,String attributes,UserProp userProp) throws Exception;
+
+
+	 /** @Title:updatePersonAttributes
+	 * @Description:  TODO(跟新检测结果)
+	 * @param:        @param id
+	 * @param:        @param attributes
+	 * @param:        @param  userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws* @author: 陈晓克
+	 * @version: 2017-11-25
+			*/
+	public abstract MessageResponse updatePersonFaceTokenAttributes(String id,String faceFoken,String attributes,UserProp userProp) throws Exception;
+
 	
 }
