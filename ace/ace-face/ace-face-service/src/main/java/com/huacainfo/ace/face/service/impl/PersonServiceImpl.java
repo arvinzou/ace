@@ -84,12 +84,7 @@ public class PersonServiceImpl implements PersonService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "姓名不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSex())) {
-            return new MessageResponse(1, "性别不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getBirthday())) {
-            return new MessageResponse(1, "出生日期不能为空！");
-        }
+
         int temp = this.personDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "人脸建档名称重复！");
@@ -124,12 +119,7 @@ public class PersonServiceImpl implements PersonService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "姓名不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSex())) {
-            return new MessageResponse(1, "性别不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getBirthday())) {
-            return new MessageResponse(1, "出生日期不能为空！");
-        }
+
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
