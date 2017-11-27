@@ -181,11 +181,12 @@ function facesearch(){
 			api_key : api_key,
 			api_secret:api_secret,
 			faceset_token:faceset_token,
-			return_result_count:10,
+			return_result_count:4,
 			image_url:image_url
 		},
 		beforeSend : function(XMLHttpRequest) {
 		     $("#message").html("<span style='color:blue;font-size:14px'>搜索中，请稍后......</span>");
+		     $("#box2").html("");
 		},
 		success : function(rst, textStatus) {
 		    $("#message").html("");
