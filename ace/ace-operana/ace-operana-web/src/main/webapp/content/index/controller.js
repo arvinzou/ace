@@ -19,6 +19,10 @@ function loadView(id) {
 				if (key == 'category') {
 					value = rsd(value, '83');
 				}
+				if (key == 'site') {
+                					value = rsd(value, '106');
+                				}
+
 				if (key == 'status') {
 					value = value == "1" ? "on" : "off";
 				}
@@ -281,13 +285,13 @@ function viewTopic(meetingId, name) {
 											+ meetingId
 											+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>');
 							btn
-									.push('<a data-rel="tooltip" data-placement="top" title="数据导入" class="blue" href="javascript:upload2(\''
+									.push('<a data-rel="tooltip" data-placement="top" title="不良数据导入" class="blue" href="javascript:upload2(\''
 											+ meetingId
 											+ '\',\''
 											+ data.id
 											+ '\')"><i class="ace-icon fa fa-upload bigger-130"></i></a>');
 							btn
-									.push('<a data-rel="tooltip" data-placement="top" title="数据导出" class="blue" href="javascript:export2(\''
+									.push('<a data-rel="tooltip" data-placement="top" title="不良数据导出" class="blue" href="javascript:export2(\''
 											+ meetingId
 											+ '\',\''
 											+ data.id
@@ -448,7 +452,7 @@ function attendanceCfg(id, title) {
 					{
 						modal : false,
 						width : 800,
-						height:300,
+						height:500,
 						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
 								+ title + "</div></div>",
 						title_html : true,
@@ -471,6 +475,7 @@ function attendanceCfg(id, title) {
 									}
 								}]
 					});
+					 $(dialog).css("max-height", 400);
 	selectAllUserDeptId(id);
 }
 
@@ -1010,7 +1015,7 @@ function viewMeeting(name) {
 				html.push("<div class='meeting2'>");
                 html.push(o.divisionName);
                 html.push(' ');
-                html.push(o.site);
+                html.push(rsd(o.site, "106"));
                 html.push("</div>");
                 html.push("<div class='meeting2'>");
                 html.push('<a class="blue" href="javascript:previewMeeting()"');

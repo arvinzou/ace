@@ -10,13 +10,13 @@ import com.alibaba.fastjson.JSON;
 import java.util.Random;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.model.view.Tree;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.model.WxFormid;
-import com.huacainfo.ace.portal.service.SystemService;
-import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,6 @@ import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.portal.model.Attach;
-import com.huacainfo.ace.portal.service.AttachService;
-import com.huacainfo.ace.portal.service.TaskCmccService;
-import com.huacainfo.ace.portal.service.FilesService;
-import com.huacainfo.ace.portal.service.WxCfgService;
 import com.huacainfo.ace.portal.vo.AttachQVo;
 import com.huacainfo.ace.portal.vo.AttachVo;
 
@@ -61,6 +57,9 @@ public class WWWController extends PortalBaseController {
 	private WxCfgService wxCfgService;
 	@Autowired
 	private  TaskCmccService taskCmccService;
+
+	@Autowired
+	private WxUserService wxUserService;
 
 	@Autowired
 	private RedisOperations<String, Object> redisTemplate;
@@ -142,6 +141,60 @@ public class WWWController extends PortalBaseController {
 		return this.wxCfgService.insertFormIds(list);
 	}
 
+	@RequestMapping(value = "/selectWxUser.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectWxUser()throws Exception{
+		return this.wxUserService.selectWxUser(this.getParams());
+	}
+	@RequestMapping(value = "/updateFaceToken.do")
+	@ResponseBody
+	public MessageResponse updateFaceToken(@RequestParam MultipartFile[] file, String id, String collectionName)throws Exception{
+		String image_url=null;
+		String unionId=null;
+		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+		File tmp = new File(dir);
+		if (!tmp.exists()) {
+			tmp.mkdirs();
+		}
+		for (MultipartFile o : file) {
+			File dest = new File(dir + File.separator + o.getName());
+			o.transferTo(dest);
+			String fileName=this.fileSaver.saveFile(dest, o.getOriginalFilename());
+			image_url="http://zx.huacainfo.com/"+fileName;
+			dest.delete();
+		}
+		if(CommonUtils.isNotEmpty(this.getCurWxUser())){
+			unionId=this.getCurWxUser().getUnionId();
+		}else{
+			unionId=id;
+		}
+		return this.wxUserService.updateFaceToken(image_url,unionId);
+	}
+
+	@RequestMapping(value = "/selectWxUserByPrimaryKey.do")
+	@ResponseBody
+	public SingleResult<WxUser>  selectWxUserByPrimaryKey(String id)throws Exception{
+		return this.wxUserService.selectWxUserByPrimaryKey(id);
+	}
+
+	@RequestMapping(value = "/searchFace.do")
+	@ResponseBody
+	public SingleResult<WxUser> searchFace(@RequestParam MultipartFile[] file)throws Exception{
+		String image_url=null;
+		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+		File tmp = new File(dir);
+		if (!tmp.exists()) {
+			tmp.mkdirs();
+		}
+		for (MultipartFile o : file) {
+			File dest = new File(dir + File.separator + o.getName());
+			o.transferTo(dest);
+			String fileName=this.fileSaver.saveFile(dest, o.getOriginalFilename());
+			image_url="http://zx.huacainfo.com/"+fileName;
+			dest.delete();
+		}
+		return this.wxUserService.searchFace(image_url);
+	}
 	private String getRandCode() {
 		Random random = new Random();
 		String sRand = "";

@@ -48,4 +48,8 @@
                    ref="tpaService"/>
     <dubbo:service interface="com.huacainfo.ace.operana.service.TaskOperanaService"
                    ref="taskOperanaService"/>
+
+
+    <dubbo:service interface="com.huacainfo.ace.operana.service.MeetingFilesService"
+                   ref="meetingFilesService"/>
 </beans>

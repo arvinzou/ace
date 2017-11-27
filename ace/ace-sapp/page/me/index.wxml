@@ -7,8 +7,8 @@
         <text class="userinfo-nickname">用户信息</text>
         </view>
        
-        
-          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+        <navigator url='../face/index'>
+          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image></navigator>
           <text class="userinfo-nickname">{{userInfo.nickName}}</text>
         
       </view>

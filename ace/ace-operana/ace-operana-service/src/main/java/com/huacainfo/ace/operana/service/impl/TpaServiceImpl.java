@@ -76,7 +76,7 @@ public class TpaServiceImpl implements TpaService {
 			return new MessageResponse(1, "责任人不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getStatus())) {
-			return new MessageResponse(1, "任务状态不能为空！");
+			o.setStatus("1");
 		}
 		int temp = this.tpaDao.isExit(o);
 		if (temp > 0) {
@@ -122,9 +122,7 @@ public class TpaServiceImpl implements TpaService {
 		if (CommonUtils.isBlank(o.getLiable())) {
 			return new MessageResponse(1, "责任人不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getStatus())) {
-			return new MessageResponse(1, "任务状态不能为空！");
-		}
+
 
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());

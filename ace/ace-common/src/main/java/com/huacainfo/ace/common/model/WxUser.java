@@ -42,6 +42,9 @@ public class WxUser implements java.io.Serializable {
 
 	private BigDecimal longitude;
 
+	private String faceToken;
+	private String photo;
+
 	public String getUnionId() {
 		return unionId;
 	}
@@ -216,5 +219,21 @@ public class WxUser implements java.io.Serializable {
 
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
+	}
+
+	public String getFaceToken() {
+		return faceToken;
+	}
+
+	public void setFaceToken(String faceToken) {
+		this.faceToken = faceToken;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 }

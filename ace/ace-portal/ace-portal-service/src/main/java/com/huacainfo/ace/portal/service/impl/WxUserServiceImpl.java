@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import com.huacainfo.ace.common.tools.FaceUtils;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,9 @@ public class WxUserServiceImpl implements WxUserService {
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
 
+	private final static String faceset_token="c159ecda6f1e7fac4de5d5e85fe42948";
+
+	@Override
 	public PageResult<WxUserVo> findWxUserList(WxUserQVo condition, int start,
 			int limit, String orderBy) throws Exception {
 		PageResult<WxUserVo> rst = new PageResult<WxUserVo>();
@@ -41,7 +48,7 @@ public class WxUserServiceImpl implements WxUserService {
 		}
 		return rst;
 	}
-
+	@Override
 	public MessageResponse insertWxUser(WxUser o, UserProp userProp)
 			throws Exception {
 		int temp = this.wxUserDao.isExit(o);
@@ -53,7 +60,7 @@ public class WxUserServiceImpl implements WxUserService {
 				o.getName(), userProp);
 		return new MessageResponse(0, "添加微信用户完成！");
 	}
-
+	@Override
 	public MessageResponse updateWxUser(WxUser o, UserProp userProp)
 			throws Exception {
 		this.wxUserDao.updateByPrimaryKey(o);
@@ -61,13 +68,13 @@ public class WxUserServiceImpl implements WxUserService {
 				o.getName(), userProp);
 		return new MessageResponse(0, "变更微信用户完成！");
 	}
-
+	@Override
 	public SingleResult<WxUser> selectWxUserByPrimaryKey(String id) throws Exception {
 		SingleResult<WxUser> rst = new SingleResult<WxUser>();
 		rst.setValue(this.wxUserDao.selectByPrimaryKey(id));
 		return rst;
 	}
-
+	@Override
 	public MessageResponse deleteWxUserByWxUserId(String id,
 			UserProp userProp) throws Exception {
 		this.wxUserDao.deleteByPrimaryKey(id);
@@ -75,6 +82,7 @@ public class WxUserServiceImpl implements WxUserService {
 				String.valueOf(id), "微信用户", userProp);
 		return new MessageResponse(0, "微信用户删除完成！");
 	}
+	@Override
 	public MessageResponse updateRoleById(String id,String role,
 												  UserProp userProp) throws Exception {
 		this.wxUserDao.updateRole(id,role);
@@ -82,14 +90,49 @@ public class WxUserServiceImpl implements WxUserService {
 				String.valueOf(id), "微信用户", userProp);
 		return new MessageResponse(0, "微信用户绑定管理员完成！");
 	}
-	public MessageResponse deleteRoleById(String id,
-										  UserProp userProp) throws Exception {
+	@Override
+	public MessageResponse deleteRoleById(String id, UserProp userProp) throws Exception {
 		this.wxUserDao.updateRole(id,null);
 		this.dataBaseLogService.log("解绑管理员", "微信用户", String.valueOf(id),
 				String.valueOf(id), "微信用户", userProp);
 		return new MessageResponse(0, "微信用户解绑管理员完成！");
 	}
+	@Override
 	public List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception{
 		return this.wxUserDao.selectWxUser(condition);
+	}
+	@Override
+	public MessageResponse updateFaceToken(String image_url,String unionId) throws Exception{
+		String faceToken=null;
+		WxUser o=this.wxUserDao.selectByPrimaryKey(unionId);
+		if(CommonUtils.isNotEmpty(o.getFaceToken())){
+			FaceUtils.faceSetDel(faceset_token,o.getFaceToken());
+		}
+		String text=FaceUtils.detect(image_url);
+		com.alibaba.fastjson.JSONObject rst = com.alibaba.fastjson.JSON.parseObject(text);
+		com.alibaba.fastjson.JSONArray list=rst.getJSONArray("faces");
+		if(CommonUtils.isNotEmpty(list)||list.size()>0){
+			com.alibaba.fastjson.JSONObject face=list.getJSONObject(0);
+			faceToken=face.getString("face_token");
+			FaceUtils.faceSetAdd(faceset_token,faceToken);
+			this.wxUserDao.updateFaceToken(unionId,faceToken,image_url);
+		}
+		return new MessageResponse(0, "更新faceToken完成！");
+	}
+	@Override
+	public  SingleResult<WxUser> searchFace(String image_url) throws Exception{
+		SingleResult<WxUser> rst = new SingleResult<WxUser>(1,null);
+		String faceToken=null;
+		String text=FaceUtils.search(faceset_token,image_url);
+		com.alibaba.fastjson.JSONObject json = com.alibaba.fastjson.JSON.parseObject(text);
+		com.alibaba.fastjson.JSONArray list=json.getJSONArray("results");
+		if(CommonUtils.isNotEmpty(list)||list.size()>0){
+			com.alibaba.fastjson.JSONObject face=list.getJSONObject(0);
+			faceToken=face.getString("face_token");
+			rst.setValue(this.wxUserDao.selectByPrimaryKey(faceToken));
+			rst.getOther().put("photo",image_url);
+			rst.setStatus(0);
+		}
+		return rst;
 	}
 }

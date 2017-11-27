@@ -66,7 +66,11 @@
       liable = #{liable,jdbcType=VARCHAR},
       deptId = #{deptId,jdbcType=VARCHAR},
       category=#{category},
+    <if test="status!=null">
       status = #{status,jdbcType=VARCHAR},
+    </if>
+
+
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
