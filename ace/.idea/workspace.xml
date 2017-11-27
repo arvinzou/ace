@@ -7,7 +7,7 @@
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-app/ios/Portal/App" afterPath="$PROJECT_DIR$/ace-app/ios/Portal/App" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js" afterPath="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -101,7 +101,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="face.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="face.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2472">
@@ -145,11 +145,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ace-ui-custom.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ace-ui-custom.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="253" column="23" lean-forward="true" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
+            <state relative-caret-position="139">
+              <caret line="412" column="23" lean-forward="false" selection-start-line="412" selection-start-column="23" selection-end-line="412" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -253,7 +253,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ace-face/ace-face-service/src/main/resources/applicationContext.xml" />
         <option value="$PROJECT_DIR$/ace-face/ace-face-service/src/main/resources/spring/spring-ace-face-service.xml" />
         <option value="$PROJECT_DIR$/ace-face/ace-face-service/src/main/resources/config.properties" />
         <option value="$PROJECT_DIR$/ace-face/ace-face-service/src/main/resources/special.properties" />
@@ -304,6 +303,7 @@
         <option value="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/dynamic/service/search/index.jsp" />
         <option value="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/dynamic/service/person/index.jsp" />
         <option value="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css" />
       </list>
     </option>
   </component>
@@ -1911,13 +1911,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00253" summary="掌上统战二期人士档案扩展">
-      <created>1509418976422</created>
-      <option name="number" value="00253" />
-      <option name="presentableId" value="LOCAL-00253" />
-      <option name="project" value="LOCAL" />
-      <updated>1509418976423</updated>
-    </task>
     <task id="LOCAL-00254" summary="掌上统战二期人士档案扩展">
       <created>1509419105777</created>
       <option name="number" value="00254" />
@@ -2254,7 +2247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511795469339</updated>
     </task>
-    <option name="localTasksCounter" value="302" />
+    <task id="LOCAL-00302" summary="人脸搜索">
+      <created>1511795763646</created>
+      <option name="number" value="00302" />
+      <option name="presentableId" value="LOCAL-00302" />
+      <option name="project" value="LOCAL" />
+      <updated>1511795763646</updated>
+    </task>
+    <option name="localTasksCounter" value="303" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2725,14 +2725,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="253" column="23" lean-forward="true" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/search/controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -2781,6 +2773,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2472">
           <caret line="168" column="92" lean-forward="false" selection-start-line="168" selection-start-column="92" selection-end-line="168" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/css/ace-ui-custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="412" column="23" lean-forward="false" selection-start-line="412" selection-start-column="23" selection-end-line="412" selection-end-column="23" />
           <folding />
         </state>
       </provider>
