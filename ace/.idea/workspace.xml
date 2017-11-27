@@ -7,12 +7,6 @@
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-app/ios/Portal/App" afterPath="$PROJECT_DIR$/ace-app/ios/Portal/App" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-face/ace-face-client/src/main/java/com/huacainfo/ace/face/service/PersonService.java" afterPath="$PROJECT_DIR$/ace-face/ace-face-client/src/main/java/com/huacainfo/ace/face/service/PersonService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-face/ace-face-service/src/main/java/com/huacainfo/ace/face/dao/PersonDao.java" afterPath="$PROJECT_DIR$/ace-face/ace-face-service/src/main/java/com/huacainfo/ace/face/dao/PersonDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-face/ace-face-service/src/main/java/com/huacainfo/ace/face/dao/PersonDao.xml" afterPath="$PROJECT_DIR$/ace-face/ace-face-service/src/main/java/com/huacainfo/ace/face/dao/PersonDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-face/ace-face-service/src/main/java/com/huacainfo/ace/face/service/impl/PersonServiceImpl.java" afterPath="$PROJECT_DIR$/ace-face/ace-face-service/src/main/java/com/huacainfo/ace/face/service/impl/PersonServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-face/ace-face-web/src/main/java/com/huacainfo/ace/face/web/controller/PersonController.java" afterPath="$PROJECT_DIR$/ace-face/ace-face-web/src/main/java/com/huacainfo/ace/face/web/controller/PersonController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/controller.js" afterPath="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js" afterPath="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
@@ -101,7 +95,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controller.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
@@ -111,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="face.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="face.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="211" column="0" lean-forward="false" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="26" />
+            <state relative-caret-position="361">
+              <caret line="179" column="36" lean-forward="true" selection-start-line="179" selection-start-column="36" selection-end-line="179" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -277,9 +271,9 @@
         <option value="$PROJECT_DIR$/ace-face/ace-face-client/src/main/java/com/huacainfo/ace/face/service/PersonService.java" />
         <option value="$PROJECT_DIR$/ace-face/ace-face-web/src/main/java/com/huacainfo/ace/face/web/controller/PersonController.java" />
         <option value="$PROJECT_DIR$/ace-face/ace-face-service/src/main/java/com/huacainfo/ace/face/dao/PersonDao.xml" />
-        <option value="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js" />
         <option value="$PROJECT_DIR$/ace-face/ace-face-service/src/main/java/com/huacainfo/ace/face/service/impl/PersonServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/controller.js" />
+        <option value="$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js" />
       </list>
     </option>
   </component>
@@ -2225,13 +2219,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00246" summary="指标按季度设置">
-      <created>1507254177395</created>
-      <option name="number" value="00246" />
-      <option name="presentableId" value="LOCAL-00246" />
-      <option name="project" value="LOCAL" />
-      <updated>1507254177397</updated>
-    </task>
     <task id="LOCAL-00247" summary="解决树形结构字典问题">
       <created>1507476489076</created>
       <option name="number" value="00247" />
@@ -2568,7 +2555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511766152990</updated>
     </task>
-    <option name="localTasksCounter" value="295" />
+    <task id="LOCAL-00295" summary="人脸搜索">
+      <created>1511766738289</created>
+      <option name="number" value="00295" />
+      <option name="presentableId" value="LOCAL-00295" />
+      <option name="project" value="LOCAL" />
+      <updated>1511766738289</updated>
+    </task>
+    <option name="localTasksCounter" value="296" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2678,7 +2672,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="统战人士统计分析" />
     <MESSAGE value="社会资源图片管理" />
     <MESSAGE value="统战小程序-我要帮助" />
     <MESSAGE value="统战小程序-周边服务" />
@@ -2703,7 +2696,8 @@
     <MESSAGE value="生成代码模板增加注解" />
     <MESSAGE value="远程视频会议系统架构创建" />
     <MESSAGE value="人脸识别" />
-    <option name="LAST_COMMIT_MESSAGE" value="人脸识别" />
+    <MESSAGE value="人脸搜索" />
+    <option name="LAST_COMMIT_MESSAGE" value="人脸搜索" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3150,18 +3144,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="211" column="0" lean-forward="false" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="307" column="39" lean-forward="false" selection-start-line="307" selection-start-column="39" selection-end-line="307" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="179" column="36" lean-forward="true" selection-start-line="179" selection-start-column="36" selection-end-line="179" selection-end-column="36" />
           <folding />
         </state>
       </provider>

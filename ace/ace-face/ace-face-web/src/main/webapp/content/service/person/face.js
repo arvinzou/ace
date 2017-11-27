@@ -179,6 +179,9 @@ function facesearch(){
 		    }
 		    var results=rst.results;
 		    var html=[];
+		    if(!results){
+		        alert("对不起，指定的faceset没有找到结果。");
+		    }
 		    $(results).each(function(i,o){
                 html.push(o.face_token);
 		    });
