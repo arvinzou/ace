@@ -181,6 +181,7 @@ function facesearch(){
 		    var html=[];
 		    if(!results){
 		        alert("对不起，指定的faceset没有找到结果。");
+		        return;
 		    }
 		    $(results).each(function(i,o){
                 html.push(o.face_token);
