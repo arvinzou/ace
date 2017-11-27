@@ -156,5 +156,20 @@ public interface PersonService {
 	 */
 	public abstract List<Map<String,Object>> selectListByFaceTokens(String[] faceTokens) throws Exception;
 
+
+	/**
+	 *
+	 * @Title:updatePersonAllStatus
+	 * @Description:  TODO(更新状态)
+	 * @param:        @param status
+	 * @param:        @param  userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	public abstract MessageResponse updatePersonAllStatus(String status,UserProp userProp) throws Exception;
+
 	
 }

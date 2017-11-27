@@ -143,4 +143,10 @@
       #{item}
     </foreach>
   </select>
+
+  <update id="updatePersonAllStatus">
+    update person
+    set
+    status = #{status,jdbcType=VARCHAR} where status='3'
+  </update>
 </mapper>

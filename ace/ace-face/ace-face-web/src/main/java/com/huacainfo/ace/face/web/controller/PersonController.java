@@ -294,4 +294,23 @@ public class PersonController extends FaceBaseController {
 
 		return this.personService.selectListByFaceTokens(p);
 	}
+
+	/**
+	 *
+	 * @Title:updatePersonAllStatus
+	 * @Description:  TODO(更新状态)
+	 * @param:        @param id
+	 * @param:        @param status
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	@RequestMapping(value = "/updatePersonAllStatus.do")
+	@ResponseBody
+	public  MessageResponse updatePersonAllStatus(String status) throws Exception{
+		return this.personService.updatePersonAllStatus(status,this.getCurUserProp());
+
+	}
 }

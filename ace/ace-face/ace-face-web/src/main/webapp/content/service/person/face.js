@@ -208,6 +208,7 @@ function removeallface(){
 		        alert(rst["error_message"]);
 		        return;
 		    }
+		    updatePersonAllStatus("2");
 		    alert("移除成功");
 		},
 		error : function(rst) {

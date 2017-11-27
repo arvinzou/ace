@@ -302,5 +302,25 @@ function updatePersonStatus(id,status){
 }
 
 function reloadGrid(){
-jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+    jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+}
+
+function updatePersonAllStatus(status){
+	$.ajax({
+		type : "post",
+		url : contextPath+'/person/updatePersonAllStatus.do',
+		data : {
+			status:status
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+		    console.log(rst);
+		    reloadGrid();
+
+		},
+		error : function() {
+			alert("HTTP错误！");
+		}
+	});
 }

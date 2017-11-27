@@ -265,4 +265,24 @@ public class PersonServiceImpl implements PersonService {
     public  List<Map<String,Object>> selectListByFaceTokens(String[] faceTokens) throws Exception{
         return this.personDao.selectListByFaceTokens(faceTokens);
     }
+
+    /**
+     *
+     * @Title:updatePersonAllStatus
+     * @Description:  TODO(更新状态)
+     * @param:        @param status
+     * @param:        @param  userProp
+     * @param:        @throws Exception
+     * @return:       MessageResponse
+     * @throws
+     * @author: 陈晓克
+     * @version: 2017-11-25
+     */
+    @Override
+    public  MessageResponse updatePersonAllStatus(String status,UserProp userProp) throws Exception{
+        this.personDao.updatePersonAllStatus(status);
+        this.dataBaseLogService.log("更新状态", "人脸建档", "all",
+                "all", "人脸建档", userProp);
+        return new MessageResponse(0, "移除成功！");
+    }
 }
