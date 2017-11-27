@@ -1,6 +1,6 @@
 var cfg = {};
 cfg.view_load_data_url = contextPath + '/person/selectPersonByPrimaryKey.do';
-cfg.grid_load_data_url = contextPath + '/person/findPersonList.do';
+cfg.grid_load_data_url = contextPath + '/person/findPersonList.do?category=1';
 cfg.grid_add_data_url = contextPath + '/person/insertPerson.do';
 cfg.grid_edit_data_url = contextPath + '/person/updatePerson.do';
 cfg.grid_delete_data_url = contextPath + '/person/deletePersonByPersonId.do';

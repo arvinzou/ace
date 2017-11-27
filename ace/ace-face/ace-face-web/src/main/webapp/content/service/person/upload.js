@@ -116,7 +116,7 @@ function appendUploadBtn(id) {
 					function(e) {
 						e.preventDefault();
 						var config={
-                            		extensions : "jpg,gif,png,bmp",
+                            		extensions : "jpg,gif,png,bmp,jpeg",
                             		url : portalPath + '/files/uploadFile.do',
                             		target : id,
                             		multipart_params : {}

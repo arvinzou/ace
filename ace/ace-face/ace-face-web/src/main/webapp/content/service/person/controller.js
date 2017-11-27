@@ -76,10 +76,7 @@ jQuery(function($) {
 						})
 						appendUploadBtn("photo");
 			});
-	$('#btn-view-del').on(
-			'click',
-			function() {
-
+	$('#btn-view-del').on('click',function() {
 				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
 						'selrow');
 				if (!gr) {
@@ -87,18 +84,14 @@ jQuery(function($) {
 							$.jgrid.nav.alerttext);
 					return;
 				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'delGridRow',
-						gr,
-						{
-							beforeShowForm : function(e) {
+				jQuery(cfg.grid_selector).jqGrid('delGridRow',gr,{beforeShowForm : function(e) {
 								var form = $(e[0]);
 								form.closest('.ui-jqdialog').find(
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
 							}
-						})
+				})
 			});
 
 			$('#btn-view-detect').on(
@@ -118,23 +111,24 @@ jQuery(function($) {
             				}
 
             });
-            $('#btn-view-faceadd').on(
-                        			'click',
-                        			function() {
+            $('#btn-view-faceadd').on('click',function() {
+                    var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
+                            'selrow');
+                    if (!gr) {
+                        $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                                $.jgrid.nav.alerttext);
+                        return;
+                    }
+                    var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
+                    if(r.faceFoken){
+                        removeface(r.faceFoken);
+                    }
+            });
+            $('#btn-view-removeall').on('click',function() {
+                removeallface();
+            });
 
-                        				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                        						'selrow');
-                        				if (!gr) {
-                        					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-                        							$.jgrid.nav.alerttext);
-                        					return;
-                        				}
-                        				var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
-                        				if(r.faceFoken){
-                        				    removeface(r.faceFoken);
-                        				}
 
-                        });
 });
 
 function preview(id, title) {

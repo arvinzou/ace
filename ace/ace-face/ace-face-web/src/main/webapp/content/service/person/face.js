@@ -156,3 +156,62 @@ function detectOne(title,image_url,el){
 		}
 	});
 }
+function facesearch(){
+    var image_url=image_url1;
+    console.log(image_url);
+
+	$.ajax({
+		type : "post",
+		url : 'https://api-cn.faceplusplus.com/facepp/v3/search',
+		data : {
+			api_key : api_key,
+			api_secret:api_secret,
+			faceset_token:faceset_token,
+			image_url:image_url
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+		    console.log(rst);
+		    if(rst["error_message"]){
+		        alert(rst["error_message"]);
+		        return;
+		    }
+		    var results=rst.results;
+		    var html=[];
+		    $(results).each(function(i,o){
+                html.push(o.face_token);
+		    });
+            selectListByFaceTokens(html.join(","));
+		},
+		error : function(rst) {
+			alert("系统繁忙，请稍后再试。");
+		}
+	});
+}
+
+function removeallface(){
+	$.ajax({
+		type : "post",
+		url : 'https://api-cn.faceplusplus.com/facepp/v3/faceset/removeface',
+		data : {
+			api_key : api_key,
+			api_secret:api_secret,
+			faceset_token:faceset_token,
+			face_tokens:"RemoveAllFaceTokens"
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+		    console.log(rst);
+		    if(rst["error_message"]){
+		        alert(rst["error_message"]);
+		        return;
+		    }
+		    alert("移除成功");
+		},
+		error : function(rst) {
+			alert("系统繁忙，请稍后再试。");
+		}
+	});
+}

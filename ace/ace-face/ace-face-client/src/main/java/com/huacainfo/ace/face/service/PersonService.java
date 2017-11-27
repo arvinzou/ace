@@ -6,6 +6,10 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.face.model.Person;
 import com.huacainfo.ace.face.vo.PersonVo;
 import com.huacainfo.ace.face.vo.PersonQVo;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author: 陈晓克
  * @version: 2017-11-25
@@ -138,6 +142,19 @@ public interface PersonService {
 	 * @version: 2017-11-25
 	 */
 	public abstract MessageResponse updatePersonStatus(String id,String status,UserProp userProp) throws Exception;
+
+	/**
+	 *
+	 * @Title:selectListByFaceTokens
+	 * @Description:  TODO(根据faceToken搜索人员信息)
+	 * @param:        @param faceTokens
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	public abstract List<Map<String,Object>> selectListByFaceTokens(String[] faceTokens) throws Exception;
 
 	
 }

@@ -8,6 +8,8 @@ public class Person implements java.io.Serializable{
     
     private String id;
 
+    private String category;
+
     private String name;
 
     private String sex;
@@ -154,5 +156,13 @@ public class Person implements java.io.Serializable{
 
     public void setAttributes(String attributes) {
         this.attributes = attributes == null ? null : attributes.trim();
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

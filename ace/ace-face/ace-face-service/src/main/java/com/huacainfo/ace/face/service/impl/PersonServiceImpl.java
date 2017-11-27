@@ -3,6 +3,7 @@ package com.huacainfo.ace.face.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -247,5 +248,21 @@ public class PersonServiceImpl implements PersonService {
         this.dataBaseLogService.log("更新状态", "人脸建档", String.valueOf(id),
                 String.valueOf(id), "人脸建档", userProp);
         return new MessageResponse(0, "更新状态成功！");
+    }
+
+    /**
+     *
+     * @Title:selectListByFaceTokens
+     * @Description:  TODO(根据faceToken搜索人员信息)
+     * @param:        @param faceTokens
+     * @param:        @throws Exception
+     * @return:       MessageResponse
+     * @throws
+     * @author: 陈晓克
+     * @version: 2017-11-25
+     */
+    @Override
+    public  List<Map<String,Object>> selectListByFaceTokens(String[] faceTokens) throws Exception{
+        return this.personDao.selectListByFaceTokens(faceTokens);
     }
 }

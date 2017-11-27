@@ -21,6 +21,10 @@ import com.huacainfo.ace.face.service.PersonService;
 import com.huacainfo.ace.face.vo.PersonVo;
 import com.huacainfo.ace.face.vo.PersonQVo;
 import java.io.File;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 @Controller
 @RequestMapping("/person")
 /**
@@ -79,6 +83,7 @@ public class PersonController extends FaceBaseController {
 	@ResponseBody
 	public MessageResponse insertPerson(String jsons) throws Exception {
 		Person obj = JSON.parseObject(jsons, Person.class);
+		obj.setCategory("1");
 		return this.personService
 				.insertPerson(obj, this.getCurUserProp());
 	}
@@ -236,7 +241,7 @@ public class PersonController extends FaceBaseController {
 	@RequestMapping(value = "/uploadFile.do")
 	@ResponseBody
 	public SingleResult<String[]> uploadFile(
-			@RequestParam MultipartFile[] file, String id)
+			@RequestParam MultipartFile[] file, String category)
 			throws Exception {
 		SingleResult<String[]> rst = new SingleResult<String[]>(0, "上传成功！");
 		String[] fileNames = new String[file.length];
@@ -257,11 +262,36 @@ public class PersonController extends FaceBaseController {
 
 			Person obj =new Person();
 			obj.setPhoto(fileNames[i]);
-			obj.setName(o.getOriginalFilename().substring(0,o.getOriginalFilename().indexOf(".")));
-			this.personService.insertPerson(obj,this.getCurUserProp());
+			obj.setName(UUID.randomUUID().toString()+"#"+o.getOriginalFilename().substring(0,o.getOriginalFilename().indexOf(".")));
+			obj.setCategory(category);
+			MessageResponse response=this.personService.insertPerson(obj,this.getCurUserProp());
+			if(!response.getState()){
+				SingleResult<String[]> srt=new SingleResult<String[]>(1,"");
+				srt.setErrorMessage(response.getErrorMessage());
+				srt.setDetail(response.getDetail());
+				return srt;
+			}
 			i++;
 		}
 		rst.setValue(fileNames);
 		return rst;
+	}
+	/**
+	 *
+	 * @Title:selectListByFaceTokens
+	 * @Description:  TODO(根据faceToken搜索人员信息)
+	 * @param:        @param faceTokens
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2017-11-25
+	 */
+	@RequestMapping(value = "/selectListByFaceTokens.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectListByFaceTokens(String faceTokens) throws Exception{
+		String[] p=faceTokens.split(",");
+
+		return this.personService.selectListByFaceTokens(p);
 	}
 }

@@ -68,6 +68,12 @@ pageEncoding="utf-8"%>
                             class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
 
+                    <button class="btn btn-warning" id="btn-view-removeall"
+                            authority="false">
+                        清空faceSet<i
+                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+
                 </div>
             </div>
         </div>

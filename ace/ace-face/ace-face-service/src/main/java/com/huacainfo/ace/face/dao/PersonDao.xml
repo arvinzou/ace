@@ -22,7 +22,7 @@
 
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, sex, birthday, dept, photo, faceFoken, status, createUserId, createUserName, 
+    id,category, name, sex, birthday, dept, photo, faceFoken, status, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
   <sql id="Blob_Column_List">
@@ -41,12 +41,12 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.face.model.Person">
-    insert into person (id, name, sex, birthday, 
+    insert into person (id, category,name, sex, birthday,
       dept, photo, faceFoken, 
       status, createUserId, createUserName, 
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate, attributes)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, 
+    values (#{id,jdbcType=VARCHAR},#{category,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{birthday,jdbcType=DATE},
       #{dept,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{faceFoken,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
@@ -71,6 +71,9 @@
     <if test='condition.name!=null and condition.name!=""'>
       and name like
       concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="condition.category!=null and condition.category!=&quot;&quot;">
+      and category =#{condition.category,jdbcType=VARCHAR}
     </if>
   </sql>
   <select id="findCount" resultType="int">
@@ -131,4 +134,13 @@
     status = #{status,jdbcType=VARCHAR}
     where (id = #{id,jdbcType=VARCHAR} or faceFoken = #{id,jdbcType=VARCHAR})
   </update>
+
+  <select id="selectListByFaceTokens" resultType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from person where faceFoken in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
 </mapper>

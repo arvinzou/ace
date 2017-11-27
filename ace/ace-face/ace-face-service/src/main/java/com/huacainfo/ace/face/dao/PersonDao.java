@@ -1,6 +1,7 @@
 package com.huacainfo.ace.face.dao;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.face.model.Person;
 import com.huacainfo.ace.face.vo.PersonQVo;
@@ -32,5 +33,7 @@ public interface PersonDao {
     int updatePersonAttributes(@Param("id") String id,@Param("attributes") String attributes);
 
     int updatePersonFaceTokenAttributes(@Param("id") String id,@Param("faceFoken") String faceFoken,@Param("attributes") String attributes);
+
+    List<Map<String,Object>> selectListByFaceTokens(@Param("list") String[] faceTokens);
 
 }
