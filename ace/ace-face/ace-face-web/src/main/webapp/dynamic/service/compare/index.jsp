@@ -134,13 +134,18 @@ pageEncoding="utf-8"%>
 <div class="page-content">
     <div class="row center padding">
 
-        <h3>功能演示</h3>
-        <span style="font-size:14px">即刻体验人脸比对能力。请上传本地图片或提供图片URL。
-        该功能演示是基于Compare API搭建的。</span>
+        <h3>人脸比对</h3>
+
     </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-6 center photo" id="box1"></div>
-        <div class="col-xs-12 col-sm-6 center photo" id="box2"></div>
+        <div class="col-xs-12 col-sm-6">
+            <h5 class="header-title">对比对象A</h5>
+            <div id="box1" class="center photo"></div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h5 class="header-title">对比对象B</h5>
+           <div id="box2" class="center photo"></div>
+        </div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-6 center">

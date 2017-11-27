@@ -167,7 +167,7 @@ function facesearch(){
 			api_key : api_key,
 			api_secret:api_secret,
 			faceset_token:faceset_token,
-			return_result_count:3,
+			return_result_count:2,
 			image_url:image_url
 		},
 		beforeSend : function(XMLHttpRequest) {
@@ -184,9 +184,17 @@ function facesearch(){
 		        alert("对不起，指定的faceset没有找到结果。");
 		        return;
 		    }
+		    var status=false;
 		    $(results).each(function(i,o){
-                html.push(o.face_token);
+		        if(o.confidence>=90){
+		            html.push(o.face_token);
+		            status=true;
+		        }
 		    });
+		    if(!status){
+		         alert("对不起，指定的faceset没有找到结果。");
+		         return;
+		    }
             selectListByFaceTokens(html.join(","));
 		},
 		error : function(rst) {

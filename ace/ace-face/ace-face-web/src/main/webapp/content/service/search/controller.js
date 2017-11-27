@@ -192,11 +192,13 @@ function selectListByFaceTokens(faceTokens){
 		},
 		success : function(rst, textStatus) {
             var html=[];
-            html.push("<div class='center boder' style='width:200px;'>");
+            html.push("<div>");
             $(rst).each(function(i,o){
+                html.push("<div class='img-box'>");
                 html.push('<a href="javascript:previewPeson(\''+o.id+'\', \''+o.name+'\')"><img style="max-height:150px" src="'+fastdfs_server+o.photo+'"/></a>');
                 html.push('<div style="height:10px"></div>');
                 html.push('<a href="javascript:previewPeson(\''+o.id+'\', \''+o.name+'\')">'+o.name+'</a>');
+                 html.push("</div>");
             });
             html.push("</div>");
             $("#box2").html(html.join("\n\r"));

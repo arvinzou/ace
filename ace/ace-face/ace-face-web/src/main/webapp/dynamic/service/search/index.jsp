@@ -129,54 +129,59 @@ pageEncoding="utf-8"%>
 .padding{
     margin: 10px;
 }
-.boder {
-    border: 1px solid #cacaca;
-    padding: 10px;
+.img-box {
+    width: 200px;
+	height: 200px;
+	float: left;
+	margin: 5px;
+	text-align:center;
 }
+.box {
+    border: 0px solid #cacaca;
+	padding:5px;
+	margin: 5px;
+}
+ .background {
+        background-color: #cacaca;
+    }
+
+
 </style>
 <body>
 <div class="page-content">
     <div class="row center padding">
 
-        <h3>功能演示</h3>
-        <span style="font-size:14px">即刻体验人脸搜索。请上传本地图片或提供图片URL。
-        该功能演示是基于Search API搭建的。</span>
+        <h3>人脸搜索</h3>
+
     </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-6 center photo" id="box1"></div>
-        <div class="col-xs-12 col-sm-6" id="box2"></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 center">
-            <div class="swiper-container1">
-                <div class="swiper-wrapper" id="swiper1">
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/1" style="background-image:url(http://lorempixel.com/600/600/nature/1)"></div>
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/2" style="background-image:url(http://lorempixel.com/600/600/nature/2)"></div>
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/3" style="background-image:url(http://lorempixel.com/600/600/nature/3)"></div>
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/4"  style="background-image:url(http://lorempixel.com/600/600/nature/4)"></div>
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/5"  style="background-image:url(http://lorempixel.com/600/600/nature/5)"></div>
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/6"  style="background-image:url(http://lorempixel.com/600/600/nature/6)"></div>
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/7"  style="background-image:url(http://lorempixel.com/600/600/nature/7)"></div>
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/8"  style="background-image:url(http://lorempixel.com/600/600/nature/8)"></div>
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/9"  style="background-image:url(http://lorempixel.com/600/600/nature/9)"></div>
-                    <div class="swiper-slide" data="http://lorempixel.com/600/600/nature/10"  style="background-image:url(http://lorempixel.com/600/600/nature/10)"></div>
+        <div class="col-xs-12 col-sm-6">
+            <h5 class="header-title">搜索条件</h5>
+            <div class="box center">
+                <div class="row photo" id="box1"></div>
+                <div class="row">
+                    <div class="swiper-container1">
+                        <div class="swiper-wrapper" id="swiper1">
+
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="search-box search-box-one">
+                        <input type="file" accept="image/png,image/jpeg" id="file-uploader-one"
+                               class="file-uploader-one">
+                        <div id="file-uploader-btn-one" class="upload-img"><i
+                                class="icons icon-upload"></i><span>本地上传</span></div>
+                        <button class="search-btn search-btn-one" id="btn-query" authority="false">搜索</button>
+                        <input placeholder="图片URL" class="search-input search-input-one">
+                    </div>
                 </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-            </div>
-            <div class="search-box search-box-one">
-                <input type="file" accept="image/png,image/jpeg" id="file-uploader-one" class="file-uploader-one">
-                <div id="file-uploader-btn-one" class="upload-img"><i class="icons icon-upload"></i><span>本地上传</span></div>
-                <button class="search-btn search-btn-one" id="btn-query" authority="false">搜索</button>
-                <input placeholder="图片URL" class="search-input search-input-one">
             </div>
         </div>
         <div class="col-xs-12 col-sm-6">
-
+            <h5 class="header-title">搜索结果</h5>
+            <div class="box center" id="box2"></div>
         </div>
-    </div>
-    <div class="row center">
-
     </div>
 
 
@@ -198,25 +203,25 @@ pageEncoding="utf-8"%>
         src="${pageContext.request.contextPath}/content/service/search/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/search/upload.js?version=${cfg.version}"></script>
-<script  src="${pageContext.request.contextPath}/content/service/person/face.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/person/face.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/swiper/js/swiper.min.js"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <div id="dialog-message-view" class="hide">
     <div class="row" style="padding:10px" id="rst-view">
 
-            <div class="labelItem"><span class="labelItemHeader">性别</span><br><span id="gender"></span></div>
-            <div class="labelItem"><span class="labelItemHeader">年龄</span><br><span id="age"></span></div>
-            <div class="labelItem"><span class="labelItemHeader">微笑程度</span><br><span id="smile"></span></div>
-            <div class="labelItem"><span class="labelItemHeader">是否佩戴眼镜</span><br><span id="glass"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">性别</span><br><span id="gender"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">年龄</span><br><span id="age"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">微笑程度</span><br><span id="smile"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">是否佩戴眼镜</span><br><span id="glass"></span></div>
 
 
-            <div class="labelItem"><span class="labelItemHeader">情绪</span><br><span id="emotion"></span></div>
-            <div class="labelItem"><span class="labelItemHeader">人种</span><br><span id="ethnicity"></span></div>
-            <div class="labelItem"><span class="labelItemHeader">颜值</span><br><span id="beauty"></span></div>
-            <div class="labelItem"><span class="labelItemHeader">健康</span><br><span id="health"></span></div>
-            <div class="labelItem"><span class="labelItemHeader">色斑</span><br><span id="stain"></span></div>
-            <div class="labelItem"><span class="labelItemHeader">青春痘</span><br><span id="acne"></span></div>
-            <div class="labelItem"><span class="labelItemHeader">黑眼圈</span><br><span id="dark_circle"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">情绪</span><br><span id="emotion"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">人种</span><br><span id="ethnicity"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">颜值</span><br><span id="beauty"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">健康</span><br><span id="health"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">色斑</span><br><span id="stain"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">青春痘</span><br><span id="acne"></span></div>
+        <div class="labelItem"><span class="labelItemHeader">黑眼圈</span><br><span id="dark_circle"></span></div>
 
     </div>
 </div>
