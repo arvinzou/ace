@@ -108,8 +108,8 @@
       <file leaf-file-name="face.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="177" column="23" lean-forward="true" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
+            <state relative-caret-position="198">
+              <caret line="169" column="34" lean-forward="false" selection-start-line="169" selection-start-column="34" selection-end-line="169" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -2219,13 +2219,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00248" summary="深南电路自动发送邮件">
-      <created>1507534639957</created>
-      <option name="number" value="00248" />
-      <option name="presentableId" value="LOCAL-00248" />
-      <option name="project" value="LOCAL" />
-      <updated>1507534639959</updated>
-    </task>
     <task id="LOCAL-00249" summary="深南电路自动发送邮件">
       <created>1507855468758</created>
       <option name="number" value="00249" />
@@ -2562,7 +2555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511766886622</updated>
     </task>
-    <option name="localTasksCounter" value="297" />
+    <task id="LOCAL-00297" summary="人脸搜索">
+      <created>1511767085453</created>
+      <option name="number" value="00297" />
+      <option name="presentableId" value="LOCAL-00297" />
+      <option name="project" value="LOCAL" />
+      <updated>1511767085453</updated>
+    </task>
+    <option name="localTasksCounter" value="298" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -3154,8 +3154,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-face/ace-face-web/src/main/webapp/content/service/person/face.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="177" column="23" lean-forward="true" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
+        <state relative-caret-position="198">
+          <caret line="169" column="34" lean-forward="false" selection-start-line="169" selection-start-column="34" selection-end-line="169" selection-end-column="34" />
           <folding />
         </state>
       </provider>

@@ -167,6 +167,7 @@ function facesearch(){
 			api_key : api_key,
 			api_secret:api_secret,
 			faceset_token:faceset_token,
+			return_result_count:3,
 			image_url:image_url
 		},
 		beforeSend : function(XMLHttpRequest) {
