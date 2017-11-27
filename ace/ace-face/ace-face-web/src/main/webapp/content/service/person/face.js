@@ -151,7 +151,7 @@ function detectOne(title,image_url,el){
 			return_attributes:"gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus"
 		},
 		beforeSend : function(XMLHttpRequest) {
-		    $("#message").html("<span style='color:blue;font-size:14px'>搜索中，请稍后......</span>");
+		    $("#message").html("<span style='color:blue;font-size:14px'>处理中，请稍后......</span>");
 		},
 		success : function(rst, textStatus) {
 		    $("#message").html("");
@@ -166,7 +166,7 @@ function detectOne(title,image_url,el){
 	        loadView(face.attributes,el);
 		},
 		error : function(rst) {
-			 $("#message").html("<span style='color:blue;font-size:14px'>搜索中，请稍后......</span>");
+			 $("#message").html("<span style='color:red;font-size:14px'>系统繁忙，请稍后再试</span>");
 		}
 	});
 }
