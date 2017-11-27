@@ -32,7 +32,7 @@ function detect(id,image_url){
 
 		},
 		error : function(rst) {
-			alert("请求限制，请再尝试。");
+			alert("系统繁忙，请稍后再试。");
 		}
 	});
 }
@@ -59,7 +59,7 @@ function removeface(face_token){
 		    addface(face_token);
 		},
 		error : function(rst) {
-			alert("请求限制，请再尝试。");
+			alert("系统繁忙，请稍后再试。");
 		}
 	});
 }
@@ -86,7 +86,73 @@ function addface(face_token){
 		    alert("添加成功，目前数量："+rst["face_count"]);
 		},
 		error : function(rst) {
-			alert("请求限制，请再尝试。");
+			alert("系统繁忙，请稍后再试。");
+		}
+	});
+}
+
+function compare(image_url1,image_url2){
+    if(!image_url1||!image_url2){
+        return;
+    }
+    console.log(image_url1);
+    console.log(image_url2);
+	$.ajax({
+		type : "post",
+		url : 'https://api-cn.faceplusplus.com/facepp/v3/compare',
+		data : {
+			api_key : api_key,
+			api_secret:api_secret,
+			image_url1:image_url1,
+			image_url2:image_url2
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+		    console.log(rst);
+		    if(rst["error_message"]){
+		        alert(rst["error_message"]);
+		        return;
+		    }
+		    var confidence=rst.confidence;
+		    if(confidence>90){
+		        alert("比对结果：相似度"+confidence+"，两人为同一人");
+		    }else{
+		        alert("比对结果：相似度"+confidence+"，两人为同一人的可能性很小");
+		    }
+		},
+		error : function(rst) {
+			alert("系统繁忙，请稍后再试。");
+		}
+	});
+}
+
+function detectOne(title,image_url,el){
+    console.log(image_url);
+	$.ajax({
+		type : "post",
+		url : 'https://api-cn.faceplusplus.com/facepp/v3/detect',
+		data : {
+			api_key : api_key,
+			api_secret:api_secret,
+			image_url:image_url,
+			return_attributes:"gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus"
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+		    console.log(rst);
+		    if(rst["error_message"]){
+		        alert(rst["error_message"]);
+		        return;
+		    }
+		    var face=rst.faces[0];
+		    var faceToken=face.face_token;
+		    preview(title,image_url,el);
+	        loadView(face.attributes,el);
+		},
+		error : function(rst) {
+			alert("系统繁忙，请稍后再试。");
 		}
 	});
 }

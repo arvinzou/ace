@@ -198,6 +198,8 @@ pageEncoding="utf-8"%>
 
 
 </div>
+
+
 <jsp:include page="../../common/footer-1.jsp"/>
 
 <link rel="stylesheet"
@@ -211,9 +213,34 @@ pageEncoding="utf-8"%>
         src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/compare/controller.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/service/compare/upload.js?version=${cfg.version}"></script>
 <script  src="${pageContext.request.contextPath}/content/service/person/face.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/swiper/js/swiper.min.js"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
+<div id="dialog-message-view" class="hide">
+    <div class="row" style="padding:10px" id="rst-view">
 
+            <div class="labelItem"><span class="labelItemHeader">性别</span><br><span id="gender"></span></div>
+            <div class="labelItem"><span class="labelItemHeader">年龄</span><br><span id="age"></span></div>
+            <div class="labelItem"><span class="labelItemHeader">微笑程度</span><br><span id="smile"></span></div>
+            <div class="labelItem"><span class="labelItemHeader">是否佩戴眼镜</span><br><span id="glass"></span></div>
+
+
+            <div class="labelItem"><span class="labelItemHeader">情绪</span><br><span id="emotion"></span></div>
+            <div class="labelItem"><span class="labelItemHeader">人种</span><br><span id="ethnicity"></span></div>
+            <div class="labelItem"><span class="labelItemHeader">颜值</span><br><span id="beauty"></span></div>
+            <div class="labelItem"><span class="labelItemHeader">健康</span><br><span id="health"></span></div>
+            <div class="labelItem"><span class="labelItemHeader">色斑</span><br><span id="stain"></span></div>
+            <div class="labelItem"><span class="labelItemHeader">青春痘</span><br><span id="acne"></span></div>
+            <div class="labelItem"><span class="labelItemHeader">黑眼圈</span><br><span id="dark_circle"></span></div>
+
+    </div>
+</div>
+<div id="dialog-message" class="hide">
+    <div id="uploader">
+        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+    </div>
+</div>
 </body>
 </html>

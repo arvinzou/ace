@@ -1,6 +1,6 @@
 package com.huacainfo.ace.face.web.controller;
-
-import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.fastdfs.IFile;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -19,7 +20,7 @@ import com.huacainfo.ace.face.model.Person;
 import com.huacainfo.ace.face.service.PersonService;
 import com.huacainfo.ace.face.vo.PersonVo;
 import com.huacainfo.ace.face.vo.PersonQVo;
-
+import java.io.File;
 @Controller
 @RequestMapping("/person")
 /**
@@ -34,6 +35,9 @@ public class PersonController extends FaceBaseController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private PersonService personService;
+
+	@Autowired
+	private IFile fileSaver;
      /**
 	 *
 	    * @Title:find!{bean.name}List
@@ -227,5 +231,37 @@ public class PersonController extends FaceBaseController {
 	public  MessageResponse updatePersonStatus(String id,String status) throws Exception{
 		return this.personService.updatePersonStatus(id,status,this.getCurUserProp());
 
+	}
+
+	@RequestMapping(value = "/uploadFile.do")
+	@ResponseBody
+	public SingleResult<String[]> uploadFile(
+			@RequestParam MultipartFile[] file, String id)
+			throws Exception {
+		SingleResult<String[]> rst = new SingleResult<String[]>(0, "上传成功！");
+		String[] fileNames = new String[file.length];
+		String dir = this.getRequest().getSession().getServletContext()
+				.getRealPath(File.separator)
+				+ "tmp";
+		File tmp = new File(dir);
+		if (!tmp.exists()) {
+			tmp.mkdirs();
+		}
+		int i = 0;
+		for (MultipartFile o : file) {
+			File dest = new File(dir + File.separator + o.getName());
+			o.transferTo(dest);
+			fileNames[i] = this.fileSaver.saveFile(dest,
+					o.getOriginalFilename());
+			dest.delete();
+
+			Person obj =new Person();
+			obj.setPhoto(fileNames[i]);
+			obj.setName(o.getOriginalFilename().substring(0,o.getOriginalFilename().indexOf(".")));
+			this.personService.insertPerson(obj,this.getCurUserProp());
+			i++;
+		}
+		rst.setValue(fileNames);
+		return rst;
 	}
 }

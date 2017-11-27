@@ -212,7 +212,7 @@ function loadView(id) {
                 $("#dialog-message-view").find('#age').html(o.age.value);
                 $("#dialog-message-view").find('#smile').html(o.smile.threshold);
                 $("#dialog-message-view").find('#glass').html(glass[o.glass.value]);
-                $("#dialog-message-view").find('#headpose').html("抬头:"+o.headpose.pitch_angle+" 旋转:"+o.headpose.roll_angle+" 摇头:"+o.headpose.yaw_angle);
+                //$("#dialog-message-view").find('#headpose').html("抬头:"+o.headpose.pitch_angle+" 旋转:"+o.headpose.roll_angle+" 摇头:"+o.headpose.yaw_angle);
                 if(o.emotion.anger>=50){
                     o.emotion="anger";
                 }
@@ -275,6 +275,7 @@ function updatePersonFaceTokenAttributes(id,faceToken,attributes){
 		},
 		success : function(rst, textStatus) {
 		    console.log(rst);
+		    reloadGrid();
 		    alert(rst["errorMessage"]);
 		},
 		error : function() {
@@ -296,10 +297,16 @@ function updatePersonStatus(id,status){
 		},
 		success : function(rst, textStatus) {
 		    console.log(rst);
+		    reloadGrid();
 		    alert(rst["errorMessage"]);
+
 		},
 		error : function() {
 			alert("HTTP错误！");
 		}
 	});
+}
+
+function reloadGrid(){
+jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
 }

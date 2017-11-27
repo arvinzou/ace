@@ -134,7 +134,7 @@ pageEncoding="utf-8"%>
         <div class="labelItem"><span class="labelItemHeader">年龄</span><br><span id="age"></span></div>
         <div class="labelItem"><span class="labelItemHeader">微笑程度</span><br><span id="smile"></span></div>
         <div class="labelItem"><span class="labelItemHeader">是否佩戴眼镜</span><br><span id="glass"></span></div>
-        <div class="labelItem"><span class="labelItemHeader">人脸姿势</span><br><span id="headpose"></span></div>
+
 
         <div class="labelItem"><span class="labelItemHeader">情绪</span><br><span id="emotion"></span></div>
         <div class="labelItem"><span class="labelItemHeader">人种</span><br><span id="ethnicity"></span></div>
