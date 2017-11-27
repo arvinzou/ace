@@ -20,7 +20,7 @@ pageEncoding="utf-8"%>
         <div class="widget-header">
             <h5 class="widget-title smaller">设置查询条件</h5>
 
-            <div class="widget-toolbar"></div>
+            <div class="widget-toolbar">  <div id="message"></div></div>
         </div>
 
         <div class="widget-body">

@@ -135,7 +135,7 @@ pageEncoding="utf-8"%>
     <div class="row center padding">
 
         <h3>人脸比对</h3>
-
+<div id="message"></div>
     </div>
     <div class="row">
         <div class="col-xs-12 col-sm-6">

@@ -18,8 +18,10 @@ function detect(id,image_url){
 			return_attributes:"gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus"
 		},
 		beforeSend : function(XMLHttpRequest) {
+		    $("#message").html("<span style='color:blue;font-size:14px'>处理中，请稍后......</span>");
 		},
 		success : function(rst, textStatus) {
+		    $("#message").html("");
 		    console.log(rst);
 		    if(rst["error_message"]){
 		        alert(rst["error_message"]);
@@ -30,9 +32,10 @@ function detect(id,image_url){
 		    var attributes=JSON.stringify(face.attributes);
 		    updatePersonFaceTokenAttributes(id,faceToken,attributes);
 
+
 		},
 		error : function(rst) {
-			alert("系统繁忙，请稍后再试。");
+			$("#message").html("<span style='color:red;font-size:14px'>系统繁忙，请稍后再试</span>");
 		}
 	});
 }
@@ -49,8 +52,10 @@ function removeface(face_token){
 			face_tokens:face_token
 		},
 		beforeSend : function(XMLHttpRequest) {
+		    $("#message").html("<span style='color:blue;font-size:14px'>处理中，请稍后......</span>");
 		},
 		success : function(rst, textStatus) {
+		    $("#message").html("");
 		    console.log(rst);
 		    if(rst["error_message"]){
 		        alert(rst["error_message"]);
@@ -59,7 +64,7 @@ function removeface(face_token){
 		    addface(face_token);
 		},
 		error : function(rst) {
-			alert("系统繁忙，请稍后再试。");
+			$("#message").html("<span style='color:red;font-size:14px'>系统繁忙，请稍后再试</span>");
 		}
 	});
 }
@@ -75,8 +80,10 @@ function addface(face_token){
 			face_tokens:face_token
 		},
 		beforeSend : function(XMLHttpRequest) {
+		    $("#message").html("<span style='color:blue;font-size:14px'>处理中，请稍后......</span>");
 		},
 		success : function(rst, textStatus) {
+		    $("#message").html("");
 		    console.log(rst);
 		    if(rst["error_message"]){
 		        alert(rst["error_message"]);
@@ -86,7 +93,7 @@ function addface(face_token){
 		    alert("添加成功，目前数量："+rst["face_count"]);
 		},
 		error : function(rst) {
-			alert("系统繁忙，请稍后再试。");
+			$("#message").html("<span style='color:red;font-size:14px'>系统繁忙，请稍后再试</span>");
 		}
 	});
 }
@@ -107,8 +114,11 @@ function compare(image_url1,image_url2){
 			image_url2:image_url2
 		},
 		beforeSend : function(XMLHttpRequest) {
+		    $("#message").html("<span style='color:blue;font-size:14px'>处理中，请稍后......</span>");
+
 		},
 		success : function(rst, textStatus) {
+		    $("#message").html("");
 		    console.log(rst);
 		    if(rst["error_message"]){
 		        alert(rst["error_message"]);
@@ -116,13 +126,15 @@ function compare(image_url1,image_url2){
 		    }
 		    var confidence=rst.confidence;
 		    if(confidence>90){
-		        alert("比对结果：相似度"+confidence+"，两人为同一人");
+
+		        $("#message").html("<span style='color:blue;font-size:14px'>比对结果：相似度"+confidence+"，两人为同一人</span>");
 		    }else{
-		        alert("比对结果：相似度"+confidence+"，两人为同一人的可能性很小");
+
+		        $("#message").html("<span style='color:red;font-size:14px'>比对结果：相似度"+confidence+"，两人为同一人的可能性很小</span>");
 		    }
 		},
 		error : function(rst) {
-			alert("系统繁忙，请稍后再试。");
+			$("#message").html("<span style='color:red;font-size:14px'>系统繁忙，请稍后再试</span>");
 		}
 	});
 }
@@ -139,8 +151,10 @@ function detectOne(title,image_url,el){
 			return_attributes:"gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus"
 		},
 		beforeSend : function(XMLHttpRequest) {
+		    $("#message").html("<span style='color:blue;font-size:14px'>搜索中，请稍后......</span>");
 		},
 		success : function(rst, textStatus) {
+		    $("#message").html("");
 		    console.log(rst);
 		    if(rst["error_message"]){
 		        alert(rst["error_message"]);
@@ -152,7 +166,7 @@ function detectOne(title,image_url,el){
 	        loadView(face.attributes,el);
 		},
 		error : function(rst) {
-			alert("系统繁忙，请稍后再试。");
+			 $("#message").html("<span style='color:blue;font-size:14px'>搜索中，请稍后......</span>");
 		}
 	});
 }
@@ -167,12 +181,14 @@ function facesearch(){
 			api_key : api_key,
 			api_secret:api_secret,
 			faceset_token:faceset_token,
-			return_result_count:2,
+			return_result_count:10,
 			image_url:image_url
 		},
 		beforeSend : function(XMLHttpRequest) {
+		     $("#message").html("<span style='color:blue;font-size:14px'>搜索中，请稍后......</span>");
 		},
 		success : function(rst, textStatus) {
+		    $("#message").html("");
 		    console.log(rst);
 		    if(rst["error_message"]){
 		        alert(rst["error_message"]);
@@ -181,7 +197,7 @@ function facesearch(){
 		    var results=rst.results;
 		    var html=[];
 		    if(!results){
-		        alert("对不起，指定的faceset没有找到结果。");
+		        $("#message").html("<span  style='color:red;font-size:14px'>对不起，指定的faceset没有找到结果</span>");
 		        return;
 		    }
 		    var status=false;
@@ -192,13 +208,13 @@ function facesearch(){
 		        }
 		    });
 		    if(!status){
-		         alert("对不起，指定的faceset没有找到结果。");
+		         $("#message").html("<span  style='color:red;font-size:14px'>对不起，指定的faceset没有找到结果</span>");
 		         return;
 		    }
             selectListByFaceTokens(html.join(","));
 		},
 		error : function(rst) {
-			alert("系统繁忙，请稍后再试。");
+			$("#message").html("<span style='color:red;font-size:14px'>系统繁忙，请稍后再试</span>");
 		}
 	});
 }
@@ -214,8 +230,10 @@ function removeallface(){
 			face_tokens:"RemoveAllFaceTokens"
 		},
 		beforeSend : function(XMLHttpRequest) {
+		 $("#message").html("<span style='color:blue;font-size:14px'>处理中，请稍后......</span>");
 		},
 		success : function(rst, textStatus) {
+		    $("#message").html("");
 		    console.log(rst);
 		    if(rst["error_message"]){
 		        alert(rst["error_message"]);
@@ -225,7 +243,7 @@ function removeallface(){
 		    alert("移除成功");
 		},
 		error : function(rst) {
-			alert("系统繁忙，请稍后再试。");
+			$("#message").html("<span style='color:red;font-size:14px'>系统繁忙，请稍后再试</span>");
 		}
 	});
 }
