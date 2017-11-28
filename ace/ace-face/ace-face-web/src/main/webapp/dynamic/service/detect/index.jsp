@@ -181,7 +181,7 @@ pageEncoding="utf-8"%>
                                class="file-uploader-one">
                         <div id="file-uploader-btn-one" class="upload-img"><i
                                 class="icons icon-upload"></i><span>本地上传</span></div>
-                        <button class="search-btn search-btn-one" id="btn-query" authority="false">搜索</button>
+                        <button class="search-btn search-btn-one" id="btn-query" authority="false">检测</button>
                         <input placeholder="图片URL" class="search-input search-input-one">
                     </div>
                 </div>

@@ -19,7 +19,7 @@ jQuery(function($) {
     });
     $("#btn-query").on('click',function(e) {
             e.preventDefault();
-            facesearch();
+            detectTwo(image_url);
 
      });
     initData();
