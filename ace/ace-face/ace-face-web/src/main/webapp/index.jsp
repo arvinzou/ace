@@ -206,7 +206,7 @@ pageEncoding="utf-8"%>
             </div>
             <h5 class="header-title">JSON数据</h5>
 
-            <textarea style="width:100%;height:200px" readonly class="resp-json">
+            <textarea style="width:100%;height:280px" readonly class="resp-json">
 
                 </textarea>
         </div>
