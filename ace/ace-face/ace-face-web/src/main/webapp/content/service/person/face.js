@@ -170,6 +170,40 @@ function detectOne(title,image_url,el){
 		}
 	});
 }
+
+function detectTwo(image_url){
+    console.log(image_url);
+	$.ajax({
+		type : "post",
+		url : 'https://api-cn.faceplusplus.com/facepp/v3/detect',
+		data : {
+			api_key : api_key,
+			api_secret:api_secret,
+			image_url:image_url,
+			return_attributes:"gender,age,smiling,headpose,facequality,blur,eyestatus,emotion,ethnicity,beauty,mouthstatus,eyegaze,skinstatus"
+		},
+		beforeSend : function(XMLHttpRequest) {
+		    $("#message").html("<span style='color:blue;font-size:14px'>处理中，请稍后......</span>");
+		    $("#rst-view").addClass("hide");
+
+		},
+		success : function(rst, textStatus) {
+
+		    $("#message").html("");
+		    $("textarea").val(JSON.stringify(rst, null, "\t"));
+		    console.log(rst);
+		    if(rst["error_message"]){
+		        alert(rst["error_message"]);
+		        return;
+		    }
+		    var face=rst.faces[0];
+	        loadView(face.attributes,"#rst-view");
+		},
+		error : function(rst) {
+			 $("#message").html("<span style='color:red;font-size:14px'>系统繁忙，请稍后再试</span>");
+		}
+	});
+}
 function facesearch(){
     var image_url=image_url1;
     console.log(image_url);

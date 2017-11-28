@@ -9,7 +9,7 @@ pageEncoding="utf-8"%>
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>人脸检测</title>
 </head>
-<jsp:include page="/dynamic/common/common.jsp"/>
+<jsp:include page="../../common/common.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/swiper/css/swiper.min.css">
 <style>
 .swiper-container1 {
@@ -216,7 +216,7 @@ pageEncoding="utf-8"%>
 </div>
 
 
-<jsp:include page="/dynamic/common/footer-1.jsp"/>
+<jsp:include page="../../common/footer-1.jsp"/>
 
 <link rel="stylesheet"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
@@ -233,7 +233,7 @@ pageEncoding="utf-8"%>
         src="${pageContext.request.contextPath}/content/service/detect/upload.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/person/face.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/swiper/js/swiper.min.js"></script>
-<jsp:include page="/dynamic/common/footer-2.jsp"/>
+<jsp:include page="../../common/footer-2.jsp"/>
 
 <div id="dialog-message" class="hide">
     <div id="uploader">
