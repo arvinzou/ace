@@ -185,7 +185,7 @@ function detectTwo(image_url){
 		beforeSend : function(XMLHttpRequest) {
 		    $("#message").html("<span style='color:blue;font-size:14px'>处理中，请稍后......</span>");
 		    $("#rst-view").addClass("hide");
-
+            $("textarea").val("");
 		},
 		success : function(rst, textStatus) {
 
