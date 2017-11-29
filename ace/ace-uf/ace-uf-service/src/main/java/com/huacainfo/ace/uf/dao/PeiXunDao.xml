@@ -5,8 +5,10 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
         <result column="dept" jdbcType="VARCHAR" property="dept"/>
-        <result column="teacher" jdbcType="VARCHAR" property="teacher"/>
+        <result column="trainees" jdbcType="VARCHAR" property="trainees"/>
         <result column="time" jdbcType="TIMESTAMP" property="time"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -22,7 +24,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, name, address, dept, teacher,  time,if(sysdate()>time,'1','0') as category, content, createUserId, createUserName,
+          id, name, address,latitude,longitude, dept, trainees,time,if(sysdate()>time,'1','0') as category, content, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
@@ -38,37 +40,70 @@
   </delete>
 
     <insert id="insert" parameterType="com.huacainfo.ace.uf.model.PeiXun">
-    insert into tz.peixun (id, name, address,
-      dept, teacher,time, content, createUserId,
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
-      #{dept,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR},
-      #{time,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+    insert into tz.peixun (
+                 id,
+                 name,
+                 address,
+                 latitude,
+                 longitude,
+                 dept,
+                 trainees,
+                 time,
+                 content,
+
+                 createUserId,
+                 createUserName,
+                 createDate,
+                 lastModifyUserId,
+                 lastModifyUserName,
+                 lastModifyDate
+             )
+    values (
+                  #{id,jdbcType=VARCHAR},
+                  #{name,jdbcType=VARCHAR},
+                  #{address,jdbcType=VARCHAR},
+                  #{latitude,jdbcType=DECIMAL},
+                  #{longitude,jdbcType=DECIMAL},
+                  #{dept,jdbcType=VARCHAR},
+                  #{trainees,jdbcType=VARCHAR},
+                  #{time,jdbcType=TIMESTAMP},
+                  #{content,jdbcType=VARCHAR},
+
+                  #{createUserId,jdbcType=VARCHAR},
+                  #{createUserName,jdbcType=VARCHAR},
+                  #{createDate,jdbcType=TIMESTAMP},
+                  #{lastModifyUserId,jdbcType=VARCHAR},
+                  #{lastModifyUserName,jdbcType=VARCHAR},
+                  #{lastModifyDate,jdbcType=TIMESTAMP}
+              )
   </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.PeiXun">
         update tz.peixun
-        set name = #{name,jdbcType=VARCHAR},
-        address = #{address,jdbcType=VARCHAR},
-        dept = #{dept,jdbcType=VARCHAR},
-        teacher = #{teacher,jdbcType=VARCHAR},
-        time = #{time,jdbcType=TIMESTAMP},
-        content = #{content,jdbcType=VARCHAR},
-        <if test='createUserId!=null and createUserId!=""'>
-            createUserId=#{createUserId,jdbcType=VARCHAR},
-        </if>
-        <if test='createUserName!=null and createUserName!=""'>
-            createUserName=#{createUserName,jdbcType=VARCHAR},
-        </if>
-        <if test='createDate!=null and createDate!=""'>
-            createDate=#{createDate,jdbcType=TIMESTAMP},
-        </if>
-        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        set
+            name = #{
+            name,
+            jdbcType=VARCHAR},
+            address = #{address,
+            jdbcType=VARCHAR},
+            latitude = #{latitude,jdbcType=DECIMAL},
+            longitude = #{longitude,jdbcType=DECIMAL},
+            dept = #{dept,jdbcType=VARCHAR},
+            trainees = #{trainees,jdbcType=VARCHAR},
+            time = #{time,jdbcType=TIMESTAMP},
+            content = #{content,jdbcType=VARCHAR},
+            <if test='createUserId!=null and createUserId!=""'>
+                createUserId=#{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test='createUserName!=null and createUserName!=""'>
+                createUserName=#{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test='createDate!=null and createDate!=""'>
+                createDate=#{createDate,jdbcType=TIMESTAMP},
+            </if>
+            lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
@@ -79,14 +114,21 @@
             and name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.teacher!=null and condition.teacher!=&quot;&quot;">
+        <if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">
             and name like
-            concat('%',#{condition.teacher,jdbcType=VARCHAR},'%')
+            concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')
         </if>
 
         <if test="condition.dept!=null and condition.dept!=&quot;&quot;">
             and name like
             concat('%',#{condition.dept,jdbcType=VARCHAR},'%')
+        </if>
+
+        <if test="condition.category==1">
+            and time &gt; now()
+        </if>
+        <if test="condition.category==2">
+            and time &lt; now()
         </if>
     </sql>
 

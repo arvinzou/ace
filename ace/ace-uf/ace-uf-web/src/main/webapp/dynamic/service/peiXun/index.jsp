@@ -88,7 +88,7 @@
             <span id="dept"></span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">培训老师</span><br>
-            <span id="teacher"></span>
+            <span id="trainees"></span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">培训时间</span><br>
             <span id="time"></span>

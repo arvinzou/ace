@@ -44,7 +44,7 @@ jQuery(function($) {
                                 var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
                                 var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
                                 addPhotoDom(gd.id);
-                                appendMapBtn("addr");
+                                appendMapBtn("address");
 							}
 						})
 			});
@@ -69,7 +69,7 @@ jQuery(function($) {
                     var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
                     var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
                     initPhoto(gd.id);
-                    appendMapBtn("addr");
+                    appendMapBtn("address");
                 }
             });
     });
@@ -172,6 +172,6 @@ function latitude(latitude){
 function longitude(longitude){
     $("#longitude").val(longitude);
 }
-function addr(addr){
-    $("#addr").val(addr);
+function addr(address){
+    $("#address").val(address);
 }

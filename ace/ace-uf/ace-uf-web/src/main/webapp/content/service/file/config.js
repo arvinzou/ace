@@ -1,7 +1,7 @@
 var cfg = {};
 //cfg.view_load_data_url = contextPath + '/file/selectPersonageByPrimaryKey.do';
 /*获取文件列表*/
-cfg.grid_load_data_url = contextPath + '/file/findFileList.do';
+cfg.grid_load_data_url = contextPath + '/file/findFilesList.do';
 /*
 * 添加新文件*/
 cfg.grid_add_data_url = contextPath + '/file/insertFile.do';

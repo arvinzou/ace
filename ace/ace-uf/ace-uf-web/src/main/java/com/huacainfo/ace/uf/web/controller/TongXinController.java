@@ -32,8 +32,7 @@ public class TongXinController extends UfBaseController {
 
     @RequestMapping(value = "/findTongXinList.do")
     @ResponseBody
-    public PageResult<TongXinVo> findTongXinList(TongXinQVo condition,
-                                                 PageParamNoChangeSord page) throws Exception {
+    public PageResult<TongXinVo> findTongXinList(TongXinQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<TongXinVo> rst = this.tongXinService
                 .findTongXinList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());

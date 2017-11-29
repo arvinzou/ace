@@ -32,7 +32,7 @@ public class FileServiceImpl implements FileService {
     public PageResult<FileVo> findFileList(FileQVo condition,int start, int limit, String orderBy) throws Exception {
         this.logger.info("===============================fileserviceImpl=============================");
         PageResult<FileVo> rst = new PageResult<FileVo>();
-        List<FileVo> list = this.fileDao.findFileList(condition,start, start + limit, orderBy);
+        List<FileVo> list = this.fileDao.findFileList(condition,start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.fileDao.findFileCount(condition);
@@ -68,8 +68,9 @@ public class FileServiceImpl implements FileService {
         if (CommonUtils.isBlank(suffix)) {
             return new MessageResponse(1, "文件后缀不能为空");
         }
-        this.logger.info(suffix.toString());
         obj.setSuffix(suffix);
+
+
         obj.setLastModifyDate(new Date());
         obj.setLastModifyUserName(userProp.getName());
         obj.setLastModifyUserId(userProp.getUserId());
@@ -110,6 +111,13 @@ public class FileServiceImpl implements FileService {
             return new MessageResponse(1, "文件后缀不能为空");
         }
         obj.setSuffix(suffix);
+        obj.setFileSize("27.1k");
+        if (CommonUtils.isBlank(obj.getFileSize())) {
+            return new MessageResponse(1, "统战文件大小不能为空");
+        }
+        obj.setLastModifyDate(new Date());
+        obj.setLastModifyUserName(userProp.getName());
+        obj.setLastModifyUserId(userProp.getUserId());
         obj.setCreateDate(new Date());
         obj.setCreateUserName(userProp.getName());
         obj.setCreateUserId(userProp.getUserId());

@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.FuPin">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="category" jdbcType="VARCHAR" property="category" />
-    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="category" jdbcType="CHAR" property="category" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="latitude" jdbcType="DECIMAL" property="latitude" />
     <result column="longitude" jdbcType="DECIMAL" property="longitude" />
     <result column="time" jdbcType="DATE" property="time" />
@@ -22,7 +22,7 @@
 
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, category, addr, latitude, longitude, time, content, createUserId, createUserName,
+    id, name, category, address, latitude, longitude, time, content, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
@@ -39,23 +39,43 @@
   </delete>
 
   <insert id="insert" parameterType="com.huacainfo.ace.uf.model.FuPin">
-    insert into tz.fupin (id, name, category,
-      addr, latitude, longitude, 
-      time, content, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
-      #{addr,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, 
-      #{time,jdbcType=DATE}, #{content,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+    insert into tz.fupin (
+          id,
+          name,
+          category,
+          address,
+          latitude,
+          longitude,
+          time,
+          content,
+          createUserId,
+          createUserName,
+          createDate,
+          lastModifyUserId,
+          lastModifyUserName,
+          lastModifyDate)
+    values (
+          #{id,jdbcType=VARCHAR},
+          #{name,jdbcType=VARCHAR},
+          #{category,jdbcType=CHAR},
+          #{address,jdbcType=VARCHAR},
+          #{latitude,jdbcType=DECIMAL},
+          #{longitude,jdbcType=DECIMAL},
+          #{time,jdbcType=DATE},
+          #{content,jdbcType=VARCHAR},
+          #{createUserId,jdbcType=VARCHAR},
+          #{createUserName,jdbcType=VARCHAR},
+          #{createDate,jdbcType=TIMESTAMP},
+          #{lastModifyUserId,jdbcType=VARCHAR},
+          #{lastModifyUserName,jdbcType=VARCHAR},
+          #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.FuPin">
     update tz.fupin
     set name = #{name,jdbcType=VARCHAR},
-    category = #{category,jdbcType=VARCHAR},
-      addr = #{addr,jdbcType=VARCHAR},
+    category = #{category,jdbcType=CHAR},
+    address = #{address,jdbcType=VARCHAR},
       latitude = #{latitude,jdbcType=DECIMAL},
       longitude = #{longitude,jdbcType=DECIMAL},
       time = #{time,jdbcType=DATE},
@@ -85,7 +105,7 @@
       concat('%',#{condition.name,jdbcType=VARCHAR},'%')
     </if>
     <if test="condition.category!=null and condition.category!=&quot;&quot;">
-      and category =#{condition.categorycategory,jdbcType=VARCHAR}
+      and category =#{condition.category,jdbcType=CHAR}
     </if>
   </sql>
 

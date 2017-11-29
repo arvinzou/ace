@@ -36,7 +36,7 @@ var _colModel = function() {
             }
         },
         {
-            name : 'addr',
+            name : 'address',
             editable : true,
             hidden : true,
             width : 100,

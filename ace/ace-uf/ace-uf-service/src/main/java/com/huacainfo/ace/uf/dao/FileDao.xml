@@ -37,6 +37,7 @@
                 t.type,
                 t.file,
                 t.suffix,
+                t.fileSize,
                 t.createUserId,
                 t.createUserName,
                 t.createDate,
@@ -50,7 +51,7 @@
                     ORDER BY m.${orderBy}
                 </when>
                 <otherwise>
-                    order by convert(m.name using gbk) asc
+                    order  by lastModifyDate desc
                 </otherwise>
             </choose>
             limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -63,6 +64,7 @@
         type = #{type,jdbcType=VARCHAR},
         suffix = #{suffix,jdbcType=VARCHAR},
         file = #{file,jdbcType=VARCHAR},
+        fileSize=#{fileSize,jdbcType=VARCHAR},
         <if test='createUserId!=null and createUserId!=""'>
             createUserId=#{createUserId,jdbcType=VARCHAR},
         </if>
@@ -95,6 +97,7 @@
             type,
             file,
             suffix,
+            fileSize
             createUserId,
             createUserName,
             createDate,
@@ -109,6 +112,7 @@
             #{type,jdbcType=VARCHAR},
             #{file,jdbcType=VARCHAR},
             #{suffix,jdbcType=VARCHAR},
+            #{fileSize,jdbcType=VARCHAR},
             #{createUserId,jdbcType=VARCHAR},
             #{createUserName,jdbcType=VARCHAR},
             #{createDate,jdbcType=TIMESTAMP},

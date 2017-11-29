@@ -17,7 +17,7 @@ public class DiaoYan {
 
     private Date published;
 
-    private String photo;
+    private String cover;
 
     private String createUserId;
 
@@ -87,12 +87,12 @@ public class DiaoYan {
         this.published = published;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getCover() {
+        return cover;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo == null ? null : photo.trim();
+    public void setCover(String cover) {
+        this.cover = cover == null ? null : cover.trim();
     }
 
     public String getCreateUserId() {
@@ -154,7 +154,7 @@ public class DiaoYan {
                 ", media='" + media + '\'' +
                 ", url='" + url + '\'' +
                 ", published=" + published +
-                ", photo='" + photo + '\'' +
+                ", cover='" + cover + '\'' +
                 ", createUserId='" + createUserId + '\'' +
                 ", createUserName='" + createUserName + '\'' +
                 ", createDate=" + createDate +

@@ -99,7 +99,7 @@
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.category!=null and condition.category!=&quot;&quot;">
-            and category =#{condition.category,jdbcType=VARCHAR}
+            and category =#{condition.category,jdbcType=CHAR}
         </if>
     </sql>
 

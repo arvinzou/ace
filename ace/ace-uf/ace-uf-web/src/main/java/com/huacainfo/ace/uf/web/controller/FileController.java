@@ -31,11 +31,9 @@ public class FileController extends UfBaseController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/findFileList.do")
+    @RequestMapping(value = "/findFilesList.do")
     @ResponseBody
     public PageResult<FileVo> findFileList(FileQVo condition,PageParamNoChangeSord page) throws Exception {
-        this.logger.info(condition.toString());
-        this.logger.info("===============================file=============================");
         PageResult<FileVo> rst = this.fileService.findFileList(condition,page.getStart(), page.getLimit(),page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

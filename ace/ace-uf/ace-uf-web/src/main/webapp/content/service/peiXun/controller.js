@@ -46,6 +46,7 @@ jQuery(function ($) {
                     var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
                     initPhoto(gd.id);*/
                     appendUploadBtn("photo");
+                    appendMapBtn("address");
                 }
             })
     });
@@ -70,6 +71,7 @@ jQuery(function ($) {
                     var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
                     initPhoto(gd.id);
                     appendUploadBtn("photo");
+                    appendMapBtn("address");
                 }
             })
     });
@@ -155,4 +157,34 @@ function loadView(id) {
             alert("加载错误！");
         }
     });
+}
+
+/**
+ * 添加地图位置的指针*/
+function appendMapBtn(id) {
+    var html = new Array();
+    html
+        .push("<a id='btn-map-add-"
+            + id
+            + "' class='ace-icon fa fa-location-arrow bigger-110' href='javascript:false'>选取</a>");
+    $("#" + id).after(html.join(''));
+    $('#btn-map-add-'+ id).on('click', function() {
+        window.open(portalPath+"/dynamic/common/map.jsp");
+    });
+}
+
+
+
+/**
+ * 地图自动填写
+ * @param latitude
+ */
+function latitude(latitude){
+    $("#latitude").val(latitude);
+}
+function longitude(longitude){
+    $("#longitude").val(longitude);
+}
+function addr(address){
+    $("#address").val(address);
 }

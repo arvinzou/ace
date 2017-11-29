@@ -42,7 +42,6 @@
                             valueField:'code',
                             textField:'name',
                             panelHeight:'auto'">
-
                     <button class="btn btn-info" id="searchFile"
                             authority="${pageContext.request.contextPath}/file/findFilesList.do">
                         查找
