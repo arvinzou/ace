@@ -76,7 +76,14 @@ var _colModel = function() {
 				},
 				editoptions : {
 					value : odparse("01")
-				}
+				},
+				formoptions : {
+                    elmprefix : "",
+                    elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+                },
+                editrules : {
+                    required : true
+                }
 			},
 			{
 				name : 'idCard',
@@ -238,7 +245,14 @@ var _colModel = function() {
 				},
 				editoptions : {
 					value : odparse("05")
-				}
+				},
+				formoptions : {
+                    elmprefix : "",
+                    elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+                },
+                editrules : {
+                    required : true
+                }
 			}, {
 				name : 'seat',
 				hidden:true,

@@ -301,7 +301,7 @@ function inertTopicNorm(id, p) {
 		url : contextPath + "/topic/insertTopicNorm.do",
 		data : {
 			topicId : id,
-			name:param._q,
+			name:params._q,
 			jsons : JSON.stringify(params)
 		},
 		beforeSend : function(XMLHttpRequest) {

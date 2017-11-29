@@ -303,7 +303,7 @@
 		department.status='1' and department.syid=#{syid}) CHILD_COUNT
 		FROM
 		department t where t.status='1' and t.syid=#{syid}
-		and (t.department_id =#{pid} or t.parent_department_id=#{pid})
+
 
 		ORDER BY
 		t.department_id

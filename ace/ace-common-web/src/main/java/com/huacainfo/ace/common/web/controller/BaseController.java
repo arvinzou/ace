@@ -39,6 +39,7 @@ public class BaseController implements Serializable {
 
 	protected UserProp getCurUserProp() {
 		Object object = getRequest().getSession().getAttribute(CommonKeys.SESSION_USERPROP_KEY);
+		logger.info("{}",object);
 		return (UserProp) object;
 	}
 
