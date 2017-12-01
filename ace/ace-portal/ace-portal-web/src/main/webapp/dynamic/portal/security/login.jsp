@@ -72,10 +72,7 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
 <!-- BEGIN LOGO -->
 <div class="logo">
 
-    <div style="color: red;font-size:16px">
-        ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}
-        ${sessionScope['j_captcha_error']}
-    </div>
+
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
@@ -86,7 +83,9 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
           method="post">
 
         <div class="form-title">
-
+            <span style="color: red;font-size:16px">${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}${sessionScope['j_captcha_error']}</span>
+        </div>
+        <div class="form-title">
             <span class="form-subtitle">欢迎，请登录.</span>
         </div>
         <div class="alert alert-danger display-hide">
@@ -362,7 +361,7 @@ jQuery(function($) {
 <!-- END THEME LAYOUT SCRIPTS -->
 </body>
 <style>
-    .login .logo {
+.login .logo {
     margin: 0px auto 0;
     padding: 15px;
     text-align: left;

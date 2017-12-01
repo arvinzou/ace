@@ -13,12 +13,11 @@ pageEncoding="utf-8"%>
 <link rel="stylesheet" href="${portalPath}/content/common/swiper/css/swiper.min.css">
 <style>
 .swiper-container1 {
-      width: 90%;
       padding-top: 50px;
       padding-bottom: 50px;
     }
     .swiper-container2 {
-      width: 90%;
+      width: 50%;
       padding-top: 50px;
       padding-bottom: 50px;
     }
