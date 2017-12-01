@@ -6,6 +6,7 @@ var glass={"None":"不佩戴眼镜","Dark":"佩戴墨镜","Normal":"佩戴普通
 var headpose={"pitch_angle":"抬头","roll_angle":"旋转（平面旋转）","yaw_angle":"摇头"};
 var emotion={"anger":"愤怒","disgust":"厌恶","fear":"恐惧","happiness":"高兴","neutral":"平静","sadness":"伤心","surprise":"惊讶"};
 var ethnicity={"Asian":"亚洲人","White":"白人","Black":"黑人"};
+var cfd=80;
 function detect(id,image_url){
     console.log(image_url);
 	$.ajax({
@@ -125,7 +126,7 @@ function compare(image_url1,image_url2){
 		        return;
 		    }
 		    var confidence=rst.confidence;
-		    if(confidence>90){
+		    if(confidence>cfd){
 
 		        $("#message").html("<span style='color:blue;font-size:14px'>比对结果：相似度"+confidence+"，两人为同一人</span>");
 		    }else{
@@ -237,7 +238,7 @@ function facesearch(){
 		    }
 		    var status=false;
 		    $(results).each(function(i,o){
-		        if(o.confidence>=90){
+		        if(o.confidence>=cfd){
 		            html.push(o.face_token);
 		            status=true;
 		        }

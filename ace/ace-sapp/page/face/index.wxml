@@ -1,0 +1,40 @@
+<view class="page" style="height:100%">
+
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">人像建档</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">人像档案</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">人脸识别</view>
+
+  </view>
+
+  <swiper current="{{currentTab}}" class="swiper-box" bindchange="bindChange">
+    <swiper-item>
+       <view class="page-body-info">
+          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+          <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </view>
+      <image wx:if="{{o.photo}}" bindtap="previewPhoto" class="photo" mode="aspectFill"  src="{{o.photo}}" />
+        <button disabled="{{disabled}}" loading="{{loading}}"  bindtap="chooseImage" style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;"  >拍摄</button>
+    
+    </swiper-item>
+    <swiper-item>
+        <view class="weui-grids-nav">
+            <block wx:for="{{list}}" wx:key="{{item.unionId}}">
+                <navigator   open-type="navigate" class="weui-grid-nav" hover-class="weui-grid_active-nav">
+                    <image class="weui-grid__icon-nav" src="{{item.photo}}" />
+                    <view class="weui-grid__label-nav">{{item.nickName}}</view>
+                </navigator>
+            </block>
+        </view>
+    </swiper-item>
+    <swiper-item>
+     <view class="page-body-info">
+          <image wx:if="{{searched}}" class="userinfo-avatar" src="{{m.photo}}"></image>
+          <text  wx:if="{{searched}}" class="userinfo-nickname">{{m.nickName}}</text>
+      </view>
+ <text  wx:if="{{errord}}" class="errord">查找失败，档案库无此人</text>
+       <image wx:if="{{searched}}" bindtap="previewPhoto" class="photo" mode="aspectFill"  src="{{photo}}" />
+        <button disabled="{{disabled}}" loading="{{loading}}"  bindtap="chooseImageSearch" style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;margin-top:100rpx"  >拍摄</button>
+    </swiper-item>
+  </swiper>
+</view>
