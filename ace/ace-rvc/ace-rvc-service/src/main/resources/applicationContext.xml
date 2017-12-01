@@ -18,7 +18,6 @@
 			<list>
 				<value>classpath:config.properties</value>
 				<value>classpath:special.properties</value>
-				<value>classpath:dubbo.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -28,7 +27,5 @@
 	<import resource="classpath:spring/spring-ace-common-kafka.xml" />
 	<import resource="classpath:spring/spring-ace-common-dao.xml" />
 	<import resource="classpath:spring/spring-ace-rvc-service.xml" />
-	<import resource="classpath:dubbo/dubbo-ace-rvc-provider.xml" />
-	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
 
 </beans>
