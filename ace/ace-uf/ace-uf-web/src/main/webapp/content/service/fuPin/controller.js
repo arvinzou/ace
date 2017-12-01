@@ -43,8 +43,8 @@ jQuery(function($) {
                                 $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
                                 var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
                                 var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
-                                addPhotoDom(gd.id);
-                                appendMapBtn("addr");
+                                appendMapBtn("address");
+                                appendUploadBtn("cover");
 							}
 						})
 			});
@@ -69,7 +69,8 @@ jQuery(function($) {
                     var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
                     var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
                     initPhoto(gd.id);
-                    appendMapBtn("addr");
+                    appendMapBtn("address");
+                    appendUploadBtn("cover");
                 }
             });
     });
@@ -132,7 +133,7 @@ function loadView(id) {
 		success : function(rst, textStatus) {
 			$.each(rst.value, function(key, value) {
 				if (key == 'category'){
-                	value = rsd(value, '106');
+                	value = rsd(value, '109');
                 }
                 if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
                  	value = Common.DateFormatter(value);
@@ -172,6 +173,6 @@ function latitude(latitude){
 function longitude(longitude){
     $("#longitude").val(longitude);
 }
-function addr(addr){
-    $("#addr").val(addr);
+function addr(address){
+    $("#address").val(address);
 }

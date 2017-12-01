@@ -51,7 +51,7 @@ public class FuPinServiceImpl implements FuPinService {
 		if (CommonUtils.isBlank(o.getName())) {
 			return new MessageResponse(1, "扶贫名称名称不能为空");
 		}
-		if (CommonUtils.isBlank(o.getAddr())){
+		if (CommonUtils.isBlank(o.getAddress())){
 			return new MessageResponse(1, "扶贫地址不能为空");
 		}
 
@@ -82,7 +82,7 @@ public class FuPinServiceImpl implements FuPinService {
 		if (CommonUtils.isBlank(o.getName())) {
 			return new MessageResponse(1, "扶贫名称名称不能为空");
 		}
-		if (CommonUtils.isBlank(o.getAddr())){
+		if (CommonUtils.isBlank(o.getAddress())){
 			return new MessageResponse(1, "扶贫地址不能为空");
 		}
 

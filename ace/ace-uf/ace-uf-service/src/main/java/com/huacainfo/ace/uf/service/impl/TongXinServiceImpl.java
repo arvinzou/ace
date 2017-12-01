@@ -33,10 +33,6 @@ public class TongXinServiceImpl implements TongXinService {
 			int limit, String orderBy) throws Exception {
 		PageResult<TongXinVo> rst = new PageResult<TongXinVo>();
 		List<TongXinVo> list = this.tongXinDao.findList(condition, start, start + limit, orderBy);
-
-		for(TongXinVo tx:list){
-			this.logger.info(tx.toString());
-		}
 		rst.setRows(list);
 		if (start <= 1) {
 			int allRows = this.tongXinDao.findCount(condition);

@@ -19,7 +19,7 @@ jQuery(function($) {
     });
     $("#btn-query").on('click',function(e) {
             e.preventDefault();
-            detectTwo(image_url);
+            detectTwo(image_url1);
 
      });
     initData();

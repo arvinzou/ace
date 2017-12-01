@@ -1,6 +1,14 @@
 package com.huacainfo.ace.uf.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
+
+/**
+ * Demo class
+ *
+ * @author wn
+ * @date 2017/11/28
+ */
 
 public class PeiXun {
     private String id;
@@ -9,15 +17,21 @@ public class PeiXun {
 
     private String address;
 
+    private BigDecimal latitude;
+
+    private BigDecimal longitude;
+
     private String dept;
 
-    private String teacher;
+    private String trainees;
 
     private String category;
 
     private Date time;
 
     private String content;
+
+    private String cover;
 
     private String createUserId;
 
@@ -51,6 +65,22 @@ public class PeiXun {
         return address;
     }
 
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
     }
@@ -63,12 +93,12 @@ public class PeiXun {
         this.dept = dept == null ? null : dept.trim();
     }
 
-    public String getTeacher() {
-        return teacher;
+    public String getTrainees() {
+        return trainees;
     }
 
-    public void setTeacher(String teacher) {
-        this.teacher = teacher == null ? null : teacher.trim();
+    public void setTrainees(String trainees) {
+        this.trainees = trainees == null ? null : trainees.trim();
     }
 
     public String getCategory() {
@@ -143,6 +173,13 @@ public class PeiXun {
         this.lastModifyDate = lastModifyDate;
     }
 
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 
     @Override
     public String toString() {
@@ -150,8 +187,10 @@ public class PeiXun {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
                 ", dept='" + dept + '\'' +
-                ", teacher='" + teacher + '\'' +
+                ", trainees='" + trainees + '\'' +
                 ", category='" + category + '\'' +
                 ", time=" + time +
                 ", content='" + content + '\'' +

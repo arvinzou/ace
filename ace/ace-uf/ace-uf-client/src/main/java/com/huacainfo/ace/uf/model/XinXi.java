@@ -1,5 +1,6 @@
 package com.huacainfo.ace.uf.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class XinXi {
@@ -17,7 +18,7 @@ public class XinXi {
 
     private Date published;
 
-    private String photo;
+    private String cover;
 
     private String photos;
 
@@ -89,12 +90,12 @@ public class XinXi {
         this.published = published;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getCover() {
+        return cover;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo == null ? null : photo.trim();
+    public void setCover(String cover) {
+        this.cover = cover == null ? null : cover.trim();
     }
 
     public String getCreateUserId() {
@@ -163,7 +164,7 @@ public class XinXi {
                 ", media='" + media + '\'' +
                 ", url='" + url + '\'' +
                 ", published=" + published +
-                ", photo='" + photo + '\'' +
+                ", cover='" + cover + '\'' +
                 ", photos='" + photos + '\'' +
                 ", createUserId='" + createUserId + '\'' +
                 ", createUserName='" + createUserName + '\'' +

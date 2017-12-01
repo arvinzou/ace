@@ -6,8 +6,8 @@
 // 小程序后台服务解决方案：https://www.qcloud.com/solution/la
 var host = "14592619.qcloud.la";
 
-var server = "http://127.0.0.1"
-var serverfile = "http://127.0.0.1"
+var server = "https://zx.huacainfo.com";
+var serverfile = "http://zx.huacainfo.com/";
 var config = {
     // 下面的地址配合云端 Server 工作
     host,
@@ -59,10 +59,27 @@ var config = {
     selectFreeGroupTree: `${server}/uf/www/selectFreeGroupTree.do`,
     selectPersonageTree: `${server}/uf/www/selectPersonageTree.do`,
     sendCmccByMobile: `${server}/uf/www/sendCmccByMobile.do`,
-    // 统战文件的请求路径。
-    findFilesList: `${server}/uf/www/findFilesList.do`,
-    
-
+    // 获取关于统战文件路径。
+    findFilesList:`${server}/uf/www/findFilesList.do`,
+    selectFilesById: `${server}/uf/www/selectContentByPrimaryKey.do`,
+    //获取关于同心工程路径。
+    findConcentricList: `${server}/uf/www/findTongXinList.do`,
+    selectConcentricById: `${server}/uf/www/selectTongXinByPrimaryKey.do`,
+    // 获取关于培训教育路径
+    findEducationList: `${server}/uf/www/findPeiXunList.do`,
+    selectEducationById: `${server}/uf/www/selectPeiXunByPrimaryKey.do`,
+    //获取关于精准扶贫路径
+    findPovertyAlleviationList: `${server}/uf/www/findFuPinList.do`,
+    selectPovertyAlleviationById: `${server}/uf/www/selectFuPinByPrimaryKey.do`,
+    //获取关于统战信息路径
+    findMessageList: `${server}/uf/www/findXinXiList.do`,
+    selectMessageById: `${server}/uf/www/selectXinXiByPrimaryKey.do`,
+    //获取关于统战调研路径
+    findResearchList: `${server}/uf/www/findDiaoYanList.do`,
+    selectResearchById: `${server}/uf/www/selectDiaoYanByPrimaryKey.do`, 
+    //获取关于统战宣传路径
+    findPropagandaList: `${server}/uf/www/findXuanChuanList.do`,
+    selectPropagandaById: `${server}/uf/www/selectXuanChuanByPrimaryKey.do`,
 };
 module.exports = config
 

@@ -1,0 +1,6 @@
+<template name="cell">
+      <view  id="id" class="tableView"  bindtap="selectedCell"  >
+        <view class="titleView">{{title}}</view>
+        <image class="imageView" src="/pages/image/{{imageSource}}" mode="scaleToFill"></image>
+    </view>
+</template>

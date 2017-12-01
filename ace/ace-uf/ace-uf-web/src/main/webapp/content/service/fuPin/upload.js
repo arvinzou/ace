@@ -30,7 +30,7 @@ function init_uploader(config) {
 				},
 
 				url : config.url,
-				flash_swf_url : portalPath
+                flash_swf_url : portalPath
 						+ '/content/plupload-2.1.2/js/Moxie.swf',
 				silverlight_xap_url : portalPath
 						+ '/content/plupload-2.1.2/js/Moxie.xap',
@@ -286,66 +286,3 @@ $.ajax({
 	});
 }
 
-
-
-function addPhotoDom(id){
-    var html=new Array();
-    html.push('<ul class="ace-thumbnails clearfix">');
-    html.push('<li>');
-    html.push('<a href="javascript:false"><img style="padding:20px" alt="60x60" id="btn-image-upload" class="photo" src="'+portalPath+'/content/common/image/add.png"></a>');
-    html.push('</li>');
-    html.push('</ul>');
-    $("#custom-dia").html(html.join(""));
-    var $overflow = '';
-    var colorbox_params = {
-        rel: 'colorbox',
-        reposition:true,
-        scalePhotos:true,
-        scrolling:false,
-        previous:'<i class="ace-icon fa fa-arrow-left"></i>',
-        next:'<i class="ace-icon fa fa-arrow-right"></i>',
-        close:'&times;',
-        current:'{current} of {total}',
-        maxWidth:'100%',
-        maxHeight:'100%',
-        onOpen:function(){
-            $overflow = document.body.style.overflow;
-            document.body.style.overflow = 'hidden';
-        },
-        onClosed:function(){
-            document.body.style.overflow = $overflow;
-        },
-        onComplete:function(){
-            $.colorbox.resize();
-        }
-    };
-
-    $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
-
-    $('#btn-image-upload').on('click',function() {
-        var config = {
-            extensions : "jpg,gif,png,bmp,jpeg",
-            url : contextPath
-            + '/organizationSub/uploadFile.do',
-            target : "grid",
-            multipart_params : {
-                id : id
-            }
-        };
-        reset_uploader(config);
-        $("#tt").addClass('hide');
-        var dialog = $("#dialog-message").removeClass('hide').dialog({
-            modal : true,
-            width : 750,
-            title : "<div class='widget-header widget-header-small'><div class='widget-header-pd' >图片上传</div></div>",
-            title_html : true,
-            buttons : [{
-                html : "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class" : "btn btn-info btn-xs",
-                click : function() {
-                    $(this).dialog("close");
-                }
-            }]
-        });
-    });
-}

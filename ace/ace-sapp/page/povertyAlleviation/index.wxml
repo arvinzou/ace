@@ -1,0 +1,57 @@
+<!--导航条-->
+<view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+</view>
+
+<!--进行中-->
+<view class='ing' hidden="{{currentTab!==0}}">
+
+    <block wx:for-items="{{povertyAlleviationIng.List}}" wx:for-item="item" wx:key="{{item.id}}">
+        <navigator class='content' bindtap="listClick" data-id='{{item.id}}'>
+            <view class='content_img'>
+                <image class='cover' src='{{serverfile}}{{item.cover}}'></image>
+            </view>
+            <view class='content_text'>
+                <view class='title'>{{item.name}}</view>
+                <view class='time msg'>
+                    <image class='icon_icon' src='../../image/time_icon.png' mode="widthFix"></image>
+                    <text class='text_text'>起始时间：{{item.time}}</text>
+                </view>
+                <view class='dept msg'>
+                    <image class='icon_icon' src='../../image/det_icon.png' mode="widthFix"></image>
+                    <text class='text_text'>组织单位：武陵区委统战部</text>
+                </view>
+                <view class='address msg'>
+                    <image class='icon_icon' src='../../image/addr_icon.png' mode="widthFix"></image>
+                    <text class='text_text'>扶贫地点：{{item.address}}</text>
+                </view>
+            </view>
+        </navigator>
+    </block>
+    <view class="loading" hidden="{{!povertyAlleviationIng.Loadingstatus}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!povertyAlleviationIng.LoadOver}}">已加载全部</view>
+
+
+</view>
+
+<!--已结束-->
+<view class='end' hidden="{{currentTab!==1}}">
+    <block wx:for-items="{{povertyAlleviationEnd.List}}" wx:for-item="item" wx:key="{{item.id}}">
+        <navigator class="content_end" bindtap="listClick" data-id='{{item.id}}'>
+            <view class='content_end_img'>
+                <image class='end_img' src='{{serverfile}}{{item.cover}}'>
+                </image>
+            </view>
+            <view class='content_end_text'>
+                <view class='end_title'>{{item.name}}</view>
+                <view class='end_address'f>扶贫地点：{{item.address}}</view>
+            </view>
+            <view class='flag'>
+                <image class='flagImg' src='../../image/ending.png'></image>
+            </view>
+        </navigator>
+    </block>
+    <view class="loading" hidden="{{!povertyAlleviationEnd.Loadingstatus}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!povertyAlleviationEnd.LoadOver}}">已加载全部</view>
+
+</view>

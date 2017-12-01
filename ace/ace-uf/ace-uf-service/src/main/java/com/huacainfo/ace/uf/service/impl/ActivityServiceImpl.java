@@ -12,6 +12,7 @@ import com.huacainfo.ace.uf.model.Activity;
 import com.huacainfo.ace.uf.service.ActivityService;
 import com.huacainfo.ace.uf.vo.ActivityQVo;
 import com.huacainfo.ace.uf.vo.ActivityVo;
+import com.huacainfo.ace.uf.vo.TongXinVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

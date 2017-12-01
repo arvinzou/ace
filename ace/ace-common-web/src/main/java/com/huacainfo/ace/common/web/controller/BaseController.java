@@ -56,7 +56,10 @@ public class BaseController implements Serializable {
 	}
 
 	protected WxUser getCurWxUser() {
+
+
 		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+		//判断获取数据是否为空
 		if(CommonUtils.isBlank(_3rd_session)){
 			return null;
 		}

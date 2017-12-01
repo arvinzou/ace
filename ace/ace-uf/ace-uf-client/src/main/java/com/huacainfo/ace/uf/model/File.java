@@ -54,6 +54,10 @@ public class File {
      */
     private Date lastModifyDate;
 
+    /**
+     *文件大小
+     */
+    private String fileSize;
 
     public String getId() {
         return id;
@@ -151,13 +155,22 @@ public class File {
         this.suffix = suffix;
     }
 
+
+    public String getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(String fileSize) {
+        this.fileSize = fileSize;
+    }
+
     public File() {
     }
 
     @Override
     public String toString() {
         return "File{" +
-                "fielId='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", remark='" + remark + '\'' +
                 ", type='" + type + '\'' +
@@ -169,6 +182,7 @@ public class File {
                 ", lastModifyUserId='" + lastModifyUserId + '\'' +
                 ", lastModifyUserName='" + lastModifyUserName + '\'' +
                 ", lastModifyDate=" + lastModifyDate +
+                ", fileSize='" + fileSize + '\'' +
                 '}';
     }
 }

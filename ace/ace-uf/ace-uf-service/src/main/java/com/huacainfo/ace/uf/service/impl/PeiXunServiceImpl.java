@@ -51,7 +51,7 @@ public class PeiXunServiceImpl implements PeiXunService {
 			throws Exception {
 		o.setId(UUID.randomUUID().toString());
 
-		
+		this.logger.info(o.getLongitude().toString());
 		int temp = this.peiXunDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "推文名称重复！");

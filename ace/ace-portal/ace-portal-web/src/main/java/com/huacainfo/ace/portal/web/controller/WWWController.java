@@ -146,30 +146,30 @@ public class WWWController extends PortalBaseController {
 	public List<Map<String,Object>> selectWxUser()throws Exception{
 		return this.wxUserService.selectWxUser(this.getParams());
 	}
-	@RequestMapping(value = "/updateFaceToken.do")
-	@ResponseBody
-	public MessageResponse updateFaceToken(@RequestParam MultipartFile[] file, String id, String collectionName)throws Exception{
-		String image_url=null;
-		String unionId=null;
-		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
-		File tmp = new File(dir);
-		if (!tmp.exists()) {
-			tmp.mkdirs();
-		}
-		for (MultipartFile o : file) {
-			File dest = new File(dir + File.separator + o.getName());
-			o.transferTo(dest);
-			String fileName=this.fileSaver.saveFile(dest, o.getOriginalFilename());
-			image_url="http://zx.huacainfo.com/"+fileName;
-			dest.delete();
-		}
-		if(CommonUtils.isNotEmpty(this.getCurWxUser())){
-			unionId=this.getCurWxUser().getUnionId();
-		}else{
-			unionId=id;
-		}
-		return this.wxUserService.updateFaceToken(image_url,unionId);
-	}
+//	@RequestMapping(value = "/updateFaceToken.do")
+//	@ResponseBody
+//	public MessageResponse updateFaceToken(@RequestParam MultipartFile[] file, String id, String collectionName)throws Exception{
+//		String image_url=null;
+//		String unionId=null;
+//		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+//		File tmp = new File(dir);
+//		if (!tmp.exists()) {
+//			tmp.mkdirs();
+//		}
+//		for (MultipartFile o : file) {
+//			File dest = new File(dir + File.separator + o.getName());
+//			o.transferTo(dest);
+//			String fileName=this.fileSaver.saveFile(dest, o.getOriginalFilename());
+//			image_url="http://zx.huacainfo.com/"+fileName;
+//			dest.delete();
+//		}
+//		if(CommonUtils.isNotEmpty(this.getCurWxUser())){
+//			unionId=this.getCurWxUser().getUnionId();
+//		}else{
+//			unionId=id;
+//		}
+//		return this.wxUserService.updateFaceToken(image_url,unionId);
+//	}
 
 	@RequestMapping(value = "/selectWxUserByPrimaryKey.do")
 	@ResponseBody
@@ -177,24 +177,24 @@ public class WWWController extends PortalBaseController {
 		return this.wxUserService.selectWxUserByPrimaryKey(id);
 	}
 
-	@RequestMapping(value = "/searchFace.do")
-	@ResponseBody
-	public SingleResult<WxUser> searchFace(@RequestParam MultipartFile[] file)throws Exception{
-		String image_url=null;
-		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
-		File tmp = new File(dir);
-		if (!tmp.exists()) {
-			tmp.mkdirs();
-		}
-		for (MultipartFile o : file) {
-			File dest = new File(dir + File.separator + o.getName());
-			o.transferTo(dest);
-			String fileName=this.fileSaver.saveFile(dest, o.getOriginalFilename());
-			image_url="http://zx.huacainfo.com/"+fileName;
-			dest.delete();
-		}
-		return this.wxUserService.searchFace(image_url);
-	}
+//	@RequestMapping(value = "/searchFace.do")
+//	@ResponseBody
+//	public SingleResult<WxUser> searchFace(@RequestParam MultipartFile[] file)throws Exception{
+//		String image_url=null;
+//		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+//		File tmp = new File(dir);
+//		if (!tmp.exists()) {
+//			tmp.mkdirs();
+//		}
+//		for (MultipartFile o : file) {
+//			File dest = new File(dir + File.separator + o.getName());
+//			o.transferTo(dest);
+//			String fileName=this.fileSaver.saveFile(dest, o.getOriginalFilename());
+//			image_url="http://zx.huacainfo.com/"+fileName;
+//			dest.delete();
+//		}
+//		return this.wxUserService.searchFace(image_url);
+//	}
 	private String getRandCode() {
 		Random random = new Random();
 		String sRand = "";

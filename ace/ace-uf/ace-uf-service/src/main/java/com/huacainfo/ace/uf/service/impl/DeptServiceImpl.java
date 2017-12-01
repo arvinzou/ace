@@ -26,15 +26,37 @@ public class DeptServiceImpl implements DeptService {
 	private DeptDao deptDao;
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
+
+	/**
+	 * 获取单位列表
+	 * @param q
+	 * @param user
+	 * @param areaCode
+	 * @return
+	 * @throws Exception
+	 */
+
 	@Override
 	public  List<Map<String,Object>> selectDeptList(String q,WxUser user,String areaCode) throws Exception{
 
 		List<Map<String,Object>> category=this.deptDao.selectDeptCategoryList(areaCode);
+		/*
+		 *category
+		 * id:
+		 * name:
+		 * icon
+		 */
 		List<Map<String,Object>> list=this.deptDao.selectDeptListByText(q);
 		for(Map<String,Object> p:list){
+			/*
+			 *把category==4的单位 电话设置为“”；
+			 */
 			if(String.valueOf(p.get("category")).equals("4")){
 				p.put("tel","");
 			}
+			/**
+			 * 如果手机号码则，则也将手机号码设置为“”；
+			 */
 			if(p.get("tel")!=null){
 				if(String.valueOf(p.get("tel")).length()==11){
 					p.put("tel","");
@@ -42,6 +64,7 @@ public class DeptServiceImpl implements DeptService {
 			}
 		}
 		int i=0;
+		//如果参数q不为空（如果是搜索数据。）
 		if(CommonUtils.isNotBlank(q)){
 			category=new ArrayList<Map<String,Object>>();
 			Map<String,Object> e=new HashedMap();
@@ -53,8 +76,8 @@ public class DeptServiceImpl implements DeptService {
 			category.add(e);
 			return category;
 		}
+		//如果不是搜索数据
 		for(Map<String,Object> e:category){
-
 			if(i==0){
 				e.put("open",true);
 			}else{
@@ -65,6 +88,8 @@ public class DeptServiceImpl implements DeptService {
 		}
 		return category;
 	}
+
+
 	@Override
 	public  List<Map<String,Object>> selectDeptListMap(WxUser user,String longitude,String latitude,String q) throws Exception{
 		return this.deptDao.selectDeptList(q,longitude,latitude);

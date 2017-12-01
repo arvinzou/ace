@@ -1,0 +1,73 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+
+page{
+    margin: 0;
+    background-color: #f4f4f4;
+    color:#666;
+}
+ /* view{
+    border: 1px red solid;
+}  */
+
+.index{
+    width: 100%;
+    height: 100%;
+}
+.message{
+    background-color: white;
+    padding: 0rpx 32rpx 0rpx 32rpx;
+    margin-bottom: 20rpx;
+}
+
+ .icon_icon{
+    width: 29rpx;
+    height: 29rpx;
+    margin-right: 18rpx;
+}
+
+ .icon_ic{
+    float: right;
+    width: 15rpx;
+    height: 29rpx;
+    margin-top: 14rpx;
+} 
+
+.msg{
+    font-size: 34rpx;
+    padding: 30rpx 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.msg_bottom{
+     border-bottom: 1px solid white;
+}
+
+.title{
+    color: #222;
+    font-size: 32rpx;
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+.content{
+    height:fit-content;
+    background-color: white;
+    padding: 45rpx 32rpx 0rpx 32rpx;
+    overflow: hidden;
+}
+
+.content_title{
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.content_text{
+
+}
+
+.on{
+    background-color: #e5e5e5;
+}
+

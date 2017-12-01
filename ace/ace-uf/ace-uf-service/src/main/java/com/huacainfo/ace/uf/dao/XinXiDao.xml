@@ -9,7 +9,7 @@
         <result column="media" jdbcType="VARCHAR" property="media"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
         <result column="published" jdbcType="DATE" property="published"/>
-        <result column="photo" jdbcType="VARCHAR" property="photo"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
@@ -23,44 +23,44 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, name, author, dept, media, url, published, photo, createUserId, createUserName,
+    id, name, author, dept, media, url, published, cover, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Base_Column_List"/>
-        from tz.XinXi
+        from XinXi
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from tz.XinXi
+    delete from XinXi
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
     <insert id="insert" parameterType="com.huacainfo.ace.uf.model.XinXi">
-    insert into tz.XinXi (id, name, author,
+    insert into XinXi (id, name, author,
       dept, media, url, published, 
-      photo, createUserId, createUserName,
+      cover, createUserId, createUserName,
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
       #{dept,jdbcType=VARCHAR}, #{media,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{published,jdbcType=DATE}, 
-      #{photo,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+      #{cover,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
       #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.XinXi">
-    update tz.XinXi
+    update XinXi
     set name = #{name,jdbcType=VARCHAR},
       author = #{author,jdbcType=VARCHAR},
       dept = #{dept,jdbcType=VARCHAR},
       media = #{media,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       published = #{published,jdbcType=DATE},
-      photo = #{photo,jdbcType=VARCHAR},
+        cover = #{cover,jdbcType=VARCHAR},
         <if test='createUserId!=null and createUserId!=""'>
             createUserId=#{createUserId,jdbcType=VARCHAR},
         </if>
@@ -79,7 +79,7 @@
   </update>
 
     <sql id="whereCondition">
-        from tz.XinXi
+        from XinXi
         where 0=0
         <if test='condition.name!=null and condition.name!=""'>
             and name like
@@ -119,7 +119,7 @@
 
     <select id="isExit" resultType="int">
     select count(*)
-    from tz.XinXi
+    from XinXi
     where
     name=#{name}
   </select>

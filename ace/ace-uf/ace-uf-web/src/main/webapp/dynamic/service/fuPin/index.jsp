@@ -94,7 +94,7 @@
 					<span id="name"></span>
 				</div>
 				<div class="labelItem"><span class="labelItemHeader">扶贫地点</span><br>
-					<span id="addr"></span>
+					<span id="address"></span>
 				</div>
 				<div class="labelItem"><span class="labelItemHeader">扶贫日期</span><br>
 					<span id="time"></span>

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.huacainfo.ace.common.model.PageParam;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.PageResult;
@@ -19,6 +20,7 @@ import com.huacainfo.ace.portal.vo.TaskCmccQVo;
 import com.huacainfo.ace.portal.vo.TaskCmccVo;
 import com.huacainfo.ace.uf.model.ActivityComment;
 import com.huacainfo.ace.uf.service.*;
+import com.huacainfo.ace.uf.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +78,9 @@ public class WWWController extends UfBaseController {
 
 	@Autowired
 	private GroupService groupService;
+
+	@Autowired
+	private FileService fileService;
 
 	@RequestMapping(value = "/findTaskCmccList.do")
 	@ResponseBody
@@ -394,4 +399,230 @@ public class WWWController extends UfBaseController {
 		return this.personageService.selectPersonageCfgById(id);
 	}
 
+	/**
+	 * ****************************统战文件——————开始********************************************************
+	 */
+
+	/**
+	 * 查找全部file列表。
+	 * @param
+	 * @param page
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findFilesList.do")
+	@ResponseBody
+	public PageResult<FileVo> findFileList(FileQVo condition, PageParamNoChangeSord page) throws Exception {
+		PageResult<FileVo> rst = this.fileService.findFileList(condition,page.getStart(), page.getLimit(),page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+		return rst;
+	}
+
+	/**
+	 * ****************************统战文件——————结束********************************************************
+	 */
+
+	/**
+	 * ****************************同心工程——————开始********************************************************
+	 */
+
+	@Autowired
+	private TongXinService tongXinService;
+
+	/**
+	 * 获取同心列表
+	 * @param condition
+	 * @param page
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findTongXinList.do")
+	@ResponseBody
+	public PageResult<TongXinVo> findTongXinList(TongXinQVo condition, PageParamNoChangeSord page) throws Exception {
+		PageResult<TongXinVo> rst = this.tongXinService
+				.findTongXinList(condition, page.getStart(), page.getLimit(),
+						page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+		return rst;
+	}
+
+	/**
+	 *
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/selectTongXinByPrimaryKey.do")
+	@ResponseBody
+	public SingleResult<TongXinVo> selectTongXinByPrimaryKey(String id)
+			throws Exception {
+		return this.tongXinService.selectTongXinByPrimaryKey(id);
+	}
+	/**
+	 * ****************************同心工程——————结束********************************************************
+	 */
+
+
+	/**
+	 * ****************************培训教育——————开始********************************************************
+	 */
+
+	@Autowired
+	private PeiXunService peiXunService;
+
+	/**
+	 * 获取培训教育列表
+	 * @param condition
+	 * @param page
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findPeiXunList.do")
+	@ResponseBody
+	public PageResult<PeiXunVo> findPeiXunList(PeiXunQVo condition,
+											   PageParamNoChangeSord page) throws Exception {
+		PageResult<PeiXunVo> rst = this.peiXunService
+				.findPeiXunList(condition, page.getStart(), page.getLimit(),
+						page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+
+		return rst;
+	}
+
+	/**
+	 * 根据id查找
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/selectPeiXunByPrimaryKey.do")
+	@ResponseBody
+	public SingleResult<PeiXunVo> selectPeiXunByPrimaryKey(String id)
+			throws Exception {
+		return this.peiXunService.selectPeiXunByPrimaryKey(id);
+	}
+
+	/**
+	 * ****************************培训教育——————结束********************************************************
+	 */
+
+	/**
+	 * ****************************精准扶贫——————开始********************************************************
+	 */
+
+
+	@Autowired
+	private FuPinService fuPinService;
+
+	@RequestMapping(value = "/findFuPinList.do")
+	@ResponseBody
+	public PageResult<FuPinVo> findFuPinList(FuPinQVo condition,
+											 PageParamNoChangeSord page) throws Exception {
+		PageResult<FuPinVo> rst = this.fuPinService
+				.findFuPinList(condition, page.getStart(), page.getLimit(),
+						page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+
+		return rst;
+	}
+
+	/**
+	 *
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/selectFuPinByPrimaryKey.do")
+	@ResponseBody
+	public SingleResult<FuPinVo> selectFuPinByPrimaryKey(String id)
+			throws Exception {
+		return this.fuPinService.selectFuPinByPrimaryKey(id);
+	}
+	/**
+	 * ****************************精准扶贫——————结束********************************************************
+	 */
+
+	/**
+	 * ****************************统战信息——————开始********************************************************
+	 */
+
+
+	@Autowired
+	private XinXiService xinXiService;
+
+	@RequestMapping(value = "/findXinXiList.do")
+	@ResponseBody
+	public PageResult<XinXiVo> findXinXiList(XinXiQVo condition,
+											 PageParamNoChangeSord page) throws Exception {
+		PageResult<XinXiVo> rst = this.xinXiService
+				.findXinXiList(condition, page.getStart(), page.getLimit(),
+						page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+
+		return rst;
+	}
+	/**
+	 * ****************************统战信息——————结束********************************************************
+	 */
+
+	/**
+	 * ****************************统战调研——————开始********************************************************
+	 */
+
+
+
+	@Autowired
+	private DiaoYanService diaoYanService;
+
+	@RequestMapping(value = "/findDiaoYanList.do")
+	@ResponseBody
+	public PageResult<DiaoYanVo> findDiaoYanList(DiaoYanQVo condition,
+												 PageParamNoChangeSord page) throws Exception {
+		PageResult<DiaoYanVo> rst = this.diaoYanService
+				.findDiaoYanList(condition, page.getStart(), page.getLimit(),
+						page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+
+		return rst;
+	}
+
+	/**
+	 * ****************************统战调研——————结束********************************************************
+	 */
+
+	/**
+	 * ****************************统战宣传——————开始********************************************************
+	 */
+
+	@Autowired
+	private XuanChuanService xuanChuanService;
+
+	@RequestMapping(value = "/findXuanChuanList.do")
+	@ResponseBody
+	public PageResult<XuanChuanVo> findXuanChuanList(XuanChuanQVo condition,
+													 PageParamNoChangeSord page) throws Exception {
+		PageResult<XuanChuanVo> rst = this.xuanChuanService
+				.findXuanChuanList(condition, page.getStart(), page.getLimit(),
+						page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+
+		return rst;
+	}
+	/**
+	 * ****************************统战宣传——————结束********************************************************
+	 */
 }

@@ -48,8 +48,7 @@ public class PeiXunController extends UfBaseController {
 	@ResponseBody
 	public MessageResponse insertPeiXun(String jsons) throws Exception {
 		PeiXun obj = JSON.parseObject(jsons, PeiXun.class);
-		return this.peiXunService
-				.insertPeiXun(obj, this.getCurUserProp());
+		return this.peiXunService.insertPeiXun(obj, this.getCurUserProp());
 	}
 
 	@RequestMapping(value = "/updatePeiXun.do")

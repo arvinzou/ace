@@ -1,0 +1,101 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+
+page{
+    background-color: white;
+}
+.index-bd {
+    padding: 0rpx 32rpx 0rpx 32rpx;
+    color: #999;
+}
+
+.content {
+    width: 686rpx;
+    padding: 42rpx 0rpx;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+.title {
+    width: 100%; 
+    color: #222;
+    font-weight: bold;
+    font-size: 32rpx;
+    margin-bottom: 20rpx;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.titleplus{
+    height: 95rpx;
+}
+
+.remark {
+    width: 100%;
+    font-size: 26rpx;  
+}
+
+span {
+    color: #1a91ff;
+    vertical-align: bottom; 
+}
+
+.time {
+    color: #999;
+    float: right;
+    margin: 0rpx;
+}
+
+.image {
+    height: 142rpx;
+    width: 214rpx;
+    display: inline-block;
+    margin-right: 24rpx;
+}
+
+.content_text {
+    width: 448rpx;
+    display: inline-block;
+}
+.deptlong{
+    display: inline-block;
+    margin-right: 24rpx;
+    width: 230rpx;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.dept{
+    display: inline-block;
+    margin-right: 24rpx;
+    width: 110rpx;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/* 加载状态样式 */
+.loading {
+    width: 686rpx;
+    padding: 10rpx 0rpx;
+    text-align: center;
+}
+
+.loading:before {
+    display: inline-block;
+    margin-right: 5rpx;
+    vertical-align: middle;
+    content: '';
+    width: 40rpx;
+    height: 40rpx;
+    background: url(../../image/1.gif) no-repeat;
+    background-size: contain;
+    animation: rotate 1s linear infinite;
+}
+
+.loading.complete:before {
+    display: none;
+}

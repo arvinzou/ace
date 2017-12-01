@@ -10,11 +10,21 @@ public class FuPin {
 
     private String category;
 
-    private String addr;
+    private String address;
 
     private BigDecimal latitude;
 
     private BigDecimal longitude;
+
+    private String cover;
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 
     private Date time;
 
@@ -56,12 +66,12 @@ public class FuPin {
         this.category = category == null ? null : category.trim();
     }
 
-    public String getAddr() {
-        return addr;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddr(String addr) {
-        this.addr = addr == null ? null : addr.trim();
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
     }
 
     public BigDecimal getLatitude() {

@@ -1,4 +1,4 @@
-var _colNames =['主键', '扶贫名称', '地址',  '维度', '经度', '扶贫进度', '扶贫日期', '扶贫内容', '扶贫图片','操作'];
+var _colNames =['主键', '扶贫名称', '地址',  '维度', '经度', '扶贫进度', '扶贫日期', '扶贫内容','封面', '操作'];
 var _colModel = function() {
 	return [
         {
@@ -36,7 +36,7 @@ var _colModel = function() {
             }
         },
         {
-            name : 'addr',
+            name : 'address',
             editable : true,
             hidden : true,
             width : 100,
@@ -82,7 +82,7 @@ var _colModel = function() {
             editable : true,
             edittype : "select",
             renderer : function(value) {
-                return rsd(value,"106");
+                return rsd(value,"109");
             },
             formoptions : {
                 style : 'width:200px;',
@@ -90,7 +90,7 @@ var _colModel = function() {
                 elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
             editoptions : {
-                value : odparse("106")
+                value : odparse("109")
             },
             width : 100,
             editrules : {
@@ -156,11 +156,21 @@ var _colModel = function() {
         },
 
         {
-            name : 'title1',
-            editable : true,
-            hidden : true,
-            editoptions : {
-                title : true
+            name: 'cover',
+            editable: true,
+            hidden: true,
+            width: 100,
+            editoptions: {
+                style: 'width:400px;',
+                maxlength: "200",
+                colspan: false
+            },
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editrules: {
+                required: true
             }
         },
 	 {

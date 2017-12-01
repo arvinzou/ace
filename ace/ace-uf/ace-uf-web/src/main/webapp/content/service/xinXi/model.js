@@ -140,7 +140,7 @@ var _colModel = function () {
         },
 
         {
-            name: 'photo',
+            name: 'cover',
             editable: true,
             hidden: true,
             width: 100,
