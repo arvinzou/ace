@@ -11,6 +11,7 @@
         <result column="trainees" jdbcType="VARCHAR" property="trainees"/>
         <result column="time" jdbcType="TIMESTAMP" property="time"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
@@ -24,23 +25,23 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-          id, name, address,latitude,longitude, dept, trainees,time,if(sysdate()>time,'1','0') as category, content, createUserId, createUserName,
+          id, name, address,latitude,longitude, dept, trainees,time,if(sysdate()>time,'1','0') as category, content,cover, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
     <select id="selectPeiXunByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Base_Column_List"/>
-        from tz.peixun
+        from peixun
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from tz.peixun
+    delete from peixun
     where id = #{id,jdbcType=VARCHAR}
   </delete>
 
     <insert id="insert" parameterType="com.huacainfo.ace.uf.model.PeiXun">
-    insert into tz.peixun (
+    insert into peixun (
                  id,
                  name,
                  address,
@@ -50,7 +51,7 @@
                  trainees,
                  time,
                  content,
-
+                 cover,
                  createUserId,
                  createUserName,
                  createDate,
@@ -68,7 +69,7 @@
                   #{trainees,jdbcType=VARCHAR},
                   #{time,jdbcType=TIMESTAMP},
                   #{content,jdbcType=VARCHAR},
-
+                   #{cover,jdbcType=VARCHAR},
                   #{createUserId,jdbcType=VARCHAR},
                   #{createUserName,jdbcType=VARCHAR},
                   #{createDate,jdbcType=TIMESTAMP},
@@ -79,7 +80,7 @@
   </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.PeiXun">
-        update tz.peixun
+        update peixun
         set
             name = #{
             name,
@@ -92,6 +93,7 @@
             trainees = #{trainees,jdbcType=VARCHAR},
             time = #{time,jdbcType=TIMESTAMP},
             content = #{content,jdbcType=VARCHAR},
+            cover = #{cover,jdbcType=VARCHAR},
             <if test='createUserId!=null and createUserId!=""'>
                 createUserId=#{createUserId,jdbcType=VARCHAR},
             </if>
@@ -108,7 +110,7 @@
     </update>
 
     <sql id="whereCondition">
-        from tz.peixun
+        from peixun
         where 0=0
         <if test='condition.name!=null and condition.name!=""'>
             and name like
@@ -156,7 +158,7 @@
 
     <select id="isExit" resultType="int">
     select count(*)
-    from tz.peixun
+    from peixun
     where
     name=#{name}
   </select>

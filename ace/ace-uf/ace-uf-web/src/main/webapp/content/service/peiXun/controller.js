@@ -45,8 +45,8 @@ jQuery(function ($) {
                     /*var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
                     var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
                     initPhoto(gd.id);*/
-                    appendUploadBtn("photo");
                     appendMapBtn("address");
+                    appendUploadBtn("cover");
                 }
             })
     });
@@ -70,8 +70,8 @@ jQuery(function ($) {
                     var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
                     var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
                     initPhoto(gd.id);
-                    appendUploadBtn("photo");
                     appendMapBtn("address");
+                    appendUploadBtn("cover");
                 }
             })
     });

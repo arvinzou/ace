@@ -5,7 +5,7 @@ import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 public class AutoCode {
 	public static void main(String[] args) throws Exception{
 		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("face","人脸建档","陈晓克");
-		Class<?> c=com.huacainfo.ace.face.model.Person.class;
+		Class<?> c=com.huacainfo.ace.uf.model.FuPin.class;
 		autoCodeUtils.init(c);
 		autoCodeUtils.createVO(c);
 		autoCodeUtils.createQVO(c);
@@ -17,7 +17,6 @@ public class AutoCode {
 		autoCodeUtils.createJsConfig(c);
 		autoCodeUtils.createJsView(c);
 		autoCodeUtils.createJsController(c);
-
 		autoCodeUtils.createModel(c);
 
 	}

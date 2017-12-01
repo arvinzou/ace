@@ -6,8 +6,8 @@
 // 小程序后台服务解决方案：https://www.qcloud.com/solution/la
 var host = "14592619.qcloud.la";
 
-var server = "http://127.0.0.1";
-var serverfile = "http://127.0.0.1";
+var server = "https://zx.huacainfo.com";
+var serverfile = "http://zx.huacainfo.com/";
 var config = {
     // 下面的地址配合云端 Server 工作
     host,

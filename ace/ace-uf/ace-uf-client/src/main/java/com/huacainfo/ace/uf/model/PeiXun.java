@@ -31,6 +31,8 @@ public class PeiXun {
 
     private String content;
 
+    private String cover;
+
     private String createUserId;
 
     private String createUserName;
@@ -171,6 +173,13 @@ public class PeiXun {
         this.lastModifyDate = lastModifyDate;
     }
 
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 
     @Override
     public String toString() {

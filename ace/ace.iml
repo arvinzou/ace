@@ -9,6 +9,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/activiti-root/modules/activiti-admin/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="web" name="Web2">
@@ -19,6 +20,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/activiti-root/modules/activiti-ui/activiti-app/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="web" name="Web3">
@@ -29,6 +31,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/activiti-root/modules/activiti-rest/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="web" name="Web4">
@@ -39,6 +42,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/ace-weuiluohua/ace-weuiluohua-web/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="web" name="Web5">
@@ -49,6 +53,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/ace-workflow/ace-workflow-web/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="web" name="Web6">
@@ -59,6 +64,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/activiti-root/modules/activiti-webapp-rest2/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="web" name="Web7">
@@ -69,6 +75,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/ace-gis/ace-gis-web/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="web" name="Web8">
@@ -79,6 +86,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/ace-luohua/ace-luohua-web/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="web" name="Web9">
@@ -89,6 +97,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/ace-gesp/ace-gesp-web/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
     <facet type="jpa" name="JPA">
@@ -106,6 +115,15 @@
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/ace-uf/ace-uf-web/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/ace-uf/ace-uf-web/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ace-uf/ace-uf-service/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ace-uf/ace-uf-service/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/ace-uf/ace-uf-client/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ace-uf/ace-uf-client/src/main/resources" type="java-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/ace-uf/ace-uf-client/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ace-uf/ace-uf-service/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ace-uf/ace-uf-web/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />

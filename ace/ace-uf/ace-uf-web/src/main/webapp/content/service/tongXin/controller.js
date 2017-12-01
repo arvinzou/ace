@@ -49,6 +49,7 @@ jQuery(function($) {
                 style_edit_form(form);
                 initSimditor($("textarea[name=content]"),null);
                 appendMapBtn("address");
+                appendUploadBtn("cover");
             }
         })
 
@@ -81,6 +82,7 @@ jQuery(function($) {
                                 var gd=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
                                 loadText(gd.id);
                                 appendMapBtn("address");
+                                appendUploadBtn("cover");
 							}
 						})
 				});

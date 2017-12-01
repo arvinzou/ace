@@ -24,6 +24,8 @@ public class TongXin {
 
     private String content;
 
+    private String cover;
+
     private String category;
 
     private String createUserId;
@@ -170,6 +172,15 @@ public class TongXin {
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
+    }
+
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
 

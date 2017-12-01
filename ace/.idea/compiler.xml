@@ -10,15 +10,15 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
-        <module name="ace-face-client" />
-        <module name="ace-face-service" />
-        <module name="ace-face-web" />
         <module name="ace-operana-client" />
         <module name="ace-operana-service" />
         <module name="ace-operana-web" />
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />
+        <module name="ace-uf-client" />
+        <module name="ace-uf-service" />
+        <module name="ace-uf-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
@@ -52,10 +52,6 @@
       <module name="ace-uf-client" target="1.7" />
       <module name="ace-uf-service" target="1.7" />
       <module name="ace-uf-web" target="1.7" />
-      <module name="ace-workflow" target="1.7" />
-      <module name="ace-workflow-client" target="1.7" />
-      <module name="ace-workflow-service" target="1.7" />
-      <module name="ace-workflow-web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

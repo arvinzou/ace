@@ -127,11 +127,12 @@
 <script src="${pageContext.request.contextPath}/content/service/peiXun/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/peiXun/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/peiXun/view.js?version=${cfg.version}"></script>
-<link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
-      type="text/css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+<link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen"/>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 <script src="${pageContext.request.contextPath}/content/service/peiXun/upload.js?version=${cfg.version}"></script>
 
 <jsp:include page="../../common/footer-2.jsp"/>

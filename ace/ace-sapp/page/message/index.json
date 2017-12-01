@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "统战信息",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 30
+}

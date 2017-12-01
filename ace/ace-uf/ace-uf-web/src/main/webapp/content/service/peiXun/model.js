@@ -1,4 +1,4 @@
-var _colNames = ['主键', '培训主题', '培训地点', '维度', '经度','培训单位', '培训对象', '培训进度', '培训日期', '培训内容', '操作'];
+var _colNames = ['主键', '培训主题', '培训地点', '维度', '经度','培训单位', '培训对象', '培训进度', '培训日期', '封面','培训内容',  '操作'];
 var _colModel = function () {
     return [
 
@@ -80,11 +80,31 @@ var _colModel = function () {
             },
         },
 
+
+        {
+            name : 'dept',//表格列的名称
+            editable : true,//定义字段是否可编辑
+            width : 100,//默认列的宽度，只能是象素值
+            editoptions : {
+                style : 'width:200px;',
+                size : "20",
+                maxlength : "50",
+            },
+            formoptions : {//对于form进行编辑时的属性设置
+                elmprefix : "",
+                elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>",
+            },
+            editrules : {
+                required : true,
+            }
+        },
+
         {
             name : 'trainees',//表格列的名称
             editable : true,//定义字段是否可编辑
             width : 100,//默认列的宽度，只能是象素值
             editoptions : {
+                style : 'width:200px;',
                 size : "20",
                 maxlength : "50"
             },
@@ -95,25 +115,6 @@ var _colModel = function () {
             },
             editrules : {
                 required : true
-            }
-        },
-
-
-        {
-            name : 'dept',//表格列的名称
-            editable : true,//定义字段是否可编辑
-            width : 100,//默认列的宽度，只能是象素值
-            editoptions : {
-                style : 'width:200px;',
-                size : "20",
-                maxlength : "50"
-            },
-            formoptions : {//对于form进行编辑时的属性设置
-                elmprefix : "",
-                elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>",
-            },
-            editrules : {
-                required : true,
             }
         },
 
@@ -174,18 +175,42 @@ var _colModel = function () {
                 required: true
             }
         },
+        {
+            name: 'cover',
+            editable: true,
+            hidden: true,
+            width: 100,
+            editoptions: {
+                style: 'width:200px;',
+                maxlength: "200",
+                colspan: false
+            },
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editrules: {
+                required: true
+            }
+        },
 
         {
             name : 'content',
-            editable : true,
             hidden : true,
             width : 100,
-            edittype : "textarea",
+            editable : true,
             editoptions : {
-                style : 'width:600px;height:200px',
                 colspan : true,
-                maxlength : "200"
-            }
+                style : 'width:750px;line-height: 25px;height: 100px;'
+            },
+            formoptions : {
+                elmprefix : "",
+                elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            /* editrules : {
+                 required : true
+             },*/
+            edittype : "textarea"
         },
 
         {

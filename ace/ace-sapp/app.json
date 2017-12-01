@@ -27,7 +27,8 @@
     "page/education/index",
     "page/research/index",
     "page/propaganda/index",
-    "page/message/index"
+    "page/message/index",
+    "page/showWeb/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",

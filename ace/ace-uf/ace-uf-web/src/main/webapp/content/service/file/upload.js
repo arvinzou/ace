@@ -55,7 +55,7 @@ function init_uploader(config) {
             //用silverlight上传时组件的url地址
             silverlight_xap_url: portalPath + '/content/plupload-2.1.2/js/Moxie.xap',
             //获取文件信息
-            file_data_name：
+            //file_data_name：
         });
     var uploader = $('#uploader').pluploadQueue();
     uploader.bind("UploadComplete", function () {});

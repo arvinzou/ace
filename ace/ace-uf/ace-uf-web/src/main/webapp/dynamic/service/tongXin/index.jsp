@@ -157,6 +157,7 @@
 <script src="${pageContext.request.contextPath}/content/service/tongXin/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/tongXin/view.js?version=${cfg.version}"></script>
 
+<script src="${pageContext.request.contextPath}/content/service/tongXin/upload.js?version=${cfg.version}"></script>
 
 <link rel="stylesheet"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"

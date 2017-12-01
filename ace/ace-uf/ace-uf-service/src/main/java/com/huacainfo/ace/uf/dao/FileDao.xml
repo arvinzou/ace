@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.uf.dao.FileDao">
     <sql id="whereCondition">
-        from tz.file t
+        from file t
         where 0=0
         <if test='condition.name!=null and condition.name!=""'>
             and t.name like  concat('%',#{condition.name,jdbcType=VARCHAR},'%')
@@ -58,7 +58,7 @@
     </select>
 <!--更新统战文件-->
     <update id="updateFileById" parameterType="com.huacainfo.ace.uf.vo.FileQVo">
-        update tz.file set
+        update file set
         name = #{name,jdbcType=VARCHAR},
         remark = #{remark,jdbcType=VARCHAR},
         type = #{type,jdbcType=VARCHAR},
@@ -84,13 +84,13 @@
     <!--删除统战文件-->
     <delete id="deleteFileByFileId" parameterType="java.lang.String">
          DELETE
-        FROM tz.file
+        FROM file
         WHERE id=#{id}
     </delete>
 
     <!--添加统战文件-->
     <insert id="insertFile" parameterType="com.huacainfo.ace.uf.vo.FileQVo">
-         INSERT INTO tz.file(
+         INSERT INTO file(
             id,
             name,
             remark,
