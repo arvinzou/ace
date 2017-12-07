@@ -273,12 +273,21 @@ public class DataCalUtils {
 
 	public static java.math.BigDecimal getNormInex(Map<String,java.math.BigDecimal> data,int i,String category,java.math.BigDecimal defaultValue){
 		if(category.equals("quarters")){
+			if(data.get("value"+i)==null){
+				return defaultValue;
+			}
 			return data.get("value"+i);
 		}
 		if(category.equals("months")){
+			if(data.get("value"+getQuarterByMonth(i))==null){
+				return defaultValue;
+			}
 			return data.get("value"+getQuarterByMonth(i));
 		}
 		if(category.equals("weeks")){
+			if(data.get("value"+getQuarterByWeek(i))==null){
+				return defaultValue;
+			}
 			return data.get("value"+getQuarterByWeek(i));
 		}
 		return defaultValue;
