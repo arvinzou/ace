@@ -21,15 +21,21 @@ public class DataCalUtils {
 		if (calType.equals("1")) {
 			for (int i = ((quarter * 13) - 13 + 1); i <= quarter * 13; i++) {
 				logger.info("->{}", i);
-				rst = rst.add(row.get("wkt" + i));
+				if(row.get("wkt" + i)!=null){
+					rst = rst.add(row.get("wkt" + i));
+				}
+
 			}
 		} else {
 			java.math.BigDecimal wkt = new java.math.BigDecimal("0");
 			java.math.BigDecimal wkc = new java.math.BigDecimal("0");
 			for (int i = ((quarter * 13) - 13 + 1); i <= quarter * 13; i++) {
 				logger.info("-----i->{}", i);
-				wkt = wkt.add(row.get("wkt" + i));
-				wkc = wkc.add(row.get("wkc" + i));
+				if(row.get("wkt" + i)!=null){
+					wkt = wkt.add(row.get("wkt" + i));
+					wkc = wkc.add(row.get("wkc" + i));
+				}
+
 
 			}
 			logger.info("-----wkc->{}", wkc);
@@ -45,14 +51,20 @@ public class DataCalUtils {
 		if (calType.equals("1")) {
 			for (int i = (int) ((month * fl) - fl + 1); i <= month * fl; i++) {
 				logger.info("->{}", i);
-				rst = rst.add(row.get("wkt" + i));
+				if(row.get("wkt" + i)!=null){
+					rst = rst.add(row.get("wkt" + i));
+				}
+
 			}
 		} else {
 			java.math.BigDecimal wkt = new java.math.BigDecimal("0");
 			java.math.BigDecimal wkc = new java.math.BigDecimal("0");
 			for (int i = (int) ((month * fl) - fl + 1); i <= month * fl; i++) {
-				wkt = wkt.add(row.get("wkt" + i));
-				wkc = wkc.add(row.get("wkc" + i));
+				if(row.get("wkt" + i)!=null){
+					wkt = wkt.add(row.get("wkt" + i));
+					wkc = wkc.add(row.get("wkc" + i));
+				}
+
 			}
 			rst = wkc.divide(wkt, 4, java.math.BigDecimal.ROUND_HALF_EVEN);
 		}
@@ -61,6 +73,9 @@ public class DataCalUtils {
 	public static java.math.BigDecimal calWeekY(int cwk, Map<String, java.math.BigDecimal> row, String calType) {
 		java.math.BigDecimal rst = new java.math.BigDecimal("0");
 		// logger.info("->row {}",row);
+		if(row.get("wkt" + cwk)==null){
+			return rst;
+		}
 		if (calType.equals("1")) {
 			rst = rst.add(row.get("wkt" + cwk));
 		} else {
@@ -78,14 +93,19 @@ public class DataCalUtils {
 		if (calType.equals("1")) {
 			for (int i = 1; i <= cwk; i++) {
 				logger.info("->{}", i);
-				rst = rst.add(row.get("wkt" + i));
+				if(row.get("wkt" + i)!=null){
+					rst = rst.add(row.get("wkt" + i));
+				}
+
 			}
 		} else {
 			java.math.BigDecimal wkt = new java.math.BigDecimal("0");
 			java.math.BigDecimal wkc = new java.math.BigDecimal("0");
 			for (int i = 1; i <= cwk; i++) {
-				wkt = wkt.add(row.get("wkt" + i));
-				wkc = wkc.add(row.get("wkc" + i));
+				if(row.get("wkt" + i)!=null){
+					wkt = wkt.add(row.get("wkt" + i));
+					wkc = wkc.add(row.get("wkc" + i));
+				}
 			}
 			rst = wkc.divide(wkt, 4, java.math.BigDecimal.ROUND_HALF_EVEN);
 		}

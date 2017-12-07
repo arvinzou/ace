@@ -42,7 +42,6 @@
     update dict
     set
       CODE = #{code,jdbcType=VARCHAR},
-      PCODE= #{pcode,jdbcType=VARCHAR},
       SPELL= #{spell,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
       REMARK = #{remark,jdbcType=VARCHAR}
