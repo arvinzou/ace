@@ -300,7 +300,7 @@ var _colModel = function() {
 				name : 'status',
 				index : 'status',
 				width : 90,
-				editable : false,
+				editable : true,
 				edittype : "checkbox",
 				editoptions : {
 					value : "1:0"
