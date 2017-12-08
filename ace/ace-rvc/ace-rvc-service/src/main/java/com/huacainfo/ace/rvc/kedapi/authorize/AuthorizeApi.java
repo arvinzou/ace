@@ -1,8 +1,8 @@
 package com.huacainfo.ace.rvc.kedapi.authorize;
 
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.HttpSend;
 import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.rvc.kedapi.common.kits.CommonKit;
 import com.huacainfo.ace.rvc.kedapi.common.kits.HttpKit;
 import org.apache.log4j.Logger;
 
@@ -16,6 +16,23 @@ import java.util.Map;
 public class AuthorizeApi {
 
     private static Logger logger = Logger.getLogger(AuthorizeApi.class);
+
+    public static final String HTTP = "http://";
+    public static final String HTTPS = "https://";
+    public static final String IP_PORT = "127.0.0.1:8080";
+    public static final String SEPARATOR = "/";
+    public static final String URI = "http://192.168.20.240";
+    public static final String VRS_URI = "http://192.168.20.243";
+
+    public static final String APP_KEY = "PLmCgniw0Ihj";
+    public static final String APP_SECRET = "lxrQj5TqjX8J";
+    public static final String APP_NAME = "lcjt_cdsdj";
+
+    public static final String ADMIN_USER_NAME = "admin1";
+    public static final String ADMIN_PWD = "888888";
+
+    public static final String VRS_ACCOUNT = "admin";
+    public static final String VRS_PWD = "admin";
 
     /**
      * token 地址
@@ -35,6 +52,31 @@ public class AuthorizeApi {
     }
 
     /**
+     *
+     */
+    public static String ACCOUNT_TOKEN;
+    /**
+     *
+     */
+    public static String SSO_COOKIE_KEY;
+
+    /**
+     * 初始化数据,缓存在内存中
+     */
+    public static void init() {
+        //
+        login();
+    }
+
+    private static void login() {
+        ACCOUNT_TOKEN = AuthorizeApi.getToken(APP_KEY, APP_SECRET);
+        logger.debug("login() get token [" + ACCOUNT_TOKEN + "],at time :" + DateUtil.getNow());
+        Map<String, String> map = AuthorizeApi.login(ADMIN_USER_NAME, ADMIN_PWD, ACCOUNT_TOKEN);
+        SSO_COOKIE_KEY = map.get("cookies");
+        logger.debug("login() get SSO_COOKIE_KEY [" + SSO_COOKIE_KEY + "],at time :" + DateUtil.getNow());
+    }
+
+    /**
      * token获取
      * <p>
      * 平台为二次开发提供一个软件key+密钥，需申请。
@@ -45,7 +87,7 @@ public class AuthorizeApi {
      * @return account_token / ""
      */
     public static String getToken(String key, String secret) {
-        String url = CommonKit.URI + TOKEN_URL;
+        String url = URI + TOKEN_URL;
 
         String respStr = HttpSend.postSend(url, "oauth_consumer_key=" + key + "&oauth_consumer_secret=" + secret);
         logger.debug("key<" + key + "> AuthorizeApi.getToken:" + respStr);
@@ -75,7 +117,7 @@ public class AuthorizeApi {
      * @return success/fail
      */
     public static Map<String, String> login(String username, String password, String accountToken) {
-        String url = CommonKit.URI + LOGIN_URL;
+        String url = URI + LOGIN_URL;
         Map<String, String> rtnMap = HttpKit.doPost(url,
                 "password=" + password + "&username=" + username + "&account_token=" + accountToken, "");
         logger.debug("username<" + username + "> AuthorizeApi.login:" + rtnMap.toString());
@@ -101,7 +143,7 @@ public class AuthorizeApi {
 //        {
 //            "success": 1
 //        }
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + HEAR_BEAT_URL
+        Map<String, String> rtnMap = HttpKit.doPost(URI + HEAR_BEAT_URL
                 , "account_token=" + accountToken
                 , cookies);
         logger.debug("AuthorizeApi.hearBeat:" + rtnMap.toString());

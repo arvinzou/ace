@@ -5,21 +5,32 @@ package com.huacainfo.ace.rvc.kedapi.common.constant;
  * @author: ArvinZou
  * @create: 2017-11-16 11:05
  */
-public interface VideoFormat {
-    /**
-     * 1-MPEG;
-     * 2-H.261;
-     * 3-H.263;
-     * 4-H.264_HP;
-     * 5-H.264_BP;
-     * 6-H.265;
-     */
-    int MPEG = 1;
-    int H261 = 2;
-    int H263 = 3;
-    int H264_HP = 4;
-    int H264_BP = 5;
-    int H265 = 6;
+public interface VideoConstant {
+
+    interface RecordMode {
+        //录像模式 1-录像；2-直播；3-录像+直播；
+        int RECORD = 1;
+        int LIVE = 2;
+        int BOTH = 3;
+    }
+
+    interface Format {
+        /**
+         * 1-MPEG;
+         * 2-H.261;
+         * 3-H.263;
+         * 4-H.264_HP;
+         * 5-H.264_BP;
+         * 6-H.265;
+         */
+        int MPEG = 1;
+        int H261 = 2;
+        int H263 = 3;
+        int H264_HP = 4;
+        int H264_BP = 5;
+        int H265 = 6;
+    }
+
 
     interface Resolution {
         /**

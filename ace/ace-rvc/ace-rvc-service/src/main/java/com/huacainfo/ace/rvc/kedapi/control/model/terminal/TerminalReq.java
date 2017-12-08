@@ -1,4 +1,4 @@
-package com.huacainfo.ace.rvc.kedapi.control.model;
+package com.huacainfo.ace.rvc.kedapi.control.model.terminal;
 
 import com.huacainfo.ace.rvc.kedapi.common.base.BaseModel;
 
@@ -25,10 +25,17 @@ public class TerminalReq extends BaseModel {
 //  ]
 //    }
 
-    /**
-     * 接口返回时，接收字段
-     */
-    private String mt_id;
+
+    public TerminalReq() {
+    }
+
+    public TerminalReq(String account, int account_type) {
+        this.account = account;
+        this.account_type = account_type;
+        this.bitrate = 2048;
+        this.protocol = 0;//呼叫协议 0-H323；1-SIP；
+        this.forced_call = 1;//是否强制呼叫，默认是0 0-不强呼；1-强呼；
+    }
 
     /**
      * 终端E164号,IP或电话号码
@@ -90,13 +97,5 @@ public class TerminalReq extends BaseModel {
 
     public void setForced_call(int forced_call) {
         this.forced_call = forced_call;
-    }
-
-    public String getMt_id() {
-        return mt_id;
-    }
-
-    public void setMt_id(String mt_id) {
-        this.mt_id = mt_id;
     }
 }

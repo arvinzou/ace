@@ -10,8 +10,47 @@ import java.util.List;
  * @create: 2017-11-16 15:59
  */
 public class RecordReq extends BaseModel {
+    public RecordReq() {
+    }
 
-//    {
+    public RecordReq(String videoName, int recorder_mode) {
+        this.video_name = videoName;
+        this.recorder_type = 1;//录像类型 1-会议录像；2-终端录像；
+        this.publish_mode = 0;//发布模式 0-不发布；1-发布；
+        this.anonymous = 0;//是否支持免登陆观看直播 0-不支持；1-支持；
+        this.recorder_mode = recorder_mode;//录像模式 1-录像；2-直播；3-录像+直播；
+        this.main_stream = 1;//是否录主格式码流（视频+音频） 0-否；1-是；
+        this.dual_stream = 0;//是否录双流（仅双流） 0-否；1-是；
+    }
+
+    public RecordReq(String videoName, int recorder_mode, int anonymous) {
+        this.video_name = videoName;
+        this.recorder_type = 1;//录像类型 1-会议录像；2-终端录像；
+        this.publish_mode = 0;//发布模式 0-不发布；1-发布；
+        this.anonymous = anonymous;//是否支持免登陆观看直播 0-不支持；1-支持；
+        this.recorder_mode = recorder_mode;//录像模式 1-录像；2-直播；3-录像+直播；
+        this.main_stream = 1;//是否录主格式码流（视频+音频） 0-否；1-是；
+        this.dual_stream = 0;//是否录双流（仅双流） 0-否；1-是；
+    }
+
+    /**
+     * @param videoName
+     * @param recorder_type 录像类型 1-会议录像；2-终端录像；
+     * @param publish_mode  //发布模式 0-不发布；1-发布；
+     * @param anonymous     //是否支持免登陆观看直播 0-不支持；1-支持；
+     * @param recorder_mode //录像模式 1-录像；2-直播；3-录像+直播；
+     */
+    public RecordReq(String videoName, int recorder_type, int publish_mode, int anonymous, int recorder_mode) {
+        this.video_name = videoName;
+        this.recorder_type = recorder_type;//录像类型 1-会议录像；2-终端录像；
+        this.publish_mode = publish_mode;//发布模式 0-不发布；1-发布；
+        this.anonymous = anonymous;//是否支持免登陆观看直播 0-不支持；1-支持；
+        this.recorder_mode = recorder_mode;//录像模式 1-录像；2-直播；3-录像+直播；
+        this.main_stream = 1;//是否录主格式码流（视频+音频） 0-否；1-是；
+        this.dual_stream = 0;//是否录双流（仅双流） 0-否；1-是；
+    }
+
+    //    {
 //        "video_name": "filename",
 //            "recorder_type": 2,
 //            "publish_mode": 0,

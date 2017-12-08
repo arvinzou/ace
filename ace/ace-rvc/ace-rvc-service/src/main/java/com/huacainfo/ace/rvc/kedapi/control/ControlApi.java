@@ -3,13 +3,14 @@ package com.huacainfo.ace.rvc.kedapi.control;
 import com.huacainfo.ace.common.tools.HttpSend;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
+import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.kedapi.common.base.BaseApi;
 import com.huacainfo.ace.rvc.kedapi.common.kits.CommonKit;
 import com.huacainfo.ace.rvc.kedapi.common.kits.HttpKit;
 import com.huacainfo.ace.rvc.kedapi.control.model.RecordListResp;
 import com.huacainfo.ace.rvc.kedapi.control.model.RecordReq;
 import com.huacainfo.ace.rvc.kedapi.control.model.RecordStatusResp;
-import com.huacainfo.ace.rvc.kedapi.control.model.TerminalResp;
+import com.huacainfo.ace.rvc.kedapi.control.model.terminal.TerminalResp;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -35,12 +36,12 @@ public class ControlApi extends BaseApi {
      * @param params       录像参数
      * @return rec_id/fail
      */
-    public static String record(String confId, String accountToken, RecordReq params, String cookies) {
+    public static String record(String confId, RecordReq params, String accountToken, String cookies) {
         String encode = CommonKit.encode(JsonUtil.toJson(params));
         if (StringUtils.isEmpty(encode)) {
             return CommonKit.fail();
         }
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/recorders"
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/recorders"
                 , "account_token=" + accountToken + "&params=" + encode
                 , cookies);
         logger.debug("confId<" + confId + ">, ControlApi.record: " + rtnMap.toString());
@@ -73,10 +74,10 @@ public class ControlApi extends BaseApi {
      */
     public static RecordStatusResp getRecordStatus(String confId, String recId, String accountToken) {
         String respStr = HttpSend.getSend(
-                CommonKit.URI + "/api/v1/vc/confs/" + confId + "/recorders/" + recId,
+                AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/recorders/" + recId,
                 "account_token=" + accountToken);
 
-        return JsonUtil.toBean(respStr, RecordStatusResp.class);
+        return JsonUtil.toObject(respStr, RecordStatusResp.class);
     }
 
 
@@ -92,10 +93,10 @@ public class ControlApi extends BaseApi {
      */
     public static RecordListResp getRecordList(String confId, String accountToken) {
         String respStr = HttpSend.getSend(
-                CommonKit.URI + "/api/v1/vc/confs/" + confId + "/recorders",
+                AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/recorders",
                 "account_token=" + accountToken);
 
-        return JsonUtil.toBean(respStr, RecordListResp.class);
+        return JsonUtil.toObject(respStr, RecordListResp.class);
     }
 
     /**
@@ -118,7 +119,7 @@ public class ControlApi extends BaseApi {
         }
 
         String respStr = HttpSend.getSend(
-                CommonKit.URI + "/api/v1/vc/confs/" + confId + "/recorders/" + recId + "/state",
+                AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/recorders/" + recId + "/state",
                 "account_token=" + accountToken + "&_method=PUT&params=" + encode);
 
         if (JsonUtil.toMap(respStr).get("success") == 1) {
@@ -149,7 +150,7 @@ public class ControlApi extends BaseApi {
         }
 
         String respStr = HttpSend.getSend(
-                CommonKit.URI + "/api/v1/vc/confs/" + confId + "/recorders/" + recId,
+                AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/recorders/" + recId,
                 "account_token=" + accountToken + "&_method=DELETE&params=" + encode);
 
         if (JsonUtil.toMap(respStr).get("success") == 1) {
@@ -177,11 +178,11 @@ public class ControlApi extends BaseApi {
             return null;
         }
 
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/mts",
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/mts",
                 "account_token=" + token + "&params=" + encode, cookies);
         logger.debug("confId<" + confId + ">,ControlApi.addMts:" + rtnMap.toString());
 
-        TerminalResp resp = JsonUtil.toBean(rtnMap.get("resp"), TerminalResp.class);
+        TerminalResp resp = JsonUtil.toObject(rtnMap.get("resp"), TerminalResp.class);
         return resp;
     }
 
@@ -212,7 +213,7 @@ public class ControlApi extends BaseApi {
             return CommonKit.fail();
         }
 
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/mts",
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/mts",
                 "account_token=" + token + "&_method=DELETE&params=" + encode, cookies);
         logger.debug("ControlApi.deleteMts:" + rtnMap.toString());
 
@@ -246,7 +247,7 @@ public class ControlApi extends BaseApi {
             return CommonKit.fail();
         }
 
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/online_mts",
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/online_mts",
                 "account_token=" + token + "&params=" + encode, cookies);
         logger.debug("ControlApi.callOnlineMts:" + rtnMap.toString());
 
@@ -277,7 +278,7 @@ public class ControlApi extends BaseApi {
         if (StringUtils.isEmpty(encode)) {
             return CommonKit.fail();
         }
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/online_mts",
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/online_mts",
                 "account_token=" + token + "&params=" + encode + "&_method=DELETE", cookies);
         logger.debug("ControlApi.deleteOnlineMts:" + rtnMap.toString());
 
@@ -304,7 +305,7 @@ public class ControlApi extends BaseApi {
         if (StringUtils.isEmpty(encode)) {
             return CommonKit.fail();
         }
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/silence",
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/silence",
                 "account_token=" + token + "&params=" + encode + "&_method=PUT", cookies);
         logger.debug("ControlApi.silence:" + rtnMap.toString());
 
@@ -331,7 +332,7 @@ public class ControlApi extends BaseApi {
         if (StringUtils.isEmpty(encode)) {
             return CommonKit.fail();
         }
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/mute",
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/mute",
                 "account_token=" + token + "&params=" + encode + "&_method=PUT", cookies);
         logger.debug("ControlApi.mute:" + rtnMap.toString());
 
@@ -356,7 +357,7 @@ public class ControlApi extends BaseApi {
             return CommonKit.fail();
         }
 
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/vmps",
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/vmps",
                 "account_token=" + token + "&params=" + encode, cookies);
         logger.debug("ControlApi.startVmps:" + rtnMap.toString());
 
@@ -381,7 +382,7 @@ public class ControlApi extends BaseApi {
             return CommonKit.fail();
         }
 
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/vmps/1",
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/vmps/1",
                 "account_token=" + token + "&params=" + encode, cookies);
         logger.debug("ControlApi.stopVmps:" + rtnMap.toString());
 
@@ -400,8 +401,8 @@ public class ControlApi extends BaseApi {
      * @param cookies 登录授权后，携带信息
      * @return fail/success
      */
-    public static String speaker(String confId, String mtId, String token, String cookies) {
-        if (StringUtils.isEmpty(mtId) || StringUtils.isEmpty(confId)) {
+    public static String speaker(String confId, int mtId, String token, String cookies) {
+        if (StringUtils.isEmpty(mtId + "") || StringUtils.isEmpty(confId)) {
             return CommonKit.fail();
         }
         String params = "{\"mt_id\": \"" + mtId + "\"}";
@@ -410,7 +411,7 @@ public class ControlApi extends BaseApi {
             return CommonKit.fail();
         }
 
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.URI + "/api/v1/vc/confs/" + confId + "/speaker",
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/speaker",
                 "account_token=" + token + "&params=" + encode + "&_method=PUT", cookies);
         logger.debug("ControlApi.speaker:" + rtnMap.toString());
 

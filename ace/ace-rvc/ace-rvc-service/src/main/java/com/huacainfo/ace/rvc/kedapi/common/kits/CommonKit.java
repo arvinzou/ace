@@ -14,16 +14,6 @@ import java.util.Map;
  * @create: 2017-11-17 10:01
  */
 public class CommonKit {
-    public static final String HTTP = "http://";
-    public static final String HTTPS = "https://";
-    public static final String IP_PORT = "127.0.0.1:8080";
-    public static final String SEPARATOR = "/";
-    public static final String URI = "http://192.168.20.240";
-    public static final String VRS_URI = "http://192.168.20.243";
-
-    public static final String APP_KEY = "PLmCgniw0Ihj";
-    public static final String APP_SECRET = "lxrQj5TqjX8J";
-    public static final String APP_NAME = "lcjt_cdsdj";
 
     /***
      * 失败返回
