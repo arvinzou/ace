@@ -39,6 +39,15 @@ function init_uploader(config) {
     uploader.bind("UploadComplete", function () {
 
     });
+
+    uploader.bind('FilesAdded', function(uploader, file){
+        // al ert('只能上传1张图片，请注意选择图片！');
+        if(uploader.files.length>1) { // 最多上传1张图
+            //超过1张部分消除。
+            uploader.splice(1, 999);
+        }
+    });
+
     uploader.bind("FileUploaded", function (uploader, file, responseObject) {
         console.log(responseObject.response);
         var rst = JSON.parse(responseObject.response);
@@ -59,7 +68,6 @@ function init_uploader(config) {
             });
 
         } else {
-
             if (config.target) {
                 $('input[name=' + config.target + ']').val(rst.value);
                 if (config.target == 'grid') {

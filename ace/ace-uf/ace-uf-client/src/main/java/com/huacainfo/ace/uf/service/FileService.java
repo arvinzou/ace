@@ -3,11 +3,9 @@ package com.huacainfo.ace.uf.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.uf.model.Personage;
-import com.huacainfo.ace.uf.vo.FileQVo;
-import com.huacainfo.ace.uf.vo.FileVo;
-import com.huacainfo.ace.uf.vo.PersonageQVo;
-import com.huacainfo.ace.uf.vo.PersonageVo;
+import com.huacainfo.ace.uf.vo.*;
 
 /**
  * @author hcwy
@@ -51,4 +49,12 @@ public interface FileService {
      * @throws Exception
      */
     public abstract MessageResponse insertFile(FileQVo obj, UserProp userProp) throws Exception;
+
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public abstract SingleResult<FileVo> selectFileByPrimaryKey(String id) throws Exception;
 }

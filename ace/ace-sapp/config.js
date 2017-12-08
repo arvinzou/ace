@@ -7,7 +7,8 @@
 var host = "14592619.qcloud.la";
 
 var server = "https://zx.huacainfo.com";
-var serverfile = "http://zx.huacainfo.com/";
+//var server = "http://127.0.0.7";
+var serverfile = "https://zx.huacainfo.com/";
 var config = {
     // 下面的地址配合云端 Server 工作
     host,
@@ -61,7 +62,7 @@ var config = {
     sendCmccByMobile: `${server}/uf/www/sendCmccByMobile.do`,
     // 获取关于统战文件路径。
     findFilesList:`${server}/uf/www/findFilesList.do`,
-    selectFilesById: `${server}/uf/www/selectContentByPrimaryKey.do`,
+    selectFilesById: `${server}/uf/www/selectFileByPrimaryKey.do`,
     //获取关于同心工程路径。
     findConcentricList: `${server}/uf/www/findTongXinList.do`,
     selectConcentricById: `${server}/uf/www/selectTongXinByPrimaryKey.do`,

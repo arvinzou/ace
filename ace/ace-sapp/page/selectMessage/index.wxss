@@ -38,11 +38,6 @@ page{
     padding: 30rpx 0;
     border-bottom: 1px solid #e5e5e5;
 }
-
-.msg_bottom{
-     border-bottom: 1px solid white;
-}
-
 .title{
     color: #222;
     font-size: 32rpx;
@@ -63,11 +58,11 @@ page{
     font-weight: bold;
 }
 
-.content_text{
-
+.usual_progres{
+    margin-top: 12rpx;
 }
 
-.on{
-    background-color: #e5e5e5;
+.msgFile{
+   padding: 30rpx 0 12rpx 0; 
 }
 

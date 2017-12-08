@@ -31,7 +31,7 @@
 
                      名称： <input name="name" type="text" style="width: 200px;" />
 			         扶贫进度：<input class="easyui-combobox" style="width: 200px" name="category"
-							data-options="url:'${portalPath}/dict/findListByCategoryId.do?categoryId=106&selected=false',
+							data-options="url:'${portalPath}/dict/findListByCategoryId.do?categoryId=109&selected=false',
 											method:'get',
 											valueField:'code',
 											textField:'name',
@@ -104,8 +104,8 @@
 				</div>
 			</div>
 
-			<h5 class="header-title">扶贫相册</h5>
-			<div class="row" style="padding:10px" id="custom-dia">
+			<h5 class="header-title">扶贫封面</h5>
+			<div class="row" style="padding:10px" id="cover">
 			</div>
 			<h5 class="header-title">详细情况</h5>
 			<div class="row" style="padding:10px" id="content">

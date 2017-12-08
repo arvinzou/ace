@@ -14,7 +14,7 @@ var objectType = null;
 Page({
     data: {
         limit : 10,
-        type: 1,
+        type: 0,
         navbar: ['待培训', '已结束'],
         currentTab: 0,
         /*文件服务器*/
@@ -48,7 +48,7 @@ Page({
             })
         }
 
-        that.data.type = parseInt(that.data.currentTab) + 1;
+        that.data.type = parseInt(that.data.currentTab);
         that.changePage(that.data.type);
         if (objectType.LoadIsFrist) {
             that.contentView(that.data.type);
@@ -61,10 +61,10 @@ Page({
     changePage: function (type) {
         let that = this;
         let key = "";
-        if (type == 1) {
+        if (type == 0) {
             key = "Wait";
             objectType = that.data.educationWait;
-        } else if (type == 2) {
+        } else if (type == 1) {
             key = "End";
             objectType = that.data.educationEnd;
         }

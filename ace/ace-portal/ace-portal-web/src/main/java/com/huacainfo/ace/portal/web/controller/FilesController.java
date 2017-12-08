@@ -3,6 +3,8 @@ package com.huacainfo.ace.portal.web.controller;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,27 +29,23 @@ public class FilesController extends PortalBaseController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 
-	    * @Title:uploadFile 
-	    * @Description:  TODO(上传文件) 
-	 		* @param:        @param file
-	 		* @param:        @param collectionName
-	 		* @param:        @return
-	 		* @param:        @throws Exception    
-	 		* @return:       SingleResult<String[]>    
-	 		* @throws   
-	    * @author: chenxiaoke 
-	    * @version: 2016年11月17日 下午1:54:38
+	* @Title:uploadFile
+	* @Description:  TODO(上传文件)
+	* @param:        @param file
+	* @param:        @param collectionName
+	* @param:        @return
+	* @param:        @throws Exception
+	* @return:       SingleResult<String[]>
+	* @throws
+	* @author: chenxiaoke
+	* @version: 2016年11月17日 下午1:54:38
 	 */
 	@RequestMapping(value = "/uploadFile.do")
 	@ResponseBody
-	public SingleResult<String[]> uploadFile(
-			@RequestParam MultipartFile[] file, String collectionName)
-			throws Exception {
+	public SingleResult<String[]> uploadFile(@RequestParam MultipartFile[] file, String collectionName) throws Exception {
 		SingleResult<String[]> rst = new SingleResult<String[]>(0, "上传成功！");
 		String[] fileNames = new String[file.length];
-		String dir = this.getRequest().getSession().getServletContext()
-				.getRealPath(File.separator)
-				+ "tmp";
+		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
 		File tmp = new File(dir);
 		if (!tmp.exists()) {
 			tmp.mkdirs();
@@ -56,8 +54,7 @@ public class FilesController extends PortalBaseController {
 		for (MultipartFile o : file) {
 			File dest = new File(dir + File.separator + o.getName());
 			o.transferTo(dest);
-			fileNames[i] = this.fileSaver.saveFile(dest,
-					o.getOriginalFilename());
+			fileNames[i] = this.fileSaver.saveFile(dest, o.getOriginalFilename());
 			dest.delete();
 			filesService.insertFiles(fileNames[i], this.getCurUserProp());
 			i++;
@@ -65,6 +62,44 @@ public class FilesController extends PortalBaseController {
 		rst.setValue(fileNames);
 		return rst;
 	}
+
+
+	/**
+	 *
+	 * @Title:uploadFile
+	 * @Description:  TODO(上传文件)
+	 * @param:        @param file
+	 * @param:        @param collectionName
+	 * @param:        @return
+	 * @param:        @throws Exception
+	 * @return:       SingleResult<String[]>
+	 * @throws
+	 * @author: chenxiaoke
+	 * @version: 2016年11月17日 下午1:54:38
+	 */
+	@RequestMapping(value = "/uploadFilePlus.do")
+	@ResponseBody
+	public SingleResult<Map<String,Object>> uploadFilePlus(@RequestParam MultipartFile[] file, String collectionName) throws Exception {
+		SingleResult<Map<String,Object>> rst = new SingleResult<Map<String,Object>>(0, "上传成功！");
+		String[] fileNames = new String[file.length];
+		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+		File tmp = new File(dir);
+		if (!tmp.exists()) {
+			tmp.mkdirs();
+		}
+		File dest = new File(dir + File.separator + file[0].getName());
+		file[0].transferTo(dest);
+		fileNames[0] = this.fileSaver.saveFile(dest, file[0].getOriginalFilename());
+		dest.delete();
+		filesService.insertFiles(fileNames[0], this.getCurUserProp());
+		Map<String,Object> values=new HashMap<String,Object>();
+		values.put("fileName",file[0].getOriginalFilename());
+		values.put("fileSize",file[0].getSize());
+		values.put("fileNames",fileNames[0]);
+		rst.setValue(values);
+		return rst;
+	}
+
 
 	@RequestMapping(value = "/uploadImage.do")
 	@ResponseBody
@@ -74,9 +109,7 @@ public class FilesController extends PortalBaseController {
 		Map<String,Object> rst = new HashMap<String,Object>();
 		String fastdfs_server=((Map)this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
 		String[] fileNames = new String[file.length];
-		String dir = this.getRequest().getSession().getServletContext()
-				.getRealPath(File.separator)
-				+ "tmp";
+		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
 		File tmp = new File(dir);
 		if (!tmp.exists()) {
 			tmp.mkdirs();

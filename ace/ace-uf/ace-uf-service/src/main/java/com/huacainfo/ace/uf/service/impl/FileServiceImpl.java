@@ -3,7 +3,9 @@ package com.huacainfo.ace.uf.service.impl;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.FileUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.uf.dao.FileDao;
 import com.huacainfo.ace.uf.service.FileService;
@@ -28,11 +30,12 @@ public class FileServiceImpl implements FileService {
     private FileDao fileDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
     @Override
-    public PageResult<FileVo> findFileList(FileQVo condition,int start, int limit, String orderBy) throws Exception {
+    public PageResult<FileVo> findFileList(FileQVo condition, int start, int limit, String orderBy) throws Exception {
         this.logger.info("===============================fileserviceImpl=============================");
         PageResult<FileVo> rst = new PageResult<FileVo>();
-        List<FileVo> list = this.fileDao.findFileList(condition,start, limit, orderBy);
+        List<FileVo> list = this.fileDao.findFileList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.fileDao.findFileCount(condition);
@@ -43,6 +46,7 @@ public class FileServiceImpl implements FileService {
 
     /**
      * 根据ID更新统战文件列表
+     *
      * @param obj
      * @param userProp
      * @return
@@ -54,29 +58,31 @@ public class FileServiceImpl implements FileService {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(obj.getName())) {
-            return new MessageResponse(1, "文件名称不能为空");
+            return new MessageResponse(1, "请重新上传文件");
         }
-        if (CommonUtils.isBlank(obj.getType())) {
+        if (CommonUtils.isBlank(obj.getFileSize())) {
+            return new MessageResponse(1, "请重新上传文件");
+        }
+        if (CommonUtils.isBlank(obj.getCategory())) {
             return new MessageResponse(1, "统战文件类型不能为空");
         }
-        String fileUrl=obj.getFile();
+        String fileUrl = obj.getFile();
         if (CommonUtils.isBlank(fileUrl)) {
             return new MessageResponse(1, "文件不能为空");
         }
-        int index=fileUrl.lastIndexOf(".");
-        String suffix=fileUrl.substring(index+1,fileUrl.length());
+        int index = fileUrl.lastIndexOf(".");
+        String suffix = fileUrl.substring(index + 1, fileUrl.length());
         if (CommonUtils.isBlank(suffix)) {
             return new MessageResponse(1, "文件后缀不能为空");
         }
+        obj.setFileSize(FileUtil.getFormatSize(obj.getFileSize()));
         obj.setSuffix(suffix);
-
-
         obj.setLastModifyDate(new Date());
         obj.setLastModifyUserName(userProp.getName());
         obj.setLastModifyUserId(userProp.getUserId());
         this.fileDao.updateFileById(obj);
-        this.dataBaseLogService.log("变更统战文件", "统战人士", "",obj.getId(), obj.getName(), userProp);
-        return new MessageResponse(0,"更新统战文件完成");
+        this.dataBaseLogService.log("变更统战文件", "统战人士", "", obj.getId(), obj.getName(), userProp);
+        return new MessageResponse(0, "更新统战文件完成");
     }
 
     @Override
@@ -85,36 +91,37 @@ public class FileServiceImpl implements FileService {
             return new MessageResponse(1, "主键不能为空！");
         }
         this.fileDao.deleteFileByFileId(id);
-        this.dataBaseLogService.log("删除统战文件", "统战人士", "",id, id, userProp);
-        return new MessageResponse(0,"删除统战文件完成");
+        this.dataBaseLogService.log("删除统战文件", "统战人士", "", id, id, userProp);
+        return new MessageResponse(0, "删除统战文件完成");
     }
 
     @Override
     public MessageResponse insertFile(FileQVo obj, UserProp userProp) throws Exception {
-        obj.setId(String.valueOf(System.currentTimeMillis()));
+        obj.setId(UUID.randomUUID().toString());
         if (CommonUtils.isBlank(obj.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(obj.getName())) {
-            return new MessageResponse(1, "文件名称不能为空");
+            return new MessageResponse(1, "请重新上传文件");
         }
-        if (CommonUtils.isBlank(obj.getType())) {
+        if (CommonUtils.isBlank(obj.getFileSize())) {
+            return new MessageResponse(1, "请重新上传文件");
+        }
+        if (CommonUtils.isBlank(obj.getCategory())) {
             return new MessageResponse(1, "统战文件类型不能为空");
         }
-        String fileUrl=obj.getFile();
+        String fileUrl = obj.getFile();
         if (CommonUtils.isBlank(fileUrl)) {
             return new MessageResponse(1, "文件不能为空");
         }
-        int index=fileUrl.lastIndexOf(".");
-        String suffix=fileUrl.substring(index+1,fileUrl.length());
+        int index = fileUrl.lastIndexOf(".");
+        String suffix = fileUrl.substring(index + 1, fileUrl.length());
         if (CommonUtils.isBlank(suffix)) {
             return new MessageResponse(1, "文件后缀不能为空");
         }
+
         obj.setSuffix(suffix);
-        obj.setFileSize("27.1k");
-        if (CommonUtils.isBlank(obj.getFileSize())) {
-            return new MessageResponse(1, "统战文件大小不能为空");
-        }
+        obj.setFileSize(FileUtil.getFormatSize(obj.getFileSize()));
         obj.setLastModifyDate(new Date());
         obj.setLastModifyUserName(userProp.getName());
         obj.setLastModifyUserId(userProp.getUserId());
@@ -124,5 +131,17 @@ public class FileServiceImpl implements FileService {
         this.fileDao.insertFile(obj);
         this.dataBaseLogService.log("添加统战人士", "统战人士", "", obj.getName(), obj.getName(), userProp);
         return new MessageResponse(0, "添加统战人士完成！");
+    }
+
+    /**
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public SingleResult<FileVo> selectFileByPrimaryKey(String id) throws Exception {
+        SingleResult<FileVo> rst = new SingleResult<FileVo>();
+        rst.setValue(this.fileDao.selectByPrimaryKey(id));
+        return rst;
     }
 }

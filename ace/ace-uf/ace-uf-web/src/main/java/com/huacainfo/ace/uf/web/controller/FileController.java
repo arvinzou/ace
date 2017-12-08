@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.uf.service.FileService;
 import com.huacainfo.ace.uf.vo.FileQVo;
 import com.huacainfo.ace.uf.vo.FileVo;
@@ -50,8 +51,6 @@ public class FileController extends UfBaseController {
     @RequestMapping(value = "/updateFile.do")
     @ResponseBody
     public MessageResponse updateFile(String jsons) throws Exception {
-        this.logger.info(jsons.toString());
-        this.logger.info("===============================file=============================");
         FileQVo obj = JSON.parseObject(jsons, FileQVo.class);
         return this.fileService.updateFileById(obj, this.getCurUserProp());
     }
@@ -72,10 +71,18 @@ public class FileController extends UfBaseController {
     @RequestMapping(value = "/insertFile.do")
     @ResponseBody
     public MessageResponse insertFile(String jsons) throws Exception {
-        this.logger.info(jsons.toString());
-        this.logger.info("===============================insert file =============================");
         FileQVo obj = JSON.parseObject(jsons, FileQVo.class);
         return this.fileService.insertFile(obj, this.getCurUserProp());
 
     }
+
+    /**
+     * 查看统战文件
+     */
+    @RequestMapping(value = "/selectFileByPrimaryKey.do")
+    @ResponseBody
+    public SingleResult<FileVo> selectFileByPrimaryKey(String id) throws Exception {
+        return this.fileService.selectFileByPrimaryKey(id);
+    }
+
 }

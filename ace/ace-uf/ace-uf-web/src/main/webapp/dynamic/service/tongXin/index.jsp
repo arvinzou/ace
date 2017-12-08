@@ -116,17 +116,14 @@
             <span class="labelItemHeader">时间</span><br>
             <span id="createTime"></span>
         </div>
-
-        <div class="labelItem">
-            <span class="labelItemHeader">扶贫进度</span><br>
-            <span id="status"></span>
-        </div>
         <div class="labelItem">
             <span class="labelItemHeader">类别</span><br>
             <span id="category"></span>
         </div>
     </div>
-
+    <h5 class="header-title">同心封面</h5>
+    <div class="row" style="padding:10px" id="cover">
+    </div>
     <h5 class="header-title">详细情况</h5>
     <div class="row" style="padding:10px" id="content">
     </div>

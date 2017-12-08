@@ -33,6 +33,8 @@ public class PeiXun {
 
     private String cover;
 
+    private String file;
+
     private String createUserId;
 
     private String createUserName;
@@ -181,6 +183,14 @@ public class PeiXun {
         this.cover = cover;
     }
 
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
     @Override
     public String toString() {
         return "PeiXun{" +
@@ -194,6 +204,8 @@ public class PeiXun {
                 ", category='" + category + '\'' +
                 ", time=" + time +
                 ", content='" + content + '\'' +
+                ", cover='" + cover + '\'' +
+                ", file='" + file + '\'' +
                 ", createUserId='" + createUserId + '\'' +
                 ", createUserName='" + createUserName + '\'' +
                 ", createDate=" + createDate +

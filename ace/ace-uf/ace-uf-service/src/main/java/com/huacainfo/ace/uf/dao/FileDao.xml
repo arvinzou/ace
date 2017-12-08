@@ -13,8 +13,8 @@
         </if>
 
 
-        <if test='condition.type!=null and condition.type!=""'>
-            and t.type =#{condition.type,jdbcType=VARCHAR}
+        <if test='condition.category!=null and condition.category!=""'>
+            and t.category =#{condition.category,jdbcType=VARCHAR}
         </if>
 
         <if test='condition.suffix!=null and condition.suffix!=""'>
@@ -34,7 +34,7 @@
                 t.id,
                 t.name,
                 t.remark,
-                t.type,
+                t.category,
                 t.file,
                 t.suffix,
                 t.fileSize,
@@ -61,7 +61,7 @@
         update file set
         name = #{name,jdbcType=VARCHAR},
         remark = #{remark,jdbcType=VARCHAR},
-        type = #{type,jdbcType=VARCHAR},
+        category = #{category,jdbcType=VARCHAR},
         suffix = #{suffix,jdbcType=VARCHAR},
         file = #{file,jdbcType=VARCHAR},
         fileSize=#{fileSize,jdbcType=VARCHAR},
@@ -94,10 +94,10 @@
             id,
             name,
             remark,
-            type,
+            category,
             file,
             suffix,
-            fileSize
+            fileSize,
             createUserId,
             createUserName,
             createDate,
@@ -109,7 +109,7 @@
             #{id,jdbcType=VARCHAR},
             #{name,jdbcType=VARCHAR},
             #{remark,jdbcType=VARCHAR},
-            #{type,jdbcType=VARCHAR},
+            #{category,jdbcType=VARCHAR},
             #{file,jdbcType=VARCHAR},
             #{suffix,jdbcType=VARCHAR},
             #{fileSize,jdbcType=VARCHAR},
@@ -121,4 +121,24 @@
             #{lastModifyDate,jdbcType=TIMESTAMP}
         )
     </insert>
+
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.huacainfo.ace.uf.vo.FileVo">
+        select
+            id,
+            name,
+            remark,
+            category,
+            file,
+            suffix,
+            fileSize,
+            createUserId,
+            createUserName,
+            createDate,
+            lastModifyUserId,
+            lastModifyUserName,
+            lastModifyDate
+        from File
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
 </mapper>

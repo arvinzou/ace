@@ -27,6 +27,13 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
                     名称： <input name="name" type="text" style="width: 200px;"/>
+
+                    培训进度：<input class="easyui-combobox" style="width: 200px" name="category"
+                                data-options="url:'${portalPath}/dict/findListByCategoryId.do?categoryId=108&selected=false',
+											method:'get',
+											valueField:'code',
+											textField:'name',
+											panelHeight:'auto'">
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/peiXun/findPeiXunList.do">
                         <i
@@ -103,7 +110,9 @@
     </div>
     <h5 class="header-title">培训资料</h5>
     <div class="row" style="padding:10px" id="custom-dia">
-
+        <h5 class="header-title">培训封面</h5>
+        <div class="row" style="padding:10px" id="cover">
+        </div>
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">

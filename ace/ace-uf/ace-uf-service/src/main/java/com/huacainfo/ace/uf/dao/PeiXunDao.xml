@@ -12,6 +12,7 @@
         <result column="time" jdbcType="TIMESTAMP" property="time"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="file" jdbcType="VARCHAR" property="file"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
@@ -25,7 +26,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-          id, name, address,latitude,longitude, dept, trainees,time,if(sysdate()>time,'1','0') as category, content,cover, createUserId, createUserName,
+          id, name, address,latitude,longitude, dept, trainees,time,if(sysdate()>time,'1','0') as category, content,cover,file, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
@@ -52,6 +53,7 @@
                  time,
                  content,
                  cover,
+                 file,
                  createUserId,
                  createUserName,
                  createDate,
@@ -70,6 +72,7 @@
                   #{time,jdbcType=TIMESTAMP},
                   #{content,jdbcType=VARCHAR},
                    #{cover,jdbcType=VARCHAR},
+                   #{file,jdbcType=VARCHAR},
                   #{createUserId,jdbcType=VARCHAR},
                   #{createUserName,jdbcType=VARCHAR},
                   #{createDate,jdbcType=TIMESTAMP},
@@ -93,7 +96,13 @@
             trainees = #{trainees,jdbcType=VARCHAR},
             time = #{time,jdbcType=TIMESTAMP},
             content = #{content,jdbcType=VARCHAR},
-            cover = #{cover,jdbcType=VARCHAR},
+            <if test='cover!=null and cover!=""'>
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+
+            <if test='file!=null and file!=""'>
+                file = #{file,jdbcType=VARCHAR},
+            </if>
             <if test='createUserId!=null and createUserId!=""'>
                 createUserId=#{createUserId,jdbcType=VARCHAR},
             </if>
@@ -126,10 +135,10 @@
             concat('%',#{condition.dept,jdbcType=VARCHAR},'%')
         </if>
 
-        <if test="condition.category==1">
+        <if test="condition.category==0">
             and time &gt; now()
         </if>
-        <if test="condition.category==2">
+        <if test="condition.category==1">
             and time &lt; now()
         </if>
     </sql>

@@ -3,8 +3,9 @@ var cfg = require("../../config.js");
 Page({
     data: {
         requestAdd: '',
-        name:'',
-        list:[],
+        name: '',
+        list: [],
+        serverfile: cfg.serverfile,
     },
 
     onReady: function (res) {
@@ -26,7 +27,7 @@ Page({
             { id: options.id },
             function (data) {
                 that.setData({
-                   list:data.value,
+                    list: data.value,
                 });
             }
         );
@@ -65,7 +66,7 @@ Page({
         if (module == "培训教育") {
             that.setData({
                 requestAdd: cfg.selectEducationById,
-                name:'培训',
+                name: '培训',
             });
         } else if (module == "统战文件") {
             that.setData({
@@ -103,7 +104,7 @@ Page({
     navbarTap_map: function (e) {
         console.log("map");
         console.log(e.currentTarget.dataset.latitude);
-        if(!e.currentTarget.dataset.latitude){
+        if (!e.currentTarget.dataset.latitude) {
             return;
         }
         wx.openLocation({
@@ -119,6 +120,79 @@ Page({
         wx.makePhoneCall({
             phoneNumber: e.currentTarget.dataset.telnumber
         });
+    },
+
+    navbarTap_file: function (e) {
+        let that = this;
+        console.log(e);
+        let urls = that.data.serverfile + e.currentTarget.dataset.fileaddr;
+        const downloadTask = wx.downloadFile({
+            url: urls, //开启tomcat后的本机ip地址
+            success: function (res) {
+                console.log("res.tempFilePath");
+                console.log(res.tempFilePath);
+                var filePath = res.tempFilePath
+                wx.openDocument({
+                    filePath: filePath,
+                    success: function (res) {
+                        console.log('打开文档成功')
+                        console.log(res)
+                    },
+                    fail: function (res) {
+                        console.log('fail')
+                        console.log(res)
+                    },
+                    complete: function (res) {
+                        console.log('complete')
+                        console.log(res)
+                    }
+                })
+            }
+        })
+        downloadTask.onProgressUpdate((res) => {
+            console.log('下载进度', res.progress)
+            this.setData({
+                downloadPercent: (res.progress * 100).toFixed(2)//toFixed(2)取小数点后两位，更新wxml中progress组件的进度值  
+            })
+        })
     }
 })
 
+
+
+
+
+
+// wx.openDocument({
+//     filePath: res.tempFilePath,
+//     success: function (res) {
+//         that.setData({
+//             content: filePath
+//         })
+//     }
+// })
+
+
+
+
+// wx.saveFile({
+//     tempFilePath: tempFilePath,
+//     success: function (res) {
+//         console.log("success");
+//         var savedFilePath = res.savedFilePath;
+//         wx.getSavedFileList({
+//             success: function (res) {
+//                 console.log(res.fileList)
+//             }
+//         })
+//     },
+//     fail: function (res) {
+//         console.log('fail');
+//         console.log(res);
+//         showTip();
+//     },
+//     complete: function (res) {
+//         console.log('complete');
+//         console.log(res);
+//     }
+// })

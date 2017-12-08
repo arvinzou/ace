@@ -92,7 +92,7 @@ Page({
         //请求数据。
         util.request(cfg.findFilesList,
             {
-                type: value,
+                category: value,
                 start: objectType.start * 10,
                 limit: that.data.limit
             },
@@ -152,13 +152,6 @@ Page({
         that.contentView(that.data.type);
     },
 
-    /**
-     * 点击文件事件
-     */
-    ViewFile: function () {
-        console.log("hehe");
-    },
-
     onShareAppMessage: function (res) {
         return {
             title: '我发现了掌上统战小程序，一起看看吧',
@@ -187,5 +180,15 @@ Page({
     bindChange: function (e) {
         var that = this;
         that.setData({ currentTab: e.detail.current });
+    },
+
+    /**
+     * 点击查看详情
+     */
+    listClick: function (e) {
+        console.log(e);
+        let p = e.currentTarget.dataset.id;
+        let module = '统战文件'
+        wx.navigateTo({ url: '../selectMessage/index?id=' + p + '&module=' + module })
     },
 })
