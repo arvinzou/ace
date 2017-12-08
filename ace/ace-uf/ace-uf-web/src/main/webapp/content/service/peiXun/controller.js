@@ -42,11 +42,9 @@ jQuery(function ($) {
                         '<div class="widget-header" />')
                     style_edit_form(form);
                     $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
-                    /*var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-                    var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-                    initPhoto(gd.id);*/
                     appendMapBtn("address");
                     appendUploadBtn("cover");
+                    appendUploadBtn("file");
                 }
             })
     });
@@ -67,11 +65,9 @@ jQuery(function ($) {
                         '<div class="widget-header" />')
                     style_edit_form(form);
                     $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
-                    var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-                    var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-                    initPhoto(gd.id);
                     appendMapBtn("address");
                     appendUploadBtn("cover");
+                    appendUploadBtn("file");
                 }
             })
     });
@@ -150,7 +146,17 @@ function loadView(id) {
                 if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
+                if (key == 'cover') {
+                    if (value != '') {
+                        value = '<image src="' + fastdfs_server + value
+                            + '" />';
+                    } else {
+                        value = '待上传';
+                    }
+
+                }
                 $("#dialog-message-view").find('#' + key).html(value);
+
             });
         },
         error: function () {

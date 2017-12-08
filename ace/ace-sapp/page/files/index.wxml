@@ -4,12 +4,12 @@
 </view>
 
 <!--统战文件-->
-<view class='tzwj' hidden="{{currentTab!==0}}" >
+<view class='tzwj' hidden="{{currentTab!==0}}">
     <view class='warehouse' bindchange="bindChange">
         <block wx:for-items="{{tongZhanWj.List}}" wx:for-item="item" wx:key="{{item.id}}">
-            <navigator class="fileContent">
+            <navigator class="fileContent" bindtap="listClick" data-id='{{item.id}}'>
                 <view class="timeBar">{{item.lastModifyDate}}</view>
-                <view class='content' bindtap='ViewFile'>
+                <view class='content'>
                     <view class="imgLeft">
                         <image class="image" src="../../image/{{item.suffix}}.png" mode='widthFix'></image>
                     </view>
@@ -30,9 +30,9 @@
 <view class='tzzl' hidden="{{currentTab!==1}}">
     <view class='warehouse' bindchange="bindChange">
         <block wx:for-items="{{tongZhanZl.List}}" wx:key="{{item.id}}">
-            <navigator class="fileContent">
+            <navigator class="fileContent" bindtap="listClick" data-id='{{item.id}}'>
                 <view class="timeBar">{{item.lastModifyDate}}</view>
-                <view class='content' bindtap='ViewFile'>
+                <view class='content'>
                     <view class="imgLeft">
                         <image class="image" src="../../image/{{item.suffix}}.png" mode='widthFix'></image>
                     </view>

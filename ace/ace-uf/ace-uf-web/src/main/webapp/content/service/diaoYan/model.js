@@ -1,4 +1,4 @@
-var _colNames = ['主键', '名称', '作者', '作者单位', '媒体', '宣传网址', '发布日期', '封面', '操作'];
+var _colNames = ['主键', '名称', '作者', '作者单位', '媒体', '宣传网址', '发布日期', '封面', '操作','创建人编号', '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间'];
 var _colModel = function () {
     return [
         {
@@ -40,7 +40,7 @@ var _colModel = function () {
         {
             name: 'author',
             editable: true,
-            width: 200,
+            width: 100,
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "50",
@@ -50,6 +50,7 @@ var _colModel = function () {
 
         {
             name: 'dept',
+            hidden: true,
             editable: true,
             width: 200,
             editoptions: {
@@ -62,7 +63,7 @@ var _colModel = function () {
         {
             name: 'media',
             editable: true,
-            width: 200,
+            width: 100,
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "50",
@@ -80,10 +81,11 @@ var _colModel = function () {
         {
             name: 'url',
             editable: true,
+            hidden: true,
             width: 300,
             editoptions: {
                 style: 'width:200px;',
-                maxlength: "50",
+                maxlength: "150",
                 colspan: false
             },
             formoptions: {
@@ -99,7 +101,7 @@ var _colModel = function () {
         {
             name: 'published',
             editable: true,
-            width: 200,
+            width: 60,
             edittype: "datebox",
             dataoptions: {
                 formatter: function (date) {
@@ -159,13 +161,44 @@ var _colModel = function () {
         },
         {
             name: 'opt',
-            width: 100,
+            width: 30,
             hidden: false,
             editable: false,
             sortable: false,
             renderer: function (value, cur) {
                 return renderBtn(cur);
             }
+        },
+        {
+            name: 'createUserId',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'createUserName',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'createDate',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'lastModifyUserId',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'lastModifyUserName',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'lastModifyDate',
+            hidden: true,
+            editable: false,
+            width: 100
         }
     ];
 }

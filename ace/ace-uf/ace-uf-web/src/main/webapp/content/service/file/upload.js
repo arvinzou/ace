@@ -1,8 +1,8 @@
 jQuery(function ($) {
     console.log("----------------------------inntel");
     init_uploader({
-        extensions: "jpg,png,bmp,doc,xlsx,xls,docx,pdf,pptx,ppt",
-        url: portalPath + '/files/uploadFile.do',
+        extensions: "doc,docx,xlsx,xls,pdf,pptx,ppt",
+        url: portalPath + '/files/uploadFilePlus.do',
         target: "url",
         multipart_params: {}
     });
@@ -35,17 +35,8 @@ function init_uploader(config) {
                     //extensions为文件扩展名，有多个时用逗号隔开。该属性默认为一个空数组，即不做限制。
                     extensions: config.extensions,
                     //不允许文件重复
-                    prevent_duplicates:true
+                    prevent_duplicates: true
                 }]
-            },
-
-            // Resize images on clientside if we can
-            //可以使用该参数对将要上传的图片进行压缩
-            resize: {
-                width: 600,
-                height: 600,
-                //压缩后图片的质量
-                quality: 90
             },
 
             //服务器端接收和处理上传文件的脚本地址
@@ -54,13 +45,20 @@ function init_uploader(config) {
             flash_swf_url: portalPath + '/content/plupload-2.1.2/js/Moxie.swf',
             //用silverlight上传时组件的url地址
             silverlight_xap_url: portalPath + '/content/plupload-2.1.2/js/Moxie.xap',
-            //获取文件信息
-            //file_data_name：
         });
     var uploader = $('#uploader').pluploadQueue();
-    uploader.bind("UploadComplete", function () {});
+    uploader.bind("UploadComplete", function () {
+    });
+
+    uploader.bind('FilesAdded', function(uploader, files){
+        // al ert('只能上传1张图片，请注意选择图片！');
+        if(uploader.files.length>1) { // 最多上传1张图
+            //超过1张部分消除。
+            uploader.splice(1, 999);
+        }
+    });
+
     uploader.bind("FileUploaded", function (uploader, file, responseObject) {
-        console.log(responseObject.response);
         var rst = JSON.parse(responseObject.response);
         if (!rst.state) {
             bootbox.dialog({
@@ -80,7 +78,10 @@ function init_uploader(config) {
 
         } else {
             if (config.target) {
-                $('input[name=' + config.target + ']').val(rst.value);
+                console.log(rst);
+                $('input[name=' + config.target + ']').val(rst.value.fileNames);
+                $('input[name=name]').val(rst.value.fileName);
+                $('input[name=fileSize]').val(rst.value.fileSize);
                 if (config.target == 'grid') {
                     jQuery(cfgsub.grid_selector).jqGrid('setGridParam', {
                         page: 1,
@@ -114,7 +115,7 @@ function init_uploader(config) {
     });
 }
 
-function reset_uploader(config){
+function reset_uploader(config) {
     var uploader = $('#uploader').pluploadQueue();
     uploader.splice();
     uploader.refresh();
@@ -128,14 +129,14 @@ function appendUploadBtn(id) {
     $("#" + id).after(html.join(''));
     //点击上传按键
     $("#btn-upload-add" + id).on('click', function (e) {
-        console.log("======================================file 上传");
         e.preventDefault();
         var config = {
-            extensions: "jpg,png,bmp,doc,xlsx,xls,docx,pdf,pptx,ppt",
-            url: portalPath + '/files/uploadFile.do',
+            extensions: "doc,docx,xlsx,xls,pdf,pptx,ppt",
+            url: portalPath + '/files/uploadFilePlus.do',
             target: id,
             multipart_params: {}
         };
+        console.log(config);
         reset_uploader(config);
         $("#tt").addClass('hide');
         var dialog = $("#dialog-message").removeClass('hide').dialog(
@@ -156,45 +157,44 @@ function appendUploadBtn(id) {
             });
     });
 
-    $("#btn-upload-view" + id).on('click', function (e) {
-            e.preventDefault();
-            var dialog = $("#dialog-message-file")
-                .removeClass('hide')
-                .dialog(
-                    {
-                        modal: true,
-                        width: 500,
-                        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件</div></div>",
-                        title_html: true,
-                        buttons: [{
-                            html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                            "class": "btn btn-info btn-xs",
-                            click: function () {
-                                $(this).dialog("close");
-                            }
-                        }]
-                    });
-            var fileName = $('input[name=' + id + ']').val();
-            if (!fileName || fileName == '') {
-                return;
-            }
-            var src = fastdfs_server + fileName;
-            var img = new Image();
-            $(img).attr("src", "");
-            //图片加载加载后执行
-            $(img).load(function () {
-                //图片默认隐藏
-                $(this).hide();
-                //移除小动画
-                $(".loading").removeClass("loading").append(this);
-                //使用fadeIn特效
-                $(this).fadeIn("slow");
-            }).error(function () {
-                //加载失败时的处理
-            })
-            //最后设置src
-                .attr("src", src);
+    $("#btn-upload-view" + id).on('click', function (e) {e.preventDefault();
+        var dialog = $("#dialog-message-file").removeClass('hide').dialog(
+                {
+                    modal: true,
+                    width: 500,
+                    title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件</div></div>",
+                    title_html: true,
+                    buttons: [{
+                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+                        "class": "btn btn-info btn-xs",
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }]
+                });
+        var fileName = $('input[name=' + id + ']').val();
+        console.log("====================filename");
+        console.log(fileName);
+        if (!fileName || fileName == '') {
+            return;
+        }
+        var src = fastdfs_server + fileName;
+        var img = new Image();
+        $(img).attr("src", "");
+        //图片加载加载后执行
+        $(img).load(function () {
+            //图片默认隐藏
+            $(this).hide();
+            //移除小动画
+            $(".loading").removeClass("loading").append(this);
+            //使用fadeIn特效
+            $(this).fadeIn("slow");
+        }).error(function () {
+            //加载失败时的处理
+        })
+        //最后设置src
+            .attr("src", src);
 
-        });
+    });
 }
 

@@ -21,6 +21,17 @@
                 <image class='icon_ic' src='../../image/action_icon.png'></image>
             </navigator>
         </view>
+
+        <view wx:if="{{list.file!=null}}">
+            
+                <view class="msg msgFile" data-fileAddr="{{list.file}}" bindtap="navbarTap_file">
+                    <image class='icon_icon' src='../../image/online_icon.png'></image>
+                    <text>在线查看文档</text>
+                    <image class='icon_ic'  src='../../image/action_icon.png'></image>
+                    <progress class='usual_progres'  backgroundColor='white' stroke-width="3" percent='{{downloadPercent}}'></progress>
+                </view>
+        </view>
+
         <view wx:if="{{list.time!=null}}">
             <navigator class="msg ">
                 <image class='icon_icon' src='../../image/time_icon.png'></image>
@@ -45,9 +56,17 @@
                 <text>{{name}}对象：{{list.trainees}}</text>
             </navigator>
         </view>
+
+        <view wx:if="{{list.remark!=null}}">
+            <navigator class="msg msg_bottom">
+                <image class='icon_icon' src='../../image/remark_icon.png'></image>
+                <text>{{name}}备注：{{list.remark}}</text>
+            </navigator>
+        </view>
     </view>
     <view class='content'>
         <view class='content_title'>{{name}}主要内容:</view>
-        <view class='content_text'>{{list.content}}</view>
+        <rich-text class='content_text' nodes="{{list.content}}"></rich-text>
+        <rich-text class='content_text' nodes="{{content}}"></rich-text>
     </view>
 </view>

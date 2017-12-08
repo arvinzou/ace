@@ -85,11 +85,13 @@
             and name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.media!=null and condition.media!=&quot;&quot;">
-            and type =#{condition.media,jdbcType=VARCHAR}
+        <if test="condition.media!=null and condition.media!=''">
+            and media like
+            concat('%',#{condition.media,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.author!=null and condition.author!=&quot;&quot;">
-            and type =#{condition.author,jdbcType=VARCHAR}
+        <if test="condition.author!=null and condition.author!=''">
+            and author like
+            concat('%',#{condition.author,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 

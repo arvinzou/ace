@@ -34,8 +34,7 @@ jQuery(function ($) {
     /**
      * 点击添加文件
      */
-    $('#btn-view-add').on('click',
-        function () {
+    $('#btn-view-add').on('click', function () {
             console.log("===========================file adde");
             jQuery(cfg.grid_selector).jqGrid('editGridRow', 'new',
                 {
@@ -57,7 +56,6 @@ jQuery(function ($) {
             console.log("============================file 修改");
             //获取选择行号。
             var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
-            console.log(gr);
             //如果gr为空。
             if (!gr) {
                 $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
@@ -73,34 +71,27 @@ jQuery(function ($) {
 
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
+                        form.closest('.ui-jqdialog')
+                            .find('.ui-jqdialog-titlebar')
+                            .wrapInner('<div class="widget-header" />');
                         style_edit_form(form);
                     }
                 })
             appendUploadBtn("file");
         });
 
-    $('#btn-view-del').on(
-        'click',
-        function () {
+    $('#btn-view-del').on('click', function () {
 
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
             if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext);
+                $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
                 return;
             }
-            jQuery(cfg.grid_selector).jqGrid(
-                'delGridRow',
-                gr,
+            jQuery(cfg.grid_selector).jqGrid('delGridRow', gr,
                 {
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
                     }
@@ -158,9 +149,7 @@ jQuery(function ($) {
 
 function preview(id, title) {
     console.log('+++++++++++++++++++++++++++++++++++++++++++++preview');
-    var dialog = $("#dialog-message-view")
-        .removeClass('hide')
-        .dialog(
+    var dialog = $("#dialog-message-view").removeClass('hide').dialog(
             {
                 modal: false,
                 width: 800,
@@ -190,7 +179,7 @@ function preview(id, title) {
 }
 
 /*
-下载单个人员信息。
+下载单文件信息。
 * */
 function loadView(id) {
     $('#dialog-message-view').data('userId', id);
@@ -209,52 +198,22 @@ function loadView(id) {
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
                 //翻译。
-                if (key == 'sex') {
-                    value = rsd(value, '01');
-                }
                 if (key == 'category') {
-                    value = rsd(value, '98');
-                }
-                if (key == 'nation') {
-                    value = rsd(value, '09');
-                }
-                if (key == 'degreee') {
-                    value = rsd(value, '10');
-                }
-                if (key == 'academicTitle') {
-                    value = rsd(value, '99');
-                }
-                if (key == 'rank') {
-                    value = rsd(value, '100');
-                }
-
-                if (key == 'party') {
-                    value = rsd(value, '101');
-                }
-                if (key == 'careerType') {
-                    value = rsd(value, '102');
-                }
-                if (key == 'academicTitle') {
-                    value = rsd(value, '99');
-                }
-                if (key == 'status') {
-                    value = value == "1" ? "正常" : "关闭";
+                    value = rsd(value, '110');
                 }
                 if (key.indexOf('Date') != -1 || key.indexOf('time') != -1
                     || key.indexOf('Time') != -1
                     || key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
-                if (key == 'photo' || key == 'remark') {
+                if (key == 'file') {
                     if (value != '') {
-                        value = '<image src="' + fastdfs_server + value
-                            + '" />';
+                        value='<a download="'+rst.value.name+'" href="' + fastdfs_server + value +'"><span class="badge badge-info">下载</span> </a>';
                     } else {
                         value = '待上传';
                     }
 
                 }
-
                 $("#dialog-message-view").find('#' + key).html(value);
             });
         },

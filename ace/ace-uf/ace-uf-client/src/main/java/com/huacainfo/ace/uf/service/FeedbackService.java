@@ -13,6 +13,4 @@ public interface FeedbackService {
 	public abstract MessageResponse updateFeedback(Feedback obj,UserProp userProp) throws Exception;
 	public abstract SingleResult<FeedbackVo> selectFeedbackByPrimaryKey(String id) throws Exception;
 	public abstract MessageResponse deleteFeedbackByFeedbackId(String id,UserProp userProp) throws Exception;
-
-	
 }

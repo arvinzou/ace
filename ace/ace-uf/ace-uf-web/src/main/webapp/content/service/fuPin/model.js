@@ -1,4 +1,4 @@
-var _colNames =['主键', '扶贫名称', '地址',  '维度', '经度', '扶贫进度', '扶贫日期', '扶贫内容','封面', '操作'];
+var _colNames =['主键', '扶贫名称', '地址',  '维度', '经度', '扶贫进度', '扶贫日期', '扶贫内容','封面', '操作','创建人编号', '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间'];
 var _colModel = function() {
 	return [
         {
@@ -42,7 +42,7 @@ var _colModel = function() {
             width : 100,
             editoptions : {
                 style : 'width:200px;',
-                maxlength : "50",
+                maxlength : "100",
                 colspan : false
             },
             formoptions : {
@@ -92,7 +92,7 @@ var _colModel = function() {
             editoptions : {
                 value : odparse("109")
             },
-            width : 100,
+            width : 30,
             editrules : {
                 required : true
             },
@@ -101,7 +101,7 @@ var _colModel = function() {
         {
             name: 'time',
             editable: true,
-            width: 100,
+            width: 50,
             edittype: "datebox",
             formoptions : {
                 elmprefix : "",
@@ -137,22 +137,22 @@ var _colModel = function() {
             },
         },
         {
-            name : 'content',
-            hidden : true,
-            width : 100,
-            editable : true,
-            editoptions : {
-                colspan : true,
-                style : 'width:750px;line-height: 25px;height: 100px;'
+            name: 'content',
+            hidden: true,
+            width: 100,
+            editable: true,
+            editoptions: {
+                colspan: true,
+                style: 'width:750px;line-height: 25px;height: 100px;'
             },
-            formoptions : {
-                elmprefix : "",
-                elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
-           /* editrules : {
-                required : true
-            },*/
-            edittype : "textarea"
+            editrules: {
+                required: true
+            },
+            edittype: "textarea"
         },
 
         {
@@ -175,14 +175,45 @@ var _colModel = function() {
         },
 	 {
                 name: 'opt',
-                width: 100,
+                width: 30,
                 hidden:false,
                 editable: false,
                 sortable:false,
                 renderer:function(value, cur){
                     return renderBtn(cur);
                 }
-            }
+            },
+        {
+            name: 'createUserId',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'createUserName',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'createDate',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'lastModifyUserId',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'lastModifyUserName',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'lastModifyDate',
+            hidden: true,
+            editable: false,
+            width: 100
+        }
 	];
 }
 function aceSwitch(cellvalue, options, cell) {

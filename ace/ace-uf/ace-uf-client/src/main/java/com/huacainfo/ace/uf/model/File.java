@@ -20,7 +20,7 @@ public class File {
     /**
      * 文件类型
      */
-    private String type;
+    private String category;
     /**
      * 文件url
      */
@@ -83,12 +83,12 @@ public class File {
         this.remark = remark;
     }
 
-    public String getType() {
-        return type;
+    public String getCategory() {
+        return category;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getFile() {
@@ -173,7 +173,7 @@ public class File {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", remark='" + remark + '\'' +
-                ", type='" + type + '\'' +
+                ", category='" + category + '\'' +
                 ", file='" + file + '\'' +
                 ", suffix='" + suffix + '\'' +
                 ", createUserId='" + createUserId + '\'' +

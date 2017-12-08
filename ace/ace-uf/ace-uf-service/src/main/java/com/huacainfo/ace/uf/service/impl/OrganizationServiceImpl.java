@@ -20,6 +20,11 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.uf.service.OrganizationService;
 import com.huacainfo.ace.uf.vo.OrganizationVo;
 import com.huacainfo.ace.uf.vo.OrganizationQVo;
+
+/**
+ * @author AFOC
+ */
+
 @Service("organizationService")
 public class OrganizationServiceImpl implements OrganizationService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -30,8 +35,9 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 
 
-	public PageResult<OrganizationVo> findOrganizationList(OrganizationQVo condition, int start, int limit,
-			String orderBy) throws Exception {
+	@Override
+    public PageResult<OrganizationVo> findOrganizationList(OrganizationQVo condition, int start, int limit,
+                                                           String orderBy) throws Exception {
 		PageResult<OrganizationVo> rst = new PageResult<OrganizationVo>();
 		List<OrganizationVo> list = this.organizationDao.findList(condition, start, start + limit, orderBy);
 		rst.setRows(list);
@@ -42,9 +48,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 		return rst;
 	}
 
-	public MessageResponse insertOrganization(Organization o, UserProp userProp) throws Exception {
+	@Override
+    public MessageResponse insertOrganization(Organization o, UserProp userProp) throws Exception {
 		// o.setId(UUID.randomUUID().toString());
-		o.setId(String.valueOf(new Date().getTime()));
+		o.setId(String.valueOf(System.currentTimeMillis()));
 		if (CommonUtils.isBlank(o.getId())) {
 			return new MessageResponse(1, "主键不能为空！");
 		}
@@ -79,6 +86,8 @@ public class OrganizationServiceImpl implements OrganizationService {
 		return new MessageResponse(0, "添加社会资源完成！");
 	}
 
+
+    @Override
 	public MessageResponse updateOrganization(Organization o, UserProp userProp) throws Exception {
 		if (CommonUtils.isBlank(o.getId())) {
 			return new MessageResponse(1, "主键不能为空！");
@@ -112,18 +121,24 @@ public class OrganizationServiceImpl implements OrganizationService {
 		return new MessageResponse(0, "变更社会资源完成！");
 	}
 
+
+    @Override
 	public SingleResult<OrganizationVo> selectOrganizationByPrimaryKey(String id) throws Exception {
 		SingleResult<OrganizationVo> rst = new SingleResult<OrganizationVo>();
 		rst.setValue(this.organizationDao.selectByPrimaryKey(id));
 		return rst;
 	}
 
+
+    @Override
 	public MessageResponse deleteOrganizationByOrganizationId(String id, UserProp userProp) throws Exception {
 		this.organizationDao.deleteByPrimaryKey(id);
 		this.dataBaseLogService.log("删除社会资源", "社会资源", String.valueOf(id), String.valueOf(id), "社会资源", userProp);
 		return new MessageResponse(0, "社会资源删除完成！");
 	}
 
+
+    @Override
 	public  List<Map<String,Object>> selectOrganizationList(String q,WxUser user) throws Exception{
 
 		List<Map<String,Object>> category=this.organizationDao.selectOrganizationCategoryList();
@@ -152,6 +167,8 @@ public class OrganizationServiceImpl implements OrganizationService {
 		}
 		return category;
 	}
+
+    @Override
 	public  List<Map<String,Object>> selectOrganizationListMap(WxUser user,String longitude,String latitude) throws Exception{
 		return this.organizationDao.selectOrganizationList("",longitude,latitude);
 	}
@@ -166,22 +183,31 @@ public class OrganizationServiceImpl implements OrganizationService {
 		return  rst;
 	}
 
+    @Override
+
 	public  Map<String,Object> selectOrganization(String id,WxUser user) throws Exception{
 		Map<String,Object> rst=this.organizationDao.selectOrganizationById(id);
 		List<Map<String,String>> list=this.organizationDao.selectOrganizationImagesById(id);
 		rst.put("list",list);
 		return rst;
 	}
+
+
+    @Override
 	public  List<Map<String,Object>> selectAreaCodeList(String areaCode,WxUser user) throws Exception{
 		List<Map<String,Object>> list=this.organizationDao.selectAreaCodeList(areaCode);
 
 		return list;
 	}
 
+
+    @Override
 	public  List<Map<String,Object>> selectOrganizationCategoryList(WxUser user) throws Exception{
 		List<Map<String,Object>> list=this.organizationDao.selectOrganizationCategoryList();
 		return list;
 	}
+
+    @Override
 	public  List<Map<String,Object>> selectOrganizationByCategory(String category,WxUser user) throws Exception{
 		List<Map<String,Object>> list=this.organizationDao.selectOrganizationByCategory(category);
 		return list;

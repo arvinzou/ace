@@ -127,8 +127,9 @@ url</span>
             <span id="published">
 </span>
         </div>
-
-
+    </div>
+    <h5 class="header-title">信息封面</h5>
+    <div class="row" style="padding:10px" id="cover">
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">

@@ -1050,7 +1050,7 @@ function viewFiles(meetingId) {
 							'<a href="'+ fastdfs_server+data.url + '" target="_blank"><span class="badge badge-info">'
 									+ data.name + '</span></a>');
 					$(row).children('td').eq(2).html(
-                    							'<a href="javascript:deleteFileByMeetingId(\''  + data.name + '\',\'' + meetingId
+                    							'<a href="javascript:deleteFileByMeetingId(\''  + data.name + '\',\'' + data.id
                     									+ '\')"><span class="badge badge-danger">删除</span></a>');
 
 				},
@@ -1090,7 +1090,7 @@ function deleteFileByMeetingId(name,id){
 
                 },
                 success : function(rst, textStatus) {
-                    viewFiles(id);
+                    viewFiles(meetingId);
                 },
                 error : function() {
                     alert("加载错误！");

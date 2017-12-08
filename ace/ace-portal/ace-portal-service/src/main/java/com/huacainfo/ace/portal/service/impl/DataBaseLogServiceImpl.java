@@ -22,6 +22,7 @@ public class DataBaseLogServiceImpl implements DataBaseLogService {
 	private DataBaseLogDao dataBaseLogDao;
 
 
+	@Override
 	public void log(String log, String name, String old, String news,
 			String objectValue, UserProp userProp) {
 		logger.info(userProp.getName() + "  " + log + " "+ objectValue);
@@ -39,7 +40,7 @@ public class DataBaseLogServiceImpl implements DataBaseLogService {
 		this.dataBaseLogDao.insert(logs);
 	}
 
-
+	@Override
 	public PageResult<Map<String, Object>> findList(Map<String, Object> condition, int start,
 			int limit, String orderBy) throws Exception {
 		PageResult<Map<String, Object>> rst = new PageResult<Map<String, Object>>();

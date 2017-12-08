@@ -1,5 +1,5 @@
 var cfg = {};
-//cfg.view_load_data_url = contextPath + '/file/selectPersonageByPrimaryKey.do';
+cfg.view_load_data_url = contextPath + '/file/selectFileByPrimaryKey.do';
 /*获取文件列表*/
 cfg.grid_load_data_url = contextPath + '/file/findFilesList.do';
 /*

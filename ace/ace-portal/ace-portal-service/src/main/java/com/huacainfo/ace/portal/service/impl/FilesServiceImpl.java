@@ -72,7 +72,8 @@ public class FilesServiceImpl implements FilesService {
 		}
 		return new MessageResponse(0,"成功！");
 	}
-	
+
+	@Override
 	public void deleteFileTimer() {
 		logger.info("清除临时文件");
 		List<Files> list=filesMapper.selectListByStatus("0");

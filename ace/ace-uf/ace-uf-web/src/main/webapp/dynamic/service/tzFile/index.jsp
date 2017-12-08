@@ -35,9 +35,9 @@
                     名称： <input name="name" type="text" style="width: 200px;"/>
                     <%--备注的模糊搜索--%>
                     文件类型：<input
-                        class="easyui-combobox" style="width: 200px" name="type"
+                        class="easyui-combobox" style="width: 200px" name="category"
                         data-options="
-                            url:'${portalPath}/dict/findListByCategoryId.do?categoryId=105&selected=false',
+                            url:'${portalPath}/dict/findListByCategoryId.do?categoryId=110&selected=false',
                             method:'get',
                             valueField:'code',
                             textField:'name',
@@ -81,6 +81,45 @@
 <div id="dialog-message-file" class="hide">
     <div id="load" class="loading"></div>
 </div>
+
+
+<div id="dialog-message-view" class="hide">
+    <h5 class="header-title">扶贫信息</h5>
+    <div class="row" style="padding:10px">
+        <div class="labelItem"><span class="labelItemHeader">扶贫名称</span><br>
+            <span id="name"></span>
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">文件大小</span><br>
+            <span id="fileSize"></span>
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">文件分类</span><br>
+            <span id="category"></span>
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">文件下载</span><br>
+            <span id="file"></span>
+        </div>
+    </div>
+    <h5 class="header-title">文件备注</h5>
+    <div class="row" style="padding:10px" id="remark">
+    </div>
+    <h5 class="header-title">操作信息</h5>
+    <div class="row" style="padding:10px">
+        <div class="labelItem"><span class="labelItemHeader">创建人姓名</span><br>
+            <span id="createUserName"></span>
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">入库日期</span><br>
+            <span id="createDate"></span>
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">最后更新人姓名</span><br>
+            <span id="lastModifyUserName"></span>
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">最后更新时间</span><br>
+            <span id="lastModifyDate"></span>
+        </div>
+    </div>
+</div>
+
+
 <jsp:include page="../../common/footer-1.jsp"/>
 
 <script
@@ -94,6 +133,9 @@
 
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/content/service/file/upload.js?version=${cfg.version}"></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/service/file/jquery.cookie.js"></script>
+
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript"

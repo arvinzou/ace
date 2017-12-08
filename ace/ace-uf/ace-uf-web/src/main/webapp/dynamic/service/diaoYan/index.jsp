@@ -127,8 +127,9 @@ url</span>
             <span id="published">
 </span>
         </div>
-
-
+    </div>
+    <h5 class="header-title">调研封面</h5>
+    <div class="row" style="padding:10px" id="cover">
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
@@ -168,7 +169,8 @@ url</span>
 
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">

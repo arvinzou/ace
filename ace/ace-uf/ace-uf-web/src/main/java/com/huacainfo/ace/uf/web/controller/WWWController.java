@@ -421,6 +421,15 @@ public class WWWController extends UfBaseController {
 	}
 
 	/**
+	 * 查看统战文件
+	 */
+	@RequestMapping(value = "/selectFileByPrimaryKey.do")
+	@ResponseBody
+	public SingleResult<FileVo> selectFileByPrimaryKey(String id) throws Exception {
+		return this.fileService.selectFileByPrimaryKey(id);
+	}
+
+	/**
 	 * ****************************统战文件——————结束********************************************************
 	 */
 

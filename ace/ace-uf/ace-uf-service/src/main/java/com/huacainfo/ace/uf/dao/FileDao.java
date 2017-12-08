@@ -1,9 +1,6 @@
 package com.huacainfo.ace.uf.dao;
 
-import com.huacainfo.ace.uf.vo.FileQVo;
-import com.huacainfo.ace.uf.vo.FileVo;
-import com.huacainfo.ace.uf.vo.PersonageQVo;
-import com.huacainfo.ace.uf.vo.PersonageVo;
+import com.huacainfo.ace.uf.vo.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -50,4 +47,11 @@ public interface FileDao {
      * 添加文件
      */
     int insertFile(FileQVo file);
+
+    /**
+     * 按主键查找
+     * @param FileId
+     * @return
+     */
+    FileVo selectByPrimaryKey(String FileId);
 }

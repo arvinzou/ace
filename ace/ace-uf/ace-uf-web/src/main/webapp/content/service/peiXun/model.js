@@ -1,4 +1,4 @@
-var _colNames = ['主键', '培训主题', '培训地点', '维度', '经度','培训单位', '培训对象', '培训进度', '培训日期', '封面','培训内容',  '操作'];
+var _colNames = ['主键', '培训主题', '培训地点', '维度', '经度','培训单位', '培训对象', '培训进度', '培训日期', '封面','培训内容', '培训资料' ,'操作','创建人编号', '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间'];
 var _colModel = function () {
     return [
 
@@ -26,7 +26,7 @@ var _colModel = function () {
             width : 200,
             editoptions : {
                 style : 'width:200px;',
-                maxlength : "20"
+                maxlength : "50"
             },
             formoptions : {
                 elmprefix : "",
@@ -45,7 +45,7 @@ var _colModel = function () {
             width : 100,
             editoptions : {
                 style : 'width:200px;',
-                maxlength : "50",
+                maxlength : "150",
                 colspan : false
             },
             formoptions : {
@@ -85,6 +85,7 @@ var _colModel = function () {
             name : 'dept',//表格列的名称
             editable : true,//定义字段是否可编辑
             width : 100,//默认列的宽度，只能是象素值
+            hidden : true,
             editoptions : {
                 style : 'width:200px;',
                 size : "20",
@@ -120,7 +121,7 @@ var _colModel = function () {
 
         {
             name: 'category',
-            width: 100,
+            width: 50,
             edittype: "select",
             renderer: function (value) {
                 return rsd(value, "108");
@@ -204,8 +205,8 @@ var _colModel = function () {
                 style : 'width:750px;line-height: 25px;height: 100px;'
             },
             formoptions : {
-                elmprefix : "",
-                elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+                // elmprefix : "",
+                // elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
             /* editrules : {
                  required : true
@@ -214,14 +215,64 @@ var _colModel = function () {
         },
 
         {
-            name: 'opt',
+            name: 'file',
+            editable: true,
+            hidden: true,
             width: 100,
+            editoptions: {
+                style: 'width:300px;',
+                maxlength: "200",
+                colspan: false
+            },
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:#088fff;font-size:14px;font-weight:800'>*</span>"
+            },
+            editrules: {
+                required: true
+            }
+        },
+
+        {
+            name: 'opt',
+            width: 30,
             hidden: false,
             editable: false,
             sortable: false,
             renderer: function (value, cur) {
                 return renderBtn(cur);
             }
+        },
+        {
+            name: 'createUserId',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'createUserName',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'createDate',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'lastModifyUserId',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'lastModifyUserName',
+            hidden: true,
+            editable: false,
+            width: 100
+        }, {
+            name: 'lastModifyDate',
+            hidden: true,
+            editable: false,
+            width: 100
         }
     ];
 }

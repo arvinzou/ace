@@ -80,7 +80,7 @@ page {
 .icon_icon {
     width: 26rpx;
     height: 26rpx;
-    margin:0 18rpx 0 28rpx;
+    margin:0 18rpx 0 0rpx;
 
 }
 
@@ -95,12 +95,12 @@ page {
     font-size: 32rpx;
     color: #fff;
     font-weight: bold;
-    padding-left: 80rpx;
+    padding-left: 28rpx;
     background-color: rgba(27,27,27,0.5);
 }
 
 .msg{
-    padding: 45rpx 0 31rpx 0;
+    margin: 45rpx 28rpx 31rpx 28rpx;
 }
 
 .mapmsg{
