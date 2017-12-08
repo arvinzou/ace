@@ -23,13 +23,13 @@
 		</property>
 	</bean>
 
-	<import resource="classpath:spring/spring-ace-common-monitor.xml" />
-	<import resource="classpath:spring/spring-ace-common-fastdfs.xml" />
-	<import resource="classpath:spring/spring-ace-common-redis.xml" />
-	<import resource="classpath:spring/spring-ace-common-kafka.xml" />
-	<import resource="classpath:spring/spring-ace-common-dao.xml" />
-	<import resource="classpath:spring/spring-ace-common-session.xml" />
-	<import resource="classpath:spring/spring-ace-uf-service.xml" />
-	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
+	<!--<import resource="classpath:spring/spring-ace-common-monitor.xml" />-->
+	<!--<import resource="classpath:spring/spring-ace-common-fastdfs.xml" />-->
+	<!--<import resource="classpath:spring/spring-ace-common-redis.xml" />-->
+	<!--<import resource="classpath:spring/spring-ace-common-kafka.xml" />-->
+	<!--<import resource="classpath:spring/spring-ace-common-dao.xml" />-->
+	<!--<import resource="classpath:spring/spring-ace-common-session.xml" />-->
+	<!--<import resource="classpath:spring/spring-ace-uf-service.xml" />-->
+	<!--<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />-->
 	<!-- <import resource="classpath:dubbo/dubbo-ace-luohua-consumer.xml" /> -->
 </beans>

@@ -522,7 +522,7 @@
 		count(1)
 		from department
 		where department_name = #{departmentName,jdbcType=VARCHAR} and status
-		= '1'
+		= '1' and syid=#{syid} and parent_department_id=#{parentDepartmentId}
 	</select>
 
 	<select id="isExitEmail" resultType="int">

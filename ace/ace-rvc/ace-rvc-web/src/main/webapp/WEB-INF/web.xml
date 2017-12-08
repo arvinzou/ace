@@ -63,7 +63,10 @@
         <servlet-name>springServlet</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+
     <!-- spring mvc filter end -->
+
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>

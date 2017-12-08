@@ -6,11 +6,11 @@ function init_uploader(params,url) {
 	$("#uploader").pluploadQueue(
 			{
 				runtimes : 'html5,flash,silverlight,html4',
-				chunk_size : '1mb',
+				chunk_size : '50mb',
 				unique_names : true,
 				multipart_params : params,
 				filters : {
-					max_file_size : '50mb',
+					max_file_size : '500mb',
 					mime_types : [{
 						title : "Excel files",
 						extensions : "xls,xlsx,ppt,pptx,doc,docx,zip,rar"

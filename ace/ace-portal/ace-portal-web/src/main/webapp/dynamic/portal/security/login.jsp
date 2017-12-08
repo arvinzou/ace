@@ -365,7 +365,7 @@ jQuery(function($) {
     margin: 0px auto 0;
     padding: 15px;
     text-align: left;
-    height:100px;
+    height:150px;
 
 }
     .login .content {

@@ -78,6 +78,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		if (temp > 0) {
 			//return new MessageResponse(1, "名称已存在！");
 		}
+		o.setCreateTime(new Date());
 		this.dictMapper.insert(o);
 		this.dataBaseLogService.log("添加字典", "字典", "", o.getName(),
 				o.getName(), userProp);

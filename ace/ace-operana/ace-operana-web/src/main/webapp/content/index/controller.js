@@ -679,13 +679,13 @@ function viewUser(meetingId) {
                                 justified="checked";
                             }
 							html.push('<input type="radio" id="'+data.user_id+'Present" name="'+data.user_id+'" value="Present" '+present+'/>');
-							html.push('<label for="'+data.user_id+'Present">Present</label>  ');
+							html.push('<label for="'+data.user_id+'Present">出席</label>  ');
 
 							html.push('<input type="radio" id="'+data.user_id+'Absent" name="'+data.user_id+'" value="Absent" '+absent+'/>');
-                            html.push('<label for="'+data.user_id+'Absent">Absent</label>  ');
+                            html.push('<label for="'+data.user_id+'Absent">缺席</label>  ');
 
                             html.push('<input type="radio" id="'+data.user_id+'Justified" name="'+data.user_id+'" value="Justified" '+justified+'/>');
-                            html.push('<label for="'+data.user_id+'Justified">Justified</label>');
+                            html.push('<label for="'+data.user_id+'Justified">请假</label>');
 
 							$(row).children('td').eq(4).html(html.join(''));
 
@@ -1218,7 +1218,7 @@ function viewFiles(meetingId) {
 							'<a href="'+ fastdfs_server+data.url + '" target="_blank"><span class="badge badge-info">'
 									+ data.name + '</span></a>');
 					$(row).children('td').eq(2).html(
-                    							'<a href="javascript:deleteFileByMeetingId(\''  + data.name + '\',\'' + meetingId
+                    							'<a href="javascript:deleteFileByMeetingId(\''  + data.name + '\',\'' + data.id
                     									+ '\')"><span class="badge badge-danger">删除</span></a>');
 
 				},
@@ -1258,7 +1258,7 @@ function deleteFileByMeetingId(name,id){
 
                 },
                 success : function(rst, textStatus) {
-                    viewFiles(id);
+                    viewFiles(meetingId);
                 },
                 error : function() {
                     alert("加载错误！");

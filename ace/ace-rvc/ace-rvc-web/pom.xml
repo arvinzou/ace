@@ -49,7 +49,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <packagingExcludes>
-                        WEB-INF/lib/ace-uf-service-*.jar,
+                        WEB-INF/lib/ace-rvc-service-*.jar,
                         WEB-INF/lib/ace-portal-service-*.jar,
                         WEB-INF/lib/ace-common-dao-*.jar
                     </packagingExcludes>

@@ -1,293 +1,270 @@
-<%@page language="java" contentType="text/html; charset=utf-8"
-        pageEncoding="utf-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
 <html lang="en">
+<!--<![endif]-->
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <meta name="description" content="overview &amp; stats"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>统战综合管理平台</title>
+    <title>远程视频会议系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="远程视频会议系统" name="description"/>
+    <meta content="" name="author"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/content/common/assets/css/font-awesome.min.css"/>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/global/css/components.min.css" rel="stylesheet"
+          id="style_components" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/global/css/plugins.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout/css/layout.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout/css/themes/darkblue.min.css"
+          rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout/css/custom.min.css"
+          rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/themes/gray/easyui.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css">
 
 </head>
 
-<jsp:include page="/dynamic/common/common.jsp"/>
-<link rel="stylesheet" href="${portalPath}/content/common/css/new.css?version=${cfg.version}"/>
-<link href="${portalPath}/content/common/assets/global/css/components.min.css" rel="stylesheet"
-      id="style_components" type="text/css"/>
-<style>
-    .charts-portal-ct1 {
-        width: 500px;
-        height: 300px
-    }
-
-    .charts-portal-ct2 {
-        width: 500px;
-        height: 300px
-    }
-</style>
-
-<body>
-<div style="height:10px;" class="background-white"></div>
-<div class="page-content background">
-
-    <!-- PAGE CONTENT BEGINS -->
-    <!-- Row starts -->
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="dashboard-stat2 ">
-                <div class="display">
-                    <div class="number">
-                        <h3 class="font-red-haze">
-                            <span data-counter="counterup" data-value="0" id="dept">0</span>
-                            <small class="font-red-haze">家</small>
-                        </h3>
-                        <small>统战单位</small>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-bank"></i>
-                    </div>
-                </div>
-                <div class="progress-info">
-                    <div class="progress">
-                                            <span style="width: 100%;"
-                                                  class="progress-bar progress-bar-success red-haze">
-                                                <span class="sr-only"></span>
-                                            </span>
-                    </div>
-                    <div class="status">
-                        <div class="status-title"></div>
-                        <div class="status-number"></div>
-                    </div>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+<div class="page-wrapper">
+    <div class="page-header navbar navbar-fixed-top">
+        <div class="page-header-inner ">
+            <div class="page-logo">
+                <a href="#">
+                    <img src="${pageContext.request.contextPath}/content/common/assets/layouts/layout/img/logo.png"
+                         alt="logo" class="logo-default"/> </a>
+                <div class="menu-toggler sidebar-toggler" onclick="setTimeout('autoWidth()',100)">
+                    <span></span>
                 </div>
             </div>
 
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="dashboard-stat2 ">
-                <div class="display">
-                    <div class="number">
-                        <h3 class="font-green-sharp">
-                            <span data-counter="counterup" data-value="" id="personage">0</span>
-                            <small class="font-green-sharp">人</small>
-                        </h3>
-                        <small>统战人士</small>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-user-circle-o"></i>
-                    </div>
-                </div>
-                <div class="progress-info">
-                    <div class="progress">
-                                            <span style="width: 100%;"
-                                                  class="progress-bar progress-bar-success green-sharp">
-                                                <span class="sr-only"></span>
-                                            </span>
-                    </div>
-                    <div class="status">
-                        <div class="status-title"></div>
-                        <div class="status-number"></div>
-                    </div>
-                </div>
-            </div>
+            <a href="#" class="navbar-brand" style="color:#FFFFFF">
+                <small>
+                    远程视频会议系统v1.1
+                </small>
+            </a>
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                           data-close-others="true">
+                            <img alt="" class="img-circle"
+                                 src="${pageContext.request.contextPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
+                            <span class="username username-hide-on-mobile">ArvinZou </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li><a href="javascript:userCfg();">
+                                <i class="ace-icon fa fa-cog"></i>
+                                个性化配置
+                            </a></li>
+                            <li>
+                                <a data-target="#stack1" data-toggle="modal">
+                                    <i class="ace-icon fa fa-key"></i> 密码修改
+                                </a>
+                            </li>
+                            <li class="divider"></li>
 
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="dashboard-stat2 ">
-                <div class="display">
-                    <div class="number">
-                        <h3 class="font-blue-sharp">
-                            <span data-counter="counterup" data-value="0" id="feedback">0</span>
-                            <small class="font-blue-sharp">条</small>
-                        </h3>
-                        <small>建言献策</small>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-comment-o"></i>
-                    </div>
-                </div>
-                <div class="progress-info">
-                    <div class="progress">
-                                            <span style="width: 100%;"
-                                                  class="progress-bar progress-bar-success blue-sharp">
-                                                <span class="sr-only"></span>
-                                            </span>
-                    </div>
-                    <div class="status">
-                        <div class="status-title"></div>
-                        <div class="status-number"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="dashboard-stat2 ">
-                <div class="display">
-                    <div class="number">
-                        <h3 class="font-purple-soft">
-                            <span data-counter="counterup" data-value="0" id="activity">0</span>
-                            <small class="font-purple-sharp">次</small>
-                        </h3>
-                        <small>活动</small>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-flag"></i>
-                    </div>
-                </div>
-                <div class="progress-info">
-                    <div class="progress">
-                                            <span style="width: 100%;"
-                                                  class="progress-bar progress-bar-success purple-soft">
-                                                <span class="sr-only"></span>
-                                            </span>
-                    </div>
-                    <div class="status">
-                        <div class="status-title"></div>
-                        <div class="status-number"></div>
-                    </div>
-                </div>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/dynamic/portal/security/loginOut.jsp">
+                                    <i class="icon-key"></i> 安全退出 </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+    <div class="clearfix"></div>
 
+    <div class="page-container">
+        <div class="page-sidebar-wrapper">
 
-</div>
-<div class="page-content-2 background">
-    <div class="row">
-        <div class="col-xs-12 col-sm-6">
-            <!-- #section:custom/widget-box -->
-            <div class="widget-box transparent background-white padding1" id="recent-box">
-                <div class="widget-header">
-                    <h4 class="widget-title lighter smaller">
-                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>系统公告
-                    </h4>
+            <div class="page-sidebar navbar-collapse collapse">
+                <ul id="menu" class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false"
+                    data-auto-scroll="true"
+                    data-slide-speed="200" style="padding-top: 0px">
 
-                    <div class="widget-toolbar no-border">
-
-                    </div>
-                </div>
-
-                <div class="widget-body" style="min-height:250px">
-                    <div class="widget-main padding-4">
-                        <table width="100%">
-
-
-                            <tbody id="notice-list-grid">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.widget-main -->
-                </div>
-                <!-- /.widget-body -->
+                </ul>
             </div>
-            <!-- /.widget-box -->
-
-            <!-- /section:custom/widget-box -->
         </div>
+        <div class="page-content-wrapper">
+            <div class="page-content" id="main-content">
+                <script type="text/javascript">
+                    var screenHeight = window.innerHeight - 46;
+                    console.log(screenHeight);
+                    document
+                        .write('<div id="tt" class="easyui-tabs"  style="height:' + screenHeight + 'px" fit="true"></div>');
 
-        <div class="col-xs-12 col-sm-6">
-            <!-- #section:custom/widget-box -->
-            <div class="widget-box transparent background-white padding1" id="recent-box">
-                <div class="widget-header">
-                    <h4 class="widget-title lighter smaller">
-                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>业务公告
-                    </h4>
-
-                    <div class="widget-toolbar no-border">
-
-                    </div>
-                </div>
-
-                <div class="widget-body" style="min-height:250px">
-                    <div class="widget-main padding-4">
-                        <table width="100%;">
-
-
-                            <tbody id="notice-list-grid-area">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.widget-main -->
-                </div>
-                <!-- /.widget-body -->
+                </script>
             </div>
-            <!-- /.widget-box -->
 
-            <!-- /section:custom/widget-box -->
+
         </div>
-        <!-- /.span -->
     </div>
 </div>
-<!-- /.page-content -->
+<div id="stack1" class="modal fade" tabindex="-1" data-width="300">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">密码修改</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="fm-password">
+                            <fieldset>
+                                新设密码： <input id="password" type="password" style="width: 200px;"/>
+                            </fieldset>
+                            <fieldset>
+                                重复输入： <input id="repassword" type="password" style="width: 200px;"/>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn blue" onclick="submitform()">提交</button>
+                <button type="button" data-dismiss="modal" class="btn red">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--[if lt IE 9]>
+<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/respond.min.js"></script>
+<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/excanvas.min.js"></script>
+<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/ie8.fix.min.js"></script>
+<![endif]-->
+<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/jquery.min.js"
+        type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js"
+        type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/content/common/assets/global/scripts/app.min.js"
+        type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/content/common/assets/layouts/layout/scripts/layout.min.js"
+        type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/ui-modals.min.js"
+        type="text/javascript"></script>
+<script
+        src="${pageContext.request.contextPath}/content/common/assets/js/gz/jquery-ui.min.js"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js"></script>
+<script
+        src="${pageContext.request.contextPath}/content/portal/js/main/menu1.js"></script>
+<script
+        src="${pageContext.request.contextPath}/content/portal/js/main/portal.js"></script>
 
 
-<jsp:include page="/dynamic/common/footer-1.jsp"/>
-
 <script
-        src="${portalPath}/content/common/js/echarts-2.27/echarts.js?version=${cfg.version}"></script>
-
-<script
-        src="${pageContext.request.contextPath}/content/index/config-1.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/index/config-2.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/index/controller.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/index/view.js?version=${cfg.version}"></script>
-<script
-        src="${portalPath}/content/common/js/jquery.stamper.js?version=${cfg.version}"></script>
-
-<jsp:include page="/dynamic/common/footer-2.jsp"/>
+        src="${pageContext.request.contextPath}/content/common/js/dict_uf.js"></script>
 
 <script type="text/javascript">
+
     window.onresize = function () {
-        parent.autoWidth();
+        autosize();
     }
+    function autosize() {
+        var h = window.innerHeight - 36;
+        var w = window.innerWidth - 150;
+        if (portalType == '2') {
+            w = window.innerWidth
+        }
+        $('#tt').css("height", h);
+        $('#tt').css("width", w);
+
+        $('.tabs-header').css("width", w);
+        $('.panel').css("width", w);
+
+        $('.tabs-panels').css("height", h);
+        $('.tabs-panels').css("width", w);
+
+        $('.panel-body-noborder').css("height", h);
+        $('.panel-body-noborder').css("width", w);
+
+        $('iframe').height(h - 20);
+        //$('iframe').width(w);
+        autoWidth();
+    }
+
+    function autoWidth() {
+        var w = $('#main-content').width();
+        $('#tt').css("width", w);
+
+        $('.tabs-header').css("width", w);
+        $('.panel').css("width", w);
+        $('.tabs-wrap').css("width", w);
+
+
+        $('.tabs-panels').css("width", w);
+        $('.panel-body-noborder').css("width", w);
+        //$('iframe').width(w);
+
+        //setTimeout("autobell()", 1000);
+
+    }
+
+
 </script>
-<script
-        src="${pageContext.request.contextPath}/content/index/index.js?version=${cfg.version}"></script>
+<script type="text/javascript">
+    function checkPwd() {
+        var passwd = '${SystemUser.users.password}';
+        if (passwd == '4297F44B13955235245B2497399D7A93'
+            || passwd == '4297f44b13955235245b2497399d7a93') {
+            alert("${SystemUser.users.name}，你好！您目前使用的是默认密码为了确保安全，请您及时更换密码！");
+            $('#stack1').modal('show')
+        }
+    }
+
+</script>
 <style>
-    .padding1 {
-        padding: 15px 15px 15px 15px;
+    .page-content-wrapper .page-content {
+        margin-left: 200px;
+        margin-top: 0;
+        min-height: 600px;
+        padding: 0px 0px 0px;
     }
 
-    .page-content {
-        background-color: #fff;
-        position: relative;
-        margin: 0;
-        padding: 10px 10px 0px 10px;
-    }
-
-    .page-content-2 {
-        background-color: #fff;
-        position: relative;
-        margin: 0;
-        padding: 0px 10px 10px 10px;
-    }
-
-    .background {
-        background-color: #BFCAD1;
-    }
-
-    .background-white {
-        background-color: #fff;
-    }
-
-    .stamper {
-        padding-top: 10px;
-        height: 100px;
-    }
-
-    .stamper span {
-        float: right;
-        display: inline-block;
-        height: 100%;
+    .page-sidebar {
         width: 200px;
+        float: left;
+        position: relative;
+        margin-right: -100%;
+    }
+
+    .tabs-header, .tabs-tool {
+        background-color: #ffffff;
+    }
+
+    a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
+        -webkit-border-radius: 0 !important;
+        -moz-border-radius: 0 !important;
+        border-radius: 2px !important;
     }
 
 </style>
 </body>
+
 </html>

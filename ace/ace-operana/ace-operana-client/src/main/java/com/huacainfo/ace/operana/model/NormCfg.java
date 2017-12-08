@@ -9,6 +9,8 @@ public class NormCfg implements java.io.Serializable {
 
 	private String normId;
 
+
+
 	private String year;
 
 	private java.math.BigDecimal indexValue;
@@ -150,4 +152,6 @@ public class NormCfg implements java.io.Serializable {
 	public void setLastModifyDate(Date lastModifyDate) {
 		this.lastModifyDate = lastModifyDate;
 	}
+
+
 }
