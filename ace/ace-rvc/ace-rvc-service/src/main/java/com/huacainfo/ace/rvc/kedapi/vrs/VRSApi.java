@@ -2,6 +2,7 @@ package com.huacainfo.ace.rvc.kedapi.vrs;
 
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
+import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.kedapi.common.base.BaseApi;
 import com.huacainfo.ace.rvc.kedapi.common.kits.CommonKit;
 import com.huacainfo.ace.rvc.kedapi.common.kits.HttpKit;
@@ -28,22 +29,27 @@ public class VRSApi extends BaseApi {
      * 方法	POST
      * 说明	本地用户登录
      *
-     * @param token  登陆token -- 平台那边获取的token
-     * @param params 请求内容，以JSON形式发送，需进行UrlEncode
+     * @param token    登陆token -- 平台那边获取的token
+     *                 **请求内容，以JSON形式发送，需进行UrlEncode
+     * @param userName 账号
+     * @param password 密码
      * @return cookies
      */
-    public static LocalLoginResp localLogin(String token, String params) {
+    public static LocalLoginResp localLogin(String token, String userName, String password) {
 //        {
 //            "username": "admin",
 //                "psd": "admin"
 //        }
-        String encode = CommonKit.encode(params);
-        Map<String, String> rtnMap = HttpKit.doPost(CommonKit.VRS_URI + "/api/v1/vrs/login"
+        Map<String, String> params = new HashMap<>();
+        params.put("username", userName);
+        params.put("psd", password);
+        String encode = CommonKit.encode(JsonUtil.toJson(params));
+        Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.VRS_URI + "/api/v1/vrs/login"
                 , "account_token=" + token + "&params=" + encode
                 , "");
         logger.debug("params=" + params + ", VRSApi.login:{}" + rtnMap.toString());
 
-        return JsonUtil.toBean(rtnMap.get("resp"), LocalLoginResp.class);
+        return JsonUtil.toObject(rtnMap.get("resp"), LocalLoginResp.class);
     }
 
     /**
@@ -77,7 +83,7 @@ public class VRSApi extends BaseApi {
          */
         params.put("desc", 1);
 
-        String response = HttpKit.doGet(CommonKit.VRS_URI + "/api/v1/vrs/liveroom"
+        String response = HttpKit.doGet(AuthorizeApi.VRS_URI + "/api/v1/vrs/liveroom"
                 , UrlKit.getUrlParamsByMap(params)
                 , cookies);
         logger.debug("keyWords<" + keyWords + "> ,VRSApi.getLiveRoomList:" + response);
@@ -85,7 +91,7 @@ public class VRSApi extends BaseApi {
         if (StringUtils.isEmpty(response)) {
             return null;
         }
-        return JsonUtil.toBean(response, LiveRoomResp.class);
+        return JsonUtil.toObject(response, LiveRoomResp.class);
     }
 
     /**
@@ -94,13 +100,13 @@ public class VRSApi extends BaseApi {
      * @param liveRoom ‘获取直播室列表’接口返回数据
      * @return 可直播的m3u8文件URL地址
      */
-    public static String getLiveBroadcast(LiveRoomResp liveRoom) {
+    public static String getLiveURL(LiveRoomResp liveRoom) {
         String jsonPath = liveRoom.getRoomstate().get(0).getLivestreampath();
-        jsonPath = CommonKit.VRS_URI + jsonPath;
+        jsonPath = AuthorizeApi.VRS_URI + jsonPath;
 
         String jsonData = HttpKit.loadJson(jsonPath, StringUtils.CHARSET_NAME);
-        LiveBroadcast liveBroadcast = JsonUtil.toBean(jsonData, LiveBroadcast.class);
+        LiveBroadcast liveBroadcast = JsonUtil.toObject(jsonData, LiveBroadcast.class);
 
-        return CommonKit.VRS_URI + liveBroadcast.getProList().get(0).getIndexList().get(0).getHlsIndex();
+        return AuthorizeApi.VRS_URI + liveBroadcast.getProList().get(0).getIndexList().get(0).getHlsIndex();
     }
 }

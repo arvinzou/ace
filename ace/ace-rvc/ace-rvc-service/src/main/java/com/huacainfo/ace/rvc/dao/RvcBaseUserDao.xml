@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.rvc.dao.RvcBaseUserDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.rvc.model.RvcBaseUser">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="userName" jdbcType="VARCHAR" property="userName" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="portrait" jdbcType="VARCHAR" property="portrait" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="phoneNumer" jdbcType="VARCHAR" property="phoneNumer" />
+    <result column="organization" jdbcType="VARCHAR" property="organization" />
+    <result column="kedaAccount" jdbcType="VARCHAR" property="kedaAccount" />
+    <result column="kedaAccountType" jdbcType="INTEGER" property="kedaAccountType" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, userName, sex, portrait, position, phoneNumer, organization, kedaAccount, 
+    kedaAccountType, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
+    lastModifyUserName, lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rvc_base_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from rvc_base_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.rvc.model.RvcBaseUser">
+    insert into rvc_base_user (id, userId, userName, 
+      sex, portrait, position, 
+      phoneNumer, organization, kedaAccount, 
+      kedaAccountType, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=CHAR}, #{portrait,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{phoneNumer,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR}, #{kedaAccount,jdbcType=VARCHAR}, 
+      #{kedaAccountType,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.rvc.model.RvcBaseUser">
+    insert into rvc_base_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="userName != null">
+        userName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="portrait != null">
+        portrait,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="phoneNumer != null">
+        phoneNumer,
+      </if>
+      <if test="organization != null">
+        organization,
+      </if>
+      <if test="kedaAccount != null">
+        kedaAccount,
+      </if>
+      <if test="kedaAccountType != null">
+        kedaAccountType,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createUserId != null">
+        createUserId,
+      </if>
+      <if test="createUserName != null">
+        createUserName,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId,
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName,
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="portrait != null">
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumer != null">
+        #{phoneNumer,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="kedaAccount != null">
+        #{kedaAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="kedaAccountType != null">
+        #{kedaAccountType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.rvc.model.RvcBaseUser">
+    update rvc_base_user
+    <set>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="portrait != null">
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumer != null">
+        phoneNumer = #{phoneNumer,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="kedaAccount != null">
+        kedaAccount = #{kedaAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="kedaAccountType != null">
+        kedaAccountType = #{kedaAccountType,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.rvc.model.RvcBaseUser">
+    update rvc_base_user
+    set userId = #{userId,jdbcType=VARCHAR},
+      userName = #{userName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      phoneNumer = #{phoneNumer,jdbcType=VARCHAR},
+      organization = #{organization,jdbcType=VARCHAR},
+      kedaAccount = #{kedaAccount,jdbcType=VARCHAR},
+      kedaAccountType = #{kedaAccountType,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rvc_base_user
+    where userId = #{userId,jdbcType=VARCHAR}
+  </select>
+</mapper>
