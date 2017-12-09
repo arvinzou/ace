@@ -116,8 +116,7 @@
 	<script
 		src="${pageContext.request.contextPath}/content/service/topic/view.js?version=${cfg.version}"></script>
 	<jsp:include page="../../common/footer-2.jsp" />
-	<script
-			src="${portalPath}/content/common/js/easyui-draggable.js?version=${cfg.version}"></script>
+
 
 	<script
 			src= "${portalPath}/content/common/js/dataTable/jquery.dataTables.min.js?version=${cfg.version}"></script>

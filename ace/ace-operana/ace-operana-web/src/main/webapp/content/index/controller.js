@@ -20,9 +20,8 @@ function loadView(id) {
 					value = rsd(value, '83');
 				}
 				if (key == 'site') {
-                					value = rsd(value, '106');
-                				}
-
+                	 value = rsd(value, '106');
+                }
 				if (key == 'status') {
 					value = value == "1" ? "on" : "off";
 				}

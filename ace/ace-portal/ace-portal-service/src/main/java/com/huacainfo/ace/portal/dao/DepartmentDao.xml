@@ -86,7 +86,7 @@
 		<selectKey keyProperty="departmentId" resultType="string"
 			order="BEFORE">
 			SELECT
-			lpad(ifnull(max(department_id),concat(#{parentDepartmentId,jdbcType=VARCHAR},'0000'))+1,length(#{parentDepartmentId,jdbcType=VARCHAR})+4,'0')
+			lpad(ifnull(max(department_id),concat(#{parentDepartmentId,jdbcType=VARCHAR},'000'))+1,length(#{parentDepartmentId,jdbcType=VARCHAR})+3,'0')
 			FROM department where
 			parent_department_ID=#{parentDepartmentId,jdbcType=VARCHAR}
 		</selectKey>

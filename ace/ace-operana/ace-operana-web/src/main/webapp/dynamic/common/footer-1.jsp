@@ -31,7 +31,7 @@
 	
 <script
 	src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
-	 
+<!--
 <script
 	src="${portalPath}/content/common/assets/js/gz/ace.min.js?version=${cfg.version}"></script>
 <script
@@ -39,7 +39,4 @@
 
 <script
 	src="${portalPath}/content/common/assets/js/gz/ace-extra.min.js?version=${cfg.version}"></script>
-
-
-
-
+-->

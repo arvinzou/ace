@@ -155,6 +155,9 @@ function loadView(id) {
 				if (key == 'category') {
 					value = rsd(value, '83');
 				}
+				if (key == 'site') {
+                	 value = rsd(value, '106');
+                }
 				if (key == 'status') {
 					value = value == "1" ? "on" : "off";
 				}

@@ -76,13 +76,7 @@ var normId='${param.normId}';
 <script
         src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
 
-<script
-        src="${portalPath}/content/common/assets/js/gz/ace.min.js?version=${cfg.version}"></script>
-<script
-        src="${portalPath}/content/common/assets/js/gz/ace-elements.min.js?version=${cfg.version}"></script>
 
-<script
-        src="${portalPath}/content/common/assets/js/gz/ace-extra.min.js?version=${cfg.version}"></script>
 
 
 <script
@@ -121,7 +115,6 @@ window.onresize = function () {
 }
 .div-left{ float:left;width:90%;}
 .div-right{ float:right;width:10%;}
-
 </style>
 </body>
 </html>

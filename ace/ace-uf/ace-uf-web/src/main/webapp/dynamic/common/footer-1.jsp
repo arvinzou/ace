@@ -32,13 +32,15 @@
 
 <script
 	src="/portal/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
+<!--
 <script
-	src="/portal/content/common/assets/js/gz/ace.min.js?version=${cfg.version}"></script>
+	src="${portalPath}/content/common/assets/js/gz/ace.min.js?version=${cfg.version}"></script>
 <script
-	src="/portal/content/common/assets/js/gz/ace-elements.min.js?version=${cfg.version}"></script>
+	src="${portalPath}/content/common/assets/js/gz/ace-elements.min.js?version=${cfg.version}"></script>
 
 <script
-	src="/portal/content/common/assets/js/gz/ace-extra.min.js?version=${cfg.version}"></script>
+	src="${portalPath}/content/common/assets/js/gz/ace-extra.min.js?version=${cfg.version}"></script>
+-->
 	
 	<script src="/portal/content/common/assets/js/select2.min.js"></script>
 

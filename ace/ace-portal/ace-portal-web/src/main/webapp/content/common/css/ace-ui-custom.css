@@ -449,3 +449,6 @@ input[type="checkbox"].ace.ace-switch + .lbl::after {
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient();
 }
+.ui-jqgrid .ui-jqgrid-hdiv {
+    overflow-x: '';
+}

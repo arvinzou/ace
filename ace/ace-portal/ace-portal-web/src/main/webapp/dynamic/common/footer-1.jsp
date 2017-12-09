@@ -31,15 +31,13 @@
 	
 <script
 	src="${pageContext.request.contextPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
-	 
+<!--
 <script
-	src="${pageContext.request.contextPath}/content/common/assets/js/gz/ace.min.js?version=${cfg.version}"></script>
+src="${pageContext.request.contextPath}/content/common/assets/js/gz/ace.min.js?version=${cfg.version}"></script>
 <script
-	src="${pageContext.request.contextPath}/content/common/assets/js/gz/ace-elements.min.js?version=${cfg.version}"></script>
+src="${pageContext.request.contextPath}/content/common/assets/js/gz/ace-elements.min.js?version=${cfg.version}"></script>
 
 <script
-	src="${pageContext.request.contextPath}/content/common/assets/js/gz/ace-extra.min.js?version=${cfg.version}"></script>
-
-
-
+src="${pageContext.request.contextPath}/content/common/assets/js/gz/ace-extra.min.js?version=${cfg.version}"></script>
+-->
 

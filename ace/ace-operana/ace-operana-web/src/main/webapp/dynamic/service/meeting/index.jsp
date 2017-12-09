@@ -269,8 +269,7 @@ pageEncoding="utf-8"%>
         src="${portalPath}/content/common/js/dataTable/jquery.dataTables.min.js?version=${cfg.version}"></script>
 <script
         src="${portalPath}/content/common/js/dataTable/dataTables.bootstrap.min.js?version=${cfg.version}"></script>
-<script
-        src="${portalPath}/content/common/js/easyui-draggable.js?version=${cfg.version}"></script>
+
 
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
