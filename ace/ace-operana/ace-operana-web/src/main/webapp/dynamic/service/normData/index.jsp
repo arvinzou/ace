@@ -10,6 +10,7 @@ pageEncoding="utf-8"%>
     <title>运营数据</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
+
 <script type="text/javascript">
 var meetingId='${param.meetingId}';
 var topicId='${param.topicId}';
@@ -67,7 +68,6 @@ var topicId='${param.topicId}';
 
 
 
-
 <script
         src="${pageContext.request.contextPath}/content/service/normData/config.js?version=${cfg.version}"></script>
 <script
@@ -98,6 +98,16 @@ window.onresize = function () {
 }
 .div-left{ float:left;width:90%;}
 .div-right{ float:right;width:10%;}
+.ui-jqgrid .ui-jqgrid-hdiv {
+ background-color: #eff3f8;
+ border: 1px solid #D3D3D3;
+ border-width: 1px 0 0 1px;
+ line-height: 15px;
+ font-weight: bold;
+ color: #777;
+ text-shadow: none;
+overflow-x: hidden;
+}
 </style>
 </body>
 </html>

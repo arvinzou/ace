@@ -7,7 +7,7 @@ var option1 = {
 			color : '#000000'
 		}
 	},
-	color : ['#3398DB', 'red'],
+	color : [ 'red'],
 	tooltip : {
 		trigger : 'axis',
 		axisPointer : {
@@ -64,78 +64,112 @@ var option1 = {
 		axisLabel : {
 			formatter : '{value} '
 		}
-	}, {
-		type : 'value',
-		name : '',
-		axisLabel : {
-			formatter : '{value} '
-		},
-		splitLine : {
-			show : false
-		}
 	}],
-	series : [
-			{
-				name : '指标值',
-				type : 'bar',
-				barWidth : 'auto',
-				data : [],
-				itemStyle : {
-					normal : {
-						label : {
-							show : true,
-							position : 'top',
-							formatter : '{c}',
-							textStyle : {
-								color : '#000000'
-							}
-						},
-						color : function(params) {
-							var colorList = ['#EA0000', '#FF9797', '#2894FF',
-									'#F9F900', '#00E3E3', '#00A600', '#6F00D2',
-									'#EA0000', '#FF9797', '#2894FF', '#F9F900',
-									'#00E3E3', '#00A600', '#6F00D2', '#EA0000',
-									'#FF9797', '#2894FF', '#F9F900', '#00E3E3',
-									'#00A600', '#6F00D2', '#EA0000', '#FF9797',
-									'#2894FF', '#F9F900', '#00E3E3', '#00A600',
-									'#6F00D2'];
-							//return colorList[params.dataIndex];
-							return '#3398DB';
-						}
+	series : [{
+		name : '指标值',
+		type : 'bar',
+		//barWidth : 20,
+		data : [],
+		itemStyle : {
+			normal : {
+				label : {
+					show : true,
+					position : 'top',
+					formatter : '{c}',
+					textStyle : {
+						color : '#000000'
 					}
 				},
-				markLine : {
-					itemStyle : {
-						normal : {
-							lineStyle : {
-								type : 'solid',
-								color : 'red'
-							},
-							label : {
-								show : true,
-								position : 'right',
-								formatter : '目标值{c}',
-								textStyle : {
-									color : 'red'
-								}
-							}
-						}
+				color : function(params) {
+					var colorList = ['#EA0000', '#FF9797', '#2894FF',
+							'#F9F900', '#00E3E3', '#00A600', '#6F00D2',
+							'#EA0000', '#FF9797', '#2894FF', '#F9F900',
+							'#00E3E3', '#00A600', '#6F00D2', '#EA0000',
+							'#FF9797', '#2894FF', '#F9F900', '#00E3E3',
+							'#00A600', '#6F00D2', '#EA0000', '#FF9797',
+							'#2894FF', '#F9F900', '#00E3E3', '#00A600',
+							'#6F00D2'];
+					//return colorList[params.dataIndex];
+					return '#3398DB';
+				}
+			}
+		},
+		markLine : {
+		symbol:'circle',
+		symbolSize:2,
+			itemStyle : {
+				normal : {
+					lineStyle : {
+						type : 'solid',
+						color : 'red'
 					},
-					data : [[{
-						name : 'A',
-						value : 0,
-						xAxis : -1,
-						yAxis : 0
-					}, {
-						name : 'B',
-						xAxis : '',
-						yAxis : 0
-					}]]
-				},
+					label : {
+						show : true,
+						position : 'end',
+						color : 'red',
+						formatter : '{c}',
+						textStyle : {
+							color : 'red'
+						}
+					}
+				}
+			},
+			data : [[{
+
+				value : 1,
+				xAxis : -1,
+				yAxis : 0.045
 			}, {
-				name : '目标值',
-				type : 'line',
-				yAxisIndex : 1,
-				data : []
-			}]
+
+				xAxis : '1月',
+				yAxis : 0.05
+			}], [{
+
+				xAxis : '1月',
+				yAxis : 0.05
+			}, {
+
+				xAxis : '2017年累计',
+				yAxis : 0.045
+			}]]
+		},
+	}]
 };
+var oj = [[{
+	"value" : 0.65,
+	"xAxis" : -1,
+	"yAxis" : 0.65
+}, {
+	"xAxis" : "2016年",
+	"yAxis" : 0.65
+}], [{
+	"xAxis" : "2016年",
+	"yAxis" : 0.65
+}, {
+	"xAxis" : "1月",
+	"yAxis" : 0.3
+}], [{
+	"xAxis" : "1月",
+	"yAxis" : 0.3
+}, {
+	"xAxis" : "2月",
+	"yAxis" : 0.3
+}], [{
+	"xAxis" : "2月",
+	"yAxis" : 0.3
+}, {
+	"xAxis" : "9周",
+	"yAxis" : 0.3
+}], [{
+	"xAxis" : "9周",
+	"yAxis" : 0.3
+}, {
+	"xAxis" : "10周",
+	"yAxis" : 0.3
+}], [{
+	"xAxis" : "10周",
+	"yAxis" : 0.3
+}, {
+	"xAxis" : "2017年累计",
+	"yAxis" : 0.3
+}]];

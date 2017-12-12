@@ -162,4 +162,6 @@ function reload() {
 	jQuery(cfg.grid_selector).jqGrid('setGridParam', {
 		page : 1
 	}).trigger("reloadGrid");
+
+	$(".tooltip").css("display","none");
 }

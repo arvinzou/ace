@@ -33,7 +33,7 @@ pageEncoding="utf-8"%>
 
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
 
 
             <div class="div-left header-title-custom">即将进行的会议</div>
@@ -59,7 +59,7 @@ pageEncoding="utf-8"%>
                 <a class="blue" href="javascript:act3()"><i class="ace-icon fa fa-search nav-search-icon"></i></a>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div id="dialog-message" class="hide">
 
             </div>
@@ -159,7 +159,7 @@ pageEncoding="utf-8"%>
                                 <th>职务</th>
                                 <th>姓名</th>
                                 <th>是否必须</th>
-                                <th style="width:200px;">Present</th>
+                                <th style="width:200px;">状态</th>
                             </tr>
                             </thead>
                             <tbody>

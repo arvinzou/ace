@@ -126,7 +126,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		*/
 		int t = this.departmentDao.isExit(o);
 		if (t > 0) {
-			return new MessageResponse(1, "已存在的部门名称！");
+			//return new MessageResponse(1, "已存在的部门名称！");
 		}
 
 		this.departmentDao.insertDepartment(o);
