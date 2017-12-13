@@ -45,4 +45,8 @@
 
     <dubbo:reference interface="com.huacainfo.ace.operana.service.MeetingFilesService"
                      id="meetingFilesService"/>
+
+
+    <dubbo:reference interface="com.huacainfo.ace.operana.service.NormFilesService"
+                     id="normFilesService"/>
 </beans>
