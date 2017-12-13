@@ -70,7 +70,14 @@ jQuery(function($) {
 					}, 0);
 
 				},
-
+                  ajaxRowOptions:{
+                    successfunc : function(rowid, xhr) {
+						alert(rowid);
+					},
+					errorfunc : function(rowid, xhr) {
+						alert(rowid);
+					}
+                  },
 				editurl : cfg.grid_edit_data_url,// nothing is saved
 				addurl : cfg.grid_add_data_url,
 				deleteurl : cfg.grid_delete_data_url,
@@ -251,6 +258,7 @@ jQuery(function($) {
 		form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner(
 				'<div class="widget-header" />')
 		style_edit_form(form);
+
 	}
 
 	// it causes some flicker when reloading or navigating grid

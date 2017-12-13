@@ -39,9 +39,7 @@ function chart2() {
 			option2.xAxis[0].data = rst.dataX;
 			option2.series[0].data = rst.dataY1;
 			option2.series[1].data = rst.dataY2;
-			if (rst.dataX.length <= 8) {
-				// option1.series[0].barWidth=40;
-			}
+
 			initMyChar2();
 		}
 	});
@@ -56,28 +54,61 @@ function chart1(viewType) {
 					meetingId : meetingId,
 					topicId : topicId,
 					normId : normId,
-					viewType:viewType
+					viewType : viewType
 				},
 				success : function(rst) {
-				    var same=false;
+					var same = false;
 					option1.xAxis[0].data = rst.dataX;
 					option1.series[0].data = rst.dataY;
 					//
 					option1.title.text = rst.name;
 					//option1.legend.data[0] = rst.name;
 					option1.series[0].name = rst.name;
-                    if(same){
-                        option1.series[0].markLine.data[0][1].xAxis = rst.xAxis;
-                        option1.series[0].markLine.data[0][0].yAxis = rst.yAxis;
-                        option1.series[0].markLine.data[0][0].value = rst.yAxis;
-                        option1.series[0].markLine.data[0][1].yAxis = rst.yAxis;
-                    }else{
-                        option1.series[1].data = rst.index;
-                    }
+					if (same) {
+						//option1.series[0].markLine.data[0][1].xAxis = rst.xAxis;
+						//option1.series[0].markLine.data[0][0].yAxis = rst.yAxis;
 
+						// option1.series[0].markLine.data[0][0].value = rst.yAxis;
+						//option1.series[0].markLine.data[0][1].yAxis = rst.yAxis;
+					} else {
+						//option1.series[1].data = rst.index;
+						var line = [];
+						var m = rst.dataX;
+						var n = rst.index;
+						for (var i = 0; i < rst.dataX.length; i++) {
+							var linex = [];
+
+							if (i == 0) {
+								linex = [{
+									value : n[i],
+									xAxis : -1,
+									yAxis : n[i]
+								}, {
+									value : n[i],
+									xAxis : m[i],
+									yAxis : n[i]
+								}];
+							} else {
+								linex = [{
+									value : n[i - 1],
+									xAxis : m[i - 1],
+									yAxis : n[i - 1]
+								}, {
+									value : n[i],
+									xAxis : m[i],
+									yAxis : n[i]
+								}];
+							}
+							line.push(linex);
+						}
+
+						//console.log(JSON.stringify(line));
+						option1.series[0].markLine.data = [];
+						option1.series[0].markLine.data = line;
+					}
 
 					if (rst.dataX.length <= 8) {
-						option1.series[0].barWidth = 40;
+						//option1.series[0].barWidth = 40;
 					}
 					var html = [];
 					html
@@ -142,18 +173,20 @@ function chart3() {
 							+ "' style='color:#FFFFFF'>");
 					html.push("不良现象明细");
 					html.push("</td></tr>");
-					*/
+					 */
 					html.push("<thead>");
 					html
 							.push("<tr style='background:#336666;text-align:center;font-weight:800;'>");
 					$(rst.itemName)
 							.each(
 									function(i, o) {
-									    if(i==0){
-									        html.push("<td style='color:#FFFFFF;font-weight:800' class='wt600'>");
-									    }else{
-									        html.push("<td style='color:#FFFFFF;font-weight:800' class='wt60'>");
-									    }
+										if (i == 0) {
+											html
+													.push("<td style='color:#FFFFFF;font-weight:800' class='wt600'>");
+										} else {
+											html
+													.push("<td style='color:#FFFFFF;font-weight:800' class='wt60'>");
+										}
 
 										html.push(o);
 										html.push("</td>");
@@ -175,18 +208,24 @@ function chart3() {
 															if (o == 'name') {
 																background = "background:#FFFF6F";
 															}
-															if(i==0){
-                                                                html.push("<td style='font-weight:800;"+ background+ "' class='wt600'>");
-                                                            }else{
-                                                                html.push("<td style='font-weight:800;"+ background+ "' class='wt60'>");
-                                                            }
+															if (i == 0) {
+																html
+																		.push("<td style='font-weight:800;"
+																				+ background
+																				+ "' class='wt600'>");
+															} else {
+																html
+																		.push("<td style='font-weight:800;"
+																				+ background
+																				+ "' class='wt60'>");
+															}
 
 															html.push(e[o]);
 															html.push("</td>");
 														});
 										html.push("</tr>");
 									});
-									html.push("</tbody>");
+					html.push("</tbody>");
 					$("#grid2").html(html.join(""));
 				}
 			});
@@ -210,7 +249,7 @@ function chart4() {
 					html.push("TOP问题分析");
 					html.push("</td></tr>");
 
-					*/
+					 */
 					html.push("<thead>");
 					html
 							.push("<tr style='background:#336666;text-align:center;font-weight:800;'>");
@@ -238,27 +277,43 @@ function chart4() {
 																background = "background:#006000;color:#FFFFFF;";
 															}
 															if (o == 'probDiscri') {
-															    var text=e[o];
-															    if(text){
-															     e[o]=text.replace(/\b(\S+)\b/g, function($0){
-                                                                if(typeof $0 !== 'undefined'){
-                                                                    return $0 + '';
-                                                                }
-                                                                }).replace(/\s+/g, '<br/>');
-															    }
+																var text = e[o];
+																if (text) {
+																	e[o] = text
+																			.replace(
+																					/\b(\S+)\b/g,
+																					function(
+																							$0) {
+																						if (typeof $0 !== 'undefined') {
+																							return $0
+																									+ '';
+																						}
+																					})
+																			.replace(
+																					/\s+/g,
+																					'<br/>');
+																}
 
 																background = "background:#FFFF6F";
 															}
 															if (o == 'actions') {
-															    var text=e[o];
-                                                                if(text){
-                                                                 e[o]=text.replace(/\b(\S+)\b/g, function($0){
-                                                                          if(typeof $0 !== 'undefined'){
-                                                                              return $0 + '';
-                                                                          }
-                                                                          }).replace(/\s+/g, '<br/>');
-                                                                }
-                                                            }
+																var text = e[o];
+																if (text) {
+																	e[o] = text
+																			.replace(
+																					/\b(\S+)\b/g,
+																					function(
+																							$0) {
+																						if (typeof $0 !== 'undefined') {
+																							return $0
+																									+ '';
+																						}
+																					})
+																			.replace(
+																					/\s+/g,
+																					'<br/>');
+																}
+															}
 															if (o == 'status') {
 																if (e[o] == 'Open') {
 																	background = "background:red";
@@ -270,8 +325,8 @@ function chart4() {
 																	background = "background:#FFFF37";
 																}
 																if (e[o] == 'Track') {
-                                                                	background = "background:#FFA042";
-                                                                }
+																	background = "background:#FFA042";
+																}
 
 															}
 															html
@@ -283,7 +338,7 @@ function chart4() {
 														});
 										html.push("</tr>");
 									});
-									html.push("</tbody>");
+					html.push("</tbody>");
 					$("#grid3").html(html.join(""));
 				}
 			});
@@ -311,16 +366,18 @@ function reload() {
 	chart4();
 }
 function add() {
-	var url=contextPath+'/dynamic/service/tpa/index.jsp?meetingId='+meetingId+'&topicId='+topicId+'&normId='+normId;
-    window.open(url);
+	var url = contextPath + '/dynamic/service/tpa/index.jsp?meetingId='
+			+ meetingId + '&topicId=' + topicId + '&normId=' + normId;
+	window.open(url);
 }
 function reload2() {
 	chart3();
 }
 function add2() {
-	var url=contextPath+'/dynamic/service/normDetail/index.jsp?meetingId='+meetingId+'&topicId='+topicId+'&normId='+normId;
-    window.open(url);
+	var url = contextPath + '/dynamic/service/normDetail/index.jsp?meetingId='
+			+ meetingId + '&topicId=' + topicId + '&normId=' + normId;
+	window.open(url);
 }
-function setViewType(viewType){
-chart1(viewType);
+function setViewType(viewType) {
+	chart1(viewType);
 }

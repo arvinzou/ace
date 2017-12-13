@@ -115,6 +115,16 @@ window.onresize = function () {
 }
 .div-left{ float:left;width:90%;}
 .div-right{ float:right;width:10%;}
+.ui-jqgrid .ui-jqgrid-hdiv {
+ background-color: #eff3f8;
+ border: 1px solid #D3D3D3;
+ border-width: 1px 0 0 1px;
+ line-height: 15px;
+ font-weight: bold;
+ color: #777;
+ text-shadow: none;
+overflow-x: hidden;
+}
 </style>
 </body>
 </html>
