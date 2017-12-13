@@ -78,5 +78,5 @@
 
 .headimg {
     width: 180rpx;
-    height: 152rpx;
+    height: 150rpx;
 }

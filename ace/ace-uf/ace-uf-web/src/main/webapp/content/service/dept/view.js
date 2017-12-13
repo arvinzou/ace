@@ -25,10 +25,10 @@ jQuery(function($) {
 		jsonReader : {
 			root : "rows",
 			page : "page",
-			total : "totalPages",
-			records : "total",
-			id : cfg.dataId
-		},
+            total : "totalPages",
+            records : "total",
+            id : cfg.dataId
+        },
 		height : cfg.gridHeight,
 		colNames : _colNames,
 		colModel : _colModel(),

@@ -13,7 +13,7 @@
             </view>
             <view class='content_text'>
                 <view class='mapmsg msg'>
-                    <image class='icon_icon' src='../../image/map_icon.png'></image>
+                    <image class='icon_icon' src='../../image/map_icon.png' mode="aspectFill"></image>
                     <text class='text_text'>{{item.address}}</text>
                 </view>
                 <view class='telmsg msg'>

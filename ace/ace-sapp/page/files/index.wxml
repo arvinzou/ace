@@ -15,15 +15,21 @@
                     </view>
                     <view class="fontRight">
                         <view class="fileName">{{item.name}}</view>
-                        <view class="filemsg">{{item.fileSize}} 来自：{{item.lastModifyUserName}}</view>
+                        <view class="filemsg">
+                            <span>{{item.fileSize}}</span> 来自
+                            <span>{{item.lastModifyUserName}}</span>
+                        </view>
+
                         <view class="remark">备注：{{item.remark}}</view>
+
                     </view>
                 </view>
             </navigator>
         </block>
-        <view class="loading" hidden="{{!tongZhanWj.Loadingstatus}}">正在载入更多...</view>
-        <view class="loading complete" hidden="{{!tongZhanWj.LoadOver}}">已加载全部</view>
     </view>
+    <view class="loading" hidden="{{!tongZhanWj.Loadingstatus}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!tongZhanWj.LoadOver}}">已加载全部</view>
+
 </view>
 
 <!--统战资料-->
@@ -38,13 +44,17 @@
                     </view>
                     <view class="fontRight">
                         <view class="fileName">{{item.name}}</view>
-                        <view class="filemsg">{{item.fileSize}} 来自：{{item.lastModifyUserName}}</view>
+                        <view class="filemsg">
+                            <span>{{item.fileSize}}</span> 来自
+                            <span>{{item.lastModifyUserName}}</span>
+                        </view>
                         <view class="remark">备注：{{item.remark}}</view>
                     </view>
                 </view>
             </navigator>
         </block>
-        <view class="loading" hidden="{{!tongZhanZl.Loadingstatus}}">正在载入更多...</view>
-        <view class="loading complete" hidden="{{!tongZhanZl.LoadOver}}">已加载全部</view>
+        
     </view>
+     <view class="loading" hidden="{{!tongZhanZl.Loadingstatus}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!tongZhanZl.LoadOver}}">已加载全部</view>
 </view>

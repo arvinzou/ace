@@ -149,12 +149,6 @@ Page({
                 })
             }
         })
-        downloadTask.onProgressUpdate((res) => {
-            console.log('下载进度', res.progress)
-            this.setData({
-                downloadPercent: (res.progress * 100).toFixed(2)//toFixed(2)取小数点后两位，更新wxml中progress组件的进度值  
-            })
-        })
     }
 })
 

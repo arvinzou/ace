@@ -23,13 +23,12 @@
         </view>
 
         <view wx:if="{{list.file!=null}}">
-            
-                <view class="msg msgFile" data-fileAddr="{{list.file}}" bindtap="navbarTap_file">
-                    <image class='icon_icon' src='../../image/online_icon.png'></image>
-                    <text>在线查看文档</text>
-                    <image class='icon_ic'  src='../../image/action_icon.png'></image>
-                    <progress class='usual_progres'  backgroundColor='white' stroke-width="3" percent='{{downloadPercent}}'></progress>
-                </view>
+
+            <view class="msg" data-fileAddr="{{list.file}}" bindtap="navbarTap_file">
+                <image class='icon_icon' src='../../image/online_icon.png'></image>
+                <text>在线查看文档</text>
+                <image class='icon_ic' src='../../image/action_icon.png'></image>
+            </view>
         </view>
 
         <view wx:if="{{list.time!=null}}">
@@ -64,9 +63,10 @@
             </navigator>
         </view>
     </view>
-    <view class='content'>
-        <view class='content_title'>{{name}}主要内容:</view>
-        <rich-text class='content_text' nodes="{{list.content}}"></rich-text>
-        <rich-text class='content_text' nodes="{{content}}"></rich-text>
+    <view wx:if="{{list.content!=null}}">
+        <view class='content'>
+            <view class='content_title'>{{name}}主要内容:</view>
+            <rich-text class='content_text' nodes="{{list.content}}"></rich-text>
+        </view>
     </view>
 </view>

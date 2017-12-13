@@ -30,5 +30,4 @@
 	<import resource="classpath:spring/spring-ace-uf-service.xml" />
 	<import resource="classpath:dubbo/dubbo-ace-uf-provider.xml" />
 	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
-
 </beans>

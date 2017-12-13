@@ -9,7 +9,7 @@
     <block wx:for-items="{{povertyAlleviationIng.List}}" wx:for-item="item" wx:key="{{item.id}}">
         <navigator class='content' bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_img'>
-                <image class='cover' src='{{serverfile}}{{item.cover}}'></image>
+                <image class='cover' src='{{serverfile}}{{item.cover}}' mode="center"></image>
             </view>
             <view class='content_text'>
                 <view class='title'>{{item.name}}</view>

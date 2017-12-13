@@ -36,9 +36,8 @@
                             {{item.name}}
                         </view>
                         <view class='remark'>
-                            来自
-                            <span class='deptlong'>{{item.dept}}</span>
-                            <span>{{item.author}}</span>
+                            来源
+                            <span class='medialong'>{{item.media}}</span>
                             <span class="time">{{item.published}}</span>
                         </view>
                     </navigator>
@@ -56,9 +55,8 @@
                                 {{item.name}}
                             </view>
                             <view class='remark remarkplus'>
-                                来自
-                                <span class='dept'>{{item.dept}}</span>
-                                <span>{{item.author}}</span>
+                                来源
+                                <span class='media'>{{item.media}}</span>
                                 <span class="time">{{item.published}}</span>
                             </view>
                         </view>

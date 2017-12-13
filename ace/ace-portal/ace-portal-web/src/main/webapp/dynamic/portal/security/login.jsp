@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8" %>
 <%
-request.setAttribute("ch", "");
-request.setAttribute("date", new java.util.Date().getTime());
-javax.servlet.http.Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
-if(cookies!=null){
-for(javax.servlet.http.Cookie cookie : cookies){
-if(cookie.getName().equals("username")||cookie.getName().equals("password")||cookie.getName().equals("ch")){
-request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
-}
-}
-}
+    request.setAttribute("ch", "");
+    request.setAttribute("date", new java.util.Date().getTime());
+    javax.servlet.http.Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+    if (cookies != null) {
+        for (javax.servlet.http.Cookie cookie : cookies) {
+            if (cookie.getName().equals("username") || cookie.getName().equals("password") || cookie.getName().equals("ch")) {
+                request.setAttribute((String) cookie.getName(), (String) cookie.getValue());
+            }
+        }
+    }
 %>
 <!DOCTYPE html>
 <!--[if IE 8]>
@@ -63,7 +63,7 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
 </head>
 <!-- END HEAD -->
 <script type="text/javascript">
-		var contextPath = '${pageContext.request.contextPath}';
+    var contextPath = '${pageContext.request.contextPath}';
 
 
 </script>
@@ -97,20 +97,20 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
             <label class="control-label visible-ie8 visible-ie9">账号</label>
             <div class="input-icon">
                 <i class="fa fa-user"></i>
-            <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
-                   placeholder="账号" name="j_username" id="j_username" value="${username}"/>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
+                       placeholder="账号" name="j_username" id="j_username" value="${username}"/>
             </div>
-            </div>
+        </div>
 
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">密码</label>
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
-            <input class="form-control  placeholder-no-fix" type="password" autocomplete="off"
-                   placeholder="密码" name="j_password" id="j_password" value="${password}"/>
+                <input class="form-control  placeholder-no-fix" type="password" autocomplete="off"
+                       placeholder="密码" name="j_password" id="j_password" value="${password}"/>
             </div>
 
-            </div>
+        </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">验证码</label>
             <input class="form-control  placeholder-no-fix" type="text" name="j_captcha"
@@ -185,13 +185,13 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
                         输入注册的个人邮箱，系统将重置的密码发送到此邮箱.
                     </div>
 
-                        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱"
-                               name="email" id="email"/>
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱"
+                           name="email" id="email"/>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button"  class="btn blue" id="btn-resetpasswd">提交</button>
+                <button type="button" class="btn blue" id="btn-resetpasswd">提交</button>
                 <button type="button" data-dismiss="modal" class="btn red">取消</button>
             </div>
         </div>
@@ -212,7 +212,8 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
         src="${pageContext.request.contextPath}/content/common/assets/js/gz/jquery-ui.min.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js"
         type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/ui-modals.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/ui-modals.min.js"
+        type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/js.cookie.min.js"
         type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"
@@ -240,119 +241,120 @@ request.setAttribute((String)cookie.getName(), (String)cookie.getValue());
 
 <script type="text/javascript">
 
-function onLoad() {
-	document.getElementById("j_username").focus();
-}
-function j_submit() {
-	var userName = document.getElementById("j_username");
-	var password = document.getElementById("j_password");
-	var captcha = document.getElementById("j_captcha");
-	var reg = /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{8,16}/i;
-	if (userName.value == "") {
-		userName.focus();
-		alert("请输入用户名");
-		return false;
-	}
-	if (password.value == "") {
-		password.focus();
-		alert("请输入密码");
-		return false;
-	}
-	if (captcha.value == "") {
-		captcha.focus();
-		alert("请输入验证码");
-		return false;
-	}
-	if (userName.value.length > 20) {
-		userName.focus();
-		alert("用户名长度不能超过20");
-		return false;
-	}
+    function onLoad() {
+        document.getElementById("j_username").focus();
+    }
 
-	if (password.value.length > 20) {
-		password.focus();
-		alert("密码 长度不能超过20");
-		return false;
-	}
-	if (!reg.test(password.value)) {
-		alert("尊敬的用户您的密码过于简单，建议您把密码修改为，长度大于8位 、包含字母、数字、特殊符号，谢谢！");
-	}
-	var form = document.getElementById("login_form");
-	form.submit();
-	$('.content').addClass('hide');// hide others
-	$('#progress-bar-box').removeClass('hide');
-}
-window.onload = new function() {
- document.getElementById("j_username").focus();
-	if (window.top != window.self)
-		window.top.window.location.href = contextPath
-				+ "/dynamic/portal/security/login.jsp";
+    function j_submit() {
+        var userName = document.getElementById("j_username");
+        var password = document.getElementById("j_password");
+        var captcha = document.getElementById("j_captcha");
+        var reg = /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{8,16}/i;
+        if (userName.value == "") {
+            userName.focus();
+            alert("请输入用户名");
+            return false;
+        }
+        if (password.value == "") {
+            password.focus();
+            alert("请输入密码");
+            return false;
+        }
+        if (captcha.value == "") {
+            captcha.focus();
+            alert("请输入验证码");
+            return false;
+        }
+        if (userName.value.length > 20) {
+            userName.focus();
+            alert("用户名长度不能超过20");
+            return false;
+        }
 
-}
-jQuery(function($) {
+        if (password.value.length > 20) {
+            password.focus();
+            alert("密码 长度不能超过20");
+            return false;
+        }
+        if (!reg.test(password.value)) {
+            alert("尊敬的用户您的密码过于简单，建议您把密码修改为，长度大于8位 、包含字母、数字、特殊符号，谢谢！");
+        }
+        var form = document.getElementById("login_form");
+        form.submit();
+        $('.content').addClass('hide');// hide others
+        $('#progress-bar-box').removeClass('hide');
+    }
 
-	var userName = document.getElementById("j_username");
-	var password = document.getElementById("j_password");
-	var captcha = document.getElementById("j_captcha");
-	$("#flashImage").click(
-			function() {
-				$('#imageF').hide().attr(
-						'src',
-						contextPath+'/captcha/image.do'
-								+ '?' + Math.floor(Math.random() * 100))
-						.fadeIn();
-			});
+    window.onload = new function () {
+        document.getElementById("j_username").focus();
+        if (window.top != window.self)
+            window.top.window.location.href = contextPath
+                + "/dynamic/portal/security/login.jsp";
 
-	$('#j_username').keydown(function(e) {
-		if (e.keyCode == 13) {
-			password.focus();
-		}
-	});
-	$('#j_password').keydown(function(e) {
-		if (e.keyCode == 13) {
-			captcha.focus();
-		}
-	});
-	$('#j_captcha').keydown(function(e) {
-		if (e.keyCode == 13) {
-			j_submit();
-		}
-	});
-	$('#btn-login-submit').on('click', function(e) {
-		j_submit();
-	});
-	$('#btn-resetpasswd')
-			.on(
-					'click',
-					function(e) {
-						$
-								.ajax({
-									type : "post",
-									url : contextPath
-											+ "/system/retrievePassword.do",
-									data : {
-										email : $('#email').val()
-									},
-									beforeSend : function(XMLHttpRequest) {
+    }
+    jQuery(function ($) {
 
-									},
-									success : function(rst, textStatus) {
-									    $('#stack1').modal('hide');
-										alert(rst.errorMessage);
+        var userName = document.getElementById("j_username");
+        var password = document.getElementById("j_password");
+        var captcha = document.getElementById("j_captcha");
+        $("#flashImage").click(
+            function () {
+                $('#imageF').hide().attr(
+                    'src',
+                    contextPath + '/captcha/image.do'
+                    + '?' + Math.floor(Math.random() * 100))
+                    .fadeIn();
+            });
 
-									},
-									complete : function(XMLHttpRequest,
-											textStatus) {
+        $('#j_username').keydown(function (e) {
+            if (e.keyCode == 13) {
+                password.focus();
+            }
+        });
+        $('#j_password').keydown(function (e) {
+            if (e.keyCode == 13) {
+                captcha.focus();
+            }
+        });
+        $('#j_captcha').keydown(function (e) {
+            if (e.keyCode == 13) {
+                j_submit();
+            }
+        });
+        $('#btn-login-submit').on('click', function (e) {
+            j_submit();
+        });
+        $('#btn-resetpasswd')
+            .on(
+                'click',
+                function (e) {
+                    $
+                        .ajax({
+                            type: "post",
+                            url: contextPath
+                            + "/system/retrievePassword.do",
+                            data: {
+                                email: $('#email').val()
+                            },
+                            beforeSend: function (XMLHttpRequest) {
 
-									},
-									error : function(XMLHttpRequest,
-											textStatus, errorThrown) {
-										alert(XMLHttpRequest.status);
-									}
-								});
-					});
-});
+                            },
+                            success: function (rst, textStatus) {
+                                $('#stack1').modal('hide');
+                                alert(rst.errorMessage);
 
+                            },
+                            complete: function (XMLHttpRequest,
+                                                textStatus) {
+
+                            },
+                            error: function (XMLHttpRequest,
+                                             textStatus, errorThrown) {
+                                alert(XMLHttpRequest.status);
+                            }
+                        });
+                });
+    });
 
 
 </script>
@@ -361,47 +363,55 @@ jQuery(function($) {
 <!-- END THEME LAYOUT SCRIPTS -->
 </body>
 <style>
-.login .logo {
-    margin: 0px auto 0;
-    padding: 15px;
-    text-align: left;
-    height:150px;
+    .login .logo {
+        margin: 0px auto 0;
+        padding: 15px;
+        text-align: left;
+        height: 150px;
 
-}
+    }
+
     .login .content {
-    margin: 10px auto;
-}
-a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
-    -webkit-border-radius: 0!important;
-    -moz-border-radius: 0!important;
-    border-radius: 2px!important;
-}
-.login .content .form-actions {
-    background-color: #fff;
-    clear: both;
-    border: 0;
-    border-bottom: 1px solid #eee;
-    padding: 15px 35px 15px;
-    margin-left: -30px;
-    margin-right: -30px;
+        margin: 10px auto;
+    }
 
-}
-.login .content .form-actions .rememberme {
-     margin-top: 0px;
-    display: inline-block;
-}
-.mt-checkbox, .mt-radio {
-    margin-bottom: 0px;
-}
-.form-group-captcha {
-    margin-bottom: 5px;
-}
-body{
-  background-image: url(${cfg.sys_login_bg_img});
-  background-size:cover;
-}
-.content{
-    border: 1px solid #eee;
-}
+    a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
+        -webkit-border-radius: 0 !important;
+        -moz-border-radius: 0 !important;
+        border-radius: 2px !important;
+    }
+
+    .login .content .form-actions {
+        background-color: #fff;
+        clear: both;
+        border: 0;
+        border-bottom: 1px solid #eee;
+        padding: 15px 35px 15px;
+        margin-left: -30px;
+        margin-right: -30px;
+
+    }
+
+    .login .content .form-actions .rememberme {
+        margin-top: 0px;
+        display: inline-block;
+    }
+
+    .mt-checkbox, .mt-radio {
+        margin-bottom: 0px;
+    }
+
+    .form-group-captcha {
+        margin-bottom: 5px;
+    }
+
+    body {
+        background-image: url(${cfg.sys_login_bg_img});
+        background-size: cover;
+    }
+
+    .content {
+        border: 1px solid #eee;
+    }
 </style>
 </html>

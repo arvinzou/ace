@@ -68,6 +68,5 @@
         </block>
         <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
         <view class="loading complete" hidden="{{!LoadOver}}">已加载全部</view>
-
     </view>
 </view>

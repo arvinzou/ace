@@ -6,7 +6,7 @@ page {
     padding: 0;
     flex-direction: column;
     height: auto;
-    background-color: white;
+    background-color: #f4f4f4;
     color: #999;
     font-size: 26rpx;
 }
@@ -53,8 +53,9 @@ page {
 
 .tzwj {
     padding: 0 32rpx;
-    width: 100%;
+    width: 686rpx;
     height: 100%;
+    background-color: white;
 }
 
 .image {
@@ -107,15 +108,16 @@ page {
 
 .warehouse {
     display: block;
-    width: 100%;
+    width: 686rpx;
 }
 
 /******************************************************************/
 
 .tzzl {
     padding: 0 32rpx;
-    width: 100%;
+    width: 686rpx;
     height: 100%;
+    background-color: white;
 }
 
 .loading {
@@ -131,11 +133,15 @@ page {
     content: '';
     width: 40rpx;
     height: 40rpx;
-    background: url(../../image/1.gif) no-repeat;
+     background-image: url(../../image/loading.png) no-repeat;
     background-size: contain;
     animation: rotate 1s linear infinite;
 }
 
 .loading.complete:before {
     display: none;
+}
+
+span {
+    color: #1a91ff;
 }

@@ -49,7 +49,7 @@ page{
 .content{
     height:fit-content;
     background-color: white;
-    padding: 45rpx 32rpx 0rpx 32rpx;
+    padding: 45rpx 32rpx 45rpx 32rpx;
     overflow: hidden;
 }
 

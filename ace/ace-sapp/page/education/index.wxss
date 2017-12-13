@@ -52,7 +52,7 @@ page {
 
 .ing {
     padding: 30rpx 0 0 32rpx;
-    width: 100%;
+    width: 718rpx;
     height: 100%;
 }
 
