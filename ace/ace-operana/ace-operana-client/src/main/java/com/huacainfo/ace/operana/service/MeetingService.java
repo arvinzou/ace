@@ -50,5 +50,7 @@ public interface MeetingService {
 	public abstract MessageResponse updatePresent(String meetingId,List<Map<String,Object>> list, UserProp userProp)throws Exception;
 
 	public abstract MessageResponse insertMeetingCopy(String meetingId, UserProp userProp)throws Exception;
+
+	public abstract List<Map<String,Object>> selectUserListByMeetingId(String meetingId) throws Exception;
 	
 }

@@ -1117,3 +1117,6 @@ function uploadNormFile(meetingId,topicId,normId){
             upload(params,url)
 
 }
+function exportUserListXls(){
+   location.href=contextPath+"/normData/exportUserListXls.do?meetingId="+meetingId;
+}

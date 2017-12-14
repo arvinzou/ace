@@ -326,4 +326,131 @@ public class NormDataController extends OperanaBaseController {
         return this.normDataService
                 .saveOrUpdateNormData(obj, this.getCurUserProp());
     }
+    @RequestMapping(value = "/exportUserListXls.do")
+    public void exportUserListXls(String meetingId,HttpServletResponse response) throws Exception {
+        Meeting meeting=meetingService.selectMeetingByPrimaryKey(meetingId).getValue();
+        String fname = meeting.getName()+"签到列表";
+        OutputStream os = response.getOutputStream();//取得输出流
+        response.reset();//清空输出流
+        //下面是对中文文件名的处理
+        response.setCharacterEncoding("UTF-8");//设置相应内容的编码格式
+        fname = java.net.URLEncoder.encode(fname,"UTF-8");
+        response.setHeader("Content-Disposition","attachment;filename="+new String(fname.getBytes("UTF-8"),"GBK")+".xls");
+        response.setContentType("application/msexcel");//定义输出类型
+        WritableWorkbook workbook = Workbook.createWorkbook(os);
+        List <Map<String,Object>> list=meetingService.selectUserListByMeetingId(meetingId);
+        WritableFont wf_title = new WritableFont(WritableFont.ARIAL, 14,
+                WritableFont.BOLD, false, UnderlineStyle.NO_UNDERLINE,
+                Colour.WHITE); // 定义格式 字体 下划线 斜体 粗体 颜色
+
+        WritableFont wf_title_hidden = new WritableFont(WritableFont.ARIAL, 0,
+                WritableFont.BOLD, false, UnderlineStyle.NO_UNDERLINE,
+                Colour.WHITE); // 定义格式 字体 下划线 斜体 粗体 颜色
+
+        WritableFont wf_head = new WritableFont(WritableFont.ARIAL, 12,
+                WritableFont.BOLD, false, UnderlineStyle.NO_UNDERLINE,
+                Colour.BLACK); // 定义格式 字体 下划线 斜体 粗体 颜色
+
+        WritableFont wf_grid = new WritableFont(WritableFont.ARIAL, 12,
+                WritableFont.BOLD, false, UnderlineStyle.NO_UNDERLINE,
+                Colour.BLACK); // 定义格式 字体 下划线 斜体 粗体 颜色
+
+        WritableCellFormat wcf_title = new WritableCellFormat(wf_title); // 单元格定义
+        wcf_title.setBackground(Colour.BLUE2); // 设置单元格的背景颜色
+        wcf_title.setAlignment(jxl.format.Alignment.CENTRE); // 设置对齐方式
+        wcf_title.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
+
+
+        WritableCellFormat wcf_head = new WritableCellFormat(wf_head);
+        wcf_head.setBackground(Colour.YELLOW);
+        wcf_head.setAlignment(jxl.format.Alignment.CENTRE);
+        wcf_head.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
+
+
+        WritableCellFormat wcf_grid = new WritableCellFormat(wf_grid);
+        wcf_grid.setBackground(Colour.WHITE);
+        wcf_grid.setAlignment(jxl.format.Alignment.CENTRE);
+        wcf_grid.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
+
+        WritableCellFormat red = new WritableCellFormat(wf_title);
+        red.setBackground(Colour.RED);
+        red.setAlignment(jxl.format.Alignment.CENTRE);
+        red.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
+
+
+        WritableCellFormat green = new WritableCellFormat(wf_title);
+        green.setBackground(Colour.GREEN);
+        green.setAlignment(jxl.format.Alignment.CENTRE);
+        green.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
+
+        WritableCellFormat yellow = new WritableCellFormat(wf_title);
+        yellow.setBackground(Colour.YELLOW);
+        yellow.setAlignment(jxl.format.Alignment.CENTRE);
+        yellow.setBorder(Border.ALL, BorderLineStyle.THIN, Colour.BLACK);
+
+        //创建新的一页
+        WritableSheet sheet = workbook.createSheet("签到列表",0);
+        sheet.setColumnView(0, 20); // 设置列的宽度
+       sheet.setColumnView(1, 30); // 设置列的宽度
+       sheet.setColumnView(2, 30); // 设置列的宽度
+       sheet.setColumnView(3, 20);
+
+        //sheet.setRowView(0,0);
+        int row=0,col=0;
+        String [] titles=new String[]{"序号","姓名","角色","状态"};
+        for(String o:titles){
+            Label e = new Label(col,row,o,wcf_title);
+            sheet.addCell(e);
+            col++;
+        }
+
+        int k=1;
+        for(Map<String,Object> m:list){
+            col=0;
+            row++;
+            this.logger.info("{}",m);
+            Label l1 = new Label(col,row,String.valueOf(k) ,wcf_head);
+            sheet.addCell(l1);
+            col++;
+
+            Label l2 = new Label(col,row,(String) m.get("name"),wcf_grid);
+            sheet.addCell(l2);
+            col++;
+
+            Label l3 = new Label(col,row,(String) m.get("roleName"),wcf_grid);
+            sheet.addCell(l3);
+            col++;
+            Label l4=null;
+            if(((String) m.get("present")).equals("Present")){
+                l4 = new Label(col,row,getZHName((String) m.get("present")),green);
+            }
+            if(((String) m.get("present")).equals("Justified")){
+                l4 = new Label(col,row,getZHName((String) m.get("present")),yellow);
+            }
+            if(((String) m.get("present")).equals("Absent")){
+                l4 = new Label(col,row,getZHName((String) m.get("present")),red);
+            }
+            if(((String) m.get("present")).equals("0")){
+                l4 = new Label(col,row,getZHName((String) m.get("present")),wcf_grid);
+            }
+
+
+            sheet.addCell(l4);
+            col++;
+
+            k++;
+        }
+        workbook.write();
+        workbook.close();
+        os.close();
+    }
+
+    private String getZHName(String key){
+	    Map<String,String> o=new HashMap<String,String>();
+	    o.put("Present","出席");
+        o.put("Justified","请假");
+        o.put("Absent","缺席");
+        o.put("0","待签");
+	    return o.get(key);
+    }
 }

@@ -177,7 +177,10 @@ pageEncoding="utf-8"%>
     <div>
         <div class="div-left header-title">与会人员</div>
         <div class="div-right header-title">
-            <div style="text-align:right"><a data-rel="tooltip" data-placement="top" title="与会人员设置" class="blue" href="javascript:userSetting()"><i class="ace-icon fa fa-plus-circle"></i></a></div>
+            <div style="text-align:right">
+                <a data-rel="tooltip" data-placement="top" title="签到人员导出" class="blue" href="javascript:exportUserListXls()"><i class="ace-icon fa fa-download"></i></a>
+                <a data-rel="tooltip" data-placement="top" title="与会人员设置" class="blue" href="javascript:userSetting()"><i class="ace-icon fa fa-plus-circle"></i></a>
+            </div>
         </div>
     </div>
     <div class="row">
