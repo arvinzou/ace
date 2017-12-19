@@ -35,7 +35,7 @@ public class HelloWorld {
 
         ControlApi.getList(0, 10,
                 AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
-//        asda//
+
     }
 
 

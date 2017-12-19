@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
+import com.huacainfo.ace.rvc.base.RvcBaseService;
 import com.huacainfo.ace.rvc.dao.RvcBaseUserDao;
 import com.huacainfo.ace.rvc.dao.RvcConferenceMapper;
 import com.huacainfo.ace.rvc.dao.RvcConferenceMembersMapper;
@@ -12,10 +13,14 @@ import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.kedapi.common.constant.VideoConstant;
 import com.huacainfo.ace.rvc.kedapi.control.ControlApi;
 import com.huacainfo.ace.rvc.kedapi.control.model.RecordReq;
+import com.huacainfo.ace.rvc.kedapi.control.model.conference.VideoConfResp;
 import com.huacainfo.ace.rvc.kedapi.control.model.terminal.TerminalReq;
 import com.huacainfo.ace.rvc.kedapi.control.model.terminal.TerminalResp;
 import com.huacainfo.ace.rvc.kedapi.manage.ManageApi;
+import com.huacainfo.ace.rvc.kedapi.manage.model.create.Chairman;
 import com.huacainfo.ace.rvc.kedapi.manage.model.create.CreateRequest;
+import com.huacainfo.ace.rvc.kedapi.manage.model.create.InviteMember;
+import com.huacainfo.ace.rvc.kedapi.manage.model.create.Speaker;
 import com.huacainfo.ace.rvc.kedapi.vrs.VRSApi;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LiveRoomResp;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LocalLoginResp;
@@ -24,7 +29,7 @@ import com.huacainfo.ace.rvc.model.RvcConference;
 import com.huacainfo.ace.rvc.model.RvcConferenceMembers;
 import com.huacainfo.ace.rvc.service.ConferenceService;
 import com.huacainfo.ace.rvc.util.ResultUtil;
-import org.apache.log4j.Logger;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +42,7 @@ import java.util.Map;
  * Created by Arvin on 2017/11/23.
  */
 @Service("conferenceService")
-public class ConferenceServiceImpl implements ConferenceService {
-    private static Logger logger = Logger.getLogger(ConferenceServiceImpl.class);
+public class ConferenceServiceImpl extends RvcBaseService implements ConferenceService {
 
     @Autowired
     private RvcConferenceMembersMapper rvcConferenceMembersDao;
@@ -159,15 +163,16 @@ public class ConferenceServiceImpl implements ConferenceService {
             if (StringUtils.isEmpty(AuthorizeApi.ACCOUNT_TOKEN) || StringUtils.isEmpty(AuthorizeApi.SSO_COOKIE_KEY)) {
                 AuthorizeApi.init();
             }
-            //2.调用接口开始会议
+            //0.检测科达端是否存在同名会议，存在就shutDown掉，防止后面去直播地址有误
+            checkConferenceStart(userId, conference);
+            //2.调用接口开始会议，设置自己与会人员，发言人，主席
             String confId = apiCreate(operateUser, conference);//科达接口返回会议ID
-            //3.添加自己的本级终端,并指定自己为发言人
-            appointDefaultSpeaker(confId, operateUser, conference);
-            //4.开启直播功能
+            //3.开启直播功能
             apiLive(confId, operateUser, conference);
-            //5.调用录播接口，获取直播地址
+            //4.调用录播接口，获取直播地址 --
+            Thread.sleep(3000); //直播地址产生存在延迟（应答过程，分手动，自动；），停顿三秒后在获取
             String liveURL = getLiveAddress(conference);
-            //6.更新会议状态
+            //5.更新会议状态
             conference.setStatus("1");
             conference.setLiveURL(liveURL);
             conference.setLastModifyUserId(operateUser.getUserId());
@@ -182,6 +187,24 @@ public class ConferenceServiceImpl implements ConferenceService {
         }
     }
 
+    /**
+     * .检测科达端是否存在同名会议，存在就shutDown掉，防止后面去直播地址有误
+     *
+     * @param userId
+     * @param conference
+     */
+    private void checkConferenceStart(String userId, RvcConference conference) {
+        List<VideoConfResp> list = ControlApi.getList(0, 10,
+                AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+        if (CollectionUtils.isNotEmpty(list)) {
+            for (VideoConfResp item : list) {
+                if (item.getName().equals(conference.getTitle())) {
+                    ManageApi.delete(item.getConf_id(), AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+                }
+            }
+        }
+    }
+
     /***
      *  指定默认发言人
      * @param confId 会议id -- 科达编号
@@ -191,7 +214,7 @@ public class ConferenceServiceImpl implements ConferenceService {
     private void appointDefaultSpeaker(String confId, RvcBaseUser operateUser, RvcConference conference) {
         TerminalResp terminalResp = apiAddMember(confId, operateUser, conference);
         int mtId = terminalResp.getMts().get(0).getMt_id();
-        ControlApi.speaker(confId, mtId, AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+//        ControlApi.speaker(confId, mtId, AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
 
         RvcConferenceMembers members = rvcConferenceMembersDao.getByUserId(operateUser.getUserId());
         members.setMtId(mtId + "");
@@ -201,7 +224,7 @@ public class ConferenceServiceImpl implements ConferenceService {
         rvcConferenceMembersDao.updateByPrimaryKeySelective(members);
     }
 
-    /***
+    /***l
      * 加入会议
      * @param userId 用户ID
      * @param conferenceId 会议ID -- -- rvc_conference.id
@@ -279,6 +302,21 @@ public class ConferenceServiceImpl implements ConferenceService {
     }
 
     /**
+     * 获取会议列表
+     *
+     * @param userId 创建人用户ID -- 浪潮ID
+     * @param status 会议状态，用','隔开
+     *               0-未开始，1-进行中，2-已结束
+     * @return RvcConference
+     */
+    @Override
+    public List<RvcConference> getList(String userId, String status) {
+        List<RvcConference> list = rvcConferenceDao.getList(status.split(","));
+
+        return list;
+    }
+
+    /**
      * 获取直播地址
      *
      * @param conference 会议资料
@@ -324,10 +362,12 @@ public class ConferenceServiceImpl implements ConferenceService {
      * @param conference  预会议信息
      */
     private String apiCreate(RvcBaseUser operateUser, RvcConference conference) {
-//        Speaker speaker = new Speaker(operateUser.getUserName(), operateUser.getKedaAccount(), operateUser.getKedaAccountType());
-//        Chairman chairman = new Chairman(operateUser.getUserName(), operateUser.getKedaAccount(), operateUser.getKedaAccountType());
+        Speaker speaker = new Speaker(operateUser.getUserName(), operateUser.getKedaAccount(), operateUser.getKedaAccountType());
+        Chairman chairman = new Chairman(operateUser.getUserName(), operateUser.getKedaAccount(), operateUser.getKedaAccountType());
+        List<InviteMember> inviteMembers = new ArrayList<>();
+        inviteMembers.add(new InviteMember(operateUser.getUserName(), operateUser.getKedaAccount(), operateUser.getKedaAccountType()));
 
-        CreateRequest request = new CreateRequest(conference.getTitle());
+        CreateRequest request = new CreateRequest(conference.getTitle(), speaker, chairman, inviteMembers);
         String confId = ManageApi.create(AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY, request);
         conference.setConfId(confId);
         return confId;
