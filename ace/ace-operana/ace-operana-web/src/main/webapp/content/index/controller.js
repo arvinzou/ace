@@ -78,6 +78,8 @@ function topicCfg(id, title) {
 									}
 								}]
 					});
+					$(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
+					$(dialog).parent().css("top","1px");
 	selectAllTopic(id);
 }
 
@@ -345,7 +347,7 @@ function cfgUser(id, title, meetingId) {
 			.removeClass('hide')
 			.dialog(
 					{
-						modal : true,
+						modal : false,
 						width : 400,
 						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
 								+ title + "</div></div>",
@@ -370,6 +372,7 @@ function cfgUser(id, title, meetingId) {
 									}
 								}]
 					});
+					$(dialog).parent().css("top","1px");
 
 	$('#_user').combogrid({
 		panelWidth : 350,
@@ -475,6 +478,7 @@ function attendanceCfg(id, title) {
 								}]
 					});
 					 $(dialog).css("max-height", 400);
+					 $(dialog).parent().css("top","1px");
 	selectAllUserDeptId(id);
 }
 

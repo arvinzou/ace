@@ -14,11 +14,7 @@
 
 
 </script>
-<style type="text/css">
-			*{padding:0;margin:0;}
-			ul li{list-style:none;}
-			.ulinput{margin-left:50px;}
-		</style>
+
 
 <body>
 	<div class="page-content">
@@ -132,6 +128,17 @@ window.onresize = function () {
 }
 </script>
 
+	<style type="text/css">
+			*{padding:0;margin:0;}
+			ul li{list-style:none;}
+			.ulinput{margin-left:50px;}
 
+.checkboxitem {
+	width: 250px;
+	height: 20px;
+	float: left;
+	margin: 2px 2px 2px;
+}
+		</style>
 </body>
 </html>

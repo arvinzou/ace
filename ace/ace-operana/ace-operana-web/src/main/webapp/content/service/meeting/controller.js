@@ -214,6 +214,8 @@ function topicCfg(id, title) {
 									}
 								}]
 					});
+					$(dialog).parent().css("top","1px");
+					$(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
 	selectAllTopic(id);
 }
 
@@ -466,6 +468,8 @@ function cfgUser(id, title, meetingId) {
 									}
 								}]
 					});
+					$(dialog).parent().css("top","1px");
+					$(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
 
 	$('#_user').combogrid({
 		panelWidth : 350,
@@ -572,6 +576,7 @@ var dialog = $("#dialog-meeting-user")
 								}]
 					});
  $(dialog).css("max-height", 400);
+ $(dialog).parent().css("top","1px");
 	selectAllUserDeptId(id);
 }
 

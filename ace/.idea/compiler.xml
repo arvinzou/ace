@@ -19,6 +19,9 @@
         <module name="ace-uf-client" />
         <module name="ace-uf-service" />
         <module name="ace-uf-web" />
+        <module name="ace-workflow-client" />
+        <module name="ace-workflow-service" />
+        <module name="ace-workflow-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
@@ -52,6 +55,10 @@
       <module name="ace-uf-client" target="1.7" />
       <module name="ace-uf-service" target="1.7" />
       <module name="ace-uf-web" target="1.7" />
+      <module name="ace-workflow" target="1.7" />
+      <module name="ace-workflow-client" target="1.7" />
+      <module name="ace-workflow-service" target="1.7" />
+      <module name="ace-workflow-web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
