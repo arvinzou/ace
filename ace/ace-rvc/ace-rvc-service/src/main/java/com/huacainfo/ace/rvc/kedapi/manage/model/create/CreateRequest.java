@@ -12,107 +12,162 @@ import java.util.List;
  */
 public class CreateRequest extends BaseModel {
 
-    public static final String DEFAULT =
-            "{\n" +
-                    "    \"name\": \"text\",\n" +
-                    "    \"call_mode\": 0,\n" +
-                    "    \"conf_level\": 10,\n" +
-                    "    \"duration\": 240,\n" +
-                    "    \"bitrate\": 1024,\n" +
-                    "    \"closed_conf\": 0,\n" +
-                    "    \"safe_conf\": 0,\n" +
-                    "    \"encrypted_type\": 0,\n" +
-                    "    \"conf_type\": 1,\n" +
-                    "    \"call_times\": 0,\n" +
-                    "    \"call_interval\": 20,\n" +
-                    "    \"mute\": 0,\n" +
-                    "    \"silence\": 0,\n" +
-                    "    \"video_quality\": 0,\n" +
-                    "    \"encrypted_key\": \"\",\n" +
-                    "    \"dual_mode\": 1,\n" +
-                    "    \"voice_activity_detection\": 0,\n" +
-                    "    \"cascade_mode\": 1,\n" +
-                    "    \"cascade_upload\": 1,\n" +
-                    "    \"cascade_return\": 0,\n" +
-                    "    \"cascade_return_para\": 0,\n" +
-                    "    \"max_join_mt\": 192,\n" +
-                    "    \"auto_end\": 0,\n" +
-                    "    \"preoccpuy_resource\": 1,\n" +
-                    "    \"public_conf\": 0,\n" +
-                    "    \"video_formats\": [\n" +
-                    "        {\n" +
-                    "            \"format\": 5,\n" +
-                    "            \"resolution\": 12,\n" +
-                    "            \"frame\": 30,\n" +
-                    "            \"bitrate\": 1024\n" +
-                    "        }\n" +
-                    "    ]\n" +
-                    "}";
+    public CreateRequest() {
 
-    public static final String DEFAULT_2 = "{\n" +
-            "  \"name\": \"name\",\n" +
-            "  \"duration\": 240,\n" +
-            "  \"conf_level\": 10,\n" +
-            "  \"bitrate\": 8128,\n" +
-            "  \"closed_conf\": 1,\n" +
-            "  \"safe_conf\": 0,\n" +
-            "  \"encrypted_type\": 0,\n" +
-            "  \"conf_type\": 0,\n" +
-            "  \"call_mode\": 0,\n" +
-            "  \"call_times\": 0,\n" +
-            "  \"call_interval\": 20,\n" +
-            "  \"mute\": 1,\n" +
-            "  \"silence\": 1,\n" +
-            "  \"video_quality\": 1,\n" +
-            "  \"encrypted_key\": \"\",\n" +
-            "  \"dual_mode\": 0,\n" +
-            "  \"voice_activity_detection\": 1,\n" +
-            "  \"vacinterval\": 5,\n" +
-            "  \"cascade_mode\": 1,\n" +
-            "  \"cascade_upload\": 1,\n" +
-            "  \"cascade_return\": 0,\n" +
-            "  \"cascade_return_para\": 0,\n" +
-            "  \"public_conf\": 1,\n" +
-            "  \"max_join_mt\": 192,\n" +
-            "  \"auto_end\": 0,\n" +
-            "  \"preoccpuy_resource\": 1,\n" +
-            "  \"speaker\": {\n" +
-            "    \"name\": \"mxm\",\n" +
-            "    \"account\": \"c69da1ef-5930-47e0-9a79-dfa083de0208\",\n" +
-            "    \"account_type\": 1\n" +
-            "  },\n" +
-            "  \"chairman\": {\n" +
-            "    \"name\": \"mxm\",\n" +
-            "    \"account\": \"c69da1ef-5930-47e0-9a79-dfa083de0208\",\n" +
-            "    \"account_type\": 1\n" +
-            "  },\n" +
-            "  \"video_formats\": [\n" +
-            "    {\n" +
-            "      \"format\": 4,\n" +
-            "      \"resolution\": 3,\n" +
-            "      \"frame\": 30,\n" +
-            "      \"bitrate\": 8128\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"format\": 4,\n" +
-            "      \"resolution\": 2,\n" +
-            "      \"frame\": 30,\n" +
-            "      \"bitrate\": 4096\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"format\": 4,\n" +
-            "      \"resolution\": 12,\n" +
-            "      \"frame\": 30,\n" +
-            "      \"bitrate\": 2048\n" +
-            "    },\n" +
-            "    {\n" +
-            "      \"format\": 5,\n" +
-            "      \"resolution\": 3,\n" +
-            "      \"frame\": 25,\n" +
-            "      \"bitrate\": 512\n" +
-            "    }\n" +
-            "  ]\n" +
-            "}";
+    }
+
+    public CreateRequest(String name) {
+        this.name = name;
+        this.duration = 0;
+        this.conf_level = 10;
+        this.bitrate = 8128;
+        this.closed_conf = 1;
+        this.safe_conf = 0;
+        this.encrypted_type = 0;
+        this.conf_type = 0;
+        this.call_mode = 0;
+        this.call_times = 0;
+        this.call_interval = 20;
+        this.mute = 1;
+        this.silence = 1;
+        this.video_quality = 1;
+        this.encrypted_key = "";
+        this.dual_mode = 0;
+        this.voice_activity_detection = 0;
+        this.cascade_mode = 1;
+        this.cascade_upload = 1;
+        this.cascade_return_para = 0;
+        this.public_conf = 0;
+        this.max_join_mt = 192;
+        this.auto_end = 0;//	会议中无终端时，是否自动结会 0-否；1-是；
+        this.preoccpuy_resource = 1;
+        List<VideoFormat> vfList = new ArrayList<>();
+        VideoFormat vf1 = new VideoFormat(5, 12, 30, 1024);
+        VideoFormat vf2 = new VideoFormat(4, 3, 30, 8128);
+
+        vfList.add(vf1);
+        vfList.add(vf2);
+        this.video_formats = vfList;
+        this.vmp = new Vmp();
+    }
+
+    public CreateRequest(String name, Speaker speaker, Chairman chairman) {
+        this.name = name;
+        this.duration = 0;
+        this.conf_level = 10;
+        this.bitrate = 8128;
+        this.closed_conf = 1;
+        this.safe_conf = 0;
+        this.encrypted_type = 0;
+        this.conf_type = 0;
+        this.call_mode = 0;
+        this.call_times = 0;
+        this.call_interval = 20;
+        this.mute = 1;
+        this.silence = 1;
+        this.video_quality = 1;
+        this.encrypted_key = "";
+        this.dual_mode = 0;
+        this.voice_activity_detection = 0;
+        this.cascade_mode = 1;
+        this.cascade_upload = 1;
+        this.cascade_return_para = 0;
+        this.public_conf = 0;
+        this.max_join_mt = 192;
+        this.auto_end = 0;//	会议中无终端时，是否自动结会 0-否；1-是；
+        this.preoccpuy_resource = 1;
+        List<VideoFormat> vfList = new ArrayList<>();
+        VideoFormat vf1 = new VideoFormat(5, 12, 30, 1024);
+        VideoFormat vf2 = new VideoFormat(4, 3, 30, 8128);
+
+        vfList.add(vf1);
+        vfList.add(vf2);
+        this.video_formats = vfList;
+
+        this.speaker = speaker;
+        this.chairman = chairman;
+        this.vmp = new Vmp();
+    }
+
+    public CreateRequest(String name, Speaker speaker, Chairman chairman, List<InviteMember> invite_members) {
+        this.name = name;//会议名称
+        this.duration = 0;//会议时长 0为永久会议
+        this.conf_level = 10;//会议等级 0—16 数字越大会议等级越高，默认为0
+        this.bitrate = 8128;//
+        this.closed_conf = 0;//	会议免打扰 0-关闭；1-开启；
+        this.safe_conf = 0;//	会议安全 0-公开会议；1-隐藏会议；
+        this.encrypted_type = 0;//	传输加密类型 0-不加密；2-AES加密；
+        this.conf_type = 0;//	会议类型 0-传统会议；1-端口会议；
+        this.call_mode = 0;//呼叫模式，不填则默认为2； 0-手动；2-自动；
+        this.call_times = 0;//呼叫次数
+        this.call_interval = 20;//	呼叫间隔(秒)
+        this.mute = 0;//是否开启初始化哑音 0-否；1-是；
+        this.silence = 0;//	是否开启初始化静音 0-否；1-是；
+        this.video_quality = 1;//视频质量,其中租赁环境默认设为质量优先，自建环境以api下参为准 0-质量优先；1-速度优先；
+        this.encrypted_key = "";//传输加密AES加密密钥
+        this.dual_mode = 1;//双流权限 0-发言会场；1-任意会场；2-指定会场；
+        this.voice_activity_detection = 0;//	是否开启语音激励 0-否；1-是；
+        this.cascade_mode = 1;//
+        this.cascade_upload = 1;//
+        this.cascade_return_para = 0;//
+        this.public_conf = 0;//	是否公共会议室 0-否；1-是；
+        this.max_join_mt = 192;//	最大与会终端数 8-8方；192-192方；
+        this.auto_end = 0;//	会议中无终端时，是否自动结会 0-否；1-是；
+        this.preoccpuy_resource = 1;
+        List<VideoFormat> vfList = new ArrayList<>();
+        VideoFormat vf1 = new VideoFormat(5, 12, 30, 1024);
+        VideoFormat vf2 = new VideoFormat(4, 3, 30, 8128);
+
+        vfList.add(vf1);
+        vfList.add(vf2);
+        this.video_formats = vfList;
+
+        this.speaker = speaker;
+        this.chairman = chairman;
+        this.invite_members = invite_members;
+        this.vmp = new Vmp();
+    }
+
+    public CreateRequest(String name, Speaker speaker, Chairman chairman, List<InviteMember> invite_members, List<Vmp> vmp) {
+        this.name = name;//会议名称
+        this.duration = 0;//会议时长 0为永久会议
+        this.conf_level = 10;//会议等级 0—16 数字越大会议等级越高，默认为0
+        this.bitrate = 8128;//
+        this.closed_conf = 0;//	会议免打扰 0-关闭；1-开启；
+        this.safe_conf = 0;//	会议安全 0-公开会议；1-隐藏会议；
+        this.encrypted_type = 0;//	传输加密类型 0-不加密；2-AES加密；
+        this.conf_type = 0;//	会议类型 0-传统会议；1-端口会议；
+        this.call_mode = 0;//呼叫模式，不填则默认为2； 0-手动；2-自动；
+        this.call_times = 0;//呼叫次数
+        this.call_interval = 20;//	呼叫间隔(秒)
+        this.mute = 0;//是否开启初始化哑音 0-否；1-是；
+        this.silence = 0;//	是否开启初始化静音 0-否；1-是；
+        this.video_quality = 1;//视频质量,其中租赁环境默认设为质量优先，自建环境以api下参为准 0-质量优先；1-速度优先；
+        this.encrypted_key = "";//传输加密AES加密密钥
+        this.dual_mode = 1;//双流权限 0-发言会场；1-任意会场；2-指定会场；
+        this.voice_activity_detection = 0;//	是否开启语音激励 0-否；1-是；
+        this.cascade_mode = 1;//
+        this.cascade_upload = 1;//
+        this.cascade_return_para = 0;//
+        this.public_conf = 0;//	是否公共会议室 0-否；1-是；
+        this.max_join_mt = 192;//	最大与会终端数 8-8方；192-192方；
+        this.auto_end = 0;//	会议中无终端时，是否自动结会 0-否；1-是；
+        this.preoccpuy_resource = 1;
+        List<VideoFormat> vfList = new ArrayList<>();
+        VideoFormat vf1 = new VideoFormat(5, 12, 30, 1024);
+        VideoFormat vf2 = new VideoFormat(4, 3, 30, 8128);
+
+        vfList.add(vf1);
+        vfList.add(vf2);
+        this.video_formats = vfList;
+
+        this.speaker = speaker;
+        this.chairman = chairman;
+        this.invite_members = invite_members;
+        this.vmp = new Vmp();
+    }
+
+
     /**
      * 会议名称
      * 1.字符限制：
@@ -241,117 +296,17 @@ public class CreateRequest extends BaseModel {
      */
     private List<InviteMember> invite_members;
 
-    public CreateRequest() {
+    /**
+     * 画面合成设置
+     */
+    private Vmp vmp;
 
+    public Vmp getVmp() {
+        return vmp;
     }
 
-    public CreateRequest(String name) {
-        this.name = name;
-        this.duration = 0;
-        this.conf_level = 10;
-        this.bitrate = 8128;
-        this.closed_conf = 1;
-        this.safe_conf = 0;
-        this.encrypted_type = 0;
-        this.conf_type = 0;
-        this.call_mode = 0;
-        this.call_times = 0;
-        this.call_interval = 20;
-        this.mute = 1;
-        this.silence = 1;
-        this.video_quality = 1;
-        this.encrypted_key = "";
-        this.dual_mode = 0;
-        this.voice_activity_detection = 0;
-        this.cascade_mode = 1;
-        this.cascade_upload = 1;
-        this.cascade_return_para = 0;
-        this.public_conf = 0;
-        this.max_join_mt = 192;
-        this.auto_end = 0;//	会议中无终端时，是否自动结会 0-否；1-是；
-        this.preoccpuy_resource = 1;
-        List<VideoFormat> vfList = new ArrayList<>();
-        VideoFormat vf1 = new VideoFormat(5, 12, 30, 1024);
-        VideoFormat vf2 = new VideoFormat(4, 3, 30, 8128);
-
-        vfList.add(vf1);
-        vfList.add(vf2);
-        this.video_formats = vfList;
-    }
-
-    public CreateRequest(String name, Speaker speaker, Chairman chairman) {
-        this.name = name;
-        this.duration = 0;
-        this.conf_level = 10;
-        this.bitrate = 8128;
-        this.closed_conf = 1;
-        this.safe_conf = 0;
-        this.encrypted_type = 0;
-        this.conf_type = 0;
-        this.call_mode = 0;
-        this.call_times = 0;
-        this.call_interval = 20;
-        this.mute = 1;
-        this.silence = 1;
-        this.video_quality = 1;
-        this.encrypted_key = "";
-        this.dual_mode = 0;
-        this.voice_activity_detection = 0;
-        this.cascade_mode = 1;
-        this.cascade_upload = 1;
-        this.cascade_return_para = 0;
-        this.public_conf = 0;
-        this.max_join_mt = 192;
-        this.auto_end = 0;//	会议中无终端时，是否自动结会 0-否；1-是；
-        this.preoccpuy_resource = 1;
-        List<VideoFormat> vfList = new ArrayList<>();
-        VideoFormat vf1 = new VideoFormat(5, 12, 30, 1024);
-        VideoFormat vf2 = new VideoFormat(4, 3, 30, 8128);
-
-        vfList.add(vf1);
-        vfList.add(vf2);
-        this.video_formats = vfList;
-
-        this.speaker = speaker;
-        this.chairman = chairman;
-    }
-
-    public CreateRequest(String name, Speaker speaker, Chairman chairman, List<InviteMember> invite_members) {
-        this.name = name;
-        this.duration = 0;
-        this.conf_level = 10;
-        this.bitrate = 8128;
-        this.closed_conf = 1;
-        this.safe_conf = 0;
-        this.encrypted_type = 0;
-        this.conf_type = 0;
-        this.call_mode = 0;
-        this.call_times = 0;
-        this.call_interval = 20;
-        this.mute = 1;
-        this.silence = 1;
-        this.video_quality = 1;
-        this.encrypted_key = "";
-        this.dual_mode = 0;
-        this.voice_activity_detection = 0;
-        this.cascade_mode = 1;
-        this.cascade_upload = 1;
-        this.cascade_return_para = 0;
-        this.public_conf = 0;
-        this.max_join_mt = 192;
-        this.auto_end = 0;//	会议中无终端时，是否自动结会 0-否；1-是；
-        this.preoccpuy_resource = 1;
-        List<VideoFormat> vfList = new ArrayList<>();
-        VideoFormat vf1 = new VideoFormat(5, 12, 30, 1024);
-        VideoFormat vf2 = new VideoFormat(4, 3, 30, 8128);
-
-        vfList.add(vf1);
-        vfList.add(vf2);
-        this.video_formats = vfList;
-
-        this.speaker = speaker;
-        this.chairman = chairman;
-        this.invite_members = invite_members;
+    public void setVmp(Vmp vmp) {
+        this.vmp = vmp;
     }
 
     public List<InviteMember> getInvite_members() {

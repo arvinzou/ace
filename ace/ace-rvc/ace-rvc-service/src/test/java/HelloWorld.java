@@ -33,9 +33,10 @@ public class HelloWorld {
 //                System.out.println(GUIDUtil.getGUID());
         AuthorizeApi.init();
 
-        ControlApi.getList(0, 10,
-                AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
-
+//        ControlApi.getList(0, 10,
+//                AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+        String confId = ManageApi.create(AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY, new CreateRequest("Arvin-2"));
+        System.out.println(confId);
     }
 
 

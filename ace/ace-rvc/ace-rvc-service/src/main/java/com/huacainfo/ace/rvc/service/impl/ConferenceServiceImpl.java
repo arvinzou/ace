@@ -33,6 +33,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +45,7 @@ import java.util.Map;
 @Service("conferenceService")
 public class ConferenceServiceImpl extends RvcBaseService implements ConferenceService {
 
-    @Autowired
+    @Resource
     private RvcConferenceMembersMapper rvcConferenceMembersDao;
 
     @Autowired
@@ -85,6 +86,8 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         conference.setId(conferenceId);
         conference.setEmceeId(userId);
         conference.setEmceeName(user.getUserName());
+        conference.setBeginDate(StringUtils.isEmpty(conference.getBeginDate()) ?
+                DateUtil.getNow() : conference.getBeginDate());
         conference.setCreateUserId(userId);
         conference.setCreateUserName(user.getUserName());
         conference.setCreateDate(DateUtil.getNowDate());
@@ -158,6 +161,10 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         if (null == conference) {
             throw new CustomException("会议信息异常");
         }
+        //会议已开始，直接返回播放地址
+        if ("1".equals(conference.getStatus())) {
+            return ResultUtil.success(conference.getLiveURL());
+        }
         try {
             //可以放在调度器中去处理
             if (StringUtils.isEmpty(AuthorizeApi.ACCOUNT_TOKEN) || StringUtils.isEmpty(AuthorizeApi.SSO_COOKIE_KEY)) {
@@ -167,6 +174,9 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
             checkConferenceStart(userId, conference);
             //2.调用接口开始会议，设置自己与会人员，发言人，主席
             String confId = apiCreate(operateUser, conference);//科达接口返回会议ID
+            if ("fail".equals(confId)) {
+                return ResultUtil.fail(-1, "接口创建会议失败");
+            }
             //3.开启直播功能
             apiLive(confId, operateUser, conference);
             //4.调用录播接口，获取直播地址 --
@@ -298,7 +308,19 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
             throw new CustomException("会议资料异常");
         }
 
-        return ManageApi.delete(conference.getConfId(), AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+        String isSuccess = ManageApi.delete(conference.getConfId(), AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+        if ("success".equals(isSuccess)) {
+
+            conference.setStatus("2");
+            conference.setLastModifyUserId(userId);
+            conference.setLastModifyUserName(user.getUserName());
+            conference.setLastModifyDate(DateUtil.getNowDate());
+
+            rvcConferenceDao.updateByPrimaryKeySelective(conference);
+        }
+
+        return isSuccess;
+
     }
 
     /**
@@ -362,8 +384,11 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
      * @param conference  预会议信息
      */
     private String apiCreate(RvcBaseUser operateUser, RvcConference conference) {
+        //会议发言人，广播画面来源于此
         Speaker speaker = new Speaker(operateUser.getUserName(), operateUser.getKedaAccount(), operateUser.getKedaAccountType());
+        //会议注意，管理员
         Chairman chairman = new Chairman(operateUser.getUserName(), operateUser.getKedaAccount(), operateUser.getKedaAccountType());
+        //与会终端
         List<InviteMember> inviteMembers = new ArrayList<>();
         inviteMembers.add(new InviteMember(operateUser.getUserName(), operateUser.getKedaAccount(), operateUser.getKedaAccountType()));
 

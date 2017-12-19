@@ -10,6 +10,7 @@ import com.huacainfo.ace.rvc.kedapi.common.kits.UrlKit;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LiveBroadcast;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LiveRoomResp;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LocalLoginResp;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -101,6 +102,11 @@ public class VRSApi extends BaseApi {
      * @return 可直播的m3u8文件URL地址
      */
     public static String getLiveURL(LiveRoomResp liveRoom) {
+        if (null == liveRoom || CollectionUtils.isEmpty(liveRoom.getRoomstate())
+                || null == liveRoom.getRoomstate().get(0)) {
+            return "";
+        }
+
         String jsonPath = liveRoom.getRoomstate().get(0).getLivestreampath();
         jsonPath = AuthorizeApi.VRS_URI + jsonPath;
 

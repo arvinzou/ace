@@ -34,7 +34,7 @@ public class ConferenceController extends BaseController {
      * @return RvcConference
      */
     @ResponseBody
-    @RequestMapping(value = "/getList", method = RequestMethod.POST)
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
     public Map<String, Object> getList(String userId, String status) throws Exception {
         if (StringUtils.isEmpty(status)) {
             return ResultUtil.fail(-1, "params error");
@@ -69,7 +69,7 @@ public class ConferenceController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/addMember", method = RequestMethod.POST)
-    public Map<String, Object> create(String userId, String conferenceId, String members) throws Exception {
+    public Map<String, Object> addMember(String userId, String conferenceId, String members) throws Exception {
         List<RvcConferenceMembers> list = conferenceService.addMembers(userId, conferenceId, members.split(","));
 
         return ResultUtil.success(list);
