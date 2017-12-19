@@ -26,7 +26,21 @@ public class HelloWorld {
 
     @Test
     public void test() {
-//        同一登录
+//        RvcConference conference = new RvcConference();
+//        conference.setTitle("接口创建测试会议");
+//        conference.setBeginDate(DateUtil.getNow());
+//        System.out.println(JsonUtil.toJson(conference));
+//                System.out.println(GUIDUtil.getGUID());
+        AuthorizeApi.init();
+
+        ControlApi.getList(0, 10,
+                AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+//        asda//
+    }
+
+
+    private void meeting() {
+        //        同一登录
 //        login();
         String token = "92dd1035883018b7955059ff969dacda";
         String cookies = "SSO_COOKIE_KEY=28fe979d-94dc-4582-909f-13fb69fd070e;";
