@@ -59,8 +59,8 @@ public class DiaoYanServiceImpl implements DiaoYanService {
 		if (CommonUtils.isBlank(o.getPublished())) {
 			return new MessageResponse(1, "发布日期不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getCover())) {
-			return new MessageResponse(1, "封面不能为空！");
+		if (CommonUtils.isBlank(o.getContent())) {
+			return new MessageResponse(1, "调研内容不能为空！");
 		}
 		String str=o.getUrl();
 		if (str.indexOf("http://")==-1&&str.indexOf("https://")==-1){
@@ -97,8 +97,8 @@ public class DiaoYanServiceImpl implements DiaoYanService {
 		if (CommonUtils.isBlank(o.getPublished())) {
 			return new MessageResponse(1, "发布日期不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getCover())) {
-			return new MessageResponse(1, "封面不能为空！");
+		if (CommonUtils.isBlank(o.getContent())) {
+			return new MessageResponse(1, "调研内容不能为空！");
 		}
 		String str=o.getUrl();
 		if (str.indexOf("http://")==-1&&str.indexOf("https://")==-1){

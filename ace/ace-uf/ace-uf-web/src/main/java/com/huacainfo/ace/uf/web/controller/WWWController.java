@@ -580,6 +580,12 @@ public class WWWController extends UfBaseController {
 
 		return rst;
 	}
+	@RequestMapping(value = "/selectXinXiByPrimaryKey.do")
+	@ResponseBody
+	public SingleResult<XinXiVo> selectXinXiByPrimaryKey(String id)
+			throws Exception {
+		return this.xinXiService.selectXinXiByPrimaryKey(id);
+	}
 	/**
 	 * ****************************统战信息——————结束********************************************************
 	 */
@@ -608,6 +614,20 @@ public class WWWController extends UfBaseController {
 	}
 
 	/**
+	 *
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+
+	@RequestMapping(value = "/selectDiaoYanByPrimaryKey.do")
+	@ResponseBody
+	public SingleResult<DiaoYanVo> selectDiaoYanByPrimaryKey(String id)
+			throws Exception {
+		return this.diaoYanService.selectDiaoYanByPrimaryKey(id);
+	}
+
+	/**
 	 * ****************************统战调研——————结束********************************************************
 	 */
 
@@ -630,6 +650,19 @@ public class WWWController extends UfBaseController {
 		}
 
 		return rst;
+	}
+
+	/**
+	 *
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/selectXuanChuanByPrimaryKey.do")
+	@ResponseBody
+	public SingleResult<XuanChuanVo> selectXuanChuanByPrimaryKey(String id)
+			throws Exception {
+		return this.xuanChuanService.selectXuanChuanByPrimaryKey(id);
 	}
 	/**
 	 * ****************************统战宣传——————结束********************************************************

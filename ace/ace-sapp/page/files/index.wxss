@@ -6,7 +6,7 @@ page {
     padding: 0;
     flex-direction: column;
     height: auto;
-    background-color: white;
+    background-color: #f4f4f4;
     color: #999;
     font-size: 26rpx;
 }
@@ -16,44 +16,9 @@ page {
     border: 1px #d83e3f solid;
 }   */
 
-.navbar {
-    font-weight: bold;
-    font-size: 32rpx;
-    color: #666;
-    flex: none;
-    display: flex;
-    background: #fff;
-    border-bottom: 1px #e5e5e5 solid;
-}
-
-.navbar .item {
-    position: relative;
-    flex: auto;
-    text-align: center;
-    line-height: 80rpx;
-}
-
-.navbar .item.active {
-    font-size: 34rpx;
-    color: #d83e3f;
-}
-
-.navbar .item.active:after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 6rpx;
-    width: 80rpx;
-    margin: 0 auto;
-    background: #d83e3f;
-}
 
 .tzwj {
-    padding: 0 32rpx;
-    width: 100%;
+    padding-top: 80rpx;
     height: 100%;
 }
 
@@ -63,7 +28,6 @@ page {
 }
 
 .fileContent {
-    width: 686rpx;
     display: table;
     font-size: 26rpx;
     color: #999;
@@ -89,39 +53,33 @@ page {
     font-size: 30rpx;
     color: #222;
     line-height: 40rpx;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
 }
 
 .remark {
     padding-top: 10rpx;
     color: #d83e3f;
     width: 605rpx;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .warehouse {
+    background-color: white;
+    padding: 0 32rpx;
     display: block;
-    width: 100%;
+    width: 686rpx;
 }
 
 /******************************************************************/
 
 .tzzl {
-    padding: 0 32rpx;
-    width: 100%;
+    padding-top: 80rpx;
     height: 100%;
 }
 
 .loading {
     width: 686rpx;
-    padding: 10rpx 0rpx;
+    padding: 30rpx 32rpx 0rpx 32rpx;
     text-align: center;
+    font-size: 24rpx;
 }
 
 .loading:before {
@@ -131,11 +89,15 @@ page {
     content: '';
     width: 40rpx;
     height: 40rpx;
-    background: url(../../image/1.gif) no-repeat;
+     background-image: url(../../image/loading.png) no-repeat;
     background-size: contain;
     animation: rotate 1s linear infinite;
 }
 
 .loading.complete:before {
     display: none;
+}
+
+span {
+    color: #999;
 }

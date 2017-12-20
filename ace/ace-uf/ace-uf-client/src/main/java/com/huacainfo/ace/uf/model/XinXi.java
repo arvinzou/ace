@@ -14,13 +14,11 @@ public class XinXi {
 
     private String media;
 
-    private String url;
+    private String content;
 
     private Date published;
 
     private String cover;
-
-    private String photos;
 
     private String createUserId;
 
@@ -74,12 +72,12 @@ public class XinXi {
         this.media = media == null ? null : media.trim();
     }
 
-    public String getUrl() {
-        return url;
+    public String getContent() {
+        return content;
     }
 
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public Date getPublished() {
@@ -146,14 +144,6 @@ public class XinXi {
         this.lastModifyDate = lastModifyDate;
     }
 
-    public String getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(String photos) {
-        this.photos = photos;
-    }
-
     @Override
     public String toString() {
         return "XinXi{" +
@@ -162,10 +152,9 @@ public class XinXi {
                 ", author='" + author + '\'' +
                 ", dept='" + dept + '\'' +
                 ", media='" + media + '\'' +
-                ", url='" + url + '\'' +
+                ", content='" + content + '\'' +
                 ", published=" + published +
                 ", cover='" + cover + '\'' +
-                ", photos='" + photos + '\'' +
                 ", createUserId='" + createUserId + '\'' +
                 ", createUserName='" + createUserName + '\'' +
                 ", createDate=" + createDate +

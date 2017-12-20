@@ -1,6 +1,6 @@
 jQuery(function ($) {
     init_uploader({
-        extensions: "doc,docx,pptx,ppt,xls,xlsx,pdf",
+        extensions: "jpg,png,doc,docx,pptx,ppt,xls,xlsx,pdf",
         url: portalPath + '/files/uploadFile.do',
         target: "url",
         multipart_params: {}
@@ -123,7 +123,7 @@ function appendUploadBtn(id) {
             function (e) {
                 e.preventDefault();
                 var config = {
-                    extensions: "doc,docx,pptx,ppt,xls,xlsx,pdf",
+                    extensions: "jpg,png,doc,docx,pptx,ppt,xls,xlsx,pdf",
                     url: portalPath + '/files/uploadFile.do',
                     target: id,
                     multipart_params: {}
@@ -264,7 +264,7 @@ function initPhotoDom(rst, id) {
     //$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
     $('#btn-image-upload').on('click', function () {
         var config = {
-            extensions: "doc,docx,pptx,ppt,xls,xlsx,pdf",
+            extensions: "jpg,png,doc,docx,pptx,ppt,xls,xlsx,pdf",
             url: contextPath
             + '/organizationSub/uploadFile.do',
             target: "grid",

@@ -9,17 +9,13 @@
     <block wx:for-items="{{povertyAlleviationIng.List}}" wx:for-item="item" wx:key="{{item.id}}">
         <navigator class='content' bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_img'>
-                <image class='cover' src='{{serverfile}}{{item.cover}}'></image>
+                <image class='cover' src='{{serverfile}}{{item.cover}}' mode="center"></image>
             </view>
             <view class='content_text'>
                 <view class='title'>{{item.name}}</view>
                 <view class='time msg'>
                     <image class='icon_icon' src='../../image/time_icon.png' mode="widthFix"></image>
                     <text class='text_text'>起始时间：{{item.time}}</text>
-                </view>
-                <view class='dept msg'>
-                    <image class='icon_icon' src='../../image/det_icon.png' mode="widthFix"></image>
-                    <text class='text_text'>组织单位：武陵区委统战部</text>
                 </view>
                 <view class='address msg'>
                     <image class='icon_icon' src='../../image/addr_icon.png' mode="widthFix"></image>
@@ -50,6 +46,7 @@
                 <image class='flagImg' src='../../image/ending.png'></image>
             </view>
         </navigator>
+        <view class='lineP'></view>
     </block>
     <view class="loading" hidden="{{!povertyAlleviationEnd.Loadingstatus}}">正在载入更多...</view>
     <view class="loading complete" hidden="{{!povertyAlleviationEnd.LoadOver}}">已加载全部</view>

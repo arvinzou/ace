@@ -6,19 +6,17 @@
 <!--同心社区-->
 <view class='ing' hidden="{{currentTab!==0}}">
     <block wx:for-items="{{concentricSq.List}}" wx:for-item="item" wx:key="{{item.id}}">
-        <navigator class='content'  bindtap="listClick" data-id='{{item.id}}'>
+        <navigator class='content' bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_img'>
-                <image class='cover' src='{{serverfile}}{{item.cover}}'></image>
-                <view class='title'>{{item.name}}</view>
+                <image class='cover' src='{{serverfile}}{{item.cover}}' mode="aspectFill" ></image>
             </view>
-            <view class='content_text'>
+            <view class='content_text'> 
+                <view class='tilmsg msg'>
+                    <view class='title'>{{item.name}}</view>
+                </view>
                 <view class='mapmsg msg'>
                     <image class='icon_icon' src='../../image/map_icon.png'></image>
                     <text class='text_text'>{{item.address}}</text>
-                </view>
-                <view class='telmsg msg'>
-                    <image class='icon_icon' src='../../image/tel_icon.png'></image>
-                    <text class='text_text'>{{item.tel}}</text>
                 </view>
             </view>
         </navigator>
@@ -30,20 +28,18 @@
 <!--同心乡村-->
 <view class='ing' hidden="{{currentTab!==1}}">
 
-<block wx:for-items="{{concentricXc.List}}" wx:for-item="item" wx:key="{{item.id}}">
-        <navigator class='content'  bindtap="listClick" data-id='{{item.id}}'>
+    <block wx:for-items="{{concentricXc.List}}" wx:for-item="item" wx:key="{{item.id}}">
+        <navigator class='content' bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_img'>
-                <image class='cover' src='{{serverfile}}{{item.cover}}'></image>
-                <view class='title'>{{item.name}}</view>
+                <image class='cover' src='{{serverfile}}{{item.cover}}' mode="aspectFill"></image>
             </view>
             <view class='content_text'>
+                <view class='tilmsg msg'>
+                    <view class='title'>{{item.name}}</view>
+                </view>
                 <view class='mapmsg msg'>
                     <image class='icon_icon' src='../../image/map_icon.png'></image>
                     <text class='text_text'>{{item.address}}</text>
-                </view>
-                <view class='telmsg msg'>
-                    <image class='icon_icon' src='../../image/tel_icon.png'></image>
-                    <text class='text_text'>{{item.tel}}</text>
                 </view>
             </view>
         </navigator>
@@ -56,20 +52,18 @@
 <!--同心项目-->
 <view class='ing' hidden="{{currentTab!==2}}">
 
-<block wx:for-items="{{concentricXm.List}}" wx:for-item="item" wx:key="{{item.id}}">
-        <navigator class='content'  bindtap="listClick" data-id='{{item.id}}'>
+    <block wx:for-items="{{concentricXm.List}}" wx:for-item="item" wx:key="{{item.id}}">
+        <navigator class='content' bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_img'>
-                <image class='cover' src='{{serverfile}}{{item.cover}}'></image>
-                <view class='title'>{{item.name}}</view>
+                <image class='cover' src='{{serverfile}}{{item.cover}}' mode="aspectFill"></image>
             </view>
-            <view class='content_text'>
+            <view class='content_text'> 
+                <view class='tilmsg msg'>
+                    <view class='title'>{{item.name}}</view>
+                </view>
                 <view class='mapmsg msg'>
                     <image class='icon_icon' src='../../image/map_icon.png'></image>
                     <text class='text_text'>{{item.address}}</text>
-                </view>
-                <view class='telmsg msg'>
-                    <image class='icon_icon' src='../../image/tel_icon.png'></image>
-                    <text class='text_text'>{{item.tel}}</text>
                 </view>
             </view>
         </navigator>
@@ -81,26 +75,22 @@
 
 <!--同心园区-->
 <view class='ing' hidden="{{currentTab!==3}}">
-
-<block wx:for-items="{{concentricYq.List}}" wx:for-item="item" wx:key="{{item.id}}">
-        <navigator class='content'  bindtap="listClick" data-id='{{item.id}}'> 
+    <block wx:for-items="{{concentricYq.List}}" wx:for-item="item" wx:key="{{item.id}}">
+        <navigator class='content' bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_img'>
-                <image class='cover' src='{{serverfile}}{{item.cover}}'></image>
-                <view class='title'>{{item.name}}</view>
+                <image class='cover' src='{{serverfile}}{{item.cover}}' mode="aspectFill"></image>
             </view>
-            <view class='content_text'>
+           <view class='content_text'> 
+                <view class='tilmsg msg'>
+                    <view class='title'>{{item.name}}</view>
+                </view>
                 <view class='mapmsg msg'>
                     <image class='icon_icon' src='../../image/map_icon.png'></image>
                     <text class='text_text'>{{item.address}}</text>
-                </view>
-                <view class='telmsg msg'>
-                    <image class='icon_icon' src='../../image/tel_icon.png'></image>
-                    <text class='text_text'>{{item.tel}}</text>
                 </view>
             </view>
         </navigator>
     </block>
     <view class="loading" hidden="{{!concentricYq.Loadingstatus}}">正在载入更多...</view>
     <view class="loading complete" hidden="{{!concentricYq.LoadOver}}">已加载全部</view>
-    
 </view>

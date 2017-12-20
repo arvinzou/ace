@@ -29,16 +29,12 @@
     <view class='index-bd'>
 
         <block wx:for-items="{{list}}" wx:for-item="item" wx:key="{{item.id}}">
-            <view wx:if="{{item.cover==null}}">
-                <view class='content'>
+            <view wx:if="{{item.cover==''?true:item.cover==null?true:false}}">
+                <view class='content' bindtap="listClick" data-id='{{item.id}}'>
                     <navigator>
-                        <view class='title'>
-                            {{item.name}}
-                        </view>
+                        <view class='title'>{{item.name}}</view>
                         <view class='remark'>
-                            来自
-                            <span class='deptlong'>{{item.dept}}</span>
-                            <span>{{item.author}}</span>
+                            <span class='medialong'>{{item.media}}</span>
                             <span class="time">{{item.published}}</span>
                         </view>
                     </navigator>
@@ -46,27 +42,24 @@
             </view>
 
             <view wx:else>
-                <view class='content contentplus'>
+                <view class='content contentplus' bindtap="listClick" data-id='{{item.id}}'>
                     <navigator>
                         <view class='image'>
                             <image class='image' src='{{serverfile}}{{item.cover}}' mode="aspectFill"></image>
                         </view>
                         <view class='content_text'>
-                            <view class='title titleplus'>
-                                {{item.name}}
-                            </view>
+                            <view class='title titleplus'>{{item.name}}</view>
                             <view class='remark remarkplus'>
-                                来自
-                                <span class='dept'>{{item.dept}}</span>
-                                <span>{{item.author}}</span>
+                                <span class='media'>{{item.media}}</span>
                                 <span class="time">{{item.published}}</span>
                             </view>
                         </view>
                     </navigator>
-                </view>
+                </view> 
             </view>
+            <view class='lineP'></view>
         </block>
-        <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
-        <view class="loading complete" hidden="{{!LoadOver}}">已加载全部</view>
     </view>
+    <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!LoadOver}}">已加载全部</view>
 </view>

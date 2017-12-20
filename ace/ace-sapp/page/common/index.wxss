@@ -4,6 +4,7 @@
 .index-hd {
   padding: 5rpx;
   text-align: center;
+  box-shadow: 0px 4px 6px #e5e5e5;
 }
 
 .index-bd {
@@ -130,11 +131,11 @@
 }
 .page{
   padding:10rpx;
-  background: #FFFFFF
+  background: #FFFFFF;
 }
 .body{
   padding:10rpx;
-  background: #FFFFFF
+  background: #FFFFFF;
 }
 .iconList{
   width:16px; height: 16px;
@@ -194,4 +195,61 @@
     align-items: center;
     justify-content: center;
 }
+.navbar {
+    z-index: 100;
+    width: 750rpx;
+    position: fixed; 
+    font-weight: bold;
+    font-size: 32rpx;
+    color: #666;
+    flex: none;
+    display: flex;
+    background: #fff;
+    border-bottom: 1px #e5e5e5 solid;
+}
 
+.navbar .item {
+    position: relative;
+    flex: auto;
+    text-align: center;
+    line-height: 80rpx;
+}
+
+.navbar .item.active {
+    font-size: 34rpx;
+    color: #d83e3f;
+}
+
+.navbar .item.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6rpx;
+    width: 80rpx;
+    margin: 0 auto;
+    background: #d83e3f;
+}
+
+/*标题*/
+.title{
+    background-color: white;
+    color: #222;
+    font-size: 40rpx;
+    font-weight: bold;
+    text-align: left;
+}
+/*画线*/
+.line{
+    margin: 0 32rpx;
+    border-bottom: 1px #e5e5e5 solid;
+}
+/*特殊画线*/
+.lineP {  
+    border-right: 32rpx white solid ;
+    border-left: 32rpx white solid ;
+    height: 1px;
+    background-color: #e5e5e5;
+}

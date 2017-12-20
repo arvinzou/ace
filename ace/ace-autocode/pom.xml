@@ -15,11 +15,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.huacainfo</groupId>
-			<artifactId>ace-kernel-client</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.huacainfo</groupId>
 			<artifactId>ace-portal-client</artifactId>
 			<version>1.0</version>
 		</dependency>

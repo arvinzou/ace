@@ -40,13 +40,13 @@ Page({
                 ]
             },
 
-            {
-                id: "4",
-                name: "统战看板",
-                menu: [
-                    { id: "15", opentype: "navigate", name: "统战数据", icon: "tongzhan_sj.png", page: "#", color: "#3285ff" }
-                ]
-            },
+            // {
+            //     id: "4",
+            //     name: "统战看板",
+            //     menu: [
+            //         { id: "15", opentype: "navigate", name: "统战数据", icon: "tongzhan_sj.png", page: "#", color: "#3285ff" }
+            //     ]
+            // },
         ]
 
     },

@@ -1,5 +1,5 @@
 {
   "navigationBarTitleText": "统战调研",
-"enablePullDownRefresh": true,
-"onReachBottomDistance": 30
+  "enablePullDownRefresh": true,
+    "onReachBottomDistance": 30
 }

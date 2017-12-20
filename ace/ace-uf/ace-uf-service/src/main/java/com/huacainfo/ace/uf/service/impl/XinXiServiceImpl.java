@@ -54,25 +54,12 @@ public class XinXiServiceImpl implements XinXiService {
 		if (CommonUtils.isBlank(o.getName())) {
 			return new MessageResponse(1, "名称不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getMedia())) {
-			return new MessageResponse(1, "媒体不能为空！");
-		}
 		if (CommonUtils.isBlank(o.getPublished())) {
 			return new MessageResponse(1, "发布日期不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getCover())) {
-			return new MessageResponse(1, "封面不能为空！");
+		if (CommonUtils.isBlank(o.getContent())) {
+			return new MessageResponse(1, "内容不能为空！");
 		}
-		String str=o.getUrl();
-		if (str.indexOf("http://")==-1&&str.indexOf("https://")==-1){
-			if(str.indexOf("www.")!=-1){
-				str="http://"+str;
-			}
-			else{
-				return new MessageResponse(1, "Url格式不正确或不能为空！");
-			}
-		}
-		o.setUrl(str);
 		o.setCreateDate(new Date());
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
@@ -92,23 +79,11 @@ public class XinXiServiceImpl implements XinXiService {
 		if (CommonUtils.isBlank(o.getName())) {
 			return new MessageResponse(1, "名称不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getMedia())) {
-			return new MessageResponse(1, "媒体不能为空！");
-		}
 		if (CommonUtils.isBlank(o.getPublished())) {
 			return new MessageResponse(1, "发布日期不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getCover())) {
-			return new MessageResponse(1, "封面不能为空！");
-		}
-		String str=o.getUrl();
-		if (str.indexOf("http://")==-1&&str.indexOf("https://")==-1){
-			if(str.indexOf("www.")!=-1){
-				str="http://"+str;
-			}
-			else{
-				System.out.println("Url格式不正确或不能为空");
-			}
+		if (CommonUtils.isBlank(o.getContent())) {
+			return new MessageResponse(1, "内容不能为空！");
 		}
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());

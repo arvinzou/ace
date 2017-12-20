@@ -4,7 +4,7 @@
 </view>
 
 <!--待培训-->
-<view class='ing' hidden="{{currentTab!==0}}">
+<view class='aaaa ing' hidden="{{currentTab!==0}}">
     <block wx:for-items="{{educationWait.List}}" wx:for-item="item" wx:key="{{item.id}}">
         <navigator  class='content' bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_img'>
@@ -32,7 +32,7 @@
 </view>
 
 <!--已结束-->
-<view class='end' hidden="{{currentTab!==1}}">
+<view class='aaaa end' hidden="{{currentTab!==1}}">
     <block wx:for-items="{{educationEnd.List}}" wx:for-item="item" wx:key="{{item.id}}">
         <navigator  class="content_end" bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_end_img'>
@@ -47,6 +47,7 @@
                 <image class='flagImg' src='../../image/ending.png'></image>
             </view>
         </navigator>
+        <view class='lineP'></view>      
     </block>
     <view class="loading" hidden="{{!educationEnd.Loadingstatus}}">正在载入更多...</view>
     <view class="loading complete" hidden="{{!educationEnd.LoadOver}}">已加载全部</view>

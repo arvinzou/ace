@@ -164,8 +164,7 @@ Page({
     listClick: function (e) {
         console.log(e);
         let p = e.currentTarget.dataset.id;
-        let module='培训教育'
-        wx.navigateTo({ url: '../selectMessage/index?id=' + p + '&module=' + module })
+        wx.navigateTo({ url: '../showPX/index?id=' + p})
     },
 
     onShareAppMessage: function (res) {

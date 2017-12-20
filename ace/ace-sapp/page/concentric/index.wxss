@@ -16,44 +16,9 @@ page {
     border: 1px #d83e3f solid;
 }   */
 
-.navbar {
-    font-weight: bold;
-    font-size: 32rpx;
-    color: #666;
-    flex: none;
-    display: flex;
-    background: #fff;
-    border-bottom: 1px #e5e5e5 solid;
-}
-
-.navbar .item {
-    position: relative;
-    flex: auto;
-    text-align: center;
-    line-height: 80rpx;
-}
-
-.navbar .item.active {
-    font-size: 34rpx;
-    color: #d83e3f;
-}
-
-.navbar .item.active:after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 6rpx;
-    width: 80rpx;
-    margin: 0 auto;
-    background: #d83e3f;
-}
-
 .ing {
-    padding: 32rpx;
-    width: 100%;
+    padding: 100rpx 32rpx 0rpx 32rpx;
+    width: 686rpx;
     height: auto;
 }
 
@@ -87,23 +52,21 @@ page {
 
 
 .title {
-    line-height:80rpx;
-    position: absolute;
-    top: 306rpx;
-    width: 606rpx;
-    height: 80rpx;
+    /* position: absolute; */
+    /* top: 306rpx; */
     font-size: 32rpx;
-    color: #fff;
     font-weight: bold;
-    padding-left: 28rpx;
-    background-color: rgba(27,27,27,0.5);
+    color:#222;
+    width: 630rpx; 
 }
 
 .msg{
-    margin: 45rpx 28rpx 31rpx 28rpx;
+    margin: 0rpx 28rpx 0rpx 28rpx;
+    padding-bottom: 30rpx;
+    padding-top: 32rpx;
 }
 
-.mapmsg{
+.tilmsg{
     border-bottom: 1px solid #e5e5e5;
 }
 
@@ -111,8 +74,8 @@ page {
 /* 加载状态样式 */
 .loading {
     width: 686rpx;
-    padding: 10rpx 0rpx;
     text-align: center;
+    font-size: 24rpx;
 }
 
 .loading:before {
@@ -122,7 +85,7 @@ page {
     content: '';
     width: 40rpx;
     height: 40rpx;
-    background: url(../../image/1.gif) no-repeat;
+    background-image: url(../../image/loading.png) no-repeat;
     background-size: contain;
     animation: rotate 1s linear infinite;
 }

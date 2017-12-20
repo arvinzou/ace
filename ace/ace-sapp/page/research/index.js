@@ -88,7 +88,7 @@ Page({
         this.setData({
             inputVal: e.detail.value
         });
-        if (that.data.inputVal.length >= 1) {
+        if (that.data.inputVal.length >= 2) {
             that.initData(that.data.inputVal);
         }
         if (that.data.inputVal == '') {
@@ -178,6 +178,15 @@ Page({
         that.data.start++;
         value = that.data.inputVal;
         that.initData(value ? value : "");
+    },
+    /**
+     * 点击查看详情
+     */
+    listClick: function (e) {
+      console.log(e);
+      let p = e.currentTarget.dataset.id;
+      let module = '统战调研'
+      wx.navigateTo({ url: '../showNews/index?id=' + p + '&module=' + module })
     },
 })
 
