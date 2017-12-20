@@ -24,7 +24,7 @@ Welcome<br/>
 
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocket = new WebSocket("ws://localhost/live/websocket?id=M0184765666555433");
+          websocket = new WebSocket("ws://localhost/live/websocket/A01/M01");
       }
       else{
           alert('Not support websocket')

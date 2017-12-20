@@ -40,7 +40,7 @@
 		<filter-name>springSessionRepositoryFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	<!-- 权限过滤开始
+	<!-- 权限过滤开始-->
 	<filter>
 		<filter-name>webAccessDecisionSecurityFilter</filter-name>
 		<filter-class>com.huacainfo.ace.common.security.filter.WebAccessDecisionSecurityFilter</filter-class>
@@ -52,7 +52,7 @@
 	<filter-mapping>
 		<filter-name>webAccessDecisionSecurityFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
-	</filter-mapping>-->
+	</filter-mapping>
 	<!-- 权限过滤结束-->
 	
 	<servlet>
