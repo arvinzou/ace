@@ -28,7 +28,9 @@
     "page/research/index",
     "page/propaganda/index",
     "page/message/index",
-    "page/showWeb/index"
+    "page/showNews/index",
+    "page/showTX/index",
+    "page/showPX/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",

@@ -28,8 +28,8 @@
 }
 
 .title {
-    line-height: 37rpx;
-    height: 34rpx;
+    line-height: 34rpx;
+    height: 32rpx;
     font-size: 34rpx;
     color: #999;
     border-left: 6rpx solid #d83e3f;
@@ -39,7 +39,7 @@
 
 .menu {
     width: 120rpx;
-    margin: 48rpx 30rpx 0rpx 30rpx;
+    margin: 40rpx 30rpx 0rpx 30rpx;
     display: inline-block;
 }
 

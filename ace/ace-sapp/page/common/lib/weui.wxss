@@ -967,7 +967,8 @@ icon {
   display: -webkit-flex;
   display: flex;
   box-sizing: border-box;
-  background-color: #EFEFF4;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #E5E5E5;
 }
 .weui-icon-search {
   margin-right: 8px;
@@ -1022,8 +1023,9 @@ icon {
   border-radius: 3px;
   text-align: center;
   color: #9B9B9B;
-  background: #FFFFFF;
+  background: white;
   line-height: 28px;
+  border: 1px solid #fcfcfc;
 }
 .weui-search-bar__cancel-btn {
   margin-left: 10px;

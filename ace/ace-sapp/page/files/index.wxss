@@ -16,46 +16,10 @@ page {
     border: 1px #d83e3f solid;
 }   */
 
-.navbar {
-    font-weight: bold;
-    font-size: 32rpx;
-    color: #666;
-    flex: none;
-    display: flex;
-    background: #fff;
-    border-bottom: 1px #e5e5e5 solid;
-}
-
-.navbar .item {
-    position: relative;
-    flex: auto;
-    text-align: center;
-    line-height: 80rpx;
-}
-
-.navbar .item.active {
-    font-size: 34rpx;
-    color: #d83e3f;
-}
-
-.navbar .item.active:after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 6rpx;
-    width: 80rpx;
-    margin: 0 auto;
-    background: #d83e3f;
-}
 
 .tzwj {
-    padding: 0 32rpx;
-    width: 686rpx;
+    padding-top: 80rpx;
     height: 100%;
-    background-color: white;
 }
 
 .image {
@@ -64,7 +28,6 @@ page {
 }
 
 .fileContent {
-    width: 686rpx;
     display: table;
     font-size: 26rpx;
     color: #999;
@@ -90,23 +53,17 @@ page {
     font-size: 30rpx;
     color: #222;
     line-height: 40rpx;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
 }
 
 .remark {
     padding-top: 10rpx;
     color: #d83e3f;
     width: 605rpx;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .warehouse {
+    background-color: white;
+    padding: 0 32rpx;
     display: block;
     width: 686rpx;
 }
@@ -114,16 +71,15 @@ page {
 /******************************************************************/
 
 .tzzl {
-    padding: 0 32rpx;
-    width: 686rpx;
+    padding-top: 80rpx;
     height: 100%;
-    background-color: white;
 }
 
 .loading {
     width: 686rpx;
-    padding: 10rpx 0rpx;
+    padding: 30rpx 32rpx 0rpx 32rpx;
     text-align: center;
+    font-size: 24rpx;
 }
 
 .loading:before {
@@ -143,5 +99,5 @@ page {
 }
 
 span {
-    color: #1a91ff;
+    color: #999;
 }

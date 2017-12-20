@@ -5,9 +5,30 @@
 
 <!--统战文件-->
 <view class='tzwj' hidden="{{currentTab!==0}}">
+    <!--搜索栏  -->
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <!--placeholder:输入框为空时占位符
+                    bindinput 键盘输入事件
+                    focus 获取焦点，放置输入光标-->
+                    <input type="text" class="weui-search-bar__input"  value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <!--inputShowed =true  -->
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
     <view class='warehouse' bindchange="bindChange">
         <block wx:for-items="{{tongZhanWj.List}}" wx:for-item="item" wx:key="{{item.id}}">
-            <navigator class="fileContent" bindtap="listClick" data-id='{{item.id}}'>
+            <navigator class="fileContent" data-fileAddr="{{item.file}}" bindtap="navbarTap_file">
                 <view class="timeBar">{{item.lastModifyDate}}</view>
                 <view class='content'>
                     <view class="imgLeft">
@@ -19,9 +40,9 @@
                             <span>{{item.fileSize}}</span> 来自
                             <span>{{item.lastModifyUserName}}</span>
                         </view>
-
+                        <view  wx:if="{{item.remark==''?false:item.remark==null?false:true}}">
                         <view class="remark">备注：{{item.remark}}</view>
-
+                        </view>
                     </view>
                 </view>
             </navigator>
@@ -34,9 +55,31 @@
 
 <!--统战资料-->
 <view class='tzzl' hidden="{{currentTab!==1}}">
+    <!--搜索栏  -->
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <!--placeholder:输入框为空时占位符
+                    bindinput 键盘输入事件
+                    focus 获取焦点，放置输入光标-->
+                    <input type="text" class="weui-search-bar__input"  value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <!--inputShowed =true  -->
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
     <view class='warehouse' bindchange="bindChange">
+
         <block wx:for-items="{{tongZhanZl.List}}" wx:key="{{item.id}}">
-            <navigator class="fileContent" bindtap="listClick" data-id='{{item.id}}'>
+            <navigator class="fileContent" data-fileAddr="{{item.file}}" bindtap="navbarTap_file">
                 <view class="timeBar">{{item.lastModifyDate}}</view>
                 <view class='content'>
                     <view class="imgLeft">
@@ -48,12 +91,13 @@
                             <span>{{item.fileSize}}</span> 来自
                             <span>{{item.lastModifyUserName}}</span>
                         </view>
-                        <view class="remark">备注：{{item.remark}}</view>
+                        <view  wx:if="{{item.remark==''?false:item.remark==null?false:true}}">
+                            <view class="remark">备注：{{item.remark}}</view>
+                        </view>
                     </view>
                 </view>
             </navigator>
-        </block>
-        
+        </block> 
     </view>
      <view class="loading" hidden="{{!tongZhanZl.Loadingstatus}}">正在载入更多...</view>
     <view class="loading complete" hidden="{{!tongZhanZl.LoadOver}}">已加载全部</view>

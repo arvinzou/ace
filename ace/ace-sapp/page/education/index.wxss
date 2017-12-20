@@ -15,43 +15,8 @@ page {
     border: 1px #d83e3f solid;
 }  */
 
-.navbar {
-    font-weight: bold;
-    font-size: 32rpx;
-    color: #666;
-    flex: none;
-    display: flex;
-    background: #fff;
-    border-bottom: 1px #e5e5e5 solid;
-}
-
-.navbar .item {
-    position: relative;
-    flex: auto;
-    text-align: center;
-    line-height: 80rpx;
-}
-
-.navbar .item.active {
-    font-size: 34rpx;
-    color: #d83e3f;
-}
-
-.navbar .item.active:after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 6rpx;
-    width: 80rpx;
-    margin: 0 auto;
-    background: #d83e3f;
-}
-
 .ing {
-    padding: 30rpx 0 0 32rpx;
+    padding: 110rpx 32rpx 0 32rpx;
     width: 718rpx;
     height: 100%;
 }
@@ -79,7 +44,7 @@ page {
 }
 
 .msg {
-    margin-top: 24rpx;
+    margin-top: 14rpx;
 }
 
 .title {
@@ -97,24 +62,25 @@ page {
 
 /******************************************************************/
 
-.end {
-    padding: 18rpx 0rpx 0rpx 32rpx;
-    background: white;
+.line {
+    margin:0rpx 32rpx;  
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .content_end {
+    background: white;
     display: table;
     position: relative;
     width: 686rpx;
-    padding: 40rpx 0;
-    border-bottom: 1px solid #e5e5e5;
+    padding: 34rpx 32rpx;
+    
 }
 
 .content_end_img {
     display: inline-table;
     width: 220rpx;
     height: 128rpx;
-    margin: 0 18rpx 0 0;
+    margin: 8rpx 18rpx 0 0;
 }
 
 .end_img {
@@ -150,19 +116,15 @@ page {
 
 .end_title {
     font-size: 28rpx;
+    min-height:95rpx;
     color: #666;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
 }
 
 /* 加载状态样式 */
 .loading {
     width: 686rpx;
-    padding: 10rpx 0rpx;
     text-align: center;
+    margin-top: 20rpx;
 }
 
 .loading:before {
@@ -179,4 +141,8 @@ page {
 
 .loading.complete:before {
     display: none;
+}
+
+.end{
+    padding-top: 80rpx;
 }

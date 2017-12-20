@@ -1,4 +1,4 @@
-var _colNames = ['主键', '名称', '作者', '作者单位', '媒体', '宣传网址', '发布日期', '封面', '操作','创建人编号', '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间'];
+var _colNames = ['主键', '名称', '作者', '作者单位', '媒体', '宣传网址', '发布日期', '封面','调研内容', '操作','创建人编号', '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间'];
 var _colModel = function () {
     return [
         {
@@ -151,13 +151,24 @@ var _colModel = function () {
                 maxlength: "200",
                 colspan: false
             },
+        },
+        {
+            name: 'content',
+            hidden: true,
+            width: 100,
+            editable: true,
+            editoptions: {
+                colspan: true,
+                style: 'width:750px;line-height: 25px;height: 100px;'
+            },
             formoptions: {
                 elmprefix: "",
                 elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
             editrules: {
                 required: true
-            }
+            },
+            edittype: "textarea"
         },
         {
             name: 'opt',

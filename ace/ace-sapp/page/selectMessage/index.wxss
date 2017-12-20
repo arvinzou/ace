@@ -1,68 +1,68 @@
 @import "../common/index.wxss";
 @import "../common/lib/weui.wxss";
 
-page{
-    margin: 0;
-    background-color: #f4f4f4;
-    color:#666;
+page {
+  margin: 0;
+  background-color: #f4f4f4;
+  color: #666;
 }
- /* view{
+
+/* view{
     border: 1px red solid;
 }  */
 
-.index{
-    width: 100%;
-    height: 100%;
+.index {
+  width: 100%;
+  height: 100%;
 }
-.message{
-    background-color: white;
-    padding: 0rpx 32rpx 0rpx 32rpx;
+
+.message {
+  background-color: white;
+  padding: 0rpx 32rpx 0rpx 32rpx;
+  margin-bottom: 20rpx;
+}
+
+.icon_icon {
+  width: 29rpx;
+  height: 29rpx;
+  margin-right: 18rpx;
+}
+
+.icon_ic {
+  float: right;
+  width: 15rpx;
+  height: 29rpx;
+  margin-top: 14rpx;
+}
+
+.msg {
+  font-size: 34rpx;
+  padding: 24rpx 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.title {
+  padding-top: 35rpx;
+}
+
+.content {
+  /* height: fit-content; */
+  width: 686rpx;
+  background-color: white;
+  padding: 45rpx 32rpx 45rpx 32rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+.usual_progres {
+  margin-top: 12rpx;
+}
+
+.msgFile {
+  padding: 30rpx 0 12rpx 0;
+}
+
+.msg_bottom{
     margin-bottom: 20rpx;
 }
-
- .icon_icon{
-    width: 29rpx;
-    height: 29rpx;
-    margin-right: 18rpx;
-}
-
- .icon_ic{
-    float: right;
-    width: 15rpx;
-    height: 29rpx;
-    margin-top: 14rpx;
-} 
-
-.msg{
-    font-size: 34rpx;
-    padding: 30rpx 0;
-    border-bottom: 1px solid #e5e5e5;
-}
-.title{
-    color: #222;
-    font-size: 32rpx;
-    font-weight: bold;
-    text-align: center;
-    
-}
-
-.content{
-    height:fit-content;
-    background-color: white;
-    padding: 45rpx 32rpx 45rpx 32rpx;
-    overflow: hidden;
-}
-
-.content_title{
-    font-size: 32rpx;
-    font-weight: bold;
-}
-
-.usual_progres{
-    margin-top: 12rpx;
-}
-
-.msgFile{
-   padding: 30rpx 0 12rpx 0; 
-}
-

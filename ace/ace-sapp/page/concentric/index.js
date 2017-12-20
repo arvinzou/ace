@@ -129,6 +129,11 @@ Page({
                 let dataList = [];
                 wx.hideNavigationBarLoading(); //完成停止加载
                 wx.stopPullDownRefresh(); //停止下拉刷新
+                //修改时间格式
+                for (let i = 0; i < data.rows.length; i++) {
+                  let date = data.rows[i].createTime;
+                  data.rows[i].createTime = date.substring(0, 10);;
+                }
                 //获取list容器
                 //判断有没有获取到数据
                 //有获得数据
@@ -183,13 +188,6 @@ Page({
         that.contentView(that.data.type);
     },
 
-    /**
-     * 点击文件事件
-     */
-    ViewFile: function () {
-        console.log("hehe");
-    },
-
     onShareAppMessage: function (res) {
         return {
             title: '我发现了掌上统战小程序，一起看看吧',
@@ -223,10 +221,8 @@ Page({
      * 点击查看详情
      */
     listClick: function (e) {
-        console.log(e);
         let p = e.currentTarget.dataset.id;
-        let module = '同心工程'
-        wx.navigateTo({ url: '../selectMessage/index?id=' + p + '&module=' + module })
+        wx.navigateTo({ url: '../showTX/index?id=' + p})
     },
 })
 

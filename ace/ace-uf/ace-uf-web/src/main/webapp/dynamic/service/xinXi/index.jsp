@@ -35,7 +35,6 @@
 
                     名称： <input name="name" type="text" style="width: 200px;"/>
                     作者： <input name="author" type="text" style="width: 200px;"/>
-                    媒体：<input name="media" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/xinXi/findXinXiList.do">
                         <i
@@ -106,21 +105,6 @@
 </span>
         </div>
 
-
-        <div class="labelItem"><span class="labelItemHeader">
-媒体</span>
-            <br>
-            <span id="media">
-</span>
-        </div>
-
-        <div class="labelItem"><span class="labelItemHeader">
-url</span>
-            <br>
-            <span id="url">
-</span>
-        </div>
-
         <div class="labelItem"><span class="labelItemHeader">
 发布时间</span>
             <br>
@@ -130,6 +114,9 @@ url</span>
     </div>
     <h5 class="header-title">信息封面</h5>
     <div class="row" style="padding:10px" id="cover">
+    </div>
+    <h5 class="header-title">详细情况</h5>
+    <div class="row" style="padding:10px" id="content">
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
@@ -166,10 +153,15 @@ url</span>
 <script src="${pageContext.request.contextPath}/content/service/xinXi/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/xinXi/view.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/xinXi/upload.js?version=${cfg.version}"></script>
-
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
 
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">

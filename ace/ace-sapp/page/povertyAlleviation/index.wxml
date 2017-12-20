@@ -17,10 +17,6 @@
                     <image class='icon_icon' src='../../image/time_icon.png' mode="widthFix"></image>
                     <text class='text_text'>起始时间：{{item.time}}</text>
                 </view>
-                <view class='dept msg'>
-                    <image class='icon_icon' src='../../image/det_icon.png' mode="widthFix"></image>
-                    <text class='text_text'>组织单位：武陵区委统战部</text>
-                </view>
                 <view class='address msg'>
                     <image class='icon_icon' src='../../image/addr_icon.png' mode="widthFix"></image>
                     <text class='text_text'>扶贫地点：{{item.address}}</text>
@@ -50,6 +46,7 @@
                 <image class='flagImg' src='../../image/ending.png'></image>
             </view>
         </navigator>
+        <view class='lineP'></view>
     </block>
     <view class="loading" hidden="{{!povertyAlleviationEnd.Loadingstatus}}">正在载入更多...</view>
     <view class="loading complete" hidden="{{!povertyAlleviationEnd.LoadOver}}">已加载全部</view>

@@ -18,6 +18,7 @@ Page({
         type: 1,
         navbar: ['统战文件', '统战资料'],
         currentTab: 0,
+        serverfile: cfg.serverfile,
         tongZhanWj: {
             List: [],
             LoadOver: false,
@@ -43,10 +44,14 @@ Page({
                 currentTab: e.target.dataset.idx
             })
         }
+        this.setData({
+            inputVal: "",
+            inputShowed: false
+        });
         that.data.type = parseInt(that.data.currentTab) + 1;
         that.changePage(that.data.type);
         if (objectType.LoadIsFrist) {
-            that.contentView(that.data.type);
+            that.contentView('');
         }
 
     },
@@ -79,8 +84,75 @@ Page({
         let val = that.data.type;
         //更改页面。
         that.changePage(val);
-        that.contentView(val);
+        that.contentView('');
     },
+
+    // 显示输入框
+    showInput: function () {
+        let that = this;
+        that.setData({
+            inputShowed: true
+        });
+    },
+
+    clearInputStatus: function () {
+        let that = this;
+        that.setData({
+            [listStr]: null,
+            [startStr]: 0,
+            [LoadIsFristStr]: true,
+            [LoadOverStr]: false,
+        });
+    },
+
+    /**
+     * 清除状态
+     */
+    clearStatus: function () {
+        let that = this;
+        that.setData({
+            inputVal: "",
+            [listStr]: null,  //触发到上拉事件，把isFromFile设为为false  
+            [startStr]: 0,
+            [LoadIsFristStr]: true,
+            [LoadOverStr]: false,
+        });
+    },
+    //隐藏输入框
+    hideInput: function () {
+        this.setData({
+            inputVal: "",
+            inputShowed: false
+        });
+        this.clearStatus();
+        this.contentView('');
+    },
+    //清除输入框内的数据
+    clearInput: function () {
+        this.setData({
+            inputVal: ""
+        });
+        this.clearStatus();
+        this.contentView('');
+    },
+    //实时根据输入框内容进行搜索
+    inputTyping: function (e) {
+        var that = this;
+        this.setData({
+            [listStr]: null,
+            [startStr]: 0,
+            [LoadIsFristStr]: true,
+            [LoadOverStr]: false,
+            inputVal: e.detail.value
+        });  
+        if (that.data.inputVal.length >= 2) {
+            that.contentView(that.data.inputVal);
+        }
+        if (that.data.inputVal == '') {
+            that.contentView(that.data.inputVal);
+        }
+    },
+
 
     /*加载页面*/
     contentView: function (value) {
@@ -92,7 +164,8 @@ Page({
         //请求数据。
         util.request(cfg.findFilesList,
             {
-                category: value,
+                category: that.data.type,
+                name: value,
                 start: objectType.start * 10,
                 limit: that.data.limit
             },
@@ -134,7 +207,7 @@ Page({
         that.setData({
             [startStr]: num,
         });
-        that.contentView(that.data.type);
+        that.contentView('');
     },
 
     /**
@@ -144,12 +217,11 @@ Page({
         console.log('--------下拉刷新-------');
         var that = this;
         that.setData({
-            [listStr]: null,  //触发到上拉事件，把isFromFile设为为false  
-            [startStr]: 0,
-            [LoadIsFristStr]: true,
-            [LoadOverStr]: false,
+            inputVal: "",
+            inputShowed: false
         });
-        that.contentView(that.data.type);
+        that.clearStatus();
+        that.contentView('');
     },
 
     onShareAppMessage: function (res) {
@@ -182,13 +254,32 @@ Page({
         that.setData({ currentTab: e.detail.current });
     },
 
-    /**
-     * 点击查看详情
-     */
-    listClick: function (e) {
+    navbarTap_file: function (e) {
+        let that = this;
         console.log(e);
-        let p = e.currentTarget.dataset.id;
-        let module = '统战文件'
-        wx.navigateTo({ url: '../selectMessage/index?id=' + p + '&module=' + module })
-    },
+        let urls = that.data.serverfile + e.currentTarget.dataset.fileaddr;
+        const downloadTask = wx.downloadFile({
+            url: urls, //开启tomcat后的本机ip地址
+            success: function (res) {
+                console.log("res.tempFilePath");
+                console.log(res.tempFilePath);
+                var filePath = res.tempFilePath
+                wx.openDocument({
+                    filePath: filePath,
+                    success: function (res) {
+                        console.log('打开文档成功')
+                        console.log(res)
+                    },
+                    fail: function (res) {
+                        console.log('fail')
+                        console.log(res)
+                    },
+                    complete: function (res) {
+                        console.log('complete')
+                        console.log(res)
+                    }
+                })
+            }
+        })
+    }
 })

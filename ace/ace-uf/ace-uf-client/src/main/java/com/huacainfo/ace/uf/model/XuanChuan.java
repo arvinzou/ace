@@ -19,6 +19,8 @@ public class XuanChuan {
 
     private String cover;
 
+    private  String content;
+
     private String createUserId;
 
     private String createUserName;
@@ -144,9 +146,17 @@ public class XuanChuan {
     }
 
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
-        return "DiaoYan{" +
+        return "XuanChuan{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
@@ -155,6 +165,7 @@ public class XuanChuan {
                 ", url='" + url + '\'' +
                 ", published=" + published +
                 ", cover='" + cover + '\'' +
+                ", content='" + content + '\'' +
                 ", createUserId='" + createUserId + '\'' +
                 ", createUserName='" + createUserName + '\'' +
                 ", createDate=" + createDate +

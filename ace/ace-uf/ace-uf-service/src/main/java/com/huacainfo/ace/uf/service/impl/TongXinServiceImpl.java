@@ -54,12 +54,7 @@ public class TongXinServiceImpl implements TongXinService {
 		if (CommonUtils.isBlank(o.getAddress())) {
 			return new MessageResponse(1, "工程地址不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getLinkman())) {
-			return new MessageResponse(1, "联系人不能为空！");
-		}
-		if (CommonUtils.isBlank(o.getTel())) {
-			return new MessageResponse(1, "联系电话不能为空！");
-		}
+
 		if (CommonUtils.isBlank(o.getContent())) {
 			return new MessageResponse(1, "工程内容不能为空！");
 		}
@@ -95,12 +90,6 @@ public class TongXinServiceImpl implements TongXinService {
 		}
 		if (CommonUtils.isBlank(o.getAddress())) {
 			return new MessageResponse(1, "工程地址不能为空！");
-		}
-		if (CommonUtils.isBlank(o.getLinkman())) {
-			return new MessageResponse(1, "联系人不能为空！");
-		}
-		if (CommonUtils.isBlank(o.getTel())) {
-			return new MessageResponse(1, "联系电话不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getContent())) {
 			return new MessageResponse(1, "工程内容不能为空！");

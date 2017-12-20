@@ -39,7 +39,6 @@ public class XinXiController extends UfBaseController {
 		if (rst.getTotal() == 0) {
 			rst.setTotal(page.getTotalRecord());
 		}
-	
 		return rst;
 	}
 

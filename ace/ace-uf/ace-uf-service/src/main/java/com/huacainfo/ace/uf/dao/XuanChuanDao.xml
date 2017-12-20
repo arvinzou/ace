@@ -10,6 +10,7 @@
         <result column="url" jdbcType="VARCHAR" property="url"/>
         <result column="published" jdbcType="DATE" property="published"/>
         <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
@@ -23,7 +24,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, name, author, dept, media, url, published, cover, createUserId, createUserName,
+    id, name, author, dept, media, url, published, cover, content,createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
@@ -42,12 +43,12 @@
     <insert id="insert" parameterType="com.huacainfo.ace.uf.model.XuanChuan">
     insert into xuanchuan (id, name, author,
       dept, media, url, published, 
-      cover, createUserId, createUserName,
+      cover, content,createUserId, createUserName,
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
       #{dept,jdbcType=VARCHAR}, #{media,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{published,jdbcType=DATE}, 
-      #{cover,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+      #{cover,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},#{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
       #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
@@ -61,6 +62,7 @@
       url = #{url,jdbcType=VARCHAR},
       published = #{published,jdbcType=DATE},
         cover = #{cover,jdbcType=VARCHAR},
+        content=#{content,jdbcType=VARCHAR},
         <if test='createUserId!=null and createUserId!=""'>
             createUserId=#{createUserId,jdbcType=VARCHAR},
         </if>
