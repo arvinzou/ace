@@ -1,17 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 session.setAttribute("KEY0001","M009485553455");
 %>
 
 <!DOCTYPE HTML>
 <html>
 <head>
-    <base href="<%=basePath%>">
+
     <title>My WebSocket</title>
 </head>
-
+<script src="${pageContext.request.contextPath}/content/common/js/reconnecting-websocket.js"></script>
 <body>
 Welcome<br/>
 <input id="text" type="text" /><button onclick="send()">Send</button>    <button onclick="closeWebSocket()">Close</button>
@@ -24,7 +22,7 @@ Welcome<br/>
 
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocket = new WebSocket("ws://localhost/live/websocket/A01/M01");
+          websocket = new ReconnectingWebSocket("ws://localhost/live/websocket/A01/M01");
       }
       else{
           alert('Not support websocket')
