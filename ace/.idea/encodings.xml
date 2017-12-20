@@ -23,6 +23,10 @@
     <file url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-live" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-live/ace-live-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-live/ace-live-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-live/ace-live-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-luohua" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-luohua/ace-luohua-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-luohua/ace-luohua-service" charset="UTF-8" />
