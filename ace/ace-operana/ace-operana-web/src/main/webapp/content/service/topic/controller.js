@@ -181,6 +181,8 @@ function normCfg(id, title) {
 									}
 								}]
 					});
+					$(dialog).parent().css("top","1px");
+					$(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
 	selectAllNorm(id);
 }
 

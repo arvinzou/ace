@@ -78,6 +78,8 @@ function topicCfg(id, title) {
 									}
 								}]
 					});
+					$(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
+					$(dialog).parent().css("top","1px");
 	selectAllTopic(id);
 }
 
@@ -345,7 +347,7 @@ function cfgUser(id, title, meetingId) {
 			.removeClass('hide')
 			.dialog(
 					{
-						modal : true,
+						modal : false,
 						width : 400,
 						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
 								+ title + "</div></div>",
@@ -370,6 +372,7 @@ function cfgUser(id, title, meetingId) {
 									}
 								}]
 					});
+					$(dialog).parent().css("top","1px");
 
 	$('#_user').combogrid({
 		panelWidth : 350,
@@ -475,6 +478,7 @@ function attendanceCfg(id, title) {
 								}]
 					});
 					 $(dialog).css("max-height", 400);
+					 $(dialog).parent().css("top","1px");
 	selectAllUserDeptId(id);
 }
 
@@ -867,8 +871,8 @@ function viewNorm(meetingId, topicId, title) {
 							$(row).children('td').eq(0).attr('style',
 									'text-align: center;font-weight:800');
 							var btn = [];
-							btn
-									.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
+							btn.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
+							btn.push('<a data-rel="tooltip" data-placement="top" title="指标文件" class="blue" href="javascript:uploadNormFile(\'' + meetingId+ '\',\'' + topicId+ '\',\''+ data.id + '\')"><i class="ace-icon fa fa-upload bigger-130"></i></a>');
 							btn
 									.push('<a data-rel="tooltip" data-placement="top" title="编辑不良现象明细数据" class="blue" href="javascript:dataSetting3(\''
 											+ meetingId
@@ -990,6 +994,7 @@ function viewMeeting(name) {
 		url : contextPath + '/meeting/findMeetingList.do',
 		data : {
 			name : name,
+			division:userProp.corpId,
 			status:'2'
 		},
 		success : function(rst) {
@@ -1269,4 +1274,15 @@ function filesSetting(){
     var url=contextPath + '/meetingFiles/uploadFile.do';
         var params={id:meetingId};
         upload(params,url)
+}
+function exportUserListXls(){
+   location.href=contextPath+"/normData/exportUserListXls.do?meetingId="+meetingId;
+}
+function uploadNormFile(meetingId,topicId,normId){
+    //alert(meetingId+"|"+topicId+"|"+normId);
+
+     var url=contextPath + '/normFiles/uploadFile.do';
+            var params={meetingId:meetingId,topicId:topicId,normId:normId};
+            upload(params,url)
+
 }

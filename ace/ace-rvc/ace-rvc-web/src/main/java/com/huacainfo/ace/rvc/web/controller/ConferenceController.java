@@ -1,5 +1,7 @@
 package com.huacainfo.ace.rvc.web.controller;
 
+import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.rvc.model.RvcConference;
 import com.huacainfo.ace.rvc.model.RvcConferenceMembers;
 import com.huacainfo.ace.rvc.service.ConferenceService;
@@ -26,6 +28,23 @@ public class ConferenceController extends BaseController {
     private ConferenceService conferenceService;
 
     /**
+     * 获取会议列表
+     *
+     * @param userId 创建人用户ID -- 浪潮ID
+     * @return RvcConference
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getList", method = RequestMethod.GET)
+    public Map<String, Object> getList(String userId, String status) throws Exception {
+        if (StringUtils.isEmpty(status)) {
+            return ResultUtil.fail(-1, "params error");
+        }
+        List<RvcConference> rvcConference = conferenceService.getList(userId, status);
+
+        return ResultUtil.success(rvcConference);
+    }
+
+    /**
      * 创建会议
      *
      * @param userId     创建人用户ID -- 浪潮ID
@@ -34,8 +53,8 @@ public class ConferenceController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Map<String, Object> create(String userId, RvcConference conference) throws Exception {
-        RvcConference rvcConference = conferenceService.create(userId, conference);
+    public Map<String, Object> create(String userId, String conference) throws Exception {
+        RvcConference rvcConference = conferenceService.create(userId, JsonUtil.toObject(conference, RvcConference.class));
 
         return ResultUtil.success(rvcConference);
     }
@@ -50,7 +69,7 @@ public class ConferenceController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/addMember", method = RequestMethod.POST)
-    public Map<String, Object> create(String userId, String conferenceId, String members) throws Exception {
+    public Map<String, Object> addMember(String userId, String conferenceId, String members) throws Exception {
         List<RvcConferenceMembers> list = conferenceService.addMembers(userId, conferenceId, members.split(","));
 
         return ResultUtil.success(list);

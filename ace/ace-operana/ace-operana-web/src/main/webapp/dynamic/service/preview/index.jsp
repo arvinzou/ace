@@ -20,6 +20,23 @@ var normId='${param.normId}';
 </script>
 <body>
 <div class="page-content">
+    <div class="row" id="filesView">
+        <table id="detail5"
+               class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th class="center" style="width:100px;">序号</th>
+                <th style="width:500px;">文档名称</th>
+
+                <th style="width:200px;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+    <div id="chartView">
     <div class="row">
         <div class="col-md-6">
             <div style="padding-left:30px">
@@ -94,10 +111,17 @@ var normId='${param.normId}';
             </table>
         </div>
     </div>
+    </div>
 </div>
+
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
+        src="${portalPath}/content/common/js/dataTable/jquery.dataTables.min.js?version=${cfg.version}"></script>
+<script
+        src="${portalPath}/content/common/js/dataTable/dataTables.bootstrap.min.js?version=${cfg.version}"></script>
+<script
         src="${portalPath}/content/common/js/echarts-2.27/echarts.js?version=${cfg.version}"></script>
+
 <script
         src="${pageContext.request.contextPath}/content/service/preview/config-1.js?version=${cfg.version}"></script>
 <script
@@ -106,7 +130,10 @@ var normId='${param.normId}';
         src="${pageContext.request.contextPath}/content/service/preview/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/preview/view.js?version=${cfg.version}&t=1"></script>
+
+
 <jsp:include page="../../common/footer-2.jsp"/>
+
 <style>
 .div-left{ float:left;width:90%;}
 .div-right{ float:right;width:10%;}

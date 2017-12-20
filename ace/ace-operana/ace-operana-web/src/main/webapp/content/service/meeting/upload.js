@@ -13,7 +13,7 @@ function init_uploader(params,url) {
 					max_file_size : '500mb',
 					mime_types : [{
 						title : "Excel files",
-						extensions : "xls,xlsx,ppt,pptx,doc,docx,zip,rar"
+						extensions : "xls,xlsx,ppt,pptx,doc,docx,zip,rar,jpg,gif,jpeg,png"
 					}
 
 					]

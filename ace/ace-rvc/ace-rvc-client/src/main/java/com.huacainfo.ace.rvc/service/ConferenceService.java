@@ -65,4 +65,14 @@ public interface ConferenceService {
      * @return 处理结果
      */
     String end(String userId, String conferenceId);
+
+    /**
+     * 获取会议列表
+     *
+     * @param userId 创建人用户ID -- 浪潮ID
+     * @param status 会议状态，用','隔开
+     *               0-未开始，1-进行中，2-已结束
+     * @return RvcConference
+     */
+    List<RvcConference> getList(String userId, String status);
 }

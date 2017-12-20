@@ -214,6 +214,8 @@ function topicCfg(id, title) {
 									}
 								}]
 					});
+					$(dialog).parent().css("top","1px");
+					$(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
 	selectAllTopic(id);
 }
 
@@ -401,6 +403,7 @@ function viewTopic(meetingId, name) {
 									+ data.owner + '</span></a>');
 					var btn=[];
 					btn.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
+
 					btn.push('<a data-rel="tooltip" data-placement="top" title="删除" class="red" href="javascript:deleteByMeetingIdAndTopicId(\'' + data.id+ '\',\'' + data.name + '\',\'' + meetingId+ '\')"><i class="ace-icon fa fa-trash-o bigger-130"></i></a>');
 					btn.push('<a data-rel="tooltip" data-placement="top" title="不良数据导入" class="blue" href="javascript:upload2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-upload bigger-130"></i></a>');
 					btn.push('<a data-rel="tooltip" data-placement="top" title="不良数据导出" class="blue" href="javascript:export2(\'' + meetingId+ '\',\'' + data.id+ '\')"><i class="ace-icon fa fa-download bigger-130"></i></a>');
@@ -465,6 +468,8 @@ function cfgUser(id, title, meetingId) {
 									}
 								}]
 					});
+					$(dialog).parent().css("top","1px");
+					$(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
 
 	$('#_user').combogrid({
 		panelWidth : 350,
@@ -571,6 +576,7 @@ var dialog = $("#dialog-meeting-user")
 								}]
 					});
  $(dialog).css("max-height", 400);
+ $(dialog).parent().css("top","1px");
 	selectAllUserDeptId(id);
 }
 
@@ -913,7 +919,9 @@ function viewNorm(meetingId,topicId,title) {
 					$(row).children('td').eq(0).attr('style',
 							'text-align: center;font-weight:800');
 					var btn=[];
+
                     btn.push('<div class="hidden-sm hidden-xs action-buttons" style="text-align:right">');
+                    btn.push('<a data-rel="tooltip" data-placement="top" title="指标文件" class="blue" href="javascript:uploadNormFile(\'' + meetingId+ '\',\'' + topicId+ '\',\''+ data.id + '\')"><i class="ace-icon fa fa-upload bigger-130"></i></a>');
                     btn.push('<a data-rel="tooltip" data-placement="top" title="编辑不良现象明细数据" class="blue" href="javascript:dataSetting3(\'' + meetingId+ '\',\'' + topicId+ '\',\'' + data.id+ '\',\''+ title + '\')"><i class="ace-icon fa fa-plus-circle bigger-130"></i></a>');
                     btn.push('<a data-rel="tooltip" data-placement="top" title="预览" class="blue" href="javascript:previewChart(\'' + meetingId+ '\',\'' + topicId+ '\',\''+ data.id + '\')"><i class="ace-icon fa fa-play bigger-130"></i></a>');
                     btn.push('<a data-rel="tooltip" data-placement="top" title="任务" class="blue" href="javascript:previewTpa(\'' + meetingId+ '\',\'' + topicId+ '\',\''+ data.id + '\')"><i class="ace-icon fa fa-tasks bigger-130"></i></a>');
@@ -1105,4 +1113,15 @@ function filesSetting(){
     var url=contextPath + '/meetingFiles/uploadFile.do';
         var params={id:meetingId};
         upload(params,url)
+}
+function uploadNormFile(meetingId,topicId,normId){
+    //alert(meetingId+"|"+topicId+"|"+normId);
+
+     var url=contextPath + '/normFiles/uploadFile.do';
+            var params={meetingId:meetingId,topicId:topicId,normId:normId};
+            upload(params,url)
+
+}
+function exportUserListXls(){
+   location.href=contextPath+"/normData/exportUserListXls.do?meetingId="+meetingId;
 }

@@ -10,10 +10,13 @@ import com.huacainfo.ace.rvc.kedapi.common.kits.HttpKit;
 import com.huacainfo.ace.rvc.kedapi.control.model.RecordListResp;
 import com.huacainfo.ace.rvc.kedapi.control.model.RecordReq;
 import com.huacainfo.ace.rvc.kedapi.control.model.RecordStatusResp;
+import com.huacainfo.ace.rvc.kedapi.control.model.conference.VideoConfListResp;
+import com.huacainfo.ace.rvc.kedapi.control.model.conference.VideoConfResp;
 import com.huacainfo.ace.rvc.kedapi.control.model.terminal.TerminalResp;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +27,56 @@ import java.util.Map;
 public class ControlApi extends BaseApi {
     private static Logger logger = Logger.getLogger(ControlApi.class);
 
+    /**
+     * 名称	获取视频会议信息
+     * URI	/api/v1/vc/confs/{conf_id}
+     * 方法	GET
+     * 说明	获取视频会议详细信息
+     *
+     * @param confId
+     * @param accountToken 登陆token
+     * @param cookies
+     * @return List<VideoConfResp>
+     */
+    public static VideoConfResp get(String confId, String accountToken, String cookies) {
+        String uri = AuthorizeApi.URI + "/api/v1/vc/confs" + confId;
+        Map<String, Object> params = new HashMap<>();
+        params.put("account_token", accountToken);
+
+        String respStr = HttpKit.doGet(uri, "", cookies);
+        logger.debug("" + respStr);
+
+        return JsonUtil.toObject(respStr, VideoConfResp.class);
+
+    }
+
+
+    /**
+     * 名称	获取视频会议列表
+     * URI	/api/v1/vc/confs
+     * 方法	GET
+     * 说明	获取视频会议列表
+     *
+     * @param start        获取的视频会议列表的起始会议位置, 0表示第一个会议, 默认为0
+     * @param count        获取的视频会议的个数, 即包括start在内的后count个会议, 0代表获取所有会议, 默认为10
+     * @param accountToken 登陆token
+     * @param cookies
+     * @return List<VideoConfResp>
+     */
+    public static List<VideoConfResp> getList(int start, int count, String accountToken, String cookies) {
+        String uri = AuthorizeApi.URI + "/api/v1/vc/confs";
+        Map<String, Object> params = new HashMap<>();
+        params.put("account_token", accountToken);
+        params.put("start", start < 0 ? 0 : start);
+        params.put("count", count < 10 ? 10 : count);
+
+        String respStr = HttpKit.doGet(uri, "", cookies);
+        logger.debug("" + respStr);
+
+        VideoConfListResp list = JsonUtil.toObject(respStr, VideoConfListResp.class);
+
+        return list.getConfs();
+    }
 
     /**
      * 名称	开启录像

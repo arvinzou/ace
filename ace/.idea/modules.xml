@@ -19,6 +19,10 @@
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-client/ace-workflow-client.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-client/ace-workflow-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-service/ace-workflow-service.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-service/ace-workflow-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-web/ace-workflow-web.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-web/ace-workflow-web.iml" />
     </modules>
   </component>
 </project>

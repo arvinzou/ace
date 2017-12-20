@@ -62,27 +62,18 @@
 		<module>ace-common-dao</module>
 		<module>ace-common-web</module>
 		<module>ace-portal</module>
-		<module>ace-face</module>
 		<module>ace-uf</module>
-
-
+		<module>ace-workflow</module>
 		<!--
-<module>ace-kernel</module>
+		<module>ace-face</module>
+		<module>ace-kernel</module>
 		<module>ace-rvc</module>
 		<module>ace-luohua</module>
-
-<module>ace-workflow</module>
-     <module>ace-weuiluohua</module>
-
-
-<module>ace-gesp</module>
-
+     	<module>ace-weuiluohua</module>
+		<module>ace-gesp</module>
      -->
-
 		<module>ace-operana</module>
-
  		<module>ace-autocode</module>
-
 	</modules>
 	<dependencies>
 		<dependency>

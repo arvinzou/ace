@@ -145,7 +145,9 @@ pageEncoding="utf-8"%>
                                 class="ace-icon fa fa-save"></i></a> <a data-rel="tooltip" data-placement="top"
                                                                         title="与会人员设置"
                                                                         class="blue" href="javascript:userSetting()"><i
-                                class="ace-icon fa fa-plus-circle"></i></a></div>
+                                class="ace-icon fa fa-plus-circle"></i></a>
+                            <a data-rel="tooltip" data-placement="top" title="签到人员导出" class="blue" href="javascript:exportUserListXls()"><i class="ace-icon fa fa-download"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="row">

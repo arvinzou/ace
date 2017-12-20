@@ -22,11 +22,11 @@ import java.util.Map;
  */
 public class HttpKit {
 
+    private static Logger logger = Logger.getLogger(HttpKit.class);
+
     private HttpKit() {
 
     }
-
-    private static Logger logger = Logger.getLogger(HttpKit.class);
 
     /**
      * 带cookies的post
@@ -108,7 +108,7 @@ public class HttpKit {
     /**
      * 带cookies的 get
      *
-     * @param urlStr  请求地址
+     * @param uri     请求地址
      * @param param   请求参数
      * @param cookies 携带cookies信息，可为空
      * @return Map<String,String>
@@ -118,11 +118,11 @@ public class HttpKit {
      * 异常返回：<errorCode,-1>
      * *********<errorMsg,errorMsg>
      */
-    public static String doGet(String urlStr, String param, String cookies) {
+    public static String doGet(String uri, String param, String cookies) {
         URL url;
         HttpURLConnection connection = null;
         try {
-            url = new URL(urlStr + "?" + param);
+            url = new URL(uri + "?" + param);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36");
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -163,7 +163,7 @@ public class HttpKit {
      * @param url:http://127.0.0.1:80/dashboard/dept_uuid.json
      * @return:json文件的内容
      */
-    public static String loadJson(String url,String charset) {
+    public static String loadJson(String url, String charset) {
         StringBuilder json = new StringBuilder();
         try {
             URL urlObject = new URL(url);

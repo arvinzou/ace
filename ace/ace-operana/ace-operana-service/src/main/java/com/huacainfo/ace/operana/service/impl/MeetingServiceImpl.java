@@ -154,14 +154,14 @@ public class MeetingServiceImpl implements MeetingService {
 
 		return rst;
 	}
-
+	@Override
 	public  Map<String, Object> selectTopicByMeetingId(String meetingId) throws Exception{
 		Map<String, Object> rst=new HashMap<String, Object>();
 		List<Map<String, Object>> data=this.meetingDao.selectTopicByMeetingId(meetingId);
 		rst.put("data",data);
 		return rst;
 	}
-
+	@Override
 	public  MessageResponse insertMeetingTopic(List<MeetingTopic> list, String meetingId,boolean del, UserProp userProp) throws Exception{
 		if (CommonUtils.isBlank(meetingId)) {
 			return new MessageResponse(1, "会议编号不能为空！");
@@ -196,6 +196,7 @@ public class MeetingServiceImpl implements MeetingService {
 		this.dataBaseLogService.log("议题指标配置", "议题", "", meetingId, meetingId, userProp);
 		return new MessageResponse(0, "成功！");
 	}
+	@Override
 	public  MessageResponse updateTopicOwner(String userId,String meetingId,String topicId, UserProp userProp)throws Exception{
 		if (CommonUtils.isBlank(userId)) {
 			return new MessageResponse(1, "负责人不能为空！");
@@ -210,7 +211,7 @@ public class MeetingServiceImpl implements MeetingService {
 		this.dataBaseLogService.log("议题负责人配置", "议题", "", meetingId, meetingId, userProp);
 		return new MessageResponse(0, "成功！");
 	}
-
+	@Override
 	public  MessageResponse deleteByMeetingIdAndTopicId(String meetingId,String topicId, UserProp userProp)throws Exception{
 
 		if (CommonUtils.isBlank(meetingId)) {
@@ -226,7 +227,7 @@ public class MeetingServiceImpl implements MeetingService {
 	/**
 	 *
 	 */
-
+	@Override
 	public  List<Map<String,Object>> selectAllUserDeptId(String meetingId,String name){
 		List<Map<String,Object>> rst=new ArrayList<Map<String,Object>>();
 		if(CommonUtils.isBlank(name)){
@@ -251,14 +252,14 @@ public class MeetingServiceImpl implements MeetingService {
 
 		return rst;
 	}
-
+	@Override
 	public  Map<String, Object> selectUserByMeetingId(String meetingId) throws Exception{
 		Map<String, Object> rst=new HashMap<String, Object>();
 		List<Map<String, Object>> data=this.meetingDao.selectUserByMeetingId(meetingId);
 		rst.put("data",data);
 		return rst;
 	}
-
+	@Override
 	public  MessageResponse insertMeetingUser(List<MeetingUser> list, String meetingId, boolean del, UserProp userProp) throws Exception{
 		if (CommonUtils.isBlank(meetingId)) {
 			return new MessageResponse(1, "会议编号不能为空！");
@@ -294,21 +295,21 @@ public class MeetingServiceImpl implements MeetingService {
 		return new MessageResponse(0, "成功！");
 	}
 
-
+	@Override
 	public  MessageResponse updateMandatory(String userId,String meetingId,String mandatory, UserProp userProp)throws Exception{
 		this.meetingUserDao.updateMandatory(userId,meetingId,mandatory);
 		this.dataBaseLogService.log("是否必须参与", "会议", "", userId, meetingId, userProp);
 		return new MessageResponse(0, "成功！");
 
 	}
-
+	@Override
 	public  MessageResponse deleteByMeetingIdAndUserId(String meetingId,String userId, UserProp userProp)throws Exception{
 		this.meetingUserDao.deleteByMeetingIdAndUserId(userId,meetingId);
 		this.dataBaseLogService.log("删除与会人员", "会议", "", userId, meetingId, userProp);
 		return new MessageResponse(0, "成功！");
 	}
 
-
+	@Override
 	public  MessageResponse updatePresent(String meetingId,List<Map<String,Object>> list, UserProp userProp)throws Exception{
 		for(Map<String,Object> o:list){
 			this.meetingUserDao.updatePresent((String) o.get("userId"),meetingId,(String) o.get("present"));
@@ -317,6 +318,7 @@ public class MeetingServiceImpl implements MeetingService {
 		return new MessageResponse(0, "成功！");
 
 	}
+	@Override
 	public  MessageResponse insertMeetingCopy(String meetingId, UserProp userProp)throws Exception{
 		String newMeetingId=UUID.randomUUID().toString();
 		Meeting m=this.meetingDao.selectByPrimaryKey(meetingId);
@@ -338,6 +340,9 @@ public class MeetingServiceImpl implements MeetingService {
 
 		return new MessageResponse(0, "成功！");
 	}
-
+	@Override
+	public  List<Map<String,Object>> selectUserListByMeetingId(String meetingId) throws Exception{
+		return this.meetingDao.selectUserByMeetingId(meetingId);
+	}
 
 }
