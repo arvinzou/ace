@@ -982,7 +982,7 @@ function previewChart(_meetingId, _topicId, _normId, title) {
 	window.open(url);
 }
 function previewTpa(_meetingId, _topicId, _normId, title) {
-	var url = contextPath + '/dynamic/service/tpa/index.jsp?meetingId='
+	var url = contextPath + '/dynamic/service/tpaCommon/index.jsp?meetingId='
 			+ _meetingId + '&topicId=' + _topicId + '&normId=' + _normId;
 	window.open(url);
 }

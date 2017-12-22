@@ -19,4 +19,8 @@ public interface TpaService {
 			throws Exception;
 	public abstract MessageResponse updateTpaById(Tpa obj, UserProp userProp) throws Exception;
 
+
+	public abstract PageResult<TpaVo> findTpaListCommon(TpaQVo condition, int start, int limit, String orderBy)
+			throws Exception;
+
 }

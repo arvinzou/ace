@@ -78,10 +78,8 @@ public class TpaServiceImpl implements TpaService {
 		if (CommonUtils.isBlank(o.getStatus())) {
 			o.setStatus("1");
 		}
-		int temp = this.tpaDao.isExit(o);
-		if (temp > 0) {
-			return new MessageResponse(1, "TOP问题分析名称重复！");
-		}
+
+
 		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
@@ -184,5 +182,17 @@ public class TpaServiceImpl implements TpaService {
 		this.dataBaseLogService.log("执行任务", "任务执行", "", o.getNormId(), o.getNormId(), userProp);
 		return new MessageResponse(0, "变更TOP问题分析完成！");
 	}
+	public PageResult<TpaVo> findTpaListCommon(TpaQVo condition, int start, int limit, String orderBy) throws Exception {
+		Meeting meeting = this.meetingDao.selectByPrimaryKey(condition.getMeetingId());
+		int cwk = meeting.getCvalue();
 
+		PageResult<TpaVo> rst = new PageResult<TpaVo>();
+		List<TpaVo> list = this.tpaDao.findListCommon(condition, start, start + limit, "wk" + cwk);
+		rst.setRows(list);
+		if (start <= 1) {
+			int allRows = this.tpaDao.findCountCommon(condition, "wk" + cwk);
+			rst.setTotal(allRows);
+		}
+		return rst;
+	}
 }

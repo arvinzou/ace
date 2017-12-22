@@ -33,4 +33,11 @@ public interface TpaDao {
 	List<Map<String,Object>> selectTaskAByUserId( @Param("userId") String userId);
 	List<Map<String,Object>> selectTaskBByUserId( @Param("userId") String userId,@Param("tasktime")Integer tasktime);
 
+
+
+	List<TpaVo> findListCommon(@Param("condition") TpaQVo condition, @Param("start") int start, @Param("limit") int limit,
+						 @Param("orderBy") String orderBy);
+
+	int findCountCommon(@Param("condition") TpaQVo condition, @Param("orderBy") String orderBy);
+
 }
