@@ -89,7 +89,7 @@
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.division!=null and condition.division!=&quot;&quot;">
-            and t.division like concat('%',#{condition.division,jdbcType=VARCHAR})
+            and t.division like concat(#{condition.division,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.owner!=null and condition.owner!=&quot;&quot;">
             and t.owner =#{condition.owner,jdbcType=VARCHAR}

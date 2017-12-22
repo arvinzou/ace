@@ -21,4 +21,7 @@ public interface NormService {
 
 	public abstract Map<String, Object> selectNormByTopicId(String topicId) throws Exception;
 
+	public abstract MessageResponse updateSort(List<Map<String,Object>> list, UserProp userProp) throws Exception;
+
+
 }

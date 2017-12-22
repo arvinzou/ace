@@ -17,13 +17,15 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.operana.vo.NormVo">
 
     </resultMap>
     <sql id="Base_Column_List">
         id, name, category, groups, deptId, calType, pcode, status, createUserId, createUserName,
-        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,remark
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,remark,url,sort
     </sql>
     <sql id="Blob_Column_List">
         remark
@@ -31,7 +33,7 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         t.id, t.name, t.category, t.groups, t.deptId, t.calType, t.pcode, t.status, t.createUserId, t.createUserName,
-        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.remark,a.department_name deptName
+        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.remark,a.department_name deptName,t.url,t.sort
         from norm t left join portal.department a on t.deptId=a.department_id
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
@@ -44,13 +46,13 @@
         groups, deptId, calType,
         pcode, status, createUserId,
         createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate, remark
+        lastModifyUserName, lastModifyDate, remark,url,sort
         )
         values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
         #{groups,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{calType,jdbcType=CHAR},
         #{pcode,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
-        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR}
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR},#{url},#{sort}
         )
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.Norm">
@@ -65,7 +67,8 @@
         remark = #{remark,jdbcType=LONGVARCHAR},
         lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
         lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+        url=#{url}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
@@ -118,8 +121,8 @@
         status='1'
     </select>
     <select id="selectNormByTopicId" resultType="map">
-        SELECT @rownum := @rownum+1 AS rownum, t.* FROM (SELECT @rownum:=0) r,(select t.id, t.name, t.category, t.groups, t.deptId, t.calType,t.remark from norm t inner join topic_norm a on
-        t.id=a.normId where a.topicId=#{topicId} and t.status='1') as t order by t.id
+        SELECT @rownum := @rownum+1 AS rownum, t.* FROM (SELECT @rownum:=0) r,(select a.id ids,t.id, t.name, t.category, t.groups, t.deptId, t.calType,t.remark,t.url,t.sort from norm t inner join topic_norm a on
+        t.id=a.normId where a.topicId=#{topicId} and t.status='1') as t order by t.sort,t.id
 
     </select>
 
@@ -128,4 +131,10 @@
         id,normId from topic_norm where topicId=#{topicId})a on t.id=a.normId where t.name like concat('%',#{name,jdbcType=VARCHAR},'%') and
         status='1'
     </select>
+    <update id="updateSort">
+        update norm
+        set
+        sort=#{sort}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

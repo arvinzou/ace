@@ -35,6 +35,10 @@ public class Norm implements java.io.Serializable {
 
     private String remark;
 
+    private String url;
+
+    private Integer sort;
+
     public String getId() {
         return id;
     }
@@ -153,5 +157,21 @@ public class Norm implements java.io.Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 }
