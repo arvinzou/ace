@@ -25,25 +25,25 @@ public class CacheServiceImpl implements CacheService {
 	@Autowired
 	private DictMapper kernelMapper;
 	
-
+	@Override
 	public Object get(String key) {
 		logger.debug("get for key ->{}", key);
 		return redisTemplate.opsForValue().get(key);
 	}
-
+	@Override
 	public void put(String key, Object value) {
 		logger.debug("put key ->{}", key);
 		redisTemplate.opsForValue().set(key, value);
 	}
-
+	@Override
 	public boolean containsKey(String key) {
 		return redisTemplate.opsForValue().get(key) == null ? false : true;
 	}
-
+	@Override
 	public void clear() {
 		init();
 	}
-
+	@Override
 	public void init() {
 		logger.info("cache init C0001");
 		String key = "C0001";

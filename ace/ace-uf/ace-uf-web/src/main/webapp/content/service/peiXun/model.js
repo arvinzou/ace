@@ -80,6 +80,27 @@ var _colModel = function () {
             },
         },
 
+        {
+            name : 'category',
+            editable : true,
+            edittype : "select",
+            renderer : function(value) {
+                return rsd(value,"109");
+            },
+            formoptions : {
+                style : 'width:200px;',
+                elmprefix : "",
+                elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editoptions : {
+                value : odparse("109")
+            },
+            width : 30,
+            editrules : {
+                required : true
+            },
+        },
+
 
         {
             name : 'dept',//表格列的名称

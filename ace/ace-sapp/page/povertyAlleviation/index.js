@@ -14,7 +14,7 @@ Page({
     data: {
         type: 1,
         limit: 10,
-        navbar: ['进行中', '已结束'],
+        navbar: ['扶贫活动', '扶贫计划'],
         currentTab: 0,
         /*文件服务器*/
         serverfile: cfg.serverfile,
