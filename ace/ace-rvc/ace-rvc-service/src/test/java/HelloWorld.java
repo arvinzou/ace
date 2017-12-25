@@ -12,6 +12,9 @@ import com.huacainfo.ace.rvc.kedapi.manage.model.create.CreateRequest;
 import com.huacainfo.ace.rvc.kedapi.vrs.VRSApi;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LiveRoomResp;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LocalLoginResp;
+import com.huacainfo.ace.rvc.vo.ConferenceDTO;
+import com.huacainfo.ace.rvc.vo.JoinMember;
+import com.huacainfo.ace.rvc.vo.SearchCondition;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -24,19 +27,66 @@ import java.util.Map;
  */
 public class HelloWorld {
 
+    private void CreateDTO() {
+        ConferenceDTO dto = new ConferenceDTO();
+        dto.setTitle("常德市党建会议");
+        dto.setSubtitle("会议议程：" +
+                "1、议程1。" +
+                "2、议程2" +
+                "3、议程3");
+        dto.setEmceeId("eUserID");
+        dto.setEmceeName("主持人-Mir朱");
+        dto.setAddressId("addres-id");
+        dto.setAddressName("常德市市政协会议室");
+
+        dto.setBeginDate(DateUtil.getNow());
+        dto.setEndDate(DateUtil.getNow());
+
+        List<JoinMember> members = new ArrayList<>();
+        JoinMember vip = new JoinMember();
+        vip.setUserId("");
+        vip.setUserName("Mir朱");
+        vip.setLevel("2");
+        JoinMember normal = new JoinMember();
+        normal.setUserId("id1");
+        normal.setUserName("普通人1");
+        normal.setLevel("1");
+        JoinMember normal2 = new JoinMember();
+        normal2.setUserId("id2");
+        normal2.setUserName("普通人2");
+        normal2.setLevel("1");
+        members.add(vip);
+        members.add(normal);
+        members.add(normal2);
+
+        dto.setInviteList(members);
+
+        System.out.println(dto.toString());
+    }
+
+    private void searchCondition() {
+        SearchCondition condition = new SearchCondition();
+        condition.setTitle("Arvin");
+        condition.setStart(0);
+        condition.setLimit(10);
+
+        condition.setSearchRegion("related");
+
+        System.out.println(condition.toString());
+    }
+
+
     @Test
     public void test() {
-//        RvcConference conference = new RvcConference();
-//        conference.setTitle("接口创建测试会议");
-//        conference.setBeginDate(DateUtil.getNow());
-//        System.out.println(JsonUtil.toJson(conference));
-//                System.out.println(GUIDUtil.getGUID());
-        AuthorizeApi.init();
+        searchCondition();
+//        CreateDTO();
 
-//        ControlApi.getList(0, 10,
-//                AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
-        String confId = ManageApi.create(AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY, new CreateRequest("Arvin-2"));
-        System.out.println(confId);
+//        AuthorizeApi.init();
+//
+////        ControlApi.getList(0, 10,
+////                AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+//        String confId = ManageApi.create(AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY, new CreateRequest("Arvin-2"));
+//        System.out.println(confId);
     }
 
 

@@ -2,22 +2,24 @@ package com.huacainfo.ace.rvc.model;
 
 import java.util.Date;
 
-public class RvcBaseUser {
+public class RvcConferenceAddress {
     private String id;
 
-    private String userId;
+    private String managerName;
 
-    private String userName;
+    private String managerPhone;
 
-    private String sex;
+    private String addrName;
 
-    private String portrait;
+    private String addrCountry;
 
-    private String position;
+    private String addrProvince;
 
-    private String phoneNumer;
+    private String addrCity;
 
-    private String organization;
+    private String addrDistrict;
+
+    private String addrStreet;
 
     private String kedaAccount;
 
@@ -38,7 +40,6 @@ public class RvcBaseUser {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
-
     /**
      * 所属党组织编码
      */
@@ -72,60 +73,68 @@ public class RvcBaseUser {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getUserId() {
-        return userId;
+    public String getManagerName() {
+        return managerName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setManagerName(String managerName) {
+        this.managerName = managerName == null ? null : managerName.trim();
     }
 
-    public String getUserName() {
-        return userName;
+    public String getManagerPhone() {
+        return managerPhone;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setManagerPhone(String managerPhone) {
+        this.managerPhone = managerPhone == null ? null : managerPhone.trim();
     }
 
-    public String getSex() {
-        return sex;
+    public String getAddrName() {
+        return addrName;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setAddrName(String addrName) {
+        this.addrName = addrName == null ? null : addrName.trim();
     }
 
-    public String getPortrait() {
-        return portrait;
+    public String getAddrCountry() {
+        return addrCountry;
     }
 
-    public void setPortrait(String portrait) {
-        this.portrait = portrait == null ? null : portrait.trim();
+    public void setAddrCountry(String addrCountry) {
+        this.addrCountry = addrCountry == null ? null : addrCountry.trim();
     }
 
-    public String getPosition() {
-        return position;
+    public String getAddrProvince() {
+        return addrProvince;
     }
 
-    public void setPosition(String position) {
-        this.position = position == null ? null : position.trim();
+    public void setAddrProvince(String addrProvince) {
+        this.addrProvince = addrProvince == null ? null : addrProvince.trim();
     }
 
-    public String getPhoneNumer() {
-        return phoneNumer;
+    public String getAddrCity() {
+        return addrCity;
     }
 
-    public void setPhoneNumer(String phoneNumer) {
-        this.phoneNumer = phoneNumer == null ? null : phoneNumer.trim();
+    public void setAddrCity(String addrCity) {
+        this.addrCity = addrCity == null ? null : addrCity.trim();
     }
 
-    public String getOrganization() {
-        return organization;
+    public String getAddrDistrict() {
+        return addrDistrict;
     }
 
-    public void setOrganization(String organization) {
-        this.organization = organization == null ? null : organization.trim();
+    public void setAddrDistrict(String addrDistrict) {
+        this.addrDistrict = addrDistrict == null ? null : addrDistrict.trim();
+    }
+
+    public String getAddrStreet() {
+        return addrStreet;
+    }
+
+    public void setAddrStreet(String addrStreet) {
+        this.addrStreet = addrStreet == null ? null : addrStreet.trim();
     }
 
     public String getKedaAccount() {
