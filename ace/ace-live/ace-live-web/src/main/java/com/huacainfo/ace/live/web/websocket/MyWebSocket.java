@@ -1,6 +1,7 @@
 package com.huacainfo.ace.live.web.websocket;
 
 import com.huacainfo.ace.common.tools.CommonKeys;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,12 +46,17 @@ public class MyWebSocket {
     public MyWebSocket(){
         String [] roomids={"A01","A02","A03","A04","A05","A06","A07","A08","A09","A10"};
         for(String roomid:roomids){
-            CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
-            MyWebSocket.rooms.put(roomid,webSocketSet);
+            //CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+           // MyWebSocket.rooms.put(roomid,webSocketSet);
         }
     }
     public   synchronized void addSession(MyWebSocket webSocket){
-        MyWebSocket.rooms.get(rid).add(webSocket);
+         if(MyWebSocket.rooms.get(rid)==null){
+             CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+             MyWebSocket.rooms.put(rid,webSocketSet);
+             logger.debug("create new room rid:{} uid:{}",rid,uid);
+         }
+         MyWebSocket.rooms.get(rid).add(webSocket);
 
     }
     public   synchronized void removeSession(MyWebSocket webSocket){
