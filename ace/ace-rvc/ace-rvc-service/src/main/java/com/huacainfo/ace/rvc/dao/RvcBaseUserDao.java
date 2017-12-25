@@ -3,6 +3,8 @@ package com.huacainfo.ace.rvc.dao;
 import com.huacainfo.ace.rvc.model.RvcBaseUser;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public interface RvcBaseUserDao {
     int deleteByPrimaryKey(String id);
@@ -24,4 +26,10 @@ public interface RvcBaseUserDao {
      * @return RvcBaseUser
      */
     RvcBaseUser getByUserId(String userId);
+
+    /***
+     * 获取所有人员列表
+     * @return list
+     */
+    List<RvcBaseUser> getAll();
 }

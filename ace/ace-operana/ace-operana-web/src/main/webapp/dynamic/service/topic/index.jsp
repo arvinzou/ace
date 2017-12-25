@@ -140,5 +140,13 @@ window.onresize = function () {
 	margin: 2px 2px 2px;
 }
 		</style>
+
+	<div id="dialog-sort" class="hide">
+		<div class="sortable">
+			<li class="dd-handle"  id="1">第1项</li>
+			<li class="dd-handle"  id="2" >第2项</li>
+			<li class="dd-handle"  id="3">第3项</li>
+		</div>
+	</div>
 </body>
 </html>

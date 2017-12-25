@@ -120,5 +120,17 @@ public class TpaController extends OperanaBaseController {
 		}
 		return this.tpaService.updateTpaById(obj, this.getCurUserProp());
 	}
+
+	@RequestMapping(value = "/findTpaListCommon.do")
+	@ResponseBody
+	public PageResult<TpaVo> findTpaListCommon(TpaQVo condition, PageParamNoChangeSord page) throws Exception {
+		PageResult<TpaVo> rst = this.tpaService.findTpaListCommon(condition, page.getStart(), page.getLimit(),
+				page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+
+		return rst;
+	}
 }
 

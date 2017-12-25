@@ -163,7 +163,7 @@
 </div>
 
 <div id="progress-bar-box"
-     class="logo hide">
+     class="progress-bar-box hide">
 
 
     <div class="space-6"></div>
@@ -392,27 +392,25 @@
         margin-right: -30px;
 
     }
-
     .login .content .form-actions .rememberme {
         margin-top: 0px;
         display: inline-block;
     }
-
     .mt-checkbox, .mt-radio {
         margin-bottom: 0px;
     }
-
     .form-group-captcha {
         margin-bottom: 5px;
     }
-
     body {
         background-image: url(${cfg.sys_login_bg_img});
         background-size: cover;
     }
-
     .content {
         border: 1px solid #eee;
+    }
+    .progress-bar-box {
+        text-align:center;
     }
 </style>
 </html>

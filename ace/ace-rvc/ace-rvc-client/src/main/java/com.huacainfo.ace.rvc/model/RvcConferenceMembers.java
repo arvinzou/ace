@@ -25,6 +25,9 @@ public class RvcConferenceMembers {
 
     private String remark;
 
+    /**
+     * 签到状态，0-未签，1-已签到
+     */
     private String status;
 
     private String createUserId;
@@ -38,6 +41,19 @@ public class RvcConferenceMembers {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    /***
+     * 0- 会议主场，1-普通与会人员，2-特邀嘉宾
+     */
+    private String userLevel;
+
+    public String getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(String userLevel) {
+        this.userLevel = userLevel;
+    }
 
     public String getId() {
         return id;

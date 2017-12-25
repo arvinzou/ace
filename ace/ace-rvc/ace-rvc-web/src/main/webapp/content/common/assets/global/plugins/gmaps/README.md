@@ -111,7 +111,7 @@ Changelog
 
 0.3.3
 -----------------------
-* Fix destination as address in getRoutes
+* Fix destination as addressName in getRoutes
 
 0.3.2
 -----------------------

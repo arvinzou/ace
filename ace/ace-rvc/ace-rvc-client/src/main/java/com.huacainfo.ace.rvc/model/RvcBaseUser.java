@@ -39,6 +39,31 @@ public class RvcBaseUser {
 
     private Date lastModifyDate;
 
+    /**
+     * 所属党组织编码
+     */
+    private String poCode;
+    /**
+     * 所属党组织名称
+     */
+    private String poName;
+
+    public String getPoCode() {
+        return poCode;
+    }
+
+    public void setPoCode(String poCode) {
+        this.poCode = poCode;
+    }
+
+    public String getPoName() {
+        return poName;
+    }
+
+    public void setPoName(String poName) {
+        this.poName = poName;
+    }
+
     public String getId() {
         return id;
     }

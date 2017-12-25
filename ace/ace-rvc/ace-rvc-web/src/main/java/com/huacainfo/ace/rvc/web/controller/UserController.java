@@ -1,5 +1,6 @@
 package com.huacainfo.ace.rvc.web.controller;
 
+import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.rvc.model.RvcBaseUser;
 import com.huacainfo.ace.rvc.service.UserService;
 import com.huacainfo.ace.rvc.util.ResultUtil;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,9 +34,24 @@ public class UserController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Map<String, Object> login(String userId) throws Exception {
-        RvcBaseUser user = userService.login(userId);
+        if (StringUtils.isEmpty(userId)) {
+            return ResultUtil.fail(-1, "用户ID不能为空");
+        }
 
+        RvcBaseUser user = userService.login(userId);
         return ResultUtil.success(user);
     }
 
+    /***
+     * 获取所有人员列表
+     * @param userId 操作用户ID
+     * @return list
+     */
+    @ResponseBody
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public Map<String, Object> getAll(String userId) {
+        List<RvcBaseUser> userList = userService.getAll(userId);
+
+        return ResultUtil.success(userList);
+    }
 }

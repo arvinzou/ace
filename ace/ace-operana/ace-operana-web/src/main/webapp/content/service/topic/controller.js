@@ -98,6 +98,7 @@ jQuery(function($) {
 						})
 			});
 
+
 });
 
 function preview(id, title) {
@@ -377,4 +378,84 @@ function viewNorm(topicId) {
 				}
 			});
 
+}
+function sort(id,name){
+        var dialog = $( "#dialog-sort" ).removeClass('hide').dialog({
+            modal: false,
+            width:600,
+            title: "<div class='widget-header widget-header-small'><h4 class='smaller'>排序</h4></div>",
+            title_html: true,
+            buttons: [
+                {
+                    html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 关闭",
+                    "class" : "btn btn-xs",
+                    click: function() {
+                        $( this ).dialog( "close" );
+                    }
+                }
+            ]
+        });
+        initSortList(id);
+}
+function initSortList(id){
+     $.ajax({
+		type : "post",
+		url : contextPath + "/norm/selectNormByTopicId.do",
+		data : {
+			topicId : id
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+		    var html=[];
+		    $(rst.data).each(function(i,o){
+		         html.push('<li class="dd-handle"  id="'+o.id+'">'+o.name+'</li>');
+		    });
+		    $(".sortable").html(html.join(""));
+
+		},
+		error : function() {
+			alert("加载错误！");
+		}
+	});
+    $( ".sortable" ).sortable({
+          cursor: "move",
+          items :"li",                        //只是li可以拖动
+          opacity: 0.6,                       //拖动时，透明度为0.6
+          revert: true,                       //释放时，增加动画
+          stop : function(event, ui){       //更新排序之后
+              updateSort($(this).sortable("toArray"));
+          }
+    });
+}
+function updateSort(arr){
+    var data=[];
+    for(var i=0;i<arr.length;i++){
+        data.push({id:arr[i],sort:i});
+    }
+    $.ajax({
+        type : "post",
+        url : contextPath +"/norm/updateSort.do",
+        data:{jsons:JSON.stringify(data)},
+        success : function(rst, textStatus) {
+            if (!rst.state) {
+                bootbox.dialog({
+                    title:'系统提示',
+                    message:rst.errorMessage,
+                    detail:rst.detail,
+                    buttons:
+                    {
+                        "success" :
+                         {
+                            "label" : "<i class='ace-icon fa fa-check'></i>确定",
+                            "className" : "btn-sm btn-success",
+                            "callback": function() {
+                            }
+                        }
+                    }
+                });
+
+            }
+        }
+    });
 }

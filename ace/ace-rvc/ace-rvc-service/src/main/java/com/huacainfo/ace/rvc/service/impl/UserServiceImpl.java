@@ -8,6 +8,8 @@ import com.huacainfo.ace.rvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Arvin on 2017/11/23.
  */
@@ -32,6 +34,16 @@ public class UserServiceImpl implements UserService {
             return singleSignOn(userId);
         }
         return user;
+    }
+
+    /***
+     * 获取所有人员列表
+     * @param userId 操作用户ID
+     * @return list
+     */
+    @Override
+    public List<RvcBaseUser> getAll(String userId) {
+        return rvcBaseUserDao.getAll();
     }
 
     /**

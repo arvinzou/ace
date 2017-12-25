@@ -2,6 +2,8 @@ package com.huacainfo.ace.rvc.service;
 
 import com.huacainfo.ace.rvc.model.RvcBaseUser;
 
+import java.util.List;
+
 /**
  * Created by Arvin on 2017/11/23.
  */
@@ -17,4 +19,10 @@ public interface UserService {
      */
     RvcBaseUser login(String userId);
 
+    /***
+     * 获取所有人员列表
+     * @param userId 操作用户ID
+     * @return list
+     */
+    List<RvcBaseUser> getAll(String userId);
 }

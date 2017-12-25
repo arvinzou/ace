@@ -1,5 +1,6 @@
 package com.huacainfo.ace.operana.web.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import com.huacainfo.ace.operana.service.NormService;
 import com.huacainfo.ace.operana.vo.NormVo;
 import com.huacainfo.ace.operana.vo.NormQVo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,5 +85,32 @@ public class NormController extends OperanaBaseController {
 	@ResponseBody
 	public Map<String, Object> selectNormByTopicId(String topicId) throws Exception{
 		return this.normService.selectNormByTopicId(topicId);
+	}
+
+	@RequestMapping(value = "/updateSort.do")
+	@ResponseBody
+	public MessageResponse updateSort(String jsons)
+			throws Exception {
+		JSONArray jsonArray=JSON.parseArray(jsons);
+		List<Map<String, Object>> list=	this.handleJSONArray(jsonArray);
+		return this.normService.updateSort(list,
+				this.getCurUserProp());
+	}
+
+	private  List<Map<String, Object>> handleJSONArray(JSONArray jsonArray){
+		List list = new ArrayList();
+		for (Object object : jsonArray) {
+			JSONObject jsonObject = (JSONObject) object;
+			Map map = new HashMap<String, Object>();
+			for (Map.Entry entry : jsonObject.entrySet()) {
+				if(entry.getValue() instanceof  JSONArray){
+					map.put((String)entry.getKey(), handleJSONArray((JSONArray)entry.getValue()));
+				}else{
+					map.put((String)entry.getKey(), entry.getValue());
+				}
+			}
+			list.add(map);
+		}
+		return list;
 	}
 }

@@ -9,7 +9,15 @@ public class RvcConferenceRes {
 
     private String conferenceId;
 
+    /**
+     * 1-文本内容，2-图片，3-文件，4-视频，5-会议纪要
+     */
     private Integer resType;
+
+    /**
+     * 文件大小
+     */
+    private Double resSize;
 
     private String resURL;
 
@@ -32,6 +40,15 @@ public class RvcConferenceRes {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+
+    public Double getResSize() {
+        return resSize;
+    }
+
+    public void setResSize(Double resSize) {
+        this.resSize = resSize;
+    }
 
     public String getId() {
         return id;

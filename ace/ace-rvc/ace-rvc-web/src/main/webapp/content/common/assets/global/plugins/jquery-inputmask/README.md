@@ -254,7 +254,7 @@ Cardinality specifies how many characters are represented and validated for the 
 The prevalidator option is used to validate the characters before the definition cardinality is reached. (see 'j' example)
 
 ### definitionSymbol
-When you insert or delete characters, they are only shifted when the definition type is the same.  This behavior can be overridden by giving a definitionSymbol. (see example x, y, z, which can be used for ip-address masking, the validation is different, but it is allowed to shift the characters between the definitions)
+When you insert or delete characters, they are only shifted when the definition type is the same.  This behavior can be overridden by giving a definitionSymbol. (see example x, y, z, which can be used for ip-addressName masking, the validation is different, but it is allowed to shift the characters between the definitions)
 
 ```javascript
 Inputmask.extendDefinitions({

@@ -33,4 +33,6 @@ public interface NormDao {
 	List<Map<String, Object>> selectNormByName(@Param("name") String name,
 					 @Param("topicId") String topicId);
 
+	int updateSort( @Param("id") String id, @Param("sort") int sort);
+
 }

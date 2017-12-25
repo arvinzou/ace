@@ -19,7 +19,9 @@ public class RvcConference {
 
     private String emceeName;
 
-    private String address;
+    private String addressId;
+
+    private String addressName;
 
     private String beginDate;
 
@@ -33,6 +35,9 @@ public class RvcConference {
 
     private String remark;
 
+    /**
+     * 0-未开始，1-进行中，2-已结束, 3-已删除
+     */
     private String status;
 
     private String createUserId;
@@ -46,6 +51,91 @@ public class RvcConference {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    /**
+     * 所属党组织编码
+     */
+    private String poCode;
+    /**
+     * 所属党组织名称
+     */
+    private String poName;
+
+    public String getPoCode() {
+        return poCode;
+    }
+
+    public void setPoCode(String poCode) {
+        this.poCode = poCode;
+    }
+
+    public String getPoName() {
+        return poName;
+    }
+
+    public void setPoName(String poName) {
+        this.poName = poName;
+    }
+
+
+    /**
+     * 与会人员总人数
+     */
+    private int memberCount;
+
+    /**
+     * 自身签到状态 0-未签，1-已签
+     */
+    private boolean isSignIn;
+
+    /**
+     * 科达账号
+     */
+    private String kedaAccount;
+    /**
+     * 科达账号类型  -- 	终端类型 5-e164号码；6-电话；7-ip地址；
+     */
+    private Integer kedaAccountType;
+
+    public String getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
+    }
+
+    public String getKedaAccount() {
+        return kedaAccount;
+    }
+
+    public void setKedaAccount(String kedaAccount) {
+        this.kedaAccount = kedaAccount;
+    }
+
+    public Integer getKedaAccountType() {
+        return kedaAccountType;
+    }
+
+    public void setKedaAccountType(Integer kedaAccountType) {
+        this.kedaAccountType = kedaAccountType;
+    }
+
+    public int getMemberCount() {
+        return memberCount;
+    }
+
+    public void setMemberCount(int memberCount) {
+        this.memberCount = memberCount;
+    }
+
+    public boolean isSignIn() {
+        return isSignIn;
+    }
+
+    public void setSignIn(boolean signIn) {
+        isSignIn = signIn;
+    }
 
     public String getId() {
         return id;
@@ -111,12 +201,12 @@ public class RvcConference {
         this.emceeName = emceeName == null ? null : emceeName.trim();
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddressName() {
+        return addressName;
     }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+    public void setAddressName(String addressName) {
+        this.addressName = addressName == null ? null : addressName.trim();
     }
 
     public String getBeginDate() {

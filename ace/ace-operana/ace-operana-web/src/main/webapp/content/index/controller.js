@@ -626,13 +626,9 @@ function viewUser(meetingId) {
 		dttable.fnClearTable(); // 清空一下table
 		dttable.fnDestroy(); // 还原初始化了的datatable
 	}
-	var table = $('#' + tableId)
-			.DataTable(
-					{
+	var table = $('#' + tableId).DataTable({
 						ajax : {
-							url : contextPath
-									+ '/meeting/selectUserByMeetingId.do?meetingId='
-									+ meetingId,
+							url : contextPath+ '/meeting/selectUserByMeetingId.do?meetingId='+ meetingId,
 							dataSrc : 'data'
 						},
 						columns : [{
@@ -693,7 +689,10 @@ function viewUser(meetingId) {
 							$(row).children('td').eq(4).html(html.join(''));
 
 						},
-						"aLengthMenu" : [5, 10, 15, 20],
+						"aLengthMenu" : [500, 1000, 1500, 2000],
+						"scrollY": "200px",
+                        "scrollCollapse": "true",
+                        "paging": "false",
 						"oLanguage" : {
 							"sLengthMenu" : "每页显示 _MENU_ 条记录",
 							"sZeroRecords" : "对不起，查询不到任何相关数据",
@@ -983,7 +982,7 @@ function previewChart(_meetingId, _topicId, _normId, title) {
 	window.open(url);
 }
 function previewTpa(_meetingId, _topicId, _normId, title) {
-	var url = contextPath + '/dynamic/service/tpa/index.jsp?meetingId='
+	var url = contextPath + '/dynamic/service/tpaCommon/index.jsp?meetingId='
 			+ _meetingId + '&topicId=' + _topicId + '&normId=' + _normId;
 	window.open(url);
 }

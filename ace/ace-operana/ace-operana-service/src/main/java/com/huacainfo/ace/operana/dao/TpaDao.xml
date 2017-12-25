@@ -113,7 +113,10 @@
     select count(*)
     from
     tpa where
-    probDiscri=#{probDiscri} and meetingId=#{meetingId} and topicId=#{topicId}
+    probDiscri=#{probDiscri}
+    and productId=#{productId}
+    and meetingId=#{meetingId}
+    and topicId=#{topicId}
     and  normId=#{normId}
   </select>
 
@@ -196,5 +199,34 @@
     <![CDATA[
     where t.liable=#{userId} and hour(timediff(t.lastModifyDate,now()))<=#{tasktime}
      ]]>
+  </select>
+
+
+  <sql id="whereConditionCommon">
+    from tpa t
+    left join portal.users b on t.liable=b.user_id
+    left join portal.department c on t.deptId=c.department_id
+  </sql>
+  <select id="findCountCommon" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereConditionCommon"/>
+  </select>
+  <select id="findListCommon" resultMap="BaseResultMapVo">
+
+    select
+    t.meetingId, t.topicId, t.normId, t.productId, t.probDiscri, t.probAnsys, t.actions, t.liable,
+    t.deptId,t.category,t.status,ifnull(b.name,'') userName,t.lastModifyDate,t.id,ifnull(c.department_name,'') deptName
+    <include refid="whereConditionCommon"/>
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY t.createDate
+      </when>
+      <otherwise>
+        ORDER BY t.createDate
+      </otherwise>
+    </choose>
+
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
   </select>
 </mapper>

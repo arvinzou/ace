@@ -1,6 +1,7 @@
 jQuery(function($) {
 	launchExample();
 	loadFiles();
+	loadView();
 });
 function initData() {
 	chart1("1");
@@ -491,4 +492,24 @@ function loadFiles(){
             alert("加载错误！");
         }
     });
+}
+function loadView() {
+	$.ajax({
+		type : "post",
+		url : contextPath + '/norm/selectNormByPrimaryKey.do',
+		data : {
+			id : normId
+		},
+		beforeSend : function(XMLHttpRequest) {
+		},
+		success : function(rst, textStatus) {
+            var o=rst.value;
+            if(o.url){
+                location.href=o.url;
+            }
+		},
+		error : function() {
+			alert("加载错误！");
+		}
+	});
 }
