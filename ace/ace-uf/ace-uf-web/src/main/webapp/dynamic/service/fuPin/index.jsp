@@ -30,7 +30,7 @@
 
 
                      名称： <input name="name" type="text" style="width: 200px;" />
-			         扶贫进度：<input class="easyui-combobox" style="width: 200px" name="category"
+						类别：<input class="easyui-combobox" style="width: 200px" name="category"
 							data-options="url:'${portalPath}/dict/findListByCategoryId.do?categoryId=109&selected=false',
 											method:'get',
 											valueField:'code',
@@ -99,7 +99,7 @@
 				<div class="labelItem"><span class="labelItemHeader">扶贫日期</span><br>
 					<span id="time"></span>
 				</div>
-				<div class="labelItem"><span class="labelItemHeader">扶贫进度</span><br>
+				<div class="labelItem"><span class="labelItemHeader">类别</span><br>
 					<span id="category"></span>
 				</div>
 			</div>
