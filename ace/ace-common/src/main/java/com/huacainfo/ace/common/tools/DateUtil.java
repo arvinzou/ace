@@ -48,17 +48,17 @@ public final class DateUtil {
     /**
      * 默认的日期格式 .
      */
-    public static String DEFAULT_DATE_TIME_RFGFX = "yyyy-MM-dd HH:mm:ss";
+    public static String DEFAULT_DATE_TIME_REGEX = "yyyy-MM-dd HH:mm:ss";
     /**
      * 默认的DateFormat 实例
      */
-    private static final EPNDateFormat DEFAULT_FORMAT_YYYY_MM_DD_HH_MIN_SS = new EPNDateFormat(DEFAULT_DATE_TIME_RFGFX);
+    private static final EPNDateFormat DEFAULT_FORMAT_YYYY_MM_DD_HH_MIN_SS = new EPNDateFormat(DEFAULT_DATE_TIME_REGEX);
     protected static Logger logger = LoggerFactory.getLogger(DateUtil.class);
     private static Map<String, EPNDateFormat> formatMap = new HashMap<>();
 
     static {
         formatMap.put(DEFAULT_DATE_REGEX, DEFAULT_FORMAT);
-        formatMap.put(DEFAULT_DATE_TIME_RFGFX, DEFAULT_FORMAT_YYYY_MM_DD_HH_MIN_SS);
+        formatMap.put(DEFAULT_DATE_TIME_REGEX, DEFAULT_FORMAT_YYYY_MM_DD_HH_MIN_SS);
         formatMap.put(DEFAULT_REGEX_YYYYMMDD, DEFAULT_FORMAT_YYYYMMDD);
     }
 
@@ -75,12 +75,12 @@ public final class DateUtil {
     public static void setTimeFromat(String timeFormat) {
         if (timeFormat.isEmpty())
             throw new IllegalArgumentException("timeFormat can not be blank.");
-        DEFAULT_DATE_TIME_RFGFX = timeFormat;
+        DEFAULT_DATE_TIME_REGEX = timeFormat;
     }
 
     public static Date toDate(String dateStr) {
         Date date = null;
-        SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_DATE_TIME_RFGFX);
+        SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_DATE_TIME_REGEX);
         try {
             date = sdf.parse(dateStr);
         } catch (ParseException e) {
@@ -291,7 +291,7 @@ public final class DateUtil {
      * @return
      */
     public static String getNow() {
-        return getNow(DEFAULT_DATE_TIME_RFGFX);
+        return getNow(DEFAULT_DATE_TIME_REGEX);
     }
 
     /**
@@ -655,7 +655,7 @@ public final class DateUtil {
     public static boolean isTween(String dateTime, String startTime, String endTime, String regex) {
         DateFormat df = null;
         if (StringUtils.isEmpty(regex))
-            df = new SimpleDateFormat(DEFAULT_DATE_TIME_RFGFX);
+            df = new SimpleDateFormat(DEFAULT_DATE_TIME_REGEX);
         else
             df = new SimpleDateFormat(regex);
         try {
@@ -682,7 +682,7 @@ public final class DateUtil {
      * @return 0-表示2个时间相等；小于0-表示d1在d2之前；大于0表示d1在d2之后
      */
     public static int dateCompare(String date1, String date2) {
-        SimpleDateFormat df = new SimpleDateFormat(DEFAULT_DATE_TIME_RFGFX);
+        SimpleDateFormat df = new SimpleDateFormat(DEFAULT_DATE_TIME_REGEX);
 
         try {
             Date d1 = df.parse(date1);
@@ -739,7 +739,7 @@ public final class DateUtil {
      * @return 指定时间
      */
     public static String getTime(String date, int type, int diffValue) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_DATE_TIME_RFGFX);//含时分秒
+        SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_DATE_TIME_REGEX);//含时分秒
         Date date1 = sdf.parse(date);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date1);
@@ -784,13 +784,13 @@ public final class DateUtil {
         Calendar curr = Calendar.getInstance();
         if ("week".equals(type)) {
             curr.set(Calendar.DAY_OF_MONTH, curr.get(Calendar.DAY_OF_MONTH) + 7 * value);
-            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_RFGFX);
+            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
         } else if ("month".equals(type)) {
             curr.set(Calendar.MONTH, curr.get(Calendar.MONTH) + value);
-            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_RFGFX);
+            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
         } else if ("year".equals(type)) {
             curr.set(Calendar.YEAR, curr.get(Calendar.YEAR) + value);
-            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_RFGFX);
+            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
         }
 
         return "未知类型!";
@@ -809,13 +809,13 @@ public final class DateUtil {
         curr.setTime(getDate(date, format));
         if ("week".equals(type)) {
             curr.set(Calendar.DAY_OF_MONTH, curr.get(Calendar.DAY_OF_MONTH) + 7 * value);
-            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_RFGFX);
+            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
         } else if ("month".equals(type)) {
             curr.set(Calendar.MONTH, curr.get(Calendar.MONTH) + value);
-            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_RFGFX);
+            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
         } else if ("year".equals(type)) {
             curr.set(Calendar.YEAR, curr.get(Calendar.YEAR) + value);
-            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_RFGFX);
+            return format(curr.getTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
         }
 
         return "未知类型!";
@@ -840,12 +840,12 @@ public final class DateUtil {
      */
     public static Map<String, String> getMonthDate(String month) {
         month = month + "-15 12:00:00";//2017-03-15 12:00:00
-        Date d = DateUtil.getDate(month, DateUtil.DEFAULT_DATE_TIME_RFGFX);
+        Date d = DateUtil.getDate(month, DateUtil.DEFAULT_DATE_TIME_REGEX);
         Map<String, Date> map = DateUtil.getMonthDate(d);
 
         Map<String, String> rtnMap = new HashedMap();
-        rtnMap.put("start", DateUtil.format(map.get("start"), DateUtil.DEFAULT_DATE_TIME_RFGFX));
-        rtnMap.put("end", DateUtil.format(map.get("end"), DateUtil.DEFAULT_DATE_TIME_RFGFX));
+        rtnMap.put("start", DateUtil.format(map.get("start"), DateUtil.DEFAULT_DATE_TIME_REGEX));
+        rtnMap.put("end", DateUtil.format(map.get("end"), DateUtil.DEFAULT_DATE_TIME_REGEX));
 
         return rtnMap;
     }
