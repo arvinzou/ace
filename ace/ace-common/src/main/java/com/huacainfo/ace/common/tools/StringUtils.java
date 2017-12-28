@@ -198,6 +198,10 @@ public class StringUtils {
         return false;
     }
 
+    public static boolean isNotEmpty(String value) {
+        return !isEmpty(value);
+    }
+
     public static boolean IsNullOrEmpty(String val) {
         if (val == null)
             return true;
