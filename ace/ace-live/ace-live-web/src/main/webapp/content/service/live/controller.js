@@ -163,7 +163,7 @@ function loadView(id) {
                 	value = rsd(value, '111');
                 }
                 if (key == 'status') {
-                   value=value == "1" ? "正常" : "关闭";
+                   value = rsd(value, '112');
                 }if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
                  	value = Common.DateFormatter(value);
                 }

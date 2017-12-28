@@ -7,7 +7,7 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="category" jdbcType="VARCHAR" property="category"/>
         <result column="deptName" jdbcType="VARCHAR" property="deptName"/>
-        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthday"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="nop" jdbcType="BIGINT" property="nop"/>
         <result column="pop" jdbcType="BIGINT" property="pop"/>
@@ -61,7 +61,7 @@
         lastModifyUserId, lastModifyUserName, lastModifyDate,
         content)
         values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-        #{category,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
+        #{category,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
         #{remark,jdbcType=VARCHAR}, #{nop,jdbcType=BIGINT}, #{pop,jdbcType=BIGINT}, #{addr,jdbcType=VARCHAR},
         #{rtmpUrl,jdbcType=VARCHAR}, #{mp4Url,jdbcType=VARCHAR}, #{imageSrc,jdbcType=VARCHAR},
         #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{status,jdbcType=CHAR},
@@ -77,7 +77,7 @@
         name = #{name,jdbcType=VARCHAR},
         category = #{category,jdbcType=VARCHAR},
         deptName = #{deptName,jdbcType=VARCHAR},
-        birthday = #{birthday,jdbcType=DATE},
+        birthday = #{birthday,jdbcType=TIMESTAMP},
         remark = #{remark,jdbcType=VARCHAR},
         nop = #{nop,jdbcType=BIGINT},
         pop = #{pop,jdbcType=BIGINT},
