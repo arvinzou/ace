@@ -15,7 +15,7 @@ Page({
     data: {
         limit : 10,
         type: 0,
-        navbar: ['待培训', '已结束'],
+        navbar: ['培训活动', '培训计划'],
         currentTab: 0,
         /*文件服务器*/
         serverfile: cfg.serverfile,

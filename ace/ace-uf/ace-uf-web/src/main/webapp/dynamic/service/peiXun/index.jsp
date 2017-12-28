@@ -28,7 +28,7 @@
                 <form action="#" id="fm-search">
                     名称： <input name="name" type="text" style="width: 200px;"/>
 
-                    培训进度：<input class="easyui-combobox" style="width: 200px" name="category"
+                    类别：<input class="easyui-combobox" style="width: 200px" name="category"
                                 data-options="url:'${portalPath}/dict/findListByCategoryId.do?categoryId=108&selected=false',
 											method:'get',
 											valueField:'code',
@@ -100,7 +100,7 @@
         <div class="labelItem"><span class="labelItemHeader">培训时间</span><br>
             <span id="time"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">培训进度</span><br>
+        <div class="labelItem"><span class="labelItemHeader">类别</span><br>
             <span id="category"></span>
         </div>
     </div>

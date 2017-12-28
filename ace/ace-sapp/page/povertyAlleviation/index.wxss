@@ -63,59 +63,6 @@ page {
     border-bottom: 1px solid #e5e5e5;
 }
 
-.content_end {
-    background: white;
-    display: table;
-    position: relative;
-    width: 686rpx;
-    padding: 34rpx 32rpx;
-}
-
-.content_end_img {
-    display: inline-table;
-    width: 220rpx;
-    height: 128rpx;
-    margin: 8rpx 18rpx 0 0;
-}
-
-.end_img {
-    width: 220rpx;
-    height: 128rpx;
-}
-
-.content_end_text {
-    display: inline-table;
-    vertical-align: top;
-    width: 440rpx;
-    font-weight: bold;
-}
-
-.end_address {
-    margin-top: 6rpx;
-    color: #999;
-    font-size: 24rpx;
-}
-
-.flag {
-    position: absolute;
-    left: 580rpx;
-    top: 84rpx;
-    width: 102rpx;
-    height: 83rpx;
-}
-
-.flagImg {
-    width: 102rpx;
-    height: 83rpx;
-}
-
-.end_title {
-    font-size: 28rpx;
-    min-height:95rpx;
-    color: #666;
-}
-
-
 /* 加载状态样式 */
 .loading {
     width: 686rpx;
@@ -137,8 +84,5 @@ page {
 
 .loading.complete:before {
     display: none;
-}
-.end{
-    padding-top: 80rpx;
 }
 

@@ -1,4 +1,4 @@
-var _colNames = ['主键', '培训主题', '培训地点', '维度', '经度','培训单位', '培训对象', '培训进度', '培训日期', '封面','培训内容', '培训资料' ,'操作','创建人编号', '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间'];
+var _colNames = ['主键','类别', '培训主题', '培训地点', '维度', '经度','培训单位', '培训对象',  '培训日期', '封面','培训资料','培训内容'  ,'操作','创建人编号', '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间'];
 var _colModel = function () {
     return [
 
@@ -18,6 +18,26 @@ var _colModel = function () {
             editrules : {
                 required : true
             }
+        },
+        {
+            name : 'category',
+            editable : true,
+            edittype : "select",
+            renderer : function(value) {
+                return rsd(value,"108");
+            },
+            formoptions : {
+                style : 'width:200px;',
+                elmprefix : "",
+                elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editoptions : {
+                value : odparse("108")
+            },
+            width : 30,
+            editrules : {
+                required : true
+            },
         },
 
         {
@@ -79,8 +99,6 @@ var _colModel = function () {
                 maxlength : "50"
             },
         },
-
-
         {
             name : 'dept',//表格列的名称
             editable : true,//定义字段是否可编辑
@@ -117,18 +135,6 @@ var _colModel = function () {
             editrules : {
                 required : true
             }
-        },
-
-        {
-            name: 'category',
-            width: 50,
-            edittype: "select",
-            renderer: function (value) {
-                return rsd(value, "108");
-            },
-            editoptions: {
-                value: odparse("108")
-            },
         },
         {
             name: 'time',
@@ -194,6 +200,17 @@ var _colModel = function () {
                 required: true
             }
         },
+        {
+            name: 'file',
+            editable: true,
+            hidden: true,
+            width: 100,
+            editoptions: {
+                style: 'width:200px;',
+                maxlength: "200",
+                colspan: false
+            },
+        },
 
         {
             name : 'content',
@@ -212,25 +229,6 @@ var _colModel = function () {
                  required : true
              },*/
             edittype : "textarea"
-        },
-
-        {
-            name: 'file',
-            editable: true,
-            hidden: true,
-            width: 100,
-            editoptions: {
-                style: 'width:300px;',
-                maxlength: "200",
-                colspan: false
-            },
-            formoptions: {
-                elmprefix: "",
-                elmsuffix: "<span style='color:#088fff;font-size:14px;font-weight:800'>*</span>"
-            },
-            editrules: {
-                required: true
-            }
         },
 
         {

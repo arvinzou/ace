@@ -27,7 +27,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ace-uf-service" />
-    <orderEntry type="module" module-name="ace-portal-client" />
+    <orderEntry type="library" name="Maven: com.huacainfo:ace-portal-client:1.0" level="project" />
     <orderEntry type="module" module-name="ace-uf-client" />
     <orderEntry type="module" module-name="ace-common" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.3.2.RELEASE" level="project" />

@@ -2,8 +2,8 @@ package com.huacainfo.ace.rvc.service.impl;
 
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.rvc.base.RvcBaseService;
 import com.huacainfo.ace.rvc.dao.RvcBaseUserDao;

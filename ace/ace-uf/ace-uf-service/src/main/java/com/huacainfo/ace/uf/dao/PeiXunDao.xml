@@ -10,6 +10,7 @@
         <result column="dept" jdbcType="VARCHAR" property="dept"/>
         <result column="trainees" jdbcType="VARCHAR" property="trainees"/>
         <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="cover" jdbcType="VARCHAR" property="cover"/>
         <result column="file" jdbcType="VARCHAR" property="file"/>
@@ -26,7 +27,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-          id, name, address,latitude,longitude, dept, trainees,time,if(sysdate()>time,'1','0') as category, content,cover,file, createUserId, createUserName,
+          id, name, address,latitude,longitude, dept, trainees,time,category, content,cover,file, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
@@ -51,6 +52,7 @@
                  dept,
                  trainees,
                  time,
+                 category,
                  content,
                  cover,
                  file,
@@ -70,9 +72,10 @@
                   #{dept,jdbcType=VARCHAR},
                   #{trainees,jdbcType=VARCHAR},
                   #{time,jdbcType=TIMESTAMP},
+                  #{category,jdbcType=CHAR},
                   #{content,jdbcType=VARCHAR},
-                   #{cover,jdbcType=VARCHAR},
-                   #{file,jdbcType=VARCHAR},
+                  #{cover,jdbcType=VARCHAR},
+                  #{file,jdbcType=VARCHAR},
                   #{createUserId,jdbcType=VARCHAR},
                   #{createUserName,jdbcType=VARCHAR},
                   #{createDate,jdbcType=TIMESTAMP},
@@ -95,6 +98,7 @@
             dept = #{dept,jdbcType=VARCHAR},
             trainees = #{trainees,jdbcType=VARCHAR},
             time = #{time,jdbcType=TIMESTAMP},
+            category = #{category,jdbcType=CHAR},
             content = #{content,jdbcType=VARCHAR},
             <if test='cover!=null and cover!=""'>
                 cover = #{cover,jdbcType=VARCHAR},
@@ -134,12 +138,8 @@
             and name like
             concat('%',#{condition.dept,jdbcType=VARCHAR},'%')
         </if>
-
-        <if test="condition.category==0">
-            and time &gt; now()
-        </if>
-        <if test="condition.category==1">
-            and time &lt; now()
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and category =#{condition.category,jdbcType=CHAR}
         </if>
     </sql>
 
