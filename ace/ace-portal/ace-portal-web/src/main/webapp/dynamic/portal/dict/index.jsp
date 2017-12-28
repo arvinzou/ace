@@ -31,9 +31,9 @@
 					<form action="#" id="fm-search">
 						字典名称： <input name="name" type="text"
 							style="width: 200px;height:25px" />
-							字典类型：<input class="easyui-combobox"  style="width:200px;height:25px;line-height: 25px;"
-            name="categoryId" id="type001"
-            data-options="
+						字典类型：<input class="easyui-combobox" style="width:200px;"
+									name="categoryId" id="type001"
+									data-options="
                     url:'${pageContext.request.contextPath}/dictCategory/findDictCategoryListAll.do',
                     method:'get',
                     valueField:'categoryId',

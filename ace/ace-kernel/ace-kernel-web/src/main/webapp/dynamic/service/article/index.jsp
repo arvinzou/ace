@@ -40,9 +40,9 @@
                                         							style="width: 200px;" />
 
 						时间：
-						<input class="easyui-datebox" name="startDate" style="width:100px;height:25px;line-height: 25px;">
+						<input class="easyui-datebox" name="startDate" style="width:100px;">
 						至
-						<input class="easyui-datebox" name="endDate" style="width:100px;height:25px;line-height: 25px;">
+						<input class="easyui-datebox" name="endDate" style="width:100px;">
 						<button class="btn btn-info" id="btn-search"
 							authority="${pageContext.request.contextPath}/article/findArticleList.do">
 							 <i

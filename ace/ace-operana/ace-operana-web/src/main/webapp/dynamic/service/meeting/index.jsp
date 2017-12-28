@@ -59,9 +59,9 @@ pageEncoding="utf-8"%>
                                style="width: 200px;"/>
 
                     时间：
-                    <input class="easyui-datetimebox" name="startDate" style="width:150px;height:25px;line-height: 25px;">
+                    <input class="easyui-datetimebox" name="startDate" style="width:150px;">
                     至
-                    <input class="easyui-datetimebox" name="endDate" style="width:150px;height:25px;line-height: 25px;">
+                    <input class="easyui-datetimebox" name="endDate" style="width:150px;">
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/meeting/findMeetingList.do">
                         <i

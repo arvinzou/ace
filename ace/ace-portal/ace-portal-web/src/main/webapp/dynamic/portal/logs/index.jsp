@@ -28,10 +28,10 @@
 					<form action="#" id="fm-search">
 						内容： <input name="name" type="text"
 							style="width: 200px;height:25px" />
-							时间： 
-							<input class="easyui-datetimebox" name="startDate" style="width:200px;height:25px;line-height: 25px;">
+							时间：
+						<input class="easyui-datetimebox" name="startDate" style="width:200px;">
 							至
-							<input class="easyui-datetimebox" name="endDate" style="width:200px;height:25px;line-height: 25px;">
+						<input class="easyui-datetimebox" name="endDate" style="width:200px;">
 						<button class="btn btn-info" id="btn-search"
 							authority="false">
 							查询
