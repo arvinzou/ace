@@ -11,10 +11,6 @@
       <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana-client/ace-operana-client.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana-client/ace-operana-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana-service/ace-operana-service.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana-service/ace-operana-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana-web/ace-operana-web.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana-web/ace-operana-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />
