@@ -125,4 +125,21 @@ public interface ConferenceService {
      * @return list
      */
     ConferenceVO search(String userId, SearchCondition condition);
+
+    /**
+     * 获取单个会议信息
+     *
+     * @param userId       操作人用户id
+     * @param conferenceId 会议ID -- rvc_conference.id
+     * @return result
+     */
+    Map<String,Object> get(String userId, String conferenceId);
+
+    /**
+     * 获取直播地址
+     *
+     * @param conference 会议资料
+     * @return 直播地址
+     */
+    String getLiveAddress(RvcConference conference);
 }

@@ -14,9 +14,10 @@
     </bean>
 
     <import resource="classpath:spring/spring-ace-common-monitor.xml"/>
-    <import resource="classpath:spring/spring-ace-common-fastdfs.xml"/>
     <import resource="classpath:spring/spring-ace-common-dao.xml"/>
     <import resource="classpath:spring/spring-ace-rvc-service.xml"/>
-    <!--<import resource="classpath:spring/spring-ace-common-servlet.xml"/>-->
 
+    <import resource="classpath:spring/spring-ace-common-fastdfs.xml"/>
+    <import resource="classpath:spring/spring-ace-common-redis.xml" />
+    <import resource="classpath:spring/spring-ace-common-kafka.xml" />
 </beans>

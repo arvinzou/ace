@@ -2,33 +2,25 @@ package com.huacainfo.ace.rvc.model;
 
 import java.util.Date;
 
-public class RvcConferenceRes {
+public class RvcConferenceChatLog {
     private String id;
 
-    private String confId;
-
-    private String conferenceId;
-
     /**
-     * 资源名称
+     * 此处存放会议ID
      */
-    private String resName;
+    private String roomId;
 
-    /**
-     * 1-文本内容，2-图片，3-文件，4-视频，5-会议纪要
-     */
-    private Integer resType;
+    private String userId;
 
-    /**
-     * 文件大小
-     */
-    private Double resSize;
+    private String userName;
 
-    private String resURL;
+    private String toUserId;
 
-    private String resText;
+    private String toUserName;
 
-    private Integer displaySeq;
+    private String content;
+
+    private String contentType;
 
     private String remark;
 
@@ -46,23 +38,6 @@ public class RvcConferenceRes {
 
     private Date lastModifyDate;
 
-
-    public String getResName() {
-        return resName;
-    }
-
-    public void setResName(String resName) {
-        this.resName = resName;
-    }
-
-    public Double getResSize() {
-        return resSize;
-    }
-
-    public void setResSize(Double resSize) {
-        this.resSize = resSize;
-    }
-
     public String getId() {
         return id;
     }
@@ -71,52 +46,60 @@ public class RvcConferenceRes {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getConfId() {
-        return confId;
+    public String getRoomId() {
+        return roomId;
     }
 
-    public void setConfId(String confId) {
-        this.confId = confId == null ? null : confId.trim();
+    public void setRoomId(String roomId) {
+        this.roomId = roomId == null ? null : roomId.trim();
     }
 
-    public String getConferenceId() {
-        return conferenceId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setConferenceId(String conferenceId) {
-        this.conferenceId = conferenceId == null ? null : conferenceId.trim();
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public Integer getResType() {
-        return resType;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setResType(Integer resType) {
-        this.resType = resType;
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getResURL() {
-        return resURL;
+    public String getToUserId() {
+        return toUserId;
     }
 
-    public void setResURL(String resURL) {
-        this.resURL = resURL == null ? null : resURL.trim();
+    public void setToUserId(String toUserId) {
+        this.toUserId = toUserId == null ? null : toUserId.trim();
     }
 
-    public String getResText() {
-        return resText;
+    public String getToUserName() {
+        return toUserName;
     }
 
-    public void setResText(String resText) {
-        this.resText = resText == null ? null : resText.trim();
+    public void setToUserName(String toUserName) {
+        this.toUserName = toUserName == null ? null : toUserName.trim();
     }
 
-    public Integer getDisplaySeq() {
-        return displaySeq;
+    public String getContent() {
+        return content;
     }
 
-    public void setDisplaySeq(Integer displaySeq) {
-        this.displaySeq = displaySeq;
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType == null ? null : contentType.trim();
     }
 
     public String getRemark() {

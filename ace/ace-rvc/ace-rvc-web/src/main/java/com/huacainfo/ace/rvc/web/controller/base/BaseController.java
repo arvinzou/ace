@@ -6,5 +6,5 @@ import org.slf4j.LoggerFactory;
  * Created by Arvin on 2017/12/7.
  */
 public class BaseController {
-    org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
+    public org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
 }

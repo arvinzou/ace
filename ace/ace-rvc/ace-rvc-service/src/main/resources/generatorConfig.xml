@@ -12,9 +12,12 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
+        <!--connectionURL="jdbc:mysql://106.75.69.81:3306/rvc"-->
+        <!--userId="root" password="huacai$2016">-->
+        <!--数据库连接信息。具体参看mybatis-generator -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://106.75.69.81:3306/rvc"
-                        userId="root" password="huacai$2016"><!--数据库连接信息。具体参看mybatis-generator -->
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/rvc"
+                        userId="root" password="admin">
         </jdbcConnection>
 
         <javaTypeResolver><!--具体参看mybatis-generator -->
@@ -74,12 +77,11 @@
 
         <!--与原来mybatis-generator不一样，这个table标签不是必须的。只有对生成的映射有复杂要求时，才需要在这里详细配置 -->
         <!--domainObjectName="RvcConferenceMembers" -->
-        <table tableName="rvc_conference_address"
+        <table tableName="rvc_conference"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="true"/>
-            <property name="mapperName" value="RvcConferenceMembersDao"/>
         </table>
 
 

@@ -131,10 +131,12 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         RvcConference conference = new RvcConference();
         String conferenceId = GUIDUtil.getGUID();
         conference.setId(conferenceId);
+        conference.setTitle(dto.getTitle());
+        conference.setSubtitle(dto.getSubtitle());
         conference.setEmceeId(StringUtils.isEmpty(dto.getEmceeId()) ? userId : dto.getEmceeId());
         conference.setEmceeName(StringUtils.isEmpty(dto.getEmceeName()) ? user.getUserName() : dto.getEmceeName());
-        conference.setBeginDate(StringUtils.isEmpty(dto.getBeginDate()) ?
-                DateUtil.getNow() : dto.getBeginDate());
+        conference.setBeginDate(StringUtils.isEmpty(dto.getBeginDate()) ? DateUtil.getNow() : dto.getBeginDate());
+        conference.setEndDate(StringUtils.isEmpty(dto.getEndDate()) ? DateUtil.getNow() : dto.getEndDate());
         conference.setCreateUserId(userId);
         conference.setCreateUserName(user.getUserName());
         conference.setCreateDate(DateUtil.getNowDate());
@@ -154,10 +156,10 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         }
         conference.setPoCode(null == confAddress ? user.getPoCode() : confAddress.getPoCode());
         conference.setPoName(null == confAddress ? user.getPoName() : confAddress.getPoName());
-        conference.setAddressId(dto.getAddressId());
-        conference.setAddressName(dto.getAddressName());
+        conference.setAddressId(null == confAddress ? "" : confAddress.getId());
+        conference.setAddressName(null == confAddress ? "" : confAddress.getAddrName());
         conference.setKedaAccount(kedaAccount);
-        confAddress.setKedaAccountType(kedaAccountType);
+        conference.setKedaAccountType(kedaAccountType);
         rvcConferenceDao.insertSelective(conference);
         //加入参会人员
         createConferenceAddMember(user, conference, dto);
@@ -176,9 +178,13 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         //会议主场方
         RvcConferenceMembers conferenceMember = null;
         for (JoinMember item : dto.getInviteList()) {
+            if (item.getUserId().equals(user.getUserId())) {
+                continue;
+            }
+
             RvcBaseUser member = null;
             if (StringUtils.isNotEmpty(item.getUserId()))
-                member = rvcBaseUserDao.selectByPrimaryKey(item.getUserId());
+                member = rvcBaseUserDao.getByUserId(item.getUserId());
 
             conferenceMember = new RvcConferenceMembers();
             conferenceMember.setId(GUIDUtil.getGUID());
@@ -187,7 +193,7 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
             conferenceMember.setUserName(item.getUserName());
             conferenceMember.setKedaAccount(null == member ? "" : member.getKedaAccount());
             conferenceMember.setKedaAccountType(null == member ? null : member.getKedaAccountType());
-            conferenceMember.setUserLevel(item.getLevel());//特邀嘉宾方/普通与会人员
+            conferenceMember.setUserLevel(StringUtils.isEmpty(item.getLevel()) ? "1" : item.getLevel());//特邀嘉宾方/普通与会人员
             conferenceMember.setCreateUserId("system");
             conferenceMember.setCreateUserName("system");
             conferenceMember.setCreateDate(DateUtil.getNowDate());
@@ -493,6 +499,7 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
      */
     @Override
     public ConferenceVO search(String userId, SearchCondition condition) {
+
         int count;
         List<RvcConference> list;
         Map<String, Object> param = new HashMap<>();
@@ -500,8 +507,7 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         param.put("limit", condition.getLimit());
         param.put("userId", userId);
         //搜索域
-        String searchRegion = StringUtils.isEmpty(condition.getSearchRegion()) ?
-                "related" : condition.getSearchRegion();
+        String searchRegion = StringUtils.isEmpty(condition.getSearchRegion()) ? "related" : condition.getSearchRegion();
         //与我相关的
         if ("related".equals(searchRegion)) {
             param.put("region", "related");
@@ -524,6 +530,20 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         vo.setPageNo(condition.getStart());
         vo.setPageSize(null != list ? list.size() : 0);
         return vo;
+    }
+
+    /**
+     * 获取单个会议信息
+     *
+     * @param userId       操作人用户id
+     * @param conferenceId 会议ID -- rvc_conference.id
+     * @return result
+     */
+    @Override
+    public Map<String, Object> get(String userId, String conferenceId) {
+        RvcConference conference = rvcConferenceDao.selectByPrimaryKey(conferenceId);
+
+        return ResultUtil.success(conference);
     }
 
     /**
@@ -661,7 +681,8 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
      * @param conference 会议资料
      * @return 直播地址
      */
-    private String getLiveAddress(RvcConference conference) {
+    @Override
+    public String getLiveAddress(RvcConference conference) {
         LocalLoginResp loginResp = VRSApi.localLogin(AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.VRS_ACCOUNT, AuthorizeApi.VRS_PWD);
         String cookies = "SSO_COOKIE_KEY=" + loginResp.getToken();
         LiveRoomResp liveRoom = VRSApi.getLiveRoomList(AuthorizeApi.ACCOUNT_TOKEN, conference.getTitle(), cookies);

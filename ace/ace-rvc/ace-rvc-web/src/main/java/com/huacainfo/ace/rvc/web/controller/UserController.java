@@ -1,6 +1,7 @@
 package com.huacainfo.ace.rvc.web.controller;
 
 import com.huacainfo.ace.common.tools.StringUtils;
+import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.model.RvcBaseUser;
 import com.huacainfo.ace.rvc.service.UserService;
 import com.huacainfo.ace.rvc.util.ResultUtil;
@@ -26,6 +27,7 @@ public class UserController extends BaseController {
 
     /**
      * 用户登录接口
+     * ，
      *
      * @param userId 用户ID -- 浪潮ID
      * @return user
@@ -38,8 +40,16 @@ public class UserController extends BaseController {
             return ResultUtil.fail(-1, "用户ID不能为空");
         }
 
-        RvcBaseUser user = userService.login(userId);
-        return ResultUtil.success(user);
+        try {
+            String a = AuthorizeApi.ACCOUNT_TOKEN;
+            String b = AuthorizeApi.SSO_COOKIE_KEY;
+            RvcBaseUser user = userService.login(userId);
+            return ResultUtil.success(user);
+        } catch (Exception e) {
+            logger.error("UserController.login.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
     }
 
     /***
@@ -50,8 +60,15 @@ public class UserController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Map<String, Object> getAll(String userId) {
-        List<RvcBaseUser> userList = userService.getAll(userId);
 
-        return ResultUtil.success(userList);
+        try {
+            List<RvcBaseUser> userList = userService.getAll(userId);
+
+            return ResultUtil.success(userList);
+        } catch (Exception e) {
+            logger.error("UserController.getAll.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
     }
 }

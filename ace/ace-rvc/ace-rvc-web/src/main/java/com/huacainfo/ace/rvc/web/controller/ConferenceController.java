@@ -33,6 +33,28 @@ public class ConferenceController extends BaseController {
 
 
     /**
+     * 获取单个会议信息
+     *
+     * @param userId       操作人用户id
+     * @param conferenceId 会议ID -- rvc_conference.id
+     * @return result
+     */
+    @ResponseBody
+    @RequestMapping(value = "/get", method = RequestMethod.POST)
+    public Map<String, Object> get(String userId, String conferenceId) {
+
+        try {
+            return conferenceService.get(userId, conferenceId);
+        } catch (Exception e) {
+            logger.error("ConferenceController.get.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
+
+    }
+
+
+    /**
      * 删除会议
      *
      * @param userId       操作人用户id
@@ -42,7 +64,14 @@ public class ConferenceController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Map<String, Object> deleteConference(String userId, String conferenceId) {
-        return conferenceService.deleteConference(userId, conferenceId);
+
+        try {
+            return conferenceService.deleteConference(userId, conferenceId);
+        } catch (Exception e) {
+            logger.error("ConferenceController.deleteConference.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
     }
 
     /**
@@ -56,7 +85,16 @@ public class ConferenceController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public Map<String, Object> modifyConference(String userId, String conferenceId, String dto) {
-        return conferenceService.modifyConference(userId, conferenceId, JsonUtil.toObject(dto, ConferenceDTO.class));
+
+        try {
+            return conferenceService.modifyConference(userId, conferenceId,
+                    JsonUtil.toObject(dto, ConferenceDTO.class));
+        } catch (Exception e) {
+            logger.error("ConferenceController.modifyConference.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
+
     }
 
     /**
@@ -69,7 +107,15 @@ public class ConferenceController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/getMemberList", method = RequestMethod.POST)
     public Map<String, Object> getMemberList(String userId, String conferenceId) {
-        return conferenceService.getMemberList(userId, conferenceId);
+
+
+        try {
+            return conferenceService.getMemberList(userId, conferenceId);
+        } catch (Exception e) {
+            logger.error("ConferenceController.getMemberList.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
     }
 
 
@@ -85,7 +131,15 @@ public class ConferenceController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     public Map<String, Object> signIn(String signInType, String userId, String conferenceId, String ids) {
-        return conferenceService.signIn(signInType, userId, conferenceId, ids);
+
+        try {
+            return conferenceService.signIn(signInType, userId, conferenceId, ids);
+        } catch (Exception e) {
+            logger.error("ConferenceController.signIn.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
+
     }
 
 
@@ -100,9 +154,17 @@ public class ConferenceController extends BaseController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public Map<String, Object> search(String userId, String condition) {
 
-        ConferenceVO data = conferenceService.search(userId, JsonUtil.toObject(condition, SearchCondition.class));
 
-        return ResultUtil.success(data);
+        try {
+
+            ConferenceVO data = conferenceService.search(userId, JsonUtil.toObject(condition, SearchCondition.class));
+
+            return ResultUtil.success(data);
+        } catch (Exception e) {
+            logger.error("ConferenceController.search.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
     }
 
     /**
@@ -114,9 +176,18 @@ public class ConferenceController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/getAddrList", method = RequestMethod.GET)
     public Map<String, Object> getAddressList(String userId) {
-        List<RvcConferenceAddress> list = conferenceService.getAddressList(userId);
 
-        return ResultUtil.success(list);
+        try {
+
+            List<RvcConferenceAddress> list = conferenceService.getAddressList(userId);
+
+            return ResultUtil.success(list);
+        } catch (Exception e) {
+            logger.error("ConferenceController.getAddressList.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
+
     }
 
     /**
@@ -132,9 +203,18 @@ public class ConferenceController extends BaseController {
         if (StringUtils.isEmpty(status)) {
             return ResultUtil.fail(-1, "params error");
         }
-        List<RvcConference> rvcConference = conferenceService.getList(userId, status);
 
-        return ResultUtil.success(rvcConference);
+        try {
+
+            List<RvcConference> rvcConference = conferenceService.getList(userId, status);
+
+            return ResultUtil.success(rvcConference);
+        } catch (Exception e) {
+            logger.error("ConferenceController.getList.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
+
     }
 
     /**
@@ -148,9 +228,18 @@ public class ConferenceController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Map<String, Object> create(String userId, String conference) throws Exception {
-        RvcConference rvcConference = conferenceService.create(userId, JsonUtil.toObject(conference, ConferenceDTO.class));
 
-        return ResultUtil.success(rvcConference);
+
+        try {
+
+            RvcConference rvcConference = conferenceService.create(userId, JsonUtil.toObject(conference, ConferenceDTO.class));
+
+            return ResultUtil.success(rvcConference);
+        } catch (Exception e) {
+            logger.error("ConferenceController.create.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
     }
 
     /**
@@ -164,9 +253,18 @@ public class ConferenceController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/addMember", method = RequestMethod.POST)
     public Map<String, Object> addMember(String userId, String conferenceId, String members) throws Exception {
-        List<RvcConferenceMembers> list = conferenceService.addMembers(userId, conferenceId, members.split(","));
 
-        return ResultUtil.success(list);
+
+        try {
+
+            List<RvcConferenceMembers> list = conferenceService.addMembers(userId, conferenceId, members.split(","));
+
+            return ResultUtil.success(list);
+        } catch (Exception e) {
+            logger.error("ConferenceController.addMember.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
     }
 
 
@@ -181,7 +279,15 @@ public class ConferenceController extends BaseController {
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public Map<String, Object> start(String userId, String conferenceId) throws Exception {
 
-        return conferenceService.start(userId, conferenceId);
+
+        try {
+
+            return conferenceService.start(userId, conferenceId);
+        } catch (Exception e) {
+            logger.error("ConferenceController.start.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
     }
 
     /***
@@ -195,7 +301,15 @@ public class ConferenceController extends BaseController {
     @RequestMapping(value = "/join", method = RequestMethod.POST)
     public Map<String, Object> join(String userId, String conferenceId) throws Exception {
 
-        return ResultUtil.success(conferenceService.join(userId, conferenceId));
+        try {
+
+            return ResultUtil.success(conferenceService.join(userId, conferenceId));
+        } catch (Exception e) {
+            logger.error("ConferenceController.join.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
+
     }
 
     /***
@@ -209,6 +323,14 @@ public class ConferenceController extends BaseController {
     @RequestMapping(value = "/end", method = RequestMethod.POST)
     public Map<String, Object> end(String userId, String conferenceId) throws Exception {
 
-        return ResultUtil.success(conferenceService.end(userId, conferenceId));
+        try {
+
+            return ResultUtil.success(conferenceService.end(userId, conferenceId));
+        } catch (Exception e) {
+            logger.error("ConferenceController.end.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
+
     }
 }

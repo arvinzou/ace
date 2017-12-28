@@ -28,7 +28,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.huacainfo.ace.rvc.web.common.CommonInterceptor"/>
+            <bean class="com.huacainfo.ace.rvc.web.common.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

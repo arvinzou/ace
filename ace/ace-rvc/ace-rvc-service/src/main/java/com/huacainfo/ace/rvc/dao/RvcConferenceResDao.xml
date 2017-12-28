@@ -5,6 +5,7 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="confId" jdbcType="VARCHAR" property="confId"/>
         <result column="conferenceId" jdbcType="VARCHAR" property="conferenceId"/>
+        <result column="resName" jdbcType="VARCHAR" property="resName"/>
         <result column="resType" jdbcType="INTEGER" property="resType"/>
         <result column="resURL" jdbcType="VARCHAR" property="resURL"/>
         <result column="resText" jdbcType="VARCHAR" property="resText"/>
@@ -17,10 +18,12 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="resSize" jdbcType="DOUBLE" property="resSize"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, confId, conferenceId, resType, resURL, resText, displaySeq, remark, status, createUserId, 
-    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, resName,
+    resSize
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -37,13 +40,15 @@
       resType, resURL, resText, 
       displaySeq, remark, status, 
       createUserId, createUserName, createDate, 
-      lastModifyUserId, lastModifyUserName, lastModifyDate
+      lastModifyUserId, lastModifyUserName, lastModifyDate, resName,
+      resSize
       )
     values (#{id,jdbcType=VARCHAR}, #{confId,jdbcType=VARCHAR}, #{conferenceId,jdbcType=VARCHAR}, 
       #{resType,jdbcType=INTEGER}, #{resURL,jdbcType=VARCHAR}, #{resText,jdbcType=VARCHAR}, 
       #{displaySeq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
+      #{resName,jdbcType=VARCHAR}, #{resSize,jdbcType=DOUBLE}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.rvc.model.RvcConferenceRes">
@@ -94,6 +99,12 @@
             <if test="lastModifyDate != null">
                 lastModifyDate,
             </if>
+            <if test="resName != null">
+                resName,
+            </if>
+            <if test="resSize != null">
+                resSize,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -140,6 +151,12 @@
             </if>
             <if test="lastModifyDate != null">
                 #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="resName != null">
+                #{resName,jdbcType=VARCHAR},
+            </if>
+            <if test="resSize != null">
+                #{resSize,jdbcType=DOUBLE},
             </if>
         </trim>
     </insert>
@@ -188,6 +205,12 @@
             <if test="lastModifyDate != null">
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="resName != null">
+                resName = #{resName,jdbcType=VARCHAR},
+            </if>
+            <if test="resSize != null">
+                resSize = #{resSize,jdbcType=DOUBLE},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -206,7 +229,9 @@
       createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      resName = #{resName,jdbcType=VARCHAR},
+      resSize = #{resSize,jdbcType=DOUBLE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -219,5 +244,6 @@
         <foreach collection="typeArray" item="item" open="(" close=")" separator=",">
             #{item}
         </foreach>
+        order by createDate desc
     </select>
 </mapper>

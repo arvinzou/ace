@@ -1,17 +1,16 @@
 package com.huacainfo.ace.rvc.service.impl;
 
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.rvc.base.RvcBaseService;
 import com.huacainfo.ace.rvc.dao.RvcConferenceResDao;
 import com.huacainfo.ace.rvc.model.RvcConferenceRes;
 import com.huacainfo.ace.rvc.service.ConferenceResService;
 import com.huacainfo.ace.rvc.util.ResultUtil;
+import com.huacainfo.ace.rvc.vo.ConferenceResVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Arvin on 2017/12/22.
@@ -45,7 +44,21 @@ public class ConferenceResServiceImpl extends RvcBaseService implements Conferen
         condition.put("conferenceId", confId);
 
         List<RvcConferenceRes> dataList = rvcConferenceResDao.getByType(condition);
+        List<ConferenceResVO> voList = new LinkedList<>();
+        ConferenceResVO vo;
+        for (RvcConferenceRes res : dataList) {
+            vo = new ConferenceResVO();
+            vo.setAuthor(res.getCreateUserName());
+            vo.setDate(DateUtil.format(res.getCreateDate(), DateUtil.DEFAULT_DATE_TIME_REGEX));
+            vo.setFileName(res.getResName());
+            vo.setFileType(res.getResType());
+            vo.setFileURL(res.getResURL());
+            vo.setId(res.getId());
+            vo.setSize(null == res.getResSize() ? 0 : res.getResSize());
 
-        return ResultUtil.success(dataList);
+            voList.add(vo);
+        }
+
+        return ResultUtil.success(voList);
     }
 }

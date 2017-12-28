@@ -47,6 +47,19 @@ public class RvcConferenceMembers {
      */
     private String userLevel;
 
+    /**
+     * 是否签到
+     */
+    private boolean isSignIn;
+
+    public boolean isSignIn() {
+        return "1".equals(getStatus());
+    }
+
+    public void setSignIn(boolean signIn) {
+        isSignIn = signIn;
+    }
+
     public String getUserLevel() {
         return userLevel;
     }

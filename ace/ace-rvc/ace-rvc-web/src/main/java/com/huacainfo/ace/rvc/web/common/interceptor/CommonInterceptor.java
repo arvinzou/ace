@@ -6,7 +6,7 @@
  * author:haing
  * Copyright (c) CD Technology Co.,Ltd. All rights reserved.
  */
-package com.huacainfo.ace.rvc.web.common;
+package com.huacainfo.ace.rvc.web.common.interceptor;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

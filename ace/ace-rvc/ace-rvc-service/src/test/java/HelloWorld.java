@@ -1,9 +1,7 @@
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.kedapi.common.constant.VideoConstant;
-import com.huacainfo.ace.rvc.kedapi.common.kits.HttpKit;
 import com.huacainfo.ace.rvc.kedapi.control.ControlApi;
 import com.huacainfo.ace.rvc.kedapi.control.model.RecordReq;
 import com.huacainfo.ace.rvc.kedapi.control.model.terminal.TerminalReq;
@@ -78,15 +76,14 @@ public class HelloWorld {
 
     @Test
     public void test() {
-        searchCondition();
-//        CreateDTO();
+//        System.out.println(GUIDUtil.getGUID() + "\n" + DateUtil.getNow());
 
-//        AuthorizeApi.init();
-//
-////        ControlApi.getList(0, 10,
-////                AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
-//        String confId = ManageApi.create(AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY, new CreateRequest("Arvin-2"));
-//        System.out.println(confId);
+
+        String token = "f129d53b6d8555a832932ef316b298e7";
+        String s = "eos_style_cookie=default; SSO_COOKIE_KEY=8e5fb19c-d6e7-4efd-af78-adff8be1da84; Expires=Wed, 10-Jan-2018 02:39:22 GMT; Path=/";
+
+//        VRS
+        vrs(token, "admin1");
     }
 
 
@@ -115,16 +112,6 @@ public class HelloWorld {
 //        System.out.println(AuthorizeApi.getSsoCookieKey(cookieStr));
 
 
-        //VRS
-//        vrs(token, "接口创建");
-
-
-        //others
-        String json = HttpKit.loadJson("http://192.168.20.243/hlsfile/2017/12/06/20171206101528_574/Readme.json"
-                , StringUtils.CHARSET_NAME);
-//
-        System.out.println("============================");
-        System.out.println("json:" + json);
     }
 
     private void record(String confId, String token, String cookies) {
@@ -148,9 +135,9 @@ public class HelloWorld {
         String cookies = "SSO_COOKIE_KEY=" + loginResp.getToken();
         LiveRoomResp object = VRSApi.getLiveRoomList(token, keyWords, cookies);
         System.out.println("LiveRoomResp=>" + object.toString());
-//        {   "roomstate" : [      {         "elapse" : 121,         "ip" : 3232240883,         "lcastpoint" : "API接口创建会议20171130-1-20171130162544350",         "livestreampath" : "/hlsfile/2017/11/30/20171130162544_431/Readme.json",         "livetime" : 0,         "prgid" : 16777217,         "roomid" : 16777217,         "roomname" : "API接口创建会议20171130-1",         "userdomainmoid" : ""      }   ],   "success" : 1}
-//        {"error_code":0,"pageid":0,"roomcount":0,"roomstate":[{"createtime":0,"elapse":121,"lcastpoint":"API接口创建会议20171130-1-20171130162544350","livestatnum":0,"livestreampath":"/hlsfile/2017/11/30/20171130162544_431/Readme.json","prgid":16777217,"roomid":16777217,"roomname":"API接口创建会议20171130-1","userdomainmoid":""}],"success":1}
-//        http://192.168.20.243/hlsfile/2017/11/30/20171130162544_431/1280_720/playlist.m3u8
+
+
+        System.out.println(VRSApi.getLiveURL(object));
     }
 
     public void heartBeat() {
