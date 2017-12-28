@@ -1,3 +1,4 @@
+var editor;
 jQuery(function($) {
 	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 		_title : function(title) {
@@ -39,6 +40,11 @@ jQuery(function($) {
 							closeAfterAdd : true,
 							recreateForm : true,
 							viewPagerButtons : false,
+							beforeSubmit: function (postdata) {
+                                postdata.content = editor.getValue();
+                                return [true, "", ""];
+
+                            },
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
 								form.closest('.ui-jqdialog').find(
@@ -67,6 +73,10 @@ jQuery(function($) {
 							closeAfterAdd : true,
 							recreateForm : true,
 							viewPagerButtons : true,
+							beforeSubmit: function (postdata) {
+                                postdata.content = editor.getValue();
+                                return [true, "", ""];
+                            },
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
 								form.closest('.ui-jqdialog').find(
@@ -150,12 +160,21 @@ function loadView(id) {
 		success : function(rst, textStatus) {
 			$.each(rst.value, function(key, value) {
 				if (key == 'category') {
-                	value = rsd(value, '83');
+                	value = rsd(value, '111');
                 }
                 if (key == 'status') {
-                   value == "1" ? "正常" : "关闭";
+                   value=value == "1" ? "正常" : "关闭";
                 }if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
                  	value = Common.DateFormatter(value);
+                }
+                if (key == 'imageSrc') {
+                    if (value != '') {
+                        value = '<image src="' + fastdfs_server + value
+                                + '" />';
+                    } else {
+                        value = '待上传';
+                    }
+
                 }
 				$("#dialog-message-view").find('#' + key).html(value);
 			});

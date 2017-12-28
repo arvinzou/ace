@@ -92,18 +92,7 @@ pageEncoding="utf-8"%>
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-主键</span>
-            <br>
-            <span id="id">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-所属辖区</span>
-            <br>
-            <span id="areaCode">
-</span>
-        </div>
+
         <div class="labelItem"><span class="labelItemHeader">
 名称</span>
             <br>
@@ -128,18 +117,29 @@ pageEncoding="utf-8"%>
             <span id="birthday">
 </span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-摘要</span>
-            <br>
-            <span id="remark">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-活动介绍</span>
-            <br>
-            <span id="content">
-</span>
-        </div>
+    </div>
+    <h5 class="header-title">摘要</h5>
+    <div class="row" style="padding:10px" id="remark">
+
+    </div>
+    <h5 class="header-title">活动介绍</h5>
+    <div class="row" style="padding:10px" id="content">
+    </div>
+
+    <h5 class="header-title">直播流地址</h5>
+    <div class="row" style="padding:10px" id="rtmpUrl">
+    </div>
+
+    <h5 class="header-title">回放地址</h5>
+    <div class="row" style="padding:10px" id="mp4Url">
+    </div>
+
+    <h5 class="header-title">封面</h5>
+    <div class="row" style="padding:10px" id="imageSrc">
+    </div>
+
+
+    <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">
 参与人数</span>
             <br>
@@ -158,24 +158,8 @@ pageEncoding="utf-8"%>
             <span id="addr">
 </span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-直播流地址</span>
-            <br>
-            <span id="rtmpUrl">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-回放地址</span>
-            <br>
-            <span id="mp4Url">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-封面</span>
-            <br>
-            <span id="imageSrc">
-</span>
-        </div>
+
+
         <div class="labelItem"><span class="labelItemHeader">
 维度</span>
             <br>
@@ -257,6 +241,7 @@ window.onresize = function () {
 	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
 	parent.autoWidth();
 }
+
 
 
 </script>
