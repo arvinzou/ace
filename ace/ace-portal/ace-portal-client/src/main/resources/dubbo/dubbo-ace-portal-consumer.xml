@@ -84,4 +84,10 @@
     <dubbo:reference interface="com.huacainfo.ace.portal.service.GroupService"
                      id="groupService"/>
 
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.OAuth2Service"
+                     id="oAuth2Service"/>
+
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.UserinfoService"
+                     id="userinfoService"/>
+
 </beans>

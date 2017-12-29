@@ -1,6 +1,7 @@
 package com.huacainfo.ace.common.security.filter;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,9 +15,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -24,6 +28,7 @@ import com.huacainfo.ace.common.security.spring.BasicUsers;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.common.web.tools.WebUtils;
+
 public class WebAccessDecisionSecurityFilter implements Filter {
 	public static final Map<String, String> RESOURCE_AND_ROLE_MAP = new ConcurrentHashMap<String, String>();
 	private RedisOperations<String, String> redisTemplateString = null;
@@ -34,6 +39,7 @@ public class WebAccessDecisionSecurityFilter implements Filter {
 	private boolean cachable = true;
 
 	private static Logger LOGGER = LoggerFactory.getLogger(WebAccessDecisionSecurityFilter.class);
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -71,7 +77,20 @@ public class WebAccessDecisionSecurityFilter implements Filter {
 			accessable = checkAccessable(httpReq.getRequestURI(), basicUsers);
 		}else{
 			if(httpReq.getRequestURI().indexOf("www")!=-1){
-				accessable = true;
+				if (httpReq.getRequestURI().indexOf("www/view") != -1) {
+					if (session.getAttribute(CommonKeys.SESSION_USERINFO_KEY) == null) {
+						accessable = false;
+						String appid = PropertyUtil.getProperty("appid");
+						String redirect_uri = PropertyUtil.getProperty("redirect_uri");
+						String scope = PropertyUtil.getProperty("scope");
+						String state = PropertyUtil.getProperty("state");
+						redirectPage = this.authorize(appid, redirect_uri, scope, state);
+					} else {
+						accessable = true;
+					}
+				} else {
+					accessable = true;
+				}
 			}
 		}
 		if (accessable) {
@@ -127,6 +146,27 @@ public class WebAccessDecisionSecurityFilter implements Filter {
 	@Override
 	public void destroy() {
 
+	}
+
+	public String authorize(String appid, String redirect_uri, String scope, String state) {
+		try {
+			StringBuffer url = new StringBuffer("https://open.weixin.qq.com/connect/oauth2/authorize");
+			url.append("?appid=");
+			url.append(appid);
+			url.append("&redirect_uri=");
+			url.append(URLEncoder.encode(redirect_uri, "utf-8"));
+			url.append("&response_type=code");
+			url.append("&scope=");
+			url.append(scope);
+			url.append("&state=");
+			url.append(state);
+			url.append("#wechat_redirect");
+			LOGGER.info("{}", url.toString());
+			return url.toString();
+		} catch (Exception e) {
+			LOGGER.error("{}", e);
+			return null;
+		}
 	}
 
 }

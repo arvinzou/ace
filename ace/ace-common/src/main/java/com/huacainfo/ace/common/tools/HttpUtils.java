@@ -203,8 +203,8 @@ public class HttpUtils {
 					publicSuffixMatcher);
 			httpClient = HttpClients.custom()
 					.setSSLHostnameVerifier(hostnameVerifier).build();
-			httpGet.addHeader("WX-SESSION-ID","oCjYM0Ux6pr9MoumsfZITuMW5lE8");
-			response = httpClient.execute(httpGet);
+            //httpGet.addHeader("WX-SESSION-ID","oCjYM0Ux6pr9MoumsfZITuMW5lE8");
+            response = httpClient.execute(httpGet);
 			entity = response.getEntity();
 			responseContent = EntityUtils.toString(entity, encoding);
 		} finally {
