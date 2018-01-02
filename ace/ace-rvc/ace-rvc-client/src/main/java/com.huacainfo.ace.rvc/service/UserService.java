@@ -25,4 +25,12 @@ public interface UserService {
      * @return list
      */
     List<RvcBaseUser> getAll(String userId);
+
+    /**
+     * redis方式获取用户信息
+     *
+     * @param userId 用户ID-rvc_base_user.userId
+     * @return RvcBaseUser
+     */
+    RvcBaseUser getByUserIdWithRedis(String userId);
 }

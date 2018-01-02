@@ -1,3 +1,4 @@
+import com.huacainfo.ace.rvc.vo.ChatDTO;
 import org.junit.Test;
 
 /**
@@ -8,5 +9,10 @@ public class HelloWorld {
     @Test
     public void test() {
 
+        ChatDTO chatMessage = new ChatDTO();
+        chatMessage.setAction("text");
+        chatMessage.setContent("你好");
+
+        System.out.println(chatMessage.toString());
     }
 }

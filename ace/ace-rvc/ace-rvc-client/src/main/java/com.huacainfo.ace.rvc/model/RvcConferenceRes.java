@@ -22,7 +22,7 @@ public class RvcConferenceRes {
     /**
      * 文件大小
      */
-    private Double resSize;
+    private Integer resSize;
 
     private String resURL;
 
@@ -55,11 +55,11 @@ public class RvcConferenceRes {
         this.resName = resName;
     }
 
-    public Double getResSize() {
+    public Integer getResSize() {
         return resSize;
     }
 
-    public void setResSize(Double resSize) {
+    public void setResSize(Integer resSize) {
         this.resSize = resSize;
     }
 
