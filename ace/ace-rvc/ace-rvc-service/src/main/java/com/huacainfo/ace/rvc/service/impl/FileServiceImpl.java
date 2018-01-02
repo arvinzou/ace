@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.FileUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.rvc.base.RvcBaseService;
 import com.huacainfo.ace.rvc.dao.RvcConferenceResDao;
 import com.huacainfo.ace.rvc.model.RvcConferenceRes;
@@ -15,7 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by Arvin on 2018/1/2.
@@ -25,7 +29,7 @@ public class FileServiceImpl extends RvcBaseService implements FileService {
 
     private static final String tempDir = "\\upload\\temp\\rvc";
 
-    public static final String http = "http://139.224.0.227/";
+    private String domain = "";
 
     @Autowired
     private IFile fileSaver;
@@ -41,7 +45,19 @@ public class FileServiceImpl extends RvcBaseService implements FileService {
         if (!tempFile.exists()) {
             tempFile.mkdirs();
         }
+
+        if (StringUtils.isEmpty(domain)) {
+            InputStream in = this.getClass().getClassLoader().getResourceAsStream("config.properties");
+            Properties propKit = new Properties();
+            try {
+                propKit.load(in);
+                domain = propKit.getProperty("fdfs.ip", "");
+            } catch (IOException e) {
+                logger.error("FileServiceImpl.init.error:{}", e);
+            }
+        }
     }
+
 
     /**
      * 文件上传
@@ -71,7 +87,7 @@ public class FileServiceImpl extends RvcBaseService implements FileService {
                 res.setResName(o.getOriginalFilename());
                 res.setResSize((int) o.getSize());
                 res.setResType(3);//1-文本内容，2-图片，3-文件，4-视频，5-会议纪要
-                res.setResURL(http + fileUri);
+                res.setResURL(domain + fileUri);
                 res.setCreateUserId("system");
                 res.setCreateUserName("system");
                 res.setCreateDate(DateUtil.getNowDate());
@@ -99,6 +115,7 @@ public class FileServiceImpl extends RvcBaseService implements FileService {
                          String conferenceId, String userId) {
         // 初始化临时路径
         init();
+
         // 转存本地
         byte[] bytes = Base64.decodeBase64(base64Str);
         String filePath = tempDir + File.separator + fileName + "." + suffix;
@@ -107,10 +124,10 @@ public class FileServiceImpl extends RvcBaseService implements FileService {
         // 上传至服务器
         String fileUri;
         try {
-            fileUri = fileSaver.saveFile(file, fileName);
+            fileUri = fileSaver.saveFile(file, fileName + "." + suffix);
             file.delete();
 
-            return fileUri;
+            return domain + fileUri;
         } catch (Exception e) {
             logger.error("FileServiceImpl.upload.error:{}", e);
             return "";
