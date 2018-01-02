@@ -37,9 +37,9 @@
 						姓名： <input name="name" type="text" style="width: 200px;height:25px" />
 						归属部门：
 						<input name="departmentId" class="easyui-combotree"
-				data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do?id=01',method:'get',animate: true,
+							   data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do?id=01',method:'get',animate: true,
                 lines:false,"
-				style='width: 200px; line-height: 25px; height: 25px;'>
+							   style='width: 200px;'>
 						<button class="btn btn-info" id="btn-search"
 							authority="${pageContext.request.contextPath}/users/findUsersList.do">
 							<i

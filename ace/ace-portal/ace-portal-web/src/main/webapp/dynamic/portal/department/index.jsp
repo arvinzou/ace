@@ -50,7 +50,7 @@
 							style='width: 200px; line-height: 25px; height: 25px;'> <a
 							href="javascript:clearQparams()">清除</a> 部门名称： <input
 							name="departmentName" type="text" maxlength="20"
-							style="width: 200px; height: 25px;" />
+							style="width: 200px;"/>
 						<button class="btn btn-info" id="btn-search"
 							authority="${pageContext.request.contextPath}/department/findDepartmentList.do">
 							<i

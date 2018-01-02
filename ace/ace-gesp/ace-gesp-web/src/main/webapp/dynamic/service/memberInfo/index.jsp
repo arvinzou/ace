@@ -37,9 +37,9 @@
 				                    editable:false,
 				                    panelHeight:'auto'">
 							入会时间:
-							<input class="easyui-datebox" name="startDate" style="width:120px;height:25px;line-height: 25px;">
+                        <input class="easyui-datebox" name="startDate" style="width:120px;">
 							至
-							<input class="easyui-datebox" name="endsDate" style="width:120px;height:25px;line-height: 25px;">
+                        <input class="easyui-datebox" name="endsDate" style="width:120px;">
 
 						<button class="btn btn-info" id="btn-search"
 							authority="${pageContext.request.contextPath}/memberInfo/findMemberInfoList.do">

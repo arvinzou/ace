@@ -27,8 +27,8 @@ public class DBHelpInfo {
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String pwd = "123456";
 	private static final String user = "root";
-	private static final String url = "jdbc:mysql://127.0.0.1/face" + "?user=" + user + "&password=" + pwd
-			+ "&useUnicode=true&characterEncoding=UTF-8";
+    private static final String url = "jdbc:mysql://127.0.0.1/portal" + "?user=" + user + "&password=" + pwd
+            + "&useUnicode=true&characterEncoding=UTF-8";
 	private static Connection getConnection = null;
 
 	public static void main(String[] args) {

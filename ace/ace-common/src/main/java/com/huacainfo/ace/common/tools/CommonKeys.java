@@ -21,4 +21,6 @@ public interface CommonKeys {
 	
 	String regModel="regModel";
 
+    String SESSION_USERINFO_KEY = "SESSION_USERINFO_KEY";
+
 }

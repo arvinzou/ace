@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.UserinfoDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Userinfo">
+        <id column="unionid" jdbcType="VARCHAR" property="unionid"/>
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
+        <result column="appid" jdbcType="VARCHAR" property="appid"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="access_token" jdbcType="VARCHAR" property="access_token"/>
+        <result column="refresh_token" jdbcType="VARCHAR" property="refresh_token"/>
+        <result column="scope" jdbcType="VARCHAR" property="scope"/>
+        <result column="expires_in" jdbcType="BIGINT" property="expires_in"/>
+    </resultMap>
+
+    <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.UserinfoVo"
+               extends="BaseResultMap">
+
+    </resultMap>
+    <sql id="Base_Column_List">
+        unionid, openid, appid, nickname, sex, city, province, country, headimgurl, access_token,
+        refresh_token, scope, expires_in
+    </sql>
+    <sql id="Blob_Column_List">
+        privilege
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from userinfo
+        where unionid = #{unionid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from userinfo
+        where unionid = #{unionid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.portal.model.Userinfo">
+        insert into userinfo (unionid, openid, appid,
+        nickname, sex, city,
+        province, country, headimgurl,
+        access_token, refresh_token, scope,
+        expires_in, privilege)
+        values (#{unionid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR},
+        #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+        #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR},
+        #{access_token,jdbcType=VARCHAR}, #{refresh_token,jdbcType=VARCHAR}, #{scope,jdbcType=VARCHAR},
+        #{expires_in,jdbcType=BIGINT}, #{privilege,jdbcType=LONGVARCHAR})
+    </insert>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Userinfo">
+        update userinfo
+        set openid = #{openid,jdbcType=VARCHAR},
+        appid = #{appid,jdbcType=VARCHAR},
+        nickname = #{nickname,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=VARCHAR},
+        city = #{city,jdbcType=VARCHAR},
+        province = #{province,jdbcType=VARCHAR},
+        country = #{country,jdbcType=VARCHAR},
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+        access_token = #{access_token,jdbcType=VARCHAR},
+        refresh_token = #{refresh_token,jdbcType=VARCHAR},
+        privilege = #{privilege,jdbcType=LONGVARCHAR},
+        scope = #{scope,jdbcType=VARCHAR},
+        expires_in = #{expires_in,jdbcType=BIGINT}
+        where unionid = #{unionid,jdbcType=VARCHAR}
+    </update>
+
+    <select id="isExit" resultType="int">
+        select count(*) from userinfo where unionId=#{unionId}
+    </select>
+
+
+    <sql id="whereCondition">
+        from userinfo where 0=0
+        <if test='condition.nickname!=null and condition.nickname!=""'>
+            and nickname like
+            concat(#{condition.nickname,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.appid!=null and condition.appid!=""'>
+            and appid =#{condition.appid,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY unionId
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+</mapper>
