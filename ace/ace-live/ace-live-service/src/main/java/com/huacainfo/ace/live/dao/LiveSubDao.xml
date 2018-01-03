@@ -24,7 +24,7 @@
         lastModifyUserName, lastModifyDate,content
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Base_Column_List"/>
         from live_sub
@@ -48,15 +48,10 @@
         #{content,jdbcType=LONGVARCHAR})
     </insert>
 
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.live.model.LiveSub">
+    <update id="updateByPrimaryKey">
         update live_sub
         set
-        remark = #{remark,jdbcType=VARCHAR},
-        content = #{content,jdbcType=LONGVARCHAR},
-        status = #{status,jdbcType=CHAR},
-        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
@@ -71,6 +66,9 @@
         </if>
         <if test='condition.uid!=null and condition.uid!=""'>
             and uid =#{condition.uid,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.status!=null and condition.status!=""'>
+            and status =#{condition.status,jdbcType=VARCHAR}
         </if>
     </sql>
     <select id="findCount" resultType="int">

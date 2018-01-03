@@ -17,7 +17,7 @@
     <sql id="Base_Column_List">
         id, rid, uid, status,content, createDate
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Base_Column_List"/>
         from live_msg
@@ -37,13 +37,10 @@
     </insert>
 
 
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.live.model.LiveMsg">
+    <update id="updateByPrimaryKey">
         update live_msg
-        set rid = #{rid,jdbcType=VARCHAR},
-        uid = #{uid,jdbcType=VARCHAR},
-        content = #{content,jdbcType=LONGVARCHAR},
-        status = #{status,jdbcType=CHAR},
-        createDate = #{createDate,jdbcType=TIMESTAMP}
+        set
+        status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
@@ -55,6 +52,12 @@
         </if>
         <if test='condition.rid!=null and condition.rid!=""'>
             and rid =#{condition.rid,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.uid!=null and condition.uid!=""'>
+            and uid =#{condition.uid,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.status!=null and condition.status!=""'>
+            and status =#{condition.status,jdbcType=VARCHAR}
         </if>
     </sql>
     <select id="findCount" resultType="int">
