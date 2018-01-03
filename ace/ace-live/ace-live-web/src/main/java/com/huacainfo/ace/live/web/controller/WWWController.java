@@ -18,6 +18,7 @@ import com.huacainfo.ace.live.web.websocket.MyWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,6 +47,9 @@ public class WWWController extends LiveBaseController {
 
     @Autowired
     private LiveSubService liveSubService;
+
+    @Autowired
+    private RedisOperations<String, Object> redisTemplate;
 
     /**
      * @throws
@@ -131,5 +135,21 @@ public class WWWController extends LiveBaseController {
             }
         }
         return new MessageResponse(0, "OK");
+    }
+
+    @RequestMapping(value = "/pop.do")
+    @ResponseBody
+    public SingleResult<Long> pop(String rid) throws Exception {
+        SingleResult<Long> rst = new SingleResult(0, "OK");
+        logger.debug("{}", rid);
+        String keypop = rid + ".pop";
+        Long pop = (Long) this.redisTemplate.opsForValue().get(keypop);
+        if (pop == null) {
+            pop = new Long(0);
+            this.redisTemplate.opsForValue().set(keypop, pop);
+        }
+        this.redisTemplate.opsForValue().set(keypop, new Long(pop + 1));
+        rst.setValue(pop);
+        return rst;
     }
 }
