@@ -7,6 +7,10 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.live.model.Live;
+import com.huacainfo.ace.live.model.LiveMsg;
+import com.huacainfo.ace.live.model.LiveSub;
+import com.huacainfo.ace.live.service.LiveMsgService;
+import com.huacainfo.ace.live.service.LiveSubService;
 import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.vo.LiveQVo;
 import com.huacainfo.ace.live.vo.LiveVo;
@@ -32,6 +36,12 @@ public class WWWController extends LiveBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private WWWService wwwService;
+
+    @Autowired
+    private LiveMsgService liveMsgService;
+
+    @Autowired
+    private LiveSubService liveSubService;
 
     /**
      * @throws
@@ -64,5 +74,41 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public Map<String, Object> getLive(String id) throws Exception {
         return this.wwwService.getLive(id);
+    }
+
+    /**
+     * @throws
+     * @Title:insertLiveMsg
+     * @Description: TODO(添加图文直播)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    @RequestMapping(value = "/insertLiveMsg.do")
+    @ResponseBody
+    public MessageResponse insertLiveMsg(String jsons) throws Exception {
+        LiveMsg obj = JSON.parseObject(jsons, LiveMsg.class);
+        return this.liveMsgService
+                .insertLiveMsg(obj);
+    }
+
+    /**
+     * @throws
+     * @Title:insertLiveSub
+     * @Description: TODO(添加图文直播)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    @RequestMapping(value = "/insertLiveSub.do")
+    @ResponseBody
+    public MessageResponse insertLiveSub(String jsons) throws Exception {
+        LiveSub obj = JSON.parseObject(jsons, LiveSub.class);
+        return this.liveSubService
+                .insertLiveSub(obj);
     }
 }
