@@ -1,7 +1,6 @@
 package com.huacainfo.ace.rvc.web.controller;
 
 import com.huacainfo.ace.common.tools.StringUtils;
-import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.model.RvcBaseUser;
 import com.huacainfo.ace.rvc.service.UserService;
 import com.huacainfo.ace.rvc.util.ResultUtil;
@@ -41,8 +40,6 @@ public class UserController extends BaseController {
         }
 
         try {
-            String a = AuthorizeApi.ACCOUNT_TOKEN;
-            String b = AuthorizeApi.SSO_COOKIE_KEY;
             RvcBaseUser user = userService.login(userId);
             return ResultUtil.success(user);
         } catch (Exception e) {

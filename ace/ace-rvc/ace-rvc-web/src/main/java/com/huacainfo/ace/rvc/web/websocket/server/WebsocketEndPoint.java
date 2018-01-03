@@ -1,5 +1,9 @@
 package com.huacainfo.ace.rvc.web.websocket.server;
 
+import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.common.tools.SpringUtils;
+import com.huacainfo.ace.rvc.service.ChatLogService;
+import com.huacainfo.ace.rvc.vo.ChatDTO;
 import com.huacainfo.ace.rvc.web.common.utils.SessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +25,25 @@ import java.util.Map;
 @ServerEndpoint("/live/websocket/{rid}/{uid}")
 public class WebsocketEndPoint {
 
+
+    private ChatLogService chatLogService;
+
+    /**
+     * 解决无法自动注入问题
+     *
+     * @return ChatLogService
+     */
+    private ChatLogService getInstance() {
+        if (null == chatLogService) {
+            return (ChatLogService) SpringUtils.getBean("chatLogServiceImpl");
+        }
+
+        return chatLogService;
+    }
+
     //日志处理
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final int TEXT = 1;
-    private final int IMAGE = 2;
-    private final int FILE = 3;
 
     /**
      * 打开连接时触发
@@ -41,9 +58,11 @@ public class WebsocketEndPoint {
         //放入群发列表
         SessionUtils.put(rid, uid, session);
 
-        String notice = uid + "已进入聊天室，大家欢迎!~";
         //
-        broadcast(notice, this.TEXT);
+        String welcome = getInstance().getWelcomeStatement(rid,uid);
+
+        //
+        broadcast(rid, uid, welcome);
     }
 
 
@@ -58,13 +77,19 @@ public class WebsocketEndPoint {
     @OnMessage
     public void onMessage(@PathParam("rid") String rid, @PathParam("uid") String uid, String message) {
         logger.info("uid:" + uid + ",Got you message:" + message);
-        if (message.startsWith("image:")) {
-            String imageURI = "http://zx.huacainfo.com/group1/M00/00/11/i-AA41ow1qeAF4JuAACEiGSVNx8324.jpg?filename=%E5%9F%B9%E8%AE%AD%E6%95%99%E8%82%B21.jpg";
-            //发送图片
-            broadcast(imageURI, this.IMAGE);
-        } else {
-            broadcast(uid + " say:" + message, this.TEXT);
+
+        ChatDTO chatMessage = JsonUtil.toObject(message, ChatDTO.class);
+        chatMessage.setRid(rid);
+        chatMessage.setUid(uid);
+
+        ChatDTO reply = getInstance().parseMessage(chatMessage);
+        //出现错误，只把错误信息返回给当前客户端
+        if (reply.getAction().equals(ChatDTO.ACTION_ERROR)) {
+            sendMessage(rid, uid, reply.toString());
+            return;
         }
+        //广播消息
+        broadcast(rid, uid, reply.toString());
     }
 
 
@@ -121,41 +146,27 @@ public class WebsocketEndPoint {
         }
     }
 
-    /**
-     * 发送图片
-     *
-     * @param imageUri 图片URL地址
-     */
-    private void sendImage(String rid, String uid, String imageUri) {
-
-        String imageContent = "<img src='" + imageUri + "'>";
-        sendMessage(rid, uid, imageContent);
-    }
-
 
     /**
      * 广播消息
      *
-     * @param message 消息主体
-     * @param type    消息类型
+     * @param rid      发送房间号
+     * @param uid      发送人表示
+     * @param replyTxt 回复文本
      */
-    private void broadcast(String message, int type) {
+    private void broadcast(String rid, String uid, String replyTxt) {
 //        String key;
 //        Session client;
         String[] keyArray;
         for (Map.Entry<String, Session> entry : SessionUtils.clients.entrySet()) {
             keyArray = entry.getKey().split("_");
-            switch (type) {
-                case TEXT://文本发送
-                    sendMessage(keyArray[0], keyArray[1], message);
-                    break;
-                case IMAGE://图片发送
-                    sendImage(keyArray[0], keyArray[1], message);
-                    break;
-                default:
-                    break;
+            //TODO 是否区别回复本人时的文本排布格式
+            if (uid.equals(keyArray[1])) {
+                sendMessage(keyArray[0], keyArray[1], replyTxt);
+            } else {
+                sendMessage(keyArray[0], keyArray[1], replyTxt);
             }
-
         }
     }
+
 }

@@ -1,4 +1,5 @@
 import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.FileUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.kedapi.common.constant.VideoConstant;
@@ -78,12 +79,12 @@ public class HelloWorld {
     public void test() {
 //        System.out.println(GUIDUtil.getGUID() + "\n" + DateUtil.getNow());
 
-
-        String token = "f129d53b6d8555a832932ef316b298e7";
-        String s = "eos_style_cookie=default; SSO_COOKIE_KEY=8e5fb19c-d6e7-4efd-af78-adff8be1da84; Expires=Wed, 10-Jan-2018 02:39:22 GMT; Path=/";
-
-//        VRS
-        vrs(token, "admin1");
+        try {
+            String a = FileUtil.encodeBase64("C:\\Users\\Arvin\\Desktop\\科达沟通01.txt");
+            System.out.println(a);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

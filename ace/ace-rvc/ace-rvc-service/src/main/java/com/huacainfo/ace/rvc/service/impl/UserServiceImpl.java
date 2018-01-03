@@ -47,6 +47,18 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * redis方式获取用户信息
+     *
+     * @param userId 用户ID-rvc_base_user.userId
+     * @return RvcBaseUser
+     */
+    @Override
+    public RvcBaseUser getByUserIdWithRedis(String userId) {
+        //TODO 接入Redis功能
+        return rvcBaseUserDao.getByUserId(userId);
+    }
+
+    /**
      * 从浪潮方获取登录人员信息
      *
      * @param userId 浪潮 userId

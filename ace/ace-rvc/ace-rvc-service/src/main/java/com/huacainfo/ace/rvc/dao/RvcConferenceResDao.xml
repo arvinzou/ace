@@ -18,7 +18,7 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
-        <result column="resSize" jdbcType="DOUBLE" property="resSize"/>
+        <result column="resSize" jdbcType="INTEGER" property="resSize"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, confId, conferenceId, resType, resURL, resText, displaySeq, remark, status, createUserId, 
@@ -48,7 +48,7 @@
       #{displaySeq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
-      #{resName,jdbcType=VARCHAR}, #{resSize,jdbcType=DOUBLE}
+      #{resName,jdbcType=VARCHAR}, #{resSize,jdbcType=INTEGER}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.rvc.model.RvcConferenceRes">
@@ -156,7 +156,7 @@
                 #{resName,jdbcType=VARCHAR},
             </if>
             <if test="resSize != null">
-                #{resSize,jdbcType=DOUBLE},
+                #{resSize,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -209,7 +209,7 @@
                 resName = #{resName,jdbcType=VARCHAR},
             </if>
             <if test="resSize != null">
-                resSize = #{resSize,jdbcType=DOUBLE},
+                resSize = #{resSize,jdbcType=INTEGER},
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
@@ -231,7 +231,7 @@
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
       resName = #{resName,jdbcType=VARCHAR},
-      resSize = #{resSize,jdbcType=DOUBLE}
+      resSize = #{resSize,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 

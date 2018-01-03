@@ -32,4 +32,6 @@ public interface RvcBaseUserDao {
      * @return list
      */
     List<RvcBaseUser> getAll();
+
+
 }
