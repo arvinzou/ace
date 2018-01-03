@@ -14,6 +14,7 @@ import com.huacainfo.ace.live.service.LiveSubService;
 import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.vo.LiveQVo;
 import com.huacainfo.ace.live.vo.LiveVo;
+import com.huacainfo.ace.live.web.websocket.MyWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.websocket.Session;
+import javax.websocket.server.PathParam;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -110,5 +114,22 @@ public class WWWController extends LiveBaseController {
         LiveSub obj = JSON.parseObject(jsons, LiveSub.class);
         return this.liveSubService
                 .insertLiveSub(obj);
+    }
+
+    @RequestMapping(value = "/sendMsg.do")
+    @ResponseBody
+    public MessageResponse sendMsg(String message, String rid) throws Exception {
+        logger.debug("{} {}", rid, message);
+
+        //群发消息
+        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+            try {
+                item.sendMessage(message);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
+        return new MessageResponse(0, "OK");
     }
 }
