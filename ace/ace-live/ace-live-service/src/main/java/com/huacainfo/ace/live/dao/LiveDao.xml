@@ -141,4 +141,12 @@
         status,remark,rtmpUrl,content,mp4Url, imageSrc, latitude, longitude, date_format(createDate,'%Y-%m-%d %H:%i')
         createDate from live where id=#{id}
     </select>
+
+    <update id="updateNopPop">
+        update live
+        set
+        nop = #{nop,jdbcType=BIGINT},
+        pop = #{pop,jdbcType=BIGINT}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

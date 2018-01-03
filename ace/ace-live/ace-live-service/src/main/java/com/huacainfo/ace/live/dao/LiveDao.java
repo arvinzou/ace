@@ -30,4 +30,6 @@ public interface LiveDao {
 
     Map<String, Object> getLive(String id);
 
+    int updateNopPop(@Param("id") String id, @Param("nop") long nop, @Param("pop") long pop);
+
 }
