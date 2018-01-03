@@ -26,7 +26,7 @@ Welcome<br/>
       var websocket = null;
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocket = new ReconnectingWebSocket("ws://127.0.0.1/live/websocket/A01/M001");
+          websocket = new ReconnectingWebSocket("ws://zx.huacainfo.com/live/websocket/A01/M001");
       }
       else{
           alert('Not support websocket');

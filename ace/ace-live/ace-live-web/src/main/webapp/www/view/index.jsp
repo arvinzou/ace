@@ -5,6 +5,9 @@
     <title>hello world</title>
 </head>
 <body>
-<h2>hello world</h2>
+<div style="text-align:center">
+    <h2>${SESSION_USERINFO_KEY.nickname}</h2>
+    <img src="${SESSION_USERINFO_KEY.headimgurl}" style="max-height:100px">
+</div>
 </body>
 </html>

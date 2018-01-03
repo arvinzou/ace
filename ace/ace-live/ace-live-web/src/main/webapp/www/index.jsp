@@ -1,79 +1,31 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-session.setAttribute("KEY0001","M009485553455");
-%>
-
-<!DOCTYPE HTML>
-<html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html lang="cn">
 <head>
-
-    <title>My WebSocket</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>直播</title>
+    <jsp:include page="/dynamic/common/common-www.jsp"/>
 </head>
-<script src="${pageContext.request.contextPath}/content/common/js/reconnecting-websocket.js"></script>
-<style>
-
-
-</style>
-<body>
-
-Welcome<br/>
-<input id="text" type="text"/>
-<button onclick="send()">Send</button>
-<button onclick="closeWebSocket()">Close</button>
-<div id="message">
-</div>
-</body>
-
-<script type="text/javascript">
-      var websocket = null;
-      //判断当前浏览器是否支持WebSocket
-      if('WebSocket' in window){
-          websocket = new ReconnectingWebSocket("ws://127.0.0.1/live/websocket/A01/M001");
-      }
-      else{
-          alert('Not support websocket');
-      }
-
-      //连接发生错误的回调方法
-      websocket.onerror = function(){
-          setMessageInnerHTML("error");
-      };
-
-      //连接成功建立的回调方法
-      websocket.onopen = function(event){
-          setMessageInnerHTML("open");
-      };
-
-      //接收到消息的回调方法
-      websocket.onmessage = function(){
-          setMessageInnerHTML(event.data);
-      };
-
-      //连接关闭的回调方法
-      websocket.onclose = function(){
-          setMessageInnerHTML("close");
-      };
-
-      //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-      window.onbeforeunload = function(){
-          websocket.close();
-      };
-
-      //将消息显示在网页上
-      function setMessageInnerHTML(innerHTML){
-          document.getElementById('message').innerHTML += innerHTML + '<br/>';
-      }
-
-      //关闭连接
-      function closeWebSocket(){
-          websocket.close();
-      }
-
-      //发送消息
-      function send(){
-          var message = document.getElementById('text').value;
-          websocket.send(message);
-      }
-
+<script id="pagetmpl" type="text/x-dot-template">
+    <h1>{{=it.name}}</h1>
 </script>
+<body ontouchstart>
+<div class="weui-pull-to-refresh__layer">
+    <div class='weui-pull-to-refresh__arrow'></div>
+    <div class='weui-pull-to-refresh__preloader'></div>
+    <div class="down">下拉刷新</div>
+    <div class="up">释放刷新</div>
+    <div class="refresh">正在刷新</div>
+</div>
+
+<div class="page__bd">
+
+</div>
+<jsp:include page="/dynamic/common/footer-1-www.jsp"/>
+
+<script src="${pageContext.request.contextPath}/content/www/live/controller.js"></script>
+</body>
 </html>

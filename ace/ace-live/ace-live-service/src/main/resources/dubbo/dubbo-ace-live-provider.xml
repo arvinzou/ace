@@ -23,5 +23,7 @@
                    ref="analysisService"/>
     <dubbo:service interface="com.huacainfo.ace.live.service.LiveService"
                    ref="liveService"/>
+    <dubbo:service interface="com.huacainfo.ace.live.service.WWWService"
+                   ref="wwwService"/>
 
 </beans>

@@ -132,4 +132,13 @@
         live where
         name=#{name}
     </select>
+    <select id="getLiveList" resultType="map">
+        select id, name, category, deptName, date_format(birthday,'%Y-%m-%d %H:%i') birthday, nop, pop, addr, imageSrc,
+        status, date_format(createDate,'%Y-%m-%d %H:%i') createDate from live order by birthday desc
+    </select>
+    <select id="getLive" resultType="map">
+        select id, name, category, deptName, date_format(birthday,'%Y-%m-%d %H:%i') birthday, nop, pop, addr, imageSrc,
+        status,remark,rtmpUrl,content,mp4Url, imageSrc, latitude, longitude, date_format(createDate,'%Y-%m-%d %H:%i')
+        createDate from live where id=#{id}
+    </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.huacainfo.ace.portal.model;
+package com.huacainfo.ace.common.model;
 
 public class Userinfo implements java.io.Serializable {
 
