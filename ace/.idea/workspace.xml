@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_freemarker_freemarker_2_3_23.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/java/com/huacainfo/ace/backend/mq/LiveMsgCallbackDealer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/java/com/huacainfo/ace/backend/mq/LiveSubCallbackDealer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/java/com/huacainfo/ace/backend/mq/threads/LiveMsgCallBackThread.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/java/com/huacainfo/ace/backend/mq/threads/LiveSubCallBackThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/pom.xml" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/resources/applicationContext.xml" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/resources/applicationContext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/resources/spring/spring-ace-kernel-backend.xml" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/resources/spring/spring-ace-kernel-backend.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" afterPath="$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/websocket/MyWebSocket.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/websocket/MyWebSocket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -103,11 +87,11 @@
         <entry file="file://$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/java/com/huacainfo/ace/backend/mq/threads/LiveMsgCallBackThread.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="161">
-              <caret line="60" column="51" lean-forward="false" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
+              <caret line="64" column="51" lean-forward="false" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1094#1095#0" expanded="true" />
-                <element signature="e#1177#1178#0" expanded="true" />
+                <element signature="e#1157#1158#0" expanded="true" />
+                <element signature="e#1249#1250#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2226,13 +2210,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00291" summary="人脸识别">
-      <created>1511699192327</created>
-      <option name="number" value="00291" />
-      <option name="presentableId" value="LOCAL-00291" />
-      <option name="project" value="LOCAL" />
-      <updated>1511699192327</updated>
-    </task>
     <task id="LOCAL-00292" summary="人脸识别">
       <created>1511703334250</created>
       <option name="number" value="00292" />
@@ -2569,7 +2546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1514971556358</updated>
     </task>
-    <option name="localTasksCounter" value="340" />
+    <task id="LOCAL-00340" summary="融媒直播">
+      <created>1515030419102</created>
+      <option name="number" value="00340" />
+      <option name="presentableId" value="LOCAL-00340" />
+      <option name="project" value="LOCAL" />
+      <updated>1515030419104</updated>
+    </task>
+    <option name="localTasksCounter" value="341" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -3026,8 +3010,8 @@
           <caret line="102" column="116" lean-forward="false" selection-start-line="102" selection-start-column="116" selection-end-line="102" selection-end-column="116" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2449#2462#0" expanded="true" />
-            <element signature="e#4237#4253#0" expanded="true" />
+            <element signature="e#2450#2463#0" expanded="true" />
+            <element signature="e#4238#4254#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3141,11 +3125,11 @@
     <entry file="file://$PROJECT_DIR$/ace-kernel/ace-kernel-backend/src/main/java/com/huacainfo/ace/backend/mq/threads/LiveMsgCallBackThread.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
-          <caret line="60" column="51" lean-forward="false" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
+          <caret line="64" column="51" lean-forward="false" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1094#1095#0" expanded="true" />
-            <element signature="e#1177#1178#0" expanded="true" />
+            <element signature="e#1157#1158#0" expanded="true" />
+            <element signature="e#1249#1250#0" expanded="true" />
           </folding>
         </state>
       </provider>
