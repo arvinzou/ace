@@ -173,3 +173,73 @@ function audit(id,status,rid,message){
             }
         });
 }
+function rowadd(data) {
+	jQuery(cfg.grid_selector).jqGrid('addRowData', uuid(),data);
+}
+function add() {
+	var data={
+        id:"ieu44009999",
+        rid:"c15f484b-bd30-4111-904d-123ca617180e",
+        uid:"oFvIjw8x1--0lQkUhO1Ta3L59o3c",
+        content:"大家好",
+        status:"1"
+	}
+	data.status=rsd(data.status, "113");
+	data.opt=renderOpt(data.id,data.rid,data.rid,data.content);
+	rowadd(data);
+}
+function renderOpt(id,title,rid,message) {
+	var html = [];
+	html.push('<a data-rel="tooltip" data-placement="top" title="通过" class="blue" href="javascript:audit(\'' + id+ '\',2,\'' + rid+ '\',\'' + message+ '\')"><i class="ace-icon fa fa-unlock bigger-130"></i></a>');
+    html.push('<a data-rel="tooltip" data-placement="top" title="退回" class="blue" href="javascript:audit(\'' + id+ '\',3)"><i class="ace-icon fa fa-lock bigger-130"></i></a>');
+	html.push('<a target="_blank" href="');
+	html.push('javascript:preview(\'' + id + '\',\'' + title + '\')');
+	html.push('"');
+	html.push('><span class="badge badge-info">查看</span></a>');
+	return html.join(' ');
+}
+self.setInterval("add()",5000)
+
+      var websocket1 = null;
+      //判断当前浏览器是否支持WebSocket
+      if('WebSocket' in window){
+          websocket1 = new ReconnectingWebSocket("ws://zx.huacainfo.com/live/websocket/c15f484b-bd30-4111-904d-123ca617180e/oFvIjw8x1--0lQkUhO1Ta3L59o3c/livemsg");
+      }
+      else{
+          alert('Not support websocket1');
+      }
+
+      //连接发生错误的回调方法
+      websocket1.onerror = function(){
+          alert(" websocket1.onerror");
+      };
+
+      //连接成功建立的回调方法
+      websocket1.onopen = function(event){
+
+      };
+
+      //接收到消息的回调方法
+      websocket1.onmessage = function(){
+          setMessageInnerHTML(event.data);
+      };
+
+      //连接关闭的回调方法
+      websocket1.onclose = function(){
+          
+      };
+
+      //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket1连接，防止连接还没断开就关闭窗口，server端会抛异常。
+      window.onbeforeunload = function(){
+          websocket1.close();
+      };
+
+      //将消息显示在网页上
+      function setMessageInnerHTML(innerHTML){
+          document.getElementById('message').innerHTML += innerHTML + '<br/>';
+      }
+
+      //关闭连接
+      function closeWebSocket(){
+          websocket1.close();
+      }

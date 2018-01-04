@@ -14,7 +14,7 @@ import com.huacainfo.ace.live.service.LiveSubService;
 import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.vo.LiveQVo;
 import com.huacainfo.ace.live.vo.LiveVo;
-import com.huacainfo.ace.live.web.websocket.MyWebSocket;
+import com.huacainfo.ace.live.web.websocket.WebSocketSub;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,7 +126,7 @@ public class WWWController extends LiveBaseController {
         logger.debug("{} {}", rid, message);
 
         //群发消息
-        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+        for (WebSocketSub item : WebSocketSub.rooms.get(rid)) {
             try {
                 item.sendMessage(message);
             } catch (IOException e) {

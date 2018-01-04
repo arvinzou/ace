@@ -38,6 +38,10 @@ public class TaskServiceImpl implements TaskService {
     public void updateNopPop() throws Exception {
         this.logger.info("jobs updateNopPop executed ");
         String[] roomkeys = (String[]) this.redisTemplate.opsForValue().get("live.rooms.keys");
+        if (roomkeys == null) {
+            logger.info("redisTemplate opsForValue roomkeys empty");
+            return;
+        }
         for (String rid : roomkeys) {
             logger.info("redisTemplate opsForValue rid -> {}", rid);
             Long nop = (Long) this.redisTemplate.opsForValue().get(rid + ".nop");
