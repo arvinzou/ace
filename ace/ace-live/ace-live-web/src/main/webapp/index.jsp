@@ -26,7 +26,7 @@ Welcome<br/>
       var websocket = null;
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocket = new ReconnectingWebSocket("ws://127.0.0.1/live/websocket/c15f484b-bd30-4111-904d-123ca617180e/M001");
+          websocket = new ReconnectingWebSocket("ws://127.0.0.1/live/websocket/c15f484b-bd30-4111-904d-123ca617180e/oFvIjw8x1--0lQkUhO1Ta3L59o3c/livemsg");
       }
       else{
           alert('Not support websocket');

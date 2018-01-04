@@ -15,6 +15,7 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.websocket.OnClose;
@@ -27,11 +28,13 @@ import javax.websocket.server.PathParam;
 import javax.websocket.EndpointConfig;
 import javax.servlet.http.HttpSession;
 
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
+
 /**
  * Created by chenxiaoke on 2017/12/19.
  */
 //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
-@ServerEndpoint(value = "/websocket/{rid}/{uid}", configurator = HttpSessionConfigurator.class)
+@ServerEndpoint(value = "/websocket/{rid}/{uid}/{topic}", configurator = HttpSessionConfigurator.class)
 public class MyWebSocket {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
@@ -50,9 +53,12 @@ public class MyWebSocket {
 
     private RedisOperations<String, Object> redisTemplate;
 
+    private KafkaProducerService kafkaProducerService;
+
 
     public MyWebSocket() {
         this.redisTemplate = (RedisOperations) SpringUtils.getBean("redisTemplate");
+        this.kafkaProducerService = (KafkaProducerService) SpringUtils.getBean("kafkaProducerService");
     }
 
     public synchronized void addSession(MyWebSocket webSocket) {
@@ -77,7 +83,7 @@ public class MyWebSocket {
      * @param session 可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据
      */
     @OnOpen
-    public void onOpen(Session session, EndpointConfig config, @PathParam("rid") String rid, @PathParam("uid") String uid) {
+    public void onOpen(Session session, EndpointConfig config, @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("topic") String topic) {
         this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         this.session = session;
         this.rid = rid;
@@ -95,7 +101,7 @@ public class MyWebSocket {
      * 连接关闭调用的方法
      */
     @OnClose
-    public void onClose(@PathParam("rid") String rid, @PathParam("uid") String uid) {
+    public void onClose(@PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("topic") String topic) {
         removeSession(this);  //从set中删除
         subOnlineCount();           //在线数减1
         logger.debug("有一连接关闭！当前在线人数为{}", getOnlineCount());
@@ -109,18 +115,25 @@ public class MyWebSocket {
      * @param session 可选的参数
      */
     @OnMessage
-    public void onMessage(String message, Session session, @PathParam("rid") String rid, @PathParam("uid") String uid) {
+    public void onMessage(String message, Session session, @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("topic") String topic) {
         logger.debug("rid:{} uid:{} 来自客户端的消息:{}", rid, uid, message);
 
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("rid", rid);
+        data.put("uid", uid);
+        data.put("message", message);
+        this.logger.info("{}", data);
+        this.kafkaProducerService.sendMsg(topic, data);
+
         //群发消息
-        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+       /* for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
             try {
                 item.sendMessage(message);
             } catch (IOException e) {
                 logger.error(e.getMessage());
                 continue;
             }
-        }
+        }*/
     }
 
     /**
