@@ -80,6 +80,7 @@ pageEncoding="utf-8"%>
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
+<script src="${pageContext.request.contextPath}/content/common/js/reconnecting-websocket.js"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/liveMsg/config.js?version=${cfg.version}"></script>
 <script

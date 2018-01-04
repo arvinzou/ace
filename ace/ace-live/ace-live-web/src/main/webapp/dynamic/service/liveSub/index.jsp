@@ -47,7 +47,7 @@ pageEncoding="utf-8"%>
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
-
+                    <div id="message"></div>
 
                 </div>
             </div>
@@ -78,6 +78,7 @@ pageEncoding="utf-8"%>
 </div>
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
+<script src="${pageContext.request.contextPath}/content/common/js/reconnecting-websocket.js"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/liveSub/config.js?version=${cfg.version}"></script>
 <script

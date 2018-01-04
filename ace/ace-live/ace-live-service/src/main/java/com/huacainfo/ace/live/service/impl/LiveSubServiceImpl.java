@@ -1,10 +1,12 @@
 package com.huacainfo.ace.live.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+import com.alibaba.fastjson.JSON;
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
+import com.huacainfo.ace.common.tools.HttpUtils;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class LiveSubServiceImpl implements LiveSubService {
     private LiveSubDao liveSubDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
     /**
      * @throws
@@ -93,6 +97,11 @@ public class LiveSubServiceImpl implements LiveSubService {
         o.setCreateDate(new Date());
         o.setStatus("1");
         this.liveSubDao.insert(o);
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("rid", "rsub");
+        data.put("message", JSON.toJSON(o).toString());
+        this.logger.info("{}", data);
+        this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
         return new MessageResponse(0, "添加图文直播完成！");
     }
 

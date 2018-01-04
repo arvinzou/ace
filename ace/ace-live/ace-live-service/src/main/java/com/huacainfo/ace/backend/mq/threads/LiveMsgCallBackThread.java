@@ -1,8 +1,8 @@
 package com.huacainfo.ace.backend.mq.threads;
 
-import com.huacainfo.ace.common.result.MessageResponse;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.live.model.LiveMsg;
 import com.huacainfo.ace.live.service.LiveMsgService;
@@ -11,8 +11,6 @@ import kafka.consumer.KafkaStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class LiveMsgCallBackThread extends Thread {

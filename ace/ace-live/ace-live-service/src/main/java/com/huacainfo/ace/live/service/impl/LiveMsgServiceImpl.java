@@ -1,10 +1,10 @@
 package com.huacainfo.ace.live.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+import com.alibaba.fastjson.JSON;
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,9 @@ public class LiveMsgServiceImpl implements LiveMsgService {
     private LiveMsgDao liveMsgDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
     /**
      * @throws
@@ -89,6 +92,11 @@ public class LiveMsgServiceImpl implements LiveMsgService {
         o.setCreateDate(new Date());
         o.setStatus("1");
         this.liveMsgDao.insert(o);
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("rid", "rmsg");
+        data.put("message", JSON.toJSON(o).toString());
+        this.logger.info("{}", data);
+        this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
         return new MessageResponse(0, "添加互动内容完成！");
     }
 
