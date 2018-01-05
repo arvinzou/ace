@@ -43,6 +43,7 @@
     <import resource="classpath:spring/spring-ace-common-monitor.xml"/>
     <import resource="classpath:spring/spring-ace-common-dao.xml"/>
     <import resource="classpath:spring/spring-ace-live-service.xml"/>
+    <import resource="classpath:spring/spring-ace-live-backend.xml"/>
     <import resource="classpath:dubbo/dubbo-ace-live-provider.xml"/>
     <import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml"/>
 

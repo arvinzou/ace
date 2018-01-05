@@ -20,4 +20,12 @@
     <dubbo:reference interface="com.huacainfo.ace.live.service.LiveService"
                      id="liveService"/>
 
+    <dubbo:reference interface="com.huacainfo.ace.live.service.LiveSubService"
+                     id="liveSubService"/>
+
+    <dubbo:reference interface="com.huacainfo.ace.live.service.LiveMsgService"
+                     id="liveMsgService"/>
+
+    <dubbo:reference interface="com.huacainfo.ace.live.service.WWWService"
+                     id="wwwService"/>
 </beans>

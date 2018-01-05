@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.portal.dao.UserinfoDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Userinfo">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.common.model.Userinfo">
         <id column="unionid" jdbcType="VARCHAR" property="unionid"/>
         <result column="openid" jdbcType="VARCHAR" property="openid"/>
         <result column="appid" jdbcType="VARCHAR" property="appid"/>
@@ -40,7 +40,7 @@
         delete from userinfo
         where unionid = #{unionid,jdbcType=VARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.portal.model.Userinfo">
+    <insert id="insert" parameterType="com.huacainfo.ace.common.model.Userinfo">
         insert into userinfo (unionid, openid, appid,
         nickname, sex, city,
         province, country, headimgurl,
@@ -54,7 +54,7 @@
     </insert>
 
 
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Userinfo">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.common.model.Userinfo">
         update userinfo
         set openid = #{openid,jdbcType=VARCHAR},
         appid = #{appid,jdbcType=VARCHAR},
@@ -73,7 +73,7 @@
     </update>
 
     <select id="isExit" resultType="int">
-        select count(*) from userinfo where unionId=#{unionId}
+        select count(*) from userinfo where unionid=#{unionid}
     </select>
 
 

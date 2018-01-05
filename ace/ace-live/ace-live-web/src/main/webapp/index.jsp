@@ -14,6 +14,7 @@ session.setAttribute("KEY0001","M009485553455");
 
 
 </style>
+<jsp:include page="/dynamic/common/common.jsp"/>
 <body>
 
 Welcome<br/>
@@ -26,7 +27,7 @@ Welcome<br/>
       var websocket = null;
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocket = new ReconnectingWebSocket("ws://127.0.0.1/live/websocket/A01/M001");
+          websocket = new ReconnectingWebSocket("ws://"+websocketurl+"/live/websocket/c15f484b-bd30-4111-904d-123ca617180e/oFvIjw8x1--0lQkUhO1Ta3L59o3c/livemsg");
       }
       else{
           alert('Not support websocket');
@@ -72,5 +73,7 @@ Welcome<br/>
           var message = document.getElementById('text').value;
           websocket.send(message);
       }
+
+      setInterval('send()',10000)
   </script>
 </html>

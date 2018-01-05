@@ -1,19 +1,11 @@
 package com.huacainfo.ace.common.tools;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -30,6 +22,18 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class HttpUtils {
 
@@ -222,8 +226,42 @@ public class HttpUtils {
 		return responseContent;
 	}
 
+    public static String sslPost(String url, Map<String, String> map, String charset) {
+        HttpClient httpClient = null;
+        HttpPost httpPost = null;
+        String result = null;
+        try {
+            httpClient = new SSLClient();
+            httpPost = new HttpPost(url);
+            //设置参数
+            List<NameValuePair> list = new ArrayList<NameValuePair>();
+            if (map != null) {
+                Iterator iterator = map.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Entry<String, String> elem = (Entry<String, String>) iterator.next();
+                    list.add(new BasicNameValuePair(elem.getKey(), elem.getValue()));
+                }
+            }
+
+            if (list.size() > 0) {
+                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list, charset);
+                httpPost.setEntity(entity);
+            }
+            HttpResponse response = httpClient.execute(httpPost);
+            if (response != null) {
+                HttpEntity resEntity = response.getEntity();
+                if (resEntity != null) {
+                    result = EntityUtils.toString(resEntity, charset);
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
 	public static void main(String args[]) throws URISyntaxException,
 			MalformedURLException, IOException {
-		System.out.println(HttpUtils.httpsGet("https://api.map.baidu.com/place/v2/search?query=酒店&scope=1&filter=&coord_type=2&page_size=10&page_num=0&output=json&ak=cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB&sn=&timestamp=&radius=2000&ret_coordtype=gcj02ll&location=29.031673%2C111.698497"));
-	}
+        System.out.println(HttpUtils.sslPost("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx29ecb720b03ea466&secret=03ea9a47442c14208943043e62114fc6&code=0012s83S0BIVL92VMV1S0lg63S02s83a&grant_type=authorization_code", null, "utf-8"));
+    }
 }

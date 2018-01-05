@@ -15,12 +15,17 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.huacainfo</groupId>
-			<artifactId>ace-live-service</artifactId>
+            <artifactId>ace-common-web</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.huacainfo</groupId>
-			<artifactId>ace-common-web</artifactId>
+            <artifactId>ace-live-client</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.huacainfo</groupId>
+            <artifactId>ace-portal-client</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>

@@ -3,7 +3,7 @@ package com.huacainfo.ace.portal.service;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.portal.model.Userinfo;
+import com.huacainfo.ace.common.model.Userinfo;
 
 import java.util.Map;
 

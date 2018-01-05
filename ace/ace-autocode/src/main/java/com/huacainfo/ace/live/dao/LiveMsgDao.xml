@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.live.dao.LiveMsgDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.live.model.LiveMsg">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="rid" jdbcType="VARCHAR" property="rid"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.live.model.LiveMsg">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, rid, uid, status, createDate
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from live_msg
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from live_msg
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.live.model.LiveMsg">
+        insert into live_msg (id, rid, uid,
+        status, createDate, content
+        )
+        values (#{id,jdbcType=VARCHAR}, #{rid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.live.model.LiveMsg">
+        insert into live_msg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="rid != null">
+                rid,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="rid != null">
+                #{rid,jdbcType=VARCHAR},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.live.model.LiveMsg">
+        update live_msg
+        <set>
+            <if test="rid != null">
+                rid = #{rid,jdbcType=VARCHAR},
+            </if>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.live.model.LiveMsg">
+        update live_msg
+        set rid = #{rid,jdbcType=VARCHAR},
+        uid = #{uid,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        content = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.live.model.LiveMsg">
+        update live_msg
+        set rid = #{rid,jdbcType=VARCHAR},
+        uid = #{uid,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

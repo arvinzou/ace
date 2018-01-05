@@ -28,6 +28,7 @@
 			<artifactId>ace-portal-client</artifactId>
 			<version>1.0</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

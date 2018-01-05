@@ -9,7 +9,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.HttpUtils;
 import com.huacainfo.ace.portal.dao.UserinfoDao;
 import com.huacainfo.ace.portal.dao.WxUserDao;
-import com.huacainfo.ace.portal.model.Userinfo;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.OAuth2Service;
@@ -94,7 +94,9 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         url.append("&code=");
         url.append(code);
         url.append("&grant_type=authorization_code");
-        String text = HttpUtils.httpsGet(url.toString());
+
+
+        String text = HttpUtils.sslPost(url.toString(), null, "utf-8");
         this.logger.info("{}", url.toString());
         this.logger.info("{}", text);
         JSONObject rst = JSON.parseObject(text);
@@ -112,7 +114,7 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         url.append("&openid=");
         url.append(openid);
         url.append("&lang=zh_CN");
-        text = HttpUtils.httpsGet(url.toString());
+        text = HttpUtils.sslPost(url.toString(), null, "utf-8");
         this.logger.info("{}", url.toString());
         this.logger.info("{}", text);
         rst = JSON.parseObject(text);
@@ -133,5 +135,38 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         SingleResult<Userinfo> sr = new SingleResult<Userinfo>(0, "同步微信用户完成！");
         sr.setValue(o);
         return sr;
+    }
+
+    public static void main(String args[]) throws Exception {
+        String redirect_uri = "https://www.huacainfo.com/live/www/oauth2/redirect.do";
+        String scope = "snsapi_base";
+        String state = "huacai";
+        String appid = "wx29ecb720b03ea466";
+        String secret = "03ea9a47442c14208943043e62114fc6";
+        String code = "001liuuO1jPR631FLowO1bCyuO1liuuC";
+        StringBuffer url = new StringBuffer("https://api.weixin.qq.com/sns/oauth2/access_token");
+        url.append("?appid=");
+        url.append(appid);
+        url.append("&secret=");
+        url.append(secret);
+        url.append("&code=");
+        url.append(code);
+        url.append("&grant_type=authorization_code");
+        System.out.println(url.toString());
+
+        url = new StringBuffer("https://open.weixin.qq.com/connect/oauth2/authorize");
+        url.append("?appid=");
+        url.append(appid);
+        url.append("&redirect_uri=");
+        url.append(URLEncoder.encode(redirect_uri, "utf-8"));
+        url.append("&response_type=code");
+        url.append("&scope=");
+        url.append(scope);
+        url.append("&state=");
+        url.append(state);
+        url.append("#wechat_redirect");
+
+        System.out.println(url.toString());
+
     }
 }
