@@ -1,5 +1,8 @@
 package com.huacainfo.ace.common.tools;
 
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
 import java.io.*;
 import java.math.BigDecimal;
 
@@ -134,4 +137,38 @@ public class FileUtil {
         }
         return buffer;
     }
+
+
+    /**
+     * 将文件转成base64 字符串
+     *
+     * @param path 文件路径
+     * @return
+     * @throws Exception
+     */
+    public static String encodeBase64(String path) throws Exception {
+        File file = new File(path);
+        FileInputStream inputFile = new FileInputStream(file);
+        byte[] buffer = new byte[(int) file.length()];
+        inputFile.read(buffer);
+        inputFile.close();
+
+        return new BASE64Encoder().encode(buffer);
+    }
+
+    /**
+     * 将base64字符解码保存文件
+     *
+     * @param base64Code
+     * @param targetPath
+     * @throws Exception
+     */
+    public static void decoderBase64(String base64Code, String targetPath)
+            throws Exception {
+        byte[] buffer = new BASE64Decoder().decodeBuffer(base64Code);
+        FileOutputStream out = new FileOutputStream(targetPath);
+        out.write(buffer);
+        out.close();
+    }
+
 }
