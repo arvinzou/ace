@@ -27,5 +27,8 @@ pageEncoding="utf-8"%>
 <jsp:include page="/dynamic/common/footer-1-www.jsp"/>
 
 <script src="${pageContext.request.contextPath}/content/www/live/controller.js"></script>
+<style>
+
+</style>
 </body>
 </html>

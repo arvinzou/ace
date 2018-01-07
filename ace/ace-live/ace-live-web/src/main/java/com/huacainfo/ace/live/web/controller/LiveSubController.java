@@ -143,4 +143,45 @@ public class LiveSubController extends LiveBaseController {
         return this.liveSubService.deleteLiveSubByLiveSubId(id,
                 this.getCurUserProp());
     }
+
+    /**
+     * @throws
+     * @Title:sendLiveSubContentBySortAct
+     * @Description: TODO(图文直播排序)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    @RequestMapping(value = "/sendLiveSubContentBySortAct.do")
+    @ResponseBody
+    public MessageResponse sendLiveSubContentBySortAct(String message, String rid) throws Exception {
+        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+            try {
+                item.sendMessage(message);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
+        return new MessageResponse(0, "排序完成！");
+    }
+
+    /**
+     * @throws
+     * @Title:updateSortByPrimaryKey
+     * @Description: TODO(更新图文直播顺序)
+     * @param: @param id
+     * @param: @param sort
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
+    @RequestMapping(value = "/updateSortByPrimaryKey.do")
+    @ResponseBody
+    public MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception {
+        return this.liveSubService.updateSortByPrimaryKey(id, sort);
+    }
 }

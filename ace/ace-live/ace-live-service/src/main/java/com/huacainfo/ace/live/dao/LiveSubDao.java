@@ -26,4 +26,6 @@ public interface LiveSubDao {
 
     int isExit(LiveSub record);
 
+    int updateSortByPrimaryKey(@Param("id") String id, @Param("sort") int sort);
+
 }

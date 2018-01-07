@@ -98,4 +98,11 @@
         content=#{content} and rid = #{rid,jdbcType=VARCHAR}
         and uid = #{uid,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateSortByPrimaryKey">
+        update live_sub
+        set
+        sort = #{sort,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

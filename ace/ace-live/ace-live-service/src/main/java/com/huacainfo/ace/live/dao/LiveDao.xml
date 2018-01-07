@@ -149,4 +149,12 @@
         pop = #{pop,jdbcType=BIGINT}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+    <select id="getLiveSubList" resultType="map">
+        select id, rid, uid, content, date_format(createDate,'%Y-%m-%d %H:%i') createDate from live_sub where rid=#{rid}
+        order by sort,createDate desc
+    </select>
+    <select id="getLiveMsgList" resultType="map">
+        select id, rid, uid, content, date_format(createDate,'%Y-%m-%d %H:%i') createDate from live_msg where rid=#{rid}
+        order by createDate desc
+    </select>
 </mapper>

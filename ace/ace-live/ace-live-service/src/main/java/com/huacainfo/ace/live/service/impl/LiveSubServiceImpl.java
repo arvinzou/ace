@@ -164,4 +164,21 @@ public class LiveSubServiceImpl implements LiveSubService {
                 String.valueOf(id), "图文直播", userProp);
         return new MessageResponse(0, "图文直播删除完成！");
     }
+
+    /**
+     * @throws
+     * @Title:updateSortByPrimaryKey
+     * @Description: TODO(更新图文直播顺序)
+     * @param: @param id
+     * @param: @param sort
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
+    @Override
+    public MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception {
+        this.liveSubDao.updateSortByPrimaryKey(id, sort);
+        return new MessageResponse(0, "OK！");
+    }
 }

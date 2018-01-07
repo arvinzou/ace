@@ -137,6 +137,16 @@ public class WWWController extends LiveBaseController {
         return new MessageResponse(0, "OK");
     }
 
+    /**
+     * @throws
+     * @Title:pop
+     * @Description: TODO(微网页直播点赞)
+     * @param:
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
     @RequestMapping(value = "/pop.do")
     @ResponseBody
     public SingleResult<Long> pop(String rid) throws Exception {
@@ -151,5 +161,37 @@ public class WWWController extends LiveBaseController {
         this.redisTemplate.opsForValue().set(keypop, new Long(pop + 1));
         rst.setValue(pop);
         return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:getLiveSubList
+     * @Description: TODO(微网页根据直播间RID获取图文直播内容)
+     * @param:
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
+    @RequestMapping(value = "/getLiveSubList.do")
+    @ResponseBody
+    public List<Map<String, Object>> getLiveSubList() {
+        return this.wwwService.getLiveSubList(this.getParams());
+    }
+
+    /**
+     * @throws
+     * @Title:getLiveMsgList
+     * @Description: TODO(微网页根据直播间RID获取互动内容)
+     * @param:
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
+    @RequestMapping(value = "/getLiveMsgList.do")
+    @ResponseBody
+    public List<Map<String, Object>> getLiveMsgList() {
+        return this.wwwService.getLiveMsgList(this.getParams());
     }
 }

@@ -10,6 +10,10 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
+        <module name="ace-kernel-backend" />
+        <module name="ace-kernel-client" />
+        <module name="ace-kernel-service" />
+        <module name="ace-kernel-web" />
         <module name="ace-live-client" />
         <module name="ace-live-service" />
         <module name="ace-live-web" />
