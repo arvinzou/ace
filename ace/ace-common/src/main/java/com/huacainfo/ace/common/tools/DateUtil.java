@@ -849,6 +849,18 @@ public final class DateUtil {
 
         return rtnMap;
     }
+
+    /**
+     * 获取时间戳
+     *
+     * @param dateTime 2018-01-02 14:23:23  to 20180102142323
+     * @return
+     */
+    public static String getTimestamp(String dateTime) {
+        return dateTime.replace("-", "")
+                .replace(":", "")
+                .replace(" ", "");
+    }
 }
 
 class EPNDateFormat {
