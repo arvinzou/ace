@@ -922,3 +922,14 @@ viewReportList = {},
 windowHeight = $(window).height(),
 isPostView = !1;
 getInfo();
+$(function(){
+    var li_a= $(".tab_menu ul li a");
+    li_a.click(function(){
+        $(this).removeClass("unselected");
+        $(this).addClass("selected");
+        $(this).parent().siblings().children().removeClass("selected");
+        $(this).parent().siblings().children().addClass("unselected");
+        var index =  li_a.index(this);
+        $(".tab_box > div").eq(index).show().siblings().hide();
+    });
+})

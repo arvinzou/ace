@@ -203,118 +203,138 @@
         </script>
     </div>
     <div class="mask none" id="mask"></div>
-    <div class="xcy-sort-place">
-        <div class="xcy-sort">
-            <p>
-                <span class="sort-btn none" id="j-sort">倒序</span>
-            </p>
-        </div>
+    <div class="tab_menu">
+        <ul>
+            <li><a class="selected" href="#">图文直播</a></li>
+            <li><a class="unselected" href="#">互动聊天</a></li>
+            <li><a class="unselected" href="#">活动介绍</a></li>
+        </ul>
     </div>
-    <div id="j-report" class="xcy-report">
-        <script type="text/template">
-            <ul>
-                {@each data as item}
-                <li data-id="${item.reportId}">
-                    <div class="wrap">
-                        <div class="headpic">
-                            {@if item.head}
-                            <img data-lazy-img="${item.head}?x-oss-process=image/resize,m_mfit,w_108,h_108">
-                            {@else}
-                            <img src="/live/content/www/img/head_default.png">
-                            {@/if}
-                        </div>
-                        <div class="reporter fn-clear">
-                            <span class="fn-ellipsis">${item.reporter}</span>
-                            <em{@if item.createDate == "刚刚"} class="ganggang"{@/if}>${item.createDate}</em>
-                        </div>
-                        {@if item.content}
-                        <div class="content">$${item.content|reportContent}</div>
-                        {@/if}
-                        {@if item.type == 4}
-                        <div class="video" data-v-poster="${item.thumbnail}" data-v-src="${item.video}">
-                            <div class="videocontrols fn-hide">
-                                <div class="controls">
-                                    <span class="c_play"></span>
-                                    <span class="c_fullscren"></span>
-                                    <!-- <div class="c_timeline fn-hide"> -->
-                                    <div class="c_timeline fn-hide">
-                                        <span class="playtime">00:00/00:00</span>
-                                        <span class="starttime">00:00</span>
-                                        <span class="endtime">00:00</span>
-                                        <div class="timeline">
-                                            <p class="line overline"><em></em></p>
-                                            <p class="line"></p>
+    <div class="tab_box">
+        <div id="livesub">
+            <div class="xcy-sort-place">
+                <div class="xcy-sort">
+                    <p>
+                        <span class="sort-btn none" id="j-sort">倒序</span>
+                    </p>
+                </div>
+            </div>
+            <div id="j-report" class="xcy-report">
+                <script type="text/template">
+                    <ul>
+                        {@each data as item}
+                        <li data-id="${item.reportId}">
+                            <div class="wrap">
+                                <div class="headpic">
+                                    {@if item.head}
+                                    <img data-lazy-img="${item.head}?x-oss-process=image/resize,m_mfit,w_108,h_108">
+                                    {@else}
+                                    <img src="/live/content/www/img/head_default.png">
+                                    {@/if}
+                                </div>
+                                <div class="reporter fn-clear">
+                                    <span class="fn-ellipsis">${item.reporter}</span>
+                                    <em{@if item.createDate == "刚刚"} class="ganggang"{@/if}>${item.createDate}</em>
+                                </div>
+                                {@if item.content}
+                                <div class="content">$${item.content|reportContent}</div>
+                                {@/if}
+                                {@if item.type == 4}
+                                <div class="video" data-v-poster="${item.thumbnail}" data-v-src="${item.video}">
+                                    <div class="videocontrols fn-hide">
+                                        <div class="controls">
+                                            <span class="c_play"></span>
+                                            <span class="c_fullscren"></span>
+                                            <!-- <div class="c_timeline fn-hide"> -->
+                                            <div class="c_timeline fn-hide">
+                                                <span class="playtime">00:00/00:00</span>
+                                                <span class="starttime">00:00</span>
+                                                <span class="endtime">00:00</span>
+                                                <div class="timeline">
+                                                    <p class="line overline"><em></em></p>
+                                                    <p class="line"></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="playposter">
+                                        <div class="v-mask fn-hide"></div>
+                                        <span class="playbtn"></span>
+                                        <div class="tip fn-hide">
+                                            <p>获取不到视频画面，请刷新重试</p>
+                                        </div>
+                                        {@if item.thumbnail}
+                                        <img src="${item.thumbnail}">
+                                        {@else}
+                                        <img src="//xcycdn.zhongguowangshi.com/live-img/ic_default_pic@2x.png?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                                        {@/if}
+                                    </div>
+                                    <!-- <div class="v-loading-new fn-hide">
+                                      <div class="v-logo"></div>
+                                      <div class="v-line"><div class="v-line-s-box"><div></div></div></div>
+                                      <p>即将播放...</p>
+                                    </div> -->
+                                    <div class="v-loading fn-hide"><i></i></div>
+                                    <video playsinline="playsinline" webkit-playsinline="webkit-playsinline"></video>
                                 </div>
-                            </div>
-                            <div class="playposter">
-                                <div class="v-mask fn-hide"></div>
-                                <span class="playbtn"></span>
-                                <div class="tip fn-hide">
-                                    <p>获取不到视频画面，请刷新重试</p>
+                                {@else if item.imageList && item.imageList.length > 0}
+                                <div class="pictures" data-count="${item.imageList.length}">
+                                    <div class="j-photoswiper imglist${item.imageList.length}">
+                                        {@each item.imageList as imgitem, imgindex}
+                                        <span class="img${imgindex}" data-url="${imgitem.url}"
+                                              data-water="${imgitem.watermarkConfig}"
+                                              data-water-bus="${item.watermarkConfig}"
+                                              data-w="${imgitem.w}" data-h="${imgitem.h}"></span>
+                                        {@/each}
+                                    </div>
                                 </div>
-                                {@if item.thumbnail}
-                                <img src="${item.thumbnail}">
-                                {@else}
-                                <img src="//xcycdn.zhongguowangshi.com/live-img/ic_default_pic@2x.png?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
                                 {@/if}
-                            </div>
-                            <!-- <div class="v-loading-new fn-hide">
-                              <div class="v-logo"></div>
-                              <div class="v-line"><div class="v-line-s-box"><div></div></div></div>
-                              <p>即将播放...</p>
-                            </div> -->
-                            <div class="v-loading fn-hide"><i></i></div>
-                            <video playsinline="playsinline" webkit-playsinline="webkit-playsinline"></video>
-                        </div>
-                        {@else if item.imageList && item.imageList.length > 0}
-                        <div class="pictures" data-count="${item.imageList.length}">
-                            <div class="j-photoswiper imglist${item.imageList.length}">
-                                {@each item.imageList as imgitem, imgindex}
-                                <span class="img${imgindex}" data-url="${imgitem.url}"
-                                      data-water="${imgitem.watermarkConfig}" data-water-bus="${item.watermarkConfig}"
-                                      data-w="${imgitem.w}" data-h="${imgitem.h}"></span>
-                                {@/each}
-                            </div>
-                        </div>
-                        {@/if}
-                        <div class="down fn-clear">
-                            <div class="city">${item.city}</div>
-                            <div class="act fn-hide"></div>
-                            <div class="actlayer">
-                                <p class="j-actzan" data-id="${item.reportId}">
-                                    <i class="zan-w"><em class="zan"></em></i><span>赞</span>
-                                </p>
-                                <p class="line"></p>
-                                <p class="j-actping" data-id="${item.reportId}">
-                                    <i class="ping-w"></i><span>评论</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div id="j-remark-${item.reportId}" class="remark fn-hide">
-                            <em class="arrow"></em>
-                            <div class="liker fn-hide" data-liker="${item.liker}"></div>
-                            <div class="line fn-hide"></div>
-                            <div class="list fn-hide">
-                                {@each item.comments as citem}
-                                <p>
-                                    <span>${citem.reviewer}: </span>${citem.ccontent}
-                                </p>
-                                {@/each}
-                            </div>
-                        </div>
-                </li>
-                {@/each}
-            </ul>
-        </script>
+                                <div class="down fn-clear">
+                                    <div class="city">${item.city}</div>
+                                    <div class="act fn-hide"></div>
+                                    <div class="actlayer">
+                                        <p class="j-actzan" data-id="${item.reportId}">
+                                            <i class="zan-w"><em class="zan"></em></i><span>赞</span>
+                                        </p>
+                                        <p class="line"></p>
+                                        <p class="j-actping" data-id="${item.reportId}">
+                                            <i class="ping-w"></i><span>评论</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="j-remark-${item.reportId}" class="remark fn-hide">
+                                    <em class="arrow"></em>
+                                    <div class="liker fn-hide" data-liker="${item.liker}"></div>
+                                    <div class="line fn-hide"></div>
+                                    <div class="list fn-hide">
+                                        {@each item.comments as citem}
+                                        <p>
+                                            <span>${citem.reviewer}: </span>${citem.ccontent}
+                                        </p>
+                                        {@/each}
+                                    </div>
+                                </div>
+                        </li>
+                        {@/each}
+                    </ul>
+                </script>
+            </div>
+            <div id="j-nonews" class="xcy-nonews fn-hide">
+                稍等，新闻马上就到
+            </div>
+            <div id="j-listmore" class="xcy-more">
+                <span>正在加载...</span>
+            </div>
+        </div>
+        <div class="hide tab_content" id="livemsg">
+            互动聊天
+        </div>
+        <div class="hide tab_content" id="content">
+            活动介绍
+        </div>
     </div>
-    <div id="j-nonews" class="xcy-nonews fn-hide">
-        稍等，新闻马上就到
-    </div>
-    <div id="j-listmore" class="xcy-more">
-        <span>正在加载...</span>
-    </div>
+
+
     <!-- <div id="j-listmore" class="xcy-more">
       <div class="-v"></div>
       <div class="loding-con"></div>
@@ -418,5 +438,53 @@
 <script src="/live/content/www/js/soshm.js"></script>
 <script src="/live/content/www/js/info.js?_t=1511967632000"></script>
 <script src="/live/content/www/js/spm.js"></script>
+<style>
+        .tab_box{
+           width: 100%;
+           background-color: #fff;
+        }
+        .selected{
+            color: red;
+            font-size:18px;
+            border-bottom: 2px solid red;
+        }
+        .unselected{
+            color: #000000;
+            font-size:16px;
+        }
+        .tab_menu ul li {
+           display: inline-block;
+         }
+
+       .tab_menu ul li a{
+            display: block;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            padding-left: 20px;
+            padding-right:20px;
+            text-decoration: none;
+        }
+
+        ul{
+             list-style: none;
+             margin: 0;
+             padding: 0;
+        }
+
+        .hide{
+            display: none;
+        }
+        .tab_menu{
+            text-align:center;
+             background-color: #fff;
+        }
+        .tab_content{
+           padding:15px;
+        }
+
+
+
+
+</style>
 </body>
 </html>
