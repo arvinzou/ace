@@ -164,7 +164,6 @@ function getInfo() {
 
             if (void 0 == window.orientation && (i.ispc = !0), $("#j-liveinfo").html(liveinfoTpl.render(i)), $("#j-livevideo").length) {
                 var o = "/live/content/www/img/ic_default_pic@2x.png";
-                /*i.data.cover && "https://xcycdn.zhongguowangshi.com" != i.data.cover && (o = i.data.cover + "?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0");*/
                 var t = i.data.playStreamUrl;
                 if (void 0 == window.orientation) {
                     $("#j-livevideo-main").addClass("prism-player").removeClass("fn-hide"),
@@ -220,7 +219,7 @@ function getInfo() {
             })),
             $("#j-desc").css("height", "auto"),
             1 == i.data.partakeState && $(".xcy-totalcount").addClass("fn-hide"),
-            $(".xcy-totalcount").html("娴忚" + i.data.numOfPartake);
+            $(".xcy-totalcount").html("参与人数" + i.data.numOfPartake);
             var f = i.data.startTime;
             i && i.data && (i.data.topic && (wxShareDict.title = i.data.topic, document.title = wxShareDict.title), i.data.remark && (wxShareDict.desc = i.data.remark), i.data.cover && (wxShareDict.imgUrl = i.data.cover), onshare()),
             increateNumTimeFn(),
@@ -234,7 +233,7 @@ function getInfo() {
                     i.data.totalNum;
                     a && $("#j-orgname").append("<p>" + a + "</p>"),
                     n && $("#j-orgname").append('<p class="small">' + n + "</p>"),
-                    "鐜板満鐩存挱锛岀敱鐜板満浜戞彁渚涚洿鎾敮鎸併€�" == wxShareDict.desc && (wxShareDict.desc = a + formatDate(f, "YY骞碝鏈圖鏃鐐筸鍒�") + "鐜板満鐩存挱锛岀敱鐜板満浜戞彁渚涚洿鎾敮鎸併€�", onshare()),
+                    "FFFF" == wxShareDict.desc && (wxShareDict.desc = a + formatDate(f, "YY骞碝鏈圖鏃鐐筸鍒�") + "鐜板満鐩存挱锛岀敱鐜板満浜戞彁渚涚洿鎾敮鎸併€�", onshare()),
                     $(".j-orgname-back").on(tap,
                     function() {
                        // document.referrer && document.referrer.indexOf("//live.xinhuaapp.com/") > -1 ? document.referrer.indexOf("?id=") > -1 || document.referrer.indexOf("&id=") > -1 ? location.href = "/xcy/?companyId=" + companyId + "&showlink=" + showlink: document.referrer.indexOf("?companyId=") == -1 && document.referrer.indexOf("&companyId=") == -1 ? location.href = "/xcy/?companyId=" + companyId + "&showlink=" + showlink: history.back() : location.href = "/xcy/?companyId=" + companyId + "&showlink=" + showlink
@@ -888,7 +887,7 @@ function() {
                 o.find(".list").append("<p><span>" + userDict.identityName + ": </span>" + a + "</p>"),
                 showRemark(o)
             } else lvsCmd.alert(n.errMsg);
-            else lvsCmd.alert("缃戠粶璇锋眰澶辫触锛岃妫€鏌ョ綉缁滆繛鎺ョ姸鎬侊紒")
+            else lvsCmd.alert("提交失败")
         })
     }
     return ! 1

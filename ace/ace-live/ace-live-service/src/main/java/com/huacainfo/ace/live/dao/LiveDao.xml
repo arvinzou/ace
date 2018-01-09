@@ -133,13 +133,52 @@
         name=#{name}
     </select>
     <select id="getLiveList" resultType="map">
-        select id, name, category, deptName, date_format(birthday,'%Y-%m-%d %H:%i') birthday, nop, pop, addr, imageSrc,
-        status, date_format(createDate,'%Y-%m-%d %H:%i') createDate from live order by birthday desc
+        select
+        2 commentApproveType,
+        imageSrc cover,
+        createDate endTime,
+        0 hasPassword,
+        id,
+        nop numOfPartake,
+        null numOfPartakeString,
+        0 partakeState,
+        remark,
+        1 reportApproveType,
+        birthday startTime,
+        status state,
+        name topic,
+        1 type,
+        null watermarkConfig from live order by birthday desc
     </select>
     <select id="getLive" resultType="map">
-        select id, name, category, deptName, date_format(birthday,'%Y-%m-%d %H:%i') birthday, nop, pop, addr, imageSrc,
-        status,remark,rtmpUrl,content,mp4Url, imageSrc, latitude, longitude, date_format(createDate,'%Y-%m-%d %H:%i')
-        createDate from live where id=#{id}
+        select
+        null allowApprove,
+        null allowClose,
+        null allowDelete,
+        null allowEdit,
+        1 allowShare,
+        null appShortUrl,
+        addr city,
+        0 commentApproveType,
+        imageSrc cover,
+        null endTime,
+        id,
+        pop likeNums,
+        nop numOfPartake,
+        null numOfPartakeString,
+        0 partakeState,
+        0 playStreamState,
+        ifnull(mp4Url,rtmpUrl) playStreamUrl,
+        0 position,
+        remark,
+        0 showPlayView,
+        0 showWater,
+        null startTime,
+        status state,
+        name topic,
+        4 type,
+        null watermarkConfig
+        from live where id=#{id}
     </select>
 
     <update id="updateNopPop">
