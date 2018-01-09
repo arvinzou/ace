@@ -840,7 +840,7 @@ if (getReport(reportPage), setInterval(function() {
 },
 1e4), $("#j-sort").on(tap,
 function() {
-    return ! reportLoading && (0 == reportSort ? (reportSort = 1, $(this).html("姝ｅ簭")) : (reportSort = 0, $(this).html("鍊掑簭")), reportLoadEnd = !1, reportPage = 1, $("#j-report").height($("#j-report").height()), $("#j-report").html(""), getReport(reportPage), void(cutWindowScrollTop = 0))
+    return ! reportLoading && (0 == reportSort ? (reportSort = 1, $(this).html("正序")) : (reportSort = 0, $(this).html("倒序")), reportLoadEnd = !1, reportPage = 1, $("#j-report").height($("#j-report").height()), $("#j-report").html(""), getReport(reportPage), void(cutWindowScrollTop = 0))
 }), $(window).scroll(function() {
     if (!reportLoading && !reportLoadEnd && !$(".fn-contain").hasClass("j-hasremark")) {
         var e = $(window).scrollTop() + $(window).height();
@@ -921,7 +921,4 @@ var cutWindowScrollTop = 0,
 viewReportList = {},
 windowHeight = $(window).height(),
 isPostView = !1;
-
-jQuery(function($) {
-  getInfo();
-});
+getInfo();

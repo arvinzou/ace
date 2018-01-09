@@ -14,7 +14,7 @@ pageEncoding="utf-8"%>
         <div class="live-list" style="background-image: url({{=fastdfs_server+it.imageSrc}})">
 
             <div class="live-nop">
-                <img class="live-nop-icon" src="${pageContext.request.contextPath}/content/www/image/nop.png"/>
+                <img class="live-nop-icon" src="${pageContext.request.contextPath}/content/www/img/nop.png"/>
                 {{=it.nop}}
             </div>
             <div class="live-title">{{=it.name}}</div>
