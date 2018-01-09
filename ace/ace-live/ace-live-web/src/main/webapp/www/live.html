@@ -1,20 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html lang="cn">
+<html>
 <head>
     <meta charset="utf-8">
     <title>常德融媒</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="data-spm" content="zy-spot-web.v3">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/css/mobase.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/lib/prismplayer/index.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/lib/photoswipe-4.1.1/photoswipe.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/lib//photoswipe-4.1.1/default-skin.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/css/iconfont.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/css/info.css"/>
-    <script src="${pageContext.request.contextPath}/content/www/js/init-rem.js"></script>
+    <link rel="stylesheet" href="/live/content/www/css/mobase.css"/>
+    <link rel="stylesheet" href="/live/content/www/lib/prismplayer/index.css"/>
+    <link rel="stylesheet" href="/live/content/www/lib/photoswipe-4.1.1/photoswipe.css">
+    <link rel="stylesheet" href="/live/content/www/lib//photoswipe-4.1.1/default-skin.css">
+    <link rel="stylesheet" href="/live/content/www/css/iconfont.css"/>
+    <link rel="stylesheet" href="/live/content/www/css/info.css"/>
+    <script
+            src="/live/content/common/lib/jquery-2.1.4.js"></script>
+    <script src="/live/content/www/js/init-rem.js"></script>
 </head>
 <body>
 <div class="fn-contain">
@@ -222,7 +222,7 @@ pageEncoding="utf-8"%>
                             {@if item.head}
                             <img data-lazy-img="${item.head}?x-oss-process=image/resize,m_mfit,w_108,h_108">
                             {@else}
-                            <img src="./static/img/head_default.png">
+                            <img src="/live/content/www/img/head_default.png">
                             {@/if}
                         </div>
                         <div class="reporter fn-clear">
@@ -323,8 +323,8 @@ pageEncoding="utf-8"%>
     </div> -->
     <div class="xcy-totalcount"></div>
     <div class="xcy-copyright">
-        <p>Copyright &copy; 2016 现场云</p>
-        <p>由现场云团队提供技术支持</p>
+        <p>Copyright &copy; 2018 华彩</p>
+        <p>由华彩团队提供技术支持</p>
     </div>
 
     <div id="j-fullview" class="xcy-fullview">
@@ -406,22 +406,19 @@ pageEncoding="utf-8"%>
         </div>
     </div>
 </div>
+<script src="/live/content/www/js/jweixin-1.0.0.js"></script>
+<script src="/live/content/www/lib/prismplayer/prism-min.js"></script>
+<script src="/live/content/www/js/zepto-1.2.0.min.js"></script>
+<script src="/live/content/www/js/juicer-min.js"></script>
+<script src="/live/content/www/js/sugar-h5.js?_t=1510794885000"></script>
+<script src="/live/content/www/js/roll.js?_t=1507519928000"></script>
+<script src="/live/content/www/lib/photoswipe-4.1.1/photoswipe.js"></script>
+<script src="/live/content/www/lib/photoswipe-4.1.1/photoswipe-ui-default.js"></script>
+<script src="/live/content/www/js/common.js?_t=1511451507000"></script>
 
-<script src="${pageContext.request.contextPath}/content/www/js/jweixin-1.0.0.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/lib/prismplayer/prism-min.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/zepto-1.2.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/juicer-min.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/sugar-h5.js?_t=1510794885000"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/roll.js?_t=1507519928000"></script>
-<script src="${pageContext.request.contextPath}/content/www/lib/photoswipe-4.1.1/photoswipe.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/lib/photoswipe-4.1.1/photoswipe-ui-default.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/common.js?_t=1511451507000"></script>
-
-<script src="${pageContext.request.contextPath}/content/www/js/photoswipe.js?_t=1511436259000"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/soshm.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/info.js?_t=1511967632000"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/spm.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/z_stat.js"></script>
-</script>
+<script src="/live/content/www/js/photoswipe.js?_t=1511436259000"></script>
+<script src="/live/content/www/js/soshm.js"></script>
+<script src="/live/content/www/js/info.js?_t=1511967632000"></script>
+<script src="/live/content/www/js/spm.js"></script>
 </body>
 </html>
