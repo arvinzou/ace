@@ -13,3 +13,4 @@ session.setAttribute("portalPath", "/portal");
       href="${pageContext.request.contextPath}/content/common/lib/weui.min.css?version=${cfg.version}"/>
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/content/common/css/jquery-weui.min.css?version=${cfg.version}"/>
+

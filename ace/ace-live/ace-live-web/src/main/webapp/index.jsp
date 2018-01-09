@@ -74,6 +74,6 @@ Welcome<br/>
           websocket.send(message);
       }
 
-      setInterval('send()',10000)
+      //setInterval('send()',10000)
   </script>
 </html>

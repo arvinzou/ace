@@ -16,4 +16,6 @@ public interface LiveSubDao {
     int updateByPrimaryKeyWithBLOBs(LiveSub record);
 
     int updateByPrimaryKey(LiveSub record);
+
+    int updateStatusByPrimaryKey(LiveSub record);
 }

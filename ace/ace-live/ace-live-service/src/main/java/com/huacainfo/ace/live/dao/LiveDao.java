@@ -32,4 +32,8 @@ public interface LiveDao {
 
     int updateNopPop(@Param("id") String id, @Param("nop") long nop, @Param("pop") long pop);
 
+    List<Map<String, Object>> getLiveSubList(Map<String, Object> p);
+
+    List<Map<String, Object>> getLiveMsgList(Map<String, Object> p);
+
 }

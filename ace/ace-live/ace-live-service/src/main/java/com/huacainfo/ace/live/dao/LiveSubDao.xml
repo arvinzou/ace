@@ -51,6 +51,13 @@
     <update id="updateByPrimaryKey">
         update live_sub
         set
+        content = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateStatusByPrimaryKey">
+        update live_sub
+        set
         status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -98,4 +105,11 @@
         content=#{content} and rid = #{rid,jdbcType=VARCHAR}
         and uid = #{uid,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateSortByPrimaryKey">
+        update live_sub
+        set
+        sort = #{sort,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

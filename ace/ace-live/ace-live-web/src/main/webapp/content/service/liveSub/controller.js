@@ -158,7 +158,7 @@ function loadView(id) {
 function audit(id,status,rid,message){
         $.ajax({
             type : "post",
-            url : cfg.grid_edit_data_url,
+            url : contextPath+"liveSub/updateLiveSubStatus.do",
             data : {
                 id : id,
                 status:status,

@@ -16,7 +16,9 @@ public interface LiveSubDao {
     LiveSubVo selectByPrimaryKey(String LiveSubId);
 
 
-    int updateByPrimaryKey(@Param("id") String id, @Param("status") String status);
+    int updateByPrimaryKey(LiveSub record);
+
+    int updateStatusByPrimaryKey(@Param("id") String id, @Param("status") String status);
 
     List<LiveSubVo> findList(@Param("condition") LiveSubQVo condition,
                              @Param("start") int start, @Param("limit") int limit,
@@ -25,5 +27,7 @@ public interface LiveSubDao {
     int findCount(@Param("condition") LiveSubQVo condition);
 
     int isExit(LiveSub record);
+
+    int updateSortByPrimaryKey(@Param("id") String id, @Param("sort") int sort);
 
 }

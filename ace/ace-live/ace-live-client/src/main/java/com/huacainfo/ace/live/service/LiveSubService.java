@@ -53,7 +53,7 @@ public interface LiveSubService {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    public abstract MessageResponse updateLiveSub(String id, String status) throws Exception;
+    public abstract MessageResponse updateLiveSub(LiveSub obj) throws Exception;
 
     /**
      * @throws
@@ -79,6 +79,34 @@ public interface LiveSubService {
      * @version: 2018-01-03
      */
     public abstract MessageResponse deleteLiveSubByLiveSubId(String id, UserProp userProp) throws Exception;
+
+
+    /**
+     * @throws
+     * @Title:updateSortByPrimaryKey
+     * @Description: TODO(更新图文直播顺序)
+     * @param: @param id
+     * @param: @param sort
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
+    public abstract MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception;
+
+
+    /**
+     * @throws
+     * @Title:updateLiveSub
+     * @Description: TODO(更新图文直播)
+     * @param: @param obj
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    public abstract MessageResponse updateLiveSubStatus(String id, String status) throws Exception;
 
 
 }

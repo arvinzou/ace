@@ -92,7 +92,25 @@ public class LiveSubController extends LiveBaseController {
      */
     @RequestMapping(value = "/updateLiveSub.do")
     @ResponseBody
-    public MessageResponse updateLiveSub(String id, String status, String message, String rid) throws Exception {
+    public MessageResponse updateLiveSub(String jsons) throws Exception {
+        LiveSub obj = JSON.parseObject(jsons, LiveSub.class);
+        return this.liveSubService
+                .updateLiveSub(obj);
+    }
+
+    /**
+     * @throws
+     * @Title:updateLiveSub
+     * @Description: TODO(更新图文直播)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    @RequestMapping(value = "/updateLiveSubStatus.do")
+    @ResponseBody
+    public MessageResponse updateLiveSubStatus(String id, String status, String message, String rid) throws Exception {
         if (status != null && status.equals("2")) {
             for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
                 try {
@@ -104,7 +122,7 @@ public class LiveSubController extends LiveBaseController {
             }
         }
 
-        return this.liveSubService.updateLiveSub(id, status);
+        return this.liveSubService.updateLiveSubStatus(id, status);
     }
 
     /**
@@ -142,5 +160,46 @@ public class LiveSubController extends LiveBaseController {
         String id = json.getString("id");
         return this.liveSubService.deleteLiveSubByLiveSubId(id,
                 this.getCurUserProp());
+    }
+
+    /**
+     * @throws
+     * @Title:sendLiveSubContentBySortAct
+     * @Description: TODO(图文直播排序)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    @RequestMapping(value = "/sendLiveSubContentBySortAct.do")
+    @ResponseBody
+    public MessageResponse sendLiveSubContentBySortAct(String message, String rid) throws Exception {
+        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+            try {
+                item.sendMessage(message);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
+        return new MessageResponse(0, "排序完成！");
+    }
+
+    /**
+     * @throws
+     * @Title:updateSortByPrimaryKey
+     * @Description: TODO(更新图文直播顺序)
+     * @param: @param id
+     * @param: @param sort
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
+    @RequestMapping(value = "/updateSortByPrimaryKey.do")
+    @ResponseBody
+    public MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception {
+        return this.liveSubService.updateSortByPrimaryKey(id, sort);
     }
 }

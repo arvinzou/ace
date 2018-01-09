@@ -117,7 +117,33 @@ public class LiveSubServiceImpl implements LiveSubService {
      * @version: 2018-01-03
      */
     @Override
-    public MessageResponse updateLiveSub(String id, String status)
+    public MessageResponse updateLiveSub(LiveSub o)
+            throws Exception {
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+
+        if (CommonUtils.isBlank(o.getContent())) {
+            return new MessageResponse(1, "直播内容不能为空！");
+        }
+        this.liveSubDao.updateByPrimaryKey(o);
+        return new MessageResponse(0, "变更图文直播完成！");
+    }
+
+
+    /**
+     * @throws
+     * @Title:updateLiveSub
+     * @Description: TODO(更新图文直播)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    @Override
+    public MessageResponse updateLiveSubStatus(String id, String status)
             throws Exception {
         if (CommonUtils.isBlank(id)) {
             return new MessageResponse(1, "主键不能为空！");
@@ -125,7 +151,7 @@ public class LiveSubServiceImpl implements LiveSubService {
         if (CommonUtils.isBlank(status)) {
             return new MessageResponse(1, "状态不能为空！");
         }
-        this.liveSubDao.updateByPrimaryKey(id, status);
+        this.liveSubDao.updateStatusByPrimaryKey(id, status);
         return new MessageResponse(0, "变更图文直播完成！");
     }
 
@@ -163,5 +189,22 @@ public class LiveSubServiceImpl implements LiveSubService {
         this.dataBaseLogService.log("删除图文直播", "图文直播", String.valueOf(id),
                 String.valueOf(id), "图文直播", userProp);
         return new MessageResponse(0, "图文直播删除完成！");
+    }
+
+    /**
+     * @throws
+     * @Title:updateSortByPrimaryKey
+     * @Description: TODO(更新图文直播顺序)
+     * @param: @param id
+     * @param: @param sort
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
+    @Override
+    public MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception {
+        this.liveSubDao.updateSortByPrimaryKey(id, sort);
+        return new MessageResponse(0, "OK！");
     }
 }

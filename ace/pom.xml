@@ -47,15 +47,12 @@
 			<url>http://zx.huacainfo.com/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
-
 	<pluginRepositories>
-
 		<pluginRepository>
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
 			<url>http://zx.huacainfo.com/nexus/content/groups/public</url>
 		</pluginRepository>
-
 	</pluginRepositories>
 	<modules>
 		<module>ace-common</module>
@@ -63,20 +60,17 @@
 		<module>ace-common-web</module>
 		<module>ace-portal</module>
 		<module>ace-live</module>
-
-		<!--
-		 <module>ace-kernel</module>
-		<module>ace-uf</module>
-		<module>ace-workflow</module>
-		<module>ace-face</module>
-
-		<module>ace-rvc</module>
-		<module>ace-luohua</module>
-     	<module>ace-weuiluohua</module>
-		<module>ace-gesp</module>
-		<module>ace-operana</module>
+        <module>ace-kernel</module>
+        <!--
+        <module>ace-uf</module>
+        <module>ace-workflow</module>
+        <module>ace-face</module>
+        <module>ace-rvc</module>
+        <module>ace-luohua</module>
+         <module>ace-weuiluohua</module>
+        <module>ace-gesp</module>
+        <module>ace-operana</module>
      -->
-
 		<module>ace-autocode</module>
 	</modules>
 	<dependencies>

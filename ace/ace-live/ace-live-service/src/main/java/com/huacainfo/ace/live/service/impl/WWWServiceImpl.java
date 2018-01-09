@@ -64,4 +64,35 @@ public class WWWServiceImpl implements WWWService {
     public Map<String, Object> getLive(String id) {
         return this.liveDao.getLive(id);
     }
+
+
+    /**
+     * @throws
+     * @Title:getLiveSubList
+     * @Description: TODO(微网页根据直播间RID获取图文直播内容)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
+    @Override
+    public List<Map<String, Object>> getLiveSubList(Map<String, Object> p) {
+        return this.liveDao.getLiveSubList(p);
+    }
+
+    /**
+     * @throws
+     * @Title:getLiveMsgList
+     * @Description: TODO(微网页根据直播间RID获取互动内容)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-01-07
+     */
+    @Override
+    public List<Map<String, Object>> getLiveMsgList(Map<String, Object> p) {
+        return this.liveDao.getLiveMsgList(p);
+    }
 }
