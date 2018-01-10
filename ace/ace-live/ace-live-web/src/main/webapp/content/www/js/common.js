@@ -58,9 +58,9 @@ if (lvsCmd.urlParams = function() {
         lvsCmd.cookie.set(e, "null", "-1")
     }
 },
-lvsCmd.urlParams.companyId && !isNaN(lvsCmd.urlParams.companyId))
-var companyId = +lvsCmd.urlParams.companyId;
-else var companyId = +lvsCmd.cookie.get("companyId");
+lvsCmd.urlParams.companyId)
+var companyId = lvsCmd.urlParams.companyId;
+else var companyId = lvsCmd.cookie.get("companyId");
 var showlink = 1;0 == lvsCmd.urlParams.showlink && (showlink = 0),
 lvsCmd.alert = function(e) {
     if (0 == $("#j-livealert").length) {

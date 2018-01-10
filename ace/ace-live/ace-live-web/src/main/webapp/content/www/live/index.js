@@ -1,7 +1,7 @@
 function getList() {
-    loadList || (loadList = !0, lvsCmd.ajax(apiServer + "/h5/live/getListByCompany.json", {
-        companyId: companyId,
-        page: listPage
+    loadList || (loadList = !0, lvsCmd.ajax(apiServer + "/www/live/getListByCompany.do?deptId="+companyId+"&page="+(listPage||1), {
+        deptId: companyId,
+        page: listPage||1
     },
     function(i, g) {
         if (i) {
@@ -43,8 +43,8 @@ wxShareDict = {
     desc: "鐜板満鐩存挱锛岀敱鐜板満浜戞彁渚涚洿鎾敮鎸併€�",
     link: document.URL
 };
-lvsCmd.ajax(apiServer + "/h5/live/getShareContent.json", {
-    companyId: companyId
+lvsCmd.ajax(apiServer + "/www/live/getShareContent.do?deptId="+companyId, {
+    deptId: companyId
 },
 function(i, g) {
     if (i) {

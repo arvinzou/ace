@@ -3,6 +3,7 @@ package com.huacainfo.ace.live.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -86,11 +87,12 @@ public class LiveServiceImpl implements LiveService {
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "直播类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getDeptName())) {
-            return new MessageResponse(1, "组织单位不能为空！");
+
+        if (CommonUtils.isBlank(o.getStartTime())) {
+            return new MessageResponse(1, "开始时间不能为空！");
         }
-        if (CommonUtils.isBlank(o.getBirthday())) {
-            return new MessageResponse(1, "直播时间不能为空！");
+        if (CommonUtils.isBlank(o.getEndTime())) {
+            return new MessageResponse(1, "结束时间不能为空！");
         }
         if (CommonUtils.isBlank(o.getRemark())) {
             return new MessageResponse(1, "摘要不能为空！");
@@ -124,6 +126,7 @@ public class LiveServiceImpl implements LiveService {
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
+        o.setDeptId(userProp.getCorpId());
         this.liveDao.insert(o);
         this.dataBaseLogService.log("添加直播", "直播", "", o.getName(),
                 o.getName(), userProp);
@@ -153,11 +156,12 @@ public class LiveServiceImpl implements LiveService {
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "直播类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getDeptName())) {
-            return new MessageResponse(1, "组织单位不能为空！");
+
+        if (CommonUtils.isBlank(o.getStartTime())) {
+            return new MessageResponse(1, "开始时间不能为空！");
         }
-        if (CommonUtils.isBlank(o.getBirthday())) {
-            return new MessageResponse(1, "直播时间不能为空！");
+        if (CommonUtils.isBlank(o.getEndTime())) {
+            return new MessageResponse(1, "结束时间不能为空！");
         }
         if (CommonUtils.isBlank(o.getRemark())) {
             return new MessageResponse(1, "摘要不能为空！");
@@ -228,4 +232,6 @@ public class LiveServiceImpl implements LiveService {
                 String.valueOf(id), "直播", userProp);
         return new MessageResponse(0, "直播删除完成！");
     }
+
+
 }

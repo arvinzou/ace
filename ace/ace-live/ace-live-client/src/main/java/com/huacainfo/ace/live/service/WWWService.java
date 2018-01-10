@@ -64,4 +64,28 @@ public interface WWWService {
      * @version: 2018-01-07
      */
     List<Map<String, Object>> getLiveMsgList(Map<String, Object> p);
+
+    /**
+     * @throws
+     * @Title:getTotalNumAndOrgInfo
+     * @Description: TODO(微网页根据单位代码获取合计直播信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+    Map<String, Object> getTotalNumAndOrgInfo(String deptId);
+
+    /**
+     * @throws
+     * @Title:getShareContent
+     * @Description: TODO(微网页根据单位代码获取分享信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+    Map<String, Object> getShareContent(String deptId);
 }

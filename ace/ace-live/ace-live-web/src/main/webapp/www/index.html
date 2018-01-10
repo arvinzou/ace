@@ -29,18 +29,18 @@
                 <li class="news-item" data-id="${item.id}"
                     data-spm-click="category=list;action=click;itemId=${item.id}">
                     {@if item.cover}
-                    <img src="${item.cover}?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                    <img src="${item.cover}">
                     {@else}
                     <img src="http://s.newscdn.cn/spot-web/2.0.24/img/default-list.png">
                     {@/if}
                     <div class="summary">
                         <h2>${item.topic}</h2>
                         <div class="fn-clear">
-            <span class="state box state-${item.state} type-${item.type}">
-              {@if item.state == 32}已结束{@else}直播{@/if}
+            <span class="state box state-${item.state} type-${item.state}">
+             {@if item.state == 1}预告{@/if} {@if item.state == 2}直播{@/if} {@if item.state == 3}已结束{@/if}
               <em class="icon"></em>
             </span>
-                            {@if item.partakeState != 1}
+                            {@if item.state != 1}
                             <span class="join">${item.numOfPartakeString}参与</span>
                             {@/if}
                         </div>

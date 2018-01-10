@@ -36,4 +36,10 @@ public interface LiveDao {
 
     List<Map<String, Object>> getLiveMsgList(Map<String, Object> p);
 
+    Map<String, Object> getTotalNumAndOrgInfo(@Param("deptId") String deptId);
+
+    Map<String, Object> getShareContent(@Param("deptId") String deptId);
+
+
+
 }

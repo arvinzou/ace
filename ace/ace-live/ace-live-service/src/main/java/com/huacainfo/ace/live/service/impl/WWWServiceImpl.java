@@ -95,4 +95,35 @@ public class WWWServiceImpl implements WWWService {
     public List<Map<String, Object>> getLiveMsgList(Map<String, Object> p) {
         return this.liveDao.getLiveMsgList(p);
     }
+
+    /**
+     * @throws
+     * @Title:getTotalNumAndOrgInfo
+     * @Description: TODO(微网页根据单位单位代码获取合计直播信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+
+    @Override
+    public Map<String, Object> getTotalNumAndOrgInfo(String deptId) {
+        return this.liveDao.getTotalNumAndOrgInfo(deptId);
+    }
+
+    /**
+     * @throws
+     * @Title:getShareContent
+     * @Description: TODO(微网页根据单位代码获取分享信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+    @Override
+    public Map<String, Object> getShareContent(String deptId) {
+        return this.liveDao.getShareContent(deptId);
+    }
 }

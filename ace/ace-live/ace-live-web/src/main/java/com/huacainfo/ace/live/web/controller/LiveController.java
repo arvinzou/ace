@@ -52,6 +52,7 @@ public class LiveController extends LiveBaseController {
         PageResult<LiveVo> rst = this.liveService
                 .findLiveList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());
+        condition.setDeptId(this.getCurUserProp().getCorpId());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
