@@ -108,14 +108,13 @@ function fullH5Video(e) {
 }
 
 function getInfo() {
-
     var e = {
-        id: id,
+        id: lvsCmd.urlParams.id,
         upNum: 1,
         identityType: webviewType,
         userId: lvsCmd.urlParams.id
     };
-    lvsCmd.ajax(apiServer + "/h5/live/getInfo.json", e,
+    lvsCmd.ajax(apiServer + "/www/live/getInfo.do", e,
     function(e, i) {
         function a() {
             $(window).scrollTop() <= 10 && (d = !1),
@@ -124,32 +123,18 @@ function getInfo() {
         function n() {
             var e = {
                 companyId: lvsCmd.urlParams.companyId,
-                liveId: lvsCmd.urlParams.id
+                rid: lvsCmd.urlParams.id
             },
             i = !0;
             $("#j-xc-liker").on(tap,
             function() {
                 var a = $(this);
-
-                if (isLogin) e.userId = userDict.identityNo,
-                e.reviewer = userDict.identityName,
-                e.userType = userDict.identityType;
-                else {
-                    var n = lvsCmd.cookie.get("xcYKId");
-                    if (n) e.userId = n;
-                    else {
-                        var o = joeFn.createYKId();
-                        lvsCmd.cookie.set("xcYKId", o, "30d"),
-                        e.userId = o
-                    }
-                    e.userType = "youke"
-                }
                 a.addClass("xc-liker-ing"),
                 setTimeout(function() {
                     a.removeClass("xc-liker-ing")
                 },
                 600),
-                i && lvsCmd.ajax(apiServer + "/h5/comment/addLike.json", e,
+                i && lvsCmd.ajax(apiServer + "/www/live/addLike.do", e,
                 function(e, n) {
                     if ("0" == n.status) {
                         var o = a.find(".zan-num"),
@@ -161,7 +146,7 @@ function getInfo() {
             })
         }
         if (e) {
-
+            $("#content").html(i.data.content);
             if (void 0 == window.orientation && (i.ispc = !0), $("#j-liveinfo").html(liveinfoTpl.render(i)), $("#j-livevideo").length) {
                 var o = "/live/content/www/img/ic_default_pic@2x.png";
                 var t = i.data.playStreamUrl;
@@ -212,7 +197,7 @@ function getInfo() {
             });
             var p = $("#j-getDataState").html();
             p && $("#j-sort").show(),
-            "32" == p ? $(".xcy-sort p").append('<span class="xc-state end"><i>已结束</i></span>') : "8" == p || $(".xcy-sort p").append('<span class="xc-state ing"><i>鐩存挱涓�</i></span>'),
+            "3" == p ? $(".xcy-sort p").append('<span class="xc-state end"><i>已结束</i></span>') : "2" == p || $(".xcy-sort p").append('<span class="xc-state ing"><i>直播中</i></span>'),
             $("#j-desc p").height() > $("#j-desc").height() && ($("#j-desc").addClass("descclamp"), $("#j-desc .act").removeClass("fn-hide"), $("#j-desc").on(tap,
             function() {
                 $(this).toggleClass("descclamp")
@@ -223,8 +208,9 @@ function getInfo() {
             var f = i.data.startTime;
             i && i.data && (i.data.topic && (wxShareDict.title = i.data.topic, document.title = wxShareDict.title), i.data.remark && (wxShareDict.desc = i.data.remark), i.data.cover && (wxShareDict.imgUrl = i.data.cover), onshare()),
             increateNumTimeFn(),
-            lvsCmd.ajax(apiServer + "/h5/live/getTotalNumAndOrgInfo.json", {
-                companyId: companyId
+            lvsCmd.ajax(apiServer + "/www/live/getTotalNumAndOrgInfo.do", {
+                companyId: companyId,
+                id: lvsCmd.urlParams.id
             },
             function(e, i) {
                 if (e) {
@@ -233,14 +219,15 @@ function getInfo() {
                     i.data.totalNum;
                     a && $("#j-orgname").append("<p>" + a + "</p>"),
                     n && $("#j-orgname").append('<p class="small">' + n + "</p>"),
-                    "FFFF" == wxShareDict.desc && (wxShareDict.desc = a + formatDate(f, "YY骞碝鏈圖鏃鐐筸鍒�") + "鐜板満鐩存挱锛岀敱鐜板満浜戞彁渚涚洿鎾敮鎸併€�", onshare()),
+                    "FFFF" == wxShareDict.desc && (wxShareDict.desc = a + formatDate(f, "YYYY-mm-dd") + "LLLLMMM", onshare()),
                     $(".j-orgname-back").on(tap,
                     function() {
-                       // document.referrer && document.referrer.indexOf("//live.xinhuaapp.com/") > -1 ? document.referrer.indexOf("?id=") > -1 || document.referrer.indexOf("&id=") > -1 ? location.href = "/xcy/?companyId=" + companyId + "&showlink=" + showlink: document.referrer.indexOf("?companyId=") == -1 && document.referrer.indexOf("&companyId=") == -1 ? location.href = "/xcy/?companyId=" + companyId + "&showlink=" + showlink: history.back() : location.href = "/xcy/?companyId=" + companyId + "&showlink=" + showlink
+                       location.href = "index.html?companyId=" + companyId + "&showlink=" + showlink
                     })
                 }
-                lvsCmd.ajax(apiServer + "/h5/live/getShareContent.json", {
+                lvsCmd.ajax(apiServer + "/www/live/getShareContent.do", {
                     companyId: companyId
+
                 },
                 function(e, i) {
                     if (e) {
@@ -582,8 +569,8 @@ if (userAgent.indexOf("micromessenger") > -1) var webviewType = "weixin";
 else var webviewType = "other";
 $(window).scrollTop(0);
 var wxShareDict = {
-    title: "鐜板満浜�",
-    desc: "鐜板満鐩存挱锛岀敱鐜板満浜戞彁渚涚洿鎾敮鎸併€�",
+    title: "uuuurr",
+    desc: "fdafdafdas",
     link: "llllll",
     imgUrl: ""
 };
@@ -893,21 +880,22 @@ function() {
     return ! 1
 }), "weixin" == webviewType) {
     var wxConfig = {
-        noncestr: "xinhuaapp",
+        noncestr: "",
         timestamp: (new Date).getTime(),
         url: wxShareDict.link,
-        appid: "wx8ecfbf8357e25e45"
+        appid: ""
     };
-    lvsCmd.ajax(apiServer + "/h5/sysConfig/getWxJsSign.json", wxConfig,
+    lvsCmd.ajax(apiServer + "/www/live/getWxJsSign.do", {companyId: companyId},
     function(e, i) {
         wx.config({
             debug: !1,
-            appId: wxConfig.appid,
+            appId: i.data.appid,
             timestamp: wxConfig.timestamp,
-            nonceStr: wxConfig.noncestr,
+            nonceStr: i.data.noncestr,
             signature: i.data.jsSign,
             jsApiList: ["onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ"]
         })
+        console.log( i.data);
     })
 }
 var wxReady = !1;

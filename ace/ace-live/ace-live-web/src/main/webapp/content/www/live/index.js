@@ -39,8 +39,8 @@ function onshare() {
 
 var listPage = 1,
 wxShareDict = {
-    title: "鐜板満浜�",
-    desc: "鐜板満鐩存挱锛岀敱鐜板満浜戞彁渚涚洿鎾敮鎸併€�",
+    title: "",
+    desc: "",
     link: document.URL
 };
 lvsCmd.ajax(apiServer + "/www/live/getShareContent.do", {
@@ -50,7 +50,7 @@ function(i, g) {
     if (i) {
         var e = g.data.logo;
         $("#j-logo").html('<img src="' + e + '">'),
-        wxShareDict.desc = g.data.downloadTitle + "鐜板満鐩存挱锛岀敱鐜板満浜戞彁渚涚洿鎾敮鎸併€�"
+        wxShareDict.desc = g.data.downloadTitle
     } else lvsCmd.alert(g.errMsg)
 });
 var livelistTpl = juicer($("#j-livelist script").html());
@@ -64,7 +64,7 @@ $(window).scroll(function() {
     }
 });
 var wxConfig = {
-    noncestr: "xinhuaapp",
+    noncestr: "huacaiapp",
     timestamp: (new Date).getTime(),
     url: document.URL.split("#")[0],
     appid: "wx8ecfbf8357e25e45"

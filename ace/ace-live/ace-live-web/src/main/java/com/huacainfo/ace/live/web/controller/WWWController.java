@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.LiveMsg;
 import com.huacainfo.ace.live.model.LiveSub;
@@ -75,7 +76,7 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public Map<String, Object> getListByCompany(int page, String companyId) throws Exception {
         Map<String, Object> p = this.getPageParam(page, this.getParams());
-        Map<String, Object> rst = this.wwwService.getTotalNumAndOrgInfo(companyId);
+        Map<String, Object> rst = this.wwwService.getTotalPageAndOrgInfo(companyId);
         Long totalNum = (Long) rst.get("totalNum");
         Long totalpage = new Long(1);
         if (totalNum % this.defaultPageSize == 0) {
@@ -94,9 +95,9 @@ public class WWWController extends LiveBaseController {
 
     @RequestMapping(value = "/getTotalNumAndOrgInfo.do")
     @ResponseBody
-    public Map<String, Object> getTotalNumAndOrgInfo(String companyId) throws Exception {
+    public Map<String, Object> getTotalNumAndOrgInfo(String companyId, String id) throws Exception {
         Map<String, Object> rst = new HashMap<>();
-        rst.put("data", this.wwwService.getTotalNumAndOrgInfo(companyId));
+        rst.put("data", this.wwwService.getTotalNumAndOrgInfo(companyId, id));
         rst.put("errCode", "get_info_succeed");
         rst.put("errMsg", "获取现场总数和组织信息成功");
         rst.put("status", 0);
@@ -112,6 +113,15 @@ public class WWWController extends LiveBaseController {
         return rst;
     }
 
+    @RequestMapping(value = "/getWxJsSign.do")
+    @ResponseBody
+    public Map<String, Object> getWxJsSign(String companyId) throws Exception {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("data", this.wwwService.getWxJsSign(companyId));
+        rst.put("status", 0);
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:getLive
@@ -122,11 +132,13 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-01
      */
-    @RequestMapping(value = "/getLive.do")
+    @RequestMapping(value = "/getInfo.do")
     @ResponseBody
-    public Map<String, Object> getLive(String id) throws Exception {
+    public Map<String, Object> getInfo() throws Exception {
+        Map<String, Object> p = this.getParams();
+        p.put("fastdfs_server", PropertyUtil.getProperty("fastdfs_server"));
         Map<String, Object> rst = new HashMap<>();
-        rst.put("data", this.wwwService.getLive(id));
+        rst.put("data", this.wwwService.getLive(p));
         rst.put("status", "0");
         return rst;
     }
@@ -194,10 +206,11 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-07
      */
-    @RequestMapping(value = "/pop.do")
+    @RequestMapping(value = "/addLike.do")
     @ResponseBody
-    public SingleResult<Long> pop(String rid) throws Exception {
-        SingleResult<Long> rst = new SingleResult(0, "OK");
+    public Map<String, Object> addLike(String rid) throws Exception {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("status", "0");
         logger.debug("{}", rid);
         String keypop = rid + ".pop";
         Long pop = (Long) this.redisTemplate.opsForValue().get(keypop);
@@ -206,7 +219,7 @@ public class WWWController extends LiveBaseController {
             this.redisTemplate.opsForValue().set(keypop, pop);
         }
         this.redisTemplate.opsForValue().set(keypop, new Long(pop + 1));
-        rst.setValue(pop);
+        rst.put("likeNum", pop);
         return rst;
     }
 

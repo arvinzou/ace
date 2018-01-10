@@ -22,13 +22,13 @@
                 {@if data.type == 4}
 
                 <!-- state：8=图片、32=视屏、其他=直播   -->
-                {@if data.state == 8}
-                {@if data.cover && data.cover != 'https://xcycdn.zhongguowangshi.com'}
-                <img src="${data.cover}?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                {@if data.state == 1}
+                {@if data.cover}
+                <img src="${data.cover}">
                 {@else}
-                <img src="//xcycdn.zhongguowangshi.com/live-img/ic_default_pic@2x.png?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                <img src="">
                 {@/if}
-                {@else if data.state == 32}
+                {@else if data.state == 3}
                 <div id="j-livevideo" class="large-video">
                     <div class="playtitle">
                         <div id="j-v-close" class="v-close"><i></i></div>
@@ -69,10 +69,10 @@
                         <div class="tip fn-hide">
                             <p>获取不到视频画面，请刷新重试</p>
                         </div>
-                        {@if data.cover && data.cover != 'https://xcycdn.zhongguowangshi.com'}
-                        <img src="${data.cover}?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                        {@if data.cover}
+                        <img src="${data.cover}">
                         {@else}
-                        <img src="//xcycdn.zhongguowangshi.com/live-img/ic_default_pic@2x.png?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                        <img src="">
                         {@/if}
                     </div>
                 </div>
@@ -116,10 +116,10 @@
                         <div class="tip fn-hide">
                             <p>获取不到直播画面，请刷新重试</p>
                         </div>
-                        {@if data.cover && data.cover != 'https://xcycdn.zhongguowangshi.com'}
-                        <img src="${data.cover}?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                        {@if data.cover}
+                        <img src="${data.cover}">
                         {@else}
-                        <img src="//xcycdn.zhongguowangshi.com/live-img/ic_default_pic@2x.png?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                        <img src="">
                         {@/if}
                     </div>
                 </div>
@@ -141,9 +141,9 @@
                 -->
                 {@else}
                 {@if data.cover}
-                <img src="${data.cover}?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                <img src="${data.cover}">
                 {@else}
-                <img src="//xcycdn.zhongguowangshi.com/live-img/ic_default_pic@2x.png?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                <img src="">
                 {@/if}
                 {@/if}
             </div>
@@ -227,7 +227,7 @@
                             <div class="wrap">
                                 <div class="headpic">
                                     {@if item.head}
-                                    <img data-lazy-img="${item.head}?x-oss-process=image/resize,m_mfit,w_108,h_108">
+                                    <img data-lazy-img="${item.head}">
                                     {@else}
                                     <img src="/live/content/www/img/head_default.png">
                                     {@/if}
@@ -266,7 +266,7 @@
                                         {@if item.thumbnail}
                                         <img src="${item.thumbnail}">
                                         {@else}
-                                        <img src="//xcycdn.zhongguowangshi.com/live-img/ic_default_pic@2x.png?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0">
+                                        <img src="">
                                         {@/if}
                                     </div>
                                     <!-- <div class="v-loading-new fn-hide">
@@ -436,7 +436,9 @@
 
 <script src="/live/content/www/js/photoswipe.js?_t=1511436259000"></script>
 <script src="/live/content/www/js/soshm.js"></script>
-<script src="/live/content/www/js/info.js?_t=1511967632000"></script>
+<script src="/live/content/www/live/info.js?_t=1511967632000"></script>
+<script src="/live/content/www/live/msg.js?_t=1511967632000"></script>
+<script src="/live/content/www/live/sub.js?_t=1511967632000"></script>
 <script src="/live/content/www/js/spm.js"></script>
 <style>
         .tab_box{
