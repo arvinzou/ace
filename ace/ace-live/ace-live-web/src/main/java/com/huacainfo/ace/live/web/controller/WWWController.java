@@ -73,9 +73,9 @@ public class WWWController extends LiveBaseController {
      */
     @RequestMapping(value = "/getListByCompany.do")
     @ResponseBody
-    public Map<String, Object> getListByCompany(int page, String deptId) throws Exception {
+    public Map<String, Object> getListByCompany(int page, String companyId) throws Exception {
         Map<String, Object> p = this.getPageParam(page, this.getParams());
-        Map<String, Object> rst = this.wwwService.getTotalNumAndOrgInfo(deptId);
+        Map<String, Object> rst = this.wwwService.getTotalNumAndOrgInfo(companyId);
         Long totalNum = (Long) rst.get("totalNum");
         Long totalpage = new Long(1);
         if (totalNum % this.defaultPageSize == 0) {
@@ -94,9 +94,9 @@ public class WWWController extends LiveBaseController {
 
     @RequestMapping(value = "/getTotalNumAndOrgInfo.do")
     @ResponseBody
-    public Map<String, Object> getTotalNumAndOrgInfo(String deptId) throws Exception {
+    public Map<String, Object> getTotalNumAndOrgInfo(String companyId) throws Exception {
         Map<String, Object> rst = new HashMap<>();
-        rst.put("data", this.wwwService.getTotalNumAndOrgInfo(deptId));
+        rst.put("data", this.wwwService.getTotalNumAndOrgInfo(companyId));
         rst.put("errCode", "get_info_succeed");
         rst.put("errMsg", "获取现场总数和组织信息成功");
         rst.put("status", 0);
@@ -105,9 +105,9 @@ public class WWWController extends LiveBaseController {
 
     @RequestMapping(value = "/getShareContent.do")
     @ResponseBody
-    public Map<String, Object> getShareContent(String deptId) throws Exception {
+    public Map<String, Object> getShareContent(String companyId) throws Exception {
         Map<String, Object> rst = new HashMap<>();
-        rst.put("data", this.wwwService.getShareContent(deptId));
+        rst.put("data", this.wwwService.getShareContent(companyId));
         rst.put("status", 0);
         return rst;
     }

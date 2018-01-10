@@ -83,10 +83,8 @@ lvsCmd.alert = function(e) {
 lvsCmd.ajax = function(e, a, r) {
     $.ajax({
         type: "post",
-        dataType: "json",
-        contentType: "application/json",
         url: e,
-        data: JSON.stringify(a),
+        data: a,
         success: function(e) {
             r(!0, e)
         },
