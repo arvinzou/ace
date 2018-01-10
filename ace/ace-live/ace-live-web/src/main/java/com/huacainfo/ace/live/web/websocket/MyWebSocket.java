@@ -126,14 +126,14 @@ public class MyWebSocket {
         this.kafkaProducerService.sendMsg(topic, data);
 
         //群发消息
-       /* for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
             try {
                 item.sendMessage(message);
             } catch (IOException e) {
                 logger.error(e.getMessage());
                 continue;
             }
-        }*/
+        }
     }
 
     /**

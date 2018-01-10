@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="/live/content/www/css/iconfont.css"/>
     <link rel="stylesheet" href="/live/content/www/css/info.css"/>
     <script src="/live/content/www/js/init-rem.js"></script>
+    <script>
+        var websocketurl="127.0.0.1";
+
+    </script>
 </head>
 <body>
 <div class="fn-contain">
@@ -326,8 +330,20 @@
                 <span>正在加载...</span>
             </div>
         </div>
-        <div class="hide tab_content" id="livemsg">
-            互动聊天
+        <div class="hide" id="livemsg">
+            <div id="chatlist">
+
+            </div>
+            <div class="xcy-remark">
+                <div class="wrap">
+                    <div class="bar">
+                        <form id="j-remarkform-msg" onsubmit="return submitMsg(this)">
+                            <input type="text" placeholder="写点什么唄~" name="content" autocomplete="off" maxlength="200">
+                            <input type="submit" value="发送">
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="hide tab_content" id="content">
             活动介绍
@@ -424,6 +440,24 @@
         </div>
     </div>
 </div>
+
+<script id="tpl-msg" type="text/template">
+    <div class="live-msg">
+        <div class="wxuser">
+            <div class="wxuser-img"><img src="${header.wxuser.headimgurl}" class="headimg"></div>
+            <div class="wxuser-nickname">${header.wxuser.nickname}</div>
+        </div>
+
+        <div class="bubbleItem">
+            <div class="bubble leftBubble">
+                ${content}
+                <span class="bottomLevel"></span>
+                <span class="topLevel"></span>
+            </div>
+        </div>
+    </div>
+</script>
+<script src="/live/content/common/js/reconnecting-websocket.js"></script>
 <script src="/live/content/www/js/jweixin-1.0.0.js"></script>
 <script src="/live/content/www/lib/prismplayer/prism-min.js"></script>
 <script src="/live/content/www/js/zepto-1.2.0.min.js"></script>
@@ -483,7 +517,110 @@
         .tab_content{
            padding:15px;
         }
+        #chatlist{
+            width: 100%;
+            max-height: 300px;
+            min-height: 300px;
+            overflow-y: scroll;
+        }
+        .headimg{
+            max-height:40px;
+            border-radius:20px
+        }
+        .wxuser{
+            float:left;
+            width:50px;
+            padding:3px;
+            font-size: .28rem;
+            color: #999;
+            text-align:center;
+        }
+        .wxmessage{
+            margin-top: .13rem;
+            padding-right: .32rem;
+            font-size: .37rem;
+            line-height: .58rem;
+            height: 1.17rem;
+            color: #999;
+            margin-left;
+            margin-left:60px;
 
+
+        }
+        .live-msg{
+            float:left;
+            width:100%;
+            height:auto;
+        }
+        .bubbleItem{
+            font-size: .37rem;
+            line-height: .58rem;
+            color: #999;
+            margin-left;
+            margin-left:50px;
+        }
+        .bubble{
+            max-width: 80%;
+            position: relative;
+            line-height: 30px;
+            padding-left: 10px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            border-radius: 7px;
+            margin-top: 15px;
+            padding-right: 10px;
+            display: inline-block;
+        }
+        .leftBubble{
+            position: relative;
+            margin-left: 25px;
+            border: 1px solid #00b6b6;
+            background-color: #f8fdfc;
+        }
+        .leftBubble .bottomLevel{
+            position: absolute;
+            top: 10px;
+            left: -10px;
+            border-top: 10px solid #00b6b6;
+            border-left: 10px solid transparent;
+        }
+        .leftBubble .topLevel{
+            position: absolute;
+            top: 11px;
+            left: -8px;
+            border-top: 10px solid #f8fdfc;
+            border-left: 10px solid transparent;
+            z-index: 100;
+        }
+        .rightBubble{
+            position: relative;
+            margin-right: 25px;
+            float: right;
+            border: 1px solid #aaa;
+        }
+        .rightBubble .bottomLevel{
+            position: absolute;
+            bottom: 11px;
+            right: -10px;
+            border-bottom: 10px solid #aaa;
+            border-right: 10px solid transparent;
+        }
+        .rightBubble .topLevel{
+            position: absolute;
+            bottom: 12px;
+            right: -8px;
+            border-bottom: 10px solid #fff;
+            border-right: 10px solid transparent;
+            z-index: 100;
+        }
+        .clearfix:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
 
 
 
