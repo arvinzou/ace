@@ -93,7 +93,7 @@ public class CreateRequest extends BaseModel {
         this.name = name;//会议名称
         this.duration = 0;//会议时长 0为永久会议
         this.conf_level = 10;//会议等级 0—16 数字越大会议等级越高，默认为0
-        this.bitrate = 8128;//
+        this.bitrate = 8128;//码率
         this.closed_conf = 0;//	会议免打扰 0-关闭；1-开启；
         this.safe_conf = 0;//	会议安全 0-公开会议；1-隐藏会议；
         this.encrypted_type = 0;//	传输加密类型 0-不加密；2-AES加密；
@@ -128,7 +128,7 @@ public class CreateRequest extends BaseModel {
         this.vmp = new Vmp();
     }
 
-    public CreateRequest(String name, Speaker speaker, Chairman chairman, List<InviteMember> invite_members, List<Vmp> vmp) {
+    public CreateRequest(String name, Speaker speaker, Chairman chairman, List<InviteMember> invite_members, Vmp vmp) {
         this.name = name;//会议名称
         this.duration = 0;//会议时长 0为永久会议
         this.conf_level = 10;//会议等级 0—16 数字越大会议等级越高，默认为0
@@ -164,7 +164,7 @@ public class CreateRequest extends BaseModel {
         this.speaker = speaker;
         this.chairman = chairman;
         this.invite_members = invite_members;
-        this.vmp = new Vmp();
+        this.vmp = vmp;
     }
 
 

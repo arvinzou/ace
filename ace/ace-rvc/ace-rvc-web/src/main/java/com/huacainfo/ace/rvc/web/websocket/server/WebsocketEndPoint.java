@@ -59,7 +59,7 @@ public class WebsocketEndPoint {
         SessionUtils.put(rid, uid, session);
 
         //
-        String welcome = getInstance().getWelcomeStatement(rid,uid);
+        ChatDTO welcome = getInstance().getWelcomeStatement(rid, uid);
 
         //
         broadcast(rid, uid, welcome);
@@ -89,7 +89,7 @@ public class WebsocketEndPoint {
             return;
         }
         //广播消息
-        broadcast(rid, uid, reply.toString());
+        broadcast(rid, uid, reply);
     }
 
 
@@ -150,21 +150,22 @@ public class WebsocketEndPoint {
     /**
      * 广播消息
      *
-     * @param rid      发送房间号
-     * @param uid      发送人表示
-     * @param replyTxt 回复文本
+     * @param rid   发送房间号
+     * @param uid   发送人表示
+     * @param reply 回复对象
      */
-    private void broadcast(String rid, String uid, String replyTxt) {
+    private void broadcast(String rid, String uid, ChatDTO reply) {
 //        String key;
 //        Session client;
         String[] keyArray;
         for (Map.Entry<String, Session> entry : SessionUtils.clients.entrySet()) {
             keyArray = entry.getKey().split("_");
-            //TODO 是否区别回复本人时的文本排布格式
             if (uid.equals(keyArray[1])) {
-                sendMessage(keyArray[0], keyArray[1], replyTxt);
+                reply.setSelf(true);
+                sendMessage(keyArray[0], keyArray[1], reply.toString());
             } else {
-                sendMessage(keyArray[0], keyArray[1], replyTxt);
+                reply.setSelf(false);
+                sendMessage(keyArray[0], keyArray[1], reply.toString());
             }
         }
     }

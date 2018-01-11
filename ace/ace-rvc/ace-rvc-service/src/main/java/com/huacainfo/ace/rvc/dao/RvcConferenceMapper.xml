@@ -29,12 +29,13 @@
     <result column="lastModifyUserId" property="lastModifyUserId" jdbcType="VARCHAR" />
     <result column="lastModifyUserName" property="lastModifyUserName" jdbcType="VARCHAR" />
     <result column="lastModifyDate" property="lastModifyDate" jdbcType="TIMESTAMP" />
+    <result column="kedaRecId" property="kedaRecId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, confId, title, subtitle, description, poCode, poName, confType, emceeId, emceeName, 
     addressId, addressName, beginDate, endDate, duration, liveURL, kedaAccount, kedaAccountType, 
     displaySeq, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
-    lastModifyUserName, lastModifyDate
+    lastModifyUserName, lastModifyDate, kedaRecId
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -55,7 +56,8 @@
       liveURL, kedaAccount, kedaAccountType, 
       displaySeq, remark, status, 
       createUserId, createUserName, createDate, 
-      lastModifyUserId, lastModifyUserName, lastModifyDate
+      lastModifyUserId, lastModifyUserName, lastModifyDate,
+      kedaRecId
       )
     values (#{id,jdbcType=VARCHAR}, #{confId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{subtitle,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{poCode,jdbcType=VARCHAR}, 
@@ -65,7 +67,8 @@
       #{liveURL,jdbcType=VARCHAR}, #{kedaAccount,jdbcType=VARCHAR}, #{kedaAccountType,jdbcType=INTEGER}, 
       #{displaySeq,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
+      #{kedaRecId,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.huacainfo.ace.rvc.model.RvcConference" >
@@ -152,6 +155,9 @@
       <if test="lastModifyDate != null" >
         lastModifyDate,
       </if>
+      <if test="kedaRecId != null" >
+        kedaRecId,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -234,6 +240,9 @@
       </if>
       <if test="lastModifyDate != null" >
         #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="kedaRecId != null" >
+        #{kedaRecId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -318,6 +327,9 @@
       <if test="lastModifyDate != null" >
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="kedaRecId != null" >
+        kedaRecId = #{kedaRecId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -348,7 +360,8 @@
       createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      kedaRecId = #{kedaRecId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 

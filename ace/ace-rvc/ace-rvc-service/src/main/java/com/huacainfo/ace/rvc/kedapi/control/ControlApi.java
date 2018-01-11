@@ -13,6 +13,7 @@ import com.huacainfo.ace.rvc.kedapi.control.model.RecordStatusResp;
 import com.huacainfo.ace.rvc.kedapi.control.model.conference.VideoConfListResp;
 import com.huacainfo.ace.rvc.kedapi.control.model.conference.VideoConfResp;
 import com.huacainfo.ace.rvc.kedapi.control.model.terminal.TerminalResp;
+import com.huacainfo.ace.rvc.util.ResultUtil;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -92,12 +93,12 @@ public class ControlApi extends BaseApi {
     public static String record(String confId, RecordReq params, String accountToken, String cookies) {
         String encode = CommonKit.encode(JsonUtil.toJson(params));
         if (StringUtils.isEmpty(encode)) {
-            return CommonKit.fail();
+            return ResultUtil.FAIL;
         }
         Map<String, String> rtnMap = HttpKit.doPost(AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/recorders"
                 , "account_token=" + accountToken + "&params=" + encode
                 , cookies);
-        logger.debug("confId<" + confId + ">, ControlApi.record: " + rtnMap.toString());
+        logger.info("confId<" + confId + ">, ControlApi.record: " + rtnMap.toString());
 //        {
 //            "success": 1,
 //                "rec_id": "1"
@@ -110,7 +111,7 @@ public class ControlApi extends BaseApi {
         if (JsonUtil.toMap(rtnMap.get("resp")).get("success") == 1) {
             return (String) JsonUtil.toMap(rtnMap.get("resp")).get("rec_id");
         } else {
-            return CommonKit.fail();
+            return ResultUtil.FAIL;
         }
     }
 
@@ -164,21 +165,27 @@ public class ControlApi extends BaseApi {
      * @param params       请求参数 {    "value": 1,    "recorder_mode": 1    }
      * @return success/fail
      */
-    public static String updateRecordStatus(String confId, String recId, String accountToken, Map<String, Integer> params) {
+    public static String updateRecordStatus(String confId, String recId, Map<String, Integer> params,
+                                            String accountToken, String cookies) {
 
         String encode = CommonKit.encode(JsonUtil.toJson(params));
         if (StringUtils.isEmpty(encode)) {
-            return CommonKit.fail();
+            return ResultUtil.FAIL;
         }
 
-        String respStr = HttpSend.getSend(
+        Map<String, String> response = HttpKit.doPost(
                 AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/recorders/" + recId + "/state",
-                "account_token=" + accountToken + "&_method=PUT&params=" + encode);
+                "account_token=" + accountToken + "&_method=PUT&params=" + encode, cookies);
 
-        if (JsonUtil.toMap(respStr).get("success") == 1) {
-            return (String) JsonUtil.toMap(respStr).get("rec_id");
+//        {
+//            "success": 1
+//        }
+        logger.info("confId<" + confId + ">, ControlApi.record: " + response.toString());
+
+        if (JsonUtil.toMap(response.get("resp")).get("success") == 1) {
+            return ResultUtil.SUCCESS;
         } else {
-            return CommonKit.fail();
+            return ResultUtil.FAIL;
         }
     }
 
@@ -194,7 +201,8 @@ public class ControlApi extends BaseApi {
      * @param recorderMode 录像模式 1-录像；2-直播；3-录像+直播；
      * @return success/fail
      */
-    public static String stopRecord(String confId, String recId, String accountToken, int recorderMode) {
+    public static String stopRecord(String confId, String recId, int recorderMode,
+                                    String accountToken, String cookies) {
         Map<String, Object> params = new HashMap<>();
         params.put("recorder_mode", recorderMode);
         String encode = CommonKit.encode(JsonUtil.toJson(params));
@@ -202,14 +210,16 @@ public class ControlApi extends BaseApi {
             return CommonKit.fail();
         }
 
-        String respStr = HttpSend.getSend(
+        Map<String, String> response = HttpKit.doPost(
                 AuthorizeApi.URI + "/api/v1/vc/confs/" + confId + "/recorders/" + recId,
-                "account_token=" + accountToken + "&_method=DELETE&params=" + encode);
+                "account_token=" + accountToken + "&_method=DELETE&params=" + encode, cookies);
 
-        if (JsonUtil.toMap(respStr).get("success") == 1) {
-            return CommonKit.success();
+        logger.debug(ControlApi.class.getName() + ".stopRecord:" + response.toString());
+
+        if (JsonUtil.toMap(response.get("resp")).get("success") == 1) {
+            return ResultUtil.SUCCESS;
         } else {
-            return CommonKit.fail();
+            return ResultUtil.FAIL;
         }
     }
 

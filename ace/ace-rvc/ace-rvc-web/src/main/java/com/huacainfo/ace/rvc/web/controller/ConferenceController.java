@@ -31,6 +31,27 @@ public class ConferenceController extends BaseController {
     @Autowired
     private ConferenceService conferenceService;
 
+    /**
+     * 会议录制
+     *
+     * @param userId       操作人用户id
+     * @param conferenceId 会议ID -- rvc_conference.id
+     * @param action       动作代码：start - 开启录制,stop - 关闭录制
+     * @return result
+     */
+    @ResponseBody
+    @RequestMapping(value = "/record", method = RequestMethod.POST)
+    public Map<String, Object> record(String userId, String conferenceId, String action) {
+
+        try {
+            return ResultUtil.success(conferenceService.record(userId, conferenceId, action));
+        } catch (Exception e) {
+            logger.error("ConferenceController.record.error:{}", e);
+
+            return ResultUtil.fail(-1, "系统错误");
+        }
+    }
+
 
     /**
      * 获取单个会议信息
@@ -278,7 +299,6 @@ public class ConferenceController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public Map<String, Object> start(String userId, String conferenceId) throws Exception {
-
 
         try {
 

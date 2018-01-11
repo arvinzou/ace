@@ -1,7 +1,8 @@
 var uid = getParameterStr("uid");
 var rid = getParameterStr("rid");
 //    var uri = "ws://127.0.0.1:6001/rvc/live/websocket/r001/" + name;//本地
-var domain = "localhost:6001";//"1931507me2.iok.la:28228";
+// var domain = "localhost:6001";
+var domain = "1931507me2.iok.la:28228";
 var uri = "ws://" + domain + "/rvc/live/websocket/" + rid + "/" + uid;//代理
 
 

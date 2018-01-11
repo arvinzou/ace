@@ -9,11 +9,19 @@ import java.util.List;
 public class Vmp {
 
     public Vmp() {
-        this.mode = 2;//2-自动画面合成
+        this.mode = 2;//2-自动画面合成；
         this.voice_hint = 1;//识别声音来源
         this.broadcast = 1;//向终端广播
         this.show_mt_name = 1;//显示别名
         this.members = new ArrayList<>();//空列表
+    }
+
+    public Vmp(int layout, List<VmpMember> members) {
+        this.mode = 1;//1-定制画面合成
+        this.voice_hint = 1;//识别声音来源
+        this.broadcast = 1;//向终端广播
+        this.show_mt_name = 1;//显示别名
+        this.members = members;//
     }
 
     public Vmp(int mode, int layout, int voice_hint, int broadcast, int show_mt_name, List<VmpMember> members) {

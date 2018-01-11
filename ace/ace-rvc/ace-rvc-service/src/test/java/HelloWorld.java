@@ -1,5 +1,4 @@
 import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.FileUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.kedapi.common.constant.VideoConstant;
@@ -11,6 +10,7 @@ import com.huacainfo.ace.rvc.kedapi.manage.model.create.CreateRequest;
 import com.huacainfo.ace.rvc.kedapi.vrs.VRSApi;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LiveRoomResp;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LocalLoginResp;
+import com.huacainfo.ace.rvc.kedapi.vrs.model.program.ProgramListResp;
 import com.huacainfo.ace.rvc.vo.ConferenceDTO;
 import com.huacainfo.ace.rvc.vo.JoinMember;
 import com.huacainfo.ace.rvc.vo.SearchCondition;
@@ -78,13 +78,19 @@ public class HelloWorld {
     @Test
     public void test() {
 //        System.out.println(GUIDUtil.getGUID() + "\n" + DateUtil.getNow());
+        //        //login and authorize
+        String token = AuthorizeApi.getToken(AuthorizeApi.APP_KEY, AuthorizeApi.APP_SECRET);
+//        Map<String, String> map = AuthorizeApi.login("admin1", "888888", token);
+//        String cookies = map.get("cookies");
+        LocalLoginResp loginResp = VRSApi.localLogin(token, "admin", "admin");
+        String cookies_vrs = "SSO_COOKIE_KEY=" + loginResp.getToken();
 
-        try {
-            String a = FileUtil.encodeBase64("C:\\Users\\Arvin\\Desktop\\科达沟通01.txt");
-            System.out.println(a);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        FolderResp rs = VRSApi.getProgramFolder(token, cookies_vrs);
+        ProgramListResp res = VRSApi.getProgramList("会议10", token, cookies_vrs);
+        System.out.println(res.getFileUrl());
+
+//        http://192.168.20.243/asffile/会议10.asf
+
     }
 
 

@@ -33,7 +33,7 @@ public class FileController extends BaseController {
      * @throws Exception
      */
     @ResponseBody
-    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    @RequestMapping(value = "/upload")
     public Map<String, Object> upload(@RequestParam("files") MultipartFile[] files,
                                       String conferenceId, String userId) {
         if (StringUtils.isEmpty(userId) ||

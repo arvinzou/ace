@@ -23,5 +23,5 @@ public interface ChatLogService {
      * @param uid 用户ID -- rvc_base_user.userId
      * @return String
      */
-    String getWelcomeStatement(String rid, String uid);
+    ChatDTO getWelcomeStatement(String rid, String uid);
 }

@@ -8,6 +8,9 @@ import java.util.Map;
  */
 public class ResultUtil {
 
+    public static final String FAIL = "fail";
+
+    public static final String SUCCESS = "success";
 
     public static Map<String, Object> success(Object object) {
         Map<String, Object> map = new HashMap<>();

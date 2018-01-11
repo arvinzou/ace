@@ -48,6 +48,32 @@ public class RvcBaseUser {
      */
     private String poName;
 
+    /**
+     * 科达平台服务器地址
+     */
+    private String kedaServerDomain;
+
+    /**
+     * 科达账号登录密码
+     */
+    private String kedaPwd;
+
+    public String getKedaServerDomain() {
+        return kedaServerDomain;
+    }
+
+    public void setKedaServerDomain(String kedaServerDomain) {
+        this.kedaServerDomain = kedaServerDomain;
+    }
+
+    public String getKedaPwd() {
+        return kedaPwd;
+    }
+
+    public void setKedaPwd(String kedaPwd) {
+        this.kedaPwd = kedaPwd;
+    }
+
     public String getPoCode() {
         return poCode;
     }

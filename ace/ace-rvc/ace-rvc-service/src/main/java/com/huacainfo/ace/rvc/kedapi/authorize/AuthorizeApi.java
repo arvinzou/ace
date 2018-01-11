@@ -19,7 +19,7 @@ public class AuthorizeApi {
 
     public static final String HTTP = "http://";
     public static final String HTTPS = "https://";
-    public static final String IP_PORT = "127.0.0.1:8080";
+    public static final String IP_PORT = "192.168.20.240";
     public static final String SEPARATOR = "/";
     public static final String URI = "http://192.168.20.240";
     public static final String VRS_URI = "http://192.168.20.243";

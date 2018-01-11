@@ -15,11 +15,12 @@ public class ChatDTO {
     public ChatDTO() {
     }
 
-    public ChatDTO(String rid, String uid, String action, String content) {
+    public ChatDTO(String rid, String uid, String action, String content, String portrait) {
         this.rid = rid;
         this.uid = uid;
         this.action = action;
         this.content = content;
+        this.portrait = portrait;
     }
 
     /**
@@ -30,10 +31,16 @@ public class ChatDTO {
      * 用户ID
      */
     private String uid;
+
+    /**
+     * 发言人姓名
+     */
+    private String speakerName;
     /**
      * 动作code  --必填
      * text     -- 文本内容
      * file     --  文件 base64 字符串
+     * image    -- 图片
      * speaker  -- 申请为发言人
      */
     private String action;
@@ -42,6 +49,39 @@ public class ChatDTO {
      */
     private String content;
 
+    /**
+     * 人物头像
+     */
+    private String portrait;
+
+    /**
+     * 是否自己
+     */
+    private boolean isSelf;
+
+    public boolean isSelf() {
+        return isSelf;
+    }
+
+    public void setSelf(boolean self) {
+        isSelf = self;
+    }
+
+    public String getSpeakerName() {
+        return speakerName;
+    }
+
+    public void setSpeakerName(String speakerName) {
+        this.speakerName = speakerName;
+    }
+
+    public String getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(String portrait) {
+        this.portrait = portrait;
+    }
 
     public String getRid() {
         return rid;

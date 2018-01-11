@@ -5,6 +5,25 @@ package com.huacainfo.ace.rvc.kedapi.manage.model.create;
  */
 public class VmpMember {
 
+    public VmpMember() {
+    }
+
+    public VmpMember(String name, String account, int account_type, int chn_idx) {
+        this.name = name;
+        this.account = account;
+        this.account_type = account_type;
+        this.member_type = 1;
+        this.chn_idx = chn_idx;
+    }
+
+    public VmpMember(String name, String account, int account_type, int member_type, int chn_idx) {
+        this.name = name;
+        this.account = account;
+        this.account_type = account_type;
+        this.member_type = member_type;
+        this.chn_idx = chn_idx;
+    }
+
     /**
      * 帐号 最大字符长度：128个字节 仅当跟随类型为会控指定时才需要输入
      */
@@ -16,7 +35,7 @@ public class VmpMember {
     /**
      * 帐号类型 1-moid；4-非系统邮箱；5-e164号；6-电话；7-ip地址；
      */
-    private String account_type;
+    private int account_type;
     /**
      * 跟随类型 1-会控指定；2-发言人跟随；3-管理方跟随；4-会议轮询跟随；7-内容共享跟随；
      */
@@ -43,11 +62,11 @@ public class VmpMember {
         this.account = account;
     }
 
-    public String getAccount_type() {
+    public Integer getAccount_type() {
         return account_type;
     }
 
-    public void setAccount_type(String account_type) {
+    public void setAccount_type(Integer account_type) {
         this.account_type = account_type;
     }
 

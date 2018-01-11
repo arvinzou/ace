@@ -10,6 +10,9 @@ import com.huacainfo.ace.rvc.kedapi.common.kits.UrlKit;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LiveBroadcast;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LiveRoomResp;
 import com.huacainfo.ace.rvc.kedapi.vrs.model.LocalLoginResp;
+import com.huacainfo.ace.rvc.kedapi.vrs.model.program.FolderResp;
+import com.huacainfo.ace.rvc.kedapi.vrs.model.program.ProgramDetail;
+import com.huacainfo.ace.rvc.kedapi.vrs.model.program.ProgramListResp;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 
@@ -23,6 +26,52 @@ import java.util.Map;
 public class VRSApi extends BaseApi {
     private static Logger logger = Logger.getLogger(VRSApi.class);
 
+
+    /**
+     * 名称	获取节目列表
+     * URI	/api/v1/vrs/program
+     * 方法	GET
+     * 说明	获取节目列表
+     */
+    public static ProgramListResp getProgramList(String keyWords, String token, String cookies) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("account_token", token);
+        params.put("folderid", 1);
+        params.put("prgs1page", 10);
+        params.put("pageid", 1);
+        params.put("includename", keyWords);
+//        params.put("prgtypemask",0);
+        String response = HttpKit.doGet(AuthorizeApi.VRS_URI + "/api/v1/vrs/program"
+                , UrlKit.getUrlParamsByMap(params),
+                cookies);
+        logger.debug("VRSApi.getProgramList:" + response);
+        if (JsonUtil.toMap(response).get("success") == 1) {
+            ProgramListResp resp = JsonUtil.toObject(response, ProgramListResp.class);
+            ProgramDetail detail = resp.getPrginfo().get(0).getPrgdetail().get(0);
+            //ip/relativepath/prgname
+            resp.setFileUrl(AuthorizeApi.VRS_URI + detail.getRelativepath() + detail.getPrgname());
+
+            return resp;
+        } else
+            return null;
+
+    }
+
+    /**
+     * 名称	获取文件夹列表
+     * URI	/api/v1/vrs/program_folder
+     * 方法	GET
+     * 说明	获取文件夹列表
+     */
+    public static FolderResp getProgramFolder(String token, String cookies) {
+        String response = HttpKit.doGet(AuthorizeApi.VRS_URI + "/api/v1/vrs/program_folder"
+                , "account_token=" + token,
+                cookies);
+
+        logger.debug("VRSApi.getProgramFolder:" + response);
+
+        return JsonUtil.toObject(response, FolderResp.class);
+    }
 
     /**
      * 名称	本地用户登录
