@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.SpringUtils;
-import com.huacainfo.ace.live.model.LiveSub;
-import com.huacainfo.ace.live.service.LiveSubService;
+import com.huacainfo.ace.live.model.LiveRpt;
+import com.huacainfo.ace.live.service.LiveRptService;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import org.slf4j.Logger;
@@ -17,7 +17,7 @@ public class LiveSubCallBackThread extends Thread {
     private static final Logger LOGGER = LoggerFactory.getLogger(LiveSubCallBackThread.class);
 
     private KafkaStream<byte[], byte[]> stream = null;
-    private LiveSubService liveSubService;
+    private LiveRptService liveSubService;
 
     public LiveSubCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
         super(name);
@@ -33,7 +33,7 @@ public class LiveSubCallBackThread extends Thread {
 
     private void init() {
 
-        this.liveSubService = (LiveSubService) SpringUtils.getBean("liveSubService");
+        this.liveSubService = (LiveRptService) SpringUtils.getBean("liveSubService");
     }
 
     @Override
@@ -56,7 +56,7 @@ public class LiveSubCallBackThread extends Thread {
     public void doCallBack(Map<String, String> data) {
         LOGGER.info("接收消息->{}", data);
         try {
-            LiveSub o = new LiveSub();
+            LiveRpt o = new LiveRpt();
             o.setContent(data.get("message"));
             o.setRid(data.get("rid"));
             o.setUid(data.get("uid"));

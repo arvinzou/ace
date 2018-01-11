@@ -3,30 +3,30 @@ package com.huacainfo.ace.live.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import com.huacainfo.ace.live.model.LiveSub;
-import com.huacainfo.ace.live.vo.LiveSubQVo;
-import com.huacainfo.ace.live.vo.LiveSubVo;
+import com.huacainfo.ace.live.model.LiveRpt;
+import com.huacainfo.ace.live.vo.LiveRptQVo;
+import com.huacainfo.ace.live.vo.LiveRptVo;
 
-public interface LiveSubDao {
+public interface LiveRptDao {
     int deleteByPrimaryKey(String LiveSubId);
 
-    int insert(LiveSub record);
+    int insert(LiveRpt record);
 
 
-    LiveSubVo selectByPrimaryKey(String LiveSubId);
+    LiveRptVo selectByPrimaryKey(String LiveSubId);
 
 
-    int updateByPrimaryKey(LiveSub record);
+    int updateByPrimaryKey(LiveRpt record);
 
     int updateStatusByPrimaryKey(@Param("id") String id, @Param("status") String status);
 
-    List<LiveSubVo> findList(@Param("condition") LiveSubQVo condition,
+    List<LiveRptVo> findList(@Param("condition") LiveRptQVo condition,
                              @Param("start") int start, @Param("limit") int limit,
                              @Param("orderBy") String orderBy);
 
-    int findCount(@Param("condition") LiveSubQVo condition);
+    int findCount(@Param("condition") LiveRptQVo condition);
 
-    int isExit(LiveSub record);
+    int isExit(LiveRpt record);
 
     int updateSortByPrimaryKey(@Param("id") String id, @Param("sort") int sort);
 

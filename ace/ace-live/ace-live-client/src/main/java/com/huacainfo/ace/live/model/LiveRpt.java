@@ -2,7 +2,7 @@ package com.huacainfo.ace.live.model;
 
 import java.util.Date;
 
-public class LiveSub implements java.io.Serializable {
+public class LiveRpt implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     private String id;
 

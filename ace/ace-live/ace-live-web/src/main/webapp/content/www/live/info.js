@@ -261,7 +261,11 @@ function getInfo() {
 function reportContent(e) {
     return e.replace(/\n/g, "<br>")
 }
+var load=false;
 function getReport(e, i) {
+    if(load){
+        return;
+    }
     reprtLoading = !0,
     i || $("#j-listmore").removeClass("fn-hide"),
     lvsCmd.ajax(apiServer + "/h5/report/getById.json", {
@@ -271,6 +275,7 @@ function getReport(e, i) {
     },
     function(a, n) {
             console.log(reportLoading);
+            load=true;
         if (reportLoading = !1, a) {
             if (i && firstReportString == JSON.stringify(n.data)) return ! 1;
             if (n && n.data && n.data.length) {
@@ -908,7 +913,23 @@ var cutWindowScrollTop = 0,
 viewReportList = {},
 windowHeight = $(window).height(),
 isPostView = !1;
+function getMsg(){
+    lvsCmd.ajax(apiServer + "/www/live/getLiveMsgList.do", {rid: lvsCmd.urlParams.id},
+    function(e, rst) {
+        var tpl = document.getElementById('tpl-msg').innerHTML;
+        $(rst).each(function(k,data){
+                try{
+                    var msg=JSON.parse(data.content);
+                    msg.createTime=data.createDate;
+                    var html = juicer(tpl,msg);
+                    setMessageInnerHTML(html);
+                }catch(e){}
+        });
+
+    })
+}
 getInfo();
+getMsg();
 $(function(){
     var li_a= $(".tab_menu ul li a");
     li_a.click(function(){
@@ -919,4 +940,4 @@ $(function(){
         var index =  li_a.index(this);
         $(".tab_box > div").eq(index).show().siblings().hide();
     });
-})
+});

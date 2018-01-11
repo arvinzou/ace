@@ -444,6 +444,7 @@
 </div>
 
 <script id="tpl-msg" type="text/template">
+
     <div class="live-msg">
         <div class="wxuser">
             <div class="wxuser-img"><img src="${header.wxuser.headimgurl}" class="headimg"></div>
@@ -451,6 +452,7 @@
         </div>
 
         <div class="bubbleItem">
+            <div class="createTime">${createTime}</div>
             <div class="bubble leftBubble">
                 ${content}
                 <span class="bottomLevel"></span>
@@ -477,150 +479,7 @@
 <script src="/live/content/www/live/sub.js?_t=1511967632000"></script>
 <script src="/live/content/www/js/spm.js"></script>
 <style>
-        .tab_box{
-           width: 100%;
-           background-color: #fff;
-        }
-        .selected{
-            color: red;
-            font-size:18px;
-            border-bottom: 2px solid red;
-        }
-        .unselected{
-            color: #000000;
-            font-size:16px;
-        }
-        .tab_menu ul li {
-           display: inline-block;
-         }
 
-       .tab_menu ul li a{
-            display: block;
-            padding-bottom: 10px;
-            padding-top: 10px;
-            padding-left: 20px;
-            padding-right:20px;
-            text-decoration: none;
-        }
-
-        ul{
-             list-style: none;
-             margin: 0;
-             padding: 0;
-        }
-
-        .hide{
-            display: none;
-        }
-        .tab_menu{
-            text-align:center;
-             background-color: #fff;
-        }
-        .tab_content{
-           padding:15px;
-        }
-        #chatlist{
-            width: 100%;
-            max-height: 300px;
-            min-height: 300px;
-            overflow-y: scroll;
-        }
-        .headimg{
-            max-height:40px;
-            max-width:40px;
-            border-radius:20px
-        }
-        .wxuser{
-            float:left;
-            width:50px;
-            padding:3px;
-            font-size: .28rem;
-            color: #999;
-            text-align:center;
-        }
-        .live-msg{
-            float:left;
-            width:100%;
-            height:auto;
-        }
-        .bubbleItem{
-            font-size: .37rem;
-            line-height: .58rem;
-            color: #999;
-            margin-left;
-            margin-left:50px;
-        }
-        .bubble{
-            max-width: 80%;
-            position: relative;
-            line-height: 30px;
-            padding-left: 10px;
-            padding-top: 3px;
-            padding-bottom: 3px;
-            border-radius: 7px;
-            margin-top: 15px;
-            padding-right: 10px;
-            display: inline-block;
-        }
-        .leftBubble{
-            position: relative;
-            margin-left: 25px;
-            border: 1px solid #00b6b6;
-            background-color: #f8fdfc;
-        }
-        .leftBubble .bottomLevel{
-            position: absolute;
-            top: 10px;
-            left: -10px;
-            border-top: 10px solid #00b6b6;
-            border-left: 10px solid transparent;
-        }
-        .leftBubble .topLevel{
-            position: absolute;
-            top: 11px;
-            left: -8px;
-            border-top: 10px solid #f8fdfc;
-            border-left: 10px solid transparent;
-            z-index: 100;
-        }
-        .rightBubble{
-            position: relative;
-            margin-right: 25px;
-            float: right;
-            border: 1px solid #aaa;
-        }
-        .rightBubble .bottomLevel{
-            position: absolute;
-            bottom: 11px;
-            right: -10px;
-            border-bottom: 10px solid #aaa;
-            border-right: 10px solid transparent;
-        }
-        .rightBubble .topLevel{
-            position: absolute;
-            bottom: 12px;
-            right: -8px;
-            border-bottom: 10px solid #fff;
-            border-right: 10px solid transparent;
-            z-index: 100;
-        }
-        .clearfix:after {
-            visibility: hidden;
-            display: block;
-            font-size: 0;
-            content: " ";
-            clear: both;
-            height: 0;
-        }
-
-        .content-text{
-            margin-top: .13rem;
-            padding-right: .32rem;
-            font-size: .37rem;
-            line-height: .58rem;
-            color: #999;
-            word-break: break-all;
-        }
 
 </style>
 </body>

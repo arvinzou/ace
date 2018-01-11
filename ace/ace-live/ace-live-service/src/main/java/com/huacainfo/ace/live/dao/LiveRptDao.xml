@@ -1,69 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.live.dao.LiveSubDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.live.model.LiveSub">
+<mapper namespace="com.huacainfo.ace.live.dao.LiveRptDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.live.model.LiveRpt">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="rid" jdbcType="VARCHAR" property="rid"/>
         <result column="uid" jdbcType="VARCHAR" property="uid"/>
         <result column="sort" jdbcType="INTEGER" property="sort"/>
-        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="mediaType" jdbcType="VARCHAR" property="mediaType"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="status" jdbcType="CHAR" property="status"/>
-        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
-        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
-        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
-        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
-        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
-        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="likeNum" jdbcType="BIGINT" property="likeNum"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="mediaContent" jdbcType="LONGVARCHAR" property="mediaContent"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.live.vo.LiveSubVo">
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.live.vo.LiveRptVo">
 
     </resultMap>
     <sql id="Base_Column_List">
-        id, rid, uid, sort, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate,content
+        id, rid, uid, sort, mediaType, createTime, status, likeNum,content, mediaContent
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Base_Column_List"/>
-        from live_sub
+        from live_rpt
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from live_sub
+        delete from live_rpt
         where id = #{id,jdbcType=VARCHAR}
     </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.live.model.LiveSub">
-        insert into live_sub (id, rid, uid,
-        sort, remark, status,
-        createUserId, createUserName, createDate,
-        lastModifyUserId, lastModifyUserName, lastModifyDate,
-        content)
+    <insert id="insert" parameterType="com.huacainfo.ace.live.model.LiveRpt">
+        insert into live_rpt (id, rid, uid,
+        sort, mediaType, createTime,
+        status, likeNum, content,
+        mediaContent)
         values (#{id,jdbcType=VARCHAR}, #{rid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR},
-        #{sort,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
-        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
-        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
-        #{lastModifyDate,jdbcType=TIMESTAMP},
-        #{content,jdbcType=LONGVARCHAR})
+        #{sort,jdbcType=INTEGER}, #{mediaType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{status,jdbcType=CHAR}, #{likeNum,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR},
+        #{mediaContent,jdbcType=LONGVARCHAR})
     </insert>
 
     <update id="updateByPrimaryKey">
-        update live_sub
+        update live_rpt
         set
-        content = #{content,jdbcType=LONGVARCHAR}
+        content = #{content,jdbcType=LONGVARCHAR},
+        mediaType=#{mediaType,jdbcType=VARCHAR},
+        mediaContent = #{mediaContent,jdbcType=LONGVARCHAR}
+
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <update id="updateStatusByPrimaryKey">
-        update live_sub
+        update live_rpt
         set
         status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <sql id="whereCondition">
-        from live_sub where 0=0
+        from live_rpt where 0=0
         <if test='condition.content!=null and condition.content!=""'>
             and content like
             concat('%',#{condition.content,jdbcType=VARCHAR},'%')
@@ -101,13 +97,13 @@
     <select id="isExit" resultType="int">
         select count(*)
         from
-        live_sub where
+        live_rpt where
         content=#{content} and rid = #{rid,jdbcType=VARCHAR}
         and uid = #{uid,jdbcType=VARCHAR}
     </select>
 
     <update id="updateSortByPrimaryKey">
-        update live_sub
+        update live_rpt
         set
         sort = #{sort,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
