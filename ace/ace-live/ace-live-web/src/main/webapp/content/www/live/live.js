@@ -920,7 +920,6 @@ function getMsg(){
         $(rst).each(function(k,data){
                 try{
                     var msg=JSON.parse(data.content);
-                    msg.createTime=data.createDate;
                     var html = juicer(tpl,msg);
                     setMessageInnerHTML(html);
                 }catch(e){}
