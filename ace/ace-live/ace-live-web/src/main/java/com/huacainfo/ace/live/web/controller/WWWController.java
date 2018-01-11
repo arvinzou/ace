@@ -59,9 +59,6 @@ public class WWWController extends LiveBaseController {
     private RedisOperations<String, Object> redisTemplate;
 
 
-    @Autowired
-    private DepartmentService departmentService;
-
     /**
      * @throws
      * @Title:getLiveList

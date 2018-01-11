@@ -1,12 +1,12 @@
     var websocketMsg = null;
-    var wxuser={
+        /*var wxuser={
            headimgurl:"https://wx.qlogo.cn/mmopen/vi_32/Ch0hmaNn9SVq7Skvq4TIkIzVBlib23IsllMSwbRpRV8ue8CpV4T4erxULbAMp8da7PXVHyowOu4hLfKZSiarNlHg/0",
            nickname:"王昭",
            openid:"oCjYM0d0x60MkCh5LWt7bPPxUq_I"
-       };
+       };*/
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocketMsg = new ReconnectingWebSocket("ws://"+websocketurl+"/live/websocket/c15f484b-bd30-4111-904d-123ca6171800/oFvIjw8x1--0lQkUhO1Ta3L59o3c/livemsg");
+          websocketMsg = new ReconnectingWebSocket("ws://"+cfg.websocketurl+"/live/websocket/c15f484b-bd30-4111-904d-123ca6171800/oFvIjw8x1--0lQkUhO1Ta3L59o3c/livemsg");
       }
       else{
           alert('Not support websocketMsg');

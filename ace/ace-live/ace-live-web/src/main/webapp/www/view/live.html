@@ -13,10 +13,8 @@
     <link rel="stylesheet" href="/live/content/www/css/iconfont.css"/>
     <link rel="stylesheet" href="/live/content/www/css/info.css"/>
     <script src="/live/content/www/js/init-rem.js"></script>
-    <script>
-        var websocketurl="127.0.0.1";
+    <script src="/live/www/oauth2/cfg.do"></script>
 
-    </script>
 </head>
 <body>
 <div class="fn-contain">
@@ -184,9 +182,9 @@
                         -->
                     </div>
                     <ul class="share-list none" id="j-tpList">
-                        <li class="j-share-weibo"><img src="./static/img/share_weibo.png"></li>
-                        <li class="j-share-weixin"><img src="./static/img/share_weixin.png"></li>
-                        <li class="j-share-qq"><img src="./static/img/share_qq.png"></li>
+                        <li class="j-share-weibo"><img src="/live/content/www/img/share_weibo.png"></li>
+                        <li class="j-share-weixin"><img src="/live/content/www/img/share_weixin.png"></li>
+                        <li class="j-share-qq"><img src="/live/content/www/img/share_qq.png"></li>
                     </ul>
                     <!--
                     <p class="bd-icon"></p>
@@ -346,8 +344,11 @@
                 </div>
             </div>
         </div>
-        <div class="hide tab_content" id="content">
-            活动介绍
+        <div class="hide tab_content">
+            <p class="content-text" id="content">
+
+            </p>
+
         </div>
     </div>
 
@@ -526,6 +527,7 @@
         }
         .headimg{
             max-height:40px;
+            max-width:40px;
             border-radius:20px
         }
         .wxuser{
@@ -535,18 +537,6 @@
             font-size: .28rem;
             color: #999;
             text-align:center;
-        }
-        .wxmessage{
-            margin-top: .13rem;
-            padding-right: .32rem;
-            font-size: .37rem;
-            line-height: .58rem;
-            height: 1.17rem;
-            color: #999;
-            margin-left;
-            margin-left:60px;
-
-
         }
         .live-msg{
             float:left;
@@ -623,8 +613,14 @@
             height: 0;
         }
 
-
-
+        .content-text{
+            margin-top: .13rem;
+            padding-right: .32rem;
+            font-size: .37rem;
+            line-height: .58rem;
+            color: #999;
+            word-break: break-all;
+        }
 
 </style>
 </body>
