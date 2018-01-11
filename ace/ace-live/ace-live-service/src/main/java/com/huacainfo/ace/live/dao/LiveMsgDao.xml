@@ -6,7 +6,7 @@
         <result column="rid" jdbcType="VARCHAR" property="rid"/>
         <result column="uid" jdbcType="VARCHAR" property="uid"/>
         <result column="status" jdbcType="CHAR" property="status"/>
-        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
 
@@ -15,7 +15,7 @@
 
     </resultMap>
     <sql id="Base_Column_List">
-        id, rid, uid, status,content, createDate
+        id, rid, uid, status,content, createTime
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
@@ -29,10 +29,10 @@
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.live.model.LiveMsg">
         insert into live_msg (id, rid, uid,
-        status, createDate, content
+        status, createTime, content
         )
         values (#{id,jdbcType=VARCHAR}, #{rid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR},
-        #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+        #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
         )
     </insert>
 
@@ -73,7 +73,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY createDate desc
+                ORDER BY createTime desc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
