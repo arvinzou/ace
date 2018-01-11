@@ -40,7 +40,7 @@ public class ChatLogServiceImpl implements ChatLogService {
         RvcBaseUser user = userService.getByUserIdWithRedis(chatDTO.getUid());
         if (null == user) {
             rtn = new ChatDTO(chatDTO.getRid(), chatDTO.getUid(),
-                    ChatDTO.ACTION_ERROR, "用户信息不存在");
+                    ChatDTO.ACTION_ERROR, "用户信息不存在", "");
             return rtn;
         }
         //是否是图片，需做文件上传，获取URL地址
@@ -53,12 +53,13 @@ public class ChatLogServiceImpl implements ChatLogService {
         }
         insertLog(user, chatDTO);
         //转换文本
-        String replyTxt = isFile ?
-                parseImage(user, fileURL) : parseText(user, chatDTO.getContent());
+        String replyTxt = isFile ? fileURL : chatDTO.getContent();
+//        parseImage(user, fileURL) :parseText(user, chatDTO.getContent());
 
         //return to client
         rtn = new ChatDTO(chatDTO.getRid(), chatDTO.getUid(),
-                chatDTO.getAction(), replyTxt);
+                chatDTO.getAction(), replyTxt, user.getPortrait());
+        rtn.setSpeakerName(user.getUserName());
         return rtn;
     }
 
@@ -70,7 +71,7 @@ public class ChatLogServiceImpl implements ChatLogService {
      * @return JJ
      */
     @Override
-    public String getWelcomeStatement(String rid, String uid) {
+    public ChatDTO getWelcomeStatement(String rid, String uid) {
         RvcBaseUser user = userService.getByUserIdWithRedis(uid);
         String nickName = "游客";
         if (null != user) {
@@ -78,8 +79,9 @@ public class ChatLogServiceImpl implements ChatLogService {
         }
 
         String welcome = nickName + "已经入聊天室，大家欢迎！";
-        ChatDTO cm = new ChatDTO(rid, uid, ChatDTO.ACTION_TEXT, welcome);
-        return cm.toString();
+        ChatDTO cm = new ChatDTO(rid, uid, ChatDTO.ACTION_TEXT, welcome,
+                null == user ? "" : user.getPortrait());
+        return cm;
     }
 
     /**
@@ -120,31 +122,31 @@ public class ChatLogServiceImpl implements ChatLogService {
     }
 
 
-    /**
-     * 转义图片文本
-     *
-     * @param imageURL 图片Base64 字符串
-     * @param user     发送人用户信息
-     * @return replyText
-     */
-    private String parseImage(RvcBaseUser user, String imageURL) {
-
-        String imageHtml = "<img src='" + imageURL + "'>";
-
-        return parseText(user, imageHtml);
-    }
-
-    /**
-     * 转义文本内容
-     *
-     * @param user 发送人用户信息
-     * @param text 发送文本内容
-     * @return replyText
-     */
-    private String parseText(RvcBaseUser user, String text) {
-
-        text = user.getUserName() + ":" + text;
-
-        return text;
-    }
+//    /**
+//     * 转义图片文本
+//     *
+//     * @param imageURL 图片Base64 字符串
+//     * @param user     发送人用户信息
+//     * @return replyText
+//     */
+//    private String parseImage(RvcBaseUser user, String imageURL) {
+//
+//        String imageHtml = "<img src='" + imageURL + "'>";
+//
+//        return parseText(user, imageHtml);
+//    }
+//
+//    /**
+//     * 转义文本内容
+//     *
+//     * @param user 发送人用户信息
+//     * @param text 发送文本内容
+//     * @return replyText
+//     */
+//    private String parseText(RvcBaseUser user, String text) {
+//
+//        text = user.getUserName() + ":" + text;
+//
+//        return text;
+//    }
 }

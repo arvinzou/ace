@@ -2,8 +2,8 @@ package com.huacainfo.ace.rvc.service.impl;
 
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.rvc.base.RvcBaseService;
 import com.huacainfo.ace.rvc.dao.RvcBaseUserDao;
@@ -77,7 +77,7 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         //自我签到
         if ("self".equals(signInType)) {
 
-            RvcConferenceMembers members = rvcConferenceMembersDao.getByUserId(userId, confId);
+            RvcConferenceMembers members = rvcConferenceMembersDao.getByUserId(ids, confId);
             if (null == members) {
                 return ResultUtil.fail(-1, "签到人员信息不存在");
             }
@@ -194,6 +194,7 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
             conferenceMember.setKedaAccount(null == member ? "" : member.getKedaAccount());
             conferenceMember.setKedaAccountType(null == member ? null : member.getKedaAccountType());
             conferenceMember.setUserLevel(StringUtils.isEmpty(item.getLevel()) ? "1" : item.getLevel());//特邀嘉宾方/普通与会人员
+            conferenceMember.setStatus("0");
             conferenceMember.setCreateUserId("system");
             conferenceMember.setCreateUserName("system");
             conferenceMember.setCreateDate(DateUtil.getNowDate());
@@ -209,6 +210,7 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         conferenceMember.setKedaAccount(user.getKedaAccount());
         conferenceMember.setKedaAccountType(user.getKedaAccountType());
         conferenceMember.setUserLevel("1");//特邀嘉宾方/普通与会人员
+        conferenceMember.setStatus("0");
         conferenceMember.setCreateUserId("system");
         conferenceMember.setCreateUserName("system");
         conferenceMember.setCreateDate(DateUtil.getNowDate());
@@ -319,11 +321,14 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
                 return ResultUtil.fail(-1, "接口创建会议失败");
             }
             //3.开启直播功能
-            apiLive(confId, operateUser, conference);
+            String kedaRecId = apiLive(confId, operateUser, conference);
             //4.调用录播接口，获取直播地址 --
-            Thread.sleep(3000); //直播地址产生存在延迟（应答过程，分手动，自动；），停顿三秒后在获取
             String liveURL = getLiveAddress(conference);
+            while (StringUtils.isEmpty(liveURL)) {
+                liveURL = getLiveAddress(conference);
+            }
             //5.更新会议状态
+            conference.setKedaRecId(kedaRecId);
             conference.setStatus("1");
             conference.setLiveURL(liveURL);
             conference.setLastModifyUserId(operateUser.getUserId());
@@ -375,7 +380,7 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         rvcConferenceMembersDao.updateByPrimaryKeySelective(members);
     }
 
-    /***l
+    /***
      * 加入会议
      * @param userId 用户ID
      * @param conferenceId 会议ID -- -- rvc_conference.id
@@ -652,7 +657,7 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
 
         RvcBaseUser user = rvcBaseUserDao.getByUserId(userId);
         if (null == user) {
-            ResultUtil.fail(-1, "用户信息异常");
+            return ResultUtil.fail(-1, "用户信息异常");
         }
         RvcConference conference = rvcConferenceDao.selectByPrimaryKey(conferenceId);
         if (null == conference) {
@@ -690,6 +695,87 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         return VRSApi.getLiveURL(liveRoom);
     }
 
+    /**
+     * 会议录制
+     *
+     * @param userId       操作人用户id
+     * @param conferenceId 会议ID -- rvc_conference.id
+     * @param action       动作代码：start - 开启录制,stop - 关闭录制
+     * @return result
+     */
+    @Override
+    public Map<String, Object> record(String userId, String conferenceId, String action) {
+        //可以放在调度器中去处理
+        if (StringUtils.isEmpty(AuthorizeApi.ACCOUNT_TOKEN) || StringUtils.isEmpty(AuthorizeApi.SSO_COOKIE_KEY)) {
+            AuthorizeApi.init();
+        }
+        RvcBaseUser user = rvcBaseUserDao.getByUserId(userId);
+        if (null == user) {
+            return ResultUtil.fail(-1, "用户信息异常");
+        }
+        RvcConference conference = rvcConferenceDao.selectByPrimaryKey(conferenceId);
+        if (null == conference) {
+            ResultUtil.fail(-1, "会议信息异常");
+        }
+        if ("1".equals(conference.getStatus())) {
+            ResultUtil.fail(-1, "会议未开始/已结束");
+        }
+        //录像操作
+        if ("start".equals(action)) {
+            return startConferenceRecord(user, conference);
+
+        } else if ("stop".equals(action)) {
+            return stopConferenceRecord(user, conference);
+        }
+
+        return ResultUtil.fail(-1, "录制失败，未知动作请求");
+    }
+
+    /**
+     * 关闭会议录像
+     *
+     * @param user
+     * @param conference
+     * @return
+     */
+    private Map<String, Object> stopConferenceRecord(RvcBaseUser user, RvcConference conference) {
+        String apiResult = ControlApi.stopRecord(conference.getConfId(), conference.getKedaRecId(),
+                VideoConstant.RecordMode.RECORD, AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+
+//        if (apiResult.equals(ResultUtil.SUCCESS)) {
+//            conference.setKedaRecId("");
+//            conference.setLastModifyUserId(user.getUserId());
+//            conference.setLastModifyUserName(user.getUserName());
+//            conference.setLastModifyDate(DateUtil.getNowDate());
+//            rvcConferenceDao.updateByPrimaryKeySelective(conference);
+//        }
+
+        return ResultUtil.success(apiResult);
+    }
+
+    /**
+     * 開啓會議錄像
+     *
+     * @param user
+     * @param conference
+     * @return
+     */
+    private Map<String, Object> startConferenceRecord(RvcBaseUser user, RvcConference conference) {
+
+        Map<String, Integer> params = new HashMap<>();
+        params.put("value", 2);//	录像状态 1-暂停录像；2-继续录像；
+        params.put("recorder_mode", VideoConstant.RecordMode.BOTH);
+
+        String apiResult = ControlApi.updateRecordStatus(conference.getConfId(), conference.getKedaRecId(), params,
+                AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+
+        if (apiResult.equals(ResultUtil.SUCCESS)) {
+            return ResultUtil.success("录制开启成功");
+        }
+
+        return ResultUtil.fail(-1, "录制开启失败 - 科达接口调用失败");
+    }
+
 
     /**
      * 添加单个本级终端
@@ -710,9 +796,10 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
      * @param operateUser 操作人
      * @param conference  会议资料
      */
-    private void apiLive(String confId, RvcBaseUser operateUser, RvcConference conference) {
-        RecordReq req = new RecordReq(conference.getTitle(), VideoConstant.RecordMode.LIVE);
-        ControlApi.record(confId, req, AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
+    private String apiLive(String confId, RvcBaseUser operateUser, RvcConference conference) {
+        RecordReq req = new RecordReq(conference.getTitle() + DateUtil.getTimestamp(DateUtil.getNow()),
+                VideoConstant.RecordMode.BOTH);
+        return ControlApi.record(confId, req, AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY);
     }
 
     /**
@@ -729,6 +816,12 @@ public class ConferenceServiceImpl extends RvcBaseService implements ConferenceS
         //与会终端
         List<InviteMember> inviteMembers = new ArrayList<>();
         inviteMembers.add(new InviteMember(conference.getAddressName(), conference.getKedaAccount(), conference.getKedaAccountType()));
+        //画面合成成员
+//        List<VmpMember> vmpMemberList = new ArrayList<>();
+//        VmpMember vmpMember = new VmpMember(conference.getTitle(),
+//                conference.getKedaAccount(), conference.getKedaAccountType(), 0);
+//        vmpMemberList.add(vmpMember);
+//        Vmp vmp = new Vmp(VideoConstant.Layout.THIRTY_FIVE, vmpMemberList);
 
         CreateRequest request = new CreateRequest(conference.getTitle(), speaker, chairman, inviteMembers);
         String confId = ManageApi.create(AuthorizeApi.ACCOUNT_TOKEN, AuthorizeApi.SSO_COOKIE_KEY, request);

@@ -42,7 +42,9 @@ public class RvcConference {
     private Integer displaySeq;
 
     private String remark;
-
+    /**
+     * 0-未开始，1-进行中，2-已结束, 3-已删除
+     */
     private String status;
 
     private String createUserId;
@@ -66,6 +68,19 @@ public class RvcConference {
      * 自身签到状态 0-未签，1-已签
      */
     private boolean isSignIn;
+
+    /**
+     * 科达录像模式ID  - 只存储上一次开启录像时返回ID，停止录像后，该字段被清空
+     */
+    private String kedaRecId;
+
+    public String getKedaRecId() {
+        return kedaRecId;
+    }
+
+    public void setKedaRecId(String kedaRecId) {
+        this.kedaRecId = kedaRecId;
+    }
 
     public int getMemberCount() {
         return memberCount;

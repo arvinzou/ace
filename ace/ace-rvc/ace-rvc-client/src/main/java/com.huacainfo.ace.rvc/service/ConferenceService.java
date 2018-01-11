@@ -142,4 +142,14 @@ public interface ConferenceService {
      * @return 直播地址
      */
     String getLiveAddress(RvcConference conference);
+
+    /**
+     * 会议录制
+     *
+     * @param userId       操作人用户id
+     * @param conferenceId 会议ID -- rvc_conference.id
+     * @param action 动作代码：start - 开启录制,stop - 关闭录制
+     * @return result
+     */
+    Map<String, Object> record(String userId, String conferenceId, String action);
 }

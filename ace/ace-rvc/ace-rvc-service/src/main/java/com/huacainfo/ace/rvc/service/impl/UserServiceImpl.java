@@ -3,6 +3,7 @@ package com.huacainfo.ace.rvc.service.impl;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.rvc.dao.RvcBaseUserDao;
+import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.model.RvcBaseUser;
 import com.huacainfo.ace.rvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class UserServiceImpl implements UserService {
         if (null == user) {
             return singleSignOn(userId);
         }
+
+        user.setKedaServerDomain(AuthorizeApi.IP_PORT);
+        user.setKedaPwd(AuthorizeApi.ADMIN_PWD);
         return user;
     }
 
