@@ -203,7 +203,7 @@
     <select id="getLiveMsgList" resultType="map">
         select id, rid, uid, content, date_format(createTime,'%Y-%m-%d %H:%i:%s') createTime from live_msg where
         rid=#{rid}
-        order by createDate
+        order by createTime
     </select>
     <select id="getTotalNumAndOrgInfo" resultType="map">
         SELECT
@@ -216,7 +216,7 @@
         #{deptId} deptId,
         count(1) totalNum
         FROM
-        live_sub
+        live_rpt
         WHERE
         rid = #{id}
         ) a

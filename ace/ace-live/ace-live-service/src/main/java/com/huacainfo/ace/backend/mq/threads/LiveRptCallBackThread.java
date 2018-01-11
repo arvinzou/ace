@@ -13,19 +13,19 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-public class LiveSubCallBackThread extends Thread {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LiveSubCallBackThread.class);
+public class LiveRptCallBackThread extends Thread {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LiveRptCallBackThread.class);
 
     private KafkaStream<byte[], byte[]> stream = null;
-    private LiveRptService liveSubService;
+    private LiveRptService liveRptService;
 
-    public LiveSubCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
+    public LiveRptCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
         super(name);
         this.stream = stream;
         this.init();
     }
 
-    public LiveSubCallBackThread(ThreadGroup group, String name, KafkaStream<byte[], byte[]> stream) {
+    public LiveRptCallBackThread(ThreadGroup group, String name, KafkaStream<byte[], byte[]> stream) {
         super(group, name);
         this.stream = stream;
         this.init();
@@ -33,7 +33,7 @@ public class LiveSubCallBackThread extends Thread {
 
     private void init() {
 
-        this.liveSubService = (LiveRptService) SpringUtils.getBean("liveSubService");
+        this.liveRptService = (LiveRptService) SpringUtils.getBean("liveRptService");
     }
 
     @Override
@@ -60,7 +60,10 @@ public class LiveSubCallBackThread extends Thread {
             o.setContent(data.get("message"));
             o.setRid(data.get("rid"));
             o.setUid(data.get("uid"));
-            MessageResponse rst = this.liveSubService.insertLiveSub(o);
+            o.setLikeNum(new Long(data.get("likeNum")));
+            o.setMediaContent(data.get("mediaContent"));
+            o.setMediaType(data.get("mediaType"));
+            MessageResponse rst = this.liveRptService.insertLiveRpt(o);
             LOGGER.info("{}", rst.getErrorMessage());
 
         } catch (Exception e) {

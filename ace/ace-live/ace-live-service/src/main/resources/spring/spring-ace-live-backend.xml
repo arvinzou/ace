@@ -16,7 +16,7 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 
-    <bean id="liveSubCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveSubCallbackDealer"
+    <bean id="liveRptCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveRptCallbackDealer"
           destroy-method="shutdown" init-method="run">
         <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
         <constructor-arg index="1" value="${kafka.consumer.group}"/>

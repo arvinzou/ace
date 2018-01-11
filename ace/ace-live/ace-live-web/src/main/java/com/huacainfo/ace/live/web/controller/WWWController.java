@@ -39,7 +39,7 @@ public class WWWController extends LiveBaseController {
     private LiveMsgService liveMsgService;
 
     @Autowired
-    private LiveRptService liveSubService;
+    private LiveRptService liveRptService;
 
     @Autowired
     private RedisOperations<String, Object> redisTemplate;
@@ -158,7 +158,7 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public MessageResponse insertLiveSub(String jsons) throws Exception {
         LiveRpt obj = JSON.parseObject(jsons, LiveRpt.class);
-        return this.liveSubService
+        return this.liveRptService
                 .insertLiveRpt(obj);
     }
 

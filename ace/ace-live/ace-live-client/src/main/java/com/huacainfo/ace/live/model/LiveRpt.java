@@ -12,30 +12,24 @@ public class LiveRpt implements java.io.Serializable {
 
     private Integer sort;
 
-    private String remark;
+    private String mediaType;
+
+    private Date createTime;
 
     private String status;
 
-    private String createUserId;
-
-    private String createUserName;
-
-    private Date createDate;
-
-    private String lastModifyUserId;
-
-    private String lastModifyUserName;
-
-    private Date lastModifyDate;
+    private Long likeNum;
 
     private String content;
+
+    private String mediaContent;
 
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+        this.id = id;
     }
 
     public String getRid() {
@@ -43,7 +37,7 @@ public class LiveRpt implements java.io.Serializable {
     }
 
     public void setRid(String rid) {
-        this.rid = rid == null ? null : rid.trim();
+        this.rid = rid;
     }
 
     public String getUid() {
@@ -51,7 +45,7 @@ public class LiveRpt implements java.io.Serializable {
     }
 
     public void setUid(String uid) {
-        this.uid = uid == null ? null : uid.trim();
+        this.uid = uid;
     }
 
     public Integer getSort() {
@@ -62,12 +56,20 @@ public class LiveRpt implements java.io.Serializable {
         this.sort = sort;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getMediaType() {
+        return mediaType;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getStatus() {
@@ -75,55 +77,15 @@ public class LiveRpt implements java.io.Serializable {
     }
 
     public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+        this.status = status;
     }
 
-    public String getCreateUserId() {
-        return createUserId;
+    public Long getLikeNum() {
+        return likeNum;
     }
 
-    public void setCreateUserId(String createUserId) {
-        this.createUserId = createUserId == null ? null : createUserId.trim();
-    }
-
-    public String getCreateUserName() {
-        return createUserName;
-    }
-
-    public void setCreateUserName(String createUserName) {
-        this.createUserName = createUserName == null ? null : createUserName.trim();
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getLastModifyUserId() {
-        return lastModifyUserId;
-    }
-
-    public void setLastModifyUserId(String lastModifyUserId) {
-        this.lastModifyUserId = lastModifyUserId == null ? null : lastModifyUserId.trim();
-    }
-
-    public String getLastModifyUserName() {
-        return lastModifyUserName;
-    }
-
-    public void setLastModifyUserName(String lastModifyUserName) {
-        this.lastModifyUserName = lastModifyUserName == null ? null : lastModifyUserName.trim();
-    }
-
-    public Date getLastModifyDate() {
-        return lastModifyDate;
-    }
-
-    public void setLastModifyDate(Date lastModifyDate) {
-        this.lastModifyDate = lastModifyDate;
+    public void setLikeNum(Long likeNum) {
+        this.likeNum = likeNum;
     }
 
     public String getContent() {
@@ -131,6 +93,14 @@ public class LiveRpt implements java.io.Serializable {
     }
 
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+        this.content = content;
+    }
+
+    public String getMediaContent() {
+        return mediaContent;
+    }
+
+    public void setMediaContent(String mediaContent) {
+        this.mediaContent = mediaContent;
     }
 }

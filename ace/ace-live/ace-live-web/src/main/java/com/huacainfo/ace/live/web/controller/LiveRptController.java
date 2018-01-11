@@ -34,7 +34,7 @@ public class LiveRptController extends LiveBaseController {
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private LiveRptService liveSubService;
+    private LiveRptService liveRptService;
 
     /**
      * @throws
@@ -52,7 +52,7 @@ public class LiveRptController extends LiveBaseController {
     @ResponseBody
     public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition,
                                                  PageParamNoChangeSord page) throws Exception {
-        PageResult<LiveRptVo> rst = this.liveSubService
+        PageResult<LiveRptVo> rst = this.liveRptService
                 .findLiveRptList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());
         if (rst.getTotal() == 0) {
@@ -76,7 +76,7 @@ public class LiveRptController extends LiveBaseController {
     @ResponseBody
     public MessageResponse insertLiveRpt(String jsons) throws Exception {
         LiveRpt obj = JSON.parseObject(jsons, LiveRpt.class);
-        return this.liveSubService
+        return this.liveRptService
                 .insertLiveRpt(obj);
     }
 
@@ -94,7 +94,7 @@ public class LiveRptController extends LiveBaseController {
     @ResponseBody
     public MessageResponse updateLiveRpt(String jsons) throws Exception {
         LiveRpt obj = JSON.parseObject(jsons, LiveRpt.class);
-        return this.liveSubService
+        return this.liveRptService
                 .updateLiveRpt(obj);
     }
 
@@ -122,7 +122,7 @@ public class LiveRptController extends LiveBaseController {
             }
         }
 
-        return this.liveSubService.updateLiveRptStatus(id, status);
+        return this.liveRptService.updateLiveRptStatus(id, status);
     }
 
     /**
@@ -139,7 +139,7 @@ public class LiveRptController extends LiveBaseController {
     @ResponseBody
     public SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id)
             throws Exception {
-        return this.liveSubService.selectLiveRptByPrimaryKey(id);
+        return this.liveRptService.selectLiveRptByPrimaryKey(id);
     }
 
     /**
@@ -158,7 +158,7 @@ public class LiveRptController extends LiveBaseController {
             throws Exception {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
-        return this.liveSubService.deleteLiveRptByLiveRptId(id,
+        return this.liveRptService.deleteLiveRptByLiveRptId(id,
                 this.getCurUserProp());
     }
 
@@ -200,6 +200,6 @@ public class LiveRptController extends LiveBaseController {
     @RequestMapping(value = "/updateSortByPrimaryKey.do")
     @ResponseBody
     public MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception {
-        return this.liveSubService.updateSortByPrimaryKey(id, sort);
+        return this.liveRptService.updateSortByPrimaryKey(id, sort);
     }
 }

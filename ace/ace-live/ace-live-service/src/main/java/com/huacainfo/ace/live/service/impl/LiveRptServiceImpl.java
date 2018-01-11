@@ -92,7 +92,7 @@ public class LiveRptServiceImpl implements LiveRptService {
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "直播内容不能为空！");
         }
-        o.setCreateDate(new Date());
+        o.setCreateTime(new Date());
         o.setStatus("1");
         this.liveSubDao.insert(o);
         Map<String, String> data = new HashMap<String, String>();
