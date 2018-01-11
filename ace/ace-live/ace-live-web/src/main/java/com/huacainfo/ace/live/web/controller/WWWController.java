@@ -6,6 +6,10 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonKeys;
+import com.huacainfo.ace.common.tools.CommonTreeUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.LiveMsg;
 import com.huacainfo.ace.live.model.LiveSub;
@@ -15,6 +19,8 @@ import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.vo.LiveQVo;
 import com.huacainfo.ace.live.vo.LiveVo;
 import com.huacainfo.ace.live.web.websocket.WebSocketSub;
+import com.huacainfo.ace.portal.service.DepartmentService;
+import com.huacainfo.ace.portal.vo.DepartmentVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +58,10 @@ public class WWWController extends LiveBaseController {
     @Autowired
     private RedisOperations<String, Object> redisTemplate;
 
+
+    @Autowired
+    private DepartmentService departmentService;
+
     /**
      * @throws
      * @Title:getLiveList
@@ -61,11 +72,54 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-01
      */
-    @RequestMapping(value = "/getLiveList.do")
+    @RequestMapping(value = "/getListByCompany.do")
     @ResponseBody
-    public List<Map<String, Object>> getLiveList() throws Exception {
+    public Map<String, Object> getListByCompany(int page, String companyId) throws Exception {
+        Map<String, Object> p = this.getPageParam(page, this.getParams());
+        Map<String, Object> rst = this.wwwService.getTotalPageAndOrgInfo(companyId);
+        Long totalNum = (Long) rst.get("totalNum");
+        Long totalpage = new Long(1);
+        if (totalNum % this.defaultPageSize == 0) {
+            totalpage = totalNum / this.defaultPageSize;
+        } else {
+            totalpage = (totalNum / this.defaultPageSize) + 1;
+        }
+        rst.put("data", this.wwwService.getLiveList(p));
+        rst.put("currentpage", page);
+        rst.put("pagecount", totalNum);
+        rst.put("status", 0);
+        rst.put("totalcount", totalNum);
+        rst.put("totalpage", totalpage);
+        return rst;
+    }
 
-        return this.wwwService.getLiveList(this.getParams());
+    @RequestMapping(value = "/getTotalNumAndOrgInfo.do")
+    @ResponseBody
+    public Map<String, Object> getTotalNumAndOrgInfo(String companyId, String id) throws Exception {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("data", this.wwwService.getTotalNumAndOrgInfo(companyId, id));
+        rst.put("errCode", "get_info_succeed");
+        rst.put("errMsg", "获取现场总数和组织信息成功");
+        rst.put("status", 0);
+        return rst;
+    }
+
+    @RequestMapping(value = "/getShareContent.do")
+    @ResponseBody
+    public Map<String, Object> getShareContent(String companyId) throws Exception {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("data", this.wwwService.getShareContent(companyId));
+        rst.put("status", 0);
+        return rst;
+    }
+
+    @RequestMapping(value = "/getWxJsSign.do")
+    @ResponseBody
+    public Map<String, Object> getWxJsSign(String companyId) throws Exception {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("data", this.wwwService.getWxJsSign(companyId));
+        rst.put("status", 0);
+        return rst;
     }
 
     /**
@@ -78,10 +132,15 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-01
      */
-    @RequestMapping(value = "/getLive.do")
+    @RequestMapping(value = "/getInfo.do")
     @ResponseBody
-    public Map<String, Object> getLive(String id) throws Exception {
-        return this.wwwService.getLive(id);
+    public Map<String, Object> getInfo() throws Exception {
+        Map<String, Object> p = this.getParams();
+        p.put("fastdfs_server", PropertyUtil.getProperty("fastdfs_server"));
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("data", this.wwwService.getLive(p));
+        rst.put("status", "0");
+        return rst;
     }
 
     /**
@@ -147,10 +206,11 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-07
      */
-    @RequestMapping(value = "/pop.do")
+    @RequestMapping(value = "/addLike.do")
     @ResponseBody
-    public SingleResult<Long> pop(String rid) throws Exception {
-        SingleResult<Long> rst = new SingleResult(0, "OK");
+    public Map<String, Object> addLike(String rid) throws Exception {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("status", "0");
         logger.debug("{}", rid);
         String keypop = rid + ".pop";
         Long pop = (Long) this.redisTemplate.opsForValue().get(keypop);
@@ -159,7 +219,7 @@ public class WWWController extends LiveBaseController {
             this.redisTemplate.opsForValue().set(keypop, pop);
         }
         this.redisTemplate.opsForValue().set(keypop, new Long(pop + 1));
-        rst.setValue(pop);
+        rst.put("likeNum", pop);
         return rst;
     }
 

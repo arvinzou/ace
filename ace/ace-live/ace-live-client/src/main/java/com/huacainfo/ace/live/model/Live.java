@@ -13,9 +13,10 @@ public class Live implements java.io.Serializable {
 
     private String category;
 
-    private String deptName;
+    private String deptId;
 
-    private Date birthday;
+    private Date endTime;
+    private Date startTime;
 
     private String remark;
 
@@ -83,20 +84,28 @@ public class Live implements java.io.Serializable {
         this.category = category == null ? null : category.trim();
     }
 
-    public String getDeptName() {
-        return deptName;
+    public String getDeptId() {
+        return deptId;
     }
 
-    public void setDeptName(String deptName) {
-        this.deptName = deptName == null ? null : deptName.trim();
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
     public String getRemark() {

@@ -28,12 +28,27 @@ public interface LiveDao {
 
     List<Map<String, Object>> getLiveList(Map<String, Object> p);
 
-    Map<String, Object> getLive(String id);
+    Map<String, Object> getLive(Map<String, Object> p);
 
     int updateNopPop(@Param("id") String id, @Param("nop") long nop, @Param("pop") long pop);
 
     List<Map<String, Object>> getLiveSubList(Map<String, Object> p);
 
     List<Map<String, Object>> getLiveMsgList(Map<String, Object> p);
+
+    Map<String, Object> getTotalNumAndOrgInfo(@Param("deptId") String deptId, @Param("id") String id);
+
+    Map<String, Object> getTotalPageAndOrgInfo(@Param("deptId") String deptId);
+
+
+
+    Map<String, Object> getShareContent(@Param("deptId") String deptId);
+
+
+    Map<String, Object> getWxJsSign(@Param("deptId") String deptId);
+
+
+
+
 
 }

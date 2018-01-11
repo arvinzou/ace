@@ -6,8 +6,9 @@
         <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="category" jdbcType="VARCHAR" property="category"/>
-        <result column="deptName" jdbcType="VARCHAR" property="deptName"/>
-        <result column="birthday" jdbcType="TIMESTAMP" property="birthday"/>
+        <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
+        <result column="endTime" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="startTime" jdbcType="TIMESTAMP" property="startTime"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="nop" jdbcType="BIGINT" property="nop"/>
         <result column="pop" jdbcType="BIGINT" property="pop"/>
@@ -32,7 +33,7 @@
 
     </resultMap>
     <sql id="Base_Column_List">
-        id, areaCode, name, category, deptName, birthday, remark, nop, pop, addr, rtmpUrl,
+        id, areaCode, name, category, deptId, endTime, remark, nop, pop, addr, rtmpUrl,
         mp4Url, imageSrc, latitude, longitude, status, createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate
     </sql>
@@ -53,7 +54,7 @@
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.live.model.Live">
         insert into live (id, areaCode, name,
-        category, deptName, birthday,
+        category, deptId, endTime,startTime,
         remark, nop, pop, addr,
         rtmpUrl, mp4Url, imageSrc,
         latitude, longitude, status,
@@ -61,7 +62,8 @@
         lastModifyUserId, lastModifyUserName, lastModifyDate,
         content)
         values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-        #{category,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
+        #{category,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP},
+        #{startTime,jdbcType=TIMESTAMP},
         #{remark,jdbcType=VARCHAR}, #{nop,jdbcType=BIGINT}, #{pop,jdbcType=BIGINT}, #{addr,jdbcType=VARCHAR},
         #{rtmpUrl,jdbcType=VARCHAR}, #{mp4Url,jdbcType=VARCHAR}, #{imageSrc,jdbcType=VARCHAR},
         #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{status,jdbcType=CHAR},
@@ -76,8 +78,8 @@
         set areaCode = #{areaCode,jdbcType=VARCHAR},
         name = #{name,jdbcType=VARCHAR},
         category = #{category,jdbcType=VARCHAR},
-        deptName = #{deptName,jdbcType=VARCHAR},
-        birthday = #{birthday,jdbcType=TIMESTAMP},
+        endTime = #{endTime,jdbcType=TIMESTAMP},
+        startTime = #{startTime,jdbcType=TIMESTAMP},
         remark = #{remark,jdbcType=VARCHAR},
         nop = #{nop,jdbcType=BIGINT},
         pop = #{pop,jdbcType=BIGINT},
@@ -95,7 +97,7 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
     <sql id="whereCondition">
-        from live where 0=0
+        from live where deptId=#{condition.deptId}
         <if test='condition.name!=null and condition.name!=""'>
             and name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
@@ -133,13 +135,57 @@
         name=#{name}
     </select>
     <select id="getLiveList" resultType="map">
-        select id, name, category, deptName, date_format(birthday,'%Y-%m-%d %H:%i') birthday, nop, pop, addr, imageSrc,
-        status, date_format(createDate,'%Y-%m-%d %H:%i') createDate from live order by birthday desc
+        <![CDATA[
+        select
+        2 commentApproveType,
+        concat(#{fastdfs_server},imageSrc) cover,
+        endTime,
+        0 hasPassword,
+        id,
+        nop numOfPartake,
+        (case  when nop<10000 then concat(nop,"") else concat(round(nop/10000,2),"万") end) numOfPartakeString,
+        0 partakeState,
+        remark,
+        1 reportApproveType,
+        startTime,
+        status state,
+        name topic,
+        category type,
+        null watermarkConfig from live where deptId=#{companyId} order by endTime desc  limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+        ]]>
     </select>
     <select id="getLive" resultType="map">
-        select id, name, category, deptName, date_format(birthday,'%Y-%m-%d %H:%i') birthday, nop, pop, addr, imageSrc,
-        status,remark,rtmpUrl,content,mp4Url, imageSrc, latitude, longitude, date_format(createDate,'%Y-%m-%d %H:%i')
-        createDate from live where id=#{id}
+        <![CDATA[
+        select
+        null allowApprove,
+        null allowClose,
+        null allowDelete,
+        null allowEdit,
+        1 allowShare,
+        null appShortUrl,
+        addr city,
+        0 commentApproveType,
+        concat(#{fastdfs_server},imageSrc) cover,
+        endTime,
+        id,
+        pop likeNums,
+        nop numOfPartake,
+        (case  when nop<10000 then concat(nop,"") else concat(round(nop/10000,2),"万") end) numOfPartakeString,
+        0 partakeState,
+        0 playStreamState,
+        ifnull(mp4Url,rtmpUrl) playStreamUrl,
+        0 position,
+        remark,
+        content,
+        0 showPlayView,
+        0 showWater,
+        startTime,
+        status state,
+        name topic,
+        category type,
+        null watermarkConfig
+        from live where id=#{id}
+        ]]>
     </select>
 
     <update id="updateNopPop">
@@ -156,5 +202,75 @@
     <select id="getLiveMsgList" resultType="map">
         select id, rid, uid, content, date_format(createDate,'%Y-%m-%d %H:%i') createDate from live_msg where rid=#{rid}
         order by createDate desc
+    </select>
+    <select id="getTotalNumAndOrgInfo" resultType="map">
+        SELECT
+        companyAlias,
+        companyName,
+        totalNum
+        FROM
+        (
+        SELECT
+        #{deptId} deptId,
+        count(1) totalNum
+        FROM
+        live_sub
+        WHERE
+        rid = #{id}
+        ) a
+        LEFT JOIN (
+        SELECT
+        department_id deptId,
+        short_name companyAlias,
+        department_name companyName
+        FROM
+        portal.department
+        WHERE
+        department_id = #{deptId}
+        ) b ON a.deptId = b.deptId
+    </select>
+    <select id="getShareContent" resultType="map">
+        select
+        '' androidDownload,
+        '' downAddress,
+        '' downloadDesc,
+        short_name downloadTitle,
+        '' iosDownload,
+        'http://zx.huacainfo.com/live/content/www/img/logo.png' logo,
+        '' sysValue
+        from portal.department t where t.department_id= #{deptId}
+    </select>
+
+    <select id="getTotalPageAndOrgInfo" resultType="map">
+        SELECT
+        companyAlias,
+        companyName,
+        totalNum
+        FROM
+        (
+        SELECT
+        deptId,
+        count(1) totalNum
+        FROM
+        live
+        WHERE
+        deptId = #{deptId}
+        ) a
+        LEFT JOIN (
+        SELECT
+        department_id deptId,
+        short_name companyAlias,
+        department_name companyName
+        FROM
+        portal.department
+        WHERE
+        department_id = #{deptId}
+        ) b ON a.deptId = b.deptId
+    </select>
+    <select id="getWxJsSign" resultType="map">
+        select
+        'wx29ecb720b03ea466' appId,
+        'huacai' nonceStr,
+        '03ea9a47442c14208943043e62114fc6' signature from portal.department where department_id = #{deptId}
     </select>
 </mapper>

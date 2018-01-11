@@ -39,7 +39,7 @@ public interface WWWService {
      * @author: 陈晓克
      * @version: 2018-01-01
      */
-    Map<String, Object> getLive(String id);
+    Map<String, Object> getLive(Map<String, Object> p);
 
     /**
      * @throws
@@ -64,4 +64,55 @@ public interface WWWService {
      * @version: 2018-01-07
      */
     List<Map<String, Object>> getLiveMsgList(Map<String, Object> p);
+
+
+    /**
+     * @throws
+     * @Title:getTotalNumAndOrgInfo
+     * @Description: TODO(微网页根据单位代码直播代码获取合计直播信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+    Map<String, Object> getTotalNumAndOrgInfo(String deptId, String id);
+
+
+    /**
+     * @throws
+     * @Title:getTotalPageAndOrgInfo
+     * @Description: TODO(微网页根据单位代码获取合计直播信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+    Map<String, Object> getTotalPageAndOrgInfo(String deptId);
+
+    /**
+     * @throws
+     * @Title:getShareContent
+     * @Description: TODO(微网页根据单位代码获取分享信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+    Map<String, Object> getShareContent(String deptId);
+
+
+    /**
+     * @throws
+     * @Title:getWxJsSign
+     * @Description: TODO(微网页获取微信公众号配置信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+    Map<String, Object> getWxJsSign(String deptId);
 }

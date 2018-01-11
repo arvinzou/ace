@@ -61,8 +61,8 @@ public class WWWServiceImpl implements WWWService {
      * @version: 2018-01-01
      */
     @Override
-    public Map<String, Object> getLive(String id) {
-        return this.liveDao.getLive(id);
+    public Map<String, Object> getLive(Map<String, Object> p) {
+        return this.liveDao.getLive(p);
     }
 
 
@@ -94,5 +94,68 @@ public class WWWServiceImpl implements WWWService {
     @Override
     public List<Map<String, Object>> getLiveMsgList(Map<String, Object> p) {
         return this.liveDao.getLiveMsgList(p);
+    }
+
+    /**
+     * @throws
+     * @Title:getTotalNumAndOrgInfo
+     * @Description: TODO(微网页根据单位单位代码直播获取合计直播信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+
+    @Override
+    public Map<String, Object> getTotalNumAndOrgInfo(String deptId, String id) {
+        return this.liveDao.getTotalNumAndOrgInfo(deptId, id);
+    }
+
+
+    /**
+     * @throws
+     * @Title:getTotalPageAndOrgInfo
+     * @Description: TODO(微网页根据单位单位代码获取合计直播信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+
+    @Override
+    public Map<String, Object> getTotalPageAndOrgInfo(String deptId) {
+        return this.liveDao.getTotalPageAndOrgInfo(deptId);
+    }
+
+    /**
+     * @throws
+     * @Title:getShareContent
+     * @Description: TODO(微网页根据单位代码获取分享信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+    @Override
+    public Map<String, Object> getShareContent(String deptId) {
+        return this.liveDao.getShareContent(deptId);
+    }
+
+    /**
+     * @throws
+     * @Title:getWxJsSign
+     * @Description: TODO(微网页获取微信公众号配置信息)
+     * @param: @param deptId
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-09
+     */
+    @Override
+    public Map<String, Object> getWxJsSign(String deptId) {
+        return this.liveDao.getWxJsSign(deptId);
     }
 }
