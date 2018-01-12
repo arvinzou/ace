@@ -311,8 +311,24 @@
                                     <div class="list fn-hide">
                                         {@each item.comments as citem}
                                         <p>
-                                            <span>${citem.reviewer}: </span>${citem.ccontent}
+                                        <div class="live_msg_cmt">
+                                            <div class="wxuser_cmt">
+                                                <div class="wxuser-img_cmt"><img src="${citem.headimgurl}"
+                                                                                 class="headimg_cmt"></div>
+
+                                            </div>
+                                            <div class="bubbleItem_cmt">
+                                                <div class="wxuser-nickname_cmt">${citem.nickname}</div>
+                                                <div class="createTime_cmt">${citem.createTime}</div>
+                                                <div class="bubble leftBubble">
+                                                    ${citem.content}
+                                                    <span class="bottomLevel"></span>
+                                                    <span class="topLevel"></span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         </p>
+
                                         {@/each}
                                     </div>
                                 </div>

@@ -223,6 +223,15 @@
             <result property="url" column="url"/>
             <result property="watermarkConfig" column="watermarkConfig"/>
         </collection>
+        <collection property="comments" ofType="com.huacainfo.ace.live.model.Comments">
+            <id property="id" column="cmtId"/>
+            <result property="content" column="c_content"/>
+            <result property="reviewer" column="c_reviewer"/>
+            <result property="nickname" column="c_nickname"/>
+            <result property="headimgurl" column="c_headimgurl"/>
+            <result property="openid" column="c_openid"/>
+            <result property="createTime" column="c_createTime"/>
+        </collection>
     </resultMap>
     <select id="getLiveRptList" resultMap="mapRpt">
         select t.id reportId, t.rid, t.uid, t.sort, t.mediaType type, t.status,
@@ -239,10 +248,20 @@
         b.url,
         b.w,
         b.h,
-        b.watermarkConfig
+        b.watermarkConfig,
+        c.id cmtId,
+        c.content c_content,
+        d.nickname c_reviewer,
+        d.headimgurl c_headimgurl,
+        d.nickname c_nickname,
+        d.openid c_openid,
+        c.createTime c_createTime
+
         from live_rpt t
         left join portal.userinfo a on t.uid=a.openid
         left join live_img b on t.id=b.rptId
+        left join live_cmt c on t.id=c.rptId
+        left join portal.userinfo d on c.uid=d.openid
         where rid=#{rid}
         order by t.sort,t.createTime
         limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}

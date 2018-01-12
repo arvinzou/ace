@@ -1601,9 +1601,9 @@ ul {
 }
 
 .headimg {
-	max-height: 40px;
-	max-width: 40px;
-	border-radius: 20px
+	height: 40px;
+	width: 40px;
+	border-radius: 50%
 }
 
 .wxuser {
@@ -1713,4 +1713,44 @@ ul {
     margin-left: 25px;
     width:80%;
     text-align:right;
+}
+
+
+.createTime_cmt{
+    font-size: .30rem;
+    text-align:right;
+    float:right
+}
+.headimg_cmt {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%
+}
+
+.wxuser_cmt {
+	float: left;
+	width: 50px;
+	padding: 3px;
+	font-size: .28rem;
+	color: #999;
+	text-align: center;
+}
+
+.live-msg_cmt {
+	width: 100%;
+	height: auto;
+	padding: 5px;
+}
+
+.bubbleItem_cmt {
+	font-size: .37rem;
+	line-height: .58rem;
+	color: #999;
+	margin-left;
+    margin-left: 50px;
+}
+.wxuser-nickname_cmt{
+    font-size: .30rem;
+    float:left;
+    width: 80px;
 }

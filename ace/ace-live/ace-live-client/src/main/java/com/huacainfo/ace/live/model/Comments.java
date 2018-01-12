@@ -15,6 +15,8 @@ public class Comments implements java.io.Serializable {
     private String nickname;
     private String openid;
 
+    private String createTime;
+
     public String getContent() {
         return content;
     }
@@ -77,5 +79,13 @@ public class Comments implements java.io.Serializable {
 
     public void setOpenid(String openid) {
         this.openid = openid;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }
