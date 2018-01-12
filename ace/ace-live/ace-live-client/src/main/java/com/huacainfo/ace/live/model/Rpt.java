@@ -26,6 +26,8 @@ public class Rpt implements java.io.Serializable {
     Reporter rpt;
     private List<Comments> comments;
 
+    private Long likeNum;
+
     public Date getApprovedTime() {
         return approvedTime;
     }
@@ -161,5 +163,13 @@ public class Rpt implements java.io.Serializable {
 
     public void setRpt(Reporter rpt) {
         this.rpt = rpt;
+    }
+
+    public Long getLikeNum() {
+        return likeNum;
+    }
+
+    public void setLikeNum(Long likeNum) {
+        this.likeNum = likeNum;
     }
 }

@@ -162,6 +162,7 @@
         null allowClose,
         null allowDelete,
         null allowEdit,
+        date_format(startTime,'%Y-%m-%d') startTime,
         1 allowShare,
         null appShortUrl,
         addr city,
@@ -207,6 +208,7 @@
         <result property="reporter" column="reporter"/>
         <result property="thumbnail" column="thumbnail"/>
         <result property="type" column="type"/>
+        <result property="likeNum" column="likeNum"/>
         <result property="userType" column="userType"/>
         <result property="watermarkConfig" column="watermarkConfig"/>
         <result property="video" column="video"/>
@@ -236,7 +238,7 @@
     <select id="getLiveRptList" resultMap="mapRpt">
         select t.id reportId, t.rid, t.uid, t.sort, t.mediaType type, t.status,
         t.likeNum,t.content,t.mediaContent video,t.createTime approvedTime,0 duration,t.createTime gmtCreate,
-        date_format(t.createTime,'%Y-%m-%d %H:%i:%s') createDate,
+        date_format(t.createTime,'%H:%i') createDate,
         '' pictures,
         '' liker,
         a.nickname reporter,

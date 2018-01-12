@@ -833,12 +833,8 @@ a {
 
 .xcy-report .headpic {
 	position: absolute;
-	width: .96rem;
-	height: .96rem;
 	left: -1.16rem;
-	border-radius: 50%;
 	background-color: #fff;
-	overflow: hidden
 }
 
 .xcy-report .headpic img {
@@ -1637,7 +1633,7 @@ ul {
 	padding-left: 10px;
 	padding-top: 3px;
 	padding-bottom: 3px;
-	border-radius: 7px;
+	border-radius: 18px;
 	margin-top: 5px;
 	padding-right: 10px;
 	display: inline-block;
@@ -1753,4 +1749,11 @@ ul {
     font-size: .30rem;
     float:left;
     width: 80px;
+}
+.wxheadimg{
+width:.80rem;height:.80rem;border-radius:50%;vertical-align:middle;
+}
+.headpic{
+ font-size: .30rem;
+ padding:.15rem;
 }

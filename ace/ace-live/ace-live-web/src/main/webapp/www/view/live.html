@@ -228,15 +228,21 @@
                         <li data-id="${item.reportId}">
                             <div class="wrap">
                                 <div class="headpic">
-                                    {@if item.rpt.headimgurl}
-                                    <img src="${item.rpt.headimgurl}" style="width:.96rem;height:.96rem">
-                                    {@else}
-                                    <img src="/live/content/www/img/head_default.png">
-                                    {@/if}
+                                    <img src="/live/content/www/img/live_ing.gif" style="width:.70rem">
+                                    ${item.createDate}
                                 </div>
                                 <div class="reporter fn-clear">
-                                    <span class="fn-ellipsis">${item.reporter}</span>
-                                    <em{@if item.createDate == "刚刚"} class="ganggang"{@/if}>${item.createDate}</em>
+
+                                    <div style="float:left;">
+                                        {@if item.rpt.headimgurl}
+                                        <img src="${item.rpt.headimgurl}" class="wxheadimg">
+                                    {@else}
+                                        <img src="/live/content/www/img/head_default.png" class="wxheadimg">
+                                    {@/if}
+                                        ${item.rpt.nickname}
+                                    </div>
+
+                                    <em{@if item.createDate == "刚刚"} class="ganggang"{@/if}></em>
                                 </div>
                                 {@if item.content}
                                 <div class="content">$${item.content|reportContent}</div>
@@ -292,7 +298,18 @@
                                 </div>
                                 {@/if}
                                 <div class="down fn-clear">
-                                    <div class="city">${item.city}</div>
+                                    <div class="city">
+
+                                        {@if item.likeNum}
+                                        <span class="zan-num"><img src="/live/content/www/img/zan-cmt@2x.png"
+                                                                   style="width:.35rem;height:.35rem"/> ${item.likeNum}</span>
+                                        {@else}
+                                        <span class="zan-num"><img src="/live/content/www/img/zan-cmt@2x.png"
+                                                                   style="width:.35rem;height:.35rem"/> 0</span>
+                                        {@/if}
+
+
+                                    </div>
                                     <div class="act fn-hide"></div>
                                     <div class="actlayer">
                                         <p class="j-actzan" data-id="${item.reportId}">
@@ -310,7 +327,7 @@
                                     <div class="line fn-hide"></div>
                                     <div class="list fn-hide">
                                         {@each item.comments as citem}
-                                        <p>
+                                        <p id="live-cmt">
                                         <div class="live_msg_cmt">
                                             <div class="wxuser_cmt">
                                                 <div class="wxuser-img_cmt"><img src="${citem.headimgurl}"
@@ -477,6 +494,29 @@
         </div>
     </div>
 </script>
+
+
+<script id="tpl-cmt" type="text/template">
+
+    <div class="live_msg_cmt">
+        <div class="wxuser_cmt">
+            <div class="wxuser-img_cmt"><img src="${citem.headimgurl}"
+                                             class="headimg_cmt"></div>
+
+        </div>
+        <div class="bubbleItem_cmt">
+            <div class="wxuser-nickname_cmt">${citem.nickname}</div>
+            <div class="createTime_cmt">${citem.createTime}</div>
+            <div class="bubble leftBubble">
+                ${citem.content}
+                <span class="bottomLevel"></span>
+                <span class="topLevel"></span>
+            </div>
+        </div>
+    </div>
+</script>
+
+
 <script src="/live/content/common/js/reconnecting-websocket.js"></script>
 <script src="/live/content/www/js/jweixin-1.0.0.js"></script>
 <script src="/live/content/www/lib/prismplayer/prism-min.js"></script>
