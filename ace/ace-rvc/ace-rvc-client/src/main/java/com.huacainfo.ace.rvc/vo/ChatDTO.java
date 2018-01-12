@@ -59,6 +59,19 @@ public class ChatDTO {
      */
     private boolean isSelf;
 
+    /**
+     * 发送为文件时，文件的扩展名
+     */
+    private String suffix;
+
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
+
     public boolean isSelf() {
         return isSelf;
     }
