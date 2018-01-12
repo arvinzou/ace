@@ -61,6 +61,14 @@
 		<filter-name>springSessionRepositoryFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>springSessionRepositoryFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>springSessionRepositoryFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
 	<!-- 权限过滤开始 -->
 	<filter>
 		<filter-name>webAccessDecisionSecurityFilter</filter-name>
@@ -73,6 +81,14 @@
 	<filter-mapping>
 		<filter-name>webAccessDecisionSecurityFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>webAccessDecisionSecurityFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>webAccessDecisionSecurityFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
 	<!-- 权限过滤结束-->
 	

@@ -1,26 +1,14 @@
 package com.huacainfo.ace.live.web.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonKeys;
-import com.huacainfo.ace.common.tools.CommonTreeUtils;
-import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.PropertyUtil;
-import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.LiveMsg;
-import com.huacainfo.ace.live.model.LiveSub;
+import com.huacainfo.ace.live.model.LiveRpt;
 import com.huacainfo.ace.live.service.LiveMsgService;
-import com.huacainfo.ace.live.service.LiveSubService;
+import com.huacainfo.ace.live.service.LiveRptService;
 import com.huacainfo.ace.live.service.WWWService;
-import com.huacainfo.ace.live.vo.LiveQVo;
-import com.huacainfo.ace.live.vo.LiveVo;
 import com.huacainfo.ace.live.web.websocket.WebSocketSub;
-import com.huacainfo.ace.portal.service.DepartmentService;
-import com.huacainfo.ace.portal.vo.DepartmentVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.websocket.Session;
-import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -53,14 +39,11 @@ public class WWWController extends LiveBaseController {
     private LiveMsgService liveMsgService;
 
     @Autowired
-    private LiveSubService liveSubService;
+    private LiveRptService liveRptService;
 
     @Autowired
     private RedisOperations<String, Object> redisTemplate;
 
-
-    @Autowired
-    private DepartmentService departmentService;
 
     /**
      * @throws
@@ -171,12 +154,12 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/insertLiveSub.do")
+    @RequestMapping(value = "/insertLiveRpt.do")
     @ResponseBody
     public MessageResponse insertLiveSub(String jsons) throws Exception {
-        LiveSub obj = JSON.parseObject(jsons, LiveSub.class);
-        return this.liveSubService
-                .insertLiveSub(obj);
+        LiveRpt obj = JSON.parseObject(jsons, LiveRpt.class);
+        return this.liveRptService
+                .insertLiveRpt(obj);
     }
 
     @RequestMapping(value = "/sendMsg.do")
@@ -233,10 +216,10 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-07
      */
-    @RequestMapping(value = "/getLiveSubList.do")
+    @RequestMapping(value = "/getLiveRptList.do")
     @ResponseBody
     public List<Map<String, Object>> getLiveSubList() {
-        return this.wwwService.getLiveSubList(this.getParams());
+        return this.wwwService.getLiveRptList(this.getParams());
     }
 
     /**

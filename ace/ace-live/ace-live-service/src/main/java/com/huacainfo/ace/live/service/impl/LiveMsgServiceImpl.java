@@ -89,7 +89,7 @@ public class LiveMsgServiceImpl implements LiveMsgService {
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "聊天内容不能为空！");
         }
-        o.setCreateDate(new Date());
+        o.setCreateTime(new Date());
         o.setStatus("1");
         this.liveMsgDao.insert(o);
         Map<String, String> data = new HashMap<String, String>();

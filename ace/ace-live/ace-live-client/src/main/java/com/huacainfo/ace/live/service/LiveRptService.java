@@ -4,16 +4,16 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.live.model.LiveSub;
-import com.huacainfo.ace.live.vo.LiveSubVo;
-import com.huacainfo.ace.live.vo.LiveSubQVo;
+import com.huacainfo.ace.live.model.LiveRpt;
+import com.huacainfo.ace.live.vo.LiveRptVo;
+import com.huacainfo.ace.live.vo.LiveRptQVo;
 
 /**
  * @author: 陈晓克
  * @version: 2018-01-03
  * @Description: TODO(图文直播)
  */
-public interface LiveSubService {
+public interface LiveRptService {
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -23,15 +23,15 @@ public interface LiveSubService {
      * @param: @param limit
      * @param: @param orderBy
      * @param: @throws Exception
-     * @return: PageResult<LiveSubVo>
+     * @return: PageResult<LiveRptVo>
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    public abstract PageResult<LiveSubVo> findLiveSubList(LiveSubQVo condition, int start, int limit, String orderBy) throws Exception;
+    public abstract PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
-     * @Title:insertLiveSub
+     * @Title:insertLiveRpt
      * @Description: TODO(添加图文直播)
      * @param: @param obj
      * @param: @param userProp
@@ -40,11 +40,11 @@ public interface LiveSubService {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    public abstract MessageResponse insertLiveSub(LiveSub obj) throws Exception;
+    public abstract MessageResponse insertLiveRpt(LiveRpt obj) throws Exception;
 
     /**
      * @throws
-     * @Title:updateLiveSub
+     * @Title:updateLiveRpt
      * @Description: TODO(更新图文直播)
      * @param: @param obj
      * @param: @param userProp
@@ -53,23 +53,23 @@ public interface LiveSubService {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    public abstract MessageResponse updateLiveSub(LiveSub obj) throws Exception;
+    public abstract MessageResponse updateLiveRpt(LiveRpt obj) throws Exception;
 
     /**
      * @throws
-     * @Title:selectLiveSubByPrimaryKey
+     * @Title:selectLiveRptByPrimaryKey
      * @Description: TODO(获取图文直播)
      * @param: @param id
      * @param: @throws Exception
-     * @return: SingleResult<LiveSub>
+     * @return: SingleResult<LiveRpt>
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    public abstract SingleResult<LiveSubVo> selectLiveSubByPrimaryKey(String id) throws Exception;
+    public abstract SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
-     * @Title:deleteLiveSubByLiveSubId
+     * @Title:deleteLiveRptByLiveRptId
      * @Description: TODO(删除图文直播)
      * @param: @param id
      * @param: @param  userProp
@@ -78,7 +78,7 @@ public interface LiveSubService {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    public abstract MessageResponse deleteLiveSubByLiveSubId(String id, UserProp userProp) throws Exception;
+    public abstract MessageResponse deleteLiveRptByLiveRptId(String id, UserProp userProp) throws Exception;
 
 
     /**
@@ -97,7 +97,7 @@ public interface LiveSubService {
 
     /**
      * @throws
-     * @Title:updateLiveSub
+     * @Title:updateLiveRpt
      * @Description: TODO(更新图文直播)
      * @param: @param obj
      * @param: @param userProp
@@ -106,7 +106,7 @@ public interface LiveSubService {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    public abstract MessageResponse updateLiveSubStatus(String id, String status) throws Exception;
+    public abstract MessageResponse updateLiveRptStatus(String id, String status) throws Exception;
 
 
 }

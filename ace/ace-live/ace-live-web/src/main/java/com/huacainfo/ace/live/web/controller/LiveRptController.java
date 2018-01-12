@@ -14,27 +14,27 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.live.model.LiveSub;
-import com.huacainfo.ace.live.service.LiveSubService;
-import com.huacainfo.ace.live.vo.LiveSubVo;
-import com.huacainfo.ace.live.vo.LiveSubQVo;
+import com.huacainfo.ace.live.model.LiveRpt;
+import com.huacainfo.ace.live.service.LiveRptService;
+import com.huacainfo.ace.live.vo.LiveRptVo;
+import com.huacainfo.ace.live.vo.LiveRptQVo;
 
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/liveSub")
+@RequestMapping("/liveRpt")
 /**
  * @author: 陈晓克
  * @version: 2018-01-03
  * @Description: TODO(图文直播)
  */
-public class LiveSubController extends LiveBaseController {
+public class LiveRptController extends LiveBaseController {
 
 
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private LiveSubService liveSubService;
+    private LiveRptService liveRptService;
 
     /**
      * @throws
@@ -44,16 +44,16 @@ public class LiveSubController extends LiveBaseController {
      * @param: @param page
      * @param: @return
      * @param: @throws Exception
-     * @return: PageResult<LiveSubVo>
+     * @return: PageResult<LiveRptVo>
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/findLiveSubList.do")
+    @RequestMapping(value = "/findLiveRptList.do")
     @ResponseBody
-    public PageResult<LiveSubVo> findLiveSubList(LiveSubQVo condition,
+    public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition,
                                                  PageParamNoChangeSord page) throws Exception {
-        PageResult<LiveSubVo> rst = this.liveSubService
-                .findLiveSubList(condition, page.getStart(), page.getLimit(),
+        PageResult<LiveRptVo> rst = this.liveRptService
+                .findLiveRptList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
@@ -64,7 +64,7 @@ public class LiveSubController extends LiveBaseController {
 
     /**
      * @throws
-     * @Title:insertLiveSub
+     * @Title:insertLiveRpt
      * @Description: TODO(添加图文直播)
      * @param: @param jsons
      * @param: @throws Exception
@@ -72,17 +72,17 @@ public class LiveSubController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/insertLiveSub.do")
+    @RequestMapping(value = "/insertLiveRpt.do")
     @ResponseBody
-    public MessageResponse insertLiveSub(String jsons) throws Exception {
-        LiveSub obj = JSON.parseObject(jsons, LiveSub.class);
-        return this.liveSubService
-                .insertLiveSub(obj);
+    public MessageResponse insertLiveRpt(String jsons) throws Exception {
+        LiveRpt obj = JSON.parseObject(jsons, LiveRpt.class);
+        return this.liveRptService
+                .insertLiveRpt(obj);
     }
 
     /**
      * @throws
-     * @Title:updateLiveSub
+     * @Title:updateLiveRpt
      * @Description: TODO(更新图文直播)
      * @param: @param jsons
      * @param: @throws Exception
@@ -90,17 +90,17 @@ public class LiveSubController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/updateLiveSub.do")
+    @RequestMapping(value = "/updateLiveRpt.do")
     @ResponseBody
-    public MessageResponse updateLiveSub(String jsons) throws Exception {
-        LiveSub obj = JSON.parseObject(jsons, LiveSub.class);
-        return this.liveSubService
-                .updateLiveSub(obj);
+    public MessageResponse updateLiveRpt(String jsons) throws Exception {
+        LiveRpt obj = JSON.parseObject(jsons, LiveRpt.class);
+        return this.liveRptService
+                .updateLiveRpt(obj);
     }
 
     /**
      * @throws
-     * @Title:updateLiveSub
+     * @Title:updateLiveRpt
      * @Description: TODO(更新图文直播)
      * @param: @param jsons
      * @param: @throws Exception
@@ -108,9 +108,9 @@ public class LiveSubController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/updateLiveSubStatus.do")
+    @RequestMapping(value = "/updateLiveRptStatus.do")
     @ResponseBody
-    public MessageResponse updateLiveSubStatus(String id, String status, String message, String rid) throws Exception {
+    public MessageResponse updateLiveRptStatus(String id, String status, String message, String rid) throws Exception {
         if (status != null && status.equals("2")) {
             for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
                 try {
@@ -122,29 +122,29 @@ public class LiveSubController extends LiveBaseController {
             }
         }
 
-        return this.liveSubService.updateLiveSubStatus(id, status);
+        return this.liveRptService.updateLiveRptStatus(id, status);
     }
 
     /**
      * @throws
-     * @Title:selectLiveSubByPrimaryKey
+     * @Title:selectLiveRptByPrimaryKey
      * @Description: TODO(获取图文直播)
      * @param: @param id
      * @param: @throws Exception
-     * @return: SingleResult<LiveSub>
+     * @return: SingleResult<LiveRpt>
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/selectLiveSubByPrimaryKey.do")
+    @RequestMapping(value = "/selectLiveRptByPrimaryKey.do")
     @ResponseBody
-    public SingleResult<LiveSubVo> selectLiveSubByPrimaryKey(String id)
+    public SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id)
             throws Exception {
-        return this.liveSubService.selectLiveSubByPrimaryKey(id);
+        return this.liveRptService.selectLiveRptByPrimaryKey(id);
     }
 
     /**
      * @throws
-     * @Title:deleteLiveSubByLiveSubId
+     * @Title:deleteLiveRptByLiveRptId
      * @Description: TODO(删除图文直播)
      * @param: @param jsons
      * @param: @throws Exception
@@ -152,19 +152,19 @@ public class LiveSubController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/deleteLiveSubByLiveSubId.do")
+    @RequestMapping(value = "/deleteLiveRptByLiveRptId.do")
     @ResponseBody
-    public MessageResponse deleteLiveSubByLiveSubId(String jsons)
+    public MessageResponse deleteLiveRptByLiveRptId(String jsons)
             throws Exception {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
-        return this.liveSubService.deleteLiveSubByLiveSubId(id,
+        return this.liveRptService.deleteLiveRptByLiveRptId(id,
                 this.getCurUserProp());
     }
 
     /**
      * @throws
-     * @Title:sendLiveSubContentBySortAct
+     * @Title:sendLiveRptContentBySortAct
      * @Description: TODO(图文直播排序)
      * @param: @param jsons
      * @param: @throws Exception
@@ -172,9 +172,9 @@ public class LiveSubController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/sendLiveSubContentBySortAct.do")
+    @RequestMapping(value = "/sendLiveRptContentBySortAct.do")
     @ResponseBody
-    public MessageResponse sendLiveSubContentBySortAct(String message, String rid) throws Exception {
+    public MessageResponse sendLiveRptContentBySortAct(String message, String rid) throws Exception {
         for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
             try {
                 item.sendMessage(message);
@@ -200,6 +200,6 @@ public class LiveSubController extends LiveBaseController {
     @RequestMapping(value = "/updateSortByPrimaryKey.do")
     @ResponseBody
     public MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception {
-        return this.liveSubService.updateSortByPrimaryKey(id, sort);
+        return this.liveRptService.updateSortByPrimaryKey(id, sort);
     }
 }

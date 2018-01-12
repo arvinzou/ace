@@ -1,8 +1,10 @@
 package com.huacainfo.ace.live.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.portal.service.OAuth2Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Properties;
+import java.util.Set;
+import java.util.Map;
 @Controller
 @RequestMapping("/www/oauth2")
 /**
@@ -26,6 +32,7 @@ public class OAuth2Controller extends LiveBaseController {
 
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @Value("#{config[appid]}")
     private String appid;
@@ -52,6 +59,28 @@ public class OAuth2Controller extends LiveBaseController {
             viewName = "error";
         }
         ModelAndView mav = new ModelAndView(viewName);
+        return mav;
+    }
+
+    @RequestMapping(value = "/cfg.do")
+    public ModelAndView userinfo() throws Exception {
+        Object o = this.getSession(CommonKeys.SESSION_USERINFO_KEY);
+        Map<String, Object> cfg = new HashMap<>();
+        cfg.put("fastdfs_server", PropertyUtil.getProperty("fastdfs_server"));
+        cfg.put("websocketurl", PropertyUtil.getProperty("websocketurl"));
+        if (null == null) {
+            logger.info("====>cfg.do wxuser in session is empty");
+        }
+        StringBuffer sb = new StringBuffer("var wxuser=");
+        sb.append(JSON.toJSONString(o));
+        sb.append(";");
+
+        sb.append("var cfg=");
+        sb.append(JSON.toJSONString(cfg));
+        sb.append(";");
+
+        ModelAndView mav = new ModelAndView("js");
+        mav.addObject("js", sb.toString());
         return mav;
     }
 }

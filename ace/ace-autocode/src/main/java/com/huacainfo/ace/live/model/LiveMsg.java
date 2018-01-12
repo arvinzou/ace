@@ -12,7 +12,7 @@ public class LiveMsg implements java.io.Serializable {
 
     private String status;
 
-    private Date createDate;
+    private Date createTime;
 
     private String content;
 
@@ -48,13 +48,6 @@ public class LiveMsg implements java.io.Serializable {
         this.status = status == null ? null : status.trim();
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
 
     public String getContent() {
         return content;
@@ -62,5 +55,13 @@ public class LiveMsg implements java.io.Serializable {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

@@ -24,8 +24,8 @@
     <dubbo:service interface="com.huacainfo.ace.live.service.LiveService"
                    ref="liveService"/>
 
-    <dubbo:service interface="com.huacainfo.ace.live.service.LiveSubService"
-                   ref="liveSubService"/>
+    <dubbo:service interface="com.huacainfo.ace.live.service.LiveRptService"
+                   ref="liveRptService"/>
 
 
     <dubbo:service interface="com.huacainfo.ace.live.service.LiveMsgService"

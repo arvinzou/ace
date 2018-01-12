@@ -1,9 +1,8 @@
-
 package com.huacainfo.ace.live.vo;
 
-import com.huacainfo.ace.live.model.LiveSub;
+import com.huacainfo.ace.live.model.LiveRpt;
 
 
-public class LiveSubVo extends LiveSub {
+public class LiveRptQVo extends LiveRpt {
     private static final long serialVersionUID = 1L;
 }

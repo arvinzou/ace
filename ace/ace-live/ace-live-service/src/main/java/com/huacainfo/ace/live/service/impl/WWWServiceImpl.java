@@ -77,8 +77,8 @@ public class WWWServiceImpl implements WWWService {
      * @version: 2018-01-07
      */
     @Override
-    public List<Map<String, Object>> getLiveSubList(Map<String, Object> p) {
-        return this.liveDao.getLiveSubList(p);
+    public List<Map<String, Object>> getLiveRptList(Map<String, Object> p) {
+        return this.liveDao.getLiveRptList(p);
     }
 
     /**

@@ -195,13 +195,15 @@
         pop = #{pop,jdbcType=BIGINT}
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <select id="getLiveSubList" resultType="map">
-        select id, rid, uid, content, date_format(createDate,'%Y-%m-%d %H:%i') createDate from live_sub where rid=#{rid}
-        order by sort,createDate desc
+    <select id="getLiveRptList" resultType="map">
+        select id, rid, uid, sort, mediaType, createTime, status, likeNum,content, mediaContent,
+        date_format(createTime,'%Y-%m-%d %H:%i:%s') createTime from live_rpt where rid=#{rid}
+        order by sort,createTime
     </select>
     <select id="getLiveMsgList" resultType="map">
-        select id, rid, uid, content, date_format(createDate,'%Y-%m-%d %H:%i') createDate from live_msg where rid=#{rid}
-        order by createDate desc
+        select id, rid, uid, content, date_format(createTime,'%Y-%m-%d %H:%i:%s') createTime from live_msg where
+        rid=#{rid}
+        order by createTime
     </select>
     <select id="getTotalNumAndOrgInfo" resultType="map">
         SELECT
@@ -214,7 +216,7 @@
         #{deptId} deptId,
         count(1) totalNum
         FROM
-        live_sub
+        live_rpt
         WHERE
         rid = #{id}
         ) a

@@ -59,4 +59,8 @@ public class PropertyUtil {
         }
         return props.getProperty(key, defaultValue);
     }
+
+    public static Properties getProps() {
+        return props;
+    }
 }

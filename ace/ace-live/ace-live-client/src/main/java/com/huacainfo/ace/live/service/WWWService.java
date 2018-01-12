@@ -51,7 +51,7 @@ public interface WWWService {
      * @author: 陈晓克
      * @version: 2018-01-07
      */
-    List<Map<String, Object>> getLiveSubList(Map<String, Object> p);
+    List<Map<String, Object>> getLiveRptList(Map<String, Object> p);
 
     /**
      * @throws

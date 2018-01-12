@@ -2,35 +2,6 @@
   "currentpage": 1,
   "data": [
     {
-      "approvedTime": 1515378169000,
-      "content": "视频直播区内整片剪辑已替换完成，点击上方视频直播区域，可观看全程演出+现场访问内容。",
-      "createDate": "2018-1-8 10:22",
-      "duration": 0,
-      "gmtCreate": 1515378120000,
-      "liker": "云友,云友,云友",
-      "reportId": 1515378169249526,
-      "reporter": "全媒体记者 伍银",
-      "thumbnail": "https://xcycdn-video.zhongguowangshi.comnull?x-oss-process=image/resize,m_fill,w_640,h_360,limit_0",
-      "type": 1,
-      "userType": "zbcb",
-      "watermarkConfig": "watermark,image_cmVwb3J0d2F0ZXJpY29uX2xpdmUtMTAwMDAtMTAwMDAucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMjIsaF8yNg,text_5bi45b636J6N5aqS,type_d3F5LXplbmhlaQ,color_FFFFFF,size_20,shadow_40,order_0,align_1,interval_4,g_se,x_30,y_15"
-    },
-    {
-      "approvedTime": 1515248189000,
-      "content": "本次直播由常德融媒团队全程执行，直播结束后，点击上方视频直播回看直播可以回顾全程。更完整的采访以及现场演出的完整短片24小时后将在视频回顾区得以呈现。",
-      "createDate": "2018-1-6 22:16",
-      "duration": 0,
-      "gmtCreate": 1515248189000,
-      "head": "https://xinhua-usercenter.oss-cn-hangzhou.aliyuncs.com/portrait/201711/2017111811040035_6409.jpg",
-      "liker": "云友,云友,云友,快哉风,云友,云友,云友",
-      "reportId": 1515248189266437,
-      "reporter": "常德融媒",
-      "thumbnail": "https://xcycdn-video.zhongguowangshi.comnull?x-oss-process=image/resize,m_fill,w_640,h_360,limit_0",
-      "type": 1,
-      "userType": "zbcb",
-      "watermarkConfig": "watermark,image_cmVwb3J0d2F0ZXJpY29uX2xpdmUtMTAwMDAtMTAwMDAucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMjIsaF8yNg,text_5bi45b636J6N5aqS,type_d3F5LXplbmhlaQ,color_FFFFFF,size_20,shadow_40,order_0,align_1,interval_4,g_se,x_30,y_15"
-    },
-    {
       "approvedTime": 1515248160000,
       "comments": [
         {
@@ -63,6 +34,14 @@
         }
       ],
       "content": "常德融媒专访主办方、策划人、演出阵容，还有歌曲原型以及来听音乐会的听众专访。",
+      "imageList": [
+        {
+          "h": 694,
+          "url": "https://xcycdn.zhongguowangshi.com/report-img/del1dmerm76.png",
+          "w": 1231,
+          "watermarkConfig": "watermark,image_cmVwb3J0d2F0ZXJpY29uX2xpdmUtMTAwMDAtMTAwMDAucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMzYsaF80Mw,text_5bi45b636J6N5aqS,type_d3F5LXplbmhlaQ,color_FFFFFF,size_33,shadow_40,order_0,align_1,interval_4,g_se,x_49,y_25"
+        }
+      ],
       "createDate": "2018-1-6 22:16",
       "duration": 0,
       "gmtCreate": 1515248160000,

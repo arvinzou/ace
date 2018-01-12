@@ -5,8 +5,6 @@ import java.util.*;
 
 import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
-import com.huacainfo.ace.common.tools.HttpUtils;
-import com.huacainfo.ace.common.tools.PropertyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +15,23 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.live.dao.LiveSubDao;
-import com.huacainfo.ace.live.model.LiveSub;
+import com.huacainfo.ace.live.dao.LiveRptDao;
+import com.huacainfo.ace.live.model.LiveRpt;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.live.service.LiveSubService;
-import com.huacainfo.ace.live.vo.LiveSubVo;
-import com.huacainfo.ace.live.vo.LiveSubQVo;
+import com.huacainfo.ace.live.service.LiveRptService;
+import com.huacainfo.ace.live.vo.LiveRptVo;
+import com.huacainfo.ace.live.vo.LiveRptQVo;
 
-@Service("liveSubService")
+@Service("liveRptService")
 /**
  * @author: 陈晓克
  * @version: 2018-01-03
  * @Description: TODO(图文直播)
  */
-public class LiveSubServiceImpl implements LiveSubService {
+public class LiveRptServiceImpl implements LiveRptService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private LiveSubDao liveSubDao;
+    private LiveRptDao liveSubDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
     @Autowired
@@ -48,15 +46,15 @@ public class LiveSubServiceImpl implements LiveSubService {
      * @param: @param limit
      * @param: @param orderBy
      * @param: @throws Exception
-     * @return: PageResult<LiveSubVo>
+     * @return: PageResult<LiveRptVo>
      * @author: 陈晓克
      * @version: 2018-01-03
      */
     @Override
-    public PageResult<LiveSubVo> findLiveSubList(LiveSubQVo condition, int start,
+    public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, int start,
                                                  int limit, String orderBy) throws Exception {
-        PageResult<LiveSubVo> rst = new PageResult<LiveSubVo>();
-        List<LiveSubVo> list = this.liveSubDao.findList(condition,
+        PageResult<LiveRptVo> rst = new PageResult<LiveRptVo>();
+        List<LiveRptVo> list = this.liveSubDao.findList(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
@@ -68,7 +66,7 @@ public class LiveSubServiceImpl implements LiveSubService {
 
     /**
      * @throws
-     * @Title:insertLiveSub
+     * @Title:insertLiveRpt
      * @Description: TODO(添加图文直播)
      * @param: @param o
      * @param: @param userProp
@@ -78,7 +76,7 @@ public class LiveSubServiceImpl implements LiveSubService {
      * @version: 2018-01-03
      */
     @Override
-    public MessageResponse insertLiveSub(LiveSub o)
+    public MessageResponse insertLiveRpt(LiveRpt o)
             throws Exception {
         o.setId(UUID.randomUUID().toString());
         //o.setId(String.valueOf(new Date().getTime()));
@@ -94,7 +92,7 @@ public class LiveSubServiceImpl implements LiveSubService {
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "直播内容不能为空！");
         }
-        o.setCreateDate(new Date());
+        o.setCreateTime(new Date());
         o.setStatus("1");
         this.liveSubDao.insert(o);
         Map<String, String> data = new HashMap<String, String>();
@@ -107,7 +105,7 @@ public class LiveSubServiceImpl implements LiveSubService {
 
     /**
      * @throws
-     * @Title:updateLiveSub
+     * @Title:updateLiveRpt
      * @Description: TODO(更新图文直播)
      * @param: @param o
      * @param: @param userProp
@@ -117,7 +115,7 @@ public class LiveSubServiceImpl implements LiveSubService {
      * @version: 2018-01-03
      */
     @Override
-    public MessageResponse updateLiveSub(LiveSub o)
+    public MessageResponse updateLiveRpt(LiveRpt o)
             throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
@@ -133,7 +131,7 @@ public class LiveSubServiceImpl implements LiveSubService {
 
     /**
      * @throws
-     * @Title:updateLiveSub
+     * @Title:updateLiveRpt
      * @Description: TODO(更新图文直播)
      * @param: @param o
      * @param: @param userProp
@@ -143,7 +141,7 @@ public class LiveSubServiceImpl implements LiveSubService {
      * @version: 2018-01-03
      */
     @Override
-    public MessageResponse updateLiveSubStatus(String id, String status)
+    public MessageResponse updateLiveRptStatus(String id, String status)
             throws Exception {
         if (CommonUtils.isBlank(id)) {
             return new MessageResponse(1, "主键不能为空！");
@@ -157,24 +155,24 @@ public class LiveSubServiceImpl implements LiveSubService {
 
     /**
      * @throws
-     * @Title:selectLiveSubByPrimaryKey
+     * @Title:selectLiveRptByPrimaryKey
      * @Description: TODO(获取图文直播)
      * @param: @param id
      * @param: @throws Exception
-     * @return: SingleResult<LiveSub>
+     * @return: SingleResult<LiveRpt>
      * @author: 陈晓克
      * @version: 2018-01-03
      */
     @Override
-    public SingleResult<LiveSubVo> selectLiveSubByPrimaryKey(String id) throws Exception {
-        SingleResult<LiveSubVo> rst = new SingleResult<LiveSubVo>();
+    public SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id) throws Exception {
+        SingleResult<LiveRptVo> rst = new SingleResult<LiveRptVo>();
         rst.setValue(this.liveSubDao.selectByPrimaryKey(id));
         return rst;
     }
 
     /**
      * @throws
-     * @Title:deleteLiveSubByLiveSubId
+     * @Title:deleteLiveRptByLiveRptId
      * @Description: TODO(删除图文直播)
      * @param: @param id
      * @param: @param userProp
@@ -184,7 +182,7 @@ public class LiveSubServiceImpl implements LiveSubService {
      * @version: 2018-01-03
      */
     @Override
-    public MessageResponse deleteLiveSubByLiveSubId(String id, UserProp userProp) throws Exception {
+    public MessageResponse deleteLiveRptByLiveRptId(String id, UserProp userProp) throws Exception {
         this.liveSubDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除图文直播", "图文直播", String.valueOf(id),
                 String.valueOf(id), "图文直播", userProp);

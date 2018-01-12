@@ -85,12 +85,13 @@ public class WebAccessDecisionSecurityFilter implements Filter {
                         o.put("nickname", "渡月影");
                         o.put("headimgurl", "https://wx.qlogo.cn/mmopen/vi_32/BL7ic7uQTibM3KcVnlVUQ7edZpBbC0bxduCHcrTM1xdIwPickCJA2ZjML3LX2lC55QXmvKmfAeP4ia56x5cQVibVcBg/0");
                         session.setAttribute(CommonKeys.SESSION_USERINFO_KEY, o);
-                        accessable = false;
 						String appid = PropertyUtil.getProperty("appid");
 						String redirect_uri = PropertyUtil.getProperty("redirect_uri");
 						String scope = PropertyUtil.getProperty("scope");
 						String state = PropertyUtil.getProperty("state");
-						redirectPage = this.authorize(appid, redirect_uri, scope, state);
+						//redirectPage = this.authorize(appid, redirect_uri, scope, state);
+						accessable = true;
+						LOGGER.info("======>{}", session.getAttribute(CommonKeys.SESSION_USERINFO_KEY));
 					} else {
 						accessable = true;
 					}
