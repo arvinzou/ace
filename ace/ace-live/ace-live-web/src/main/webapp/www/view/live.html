@@ -228,8 +228,8 @@
                         <li data-id="${item.reportId}">
                             <div class="wrap">
                                 <div class="headpic">
-                                    {@if item.head}
-                                    <img data-lazy-img="${item.head}">
+                                    {@if item.rpt.headimgurl}
+                                    <img src="${item.rpt.headimgurl}" style="width:.96rem;height:.96rem">
                                     {@else}
                                     <img src="/live/content/www/img/head_default.png">
                                     {@/if}

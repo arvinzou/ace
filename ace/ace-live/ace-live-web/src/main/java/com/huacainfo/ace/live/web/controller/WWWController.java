@@ -59,21 +59,7 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public Map<String, Object> getListByCompany(int page, String companyId) throws Exception {
         Map<String, Object> p = this.getPageParam(page, this.getParams());
-        Map<String, Object> rst = this.wwwService.getTotalPageAndOrgInfo(companyId);
-        Long totalNum = (Long) rst.get("totalNum");
-        Long totalpage = new Long(1);
-        if (totalNum % this.defaultPageSize == 0) {
-            totalpage = totalNum / this.defaultPageSize;
-        } else {
-            totalpage = (totalNum / this.defaultPageSize) + 1;
-        }
-        rst.put("data", this.wwwService.getLiveList(p));
-        rst.put("currentpage", page);
-        rst.put("pagecount", totalNum);
-        rst.put("status", 0);
-        rst.put("totalcount", totalNum);
-        rst.put("totalpage", totalpage);
-        return rst;
+        return this.wwwService.getLiveList(companyId, page, p);
     }
 
     @RequestMapping(value = "/getTotalNumAndOrgInfo.do")
@@ -218,8 +204,9 @@ public class WWWController extends LiveBaseController {
      */
     @RequestMapping(value = "/getLiveRptList.do")
     @ResponseBody
-    public List<Map<String, Object>> getLiveSubList() {
-        return this.wwwService.getLiveRptList(this.getParams());
+    public Map<String, Object> getLiveSubList(int page, String rid) {
+        Map<String, Object> p = this.getPageParam(page, this.getParams());
+        return this.wwwService.getLiveRptList(rid, page, p);
     }
 
     /**

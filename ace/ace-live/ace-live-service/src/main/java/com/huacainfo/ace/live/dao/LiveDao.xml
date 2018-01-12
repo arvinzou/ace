@@ -32,6 +32,7 @@
     <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.live.vo.LiveVo">
 
     </resultMap>
+
     <sql id="Base_Column_List">
         id, areaCode, name, category, deptId, endTime, remark, nop, pop, addr, rtmpUrl,
         mp4Url, imageSrc, latitude, longitude, status, createUserId, createUserName, createDate,
@@ -195,10 +196,60 @@
         pop = #{pop,jdbcType=BIGINT}
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <select id="getLiveRptList" resultType="map">
-        select id, rid, uid, sort, mediaType, createTime, status, likeNum,content, mediaContent,
-        date_format(createTime,'%Y-%m-%d %H:%i:%s') createTime from live_rpt where rid=#{rid}
-        order by sort,createTime
+    <resultMap id="mapRpt" type="com.huacainfo.ace.live.model.Rpt">
+        <id property="reportId" column="reportId"/>
+        <result property="approvedTime" column="approvedTime"/>
+        <result property="content" column="content"/>
+        <result property="createDate" column="createDate"/>
+        <result property="duration" column="duration"/>
+        <result property="gmtCreate" column="gmtCreate"/>
+        <result property="pictures" column="pictures"/>
+        <result property="reporter" column="reporter"/>
+        <result property="thumbnail" column="thumbnail"/>
+        <result property="type" column="type"/>
+        <result property="userType" column="userType"/>
+        <result property="watermarkConfig" column="watermarkConfig"/>
+        <result property="video" column="video"/>
+        <result property="audio" column="audio"/>
+        <association property="rpt" column="uid" javaType="com.huacainfo.ace.live.model.Reporter">
+            <id property="openid" column="openid"/>
+            <result property="headimgurl" column="headimgurl"/>
+            <result property="nickname" column="nickname"/>
+        </association>
+        <collection property="imageList" ofType="com.huacainfo.ace.live.model.Img">
+            <id property="id" column="imgId"/>
+            <result property="h" column="h"/>
+            <result property="w" column="w"/>
+            <result property="url" column="url"/>
+            <result property="watermarkConfig" column="watermarkConfig"/>
+        </collection>
+    </resultMap>
+    <select id="getLiveRptList" resultMap="mapRpt">
+        select t.id reportId, t.rid, t.uid, t.sort, t.mediaType type, t.status,
+        t.likeNum,t.content,t.mediaContent,t.createTime approvedTime,0 duration,t.createTime gmtCreate,
+        date_format(t.createTime,'%Y-%m-%d %H:%i:%s') createDate,
+        '' pictures,
+        '' liker,
+        a.nickname reporter,
+        '' thumbnail,
+        a.headimgurl,
+        a.nickname,
+        a.openid,
+        b.id imgId,
+        b.url,
+        b.w,
+        b.h,
+        b.watermarkConfig
+        from live_rpt t
+        left join portal.userinfo a on t.uid=a.openid
+        left join live_img b on t.id=b.rptId
+        where rid=#{rid}
+        order by t.sort,t.createTime
+        limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+    </select>
+    <select id="getLiveRptTotalNum" resultType="map">
+        SELECT
+        count(1) totalNum from live_rpt where rid=#{rid}
     </select>
     <select id="getLiveMsgList" resultType="map">
         select id, rid, uid, content, date_format(createTime,'%Y-%m-%d %H:%i:%s') createTime from live_msg where
@@ -243,7 +294,7 @@
         from portal.department t where t.department_id= #{deptId}
     </select>
 
-    <select id="getTotalPageAndOrgInfo" resultType="map">
+    <select id="getLiveTotalNum" resultType="map">
         SELECT
         companyAlias,
         companyName,

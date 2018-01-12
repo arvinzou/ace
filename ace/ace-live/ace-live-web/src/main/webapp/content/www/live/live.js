@@ -268,8 +268,8 @@ function getReport(e, i) {
     }
     reprtLoading = !0,
     i || $("#j-listmore").removeClass("fn-hide"),
-    lvsCmd.ajax(apiServer + "/h5/report/getById.json", {
-        id: id,
+    lvsCmd.ajax(apiServer + "/www/live/getLiveRptList.do", {
+        rid: lvsCmd.urlParams.id,
         sort: reportSort,
         page: e
     },
