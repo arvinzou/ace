@@ -6,6 +6,7 @@ import com.huacainfo.ace.rvc.dao.RvcConferenceChatLogMapper;
 import com.huacainfo.ace.rvc.model.RvcBaseUser;
 import com.huacainfo.ace.rvc.model.RvcConferenceChatLog;
 import com.huacainfo.ace.rvc.service.ChatLogService;
+import com.huacainfo.ace.rvc.service.FileService;
 import com.huacainfo.ace.rvc.service.UserService;
 import com.huacainfo.ace.rvc.vo.ChatDTO;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ import javax.annotation.Resource;
  */
 @Service("chatLogServiceImpl")
 public class ChatLogServiceImpl implements ChatLogService {
+    @Resource
+    private FileService fileService;
 
     @Resource
     private RvcConferenceChatLogMapper rvcConferenceChatLogMapper;
@@ -46,7 +49,7 @@ public class ChatLogServiceImpl implements ChatLogService {
         //是否是图片，需做文件上传，获取URL地址
         boolean isFile = ChatDTO.ACTION_FILE.equals(chatDTO.getAction()) ||
                 ChatDTO.ACTION_IMAGE.equals(chatDTO.getAction());
-        String fileURL = uploadFile(isFile, chatDTO.getContent());
+        String fileURL = uploadFile(isFile, chatDTO.getContent(), chatDTO.getSuffix());
         //存储聊天记录
         if (isFile) {
             chatDTO.setContent(fileURL);
@@ -89,12 +92,15 @@ public class ChatLogServiceImpl implements ChatLogService {
      *
      * @param isImage  是否是图片
      * @param userText 用户键入文本
+     * @param suffix
      * @return 文件URL地址
      */
-    private String uploadFile(boolean isImage, String userText) {
+    private String uploadFile(boolean isImage, String userText, String suffix) {
         if (isImage) {
-            String base64Str = userText.substring(userText.indexOf(":") + 1, userText.length() - 1);
-            String url = "http://image.uri.demo.com";//TODO 文件上传获取图片地址
+//            String base64Str = userText;
+
+            String url = fileService.upload(userText, GUIDUtil.getGUID(), suffix,
+                    "", "");//TODO 文件上传获取图片地址
 
             return url;
         }
