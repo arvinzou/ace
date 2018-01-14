@@ -80,7 +80,7 @@
             wxuser:wxuser
          };
          message.content=$(form).find("input[name=content]").val();
-         message.createTime=new Date().pattern("yyyy-MM-dd hh:mm:ss");
+         message.createTime=new Date().pattern("hh:mm:ss");
          websocketMsg.send(JSON.stringify(message));
         return false;
       }

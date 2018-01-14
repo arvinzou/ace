@@ -858,7 +858,7 @@ function() {
              };
              message.content=a;
              message.id=i;
-             message.createTime=new Date().pattern("yyyy-MM-dd hh:mm:ss");
+             message.createTime=new Date().pattern("hh:mm:ss");
         var n = {
             companyId: lvsCmd.urlParams.companyId,
             rid: lvsCmd.urlParams.id,
