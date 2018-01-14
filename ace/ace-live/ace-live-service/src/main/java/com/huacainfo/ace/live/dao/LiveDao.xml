@@ -265,8 +265,17 @@
         left join live_cmt c on t.id=c.rptId
         left join portal.userinfo d on c.uid=d.openid
         where rid=#{rid}
-        order by t.sort,t.createTime
+        <choose>
+            <when test='sort!=null and sort=="0"'>
+                order by t.sort,t.createTime desc
+            </when>
+            <otherwise>
+                order by t.sort,t.createTime
+            </otherwise>
+        </choose>
+        <!--
         limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+        -->
     </select>
     <select id="getLiveRptTotalNum" resultType="map">
         SELECT

@@ -6,7 +6,7 @@
        };*/
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocketMsg = new ReconnectingWebSocket("ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/livemsg");
+          websocketMsg = new ReconnectingWebSocket("ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg");
       }
       else{
           alert('Not support websocketMsg');
@@ -25,9 +25,24 @@
       //接收到消息的回调方法
       websocketMsg.onmessage = function(){
           var data=JSON.parse(event.data);
-          var tpl = document.getElementById('tpl-msg').innerHTML;
-          var html = juicer(tpl, data);
-          setMessageInnerHTML(html);
+            console.log(data);
+          if(data.header.type==1){
+             var tpl = document.getElementById('tpl-msg').innerHTML;
+             var html = juicer(tpl, data);
+             $("#chatlist").append(html);
+             var chatlist = document.getElementById('chatlist');
+             chatlist.scrollTop = chatlist.scrollHeight;
+          }
+          if(data.header.type==2){
+                console.log(data.header.type);
+               var tpl = document.getElementById('tpl-cmt').innerHTML;
+               var html = juicer(tpl, data);
+               console.log(html);
+               $("#cmt-list").append(html);
+               var chatlist = document.getElementById('cmt-list');
+               chatlist.scrollTop = chatlist.scrollHeight;
+           }
+
       };
 
       //连接关闭的回调方法
@@ -42,9 +57,9 @@
 
       //将消息显示在网页上
       function setMessageInnerHTML(innerHTML){
-          $("#chatlist").append(innerHTML);
-          var chatlist = document.getElementById('chatlist');
-          chatlist.scrollTop = chatlist.scrollHeight;
+                $("#chatlist").append(innerHTML);
+             var chatlist = document.getElementById('chatlist');
+             chatlist.scrollTop = chatlist.scrollHeight;
       }
 
       //关闭连接

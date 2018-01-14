@@ -1595,22 +1595,25 @@ ul {
 	min-height: 300px;
 	overflow-y: scroll;
 }
-
+#cmt-list {
+	max-height: 200px;
+	overflow-y: scroll;
+}
 .headimg {
-	height: 40px;
-	width: 40px;
-	border-radius: 50%
+	width:.80rem;height:.80rem;border-radius:50%;vertical-align:middle;
 }
 
 .wxuser {
 	float: left;
 	width: 50px;
 	padding: 3px;
-	font-size: .28rem;
 	color: #999;
 	text-align: center;
 }
-
+.wxuser-nickname {
+	font-size: .30rem;
+	float: left;
+}
 .live-msg {
 	float: left;
 	width: 100%;
@@ -1619,8 +1622,6 @@ ul {
 }
 
 .bubbleItem {
-	font-size: .37rem;
-	line-height: .58rem;
 	color: #999;
 	margin-left;
     margin-left: 50px;
@@ -1712,46 +1713,8 @@ ul {
 }
 
 
-.createTime_cmt{
-    font-size: .30rem;
-    text-align:right;
-    float:right
-}
-.headimg_cmt {
-	height: 40px;
-	width: 40px;
-	border-radius: 50%
-}
-
-.wxuser_cmt {
-	float: left;
-	width: 50px;
-	padding: 3px;
-	font-size: .28rem;
-	color: #999;
-	text-align: center;
-}
-
-.live-msg_cmt {
-	width: 100%;
-	height: auto;
-	padding: 5px;
-}
-
-.bubbleItem_cmt {
-	font-size: .37rem;
-	line-height: .58rem;
-	color: #999;
-	margin-left;
-    margin-left: 50px;
-}
-.wxuser-nickname_cmt{
-    font-size: .30rem;
-    float:left;
-    width: 80px;
-}
 .wxheadimg{
-width:.80rem;height:.80rem;border-radius:50%;vertical-align:middle;
+    width:.80rem;height:.80rem;border-radius:50%;vertical-align:middle;
 }
 .headpic{
  font-size: .30rem;

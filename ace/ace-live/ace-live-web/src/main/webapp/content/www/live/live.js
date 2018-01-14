@@ -264,7 +264,7 @@ function reportContent(e) {
 var load=false;
 function getReport(e, i) {
     if(load){
-        return;
+       // return;
     }
     reprtLoading = !0,
     i || $("#j-listmore").removeClass("fn-hide"),
@@ -502,7 +502,7 @@ function openRemark(e) {
     $(".fn-contain").height($(window).height() + i),
     setTimeout(function() {
         $("#j-remark").css("display", "block"),
-        $("#j-remark input[name=reportId]").val(e)
+        $("#j-remark input[name=rptId]").val(e)
     },
     100)
 }
@@ -857,27 +857,33 @@ function() {
     !1
 }), $("#j-remarkform").submit(function(e) {
     e.preventDefault();
-    var i = $(this).find("input[name=reportId]").val(),
+    var i = $(this).find("input[name=rptId]").val(),
     a = $.trim($(this).find("input[name=content]").val());
-    if (a.length > 200) return void lvsCmd.alert("鎮ㄨ緭鍏ョ殑鏂囧瓧鏁伴噺瓒呰繃闄愬埗锛堟渶澶�200锛�");
+    if (a.length > 200) return void lvsCmd.alert("评论内容不能超过200字");
     if (a) {
+            var message={};
+             message.header={
+                type:2,
+                wxuser:wxuser
+             };
+             message.content=a;
+             message.createTime=new Date().pattern("yyyy-MM-dd hh:mm:ss");
         var n = {
-            companyId: companyId,
-            liveId: id,
-            reportId: i,
-            content: a,
-            reviewer: userDict.identityName,
-            userId: userDict.identityNo,
-            userType: userDict.identityType
+            companyId: lvsCmd.urlParams.companyId,
+            rid: lvsCmd.urlParams.id,
+            rptId: i,
+            message: JSON.stringify(message),
+            topic:"cmt",
+            uid: wxuser.openid
         };
-        lvsCmd.ajax(apiServer + "/h5/comment/addComment.json", n,
+        lvsCmd.ajax(apiServer + "/www/live/cmt.do", n,
         function(e, n) {
             if (e) if (0 == n.status) {
                 $("#j-remarkform input[name=content]").val(""),
                 closeRemark();
-                var o = $("#j-remark-" + i);
-                o.find(".list").append("<p><span>" + userDict.identityName + ": </span>" + a + "</p>"),
-                showRemark(o)
+                //var o = $("#j-remark-" + i);
+                //o.find(".list").append("<p><span>" + userDict.identityName + ": </span>" + a + "</p>"),
+                //showRemark(o)
             } else lvsCmd.alert(n.errMsg);
             else lvsCmd.alert("提交失败")
         })

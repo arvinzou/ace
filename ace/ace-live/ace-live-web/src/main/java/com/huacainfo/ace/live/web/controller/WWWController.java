@@ -1,6 +1,7 @@
 package com.huacainfo.ace.live.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.live.model.LiveMsg;
@@ -9,6 +10,7 @@ import com.huacainfo.ace.live.service.LiveMsgService;
 import com.huacainfo.ace.live.service.LiveRptService;
 import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.web.websocket.WebSocketSub;
+import com.huacainfo.ace.live.web.websocket.MyWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,8 @@ public class WWWController extends LiveBaseController {
 
     @Autowired
     private RedisOperations<String, Object> redisTemplate;
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
 
     /**
@@ -150,7 +154,7 @@ public class WWWController extends LiveBaseController {
 
     @RequestMapping(value = "/sendMsg.do")
     @ResponseBody
-    public MessageResponse sendMsg(String message, String rid) throws Exception {
+    public MessageResponse sendMsg(String message, String rid, String uid) throws Exception {
         logger.debug("{} {}", rid, message);
 
         //群发消息
@@ -223,5 +227,29 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public List<Map<String, Object>> getLiveMsgList() {
         return this.wwwService.getLiveMsgList(this.getParams());
+    }
+
+
+    @RequestMapping(value = "/cmt.do")
+    @ResponseBody
+    public MessageResponse cmt(String message, String rid, String uid, String rptId, String topic) throws Exception {
+        logger.debug("{} {}", rid, message);
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("rid", rid);
+        data.put("rptId", rptId);
+        data.put("uid", uid);
+        data.put("message", message);
+        this.logger.info("{}", data);
+        this.kafkaProducerService.sendMsg(topic, data);
+        //群发消息
+        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+            try {
+                item.sendMessage(message);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
+        return new MessageResponse(0, "OK");
     }
 }

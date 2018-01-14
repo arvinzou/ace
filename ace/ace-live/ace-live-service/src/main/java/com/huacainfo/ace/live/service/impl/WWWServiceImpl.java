@@ -103,7 +103,7 @@ public class WWWServiceImpl implements WWWService {
         LiveDao dao = session.getMapper(LiveDao.class);
         Map<String, Object> rst = dao.getLiveRptTotalNum(rid);
         Long totalNum = (Long) rst.get("totalNum");
-        Long totalpage = this.calPage(totalNum, this.defaultPageSize);
+        Long totalpage = this.calPage(totalNum, 9999);
         rst.put("data", dao.getLiveRptList(p));
         rst.put("currentpage", page);
         rst.put("pagecount", totalNum);

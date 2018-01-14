@@ -34,4 +34,10 @@
     <dubbo:service interface="com.huacainfo.ace.live.service.WWWService"
                    ref="wwwService"/>
 
+    <dubbo:service interface="com.huacainfo.ace.live.service.LiveImgService"
+                   ref="liveImgService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.live.service.LiveCmtService"
+                   ref="liveCmtService"/>
+
 </beans>

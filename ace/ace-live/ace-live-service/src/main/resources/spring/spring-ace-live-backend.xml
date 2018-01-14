@@ -20,7 +20,7 @@
           destroy-method="shutdown" init-method="run">
         <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
         <constructor-arg index="1" value="${kafka.consumer.group}"/>
-        <constructor-arg index="2" value="livesub"/>
+        <constructor-arg index="2" value="rpt"/>
         <constructor-arg index="3"
                          value="${kafka.consumer.inp.callback.threads}"/>
         <constructor-arg index="4"
@@ -30,7 +30,17 @@
           destroy-method="shutdown" init-method="run">
         <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
         <constructor-arg index="1" value="${kafka.consumer.group}"/>
-        <constructor-arg index="2" value="livemsg"/>
+        <constructor-arg index="2" value="msg"/>
+        <constructor-arg index="3"
+                         value="${kafka.consumer.inp.callback.threads}"/>
+        <constructor-arg index="4"
+                         value="${kafka.consumer.inp.callback.newonly}"/>
+    </bean>
+    <bean id="liveCmtCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveCmtCallbackDealer"
+          destroy-method="shutdown" init-method="run">
+        <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
+        <constructor-arg index="1" value="${kafka.consumer.group}"/>
+        <constructor-arg index="2" value="cmt"/>
         <constructor-arg index="3"
                          value="${kafka.consumer.inp.callback.threads}"/>
         <constructor-arg index="4"
