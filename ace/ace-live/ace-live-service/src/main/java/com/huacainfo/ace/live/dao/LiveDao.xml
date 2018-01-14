@@ -267,10 +267,10 @@
         where rid=#{rid}
         <choose>
             <when test='sort!=null and sort=="0"'>
-                order by t.sort,t.createTime desc
+                order by t.sort,t.createTime desc,c.createTime
             </when>
             <otherwise>
-                order by t.sort,t.createTime
+                order by t.sort,t.createTime,c.createTime
             </otherwise>
         </choose>
         <!--

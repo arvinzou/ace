@@ -1595,7 +1595,7 @@ ul {
 	min-height: 300px;
 	overflow-y: scroll;
 }
-#cmt-list {
+#cmtlist {
 	max-height: 200px;
 	overflow-y: scroll;
 }

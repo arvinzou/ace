@@ -867,6 +867,7 @@ function() {
                 wxuser:wxuser
              };
              message.content=a;
+             message.id=i;
              message.createTime=new Date().pattern("yyyy-MM-dd hh:mm:ss");
         var n = {
             companyId: lvsCmd.urlParams.companyId,

@@ -37,10 +37,10 @@
                 console.log(data.header.type);
                var tpl = document.getElementById('tpl-cmt').innerHTML;
                var html = juicer(tpl, data);
-               console.log(html);
-               $("#cmt-list").append(html);
-               var chatlist = document.getElementById('cmt-list');
-               chatlist.scrollTop = chatlist.scrollHeight;
+               var el="#cmtlist"+data.id;
+               $(el).append(html);
+               //var cmtlist = document.getElementById(el);
+               //cmtlist.scrollTop = cmtlist.scrollHeight;
            }
 
       };
