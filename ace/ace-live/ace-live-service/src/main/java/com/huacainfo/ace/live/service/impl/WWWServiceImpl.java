@@ -21,10 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service("wwwService")
 /**
@@ -200,5 +197,23 @@ public class WWWServiceImpl implements WWWService {
             totalpage = (totalNum / defaultPageSize) + 1;
         }
         return totalpage;
+    }
+
+    /**
+     * @throws
+     * @Title:getWxJsSign
+     * @Description: TODO(微网页报道点赞)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-14
+     */
+    @Override
+    public Map<String, Object> updateRptLikeNum(String id) {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("status", 0);
+        this.liveDao.updateRptLikeNum(id);
+        return rst;
     }
 }

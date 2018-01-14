@@ -252,4 +252,15 @@ public class WWWController extends LiveBaseController {
         }
         return new MessageResponse(0, "OK");
     }
+
+    @RequestMapping(value = "/rptLiker.do")
+    @ResponseBody
+    public MessageResponse rptLiker(String id) throws Exception {
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("id", id);
+        this.logger.info("{}", data);
+        String topic = "liker";
+        this.kafkaProducerService.sendMsg(topic, data);
+        return new MessageResponse(0, "OK");
+    }
 }

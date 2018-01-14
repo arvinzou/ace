@@ -115,4 +115,16 @@ public interface WWWService {
      * @version: 2018-01-09
      */
     Map<String, Object> getWxJsSign(String deptId);
+
+    /**
+     * @throws
+     * @Title:getWxJsSign
+     * @Description: TODO(微网页报道点赞)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-14
+     */
+    Map<String, Object> updateRptLikeNum(String id);
 }

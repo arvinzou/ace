@@ -467,26 +467,16 @@ function showRemark(e) {
 function dianZan(e) {
     var i = {
         companyId: companyId,
-        reportId: e
+        id: e
     };
-    if (isLogin) i.userId = userDict.identityNo,
-    i.reviewer = userDict.identityName,
-    i.userType = userDict.identityType;
-    else {
-        var a = lvsCmd.cookie.get("xcYKId");
-        if (a) i.userId = a;
-        else {
-            var n = joeFn.createYKId();
-            lvsCmd.cookie.set("xcYKId", n, "30d"),
-            i.userId = n
-        }
-        i.userType = "youke"
-    }
-    lvsCmd.ajax(apiServer + "/h5/comment/addLike.json", i,
+    lvsCmd.ajax(apiServer + "/www/live/rptLiker.do", i,
     function(i, a) {
         if ("0" == a.status) {
-            var n = $("#j-remark-" + e),
-            o = n.find(".liker").data("liker"); ("," + o + ",").indexOf("," + userDict.identityName + ",") > -1 || (o && (o += ","), o += isLogin ? userDict.identityName: "浜戝弸", n.find(".liker").data("liker", o), showRemark(n))
+            var n = $("#j-remark-" + e);
+            var likerNum=parseInt($("#liker"+e).html());
+            likerNum=likerNum+1;
+            $("#liker"+e).html(likerNum)
+            showRemark(n);
         }
     })
 }
