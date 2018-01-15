@@ -55,7 +55,7 @@ public class LiveLikerCallBackThread extends Thread {
     public void doCallBack(Map<String, String> data) {
         LOGGER.info("接收消息->{}", data);
         try {
-            this.wwwService.updateRptLikeNum(data.get("id"));
+            this.wwwService.updateRptLikeNum(data.get("id"), data.get("type"));
         } catch (Exception e) {
             LOGGER.error("系统出错{}", e);
         }

@@ -169,32 +169,7 @@ public class WWWController extends LiveBaseController {
         return new MessageResponse(0, "OK");
     }
 
-    /**
-     * @throws
-     * @Title:pop
-     * @Description: TODO(微网页直播点赞)
-     * @param:
-     * @param: @throws Exception
-     * @return: List<Map<String,Object>>
-     * @author: 陈晓克
-     * @version: 2018-01-07
-     */
-    @RequestMapping(value = "/addLike.do")
-    @ResponseBody
-    public Map<String, Object> addLike(String rid) throws Exception {
-        Map<String, Object> rst = new HashMap<>();
-        rst.put("status", "0");
-        logger.debug("{}", rid);
-        String keypop = rid + ".pop";
-        Long pop = (Long) this.redisTemplate.opsForValue().get(keypop);
-        if (pop == null) {
-            pop = new Long(0);
-            this.redisTemplate.opsForValue().set(keypop, pop);
-        }
-        this.redisTemplate.opsForValue().set(keypop, new Long(pop + 1));
-        rst.put("likeNum", pop);
-        return rst;
-    }
+
 
     /**
      * @throws
@@ -253,11 +228,12 @@ public class WWWController extends LiveBaseController {
         return new MessageResponse(0, "OK");
     }
 
-    @RequestMapping(value = "/rptLiker.do")
+    @RequestMapping(value = "/addLike.do")
     @ResponseBody
-    public MessageResponse rptLiker(String id) throws Exception {
+    public MessageResponse addLike(String id, String type) throws Exception {
         Map<String, String> data = new HashMap<String, String>();
         data.put("id", id);
+        data.put("type", type);
         this.logger.info("{}", data);
         String topic = "liker";
         this.kafkaProducerService.sendMsg(topic, data);

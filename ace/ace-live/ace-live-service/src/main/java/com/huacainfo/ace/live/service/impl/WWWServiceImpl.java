@@ -210,10 +210,15 @@ public class WWWServiceImpl implements WWWService {
      * @version: 2018-01-14
      */
     @Override
-    public Map<String, Object> updateRptLikeNum(String id) {
+    public Map<String, Object> updateRptLikeNum(String id, String type) {
         Map<String, Object> rst = new HashMap<>();
         rst.put("status", 0);
-        this.liveDao.updateRptLikeNum(id);
+        if (type.equals("1")) {
+            this.liveDao.updateLiveLikeNum(id);
+        } else {
+            this.liveDao.updateRptLikeNum(id);
+        }
+
         return rst;
     }
 }

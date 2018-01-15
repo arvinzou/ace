@@ -126,5 +126,5 @@ public interface WWWService {
      * @author: 陈晓克
      * @version: 2018-01-14
      */
-    Map<String, Object> updateRptLikeNum(String id);
+    Map<String, Object> updateRptLikeNum(String id, String type);
 }

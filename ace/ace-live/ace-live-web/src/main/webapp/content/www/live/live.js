@@ -123,7 +123,8 @@ function getInfo() {
         function n() {
             var e = {
                 companyId: lvsCmd.urlParams.companyId,
-                rid: lvsCmd.urlParams.id
+                id: lvsCmd.urlParams.id,
+                type:"1"
             },
             i = !0;
             $("#j-xc-liker").on(tap,
@@ -463,9 +464,10 @@ function showRemark(e) {
 function dianZan(e) {
     var i = {
         companyId: companyId,
-        id: e
+        id: e,
+        type:"2"
     };
-    lvsCmd.ajax(apiServer + "/www/live/rptLiker.do", i,
+    lvsCmd.ajax(apiServer + "/www/live/addLike.do", i,
     function(i, a) {
         if ("0" == a.status) {
             var n = $("#j-remark-" + e);

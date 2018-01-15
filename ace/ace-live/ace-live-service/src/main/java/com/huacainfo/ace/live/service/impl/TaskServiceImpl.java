@@ -36,21 +36,6 @@ public class TaskServiceImpl implements TaskService {
     @Scheduled(cron = "${jobs.updateNopPop}")
     @Override
     public void updateNopPop() throws Exception {
-        this.logger.info("jobs updateNopPop executed ");
-        String[] roomkeys = (String[]) this.redisTemplate.opsForValue().get("live.rooms.keys");
-        if (roomkeys == null) {
-            logger.info("redisTemplate opsForValue roomkeys empty");
-            return;
-        }
-        for (String rid : roomkeys) {
-            logger.info("redisTemplate opsForValue rid -> {}", rid);
-            Long nop = (Long) this.redisTemplate.opsForValue().get(rid + ".nop");
-            Long pop = (Long) this.redisTemplate.opsForValue().get(rid + ".pop");
-            logger.info("nop-> {}", nop);
-            logger.info("pop-> {}", pop);
-            if (nop != null && pop != null) {
-                this.liveDao.updateNopPop(rid, nop, pop);
-            }
-        }
+
     }
 }
