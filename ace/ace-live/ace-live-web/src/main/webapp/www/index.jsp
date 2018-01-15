@@ -6,10 +6,9 @@
     <title>live</title>
 </head>
 <body>
-<%
+<script>
+    location.href='view/index.html?companyId=00010001';
 
-Object o=session.getAttribute("SESSION_USERINFO_KEY");
-out.println(o);
-%>
+</script>
 </body>
 </html>

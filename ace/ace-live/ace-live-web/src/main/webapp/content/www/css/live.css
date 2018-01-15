@@ -833,12 +833,8 @@ a {
 
 .xcy-report .headpic {
 	position: absolute;
-	width: .96rem;
-	height: .96rem;
 	left: -1.16rem;
-	border-radius: 50%;
 	background-color: #fff;
-	overflow: hidden
 }
 
 .xcy-report .headpic img {
@@ -1268,6 +1264,7 @@ a {
 }
 
 .xcy-remark {
+    width: 10rem;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -1276,7 +1273,6 @@ a {
 
 .xcy-remark .wrap {
 	margin: auto;
-	width: 10rem;
 	height: 1.44rem;
 	background-color: #f9f9f9;
 	border-top: solid 1px #ddd;
@@ -1318,7 +1314,6 @@ a {
 
 .app-download-place {
 	height: 1.44rem;
-	background-color: #f5f5f5
 }
 
 .app-download {
@@ -1331,7 +1326,6 @@ a {
 	-webkit-box-align: center;
 	box-align: center;
 	height: 1.44rem;
-	background: rgba(0,0,0,.8);
 	color: #fff;
 	z-index: 30
 }
@@ -1591,113 +1585,37 @@ ul {
 
 .tab_content {
 	padding: 15px;
+	background-color: #fff;
 }
-
-#chatlist {
-	width: 100%;
-	max-height: 300px;
-	min-height: 300px;
-	overflow-y: scroll;
-}
-
 .headimg {
-	max-height: 40px;
-	max-width: 40px;
-	border-radius: 20px
+	width:.80rem;height:.80rem;border-radius:50%;vertical-align:middle;
 }
-
+.center{
+    text-align:center
+}
 .wxuser {
 	float: left;
-	width: 50px;
-	padding: 3px;
-	font-size: .28rem;
+	width: .95rem;
+	padding: .15px;
 	color: #999;
 	text-align: center;
 }
-
-.live-msg {
+.bubbleItem{
+}
+.wxuser-nickname {
+	font-size: .30rem;
 	float: left;
-	width: 100%;
+}
+.live-msg {
+	width: 90%;
 	height: auto;
-	padding: 5px;
-}
+	margin: .20rem;
 
-.bubbleItem {
-	font-size: .37rem;
-	line-height: .58rem;
-	color: #999;
-	margin-left;
-    margin-left: 50px;
 }
+.chatlist{
+    background-color: #f3f3f5;
+    padding: .32rem;
 
-.bubble {
-	max-width: 80%;
-	position: relative;
-	line-height: 30px;
-	padding-left: 10px;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	border-radius: 7px;
-	margin-top: 5px;
-	padding-right: 10px;
-	display: inline-block;
-}
-
-.leftBubble {
-	position: relative;
-	margin-left: 25px;
-	border: 1px solid #00b6b6;
-	background-color: #f8fdfc;
-}
-
-.leftBubble .bottomLevel {
-	position: absolute;
-	top: 10px;
-	left: -10px;
-	border-top: 10px solid #00b6b6;
-	border-left: 10px solid transparent;
-}
-
-.leftBubble .topLevel {
-	position: absolute;
-	top: 11px;
-	left: -8px;
-	border-top: 10px solid #f8fdfc;
-	border-left: 10px solid transparent;
-	z-index: 100;
-}
-
-.rightBubble {
-	position: relative;
-	margin-right: 25px;
-	float: right;
-	border: 1px solid #aaa;
-}
-
-.rightBubble .bottomLevel {
-	position: absolute;
-	bottom: 11px;
-	right: -10px;
-	border-bottom: 10px solid #aaa;
-	border-right: 10px solid transparent;
-}
-
-.rightBubble .topLevel {
-	position: absolute;
-	bottom: 12px;
-	right: -8px;
-	border-bottom: 10px solid #fff;
-	border-right: 10px solid transparent;
-	z-index: 100;
-}
-
-.clearfix:after {
-	visibility: hidden;
-	display: block;
-	font-size: 0;
-	content: " ";
-	clear: both;
-	height: 0;
 }
 
 .content-text {
@@ -1710,7 +1628,11 @@ ul {
 }
 .createTime{
     font-size: .30rem;
-    margin-left: 25px;
-    width:80%;
+    width:100%;
     text-align:right;
+}
+
+.headpic{
+     font-size: .30rem;
+     padding:.15rem;
 }

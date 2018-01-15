@@ -12,15 +12,16 @@ import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.vo.LiveQVo;
 import com.huacainfo.ace.live.vo.LiveVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.apache.ibatis.session.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service("wwwService")
 /**
@@ -35,6 +36,11 @@ public class WWWServiceImpl implements WWWService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    private int defaultPageSize = 10;
+
     /**
      * @throws
      * @Title:getLiveList
@@ -46,8 +52,17 @@ public class WWWServiceImpl implements WWWService {
      * @version: 2018-01-01
      */
     @Override
-    public List<Map<String, Object>> getLiveList(Map<String, Object> p) {
-        return liveDao.getLiveList(p);
+    public Map<String, Object> getLiveList(String companyId, int page, Map<String, Object> p) {
+        Map<String, Object> rst = this.liveDao.getLiveTotalNum(companyId);
+        Long totalNum = (Long) rst.get("totalNum");
+        Long totalpage = this.calPage(totalNum, this.defaultPageSize);
+        rst.put("data", this.liveDao.getLiveList(p));
+        rst.put("currentpage", page);
+        rst.put("pagecount", totalNum);
+        rst.put("status", 0);
+        rst.put("totalcount", totalNum);
+        rst.put("totalpage", totalpage);
+        return rst;
     }
 
     /**
@@ -77,8 +92,22 @@ public class WWWServiceImpl implements WWWService {
      * @version: 2018-01-07
      */
     @Override
-    public List<Map<String, Object>> getLiveRptList(Map<String, Object> p) {
-        return this.liveDao.getLiveRptList(p);
+    public Map<String, Object> getLiveRptList(String rid, int page, Map<String, Object> p) {
+        SqlSession session = this.sqlSession.getSqlSessionFactory()
+                .openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration(); //反射得到configuration ,然后
+        configuration.setSafeResultHandlerEnabled(false);
+        LiveDao dao = session.getMapper(LiveDao.class);
+        Map<String, Object> rst = dao.getLiveRptTotalNum(rid);
+        Long totalNum = (Long) rst.get("totalNum");
+        Long totalpage = this.calPage(totalNum, 9999);
+        rst.put("data", dao.getLiveRptList(p));
+        rst.put("currentpage", page);
+        rst.put("pagecount", totalNum);
+        rst.put("status", 0);
+        rst.put("totalcount", totalNum);
+        rst.put("totalpage", totalpage);
+        return rst;
     }
 
     /**
@@ -126,7 +155,7 @@ public class WWWServiceImpl implements WWWService {
 
     @Override
     public Map<String, Object> getTotalPageAndOrgInfo(String deptId) {
-        return this.liveDao.getTotalPageAndOrgInfo(deptId);
+        return this.liveDao.getLiveTotalNum(deptId);
     }
 
     /**
@@ -157,5 +186,39 @@ public class WWWServiceImpl implements WWWService {
     @Override
     public Map<String, Object> getWxJsSign(String deptId) {
         return this.liveDao.getWxJsSign(deptId);
+    }
+
+
+    private Long calPage(Long totalNum, int defaultPageSize) {
+        Long totalpage = new Long(1);
+        if (totalNum % defaultPageSize == 0) {
+            totalpage = totalNum / defaultPageSize;
+        } else {
+            totalpage = (totalNum / defaultPageSize) + 1;
+        }
+        return totalpage;
+    }
+
+    /**
+     * @throws
+     * @Title:getWxJsSign
+     * @Description: TODO(微网页报道点赞)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-14
+     */
+    @Override
+    public Map<String, Object> updateRptLikeNum(String id, String type) {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("status", 0);
+        if (type.equals("1")) {
+            this.liveDao.updateLiveLikeNum(id);
+        } else {
+            this.liveDao.updateRptLikeNum(id);
+        }
+
+        return rst;
     }
 }

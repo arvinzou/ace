@@ -6,7 +6,7 @@
        };*/
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocketMsg = new ReconnectingWebSocket("ws://"+cfg.websocketurl+"/live/websocket/c15f484b-bd30-4111-904d-123ca6171800/oFvIjw8x1--0lQkUhO1Ta3L59o3c/livemsg");
+          websocketMsg = new ReconnectingWebSocket("ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg");
       }
       else{
           alert('Not support websocketMsg');
@@ -25,9 +25,24 @@
       //接收到消息的回调方法
       websocketMsg.onmessage = function(){
           var data=JSON.parse(event.data);
-          var tpl = document.getElementById('tpl-msg').innerHTML;
-          var html = juicer(tpl, data);
-          setMessageInnerHTML(html);
+            console.log(data);
+          if(data.header.type==1){
+             var tpl = document.getElementById('tpl-msg').innerHTML;
+             var html = juicer(tpl, data);
+             $("#chatContent").append(html);
+            // var chatlist = document.getElementById('chatlist');
+             //chatlist.scrollTop = chatlist.scrollHeight;
+          }
+          if(data.header.type==2){
+                console.log(data.header.type);
+               var tpl = document.getElementById('tpl-cmt').innerHTML;
+               var html = juicer(tpl, data);
+               var el="#cmtlist"+data.id;
+               $(el).append(html);
+               //var cmtlist = document.getElementById(el);
+               //cmtlist.scrollTop = cmtlist.scrollHeight;
+           }
+
       };
 
       //连接关闭的回调方法
@@ -42,9 +57,9 @@
 
       //将消息显示在网页上
       function setMessageInnerHTML(innerHTML){
-          $("#chatlist").append(innerHTML);
-          var chatlist = document.getElementById('chatlist');
-          chatlist.scrollTop = chatlist.scrollHeight;
+                $("#chatContent").append(innerHTML);
+             var chatlist = document.getElementById('chatContent');
+             chatlist.scrollTop = chatlist.scrollHeight;
       }
 
       //关闭连接
@@ -58,14 +73,15 @@
           websocketMsg.send(message);
       }
 
-      function submitMsg(form){
+
+      function submitMsg(){
          var message={};
          message.header={
             type:1,
             wxuser:wxuser
          };
-         message.content=$(form).find("input[name=content]").val();
-         message.createTime=new Date().pattern("yyyy-MM-dd hh:mm:ss");
+         message.content=$("#j-remarkform").find("input[name=content]").val();
+         message.createTime=new Date().pattern("hh:mm:ss");
          websocketMsg.send(JSON.stringify(message));
         return false;
       }

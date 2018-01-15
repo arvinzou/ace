@@ -123,7 +123,8 @@ function getInfo() {
         function n() {
             var e = {
                 companyId: lvsCmd.urlParams.companyId,
-                rid: lvsCmd.urlParams.id
+                id: lvsCmd.urlParams.id,
+                type:"1"
             },
             i = !0;
             $("#j-xc-liker").on(tap,
@@ -149,6 +150,7 @@ function getInfo() {
             $("#content").html(i.data.content);
             if (void 0 == window.orientation && (i.ispc = !0), $("#j-liveinfo").html(liveinfoTpl.render(i)), $("#j-livevideo").length) {
                 var o = "/live/content/www/img/ic_default_pic@2x.png";
+                o=i.data.cover;
                 var t = i.data.playStreamUrl;
                 if (void 0 == window.orientation) {
                     $("#j-livevideo-main").addClass("prism-player").removeClass("fn-hide"),
@@ -264,12 +266,12 @@ function reportContent(e) {
 var load=false;
 function getReport(e, i) {
     if(load){
-        return;
+       // return;
     }
     reprtLoading = !0,
     i || $("#j-listmore").removeClass("fn-hide"),
-    lvsCmd.ajax(apiServer + "/h5/report/getById.json", {
-        id: id,
+    lvsCmd.ajax(apiServer + "/www/live/getLiveRptList.do", {
+        rid: lvsCmd.urlParams.id,
         sort: reportSort,
         page: e
     },
@@ -436,12 +438,7 @@ function reportBind(e) {
     }),
     e.find(".j-actping").on(tap,
     function() {
-        if (true) {
-
-        }
-        return openRemark($(this).data("id")),
-        $(".actlayer").hide(),
-        !1
+        openRemark($(this).data("id"));
     }),
     e.find(".remark").each(function() {
         showRemark($(this))
@@ -467,56 +464,27 @@ function showRemark(e) {
 function dianZan(e) {
     var i = {
         companyId: companyId,
-        reportId: e
+        id: e,
+        type:"2"
     };
-    if (isLogin) i.userId = userDict.identityNo,
-    i.reviewer = userDict.identityName,
-    i.userType = userDict.identityType;
-    else {
-        var a = lvsCmd.cookie.get("xcYKId");
-        if (a) i.userId = a;
-        else {
-            var n = joeFn.createYKId();
-            lvsCmd.cookie.set("xcYKId", n, "30d"),
-            i.userId = n
-        }
-        i.userType = "youke"
-    }
-    lvsCmd.ajax(apiServer + "/h5/comment/addLike.json", i,
+    lvsCmd.ajax(apiServer + "/www/live/addLike.do", i,
     function(i, a) {
         if ("0" == a.status) {
-            var n = $("#j-remark-" + e),
-            o = n.find(".liker").data("liker"); ("," + o + ",").indexOf("," + userDict.identityName + ",") > -1 || (o && (o += ","), o += isLogin ? userDict.identityName: "浜戝弸", n.find(".liker").data("liker", o), showRemark(n))
+            var n = $("#j-remark-" + e);
+            var likerNum=parseInt($("#liker"+e).html());
+            likerNum=likerNum+1;
+            $("#liker"+e).html(likerNum)
+            showRemark(n);
         }
     })
 }
 function openRemark(e) {
-    $(".fn-contain").addClass("j-hasremark");
-    var i = $(window).scrollTop();
-    $(".fn-contain").css({
-        position: "relative",
-        "margin-top": -i,
-        overflow: "hidden"
-    }),
-    $(window).scrollTop(0),
-    $(".fn-contain").height($(window).height() + i),
-    setTimeout(function() {
-        $("#j-remark").css("display", "block"),
-        $("#j-remark input[name=reportId]").val(e)
-    },
-    100)
+   $("#j-remark").removeClass("fn-hide");
+   $("#j-remark input[name=rptId]").val(e);
 }
 function closeRemark() {
-    $(".fn-contain").removeClass("j-hasremark"),
-    $("#j-remark input[name=content]").blur(),
-    $("#j-remark").css("display", "none");
-    var e = $(".fn-contain").css("margin-top").replace("px", "") * -1;
-    $(".fn-contain").css({
-        position: "static",
-        "margin-top": 0
-    }),
-    $(".fn-contain").height("auto"),
-    $(window).scrollTop(e)
+    $("#j-remark").addClass("fn-hide");
+    $("#j-remark input[name=content]").blur();
 }
 function onshare() {
     wxReady && (wx.onMenuShareTimeline({
@@ -839,12 +807,12 @@ function() {
     }
 }), $(".fn-contain").on(tap,
 function() {
-    $(".actlayer").hide(),
-    $("#j-remark").addClass("fn-hide")
+    $(".actlayer").hide()
+    //$("#j-remark").addClass("fn-hide")
 }), $(".fn-contain").on("touchmove",
 function() {
-    $(".actlayer").hide(),
-    $("#j-remark").addClass("fn-hide")
+    $(".actlayer").hide()
+    //$("#j-remark").addClass("fn-hide")
 }), $("#j-remarkform input[name=content]").on("click",
 function() {
     setTimeout(function() {
@@ -853,32 +821,45 @@ function() {
     200)
 }), $(".fn-contain").on(touchstart,
 function() {
-    if ($(this).hasClass("j-hasremark")) return closeRemark(),
-    !1
+    /*if ($(this).hasClass("j-hasremark")) return closeRemark(),
+    !1*/
 }), $("#j-remarkform").submit(function(e) {
     e.preventDefault();
-    var i = $(this).find("input[name=reportId]").val(),
+    var i = $(this).find("input[name=rptId]").val(),
+    type = $(this).find("input[name=type]").val(),
     a = $.trim($(this).find("input[name=content]").val());
-    if (a.length > 200) return void lvsCmd.alert("鎮ㄨ緭鍏ョ殑鏂囧瓧鏁伴噺瓒呰繃闄愬埗锛堟渶澶�200锛�");
+    if (a.length > 200) return void lvsCmd.alert("评论内容不能超过200字");
+    if(type==2){
+        submitMsg();
+        return;
+    }
+
     if (a) {
+            var message={};
+             message.header={
+                type:2,
+                wxuser:wxuser
+             };
+             message.content=a;
+             message.id=i;
+             message.createTime=new Date().pattern("hh:mm:ss");
         var n = {
-            companyId: companyId,
-            liveId: id,
-            reportId: i,
-            content: a,
-            reviewer: userDict.identityName,
-            userId: userDict.identityNo,
-            userType: userDict.identityType
+            companyId: lvsCmd.urlParams.companyId,
+            rid: lvsCmd.urlParams.id,
+            rptId: i,
+            message: JSON.stringify(message),
+            topic:"cmt",
+            uid: wxuser.openid
         };
-        lvsCmd.ajax(apiServer + "/h5/comment/addComment.json", n,
+        lvsCmd.ajax(apiServer + "/www/live/cmt.do", n,
         function(e, n) {
             if (e) if (0 == n.status) {
-                $("#j-remarkform input[name=content]").val(""),
+                $("#j-remarkform input[name=content]").val("");
                 closeRemark();
-                var o = $("#j-remark-" + i);
-                o.find(".list").append("<p><span>" + userDict.identityName + ": </span>" + a + "</p>"),
-                showRemark(o)
-            } else lvsCmd.alert(n.errMsg);
+                //var o = $("#j-remark-" + i);
+                //o.find(".list").append("<p><span>" + userDict.identityName + ": </span>" + a + "</p>"),
+                //showRemark(o)
+            } else lvsCmd.alert(n.errorMessage);
             else lvsCmd.alert("提交失败")
         })
     }
@@ -938,5 +919,14 @@ $(function(){
         $(this).parent().siblings().children().addClass("unselected");
         var index =  li_a.index(this);
         $(".tab_box > div").eq(index).show().siblings().hide();
+        if(index==0){
+            $("#j-remark input[name=type]").val(1);
+             $("#j-remark input[name=content]").attr("placeholder","评论");
+            closeRemark();
+        }else{
+            openRemark("0");
+            $("#j-remark input[name=type]").val(2);
+            $("#j-remark input[name=content]").attr("placeholder","写点什么唄~");
+        }
     });
 });

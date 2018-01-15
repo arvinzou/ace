@@ -1,6 +1,7 @@
 package com.huacainfo.ace.live.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.live.model.LiveMsg;
@@ -9,6 +10,7 @@ import com.huacainfo.ace.live.service.LiveMsgService;
 import com.huacainfo.ace.live.service.LiveRptService;
 import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.web.websocket.WebSocketSub;
+import com.huacainfo.ace.live.web.websocket.MyWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,8 @@ public class WWWController extends LiveBaseController {
 
     @Autowired
     private RedisOperations<String, Object> redisTemplate;
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
 
     /**
@@ -59,21 +63,7 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public Map<String, Object> getListByCompany(int page, String companyId) throws Exception {
         Map<String, Object> p = this.getPageParam(page, this.getParams());
-        Map<String, Object> rst = this.wwwService.getTotalPageAndOrgInfo(companyId);
-        Long totalNum = (Long) rst.get("totalNum");
-        Long totalpage = new Long(1);
-        if (totalNum % this.defaultPageSize == 0) {
-            totalpage = totalNum / this.defaultPageSize;
-        } else {
-            totalpage = (totalNum / this.defaultPageSize) + 1;
-        }
-        rst.put("data", this.wwwService.getLiveList(p));
-        rst.put("currentpage", page);
-        rst.put("pagecount", totalNum);
-        rst.put("status", 0);
-        rst.put("totalcount", totalNum);
-        rst.put("totalpage", totalpage);
-        return rst;
+        return this.wwwService.getLiveList(companyId, page, p);
     }
 
     @RequestMapping(value = "/getTotalNumAndOrgInfo.do")
@@ -164,7 +154,7 @@ public class WWWController extends LiveBaseController {
 
     @RequestMapping(value = "/sendMsg.do")
     @ResponseBody
-    public MessageResponse sendMsg(String message, String rid) throws Exception {
+    public MessageResponse sendMsg(String message, String rid, String uid) throws Exception {
         logger.debug("{} {}", rid, message);
 
         //群发消息
@@ -179,32 +169,7 @@ public class WWWController extends LiveBaseController {
         return new MessageResponse(0, "OK");
     }
 
-    /**
-     * @throws
-     * @Title:pop
-     * @Description: TODO(微网页直播点赞)
-     * @param:
-     * @param: @throws Exception
-     * @return: List<Map<String,Object>>
-     * @author: 陈晓克
-     * @version: 2018-01-07
-     */
-    @RequestMapping(value = "/addLike.do")
-    @ResponseBody
-    public Map<String, Object> addLike(String rid) throws Exception {
-        Map<String, Object> rst = new HashMap<>();
-        rst.put("status", "0");
-        logger.debug("{}", rid);
-        String keypop = rid + ".pop";
-        Long pop = (Long) this.redisTemplate.opsForValue().get(keypop);
-        if (pop == null) {
-            pop = new Long(0);
-            this.redisTemplate.opsForValue().set(keypop, pop);
-        }
-        this.redisTemplate.opsForValue().set(keypop, new Long(pop + 1));
-        rst.put("likeNum", pop);
-        return rst;
-    }
+
 
     /**
      * @throws
@@ -218,8 +183,9 @@ public class WWWController extends LiveBaseController {
      */
     @RequestMapping(value = "/getLiveRptList.do")
     @ResponseBody
-    public List<Map<String, Object>> getLiveSubList() {
-        return this.wwwService.getLiveRptList(this.getParams());
+    public Map<String, Object> getLiveSubList(int page, String rid) {
+        Map<String, Object> p = this.getPageParam(page, this.getParams());
+        return this.wwwService.getLiveRptList(rid, page, p);
     }
 
     /**
@@ -236,5 +202,41 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public List<Map<String, Object>> getLiveMsgList() {
         return this.wwwService.getLiveMsgList(this.getParams());
+    }
+
+
+    @RequestMapping(value = "/cmt.do")
+    @ResponseBody
+    public MessageResponse cmt(String message, String rid, String uid, String rptId, String topic) throws Exception {
+        logger.debug("{} {}", rid, message);
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("rid", rid);
+        data.put("rptId", rptId);
+        data.put("uid", uid);
+        data.put("message", message);
+        this.logger.info("{}", data);
+        this.kafkaProducerService.sendMsg(topic, data);
+        //群发消息
+        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+            try {
+                item.sendMessage(message);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
+        return new MessageResponse(0, "OK");
+    }
+
+    @RequestMapping(value = "/addLike.do")
+    @ResponseBody
+    public MessageResponse addLike(String id, String type) throws Exception {
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("id", id);
+        data.put("type", type);
+        this.logger.info("{}", data);
+        String topic = "liker";
+        this.kafkaProducerService.sendMsg(topic, data);
+        return new MessageResponse(0, "OK");
     }
 }

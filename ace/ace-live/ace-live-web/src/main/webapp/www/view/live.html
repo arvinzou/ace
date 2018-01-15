@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/live/content/www/lib//photoswipe-4.1.1/default-skin.css">
     <link rel="stylesheet" href="/live/content/www/css/iconfont.css"/>
     <link rel="stylesheet" href="/live/content/www/css/live.css"/>
+    <link rel="stylesheet" href="/live/content/www/css/mimax.css"/>
     <script src="/live/content/www/js/init-rem.js"></script>
     <script src="/live/www/oauth2/cfg.do"></script>
 
@@ -228,15 +229,21 @@
                         <li data-id="${item.reportId}">
                             <div class="wrap">
                                 <div class="headpic">
-                                    {@if item.head}
-                                    <img data-lazy-img="${item.head}">
-                                    {@else}
-                                    <img src="/live/content/www/img/head_default.png">
-                                    {@/if}
+                                    <img src="/live/content/www/img/live_ing.gif" style="width:.70rem">
+                                    ${item.createDate}
                                 </div>
                                 <div class="reporter fn-clear">
-                                    <span class="fn-ellipsis">${item.reporter}</span>
-                                    <em{@if item.createDate == "刚刚"} class="ganggang"{@/if}>${item.createDate}</em>
+
+                                    <div style="float:left;">
+                                        {@if item.rpt.headimgurl}
+                                        <img src="${item.rpt.headimgurl}" class="headimg">
+                                    {@else}
+                                        <img src="/live/content/www/img/head_default.png" class="wxheadimg">
+                                    {@/if}
+                                        ${item.rpt.nickname}
+                                    </div>
+
+                                    <em{@if item.createDate == "刚刚"} class="ganggang"{@/if}></em>
                                 </div>
                                 {@if item.content}
                                 <div class="content">$${item.content|reportContent}</div>
@@ -292,7 +299,19 @@
                                 </div>
                                 {@/if}
                                 <div class="down fn-clear">
-                                    <div class="city">${item.city}</div>
+                                    <div class="city">
+
+                                        {@if item.likeNum}
+                                        <span class="zan-num"><img src="/live/content/www/img/zan-cmt@2x.png"
+                                                                   style="width:.35rem;height:.35rem"/> <span
+                                                id="liker${item.reportId}">${item.likeNum}</span></span>
+                                        {@else}
+                                        <span class="zan-num"><img src="/live/content/www/img/zan-cmt@2x.png"
+                                                                   style="width:.35rem;height:.35rem"/> 0</span>
+                                        {@/if}
+
+
+                                    </div>
                                     <div class="act fn-hide"></div>
                                     <div class="actlayer">
                                         <p class="j-actzan" data-id="${item.reportId}">
@@ -304,15 +323,24 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div id="j-remark-${item.reportId}" class="remark fn-hide">
+                                <div id="j-remark-${item.reportId}" class="remark ">
                                     <em class="arrow"></em>
                                     <div class="liker fn-hide" data-liker="${item.liker}"></div>
                                     <div class="line fn-hide"></div>
-                                    <div class="list fn-hide">
+                                    <div class="list" id="cmtlist${item.reportId}">
                                         {@each item.comments as citem}
-                                        <p>
-                                            <span>${citem.reviewer}: </span>${citem.ccontent}
-                                        </p>
+                                        <div class="live_msg">
+                                            <div class="wxuser">
+                                                <div class="wxuser-img"><img src="${citem.headimgurl}"
+                                                                             class="headimg"></div>
+
+                                            </div>
+                                            <div class="bubbleItem">
+                                                <div class="wxuser-nickname">${citem.nickname}</div>
+                                                <div class="createTime">${citem.createTime}</div>
+                                                <div>${citem.content}</div>
+                                            </div>
+                                        </div>
                                         {@/each}
                                     </div>
                                 </div>
@@ -328,19 +356,12 @@
                 <span>正在加载...</span>
             </div>
             <div class="xcy-totalcount"></div>
-        </div>
-        <div class="hide" id="livemsg">
-            <div id="chatlist">
 
-            </div>
-            <div class="xcy-remark">
-                <div class="wrap">
-                    <div class="bar">
-                        <form id="j-remarkform-msg" onsubmit="return submitMsg(this)">
-                            <input type="text" placeholder="写点什么唄~" name="content" autocomplete="off" maxlength="200">
-                            <input type="submit" value="发送">
-                        </form>
-                    </div>
+        </div>
+        <div class="hide  chat" id="livemsg">
+            <div class="scroll-content J_scrollContent">
+                <div class="chatContent" id="chatContent">
+
                 </div>
             </div>
         </div>
@@ -376,12 +397,24 @@
     </div>
 
     <div class="app-download-place"></div>
-    <div class="app-download">
-        <a href="javascript:void(0);" data-spm-click="category=item;action=closeAppDownload" class="close"></a>
-        <span class="icon"></span>
-        <h4></h4>
-        <a href="javascript:void(0)" data-spm-click="category=item;action=downloadApp" class="download">下载APP</a>
-    </div>
+
+        <div class="app-download">
+            <div id="j-remark" class="fn-hide">
+                <!-- <div class="xcy-remark-place"></div> -->
+                <div class="xcy-remark">
+                    <div class="wrap">
+                        <div class="bar">
+                            <form id="j-remarkform">
+                                <input type="hidden" name="rptId" value="0">
+                                <input type="hidden" name="type" value="1">
+                                <input type="text" placeholder="评论" name="content" autocomplete="off" maxlength="200">
+                                <input type="submit" value="发送">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 
 <div class="share-box" id="shareTpList">
@@ -390,20 +423,6 @@
     <div class="s-btn"></div>
 </div>
 
-<div id="j-remark" class="fn-hide">
-    <!-- <div class="xcy-remark-place"></div> -->
-    <div class="xcy-remark">
-        <div class="wrap">
-            <div class="bar">
-                <form id="j-remarkform">
-                    <input type="hidden" name="reportId" value="0">
-                    <input type="text" placeholder="评论" name="content" autocomplete="off" maxlength="200">
-                    <input type="submit" value="发送">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Root element of PhotoSwipe. Must have class pswp. -->
 <div id="j-pswp" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -444,23 +463,41 @@
 </div>
 
 <script id="tpl-msg" type="text/template">
-
-    <div class="live-msg">
-        <div class="wxuser">
-            <div class="wxuser-img"><img src="${header.wxuser.headimgurl}" class="headimg"></div>
-            <div class="wxuser-nickname">${header.wxuser.nickname}</div>
-        </div>
-
-        <div class="bubbleItem">
-            <div class="createTime">${createTime}</div>
-            <div class="bubble leftBubble">
-                ${content}
-                <span class="bottomLevel"></span>
-                <span class="topLevel"></span>
+    <div class="clearfix">
+        <div class="message others">
+            <div class="avatar" data-author-id="lj">
+                <img src="${header.wxuser.headimgurl}" class="avatar" alt="${header.wxuser.nickname}"/>
+            </div>
+            <div class="content">
+                <p class="author_name">${header.wxuser.nickname} ${createTime}</p>
+                <div class="bubble  bubble_default left">
+                    <div class="bubble_cont">
+                        <div class="plain">
+                            <pre>${content}</pre>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 </script>
+
+
+<script id="tpl-cmt" type="text/template">
+    <div class="live-msg">
+        <div class="wxuser">
+            <div class="wxuser-img"><img src="${header.wxuser.headimgurl}" class="headimg"></div>
+        </div>
+        <div class="bubbleItem">
+            <div class="wxuser-nickname">${header.wxuser.nickname}</div>
+            <div class="createTime">${createTime}</div>
+            <div>${content}</div>
+        </div>
+    </div>
+</script>
+
+
 <script src="/live/content/common/js/reconnecting-websocket.js"></script>
 <script src="/live/content/www/js/jweixin-1.0.0.js"></script>
 <script src="/live/content/www/lib/prismplayer/prism-min.js"></script>
@@ -477,6 +514,7 @@
 <script src="/live/content/www/live/live.js?_t=1511967632000"></script>
 <script src="/live/content/www/live/msg.js?_t=1511967632000"></script>
 <script src="/live/content/www/live/rpt.js?_t=1511967632000"></script>
+<script src="/live/content/www/live/cmt.js?_t=1511967632000"></script>
 <script src="/live/content/www/js/spm.js"></script>
 <style>
 

@@ -27,7 +27,7 @@ public interface WWWService {
      * @author: 陈晓克
      * @version: 2018-01-01
      */
-    List<Map<String, Object>> getLiveList(Map<String, Object> p);
+    Map<String, Object> getLiveList(String companyId, int page, Map<String, Object> p);
 
     /**
      * @throws
@@ -51,7 +51,7 @@ public interface WWWService {
      * @author: 陈晓克
      * @version: 2018-01-07
      */
-    List<Map<String, Object>> getLiveRptList(Map<String, Object> p);
+    Map<String, Object> getLiveRptList(String rid, int page, Map<String, Object> p);
 
     /**
      * @throws
@@ -115,4 +115,16 @@ public interface WWWService {
      * @version: 2018-01-09
      */
     Map<String, Object> getWxJsSign(String deptId);
+
+    /**
+     * @throws
+     * @Title:getWxJsSign
+     * @Description: TODO(微网页报道点赞)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-14
+     */
+    Map<String, Object> updateRptLikeNum(String id, String type);
 }

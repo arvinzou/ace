@@ -81,10 +81,10 @@ public class WebAccessDecisionSecurityFilter implements Filter {
 				if (httpReq.getRequestURI().indexOf("www/view") != -1) {
 					if (session.getAttribute(CommonKeys.SESSION_USERINFO_KEY) == null) {
                         Map o = new HashedMap();
-                        o.put("openid", "oCjYM0bfXXKj6UTMFoJhIvI-JYvs");
-                        o.put("nickname", "渡月影");
-                        o.put("headimgurl", "https://wx.qlogo.cn/mmopen/vi_32/BL7ic7uQTibM3KcVnlVUQ7edZpBbC0bxduCHcrTM1xdIwPickCJA2ZjML3LX2lC55QXmvKmfAeP4ia56x5cQVibVcBg/0");
-                        session.setAttribute(CommonKeys.SESSION_USERINFO_KEY, o);
+						o.put("openid", "oFvIjw8x1--0lQkUhO1Ta3L59o3c");
+						o.put("nickname", "热情的沙漠");
+						o.put("headimgurl", "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJLnWlZ5QwperRWRswicfELLia3cqTuLJapz3jX27VY19mwRianduy9cibSefAlnGRxNH341Qnic5w9aEg/0");
+						session.setAttribute(CommonKeys.SESSION_USERINFO_KEY, o);
 						String appid = PropertyUtil.getProperty("appid");
 						String redirect_uri = PropertyUtil.getProperty("redirect_uri");
 						String scope = PropertyUtil.getProperty("scope");
