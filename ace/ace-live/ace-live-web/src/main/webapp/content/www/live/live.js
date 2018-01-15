@@ -197,16 +197,22 @@ function getInfo() {
                 clickObj: $("#j-share"),
                 shareParams: {}
             });
-            var p = $("#j-getDataState").html();
-            p && $("#j-sort").show(),
-            "3" == p ? $(".xcy-sort p").append('<span class="xc-state end"><i>已结束</i></span>') : "2" == p || $(".xcy-sort p").append('<span class="xc-state ing"><i>直播中</i></span>'),
-            $("#j-desc p").height() > $("#j-desc").height() && ($("#j-desc").addClass("descclamp"), $("#j-desc .act").removeClass("fn-hide"), $("#j-desc").on(tap,
+            var p =  i.data.state;
+            $("#j-sort").show();
+            $("#startTime").html(i.data.startTime);
+            if("3" == p){
+               // $(".xcy-sort p").append('<span class="xc-state end"><i>已结束</i></span>');
+            }
+            if("2" == p){
+                //$("#j-sort-c").append('<span class="xc-state ing"><i>直播中</i></span>');
+            }
+            /*$("#j-desc p").height() > $("#j-desc").height() && ($("#j-desc").addClass("descclamp"), $("#j-desc .act").removeClass("fn-hide"), $("#j-desc").on(tap,
             function() {
                 $(this).toggleClass("descclamp")
-            })),
+            })),*/
             $("#j-desc").css("height", "auto"),
-            1 == i.data.partakeState && $(".xcy-totalcount").addClass("fn-hide"),
-            $(".xcy-totalcount").html("参与人数" + i.data.numOfPartake);
+            1 == i.data.partakeState && $(".xcy-totalcount").addClass("fn-hide")
+            //$(".xcy-totalcount").html("浏览人数" + i.data.numOfPartake);
             var f = i.data.startTime;
             i && i.data && (i.data.topic && (wxShareDict.title = i.data.topic, document.title = wxShareDict.title), i.data.remark && (wxShareDict.desc = i.data.remark), i.data.cover && (wxShareDict.imgUrl = i.data.cover), onshare()),
             increateNumTimeFn(),

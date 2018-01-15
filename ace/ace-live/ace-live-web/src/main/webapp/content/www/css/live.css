@@ -597,7 +597,7 @@ a {
 
 .xcy-liveinfo .org .other .xc-liker {
 	float: right;
-	margin-right: .69rem;
+	/*margin-right: .69rem;*/
 	font-size: 0
 }
 
@@ -777,7 +777,8 @@ a {
 }
 
 .xcy-sort .none {
-	display: none
+	display: none;
+
 }
 
 .xcy-sort .xc-state {
@@ -1635,4 +1636,16 @@ ul {
 .headpic{
      font-size: .30rem;
      padding:.15rem;
+}
+.bubbleItem{
+margin:.1rem;
+}
+.fn-right{
+    padding-right:.3rem;
+}
+.fn-left {
+    padding-left:1rem;
+}
+.startTime{
+	padding-right: .29rem;
 }

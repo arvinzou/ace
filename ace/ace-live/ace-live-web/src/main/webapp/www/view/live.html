@@ -158,7 +158,9 @@
                     <div id="j-orgname" class="orgname j-orgname-back" data-spm="org"
                          data-spm-click="category=item;action=orgclick"></div>
                     <div id="j-city" class="other">
+                        <!--
                         <div class="xc-share" id="j-share"><i></i></div>
+                        -->
                         <div class="xc-liker" id="j-xc-liker">
                             <i><em class="zan zaning"></em></i>
                             {@if data.likeNums}
@@ -167,30 +169,31 @@
                             <span class="zan-num">0</span>
                             {@/if}
                         </div>
-                        <!-- <div id="j-city-right" class="fn-right">
-                            {@if data.state == 8}
+                        <div id="j-city-right" class="fn-right">
+                            {@if data.state == 1}
                             <div class="disabled">预告</div>
-                            {@else if data.state == 32}
+                            {@else if data.state == 3}
                             <div class="disabled">已结束</div>
                             {@else}
                             <em class="playx"></em>
                             <div class="playing">直播中</div>
                             {@/if}
 
-                        </div> -->
-                        <!--
+                        </div>
+
                         <div class="fn-left">浏览${data.numOfPartake}</div>
-                        -->
+
                     </div>
-                    <ul class="share-list none" id="j-tpList">
-                        <li class="j-share-weibo"><img src="/live/content/www/img/share_weibo.png"></li>
-                        <li class="j-share-weixin"><img src="/live/content/www/img/share_weixin.png"></li>
-                        <li class="j-share-qq"><img src="/live/content/www/img/share_qq.png"></li>
-                    </ul>
                     <!--
-                    <p class="bd-icon"></p>
-                    <p class="bd">342个现场</p>
-                    -->
+                   <ul class="share-list none" id="j-tpList">
+                       <li class="j-share-weibo"><img src="/live/content/www/img/share_weibo.png"></li>
+                       <li class="j-share-weixin"><img src="/live/content/www/img/share_weixin.png"></li>
+                       <li class="j-share-qq"><img src="/live/content/www/img/share_qq.png"></li>
+                   </ul>
+
+                   <p class="bd-icon"></p>
+                   <p class="bd">342个现场</p>
+                   -->
                 </div>
                 {@if data.remark}
                 <div id="j-desc" class="desc">
@@ -217,8 +220,11 @@
         <div id="livesub">
             <div class="xcy-sort-place">
                 <div class="xcy-sort">
-                    <p>
+                    <p id="j-sort-c">
+                        <span id="startTime" class="startTime"></span>
                         <span class="sort-btn none" id="j-sort">倒序</span>
+
+
                     </p>
                 </div>
             </div>
