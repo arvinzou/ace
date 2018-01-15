@@ -29,9 +29,9 @@
           if(data.header.type==1){
              var tpl = document.getElementById('tpl-msg').innerHTML;
              var html = juicer(tpl, data);
-             $("#chatlist").append(html);
-             var chatlist = document.getElementById('chatlist');
-             chatlist.scrollTop = chatlist.scrollHeight;
+             $("#chatContent").append(html);
+            // var chatlist = document.getElementById('chatlist');
+             //chatlist.scrollTop = chatlist.scrollHeight;
           }
           if(data.header.type==2){
                 console.log(data.header.type);
@@ -57,8 +57,8 @@
 
       //将消息显示在网页上
       function setMessageInnerHTML(innerHTML){
-                $("#chatlist").append(innerHTML);
-             var chatlist = document.getElementById('chatlist');
+                $("#chatContent").append(innerHTML);
+             var chatlist = document.getElementById('chatContent');
              chatlist.scrollTop = chatlist.scrollHeight;
       }
 
@@ -72,6 +72,7 @@
           var message = document.getElementById('text').value;
           websocketMsg.send(message);
       }
+
 
       function submitMsg(form){
          var message={};

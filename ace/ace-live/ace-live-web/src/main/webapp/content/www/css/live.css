@@ -1272,7 +1272,6 @@ a {
 
 .xcy-remark .wrap {
 	margin: auto;
-	width: 10rem;
 	height: 1.44rem;
 	background-color: #f9f9f9;
 	border-top: solid 1px #ddd;
@@ -1587,114 +1586,37 @@ ul {
 
 .tab_content {
 	padding: 15px;
-}
-
-#chatlist {
-	width: 100%;
-	max-height: 300px;
-	min-height: 300px;
-	overflow-y: scroll;
-}
-#cmtlist {
-	max-height: 200px;
-	overflow-y: scroll;
+	background-color: #fff;
 }
 .headimg {
 	width:.80rem;height:.80rem;border-radius:50%;vertical-align:middle;
 }
-
+.center{
+    text-align:center
+}
 .wxuser {
 	float: left;
-	width: 50px;
-	padding: 3px;
+	width: .95rem;
+	padding: .15px;
 	color: #999;
 	text-align: center;
+}
+.bubbleItem{
 }
 .wxuser-nickname {
 	font-size: .30rem;
 	float: left;
 }
 .live-msg {
-	float: left;
-	width: 100%;
+	width: 90%;
 	height: auto;
-	padding: 5px;
-}
+	margin: .20rem;
 
-.bubbleItem {
-	color: #999;
-	margin-left;
-    margin-left: 50px;
 }
+.chatlist{
+    background-color: #f3f3f5;
+    padding: .32rem;
 
-.bubble {
-	max-width: 80%;
-	position: relative;
-	line-height: 30px;
-	padding-left: 10px;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	border-radius: 18px;
-	margin-top: 5px;
-	padding-right: 10px;
-	display: inline-block;
-}
-
-.leftBubble {
-	position: relative;
-	margin-left: 25px;
-	border: 1px solid #00b6b6;
-	background-color: #f8fdfc;
-}
-
-.leftBubble .bottomLevel {
-	position: absolute;
-	top: 10px;
-	left: -10px;
-	border-top: 10px solid #00b6b6;
-	border-left: 10px solid transparent;
-}
-
-.leftBubble .topLevel {
-	position: absolute;
-	top: 11px;
-	left: -8px;
-	border-top: 10px solid #f8fdfc;
-	border-left: 10px solid transparent;
-	z-index: 100;
-}
-
-.rightBubble {
-	position: relative;
-	margin-right: 25px;
-	float: right;
-	border: 1px solid #aaa;
-}
-
-.rightBubble .bottomLevel {
-	position: absolute;
-	bottom: 11px;
-	right: -10px;
-	border-bottom: 10px solid #aaa;
-	border-right: 10px solid transparent;
-}
-
-.rightBubble .topLevel {
-	position: absolute;
-	bottom: 12px;
-	right: -8px;
-	border-bottom: 10px solid #fff;
-	border-right: 10px solid transparent;
-	z-index: 100;
-}
-
-.clearfix:after {
-	visibility: hidden;
-	display: block;
-	font-size: 0;
-	content: " ";
-	clear: both;
-	height: 0;
 }
 
 .content-text {
@@ -1707,16 +1629,15 @@ ul {
 }
 .createTime{
     font-size: .30rem;
-    margin-left: 25px;
-    width:80%;
+    width:100%;
     text-align:right;
 }
 
 
 .wxheadimg{
-    width:.80rem;height:.80rem;border-radius:50%;vertical-align:middle;
+    width:.1rem;height:.1rem;border-radius:50%;vertical-align:middle;
 }
 .headpic{
- font-size: .30rem;
- padding:.15rem;
+     font-size: .30rem;
+     padding:.15rem;
 }

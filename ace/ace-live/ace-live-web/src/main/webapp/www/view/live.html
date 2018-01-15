@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/live/content/www/lib//photoswipe-4.1.1/default-skin.css">
     <link rel="stylesheet" href="/live/content/www/css/iconfont.css"/>
     <link rel="stylesheet" href="/live/content/www/css/live.css"/>
+    <link rel="stylesheet" href="/live/content/www/css/mimax.css"/>
     <script src="/live/content/www/js/init-rem.js"></script>
     <script src="/live/www/oauth2/cfg.do"></script>
 
@@ -337,11 +338,7 @@
                                             <div class="bubbleItem">
                                                 <div class="wxuser-nickname">${citem.nickname}</div>
                                                 <div class="createTime">${citem.createTime}</div>
-                                                <div class="bubble leftBubble">
-                                                    ${citem.content}
-                                                    <span class="bottomLevel"></span>
-                                                    <span class="topLevel"></span>
-                                                </div>
+                                                <div>${citem.content}</div>
                                             </div>
                                         </div>
                                         {@/each}
@@ -360,14 +357,17 @@
             </div>
             <div class="xcy-totalcount"></div>
         </div>
-        <div class="hide" id="livemsg">
-            <div id="chatlist">
+        <div class="hide tab_content chat" id="livemsg">
+            <div class="scroll-content J_scrollContent">
+                <div class="chatContent" id="chatContent">
 
+                </div>
             </div>
+
             <div class="xcy-remark">
                 <div class="wrap">
                     <div class="bar">
-                        <form id="j-remarkform-msg" onsubmit="return submitMsg(this)">
+                        <form onsubmit="return submitMsg(this)">
                             <input type="text" placeholder="写点什么唄~" name="content" autocomplete="off" maxlength="200">
                             <input type="submit" value="发送">
                         </form>
@@ -405,14 +405,15 @@
             <div class="close"></div>
         </div>
     </div>
+    <!--
+        <div class="app-download-place"></div>
 
-    <div class="app-download-place"></div>
-    <div class="app-download">
-        <a href="javascript:void(0);" data-spm-click="category=item;action=closeAppDownload" class="close"></a>
-        <span class="icon"></span>
-        <h4></h4>
-        <a href="javascript:void(0)" data-spm-click="category=item;action=downloadApp" class="download">下载APP</a>
-    </div>
+        <div class="app-download">
+            <a href="javascript:void(0);" data-spm-click="category=item;action=closeAppDownload" class="close"></a>
+            <span class="icon"></span>
+            <h4></h4>
+            <a href="javascript:void(0)" data-spm-click="category=item;action=downloadApp" class="download">下载APP</a>
+        </div>-->
 </div>
 
 <div class="share-box" id="shareTpList">
@@ -475,42 +476,36 @@
 </div>
 
 <script id="tpl-msg" type="text/template">
-
-    <div class="live-msg">
-        <div class="wxuser">
-            <div class="wxuser-img"><img src="${header.wxuser.headimgurl}" class="headimg"></div>
-
-        </div>
-
-        <div class="bubbleItem">
-            <div class="wxuser-nickname">${header.wxuser.nickname}</div>
-            <div class="createTime">${createTime}</div>
-
-            <div class="bubble leftBubble">
-                ${content}
-                <span class="bottomLevel"></span>
-                <span class="topLevel"></span>
+    <div class="clearfix">
+        <div class="message others">
+            <div class="avatar" data-author-id="lj">
+                <img src="${header.wxuser.headimgurl}" class="avatar" alt="${header.wxuser.nickname}"/>
+            </div>
+            <div class="content">
+                <p class="author_name">${header.wxuser.nickname} ${createTime}</p>
+                <div class="bubble  bubble_default left">
+                    <div class="bubble_cont">
+                        <div class="plain">
+                            <pre>${content}</pre>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 </script>
 
 
 <script id="tpl-cmt" type="text/template">
-    <div class="live_msg">
+    <div class="live-msg">
         <div class="wxuser">
-            <div class="wxuser-img">
-                <img src="${header.wxuser.headimgurl}" class="headimg"/>
-            </div>
+            <div class="wxuser-img"><img src="${header.wxuser.headimgurl}" class="headimg"></div>
         </div>
         <div class="bubbleItem">
             <div class="wxuser-nickname">${header.wxuser.nickname}</div>
             <div class="createTime">${createTime}</div>
-            <div class="bubble leftBubble">
-                ${content}
-                <span class="bottomLevel"></span>
-                <span class="topLevel"></span>
-            </div>
+            <div>${content}</div>
         </div>
     </div>
 </script>

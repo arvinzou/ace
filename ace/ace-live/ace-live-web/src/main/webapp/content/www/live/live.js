@@ -149,6 +149,7 @@ function getInfo() {
             $("#content").html(i.data.content);
             if (void 0 == window.orientation && (i.ispc = !0), $("#j-liveinfo").html(liveinfoTpl.render(i)), $("#j-livevideo").length) {
                 var o = "/live/content/www/img/ic_default_pic@2x.png";
+                o=i.data.cover;
                 var t = i.data.playStreamUrl;
                 if (void 0 == window.orientation) {
                     $("#j-livevideo-main").addClass("prism-player").removeClass("fn-hide"),
