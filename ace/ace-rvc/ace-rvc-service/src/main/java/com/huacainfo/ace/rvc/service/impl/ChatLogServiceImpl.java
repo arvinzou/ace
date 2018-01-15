@@ -47,16 +47,16 @@ public class ChatLogServiceImpl implements ChatLogService {
             return rtn;
         }
         //是否是图片，需做文件上传，获取URL地址
-        boolean isFile = ChatDTO.ACTION_FILE.equals(chatDTO.getAction()) ||
-                ChatDTO.ACTION_IMAGE.equals(chatDTO.getAction());
-        String fileURL = uploadFile(isFile, chatDTO.getContent(), chatDTO.getSuffix());
+//        boolean isFile = ChatDTO.ACTION_FILE.equals(chatDTO.getAction()) ||
+//                ChatDTO.ACTION_IMAGE.equals(chatDTO.getAction());
+//        String fileURL = uploadFile(isFile, chatDTO.getContent(), chatDTO.getSuffix());
+//        if (isFile) {
+//            chatDTO.setContent(fileURL);
+//        }
         //存储聊天记录
-        if (isFile) {
-            chatDTO.setContent(fileURL);
-        }
         insertLog(user, chatDTO);
         //转换文本
-        String replyTxt = isFile ? fileURL : chatDTO.getContent();
+        String replyTxt = chatDTO.getContent();//isFile ? fileURL : chatDTO.getContent();
 //        parseImage(user, fileURL) :parseText(user, chatDTO.getContent());
 
         //return to client
