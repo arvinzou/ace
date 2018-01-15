@@ -74,13 +74,13 @@
       }
 
 
-      function submitMsg(form){
+      function submitMsg(){
          var message={};
          message.header={
             type:1,
             wxuser:wxuser
          };
-         message.content=$(form).find("input[name=content]").val();
+         message.content=$("#j-remarkform").find("input[name=content]").val();
          message.createTime=new Date().pattern("hh:mm:ss");
          websocketMsg.send(JSON.stringify(message));
         return false;

@@ -437,12 +437,7 @@ function reportBind(e) {
     }),
     e.find(".j-actping").on(tap,
     function() {
-        if (true) {
-
-        }
-        return openRemark($(this).data("id")),
-        $(".actlayer").hide(),
-        !1
+        openRemark($(this).data("id"));
     }),
     e.find(".remark").each(function() {
         showRemark($(this))
@@ -482,32 +477,12 @@ function dianZan(e) {
     })
 }
 function openRemark(e) {
-    $(".fn-contain").addClass("j-hasremark");
-    var i = $(window).scrollTop();
-    $(".fn-contain").css({
-        position: "relative",
-        "margin-top": -i,
-        overflow: "hidden"
-    }),
-    $(window).scrollTop(0),
-    $(".fn-contain").height($(window).height() + i),
-    setTimeout(function() {
-        $("#j-remark").css("display", "block"),
-        $("#j-remark input[name=rptId]").val(e)
-    },
-    100)
+   $("#j-remark").removeClass("fn-hide");
+   $("#j-remark input[name=rptId]").val(e);
 }
 function closeRemark() {
-    $(".fn-contain").removeClass("j-hasremark"),
-    $("#j-remark input[name=content]").blur(),
-    $("#j-remark").css("display", "none");
-    var e = $(".fn-contain").css("margin-top").replace("px", "") * -1;
-    $(".fn-contain").css({
-        position: "static",
-        "margin-top": 0
-    }),
-    $(".fn-contain").height("auto"),
-    $(window).scrollTop(e)
+    $("#j-remark").addClass("fn-hide");
+    $("#j-remark input[name=content]").blur();
 }
 function onshare() {
     wxReady && (wx.onMenuShareTimeline({
@@ -830,12 +805,12 @@ function() {
     }
 }), $(".fn-contain").on(tap,
 function() {
-    $(".actlayer").hide(),
-    $("#j-remark").addClass("fn-hide")
+    $(".actlayer").hide()
+    //$("#j-remark").addClass("fn-hide")
 }), $(".fn-contain").on("touchmove",
 function() {
-    $(".actlayer").hide(),
-    $("#j-remark").addClass("fn-hide")
+    $(".actlayer").hide()
+    //$("#j-remark").addClass("fn-hide")
 }), $("#j-remarkform input[name=content]").on("click",
 function() {
     setTimeout(function() {
@@ -844,13 +819,19 @@ function() {
     200)
 }), $(".fn-contain").on(touchstart,
 function() {
-    if ($(this).hasClass("j-hasremark")) return closeRemark(),
-    !1
+    /*if ($(this).hasClass("j-hasremark")) return closeRemark(),
+    !1*/
 }), $("#j-remarkform").submit(function(e) {
     e.preventDefault();
     var i = $(this).find("input[name=rptId]").val(),
+    type = $(this).find("input[name=type]").val(),
     a = $.trim($(this).find("input[name=content]").val());
     if (a.length > 200) return void lvsCmd.alert("评论内容不能超过200字");
+    if(type==2){
+        submitMsg();
+        return;
+    }
+
     if (a) {
             var message={};
              message.header={
@@ -871,12 +852,12 @@ function() {
         lvsCmd.ajax(apiServer + "/www/live/cmt.do", n,
         function(e, n) {
             if (e) if (0 == n.status) {
-                $("#j-remarkform input[name=content]").val(""),
+                $("#j-remarkform input[name=content]").val("");
                 closeRemark();
                 //var o = $("#j-remark-" + i);
                 //o.find(".list").append("<p><span>" + userDict.identityName + ": </span>" + a + "</p>"),
                 //showRemark(o)
-            } else lvsCmd.alert(n.errMsg);
+            } else lvsCmd.alert(n.errorMessage);
             else lvsCmd.alert("提交失败")
         })
     }
@@ -936,5 +917,14 @@ $(function(){
         $(this).parent().siblings().children().addClass("unselected");
         var index =  li_a.index(this);
         $(".tab_box > div").eq(index).show().siblings().hide();
+        if(index==0){
+            $("#j-remark input[name=type]").val(1);
+             $("#j-remark input[name=content]").attr("placeholder","评论");
+            closeRemark();
+        }else{
+            openRemark("0");
+            $("#j-remark input[name=type]").val(2);
+            $("#j-remark input[name=content]").attr("placeholder","写点什么唄~");
+        }
     });
 });

@@ -1264,6 +1264,7 @@ a {
 }
 
 .xcy-remark {
+    width: 10rem;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -1313,7 +1314,6 @@ a {
 
 .app-download-place {
 	height: 1.44rem;
-	background-color: #f5f5f5
 }
 
 .app-download {
@@ -1326,7 +1326,6 @@ a {
 	-webkit-box-align: center;
 	box-align: center;
 	height: 1.44rem;
-	background: rgba(0,0,0,.8);
 	color: #fff;
 	z-index: 30
 }
@@ -1633,10 +1632,6 @@ ul {
     text-align:right;
 }
 
-
-.wxheadimg{
-    width:.1rem;height:.1rem;border-radius:50%;vertical-align:middle;
-}
 .headpic{
      font-size: .30rem;
      padding:.15rem;

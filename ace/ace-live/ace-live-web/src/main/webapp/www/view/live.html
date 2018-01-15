@@ -236,7 +236,7 @@
 
                                     <div style="float:left;">
                                         {@if item.rpt.headimgurl}
-                                        <img src="${item.rpt.headimgurl}" class="wxheadimg">
+                                        <img src="${item.rpt.headimgurl}" class="headimg">
                                     {@else}
                                         <img src="/live/content/www/img/head_default.png" class="wxheadimg">
                                     {@/if}
@@ -356,22 +356,12 @@
                 <span>正在加载...</span>
             </div>
             <div class="xcy-totalcount"></div>
+
         </div>
         <div class="hide  chat" id="livemsg">
             <div class="scroll-content J_scrollContent">
                 <div class="chatContent" id="chatContent">
 
-                </div>
-            </div>
-
-            <div class="xcy-remark">
-                <div class="wrap">
-                    <div class="bar">
-                        <form onsubmit="return submitMsg(this)">
-                            <input type="text" placeholder="写点什么唄~" name="content" autocomplete="off" maxlength="200">
-                            <input type="submit" value="发送">
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -405,15 +395,26 @@
             <div class="close"></div>
         </div>
     </div>
-    <!--
-        <div class="app-download-place"></div>
+
+    <div class="app-download-place"></div>
 
         <div class="app-download">
-            <a href="javascript:void(0);" data-spm-click="category=item;action=closeAppDownload" class="close"></a>
-            <span class="icon"></span>
-            <h4></h4>
-            <a href="javascript:void(0)" data-spm-click="category=item;action=downloadApp" class="download">下载APP</a>
-        </div>-->
+            <div id="j-remark" class="fn-hide">
+                <!-- <div class="xcy-remark-place"></div> -->
+                <div class="xcy-remark">
+                    <div class="wrap">
+                        <div class="bar">
+                            <form id="j-remarkform">
+                                <input type="hidden" name="rptId" value="0">
+                                <input type="hidden" name="type" value="1">
+                                <input type="text" placeholder="评论" name="content" autocomplete="off" maxlength="200">
+                                <input type="submit" value="发送">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
 
 <div class="share-box" id="shareTpList">
@@ -422,20 +423,6 @@
     <div class="s-btn"></div>
 </div>
 
-<div id="j-remark" class="fn-hide">
-    <!-- <div class="xcy-remark-place"></div> -->
-    <div class="xcy-remark">
-        <div class="wrap">
-            <div class="bar">
-                <form id="j-remarkform">
-                    <input type="hidden" name="rptId" value="0">
-                    <input type="text" placeholder="评论" name="content" autocomplete="off" maxlength="200">
-                    <input type="submit" value="发送">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Root element of PhotoSwipe. Must have class pswp. -->
 <div id="j-pswp" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
