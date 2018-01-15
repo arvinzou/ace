@@ -929,10 +929,13 @@ $(function(){
             $("#j-remark input[name=type]").val(1);
              $("#j-remark input[name=content]").attr("placeholder","评论");
             closeRemark();
-        }else{
+        }else if(index==1){
             openRemark("0");
             $("#j-remark input[name=type]").val(2);
             $("#j-remark input[name=content]").attr("placeholder","写点什么唄~");
-        }
+        }else{
+
+                          closeRemark();
+                      }
     });
 });
