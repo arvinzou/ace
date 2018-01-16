@@ -227,10 +227,9 @@ public class WWWController extends LiveBaseController {
     @RequestMapping(value = "/insertLiveRpt.do")
     @ResponseBody
     public MessageResponse insertLiveRpt(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject("jsons");
-        LiveRpt obj = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
-        List<LiveImg> imgs = JSON.parseArray(((JSONObject) json.get("imgs")).toJSONString(), LiveImg.class);
-        return this.liveRptService
-                .insertLiveRpt(obj, imgs);
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("jsons", jsons);
+        this.kafkaProducerService.sendMsg("rpt", data);
+        return new MessageResponse(0, "OK");
     }
 }

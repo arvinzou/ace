@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.SpringUtils;
+import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.model.LiveRpt;
 import com.huacainfo.ace.live.service.LiveRptService;
 import kafka.consumer.ConsumerIterator;
@@ -11,6 +12,7 @@ import kafka.consumer.KafkaStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.Map;
 
 public class LiveRptCallBackThread extends Thread {
@@ -56,16 +58,11 @@ public class LiveRptCallBackThread extends Thread {
     public void doCallBack(Map<String, String> data) {
         LOGGER.info("接收消息->{}", data);
         try {
-            LiveRpt o = new LiveRpt();
-            o.setContent(data.get("message"));
-            o.setRid(data.get("rid"));
-            o.setUid(data.get("uid"));
-            o.setLikeNum(new Long(data.get("likeNum")));
-            o.setMediaContent(data.get("mediaContent"));
-            o.setMediaType(data.get("mediaType"));
-            MessageResponse rst = this.liveRptService.insertLiveRpt(o);
+            JSONObject json = JSON.parseObject(data.get("jsons"));
+            LiveRpt o = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
+            List<LiveImg> imgs = JSON.parseArray(((JSONObject) json.get("imgs")).toJSONString(), LiveImg.class);
+            MessageResponse rst = this.liveRptService.insertLiveRpt(o, imgs);
             LOGGER.info("{}", rst.getErrorMessage());
-
         } catch (Exception e) {
             LOGGER.error("系统出错{}", e);
         }
