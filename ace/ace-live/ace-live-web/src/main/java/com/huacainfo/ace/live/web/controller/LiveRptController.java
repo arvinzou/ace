@@ -1,5 +1,6 @@
 package com.huacainfo.ace.live.web.controller;
 
+import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.web.websocket.MyWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import com.huacainfo.ace.live.vo.LiveRptVo;
 import com.huacainfo.ace.live.vo.LiveRptQVo;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/liveRpt")
@@ -75,9 +77,14 @@ public class LiveRptController extends LiveBaseController {
     @RequestMapping(value = "/insertLiveRpt.do")
     @ResponseBody
     public MessageResponse insertLiveRpt(String jsons) throws Exception {
-        LiveRpt obj = JSON.parseObject(jsons, LiveRpt.class);
+        JSONObject json = JSON.parseObject("jsons");
+
+        LiveRpt obj = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
+        List<LiveImg> imgs = JSON.parseArray(((JSONObject) json.get("imgs")).toJSONString(), LiveImg.class);
+
+
         return this.liveRptService
-                .insertLiveRpt(obj);
+                .insertLiveRpt(obj, imgs);
     }
 
     /**

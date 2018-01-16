@@ -1,9 +1,11 @@
 package com.huacainfo.ace.live.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.PropertyUtil;
+import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.model.LiveMsg;
 import com.huacainfo.ace.live.model.LiveRpt;
 import com.huacainfo.ace.live.service.LiveMsgService;
@@ -134,24 +136,6 @@ public class WWWController extends LiveBaseController {
                 .insertLiveMsg(obj);
     }
 
-    /**
-     * @throws
-     * @Title:insertLiveSub
-     * @Description: TODO(添加图文直播)
-     * @param: @param jsons
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: 陈晓克
-     * @version: 2018-01-03
-     */
-    @RequestMapping(value = "/insertLiveRpt.do")
-    @ResponseBody
-    public MessageResponse insertLiveSub(String jsons) throws Exception {
-        LiveRpt obj = JSON.parseObject(jsons, LiveRpt.class);
-        return this.liveRptService
-                .insertLiveRpt(obj);
-    }
-
     @RequestMapping(value = "/sendMsg.do")
     @ResponseBody
     public MessageResponse sendMsg(String message, String rid, String uid) throws Exception {
@@ -238,5 +222,15 @@ public class WWWController extends LiveBaseController {
         String topic = "liker";
         this.kafkaProducerService.sendMsg(topic, data);
         return new MessageResponse(0, "OK");
+    }
+
+    @RequestMapping(value = "/insertLiveRpt.do")
+    @ResponseBody
+    public MessageResponse insertLiveRpt(String jsons) throws Exception {
+        JSONObject json = JSON.parseObject("jsons");
+        LiveRpt obj = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
+        List<LiveImg> imgs = JSON.parseArray(((JSONObject) json.get("imgs")).toJSONString(), LiveImg.class);
+        return this.liveRptService
+                .insertLiveRpt(obj, imgs);
     }
 }

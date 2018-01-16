@@ -4,9 +4,12 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.model.LiveRpt;
 import com.huacainfo.ace.live.vo.LiveRptVo;
 import com.huacainfo.ace.live.vo.LiveRptQVo;
+
+import java.util.List;
 
 /**
  * @author: 陈晓克
@@ -40,7 +43,7 @@ public interface LiveRptService {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    public abstract MessageResponse insertLiveRpt(LiveRpt obj) throws Exception;
+    public abstract MessageResponse insertLiveRpt(LiveRpt obj, List<LiveImg> imgs) throws Exception;
 
     /**
      * @throws

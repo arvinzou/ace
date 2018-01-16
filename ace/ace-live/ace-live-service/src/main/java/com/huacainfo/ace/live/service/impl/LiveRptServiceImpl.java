@@ -5,6 +5,8 @@ import java.util.*;
 
 import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
+import com.huacainfo.ace.live.dao.LiveImgDao;
+import com.huacainfo.ace.live.model.LiveImg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,9 @@ import com.huacainfo.ace.live.vo.LiveRptQVo;
 public class LiveRptServiceImpl implements LiveRptService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private LiveRptDao liveSubDao;
+    private LiveRptDao liveRptDao;
+    @Autowired
+    private LiveImgDao liveImgDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
     @Autowired
@@ -54,11 +58,11 @@ public class LiveRptServiceImpl implements LiveRptService {
     public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, int start,
                                                  int limit, String orderBy) throws Exception {
         PageResult<LiveRptVo> rst = new PageResult<LiveRptVo>();
-        List<LiveRptVo> list = this.liveSubDao.findList(condition,
+        List<LiveRptVo> list = this.liveRptDao.findList(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.liveSubDao.findCount(condition);
+            int allRows = this.liveRptDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
@@ -76,7 +80,7 @@ public class LiveRptServiceImpl implements LiveRptService {
      * @version: 2018-01-03
      */
     @Override
-    public MessageResponse insertLiveRpt(LiveRpt o)
+    public MessageResponse insertLiveRpt(LiveRpt o, List<LiveImg> imgs)
             throws Exception {
         o.setId(UUID.randomUUID().toString());
         //o.setId(String.valueOf(new Date().getTime()));
@@ -94,7 +98,10 @@ public class LiveRptServiceImpl implements LiveRptService {
         }
         o.setCreateTime(new Date());
         o.setStatus("1");
-        this.liveSubDao.insert(o);
+        this.liveRptDao.insert(o);
+        for (LiveImg img : imgs) {
+            this.liveImgDao.insert(img);
+        }
         Map<String, String> data = new HashMap<String, String>();
         data.put("rid", "rsub");
         data.put("message", JSON.toJSON(o).toString());
@@ -124,7 +131,7 @@ public class LiveRptServiceImpl implements LiveRptService {
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "直播内容不能为空！");
         }
-        this.liveSubDao.updateByPrimaryKey(o);
+        this.liveRptDao.updateByPrimaryKey(o);
         return new MessageResponse(0, "变更图文直播完成！");
     }
 
@@ -149,7 +156,7 @@ public class LiveRptServiceImpl implements LiveRptService {
         if (CommonUtils.isBlank(status)) {
             return new MessageResponse(1, "状态不能为空！");
         }
-        this.liveSubDao.updateStatusByPrimaryKey(id, status);
+        this.liveRptDao.updateStatusByPrimaryKey(id, status);
         return new MessageResponse(0, "变更图文直播完成！");
     }
 
@@ -166,7 +173,7 @@ public class LiveRptServiceImpl implements LiveRptService {
     @Override
     public SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id) throws Exception {
         SingleResult<LiveRptVo> rst = new SingleResult<LiveRptVo>();
-        rst.setValue(this.liveSubDao.selectByPrimaryKey(id));
+        rst.setValue(this.liveRptDao.selectByPrimaryKey(id));
         return rst;
     }
 
@@ -183,7 +190,7 @@ public class LiveRptServiceImpl implements LiveRptService {
      */
     @Override
     public MessageResponse deleteLiveRptByLiveRptId(String id, UserProp userProp) throws Exception {
-        this.liveSubDao.deleteByPrimaryKey(id);
+        this.liveRptDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除图文直播", "图文直播", String.valueOf(id),
                 String.valueOf(id), "图文直播", userProp);
         return new MessageResponse(0, "图文直播删除完成！");
@@ -202,7 +209,7 @@ public class LiveRptServiceImpl implements LiveRptService {
      */
     @Override
     public MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception {
-        this.liveSubDao.updateSortByPrimaryKey(id, sort);
+        this.liveRptDao.updateSortByPrimaryKey(id, sort);
         return new MessageResponse(0, "OK！");
     }
 }
