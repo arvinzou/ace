@@ -564,7 +564,7 @@ function increateNumTimeFn() {
 var id = 0;
 var userAgent=navigator.userAgent;
 if (userAgent.indexOf("micromessenger") > -1) var webviewType = "weixin";
-else var webviewType = "other";
+else var webviewType = "weixin";
 $(window).scrollTop(0);
 var wxShareDict = {
     title: "uuuurr",
@@ -854,7 +854,7 @@ function() {
     var i = $(this).find("input[name=rptId]").val(),
     type = $(this).find("input[name=type]").val(),
     a = $.trim($(this).find("input[name=content]").val());
-    if (a.length > 200) return void lvsCmd.alert("评论内容不能超过200字");
+    if (a.length > 200) return void lvsCmd.alert("内容不能超过200字");
     if(type==2){
         submitMsg();
         return;
@@ -901,10 +901,10 @@ function() {
     function(e, i) {
         wx.config({
             debug: !1,
-            appId: i.data.appid,
+            appId: i.data.appId,
             timestamp: wxConfig.timestamp,
-            nonceStr: i.data.noncestr,
-            signature: i.data.jsSign,
+            nonceStr: i.data.nonceStr,
+            signature: i.data.signature,
             jsApiList: ["onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ"]
         })
         console.log( i.data);
