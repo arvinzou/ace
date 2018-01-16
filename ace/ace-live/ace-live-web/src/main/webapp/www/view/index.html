@@ -36,13 +36,15 @@
                     <div class="summary">
                         <h2>${item.topic}</h2>
                         <div class="fn-clear">
-            <span class="state box state-${item.state} type-${item.state}">
-             {@if item.state == 1}预告{@/if} {@if item.state == 2}直播{@/if} {@if item.state == 3}已结束{@/if}
+            <span class="state box state-${item.state} type-${item.type}">
+             {@if item.state == 1}预告{@/if} {@if item.state == 2}直播中{@/if} {@if item.state == 3}已结束{@/if}
               <em class="icon"></em>
             </span>
                             {@if item.state != 1}
                             <span class="join">${item.numOfPartakeString}参与</span>
                             {@/if}
+
+
                         </div>
                     </div>
                 </li>

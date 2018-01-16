@@ -22,7 +22,7 @@
     <div id="j-liveinfo" class="xcy-liveinfo">
         <script type="text/template">
             <div class="view">
-                {@if data.type == 4}
+                {@if data.type == 1}
 
                 <!-- state：8=图片、32=视屏、其他=直播   -->
                 {@if data.state == 1}
@@ -290,7 +290,8 @@
                                       <p>即将播放...</p>
                                     </div> -->
                                     <div class="v-loading fn-hide"><i></i></div>
-                                    <video playsinline="playsinline" webkit-playsinline="webkit-playsinline"></video>
+                                    <video playsinline="true" x-webkit-airplay="true" webkit-playsinline="true"
+                                           x5-video-player-type="h5" x5-video-player-fullscreen="true"></video>
                                 </div>
                                 {@else if item.imageList && item.imageList.length > 0}
                                 <div class="pictures" data-count="${item.imageList.length}">
