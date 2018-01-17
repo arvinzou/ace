@@ -155,13 +155,7 @@ function createUpVideo() {
         a.init();
     console.log("createUpVideo end");
 }
-var urlParams = lvsCmd.urlParams,
-liveId = +lvsCmd.urlParams.liveId; (isNaN(liveId) || liveId < 1) && (parent.pizzaCmd.history.clear(), parent.pizzaCmd.history.push(null, "/scene/showscenelist.html"));
-var urlVideo = lvsCmd.urlParams.video;
-"undefined" == urlVideo && (urlVideo = null),
-$("#j-back").click(function() {
-    parent.pizzaCmd.history.pop()
-});
+var urlParams = lvsCmd.urlParams;
 var formFieldDict = {
     type: {
         name: "type",
@@ -173,7 +167,10 @@ var formFieldDict = {
         {
             text: "视频报道",
             value: "1"
-        }],
+        },{
+                      text: "音频报道",
+                      value: "3"
+            }],
         value: 2
     },
     content: {
@@ -232,49 +229,49 @@ function(e) {
     t()
 },
 function(e) {
-    var t = {
-        source: "PC",
-        liveId: liveId,
-        type: reportType,
-        content: e.data.content
+    var data={};
+    var rpt = {
+        rid: lvsCmd.urlParams.id,
+        uid:wxuser.openid,
+        mediaType: reportType,
+        content: e.data.content,
+        mediaContent:""
+
     };
-    if (1 == reportType) {
-        if (t.pictures = "", t.imageList = [], $("#j-upcontain .xcy-cutimg").each(function() {
-            var e = $(this).data("fileurl"),
-            r = $(this).data("width"),
-            i = $(this).data("height");
+
+    var imgs=[];
+    if (2 == reportType) {
+        $("#j-upcontain .xcy-cutimg").each(function() {
+            var e = $(this).data("fileurl");
+            var r = $(this).data("width");
+            var i = $(this).data("height");
             if (e) {
-                var a = e.replace("http://", "").replace("https://", "");
-                a = a.substr(a.indexOf("/")),
-                "" == t.pictures ? t.pictures = a: t.pictures += "," + a,
-                t.imageList.push({
-                    url: a,
+                imgs.push({
+                    url: e,
                     w: r,
                     h: i
                 })
             }
-        }), "" == t.content && "" == t.pictures) return alert("报道内容和报道图片不能全为空"),
-        !1
+        });
+
+         if("" == rpt.content &&imgs.length<1) {
+            alert("报道内容和报道图片不能全为空");
+            return false;
+         }
     } else if (1 == reportType) {
         var r = $("#j-row-video").data("fileurl");
-        if (!r) return alert("请上传报道视频"),
-        !1;
-        var i = r.replace("http://", "").replace("https://", "");
-        i = i.substr(i.indexOf("/")),
-        t.video = i;
-        var a = $("#j-row-video .xcy-video .imgbar").data("fileurl");
-        if (a) {
-            var o = a.replace("http://", "").replace("https://", "");
-            o = o.substr(o.indexOf("/")),
-            t.thumbnail = o
-        }
+        if (!r)  {alert("请上传报道视频"); return false;};
+        rpt.mediaContent=r;
+
     }
-    var l = apiServer + "/report/add.json";
-    return lvsCmd.ajax(l, t,
+    data.rpt=rpt;
+    data.imgs=imgs;
+    var l = apiServer + "/www/live/insertLiveRpt.do";
+    lvsCmd.ajax(l, {jsons:JSON.stringify(data)},
     function(e, t) {
-        e ? "0" == t.status ? (alert("数据保存成功！"), parent.pizzaCmd.history.pop()) : alert(t.errMsg) : alert("接口请求失败，请检查网络连接！")
-    }),
-    !1
+        e ? "0" == t.status ? (alert("数据保存成功！"), parent.pizzaCmd.history.pop()) : alert(t.errorMessage) : alert("接口请求失败，请检查网络连接！")
+    });
+    return false;
 });
 
 $("#j-reportform input[name=type]").click(function() {

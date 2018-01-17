@@ -1,6 +1,7 @@
 package com.huacainfo.ace.backend.mq.threads;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.SpringUtils;
@@ -60,7 +61,7 @@ public class LiveRptCallBackThread extends Thread {
         try {
             JSONObject json = JSON.parseObject(data.get("jsons"));
             LiveRpt o = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
-            List<LiveImg> imgs = JSON.parseArray(((JSONObject) json.get("imgs")).toJSONString(), LiveImg.class);
+            List<LiveImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), LiveImg.class);
             MessageResponse rst = this.liveRptService.insertLiveRpt(o, imgs);
             LOGGER.info("{}", rst.getErrorMessage());
         } catch (Exception e) {

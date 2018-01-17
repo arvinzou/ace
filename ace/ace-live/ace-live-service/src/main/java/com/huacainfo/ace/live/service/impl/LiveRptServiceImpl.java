@@ -100,6 +100,9 @@ public class LiveRptServiceImpl implements LiveRptService {
         o.setStatus("1");
         this.liveRptDao.insert(o);
         for (LiveImg img : imgs) {
+            img.setId(UUID.randomUUID().toString());
+            img.setRptId(o.getId());
+            img.setCreateTime(new Date());
             this.liveImgDao.insert(img);
         }
         Map<String, String> data = new HashMap<String, String>();
