@@ -14,7 +14,7 @@ function createUpImg() {
     i = "";
     e.key="";
     console.log("createUpImg start");
-    var a = new plupload.Uploader({
+    uploadimg = new plupload.Uploader({
         runtimes: "html5,flash,silverlight,html4",
         browse_button: "j-uploader-selectimg",
         multi_selection: !1,
@@ -85,8 +85,8 @@ function createUpImg() {
         }
     });
      console.log("a.init()");
-    a.init();
-    createUpVideo();
+    uploadimg.init();
+    //createUpVideo();
     console.log("createUpImg end;");
 }
 function createUpVideo() {
@@ -95,12 +95,12 @@ function createUpVideo() {
     var  t = {
         mime_types: [{
             title: "video files",
-            extensions: "3gp,mp4,m3u8,wmv,webm,mov,avi,mpg,mpeg,mpeg1,mpeg4,mkv,flv"
+            extensions: "3gp,mp4,m3u8,wmv,webm,mov,avi,mpg,mpeg,mpeg1,mpeg4,mkv,flv,mp3,acc,wav"
         }],
         max_file_size: "20480kb",
         prevent_duplicates: !1
     };
-    var a = new plupload.Uploader({
+    uploadvdo = new plupload.Uploader({
             runtimes: "html5,flash,silverlight,html4",
             browse_button: "j-uploader-selectvideo",
             multi_selection: !1,
@@ -151,8 +151,8 @@ function createUpVideo() {
                 }
             }
         });
-         console.log("a.init()");
-        a.init();
+         console.log("uploadvdo.init()");
+        uploadvdo.init();
     console.log("createUpVideo end");
 }
 var urlParams = lvsCmd.urlParams;
@@ -188,6 +188,8 @@ var formFieldDict = {
     }
 };
 var reportType = 2;
+var uploadimg;
+var uploadvdo;
 console.log("createUpImg");
 createUpImg(),
 $("#j-row-video .videobar .icon-video").click(function() {
@@ -277,6 +279,16 @@ function(e) {
 $("#j-reportform input[name=type]").click(function() {
          var e = $(this).val();
          console.log(e);
+         if(e==1){
+            uploadimg.destroy();
+            createUpVideo();
+            //uploadvdo.init();
+         };
+         if(e==2){
+             uploadvdo.destroy();
+             createUpImg();
+          };
+
          reportType != e && (reportType = e, checkType())
 });
 reportType=2;
