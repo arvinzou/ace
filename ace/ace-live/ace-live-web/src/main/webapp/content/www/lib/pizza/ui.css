@@ -1955,7 +1955,8 @@ to {
 .pz-btn.btn-big {
 	padding:0 20px;
 	height:44px;
-	line-height:42px
+	line-height:42px;
+	width:100%;
 }
 .pz-btn.btn-big .btnselect {
 	padding-top:46px
@@ -2048,7 +2049,7 @@ to {
 }
 .pz-form .row,.pz-form .wrap {
 	border-bottom:solid 0px #eee;
-	margin:20px;
+	margin:0px;
 }
 .pz-label {
 	border-radius:4px;
@@ -2117,7 +2118,8 @@ to {
 }
 .pz-form {
 	color:#666;
-	font-size:14px
+	font-size:14px;
+	background:#fff;
 }
 .pz-form .group2 {
 	float:left;
