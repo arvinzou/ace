@@ -2,6 +2,7 @@ package com.huacainfo.ace.live.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.PropertyUtil;
@@ -19,8 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +53,9 @@ public class WWWController extends LiveBaseController {
     private RedisOperations<String, Object> redisTemplate;
     @Autowired
     private KafkaProducerService kafkaProducerService;
+
+    @Autowired
+    private IFile fileSaver;
 
 
     /**
@@ -232,4 +239,32 @@ public class WWWController extends LiveBaseController {
         this.kafkaProducerService.sendMsg("rpt", data);
         return new MessageResponse(0, "OK");
     }
+
+    @RequestMapping(value = "/upload.do")
+    @ResponseBody
+    public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName)
+            throws Exception {
+
+        Map<String, Object> rst = new HashMap<String, Object>();
+        String[] fileNames = new String[file.length];
+        String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+        File tmp = new File(dir);
+        if (!tmp.exists()) {
+            tmp.mkdirs();
+        }
+        int i = 0;
+        for (MultipartFile o : file) {
+            File dest = new File(dir + File.separator + o.getName());
+            o.transferTo(dest);
+            fileNames[i] = this.fileSaver.saveFile(dest,
+                    o.getOriginalFilename());
+            dest.delete();
+            rst.put("success", true);
+            rst.put("msg", "成功");
+            rst.put("file_path", fileNames[i]);
+            i++;
+        }
+        return rst;
+    }
+
 }

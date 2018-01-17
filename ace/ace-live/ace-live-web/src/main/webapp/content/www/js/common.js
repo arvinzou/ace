@@ -138,3 +138,64 @@ lvsCmd.ajaxUc = function(e, a, r) {
     $("body").append(o)
 },
 juicer.register("formatDate", formatDate);
+lvsCmd.cutimg = function(e, t, o) {
+    this.obj = e,
+    this.config = {
+        filetype: 5,
+        width: 400,
+        height: 300,
+        scale: 1,
+        original: !0
+    },
+    t && $.extend(this.config, t),
+    o && (this.callback = o),
+    this.init()
+},
+lvsCmd.cutimg.prototype = {
+    init: function() {
+        function e() {
+            o.fileBtn.html(a),
+            o.fileBtn.find("input").on("change",
+            function() {
+                t(this.files[0])
+            })
+        }
+        function t(t) {
+            var a = o.config;
+            a.file = t;
+            var i = juicer(pizzaTpl.pzCutimg, a);
+            new parent.pizzaCmd.overlay(i,
+            function(t) {
+                t.show();
+                var i = new pizzaCmd.cutimg(t.obj, a);
+                a.original || t.obj.find(".j-cutimg-original").parent().addClass("fn-hide"),
+                t.obj.find(".j-overlay-close").click(function() {
+                    t.remove(),
+                    e()
+                }),
+                t.obj.find(".j-cutimg-true").click(function() {
+                    var a = i.save();
+                    a ? ($(this)[0].disabled = !0, $(this).val("上传截图中..."), lvsCmd.ajax(apiServer + "/video/processingImages.json", {
+                        fileType: o.config.filetype,
+                        cover: a
+                    },
+                    function(a, i) {
+                        a && (0 == i.status ? o.callback && o.callback(i.data.cover) : alert(i.errMsg)),
+                        t.remove(),
+                        e()
+                    })) : (t.remove(), e())
+                })
+            })
+        }
+        if (!window.FileReader) return this.obj.html('<div class="file fn-textcenter"><p class="nosupport">该浏览器不支持图片截取功能，建议使用谷歌(Chrome)浏览器</p></div>'),
+        !1;
+        this.fileBtn = this.obj.find(".j-file-input");
+        var o = this,
+        a = this.fileBtn.html();
+        pizzaTpl.pzCutimg ? e() : pizzaCmd.tpl("../../cutimg.html",
+        function() {
+            e()
+        }),
+        this.config.padding || (this.config.padding = this.config.width < this.config.height ? Math.ceil(this.config.width / 4) : Math.ceil(this.config.height / 4))
+    }
+};
