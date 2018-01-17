@@ -133,6 +133,11 @@ function getInfo() {
                 type:"1"
             },
             i = !0;
+             $("#adminrpt").on(tap,
+             function(){
+                console.log(i);
+                location.href="rpt.html?id="+lvsCmd.urlParams.id+"&title="+$(".title").html();
+             }),
             $("#j-xc-liker").on(tap,
             function() {
                 var a = $(this);
@@ -826,7 +831,9 @@ if (getReport(reportPage), setInterval(function() {
 1e4), $("#j-sort").on(tap,
 function() {
     return ! reportLoading && (0 == reportSort ? (reportSort = 1, $(this).html("正序")) : (reportSort = 0, $(this).html("倒序")), reportLoadEnd = !1, reportPage = 1, $("#j-report").height($("#j-report").height()), $("#j-report").html(""), getReport(reportPage), void(cutWindowScrollTop = 0))
-}), $(window).scroll(function() {
+}),
+
+ $(window).scroll(function() {
     if (!reportLoading && !reportLoadEnd && !$(".fn-contain").hasClass("j-hasremark")) {
         var e = $(window).scrollTop() + $(window).height();
         e > $("body").height() - 100 && (reportPage++, getReport(reportPage))
