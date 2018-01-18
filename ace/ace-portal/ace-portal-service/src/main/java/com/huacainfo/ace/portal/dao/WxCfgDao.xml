@@ -9,7 +9,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Base_Column_List">
-    appId, appScret, accessToken, expiresIn, name
+    appId, appScret, accessToken, expiresIn, name,deptId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -22,10 +22,10 @@
     where appId = #{appId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.portal.model.WxCfg">
-    insert into wx_cfg (appId, appScret, accessToken, 
-      expiresIn, name)
-    values (#{appId,jdbcType=VARCHAR}, #{appScret,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, 
-      #{expiresIn,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+    insert into wx_cfg (appId, appScret, accessToken,
+    expiresIn, name,deptId)
+    values (#{appId,jdbcType=VARCHAR}, #{appScret,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR},
+    #{expiresIn,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{deptId})
   </insert>
 
 
@@ -34,7 +34,8 @@
     set appScret = #{appScret,jdbcType=VARCHAR},
       accessToken = #{accessToken,jdbcType=VARCHAR},
       expiresIn = #{expiresIn,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR}
+    name = #{name,jdbcType=VARCHAR},
+    deptId = #{deptId,jdbcType=VARCHAR}
     where appId = #{appId,jdbcType=VARCHAR}
   </update>
 
@@ -47,5 +48,9 @@
   </update>
   <select id="selectAppList" resultType="map">
     select appId, appScret, accessToken, expiresIn, name from wx_cfg order by appId
+  </select>
+
+  <select id="selectAccessTokenByDeptId" resultType="string">
+    select accessToken from wx_cfg where deptId=#{id}
   </select>
 </mapper>

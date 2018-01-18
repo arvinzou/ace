@@ -15,6 +15,7 @@ public class WxCfg implements java.io.Serializable {
     private Integer expiresIn;
 
     private String name;
+    private String deptId;
 
     public String getAppId() {
         return appId;
@@ -54,5 +55,13 @@ public class WxCfg implements java.io.Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 }

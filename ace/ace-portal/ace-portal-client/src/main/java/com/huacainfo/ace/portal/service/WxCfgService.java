@@ -24,4 +24,10 @@ public interface WxCfgService {
 
 	public abstract MessageResponse insertFormIds(List<WxFormid> list);
 
+	public abstract SingleResult<String> selectAccessTokenByDeptId(String deptId) throws Exception;
+
+	public abstract SingleResult<String> getTicket(String access_token) throws Exception;
+
+	public abstract SingleResult<String> getSignature(String url, String accessToken) throws Exception;
+
 }

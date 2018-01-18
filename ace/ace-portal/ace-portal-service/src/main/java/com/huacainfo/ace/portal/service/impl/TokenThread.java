@@ -25,8 +25,10 @@ public class TokenThread implements Runnable {
 
 
 	public TokenThread(){
+
 		this.wxCfgService=(WxCfgService)SpringUtils.getBean("wxCfgService");
-	}
+        logger.info("TokenThread start -> {}", new java.util.Date());
+    }
 
 	@Override
 	public void run() {

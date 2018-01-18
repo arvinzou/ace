@@ -30,4 +30,6 @@ public interface WxCfgDao {
 	int updateAccessToken(@Param("appId")String appId,@Param("accessToken")String accessToken,@Param("expiresIn")int expiresIn);
     List<Map<String,Object>> selectAppList();
 
+    String selectAccessTokenByDeptId(String id);
+
 }

@@ -1,5 +1,22 @@
 function checkType() {
-    2 == reportType ? ($("#j-row-img, #j-upcontain .xcy-cutimg").removeClass("fn-hide"), $("#j-row-video").addClass("fn-hide")) : 1 == reportType && ($("#j-row-img, #j-upcontain .xcy-cutimg").addClass("fn-hide"), $("#j-row-video").removeClass("fn-hide"))
+    if(2 == reportType){
+        $("#j-row-img, #j-upcontain .xcy-cutimg").removeClass("fn-hide");
+        $("#j-row-video").addClass("fn-hide");
+        $("#j-row-aideo").addClass("fn-hide");
+
+    }
+    if(1 == reportType){
+        $("#j-row-img, #j-upcontain .xcy-cutimg").addClass("fn-hide");
+        $("#j-row-video").removeClass("fn-hide");
+        $("#j-row-aideo").addClass("fn-hide");
+
+    }
+    if(3 == reportType){
+        $("#j-row-img, #j-upcontain .xcy-cutimg").addClass("fn-hide");
+        $("#j-row-video").addClass("fn-hide");
+        $("#j-row-aideo").removeClass("fn-hide");
+
+    }
 }
 function createUpImg() {
     var e={}, t = {
@@ -178,13 +195,6 @@ var formFieldDict = {
         name: "content",
         type: "textarea",
         maxlength: 300
-    },
-    scene: {
-        name: "scene",
-        type: "text",
-        disabled: !0,
-        class: "disabled",
-        value: lvsCmd.urlParams.title
     }
 };
 var reportType = 2;
@@ -280,26 +290,52 @@ $("#j-reportform input[name=type]").click(function() {
          var e = $(this).val();
          console.log(e);
          if(e==1){
-            uploadimg.destroy();
+           if(uploadimg){uploadimg.destroy()};
             createUpVideo();
             //uploadvdo.init();
          };
          if(e==2){
-             uploadvdo.destroy();
+             if(uploadvdo){uploadvdo.destroy()};
              createUpImg();
           };
+          if(e==3){
+               if(uploadvdo){uploadvdo.destroy()};
+               if(uploadimg){uploadimg.destroy()};
+           };
 
          reportType != e && (reportType = e, checkType())
 });
 reportType=2;
 checkType();
+$("title").html(lvsCmd.urlParams.title);
 function videoPlayer(e, n, t) {
 	var i = {
 		id: "j-viewvideo",
 		source: t,
 		autoplay: !0,
-		width: "480px",
-		height: "270px"
+		width: "10rem",
+		height: "6rem"
 	}; (0 == t.indexOf("rtmp:") || t.indexOf(".m3u8") > -1) && (i.useFlashPrism = !0);
 	new prismplayer(i)
 }
+
+lvsCmd.ajax(apiServer + "/www/live/getWxJsSign.do", {companyId: lvsCmd.urlParams.companyId},
+    function(e, i) {
+        wx.config({
+            debug: true,
+            appId: i.data.appId,
+            timestamp: (new Date).getTime(),
+            nonceStr: i.data.nonceStr,
+            signature: i.data.signature,
+            jsApiList: ["startRecord", "stopRecord", "onVoiceRecordEnd","playVoice","pauseVoice","stopVoice","onVoicePlayEnd","uploadVoice","downloadVoice","translateVoice"]
+        })
+        console.log( i.data);
+})
+
+wx.ready(function(){
+    alert("微信接口初始化OK");
+});
+
+wx.error(function(res){
+    alert("微信接口初始化失败");
+});

@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+import com.huacainfo.ace.portal.service.impl.TokenThread;
 public class PortalServiceApp {
 	private static Logger LOGGER = LoggerFactory
 			.getLogger(PortalServiceApp.class);
@@ -13,7 +13,8 @@ public class PortalServiceApp {
 		AbstractApplicationContext ctx = null;
 		try {
 			ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-			LOGGER.info("portal服务启动成功");
+            new TokenThread().run();
+            LOGGER.info("portal服务启动成功");
 			synchronized (ctx) {
 				ctx.wait();
 			}

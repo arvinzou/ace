@@ -20,7 +20,7 @@ video {
 }
 
 .pz-boxhead .close {
-	font-size: 20px;
+	font-size: .30rem;
 	opacity: .6
 }
 
@@ -41,8 +41,8 @@ video {
 	padding: 10px 20px;
 	background: #f3f8fd;
 	border-left: solid 4px #56678a;
-	font-size: 14px;
-	line-height: 20px;
+	font-size: .35rem;
+	line-height:.40rem;
 	color: #56678a
 }
 
@@ -51,21 +51,21 @@ video {
 }
 
 .pz-form .row.xcy-row {
-	margin-bottom: 30px;
+	margin-bottom: .12rem;
 	padding: 0
 }
 
 .pz-form .row.xcy-row .row-content {
-	margin-top: 5px
+	margin-top: .12.rem;
 }
 
 .pz-form .row.xcy-row .row-content input,.pz-form .row.xcy-row .row-content select,.pz-form .row.xcy-row .row-content textarea {
-	padding: 6px 8px;
-	font-size: 14px
+	padding: .12rem .12rem;
+	font-size: .38rem
 }
 
 .pz-form .row.xcy-row .row-content input,.pz-form .row.xcy-row .row-content select {
-	height: 38px
+	height: .45rem
 }
 
 .pz-form .row.xcy-row .row-title {
@@ -73,12 +73,11 @@ video {
 	margin: 0;
 	width: auto;
 	text-align: left;
-	color: #56678a
 }
 
 .pz-form .row.xcy-row .row-title em {
 	color: #999;
-	font-size: 12px
+	font-size: .38rem
 }
 
 .pz-form .row.xcy-row .row-title a {
@@ -90,11 +89,10 @@ video {
 }
 
 .pz-form .row input.disabled,.pz-form .row textarea.disabled {
-	background-color: #f0f0f0
+	background-color: #fff
 }
 
 .pz-form .actions-transparent {
-	background: 0 0
 }
 
 .xcy-cutimg {
@@ -102,11 +100,11 @@ video {
 	width: 240px;
 	height: 135px;
 	border: 1px dashed #b4bed3;
-	border-radius: 5px
+	border-radius: .15rem
 }
 
 .xcy-cutimg .nosupport {
-	padding: 10px;
+	padding: .15rem;
 	color: red
 }
 

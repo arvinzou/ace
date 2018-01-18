@@ -136,7 +136,7 @@ function getInfo() {
              $("#adminrpt").on(tap,
              function(){
                 console.log(i);
-                location.href="rpt.html?id="+lvsCmd.urlParams.id+"&title="+$(".title").html();
+                location.href="rpt.html?id="+lvsCmd.urlParams.id+"&title="+$(".title").html()+"&companyId="+lvsCmd.urlParams.companyId;
              }),
             $("#j-xc-liker").on(tap,
             function() {

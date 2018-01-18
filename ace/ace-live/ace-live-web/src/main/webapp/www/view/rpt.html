@@ -6,11 +6,13 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="data-spm" content="zy-spot-web.v3">
     <title>创建报道</title>
+    <link rel="stylesheet" href="/live/content/www/css/mobase.css"/>
     <link rel="stylesheet" href="/live/content/www/lib/pizza/ui.css">
     <link rel="stylesheet" href="/live/content/www/css/ui.css">
     <script src="/live/content/www/lib/jquery-1.11.0-min.js"></script>
     <script src="/live/content/www/js/juicer-min.js"></script>
     <script src="/live/content/www/lib/sha512.js"></script>
+    <script src="/live/content/www/js/init-rem.js"></script>
     <script src="/live/www/oauth2/cfg.do"></script>
 </head>
 <body>
@@ -23,13 +25,9 @@
                         <div class="row-title">报道内容<span class="j-remark-length fn-right">0/300</span></div>
                         <div class="row-content" data-field="content"></div>
                     </div>
-                    <div class="row xcy-row">
-                        <div class="row-title">所属现场</div>
-                        <div class="row-content" data-field="scene"></div>
-                    </div>
                 </div>
-                <div class="group1 fn-pl40">
-                    <div class="row xcy-row fn-mb0">
+                <div class="group1">
+                    <div class="row xcy-row">
                         <div class="row-title">报道类型</div>
                         <div class="row-content" data-field="type"></div>
                     </div>
@@ -89,6 +87,35 @@
                                 </div>-->
 
                             </div>
+
+
+                            <div id="j-row-aideo" class="fn-hide">
+                                <div class="xcy-video">
+                                    <div class=""></div>
+                                    <div class="j-uploader-tip upbtn toplayer fn-hide">
+                                        <div class="fn-pt25">
+                                            <i class="pz-icon icon-video"></i>
+                                            <p class="fn-textcenter fn-mt5"></p>
+                                        </div>
+                                    </div>
+                                    <div class="videobar toplayer fn-hide">
+                                        <div class="fn-pt30">
+                                            <span class="close"><i class="pz-icon icon-close"></i></span>
+                                            <i class="pz-icon icon-video"></i>
+                                            <p class="fn-textcenter fn-mt10">点击播放</p>
+                                        </div>
+                                    </div>
+                                    <div id="j-uploader-selectaideo" class="j-uploader-select upbtn fn-cursor-pointer">
+                                        <div class="fn-pt25">
+                                            <i class="pz-icon icon-video"></i>
+                                            <p class="fn-textcenter fn-mt5">点击选择报道音频</p>
+                                        </div>
+                                        <div class="form-group" style="display: none;">
+                                            <input type="file" id="j-locallfile"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,30 +127,30 @@
     </div>
 </div>
 <script type="text/template" id="j-overlay-view">
-    <div class="pz-boxhead fn-w520">
+    <div class="pz-boxhead">
         <em class="icon pz-icon icon-warning"></em>
         <span class="title">报道视频预览</span>
         <span class="close j-overlay-close">
     <em class="pz-icon icon-close"></em>
   </span>
     </div>
-    <div class="pz-boxbody fn-w520">
+    <div class="pz-boxbody">
         <div class="pz-form">
-            <div class="wrap fn-pd20 fn-fs16">
-                <div id="j-viewvideo" style="width:440px;height:270px;background:#000;"></div>
+            <div class="wrap fn-fs16">
+                <div id="j-viewvideo"></div>
             </div>
         </div>
 </script>
 
 <script type="text/template" id="j-overlay-material">
-    <div class="pz-boxhead" style="width:830px;">
+    <div class="pz-boxhead" style="width:6rem;">
         <em class="icon pz-icon icon-warning"></em>
         <span class="title">媒体素材</span>
         <span class="close j-overlay-close">
     <em class="pz-icon icon-close"></em>
   </span>
     </div>
-    <div class="pz-boxbody" style="width:830px;">
+    <div class="pz-boxbody" style="width:6rem;">
         <div class="pz-form">
             <div class="wrap fn-pd10"></div>
         </div>
@@ -150,6 +177,7 @@
     </ul>
     <div class="pz-page fn-mt20 fn-mb10 fn-textcenter"></div>
 </script>
+<script src="/live/content/www/lib/jweixin-1.2.0.js"></script>
 <script src="/live/content/www/lib/prismplayer/prism-min.js"></script>
 <script src="/live/content/www/lib/tplform/tplform-2.0.3.js"></script>
 <script src="/live/content/www/lib/pizza/pizza.js"></script>
