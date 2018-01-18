@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/lib/jweixin-1.2.0.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/lib/pizza/ui.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/lib/pizza/ui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/model/WxCfg.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/model/WxCfg.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/WxCfgService.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/WxCfgService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/WxCfgDao.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/WxCfgDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/WxCfgDao.xml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/WxCfgDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/PortalServiceApp.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/PortalServiceApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/TokenThread.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/TokenThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/WxCfgServiceImpl.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/WxCfgServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -96,14 +84,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WxCfgServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WxCfgServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/WxCfgServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="382">
-              <caret line="182" column="13" lean-forward="true" selection-start-line="182" selection-start-column="13" selection-end-line="182" selection-end-column="13" />
+              <caret line="186" column="13" lean-forward="true" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LiveRptServiceImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="100" column="29" lean-forward="true" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -162,7 +160,7 @@
         <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/WxCfgService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="30" column="101" lean-forward="false" selection-start-line="30" selection-start-column="101" selection-end-line="30" selection-end-column="101" />
+              <caret line="30" column="102" lean-forward="false" selection-start-line="30" selection-start-column="102" selection-end-line="30" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -302,7 +300,6 @@
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/t.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/lib/prismplayer/prism-min.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/backend/mq/threads/LiveRptCallBackThread.java" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/live.css" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css" />
@@ -318,6 +315,7 @@
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/WxCfgDao.java" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/WxCfgService.java" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/WxCfgServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -459,7 +457,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-live" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -473,33 +471,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-live" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="ace-live-service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -513,11 +489,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-live" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
+              <option name="myItemId" value="ace-live-service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -539,11 +515,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-live" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
+              <option name="myItemId" value="ace-live-service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -571,11 +547,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="portal" />
+              <option name="myItemId" value="live" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -589,11 +565,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal" />
+              <option name="myItemId" value="ace-live" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ace-portal-web" />
+              <option name="myItemId" value="ace-live-service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -621,15 +597,103 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="portal" />
+              <option name="myItemId" value="live" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
+              <option name="myItemId" value="impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live-service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="huacainfo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="live" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live-service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="huacainfo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1794,13 +1858,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00340" summary="融媒直播">
-      <created>1515030419102</created>
-      <option name="number" value="00340" />
-      <option name="presentableId" value="LOCAL-00340" />
-      <option name="project" value="LOCAL" />
-      <updated>1515030419104</updated>
-    </task>
     <task id="LOCAL-00341" summary="融媒直播">
       <created>1515030437433</created>
       <option name="number" value="00341" />
@@ -2137,7 +2194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516178306717</updated>
     </task>
-    <option name="localTasksCounter" value="389" />
+    <task id="LOCAL-00389" summary="报道上传">
+      <created>1516263547624</created>
+      <option name="number" value="00389" />
+      <option name="presentableId" value="LOCAL-00389" />
+      <option name="project" value="LOCAL" />
+      <updated>1516263547626</updated>
+    </task>
+    <option name="localTasksCounter" value="390" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2151,7 +2215,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="28" y="23" width="1366" height="678" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2163,12 +2226,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31428573" sideWeight="0.13066465" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329429" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6535714" sideWeight="0.49121523" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.85" sideWeight="0.86933535" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.85" sideWeight="0.86933535" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291815" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32930514" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40106007" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2471,14 +2534,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="100" column="34" lean-forward="false" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -2703,7 +2758,7 @@
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/WxCfgService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="30" column="101" lean-forward="false" selection-start-line="30" selection-start-column="101" selection-end-line="30" selection-end-column="101" />
+          <caret line="30" column="102" lean-forward="false" selection-start-line="30" selection-start-column="102" selection-end-line="30" selection-end-column="102" />
           <folding />
         </state>
       </provider>
@@ -2711,10 +2766,18 @@
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/WxCfgServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="382">
-          <caret line="182" column="13" lean-forward="true" selection-start-line="182" selection-start-column="13" selection-end-line="182" selection-end-column="13" />
+          <caret line="186" column="13" lean-forward="true" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="100" column="29" lean-forward="true" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
