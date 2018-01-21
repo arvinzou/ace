@@ -97,8 +97,8 @@ video {
 
 .xcy-cutimg {
 	position: relative;
-	width: 240px;
-	height: 135px;
+	width: 4.5rem;
+    	height: 3rem;
 	border: 1px dashed #b4bed3;
 	border-radius: .15rem
 }
@@ -112,8 +112,8 @@ video {
 	display: block;
 	margin: 0;
 	padding: 0;
-	width: 240px;
-	height: 135px;
+	width: 4.5rem;
+	height: 3rem;
 	text-align: center;
 	color: #a0a0a0
 }
@@ -124,18 +124,18 @@ video {
 
 .xcy-cutimg .imgbar {
 	position: absolute;
-	width: 240px;
-	height: 135px;
-	border-radius: 5px;
+	width: 4.5rem;
+	height: 3rem;
+	border-radius: .1rem;
 	overflow: hidden;
 	background-color: #fff
 }
 
 .xcy-cutimg .imgbar .logo {
 	position: absolute;
-	margin: 23px 0 0 76px;
-	width: 88px;
-	height: 88px;
+	margin: .3rem 0 0 2.5rem;
+	width: 4rem;
+	height: 2.5rem;
 	overflow: hidden
 }
 

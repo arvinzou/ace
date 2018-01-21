@@ -5,44 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_httpclient_commons_httpclient_3_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/JEEWeiXinX509TrustManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/Token.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/WeChatApiUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-jave/ace-jave.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-autocode/ace-autocode.iml" afterPath="$PROJECT_DIR$/ace-autocode/ace-autocode.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" afterPath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" afterPath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-web/pom.xml" afterPath="$PROJECT_DIR$/ace-common-web/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/web/tools/AccessToken.java" afterPath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/web/tools/AccessToken.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/web/tools/AccessTokenUtil.java" afterPath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/web/tools/AccessTokenUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/web/tools/WebUtils.java" afterPath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/web/tools/WebUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common/ace-common.iml" afterPath="$PROJECT_DIR$/ace-common/ace-common.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common/pom.xml" afterPath="$PROJECT_DIR$/ace-common/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" afterPath="$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/WWWService.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/WWWService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveDao.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveDao.xml" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/WWWServiceImpl.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/WWWServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/WxCfgService.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/WxCfgService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/WxCfgDao.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/WxCfgDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/WxCfgDao.xml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/WxCfgDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/TokenThread.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/TokenThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/WxCfgServiceImpl.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/WxCfgServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -151,7 +115,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rpt.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rpt.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="178">
@@ -163,11 +127,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ui.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ui.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="170" column="13" lean-forward="false" selection-start-line="170" selection-start-column="13" selection-end-line="170" selection-end-column="13" />
+            <state relative-caret-position="-472">
+              <caret line="100" column="21" lean-forward="false" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -322,8 +286,8 @@
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/WxCfgServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/btn.css" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css" />
       </list>
     </option>
   </component>
@@ -1963,13 +1927,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00342" summary="融媒直播">
-      <created>1515030504691</created>
-      <option name="number" value="00342" />
-      <option name="presentableId" value="LOCAL-00342" />
-      <option name="project" value="LOCAL" />
-      <updated>1515030504692</updated>
-    </task>
     <task id="LOCAL-00343" summary="融媒直播">
       <created>1515037601778</created>
       <option name="number" value="00343" />
@@ -2306,7 +2263,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516265447071</updated>
     </task>
-    <option name="localTasksCounter" value="391" />
+    <task id="LOCAL-00391" summary="录音功能">
+      <created>1516536852721</created>
+      <option name="number" value="00391" />
+      <option name="presentableId" value="LOCAL-00391" />
+      <option name="project" value="LOCAL" />
+      <updated>1516536852722</updated>
+    </task>
+    <option name="localTasksCounter" value="392" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2416,7 +2380,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="统战机构" />
     <MESSAGE value="统战活动" />
     <MESSAGE value="指标按季度设置" />
     <MESSAGE value="解决树形结构字典问题" />
@@ -2441,7 +2404,8 @@
     <MESSAGE value="电装运营通用任务" />
     <MESSAGE value="融媒直播" />
     <MESSAGE value="报道上传" />
-    <option name="LAST_COMMIT_MESSAGE" value="报道上传" />
+    <MESSAGE value="录音功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="录音功能" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -2482,6 +2446,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2496,6 +2463,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="37" lean-forward="false" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
+          <folding>
+            <element signature="e#204#205#0" expanded="true" />
+            <element signature="e#238#239#0" expanded="true" />
+            <element signature="e#292#293#0" expanded="true" />
+            <element signature="e#338#339#0" expanded="true" />
+            <element signature="e#371#372#0" expanded="true" />
+            <element signature="e#403#404#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+            <element signature="e#492#493#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2503,6 +2480,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3779">
           <caret line="117" column="32" lean-forward="true" selection-start-line="117" selection-start-column="32" selection-end-line="117" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2658,6 +2638,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="155" column="21" lean-forward="true" selection-start-line="135" selection-start-column="8" selection-end-line="155" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2665,6 +2646,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1727">
           <caret line="15" column="32" lean-forward="false" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2672,6 +2654,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="102" column="32" lean-forward="true" selection-start-line="102" selection-start-column="32" selection-end-line="102" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2679,6 +2664,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2743,14 +2729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="170" column="13" lean-forward="false" selection-start-line="170" selection-start-column="13" selection-end-line="170" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -2758,6 +2736,14 @@
           <folding>
             <element signature="n#style#0;n#div#1;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/ui.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-472">
+          <caret line="100" column="21" lean-forward="false" selection-start-line="100" selection-start-column="21" selection-end-line="100" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
