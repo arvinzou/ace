@@ -294,7 +294,12 @@
                                     <video playsinline="true" x-webkit-airplay="true" webkit-playsinline="true"
                                            x5-video-player-type="h5" x5-video-player-fullscreen="true"></video>
                                 </div>
-                                {@else if item.imageList && item.imageList.length > 0}
+                                {@/if}
+                                {@if item.type == 3}
+                                <audio src="${item.video}" controls="controls" class="audio"/>
+                                {@/if}
+
+                                {@if item.imageList && item.imageList.length > 0}
                                 <div class="pictures" data-count="${item.imageList.length}">
                                     <div class="j-photoswiper imglist${item.imageList.length}">
                                         {@each item.imageList as imgitem, imgindex}
@@ -332,10 +337,11 @@
                                     </div>
                                 </div>
                                 <div id="j-remark-${item.reportId}" class="remark ">
-                                    <em class="arrow"></em>
+                                    <em class="arrow {@if item.comments.length==0} fn-hide {@/if}"></em>
                                     <div class="liker fn-hide" data-liker="${item.liker}"></div>
                                     <div class="line fn-hide"></div>
-                                    <div class="list" id="cmtlist${item.reportId}">
+                                    <div class="list {@if item.comments.length==0} fn-hide {@/if}"
+                                         id="cmtlist${item.reportId}">
                                         {@each item.comments as citem}
                                         <div class="live_msg">
                                             <div class="wxuser">

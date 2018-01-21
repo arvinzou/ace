@@ -137,7 +137,7 @@ function createUpVideo() {
                     Math.ceil(o.size / 1024 / 1024 * 100) / 100;
                     $("#j-uploader-selectvideo").addClass("fn-hide"),
                     $("#j-row-video .j-uploader-tip").removeClass("fn-hide"),
-                    $("#j-row-video .j-uploader-tip p").html("开始上传<em>...</em>"),
+                    $("#j-row-video . p").html("开始上传<em>...</em>"),
                     t.setOption({
                        // url: r,
                         multipart_params: ""
@@ -275,7 +275,13 @@ function(e) {
         if (!r)  {alert("请上传报道视频"); return false;};
         rpt.mediaContent=r;
 
-    }
+    } else if (3 == reportType) {
+             var r =  $("#aideoplay audio").attr("src");
+             if (!r)  {alert("请录制音频"); return false;};
+             rpt.mediaContent=r;
+         }
+
+
     data.rpt=rpt;
     data.imgs=imgs;
     var l = apiServer + "/www/live/insertLiveRpt.do";

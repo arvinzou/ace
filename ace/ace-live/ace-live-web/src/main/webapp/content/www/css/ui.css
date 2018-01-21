@@ -208,7 +208,7 @@ video {
 }
 
 .xcy-video .videobar {
-	width: 240px;
+	width: 100%;
 	color: #fff;
 	text-align: center;
 	z-index: 9

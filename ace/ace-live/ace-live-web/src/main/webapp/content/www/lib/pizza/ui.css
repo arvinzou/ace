@@ -2424,8 +2424,8 @@ to {
 	background-color:rgba(0,0,0,.75)
 }
 .pz-overlay .overlay {
-	top:20%;
-	left:50%
+	top:0%;
+	left:0%
 }
 .pz-overlay .overlay-content {
 	position:absolute;
