@@ -39,9 +39,10 @@
     where appId = #{appId,jdbcType=VARCHAR}
   </update>
 
-  <update id="updateAccessToken">
+    <update id="updateAccessTokenTicket">
     update wx_cfg
     set
+        ticket = #{ticket,jdbcType=VARCHAR},
     accessToken = #{accessToken,jdbcType=VARCHAR},
     expiresIn = #{expiresIn,jdbcType=INTEGER}
     where appId = #{appId,jdbcType=VARCHAR}
@@ -50,7 +51,7 @@
     select appId, appScret, accessToken, expiresIn, name from wx_cfg order by appId
   </select>
 
-  <select id="selectAccessTokenByDeptId" resultType="string">
-    select accessToken from wx_cfg where deptId=#{id}
+    <select id="selectAccessTokenAndTicketByDeptId" resultType="map">
+        select appId,accessToken,ticket from wx_cfg where deptId=#{id}
   </select>
 </mapper>

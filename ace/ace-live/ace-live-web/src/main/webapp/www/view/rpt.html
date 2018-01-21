@@ -90,30 +90,12 @@
 
 
                             <div id="j-row-aideo" class="fn-hide">
-                                <div class="xcy-video">
-                                    <div class=""></div>
-                                    <div class="j-uploader-tip upbtn toplayer fn-hide">
-                                        <div class="fn-pt25">
-                                            <i class="pz-icon icon-video"></i>
-                                            <p class="fn-textcenter fn-mt5"></p>
-                                        </div>
-                                    </div>
-                                    <div class="videobar toplayer fn-hide">
-                                        <div class="fn-pt30">
-                                            <span class="close"><i class="pz-icon icon-close"></i></span>
-                                            <i class="pz-icon icon-video"></i>
-                                            <p class="fn-textcenter fn-mt10">点击播放</p>
-                                        </div>
-                                    </div>
-                                    <div id="j-uploader-selectaideo" class="j-uploader-select upbtn fn-cursor-pointer">
-                                        <div class="fn-pt25">
-                                            <i class="pz-icon icon-video"></i>
-                                            <p class="fn-textcenter fn-mt5">点击选择报道音频</p>
-                                        </div>
-                                        <div class="form-group" style="display: none;">
-                                            <input type="file" id="j-locallfile"/>
-                                        </div>
-                                    </div>
+                                <div id="j-uploader-selectaideo" class="btn-record">
+                                    按下开始
+                                </div>
+                                <div style="width:100%;height:.25rem"></div>
+                                <div id="aideoplay" class="fn-hide audio">
+                                    <audio src="" controls="controls" class="audio"/>
                                 </div>
                             </div>
                         </div>
@@ -185,5 +167,24 @@
 <script src="/live/content/www/js/common.js"></script>
 <script src="/live/content/www/js/material.js"></script>
 <script src="/live/content/www/live/rpt.js"></script>
+<style>
+    .btn-record{
+        text-align: center;
+        line-height: 3rem;
+        background:green;
+         color:#fff
+    }
+    .btn-record-ing{
+        text-align: center;
+        line-height:3rem;
+        background:blue;
+        color:#fff
+    }
+    .audio{
+        padding-top:.3rem;
+        width:100%;
+    }
+
+</style>
 </body>
 </html>

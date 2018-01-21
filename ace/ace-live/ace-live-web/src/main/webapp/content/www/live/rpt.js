@@ -322,20 +322,103 @@ function videoPlayer(e, n, t) {
 lvsCmd.ajax(apiServer + "/www/live/getWxJsSign.do", {companyId: lvsCmd.urlParams.companyId},
     function(e, i) {
         wx.config({
-            debug: true,
+            debug: false,
             appId: i.data.appId,
-            timestamp: (new Date).getTime(),
+            timestamp: i.data.timestamp,
             nonceStr: i.data.nonceStr,
             signature: i.data.signature,
-            jsApiList: ["startRecord", "stopRecord", "onVoiceRecordEnd","playVoice","pauseVoice","stopVoice","onVoicePlayEnd","uploadVoice","downloadVoice","translateVoice"]
+            jsApiList: ["startRecord", "stopRecord", "onVoiceRecordEnd","playVoice","pauseVoice",
+            "stopVoice","onVoicePlayEnd","uploadVoice","downloadVoice","translateVoice",'chooseImage',
+            'previewImage',
+             'uploadImage',
+             'downloadImage',
+             'getNetworkType',
+             'openLocation',
+             'getLocation',
+             'hideOptionMenu',
+             'showOptionMenu',
+             'closeWindow',
+             'scanQRCode',
+             'chooseWXPay',
+             'openProductSpecificView',
+             'addCard',
+             'chooseCard',
+             'openCard']
         })
         console.log( i.data);
 })
 
 wx.ready(function(){
-    alert("微信接口初始化OK");
+    wx.onVoicePlayEnd({
+        success: function (res) {
+            stopWave();
+        }
+    });
 });
-
 wx.error(function(res){
     alert("微信接口初始化失败");
 });
+var localId;
+
+$('#j-uploader-selectaideo').on('touchstart', function(event){
+    event.preventDefault();
+    START = new Date().getTime();
+
+    recordTimer = setTimeout(function(){
+        wx.startRecord({
+            success: function(){
+                localStorage.rainAllowRecord = 'true';
+                $("#j-uploader-selectaideo").removeClass("btn-record");
+                $("#j-uploader-selectaideo").addClass("btn-record-ing");
+            },
+            cancel: function () {
+                alert('用户拒绝授权录音');
+            }
+        });
+    },300);
+});
+//松手结束录音
+$('#j-uploader-selectaideo').on('touchend', function(event){
+    event.preventDefault();
+    END = new Date().getTime();
+    if((END - START) < 300){
+        END = 0;
+        START = 0;
+        //小于300ms，不录音
+        clearTimeout(recordTimer);
+    }else{
+        wx.stopRecord({
+          success: function (res) {
+            localId = res.localId;
+            $("#j-uploader-selectaideo").addClass("btn-record");
+            $("#j-uploader-selectaideo").removeClass("btn-record-ing");
+            /*wx.playVoice({
+                localId: localId
+            });*/
+            uploadVoice(localId);
+          },
+          fail: function (res) {
+
+          }
+        });
+    }
+});
+
+//上传录音
+function uploadVoice(localId){
+    //调用微信的上传录音接口把本地录音先上传到微信的服务器
+    //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
+    wx.uploadVoice({
+        localId: localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+        isShowProgressTips: 1, // 默认为1，显示进度提示
+        success: function (res) {
+           var l = apiServer + "/www/live/uploadAmr.do";
+           lvsCmd.ajax(l, {deptId:lvsCmd.urlParams.companyId,serverId:res.serverId},
+           function(e, t) {
+                $("#aideoplay").removeClass("fn-hide");
+                $("#aideoplay audio").attr("src",cfg.fastdfs_server+t.value.filePath);
+           });
+        }
+    });
+}
+

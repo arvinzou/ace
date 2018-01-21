@@ -167,21 +167,20 @@ video {
 
 .xcy-video {
 	position: relative;
-	width: 240px;
-	height: 135px;
+	width: 100%;
+	height: 3rem;
 	border: 1px dashed #b4bed3;
-	border-radius: 5px
+	border-radius: .1rem
 }
 
 .xcy-video .imgbar,.xcy-video .videobar {
-	height: 135px;
-	border-radius: 5px;
+	height: 3rem;
+	border-radius: .1rem;
 	position: absolute;
 	background: #000000;
 }
 
 .xcy-video .imgbar {
-	width: 240px;
 	overflow: hidden
 }
 
@@ -194,14 +193,13 @@ video {
 	display: block;
 	margin: 0;
 	padding: 0;
-	width: 240px;
-	height: 135px;
+	height: 3rem;
 	text-align: center;
 	color: #a0a0a0
 }
 
 .xcy-video .upbtn .pz-icon,.xcy-video label.upbtn .pz-icon {
-	font-size: 48px
+	font-size: 1rem
 }
 
 .xcy-video .upbtn.toplayer,.xcy-video label.upbtn.toplayer {

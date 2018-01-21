@@ -27,9 +27,9 @@ public interface WxCfgDao {
 
 	int isExit(WxCfg record);
 
-	int updateAccessToken(@Param("appId")String appId,@Param("accessToken")String accessToken,@Param("expiresIn")int expiresIn);
+    int updateAccessTokenTicket(@Param("appId") String appId, @Param("accessToken") String accessToken, @Param("expiresIn") int expiresIn, @Param("ticket") String ticket);
     List<Map<String,Object>> selectAppList();
 
-    String selectAccessTokenByDeptId(String id);
+    Map<String, String> selectAccessTokenAndTicketByDeptId(String id);
 
 }

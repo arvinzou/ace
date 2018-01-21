@@ -48,8 +48,6 @@ public interface LiveDao {
     Map<String, Object> getShareContent(@Param("deptId") String deptId);
 
 
-    Map<String, Object> getWxJsSign(@Param("deptId") String deptId);
-
     int updateRptLikeNum(String id);
 
     int updateLiveLikeNum(String id);

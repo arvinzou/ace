@@ -219,7 +219,14 @@
 			<artifactId>icepdf-core</artifactId>
 			<version>6.2.2</version>
 		</dependency>
-	</dependencies>
+        <!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient -->
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin>

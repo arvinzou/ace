@@ -1,18 +1,17 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.InputStream;
-import java.util.UUID;
 import java.security.MessageDigest;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import com.huacainfo.ace.common.fastdfs.IFile;
+import com.huacainfo.ace.common.web.tools.WebUtils;
 import com.huacainfo.ace.portal.dao.RoleDao;
 import com.huacainfo.ace.portal.model.WxFormid;
 import org.apache.ibatis.session.ExecutorType;
@@ -43,6 +42,10 @@ public class WxCfgServiceImpl implements WxCfgService {
 	private DataBaseLogService dataBaseLogService;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+
+	@Autowired
+	private IFile fileSaver;
 
 	public PageResult<WxCfgVo> findWxCfgList(WxCfgQVo condition, int start,
 			int limit, String orderBy) throws Exception {
@@ -92,8 +95,8 @@ public class WxCfgServiceImpl implements WxCfgService {
 		return new MessageResponse(0, "微信小程序删除完成！");
 	}
 
-	public  void updateAccessToken(String appid,String accessToken,int expiresIn){
-		this.wxCfgDao.updateAccessToken(appid,accessToken,expiresIn);
+	public void updateAccessTokenTicket(String appid, String accessToken, String ticket, int expiresIn) {
+		this.wxCfgDao.updateAccessTokenTicket(appid, accessToken, expiresIn, ticket);
 
 	}
 
@@ -129,48 +132,18 @@ public class WxCfgServiceImpl implements WxCfgService {
 	}
 
 	@Override
-	public SingleResult<String> selectAccessTokenByDeptId(String deptId) throws Exception {
-		SingleResult<String> rst = new SingleResult<>();
-		rst.setValue(this.wxCfgDao.selectAccessTokenByDeptId(deptId));
+	public SingleResult<Map<String, String>> selectAccessTokenAndTicketByDeptId(String deptId) throws Exception {
+		SingleResult<Map<String, String>> rst = new SingleResult<>();
+		rst.setValue(this.wxCfgDao.selectAccessTokenAndTicketByDeptId(deptId));
 		return rst;
 	}
 
-	@Override
-	public SingleResult<String> getTicket(String access_token) {
-		String ticket = null;
-		String url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + access_token + "&type=jsapi";//这个url链接和参数不能变
-		try {
-			URL urlGet = new URL(url);
-			HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
-			http.setRequestMethod("GET"); // 必须是get方式请求
-			http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-			http.setDoOutput(true);
-			http.setDoInput(true);
-			System.setProperty("sun.net.client.defaultConnectTimeout", "30000");// 连接超时30秒
-			System.setProperty("sun.net.client.defaultReadTimeout", "30000"); // 读取超时30秒
-			http.connect();
-			InputStream is = http.getInputStream();
-			int size = is.available();
-			byte[] jsonBytes = new byte[size];
-			is.read(jsonBytes);
-			String message = new String(jsonBytes, "UTF-8");
-			JSONObject demoJson = JSON.parseObject(message);
-			logger.info("JSON字符串:", demoJson);
-			ticket = demoJson.getString("ticket");
-			is.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		SingleResult<String> rst = new SingleResult<>();
-		rst.setValue(ticket);
-		return rst;
-	}
 
 	@Override
-	public SingleResult<String> getSignature(String url, String accessToken) throws Exception {
-		SingleResult<String> rst = new SingleResult<>();
+	public SingleResult<Map<String, Object>> getSignature(String url, String appId, String accessToken, String jsapi_ticket) throws Exception {
+		SingleResult<Map<String, Object>> rst = new SingleResult<>();
+		Map<String, Object> o = new HashMap<>();
 		//2、获取Ticket
-		String jsapi_ticket = this.getTicket(accessToken).getValue();
 		//3、时间戳和随机字符串
 		String noncestr = UUID.randomUUID().toString().replace("-", "").substring(0, 16);//随机字符串
 		String timestamp = String.valueOf(System.currentTimeMillis() / 1000);//时间戳
@@ -179,7 +152,11 @@ public class WxCfgServiceImpl implements WxCfgService {
 		String str = "jsapi_ticket=" + jsapi_ticket + "&noncestr=" + noncestr + "&timestamp=" + timestamp + "&url=" + url;
 		//6、将字符串进行sha1加密
 		String signature = SHA1(str);
-		rst.setValue(signature);
+		o.put("appId", appId);
+		o.put("signature", signature);
+		o.put("nonceStr", noncestr);
+		o.put("timestamp", timestamp);
+		rst.setValue(o);
 		return rst;
 	}
 
@@ -204,5 +181,29 @@ public class WxCfgServiceImpl implements WxCfgService {
 			this.logger.error(e.getMessage());
 		}
 		return "";
+	}
+
+	@Override
+	public SingleResult<Map<String, String>> getRecordFile(String deptId, String serverId) throws Exception {
+		SingleResult<Map<String, String>> rst = new SingleResult<>();
+		Map<String, String> o = new HashMap<>();
+
+
+		String accessToken = this.selectAccessTokenAndTicketByDeptId(deptId).getValue().get("accessToken");
+		this.logger.info("accessToken->{}", accessToken);
+		String url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + serverId;
+		this.logger.info("url->{}", url);
+		String saveDir = "/tmp/";
+		String id = UUID.randomUUID().toString();
+		String sourcePath = saveDir + id + ".amr";
+		String targetPath = saveDir + id + ".mp3";
+		WebUtils.downloadByApacheCommonIO(url, saveDir, id + ".amr");
+		WebUtils.changeToMp3(sourcePath, targetPath);
+		java.io.File mp3 = new java.io.File(targetPath);
+		String filePath = fileSaver.saveFile(mp3, id + ".mp3");
+		o.put("filePath", filePath);
+		this.logger.info("===============>{}", filePath);
+		rst.setValue(o);
+		return rst;
 	}
 }
