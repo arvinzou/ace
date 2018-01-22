@@ -80,18 +80,12 @@ public class WebAccessDecisionSecurityFilter implements Filter {
 			if(httpReq.getRequestURI().indexOf("www")!=-1){
 				if (httpReq.getRequestURI().indexOf("www/view") != -1) {
 					if (session.getAttribute(CommonKeys.SESSION_USERINFO_KEY) == null) {
-                        Map o = new HashedMap();
-						o.put("openid", "oFvIjw8x1--0lQkUhO1Ta3L59o3c");
-						o.put("nickname", "热情的沙漠");
-						o.put("headimgurl", "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJLnWlZ5QwperRWRswicfELLia3cqTuLJapz3jX27VY19mwRianduy9cibSefAlnGRxNH341Qnic5w9aEg/0");
-						//session.setAttribute(CommonKeys.SESSION_USERINFO_KEY, o);
 						String appid = PropertyUtil.getProperty("appid");
 						String redirect_uri = PropertyUtil.getProperty("redirect_uri");
 						String scope = PropertyUtil.getProperty("scope");
 						String state = PropertyUtil.getProperty("state");
 						redirectPage = this.authorize(appid, redirect_uri, scope, state);
 						accessable = false;
-						//LOGGER.info("======>{}", session.getAttribute(CommonKeys.SESSION_USERINFO_KEY));
 					} else {
 						accessable = true;
 					}
