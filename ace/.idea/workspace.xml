@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/oauth2/view/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/security/filter/WebAccessDecisionSecurityFilter.java" afterPath="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/security/filter/WebAccessDecisionSecurityFilter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/model/Userinfo.java" afterPath="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/model/Userinfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/UserinfoDao.xml" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/UserinfoDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/OAuth2ServiceImpl.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/OAuth2ServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
     <ignored path="$PROJECT_DIR$/ace-kernel/target/" />
@@ -90,16 +86,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OAuth2Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/OAuth2Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-77">
-              <caret line="53" column="25" lean-forward="false" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="WWWController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -113,11 +99,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="msg.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="msg.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="810">
               <caret line="54" column="12" lean-forward="false" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="226" column="53" lean-forward="false" selection-start-line="226" selection-start-column="46" selection-end-line="226" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -143,11 +139,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="live.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="live.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10336">
-              <caret line="957" column="73" lean-forward="false" selection-start-line="957" selection-start-column="73" selection-end-line="957" selection-end-column="73" />
+            <state relative-caret-position="240">
+              <caret line="138" column="14" lean-forward="false" selection-start-line="138" selection-start-column="14" selection-end-line="138" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -196,8 +192,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.pz-form .row.xcy-row .row-content</find>
-      <find>font-size</find>
       <find>.pz-form .row-content input</find>
       <find>select, textarea</find>
       <find>body, button, input, select, textarea</find>
@@ -211,7 +205,6 @@
       <find>.pz-form .row-title</find>
       <find>pz-overlay .overlay</find>
       <find>.pz-boxhead</find>
-      <find>rpt.html</find>
       <find>getWxJsSign</find>
       <find>j-viewvideo</find>
       <find>OL5L</find>
@@ -226,6 +219,9 @@
       <find>list</find>
       <find>getReport</find>
       <find>sort</find>
+      <find>rpt.html</find>
+      <find>adminrpt</find>
+      <find>admin</find>
     </findStrings>
     <replaceStrings>
       <replace>1.8</replace>
@@ -325,15 +321,15 @@
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/live.css" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html" />
         <option value="$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/security/filter/WebAccessDecisionSecurityFilter.java" />
         <option value="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/model/Userinfo.java" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/OAuth2ServiceImpl.java" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/UserinfoDao.java" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/dao/UserinfoDao.xml" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/oauth2/view/index.html" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" />
       </list>
     </option>
   </component>
@@ -2481,13 +2477,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00346" summary="融媒直播">
-      <created>1515311974184</created>
-      <option name="number" value="00346" />
-      <option name="presentableId" value="LOCAL-00346" />
-      <option name="project" value="LOCAL" />
-      <updated>1515311974185</updated>
-    </task>
     <task id="LOCAL-00347" summary="融媒直播">
       <created>1515404643778</created>
       <option name="number" value="00347" />
@@ -2824,7 +2813,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516587410279</updated>
     </task>
-    <option name="localTasksCounter" value="395" />
+    <task id="LOCAL-00395" summary="录音功能">
+      <created>1516595406426</created>
+      <option name="number" value="00395" />
+      <option name="presentableId" value="LOCAL-00395" />
+      <option name="project" value="LOCAL" />
+      <updated>1516595406427</updated>
+    </task>
+    <option name="localTasksCounter" value="396" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2855,7 +2851,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291815" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40785497" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17824773" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2895,7 +2891,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6535714" sideWeight="0.49121523" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5928571" sideWeight="0.86933535" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5928571" sideWeight="0.86933535" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985073" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291815" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40785497" sideWeight="0.69803923" order="0" side_tool="false" content_ui="combo" />
@@ -3222,17 +3218,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1561">
-          <caret line="184" column="4" lean-forward="false" selection-start-line="184" selection-start-column="4" selection-end-line="187" selection-end-column="5" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#3;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#div#0;n#div#1;n#div#1;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/model/Userinfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1119">
@@ -3285,14 +3270,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5070">
-          <caret line="338" column="50" lean-forward="false" selection-start-line="338" selection-start-column="41" selection-end-line="338" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/OAuth2Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-77">
@@ -3333,14 +3310,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10336">
-          <caret line="957" column="73" lean-forward="false" selection-start-line="957" selection-start-column="73" selection-end-line="957" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-common-web/src/main/java/com/huacainfo/ace/common/security/filter/WebAccessDecisionSecurityFilter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -3368,10 +3337,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/rpt.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2159">
+          <caret line="187" column="5" lean-forward="false" selection-start-line="184" selection-start-column="4" selection-end-line="187" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
           <caret line="54" column="12" lean-forward="false" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="226" column="53" lean-forward="false" selection-start-line="226" selection-start-column="46" selection-end-line="226" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="138" column="14" lean-forward="false" selection-start-line="138" selection-start-column="14" selection-end-line="138" selection-end-column="14" />
           <folding />
         </state>
       </provider>

@@ -133,6 +133,10 @@ function getInfo() {
                 type:"1"
             },
             i = !0;
+            if(wxuser.role&&wxuser.role=='admin'){
+                $("#adminrpt").removeClass("fn-hide");
+            };
+            //alert(wxuser.role);
              $("#adminrpt").on(tap,
              function(){
                 console.log(i);
