@@ -132,6 +132,7 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         } else {
             this.userinfoDao.insert(o);
         }
+        o = this.userinfoDao.selectByPrimaryKey(o.getUnionid());
         SingleResult<Userinfo> sr = new SingleResult<Userinfo>(0, "同步微信用户完成！");
         sr.setValue(o);
         return sr;

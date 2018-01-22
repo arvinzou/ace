@@ -6,7 +6,8 @@
        };*/
       //判断当前浏览器是否支持WebSocket
       if('WebSocket' in window){
-          websocketMsg = new ReconnectingWebSocket("ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg");
+          var url="ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
+          websocketMsg = new ReconnectingWebSocket(url);
       }
       else{
           alert('Not support websocketMsg');
@@ -14,12 +15,14 @@
 
       //连接发生错误的回调方法
       websocketMsg.onerror = function(){
+            alert("onerror");
           //setMessageInnerHTML("error");
       };
 
       //连接成功建立的回调方法
       websocketMsg.onopen = function(event){
           //setMessageInnerHTML("open");
+         // alert("onopen ok");
       };
 
       //接收到消息的回调方法
@@ -49,6 +52,7 @@
               load=false;
               getReport(reportPage);
           }
+          //alert(data.header.type);
 
       };
 
@@ -82,6 +86,7 @@
 
 
       function submitMsg(){
+
          var message={};
          message.header={
             type:1,
