@@ -39,9 +39,16 @@
                var html = juicer(tpl, data);
                var el="#cmtlist"+data.id;
                $(el).append(html);
+                $(el).removeClass("fn-hide");
+                var els="#j-remark-"+data.id+" em";
+                $(els).removeClass("fn-hide");
                //var cmtlist = document.getElementById(el);
                //cmtlist.scrollTop = cmtlist.scrollHeight;
            }
+           if(data.header.type==3){
+              load=false;
+              getReport(reportPage);
+          }
 
       };
 

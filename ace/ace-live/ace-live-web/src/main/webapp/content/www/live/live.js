@@ -296,7 +296,7 @@ function reportContent(e) {
 var load=false;
 function getReport(e, i) {
     if(load){
-       // return;
+        return;
     }
     reprtLoading = !0,
     i || $("#j-listmore").removeClass("fn-hide"),
@@ -830,6 +830,7 @@ if (getReport(reportPage), setInterval(function() {
 },
 1e4), $("#j-sort").on(tap,
 function() {
+     load=false;
     return ! reportLoading && (0 == reportSort ? (reportSort = 1, $(this).html("正序")) : (reportSort = 0, $(this).html("倒序")), reportLoadEnd = !1, reportPage = 1, $("#j-report").height($("#j-report").height()), $("#j-report").html(""), getReport(reportPage), void(cutWindowScrollTop = 0))
 }),
 
