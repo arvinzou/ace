@@ -4,19 +4,13 @@
            nickname:"王昭",
            openid:"oCjYM0d0x60MkCh5LWt7bPPxUq_I"
        };*/
-      //判断当前浏览器是否支持WebSocket
-      if('WebSocket' in window){
-          var url="ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
-          websocketMsg = new ReconnectingWebSocket(url);
-      }
-      else{
-          alert('Not support websocketMsg');
-      }
+
 
       //连接发生错误的回调方法
       websocketMsg.onerror = function(){
-            alert("onerror");
-          //setMessageInnerHTML("error");
+          var url="ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
+          alert(url);
+          setTimeout("initWebSocket",5000);
       };
 
       //连接成功建立的回调方法
@@ -97,3 +91,15 @@
          websocketMsg.send(JSON.stringify(message));
         return false;
       }
+
+      function initWebSocket(){
+      //判断当前浏览器是否支持WebSocket
+            if('WebSocket' in window){
+                var url="ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
+                websocketMsg = new ReconnectingWebSocket(url);
+            }
+            else{
+                alert('Not support websocketMsg');
+            }
+      }
+      setTimeout("initWebSocket",3000);

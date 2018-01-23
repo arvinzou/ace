@@ -27,9 +27,11 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<listener>
-		<listener-class>com.huacainfo.ace.live.web.websocket.RequestListener</listener-class>
-	</listener>
+    <!--
+    <listener>
+        <listener-class>com.huacainfo.ace.live.web.websocket.RequestListener</listener-class>
+    </listener>
+    -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>
