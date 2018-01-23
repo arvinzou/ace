@@ -112,7 +112,7 @@
         var settings = {
 
             /** Whether this instance should log debug messages. */
-            debug: false,
+            debug: true,
 
             /** Whether or not the websocket should attempt to connect immediately upon instantiation. */
             automaticOpen: true,
@@ -282,6 +282,7 @@
                 eventTarget.dispatchEvent(e);
             };
             ws.onerror = function(event) {
+                //alert(JSON.stringify(event));
                 if (self.debug || ReconnectingWebSocket.debugAll) {
                     console.debug('ReconnectingWebSocket', 'onerror', self.url, event);
                 }

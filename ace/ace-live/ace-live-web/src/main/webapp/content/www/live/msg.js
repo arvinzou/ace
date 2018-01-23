@@ -49,10 +49,11 @@
               console.log(url);
               console.log(websocketMsg);
                 //连接发生错误的回调方法
-              websocketMsg.onerror = function(){
+              websocketMsg.onerror = function(event){
                   var url="ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
-                  alert("对不起，双向网络初始化错误，请刷新重试");
+                  alert(wxuser.nickname+"对不起，双向网络初始化错误，请刷新重试\n"+url+"\n"+JSON.stringify(event));
                   console.log("websocket init onerror it will reconnecting after 5000 ms");
+                  console.log(event);
                   setTimeout("initWebSocket()",5000);
               };
 
