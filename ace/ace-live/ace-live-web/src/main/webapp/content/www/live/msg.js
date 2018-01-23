@@ -60,7 +60,7 @@
               websocketMsg.onopen = function(event){
                   //setMessageInnerHTML("open");
                  // alert("onopen ok");
-                 alert("您好，系统已启用双向通讯功能进行直播请确认");
+                 alert(wxuser.nickname+"您好，系统已启用双向通讯功能进行直播请确认");
               };
 
               //接收到消息的回调方法
