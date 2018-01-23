@@ -51,7 +51,7 @@
                 //连接发生错误的回调方法
               websocketMsg.onerror = function(){
                   var url="ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
-                  alert(url);
+                  alert("对不起，双向网络初始化错误，请刷新重试");
                   console.log("websocket init onerror it will reconnecting after 5000 ms");
                   setTimeout("initWebSocket()",5000);
               };
@@ -60,6 +60,7 @@
               websocketMsg.onopen = function(event){
                   //setMessageInnerHTML("open");
                  // alert("onopen ok");
+                 alert("您好，系统已启用双向通讯功能进行直播请确认");
               };
 
               //接收到消息的回调方法
