@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="65a12c58-4c03-4db4-95b4-3f11e7b41d0a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/websocket/MyWebSocket.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/websocket/MyWebSocket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/WEB-INF/web.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-kernel/ace-kernel-service/target/" />
@@ -90,8 +88,18 @@
       <file leaf-file-name="msg.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="36" lean-forward="false" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+            <state relative-caret-position="311">
+              <caret line="54" column="88" lean-forward="false" selection-start-line="54" selection-start-column="88" selection-end-line="54" selection-end-column="88" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4247">
+              <caret line="226" column="53" lean-forward="false" selection-start-line="226" selection-start-column="46" selection-end-line="226" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -472,6 +480,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1817,13 +1863,6 @@
       <option name="presentableId" value="Default" />
       <updated>1491306354778</updated>
     </task>
-    <task id="LOCAL-00349" summary="融媒直播">
-      <created>1515481943666</created>
-      <option name="number" value="00349" />
-      <option name="presentableId" value="LOCAL-00349" />
-      <option name="project" value="LOCAL" />
-      <updated>1515481943667</updated>
-    </task>
     <task id="LOCAL-00350" summary="融媒直播">
       <created>1515482899467</created>
       <option name="number" value="00350" />
@@ -2160,7 +2199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516619063978</updated>
     </task>
-    <option name="localTasksCounter" value="398" />
+    <task id="LOCAL-00398" summary="录音功能">
+      <created>1516690569231</created>
+      <option name="number" value="00398" />
+      <option name="presentableId" value="LOCAL-00398" />
+      <option name="project" value="LOCAL" />
+      <updated>1516690569232</updated>
+    </task>
+    <option name="localTasksCounter" value="399" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -2595,17 +2641,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="226" column="53" lean-forward="false" selection-start-line="226" selection-start-column="46" selection-end-line="226" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="138" column="14" lean-forward="false" selection-start-line="138" selection-start-column="14" selection-end-line="138" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2673,10 +2713,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4247">
+          <caret line="226" column="53" lean-forward="false" selection-start-line="226" selection-start-column="46" selection-end-line="226" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="36" lean-forward="false" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+        <state relative-caret-position="311">
+          <caret line="54" column="88" lean-forward="false" selection-start-line="54" selection-start-column="88" selection-end-line="54" selection-end-column="88" />
           <folding />
         </state>
       </provider>
