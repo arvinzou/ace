@@ -236,7 +236,6 @@ function(e) {
         mediaType: reportType,
         content: e.data.content,
         mediaContent:""
-
     };
 
     var imgs=[];
