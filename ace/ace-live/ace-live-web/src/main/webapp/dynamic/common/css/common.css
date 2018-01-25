@@ -1,0 +1,14 @@
+body {
+	font-family: "Microsoft YaHei",NSimSun,SimSun,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.container-fluid{
+	padding-right: 40px!important;
+	padding-left: 40px!important;
+}
+/*超出省略*/
+.omission{
+	word-break: keep-all;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
