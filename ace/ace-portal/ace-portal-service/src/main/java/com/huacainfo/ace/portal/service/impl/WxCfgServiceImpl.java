@@ -1,10 +1,17 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.net.URL;
+import java.net.HttpURLConnection;
+import java.io.InputStream;
+import java.security.MessageDigest;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
+import com.huacainfo.ace.common.fastdfs.IFile;
+import com.huacainfo.ace.common.web.tools.WebUtils;
 import com.huacainfo.ace.portal.dao.RoleDao;
 import com.huacainfo.ace.portal.model.WxFormid;
 import org.apache.ibatis.session.ExecutorType;
@@ -35,6 +42,10 @@ public class WxCfgServiceImpl implements WxCfgService {
 	private DataBaseLogService dataBaseLogService;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+
+	@Autowired
+	private IFile fileSaver;
 
 	public PageResult<WxCfgVo> findWxCfgList(WxCfgQVo condition, int start,
 			int limit, String orderBy) throws Exception {
@@ -84,8 +95,8 @@ public class WxCfgServiceImpl implements WxCfgService {
 		return new MessageResponse(0, "微信小程序删除完成！");
 	}
 
-	public  void updateAccessToken(String appid,String accessToken,int expiresIn){
-		this.wxCfgDao.updateAccessToken(appid,accessToken,expiresIn);
+	public void updateAccessTokenTicket(String appid, String accessToken, String ticket, int expiresIn) {
+		this.wxCfgDao.updateAccessTokenTicket(appid, accessToken, expiresIn, ticket);
 
 	}
 
@@ -118,5 +129,81 @@ public class WxCfgServiceImpl implements WxCfgService {
 			session.close();
 		}
 		return new MessageResponse(0, "保存完成！");
+	}
+
+	@Override
+	public SingleResult<Map<String, String>> selectAccessTokenAndTicketByDeptId(String deptId) throws Exception {
+		SingleResult<Map<String, String>> rst = new SingleResult<>();
+		rst.setValue(this.wxCfgDao.selectAccessTokenAndTicketByDeptId(deptId));
+		return rst;
+	}
+
+
+	@Override
+	public SingleResult<Map<String, Object>> getSignature(String url, String appId, String accessToken, String jsapi_ticket) throws Exception {
+		SingleResult<Map<String, Object>> rst = new SingleResult<>();
+		Map<String, Object> o = new HashMap<>();
+		//2、获取Ticket
+		//3、时间戳和随机字符串
+		String noncestr = UUID.randomUUID().toString().replace("-", "").substring(0, 16);//随机字符串
+		String timestamp = String.valueOf(System.currentTimeMillis() / 1000);//时间戳
+		this.logger.info("accessToken:" + accessToken + "\njsapi_ticket:" + jsapi_ticket + "\n时间戳：" + timestamp + "\n随机字符串：" + noncestr);
+		//5、将参数排序并拼接字符串
+		String str = "jsapi_ticket=" + jsapi_ticket + "&noncestr=" + noncestr + "&timestamp=" + timestamp + "&url=" + url;
+		//6、将字符串进行sha1加密
+		String signature = SHA1(str);
+		o.put("appId", appId);
+		o.put("signature", signature);
+		o.put("nonceStr", noncestr);
+		o.put("timestamp", timestamp);
+		rst.setValue(o);
+		return rst;
+	}
+
+	private String SHA1(String decript) throws Exception {
+		try {
+			MessageDigest digest = java.security.MessageDigest.getInstance("SHA-1");
+			digest.update(decript.getBytes());
+			byte messageDigest[] = digest.digest();
+			// Create Hex String
+			StringBuffer hexString = new StringBuffer();
+			// 字节数组转换为 十六进制 数
+			for (int i = 0; i < messageDigest.length; i++) {
+				String shaHex = Integer.toHexString(messageDigest[i] & 0xFF);
+				if (shaHex.length() < 2) {
+					hexString.append(0);
+				}
+				hexString.append(shaHex);
+			}
+			return hexString.toString();
+
+		} catch (Exception e) {
+			this.logger.error(e.getMessage());
+		}
+		return "";
+	}
+
+	@Override
+	public SingleResult<Map<String, String>> getRecordFile(String deptId, String serverId) throws Exception {
+		SingleResult<Map<String, String>> rst = new SingleResult<>();
+		Map<String, String> o = new HashMap<>();
+
+
+		String accessToken = this.selectAccessTokenAndTicketByDeptId(deptId).getValue().get("accessToken");
+		this.logger.info("accessToken->{}", accessToken);
+		String url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=" + accessToken + "&media_id=" + serverId;
+		this.logger.info("url->{}", url);
+		String saveDir = "/tmp/";
+		String id = UUID.randomUUID().toString();
+		String sourcePath = saveDir + id + ".amr";
+		String targetPath = saveDir + id + ".mp3";
+		WebUtils.downloadByApacheCommonIO(url, saveDir, id + ".amr");
+		WebUtils.changeToMp3(sourcePath, targetPath);
+		java.io.File mp3 = new java.io.File(targetPath);
+		String filePath = fileSaver.saveFile(mp3, id + ".mp3");
+		o.put("filePath", filePath);
+		this.logger.info("===============>{}", filePath);
+		rst.setValue(o);
+		return rst;
 	}
 }

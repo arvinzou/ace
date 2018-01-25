@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.model.LiveMsg;
@@ -14,6 +15,7 @@ import com.huacainfo.ace.live.service.LiveRptService;
 import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.web.websocket.WebSocketSub;
 import com.huacainfo.ace.live.web.websocket.MyWebSocket;
+import com.huacainfo.ace.portal.service.FilesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.huacainfo.ace.portal.service.WxCfgService;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -56,6 +58,11 @@ public class WWWController extends LiveBaseController {
 
     @Autowired
     private IFile fileSaver;
+    @Autowired
+    private WxCfgService WxCfgService;
+
+    @Autowired
+    private FilesService filesService;
 
 
     /**
@@ -98,8 +105,15 @@ public class WWWController extends LiveBaseController {
     @RequestMapping(value = "/getWxJsSign.do")
     @ResponseBody
     public Map<String, Object> getWxJsSign(String companyId) throws Exception {
+        String url = this.getRequest().getHeader("referer");
+        this.logger.info("url->{}", url);
         Map<String, Object> rst = new HashMap<>();
-        rst.put("data", this.wwwService.getWxJsSign(companyId));
+        Map<String, String> o = WxCfgService.selectAccessTokenAndTicketByDeptId(companyId).getValue();
+        this.logger.info("accessToken->{}", o.get("accessToken"));
+        this.logger.info("ticket->{}", o.get("ticket"));
+        Map<String, Object> signature = WxCfgService.getSignature(url, o.get("appId"), o.get("accessToken"), o.get("ticket")).getValue();
+        this.logger.info("signature->{}", signature);
+        rst.put("data", signature);
         rst.put("status", 0);
         return rst;
     }
@@ -259,12 +273,19 @@ public class WWWController extends LiveBaseController {
             fileNames[i] = this.fileSaver.saveFile(dest,
                     o.getOriginalFilename());
             dest.delete();
+            filesService.insertFiles(fileNames[i], this.getCurUserProp());
             rst.put("success", true);
             rst.put("msg", "成功");
             rst.put("file_path", fileNames[i]);
             i++;
         }
         return rst;
+    }
+
+    @RequestMapping(value = "/uploadAmr.do")
+    @ResponseBody
+    public SingleResult<Map<String, String>> uploadAmr(String deptId, String serverId) throws Exception {
+        return this.WxCfgService.getRecordFile(deptId, serverId);
     }
 
 }

@@ -25,8 +25,10 @@ public class TokenThread implements Runnable {
 
 
 	public TokenThread(){
+
 		this.wxCfgService=(WxCfgService)SpringUtils.getBean("wxCfgService");
-	}
+        logger.info("TokenThread start -> {}", new java.util.Date());
+    }
 
 	@Override
 	public void run() {
@@ -36,8 +38,9 @@ public class TokenThread implements Runnable {
 				List<Map<String,Object>> list=this.wxCfgService.selectAppList();
 				for(Map<String,Object> o:list){
 					access_token = AccessTokenUtil.getAccessToken((String) o.get("appId"), (String) o.get("appScret"));
-					this.wxCfgService.updateAccessToken((String) o.get("appId"),access_token.getAccess_token(),access_token.getExpires_in());
-					if (null != access_token) {
+                    String ticket = AccessTokenUtil.gettTcket(access_token.getAccess_token());
+                    this.wxCfgService.updateAccessTokenTicket((String) o.get("appId"), access_token.getAccess_token(), ticket, access_token.getExpires_in());
+                    if (null != access_token) {
 						logger.info("accessToken获取成功：{},{}",access_token.getAccess_token(), access_token.getExpires_in());
 					}
 				}
@@ -55,5 +58,11 @@ public class TokenThread implements Runnable {
 			}
 		}
 	}
+
+    public static void main(String args[]) {
+        Logger logger = LoggerFactory.getLogger(TokenThread.class);
+        AccessToken o = AccessTokenUtil.getAccessToken("wx29ecb720b03ea466", "03ea9a47442c14208943043e62114fc6");
+        logger.info("{}", o);
+    }
 
 }

@@ -1,5 +1,22 @@
 function checkType() {
-    2 == reportType ? ($("#j-row-img, #j-upcontain .xcy-cutimg").removeClass("fn-hide"), $("#j-row-video").addClass("fn-hide")) : 1 == reportType && ($("#j-row-img, #j-upcontain .xcy-cutimg").addClass("fn-hide"), $("#j-row-video").removeClass("fn-hide"))
+    if(2 == reportType){
+        $("#j-row-img, #j-upcontain .xcy-cutimg").removeClass("fn-hide");
+        $("#j-row-video").addClass("fn-hide");
+        $("#j-row-aideo").addClass("fn-hide");
+
+    }
+    if(1 == reportType){
+        $("#j-row-img, #j-upcontain .xcy-cutimg").addClass("fn-hide");
+        $("#j-row-video").removeClass("fn-hide");
+        $("#j-row-aideo").addClass("fn-hide");
+
+    }
+    if(3 == reportType){
+        $("#j-row-img, #j-upcontain .xcy-cutimg").addClass("fn-hide");
+        $("#j-row-video").addClass("fn-hide");
+        $("#j-row-aideo").removeClass("fn-hide");
+
+    }
 }
 function createUpImg() {
     var e={}, t = {
@@ -14,7 +31,7 @@ function createUpImg() {
     i = "";
     e.key="";
     console.log("createUpImg start");
-    var a = new plupload.Uploader({
+    uploadimg = new plupload.Uploader({
         runtimes: "html5,flash,silverlight,html4",
         browse_button: "j-uploader-selectimg",
         multi_selection: !1,
@@ -85,8 +102,8 @@ function createUpImg() {
         }
     });
      console.log("a.init()");
-    a.init();
-    createUpVideo();
+    uploadimg.init();
+    //createUpVideo();
     console.log("createUpImg end;");
 }
 function createUpVideo() {
@@ -95,12 +112,12 @@ function createUpVideo() {
     var  t = {
         mime_types: [{
             title: "video files",
-            extensions: "3gp,mp4,m3u8,wmv,webm,mov,avi,mpg,mpeg,mpeg1,mpeg4,mkv,flv"
+            extensions: "3gp,mp4,m3u8,wmv,webm,mov,avi,mpg,mpeg,mpeg1,mpeg4,mkv,flv,mp3,acc,wav"
         }],
         max_file_size: "20480kb",
         prevent_duplicates: !1
     };
-    var a = new plupload.Uploader({
+    uploadvdo = new plupload.Uploader({
             runtimes: "html5,flash,silverlight,html4",
             browse_button: "j-uploader-selectvideo",
             multi_selection: !1,
@@ -120,7 +137,7 @@ function createUpVideo() {
                     Math.ceil(o.size / 1024 / 1024 * 100) / 100;
                     $("#j-uploader-selectvideo").addClass("fn-hide"),
                     $("#j-row-video .j-uploader-tip").removeClass("fn-hide"),
-                    $("#j-row-video .j-uploader-tip p").html("开始上传<em>...</em>"),
+                    $("#j-row-video . p").html("开始上传<em>...</em>"),
                     t.setOption({
                        // url: r,
                         multipart_params: ""
@@ -151,8 +168,8 @@ function createUpVideo() {
                 }
             }
         });
-         console.log("a.init()");
-        a.init();
+         console.log("uploadvdo.init()");
+        uploadvdo.init();
     console.log("createUpVideo end");
 }
 var urlParams = lvsCmd.urlParams;
@@ -178,16 +195,11 @@ var formFieldDict = {
         name: "content",
         type: "textarea",
         maxlength: 300
-    },
-    scene: {
-        name: "scene",
-        type: "text",
-        disabled: !0,
-        class: "disabled",
-        value: lvsCmd.urlParams.title
     }
 };
 var reportType = 2;
+var uploadimg;
+var uploadvdo;
 console.log("createUpImg");
 createUpImg(),
 $("#j-row-video .videobar .icon-video").click(function() {
@@ -262,7 +274,13 @@ function(e) {
         if (!r)  {alert("请上传报道视频"); return false;};
         rpt.mediaContent=r;
 
-    }
+    } else if (3 == reportType) {
+             var r =  $("#aideoplay audio").attr("src");
+             if (!r)  {alert("请录制音频"); return false;};
+             rpt.mediaContent=r;
+         }
+
+
     data.rpt=rpt;
     data.imgs=imgs;
     var l = apiServer + "/www/live/insertLiveRpt.do";
@@ -276,17 +294,136 @@ function(e) {
 $("#j-reportform input[name=type]").click(function() {
          var e = $(this).val();
          console.log(e);
+         if(e==1){
+           if(uploadimg){uploadimg.destroy()};
+            createUpVideo();
+            //uploadvdo.init();
+         };
+         if(e==2){
+             if(uploadvdo){uploadvdo.destroy()};
+             createUpImg();
+          };
+          if(e==3){
+               if(uploadvdo){uploadvdo.destroy()};
+               if(uploadimg){uploadimg.destroy()};
+           };
+
          reportType != e && (reportType = e, checkType())
 });
 reportType=2;
 checkType();
+$("title").html(lvsCmd.urlParams.title);
 function videoPlayer(e, n, t) {
 	var i = {
 		id: "j-viewvideo",
 		source: t,
 		autoplay: !0,
-		width: "480px",
-		height: "270px"
+		width: "10rem",
+		height: "6rem"
 	}; (0 == t.indexOf("rtmp:") || t.indexOf(".m3u8") > -1) && (i.useFlashPrism = !0);
 	new prismplayer(i)
 }
+
+lvsCmd.ajax(apiServer + "/www/live/getWxJsSign.do", {companyId: lvsCmd.urlParams.companyId},
+    function(e, i) {
+        wx.config({
+            debug: false,
+            appId: i.data.appId,
+            timestamp: i.data.timestamp,
+            nonceStr: i.data.nonceStr,
+            signature: i.data.signature,
+            jsApiList: ["startRecord", "stopRecord", "onVoiceRecordEnd","playVoice","pauseVoice",
+            "stopVoice","onVoicePlayEnd","uploadVoice","downloadVoice","translateVoice",'chooseImage',
+            'previewImage',
+             'uploadImage',
+             'downloadImage',
+             'getNetworkType',
+             'openLocation',
+             'getLocation',
+             'hideOptionMenu',
+             'showOptionMenu',
+             'closeWindow',
+             'scanQRCode',
+             'chooseWXPay',
+             'openProductSpecificView',
+             'addCard',
+             'chooseCard',
+             'openCard']
+        })
+        console.log( i.data);
+})
+
+wx.ready(function(){
+    wx.onVoicePlayEnd({
+        success: function (res) {
+            stopWave();
+        }
+    });
+});
+wx.error(function(res){
+    alert("微信接口初始化失败");
+});
+var localId;
+
+$('#j-uploader-selectaideo').on('touchstart', function(event){
+    event.preventDefault();
+    START = new Date().getTime();
+
+    recordTimer = setTimeout(function(){
+        wx.startRecord({
+            success: function(){
+                localStorage.rainAllowRecord = 'true';
+                $("#j-uploader-selectaideo").removeClass("btn-record");
+                $("#j-uploader-selectaideo").addClass("btn-record-ing");
+            },
+            cancel: function () {
+                alert('用户拒绝授权录音');
+            }
+        });
+    },300);
+});
+//松手结束录音
+$('#j-uploader-selectaideo').on('touchend', function(event){
+    event.preventDefault();
+    END = new Date().getTime();
+    if((END - START) < 300){
+        END = 0;
+        START = 0;
+        //小于300ms，不录音
+        clearTimeout(recordTimer);
+    }else{
+        wx.stopRecord({
+          success: function (res) {
+            localId = res.localId;
+            $("#j-uploader-selectaideo").addClass("btn-record");
+            $("#j-uploader-selectaideo").removeClass("btn-record-ing");
+            /*wx.playVoice({
+                localId: localId
+            });*/
+            uploadVoice(localId);
+          },
+          fail: function (res) {
+
+          }
+        });
+    }
+});
+
+//上传录音
+function uploadVoice(localId){
+    //调用微信的上传录音接口把本地录音先上传到微信的服务器
+    //不过，微信只保留3天，而我们需要长期保存，我们需要把资源从微信服务器下载到自己的服务器
+    wx.uploadVoice({
+        localId: localId, // 需要上传的音频的本地ID，由stopRecord接口获得
+        isShowProgressTips: 1, // 默认为1，显示进度提示
+        success: function (res) {
+           var l = apiServer + "/www/live/uploadAmr.do";
+           lvsCmd.ajax(l, {deptId:lvsCmd.urlParams.companyId,serverId:res.serverId},
+           function(e, t) {
+                $("#aideoplay").removeClass("fn-hide");
+                $("#aideoplay audio").attr("src",cfg.fastdfs_server+t.value.filePath);
+           });
+        }
+    });
+}
+

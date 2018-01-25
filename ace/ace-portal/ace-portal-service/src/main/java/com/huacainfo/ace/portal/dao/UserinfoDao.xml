@@ -15,6 +15,7 @@
         <result column="refresh_token" jdbcType="VARCHAR" property="refresh_token"/>
         <result column="scope" jdbcType="VARCHAR" property="scope"/>
         <result column="expires_in" jdbcType="BIGINT" property="expires_in"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
     </resultMap>
 
     <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.UserinfoVo"
@@ -23,7 +24,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         unionid, openid, appid, nickname, sex, city, province, country, headimgurl, access_token,
-        refresh_token, scope, expires_in
+        refresh_token, scope, expires_in,role
     </sql>
     <sql id="Blob_Column_List">
         privilege

@@ -350,12 +350,7 @@
         department_id = #{deptId}
         ) b ON a.deptId = b.deptId
     </select>
-    <select id="getWxJsSign" resultType="map">
-        select
-        'wx29ecb720b03ea466' appId,
-        'huacai' nonceStr,
-        '03ea9a47442c14208943043e62114fc6' signature from portal.department where department_id = #{deptId}
-    </select>
+
     <update id="updateRptLikeNum">
         update live_rpt set likeNum=ifnull(likeNum,0)+1 where id=#{id}
     </update>

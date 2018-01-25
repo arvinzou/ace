@@ -173,21 +173,6 @@ public class WWWServiceImpl implements WWWService {
         return this.liveDao.getShareContent(deptId);
     }
 
-    /**
-     * @throws
-     * @Title:getWxJsSign
-     * @Description: TODO(微网页获取微信公众号配置信息)
-     * @param: @param deptId
-     * @param: @throws Exception
-     * @return: Map<String,Object>
-     * @author: 陈晓克
-     * @version: 2018-01-09
-     */
-    @Override
-    public Map<String, Object> getWxJsSign(String deptId) {
-        return this.liveDao.getWxJsSign(deptId);
-    }
-
 
     private Long calPage(Long totalNum, int defaultPageSize) {
         Long totalpage = new Long(1);

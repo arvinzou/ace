@@ -32,6 +32,8 @@ public class Userinfo implements java.io.Serializable {
 
     private String privilege;
 
+    private String role;
+
     public String getUnionid() {
         return unionid;
     }
@@ -142,5 +144,13 @@ public class Userinfo implements java.io.Serializable {
 
     public void setPrivilege(String privilege) {
         this.privilege = privilege == null ? null : privilege.trim();
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

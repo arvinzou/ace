@@ -34,7 +34,7 @@ import com.huacainfo.ace.common.kafka.KafkaProducerService;
  * Created by chenxiaoke on 2017/12/19.
  */
 //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
-@ServerEndpoint(value = "/websocket/{rid}/{uid}/{topic}", configurator = HttpSessionConfigurator.class)
+@ServerEndpoint(value = "/websocket/{rid}/{uid}/{topic}"/*, configurator = HttpSessionConfigurator.class*/)
 public class MyWebSocket {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
@@ -47,7 +47,7 @@ public class MyWebSocket {
 
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
-    private HttpSession httpSession;
+    //private HttpSession httpSession;
     private String rid;
     private String uid;
 
@@ -83,8 +83,8 @@ public class MyWebSocket {
      * @param session 可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据
      */
     @OnOpen
-    public void onOpen(Session session, EndpointConfig config, @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("topic") String topic) {
-        this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
+    public void onOpen(Session session, /*EndpointConfig config,*/ @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("topic") String topic) {
+        //this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         this.session = session;
         this.rid = rid;
         this.uid = uid;

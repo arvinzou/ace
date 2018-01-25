@@ -10,6 +10,7 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
+        <module name="ace-jave" />
         <module name="ace-live-client" />
         <module name="ace-live-service" />
         <module name="ace-live-web" />
@@ -28,6 +29,7 @@
       <module name="ace-face-client" target="1.7" />
       <module name="ace-face-service" target="1.7" />
       <module name="ace-face-web" target="1.7" />
+      <module name="ace-jave" target="1.7" />
       <module name="ace-kernel" target="1.7" />
       <module name="ace-kernel-backend" target="1.7" />
       <module name="ace-kernel-client" target="1.7" />

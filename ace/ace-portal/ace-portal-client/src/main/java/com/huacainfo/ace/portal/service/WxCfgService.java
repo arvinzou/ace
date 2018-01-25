@@ -18,10 +18,18 @@ public interface WxCfgService {
 	public abstract SingleResult<WxCfgVo> selectWxCfgByPrimaryKey(String id) throws Exception;
 	public abstract MessageResponse deleteWxCfgByWxCfgId(String id, UserProp userProp) throws Exception;
 
-	public abstract void updateAccessToken(String appid,String accessToken,int expiresIn);
+    public abstract void updateAccessTokenTicket(String appid, String accessToken, String ticket, int expiresIn);
 
 	public abstract List<Map<String,Object>> selectAppList();
 
 	public abstract MessageResponse insertFormIds(List<WxFormid> list);
+
+    public abstract SingleResult<Map<String, String>> selectAccessTokenAndTicketByDeptId(String deptId) throws Exception;
+
+
+    public abstract SingleResult<Map<String, Object>> getSignature(String url, String appId, String accessToken, String jsapi_ticket) throws Exception;
+
+
+    public abstract SingleResult<Map<String, String>> getRecordFile(String deptId, String serverId) throws Exception;
 
 }
