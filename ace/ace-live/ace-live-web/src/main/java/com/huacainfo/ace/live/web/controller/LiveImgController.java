@@ -26,8 +26,6 @@ import com.huacainfo.ace.live.vo.LiveImgQVo;
  * @Description: TODO(图片)
  */
 public class LiveImgController extends LiveBaseController {
-
-
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -47,8 +45,7 @@ public class LiveImgController extends LiveBaseController {
     @ResponseBody
     public MessageResponse insertLiveImg(String jsons) throws Exception {
         LiveImg obj = JSON.parseObject(jsons, LiveImg.class);
-        return this.liveImgService
-                .insertLiveImg(obj, this.getCurUserProp());
+        return this.liveImgService.insertLiveImg(obj, this.getCurUserProp());
     }
 
     /**

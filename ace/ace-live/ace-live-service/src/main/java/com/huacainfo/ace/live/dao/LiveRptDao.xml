@@ -70,6 +70,9 @@
         <if test='condition.uid!=null and condition.uid!=""'>
             and uid =#{condition.uid,jdbcType=VARCHAR}
         </if>
+        <if test='condition.mediaType!=null and condition.mediaType!=""'>
+            and mediaType =#{condition.mediaType,jdbcType=VARCHAR}
+        </if>
         <if test='condition.status!=null and condition.status!=""'>
             and status =#{condition.status,jdbcType=VARCHAR}
         </if>
@@ -87,7 +90,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY createDate desc
+                ORDER BY createTime desc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

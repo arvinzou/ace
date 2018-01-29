@@ -17,26 +17,19 @@ Page({
             },
 
             {
-                id: "2",
-                name: "统战活动",
-                menu: [
-                    { id: "5", opentype: "navigate", name: "统战管理", icon: "tongzhan_gl.png", page: "../activitySec/index?category=1", color: "#3285ff" },
-                    { id: "6", opentype: "navigate", name: "同心行动", icon: "tongxin_xd.png", page: "../activitySec/index?category=2", color: "#ff5c61" },
-                    { id: "7", opentype: "navigate", name: "建言献策", icon: "jianyan.png", page: "../feedback/index", color: "#83cc2b" },
-                    { id: "8", opentype: "navigate", name: "统战飞讯", icon: "tongzhan_fx.png", page: "../notice/index", color: "#1bc5bb" }
-                ]
-            },
-
-            {
                 id: "3",
-                name: "日常工作",
+                name: "日常管理",
                 menu: [
-                    { id: "9", opentype: "navigate", name: "同心工程", icon: "tongxin_gc.png", page: "../concentric/index", color: "#ee4b47" },
-                    { id: "10", opentype: "navigate", name: "统战宣传", icon: "tongzhan_xc.png", page: "../propaganda/index", color: "#754aff" },
-                    { id: "11", opentype: "navigate", name: "统战调研", icon: "tongzhan_dy.png", page: "../research/index",  color: "#ffc010" },
-                    { id: "12", opentype: "navigate", name: "统战信息", icon: "tongzhan_xx.png", page: "../message/index", color: "#69cffa" },
-                    { id: "13", opentype: "navigate", name: "培训教育", icon: "jypx.png", page: "../education/index", color: "#3fbc54" },
-                    { id: "14", opentype: "navigate", name: "精准扶贫", icon: "tongzhan_jzfp.png", page: "../povertyAlleviation/index", color: "#ff5c61" }
+                    { id: "5", opentype: "navigate", name: "四同创建", icon: "tongxin_gc.png", page: "../concentric/index", color: "#ee4b47" },
+                    { id: "6", opentype: "navigate", name: "理论调研", icon: "tongzhan_dy.png", page: "../research/index", color: "#ffc010" },
+                    { id: "7", opentype: "navigate", name: "信息管理", icon: "tongzhan_xx.png", page: "../message/index", color: "#69cffa" },
+                    { id: "8", opentype: "navigate", name: "学习教育", icon: "jypx.png", page: "../education/index", color: "#3fbc54" },
+                    { id: "9", opentype: "navigate", name: "精准扶贫", icon: "tongzhan_jzfp.png", page: "../povertyAlleviation/index", color: "#ff5c61" },
+                    { id: "10", opentype: "navigate", name: "统战管理", icon: "tongzhan_gl.png", page: "../activitySec/index?category=1", color: "#3285ff" },
+                    { id: "11", opentype: "navigate", name: "同心行动", icon: "tongxin_xd.png", page: "../activitySec/index?category=2", color: "#ff5c61" },
+                    { id: "12", opentype: "navigate", name: "统战宣传", icon: "tongzhan_xc.png", page: "../propaganda/index", color: "#754aff" },
+                    { id: "13", opentype: "navigate", name: "建言献策", icon: "jianyan.png", page: "../feedback/index", color: "#83cc2b" },
+                    { id: "14", opentype: "navigate", name: "统战飞讯", icon: "tongzhan_fx.png", page: "../notice/index", color: "#1bc5bb" }
                 ]
             },
 

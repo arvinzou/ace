@@ -95,13 +95,18 @@ public class LiveRptServiceImpl implements LiveRptService {
         }
         o.setCreateTime(new Date());
         o.setStatus("1");
-        this.liveRptDao.insert(o);
+        boolean flag=true;
         for (LiveImg img : imgs) {
+            if(flag){
+                o.setMediaContent(img.getUrl());
+                flag=false;
+            }
             img.setId(UUID.randomUUID().toString());
             img.setRptId(o.getId());
             img.setCreateTime(new Date());
             this.liveImgDao.insert(img);
         }
+        this.liveRptDao.insert(o);
         Map<String, String> data = new HashMap<String, String>();
         data.put("rid", "rsub");
         data.put("message", JSON.toJSON(o).toString());

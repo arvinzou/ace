@@ -185,7 +185,7 @@ Page({
     listClick: function (e) {
       console.log(e);
       let p = e.currentTarget.dataset.id;
-      let module = '统战调研'
+      let module = '理论调研'
       wx.navigateTo({ url: '../showNews/index?id=' + p + '&module=' + module })
     },
 })

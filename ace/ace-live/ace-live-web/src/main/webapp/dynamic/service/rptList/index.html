@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../../common/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../common/css/common.css">
+    <script type="text/javascript" src="../../common/js/fileinput.js"></script>
+    <link rel="stylesheet" href="../../common/css/fileinput.css">
+    <script type="text/javascript" src="../../common/js/zh.js"></script>
+    <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
+    <link rel="stylesheet" href="html/css/rptList.css">
+    <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="../../common/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../common/js/iconfont.js"></script>
+    <title>审查现场</title>
+</head>
+
+<body>
+<div class="container-fluid headContainer">
+    <ul class="topToolBtn">
+        <li>
+            <div class="input-group form-search">
+                <input type="text" class="form-control" placeholder="请输入标题关键字">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="iconfont">&#xe699;</i></button>
+                </span></div>
+        </li>
+        <li>创建时间</li>
+        <li>
+            <select class="form-control">
+                <option value="0">全部报道</option>
+                <option value="1">待审报道</option>
+                <option value="2">已审报道</option>
+            </select>
+        </li>
+    </ul>
+</div>
+<div class="container-fluid contentRpt">
+    <ul class="reportList" id="liveReportTable">
+        <li>
+            <div class="picbar">
+                <div class="textContent"></div>
+            </div>
+            <div class="msgbar">
+            	<span class="omission msgbar-common creater">
+            		<i class=""></i> 王瑜王瑜王瑜王瑜王瑜王瑜王瑜王瑜
+            	</span>
+                <span class="msgbar-common msgbar-time">
+            		<i class="icon-clock"></i> 2018-01-12 09:39
+            	</span> <a class="j-stop">预览</a>
+            </div>
+        </li>
+        <li>
+            <div class="picbar">
+                <div class="title omission">常德市委副书记、市长曹立军视察常德市第十届农博会暨首届年货节现场。常德融媒通讯员 周剑平 摄</div>
+                <div class="pic">
+                    <img src="https://xcycdn.zhongguowangshi.com/report-img/depq476ui9u.jpg?x-oss-process=image/resize,w_376">
+                </div>
+            </div>
+            <div class="msgbar"> 
+            	<span class="omission msgbar-common creater"> 
+            		<i class=""></i> 王瑜王瑜王瑜王瑜王瑜王瑜王瑜王瑜 
+            	</span>
+                <span class="msgbar-common msgbar-time">
+            		<i class="icon-clock"></i> 2018-01-12 09:39 
+            	</span> <a class="j-stop">预览</a>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="select_report container-fluid">
+    <div class="container-fluid form_web">
+        <div class="container_model">
+            <div class="formRow">
+                <div class="titles">报道内容<span class="font-right">0/500</span></div>
+                <div class="formRow-content">
+                    <textarea rows="6" class="content form-control "></textarea>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="titles">所属现场</div>
+                <div class="formRow-content">
+                    <input type="text" value="【常德融媒】常德冰冻周实时直播" onlyread class="name form-control" disabled="">
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px">
+                    <div class="titles">记者</div>
+                    <div class="formRow-content">
+                        <input type="text" onlyread class="form-control" value="【常德融媒】常德冰冻周实时直播" disabled="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px;">
+                    <div class="titles">结束时间</div>
+                    <div class="formRow-content">
+                        <input type="text" id="createTime" class="createTime form-control ">
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid btn-container">
+                <button type="button" class="release btn btn-success">发布报道</button>
+                <button type="button" class="cancel btn btn-info">取消报道</button>
+                <span class="prompt"></span></div>
+        </div>
+        <div class="container_model container_right">
+            <div class="formRow">
+                <div class="titles">报道类型</div>
+                <div class="formRow-content">
+                    <div>
+                        <label>
+                            <input name="category" type="radio" value="2" checked>
+                            图文报道 </label>
+                        <label>
+                            <input name="category" type="radio" value="1">
+                            视频报道 </label>
+                        <label>
+                            <input name="category" type="radio" value="3">
+                            音频报道 </label>
+                    </div>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="formRow-content">
+                    <div class="form-group">
+                        <div class="file-loading">
+                            <label>Preview File Icon</label>
+                            <input id="file-3" type="file" multiple>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="previewPage" style="display: block">
+    <div class="previewWeb">
+        <div class="previewWeb-head">报道预览</div>
+        <div class="previewWeb-content">
+            <div><img src="C:\Users\HuaCai003\Desktop\1.jpg"> </div>
+            <div>啦就撒旦立刻放假啊圣诞快乐房价爱睡觉的撒旦解放拉萨酱豆腐绿卡见识到了发卡量带上飞机啊是拉链设计的飞机阿斯利康大家发了</div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="html/js/rptList.js"></script>
+</html>

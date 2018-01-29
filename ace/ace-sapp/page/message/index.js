@@ -193,7 +193,7 @@ Page({
     listClick: function (e) {
       console.log(e);
       let p = e.currentTarget.dataset.id;
-      let module = '统战信息'
+      let module = '信息管理';
       wx.navigateTo({ url: '../showNews/index?id=' + p + '&module=' + module })
     },
 })
