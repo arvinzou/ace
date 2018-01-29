@@ -52,11 +52,8 @@ public class LiveRptController extends LiveBaseController {
      */
     @RequestMapping(value = "/findLiveRptList.do")
     @ResponseBody
-    public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition,
-                                                 PageParamNoChangeSord page) throws Exception {
-        PageResult<LiveRptVo> rst = this.liveRptService
-                .findLiveRptList(condition, page.getStart(), page.getLimit(),
-                        page.getOrderBy());
+    public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<LiveRptVo> rst = this.liveRptService.findLiveRptList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -118,7 +115,7 @@ public class LiveRptController extends LiveBaseController {
     @RequestMapping(value = "/updateLiveRptStatus.do")
     @ResponseBody
     public MessageResponse updateLiveRptStatus(String id, String status, String message, String rid) throws Exception {
-        if (status != null && status.equals("2")) {
+        if (status != null && "2".equals(status)) {
             for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
                 try {
                     item.sendMessage(message);
