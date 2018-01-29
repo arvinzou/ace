@@ -49,8 +49,7 @@ public class LiveController extends LiveBaseController {
     @ResponseBody
     public PageResult<LiveVo> findLiveList(LiveQVo condition,
                                            PageParamNoChangeSord page) throws Exception {
-        PageResult<LiveVo> rst = this.liveService
-                .findLiveList(condition, page.getStart(), page.getLimit(),
+        PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());
         condition.setDeptId(this.getCurUserProp().getCorpId());
         if (rst.getTotal() == 0) {
@@ -92,8 +91,7 @@ public class LiveController extends LiveBaseController {
     @ResponseBody
     public MessageResponse updateLive(String jsons) throws Exception {
         Live obj = JSON.parseObject(jsons, Live.class);
-        return this.liveService
-                .updateLive(obj, this.getCurUserProp());
+        return this.liveService.updateLive(obj, this.getCurUserProp());
     }
 
     /**

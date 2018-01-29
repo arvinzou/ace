@@ -26,7 +26,6 @@ $("#endDate").datetimepicker({
 
 
 $(function () {
-    webInit();
     $('.formRow').on('keyup', 'input', computedNumDo);
     $('.release').click(releaseDo);
 });
@@ -110,9 +109,6 @@ function computedNumDo() {
     $span.text(nowWordNumber + '/' + num);
 }
 
-function webInit() {
-
-}
 
 /*文件上传*/
 var uploader = new plupload.Uploader({
