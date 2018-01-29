@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="/live/content/www/css/mobase.css"/>
     <link rel="stylesheet" href="/live/content/www/lib/pizza/ui.css">
     <link rel="stylesheet" href="/live/content/www/css/ui.css">
+
+
     <script src="/live/content/www/lib/jquery-1.11.0-min.js"></script>
+
     <script src="/live/content/www/js/juicer-min.js"></script>
     <script src="/live/content/www/lib/sha512.js"></script>
     <script src="/live/content/www/js/init-rem.js"></script>
@@ -25,6 +28,9 @@
                         <div class="row-title">报道内容<span class="j-remark-length fn-right">0/300</span></div>
                         <div class="row-content" data-field="content"></div>
                     </div>
+                    <div class="row xcy-row fn-hide" id="j-viewvideo-play">
+
+                    </div>
                 </div>
                 <div class="group1">
                     <div class="row xcy-row">
@@ -34,7 +40,7 @@
                     <div class="row xcy-row">
                         <div id="j-upcontain" class="row-content">
                             <div id="j-row-img" class="xcy-video fn-left fn-hide">
-                                <div class="j-uploader-tip upbtn toplayer fn-hide">
+                                <div class="j-uploader-tip upbtn toplayer fn-hide" id="j-uploader-tip">
                                     <div class="fn-pt25">
                                         <i class="pz-icon icon-img"></i>
                                         <p class="fn-textcenter fn-mt5"></p>
@@ -58,7 +64,7 @@
                                             <p class="fn-textcenter fn-mt5"></p>
                                         </div>
                                     </div>
-                                    <div class="videobar toplayer fn-hide">
+                                    <div class="videobar toplayer fn-hide" id="j-viewvideo-pre">
                                         <div class="fn-pt30">
                                             <span class="close"><i class="pz-icon icon-close"></i></span>
                                             <i class="pz-icon icon-video"></i>
@@ -74,6 +80,7 @@
                                             <input type="file" id="j-locallfile"/>
                                         </div>
                                     </div>
+
                                 </div>
                                 <!--
                                 <div class="row-title fn-w240 fn-clear">
