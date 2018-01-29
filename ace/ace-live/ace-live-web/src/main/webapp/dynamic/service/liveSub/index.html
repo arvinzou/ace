@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../../common/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
+    <link rel="stylesheet" href="scene/css/scene.css">
+    <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="../../common/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="../../common/js/iconfont.js"></script>
+    <script type="text/javascript" src="../../common/js/plupload.full.min.js"></script>
+    <title>审查现场</title>
+</head>
+
+<body>
+<div class="container-fluid headContainer">
+    <ul class="topToolBtn">
+        <li>
+            <div class="input-group form-search">
+                <input type="text" class="searchByName  form-control" placeholder="请输入标题关键字">
+                <span class="input-group-btn">
+                <button class="search btn btn-default" type="button">查</button>
+                </span></div>
+        </li>
+        <li>卡片模式</li>
+        <li class="sortLive">创建时间</li>
+        <li>
+            <select class="form-control">
+                <option value="0">全部现场</option>
+                <option value="1">待审现场</option>
+                <option value="16">直播中</option>
+                <option value="32">直播结束</option>
+                <option value="64">回收站</option>
+            </select>
+        </li>
+    </ul>
+</div>
+<div class="container-fluid livecontent">
+    <ul class="sceneList">
+        <li>
+            <div class="picbar">
+                <div class="pic">
+                    <img src="https://xcycdn.zhongguowangshi.com/live-img/698a736b-a1c8-4703-a077-a7f704c8db44.jpg">
+                </div>
+                <span class="actionTop">
+                	<i class=""></i>置顶
+                </span>
+                <span class="reportNum">15条报道
+                </span>
+                <div class="title omission">【常德融媒直播】新湖南常德频道上线签约仪式频道上线签约仪式频道上线签约仪式</div>
+            </div>
+            <div class="msgbar fn-clear"> 
+            	<span class="omission msgbar-common creater">
+            		<i class=""></i> 王瑜王瑜王瑜王瑜王瑜王瑜王瑜王瑜
+            	</span>
+                <span class="msgbar-common msgbar-time">
+            		<i class="pz-icon icon-clock"></i> 2018-01-12 09:39
+            	</span>
+                <a class="actionList">结束直播</a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="container-fluid modify">
+    <div class="container-fluid mainContent">
+        <div class="container-fluid">
+            <div class="formContent formContenLeft">
+                <div class="formRow">
+                    <div class="title">标题*<span class="font-right ">0/30</span></div>
+                    <div class="formRow-content" data-field="topic">
+                        <input type="text" class="name form-control ">
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="title">所属辖区<span class="font-right ">0/50</span></div>
+                    <div class="formRow-content" data-field="topic">
+                        <input type="text" class="areaCode form-control">
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px">
+                        <div class="title">开始时间*</div>
+                        <div class="formRow-content" data-field="topic">
+                            <input type="text" id="startDate" class="startTime form-control ">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px;">
+                        <div class="title">结束时间</div>
+                        <div class="formRow-content" data-field="topic">
+                            <input type="text" id="endDate" class="endTime form-control ">
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="title">摘要*<span class="font-right">0/500</span></div>
+                    <div class="formRow-content" data-field="remark">
+                        <textarea rows="6" class="remark form-control "></textarea>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="title">活动介绍*</div>
+                    <div class="formRow-content" data-field="remark">
+                        <textarea rows="6" class="content form-control "></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="formContent formContenRight">
+                <div class="formRow">
+                    <div class="title">现场类型*</div>
+                    <div class="formRow-content" data-field="type">
+                        <div>
+                            <label>
+                                <input name="category" type="radio" value="2" checked="">
+                                视频直播 </label>
+                            <label>
+                                <input name="category" type="radio" value="1">
+                                图文直播 </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="title">组织单位*<span class="font-right deptIdNum">0/100</span></div>
+                    <div class="formRow-content" data-field="topic">
+                        <input type="text" class="deptId form-control ">
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="title">地点*<span class="font-right addrNum">0/200</span></div>
+                    <div class="formRow-content" data-field="topic">
+                        <input type="text" class="addr form-control ">
+                    </div>
+                </div>
+                <div class="formRow" style="margin-bottom: 33px;">
+                    <div class="title">直播流地址*<span class="font-right rtmpUrlNum">0/200</span></div>
+                    <div class="formRow-content" data-field="topic">
+                        <input type="text" class="rtmpUrl form-control ">
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="title">回放地址*<span class="font-right mp4UrlNum">0/200</span></div>
+                    <div class="formRow-content" data-field="topic">
+                        <input type="text" class="mp4Url form-control">
+                    </div>
+                </div>
+                <div class="formRow">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px">
+                        <div class="formRow">
+                            <div class="title">参与人数*</div>
+                            <div class="formRow-content" data-field="topic">
+                                <input type="text" class="nop form-control ">
+                            </div>
+                        </div>
+                        <div class="formRow">
+                            <div class="title">点赞数*</div>
+                            <div class="formRow-content" data-field="topic">
+                                <input type="text" class="pop form-control ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px">
+                        <div class="title">封面*<em>（750px * 422px）</em></div>
+                        <div class="formRow-content">
+                            <div id="j-cover" class="xcy-cutimg">
+                                <label id="upbtn" class="upbtn">
+                                    <div class="imgbar"> </div>
+                                    <div class="fn-pt25"><i class="pz-icon icon-img"></i>
+                                        <p class="fn-textcenter fn-mt5">点击选择封面图片</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid btn-container">
+        <button type="button" class="release btn btn-success">确认修改</button> <button type="button" class="cancel btn btn-info">取消修改</button>
+        <span class="prompt"></span>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="scene/js/scene.js"></script>
+<script type="text/javascript" src="scene/js/modify.js"></script>
+</html>
