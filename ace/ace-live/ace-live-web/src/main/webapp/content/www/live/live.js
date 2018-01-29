@@ -567,12 +567,13 @@ function increateNumTimeFn() {
                 id: id,
                 increaseNum: e
             };
-            isLogin ? (i.identityNo = userDict.identityNo, i.identityType = userDict.identityType) : i.identityType = webviewType,
+            isLogin ? (i.identityNo = userDict.identityNo, i.identityType = userDict.identityType) : i.identityType = webviewType
+            /*
             lvsCmd.ajax(apiServer + "/h5/live/increaseNum.json", i,
             function(e, i) {
                 isPostView = !1,
                 increateNumTimeFn()
-            })
+            })*/
         } else setTimeout(increateNumTimeFn, 1e3)
     }
 }
