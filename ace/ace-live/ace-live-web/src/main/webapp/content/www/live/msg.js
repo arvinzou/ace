@@ -55,6 +55,7 @@
                   console.log("websocket init onerror it will reconnecting after 5000 ms");
                   console.log(event);
                   setTimeout("initWebSocket()",5000);
+                  location.href="index.html?companyId="+lvsCmd.urlParams.companyId
               };
 
               //连接成功建立的回调方法
