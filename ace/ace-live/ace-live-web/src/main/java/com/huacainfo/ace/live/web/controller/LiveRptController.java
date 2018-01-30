@@ -191,19 +191,15 @@ public class LiveRptController extends LiveBaseController {
     }
 
     /**
-     * @throws
-     * @Title:updateSortByPrimaryKey
-     * @Description: TODO(更新图文直播顺序)
-     * @param: @param id
-     * @param: @param sort
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: 陈晓克
-     * @version: 2018-01-07
+     *
+     * @param data [{"id":"id1","index":0},{"id":"id2","index":1}]
+     * @return
+     * @throws Exception
      */
-    @RequestMapping(value = "/updateSortByPrimaryKey.do")
+    @RequestMapping(value = "/updateSequence.do")
     @ResponseBody
-    public MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception {
-        return this.liveRptService.updateSortByPrimaryKey(id, sort);
+    public MessageResponse updateSequence(String data) throws Exception {
+        return liveRptService.updateSequence(data);
     }
+
 }
