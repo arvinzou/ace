@@ -55,6 +55,41 @@
 
             //TODO -- 20180130 ajax function
             //functionName : /liveRpt/updateSequence.do
+
+            //Demo
+//            $.ajax({
+//                type : "post",
+//                url : contextPath +"/resources/updateSequence.do",
+//                data:{jsons:JSON.stringify(data)},
+//                beforeSend : function(XMLHttpRequest) {
+//                },
+//                success : function(rst, textStatus) {
+//                    if (!rst.state) {
+//                        bootbox.dialog({
+//                            title:'系统提示',
+//                            message:rst.errorMessage,
+//                            detail:rst.detail,
+//                            buttons:
+//                                {
+//                                    "success" :
+//                                        {
+//                                            "label" : "<i class='ace-icon fa fa-check'></i>确定",
+//                                            "className" : "btn-sm btn-success",
+//                                            "callback": function() {
+//                                            }
+//                                        }
+//                                }
+//                        });
+//
+//                    }
+//                },
+//                complete : function(XMLHttpRequest, textStatus) {
+//
+//                },
+//                error : function() {
+//
+//                }
+//            });
         }
     </script>
 </head>
