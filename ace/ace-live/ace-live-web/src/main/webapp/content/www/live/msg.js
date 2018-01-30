@@ -52,7 +52,7 @@
               wsk.onerror = function(event){
 
                   var url="ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
-                  alert(wxuser.nickname+"对不起，双向网络初始化错误，请重新打开微信重试\n"+url+"\n"+JSON.stringify(event));
+                  alert(wxuser.nickname+"对不起，网络初始化失败，5秒后尝试重新连接。");
                   console.log("websocket init onerror it will reconnecting after 5000 ms");
                   console.log(event);
                   setTimeout("initWebSocket()",5000);
