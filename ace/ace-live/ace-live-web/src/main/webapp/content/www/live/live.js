@@ -319,7 +319,7 @@ function getReport(e, i) {
             if (i && firstReportString == JSON.stringify(n.data)) return ! 1;
             if (n && n.data && n.data.length) {
                 var o = $(reportTpl.render(n));
-                if (reportBind(o), 1 == e ? ($("#j-report").html(o), firstReportString = JSON.stringify(n.data), reportPage = 1, $(".xcy-sort").removeClass("fn-hide"), $("#j-nonews").remove(), 1 == n.data.length && $(".xcy-sort").addClass("fn-hide")) : $("#j-report").append(o), void 0 != window.orientation, $("#j-report").height("auto"), joeFn.imgVideoLazy({
+                if (reportBind(o), 1 == e ? ($("#j-report").html(o), firstReportString = JSON.stringify(n.data), reportPage = 1, $(".xcy-sort").removeClass("fn-hide"), $("#j-nonews").remove(), 1 == n.data.length && $(".xcy-sort").addClass("fn-hide2")) : $("#j-report").append(o), void 0 != window.orientation, $("#j-report").height("auto"), joeFn.imgVideoLazy({
                     v: {
                         obj: $("#j-report .video")
                     },
