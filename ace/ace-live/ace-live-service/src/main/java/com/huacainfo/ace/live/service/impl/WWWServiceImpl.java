@@ -206,4 +206,23 @@ public class WWWServiceImpl implements WWWService {
 
         return rst;
     }
+
+
+    /**
+     * @throws
+     * @Title:updateRptVisitNum
+     * @Description: TODO(微网页浏览人次)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-14
+     */
+    @Override
+    public Map<String, Object> updateRptVisitNum(String id) {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("status", 0);
+        this.liveDao.updateLiveVisitNum(id);
+        return rst;
+    }
 }

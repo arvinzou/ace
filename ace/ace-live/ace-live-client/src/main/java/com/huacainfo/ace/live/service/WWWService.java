@@ -106,7 +106,7 @@ public interface WWWService {
 
     /**
      * @throws
-     * @Title:getWxJsSign
+     * @Title:updateRptLikeNum
      * @Description: TODO(微网页报道点赞)
      * @param: @param id
      * @param: @throws Exception
@@ -115,4 +115,16 @@ public interface WWWService {
      * @version: 2018-01-14
      */
     Map<String, Object> updateRptLikeNum(String id, String type);
+
+    /**
+     * @throws
+     * @Title:updateRptVisitNum
+     * @Description: TODO(微网页浏览人次)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-01-14
+     */
+    Map<String, Object> updateRptVisitNum(String id);
 }

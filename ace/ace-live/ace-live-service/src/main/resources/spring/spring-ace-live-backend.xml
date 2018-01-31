@@ -56,4 +56,14 @@
         <constructor-arg index="4"
                          value="${kafka.consumer.inp.callback.newonly}"/>
     </bean>
+    <bean id="liveVisitCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveVisitCallbackDealer"
+          destroy-method="shutdown" init-method="run">
+        <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
+        <constructor-arg index="1" value="${kafka.consumer.group}"/>
+        <constructor-arg index="2" value="visit"/>
+        <constructor-arg index="3"
+                         value="${kafka.consumer.inp.callback.threads}"/>
+        <constructor-arg index="4"
+                         value="${kafka.consumer.inp.callback.newonly}"/>
+    </bean>
 </beans>
