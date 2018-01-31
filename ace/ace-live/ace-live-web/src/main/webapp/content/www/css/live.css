@@ -322,8 +322,8 @@ a {
 	height: 5.62rem;
 	background-color: #000;
 	overflow: hidden;
-
-
+	position: fixed;
+    z-index: 310;
 }
 
 .xcy-liveinfo .view video {
@@ -331,8 +331,6 @@ a {
 	width: 100%;
 	height: 5.62rem;
 	background-color: #000;
-
-
 }
 
 .xcy-liveinfo .view img {
@@ -526,7 +524,8 @@ a {
 }
 
 .xcy-liveinfo .content {
-	padding: .26rem .42rem
+	padding: .26rem .42rem;
+	padding-top:5.62rem;
 }
 
 .xcy-liveinfo .title {
