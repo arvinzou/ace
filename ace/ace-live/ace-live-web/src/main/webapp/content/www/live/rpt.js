@@ -137,7 +137,7 @@ function createUpVideo() {
                     Math.ceil(o.size / 1024 / 1024 * 100) / 100;
                     $("#j-uploader-selectvideo").addClass("fn-hide"),
                     $("#j-row-video .j-uploader-tip").removeClass("fn-hide"),
-                    $("#j-row-video . p").html("开始上传<em>...</em>"),
+                    $("#j-row-video .p").html("开始上传<em>...</em>"),
                     t.setOption({
                        // url: r,
                         multipart_params: ""
@@ -157,9 +157,11 @@ function createUpVideo() {
                         checkType();
                       $("#j-row-video").data("fileurl", o);
                       $("#j-row-video").attr("fileurl", o);
-                      $("#j-row-video .videobar, #j-videocover").removeClass("fn-hide");
+                      $("#j-viewvideo-pre").removeClass("fn-hide");
                       $("#j-uploader-selectvideo").addClass("fn-hide");
                       $("#j-row-video .j-uploader-tip").addClass("fn-hide");
+
+                      //videoPlayer("j-viewvideo-play", "", o);
 
                     } else $("#j-row-video .j-uploader-tip p").html(a.response)
                 },
@@ -204,7 +206,11 @@ console.log("createUpImg");
 createUpImg(),
 $("#j-row-video .videobar .icon-video").click(function() {
     var e = $("#j-row-video").data("fileurl");
-   new pizzaCmd.overlay($("#j-overlay-view").html(),
+    videoPlayer("j-viewvideo-play", "", e);
+    $("#j-viewvideo-play").removeClass("fn-hide");
+    $("#j-viewvideo-pre").addClass("fn-hide");
+    $("#j-uploader-selectvideo").removeClass("fn-hide");
+  /*new pizzaCmd.overlay($("#j-overlay-view").html(),
     function(t) {
         t.show(),
         t.obj.find(".j-overlay-close").click(function() {
@@ -212,7 +218,7 @@ $("#j-row-video .videobar .icon-video").click(function() {
         })
         videoPlayer("j-viewvideo", "", e)
     })
-    $(this).blur();
+    $(this).blur();*/
 }),
 $("#j-row-video .videobar .close").click(function() {
     $("#j-row-video .videobar, #j-row-video .j-uploader-tip, #j-videocover").addClass("fn-hide"),
@@ -315,11 +321,11 @@ checkType();
 $("title").html(lvsCmd.urlParams.title);
 function videoPlayer(e, n, t) {
 	var i = {
-		id: "j-viewvideo",
+		id: "j-viewvideo-play",
 		source: t,
 		autoplay: !0,
-		width: "10rem",
-		height: "6rem"
+		width: "9.6rem",
+		height: "3rem"
 	}; (0 == t.indexOf("rtmp:") || t.indexOf(".m3u8") > -1) && (i.useFlashPrism = !0);
 	new prismplayer(i)
 }

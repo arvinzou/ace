@@ -47,7 +47,7 @@ function playH5Video(e) {
     t = $("#j-video-wrap").data("src");
 
     t.indexOf("m3u8") > -1 && (e = !0),
-    e && ("ios" == videoOsType ? ($("#j-livevideo").hasClass("minvideobar") ? $("#j-v-loading").removeClass("fn-hide") : $("#j-v-loading-new").removeClass("fn-hide"), $("#j-video-wrap").html('<video poster="' + o + '" src="' + t + '" playsinline="true" x-webkit-airplay="true" webkit-playsinline="true"></video>')) : $("#j-video-wrap").html('<video poster="' + o + '" x-webkit-airplay="true" webkit-playsinline="true" src="' + t + '" controls="controls"></video>'));
+    e && ("ios" == videoOsType ? ($("#j-livevideo").hasClass("minvideobar") ? $("#j-v-loading").removeClass("fn-hide") : $("#j-v-loading-new").removeClass("fn-hide"), $("#j-video-wrap").html('<video poster="' + o + '" src="' + t + '" playsinline="true" x-webkit-airplay="true" webkit-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true"></video>')) : $("#j-video-wrap").html('<video poster="' + o + '" playsinline="true" x-webkit-airplay="true" webkit-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" src="' + t + '" controls="controls"></video>'));
     var r = $("#j-video-wrap video");
 
     if (r[0].play(), $("#j-video-controls .c_play").addClass("c_pause"), $("#j-video-controls .c_timeline").length) {
@@ -135,8 +135,14 @@ function getInfo() {
             i = !0;
             if(wxuser.role&&wxuser.role=='admin'){
                 $("#adminrpt").removeClass("fn-hide");
+                $("#adminrpt2").removeClass("fn-hide");
             };
             //alert(wxuser.role);
+            $("#adminrpt2").on(tap,
+                         function(){
+                            console.log(i);
+                            location.href="rpt.html?id="+lvsCmd.urlParams.id+"&title="+$(".title").html()+"&companyId="+lvsCmd.urlParams.companyId;
+             }),
              $("#adminrpt").on(tap,
              function(){
                 console.log(i);
@@ -167,8 +173,6 @@ function getInfo() {
                 var o = "/live/content/www/img/ic_default_pic@2x.png";
                 o=i.data.cover;
                 var t = i.data.playStreamUrl;
-
-
                 if (void 0 == window.orientation) {
                     $("#j-livevideo-main").addClass("prism-player").removeClass("fn-hide"),
                     $("#j-livevideo-tip").addClass("fn-hide");
@@ -185,7 +189,6 @@ function getInfo() {
                 } else {
 
                     createH5Video(o, t, i.data.playStreamUrlHd, i.data.playStreamUrlSd);
-
                     var s = !0;
                     if ($("#j-livevideo-tip").on(tap,
                     function() {
@@ -316,7 +319,7 @@ function getReport(e, i) {
             if (i && firstReportString == JSON.stringify(n.data)) return ! 1;
             if (n && n.data && n.data.length) {
                 var o = $(reportTpl.render(n));
-                if (reportBind(o), 1 == e ? ($("#j-report").html(o), firstReportString = JSON.stringify(n.data), reportPage = 1, $(".xcy-sort").removeClass("fn-hide"), $("#j-nonews").remove(), 1 == n.data.length && $(".xcy-sort").addClass("fn-hide")) : $("#j-report").append(o), void 0 != window.orientation, $("#j-report").height("auto"), joeFn.imgVideoLazy({
+                if (reportBind(o), 1 == e ? ($("#j-report").html(o), firstReportString = JSON.stringify(n.data), reportPage = 1, $(".xcy-sort").removeClass("fn-hide"), $("#j-nonews").remove(), 1 == n.data.length && $(".xcy-sort").addClass("fn-hide2")) : $("#j-report").append(o), void 0 != window.orientation, $("#j-report").height("auto"), joeFn.imgVideoLazy({
                     v: {
                         obj: $("#j-report .video")
                     },
@@ -561,12 +564,13 @@ function increateNumTimeFn() {
                 id: id,
                 increaseNum: e
             };
-            isLogin ? (i.identityNo = userDict.identityNo, i.identityType = userDict.identityType) : i.identityType = webviewType,
+            isLogin ? (i.identityNo = userDict.identityNo, i.identityType = userDict.identityType) : i.identityType = webviewType
+            /*
             lvsCmd.ajax(apiServer + "/h5/live/increaseNum.json", i,
             function(e, i) {
                 isPostView = !1,
                 increateNumTimeFn()
-            })
+            })*/
         } else setTimeout(increateNumTimeFn, 1e3)
     }
 }

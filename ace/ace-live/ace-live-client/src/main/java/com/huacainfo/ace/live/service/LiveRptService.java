@@ -112,4 +112,10 @@ public interface LiveRptService {
     public abstract MessageResponse updateLiveRptStatus(String id, String status) throws Exception;
 
 
+    /**
+     *
+     * @param data
+     * @return
+     */
+    MessageResponse updateSequence(String data);
 }

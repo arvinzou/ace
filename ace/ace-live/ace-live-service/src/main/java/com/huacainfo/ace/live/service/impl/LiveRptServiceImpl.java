@@ -1,28 +1,28 @@
 package com.huacainfo.ace.live.service.impl;
 
 
-import java.util.*;
-
 import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
-import com.huacainfo.ace.live.dao.LiveImgDao;
-import com.huacainfo.ace.live.model.LiveImg;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.live.dao.LiveImgDao;
 import com.huacainfo.ace.live.dao.LiveRptDao;
+import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.model.LiveRpt;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.live.service.LiveRptService;
-import com.huacainfo.ace.live.vo.LiveRptVo;
 import com.huacainfo.ace.live.vo.LiveRptQVo;
+import com.huacainfo.ace.live.vo.LiveRptVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service("liveRptService")
 /**
@@ -163,6 +163,26 @@ public class LiveRptServiceImpl implements LiveRptService {
         }
         this.liveRptDao.updateStatusByPrimaryKey(id, status);
         return new MessageResponse(0, "变更图文直播完成！");
+    }
+
+    /**
+     * @param data
+     * @return
+     */
+    @Override
+    public MessageResponse updateSequence(String data) {
+
+        List<Map<String, Object>> dataList = JsonUtil.toObject(data, List.class);
+        String rptId;
+        int sort;
+        for (Map<String, Object> map : dataList) {
+            rptId = (String) map.get("id");
+            sort = (int) map.get("index");
+
+            liveRptDao.updateSortByPrimaryKey(rptId, sort);
+        }
+
+        return new MessageResponse(0, "OK！");
     }
 
     /**
