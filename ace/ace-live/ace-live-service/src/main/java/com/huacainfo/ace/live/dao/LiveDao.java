@@ -52,6 +52,8 @@ public interface LiveDao {
 
     int updateLiveLikeNum(String id);
 
+    int updateLiveVisitNum(String id);
+
 
 
 

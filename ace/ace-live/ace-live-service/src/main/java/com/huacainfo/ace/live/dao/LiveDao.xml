@@ -357,4 +357,7 @@
     <update id="updateLiveLikeNum">
         update live set pop=ifnull(pop,0)+1 where id=#{id}
     </update>
+    <update id="updateLiveVisitNum">
+        update live set nop=ifnull(nop,0)+1 where id=#{id}
+    </update>
 </mapper>

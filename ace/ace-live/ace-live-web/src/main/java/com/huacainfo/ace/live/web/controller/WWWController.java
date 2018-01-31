@@ -288,4 +288,15 @@ public class WWWController extends LiveBaseController {
         return this.WxCfgService.getRecordFile(deptId, serverId);
     }
 
+    @RequestMapping(value = "/visit.do")
+    @ResponseBody
+    public MessageResponse visit(String id) throws Exception {
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("id", id);
+        this.logger.info("{}", data);
+        String topic = "visit";
+        this.kafkaProducerService.sendMsg(topic, data);
+        return new MessageResponse(0, "OK");
+    }
+
 }

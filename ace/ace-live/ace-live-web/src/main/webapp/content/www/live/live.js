@@ -952,6 +952,7 @@ function getMsg(){
 }
 getInfo();
 getMsg();
+visit()();
 $(function(){
     var li_a= $(".tab_menu ul li a");
     li_a.click(function(){
@@ -975,3 +976,16 @@ $(function(){
                       }
     });
 });
+function visit() {
+    var i = {
+        id: lvsCmd.urlParams.id
+    };
+    lvsCmd.ajax(apiServer + "/www/live/visit.do", i,
+    function(i, a) {
+        if ("0" == a.status) {
+            var visit=parseInt($("#visit").html());
+            visit=visit+1;
+            $("#visit").html(visit)
+        }
+    })
+}
