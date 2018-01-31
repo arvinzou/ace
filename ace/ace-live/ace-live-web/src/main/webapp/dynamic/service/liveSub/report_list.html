@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>直播报道列表</title>
+    <link rel="stylesheet" href="../../../content/common/plugins/jquery-ui/jquery-ui.min.css">
+    <!--<link rel="stylesheet" href="jqueryui/style.css">-->
+    <script src="../../../content/common/plugins/jquery-ui/jquery.min.js"></script>
+    <script src="../../../content/common/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <style>
+        #sortable {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 60%;
+        }
+
+        #sortable li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 1.2em;
+            height: 1.5em;
+        }
+
+        html > body #sortable li {
+            height: 1.5em;
+            line-height: 1.2em;
+        }
+
+        .ui-state-highlight {
+            height: 1.5em;
+            line-height: 1.2em;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("#sortable").sortable({
+                cursor: "move",
+                items: "li",                        //只是li可以拖动
+                opacity: 0.3,                       //拖动时，透明度为0.6
+                revert: true,                       //释放时，增加动画
+                stop: function (event, ui) {        //更新排序
+                    updateSequence($(this).sortable("toArray"));
+                }
+            });
+        });
+
+        //
+        function updateSequence(arr) {
+            var data = [];
+            for (var i = 0; i < arr.length; i++) {
+                data.push({id: arr[i], index: i});
+                console.log("id:" + arr[i] + ",index:" + i);
+            }
+
+            //TODO -- 20180130 ajax function
+            //functionName : /liveRpt/updateSequence.do
+
+            //Demo
+//            $.ajax({
+//                type : "post",
+//                url : contextPath +"/resources/updateSequence.do",
+//                data:{jsons:JSON.stringify(data)},
+//                beforeSend : function(XMLHttpRequest) {
+//                },
+//                success : function(rst, textStatus) {
+//                    if (!rst.state) {
+//                        bootbox.dialog({
+//                            title:'系统提示',
+//                            message:rst.errorMessage,
+//                            detail:rst.detail,
+//                            buttons:
+//                                {
+//                                    "success" :
+//                                        {
+//                                            "label" : "<i class='ace-icon fa fa-check'></i>确定",
+//                                            "className" : "btn-sm btn-success",
+//                                            "callback": function() {
+//                                            }
+//                                        }
+//                                }
+//                        });
+//
+//                    }
+//                },
+//                complete : function(XMLHttpRequest, textStatus) {
+//
+//                },
+//                error : function() {
+//
+//                }
+//            });
+        }
+    </script>
+</head>
+
+<body>
+
+<ul id="sortable">
+    <li class="ui-state-default">Item 1</li>
+    <li class="ui-state-default">Item 2</li>
+    <li class="ui-state-default">Item 3</li>
+    <li class="ui-state-default">Item 4</li>
+    <li class="ui-state-default">Item 5</li>
+    <li class="ui-state-default">Item 6</li>
+    <li class="ui-state-default">Item 7</li>
+</ul>
+</body>
+<script type="text/javascript" src="scene/js/report_list.js"></script>
+</html>
