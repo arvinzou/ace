@@ -1,4 +1,4 @@
-var host='http://localhost/live';
+var host='http://192.168.2.153/live';
 var start;
 var limit=25;
 var orderByStr=null;
@@ -9,12 +9,20 @@ $(function () {
     initweb();
     $(":radio").click(chooseTypeDo);
     $('.cancel').click(hideSelectReportDo);
-    $('#liveListTable').on('click','a',actionSelectReportDo);
     $('.search').click(searchByNameDo);
     $('.release').click(releaseDo);
     $('.reportList').on('click','.picbar',actionModifyDo);
-    $('.previewPage').click(hidePreviewPageDo)
+    $('.previewPage').click(hidePreviewPageDo);
+    $('.msgbar').on('click','a',startPreviewDo);
 });
+/*点击预览按键*/
+function startPreviewDo() {
+       console.log('33333333');
+       var  id=$(this).parent().parent().data('Liveid');
+       var data= findCover(id);
+       console.log(data);
+}
+
 /*取消预览*/
 function hidePreviewPageDo(event) {
     if(event.eventPhase=='2'){
@@ -31,15 +39,57 @@ function  actionModifyDo() {
     var url = host + '/liveRpt/selectLiveRptByPrimaryKey.do';
     var data = {
         'id': id
-    }
+    };
     $.getJSON(url, data, function (result) {
         console.log(result);
         if (result.status == 0) {
             showModifyWeb(result.value);
         }
     });
-    $('.select_report').show();
 }
+
+/*显示修改报道页*/
+function showModifyWeb(data){
+    $('.select_report').show();
+    for (var item in data) {
+        if (item == 'id') {
+            findCover(data[item]);
+        } else if (item == 'rid'){
+            viewLiveName(data[item]);
+        } else {
+            $('.' + item).val(data[item]);
+        }
+    }
+}
+
+/*根据id查找直播*/
+function viewLiveName(id) {
+    var url = host + '/live/selectLiveByPrimaryKey.do';
+    var data = {
+        'id': id
+    }
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            var data=result.value;
+            for (var item in data){
+                    $('.' + item).val(data[item]);
+            }
+        }
+    });
+}
+/*根据id查找图片*/
+function findCover(id){
+    var url = host + '/liveImg/findLiveImgList.do';
+    var data = {
+        'rptId': id
+    };
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+           return result.value;
+        }
+    });
+}
+
 
 /*确认发布报道*/
 function releaseDo() {
@@ -53,15 +103,7 @@ function searchByNameDo(){
     loadLiveList(inputName);
 }
 
-/*点击添加直播报道*/
-function actionSelectReportDo() {
-    id=null;
-    id= $(this).parent().parent().data('Liveid');
-    if(!id){
-        return;
-    };
-    $('.select_report').show();
-}
+
 
 /*点击隐藏发布直播页*/
 function  hideSelectReportDo() {
@@ -96,6 +138,7 @@ function initweb() {
     chooseImageDo();
     /*下载报道列表*/
     loadReportList();
+    $('.previewPage').hide();
 }
 /*下载直播数据*/
 function loadReportList(name) {
@@ -144,7 +187,7 @@ var reportTextTemplate='<li>'+
     '            	</span>'+
     '                <span class="msgbar-common msgbar-time">'+
     '            		<i class="icon-clock"></i>[createTime]'+
-    '            	</span><a>预览</a>'+
+    '            	</span><a class="">预览</a>'+
     '            </div>'+
     '        </li>';
 
@@ -170,7 +213,7 @@ function initFileUpload() {
     $("#file-3").fileinput({
         theme: 'fa',
         language: 'zh',
-        uploadUrl: 'www',
+        uploadUrl: 'http://192.168.2.153/portal/files/uploadFile.do',
         uploadAsync: false,
         showUpload: false,
         maxFileCount: 4,

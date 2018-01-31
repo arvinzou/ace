@@ -1,6 +1,6 @@
 // JavaScript Document
 
-var host='http://localhost/live';
+var host='http://192.168.2.153/live';
 var imageSrc;
 
 $("#startDate").datetimepicker({
@@ -28,6 +28,7 @@ $("#endDate").datetimepicker({
 $(function () {
     webInit();
     $('.formRow').on('keyup', 'input', computedNumDo);
+    $('.formRow').on('keyup', 'textarea', computedNumDo);
     $('.release').click(releaseDo);
 });
 
@@ -41,15 +42,15 @@ function releaseDo() {
     if(endTime){
        endTime+=':00';
     }
-    var remark=$('.remark').val();
-    var content=$('.content').val();
-    var deptId=$('.deptId').val();
-    var addr=$('.addr').val();
-    var rtmpUrl=$('.rtmpUrl').val();
-    var mp4Url=$('.mp4Url').val();
-    var category=$("input[type='radio']:checked").val();
-    var nop=$('.nop').val();
-    var pop=$('.pop').val();
+    var remark=$('.remark').val().trim();
+    var content=$('.content').val().trim();
+    var deptId=$('.deptId').val().trim();
+    var addr=$('.addr').val().trim();
+    var rtmpUrl=$('.rtmpUrl').val().trim();
+    var mp4Url=$('.mp4Url').val().trim();
+    var category=$("input[type='radio']:checked").val().trim();
+    var nop=$('.nop').val().trim();
+    var pop=$('.pop').val().trim();
     if(!(name&&imageSrc&&startTime&&remark&&content&&category&&deptId&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
         $('.prompt').text('带“ * ”为必填项');
         return;
@@ -92,7 +93,7 @@ function computedNumDo() {
     $('.prompt').text('');
     var that = $(this);
     var nowWordNumber = that.val().length;
-    var $span = that.parent().siblings().eq(0).children();
+    var $span = that.parent().parent().find('span');
     if (!$span.length) {
         return;
     }
@@ -113,9 +114,8 @@ function webInit() {
 /*文件上传*/
 var uploader = new plupload.Uploader({
     runtimes: 'html5,flash,silverlight,html4',
-    browse_button: 'upbtn', // you can pass an id...
-    /*container: document.getElementById('container'),*/ // ... or DOM Element itself
-    url: 'http://localhost/portal/files/uploadFile.do',
+    browse_button: 'upbtn',
+    url: 'http://192.168.2.153/portal/files/uploadFile.do',
     file_data_name: 'file',
     multi_selection: false,
     filters: {

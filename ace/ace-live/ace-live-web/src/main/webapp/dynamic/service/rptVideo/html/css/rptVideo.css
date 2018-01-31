@@ -162,3 +162,11 @@ video{
 .startStatus>.iconfont{
 	padding-left: 14px;
 }
+
+.videobar input{
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	margin:0px;
+	cursor: pointer;
+}

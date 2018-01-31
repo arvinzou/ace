@@ -1,5 +1,5 @@
 /*变量*/
-var host = 'http://localhost/live';
+var host = 'http://192.168.2.153/live';
 var imghost = "http://zx.huacainfo.com/";
 var start;
 var limit = 25;
@@ -8,8 +8,7 @@ var id;
 var status;
 $(function () {
     initWeb();
-    $('.changeLiveStatus').click(changeLiveStatusDo);
-    $('.msgbar').on('click','a',changeLiveStatusDo);
+    $('.sceneList').on('click','.changeLiveStatus',changeLiveStatusDo);
     $('.search').click(searchByNameDo);
     $('.sortLive').click(sortLiveDo);
     $('.sceneList').on('click', '.picbar', modifyLiveDo);
@@ -28,13 +27,11 @@ function hideModifyWebDo() {
 function modifyLiveDo() {
     console.log('修改直播');
     id = $(this).parent().data('Liveid');
-    console.log(id);
     var url = host + '/live/selectLiveByPrimaryKey.do';
     var data = {
         'id': id
     }
     $.getJSON(url, data, function (result) {
-        console.log(result);
         if (result.status == 0) {
             showModifyWeb(result.value);
         }
@@ -46,7 +43,6 @@ function showModifyWeb(data) {
     $('.modify').show();
     for (var item in data) {
         if (item == 'imageSrc') {
-            console.log(data[item]);
             viewCover(data[item]);
         } else if (item == 'category') {
             $(":radio[name='category'][value='" + data[item] + "']").prop("checked", "checked");
@@ -72,47 +68,42 @@ function sortLiveDo() {
 /*按名字搜索直播*/
 function searchByNameDo() {
     var inputName = $('.searchByName').val();
-    console.log(inputName);
     loadLiveList(inputName);
 }
 
 /*切换直播状态*/
 function changeLiveStatusDo() {
     console.log('切换直播');
-    // id = $(this).parent().data('Liveid');
-    // console.log(id);
-    // var url = host + '/live/selectLiveByPrimaryKey.do';
-    // var data = {
-    //     'id': id
-    // }
-    // $.getJSON(url, data, function (result) {
-    //     console.log(result);
-    //     if (result.status == 0) {
-    //         modifyStatus(result.value);
-    //     }
-    // })
+    id = $(this).parent().parent().data('Liveid');
+    var url = host + '/live/selectLiveByPrimaryKey.do';
+    var data = {
+        'id': id
+    }
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            modifyStatus(result.value);
+        }
+    })
 }
 
 /*更改状态*/
 function modifyStatus(dataLive) {
-    console.log(dataLive);
     for (var item in dataLive) {
         if (item == 'status') {
             status = dataLive[item];
+
             if ("2" == status) {
-                dataLive[item] == "1";
+                dataLive[item] = "1";
             } else {
-                dataLive[item] == "2";
+                dataLive[item] = "2";
             }
         }
     }
-    console.log(dataLive);
     var url=host+"/live//updateLive.do";
     var data={
         'jsons':JSON.stringify(dataLive)
     };
     $.post(url,data, function (result) {
-        console.log(result);
         if(result.status==0){
             loadLiveList();
         }else{

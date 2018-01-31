@@ -1,6 +1,6 @@
 // JavaScript Document
 
-var host='http://localhost/live';
+var host='http://192.168.2.153/live';
 var imghost = "http://zx.huacainfo.com/";
 var imageSrc;
 
@@ -28,28 +28,29 @@ $("#endDate").datetimepicker({
 
 $(function () {
     $('.formRow').on('keyup', 'input', computedNumDo);
+    $('.formRow').on('keyup', 'textarea', computedNumDo);
     $('.release').click(releaseDo);
 });
 
 /*点击发布直播*/
 function releaseDo() {
     console.log('releaseDo');
-    var name=$('.name').val();
-    var areaCode=$('.areaCode').val();
-    var startTime=$('.startTime').val();
-    var endTime=$('.endTime').val();
+    var name=$('.name').val().trim();
+    var areaCode=$('.areaCode').val().trim();
+    var startTime=$('.startTime').val().trim();
+    var endTime=$('.endTime').val().trim();
     if(endTime){
         endTime+=':00';
     }
-    var remark=$('.remark').val();
-    var content=$('.content').val();
-    var deptId=$('.deptId').val();
-    var addr=$('.addr').val();
-    var rtmpUrl=$('.rtmpUrl').val();
-    var mp4Url=$('.mp4Url').val();
-    var category=$("input[type='radio']:checked").val();
-    var nop=$('.nop').val();
-    var pop=$('.pop').val();
+    var remark=$('.remark').val().trim();
+    var content=$('.content').val().trim();
+    var deptId=$('.deptId').val().trim();
+    var addr=$('.addr').val().trim();
+    var rtmpUrl=$('.rtmpUrl').val().trim();
+    var mp4Url=$('.mp4Url').val().trim();
+    var category=$("input[type='radio']:checked").val().trim();
+    var nop=$('.nop').val().trim();
+    var pop=$('.pop').val().trim();
     if(!(name&&imageSrc&&startTime&&remark&&content&&category&&deptId&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
         $('.prompt').text('带“ * ”为必填项');
         return;
@@ -96,7 +97,7 @@ function computedNumDo() {
     $('.prompt').text('');
     var that = $(this);
     var nowWordNumber = that.val().length;
-    var $span = that.parent().siblings().eq(0).children();
+    var $span = that.parent().parent().find('span');
     if (!$span.length) {
         return;
     }
@@ -109,7 +110,6 @@ function computedNumDo() {
     }
     $span.text(nowWordNumber + '/' + num);
 }
-
 
 /*文件上传*/
 var uploader = new plupload.Uploader({

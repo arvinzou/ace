@@ -1,4 +1,4 @@
-var host='http://localhost/live';
+var host='http://192.168.2.153/live';
 var start;
 var limit=25;
 var orderByStr=null;
@@ -15,7 +15,10 @@ $(function () {
 });
 /*确认发布报道*/
 function releaseDo() {
-	
+    console.log('发布报道');
+    var selectedFile = $('#file-3').get(0).files;
+    console.log(selectedFile);
+    $('#file-3').fileinput('upload');
 }
 
 /*按名字搜索直播*/
@@ -110,9 +113,9 @@ function initFileUpload() {
 	$("#file-3").fileinput({
 		theme:'fa',
 		language:'zh',
-		uploadUrl:'http://localhost/portal/files/uploadFile.do',
+		uploadUrl:'http://192.168.2.153/portal/files/uploadFile.do',
 		uploadAsync: false,
-		showUpload: true,
+		showUpload: false,
 		maxFileCount: 4,
 		showCaption: false,
 		browseClass: "btn btn-primary btn-lg",
@@ -120,10 +123,61 @@ function initFileUpload() {
 		previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
 		overwriteInitial: false,
 		initialPreviewAsData: true,
+        layoutTemplates:{
+            actionUpload:'',
+        }
 	});
 }
 
-$('#file-3').on('fileuploaded', function(event, data, previewId, index) {
-    console.log(data);
-    console.log(event);
+// $('#file-3').on('fileuploaded', function(event, data, previewId, index) {
+//     console.log(data);
+//     console.log(event);
+// });
+
+// $('#file-3').on('filebatchpreupload', function(event, data) {
+//      console.log(event);
+//      console.log(data);
+// });
+
+// $('#file-3').on('fileloaded', function(event, file, previewId, index, reader) {
+//     console.log(event);
+//     console.log(file);
+//     console.log(previewId);
+//     console.log(index);
+//     console.log(reader);
+// });
+
+ // $('#file-3').on('change', function(event) {
+ //     var selectedFile = $('#file-3').get(0).files;
+ //     console.log(selectedFile);
+ //     var files= event.target.files;
+ //     console.log(files);
+ //     for(var i=0;i<files.length;i++){
+ //         var file=files[i];
+ //         var reader=new FileReader();
+ //         reader.onload=function(e){
+ //             var data =e.target.result;
+ //             var image=new Image();
+ //             image.onload=function () {
+ //                 var width=image.width;
+ //                 var height=image.height;
+ //                 console.log(width+'======'+height);
+ //             };
+ //             image.src= data;
+ //         };
+ //         reader.readAsDataURL(file);
+ //     }
+ // });
+
+// $('#file-3').on('filepreremove', function(event, id, index) {
+//     console.log(event);
+//     console.log(id);
+//     console.log(index);
+// });
+
+$('#file-3').on('filepreupload', function(event, data, previewId, index) {
+   console.log(event);
+   console.log(data);
+   console.log(previewId);
+   console.log(index);
 });

@@ -158,10 +158,7 @@ public class LiveRptController extends LiveBaseController {
      */
     @RequestMapping(value = "/deleteLiveRptByLiveRptId.do")
     @ResponseBody
-    public MessageResponse deleteLiveRptByLiveRptId(String jsons)
-            throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
+    public MessageResponse deleteLiveRptByLiveRptId(String id) throws Exception {
         return this.liveRptService.deleteLiveRptByLiveRptId(id,
                 this.getCurUserProp());
     }
