@@ -74,8 +74,8 @@ public class LiveRptController extends LiveBaseController {
     @RequestMapping(value = "/insertLiveRpt.do")
     @ResponseBody
     public MessageResponse insertLiveRpt(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject("jsons");
-
+        logger.debug(jsons);
+        JSONObject json = JSON.parseObject(jsons);
         LiveRpt obj = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
         List<LiveImg> imgs = JSON.parseArray(((JSONObject) json.get("imgs")).toJSONString(), LiveImg.class);
 

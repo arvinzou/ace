@@ -25,7 +25,7 @@ public class DBHelpInfo {
 	 * 这里是MySQL连接方法
 	 */
 	private static final String driver = "com.mysql.jdbc.Driver";
-	private static final String pwd = "123456";
+	private static final String pwd = "huacai$2016";
 	private static final String user = "root";
     private static final String url = "jdbc:mysql://127.0.0.1/live" + "?user=" + user + "&password=" + pwd
             + "&useUnicode=true&characterEncoding=UTF-8";

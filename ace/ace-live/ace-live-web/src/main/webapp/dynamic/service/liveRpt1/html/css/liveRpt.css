@@ -81,11 +81,3 @@ body{
 .btn-container{
 	padding: 40px 0px;
 }
-
-.xcy-cutimg {
-	position: relative;
-	width: 240px;
-	height: 135px;
-	border: 1px dashed #b4bed3;
-	border-radius: 5px;
-}

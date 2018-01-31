@@ -5,6 +5,9 @@
 <script type="text/javascript" src="../../common/js/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="../../common/js/fileinput.js"></script>
+<link rel="stylesheet" href="../../common/css/fileinput.css">
+<script type="text/javascript" src="../../common/js/zh.js"></script>
 <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
 <link rel="stylesheet" href="html/css/liveRpt.css">
 <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
@@ -73,15 +76,11 @@
 
             <div class="formRow">
                 <div class="formRow-content">
-                    <div id="j-cover" class="xcy-cutimg">
-                        <label id="upbtn" class="upbtn">
-                            <div class="imgbar">
-
-                            </div>
-                            <div class="fn-pt25"><i class="pz-icon icon-img"></i>
-                                <p class="fn-textcenter fn-mt5">点击选择封面图片</p>
-                            </div>
-                        </label>
+                    <div class="form-group">
+                        <div class="file-loading">
+                            <label>Preview File Icon</label>
+                            <input id="file-3" name="file" type="file" multiple>
+                        </div>
                     </div>
                 </div>
             </div>

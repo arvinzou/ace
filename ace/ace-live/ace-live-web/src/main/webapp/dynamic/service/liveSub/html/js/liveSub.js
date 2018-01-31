@@ -96,6 +96,7 @@ function modifyStatus(dataLive) {
                 dataLive[item] = "1";
             } else {
                 dataLive[item] = "2";
+                dataLive['endTime']=new Date();
             }
         }
     }
