@@ -52,7 +52,7 @@
               wsk.onerror = function(event){
 
                   var url="ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
-                  alert(wxuser.nickname+"对不起，网络初始化失败，5秒后尝试重新连接。");
+                  alert(wxuser.nickname+"对不起，网络初始化失败，5秒后尝试重新连接,状态码："+wsk.readyState);
                   console.log("websocket init onerror it will reconnecting after 5000 ms");
                   console.log(event);
                   setTimeout("initWebSocket()",5000);
@@ -111,6 +111,11 @@
                   }
 
               };
+              window.onunload = function(){
+                 if(wsk){
+                   wsk.close();
+                 }
+               };
 
 
             }
@@ -119,4 +124,8 @@
             }
       }
 
-      setTimeout("initWebSocket()",3000);
+
+
+      window.onload = function(){
+        setTimeout("initWebSocket()",2000);
+      }
