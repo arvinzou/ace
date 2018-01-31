@@ -131,7 +131,7 @@ function initWeb() {
 
 /*下载直播数据*/
 function loadLiveList(name) {
-    var url = host + '/live//findLiveList.do';
+    var url = host + '/live/findLiveList.do';
     var data = {
         'name': name,
         'start': start,
