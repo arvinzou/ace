@@ -47,7 +47,7 @@ function playH5Video(e) {
     t = $("#j-video-wrap").data("src");
 
     t.indexOf("m3u8") > -1 && (e = !0),
-    e && ("ios" == videoOsType ? ($("#j-livevideo").hasClass("minvideobar") ? $("#j-v-loading").removeClass("fn-hide") : $("#j-v-loading-new").removeClass("fn-hide"), $("#j-video-wrap").html('<video poster="' + o + '" src="' + t + '" playsinline="true" x-webkit-airplay="true" webkit-playsinline="true"></video>')) : $("#j-video-wrap").html('<video poster="' + o + '" x-webkit-airplay="true" webkit-playsinline="true" src="' + t + '" controls="controls"></video>'));
+    e && ("ios" == videoOsType ? ($("#j-livevideo").hasClass("minvideobar") ? $("#j-v-loading").removeClass("fn-hide") : $("#j-v-loading-new").removeClass("fn-hide"), $("#j-video-wrap").html('<video poster="' + o + '" src="' + t + '" playsinline="true" x-webkit-airplay="true" webkit-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true"></video>')) : $("#j-video-wrap").html('<video poster="' + o + '" playsinline="true" x-webkit-airplay="true" webkit-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" src="' + t + '" controls="controls"></video>'));
     var r = $("#j-video-wrap video");
 
     if (r[0].play(), $("#j-video-controls .c_play").addClass("c_pause"), $("#j-video-controls .c_timeline").length) {
@@ -173,8 +173,6 @@ function getInfo() {
                 var o = "/live/content/www/img/ic_default_pic@2x.png";
                 o=i.data.cover;
                 var t = i.data.playStreamUrl;
-
-
                 if (void 0 == window.orientation) {
                     $("#j-livevideo-main").addClass("prism-player").removeClass("fn-hide"),
                     $("#j-livevideo-tip").addClass("fn-hide");
@@ -191,7 +189,6 @@ function getInfo() {
                 } else {
 
                     createH5Video(o, t, i.data.playStreamUrlHd, i.data.playStreamUrlSd);
-
                     var s = !0;
                     if ($("#j-livevideo-tip").on(tap,
                     function() {
