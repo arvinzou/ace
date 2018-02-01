@@ -1,12 +1,5 @@
 /*Arvin 2017-12-29*/
 /*聊天框模块*/
-.room {
-    width: 366px;
-    height: 461px;
-    overflow: auto;
-    border-bottom: 1px solid #E3E3E3;
-    background-color: #22252A;
-}
 
 /*聊天模块 -- name ,message*/
 .row {
@@ -64,11 +57,7 @@
 }
 
 /*用户操作模块*/
-.operate-cls {
-    width: 366px;
-    height: 187px;
-    background-color: #22252A;
-}
+
 
 .tool-div {
     /*margin-top: 12px;*/

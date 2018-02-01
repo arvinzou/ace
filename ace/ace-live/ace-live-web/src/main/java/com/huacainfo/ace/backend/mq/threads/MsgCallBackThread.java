@@ -2,10 +2,7 @@ package com.huacainfo.ace.backend.mq.threads;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.tools.SpringUtils;
-import com.huacainfo.ace.live.model.LiveMsg;
-import com.huacainfo.ace.live.service.LiveMsgService;
+
 import com.huacainfo.ace.live.web.websocket.WebSocketSub;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;

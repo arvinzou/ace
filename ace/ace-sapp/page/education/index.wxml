@@ -4,7 +4,7 @@
 </view>
 
 <!--待培训-->
-<view class='aaaa ing' hidden="{{currentTab!==0}}">
+<view class='ing' hidden="{{currentTab!==0}}">
     <block wx:for-items="{{educationWait.List}}" wx:for-item="item" wx:key="{{item.id}}">
         <navigator  class='content' bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_img'>
@@ -32,22 +32,28 @@
 </view>
 
 <!--已结束-->
-<view class='aaaa end' hidden="{{currentTab!==1}}">
+<view class='ing' hidden="{{currentTab!==1}}">
     <block wx:for-items="{{educationEnd.List}}" wx:for-item="item" wx:key="{{item.id}}">
-        <navigator  class="content_end" bindtap="listClick" data-id='{{item.id}}'>
-            <view class='content_end_img'>
-                <image class='end_img' src='{{serverfile}}{{item.cover}}'>
-                </image>
+        <navigator  class='content' bindtap="listClick" data-id='{{item.id}}'>
+            <view class='content_img'>
+                <image class='cover' src="{{serverfile}}{{item.cover}}"></image>
             </view>
-            <view class='content_end_text'>
-                <view class='end_title'>{{item.name}}</view>
-                <view class='end_time'>培训时间：{{item.time}}</view>
-            </view>
-            <view class='flag'>
-                <image class='flagImg' src='../../image/ending.png'></image>
+            <view class='content_text'>
+                <view class='title'>{{item.name}}</view>
+                <view class='time msg'>
+                    <image class='icon_icon' src='../../image/time_icon.png' mode="widthFix"></image>
+                    <text class='text_text'>培训时间：{{item.time}}</text>
+                </view>
+                <view class='address msg'>
+                    <image class='icon_icon' src='../../image/addr_icon.png' mode="widthFix"></image>
+                    <text class='text_text'>培训地点：{{item.address}}</text>
+                </view>
+                <view class='intent msg'>
+                    <image class='icon_icon' src='../../image/intent_icon.png' mode="widthFix"></image>
+                    <text class='text_text'>培训对象：{{item.trainees}}</text>
+                </view>
             </view>
         </navigator>
-        <view class='lineP'></view>      
     </block>
     <view class="loading" hidden="{{!educationEnd.Loadingstatus}}">正在载入更多...</view>
     <view class="loading complete" hidden="{{!educationEnd.LoadOver}}">已加载全部</view>

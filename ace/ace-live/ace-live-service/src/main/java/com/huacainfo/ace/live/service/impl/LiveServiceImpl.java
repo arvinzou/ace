@@ -50,8 +50,7 @@ public class LiveServiceImpl implements LiveService {
      * @version: 2017-12-28
      */
     @Override
-    public PageResult<LiveVo> findLiveList(LiveQVo condition, int start,
-                                           int limit, String orderBy) throws Exception {
+    public PageResult<LiveVo> findLiveList(LiveQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<LiveVo> rst = new PageResult<LiveVo>();
         List<LiveVo> list = this.liveDao.findList(condition,
                 start, start + limit, orderBy);
@@ -232,6 +231,4 @@ public class LiveServiceImpl implements LiveService {
                 String.valueOf(id), "直播", userProp);
         return new MessageResponse(0, "直播删除完成！");
     }
-
-
 }

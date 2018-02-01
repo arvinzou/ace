@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-face/ace-face-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-live/ace-live-web" />
     <file type="web" url="file://$PROJECT_DIR$/ace-operana/ace-operana-web" />
     <file type="web" url="file://$PROJECT_DIR$/ace-portal/ace-portal-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-rvc/ace-rvc-web" />
     <file type="web" url="file://$PROJECT_DIR$/ace-uf/ace-uf-web" />
-    <file type="web" url="file://$PROJECT_DIR$/ace-weui/ace-weui-web" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-rvc/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-live/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/ace-face/ace-face-client/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-face/ace-face-service/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-face/ace-face-web/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-face/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-rvc/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/pom.xml" />
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
-  </component>
-  <component name="ZooKeeperConfig">
-    <option name="host" value="localhost" />
-    <option name="port" value="2181" />
-    <option name="charset" value="UTF-8" />
-    <option name="whitePaths" value="" />
-    <option name="enabled" value="true" />
   </component>
 </project>

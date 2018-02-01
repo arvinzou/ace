@@ -5,14 +5,11 @@
 <script type="text/javascript" src="../../common/js/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
-<script type="text/javascript" src="../../common/js/fileinput.js"></script>
-<link rel="stylesheet" href="../../common/css/fileinput.css">
-<script type="text/javascript" src="../../common/js/zh.js"></script>
 <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
-<link rel="stylesheet" href="report/css/report.css">
+<link rel="stylesheet" href="html/css/liveRpt.css">
 <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../common/js/iconfont.js"></script>
-<script type="text/javascript" src="../../common/js/plupl   oad.full.min.js"></script>
+<script type="text/javascript" src="../../common/js/plupload.full.min.js"></script>
 <title>创建报道</title>
 </head>
 
@@ -26,37 +23,7 @@
 </div>
 <div class="container-fluid content_container">
     <div class="table_content">
-        <table id="liveListTable" class="table table-striped">
-            <tr>
-                <td>【常德融媒】常德冰冻周实时直播</td>
-                <td>全媒体记者 伍银</td>
-                <td>2018-01-24 10:31</td>
-                <td><a>发布报道</a></td>
-            </tr>
-            <tr>
-                <td>【常德融媒】常德冰冻周实时直播</td>
-                <td>全媒体记者 伍银</td>
-                <td>2018-01-24 10:31</td>
-                <td><a>发布报道</a></td>
-            </tr>
-            <tr>
-                <td>【常德融媒】常德冰冻周实时直播</td>
-                <td>全媒体记者 伍银</td>
-                <td>2018-01-24 10:31</td>
-                <td><a>发布报道</a></td>
-            </tr>
-            <tr>
-                <td>【常德融媒】常德冰冻周实时直播</td>
-                <td>全媒体记者 伍银</td>
-                <td>2018-01-24 10:31</td>
-                <td><a>发布报道</a></td>
-            </tr>
-            <tr>
-                <td>【常德融媒】常德冰冻周实时直播【常德融媒】常德冰冻周实时直播【常德融媒】常德冰冻周实时直播【常德融媒】常德冰冻周实时直播【常德融媒】常德冰冻周实时直播</td>
-                <td>全媒体记者 伍银</td>
-                <td>2018-01-24 10:31</td>
-                <td><a>发布报道</a></td>
-            </tr>
+        <table id="liveListTable" class="table-striped table">
             <tr>
                 <td>【常德融媒】常德冰冻周实时直播</td>
                 <td>全媒体记者 伍银</td>
@@ -103,13 +70,18 @@
                     </div>
                 </div>
             </div>
+
             <div class="formRow">
                 <div class="formRow-content">
-                    <div class="form-group">
-                        <div class="file-loading">
-                            <label>Preview File Icon</label>
-                            <input id="file-3" type="file" multiple>
-                        </div>
+                    <div id="j-cover" class="xcy-cutimg">
+                        <label id="upbtn" class="upbtn">
+                            <div class="imgbar">
+
+                            </div>
+                            <div class="fn-pt25"><i class="pz-icon icon-img"></i>
+                                <p class="fn-textcenter fn-mt5">点击选择封面图片</p>
+                            </div>
+                        </label>
                     </div>
                 </div>
             </div>
@@ -117,5 +89,5 @@
     </div>
 </div>
 </body>
-<script type="text/javascript" src="report/js/report.js"></script>
+<script type="text/javascript" src="html/js/liveRpt.js"></script>
 </html>

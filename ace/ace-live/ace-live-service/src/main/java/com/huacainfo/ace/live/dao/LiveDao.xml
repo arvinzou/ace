@@ -34,7 +34,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, areaCode, name, category, deptId, endTime, remark, nop, pop, addr, rtmpUrl,
+        id, areaCode, name, category, deptId,endTime,startTime, remark, nop, pop, addr, rtmpUrl,
         mp4Url, imageSrc, latitude, longitude, status, createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate
     </sql>
@@ -121,7 +121,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY createDate desc
+                ORDER BY startTime desc
             </otherwise>
         </choose>
 

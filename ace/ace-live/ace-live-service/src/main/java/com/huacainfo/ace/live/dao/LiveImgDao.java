@@ -2,6 +2,8 @@ package com.huacainfo.ace.live.dao;
 
 import java.util.List;
 
+import com.huacainfo.ace.live.vo.LiveQVo;
+import com.huacainfo.ace.live.vo.LiveVo;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.vo.LiveImgQVo;
@@ -18,12 +20,9 @@ public interface LiveImgDao {
 
     int updateByPrimaryKey(LiveImg record);
 
-    List<LiveImgVo> findList(@Param("condition") LiveImgQVo condition,
-                             @Param("start") int start, @Param("limit") int limit,
-                             @Param("orderBy") String orderBy);
+    List<LiveImgVo> findList(@Param("condition") LiveImgQVo condition, @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") LiveImgQVo condition);
 
     int isExit(LiveImg record);
-
 }

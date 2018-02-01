@@ -1,5 +1,7 @@
 package com.huacainfo.ace.live.web.controller;
 
+import com.huacainfo.ace.live.vo.LiveQVo;
+import com.huacainfo.ace.live.vo.LiveVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,6 @@ import com.huacainfo.ace.live.vo.LiveImgQVo;
  * @Description: TODO(图片)
  */
 public class LiveImgController extends LiveBaseController {
-
-
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -47,8 +47,7 @@ public class LiveImgController extends LiveBaseController {
     @ResponseBody
     public MessageResponse insertLiveImg(String jsons) throws Exception {
         LiveImg obj = JSON.parseObject(jsons, LiveImg.class);
-        return this.liveImgService
-                .insertLiveImg(obj, this.getCurUserProp());
+        return this.liveImgService.insertLiveImg(obj, this.getCurUserProp());
     }
 
     /**
@@ -68,4 +67,29 @@ public class LiveImgController extends LiveBaseController {
         return this.liveImgService.deleteLiveImgByLiveImgId(id,
                 this.getCurUserProp());
     }
+
+    /**
+     * TODO（获取图片）
+     * @param id
+     * @return
+     * @throws Exception
+     */
+
+    @RequestMapping(value = "/selectLiveImgByPrimaryKey.do")
+    @ResponseBody
+    public MessageResponse selectLiveImgByPrimaryKey(String id)
+            throws Exception {
+        return this.liveImgService.selectLiveImgByPrimaryKey(id);
+    }
+
+    @RequestMapping(value = "/findLiveImgList.do")
+    @ResponseBody
+    public PageResult<LiveImgVo> findLiveImgList(LiveImgQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<LiveImgVo> rst = this.liveImgService.findLiveImgList(condition, page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
+    }
+
 }

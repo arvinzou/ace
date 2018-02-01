@@ -192,10 +192,10 @@ lvsCmd.cutimg.prototype = {
         this.fileBtn = this.obj.find(".j-file-input");
         var o = this,
         a = this.fileBtn.html();
-        pizzaTpl.pzCutimg ? e() : pizzaCmd.tpl("../../cutimg.html",
+       /* pizzaTpl.pzCutimg ? e() : pizzaCmd.tpl("../../cutimg.html",
         function() {
             e()
-        }),
+        }),*/
         this.config.padding || (this.config.padding = this.config.width < this.config.height ? Math.ceil(this.config.width / 4) : Math.ceil(this.config.height / 4))
     }
 };

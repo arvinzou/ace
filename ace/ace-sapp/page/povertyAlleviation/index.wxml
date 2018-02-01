@@ -32,7 +32,7 @@
 
 <!--已结束-->
 <view class='ing' hidden="{{currentTab!==1}}">
-    <block wx:for-items="{{povertyAlleviationIng.List}}" wx:for-item="item" wx:key="{{item.id}}">
+    <block wx:for-items="{{povertyAlleviationEnd.List}}" wx:for-item="item" wx:key="{{item.id}}">
         <navigator class='content' bindtap="listClick" data-id='{{item.id}}'>
             <view class='content_img'>
                 <image class='cover' src='{{serverfile}}{{item.cover}}' mode="center"></image>
@@ -50,7 +50,7 @@
             </view>
         </navigator>
     </block>
-    <view class="loading" hidden="{{!povertyAlleviationIng.Loadingstatus}}">正在载入更多...</view>
-    <view class="loading complete" hidden="{{!povertyAlleviationIng.LoadOver}}">已加载全部</view>
+    <view class="loading" hidden="{{!povertyAlleviationEnd.Loadingstatus}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!povertyAlleviationEnd.LoadOver}}">已加载全部</view>
 
 </view>

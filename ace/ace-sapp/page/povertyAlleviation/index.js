@@ -201,7 +201,7 @@ Page({
         console.log(e);
         let p = e.currentTarget.dataset.id;
         let module = '精准扶贫'
-        wx.navigateTo({ url: '../selectMessage/index?id=' + p + '&module=' + module })
+        wx.navigateTo({ url: '../showFP/index?id=' + p + '&module=' + module })
     },
 })
 

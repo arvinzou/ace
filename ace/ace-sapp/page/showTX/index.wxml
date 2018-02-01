@@ -1,0 +1,21 @@
+<view class='index'>
+    <view class='message'>
+        <view class='title'>{{list.name}}</view>
+        <view class='address'>{{list.address}}</view>
+        <view class='menu'>
+            <span wx:if="{{list.latitude==''?false:list.latitude==null?false:true}}">
+                <span class='modle modles' bindtap="navbarTap_map" data-address='{{list.address}}' data-latitude="{{list.latitude}}" data-longitude='{{list.longitude}}'>
+                    <image class='icon_icon' src='../../image/map_icon.png' mode="widthFix"></image>位置</span>
+            </span>
+            <span class='modle modles' data-telNumber="{{list.tel}}" bindtap="navbarTap_tel">
+                <image class='icon_icon' src='../../image/tel_icon.png' mode="widthFix"></image>电话</span>
+            <span class='modle '>
+                <image class='icon_icon' src='../../image/intent_icon.png' mode="widthFix"></image>负责人：{{list.linkman}}</span>
+        </view>
+    </view>
+    <view wx:if="{{list.content==''?false:list.content==null?false:true}}">
+        <view class='content'>
+            <rich-text class='content_text' style="text-indent:40px;" nodes="{{list.content}}"></rich-text>
+        </view>
+    </view>
+</view>

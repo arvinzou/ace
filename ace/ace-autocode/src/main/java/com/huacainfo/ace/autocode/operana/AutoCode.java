@@ -3,15 +3,15 @@ package com.huacainfo.ace.autocode.operana;
 import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 public class AutoCode {
 	public static void main(String[] args) throws Exception{
-		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("operana","指标文件","陈晓克");
-        Class<?> c = com.huacainfo.ace.operana.model.MeetingFiles.class;
-        autoCodeUtils.init(c);
-		autoCodeUtils.createVO(c);
-		autoCodeUtils.createQVO(c);
-		autoCodeUtils.createDAO(c);
-		autoCodeUtils.createService(c);
-		autoCodeUtils.createServiceImpl(c);
-		autoCodeUtils.createAction(c);
+//		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("operana","指标文件","陈晓克");
+//		Class<?> c=com.huacainfo.ace.operana.model.NormFiles.class;
+//		autoCodeUtils.init(c);
+//		autoCodeUtils.createVO(c);
+//		autoCodeUtils.createQVO(c);
+//		autoCodeUtils.createDAO(c);
+//		autoCodeUtils.createService(c);
+//		autoCodeUtils.createServiceImpl(c);
+//		autoCodeUtils.createAction(c);
 		//autoCodeUtils.createJsp(c);
 		//autoCodeUtils.createJsConfig(c);
 		//autoCodeUtils.createJsView(c);

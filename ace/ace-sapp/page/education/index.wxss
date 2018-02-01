@@ -76,18 +76,6 @@ page {
     
 }
 
-.content_end_img {
-    display: inline-table;
-    width: 220rpx;
-    height: 128rpx;
-    margin: 8rpx 18rpx 0 0;
-}
-
-.end_img {
-    width: 220rpx;
-    height: 128rpx;
-}
-
 .content_end_text {
     display: inline-table;
     vertical-align: top;
@@ -95,11 +83,7 @@ page {
     font-weight: bold;
 }
 
-.end_time {
-    margin-top: 6rpx;
-    color: #999;
-    font-size: 24rpx;
-}
+
 
 .flag {
     position: absolute;
@@ -114,11 +98,7 @@ page {
     height: 83rpx;
 }
 
-.end_title {
-    font-size: 28rpx;
-    min-height:95rpx;
-    color: #666;
-}
+
 
 /* 加载状态样式 */
 .loading {
@@ -141,8 +121,4 @@ page {
 
 .loading.complete:before {
     display: none;
-}
-
-.end{
-    padding-top: 80rpx;
 }

@@ -27,19 +27,19 @@
 
 <div id="inputDiv" class="operate-cls">
     <div id="toolDiv" class="tool-div">
-        <button id="btnFont"
-                style="text-align:center;width: 15px;height: 15px;border: silver;background-color: #22252A;color:#ffffff">
-            A
-        </button>
-        <button id="btnEmoji"
-                style="text-align:center;padding-left:14px;width: 17px;height: 17px;border: silver;border: silver;background-color: #22252A;color:#ffffff">
-            E
-        </button>
-        <button id="btnImage"
-                style="text-align:center;padding-left:14px;width: 17px;height: 17px;border: silver;border: silver;background-color: #22252A;color:#ffffff">
-            I
-        </button>
-    </div>
+    <button id="btnFont"
+            style="text-align:center;width: 15px;height: 15px;border: silver;background-color: #22252A;color:#ffffff">
+        A
+    </button>
+    <button id="btnEmoji"
+            style="text-align:center;padding-left:14px;width: 17px;height: 17px;border: silver;border: silver;background-color: #22252A;color:#ffffff">
+        E
+    </button>
+    <button id="btnImage"
+            style="text-align:center;padding-left:14px;width: 17px;height: 17px;border: silver;border: silver;background-color: #22252A;color:#ffffff">
+        I
+    </button>
+</div>
     <div id="inputContentDiv" class="content-div">
         <textarea id="text" class="textarea-cls">
         </textarea>
