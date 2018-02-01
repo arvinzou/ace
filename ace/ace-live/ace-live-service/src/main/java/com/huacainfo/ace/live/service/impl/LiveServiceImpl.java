@@ -231,6 +231,4 @@ public class LiveServiceImpl implements LiveService {
                 String.valueOf(id), "直播", userProp);
         return new MessageResponse(0, "直播删除完成！");
     }
-
-
 }
