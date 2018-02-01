@@ -34,6 +34,7 @@ public class WebContextParamListener implements ServletContextListener {
 	private ResourcesService resourcesService;
 	private FilesService filesService;
 	private CleanFileThread cleanFileThread=new CleanFileThread();
+	@Override
 	public void contextInitialized(ServletContextEvent event) { // 上下文初始化时触发
 		servletContext = event.getServletContext();
 		initWebContextParamService();
@@ -145,7 +146,7 @@ public class WebContextParamListener implements ServletContextListener {
 		dictJsonListString = "var staticDictObject=" + dictJsonListString;
 		return dictJsonListString;
 	}
-
+	@Override
 	public void contextDestroyed(ServletContextEvent event) { // 上下文销毁时触发
 
 	}
@@ -157,6 +158,7 @@ public class WebContextParamListener implements ServletContextListener {
 	 *
 	 */
 	class ReflushDictFileThread extends Thread {
+		@Override
 		public void run() {
 			try {
 				flushStaticDictList();
@@ -181,6 +183,7 @@ public class WebContextParamListener implements ServletContextListener {
 	     * @version: 2016年11月26日 下午5:42:33
 	 */
 	class CleanFileThread extends Thread {
+		@Override
 		public void run() {
 			try {
 				filesService.deleteFileTimer();

@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.service;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -11,7 +12,6 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.security.spring.SecurityLoadResouceDefine;
 import com.huacainfo.ace.portal.model.Resources;
 import com.huacainfo.ace.portal.vo.ResourcesVo;
-
 public interface ResourcesService extends SecurityLoadResouceDefine {
 	/**
 	 * 

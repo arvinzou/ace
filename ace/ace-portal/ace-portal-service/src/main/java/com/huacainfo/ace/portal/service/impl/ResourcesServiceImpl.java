@@ -45,7 +45,7 @@ public class ResourcesServiceImpl implements ResourcesService,
 		}
 		return rst;
 	}
-
+	@Override
 	public MessageResponse insertResources(Resources o, UserProp userProp)
 			throws Exception {
 		StringBuffer msg=new StringBuffer("添加资源完成");
@@ -76,7 +76,7 @@ public class ResourcesServiceImpl implements ResourcesService,
 				o.getResourcesName(), userProp);
 		return new MessageResponse(0, "添加资源完成！");
 	}
-
+	@Override
 	public MessageResponse updateResources(Resources o, UserProp userProp)
 			throws Exception {
 		if (CommonUtils.isBlank(o.getResourcesId())) {

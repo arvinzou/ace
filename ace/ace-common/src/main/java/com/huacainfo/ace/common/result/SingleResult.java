@@ -34,6 +34,7 @@ public class SingleResult<T> extends MessageResponse {
 
     /**
      * 其他结果
+     * @param value
      */
     public void setValue(T value) {
         this.value = value;
