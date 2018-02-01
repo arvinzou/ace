@@ -63,8 +63,9 @@
 		<module>ace-common-web</module>
 		<module>ace-portal</module>
 		<module>ace-live</module>
-		<module>ace-jave</module>
+
 		<!--
+		<module>ace-jave</module>
 		<module>ace-uf</module>
 		<module>ace-face</module>
 <module>ace-kernel</module>
