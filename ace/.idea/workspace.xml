@@ -6,8 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80647b4d-8417-47a2-ae86-012d433c63d2" name="Default" comment="常德融媒后台管理页面——王恩">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/vo/ImgQVo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/vo/ImgVo.java" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_101tec_zkclient_0_3.xml" afterPath="" />
@@ -120,41 +118,14 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__redis_clients_jedis_2_8_1.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__stax_stax_api_1_0_1.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/ImgService.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-web/pom.xml" afterPath="$PROJECT_DIR$/ace-common-web/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common-web/src/main/resources/spring/spring-ace-common-security.xml" afterPath="$PROJECT_DIR$/ace-common-web/src/main/resources/spring/spring-ace-common-security.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/result/SingleResult.java" afterPath="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/result/SingleResult.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-jave/pom.xml" afterPath="$PROJECT_DIR$/ace-jave/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/LiveImgService.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/LiveImgService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.xml" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveRptDao.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveRptDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/LiveServiceApp.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/LiveServiceApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveImgServiceImpl.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveImgServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveServiceImpl.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/ResourcesService.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-client/src/main/java/com/huacainfo/ace/portal/service/ResourcesService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/ResourcesServiceImpl.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/java/com/huacainfo/ace/portal/service/impl/ResourcesServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/resources/config.properties" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-service/src/main/resources/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/listener/WebContextParamListener.java" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/listener/WebContextParamListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/resources/config.properties" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/resources/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_bdpf.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_bdpf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_face.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_face.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_kernel.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_kernel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_live.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_live.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_luohua.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_luohua.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_operana.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_operana.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_sys.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_sys.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_uf.js" afterPath="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/common/js/dict_uf.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-client/ace-rvc-client.iml" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-client/ace-rvc-client.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/ace-rvc-service.iml" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/ace-rvc-service.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/test/java/HelloWorld.java" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/test/java/HelloWorld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/ace-rvc-web.iml" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/ace-rvc-web.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/rvc/web/controller/ConferenceController.java" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/java/com/huacainfo/ace/rvc/web/controller/ConferenceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/resources/config.properties" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/resources/config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/webapp/content/common/js/reconnecting-websocket.js" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/webapp/content/common/js/reconnecting-websocket.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/webapp/dynamic/view/chatroom.jsp" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/webapp/dynamic/view/chatroom.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/webapp/script/css/chatroom.css" afterPath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/src/main/webapp/script/css/chatroom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/resources/config.properties" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/resources/config.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" afterPath="$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" />
@@ -209,7 +180,7 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5952941">
+    <splitter split-orientation="horizontal" split-proportion="0.13017242">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
@@ -225,7 +196,7 @@
           <file leaf-file-name="liveRpt.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/js/liveRpt.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1760">
+                <state relative-caret-position="-1737">
                   <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
                   <folding />
                 </state>
@@ -266,11 +237,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="live.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="live.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="616">
                   <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="16" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LiveImgService.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/LiveImgService.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="741">
+                  <caret line="71" column="57" lean-forward="false" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="57" />
                   <folding />
                 </state>
               </provider>
@@ -480,6 +461,68 @@
             <path>
               <item name="ace" type="b2602c69:ProjectViewProjectNode" />
               <item name="ace" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="live" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="live" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ace" type="b2602c69:ProjectViewProjectNode" />
@@ -945,7 +988,7 @@
       <workItem from="1517202390014" duration="15759000" />
       <workItem from="1517272867815" duration="26280000" />
       <workItem from="1517358402006" duration="38842000" />
-      <workItem from="1517445164927" duration="719000" />
+      <workItem from="1517445164927" duration="1342000" />
     </task>
     <task id="LOCAL-00001" summary="统战二期">
       <created>1513732190656</created>
@@ -1010,7 +1053,21 @@
       <option name="project" value="LOCAL" />
       <updated>1517399830661</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="常德融媒后台管理页面——王恩">
+      <created>1517445965430</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1517445965430</updated>
+    </task>
+    <task id="LOCAL-00011" summary="常德融媒后台管理页面——王恩">
+      <created>1517446506277</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1517446506277</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1019,7 +1076,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="336327000" />
+    <option name="totallyTimeSpent" value="336950000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1171,6 +1228,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="464">
           <caret line="37" column="7" lean-forward="true" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1178,6 +1236,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="9" column="88" lean-forward="true" selection-start-line="9" selection-start-column="88" selection-end-line="9" selection-end-column="88" />
+          <folding>
+            <marker date="1516063568530" expanded="true" signature="992:1106" ph="select from live_img" />
+            <marker date="1516063568530" expanded="true" signature="1199:1261" ph="delete from " />
+            <marker date="1516063568530" expanded="true" signature="1362:1675" ph="insert into live_img... " />
+            <marker date="1516063568530" expanded="true" signature="3336:4081" ph="update live_... " />
+            <marker date="1516063568530" expanded="true" signature="4194:4524" ph="update live_... " />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1195,17 +1260,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/LiveImgService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="71" column="57" lean-forward="false" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveImgController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="402">
           <caret line="85" column="17" lean-forward="true" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1213,6 +1272,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="37" column="10" lean-forward="true" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
+          <folding>
+            <marker date="1517382103913" expanded="true" signature="1108:1225" ph="select from live_img" />
+            <marker date="1517382103913" expanded="true" signature="1318:1380" ph="delete from " />
+            <marker date="1517382103913" expanded="true" signature="1481:1794" ph="insert into live_img... " />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1220,6 +1284,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="104" column="13" lean-forward="true" selection-start-line="104" selection-start-column="13" selection-end-line="104" selection-end-column="13" />
+          <folding>
+            <marker date="1517382089024" expanded="true" signature="2810:2974" ph="select , fro... " />
+            <marker date="1517382089024" expanded="true" signature="3067:3125" ph="delete from " />
+            <marker date="1517382089024" expanded="true" signature="3223:4356" ph="insert into live... " />
+            <marker date="1517382089024" expanded="true" signature="4467:5457" ph="update live " />
+            <marker date="1517382089024" expanded="true" signature="5945:5960" ph="SELECT COUNT... " />
+            <marker date="1517382089024" expanded="true" signature="6081:6477" ph="select ORDER... " />
+            <marker date="1517382089024" expanded="true" signature="6544:6612" ph="select count... live" />
+            <marker date="1517382089024" expanded="true" signature="6700:7273" ph="select 2 com... live" />
+            <marker date="1517382089024" expanded="true" signature="7369:8206" ph="select null " />
+            <marker date="1517382089024" expanded="true" signature="8273:8413" ph="update live " />
+            <marker date="1517382089024" expanded="true" signature="12008:12071" ph="SELECT count... live_rpt" />
+            <marker date="1517382089024" expanded="true" signature="12144:12286" ph="select id, r... live_msg" />
+            <marker date="1517382089024" expanded="true" signature="12366:12854" ph="SELECT compa... deptId" />
+            <marker date="1517382089024" expanded="true" signature="12464:12586" ph="SELECT ##{dep... live_rpt" />
+            <marker date="1517382089024" expanded="true" signature="12627:12819" ph="SELECT depar... department" />
+            <marker date="1517382089024" expanded="true" signature="12928:13225" ph="select '' an... department" />
+            <marker date="1517382089024" expanded="true" signature="13300:13781" ph="SELECT compa... deptId" />
+            <marker date="1517382089024" expanded="true" signature="13398:13513" ph="SELECT deptI... live" />
+            <marker date="1517382089024" expanded="true" signature="13554:13746" ph="SELECT depar... department" />
+            <marker date="1517382089024" expanded="true" signature="13840:13902" ph="update live_... " />
+            <marker date="1517382089024" expanded="true" signature="13961:14011" ph="update live " />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1245,6 +1332,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="33" column="41" lean-forward="true" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
+          <folding>
+            <marker date="1516063568530" expanded="true" signature="1446:1614" ph="select , fro... " />
+            <marker date="1516063568530" expanded="true" signature="1707:1769" ph="delete from " />
+            <marker date="1516063568530" expanded="true" signature="1879:2336" ph="insert into live_rpt... " />
+            <marker date="1516063568530" expanded="true" signature="4597:5700" ph="update live_... " />
+            <marker date="1516063568530" expanded="true" signature="5831:6316" ph="update live_... " />
+            <marker date="1516063568530" expanded="true" signature="6429:6802" ph="update live_... " />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1266,6 +1361,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="30" column="41" lean-forward="true" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+          <folding>
+            <marker date="1517303517201" expanded="true" signature="1381:1495" ph="select from live_rpt" />
+            <marker date="1517303517201" expanded="true" signature="1588:1650" ph="delete from " />
+            <marker date="1517303517201" expanded="true" signature="1751:2208" ph="insert into live_rpt... " />
+            <marker date="1517303517201" expanded="true" signature="2269:2499" ph="update live_... " />
+            <marker date="1517303517201" expanded="true" signature="2566:2676" ph="update live_... " />
+            <marker date="1517303517201" expanded="true" signature="3557:3572" ph="SELECT COUNT... " />
+            <marker date="1517303517201" expanded="true" signature="3692:4088" ph="select ORDER... " />
+            <marker date="1517303517201" expanded="true" signature="4155:4309" ph="select count... live_rpt" />
+            <marker date="1517303517201" expanded="true" signature="4374:4480" ph="update live_... " />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1273,6 +1379,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="896">
           <caret line="76" column="61" lean-forward="false" selection-start-line="76" selection-start-column="59" selection-end-line="76" selection-end-column="61" />
+          <folding>
+            <element signature="e#3634#3645#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1417,7 +1526,7 @@
         <state relative-caret-position="69">
           <caret line="53" column="34" lean-forward="false" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="34" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1464,7 +1573,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/js/liveRpt.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1760">
+        <state relative-caret-position="-1737">
           <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
           <folding />
         </state>
@@ -1482,6 +1591,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1824">
           <caret line="114" column="95" lean-forward="false" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/LiveImgService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="71" column="57" lean-forward="false" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="57" />
           <folding />
         </state>
       </provider>

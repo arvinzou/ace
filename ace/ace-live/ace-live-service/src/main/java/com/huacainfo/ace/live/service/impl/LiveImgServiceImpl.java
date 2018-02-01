@@ -1,10 +1,13 @@
 package com.huacainfo.ace.live.service.impl;
 
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.live.vo.LiveImgQVo;
+import com.huacainfo.ace.live.vo.LiveQVo;
+import com.huacainfo.ace.live.vo.LiveVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.live.dao.LiveImgDao;
@@ -20,7 +22,6 @@ import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.live.service.LiveImgService;
 import com.huacainfo.ace.live.vo.LiveImgVo;
-import com.huacainfo.ace.live.vo.LiveImgQVo;
 
 @Service("liveImgService")
 /**
@@ -79,5 +80,43 @@ public class LiveImgServiceImpl implements LiveImgService {
         this.dataBaseLogService.log("删除图片", "图片", String.valueOf(id),
                 String.valueOf(id), "图片", userProp);
         return new MessageResponse(0, "图片删除完成！");
+    }
+
+    /**
+     * @throws
+     * @Title:selectLiveByPrimaryKey
+     * @Description: TODO(获取直播)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Live>
+     * @author: 陈晓克
+     * @version: 2017-12-28
+     */
+    @Override
+    public SingleResult<LiveImgVo> selectLiveImgByPrimaryKey(String id) throws Exception {
+        SingleResult rst = new SingleResult<>();
+        rst.setValue(this.liveImgDao.selectByPrimaryKey(id));
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(直播分页查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult<LiveVo>
+     * @author: 陈晓克
+     * @version: 2017-12-28
+     */
+    @Override
+    public PageResult<LiveImgVo> findLiveImgList(LiveImgQVo condition, String orderBy) throws Exception {
+        PageResult<LiveImgVo> rst = new PageResult<LiveImgVo>();
+        List<LiveImgVo> list = this.liveImgDao.findList(condition, orderBy);
+        rst.setRows(list);
+        return rst;
     }
 }

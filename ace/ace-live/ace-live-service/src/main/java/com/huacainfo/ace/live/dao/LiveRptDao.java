@@ -8,7 +8,7 @@ import com.huacainfo.ace.live.vo.LiveRptQVo;
 import com.huacainfo.ace.live.vo.LiveRptVo;
 
 public interface LiveRptDao {
-    int deleteByPrimaryKey(String LiveSubId);
+    int deleteByPrimaryKey(String id);
 
     int insert(LiveRpt record);
 

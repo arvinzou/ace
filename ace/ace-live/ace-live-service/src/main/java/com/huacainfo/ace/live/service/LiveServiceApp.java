@@ -24,6 +24,5 @@ public class LiveServiceApp {
 			}
 			System.exit(1);
 		}
-
 	}
 }

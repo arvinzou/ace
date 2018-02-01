@@ -118,8 +118,8 @@ public class ConferenceController extends BaseController {
 
     }
 
-    /**
-     * 获取与会人员列表
+    /**获取与会人员列表
+     * startMeetingDo
      *
      * @param userId       操作人用户id
      * @param conferenceId 会议ID
@@ -175,7 +175,7 @@ public class ConferenceController extends BaseController {
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public Map<String, Object> search(String userId, String condition) {
 
-
+        System.out.print("11111111111111111111111111111111");
         try {
 
             ConferenceVO data = conferenceService.search(userId, JsonUtil.toObject(condition, SearchCondition.class));
@@ -199,9 +199,7 @@ public class ConferenceController extends BaseController {
     public Map<String, Object> getAddressList(String userId) {
 
         try {
-
             List<RvcConferenceAddress> list = conferenceService.getAddressList(userId);
-
             return ResultUtil.success(list);
         } catch (Exception e) {
             logger.error("ConferenceController.getAddressList.error:{}", e);
@@ -351,6 +349,5 @@ public class ConferenceController extends BaseController {
 
             return ResultUtil.fail(-1, "系统错误");
         }
-
     }
 }
