@@ -1,5 +1,5 @@
 /*变量*/
-var host = 'http://192.168.2.153/liveRpt';
+var host = 'http://192.168.2.153';
 var imghost = "http://zx.huacainfo.com/";
 var start = 0;
 var limit = 10;
@@ -25,7 +25,7 @@ $(function () {
 
 //getData
 function initData() {
-    var url = host + '/findLiveRptList.do';
+    var url = host + '/liveRpt/findLiveRptList.do';
     var data = {
         'rid': 'c15f484b-bd30-4111-904d-123ca617180e',
         'start': start,
@@ -42,11 +42,19 @@ function initData() {
 
 //draw page
 function initSortableDiv(data) {
-    // $('.sortable').empty();
-    console.log(JSON.stringify(data))
+    $('.sortable').empty();
+    console.log(JSON.stringify(data));
+    for (var i = 0; i < data.length; i++) {
+        var liLiveRpt = sortLiTemplate;
+        liLiveRpt = liLiveRpt.replace("[objId]", data[i].id)
+            .replace("[title]", data[i].content);
+
+        var $li = $(liLive).data("rptId", data[i].id);
+        $('.sortable').append($li);
+    }
 }
 
-var itemTemplate = '<li id="[objId]" class="ui-state-default">[title]</li>';
+var sortLiTemplate = '<li id="[objId]" class="ui-state-default">[title]</li>';
 
 //
 function updateSequence(arr) {
@@ -54,44 +62,38 @@ function updateSequence(arr) {
     for (var i = 0; i < arr.length; i++) {
         data.push({id: arr[i], index: i});
     }
-
     console.log(JSON.stringify(data));
-    //TODO -- 20180130 ajax function
-    //functionName : /liveRpt/updateSequence.do
 
-    //Demo
-//            $.ajax({
-//                type : "post",
-//                url : contextPath +"/resources/updateSequence.do",
-//                data:{jsons:JSON.stringify(data)},
-//                beforeSend : function(XMLHttpRequest) {
-//                },
-//                success : function(rst, textStatus) {
-//                    if (!rst.state) {
-//                        bootbox.dialog({
-//                            title:'系统提示',
-//                            message:rst.errorMessage,
-//                            detail:rst.detail,
-//                            buttons:
-//                                {
-//                                    "success" :
-//                                        {
-//                                            "label" : "<i class='ace-icon fa fa-check'></i>确定",
-//                                            "className" : "btn-sm btn-success",
-//                                            "callback": function() {
-//                                            }
-//                                        }
-//                                }
-//                        });
-//
-//                    }
-//                },
-//                complete : function(XMLHttpRequest, textStatus) {
-//
-//                },
-//                error : function() {
-//
-//                }
-//            });
+    $.ajax({
+        type: "post",
+        url: host + "/updateSequence.do",
+        data: {jsons: JSON.stringify(data)},
+        beforeSend: function (XMLHttpRequest) {
+        },
+        success: function (rst, textStatus) {
+            if (!rst.state) {
+                bootbox.dialog({
+                    title: '系统提示',
+                    message: rst.errorMessage,
+                    detail: rst.detail,
+                    buttons: {
+                        "success": {
+                            "label": "<i class='ace-icon fa fa-check'></i>确定",
+                            "className": "btn-sm btn-success",
+                            "callback": function () {
+                            }
+                        }
+                    }
+                });
+
+            }
+        },
+        complete: function (XMLHttpRequest, textStatus) {
+
+        },
+        error: function () {
+
+        }
+    });
 }
 
