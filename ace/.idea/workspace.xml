@@ -5,12 +5,13 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80647b4d-8417-47a2-ae86-012d433c63d2" name="Default" comment="增加图片压缩内容">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/img/logo1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/img/logo2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/img/logo4.png" afterPath="" />
+    <list default="true" id="80647b4d-8417-47a2-ae86-012d433c63d2" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/info.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/live.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/live.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/lib/prismplayer/index.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/lib/prismplayer/index.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-portal/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -63,11 +64,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="rpt.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js">
+      <file leaf-file-name="info.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/info.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="42" column="67" lean-forward="false" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="67" />
+            <state relative-caret-position="15">
+              <caret line="766" column="18" lean-forward="false" selection-start-line="766" selection-start-column="8" selection-end-line="766" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/live.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="317">
+              <caret line="526" column="17" lean-forward="false" selection-start-line="526" selection-start-column="17" selection-end-line="526" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -76,18 +87,38 @@
       <file leaf-file-name="live.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="141" column="36" lean-forward="true" selection-start-line="141" selection-start-column="36" selection-end-line="141" selection-end-column="36" />
+            <state relative-caret-position="287">
+              <caret line="772" column="55" lean-forward="true" selection-start-line="772" selection-start-column="55" selection-end-line="772" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WWWController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java">
+      <file leaf-file-name="index.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="277" column="64" lean-forward="false" selection-start-line="277" selection-start-column="64" selection-end-line="277" selection-end-column="64" />
+            <state relative-caret-position="-582">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/lib/prismplayer/index.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="60" column="31" lean-forward="true" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="107" column="92" lean-forward="false" selection-start-line="107" selection-start-column="92" selection-end-line="107" selection-end-column="92" />
               <folding />
             </state>
           </provider>
@@ -105,10 +136,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>reportList</find>
-      <find>msgbar</find>
-      <find>initweb</find>
-      <find>findCover</find>
       <find>imgs=[]</find>
       <find>release</find>
       <find>data</find>
@@ -135,6 +162,10 @@
       <find>评论</find>
       <find>live_msg</find>
       <find>des</find>
+      <find>function i</find>
+      <find>view</find>
+      <find>prism-cover</find>
+      <find>j-livevideo</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -160,8 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ace-common-web/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-jave/pom.xml" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/scene/css/scene.css" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/scene/js/modify.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/scene/js/scene.js" />
@@ -204,13 +233,15 @@
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/js/liveRpt.js" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/js/common.js" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/live.css" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html" />
         <option value="$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/tools/WaterMarkUtils.java" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/msg.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/info.js" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/live.css" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/lib/prismplayer/index.css" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html" />
       </list>
     </option>
   </component>
@@ -275,7 +306,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1366" />
-    <option name="height" value="676" />
+    <option name="height" value="673" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -543,6 +574,10 @@
               <option name="myItemId" value="www" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -582,7 +617,91 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prismplayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ace-live-web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1032,148 +1151,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="huacainfo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace-common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="huacainfo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ace" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="AndroidView" />
@@ -1199,253 +1176,6 @@
       <recent name="C:\Users\HuaCai003\IdeaProjects\ace\ace\ace-live\ace-live-web\src\main\webapp\dynamic\common\img" />
       <recent name="C:\Users\HuaCai003\IdeaProjects\ace\ace\ace-common-web\src\main\lib" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-jave/pom.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/LiveImgService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-client/src/main/java/com/huacainfo/ace/live/service/LiveRptService.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveImgServiceImpl.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveRptController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/css/common.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/css/liveRpt.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/js/liveRpt.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/index.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/css/rptList.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/js/rptList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/index.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-rvc/ace-rvc-service/ace-rvc-service.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-rvc/ace-rvc-service/src/test/java/HelloWorld.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-rvc/ace-rvc-web/ace-rvc-web.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-uf/ace-uf-service/src/main/resources/config.properties</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/ace-uf/ace-uf-web/src/main/resources/config.properties</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/pom.xml</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_101tec_zkclient_0_3.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_alibaba_dubbo_2_5_3.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_alibaba_fastjson_1_2_16.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_baidubce_bce_java_sdk_0_10_15.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_belerweb_pinyin4j_2_5_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_caucho_hessian_4_0_38.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_1_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_1_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_1_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_8_6.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_github_miemiedev_mybatis_paginator_1_2_17.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_google_guava_guava_17_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_huacainfo_ace_kernel_client_1_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_mchange_c3p0_0_9_2_pre5.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_mchange_mchange_commons_java_0_2_3.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_walkmanz_fastdfs4j_fastdfs_client_0_0_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_yammer_metrics_metrics_annotation_2_2_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__com_yammer_metrics_metrics_core_2_2_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__commons_codec_commons_codec_1_9.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__commons_io_commons_io_2_5.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__commons_lang_commons_lang_2_5.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__dom4j_dom4j_1_6_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__javax_activation_activation_1_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__javax_mail_mail_1_4_7.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__javax_media_jai_core_1_1_3.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__javax_servlet_jsp_api_2_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__javax_servlet_servlet_api_2_4.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__jline_jline_0_9_94.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__joda_time_joda_time_2_3.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__junit_junit_4_12.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__log4j_log4j_1_2_14.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__mysql_mysql_connector_java_5_0_5.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__mysql_mysql_connector_java_5_1_25.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__net_coobird_thumbnailator_0_4_7.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__net_sf_ehcache_ehcache_2_9_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__net_sf_ezmorph_ezmorph_1_0_6.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__net_sf_jopt_simple_jopt_simple_3_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__net_sf_json_lib_json_lib_jdk15_2_4.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__net_sourceforge_jexcelapi_jxl_2_6_12.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_commons_commons_pool2_2_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_httpcomponents_httpasyncclient_4_0_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_4.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_httpcomponents_httpcore_nio_4_3_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_kafka_kafka_2_8_2_0_8_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_poi_poi_3_11.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_poi_poi_ooxml_3_11.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_3_11.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_velocity_velocity_1_7.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_2_6_0.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_zookeeper_zookeeper_3_3_4.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_9.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_54.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_bouncycastle_bcprov_ext_jdk15on_1_54.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_54.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_bouncycastle_bcprov_jdk16_1_46.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_freemarker_freemarker_2_3_23.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_icepdf_os_icepdf_core_6_2_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_javassist_javassist_3_15_0_GA.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_jboss_netty_netty_3_2_5_Final.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_jsoup_jsoup_1_10_3.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_mybatis_mybatis_3_4_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_mybatis_mybatis_spring_1_3_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_scala_lang_scala_compiler_2_8_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_scala_lang_scala_library_2_8_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_21.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_7.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_2.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_5.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_5.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_slf4j_simple_1_6_4.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_data_spring_data_commons_1_12_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_1_1_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_data_spring_data_redis_1_7_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_security_spring_security_acl_4_0_4_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_security_spring_security_config_4_0_4_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_security_spring_security_core_4_0_4_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_security_spring_security_taglibs_4_0_4_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_security_spring_security_web_4_0_4_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_session_spring_session_1_2_1_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_aop_4_2_5_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_aop_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_aspects_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_beans_4_2_5_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_beans_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_context_4_2_5_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_context_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_context_support_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_core_4_2_5_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_core_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_expression_4_2_5_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_expression_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_jdbc_4_2_5_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_orm_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_oxm_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_test_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_tx_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_web_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_webmvc_4_3_2_RELEASE.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__org_xerial_snappy_snappy_java_1_0_4_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__redis_clients_jedis_2_8_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__stax_stax_api_1_0_1.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/../.idea/libraries/Maven__xml_apis_xml_apis_1_0_b2.xml</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2166,7 +1896,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517554755001</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="增加图片压缩内容">
+      <created>1517555131845</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1517555131845</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2178,12 +1915,12 @@
     <option name="totallyTimeSpent" value="336950000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1366" height="676" extended-state="0" />
+    <frame x="0" y="23" width="1366" height="673" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.5473341" sideWeight="0.47228146" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -2195,8 +1932,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41458106" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39350453" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32616487" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20619336" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2211,11 +1947,13 @@
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16213275" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.5473341" sideWeight="0.47228146" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32616487" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2248,10 +1986,10 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46057346" sideWeight="0.8176972" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41458106" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39350453" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20619336" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32795697" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32616487" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
@@ -2320,28 +2058,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveImgController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="85" column="17" lean-forward="true" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="37" column="10" lean-forward="true" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptVideo/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="800">
@@ -2537,7 +2253,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="915">
           <caret line="61" column="1" lean-forward="false" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2573,7 +2288,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="64" column="27" lean-forward="false" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2589,7 +2303,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2597,7 +2310,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="129" column="26" lean-forward="false" selection-start-line="118" selection-start-column="20" selection-end-line="129" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2605,7 +2317,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="395">
           <caret line="197" column="13" lean-forward="false" selection-start-line="197" selection-start-column="13" selection-end-line="197" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2613,23 +2324,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-75">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="23" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/live.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="1673" column="29" lean-forward="false" selection-start-line="1673" selection-start-column="29" selection-end-line="1673" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="244" column="72" lean-forward="false" selection-start-line="244" selection-start-column="72" selection-end-line="244" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2662,7 +2356,7 @@
         <state relative-caret-position="4321">
           <caret line="315" column="46" lean-forward="false" selection-start-line="315" selection-start-column="7" selection-end-line="315" selection-end-column="46" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2671,6 +2365,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-119">
           <caret line="51" column="29" lean-forward="true" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="317" column="17" lean-forward="true" selection-start-line="317" selection-start-column="17" selection-end-line="317" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -2679,22 +2380,53 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="42" column="67" lean-forward="false" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/info.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="766" column="18" lean-forward="false" selection-start-line="766" selection-start-column="8" selection-end-line="766" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/live.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="526" column="17" lean-forward="false" selection-start-line="526" selection-start-column="17" selection-end-line="526" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-582">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/lib/prismplayer/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="60" column="31" lean-forward="true" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/live.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="141" column="36" lean-forward="true" selection-start-line="141" selection-start-column="36" selection-end-line="141" selection-end-column="36" />
+        <state relative-caret-position="287">
+          <caret line="772" column="55" lean-forward="true" selection-start-line="772" selection-start-column="55" selection-end-line="772" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java">
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/www/view/live.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="277" column="64" lean-forward="false" selection-start-line="277" selection-start-column="64" selection-end-line="277" selection-end-column="64" />
+        <state relative-caret-position="229">
+          <caret line="107" column="92" lean-forward="false" selection-start-line="107" selection-start-column="92" selection-end-line="107" selection-end-column="92" />
           <folding />
         </state>
       </provider>

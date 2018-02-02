@@ -322,8 +322,7 @@ a {
 	height: 5.62rem;
 	background-color: #000;
 	overflow: hidden;
-	position: fixed;
-    z-index: 310;
+
 }
 
 .xcy-liveinfo .view video {
@@ -525,7 +524,7 @@ a {
 
 .xcy-liveinfo .content {
 	padding: .26rem .42rem;
-	padding-top:6.0rem;
+	/*padding-top:6.0rem;*/
 }
 
 .xcy-liveinfo .title {
