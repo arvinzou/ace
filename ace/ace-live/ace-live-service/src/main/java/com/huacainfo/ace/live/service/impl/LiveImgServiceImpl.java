@@ -84,6 +84,25 @@ public class LiveImgServiceImpl implements LiveImgService {
 
     /**
      * @throws
+     * @Title:deleteLiveImgByLiveImgId
+     * @Description: TODO(删除一个报道的所有图片)
+     * @param: @param id
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-13
+     */
+    @Override
+    public MessageResponse deleteLiveImgByRId(String id, UserProp userProp) throws Exception {
+        this.liveImgDao.deleteByPrimaryKey(id);
+        this.dataBaseLogService.log("删除图片", "图片", String.valueOf(id),
+                String.valueOf(id), "图片", userProp);
+        return new MessageResponse(0, "图片删除完成！");
+    }
+
+    /**
+     * @throws
      * @Title:selectLiveByPrimaryKey
      * @Description: TODO(获取直播)
      * @param: @param id

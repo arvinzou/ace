@@ -31,8 +31,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ace-jave" />
     <orderEntry type="module" module-name="ace-common-web" />
-    <orderEntry type="library" name="Maven: com.huacainfo:ace-jave:1.0" level="project" />
+    <orderEntry type="module" module-name="ace-jave" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.14" level="project" />

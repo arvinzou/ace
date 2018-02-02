@@ -118,4 +118,6 @@ public interface LiveRptService {
      * @return
      */
     MessageResponse updateSequence(String data);
+
+    MessageResponse deleteLiveRptAndImgLiveByRptId(String id,UserProp userProp);
 }

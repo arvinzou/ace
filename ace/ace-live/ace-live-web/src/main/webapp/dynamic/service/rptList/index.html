@@ -6,9 +6,6 @@
     <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../../common/css/common.css">
-    <script type="text/javascript" src="../../common/js/fileinput.js"></script>
-    <link rel="stylesheet" href="../../common/css/fileinput.css">
-    <script type="text/javascript" src="../../common/js/zh.js"></script>
     <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
     <link rel="stylesheet" href="html/css/rptList.css">
     <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.js"></script>
@@ -16,6 +13,7 @@
     <link rel="stylesheet" href="../../common/css/bootstrap-datetimepicker.min.css">
     <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../common/js/iconfont.js"></script>
+    <script type="text/javascript" src="../../common/js/plupload.full.min.js"></script>
     <title>审查现场</title>
 </head>
 
@@ -78,7 +76,7 @@
             <div class="formRow">
                 <div class="titles">报道内容<span class="font-right">0/500</span></div>
                 <div class="formRow-content">
-                    <textarea rows="6" class="content form-control "></textarea>
+                    <textarea rows="6" class="contentRpt form-control "></textarea>
                 </div>
             </div>
             <div class="formRow">
@@ -97,7 +95,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px;">
                     <div class="titles">发布时间</div>
                     <div class="formRow-content">
-                        <input type="text" id="createTime" class="createTime form-control ">
+                        <input type="text" id="createTime" class="createTimeRpt form-control ">
                     </div>
                 </div>
             </div>
@@ -111,44 +109,43 @@
                 <div class="titles">报道类型</div>
                 <div class="formRow-content">
                     <div>
-                        <label>
+                        <label class="label3">
                             <input name="category" type="radio" value="2" checked>
                             图文报道 </label>
-                        <label>
+                        <label class="label3">
                             <input name="category" type="radio" value="1">
                             视频报道 </label>
-                        <label>
+                        <label class="label3">
                             <input name="category" type="radio" value="3">
                             音频报道 </label>
                     </div>
                 </div>
             </div>
-            <div class="formRow">
-                <ul id="forRow-imgList">
-                    <li>
-                        <img src="1.jpg">
-                    </li>
-                    <li>
-                        <img src="1.jpg">
-                    </li>
-                    <li>
-                        <img src="1.jpg">
-                    </li>
-                    <li>
-                        <img src="1.jpg">
-                    </li>
-                </ul>
-            </div>
-            <div class="formRow">
-                <div class="formRow-content">
-                    <div class="form-group">
-                        <div class="file-loading">
-                            <label>Preview File Icon</label>
-                            <input id="file-3" name="file" type="file" multiple>
-                        </div>
+
+            <div class="formRow formRowImg">
+                <div class="formRow-content" id="imageView">
+                    <div id="j-cover" class="retainEl">
+                        <label id="Iupbtn" class="upbtn">
+                            <div class="fn-pt25"><i class="pz-icon icon-img"></i>
+                                <p class="fn-textcenter fn-mt5">点击选择图片</p>
+                            </div>
+                        </label>
                     </div>
                 </div>
             </div>
+
+            <div class="formRow formRowVdo">
+                <div class="formRow-content" id="videoView">
+                    <div id="v-cover" class="retainEl">
+                        <label id="Vupbtn" class="upbtn">
+                            <div class="fn-pt25"><i class="pz-icon icon-img"></i>
+                                <p class="fn-textcenter fn-mt5">点击选择视频</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

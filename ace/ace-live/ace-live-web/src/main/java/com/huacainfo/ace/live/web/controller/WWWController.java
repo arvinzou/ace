@@ -261,7 +261,7 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName,String marktext)
             throws Exception {
-
+        logger.info("=========================");
         Map<String, Object> rst = new HashMap<String, Object>();
         String[] fileNames = new String[file.length];
         String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
@@ -278,11 +278,13 @@ public class WWWController extends LiveBaseController {
         if(marktext!=null){
             waterMarkUtils.MARK_LOGO_IMAGE_04=logoDir+"logo4.png";
             waterMarkUtils.MARK_TEXT=marktext;
+        }else{
+            waterMarkUtils.MARK_LOGO_IMAGE_04=null;
+            waterMarkUtils.MARK_TEXT=null;
         }
-
         for (MultipartFile o : file) {
             File dest = new File(dir + File.separator + o.getName());
-            String fileName=o.getName().toLowerCase();
+            String fileName=o.getOriginalFilename().toLowerCase();
 
             o.transferTo(dest);
             this.logger.info("=================>{}",fileName);

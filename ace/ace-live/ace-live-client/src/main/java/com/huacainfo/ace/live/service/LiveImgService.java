@@ -45,6 +45,22 @@ public interface LiveImgService {
      */
     public abstract MessageResponse deleteLiveImgByLiveImgId(String id, UserProp userProp) throws Exception;
 
+
+
+    /**
+     * @throws
+     * @Title:deleteLiveImgByLiveImgId
+     * @Description: TODO(删除一个报道的所有图片)
+     * @param: @param id
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-13
+     */
+
+    public abstract MessageResponse deleteLiveImgByRId(String id, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:selectLiveByPrimaryKey

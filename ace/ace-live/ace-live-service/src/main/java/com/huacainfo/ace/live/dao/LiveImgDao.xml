@@ -24,6 +24,12 @@
         delete from live_img
         where id = #{id,jdbcType=VARCHAR}
     </delete>
+
+    <delete id="deleteByRid" parameterType="java.lang.String">
+        delete from live_img
+        where rptId = #{rptId,jdbcType=VARCHAR}
+    </delete>
+
     <insert id="insert" parameterType="com.huacainfo.ace.live.model.LiveImg">
         insert into live_img (id, rptId, url,
         w, h, watermarkConfig,
