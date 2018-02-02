@@ -299,6 +299,7 @@ function(e) {
     var l = apiServer + "/www/live/insertLiveRpt.do";
     lvsCmd.ajax(l, {jsons:JSON.stringify(data)},
     function(e, t) {
+        $(".j-content").val("");
         e ? "0" == t.status ? (alert("数据保存成功！"), parent.pizzaCmd.history.pop()) : alert(t.errorMessage) : alert("接口请求失败，请检查网络连接！")
     });
     return false;

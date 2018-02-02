@@ -37,6 +37,7 @@
          message.content=$("#j-remarkform").find("input[name=content]").val();
          message.createTime=new Date().pattern("hh:mm:ss");
          wsk.send(JSON.stringify(message));
+         $("#j-remarkform input[name=content]").val("");
         return false;
       }
 
