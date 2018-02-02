@@ -40,6 +40,7 @@ function createUpImg() {
         silverlight_xap_url: "/live/content/www/lib/plupload-2.1.2/Moxie.xap",
         url: "/live/www/live/upload.do",
         filters: t,
+        multipart_params:{marktext:lvsCmd.urlParams.title,companyId:lvsCmd.urlParams.companyId},
         resize: {
             width: 1024,
             height: 1024,

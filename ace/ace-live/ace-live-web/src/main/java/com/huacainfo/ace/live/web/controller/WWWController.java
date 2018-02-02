@@ -259,7 +259,7 @@ public class WWWController extends LiveBaseController {
 
     @RequestMapping(value = "/upload.do")
     @ResponseBody
-    public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName,String marktext)
+    public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName,String marktext,String companyId)
             throws Exception {
         logger.info("=========================");
         Map<String, Object> rst = new HashMap<String, Object>();
