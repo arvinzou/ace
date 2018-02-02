@@ -739,9 +739,12 @@ var joeFn = {
                 $("#j-liveinfo .view").css("z-index",310);
                 $("#j-liveinfo .content").css("padding-top","2.62rem");
                 $("#j-livevideo-main").css("height","2.62rem");
+                //$("#j-livevideo-main").css("width","5rem");
                 $("#j-video-wrap video").css("width","5rem");
                 $("#j-video-wrap video").css("height","2.62rem");
                 $("#j-video-wrap .prism-cover").css("width","5rem");
+                $("#j-video-wrap .prism-cover").css("height","2.62rem");
+                $("#j-video-wrap .prism-cover").css("float","left");
                 $("#j-video-wrap").css("height","110px");
                 $("#j-video-wrap").css("width","5rem");
                 $("#j-video-wrap .prism-big-play-btn").css("left","25%!important");
@@ -760,9 +763,11 @@ var joeFn = {
                 $("#j-liveinfo .view").css("z-index",0);
                 $("#j-liveinfo .content").css("padding-top",".26rem");
                 $("#j-livevideo-main").css("height","5.62rem");
+                //$("#j-livevideo-main").css("width","10rem");
                 $("#j-video-wrap video").css("width","10rem");
                 $("#j-video-wrap video").css("height","5.62rem");
                 $("#j-video-wrap .prism-cover").css("width","10rem");
+                $("#j-video-wrap .prism-cover").css("height","5.62rem");
                 $("#j-video-wrap").css("height","210px");
                 $("#j-video-wrap").css("width","10rem");
                 $("#j-video-wrap .prism-big-play-btn").css("left","50%!important");
@@ -771,6 +776,7 @@ var joeFn = {
                 $("#j-video-text").addClass("fn-hide");
                 $("#j-video-wrap").css("float","null");
                 $("#j-video-text").css("float","null");
+                $("#j-video-wrap .prism-cover").css("float","null");
             }
         }),
         i()
