@@ -901,6 +901,9 @@ function() {
                 //var o = $("#j-remark-" + i);
                 //o.find(".list").append("<p><span>" + userDict.identityName + ": </span>" + a + "</p>"),
                 //showRemark(o)
+              var e=$('#j-remark-'+i).offset().top-$('#j-remark-'+i).height();
+              console.log("===============>"+e);
+              $(window).scrollTop(e)
             } else lvsCmd.alert(n.errorMessage);
             else lvsCmd.alert("提交失败")
         })

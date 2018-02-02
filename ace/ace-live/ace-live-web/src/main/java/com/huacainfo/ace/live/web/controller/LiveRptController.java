@@ -1,5 +1,6 @@
 package com.huacainfo.ace.live.web.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.web.websocket.MyWebSocket;
 import org.slf4j.Logger;
@@ -74,14 +75,10 @@ public class LiveRptController extends LiveBaseController {
     @RequestMapping(value = "/insertLiveRpt.do")
     @ResponseBody
     public MessageResponse insertLiveRpt(String jsons) throws Exception {
-        logger.debug(jsons);
         JSONObject json = JSON.parseObject(jsons);
         LiveRpt obj = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
-        List<LiveImg> imgs = JSON.parseArray(((JSONObject) json.get("imgs")).toJSONString(), LiveImg.class);
-
-
-        return this.liveRptService
-                .insertLiveRpt(obj, imgs);
+        List<LiveImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), LiveImg.class);
+        return this.liveRptService.insertLiveRpt(obj, imgs);
     }
 
     /**
@@ -141,8 +138,7 @@ public class LiveRptController extends LiveBaseController {
      */
     @RequestMapping(value = "/selectLiveRptByPrimaryKey.do")
     @ResponseBody
-    public SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id)
-            throws Exception {
+    public SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id) throws Exception {
         return this.liveRptService.selectLiveRptByPrimaryKey(id);
     }
 
@@ -161,6 +157,23 @@ public class LiveRptController extends LiveBaseController {
     public MessageResponse deleteLiveRptByLiveRptId(String id) throws Exception {
         return this.liveRptService.deleteLiveRptByLiveRptId(id,
                 this.getCurUserProp());
+    }
+
+
+    /**
+     * @throws
+     * @Title:deleteLiveRptByLiveRptId
+     * @Description: TODO(删除图和文直播)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    @RequestMapping(value = "/deleteLiveRptAndImgLiveByRptId.do")
+    @ResponseBody
+    public MessageResponse deleteLiveRptAndImgLiveByRptId(String id) throws Exception {
+        return this.liveRptService.deleteLiveRptAndImgLiveByRptId(id,this.getCurUserProp());
     }
 
     /**

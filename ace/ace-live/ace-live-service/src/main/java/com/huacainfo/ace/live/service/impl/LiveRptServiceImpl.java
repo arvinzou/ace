@@ -93,7 +93,9 @@ public class LiveRptServiceImpl implements LiveRptService {
         if (CommonUtils.isBlank(o.getUid())) {
             return new MessageResponse(1, "用户编号不能为空！");
         }
-        o.setCreateTime(new Date());
+        if(o.getCreateTime()==null){
+            o.setCreateTime(new Date());
+        }
         o.setStatus("1");
         boolean flag=true;
         for (LiveImg img : imgs) {
@@ -183,6 +185,15 @@ public class LiveRptServiceImpl implements LiveRptService {
         }
 
         return new MessageResponse(0, "OK！");
+    }
+
+    @Override
+    public MessageResponse deleteLiveRptAndImgLiveByRptId(String id,UserProp userProp) {
+        this.liveRptDao.deleteByPrimaryKey(id);
+        this.liveImgDao.deleteByRid(id);
+        this.dataBaseLogService.log("删除图文直播", "图文直播", String.valueOf(id),
+                String.valueOf(id), "图文直播", userProp);
+        return new MessageResponse(0, "图文直播删除完成！");
     }
 
     /**

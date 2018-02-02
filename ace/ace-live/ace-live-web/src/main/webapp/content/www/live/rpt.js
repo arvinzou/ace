@@ -40,6 +40,7 @@ function createUpImg() {
         silverlight_xap_url: "/live/content/www/lib/plupload-2.1.2/Moxie.xap",
         url: "/live/www/live/upload.do",
         filters: t,
+        multipart_params:{marktext:lvsCmd.urlParams.title,companyId:lvsCmd.urlParams.companyId},
         resize: {
             width: 1024,
             height: 1024,
@@ -299,6 +300,7 @@ function(e) {
     var l = apiServer + "/www/live/insertLiveRpt.do";
     lvsCmd.ajax(l, {jsons:JSON.stringify(data)},
     function(e, t) {
+        $(".j-content").val("");
         e ? "0" == t.status ? (alert("数据保存成功！"), parent.pizzaCmd.history.pop()) : alert(t.errorMessage) : alert("接口请求失败，请检查网络连接！")
     });
     return false;

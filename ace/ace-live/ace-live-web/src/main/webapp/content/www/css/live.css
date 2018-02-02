@@ -822,13 +822,14 @@ a {
 }
 
 .xcy-report ul {
-	border-left: solid 2px #f0f0f0;
+	border-left: solid 1px #f0f0f0;
 	padding-left: .64rem
 }
 
 .xcy-report li {
 	border-top: solid 1px #ebebeb;
-	padding-top: .42rem
+	padding-top: .42rem;
+	width: 8.13rem;
 }
 
 .xcy-report li:first-child {
@@ -1601,6 +1602,9 @@ ul {
 .headimg {
 	width:.80rem;height:.80rem;border-radius:50%;vertical-align:middle;
 }
+.headimgp {
+	width:.80rem;height:.80rem;border-radius:50%;vertical-align:middle; padding-right: .2rem;
+}
 .center{
     text-align:center
 }
@@ -1665,4 +1669,7 @@ margin:.1rem;
 .audio{
         padding-top:.3rem;
         width:100%;
+    }
+    .live_msg{
+        padding-bottom:.2rem;
     }

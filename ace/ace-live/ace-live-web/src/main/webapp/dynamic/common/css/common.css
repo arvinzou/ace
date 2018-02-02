@@ -1,6 +1,7 @@
 body {
 	font-family: "Microsoft YaHei",NSimSun,SimSun,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #666;
+	overflow-y: hidden;
 }
 .container-fluid{
 	padding-right: 40px!important;

@@ -242,13 +242,14 @@
                                 </div>
                                 <div class="reporter fn-clear">
 
-                                    <div style="float:left;">
+                                    <div style="float:left;color:#999999">
                                         {@if item.rpt.headimgurl}
-                                        <img src="${item.rpt.headimgurl}" class="headimg">
+                                        <img src="${item.rpt.headimgurl}" class="headimgp">
                                     {@else}
-                                        <img src="/live/content/www/img/head_default.png" class="wxheadimg">
+                                        <img src="/live/content/www/img/head_default.png" class="headimg">
                                     {@/if}
-                                        ${item.rpt.nickname}
+
+                                          ${item.rpt.nickname}
                                     </div>
 
                                     <em{@if item.createDate == "刚刚"} class="ganggang"{@/if}></em>

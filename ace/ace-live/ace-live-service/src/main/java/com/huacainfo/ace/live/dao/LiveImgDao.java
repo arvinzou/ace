@@ -25,4 +25,6 @@ public interface LiveImgDao {
     int findCount(@Param("condition") LiveImgQVo condition);
 
     int isExit(LiveImg record);
+
+    int deleteByRid(String rptId);
 }

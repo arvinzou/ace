@@ -1,16 +1,16 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<script type="text/javascript" src="../../common/js/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" href="../../common/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../../common/css/font-awesome.min.css">
-<link rel="stylesheet" href="html/css/liveRpt.css">
-<script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../common/js/iconfont.js"></script>
-<script type="text/javascript" src="../../common/js/plupload.full.min.js"></script>
-<title>创建报道</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../../common/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
+    <link rel="stylesheet" href="html/css/liveRpt.css">
+    <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../common/js/iconfont.js"></script>
+    <script type="text/javascript" src="../../common/js/plupload.full.min.js"></script>
+    <title>创建报道</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
         <input type="text" class="searchByName form-control" placeholder="请输入标题关键字">
         <span class="input-group-btn">
         <button class="search btn btn-default" type="button">查</button>
-        </span> </div>
+        </span></div>
 </div>
 <div class="container-fluid content_container">
     <div class="table_content">
@@ -45,13 +45,13 @@
             <div class="formRow">
                 <div class="title">所属现场</div>
                 <div class="formRow-content">
-                    <input type="text" value="【常德融媒】常德冰冻周实时直播" onlyread class="name form-control" disabled="">
+                    <input type="text" onlyread class="name form-control" disabled="">
                 </div>
             </div>
-			<div class="container-fluid btn-container">
-        <button type="button" class="release btn btn-success">发布报道</button>
-        <button type="button" class="cancel btn btn-info">取消报道</button>
-        <span class="prompt"></span> </div>
+            <div class="container-fluid btn-container">
+                <button type="button" class="release btn btn-success">发布报道</button>
+                <button type="button" class="cancel btn btn-info">取消报道</button>
+                <span class="prompt"></span></div>
         </div>
         <div class="container_model container_right">
             <div class="formRow">
@@ -70,21 +70,31 @@
                     </div>
                 </div>
             </div>
-
-            <div class="formRow">
-                <div class="formRow-content">
-                    <div id="j-cover" class="xcy-cutimg">
-                        <label id="upbtn" class="upbtn">
-                            <div class="imgbar">
-
-                            </div>
+            <div class="formRow formRowImg">
+                <div class="formRow-content" id="imageView">
+                    <div id="j-cover" class="retainEl">
+                        <label id="Iupbtn" class="upbtn">
                             <div class="fn-pt25"><i class="pz-icon icon-img"></i>
-                                <p class="fn-textcenter fn-mt5">点击选择封面图片</p>
+                                <p class="fn-textcenter fn-mt5">点击选择图片</p>
                             </div>
                         </label>
                     </div>
                 </div>
             </div>
+
+            <div class="formRow formRowVdo">
+                <div class="formRow-content" id="videoView">
+                    <div id="v-cover" class="retainEl">
+                        <label id="Vupbtn" class="upbtn">
+                            <div class="fn-pt25"><i class="pz-icon icon-img"></i>
+                                <p class="fn-textcenter fn-mt5">点击选择视频</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
