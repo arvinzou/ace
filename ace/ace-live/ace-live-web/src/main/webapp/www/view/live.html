@@ -28,6 +28,10 @@
                 {@if data.state == 1}
                 {@if data.cover}
                 <img src="${data.cover}">
+                <div id="j-video-text" class="fn-hide" style="width:5rem;">
+
+                    <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">${data.topic}</p></div>
+                </div>
                 {@else}
                 <img src="">
                 {@/if}
@@ -55,8 +59,8 @@
                             </div>
                         </div>
                         <div id="j-video-wrap"></div>
-                        <div id="j-video-text" class="fn-hide" style="width:5rem;color:#fff">
-                            ${data.topic}
+                        <div id="j-video-text" class="fn-hide" style="width:5rem;">
+                            <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">${data.topic}</p></div>
                         </div>
                     </div>
                     <div id="j-v-loading" class="v-loading fn-hide"><i></i></div>
@@ -77,6 +81,9 @@
                         </div>
                         {@if data.cover}
                         <img src="${data.cover}">
+                        <div id="j-video-text" class="fn-hide" style="width:5rem;color:#fff;">
+                            <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">${data.topic}</p></div>
+                        </div>
                         {@else}
                         <img src="">
                         {@/if}
@@ -89,7 +96,7 @@
                         <div class="text"><span>正在播放：</span>
                             <p>${data.topic}</p></div>
                     </div>
-                    <div id="j-livevideo-main" class="videowrap fn-hide">
+                    <div id="j-livevideo-main" class="videowrap">
                         <div class="videotypelist fn-hide">
                             <ul>
                                 <li data-type="hd">高清</li>
@@ -106,7 +113,7 @@
                         </div>
                         <div id="j-video-wrap"></div>
                         <div id="j-video-text" class="fn-hide" style="width:5rem;color:#fff">
-                            ${data.topic}
+                            <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">${data.topic}</p></div>
                         </div>
                     </div>
                     <div id="j-v-loading" class="v-loading fn-hide"><i></i></div>
@@ -151,6 +158,9 @@
                 {@else}
                 {@if data.cover}
                 <img src="${data.cover}">
+                <div id="j-video-text" class="fn-hide" style="width:5rem;color:#fff">
+                    <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">${data.topic}</p></div>
+                </div>
                 {@else}
                 <img src="">
                 {@/if}

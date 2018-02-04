@@ -754,6 +754,9 @@ var joeFn = {
                 $("#j-video-wrap").css("float","left");
                 $("#j-video-text").css("float","right");
 
+                $("#j-liveinfo img").css("width","5rem");
+                $("#j-liveinfo img").css("float","left");
+
 
 
 
@@ -777,6 +780,9 @@ var joeFn = {
                 $("#j-video-wrap").css("float","null");
                 $("#j-video-text").css("float","null");
                 $("#j-video-wrap .prism-cover").css("float","null");
+                $("#j-liveinfo img").css("width","10rem");
+                $("#j-liveinfo img").css("float","null");
+
             }
         }),
         i()

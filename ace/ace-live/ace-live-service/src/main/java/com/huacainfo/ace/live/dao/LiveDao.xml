@@ -264,7 +264,7 @@
         left join live_img b on t.id=b.rptId
         left join live_cmt c on t.id=c.rptId
         left join portal.userinfo d on c.uid=d.openid
-        where rid=#{rid}
+        where rid=#{rid} and status='2'
         <choose>
             <when test='sort!=null and sort=="0"'>
                 order by t.sort,t.createTime desc,c.createTime
