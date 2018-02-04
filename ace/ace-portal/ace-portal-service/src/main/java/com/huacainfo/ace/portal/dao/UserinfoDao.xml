@@ -106,4 +106,28 @@
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
+
+    <update id="updateRole">
+        update userinfo
+        set
+        role = #{role,jdbcType=VARCHAR}
+        where unionid = #{unionid,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectWxUser" resultType="map">
+        select  unionid, openid, appid, nickname, sex, city, province, country, headimgurl, access_token,
+        refresh_token, scope, expires_in,role from userinfo
+        where 0=0
+        <if test='condition.nickname!=null and condition.nickname!=""'>
+            and nickname like
+            concat(#{condition.nickname,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.role!=null and condition.role!=""'>
+            and role =#{condition.role,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.openid!=null and condition.openid!=""'>
+            and openid role =#{condition.openid,jdbcType=VARCHAR}
+        </if>
+        ORDER BY unionid
+    </select>
 </mapper>

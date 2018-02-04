@@ -18,6 +18,9 @@ import com.huacainfo.ace.portal.service.UserinfoService;
 import com.huacainfo.ace.portal.vo.UserinfoVo;
 import com.huacainfo.ace.portal.vo.UserinfoQVo;
 
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/userinfo")
 /**
@@ -130,5 +133,21 @@ public class UserinfoController extends PortalBaseController {
         String id = json.getString("id");
         return this.userinfoService.deleteUserinfoByUserinfoId(id,
                 this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/updateRoleById.do")
+    @ResponseBody
+    public MessageResponse updateRoleById(String id, String role) throws Exception {
+        return this.userinfoService.updateRoleById(id, role, this.getCurUserProp());
+    }
+    @RequestMapping(value = "/deleteRoleById.do")
+    @ResponseBody
+    public MessageResponse deleteRoleById(String id) throws Exception {
+        return this.userinfoService.deleteRoleById(id, this.getCurUserProp());
+    }
+    @RequestMapping(value = "/selectWxUser.do")
+    @ResponseBody
+    public List<Map<String,Object>> selectWxUser()throws Exception{
+        return this.userinfoService.selectWxUser(this.getParams());
     }
 }

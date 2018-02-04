@@ -8,6 +8,9 @@ import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.portal.vo.UserinfoVo;
 import com.huacainfo.ace.portal.vo.UserinfoQVo;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author: 陈晓克
  * @version: 2017-12-29
@@ -79,6 +82,46 @@ public interface UserinfoService {
      * @version: 2017-12-29
      */
     public abstract MessageResponse deleteUserinfoByUserinfoId(String id, UserProp userProp) throws Exception;
+
+    /**
+     * @throws
+     * @Title:deleteRoleById
+     * @Description: TODO(删除微信用户的角色)
+     * @param: @param id
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-02-04
+     */
+    public abstract MessageResponse deleteRoleById(String id,UserProp userProp) throws Exception;
+    /**
+     * @throws
+     * @Title:updateRoleById
+     * @Description: TODO(更新微信用户的角色)
+     * @param: @param id
+     * @param: @param role
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-02-04
+     */
+    public abstract MessageResponse updateRoleById(String id,String role,UserProp userProp) throws Exception;
+
+    /**
+     * @throws
+     * @Title:selectWxUser
+     * @Description: TODO(组合查询微信用户)
+     * @param: @param id
+     * @param: @param role
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-02-04
+     */
+    List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception;
 
 
 }

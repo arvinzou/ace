@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -138,5 +139,60 @@ public class UserinfoServiceImpl implements UserinfoService {
         this.dataBaseLogService.log("删除微信用户", "微信用户", String.valueOf(id),
                 String.valueOf(id), "微信用户", userProp);
         return new MessageResponse(0, "微信用户删除完成！");
+    }
+
+    /**
+     * @throws
+     * @Title:deleteRoleById
+     * @Description: TODO(删除微信用户的角色)
+     * @param: @param id
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-02-04
+     */
+    @Override
+    public  MessageResponse deleteRoleById(String id,UserProp userProp) throws Exception{
+        this.userinfoDao.updateRole(id,null);
+        this.dataBaseLogService.log("删除角色", "微信用户", String.valueOf(id),
+                String.valueOf(id), "微信用户", userProp);
+        return new MessageResponse(0, "删除角色完成！");
+    }
+    /**
+     * @throws
+     * @Title:updateRoleById
+     * @Description: TODO(更新微信用户的角色)
+     * @param: @param id
+     * @param: @param role
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-02-04
+     */
+    @Override
+    public  MessageResponse updateRoleById(String id,String role,UserProp userProp) throws Exception{
+        this.userinfoDao.updateRole(id,role);
+        this.dataBaseLogService.log("分配角色", "微信用户", String.valueOf(id),
+                String.valueOf(id), "微信用户", userProp);
+        return new MessageResponse(0, "分配角色完成！");
+    }
+
+    /**
+     * @throws
+     * @Title:selectWxUser
+     * @Description: TODO(组合查询微信用户)
+     * @param: @param id
+     * @param: @param role
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-02-04
+     */
+    @Override
+    public List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception{
+        return this.userinfoDao.selectWxUser(condition);
     }
 }

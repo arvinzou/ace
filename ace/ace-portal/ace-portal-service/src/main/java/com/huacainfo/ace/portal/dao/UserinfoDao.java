@@ -1,6 +1,7 @@
 package com.huacainfo.ace.portal.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.common.model.Userinfo;
@@ -25,5 +26,8 @@ public interface UserinfoDao {
     int findCount(@Param("condition") UserinfoQVo condition);
 
     int isExit(Userinfo record);
+
+    int updateRole(@Param("unionid") String unionid,@Param("role") String role);
+    List<Map<String,Object>> selectWxUser(@Param("condition") Map<String,Object> condition);
 
 }
