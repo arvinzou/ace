@@ -543,7 +543,7 @@ $.ajax({
 		url : contextPath + "/users/updateOpenIdById.do",
 		data:{userId:r.userId,openId:openId},
 		success : function(rst, textStatus) {
-			initPhoto();
+			initPhoto(r.userId);
 		}
 	});
 }
