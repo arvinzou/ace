@@ -378,7 +378,7 @@ public class UsersServiceImpl implements UsersService {
 	 */
 	@Override
 	public  MessageResponse deleteOpenIdById(String userId,UserProp userProp) throws Exception{
-		this.usersDao.updateUserOpenId(null,userId);
+		this.usersDao.updateUserOpenId(userId,null);
 		this.dataBaseLogService.log("绑定微信", "用户", String.valueOf(userId),
 				String.valueOf(userId), "微信用户", userProp);
 		return new MessageResponse(0, "解除绑定完成！");
