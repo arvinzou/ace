@@ -4,16 +4,16 @@ jQuery(function($) {
         $.ajax({
                 type : "post",
                 url : contextPath + "/userinfo/selectWxUser.do",
-                data:{role:"",nickName:$("#q").val()},
+                data:{role:"",nickname:$("#q").val()},
                 success : function(rst, textStatus) {
                     var html=[];
                     $.each($(rst),function(i,o){
                             html.push('<div class="layout-user">');
-                            html.push('<a href="javascript:insertWxUser(\''+o.unionId+'\')">');
-                            html.push('<img  class="photo" src="'+o.avatarUrl+'">');
+                            html.push('<a href="javascript:insertWxUser(\''+o.unionid+'\')">');
+                            html.push('<img  class="photo" src="'+o.headimgurl+'">');
                             html.push('</a>');
                             html.push('<div style="text-align:center">');
-                            html.push(o.nickName);
+                            html.push(o.nickname);
                             html.push('</div>');
                             html.push('</div>');
                     });
@@ -38,16 +38,16 @@ function initPhotoDom(rst){
         html.push('<ul class="ace-thumbnails clearfix">');
         $.each($(rst),function(i,o){
 				html.push('<li>');
-                html.push('<a href="'+o.avatarUrl+'" title="'+o.nickName+'" data-rel="colorbox" class="cboxElement">');
-                html.push('<img class="photo" src="'+o.avatarUrl+'">');
+                html.push('<a href="'+o.headimgurl+'" title="'+o.nickname+'" data-rel="colorbox" class="cboxElement">');
+                html.push('<img class="photo" src="'+o.headimgurl+'">');
                 html.push('</a>');
                 html.push('<div class="tools tools-bottom">');
-                html.push('<a href="javascript:delPhoto(\''+o.unionId+'\')">');
+                html.push('<a href="javascript:delPhoto(\''+o.unionid+'\')">');
                 html.push('<i class="ace-icon fa fa-times red"></i>');
                 html.push('</a>');
                 html.push('</div>');
                 html.push('<div style="text-align:center">');
-                html.push(o.nickName);
+                html.push(o.nickname);
                 html.push('</div>');
                 html.push('</li>');
 		});

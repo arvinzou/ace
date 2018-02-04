@@ -1,5 +1,5 @@
 var _colNames = ['姓名', '用户编号', '账户','密码', '性别', '身份证号',  '归属部门','所属地区', '出生日期', '状态',
-		'最后登录时间', '手机号', '电子邮箱', '职务', '座位', '创建时间' ];
+		'最后登录时间', '手机号', '电子邮箱', '职务','绑定微信', '座位', '创建时间' ];
 var _colModel = function() {
 	return [
             {
@@ -254,6 +254,15 @@ var _colModel = function() {
                     required : true
                 }
 			}, {
+              				name : 'nickname',
+              				hidden:false,
+
+              				editable : true,
+              				editoptions : {
+              					size : "20",
+              					maxlength : "50"
+              				}
+              			}, {
 				name : 'seat',
 				hidden:true,
 				//width : 150,

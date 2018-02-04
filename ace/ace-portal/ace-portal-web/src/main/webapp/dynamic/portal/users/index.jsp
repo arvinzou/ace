@@ -11,6 +11,7 @@
 </head>
 <jsp:include page="../../common/common.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+
 <style type="text/css">
 		.excel{ background-color:#999; font-size:13px;}
 		.excel td{ background-color:#fff; white-space:nowrap;}
@@ -150,8 +151,22 @@
 				<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i> 您确定吗?
 			</p>
 		</div>
+		<div id="dialog-message-admin" class="hide">
+			<div>
+				昵称： <input type="text" name="q" id="q"/>
+				<button class="btn btn-info" id="btn-search-admin"
+						authority="false">
+					查询
+					<i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+				</button>
+			</div>
+			<div id="wxUserList">
+
+			</div>
+		</div>
 	</div>
 	<jsp:include page="../../common/footer-1.jsp" />
+	<script src="${portalPath}/content/common/assets/js/uncompressed/jquery.colorbox.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/portal/js/users/config.js?version=${cfg.version}"></script>
 	<script
@@ -198,5 +213,44 @@ function autoSize(){
 		<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
 			<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
+	<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css" />
+	<style>
+        .layout-user {
+            width: 80px;
+            height: 80px;
+            float: left;
+            margin: 10px 10px 10px;
+            text-align:center;
+        }
+        .photo {
+            height: 60px;
+            max-height:60px;
+            max-width:60px;
+            vertical-align: middle;
+            border-radius:60px;
+        }
+        #cboxContent {
+            background-color: rgb(255, 255, 255);
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
+            padding: 5px;
+        }
+        .ace-thumbnails > li {
+            float: left;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            margin: 2px;
+            border-width: 0px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
+        }
+
+
+    </style>
 </body>
 </html>

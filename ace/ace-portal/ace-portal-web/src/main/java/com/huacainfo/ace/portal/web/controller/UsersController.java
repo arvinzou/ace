@@ -391,7 +391,7 @@ public class UsersController extends PortalBaseController {
 	public MessageResponse updateOpenIdById(String userId, String openId) throws Exception {
 		return this.usersService.updateOpenIdById(userId,openId , this.getCurUserProp());
 	}
-	@RequestMapping(value = "/deleteRoleById.do")
+	@RequestMapping(value = "/deleteOpenIdById.do")
 	@ResponseBody
 	public MessageResponse deleteOpenIdById(String userId) throws Exception {
 		return this.usersService.deleteOpenIdById(userId, this.getCurUserProp());

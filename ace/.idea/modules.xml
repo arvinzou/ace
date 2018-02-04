@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/ace-common/ace-common.iml" filepath="$PROJECT_DIR$/ace-common/ace-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-web/ace-common-web.iml" filepath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jave/ace-jave.iml" filepath="$PROJECT_DIR$/ace-jave/ace-jave.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live.iml" filepath="$PROJECT_DIR$/ace-live/ace-live.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" />

@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import com.huacainfo.ace.common.security.filter.WebAccessDecisionSecurityFilter;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -45,7 +43,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
+	@Override
 	public PageResult<RoleVo> findRoleList(Role condition, int start,
 			int limit, String orderBy) throws Exception {
 		PageResult<RoleVo> rst = new PageResult<RoleVo>();
@@ -57,7 +55,7 @@ public class RoleServiceImpl implements RoleService {
 		rst.setStatus(0);
 		return rst;
 	}
-
+	@Override
 	public MessageResponse insertRole(Role role, UserProp userProp)
 			throws Exception {
 
@@ -79,7 +77,7 @@ public class RoleServiceImpl implements RoleService {
 				role.getRoleName(), userProp);
 		return new MessageResponse(0, "添加新角色完成！");
 	}
-
+	@Override
 	public MessageResponse updateRole(Role role, UserProp userProp)
 			throws Exception {
 
@@ -102,7 +100,7 @@ public class RoleServiceImpl implements RoleService {
 
 		return new MessageResponse(0, "角色信息变更完成！");
 	}
-
+	@Override
 	public MessageResponse insertRoleResources(String roleId,
 			String[] resourcesId, UserProp userProp) throws Exception {
 		SqlSession session = this.sqlSession.getSqlSessionFactory()
@@ -133,7 +131,7 @@ public class RoleServiceImpl implements RoleService {
 		this.dataBaseLogService.log("角色权限变更", "角色权限", "", "", roleId, userProp);
 		return new MessageResponse(0, "权限分配完成！");
 	}
-
+	@Override
 	public SingleResult<RoleVo> selectRoleByPrimaryKey(String roleId)
 			throws Exception {
 		SingleResult<RoleVo> rst = new SingleResult<RoleVo>();
@@ -142,13 +140,13 @@ public class RoleServiceImpl implements RoleService {
 		rst.setStatus(0);
 		return rst;
 	}
-
+	@Override
 	public List<CheckTree> selectRoleResourceTreeList(String roleId) {
 		CKTreeUtils checkTreeUtils = new CKTreeUtils(
 				this.roleDao.selectRoleResourceTreeList(roleId));
 		return checkTreeUtils.getCheckTreeList("0");
 	}
-
+	@Override
 	public MessageResponse deleteRoleByRoleId(String roleId, UserProp userProp)
 			throws Exception {
 		if (roleId.indexOf(",") != -1) {

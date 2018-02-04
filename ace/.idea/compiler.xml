@@ -10,6 +10,7 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
+        <module name="ace-jave" />
         <module name="ace-live-client" />
         <module name="ace-live-service" />
         <module name="ace-live-web" />

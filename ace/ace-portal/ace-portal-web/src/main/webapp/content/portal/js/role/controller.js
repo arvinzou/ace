@@ -261,3 +261,4 @@ function style_ajax_button(btnId,status){
 	}
 }
 });
+
