@@ -126,7 +126,7 @@
             and role =#{condition.role,jdbcType=VARCHAR}
         </if>
         <if test='condition.openid!=null and condition.openid!=""'>
-            and openid role =#{condition.openid,jdbcType=VARCHAR}
+            and openid =#{condition.openid,jdbcType=VARCHAR}
         </if>
         ORDER BY unionid
     </select>

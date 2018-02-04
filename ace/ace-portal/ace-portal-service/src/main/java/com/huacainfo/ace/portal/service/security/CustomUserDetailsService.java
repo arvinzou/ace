@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private SystemService systemService;
-
+	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
 		Users syUser = systemService.selectUsersByAccount(username);
@@ -67,14 +67,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 					syUser.getDepartmentId(), syUser.getCorpName(),
 					syUser.getAreaCode(), syUser.getStauts().equals("1"), true,
 					true, true, auths, roleType, syUser.getParentCorpId(),
-					syUser.getEmail(), syUser.getAccount(), role, syid, syUser.getCurSyid(),cfg);
+					syUser.getEmail(), syUser.getAccount(), role, syid, syUser.getCurSyid(),cfg,syUser.getOpenId());
 			logger.info("加载用户信息:{}", o);
 			return o;
 		} else {
 			return new BasicUsers("0", "default", "default", "default",
 					"default", "default", "default", "default", false, true,
 					true, false, auths, null, "default", null, null, null,
-					null, null,null);
+					null, null,null,null);
 		}
 	}
 }

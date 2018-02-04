@@ -213,4 +213,45 @@ public interface UsersService {
 
 	public abstract MessageResponse insertReg(Users obj) throws Exception;
 
+
+	/**
+	 * @throws
+	 * @Title:deleteRoleById
+	 * @Description: TODO(删除微信用户的角色)
+	 * @param: @param id
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-02-04
+	 */
+	public abstract MessageResponse deleteOpenIdById(String userId,UserProp userProp) throws Exception;
+	/**
+	 * @throws
+	 * @Title:updateRoleById
+	 * @Description: TODO(更新微信用户的角色)
+	 * @param: @param id
+	 * @param: @param role
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-02-04
+	 */
+	public abstract MessageResponse updateOpenIdById(String userId,String openId,UserProp userProp) throws Exception;
+
+	/**
+	 * @throws
+	 * @Title:selectWxUser
+	 * @Description: TODO(组合查询微信用户)
+	 * @param: @param id
+	 * @param: @param role
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-02-04
+	 */
+	List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception;
+
 }

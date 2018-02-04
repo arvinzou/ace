@@ -32,7 +32,7 @@ public class BasicUsers extends UserProp implements UserDetails {
 			String areaCode, boolean accountNonExpired,
 			boolean accountNonLocked, boolean credentialsNonExpired,
 			boolean enabled, Collection<GrantedAuthority> authorities,
-			List<String> roleType, String parentCorpId,String email,String account,List<String> role, String[] syid, String activeSyId,Map<String,Object> cfg) {
+			List<String> roleType, String parentCorpId,String email,String account,List<String> role, String[] syid, String activeSyId,Map<String,Object> cfg,String openId) {
 		super();
 		this.password = password;
 		this.username = username;
@@ -56,6 +56,7 @@ public class BasicUsers extends UserProp implements UserDetails {
 		setSyid(syid);
 		setActiveSyId(activeSyId);
 		setCfg(cfg);
+		setOpenId(openId);
 	}
 
 	public String getPassword() {

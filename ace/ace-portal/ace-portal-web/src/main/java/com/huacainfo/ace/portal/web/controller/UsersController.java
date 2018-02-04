@@ -385,4 +385,20 @@ public class UsersController extends PortalBaseController {
 		}
 		return this.usersService.importXls(list, this.getCurUserProp());
 	}
+
+	@RequestMapping(value = "/updateOpenIdById.do")
+	@ResponseBody
+	public MessageResponse updateOpenIdById(String userId, String openId) throws Exception {
+		return this.usersService.updateOpenIdById(userId,openId , this.getCurUserProp());
+	}
+	@RequestMapping(value = "/deleteRoleById.do")
+	@ResponseBody
+	public MessageResponse deleteOpenIdById(String userId) throws Exception {
+		return this.usersService.deleteOpenIdById(userId, this.getCurUserProp());
+	}
+	@RequestMapping(value = "/selectWxUser.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectWxUser()throws Exception{
+		return this.usersService.selectWxUser(this.getParams());
+	}
 }

@@ -1,4 +1,5 @@
 jQuery(function($) {
+
 $("#pg").propertygrid({
  						width: 'auto',
  				        height: 'auto',

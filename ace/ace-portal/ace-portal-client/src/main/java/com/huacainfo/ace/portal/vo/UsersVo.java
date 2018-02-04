@@ -12,6 +12,10 @@ public class UsersVo extends Users{
 	
 	private String areaName;
 
+	private String nickname;
+
+	private String headimgurl;
+
 	public String getDepartmentName() {
 		return departmentName;
 	}
@@ -26,5 +30,21 @@ public class UsersVo extends Users{
 
 	public void setAreaName(String areaName) {
 		this.areaName = areaName;
-	}	
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getHeadimgurl() {
+		return headimgurl;
+	}
+
+	public void setHeadimgurl(String headimgurl) {
+		this.headimgurl = headimgurl;
+	}
 }

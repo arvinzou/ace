@@ -53,6 +53,8 @@ public class UserProp implements Serializable {
 
 	private String email;
 
+	private String openId;
+
 	private List<String> roleType;
 	private List<String> role;
 	
@@ -269,5 +271,13 @@ public class UserProp implements Serializable {
 
 	public void setCfg(Map<String, Object> cfg) {
 		this.cfg = cfg;
+	}
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
 	}
 }

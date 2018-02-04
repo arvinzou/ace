@@ -57,6 +57,8 @@ public class Users implements java.io.Serializable{
 	private String id;
 
 	private String formId;
+
+	private String openId;
 	
 	
 	public String getCurSyid() {
@@ -211,18 +213,44 @@ public class Users implements java.io.Serializable{
 		this.formId = formId;
 	}
 
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Users [userId=" + userId + ", account=" + account
-				+ ", password=" + password + ", sex=" + sex + ", idCard="
-				+ idCard + ", name=" + name + ", departmentId=" + departmentId
-				+ ", areaCode=" + areaCode + ", birthday=" + birthday
-				+ ", stauts=" + stauts + ", lastLoginTime=" + lastLoginTime
-				+ ", mobile=" + mobile + ", email=" + email + ", seat=" + seat
-				+ ", userLevel=" + userLevel + ", createTime=" + createTime
-				+ "]";
+		return "Users{" +
+				"userId='" + userId + '\'' +
+				", account='" + account + '\'' +
+				", password='" + password + '\'' +
+				", sex='" + sex + '\'' +
+				", idCard='" + idCard + '\'' +
+				", name='" + name + '\'' +
+				", departmentId='" + departmentId + '\'' +
+				", areaCode='" + areaCode + '\'' +
+				", birthday=" + birthday +
+				", stauts='" + stauts + '\'' +
+				", lastLoginTime=" + lastLoginTime +
+				", mobile='" + mobile + '\'' +
+				", email='" + email + '\'' +
+				", seat='" + seat + '\'' +
+				", userLevel='" + userLevel + '\'' +
+				", createTime=" + createTime +
+				", parentCorpId='" + parentCorpId + '\'' +
+				", corpName='" + corpName + '\'' +
+				", telphone='" + telphone + '\'' +
+				", fax='" + fax + '\'' +
+				", qq='" + qq + '\'' +
+				", curSyid='" + curSyid + '\'' +
+				", id='" + id + '\'' +
+				", formId='" + formId + '\'' +
+				", openId='" + openId + '\'' +
+				'}';
 	}
-	
-	
-	
 }

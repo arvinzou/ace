@@ -365,4 +365,59 @@ public class UsersServiceImpl implements UsersService {
 		return new MessageResponse(0, "导入完成！");
 	}
 
+	/**
+	 * @throws
+	 * @Title:deleteRoleById
+	 * @Description: TODO(删除微信用户的角色)
+	 * @param: @param id
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-02-04
+	 */
+	@Override
+	public  MessageResponse deleteOpenIdById(String userId,UserProp userProp) throws Exception{
+		this.usersDao.updateUserOpenId(null,userId);
+		this.dataBaseLogService.log("绑定微信", "用户", String.valueOf(userId),
+				String.valueOf(userId), "微信用户", userProp);
+		return new MessageResponse(0, "解除绑定完成！");
+	}
+	/**
+	 * @throws
+	 * @Title:updateRoleById
+	 * @Description: TODO(更新微信用户的角色)
+	 * @param: @param id
+	 * @param: @param role
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-02-04
+	 */
+	@Override
+	public  MessageResponse updateOpenIdById(String userId,String openId,UserProp userProp) throws Exception{
+		this.usersDao.updateUserOpenId(userId,openId);
+		this.dataBaseLogService.log("绑定微信", "用户", String.valueOf(userId),
+				String.valueOf(userId), "微信用户", userProp);
+		return new MessageResponse(0, "绑定完成！");
+	}
+
+	/**
+	 * @throws
+	 * @Title:selectWxUser
+	 * @Description: TODO(组合查询微信用户)
+	 * @param: @param id
+	 * @param: @param role
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-02-04
+	 */
+	@Override
+	public List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception{
+		return this.usersDao.selectWxUser(condition);
+	}
+
 }

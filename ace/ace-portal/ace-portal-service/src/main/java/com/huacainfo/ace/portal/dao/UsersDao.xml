@@ -190,6 +190,7 @@
         on USERS.department_id=s.department_id
         left join province s2
         on users.area_code=s2.code
+        left join userinfo s3 on users.openId=s3.openid
         where USERS.STAUTS='1' and USERS.cur_syid=#{condition.curSyid}
 
         <if test='condition.name!=null and condition.name!=""'>
@@ -222,6 +223,7 @@
 
         select USERS.user_id,
         USERS.account,
+        USERS.openId,
         USERS.sex,
         USERS.id_card,
         USERS.name,
@@ -239,7 +241,9 @@
         USERS.create_time,
         users.fax,
         users.telphone,
-        users.qq
+        users.qq,
+        s3.nickname,
+        s3.headimgurl
         <include refid="usersPagingWhereCondition"/>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -260,6 +264,7 @@
         select t.user_id,
         t.account,
         t.sex,
+        t.openId,
         t.id_card,
         t.name,
         t.department_id,
@@ -276,10 +281,13 @@
         t.fax,
         t.seat,
         t.user_level,
-        t.create_time from users t left join department s
+        t.create_time,
+        s3.nickname,
+        s3.headimgurl
+        from users t left join department s
         on t.department_id=s.department_id
-        left join province s2
-        on t.area_code=s2.code
+        left join province s2 on t.area_code=s2.code
+        left join userinfo s3 on users.openId=s3.openid
         where t.user_id = #{userId}
 
     </select>
@@ -384,4 +392,18 @@
     <update id="updateCurSyid">
         update users set cur_syid=#{syid} where user_id=#{userId}
     </update>
+
+    <update id="updateUserOpenId">
+        update users
+        set
+        openId = #{openId,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectWxUser" resultType="map">
+        select  t.unionid, t.openid, t.appid, t.nickname, t.sex, t.city, t.province, t.country, t.headimgurl, t.access_token,
+        t.refresh_token, t.scope, t.expires_in,t.role from userinfo t inner join users a
+        on t.openid=a.openId
+        where a.user_id=#{condition.userId}
+    </select>
 </mapper>

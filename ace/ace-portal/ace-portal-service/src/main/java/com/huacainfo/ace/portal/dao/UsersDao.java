@@ -97,4 +97,10 @@ public interface UsersDao {
 	public int updateCurSyid(@Param("syid") String syid,
 			@Param("userId") String userId);
 
+	public int updateUserOpenId(
+							 @Param("userId") String userId,@Param("openId") String openId);
+
+	List<Map<String,Object>> selectWxUser(@Param("condition") Map<String,Object> condition);
+
+
 }
