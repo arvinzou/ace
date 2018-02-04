@@ -74,7 +74,7 @@ public class UserProp implements Serializable {
 
 	public UserProp(String userId, String name, String nickName, String corpId,
 			String corpName, String areaCode, List<String> roleType,
-			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg) {
+			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg,String openId) {
 		this.userId = userId;
 		this.name = name;
 		this.nickName = nickName;
@@ -89,13 +89,14 @@ public class UserProp implements Serializable {
 		this.roleType=roleType;
 		this.activeSyId=activeSyId;
 		this.cfg=cfg;
+		this.openId=openId;
 	}
 
 	public UserProp(String userId, String name, String nickName, String corpId,
 			String corpName, String areaCode, String ip, List<String> roleType,
-			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg) {
+			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg,String openId) {
 		this(userId, name, nickName, corpId, corpName, areaCode, roleType,
-				parentCorpId, role, email, account,syid, activeSyId,cfg);
+				parentCorpId, role, email, account,syid, activeSyId,cfg, openId);
 		this.ip = ip;
 	}
 

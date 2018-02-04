@@ -84,6 +84,7 @@
 	select t.user_id,
 	t.account,
 	t.password,
+		t.openId,
 	t.sex,
 	t.id_card,
 	t.name,
