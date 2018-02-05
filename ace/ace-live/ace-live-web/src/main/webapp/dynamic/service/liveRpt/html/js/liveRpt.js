@@ -1,4 +1,3 @@
-var host = 'http://192.168.2.153/live';
 var fileHost = 'http://zx.huacainfo.com/';
 var start;
 var limit = 25;
@@ -63,9 +62,13 @@ function releaseDo() {
     }
     datas.imgs = imgs;
     datas.rpt = rpt;
-    var url = host + '/liveRpt/insertLiveRpt.do';
+    var url = '/live/liveRpt/insertLiveRpt.do';
     $.post(url, {jsons: JSON.stringify(datas)}, function (result) {
-        console.log(result);
+        if(0==result.status){
+            hideSelectReportDo();
+            return;
+        }
+        alert("创建失败！");
     });
 }
 
@@ -83,14 +86,15 @@ function actionSelectReportDo() {
     id = $(this).parent().parent().data('Liveid');
     if (!id) {
         return;
-    };
-    var url=host+'/live/selectLiveByPrimaryKey.do';
-    var data={
-        id:id
     }
-    $.getJSON(url,data,function (result) {
+    ;
+    var url = '/live/live/selectLiveByPrimaryKey.do';
+    var data = {
+        id: id
+    }
+    $.getJSON(url, data, function (result) {
         console.log(result);
-        if(result.status==0){
+        if (result.status == 0) {
             $('.formRow-content .name').val(result.value.name);
             $('.select_report').show();
             chooseImageDo();
@@ -115,8 +119,6 @@ function chooseTypeDo() {
         case 2:
             chooseImageDo();
             break;
-        case 3:
-            chooseAudioDo();
     }
 }
 
@@ -124,14 +126,14 @@ function chooseVideoDo() {
     console.log('视频');
     $('.formRowVdo').show();
     $('.formRowImg').hide();
-    if(uploaderV){
+    if (uploaderV) {
         return;
     }
     /*文件上传*/
     uploaderV = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Vupbtn',
-        url: 'http://192.168.2.153/portal/files/uploadFile.do',
+        url: '/portal/files/uploadFile.do',
         file_data_name: 'file',
         multi_selection: false,
         filters: {
@@ -146,7 +148,7 @@ function chooseVideoDo() {
         },
         multipart_params: {
             marktext: marktext,
-            companyId:userProp.corpId
+            companyId: userProp.corpId
         },
         init: {
             FilesAdded: function (up, files) {
@@ -171,14 +173,14 @@ function chooseImageDo() {
     console.log('图片');
     $('.formRowVdo').hide();
     $('.formRowImg').show();
-    if(uploaderI){
+    if (uploaderI) {
         return;
     }
     /*文件上传*/
     uploaderI = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Iupbtn',
-        url: 'http://192.168.2.153/portal/files/uploadFile.do',
+        url: '/portal/files/uploadFile.do',
         file_data_name: 'file',
         multi_selection: false,
         filters: {
@@ -193,7 +195,7 @@ function chooseImageDo() {
         },
         multipart_params: {
             marktext: marktext,
-            companyId:userProp.corpId
+            companyId: userProp.corpId
         },
         init: {
             FilesAdded: function (up, files) {
@@ -214,9 +216,6 @@ function chooseImageDo() {
     uploaderI.init();
 }
 
-function chooseAudioDo() {
-
-}
 
 /*显示视频*/
 function viewVideo(videoUrl) {
@@ -230,6 +229,7 @@ function viewVideo(videoUrl) {
         $('#v-cover').hide();
     }
 }
+
 /*处理图片*/
 function handleImage(imageUrl) {
     var o = fileHost + imageUrl, l = new Image;
@@ -255,15 +255,15 @@ function viewImagePage(o, e, t) {
 
 /*网页初始化*/
 function initweb() {
-    url='/portal/system/getUserProp.do';
-    $.get(url,function (result) {
+    url = '/portal/system/getUserProp.do';
+    $.get(url, function (result) {
         loadLiveList();
     })
 }
 
 /*下载直播数据*/
 function loadLiveList(name) {
-    var url = host + '/live/findLiveList.do';
+    var url = '/live/live/findLiveList.do';
     var data = {
         'name': name,
         'start': start,

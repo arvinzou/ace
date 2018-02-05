@@ -1,5 +1,4 @@
 /*变量*/
-var host = 'http://192.168.2.153/live';
 var imghost = "http://zx.huacainfo.com/";
 var start;
 var limit = 25;
@@ -25,6 +24,7 @@ $(function () {
         }
     });
 });
+
 /*取消排序*/
 function cancelSortDo() {
     $('#reportCan').empty();
@@ -32,17 +32,17 @@ function cancelSortDo() {
 }
 
 /*查看报道列表*/
-function viewReportListByIdDo(){
+function viewReportListByIdDo() {
     var id = $(this).parent().parent().data('Liveid');
     console.log('loadReportList');
-    var url = host + '/liveRpt/findLiveRptList.do';
+    var url = '/live/liveRpt/findLiveRptList.do';
     var data = {
         'rid': id,
         'start': start,
         'limit': 1000,
         'status': 2,
-        'orderBy':'sort',
-        'sord':'asc'
+        'orderBy': 'sort',
+        'sord': 'asc'
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -52,6 +52,7 @@ function viewReportListByIdDo(){
     })
     return false;
 }
+
 
 /*渲染直播列表*/
 function viewReportList(data) {
@@ -98,7 +99,7 @@ function sortLiveByTimeDo() {
 function changeLiveStatusDo() {
     console.log('切换直播');
     var id = $(this).parent().parent().data('Liveid');
-    var url = host + '/live/selectLiveByPrimaryKey.do';
+    var url = '/live/live/selectLiveByPrimaryKey.do';
     var data = {
         'id': id
     }
@@ -122,7 +123,7 @@ function modifyStatus(dataLive) {
             }
         }
     }
-    var url = host + "/live//updateLive.do";
+    var url = "/live/live/updateLive.do";
     var data = {
         'jsons': JSON.stringify(dataLive)
     };
@@ -144,7 +145,7 @@ function searchByNameDo(orderByStr) {
 
 /*下载直播数据*/
 function loadLiveList(name, orderByStr) {
-    var url = host + '/live/findLiveList.do';
+    var url = '/live/live/findLiveList.do';
     var data = {
         'name': name,
         'start': start,
@@ -191,7 +192,7 @@ function modifyLiveDo(event) {
     id = null;
     console.log('修改直播');
     id = $(this).parent().data('Liveid');
-    var url = host + '/live/selectLiveByPrimaryKey.do';
+    var url = '/live/live/selectLiveByPrimaryKey.do';
     var data = {
         'id': id
     }
@@ -263,7 +264,7 @@ function updateSequence(arr) {
 
     $.ajax({
         type: "post",
-        url: host + "/liveRpt/updateSequence.do",
+        url: "/live/liveRpt/updateSequence.do",
         data: {data: JSON.stringify(data)},
         beforeSend: function (XMLHttpRequest) {
         },
@@ -282,7 +283,6 @@ function updateSequence(arr) {
                         }
                     }
                 });
-
             }
         },
         complete: function (XMLHttpRequest, textStatus) {
@@ -312,7 +312,7 @@ var reportTextTemplate = '<li id="[id]">' +
 
 var reportImgTemplate = '<li id="[id]">' +
     '            <div class="picbar">' +
-    '                <div class="title omission">[content]</div>' +
+    '                <div class="title1 omission">[content]</div>' +
     '                <div class="pic">' +
     '                    <img src="[mediaContent]">' +
     '                </div>' +
@@ -329,7 +329,7 @@ var reportImgTemplate = '<li id="[id]">' +
 
 var reportVideoTempla = '<li id="[id]">' +
     '            <div class="picbar">' +
-    '                <div class="title omission">[content]</div>' +
+    '                <div class="title1 omission">[content]</div>' +
     '                <div class="pic">' +
     '                    <video src="[mediaContent]"></video>' +
     '                </div>' +
@@ -347,7 +347,7 @@ var reportVideoTempla = '<li id="[id]">' +
 
 var reportAudioTempla = '<li id="[id]">' +
     '            <div class="picbar">' +
-    '                <div class="title omission">[content]</div>' +
+    '                <div class="title1 omission">[content]</div>' +
     '                <div class="pic">' +
     '                 <audio controls="controls">' +
     '                           <source src="[mediaContent]" type="audio/mpeg">' +

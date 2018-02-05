@@ -1,4 +1,3 @@
-var host = 'http://192.168.2.153/live';
 var start;
 var limit = 25;
 var orderByStr = null;
@@ -74,6 +73,7 @@ function stopVideoDo() {
     var media = $(this).parent().parent().find('video')[0];
     media.pause();
 }
+
 /*查找选中的视频*/
 function delectVideoDo() {
     $(":checked").each(function (index) {
@@ -88,9 +88,9 @@ function delectVideoDo() {
 
 /*开始删除视频*/
 function actionDelectVideo(id) {
-    var url = host + '/liveRpt/deleteLiveRptByLiveRptId.do';
-    var data ={
-        'id':id
+    var url = '/live/liveRpt/deleteLiveRptByLiveRptId.do';
+    var data = {
+        'id': id
     }
 
     $.getJSON(url, JSON.stringify(data), function (result) {
@@ -101,7 +101,7 @@ function actionDelectVideo(id) {
 /*下载直播数据*/
 function loadReportVideoList(name) {
     console.log('loadReportList');
-    var url = host + '/liveRpt/findLiveRptList.do';
+    var url = '/live/liveRpt/findLiveRptList.do';
     console.log(url);
     var data = {
         'name': name,
@@ -131,29 +131,28 @@ function viewReportVideoList(data) {
     hideStatusDo();
 }
 
-
-var liVideoTemplate = '<li class="picbar">'+
-    '            <div class="videobar">'+
-    '                <div class="pic">'+
-    '                    <video src="[mediaContent]"></video>'+
-    '                </div>'+
-    '                <div class="mediaMark">'+
-    '                    <span class="startStatus"><i class="iconfont">&#xe769;</i></span>'+
-    '                    <span class="stopStatus"><i class="iconfont">&#xe7af;</i></span>'+
-    '                </div>'+
-    '                <label class="Topcheckbox">'+
-    '                    <input type="checkbox">'+
-    '                </label>'+
-    '                <div class="title omission">[content]</div>'+
-    '            </div>'+
-    '            <div class="msgbar">'+
-    '                <span class="omission msgbar-common creater">'+
-    '                    <i class="iconfont">&#xe61a;</i>[name]'+
-    '                </span>'+
-    '                <span class="msgbar-common msgbar-time">'+
-    '                    <i class="iconfont">&#xe651;</i>[createTime]'+
-    '                </span>'+
-    '                <a href="[mediaContent]" download="">下载</a>'+
-    '                <a class="j-report">发布</a>'+
-    '            </div>'+
+var liVideoTemplate = '<li class="picbar">' +
+    '            <div class="videobar">' +
+    '                <div class="pic">' +
+    '                    <video src="[mediaContent]"></video>' +
+    '                </div>' +
+    '                <div class="mediaMark">' +
+    '                    <span class="startStatus"><i class="iconfont">&#xe769;</i></span>' +
+    '                    <span class="stopStatus"><i class="iconfont">&#xe7af;</i></span>' +
+    '                </div>' +
+    '                <label class="Topcheckbox">' +
+    '                    <input type="checkbox">' +
+    '                </label>' +
+    '                <div class="title omission">[content]</div>' +
+    '            </div>' +
+    '            <div class="msgbar">' +
+    '                <span class="omission msgbar-common creater">' +
+    '                    <i class="iconfont">&#xe61a;</i>[name]' +
+    '                </span>' +
+    '                <span class="msgbar-common msgbar-time">' +
+    '                    <i class="iconfont">&#xe651;</i>[createTime]' +
+    '                </span>' +
+    '                <a href="[mediaContent]" download="">下载</a>' +
+    '                <a class="j-report">发布</a>' +
+    '            </div>' +
     '        </li>';

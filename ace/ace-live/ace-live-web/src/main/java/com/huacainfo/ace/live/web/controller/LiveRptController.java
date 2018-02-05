@@ -94,9 +94,10 @@ public class LiveRptController extends LiveBaseController {
     @RequestMapping(value = "/updateLiveRpt.do")
     @ResponseBody
     public MessageResponse updateLiveRpt(String jsons) throws Exception {
-        LiveRpt obj = JSON.parseObject(jsons, LiveRpt.class);
-        return this.liveRptService
-                .updateLiveRpt(obj);
+        JSONObject json = JSON.parseObject(jsons);
+        LiveRpt obj = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
+        List<LiveImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), LiveImg.class);
+        return this.liveRptService.updateLiveRpt(obj,imgs);
     }
 
     /**

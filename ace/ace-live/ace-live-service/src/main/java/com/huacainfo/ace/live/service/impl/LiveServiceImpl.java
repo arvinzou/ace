@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.huacainfo.ace.live.dao.LiveRptDao;
+import com.huacainfo.ace.live.vo.LiveRptQVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ import com.huacainfo.ace.live.vo.LiveQVo;
  */
 public class LiveServiceImpl implements LiveService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private LiveRptDao LiveRptDao;
     @Autowired
     private LiveDao liveDao;
     @Autowired
@@ -51,9 +56,20 @@ public class LiveServiceImpl implements LiveService {
      */
     @Override
     public PageResult<LiveVo> findLiveList(LiveQVo condition, int start, int limit, String orderBy) throws Exception {
-        PageResult<LiveVo> rst = new PageResult<LiveVo>();
+
         List<LiveVo> list = this.liveDao.findList(condition,
                 start, start + limit, orderBy);
+        int reportCount;
+        LiveRptQVo rptQVo = new LiveRptQVo();
+        for (LiveVo vo : list) {
+            rptQVo.setRid(vo.getId());
+            rptQVo.setStatus("2");//只统计已发布的报道
+            reportCount = LiveRptDao.findCount(rptQVo);
+            vo.setReportCount(reportCount);
+        }
+
+
+        PageResult<LiveVo> rst = new PageResult<LiveVo>();
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.liveDao.findCount(condition);

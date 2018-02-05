@@ -56,7 +56,7 @@ public interface LiveRptService {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    public abstract MessageResponse updateLiveRpt(LiveRpt obj) throws Exception;
+    public abstract MessageResponse updateLiveRpt(LiveRpt obj, List<LiveImg> imgs) throws Exception;
 
     /**
      * @throws

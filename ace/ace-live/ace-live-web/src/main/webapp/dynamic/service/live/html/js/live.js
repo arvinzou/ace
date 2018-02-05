@@ -1,7 +1,6 @@
 // JavaScript Document
-var host='http://192.168.2.153/live';
 var imageSrc;
-
+var userProp;
 $("#startDate").datetimepicker({
     format: "yyyy-mm-dd hh:ii",
     language: 'zh-CN',
@@ -35,7 +34,7 @@ $(function () {
 function releaseDo() {
     console.log('releaseDo');
     var name=$('.name').val();
-    var areaCode=$('.areaCode').val();
+    var areaCode=userProp.areaCode;
     var startTime=$('.startTime').val();
     var endTime=$('.endTime').val();
     if(endTime){
@@ -43,14 +42,14 @@ function releaseDo() {
     }
     var remark=$('.remark').val().trim();
     var content=$('.content').val().trim();
-    var deptId=$('.deptId').val().trim();
+    var deptId=userProp.corpId;
     var addr=$('.addr').val().trim();
     var rtmpUrl=$('.rtmpUrl').val().trim();
     var mp4Url=$('.mp4Url').val().trim();
     var category=$("input[type='radio']:checked").val().trim();
     var nop=$('.nop').val().trim();
     var pop=$('.pop').val().trim();
-    if(!(name&&imageSrc&&startTime&&remark&&content&&category&&deptId&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
+    if(!(name&&imageSrc&&startTime&&remark&&content&&category&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
         $('.prompt').text('带“ * ”为必填项');
         return;
     }
@@ -70,7 +69,7 @@ function releaseDo() {
         'nop':nop,
         'pop':pop
     }
-    var url=host+"/live/insertLive.do";
+    var url="/live/live/insertLive.do";
     var data={
         'jsons':JSON.stringify(keyVal)
     };
@@ -107,6 +106,9 @@ function computedNumDo() {
 }
 
 function webInit() {
+    var url = '/portal/system/getUserProp.do';
+    $.get(url, function () {
+    });
 }
 
 /*文件上传*/

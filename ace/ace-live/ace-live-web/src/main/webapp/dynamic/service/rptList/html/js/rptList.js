@@ -1,4 +1,3 @@
-var host = 'http://192.168.2.153/live';
 var fileHost = 'http://zx.huacainfo.com/';
 var start;
 var limit = 25;
@@ -38,8 +37,7 @@ function startPublicationDo() {
     var $this = $(this);
     var id = $this.parent().parent().parent().data('id');
     var rid = $this.parent().parent().parent().data('rid');
-
-    var url = host + '/liveRpt/updateLiveRptStatus.do';
+    var url = '/live/liveRpt/updateLiveRptStatus.do';
     var data = {
         'id': id,
         'rid': rid,
@@ -85,7 +83,7 @@ function startPreviewDo() {
 
 /*根据id查找图片*/
 function findCover(id) {
-    var url = host + '/liveImg/findLiveImgList.do';
+    var url = '/live/liveImg/findLiveImgList.do';
     var data = {
         'rptId': id
     };
@@ -134,7 +132,7 @@ function actionModifyDo() {
     console.log('修改报道');
     id = $(this).parent().data('id');
     console.log(id);
-    var url = host + '/liveRpt/selectLiveRptByPrimaryKey.do';
+    var url =  '/live/liveRpt/selectLiveRptByPrimaryKey.do';
     var data = {
         'id': id
     };
@@ -154,7 +152,7 @@ function showModifyWeb(data) {
         if (item == 'rid') {
             viewLiveName(data[item]);
         } else {
-            $('.' + item + 'Rpt').val(data[item]);
+            $('.' + item + 'Rpt1').val(data[item]);
         }
         if (item == 'mediaType') {
             if (data[item] == '2') {
@@ -162,26 +160,27 @@ function showModifyWeb(data) {
                 $('.formRowImg').show();
                 mediaType = 2;
                 chooseImageDo();
-                $(":radio[name='category'][value='2']").prop("checked", "checked");
                 findCover(data['id']);
             } else if (data[item] == '1') {
                 $('.formRowVdo').show();
                 $('.formRowImg').hide();
                 chooseVideoDo();
                 mediaType = 1;
-                $(":radio[name='category'][value='1']").prop("checked", "checked");
                 viewVideo(data['mediaContent'])
             } else {
-                $(":radio[name='category'][value='3']").prop("checked", "checked");
+                $('.formRowVdo').hide();
+                $('.formRowImg').hide();
                 mediaType = 3;
+                viewAudio(data['mediaContent'])
             }
         }
+        $(":radio[name='category'][value='"+mediaType+"']").prop("checked", "checked");
     }
 }
 
 /*根据id查找直播*/
 function viewLiveName(id) {
-    var url = host + '/live/selectLiveByPrimaryKey.do';
+    var url ='/live/live/selectLiveByPrimaryKey.do';
     var data = {
         'id': id
     };
@@ -197,30 +196,18 @@ function viewLiveName(id) {
 
 /*确认发布报道*/
 function releaseDo() {
-    var url = host + '/liveRpt/deleteLiveRptAndImgLiveByRptId.do';
-    var data = {
-        'id': id,
-    }
-    $.getJSON(url, data, function (result) {
-        if (0 == result.status) {
-            actionUpdataRpt();
-        }
-    });
-}
-
-/*开始修改报道*/
-
-function actionUpdataRpt() {
     var imgs = [];
     var datas = {};
     var rpt = {
+        'id':id,
         'mediaType': mediaType,
-        'content': $('.contentRpt').val(),
+        'content': $('.contentRpt1').val(),
         'rid': id,
         'uid': 'oFvIjw8x1--0lQkUhO1Ta3L59o3c',
         'mediaContent': '',
-        'createTime': $('.createTimeRpt').val() + ':00',
+        'createTime': $('.createTimeRpt1').val() + ':00',
     };
+    console.log($('.contentRpt').val());
     if (2 == mediaType) {
         $("#imageView .xcy-cutimg").each(function () {
             var e = $(this).data("fileurl");
@@ -241,7 +228,7 @@ function actionUpdataRpt() {
     }
     datas.imgs = imgs;
     datas.rpt = rpt;
-    var url = host + '/liveRpt/insertLiveRpt.do';
+    var url ='/live/liveRpt/updateLiveRpt.do';
     $.post(url, {jsons: JSON.stringify(datas)}, function (result) {
         console.log(result);
     });
@@ -374,7 +361,8 @@ function chooseImageDo() {
 
 
 function chooseAudioDo() {
-
+    $('.formRowVdo').hide();
+    $('.formRowImg').hide();
 }
 
 /*网页初始化*/
@@ -390,7 +378,7 @@ function initweb() {
 /*下载直播数据*/
 function loadReportList(content, status) {
     console.log('loadReportList');
-    var url = host + '/liveRpt/findLiveRptList.do';
+    var url = '/live/liveRpt/findLiveRptList.do';
     var data = {
         'content': content,
         'start': start,
@@ -554,6 +542,17 @@ function viewVideo(videoUrl) {
     if ($('#videoView').children().length >= 2) {
         $('#v-cover').hide();
     }
+}
+
+function viewAudio(videoUrl) {
+    // var vdoDiv = videoTempLate.replace('[videoUrl]', videoUrl);
+    // var $vdoDiv = $(vdoDiv).data({
+    //     fileurl: videoUrl,
+    // });
+    // $('#v-cover').before($vdoDiv);
+    // if ($('#videoView').children().length >= 2) {
+    //     $('#v-cover').hide();
+    // }
 }
 
 

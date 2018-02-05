@@ -93,15 +93,15 @@ public class LiveRptServiceImpl implements LiveRptService {
         if (CommonUtils.isBlank(o.getUid())) {
             return new MessageResponse(1, "用户编号不能为空！");
         }
-        if(o.getCreateTime()==null){
+        if (o.getCreateTime() == null) {
             o.setCreateTime(new Date());
         }
         o.setStatus("1");
-        boolean flag=true;
+        boolean flag = true;
         for (LiveImg img : imgs) {
-            if(flag){
+            if (flag) {
                 o.setMediaContent(img.getUrl());
-                flag=false;
+                flag = false;
             }
             img.setId(UUID.randomUUID().toString());
             img.setRptId(o.getId());
@@ -128,18 +128,36 @@ public class LiveRptServiceImpl implements LiveRptService {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
+
     @Override
-    public MessageResponse updateLiveRpt(LiveRpt o)
+    public MessageResponse updateLiveRpt(LiveRpt obj, List<LiveImg> imgs)
             throws Exception {
-        if (CommonUtils.isBlank(o.getId())) {
+        if (CommonUtils.isBlank(obj.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-
-        if (CommonUtils.isBlank(o.getContent())) {
+        if (CommonUtils.isBlank(obj.getContent())) {
             return new MessageResponse(1, "直播内容不能为空！");
         }
-        this.liveRptDao.updateByPrimaryKey(o);
-        return new MessageResponse(0, "变更图文直播完成！");
+        /*删除图片*/
+        liveImgDao.deleteByPrimaryKey(obj.getId());
+        boolean flag = true;
+        for (LiveImg img : imgs) {
+            if (flag) {
+                obj.setMediaContent(img.getUrl());
+                flag = false;
+            }
+            img.setId(UUID.randomUUID().toString());
+            img.setRptId(obj.getId());
+            img.setCreateTime(new Date());
+            this.liveImgDao.insert(img);
+        }
+        this.liveRptDao.updateByPrimaryKey(obj);
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("rid", "rsub");
+        data.put("message", JSON.toJSON(obj).toString());
+        this.logger.info("{}", data);
+        this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
+        return new MessageResponse(0, "添加图文直播完成！");
     }
 
 
@@ -188,7 +206,7 @@ public class LiveRptServiceImpl implements LiveRptService {
     }
 
     @Override
-    public MessageResponse deleteLiveRptAndImgLiveByRptId(String id,UserProp userProp) {
+    public MessageResponse deleteLiveRptAndImgLiveByRptId(String id, UserProp userProp) {
         this.liveRptDao.deleteByPrimaryKey(id);
         this.liveImgDao.deleteByRid(id);
         this.dataBaseLogService.log("删除图文直播", "图文直播", String.valueOf(id),
