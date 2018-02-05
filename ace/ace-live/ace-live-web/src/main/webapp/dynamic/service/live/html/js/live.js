@@ -115,7 +115,7 @@ function webInit() {
 var uploader = new plupload.Uploader({
     runtimes: 'html5,flash,silverlight,html4',
     browse_button: 'upbtn',
-    url: 'http://192.168.2.153/portal/files/uploadFile.do',
+    url: '/portal/files/uploadFile.do',
     file_data_name: 'file',
     multi_selection: false,
     filters: {
