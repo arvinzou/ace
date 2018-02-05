@@ -10,9 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="80647b4d-8417-47a2-ae86-012d433c63d2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/index.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/liveSub.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/liveSub.js" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-portal/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -89,18 +87,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="127" column="45" lean-forward="true" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="live.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="48" column="63" lean-forward="true" selection-start-line="48" selection-start-column="63" selection-end-line="48" selection-end-column="63" />
+            <state relative-caret-position="243">
+              <caret line="74" column="34" lean-forward="false" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -109,19 +97,19 @@
       <file leaf-file-name="liveSub.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/liveSub.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="75" column="9" lean-forward="true" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
+            <state relative-caret-position="400">
+              <caret line="58" column="10" lean-forward="true" selection-start-line="58" selection-start-column="10" selection-end-line="58" selection-end-column="10" />
               <folding>
-                <marker date="1517829658924" expanded="true" signature="7043:7051" ph="&amp;##xe61a;" />
-                <marker date="1517829658924" expanded="true" signature="7208:7216" ph="&amp;##xe651;" />
-                <marker date="1517829658924" expanded="true" signature="9033:9041" ph="&amp;##xe61a;" />
-                <marker date="1517829658924" expanded="true" signature="9188:9196" ph="&amp;##xe651;" />
-                <marker date="1517829658924" expanded="true" signature="9751:9759" ph="&amp;##xe61a;" />
-                <marker date="1517829658924" expanded="true" signature="9907:9915" ph="&amp;##xe651;" />
-                <marker date="1517829658924" expanded="true" signature="10489:10497" ph="&amp;##xe61a;" />
-                <marker date="1517829658924" expanded="true" signature="10653:10661" ph="&amp;##xe651;" />
-                <marker date="1517829658924" expanded="true" signature="11342:11350" ph="&amp;##xe61a;" />
-                <marker date="1517829658924" expanded="true" signature="11506:11514" ph="&amp;##xe651;" />
+                <marker date="1517832346855" expanded="true" signature="7071:7079" ph="&amp;##xe61a;" />
+                <marker date="1517832346855" expanded="true" signature="7236:7244" ph="&amp;##xe651;" />
+                <marker date="1517832346855" expanded="true" signature="9061:9069" ph="&amp;##xe61a;" />
+                <marker date="1517832346855" expanded="true" signature="9216:9224" ph="&amp;##xe651;" />
+                <marker date="1517832346855" expanded="true" signature="9779:9787" ph="&amp;##xe61a;" />
+                <marker date="1517832346855" expanded="true" signature="9935:9943" ph="&amp;##xe651;" />
+                <marker date="1517832346855" expanded="true" signature="10517:10525" ph="&amp;##xe61a;" />
+                <marker date="1517832346855" expanded="true" signature="10681:10689" ph="&amp;##xe651;" />
+                <marker date="1517832346855" expanded="true" signature="11370:11378" ph="&amp;##xe61a;" />
+                <marker date="1517832346855" expanded="true" signature="11534:11542" ph="&amp;##xe651;" />
               </folding>
             </state>
           </provider>
@@ -301,12 +289,12 @@
         <option value="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.java" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveImgDao.xml" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/js/rptList.js" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/liveSub.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveRptController.java" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/css/liveSub.css" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/index.html" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/liveSub.js" />
       </list>
     </option>
   </component>
@@ -1114,7 +1102,7 @@
       <workItem from="1517623971268" duration="15475000" />
       <workItem from="1517709439537" duration="4875000" />
       <workItem from="1517714345789" duration="21941000" />
-      <workItem from="1517790318782" duration="37824000" />
+      <workItem from="1517790318782" duration="38125000" />
     </task>
     <task id="LOCAL-00001" summary="统战二期">
       <created>1513732190656</created>
@@ -1312,7 +1300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1517829850257</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="常德融媒后台管理页面——王恩">
+      <created>1517832111054</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1517832111055</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1321,7 +1316,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="472094000" />
+    <option name="totallyTimeSpent" value="472395000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1914,14 +1909,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="127" column="45" lean-forward="true" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="986">
@@ -1946,21 +1933,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="74" column="34" lean-forward="false" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/liveSub.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="75" column="9" lean-forward="true" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
+        <state relative-caret-position="400">
+          <caret line="58" column="10" lean-forward="true" selection-start-line="58" selection-start-column="10" selection-end-line="58" selection-end-column="10" />
           <folding>
-            <marker date="1517829658924" expanded="true" signature="7043:7051" ph="&amp;##xe61a;" />
-            <marker date="1517829658924" expanded="true" signature="7208:7216" ph="&amp;##xe651;" />
-            <marker date="1517829658924" expanded="true" signature="9033:9041" ph="&amp;##xe61a;" />
-            <marker date="1517829658924" expanded="true" signature="9188:9196" ph="&amp;##xe651;" />
-            <marker date="1517829658924" expanded="true" signature="9751:9759" ph="&amp;##xe61a;" />
-            <marker date="1517829658924" expanded="true" signature="9907:9915" ph="&amp;##xe651;" />
-            <marker date="1517829658924" expanded="true" signature="10489:10497" ph="&amp;##xe61a;" />
-            <marker date="1517829658924" expanded="true" signature="10653:10661" ph="&amp;##xe651;" />
-            <marker date="1517829658924" expanded="true" signature="11342:11350" ph="&amp;##xe61a;" />
-            <marker date="1517829658924" expanded="true" signature="11506:11514" ph="&amp;##xe651;" />
+            <marker date="1517832346855" expanded="true" signature="7071:7079" ph="&amp;##xe61a;" />
+            <marker date="1517832346855" expanded="true" signature="7236:7244" ph="&amp;##xe651;" />
+            <marker date="1517832346855" expanded="true" signature="9061:9069" ph="&amp;##xe61a;" />
+            <marker date="1517832346855" expanded="true" signature="9216:9224" ph="&amp;##xe651;" />
+            <marker date="1517832346855" expanded="true" signature="9779:9787" ph="&amp;##xe61a;" />
+            <marker date="1517832346855" expanded="true" signature="9935:9943" ph="&amp;##xe651;" />
+            <marker date="1517832346855" expanded="true" signature="10517:10525" ph="&amp;##xe61a;" />
+            <marker date="1517832346855" expanded="true" signature="10681:10689" ph="&amp;##xe651;" />
+            <marker date="1517832346855" expanded="true" signature="11370:11378" ph="&amp;##xe61a;" />
+            <marker date="1517832346855" expanded="true" signature="11534:11542" ph="&amp;##xe651;" />
           </folding>
         </state>
       </provider>
