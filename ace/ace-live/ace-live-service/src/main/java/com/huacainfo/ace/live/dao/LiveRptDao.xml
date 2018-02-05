@@ -111,4 +111,19 @@
         sort = #{sort,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+
+    <select id="findNickNameByRid" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+            u.nickName,
+            rpt.id,
+            rpt.uid,
+            rpt.rid
+        FROM
+            live.live_rpt rpt
+        LEFT JOIN portal.userinfo u ON rpt.uid = u.openid
+        WHERE
+            rpt.rid = #{rid,jdbcType=VARCHAR}
+        and rpt.id = #{id,jdbcType=VARCHAR}
+    </select>
 </mapper>
