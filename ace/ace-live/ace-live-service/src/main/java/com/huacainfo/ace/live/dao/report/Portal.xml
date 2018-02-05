@@ -2,6 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.live.dao.report.Portal">
   <select id="query" resultType="map">
-    select a.`name`,count(1) 'value' from meeting t left join (SELECT code,name from portal.dict where category_id='93') a on t.`status` =a.code GROUP BY a.`name`
+    SELECT
+    'live' id,
+    count(1) value
+    FROM
+    live
+    WHERE
+    deptId =#{deptId} and status='1'
+    union all
+    SELECT
+    'rpt' id,
+    count(1) rpt
+    FROM
+    live_rpt inner join live on live_rpt.rid=live.id
+    WHERE
+    live.deptId =#{deptId} and live_rpt.status='2'
+    union all
+    SELECT
+    'cmt' id,
+    count(1) cmt
+    FROM
+    live_cmt
+    inner join live_rpt on live_rpt.id=live_cmt.rptId
+    inner join live on live_rpt.rid=live.id
+    WHERE
+    live.deptId =#{deptId}
   </select>
 </mapper>
