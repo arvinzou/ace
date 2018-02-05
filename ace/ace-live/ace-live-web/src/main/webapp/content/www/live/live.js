@@ -730,61 +730,7 @@ var joeFn = {
             top: 0
         };
         $.extend(o, e),
-        $(window).on("scroll",
-        function() {
-            console.log("======>"+$(window).scrollTop());
-            if($(window).scrollTop()>=50){
-                $("#j-liveinfo .view").css("height","2.62rem");
-                $("#j-liveinfo .view").css("position","fixed");
-                $("#j-liveinfo .view").css("z-index",310);
-                $("#j-liveinfo .content").css("padding-top","2.62rem");
-                $("#j-livevideo-main").css("height","2.62rem");
-                //$("#j-livevideo-main").css("width","5rem");
-                $("#j-video-wrap video").css("width","5rem");
-                $("#j-video-wrap video").css("height","2.62rem");
-                $("#j-video-wrap .prism-cover").css("width","5rem");
-                $("#j-video-wrap .prism-cover").css("height","2.62rem");
-                $("#j-video-wrap .prism-cover").css("float","left");
-                $("#j-video-wrap").css("height","110px");
-                $("#j-video-wrap").css("width","5rem");
-                $("#j-video-wrap .prism-big-play-btn").css("left","25%!important");
-                $("#j-video-wrap .prism-big-play-btn").css("top","25%!important");
-                $("#j-video-wrap .prism-big-play-btn").css("zoom",0.3);
-                $("#j-video-text").removeClass("fn-hide");
-                $("#j-video-wrap").css("float","left");
-                $("#j-video-text").css("float","right");
 
-                $("#j-liveinfo img").css("width","5rem");
-                $("#j-liveinfo img").css("float","left");
-
-
-
-
-            }else{
-                $("#j-liveinfo .view").css("height","5.62rem");
-                $("#j-liveinfo .view").css("position","relative");
-                $("#j-liveinfo .view").css("z-index",0);
-                $("#j-liveinfo .content").css("padding-top",".26rem");
-                $("#j-livevideo-main").css("height","5.62rem");
-                //$("#j-livevideo-main").css("width","10rem");
-                $("#j-video-wrap video").css("width","10rem");
-                $("#j-video-wrap video").css("height","5.62rem");
-                $("#j-video-wrap .prism-cover").css("width","10rem");
-                $("#j-video-wrap .prism-cover").css("height","5.62rem");
-                $("#j-video-wrap").css("height","210px");
-                $("#j-video-wrap").css("width","10rem");
-                $("#j-video-wrap .prism-big-play-btn").css("left","50%!important");
-                $("#j-video-wrap .prism-big-play-btn").css("top","50%!important");
-                $("#j-video-wrap .prism-big-play-btn").css("zoom",0.6);
-                $("#j-video-text").addClass("fn-hide");
-                $("#j-video-wrap").css("float","null");
-                $("#j-video-text").css("float","null");
-                $("#j-video-wrap .prism-cover").css("float","null");
-                $("#j-liveinfo img").css("width","10rem");
-                $("#j-liveinfo img").css("float","null");
-
-            }
-        }),
         i()
     },
     setContentSize: function(e) {
@@ -1043,3 +989,58 @@ $(function(){
                       }
     });
 });
+$(window).on("scroll",
+        function() {
+            console.log("======>"+$(window).scrollTop());
+            if($(window).scrollTop()>=50){
+                $("#j-liveinfo .view").css("height","2.62rem");
+                $("#j-liveinfo .view").css("position","fixed");
+                $("#j-liveinfo .view").css("z-index",310);
+                $("#j-liveinfo .content").css("padding-top","2.62rem");
+                $("#j-livevideo-main").css("height","2.62rem");
+                //$("#j-livevideo-main").css("width","5rem");
+                $("#j-video-wrap video").css("width","5rem");
+                $("#j-video-wrap video").css("height","2.62rem");
+                $("#j-video-wrap .prism-cover").css("width","5rem");
+                $("#j-video-wrap .prism-cover").css("height","2.62rem");
+                $("#j-video-wrap .prism-cover").css("float","left");
+                $("#j-video-wrap").css("height","110px");
+                $("#j-video-wrap").css("width","5rem");
+                $("#j-video-wrap .prism-big-play-btn").css("left","25%!important");
+                $("#j-video-wrap .prism-big-play-btn").css("top","25%!important");
+                $("#j-video-wrap .prism-big-play-btn").css("zoom",0.3);
+                $("#j-video-text").removeClass("fn-hide");
+                $("#j-video-wrap").css("float","left");
+                $("#j-video-text").css("float","right");
+
+                $("#j-liveinfo img").css("width","5rem");
+                $("#j-liveinfo img").css("float","left");
+
+
+
+
+            }else{
+                $("#j-liveinfo .view").css("height","5.62rem");
+                $("#j-liveinfo .view").css("position","relative");
+                $("#j-liveinfo .view").css("z-index",0);
+                $("#j-liveinfo .content").css("padding-top",".26rem");
+                $("#j-livevideo-main").css("height","5.62rem");
+                //$("#j-livevideo-main").css("width","10rem");
+                $("#j-video-wrap video").css("width","10rem");
+                $("#j-video-wrap video").css("height","5.62rem");
+                $("#j-video-wrap .prism-cover").css("width","10rem");
+                $("#j-video-wrap .prism-cover").css("height","5.62rem");
+                $("#j-video-wrap").css("height","210px");
+                $("#j-video-wrap").css("width","10rem");
+                $("#j-video-wrap .prism-big-play-btn").css("left","50%!important");
+                $("#j-video-wrap .prism-big-play-btn").css("top","50%!important");
+                $("#j-video-wrap .prism-big-play-btn").css("zoom",0.6);
+                $("#j-video-text").addClass("fn-hide");
+                $("#j-video-wrap").css("float","null");
+                $("#j-video-text").css("float","null");
+                $("#j-video-wrap .prism-cover").css("float","null");
+                $("#j-liveinfo img").css("width","10rem");
+                $("#j-liveinfo img").css("float","null");
+
+            }
+        });
