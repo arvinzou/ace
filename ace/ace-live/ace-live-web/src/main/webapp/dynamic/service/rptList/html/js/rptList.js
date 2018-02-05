@@ -20,7 +20,7 @@ $(function () {
     $('#videoView').on('click', '.removeImg', removeVdoDo);
     $('#liveReportTable').on('click', '.publication', startPublicationDo);
     $('#liveReportTable').on('click', '.preview-report', startPreviewDo);
-    $('.topToolBtn').on('change', '#chooseStatus', searchByStatusDo);
+    $('.topToolBtn').on('change', '#chooseStatus',searchByStatusDo);
 });
 
 /*根据状态查找*/
@@ -37,7 +37,7 @@ function startPublicationDo() {
     console.log('发布报道');
     var $this = $(this);
     var id = $this.parents('li').data('id');
-    var rid = $this.parents('li').data('id');
+    var rid =$this.parents('li').data('id');
     var url = '/live/liveRpt/updateLiveRptStatus.do';
     var data = {
         'id': id,
@@ -79,7 +79,7 @@ function startPreviewDo() {
     if (!id) {
         return;
     }
-    var url = '/live/liveRpt/selectLiveRptByPrimaryKey.do';
+    var url =  '/live/liveRpt/selectLiveRptByPrimaryKey.do';
     var data = {
         'id': id
     };
@@ -88,36 +88,40 @@ function startPreviewDo() {
         if (result.status == 0) {
             console.log(result);
             $('.previewPage').show()
-            $('.previewWeb-media').empty();
-            viewPreviewReport(result.value, id);
+            $('.previewWeb-content').empty();
+            viewPreviewReport(result.value,id);
         }
     });
 }
 
-function viewPreviewReport(data, id) {
-    if ('2' == data.mediaType) {
+function viewPreviewReport(data,id) {
+    if('2'==data.mediaType){
         var url = '/live/liveImg/findLiveImgList.do';
-        var data = {
+        var datas = {
             'rptId': id
         };
-        $.getJSON(url, data, function (result) {
-            if (result.status == 0) {
-                var imgdata = result.rows;
-                for (var i = 0; i < imgdata.length; i++) {
-                    var imgStr = '<img src="' + imgdata[i].url + '">';
-                    $('.previewWeb-media').append($(imgStr));
-                }
-            }
+        $.getJSON(url,datas,function (result) {
+              if(result.status==0){
+                  var imgdata=result.rows;
+                  for(var i=0;i<imgdata.length();i++){
+                      var imgStr='<div class="previewWeb-medio"><img src="'+imgdata[i].url+'"></div>';
+                      $('.previewWeb-content').append($(imgStr));
+                  }
+              }
         })
-    } else if ('1' == data.mediaType) {
-        var VStr = '<video src="' + data.mediaContent + '"></video>';
-        $('.previewWeb-media').append($(VStr));
-    } else if ('3' == data.mediaType) {
-        var AStr = '<audio controls="controls"><source src="' + data.mediaContent + '" type="audio/mpeg"></audio>';
-        $('.previewWeb-media').append($(AStr));
+    }else if('1'==data.mediaType){
+        var VStr='<div class="previewWeb-medio"><video controls="controls" src="'+data.mediaContent +'"></video></div>';
+        $('.previewWeb-content').append($(VStr));
+    }else if('3'==data.mediaType){
+        var AStr='<vid class="previewWeb-medio"><audio controls="controls"><source src="'+data.mediaContent+'" type="audio/mpeg"></audio></vid>';
+        $('.previewWeb-content').append($(AStr));
     }
     $('.previewWeb-text').text(data.content);
 }
+
+
+
+
 
 
 /*根据id查找图片*/
@@ -171,7 +175,7 @@ function actionModifyDo() {
     console.log('修改报道');
     id = $(this).parents('li').data('id');
     console.log(id);
-    var url = '/live/liveRpt/selectLiveRptByPrimaryKey.do';
+    var url =  '/live/liveRpt/selectLiveRptByPrimaryKey.do';
     var data = {
         'id': id
     };
@@ -213,13 +217,13 @@ function showModifyWeb(data) {
                 viewAudio(data['mediaContent'])
             }
         }
-        $(":radio[name='category'][value='" + mediaType + "']").prop("checked", "checked");
+        $(":radio[name='category'][value='"+mediaType+"']").prop("checked", "checked");
     }
 }
 
 /*根据id查找直播*/
 function viewLiveName(id) {
-    var url = '/live/live/selectLiveByPrimaryKey.do';
+    var url ='/live/live/selectLiveByPrimaryKey.do';
     var data = {
         'id': id
     };
@@ -238,7 +242,7 @@ function releaseDo() {
     var imgs = [];
     var datas = {};
     var rpt = {
-        'id': id,
+        'id':id,
         'mediaType': mediaType,
         'content': $('.contentRpt1').val(),
         'rid': id,
@@ -267,7 +271,7 @@ function releaseDo() {
     }
     datas.imgs = imgs;
     datas.rpt = rpt;
-    var url = '/live/liveRpt/updateLiveRpt.do';
+    var url ='/live/liveRpt/updateLiveRpt.do';
     $.post(url, {jsons: JSON.stringify(datas)}, function (result) {
         console.log(result);
     });
@@ -314,7 +318,7 @@ function chooseVideoDo() {
     uploaderV = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Vupbtn',
-        url: 'http://192.168.2.153/live/www/live/upload.do',
+        url: '/live/www/live/upload.do',
         file_data_name: 'file',
         multi_selection: false,
         filters: {
@@ -361,7 +365,7 @@ function chooseImageDo() {
     uploaderI = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Iupbtn',
-        url: 'http://192.168.2.153/live/www/live/upload.do',
+        url: '/live/www/live/upload.do',
         file_data_name: 'file',
         multi_selection: false,
         filters: {
