@@ -1,5 +1,12 @@
 /* CSS Document */
 /*上部分*/
+body{
+	height: 100%;
+}
+html{
+	height: 100%;
+}
+
 .topToolBtn,.reportList{
 	margin: 0px;
 	padding: 0px;
@@ -18,6 +25,7 @@
 }
 
 .headContainer{
+	min-width: 1200px;
 	padding: 10px 0px;
 	background-color:#e5e8ee;
 }
@@ -107,6 +115,11 @@
     background-color: #ebeef3;
     color: #666;
     overflow: auto;
+}
+
+.video-content{
+	height: 90%;
+	overflow: auto;
 }
 
 .inputDate{
