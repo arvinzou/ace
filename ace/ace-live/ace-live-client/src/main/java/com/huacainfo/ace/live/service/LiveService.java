@@ -55,6 +55,9 @@ public interface LiveService {
      */
     public abstract MessageResponse updateLive(Live obj, UserProp userProp) throws Exception;
 
+
+    public abstract MessageResponse updateLiveSelective(Live obj, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:selectLiveByPrimaryKey

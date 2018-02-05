@@ -175,9 +175,6 @@ public class LiveServiceImpl implements LiveService {
         if (CommonUtils.isBlank(o.getStartTime())) {
             return new MessageResponse(1, "开始时间不能为空！");
         }
-        if (CommonUtils.isBlank(o.getEndTime())) {
-            return new MessageResponse(1, "结束时间不能为空！");
-        }
         if (CommonUtils.isBlank(o.getRemark())) {
             return new MessageResponse(1, "摘要不能为空！");
         }
@@ -206,6 +203,54 @@ public class LiveServiceImpl implements LiveService {
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.liveDao.updateByPrimaryKey(o);
+        this.dataBaseLogService.log("变更直播", "直播", "", o.getName(),
+                o.getName(), userProp);
+        return new MessageResponse(0, "变更直播完成！");
+    }
+
+    @Override
+    public MessageResponse updateLiveSelective(Live o, UserProp userProp)
+            throws Exception {
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getName())) {
+            return new MessageResponse(1, "名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getCategory())) {
+            return new MessageResponse(1, "直播类型不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getStartTime())) {
+            return new MessageResponse(1, "开始时间不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getRemark())) {
+            return new MessageResponse(1, "摘要不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getContent())) {
+            return new MessageResponse(1, "活动介绍不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getNop())) {
+            return new MessageResponse(1, "参与人数不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPop())) {
+            return new MessageResponse(1, "点赞数不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getAddr())) {
+            return new MessageResponse(1, "地点不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getRtmpUrl())) {
+            return new MessageResponse(1, "直播流地址不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getMp4Url())) {
+            return new MessageResponse(1, "回放地址不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getImageSrc())) {
+            return new MessageResponse(1, "封面不能为空！");
+        }
+        o.setLastModifyDate(new Date());
+        o.setLastModifyUserName(userProp.getName());
+        o.setLastModifyUserId(userProp.getUserId());
+        this.liveDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更直播", "直播", "", o.getName(),
                 o.getName(), userProp);
         return new MessageResponse(0, "变更直播完成！");

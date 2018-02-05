@@ -20,12 +20,13 @@ $(function () {
     $('#videoView').on('click', '.removeImg', removeVdoDo);
     $('#liveReportTable').on('click', '.publication', startPublicationDo);
     $('#liveReportTable').on('click', '.preview-report', startPreviewDo);
-    $('#liveReportTable').on('change', '#chooseStatus',searchByStatusDo);
+    $('.topToolBtn').on('change', '#chooseStatus',searchByStatusDo);
 });
 
 /*根据状态查找*/
 function searchByStatusDo() {
     var status = $(this).val();
+    console.log(status);
     var inputName = $('.searchByName').val();
     loadReportList(inputName, status);
 

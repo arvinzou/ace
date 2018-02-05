@@ -130,4 +130,23 @@ public class LiveController extends LiveBaseController {
         return this.liveService.deleteLiveByLiveId(id,
                 this.getCurUserProp());
     }
+
+
+
+    /**
+     * @throws
+     * @Title:updateLive
+     * @Description: TODO(更新直播)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2017-12-27
+     */
+    @RequestMapping(value = "/updateLiveSelective.do")
+    @ResponseBody
+    public MessageResponse updateByPrimaryKeySelective(String jsons) throws Exception {
+        Live obj = JSON.parseObject(jsons, Live.class);
+        return this.liveService.updateLiveSelective(obj, this.getCurUserProp());
+    }
 }

@@ -19,6 +19,8 @@ public interface LiveDao {
 
     int updateByPrimaryKey(Live record);
 
+    int updateByPrimaryKeySelective(Live record);
+
     List<LiveVo> findList(@Param("condition") LiveQVo condition,
                           @Param("start") int start, @Param("limit") int limit,
                           @Param("orderBy") String orderBy);

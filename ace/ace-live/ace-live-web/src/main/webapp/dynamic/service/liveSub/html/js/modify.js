@@ -36,7 +36,6 @@ $(function () {
 function releaseDo() {
     console.log('releaseDo');
     var name=$('.name').val().trim();
-    var areaCode=$('.areaCode').val().trim();
     var startTime=$('.startTime').val().trim();
     var endTime=$('.endTime').val().trim();
     if(endTime){
@@ -44,26 +43,23 @@ function releaseDo() {
     }
     var remark=$('.remark').val().trim();
     var content=$('.content').val().trim();
-    var deptId=$('.deptId').val().trim();
     var addr=$('.addr').val().trim();
     var rtmpUrl=$('.rtmpUrl').val().trim();
     var mp4Url=$('.mp4Url').val().trim();
     var category=$("input[type='radio']:checked").val().trim();
     var nop=$('.nop').val().trim();
     var pop=$('.pop').val().trim();
-    if(!(name&&imageSrc&&startTime&&remark&&content&&category&&deptId&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
+    if(!(name&&imageSrc&&startTime&&remark&&content&&category&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
         $('.prompt').text('带“ * ”为必填项');
         return;
     }
     var keyVal={
          'id':id,
         'name':name,
-        'areaCode':areaCode,
         'startTime':startTime+':00',
         'endTime':endTime,
         'remark':remark,
         'content':content,
-        'deptId':deptId,
         'addr':addr,
         'rtmpUrl':rtmpUrl,
         'mp4Url':mp4Url,
@@ -73,7 +69,7 @@ function releaseDo() {
         'pop':pop,
         'status':status
     }
-    var url=host+"/live//updateLive.do";
+    var url=host+"/live/updateLiveSelective.do";
     var data={
         'jsons':JSON.stringify(keyVal)
     };
