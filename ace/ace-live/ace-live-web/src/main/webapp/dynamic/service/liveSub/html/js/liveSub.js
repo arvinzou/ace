@@ -28,7 +28,7 @@ $(function () {
 
 /*取消排序*/
 function cancelSortDo() {
-    $('.report-temp').empty();
+    $('.report-list').empty();
     $('#reportCan').hide();
 }
 
@@ -60,6 +60,7 @@ function viewReportListByIdDo() {
 function viewReportList(data) {
     console.log('viewList');
     console.log(data);
+    $('#reportCan').show();
     var publication = '';
     $('.report-list').empty();
     for (var i = 0; i < data.length; i++) {
