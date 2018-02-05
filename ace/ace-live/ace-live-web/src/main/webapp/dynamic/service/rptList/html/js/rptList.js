@@ -368,6 +368,13 @@ function chooseImageDo() {
         url: '/live/www/live/upload.do',
         file_data_name: 'file',
         multi_selection: false,
+        resize: {
+            width: 1024,
+            height: 1024,
+            crop: true,
+            quality: 60,
+            preserve_headers: false
+        },
         filters: {
             max_file_size: '20mb',
             mime_types: [
@@ -382,7 +389,6 @@ function chooseImageDo() {
             marktext: marktext,
             companyId: userProp.corpId
         },
-
         init: {
             FilesAdded: function (up, files) {
                 console.log('uploadFile');
@@ -390,8 +396,8 @@ function chooseImageDo() {
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
-                if (0 == rst.status) {
-                    handleImage(rst.value[0]);
+                if (rst.success) {
+                    handleImage(rst.file_path);
                 }
             },
             Error: function (e, t) {
@@ -461,6 +467,7 @@ function viewReportList(data) {
         liReport = liReport.replace('[content]', data[i].content);
         liReport = liReport.replace('[createTime]', data[i].createTime.substring(0, 16));
         liReport = liReport.replace('[publication]', publication);
+        liReport = liReport.replace('[name]', data[i].nickName);
         var $liReport = $(liReport);
         $liReport.data("id", data[i].id);
         $liReport.data("rid", data[i].rid);
@@ -475,7 +482,7 @@ var reportTextTemplate = '<li>' +
     '            </div>' +
     '            <div class="msgbar">' +
     '            	<span class="omission msgbar-common creater"> ' +
-    '            		<i class="iconfont">&#xe61a;</i>[名字]' +
+    '            		<i class="iconfont">&#xe61a;</i>[name]' +
     '            	</span>' +
     '                <span class="msgbar-common msgbar-time">' +
     '            		<i class="iconfont">&#xe651;</i>[createTime]' +
@@ -492,7 +499,7 @@ var reportImgTemplate = '<li>' +
     '            </div>' +
     '            <div class="msgbar"> ' +
     '            	<span class="omission msgbar-common creater"> ' +
-    '            		<i class="iconfont">&#xe61a;</i>[名字] ' +
+    '            		<i class="iconfont">&#xe61a;</i>[name] ' +
     '            	</span>' +
     '                <span class="msgbar-common msgbar-time">' +
     '            		<i class="iconfont">&#xe651;</i> [createTime] ' +
