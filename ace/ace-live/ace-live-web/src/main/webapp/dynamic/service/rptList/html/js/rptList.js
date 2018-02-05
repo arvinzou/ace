@@ -246,10 +246,11 @@ function releaseDo() {
         'mediaType': mediaType,
         'content': $('.contentRpt1').val(),
         'rid': id,
-        'uid': 'oFvIjw8x1--0lQkUhO1Ta3L59o3c',
+        'uid': userProp.openId,
         'mediaContent': '',
         'createTime': $('.createTimeRpt1').val() + ':00',
     };
+
     console.log($('.contentRpt').val());
     if (2 == mediaType) {
         $("#imageView .xcy-cutimg").each(function () {

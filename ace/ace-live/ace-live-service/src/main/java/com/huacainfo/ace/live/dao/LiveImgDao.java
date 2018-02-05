@@ -12,6 +12,8 @@ import com.huacainfo.ace.live.vo.LiveImgVo;
 public interface LiveImgDao {
     int deleteByPrimaryKey(String LiveImgId);
 
+    int deleteByRptId(String rptId);
+
     int insert(LiveImg record);
 
 
