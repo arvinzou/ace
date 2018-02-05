@@ -1,4 +1,4 @@
-function checkType() {
+ function checkType() {
     if(2 == reportType){
         $("#j-row-img, #j-upcontain .xcy-cutimg").removeClass("fn-hide");
         $("#j-row-video").addClass("fn-hide");
@@ -38,7 +38,7 @@ function createUpImg() {
         container: document.getElementById("j-row-img"),
         flash_swf_url: "/live/content/www/lib/plupload-2.1.2/Moxie.swf",
         silverlight_xap_url: "/live/content/www/lib/plupload-2.1.2/Moxie.xap",
-        url: "/live/www/live/upload.do",
+        url: "/live/www/live/upload.do?companyId="+lvsCmd.urlParams.companyId,
         filters: t,
         multipart_params:{marktext:lvsCmd.urlParams.title,companyId:lvsCmd.urlParams.companyId},
         resize: {
@@ -301,6 +301,7 @@ function(e) {
     lvsCmd.ajax(l, {jsons:JSON.stringify(data)},
     function(e, t) {
         $(".j-content").val("");
+        location.reload();
         e ? "0" == t.status ? (alert("数据保存成功！"), parent.pizzaCmd.history.pop()) : alert(t.errorMessage) : alert("接口请求失败，请检查网络连接！")
     });
     return false;
