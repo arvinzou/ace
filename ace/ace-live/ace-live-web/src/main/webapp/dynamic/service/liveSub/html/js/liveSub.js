@@ -27,7 +27,7 @@ $(function () {
 
 /*取消排序*/
 function cancelSortDo() {
-    $('#reportCan').empty();
+    $('.report-temp').empty();
     $('#reportCan').hide();
 }
 
@@ -77,6 +77,7 @@ function viewReportList(data) {
         liReport = liReport.replace('[createTime]', data[i].createTime.substring(0, 16));
         liReport = liReport.replace('[publication]', publication);
         liReport = liReport.replace('[id]', data[i].id);
+        liReport = liReport.replace('[name]', data[i].nickName);
         var $liReport = $(liReport);
         $('.report-list').append($liReport);
     }
@@ -302,7 +303,7 @@ var reportTextTemplate = '<li id="[id]">' +
     '            </div>' +
     '            <div class="msgbar">' +
     '            	<span class="omission msgbar-common creater"> ' +
-    '            		<i class="iconfont">&#xe61a;</i>[名字]' +
+    '            		<i class="iconfont">&#xe61a;</i>[name]' +
     '            	</span>' +
     '                <span class="msgbar-common msgbar-time">' +
     '            		<i class="iconfont">&#xe651;</i>[createTime]' +
@@ -319,7 +320,7 @@ var reportImgTemplate = '<li id="[id]">' +
     '            </div>' +
     '            <div class="msgbar"> ' +
     '            	<span class="omission msgbar-common creater"> ' +
-    '            		<i class="iconfont">&#xe61a;</i>[名字] ' +
+    '            		<i class="iconfont">&#xe61a;</i>[name] ' +
     '            	</span>' +
     '                <span class="msgbar-common msgbar-time">' +
     '            		<i class="iconfont">&#xe651;</i> [createTime] ' +

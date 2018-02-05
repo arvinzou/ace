@@ -39,7 +39,7 @@ function releaseDo() {
         'mediaType': mediaType,
         'content': $('.content').val(),
         'rid': id,
-        'uid': 'oFvIjw8x1--0lQkUhO1Ta3L59o3c',
+        'uid': userProp.openId,
         'mediaContent': ""
     };
     if (2 == mediaType) {
@@ -133,7 +133,7 @@ function chooseVideoDo() {
     uploaderV = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Vupbtn',
-        url: '/portal/files/uploadFile.do',
+        url: '/live/www/live/upload.do',
         file_data_name: 'file',
         multi_selection: false,
         filters: {
@@ -180,9 +180,16 @@ function chooseImageDo() {
     uploaderI = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Iupbtn',
-        url: '/portal/files/uploadFile.do',
+        url: '/live/www/live/upload.do',
         file_data_name: 'file',
         multi_selection: false,
+        resize: {
+            width: 1024,
+            height: 1024,
+            crop: true,
+            quality: 60,
+            preserve_headers: false
+        },
         filters: {
             max_file_size: '20mb',
             mime_types: [
@@ -204,8 +211,9 @@ function chooseImageDo() {
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
-                if (0 == rst.status) {
-                    handleImage(rst.value[0]);
+                console.log(rst);
+                if (rst.success) {
+                    handleImage(rst.file_path);
                 }
             },
             Error: function (e, t) {

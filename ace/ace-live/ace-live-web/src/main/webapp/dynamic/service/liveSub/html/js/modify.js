@@ -114,6 +114,13 @@ var uploader = new plupload.Uploader({
     url: '/portal/files/uploadFile.do',
     file_data_name: 'file',
     multi_selection: false,
+    resize: {
+        width: 1024,
+        height: 1024,
+        crop: true,
+        quality: 60,
+        preserve_headers: false
+    },
     filters: {
         max_file_size: '10mb',
         mime_types: [
