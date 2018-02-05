@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <script type="text/javascript" src="../../common/js/jquery-3.2.1.min.js"></script>
+    <script src="../../../content/common/plugins/jquery-ui/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
     <link rel="stylesheet" href="html/css/liveSub.css">
+    <link rel="stylesheet" href="../../common/css/iconfont.css">
     <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.zh-CN.js"></script>
@@ -23,7 +25,7 @@
             <div class="input-group form-search">
                 <input type="text" class="searchByName  form-control" placeholder="请输入标题关键字">
                 <span class="input-group-btn">
-                <button class="search btn btn-default" type="button">查</button>
+                <button class="search btn btn-default" type="button"><i class="iconfont">&#xe60d;</i></button>
                 </span></div>
         </li>
         <li>卡片模式</li>
@@ -64,6 +66,17 @@
             </div>
         </li>
     </ul>
+</div>
+
+<div id="reportCan">
+    <div class="container-fluid report-temp">
+        <div class="report-temp-ul" >
+            <h1>报道排序</h1><button class="btn btn-info cancelSort">取消排序</button>
+            <ul class="report-list">
+
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div class="container-fluid modify">
@@ -167,7 +180,7 @@
                         <div class="formRow-content">
                             <div id="j-cover" class="xcy-cutimg">
                                 <label id="upbtn" class="upbtn">
-                                    <div class="imgbar"> </div>
+                                    <div class="imgbar"></div>
                                     <div class="fn-pt25"><i class="pz-icon icon-img"></i>
                                         <p class="fn-textcenter fn-mt5">点击选择封面图片</p>
                                     </div>
@@ -180,7 +193,8 @@
         </div>
     </div>
     <div class="container-fluid btn-container">
-        <button type="button" class="release btn btn-success">确认修改</button> <button type="button" class="cancel btn btn-info">取消修改</button>
+        <button type="button" class="release btn btn-success">确认修改</button>
+        <button type="button" class="cancel btn btn-info">取消修改</button>
         <span class="prompt"></span>
     </div>
 </div>

@@ -148,10 +148,10 @@ var liVideoTemplate = '<li class="picbar">'+
     '            </div>'+
     '            <div class="msgbar">'+
     '                <span class="omission msgbar-common creater">'+
-    '                    <i class=""></i>[name]'+
+    '                    <i class="iconfont">&#xe61a;</i>[name]'+
     '                </span>'+
     '                <span class="msgbar-common msgbar-time">'+
-    '                    <i class="icon-clock"></i>[createTime]'+
+    '                    <i class="iconfont">&#xe651;</i>[createTime]'+
     '                </span>'+
     '                <a href="[mediaContent]" download="">下载</a>'+
     '                <a class="j-report">发布</a>'+

@@ -116,7 +116,7 @@ var uploader = new plupload.Uploader({
     runtimes: 'html5,flash,silverlight,html4',
     browse_button: 'upbtn', // you can pass an id...
     /*container: document.getElementById('container'),*/ // ... or DOM Element itself
-    url: 'http://localhost/portal/files/uploadFile.do',
+    url: '/portal/files/uploadFile.do',
     file_data_name: 'file',
     multi_selection: false,
     filters: {

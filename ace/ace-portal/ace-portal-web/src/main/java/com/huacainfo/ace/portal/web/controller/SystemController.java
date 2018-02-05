@@ -178,7 +178,7 @@ public class SystemController extends PortalBaseController{
 		ModelAndView mav=new ModelAndView("js");
 		mav.addObject("js",sb.toString());
 		return mav;
-	}
+	};
 	/**
 	 * 
 	    * @Title:selectProvinceTreeList 

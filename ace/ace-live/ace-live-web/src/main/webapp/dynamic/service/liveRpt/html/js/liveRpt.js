@@ -7,6 +7,8 @@ var id;
 var mediaType = 2;
 var uploaderI;
 var uploaderV;
+var userProp;
+var marktext;
 $(function () {
     initweb();
     $(":radio").click(chooseTypeDo);
@@ -142,6 +144,10 @@ function chooseVideoDo() {
                 }
             ]
         },
+        multipart_params: {
+            marktext: marktext,
+            companyId:userProp.corpId
+        },
         init: {
             FilesAdded: function (up, files) {
                 console.log('uploadFile');
@@ -185,7 +191,10 @@ function chooseImageDo() {
                 }
             ]
         },
-
+        multipart_params: {
+            marktext: marktext,
+            companyId:userProp.corpId
+        },
         init: {
             FilesAdded: function (up, files) {
                 console.log('uploadFile');
@@ -246,7 +255,10 @@ function viewImagePage(o, e, t) {
 
 /*网页初始化*/
 function initweb() {
-    loadLiveList();
+    url='/portal/system/getUserProp.do';
+    $.get(url,function (result) {
+        loadLiveList();
+    })
 }
 
 /*下载直播数据*/
@@ -257,7 +269,7 @@ function loadLiveList(name) {
         'start': start,
         'limit': limit,
         'orderBy': orderByStr,
-        'deptId': '00010001'
+        'deptId': userProp.corpId
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {

@@ -7,27 +7,58 @@ var id;
 var mediaType = 2;
 var uploaderI;
 var uploaderV;
+var userProp;
+var marktext;
 $(function () {
     initweb();
-    $(":radio").click(chooseTypeDo);
-    $('.cancel').click(hideSelectReportDo);
-    $('.search').click(searchByNameDo);
-    $('.release').click(releaseDo);
+    $(":radio").on('click', chooseTypeDo);
+    $('.cancel').on('click', hideSelectReportDo);
+    $('.search').on('click', searchByNameDo);
+    $('.release').on('click', releaseDo);
     $('.reportList').on('click', '.picbar', actionModifyDo);
-    $('.previewPage').click(hidePreviewPageDo);
-    $('.msgbar').on('click', 'a', startPreviewDo);
+    $('.previewPage').on('click', hidePreviewPageDo);
     $('#imageView').on('click', '.removeImg', removeImgDo);
     $('#videoView').on('click', '.removeImg', removeVdoDo);
+    $('#liveReportTable').on('click', '.publication', startPublicationDo);
+    $('#liveReportTable').on('click', '.preview-report', startPreviewDo);
+    $('#liveReportTable').on('change', '#chooseStatus',searchByStatusDo);
 });
 
-/*处理图片*/
-function handleImage(imageUrl) {
-    var o = fileHost + imageUrl, l = new Image;
-    l.src = o,
-        l.onload = l.onerror = function () {
-            var e = l.width, t = l.height;
-            viewImagePage(o, e, t);
+/*根据状态查找*/
+function searchByStatusDo() {
+    var status = $(this).val();
+    var inputName = $('.searchByName').val();
+    loadReportList(inputName, status);
+
+}
+
+/*发布报道*/
+function startPublicationDo() {
+    console.log('发布报道');
+    var $this = $(this);
+    var id = $this.parent().parent().parent().data('id');
+    var rid = $this.parent().parent().parent().data('rid');
+
+    var url = host + '/liveRpt/updateLiveRptStatus.do';
+    var data = {
+        'id': id,
+        'rid': rid,
+        'status': 2,
+        'message': JSON.stringify(
+            {
+                "header": {
+                    "type": 3
+                }
+            }
+        )
+    };
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            var status = $(this).val();
+            var inputName = $('.searchByName').val();
+            loadReportList(inputName, status);
         }
+    })
 }
 
 /*删除图片*/
@@ -44,10 +75,50 @@ function removeVdoDo() {
 
 /*点击预览按键*/
 function startPreviewDo() {
-    var id = $(this).parent().parent().data('Liveid');
-    var data = findCover(id);
-    console.log(data);
+    console.log(222222222222);
+    var id = $(this).parent().parent().data('id');
+    if (!id) {
+        return;
+    }
+    findCover(id);
 }
+
+/*根据id查找图片*/
+function findCover(id) {
+    var url = host + '/liveImg/findLiveImgList.do';
+    var data = {
+        'rptId': id
+    };
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            viewImage(result.rows);
+        }
+    });
+}
+
+/*渲染图片*/
+function viewImage(data) {
+    for (var i = 0; i < data.length; i++) {
+        viewImageDiv(data[i].url, data[i].w, data[i].h);
+    }
+}
+
+/*显示图片*/
+function viewImageDiv(o, e, t) {
+    console.log(o + e + t);
+    var imgDiv = imgTemplate.replace('[imgPath]', o);
+    var $imgDiv = $(imgDiv).data({
+        fileurl: o,
+        width: e,
+        height: t
+    });
+    console.log($imgDiv);
+    $('#j-cover').before($imgDiv);
+    if ($('#imageView').children().length >= 5) {
+        $('#j-cover').hide();
+    }
+}
+
 
 /*取消预览*/
 function hidePreviewPageDo(event) {
@@ -61,7 +132,7 @@ function hidePreviewPageDo(event) {
 /*点击修改报道*/
 function actionModifyDo() {
     console.log('修改报道');
-    id = $(this).parent().data('Liveid');
+    id = $(this).parent().data('id');
     console.log(id);
     var url = host + '/liveRpt/selectLiveRptByPrimaryKey.do';
     var data = {
@@ -89,7 +160,7 @@ function showModifyWeb(data) {
             if (data[item] == '2') {
                 $('.formRowVdo').hide();
                 $('.formRowImg').show();
-                mediaType=2;
+                mediaType = 2;
                 chooseImageDo();
                 $(":radio[name='category'][value='2']").prop("checked", "checked");
                 findCover(data['id']);
@@ -97,21 +168,14 @@ function showModifyWeb(data) {
                 $('.formRowVdo').show();
                 $('.formRowImg').hide();
                 chooseVideoDo();
-                mediaType=1;
+                mediaType = 1;
                 $(":radio[name='category'][value='1']").prop("checked", "checked");
                 viewVideo(data['mediaContent'])
             } else {
                 $(":radio[name='category'][value='3']").prop("checked", "checked");
-                mediaType=3;
+                mediaType = 3;
             }
         }
-    }
-}
-
-function viewImage(data) {
-    console.log(data);
-    for (var i = 0; i < data.length; i++) {
-        viewImagePage(data[i].url, data[i].w, data[i].h);
     }
 }
 
@@ -131,23 +195,9 @@ function viewLiveName(id) {
     });
 }
 
-/*根据id查找图片*/
-function findCover(id) {
-    var url = host + '/liveImg/findLiveImgList.do';
-    var data = {
-        'rptId': id
-    };
-    $.getJSON(url, data, function (result) {
-        if (result.status == 0) {
-            viewImage(result.rows);
-        }
-    });
-}
-
-
 /*确认发布报道*/
 function releaseDo() {
-    var url =host+ '/liveRpt/deleteLiveRptAndImgLiveByRptId.do';
+    var url = host + '/liveRpt/deleteLiveRptAndImgLiveByRptId.do';
     var data = {
         'id': id,
     }
@@ -199,9 +249,9 @@ function actionUpdataRpt() {
 
 /*按名字搜索报道*/
 function searchByNameDo() {
+    var status = $('#chooseStatus').val();
     var inputName = $('.searchByName').val();
-    console.log(inputName);
-    loadLiveList(inputName);
+    loadReportList(inputName, status);
 }
 
 
@@ -251,6 +301,10 @@ function chooseVideoDo() {
                 }
             ]
         },
+        multipart_params: {
+            marktext: marktext,
+            companyId: userProp.corpId
+        },
         init: {
             FilesAdded: function (up, files) {
                 console.log('uploadFile');
@@ -294,6 +348,10 @@ function chooseImageDo() {
                 }
             ]
         },
+        multipart_params: {
+            marktext: marktext,
+            companyId: userProp.corpId
+        },
 
         init: {
             FilesAdded: function (up, files) {
@@ -322,19 +380,23 @@ function chooseAudioDo() {
 /*网页初始化*/
 function initweb() {
     /*下载报道列表*/
-    loadReportList();
     $('.previewPage').hide();
+    var url = '/portal/system/getUserProp.do';
+    $.get(url, function () {
+        loadReportList();
+    })
 }
 
 /*下载直播数据*/
-function loadReportList(name) {
+function loadReportList(content, status) {
     console.log('loadReportList');
     var url = host + '/liveRpt/findLiveRptList.do';
     var data = {
-        'name': name,
+        'content': content,
         'start': start,
         'limit': limit,
         'orderBy': orderByStr,
+        'status': status,
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -347,12 +409,10 @@ function loadReportList(name) {
 function viewReportList(data) {
     console.log('viewList');
     console.log(data);
+    var publication = '';
     $('#liveReportTable').empty();
     for (var i = 0; i < data.length; i++) {
         var liReport = '';
-        if (data[i].mediaContent) {
-            liReport = reportImgTemplate;
-        }
         if (1 == data[i].mediaType) {
             liReport = reportVideoTempla;
         } else if (2 == data[i].mediaType) {
@@ -363,11 +423,17 @@ function viewReportList(data) {
         } else {
             liReport = reportAudioTempla;
         }
+        if (1 == data[i].status) {
+            publication = '<a class="publication">发布</a>';
+        }
         liReport = liReport.replace('[mediaContent]', data[i].mediaContent);
         liReport = liReport.replace('[content]', data[i].content);
         liReport = liReport.replace('[createTime]', data[i].createTime.substring(0, 16));
-        var $li = $(liReport).data("Liveid", data[i].id);
-        $('#liveReportTable').append($li);
+        liReport = liReport.replace('[publication]', publication);
+        var $liReport = $(liReport);
+        $liReport.data("id", data[i].id);
+        $liReport.data("rid", data[i].rid);
+        $('#liveReportTable').append($liReport);
     }
 }
 
@@ -378,11 +444,11 @@ var reportTextTemplate = '<li>' +
     '            </div>' +
     '            <div class="msgbar">' +
     '            	<span class="omission msgbar-common creater"> ' +
-    '            		<i class=""></i>[名字]' +
+    '            		<i class="iconfont">&#xe61a;</i>[名字]' +
     '            	</span>' +
     '                <span class="msgbar-common msgbar-time">' +
-    '            		<i class="icon-clock"></i>[createTime]' +
-    '            	</span><a class="">预览</a>' +
+    '            		<i class="iconfont">&#xe651;</i>[createTime]' +
+    '            	</span>[publication]<a class="preview-report">预览</a>' +
     '            </div>' +
     '        </li>';
 
@@ -395,11 +461,11 @@ var reportImgTemplate = '<li>' +
     '            </div>' +
     '            <div class="msgbar"> ' +
     '            	<span class="omission msgbar-common creater"> ' +
-    '            		<i class=""></i> [名字] ' +
+    '            		<i class="iconfont">&#xe61a;</i>[名字] ' +
     '            	</span>' +
     '                <span class="msgbar-common msgbar-time">' +
-    '            		<i class="icon-clock"></i> [createTime] ' +
-    '            	</span> <a>预览</a>' +
+    '            		<i class="iconfont">&#xe651;</i> [createTime] ' +
+    '            	</span>[publication]<a class="preview-report">预览</a>' +
     '            </div>' +
     '        </li>';
 
@@ -412,11 +478,11 @@ var reportVideoTempla = '<li>' +
     '            </div>' +
     '            <div class="msgbar">' +
     '                <span class="omission msgbar-common creater">' +
-    '                    <i class=""></i>[name]' +
+    '                    <i class="iconfont">&#xe61a;</i>[name]' +
     '                </span>' +
     '                <span class="msgbar-common msgbar-time">' +
-    '                    <i class="icon-clock"></i>[createTime]' +
-    '                </span><a>发布</a>' +
+    '                    <i class="iconfont">&#xe651;</i>[createTime]' +
+    '                </span>[publication]<a class="preview-report">预览</a>' +
     '            </div>' +
     '        </li>';
 
@@ -432,11 +498,11 @@ var reportAudioTempla = '<li>' +
     '            </div>' +
     '            <div class="msgbar">' +
     '                <span class="omission msgbar-common creater">' +
-    '                    <i class=""></i>[name]' +
+    '                    <i class="iconfont">&#xe61a;</i>[name]' +
     '                </span>' +
     '                <span class="msgbar-common msgbar-time">' +
-    '                    <i class="icon-clock"></i>[createTime]' +
-    '                </span><a>发布</a>' +
+    '                    <i class="iconfont">&#xe651;</i>[createTime]' +
+    '                </span>[publication]<a class="preview-report">预览</a>' +
     '            </div>' +
     '        </li>';
 
@@ -466,18 +532,15 @@ var imgTemplate = '<div class="xcy-cutimg">' +
     '              </label>' +
     '</div>';
 
-/*显示图片*/
-function viewImagePage(o, e, t) {
-    var imgDiv = imgTemplate.replace('[imgPath]', o);
-    var $imgDiv = $(imgDiv).data({
-        fileurl: o,
-        width: e,
-        height: t
-    });
-    $('#j-cover').before($imgDiv);
-    if ($('#imageView').children().length >= 5) {
-        $('#j-cover').hide();
-    }
+/*处理图片*/
+function handleImage(imageUrl) {
+    console.log(imageUrl);
+    var o = fileHost + imageUrl, l = new Image;
+    l.src = o,
+        l.onload = l.onerror = function () {
+            var e = l.width, t = l.height;
+            viewImageDiv(o, e, t);
+        }
 }
 
 

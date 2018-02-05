@@ -112,7 +112,8 @@ public class LiveRptController extends LiveBaseController {
     @RequestMapping(value = "/updateLiveRptStatus.do")
     @ResponseBody
     public MessageResponse updateLiveRptStatus(String id, String status, String message, String rid) throws Exception {
-        if (status != null && "2".equals(status)) {
+        MessageResponse rst= this.liveRptService.updateLiveRptStatus(id, status);
+        if (0==rst.getStatus()) {
             for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
                 try {
                     item.sendMessage(message);
@@ -122,8 +123,7 @@ public class LiveRptController extends LiveBaseController {
                 }
             }
         }
-
-        return this.liveRptService.updateLiveRptStatus(id, status);
+        return rst;
     }
 
     /**

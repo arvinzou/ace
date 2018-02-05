@@ -1,5 +1,4 @@
 // JavaScript Document
-
 var host='http://192.168.2.153/live';
 var imageSrc;
 
@@ -108,7 +107,6 @@ function computedNumDo() {
 }
 
 function webInit() {
-
 }
 
 /*文件上传*/

@@ -2,6 +2,7 @@
 /*上部分*/
 .topToolBtn{
 	list-style: none;
+
 }
 
 .topToolBtn >li{
@@ -13,6 +14,7 @@
 
 .input-group{
 	max-width: 300px;
+	z-index: 0;
 }
 
 .headContainer{
@@ -43,18 +45,13 @@
 	cursor: pointer;
 }
 
-.actionTop{
-    top: 10px;
-    background-color: #ccc;
-
-}
 
 .picbar{
 	position: relative;
 	cursor: pointer;
 }
 
-.reportNum,.actionTop{
+.reportNum{
 	position: absolute;
 	left: 10px;
 	color: #fff;
@@ -63,7 +60,7 @@
 }
 
 .reportNum{
-	top: 40px;
+	top: 10px;
 	background-color: rgba(0,0,0,.5);
 }
 
@@ -112,8 +109,7 @@
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`*/
-.modify{
-	z-index: 100;
+.modify,.report-temp{
 	position:absolute;
 	top:0;
 	left: 0;
@@ -217,4 +213,94 @@ input[type=radio]{
 .prompt{
 	margin-left: 20px;
 	color:red;
+}
+
+
+/*888888888888888888888888888888888888888888*/
+#reportCan{
+	z-index: 999;
+}
+
+.report-temp{
+	mix-height: 100%;
+	overflow-y: scroll;
+}
+
+.report-list {
+	list-style-type: none;
+	padding: 0px;
+
+}
+
+.report-temp-ul{
+	background-color: white;
+	padding: 40px;
+	width: 100%;
+	border-radius: 10px;
+	display: table;
+}
+
+.report-temp-ul h1,.report-temp-ul button{
+	display: inline-block;
+}
+
+.report-temp-ul button{
+	margin: 0 0 10px 40px;
+
+}
+
+.report-list>li{
+	float: left;
+	margin:0 20px 20px 0;
+	border: 1px solid #e2e7f6;
+}
+
+.report-list video{
+	width: 100%;
+	height: 100%;
+}
+
+.report-list audio{
+	margin: 80px 3% 0 3%;
+	width: 94%;
+}
+
+.xcy-cutimg ,.retainEl{
+	position: relative;
+	float: left;
+	width: 240px;
+	height: 135px;
+	border: 1px dashed #b4bed3;
+	border-radius: 5px;
+	margin: 5px;
+}
+
+.report-list img{
+	display: block;
+	width: 100%;
+	border: 0;
+	overflow: hidden;
+	object-fit:cover;
+}
+
+.textContent{
+	width: 376px;
+	padding: 6px 12px;
+	height: 212px;
+	font-size: 14px;
+	line-height: 28px;
+	background-color: #ebeef3;
+	color: #666;
+	overflow: auto;
+}
+
+.title{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,.5);
+	line-height: 40px;
+	padding: 0 6px;
+	color: #fff;
 }

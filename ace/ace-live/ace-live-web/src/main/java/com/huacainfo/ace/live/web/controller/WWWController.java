@@ -262,6 +262,8 @@ public class WWWController extends LiveBaseController {
     public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName,String marktext,String companyId)
             throws Exception {
         logger.info("=========================");
+        logger.info(marktext);
+        logger.info(companyId);
         Map<String, Object> rst = new HashMap<String, Object>();
         String[] fileNames = new String[file.length];
         String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";

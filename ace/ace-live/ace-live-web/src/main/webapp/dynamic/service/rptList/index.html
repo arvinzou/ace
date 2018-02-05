@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../common/css/common.css">
     <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
     <link rel="stylesheet" href="html/css/rptList.css">
+    <link rel="stylesheet" href="../../common/css/iconfont.css">
     <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.zh-CN.js"></script>
     <link rel="stylesheet" href="../../common/css/bootstrap-datetimepicker.min.css">
@@ -22,14 +23,14 @@
     <ul class="topToolBtn">
         <li>
             <div class="input-group form-search">
-                <input type="text" class="form-control" placeholder="请输入标题关键字">
+                <input type="text" class="searchByName form-control" placeholder="请输入标题关键字">
                 <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><i class="iconfont">&#xe699;</i></button>
+                <button class="search btn btn-default" type="button"><i class="iconfont">&#xe60d;</i></button>
                 </span></div>
         </li>
         <li>创建时间</li>
         <li>
-            <select class="form-control">
+            <select class="form-control" id="chooseStatus">
                 <option value="0">全部报道</option>
                 <option value="1">待审报道</option>
                 <option value="2">已审报道</option>
@@ -64,7 +65,7 @@
             		<i class=""></i> 王瑜王瑜王瑜王瑜王瑜王瑜王瑜王瑜 
             	</span>
                 <span class="msgbar-common msgbar-time">
-            		<i class="icon-clock"></i> 2018-01-12 09:39 
+            		<i class="icon-clock"></i> 2018-01-12 09:39
             	</span> <a class="j-stop">预览</a>
             </div>
         </li>
@@ -76,7 +77,7 @@
             <div class="formRow">
                 <div class="titles">报道内容<span class="font-right">0/500</span></div>
                 <div class="formRow-content">
-                    <textarea rows="6" class="contentRpt form-control "></textarea>
+                    <textarea rows="6" class="contentRpt form-control"></textarea>
                 </div>
             </div>
             <div class="formRow">
@@ -153,8 +154,8 @@
     <div class="previewWeb">
         <div class="previewWeb-head">报道预览</div>
         <div class="previewWeb-content">
-            <div><img src="C:\Users\HuaCai003\Desktop\1.jpg"> </div>
-            <div>啦就撒旦立刻放假啊圣诞快乐房价爱睡觉的撒旦解放拉萨酱豆腐绿卡见识到了发卡量带上飞机啊是拉链设计的飞机阿斯利康大家发了</div>
+            <div class="previewWeb-medio"><img src="C:\Users\HuaCai003\Desktop\1.jpg"></div>
+            <div class="previewWeb-text"></div>
         </div>
     </div>
 </div>
