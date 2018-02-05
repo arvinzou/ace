@@ -36,6 +36,10 @@
          };
          message.content=$("#j-remarkform").find("input[name=content]").val();
          message.createTime=new Date().pattern("hh:mm:ss");
+         if(message.content==null||message.content==''){
+            alert("您还没写内容");
+            return false;
+         }
          wsk.send(JSON.stringify(message));
          $("#j-remarkform input[name=content]").val("");
         return false;

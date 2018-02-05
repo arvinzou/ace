@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.common.tools.WaterMarkUtils;
 import com.huacainfo.ace.live.model.LiveImg;
@@ -264,6 +265,9 @@ public class WWWController extends LiveBaseController {
         logger.info("=========================");
         logger.info(marktext);
         logger.info(companyId);
+        if(CommonUtils.isBlank(companyId)){
+            companyId="00010001";
+        }
         Map<String, Object> rst = new HashMap<String, Object>();
         String[] fileNames = new String[file.length];
         String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
