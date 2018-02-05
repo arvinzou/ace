@@ -5,6 +5,7 @@ var limit = 25;
 var userProp;
 var status;
 var id;
+var rid;
 $(function () {
     initWeb();
     $('.sceneList').on('click', '.changeLiveStatus', changeLiveStatusDo);
@@ -33,16 +34,17 @@ function cancelSortDo() {
 
 /*查看报道列表*/
 function viewReportListByIdDo() {
-    var id = $(this).parent().parent().data('Liveid');
+    rid = $(this).parents('li').data('Liveid');
     console.log('loadReportList');
     var url = '/live/liveRpt/findLiveRptList.do';
     var data = {
-        'rid': id,
+        'rid': rid,
         'start': start,
         'limit': 1000,
         'status': 2,
         'orderBy': 'sort',
         'sord': 'asc'
+
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -266,7 +268,16 @@ function updateSequence(arr) {
     $.ajax({
         type: "post",
         url: "/live/liveRpt/updateSequence.do",
-        data: {data: JSON.stringify(data)},
+        data: {data: JSON.stringify(data),
+            'rid':rid,
+            'message': JSON.stringify(
+                {
+                    "header": {
+                        "type": 3
+                    }
+                }
+            )
+        },
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {

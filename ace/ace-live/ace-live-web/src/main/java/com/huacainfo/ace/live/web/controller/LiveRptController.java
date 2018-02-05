@@ -215,7 +215,20 @@ public class LiveRptController extends LiveBaseController {
      */
     @RequestMapping(value = "/updateSequence.do")
     @ResponseBody
-    public MessageResponse updateSequence(String data) throws Exception {
+    public MessageResponse updateSequence(String data,String rid,String message) throws Exception {
+        if (MyWebSocket.rooms.get(rid) == null) {
+            CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+            MyWebSocket.rooms.put(rid, webSocketSet);
+            logger.debug("create new room rid:{}", rid);
+        }
+        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+            try {
+                item.sendMessage(message);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
         return liveRptService.updateSequence(data);
     }
 
