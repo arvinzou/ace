@@ -23,6 +23,7 @@ import com.huacainfo.ace.live.vo.LiveRptQVo;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 @Controller
 @RequestMapping("/liveRpt")
@@ -115,6 +116,11 @@ public class LiveRptController extends LiveBaseController {
     public MessageResponse updateLiveRptStatus(String id, String status, String message, String rid) throws Exception {
         MessageResponse rst= this.liveRptService.updateLiveRptStatus(id, status);
         if (0==rst.getStatus()) {
+            if (MyWebSocket.rooms.get(rid) == null) {
+                CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+                MyWebSocket.rooms.put(rid, webSocketSet);
+                logger.debug("create new room rid:{}", rid);
+            }
             for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
                 try {
                     item.sendMessage(message);

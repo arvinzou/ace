@@ -154,7 +154,7 @@ function loadView(id) {
 		}
 	});
 }
-function audit(id,status,rid,message){
+function audit(id,status,rid){
         $.ajax({
             type : "post",
             url : cfg.grid_edit_data_url,
@@ -162,7 +162,7 @@ function audit(id,status,rid,message){
                 id : id,
                 status:status,
                 rid:rid,
-                message:message
+                message:""
             },
             success : function(rst, textStatus) {
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
@@ -185,12 +185,12 @@ function add() {
         status:"1"
 	}
 	data.status=rsd(data.status, "113");
-	data.opt=renderOpt(data.id,data.rid,data.rid,data.content);
+	data.opt=renderOpt(data.id,data.rid,data.rid);
 	rowadd(data);
 }
-function renderOpt(id,title,rid,message) {
+function renderOpt(id,title,rid) {
 	var html = [];
-	html.push('<a data-rel="tooltip" data-placement="top" title="通过" class="blue" href="javascript:audit(\'' + id+ '\',2,\'' + rid+ '\',\'' + message+ '\')"><i class="ace-icon fa fa-unlock bigger-130"></i></a>');
+	html.push('<a data-rel="tooltip" data-placement="top" title="通过" class="blue" href="javascript:audit(\'' + id+ '\',2,\'' + rid+'\')"><i class="ace-icon fa fa-unlock bigger-130"></i></a>');
     html.push('<a data-rel="tooltip" data-placement="top" title="退回" class="blue" href="javascript:audit(\'' + id+ '\',3)"><i class="ace-icon fa fa-lock bigger-130"></i></a>');
 	html.push('<a target="_blank" href="');
 	html.push('javascript:preview(\'' + id + '\',\'' + title + '\')');
@@ -203,7 +203,7 @@ function renderOpt(id,title,rid,message) {
 var websocket1 = null;
 //判断当前浏览器是否支持WebSocket
 if('WebSocket' in window){
-  websocket1 = new ReconnectingWebSocket("ws://"+websocketurl+"/live/wcst/rmsg/sys");
+  websocket1 = new ReconnectingWebSocket("ws://"+websocketurl+"/live/websocketsub/rmsg/sys");
 }
 else{
   console.log('Not support websocket1');
@@ -224,7 +224,7 @@ websocket1.onmessage = function(){
     var data =JSON.parse(event.data);
     data.status="1";
     data.status=rsd(data.status, "113");
-  	data.opt=renderOpt(data.id,data.rid,data.rid,data.content);
+  	data.opt=renderOpt(data.id,data.rid,data.rid);
   	rowadd(data);
   	var lastTr = $("#grid-table tr:last");
     lastTr.focus();

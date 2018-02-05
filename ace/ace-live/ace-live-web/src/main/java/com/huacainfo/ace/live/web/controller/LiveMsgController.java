@@ -20,6 +20,7 @@ import com.huacainfo.ace.live.vo.LiveMsgVo;
 import com.huacainfo.ace.live.vo.LiveMsgQVo;
 
 import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 @Controller
 @RequestMapping("/liveMsg")
@@ -94,9 +95,16 @@ public class LiveMsgController extends LiveBaseController {
     @ResponseBody
     public MessageResponse updateLiveMsg(String id, String status, String message, String rid) throws Exception {
         if (status != null && status.equals("2")) {
+            SingleResult<LiveMsgVo> rst=this.liveMsgService.selectLiveMsgByPrimaryKey(id);
+
+            if (MyWebSocket.rooms.get(rid) == null) {
+                CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+                MyWebSocket.rooms.put(rid, webSocketSet);
+                logger.debug("create new room rid:{}", rid);
+            }
             for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
                 try {
-                    item.sendMessage(message);
+                    item.sendMessage(rst.getValue().getContent());
                 } catch (IOException e) {
                     logger.error(e.getMessage());
                     continue;

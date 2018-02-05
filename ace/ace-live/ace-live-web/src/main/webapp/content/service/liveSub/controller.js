@@ -204,7 +204,7 @@ function renderOpt(id,title,rid,message) {
 var websocket1 = null;
 //判断当前浏览器是否支持WebSocket
 if('WebSocket' in window){
-  websocket1 = new ReconnectingWebSocket("ws://"+websocketurl+"/live/wcst/rsub/sys");
+  websocket1 = new ReconnectingWebSocket("ws://"+websocketurl+"/live/websocketsub/rsub/sys");
 }
 else{
   console.log('Not support websocket1');
