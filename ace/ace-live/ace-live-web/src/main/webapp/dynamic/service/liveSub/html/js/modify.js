@@ -1,6 +1,5 @@
 // JavaScript Document
 
-var host='http://192.168.2.153/live';
 var imghost = "http://zx.huacainfo.com/";
 var imageSrc;
 
@@ -69,7 +68,7 @@ function releaseDo() {
         'pop':pop,
         'status':status
     }
-    var url=host+"/live/updateLiveSelective.do";
+    var url="/live/live/updateLiveSelective.do";
     var data={
         'jsons':JSON.stringify(keyVal)
     };

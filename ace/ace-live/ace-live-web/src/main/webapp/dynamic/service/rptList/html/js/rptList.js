@@ -79,18 +79,62 @@ function startPreviewDo() {
     if (!id) {
         return;
     }
-    previewReport(id);
+    var url =  '/live/liveRpt/selectLiveRptByPrimaryKey.do';
+    var data = {
+        'id': id
+    };
+    $.getJSON(url, data, function (result) {
+        console.log(result);
+        if (result.status == 0) {
+            console.log(result);
+            $('.previewPage').show()
+            $('.previewWeb-content').empty();
+            viewPreviewReport(result.value,id);
+        }
+    });
 }
 
+function viewPreviewReport(data,id) {
+    if('2'==data.mediaType){
+        var url = '/live/liveImg/findLiveImgList.do';
+        var datas = {
+            'rptId': id
+        };
+        $.getJSON(url,datas,function (result) {
+              if(result.status==0){
+                  var imgdata=result.rows;
+                  for(var i=0;i<imgdata.length();i++){
+                      var imgStr='<div class="previewWeb-medio"><img src="'+imgdata[i].url+'"></div>';
+                      $('.previewWeb-content').append($(imgStr));
+                  }
+              }
+        })
+    }else if('1'==data.mediaType){
+        var VStr='<div class="previewWeb-medio"><video controls="controls" src="'+data.mediaContent +'"></video></div>';
+        $('.previewWeb-content').append($(VStr));
+    }else if('3'==data.mediaType){
+        var AStr='<vid class="previewWeb-medio"><audio controls="controls"><source src="'+data.mediaContent+'" type="audio/mpeg"></audio></vid>';
+        $('.previewWeb-content').append($(AStr));
+    }
+    $('.previewWeb-text').text(data.content);
+}
+
+
+
+
+
+
 /*根据id查找图片*/
-function previewReport(id) {
+function findCover(id) {
     var url = '/live/liveImg/findLiveImgList.do';
     var data = {
         'rptId': id
     };
-    $.getJSON(url,data,function (result) {
-        console.log();
-    })
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            viewImage(result.rows);
+        }
+    });
 }
 
 /*渲染图片*/
@@ -129,7 +173,7 @@ function hidePreviewPageDo(event) {
 /*点击修改报道*/
 function actionModifyDo() {
     console.log('修改报道');
-    id = $(this).parent().data('id');
+    id = $(this).parents('li').data('id');
     console.log(id);
     var url =  '/live/liveRpt/selectLiveRptByPrimaryKey.do';
     var data = {
@@ -274,7 +318,7 @@ function chooseVideoDo() {
     uploaderV = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Vupbtn',
-        url: 'http://192.168.2.153/live/www/live/upload.do',
+        url: '/live/www/live/upload.do',
         file_data_name: 'file',
         multi_selection: false,
         filters: {
@@ -321,7 +365,7 @@ function chooseImageDo() {
     uploaderI = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Iupbtn',
-        url: 'http://192.168.2.153/live/www/live/upload.do',
+        url: '/live/www/live/upload.do',
         file_data_name: 'file',
         multi_selection: false,
         filters: {
