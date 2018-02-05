@@ -36,8 +36,8 @@ function searchByStatusDo() {
 function startPublicationDo() {
     console.log('发布报道');
     var $this = $(this);
-    var id = $this.parent().parent().parent().data('id');
-    var rid = $this.parent().parent().parent().data('rid');
+    var id = $this.parents('li').data('id');
+    var rid =$this.parents('li').data('id');
     var url = '/live/liveRpt/updateLiveRptStatus.do';
     var data = {
         'id': id,
@@ -53,11 +53,11 @@ function startPublicationDo() {
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            var status = $(this).val();
+            var status = $('#chooseStatus').val();
             var inputName = $('.searchByName').val();
             loadReportList(inputName, status);
         }
-    })
+    });
 }
 
 /*删除图片*/
@@ -75,24 +75,22 @@ function removeVdoDo() {
 /*点击预览按键*/
 function startPreviewDo() {
     console.log(222222222222);
-    var id = $(this).parent().parent().data('id');
+    var id = $(this).parents('li').data('id');
     if (!id) {
         return;
     }
-    findCover(id);
+    previewReport(id);
 }
 
 /*根据id查找图片*/
-function findCover(id) {
+function previewReport(id) {
     var url = '/live/liveImg/findLiveImgList.do';
     var data = {
         'rptId': id
     };
-    $.getJSON(url, data, function (result) {
-        if (result.status == 0) {
-            viewImage(result.rows);
-        }
-    });
+    $.getJSON(url,data,function (result) {
+        console.log();
+    })
 }
 
 /*渲染图片*/
@@ -398,9 +396,9 @@ function loadReportList(content, status) {
 function viewReportList(data) {
     console.log('viewList');
     console.log(data);
-    var publication = '';
     $('#liveReportTable').empty();
     for (var i = 0; i < data.length; i++) {
+        var publication = '';
         var liReport = '';
         if (1 == data[i].mediaType) {
             liReport = reportVideoTempla;
