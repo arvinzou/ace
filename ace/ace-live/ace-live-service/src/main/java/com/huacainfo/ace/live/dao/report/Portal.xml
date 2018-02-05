@@ -27,5 +27,14 @@
     inner join live on live_rpt.rid=live.id
     WHERE
     live.deptId =#{deptId}
+    union all
+    SELECT
+    'msg' id,
+    count(1) msg
+    FROM
+    live_msg
+    inner join live on live_msg.rid=live.id
+    WHERE
+    live.deptId =#{deptId}
   </select>
 </mapper>
