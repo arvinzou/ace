@@ -37,7 +37,7 @@ function startPublicationDo() {
     console.log('发布报道');
     var $this = $(this);
     var id = $this.parents('li').data('id');
-    var rid =$this.parents('li').data('id');
+    var rid =$this.parents('li').data('rid');
     var url = '/live/liveRpt/updateLiveRptStatus.do';
     var data = {
         'id': id,
