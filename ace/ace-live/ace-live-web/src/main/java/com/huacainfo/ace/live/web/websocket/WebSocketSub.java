@@ -22,7 +22,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * Created by chenxiaoke on 2017/12/19.
  */
 //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
-@ServerEndpoint(value = "/wcst/{rid}/{uid}", configurator = HttpSessionConfigurator.class)
+@ServerEndpoint(value = "/websocketsub/{rid}/{uid}")
 public class WebSocketSub {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
@@ -70,8 +70,8 @@ public class WebSocketSub {
      * @param session 可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据
      */
     @OnOpen
-    public void onOpen(Session session, EndpointConfig config, @PathParam("rid") String rid, @PathParam("uid") String uid) {
-        this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
+    public void onOpen(Session session, @PathParam("rid") String rid, @PathParam("uid") String uid) {
+        //this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         this.session = session;
         this.rid = rid;
         this.uid = uid;

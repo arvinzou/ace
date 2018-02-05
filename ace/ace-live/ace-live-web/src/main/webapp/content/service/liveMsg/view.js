@@ -1,3 +1,7 @@
+
+
+
+
 jQuery(function($) {
 
 	// resize to fit page size
