@@ -146,6 +146,19 @@ function loadView(id) {
                 }if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
                  	value = Common.DateFormatter(value);
                 }
+                if(key=='content'){
+                    var html=[];
+                    var obj = JSON.parse(value);
+                    if(obj.header.wxuser.nickname){
+                        html.push("[");
+                        html.push(obj.header.wxuser.nickname);
+                        html.push("]");
+                    }
+                    html.push(obj.content);
+                    value=html.join("");
+                }
+
+
 				$("#dialog-message-view").find('#' + key).html(value);
 			});
 		},
@@ -224,6 +237,16 @@ websocket1.onmessage = function(){
     var data =JSON.parse(event.data);
     data.status="1";
     data.status=rsd(data.status, "113");
+    var html=[];
+    var obj = data;
+    if(obj.header.wxuser.nickname){
+        html.push("[");
+        html.push(obj.header.wxuser.nickname);
+        html.push("]");
+    }
+    html.push(obj.content);
+    data.content=html.join("");
+
   	data.opt=renderOpt(data.id,data.rid,data.rid);
   	rowadd(data);
   	var lastTr = $("#grid-table tr:last");
