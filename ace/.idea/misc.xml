@@ -14,21 +14,9 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/ace-rvc/pom.xml" />
         <option value="$PROJECT_DIR$/ace-uf/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-uf/ace-uf-client/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/pom.xml" />
         <option value="$PROJECT_DIR$/ace-portal/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-client/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/pom.xml" />
         <option value="$PROJECT_DIR$/ace-live/pom.xml" />
       </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/ace-rvc/pom.xml" />
-        <option value="$PROJECT_DIR$/ace-uf/pom.xml" />
-      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.7" project-jdk-type="JavaSDK">

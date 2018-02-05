@@ -88,7 +88,7 @@ function startPreviewDo() {
         if (result.status == 0) {
             console.log(result);
             $('.previewPage').show()
-            $('.previewWeb-content').empty();
+            $('.previewWeb-media').empty();
             viewPreviewReport(result.value, id);
         }
     });
@@ -104,17 +104,17 @@ function viewPreviewReport(data, id) {
             if (result.status == 0) {
                 var imgdata = result.rows;
                 for (var i = 0; i < imgdata.length; i++) {
-                    var imgStr = '<div class="previewWeb-medio"><img src="' + imgdata[i].url + '"></div>';
-                    $('.previewWeb-content').append($(imgStr));
+                    var imgStr = '<img src="' + imgdata[i].url + '">';
+                    $('.previewWeb-media').append($(imgStr));
                 }
             }
         })
     } else if ('1' == data.mediaType) {
-        var VStr = '<div class="previewWeb-medio"><video src="' + data.mediaContent + '"></video></div>';
-        $('.previewWeb-content').append($(VStr));
+        var VStr = '<video src="' + data.mediaContent + '"></video>';
+        $('.previewWeb-media').append($(VStr));
     } else if ('3' == data.mediaType) {
-        var AStr = '<vid class="previewWeb-medio"><audio controls="controls"><source src="' + data.mediaContent + '" type="audio/mpeg"></audio></vid>';
-        $('.previewWeb-content').append($(AStr));
+        var AStr = '<audio controls="controls"><source src="' + data.mediaContent + '" type="audio/mpeg"></audio>';
+        $('.previewWeb-media').append($(AStr));
     }
     $('.previewWeb-text').text(data.content);
 }
