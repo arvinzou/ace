@@ -65,6 +65,14 @@ public class LiveRptServiceImpl implements LiveRptService {
             int allRows = this.liveRptDao.findCount(condition);
             rst.setTotal(allRows);
         }
+
+        //获取nickName
+        String nickName;
+        for (LiveRptVo vo : list) {
+            nickName = liveRptDao.findNickNameByRid(vo.getRid(), vo.getId());
+            vo.setNickName(nickName);
+        }
+
         return rst;
     }
 
