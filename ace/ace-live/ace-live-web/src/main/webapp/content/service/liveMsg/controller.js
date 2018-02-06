@@ -238,7 +238,7 @@ websocket1.onmessage = function(){
     data.status="1";
     data.status=rsd(data.status, "113");
     var html=[];
-    var obj = data;
+    var obj = JSON.parse(data.content);
     if(obj.header.wxuser.nickname){
         html.push("[");
         html.push(obj.header.wxuser.nickname);

@@ -324,7 +324,10 @@
                                         <span class="img${imgindex}" data-url="${imgitem.url}"
                                               data-water="${imgitem.watermarkConfig}"
                                               data-water-bus="${item.watermarkConfig}"
-                                              data-w="${imgitem.w}" data-h="${imgitem.h}"></span>
+                                              data-w="${imgitem.w}" data-h="${imgitem.h}">
+
+                                            <img data-lazy-img="${imgitem.url}?x-oss-process=image/resize,m_fill,w_304,h_170,limit_0" src="${imgitem.url}?x-oss-process=image/resize,m_fill,w_304,h_170,limit_0">
+                                        </span>
                                         {@/each}
                                     </div>
                                 </div>
