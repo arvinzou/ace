@@ -56,6 +56,8 @@ body{
 	position: relative;
 }
 
+
+
 .title{
 	position: absolute;
     left: 0;
@@ -172,7 +174,7 @@ body{
 
 .previewWeb video{
 	width: 100%;
-	height: 100%;
+	height: 450px;
 }
 
 .previewWeb audio{
@@ -230,15 +232,7 @@ body{
 	width: 94%;
 }
 
-.xcy-cutimg ,.retainEl{
-	position: relative;
-	float: left;
-	width: 240px;
-	height: 135px;
-	border: 1px dashed #b4bed3;
-	border-radius: 5px;
-	margin: 5px;
-}
+
 
 #imageView img{
 	display: block;
@@ -247,6 +241,32 @@ body{
 	border-radius: 5px;
 	overflow: hidden;
 	object-fit:cover;
+}
+
+
+.xcy-cutimg ,.retainEl{
+	position: relative;
+	float: left;
+	width: 240px;
+	height: 135px;
+	margin: 5px;
+}
+
+.retainEl{
+	border: 1px dashed #b4bed3;
+	border-radius: 5px;
+}
+
+.imgbar img{
+	width: 100%;
+}
+
+.imgbar{
+	border: 1px dashed #b4bed3;
+	border-radius: 5px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
 }
 
 
@@ -289,10 +309,10 @@ body{
 
 
 .previewWeb-text{
-	padding:5px 20px;
+	padding:15px 20px;
 	text-align: center;
-	height: 20px;
-	font-size: 18px;
+	height: auto;
+	font-size: 16px;
 	line-height: 20px;
 }
 

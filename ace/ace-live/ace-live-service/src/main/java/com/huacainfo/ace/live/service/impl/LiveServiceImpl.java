@@ -106,9 +106,6 @@ public class LiveServiceImpl implements LiveService {
         if (CommonUtils.isBlank(o.getStartTime())) {
             return new MessageResponse(1, "开始时间不能为空！");
         }
-        if (CommonUtils.isBlank(o.getEndTime())) {
-            return new MessageResponse(1, "结束时间不能为空！");
-        }
         if (CommonUtils.isBlank(o.getRemark())) {
             return new MessageResponse(1, "摘要不能为空！");
         }

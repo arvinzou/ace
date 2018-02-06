@@ -137,7 +137,7 @@ function chooseVideoDo() {
         file_data_name: 'file',
         multi_selection: false,
         filters: {
-            max_file_size: '20mb',
+            max_file_size: '2048mb',
             mime_types: [
                 {
                     title: "video files",
@@ -158,7 +158,10 @@ function chooseVideoDo() {
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
-                viewVideo(rst.value[0]);
+                if (rst.success) {
+                    var videourl = fileHost + rst.file_path;
+                    viewVideo(videourl);
+                }
             },
             Error: function (e, t) {
                 t.code == -600 ? alert("上传的图片太大，请压缩到20M内") : t.code == -601 ? alert("不支持该格式！") : t.code == -602 ? alert("文件已选择！") : $("#j-row-img .j-uploader-tip p").html("文件上传失败：" + t.message)
@@ -191,7 +194,7 @@ function chooseImageDo() {
             preserve_headers: false
         },
         filters: {
-            max_file_size: '20mb',
+            max_file_size: '2048mb',
             mime_types: [
                 {
                     title: "Image files",
@@ -227,7 +230,6 @@ function chooseImageDo() {
 
 /*显示视频*/
 function viewVideo(videoUrl) {
-    var videoUrl = fileHost + videoUrl;
     var vdoDiv = videoTempLate.replace('[videoUrl]', videoUrl);
     var $vdoDiv = $(vdoDiv).data({
         fileurl: videoUrl,

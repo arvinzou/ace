@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
     <link rel="stylesheet" href="html/css/liveSub.css">
     <link rel="stylesheet" href="../../common/css/iconfont.css">
+    <link rel="stylesheet" href="../../common/css/common.css">
     <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.zh-CN.js"></script>
@@ -31,12 +32,11 @@
         <li>卡片模式</li>
         <li class="sortLive">创建时间</li>
         <li>
-            <select class="form-control">
-                <option value="0">全部现场</option>
-                <option value="1">待审现场</option>
-                <option value="16">直播中</option>
-                <option value="32">直播结束</option>
-                <option value="64">回收站</option>
+            <select class="form-control liveStatus">
+                <option value="">全部现场</option>
+                <option value="1">直播预告</option>
+                <option value="2">正在直播</option>
+                <option value="3">直播结束</option>
             </select>
         </li>
     </ul>

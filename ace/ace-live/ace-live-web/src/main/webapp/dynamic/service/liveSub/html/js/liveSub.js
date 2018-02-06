@@ -15,6 +15,7 @@ $(function () {
     $('.sceneList').on('click', '.reportNum', viewReportListByIdDo);
     $('#reportCan').on('click', '.cancelSort', cancelSortDo);
     $('.cancel').click(hideModifyWebDo);
+    $('.topToolBtn').on('change', '.liveStatus',searchByStatusDo);
     $('.report-list').sortable({
         cursor: "move",
         items: "li",                        //只是li可以拖动
@@ -25,6 +26,11 @@ $(function () {
         }
     });
 });
+
+/*根据状态查找*/
+function searchByStatusDo() {
+    searchByNameDo();
+}
 
 /*取消排序*/
 function cancelSortDo() {
@@ -102,7 +108,7 @@ function sortLiveByTimeDo() {
 /*切换直播状态*/
 function changeLiveStatusDo() {
     console.log('切换直播');
-    var id = $(this).parent().parent().data('Liveid');
+    var id = $(this).parents('li').data('Liveid');
     var url = '/live/live/selectLiveByPrimaryKey.do';
     var data = {
         'id': id
@@ -119,13 +125,16 @@ function modifyStatus(dataLive) {
     for (var item in dataLive) {
         if (item == 'status') {
             var status = dataLive[item];
-            if ("2" == status) {
-                dataLive[item] = "1";
-            } else {
+            if ("1" == status) {
                 dataLive[item] = "2";
-                dataLive['endTime'] = new Date();
+            } else if ("2" == status) {
+                dataLive[item] = "3";
+
+            } else if ("3" == status) {
+                dataLive[item] = "1";
             }
         }
+        dataLive['endTime'] = new Date();
     }
     var url = "/live/live/updateLive.do";
     var data = {
@@ -133,28 +142,30 @@ function modifyStatus(dataLive) {
     };
     $.post(url, data, function (result) {
         if (result.status == 0) {
-            loadLiveList();
+            searchByNameDo();
         } else {
             alert("操作失败，请重试。");
-            loadLiveList();
+            searchByNameDo();
         }
     });
 }
 
 /*按名字搜索直播*/
 function searchByNameDo(orderByStr) {
+    var liveStatus =$('.liveStatus').val();
     var inputName = $('.searchByName').val();
-    loadLiveList(inputName, orderByStr);
+    loadLiveList(inputName,liveStatus, orderByStr);
 }
 
 /*下载直播数据*/
-function loadLiveList(name, orderByStr) {
+function loadLiveList(name, liveStatus,orderByStr) {
     var url = '/live/live/findLiveList.do';
     var data = {
         'name': name,
         'start': start,
         'limit': limit,
         'orderBy': orderByStr,
+        'status':liveStatus,
         'deptId': userProp.corpId,
         'sord': 'asc'
     }
@@ -175,13 +186,12 @@ function viewLiveList(data) {
         liLive = liLive.replace('[createUserName]', data[i].createUserName);
         liLive = liLive.replace('[startTime]', data[i].startTime.substring(0, 16));
         liLive = liLive.replace('[reportNum]', data[i].reportCount);
-        var status = data[i].status == 2 ? '恢复直播' : (data[i].status == 1 ? '开始直播' : '');
+        var status = data[i].status == 1 ? '开始直播' : (data[i].status == 2 ? '结束直播' :(data[i].status == 3?'恢复直播':''));
         liLive = liLive.replace('[status]', status);
         var $li = $(liLive).data("Liveid", data[i].id);
         $('.sceneList').append($li);
     }
 }
-
 
 /*隐藏修改页面*/
 function hideModifyWebDo() {
@@ -269,8 +279,9 @@ function updateSequence(arr) {
     $.ajax({
         type: "post",
         url: "/live/liveRpt/updateSequence.do",
-        data: {data: JSON.stringify(data),
-            'rid':rid,
+        data: {
+            data: JSON.stringify(data),
+            'rid': rid,
             'message': JSON.stringify(
                 {
                     "header": {

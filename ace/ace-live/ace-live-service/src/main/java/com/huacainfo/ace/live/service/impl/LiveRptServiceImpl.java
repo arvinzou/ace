@@ -138,16 +138,16 @@ public class LiveRptServiceImpl implements LiveRptService {
      */
 
     @Override
-    public MessageResponse updateLiveRpt(LiveRpt obj, List<LiveImg> imgs)
-            throws Exception {
+    public MessageResponse updateLiveRpt(LiveRpt obj, List<LiveImg> imgs) throws Exception {
         if (CommonUtils.isBlank(obj.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(obj.getContent())) {
             return new MessageResponse(1, "直播内容不能为空！");
         }
+
         /*删除图片*/
-        liveImgDao.deleteByPrimaryKey(obj.getId());
+        liveImgDao.deleteByRptId(obj.getId());
         boolean flag = true;
         for (LiveImg img : imgs) {
             if (flag) {

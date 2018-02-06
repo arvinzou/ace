@@ -131,12 +131,15 @@ var uploader = new plupload.Uploader({
             {title: "Image files", extensions: "jpg,gif,png"}
         ]
     },
-
     init: {
         FileFiltered: function (up, files) {
             console.log('uploadFile');
             uploader.start();
             return false;
+        },
+        UploadProgress: function(e, t) {
+            var r = t.percent;
+            $("#j-row-img .j-uploader-tip p em").html("（" + r + "%）")
         },
         FileUploaded: function (uploader, file, responseObject) {
             var rst = JSON.parse(responseObject.response);

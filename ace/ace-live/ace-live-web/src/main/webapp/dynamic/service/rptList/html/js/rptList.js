@@ -8,6 +8,7 @@ var uploaderI;
 var uploaderV;
 var userProp;
 var marktext;
+
 $(function () {
     initweb();
     $(":radio").on('click', chooseTypeDo);
@@ -23,13 +24,11 @@ $(function () {
     $('.topToolBtn').on('change', '#chooseStatus',searchByStatusDo);
 });
 
+
+
 /*根据状态查找*/
 function searchByStatusDo() {
-    var status = $(this).val();
-    console.log(status);
-    var inputName = $('.searchByName').val();
-    loadReportList(inputName, status);
-
+    searchByNameDo();
 }
 
 /*发布报道*/
@@ -53,9 +52,7 @@ function startPublicationDo() {
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            var status = $('#chooseStatus').val();
-            var inputName = $('.searchByName').val();
-            loadReportList(inputName, status);
+            searchByNameDo();
         }
     });
 }
@@ -95,6 +92,8 @@ function startPreviewDo() {
 }
 
 function viewPreviewReport(data,id) {
+    var TStr='<div class="previewWeb-text">'+data.content+'</div>';
+    $('.previewWeb-content').append($(TStr));
     if('2'==data.mediaType){
         var url = '/live/liveImg/findLiveImgList.do';
         var datas = {
@@ -103,12 +102,12 @@ function viewPreviewReport(data,id) {
         $.getJSON(url,datas,function (result) {
               if(result.status==0){
                   var imgdata=result.rows;
-                  for(var i=0;i<imgdata.length();i++){
+                  for(var i=0;i<imgdata.length;i++){
                       var imgStr='<div class="previewWeb-medio"><img src="'+imgdata[i].url+'"></div>';
                       $('.previewWeb-content').append($(imgStr));
                   }
               }
-        })
+        });
     }else if('1'==data.mediaType){
         var VStr='<div class="previewWeb-medio"><video controls="controls" src="'+data.mediaContent +'"></video></div>';
         $('.previewWeb-content').append($(VStr));
@@ -116,7 +115,6 @@ function viewPreviewReport(data,id) {
         var AStr='<vid class="previewWeb-medio"><audio controls="controls"><source src="'+data.mediaContent+'" type="audio/mpeg"></audio></vid>';
         $('.previewWeb-content').append($(AStr));
     }
-    $('.previewWeb-text').text(data.content);
 }
 
 
@@ -274,7 +272,8 @@ function releaseDo() {
     datas.rpt = rpt;
     var url ='/live/liveRpt/updateLiveRpt.do';
     $.post(url, {jsons: JSON.stringify(datas)}, function (result) {
-        console.log(result);
+        hideSelectReportDo();
+        searchByNameDo();
     });
 }
 
@@ -323,7 +322,7 @@ function chooseVideoDo() {
         file_data_name: 'file',
         multi_selection: false,
         filters: {
-            max_file_size: '20mb',
+            max_file_size: '2048mb',
             mime_types: [
                 {
                     title: "video files",
@@ -344,8 +343,10 @@ function chooseVideoDo() {
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
-                var videourl = fileHost + rst.value[0];
-                viewVideo(videourl);
+                if (rst.success) {
+                    var videourl = fileHost + rst.file_path;
+                    viewVideo(videourl);
+                }
             },
             Error: function (e, t) {
                 t.code == -600 ? alert("上传的图片太大，请压缩到20M内") : t.code == -601 ? alert("不支持该格式！") : t.code == -602 ? alert("文件已选择！") : $("#j-row-img .j-uploader-tip p").html("文件上传失败：" + t.message)
@@ -377,7 +378,7 @@ function chooseImageDo() {
             preserve_headers: false
         },
         filters: {
-            max_file_size: '20mb',
+            max_file_size: '2048mb',
             mime_types: [
                 {
                     title: "Image files",
