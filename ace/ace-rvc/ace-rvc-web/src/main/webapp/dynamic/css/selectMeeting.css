@@ -1,0 +1,132 @@
+
+/* CSS Document */
+body{
+	background-color: #EEE;
+}
+
+.container{
+	padding: 0 200px;
+	background-color: white;
+}
+#slectHeadTitle{
+	padding: 0;
+}
+
+.schedule{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	
+	border-bottom: 1px #e5e5e5 solid;
+}
+.divline{
+	width:auto;
+	border-bottom: 2px #eee solid;
+	margin: 16px;
+}
+
+.divlineRed{
+	width:auto;
+	border-bottom: 2px #de2800 solid;
+	margin: 16px;
+}
+
+.redIcon{
+	color:#de2800;
+}
+.textarea.form-control{
+	height: 100px;
+}
+
+.paddingNULL{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.formTitle{
+	padding-top: 20px;
+}
+
+.formNext{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.successMessage{
+	text-align:center;
+}
+
+.successIcon{
+	font-size:80px!important;
+	color:#de2800;
+}
+
+.contentRightTitle{
+	margin-bottom: 1px;
+	background-color: #de2800;
+	height:56px; 
+	line-height: 56px;
+	font-size:28px;
+	color:white;
+}
+.promptMessage{
+	margin-left: 30px;
+	font-size: 18px;
+	color: #de2800;
+}
+
+/*地址搜索提示框*/
+.addressList>li{
+	line-height: 30px;
+	cursor: pointer;
+}
+.addressList>li:hover{
+	background-color: #ddd;
+}
+
+.addressList{
+	list-style-type:none;
+	-webkit-padding-start:0px;
+}
+.showAddress{
+	max-height: 200px; 
+	position: absolute; 
+	background-color:#f5f5f5;
+	z-index: 100;
+	overflow-y: scroll;
+	white-space:nowrap;
+	overflow-x:hidden;
+	text-overflow:ellipsis;
+}
+
+ .showAddress::-webkit-scrollbar {/*滚动条整体样式*/
+ width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+ height: 1px;
+}
+.showAddress::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+ border-radius: 6px;
+ -webkit-box-shadow: inset 0 0 5px #e5e5e5;
+ background:#ddd;
+}
+.showAddress::-webkit-scrollbar-track {/*滚动条里面轨道*/
+ -webkit-box-shadow: inset 0 0 5px #e5e5e5;
+ background: #f5f5f5;
+}
+/*地址搜索提示框end*/
+
+/*与会人员列表*/
+.meeters{
+	list-style: none;
+}
+
+.meeters .meeter{
+	cursor: pointer;
+	text-align: center;
+	float: left;
+	width: 80px;
+	margin:10px 10px;
+	font-size: 18px;
+}
+
+.meeters .meeter:hover{
+	background: #e5e5e5;
+}
+

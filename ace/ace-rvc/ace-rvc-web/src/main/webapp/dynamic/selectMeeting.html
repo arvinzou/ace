@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/selectMeeting.css">
+<link rel="stylesheet" href="css/iconfont.css">
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="css/common.css">
+<style type="text/css"></style>
+<title>创建会议</title>
+</head>
+<body>
+<div class="container" id="slectHeadTitle">
+    <div class="col-lg-12 col-md-12 col-sm-12 contentRightTitle">
+        创建会议
+    </div>
+</div>
+<div class="container schedule schedule-1">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <h4 style="color: #de2800"><i class="iconfont">&#xe600;</i> 基本信息 </h4>
+    </div>
+	
+    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+        <div class="divline"></div>
+    </div>
+	
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <h4> <i class="iconfont">&#xe601;</i> 与会人员 </h4>
+    </div>
+	
+    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+        <div class="divline"></div>
+    </div>
+	
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+        <h4><i class="iconfont">&#xe601;</i> 完成 </h4>
+    </div>
+	
+</div>
+<div class="container schedule schedule-2">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <h4 style="color: #de2800"><i class="iconfont">&#xe601;</i> 基本信息 </h4>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+        <div class="divlineRed"></div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <h4 style="color: #de2800"> <i class="iconfont">&#xe600;</i> 与会人员 </h4>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+        <div class="divline"></div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+        <h4><i class="iconfont">&#xe601;</i> 完成 </h4>
+    </div>
+</div>
+	
+<div class="container schedule schedule-3">
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <h4 style="color: #de2800"><i class="iconfont">&#xe601;</i> 基本信息 </h4>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+        <div class="divlineRed"></div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <h4 style="color: #de2800"> <i class="iconfont">&#xe601;</i> 与会人员 </h4>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-1">
+        <div class="divlineRed"></div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+        <h4 style="color: #de2800"><i class="iconfont">&#xe600;</i> 完成 </h4>
+    </div>
+</div>
+<div class="container selectMessage">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 paddingNULL">
+            <div class="formTitle">
+                <h5>会议名称 <span class="redIcon"> *</span></h5>
+            </div>
+            <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <input type="text" class="title form-control">
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0"> </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 paddingNULL">
+            <div class="formTitle">
+                <h5>会议主持人 <span class="redIcon"> *</span></h5>
+            </div>
+            <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <input type="text" class="emceeName form-control">
+            </div>
+        </div>
+    </div>
+	
+	
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="formTitle">
+            <h5><span class="redIcon"> </span> 会议议程</h5>
+        </div>
+        <div class="input-group col-lg-12  col-md-12 col-sm-12 col-xs-12">
+            <textarea class="description form-control" rows="5"></textarea>
+        </div>
+    </div>
+	
+	
+    
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 paddingNULL">
+            <div class="formTitle">
+                <h5>开始时间 <span class="redIcon"> *</span></h5>
+            </div>
+            <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <input id="startDate" size="16" type="text" readonly class="beginDate form-control form_datetime">
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0"> </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 paddingNULL">
+            <div class="formTitle">
+                <h5>结束时间 <span class="redIcon"> </span></h5>
+            </div>
+            <div class="input-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <input id="returnDate" size="16" type="text"  readonly class="endDate form-control form_datetime">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="formTitle">
+            <h5>会议地址 <span class="redIcon"> *</span></h5>
+        </div>
+        <div class="input-group col-lg-5 col-md-5 col-sm-12 col-xs-12" style="position: relative">
+            <input type="text" class="address form-control">
+        </div>
+		<div class="showAddress col-lg-5 col-md-5 col-sm-12 col-xs-12">
+			<ul class="addressList">
+<!--				<li>中国</li>-->
+			</ul>
+		</div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="formTitle">
+            <h5>会议资料 <span class="redIcon"></span> </h5>
+        </div>
+        <div class="input-group col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <input  type="file" id="upFile exampleInputFile">
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 formNext ">
+        <button type="button" class="next_1 btn btn-default">下一步</button>
+		<span class="promptMessage"></span>
+    </div>
+</div>
+<div class="container personMessage" style=""> 
+	<div class="personList col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		  <ul class="meeters">
+			 <li class="meeter">王恩王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩恩</li>
+			 <li class="meeter">王嗯恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩</li>
+			 <li class="meeter">王恩恩</li>
+			 <li class="meeter">王恩恩</li>
+			 <li class="meeter">王恩恩</li>
+			 
+		</ul>
+	</div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 formNext ">
+       <button type="button" class="back_1 btn btn-default">上一步</button>
+        <button type="button" class="next_2 btn btn-default">下一步</button>
+    </div>
+
+</div>
+<div class="container successMessage">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><i class="iconfont successIcon">&#xe807;</i></div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h4>会议于2017年12月20日在斗姆湖政府一栋一号</h4>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4 "></div>
+    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 formNext ">
+        <button type="button" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn btn-default createMeetingOK">完成</button>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/selectMeeting.js"></script>
+<script type="text/javascript">
+  
+</script>
+</html>

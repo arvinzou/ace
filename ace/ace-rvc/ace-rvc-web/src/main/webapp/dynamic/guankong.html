@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/guankong.css">
+<style type="text/css">
+div {
+	border: 1px solid #eee;
+}
+</style>
+<title>会议管控</title>
+</head>
+<body>
+<div class="container">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="video">
+            <div style="width:auto; height: atuo; "> 
+                <script type="text/javascript" src="js/sewise.player.min.js"></script> 
+                <script type="text/javascript">
+			SewisePlayer.setup({
+				server: "vod",
+				type: "m3u8",
+				videourl: "https://jackzhang1204.github.io/materials/m3u8/aes128/test2.m3u8",
+		        skin: "vodWhite",
+		        title: "Tile 标题",
+		        lang: 'zh_CN',
+		        fallbackurls:{
+					ogg: "http://jackzhang1204.github.io/materials/mov_bbb.ogg",
+					webm: "http://jackzhang1204.github.io/materials/mov_bbb.webm"
+				}
+			});
+		</script> 
+            </div>
+        </div>
+    </div>
+	
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="video">
+            <div style="width:auto; height: atuo; "> 
+                
+                <script type="text/javascript">
+			SewisePlayer.setup({
+				server: "vod",
+				type: "m3u8",
+				videourl: "https://jackzhang1204.github.io/materials/m3u8/aes128/test2.m3u8",
+		        skin: "vodWhite",
+		        title: "Tile 标题",
+		        lang: 'zh_CN',
+		        fallbackurls:{
+					ogg: "http://jackzhang1204.github.io/materials/mov_bbb.ogg",
+					webm: "http://jackzhang1204.github.io/materials/mov_bbb.webm"
+				}
+			});
+		</script> 
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

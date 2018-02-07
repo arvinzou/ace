@@ -1,0 +1,72 @@
+
+/* CSS Document */
+body{
+	background-color: #EEE;
+}
+.input-group{
+	border-radius: 10px;
+}
+
+.col-center-block {  
+    float: none;  
+    display: block;  
+    margin-left: auto;  
+    margin-right: auto;  
+} 
+
+.container{
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.buttomMenu{
+	padding: 15px 0px;
+	background-color: white;
+	border-bottom: 1px solid #e5e5e5;
+}
+.table td  
+{  
+    text-align:center;  
+} 
+
+.table th
+{  
+    text-align:center;  
+} 
+.tbhead{
+	background:rgba(246,246,246,1);
+}
+
+.headTitle{
+	padding: 10px;
+}
+.meetingTable{
+	margin-top: 10px;
+	height: 500px;
+}
+.buttomMenu .btns{
+	margin:0 20px;
+}
+
+.contentRight{
+	background-color: white;
+	padding:0 100px;
+}
+
+.contentRightTitle{
+	margin-bottom: 1px;
+	background-color: #de2800;
+	height:56px; 
+	line-height: 56px;
+	font-size:28px;
+	color:white;
+}
+
+.startMeeting{
+	padding: 0px 3px;
+	background-color: #de2800;
+	text-shadow:0 0px 0 #fff;
+	color: #e5e5e5;
+}
+
+
+

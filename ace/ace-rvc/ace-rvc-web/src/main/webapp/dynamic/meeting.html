@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.4.1/html2canvas.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/fileinput.js"></script>
+<script type="text/javascript" src="js/sewise.player.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/meeting.css"/>
+<link rel="stylesheet" href="css/fileinput.css"/>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/zh.js"></script>
+<script type="text/javascript" src="js/reconnecting-websocket.js"></script>
+<link rel="stylesheet" href="css/iconfont.css">
+<title>会议室</title>
+<style></style>
+</head>
+
+<body>
+<div class="container-fluid menu">
+    <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0"> </div>
+    <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 menuList">
+        <div class="menuActive col-lg-2 col-md-2 col-sm-4 col-xs-4 videoMeetingMenu publicMenu">
+            <h4>视频会议</h4>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 meetingFileMenu publicMenu">
+            <h4>会议资料</h4>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 meetingDataMenu publicMenu">
+            <h4>会议数据</h4>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0"> </div>
+</div>
+<div class="container-fluid contentMeeting" id="MeetingVideo">
+    <div class="meetingWindow">
+        <div class="meetingTitle"></div>
+        <div class="videoWindow">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 videoWindow">
+                <div id="player" style="width: auto; height: 644px; "> 
+<!--                <video style="width: auto; height: 644px; " src="file:///C:/Users/%E7%8E%8B%E6%81%A9/Documents/web/zhdj4.0/111.mp4"></video>-->
+                    <script type="text/javascript">
+						SewisePlayer.setup({
+							server: "vod",
+							type: "m3u8",
+							autostart: "true",
+							poster: '',
+							videourl:$.cookie('liveURL'),
+							skin: "vodWhite",
+							claritybutton: "disable",
+							lang: "zh_CN"
+						}, "player");
+					</script> 
+                </div>
+                <div id="onPlayer"> <img alt="智慧党建" src="images/videologo.png"> </div>
+                <div class="videoAction">
+                    <ul class="toolbtn">
+                        <li class="printScreen"><i class="iconfont">&#xe64c;</i></li>
+                        <li class="RECBtn" style="font-size: 33px;margin-top:5px;"><i class="iconfont">&#xe645;</i></li>
+                    </ul>
+                    <span id="RECtime"></span>
+                    <ul class="rightToolBtn">
+                        <li class="stopMeeting"><i class="iconfont">&#xe60d;</i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 chatWindow">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="buttomss chatButtom active"><a href="#chat" data-toggle="tab">聊天室</a> </li>
+                    <li class="buttomss signButtom"><a href="#sign" data-toggle="tab">签 到</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade in active" id="chat">
+                        <div class="chatText scrollbar" id="chatTextWindow">
+                        
+                            
+                        </div>
+                        
+                        <div class="chatInput">
+                            <div id="toolDiv" class="tool-div">
+                                <ul>
+                                    <li id="emojiBtn"><i class="iconfont">&#xe63c;</i></li>
+                                    <li  style="margin-top:-1px;"><i class="iconfont">&#xe65c;</i></li>
+                                    <li><i class="iconfont">&#xe604;</i></li>
+                                </ul>
+                            </div>
+                            <div id="inputContentDiv" class="content-div">
+                                <div class="input-group">
+                                    <input id="chatInputText" type="text" class="form-control" placeholder="说两句...">
+                                    <span class="input-group-btn">
+                                    <button id="btnSend" class="btn btn-default" type="button">发送</button>
+                                    </span> </div>
+                            </div>
+                                                   <div class="emojisWindow" style="display: none">
+                            	<ul id="emojiList">
+                            		
+                            	</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="sign">
+                        <div class="signWindow scrollbar">
+                            <ul id="meetingPersonList">
+                                
+                            </ul>
+                        </div>
+                        <div class="signButtomNumber">
+                            <div class="signNumber">
+                                <h4>签到人数：<span class="number1"></span> / <span class="number2"></span></h4>
+                            </div>
+                            <label class="tgl" style="font-size:14px; margin-top: 14px;">
+                                <input id="allSignBtn" type="checkbox" />
+                                <span data-on="签到成功" data-off="一键签到"></span> </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container  contentMeeting" id="meetingFile">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fileList">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <button type="button" class="btn btn-default" id="uploadMeetingFileBtn">上传</button>
+            <button type="button" class="btn btn-default">删除</button>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="input-group form-search">
+                <input type="text" class="form-control searchFileName" placeholder="Search for...">
+                <span class="input-group-btn">
+                <button class="btn btn-default searchMeetingFile" type="button"><i class="iconfont" style="font-size: 14px;">&#xe699;</i></button>
+                </span> </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fileTable">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>文件名称</td>
+                        <td>上传时间</td>
+                        <td>上传人</td>
+                        <td>下载</td>
+                    </tr>
+                </thead>
+                <tbody id="MeetingDataList">
+                    <tr>
+                        <td>#</td>
+                        <td>文件名称</td>
+                        <td>上传时间</td>
+                        <td>上传人</td>
+                        <td>下载</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="container contentMeeting" id="meetingData">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fileList">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <button type="button" class="btn btn-default" id="uploadMeetingDataBtn">上传</button>
+            <button type="button" class="btn btn-default">删除</button>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="input-group form-search">
+                <input type="text" class="form-control searchDataName" placeholder="Search for...">
+                <span class="input-group-btn">
+                <button class="btn btn-default searchMeetingData" type="button"><i class="iconfont" style="font-size: 14px;">&#xe699;</i></button>
+                </span> </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fileTable">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>文件名称</td>
+                        <td>上传时间</td>
+                        <td>上传人</td>
+                        <td>下载</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#</td>
+                        <td>文件名称</td>
+                        <td>上传时间</td>
+                        <td>上传人</td>
+                        <td>下载</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="upFilePage" style="display: none;">
+    <div class="container upFileContent" onClick="event.cancelBubble = true">
+        <form method="post" enctype="multipart/form-data">
+            <input id="input-711" name="files" type="file" multiple class="file-loading">
+        </form>
+        <div class="upFilePageHide"> <span class="glyphicon glyphicon-remove" style="font-size: 30px;"></span> </div>
+    </div>
+</div>
+<!--<canvas  width="1041" height="644" id="canvas2" style="background-color: aqua"></canvas>-->
+</body>
+<script type="text/javascript" src="js/meeting1.js"></script>
+<script type="text/javascript" src="js/chatroom.js"></script>
+</html>

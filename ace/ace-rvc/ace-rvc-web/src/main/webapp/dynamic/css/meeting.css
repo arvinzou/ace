@@ -1,0 +1,439 @@
+/* CSS Document */
+body {
+	background: rgba(240,240,240,1);
+}
+/*签到下方*/
+.signNumber {
+	float: left;
+	width: 200px;
+	height: 60px;
+	padding-top: 10px;
+	margin-left: 20px;
+	color: white;
+}
+/*switch*/
+.tgl {
+	position: relative;
+	outline: 0;
+	display: inline-block;
+	cursor: pointer;
+	user-select: none;
+	margin: 0 0 5px 0;
+}
+.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+	box-sizing: border-box;
+}
+.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+ background: none;
+}
+.tgl span {
+	position: relative;
+	display: block;
+	height: 1.8em;
+	line-height: 1.2em;
+	overflow: hidden;
+	font-weight: normal;
+	text-align: center;
+	border-radius: 2em;
+	padding: 0.2em 1em;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	transition: color 0.3s ease, padding 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+.tgl span:before {
+	position: relative;
+	display: block;
+	line-height: 1.3em;
+	padding: 0 0.2em;
+	font-size: 1em;
+}
+.tgl span:after {
+	position: absolute;
+	display: block;
+	content: '';
+	border-radius: 2em;
+	width: 1.3em;
+	height: 1.3em;
+	margin-left: -1.45em;
+	top: 0.2em;
+	background: #FFFFFF;
+	transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 0.97), background 0.3s ease-in-out;
+}
+.tgl input[type="checkbox"] {
+	display: none !important;
+}
+.tgl input[type="checkbox"]:not(:checked) + span {
+	background: #de2800;
+	color: #FFFFFF;
+	padding-left: 1.6em;
+	padding-right: 0.4em;
+}
+.tgl input[type="checkbox"]:not(:checked) + span:before {
+	content: attr(data-off);
+	color: #FFFFFF;
+}
+.tgl input[type="checkbox"]:not(:checked) + span:after {
+	background: #FFFFFF;
+	left: 1.6em;
+}
+.tgl input[type="checkbox"]:checked + span {
+	background: #86d993;
+	color: #FFFFFF;
+	padding-left: 0.4em;
+	padding-right: 1.6em;
+}
+.tgl input[type="checkbox"]:checked + span:before {
+	content: attr(data-on);
+}
+.tgl input[type="checkbox"]:checked + span:after {
+	background: #FFFFFF;
+	left: 100%;
+}
+.tgl input[type="checkbox"]:disabled, .tgl input[type="checkbox"]:disabled + span, .tgl input[type="checkbox"]:read-only, .tgl input[type="checkbox"]:read-only + span {
+ cursor: not-allowed;
+}
+/*switch*/
+.navbar {
+	margin: 0px;
+	border-color: #fff;
+	background-color: white;
+}
+.nav>li>a:hover {
+	background-color: #e7e7e7
+}
+.videoWindow {
+	padding: 0;
+}
+.chatWindow {
+	padding: 0px;
+	background: rgba(34,37,42,1);
+}
+.nav>li>a {
+	margin: 0px;
+	padding: 20px;
+	border-radius: 0;
+	font-size: 18px;
+	color: #555;
+	border-top: 0px;
+	border-right: 0px;
+	border-left: 0px;
+	border-bottom: 1px solid #E3E3E3;
+}
+.nav>li {
+	text-align: center;
+	width: 50%;
+}
+.meetingTitle {
+	padding-left: 28px;
+	height: 56px;
+	background: rgba(255,255,255,1);
+	font-size: 18px;
+	color: rgba(51,51,51,1);
+	line-height: 56px;
+}
+.menu {
+	background-color: white;
+	margin-bottom: 30px;
+}
+.publicMenu {
+	margin-top: 3px;
+	text-align: center;
+	padding: 10px 0px;
+}
+.publicMenu:hover {
+	background-color: #eee;
+}
+.publicMenu:active {
+	background-color: #aaa;
+	color: #fefefe;
+}
+.menuActive {
+	background-color: #ccc;
+	color: #de2800;
+}
+.meetingFile {
+	padding: 20px 0;
+	background-color: white;
+}
+.meetingWindow {
+	width: 1388px;
+	height: 760px;
+	margin: 0px auto;
+}
+.videoAction {
+	width: 100%;
+	height: 60px;
+	background: rgba(34,37,42,1);
+}
+.nav {
+	border: 0px;
+	background: rgba(34,37,42,1);
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+	background: rgba(34,37,42,1);
+	border: 0px;
+	color: rgba(222,40,0,1);
+	border-bottom: 1px solid rgba(222,40,0,1);
+}
+.nav>li>a:hover {
+	color: white;
+	background-color: rgba(34,37,42,1);
+}
+.chatText {
+	height: 536px;
+}
+.chatInput  {
+	position: relative;
+	border-top: 1px solid #de2800;
+	height: 100px;
+	padding: 5px 20px;
+}
+.signButtomNumber {
+	height: 60px;
+}
+.signWindow {
+	height: 577px;
+}
+.scrollbar {
+	overflow-y: scroll;
+}
+ .scrollbar::-webkit-scrollbar {/*滚动条整体样式*/
+ width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+ height: 1px;
+}
+.scrollbar::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+ border-radius: 6px;
+ -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+ background:rgba(0,0,0,0.4);
+}
+.scrollbar::-webkit-scrollbar-track {/*滚动条里面轨道*/
+ -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+ background: rgba(34,37,42,1);
+}
+.tab-content {
+	margin-top: 2px;
+}
+.fileTable {
+	padding-top: 20px;
+}
+.table>thead {
+	background-color: rgba(246,246,246,1);
+}
+.container {
+	background-color: white;
+	padding: 20px 120px;
+}
+/*111111111111111111111111*/
+/*Arvin 2017-12-29*/
+/*聊天框模块*/
+
+/*聊天模块 -- name ,message*/
+.talkMessage,.selfTalkMessage {
+    width: auto;
+    font-size: 14px;
+    padding:10px 20px;
+    clear: both;
+    overflow: hidden;
+}
+
+.portrait-div {
+    float: left;
+    margin-top: 5px;
+    color: #D89EA7;
+    width: 15%;
+}
+
+.portrait-image {
+	border-radius: 45px;
+    width: 45px;
+    height: 45px;
+}
+
+.name-b {
+    color: #de2800;
+}
+
+.content-warper {
+    float: left;
+    margin-left: 6%;
+    width: 79%;
+}
+
+.selfContent-warper {
+    float: left;
+    margin-right: 6%;
+    width: 79%;
+}
+
+.selfContent{
+	float: right;
+}
+
+.content,.selfContent {
+    display: inline-block;
+    position: relative;
+    line-height: 24px;
+    padding: 5px 12px;
+    background-color: #353A41;
+    color: #ffffff;
+    border-radius: 5px;
+    margin: 0;
+}
+
+.content:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid;
+    border-right-color: #353A41;
+    color: #22252A;
+    top: 20px;
+    right: 100%;
+}
+
+.selfContent:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid;
+    border-left-color: #353A41;
+    color: #22252A;
+    top: 20px;
+    left: 100%;
+}
+
+
+
+/*用户操作模块*/
+
+
+.tool-div>ul {
+	display: table;
+	margin: 8px 0;
+	padding: 0px;
+}
+.tool-div li {
+	font-size: 20px;
+	line-height: 20px;
+	color: white;
+	list-style: none;
+	float: left;
+	margin-right: 20px;
+}
+.content-div {
+}
+#player {
+	position: relative;
+}
+#onPlayer {
+	position: absolute;
+	height: 644px;
+	width: 1041px;
+	top: 0px;
+}
+#onPlayer img {
+	margin-top: 230px;
+	margin-left: 370px;
+	height: 100px;
+	width: auto;
+}
+.toolbtn, #meetingPersonList, .rightToolBtn,#emojiList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.toolbtn li, .videoAction>span, .rightToolBtn li {
+	padding: 4px;
+	font-size: 25px;
+	color: white;
+}
+.toolbtn li, .videoAction>span {
+	float: left;
+	margin: 10px 0px 0px 30px;
+}
+.rightToolBtn li {
+	float: right;
+	margin: 10px 30px 0px 0px;
+}
+#chatInputText {
+	background-color: #353A41;
+}
+#btnSend, #chatInputText {
+	border: none;
+	color: white;
+	height: 42px;
+}
+#btnSend {
+	background-color: #2B3037;
+	text-shadow: none;
+}
+.tool-div li:hover, .toolbtn li:hover, .rightToolBtn li:hover {
+	cursor: pointer;
+	color: #de2800;
+}
+#meetingPersonList>li {
+	cursor: pointer;
+	float: left;
+	width: 90px;
+	font-size: 16px;
+	margin: 10px 0px 5px 20px;
+	color: white;
+}
+#meetingPersonList .iconfont {
+	font-size: 18px;
+}
+
+/*上传页的样式设计*/
+.upFilePage{
+	top:0;
+	left:0;
+	position:absolute;
+	width: 100%;
+	height: 120%;
+	background-color:rgba(23,25,28,0.4);
+	z-index: 100;
+	padding-top: 100px;
+}
+
+.upFileContent{
+	position: relative;
+	padding: 50px;
+}
+
+.upFilePageHide{
+	cursor: pointer;
+	top:10px;
+	left: 10px;
+	border: 1px solid #ddd;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+}
+/*上传页的样式设计end*/
+
+
+/*emoji样式设计*/
+.emojisWindow{
+	position: absolute;
+	top:-233px;
+	left:0px;
+	background-color: rgba(240,240,240,0.29);
+	width: 330px;
+	min-height: 100px;
+	z-index: 100px;
+}
+
+#emojiList img{
+	cursor: pointer;
+	width: 25px;
+	height: 25px;
+	margin: 2px 2px;
+}
+
+#emojiList>li{
+	float:left;
+}
+/*emoji样式设计end*/
+

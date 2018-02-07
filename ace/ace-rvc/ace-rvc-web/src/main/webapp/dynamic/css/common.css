@@ -1,0 +1,15 @@
+/* CSS Document */
+@import url("buttons.css");
+body{
+	min-width:1140px;
+}
+.form-control{
+	background-color: #eee;
+}
+.form-control:focus{
+	border :1px #de2800 solid;
+}
+
+.container{
+
+}
