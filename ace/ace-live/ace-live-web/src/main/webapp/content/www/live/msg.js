@@ -1,13 +1,4 @@
     var wsk = null;
-        /*var wxuser={
-           headimgurl:"https://wx.qlogo.cn/mmopen/vi_32/Ch0hmaNn9SVq7Skvq4TIkIzVBlib23IsllMSwbRpRV8ue8CpV4T4erxULbAMp8da7PXVHyowOu4hLfKZSiarNlHg/0",
-           nickname:"王昭",
-           openid:"oCjYM0d0x60MkCh5LWt7bPPxUq_I"
-       };*/
-
-
-
-
       //将消息显示在网页上
       function setMessageInnerHTML(innerHTML){
                 $("#chatContent").append(innerHTML);
@@ -55,12 +46,12 @@
               console.log(wsk);
                 //连接发生错误的回调方法
               wsk.onerror = function(event){
-
                   var url="ws://"+cfg.websocketurl+"/live/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
                   //alert(wxuser.nickname+"对不起，网络初始化失败，5秒后尝试重新连接,状态码："+wsk.readyState);
                   console.log("websocket init onerror it will reconnecting after 5000 ms");
                   console.log(event);
-                  setTimeout("initWebSocket()",2000);
+                  //setTimeout("initWebSocket()",2000);
+                  location.href.reload();
                   //location.href="index.html?companyId="+lvsCmd.urlParams.companyId
               };
 
