@@ -424,7 +424,8 @@ function dianZan(e) {
     function(i, a) {
         if ("0" == a.status) {
             var n = $("#j-remark-" + e);
-            var likerNum=parseInt($("#liker"+e).html());
+            var s=$("#liker"+e).html();
+            var likerNum=parseInt(s);
             likerNum=likerNum+1;
             $("#liker"+e).html(likerNum)
             showRemark(n);
