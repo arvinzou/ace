@@ -383,6 +383,10 @@ function reportBind(e) {
             $(this).append(d)
         });
         else {
+        if (1 == i) var a = [{
+                        w: 608,
+                        h: 342
+                    }];
             if (2 == i) var a = [{
                 w: 304,
                 h: 342
@@ -391,6 +395,7 @@ function reportBind(e) {
                 w: 304,
                 h: 342
             }];
+
             else if (3 == i) var a = [{
                 w: 304,
                 h: 342
@@ -440,6 +445,7 @@ function reportBind(e) {
                 var d = i + "?x-oss-process=image/resize,m_fill,w_" + a[e].w + ",h_" + a[e].h + ",limit_0",
                 l = new Image;
                 l.setAttribute("data-lazy-img", d);
+                l.src=d;
                 var c = $(l);
                 $(this).data("url", s),
                 $(this).append(c),
