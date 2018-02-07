@@ -351,42 +351,19 @@ function reportBind(e) {
     e.find(".pictures").each(function() {
         var e = $(this),
         i = e.data("count");
+
         if (1 == i) e.find("span").each(function() {
             var e = $(this).data("url"),
             i = $(this).data("water-bus"),
             a = $(this).data("water"),
             n = $(this).data("w"),
             o = $(this).data("h");
-            if (e.indexOf(".gif") > -1) {
-                var t = e;
-                i = ""
-            } else if (void 0 == window.orientation) var t = e + "?x-oss-process=image/" + a;
-            else if (n > 2e3) var t = e + "?x-oss-process=image/resize,w_2000/" + a;
-            else if (o > 2e3) var t = e + "?x-oss-process=image/resize,h_2000/" + a;
-            else if (n > 0) var t = e + "?x-oss-process=image/resize,w_" + n + "/" + a;
-            else var t = e + "?x-oss-process=image/" + a;
-            var r = "data-lazy-img";
-            if ("0" == n || "0" == o) var s = e + "?x-oss-process=image/resize,m_lfit,w_610,h_386,limit_0/" + i,
-            d = $("<img " + r + '="' + s + '" class="normal">');
-            else if (n / o >= 2) var s = e + "?x-oss-process=image/resize,m_fill,w_610,h_202,limit_0/" + i,
-            d = $("<img " + r + '="' + s + '" class="horizontal">');
-            else if (n / o * 16 <= 9) {
-                var s = e + "?x-oss-process=image/resize,w_216";
-                n / o * 32 <= 9 ? $(this).append("<em>闀垮浘</em>") : s += "/" + i;
-                var d = $("<img " + r + '="' + s + '" class="vertical">')
-            } else {
-                var s = e + "?x-oss-process=image/resize,m_mfit,w_610,h_386,limit_0/" + i;
-                if ($(this).parents(".j-photoswiper").css("maxHeight", "100%"), n / o > 610 / 386) var d = $("<img " + r + '="' + s + '" class="normal2">');
-                else var d = $("<img " + r + '="' + s + '" class="normal2">')
-            }
-            $(this).data("url", t),
-            $(this).append(d)
+            $(this).data("url", e);
+            $(this).append("<img data-lazy-img='"+e+"' src='"+e+"' style='width:100%;height:auto'/>");
+
         });
         else {
-        if (1 == i) var a = [{
-                        w: 608,
-                        h: 342
-                    }];
+
             if (2 == i) var a = [{
                 w: 304,
                 h: 342
