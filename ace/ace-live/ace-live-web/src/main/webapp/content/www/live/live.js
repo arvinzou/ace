@@ -350,31 +350,21 @@ function getReport(e, i) {
 function reportBind(e) {
     e.find(".pictures").each(function() {
         var e = $(this),
-        i = e.data("count");
-
-        if (1 == i) e.find("span").each(function() {
-            var e = $(this).data("url"),
-            i = $(this).data("water-bus"),
-            a = $(this).data("water"),
-            n = $(this).data("w"),
-            o = $(this).data("h");
-            $(this).data("url", e);
-            $(this).append("<img data-lazy-img='"+e+"' src='"+e+"' style='width:100%;height:auto'/>");
-
-        });
-        else {
-            e.find("span").each(function(e) {
-                var i = $(this).data("url"),
-                n = $(this).data("water-bus"),
-                o = $(this).data("water"),
-                t = $(this).data("w"),
-                r = $(this).data("h");
-
-                $(this).data("url", i);
+        c = e.data("count");
+        e.find("span").each(function(e) {
+           var i = $(this).data("url"),
+           n = $(this).data("water-bus"),
+           o = $(this).data("water"),
+           t = $(this).data("w"),
+           r = $(this).data("h");
+           $(this).data("url", i);
+           if(c==1){
+                $(this).append("<img data-lazy-img='"+i+"' src='"+i+"' style='width:100%;height:auto'/>");
+           }else{
                 $(this).append("<img data-lazy-img='"+i+"' src='"+i+"'/>");
+           }
 
-            });
-        }
+       });
     }),
     e.find(".act").removeClass("fn-hide"),
     e.find("li").each(function() {
