@@ -237,10 +237,10 @@ function getInfo() {
             if("2" == p){
                 //$("#j-sort-c").append('<span class="xc-state ing"><i>直播中</i></span>');
             }
-            /*$("#j-desc p").height() > $("#j-desc").height() && ($("#j-desc").addClass("descclamp"), $("#j-desc .act").removeClass("fn-hide"), $("#j-desc").on(tap,
+            $("#j-desc p").height() > $("#j-desc").height() && ($("#j-desc").addClass("descclamp"), $("#j-desc .act").removeClass("fn-hide"), $("#j-desc").on(tap,
             function() {
                 $(this).toggleClass("descclamp")
-            })),*/
+            })),
             $("#j-desc").css("height", "auto"),
             1 == i.data.partakeState && $(".xcy-totalcount").addClass("fn-hide")
             //$(".xcy-totalcount").html("浏览人数" + i.data.numOfPartake);
@@ -909,7 +909,7 @@ $(function(){
 $(window).on("scroll",
         function() {
             console.log("======>"+$(window).scrollTop());
-            if($(window).scrollTop()>=50){
+            if($(window).scrollTop()>=25){
                 $("#j-liveinfo .view").css("height","2.62rem");
                 $("#j-liveinfo .view").css("position","fixed");
                 $("#j-liveinfo .view").css("z-index",310);
