@@ -134,16 +134,9 @@ function getInfo() {
             },
             i = !0;
             if(wxuser.role&&wxuser.role=='admin'){
-                $("#adminrpt").removeClass("fn-hide");
-                $("#adminrpt2").removeClass("fn-hide");
+                $("#add_note_icon").removeClass("fn-hide");
             };
-            //alert(wxuser.role);
-            $("#adminrpt2").on(tap,
-                         function(){
-                            console.log(i);
-                            location.href="rpt.html?id="+lvsCmd.urlParams.id+"&title="+$(".title").html()+"&companyId="+lvsCmd.urlParams.companyId;
-             }),
-             $("#adminrpt").on(tap,
+             $("#add_note_icon").on(tap,
              function(){
                 console.log(i);
                 location.href="rpt.html?id="+lvsCmd.urlParams.id+"&title="+$(".title").html()+"&companyId="+lvsCmd.urlParams.companyId;
