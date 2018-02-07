@@ -909,7 +909,7 @@ $(function(){
 $(window).on("scroll",
         function() {
             console.log("======>"+$(window).scrollTop());
-            if($(window).scrollTop()>=25){
+            if($(window).scrollTop()>=50){
                 $("#j-liveinfo .view").css("height","2.62rem");
                 $("#j-liveinfo .view").css("position","fixed");
                 $("#j-liveinfo .view").css("z-index",310);
