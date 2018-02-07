@@ -149,7 +149,7 @@ public class LiveRptServiceImpl implements LiveRptService {
         /*删除图片*/
         liveImgDao.deleteByRptId(obj.getId());
         boolean flag = true;
-        for (LiveImg img : imgs) {
+        for(LiveImg img : imgs){
             if (flag) {
                 obj.setMediaContent(img.getUrl());
                 flag = false;

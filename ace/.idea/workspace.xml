@@ -9,22 +9,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80647b4d-8417-47a2-ae86-012d433c63d2" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptVideo/11.mp4" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/fonts/iconfont.eot" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/fonts/iconfont.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/fonts/iconfont.ttf" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/fonts/iconfont.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/fonts/iconfont.woff" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/fonts/iconfont.woff" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveDao.xml" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/dao/LiveDao.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveServiceImpl.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveController.java" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/css/iconfont.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/css/iconfont.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/fonts/iconfont.svg" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/fonts/iconfont.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/js/iconfont.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/js/iconfont.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/css/live.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/css/live.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/css/liveRpt.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/css/liveRpt.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/js/liveRpt.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/js/liveRpt.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/css/liveSub.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/css/liveSub.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/liveSub.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/liveSub.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/css/rptList.css" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/css/rptList.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/js/rptList.js" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/js/rptList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/index.html" afterPath="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/ace-portal/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -79,21 +75,90 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="live.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="139" column="40" lean-forward="true" selection-start-line="139" selection-start-column="40" selection-end-line="139" selection-end-column="40" />
+            <state relative-caret-position="337">
+              <caret line="109" column="63" lean-forward="false" selection-start-line="109" selection-start-column="63" selection-end-line="109" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html">
+      <file leaf-file-name="live.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="337">
+              <caret line="139" column="25" lean-forward="false" selection-start-line="139" selection-start-column="25" selection-end-line="139" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rpt.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="37" column="7" lean-forward="false" selection-start-line="37" selection-start-column="7" selection-end-line="38" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rptList.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/js/rptList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="272" column="44" lean-forward="false" selection-start-line="272" selection-start-column="28" selection-end-line="272" selection-end-column="44" />
+              <folding>
+                <marker date="1517896950508" expanded="true" signature="13406:13414" ph="&amp;##xe61a;" />
+                <marker date="1517896950508" expanded="true" signature="13561:13569" ph="&amp;##xe651;" />
+                <marker date="1517896950508" expanded="true" signature="14158:14166" ph="&amp;##xe61a;" />
+                <marker date="1517896950508" expanded="true" signature="14314:14322" ph="&amp;##xe651;" />
+                <marker date="1517896950508" expanded="true" signature="14930:14938" ph="&amp;##xe61a;" />
+                <marker date="1517896950508" expanded="true" signature="15094:15102" ph="&amp;##xe651;" />
+                <marker date="1517896950508" expanded="true" signature="15817:15825" ph="&amp;##xe61a;" />
+                <marker date="1517896950508" expanded="true" signature="15981:15989" ph="&amp;##xe651;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="live.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/css/live.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="117" column="1" lean-forward="false" selection-start-line="117" selection-start-column="1" selection-end-line="117" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="liveSub.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/css/liveSub.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="317" column="23" lean-forward="false" selection-start-line="317" selection-start-column="23" selection-end-line="317" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LiveRptServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="343">
-              <caret line="115" column="59" lean-forward="true" selection-start-line="115" selection-start-column="46" selection-end-line="115" selection-end-column="59" />
+              <caret line="159" column="40" lean-forward="false" selection-start-line="159" selection-start-column="40" selection-end-line="159" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LiveRptController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveRptController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="298">
+              <caret line="100" column="48" lean-forward="false" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -111,9 +176,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>headContainer</find>
-      <find>updateByPrimaryKeySelective</find>
-      <find>findlive</find>
       <find>reportVideoTempla</find>
       <find>previewWeb-text</find>
       <find>192.168</find>
@@ -126,9 +188,7 @@
       <find>title</find>
       <find>title1</find>
       <find>rid</find>
-      <find>imgbar</find>
       <find>retainEl</find>
-      <find>xcy-cutimg</find>
       <find>removeImg</find>
       <find>previewWeb</find>
       <find>updateLiveRpt</find>
@@ -141,6 +201,11 @@
       <find>20m</find>
       <find>text</find>
       <find>20mb</find>
+      <find>j-cover</find>
+      <find>xcy-cutimg</find>
+      <find>imgbar</find>
+      <find>upbtn</find>
+      <find>iconfont</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -184,7 +249,6 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/java/com/huacainfo/ace/portal/web/controller/SystemController.java" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/WWWController.java" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/css/iconfont.css" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/js/iconfont.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/service/index/frist.js" />
@@ -208,9 +272,6 @@
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/css/liveRpt.css" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/index.html" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/css/live.css" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/css/liveSub.css" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/liveSub.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveController.java" />
@@ -218,8 +279,12 @@
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveRpt/html/js/liveRpt.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/js/rptList.js" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/css/rptList.css" />
-        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/css/iconfont.css" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/css/liveSub.css" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/css/live.css" />
         <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js" />
       </list>
     </option>
   </component>
@@ -276,7 +341,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -299,51 +363,6 @@
               <item name="ace" type="b2602c69:ProjectViewProjectNode" />
               <item name="ace" type="462c0819:PsiDirectoryNode" />
               <item name="ace-live" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="live" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="live" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
               <item name="ace-live-service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -390,18 +409,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="ace" type="462c0819:PsiDirectoryNode" />
               <item name="live" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live-service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="live" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ace" type="b2602c69:ProjectViewProjectNode" />
@@ -465,7 +472,31 @@
               <item name="ace-live-web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ace" type="b2602c69:ProjectViewProjectNode" />
@@ -475,40 +506,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="content" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="content" type="462c0819:PsiDirectoryNode" />
-              <item name="www" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="content" type="462c0819:PsiDirectoryNode" />
-              <item name="www" type="462c0819:PsiDirectoryNode" />
-              <item name="live" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ace" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
-              <item name="ace-live-web" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="dynamic" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ace" type="b2602c69:ProjectViewProjectNode" />
@@ -519,7 +516,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="dynamic" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ace" type="b2602c69:ProjectViewProjectNode" />
@@ -531,7 +527,6 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="dynamic" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="live" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ace" type="b2602c69:ProjectViewProjectNode" />
@@ -543,7 +538,19 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="dynamic" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="live" type="462c0819:PsiDirectoryNode" />
+              <item name="rptList" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-live-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="dynamic" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="rptList" type="462c0819:PsiDirectoryNode" />
               <item name="html" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -556,9 +563,44 @@
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="dynamic" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="live" type="462c0819:PsiDirectoryNode" />
+              <item name="rptList" type="462c0819:PsiDirectoryNode" />
               <item name="html" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-rvc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-rvc" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-rvc-web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-rvc" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-rvc-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-rvc" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-rvc-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ace" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-rvc" type="462c0819:PsiDirectoryNode" />
+              <item name="ace-rvc-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ace" type="b2602c69:ProjectViewProjectNode" />
@@ -586,9 +628,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1047,7 +1090,8 @@
       <workItem from="1517709439537" duration="4875000" />
       <workItem from="1517714345789" duration="21941000" />
       <workItem from="1517790318782" duration="38553000" />
-      <workItem from="1517876728389" duration="19318000" />
+      <workItem from="1517876728389" duration="29145000" />
+      <workItem from="1517963940074" duration="10695000" />
     </task>
     <task id="LOCAL-00001" summary="统战二期">
       <created>1513732190656</created>
@@ -1259,7 +1303,21 @@
       <option name="project" value="LOCAL" />
       <updated>1517832408472</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="常德融媒后台管理页面——王恩">
+      <created>1517899882375</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1517899882375</updated>
+    </task>
+    <task id="LOCAL-00032" summary="常德融媒后台管理页面——王恩">
+      <created>1517967075986</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1517967075986</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1268,7 +1326,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="492141000" />
+    <option name="totallyTimeSpent" value="512663000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1296,19 +1354,18 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.70293796" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.46483517" sideWeight="0.47228146" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.46463546" sideWeight="0.47228146" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25136018" sideWeight="0.8176972" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20565833" sideWeight="0.48507464" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32861805" sideWeight="0.8176972" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41458106" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22761194" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1317,6 +1374,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16213275" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1426,17 +1484,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ace-common/src/main/java/com/huacainfo/ace/common/result/MessageResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1056">
-          <caret line="87" column="16" lean-forward="false" selection-start-line="87" selection-start-column="16" selection-end-line="87" selection-end-column="16" />
-          <folding>
-            <element signature="e#1599#1600#0" expanded="false" />
-            <element signature="e#1626#1627#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-portal/ace-portal-web/src/main/webapp/content/portal/js/config/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1590,12 +1637,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="48" column="28" lean-forward="false" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="28" />
-          <folding>
-            <marker date="1517796927796" expanded="true" signature="3745:3753" ph="&amp;##xe769;" />
-            <marker date="1517796927796" expanded="true" signature="3838:3846" ph="&amp;##xe7af;" />
-            <marker date="1517796927796" expanded="true" signature="4280:4288" ph="&amp;##xe61a;" />
-            <marker date="1517796927796" expanded="true" signature="4444:4452" ph="&amp;##xe651;" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1626,7 +1667,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="470">
           <caret line="84" column="53" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1634,7 +1674,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1642,7 +1681,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="116" column="1" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="116" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1650,15 +1688,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
           <caret line="156" column="40" lean-forward="false" selection-start-line="156" selection-start-column="40" selection-end-line="156" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveRptController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="100" column="41" lean-forward="true" selection-start-line="100" selection-start-column="41" selection-end-line="100" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1691,14 +1720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="157" column="38" lean-forward="true" selection-start-line="157" selection-start-column="38" selection-end-line="157" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/js/modify.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="637">
@@ -1707,27 +1728,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/css/live.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="107" column="23" lean-forward="false" selection-start-line="107" selection-start-column="23" selection-end-line="107" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/css/liveSub.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="293" column="18" lean-forward="true" selection-start-line="293" selection-start-column="18" selection-end-line="293" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="32" column="27" lean-forward="false" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1754,7 +1758,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
           <caret line="50" column="55" lean-forward="false" selection-start-line="50" selection-start-column="55" selection-end-line="50" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1771,29 +1774,29 @@
         <state relative-caret-position="-769">
           <caret line="174" column="57" lean-forward="true" selection-start-line="174" selection-start-column="57" selection-end-line="174" selection-end-column="57" />
           <folding>
-            <marker date="1517894635992" expanded="true" signature="2810:2974" ph="select , fro... " />
-            <marker date="1517894635992" expanded="true" signature="3067:3125" ph="delete from " />
-            <marker date="1517894635992" expanded="true" signature="3223:4356" ph="insert into live... " />
-            <marker date="1517894635992" expanded="true" signature="4467:5457" ph="update live " />
-            <marker date="1517894635992" expanded="true" signature="5578:7884" ph="update live " />
-            <marker date="1517894635992" expanded="true" signature="8523:8538" ph="SELECT COUNT... " />
-            <marker date="1517894635992" expanded="true" signature="8659:9055" ph="select ORDER... " />
-            <marker date="1517894635992" expanded="true" signature="9122:9190" ph="select count... live" />
-            <marker date="1517894635992" expanded="true" signature="9278:9851" ph="select 2 com... live" />
-            <marker date="1517894635992" expanded="true" signature="9947:10784" ph="select null " />
-            <marker date="1517894635992" expanded="true" signature="10851:10991" ph="update live " />
-            <marker date="1517894635992" expanded="true" signature="14605:14668" ph="SELECT count... live_rpt" />
-            <marker date="1517894635992" expanded="true" signature="14741:14883" ph="select id, r... live_msg" />
-            <marker date="1517894635992" expanded="true" signature="14963:15451" ph="SELECT compa... deptId" />
-            <marker date="1517894635992" expanded="true" signature="15061:15183" ph="SELECT ##{dep... live_rpt" />
-            <marker date="1517894635992" expanded="true" signature="15224:15416" ph="SELECT depar... department" />
-            <marker date="1517894635992" expanded="true" signature="15525:15822" ph="select '' an... department" />
-            <marker date="1517894635992" expanded="true" signature="15897:16378" ph="SELECT compa... deptId" />
-            <marker date="1517894635992" expanded="true" signature="15995:16110" ph="SELECT deptI... live" />
-            <marker date="1517894635992" expanded="true" signature="16151:16343" ph="SELECT depar... department" />
-            <marker date="1517894635992" expanded="true" signature="16437:16499" ph="update live_... " />
-            <marker date="1517894635992" expanded="true" signature="16558:16608" ph="update live " />
-            <marker date="1517894635992" expanded="true" signature="16668:16718" ph="update live " />
+            <marker date="1517909630545" expanded="true" signature="2810:2974" ph="select , fro... " />
+            <marker date="1517909630545" expanded="true" signature="3067:3125" ph="delete from " />
+            <marker date="1517909630545" expanded="true" signature="3223:4356" ph="insert into live... " />
+            <marker date="1517909630545" expanded="true" signature="4467:5457" ph="update live " />
+            <marker date="1517909630545" expanded="true" signature="5578:7884" ph="update live " />
+            <marker date="1517909630545" expanded="true" signature="8523:8538" ph="SELECT COUNT... " />
+            <marker date="1517909630545" expanded="true" signature="8659:9055" ph="select ORDER... " />
+            <marker date="1517909630545" expanded="true" signature="9122:9190" ph="select count... live" />
+            <marker date="1517909630545" expanded="true" signature="9278:9853" ph="select 2 com... live" />
+            <marker date="1517909630545" expanded="true" signature="9949:10786" ph="select null " />
+            <marker date="1517909630545" expanded="true" signature="10853:10993" ph="update live " />
+            <marker date="1517909630545" expanded="true" signature="14607:14670" ph="SELECT count... live_rpt" />
+            <marker date="1517909630545" expanded="true" signature="14743:14885" ph="select id, r... live_msg" />
+            <marker date="1517909630545" expanded="true" signature="14965:15453" ph="SELECT compa... deptId" />
+            <marker date="1517909630545" expanded="true" signature="15063:15185" ph="SELECT ##{dep... live_rpt" />
+            <marker date="1517909630545" expanded="true" signature="15226:15418" ph="SELECT depar... department" />
+            <marker date="1517909630545" expanded="true" signature="15527:15824" ph="select '' an... department" />
+            <marker date="1517909630545" expanded="true" signature="15899:16380" ph="SELECT compa... deptId" />
+            <marker date="1517909630545" expanded="true" signature="15997:16112" ph="SELECT deptI... live" />
+            <marker date="1517909630545" expanded="true" signature="16153:16345" ph="SELECT depar... department" />
+            <marker date="1517909630545" expanded="true" signature="16439:16501" ph="update live_... " />
+            <marker date="1517909630545" expanded="true" signature="16560:16610" ph="update live " />
+            <marker date="1517909630545" expanded="true" signature="16670:16720" ph="update live " />
           </folding>
         </state>
       </provider>
@@ -1830,10 +1833,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/css/rptList.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="310" column="17" lean-forward="false" selection-start-line="310" selection-start-column="16" selection-end-line="310" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/liveSub/html/css/liveSub.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="317" column="23" lean-forward="false" selection-start-line="317" selection-start-column="23" selection-end-line="317" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/common/css/iconfont.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="31" column="41" lean-forward="true" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/css/live.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="117" column="1" lean-forward="false" selection-start-line="117" selection-start-column="1" selection-end-line="117" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="139" column="25" lean-forward="false" selection-start-line="139" selection-start-column="25" selection-end-line="139" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="109" column="63" lean-forward="false" selection-start-line="109" selection-start-column="63" selection-end-line="109" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="37" column="7" lean-forward="false" selection-start-line="37" selection-start-column="7" selection-end-line="38" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/js/rptList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="380" column="35" lean-forward="true" selection-start-line="380" selection-start-column="35" selection-end-line="380" selection-end-column="35" />
+        <state relative-caret-position="420">
+          <caret line="272" column="44" lean-forward="false" selection-start-line="272" selection-start-column="28" selection-end-line="272" selection-end-column="44" />
           <folding>
             <marker date="1517896950508" expanded="true" signature="13406:13414" ph="&amp;##xe61a;" />
             <marker date="1517896950508" expanded="true" signature="13561:13569" ph="&amp;##xe651;" />
@@ -1847,34 +1905,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/rptList/html/css/rptList.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="310" column="17" lean-forward="false" selection-start-line="310" selection-start-column="16" selection-end-line="310" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/content/www/live/rpt.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="72" column="14" lean-forward="true" selection-start-line="69" selection-start-column="12" selection-end-line="72" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/html/js/live.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="139" column="40" lean-forward="true" selection-start-line="139" selection-start-column="40" selection-end-line="139" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/webapp/dynamic/service/live/index.html">
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-service/src/main/java/com/huacainfo/ace/live/service/impl/LiveRptServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
-          <caret line="115" column="59" lean-forward="true" selection-start-line="115" selection-start-column="46" selection-end-line="115" selection-end-column="59" />
+          <caret line="159" column="40" lean-forward="false" selection-start-line="159" selection-start-column="40" selection-end-line="159" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ace-live/ace-live-web/src/main/java/com/huacainfo/ace/live/web/controller/LiveRptController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="100" column="48" lean-forward="false" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="48" />
           <folding />
         </state>
       </provider>

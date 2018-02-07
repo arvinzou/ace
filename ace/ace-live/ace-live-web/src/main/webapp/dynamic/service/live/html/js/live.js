@@ -1,4 +1,5 @@
 // JavaScript Document
+var imgHost='http://zx.huacainfo.com/';
 var imageSrc;
 var userProp;
 $("#startDate").datetimepicker({
@@ -126,20 +127,22 @@ var uploader = new plupload.Uploader({
         preserve_headers: false
     },
     filters: {
-        max_file_size: '10mb',
+        max_file_size: '2048mb',
         mime_types: [
             {title: "Image files", extensions: "jpg,gif,png"}
         ]
     },
     init: {
         FileFiltered: function (up, files) {
-            console.log('uploadFile');
-            uploader.start();
+            $('.viewPicture img').prop('src','');
+            $('.uploadText').show();
+            up.start();
             return false;
         },
         UploadProgress: function(e, t) {
+            console.log(t);
             var r = t.percent;
-            $("#j-row-img .j-uploader-tip p em").html("（" + r + "%）")
+            $(".uploadPloadprogress").html("开始上传（" + r + "%）")
         },
         FileUploaded: function (uploader, file, responseObject) {
             var rst = JSON.parse(responseObject.response);
@@ -151,9 +154,7 @@ uploader.init();
 
 /*图片上传成功后*/
 function viewCover(img) {
-    imageSrc=img[0];
-    var image=imgBox.replace('[imgPath]',img[0]);
-    $('.imgbar').empty().append($(image));
+    var imagePath=imgHost+img[0];
+    $('.viewPicture img').prop('src',imagePath);
+    $('.uploadText').hide();
 }
-
-var imgBox='<img src="http://zx.huacainfo.com/[imgPath]">';
