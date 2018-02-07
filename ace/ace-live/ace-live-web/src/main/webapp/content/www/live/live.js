@@ -363,74 +363,17 @@ function reportBind(e) {
 
         });
         else {
-
-            if (2 == i) var a = [{
-                w: 304,
-                h: 342
-            },
-            {
-                w: 304,
-                h: 342
-            }];
-
-            else if (3 == i) var a = [{
-                w: 304,
-                h: 342
-            },
-            {
-                w: 304,
-                h: 170
-            },
-            {
-                w: 304,
-                h: 170
-            }];
-            else var a = [{
-                w: 304,
-                h: 170
-            },
-            {
-                w: 304,
-                h: 170
-            },
-            {
-                w: 304,
-                h: 170
-            },
-            {
-                w: 304,
-                h: 170
-            }];
             e.find("span").each(function(e) {
                 var i = $(this).data("url"),
                 n = $(this).data("water-bus"),
                 o = $(this).data("water"),
                 t = $(this).data("w"),
                 r = $(this).data("h");
-                if (i.indexOf(".gif") > -1) {
-                    var s = i;
-                    n = ""
-                } else if (void 0 == window.orientation) var s = i + "?x-oss-process=image/" + n;
-                else if (t > 2e3) var s = i + "?x-oss-process=image/resize,w_2000/" + o;
-                else if (r > 2e3) var s = i + "?x-oss-process=image/resize,h_2000/" + o;
-                else if (t > 0) var s = i + "?x-oss-process=image/resize,w_" + t + "/" + o;
-                else var s = i + "?x-oss-process=image/" + o;
-                a[e] || (a[e] = {
-                    w: 304,
-                    h: 170
-                });
-                var d = i + "?x-oss-process=image/resize,m_fill,w_" + a[e].w + ",h_" + a[e].h + ",limit_0",
-                l = new Image;
-                l.setAttribute("data-lazy-img", d);
-                l.src=d;
-                var c = $(l);
-                $(this).data("url", s),
-                $(this).append(c),
-                l.complete && c.height() < c.parent().height() && (c.width("auto"), c.height(c.parent().height())),
-                l.onload = function() {
-                    c.height() < c.parent().height() && (c.width("auto"), c.height(c.parent().height()))
-                }
-            })
+
+                $(this).data("url", i);
+                $(this).append("<img data-lazy-img='"+i+"' src='"+i+"'/>");
+
+            });
         }
     }),
     e.find(".act").removeClass("fn-hide"),
