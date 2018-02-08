@@ -1,8 +1,9 @@
 var fileHost = 'http://zx.huacainfo.com/';
 var start;
-var limit = 25;
+var limit =1000;
 var orderByStr = null;
 var id;
+var rid;
 var mediaType = 2;
 var uploaderI;
 var uploaderV;
@@ -17,12 +18,28 @@ $(function () {
     $('.release').on('click', releaseDo);
     $('.reportList').on('click', '.picbar', actionModifyDo);
     $('.previewPage').on('click', hidePreviewPageDo);
-    $('#imageView').on('click', '.removeImg', removeImgDo);
-    $('#videoView').on('click', '.removeImg', removeVdoDo);
+    $('.reportImageUploadList').on('click', '.removeImage', removeImgDo);
+    $('.reportVideoUploadList').on('click', '.removeVideo', removeVdoDo);
     $('#liveReportTable').on('click', '.publication', startPublicationDo);
     $('#liveReportTable').on('click', '.preview-report', startPreviewDo);
     $('.topToolBtn').on('change', '#chooseStatus',searchByStatusDo);
 });
+
+
+/*删除图片*/
+function removeImgDo() {
+    $(this).parents('li').remove();
+    $('.Iupbtn').show();
+}
+
+/*删除图片*/
+function removeVdoDo() {
+    $('.removeVideo').hide();
+    $('.reportVideoUploadList video').prop('src','');
+    $('.reportVideoUploadList').data('fileurl',null);
+    $('.reportVideoUploadList .uploadText').show();
+    return false;
+}
 
 
 
@@ -57,21 +74,8 @@ function startPublicationDo() {
     });
 }
 
-/*删除图片*/
-function removeImgDo() {
-    $(this).parent().parent().remove();
-    $('#j-cover').show();
-}
-
-/*删除视频*/
-function removeVdoDo() {
-    $(this).parent().remove();
-    $('#v-cover').show();
-}
-
 /*点击预览按键*/
 function startPreviewDo() {
-    console.log(222222222222);
     var id = $(this).parents('li').data('id');
     if (!id) {
         return;
@@ -138,23 +142,7 @@ function findCover(id) {
 /*渲染图片*/
 function viewImage(data) {
     for (var i = 0; i < data.length; i++) {
-        viewImageDiv(data[i].url, data[i].w, data[i].h);
-    }
-}
-
-/*显示图片*/
-function viewImageDiv(o, e, t) {
-    console.log(o + e + t);
-    var imgDiv = imgTemplate.replace('[imgPath]', o);
-    var $imgDiv = $(imgDiv).data({
-        fileurl: o,
-        width: e,
-        height: t
-    });
-    console.log($imgDiv);
-    $('#j-cover').before($imgDiv);
-    if ($('#imageView').children().length >= 5) {
-        $('#j-cover').hide();
+        viewImagePage(data[i].url, data[i].w, data[i].h);
     }
 }
 
@@ -172,6 +160,7 @@ function hidePreviewPageDo(event) {
 function actionModifyDo() {
     console.log('修改报道');
     id = $(this).parents('li').data('id');
+    rid = $(this).parents('li').data('rid');
     console.log(id);
     var url =  '/live/liveRpt/selectLiveRptByPrimaryKey.do';
     var data = {
@@ -237,25 +226,26 @@ function viewLiveName(id) {
 
 /*确认发布报道*/
 function releaseDo() {
+    var flag=false;
     var imgs = [];
     var datas = {};
+    var content=$('.contentRpt1').val();
     var rpt = {
         'id':id,
         'mediaType': mediaType,
-        'content': $('.contentRpt1').val(),
-        'rid': id,
+        'content': content,
+        'rid': rid,
         'uid': userProp.openId,
         'mediaContent': '',
         'createTime': $('.createTimeRpt1').val() + ':00',
     };
-
-    console.log($('.contentRpt').val());
     if (2 == mediaType) {
-        $("#imageView .xcy-cutimg").each(function () {
+        $(".reportImageUploadList li").each(function () {
             var e = $(this).data("fileurl");
             var r = $(this).data("width");
             var i = $(this).data("height");
             if (e) {
+                flag=true;
                 imgs.push({
                     url: e,
                     w: r,
@@ -265,15 +255,26 @@ function releaseDo() {
         });
 
     } else {
-        var e = $("#videoView .xcy-cutimg").data("fileurl");
+        var e = $(".reportVideoUploadList").data("fileurl");
+        if(!e){
+            $('.prompt').text('未上传视频');
+            return;
+        }
         rpt.mediaContent = e;
+    }
+    if(!(content||flag)){
+        $('.prompt').text('内容和图片不能都为空');
+        return;
     }
     datas.imgs = imgs;
     datas.rpt = rpt;
-    var url ='/live/liveRpt/updateLiveRpt.do';
+    var url = '/live/liveRpt/updateLiveRpt.do';
     $.post(url, {jsons: JSON.stringify(datas)}, function (result) {
-        hideSelectReportDo();
-        searchByNameDo();
+        if(0==result.status){
+            hideSelectReportDo();
+            return;
+        }
+        alert("创建失败！");
     });
 }
 
@@ -287,8 +288,7 @@ function searchByNameDo() {
 
 /*点击隐藏发布直播页*/
 function hideSelectReportDo() {
-    $('.xcy-cutimg').remove();
-    $('.select_report').hide();
+    window.location.reload();
 }
 
 /*选择报道类型*/
@@ -337,16 +337,20 @@ function chooseVideoDo() {
         },
         init: {
             FilesAdded: function (up, files) {
-                console.log('uploadFile');
+                $('.prompt').text('');
                 up.start();
-
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
+                $(".uploadVideoPloadprogress").html("点击上传视频");
                 if (rst.success) {
                     var videourl = fileHost + rst.file_path;
                     viewVideo(videourl);
                 }
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".uploadVideoPloadprogress").html("开始上传（" + r + "%）");
             },
             Error: function (e, t) {
                 t.code == -600 ? alert("上传的图片太大，请压缩到20M内") : t.code == -601 ? alert("不支持该格式！") : t.code == -602 ? alert("文件已选择！") : $("#j-row-img .j-uploader-tip p").html("文件上传失败：" + t.message)
@@ -393,11 +397,17 @@ function chooseImageDo() {
         },
         init: {
             FilesAdded: function (up, files) {
-                console.log('uploadFile');
+                $('.prompt').text('');
                 up.start();
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".uploadImagePloadprogress").html("开始上传（" + r + "%）");
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
+                console.log(rst);
+                $(".uploadImagePloadprogress").html("点击上传图片");
                 if (rst.success) {
                     handleImage(rst.file_path);
                 }
@@ -446,8 +456,6 @@ function loadReportList(content, status) {
 
 /*渲染直播列表*/
 function viewReportList(data) {
-    console.log('viewList');
-    console.log(data);
     $('#liveReportTable').empty();
     for (var i = 0; i < data.length; i++) {
         var publication = '';
@@ -555,56 +563,48 @@ $("#createTime").datetimepicker({
 });
 
 
-var videoTempLate = '<div class="xcy-cutimg">' +
-    '                        <label class="upbtn">' +
-    '                            <video src="[videoUrl]"></video>' +
-    '                        </label>' +
-    '                        <span class="removeImg">X</span>' +
-    '                    </div>';
-
-
-var imgTemplate = '<div class="xcy-cutimg">' +
-    '             <label  class="upbtn">' +
-    '                  <div class="imgbar">' +
-    '                          <img src="[imgPath]">' +
-    '                  </div>' +
-    '                   <span class="removeImg">X</span>' +
-    '              </label>' +
-    '</div>';
-
 /*处理图片*/
 function handleImage(imageUrl) {
-    console.log(imageUrl);
     var o = fileHost + imageUrl, l = new Image;
     l.src = o,
         l.onload = l.onerror = function () {
             var e = l.width, t = l.height;
-            viewImageDiv(o, e, t);
+            viewImagePage(o, e, t);
         }
+}
+
+
+function viewImagePage(o, e, t) {
+    var imgli = reportUploadImgTemplate.replace('[imgPath]', o);
+    var $imgli = $(imgli).data({
+        fileurl: o,
+        width: e,
+        height: t
+    });
+    $('.Iupbtn').before($imgli);
+    if ($('.reportImageUploadList').children().length >= 5) {
+        $('.Iupbtn').hide();
+    }
 }
 
 
 /*显示视频*/
 function viewVideo(videoUrl) {
-    var vdoDiv = videoTempLate.replace('[videoUrl]', videoUrl);
-    var $vdoDiv = $(vdoDiv).data({
-        fileurl: videoUrl,
-    });
-    $('#v-cover').before($vdoDiv);
-    if ($('#videoView').children().length >= 2) {
-        $('#v-cover').hide();
-    }
+    $('.removeVideo').show();
+    $('.reportVideoUploadList video').prop('src',videoUrl);
+    $('.reportVideoUploadList').data('fileurl',videoUrl);
+    $('.reportVideoUploadList .uploadText').hide();
 }
 
 function viewAudio(videoUrl) {
-    // var vdoDiv = videoTempLate.replace('[videoUrl]', videoUrl);
-    // var $vdoDiv = $(vdoDiv).data({
-    //     fileurl: videoUrl,
-    // });
-    // $('#v-cover').before($vdoDiv);
-    // if ($('#videoView').children().length >= 2) {
-    //     $('#v-cover').hide();
-    // }
+
 }
+
+var reportUploadImgTemplate='<li>'+
+    '                        <div>'+
+    '                            <img src="[imgPath]">'+
+    '                        </div>'+
+    '                        <span class="removeIcon removeImage"><i class="iconfont">&#xe628;</i></span>'+
+    '                    </li>';
 
 

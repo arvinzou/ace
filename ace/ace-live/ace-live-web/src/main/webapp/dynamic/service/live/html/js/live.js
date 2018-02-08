@@ -1,6 +1,5 @@
 // JavaScript Document
 var imgHost='http://zx.huacainfo.com/';
-var imageSrc;
 var userProp;
 $("#startDate").datetimepicker({
     format: "yyyy-mm-dd hh:ii",
@@ -28,8 +27,13 @@ $(function () {
     webInit();
     $('.formRow').on('keyup', 'input', computedNumDo);
     $('.formRow').on('keyup', 'textarea', computedNumDo);
+    $('.mainContent').on('focus', '.form-control',promptDo);
     $('.release').click(releaseDo);
 });
+
+function promptDo() {
+    $('.prompt').text('');
+}
 
 /*点击发布直播*/
 function releaseDo() {
@@ -50,6 +54,7 @@ function releaseDo() {
     var category=$("input[type='radio']:checked").val().trim();
     var nop=$('.nop').val().trim();
     var pop=$('.pop').val().trim();
+    var imageSrc=$('.pictureContainer').data('imgSrc');
     if(!(name&&imageSrc&&startTime&&remark&&content&&category&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
         $('.prompt').text('带“ * ”为必填项');
         return;
@@ -140,13 +145,12 @@ var uploader = new plupload.Uploader({
             return false;
         },
         UploadProgress: function(e, t) {
-            console.log(t);
             var r = t.percent;
             $(".uploadPloadprogress").html("开始上传（" + r + "%）")
         },
         FileUploaded: function (uploader, file, responseObject) {
             var rst = JSON.parse(responseObject.response);
-            viewCover(rst.value);
+            viewCover(rst.value[0]);
         }
     }
 });
@@ -154,7 +158,8 @@ uploader.init();
 
 /*图片上传成功后*/
 function viewCover(img) {
-    var imagePath=imgHost+img[0];
+    $('.pictureContainer').data('imgSrc',img);
+    var imagePath=imgHost+img;
     $('.viewPicture img').prop('src',imagePath);
     $('.uploadText').hide();
 }
