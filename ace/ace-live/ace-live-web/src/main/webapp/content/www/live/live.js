@@ -134,16 +134,9 @@ function getInfo() {
             },
             i = !0;
             if(wxuser.role&&wxuser.role=='admin'){
-                $("#adminrpt").removeClass("fn-hide");
-                $("#adminrpt2").removeClass("fn-hide");
+                $("#add_note_icon").removeClass("fn-hide");
             };
-            //alert(wxuser.role);
-            $("#adminrpt2").on(tap,
-                         function(){
-                            console.log(i);
-                            location.href="rpt.html?id="+lvsCmd.urlParams.id+"&title="+$(".title").html()+"&companyId="+lvsCmd.urlParams.companyId;
-             }),
-             $("#adminrpt").on(tap,
+             $("#add_note_icon").on(tap,
              function(){
                 console.log(i);
                 location.href="rpt.html?id="+lvsCmd.urlParams.id+"&title="+$(".title").html()+"&companyId="+lvsCmd.urlParams.companyId;
@@ -237,10 +230,10 @@ function getInfo() {
             if("2" == p){
                 //$("#j-sort-c").append('<span class="xc-state ing"><i>直播中</i></span>');
             }
-            /*$("#j-desc p").height() > $("#j-desc").height() && ($("#j-desc").addClass("descclamp"), $("#j-desc .act").removeClass("fn-hide"), $("#j-desc").on(tap,
+            $("#j-desc p").height() > $("#j-desc").height() && ($("#j-desc").addClass("descclamp"), $("#j-desc .act").removeClass("fn-hide"), $("#j-desc").on(tap,
             function() {
                 $(this).toggleClass("descclamp")
-            })),*/
+            })),
             $("#j-desc").css("height", "auto"),
             1 == i.data.partakeState && $(".xcy-totalcount").addClass("fn-hide")
             //$(".xcy-totalcount").html("浏览人数" + i.data.numOfPartake);
@@ -350,105 +343,21 @@ function getReport(e, i) {
 function reportBind(e) {
     e.find(".pictures").each(function() {
         var e = $(this),
-        i = e.data("count");
-        if (1 == i) e.find("span").each(function() {
-            var e = $(this).data("url"),
-            i = $(this).data("water-bus"),
-            a = $(this).data("water"),
-            n = $(this).data("w"),
-            o = $(this).data("h");
-            if (e.indexOf(".gif") > -1) {
-                var t = e;
-                i = ""
-            } else if (void 0 == window.orientation) var t = e + "?x-oss-process=image/" + a;
-            else if (n > 2e3) var t = e + "?x-oss-process=image/resize,w_2000/" + a;
-            else if (o > 2e3) var t = e + "?x-oss-process=image/resize,h_2000/" + a;
-            else if (n > 0) var t = e + "?x-oss-process=image/resize,w_" + n + "/" + a;
-            else var t = e + "?x-oss-process=image/" + a;
-            var r = "data-lazy-img";
-            if ("0" == n || "0" == o) var s = e + "?x-oss-process=image/resize,m_lfit,w_610,h_386,limit_0/" + i,
-            d = $("<img " + r + '="' + s + '" class="normal">');
-            else if (n / o >= 2) var s = e + "?x-oss-process=image/resize,m_fill,w_610,h_202,limit_0/" + i,
-            d = $("<img " + r + '="' + s + '" class="horizontal">');
-            else if (n / o * 16 <= 9) {
-                var s = e + "?x-oss-process=image/resize,w_216";
-                n / o * 32 <= 9 ? $(this).append("<em>闀垮浘</em>") : s += "/" + i;
-                var d = $("<img " + r + '="' + s + '" class="vertical">')
-            } else {
-                var s = e + "?x-oss-process=image/resize,m_mfit,w_610,h_386,limit_0/" + i;
-                if ($(this).parents(".j-photoswiper").css("maxHeight", "100%"), n / o > 610 / 386) var d = $("<img " + r + '="' + s + '" class="normal2">');
-                else var d = $("<img " + r + '="' + s + '" class="normal2">')
-            }
-            $(this).data("url", t),
-            $(this).append(d)
-        });
-        else {
-            if (2 == i) var a = [{
-                w: 304,
-                h: 342
-            },
-            {
-                w: 304,
-                h: 342
-            }];
-            else if (3 == i) var a = [{
-                w: 304,
-                h: 342
-            },
-            {
-                w: 304,
-                h: 170
-            },
-            {
-                w: 304,
-                h: 170
-            }];
-            else var a = [{
-                w: 304,
-                h: 170
-            },
-            {
-                w: 304,
-                h: 170
-            },
-            {
-                w: 304,
-                h: 170
-            },
-            {
-                w: 304,
-                h: 170
-            }];
-            e.find("span").each(function(e) {
-                var i = $(this).data("url"),
-                n = $(this).data("water-bus"),
-                o = $(this).data("water"),
-                t = $(this).data("w"),
-                r = $(this).data("h");
-                if (i.indexOf(".gif") > -1) {
-                    var s = i;
-                    n = ""
-                } else if (void 0 == window.orientation) var s = i + "?x-oss-process=image/" + n;
-                else if (t > 2e3) var s = i + "?x-oss-process=image/resize,w_2000/" + o;
-                else if (r > 2e3) var s = i + "?x-oss-process=image/resize,h_2000/" + o;
-                else if (t > 0) var s = i + "?x-oss-process=image/resize,w_" + t + "/" + o;
-                else var s = i + "?x-oss-process=image/" + o;
-                a[e] || (a[e] = {
-                    w: 304,
-                    h: 170
-                });
-                var d = i + "?x-oss-process=image/resize,m_fill,w_" + a[e].w + ",h_" + a[e].h + ",limit_0",
-                l = new Image;
-                l.setAttribute("data-lazy-img", d);
-                var c = $(l);
-                $(this).data("url", s),
-                $(this).append(c),
-                l.complete && c.height() < c.parent().height() && (c.width("auto"), c.height(c.parent().height())),
-                l.onload = function() {
-                    c.height() < c.parent().height() && (c.width("auto"), c.height(c.parent().height()))
-                }
-            })
-        }
+        c = e.data("count");
+        e.find("span").each(function(e) {
+           var i = $(this).data("url"),
+           n = $(this).data("water-bus"),
+           o = $(this).data("water"),
+           t = $(this).data("w"),
+           r = $(this).data("h");
+           $(this).data("url", i);
+           if(c==1){
+                $(this).append("<img data-lazy-img='"+i+"' src='"+i+"' style='width:100%;height:auto'/>");
+           }else{
+                $(this).append("<img data-lazy-img='"+i+"' src='"+i+"'/>");
+           }
+
+       });
     }),
     e.find(".act").removeClass("fn-hide"),
     e.find("li").each(function() {
@@ -508,7 +417,8 @@ function dianZan(e) {
     function(i, a) {
         if ("0" == a.status) {
             var n = $("#j-remark-" + e);
-            var likerNum=parseInt($("#liker"+e).html());
+            var s=$("#liker"+e).html();
+            var likerNum=parseInt(s);
             likerNum=likerNum+1;
             $("#liker"+e).html(likerNum)
             showRemark(n);

@@ -8,7 +8,7 @@
     FROM
     live
     WHERE
-    deptId =#{deptId} and status='1'
+    deptId =#{deptId}
     union all
     SELECT
     'rpt' id,
@@ -16,7 +16,7 @@
     FROM
     live_rpt inner join live on live_rpt.rid=live.id
     WHERE
-    live.deptId =#{deptId} and live_rpt.status='2'
+    live.deptId =#{deptId}
     union all
     SELECT
     'cmt' id,
