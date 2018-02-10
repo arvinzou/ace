@@ -134,30 +134,17 @@ body{
 	float: left;
 	width: 50%;
 }
-.mainContent{
-	padding: 20px 30px 0px 30px!important;
-	border-bottom: solid 1px #eee;
-	background-color: white;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-}
-
-
-.btn-container{
-	padding: 20px 80px!important;
-	background-color: white;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
 
 .formRow {
 	overflow:hidden;
 	margin-bottom: 30px;
 	padding: 0;
 }
+
 .formContenRight {
 	padding-left: 40px;
 }
+
 .formRow-content label{
 	padding: 0 5px;
 	margin: 0 10px 0 0;
@@ -165,6 +152,7 @@ body{
 	font-weight: normal;
 	cursor: pointer;
 }
+
 .formRow-content{
 	margin-top: 5px;
 }
@@ -315,4 +303,8 @@ input[type=radio]{
 .uploadText:hover{
 	color: #1a9fff;
 }
+
+
+/**********************************************************************************************/
+
 
