@@ -1,6 +1,8 @@
 import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.FileUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.rvc.hngdapi.pojo.ResourceDetail;
+import com.huacainfo.ace.rvc.hngdapi.pojo.response.ResourceDetailResp;
+import com.huacainfo.ace.rvc.hngdapi.util.XmlConverUtil;
 import com.huacainfo.ace.rvc.kedapi.authorize.AuthorizeApi;
 import com.huacainfo.ace.rvc.kedapi.common.constant.VideoConstant;
 import com.huacainfo.ace.rvc.kedapi.control.ControlApi;
@@ -77,15 +79,22 @@ public class HelloWorld {
 
     @Test
     public void test() {
-        CreateDTO();
-//        System.out.println(GUIDUtil.getGUID() + "\n" + DateUtil.getNow());
 
-//        try {
-//            String a = FileUtil.encodeBase64("C:\\Users\\Arvin\\Desktop\\科达沟通01.txt");
-//            System.out.println(a);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><table>\n" +
+                "<head>\n" +
+                "<result result_code=\"0\" message=\"成功\" size=\"2\" />\n" +
+                "</head>\n" +
+                "<rows>\n" +
+                "<row i_id=\"134\" i_org_id=\"8\" c_device_index_code=\"001144\" c_name=\"市智慧党建办会议室\" i_channel_no=\"1\" i_camera_type=\"0\" i_record_location_set=\"null\" i_stream_link_type=\"1\" i_stream_type=\"0\" c_matrix_code=\"null\" i_pixel=\"1\" i_ptz_type=\"4\" i_is_bind_audio=\"0\" i_main_bit_rate=\"0\" i_main_rate_type=\"0\" c_stream_url=\"null\" c_management=\"null\" i_layout_type=\"null\" i_matrix_camera_index=\"null\" i_view_horangle=\"null\" i_view_angle=\"null\" i_view_length=\"null\" i_view_visible_radius=\"null\" i_view_ver_angle=\"null\" i_view_tilt=\"null\" i_view_zoom=\"null\" i_is_infrared=\"0\" i_is_auto_follow=\"0\" i_is_intelligent=\"0\" i_is_high_digital=\"0\" i_is_visual=\"0\" c_install_address=\"null\" c_install_time=\"null\" i_install_way=\"null\" i_init_pos=\"null\" i_charge_dept=\"null\" i_integration_type=\"null\" i_area_type=\"null\" i_video_build_type=\"null\" i_video_type=\"null\" i_delay_build=\"null\" c_description=\"null\" c_assign_time=\"2018-02-01 10:03:43\" i_is_online=\"1\" i_domain_id=\"3\" c_longitude=\"null\" c_latitude=\"null\" c_pinyin_code_all=\"shizhihuidangjianbanhuiyishi\" c_index_code=\"001146\" c_biz_code=\"null\" c_pinyin_code=\"szhdjbhys\" i_status=\"0\" c_create_time=\"2018-02-01 10:03:08\" c_creator=\"admin\" c_update_time=\"2018-02-06 00:06:03\" i_group_count=\"0\" c_config_param=\"null\" i_transform_bandwidth_limit=\"null\" i_key_control=\"null\" c_cascade_code=\"null\" c_cascade_privilege=\"null\" c_decode_tag=\"null\" i_play_type=\"null\" i_passageway=\"null\" i_res_type=\"10000\" i_device_res_type=\"30000\" i_type=\"1\" c_channel_identify=\"1\" i_enable=\"1\" i_sequence_idx=\"-1\" c_ezviz_encrypt=\"null\" i_is_encrypt=\"null\" i_is_share=\"null\" c_ezviz_camera_code=\"null\" c_osd_xml=\"null\" i_height=\"null\" c_device_info=\"null\" c_position=\"null\" i_is_voice_intercom=\"null\" i_channel_indexcode=\"null\" i_talk_channel_no=\"null\" c_relation_index_code=\"null\" c_org_name=\"市智慧党建办\" c_org_index_code=\"001126\" c_device_name=\"市智慧党建办\" c_device_ip=\"59.231.65.113\" i_device_port=\"9351\" i_manufacturer=\"0\" i_device_type=\"0\" i_device_detail_type=\"7\"  />\n" +
+                "<row i_id=\"135\" i_org_id=\"8\" c_device_index_code=\"001144\" c_name=\"市智慧党建办走廊\" i_channel_no=\"2\" i_camera_type=\"0\" i_record_location_set=\"null\" i_stream_link_type=\"1\" i_stream_type=\"0\" c_matrix_code=\"null\" i_pixel=\"1\" i_ptz_type=\"4\" i_is_bind_audio=\"0\" i_main_bit_rate=\"0\" i_main_rate_type=\"0\" c_stream_url=\"null\" c_management=\"null\" i_layout_type=\"null\" i_matrix_camera_index=\"null\" i_view_horangle=\"null\" i_view_angle=\"null\" i_view_length=\"null\" i_view_visible_radius=\"null\" i_view_ver_angle=\"null\" i_view_tilt=\"null\" i_view_zoom=\"null\" i_is_infrared=\"0\" i_is_auto_follow=\"0\" i_is_intelligent=\"0\" i_is_high_digital=\"0\" i_is_visual=\"0\" c_install_address=\"null\" c_install_time=\"null\" i_install_way=\"null\" i_init_pos=\"null\" i_charge_dept=\"null\" i_integration_type=\"null\" i_area_type=\"null\" i_video_build_type=\"null\" i_video_type=\"null\" i_delay_build=\"null\" c_description=\"null\" c_assign_time=\"2018-02-01 10:03:43\" i_is_online=\"1\" i_domain_id=\"3\" c_longitude=\"null\" c_latitude=\"null\" c_pinyin_code_all=\"shizhihuidangjianbanzoulang\" c_index_code=\"001145\" c_biz_code=\"null\" c_pinyin_code=\"szhdjbzl\" i_status=\"0\" c_create_time=\"2018-02-01 10:03:08\" c_creator=\"admin\" c_update_time=\"2018-02-06 00:06:03\" i_group_count=\"0\" c_config_param=\"null\" i_transform_bandwidth_limit=\"null\" i_key_control=\"null\" c_cascade_code=\"null\" c_cascade_privilege=\"null\" c_decode_tag=\"null\" i_play_type=\"null\" i_passageway=\"null\" i_res_type=\"10000\" i_device_res_type=\"30000\" i_type=\"1\" c_channel_identify=\"2\" i_enable=\"1\" i_sequence_idx=\"0\" c_ezviz_encrypt=\"null\" i_is_encrypt=\"null\" i_is_share=\"null\" c_ezviz_camera_code=\"null\" c_osd_xml=\"null\" i_height=\"null\" c_device_info=\"null\" c_position=\"null\" i_is_voice_intercom=\"null\" i_channel_indexcode=\"null\" i_talk_channel_no=\"null\" c_relation_index_code=\"null\" c_org_name=\"市智慧党建办\" c_org_index_code=\"001126\" c_device_name=\"市智慧党建办\" c_device_ip=\"59.231.65.113\" i_device_port=\"9351\" i_manufacturer=\"0\" i_device_type=\"0\" i_device_detail_type=\"7\"  />\n" +
+                "</rows>\n" +
+                "</table>";
+
+
+        String json = XmlConverUtil.xmltoJson(xml).replace("@", "");
+        ResourceDetailResp rsp = JsonUtil.toObject(json, ResourceDetailResp.class);
+
+        System.out.println(json);
     }
 
 
