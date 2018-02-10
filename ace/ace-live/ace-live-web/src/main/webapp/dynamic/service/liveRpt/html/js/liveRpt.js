@@ -1,6 +1,6 @@
 var fileHost = 'http://zx.huacainfo.com/';
 var start;
-var limit = 25;
+var limit = 1000;
 var orderByStr = null;
 var id;
 var mediaType = 2;
@@ -15,39 +15,50 @@ $(function () {
     $('#liveListTable').on('click', 'a', actionSelectReportDo);
     $('.search').click(searchByNameDo);
     $('.release').click(releaseDo);
-    $('#imageView').on('click', '.removeImg', removeImgDo);
-    $('#videoView').on('click', '.removeImg', removeVdoDo);
+    $('.reportImageUploadList').on('click', '.removeImage', removeImgDo);
+    $('.reportVideoUploadList').on('click', '.removeVideo', removeVdoDo);
+    $('.select_report').on('focus', '.form-control',promptDo);
 });
 
 /*删除图片*/
 function removeImgDo() {
-    $(this).parent().parent().remove();
-    $('#j-cover').show();
+    $(this).parents('li').remove();
+    $('.Iupbtn').show();
 }
 
 /*删除图片*/
 function removeVdoDo() {
-    $(this).parent().remove();
-    $('#v-cover').show();
+    $('.removeVideo').hide();
+    $('.reportVideoUploadList video').prop('src','');
+    $('.reportVideoUploadList').data('fileurl',null);
+    $('.reportVideoUploadList .uploadText').show();
+    return false;
+}
+
+function promptDo() {
+    $('.prompt').text('');
 }
 
 /*确认发布报道*/
 function releaseDo() {
+    var flag=false;
     var imgs = [];
     var datas = {};
+    var content=$('.content').val();
     var rpt = {
         'mediaType': mediaType,
-        'content': $('.content').val(),
+        'content':content,
         'rid': id,
         'uid': userProp.openId,
         'mediaContent': ""
     };
     if (2 == mediaType) {
-        $("#imageView .xcy-cutimg").each(function () {
+        $(".reportImageUploadList li").each(function () {
             var e = $(this).data("fileurl");
             var r = $(this).data("width");
             var i = $(this).data("height");
             if (e) {
+                flag=true;
                 imgs.push({
                     url: e,
                     w: r,
@@ -57,8 +68,16 @@ function releaseDo() {
         });
 
     } else {
-        var e = $("#videoView .xcy-cutimg").data("fileurl");
+        var e = $(".reportVideoUploadList").data("fileurl");
+        if(!e){
+            $('.prompt').text('未上传视频');
+            return;
+        }
         rpt.mediaContent = e;
+    }
+    if(!(content||flag)){
+        $('.prompt').text('内容和图片不能都为空');
+        return;
     }
     datas.imgs = imgs;
     datas.rpt = rpt;
@@ -104,8 +123,7 @@ function actionSelectReportDo() {
 
 /*点击隐藏发布直播页*/
 function hideSelectReportDo() {
-    $('.xcy-cutimg').remove();
-    $('.select_report').hide();
+    window.location.reload();
 }
 
 /*选择报道类型*/
@@ -152,16 +170,20 @@ function chooseVideoDo() {
         },
         init: {
             FilesAdded: function (up, files) {
-                console.log('uploadFile');
+                $('.prompt').text('');
                 up.start();
-
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
+                $(".uploadVideoPloadprogress").html("点击上传视频");
                 if (rst.success) {
                     var videourl = fileHost + rst.file_path;
                     viewVideo(videourl);
                 }
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".uploadVideoPloadprogress").html("开始上传（" + r + "%）");
             },
             Error: function (e, t) {
                 t.code == -600 ? alert("上传的图片太大，请压缩到20M内") : t.code == -601 ? alert("不支持该格式！") : t.code == -602 ? alert("文件已选择！") : $("#j-row-img .j-uploader-tip p").html("文件上传失败：" + t.message)
@@ -209,12 +231,17 @@ function chooseImageDo() {
         },
         init: {
             FilesAdded: function (up, files) {
-                console.log('uploadFile');
+                $('.prompt').text('');
                 up.start();
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".uploadImagePloadprogress").html("开始上传（" + r + "%）");
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
                 console.log(rst);
+                $(".uploadImagePloadprogress").html("点击上传图片");
                 if (rst.success) {
                     handleImage(rst.file_path);
                 }
@@ -230,14 +257,10 @@ function chooseImageDo() {
 
 /*显示视频*/
 function viewVideo(videoUrl) {
-    var vdoDiv = videoTempLate.replace('[videoUrl]', videoUrl);
-    var $vdoDiv = $(vdoDiv).data({
-        fileurl: videoUrl,
-    });
-    $('#v-cover').before($vdoDiv);
-    if ($('#videoView').children().length >= 2) {
-        $('#v-cover').hide();
-    }
+    $('.removeVideo').show();
+    $('.reportVideoUploadList video').prop('src',videoUrl);
+    $('.reportVideoUploadList').data('fileurl',videoUrl);
+    $('.reportVideoUploadList .uploadText').hide();
 }
 
 /*处理图片*/
@@ -251,15 +274,15 @@ function handleImage(imageUrl) {
 }
 
 function viewImagePage(o, e, t) {
-    var imgDiv = imgTemplate.replace('[imgPath]', o);
-    var $imgDiv = $(imgDiv).data({
+    var imgli = reportUploadImgTemplate.replace('[imgPath]', o);
+    var $imgli = $(imgli).data({
         fileurl: o,
         width: e,
         height: t
     });
-    $('#j-cover').before($imgDiv);
-    if ($('#imageView').children().length >= 5) {
-        $('#j-cover').hide();
+    $('.Iupbtn').before($imgli);
+    if ($('.reportImageUploadList').children().length >= 5) {
+        $('.Iupbtn').hide();
     }
 }
 
@@ -309,22 +332,13 @@ var liveTemplate = '<tr>' +
     '                <td><a>发布报道</a></td>' +
     '</tr>';
 
-var videoTempLate = '<div class="xcy-cutimg">' +
-    '                        <label class="upbtn">' +
-    '                            <video src="[videoUrl]"></video>' +
-    '                        </label>' +
-    '                        <span class="removeImg">X</span>' +
-    '                    </div>';
 
-
-var imgTemplate = '<div class="xcy-cutimg">' +
-    '             <label  class="upbtn">' +
-    '                  <div class="imgbar">' +
-    '                          <img src="[imgPath]">' +
-    '                  </div>' +
-    '                   <span class="removeImg">X</span>' +
-    '              </label>' +
-    '</div>';
+var reportUploadImgTemplate='<li>'+
+    '                        <div>'+
+    '                            <img src="[imgPath]">'+
+    '                        </div>'+
+    '                        <span class="removeIcon removeImage"><i class="iconfont">&#xe628;</i></span>'+
+    '                    </li>';
 
 
 

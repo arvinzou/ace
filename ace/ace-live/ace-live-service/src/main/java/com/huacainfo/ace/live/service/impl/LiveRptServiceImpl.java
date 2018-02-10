@@ -142,14 +142,11 @@ public class LiveRptServiceImpl implements LiveRptService {
         if (CommonUtils.isBlank(obj.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(obj.getContent())) {
-            return new MessageResponse(1, "直播内容不能为空！");
-        }
 
         /*删除图片*/
         liveImgDao.deleteByRptId(obj.getId());
         boolean flag = true;
-        for (LiveImg img : imgs) {
+        for(LiveImg img : imgs){
             if (flag) {
                 obj.setMediaContent(img.getUrl());
                 flag = false;

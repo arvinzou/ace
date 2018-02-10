@@ -1,7 +1,7 @@
 /*变量*/
-var imghost = "http://zx.huacainfo.com/";
+var imgHost = "http://zx.huacainfo.com/";
 var start;
-var limit = 25;
+var limit = 1000;
 var userProp;
 var status;
 var id;
@@ -16,6 +16,7 @@ $(function () {
     $('#reportCan').on('click', '.cancelSort', cancelSortDo);
     $('.cancel').click(hideModifyWebDo);
     $('.topToolBtn').on('change', '.liveStatus',searchByStatusDo);
+    $('.mainContent').on('focus', '.form-control',promptDo);
     $('.report-list').sortable({
         cursor: "move",
         items: "li",                        //只是li可以拖动
@@ -26,6 +27,12 @@ $(function () {
         }
     });
 });
+
+
+function promptDo() {
+    $('.prompt').text('');
+}
+
 
 /*根据状态查找*/
 function searchByStatusDo() {
@@ -181,7 +188,7 @@ function viewLiveList(data) {
     $('.sceneList').empty();
     for (var i = 0; i < data.length; i++) {
         var liLive = liveTemplate;
-        liLive = liLive.replace('[imageSrc]', imghost + data[i].imageSrc);
+        liLive = liLive.replace('[imageSrc]', imgHost + data[i].imageSrc);
         liLive = liLive.replace('[name]', data[i].name);
         liLive = liLive.replace('[createUserName]', data[i].createUserName);
         liLive = liLive.replace('[startTime]', data[i].startTime.substring(0, 16));
@@ -202,10 +209,8 @@ function hideModifyWebDo() {
 
 /*修改直播信息*/
 function modifyLiveDo(event) {
-    console.log(event);
     id = null;
-    console.log('修改直播');
-    id = $(this).parent().data('Liveid');
+    id = $(this).parents('li').data('Liveid');
     var url = '/live/live/selectLiveByPrimaryKey.do';
     var data = {
         'id': id
@@ -233,6 +238,13 @@ function showModifyWeb(data) {
     }
 }
 
+/*图片上传成功后*/
+function viewCover(img) {
+    $('.pictureContainer').data('imgSrc',img);
+    var imagePath=imgHost+img;
+    $('.viewPicture img').prop('src',imagePath);
+    $('.uploadText').hide();
+}
 
 /*初始化页面*/
 function initWeb() {

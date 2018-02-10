@@ -1,5 +1,5 @@
 // JavaScript Document
-var imageSrc;
+var imgHost='http://zx.huacainfo.com/';
 var userProp;
 $("#startDate").datetimepicker({
     format: "yyyy-mm-dd hh:ii",
@@ -27,8 +27,13 @@ $(function () {
     webInit();
     $('.formRow').on('keyup', 'input', computedNumDo);
     $('.formRow').on('keyup', 'textarea', computedNumDo);
+    $('.mainContent').on('focus', '.form-control',promptDo);
     $('.release').click(releaseDo);
 });
+
+function promptDo() {
+    $('.prompt').text('');
+}
 
 /*点击发布直播*/
 function releaseDo() {
@@ -49,6 +54,7 @@ function releaseDo() {
     var category=$("input[type='radio']:checked").val().trim();
     var nop=$('.nop').val().trim();
     var pop=$('.pop').val().trim();
+    var imageSrc=$('.pictureContainer').data('imgSrc');
     if(!(name&&imageSrc&&startTime&&remark&&content&&category&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
         $('.prompt').text('带“ * ”为必填项');
         return;
@@ -126,24 +132,25 @@ var uploader = new plupload.Uploader({
         preserve_headers: false
     },
     filters: {
-        max_file_size: '10mb',
+        max_file_size: '2048mb',
         mime_types: [
             {title: "Image files", extensions: "jpg,gif,png"}
         ]
     },
     init: {
         FileFiltered: function (up, files) {
-            console.log('uploadFile');
-            uploader.start();
+            $('.viewPicture img').prop('src','');
+            $('.uploadText').show();
+            up.start();
             return false;
         },
         UploadProgress: function(e, t) {
             var r = t.percent;
-            $("#j-row-img .j-uploader-tip p em").html("（" + r + "%）")
+            $(".uploadPloadprogress").html("开始上传（" + r + "%）")
         },
         FileUploaded: function (uploader, file, responseObject) {
             var rst = JSON.parse(responseObject.response);
-            viewCover(rst.value);
+            viewCover(rst.value[0]);
         }
     }
 });
@@ -151,9 +158,8 @@ uploader.init();
 
 /*图片上传成功后*/
 function viewCover(img) {
-    imageSrc=img[0];
-    var image=imgBox.replace('[imgPath]',img[0]);
-    $('.imgbar').empty().append($(image));
+    $('.pictureContainer').data('imgSrc',img);
+    var imagePath=imgHost+img;
+    $('.viewPicture img').prop('src',imagePath);
+    $('.uploadText').hide();
 }
-
-var imgBox='<img src="http://zx.huacainfo.com/[imgPath]">';

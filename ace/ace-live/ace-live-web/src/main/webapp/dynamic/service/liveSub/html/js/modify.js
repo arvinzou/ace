@@ -1,7 +1,3 @@
-// JavaScript Document
-
-var imghost = "http://zx.huacainfo.com/";
-var imageSrc;
 
 $("#startDate").datetimepicker({
     format: "yyyy-mm-dd hh:ii",
@@ -48,6 +44,7 @@ function releaseDo() {
     var category=$("input[type='radio']:checked").val().trim();
     var nop=$('.nop').val().trim();
     var pop=$('.pop').val().trim();
+    var imageSrc=$('.pictureContainer').data('imgSrc');
     if(!(name&&imageSrc&&startTime&&remark&&content&&category&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
         $('.prompt').text('带“ * ”为必填项');
         return;
@@ -83,7 +80,6 @@ function releaseDo() {
         }else{
             $('.prompt').text(result.errorMessage);
         }
-
     });
 }
 
@@ -122,7 +118,7 @@ var uploader = new plupload.Uploader({
         preserve_headers: false
     },
     filters: {
-        max_file_size: '10mb',
+        max_file_size: '1000mb',
         mime_types: [
             {title: "Image files", extensions: "jpg,gif,png"}
         ]
@@ -130,9 +126,14 @@ var uploader = new plupload.Uploader({
 
     init: {
         FileFiltered: function (up, files) {
-            console.log('uploadFile');
-            uploader.start();
+            $('.viewPicture img').prop('src','');
+            $('.uploadText').show();
+            up.start();
             return false;
+        },
+        UploadProgress: function(e, t) {
+            var r = t.percent;
+            $(".uploadPloadprogress").html("开始上传（" + r + "%）")
         },
         FileUploaded: function (uploader, file, responseObject) {
             var rst = JSON.parse(responseObject.response);
@@ -141,13 +142,3 @@ var uploader = new plupload.Uploader({
     }
 });
 uploader.init();
-
-/*图片上传成功后*/
-function viewCover(img) {
-    imageSrc=img;
-    console.log(img);
-    var image=imgBox.replace('[imgPath]',img);
-    $('.imgbar').empty().append($(image));
-}
-
-var imgBox='<img src="'+imghost+'[imgPath]">';

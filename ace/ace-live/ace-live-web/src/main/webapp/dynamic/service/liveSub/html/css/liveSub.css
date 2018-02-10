@@ -183,23 +183,8 @@ input[type=radio]{
 .font-right{
 	float: right!important;
 }
-.xcy-cutimg {
-	position: relative;
-	width: 240px;
-	height: 135px;
-	border: 1px dashed #b4bed3;
-	border-radius: 5px;
-}
 
-.upbtn{
-	display: block;
-	margin: 0!important;
-	padding: 0!important;
-	width: 240px;
-	height: 135px;
-	text-align: center;
-	color: #a0a0a0;
-}
+
 
 .fn-hide {
 	display: none!important;
@@ -210,12 +195,7 @@ input[type=radio]{
 	text-align: center;
 	color: #a0a0a0;
 }
-.imgbar{
-	height: 100%;
-}
-.imgbar >img{
-	width: 100%;
-}
+
 .prompt{
 	margin-left: 20px;
 	color:red;
@@ -271,14 +251,6 @@ input[type=radio]{
 	width: 94%;
 }
 
-.xcy-cutimg ,.retainEl{
-	position: relative;
-	float: left;
-	width: 240px;
-	height: 135px;
-	margin: 5px;
-}
-
 
 .report-list img{
 	display: block;
@@ -310,10 +282,37 @@ input[type=radio]{
 	color: #fff;
 }
 
-.imgbar{
+.pictureContainer{
+	position: relative;
+	width: 240px;
+	height: 135px;
+	margin: 5px;
+	cursor: pointer;
+}
+
+.pictureContainer .viewPicture{
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
 	border: 1px dashed #b4bed3;
 	border-radius: 5px;
 }
+
+.uploadText{
+	position: absolute;
+	top:0;
+	left: 0;
+	padding: 20px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+.uploadText .iconfont{
+	font-size: 40px;
+}
+
+.uploadText:hover{
+	color: #1a9fff;
+}
+

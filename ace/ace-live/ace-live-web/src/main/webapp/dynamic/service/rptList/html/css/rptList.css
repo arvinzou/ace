@@ -232,82 +232,6 @@ body{
 	width: 94%;
 }
 
-
-
-#imageView img{
-	display: block;
-	width: 100%;
-	border: 0;
-	border-radius: 5px;
-	overflow: hidden;
-	object-fit:cover;
-}
-
-
-.xcy-cutimg ,.retainEl{
-	position: relative;
-	float: left;
-	width: 240px;
-	height: 135px;
-	margin: 5px;
-}
-
-.retainEl{
-	border: 1px dashed #b4bed3;
-	border-radius: 5px;
-}
-
-.imgbar img{
-	width: 100%;
-}
-
-.imgbar{
-	border: 1px dashed #b4bed3;
-	border-radius: 5px;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-
-
-.removeImg{
-	position: absolute;
-	top:0px;
-	left: 0px;
-	display:block;
-	margin: 4px;
-	height: 30px;
-	width: 30px;
-	line-height: 30px;
-	background-color: rgba(0,0,0,.5);
-	border-radius: 10px;
-	text-align: center;
-	cursor: pointer;
-}
-
-.removeImg>.iconfont{
-	font-size:30px;
-	color: white;
-}
-#videoView video{
-	border-radius: 5px;
-	width: 100%;
-	height: 100%;
-}
-
-.upbtn {
-	display: block;
-	margin: 0 !important;
-	padding: 0 !important;
-	width: 240px;
-	height: 135px;
-	text-align: center;
-	color: #a0a0a0;
-	border-radius: 5px;
-	overflow: hidden;
-}
-
-
 .previewWeb-text{
 	padding:15px 20px;
 	text-align: center;
@@ -316,5 +240,78 @@ body{
 	line-height: 20px;
 }
 
+
+.removeIcon{
+	position: absolute;
+	top:0px;
+	left: 0px;
+	margin: 4px;
+	height: 30px;
+	width: 30px;
+	line-height: 30px;
+	border-radius: 15px;
+	text-align: center;
+	cursor: pointer;
+	background-color:rgba(217,83,79,0.56);
+	z-index: 100;
+}
+
+.reportImageUploadList {
+	list-style: none;
+	padding: 0px;
+}
+
+.reportImageUploadList li,.reportVideoUploadList{
+	position: relative;
+	width: 240px;
+	height: 135px;
+	float: left;
+	margin: 5px;
+	cursor: pointer;
+}
+
+.reportImageUploadList li div,.viewPicture{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	border: 1px dashed #b4bed3;
+	border-radius: 5px;
+}
+
+
+.uploadText{
+	position: absolute;
+	top:0;
+	left: 0;
+	padding: 20px;
+	width: 100%;
+	height: 100%;
+}
+
+.uploadText .iconfont{
+	font-size: 40px;
+}
+
+.uploadText:hover{
+	color: #1a9fff;
+}
+
+.removeIcon:hover{
+	background-color:rgba(217,83,79,0.9);
+	color:white;
+}
+
+.removeVideo{
+	display: none;
+}
+
+.prompt{
+	color:rgba(217,83,79,1);
+}
+
+.reportVideoUploadList video{
+	width: 100%;
+	height: 100%;
+}
 
 
