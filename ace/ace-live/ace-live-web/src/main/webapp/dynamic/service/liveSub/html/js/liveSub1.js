@@ -14,7 +14,6 @@ $(function () {
     $('#reportCan').on('click', '.cancelSort', cancelSortDo);
 
     $('#htmlLoad').on('focus', '.form-control',promptDo);
-    $('#htmlLoad').on('click', '.html-blackCancel','.cancelHandle',hideModifyWebDo);
     $('#htmlLoad').on('click',hideModifyWebDo);
     $('.report-list').sortable({
         cursor: "move",
@@ -26,12 +25,6 @@ $(function () {
         }
     });
 });
-
-/*隐藏修改页面*/
-function hideModifyWebDo() {
-    console.log('hideModifyWebDo');
-    $('#htmlLoad').empty();
-}
 
 function promptDo() {
     $('#htmlLoad .prompt').text('');
@@ -99,18 +92,6 @@ function viewReportList(data) {
     }
 }
 
-/*按开始时间排序*/
-function sortLiveByTimeDo() {
-    var flag = $(this).data('flag');
-    if (flag) {
-        orderByStr = null;
-        $(this).data('flag', false);
-    } else {
-        orderByStr = 'startTime';
-        $(this).data('flag', true);
-    }
-    searchByNameDo(orderByStr);
-}
 
 
 
@@ -122,29 +103,10 @@ function sortLiveByTimeDo() {
 
 
 
-/*进入修改页*/
-function showModifyWeb(data) {
-    $('.modify').show();
-    for (var item in data) {
-        if (item == 'imageSrc') {
-            viewCover(data[item]);
-        } else if (item == 'category') {
-            $(":radio[name='category'][value='" + data[item] + "']").prop("checked", "checked");
-        } else if (item == 'status') {
-            status = data[item];
-        } else {
-            $('.' + item).val(data[item]);
-        }
-    }
-}
 
-/*图片上传成功后*/
-function viewCover(img) {
-    $('.pictureContainer').data('imgSrc',img);
-    var imagePath=imgHost+img;
-    $('.viewPicture img').prop('src',imagePath);
-    $('.uploadText').hide();
-}
+
+
+
 
 
 function updateSequence(arr) {

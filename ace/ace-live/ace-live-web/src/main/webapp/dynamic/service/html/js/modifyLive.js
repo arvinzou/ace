@@ -36,6 +36,7 @@ function releaseDo() {
     if(endTime){
         endTime+=':00';
     }
+    var id=$('#htmlLoad').data('liveId');
     var remark=$('.remark').val().trim();
     var content=$('.content').val().trim();
     var addr=$('.addr').val().trim();
@@ -46,11 +47,11 @@ function releaseDo() {
     var pop=$('.pop').val().trim();
     var imageSrc=$('.pictureContainer').data('imgSrc');
     if(!(name&&imageSrc&&startTime&&remark&&content&&category&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
-        $('.prompt').text('带“ * ”为必填项');
+        promptDo('带“ * ”为必填项');
         return;
     }
     var keyVal={
-         'id':id,
+        'id':id,
         'name':name,
         'startTime':startTime+':00',
         'endTime':endTime,
@@ -73,19 +74,17 @@ function releaseDo() {
         console.log(result);
         if(result.status==0){
             alert("修改直播成功");
-            $(".form-control").val('');
-            $('.imgbar').empty();
-            $('.modify').hide();
+            hideTableDo();
             loadLiveList();
         }else{
-            $('.prompt').text(result.errorMessage);
+            promptDo(result.errorMessage);
         }
     });
 }
 
 /*直播名字字数的计算*/
 function computedNumDo() {
-    $('.prompt').text('');
+    promptDo('');
     var that = $(this);
     var nowWordNumber = that.val().length;
     var $span = that.parent().parent().find('span');
@@ -126,6 +125,7 @@ var uploader = new plupload.Uploader({
 
     init: {
         FileFiltered: function (up, files) {
+            promptDo('');
             $('.viewPicture img').prop('src','');
             $('.uploadText').show();
             up.start();

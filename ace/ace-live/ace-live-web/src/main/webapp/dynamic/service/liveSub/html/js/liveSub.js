@@ -1,3 +1,5 @@
+var orderByStr = '';
+
 $(function () {
     initWeb();
     /*修改直播状态*/
@@ -8,7 +10,23 @@ $(function () {
     $('.topToolBtn').on('change', '.liveStatus', searchByStatusDo);
     /*点击修改直播内容*/
     $('.sceneList').on('click', '.picbar', modifyLiveDo);
+    /*按事件排序*/
+    $('.sortLive').click(sortLiveByTimeDo);
 })
+
+/*按开始时间排序*/
+function sortLiveByTimeDo() {
+    var flag = $(this).data('flag');
+    if (flag) {
+        orderByStr = null;
+        $(this).data('flag', false);
+    } else {
+        orderByStr = 'startTime';
+        $(this).data('flag', true);
+    }
+    searchByNameDo(orderByStr);
+}
+
 
 /*初始化页面*/
 function initWeb() {
@@ -66,7 +84,7 @@ function changeLiveStatusDo() {
         if (result.status == 0) {
             modifyStatus(result.value);
         }
-    })
+    });
 }
 
 /*更改状态*/
@@ -114,6 +132,9 @@ function searchByStatusDo() {
 /*修改直播信息*/
 function modifyLiveDo(event) {
     var id = $(this).parents('li').data('Liveid');
+    if (!id) {
+        return;
+    }
     var url = '/live/live/selectLiveByPrimaryKey.do';
     var data = {
         'id': id
@@ -121,9 +142,37 @@ function modifyLiveDo(event) {
     $('#htmlLoad').data('liveId', id);
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            $('#htmlLoad').load('./../html/createLive.html', function () {
-                showModifyWeb(result.value);
+            $('#htmlLoad').load('./../html/floatTable.html', function () {
+                $('#floatTable').load('./../html/liveForm.html', function () {
+                    $('#JSLoad').load('./../html/modifyLiveJS.html', function () {
+                        showModifyWeb(result.value);
+                    })
+                });
             });
         }
     });
+}
+
+/*进入修改页*/
+function showModifyWeb(data) {
+    $('.modify').show();
+    for (var item in data) {
+        if (item == 'imageSrc') {
+            viewCover(data[item]);
+        } else if (item == 'category') {
+            $(":radio[name='category'][value='" + data[item] + "']").prop("checked", "checked");
+        } else if (item == 'status') {
+            status = data[item];
+        } else {
+            $('.' + item).val(data[item]);
+        }
+    }
+}
+
+/*图片上传成功后*/
+function viewCover(img) {
+    $('.pictureContainer').data('imgSrc', img);
+    var imagePath = imgHost + img;
+    $('.viewPicture img').prop('src', imagePath);
+    $('.uploadText').hide();
 }

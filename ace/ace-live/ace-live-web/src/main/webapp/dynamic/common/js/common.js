@@ -2,7 +2,7 @@
 var imgHost='http://zx.huacainfo.com/';
 var limit = 1000;
 var userProp;
-
+var start=0;
 /*直播模板*/
 var liveTemplate = ' <li>' +
     '             <div class="picbar">' +
@@ -26,4 +26,15 @@ var liveTemplate = ' <li>' +
 
 function promptDo(text) {
     $('.prompt').text(text);
+}
+
+/**/
+$(function () {
+    $('#htmlLoad').on('click', '.html-blackCancel',hideTableDo);
+})
+
+
+/*隐藏修改页面*/
+function hideTableDo() {
+    $('#htmlLoad').empty();
 }

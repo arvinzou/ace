@@ -8,6 +8,9 @@ function webInit() {
     $.get(url, function () {
     });
 
-    $('#htmlLoad').load('./../html/createLive.html',function () {
+    $('#htmlLoad').load('./../html/liveForm.html',function () {
+        $('#JSLoad').load('./../html/createLiveJS.html',function () {
+
+        });
     });
 }
