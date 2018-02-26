@@ -350,9 +350,9 @@
         count(1) totalNum from live_rpt where rid=#{rid}
     </select>
     <select id="getLiveMsgList" resultType="map">
-        select id, rid, uid, content, date_format(createTime,'%H:%i:%s') createTime from live_msg where
-        rid=#{rid}
-        order by createTime
+        select t.id, t.rid, t.uid, t.content, date_format(t.createTime,'%H:%i:%s') createTime from live_msg t where
+        t.rid=#{rid}
+        order by t.createTime
     </select>
     <select id="getTotalNumAndOrgInfo" resultType="map">
         SELECT
