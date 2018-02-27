@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.portal.dao.DepartmentDao">
-	<select id="init" resultType="int">
-		select 1 from dual
-	</select>
 	<resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Department">
 		<id column="department_id" jdbcType="VARCHAR" property="departmentId" />
 		<result column="parent_department_id" jdbcType="VARCHAR"
@@ -68,12 +65,13 @@
 			property="accidentOfYear" />
 		<result column="complaints_remark" jdbcType="LONGVARCHAR"
 			property="complaintsRemark" />
-
 		<result column="serviceTimeStart" jdbcType="VARCHAR" property="serviceTimeStart" />
 		<result column="serviceTimeEnd" jdbcType="VARCHAR" property="serviceTimeEnd" />
 		<result column="qrcode" jdbcType="VARCHAR" property="qrcode" />
 		<result column="serviceWay" jdbcType="VARCHAR" property="serviceWay" />
-
+		<result column="logo" jdbcType="VARCHAR" property="logo" />
+		<result column="watermark1" jdbcType="VARCHAR" property="watermark1" />
+		<result column="watermark2" jdbcType="VARCHAR" property="watermark2" />
 	</resultMap>
 	<resultMap id="BaseResultMapVo" extends="BaseResultMap"
 		type="com.huacainfo.ace.portal.vo.DepartmentVo">
@@ -114,7 +112,7 @@
 		create_time, last_modify_time,
 		last_modify_user_id,
 		last_modify_user_name, accident_of_year,
-		complaints_remark,latitude, longitude,serviceTimeStart,serviceTimeEnd,qrcode,serviceWay,syid)
+		complaints_remark,latitude, longitude,serviceTimeStart,serviceTimeEnd,qrcode,serviceWay,syid,logo,watermark1,watermark2)
 		values
 		(#{departmentId,jdbcType=VARCHAR},
 		#{parentDepartmentId,jdbcType=VARCHAR},
@@ -153,7 +151,7 @@
 		#{lastModifyUserId,jdbcType=VARCHAR},
 		#{lastModifyUserName,jdbcType=VARCHAR},
 		#{accidentOfYear,jdbcType=LONGVARCHAR},
-		#{complaintsRemark,jdbcType=LONGVARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL},#{serviceTimeStart,jdbcType=VARCHAR},#{serviceTimeEnd,jdbcType=VARCHAR},#{qrcode,jdbcType=VARCHAR},#{serviceWay,jdbcType=VARCHAR},#{syid,jdbcType=VARCHAR})
+		#{complaintsRemark,jdbcType=LONGVARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL},#{serviceTimeStart,jdbcType=VARCHAR},#{serviceTimeEnd,jdbcType=VARCHAR},#{qrcode,jdbcType=VARCHAR},#{serviceWay,jdbcType=VARCHAR},#{syid,jdbcType=VARCHAR},#{logo,jdbcType=VARCHAR},#{watermark1,jdbcType=VARCHAR},#{watermark2,jdbcType=VARCHAR})
 	</insert>
 	<update id="updateDepartmentByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Department">
 
@@ -339,6 +337,21 @@
 				serviceWay =
 				#{serviceWay,jdbcType=VARCHAR},
 			</if>
+			<if test="logo != null">
+				logo =
+				#{logo,jdbcType=VARCHAR},
+			</if>
+
+			<if test="watermark1 != null">
+				watermark1 =
+				#{watermark1,jdbcType=VARCHAR},
+			</if>
+
+			<if test="watermark2 != null">
+				watermark2 =
+				#{watermark2,jdbcType=VARCHAR}
+			</if>
+
 		</set>
 		where department_id = #{departmentId,jdbcType=VARCHAR}
 	</update>
@@ -479,7 +492,11 @@
 		t.serviceTimeStart,
 		t.serviceTimeEnd,
 		t.qrcode,
-		t.serviceWay
+		t.serviceWay,
+		t.logo,
+		t.watermark1,
+		t.watermark2
+
 		from
 		department t
 		left join

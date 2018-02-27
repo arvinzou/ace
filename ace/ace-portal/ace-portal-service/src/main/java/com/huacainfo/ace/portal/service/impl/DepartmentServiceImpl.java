@@ -44,7 +44,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	private CacheService cacheService;
 	@Autowired
 	private ConfigService configService;
-
+	@Override
 	public PageResult<DepartmentVo> findDepartmentList(Department condition,
 			int start, int limit, String orderBy) throws Exception {
 		PageResult<DepartmentVo> rst = new PageResult<DepartmentVo>();
@@ -57,7 +57,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		}
 		return rst;
 	}
-
+	@Override
 	public MessageResponse insertDepartment(Department o, UserProp userProp)
 			throws Exception {
 
@@ -159,7 +159,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 				o.getDepartmentName(), userProp);
 		return new MessageResponse(0, "添加新机构完成！");
 	}
-
+	@Override
 	public MessageResponse updateDepartment(Department o, UserProp userProp)
 			throws Exception {
 
@@ -179,7 +179,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 				o.getDepartmentName()+","+o.getDepartmentId(), userProp);
 		return new MessageResponse(0, "机构信息变更完成！");
 	}
-
+	@Override
 	public MessageResponse updateDepartmentStautsByPrimaryKey(
 			String departmentId, String struts, UserProp userProp)
 			throws Exception {
@@ -195,7 +195,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 				userProp);
 		return new MessageResponse(0, "审核完成！");
 	}
-
+	@Override
 	public SingleResult<DepartmentVo> selectDepartmentByPrimaryKey(
 			String departmentId) throws Exception {
 		SingleResult<DepartmentVo> rst = new SingleResult<DepartmentVo>();
@@ -205,14 +205,14 @@ public class DepartmentServiceImpl implements DepartmentService {
 		rst.setStatus(0);
 		return rst;
 	}
-
+	@Override
 	public List<Tree> selectDepartmentTreeList(String id,String syid) throws Exception {
 
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
 				this.departmentDao.selectDepartmentTreeList(id,syid));
 		return commonTreeUtils.getTreeList(id);
 	}
-
+	@Override
 	public MessageResponse delDepartmentByPrimaryKey(String departmentId,
 			UserProp userProp) throws Exception {
 		if (CommonUtils.isBlank(departmentId)) {
@@ -223,7 +223,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 				userProp);
 		return new MessageResponse(0, "机构删除完成！");
 	}
-
+	@Override
 	public ListResult<Map<String, String>> selectUsersListByDepartmentId(
 			String departmentId) throws Exception {
 		ListResult<Map<String, String>> rst = new ListResult<Map<String, String>>();
@@ -235,6 +235,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		rst.setValue(list);
 		return rst;
 	}
+
 	public void regSendEamil(Map<String,Object> model) throws Exception {
 		String subject = "", content = "";
 		VelocityEngine velocityEngine = new VelocityEngine();
@@ -253,7 +254,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		data.put("to", (String)model.get("contactEmail"));
 		this.kafkaProducerService.sendMsg("GESP_SYS_INFO", data);
 	}
-
+	@Override
 	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
 		int i = 1;
 		for (Map<String, Object> row : list) {

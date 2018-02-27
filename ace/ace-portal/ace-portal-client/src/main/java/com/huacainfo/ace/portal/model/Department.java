@@ -121,6 +121,11 @@ public class Department implements java.io.Serializable{
 	private String serviceWay;
 
 	private String syid;
+	private String logo;
+	private String watermark1;
+	private String watermark2;
+
+
 
 	public String getDepartmentId() {
 		return departmentId;
@@ -584,5 +589,29 @@ public class Department implements java.io.Serializable{
 
 	public void setSyid(String syid) {
 		this.syid = syid;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public String getWatermark1() {
+		return watermark1;
+	}
+
+	public void setWatermark1(String watermark1) {
+		this.watermark1 = watermark1;
+	}
+
+	public String getWatermark2() {
+		return watermark2;
+	}
+
+	public void setWatermark2(String watermark2) {
+		this.watermark2 = watermark2;
 	}
 }
