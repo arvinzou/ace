@@ -4,8 +4,7 @@ $(function () {
     webInit();
 });
 function webInit() {
-    var url = '/portal/system/getUserProp.do';
-    $.get(url, function () {
+    $.get(userUrl, function () {
     });
 
     $('#htmlLoad').load('./../html/liveForm.html',function () {

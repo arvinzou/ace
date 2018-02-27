@@ -1,34 +1,8 @@
-
-$("#startDate").datetimepicker({
-    format: "yyyy-mm-dd hh:ii",
-    language: 'zh-CN',
-    autoclose: true,
-    todayBtn: true,
-}).on('change', function (ev) {
-    var startDate = $('#startDate').val();
-    $("#endDate").datetimepicker('setStartDate', startDate);
-    $("#startDate").datetimepicker('hide');
-});
-$("#endDate").datetimepicker({
-    format: "yyyy-mm-dd hh:ii",
-    language: 'zh-CN',
-    autoclose: true,
-    todayBtn: true,
-}).on('change', function (ev) {
-    var endDate = $("#endDate").val();
-    $("#startDate").datetimepicker('setEndDate', endDate);
-    $("#endDate").datetimepicker('hide');
-});
-
-
-$(function () {
-    $('.formRow').on('keyup', 'input', computedNumDo);
-    $('.formRow').on('keyup', 'textarea', computedNumDo);
-    $('.release').click(releaseDo);
-});
-
 /*点击发布直播*/
 function releaseDo() {
+    if(checkWordNumber()){
+        return;
+    }
     console.log('releaseDo');
     var name=$('.name').val().trim();
     var startTime=$('.startTime').val().trim();
@@ -82,63 +56,13 @@ function releaseDo() {
     });
 }
 
-/*直播名字字数的计算*/
-function computedNumDo() {
-    promptDo('');
-    var that = $(this);
-    var nowWordNumber = that.val().length;
-    var $span = that.parent().parent().find('span');
-    if (!$span.length) {
-        return;
-    }
-    var spanText=$span.text();
-    var num=spanText.substring(spanText.indexOf('/')+1,spanText.length);
-    if (nowWordNumber > num) {
-        $span.css('color', '#f00');
-    } else {
-        $span.css('color', '#666');
-    }
-    $span.text(nowWordNumber + '/' + num);
-}
-
-/*文件上传*/
-var uploader = new plupload.Uploader({
-    runtimes: 'html5,flash,silverlight,html4',
-    browse_button: 'upbtn', // you can pass an id...
-    /*container: document.getElementById('container'),*/ // ... or DOM Element itself
-    url: '/portal/files/uploadFile.do',
-    file_data_name: 'file',
-    multi_selection: false,
-    resize: {
-        width: 1024,
-        height: 1024,
-        crop: true,
-        quality: 60,
-        preserve_headers: false
-    },
-    filters: {
-        max_file_size: '1000mb',
-        mime_types: [
-            {title: "Image files", extensions: "jpg,gif,png"}
-        ]
-    },
-
-    init: {
-        FileFiltered: function (up, files) {
-            promptDo('');
-            $('.viewPicture img').prop('src','');
-            $('.uploadText').show();
-            up.start();
-            return false;
-        },
-        UploadProgress: function(e, t) {
-            var r = t.percent;
-            $(".uploadPloadprogress").html("开始上传（" + r + "%）")
-        },
-        FileUploaded: function (uploader, file, responseObject) {
-            var rst = JSON.parse(responseObject.response);
-            viewCover(rst.value[0]);
+function checkWordNumber() {
+    var flag=false;
+    $('#htmlLoad .formRow span').each(function(){
+        if('rgb(255, 0, 0)'==$(this).css('color')){
+            promptDo('超过限制字数');
+            flag=true;
         }
-    }
-});
-uploader.init();
+    });
+    return flag;
+}
