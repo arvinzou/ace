@@ -4,15 +4,31 @@ $(function () {
     initWeb();
     /*修改直播状态*/
     $('.sceneList').on('click', '.changeLiveStatus', changeLiveStatusDo);
+    $('.sceneList').on('click', '.reportNum', viewReportListByIdDo);
     /*根据直播名查找*/
     $('.search').click(searchByNameDo);
     /*按照状态分类*/
     $('.topToolBtn').on('change', '.liveStatus', searchByStatusDo);
     /*点击修改直播内容*/
     $('.sceneList').on('click', '.picbar', modifyLiveDo);
-    /*按事件排序*/
-    $('.sortLive').click(sortLiveByTimeDo);
-})
+    /*按时间排序*/
+    $('.topToolBtn').on('click', '.sortLive', sortLiveByTimeDo);
+});
+
+/*查看报道列表*/
+function viewReportListByIdDo() {
+    var rid = $(this).parents('li').data('Liveid');
+    if (!rid) {
+        return;
+    }
+    $('#htmlLoad').data('rid', rid);
+    $('#htmlLoad').load('./../html/managementReportInLive.html', function () {
+        $('#JSLoad').load('./../html/managementReportInLiveJS.html', function () {
+
+        });
+    });
+    return false;
+}
 
 /*按开始时间排序*/
 function sortLiveByTimeDo() {
@@ -30,8 +46,7 @@ function sortLiveByTimeDo() {
 
 /*初始化页面*/
 function initWeb() {
-    var url = '/portal/system/getUserProp.do';
-    $.get(url, function () {
+    $.get(userUrl, function () {
         loadLiveList();
     });
 }

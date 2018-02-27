@@ -6,21 +6,28 @@
     <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../common/css/common.css">
     <link rel="stylesheet" href="html/css/liveRpt.css">
+    <link rel="stylesheet" href="../html/css/rptForm.css">
     <link rel="stylesheet" href="../../common/css/iconfont.css">
+    <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="../../common/css/bootstrap-datetimepicker.min.css">
     <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../common/js/iconfont.js"></script>
     <script type="text/javascript" src="../../common/js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="../../common/js/common.js"></script>
     <title>创建报道</title>
 </head>
 
 <body>
-<div class="container-fluid headContainer" id="can">
+<div class="container-fluid headContainer">
     <div class="searchInput input-group form-search">
         <input type="text" class="searchByName form-control" placeholder="请输入标题关键字">
         <span class="input-group-btn">
         <button class="search btn btn-default" type="button"><i class="iconfont">&#xe60d;</i></button>
-        </span></div>
+        </span>
+    </div>
 </div>
 <div class="container-fluid content_container">
     <div class="table_content">
@@ -34,64 +41,11 @@
         </table>
     </div>
 </div>
-<div class="select_report container-fluid">
-    <div class="container-fluid form_web">
-        <div class="container_model">
-            <div class="formRow">
-                <div class="title">报道内容<span class="font-right">0/500</span></div>
-                <div class="formRow-content">
-                    <textarea rows="6" class="content form-control "></textarea>
-                </div>
-            </div>
-            <div class="formRow">
-                <div class="title">所属现场</div>
-                <div class="formRow-content">
-                    <input type="text" onlyread class="name form-control" disabled="">
-                </div>
-            </div>
-            <div class="container-fluid btn-container">
-                <button type="button" class="release btn btn-success">发布报道</button>
-                <button type="button" class="cancel btn btn-info">取消报道</button>
-                <span class="prompt"></span></div>
-        </div>
-        <div class="container_model container_right">
-            <div class="formRow">
-                <div class="title">报道类型</div>
-                <div class="formRow-content">
-                    <div>
-                        <label>
-                            <input name="category" type="radio" value="2" checked>
-                            图文报道 </label>
-                        <label>
-                            <input name="category" type="radio" value="1">
-                            视频报道 </label>
-                    </div>
-                </div>
-            </div>
-            <div class="formRow formRowImg">
-                <ul class="reportImageUploadList">
-                    <li class="Iupbtn">
-                        <div class="uploadText" id="Iupbtn">
-                            <p class="imgiocn"><i class="iconfont">&#xe648;</i></p>
-                            <p class="uploadImagePloadprogress">点击上传图片</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="formRow formRowVdo">
-                <div class="reportVideoUploadList" id="Vupbtn">
-                    <div class="viewPicture">
-                        <video src=''></video>
-                    </div>
-                    <div class="uploadText">
-                        <p class="imgiocn"><i class="iconfont">&#xe64a;</i></p>
-                        <p class="uploadVideoPloadprogress">点击上传视频</p>
-                    </div>
-                    <span class="removeIcon removeVideo"><i class="iconfont">&#xe628;</i></span>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="htmlLoad">
+
+</div>
+<div id="JSLoad">
+
 </div>
 </body>
 <script type="text/javascript" src="html/js/liveRpt.js"></script>

@@ -146,7 +146,7 @@ public class LiveRptServiceImpl implements LiveRptService {
         /*删除图片*/
         liveImgDao.deleteByRptId(obj.getId());
         boolean flag = true;
-        for(LiveImg img : imgs){
+        for (LiveImg img : imgs) {
             if (flag) {
                 obj.setMediaContent(img.getUrl());
                 flag = false;
@@ -232,7 +232,12 @@ public class LiveRptServiceImpl implements LiveRptService {
     @Override
     public SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id) throws Exception {
         SingleResult<LiveRptVo> rst = new SingleResult<LiveRptVo>();
-        rst.setValue(this.liveRptDao.selectByPrimaryKey(id));
+        //获取nickName
+        String nickName;
+        LiveRptVo vo = this.liveRptDao.selectByPrimaryKey(id);
+        nickName = liveRptDao.findNickNameByRid(vo.getRid(), vo.getId());
+        vo.setNickName(nickName);
+        rst.setValue(vo);
         return rst;
     }
 

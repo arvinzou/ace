@@ -1,163 +1,41 @@
 /* CSS Document */
-body{
-	color: #666;
-	height: 100%;
+body {
+    height: 100%;
 }
 
-html{
-	height:100%;
+html {
+    height: 100%;
 }
-.searchInput{
-	width: 400px;
+
+.headContainer {
+    padding: 10px 40px;
+    background-color: #f7faff;
+    border-bottom: solid 1px #e5e8ee;
 }
-.headContainer{
-	padding:10px 40px;
-	background-color:#f7faff; 
-	border-bottom: solid 1px #e5e8ee;
+
+.headContainer .searchInput {
+    max-width: 300px;
+    z-index: 0;
 }
+
+.content_container {
+    padding: 30px 40px;
+    height: 100%;
+    overflow-y: auto;
+}
+
 .table-striped > tr:nth-of-type(2n+1) {
     background-color: #f3f8fd;
 }
 
-.table-striped > tr>td{
-	height: 60px;
-	vertical-align: middle;
-	border-top:none;
+.table-striped > tr > td {
+    height: 60px;
+    vertical-align: middle;
+    border-top: none;
 }
-.table_content{
-	border-radius: 10px;
+
+.table_content {
+    border-radius: 10px;
     border: 1px solid #e2e7f6;
     overflow: hidden;
-}
-.content_container{
-	padding:30px 40px;
-	height: 100%;
-	overflow-y: auto;
-}
-.container_model{
-	float: left;
-	width:50%;
-}
-
-.formRow {
-	overflow:hidden;
-	margin-bottom: 30px;
-	padding: 0;
-}
-
-.font-right{
-	float: right!important;
-}
-.container_right{
-	padding-left: 40px;
-}
-
-.formRow-content label{
-	padding: 0 5px;
-	margin: 0 10px 0 0;
-	white-space: nowrap;
-	font-weight: normal;
-	cursor: pointer;
-}
-.select_report{
-	z-index: 100;
-	width:100%;
-	position: absolute;
-	top:0px;
-	padding: 60px;
-	background-color: rgba(0,0,0,0.56);
-	display: none;
-	height: 100%;
-	overflow-y: auto;
-}
-
-.form_web{
-	padding: 40px;
-	background-color: white;
-	border-radius: 10px;
-}
-
-.btn-container{
-	padding: 40px 0px;
-}
-
-
-
-
-img{
-	width: 100%;
-}
-
-video{
-	width: 100%;
-	height: 100%;
-}
-
-.removeIcon{
-	position: absolute;
-	top:0px;
-	left: 0px;
-	margin: 4px;
-	height: 30px;
-	width: 30px;
-	line-height: 30px;
-	border-radius: 15px;
-	text-align: center;
-	cursor: pointer;
-	background-color:rgba(217,83,79,0.56);
-	z-index: 100;
-}
-
-.reportImageUploadList {
-	list-style: none;
-	padding: 0px;
-}
-
-.reportImageUploadList li,.reportVideoUploadList{
-	position: relative;
-	width: 240px;
-	height: 135px;
-	float: left;
-	margin: 5px;
-	cursor: pointer;
-}
-
-.reportImageUploadList li div,.viewPicture{
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	border: 1px dashed #b4bed3;
-	border-radius: 5px;
-}
-
-
-.uploadText{
-	position: absolute;
-	top:0;
-	left: 0;
-	padding: 20px;
-	width: 100%;
-	height: 100%;
-	text-align: center;
-}
-
-.uploadText .iconfont{
-	font-size: 40px;
-}
-
-.uploadText:hover{
-	color: #1a9fff;
-}
-
-.removeIcon:hover{
-	background-color:rgba(217,83,79,0.9);
-	color:white;
-}
-
-.removeVideo{
-	display: none;
-}
-
-.prompt{
-	color:rgba(217,83,79,1);
 }
