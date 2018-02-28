@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>企业单位基本信息</title>
 </head>
-
-
-<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css" />
-
+<jsp:include page="../../common/common-base.jsp"/>
 <script type="text/javascript">
-
-
 </script>
 <body>
-
+<jsp:include page="../../common/footer-base.jsp"/>
+<script src="${pageContext.request.contextPath}/content/service/company/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/company/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/company/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/company/view.js?version=${cfg.version}"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/company/style.css?version=${cfg.version}" />
 </body>
 </html>
