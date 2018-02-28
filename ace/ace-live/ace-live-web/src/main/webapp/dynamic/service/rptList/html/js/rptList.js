@@ -14,7 +14,43 @@ $(function () {
     $('.topToolBtn').on('change', '#chooseStatus',searchByStatusDo);
     /*按名字搜索*/
     $('.search').on('click', searchByNameDo);
+    /*开始删除*/
+    $('.topToolBtn').on('click', '.delect-rpt', delectRptDo);
+
+    $('#liveReportTable').on('click', '.Topcheckbox', function (e) {
+
+        e.stopPropagation();
+    });
 });
+
+
+
+/*删除报道*/
+function delectRptDo() {
+    $('#liveReportTable .Topcheckbox input').each(function () {
+        if ($(this).prop('checked')) {
+            var id = $(this).parents('li').data('id');
+            var rid =$(this).parents('li').data('rid');
+            modifyStatus(id,rid,0);
+        }
+    });
+    searchByNameDo();
+}
+
+// /*全选选择*/
+// function selectAllDo() {
+//     console.log('selectAllDo');
+//     var text = $(this).text();
+//     if ('全选' == text) {
+//         $(this).text('取消全选');
+//         $('#liveReportTable .Topcheckbox input').prop({checked: true});
+//     } else if ('取消全选' == text) {
+//         $(this).text('全选');
+//         $('#liveReportTable .Topcheckbox input').prop({checked: false});
+//     }
+//     return false;
+// }
+
 
 /*根据id查找图片*/
 function findCover(id) {
@@ -122,15 +158,19 @@ function searchByStatusDo() {
 
 /*发布报道*/
 function startPublicationDo() {
-    console.log('发布报道');
-    var $this = $(this);
-    var id = $this.parents('li').data('id');
-    var rid =$this.parents('li').data('rid');
+    var id = $(this).parents('li').data('id');
+    var rid =$(this).parents('li').data('rid');
+    modifyStatus(id,rid,2);
+    searchByNameDo();
+}
+
+/*修改状态*/
+function modifyStatus(id,rid,status){
     var url = '/live/liveRpt/updateLiveRptStatus.do';
     var data = {
         'id': id,
         'rid': rid,
-        'status': 2,
+        'status': status,
         'message': JSON.stringify(
             {
                 "header": {
@@ -140,9 +180,6 @@ function startPublicationDo() {
         )
     };
     $.getJSON(url, data, function (result) {
-        if (result.status == 0) {
-            searchByNameDo();
-        }
     });
 }
 
@@ -159,6 +196,9 @@ function viewReportList(data) {
     for (var i = 0; i < data.length; i++) {
         var btnSpace = '';
         var liReport = '';
+        var checkboxTemplate = '<label class="Topcheckbox">' +
+            '                    <input type="checkbox">' +
+            '                </label>';
         if (1 == data[i].mediaType) {
             liReport = reportVideoTemplate;
         } else if (2 == data[i].mediaType) {
@@ -171,14 +211,17 @@ function viewReportList(data) {
         }
         if (1 == data[i].status) {
             btnSpace = '<a class="publication">发布</a><a class="preview-report">预览</a>';
-        }else{
+        }else if(2 == data[i].status){
             btnSpace = '<a class="preview-report">预览</a>';
+        }else if(0 == data[i].status){
+            continue;
         }
         liReport = liReport.replace('[mediaContent]', data[i].mediaContent);
         liReport = liReport.replace('[content]', data[i].content);
         liReport = liReport.replace('[createTime]', data[i].createTime.substring(0, 16));
         liReport = liReport.replace('[btnSpace]', btnSpace);
         liReport = liReport.replace('[id]', data[i].id);
+        liReport = liReport.replace('[checkbox]', checkboxTemplate);
         liReport = liReport.replace('[name]', data[i].nickName);
         var $liReport = $(liReport);
         $liReport.data("id", data[i].id);
@@ -266,6 +309,9 @@ function viewPreviewReport(data) {
     }
     $('.preview .preview-right span').text(data.content);
 }
+
+
+
 
 
 

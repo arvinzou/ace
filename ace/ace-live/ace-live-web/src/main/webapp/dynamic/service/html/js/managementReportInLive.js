@@ -6,11 +6,26 @@ $(function () {
     $('.rptManageBtnList').on('click', '.search', searchByNameDo);
     $('.rptManageBtnList').on('click', '.startSort', sortActionDo);
     $('.rptManageBtnList').on('click', '.select-all-Btn', selectAllDo);
-    $('.rptManageBtnList').on('click', '.download-file', downloadFileDo);
+    $('.rptManageBtnList').on('click', '.download-files', downloadFilesDo);
+    $('.liveInRptList').on('click', '.download-file', downloadFileDo);
 });
 
 function downloadFileDo() {
-    console.log(1);
+    var id = $(this).parents('li').data('id');
+    if (!id) {
+        return;
+    }
+    var url = '/live/liveRpt/selectLiveRptByPrimaryKey.do';
+    var data = {
+        'id': id
+    };
+    $.getJSON(url, data, function (result) {
+        actiondownload(result.value);
+    });
+}
+
+/*点击下载文件*/
+function downloadFilesDo() {
     $('#htmlLoad .liveInRptList .Topcheckbox input').each(function () {
         if ($(this).prop('checked')) {
             var id = $(this).parents('li').data('id');
@@ -42,23 +57,36 @@ function actiondownload(data) {
                     var imgdata = result.rows;
                     $('.preview-img img').show();
                     for (var i = 0; i < imgdata.length; i++) {
-                        toUpload(imgdata[i].url);
+                        uploadfile(imgdata[i].url);
                     }
                 }
             });
         }
     } else if ('1' == data.mediaType) {
         console.log(4);
-        toUpload(data.mediaContent);
+        uploadfile(data.mediaContent);
     } else if ('3' == data.mediaType) {
         console.log(5);
-        toUpload(data.mediaContent);
+        uploadfile(data.mediaContent);
     }
 }
 
-function toUpload(fileUrl) {
-    console.log(fileUrl);
-    window.open(fileUrl, "navTab");
+function uploadfile(url) {
+    $('#downloadKey').prop('href', url);
+    $('#downloadKey').prop('download', getFileName(url));
+    document.getElementById('downloadKey').click();
+}
+
+function getFileName(url) {
+    return url.substring(url.indexOf('filename=') + 9, url.length);
+}
+
+
+function is_ie() { //ie?
+    if (!!window.ActiveXObject || "ActiveXObject" in window)
+        return true;
+    else
+        return false;
 }
 
 
@@ -147,19 +175,24 @@ function loadReportList(content, mediaType) {
 function viewReportList(data) {
     $('.liveInRptList').empty();
     for (var i = 0; i < data.length; i++) {
-        var btnSpace = '';
+        var btnSpace = '<a class="download-file">下载</a>';
+        var checkboxTemplate = '<label class="Topcheckbox">' +
+            '                    <input type="checkbox">' +
+            '                </label>';
         var liReport = '';
+
         if (1 == data[i].mediaType) {
             liReport = reportVideoTemplate;
         } else if (2 == data[i].mediaType) {
             liReport = reportImgTemplate;
             if (data[i].mediaContent == null || data[i].mediaContent.trim() == '') {
                 liReport = reportTextTemplate;
+                btnSpace='';
+                checkboxTemplate='';
             }
-        } else {
+        } else if (3 == data[i].mediaType) {
             liReport = reportAudioTemplate;
         }
-        btnSpace = '<a class="download-file">下载</a>';
         liReport = liReport.replace('[mediaContent]', data[i].mediaContent);
         liReport = liReport.replace('[content]', data[i].content);
         liReport = liReport.replace('[createTime]', data[i].createTime.substring(0, 16));

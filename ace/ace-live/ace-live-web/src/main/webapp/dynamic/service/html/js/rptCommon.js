@@ -1,5 +1,3 @@
-var uploaderI;
-var uploaderV;
 $(function () {
     init();
     $('.reportImageUploadList').on('click', '.removeImage', removeImgDo);
@@ -73,11 +71,10 @@ function actionPromptDo() {
 
 
 function chooseVideoRptDo() {
-    console.log('视频');
     $('.formRowVdo').show();
     $('.formRowImg').hide();
     if (uploaderV) {
-        return;
+        uploaderV.destroy();
     }
     /*文件上传*/
     uploaderV = new plupload.Uploader({
@@ -119,6 +116,11 @@ function chooseVideoRptDo() {
             },
             Error: function (e, t) {
                 t.code == -600 ? alert("上传的图片太大，请压缩到20M内") : t.code == -601 ? alert("不支持该格式！") : t.code == -602 ? alert("文件已选择！") : $("#j-row-img .j-uploader-tip p").html("文件上传失败：" + t.message)
+            },
+            destroy : function() {
+                // this.trigger('Destroy');
+                // settings = total = null; // purge these exclusively
+                this.unbindAll();
             }
         }
     });
@@ -126,11 +128,10 @@ function chooseVideoRptDo() {
 }
 
 function chooseImageRptDo() {
-    console.log('图片');
     $('.formRowVdo').hide();
     $('.formRowImg').show();
     if (uploaderI) {
-        return;
+        uploaderI.destroy();
     }
     /*文件上传*/
     uploaderI = new plupload.Uploader({
@@ -179,6 +180,11 @@ function chooseImageRptDo() {
             },
             Error: function (e, t) {
                 t.code == -600 ? alert("上传的图片太大，请压缩到20M内") : t.code == -601 ? alert("不支持该格式！") : t.code == -602 ? alert("文件已选择！") : $("#j-row-img .j-uploader-tip p").html("文件上传失败：" + t.message)
+            },
+            destroy : function() {
+                // this.trigger('Destroy');
+                // settings = total = null; // purge these exclusively
+                this.unbindAll();
             }
         }
     });
