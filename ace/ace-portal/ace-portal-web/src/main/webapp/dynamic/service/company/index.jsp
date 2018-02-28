@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>企业单位基本信息</title>
 </head>
-<jsp:include page="../../common/common-base.jsp"/>
+<jsp:include page="../../common/header.jsp"/>
 <script type="text/javascript">
 </script>
 <body>
-<jsp:include page="../../common/footer-base.jsp"/>
+<jsp:include page="../../common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/service/company/config.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/company/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/company/controller.js?version=${cfg.version}"></script>
