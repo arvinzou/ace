@@ -13,6 +13,8 @@ request.setAttribute("now", CommonUtils.formatDate(new Date()));
 <script type="text/javascript">
 window.jQuery || document.write("<script src='${portalPath}/content/common/assets/js/gz/jquery.min.js?version=${cfg.version}'>"+"<"+"/script>");
 </script>
+<link href="//cdn.bootcss.com/tether/1.3.6/css/tether.min.css" rel="stylesheet">
+<script src="//cdn.bootcss.com/tether/1.3.6/js/tether.min.js"></script>
 <link rel="stylesheet" href="${portalPath}/content/common/bootstrap/css/bootstrap.min.css?version=${cfg.version}" />
 <script type="text/javascript">
 	var contextPath = '${pageContext.request.contextPath}';
