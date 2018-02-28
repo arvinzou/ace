@@ -1,8 +1,10 @@
 jQuery(function($) {
     renderForm();
-    renderUploader1();
+    uploader1=renderUploader("logo");
+    uploader2=renderUploader("watermark1");
+    uploader3=renderUploader("watermark2");
 });
-var uploader1;
+var uploader1,uploader2,uploader3;
 function renderForm() {
     var e = new cake.tplform("j-editform", formModel);
     e.render($("#j-editform .row-content"),function(e) {
@@ -12,12 +14,12 @@ function renderForm() {
     });
 }
 
-function renderUploader1() {
-    uploader1 = new plupload.Uploader({
+function renderUploader(key) {
+    uploader = new plupload.Uploader({
         runtimes: "html5,flash,silverlight,html4",
-        browse_button: "j-cover",
+        browse_button: "j-cover-"+key,
         multi_selection: false,
-        container: document.getElementById("j-uploader-cnt"),
+        container: document.getElementById("j-uploader-cnt-"+key),
         flash_swf_url: portalPath+"/content/common/plupload/Moxie.swf",
         silverlight_xap_url: portalPath+"/content/common/plupload/Moxie.xap",
         url: portalPath+"/department/upload.do",
@@ -40,14 +42,14 @@ function renderUploader1() {
         init: {
             PostInit: function() {},
             FilesAdded: function(t, a) {
-                $("#j-cover").addClass("fn-hide"),
-                $("#j-row-img .j-uploader-tip").removeClass("fn-hide"),
-                $("#j-row-img .j-uploader-tip p em").html("开始上传"),
+                $("#j-cover-"+key).addClass("fn-hide"),
+                $("#j-row-img-"+key+" .j-uploader-tip").removeClass("fn-hide"),
+                $("#j-row-img-"+key+" .j-uploader-tip p em").html("开始上传"),
                 t.start()
             },
             UploadProgress: function(e, t) {
                 var r = t.percent;
-                $("#j-row-img .j-uploader-tip p em").html("正在上传（" + r + "%）");
+                $("#j-row-img-"+key+" .j-uploader-tip p em").html("正在上传（" + r + "%）");
             },
             FileUploaded: function(t, i, a) {
                 if (200 == a.status) {
@@ -59,7 +61,7 @@ function renderUploader1() {
                     l.onload = l.onerror = function() {
                         var e = l.width;
                         t = l.height;
-                        $("#j-row-img .j-uploader-tip p em").html("（100%）");
+                        $("#j-row-img-"+key+" .j-uploader-tip p em").html("（100%）");
                         var i = $('<div class="xcy-cutimg fn-left fn-mr10 fn-mb10"><div class="imgbar"><span class="close"><i class="pz-icon icon-close"></i></span><img src="' + o + '"></div></div>');
                         i.data({
                             fileurl: o,
@@ -68,15 +70,15 @@ function renderUploader1() {
                         });
                         i.find(".close").click(function() {
                             i.remove();
-                            $("#j-cover").removeClass("fn-hide");
+                            $("#j-cover-"+key).removeClass("fn-hide");
                         });
-                        $("#j-uploader-rst").html(i);
-                        $("#j-row-img .j-uploader-tip p em").html("");
-                        $("#j-row-img .j-uploader-tip").addClass("fn-hide");
-                        $("#j-cover").addClass("fn-hide");
+                        $("#j-uploader-rst-"+key).html(i);
+                        $("#j-row-img-"+key+" .j-uploader-tip p em").html("");
+                        $("#j-row-img-"+key+" .j-uploader-tip").addClass("fn-hide");
+                        $("#j-cover-"+key).addClass("fn-hide");
                     }
                 } else {
-                    $("#j-row-img .j-uploader-tip p em").html(a.response)
+                    $("#j-row-img-"+key+" .j-uploader-tip p em").html(a.response)
                 }
             },
             Error: function(e, t) {
@@ -84,5 +86,7 @@ function renderUploader1() {
             }
         }
     });
-    uploader1.init();
+    uploader.init();
+
+    return uploader;
 }

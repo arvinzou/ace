@@ -28,10 +28,10 @@
                     <div class="rows row100">
                         <div class="row-title">LOGO</div>
                         <div class="row-content">
-                            <div id="j-row-img">
-                                <div id="j-uploader-tip" class="fn-hide j-uploader-tip"><p><em></em></p></div>
-                                <div id="j-uploader-rst"></div>
-                                <div id="j-cover" class="xcy-cutimg">
+                            <div id="j-row-img-logo">
+                                <div class="fn-hide j-uploader-tip"><p><em></em></p></div>
+                                <div id="j-uploader-rst-logo"></div>
+                                <div id="j-cover-logo" class="xcy-cutimg">
                                     <label class="upbtn">
                                         <div class="imgbar fn-textleft fn-hide">
                                             <span class="close"><i class="pz-icon icon-close"></i></span>
@@ -47,7 +47,7 @@
                                 </div>
 
                             </div>
-                            <div id="j-uploader-cnt"></div>
+                            <div id="j-uploader-cnt-logo"></div>
 
                         </div>
                     </div>
