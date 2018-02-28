@@ -40,7 +40,7 @@ function sortLiveByTimeDo() {
         orderByStr = 'startTime';
         $(this).data('flag', true);
     }
-    searchByNameDo(orderByStr);
+    searchByNameDo();
 }
 
 
@@ -52,7 +52,7 @@ function initWeb() {
 }
 
 /*下载直播数据*/
-function loadLiveList(name, liveStatus, orderByStr) {
+function loadLiveList(name, liveStatus) {
     var url = '/live/live/findLiveList.do';
     var data = {
         'name': name,
@@ -133,10 +133,10 @@ function modifyStatus(dataLive) {
 }
 
 /*按名字搜索直播*/
-function searchByNameDo(orderByStr) {
+function searchByNameDo() {
     var liveStatus = $('.liveStatus').val();
     var inputName = $('.searchByName').val();
-    loadLiveList(inputName, liveStatus, orderByStr);
+    loadLiveList(inputName, liveStatus);
 }
 
 /*根据状态查找*/

@@ -4,6 +4,8 @@ var userUrl = '/portal/system/getUserProp.do';
 var limit = 1000;
 var userProp;
 var start = 0;
+var uploaderI=null;
+var uploaderV=null;
 /*直播模板*/
 var liveTemplate = ' <li>' +
     '             <div class="picbar">' +
@@ -127,8 +129,3 @@ var reportAudioTemplate = '<li id="[id]">' +
     '                </span>[btnSpace]' +
     '            </div>' +
     '        </li>';
-
-
-var checkboxTemplate = '<label class="Topcheckbox">' +
-    '                    <input type="checkbox">' +
-    '                </label>';
