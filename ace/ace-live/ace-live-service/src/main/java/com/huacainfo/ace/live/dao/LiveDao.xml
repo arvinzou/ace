@@ -98,64 +98,64 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.live.model.Live" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.live.model.Live">
         update live
         <set>
-            <if test="areaCode != null" >
+            <if test="areaCode != null">
                 areaCode = #{areaCode,jdbcType=VARCHAR},
             </if>
-            <if test="name != null" >
+            <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="category != null" >
+            <if test="category != null">
                 category = #{category,jdbcType=VARCHAR},
             </if>
-            <if test="endTime != null" >
+            <if test="endTime != null">
                 endTime = #{endTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="startTime != null" >
+            <if test="startTime != null">
                 startTime = #{startTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="remark != null" >
+            <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
-            <if test="nop != null" >
+            <if test="nop != null">
                 nop = #{nop,jdbcType=BIGINT},
             </if>
-            <if test="pop != null" >
+            <if test="pop != null">
                 pop = #{pop,jdbcType=BIGINT},
             </if>
-            <if test="addr != null" >
+            <if test="addr != null">
                 addr = #{addr,jdbcType=VARCHAR},
             </if>
-            <if test="rtmpUrl != null" >
+            <if test="rtmpUrl != null">
                 rtmpUrl = #{rtmpUrl,jdbcType=VARCHAR},
             </if>
-            <if test="mp4Url != null" >
+            <if test="mp4Url != null">
                 mp4Url = #{mp4Url,jdbcType=VARCHAR},
             </if>
-            <if test="imageSrc != null" >
+            <if test="imageSrc != null">
                 imageSrc = #{imageSrc,jdbcType=VARCHAR},
             </if>
-            <if test="latitude != null" >
+            <if test="latitude != null">
                 latitude = #{latitude,jdbcType=DECIMAL},
             </if>
-            <if test="longitude != null" >
+            <if test="longitude != null">
                 longitude = #{longitude,jdbcType=DECIMAL},
             </if>
-            <if test="status != null" >
+            <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
-            <if test="lastModifyUserId != null" >
+            <if test="lastModifyUserId != null">
                 lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
             </if>
-            <if test="lastModifyUserName != null" >
+            <if test="lastModifyUserName != null">
                 lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
             </if>
-            <if test="lastModifyDate != null" >
+            <if test="lastModifyDate != null">
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="content != null" >
+            <if test="content != null">
                 content = #{content,jdbcType=LONGVARCHAR}
             </if>
         </set>
@@ -205,6 +205,7 @@
     </select>
     <select id="getLiveList" resultType="map">
         <![CDATA[
+
         select
         2 commentApproveType,
         concat(#{fastdfs_server},imageSrc) cover,
@@ -221,10 +222,12 @@
         name topic,
         category type,
         null watermarkConfig from live where deptId=#{companyId} order by startTime desc  limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+
         ]]>
     </select>
     <select id="getLive" resultType="map">
         <![CDATA[
+
         select
         null allowApprove,
         null allowClose,
@@ -255,6 +258,7 @@
         category type,
         null watermarkConfig
         from live where id=#{id}
+
         ]]>
     </select>
 
@@ -428,4 +432,10 @@
     <update id="updateLiveVisitNum">
         update live set nop=ifnull(nop,0)+1 where id=#{id}
     </update>
+
+    <select id="selectSysUserByOpenid" parameterType="java.lang.String" resultType="java.util.Map">
+        select *
+        from users
+        where openid = #{openid,jdbcType=VARCHAR}
+    </select>
 </mapper>

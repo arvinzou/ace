@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.huacainfo.ace.portal.service.WxCfgService;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -66,7 +67,7 @@ public class WWWController extends LiveBaseController {
     @Autowired
     private FilesService filesService;
 
-    private WaterMarkUtils waterMarkUtils=new WaterMarkUtils();
+    private WaterMarkUtils waterMarkUtils = new WaterMarkUtils();
 
 
     /**
@@ -179,7 +180,6 @@ public class WWWController extends LiveBaseController {
     }
 
 
-
     /**
      * @throws
      * @Title:getLiveSubList
@@ -260,13 +260,13 @@ public class WWWController extends LiveBaseController {
 
     @RequestMapping(value = "/upload.do")
     @ResponseBody
-    public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName,String marktext,String companyId)
+    public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName, String marktext, String companyId)
             throws Exception {
         logger.info("=========================");
         logger.info(marktext);
         logger.info(companyId);
-        if(CommonUtils.isBlank(companyId)){
-            companyId="00010001";
+        if (CommonUtils.isBlank(companyId)) {
+            companyId = "00010001";
         }
         Map<String, Object> rst = new HashMap<String, Object>();
         String[] fileNames = new String[file.length];
@@ -276,31 +276,31 @@ public class WWWController extends LiveBaseController {
             tmp.mkdirs();
         }
         int i = 0;
-        waterMarkUtils.BASE_PATH=dir+File.separator;
-        String logoDir=this.getRequest().getSession().getServletContext().getRealPath(File.separator)+"content"+File.separator+"www"+File.separator+"img"+File.separator;
-        waterMarkUtils.MARK_LOGO_IMAGE_01=logoDir+companyId+"-logo1.png";
-        waterMarkUtils.MARK_LOGO_IMAGE_02=logoDir+companyId+"-logo2.png";
-        if(marktext!=null){
-            waterMarkUtils.MARK_LOGO_IMAGE_04=logoDir+companyId+"-logo4.png";
-            waterMarkUtils.MARK_TEXT=marktext;
-        }else{
-            waterMarkUtils.MARK_LOGO_IMAGE_04=null;
-            waterMarkUtils.MARK_TEXT=null;
+        waterMarkUtils.BASE_PATH = dir + File.separator;
+        String logoDir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "content" + File.separator + "www" + File.separator + "img" + File.separator;
+        waterMarkUtils.MARK_LOGO_IMAGE_01 = logoDir + companyId + "-logo1.png";
+        waterMarkUtils.MARK_LOGO_IMAGE_02 = logoDir + companyId + "-logo2.png";
+        if (marktext != null) {
+            waterMarkUtils.MARK_LOGO_IMAGE_04 = logoDir + companyId + "-logo4.png";
+            waterMarkUtils.MARK_TEXT = marktext;
+        } else {
+            waterMarkUtils.MARK_LOGO_IMAGE_04 = null;
+            waterMarkUtils.MARK_TEXT = null;
         }
         for (MultipartFile o : file) {
             File dest = new File(dir + File.separator + o.getName());
-            String fileName=o.getOriginalFilename().toLowerCase();
+            String fileName = o.getOriginalFilename().toLowerCase();
 
             o.transferTo(dest);
-            this.logger.info("=================>{}",fileName);
-            if(fileName.endsWith("jpg")||fileName.endsWith("jpeg")||fileName.endsWith("bmp")||fileName.endsWith("png")){
-                String f=waterMarkUtils.waterMarkBySingleImage(dest);
-                this.logger.info("=================>{}",f);
-                File mark=new File(waterMarkUtils.BASE_PATH + f);
+            this.logger.info("=================>{}", fileName);
+            if (fileName.endsWith("jpg") || fileName.endsWith("jpeg") || fileName.endsWith("bmp") || fileName.endsWith("png")) {
+                String f = waterMarkUtils.waterMarkBySingleImage(dest);
+                this.logger.info("=================>{}", f);
+                File mark = new File(waterMarkUtils.BASE_PATH + f);
                 fileNames[i] = this.fileSaver.saveFile(mark,
                         o.getOriginalFilename());
                 mark.delete();
-            }else{
+            } else {
                 fileNames[i] = this.fileSaver.saveFile(dest,
                         o.getOriginalFilename());
             }
@@ -331,4 +331,14 @@ public class WWWController extends LiveBaseController {
         return new MessageResponse(0, "OK");
     }
 
+
+    @RequestMapping(value = "/insertLive.do")
+    @ResponseBody
+    public MessageResponse insertLive(String data) {
+        Map<String, String> params = new HashMap<>();
+        params.put("jsons", data);
+        this.kafkaProducerService.sendMsg("live", data);
+        return new MessageResponse(0, "OK");
+
+    }
 }

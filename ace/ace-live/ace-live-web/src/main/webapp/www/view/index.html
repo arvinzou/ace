@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/live/content/www/css/iconfont.css"/>
     <link rel="stylesheet" href="/live/content/www/css/index.css"/>
     <script src="/live/content/www/js/init-rem.js"></script>
+    <!--用戶信息-->
+    <script src="/live/www/oauth2/cfg.do"></script>
 </head>
 <body>
 <div class="fn-contain">
@@ -52,6 +54,9 @@
             </ul>
         </script>
     </section>
+
+    <!--管理员新增直播-->
+    <div id="add_note_icon" class="fn-hide"></div>
 </div>
 
 
@@ -69,5 +74,42 @@
 <script src="/live/content/www/js/soshm.js"></script>
 <script src="/live/content/www/js/spm.js"></script>
 <script src="/live/content/www/live/index.js"></script>
+
+<style>
+    /** 右下角跳转按钮 跳转到添加页 */
+    #add_note_icon {
+        position: fixed;
+        bottom: 8%;
+        right: 8%;
+        z-index: 888;
+        background: red;
+        width: 1.6rem;
+        height: 1.6rem;
+        border-radius: 50%;
+        box-shadow: .03rem .03rem .03rem #888888;
+        opacity: 0.9;
+    }
+
+    #add_note_icon:before, #add_note_icon:after {
+        content: "";
+        display: block;
+        background: #fff;
+        position: absolute;
+    }
+
+    #add_note_icon:before {
+        width: .025rem;
+        height: 1.15rem;
+        left: 0.8rem;
+        top: .25rem;
+    }
+
+    #add_note_icon:after {
+        width: 1.15rem;
+        height: .025rem;
+        left: .25rem;
+        top: 0.8rem;
+    }
+</style>
 </body>
 </html>
