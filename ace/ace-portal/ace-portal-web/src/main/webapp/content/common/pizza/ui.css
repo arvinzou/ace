@@ -2669,7 +2669,7 @@ a {
 	border-top: solid 1px #fff
 }
 
-.pz-form,.pz-form .wrap {
+.pz-form .wrap {
 	border-bottom: solid 1px #eee
 }
 
@@ -3517,10 +3517,8 @@ video {
 
 .xcy-cutimg .imgbar {
 	position: absolute;
-	width: 240px;
-	height: 135px;
+	width: 236px;
 	border-radius: 5px;
-	overflow: hidden;
 	background-color: #fff
 }
 

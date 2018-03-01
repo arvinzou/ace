@@ -14,7 +14,7 @@
 <div class="fn-pl40 fn-pr40 fn-pt30 fn-pb30 fn-clear">
     <div class="pz-form">
         <form id="j-editform" onsubmit="return false">
-            <div class="wrap fn-clear fn-pb20">
+            <div class="wrap fn-clear fn-pb40">
                 <div class="group2">
                     <div class="formtitle fn-mb15">基本信息</div>
                     <div class="rows row100">
@@ -25,7 +25,7 @@
                         <div class="row-title">机构简称</div>
                         <div class="row-content" data-field="shortName"></div>
                     </div>
-                    <div class="rows row100">
+                    <div class="rows row100 ">
                         <div class="row-title">LOGO</div>
                         <div class="row-content">
                             <div id="j-row-img-logo">
@@ -60,22 +60,52 @@
                     <div class="rows row100">
                         <div class="row-title">图片水印1</div>
                         <div class="row-content">
-                            <div id="j-videocover1" class="xcy-cutimg">
-                                <label class="upbtn">
-                                    <div class="imgbar fn-textleft fn-hide">
-                                        <span class="close"><i class="pz-icon icon-close"></i></span>
-                                        <span class="logo fn-pt30"></span>
-                                    </div>
-                                    <div class="fn-pt25">
-                                        <i class="pz-icon icon-img"></i>
-                                        <p class="fn-textcenter fn-mt5">点击选择直播水印</p>
-                                    </div>
-                                    <div class="j-file-input fn-hide">
-                                        <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png">
-                                    </div>
-                                </label>
+                            <div id="j-row-img-watermark1">
+                                <div class="fn-hide j-uploader-tip"><p><em></em></p></div>
+                                <div id="j-uploader-rst-watermark1"></div>
+                                <div id="j-cover-watermark1" class="xcy-cutimg">
+                                    <label class="upbtn">
+                                        <div class="imgbar fn-textleft fn-hide">
+                                            <span class="close"><i class="pz-icon icon-close"></i></span>
+                                            <span class="logo"></span>
+                                        </div>
+                                        <div class="fn-pt25">
+                                            <i class="pz-icon icon-img"></i>
+                                            <p class="fn-textcenter fn-mt5">点击选择水印图片</p>
+                                        </div>
+
+                                    </label>
+                                    <div class="fn-mt5 pz-color-gray">支持92px*22px图片大小格式png</div>
+                                </div>
+
                             </div>
-                            <div class="fn-mt5 pz-color-gray">图片大小：92px*22px<br>图片格式：png</div>
+                            <div id="j-uploader-cnt-watermark1"></div>
+                        </div>
+                    </div>
+
+                    <div class="rows row100 fn-mt20">
+                        <div class="row-title">图片水印2</div>
+                        <div class="row-content">
+                            <div id="j-row-img-watermark2">
+                                <div class="fn-hide j-uploader-tip"><p><em></em></p></div>
+                                <div id="j-uploader-rst-watermark2"></div>
+                                <div id="j-cover-watermark2" class="xcy-cutimg">
+                                    <label class="upbtn">
+                                        <div class="imgbar fn-textleft fn-hide">
+                                            <span class="close"><i class="pz-icon icon-close"></i></span>
+                                            <span class="logo"></span>
+                                        </div>
+                                        <div class="fn-pt25">
+                                            <i class="pz-icon icon-img"></i>
+                                            <p class="fn-textcenter fn-mt5">点击选择水印图片</p>
+                                        </div>
+
+                                    </label>
+                                    <div class="fn-mt5 pz-color-gray">支持92px*22px图片大小格式png</div>
+                                </div>
+
+                            </div>
+                            <div id="j-uploader-cnt-watermark2"></div>
                         </div>
                     </div>
 

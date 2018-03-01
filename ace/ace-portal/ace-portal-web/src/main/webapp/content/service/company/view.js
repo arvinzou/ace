@@ -1,8 +1,8 @@
 jQuery(function($) {
     renderForm();
-    uploader1=renderUploader("logo");
-    uploader2=renderUploader("watermark1");
-    uploader3=renderUploader("watermark2");
+    uploader1=renderUploader("logo",{},{ width: 88,height: 88,crop: true,quality: 99,preserve_headers: false });
+    uploader2=renderUploader("watermark1",{},{ width: 92,height: 22,crop: true,quality: 99,preserve_headers: false });
+    uploader3=renderUploader("watermark2",{},{ width: 92,height: 22,crop: true,quality: 99,preserve_headers: false });
 });
 var uploader1,uploader2,uploader3;
 function renderForm() {
@@ -10,11 +10,14 @@ function renderForm() {
     e.render($("#j-editform .row-content"),function(e) {
         console.log(e);
     },function(e) {
+        e.data.logo=$("#j-uploader-rst-logo .xcy-cutimg").data("fileurl");
+        e.data.watermark1=$("#j-uploader-rst-watermark1 .xcy-cutimg").data("fileurl");
+        e.data.watermark2=$("#j-uploader-rst-watermark2 .xcy-cutimg").data("fileurl");
         console.log(e);
     });
 }
 
-function renderUploader(key) {
+function renderUploader(key,multipart_params,resize) {
     uploader = new plupload.Uploader({
         runtimes: "html5,flash,silverlight,html4",
         browse_button: "j-cover-"+key,
@@ -31,14 +34,8 @@ function renderUploader(key) {
              max_file_size: "20480kb",
              prevent_duplicates: !1
          },
-        multipart_params:{},
-        resize: {
-            width: 1024,
-            height: 1024,
-            crop: true,
-            quality: 60,
-            preserve_headers: false
-        },
+        multipart_params:multipart_params,
+        resize: resize,
         init: {
             PostInit: function() {},
             FilesAdded: function(t, a) {
@@ -62,9 +59,9 @@ function renderUploader(key) {
                         var e = l.width;
                         t = l.height;
                         $("#j-row-img-"+key+" .j-uploader-tip p em").html("（100%）");
-                        var i = $('<div class="xcy-cutimg fn-left fn-mr10 fn-mb10"><div class="imgbar"><span class="close"><i class="pz-icon icon-close"></i></span><img src="' + o + '"></div></div>');
+                        var i = $('<div class="xcy-cutimg"> <label class="upbtn"><div class="imgbar fn-textleft"><span class="close"><i class="pz-icon icon-close"></i></span><span class="logo"><img src="' + o + '"></span></div></label></div>');
                         i.data({
-                            fileurl: o,
+                            fileurl: rst.file_path,
                             width: e,
                             height: t
                         });
