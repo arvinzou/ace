@@ -81,11 +81,11 @@ function renderUploader(key,multipart_params,resize) {
 }
 
 function renderImg(file_path,key){
-    var i = $('<div class="xcy-cutimg"> <label class="upbtn"><div class="imgbar fn-textleft"><span class="close"><i class="pz-icon icon-close"></i></span><span class="logo"><img src="' + fastdfs_server+file_path + '"></span></div></label></div>');
+    var i = $('<div class="xcy-cutimg"> <label class="upbtn"><div class="imgbar fn-textleft"><span class="pz-close"><i class="pz-icon pz-icon-close"></i></span><span class="logo"><img src="' + fastdfs_server+file_path + '"></span></div></label></div>');
     i.data({
         fileurl: file_path
     });
-    i.find(".close").click(function() {
+    i.find(".pz-close").click(function() {
         i.remove();
         $("#j-cover-"+key).removeClass("fn-hide");
     });

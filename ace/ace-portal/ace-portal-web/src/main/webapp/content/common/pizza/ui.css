@@ -1465,7 +1465,7 @@ a {
 	content: "\e69a"
 }
 
-.pz-icon.icon-close:before {
+.pz-icon.pz-icon-close:before {
 	content: "\e69b"
 }
 
@@ -3530,7 +3530,7 @@ video {
 	overflow: hidden
 }
 
-.xcy-cutimg .imgbar .close {
+.xcy-cutimg .imgbar .pz-close {
 	position: absolute;
 	top: 8px;
 	right: 8px;
@@ -3547,7 +3547,7 @@ video {
 	background-color: #000
 }
 
-.xcy-cutimg .imgbar .close .pz-icon {
+.xcy-cutimg .imgbar .pz-close .pz-icon {
 	font-size: 20px
 }
 

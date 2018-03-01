@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html lang="cn">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>企业单位基本信息</title>
 </head>
@@ -92,7 +93,7 @@
                                 <div id="j-cover-watermark2" class="xcy-cutimg">
                                     <label class="upbtn">
                                         <div class="imgbar fn-textleft fn-hide">
-                                            <span class="close"><i class="pz-icon icon-close"></i></span>
+                                            <span class="pz-close"><i class="pz-icon pz-icon-close"></i></span>
                                             <span class="logo"></span>
                                         </div>
                                         <div class="fn-pt25">
