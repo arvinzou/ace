@@ -2,6 +2,7 @@ package com.huacainfo.ace.portal.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.model.PageParam;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
@@ -12,6 +13,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.portal.model.Department;
 import com.huacainfo.ace.portal.service.DepartmentService;
+import com.huacainfo.ace.portal.service.FilesService;
 import com.huacainfo.ace.portal.vo.DepartmentVo;
 import com.huacainfo.ace.portal.vo.MongoFile;
 import org.slf4j.Logger;
@@ -24,7 +26,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +39,11 @@ public class DepartmentController extends PortalBaseController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private DepartmentService departmentService;
+
+	@Autowired
+	private IFile fileSaver;
+	@Autowired
+	private FilesService filesService;
 	/**
 	 * 
 	    * @Title:findDepartmentList 
@@ -232,5 +241,27 @@ public class DepartmentController extends PortalBaseController {
 			}
 		}
 		return this.departmentService.importXls(list, this.getCurUserProp());
+	}
+
+	@RequestMapping(value = "/upload.do")
+	@ResponseBody
+	public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName) throws Exception {
+		Map<String, Object> rst = new HashMap<String, Object>();
+		String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+		File tmp = new File(dir);
+		if (!tmp.exists()) {
+			tmp.mkdirs();
+		}
+		for (MultipartFile o : file) {
+			File dest = new File(dir + File.separator + o.getName());
+			o.transferTo(dest);
+			String filePath = this.fileSaver.saveFile(dest, o.getOriginalFilename());
+			dest.delete();
+			filesService.insertFiles(filePath, this.getCurUserProp());
+			rst.put("success", true);
+			rst.put("msg", "成功");
+			rst.put("file_path", filePath);
+		}
+		return  rst;
 	}
 }
