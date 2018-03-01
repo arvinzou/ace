@@ -45,6 +45,7 @@ public class PageResult<T> extends MessageResponse {
 
 	/**
 	 * 结果列表
+	 * @param rows
 	 */
 	public void setRows(List<T> rows) {
 		this.rows = rows;

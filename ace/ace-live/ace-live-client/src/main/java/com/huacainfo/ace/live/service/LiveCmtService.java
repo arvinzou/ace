@@ -53,7 +53,7 @@ public interface LiveCmtService {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    public abstract MessageResponse updateLiveCmt(LiveCmt obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse updateLiveCmt(String id, String status) throws Exception;
 
     /**
      * @throws

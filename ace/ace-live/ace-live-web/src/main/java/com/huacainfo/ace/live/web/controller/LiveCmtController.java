@@ -89,10 +89,8 @@ public class LiveCmtController extends LiveBaseController {
      */
     @RequestMapping(value = "/updateLiveCmt.do")
     @ResponseBody
-    public MessageResponse updateLiveCmt(String jsons) throws Exception {
-        LiveCmt obj = JSON.parseObject(jsons, LiveCmt.class);
-        return this.liveCmtService
-                .updateLiveCmt(obj, this.getCurUserProp());
+    public MessageResponse updateLiveCmt(String id, String status, String message, String rptId) throws Exception {
+        return this.liveCmtService.updateLiveCmt(id, status);
     }
 
     /**

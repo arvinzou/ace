@@ -22,7 +22,12 @@ public interface DataBaseLogService{
 	    * @author: chenxiaoke 
 	    * @version: 2016年11月16日 下午3:40:56
 	 */
-	public  void log(String log,String name,String old,String news,String type,UserProp userProp);
+	public  void log(String log,
+					 String name,
+					 String old,
+					 String news,
+					 String type,
+					 UserProp userProp);
 	/**
 	 * 
 	    * @Title:findList 

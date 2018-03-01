@@ -104,18 +104,16 @@ public class LiveCmtServiceImpl implements LiveCmtService {
      * @version: 2018-01-13
      */
     @Override
-    public MessageResponse updateLiveCmt(LiveCmt o, UserProp userProp)
+    public MessageResponse updateLiveCmt(String id, String status)
             throws Exception {
-        if (CommonUtils.isBlank(o.getId())) {
+        if (CommonUtils.isBlank(id)) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getContent())) {
-            return new MessageResponse(1, "聊天内容不能为空！");
+        if (CommonUtils.isBlank(status)) {
+            return new MessageResponse(1, "状态不能为空！");
         }
-        this.liveCmtDao.updateByPrimaryKey(o);
-        this.dataBaseLogService.log("变更评论", "评论", "", o.getId(),
-                o.getId(), userProp);
-        return new MessageResponse(0, "变更评论完成！");
+        this.liveCmtDao.updateByPrimaryKey(id, status);
+        return new MessageResponse(0, "变更互动内容完成！");
     }
 
     /**

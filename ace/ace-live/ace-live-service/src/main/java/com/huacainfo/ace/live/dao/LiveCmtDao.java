@@ -16,7 +16,7 @@ public interface LiveCmtDao {
     LiveCmtVo selectByPrimaryKey(String LiveCmtId);
 
 
-    int updateByPrimaryKey(LiveCmt record);
+    int updateByPrimaryKey(@Param("id") String id, @Param("status") String status);
 
     List<LiveCmtVo> findList(@Param("condition") LiveCmtQVo condition,
                              @Param("start") int start, @Param("limit") int limit,

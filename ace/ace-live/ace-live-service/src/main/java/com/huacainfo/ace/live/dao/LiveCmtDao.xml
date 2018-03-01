@@ -34,10 +34,10 @@
         #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
         )
     </insert>
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.live.model.LiveCmt">
+    <update id="updateByPrimaryKey">
         update live_cmt
         set
-        content = #{content,jdbcType=LONGVARCHAR}
+        status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 

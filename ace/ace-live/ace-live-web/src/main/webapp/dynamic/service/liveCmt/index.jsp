@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
@@ -7,7 +7,7 @@ pageEncoding="utf-8"%>
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>评论</title>
+    <title>图文直播</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -28,43 +28,24 @@ pageEncoding="utf-8"%>
                 <form action="#" id="fm-search">
 
                     类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
+                        class="easyui-combobox" style="width: 200px" name="status"
                         data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=113&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
+                    RID：<input name="rptId" type="text" style="width: 200px;"/>
 
-                    名称： <input name="name" type="text"
-                               style="width: 200px;"/>
+                    UID： <input name="uid" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/liveCmt/findLiveCmtList.do">
-                        <i
-                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
-
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
 
-
-                    <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/liveCmt/insertLiveCmt.do">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/liveCmt/updateLiveCmt.do">
-                        <i
-                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/liveCmt/deleteLiveCmtByLiveCmtId.do">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-                    </button>
 
                 </div>
             </div>
@@ -87,51 +68,16 @@ pageEncoding="utf-8"%>
 </div>
 
 <div id="dialog-message-view" class="hide">
-    <h5 class="header-title">基本信息</h5>
-    <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-主键</span>
-            <br>
-            <span id="id">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-报道编号</span>
-            <br>
-            <span id="rptId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-用户编号</span>
-            <br>
-            <span id="uid">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-聊天内容</span>
-            <br>
-            <span id="content">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
-            <br>
-            <span id="status">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-入库日期</span>
-            <br>
-            <span id="createTime">
-</span>
-        </div>
-    </div>
-    <h5 class="header-title">操作信息</h5>
-    <div class="row" style="padding:10px">
+    <div class="row" style="padding:10px" id="content">
+
+
     </div>
 
 </div>
+
+</div>
 <jsp:include page="../../common/footer-1.jsp"/>
+<script src="${pageContext.request.contextPath}/content/common/js/reconnecting-websocket.js"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/liveCmt/config.js?version=${cfg.version}"></script>
 <script
@@ -142,12 +88,12 @@ pageEncoding="utf-8"%>
         src="${pageContext.request.contextPath}/content/service/liveCmt/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
-window.onresize = function () {
-	console.log('autoWidthJqgrid');
-	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
-	parent.autoWidth();
-}
+    window.onresize = function () {
+        console.log('autoWidthJqgrid');
+        $(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
+        $(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
+        parent.autoWidth();
+    }
 
 </script>
 </body>
