@@ -2,6 +2,8 @@ package com.huacainfo.ace.live.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import com.huacainfo.ace.portal.model.Users;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.Rpt;
@@ -57,7 +59,5 @@ public interface LiveDao {
     int updateLiveVisitNum(String id);
 
 
-
-
-
+    Users selectSysUserByOpenid(String openid);
 }

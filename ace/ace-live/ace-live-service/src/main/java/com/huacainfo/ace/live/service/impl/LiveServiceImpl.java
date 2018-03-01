@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import com.huacainfo.ace.live.dao.LiveRptDao;
 import com.huacainfo.ace.live.vo.LiveRptQVo;
+import com.huacainfo.ace.portal.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -289,4 +290,14 @@ public class LiveServiceImpl implements LiveService {
                 String.valueOf(id), "直播", userProp);
         return new MessageResponse(0, "直播删除完成！");
     }
+
+    @Override
+    public MessageResponse insertLive(String openid, Live live) throws Exception {
+        Users users = liveDao.selectSysUserByOpenid(openid);
+
+        UserProp userProp = null;
+
+        return insertLive(live, userProp);
+    }
+
 }

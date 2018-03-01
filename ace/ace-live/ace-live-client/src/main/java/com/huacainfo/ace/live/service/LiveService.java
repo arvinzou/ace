@@ -8,6 +8,8 @@ import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.vo.LiveVo;
 import com.huacainfo.ace.live.vo.LiveQVo;
 
+import java.util.Map;
+
 /**
  * @author: 陈晓克
  * @version: 2017-12-27
@@ -84,4 +86,5 @@ public interface LiveService {
     public abstract MessageResponse deleteLiveByLiveId(String id, UserProp userProp) throws Exception;
 
 
+    MessageResponse insertLive(String openid, Live live) throws Exception;
 }
