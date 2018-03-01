@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="actions actions-transparent fn-pt20">
-                <input type="submit" class="pz-btn btn-success btn-big" value="保存修改">
+                <input type="submit" id="btn-submit" class="pz-btn btn-success btn-big" value="保存修改">
             </div>
         </form>
     </div>

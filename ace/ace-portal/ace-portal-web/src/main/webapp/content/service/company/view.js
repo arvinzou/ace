@@ -1,11 +1,16 @@
 jQuery(function($) {
-    renderForm();
     uploader1=renderUploader("logo",{},{ width: 88,height: 88,crop: true,quality: 99,preserve_headers: false });
     uploader2=renderUploader("watermark1",{},{ width: 92,height: 22,crop: true,quality: 99,preserve_headers: false });
     uploader3=renderUploader("watermark2",{},{ width: 92,height: 22,crop: true,quality: 99,preserve_headers: false });
 });
 var uploader1,uploader2,uploader3;
-function renderForm() {
+function renderForm(data) {
+    formModel.departmentName.value=data.departmentName;
+    formModel.shortName.value=data.shortName;
+    renderImg(data.logo,"logo");
+    renderImg(data.watermark1,"watermark1");
+    renderImg(data.watermark2,"watermark2");
+
     var e = new cake.tplform("j-editform", formModel);
     e.render($("#j-editform .row-content"),function(e) {
         console.log(e);
@@ -13,7 +18,9 @@ function renderForm() {
         e.data.logo=$("#j-uploader-rst-logo .xcy-cutimg").data("fileurl");
         e.data.watermark1=$("#j-uploader-rst-watermark1 .xcy-cutimg").data("fileurl");
         e.data.watermark2=$("#j-uploader-rst-watermark2 .xcy-cutimg").data("fileurl");
+        e.data.id=userProp.corpId;
         console.log(e);
+        update(e.data);
     });
 }
 
@@ -56,23 +63,8 @@ function renderUploader(key,multipart_params,resize) {
                     var l = new Image;
                     l.src = o,
                     l.onload = l.onerror = function() {
-                        var e = l.width;
-                        t = l.height;
                         $("#j-row-img-"+key+" .j-uploader-tip p em").html("（100%）");
-                        var i = $('<div class="xcy-cutimg"> <label class="upbtn"><div class="imgbar fn-textleft"><span class="close"><i class="pz-icon icon-close"></i></span><span class="logo"><img src="' + o + '"></span></div></label></div>');
-                        i.data({
-                            fileurl: rst.file_path,
-                            width: e,
-                            height: t
-                        });
-                        i.find(".close").click(function() {
-                            i.remove();
-                            $("#j-cover-"+key).removeClass("fn-hide");
-                        });
-                        $("#j-uploader-rst-"+key).html(i);
-                        $("#j-row-img-"+key+" .j-uploader-tip p em").html("");
-                        $("#j-row-img-"+key+" .j-uploader-tip").addClass("fn-hide");
-                        $("#j-cover-"+key).addClass("fn-hide");
+                       renderImg(rst.file_path,key);
                     }
                 } else {
                     $("#j-row-img-"+key+" .j-uploader-tip p em").html(a.response)
@@ -86,4 +78,19 @@ function renderUploader(key,multipart_params,resize) {
     uploader.init();
 
     return uploader;
+}
+
+function renderImg(file_path,key){
+    var i = $('<div class="xcy-cutimg"> <label class="upbtn"><div class="imgbar fn-textleft"><span class="close"><i class="pz-icon icon-close"></i></span><span class="logo"><img src="' + fastdfs_server+file_path + '"></span></div></label></div>');
+    i.data({
+        fileurl: file_path
+    });
+    i.find(".close").click(function() {
+        i.remove();
+        $("#j-cover-"+key).removeClass("fn-hide");
+    });
+    $("#j-uploader-rst-"+key).html(i);
+    $("#j-row-img-"+key+" .j-uploader-tip p em").html("");
+    $("#j-row-img-"+key+" .j-uploader-tip").addClass("fn-hide");
+    $("#j-cover-"+key).addClass("fn-hide");
 }

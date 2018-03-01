@@ -166,14 +166,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 		if (CommonUtils.isBlank(o.getDepartmentId())) {
 			return new MessageResponse(1, "机构编号不能为空！");
 		}
-		if (CommonUtils.isBlank(o.getParentDepartmentId())) {
-			return new MessageResponse(1, "上级机构编号不能为空！");
-		}
 		if (CommonUtils.isBlank(o.getDepartmentName())) {
 			return new MessageResponse(1, "机构名称不能为空！");
 		}
-		o.setCreateUserId(userProp.getUserId());
-		o.setCreateTime(new Date());
+		o.setLastModifyUserId(userProp.getUserId());
+		o.setLastModifyTime(new Date());
 		this.departmentDao.updateDepartmentByPrimaryKey(o);
 		this.dataBaseLogService.log("机构信息变更", "机构", "", "企业名称："+o.getDepartmentName()+"营业执照号："+o.getBussLicenseNo()+",企业编号："+o.getDepartmentId(),
 				o.getDepartmentName()+","+o.getDepartmentId(), userProp);
