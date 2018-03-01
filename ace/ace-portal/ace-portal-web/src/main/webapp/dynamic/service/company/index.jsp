@@ -76,7 +76,7 @@
                                         </div>
 
                                     </label>
-                                    <div class="fn-mt5 pz-color-gray">支持92px*22px图片大小格式png</div>
+                                    <div class="fn-mt5 pz-color-gray">支持157px*44px图片大小格式png</div>
                                 </div>
 
                             </div>
@@ -102,7 +102,7 @@
                                         </div>
 
                                     </label>
-                                    <div class="fn-mt5 pz-color-gray">支持92px*22px图片大小格式png</div>
+                                    <div class="fn-mt5 pz-color-gray">支持80px*47px图片大小格式png</div>
                                 </div>
 
                             </div>

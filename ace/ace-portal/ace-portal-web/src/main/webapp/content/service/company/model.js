@@ -2,6 +2,7 @@ var formModel = {
     departmentName: {
         name: "departmentName",
         type: "text",
+        maxlength: 100,
         disabled: false,
         required:true,
         value: ""
@@ -9,7 +10,7 @@ var formModel = {
     shortName: {
         name: "shortName",
         type: "text",
-        maxlength: 20,
+        maxlength: 50,
         disabled: false,
         required:true
     }

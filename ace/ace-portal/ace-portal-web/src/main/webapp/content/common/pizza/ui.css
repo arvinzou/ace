@@ -4830,3 +4830,7 @@ video {
 	padding: 5px 10px 10px;
 	box-sizing: border-box
 }
+.pz-error-msg{
+    color:red;
+    padding:2px;
+}
