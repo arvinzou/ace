@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html lang="cn">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>企业单位基本信息</title>
 </head>
@@ -75,7 +76,7 @@
                                         </div>
 
                                     </label>
-                                    <div class="fn-mt5 pz-color-gray">支持92px*22px图片大小格式png</div>
+                                    <div class="fn-mt5 pz-color-gray">支持157px*44px图片大小格式png</div>
                                 </div>
 
                             </div>
@@ -92,7 +93,7 @@
                                 <div id="j-cover-watermark2" class="xcy-cutimg">
                                     <label class="upbtn">
                                         <div class="imgbar fn-textleft fn-hide">
-                                            <span class="close"><i class="pz-icon icon-close"></i></span>
+                                            <span class="pz-close"><i class="pz-icon pz-icon-close"></i></span>
                                             <span class="logo"></span>
                                         </div>
                                         <div class="fn-pt25">
@@ -101,7 +102,7 @@
                                         </div>
 
                                     </label>
-                                    <div class="fn-mt5 pz-color-gray">支持92px*22px图片大小格式png</div>
+                                    <div class="fn-mt5 pz-color-gray">支持80px*47px图片大小格式png</div>
                                 </div>
 
                             </div>

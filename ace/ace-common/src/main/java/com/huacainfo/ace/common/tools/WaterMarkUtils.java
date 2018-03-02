@@ -181,52 +181,56 @@ public class WaterMarkUtils {
             /********************************************/
             if(MARK_LOGO_IMAGE_01!=null) {
                 File logo1 = new File(MARK_LOGO_IMAGE_01);
-                Image logoImage1 = ImageIO.read(logo1);
-                /**
-                 * 获取水印图片的高和宽度
-                 */
-                int waterMarkWidth1 = logoImage1.getWidth(null);
-                int waterMarkHeight1 = logoImage1.getHeight(null);
+                if(logo1.exists()) {
+                    Image logoImage1 = ImageIO.read(logo1);
+                    /**
+                     * 获取水印图片的高和宽度
+                     */
+                    int waterMarkWidth1 = logoImage1.getWidth(null);
+                    int waterMarkHeight1 = logoImage1.getHeight(null);
 
-                //计算图片尺寸和水印尺寸差异
-                int widthDiff1 = width - waterMarkWidth1;
-                int heightDiff1 = height - waterMarkHeight1;
-                int x1 = X;
-                int y1 = Y;
-                if (x1 > widthDiff1) {
-                    x1 = widthDiff1;
+                    //计算图片尺寸和水印尺寸差异
+                    int widthDiff1 = width - waterMarkWidth1;
+                    int heightDiff1 = height - waterMarkHeight1;
+                    int x1 = X;
+                    int y1 = Y;
+                    if (x1 > widthDiff1) {
+                        x1 = widthDiff1;
+                    }
+                    if (y1 > heightDiff1) {
+                        y1 = heightDiff1;
+                    }
+                    //设置水印透明度 0.3
+                    graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, ALPHA));
+                    //4.使用绘图工具将水印（文字或图片）绘制到缓存图片对象
+                    graphics2D.drawImage(logoImage1, x1, y1, null);
                 }
-                if (y1 > heightDiff1) {
-                    y1 = heightDiff1;
-                }
-                //设置水印透明度 0.3
-                graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, ALPHA));
-                //4.使用绘图工具将水印（文字或图片）绘制到缓存图片对象
-                graphics2D.drawImage(logoImage1, x1, y1, null);
             }
                 /**************************************************/
             if(MARK_LOGO_IMAGE_02!=null){
                 //添加第二个水印
                 File logo2 = new File(MARK_LOGO_IMAGE_02);
-                Image logoImage2 = ImageIO.read(logo2);
-                /**
-                 * 获取水印图片的高和宽度
-                 */
-                int waterMarkWidth2 = logoImage2.getWidth(null);
-                int waterMarkHeight2 = logoImage2.getHeight(null);
+                if(logo2.exists()) {
+                    Image logoImage2 = ImageIO.read(logo2);
+                    /**
+                     * 获取水印图片的高和宽度
+                     */
+                    int waterMarkWidth2 = logoImage2.getWidth(null);
+                    int waterMarkHeight2 = logoImage2.getHeight(null);
 
-                //计算图片尺寸和水印尺寸差异
-                int widthDiff2 = width - waterMarkWidth2;
-                int heightDiff2 = height - waterMarkHeight2;
-                int x2 = 0;
-                int y2 = 0;
-                if (widthDiff2 > 0 && heightDiff2 > 0) {
-                    x2 = widthDiff2 - 10;
-                    y2 = heightDiff2 - 10;
-                    //设置水印透明度 0.3
-                    graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, ALPHA));
-                    //4.使用绘图工具将水印（文字或图片）绘制到缓存图片对象
-                    graphics2D.drawImage(logoImage2, x2, y2, null);
+                    //计算图片尺寸和水印尺寸差异
+                    int widthDiff2 = width - waterMarkWidth2;
+                    int heightDiff2 = height - waterMarkHeight2;
+                    int x2 = 0;
+                    int y2 = 0;
+                    if (widthDiff2 > 0 && heightDiff2 > 0) {
+                        x2 = widthDiff2 - 10;
+                        y2 = heightDiff2 - 10;
+                        //设置水印透明度 0.3
+                        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, ALPHA));
+                        //4.使用绘图工具将水印（文字或图片）绘制到缓存图片对象
+                        graphics2D.drawImage(logoImage2, x2, y2, null);
+                    }
                 }
             }
 
@@ -273,22 +277,24 @@ public class WaterMarkUtils {
                 int waterMarkWidth3 = FONT_SIZE * getTextLength(MARK_TEXT);
                 //添加第四个个水印
                 File logo4 = new File(MARK_LOGO_IMAGE_04);
-                Image logoImage4 = ImageIO.read(logo4);
-                /**
-                 * 获取水印图片的高和宽度
-                 */
-                int waterMarkWidth4 = logoImage4.getWidth(null);
-                int waterMarkHeight4 = logoImage4.getHeight(null);
+                if(logo4.exists()){
+                    Image logoImage4 = ImageIO.read(logo4);
+                    /**
+                     * 获取水印图片的高和宽度
+                     */
+                    int waterMarkWidth4 = logoImage4.getWidth(null);
+                    int waterMarkHeight4 = logoImage4.getHeight(null);
 
-                //计算图片尺寸和水印尺寸差异
-                int widthDiff4 = width - waterMarkWidth4;
-                int heightDiff4 = height - waterMarkHeight4;
-                int x4 = 0;
-                int y4 = Y;
-                if (widthDiff4 > 0 && heightDiff4 > 0) {
-                    x4 = widthDiff4 - 10 - waterMarkWidth3;
-                    //4.使用绘图工具将水印（文字或图片）绘制到缓存图片对象
-                    graphics2D.drawImage(logoImage4, x4, y4, null);
+                    //计算图片尺寸和水印尺寸差异
+                    int widthDiff4 = width - waterMarkWidth4;
+                    int heightDiff4 = height - waterMarkHeight4;
+                    int x4 = 0;
+                    int y4 = Y;
+                    if (widthDiff4 > 0 && heightDiff4 > 0) {
+                        x4 = widthDiff4 - 10 - waterMarkWidth3;
+                        //4.使用绘图工具将水印（文字或图片）绘制到缓存图片对象
+                        graphics2D.drawImage(logoImage4, x4, y4, null);
+                    }
                 }
             }
             /**************************************************/

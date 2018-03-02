@@ -32,6 +32,7 @@ function update(data) {
            alert(rst.errorMessage);
 		},
 		error : function() {
+		    $("#btn-submit").removeAttr('disabled');
 			alert("加载错误！");
 		}
 	});

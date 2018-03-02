@@ -1,16 +1,16 @@
 package com.huacainfo.ace.live.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
+import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.live.dao.LiveRptDao;
 import com.huacainfo.ace.live.vo.LiveRptQVo;
+import com.huacainfo.ace.portal.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.huacainfo.ace.common.model.UserProp;
@@ -289,4 +289,47 @@ public class LiveServiceImpl implements LiveService {
                 String.valueOf(id), "直播", userProp);
         return new MessageResponse(0, "直播删除完成！");
     }
+
+    @Override
+    public MessageResponse insertLive(String openid, Live live) throws Exception {
+        MessageResponse response = checkIsBandUsers(openid);
+        if (1 == response.getStatus()) {
+            return new MessageResponse(1, "新增直播失败,当前用户不合法[openid=" + openid + "]");
+        }
+
+        Users users = (Users) response.getOther().get("users");
+        //
+        UserProp userProp = new UserProp();
+        userProp.setName(users.getName());
+        userProp.setUserId(users.getUserId());
+        userProp.setCorpId(users.getDepartmentId());
+        userProp.setAreaCode(users.getAreaCode());
+        userProp.setOpenId(openid);
+        //
+        live.setAreaCode(users.getAreaCode());
+        live.setDeptId(users.getDepartmentId());
+
+        return insertLive(live, userProp);
+    }
+
+    @Override
+    public MessageResponse checkIsBandUsers(String openid) {
+        if (StringUtils.isEmpty(openid)) {
+            return new MessageResponse(1, "当前微信用户未绑定系统用户,请联系管理员!");
+        }
+
+        Users users = liveDao.selectSysUserByOpenid(openid);
+        if (null == users) {
+            return new MessageResponse(1, "当前微信用户未绑定系统用户,请联系管理员!");
+        }
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("users", users);
+
+        MessageResponse response = new MessageResponse(0, "身份合法");
+        response.setOther(data);
+        return response;
+    }
+
+
 }

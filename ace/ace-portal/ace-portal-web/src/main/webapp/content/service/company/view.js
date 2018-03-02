@@ -1,7 +1,7 @@
 jQuery(function($) {
     uploader1=renderUploader("logo",{},{ width: 88,height: 88,crop: true,quality: 99,preserve_headers: false });
-    uploader2=renderUploader("watermark1",{},{ width: 92,height: 22,crop: true,quality: 99,preserve_headers: false });
-    uploader3=renderUploader("watermark2",{},{ width: 92,height: 22,crop: true,quality: 99,preserve_headers: false });
+    uploader2=renderUploader("watermark1",{},{ width: 157,height: 44,crop: true,quality: 99,preserve_headers: false });
+    uploader3=renderUploader("watermark2",{},{ width: 80,height: 47,crop: true,quality: 99,preserve_headers: false });
 });
 var uploader1,uploader2,uploader3;
 function renderForm(data) {
@@ -20,6 +20,13 @@ function renderForm(data) {
         e.data.watermark2=$("#j-uploader-rst-watermark2 .xcy-cutimg").data("fileurl");
         e.data.id=userProp.corpId;
         console.log(e);
+        if (!e.state){
+            $(e.error).each(function(i,o){
+                //$(o.fieldObj).next().remove();
+                //$(o.fieldObj).after("<span class='pz-error-msg'>"+o.msg+"</span>");
+            });
+            return false;
+        }
         update(e.data);
     });
 }
@@ -81,11 +88,11 @@ function renderUploader(key,multipart_params,resize) {
 }
 
 function renderImg(file_path,key){
-    var i = $('<div class="xcy-cutimg"> <label class="upbtn"><div class="imgbar fn-textleft"><span class="close"><i class="pz-icon icon-close"></i></span><span class="logo"><img src="' + fastdfs_server+file_path + '"></span></div></label></div>');
+    var i = $('<div class="xcy-cutimg" style="background:#000000"> <label class="upbtn"><div class="imgbar fn-textleft"><span class="pz-close"><i class="pz-icon pz-icon-close"></i></span><span class="logo"><img src="' + fastdfs_server+file_path + '"></span></div></label></div>');
     i.data({
         fileurl: file_path
     });
-    i.find(".close").click(function() {
+    i.find(".pz-close").click(function() {
         i.remove();
         $("#j-cover-"+key).removeClass("fn-hide");
     });

@@ -2,6 +2,8 @@ package com.huacainfo.ace.live.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import com.huacainfo.ace.portal.model.Users;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.Rpt;
@@ -47,7 +49,7 @@ public interface LiveDao {
     Map<String, Object> getTotalNumAndOrgInfo(@Param("deptId") String deptId, @Param("id") String id);
 
 
-    Map<String, Object> getShareContent(@Param("deptId") String deptId);
+    Map<String, Object> getShareContent(@Param("deptId") String deptId,@Param("fastdfs_server") String fastdfs_server);
 
 
     int updateRptLikeNum(String id);
@@ -56,8 +58,5 @@ public interface LiveDao {
 
     int updateLiveVisitNum(String id);
 
-
-
-
-
+    Users selectSysUserByOpenid(String openid);
 }

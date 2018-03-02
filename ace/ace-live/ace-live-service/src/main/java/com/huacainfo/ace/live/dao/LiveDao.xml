@@ -98,64 +98,64 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.live.model.Live" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.live.model.Live">
         update live
         <set>
-            <if test="areaCode != null" >
+            <if test="areaCode != null">
                 areaCode = #{areaCode,jdbcType=VARCHAR},
             </if>
-            <if test="name != null" >
+            <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
-            <if test="category != null" >
+            <if test="category != null">
                 category = #{category,jdbcType=VARCHAR},
             </if>
-            <if test="endTime != null" >
+            <if test="endTime != null">
                 endTime = #{endTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="startTime != null" >
+            <if test="startTime != null">
                 startTime = #{startTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="remark != null" >
+            <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
-            <if test="nop != null" >
+            <if test="nop != null">
                 nop = #{nop,jdbcType=BIGINT},
             </if>
-            <if test="pop != null" >
+            <if test="pop != null">
                 pop = #{pop,jdbcType=BIGINT},
             </if>
-            <if test="addr != null" >
+            <if test="addr != null">
                 addr = #{addr,jdbcType=VARCHAR},
             </if>
-            <if test="rtmpUrl != null" >
+            <if test="rtmpUrl != null">
                 rtmpUrl = #{rtmpUrl,jdbcType=VARCHAR},
             </if>
-            <if test="mp4Url != null" >
+            <if test="mp4Url != null">
                 mp4Url = #{mp4Url,jdbcType=VARCHAR},
             </if>
-            <if test="imageSrc != null" >
+            <if test="imageSrc != null">
                 imageSrc = #{imageSrc,jdbcType=VARCHAR},
             </if>
-            <if test="latitude != null" >
+            <if test="latitude != null">
                 latitude = #{latitude,jdbcType=DECIMAL},
             </if>
-            <if test="longitude != null" >
+            <if test="longitude != null">
                 longitude = #{longitude,jdbcType=DECIMAL},
             </if>
-            <if test="status != null" >
+            <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
-            <if test="lastModifyUserId != null" >
+            <if test="lastModifyUserId != null">
                 lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
             </if>
-            <if test="lastModifyUserName != null" >
+            <if test="lastModifyUserName != null">
                 lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
             </if>
-            <if test="lastModifyDate != null" >
+            <if test="lastModifyDate != null">
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="content != null" >
+            <if test="content != null">
                 content = #{content,jdbcType=LONGVARCHAR}
             </if>
         </set>
@@ -205,6 +205,7 @@
     </select>
     <select id="getLiveList" resultType="map">
         <![CDATA[
+
         select
         2 commentApproveType,
         concat(#{fastdfs_server},imageSrc) cover,
@@ -221,16 +222,19 @@
         name topic,
         category type,
         null watermarkConfig from live where deptId=#{companyId} order by startTime desc  limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+
         ]]>
     </select>
     <select id="getLive" resultType="map">
         <![CDATA[
+
         select
         null allowApprove,
         null allowClose,
         null allowDelete,
         null allowEdit,
-        date_format(startTime,'%Y-%m-%d') startTime,
+        date_format(startTime,'%Y-%m-%d %H:%i:%S') startTime,
+        date_format(endTime,'%Y-%m-%d %H:%i:%S') endTime,
         1 allowShare,
         null appShortUrl,
         addr city,
@@ -249,12 +253,12 @@
         content,
         0 showPlayView,
         0 showWater,
-        startTime,
         status state,
         name topic,
         category type,
         null watermarkConfig
         from live where id=#{id}
+
         ]]>
     </select>
 
@@ -311,8 +315,8 @@
         '' liker,
         a.nickname reporter,
         '' thumbnail,
-        a.headimgurl,
-        a.nickname,
+        ifnull(concat(#{fastdfs_server},f.logo),a.headimgurl) headimgurl,
+        ifnull(f.short_name,a.nickname) nickname,
         a.openid,
         b.id imgId,
         b.url,
@@ -332,6 +336,8 @@
         left join live_img b on t.id=b.rptId
         left join live_cmt c on t.id=c.rptId
         left join portal.userinfo d on c.uid=d.openid
+        left join portal.users e on t.uid=e.openId
+        left join portal.department f on e.department_id=f.department_id
         where t.rid=#{rid} and t.status='2'
         <choose>
             <when test='sort!=null and sort=="0"'>
@@ -387,7 +393,7 @@
         '' downloadDesc,
         short_name downloadTitle,
         '' iosDownload,
-        'http://zx.huacainfo.com/live/content/www/img/logo.png' logo,
+        concat(#{fastdfs_server},t.logo) logo,
         '' sysValue
         from portal.department t where t.department_id= #{deptId}
     </select>
@@ -428,4 +434,32 @@
     <update id="updateLiveVisitNum">
         update live set nop=ifnull(nop,0)+1 where id=#{id}
     </update>
+
+    <resultMap id="SysUsersMap" type="com.huacainfo.ace.portal.model.Users">
+        <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="SEX" property="sex" jdbcType="CHAR"/>
+        <result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="DEPARTMENT_ID" property="departmentId" jdbcType="VARCHAR"/>
+        <result column="AREA_CODE" property="areaCode" jdbcType="CHAR"/>
+        <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="STAUTS" property="stauts" jdbcType="CHAR"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="SEAT" property="seat" jdbcType="VARCHAR"/>
+        <result column="USER_LEVEL" property="userLevel" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="cur_syid" property="curSyid" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectSysUserByOpenid" parameterType="java.lang.String" resultMap="SysUsersMap">
+         select user_id,account,password,sex,id_card,name,
+				department_id,area_code,birthday,stauts, last_login_time,
+				mobile,email,seat,user_level,create_time,fax,telphone,qq,openId,cur_syid
+        from portal.users
+        where openid = #{openid,jdbcType=VARCHAR}
+    </select>
 </mapper>
