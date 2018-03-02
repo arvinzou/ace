@@ -245,6 +245,15 @@ function getInfo() {
                 1 == i.data.partakeState && $(".xcy-totalcount").addClass("fn-hide")
                 //$(".xcy-totalcount").html("浏览人数" + i.data.numOfPartake);
                 var f = i.data.startTime;
+
+                $(".count_down").countDown({
+                			startTimeStr:'2017/01/11 00:00:00',//开始时间
+                        	endTimeStr:'2028/01/17 23:59:59',//结束时间
+                        	daySelector:".day_num",
+                            hourSelector:".hour_num",
+                            minSelector:".min_num",
+                            secSelector:".sec_num"
+                		});
                 i && i.data && (i.data.topic && (wxShareDict.title = i.data.topic, document.title = wxShareDict.title), i.data.remark && (wxShareDict.desc = i.data.remark), i.data.cover && (wxShareDict.imgUrl = i.data.cover), onshare()),
                     increateNumTimeFn(),
                     lvsCmd.ajax(apiServer + "/www/live/getTotalNumAndOrgInfo.do", {
