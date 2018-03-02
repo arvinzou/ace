@@ -1056,6 +1056,7 @@ $(window).on("scroll",
 
             $("#j-liveinfo .view img").css("width", "5rem");
             $("#j-liveinfo .view img").css("float", "left");
+            $(".count_down").addClass("fn-hide");
 
 
         } else {
@@ -1080,6 +1081,7 @@ $(window).on("scroll",
             $("#j-video-wrap .prism-cover").css("float", "null");
             $("#j-liveinfo .view img").css("width", "10rem");
             $("#j-liveinfo .view img").css("float", "null");
+            $(".count_down").removeClass("fn-hide");
 
         }
     });
