@@ -192,8 +192,9 @@ public class WWWController extends LiveBaseController {
      */
     @RequestMapping(value = "/getLiveRptList.do")
     @ResponseBody
-    public Map<String, Object> getLiveSubList(int page, String rid) {
+    public Map<String, Object> getLiveRptList(int page, String rid) {
         Map<String, Object> p = this.getPageParam(page, this.getParams());
+        p.put("fastdfs_server", PropertyUtil.getProperty("fastdfs_server"));
         return this.wwwService.getLiveRptList(rid, page, p);
     }
 
@@ -277,8 +278,8 @@ public class WWWController extends LiveBaseController {
         }
         int i = 0;
         waterMarkUtils.BASE_PATH = dir + File.separator;
-        String logoDir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "content" + File.separator + "www" + File.separator + "img" + File.separator;
-        logoDir=System.getProperty("user.home")+File.separator+"files"+File.separator;
+        //String logoDir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "content" + File.separator + "www" + File.separator + "img" + File.separator;
+        String logoDir = System.getProperty("user.home")+File.separator+"files"+File.separator;
         waterMarkUtils.MARK_LOGO_IMAGE_01 = logoDir + companyId + "-watermark1.png";
         waterMarkUtils.MARK_LOGO_IMAGE_02 = logoDir + companyId + "-watermark2.png";
         if (marktext != null) {

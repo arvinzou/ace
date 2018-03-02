@@ -315,8 +315,8 @@
         '' liker,
         a.nickname reporter,
         '' thumbnail,
-        a.headimgurl,
-        a.nickname,
+        ifnull(concat(#{fastdfs_server},f.logo),a.headimgurl) headimgurl,
+        ifnull(f.short_name,a.nickname) nickname,
         a.openid,
         b.id imgId,
         b.url,
@@ -336,6 +336,8 @@
         left join live_img b on t.id=b.rptId
         left join live_cmt c on t.id=c.rptId
         left join portal.userinfo d on c.uid=d.openid
+        left join portal.users e on t.uid=e.openId
+        left join portal.department f on e.department_id=f.department_id
         where t.rid=#{rid} and t.status='2'
         <choose>
             <when test='sort!=null and sort=="0"'>
