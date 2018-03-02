@@ -232,6 +232,7 @@ public class WWWController extends LiveBaseController {
         data.put("uid", uid);
         data.put("message", message);
         this.logger.info("{}", data);
+
         this.kafkaProducerService.sendMsg(topic, data);
         //群发消息
         for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {

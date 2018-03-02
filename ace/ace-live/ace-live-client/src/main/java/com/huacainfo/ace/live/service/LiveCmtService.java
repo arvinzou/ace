@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.LiveCmt;
 import com.huacainfo.ace.live.vo.LiveCmtVo;
 import com.huacainfo.ace.live.vo.LiveCmtQVo;
@@ -40,7 +41,7 @@ public interface LiveCmtService {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    public abstract MessageResponse insertLiveCmt(LiveCmt obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse insertLiveCmt(LiveCmt obj, String corpId) throws Exception;
 
     /**
      * @throws
@@ -80,5 +81,5 @@ public interface LiveCmtService {
      */
     public abstract MessageResponse deleteLiveCmtByLiveCmtId(String id, UserProp userProp) throws Exception;
 
-
+    Live findLiveByPrimaryKey(String id);
 }

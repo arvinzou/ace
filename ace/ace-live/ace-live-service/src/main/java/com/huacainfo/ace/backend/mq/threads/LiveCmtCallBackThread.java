@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.SpringUtils;
+import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.LiveCmt;
 import com.huacainfo.ace.live.service.LiveCmtService;
 import kafka.consumer.ConsumerIterator;
@@ -13,11 +14,16 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
+/**
+ * @author
+ */
+
 public class LiveCmtCallBackThread extends Thread {
     private static final Logger LOGGER = LoggerFactory.getLogger(LiveCmtCallBackThread.class);
 
     private KafkaStream<byte[], byte[]> stream = null;
     private LiveCmtService liveCmtService;
+
 
     public LiveCmtCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
         super(name);
@@ -59,7 +65,9 @@ public class LiveCmtCallBackThread extends Thread {
             o.setContent(JSON.parseObject(data.get("message")).getString("content"));
             o.setUid(data.get("uid"));
             o.setRptId(data.get("rptId"));
-            MessageResponse rst = this.liveCmtService.insertLiveCmt(o);
+            String rid=data.get("rid");
+            Live live=liveCmtService.findLiveByPrimaryKey(rid);
+            MessageResponse rst = this.liveCmtService.insertLiveCmt(o,live.getDeptId());
             LOGGER.info("{}", rst.getErrorMessage());
         } catch (Exception e) {
             LOGGER.error("系统出错{}", e);

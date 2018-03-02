@@ -28,5 +28,5 @@ public interface LiveCmtDao {
 
     int isExit(LiveCmt record);
 
-    List<SensitiveWordsVo> findSensitiveWordsList(SensitiveWords record);
+    List<SensitiveWordsVo> findSensitiveWordsList(SensitiveWords condition);
 }

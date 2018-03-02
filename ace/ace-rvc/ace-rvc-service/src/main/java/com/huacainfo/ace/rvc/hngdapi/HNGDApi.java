@@ -3,7 +3,7 @@ package com.huacainfo.ace.rvc.hngdapi;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.rvc.hngdapi.pojo.response.OrganizationResp;
 import com.huacainfo.ace.rvc.hngdapi.util.WebServiceCallUtil;
-import com.huacainfo.ace.rvc.hngdapi.util.XmlConverUtil;
+//import com.huacainfo.ace.rvc.hngdapi.util.XmlConverUtil;
 
 import java.util.LinkedHashMap;
 
@@ -49,7 +49,7 @@ public class HNGDApi {
         String respXml = WebServiceCallUtil.call(wsUrl.toString(), NAMESPACE_URI,
                 "getAllResourceDetail", parameter);
 
-        String json = XmlConverUtil.xmltoJson(respXml).replace("@", "");
+        String json ="";// XmlConverUtil.xmltoJson(respXml).replace("@", "");
         return JsonUtil.toObject(json, OrganizationResp.class);
     }
 

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.huacainfo.ace.live.dao.LiveDao;
+import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.portal.model.SensitiveWords;
 import com.huacainfo.ace.portal.vo.SensitiveWordsVo;
 import org.slf4j.Logger;
@@ -34,6 +36,8 @@ public class LiveCmtServiceImpl implements LiveCmtService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private LiveCmtDao liveCmtDao;
+    @Autowired
+    private LiveDao liveDao;
 
     @Autowired
     private DataBaseLogService dataBaseLogService;
@@ -77,7 +81,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
      * @version: 2018-01-13
      */
     @Override
-    public MessageResponse insertLiveCmt(LiveCmt o, UserProp userProp)
+    public MessageResponse insertLiveCmt(LiveCmt o, String corpId)
             throws Exception {
         o.setId(UUID.randomUUID().toString());
         if (CommonUtils.isBlank(o.getRptId())) {
@@ -92,7 +96,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
         }
         PageResult<SensitiveWordsVo> rst = new PageResult<>();
         SensitiveWords condition=new SensitiveWords();
-        condition.setDeptId(userProp.getCorpId());
+        condition.setDeptId(corpId);
         List<SensitiveWordsVo> list = this.liveCmtDao.findSensitiveWordsList(condition);
         for(SensitiveWordsVo sw:list){
             String x="";
@@ -172,4 +176,10 @@ public class LiveCmtServiceImpl implements LiveCmtService {
                 String.valueOf(id), "评论", userProp);
         return new MessageResponse(0, "评论删除完成！");
     }
+
+    @Override
+    public Live findLiveByPrimaryKey(String id) {
+        return liveDao.selectByPrimaryKey(id);
+    }
+
 }
