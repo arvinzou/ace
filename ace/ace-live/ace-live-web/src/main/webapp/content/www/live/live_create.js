@@ -256,8 +256,8 @@ newTplform.render($("#j-liveform .row-content"),
     //表单提交
     function (e) {
         var name = e.data.name;
-        var startTime = e.data.startTime;
-        var endTime = e.data.endTime;
+        var startTime = e.data.startTime + ":00";
+        var endTime = e.data.endTime + ":00";
         var remark = e.data.remark;
         var content = e.data.content;
         var addr = addr;
@@ -267,19 +267,20 @@ newTplform.render($("#j-liveform .row-content"),
         var imageSrc = $(".pictureContainer").data("imageSrc");
         var nop = e.data.nop;
         var pop = e.data.pop;
-        if (!(name && imageSrc && startTime && remark && content && addr && rtmpUrl && mp4Url && nop && pop)) {
-            alert('带“ * ”为必填项');
+        //数据合法性校验
+        if (checkData(name, imageSrc, startTime, endTime, remark, content, addr, rtmpUrl, mp4Url, nop, pop)) {
             return false;
         }
 
+
         var data = {
             name: name,
-            areaCode: "001",
+            areaCode: "",
             startTime: startTime,
             endTime: endTime,
             remark: remark,
             content: content,
-            deptId: "002",
+            deptId: "",
             addr: addr,
             rtmpUrl: rtmpUrl,
             mp4Url: mp4Url,
@@ -297,7 +298,8 @@ newTplform.render($("#j-liveform .row-content"),
             function (e, t) {
                 $(".j-content").val("");
                 location.reload();
-                e ? "0" == t.status ? (alert("数据保存成功！"), parent.pizzaCmd.history.pop()) : alert(t.errorMessage) : alert("接口请求失败，请检查网络连接！")
+                e ? "0" == t.status ? (alert("数据保存成功！"), parent.pizzaCmd.history.pop()) :
+                    alert(t.errorMessage) : alert("接口请求失败，请检查网络连接！")
             });
         return false;
     }
@@ -356,4 +358,59 @@ function viewCover(imagePath) {
     $('.pictureContainer').data("imageSrc", imagePath);
 
     showUploadImg(imagePath);
+}
+
+
+function checkData(name, imageSrc, startTime, endTime, remark, content, addr, rtmpUrl, mp4Url, nop, pop) {
+    if (!(name && imageSrc && startTime && remark && content && addr && rtmpUrl && mp4Url && nop && pop)) {
+        alert('带“ * ”为必填项');
+        return false;
+    }
+    if (name.length > 30) {
+        alert('标题字数过长');
+        return false;
+    }
+    if (remark.length > 500) {
+        alert('摘要字数过长');
+        return false;
+    }
+    if (addr.length > 200) {
+        alert('地点字数过长');
+        return false;
+    }
+    if (rtmpUrl.length > 200) {
+        alert('直播流地址字数过长');
+        return false;
+    }
+    if (mp4Url.length > 200) {
+        alert('回放地址字数过长');
+        return false;
+    }
+    if (isPositiveInteger(nop)) {
+        alert('参与人数必须为正整数');
+        return false;
+    }
+    if (isPositiveInteger(pop)) {
+        alert('点赞数必须为正整数');
+        return false;
+    }
+
+    if (judegTimeOrder(startTime, endTime)) {
+        alert('开始时间不能大于结束时间');
+        return false;
+    }
+
+    return true;
+}
+
+function isPositiveInteger(s) {//是否为正整数
+    var re = /^[0-9]+$/;
+    return re.test(s)
+}
+
+function judegTimeOrder(time1, time2) {
+    var s = new Date(time1).getTime();
+    var e = new Date(time2).getTime();
+
+    return s > e;
 }
