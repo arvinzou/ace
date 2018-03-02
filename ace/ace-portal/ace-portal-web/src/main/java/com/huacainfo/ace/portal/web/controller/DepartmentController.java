@@ -27,10 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/department")
@@ -109,8 +106,27 @@ public class DepartmentController extends PortalBaseController {
 			throws Exception {
 		Department obj = JSON.parseObject(jsons, Department.class);
 		obj.setDepartmentId(obj.getId());
+		if(CommonUtils.isNotEmpty(obj.getWatermark1())){
+			downFiles(obj.getWatermark1(),obj.getDepartmentId() + "-watermark1.png");
+		}
+		if(CommonUtils.isNotEmpty(obj.getWatermark2())){
+			downFiles(obj.getWatermark2(),obj.getDepartmentId() + "-watermark2.png");
+		}
 		return this.departmentService.updateDepartment(obj,
 				this.getCurUserProp());
+	}
+
+	private void downFiles(String filePath,String fileName) throws Exception{
+		String dir=System.getProperty("user.home")+File.separator+"files"+File.separator;
+		this.logger.info("user.home-> {}",dir);
+		File tmp = new File(dir);
+		if (!tmp.exists()) {
+			tmp.mkdirs();
+		}
+		java.io.File file=new java.io.File(dir+ fileName);
+		java.io.OutputStream os=new java.io.FileOutputStream(file);
+		fileSaver.outputFile(filePath,os);
+		os.close();
 	}
 	/**
 	 * 

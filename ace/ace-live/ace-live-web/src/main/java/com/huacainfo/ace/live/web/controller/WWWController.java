@@ -278,10 +278,11 @@ public class WWWController extends LiveBaseController {
         int i = 0;
         waterMarkUtils.BASE_PATH = dir + File.separator;
         String logoDir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "content" + File.separator + "www" + File.separator + "img" + File.separator;
-        waterMarkUtils.MARK_LOGO_IMAGE_01 = logoDir + companyId + "-logo1.png";
-        waterMarkUtils.MARK_LOGO_IMAGE_02 = logoDir + companyId + "-logo2.png";
+        logoDir=System.getProperty("user.home")+File.separator+"files"+File.separator;
+        waterMarkUtils.MARK_LOGO_IMAGE_01 = logoDir + companyId + "-watermark1.png";
+        waterMarkUtils.MARK_LOGO_IMAGE_02 = logoDir + companyId + "-watermark2.png";
         if (marktext != null) {
-            waterMarkUtils.MARK_LOGO_IMAGE_04 = logoDir + companyId + "-logo4.png";
+            waterMarkUtils.MARK_LOGO_IMAGE_04 = logoDir + "watermarktitle.png";
             waterMarkUtils.MARK_TEXT = marktext;
         } else {
             waterMarkUtils.MARK_LOGO_IMAGE_04 = null;
