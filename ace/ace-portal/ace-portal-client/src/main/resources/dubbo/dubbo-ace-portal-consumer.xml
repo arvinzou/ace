@@ -90,4 +90,7 @@
     <dubbo:reference interface="com.huacainfo.ace.portal.service.UserinfoService"
                      id="userinfoService"/>
 
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.SensitiveWordsService"
+                     id="sensitiveWordsService"/>
+
 </beans>

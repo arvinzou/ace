@@ -4,6 +4,7 @@ package com.huacainfo.ace.portal.service.impl;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 
 import com.huacainfo.ace.portal.dao.SensitiveWordsDao;
@@ -41,8 +42,16 @@ public class SensitiveWordsServiceImpl implements SensitiveWordsService {
 
     @Override
     public MessageResponse insertSensitiveWords(SensitiveWords condition, UserProp userProp) throws Exception {
+        SensitiveWords sw = new SensitiveWords();
+        sw.setWord(condition.getWord());
+        sw.setDeptId(userProp.getCorpId());
+        int i =sensitiveWordsDao.isExit(sw);
+        if(i>0){
+            return new MessageResponse(1, "已经存在敏感词!");
+        }
+        SingleResult<SensitiveWords> rst = new SingleResult<>();
         condition.setId(UUID.randomUUID().toString());
-        condition.setDeptId("00010001");
+        condition.setDeptId(userProp.getCorpId());
         if (CommonUtils.isBlank(condition.getWord())) {
             return new MessageResponse(1, "归属部门不能为空!");
         }
@@ -51,9 +60,11 @@ public class SensitiveWordsServiceImpl implements SensitiveWordsService {
         condition.setCreateDate(new Date());
         condition.setCreateUserName(userProp.getName());
         condition.setCreateUserId(userProp.getUserId());
+        sensitiveWordsDao.insert(condition);
         this.dataBaseLogService.log("敏感词添加成功", condition.getWord(), "",
                 "", "", userProp);
-        return new MessageResponse(0, "添加敏感词完成！");
+        rst.setValue(condition);
+        return rst;
 
     }
 
@@ -63,6 +74,7 @@ public class SensitiveWordsServiceImpl implements SensitiveWordsService {
             return new MessageResponse(1, "编号不能为空！");
         }
         SensitiveWords s = this.sensitiveWordsDao.selectByPrimaryKey(id);
+        logger.debug(s.toString());
         this.sensitiveWordsDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除关键词" + s.getWord(), "关键词单位编号" + s.getDeptId(), "", "删除编号是" + id, id, userProp);
         return new MessageResponse(0, "删除成功！");

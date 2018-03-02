@@ -2,7 +2,11 @@ package com.huacainfo.ace.portal.model;
 
 import java.util.Date;
 
-public class SensitiveWords {
+public class SensitiveWords implements java.io.Serializable {
+
+
+    private static final long serialVersionUID = 960341868537998939L;
+
     private String id;
 
     private String word;

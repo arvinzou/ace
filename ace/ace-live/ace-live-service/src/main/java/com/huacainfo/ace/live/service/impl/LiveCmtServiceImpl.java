@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.huacainfo.ace.portal.model.SensitiveWords;
+import com.huacainfo.ace.portal.vo.SensitiveWordsVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private LiveCmtDao liveCmtDao;
+
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -74,7 +77,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
      * @version: 2018-01-13
      */
     @Override
-    public MessageResponse insertLiveCmt(LiveCmt o)
+    public MessageResponse insertLiveCmt(LiveCmt o, UserProp userProp)
             throws Exception {
         o.setId(UUID.randomUUID().toString());
         if (CommonUtils.isBlank(o.getRptId())) {
@@ -83,9 +86,26 @@ public class LiveCmtServiceImpl implements LiveCmtService {
         if (CommonUtils.isBlank(o.getUid())) {
             return new MessageResponse(1, "用户编号不能为空！");
         }
-        if (CommonUtils.isBlank(o.getContent())) {
+        String content=o.getContent();
+        if (CommonUtils.isBlank(content)) {
             return new MessageResponse(1, "聊天内容不能为空！");
         }
+        PageResult<SensitiveWordsVo> rst = new PageResult<>();
+        SensitiveWords condition=new SensitiveWords();
+        condition.setDeptId(userProp.getCorpId());
+        List<SensitiveWordsVo> list = this.liveCmtDao.findSensitiveWordsList(condition);
+        for(SensitiveWordsVo sw:list){
+            String x="";
+            String word=sw.getWord();
+            if(content.indexOf(word)==-1){
+               continue;
+            }
+            for(int i=0;i<sw.getWord().length();i++){
+                x+="*";
+            }
+            content.replaceAll(word,x);
+        }
+        rst.setRows(list);
         o.setStatus("1");
         o.setCreateTime(new Date());
         this.liveCmtDao.insert(o);

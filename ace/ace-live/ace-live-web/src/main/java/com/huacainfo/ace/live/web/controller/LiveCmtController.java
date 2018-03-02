@@ -74,7 +74,7 @@ public class LiveCmtController extends LiveBaseController {
     public MessageResponse insertLiveCmt(String jsons) throws Exception {
         LiveCmt obj = JSON.parseObject(jsons, LiveCmt.class);
         return this.liveCmtService
-                .insertLiveCmt(obj);
+                .insertLiveCmt(obj,this.getCurUserProp());
     }
 
     /**

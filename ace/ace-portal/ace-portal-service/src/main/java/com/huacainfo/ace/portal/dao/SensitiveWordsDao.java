@@ -20,4 +20,6 @@ public interface SensitiveWordsDao {
     int updateByPrimaryKeySelective(SensitiveWords record);
 
     int updateByPrimaryKey(SensitiveWords record);
+
+    int isExit(SensitiveWords record);
 }

@@ -2,6 +2,8 @@ package com.huacainfo.ace.live.dao;
 
 import java.util.List;
 
+import com.huacainfo.ace.portal.model.SensitiveWords;
+import com.huacainfo.ace.portal.vo.SensitiveWordsVo;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.live.model.LiveCmt;
 import com.huacainfo.ace.live.vo.LiveCmtQVo;
@@ -26,4 +28,5 @@ public interface LiveCmtDao {
 
     int isExit(LiveCmt record);
 
+    List<SensitiveWordsVo> findSensitiveWordsList(SensitiveWords record);
 }

@@ -83,4 +83,19 @@
         live_cmt where
         content=#{content} and rptId =#{condition.rptId,jdbcType=VARCHAR}
     </select>
+
+    <resultMap id="BaseResultMap1" type="com.huacainfo.ace.portal.model.SensitiveWords">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="word" jdbcType="VARCHAR" property="word"/>
+        <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+
+    <select id="findSensitiveWordsList" parameterType="java.lang.String" resultMap="BaseResultMap1">
+        select *
+        from portal.sensitive_words
+        where deptId = #{deptId,jdbcType=VARCHAR}
+    </select>
 </mapper>
