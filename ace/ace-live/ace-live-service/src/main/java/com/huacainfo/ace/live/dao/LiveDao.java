@@ -49,7 +49,7 @@ public interface LiveDao {
     Map<String, Object> getTotalNumAndOrgInfo(@Param("deptId") String deptId, @Param("id") String id);
 
 
-    Map<String, Object> getShareContent(@Param("deptId") String deptId);
+    Map<String, Object> getShareContent(@Param("deptId") String deptId,@Param("fastdfs_server") String fastdfs_server);
 
 
     int updateRptLikeNum(String id);

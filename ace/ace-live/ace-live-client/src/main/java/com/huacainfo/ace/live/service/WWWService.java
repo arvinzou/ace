@@ -101,7 +101,7 @@ public interface WWWService {
      * @author: 陈晓克
      * @version: 2018-01-09
      */
-    Map<String, Object> getShareContent(String deptId);
+    Map<String, Object> getShareContent(String deptId,String fastdfs_server);
 
 
     /**

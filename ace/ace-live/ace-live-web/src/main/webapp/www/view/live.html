@@ -29,10 +29,15 @@
                 {@if data.state == 1}
                 {@if data.cover}
                 <img src="${data.cover}">
-                <div class="count_down"><span class="day_num"></span><span class="hour_num"></span><span class="min_num"></span><span class="sec_num"></span></div>
+                <div class="count_down">
+                    <div class="count_down_content">
+                        <span class="day_num"></span><span class="hour_num"></span><span class="min_num"></span><span class="sec_num"></span>
+                        <div class="djs">直播倒计时</div>
+                    </div>
+                </div>
                 <div id="j-video-text" class="fn-hide" style="width:5rem;">
 
-                    <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">${data.topic}</p></div>
+                    <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">即将播放：</span><p style="color:#fff;font-size:.35rem">${data.topic}</p></div>
                 </div>
                 {@else}
                 <img src="">
@@ -540,6 +545,7 @@
 <script src="/live/content/www/js/jweixin-1.0.0.js"></script>
 <script src="/live/content/www/lib/prismplayer/prism-min.js"></script>
 <script src="/live/content/www/lib/jquery-1.11.0-min.js"></script>
+<script src="/live/content/www/js/zepto-1.2.0.min.js"></script>
 <script src="/live/content/www/js/juicer-min.js"></script>
 <script src="/live/content/www/js/sugar-h5.js?_t=1510794885000"></script>
 <script src="/live/content/www/js/roll.js?_t=1507519928000"></script>
@@ -622,6 +628,27 @@
     height: .025rem;
     left: .25rem;
     top: 0.8rem;
+}
+.count_down{
+    position: fixed;
+    top: 0rem;
+    width:100%;
+    height:100%;
+    background:#000000;
+    z-index: 888;
+    font-size: .56rem;
+    line-height: 1.5;
+    color:#fff;
+    text-align:center;
+     opacity:0.6;
+}
+.djs{
+    padding:.2rem;
+    font-size: .46rem;
+}
+.count_down_content{
+     width:100%;
+     padding-top: 2rem;
 }
 </style>
 

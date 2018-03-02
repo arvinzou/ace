@@ -109,7 +109,7 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public Map<String, Object> getShareContent(String companyId) throws Exception {
         Map<String, Object> rst = new HashMap<>();
-        rst.put("data", this.wwwService.getShareContent(companyId));
+        rst.put("data", this.wwwService.getShareContent(companyId,PropertyUtil.getProperty("fastdfs_server")));
         rst.put("status", 0);
         return rst;
     }

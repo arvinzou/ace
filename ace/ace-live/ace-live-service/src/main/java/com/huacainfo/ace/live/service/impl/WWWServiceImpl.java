@@ -169,8 +169,8 @@ public class WWWServiceImpl implements WWWService {
      * @version: 2018-01-09
      */
     @Override
-    public Map<String, Object> getShareContent(String deptId) {
-        return this.liveDao.getShareContent(deptId);
+    public Map<String, Object> getShareContent(String deptId,String fastdfs_server) {
+        return this.liveDao.getShareContent(deptId,fastdfs_server);
     }
 
 

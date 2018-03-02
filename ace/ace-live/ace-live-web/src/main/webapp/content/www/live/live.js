@@ -245,8 +245,8 @@ function getInfo() {
                 var f = i.data.startTime;
 
                 $(".count_down").countDown({
-                			startTimeStr:'2017/01/11 00:00:00',//开始时间
-                        	endTimeStr:'2028/01/17 23:59:59',//结束时间
+                			startTimeStr:i.data.startTime,//开始时间
+                        	endTimeStr:i.data.endTime,//结束时间
                         	daySelector:".day_num",
                             hourSelector:".hour_num",
                             minSelector:".min_num",
@@ -960,6 +960,7 @@ $(window).on("scroll",
 
             $("#j-liveinfo .view img").css("width", "5rem");
             $("#j-liveinfo .view img").css("float", "left");
+            $(".count_down").addClass("fn-hide");
 
 
         } else {
@@ -984,6 +985,7 @@ $(window).on("scroll",
             $("#j-video-wrap .prism-cover").css("float", "null");
             $("#j-liveinfo .view img").css("width", "10rem");
             $("#j-liveinfo .view img").css("float", "null");
+            $(".count_down").removeClass("fn-hide");
 
         }
     });

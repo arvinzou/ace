@@ -393,7 +393,7 @@
         '' downloadDesc,
         short_name downloadTitle,
         '' iosDownload,
-        'http://zx.huacainfo.com/live/content/www/img/logo.png' logo,
+        concat(#{fastdfs_server},t.logo) logo,
         '' sysValue
         from portal.department t where t.department_id= #{deptId}
     </select>
