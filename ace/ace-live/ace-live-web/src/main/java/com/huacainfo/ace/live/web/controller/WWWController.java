@@ -7,13 +7,16 @@ import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.common.tools.WaterMarkUtils;
+import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.model.LiveMsg;
 import com.huacainfo.ace.live.model.LiveRpt;
 import com.huacainfo.ace.live.service.LiveMsgService;
 import com.huacainfo.ace.live.service.LiveRptService;
+import com.huacainfo.ace.live.service.LiveService;
 import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.web.websocket.WebSocketSub;
 import com.huacainfo.ace.live.web.websocket.MyWebSocket;
@@ -45,6 +48,10 @@ import java.util.Map;
 public class WWWController extends LiveBaseController {
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private LiveService liveService;
+
     @Autowired
     private WWWService wwwService;
 
@@ -253,10 +260,21 @@ public class WWWController extends LiveBaseController {
     @RequestMapping(value = "/insertLiveRpt.do")
     @ResponseBody
     public MessageResponse insertLiveRpt(String jsons) throws Exception {
-        Map<String, String> data = new HashMap<String, String>();
-        data.put("jsons", jsons);
-        this.kafkaProducerService.sendMsg("rpt", data);
-        return new MessageResponse(0, "OK");
+
+        Map<String, Object> params = JsonUtil.toMap(jsons);
+        String openid = (String) params.get("openid");
+        MessageResponse checked = liveService.checkIsBandUsers(openid);
+
+        //验证通过
+        if (0 == checked.getStatus()) {
+            Map<String, String> data = new HashMap<String, String>();
+            data.put("jsons", jsons);
+            this.kafkaProducerService.sendMsg("rpt", data);
+            return new MessageResponse(0, "OK");
+
+        } else {
+            return checked;
+        }
     }
 
     @RequestMapping(value = "/upload.do")
@@ -336,11 +354,23 @@ public class WWWController extends LiveBaseController {
 
     @RequestMapping(value = "/insertLive.do")
     @ResponseBody
-    public MessageResponse insertLive(String data) {
-        Map<String, String> params = new HashMap<>();
-        params.put("jsons", data);
-        this.kafkaProducerService.sendMsg("live", data);
-        return new MessageResponse(0, "OK");
+    public MessageResponse insertLive(String jsons) throws Exception {
+        Map<String, Object> data = JsonUtil.toMap(jsons);
+        String openid = (String) data.get("openid");
+        MessageResponse checked = liveService.checkIsBandUsers(openid);
+        //验证通过
+        if (0 == checked.getStatus()) {
+//            Map<String, String> params = new HashMap<>();
+//            params.put("jsons", jsons);
+//            this.kafkaProducerService.sendMsg("live", data);
 
+            Live live = JsonUtil.toObject(jsons, Live.class);
+
+            return liveService.insertLive(openid, live);
+        } else {
+
+            return checked;
+
+        }
     }
 }

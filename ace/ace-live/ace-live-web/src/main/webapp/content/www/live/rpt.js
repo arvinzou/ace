@@ -297,6 +297,8 @@ function(e) {
 
     data.rpt=rpt;
     data.imgs=imgs;
+    data.openid = wxuser.openid;//用于校验绑定关系
+
     var l = apiServer + "/www/live/insertLiveRpt.do";
     lvsCmd.ajax(l, {jsons:JSON.stringify(data)},
     function(e, t) {

@@ -143,8 +143,6 @@ function getInfo() {
                     function () {
                         console.log(i);
                         location.href = "rpt.html?id=" + lvsCmd.urlParams.id + "&title=" + $(".title").html() + "&companyId=" + lvsCmd.urlParams.companyId;
-                        console.log("**********跳转创建直播報道*********");
-
                     }),
                     $("#j-xc-liker").on(tap,
                         function () {
@@ -772,115 +770,91 @@ var reportLoading = !1,
     reportTpl = juicer($("#j-report script").html());
 $("#j-report script").remove();
 var firstReportString = "";
-
-//1.
-getReport(reportPage);
-//2
-setInterval(function () {
-    return !(reportLoading || $(window).scrollTop() > $("#j-liveinfo").height()
-        || $(".fn-contain").hasClass("j-hasremark") || 1 == reportSort) && void getReport(1, !0)
-}, 1e4);
-//3
-$("#j-sort").on(tap,
-    function () {
-        load = false;
-        return !reportLoading && (0 == reportSort ? (reportSort = 1, $(this).html("正序")) :
-                (reportSort = 0, $(this).html("倒序")), reportLoadEnd = !1, reportPage = 1,
-                $("#j-report").height($("#j-report").height()), $("#j-report").html(""), getReport(reportPage),
-                void(cutWindowScrollTop = 0))
-    });
-//4
-$(window).scroll(function () {
-    if (!reportLoading && !reportLoadEnd && !$(".fn-contain").hasClass("j-hasremark")) {
-        var e = $(window).scrollTop() + $(window).height();
-        e > $("body").height() - 100 && (reportPage++, getReport(reportPage))
-    }
-});
-//5
-$(".fn-contain").on(tap,
-    function () {
-        $(".actlayer").hide()
-        //$("#j-remark").addClass("fn-hide")
-    });
-//6
-$(".fn-contain").on("touchmove",
-    function () {
-        $(".actlayer").hide()
-        //$("#j-remark").addClass("fn-hide")
-    });
-//7
-$("#j-remarkform input[name=content]").on("click",
-    function () {
-        setTimeout(function () {
-                $(window).scrollTop($(".fn-contain").height())
-            },
-            200)
-    });
-//8
-$(".fn-contain").on(touchstart,
-    function () {
-        /*if ($(this).hasClass("j-hasremark")) return closeRemark(),
-         !1*/
-    });
-//9
-$("#j-remarkform").submit(function (e) {
-    e.preventDefault();
-    var i = $(this).find("input[name=rptId]").val(),
-        type = $(this).find("input[name=type]").val(),
-        a = $.trim($(this).find("input[name=content]").val());
-    if (a.length > 200) return void lvsCmd.alert("内容不能超过200字");
-    if (type == 2) {
-        submitMsg();
-        return;
-    }
-    if (a) {
-        var message = {};
-        message.header = {
-            type: 2,
-            wxuser: wxuser
-        };
-        message.content = a;
-        message.id = i;
-        message.createTime = new Date().pattern("hh:mm:ss");
-        var n = {
-            companyId: lvsCmd.urlParams.companyId,
-            rid: lvsCmd.urlParams.id,
-            rptId: i,
-            message: JSON.stringify(message),
-            topic: "cmt",
-            uid: wxuser.openid
-        };
-        lvsCmd.ajax(apiServer + "/www/live/cmt.do", n,
-            function (e, n) {
-                if (e) if (0 == n.status) {
-                    $("#j-remarkform input[name=content]").val("");
-                    closeRemark();
-                    //var o = $("#j-remark-" + i);
-                    //o.find(".list").append("<p><span>" + userDict.identityName + ": </span>" + a + "</p>"),
-                    //showRemark(o)
-                    var e = $('#j-remark-' + i).offset().top - $('#j-remark-' + i).height();
-                    console.log("===============>" + e);
-                    $(window).scrollTop(e)
-                } else lvsCmd.alert(n.errorMessage);
-                else lvsCmd.alert("提交失败")
-            })
-    }
-    return !1
-});
-//10
-if ("weixin" == webviewType) {
+if (getReport(reportPage), setInterval(function () {
+            return !(reportLoading || $(window).scrollTop() > $("#j-liveinfo").height() || $(".fn-contain").hasClass("j-hasremark") || 1 == reportSort) && void getReport(1, !0)
+        },
+        1e4), $("#j-sort").on(tap,
+        function () {
+            load = false;
+            return !reportLoading && (0 == reportSort ? (reportSort = 1, $(this).html("正序")) : (reportSort = 0, $(this).html("倒序")), reportLoadEnd = !1, reportPage = 1, $("#j-report").height($("#j-report").height()), $("#j-report").html(""), getReport(reportPage), void(cutWindowScrollTop = 0))
+        }),
+        $(window).scroll(function () {
+            if (!reportLoading && !reportLoadEnd && !$(".fn-contain").hasClass("j-hasremark")) {
+                var e = $(window).scrollTop() + $(window).height();
+                e > $("body").height() - 100 && (reportPage++, getReport(reportPage))
+            }
+        }), $(".fn-contain").on(tap,
+        function () {
+            $(".actlayer").hide()
+            //$("#j-remark").addClass("fn-hide")
+        }), $(".fn-contain").on("touchmove",
+        function () {
+            $(".actlayer").hide()
+            //$("#j-remark").addClass("fn-hide")
+        }), $("#j-remarkform input[name=content]").on("click",
+        function () {
+            setTimeout(function () {
+                    $(window).scrollTop($(".fn-contain").height())
+                },
+                200)
+        }), $(".fn-contain").on(touchstart,
+        function () {
+            /*if ($(this).hasClass("j-hasremark")) return closeRemark(),
+             !1*/
+        }), $("#j-remarkform").submit(function (e) {
+        e.preventDefault();
+        var i = $(this).find("input[name=rptId]").val(),
+            type = $(this).find("input[name=type]").val(),
+            a = $.trim($(this).find("input[name=content]").val());
+        if (a.length > 200) return void lvsCmd.alert("内容不能超过200字");
+        if (type == 2) {
+            submitMsg();
+            return;
+        }
+        if (a) {
+            var message = {};
+            message.header = {
+                type: 2,
+                wxuser: wxuser
+            };
+            message.content = a;
+            message.id = i;
+            message.createTime = new Date().pattern("hh:mm:ss");
+            var n = {
+                companyId: lvsCmd.urlParams.companyId,
+                rid: lvsCmd.urlParams.id,
+                rptId: i,
+                message: JSON.stringify(message),
+                topic: "cmt",
+                uid: wxuser.openid
+            };
+            lvsCmd.ajax(apiServer + "/www/live/cmt.do", n,
+                function (e, n) {
+                    if (e) if (0 == n.status) {
+                        $("#j-remarkform input[name=content]").val("");
+                        closeRemark();
+                        //var o = $("#j-remark-" + i);
+                        //o.find(".list").append("<p><span>" + userDict.identityName + ": </span>" + a + "</p>"),
+                        //showRemark(o)
+                        var e = $('#j-remark-' + i).offset().top - $('#j-remark-' + i).height();
+                        console.log("===============>" + e);
+                        $(window).scrollTop(e)
+                    } else lvsCmd.alert(n.errorMessage);
+                    else lvsCmd.alert("提交失败")
+                })
+        }
+        return !1
+    }), "weixin" == webviewType) {
     // var wxConfig = {
     //     noncestr: "",
     //     timestamp: (new Date).getTime(),
     //     url: wxShareDict.link,
     //     appid: ""
     // };
-
-    //微信接口配置
     lvsCmd.ajax(apiServer + "/www/live/getWxJsSign.do", {companyId: companyId},
         function (e, i) {
             wx.config({
-                debug: false,
+                debug: true,
                 appId: i.data.appId,
                 timestamp: i.data.timestamp,
                 nonceStr: i.data.nonceStr,
@@ -890,86 +864,16 @@ if ("weixin" == webviewType) {
             console.log(i.data);
         })
 }
-//拆分
-// if ("1", "2", 3, 4 , 5, 6, 7, 8, 9, 10) {
-//     // var wxConfig = {
-//     //     noncestr: "",
-//     //     timestamp: (new Date).getTime(),
-//     //     url: wxShareDict.link,
-//     //     appid: ""
-//     // };
-//     lvsCmd.ajax(apiServer + "/www/live/getWxJsSign.do", {companyId: companyId},
-//         function (e, i) {
-//             wx.config({
-//                 debug: true,
-//                 appId: i.data.appId,
-//                 timestamp: i.data.timestamp,
-//                 nonceStr: i.data.nonceStr,
-//                 signature: i.data.signature,
-//                 jsApiList: ["onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ"]
-//             })
-//             console.log(i.data);
-//         })
-// }
-//需要检测的JS接口列表，所有JS接口列表见附录2,
-wx.checkJsApi({
-    jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-    success: function (res) {
-        // 以键值对的形式返回，可用的api值true，不可用为false
-        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-        console.log("checkJsApi result:");
-        console.log(res);
-    }
-});
-
 var wxReady = !1;
-//配置成功后执行
-wx.ready(function () {
-    if (wxReady != !0)
-        return;
-    //     onshare()
-    console.log("****************wx.ready***************");
-    //分享给朋友圈
-    wx.onMenuShareTimeline({
-        title: "我是标题123",
-        link: wxShareDict.link,
-        imgUrl: wxShareDict.imgUrl,
-        success: function () {
-        },
-        cancel: function () {
-        }
-    });
-    //分享给朋友
-    wx.onMenuShareAppMessage({
-        title: wxShareDict.title,
-        desc: wxShareDict.desc,
-        link: wxShareDict.link,
-        imgUrl: wxShareDict.imgUrl,
-        type: "link",
-        dataUrl: "",
-        success: function () {
-        },
-        cancel: function () {
-        }
-    });
-    //分享到QQ
-    wx.onMenuShareQQ({
-        title: wxShareDict.title,
-        desc: wxShareDict.desc,
-        link: wxShareDict.link,
-        imgUrl: wxShareDict.imgUrl,
-        success: function () {
-        },
-        cancel: function () {
-        }
-    });
 
+wx.ready(function () {
+    wxReady = !0,
+        onshare()
 });
-//配置失败时执行
+
 wx.error(function (res) {
     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-    console.log("wx_config_error:");
-    console.log(res);
+    console.log("wx_config_error:" + res);
 });
 
 var cutWindowScrollTop = 0,

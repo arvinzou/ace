@@ -87,4 +87,6 @@ public interface LiveService {
 
 
     MessageResponse insertLive(String openid, Live live) throws Exception;
+
+    MessageResponse checkIsBandUsers(String openid);
 }

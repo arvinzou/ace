@@ -58,6 +58,5 @@ public interface LiveDao {
 
     int updateLiveVisitNum(String id);
 
-
     Users selectSysUserByOpenid(String openid);
 }
