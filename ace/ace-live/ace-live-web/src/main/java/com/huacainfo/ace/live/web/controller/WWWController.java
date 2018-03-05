@@ -14,13 +14,12 @@ import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.model.LiveMsg;
 import com.huacainfo.ace.live.model.LiveRpt;
-import com.huacainfo.ace.live.service.LiveMsgService;
-import com.huacainfo.ace.live.service.LiveRptService;
-import com.huacainfo.ace.live.service.LiveService;
-import com.huacainfo.ace.live.service.WWWService;
+import com.huacainfo.ace.live.service.*;
 import com.huacainfo.ace.live.web.websocket.WebSocketSub;
 import com.huacainfo.ace.live.web.websocket.MyWebSocket;
+import com.huacainfo.ace.portal.model.SensitiveWords;
 import com.huacainfo.ace.portal.service.FilesService;
+import com.huacainfo.ace.portal.vo.SensitiveWordsVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +74,10 @@ public class WWWController extends LiveBaseController {
     private FilesService filesService;
 
     private WaterMarkUtils waterMarkUtils = new WaterMarkUtils();
+
+    @Autowired
+    private LiveCmtService liveCmtService;
+
 
 
     /**
@@ -231,10 +234,21 @@ public class WWWController extends LiveBaseController {
         data.put("companyId", companyId);
         data.put("rptId", rptId);
         data.put("uid", uid);
+        JSONObject jsons=JSON.parseObject(message);
+        String content=jsons.getString("content");
+        List<String> list = this.liveCmtService.findSensitiveWordsList(companyId);
+        for(String word:list){
+            String x="";
+            if(content.indexOf(word)==-1){
+                continue;
+            }
+            for(int i=0;i<word.length();i++){
+                x+="*";
+            }
+            jsons.put("content",content.replaceAll(word,x));
+        }
+        message=JSON.toJSONString(jsons);
         data.put("message", message);
-        this.logger.info("{}", "---------------------------------------------------------------------------------------------------");
-        this.logger.info("{}", companyId);
-        this.logger.info("{}", data);
         this.kafkaProducerService.sendMsg(topic, data);
         //群发消息
         for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {

@@ -93,9 +93,7 @@
           <element id="archive" name="ace-common-web-1.0.jar">
             <element id="module-output" name="ace-common-web" />
           </element>
-          <element id="archive" name="ace-jave-1.0.jar">
-            <element id="module-output" name="ace-jave" />
-          </element>
+          <element id="library" level="project" name="Maven: com.huacainfo:ace-jave:1.0" />
           <element id="library" level="project" name="Maven: org.springframework.session:spring-session:1.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:4.0.4.RELEASE" />

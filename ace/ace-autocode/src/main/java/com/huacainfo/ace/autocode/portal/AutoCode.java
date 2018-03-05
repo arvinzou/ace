@@ -4,8 +4,8 @@ import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 
 public class AutoCode {
 	public static void main(String[] args) throws Exception{
-        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("portal", "微信用户", "陈晓克");
-        Class<?> c = com.huacainfo.ace.portal.model.Userinfo.class;
+        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("portal", "敏感词", "王恩");
+        Class<?> c = com.huacainfo.ace.portal.model.SensitiveWords.class;
         autoCodeUtils.init(c);
 		autoCodeUtils.createVO(c);
 		autoCodeUtils.createQVO(c);
@@ -17,8 +17,6 @@ public class AutoCode {
 		autoCodeUtils.createJsConfig(c);
 		autoCodeUtils.createJsView(c);
 		autoCodeUtils.createJsController(c);
-
 		autoCodeUtils.createModel(c);
-
 	}
 }

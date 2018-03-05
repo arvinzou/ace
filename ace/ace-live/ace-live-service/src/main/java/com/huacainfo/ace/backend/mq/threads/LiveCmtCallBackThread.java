@@ -65,7 +65,6 @@ public class LiveCmtCallBackThread extends Thread {
             o.setContent(JSON.parseObject(data.get("message")).getString("content"));
             o.setUid(data.get("uid"));
             o.setRptId(data.get("rptId"));
-            String rid=data.get("rid");
             MessageResponse rst = this.liveCmtService.insertLiveCmt(o,data.get("companyId"));
             LOGGER.info("{}", rst.getErrorMessage());
         } catch (Exception e) {

@@ -26,12 +26,13 @@ import com.huacainfo.ace.live.service.LiveCmtService;
 import com.huacainfo.ace.live.vo.LiveCmtVo;
 import com.huacainfo.ace.live.vo.LiveCmtQVo;
 
-@Service("liveCmtService")
+
 /**
  * @author: 陈晓克
  * @version: 2018-01-13
  * @Description: TODO(评论)
  */
+@Service("liveCmtService")
 public class LiveCmtServiceImpl implements LiveCmtService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -93,20 +94,6 @@ public class LiveCmtServiceImpl implements LiveCmtService {
         String content=o.getContent();
         if (CommonUtils.isBlank(content)) {
             return new MessageResponse(1, "聊天内容不能为空！");
-        }
-        SensitiveWords condition=new SensitiveWords();
-        condition.setDeptId(corpId);
-        List<SensitiveWordsVo> list = this.liveCmtDao.findSensitiveWordsList(condition);
-        for(SensitiveWords sw:list){
-            String x="";
-            String word=sw.getWord();
-            if(content.indexOf(word)==-1){
-               continue;
-            }
-            for(int i=0;i<sw.getWord().length();i++){
-                x+="*";
-            }
-            o.setContent(content.replaceAll(word,x));
         }
         o.setStatus("1");
         o.setCreateTime(new Date());
@@ -173,5 +160,11 @@ public class LiveCmtServiceImpl implements LiveCmtService {
         this.dataBaseLogService.log("删除评论", "评论", String.valueOf(id),
                 String.valueOf(id), "评论", userProp);
         return new MessageResponse(0, "评论删除完成！");
+    }
+
+    @Override
+    public List<String> findSensitiveWordsList(String deptId) throws Exception {
+        List<String> list = this.liveCmtDao.findSensitiveWordsListBydeptId(deptId);
+        return list;
     }
 }

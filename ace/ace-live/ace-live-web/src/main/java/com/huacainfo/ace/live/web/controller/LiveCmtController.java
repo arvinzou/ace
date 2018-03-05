@@ -126,7 +126,6 @@ public class LiveCmtController extends LiveBaseController {
             throws Exception {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
-        return this.liveCmtService.deleteLiveCmtByLiveCmtId(id,
-                this.getCurUserProp());
+        return this.liveCmtService.deleteLiveCmtByLiveCmtId(id, this.getCurUserProp());
     }
 }

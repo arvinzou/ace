@@ -9,6 +9,8 @@ import com.huacainfo.ace.live.model.LiveCmt;
 import com.huacainfo.ace.live.vo.LiveCmtVo;
 import com.huacainfo.ace.live.vo.LiveCmtQVo;
 
+import java.util.List;
+
 /**
  * @author: 陈晓克
  * @version: 2018-01-13
@@ -80,4 +82,7 @@ public interface LiveCmtService {
      * @version: 2018-01-13
      */
     public abstract MessageResponse deleteLiveCmtByLiveCmtId(String id, UserProp userProp) throws Exception;
+
+    List<String> findSensitiveWordsList(String deptId) throws Exception;
+
 }

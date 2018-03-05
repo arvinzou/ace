@@ -10,9 +10,7 @@
           <element id="archive" name="ace-common-web-1.0.jar">
             <element id="module-output" name="ace-common-web" />
           </element>
-          <element id="archive" name="ace-jave-1.0.jar">
-            <element id="module-output" name="ace-jave" />
-          </element>
+          <element id="library" level="project" name="Maven: com.huacainfo:ace-jave:1.0" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.5" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.14" />
