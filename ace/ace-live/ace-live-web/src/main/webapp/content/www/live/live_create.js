@@ -347,9 +347,10 @@ function judegTimeOrder(time1, time2) {
 
 
 function ajaxSuccess() {
-    $(".j-content").val("");
-    location.reload();
-    (alert("数据保存成功！"), parent.pizzaCmd.history.pop())
+    // $(".j-content").val("");
+    // location.reload();
+    location.href = "index.html?companyId=" + lvsCmd.urlParams.companyId;
+    (alert("数据保存成功！"), parent.pizzaCmd.history.pop());
 }
 
 function ajaxFailed(t) {
