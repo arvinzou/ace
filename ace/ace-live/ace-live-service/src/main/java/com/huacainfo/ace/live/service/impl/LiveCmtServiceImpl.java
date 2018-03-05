@@ -94,11 +94,10 @@ public class LiveCmtServiceImpl implements LiveCmtService {
         if (CommonUtils.isBlank(content)) {
             return new MessageResponse(1, "聊天内容不能为空！");
         }
-        PageResult<SensitiveWordsVo> rst = new PageResult<>();
         SensitiveWords condition=new SensitiveWords();
         condition.setDeptId(corpId);
         List<SensitiveWordsVo> list = this.liveCmtDao.findSensitiveWordsList(condition);
-        for(SensitiveWordsVo sw:list){
+        for(SensitiveWords sw:list){
             String x="";
             String word=sw.getWord();
             if(content.indexOf(word)==-1){
@@ -107,9 +106,8 @@ public class LiveCmtServiceImpl implements LiveCmtService {
             for(int i=0;i<sw.getWord().length();i++){
                 x+="*";
             }
-            content.replaceAll(word,x);
+            o.setContent(content.replaceAll(word,x));
         }
-        rst.setRows(list);
         o.setStatus("1");
         o.setCreateTime(new Date());
         this.liveCmtDao.insert(o);

@@ -79,12 +79,12 @@
 
     <select id="isExit" resultType="int">
         select count(*)
-        from
-        live_cmt where
+        from live_cmt
+        where
         content=#{content} and rptId =#{condition.rptId,jdbcType=VARCHAR}
     </select>
 
-    <resultMap id="BaseResultMap1" type="com.huacainfo.ace.portal.model.SensitiveWords">
+    <resultMap id="BaseSenditiveWordsResultMap" type="com.huacainfo.ace.portal.model.SensitiveWords">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="word" jdbcType="VARCHAR" property="word"/>
         <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
@@ -93,8 +93,8 @@
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
 
-    <select id="findSensitiveWordsList" parameterType="java.lang.String" resultMap="BaseResultMap1">
-        select *
+    <select id="findSensitiveWordsList" parameterType="java.lang.String" resultMap="BaseSenditiveWordsResultMap">
+        select word,deptId,createUserId,createUserName,createDate
         from portal.sensitive_words
         where deptId = #{deptId,jdbcType=VARCHAR}
     </select>
