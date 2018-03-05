@@ -80,6 +80,4 @@ public interface LiveCmtService {
      * @version: 2018-01-13
      */
     public abstract MessageResponse deleteLiveCmtByLiveCmtId(String id, UserProp userProp) throws Exception;
-
-    Live findLiveByPrimaryKey(String id);
 }

@@ -224,15 +224,17 @@ public class WWWController extends LiveBaseController {
 
     @RequestMapping(value = "/cmt.do")
     @ResponseBody
-    public MessageResponse cmt(String message, String rid, String uid, String rptId, String topic) throws Exception {
+    public MessageResponse cmt(String companyId,String message, String rid, String uid, String rptId, String topic) throws Exception {
         logger.debug("{} {}", rid, message);
         Map<String, String> data = new HashMap<String, String>();
         data.put("rid", rid);
+        data.put("companyId", companyId);
         data.put("rptId", rptId);
         data.put("uid", uid);
         data.put("message", message);
+        this.logger.info("{}", "---------------------------------------------------------------------------------------------------");
+        this.logger.info("{}", companyId);
         this.logger.info("{}", data);
-
         this.kafkaProducerService.sendMsg(topic, data);
         //群发消息
         for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {

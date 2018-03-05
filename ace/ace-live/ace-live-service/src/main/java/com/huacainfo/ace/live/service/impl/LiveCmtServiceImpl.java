@@ -176,10 +176,4 @@ public class LiveCmtServiceImpl implements LiveCmtService {
                 String.valueOf(id), "评论", userProp);
         return new MessageResponse(0, "评论删除完成！");
     }
-
-    @Override
-    public Live findLiveByPrimaryKey(String id) {
-        return liveDao.selectByPrimaryKey(id);
-    }
-
 }

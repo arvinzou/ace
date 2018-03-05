@@ -455,6 +455,7 @@
         <result column="cur_syid" property="curSyid" jdbcType="VARCHAR"/>
     </resultMap>
 
+
     <select id="selectSysUserByOpenid" parameterType="java.lang.String" resultMap="SysUsersMap">
          select user_id,account,password,sex,id_card,name,
 				department_id,area_code,birthday,stauts, last_login_time,
