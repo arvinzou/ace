@@ -962,6 +962,8 @@ $(window).on("scroll",
             $("#j-liveinfo .view img").css("width", "5rem");
             $("#j-liveinfo .view img").css("float", "left");
             $(".count_down").addClass("fn-hide");
+            $("#j-livevideo").css("height", "2.8rem");
+
 
 
         } else {
@@ -987,6 +989,7 @@ $(window).on("scroll",
             $("#j-liveinfo .view img").css("width", "10rem");
             $("#j-liveinfo .view img").css("float", "null");
             $(".count_down").removeClass("fn-hide");
+            $("#j-livevideo").css("height", "5.62rem");
 
         }
     });
