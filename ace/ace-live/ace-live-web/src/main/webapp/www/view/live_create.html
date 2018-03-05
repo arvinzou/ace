@@ -32,19 +32,20 @@
             border-radius: 5px;
         }
 
-        .pictureContainer{
+        .pictureContainer {
             position: relative;
             width: 100%;
             height: 100%;
             margin: 0px auto;
             cursor: pointer;
         }
-        .pictureContainer img{
+
+        .pictureContainer img {
             width: 100%;
             height: 100%;
         }
 
-        .pictureContainer .viewPicture{
+        .pictureContainer .viewPicture {
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -52,25 +53,25 @@
             border-radius: 5px;
         }
 
-        .uploadText{
+        .uploadText {
             position: absolute;
-            top:0;
+            top: 0;
             left: 0;
-            padding-top:20px;
+            padding-top: 20px;
             width: 100%;
             height: 100%;
             text-align: center;
         }
 
-        .uploadText .icon-img{
+        .uploadText .icon-img {
             font-size: 50px;
         }
 
-        .uploadText:hover{
+        .uploadText:hover {
             color: #1a9fff;
         }
 
-        #j-row-img{
+        #j-row-img {
             width: 100%;
             height: 150px;
             margin: 0px auto 10px auto;
@@ -84,12 +85,19 @@
     <div class="pz-form">
         <form id="j-liveform">
             <div class="wrap fn-clear">
+                <!--标题-->
+                <div id="j-title" class="group1">
+                    <div class="row xcy-row">
+                        <div class="row-title">标题*<span class="j-remark-length fn-right">0/30</span></div>
+                        <div id="j-title-content" class="row-content" data-field="title"></div>
+                    </div>
+                </div>
                 <!--封面-->
                 <div class="group1">
                     <div class="row xcy-row">
                         <div class="row-title">封面*<em>（750px * 422px）</em></div>
                         <div id="j-upcontain" class="row-content">
-                            <div id="j-row-img" class="xcy-video fn-left img-content" >
+                            <div id="j-row-img" class="xcy-video fn-left img-content">
                                 <div class="pictureContainer" id="upbtn">
                                     <div class="viewPicture">
                                         <img src="">
@@ -103,20 +111,11 @@
                         </div>
                     </div>
                 </div>
-
-                <!--标题-->
-                <div id="j-title" class="group1">
-                    <div class="row xcy-row">
-                        <div class="row-title">标题*<span class="j-remark-length fn-right">0/30</span></div>
-                        <div id="j-title-content" class="row-content" data-field="name"></div>
-                    </div>
-                </div>
                 <!--开始时间-->
                 <div class="group1">
                     <div class="row xcy-row">
                         <div class="row-title">开始时间*</div>
                         <div class="row-content" data-field="startTime">
-                            <!--<input id="startTime" type="text" name="startTime" class="j-content fn-text fn-h30 start-time">-->
                         </div>
                     </div>
                 </div>
@@ -131,7 +130,7 @@
                 <div id="j-summary" class="group1">
                     <div class="row xcy-row">
                         <div class="row-title">摘要*<span class="j-remark-length fn-right">0/500</span></div>
-                        <div id="j-summary-content" class="row-content summary" data-field="remark"></div>
+                        <div id="j-summary-content" class="row-content" data-field="name"></div>
                     </div>
                 </div>
                 <!--活动介绍-->

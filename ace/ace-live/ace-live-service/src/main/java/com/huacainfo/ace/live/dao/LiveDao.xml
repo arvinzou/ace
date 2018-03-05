@@ -221,7 +221,9 @@
         status state,
         name topic,
         category type,
-        null watermarkConfig from live where deptId=#{companyId} order by startTime desc  limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+        null watermarkConfig from live where deptId=#{companyId}
+        order by status, startTime desc
+        limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
 
         ]]>
     </select>
