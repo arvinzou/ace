@@ -3,6 +3,7 @@ package com.huacainfo.ace.live.service.impl;
 
 import java.util.*;
 
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.live.dao.LiveRptDao;
 import com.huacainfo.ace.live.vo.LiveRptQVo;
@@ -105,6 +106,12 @@ public class LiveServiceImpl implements LiveService {
 
         if (CommonUtils.isBlank(o.getStartTime())) {
             return new MessageResponse(1, "开始时间不能为空！");
+        }
+        if (o.getStartTime().before(DateUtil.getNowDate())) {
+            return new MessageResponse(1, "开始时间不能在系统时间之前");
+        }
+        if (o.getStartTime().after(o.getEndTime())) {
+            return new MessageResponse(1, "开始时间结束时间之后");
         }
         if (CommonUtils.isBlank(o.getRemark())) {
             return new MessageResponse(1, "摘要不能为空！");
