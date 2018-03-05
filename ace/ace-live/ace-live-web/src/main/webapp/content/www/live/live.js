@@ -243,15 +243,16 @@ function getInfo() {
                 1 == i.data.partakeState && $(".xcy-totalcount").addClass("fn-hide")
                 //$(".xcy-totalcount").html("浏览人数" + i.data.numOfPartake);
                 var f = i.data.startTime;
+               $.leftTime(i.data.startTime,function(d){
+               							if(d.status){
+               								var $dateShow1=$(".count_down_content");
+               								$dateShow1.find(".day_num").html(d.d);
+               								$dateShow1.find(".hour_num").html(d.h);
+               								$dateShow1.find(".min_num").html(d.m);
+               								$dateShow1.find(".sec_num").html(d.s);
+               							}
+               						});
 
-                $(".count_down").countDown({
-                			startTimeStr:i.data.startTime,//开始时间
-                        	endTimeStr:i.data.endTime,//结束时间
-                        	daySelector:".day_num",
-                            hourSelector:".hour_num",
-                            minSelector:".min_num",
-                            secSelector:".sec_num"
-                		});
                 i && i.data && (i.data.topic && (wxShareDict.title = i.data.topic, document.title = wxShareDict.title), i.data.remark && (wxShareDict.desc = i.data.remark), i.data.cover && (wxShareDict.imgUrl = i.data.cover), onshare()),
                     increateNumTimeFn(),
                     lvsCmd.ajax(apiServer + "/www/live/getTotalNumAndOrgInfo.do", {
@@ -854,7 +855,7 @@ if (getReport(reportPage), setInterval(function () {
     lvsCmd.ajax(apiServer + "/www/live/getWxJsSign.do", {companyId: companyId},
         function (e, i) {
             wx.config({
-                debug: true,
+                debug: false,
                 appId: i.data.appId,
                 timestamp: i.data.timestamp,
                 nonceStr: i.data.nonceStr,

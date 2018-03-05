@@ -58,7 +58,7 @@
 
             var defaults = {
                     startTimeStr: "2017/01/10 00:00:00",
-                    endTimeStr: "2017/01/17 23:59:59",
+                    endTimeStr: "2019/01/17 23:59:59",
                     daySelector:".day",
                     hourSelector:".hour",
                     minSelector:".min",
