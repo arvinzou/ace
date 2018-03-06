@@ -369,7 +369,15 @@ function reportBind(e) {
             if (c == 1) {
                 $(this).append("<img data-lazy-img='" + i + "' src='" + i + "' style='width:100%;height:auto'/>");
             } else {
-                $(this).append("<img data-lazy-img='" + i + "' src='" + i + "'/>");
+                 var l = new Image;
+                 l.setAttribute("data-lazy-img", i);
+                 l.setAttribute("src", i);
+                 var c = $(l);
+                $(this).append(c);
+                l.complete && c.height() < c.parent().height() && (c.width("auto"), c.height(c.parent().height())),
+                l.onload = function() {
+                    c.height() < c.parent().height() && (c.width("auto"), c.height(c.parent().height()))
+                }
             }
 
         });

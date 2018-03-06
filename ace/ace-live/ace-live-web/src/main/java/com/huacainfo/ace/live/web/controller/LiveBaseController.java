@@ -16,8 +16,8 @@ public class LiveBaseController extends BaseController implements
 			p.put("start", 0);
 			p.put("end", defaultPageSize);
 		} else {
-			p.put("start", (page - 1) * defaultPageSize + 1);
-			p.put("end", page * defaultPageSize);
+			p.put("start", (page - 1) * defaultPageSize);
+			p.put("end",  defaultPageSize);
 		}
 		p.put("fastdfs_server", PropertyUtil.getProperty("fastdfs_server"));
 		return p;

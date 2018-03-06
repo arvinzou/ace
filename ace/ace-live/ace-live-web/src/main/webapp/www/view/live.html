@@ -165,6 +165,14 @@
                 {@else}
                 {@if data.cover}
                 <img src="${data.cover}">
+                {@if data.state == 1}
+                <div class="count_down">
+                    <div class="count_down_content">
+                        <span class="day_num"></span>天<span class="hour_num"></span>小时<span class="min_num"></span>分<span class="sec_num"></span>秒
+                        <div class="djs">直播倒计时</div>
+                    </div>
+                </div>
+                {@/if}
                 <div id="j-video-text" class="fn-hide" style="width:5rem;color:#fff">
                     <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">${data.topic}</p></div>
                 </div>
