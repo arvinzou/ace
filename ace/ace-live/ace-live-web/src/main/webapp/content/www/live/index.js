@@ -13,7 +13,7 @@ function getList() {
                 function () {
                     console.log(i);
                     location.href = "live_create.html?id=" + lvsCmd.urlParams.id + "&companyId=" + lvsCmd.urlParams.companyId;
-                    console.log("**********跳转创建直播*********");
+                    // console.log("**********跳转创建直播*********");
                 });
 
             if (i) {
