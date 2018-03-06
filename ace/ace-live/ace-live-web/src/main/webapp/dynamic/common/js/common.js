@@ -35,12 +35,18 @@ function promptDo(text) {
 $(function () {
     $('#htmlLoad').on('click', '.html-blackCancel', hideTableDo);
     $('#htmlLoad').on('click', '.blackBtn', hideTableDo);
+    $('#htmlLoad').on('focus', '.form-control', actionPromptDo);
 });
+
+function actionPromptDo() {
+    promptDo('');
+}
 
 
 /*隐藏修改页面*/
 function hideTableDo() {
     $('#htmlLoad').empty();
+    $('#JSLoad').empty();
 }
 
 /*选择报道类型*/

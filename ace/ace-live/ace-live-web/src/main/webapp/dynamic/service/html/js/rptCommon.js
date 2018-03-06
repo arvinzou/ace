@@ -3,8 +3,8 @@ $(function () {
     $('.reportImageUploadList').on('click', '.removeImage', removeImgDo);
     $('.reportVideoUploadList').on('click', '.removeVideo', removeVdoDo);
     $('.formRow').on('keyup', 'textarea', computedNumDo);
-    $('#htmlLoad').on('focus', '.form-control', actionPromptDo);
     $(":radio").on('click', chooseRptTypeDo);
+    $('.html-margin').on('click','.release',releaseDo);
 });
 
 /*直播名字字数的计算*/
@@ -63,11 +63,6 @@ function removeVdoDo() {
     return false;
 }
 
-
-
-function actionPromptDo() {
-    promptDo('');
-}
 
 
 function chooseVideoRptDo() {
