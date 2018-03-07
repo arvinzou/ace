@@ -24,7 +24,7 @@ public class TokenController extends WocBaseController {
 	private AnalysisService analysisService;
 
 	@RequestMapping(value = "/login")
-	public ResponseEntity login(String username,String password)
+	public ResponseEntity login(@RequestParam String username, @RequestParam String password)
 			throws Exception {
 		Map<String,Object> rst=new HashMap<>();
 		rst.put("access_token","2YotnFZFEjr1zCsicMWpAA");

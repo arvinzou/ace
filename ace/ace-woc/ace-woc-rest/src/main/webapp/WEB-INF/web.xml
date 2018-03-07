@@ -60,7 +60,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>springServlet</servlet-name>
-        <url-pattern>*.*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!-- spring mvc filter end -->
     <welcome-file-list>
