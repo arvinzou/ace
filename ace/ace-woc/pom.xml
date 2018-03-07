@@ -11,5 +11,6 @@
 		<module>ace-woc-client</module> 
 		<module>ace-woc-service</module>
 		<module>ace-woc-web</module> 
+		<module>ace-woc-rest</module>
 	</modules>
 </project>
