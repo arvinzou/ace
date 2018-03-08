@@ -7,7 +7,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<description>Spring MVC Configuration</description>
+
 	<!--SpringMVC自带的JSON转换工具,支持@ResponseBody @RequestBody 注解 -->
+
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
@@ -16,9 +18,8 @@
 			</list>
 		</property>
 	</bean>
-	<!-- <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> 
-		<property name="supportedMediaTypes"> <list> <value>application/json;charset=UTF-8</value> 
-		</list> </property> </bean> -->
+
+
 	<bean id="jsonHttpMessageConverter"
 		class="com.huacainfo.ace.common.web.converter.MappingFastJsonHttpMessageConverter">
 		<property name="supportedMediaTypes">
@@ -32,6 +33,7 @@
 			</list>
 		</property>
 	</bean>
+
 	<!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

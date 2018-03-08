@@ -44,7 +44,7 @@ public class TokenController extends WocBaseController {
 	}
 	@RequestMapping("/requestJson")
 	@ResponseBody
-	public Users requestJson(@RequestBody Users users){
+	public java.util.List<Users> requestJson(@RequestBody java.util.List<Users> users){
 		//@ResponseBody将itemsCustom转成json格式输出
 		/*
 		<script>
