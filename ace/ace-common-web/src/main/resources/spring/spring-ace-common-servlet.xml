@@ -37,7 +37,7 @@
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">
 			<list>
-				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
 			</list>
 		</property>
 	</bean>
