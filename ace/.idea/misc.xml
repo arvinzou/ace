@@ -20,7 +20,9 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/ace-live/pom.xml" />
         <option value="$PROJECT_DIR$/ace-rvc/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/pom.xml" />
       </set>
     </option>
   </component>

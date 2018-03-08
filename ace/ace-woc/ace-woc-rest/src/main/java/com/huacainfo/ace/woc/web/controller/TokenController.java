@@ -3,7 +3,7 @@ package com.huacainfo.ace.woc.web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.portal.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,19 +44,22 @@ public class TokenController extends WocBaseController {
 	}
 	@RequestMapping("/requestJson")
 	@ResponseBody
-	public Userinfo requestJson(@RequestBody Userinfo userinfo){
+	public Users requestJson(@RequestBody Users users){
 		//@ResponseBody将itemsCustom转成json格式输出
 		/*
-		$.ajax({
-				type:'post',
-				url:'${pageContext.request.contextPath }/requestJson.action',
-				contentType:'application/json;charset=utf-8',
-				//数据格式是json串,商品信息
-				data:'{"name":"手机","price":999}',
-				success:function(data){//返回json结果
-			alert(data);
-		}
-            });*/
-		return userinfo;
+		<script>
+			jQuery(function($) {
+			$.ajax({
+					type:'post',
+					url:'${pageContext.request.contextPath }/v1/token/requestJson',
+					contentType:'application/json;charset=utf-8',
+					data:'{"name":"王五","createTime":"2018-03-08"}',
+					success:function(data){
+						console.log(data);
+					}
+				});
+				});
+		</script>*/
+		return users;
 	}
 }
