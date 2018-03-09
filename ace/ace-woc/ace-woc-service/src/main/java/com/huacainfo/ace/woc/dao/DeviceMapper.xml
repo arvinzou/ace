@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.woc.dao.DeviceMapper">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.woc.model.Device">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="deviceName" property="deviceName" jdbcType="VARCHAR"/>
+        <result column="deviceNo" property="deviceNo" jdbcType="VARCHAR"/>
+        <result column="deviceType" property="deviceType" jdbcType="CHAR"/>
+        <result column="deviceStatus" property="deviceStatus" jdbcType="CHAR"/>
+        <result column="onlineDate" property="onlineDate" jdbcType="TIMESTAMP"/>
+        <result column="offlineDate" property="offlineDate" jdbcType="TIMESTAMP"/>
+        <result column="manufacturer" property="manufacturer" jdbcType="VARCHAR"/>
+        <result column="manufactureDate" property="manufactureDate" jdbcType="TIMESTAMP"/>
+        <result column="contactName" property="contactName" jdbcType="VARCHAR"/>
+        <result column="contactPhoneNumber" property="contactPhoneNumber" jdbcType="VARCHAR"/>
+        <result column="ipAddr" property="ipAddr" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="createUserId" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="createUserName" property="createUserName" jdbcType="VARCHAR"/>
+        <result column="createDate" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="lastModifyUserId" property="lastModifyUserId" jdbcType="VARCHAR"/>
+        <result column="lastModifyUserName" property="lastModifyUserName" jdbcType="VARCHAR"/>
+        <result column="lastModifyDate" property="lastModifyDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, deviceName, deviceNo, deviceType, deviceStatus, onlineDate, offlineDate, manufacturer, 
+    manufactureDate, contactName, contactPhoneNumber, ipAddr, remark, status, createUserId, 
+    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from device
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from device
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.woc.model.Device">
+        insert into device (id, deviceName, deviceNo,
+        deviceType, deviceStatus, onlineDate,
+        offlineDate, manufacturer, manufactureDate,
+        contactName, contactPhoneNumber, ipAddr,
+        remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate)
+        values (#{id,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, #{deviceNo,jdbcType=VARCHAR},
+        #{deviceType,jdbcType=CHAR}, #{deviceStatus,jdbcType=CHAR}, #{onlineDate,jdbcType=TIMESTAMP},
+        #{offlineDate,jdbcType=TIMESTAMP}, #{manufacturer,jdbcType=VARCHAR}, #{manufactureDate,jdbcType=TIMESTAMP},
+        #{contactName,jdbcType=VARCHAR}, #{contactPhoneNumber,jdbcType=VARCHAR}, #{ipAddr,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.Device">
+        insert into device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="deviceName != null">
+                deviceName,
+            </if>
+            <if test="deviceNo != null">
+                deviceNo,
+            </if>
+            <if test="deviceType != null">
+                deviceType,
+            </if>
+            <if test="deviceStatus != null">
+                deviceStatus,
+            </if>
+            <if test="onlineDate != null">
+                onlineDate,
+            </if>
+            <if test="offlineDate != null">
+                offlineDate,
+            </if>
+            <if test="manufacturer != null">
+                manufacturer,
+            </if>
+            <if test="manufactureDate != null">
+                manufactureDate,
+            </if>
+            <if test="contactName != null">
+                contactName,
+            </if>
+            <if test="contactPhoneNumber != null">
+                contactPhoneNumber,
+            </if>
+            <if test="ipAddr != null">
+                ipAddr,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceName != null">
+                #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceNo != null">
+                #{deviceNo,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType,jdbcType=CHAR},
+            </if>
+            <if test="deviceStatus != null">
+                #{deviceStatus,jdbcType=CHAR},
+            </if>
+            <if test="onlineDate != null">
+                #{onlineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="offlineDate != null">
+                #{offlineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="manufacturer != null">
+                #{manufacturer,jdbcType=VARCHAR},
+            </if>
+            <if test="manufactureDate != null">
+                #{manufactureDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="contactName != null">
+                #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhoneNumber != null">
+                #{contactPhoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="ipAddr != null">
+                #{ipAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.Device">
+        update device
+        <set>
+            <if test="deviceName != null">
+                deviceName = #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceNo != null">
+                deviceNo = #{deviceNo,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceType != null">
+                deviceType = #{deviceType,jdbcType=CHAR},
+            </if>
+            <if test="deviceStatus != null">
+                deviceStatus = #{deviceStatus,jdbcType=CHAR},
+            </if>
+            <if test="onlineDate != null">
+                onlineDate = #{onlineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="offlineDate != null">
+                offlineDate = #{offlineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="manufacturer != null">
+                manufacturer = #{manufacturer,jdbcType=VARCHAR},
+            </if>
+            <if test="manufactureDate != null">
+                manufactureDate = #{manufactureDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="contactName != null">
+                contactName = #{contactName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhoneNumber != null">
+                contactPhoneNumber = #{contactPhoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="ipAddr != null">
+                ipAddr = #{ipAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.woc.model.Device">
+        update device
+        set deviceName = #{deviceName,jdbcType=VARCHAR},
+        deviceNo = #{deviceNo,jdbcType=VARCHAR},
+        deviceType = #{deviceType,jdbcType=CHAR},
+        deviceStatus = #{deviceStatus,jdbcType=CHAR},
+        onlineDate = #{onlineDate,jdbcType=TIMESTAMP},
+        offlineDate = #{offlineDate,jdbcType=TIMESTAMP},
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+        manufactureDate = #{manufactureDate,jdbcType=TIMESTAMP},
+        contactName = #{contactName,jdbcType=VARCHAR},
+        contactPhoneNumber = #{contactPhoneNumber,jdbcType=VARCHAR},
+        ipAddr = #{ipAddr,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>
