@@ -39,7 +39,7 @@
                      名称： <input name="name" type="text"
                                         							style="width: 200px;" />
 						<button class="btn btn-info" id="btn-search"
-							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/find$!{bean.name}List.do">
+							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/find$!{bean.name}List">
 							 <i
 								class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
 						</button>
@@ -51,17 +51,17 @@
 
 						
 						<button class="btn btn-info" id="btn-view-add"
-							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/insert$!{bean.name}.do">
+							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/insert$!{bean.name}">
 							 <i
 								class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
 						</button>
 						<button class="btn btn-info" id="btn-view-edit"
-							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/update$!{bean.name}.do">
+							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/update$!{bean.name}">
 							 <i
 								class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
 						</button>
 						<button class="btn btn-warning" id="btn-view-del"
-							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/delete$!{bean.name}By$!{bean.name}Id.do">
+							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/delete$!{bean.name}By$!{bean.name}Id">
 							 <i
 								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
 						</button>
