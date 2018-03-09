@@ -1,8 +1,13 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MonitorSiteDetail {
+/**
+ * @author HuaCai003
+ */
+public class MonitorSiteDetail implements Serializable {
+    private static final long serialVersionUID = 507052890546219814L;
     private String id;
 
     private String monitorSiteId;

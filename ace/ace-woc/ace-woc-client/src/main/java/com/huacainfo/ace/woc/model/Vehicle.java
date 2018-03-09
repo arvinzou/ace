@@ -1,9 +1,14 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Vehicle {
+/**
+ * @author HuaCai003
+ */
+public class Vehicle implements Serializable {
+    private static final long serialVersionUID = -7063674829801878096L;
     private String id;
 
     private String plateNo;
