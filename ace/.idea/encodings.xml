@@ -31,5 +31,10 @@
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-woc" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-woc/ace-woc-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-woc/ace-woc-rest" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-woc/ace-woc-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-woc/ace-woc-web" charset="UTF-8" />
   </component>
 </project>

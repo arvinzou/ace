@@ -22,6 +22,11 @@
         <module name="ace-uf-client" />
         <module name="ace-uf-service" />
         <module name="ace-uf-web" />
+        <module name="ace-woc-client" />
+        <module name="ace-woc-rest" />
+        <module name="ace-woc-service" />
+        <module name="ace-woc-web" />
+        <module name="ace-woc-web (1)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -55,6 +60,12 @@
       <module name="ace-uf-client" target="1.7" />
       <module name="ace-uf-service" target="1.7" />
       <module name="ace-uf-web" target="1.7" />
+      <module name="ace-woc" target="1.7" />
+      <module name="ace-woc-client" target="1.7" />
+      <module name="ace-woc-rest" target="1.7" />
+      <module name="ace-woc-service" target="1.7" />
+      <module name="ace-woc-web" target="1.7" />
+      <module name="ace-woc-web (1)" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
