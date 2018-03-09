@@ -15,7 +15,7 @@ jQuery(function($) {
             type:'post',
             url:'${pageContext.request.contextPath }/v1/token/requestJson',
             contentType:'application/json;charset=utf-8',
-            data:'[{"name":"王五","createTime":"2018-03-08"},{"name":"王五","createTime":"2018-03-08"}]',
+            data:'[{"name":"王五","createTime":"2018-03-08 12:01:05"},{"name":"王五","createTime":"2018-03-08"}]',
             success:function(data){
 			    console.log(data);
 			}
