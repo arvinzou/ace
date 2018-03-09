@@ -45,69 +45,78 @@
 
         <!--与原来mybatis-generator不一样，这个table标签不是必须的。只有对生成的映射有复杂要求时，才需要在这里详细配置-->
         <table schema="woc" tableName="blacklist"
-               domainObjectName="BlacklistModel"
+               domainObjectName="Blacklist"
                mapperName="BlacklistDao"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="true"></property>
         </table>
-
         <!--<table tableName="device"-->
-        <!--enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="mapperName" value="BlacklistDao"/>-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
+               <!--domainObjectName="Device"-->
+               <!--mapperName="DeviceDao"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="mapperName" value="BlacklistDao"/>-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
         <!--<table tableName="monitor_site_detail"-->
-        <!--enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="mapperName" value="BlacklistDao"/>-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
+               <!--domainObjectName="MonitorSiteDetail"-->
+               <!--mapperName="MonitorSiteDetailDao"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
         <!--<table tableName="monitor_site"-->
-        <!--enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="mapperName" value="BlacklistDao"/>-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
+               <!--domainObjectName="MonitorSite"-->
+               <!--mapperName="MonitorSiteDao"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="mapperName" value="BlacklistDao"/>-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
-        <!--<table tableName="road"-->
-        <!--enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="mapperName" value="BlacklistDao"/>-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--</table>-->
+        <table tableName="road"
+               domainObjectName="Road"
+               mapperName="RoadDao"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
         <!--<table tableName="site"-->
-        <!--enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="mapperName" value="BlacklistDao"/>-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
+               <!--domainObjectName="Site"-->
+               <!--mapperName="SiteDao"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
         <!--<table tableName="license"-->
-        <!--enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="mapperName" value="BlacklistDao"/>-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
+               <!--domainObjectName="License"-->
+               <!--mapperName="LicenseDao"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
         <!--<table tableName="vehicle"-->
-        <!--enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="mapperName" value="BlacklistDao"/>-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
+               <!--domainObjectName="Vehicle"-->
+               <!--mapperName="VehicleDao"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
         <!--<table tableName="person"-->
-        <!--enableCountByExample="false" enableUpdateByExample="false"-->
-        <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--selectByExampleQueryId="false">-->
-        <!--<property name="mapperName" value="BlacklistDao"/>-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
+               <!--domainObjectName="Person"-->
+               <!--mapperName="PersonDao"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<property name="useActualColumnNames" value="true"/>-->
         <!--</table>-->
 
     </context>

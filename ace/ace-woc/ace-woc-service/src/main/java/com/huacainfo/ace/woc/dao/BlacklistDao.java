@@ -2,7 +2,7 @@ package com.huacainfo.ace.woc.dao;
 
 import com.huacainfo.ace.woc.model.Blacklist;
 
-public interface BlacklistMapper {
+public interface BlacklistDao {
     int deleteByPrimaryKey(String id);
 
     int insert(Blacklist record);

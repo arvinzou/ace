@@ -74,19 +74,20 @@ public class AutoCodeUtils {
 
     public AutoCodeUtils(String cfg) {
         this.cfg = cfg;
-        this.name="XXX";
-        this.author="陈晓克";
+        this.name = "XXX";
+        this.author = "陈晓克";
         this.initCfg();
     }
 
-    public AutoCodeUtils(String cfg,String name,String author) {
+    public AutoCodeUtils(String cfg, String name, String author) {
         this.cfg = cfg;
-        this.name=name;
-        this.author=author;
+        this.name = name;
+        this.author = author;
         this.initCfg();
     }
 
-    private void initCfg(){
+
+    private void initCfg() {
         this.BEAN_ACTION_TEMPLATE_VM_PATH = this
                 .getProperty("BEAN_ACTION_TEMPLATE_VM_PATH");
         this.BEAN_SERVICE_TEMPLATE_VM_PATH = this
@@ -115,11 +116,11 @@ public class AutoCodeUtils {
         this.CRON_JS_PATH = this.getProperty("CRON_JS_PATH");
 
         if (this.getProperty("local").equals("true")) {
-            String userDir=System.getProperty("user.dir");
+            String userDir = System.getProperty("user.dir");
             System.out.println(userDir);
-            this.clientws =userDir+ this.getProperty("clientws");
-            this.serverws =userDir+ this.getProperty("serverws");
-            this.webws =userDir+ this.getProperty("webws");
+            this.clientws = userDir + this.getProperty("clientws");
+            this.serverws = userDir + this.getProperty("serverws");
+            this.webws = userDir + this.getProperty("webws");
 
         }
     }
@@ -138,8 +139,7 @@ public class AutoCodeUtils {
 
             annotation.setAuthorName(this.author);
             annotation.setAuthorMail("249134995@qq.com");
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-                    "yyyy-MM-dd");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             annotation.setDate(simpleDateFormat.format(new Date()));
             annotation.setVersion(simpleDateFormat.format(new Date()));
         }
@@ -279,7 +279,7 @@ public class AutoCodeUtils {
         }
         List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
         for (ColumsInfo o : list) {
-            if (o.getIsNullAble().equals("NO")&&(!o.getColumName().equals("createUserId"))&&(!o.getColumName().equals("createUserName"))&&(!o.getColumName().equals("createDate"))) {
+            if (o.getIsNullAble().equals("NO") && (!o.getColumName().equals("createUserId")) && (!o.getColumName().equals("createUserName")) && (!o.getColumName().equals("createDate"))) {
                 validate.append("if (CommonUtils.isBlank(o.get"
                         + CommonUtils.firstToUpper(CommonUtils.getJavaName(o
                         .getColumName())) + "())) {\r");
@@ -369,7 +369,7 @@ public class AutoCodeUtils {
             _colModel.append("{\r");
             _colModel.append("name : '"
                     + CommonUtils.getJavaName(o.getColumName()) + "',\r");
-            boolean status=o.getColumName().equals("lastModifyUserName") || o.getColumName().equals("lastModifyDate") || o.getColumName().equals("createUserId") || o.getColumName().equals("lastModifyUserId")|| o.getColumName().equals("createUserName")|| o.getColumName().equals("createDate");
+            boolean status = o.getColumName().equals("lastModifyUserName") || o.getColumName().equals("lastModifyDate") || o.getColumName().equals("createUserId") || o.getColumName().equals("lastModifyUserId") || o.getColumName().equals("createUserName") || o.getColumName().equals("createDate");
             if (status) {
                 _colModel.append("hidden : true,\r");
                 _colModel.append("editable : false,\r");
@@ -378,8 +378,8 @@ public class AutoCodeUtils {
                 _colModel.append("editable : true,\r");
                 _colModel.append("width : 100,\r");
             }
-            if(o.getTypeName().equals("date")||o.getTypeName().equals("datetime")){
-                if(!status) {
+            if (o.getTypeName().equals("date") || o.getTypeName().equals("datetime")) {
+                if (!status) {
                     _colModel.append("edittype : \"datebox\",\r");
                     _colModel.append("dataoptions : {\r");
                     _colModel.append("    formatter : function(date) {\r");
@@ -406,21 +406,21 @@ public class AutoCodeUtils {
                 }
             }
 
-            boolean combox=false;
-            if(o.getTypeName().equals("varchar")&&o.getLen()!=null){
-               if(o.getLen().equals("20")){
-                   _colModel.append("edittype : \"select\",\r");
-                   _colModel.append("renderer : function(value) {\r");
-                   _colModel.append("return rsd(value, \"01\");\r");
-                   _colModel.append("},\r");
-                   _colModel.append("editoptions : {\r");
-                   _colModel.append("value : odparse(\"01\")\r");
-                   _colModel.append("},\r");
-                   combox=true;
-               }
+            boolean combox = false;
+            if (o.getTypeName().equals("varchar") && o.getLen() != null) {
+                if (o.getLen().equals("20")) {
+                    _colModel.append("edittype : \"select\",\r");
+                    _colModel.append("renderer : function(value) {\r");
+                    _colModel.append("return rsd(value, \"01\");\r");
+                    _colModel.append("},\r");
+                    _colModel.append("editoptions : {\r");
+                    _colModel.append("value : odparse(\"01\")\r");
+                    _colModel.append("},\r");
+                    combox = true;
+                }
             }
-            if(o.getTypeName().equals("varchar")&&o.getLen()!=null){
-                if(o.getLen().equals("12")){
+            if (o.getTypeName().equals("varchar") && o.getLen() != null) {
+                if (o.getLen().equals("12")) {
                     _colModel.append("edittype : \"combotree\",\r");
                     _colModel.append("dataoptions : {\r");
                     _colModel.append("url : portalPath + '/system/selectProvinceTreeList.do',\r");
@@ -429,11 +429,11 @@ public class AutoCodeUtils {
                     _colModel.append("renderer : function(value, cur) {\r");
                     _colModel.append("return $.jgrid.getAccessor(cur, 'areaName');\r");
                     _colModel.append("},\r");
-                    combox=true;
+                    combox = true;
                 }
             }
-            if(o.getTypeName().equals("varchar")&&o.getLen()!=null){
-                if(o.getLen().equals("16")){
+            if (o.getTypeName().equals("varchar") && o.getLen() != null) {
+                if (o.getLen().equals("16")) {
                     _colModel.append("edittype : \"combotree\",\r");
                     _colModel.append("dataoptions : {\r");
                     _colModel.append("url : portalPath + '/system/selectDepartmentTreeList.do',\r");
@@ -442,10 +442,10 @@ public class AutoCodeUtils {
                     _colModel.append("renderer : function(value, cur) {\r");
                     _colModel.append("return $.jgrid.getAccessor(cur, 'areaName');\r");
                     _colModel.append("},\r");
-                    combox=true;
+                    combox = true;
                 }
             }
-            if(o.getColumName().equals("status")){
+            if (o.getColumName().equals("status")) {
                 _colModel.append("edittype : \"checkbox\",\r");
                 _colModel.append("editoptions : {\r");
                 _colModel.append("value : \"1:0\"\r");
@@ -482,9 +482,9 @@ public class AutoCodeUtils {
                 _colModel.append("}\r");
                 _colModel.append("return rst;\r");
                 _colModel.append("},\r");
-                combox=true;
+                combox = true;
             }
-            if(!status&&(!combox)){
+            if (!status && (!combox)) {
                 _colModel.append("editoptions : {\r");
                 _colModel.append("size : \"20\",\r");
                 _colModel.append("maxlength : \"50\"\r");
@@ -492,9 +492,7 @@ public class AutoCodeUtils {
             }
 
 
-
-
-            if (o.getIsNullAble().equals("NO")&&(!status)) {
+            if (o.getIsNullAble().equals("NO") && (!status)) {
                 _colModel.append("\rformoptions : {\r");
                 _colModel.append("elmprefix : \"\",\r");
                 _colModel
@@ -541,12 +539,9 @@ public class AutoCodeUtils {
     /**
      * 根据模板生成代码
      *
-     * @param fileVMPath
-     *            模板路径
-     * @param bean
-     *            目标bean
-     * @param annotation
-     *            注释
+     * @param fileVMPath 模板路径
+     * @param bean       目标bean
+     * @param annotation 注释
      * @return
      * @throws Exception
      */
