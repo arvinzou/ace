@@ -7,8 +7,8 @@ public class AutoCode {
     public static void main(String[] args) throws Exception {
 //        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("woc", "道路档案", "Arvin",
 //                "C:\\Users\\Arvin\\IdeaProjects\\ace\\ace");
-        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("woc", "道路档案", "Arvin");
-        Class<?> c = com.huacainfo.ace.woc.model.Road.class;
+        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("woc", "黑名单档案", "Arvin");
+        Class<?> c = com.huacainfo.ace.woc.model.Blacklist.class;
         autoCodeUtils.init(c);
         autoCodeUtils.createVO(c);
         autoCodeUtils.createQVO(c);
