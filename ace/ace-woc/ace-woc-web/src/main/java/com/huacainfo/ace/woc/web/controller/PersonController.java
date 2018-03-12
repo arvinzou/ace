@@ -25,7 +25,7 @@ import com.huacainfo.ace.woc.vo.PersonQVo;
  * @version: 2018-03-09
  * @Description:  TODO(人员信息)
  */
-public class PersonController extends LiveBaseController {
+public class PersonController extends WocBaseController {
 
 
 	private static final long serialVersionUID = 1L;

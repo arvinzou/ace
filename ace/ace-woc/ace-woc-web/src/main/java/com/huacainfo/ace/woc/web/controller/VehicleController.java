@@ -25,7 +25,7 @@ import com.huacainfo.ace.woc.vo.VehicleQVo;
  * @version: 2018-03-09
  * @Description:  TODO(人员信息)
  */
-public class VehicleController extends LiveBaseController {
+public class VehicleController extends WocBaseController {
 
 
 	private static final long serialVersionUID = 1L;
