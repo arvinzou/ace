@@ -25,7 +25,7 @@ import com.huacainfo.ace.woc.vo.$!{bean.name}QVo;
  * @version: $!{annotation.version}
  * @Description:  TODO($!{bean.tableChineseName})
  */
-public class $!{bean.name}Controller extends LiveBaseController {
+public class $!{bean.name}Controller extends WocBaseController {
 
 
 	private static final long serialVersionUID = 1L;
