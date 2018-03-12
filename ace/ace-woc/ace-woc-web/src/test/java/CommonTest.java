@@ -1,5 +1,4 @@
 import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.woc.model.Person;
 import org.junit.Test;
 
 import java.util.ArrayList;
