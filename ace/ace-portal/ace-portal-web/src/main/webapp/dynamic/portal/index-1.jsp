@@ -79,7 +79,6 @@ pageEncoding="utf-8"%>
 
             <a href="#" class="navbar-brand" style="color:#FFFFFF">
                 <small>
-
                     ${cfg.sys_name}${cfg.version}
                 </small>
             </a>
