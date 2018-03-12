@@ -1,13 +1,8 @@
 package com.huacainfo.ace.woc.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author HuaCai003
- */
-public class License implements Serializable {
-    private static final long serialVersionUID = -9071327872264882737L;
+public class License {
     private String id;
 
     private String licenseType;
@@ -29,6 +24,10 @@ public class License implements Serializable {
     private String licenseImg3;
 
     private String licenseImg4;
+
+    private String remark;
+
+    private String status;
 
     private String createUserId;
 
@@ -128,6 +127,22 @@ public class License implements Serializable {
 
     public void setLicenseImg4(String licenseImg4) {
         this.licenseImg4 = licenseImg4 == null ? null : licenseImg4.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getCreateUserId() {

@@ -157,60 +157,7 @@ pageEncoding="utf-8"%>
 </style>
 <body>
 <div class="page-content">
-    <div class="row center padding">
-
-        <h3>人脸检测</h3>
-        <div id="message"></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-6">
-            <h5 class="header-title">检测对象</h5>
-            <div class="box center">
-                <div class="row photo" id="box1"></div>
-                <div class="row">
-                    <div class="swiper-container1">
-                        <div class="swiper-wrapper" id="swiper1">
-
-                        </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                    </div>
-                    <div class="search-box search-box-one">
-                        <input type="file" accept="image/png,image/jpeg" id="file-uploader-one"
-                               class="file-uploader-one">
-                        <div id="file-uploader-btn-one" class="upload-img"><i
-                                class="icons icon-upload"></i><span>本地上传</span></div>
-                        <button class="search-btn search-btn-one" id="btn-query" authority="false">检测</button>
-                        <input placeholder="图片URL" class="search-input search-input-one">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6">
-            <h5 class="header-title">检测结果</h5>
-            <div class="row hide" style="padding:10px" id="rst-view">
-
-                <div class="labelItem"><span class="labelItemHeader">性别</span><br><span id="gender"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">年龄</span><br><span id="age"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">微笑程度</span><br><span id="smile"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">是否佩戴眼镜</span><br><span id="glass"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">情绪</span><br><span id="emotion"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">人种</span><br><span id="ethnicity"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">颜值</span><br><span id="beauty"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">健康</span><br><span id="health"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">色斑</span><br><span id="stain"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">青春痘</span><br><span id="acne"></span></div>
-                <div class="labelItem"><span class="labelItemHeader">黑眼圈</span><br><span id="dark_circle"></span></div>
-
-            </div>
-            <h5 class="header-title">JSON数据</h5>
-
-            <textarea style="width:100%;height:280px" readonly class="resp-json">
-
-                </textarea>
-        </div>
-    </div>
-
+    <p>hello world</p>
 
 </div>
 

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +77,7 @@ public class RoadServiceImpl implements RoadService {
     @Override
     public MessageResponse insertRoad(Road o, UserProp userProp)
             throws Exception {
-        o.setId(UUID.randomUUID().toString());
+        o.setId(GUIDUtil.getGUID());
         //o.setId(String.valueOf(new Date().getTime()));
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
