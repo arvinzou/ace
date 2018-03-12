@@ -1,7 +1,3 @@
-$(function () {
-    $('#htmlLoad').on('click', '.release', releaseDo);
-});
-
 /*确认发布报道*/
 function releaseDo() {
     if(checkWordNumber()){

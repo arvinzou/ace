@@ -1,8 +1,11 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Person {
+public class Person implements Serializable {
+    private static final long serialVersionUID = 2648618122780760299L;
+
     private String id;
 
     private String name;

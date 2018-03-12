@@ -1,7 +1,3 @@
-$(function () {
-    $('#htmlLoad').on('click', '.release',releaseDo);
-});
-
 
 function releaseDo() {
     if(checkWordNumber()){

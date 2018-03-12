@@ -1,8 +1,13 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Road {
+/**
+ * @author HuaCai003
+ */
+public class Road implements Serializable {
+    private static final long serialVersionUID = -8136917915162509854L;
     private String id;
 
     private String roadName;

@@ -15,9 +15,9 @@ import com.huacainfo.ace.woc.service.AnalysisService;
 
 @Controller
 @RequestMapping("/anslysis")
-public class AnalysisController { // extends WocBaseController
+public class AnalysisController extends WocBaseController {
     private static final long serialVersionUID = 1L;
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private AnalysisService analysisService;
 

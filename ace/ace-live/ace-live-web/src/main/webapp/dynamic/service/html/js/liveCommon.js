@@ -5,7 +5,7 @@ $("#startDate").datetimepicker({
     todayBtn: true,
 }).on('change', function (ev) {
     var startDate = $('#startDate').val();
-    $("#endDate").datetimepicker('setStartDate', startDate);
+    $("#endDate").datetimepicker('setStartDate', new Date());
     $("#startDate").datetimepicker('hide');
 });
 $("#endDate").datetimepicker({
@@ -24,14 +24,8 @@ $(function () {
     $('.formRow').on('keyup', 'input', computedNumDo);
     $('.formRow').on('keyup', 'textarea', computedNumDo);
     /*点击取消提示*/
-    $('.mainContent').on('focus', '.form-control',promptToDo);
-    $('#htmlLoad').on('click','.release',releaseDo);
+    $('.html-margin').on('click','.release',releaseDo);
 });
-
-/*取消提示*/
-function promptToDo() {
-    promptDo('');
-}
 
 
 

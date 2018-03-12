@@ -27,6 +27,7 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <!--设置编码 utf8-->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>
@@ -46,18 +47,18 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- spring session filter start -->
-    <!--<filter>-->
-    <!--<filter-name>springSessionRepositoryFilter</filter-name>-->
-    <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-    <!--<filter-name>springSessionRepositoryFilter</filter-name>-->
-    <!--<url-pattern>*.jsp</url-pattern>-->
-    <!--</filter-mapping>-->
-    <!--<filter-mapping>-->
-    <!--<filter-name>springSessionRepositoryFilter</filter-name>-->
-    <!--<url-pattern>/</url-pattern>-->
-    <!--</filter-mapping>-->
+    <filter>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
     <!-- 权限过滤开始 -->
     <filter>
         <filter-name>webAccessDecisionSecurityFilter</filter-name>
@@ -92,4 +93,9 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/page404.jsp</location>
+    </error-page>
+
 </web-app>

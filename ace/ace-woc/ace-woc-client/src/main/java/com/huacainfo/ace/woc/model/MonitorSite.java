@@ -1,9 +1,14 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class MonitorSite {
+/**
+ * @author HuaCai003
+ */
+public class MonitorSite implements Serializable {
+    private static final long serialVersionUID = -1387251659853030705L;
     private String id;
 
     private String siteId;

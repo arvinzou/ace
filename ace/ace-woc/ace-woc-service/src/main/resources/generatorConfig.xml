@@ -27,19 +27,19 @@
 
 		<!--targetProject，是相对于本xml配置文件的相对路径，src/main/resources是targetPackage包路径的父级目录。 -->
 
-		<javaModelGenerator targetPackage="com.huacainfo.ace.kernel.model"
+		<javaModelGenerator targetPackage="com.huacainfo.ace.woc.model"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.huacainfo.ace.kernel.dao"
+		<sqlMapGenerator targetPackage="com.huacainfo.ace.woc.dao"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.huacainfo.ace.kernel.dao" targetProject="src/main/java">
+			targetPackage="com.huacainfo.ace.woc.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
