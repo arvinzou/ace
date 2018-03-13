@@ -53,11 +53,7 @@
     </filter>
     <filter-mapping>
         <filter-name>springSessionRepositoryFilter</filter-name>
-        <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>springSessionRepositoryFilter</filter-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- 权限过滤开始 -->
     <filter>
@@ -66,11 +62,7 @@
     </filter>
     <filter-mapping>
         <filter-name>webAccessDecisionSecurityFilter</filter-name>
-        <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>webAccessDecisionSecurityFilter</filter-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- 权限过滤结束-->
 
