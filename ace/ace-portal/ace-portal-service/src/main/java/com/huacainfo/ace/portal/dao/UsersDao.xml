@@ -287,7 +287,7 @@
         from users t left join department s
         on t.department_id=s.department_id
         left join province s2 on t.area_code=s2.code
-        left join userinfo s3 on users.openId=s3.openid
+        left join userinfo s3 on t.openId=s3.openid
         where t.user_id = #{userId}
 
     </select>
