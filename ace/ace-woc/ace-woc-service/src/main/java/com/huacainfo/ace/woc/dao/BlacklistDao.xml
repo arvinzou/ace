@@ -25,7 +25,7 @@
     isBlack, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
     lastModifyUserName, lastModifyDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select 
     <include refid="Base_Column_List" />
     from blacklist
@@ -232,4 +232,43 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <!--voMap-->
+  <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.woc.vo.BlacklistVo">
+  </resultMap>
+
+  <select id="findList" resultMap="BaseResultMapVo">
+    select
+    <include refid="Base_Column_List"/>
+
+    <include refid="whereCondition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY createDate
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <sql id="whereCondition">
+    from blacklist
+    where 1 = 1
+    <if test="condition.id!=null and condition.id!=&quot;&quot;">
+      and id = #{condition.id,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.woc.model.Device">
+    select count(*)
+    from blacklist
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
 </mapper>

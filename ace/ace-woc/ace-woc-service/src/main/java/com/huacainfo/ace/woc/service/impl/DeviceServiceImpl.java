@@ -4,6 +4,7 @@ package com.huacainfo.ace.woc.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,7 +78,7 @@ public class DeviceServiceImpl implements DeviceService {
     public MessageResponse insertDevice(Device o, UserProp userProp)
             throws Exception {
         o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
+        o.setLastModifyDate(DateUtil.getNowDate());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -108,7 +109,7 @@ public class DeviceServiceImpl implements DeviceService {
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
-        this.deviceDao.insert(o);
+        this.deviceDao.insertSelective(o);
         this.dataBaseLogService.log("添加设备档案", "设备档案", "", "insertDevice",
                 "insertDevice", userProp);
         return new MessageResponse(0, "添加设备档案完成！");
@@ -146,17 +147,13 @@ public class DeviceServiceImpl implements DeviceService {
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
-        this.deviceDao.updateByPrimaryKey(o);
+        this.deviceDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更设备档案", "设备档案", "", "updateDevice",
-               "updateDevice", userProp);
+                "updateDevice", userProp);
         return new MessageResponse(0, "变更设备档案完成！");
     }
 

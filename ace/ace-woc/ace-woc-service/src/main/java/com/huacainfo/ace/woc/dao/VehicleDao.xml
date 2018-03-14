@@ -36,7 +36,7 @@
     unladedMass, approvedMass, containerInsideSize, tractionMass, remark, status, createUserId, 
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMapVo" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
         from vehicle
@@ -352,10 +352,15 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.VehicleVo"></resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.VehicleVo">
+        <result column="personName" property="personName" jdbcType="VARCHAR"/>
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+    </resultMap>
 
     <sql id="whereCondition">
-        from vehicle
+        FROM woc.vehicle v
+        LEFT JOIN woc.person p ON v.ownerId = p.id
+        LEFT JOIN portal.department d ON v.ownerCompanyId = d.department_id
         where 0=0
         <if test='condition.plateNo!=null and condition.plateNo!=""'>
             and plateNo like
@@ -364,11 +369,16 @@
     </sql>
 
     <select id="findList" resultMap="BaseResultMapVo">
-        select m.* from(
         select
-        <include refid="Base_Column_List"/>
+        p.NAME as personName,
+        d.department_name,
+        v.id, v.plateNo, v.vehicleColor, v.ownerId, v.ownerCompanyId, v.fileNo, v.axleCount, v.vehicleType,
+        v.model, v.engineNo, v.VIN, v.RegisterDate, v.IssueDate, v.licenceIssuingAuthority, v.totalMass,
+        v.unladedMass, v.approvedMass, v.containerInsideSize, v.tractionMass, v.remark, v.status, v.createUserId,
+        v.createUserName, v.createDate, v.lastModifyUserId, v.lastModifyUserName, v.lastModifyDate
+
         <include refid="whereCondition"/>
-        ) m
+
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
                 ORDER BY m.${orderBy}
@@ -378,7 +388,6 @@
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-
     </select>
 
     <select id="findCount" resultType="int">
