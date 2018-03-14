@@ -9,7 +9,9 @@ import com.huacainfo.ace.woc.vo.RoadQVo;
 import com.huacainfo.ace.woc.vo.RoadVo;
 
 public interface RoadDao {
-    RoadVo selectByPrimaryKey(String id);
+    RoadVo selectVoByPrimaryKey(String id);
+
+    Road selectByPrimaryKey(String id);
 
     int deleteByPrimaryKey(String id);
 

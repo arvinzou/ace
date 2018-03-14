@@ -22,6 +22,9 @@ public class Road implements Serializable {
 
     private String adminDepId;
 
+    /**
+     * 1: '在运营', 2: '养护中', 3: '已废弃'
+     */
     private String roadStatus;
 
     private String remark;

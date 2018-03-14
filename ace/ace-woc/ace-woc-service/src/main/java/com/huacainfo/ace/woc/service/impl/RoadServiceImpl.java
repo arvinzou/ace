@@ -147,10 +147,6 @@ public class RoadServiceImpl implements RoadService {
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -174,7 +170,7 @@ public class RoadServiceImpl implements RoadService {
     @Override
     public SingleResult<RoadVo> selectRoadByPrimaryKey(String id) throws Exception {
         SingleResult<RoadVo> rst = new SingleResult<RoadVo>();
-        rst.setValue(this.roadDao.selectByPrimaryKey(id));
+        rst.setValue(this.roadDao.selectVoByPrimaryKey(id));
         return rst;
     }
 

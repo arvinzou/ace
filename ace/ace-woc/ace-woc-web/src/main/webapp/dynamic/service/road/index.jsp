@@ -28,8 +28,8 @@
                 <form action="#" id="fm-search">
 
                     <%--类别：<input--%>
-                        <%--class="easyui-combobox" style="width: 200px" name="category"--%>
-                        <%--data-options="--%>
+                    <%--class="easyui-combobox" style="width: 200px" name="category"--%>
+                    <%--data-options="--%>
                     <%--url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',--%>
                     <%--method:'get',--%>
                     <%--valueField:'code',--%>
@@ -84,16 +84,11 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem">
-            <span class="labelItemHeader">主键</span>
-            <br>
-            <span id="id"></span>
-        </div>
-        <div class="labelItem">
+        <%--<div class="labelItem">
             <span class="labelItemHeader">道路名称</span>
             <br>
             <span id="roadName"></span>
-        </div>
+        </div>--%>
         <div class="labelItem">
             <span class="labelItemHeader">道路国标</span>
             <br>
@@ -102,7 +97,8 @@
         <div class="labelItem">
             <span class="labelItemHeader">所在地区</span>
             <br>
-            <span id="areaCode"></span>
+            <span id="areaCode" class="hide"></span>
+            <span id="areaName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">道路全长</span>
@@ -115,25 +111,26 @@
             <span id="constructDate"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">归属管辖单位编码</span>
+            <span class="labelItemHeader">归属管辖单位</span>
             <br>
             <span id="adminDepId"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">道路运行状态</span>
             <br>
-            <span id="roadStatus"></span>
+            <span id="roadStatus" class="hide"></span>
+            <span id="roadStatusName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">备注</span>
             <br>
             <span id="remark"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">状态</span>
-            <br>
-            <span id="status"></span>
-        </div>
+        <%--<div class="labelItem hide">--%>
+        <%--<span class="labelItemHeader">状态</span>--%>
+        <%--<br>--%>
+        <%--<span id="status"></span>--%>
+        <%--</div>--%>
     </div>
 
     <h5 class="header-title">操作信息</h5>
