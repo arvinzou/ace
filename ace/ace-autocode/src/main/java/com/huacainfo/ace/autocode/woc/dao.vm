@@ -7,15 +7,19 @@ import com.huacainfo.ace.woc.vo.$!{bean.name}QVo;
 import com.huacainfo.ace.woc.vo.$!{bean.name}Vo;
 
 public interface $!{bean.name}Dao {
-    int deleteByPrimaryKey(String $!{bean.name}Id);
+
+    $!{bean.name}Vo selectByPrimaryKey(String id);
+
+    int deleteByPrimaryKey(String id);
 
     int insert($!{bean.name} record);
 
-
-    $!{bean.name}Vo selectByPrimaryKey(String $!{bean.name}Id);
-
+    int insertSelective($!{bean.name} record);
 
     int updateByPrimaryKey($!{bean.name} record);
+
+    int updateByPrimaryKeySelective($!{bean.name} record);
+
     
     List<$!{bean.name}Vo> findList(@Param("condition") $!{bean.name}QVo condition,
 			@Param("start") int start, @Param("limit") int limit,
