@@ -6,6 +6,7 @@ import com.huacainfo.ace.woc.vo.PersonVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PersonDao {
     int deleteByPrimaryKey(String id);
@@ -27,4 +28,7 @@ public interface PersonDao {
     int findCount(@Param("condition") PersonQVo condition);
 
     int isExit(Person record);
+
+    List<Map<String, String>> selectPerson(
+            @Param("params") Map<String, Object> params);
 }

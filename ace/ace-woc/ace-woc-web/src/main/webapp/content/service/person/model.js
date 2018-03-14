@@ -1,5 +1,5 @@
-var _colNames = ['主键','姓名','身份证','头像','电话号码','所属机构','所在地区',
-    '所住地址','从业资格证','驾驶证件号','备注','状态','创建人编号', '创建人姓名',
+var _colNames = ['主键','姓名','身份证','电话号码','所属机构','所在地区',
+    '所住地址','从业资格证','驾驶证件号','头像','备注','状态','创建人编号', '创建人姓名',
     '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间', '操作'];
 var _colModel = function () {
     return [
@@ -30,7 +30,7 @@ var _colModel = function () {
         },
         /*身份证id*/
         {
-            name : 'idCard',
+            name : 'paperworkId',
             editable : true,
             hidden : true,
             width : 200,
@@ -45,18 +45,6 @@ var _colModel = function () {
                 elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
         },
-        /*头像地址*/
-        {
-            name: 'headImgUrl',
-            editable: true,
-            hidden: true,
-            width: 100,
-            editoptions: {
-                style: 'width:400px;',
-                maxlength: "300",
-                colspan: false
-            },
-        },
         /*电话号码*/
         {
             name : 'phoneNumber',
@@ -64,17 +52,28 @@ var _colModel = function () {
             hidden : true,
             width : 100,
             editoptions : {
-                maxlength : "20"
+                style: 'width:200px;',
+                maxlength : "20",
+                colspan: false
             }
         },
         /*所属机构*/
         {
             name : 'companyId',
             editable : true,
+            hidden : true,
             width : 200,
+            edittype : "combotree",
             editoptions : {
-                style : 'width:200px;'
-            }
+                style : 'width:200px;height:25px;'
+            },
+            dataoptions : {
+                url : portalPath + '/department/selectDepartmentTreeList.do',
+                required : false
+            },
+            renderer : function(value, cur) {
+                return $.jgrid.getAccessor(cur, 'department_name');
+            },
         },
         /*所在机构*/
         {
@@ -82,6 +81,7 @@ var _colModel = function () {
             editable : true,
             hidden : true,
             edittype : "combotree",
+            width : 200,
             editoptions : {
                 style : 'width:200px;',
             },
@@ -92,7 +92,6 @@ var _colModel = function () {
             renderer : function(value, cur) {
                 return $.jgrid.getAccessor(cur, 'areaName');
             },
-            width : 100,
             formoptions : {
                 elmprefix : "",
                 elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
@@ -107,6 +106,7 @@ var _colModel = function () {
             editable : true,
             width : 200,
             editoptions : {
+                style : 'width:200px;',
                 maxlength : "100"
             },
         },
@@ -116,6 +116,7 @@ var _colModel = function () {
             editable : true,
             width : 200,
             editoptions : {
+                style : 'width:200px;',
                 maxlength : "50"
             },
         },
@@ -125,7 +126,20 @@ var _colModel = function () {
             editable : true,
             width : 200,
             editoptions : {
+                style : 'width:200px;',
                 maxlength : "50"
+            },
+        },
+        /*头像地址*/
+        {
+            name: 'headImgUrl',
+            editable: true,
+            hidden: true,
+            width: 100,
+            editoptions: {
+                style: 'width:600px;',
+                maxlength: "300",
+                colspan: true
             },
         },
         /*备注*/

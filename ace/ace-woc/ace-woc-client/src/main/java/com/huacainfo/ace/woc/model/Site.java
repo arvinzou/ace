@@ -53,6 +53,16 @@ public class Site implements Serializable {
 
     private Date lastModifyDate;
 
+    private String buildDeptId;
+
+    public String getBuildDeptId() {
+        return buildDeptId;
+    }
+
+    public void setBuildDeptId(String buildDeptId) {
+        this.buildDeptId = buildDeptId;
+    }
+
     public String getId() {
         return id;
     }

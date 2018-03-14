@@ -47,7 +47,7 @@
 <body>
 <div class="wrap">
     <div class="logo">
-        <img src="images/404.png" alt=""/>
+        <img src="./images/404.png" alt=""/>
         <p><a href="#" onClick="javascript:history.back(-1)">返回前页</a></p>
     </div>
 </div>

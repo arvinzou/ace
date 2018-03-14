@@ -5,6 +5,7 @@
 <%
 session.setAttribute("portalPath", "/portal");
 request.setAttribute("now", CommonUtils.formatDate(new Date()));
+
 %>
 <script type="text/javascript">
 	var contextPath = '${pageContext.request.contextPath}';

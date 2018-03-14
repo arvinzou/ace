@@ -357,17 +357,9 @@
     <sql id="whereCondition">
         from vehicle
         where 0=0
-        <if test='condition.name!=null and condition.name!=""'>
-            and name like
-            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.media!=null and condition.media!=''">
-            and media like
-            concat('%',#{condition.media,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.author!=null and condition.author!=''">
-            and author like
-            concat('%',#{condition.author,jdbcType=VARCHAR},'%')
+        <if test='condition.plateNo!=null and condition.plateNo!=""'>
+            and plateNo like
+            concat('%',#{condition.plateNo,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 
@@ -399,6 +391,6 @@
         select count(*)
         from vehicle
         where
-        name=#{name}
+        plateNo=#{plateNo}
     </select>
 </mapper>

@@ -106,12 +106,10 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
 	public MessageResponse updateVehicle(Vehicle o, UserProp userProp)
 			throws Exception {
-		
-		
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
-		this.vehicleDao.updateByPrimaryKey(o);
+		this.vehicleDao.updateByPrimaryKeySelective(o);
 		this.dataBaseLogService.log("变更人员信息", "人员信息", "", o.getPlateNo(),
 				o.getPlateNo(), userProp);
 		return new MessageResponse(0, "变更人员信息完成！");

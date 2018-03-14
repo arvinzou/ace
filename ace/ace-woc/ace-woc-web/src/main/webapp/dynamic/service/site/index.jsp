@@ -27,19 +27,19 @@
 				<div class="widget-main padding-6">
 					<form action="#" id="fm-search">
 					
-				类别：<input
-							class="easyui-combobox" style="width: 200px" name="category"
-							data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
+				<%--类别：<input--%>
+							<%--class="easyui-combobox" style="width: 200px" name="category"--%>
+							<%--data-options="--%>
+                    <%--url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',--%>
+                    <%--method:'get',--%>
+                    <%--valueField:'code',--%>
+                    <%--textField:'name',--%>
+                    <%--panelHeight:'auto'">--%>
 
                      名称： <input name="name" type="text"
                                         							style="width: 200px;" />
 						<button class="btn btn-info" id="btn-search"
-							authority="${pageContext.request.contextPath}/site/findSiteList.do">
+							authority="${pageContext.request.contextPath}/site/findSiteList">
 							 <i
 								class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
 						</button>
@@ -51,17 +51,17 @@
 
 						
 						<button class="btn btn-info" id="btn-view-add"
-							authority="${pageContext.request.contextPath}/site/insertSite.do">
+							authority="${pageContext.request.contextPath}/site/insertSite">
 							 <i
 								class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
 						</button>
 						<button class="btn btn-info" id="btn-view-edit"
-							authority="${pageContext.request.contextPath}/site/updateSite.do">
+							authority="${pageContext.request.contextPath}/site/updateSite">
 							 <i
 								class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
 						</button>
 						<button class="btn btn-warning" id="btn-view-del"
-							authority="${pageContext.request.contextPath}/site/deleteSiteBySiteId.do">
+							authority="${pageContext.request.contextPath}/site/deleteSiteBySiteId">
 							 <i
 								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
 						</button>

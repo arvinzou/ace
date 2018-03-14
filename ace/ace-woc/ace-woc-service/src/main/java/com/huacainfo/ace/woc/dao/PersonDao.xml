@@ -21,12 +21,14 @@
         <result column="lastModifyUserName" property="lastModifyUserName" jdbcType="VARCHAR"/>
         <result column="lastModifyDate" property="lastModifyDate" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.PersonVo">  </resultMap>
     <sql id="Base_Column_List">
     id, name, paperworkId, headImgUrl, phoneNumber, companyId, areaCode, address, certNumber, 
     driverLicenseCode, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
     lastModifyUserName, lastModifyDate
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMapVo" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
         from person
@@ -246,7 +248,6 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.PersonVo"></resultMap>
 
     <sql id="whereCondition">
         from person
@@ -255,13 +256,17 @@
             and name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.media!=null and condition.media!=''">
-            and media like
-            concat('%',#{condition.media,jdbcType=VARCHAR},'%')
+        <if test='condition.paperworkId!=null and condition.paperworkId!=""'>
+            and paperworkId like
+            concat('%',#{condition.paperworkId,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.author!=null and condition.author!=''">
-            and author like
-            concat('%',#{condition.author,jdbcType=VARCHAR},'%')
+        <if test='condition.driverLicenseCode!=null and condition.driverLicenseCode!=""'>
+            and driverLicenseCode like
+            concat('%',#{condition.driverLicenseCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.phoneNumber!=null and condition.phoneNumber!=""'>
+            and phoneNumber like
+            concat('%',#{condition.phoneNumber,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 
@@ -293,6 +298,18 @@
         select count(*)
         from person
         where
-        name=#{name}
+        paperworkId=#{paperworkId}
+    </select>
+
+    <select id="selectPerson" resultType="map">
+        select t.id,concat(t.name,'+(',t.paperworkId,')') as name
+        from person t
+        where 0=0
+        <if test='params.q !=null and params.q!=""'>
+            and
+            t.id=#{params.q} or t.name like concat('%',#{params.q},'%') or t.paperworkId like concat('%',#{params.q},'%')
+        </if>
+        order by t.createDate
+        limit 0,20
     </select>
 </mapper>
