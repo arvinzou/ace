@@ -23,16 +23,20 @@ var normId='${param.normId}';
         <div class="div-right header-title-custom">
             <div style="text-align:right"><a class="blue" href="javascript:add()" data-rel="tooltip" data-placement="top"
                                              title="添加"><i class="ace-icon fa fa-plus-square"></i></a>
+
                 <a class="blue" href="javascript:reload()" data-rel="tooltip" data-placement="top" title="刷新"><i
                         class="ace-icon glyphicon glyphicon-refresh"></i></a>
+
+
             </div>
         </div>
     </div>
-    <div class="action-buttons">
-        <a>
-        </a>
+
+    <div class="btn-toolbar">
+        <div class="jqgrid-export"></div>
+
     </div>
-    <table id="grid-table"></table>
+        <table id="grid-table"></table>
 
     <div id="grid-pager"></div>
 </div>
@@ -145,6 +149,7 @@ var normId='${param.normId}';
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
+
 <script
         src="${portalPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
 <script
@@ -155,6 +160,7 @@ var normId='${param.normId}';
         src="${pageContext.request.contextPath}/content/service/tpaCommon/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/tpaCommon/view.js?version=${cfg.version}"></script>
+
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
 window.onresize = function () {
@@ -165,5 +171,12 @@ window.onresize = function () {
 }
 
 </script>
+<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/jsPDF/jspdf.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/jsPDF-AutoTable/jspdf.plugin.autotable.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
 </body>
 </html>

@@ -452,3 +452,10 @@ input[type="checkbox"].ace.ace-switch + .lbl::after {
 .ui-jqgrid .ui-jqgrid-hdiv {
     overflow-x: '';
 }
+.ui-jqgrid tr.jqgrow td {
+  white-space: normal !important;
+  height:auto;
+  vertical-align:text-top;
+  padding-top:1px;
+  word-break:break-all;
+ }

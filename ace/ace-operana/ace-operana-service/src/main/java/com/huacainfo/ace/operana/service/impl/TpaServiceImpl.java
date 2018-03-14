@@ -70,7 +70,7 @@ public class TpaServiceImpl implements TpaService {
 			//return new MessageResponse(1, "原因分析不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getActions())) {
-			return new MessageResponse(1, "改善措施不能为空！");
+			//return new MessageResponse(1, "改善措施不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getLiable())) {
 			return new MessageResponse(1, "责任人不能为空！");
@@ -115,7 +115,7 @@ public class TpaServiceImpl implements TpaService {
 			//return new MessageResponse(1, "原因分析不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getActions())) {
-			return new MessageResponse(1, "改善措施不能为空！");
+			//return new MessageResponse(1, "改善措施不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getLiable())) {
 			return new MessageResponse(1, "责任人不能为空！");

@@ -63,6 +63,7 @@
 		<module>ace-common-web</module>
 		<module>ace-portal</module>
 		<module>ace-woc</module>
+		<module>ace-operana</module>
 		<!--
 		<module>ace-live</module>
 		<module>ace-jave</module>
@@ -73,7 +74,7 @@
 <module>ace-workflow</module>
      <module>ace-weuiluohua</module>
 <module>ace-gesp</module>
-<module>ace-operana</module>
+
      -->
 
 
