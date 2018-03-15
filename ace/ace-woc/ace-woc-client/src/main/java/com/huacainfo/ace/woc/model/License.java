@@ -4,7 +4,9 @@ import java.util.Date;
 
 public class License {
     private String id;
-
+    /**
+     * 1: '身份证', 2: '驾驶证', 3: '行驶证', 4: '营业证', 5: '交通运输许可证'
+     */
     private String licenseType;
 
     private String licenseNo;
