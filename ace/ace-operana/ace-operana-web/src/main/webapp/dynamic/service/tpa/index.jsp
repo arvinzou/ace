@@ -18,6 +18,10 @@ var normId='${param.normId}';
 </script>
 <body>
 <div class="page-content">
+    <div class="btn-toolbar">
+        <div class="jqgrid-export"></div>
+
+    </div>
     <table id="grid-table"></table>
 
     <div id="grid-pager"></div>
@@ -32,101 +36,7 @@ var normId='${param.normId}';
 </div>
 
 <div id="dialog-message-view" class="hide">
-    <h5 class="header-title">基本信息</h5>
-    <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-编码</span>
-            <br>
-            <span id="id">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-会议编码</span>
-            <br>
-            <span id="meetingId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-议题编码</span>
-            <br>
-            <span id="topicId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-指标编码</span>
-            <br>
-            <span id="normId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-产品编码</span>
-            <br>
-            <span id="productId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-问题描述</span>
-            <br>
-            <span id="probDiscri">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-原因分析</span>
-            <br>
-            <span id="probAnsys">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-改善措施</span>
-            <br>
-            <span id="actions">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-责任人</span>
-            <br>
-            <span id="liable">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-任务状态</span>
-            <br>
-            <span id="status">
-</span>
-        </div>
-    </div>
-    <h5 class="header-title">操作信息</h5>
-    <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-创建人编码</span>
-            <br>
-            <span id="createUserId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-入库日期</span>
-            <br>
-            <span id="createDate">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人编码</span>
-            <br>
-            <span id="lastModifyUserId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人姓名</span>
-            <br>
-            <span id="lastModifyUserName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新时间</span>
-            <br>
-            <span id="lastModifyDate">
-</span>
-        </div>
+
     </div>
 
 </div>
@@ -151,5 +61,15 @@ window.onresize = function () {
 }
 
 </script>
+<script type="text/javascript" src="${portalPath}/content/common/tableExport/pdfmake/pdfmake.min.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/tableExport/pdfmake/vfs_fonts.js"></script>
+<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/jsPDF/jspdf.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/jsPDF-AutoTable/jspdf.plugin.autotable.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
+<div id="tableExport"></div>
 </body>
 </html>

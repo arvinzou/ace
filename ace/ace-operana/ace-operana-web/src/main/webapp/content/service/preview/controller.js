@@ -300,19 +300,11 @@ function chart4() {
 															if (o == 'actions') {
 																var text = e[o];
 																if (text) {
-																	e[o] = text
-																			.replace(
-																					/\b(\S+)\b/g,
-																					function(
-																							$0) {
+																	e[o] = text.replace(/\b(\S+)\b/g,function($0) {
 																						if (typeof $0 !== 'undefined') {
-																							return $0
-																									+ '';
+																							return $0+ '';
 																						}
-																					})
-																			.replace(
-																					/\s+/g,
-																					'<br/>');
+																					}).replace(/\s+/g,'<br/>');
 																}
 															}
 															if (o == 'status') {
