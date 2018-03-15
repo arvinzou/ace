@@ -18,8 +18,8 @@ var normId='${param.normId}';
 </script>
 <body>
 <div class="page-content">
-    <div class="btn-toolbar">
-        <div class="jqgrid-export"></div>
+    <div class="toolbar">
+
 
     </div>
     <table id="grid-table"></table>
@@ -67,6 +67,5 @@ window.onresize = function () {
 <script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
-<div id="tableExport"></div>
 </body>
 </html>

@@ -197,5 +197,10 @@ window.onresize = function () {
 }
 
 </script>
+<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
 </body>
 </html>

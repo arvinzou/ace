@@ -10,7 +10,7 @@ var TYPE_NAME = {
         //powerpoint: 'MS-Powerpoint'
        // pdf: 'PDF'
 };
-var $menu = $('<div class="widget-toolbar no-border"><button class="btn btn-xs bigger btn-white dropdown-toggle" data-toggle="dropdown" authority="false">导出<i class="ace-icon fa fa-chevron-down icon-on-right"></i></button><ul class="dropdown-menu dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close" role="menu" aria-labelledby="dropdownMenu"></ul></div>');
+var $menu = $('<span class="widget-toolbar no-border"><button class="btn btn-xs bigger btn-white dropdown-toggle" data-toggle="dropdown" authority="false">导出<i class="ace-icon fa fa-chevron-down icon-on-right"></i></button><ul class="dropdown-menu dropdown-default dropdown-menu-right dropdown-caret dropdown-close" role="menu" aria-labelledby="dropdownMenu"></ul></span>');
 //var exportTypes = ['txt','excel','json','xml','png','csv','sql','doc','pdf','powerpoint'];
 var exportTypes = ['txt','excel','json','xml','png','csv','sql','doc'];
 var tempStr = "";
@@ -21,6 +21,9 @@ $menu.find("ul.dropdown-menu ").html(tempStr);
 $menu.find("li").click(function () {
     var type = $(this).data('type');
     var doExport = function () {
+            if(!cfg.fileName){
+                cfg.fileName="表格数据";
+            }
             var dd = $('.ui-jqgrid-htable thead').clone();//找到<thead>
             var ee = $(cfg.grid_selector).clone();
             ee.find('.jqgfirstrow').remove();//干掉多余的无效行
@@ -53,8 +56,8 @@ $menu.find("li").click(function () {
    doExport();
 });
 //导出按钮的构建
-$("body").find('.jqgrid-export').replaceWith($menu);
-
+$(".toolbar").append($menu);
+$("body").append('<div id="tableExport"></div>');
 function getNowFormatDate() {
     var date = new Date();
     var seperator1 = "";

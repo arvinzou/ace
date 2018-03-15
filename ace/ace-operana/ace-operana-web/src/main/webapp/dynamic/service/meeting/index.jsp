@@ -314,5 +314,6 @@ window.onresize = function () {
 .div-right{ float:right;width:10%;}
 
 </style>
+
 </body>
 </html>

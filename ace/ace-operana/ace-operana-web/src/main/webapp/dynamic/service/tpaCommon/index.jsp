@@ -32,11 +32,7 @@ var normId='${param.normId}';
         </div>
     </div>
 
-    <div class="btn-toolbar">
-        <div class="jqgrid-export"></div>
-
-
-
+    <div class="toolbar">
 
     </div>
         <table id="grid-table"></table>
