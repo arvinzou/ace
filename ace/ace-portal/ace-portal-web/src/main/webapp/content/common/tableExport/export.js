@@ -28,7 +28,15 @@ $menu.find(".dropdown-menu-default li").click(function () {
             console.log({type:type,fileName: cfg.fileName+'v'+getNowFormatDate()});
             //Regex reg = new Regex(@"(?i)<(/?(?:table|tr|td))\b[^>]*>");
             var domstr=$(ee).html();
-            $("#tableExport").html("<table id='exportHandle'><caption>"+cfg.fileName+"</caption>"+domstr.replace(/<(?!(table|tbody|th|thead|tr|td)[ >])[^>/]*>/img,"")+"</table>");
+            var html="<table id='exportHandle'><caption>"+cfg.fileName+"</caption>"+domstr.replace(/<(?!(table|tbody|th|thead|tr|td)[ >])[^>/]*>/img,"")+"</table>";
+            html=html.replace(/width=".*?"/,'');
+            html=html.replace(/height=".*?"/,'');
+            html=html.replace(/style=".*?"/,'');
+            html=html.replace(/class=".*?"/,'');
+            html=html.replace(/id=".*?"/,'');
+             html=html.replace(/aria-describedby=".*?"/,'');
+            console.log(html);
+            $("#tableExport").html(html);
             $("#tableExport").removeClass("hide");
             $("#exportHandle").tableExport({type:type,fileName: cfg.fileName+'v'+getNowFormatDate()});
             $("#tableExport").addClass("hide");
