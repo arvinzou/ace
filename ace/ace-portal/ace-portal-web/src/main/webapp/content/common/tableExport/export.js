@@ -6,18 +6,19 @@ var TYPE_NAME = {
         txt: 'TXT',
         sql: 'SQL',
         doc: 'MS-Word',
-        excel: 'MS-Excel',
-        powerpoint: 'MS-Powerpoint',
-        pdf: 'PDF'
+        excel: 'MS-Excel'
+        //powerpoint: 'MS-Powerpoint'
+       // pdf: 'PDF'
 };
-var $menu = $('<div class="top-menu"><ul class="nav navbar-nav pull-left"><li class="dropdown dropdown-user"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"><span class="username username-hide-on-mobile">导出</span> <i class="fa fa-angle-down"></i></a><ul class="dropdown-menu dropdown-menu-default"></ul></li></ul></div>');
-var exportTypes = ['txt','excel','json','xml','png','csv','sql','doc','pdf','powerpoint'];
+var $menu = $('<div class="widget-toolbar no-border"><button class="btn btn-xs bigger btn-white dropdown-toggle" data-toggle="dropdown" authority="false">导出<i class="ace-icon fa fa-chevron-down icon-on-right"></i></button><ul class="dropdown-menu dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close" role="menu" aria-labelledby="dropdownMenu"></ul></div>');
+//var exportTypes = ['txt','excel','json','xml','png','csv','sql','doc','pdf','powerpoint'];
+var exportTypes = ['txt','excel','json','xml','png','csv','sql','doc'];
 var tempStr = "";
 for(var i = 0;i < exportTypes.length;i++){
     tempStr += '<li data-type="'+exportTypes[i]+'"><a href="javascript:void(0)">'+TYPE_NAME[exportTypes[i]]+'</a></li>';
 }
 $menu.find("ul.dropdown-menu ").html(tempStr);
-$menu.find(".dropdown-menu-default li").click(function () {
+$menu.find("li").click(function () {
     var type = $(this).data('type');
     var doExport = function () {
             var dd = $('.ui-jqgrid-htable thead').clone();//找到<thead>
@@ -28,13 +29,21 @@ $menu.find(".dropdown-menu-default li").click(function () {
             console.log({type:type,fileName: cfg.fileName+'v'+getNowFormatDate()});
             //Regex reg = new Regex(@"(?i)<(/?(?:table|tr|td))\b[^>]*>");
             var domstr=$(ee).html();
-            var html="<table id='exportHandle'><caption>"+cfg.fileName+"</caption>"+domstr.replace(/<(?!(table|tbody|th|thead|tr|td)[ >])[^>/]*>/img,"")+"</table>";
-            html=html.replace(/width=".*?"/,'');
-            html=html.replace(/height=".*?"/,'');
-            html=html.replace(/style=".*?"/,'');
-            html=html.replace(/class=".*?"/,'');
-            html=html.replace(/id=".*?"/,'');
-             html=html.replace(/aria-describedby=".*?"/,'');
+            var html=domstr.replace(/<(?!(table|tbody|th|thead|tr|td)[ >])[^>/]*>/gi,"");
+            html = html.replace(/[\r\n]/g, "");
+            html=html.replace(/<\/?span[^>]*>/gi,'');
+            html=html.replace(/<\/?div[^>]*>/gi,'');
+            html=html.replace(/style=".*?"/gi,'');
+            html=html.replace(/class=".*?"/gi,'');
+            html=html.replace(/role=".*?"/gi,'');
+            html=html.replace(/id=".*?"/gi,'');
+            html=html.replace(/aria-describedby=".*?"/gi,'');
+            html=html.replace(/title=".*?"/gi,'');
+            html=html.replace(/tabindex=".*?"/gi,'');
+            html=html.replace(/^\s+|\s+$/ig, '');
+            html=html.replace(/&nbsp;/ig, '');
+            html=html.replace(/ /ig, '');
+            html="<table id='exportHandle'><caption>"+cfg.fileName+"</caption>"+html+"</table>";
             console.log(html);
             $("#tableExport").html(html);
             $("#tableExport").removeClass("hide");

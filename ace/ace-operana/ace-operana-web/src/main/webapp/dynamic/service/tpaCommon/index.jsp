@@ -35,10 +35,14 @@ var normId='${param.normId}';
     <div class="btn-toolbar">
         <div class="jqgrid-export"></div>
 
+
+
+
     </div>
         <table id="grid-table"></table>
 
     <div id="grid-pager"></div>
+
 </div>
 
 
@@ -67,12 +71,8 @@ window.onresize = function () {
 }
 
 </script>
-<script type="text/javascript" src="${portalPath}/content/common/tableExport/pdfmake/pdfmake.min.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/tableExport/pdfmake/vfs_fonts.js"></script>
 <script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/jsPDF/jspdf.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/jsPDF-AutoTable/jspdf.plugin.autotable.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
