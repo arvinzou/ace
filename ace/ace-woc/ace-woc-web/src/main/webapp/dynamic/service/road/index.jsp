@@ -113,7 +113,8 @@
         <div class="labelItem">
             <span class="labelItemHeader">归属管辖单位</span>
             <br>
-            <span id="adminDepId"></span>
+            <span id="adminDepId" class="hide"></span>
+            <span id="adminDepName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">道路运行状态</span>

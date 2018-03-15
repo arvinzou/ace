@@ -47,7 +47,7 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <finalName>ufService</finalName>
+                    <finalName>wocService</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
                         <descriptor>../../src/assembly.xml</descriptor>
