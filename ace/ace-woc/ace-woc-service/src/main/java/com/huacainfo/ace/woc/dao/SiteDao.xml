@@ -12,6 +12,7 @@
         <result column="longitude" property="longitude" jdbcType="DECIMAL"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="constructDate" property="constructDate" jdbcType="TIMESTAMP"/>
+        <result column="buildDeptId" property="buildDeptId" jdbcType="VARCHAR"/>
         <result column="roadId" property="roadId" jdbcType="VARCHAR"/>
         <result column="adminDepId" property="adminDepId" jdbcType="VARCHAR"/>
         <result column="sitStatus" property="sitStatus" jdbcType="CHAR"/>
@@ -26,7 +27,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, siteName, siteCode, areaCode, roadwayNum, checkpointsNum, latitude, longitude, 
-    address, constructDate, roadId, adminDepId, sitStatus, remark, status, createUserId, 
+    address, constructDate, buildDeptId, roadId, adminDepId, sitStatus, remark, status, createUserId,
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -43,7 +44,7 @@
     insert into site (id, siteName, siteCode, 
       areaCode, roadwayNum, checkpointsNum, 
       latitude, longitude, address, 
-      constructDate, roadId, adminDepId, 
+      constructDate, buildDeptId, roadId, adminDepId,
       sitStatus, remark, status, 
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate
@@ -51,7 +52,7 @@
     values (#{id,jdbcType=VARCHAR}, #{siteName,jdbcType=VARCHAR}, #{siteCode,jdbcType=VARCHAR}, 
       #{areaCode,jdbcType=VARCHAR}, #{roadwayNum,jdbcType=INTEGER}, #{checkpointsNum,jdbcType=INTEGER}, 
       #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, 
-      #{constructDate,jdbcType=TIMESTAMP}, #{roadId,jdbcType=VARCHAR}, #{adminDepId,jdbcType=VARCHAR}, 
+      #{constructDate,jdbcType=TIMESTAMP},#{buildDeptId,jdbcType=VARCHAR}, #{roadId,jdbcType=VARCHAR}, #{adminDepId,jdbcType=VARCHAR},
       #{sitStatus,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
@@ -89,6 +90,9 @@
             </if>
             <if test="constructDate != null">
                 constructDate,
+            </if>
+            <if test="buildDeptId != null">
+                buildDeptId,
             </if>
             <if test="roadId != null">
                 roadId,
@@ -153,7 +157,10 @@
                 #{address,jdbcType=VARCHAR},
             </if>
             <if test="constructDate != null">
-                #{constructDate,jdbcType=TIMESTAMP},
+                #{constructDate,jdbcType=VARCHAR},
+            </if>
+            <if test="buildDeptId != null">
+                #{buildDeptId,jdbcType=TIMESTAMP},
             </if>
             <if test="roadId != null">
                 #{roadId,jdbcType=VARCHAR},
@@ -220,6 +227,9 @@
             <if test="constructDate != null">
                 constructDate = #{constructDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="buildDeptId != null">
+                buildDeptId = #{buildDeptId,jdbcType=VARCHAR},
+            </if>
             <if test="roadId != null">
                 roadId = #{roadId,jdbcType=VARCHAR},
             </if>
@@ -267,6 +277,7 @@
       longitude = #{longitude,jdbcType=DECIMAL},
       address = #{address,jdbcType=VARCHAR},
       constructDate = #{constructDate,jdbcType=TIMESTAMP},
+       buildDeptId = #{buildDeptId,jdbcType=VARCHAR},
       roadId = #{roadId,jdbcType=VARCHAR},
       adminDepId = #{adminDepId,jdbcType=VARCHAR},
       sitStatus = #{sitStatus,jdbcType=CHAR},
@@ -281,22 +292,14 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.PersonVo"></resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.SiteVo"></resultMap>
 
     <sql id="whereCondition">
-        from person
+        from site
         where 0=0
-        <if test='condition.name!=null and condition.name!=""'>
-            and name like
-            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.media!=null and condition.media!=''">
-            and media like
-            concat('%',#{condition.media,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.author!=null and condition.author!=''">
-            and author like
-            concat('%',#{condition.author,jdbcType=VARCHAR},'%')
+        <if test='condition.siteName!=null and condition.siteName!=""'>
+            and siteName like
+            concat('%',#{condition.siteName,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 
@@ -326,7 +329,7 @@
 
     <select id="isExit" resultType="int">
         select count(*)
-        from person
+        from site
         where
         name=#{name}
     </select>

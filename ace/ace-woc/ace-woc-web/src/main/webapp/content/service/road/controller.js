@@ -19,7 +19,7 @@ jQuery(function ($) {
                 $.extend(params, {
                     time: new Date()
                 });
-                // console.log(params);
+                console.log(params);
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {
                     page: 1,
                     postData: params

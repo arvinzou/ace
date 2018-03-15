@@ -1,5 +1,6 @@
 package com.huacainfo.ace.woc.web.controller;
 
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import com.huacainfo.ace.woc.model.Person;
 import com.huacainfo.ace.woc.service.PersonService;
 import com.huacainfo.ace.woc.vo.PersonVo;
 import com.huacainfo.ace.woc.vo.PersonQVo;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/person")
@@ -73,8 +77,7 @@ public class PersonController extends WocBaseController {
 	@ResponseBody
 	public MessageResponse insertPerson(String jsons) throws Exception {
 		Person obj = JSON.parseObject(jsons, Person.class);
-		return this.personService
-				.insertPerson(obj, this.getCurUserProp());
+		return this.personService.insertPerson(obj, this.getCurUserProp());
 	}
     /**
 	 *
@@ -130,5 +133,17 @@ public class PersonController extends WocBaseController {
 		String id = json.getString("id");
 		return this.personService.deletePersonByPersonId(id,
 				this.getCurUserProp());
+	}
+
+	@RequestMapping(value = "/selectPerson")
+	@ResponseBody
+	public Map<String,Object> selectAuthor(String q, String id)throws Exception {
+		Map<String,Object> params=new HashMap<String,Object>();
+		params.put("q", id);
+		if(!CommonUtils.isBlank(q)){
+			params.put("q", q);
+		}
+		this.logger.info("",params);
+		return this.personService.selectPerson(params);
 	}
 }

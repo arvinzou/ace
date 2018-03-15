@@ -27,16 +27,16 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
-                        data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
+                    <%--类别：<input--%>
+                    <%--class="easyui-combobox" style="width: 200px" name="category"--%>
+                    <%--data-options="--%>
+                    <%--url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',--%>
+                    <%--method:'get',--%>
+                    <%--valueField:'code',--%>
+                    <%--textField:'name',--%>
+                    <%--panelHeight:'auto'">--%>
 
-                    名称： <input name="name" type="text"
+                    名称： <input name="roadName" type="text"
                                style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/road/findRoadList">
@@ -53,12 +53,12 @@
                                 class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/road/updateRoad.do">
+                            authority="${pageContext.request.contextPath}/road/updateRoad">
                         <i
                                 class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/road/deleteRoadByRoadId.do">
+                            authority="${pageContext.request.contextPath}/road/deleteRoadByRoadId">
                         <i
                                 class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
@@ -84,16 +84,11 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem">
-            <span class="labelItemHeader">主键</span>
-            <br>
-            <span id="id"></span>
-        </div>
-        <div class="labelItem">
+        <%--<div class="labelItem">
             <span class="labelItemHeader">道路名称</span>
             <br>
             <span id="roadName"></span>
-        </div>
+        </div>--%>
         <div class="labelItem">
             <span class="labelItemHeader">道路国标</span>
             <br>
@@ -102,7 +97,8 @@
         <div class="labelItem">
             <span class="labelItemHeader">所在地区</span>
             <br>
-            <span id="areaCode"></span>
+            <span id="areaCode" class="hide"></span>
+            <span id="areaName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">道路全长</span>
@@ -115,25 +111,26 @@
             <span id="constructDate"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">归属管辖单位编码</span>
+            <span class="labelItemHeader">归属管辖单位</span>
             <br>
             <span id="adminDepId"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">道路运行状态</span>
             <br>
-            <span id="roadStatus"></span>
+            <span id="roadStatus" class="hide"></span>
+            <span id="roadStatusName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">备注</span>
             <br>
             <span id="remark"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">状态</span>
-            <br>
-            <span id="status"></span>
-        </div>
+        <%--<div class="labelItem hide">--%>
+        <%--<span class="labelItemHeader">状态</span>--%>
+        <%--<br>--%>
+        <%--<span id="status"></span>--%>
+        <%--</div>--%>
     </div>
 
     <h5 class="header-title">操作信息</h5>

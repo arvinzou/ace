@@ -4,6 +4,7 @@ package com.huacainfo.ace.woc.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,7 +78,7 @@ public class LicenseServiceImpl implements LicenseService {
     public MessageResponse insertLicense(License o, UserProp userProp)
             throws Exception {
         o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
+        o.setLastModifyDate(DateUtil.getNowDate());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -134,15 +135,12 @@ public class LicenseServiceImpl implements LicenseService {
         if (CommonUtils.isBlank(o.getLicenseImg1())) {
             return new MessageResponse(1, "证件照片1不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "更新时间不能为空！");
-        }
 
 
-        o.setLastModifyDate(new Date());
+        o.setLastModifyDate(DateUtil.getNowDate());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
-        this.licenseDao.updateByPrimaryKey(o);
+        this.licenseDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更证件档案", "证件档案", "", "insertLicense",
                 "insertLicense", userProp);
         return new MessageResponse(0, "变更证件档案完成！");

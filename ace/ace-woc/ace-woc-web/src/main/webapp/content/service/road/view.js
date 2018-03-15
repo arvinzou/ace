@@ -1,5 +1,6 @@
 jQuery(function ($) {
-
+    console.log("_colNames:" + _colNames.length);
+    console.log("_colModel:" + _colModel.length);
     // resize to fit page size
     $(window).on('resize.jqGrid', function () {
         $(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());

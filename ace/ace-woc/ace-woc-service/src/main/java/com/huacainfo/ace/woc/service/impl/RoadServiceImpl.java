@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,7 +79,7 @@ public class RoadServiceImpl implements RoadService {
     public MessageResponse insertRoad(Road o, UserProp userProp)
             throws Exception {
         o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
+        o.setLastModifyDate(DateUtil.getNowDate());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -109,7 +110,7 @@ public class RoadServiceImpl implements RoadService {
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
-        this.roadDao.insert(o);
+        this.roadDao.insertSelective(o);
         this.dataBaseLogService.log("添加道路档案", "道路档案", "", o.getRoadName(), o.getRoadName(), userProp);
         return new MessageResponse(0, "添加道路档案完成！");
     }
@@ -146,15 +147,11 @@ public class RoadServiceImpl implements RoadService {
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
-        this.roadDao.updateByPrimaryKey(o);
+        this.roadDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更道路档案", "道路档案", "", o.getRoadName(),
                 o.getRoadName(), userProp);
         return new MessageResponse(0, "变更道路档案完成！");
@@ -173,7 +170,7 @@ public class RoadServiceImpl implements RoadService {
     @Override
     public SingleResult<RoadVo> selectRoadByPrimaryKey(String id) throws Exception {
         SingleResult<RoadVo> rst = new SingleResult<RoadVo>();
-        rst.setValue(this.roadDao.selectByPrimaryKey(id));
+        rst.setValue(this.roadDao.selectVoByPrimaryKey(id));
         return rst;
     }
 

@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.woc.model.Person;
 import com.huacainfo.ace.woc.vo.PersonVo;
 import com.huacainfo.ace.woc.vo.PersonQVo;
+
+import java.util.Map;
+
 /**
  * @author: 王恩
  * @version: 2018-03-09
@@ -80,6 +83,8 @@ public interface PersonService {
 	    * @version: 2018-03-09
 	 */
 	public abstract MessageResponse deletePersonByPersonId(String id,UserProp userProp) throws Exception;
+
+	public Map<String, Object> selectPerson(Map<String, Object> params) throws Exception;
 
 	
 }

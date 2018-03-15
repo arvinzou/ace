@@ -1,9 +1,8 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,11 +75,9 @@ public class PersonServiceImpl implements PersonService {
 	public MessageResponse insertPerson(Person o, UserProp userProp)
 			throws Exception {
 		o.setId(UUID.randomUUID().toString());
-		//o.setId(String.valueOf(new Date().getTime()));
-		
 		int temp = this.personDao.isExit(o);
 		if (temp > 0) {
-			return new MessageResponse(1, "人员信息名称重复！");
+			return new MessageResponse(1, "身份证号码已经存在！");
 		}
 		o.setCreateDate(new Date());
 		o.setStatus("1");
@@ -111,7 +108,7 @@ public class PersonServiceImpl implements PersonService {
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
-		this.personDao.updateByPrimaryKey(o);
+		this.personDao.updateByPrimaryKeySelective(o);
 		this.dataBaseLogService.log("变更人员信息", "人员信息", "", o.getName(),
 				o.getName(), userProp);
 		return new MessageResponse(0, "变更人员信息完成！");
@@ -153,5 +150,14 @@ public class PersonServiceImpl implements PersonService {
 		this.dataBaseLogService.log("删除人员信息", "人员信息", String.valueOf(id),
 				String.valueOf(id), "人员信息", userProp);
 		return new MessageResponse(0, "人员信息删除完成！");
+	}
+
+	@Override
+	public Map<String, Object> selectPerson(Map<String, Object> params) throws Exception{
+		Map<String, Object> rst = new HashMap<String, Object>();
+		List<Map<String, String>> list = this.personDao.selectPerson(params);
+		rst.put("total", list.size());
+		rst.put("rows", list);
+		return rst;
 	}
 }

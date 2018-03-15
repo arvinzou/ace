@@ -18,19 +18,18 @@ var _colModel = function () {
         },
         /*车牌号*/
         {
-            name: 'name',
+            name: 'plateNo',
             editable: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
             },
             formoptions: {
                 elmprefix: "",
                 elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
-            editrules: {
-                required: true
-            }
+            editrules: {required: true, String: true, custom: true, custom_func: checkPlateNo},
         },
         /*车辆颜色*/
         {
@@ -39,6 +38,7 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
             },
         },
@@ -46,9 +46,36 @@ var _colModel = function () {
         {
             name: 'ownerId',
             editable: true,
-            width: 200,
+            width: 100,
+            edittype: "combogrid",
+            dataoptions: {
+                panelWidth: 400,
+                idField: 'id',
+                textField: 'name',
+                url: contextPath + '/person/selectPerson',
+                mode: 'remote',
+                fitColumns: true,
+                method: 'get',
+                columns: [[{
+                    field: 'name',
+                    title: '姓名+(身份证)',
+                    width: 200
+                }]]
+            },
             editoptions: {
-                maxlength: "50"
+                style: 'width:200px;height:25px;',
+            },
+            renderer: function (value, cur) {
+                url = contextPath + '/person/selectPersonByPrimaryKey';
+                data = {
+                    id: value,
+                }
+                $.ajaxSettings.async = false;
+                $.post(url, data, function (result) {
+                    value=  result.value.name;
+                });
+                $.ajaxSettings.async = true;
+                return value;
             },
             formoptions: {
                 elmprefix: "",
@@ -65,8 +92,9 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
-            },
+            }
         },
         /*行驶证号*/
         {
@@ -74,6 +102,7 @@ var _colModel = function () {
             editable: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
             },
             formoptions: {
@@ -91,11 +120,15 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "11",
             },
             editrules: {
                 number: true,
-                required: false,
+                integer: true,
+                minValue: 2,
+                maxValue: 10,
+                required: false
             }
         },
         /*车辆类型*/
@@ -105,6 +138,7 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
             },
         },
@@ -115,6 +149,7 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
             },
         },
@@ -125,6 +160,7 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
             },
         },
@@ -135,6 +171,7 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
             },
         },
@@ -146,6 +183,7 @@ var _colModel = function () {
             width: 100,
             edittype: "datebox",
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "20"
             },
             dataoptions: {
@@ -182,6 +220,7 @@ var _colModel = function () {
             width: 100,
             edittype: "datebox",
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "20"
             },
             dataoptions: {
@@ -217,6 +256,7 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
             },
         },
@@ -227,9 +267,14 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "11"
             },
-            editrules: {required: true, number: true, custom: true, custom_func: ValidateTvalue},
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editrules: {required: true, number: true, custom: true, custom_func: checkFloat},
 
         },
         /*整备质量*/
@@ -239,9 +284,14 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "11"
             },
-            editrules: {required: true, number: true, custom: true, custom_func: ValidateTvalue},
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editrules: {required: true, number: true, custom: true, custom_func: checkFloat},
 
         },
         /*核定载质量*/
@@ -251,9 +301,14 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "11"
             },
-            editrules: {required: true, number: true, custom: true, custom_func: ValidateTvalue},
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editrules: {required: true, number: true, custom: true, custom_func: checkFloat},
 
         },
         /*外廓尺寸*/
@@ -263,6 +318,7 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "50"
             },
         },
@@ -273,9 +329,14 @@ var _colModel = function () {
             hidden: true,
             width: 200,
             editoptions: {
+                style: 'width:200px;',
                 maxlength: "11"
             },
-            editrules: {required: true, number: true, custom: true, custom_func: ValidateTvalue},
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editrules: {required: true, number: true, custom: true, custom_func: checkFloat},
         },
         /*备注*/
         {
@@ -298,6 +359,7 @@ var _colModel = function () {
             width: 100,
             edittype: "checkbox",
             editoptions: {
+                style: 'width:200px;',
                 value: "1:0"
             },
             unformat: aceSwitch,
@@ -391,16 +453,24 @@ function renderBtn(cur) {
     return html.join(' ');
 }
 
-function ValidateTvalue(value, name) {
-    //#region 验证分数是否为数值
-    var regu = "^[0-9]+(.[0-9]{2})?$";
-    //var regu = "/^\+?(\d*\.\d{2})$/";
+function checkFloat(value, name, index) {
+    var regu = "\^[1-9]\\d{0,7}(\.\\d{1,2})?\$";
     var re = new RegExp(regu);
     if (re.test(value)) {
         return [true, ""];
     }
     else {
-        return [false, "分数【" + rowDatas.MarkScore + "】错误，请输入数值型.如：12或12.23"];
+        return [false, name + '格式错误'];
     }
-    //#endregion
+}
+
+function checkPlateNo(value, name, index) {
+    var regu = "\^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}\$";
+    var re = new RegExp(regu);
+    if (re.test(value)) {
+        return [true, ""];
+    }
+    else {
+        return [false, '格式错误,注意英文部分为大写'];
+    }
 }
