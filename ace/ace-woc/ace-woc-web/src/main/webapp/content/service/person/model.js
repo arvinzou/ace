@@ -173,7 +173,7 @@ var _colModel = function () {
         /*状态*/
         {
             name : 'status',
-            editable : true,
+            editable : false,
             hidden : true,
             width : 100,
             edittype : "checkbox",

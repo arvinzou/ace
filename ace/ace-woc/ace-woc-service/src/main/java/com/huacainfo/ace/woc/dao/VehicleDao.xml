@@ -30,16 +30,20 @@
         <result column="lastModifyDate" property="lastModifyDate" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, plateNo, vehicleColor, ownerId, ownerCompanyId, axleCount, vehicleType,
-    model, engineNo, VIN, RegisterDate, IssueDate, licenceIssuingAuthority, totalMass, 
-    unladedMass, approvedMass, containerInsideSize, tractionMass, remark, status, createUserId, 
-    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+        p.NAME as personName,
+        d.department_name,
+        v.id, v.plateNo, v.vehicleColor, v.ownerId, v.ownerCompanyId, v.axleCount, v.vehicleType,
+        v.model, v.engineNo, v.VIN, v.RegisterDate, v.IssueDate, v.licenceIssuingAuthority, v.totalMass,
+        v.unladedMass, v.approvedMass, v.containerInsideSize, v.tractionMass, v.remark, v.status, v.createUserId,
+        v.createUserName, v.createDate, v.lastModifyUserId, v.lastModifyUserName, v.lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMapVo" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
-        from vehicle
-        where id = #{id,jdbcType=VARCHAR}
+        FROM vehicle v
+        LEFT JOIN person p ON v.ownerId = p.id
+        LEFT JOIN portal.department d ON v.ownerCompanyId = d.department_id
+        where v.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from vehicle
@@ -347,8 +351,8 @@
     </resultMap>
 
     <sql id="whereCondition">
-        FROM woc.vehicle v
-        LEFT JOIN woc.person p ON v.ownerId = p.id
+        FROM vehicle v
+        LEFT JOIN person p ON v.ownerId = p.id
         LEFT JOIN portal.department d ON v.ownerCompanyId = d.department_id
         where 0=0
         <if test='condition.plateNo!=null and condition.plateNo!=""'>
@@ -359,13 +363,7 @@
 
     <select id="findList" resultMap="BaseResultMapVo">
         select
-        p.NAME as personName,
-        d.department_name,
-        v.id, v.plateNo, v.vehicleColor, v.ownerId, v.ownerCompanyId, v.axleCount, v.vehicleType,
-        v.model, v.engineNo, v.VIN, v.RegisterDate, v.IssueDate, v.licenceIssuingAuthority, v.totalMass,
-        v.unladedMass, v.approvedMass, v.containerInsideSize, v.tractionMass, v.remark, v.status, v.createUserId,
-        v.createUserName, v.createDate, v.lastModifyUserId, v.lastModifyUserName, v.lastModifyDate
-
+        <include refid="Base_Column_List"/>
         <include refid="whereCondition"/>
 
         <choose>

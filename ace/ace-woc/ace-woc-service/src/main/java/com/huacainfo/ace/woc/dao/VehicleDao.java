@@ -1,9 +1,6 @@
 package com.huacainfo.ace.woc.dao;
-
-import com.huacainfo.ace.woc.model.Person;
 import com.huacainfo.ace.woc.model.Vehicle;
-import com.huacainfo.ace.woc.vo.PersonQVo;
-import com.huacainfo.ace.woc.vo.PersonVo;
+
 import com.huacainfo.ace.woc.vo.VehicleQVo;
 import com.huacainfo.ace.woc.vo.VehicleVo;
 import org.apache.ibatis.annotations.Param;

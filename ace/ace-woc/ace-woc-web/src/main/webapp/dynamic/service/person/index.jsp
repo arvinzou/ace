@@ -91,9 +91,87 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
+        <div class="labelItem">
+            <span class="labelItemHeader">姓名</span>
+            <br>
+            <span id="name"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">身份证</span>
+            <br>
+            <span id="paperworkId"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">电话号码</span>
+            <br>
+            <span id="phoneNumber"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">所属机构</span>
+            <br>
+            <span id="deptName"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">所属地区</span>
+            <br>
+            <span id="areaName"></span>
+        </div>
+
+        <div class="labelItem">
+            <span class="labelItemHeader">居住地址</span>
+            <br>
+            <span id="address"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">从业资格证</span>
+            <br>
+            <span id="certNumber"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">驾驶证号</span>
+            <br>
+            <span id="driverLicenseCode"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">备注</span>
+            <br>
+            <span id="remark"></span>
+        </div>
     </div>
+    <h5 class="header-title">照片</h5>
+    <div class="row" style="padding:10px" id="headImgUrl"></div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
+        <div class="labelItem">
+            <span class="labelItemHeader">创建人编号</span>
+            <br>
+            <span id="createUserId"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">创建人姓名</span>
+            <br>
+            <span id="createUserName"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">入库日期</span>
+            <br>
+            <span id="createDate"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新人编号</span>
+            <br>
+            <span id="lastModifyUserId"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新人姓名</span>
+            <br>
+            <span id="lastModifyUserName"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新时间</span>
+            <br>
+            <span id="lastModifyDate"></span>
+        </div>
     </div>
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>

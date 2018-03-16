@@ -140,13 +140,19 @@ function loadView(id) {
 		},
 		success : function(rst, textStatus) {
 			$.each(rst.value, function(key, value) {
-				if (key == 'category') {
-                	value = rsd(value, '83');
-                }
                 if (key == 'status') {
                    value == "1" ? "正常" : "关闭";
-                }if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
+                }
+                if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
                  	value = Common.DateFormatter(value);
+                }
+                if (key == 'headImgUrl') {
+                    if (value != '') {
+                        value = '<image src="' + fastdfs_server + value
+                            + '" />';
+                    } else {
+                        value = '待上传';
+                    }
                 }
 				$("#dialog-message-view").find('#' + key).html(value);
 			});

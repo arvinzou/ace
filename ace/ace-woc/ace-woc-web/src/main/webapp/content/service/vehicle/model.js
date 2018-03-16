@@ -81,16 +81,20 @@ var _colModel = function () {
         /*所属企业*/
         {
             name: 'ownerCompanyId',
-            editable: true,
-            hidden: false,
-            width: 200,
-            renderer: function (value, cur) {
-                return $.jgrid.getAccessor(cur, 'departmentName');
+            editable : true,
+            hidden : false,
+            width : 200,
+            edittype : "combotree",
+            editoptions : {
+                style : 'width:200px;height:25px;'
             },
-            editoptions: {
-                style: 'width:200px;',
-                maxlength: "50"
-            }
+            dataoptions : {
+                url : portalPath + '/department/selectDepartmentTreeList.do',
+                required : false
+            },
+            renderer : function(value, cur) {
+                return $.jgrid.getAccessor(cur, 'deptName');
+            },
         },
         /*轴数*/
         {
@@ -334,7 +338,7 @@ var _colModel = function () {
         /*状态*/
         {
             name: 'status',
-            editable: true,
+            editable: false,
             hidden: true,
             width: 100,
             edittype: "checkbox",
@@ -424,7 +428,7 @@ function pickDate(cellvalue, options, cell) {
 
 function renderBtn(cur) {
     var id = $.jgrid.getAccessor(cur, 'id');
-    var title = $.jgrid.getAccessor(cur, 'name');
+    var title = $.jgrid.getAccessor(cur, 'plateNo');
     var html = [];
     html.push('<a target="_blank" href="');
     html.push('javascript:preview(\'' + id + '\',\'' + title + '\')');

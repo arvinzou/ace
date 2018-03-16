@@ -146,13 +146,19 @@ var _colModel = function () {
         /*归属管辖单位*/
         {
             name: 'buildDeptId',
-            editable: true,
-            width: 200,
-            editoptions: {
-                style: 'width:200px;'
+            editable : true,
+            hidden : false,
+            width : 200,
+            edittype : "combotree",
+            editoptions : {
+                style : 'width:200px;height:25px;'
             },
-            renderer: function (value, cur) {
-                return $.jgrid.getAccessor(cur, 'buildDeptName');
+            dataoptions : {
+                url : portalPath + '/department/selectDepartmentTreeList.do',
+                required : false
+            },
+            renderer : function(value, cur) {
+                return $.jgrid.getAccessor(cur, 'deptName');
             },
         },
         /*建造时间*/
@@ -220,13 +226,19 @@ var _colModel = function () {
         /*归属管辖单位*/
         {
             name: 'adminDepId',
-            editable: true,
-            width: 200,
-            editoptions: {
-                style: 'width:200px;'
+            editable : true,
+            hidden : false,
+            width : 200,
+            edittype : "combotree",
+            editoptions : {
+                style : 'width:200px;height:25px;'
             },
-            renderer: function (value, cur) {
-                return $.jgrid.getAccessor(cur, 'adminDeptName');
+            dataoptions : {
+                url : portalPath + '/department/selectDepartmentTreeList.do',
+                required : false
+            },
+            renderer : function(value, cur) {
+                return $.jgrid.getAccessor(cur, 'deptName');
             },
         },
         /*卡点运行状态*/
@@ -268,7 +280,7 @@ var _colModel = function () {
         /*状态*/
         {
             name: 'status',
-            editable: true,
+            editable: false,
             hidden: true,
             width: 100,
             edittype: "checkbox",
@@ -356,7 +368,7 @@ function pickDate(cellvalue, options, cell) {
 
 function renderBtn(cur) {
     var id = $.jgrid.getAccessor(cur, 'id');
-    var title = $.jgrid.getAccessor(cur, 'name');
+    var title = $.jgrid.getAccessor(cur, 'siteName');
     var html = [];
     html.push('<a target="_blank" href="');
     html.push('javascript:preview(\'' + id + '\',\'' + title + '\')');

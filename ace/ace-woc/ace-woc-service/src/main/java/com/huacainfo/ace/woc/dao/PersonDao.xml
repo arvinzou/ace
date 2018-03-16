@@ -34,7 +34,7 @@ p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.de
         from person p
         left join portal.province a on p.areaCode=a.code
         left join portal.department d on p.companyId=d.department_id
-        where id = #{id,jdbcType=VARCHAR}
+        where p.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from person
