@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.woc.model.Road;
 import com.huacainfo.ace.woc.vo.RoadVo;
 import com.huacainfo.ace.woc.vo.RoadQVo;
+
+import java.util.Map;
+
 /**
  * @author: Arvin
  * @version: 2018-03-09
@@ -81,5 +84,5 @@ public interface RoadService {
 	 */
 	public abstract MessageResponse deleteRoadByRoadId(String id,UserProp userProp) throws Exception;
 
-	
+	public Map<String, Object> selectRoad(Map<String, Object> params) throws Exception;
 }

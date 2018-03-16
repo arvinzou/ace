@@ -1,6 +1,7 @@
 package com.huacainfo.ace.woc.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.huacainfo.ace.portal.model.Resources;
 import org.apache.ibatis.annotations.Param;
@@ -32,4 +33,7 @@ public interface RoadDao {
 
     int isExit(Road record);
 
+
+    List<Map<String, String>> selectRoad(
+            @Param("params") Map<String, Object> params);
 }

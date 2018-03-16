@@ -1,5 +1,6 @@
 package com.huacainfo.ace.woc.web.controller;
 
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import com.huacainfo.ace.woc.model.Road;
 import com.huacainfo.ace.woc.service.RoadService;
 import com.huacainfo.ace.woc.vo.RoadVo;
 import com.huacainfo.ace.woc.vo.RoadQVo;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/road")
@@ -130,5 +134,17 @@ public class RoadController extends WocBaseController {
 		String id = json.getString("id");
 		return this.roadService.deleteRoadByRoadId(id,
 				this.getCurUserProp());
+	}
+
+	@RequestMapping(value = "/selectRoad")
+	@ResponseBody
+	public Map<String,Object> selectAuthor(String q, String id)throws Exception {
+		Map<String,Object> params=new HashMap<String,Object>();
+		params.put("q", id);
+		if(!CommonUtils.isBlank(q)){
+			params.put("q", q);
+		}
+		this.logger.info("",params);
+		return this.roadService.selectRoad(params);
 	}
 }

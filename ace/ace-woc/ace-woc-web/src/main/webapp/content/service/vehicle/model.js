@@ -1,6 +1,6 @@
 var _colNames = ['主键', '车牌号', '车辆颜色', '所属人', '所属企业',
-    '行驶证号', '轴数', '车辆类型', '车辆品牌', '发动机号码', '车辆识别代码',
-    '行驶证注册日期', '行驶证发证日期', '领证单位', '总质量', '整备质量',
+    '轴数', '车辆类型', '车辆品牌', '发动机号码', '车辆识别代码', '领证单位',
+    '行驶证注册日期', '行驶证发证日期', '总质量', '整备质量',
     '核定载质量', '外廓尺寸', '准牵引总量', '备注', '状态', '创建人编号',
     '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间', '操作'];
 var _colModel = function () {
@@ -20,7 +20,8 @@ var _colModel = function () {
         {
             name: 'plateNo',
             editable: true,
-            width: 200,
+            hidden: false,
+            width: 70,
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "50"
@@ -46,6 +47,7 @@ var _colModel = function () {
         {
             name: 'ownerId',
             editable: true,
+            hidden: false,
             width: 100,
             edittype: "combogrid",
             dataoptions: {
@@ -66,16 +68,7 @@ var _colModel = function () {
                 style: 'width:200px;height:25px;',
             },
             renderer: function (value, cur) {
-                url = contextPath + '/person/selectPersonByPrimaryKey';
-                data = {
-                    id: value,
-                }
-                $.ajaxSettings.async = false;
-                $.post(url, data, function (result) {
-                    value=  result.value.name;
-                });
-                $.ajaxSettings.async = true;
-                return value;
+                return $.jgrid.getAccessor(cur, 'personName');
             },
             formoptions: {
                 elmprefix: "",
@@ -89,36 +82,22 @@ var _colModel = function () {
         {
             name: 'ownerCompanyId',
             editable: true,
-            hidden: true,
+            hidden: false,
             width: 200,
+            renderer: function (value, cur) {
+                return $.jgrid.getAccessor(cur, 'departmentName');
+            },
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "50"
-            }
-        },
-        /*行驶证号*/
-        {
-            name: 'fileNo',
-            editable: true,
-            width: 200,
-            editoptions: {
-                style: 'width:200px;',
-                maxlength: "50"
-            },
-            formoptions: {
-                elmprefix: "",
-                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
-            },
-            editrules: {
-                required: true
             }
         },
         /*轴数*/
         {
-            name: 'ownerCompanyId',
+            name: 'axleCount',
             editable: true,
-            hidden: true,
-            width: 200,
+            hidden: false,
+            width: 50,
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "11",
@@ -175,6 +154,17 @@ var _colModel = function () {
                 maxlength: "50"
             },
         },
+        /*领证单位*/
+        {
+            name: 'licenceIssuingAuthority',
+            editable: true,
+            hidden: true,
+            width: 200,
+            editoptions: {
+                style: 'width:200px;',
+                maxlength: "50"
+            },
+        },
         /*行驶证注册日期*/
         {
             name: 'RegisterDate',
@@ -183,7 +173,7 @@ var _colModel = function () {
             width: 100,
             edittype: "datebox",
             editoptions: {
-                style: 'width:200px;',
+                style: 'width:200px;height:25px;',
                 maxlength: "20"
             },
             dataoptions: {
@@ -220,7 +210,7 @@ var _colModel = function () {
             width: 100,
             edittype: "datebox",
             editoptions: {
-                style: 'width:200px;',
+                style: 'width:200px;height:25px;',
                 maxlength: "20"
             },
             dataoptions: {
@@ -249,23 +239,12 @@ var _colModel = function () {
                 return value == null ? "" : value.substring(0, 8);
             },
         },
-        /*领证单位*/
-        {
-            name: 'licenceIssuingAuthority',
-            editable: true,
-            hidden: true,
-            width: 200,
-            editoptions: {
-                style: 'width:200px;',
-                maxlength: "50"
-            },
-        },
         /*总质量*/
         {
             name: 'totalMass',
             editable: true,
-            hidden: true,
-            width: 200,
+            hidden: false,
+            width: 100,
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "11"
@@ -298,8 +277,8 @@ var _colModel = function () {
         {
             name: 'approvedMass',
             editable: true,
-            hidden: true,
-            width: 200,
+            hidden: false,
+            width: 100,
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "11"
@@ -330,7 +309,8 @@ var _colModel = function () {
             width: 200,
             editoptions: {
                 style: 'width:200px;',
-                maxlength: "11"
+                maxlength: "11",
+                colspan: true,
             },
             formoptions: {
                 elmprefix: "",

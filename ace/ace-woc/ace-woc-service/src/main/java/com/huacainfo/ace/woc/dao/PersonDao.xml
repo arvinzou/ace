@@ -22,16 +22,18 @@
         <result column="lastModifyDate" property="lastModifyDate" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.PersonVo">  </resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.PersonVo"></resultMap>
     <sql id="Base_Column_List">
-    id, name, paperworkId, headImgUrl, phoneNumber, companyId, areaCode, address, certNumber, 
-    driverLicenseCode, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
-    lastModifyUserName, lastModifyDate
+p.id,p.name,p.paperworkId,p.headImgUrl,p.phoneNumber,p.companyId,p.areaCode,p.address,
+p.certNumber,p.driverLicenseCode,p.remark,p.status,p.createUserId,p.createUserName,p.createDate,
+p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.department_name as deptName
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMapVo" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
-        from person
+        from person p
+        left join portal.province a on p.areaCode=a.code
+        left join portal.department d on p.companyId=d.department_id
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -250,22 +252,24 @@
 
 
     <sql id="whereCondition">
-        from person
+        from person p
+        left join portal.province a on p.areaCode=a.code
+        left join portal.department d on p.companyId=d.department_id
         where 0=0
         <if test='condition.name!=null and condition.name!=""'>
-            and name like
+            and p.name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.paperworkId!=null and condition.paperworkId!=""'>
-            and paperworkId like
+            and p.paperworkId like
             concat('%',#{condition.paperworkId,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.driverLicenseCode!=null and condition.driverLicenseCode!=""'>
-            and driverLicenseCode like
+            and p.driverLicenseCode like
             concat('%',#{condition.driverLicenseCode,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.phoneNumber!=null and condition.phoneNumber!=""'>
-            and phoneNumber like
+            and p.phoneNumber like
             concat('%',#{condition.phoneNumber,jdbcType=VARCHAR},'%')
         </if>
     </sql>
@@ -307,7 +311,8 @@
         where 0=0
         <if test='params.q !=null and params.q!=""'>
             and
-            t.id=#{params.q} or t.name like concat('%',#{params.q},'%') or t.paperworkId like concat('%',#{params.q},'%')
+            t.id=#{params.q} or t.name like concat('%',#{params.q},'%') or t.paperworkId like
+            concat('%',#{params.q},'%')
         </if>
         order by t.createDate
         limit 0,20
