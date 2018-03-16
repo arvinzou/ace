@@ -165,7 +165,7 @@ public class MonitorSiteServiceImpl implements MonitorSiteService {
     @Override
     public SingleResult<MonitorSiteVo> selectMonitorSiteByPrimaryKey(String id) throws Exception {
         SingleResult<MonitorSiteVo> rst = new SingleResult<MonitorSiteVo>();
-        rst.setValue(this.monitorSiteDao.selectByPrimaryKey(id));
+        rst.setValue(this.monitorSiteDao.selectVoByPrimaryKey(id));
         return rst;
     }
 

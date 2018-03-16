@@ -25,7 +25,7 @@
     latitude, longitude, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
     lastModifyUserName, lastModifyDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from monitor_site
@@ -235,11 +235,16 @@
 
   <!--voMap-->
   <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.woc.vo.MonitorSiteVo">
+    <result column="siteName" jdbcType="VARCHAR" property="siteName" />
+    <result column="fullname" jdbcType="VARCHAR" property="areaName" />
   </resultMap>
 
   <select id="findList" resultMap="BaseResultMapVo">
     select
-    <include refid="Base_Column_List"/>
+      s.siteName,p.fullname,p.name,
+      m.id, m.siteId, m.monitorSiteName, m.monitorSiteNo, m.monitorSiteStatus, m.areaCode, m.direction,
+      m.latitude, m.longitude, m.remark, m.status, m.createUserId, m.createUserName, m.createDate,
+      m.lastModifyUserId, m.lastModifyUserName, m.lastModifyDate
 
     <include refid="whereCondition"/>
     <choose>
@@ -247,17 +252,20 @@
         ORDER BY ${orderBy}
       </when>
       <otherwise>
-        ORDER BY createDate
+        ORDER BY m.createDate
       </otherwise>
     </choose>
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
   </select>
 
   <sql id="whereCondition">
-    from monitor_site
+    from
+      woc.monitor_site m
+    left join woc.site s ON m.siteId = s.id
+    left join portal.province p on m.areaCode =p.code
     where 1 = 1
     <if test="condition.id!=null and condition.id!=&quot;&quot;">
-      and id = #{condition.id,jdbcType=VARCHAR}
+      and m.id = #{condition.id,jdbcType=VARCHAR}
     </if>
   </sql>
 
@@ -270,5 +278,18 @@
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
     <include refid="whereCondition"/>
+  </select>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select
+      s.siteName, p.fullname as areaName, p.name,
+      m.id, m.siteId, m.monitorSiteName, m.monitorSiteNo, m.monitorSiteStatus, m.areaCode, m.direction,
+      m.latitude, m.longitude, m.remark, m.status, m.createUserId, m.createUserName, m.createDate,
+      m.lastModifyUserId, m.lastModifyUserName, m.lastModifyDate
+    FROM
+	  woc.monitor_site m
+    LEFT JOIN woc.site s ON m.siteId = s.id
+    left join portal.province p on m.areaCode =p.code
+    where m.id = #{id,jdbcType=VARCHAR}
   </select>
 </mapper>

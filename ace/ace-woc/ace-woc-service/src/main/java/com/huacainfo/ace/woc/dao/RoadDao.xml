@@ -7,7 +7,7 @@
         <result column="roadCode" jdbcType="VARCHAR" property="roadCode"/>
         <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
         <result column="roadLength" jdbcType="BIGINT" property="roadLength"/>
-        <result column="constructDate" jdbcType="VARCHAR" property="constructDate"/>
+        <result column="constructDate" jdbcType="TIMESTAMP" property="constructDate"/>
         <result column="adminDepId" jdbcType="VARCHAR" property="adminDepId"/>
         <result column="roadStatus" jdbcType="CHAR" property="roadStatus"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -43,7 +43,7 @@
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{roadName,jdbcType=VARCHAR}, #{roadCode,jdbcType=VARCHAR}, 
-      #{areaCode,jdbcType=VARCHAR}, #{roadLength,jdbcType=BIGINT}, #{constructDate,jdbcType=VARCHAR}, 
+      #{areaCode,jdbcType=VARCHAR}, #{roadLength,jdbcType=BIGINT}, #{constructDate,jdbcType=TIMESTAMP},
       #{adminDepId,jdbcType=VARCHAR}, #{roadStatus,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
       #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
@@ -118,7 +118,7 @@
                 #{roadLength,jdbcType=BIGINT},
             </if>
             <if test="constructDate != null">
-                #{constructDate,jdbcType=VARCHAR},
+                #{constructDate,jdbcType=TIMESTAMP},
             </if>
             <if test="adminDepId != null">
                 #{adminDepId,jdbcType=VARCHAR},
@@ -168,7 +168,7 @@
                 roadLength = #{roadLength,jdbcType=BIGINT},
             </if>
             <if test="constructDate != null">
-                constructDate = #{constructDate,jdbcType=VARCHAR},
+                constructDate = #{constructDate,jdbcType=TIMESTAMP},
             </if>
             <if test="adminDepId != null">
                 adminDepId = #{adminDepId,jdbcType=VARCHAR},
@@ -209,7 +209,7 @@
       roadCode = #{roadCode,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
       roadLength = #{roadLength,jdbcType=BIGINT},
-      constructDate = #{constructDate,jdbcType=VARCHAR},
+      constructDate = #{constructDate,jdbcType=TIMESTAMP},
       adminDepId = #{adminDepId,jdbcType=VARCHAR},
       roadStatus = #{roadStatus,jdbcType=CHAR},
       remark = #{remark,jdbcType=VARCHAR},

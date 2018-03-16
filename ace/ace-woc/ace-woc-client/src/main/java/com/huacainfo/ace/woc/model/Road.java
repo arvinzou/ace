@@ -18,7 +18,7 @@ public class Road implements Serializable {
 
     private Long roadLength;
 
-    private String constructDate;
+    private Date constructDate;
 
     private String adminDepId;
 
@@ -83,12 +83,12 @@ public class Road implements Serializable {
         this.roadLength = roadLength;
     }
 
-    public String getConstructDate() {
+    public Date getConstructDate() {
         return constructDate;
     }
 
-    public void setConstructDate(String constructDate) {
-        this.constructDate = constructDate == null ? null : constructDate.trim();
+    public void setConstructDate(Date constructDate) {
+        this.constructDate = constructDate;
     }
 
     public String getAdminDepId() {

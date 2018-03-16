@@ -77,25 +77,23 @@ public class BlacklistServiceImpl implements BlacklistService {
     @Override
     public MessageResponse insertBlacklist(Blacklist o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
-        o.setLastModifyDate(DateUtil.getNowDate());
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
+
+        if(CommonUtils.isBlank(o.getPersonId())
+                && CommonUtils.isBlank(o.getVehicleId())
+                && CommonUtils.isBlank(o.getDepartmentId())){
+            return new MessageResponse(1, "所属人，所属车辆，所属部门必选其一！");
         }
         if (CommonUtils.isBlank(o.getIsBlack())) {
             return new MessageResponse(1, "是否黑名单不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
 
-        int temp = this.blacklistDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "黑名单档案名称重复！");
-        }
+//        int temp = this.blacklistDao.isExit(o);
+//        if (temp > 0) {
+//            return new MessageResponse(1, "黑名单档案名称重复！");
+//        }
+
+        o.setId(GUIDUtil.getGUID());
+        o.setLastModifyDate(DateUtil.getNowDate());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -126,9 +124,6 @@ public class BlacklistServiceImpl implements BlacklistService {
         if (CommonUtils.isBlank(o.getIsBlack())) {
             return new MessageResponse(1, "是否黑名单不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -152,7 +147,7 @@ public class BlacklistServiceImpl implements BlacklistService {
     @Override
     public SingleResult<BlacklistVo> selectBlacklistByPrimaryKey(String id) throws Exception {
         SingleResult<BlacklistVo> rst = new SingleResult<BlacklistVo>();
-        rst.setValue(this.blacklistDao.selectByPrimaryKey(id));
+        rst.setValue(this.blacklistDao.selectVoByPrimaryKey(id));
         return rst;
     }
 

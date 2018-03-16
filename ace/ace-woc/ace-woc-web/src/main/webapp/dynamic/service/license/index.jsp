@@ -111,13 +111,14 @@
         <div class="labelItem">
             <span class="labelItemHeader">所属车辆车牌号</span>
             <br>
-            <span id="vehicleId"></span>
+            <span id="vehicleId" class="hide"></span>
             <span id="vehicleNo"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">所属企业</span>
             <br>
-            <span id="departmentId"></span>
+            <span id="departmentId" class="hide"></span>
+            <span id="departmentName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">证件照片1</span>

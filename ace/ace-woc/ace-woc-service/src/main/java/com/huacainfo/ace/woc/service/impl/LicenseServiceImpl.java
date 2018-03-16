@@ -159,7 +159,7 @@ public class LicenseServiceImpl implements LicenseService {
     @Override
     public SingleResult<LicenseVo> selectLicenseByPrimaryKey(String id) throws Exception {
         SingleResult<LicenseVo> rst = new SingleResult<LicenseVo>();
-        rst.setValue(this.licenseDao.selectByPrimaryKey(id));
+        rst.setValue(this.licenseDao.selectVoByPrimaryKey(id));
         return rst;
     }
 

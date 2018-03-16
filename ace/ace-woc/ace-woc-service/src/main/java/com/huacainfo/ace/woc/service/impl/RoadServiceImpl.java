@@ -76,11 +76,6 @@ public class RoadServiceImpl implements RoadService {
     @Override
     public MessageResponse insertRoad(Road o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
-        o.setLastModifyDate(DateUtil.getNowDate());
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getRoadName())) {
             return new MessageResponse(1, "道路名称不能为空！");
         }
@@ -93,21 +88,18 @@ public class RoadServiceImpl implements RoadService {
         if (CommonUtils.isBlank(o.getRoadStatus())) {
             return new MessageResponse(1, "道路运行状态不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
 
         int temp = this.roadDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "道路档案名称重复！");
         }
+
+        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
+        o.setLastModifyDate(DateUtil.getNowDate());
         this.roadDao.insertSelective(o);
         this.dataBaseLogService.log("添加道路档案", "道路档案", "", o.getRoadName(), o.getRoadName(), userProp);
         return new MessageResponse(0, "添加道路档案完成！");

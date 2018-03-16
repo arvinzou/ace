@@ -10,8 +10,9 @@ import com.huacainfo.ace.woc.vo.BlacklistQVo;
 import com.huacainfo.ace.woc.vo.BlacklistVo;
 
 public interface BlacklistDao {
-    //********************
-    BlacklistVo selectByPrimaryKey(String id);
+    Blacklist selectByPrimaryKey(String id);
+
+    BlacklistVo selectVoByPrimaryKey(String id);
 
     int deleteByPrimaryKey(String id);
 
@@ -22,6 +23,7 @@ public interface BlacklistDao {
     int updateByPrimaryKey(Blacklist record);
 
     int updateByPrimaryKeySelective(Blacklist record);
+
     
     List<BlacklistVo> findList(@Param("condition") BlacklistQVo condition,
 			@Param("start") int start, @Param("limit") int limit,

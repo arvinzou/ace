@@ -9,7 +9,9 @@ import com.huacainfo.ace.woc.vo.LicenseQVo;
 import com.huacainfo.ace.woc.vo.LicenseVo;
 
 public interface LicenseDao {
-    LicenseVo selectByPrimaryKey(String licenseId);
+    License selectByPrimaryKey(String licenseId);
+
+    LicenseVo selectVoByPrimaryKey(String licenseId);
 
     int deleteByPrimaryKey(String licenseId);
 

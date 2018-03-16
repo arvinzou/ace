@@ -84,11 +84,11 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <%--<div class="labelItem">
+        <div class="labelItem">
             <span class="labelItemHeader">道路名称</span>
             <br>
             <span id="roadName"></span>
-        </div>--%>
+        </div>
         <div class="labelItem">
             <span class="labelItemHeader">道路国标</span>
             <br>
@@ -120,18 +120,17 @@
             <span class="labelItemHeader">道路运行状态</span>
             <br>
             <span id="roadStatus" class="hide"></span>
-            <span id="roadStatusName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">备注</span>
             <br>
             <span id="remark"></span>
         </div>
-        <%--<div class="labelItem hide">--%>
-        <%--<span class="labelItemHeader">状态</span>--%>
-        <%--<br>--%>
-        <%--<span id="status"></span>--%>
-        <%--</div>--%>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">状态</span>
+            <br>
+            <span id="status"></span>
+        </div>
     </div>
 
     <h5 class="header-title">操作信息</h5>
