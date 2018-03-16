@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.report.PersonAgePageList">
+  <select id="query" resultType="map">
+    select t.id, t.name, t.sex, t.birthday, t.photo, t.mobile, t.tel, t.remark,
+    t.intro,a.name areaName,b.department_name deptName,c.fullname placeOfOriginName,dict.name categoryName,
+    IFNULL(wx.mobile,'0') bindStatus
+    from personage t
+    inner join portal.province a on t.areaCode=a.code
+    inner join portal.department b on t.deptId=b.department_id
+    left join portal.province c on t.placeOfOrigin=c.code
+    inner join (select code,name from portal.dict where category_id='98') dict on t.category=dict.code
+    left join portal.wx_user wx on t.mobile=wx.mobile
+    where t.status='1'
+    <if test='name!=null and name!=""'>
+      and (t.name like concat('%',#{name,jdbcType=VARCHAR},'%') or b.department_name like concat('%',#{name,jdbcType=VARCHAR},'%') or a.name like concat('%',#{name,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test='category!=null and category!=""'>
+      and t.category =#{category,jdbcType=VARCHAR}
+    </if>
+    ORDER BY t.pcode
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+</mapper>

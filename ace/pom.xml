@@ -63,9 +63,10 @@
 		<module>ace-common-web</module>
 		<module>ace-portal</module>
 		<module>ace-iop</module>
+		<module>ace-operana</module>
 		<!--
 		<module>ace-woc</module>
-		<module>ace-operana</module>
+
 		<module>ace-live</module>
 		<module>ace-jave</module>
 		<module>ace-uf</module>

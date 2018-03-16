@@ -1,0 +1,13 @@
+<html>
+<body>
+<div>$!{o.name}您好!</div>
+<div>
+    感谢您的留言建议，答复如下：<br>
+    $!{o.replyText}<br>
+    本Email是系统自动发送，请勿回复！<br>
+    $!{o.sysDate}<br>
+    留言内容：<br>
+     $!{o.docText}
+</div>
+</body>
+</html>

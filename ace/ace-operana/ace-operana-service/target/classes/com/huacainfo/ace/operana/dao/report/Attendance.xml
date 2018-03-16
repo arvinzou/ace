@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.operana.dao.report.Attendance">
+    <select id="query" resultType="map">
+        SELECT @rownum := @rownum+1 AS rownum, t.* FROM (SELECT @rownum:=0) r,(
+        SELECT
+        a.`name`,
+        b.department_name,
+        count(1) total,
+        sum(
+        CASE t.present
+        WHEN 'Present' THEN
+        1
+        ELSE
+        0
+        END
+        ) 'Present',
+        sum(
+        CASE t.present
+        WHEN 'Absent' THEN
+        1
+        ELSE
+        0
+        END
+        ) 'Absent',
+        sum(
+        CASE t.present
+        WHEN 'Justified' THEN
+        1
+        ELSE
+        0
+        END
+        ) 'Justified'
+        FROM
+        meeting_user t
+        LEFT JOIN portal.users a ON t.userId = a.user_id
+        LEFT JOIN portal.department b ON a.department_id = b.department_id
+        left join meeting c on t.meetingId=c.id
+        where 0=0
+        <if test='deptId!=null and deptId!=""'>
+            and a.department_id like concat(#{deptId},'%')
+        </if>
+        <if test='startDate!=null and startDate!=""'>
+            <![CDATA[
+			and c.meetingDate>=str_to_date(#{startDate},'%Y-%m-%d')
+			]]>
+        </if>
+        <if test='endDate!=null and endDate!=""'>
+            <![CDATA[
+				and c.meetingDate<=str_to_date(#{endDate},'%Y-%m-%d')
+				]]>
+        </if>
+
+        GROUP BY
+        a.`name`,
+        b.department_name) t order by t.name
+    </select>
+</mapper>

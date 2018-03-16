@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.OrganizationDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.Organization">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="addr" jdbcType="VARCHAR" property="addr"/>
+        <result column="tel" jdbcType="VARCHAR" property="tel"/>
+        <result column="serviceWay" jdbcType="VARCHAR" property="serviceWay"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="serviceTimeStart" jdbcType="VARCHAR" property="serviceTimeStart"/>
+        <result column="serviceTimeEnd" jdbcType="VARCHAR" property="serviceTimeEnd"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.uf.vo.OrganizationVo">
+
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, category, areaCode, name, addr, tel, serviceWay, latitude, longitude, serviceTimeStart,
+        serviceTimeEnd, icon, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        t.id, t.category, t.areaCode, t.name, t.addr, t.tel, t.serviceWay, t.latitude, t.longitude, t.serviceTimeStart,
+        t.serviceTimeEnd, t.icon, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+        t.lastModifyUserId,
+        t.lastModifyUserName, t.lastModifyDate,a.name areaName
+        from organization t left join portal.province a on t.areaCode=a.code
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from organization
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.uf.model.Organization">
+        insert into organization (id, category, areaCode,
+        name, addr, tel, serviceWay,
+        latitude, longitude, serviceTimeStart,
+        serviceTimeEnd, icon, remark,
+        status, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate)
+        values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{serviceWay,jdbcType=VARCHAR},
+        #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{serviceTimeStart,jdbcType=VARCHAR},
+        #{serviceTimeEnd,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.Organization">
+        update organization
+        set category = #{category,jdbcType=VARCHAR},
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        addr = #{addr,jdbcType=VARCHAR},
+        tel = #{tel,jdbcType=VARCHAR},
+        serviceWay = #{serviceWay,jdbcType=VARCHAR},
+        serviceTimeStart = #{serviceTimeStart,jdbcType=VARCHAR},
+        serviceTimeEnd = #{serviceTimeEnd,jdbcType=VARCHAR},
+        icon = #{icon,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <sql id="whereCondition">
+        from organization t
+        left join portal.province a on t.areaCode=a.code
+        where 0=0
+        <if test='condition.name!=null and condition.name!=""'>
+            and t.name like
+            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and t.areaCode like
+            concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and t.category =#{condition.category,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        t.id, t.category, t.areaCode, t.name, t.addr, t.tel, t.serviceWay, t.latitude, t.longitude, t.serviceTimeStart,
+        t.serviceTimeEnd, t.icon, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+        t.lastModifyUserId,
+        t.lastModifyUserName, t.lastModifyDate,a.name areaName
+
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate
+            </otherwise>
+        </choose>
+
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+    </select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        organization where
+        name=#{name} and areaCode=#{areaCode}
+    </select>
+
+    <select id="selectOrganizationCategoryList" resultType="map">
+        SELECT
+        CODE 'id',
+        NAME 'name',
+        remark 'icon'
+        FROM
+        portal.dict
+        WHERE
+        category_id = '97'
+    </select>
+
+    <select id="selectOrganizationList" resultType="map">
+        SELECT
+        id 'id',
+        name 'name',
+        category,
+        icon,
+        addr,
+        latitude,
+        longitude,
+        tel,serviceTimeStart,
+        serviceTimeEnd,
+        (POWER(MOD(ABS(longitude - #{longitude,jdbcType=DECIMAL}),360),2) + POWER(ABS(latitude - #{latitude,jdbcType=DECIMAL}),2)) AS distance,
+        'organization' types
+        FROM
+        organization
+        WHERE latitude is not null and longitude is not null
+        <if test='q!=null and q!=""'>
+            and name like
+            concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
+        and STATUS = '1'
+        ORDER BY distance LIMIT 50
+    </select>
+    <select id="selectOrganizationListByText" resultType="map">
+        SELECT
+        id 'id',
+        name 'name',
+        category,
+        icon,
+        addr,
+        latitude,
+        longitude,
+        tel,serviceTimeStart,
+        serviceTimeEnd
+        FROM
+        organization
+        WHERE 0=0
+        <if test='q!=null and q!=""'>
+            and name like
+            concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
+        and STATUS = '1'
+    </select>
+
+    <select id="selectOrganizationById" resultType="map">
+        select
+        t.id, t.category, t.areaCode, t.name, t.addr, t.tel, t.serviceWay, t.latitude, t.longitude, t.serviceTimeStart,
+        t.serviceTimeEnd, t.icon, t.remark,a.fullname areaName
+        from organization t left join portal.province a on t.areaCode=a.code
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectOrganizationImagesById" resultType="map">
+        select name, url, remark from organization_sub where
+        organizationId =#{id,jdbcType=VARCHAR} order by createDate
+    </select>
+    <select id="selectAreaCodeList" resultType="map">
+        SELECT
+        CODE 'id',
+        NAME 'name'
+        FROM
+        portal.province
+        WHERE
+        parent_code = #{areaCode}
+    </select>
+    <select id="selectOrganizationByCategory" resultType="map">
+        SELECT
+        id 'id',
+        name 'name',
+        category,
+        icon,
+        addr,
+        latitude,
+        longitude,
+        tel,serviceTimeStart,
+        serviceTimeEnd,
+        'organization' types
+        FROM
+        organization
+        WHERE category=#{category}
+
+        and STATUS = '1'
+    </select>
+</mapper>

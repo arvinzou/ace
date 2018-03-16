@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.DictMapper">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Dict">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="CATEGORY_ID" jdbcType="VARCHAR" property="categoryId" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="PCODE" jdbcType="VARCHAR" property="pcode" />
+    <result column="SPELL" jdbcType="VARCHAR" property="spell" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.DictVo"  extends="BaseResultMap" >
+    <result column="CATEGORY_NAME" jdbcType="VARCHAR" property="categoryName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CATEGORY_ID, CODE, NAME, REMARK, CREATE_TIME,PCODE,SPELL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dict
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dict
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.Dict">
+    insert into dict (ID, CATEGORY_ID, CODE, 
+      NAME, REMARK, CREATE_TIME,PCODE,SPELL
+      )
+    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{pcode,jdbcType=VARCHAR}, #{spell,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Dict">
+    update dict
+    set
+      CODE = #{code,jdbcType=VARCHAR},
+      SPELL= #{spell,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where CATEGORY_ID = #{categoryId,jdbcType=VARCHAR} and  CODE = #{code,jdbcType=VARCHAR}
+  </update>
+  <sql id="whereCondition">
+		from dict ,dict_category where dict.category_id=dict_category.category_id
+      and dict_category.syid=#{condition.syid}
+
+		<if test="condition.categoryId!=null and condition.categoryId!=&quot;&quot;">
+			and (dict.category_id =#{condition.categoryId,jdbcType=VARCHAR} or dict.id=#{condition.categoryId,jdbcType=VARCHAR})
+		</if>
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and dict.name like
+			concat(#{condition.name,jdbcType=VARCHAR},'%')
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+
+		select
+		dict.ID, dict.CATEGORY_ID, dict.CODE, dict.NAME, dict.REMARK, dict.CREATE_TIME,dict_category.name categoryName,dict.PCODE,dict.SPELL
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY id
+			</otherwise>
+		</choose>
+
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+	</select>
+	<select id="findListByCategoryId" resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		from dict where category_id=#{categoryId} order by code
+
+	</select>
+	<select id="isExitByNameAndCategoryId" resultType="int">
+		select count(*)
+		from
+		dict where name=#{name} and category_id=#{categoryId}
+	</select>
+
+
+
+	<select id="selectDictTreeList" resultType="map">
+
+
+
+
+
+            <if test="pid==0">
+                SELECT
+                *
+                FROM
+                (SELECT
+                t.category_id ID,
+                '0' PID,
+                t.name TEXT,
+                'closed' STATE,
+                '' SRC,
+                '' ICON,
+                '' HREF,
+                '1' CHILD_COUNT
+                FROM
+                dict_category t
+                WHERE
+                t.syid=#{syid}
+                ORDER BY t.category_id) a
+                WHERE
+                a.PID = #{pid}
+            </if>
+            <if test="pid!=0">
+                SELECT
+                *
+                FROM
+                (SELECT
+                t.ID,
+                category_id PID,
+                t.name TEXT,
+                'closed' STATE,
+                '' SRC,
+                '' ICON,
+                '' HREF,
+                (select count(*)  from dict  where
+                category_id=#{pid} and pcode=t.id) CHILD_COUNT
+                FROM
+                dict t
+                WHERE
+                t.category_id = #{pid} and t.pcode='0'
+                ORDER BY t.code) b
+                UNION ALL SELECT
+                *
+                FROM
+                (SELECT
+                t.ID,
+                t.pcode PID,
+                t.name TEXT,
+                'closed' STATE,
+                '' SRC,
+                '' ICON,
+                '' HREF,
+                (select count(*)  from dict  where
+                category_id=t.category_id and pcode=t.id) CHILD_COUNT
+                FROM
+                dict t
+                WHERE
+                t.pcode = #{pid}
+                ORDER BY t.code) c
+            </if>
+
+    </select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        dict where
+        code=#{code} and category_id = #{categoryId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAreaCode" resultType="map">
+        select code,fullname name from province
+    </select>
+
+    <select id="selectDictAllTreeByCategoryId" resultType="map">
+        SELECT
+        t. CODE ID,
+        substr(t. CODE, 1, length(t. CODE) - 2) PID,
+        t. NAME TEXT,
+        'closed' STATE,
+        '' SRC,
+        '' ICON,
+        '' HREF,
+        (
+        SELECT
+        count(*)
+        FROM
+        dict
+        WHERE
+        category_id = #{id}
+        AND pcode = t.id
+        ) CHILD_COUNT
+        FROM
+        dict t
+        WHERE
+        t.category_id = #{id}
+        ORDER BY
+        t. CODE
+    </select>
+
+</mapper>

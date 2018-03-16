@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.RoleDao">
+	<select id="init" resultType="int">
+		select 1 from dual
+	</select>
+	<resultMap id="role" type="com.huacainfo.ace.portal.model.Role">
+		<id column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+		<result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="CREATE_USER_ID" jdbcType="VARCHAR" property="createUserId" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="TYPE" jdbcType="VARCHAR" property="type" />
+		<result column="syid" jdbcType="VARCHAR" property="syid" />
+	</resultMap>
+	<resultMap id="roleVo" type="com.huacainfo.ace.portal.vo.RoleVo">
+		<id column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+		<result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="CREATE_USER_ID" jdbcType="VARCHAR" property="createUserId" />
+		<result column="name" jdbcType="VARCHAR" property="operater" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="TYPE" jdbcType="VARCHAR" property="type" />
+		<result column="syid" jdbcType="VARCHAR" property="syid" />
+	</resultMap>
+	<insert id="insertRole" parameterType="com.huacainfo.ace.portal.model.Role">
+		<!-- <selectKey keyProperty="ids" resultType="string" order="BEFORE">
+			select ifnull(max(role_id)+1,1) from role
+		</selectKey> -->
+		insert into ROLE (ROLE_ID, ROLE_NAME, CREATE_TIME,
+		CREATE_USER_ID,
+		REMARK,TYPE,syid)
+		values (#{role.roleId,jdbcType=VARCHAR},
+		#{role.roleName,jdbcType=VARCHAR}, now(),
+		#{role.createUserId,jdbcType=VARCHAR},
+		#{role.remark,jdbcType=VARCHAR},#{role.type,jdbcType=VARCHAR},#{role.syid})
+	</insert>
+	<update id="updateRoleByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Role">
+		update ROLE
+		set ROLE_NAME = #{role.roleName,jdbcType=VARCHAR},
+		REMARK =
+		#{role.remark,jdbcType=VARCHAR},
+		syid=#{role.syid},
+		TYPE =
+		#{role.type,jdbcType=VARCHAR}
+		where ROLE_ID = #{role.roleId,jdbcType=VARCHAR}
+	</update>
+
+	<sql id="rolePagingWhereCondition">
+		from Role,USERS where Role.CREATE_USER_ID=USERS.USER_ID and (syid =#{condition.syid})
+
+		<if test='condition.roleName!=null and condition.roleName!=""'>
+			and Role.role_name like
+			concat(#{condition.roleName,jdbcType=VARCHAR},'%')
+		</if>
+	</sql>
+	<select id="findRoleCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="rolePagingWhereCondition" />
+	</select>
+	<select id="findRoleList" resultMap="roleVo">
+	
+		select Role.ROLE_ID, Role.ROLE_NAME, Role.CREATE_TIME,
+		Role.CREATE_USER_ID, Role.REMARK ,
+		users.NAME,Role.TYPE,Role.syid
+		<include refid="rolePagingWhereCondition" />
+		<choose>
+	      <when test='orderBy!=null and orderBy!=""'>
+	       ORDER BY ${orderBy}
+	      </when>
+	      <otherwise>
+	        ORDER BY Role.role_id
+	      </otherwise>
+	</choose>
+		
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+		
+	</select>
+	<select id="selectRoleVoByPrimaryKey" resultMap="roleVo"
+		parameterType="java.lang.String">
+		select Role.role_id, Role.role_name, Role.create_time,
+		Role.create_user_id, Role.remark ,
+		users.name,Role.TYPE,Role.syid
+		from Role,USERS where
+		Role.CREATE_USER_ID=USERS.USER_ID
+		and Role.role_id =
+		#{roleId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectRoleResourceTreeList" resultType="map">
+		select 
+    t.resources_id ID,
+    t.parent_resources_id PID,
+    t.resources_name TEXT,
+    t.resources_icon ICON,
+    if(s.resources_id is not null,
+        'true',
+        'false') CHECKED,
+    (select 
+            count(*) 
+        from
+            resources
+        where
+            resources.parent_resources_id = t.resources_id) CHILD_COUNT
+from
+    resources t
+        left join
+    (select 
+        resources_id
+    from
+        role_resources
+    where
+        role_id = #{roleId} group by resources_id) s on t.resources_id = s.resources_id
+order by t.resources_id
+	</select>
+	<delete id="deleteRoleResources">
+		delete from role_resources where role_id=#{roleId}
+	</delete>
+	<insert id="insertRoleResources">
+			insert into role_resources
+			(role_id, resources_id, create_time)
+			values
+			(#{roleId,jdbcType=VARCHAR}, #{resourcesId,jdbcType=VARCHAR}, now());
+	</insert>
+	<delete id="deleteRoleByRoleId">
+			delete from role where role_id=#{roleId};
+			delete from role_resources where role_id=#{roleId};
+			delete from users_role where role_id=#{roleId};
+	</delete>
+	<select id="isExitRoleByRoleName" resultType="int">
+		select count(*) from role where role_name=#{roleName}
+	</select>
+	<select id="isExitRoleUsedByRoleId" resultType="int">
+		select count(*) from users_role where role_id=#{roleId}
+	</select>
+</mapper>

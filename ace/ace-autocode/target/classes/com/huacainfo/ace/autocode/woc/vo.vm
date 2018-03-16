@@ -1,0 +1,9 @@
+
+package com.huacainfo.ace.woc.vo;
+
+import com.huacainfo.ace.woc.model.$!{bean.name};
+
+
+public class $!{bean.name}Vo extends $!{bean.name} {
+	private static final long serialVersionUID = 1L;
+}

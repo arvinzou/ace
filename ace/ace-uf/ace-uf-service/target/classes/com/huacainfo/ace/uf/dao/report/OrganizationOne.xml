@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.report.OrganizationOne">
+  <select id="query" resultType="map">
+    select
+    t.id, t.category, t.areaCode, t.name, t.addr, t.tel, t.serviceWay, t.latitude, t.longitude, t.serviceTimeStart,
+    t.serviceTimeEnd, t.icon, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+    t.lastModifyUserId,
+    t.lastModifyUserName, t.lastModifyDate,a.fullname areaName
+    from organization t left join portal.province a on t.areaCode=a.code
+    where t.id=#{id}
+  </select>
+</mapper>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.PeiXunDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.PeiXun">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="dept" jdbcType="VARCHAR" property="dept"/>
+        <result column="trainees" jdbcType="VARCHAR" property="trainees"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="file" jdbcType="VARCHAR" property="file"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.uf.vo.PeiXunVo">
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+          id, name, address,latitude,longitude, dept, trainees,time,category, content,cover,file, createUserId, createUserName,
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+
+    <select id="selectPeiXunByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        from peixun
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from peixun
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.huacainfo.ace.uf.model.PeiXun">
+    insert into peixun (
+                 id,
+                 name,
+                 address,
+                 latitude,
+                 longitude,
+                 dept,
+                 trainees,
+                 time,
+                 category,
+                 content,
+                 cover,
+                 file,
+                 createUserId,
+                 createUserName,
+                 createDate,
+                 lastModifyUserId,
+                 lastModifyUserName,
+                 lastModifyDate
+             )
+    values (
+                  #{id,jdbcType=VARCHAR},
+                  #{name,jdbcType=VARCHAR},
+                  #{address,jdbcType=VARCHAR},
+                  #{latitude,jdbcType=DECIMAL},
+                  #{longitude,jdbcType=DECIMAL},
+                  #{dept,jdbcType=VARCHAR},
+                  #{trainees,jdbcType=VARCHAR},
+                  #{time,jdbcType=TIMESTAMP},
+                  #{category,jdbcType=CHAR},
+                  #{content,jdbcType=VARCHAR},
+                  #{cover,jdbcType=VARCHAR},
+                  #{file,jdbcType=VARCHAR},
+                  #{createUserId,jdbcType=VARCHAR},
+                  #{createUserName,jdbcType=VARCHAR},
+                  #{createDate,jdbcType=TIMESTAMP},
+                  #{lastModifyUserId,jdbcType=VARCHAR},
+                  #{lastModifyUserName,jdbcType=VARCHAR},
+                  #{lastModifyDate,jdbcType=TIMESTAMP}
+              )
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.PeiXun">
+        update peixun
+        set
+            name = #{
+            name,
+            jdbcType=VARCHAR},
+            address = #{address,
+            jdbcType=VARCHAR},
+            latitude = #{latitude,jdbcType=DECIMAL},
+            longitude = #{longitude,jdbcType=DECIMAL},
+            dept = #{dept,jdbcType=VARCHAR},
+            trainees = #{trainees,jdbcType=VARCHAR},
+            time = #{time,jdbcType=TIMESTAMP},
+            category = #{category,jdbcType=CHAR},
+            content = #{content,jdbcType=VARCHAR},
+            <if test='cover!=null and cover!=""'>
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+
+            <if test='file!=null and file!=""'>
+                file = #{file,jdbcType=VARCHAR},
+            </if>
+            <if test='createUserId!=null and createUserId!=""'>
+                createUserId=#{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test='createUserName!=null and createUserName!=""'>
+                createUserName=#{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test='createDate!=null and createDate!=""'>
+                createDate=#{createDate,jdbcType=TIMESTAMP},
+            </if>
+            lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <sql id="whereCondition">
+        from peixun
+        where 0=0
+        <if test='condition.name!=null and condition.name!=""'>
+            and name like
+            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">
+            and name like
+            concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')
+        </if>
+
+        <if test="condition.dept!=null and condition.dept!=&quot;&quot;">
+            and name like
+            concat('%',#{condition.dept,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and category =#{condition.category,jdbcType=CHAR}
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int">
+    select count(*)
+    from peixun
+    where
+    name=#{name}
+  </select>
+</mapper>

@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.operana.dao.TpaDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.operana.model.Tpa">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="meetingId" jdbcType="VARCHAR" property="meetingId" />
+    <result column="topicId" jdbcType="VARCHAR" property="topicId" />
+    <result column="normId" jdbcType="VARCHAR" property="normId" />
+    <result column="productId" jdbcType="VARCHAR" property="productId" />
+    <result column="probDiscri" jdbcType="VARCHAR" property="probDiscri" />
+    <result column="probAnsys" jdbcType="VARCHAR" property="probAnsys" />
+    <result column="actions" jdbcType="VARCHAR" property="actions" />
+    <result column="liable" jdbcType="VARCHAR" property="liable" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable, 
+    status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tpa
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tpa
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    insert into tpa (id, meetingId, topicId, 
+      normId, productId, probDiscri, 
+      probAnsys, actions, liable, 
+      status, createUserId, createUserName, 
+      createDate, lastModifyUserId, lastModifyUserName, 
+      lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{meetingId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}, 
+      #{normId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{probDiscri,jdbcType=VARCHAR}, 
+      #{probAnsys,jdbcType=VARCHAR}, #{actions,jdbcType=VARCHAR}, #{liable,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    insert into tpa
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="meetingId != null">
+        meetingId,
+      </if>
+      <if test="topicId != null">
+        topicId,
+      </if>
+      <if test="normId != null">
+        normId,
+      </if>
+      <if test="productId != null">
+        productId,
+      </if>
+      <if test="probDiscri != null">
+        probDiscri,
+      </if>
+      <if test="probAnsys != null">
+        probAnsys,
+      </if>
+      <if test="actions != null">
+        actions,
+      </if>
+      <if test="liable != null">
+        liable,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createUserId != null">
+        createUserId,
+      </if>
+      <if test="createUserName != null">
+        createUserName,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId,
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName,
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingId != null">
+        #{meetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="topicId != null">
+        #{topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="normId != null">
+        #{normId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="probDiscri != null">
+        #{probDiscri,jdbcType=VARCHAR},
+      </if>
+      <if test="probAnsys != null">
+        #{probAnsys,jdbcType=VARCHAR},
+      </if>
+      <if test="actions != null">
+        #{actions,jdbcType=VARCHAR},
+      </if>
+      <if test="liable != null">
+        #{liable,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    update tpa
+    <set>
+      <if test="meetingId != null">
+        meetingId = #{meetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="topicId != null">
+        topicId = #{topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="normId != null">
+        normId = #{normId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        productId = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="probDiscri != null">
+        probDiscri = #{probDiscri,jdbcType=VARCHAR},
+      </if>
+      <if test="probAnsys != null">
+        probAnsys = #{probAnsys,jdbcType=VARCHAR},
+      </if>
+      <if test="actions != null">
+        actions = #{actions,jdbcType=VARCHAR},
+      </if>
+      <if test="liable != null">
+        liable = #{liable,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    update tpa
+    set meetingId = #{meetingId,jdbcType=VARCHAR},
+      topicId = #{topicId,jdbcType=VARCHAR},
+      normId = #{normId,jdbcType=VARCHAR},
+      productId = #{productId,jdbcType=VARCHAR},
+      probDiscri = #{probDiscri,jdbcType=VARCHAR},
+      probAnsys = #{probAnsys,jdbcType=VARCHAR},
+      actions = #{actions,jdbcType=VARCHAR},
+      liable = #{liable,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.operana.model.Tpa">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="meetingId" jdbcType="VARCHAR" property="meetingId" />
+    <result column="topicId" jdbcType="VARCHAR" property="topicId" />
+    <result column="normId" jdbcType="VARCHAR" property="normId" />
+    <result column="productId" jdbcType="VARCHAR" property="productId" />
+    <result column="probDiscri" jdbcType="VARCHAR" property="probDiscri" />
+    <result column="probAnsys" jdbcType="VARCHAR" property="probAnsys" />
+    <result column="actions" jdbcType="VARCHAR" property="actions" />
+    <result column="liable" jdbcType="VARCHAR" property="liable" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable, 
+    status, createUserId, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tpa
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tpa
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    insert into tpa (id, meetingId, topicId, 
+      normId, productId, probDiscri, 
+      probAnsys, actions, liable, 
+      status, createUserId, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{meetingId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}, 
+      #{normId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{probDiscri,jdbcType=VARCHAR}, 
+      #{probAnsys,jdbcType=VARCHAR}, #{actions,jdbcType=VARCHAR}, #{liable,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    insert into tpa
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="meetingId != null">
+        meetingId,
+      </if>
+      <if test="topicId != null">
+        topicId,
+      </if>
+      <if test="normId != null">
+        normId,
+      </if>
+      <if test="productId != null">
+        productId,
+      </if>
+      <if test="probDiscri != null">
+        probDiscri,
+      </if>
+      <if test="probAnsys != null">
+        probAnsys,
+      </if>
+      <if test="actions != null">
+        actions,
+      </if>
+      <if test="liable != null">
+        liable,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createUserId != null">
+        createUserId,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId,
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName,
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingId != null">
+        #{meetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="topicId != null">
+        #{topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="normId != null">
+        #{normId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="probDiscri != null">
+        #{probDiscri,jdbcType=VARCHAR},
+      </if>
+      <if test="probAnsys != null">
+        #{probAnsys,jdbcType=VARCHAR},
+      </if>
+      <if test="actions != null">
+        #{actions,jdbcType=VARCHAR},
+      </if>
+      <if test="liable != null">
+        #{liable,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    update tpa
+    <set>
+      <if test="meetingId != null">
+        meetingId = #{meetingId,jdbcType=VARCHAR},
+      </if>
+      <if test="topicId != null">
+        topicId = #{topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="normId != null">
+        normId = #{normId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        productId = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="probDiscri != null">
+        probDiscri = #{probDiscri,jdbcType=VARCHAR},
+      </if>
+      <if test="probAnsys != null">
+        probAnsys = #{probAnsys,jdbcType=VARCHAR},
+      </if>
+      <if test="actions != null">
+        actions = #{actions,jdbcType=VARCHAR},
+      </if>
+      <if test="liable != null">
+        liable = #{liable,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.Tpa">
+    update tpa
+    set meetingId = #{meetingId,jdbcType=VARCHAR},
+      topicId = #{topicId,jdbcType=VARCHAR},
+      normId = #{normId,jdbcType=VARCHAR},
+      productId = #{productId,jdbcType=VARCHAR},
+      probDiscri = #{probDiscri,jdbcType=VARCHAR},
+      probAnsys = #{probAnsys,jdbcType=VARCHAR},
+      actions = #{actions,jdbcType=VARCHAR},
+      liable = #{liable,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

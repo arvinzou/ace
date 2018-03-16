@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.XinXiDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.XinXi">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="dept" jdbcType="VARCHAR" property="dept"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="published" jdbcType="DATE" property="published"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.uf.vo.XinXiVo">
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, name, author, dept, content, published, cover, createUserId, createUserName,
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        from XinXi
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from XinXi
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.huacainfo.ace.uf.model.XinXi">
+    insert into XinXi (id, name, author,
+      dept,  content, published,
+      cover,createUserId, createUserName,
+      createDate, lastModifyUserId, lastModifyUserName, 
+      lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR},
+      #{dept,jdbcType=VARCHAR},  #{content,jdbcType=VARCHAR}, #{published,jdbcType=DATE},
+      #{cover,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.XinXi">
+    update XinXi
+    set name = #{name,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      dept = #{dept,jdbcType=VARCHAR},
+        content = #{content,jdbcType=VARCHAR},
+      published = #{published,jdbcType=DATE},
+        cover = #{cover,jdbcType=VARCHAR},
+        <if test='createUserId!=null and createUserId!=""'>
+            createUserId=#{createUserId,jdbcType=VARCHAR},
+        </if>
+
+        <if test='createUserName!=null and createUserName!=""'>
+            createUserName=#{createUserName,jdbcType=VARCHAR},
+        </if>
+
+        <if test='createDate!=null and createDate!=""'>
+            createDate=#{createDate,jdbcType=TIMESTAMP},
+        </if>
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <sql id="whereCondition">
+        from XinXi
+        where 0=0
+        <if test='condition.name!=null and condition.name!=""'>
+            and name like
+            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.author!=null and condition.author!=''">
+            and author like
+            concat('%',#{condition.author,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+
+    <select id="isExit" resultType="int">
+    select count(*)
+    from XinXi
+    where
+    name=#{name}
+  </select>
+
+</mapper>

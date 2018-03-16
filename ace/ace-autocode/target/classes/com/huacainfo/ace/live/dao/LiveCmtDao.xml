@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.live.dao.LiveCmtDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.live.model.LiveCmt">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="rptId" jdbcType="VARCHAR" property="rptId"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.live.model.LiveCmt">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, rptId, uid, status, createTime
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from live_cmt
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from live_cmt
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.live.model.LiveCmt">
+        insert into live_cmt (id, rptId, uid,
+        status, createTime, content
+        )
+        values (#{id,jdbcType=VARCHAR}, #{rptId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.live.model.LiveCmt">
+        insert into live_cmt
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="rptId != null">
+                rptId,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="rptId != null">
+                #{rptId,jdbcType=VARCHAR},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.live.model.LiveCmt">
+        update live_cmt
+        <set>
+            <if test="rptId != null">
+                rptId = #{rptId,jdbcType=VARCHAR},
+            </if>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.live.model.LiveCmt">
+        update live_cmt
+        set rptId = #{rptId,jdbcType=VARCHAR},
+        uid = #{uid,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+        content = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.live.model.LiveCmt">
+        update live_cmt
+        set rptId = #{rptId,jdbcType=VARCHAR},
+        uid = #{uid,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createTime = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

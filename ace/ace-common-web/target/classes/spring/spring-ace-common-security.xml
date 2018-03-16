@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd  
+          http://www.springframework.org/schema/context  
+          http://www.springframework.org/schema/context/spring-context.xsd  
+          http://www.springframework.org/schema/security  
+              http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+
+    <!-- 登录页面和忘记密码页面不过滤  Start-->
+    <!--登录页面-->
+    <http pattern="/dynamic/portal/security/**" security="none"/>
+    <!--验证码请求-->
+    <http pattern="/captcha/image.do" security="none"/>
+    <!--找回密码请求-->
+    <http pattern="/system/retrievePassword.do" security="none"/>
+    <!---->
+    <http pattern="/dict/findListByCategoryId.do" security="none"/>
+    <http pattern="/system/selectProvinceTreeList.do" security="none"/>
+    <http pattern="/content/**" security="none"/>
+    <http pattern="/www/**" security="none"/>
+    <!--end-->
+    <http auto-config="true" use-expressions="false">
+
+        <intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY"/>
+        <form-login login-page="/dynamic/portal/security/login.jsp"
+                    login-processing-url="/j_spring_security_check"
+                    authentication-failure-url="/dynamic/portal/security/login.jsp"
+                    default-target-url="/index.jsp"
+                    always-use-default-target="true" password-parameter="j_password"
+                    username-parameter="j_username"/>
+        <logout invalidate-session="true" logout-url="/dynamic/portal/security/loginOut.jsp"
+                logout-success-url="/dynamic/portal/security/login.jsp"/>
+        <!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中） -->
+        <remember-me data-source-ref="${security.dataSource}"/>
+        <http-basic/>
+        <headers>
+            <frame-options disabled="true"></frame-options>
+        </headers>
+        <!-- <csrf token-repository-ref="csrfTokenRepository" /> -->
+        <csrf disabled="true"/>
+        <session-management
+                session-authentication-error-url="/dynamic/portal/security/expired.jsp">
+            <!-- max-sessions只容许一个账号登录，error-if-maximum-exceeded 后面账号登录后踢出前一个账号，expired-url
+                session过期跳转界面 -->
+            <concurrency-control max-sessions="1"
+                                 error-if-maximum-exceeded="false" expired-url="/dynamic/portal/security/expired.jsp"
+                                 session-registry-ref="sessionRegistry"/>
+        </session-management>
+        <expression-handler ref="webexpressionHandler"></expression-handler>
+        <!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中） -->
+        <remember-me data-source-ref="${security.dataSource}"/>
+        <!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前， 实现用户、角色、权限、资源的数据库管理 -->
+        <custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>
+    </http>
+
+
+    <beans:bean id="sessionRegistry"
+                class="org.springframework.security.core.session.SessionRegistryImpl"/>
+    <beans:bean id="requestDataValueProcessor"
+                class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor"/>
+
+    <!--配置web端使用权限控制 -->
+    <beans:bean id="webexpressionHandler"
+                class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+    <!-- Md5加密 -->
+    <beans:bean id="passwordEncoder"
+                class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+
+    <!-- 盐值加密 salt对应数据库字段 -->
+    <beans:bean id="saltSource"
+                class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+        <beans:property name="userPropertyToUse" value="salt"/>
+    </beans:bean>
+    <beans:bean id="csrfTokenRepository"
+                class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository"/>
+    <!-- 一个自定义的filter，必须包含authenticationManager, accessDecisionManager,securityMetadataSource三个属性 -->
+    <beans:bean id="filterSecurityInterceptor"
+                class="com.huacainfo.ace.common.security.spring.CustomFilterSecurityInterceptor">
+        <beans:property name="authenticationManager" ref="authenticationManager"/>
+        <beans:property name="accessDecisionManager" ref="customAccessDecisionManager"/>
+        <beans:property name="securityMetadataSource" ref="customSecurityMetadataSource"/>
+    </beans:bean>
+
+    <!-- 注意能够为authentication-manager 设置alias别名 -->
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="${security.userDetailsService}">
+            <password-encoder hash="md5" ref="passwordEncoder">
+            </password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+    <!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+    <beans:bean id="customAccessDecisionManager"
+                class="com.huacainfo.ace.common.security.spring.CustomAccessDecisionManager">
+    </beans:bean>
+    <!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色去访问 -->
+    <beans:bean id="customSecurityMetadataSource"
+                class="com.huacainfo.ace.common.security.spring.CustomInvocationSecurityMetadataSource"
+                init-method="loadResourceDefine">
+        <beans:property name="securityLoadResouceDefine"
+                        ref="${security.securityLoadResouceDefine}"/>
+    </beans:bean>
+    <!-- 定义上下文返回的消息的国际化。（新版本） 11/3/23 -->
+    <beans:bean id="messageSource"
+                class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename"
+                        value="classpath:org/springframework/security/messages_zh_CN"/>
+    </beans:bean>
+    <!-- 事件监听:实现了 ApplicationListener监听接口, 包括AuthenticationCredentialsNotFoundEvent
+        事件， AuthorizationFailureEvent事件，AuthorizedEvent事件， PublicInvocationEvent事
+        件。 -->
+    <beans:bean
+            class="org.springframework.security.authentication.event.LoggerListener"/>
+    <!-- spring security自带的与权限有关的数据读写Jdbc模板 -->
+    <beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <beans:property name="dataSource" ref="${security.dataSource}"/>
+    </beans:bean>
+    <!-- 设置权限的前缀为AUTH_，而不是ROLE_。 -->
+    <beans:bean id="roleVoter"
+                class="org.springframework.security.access.vote.RoleVoter">
+        <beans:property name="rolePrefix" value="AUTH_"/>
+    </beans:bean>
+</beans:beans>

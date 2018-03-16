@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.OrganizationSubDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.OrganizationSub">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="organizationId" jdbcType="VARCHAR" property="organizationId" />
+    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.uf.vo.OrganizationSubVo">
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, organizationId, areaCode, name, url, remark, status, createUserId, createUserName, 
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select 
+    <include refid="Base_Column_List" />
+    from organization_sub
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from organization_sub
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.uf.model.OrganizationSub">
+    insert into organization_sub (id, organizationId, areaCode, 
+      name, url, remark, 
+      status, createUserId, createUserName, 
+      createDate, lastModifyUserId, lastModifyUserName, 
+      lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{organizationId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.OrganizationSub">
+    update organization_sub
+    set
+      name = #{name,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <sql id="whereCondition">
+    from organization_sub t
+    where 0=0
+    <if test='condition.areaCode!=null and condition.areaCode!=""'>
+      and t.areaCode like
+      concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="condition.organizationId!=null and condition.organizationId!=&quot;&quot;">
+      and t.organizationId =#{condition.organizationId,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+  <select id="findList" resultMap="BaseResultMapVo">
+    select m.* from(
+    select t.id, t.organizationId, t.areaCode, t.name, t.url, t.remark,t.createDate
+    <include refid="whereCondition"/>
+    ) m
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY m.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY m.createDate
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    organization_sub where
+    id=#{id} and areaCode=#{areaCode}
+  </select>
+</mapper>

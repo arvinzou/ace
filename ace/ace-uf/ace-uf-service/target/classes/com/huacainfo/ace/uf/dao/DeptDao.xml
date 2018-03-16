@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.DeptDao">
+
+    <select id="selectDeptCategoryList" resultType="map">
+        SELECT
+        CODE 'id',
+        NAME 'name',
+        remark 'icon'
+        FROM
+        portal.dict
+        WHERE
+        category_id = '04'
+    </select>
+
+    <select id="selectDeptList" resultType="map">
+        select
+        department_id 'id',
+        department_name 'name',
+        area_code category,
+        reg_addr addr,
+        latitude,
+        longitude,
+        contact_tel tel,
+        serviceTimeStart,
+        serviceTimeEnd,
+        (POWER(MOD(ABS(longitude - #{longitude,jdbcType=DECIMAL}),360),2) + POWER(ABS(latitude - #{latitude,jdbcType=DECIMAL}),2)) AS distance,
+        'deptSub' types
+        from
+        portal.department
+        WHERE latitude is not null and longitude is not null
+        <if test='q!=null and q!=""'>
+            and department_name like
+            concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
+        and status = '1'
+        ORDER BY distance LIMIT 50
+    </select>
+    <select id="selectDeptListByText" resultType="map">
+        select
+        department_id 'id',
+        department_name 'name',
+        type category,
+        reg_addr addr,
+        latitude,
+        longitude,
+        contact_tel tel,
+        serviceTimeStart,
+        serviceTimeEnd
+        from
+        portal.department
+        WHERE department_id like '00010002%'
+        <if test='q!=null and q!=""'>
+            and department_name like
+            concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
+        and status = '1'
+    </select>
+
+    <select id="selectDeptById" resultType="map">
+        select
+        t.department_id,
+        t.parent_department_id,
+        t.department_name,
+        t.short_name,
+        t.create_time,
+        t.create_user_id,
+        t.status,
+        t.category,
+        t.area_code,
+        a.fullname area_name,
+        t.pcode, t.contact_name, t.contact_tel,
+        t.contact_mobile, t.contact_qq, t.contact_email,
+        t.contact_fax,
+        t.legal_person_name, t.legal_person_id_type, t.legal_person_id_no,
+        t.legal_person_tel,
+        t.legal_person_mobile,
+        t.legal_person_addr,
+        t.reg_date,
+        t.reg_capital, t.reg_area_code, t.reg_addr, t.nature,
+        t.buss_license_no,
+        t.buss_addr, t.buss_area_code, t.fax, t.email,
+        t.trans_depart_approval_no,
+        t.trans_buss_license_no,
+        t.trans_buss_license_valid_date, t.trans_buss_scope,
+        t.employees_num,
+        t.driver_num, t.unlicensed_driver_num,
+        t.licensed_driver_num,
+        t.type,
+        t.simage, t.bimage, t.create_user_id,
+        t.create_user_name,
+        t.last_modify_time, t.last_modify_user_id,
+        t.last_modify_user_name,
+        t.latitude,
+        t.longitude,
+        t.serviceTimeStart,
+        t.serviceTimeEnd,
+        t.qrcode,
+        t.serviceWay
+        from
+        portal.department t
+        left join
+        portal.province a on
+        t.area_code = a.code
+        where
+        t.department_id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectDeptImagesById" resultType="map">
+        select name, url, remark from organization_sub where
+        organizationId =#{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAreaCodeList" resultType="map">
+        SELECT
+        CODE 'id',
+        NAME 'name'
+        FROM
+        portal.province
+        WHERE
+        parent_code = #{areaCode}
+    </select>
+    <select id="selectDeptByCategory" resultType="map">
+        select
+        department_id 'id',
+        department_name 'name',
+        type category,
+        reg_addr addr,
+        latitude,
+        longitude,
+        contact_tel tel,
+        serviceTimeStart,
+        serviceTimeEnd,
+        'deptSub' types
+        from
+        portal.department
+        WHERE 0=0
+        and STATUS = '1'
+    </select>
+</mapper>

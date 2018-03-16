@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.WxCfgDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.WxCfg">
+    <id column="appId" jdbcType="VARCHAR" property="appId" />
+    <result column="appScret" jdbcType="VARCHAR" property="appScret" />
+    <result column="accessToken" jdbcType="VARCHAR" property="accessToken" />
+    <result column="expiresIn" jdbcType="INTEGER" property="expiresIn" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    appId, appScret, accessToken, expiresIn, name,deptId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wx_cfg
+    where appId = #{appId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wx_cfg
+    where appId = #{appId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.WxCfg">
+    insert into wx_cfg (appId, appScret, accessToken,
+    expiresIn, name,deptId)
+    values (#{appId,jdbcType=VARCHAR}, #{appScret,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR},
+    #{expiresIn,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{deptId})
+  </insert>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.WxCfg">
+    update wx_cfg
+    set appScret = #{appScret,jdbcType=VARCHAR},
+      accessToken = #{accessToken,jdbcType=VARCHAR},
+      expiresIn = #{expiresIn,jdbcType=INTEGER},
+    name = #{name,jdbcType=VARCHAR},
+    deptId = #{deptId,jdbcType=VARCHAR}
+    where appId = #{appId,jdbcType=VARCHAR}
+  </update>
+
+    <update id="updateAccessTokenTicket">
+    update wx_cfg
+    set
+        ticket = #{ticket,jdbcType=VARCHAR},
+    accessToken = #{accessToken,jdbcType=VARCHAR},
+    expiresIn = #{expiresIn,jdbcType=INTEGER}
+    where appId = #{appId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectAppList" resultType="map">
+    select appId, appScret, accessToken, expiresIn, name from wx_cfg order by appId
+  </select>
+
+    <select id="selectAccessTokenAndTicketByDeptId" resultType="map">
+        select appId,accessToken,ticket from wx_cfg where deptId=#{id}
+  </select>
+</mapper>

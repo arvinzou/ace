@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.operana.dao.NormDetailDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.operana.model.NormDetail">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="meetingId" jdbcType="VARCHAR" property="meetingId"/>
+        <result column="topicId" jdbcType="VARCHAR" property="topicId"/>
+        <result column="normId" jdbcType="VARCHAR" property="normId"/>
+        <result column="year" jdbcType="INTEGER" property="year"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="productId" jdbcType="VARCHAR" property="productId"/>
+        <result column="wk1" jdbcType="DECIMAL" property="wk1"/>
+        <result column="wk2" jdbcType="DECIMAL" property="wk2"/>
+        <result column="wk3" jdbcType="DECIMAL" property="wk3"/>
+        <result column="wk4" jdbcType="DECIMAL" property="wk4"/>
+        <result column="wk5" jdbcType="DECIMAL" property="wk5"/>
+        <result column="wk6" jdbcType="DECIMAL" property="wk6"/>
+        <result column="wk7" jdbcType="DECIMAL" property="wk7"/>
+        <result column="wk8" jdbcType="DECIMAL" property="wk8"/>
+        <result column="wk9" jdbcType="DECIMAL" property="wk9"/>
+        <result column="wk10" jdbcType="DECIMAL" property="wk10"/>
+        <result column="wk11" jdbcType="DECIMAL" property="wk11"/>
+        <result column="wk12" jdbcType="DECIMAL" property="wk12"/>
+        <result column="wk13" jdbcType="DECIMAL" property="wk13"/>
+        <result column="wk14" jdbcType="DECIMAL" property="wk14"/>
+        <result column="wk15" jdbcType="DECIMAL" property="wk15"/>
+        <result column="wk16" jdbcType="DECIMAL" property="wk16"/>
+        <result column="wk17" jdbcType="DECIMAL" property="wk17"/>
+        <result column="wk18" jdbcType="DECIMAL" property="wk18"/>
+        <result column="wk19" jdbcType="DECIMAL" property="wk19"/>
+        <result column="wk20" jdbcType="DECIMAL" property="wk20"/>
+        <result column="wk21" jdbcType="DECIMAL" property="wk21"/>
+        <result column="wk22" jdbcType="DECIMAL" property="wk22"/>
+        <result column="wk23" jdbcType="DECIMAL" property="wk23"/>
+        <result column="wk24" jdbcType="DECIMAL" property="wk24"/>
+        <result column="wk25" jdbcType="DECIMAL" property="wk25"/>
+        <result column="wk26" jdbcType="DECIMAL" property="wk26"/>
+        <result column="wk27" jdbcType="DECIMAL" property="wk27"/>
+        <result column="wk28" jdbcType="DECIMAL" property="wk28"/>
+        <result column="wk29" jdbcType="DECIMAL" property="wk29"/>
+        <result column="wk30" jdbcType="DECIMAL" property="wk30"/>
+        <result column="wk31" jdbcType="DECIMAL" property="wk31"/>
+        <result column="wk32" jdbcType="DECIMAL" property="wk32"/>
+        <result column="wk33" jdbcType="DECIMAL" property="wk33"/>
+        <result column="wk34" jdbcType="DECIMAL" property="wk34"/>
+        <result column="wk35" jdbcType="DECIMAL" property="wk35"/>
+        <result column="wk36" jdbcType="DECIMAL" property="wk36"/>
+        <result column="wk37" jdbcType="DECIMAL" property="wk37"/>
+        <result column="wk38" jdbcType="DECIMAL" property="wk38"/>
+        <result column="wk39" jdbcType="DECIMAL" property="wk39"/>
+        <result column="wk40" jdbcType="DECIMAL" property="wk40"/>
+        <result column="wk41" jdbcType="DECIMAL" property="wk41"/>
+        <result column="wk42" jdbcType="DECIMAL" property="wk42"/>
+        <result column="wk43" jdbcType="DECIMAL" property="wk43"/>
+        <result column="wk44" jdbcType="DECIMAL" property="wk44"/>
+        <result column="wk45" jdbcType="DECIMAL" property="wk45"/>
+        <result column="wk46" jdbcType="DECIMAL" property="wk46"/>
+        <result column="wk47" jdbcType="DECIMAL" property="wk47"/>
+        <result column="wk48" jdbcType="DECIMAL" property="wk48"/>
+        <result column="wk49" jdbcType="DECIMAL" property="wk49"/>
+        <result column="wk50" jdbcType="DECIMAL" property="wk50"/>
+        <result column="wk51" jdbcType="DECIMAL" property="wk51"/>
+        <result column="wk52" jdbcType="DECIMAL" property="wk52"/>
+        <result column="wk53" jdbcType="DECIMAL" property="wk53"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, meetingId, topicId, normId, year, name, wk1, wk2, wk3, wk4, wk5, wk6, wk7, wk8,
+        wk9, wk10, wk11, wk12, wk13, wk14, wk15, wk16, wk17, wk18, wk19, wk20, wk21, wk22,
+        wk23, wk24, wk25, wk26, wk27, wk28, wk29, wk30, wk31, wk32, wk33, wk34, wk35, wk36,
+        wk37, wk38, wk39, wk40, wk41, wk42, wk43, wk44, wk45, wk46, wk47, wk48, wk49, wk50,
+        wk51, wk52, wk53, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from norm_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from norm_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.operana.model.NormDetail">
+        insert into norm_detail (id, meetingId, topicId,
+        normId, year, name,productId,
+        wk1, wk2, wk3, wk4,
+        wk5, wk6, wk7, wk8,
+        wk9, wk10, wk11, wk12,
+        wk13, wk14, wk15, wk16,
+        wk17, wk18, wk19, wk20,
+        wk21, wk22, wk23, wk24,
+        wk25, wk26, wk27, wk28,
+        wk29, wk30, wk31, wk32,
+        wk33, wk34, wk35, wk36,
+        wk37, wk38, wk39, wk40,
+        wk41, wk42, wk43, wk44,
+        wk45, wk46, wk47, wk48,
+        wk49, wk50, wk51, wk52,
+        wk53, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate)
+        values (#{id,jdbcType=VARCHAR}, #{meetingId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR},
+        #{normId,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{productId,jdbcType=VARCHAR},
+        #{wk1,jdbcType=DECIMAL}, #{wk2,jdbcType=DECIMAL}, #{wk3,jdbcType=DECIMAL}, #{wk4,jdbcType=DECIMAL},
+        #{wk5,jdbcType=DECIMAL}, #{wk6,jdbcType=DECIMAL}, #{wk7,jdbcType=DECIMAL}, #{wk8,jdbcType=DECIMAL},
+        #{wk9,jdbcType=DECIMAL}, #{wk10,jdbcType=DECIMAL}, #{wk11,jdbcType=DECIMAL}, #{wk12,jdbcType=DECIMAL},
+        #{wk13,jdbcType=DECIMAL}, #{wk14,jdbcType=DECIMAL}, #{wk15,jdbcType=DECIMAL}, #{wk16,jdbcType=DECIMAL},
+        #{wk17,jdbcType=DECIMAL}, #{wk18,jdbcType=DECIMAL}, #{wk19,jdbcType=DECIMAL}, #{wk20,jdbcType=DECIMAL},
+        #{wk21,jdbcType=DECIMAL}, #{wk22,jdbcType=DECIMAL}, #{wk23,jdbcType=DECIMAL}, #{wk24,jdbcType=DECIMAL},
+        #{wk25,jdbcType=DECIMAL}, #{wk26,jdbcType=DECIMAL}, #{wk27,jdbcType=DECIMAL}, #{wk28,jdbcType=DECIMAL},
+        #{wk29,jdbcType=DECIMAL}, #{wk30,jdbcType=DECIMAL}, #{wk31,jdbcType=DECIMAL}, #{wk32,jdbcType=DECIMAL},
+        #{wk33,jdbcType=DECIMAL}, #{wk34,jdbcType=DECIMAL}, #{wk35,jdbcType=DECIMAL}, #{wk36,jdbcType=DECIMAL},
+        #{wk37,jdbcType=DECIMAL}, #{wk38,jdbcType=DECIMAL}, #{wk39,jdbcType=DECIMAL}, #{wk40,jdbcType=DECIMAL},
+        #{wk41,jdbcType=DECIMAL}, #{wk42,jdbcType=DECIMAL}, #{wk43,jdbcType=DECIMAL}, #{wk44,jdbcType=DECIMAL},
+        #{wk45,jdbcType=DECIMAL}, #{wk46,jdbcType=DECIMAL}, #{wk47,jdbcType=DECIMAL}, #{wk48,jdbcType=DECIMAL},
+        #{wk49,jdbcType=DECIMAL}, #{wk50,jdbcType=DECIMAL}, #{wk51,jdbcType=DECIMAL}, #{wk52,jdbcType=DECIMAL},
+        #{wk53,jdbcType=DECIMAL}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.NormDetail">
+        update norm_detail
+        set
+        year = #{year,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        productId= #{productId,jdbcType=VARCHAR},
+        wk1 = #{wk1,jdbcType=DECIMAL},
+        wk2 = #{wk2,jdbcType=DECIMAL},
+        wk3 = #{wk3,jdbcType=DECIMAL},
+        wk4 = #{wk4,jdbcType=DECIMAL},
+        wk5 = #{wk5,jdbcType=DECIMAL},
+        wk6 = #{wk6,jdbcType=DECIMAL},
+        wk7 = #{wk7,jdbcType=DECIMAL},
+        wk8 = #{wk8,jdbcType=DECIMAL},
+        wk9 = #{wk9,jdbcType=DECIMAL},
+        wk10 = #{wk10,jdbcType=DECIMAL},
+        wk11 = #{wk11,jdbcType=DECIMAL},
+        wk12 = #{wk12,jdbcType=DECIMAL},
+        wk13 = #{wk13,jdbcType=DECIMAL},
+        wk14 = #{wk14,jdbcType=DECIMAL},
+        wk15 = #{wk15,jdbcType=DECIMAL},
+        wk16 = #{wk16,jdbcType=DECIMAL},
+        wk17 = #{wk17,jdbcType=DECIMAL},
+        wk18 = #{wk18,jdbcType=DECIMAL},
+        wk19 = #{wk19,jdbcType=DECIMAL},
+        wk20 = #{wk20,jdbcType=DECIMAL},
+        wk21 = #{wk21,jdbcType=DECIMAL},
+        wk22 = #{wk22,jdbcType=DECIMAL},
+        wk23 = #{wk23,jdbcType=DECIMAL},
+        wk24 = #{wk24,jdbcType=DECIMAL},
+        wk25 = #{wk25,jdbcType=DECIMAL},
+        wk26 = #{wk26,jdbcType=DECIMAL},
+        wk27 = #{wk27,jdbcType=DECIMAL},
+        wk28 = #{wk28,jdbcType=DECIMAL},
+        wk29 = #{wk29,jdbcType=DECIMAL},
+        wk30 = #{wk30,jdbcType=DECIMAL},
+        wk31 = #{wk31,jdbcType=DECIMAL},
+        wk32 = #{wk32,jdbcType=DECIMAL},
+        wk33 = #{wk33,jdbcType=DECIMAL},
+        wk34 = #{wk34,jdbcType=DECIMAL},
+        wk35 = #{wk35,jdbcType=DECIMAL},
+        wk36 = #{wk36,jdbcType=DECIMAL},
+        wk37 = #{wk37,jdbcType=DECIMAL},
+        wk38 = #{wk38,jdbcType=DECIMAL},
+        wk39 = #{wk39,jdbcType=DECIMAL},
+        wk40 = #{wk40,jdbcType=DECIMAL},
+        wk41 = #{wk41,jdbcType=DECIMAL},
+        wk42 = #{wk42,jdbcType=DECIMAL},
+        wk43 = #{wk43,jdbcType=DECIMAL},
+        wk44 = #{wk44,jdbcType=DECIMAL},
+        wk45 = #{wk45,jdbcType=DECIMAL},
+        wk46 = #{wk46,jdbcType=DECIMAL},
+        wk47 = #{wk47,jdbcType=DECIMAL},
+        wk48 = #{wk48,jdbcType=DECIMAL},
+        wk49 = #{wk49,jdbcType=DECIMAL},
+        wk50 = #{wk50,jdbcType=DECIMAL},
+        wk51 = #{wk51,jdbcType=DECIMAL},
+        wk52 = #{wk52,jdbcType=DECIMAL},
+        wk53 = #{wk53,jdbcType=DECIMAL},
+
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where meetingId = #{meetingId,jdbcType=VARCHAR}
+        and
+        topicId = #{topicId,jdbcType=VARCHAR}
+        and
+        normId = #{normId,jdbcType=VARCHAR}
+        and
+        name= #{name,jdbcType=VARCHAR}
+    </update>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        norm_detail where
+        meetingId=#{meetingId,jdbcType=VARCHAR}
+        and
+        topicId= #{topicId,jdbcType=VARCHAR}
+        and
+        name= #{name,jdbcType=VARCHAR}
+        and normId= #{normId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectNormDetailByMeetingAndTopicIdAndNormId" resultType="map">
+        select id, meetingId, topicId, normId, year,productId, name, wk1, wk2, wk3, wk4, wk5, wk6, wk7, wk8,
+        wk9, wk10, wk11, wk12, wk13, wk14, wk15, wk16, wk17, wk18, wk19, wk20, wk21, wk22,
+        wk23, wk24, wk25, wk26, wk27, wk28, wk29, wk30, wk31, wk32, wk33, wk34, wk35, wk36,
+        wk37, wk38, wk39, wk40, wk41, wk42, wk43, wk44, wk45, wk46, wk47, wk48, wk49, wk50,
+        wk51, wk52, wk53 from norm_detail where meetingId=#{meetingId} and topicId=#{topicId} and normId=#{normId} order
+        by id
+    </select>
+
+    <sql id="whereCondition">
+        from norm_detail  where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
+        and  normId=#{condition.normId}
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultType="map">
+        select * from(
+        select id, meetingId, topicId, normId, year,productId, name, wk1, wk2, wk3, wk4, wk5, wk6, wk7, wk8,
+        wk9, wk10, wk11, wk12, wk13, wk14, wk15, wk16, wk17, wk18, wk19, wk20, wk21, wk22,
+        wk23, wk24, wk25, wk26, wk27, wk28, wk29, wk30, wk31, wk32, wk33, wk34, wk35, wk36,
+        wk37, wk38, wk39, wk40, wk41, wk42, wk43, wk44, wk45, wk46, wk47, wk48, wk49, wk50,
+        wk51, wk52, wk53
+        <include refid="whereCondition"/>) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.id
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+</mapper>

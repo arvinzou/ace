@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.operana.dao.NormCfgDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.operana.model.NormCfg">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="normId" jdbcType="VARCHAR" property="normId" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="indexValue" jdbcType="DECIMAL" property="indexValue" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, normId, year, indexValue, status, createUserId, createUserName, createDate, lastModifyUserId, 
+    lastModifyUserName, lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from norm_cfg
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from norm_cfg
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.operana.model.NormCfg">
+    insert into norm_cfg (id, normId, year, 
+      indexValue, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{normId,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{indexValue,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.operana.model.NormCfg">
+    insert into norm_cfg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="normId != null">
+        normId,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="indexValue != null">
+        indexValue,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createUserId != null">
+        createUserId,
+      </if>
+      <if test="createUserName != null">
+        createUserName,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId,
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName,
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="normId != null">
+        #{normId,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="indexValue != null">
+        #{indexValue,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.operana.model.NormCfg">
+    update norm_cfg
+    <set>
+      <if test="normId != null">
+        normId = #{normId,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="indexValue != null">
+        indexValue = #{indexValue,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.NormCfg">
+    update norm_cfg
+    set normId = #{normId,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR},
+      indexValue = #{indexValue,jdbcType=DECIMAL},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

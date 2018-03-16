@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/tool
+        http://www.springframework.org/schema/tool/spring-tool.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <description>Spring MVC Configuration</description>
+    <mvc:annotation-driven>
+        <!--设置字符集-->
+        <mvc:message-converters>
+            <ref bean="jsonHttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <mvc:resources location="/content/" mapping="/content/**"/>
+    <mvc:resources location="/dynamic/" mapping="/dynamic/**"/>
+    <mvc:resources location="/www/" mapping="/www/**"/>
+
+    <bean id="jsonHttpMessageConverter"
+          class="com.huacainfo.ace.common.web.converter.MappingFastJsonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>${spring.mvc.supportedMediaTypes}</value>
+            </list>
+        </property>
+        <property name="serializerFeature">
+            <list>
+                <value>QuoteFieldNames</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="${spring.mvc.charset}"/>
+        <!-- 指定所上传文件的总大小不能超过20MB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        <property name="maxUploadSize" value="${spring.mvc.maxUploadSize}"/>
+    </bean>
+    <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+            p:prefix="${spring.mvc.resourceView.prefix}" p:suffix="${spring.mvc.resourceView.suffix}"/>
+
+    <bean id="exceptionHandler" class="com.huacainfo.ace.common.web.handler.ExceptionHandler"/>
+</beans>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.DictCategoryMapper">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.DictCategory">
+		<id column="category_id" jdbcType="VARCHAR" property="categoryId" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="syid" property="syid" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		category_id, name, remark, create_time,syid
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from dict_category
+		where category_id = #{categoryId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		dict_category
+		where category_id = #{categoryId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.portal.model.DictCategory">
+		<selectKey keyProperty="categoryId" resultType="string"
+			order="BEFORE">
+			select MAX(CAST(t.category_id as UNSIGNED INTEGER))+1 from dict_category t
+		</selectKey>
+		insert into dict_category (category_id, name, remark,
+		create_time,syid)
+		values (#{categoryId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},#{syid})
+	</insert>
+	
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.DictCategory">
+		update
+		dict_category
+		set name = #{name,jdbcType=VARCHAR},
+		remark =
+		#{remark,jdbcType=VARCHAR},
+		syid = #{syid,jdbcType=VARCHAR}
+		where category_id =
+		#{categoryId,jdbcType=VARCHAR}
+	</update>
+
+	<sql id="whereCondition">
+		from dict_category where (syid =#{condition.syid})
+		<if test='condition.name!=null and condition.name!=""'>
+			and name like
+			concat(#{condition.name,jdbcType=VARCHAR},'%')
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		<include refid="whereCondition" />
+		<choose>
+			<when test='orderBy!=null and orderBy!=""'>
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY category_id
+			</otherwise>
+		</choose>
+
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+	</select>
+	<select id="findListAll" resultMap="BaseResultMap">
+
+		select
+		<include refid="Base_Column_List" />
+		from dict_category where syid = #{syid,jdbcType=VARCHAR} order by create_time
+
+	</select>
+	<select id="isExitByName" resultType="int">
+		select count(*)
+		from
+		dict_category where name=#{name}
+	</select>
+</mapper>

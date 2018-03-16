@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.PerResumeDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.PerResume">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="personageId" jdbcType="VARCHAR" property="personageId" />
+    <result column="deptId" jdbcType="VARCHAR" property="deptId" />
+    <result column="startDate" jdbcType="TIMESTAMP" property="startDate" />
+    <result column="endDate" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="jobId" jdbcType="VARCHAR" property="jobId" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, personageId, deptId, startDate, endDate, jobId, createUserId, createUserName, 
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from per_resume
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from per_resume
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.uf.model.PerResume">
+    insert into per_resume (id, personageId, deptId, 
+      startDate, endDate, jobId, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{personageId,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{jobId,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.uf.model.PerResume">
+    insert into per_resume
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="personageId != null">
+        personageId,
+      </if>
+      <if test="deptId != null">
+        deptId,
+      </if>
+      <if test="startDate != null">
+        startDate,
+      </if>
+      <if test="endDate != null">
+        endDate,
+      </if>
+      <if test="jobId != null">
+        jobId,
+      </if>
+      <if test="createUserId != null">
+        createUserId,
+      </if>
+      <if test="createUserName != null">
+        createUserName,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId,
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName,
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="personageId != null">
+        #{personageId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobId != null">
+        #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.uf.model.PerResume">
+    update per_resume
+    <set>
+      <if test="personageId != null">
+        personageId = #{personageId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        deptId = #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        startDate = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        endDate = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobId != null">
+        jobId = #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.PerResume">
+    update per_resume
+    set personageId = #{personageId,jdbcType=VARCHAR},
+      deptId = #{deptId,jdbcType=VARCHAR},
+      startDate = #{startDate,jdbcType=TIMESTAMP},
+      endDate = #{endDate,jdbcType=TIMESTAMP},
+      jobId = #{jobId,jdbcType=VARCHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.uf.model.PerResume">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="personageId" jdbcType="VARCHAR" property="personageId" />
+    <result column="deptId" jdbcType="VARCHAR" property="deptId" />
+    <result column="startDate" jdbcType="TIMESTAMP" property="startDate" />
+    <result column="endDate" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="jobId" jdbcType="VARCHAR" property="jobId" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, personageId, deptId, startDate, endDate, jobId, createDate, lastModifyUserId, 
+    lastModifyUserName, lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from per_resume
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from per_resume
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.uf.model.PerResume">
+    insert into per_resume (id, personageId, deptId, 
+      startDate, endDate, jobId, 
+      createDate, lastModifyUserId, lastModifyUserName, 
+      lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{personageId,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{jobId,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.uf.model.PerResume">
+    insert into per_resume
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="personageId != null">
+        personageId,
+      </if>
+      <if test="deptId != null">
+        deptId,
+      </if>
+      <if test="startDate != null">
+        startDate,
+      </if>
+      <if test="endDate != null">
+        endDate,
+      </if>
+      <if test="jobId != null">
+        jobId,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId,
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName,
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="personageId != null">
+        #{personageId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobId != null">
+        #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.uf.model.PerResume">
+    update per_resume
+    <set>
+      <if test="personageId != null">
+        personageId = #{personageId,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        deptId = #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        startDate = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDate != null">
+        endDate = #{endDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobId != null">
+        jobId = #{jobId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyUserId != null">
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyUserName != null">
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.uf.model.PerResume">
+    update per_resume
+    set personageId = #{personageId,jdbcType=VARCHAR},
+      deptId = #{deptId,jdbcType=VARCHAR},
+      startDate = #{startDate,jdbcType=TIMESTAMP},
+      endDate = #{endDate,jdbcType=TIMESTAMP},
+      jobId = #{jobId,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

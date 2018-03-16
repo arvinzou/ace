@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.report.PersonageNation">
+  <select id="query" resultType="map">
+    SELECT
+    count(1) 'value',
+    a. NAME 'name'
+    FROM
+    personage t
+    inner JOIN (
+    SELECT
+    code CODE,
+    name NAME
+    FROM
+    portal.dict where category_id='09'
+    ) a ON t.nation = a. CODE
+    where t.`status`='1' and t.areaCode like concat(#{areaCode},'%')
+    GROUP BY
+    a. NAME
+    order by value desc limit 56
+  </select>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.report.OrganizationPageList">
+    <select id="query" resultType="map">
+       select t.id, t.category, t.areaCode, t.name, t.addr, t.tel, t.serviceWay, t.latitude, t.longitude, t.serviceTimeStart,
+        t.serviceTimeEnd, t.icon, t.remark,a.fullname areaName
+        from organization t
+        left join portal.province a on t.areaCode=a.code
+        where t.status='1'
+        <if test='name!=null and name!=""'>
+            and t.name like
+            concat('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition!=null and condition!=""'>
+            and t.category =#{category,jdbcType=VARCHAR}
+        </if>
+        ORDER BY t.id
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+</mapper>

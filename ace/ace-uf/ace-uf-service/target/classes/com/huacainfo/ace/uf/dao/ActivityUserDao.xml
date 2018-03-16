@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.uf.dao.ActivityUserDao">
+  <delete id="deletePersonageByActivityId">
+    delete from activity_user
+    where activityId = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.uf.model.ActivityUser">
+    insert into activity_user (id, activityId, userId,
+    createDate)
+    values (#{id,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+    #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="selectListByActivityId" resultType="map">
+    select  t.userId, t.activityId, t.createDate,a.name,a.photo from activity_user t inner join personage a on t.userId=a.id
+    where activityId =#{activityId,jdbcType=VARCHAR}
+        ORDER BY t.createDate
+  </select>
+
+  <delete id="deleteByPrimaryKey">
+    delete from activity_user
+    where  id= #{id,jdbcType=VARCHAR}
+  </delete>
+</mapper>

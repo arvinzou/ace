@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:amq="http://activemq.apache.org/schema/core" xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://activemq.apache.org/schema/core  http://activemq.apache.org/schema/core/activemq-core-5.2.0.xsd
+	http://www.springframework.org/schema/jms  http://www.springframework.org/schema/jms/spring-jms-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://code.alibabatech.com/schema/dubbo  http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <import resource="classpath:dubbo/dubbo-ace-common-provider.xml"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.DataBaseLogService"
+                   ref="dataBaseLogService"/>
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service
+            interface="org.springframework.security.core.userdetails.UserDetailsService"
+            ref="customUserDetailsService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.ResourcesService"
+                   ref="resourcesService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.FilesService"
+                   ref="filesService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.AttachService"
+                   ref="attachService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.CacheService"
+                   ref="cacheService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.ConfigService"
+                   ref="configService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.DepartmentService"
+                   ref="departmentService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.DictCategoryService"
+                   ref="dictCategoryService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.DictService"
+                   ref="dictService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.NoticeService"
+                   ref="noticeService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.RoleService"
+                   ref="roleService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.SystemService"
+                   ref="systemService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.TaskService"
+                   ref="taskService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.UsersService"
+                   ref="usersService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.SysInfoService"
+                   ref="sysInfoService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.SyCfgService"
+                   ref="syCfgService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.UserCfgService"
+                   ref="userCfgService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.AuthorityService"
+                   ref="authorityService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.ProvinceService"
+                   ref="provinceService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.AnalysisService"
+                   ref="analysisPortalService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.WxUserService"
+                   ref="wxUserService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.WxCfgService"
+                   ref="wxCfgService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.QueueCmccHisService"
+                   ref="queueCmccHisService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.QueueCmccWaitService"
+                   ref="queueCmccWaitService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.TaskCmccService"
+                   ref="taskCmccService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.TemplateCmccService"
+                   ref="templateCmccService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.GroupService"
+                   ref="groupService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.OAuth2Service"
+                   ref="oAuth2Service"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.UserinfoService"
+                   ref="userinfoService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.SensitiveWordsService"
+                   ref="sensitiveWordsService"/>
+</beans>

@@ -10,11 +10,29 @@
     <file url="file://$PROJECT_DIR$/ace-face/ace-face-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-face/ace-face-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-face/ace-face-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gesp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-iop" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-rest" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-jave" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-kernel" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-backend" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-live" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-live/ace-live-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-live/ace-live-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-live/ace-live-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-luohua" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-luohua/ace-luohua-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-luohua/ace-luohua-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-luohua/ace-luohua-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-operana" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-operana/ace-operana-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-operana/ace-operana-service" charset="UTF-8" />
@@ -31,10 +49,18 @@
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weuiluohua" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-woc" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-woc/ace-woc-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-woc/ace-woc-rest" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-woc/ace-woc-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-woc/ace-woc-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-workflow" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-web" charset="UTF-8" />
   </component>
 </project>

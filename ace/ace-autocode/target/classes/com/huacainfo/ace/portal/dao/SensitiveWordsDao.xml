@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.SensitiveWordsDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.SensitiveWords">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="word" jdbcType="VARCHAR" property="word" />
+    <result column="deptId" jdbcType="VARCHAR" property="deptId" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, word, deptId, createUserId, createUserName, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sensitive_words
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sensitive_words
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.SensitiveWords">
+    insert into sensitive_words (id, word, deptId, 
+      createUserId, createUserName, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{word,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.portal.model.SensitiveWords">
+    insert into sensitive_words
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="word != null">
+        word,
+      </if>
+      <if test="deptId != null">
+        deptId,
+      </if>
+      <if test="createUserId != null">
+        createUserId,
+      </if>
+      <if test="createUserName != null">
+        createUserName,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="word != null">
+        #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.portal.model.SensitiveWords">
+    update sensitive_words
+    <set>
+      <if test="word != null">
+        word = #{word,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null">
+        deptId = #{deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null">
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.SensitiveWords">
+    update sensitive_words
+    set word = #{word,jdbcType=VARCHAR},
+      deptId = #{deptId,jdbcType=VARCHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
