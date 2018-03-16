@@ -25,7 +25,7 @@
 
 			<div class="widget-body">
 				<div class="widget-main padding-6">
-					<form action="#" id="fm-search">
+					<form action="#" id="fm-search" class="toolbar">
 						内容： <input name="name" type="text"
 							style="width: 200px;height:25px" />
 							时间：
@@ -41,7 +41,7 @@
 
 					</form>
 					<div class="space10"></div>
-					<div id="toolbar" class="toolbar">
+					<div id="toolbar" >
 
 						
 						
