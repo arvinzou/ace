@@ -72,6 +72,5 @@ window.onresize = function () {
 <script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
-<div id="tableExport"></div>
 </body>
 </html>
