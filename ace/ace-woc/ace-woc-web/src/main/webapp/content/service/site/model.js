@@ -119,7 +119,7 @@ var _colModel = function () {
                 required: true
             }
         },
-        /*维度*/
+        /*纬度*/
         {
             name: 'latitude',
             hidden: true,
@@ -150,20 +150,19 @@ var _colModel = function () {
             width: 200,
             editoptions: {
                 style: 'width:200px;'
-            }
+            },
+            renderer: function (value, cur) {
+                return $.jgrid.getAccessor(cur, 'buildDeptName');
+            },
         },
         /*建造时间*/
         {
             name: 'constructDate',
             editable: true,
-            width: 50,
+            width: 100,
             edittype: "datebox",
             editoptions: {
                 style: 'width:200px;height:25px;',
-            },
-            formoptions: {
-                elmprefix: "",
-                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
             dataoptions: {
                 formatter: function (date) {
@@ -190,18 +189,33 @@ var _colModel = function () {
             renderer: function (value) {
                 return value == null ? "" : value.substring(0, 10);
             },
-            editrules: {
-                required: true
-            },
         },
         /*归属道路编号*/
         {
             name: 'roadId',
             editable: true,
-            width: 200,
+            width: 100,
+            edittype: "combogrid",
+            dataoptions: {
+                panelWidth: 400,
+                idField: 'id',
+                textField: 'name',
+                url: contextPath + '/road/selectRoad',
+                mode: 'remote',
+                fitColumns: true,
+                method: 'get',
+                columns: [[{
+                    field: 'name',
+                    title: '道路名称——道路编号',
+                    width: 200
+                }]]
+            },
             editoptions: {
-                style: 'width:200px;'
-            }
+                style: 'width:200px;height:25px;',
+            },
+            renderer: function (value, cur) {
+                return $.jgrid.getAccessor(cur, 'roadName');
+            },
         },
         /*归属管辖单位*/
         {
@@ -210,33 +224,33 @@ var _colModel = function () {
             width: 200,
             editoptions: {
                 style: 'width:200px;'
-            }
+            },
+            renderer: function (value, cur) {
+                return $.jgrid.getAccessor(cur, 'adminDeptName');
+            },
         },
         /*卡点运行状态*/
         {
             name: 'sitStatus',
-            editable: true,
-            hidden: true,
-            width: 100,
-            edittype: "checkbox",
-            editoptions: {
-                value: "1:0"
+            editable : true,
+            edittype : "select",
+            renderer : function(value) {
+                return rsd(value,"114");
             },
-            unformat: aceSwitch,
-            renderer: function (value) {
-                var rst = "";
-                switch (value) {
-                    case '1' :
-                        rst = "正常";
-                        break;
-                    case '0' :
-                        rst = "离线";
-                        break;
-                    default :
-                        rst = "N/A";
-                }
-                return rst;
-            }
+            formoptions : {
+                style : 'width:200px;height:25px;',
+                elmprefix : "",
+                elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>",
+
+            },
+            editoptions : {
+                value : odparse("114"),
+                colspan: true,
+            },
+            width : 80,
+            editrules : {
+                required : true
+            },
         },
         /*备注*/
         {

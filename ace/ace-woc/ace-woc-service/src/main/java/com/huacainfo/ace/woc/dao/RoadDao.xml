@@ -288,4 +288,16 @@
         LEFT JOIN portal.department d ON r.adminDepId = d.department_id
         where r.id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectRoad" resultType="map">
+        select t.id,concat(t.roadName,'+',t.roadCode) as name
+        from road t
+        where 0=0
+        <if test='params.q !=null and params.q!=""'>
+            and
+            t.id=#{params.q} or t.roadName like concat('%',#{params.q},'%') or t.roadCode like concat('%',#{params.q},'%')
+        </if>
+        order by t.createDate
+        limit 0,20
+    </select>
 </mapper>

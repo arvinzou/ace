@@ -19,7 +19,7 @@ public class Vehicle implements Serializable {
 
     private String ownerCompanyId;
 
-    private String fileNo;
+
 
     private Integer axleCount;
 
@@ -103,13 +103,6 @@ public class Vehicle implements Serializable {
         this.ownerCompanyId = ownerCompanyId == null ? null : ownerCompanyId.trim();
     }
 
-    public String getFileNo() {
-        return fileNo;
-    }
-
-    public void setFileNo(String fileNo) {
-        this.fileNo = fileNo == null ? null : fileNo.trim();
-    }
 
     public Integer getAxleCount() {
         return axleCount;

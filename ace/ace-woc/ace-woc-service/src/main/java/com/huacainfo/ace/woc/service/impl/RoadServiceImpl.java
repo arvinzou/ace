@@ -1,9 +1,7 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -189,5 +187,14 @@ public class RoadServiceImpl implements RoadService {
         this.dataBaseLogService.log("删除道路档案", "道路档案", String.valueOf(id),
                 String.valueOf(id), "道路档案", userProp);
         return new MessageResponse(0, "道路档案删除完成！");
+    }
+
+    @Override
+    public Map<String, Object> selectRoad(Map<String, Object> params) throws Exception{
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, String>> list = this.roadDao.selectRoad(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+        return rst;
     }
 }

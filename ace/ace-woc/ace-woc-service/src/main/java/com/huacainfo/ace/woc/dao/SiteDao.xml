@@ -26,14 +26,19 @@
         <result column="lastModifyDate" property="lastModifyDate" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, siteName, siteCode, areaCode, roadwayNum, checkpointsNum, latitude, longitude, 
-    address, constructDate, buildDeptId, roadId, adminDepId, sitStatus, remark, status, createUserId,
-    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
-  </sql>
+    s.id,s.siteName,s.siteCode,s.areaCode,s.roadwayNum,s.checkpointsNum,s.latitude,
+    s.longitude,s.address,s.constructDate,s.buildDeptId,
+    s.roadId,s.adminDepId,s.sitStatus,s.remark,s.status,
+    s.createUserId,s.createUserName,s.createDate,s.lastModifyUserId,s.lastModifyUserName,
+    s.lastModifyDate,r.roadName as roadName,d.department_name as buildDeptName,d1.department_name as adminDeptName
+</sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
-        from site
+        from site s
+        left join road r on s.roadId=r.id
+        left join portal.department d on s.buildDeptId=d.department_id
+        left join portal.department d1 on s.adminDepId=d1.department_id
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -295,7 +300,10 @@
     <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.SiteVo"></resultMap>
 
     <sql id="whereCondition">
-        from site
+        from site s
+        left join road r on s.roadId=r.id
+        left join portal.department d on s.buildDeptId=d.department_id
+        left join portal.department d1 on s.adminDepId=d1.department_id
         where 0=0
         <if test='condition.siteName!=null and condition.siteName!=""'>
             and siteName like
@@ -331,6 +339,6 @@
         select count(*)
         from site
         where
-        name=#{name}
+        siteName=#{siteName}
     </select>
 </mapper>

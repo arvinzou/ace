@@ -14,7 +14,7 @@ var _colModel = function () {
         {
             name : 'name',
             editable : true,
-            width : 200,
+            width : 100,
             editoptions : {
                 style : 'width:200px;',
                 maxlength : "50",
@@ -25,7 +25,9 @@ var _colModel = function () {
                 elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
             editrules : {
-                required : true
+                required : true,
+                custom: true,
+                custom_func: checkPeopleName
             }
         },
         /*身份证id*/
@@ -44,24 +46,34 @@ var _colModel = function () {
                 elmprefix : "",
                 elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
+            editrules : {
+                required : true,
+                custom: true,
+                custom_func: checkIDcard
+            }
         },
         /*电话号码*/
         {
             name : 'phoneNumber',
             editable : true,
-            hidden : true,
-            width : 100,
+            hidden : false,
+            width : 200,
             editoptions : {
                 style: 'width:200px;',
                 maxlength : "20",
                 colspan: false
+            },
+            editrules : {
+
+                custom: true,
+                custom_func: checkCallPhone
             }
         },
         /*所属机构*/
         {
             name : 'companyId',
             editable : true,
-            hidden : true,
+            hidden : false,
             width : 200,
             edittype : "combotree",
             editoptions : {
@@ -72,18 +84,18 @@ var _colModel = function () {
                 required : false
             },
             renderer : function(value, cur) {
-                return $.jgrid.getAccessor(cur, 'department_name');
+                return $.jgrid.getAccessor(cur, 'deptName');
             },
         },
-        /*所在机构*/
+        /*所在地区*/
         {
             name : 'areaCode',
             editable : true,
-            hidden : true,
+            hidden : false,
             edittype : "combotree",
             width : 200,
             editoptions : {
-                style : 'width:200px;',
+                style : 'width:200px;height:25px;',
             },
             dataoptions : {
                 url : portalPath + '/system/selectProvinceTreeList.do',
@@ -104,6 +116,7 @@ var _colModel = function () {
         {
             name : 'address',
             editable : true,
+            hidden : true,
             width : 200,
             editoptions : {
                 style : 'width:200px;',
@@ -114,6 +127,7 @@ var _colModel = function () {
         {
             name : 'certNumber',
             editable : true,
+            hidden : true,
             width : 200,
             editoptions : {
                 style : 'width:200px;',
@@ -124,6 +138,7 @@ var _colModel = function () {
         {
             name : 'driverLicenseCode',
             editable : true,
+            hidden : true,
             width : 200,
             editoptions : {
                 style : 'width:200px;',
@@ -250,4 +265,34 @@ function renderBtn(cur) {
 	html.push('"');
 	html.push('><span class="badge badge-info">查看</span></a>');
 	return html.join(' ');
+}
+
+function checkIDcard(value, name, index) {
+    var regu = "\^(\\d{6})(\\d{4})(\\d{2})(\\d{2})(\\d{3})([0-9]|X)\$";
+    var re = new RegExp(regu);
+    if (re.test(value)) {
+        return [true, ""];
+    }
+    else {
+        return [false, '格式错误'];
+    }
+}
+function checkPeopleName(value, name, index) {
+    var regu = "\^[\u4e00-\u9fa5]{2,8}\$";
+    var re = new RegExp(regu);
+    if (re.test(value)) {
+        return [true, ""];
+    }
+    else {
+        return [false, '格式错误,全中文'];
+    }
+}function checkCallPhone(value, name, index) {
+    var regu = "\^1[34578]\\d{9}\$";
+    var re = new RegExp(regu);
+    if (re.test(value)) {
+        return [true, ""];
+    }
+    else {
+        return [false, '格式错误'];
+    }
 }
