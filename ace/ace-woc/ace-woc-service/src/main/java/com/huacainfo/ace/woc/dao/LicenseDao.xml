@@ -28,7 +28,7 @@
     licenseImg2, licenseImg3, licenseImg4, remark, status, createUserId, createUserName, 
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from license
@@ -260,12 +260,17 @@
 
     <!--voMap-->
     <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.woc.vo.LicenseVo">
+        <result column="personName" jdbcType="VARCHAR" property="personName"/>
+        <result column="plateNo" jdbcType="VARCHAR" property="vehicleNo"/>
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName"/>
     </resultMap>
 
     <select id="findList" resultMap="BaseResultMapVo">
         select
-        <include refid="Base_Column_List"/>
-
+            p.name personName, v.plateNo, d.department_name,
+            l.id, l.licenseType, l.licenseNo, l.expiryDate, l.personId, l.vehicleId, l.departmentId, l.licenseImg1, l.
+            licenseImg2, l.licenseImg3, l.licenseImg4, l.remark, l.status, l.createUserId, l.createUserName, l.
+            createDate, l.lastModifyUserId, l.lastModifyUserName, l.lastModifyDate
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -279,10 +284,13 @@
     </select>
 
     <sql id="whereCondition">
-        from license
+        from woc.license l
+        left join woc.person p on l.personId = p.id
+        left join woc.vehicle v on l.vehicleId = v.id
+        left join portal.department d on l.departmentId  = d.department_id
         where 1 = 1
         <if test="condition.licenseNo!=null and condition.licenseNo!=&quot;&quot;">
-            and licenseNo = #{condition.licenseNo,jdbcType=VARCHAR}
+            and l.licenseNo = #{condition.licenseNo,jdbcType=VARCHAR}
         </if>
     </sql>
 
@@ -295,5 +303,19 @@
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
         <include refid="whereCondition"/>
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        	p.name personName, v.plateNo, d.department_name,
+            l.id, l.licenseType, l.licenseNo, l.expiryDate, l.personId, l.vehicleId, l.departmentId, l.licenseImg1, l.
+            licenseImg2, l.licenseImg3, l.licenseImg4, l.remark, l.status, l.createUserId, l.createUserName, l.
+            createDate, l.lastModifyUserId, l.lastModifyUserName, l.lastModifyDate
+        from woc.license l
+        left join woc.person p on l.personId = p.id
+        left join woc.vehicle v on l.vehicleId = v.id
+        left join portal.department d on l.departmentId  = d.department_id
+
+        where l.id = #{id,jdbcType=VARCHAR}
     </select>
 </mapper>

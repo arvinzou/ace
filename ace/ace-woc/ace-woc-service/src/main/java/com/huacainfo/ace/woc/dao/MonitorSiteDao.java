@@ -10,8 +10,9 @@ import com.huacainfo.ace.woc.vo.MonitorSiteQVo;
 import com.huacainfo.ace.woc.vo.MonitorSiteVo;
 
 public interface MonitorSiteDao {
+    MonitorSiteVo selectVoByPrimaryKey(String id);
 
-    MonitorSiteVo selectByPrimaryKey(String id);
+    MonitorSite selectByPrimaryKey(String id);
 
     int deleteByPrimaryKey(String id);
 

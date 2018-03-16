@@ -11,24 +11,6 @@ public class RoadVo extends Road {
 
     private String adminDepName;
 
-    private String roadStatusName;
-
-    public String getRoadStatusName() {
-        switch (getRoadStatus()) {
-            case "1":
-                return "在运营";
-            case "2":
-                return "养护中";
-            case "3":
-                return "已废弃";
-            default:
-                return "";
-        }
-    }
-
-    public void setRoadStatusName(String roadStatusName) {
-        this.roadStatusName = roadStatusName;
-    }
 
     public String getAreaName() {
         return areaName;

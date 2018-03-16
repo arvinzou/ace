@@ -77,11 +77,7 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public MessageResponse insertDevice(Device o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
-        o.setLastModifyDate(DateUtil.getNowDate());
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getDeviceName())) {
             return new MessageResponse(1, "设备名称不能为空！");
         }
@@ -94,17 +90,14 @@ public class DeviceServiceImpl implements DeviceService {
         if (CommonUtils.isBlank(o.getDeviceStatus())) {
             return new MessageResponse(1, "设备状态不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
 
         int temp = this.deviceDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "设备档案名称重复！");
         }
+
+        o.setId(GUIDUtil.getGUID());
+        o.setLastModifyDate(DateUtil.getNowDate());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -143,9 +136,6 @@ public class DeviceServiceImpl implements DeviceService {
         }
         if (CommonUtils.isBlank(o.getDeviceStatus())) {
             return new MessageResponse(1, "设备状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
         }
 
         o.setLastModifyDate(new Date());

@@ -7,27 +7,33 @@ import com.huacainfo.ace.woc.model.License;
 public class LicenseVo extends License {
     private static final long serialVersionUID = 1L;
 
-    private String licenseTypeName;
+    private String personName;
 
-    public String getLicenseTypeName() {
-        //1: '身份证', 2: '驾驶证', 3: '行驶证', 4: '营业证', 5: '交通运输许可证'
-        switch (getLicenseType()) {
-            case "1":
-                return "身份证";
-            case "2":
-                return "驾驶证";
-            case "3":
-                return "行驶证";
-            case "4":
-                return "营业证";
-            case "5":
-                return "交通运输许可证";
-            default:
-                return "未知证件类型";
-        }
+    private String vehicleNo;
+
+    private String departmentName;
+
+    public String getVehicleNo() {
+        return vehicleNo;
     }
 
-    public void setLicenseTypeName(String licenseTypeName) {
-        this.licenseTypeName = licenseTypeName;
+    public void setVehicleNo(String vehicleNo) {
+        this.vehicleNo = vehicleNo;
+    }
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }
