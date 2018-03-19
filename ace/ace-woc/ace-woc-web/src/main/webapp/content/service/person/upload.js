@@ -40,9 +40,9 @@ function init_uploader(config) {
 
     });
 
-    uploader.bind('FilesAdded', function(uploader, file){
+    uploader.bind('FilesAdded', function (uploader, file) {
         // al ert('只能上传1张图片，请注意选择图片！');
-        if(uploader.files.length>1) { // 最多上传1张图
+        if (uploader.files.length > 1) { // 最多上传1张图
             //超过1张部分消除。
             uploader.splice(1, 999);
         }
@@ -152,46 +152,47 @@ function appendUploadBtn(id) {
             });
 
     $("#btn-upload-view" + id).on('click',
-            function (e) {e.preventDefault();
-                var dialog = $("#dialog-message-file").removeClass('hide')
-                    .dialog(
-                        {
-                            modal: true,
-                            width: 500,
-                            title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件</div></div>",
-                            title_html: true,
-                            buttons: [{
-                                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                                "class": "btn btn-info btn-xs",
-                                click: function () {
-                                    $(this).dialog("close");
-                                }
+        function (e) {
+            e.preventDefault();
+            var dialog = $("#dialog-message-file").removeClass('hide')
+                .dialog(
+                    {
+                        modal: true,
+                        width: 500,
+                        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件</div></div>",
+                        title_html: true,
+                        buttons: [{
+                            html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+                            "class": "btn btn-info btn-xs",
+                            click: function () {
+                                $(this).dialog("close");
                             }
+                        }
 
-                            ]
-                        });
-                var fileName = $('input[name=' + id + ']').val();
-                if (!fileName || fileName == '') {
-                    return;
-                }
-                var src = fastdfs_server + fileName;
-                var img = new Image();
-                $(img).attr("src", "");
-                //图片加载加载后执行
-                $(img).load(function () {
-                    //图片默认隐藏
-                    $(this).hide();
-                    //移除小动画
-                    $(".loading").removeClass("loading").append(this);
-                    //使用fadeIn特效
-                    $(this).fadeIn("slow");
-                }).error(function () {
-                    //加载失败时的处理
-                })
-                //最后设置src
-                    .attr("src", src);
+                        ]
+                    });
+            var fileName = $('input[name=' + id + ']').val();
+            if (!fileName || fileName == '') {
+                return;
+            }
+            var src = fastdfs_server + fileName;
+            var img = new Image();
+            $(img).attr("src", "");
+            //图片加载加载后执行
+            $(img).load(function () {
+                //图片默认隐藏
+                $(this).hide();
+                //移除小动画
+                $(".loading").removeClass("loading").append(this);
+                //使用fadeIn特效
+                $(this).fadeIn("slow");
+            }).error(function () {
+                //加载失败时的处理
+            })
+            //最后设置src
+                .attr("src", src);
 
-            });
+        });
 }
 
 function initPhoto(id) {

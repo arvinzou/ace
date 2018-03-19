@@ -29,9 +29,7 @@ jQuery(function($) {
 		});
 	});
 
-	$('#btn-view-add').on(
-			'click',
-			function() {
+	$('#btn-view-add').on('click', function() {
 				jQuery(cfg.grid_selector).jqGrid(
 						'editGridRow',
 						'new',
@@ -45,12 +43,14 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
+                                appendUploadBtn("licenseImg1");
+                                appendUploadBtn("licenseImg2");
+                                appendUploadBtn("licenseImg3");
+                                appendUploadBtn("licenseImg4");
 							}
 						})
 			});
-	$('#btn-view-edit').on(
-			'click',
-			function() {
+	$('#btn-view-edit').on('click', function() {
 				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
 						'selrow');
 				if (!gr) {
@@ -70,6 +70,10 @@ jQuery(function($) {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
+                                appendUploadBtn("licenseImg1");
+                                appendUploadBtn("licenseImg2");
+                                appendUploadBtn("licenseImg3");
+                                appendUploadBtn("licenseImg4");
 							}
 						})
 			});

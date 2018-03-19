@@ -17,7 +17,8 @@ var _colModel = function () {
             width : 100,
             editoptions : {
                 style : 'width:200px;',
-                maxlength : "50",
+                size:'7',
+                maxlength : "8",
                 colspan : false
             },
             formoptions : {
@@ -289,7 +290,7 @@ function checkPeopleName(value, name, index) {
 }function checkCallPhone(value, name, index) {
     var regu = "\^1[34578]\\d{9}\$";
     var re = new RegExp(regu);
-    if (re.test(value)) {
+    if (re.test(value)||!value) {
         return [true, ""];
     }
     else {

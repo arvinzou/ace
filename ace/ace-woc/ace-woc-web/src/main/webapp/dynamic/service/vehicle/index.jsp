@@ -220,6 +220,8 @@
         src="${pageContext.request.contextPath}/content/service/vehicle/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/vehicle/view.js?version=${cfg.version}"></script>
+
+
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

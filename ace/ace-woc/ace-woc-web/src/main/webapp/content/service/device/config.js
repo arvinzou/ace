@@ -10,7 +10,7 @@ cfg.fileName="设备";
 cfg.rowNum= default_page_list[0];
 cfg.dataId= 'id';
 cfg.gridHeight=window.innerHeight-layoutTopHeight;
-cfg.jgridEditWinWidth=550;
+cfg.jgridEditWinWidth=1000;
 cfg.jgridAlertWidth=400;
 cfg.jgrdInfoDialogWidth=500;
 if(cfg.gridHeight<100){
