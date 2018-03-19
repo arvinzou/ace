@@ -6,6 +6,10 @@ import java.util.List;
 
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.woc.dao.DeviceDao;
+import com.huacainfo.ace.woc.dao.MonitorSiteDao;
+import com.huacainfo.ace.woc.model.Device;
+import com.huacainfo.ace.woc.model.MonitorSite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,8 @@ import com.huacainfo.ace.woc.service.MonitorSiteDetailService;
 import com.huacainfo.ace.woc.vo.MonitorSiteDetailVo;
 import com.huacainfo.ace.woc.vo.MonitorSiteDetailQVo;
 
+import javax.annotation.Resource;
+
 @Service("monitorSiteDetailService")
 /**
  * @author: Arvin
@@ -31,10 +37,16 @@ import com.huacainfo.ace.woc.vo.MonitorSiteDetailQVo;
  */
 public class MonitorSiteDetailServiceImpl implements MonitorSiteDetailService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
     @Autowired
     private MonitorSiteDetailDao monitorSiteDetailDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Resource
+    private MonitorSiteDao monitorSiteDao;
+    @Resource
+    private DeviceDao deviceDao;
 
     /**
      * @throws
@@ -77,25 +89,21 @@ public class MonitorSiteDetailServiceImpl implements MonitorSiteDetailService {
     @Override
     public MessageResponse insertMonitorSiteDetail(MonitorSiteDetail o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
-        o.setLastModifyDate(DateUtil.getNowDate());
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getMonitorSiteId())) {
             return new MessageResponse(1, "监控点ID不能为空！");
         }
         if (CommonUtils.isBlank(o.getDeviceId())) {
             return new MessageResponse(1, "设备ID不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
 
-        int temp = this.monitorSiteDetailDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "监控点明细档案名称重复！");
-        }
+//        int temp = this.monitorSiteDetailDao.isExit(o);
+//        if (temp > 0) {
+//            return new MessageResponse(1, "监控点明细档案名称重复！");
+//        }
+
+        o.setId(GUIDUtil.getGUID());
+        o.setLastModifyDate(DateUtil.getNowDate());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -156,7 +164,7 @@ public class MonitorSiteDetailServiceImpl implements MonitorSiteDetailService {
     @Override
     public SingleResult<MonitorSiteDetailVo> selectMonitorSiteDetailByPrimaryKey(String id) throws Exception {
         SingleResult<MonitorSiteDetailVo> rst = new SingleResult<MonitorSiteDetailVo>();
-        rst.setValue(this.monitorSiteDetailDao.selectByPrimaryKey(id));
+        rst.setValue(this.monitorSiteDetailDao.selectVoByPrimaryKey(id));
         return rst;
     }
 
@@ -178,5 +186,77 @@ public class MonitorSiteDetailServiceImpl implements MonitorSiteDetailService {
         this.dataBaseLogService.log("删除监控点明细档案", "监控点明细档案", String.valueOf(id),
                 String.valueOf(id), "监控点明细档案", userProp);
         return new MessageResponse(0, "监控点明细档案删除完成！");
+    }
+
+    /**
+     * 建立设备与监控点之前的关系
+     */
+    @Override
+    public MessageResponse bindMonitorSiteDevice(MonitorSiteDetailVo[] dataList, UserProp curUserProp) throws Exception {
+        MonitorSite monitorSite = null;
+        Device device;
+        MessageResponse response;
+        for (MonitorSiteDetailVo vo : dataList) {
+            if (null == monitorSite) {
+                monitorSite = monitorSiteDao.selectByPrimaryKey(vo.getMonitorSiteId());
+                if (null == monitorSite) {
+                    return new MessageResponse(1, "监控点档案信息有误！");
+                }
+            }
+            device = deviceDao.selectByPrimaryKey(vo.getDeviceId());
+            if (null == device) {
+                return new MessageResponse(1, "设备信息有误！[" + vo.getDeviceId() + "]");
+            }
+            //添加设备
+            if (1 == vo.getModifyType()) {
+                response = insertMonitorSiteDevice(vo, device, curUserProp);
+                //添加失败返回
+                if (response.getStatus() == 1) {
+                    return response;
+                }
+            }
+            //移除设备
+            if (2 == vo.getModifyType()) {
+                response = deleteMonitorSiteDevice(vo, device, curUserProp);
+                //添加失败返回
+                if (response.getStatus() == 1) {
+                    return response;
+                }
+            }
+        }
+
+        return new MessageResponse(0, "监控点明细设备关系添加完成！");
+    }
+
+    private MessageResponse deleteMonitorSiteDevice(MonitorSiteDetailVo vo, Device device,
+                                                    UserProp curUserProp) throws Exception {
+        MonitorSiteDetail detail = monitorSiteDetailDao.selectByPrimaryKey(vo.getId());
+        if (null == detail) {
+            return new MessageResponse(1, "监控点明细记录有误！");
+        }
+        //使设备处于待上线，可供其他监控点使用
+        device.setDeviceStatus("1");//1-待上线,2-已上线,3-已下线
+        device.setLastModifyUserId(curUserProp.getUserId());
+        device.setLastModifyUserName(curUserProp.getName());
+        device.setLastModifyDate(DateUtil.getNowDate());
+        deviceDao.updateByPrimaryKeySelective(device);
+
+        return deleteMonitorSiteDetailByMonitorSiteDetailId(detail.getId(), curUserProp);
+    }
+
+    private MessageResponse insertMonitorSiteDevice(MonitorSiteDetailVo vo, Device device,
+                                                    UserProp curUserProp) throws Exception {
+        int temp = this.monitorSiteDetailDao.isExit(vo);
+        if (temp > 0) {
+            return new MessageResponse(1, "[" + device.getDeviceName() + "]该设备存在其他绑定关系！");
+        }
+        //使设备上线
+        device.setDeviceStatus("2");//1-待上线,2-已上线,3-已下线
+        device.setLastModifyUserId(curUserProp.getUserId());
+        device.setLastModifyUserName(curUserProp.getName());
+        device.setLastModifyDate(DateUtil.getNowDate());
+        deviceDao.updateByPrimaryKeySelective(device);
+
+        return insertMonitorSiteDetail(vo, curUserProp);
     }
 }

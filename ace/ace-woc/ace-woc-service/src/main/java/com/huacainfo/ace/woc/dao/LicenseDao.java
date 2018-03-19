@@ -2,7 +2,6 @@ package com.huacainfo.ace.woc.dao;
 
 import java.util.List;
 
-import com.huacainfo.ace.woc.model.Road;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.woc.model.License;
 import com.huacainfo.ace.woc.vo.LicenseQVo;

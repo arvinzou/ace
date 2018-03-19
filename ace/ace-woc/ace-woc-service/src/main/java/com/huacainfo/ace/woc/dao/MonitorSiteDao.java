@@ -2,8 +2,6 @@ package com.huacainfo.ace.woc.dao;
 
 import java.util.List;
 
-import com.huacainfo.ace.woc.model.Device;
-import com.huacainfo.ace.woc.vo.DeviceVo;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.woc.model.MonitorSite;
 import com.huacainfo.ace.woc.vo.MonitorSiteQVo;

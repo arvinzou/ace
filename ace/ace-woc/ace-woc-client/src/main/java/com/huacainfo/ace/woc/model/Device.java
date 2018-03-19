@@ -16,6 +16,9 @@ public class Device implements Serializable {
 
     private String deviceType;
 
+    /**
+     * 1-待上线,2-已上线,3-已下线
+     */
     private String deviceStatus;
 
     private Date onlineDate;
