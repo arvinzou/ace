@@ -192,56 +192,48 @@ public class MonitorSiteDetailServiceImpl implements MonitorSiteDetailService {
      * 建立设备与监控点之前的关系
      */
     @Override
-    public MessageResponse bindMonitorSiteDevice(MonitorSiteDetailVo[] dataList, UserProp curUserProp) throws Exception {
-        MonitorSite monitorSite = null;
+    public MessageResponse bindMonitorSiteDevice(String monitorSiteId, String deviceIds,
+                                                 UserProp curUserProp) throws Exception {
+        MonitorSite monitorSite = monitorSiteDao.selectByPrimaryKey(monitorSiteId);
+        if (null == monitorSite) {
+            return new MessageResponse(1, "监控点档案信息有误！");
+        }
         Device device;
+
+        //清楚此前设备绑定关系
+        List<MonitorSiteDetail> clearList = monitorSiteDetailDao.findAllDevice(monitorSiteId);
+        for (MonitorSiteDetail item : clearList) {
+            device = deviceDao.selectByPrimaryKey(item.getDeviceId());
+            //使设备处于待上线，可供其他监控点使用
+            device.setDeviceStatus("1");//1-待上线,2-已上线,3-已下线
+            device.setLastModifyUserId(curUserProp.getUserId());
+            device.setLastModifyUserName(curUserProp.getName());
+            device.setLastModifyDate(DateUtil.getNowDate());
+            deviceDao.updateByPrimaryKeySelective(device);
+            //
+            monitorSiteDetailDao.deleteByPrimaryKey(item.getId());
+        }
+        //新增新设备关系
+        MonitorSiteDetailVo vo;
         MessageResponse response;
-        for (MonitorSiteDetailVo vo : dataList) {
-            if (null == monitorSite) {
-                monitorSite = monitorSiteDao.selectByPrimaryKey(vo.getMonitorSiteId());
-                if (null == monitorSite) {
-                    return new MessageResponse(1, "监控点档案信息有误！");
-                }
-            }
-            device = deviceDao.selectByPrimaryKey(vo.getDeviceId());
+        String[] deviceIdArray = deviceIds.split(",");
+        for (String deviceId : deviceIdArray) {
+            device = deviceDao.selectByPrimaryKey(deviceId);
             if (null == device) {
-                return new MessageResponse(1, "设备信息有误！[" + vo.getDeviceId() + "]");
+                return new MessageResponse(1, "设备信息有误！[" + deviceId + "]");
             }
-            //添加设备
-            if (1 == vo.getModifyType()) {
-                response = insertMonitorSiteDevice(vo, device, curUserProp);
-                //添加失败返回
-                if (response.getStatus() == 1) {
-                    return response;
-                }
-            }
-            //移除设备
-            if (2 == vo.getModifyType()) {
-                response = deleteMonitorSiteDevice(vo, device, curUserProp);
-                //添加失败返回
-                if (response.getStatus() == 1) {
-                    return response;
-                }
+            vo = new MonitorSiteDetailVo();
+            vo.setMonitorSiteId(monitorSiteId);
+            vo.setDeviceId(deviceId);
+
+            response = insertMonitorSiteDevice(vo, device, curUserProp);
+            //添加失败返回
+            if (response.getStatus() == 1) {
+                return response;
             }
         }
 
         return new MessageResponse(0, "监控点明细设备关系添加完成！");
-    }
-
-    private MessageResponse deleteMonitorSiteDevice(MonitorSiteDetailVo vo, Device device,
-                                                    UserProp curUserProp) throws Exception {
-        MonitorSiteDetail detail = monitorSiteDetailDao.selectByPrimaryKey(vo.getId());
-        if (null == detail) {
-            return new MessageResponse(1, "监控点明细记录有误！");
-        }
-        //使设备处于待上线，可供其他监控点使用
-        device.setDeviceStatus("1");//1-待上线,2-已上线,3-已下线
-        device.setLastModifyUserId(curUserProp.getUserId());
-        device.setLastModifyUserName(curUserProp.getName());
-        device.setLastModifyDate(DateUtil.getNowDate());
-        deviceDao.updateByPrimaryKeySelective(device);
-
-        return deleteMonitorSiteDetailByMonitorSiteDetailId(detail.getId(), curUserProp);
     }
 
     private MessageResponse insertMonitorSiteDevice(MonitorSiteDetailVo vo, Device device,

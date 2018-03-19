@@ -1,5 +1,6 @@
 package com.huacainfo.ace.woc.web.controller;
 
+import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.woc.model.MonitorSiteDetail;
@@ -159,13 +160,14 @@ public class MonitorSiteController extends WocBaseController {
      */
     @RequestMapping(value = "/bindMonitorSiteDevice")
     @ResponseBody
-    public MessageResponse bindMonitorSiteDevice(MonitorSiteDetailVo[] dataList) throws Exception {
+    public MessageResponse bindMonitorSiteDevice(String monitorSiteId, String deviceIds) throws Exception {
 
-        if (null == dataList || dataList.length == 0) {
+        if (CommonUtils.isBlank(monitorSiteId)
+                || CommonUtils.isBlank(deviceIds)) {
             return new MessageResponse(1, "传入数据不能为空！");
         }
 
-        return monitorSiteDetailService.bindMonitorSiteDevice(dataList, this.getCurUserProp());
+        return monitorSiteDetailService.bindMonitorSiteDevice(monitorSiteId, deviceIds, this.getCurUserProp());
     }
 
 

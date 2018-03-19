@@ -83,7 +83,7 @@ public interface MonitorSiteDetailService {
     /**
      * 建立设备与监控点之前的关系
      */
-    MessageResponse bindMonitorSiteDevice(MonitorSiteDetailVo[] dataList,
+    MessageResponse bindMonitorSiteDevice(String monitorSiteId, String deviceIds,
                                           UserProp curUserProp) throws Exception;
 
 }

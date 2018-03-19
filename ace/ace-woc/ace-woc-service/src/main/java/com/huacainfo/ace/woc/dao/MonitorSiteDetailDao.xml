@@ -200,4 +200,11 @@
     from monitor_site_detail
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="findAllDevice" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from monitor_site_detail
+    where monitorSiteId = #{monitorSiteId,jdbcType=VARCHAR}
+  </select>
 </mapper>

@@ -32,4 +32,5 @@ public interface MonitorSiteDetailDao {
 
     int isExit(MonitorSiteDetail record);
 
+    List<MonitorSiteDetail> findAllDevice(String monitorSiteId);
 }
