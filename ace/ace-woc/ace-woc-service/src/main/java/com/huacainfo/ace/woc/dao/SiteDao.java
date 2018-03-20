@@ -9,6 +9,7 @@ import com.huacainfo.ace.woc.vo.SiteVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SiteDao {
     int deleteByPrimaryKey(String id);
@@ -32,4 +33,6 @@ public interface SiteDao {
     int findCount(@Param("condition") SiteQVo condition);
 
     int isExit(Site record);
+    List<Map<String, String>> selectSite(
+            @Param("params") Map<String, Object> params);
 }

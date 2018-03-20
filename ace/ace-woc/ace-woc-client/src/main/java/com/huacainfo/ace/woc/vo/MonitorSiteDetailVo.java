@@ -9,6 +9,26 @@ public class MonitorSiteDetailVo extends MonitorSiteDetail {
 
     private String deviceName;
 
+    private  String deviceNo;
+
+    private  String deviceType;
+
+    public String getDeviceNo() {
+        return deviceNo;
+    }
+
+    public void setDeviceNo(String deviceNo) {
+        this.deviceNo = deviceNo;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
     public String getDeviceName() {
         return deviceName;
     }

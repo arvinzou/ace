@@ -294,6 +294,9 @@
     <if test="condition.id!=null and condition.id!=&quot;&quot;">
       and id = #{condition.id,jdbcType=VARCHAR}
     </if>
+    <if test="condition.deviceStatus!=null and condition.deviceStatus!=&quot;&quot;">
+      and deviceStatus = #{condition.deviceStatus,jdbcType=CHAR}
+    </if>
   </sql>
 
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.woc.model.Device">

@@ -1,9 +1,8 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,5 +152,14 @@ public class SiteServiceImpl implements SiteService {
 		this.dataBaseLogService.log("删除卡点档案", "卡点档案", String.valueOf(id),
 				String.valueOf(id), "卡点档案", userProp);
 		return new MessageResponse(0, "卡点档案删除完成！");
+	}
+
+	@Override
+	public Map<String, Object> selectSite(Map<String, Object> params) throws Exception{
+		Map<String, Object> rst = new HashMap<String, Object>();
+		List<Map<String, String>> list = this.siteDao.selectSite(params);
+		rst.put("total", list.size());
+		rst.put("rows", list);
+		return rst;
 	}
 }

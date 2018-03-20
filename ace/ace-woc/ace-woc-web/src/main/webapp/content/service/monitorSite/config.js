@@ -8,6 +8,8 @@ cfg.grid_selector= "#grid-table";
 cfg.pager_selector= "#grid-pager";
 //cfg.caption= "参数";
 cfg.rowNum= default_page_list[0];
+console.log('***************************************************************');
+console.log(default_page_list);
 cfg.dataId= 'id';
 cfg.gridHeight=window.innerHeight-layoutTopHeight;
 cfg.jgridEditWinWidth=1000;

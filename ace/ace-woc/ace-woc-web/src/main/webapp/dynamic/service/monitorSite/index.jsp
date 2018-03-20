@@ -54,6 +54,10 @@
                             authority="${pageContext.request.contextPath}/monitorSite/updateMonitorSite">
                         <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
+                    <button class="btn btn-purple" id="btn-view-da"
+                            authority="${pageContext.request.contextPath}/monitorSite/insertMonitorSiteDetail">
+                        <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
+                    </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/monitorSite/deleteMonitorSiteByMonitorSiteId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
@@ -69,16 +73,49 @@
     <div id="grid-pager"></div>
 
 
+
 </div>
+
 <div id="dialog-message" class="hide">
-    <div id="uploader">
-        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-    </div>
+    <table >
+        <tr>
+            <td align="center" valign="top">
+                <table id="alldevice-grid-table"></table>
+                <div id="alldevice-grid-pager"></div>
+            </td>
+            <td align="center" valign="middle">
+                <button class="btn btn-info" id="btn-view-da-add"
+                        authority="${pageContext.request.contextPath}/monitorSite/insertMonitorSiteDetail">
+                    分配<i
+                        class="ace-icon fa   fa-angle-double-right  align-middle bigger-125 icon-on-right"></i>
+                </button>
+                <div style="height:3px"></div>
+                <button class="btn btn-info" id="btn-view-da-del"
+                        authority="${pageContext.request.contextPath}/monitorSite/insertMonitorSiteDetail">
+                    移除<i
+                        class="ace-icon fa  fa-angle-double-left  align-middle bigger-125 icon-on-right"></i>
+                </button>
+            </td>
+            <td align="center" valign="top">
+                <table id="mydevice-grid-table"></table>
+                <div id="mydevice-grid-pager"></div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="dialog-confirm" class="hide">
+    <div class="alert alert-info bigger-110">
+        重新分配角色后，分配此角色的用户将获取新的权限.</div>
+
+    <div class="space-6"></div>
+
+    <p class="bigger-110 bolder center grey">
+        <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i> 您确定吗?
+    </p>
 </div>
 <div id="dialog-message-file" class="hide">
     <div id="load" class="loading"></div>
 </div>
-
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
@@ -139,6 +176,9 @@
             <span id="status"></span>
         </div>
     </div>
+    <h5 class="header-title">设备信息</h5>
+    <table id="onlinedevice-grid-table"></table>
+    <div id="onlinedevice-grid-pager"></div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem">
@@ -175,6 +215,7 @@
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
+<script src="${pageContext.request.contextPath}/content/common/js/jquery.colorbox.js"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/monitorSite/config.js?version=${cfg.version}"></script>
 <script

@@ -341,4 +341,17 @@
         where
         siteName=#{siteName}
     </select>
+
+    <select id="selectSite" resultType="map">
+        select t.id,concat('卡点名称：',t.siteName,'  卡点编号：',t.siteCode) as name
+        from site t
+        where 0=0
+        <if test='params.q !=null and params.q!=""'>
+            and
+            t.id=#{params.q} or t.siteName like concat('%',#{params.q},'%') or t.siteCode like
+            concat('%',#{params.q},'%')
+        </if>
+        order by t.createDate
+        limit 0,20
+    </select>
 </mapper>

@@ -162,8 +162,7 @@ public class MonitorSiteController extends WocBaseController {
     @ResponseBody
     public MessageResponse bindMonitorSiteDevice(String monitorSiteId, String deviceIds) throws Exception {
 
-        if (CommonUtils.isBlank(monitorSiteId)
-                || CommonUtils.isBlank(deviceIds)) {
+        if (CommonUtils.isBlank(monitorSiteId)) {
             return new MessageResponse(1, "传入数据不能为空！");
         }
 
@@ -193,7 +192,6 @@ public class MonitorSiteController extends WocBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 }

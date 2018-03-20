@@ -213,6 +213,9 @@ public class MonitorSiteDetailServiceImpl implements MonitorSiteDetailService {
             //
             monitorSiteDetailDao.deleteByPrimaryKey(item.getId());
         }
+        if (CommonUtils.isBlank(deviceIds)) {
+            return new MessageResponse(0, "监控点明细设备关系添加完成！");
+        }
         //新增新设备关系
         MonitorSiteDetailVo vo;
         MessageResponse response;

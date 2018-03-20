@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.woc.model.Site;
 import com.huacainfo.ace.woc.vo.SiteVo;
 import com.huacainfo.ace.woc.vo.SiteQVo;
+
+import java.util.Map;
+
 /**
  * @author: 王恩
  * @version: 2018-03-09
@@ -81,5 +84,6 @@ public interface SiteService {
 	 */
 	public abstract MessageResponse deleteSiteBySiteId(String id,UserProp userProp) throws Exception;
 
-	
+	public Map<String, Object> selectSite(Map<String, Object> params) throws Exception;
+
 }
