@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ace-autocode" />
+        <module name="ace-common" />
+        <module name="ace-common-dao" />
+        <module name="ace-common-web" />
+        <module name="ace-live-client" />
+        <module name="ace-live-service" />
+        <module name="ace-live-web" />
+        <module name="ace-portal-client" />
+        <module name="ace-portal-service" />
+        <module name="ace-portal-web" />
+        <module name="ace-woc-client" />
+        <module name="ace-woc-rest" />
+        <module name="ace-woc-service" />
+        <module name="ace-woc-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ace" target="1.7" />
+      <module name="ace-autocode" target="1.7" />
+      <module name="ace-common" target="1.7" />
+      <module name="ace-common-dao" target="1.7" />
+      <module name="ace-common-web" target="1.7" />
+      <module name="ace-gesp" target="1.7" />
+      <module name="ace-gesp-client" target="1.7" />
+      <module name="ace-gesp-service" target="1.7" />
+      <module name="ace-gesp-web" target="1.7" />
+      <module name="ace-iop" target="1.7" />
+      <module name="ace-iop-client" target="1.7" />
+      <module name="ace-iop-rest" target="1.7" />
+      <module name="ace-iop-service" target="1.7" />
+      <module name="ace-iop-web" target="1.7" />
+      <module name="ace-jave" target="1.7" />
+      <module name="ace-kernel" target="1.7" />
+      <module name="ace-kernel-backend" target="1.7" />
+      <module name="ace-kernel-client" target="1.7" />
+      <module name="ace-kernel-service" target="1.7" />
+      <module name="ace-kernel-web" target="1.7" />
+      <module name="ace-live" target="1.7" />
+      <module name="ace-live-client" target="1.7" />
+      <module name="ace-live-service" target="1.7" />
+      <module name="ace-live-web" target="1.7" />
+      <module name="ace-luohua" target="1.7" />
+      <module name="ace-luohua-client" target="1.7" />
+      <module name="ace-luohua-service" target="1.7" />
+      <module name="ace-luohua-web" target="1.7" />
+      <module name="ace-operana" target="1.7" />
+      <module name="ace-operana-client" target="1.7" />
+      <module name="ace-operana-service" target="1.7" />
+      <module name="ace-operana-web" target="1.7" />
+      <module name="ace-portal" target="1.7" />
+      <module name="ace-portal-client" target="1.7" />
+      <module name="ace-portal-service" target="1.7" />
+      <module name="ace-portal-web" target="1.7" />
+      <module name="ace-rvc" target="1.7" />
+      <module name="ace-rvc-client" target="1.7" />
+      <module name="ace-rvc-service" target="1.7" />
+      <module name="ace-rvc-web" target="1.7" />
+      <module name="ace-uf" target="1.7" />
+      <module name="ace-uf-client" target="1.7" />
+      <module name="ace-uf-service" target="1.7" />
+      <module name="ace-uf-web" target="1.7" />
+      <module name="ace-weuiluohua" target="1.7" />
+      <module name="ace-weuiluohua-client" target="1.7" />
+      <module name="ace-weuiluohua-service" target="1.7" />
+      <module name="ace-weuiluohua-web" target="1.7" />
+      <module name="ace-woc" target="1.7" />
+      <module name="ace-woc-client" target="1.7" />
+      <module name="ace-woc-rest" target="1.7" />
+      <module name="ace-woc-service" target="1.7" />
+      <module name="ace-woc-web" target="1.7" />
+      <module name="ace-workflow" target="1.7" />
+      <module name="ace-workflow-client" target="1.7" />
+      <module name="ace-workflow-service" target="1.7" />
+      <module name="ace-workflow-web" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

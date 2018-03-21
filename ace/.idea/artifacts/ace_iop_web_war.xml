@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ace-iop-web:war">
+    <output-path>$PROJECT_DIR$/ace-iop/ace-iop-web/target</output-path>
+    <root id="archive" name="ace-iop-web-1.0.war">
+      <element id="artifact" artifact-name="ace-iop-web:war exploded" />
+    </root>
+  </artifact>
+</component>

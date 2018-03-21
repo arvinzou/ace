@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ace-gesp-web:war">
+    <output-path>$PROJECT_DIR$/ace-gesp/ace-gesp-web/target</output-path>
+    <root id="archive" name="ace-gesp-web-1.0.war">
+      <element id="artifact" artifact-name="ace-gesp-web:war exploded" />
+    </root>
+  </artifact>
+</component>

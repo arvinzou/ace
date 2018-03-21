@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-iop/ace-iop-rest" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-iop/ace-iop-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-live/ace-live-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-luohua/ace-luohua-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-operana/ace-operana-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-portal/ace-portal-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-rvc/ace-rvc-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-uf/ace-uf-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-woc/ace-woc-rest" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-woc/ace-woc-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/ace-live/ace-live-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-live/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-live/ace-live-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-woc/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-woc/ace-woc-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-woc/ace-woc-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-woc/ace-woc-rest/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-woc/ace-woc-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-common/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-common-dao/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-common-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-autocode/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-gesp/ace-gesp-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-gesp/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-iop/ace-iop-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-iop/ace-iop-rest/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-iop/ace-iop-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-iop/ace-iop-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-iop/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-jave/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-kernel/ace-kernel-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-kernel/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-luohua/ace-luohua-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-luohua/ace-luohua-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-luohua/ace-luohua-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-luohua/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-operana/ace-operana-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-operana/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-rvc/ace-rvc-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-rvc/ace-rvc-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-rvc/ace-rvc-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-rvc/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/ace-uf-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-uf/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-weuiluohua/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-workflow/ace-workflow-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-workflow/ace-workflow-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-workflow/ace-workflow-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-workflow/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
