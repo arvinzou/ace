@@ -127,7 +127,6 @@ var _colModel = function () {
             width: 100,
             editoptions: {
                 style: 'width:200px;',
-                size: "20",
                 maxlength: "50"
             },
         },
@@ -139,25 +138,24 @@ var _colModel = function () {
             width: 100,
             editoptions: {
                 style: 'width:200px;',
-                size: "20",
                 maxlength: "50"
             },
         },
         /*归属管辖单位*/
         {
             name: 'buildDeptId',
-            editable : true,
-            hidden : false,
-            width : 200,
-            edittype : "combotree",
-            editoptions : {
-                style : 'width:200px;height:25px;'
+            editable: true,
+            hidden: false,
+            width: 200,
+            edittype: "combotree",
+            editoptions: {
+                style: 'width:200px;height:25px;'
             },
-            dataoptions : {
-                url : portalPath + '/department/selectDepartmentTreeList.do',
-                required : false
+            dataoptions: {
+                url: portalPath + '/department/selectDepartmentTreeList.do',
+                required: false
             },
-            renderer : function(value, cur) {
+            renderer: function (value, cur) {
                 return $.jgrid.getAccessor(cur, 'deptName');
             },
         },
@@ -226,42 +224,42 @@ var _colModel = function () {
         /*归属管辖单位*/
         {
             name: 'adminDepId',
-            editable : true,
-            hidden : false,
-            width : 200,
-            edittype : "combotree",
-            editoptions : {
-                style : 'width:200px;height:25px;'
+            editable: true,
+            hidden: false,
+            width: 200,
+            edittype: "combotree",
+            editoptions: {
+                style: 'width:200px;height:25px;'
             },
-            dataoptions : {
-                url : portalPath + '/department/selectDepartmentTreeList.do',
-                required : false
+            dataoptions: {
+                url: portalPath + '/department/selectDepartmentTreeList.do',
+                required: false
             },
-            renderer : function(value, cur) {
+            renderer: function (value, cur) {
                 return $.jgrid.getAccessor(cur, 'deptName');
             },
         },
         /*卡点运行状态*/
         {
             name: 'sitStatus',
-            editable : true,
-            edittype : "select",
-            renderer : function(value) {
-                return rsd(value,"114");
+            editable: true,
+            edittype: "select",
+            renderer: function (value) {
+                return rsd(value, "114");
             },
-            formoptions : {
-                style : 'width:200px;height:25px;',
-                elmprefix : "",
-                elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>",
+            formoptions: {
+                style: 'width:200px;height:25px;',
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>",
 
             },
-            editoptions : {
-                value : odparse("114"),
+            editoptions: {
+                value: odparse("114"),
                 colspan: true,
             },
-            width : 80,
-            editrules : {
-                required : true
+            width: 80,
+            editrules: {
+                required: true
             },
         },
         /*备注*/
