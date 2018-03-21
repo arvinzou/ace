@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.LiveDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.Live">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
+        <result column="endTime" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="startTime" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="nop" jdbcType="BIGINT" property="nop"/>
+        <result column="pop" jdbcType="BIGINT" property="pop"/>
+        <result column="addr" jdbcType="VARCHAR" property="addr"/>
+        <result column="rtmpUrl" jdbcType="VARCHAR" property="rtmpUrl"/>
+        <result column="mp4Url" jdbcType="VARCHAR" property="mp4Url"/>
+        <result column="imageSrc" jdbcType="VARCHAR" property="imageSrc"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.jxb.model.Live">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.jxb.vo.LiveVo">
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, areaCode, name, category, deptId,endTime,startTime, remark, nop, pop, addr, rtmpUrl,
+        mp4Url, imageSrc, latitude, longitude, status, createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from jxb
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from jxb
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Live">
+        insert into jxb (id, areaCode, name,
+        category, deptId, endTime,startTime,
+        remark, nop, pop, addr,
+        rtmpUrl, mp4Url, imageSrc,
+        latitude, longitude, status,
+        createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate,
+        content)
+        values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{category,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP},
+        #{startTime,jdbcType=TIMESTAMP},
+        #{remark,jdbcType=VARCHAR}, #{nop,jdbcType=BIGINT}, #{pop,jdbcType=BIGINT}, #{addr,jdbcType=VARCHAR},
+        #{rtmpUrl,jdbcType=VARCHAR}, #{mp4Url,jdbcType=VARCHAR}, #{imageSrc,jdbcType=VARCHAR},
+        #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{status,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{content,jdbcType=LONGVARCHAR})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Live">
+        update jxb
+        set areaCode = #{areaCode,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        category = #{category,jdbcType=VARCHAR},
+        endTime = #{endTime,jdbcType=TIMESTAMP},
+        startTime = #{startTime,jdbcType=TIMESTAMP},
+        remark = #{remark,jdbcType=VARCHAR},
+        nop = #{nop,jdbcType=BIGINT},
+        pop = #{pop,jdbcType=BIGINT},
+        addr = #{addr,jdbcType=VARCHAR},
+        rtmpUrl = #{rtmpUrl,jdbcType=VARCHAR},
+        mp4Url = #{mp4Url,jdbcType=VARCHAR},
+        imageSrc = #{imageSrc,jdbcType=VARCHAR},
+        latitude = #{latitude,jdbcType=DECIMAL},
+        longitude = #{longitude,jdbcType=DECIMAL},
+        status = #{status,jdbcType=CHAR},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+        content = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.Live">
+        update jxb
+        <set>
+            <if test="areaCode != null">
+                areaCode = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null">
+                endTime = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="startTime != null">
+                startTime = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="nop != null">
+                nop = #{nop,jdbcType=BIGINT},
+            </if>
+            <if test="pop != null">
+                pop = #{pop,jdbcType=BIGINT},
+            </if>
+            <if test="addr != null">
+                addr = #{addr,jdbcType=VARCHAR},
+            </if>
+            <if test="rtmpUrl != null">
+                rtmpUrl = #{rtmpUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="mp4Url != null">
+                mp4Url = #{mp4Url,jdbcType=VARCHAR},
+            </if>
+            <if test="imageSrc != null">
+                imageSrc = #{imageSrc,jdbcType=VARCHAR},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <sql id="whereCondition">
+        from jxb where deptId=#{condition.deptId}
+        <if test='condition.name!=null and condition.name!=""'>
+            and name like
+            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and category =#{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and status =#{condition.status,jdbcType=CHAR}
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMapVo">
+
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY startTime desc
+            </otherwise>
+        </choose>
+
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+    </select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        jxb where
+        name=#{name}
+    </select>
+    <select id="getLiveList" resultType="map">
+        <![CDATA[
+
+        select
+        2 commentApproveType,
+        concat(#{fastdfs_server},imageSrc) cover,
+        endTime,
+        0 hasPassword,
+        id,
+        nop numOfPartake,
+        (case  when nop<10000 then concat(nop,"") else concat(round(nop/10000,2),"万") end) numOfPartakeString,
+        0 partakeState,
+        remark,
+        1 reportApproveType,
+        startTime,
+        status state,
+        name topic,
+        category type,
+        null watermarkConfig from jxb where deptId=#{companyId}
+        order by status, startTime desc
+        limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+
+        ]]>
+    </select>
+    <select id="getLive" resultType="map">
+        <![CDATA[
+
+        select
+        null allowApprove,
+        null allowClose,
+        null allowDelete,
+        null allowEdit,
+        date_format(startTime,'%Y/%m/%d %H:%i:%S') startTime,
+        date_format(endTime,'%Y/%m/%d %H:%i:%S') endTime,
+        1 allowShare,
+        null appShortUrl,
+        addr city,
+        0 commentApproveType,
+        concat(#{fastdfs_server},imageSrc) cover,
+        endTime,
+        id,
+        pop likeNums,
+        nop numOfPartake,
+        (case  when nop<10000 then concat(nop,"") else concat(round(nop/10000,2),"万") end) numOfPartakeString,
+        0 partakeState,
+        0 playStreamState,
+        ifnull(mp4Url,rtmpUrl) playStreamUrl,
+        0 position,
+        remark,
+        content,
+        0 showPlayView,
+        0 showWater,
+        status state,
+        name topic,
+        category type,
+        null watermarkConfig
+        from jxb where id=#{id}
+
+        ]]>
+    </select>
+
+    <update id="updateNopPop">
+        update jxb
+        set
+        nop = #{nop,jdbcType=BIGINT},
+        pop = #{pop,jdbcType=BIGINT}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <resultMap id="mapRpt" type="com.huacainfo.ace.jxb.model.Rpt">
+        <id property="reportId" column="reportId"/>
+        <result property="approvedTime" column="approvedTime"/>
+        <result property="content" column="content"/>
+        <result property="createDate" column="createDate"/>
+        <result property="duration" column="duration"/>
+        <result property="gmtCreate" column="gmtCreate"/>
+        <result property="pictures" column="pictures"/>
+        <result property="reporter" column="reporter"/>
+        <result property="thumbnail" column="thumbnail"/>
+        <result property="type" column="type"/>
+        <result property="likeNum" column="likeNum"/>
+        <result property="userType" column="userType"/>
+        <result property="watermarkConfig" column="watermarkConfig"/>
+        <result property="video" column="video"/>
+        <result property="audio" column="audio"/>
+        <association property="rpt" column="uid" javaType="com.huacainfo.ace.jxb.model.Reporter">
+            <id property="openid" column="openid"/>
+            <result property="headimgurl" column="headimgurl"/>
+            <result property="nickname" column="nickname"/>
+        </association>
+        <collection property="imageList" ofType="com.huacainfo.ace.jxb.model.Img">
+            <id property="id" column="imgId"/>
+            <result property="h" column="h"/>
+            <result property="w" column="w"/>
+            <result property="url" column="url"/>
+            <result property="watermarkConfig" column="watermarkConfig"/>
+        </collection>
+        <collection property="comments" ofType="com.huacainfo.ace.jxb.model.Comments">
+            <id property="id" column="cmtId"/>
+            <result property="content" column="c_content"/>
+            <result property="reviewer" column="c_reviewer"/>
+            <result property="nickname" column="c_nickname"/>
+            <result property="headimgurl" column="c_headimgurl"/>
+            <result property="openid" column="c_openid"/>
+            <result property="createTime" column="c_createTime"/>
+        </collection>
+    </resultMap>
+    <select id="getLiveRptList" resultMap="mapRpt">
+        select t.id reportId, t.rid, t.uid, t.sort, t.mediaType type, t.status,
+        t.likeNum,t.content,t.mediaContent video,t.createTime approvedTime,0 duration,t.createTime gmtCreate,
+        date_format(t.createTime,'%H:%i') createDate,
+        '' pictures,
+        '' liker,
+        a.nickname reporter,
+        '' thumbnail,
+        ifnull(concat(#{fastdfs_server},f.logo),a.headimgurl) headimgurl,
+        ifnull(f.short_name,a.nickname) nickname,
+        a.openid,
+        b.id imgId,
+        b.url,
+        b.w,
+        b.h,
+        b.watermarkConfig,
+        c.id cmtId,
+        c.content c_content,
+        d.nickname c_reviewer,
+        d.headimgurl c_headimgurl,
+        d.nickname c_nickname,
+        d.openid c_openid,
+        date_format(c.createTime,'%H:%i:%s') c_createTime
+
+        from jxb_rpt t
+        left join portal.userinfo a on t.uid=a.openid
+        left join jxb_img b on t.id=b.rptId
+        left join jxb_cmt c on t.id=c.rptId
+        left join portal.userinfo d on c.uid=d.openid
+        left join portal.users e on t.uid=e.openId
+        left join portal.department f on e.department_id=f.department_id
+        where t.rid=#{rid} and t.status='2'
+        <choose>
+            <when test='sort!=null and sort=="0"'>
+                order by t.sort,t.createTime desc,c.createTime
+            </when>
+            <otherwise>
+                order by t.sort,t.createTime,c.createTime
+            </otherwise>
+        </choose>
+        <!--
+        limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+        -->
+    </select>
+    <select id="getLiveRptTotalNum" resultType="map">
+        SELECT
+        count(1) totalNum from jxb_rpt where rid=#{rid}
+    </select>
+    <select id="getLiveMsgList" resultType="map">
+        select t.id, t.rid, t.uid, t.content, date_format(t.createTime,'%H:%i:%s') createTime from jxb_msg t where
+        t.rid=#{rid}
+        order by t.createTime
+    </select>
+    <select id="getTotalNumAndOrgInfo" resultType="map">
+        SELECT
+        companyAlias,
+        companyName,
+        totalNum
+        FROM
+        (
+        SELECT
+        #{deptId} deptId,
+        count(1) totalNum
+        FROM
+        jxb_rpt
+        WHERE
+        rid = #{id}
+        ) a
+        LEFT JOIN (
+        SELECT
+        department_id deptId,
+        short_name companyAlias,
+        department_name companyName
+        FROM
+        portal.department
+        WHERE
+        department_id = #{deptId}
+        ) b ON a.deptId = b.deptId
+    </select>
+    <select id="getShareContent" resultType="map">
+        select
+        '' androidDownload,
+        '' downAddress,
+        '' downloadDesc,
+        short_name downloadTitle,
+        '' iosDownload,
+        concat(#{fastdfs_server},t.logo) logo,
+        '' sysValue
+        from portal.department t where t.department_id= #{deptId}
+    </select>
+
+    <select id="getLiveTotalNum" resultType="map">
+        SELECT
+        companyAlias,
+        companyName,
+        totalNum
+        FROM
+        (
+        SELECT
+        deptId,
+        count(1) totalNum
+        FROM
+        jxb
+        WHERE
+        deptId = #{deptId}
+        ) a
+        LEFT JOIN (
+        SELECT
+        department_id deptId,
+        short_name companyAlias,
+        department_name companyName
+        FROM
+        portal.department
+        WHERE
+        department_id = #{deptId}
+        ) b ON a.deptId = b.deptId
+    </select>
+
+    <update id="updateRptLikeNum">
+        update jxb_rpt set likeNum=ifnull(likeNum,0)+1 where id=#{id}
+    </update>
+    <update id="updateLiveLikeNum">
+        update jxb set pop=ifnull(pop,0)+1 where id=#{id}
+    </update>
+    <update id="updateLiveVisitNum">
+        update jxb set nop=ifnull(nop,0)+1 where id=#{id}
+    </update>
+
+    <resultMap id="SysUsersMap" type="com.huacainfo.ace.portal.model.Users">
+        <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="SEX" property="sex" jdbcType="CHAR"/>
+        <result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="DEPARTMENT_ID" property="departmentId" jdbcType="VARCHAR"/>
+        <result column="AREA_CODE" property="areaCode" jdbcType="CHAR"/>
+        <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="STAUTS" property="stauts" jdbcType="CHAR"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="SEAT" property="seat" jdbcType="VARCHAR"/>
+        <result column="USER_LEVEL" property="userLevel" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="cur_syid" property="curSyid" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="selectSysUserByOpenid" parameterType="java.lang.String" resultMap="SysUsersMap">
+         select user_id,account,password,sex,id_card,name,
+				department_id,area_code,birthday,stauts, last_login_time,
+				mobile,email,seat,user_level,create_time,fax,telphone,qq,openId,cur_syid
+        from portal.users
+        where openid = #{openid,jdbcType=VARCHAR}
+    </select>
+</mapper>

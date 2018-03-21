@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.LiveMsgDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.LiveMsg">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="rid" jdbcType="VARCHAR" property="rid"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.jxb.vo.LiveMsgVo">
+
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, rid, uid, status,content, createTime
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        from jxb_msg
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from jxb_msg
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.LiveMsg">
+        insert into jxb_msg (id, rid, uid,
+        status, createTime, content
+        )
+        values (#{id,jdbcType=VARCHAR}, #{rid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+
+
+    <update id="updateByPrimaryKey">
+        update jxb_msg
+        set
+        status = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <sql id="whereCondition">
+        from jxb_msg where 0=0
+        <if test='condition.content!=null and condition.content!=""'>
+            and content like
+            concat('%',#{condition.content,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.rid!=null and condition.rid!=""'>
+            and rid =#{condition.rid,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.uid!=null and condition.uid!=""'>
+            and uid =#{condition.uid,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.status!=null and condition.status!=""'>
+            and status =#{condition.status,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createTime desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+    </select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        jxb_msg where
+        content=#{content} and rid = #{rid,jdbcType=VARCHAR}
+        and uid = #{uid,jdbcType=VARCHAR}
+    </select>
+</mapper>

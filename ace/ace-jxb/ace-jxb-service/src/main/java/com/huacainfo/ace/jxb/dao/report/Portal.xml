@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.report.Portal">
+  <select id="query" resultType="map">
+    SELECT
+    'jxb' id,
+    count(1) value
+    FROM
+    jxb
+    WHERE
+    deptId =#{deptId}
+    union all
+    SELECT
+    'rpt' id,
+    count(1) rpt
+    FROM
+    jxb_rpt inner join jxb on jxb_rpt.rid=jxb.id
+    WHERE
+    jxb.deptId =#{deptId}
+    union all
+    SELECT
+    'cmt' id,
+    count(1) cmt
+    FROM
+    jxb_cmt
+    inner join jxb_rpt on jxb_rpt.id=jxb_cmt.rptId
+    inner join jxb on jxb_rpt.rid=jxb.id
+    WHERE
+    jxb.deptId =#{deptId}
+    union all
+    SELECT
+    'msg' id,
+    count(1) msg
+    FROM
+    jxb_msg
+    inner join jxb on jxb_msg.rid=jxb.id
+    WHERE
+    jxb.deptId =#{deptId}
+  </select>
+</mapper>
