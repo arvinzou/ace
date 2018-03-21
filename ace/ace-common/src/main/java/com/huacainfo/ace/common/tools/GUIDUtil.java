@@ -13,7 +13,7 @@ public final class GUIDUtil {
      */
     private static String getUUID() {
         UUID uuid = UUID.randomUUID();
-        return uuid.toString().toUpperCase();// 标准UUID
+        return uuid.toString();// 标准UUID
     }
 
     /**
@@ -24,7 +24,7 @@ public final class GUIDUtil {
         String str = getUUID();
         // 去掉"-"符号
         String temp = str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23) + str.substring(24);
-        return temp.toUpperCase();
+        return temp;
     }
 
     /**
