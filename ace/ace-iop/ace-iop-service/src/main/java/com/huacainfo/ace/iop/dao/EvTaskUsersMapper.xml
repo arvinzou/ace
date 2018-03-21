@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.iop.dao.EvTaskUsersMapper">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.iop.model.EvTaskUsers">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="ev_task_id" property="evTaskId" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="grade" property="grade" jdbcType="VARCHAR" />
+		<result column="ip" property="ip" jdbcType="VARCHAR" />
+		<result column="task_time" property="taskTime" jdbcType="TIMESTAMP" />
+		<result column="ev_time" property="evTime" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.huacainfo.ace.iop.model.EvTaskUsers"
+		extends="BaseResultMap">
+		<result column="advise" property="advise" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<resultMap id="BaseResultMapVo" type="com.huacainfo.ace.iop.vo.EvTaskUsersVo"
+		extends="ResultMapWithBLOBs">
+		<result column="userName" property="userName" jdbcType="VARCHAR" />
+		<result column="evTaskName" property="evTaskName" jdbcType="VARCHAR" />
+		<result column="gradeName" property="gradeName" jdbcType="VARCHAR" />
+		<result column="account" property="account" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, ev_task_id, user_id, grade, ip, task_time, ev_time,
+		status,
+		create_time
+	</sql>
+	<sql id="Blob_Column_List">
+		advise
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from ev_task_users
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ev_task_users
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.iop.model.EvTaskUsers">
+		insert into ev_task_users (id,
+		ev_task_id, user_id,
+		grade, ip, task_time,
+		ev_time, status, create_time,
+		advise)
+		values (#{id,jdbcType=VARCHAR}, #{evTaskId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{grade,jdbcType=VARCHAR},
+		#{ip,jdbcType=VARCHAR}, #{taskTime,jdbcType=TIMESTAMP},
+		#{evTime,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{advise,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.huacainfo.ace.iop.model.EvTaskUsers">
+		insert into ev_task_users
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="evTaskId != null">
+				ev_task_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="grade != null">
+				grade,
+			</if>
+			<if test="ip != null">
+				ip,
+			</if>
+			<if test="taskTime != null">
+				task_time,
+			</if>
+			<if test="evTime != null">
+				ev_time,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="advise != null">
+				advise,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="evTaskId != null">
+				#{evTaskId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="taskTime != null">
+				#{taskTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evTime != null">
+				#{evTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="advise != null">
+				#{advise,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.iop.model.EvTaskUsers">
+		update ev_task_users
+		<set>
+			<if test="evTaskId != null">
+				ev_task_id = #{evTaskId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="grade != null">
+				grade = #{grade,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				ip = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="taskTime != null">
+				task_time = #{taskTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evTime != null">
+				ev_time = #{evTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="advise != null">
+				advise = #{advise,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.iop.model.EvTaskUsers">
+		update
+		ev_task_users
+		set ev_task_id = #{evTaskId,jdbcType=VARCHAR},
+		user_id =
+		#{userId,jdbcType=VARCHAR},
+		grade = #{grade,jdbcType=VARCHAR},
+		ip =
+		#{ip,jdbcType=VARCHAR},
+		task_time = #{taskTime,jdbcType=TIMESTAMP},
+		ev_time = #{evTime,jdbcType=TIMESTAMP},
+		status =
+		#{status,jdbcType=CHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		advise =
+		#{advise,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.iop.model.EvTaskUsers">
+		update
+		ev_task_users
+		set ev_task_id = #{evTaskId,jdbcType=VARCHAR},
+		user_id =
+		#{userId,jdbcType=VARCHAR},
+		grade = #{grade,jdbcType=VARCHAR},
+		ip =
+		#{ip,jdbcType=VARCHAR},
+		task_time = #{taskTime,jdbcType=TIMESTAMP},
+		ev_time = #{evTime,jdbcType=TIMESTAMP},
+		advise =
+		#{advise,jdbcType=LONGVARCHAR},
+		status =
+		#{status,jdbcType=CHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="isExit" resultType="int">
+		SELECT COUNT(*) from
+		ev_task_users
+		where ev_task_id = #{evTaskId,jdbcType=VARCHAR}
+		and
+		user_id = #{userId,jdbcType=VARCHAR}
+	</select>
+	<sql id="whereCondition">
+		from ev_task_users t left join users a on t.user_id=a.user_id
+		left join
+		ev_task b on t.ev_task_id=b.ev_task_id
+		left join ev_grade c on
+		t.grade=c.grade_id
+		where 0=0
+		<if test="condition.evTaskId!=null and condition.evTaskId!=&quot;&quot;">
+			and
+			t.ev_task_id =#{condition.evTaskId,jdbcType=VARCHAR}
+
+		</if>
+		<if test="condition.status!=null and condition.status!=&quot;&quot;">
+			and
+			t.status =#{condition.status,jdbcType=VARCHAR}
+
+		</if>
+
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+		SELECT t.id, t.ev_task_id, t.user_id, t.grade, t.ip, t.task_time,
+		t.ev_time,
+		t.status,
+		t.create_time,a.name userName,b.ev_task_name
+		evTaskName,c.grade_name gradeName,t.advise,a.account
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.user_id 
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<select id="selectUserListByDeptId" resultType="map">
+		SELECT
+		t.USER_ID,
+		t.ACCOUNT, t.SEAT, t.NAME
+		FROM
+		users t
+		WHERE
+		t.department_id = #{id} and
+		t.user_id not in(select user_id from ev_task_users where
+		ev_task_id=#{evTaskId}) and t.name like '评测%'
+		ORDER BY t.user_id
+		LIMIT #{limit}
+	</select>
+	<update id="updateForReset">
+		update
+		ev_task_users
+		set 
+		grade = null,
+		ip =null,
+		task_time = now(),
+		ev_time = null,
+		status ='1'
+		where id = #{id,jdbcType=VARCHAR};
+		delete  from ev_task_data
+		where ev_task_id=#{evTaskId} and ev_user_id=#{userId}
+	</update>
+	<select id="selectPrintUserListByDeptId" resultType="map">
+		SELECT
+		t.USER_ID,
+		t.ACCOUNT, t.SEAT, t.NAME
+		FROM
+		users t
+		WHERE
+		t.user_id  in(select user_id from ev_task_users where
+		ev_task_id=#{evTaskId}) and t.name like '评测%'
+		ORDER BY t.user_id
+		
+	</select>
+	<update id="updateVoteByPrimaryKey" parameterType="com.huacainfo.ace.iop.model.EvTaskUsers">
+		update
+		ev_task_users
+		set 
+		grade = #{grade,jdbcType=VARCHAR},
+		ip =#{ip,jdbcType=VARCHAR},
+		advise =
+		#{advise,jdbcType=LONGVARCHAR},
+		ev_time = #{evTime,jdbcType=TIMESTAMP},
+		status =#{status,jdbcType=CHAR}
+		where ev_task_id = #{evTaskId,jdbcType=VARCHAR} and
+		user_id =
+		#{userId,jdbcType=VARCHAR}
+	</update>
+</mapper>

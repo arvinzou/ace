@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.iop.dao.EvScoreTemleteMapper" >
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.iop.model.EvScoreTemlete" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, status, create_time,remark
+  </sql>
+  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.iop.vo.EvScoreTemleteVo"
+		extends="BaseResultMap">
+		
+	</resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ev_score_temlete
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ev_score_temlete
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.iop.model.EvScoreTemlete" >
+    insert into ev_score_temlete (id, name,remark, status, 
+      create_time)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.iop.model.EvScoreTemlete" >
+    insert into ev_score_temlete
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.iop.model.EvScoreTemlete" >
+    update ev_score_temlete
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.iop.model.EvScoreTemlete" >
+    update ev_score_temlete
+    set name = #{name,jdbcType=VARCHAR},remark = #{remark,jdbcType=VARCHAR}
+     
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+   <select id="isExit" resultType="int">
+		SELECT COUNT(*) from ev_score_temlete where id=#{id}
+	</select>
+  <sql id="whereCondition">
+		from ev_score_temlete
+		where status='1'
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and
+			name like
+			concat('%',concat(#{condition.name,jdbcType=VARCHAR},'%'))
+
+		</if>
+		
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+		SELECT  id, name, status,remark, create_time
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY create_time desc
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<select id="selectListAll" resultMap="BaseResultMap">
+	SELECT  id, name, status, create_time
+		from ev_score_temlete
+				ORDER BY create_time desc
+	</select>
+</mapper>

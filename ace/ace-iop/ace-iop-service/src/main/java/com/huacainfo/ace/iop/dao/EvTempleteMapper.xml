@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.iop.dao.EvTempleteMapper" >
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.iop.model.EvTemplete" >
+    <id column="ev_templete_id" property="evTempleteId" jdbcType="VARCHAR" />
+    <result column="ev_name" property="evName" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="ev_discription" property="evDiscription" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.huacainfo.ace.iop.model.EvTemplete" extends="BaseResultMap" >
+    <result column="ev_content" property="evContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+   <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.iop.vo.EvTempleteVo"
+		extends="BaseResultMap">
+		 <result column="categoryName" property="categoryName" jdbcType="VARCHAR" />
+	</resultMap>
+  <sql id="Base_Column_List" >
+    ev_templete_id, ev_name, category, ev_discription, status, create_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    ev_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ev_templete
+    where ev_templete_id = #{evTempleteId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ev_templete
+    where ev_templete_id = #{evTempleteId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.iop.model.EvTemplete" >
+    insert into ev_templete (ev_templete_id, ev_name, category, 
+      ev_discription, status, create_time, 
+      ev_content)
+    values (#{evTempleteId,jdbcType=VARCHAR}, #{evName,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{evDiscription,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{evContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.iop.model.EvTemplete" >
+    insert into ev_templete
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evTempleteId != null" >
+        ev_templete_id,
+      </if>
+      <if test="evName != null" >
+        ev_name,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="evDiscription != null" >
+        ev_discription,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="evContent != null" >
+        ev_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evTempleteId != null" >
+        #{evTempleteId,jdbcType=VARCHAR},
+      </if>
+      <if test="evName != null" >
+        #{evName,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="evDiscription != null" >
+        #{evDiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evContent != null" >
+        #{evContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.iop.model.EvTemplete" >
+    update ev_templete
+    <set >
+      <if test="evName != null" >
+        ev_name = #{evName,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="evDiscription != null" >
+        ev_discription = #{evDiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evContent != null" >
+        ev_content = #{evContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ev_templete_id = #{evTempleteId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.iop.model.EvTemplete" >
+    update ev_templete
+    set ev_name = #{evName,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      ev_discription = #{evDiscription,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ev_content = #{evContent,jdbcType=LONGVARCHAR}
+    where ev_templete_id = #{evTempleteId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.iop.model.EvTemplete" >
+    update ev_templete
+    set ev_name = #{evName,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      ev_discription = #{evDiscription,jdbcType=VARCHAR},
+       ev_content = #{evContent,jdbcType=LONGVARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where ev_templete_id = #{evTempleteId,jdbcType=VARCHAR}
+  </update>
+   <select id="isExit" resultType="int">
+		SELECT COUNT(*) from ev_templete where ev_name=#{evName}
+  </select>
+  <sql id="whereCondition">
+		from ev_templete t left join ev_category a on t.category=a.code
+		where t.status='1'
+		<if test="condition.evName!=null and condition.evName!=&quot;&quot;">
+			and
+			t.ev_name like
+			concat('%',concat(#{condition.evName,jdbcType=VARCHAR},'%'))
+
+		</if>
+		<if test="condition.category!=null and condition.category!=&quot;&quot;">
+			and
+			t.category =#{condition.category,jdbcType=VARCHAR}
+
+		</if>
+		
+		
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+		SELECT  t.ev_templete_id, t.ev_name, t.category, t.ev_discription, t.status, t.create_time,
+		a.name categoryName
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.create_time desc
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<select id="selectListAll" resultMap="BaseResultMap">
+		SELECT  ev_templete_id, ev_name from ev_templete where status='1'  ORDER BY create_time desc
+	</select>
+</mapper>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.iop.dao.EvScoreTemleteSubMapper">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.iop.model.EvScoreTemleteSub">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="score_temple_id" property="scoreTempleId"
+			jdbcType="VARCHAR" />
+		<result column="skey" property="skey" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="sqe" property="sqe" jdbcType="INTEGER" />
+		<result column="score" property="score" jdbcType="DECIMAL" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="BaseResultMapVo" type="com.huacainfo.ace.iop.vo.EvScoreTemleteSubVo"
+		extends="BaseResultMap">
+		<result column="templeName" property="templeName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, score_temple_id, skey, name, sqe, score, status,
+		create_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ev_score_temlete_sub
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ev_score_temlete_sub
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.iop.model.EvScoreTemleteSub">
+		insert into
+		ev_score_temlete_sub (id, score_temple_id, skey,
+		name, sqe, score,
+		status,
+		create_time)
+		values (#{id,jdbcType=VARCHAR},
+		#{scoreTempleId,jdbcType=VARCHAR},
+		#{skey,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{sqe,jdbcType=INTEGER},
+		#{score,jdbcType=DECIMAL},
+		#{status,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.huacainfo.ace.iop.model.EvScoreTemleteSub">
+		insert into ev_score_temlete_sub
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="scoreTempleId != null">
+				score_temple_id,
+			</if>
+			<if test="skey != null">
+				skey,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="sqe != null">
+				sqe,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="scoreTempleId != null">
+				#{scoreTempleId,jdbcType=VARCHAR},
+			</if>
+			<if test="skey != null">
+				#{skey,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sqe != null">
+				#{sqe,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.iop.model.EvScoreTemleteSub">
+		update ev_score_temlete_sub
+		<set>
+			<if test="scoreTempleId != null">
+				score_temple_id = #{scoreTempleId,jdbcType=VARCHAR},
+			</if>
+			<if test="skey != null">
+				skey = #{skey,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sqe != null">
+				sqe = #{sqe,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				score = #{score,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.iop.model.EvScoreTemleteSub">
+		update
+		ev_score_temlete_sub
+		set score_temple_id =
+		#{scoreTempleId,jdbcType=VARCHAR},
+		skey = #{skey,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		sqe = #{sqe,jdbcType=INTEGER},
+		score =
+		#{score,jdbcType=DECIMAL},
+		status = #{status,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where id =
+		#{id,jdbcType=VARCHAR}
+	</update>
+	<select id="isExit" resultType="int">
+		SELECT COUNT(*) from
+		ev_score_temlete where id=#{id}
+	</select>
+	<sql id="whereCondition">
+		from ev_score_temlete_sub t
+		left join ev_score_temlete a on
+		t.score_temple_id=a.id
+		where
+		t.status='1'
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and
+			t.name like
+			concat('%',concat(#{condition.name,jdbcType=VARCHAR},'%'))
+
+		</if>
+		<if
+			test="condition.scoreTempleId!=null and condition.scoreTempleId!=&quot;&quot;">
+			and
+			t.score_temple_id
+			=#{condition.scoreTempleId,jdbcType=VARCHAR}
+		</if>
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+		SELECT t.id, t.name, t.status, t.create_time,a.name templeName,t.score_temple_id,t.skey,t.sqe,t.score
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.sqe
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+</mapper>

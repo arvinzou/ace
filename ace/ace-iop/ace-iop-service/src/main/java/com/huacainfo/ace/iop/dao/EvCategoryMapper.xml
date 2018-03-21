@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.iop.dao.EvCategoryMapper">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.iop.model.EvCategory">
+		<id column="code" property="code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="BaseResultMapVo" type="com.huacainfo.ace.iop.vo.EvCategoryVo"
+		extends="BaseResultMap">
+
+	</resultMap>
+	<sql id="Base_Column_List">
+		code, name, status, create_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ev_category
+		where code = #{code,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		update ev_category set status='0'
+		where code = #{code,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.iop.model.EvCategory">
+		insert into ev_category (code, name, status,
+		create_time)
+		values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{status,jdbcType=CHAR},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.huacainfo.ace.iop.model.EvCategory">
+		insert into ev_category
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="code != null">
+				code,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="code != null">
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.iop.model.EvCategory">
+		update ev_category
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where code = #{code,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.iop.model.EvCategory">
+		update ev_category
+		set name = #{name,jdbcType=VARCHAR},
+		status = #{status,jdbcType=CHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where code = #{code,jdbcType=VARCHAR}
+	</update>
+	<select id="isExit" resultType="int">
+		SELECT COUNT(*) from ev_category
+		where code=#{code}
+	</select>
+	<sql id="whereCondition">
+		from ev_category
+		where status='1'
+		<if test="condition.name!=null and condition.name!=&quot;&quot;">
+			and
+			name like
+			concat('%',concat(#{condition.name,jdbcType=VARCHAR},'%'))
+
+		</if>
+
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+		SELECT code, name, status, create_time
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY ${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY create_time desc
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<select id="selectListAll" resultMap="BaseResultMap">
+		SELECT code, name, status,
+		create_time where status='1' ORDER BY create_time desc
+	</select>
+</mapper>

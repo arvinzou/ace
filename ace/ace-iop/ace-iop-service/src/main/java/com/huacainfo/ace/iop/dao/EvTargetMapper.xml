@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.iop.dao.EvTargetMapper">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.iop.model.EvTarget">
+		<id column="ev_target_id" property="evTargetId" jdbcType="VARCHAR" />
+		<result column="ev_templete_id" property="evTempleteId"
+			jdbcType="VARCHAR" />
+		<result column="ev_target_name" property="evTargetName"
+			jdbcType="VARCHAR" />
+		<result column="category" property="category" jdbcType="VARCHAR" />
+		<result column="arget_score" property="argetScore" jdbcType="DECIMAL" />
+		<result column="score_type" property="scoreType" jdbcType="VARCHAR" />
+		<result column="ev_points" property="evPoints" jdbcType="VARCHAR" />
+		<result column="sta_type" property="staType" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="BaseResultMapVo" type="com.huacainfo.ace.iop.vo.EvTargetVo"
+		extends="BaseResultMap">
+
+	</resultMap>
+	<sql id="Base_Column_List">
+		ev_target_id, ev_templete_id, ev_target_name, category, arget_score, score_type,
+		ev_points, sta_type, status, create_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ev_target
+		where ev_target_id = #{evTargetId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from ev_target
+		where ev_target_id = #{evTargetId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.iop.model.EvTarget">
+		insert into ev_target (ev_target_id, ev_templete_id, ev_target_name,
+		category, arget_score, score_type,
+		ev_points, sta_type, status,
+		create_time)
+		values (#{evTargetId,jdbcType=VARCHAR}, #{evTempleteId,jdbcType=VARCHAR},
+		#{evTargetName,jdbcType=VARCHAR},
+		#{category,jdbcType=VARCHAR}, #{argetScore,jdbcType=DECIMAL}, #{scoreType,jdbcType=VARCHAR},
+		#{evPoints,jdbcType=VARCHAR}, #{staType,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.huacainfo.ace.iop.model.EvTarget">
+		insert into ev_target
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="evTargetId != null">
+				ev_target_id,
+			</if>
+			<if test="evTempleteId != null">
+				ev_templete_id,
+			</if>
+			<if test="evTargetName != null">
+				ev_target_name,
+			</if>
+			<if test="category != null">
+				category,
+			</if>
+			<if test="argetScore != null">
+				arget_score,
+			</if>
+			<if test="scoreType != null">
+				score_type,
+			</if>
+			<if test="evPoints != null">
+				ev_points,
+			</if>
+			<if test="staType != null">
+				sta_type,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="evTargetId != null">
+				#{evTargetId,jdbcType=VARCHAR},
+			</if>
+			<if test="evTempleteId != null">
+				#{evTempleteId,jdbcType=VARCHAR},
+			</if>
+			<if test="evTargetName != null">
+				#{evTargetName,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				#{category,jdbcType=VARCHAR},
+			</if>
+			<if test="argetScore != null">
+				#{argetScore,jdbcType=DECIMAL},
+			</if>
+			<if test="scoreType != null">
+				#{scoreType,jdbcType=VARCHAR},
+			</if>
+			<if test="evPoints != null">
+				#{evPoints,jdbcType=VARCHAR},
+			</if>
+			<if test="staType != null">
+				#{staType,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.iop.model.EvTarget">
+		update ev_target
+		<set>
+			<if test="evTempleteId != null">
+				ev_templete_id = #{evTempleteId,jdbcType=VARCHAR},
+			</if>
+			<if test="evTargetName != null">
+				ev_target_name = #{evTargetName,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				category = #{category,jdbcType=VARCHAR},
+			</if>
+			<if test="argetScore != null">
+				arget_score = #{argetScore,jdbcType=DECIMAL},
+			</if>
+			<if test="scoreType != null">
+				score_type = #{scoreType,jdbcType=VARCHAR},
+			</if>
+			<if test="evPoints != null">
+				ev_points = #{evPoints,jdbcType=VARCHAR},
+			</if>
+			<if test="staType != null">
+				sta_type = #{staType,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ev_target_id = #{evTargetId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.iop.model.EvTarget">
+		update ev_target
+		set ev_templete_id = #{evTempleteId,jdbcType=VARCHAR},
+		ev_target_name = #{evTargetName,jdbcType=VARCHAR},
+		category = #{category,jdbcType=VARCHAR},
+		arget_score = #{argetScore,jdbcType=DECIMAL},
+		score_type = #{scoreType,jdbcType=VARCHAR},
+		ev_points = #{evPoints,jdbcType=VARCHAR},
+		sta_type = #{staType,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where ev_target_id = #{evTargetId,jdbcType=VARCHAR}
+	</update>
+	<select id="isExit" resultType="int">
+		SELECT COUNT(*) from ev_target
+		where ev_target_name=#{evTargetName} and status='1'
+	</select>
+	<sql id="whereCondition">
+		from ev_target t left join ev_score_temlete a on t.category=a.id
+		where t.status='1' and t.ev_templete_id=#{condition.evTempleteId,jdbcType=VARCHAR}
+		<if
+			test="condition.evTargetName!=null and condition.evTargetName!=&quot;&quot;">
+			and
+			t.ev_target_name like
+			concat('%',concat(#{condition.evTargetName,jdbcType=VARCHAR},'%'))
+
+		</if>
+
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+		SELECT t.ev_target_id, t.ev_templete_id, t.ev_target_name, t.category,
+		t.arget_score, (select GROUP_CONCAT(score) from ev_score_temlete_sub s where  t.category=s.score_temple_id) score_type,
+		(select GROUP_CONCAT(concat(skey,name)) from ev_score_temlete_sub s where  t.category=s.score_temple_id) ev_points, t.sta_type, t.status, t.create_time
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.create_time asc
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<select id="selectListAll" resultMap="BaseResultMap">
+		SELECT ev_target_id, ev_templete_id, ev_target_name, category, arget_score,
+		score_type,
+		ev_points, sta_type, status, create_time from ev_target where status='1' and ev_templete_id=#{id} ORDER
+		BY create_time desc
+	</select>
+</mapper>

@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huacainfo.ace.iop.dao.EvTaskMapper">
+	<resultMap id="BaseResultMap" type="com.huacainfo.ace.iop.model.EvTask">
+		<id column="ev_task_id" property="evTaskId" jdbcType="VARCHAR" />
+		<result column="category" property="category" jdbcType="VARCHAR" />
+		<result column="ev_task_name" property="evTaskName" jdbcType="VARCHAR" />
+		<result column="ev_obj" property="evObj" jdbcType="VARCHAR" />
+		<result column="ev_templete_id" property="evTempleteId"
+			jdbcType="VARCHAR" />
+		<result column="ev_deadline" property="evDeadline" jdbcType="TIMESTAMP" />
+		<result column="ev_start_date" property="evStartDate" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="CHAR" />
+		<result column="admin" property="admin" jdbcType="VARCHAR" />
+		<result column="dept_id" property="deptId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.huacainfo.ace.iop.model.EvTaskWithBLOBs"
+		extends="BaseResultMap">
+		<result column="ev_discribtion" property="evDiscribtion"
+			jdbcType="LONGVARCHAR" />
+		<result column="ev_content" property="evContent" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<resultMap id="BaseResultMapVo" type="com.huacainfo.ace.iop.vo.EvTaskVo"
+		extends="ResultMapWithBLOBs">
+		<result column="adminName" property="adminName" jdbcType="VARCHAR" />
+		<result column="evObjName" property="evObjName" jdbcType="VARCHAR" />
+		<result column="allUsers" property="allUsers" jdbcType="DECIMAL" />
+		<result column="voteUsers" property="voteUsers" jdbcType="DECIMAL" />
+		<result column="deptName" property="deptName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ev_task_id, category, ev_task_name, ev_obj, ev_templete_id,
+		ev_deadline,
+		ev_start_date,
+		status, admin, create_time
+	</sql>
+	<sql id="Blob_Column_List">
+		ev_discribtion, ev_content
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMapVo">
+		SELECT t.ev_task_id ,
+		t.category , t.ev_task_name , t.ev_obj ,t.dept_id,
+		t.ev_templete_id ,
+		t.ev_deadline , t.ev_start_date , t.status ,
+		t.admin , t.create_time ,
+		a.name adminName , 
+		 CASE
+        WHEN
+            m.name IS NULL
+        THEN
+            (SELECT 
+                    GROUP_CONCAT(users.name)
+                FROM
+                    ev_insp
+                        LEFT JOIN
+                    users ON ev_insp.ev_user_id = users.user_id
+                WHERE
+                    ev_insp.ev_task_id = t.ev_task_id)
+        ELSE m.name
+    END evObjName,
+		t.ev_discribtion , t.ev_content,
+		(select count(1) from ev_task_users where ev_task_id=#{evTaskId}) allUsers,
+		(select count(1) from ev_task_users where ev_task_id=#{evTaskId} and status='1') voteUsers
+		from ev_task t left join users a on
+		t.admin=a.user_id left join (
+		select a.user_id id , a.name from users
+		a union select b.department_id
+		id , b.department_name name from
+		department b ) m on t.ev_obj=m.id
+		where
+		t.ev_task_id=#{evTaskId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+
+		delete from
+		ev_insp
+		where ev_task_id = #{evTaskId,jdbcType=VARCHAR};
+
+		delete from
+		ev_task_users
+		where ev_task_id = #{evTaskId,jdbcType=VARCHAR};
+
+		delete from
+		ev_task_data
+		where ev_task_id = #{evTaskId,jdbcType=VARCHAR};
+
+		delete from
+		ev_task
+		where ev_task_id = #{evTaskId,jdbcType=VARCHAR};
+
+	</delete>
+	<insert id="insert" parameterType="com.huacainfo.ace.iop.model.EvTaskWithBLOBs">
+		insert into ev_task
+		(ev_task_id, category, ev_task_name,
+		ev_obj, ev_templete_id,
+		ev_deadline,
+		ev_start_date, status, admin,
+		create_time, ev_discribtion,
+		ev_content,dept_id
+		)
+		values (#{evTaskId,jdbcType=VARCHAR},
+		#{category,jdbcType=VARCHAR},
+		#{evTaskName,jdbcType=VARCHAR},
+		#{evObj,jdbcType=VARCHAR}, #{evTempleteId,jdbcType=VARCHAR},
+		#{evDeadline,jdbcType=TIMESTAMP},
+		#{evStartDate,jdbcType=TIMESTAMP},
+		#{status,jdbcType=CHAR},
+		#{admin,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{evDiscribtion,jdbcType=LONGVARCHAR},
+		#{evContent,jdbcType=LONGVARCHAR},#{deptId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.huacainfo.ace.iop.model.EvTaskWithBLOBs">
+		insert into ev_task
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="evTaskId != null">
+				ev_task_id,
+			</if>
+			<if test="category != null">
+				category,
+			</if>
+			<if test="evTaskName != null">
+				ev_task_name,
+			</if>
+			<if test="evObj != null">
+				ev_obj,
+			</if>
+			<if test="evTempleteId != null">
+				ev_templete_id,
+			</if>
+			<if test="evDeadline != null">
+				ev_deadline,
+			</if>
+			<if test="evStartDate != null">
+				ev_start_date,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="admin != null">
+				admin,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="evDiscribtion != null">
+				ev_discribtion,
+			</if>
+			<if test="evContent != null">
+				ev_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="evTaskId != null">
+				#{evTaskId,jdbcType=VARCHAR},
+			</if>
+			<if test="category != null">
+				#{category,jdbcType=VARCHAR},
+			</if>
+			<if test="evTaskName != null">
+				#{evTaskName,jdbcType=VARCHAR},
+			</if>
+			<if test="evObj != null">
+				#{evObj,jdbcType=VARCHAR},
+			</if>
+			<if test="evTempleteId != null">
+				#{evTempleteId,jdbcType=VARCHAR},
+			</if>
+			<if test="evDeadline != null">
+				#{evDeadline,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evStartDate != null">
+				#{evStartDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="admin != null">
+				#{admin,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="evDiscribtion != null">
+				#{evDiscribtion,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="evContent != null">
+				#{evContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.iop.model.EvTaskWithBLOBs">
+		update ev_task
+		<set>
+			<if test="category != null">
+				category = #{category,jdbcType=VARCHAR},
+			</if>
+			<if test="evTaskName != null">
+				ev_task_name = #{evTaskName,jdbcType=VARCHAR},
+			</if>
+			<if test="evObj != null">
+				ev_obj = #{evObj,jdbcType=VARCHAR},
+			</if>
+			<if test="evTempleteId != null">
+				ev_templete_id = #{evTempleteId,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="admin != null">
+				admin = #{admin,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="evDiscribtion != null">
+				ev_discribtion = #{evDiscribtion,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="evContent != null">
+				ev_content = #{evContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ev_task_id = #{evTaskId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.iop.model.EvTaskWithBLOBs">
+		update
+		ev_task
+		set category = #{category,jdbcType=VARCHAR},
+		ev_task_name =
+		#{evTaskName,jdbcType=VARCHAR},
+		ev_obj = #{evObj,jdbcType=VARCHAR},
+		ev_templete_id = #{evTempleteId,jdbcType=VARCHAR},
+		
+		status = #{status,jdbcType=CHAR},
+		admin = #{admin,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		ev_discribtion =
+		#{evDiscribtion,jdbcType=LONGVARCHAR},
+		ev_content =
+		#{evContent,jdbcType=LONGVARCHAR}
+		where ev_task_id =
+		#{evTaskId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.iop.model.EvTask">
+		update
+		ev_task
+		set
+		category = #{category,jdbcType=VARCHAR},
+		ev_task_name =
+		#{evTaskName,jdbcType=VARCHAR},
+		ev_obj = #{evObj,jdbcType=VARCHAR},
+		dept_id = #{deptId,jdbcType=VARCHAR},
+		ev_templete_id = #{evTempleteId,jdbcType=VARCHAR},
+		ev_deadline =
+		#{evDeadline,jdbcType=TIMESTAMP},
+		ev_start_date =
+		#{evStartDate,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=CHAR},
+		admin = #{admin,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		ev_discribtion =
+		#{evDiscribtion,jdbcType=LONGVARCHAR},
+		ev_content =#{evContent,jdbcType=LONGVARCHAR}
+
+		where ev_task_id =
+		#{evTaskId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="isExit" resultType="int">
+		SELECT COUNT(*) from ev_task
+		where ev_task_name=#{evTaskName}
+	</select>
+	<sql id="whereCondition">
+		from ev_task t left join users a on t.admin=a.user_id
+		left join department m on t.dept_id=m.department_id
+		left join (select
+		a.user_id id,a.name from users a
+		union
+		select b.department_id
+		id,b.department_name name from department b) m on
+		t.ev_obj=m.id
+		where
+		0=0
+		<if
+			test="condition.evTaskName!=null and condition.evTaskName!=&quot;&quot;">
+			and
+			t.ev_task_name like
+			concat('%',concat(#{condition.evTaskName,jdbcType=VARCHAR},'%'))
+
+		</if>
+		<if test="condition.category!=null and condition.category!=&quot;&quot;">
+			and
+			t.category =#{condition.category,jdbcType=VARCHAR}
+
+		</if>
+		<if test="condition.status!=null and condition.status!=&quot;&quot;">
+			and
+			t.status=#{condition.status,jdbcType=VARCHAR}
+
+		</if>
+		<if test="condition.deptId!=null and condition.deptId!=&quot;&quot;">
+			and
+			t.dept_id =#{condition.deptId,jdbcType=VARCHAR}
+
+		</if>
+
+	</sql>
+	<select id="findCount" resultType="int">
+		SELECT COUNT(*)
+		<include refid="whereCondition" />
+	</select>
+	<select id="findList" resultMap="BaseResultMapVo">
+		SELECT 
+    t.ev_task_id,
+    t.category,
+    t.ev_task_name,
+    t.ev_obj,
+    m.department_name deptName,
+    t.ev_templete_id,
+    t.ev_deadline,
+    t.ev_start_date,
+    t.dept_id,
+    t.status,
+    t.admin,
+    t.create_time,
+    a.name adminName,
+    CASE
+        WHEN
+            m.name IS NULL
+        THEN
+            (SELECT 
+                    GROUP_CONCAT(users.name)
+                FROM
+                    ev_insp
+                        LEFT JOIN
+                    users ON ev_insp.ev_user_id = users.user_id
+                WHERE
+                    ev_insp.ev_task_id = t.ev_task_id)
+        ELSE m.name
+    END evObjName,
+    t.ev_discribtion,
+    t.ev_content,
+    (select count(1) from ev_task_users where ev_task_id= t.ev_task_id) allUsers,
+		(select count(1) from ev_task_users where ev_task_id= t.ev_task_id and status='1') voteUsers
+		<include refid="whereCondition" />
+		<choose>
+			<when test="orderBy!=null and orderBy!=&quot;&quot;">
+				ORDER BY t.${orderBy}
+			</when>
+			<otherwise>
+				ORDER BY t.create_time desc
+			</otherwise>
+		</choose>
+		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+	</select>
+	<select id="findMyTaskList" resultMap="BaseResultMapVo">
+		SELECT t.ev_task_id, t.category, t.ev_task_name, t.ev_obj,
+		t.ev_templete_id, t.ev_deadline, t.ev_start_date,
+		t.status, t.admin,
+		t.create_time,a.name adminName,
+		
+		  CASE
+        WHEN
+            m.name IS NULL
+        THEN
+            (SELECT 
+                    GROUP_CONCAT(users.name)
+                FROM
+                    ev_insp
+                        LEFT JOIN
+                    users ON ev_insp.ev_user_id = users.user_id
+                WHERE
+                    ev_insp.ev_task_id = t.ev_task_id)
+        ELSE m.name
+    END evObjName,
+		
+		t.ev_discribtion,
+		t.ev_content
+		from ev_task t left join users a on t.admin=a.user_id
+		left join (select
+		a.user_id id,a.name from users a
+		union
+		select b.department_id
+		id,b.department_name name from department b) m on
+		t.ev_obj=m.id
+		where t.ev_task_id in(
+		SELECT ev_task_id FROM ev_task_users where user_id=#{condition.userId}
+		<if test="condition.status!=null and condition.status!=&quot;&quot;">
+			and
+			status=#{condition.status,jdbcType=VARCHAR}
+		</if>
+		) 
+		
+		ORDER BY t.create_time desc
+	</select>
+	<select id="selectTaskTjById" resultType="map">
+	SELECT 
+    b.ev_target_name name,
+    SUM(c.score) score,
+    round(SUM(c.score)/count(1),2) avs,
+    SUM(CASE
+        WHEN c.skey IN ('A') THEN 1
+        ELSE 0
+    END) A,
+    SUM(CASE
+        WHEN c.skey IN ('B') THEN 1
+        ELSE 0
+    END) B,
+    SUM(CASE
+        WHEN c.skey IN ('C') THEN 1
+        ELSE 0
+    END) C,
+    SUM(CASE
+        WHEN c.skey IN ('D') THEN 1
+        ELSE 0
+    END) D
+FROM
+    ev_task_data t
+        LEFT JOIN
+    ev_target b ON t.ev_target = b.ev_target_id
+        LEFT JOIN
+    ev_score_temlete_sub c ON t.ev_score_id = c.id
+WHERE
+    t.ev_task_id = #{id}
+GROUP BY b.ev_target_name
+ORDER BY b.create_time
+	</select>
+	
+	<select id="selectDepAndUsersTreeList" resultType="map">
+ SELECT 
+    t.ID,
+    t.PID,
+    t.TEXT,
+    '' SRC,
+    t.href HREF,
+    'closed' STATE,
+    '' ICON,
+    (SELECT 
+            CAST(COUNT(*) AS CHAR)
+        FROM
+            (SELECT 
+                b.department_id id,
+                    b.parent_department_id pid,
+                    b.department_name text,
+                    b.department_id herf
+            FROM
+                department b UNION ALL SELECT 
+                a.user_id id,
+                    a.department_id pid,
+                    a.name text,
+                    a.user_id href
+            FROM
+                users a
+            WHERE
+                a.stauts = '1') a
+        WHERE
+            a.pid = t.id) CHILD_COUNT
+FROM
+    (SELECT 
+        b.department_id id,
+            b.parent_department_id pid,
+            b.department_name text,
+            b.department_id href
+    FROM
+        department b UNION ALL SELECT 
+        a.user_id id,
+            a.department_id pid,
+            a.name text,
+            a.user_id herf
+    FROM
+        users a
+    WHERE
+        a.stauts = '1') t
+  </select>
+  <select id="selectVoteUserListByTaskId" resultType="map">
+  
+  SELECT 
+    t.ev_task_id taskId, t.ev_user_id userId, a.name
+FROM
+    ev.ev_insp t
+        LEFT JOIN
+    users a ON t.ev_user_id = a.user_id
+    where t.ev_task_id=#{id} order by a.user_id
+  </select>
+  <select id="selectTargetListByTemleteId" resultType="map">
+ SELECT 
+    t.ev_target_id,
+    t.ev_target_name,
+    a.id,
+    a.skey,
+    a.name,
+    a.score
+FROM
+    ev.ev_target t
+        LEFT JOIN
+    ev_score_temlete_sub a ON t.category = a.score_temple_id
+WHERE
+    t.ev_templete_id =#{id}
+  </select>
+  
+  <select id="selectTargetTopNameByTemleteId" resultType="map">
+ SELECT 
+    t.ev_target_id,
+    a.id,
+    a.name,
+    a.remark
+FROM
+    ev.ev_target t
+        LEFT JOIN
+    ev_score_temlete a ON t.category = a.id
+WHERE
+    t.ev_templete_id =#{id}
+  </select>
+  <select id="selectTaskTjTeacherById" resultType="map">
+	  SELECT
+	  b.name,
+	  b.user_id,
+	  SUM(CASE
+	  WHEN a.id = '1491883259039' THEN 1
+	  ELSE 0
+	  END) 'a',
+	  SUM(CASE
+	  WHEN a.id= '1491883283662' THEN 1
+	  ELSE 0
+	  END) 'b',
+	  SUM(CASE
+	  WHEN a.id = '1491883326594' THEN 1
+	  ELSE 0
+	  END) 'c',
+	  SUM(CASE
+	  WHEN a.id = '1491883350318' THEN 1
+	  ELSE 0
+	  END) 'd',
+	  SUM(CASE
+	  WHEN a.id = '1491883619522' THEN 1
+	  ELSE 0
+	  END) 'e',
+	  SUM(CASE
+	  WHEN a.id= '1491895115352' THEN 1
+	  ELSE 0
+	  END) 'f',
+	  SUM(CASE
+	  WHEN a.id = '1491895305679' THEN 1
+	  ELSE 0
+	  END) 'g',
+	  SUM(CASE
+	  WHEN a.id = '1491895387590' THEN 1
+	  ELSE 0
+	  END) 'h',
+	  SUM(CASE
+	  WHEN a.id = '1491895592441' THEN 1
+	  ELSE 0
+	  END) 'i',
+	  SUM(CASE
+	  WHEN a.id= '1491895946630' THEN 1
+	  ELSE 0
+	  END) 'j',
+	  SUM(CASE
+	  WHEN a.id = '1491896442864' THEN 1
+	  ELSE 0
+	  END) 'k'
+
+	  FROM
+	  ev_task_data t,
+	  ev_score_temlete_sub a,
+	  ev_score_temlete c,
+	  users b
+	  WHERE
+	  t.ev_score_id = a.id
+	  AND a.score_temple_id = c.id
+	  AND t.user_id = b.user_id
+	  AND t.ev_task_id = #{id}
+	  GROUP BY b.name,b.user_id
+	</select>
+	  <select id="selectVoteUserListBySetting" resultType="map">
+  
+  SELECT 
+    t.teacher_id userId, t.name
+FROM
+    teacher t where  t.department_id=#{p.deptId} and  t.grade_id=#{p.gradeId} and t.classes_taught=#{p.classesId}
+         order by t.teacher_id
+  </select>
+
+
+	<select id="selectVoteTeacherListByQr" resultType="map">
+		SELECT
+		t.teacher_id userId,
+		t. name
+		FROM
+		teacher t
+		WHERE
+		t.department_id = #{p.deptId}
+		AND EXISTS (
+		SELECT
+		a.teacher_id
+		FROM
+		teacher_sub a
+		WHERE
+		a.teacher_id = t.teacher_id
+		AND a.grade_id = #{p.gradeId}
+		AND a.classes_taught = #{p.classId}
+		)
+	</select>
+
+	<select id="selectVoteClassesListByDeptId" resultType="map">
+		SELECT
+		t.classes_id,t.grade_id,t.classes_name,a.grade_name
+		FROM
+		classes t left join grade a on t.grade_id=a.grade_id
+		WHERE
+		t.dept_id = ${p.deptId} order by  a.grade_id,t.classes_id
+	</select>
+
+	<select id="selectVoteClassesNameById" resultType="map">
+		SELECT
+		t.classes_id,t.grade_id,t.classes_name,a.grade_name
+		FROM
+		classes t left join grade a on t.grade_id=a.grade_id
+		WHERE
+		t.classes_id = #{classesId} and  t.dept_id = #{deptId} and t.grade_id=#{gradeId}
+	</select>
+
+	<select id="selectFeedbackById" resultType="map">
+		SELECT
+		count(1) c,
+		t.ev_score_id feedback
+		FROM
+		ev_task_data t
+		WHERE
+		t.ev_task_id = #{takId}
+		AND t.user_id = #{userId}
+		and t.ev_score_id not in(
+			select id from ev_score_temlete_sub
+		)
+		group by t.ev_score_id
+	</select>
+
+	<select id="selectFeedbackUserById" resultType="map">
+		select s.user_id,m.name,s.grade from (
+		SELECT
+		t.user_id,
+		(CASE
+		WHEN t.remark= '1' THEN '教师'
+		WHEN t.remark= '2' THEN '家长'
+		ELSE '学生'
+		END) grade
+
+		FROM
+		ev_task_data t
+
+		WHERE
+		t.ev_task_id = #{takId}
+		group by t.user_id
+		) s left join teacher m on s.user_id=m.teacher_id
+	</select>
+	<select id="selectZMTeacherBYTaskId" resultType="map">
+		SELECT
+		t.teacher_id id,
+		a.ev_task_id taskId,
+		t. NAME name,
+		c. NAME sexName,
+		b.DEPARTMENT_NAME deptName,
+		t.tel,
+		t.photo,
+		ifnull(round(rst/d.ta,2),0)*100 pe,
+		ifnull(d.rst, 0) rst
+		FROM
+		teacher t
+		INNER JOIN (
+		SELECT
+		ev_user_id,
+		ev_task_id
+		FROM
+		ev_insp
+		WHERE
+		ev_task_id = #{taskId}
+		) a ON t.teacher_id = a.ev_user_id
+		LEFT JOIN department b ON t.department_id = b.DEPARTMENT_ID
+		LEFT JOIN (
+		SELECT
+		CODE,
+		NAME
+		FROM
+		dict
+		WHERE
+		category_id = '01'
+		) c ON t.sex = c. CODE
+		LEFT JOIN (
+		SELECT
+		count(1) rst,
+		(select count(1) from ev_task_data y where y.ev_task_id =  #{taskId}) ta,
+		s.user_id
+		FROM
+		ev_task_data s
+		WHERE
+		s.ev_task_id =  #{taskId}
+		GROUP BY
+		s.user_id
+		) d ON t.teacher_id = d.user_id
+		<if test="orderBy=='name'">
+			ORDER BY t.ft_year ASC
+		</if>
+		<if test="orderBy=='rst'">
+			ORDER BY d.rst desc
+		</if>
+	</select>
+</mapper>
