@@ -77,7 +77,28 @@ public class CaseAuditServiceImpl implements CaseAuditService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getCaseId())) {return new MessageResponse(1, "案件记录主键不能为空！");}if (CommonUtils.isBlank(o.getAuditTime())) {return new MessageResponse(1, "审核时间不能为空！");}if (CommonUtils.isBlank(o.getAuditor())) {return new MessageResponse(1, "审核人不能为空！");}if (CommonUtils.isBlank(o.getAuditResult())) {return new MessageResponse(1, "审核结果不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCaseId())) {
+return new MessageResponse(1, "案件记录主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditTime())) {
+return new MessageResponse(1, "审核时间不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditor())) {
+return new MessageResponse(1, "审核人不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditResult())) {
+return new MessageResponse(1, "审核结果不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
+
 		int temp = this.caseAuditDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "案件审核记录名称重复！");
@@ -89,7 +110,9 @@ public class CaseAuditServiceImpl implements CaseAuditService {
 		this.caseAuditDao.insertSelective(o);
 		this.dataBaseLogService.log("添加案件审核记录", "案件审核记录", "", o.getName(),
 				o.getName(), userProp);
-		return new MessageResponse(0, "添加案件审核记录完成！");
+
+        123
+        return new MessageResponse(0, "添加案件审核记录完成！");
 	}
     /**
 	 *
@@ -106,7 +129,28 @@ public class CaseAuditServiceImpl implements CaseAuditService {
     @Override
 	public MessageResponse updateCaseAudit(CaseAudit o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getCaseId())) {return new MessageResponse(1, "案件记录主键不能为空！");}if (CommonUtils.isBlank(o.getAuditTime())) {return new MessageResponse(1, "审核时间不能为空！");}if (CommonUtils.isBlank(o.getAuditor())) {return new MessageResponse(1, "审核人不能为空！");}if (CommonUtils.isBlank(o.getAuditResult())) {return new MessageResponse(1, "审核结果不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCaseId())) {
+return new MessageResponse(1, "案件记录主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditTime())) {
+return new MessageResponse(1, "审核时间不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditor())) {
+return new MessageResponse(1, "审核人不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditResult())) {
+return new MessageResponse(1, "审核结果不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
+
 		
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
