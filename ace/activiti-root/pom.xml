@@ -704,7 +704,9 @@
 	<modules>
 		<module>modules/activiti-bpmn-model</module>
 		<module>modules/activiti-process-validation</module>
+		<!--
 		<module>modules/activiti-bpmn-layout</module>
+		-->
 		<module>modules/activiti-image-generator</module>
 		<module>modules/activiti-bpmn-converter</module>
 		<module>modules/activiti-form-model</module>
@@ -836,7 +838,9 @@
 				<module>modules/activiti-bpmn-converter</module>
 				<module>modules/activiti-engine</module>
 				<module>modules/activiti-secure-javascript</module>
+				<!--
 				<module>modules/activiti-bpmn-layout</module>
+				-->
 				<module>modules/activiti-json-converter</module>
 				<module>modules/activiti-dmn-model</module>
 				<module>modules/activiti-dmn-json-converter</module>
@@ -918,7 +922,9 @@
 				<module>modules/activiti-process-validation</module>
 				<module>modules/activiti-image-generator</module>
 				<module>modules/activiti-bpmn-converter</module>
+				<!--
 				<module>modules/activiti-bpmn-layout</module>
+				-->
 				<module>modules/activiti-json-converter</module>
 				<module>modules/activiti-spring</module>
 				<module>modules/activiti-spring-boot</module>
@@ -1002,7 +1008,9 @@
 				<module>modules/activiti-process-validation</module>
 				<module>modules/activiti-image-generator</module>
 				<module>modules/activiti-bpmn-converter</module>
+				<!--
 				<module>modules/activiti-bpmn-layout</module>
+				-->
 				<module>modules/activiti-json-converter</module>
 				<module>modules/activiti-secure-javascript</module>
 				<module>modules/activiti-dmn-model</module>
