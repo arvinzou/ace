@@ -87,7 +87,7 @@ public class EvTaskController extends BaseController {
 	}
 	@RequestMapping(value = "/findMyEvTaskList")
 	@ResponseBody
-	public  PageResult<EvTaskVo> findMyEvTaskList(EvTaskQVo condition) throws Exception{
+	public   List<EvTaskVo> findMyEvTaskList(EvTaskQVo condition) throws Exception{
 		return  this.evTaskService.findMyEvTaskList(condition);
 	}
 	
