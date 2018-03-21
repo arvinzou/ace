@@ -77,7 +77,31 @@ public class TrafficSubServiceImpl implements TrafficSubService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getTrafficId())) {return new MessageResponse(1, "通行记录主键不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "资料类型不能为空！");}if (CommonUtils.isBlank(o.getInspectTime())) {return new MessageResponse(1, "检查时间不能为空！");}if (CommonUtils.isBlank(o.getPlateNo())) {return new MessageResponse(1, "车牌号不能为空！");}if (CommonUtils.isBlank(o.getFileUrl())) {return new MessageResponse(1, "资料地址不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getTrafficId())) {
+return new MessageResponse(1, "通行记录主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "资料类型不能为空！");
+}
+if (CommonUtils.isBlank(o.getInspectTime())) {
+return new MessageResponse(1, "检查时间不能为空！");
+}
+if (CommonUtils.isBlank(o.getPlateNo())) {
+return new MessageResponse(1, "车牌号不能为空！");
+}
+if (CommonUtils.isBlank(o.getFileUrl())) {
+return new MessageResponse(1, "资料地址不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
+
 		int temp = this.trafficSubDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "通行记录子表名称重复！");
@@ -87,8 +111,8 @@ public class TrafficSubServiceImpl implements TrafficSubService {
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
 		this.trafficSubDao.insertSelective(o);
-		this.dataBaseLogService.log("添加通行记录子表", "通行记录子表", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("添加通行记录子表", "通行记录子表", "", o.getId(),
+				o.getId(), userProp);
 		return new MessageResponse(0, "添加通行记录子表完成！");
 	}
     /**
@@ -106,14 +130,38 @@ public class TrafficSubServiceImpl implements TrafficSubService {
     @Override
 	public MessageResponse updateTrafficSub(TrafficSub o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getTrafficId())) {return new MessageResponse(1, "通行记录主键不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "资料类型不能为空！");}if (CommonUtils.isBlank(o.getInspectTime())) {return new MessageResponse(1, "检查时间不能为空！");}if (CommonUtils.isBlank(o.getPlateNo())) {return new MessageResponse(1, "车牌号不能为空！");}if (CommonUtils.isBlank(o.getFileUrl())) {return new MessageResponse(1, "资料地址不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getTrafficId())) {
+return new MessageResponse(1, "通行记录主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "资料类型不能为空！");
+}
+if (CommonUtils.isBlank(o.getInspectTime())) {
+return new MessageResponse(1, "检查时间不能为空！");
+}
+if (CommonUtils.isBlank(o.getPlateNo())) {
+return new MessageResponse(1, "车牌号不能为空！");
+}
+if (CommonUtils.isBlank(o.getFileUrl())) {
+return new MessageResponse(1, "资料地址不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
+
 		
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
 		this.trafficSubDao.updateByPrimaryKeySelective(o);
-		this.dataBaseLogService.log("变更通行记录子表", "通行记录子表", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("变更通行记录子表", "通行记录子表", "", o.getId(),
+				o.getId(), userProp);
 		return new MessageResponse(0, "变更通行记录子表完成！");
 	}
 

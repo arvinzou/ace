@@ -108,8 +108,8 @@ return new MessageResponse(1, "最后更新时间不能为空！");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
 		this.caseAuditDao.insertSelective(o);
-		this.dataBaseLogService.log("添加案件审核记录", "案件审核记录", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("添加案件审核记录", "案件审核记录", "", o.getCaseId(),
+				o.getCaseId(), userProp);
 		return new MessageResponse(0, "添加案件审核记录完成！");
 	}
     /**
@@ -154,8 +154,8 @@ return new MessageResponse(1, "最后更新时间不能为空！");
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
 		this.caseAuditDao.updateByPrimaryKeySelective(o);
-		this.dataBaseLogService.log("变更案件审核记录", "案件审核记录", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("变更案件审核记录", "案件审核记录", "", o.getCaseId(),
+				o.getCaseId(), userProp);
 		return new MessageResponse(0, "变更案件审核记录完成！");
 	}
 

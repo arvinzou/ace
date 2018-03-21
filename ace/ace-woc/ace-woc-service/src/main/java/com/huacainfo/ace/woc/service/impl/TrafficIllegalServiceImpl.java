@@ -77,7 +77,25 @@ public class TrafficIllegalServiceImpl implements TrafficIllegalService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getTrafficId())) {return new MessageResponse(1, "通行记录主键不能为空！");}if (CommonUtils.isBlank(o.getAuditTime())) {return new MessageResponse(1, "确认时间不能为空！");}if (CommonUtils.isBlank(o.getAuditor())) {return new MessageResponse(1, "审核人不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getTrafficId())) {
+return new MessageResponse(1, "通行记录主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditTime())) {
+return new MessageResponse(1, "确认时间不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditor())) {
+return new MessageResponse(1, "审核人不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
+
 		int temp = this.trafficIllegalDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "通行违章记录名称重复！");
@@ -87,8 +105,8 @@ public class TrafficIllegalServiceImpl implements TrafficIllegalService {
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
 		this.trafficIllegalDao.insertSelective(o);
-		this.dataBaseLogService.log("添加通行违章记录", "通行违章记录", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("添加通行违章记录", "通行违章记录", "", o.getTrafficId(),
+				o.getTrafficId(), userProp);
 		return new MessageResponse(0, "添加通行违章记录完成！");
 	}
     /**
@@ -106,14 +124,32 @@ public class TrafficIllegalServiceImpl implements TrafficIllegalService {
     @Override
 	public MessageResponse updateTrafficIllegal(TrafficIllegal o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getTrafficId())) {return new MessageResponse(1, "通行记录主键不能为空！");}if (CommonUtils.isBlank(o.getAuditTime())) {return new MessageResponse(1, "确认时间不能为空！");}if (CommonUtils.isBlank(o.getAuditor())) {return new MessageResponse(1, "审核人不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getTrafficId())) {
+return new MessageResponse(1, "通行记录主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditTime())) {
+return new MessageResponse(1, "确认时间不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditor())) {
+return new MessageResponse(1, "审核人不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
+
 		
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
 		this.trafficIllegalDao.updateByPrimaryKeySelective(o);
-		this.dataBaseLogService.log("变更通行违章记录", "通行违章记录", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("变更通行违章记录", "通行违章记录", "", o.getTrafficId(),
+				o.getTrafficId(), userProp);
 		return new MessageResponse(0, "变更通行违章记录完成！");
 	}
 
