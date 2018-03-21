@@ -73,11 +73,10 @@
     <div id="grid-pager"></div>
 
 
-
 </div>
 
 <div id="dialog-message" class="hide">
-    <table >
+    <table>
         <tr>
             <td align="center" valign="top">
                 <table id="alldevice-grid-table"></table>
@@ -105,7 +104,8 @@
 </div>
 <div id="dialog-confirm" class="hide">
     <div class="alert alert-info bigger-110">
-        重新分配角色后，分配此角色的用户将获取新的权限.</div>
+        重新分配角色后，分配此角色的用户将获取新的权限.
+    </div>
 
     <div class="space-6"></div>
 
@@ -128,7 +128,7 @@
             <span class="labelItemHeader">所属卡点名称</span>
             <br>
             <span id="siteId" class="hide"></span>
-            <span id="siteName" ></span>
+            <span id="siteName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">监控点名称</span>
@@ -177,8 +177,14 @@
         </div>
     </div>
     <h5 class="header-title">设备信息</h5>
-    <table id="onlinedevice-grid-table"></table>
-    <div id="onlinedevice-grid-pager"></div>
+    <div style="max-height:150px;
+        width: 100%;
+        overflow-y: auto;">
+        <table class="table table-striped" id="device-table">
+        </table>
+    </div>
+    <%--<table id="onlinedevice-grid-table"></table>--%>
+    <%--<div id="onlinedevice-grid-pager"></div>--%>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem">
