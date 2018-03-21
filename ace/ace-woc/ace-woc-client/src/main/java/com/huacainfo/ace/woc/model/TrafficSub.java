@@ -1,25 +1,26 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Blacklist {
+/**
+ * @author HuaCai003
+ */
+public class TrafficSub implements Serializable {
+    private static final long serialVersionUID = 4542527465800426528L;
     private String id;
 
-    private String personId;
+    private String trafficId;
 
-    private String vehicleId;
+    private String deviceId;
 
-    private String departmentId;
+    private String category;
 
-    private Date effectDate;
+    private Date inspectTime;
 
-    private String effectReason;
+    private String plateNo;
 
-    private Date lapseDate;
-
-    private String lapseReason;
-
-    private String isBlack;
+    private String fileUrl;
 
     private String remark;
 
@@ -45,68 +46,52 @@ public class Blacklist {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getPersonId() {
-        return personId;
+    public String getTrafficId() {
+        return trafficId;
     }
 
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
+    public void setTrafficId(String trafficId) {
+        this.trafficId = trafficId == null ? null : trafficId.trim();
     }
 
-    public String getVehicleId() {
-        return vehicleId;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId == null ? null : vehicleId.trim();
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId == null ? null : deviceId.trim();
     }
 
-    public String getDepartmentId() {
-        return departmentId;
+    public String getCategory() {
+        return category;
     }
 
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId == null ? null : departmentId.trim();
+    public void setCategory(String category) {
+        this.category = category == null ? null : category.trim();
     }
 
-    public Date getEffectDate() {
-        return effectDate;
+    public Date getInspectTime() {
+        return inspectTime;
     }
 
-    public void setEffectDate(Date effectDate) {
-        this.effectDate = effectDate;
+    public void setInspectTime(Date inspectTime) {
+        this.inspectTime = inspectTime;
     }
 
-    public String getEffectReason() {
-        return effectReason;
+    public String getPlateNo() {
+        return plateNo;
     }
 
-    public void setEffectReason(String effectReason) {
-        this.effectReason = effectReason == null ? null : effectReason.trim();
+    public void setPlateNo(String plateNo) {
+        this.plateNo = plateNo == null ? null : plateNo.trim();
     }
 
-    public Date getLapseDate() {
-        return lapseDate;
+    public String getFileUrl() {
+        return fileUrl;
     }
 
-    public void setLapseDate(Date lapseDate) {
-        this.lapseDate = lapseDate;
-    }
-
-    public String getLapseReason() {
-        return lapseReason;
-    }
-
-    public void setLapseReason(String lapseReason) {
-        this.lapseReason = lapseReason == null ? null : lapseReason.trim();
-    }
-
-    public String getIsBlack() {
-        return isBlack;
-    }
-
-    public void setIsBlack(String isBlack) {
-        this.isBlack = isBlack == null ? null : isBlack.trim();
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl == null ? null : fileUrl.trim();
     }
 
     public String getRemark() {

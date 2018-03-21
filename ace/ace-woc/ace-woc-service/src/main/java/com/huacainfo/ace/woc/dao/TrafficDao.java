@@ -1,0 +1,32 @@
+package com.huacainfo.ace.woc.dao;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+import com.huacainfo.ace.woc.model.Traffic;
+import com.huacainfo.ace.woc.vo.TrafficQVo;
+import com.huacainfo.ace.woc.vo.TrafficVo;
+
+public interface TrafficDao {
+
+    TrafficVo selectByPrimaryKey(String id);
+
+    int deleteByPrimaryKey(String id);
+
+    int insert(Traffic record);
+
+    int insertSelective(Traffic record);
+
+    int updateByPrimaryKey(Traffic record);
+
+    int updateByPrimaryKeySelective(Traffic record);
+
+    
+    List<TrafficVo> findList(@Param("condition") TrafficQVo condition,
+			@Param("start") int start, @Param("limit") int limit,
+			@Param("orderBy") String orderBy);
+
+	int findCount(@Param("condition") TrafficQVo condition);
+
+	int isExit(Traffic record);
+
+}

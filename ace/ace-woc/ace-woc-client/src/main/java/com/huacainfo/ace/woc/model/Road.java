@@ -1,13 +1,8 @@
 package com.huacainfo.ace.woc.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author HuaCai003
- */
-public class Road implements Serializable {
-    private static final long serialVersionUID = -8136917915162509854L;
+public class Road {
     private String id;
 
     private String roadName;
@@ -18,13 +13,10 @@ public class Road implements Serializable {
 
     private Long roadLength;
 
-    private Date constructDate;
+    private String constructDate;
 
     private String adminDepId;
 
-    /**
-     * 1: '在运营', 2: '养护中', 3: '已废弃'
-     */
     private String roadStatus;
 
     private String remark;
@@ -83,12 +75,12 @@ public class Road implements Serializable {
         this.roadLength = roadLength;
     }
 
-    public Date getConstructDate() {
+    public String getConstructDate() {
         return constructDate;
     }
 
-    public void setConstructDate(Date constructDate) {
-        this.constructDate = constructDate;
+    public void setConstructDate(String constructDate) {
+        this.constructDate = constructDate == null ? null : constructDate.trim();
     }
 
     public String getAdminDepId() {

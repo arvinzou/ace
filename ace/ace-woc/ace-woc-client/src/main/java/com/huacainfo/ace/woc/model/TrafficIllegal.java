@@ -1,25 +1,20 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Blacklist {
+/**
+ * @author HuaCai003
+ */
+public class TrafficIllegal implements Serializable {
+    private static final long serialVersionUID = -9119890843850942267L;
     private String id;
 
-    private String personId;
+    private String trafficId;
 
-    private String vehicleId;
+    private Date auditTime;
 
-    private String departmentId;
-
-    private Date effectDate;
-
-    private String effectReason;
-
-    private Date lapseDate;
-
-    private String lapseReason;
-
-    private String isBlack;
+    private String auditor;
 
     private String remark;
 
@@ -45,68 +40,28 @@ public class Blacklist {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getPersonId() {
-        return personId;
+    public String getTrafficId() {
+        return trafficId;
     }
 
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
+    public void setTrafficId(String trafficId) {
+        this.trafficId = trafficId == null ? null : trafficId.trim();
     }
 
-    public String getVehicleId() {
-        return vehicleId;
+    public Date getAuditTime() {
+        return auditTime;
     }
 
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId == null ? null : vehicleId.trim();
+    public void setAuditTime(Date auditTime) {
+        this.auditTime = auditTime;
     }
 
-    public String getDepartmentId() {
-        return departmentId;
+    public String getAuditor() {
+        return auditor;
     }
 
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId == null ? null : departmentId.trim();
-    }
-
-    public Date getEffectDate() {
-        return effectDate;
-    }
-
-    public void setEffectDate(Date effectDate) {
-        this.effectDate = effectDate;
-    }
-
-    public String getEffectReason() {
-        return effectReason;
-    }
-
-    public void setEffectReason(String effectReason) {
-        this.effectReason = effectReason == null ? null : effectReason.trim();
-    }
-
-    public Date getLapseDate() {
-        return lapseDate;
-    }
-
-    public void setLapseDate(Date lapseDate) {
-        this.lapseDate = lapseDate;
-    }
-
-    public String getLapseReason() {
-        return lapseReason;
-    }
-
-    public void setLapseReason(String lapseReason) {
-        this.lapseReason = lapseReason == null ? null : lapseReason.trim();
-    }
-
-    public String getIsBlack() {
-        return isBlack;
-    }
-
-    public void setIsBlack(String isBlack) {
-        this.isBlack = isBlack == null ? null : isBlack.trim();
+    public void setAuditor(String auditor) {
+        this.auditor = auditor == null ? null : auditor.trim();
     }
 
     public String getRemark() {

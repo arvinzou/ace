@@ -1,23 +1,20 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Road {
+/**
+ * @author HuaCai003
+ */
+public class TrafficIllegalCancel implements Serializable {
+    private static final long serialVersionUID = 1035974645214939434L;
     private String id;
 
-    private String roadName;
+    private String trafficId;
 
-    private String roadCode;
+    private Date cancelTime;
 
-    private String areaCode;
-
-    private Long roadLength;
-
-    private String constructDate;
-
-    private String adminDepId;
-
-    private String roadStatus;
+    private String cancelor;
 
     private String remark;
 
@@ -43,60 +40,28 @@ public class Road {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getRoadName() {
-        return roadName;
+    public String getTrafficId() {
+        return trafficId;
     }
 
-    public void setRoadName(String roadName) {
-        this.roadName = roadName == null ? null : roadName.trim();
+    public void setTrafficId(String trafficId) {
+        this.trafficId = trafficId == null ? null : trafficId.trim();
     }
 
-    public String getRoadCode() {
-        return roadCode;
+    public Date getCancelTime() {
+        return cancelTime;
     }
 
-    public void setRoadCode(String roadCode) {
-        this.roadCode = roadCode == null ? null : roadCode.trim();
+    public void setCancelTime(Date cancelTime) {
+        this.cancelTime = cancelTime;
     }
 
-    public String getAreaCode() {
-        return areaCode;
+    public String getCancelor() {
+        return cancelor;
     }
 
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode == null ? null : areaCode.trim();
-    }
-
-    public Long getRoadLength() {
-        return roadLength;
-    }
-
-    public void setRoadLength(Long roadLength) {
-        this.roadLength = roadLength;
-    }
-
-    public String getConstructDate() {
-        return constructDate;
-    }
-
-    public void setConstructDate(String constructDate) {
-        this.constructDate = constructDate == null ? null : constructDate.trim();
-    }
-
-    public String getAdminDepId() {
-        return adminDepId;
-    }
-
-    public void setAdminDepId(String adminDepId) {
-        this.adminDepId = adminDepId == null ? null : adminDepId.trim();
-    }
-
-    public String getRoadStatus() {
-        return roadStatus;
-    }
-
-    public void setRoadStatus(String roadStatus) {
-        this.roadStatus = roadStatus == null ? null : roadStatus.trim();
+    public void setCancelor(String cancelor) {
+        this.cancelor = cancelor == null ? null : cancelor.trim();
     }
 
     public String getRemark() {
