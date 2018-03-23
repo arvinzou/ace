@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.HashMap;
 import com.alibaba.fastjson.JSON;
 import java.util.Random;
+
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -20,6 +22,8 @@ import com.huacainfo.ace.portal.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,6 +67,11 @@ public class WWWController extends PortalBaseController {
 
 	@Autowired
 	private RedisOperations<String, Object> redisTemplate;
+
+	@Autowired
+	private AuthorityService authorityService;
+	@Autowired
+	private KafkaProducerService kafkaProducerService;
 
 	/**
 	 * 
@@ -205,6 +214,42 @@ public class WWWController extends PortalBaseController {
 		// 保存进session
 		this.getRequest().getSession().setAttribute("j_captcha_cmcc", sRand);
 		return sRand;
+	}
+
+	@RequestMapping(value = "/on_publish.do")
+	@ResponseBody
+	public ResponseEntity on_publish()throws Exception{
+		Map<String,Object> p=this.getParams();
+		this.logger.info("on_publish->{}",p);
+		MessageResponse rst=authorityService.authority(p);
+		if(!rst.getState()){
+			return new ResponseEntity<>(rst, HttpStatus.NOT_ACCEPTABLE);
+		}
+		this.logger.info("{}",rst);
+		String swfurl=(String)p.get("swfurl");
+		Map<String,String> o=CommonUtils.urlSplit(swfurl);
+		if(o.containsKey("id")){
+			String id=o.get("id");
+			if(CommonUtils.isNotEmpty(id)){
+				this.redisTemplate.opsForValue().set((String) p.get("name"),id);
+			}
+
+		}
+
+		return new ResponseEntity<>(p, HttpStatus.OK);
+	}
+	@RequestMapping(value = "/record_done.do")
+	@ResponseBody
+	public ResponseEntity  record_done()throws Exception{
+		Map<String,Object> p=this.getParams();
+		p.put("service","flvfileConverService");
+		Object id=this.redisTemplate.opsForValue().get((String) p.get("name"));
+		if(CommonUtils.isNotEmpty(id)){
+			p.put("id",id);
+		}
+		this.logger.info("record_done->{}",p);
+		this.kafkaProducerService.sendMsg("topic.sys.msg", p);
+		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
 
 }

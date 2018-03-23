@@ -120,15 +120,13 @@ public class WebUtils {
         AudioAttributes audio = new AudioAttributes();
         Encoder encoder = new Encoder();
         audio.setCodec("libmp3lame");
-        audio.setBitRate(new Integer(64000));
+        audio.setBitRate(new Integer(86000));
         audio.setChannels(new Integer(1));
         audio.setSamplingRate(new Integer(22050));
-
         VideoAttributes video = new VideoAttributes();
         video.setCodec("libxvid");// 转MP4
-        video.setBitRate(new Integer(180000));// 180kb/s比特率
-        video.setFrameRate(new Integer(1));// 1f/s帧频，1是目前测试比较清楚的，越大越模糊
-
+        video.setBitRate(new Integer(860000));
+        video.setFrameRate(new Integer(15));
         EncodingAttributes attrs = new EncodingAttributes();
         attrs.setFormat("mp4");
         attrs.setAudioAttributes(audio);

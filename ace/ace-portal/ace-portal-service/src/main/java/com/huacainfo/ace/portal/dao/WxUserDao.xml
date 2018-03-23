@@ -154,4 +154,11 @@
     where unionId = #{unionId,jdbcType=VARCHAR}
   </update>
 
+  <select id="selectByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from wx_user
+    where mobile=#{mobile} limit 0,1
+  </select>
+
 </mapper>

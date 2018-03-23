@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.FileRecordDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.FileRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="mp4" jdbcType="VARCHAR" property="mp4" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="bytes_in" jdbcType="BIGINT" property="bytes_in" />
+    <result column="bytes_out" jdbcType="BIGINT" property="bytes_out" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="flashver" jdbcType="VARCHAR" property="flashver" />
+    <result column="clientid" jdbcType="VARCHAR" property="clientid" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, path, mp4, url, status, bytes_in, bytes_out, addr, flashver, clientid,
+    updateTime, createTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from file_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from file_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.FileRecord">
+    insert into file_record (id, name, path,
+    mp4, url, status, bytes_in,
+    bytes_out, addr, flashver,
+    clientid, updateTime, createTime
+    )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+    #{mp4,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{bytes_in,jdbcType=BIGINT},
+    #{bytes_out,jdbcType=BIGINT}, #{addr,jdbcType=VARCHAR}, #{flashver,jdbcType=VARCHAR},
+    #{clientid,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.FileRecord">
+    update file_record
+    set name = #{name,jdbcType=VARCHAR},
+    path = #{path,jdbcType=VARCHAR},
+    mp4 = #{mp4,jdbcType=VARCHAR},
+    url = #{url,jdbcType=VARCHAR},
+    status = #{status,jdbcType=CHAR},
+    bytes_in = #{bytes_in,jdbcType=BIGINT},
+    bytes_out = #{bytes_out,jdbcType=BIGINT},
+    addr = #{addr,jdbcType=VARCHAR},
+    flashver = #{flashver,jdbcType=VARCHAR},
+    clientid = #{clientid,jdbcType=VARCHAR},
+    updateTime = #{updateTime,jdbcType=TIMESTAMP},
+    createTime = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="isExit" resultType="int">
+    select count(*) from file_record where id=#{id}
+  </select>
+</mapper>
