@@ -285,42 +285,27 @@ function preview(id, title) {
     $(dialog).parent().css("top", "1px");
     $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
     loadView(id);
-    jQuery("#onlinedevice-grid-table").jqGrid(
-        {
-            url: contextPath + "/monitorSite/findMonitorSiteDetailList",
-            postData: {monitorSiteId: id},
-            datatype : "json",//请求数据返回的类型。可选json,xml,txt
-            colNames: ['设备编号', '设备名称', '设备类型', '设备编号'],
-            colModel: [
-                {
-                    name: 'id',
-                    hidden: true,
-                    width: 90
-                },
-                {
-                    name: 'deviceName',
-                    width: 100
-                },
-                {
-                    name: 'deviceType',
-                    width: 100
-                },
-                {
-                    name: 'deviceNo',
-                    width: 100
-                }
-            ],
-            rowNum : 10,//一页显示多少条
-            rowList : [ 10, 20, 30 ],//可供用户选择一页显示多少条
-            pager : '#onlinedevice-grid-pager',//表格页脚的占位符(一般是div)的id
-            sortname : 'id',//初始化的时候排序的字段
-            sortorder : "desc",//排序方式,可选desc,asc
-            mtype : "post",//向后台请求数据的ajax的类型。可选post,get
-            viewrecords : true,
-        });
-    /*创建jqGrid的操作按钮容器*/
-    /*可以控制界面上增删改查的按钮是否显示*/
-    jQuery("#onlinedevice-grid-table").jqGrid('navGrid', '#onlinedevice-grid-pager', {edit : false,add : false,del : false});
+    var url=contextPath + "/monitorSite/findMonitorSiteDetailList";
+    var postData={monitorSiteId: id};
+    $.getJSON(url,postData,function (result) {
+        if(result.status==0){
+            tablePreview(result.rows);
+        }
+    });
+
+
+}
+
+function tablePreview(data) {
+    console.log(data);
+    $('#device-table').empty();
+    for(var i=0;i<data.length;i++){
+        var t=tableView.replace('[index]',i+1+'');
+        t=t.replace('[deviceName]',data[i].deviceName);
+        t=t.replace('[deviceType]',data[i].deviceType);
+        t=t.replace('[deviceNo]',data[i].deviceNo);
+        $('#device-table').append($(t));
+    }
 }
 
 function loadView(id) {
@@ -351,3 +336,10 @@ function loadView(id) {
         }
     });
 }
+
+var tableView='<tr>'+
+    '                <th>[index]</th>'+
+    '                <th>[deviceName]</th>'+
+    '                <th>[deviceType]</th>'+
+    '                <th>[deviceNo]</th>'+
+    ' </tr>';

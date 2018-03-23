@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ace-kernel-web:war">
+    <output-path>$PROJECT_DIR$/ace-kernel/ace-kernel-web/target</output-path>
+    <root id="archive" name="ace-kernel-web-1.0.war">
+      <element id="artifact" artifact-name="ace-kernel-web:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -12,7 +12,6 @@ var _colModel = function () {
             hidden: true,//在初始化表格时是否要隐藏此列
             width: 100,//默认列的宽度，只能是象素值
             editoptions: {
-                size: "20",
                 maxlength: "50"
             },
         },
