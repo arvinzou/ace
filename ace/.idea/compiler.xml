@@ -6,7 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ace-autocode" />
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
@@ -16,10 +15,17 @@
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />
+        <module name="ace-rvc-client" />
+        <module name="ace-rvc-service" />
+        <module name="ace-rvc-web" />
+        <module name="ace-uf-client" />
+        <module name="ace-uf-service" />
+        <module name="ace-uf-web" />
         <module name="ace-woc-client" />
         <module name="ace-woc-rest" />
         <module name="ace-woc-service" />
         <module name="ace-woc-web" />
+        <module name="ace-woc-web (1)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,10 +34,18 @@
       <module name="ace-common" target="1.7" />
       <module name="ace-common-dao" target="1.7" />
       <module name="ace-common-web" target="1.7" />
+      <module name="ace-face" target="1.7" />
+      <module name="ace-face-client" target="1.7" />
+      <module name="ace-face-service" target="1.7" />
+      <module name="ace-face-web" target="1.7" />
       <module name="ace-gesp" target="1.7" />
       <module name="ace-gesp-client" target="1.7" />
       <module name="ace-gesp-service" target="1.7" />
       <module name="ace-gesp-web" target="1.7" />
+      <module name="ace-gis" target="1.7" />
+      <module name="ace-gis-client" target="1.7" />
+      <module name="ace-gis-service" target="1.7" />
+      <module name="ace-gis-web" target="1.7" />
       <module name="ace-iop" target="1.7" />
       <module name="ace-iop-client" target="1.7" />
       <module name="ace-iop-rest" target="1.7" />
@@ -67,6 +81,10 @@
       <module name="ace-uf-client" target="1.7" />
       <module name="ace-uf-service" target="1.7" />
       <module name="ace-uf-web" target="1.7" />
+      <module name="ace-weui" target="1.7" />
+      <module name="ace-weui-client" target="1.7" />
+      <module name="ace-weui-service" target="1.7" />
+      <module name="ace-weui-web" target="1.7" />
       <module name="ace-weuiluohua" target="1.7" />
       <module name="ace-weuiluohua-client" target="1.7" />
       <module name="ace-weuiluohua-service" target="1.7" />
@@ -76,10 +94,22 @@
       <module name="ace-woc-rest" target="1.7" />
       <module name="ace-woc-service" target="1.7" />
       <module name="ace-woc-web" target="1.7" />
+      <module name="ace-woc-web (1)" target="1.7" />
       <module name="ace-workflow" target="1.7" />
       <module name="ace-workflow-client" target="1.7" />
       <module name="ace-workflow-service" target="1.7" />
       <module name="ace-workflow-web" target="1.7" />
+      <module name="activiti-bpmn-converter" target="1.7" />
+      <module name="activiti-bpmn-model" target="1.7" />
+      <module name="activiti-dmn-api" target="1.7" />
+      <module name="activiti-dmn-model" target="1.7" />
+      <module name="activiti-engine" target="1.7" />
+      <module name="activiti-form-api" target="1.7" />
+      <module name="activiti-form-model" target="1.7" />
+      <module name="activiti-image-generator" target="1.7" />
+      <module name="activiti-json-converter" target="1.7" />
+      <module name="activiti-process-validation" target="1.7" />
+      <module name="activiti-root" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
