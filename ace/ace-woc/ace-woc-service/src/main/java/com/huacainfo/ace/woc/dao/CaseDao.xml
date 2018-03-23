@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.woc.dao.CaseDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.woc.model.Case">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="caseNo" jdbcType="VARCHAR" property="caseNo" />
-    <result column="caseDate" jdbcType="TIMESTAMP" property="caseDate" />
-    <result column="trafficId" jdbcType="VARCHAR" property="trafficId" />
-    <result column="vehicleId" jdbcType="VARCHAR" property="vehicleId" />
-    <result column="driver" jdbcType="VARCHAR" property="driver" />
-    <result column="party" jdbcType="VARCHAR" property="party" />
-    <result column="partyType" jdbcType="VARCHAR" property="partyType" />
-    <result column="chp1" jdbcType="VARCHAR" property="chp1" />
-    <result column="lecn" jdbcType="VARCHAR" property="lecn" />
-    <result column="chp2" jdbcType="VARCHAR" property="chp2" />
-    <result column="recorder" jdbcType="VARCHAR" property="recorder" />
-    <result column="recordTime" jdbcType="TIMESTAMP" property="recordTime" />
-    <result column="fines" jdbcType="DECIMAL" property="fines" />
-    <result column="auditDept" jdbcType="VARCHAR" property="auditDept" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.woc.model.Case">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="caseNo" jdbcType="VARCHAR" property="caseNo"/>
+        <result column="caseDate" jdbcType="TIMESTAMP" property="caseDate"/>
+        <result column="trafficId" jdbcType="VARCHAR" property="trafficId"/>
+        <result column="vehicleId" jdbcType="VARCHAR" property="vehicleId"/>
+        <result column="driver" jdbcType="VARCHAR" property="driver"/>
+        <result column="party" jdbcType="VARCHAR" property="party"/>
+        <result column="partyType" jdbcType="VARCHAR" property="partyType"/>
+        <result column="chp1" jdbcType="VARCHAR" property="chp1"/>
+        <result column="lecn" jdbcType="VARCHAR" property="lecn"/>
+        <result column="chp2" jdbcType="VARCHAR" property="chp2"/>
+        <result column="recorder" jdbcType="VARCHAR" property="recorder"/>
+        <result column="recordTime" jdbcType="TIMESTAMP" property="recordTime"/>
+        <result column="fines" jdbcType="DECIMAL" property="fines"/>
+        <result column="auditDept" jdbcType="VARCHAR" property="auditDept"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, caseNo, caseDate, trafficId, vehicleId, driver, party, partyType, chp1, lecn, 
     chp2, recorder, recordTime, fines, auditDept, remark, status, createUserId, createUserName, 
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from case
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from case
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from case
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.woc.model.Case">
+    <insert id="insert" parameterType="com.huacainfo.ace.woc.model.Case">
     insert into case (id, caseNo, caseDate, 
       trafficId, vehicleId, driver, 
       party, partyType, chp1, 
@@ -59,224 +59,224 @@
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.Case">
-    insert into case
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="caseNo != null">
-        caseNo,
-      </if>
-      <if test="caseDate != null">
-        caseDate,
-      </if>
-      <if test="trafficId != null">
-        trafficId,
-      </if>
-      <if test="vehicleId != null">
-        vehicleId,
-      </if>
-      <if test="driver != null">
-        driver,
-      </if>
-      <if test="party != null">
-        party,
-      </if>
-      <if test="partyType != null">
-        partyType,
-      </if>
-      <if test="chp1 != null">
-        chp1,
-      </if>
-      <if test="lecn != null">
-        lecn,
-      </if>
-      <if test="chp2 != null">
-        chp2,
-      </if>
-      <if test="recorder != null">
-        recorder,
-      </if>
-      <if test="recordTime != null">
-        recordTime,
-      </if>
-      <if test="fines != null">
-        fines,
-      </if>
-      <if test="auditDept != null">
-        auditDept,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="createUserId != null">
-        createUserId,
-      </if>
-      <if test="createUserName != null">
-        createUserName,
-      </if>
-      <if test="createDate != null">
-        createDate,
-      </if>
-      <if test="lastModifyUserId != null">
-        lastModifyUserId,
-      </if>
-      <if test="lastModifyUserName != null">
-        lastModifyUserName,
-      </if>
-      <if test="lastModifyDate != null">
-        lastModifyDate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="caseNo != null">
-        #{caseNo,jdbcType=VARCHAR},
-      </if>
-      <if test="caseDate != null">
-        #{caseDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="trafficId != null">
-        #{trafficId,jdbcType=VARCHAR},
-      </if>
-      <if test="vehicleId != null">
-        #{vehicleId,jdbcType=VARCHAR},
-      </if>
-      <if test="driver != null">
-        #{driver,jdbcType=VARCHAR},
-      </if>
-      <if test="party != null">
-        #{party,jdbcType=VARCHAR},
-      </if>
-      <if test="partyType != null">
-        #{partyType,jdbcType=VARCHAR},
-      </if>
-      <if test="chp1 != null">
-        #{chp1,jdbcType=VARCHAR},
-      </if>
-      <if test="lecn != null">
-        #{lecn,jdbcType=VARCHAR},
-      </if>
-      <if test="chp2 != null">
-        #{chp2,jdbcType=VARCHAR},
-      </if>
-      <if test="recorder != null">
-        #{recorder,jdbcType=VARCHAR},
-      </if>
-      <if test="recordTime != null">
-        #{recordTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="fines != null">
-        #{fines,jdbcType=DECIMAL},
-      </if>
-      <if test="auditDept != null">
-        #{auditDept,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="createUserId != null">
-        #{createUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="createUserName != null">
-        #{createUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUserId != null">
-        #{lastModifyUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyUserName != null">
-        #{lastModifyUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyDate != null">
-        #{lastModifyDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.Case">
-    update case
-    <set>
-      <if test="caseNo != null">
-        caseNo = #{caseNo,jdbcType=VARCHAR},
-      </if>
-      <if test="caseDate != null">
-        caseDate = #{caseDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="trafficId != null">
-        trafficId = #{trafficId,jdbcType=VARCHAR},
-      </if>
-      <if test="vehicleId != null">
-        vehicleId = #{vehicleId,jdbcType=VARCHAR},
-      </if>
-      <if test="driver != null">
-        driver = #{driver,jdbcType=VARCHAR},
-      </if>
-      <if test="party != null">
-        party = #{party,jdbcType=VARCHAR},
-      </if>
-      <if test="partyType != null">
-        partyType = #{partyType,jdbcType=VARCHAR},
-      </if>
-      <if test="chp1 != null">
-        chp1 = #{chp1,jdbcType=VARCHAR},
-      </if>
-      <if test="lecn != null">
-        lecn = #{lecn,jdbcType=VARCHAR},
-      </if>
-      <if test="chp2 != null">
-        chp2 = #{chp2,jdbcType=VARCHAR},
-      </if>
-      <if test="recorder != null">
-        recorder = #{recorder,jdbcType=VARCHAR},
-      </if>
-      <if test="recordTime != null">
-        recordTime = #{recordTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="fines != null">
-        fines = #{fines,jdbcType=DECIMAL},
-      </if>
-      <if test="auditDept != null">
-        auditDept = #{auditDept,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="createUserId != null">
-        createUserId = #{createUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="createUserName != null">
-        createUserName = #{createUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        createDate = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUserId != null">
-        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyUserName != null">
-        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyDate != null">
-        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.woc.model.Case">
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.Case">
+        insert into case
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="caseNo != null">
+                caseNo,
+            </if>
+            <if test="caseDate != null">
+                caseDate,
+            </if>
+            <if test="trafficId != null">
+                trafficId,
+            </if>
+            <if test="vehicleId != null">
+                vehicleId,
+            </if>
+            <if test="driver != null">
+                driver,
+            </if>
+            <if test="party != null">
+                party,
+            </if>
+            <if test="partyType != null">
+                partyType,
+            </if>
+            <if test="chp1 != null">
+                chp1,
+            </if>
+            <if test="lecn != null">
+                lecn,
+            </if>
+            <if test="chp2 != null">
+                chp2,
+            </if>
+            <if test="recorder != null">
+                recorder,
+            </if>
+            <if test="recordTime != null">
+                recordTime,
+            </if>
+            <if test="fines != null">
+                fines,
+            </if>
+            <if test="auditDept != null">
+                auditDept,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="caseNo != null">
+                #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseDate != null">
+                #{caseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="trafficId != null">
+                #{trafficId,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleId != null">
+                #{vehicleId,jdbcType=VARCHAR},
+            </if>
+            <if test="driver != null">
+                #{driver,jdbcType=VARCHAR},
+            </if>
+            <if test="party != null">
+                #{party,jdbcType=VARCHAR},
+            </if>
+            <if test="partyType != null">
+                #{partyType,jdbcType=VARCHAR},
+            </if>
+            <if test="chp1 != null">
+                #{chp1,jdbcType=VARCHAR},
+            </if>
+            <if test="lecn != null">
+                #{lecn,jdbcType=VARCHAR},
+            </if>
+            <if test="chp2 != null">
+                #{chp2,jdbcType=VARCHAR},
+            </if>
+            <if test="recorder != null">
+                #{recorder,jdbcType=VARCHAR},
+            </if>
+            <if test="recordTime != null">
+                #{recordTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fines != null">
+                #{fines,jdbcType=DECIMAL},
+            </if>
+            <if test="auditDept != null">
+                #{auditDept,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.Case">
+        update case
+        <set>
+            <if test="caseNo != null">
+                caseNo = #{caseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="caseDate != null">
+                caseDate = #{caseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="trafficId != null">
+                trafficId = #{trafficId,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleId != null">
+                vehicleId = #{vehicleId,jdbcType=VARCHAR},
+            </if>
+            <if test="driver != null">
+                driver = #{driver,jdbcType=VARCHAR},
+            </if>
+            <if test="party != null">
+                party = #{party,jdbcType=VARCHAR},
+            </if>
+            <if test="partyType != null">
+                partyType = #{partyType,jdbcType=VARCHAR},
+            </if>
+            <if test="chp1 != null">
+                chp1 = #{chp1,jdbcType=VARCHAR},
+            </if>
+            <if test="lecn != null">
+                lecn = #{lecn,jdbcType=VARCHAR},
+            </if>
+            <if test="chp2 != null">
+                chp2 = #{chp2,jdbcType=VARCHAR},
+            </if>
+            <if test="recorder != null">
+                recorder = #{recorder,jdbcType=VARCHAR},
+            </if>
+            <if test="recordTime != null">
+                recordTime = #{recordTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fines != null">
+                fines = #{fines,jdbcType=DECIMAL},
+            </if>
+            <if test="auditDept != null">
+                auditDept = #{auditDept,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.woc.model.Case">
     update case
     set caseNo = #{caseNo,jdbcType=VARCHAR},
       caseDate = #{caseDate,jdbcType=TIMESTAMP},
@@ -302,4 +302,64 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+    <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.woc.vo.CaseVo">
+        <result column="partyName" jdbcType="VARCHAR" property="partyName"/>
+        <result column="partyDeptName" jdbcType="VARCHAR" property="partyDeptName"/>
+        <result column="plateNo" jdbcType="VARCHAR" property="vehicleNo"/>
+        <result column="axleCount" jdbcType="INTEGER" property="axleCount" />
+        <result column="totalMass" jdbcType="DECIMAL" property="totalMass" />
+        <result column="overMass" jdbcType="DECIMAL" property="overMass" />
+        <result column="overRate" jdbcType="DECIMAL" property="overRate" />
+        <result column="speed" jdbcType="DECIMAL" property="speed" />
+    </resultMap>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        from case
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" resultMap="BaseResultMapVo">
+        select
+            p.`name` as partyName, d.department_name as partyDeptName,
+            tc.plateNo, tc.axleCount,tc.totalMass, tc.overMass, tc.overRate, tc.speed,
+            t.id, t.caseNo, t.caseDate, t.trafficId, t.vehicleId, t.driver, t.party, t.partyType, t.chp1, t.lecn,
+            t.chp2, t.recorder, t.recordTime, t.fines, t.auditDept, t.remark, t.status, t.createUserId, t.createUserName,
+            t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from woc.`case` t
+        left join woc.traffic tc on t.trafficId = tc.id
+        left join woc.person p on t.party = p.id
+        left join portal.department d on p.companyId = d.department_id
+        where 1 = 1
+        <if test="condition.caseNo!=null and condition.caseNo!=&quot;&quot;">
+            and t.caseNo like concat(#{condition.caseNo,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.woc.model.Case">
+        select count(*)
+        from woc.`case`
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
 </mapper>
