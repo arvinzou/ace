@@ -1,0 +1,39 @@
+<view class="weui-search-bar">
+  <view class="weui-search-bar__form">
+    <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+      <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+        <icon type="clear" size="14"></icon>
+      </view>
+    </view>
+    <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+  </view>
+  <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+</view>
+
+
+<block wx:for-items="{{listHis}}" wx:for-item="o" wx:key="*item">
+
+  <navigator url="../noticePreview/index?id={{o.taskId}}" class="navigator" hover-class="weui-cell_active">
+
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+      <view class=" title-strong-big2">{{o.taskName}}</view>
+      <view style="flex-direction:column;">
+        <view style="font-size:14px;">
+          发送时间：{{o.createTime}}
+        </view>
+        <view wx:if="{{o.status==0}}">
+          <text style="border-radius: 20rpx;color: #fff;background-color: red;	margin: 3px 3px 3px;">待发送</text>
+        </view>
+        <view wx:if="{{o.status==1}}">
+          <text style="border-radius: 20rpx;color: #fff;background-color: green;	margin: 3px 3px 3px;">已发送</text>
+        </view>
+      </view>
+    </view>
+    <view class="navigator-arrow"></view>
+  </navigator>
+</block>

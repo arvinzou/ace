@@ -1,0 +1,95 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+
+page {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #f4f4f4;
+    color: #999;
+    font-size: 28rpx;
+}
+
+ /* view{
+    border: 1px #d83e3f solid;
+}   */
+
+.ing {
+    padding: 100rpx 32rpx 0rpx 32rpx;
+    width: 686rpx;
+    height: auto;
+}
+
+.content {
+    width: 686rpx;
+    background-color: white;
+    margin:0rpx 0 40rpx 0;
+    border-radius: 10rpx;
+}
+
+.content_img {
+    position: relative;
+    width: 686rpx;
+    height: 386rpx;
+}
+
+.cover {
+    width: 686rpx;
+    height: 386rpx;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+}
+
+.icon_icon {
+    width: 26rpx;
+    height: 26rpx;
+    margin:0 18rpx 0 0rpx;
+
+}
+
+
+
+.title {
+    /* position: absolute; */
+    /* top: 306rpx; */
+    font-size: 32rpx;
+    font-weight: bold;
+    color:#222;
+    width: 630rpx; 
+}
+
+.msg{
+    margin: 0rpx 28rpx 0rpx 28rpx;
+    padding-bottom: 30rpx;
+    padding-top: 32rpx;
+}
+
+.tilmsg{
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+/* 加载状态样式 */
+.loading {
+    width: 686rpx;
+    text-align: center;
+    font-size: 24rpx;
+}
+
+.loading:before {
+    display: inline-block;
+    margin-right: 5rpx;
+    vertical-align: middle;
+    content: '';
+    width: 40rpx;
+    height: 40rpx;
+    background-image: url(../../image/loading.png) no-repeat;
+    background-size: contain;
+    animation: rotate 1s linear infinite;
+}
+
+.loading.complete:before {
+    display: none;
+}

@@ -1,0 +1,62 @@
+<view class="index">
+    <!-- 头 -->
+    <view class="index-hd">
+        <!--搜索栏  -->
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <!--placeholder:输入框为空时占位符
+                    bindinput 键盘输入事件
+                    focus 获取焦点，放置输入光标-->
+                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <!--inputShowed =true  -->
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+    </view>
+
+    <view class='index-bd'>
+
+        <block wx:for-items="{{list}}" wx:for-item="item" wx:key="{{item.id}}">
+            <view wx:if="{{item.cover==''?true:item.cover==null?true:false}}">
+                <view class='content' bindtap="listClick" data-id='{{item.id}}'>
+                    <navigator>
+                        <view class='title'>{{item.name}}</view>
+                        <view class='remark'>
+                            <span class='deptlong'>{{item.dept}}</span>
+                            <span class="time">{{item.published}}</span>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+            <view wx:else>
+                <view class='content contentplus' bindtap="listClick" data-id='{{item.id}}'>
+                    <navigator>
+                        <view class='image'>
+                            <image class='image' src='{{serverfile}}{{item.cover}}' mode="aspectFill"></image>
+                        </view>
+                        <view class='content_text'>
+                            <view class='title titleplus'>{{item.name}}</view>
+                            <view class='remark remarkplus'>
+                                <span class='dept'>{{item.dept}}</span>
+                                <span class="time">{{item.published}}</span>
+                            </view>
+                        </view>
+                    </navigator>
+                </view>
+            </view>
+            <view class='lineP'></view>
+        </block>
+    </view>
+    <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!LoadOver}}">已加载全部</view>
+</view>

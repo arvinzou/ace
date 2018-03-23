@@ -1,0 +1,44 @@
+<view class="index">
+<view class="reg-top">
+  <view class="reg-logo-panel">
+      <image src="../../image/登录.png" mode="aspectFit" class="reg-icon"/>
+      <view class="reg-logo-text">白名单申请</view>
+  </view>
+  <view class="reg-title">
+    掌上统战
+  </view>
+</view>
+
+  <view>
+  <form catchsubmit="formSubmit" report-submit catchreset="formReset" >
+
+
+    <view class="kind-list">
+     
+
+      <view class="kind-list-item weui-flex">
+        <view class="weui-flex__item-icon">
+          <image class="iconList20" src="../../image/me.png" />
+        </view>
+        <input name="name" value="{{formData.name}}" class="weui-flex__item-body" maxlength="10" placeholder="姓名" />
+      </view>
+      <view class="kind-list-item weui-flex">
+        <view class="weui-flex__item-icon">
+          <image class="iconList20" src="../../image/checkcode.png" />
+        </view>
+
+        <input name="code" bindinput="bindinputMobile" value="{{formData.code}}" type="number" class="weui-flex__item-body" maxlength="11" placeholder="验证码" />
+
+        
+      </view>
+
+    </view>
+ <view >
+        <button disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;"  formType="submit">提交</button>
+        <view class="reg-remark">注：申请白名单为临时体验系统用户，使用期限为一周</view>
+
+      </view>
+
+  </form>
+  </view>
+</view>

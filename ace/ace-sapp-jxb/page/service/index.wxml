@@ -1,0 +1,194 @@
+<view class="index">
+  <view class="index-hd">
+    <view class="weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">搜索</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+  </view>
+  <map id="myMap" wx:if="{{showMapStatus}}" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindcallouttap="callouttap" bindtap="bindtap" bindmarkertap="markertap" polyline="{{polyline}}" circles="{{circles}}"
+    bindregionchange="regionchange" show-location style="width: 100%; height: {{view.height}}; " include-points="{{includePoints}}">
+
+
+  <cover-view class="controls"  wx:if="{{showFloatBoxStatus}}" bindtap="tabdept">
+    <cover-image  class="center-img" src="../../image/{{deptIcon}}" mode="aspectFit" />
+    <cover-view class="center-text">单位</cover-view>
+  </cover-view>
+
+  <cover-view class="controls" wx:if="{{showFloatBoxStatus}}"  bindtap="tabpersonage">
+  <cover-image  class="center-img" src="../../image/{{personageIcon}}" mode="aspectFit" />
+   <cover-view class="center-text">人士</cover-view>
+  </cover-view>
+  <cover-view class="controls"  wx:if="{{showFloatBoxStatus}}" bindtap="taborg">
+  <cover-image  class="center-img" src="../../image/{{orgIcon}}" mode="aspectFit" />
+   <cover-view class="center-text">服务</cover-view>
+  </cover-view>
+
+
+  <cover-view class="controls" bindtap="tabscaleadd" wx:if="{{showFloatBoxStatus}}">
+    <cover-image  class="center-img" src="../../image/jiahao.png" mode="aspectFit" />
+     <cover-view class="center-text">放大</cover-view>
+   </cover-view>
+   
+  <cover-view class="controls" bindtap="tabscale" wx:if="{{showFloatBoxStatus}}">
+    <cover-image  class="center-img" src="../../image/jianhao.png" mode="aspectFit" />
+     <cover-view class="center-text">缩小</cover-view>
+  </cover-view>
+ <cover-view class="controls" bindtap="getLocation" wx:if="{{showFloatBoxStatus}}">
+     <cover-image  class="center-img" src="../../image/mylocation.png" mode="aspectFit" />
+      <cover-view class="center-text">定位</cover-view>
+  </cover-view>
+ <cover-view class="controls" bindtap="getCircles" wx:if="{{showFloatBoxStatus}}">
+     <cover-image  class="center-img" src="../../image/cir.png" mode="aspectFit" />
+      <cover-view class="center-text">周边</cover-view>
+  </cover-view>
+
+
+
+  </map>
+
+  <view class="attr_box" wx:if="{{showModalStatus}}">
+
+    <navigator wx:if="{{o.types=='deptSub'||o.types=='organization'}}" url="../{{o.types}}/index?id={{o.id}}" class="navigator">
+      <view class="navigator-text" style="flex-direction:column;">
+        <view class="title-strong-big2">{{o.name}}</view>
+        <view style="font-size:14px;" wx:if="{{o.addr.length>0}}">
+          <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" />{{o.addr}}
+        </view>
+        <view style="font-size:14px" >
+          <image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit" wx:if="{{o.tel.length>0}}"/>{{o.tel}}
+          <image class="iconList" src="../../image/time_71.003460207612px_1195888_easyicon.net.png" mode="aspectFit" wx:if="{{o.serviceTimeStart.length>0}}"/> 
+          {{o.serviceTimeStart}}<text wx:if="{{o.serviceTimeStart.length>0}}">-</text>{{o.serviceTimeEnd}}
+       </view>
+      </view>
+      <view class="navigator-arrow"></view>
+    </navigator>
+    <navigator wx:if="{{o.types=='personageSub'}}" url="../{{o.types}}/index?id={{o.id}}" class="navigator">
+       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image wx:if="{{o.photo.length>0}}" class="photo" mode="aspectFill" src="{{serverfile}}{{o.photo}}" />
+
+   <image wx:if="{{o.photo.length==0}}" class="photo" src="../../image/tongzhanrs.png" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class=" title-strong-big2">{{o.name}}</view>
+          <view style="flex-direction:column;">
+            <view class="title-strong-big">
+                {{o.deptName}}
+              </view>
+              <view style="font-size:14px">
+            {{o.areaName}}{{o.categoryName}}
+            </view>
+          </view>
+        </view>
+        <view class="navigator-arrow"></view>
+    </navigator>
+
+   <view  class="navigator" wx:if="{{o.types=='www'}}" bindtap="openLocation" data-name="{{o.name}}" data-address="{{o.addr}}" data-latitude="{{o.latitude}}" data-longitude="{{o.longitude}}">
+      <view class="navigator-text" style="flex-direction:column;">
+        <view class="title-strong-big2">{{o.name}}</view>
+        <view style="font-size:14px; width:90%" wx:if="{{o.addr.length>0}}">
+          <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" />
+          {{o.addr}}
+        </view>
+        <view style="font-size:14px" >
+          <image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit" wx:if="{{o.tel.length>0}}"/>{{o.tel}}
+       </view>
+      </view>
+      <view class="navigator-arrow"></view>
+    </view>
+
+  <!--
+    <button type="primary" bindtap="navigator" style="width:95%">详细</button>
+    -->
+  </view>
+
+  <view class="bar_box" wx:if="{{showBarStatus}}" style="flex-direction:column;">
+      <view style="width:100%;display: flex;position:relative;">
+        <view style="flex:1"></view>
+        <image bindtap="hideBar" style="text-align: right;padding:10px;width:20px;height:20px" src="../../image/close2.png" />
+      </view>
+    <view class="weui-grids-nav" wx:if="{{activeTarget=='org'}}">
+      <block wx:for="{{listCategory}}" wx:key="{{item.id}}">
+
+        <view bindtap="bindtapType" id="{{item.id}}" data-name="{{item.name}}" class="weui-grid-nav" hover-class="weui-grid_active-nav">
+          <view style="flex-direction:column;" bindtap="query" id="{{item.id}}">
+            <image class="weui-grid__icon-nav" src="{{serverfile}}{{item.icon}}" />
+            <view class="weui-grid__label-nav">{{item.name}}</view>
+          </view>
+        </view>
+
+      </block>
+    </view>
+    <scroll-view scroll-y="true" style="height:70vh">
+        <block wx:for="{{markers}}" wx:for-item="o" wx:key="*item">
+
+          <view  class="navigator" wx:if="{{o.types=='www'}}" bindtap="openLocation" data-name="{{o.name}}" data-address="{{o.addr}}" data-latitude="{{o.latitude}}" data-longitude="{{o.longitude}}">
+            <view class="navigator-text" style="flex-direction:column;">
+              <view class="title-strong-big2">{{o.name}}</view>
+              <view style="font-size:14px; width:90%" wx:if="{{o.addr.length>0}}">
+                <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" />
+                {{o.addr}}
+              </view>
+              <view style="font-size:14px" >
+                <image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit" wx:if="{{o.tel.length>0}}"/>{{o.tel}}
+            </view>
+            </view>
+            <view class="navigator-arrow"></view>
+          </view>
+
+          <navigator wx:if="{{o.types=='deptSub'||o.types=='organization'}}" url="../{{o.types}}/index?id={{o.id}}" class="navigator">
+      <view class="navigator-text" style="flex-direction:column;">
+        <view class="title-strong-big2">{{o.name}}</view>
+        <view style="font-size:14px;" wx:if="{{o.addr.length>0}}">
+          <image class="iconList" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" />{{o.addr}}
+        </view>
+        <view style="font-size:14px" >
+          <image class="iconList" src="../../image/phone_32.088397790055px_1187704_easyicon.net.png" mode="aspectFit" wx:if="{{o.tel.length>0}}"/>{{o.tel}}
+          <image class="iconList" src="../../image/time_71.003460207612px_1195888_easyicon.net.png" mode="aspectFit" wx:if="{{o.serviceTimeStart.length>0}}"/> 
+          {{o.serviceTimeStart}}<text wx:if="{{o.serviceTimeStart.length>0}}">-</text>{{o.serviceTimeEnd}}
+       </view>
+      </view>
+      <view class="navigator-arrow"></view>
+    </navigator>
+    <navigator wx:if="{{o.types=='personageSub'}}" url="../{{o.types}}/index?id={{o.id}}" class="navigator">
+       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image wx:if="{{o.photo.length>0}}" class="photo" mode="aspectFill" src="{{serverfile}}{{o.photo}}" />
+            <image wx:if="{{o.photo.length==0}}" class="photo" src="../../image/tongzhanrs.png" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class=" title-strong-big2">{{o.name}}</view>
+          <view style="flex-direction:column;">
+            <view class="title-strong-big">
+                 {{o.deptName}}
+              </view>
+              <view style="font-size:14px">
+            {{o.areaName}}{{o.categoryName}}
+            </view>
+          </view>
+        </view>
+        <view class="navigator-arrow"></view>
+    </navigator>
+
+        </block>
+    </scroll-view>
+  </view>
+  <view class="controls-box-bottom" wx:if="{{showOrgBarStatus}}">
+           <navigator bindtap="showBar" class="navigator">
+           <view  class="navigator-text" style="flex-direction:row;">
+          <image class="iconList" mode="aspectFit" src="../../image/pin_location_50.04px_1189687_easyicon.net.png" mode="aspectFit" />发现服务
+          </view>
+           <view class="navigator-arrow"></view>
+          </navigator>    
+  </view>
+</view>

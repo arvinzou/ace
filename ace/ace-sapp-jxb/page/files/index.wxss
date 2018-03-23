@@ -1,0 +1,103 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+
+page {
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    height: auto;
+    background-color: #f4f4f4;
+    color: #999;
+    font-size: 26rpx;
+}
+
+ 
+/* view{
+    border: 1px #d83e3f solid;
+}   */
+
+
+.tzwj {
+    padding-top: 80rpx;
+    height: 100%;
+}
+
+.image {
+    width: 55rpx;
+    height: auto;
+}
+
+.fileContent {
+    display: table;
+    font-size: 26rpx;
+    color: #999;
+    padding: 30rpx 0;
+    border-bottom: #e5e5e5 solid 1rpx;
+}
+
+.imgLeft {
+    vertical-align: top;
+    display: inline-block;
+    width: 80rpx;
+    margin-top: 30rpx;
+}
+
+.fontRight {
+    vertical-align: top;
+    display: inline-block;
+    width: 605rpx;
+    margin-top: 20rpx;
+}
+
+.fileName {
+    font-size: 30rpx;
+    color: #222;
+    line-height: 40rpx;
+}
+
+.remark {
+    padding-top: 10rpx;
+    color: #d83e3f;
+    width: 605rpx;
+}
+
+.warehouse {
+    background-color: white;
+    padding: 0 32rpx;
+    display: block;
+    width: 686rpx;
+}
+
+/******************************************************************/
+
+.tzzl {
+    padding-top: 80rpx;
+    height: 100%;
+}
+
+.loading {
+    width: 686rpx;
+    padding: 30rpx 32rpx 0rpx 32rpx;
+    text-align: center;
+    font-size: 24rpx;
+}
+
+.loading:before {
+    display: inline-block;
+    margin-right: 5rpx;
+    vertical-align: middle;
+    content: '';
+    width: 40rpx;
+    height: 40rpx;
+     background-image: url(../../image/loading.png) no-repeat;
+    background-size: contain;
+    animation: rotate 1s linear infinite;
+}
+
+.loading.complete:before {
+    display: none;
+}
+
+span {
+    color: #999;
+}

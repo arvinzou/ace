@@ -1,0 +1,98 @@
+<view class="index">
+  <view class="reg-top" wx:if="{{userLogin}}">
+    <view class="reg-title">
+      统战飞讯
+    </view>
+  </view>
+  <view class="reg-tabbar" wx:if="{{userLogin&&!tabActiveThir}}">
+
+    <view class="reg-tabbar-login {{tabActiveLeft==true?'tab-active':''}}" bindtap="tableft">信息发送</view>
+
+    <view class="reg-tabbar-reg {{tabActiveRight==true?'tab-active':''}}" bindtap="tabright">发送状态</view>
+  </view>
+
+  <view wx:if="{{!userLogin}}">
+    <view class="reg-top">
+      <view class="reg-logo-panel">
+        <image src="../../image/登录.png" mode="aspectFit" bindtap="onLoad" class="reg-icon" />
+        <view class="reg-logo-text">请先登录</view>
+      </view>
+      <view class="reg-title">
+        武陵掌上统战
+      </view>
+
+    </view>
+    <view class="kind-list">
+      <button style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;" bindtap="onLoad">确定</button>
+    </view>
+  </view>
+
+  <view wx:if="{{userLogin&&tabActiveLeft}}">
+
+
+
+    <form name='saveFormId' report-submit bindsubmit='onSubmit'>
+      <view class="kind-list">
+
+
+        <view class="kind-list-item weui-flex">
+          <view class="weui-flex__item-icon">
+            <image class="iconList20" src="../../image/title.png" />
+          </view>
+          <input name="taskName" class="weui-flex__item-body" maxlength="50" placeholder="任务名称" />
+        </view>
+        <view class="kind-list-item column">
+
+          <view>发送给</view>
+
+          <scroll-view scroll-y style="height: 200rpx;">
+            <block wx:for-items="{{userList}}" wx:for-item="o" wx:key="*item">
+              <view class="dataItem">{{o.name}}</view>
+            </block>
+          </scroll-view>
+          <view class="row">
+            <button disabled="{{disabled}}" size="mini" bindtap="tabadd" style="color:#fff;background-color:#BB3D00; border-radius: 2px;margin-left:0px">添加</button>
+            <button disabled="{{disabled}}" size="mini" bindtap="tabdel" style="color:#fff;background-color:#BB3D00; border-radius: 2px;margin-left:5px">全部清除</button>
+            <button disabled="{{disabled}}" size="mini" bindtap="tabdelLast" style="color:#fff;background-color:#BB3D00; border-radius: 2px;margin-left:5px">删除最后</button>
+          </view>
+        </view>
+
+        <view class="kind-list-item">
+          <textarea name="msg" bindinput="valueChange" maxlength="200" class="weui-textarea" placeholder="请输入发送内容" style="height: 200rpx" />
+          <view class="weui-textarea-counter">{{max}}/200</view>
+        </view>
+
+        <view class="kind-list-item weui-flex">
+          <view class="weui-flex__item-icon">
+            <image class="iconList20" src="../../image/checkcode.png" />
+          </view>
+          <input name="captcha" type="number" class="weui-flex__item-body" maxlength="10" placeholder="验证码" />
+          <image class="weui-vcode-img weui-flex__item-body" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width:90px;height:30px;text-align:right"></image>
+        </view>
+
+
+      </view>
+      <view>
+        <button disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;" formType="submit">提交</button>
+        <view class="reg-remark"></view>
+
+      </view>
+    </form>
+
+  </view>
+  <view class="bd" wx:if="{{userLogin&&tabActiveRight}}">
+    <include src="page-list.wxml" />
+  </view>
+  <view wx:if="{{userLogin&&tabActiveThir}}">
+    <view class="reg-tabbar">
+
+      <view class="reg-tabbar-login {{tab1==true?'tab-active':''}}" bindtap="tab1">统战分组</view>
+
+      <view class="reg-tabbar-center {{tab2==true?'tab-active':''}}" bindtap="tab2">自由分组</view>
+      <view class="reg-tabbar-reg {{tab3==true?'tab-active':''}}" bindtap="tab3">临时分组</view>
+    </view>
+    <form name='getMobile' report-submit bindsubmit='onSelect'>
+      <include src="tree.wxml"/>
+    </form>
+  </view>
+</view>

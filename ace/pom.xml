@@ -62,6 +62,8 @@
         <module>ace-common-dao</module>
         <module>ace-common-web</module>
         <module>ace-portal</module>
+        <module>ace-jave</module>
+        <!--
         <module>ace-iop</module>
         <module>ace-operana</module>
         <module>ace-jxb</module>
@@ -69,7 +71,7 @@
         <module>ace-gis</module>
         <module>ace-face</module>
         <module>ace-live</module>
-        <module>ace-jave</module>
+
         <module>ace-uf</module>
         <module>ace-kernel</module>
         <module>ace-rvc</module>
@@ -80,7 +82,7 @@
         <module>ace-weui</module>
         <module>activiti-root</module>
 
-
+-->
         <module>ace-autocode</module>
 
     </modules>

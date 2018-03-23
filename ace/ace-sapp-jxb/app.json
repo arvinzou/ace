@@ -1,0 +1,68 @@
+{
+  "pages": [
+    "page/index/index",
+    "page/dept/index",
+    "page/personage/index",
+    "page/activity/index",
+    "page/service/index",
+    "page/feedback/index",
+    "page/organization/index",
+    "page/info/index",
+    "page/deptSub/index",
+    "page/showFP/index",
+    "page/personageSub/index",
+    "page/reg/index",
+    "page/regInfo/index",
+    "page/me/index",
+    "page/map/index",
+    "page/activitySec/index",
+    "page/activityPreview/index",
+    "page/notice/index",
+    "page/noticePreview/index",
+    "page/files/index",
+    "page/whiteList/index",
+    "page/px/index",
+	"page/povertyAlleviation/index",
+    "page/concentric/index",
+    "page/education/index",
+    "page/research/index",
+    "page/propaganda/index",
+    "page/message/index",
+    "page/showNews/index",
+    "page/showTX/index",
+    "page/showPX/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "#fff",
+    "navigationBarTitleText": "掌上统战",
+    "navigationBarBackgroundColor": "#3C3C3C",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#353536",
+    "selectedColor": "#353536",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "page/index/index",
+        "iconPath": "image/tongzhan.png",
+        "selectedIconPath": "image/tongzhan_s.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "page/me/index",
+        "iconPath": "image/me.png",
+        "selectedIconPath": "image/me_s.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false
+}

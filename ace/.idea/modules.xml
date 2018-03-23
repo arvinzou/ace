@@ -7,85 +7,11 @@
       <module fileurl="file://$PROJECT_DIR$/ace-common/ace-common.iml" filepath="$PROJECT_DIR$/ace-common/ace-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-web/ace-common-web.iml" filepath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-face/ace-face.iml" filepath="$PROJECT_DIR$/ace-face/ace-face.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-face/ace-face-client/ace-face-client.iml" filepath="$PROJECT_DIR$/ace-face/ace-face-client/ace-face-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-face/ace-face-service/ace-face-service.iml" filepath="$PROJECT_DIR$/ace-face/ace-face-service/ace-face-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-face/ace-face-web/ace-face-web.iml" filepath="$PROJECT_DIR$/ace-face/ace-face-web/ace-face-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gesp/ace-gesp.iml" filepath="$PROJECT_DIR$/ace-gesp/ace-gesp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gesp/ace-gesp-client/ace-gesp-client.iml" filepath="$PROJECT_DIR$/ace-gesp/ace-gesp-client/ace-gesp-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gesp/ace-gesp-service/ace-gesp-service.iml" filepath="$PROJECT_DIR$/ace-gesp/ace-gesp-service/ace-gesp-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gesp/ace-gesp-web/ace-gesp-web.iml" filepath="$PROJECT_DIR$/ace-gesp/ace-gesp-web/ace-gesp-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gis/ace-gis.iml" filepath="$PROJECT_DIR$/ace-gis/ace-gis.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gis/ace-gis-client/ace-gis-client.iml" filepath="$PROJECT_DIR$/ace-gis/ace-gis-client/ace-gis-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gis/ace-gis-service/ace-gis-service.iml" filepath="$PROJECT_DIR$/ace-gis/ace-gis-service/ace-gis-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-gis/ace-gis-web/ace-gis-web.iml" filepath="$PROJECT_DIR$/ace-gis/ace-gis-web/ace-gis-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop-client/ace-iop-client.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop-client/ace-iop-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop-rest/ace-iop-rest.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop-rest/ace-iop-rest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop-service/ace-iop-service.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop-service/ace-iop-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop-web/ace-iop-web.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop-web/ace-iop-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-jave/ace-jave.iml" filepath="$PROJECT_DIR$/ace-jave/ace-jave.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-web/ace-jxb-web.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-web/ace-jxb-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-backend/ace-kernel-backend.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-client/ace-kernel-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-service/ace-kernel-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-kernel/ace-kernel-web/ace-kernel-web.iml" filepath="$PROJECT_DIR$/ace-kernel/ace-kernel-web/ace-kernel-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live.iml" filepath="$PROJECT_DIR$/ace-live/ace-live.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-luohua/ace-luohua.iml" filepath="$PROJECT_DIR$/ace-luohua/ace-luohua.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-luohua/ace-luohua-client/ace-luohua-client.iml" filepath="$PROJECT_DIR$/ace-luohua/ace-luohua-client/ace-luohua-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-luohua/ace-luohua-service/ace-luohua-service.iml" filepath="$PROJECT_DIR$/ace-luohua/ace-luohua-service/ace-luohua-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-luohua/ace-luohua-web/ace-luohua-web.iml" filepath="$PROJECT_DIR$/ace-luohua/ace-luohua-web/ace-luohua-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana-client/ace-operana-client.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana-client/ace-operana-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana-service/ace-operana-service.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana-service/ace-operana-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-operana/ace-operana-web/ace-operana-web.iml" filepath="$PROJECT_DIR$/ace-operana/ace-operana-web/ace-operana-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-rvc/ace-rvc.iml" filepath="$PROJECT_DIR$/ace-rvc/ace-rvc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-rvc/ace-rvc-client/ace-rvc-client.iml" filepath="$PROJECT_DIR$/ace-rvc/ace-rvc-client/ace-rvc-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-rvc/ace-rvc-service/ace-rvc-service.iml" filepath="$PROJECT_DIR$/ace-rvc/ace-rvc-service/ace-rvc-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-rvc/ace-rvc-web/ace-rvc-web.iml" filepath="$PROJECT_DIR$/ace-rvc/ace-rvc-web/ace-rvc-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-client/ace-uf-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-service/ace-uf-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" filepath="$PROJECT_DIR$/ace-uf/ace-uf-web/ace-uf-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-client/ace-weui-client.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-client/ace-weui-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-service/ace-weui-service.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-service/ace-weui-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weui/ace-weui-web/ace-weui-web.iml" filepath="$PROJECT_DIR$/ace-weui/ace-weui-web/ace-weui-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua.iml" filepath="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-client/ace-weuiluohua-client.iml" filepath="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-client/ace-weuiluohua-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-service/ace-weuiluohua-service.iml" filepath="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-service/ace-weuiluohua-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-web/ace-weuiluohua-web.iml" filepath="$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-web/ace-weuiluohua-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc-client/ace-woc-client.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc-client/ace-woc-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc-rest/ace-woc-rest.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc-rest/ace-woc-rest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc-service/ace-woc-service.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc-service/ace-woc-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc-web/ace-woc-web.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc-web/ace-woc-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-client/ace-workflow-client.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-client/ace-workflow-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-service/ace-workflow-service.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-service/ace-workflow-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-workflow/ace-workflow-web/ace-workflow-web.iml" filepath="$PROJECT_DIR$/ace-workflow/ace-workflow-web/ace-workflow-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-bpmn-converter/activiti-bpmn-converter.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-bpmn-converter/activiti-bpmn-converter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-bpmn-model/activiti-bpmn-model.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-bpmn-model/activiti-bpmn-model.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-dmn-api/activiti-dmn-api.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-dmn-api/activiti-dmn-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-dmn-model/activiti-dmn-model.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-dmn-model/activiti-dmn-model.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-engine/activiti-engine.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-engine/activiti-engine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-form-api/activiti-form-api.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-form-api/activiti-form-api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-form-model/activiti-form-model.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-form-model/activiti-form-model.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-image-generator/activiti-image-generator.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-image-generator/activiti-image-generator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-json-converter/activiti-json-converter.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-json-converter/activiti-json-converter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/modules/activiti-process-validation/activiti-process-validation.iml" filepath="$PROJECT_DIR$/activiti-root/modules/activiti-process-validation/activiti-process-validation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/activiti-root/activiti-root.iml" filepath="$PROJECT_DIR$/activiti-root/activiti-root.iml" />
     </modules>
   </component>
 </project>

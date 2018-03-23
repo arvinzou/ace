@@ -1,0 +1,30 @@
+<view class='page' style="height:100%">
+    <view class='head'>
+        <view class='headicon'>
+            <image class="headimg" src='../../image/logo.png'></image>
+        </view>
+        <view class='headtext'>
+            中共常德市武陵区委统战部
+        </view>
+    </view>
+
+    <block wx:for="{{list}}" wx:key="{{item.id}}">
+        <view class='warehouse'>
+            <view class="topContent">
+                <view class='title'>{{item.name}}</view>
+            </view>
+            <view class='bottomContent'>
+                <block wx:for="{{item.menu}}" wx:for-item="o" wx:key="{{o.id}}">
+                    <view class='menu'>
+                        <navigator url='{{o.page}}' open-type='{{o.opentype}}'>
+                            <view class='icon' style='background-color: {{o.color}};'>
+                                <image class='iconImg' src='../../image/{{o.icon}}'></image>
+                            </view>
+                            <view class='iconText'>{{o.name}}</view>
+                        </navigator>
+                    </view>
+                </block>
+            </view>
+        </view>   
+    </block>
+</view>

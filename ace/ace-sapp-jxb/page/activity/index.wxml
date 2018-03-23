@@ -1,0 +1,31 @@
+<view class="b1">
+  <view class="t_w">
+    <view class="t_image">
+      <image class="t_image1" src="../../image/huodong-title.png"></image>
+    </view>
+    <view class="b2">
+      <view class="v1">发布统战工作信息、展示统战工作风采、报道统战工作典型、提供建言献策平台
+。</view>
+      <navigator open-type="navigate" url="../activitySec/index?category=1">
+      <view class="btn1">
+        <p class="p1">统战管理</p>
+        <p class="p2">区委、统战系统单位关于统战相关工作的研究、部署、安排和贯彻落实等工作动态的展示</p>
+      </view>
+      </navigator>
+      <navigator open-type="navigate" url="../activitySec/index?category=2">
+      <view class="btn2" bindtap="b">
+        <p class="p1">同心行动</p>
+        <p class="p2">全区统一战线围绕全区经济社会发展的主题、主线和中心任务，开展的各类公益性活动</p>
+      </view>
+      </navigator>
+      <navigator open-type="navigate" url="../feedback/index">
+       <view class="btn3" bindtap="b">
+        <p class="p1">建言献策</p>
+        <p class="p2">社会各界人士提出意见建议、反映社情民意的平台</p>
+      </view>
+      </navigator>
+    </view>
+  </view>
+</view>
+<view bindtap="a" style="height:100vh;background-color: deepskyblue;">
+</view>

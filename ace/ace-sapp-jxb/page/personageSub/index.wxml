@@ -1,0 +1,148 @@
+<view class="index">
+  <view class="weui-flex" style="background:#FFFFFF;">
+    <view class="weui-flex__item" style="text-align: center;justify-content: bottom;">
+      <view wx:if="{{o.photo.length>0}}">
+
+        <image class="photo"  src="{{serverfile}}{{o.photo}}" bindtap="previewPhoto"/>
+
+      </view>
+      <view wx:if="{{!o.photo}}">
+
+        <image   bindload="imageLoad" 
+style="width:{{ images.width }}rpx; height:{{ images.height }}rpx;"  src="../../image/照片.png" bindtap="previewPhoto"/>
+
+      </view>
+      <view style="text-align: center;padding:2px;font-weight:800;font-size:14px">
+        {{o.name}}
+      </view>
+    </view>
+    <view class="weui-flex__item1">
+      <view class="weui-form-preview__bd">
+       <view class="weui-form-preview__item ">
+          <view class="weui-form-preview__label">辖区</view>
+          <view class="weui-form-preview__value">{{o.areaName}}</view>
+        </view>
+        <view class="weui-form-preview__item ">
+          <view class="weui-form-preview__label">单位及职务</view>
+          <view class="weui-form-preview__value">{{o.deptName}}</view>
+        </view>
+        <view class="weui-form-preview__item ">
+          <view class="weui-form-preview__label">党派</view>
+          <view class="weui-form-preview__value">{{o.partyName}}</view>
+        </view>
+        <view class="weui-form-preview__item ">
+          <view class="weui-form-preview__label">出生年月</view>
+          <view class="weui-form-preview__value">{{o.birthdayName}}</view>
+        </view>
+      
+      </view>
+    </view>
+  </view>
+
+  <view class="index-bd" style="padding-top:20rpx">
+    <view class="kind-list" >
+     <view class="kind-list-item" wx:if="{{o.intro.length>0}}">
+        <view class="kind-list-item-hd">
+          <view>{{o.intro}}</view>
+        </view>
+      </view>
+      <view class="kind-list-item" wx:if="{{o.placeOfOriginName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">籍贯</view>
+          <view>{{o.placeOfOriginName}}</view>
+        </view>
+      </view>
+       <view class="kind-list-item" wx:if="{{o.careerTypeName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">人士类型</view>
+          <view>{{o.categoryName}}</view>
+        </view>
+      </view>
+       <view class="kind-list-item" wx:if="{{o.careerTypeName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">职业类型</view>
+          <view>{{o.careerTypeName}}</view>
+        </view>
+      </view>
+      <view class="kind-list-item" wx:if="{{o.nationName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">民族</view>
+          <view>{{o.nationName}}</view>
+        </view>
+      </view>
+      <view class="kind-list-item" wx:if="{{o.rankName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">职级</view>
+          <view>{{o.rankName}}</view>
+        </view>
+      </view>
+
+      <view class="kind-list-item" wx:if="{{o.joinDateName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">加入时间</view>
+          <view>{{o.joinDateName}}</view>
+        </view>
+      </view>
+      <view class="kind-list-item" wx:if="{{o.administrativeDuty.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">行政职务</view>
+          <view>{{o.administrativeDuty}}</view>
+        </view>
+      </view>
+      <view class="kind-list-item" wx:if="{{o.degreeeName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">学历</view>
+          <view>{{o.degreeeName}}</view>
+        </view>
+      </view>
+
+      <view class="kind-list-item" wx:if="{{o.academicTitleName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">职称</view>
+          <view>{{o.academicTitleName}}</view>
+        </view>
+      </view>
+
+      <view class="kind-list-item" wx:if="{{o.currentPostDateName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">现任职务时间</view>
+          <view>{{o.currentPostDateName}}</view>
+        </view>
+      </view>
+      <view class="kind-list-item" wx:if="{{o.currentRankDateName.length>0}}">
+        <view class="kind-list-item-hd">
+          <view class="kind-list-text">现任职级时间</view>
+          <view>{{o.currentRankDateName}}</view>
+        </view>
+      </view>
+
+     
+      <view class="kind-list-item" wx:if="{{o.qrcode.length>0}}" style="text-align: center;padding:2px;">
+       
+        <image wx:if="{{o.qrcode.length>0}}" class="qrcode" bindtap="previewImage"  src="{{serverfile}}{{o.qrcode}}"/>
+        <view style="text-align: center;padding:2px;font-weight:800;font-size:14px">二维码 </view>
+      </view>
+
+      <view class="kind-list-item" style="text-align: center;padding:2px;" wx:if="{{o.intro.length>0}}">
+           
+            <view style="text-align: center;padding:2px;font-weight:800;font-size:18px">简历 </view>
+              <rich-text nodes="{{o.intro}}" style="text-align:left;text-indent:40px;"></rich-text>
+           
+      </view>
+
+    
+      <view class="kind-list-item" style="flex-direction:colum;" wx:if="{{o.bindStatus.length>0}}">
+     
+      <view class="page-body-info">
+        <view class="page-body-title">绑定信息</view>
+        
+          <image class="userinfo-avatar" src="{{o.avatarUrl}}"></image>
+          <text class="userinfo-nickname">{{o.nickName}}</text>
+      
+      </view>
+
+      
+      </view>
+    </view>
+  </view>
+</view>

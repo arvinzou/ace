@@ -1,0 +1,26 @@
+@import "../common/index.wxss";
+.swiper {
+  height: 400rpx;
+  width: 100%;
+}
+.swiper image {
+  height: 100%;
+  width: 100%;
+}
+.body {
+  padding: 20rpx;
+}
+.navigator-text:before {
+  content: " ";
+  position: absolute;
+  left: 30rpx;
+  top: 0;
+  right: 30rpx;
+  height: 1px;
+  border-top: 1rpx solid #D8D8D8;
+  color: #D8D8D8;
+}
+.iconList{
+  width:22px; height: 22px;
+  padding-right: 10rpx;
+}
