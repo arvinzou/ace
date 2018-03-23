@@ -45,5 +45,6 @@
     <import resource="classpath:spring/spring-ace-common-monitor.xml"/>
     <import resource="classpath:spring/spring-ace-common-dao.xml"/>
     <import resource="classpath:spring/spring-ace-portal-service.xml"/>
+    <import resource="classpath:spring/spring-ace-portal-backend.xml"/>
     <import resource="classpath:dubbo/dubbo-ace-portal-provider.xml"/>
 </beans>

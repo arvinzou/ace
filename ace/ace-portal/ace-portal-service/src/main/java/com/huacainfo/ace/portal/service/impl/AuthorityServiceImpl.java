@@ -250,4 +250,29 @@ public class AuthorityServiceImpl implements AuthorityService {
 		rst.setValue(o);
 		return rst;
 	}
+	/**
+	 *
+	 * @Title:authority
+	 * @Description:  TODO(直播推流鉴权)
+	 * @param:        @param p
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: Arvin
+	 * @version: 2018-03-22
+	 */
+	@Override
+	public  MessageResponse authority(Map<String,Object> p) throws Exception{
+		WxUser o=this.wxUserDao.selectByMobile((String) p.get("name"));
+		if(CommonUtils.isBlank(o)){
+			return new MessageResponse(1,"没有找到对应的用户");
+		}
+		if(CommonUtils.isBlank(o.getRole())){
+			return new MessageResponse(1,"没有分配权限");
+		}
+		if(!o.getRole().equals("admin")){
+			return new MessageResponse(1,"权限非admin");
+		}
+		return new MessageResponse(0,"OK");
+	}
 }

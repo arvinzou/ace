@@ -11,11 +11,12 @@ import org.springframework.data.redis.core.RedisOperations;
 import org.apache.commons.io.FileUtils;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import it.sauronsoftware.jave.AudioAttributes;
+import it.sauronsoftware.jave.VideoAttributes;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.EncodingAttributes;
 import it.sauronsoftware.jave.InputFormatException;
-
+import it.sauronsoftware.jave.MultimediaInfo;
 import java.io.File;
 public class WebUtils {
 	private static Logger LOGGER = LoggerFactory.getLogger(WebUtils.class);
@@ -107,14 +108,60 @@ public class WebUtils {
         LOGGER.info("============complete changeToMp3==================");
     }
 
+    public static void changeToMp4(String sourcePath, String targetPath) {
+        LOGGER.info("============start changeToMp4==================");
+        LOGGER.info("{}", sourcePath);
+        File source = new File(sourcePath);
+        File target = new File(targetPath);
+        if (!source.exists()) {
+            LOGGER.error("===============source {} not exists=================", source.getPath());
+            return;
+        }
+        AudioAttributes audio = new AudioAttributes();
+        Encoder encoder = new Encoder();
+        audio.setCodec("libmp3lame");
+        audio.setBitRate(new Integer(86000));
+        audio.setChannels(new Integer(1));
+        audio.setSamplingRate(new Integer(22050));
+        VideoAttributes video = new VideoAttributes();
+        video.setCodec("libxvid");// 转MP4
+        video.setBitRate(new Integer(860000));
+        video.setFrameRate(new Integer(15));
+        EncodingAttributes attrs = new EncodingAttributes();
+        attrs.setFormat("mp4");
+        attrs.setAudioAttributes(audio);
+        attrs.setVideoAttributes(video);
+        long beginTime = System.currentTimeMillis();
+        try {
+            // 获取时长
+            //MultimediaInfo m = encoder.getInfo(source);
+            //LOGGER.info("{}",m.getDuration());
+            LOGGER.info("获取时长花费时间是：{}" + (System.currentTimeMillis() - beginTime));
+            beginTime = System.currentTimeMillis();
+            encoder.encode(source, target, attrs);
+            LOGGER.info("视频转码花费时间是:{}" ,(System.currentTimeMillis() - beginTime));
+        } catch (IllegalArgumentException e) {
+            LOGGER.error("{}", e);
+            e.printStackTrace();
+        } catch (InputFormatException e) {
+            LOGGER.error("{}", e);
+            e.printStackTrace();
+        } catch (EncoderException e) {
+            LOGGER.error("{}", e);
+            e.printStackTrace();
+        }
+        LOGGER.info("{}", targetPath);
+        LOGGER.info("============complete changeToMp4==================");
+    }
+
     public static void main(String args[]) {
 
-        String sourcePath = "/tmp/2c3ad216-c777-462a-a36b-3923e0f29a69.amr";
-        String targetPath = "/tmp/2c3ad216-c777-462a-a36b-3923e0f29a69.mp3";
+        String sourcePath = "/Users/chenxiaoke/Documents/tmp/201803180001.flv";
+        String targetPath = "/Users/chenxiaoke/Documents/tmp/201803180001.mp4";
         System.out.println(sourcePath);
         System.out.println(targetPath);
-        System.out.println("start changeToMp3");
-        WebUtils.changeToMp3(sourcePath, targetPath);
-        System.out.println("end changeToMp3");
+        System.out.println("start changeToMp4");
+        WebUtils.changeToMp4(sourcePath, targetPath);
+        System.out.println("end changeToMp4");
     }
 }

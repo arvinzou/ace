@@ -1,0 +1,255 @@
+.index{
+  color: 	#7A7E83;
+}
+.index-hd {
+  padding: 5rpx;
+  text-align: center;
+  box-shadow: 0px 4px 6px #e5e5e5;
+}
+
+.index-bd {
+  padding: 0 5rpx 5rpx;
+}
+.index-ft {
+  padding-bottom: 20rpx;
+  text-align: center;
+}
+.index-logo {
+  width: 186rpx;
+  height: 186rpx;
+}
+.index-desc {
+  margin-top: 20rpx;
+  
+  font-size: 28rpx;
+}
+
+
+.navigator-box {
+  opacity: 0;
+  position: relative;
+  background-color: #FFFFFF;
+  line-height: 1.41176471;
+  font-size: 34rpx;
+
+  transform: translateY(-50%);
+  transition: .3s;
+}
+.navigator-box-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.navigator {
+  padding: 20rpx 30rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.navigator:before {
+  content: " ";
+  position: absolute;
+  left: 30rpx;
+  top: 0;
+  right: 30rpx;
+  height: 1px;
+  border-top: 1rpx solid #D8D8D8;
+  color: #D8D8D8;
+}
+.navigator:first-child:before {
+  display: none;
+}
+.navigator-text {
+  flex: 1;
+}
+.navigator-arrow {
+  padding-right: 26rpx;
+  position: relative;
+}
+.navigator-arrow:after {
+  content: " ";
+  display: inline-block;
+  height: 18rpx;
+  width: 18rpx;
+  border-width: 2rpx 2rpx 0 0;
+  border-color: #888888;
+  border-style: solid;
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+  position: absolute;
+  top: 50%;
+  margin-top: -8rpx;
+  right: 28rpx;
+}
+
+
+.kind-list-item {
+  margin: 10rpx 0;
+  background-color: #FFFFFF;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+.kind-list-item-open {
+  margin: 10rpx 0;
+  border-radius: 4rpx;
+  overflow: hidden;
+  opacity: 1;
+  background-color: #fff;
+}
+.kind-list-item:first-child {
+  margin-top: 0;
+}
+.kind-list-text{
+  flex: 1;
+}
+.kind-list-img {
+  width: 30rpx;
+  height: 30rpx;
+}
+.kind-list-item-hd {
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  transition: opacity .3s;
+ 
+}
+.kind-list-item-hd-show {
+  opacity: 1;
+  font-weight: 800;
+  font-size: 16px;
+ 
+}
+.kind-list-item-bd {
+  height: 0;
+  overflow: hidden;
+
+
+}
+.kind-list-item-bd-show {
+  height: auto;
+}
+.map{
+  height: 400rpx;
+}
+.page{
+  padding:10rpx;
+  background: #FFFFFF;
+}
+.body{
+  padding:10rpx;
+  background: #FFFFFF;
+}
+.iconList{
+  width:16px; height: 16px;
+  padding-right: 10rpx;
+  vertical-align: middle;
+  
+}
+.iconList20{
+  width:20px; height: 20px;
+  padding-right: 10rpx;
+  vertical-align: middle;
+  
+}
+.list-group {
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);
+    box-shadow: 0 1px 2px rgba(0,0,0,.075);
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+.list-group-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.title-strong-big1{
+  font-size: 18px;
+  font-weight: 800;
+}
+.title-strong-big2{
+  font-size: 16px;
+  font-weight: 800;
+}
+.weui-flex__item_icon {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.weui-flex__item_body {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.center{
+    align-items: center;
+    justify-content: center;
+}
+.navbar {
+    z-index: 100;
+    width: 750rpx;
+    position: fixed; 
+    font-weight: bold;
+    font-size: 32rpx;
+    color: #666;
+    flex: none;
+    display: flex;
+    background: #fff;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+.navbar .item {
+    position: relative;
+    flex: auto;
+    text-align: center;
+    line-height: 80rpx;
+}
+
+.navbar .item.active {
+    font-size: 34rpx;
+    color: #d83e3f;
+}
+
+.navbar .item.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6rpx;
+    width: 80rpx;
+    margin: 0 auto;
+    background: #d83e3f;
+}
+
+/*标题*/
+.title{
+    background-color: white;
+    color: #222;
+    font-size: 40rpx;
+    font-weight: bold;
+    text-align: left;
+}
+/*画线*/
+.line{
+    margin: 0 32rpx;
+    border-bottom: 1px #e5e5e5 solid;
+}
+/*特殊画线*/
+.lineP {  
+    border-right: 32rpx white solid ;
+    border-left: 32rpx white solid ;
+    height: 1px;
+    background-color: #e5e5e5;
+}

@@ -37,4 +37,6 @@ public interface WxUserDao {
 
     List<Map<String,Object>> selectWxUser(@Param("condition") Map<String,Object> condition);
 
+    WxUser selectByMobile(String mobile);
+
 }

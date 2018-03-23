@@ -7,19 +7,11 @@
       <module fileurl="file://$PROJECT_DIR$/ace-common/ace-common.iml" filepath="$PROJECT_DIR$/ace-common/ace-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-web/ace-common-web.iml" filepath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live.iml" filepath="$PROJECT_DIR$/ace-live/ace-live.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jave/ace-jave.iml" filepath="$PROJECT_DIR$/ace-jave/ace-jave.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc-client/ace-woc-client.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc-client/ace-woc-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc-rest/ace-woc-rest.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc-rest/ace-woc-rest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc-service/ace-woc-service.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc-service/ace-woc-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-woc/ace-woc-web/ace-woc-web.iml" filepath="$PROJECT_DIR$/ace-woc/ace-woc-web/ace-woc-web.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../../common/js/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="../../common/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../common/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../common/css/common.css">
+    <link rel="stylesheet" href="../../common/css/font-awesome.min.css">
+    <link rel="stylesheet" href="html/css/rptList.css">
+    <link rel="stylesheet" href="../html/css/rptForm.css">
+    <link rel="stylesheet" href="../../common/css/iconfont.css">
+    <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../../common/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" href="../../common/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="../../common/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../common/js/iconfont.js"></script>
+    <script type="text/javascript" src="../../common/js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="../../common/js/common.js"></script>
+    <title>审查现场</title>
+</head>
+
+<body>
+<div class="container-fluid headContainer">
+    <ul class="topToolBtn">
+        <li>
+            <div class="input-group form-search">
+                <input type="text" class="searchByName form-control" placeholder="请输入标题关键字">
+                <span class="input-group-btn">
+                <button class="search btn btn-default" type="button"><i class="iconfont">&#xe60d;</i></button>
+                </span></div>
+        </li>
+        <li>创建时间</li>
+        <li>
+            <select class="form-control" id="chooseStatus">
+                <option value="">全部报道</option>
+                <option value="1">待审报道</option>
+                <option value="2">已审报道</option>
+            </select>
+        </li>
+        <li class="delectRptbtn">
+            <button class="btn btn-danger delect-rpt">删除报道</button>
+        </li>
+    </ul>
+</div>
+<div class="container-fluid contentRpt">
+    <ul class="reportList" id="jxbReportTable">
+
+    </ul>
+</div>
+
+<div id="htmlLoad">
+
+</div>
+<div id="JSLoad">
+
+</div>
+</body>
+<script type="text/javascript" src="html/js/rptList.js"></script>
+</html>

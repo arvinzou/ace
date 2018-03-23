@@ -6,16 +6,28 @@
     <file url="file://$PROJECT_DIR$/ace-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-common-dao" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-common-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-face" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-face/ace-face-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-face/ace-face-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-face/ace-face-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gesp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gis/ace-gis-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gis/ace-gis-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-gis/ace-gis-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-iop" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-rest" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-jave" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-jxb" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-jxb/ace-jxb-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-jxb/ace-jxb-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-jxb/ace-jxb-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-kernel" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-backend" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-kernel/ace-kernel-client" charset="UTF-8" />
@@ -45,6 +57,10 @@
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weui" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weui/ace-weui-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weui/ace-weui-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weui/ace-weui-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-weuiluohua" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-service" charset="UTF-8" />
@@ -58,5 +74,16 @@
     <file url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-workflow/ace-workflow-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-bpmn-converter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-bpmn-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-dmn-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-dmn-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-engine" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-form-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-form-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-image-generator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-json-converter" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/activiti-root/modules/activiti-process-validation" charset="UTF-8" />
   </component>
 </project>
