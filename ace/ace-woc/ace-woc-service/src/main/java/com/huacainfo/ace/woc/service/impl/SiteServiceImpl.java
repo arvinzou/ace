@@ -82,6 +82,7 @@ public class SiteServiceImpl implements SiteService {
 			return new MessageResponse(1, "卡点档案名称重复！");
 		}
 		o.setCreateDate(new Date());
+		o.setLastModifyDate(new Date());
 		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());

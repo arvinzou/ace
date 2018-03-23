@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.woc.dao.TrafficDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.woc.model.Traffic">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="siteId" jdbcType="VARCHAR" property="siteId" />
-    <result column="monitorSiteId" jdbcType="VARCHAR" property="monitorSiteId" />
-    <result column="inspectTime" jdbcType="TIMESTAMP" property="inspectTime" />
-    <result column="locale" jdbcType="VARCHAR" property="locale" />
-    <result column="plateNo" jdbcType="VARCHAR" property="plateNo" />
-    <result column="direction" jdbcType="VARCHAR" property="direction" />
-    <result column="axleCount" jdbcType="INTEGER" property="axleCount" />
-    <result column="totalMass" jdbcType="DECIMAL" property="totalMass" />
-    <result column="overMass" jdbcType="DECIMAL" property="overMass" />
-    <result column="overRate" jdbcType="DECIMAL" property="overRate" />
-    <result column="speed" jdbcType="DECIMAL" property="speed" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.woc.model.Traffic">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="siteId" jdbcType="VARCHAR" property="siteId"/>
+        <result column="monitorSiteId" jdbcType="VARCHAR" property="monitorSiteId"/>
+        <result column="inspectTime" jdbcType="TIMESTAMP" property="inspectTime"/>
+        <result column="locale" jdbcType="VARCHAR" property="locale"/>
+        <result column="plateNo" jdbcType="VARCHAR" property="plateNo"/>
+        <result column="direction" jdbcType="VARCHAR" property="direction"/>
+        <result column="axleCount" jdbcType="INTEGER" property="axleCount"/>
+        <result column="totalMass" jdbcType="DECIMAL" property="totalMass"/>
+        <result column="overMass" jdbcType="DECIMAL" property="overMass"/>
+        <result column="overRate" jdbcType="DECIMAL" property="overRate"/>
+        <result column="speed" jdbcType="DECIMAL" property="speed"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, siteId, monitorSiteId, inspectTime, locale, plateNo, direction, axleCount, totalMass, 
     overMass, overRate, speed, remark, status, createUserId, createUserName, createDate, 
     lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from traffic
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from traffic
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from traffic
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.woc.model.Traffic">
+    <insert id="insert" parameterType="com.huacainfo.ace.woc.model.Traffic">
     insert into traffic (id, siteId, monitorSiteId, 
       inspectTime, locale, plateNo, 
       direction, axleCount, totalMass, 
@@ -54,197 +54,197 @@
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.Traffic">
-    insert into traffic
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="siteId != null">
-        siteId,
-      </if>
-      <if test="monitorSiteId != null">
-        monitorSiteId,
-      </if>
-      <if test="inspectTime != null">
-        inspectTime,
-      </if>
-      <if test="locale != null">
-        locale,
-      </if>
-      <if test="plateNo != null">
-        plateNo,
-      </if>
-      <if test="direction != null">
-        direction,
-      </if>
-      <if test="axleCount != null">
-        axleCount,
-      </if>
-      <if test="totalMass != null">
-        totalMass,
-      </if>
-      <if test="overMass != null">
-        overMass,
-      </if>
-      <if test="overRate != null">
-        overRate,
-      </if>
-      <if test="speed != null">
-        speed,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="createUserId != null">
-        createUserId,
-      </if>
-      <if test="createUserName != null">
-        createUserName,
-      </if>
-      <if test="createDate != null">
-        createDate,
-      </if>
-      <if test="lastModifyUserId != null">
-        lastModifyUserId,
-      </if>
-      <if test="lastModifyUserName != null">
-        lastModifyUserName,
-      </if>
-      <if test="lastModifyDate != null">
-        lastModifyDate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="siteId != null">
-        #{siteId,jdbcType=VARCHAR},
-      </if>
-      <if test="monitorSiteId != null">
-        #{monitorSiteId,jdbcType=VARCHAR},
-      </if>
-      <if test="inspectTime != null">
-        #{inspectTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="locale != null">
-        #{locale,jdbcType=VARCHAR},
-      </if>
-      <if test="plateNo != null">
-        #{plateNo,jdbcType=VARCHAR},
-      </if>
-      <if test="direction != null">
-        #{direction,jdbcType=VARCHAR},
-      </if>
-      <if test="axleCount != null">
-        #{axleCount,jdbcType=INTEGER},
-      </if>
-      <if test="totalMass != null">
-        #{totalMass,jdbcType=DECIMAL},
-      </if>
-      <if test="overMass != null">
-        #{overMass,jdbcType=DECIMAL},
-      </if>
-      <if test="overRate != null">
-        #{overRate,jdbcType=DECIMAL},
-      </if>
-      <if test="speed != null">
-        #{speed,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="createUserId != null">
-        #{createUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="createUserName != null">
-        #{createUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUserId != null">
-        #{lastModifyUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyUserName != null">
-        #{lastModifyUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyDate != null">
-        #{lastModifyDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.Traffic">
-    update traffic
-    <set>
-      <if test="siteId != null">
-        siteId = #{siteId,jdbcType=VARCHAR},
-      </if>
-      <if test="monitorSiteId != null">
-        monitorSiteId = #{monitorSiteId,jdbcType=VARCHAR},
-      </if>
-      <if test="inspectTime != null">
-        inspectTime = #{inspectTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="locale != null">
-        locale = #{locale,jdbcType=VARCHAR},
-      </if>
-      <if test="plateNo != null">
-        plateNo = #{plateNo,jdbcType=VARCHAR},
-      </if>
-      <if test="direction != null">
-        direction = #{direction,jdbcType=VARCHAR},
-      </if>
-      <if test="axleCount != null">
-        axleCount = #{axleCount,jdbcType=INTEGER},
-      </if>
-      <if test="totalMass != null">
-        totalMass = #{totalMass,jdbcType=DECIMAL},
-      </if>
-      <if test="overMass != null">
-        overMass = #{overMass,jdbcType=DECIMAL},
-      </if>
-      <if test="overRate != null">
-        overRate = #{overRate,jdbcType=DECIMAL},
-      </if>
-      <if test="speed != null">
-        speed = #{speed,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="createUserId != null">
-        createUserId = #{createUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="createUserName != null">
-        createUserName = #{createUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        createDate = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUserId != null">
-        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyUserName != null">
-        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyDate != null">
-        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.woc.model.Traffic">
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.Traffic">
+        insert into traffic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="siteId != null">
+                siteId,
+            </if>
+            <if test="monitorSiteId != null">
+                monitorSiteId,
+            </if>
+            <if test="inspectTime != null">
+                inspectTime,
+            </if>
+            <if test="locale != null">
+                locale,
+            </if>
+            <if test="plateNo != null">
+                plateNo,
+            </if>
+            <if test="direction != null">
+                direction,
+            </if>
+            <if test="axleCount != null">
+                axleCount,
+            </if>
+            <if test="totalMass != null">
+                totalMass,
+            </if>
+            <if test="overMass != null">
+                overMass,
+            </if>
+            <if test="overRate != null">
+                overRate,
+            </if>
+            <if test="speed != null">
+                speed,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="siteId != null">
+                #{siteId,jdbcType=VARCHAR},
+            </if>
+            <if test="monitorSiteId != null">
+                #{monitorSiteId,jdbcType=VARCHAR},
+            </if>
+            <if test="inspectTime != null">
+                #{inspectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="locale != null">
+                #{locale,jdbcType=VARCHAR},
+            </if>
+            <if test="plateNo != null">
+                #{plateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                #{direction,jdbcType=VARCHAR},
+            </if>
+            <if test="axleCount != null">
+                #{axleCount,jdbcType=INTEGER},
+            </if>
+            <if test="totalMass != null">
+                #{totalMass,jdbcType=DECIMAL},
+            </if>
+            <if test="overMass != null">
+                #{overMass,jdbcType=DECIMAL},
+            </if>
+            <if test="overRate != null">
+                #{overRate,jdbcType=DECIMAL},
+            </if>
+            <if test="speed != null">
+                #{speed,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.Traffic">
+        update traffic
+        <set>
+            <if test="siteId != null">
+                siteId = #{siteId,jdbcType=VARCHAR},
+            </if>
+            <if test="monitorSiteId != null">
+                monitorSiteId = #{monitorSiteId,jdbcType=VARCHAR},
+            </if>
+            <if test="inspectTime != null">
+                inspectTime = #{inspectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="locale != null">
+                locale = #{locale,jdbcType=VARCHAR},
+            </if>
+            <if test="plateNo != null">
+                plateNo = #{plateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                direction = #{direction,jdbcType=VARCHAR},
+            </if>
+            <if test="axleCount != null">
+                axleCount = #{axleCount,jdbcType=INTEGER},
+            </if>
+            <if test="totalMass != null">
+                totalMass = #{totalMass,jdbcType=DECIMAL},
+            </if>
+            <if test="overMass != null">
+                overMass = #{overMass,jdbcType=DECIMAL},
+            </if>
+            <if test="overRate != null">
+                overRate = #{overRate,jdbcType=DECIMAL},
+            </if>
+            <if test="speed != null">
+                speed = #{speed,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.woc.model.Traffic">
     update traffic
     set siteId = #{siteId,jdbcType=VARCHAR},
       monitorSiteId = #{monitorSiteId,jdbcType=VARCHAR},
@@ -267,4 +267,57 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.TrafficVo"></resultMap>
+
+    <sql id="whereCondition">
+        from traffic
+        where 0=0
+        <if test='condition.direction!=null and condition.direction!=""'>
+            and direction like
+            concat('%',#{condition.direction,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.plateNo!=null and condition.plateNo!=''">
+            and plateNo like
+            concat('%',#{condition.plateNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.siteId!=null and condition.siteId!=''">
+            and siteId like
+            concat('%',#{condition.siteId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.siteId!=null and condition.siteId!=''">
+            and siteId like
+            concat('%',#{condition.siteId,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int">
+    select count(*)
+    from traffic
+    where
+    name=#{name}
+  </select>
 </mapper>

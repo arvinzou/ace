@@ -245,7 +245,7 @@ var _colModel = function () {
             editable: true,
             edittype: "select",
             renderer: function (value) {
-                return rsd(value, "114");
+                return rsd(value, "119");
             },
             formoptions: {
                 style: 'width:200px;height:25px;',
@@ -254,7 +254,7 @@ var _colModel = function () {
 
             },
             editoptions: {
-                value: odparse("114"),
+                value: odparse("119"),
                 colspan: true,
             },
             width: 80,

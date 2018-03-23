@@ -80,6 +80,7 @@ public class PersonServiceImpl implements PersonService {
 			return new MessageResponse(1, "身份证号码已经存在！");
 		}
 		o.setCreateDate(new Date());
+		o.setLastModifyDate(new Date());
 		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());

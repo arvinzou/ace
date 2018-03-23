@@ -83,6 +83,7 @@ public class VehicleServiceImpl implements VehicleService {
 			return new MessageResponse(1, "人员信息名称重复！");
 		}
 		o.setCreateDate(new Date());
+		o.setLastModifyDate(new Date());
 		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
