@@ -23,7 +23,7 @@ import com.huacainfo.ace.woc.vo.TrafficQVo;
 /**
  * @author: 王恩
  * @version: 2018-03-21
- * @Description:  TODO(案件审核记录)
+ * @Description: TODO(通行记录)
  */
 public class TrafficController extends WocBaseController {
 
@@ -35,8 +35,8 @@ public class TrafficController extends WocBaseController {
      /**
 	 *
 	    * @Title:find!{bean.name}List
-	    * @Description:  TODO(案件审核记录分页查询)
-	 		* @param:        @param condition
+      * @Description: TODO(通行记录分页查询)
+      * @param:        @param condition
 	 		* @param:        @param page
 	 		* @param:        @return
 	 		* @param:        @throws Exception
@@ -61,8 +61,8 @@ public class TrafficController extends WocBaseController {
     /**
 	 *
 	    * @Title:insertTraffic
-	    * @Description:  TODO(添加案件审核记录)
-	 		* @param:        @param jsons
+     * @Description: TODO(添加通行记录)
+     * @param:        @param jsons
 	 		* @param:        @throws Exception
 	 		* @return:       MessageResponse
 	 		* @throws
@@ -79,8 +79,8 @@ public class TrafficController extends WocBaseController {
     /**
 	 *
 	    * @Title:updateTraffic
-	    * @Description:  TODO(更新案件审核记录)
-	 		* @param:        @param jsons
+     * @Description: TODO(更新通行记录)
+     * @param:        @param jsons
 	 		* @param:        @throws Exception
 	 		* @return:       MessageResponse
 	 		* @throws
@@ -97,8 +97,8 @@ public class TrafficController extends WocBaseController {
     /**
 	 *
 	    * @Title:selectTrafficByPrimaryKey
-	    * @Description:  TODO(获取案件审核记录)
-	 		* @param:        @param id
+     * @Description: TODO(获取通行记录)
+     * @param:        @param id
 	 		* @param:        @throws Exception
 	 		* @return:       SingleResult<Traffic>
 	 		* @throws
@@ -114,8 +114,8 @@ public class TrafficController extends WocBaseController {
     /**
 	 *
 	    * @Title:deleteTrafficByTrafficId
-	    * @Description:  TODO(删除案件审核记录)
-	 		* @param:        @param jsons
+     * @Description: TODO(删除通行记录)
+     * @param:        @param jsons
 	 		* @param:        @throws Exception
 	 		* @return:       MessageResponse
 	 		* @throws
