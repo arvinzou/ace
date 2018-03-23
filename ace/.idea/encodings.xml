@@ -6,6 +6,10 @@
     <file url="file://$PROJECT_DIR$/ace-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-common-dao" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-common-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-face" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-face/ace-face-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-face/ace-face-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-face/ace-face-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gesp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-gesp/ace-gesp-service" charset="UTF-8" />
@@ -53,6 +57,10 @@
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-uf/ace-uf-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weui" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weui/ace-weui-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weui/ace-weui-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-weui/ace-weui-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-weuiluohua" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-weuiluohua/ace-weuiluohua-service" charset="UTF-8" />

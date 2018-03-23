@@ -10,14 +10,23 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
+        <module name="ace-face-client" />
+        <module name="ace-face-service" />
+        <module name="ace-face-web" />
         <module name="ace-gesp-client" />
         <module name="ace-gesp-service" />
         <module name="ace-gesp-web" />
+        <module name="ace-gis-client" />
+        <module name="ace-gis-service" />
+        <module name="ace-gis-web" />
         <module name="ace-iop-client" />
         <module name="ace-iop-rest" />
         <module name="ace-iop-service" />
         <module name="ace-iop-web" />
         <module name="ace-jave" />
+        <module name="ace-jxb-client" />
+        <module name="ace-jxb-service" />
+        <module name="ace-jxb-web" />
         <module name="ace-kernel-backend" />
         <module name="ace-kernel-client" />
         <module name="ace-kernel-service" />
@@ -40,6 +49,9 @@
         <module name="ace-uf-client" />
         <module name="ace-uf-service" />
         <module name="ace-uf-web" />
+        <module name="ace-weui-client" />
+        <module name="ace-weui-service" />
+        <module name="ace-weui-web" />
         <module name="ace-weuiluohua-client" />
         <module name="ace-weuiluohua-service" />
         <module name="ace-weuiluohua-web" />
@@ -50,6 +62,16 @@
         <module name="ace-workflow-client" />
         <module name="ace-workflow-service" />
         <module name="ace-workflow-web" />
+        <module name="activiti-bpmn-converter" />
+        <module name="activiti-bpmn-model" />
+        <module name="activiti-dmn-api" />
+        <module name="activiti-dmn-model" />
+        <module name="activiti-engine" />
+        <module name="activiti-form-api" />
+        <module name="activiti-form-model" />
+        <module name="activiti-image-generator" />
+        <module name="activiti-json-converter" />
+        <module name="activiti-process-validation" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -58,6 +80,10 @@
       <module name="ace-common" target="1.7" />
       <module name="ace-common-dao" target="1.7" />
       <module name="ace-common-web" target="1.7" />
+      <module name="ace-face" target="1.7" />
+      <module name="ace-face-client" target="1.7" />
+      <module name="ace-face-service" target="1.7" />
+      <module name="ace-face-web" target="1.7" />
       <module name="ace-gesp" target="1.7" />
       <module name="ace-gesp-client" target="1.7" />
       <module name="ace-gesp-service" target="1.7" />
@@ -105,6 +131,10 @@
       <module name="ace-uf-client" target="1.7" />
       <module name="ace-uf-service" target="1.7" />
       <module name="ace-uf-web" target="1.7" />
+      <module name="ace-weui" target="1.7" />
+      <module name="ace-weui-client" target="1.7" />
+      <module name="ace-weui-service" target="1.7" />
+      <module name="ace-weui-web" target="1.7" />
       <module name="ace-weuiluohua" target="1.7" />
       <module name="ace-weuiluohua-client" target="1.7" />
       <module name="ace-weuiluohua-service" target="1.7" />
