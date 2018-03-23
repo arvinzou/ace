@@ -8,7 +8,9 @@ import com.huacainfo.ace.woc.vo.CaseVo;
 
 public interface CaseDao {
 
-    CaseVo selectByPrimaryKey(String id);
+    Case selectByPrimaryKey(String id);
+
+    CaseVo selectVoByPrimaryKey(String id);
 
     int deleteByPrimaryKey(String id);
 

@@ -23,112 +23,111 @@ import com.huacainfo.ace.woc.vo.CaseQVo;
 /**
  * @author: 王恩
  * @version: 2018-03-21
- * @Description:  TODO(案件)
+ * @Description: TODO(案件)
  */
 public class CaseController extends WocBaseController {
 
 
-	private static final long serialVersionUID = 1L;
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-	@Autowired
-	private CaseService caseService;
-     /**
-	 *
-	    * @Title:find!{bean.name}List
-	    * @Description:  TODO(案件分页查询)
-	 		* @param:        @param condition
-	 		* @param:        @param page
-	 		* @param:        @return
-	 		* @param:        @throws Exception
-	 		* @return:       PageResult<CaseVo>
-	 		* @throws
-	    * @author: 王恩
-	    * @version: 2018-03-21
-	 */
-	@RequestMapping(value = "/findCaseList")
-	@ResponseBody
-	public PageResult<CaseVo> findCaseList(CaseQVo condition,
-			PageParamNoChangeSord page) throws Exception {
-		PageResult<CaseVo> rst = this.caseService
-				.findCaseList(condition, page.getStart(), page.getLimit(),
-						page.getOrderBy());
-		if (rst.getTotal() == 0) {
-			rst.setTotal(page.getTotalRecord());
-		}
-	
-		return rst;
-	}
+    private static final long serialVersionUID = 1L;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private CaseService caseService;
+
     /**
-	 *
-	    * @Title:insertCase
-	    * @Description:  TODO(添加案件)
-	 		* @param:        @param jsons
-	 		* @param:        @throws Exception
-	 		* @return:       MessageResponse
-	 		* @throws
-	    * @author: 王恩
-	    * @version: 2018-03-21
-	 */
-	@RequestMapping(value = "/insertCase")
-	@ResponseBody
-	public MessageResponse insertCase(String jsons) throws Exception {
-		Case obj = JSON.parseObject(jsons, Case.class);
-		return this.caseService
-				.insertCase(obj, this.getCurUserProp());
-	}
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(案件分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult<CaseVo>
+     * @author: 王恩
+     * @version: 2018-03-21
+     */
+    @RequestMapping(value = "/findCaseList")
+    @ResponseBody
+    public PageResult<CaseVo> findCaseList(CaseQVo condition,
+                                           PageParamNoChangeSord page) throws Exception {
+        PageResult<CaseVo> rst = this.caseService.findCaseList(condition,
+                page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
+    }
+
     /**
-	 *
-	    * @Title:updateCase
-	    * @Description:  TODO(更新案件)
-	 		* @param:        @param jsons
-	 		* @param:        @throws Exception
-	 		* @return:       MessageResponse
-	 		* @throws
-	    * @author: 王恩
-	    * @version: 2018-03-21
-	 */
-	@RequestMapping(value = "/updateCase")
-	@ResponseBody
-	public MessageResponse updateCase(String jsons) throws Exception {
-		Case obj = JSON.parseObject(jsons, Case.class);
-		return this.caseService
-				.updateCase(obj, this.getCurUserProp());
-	}
+     * @throws
+     * @Title:insertCase
+     * @Description: TODO(添加案件)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 王恩
+     * @version: 2018-03-21
+     */
+    @RequestMapping(value = "/insertCase")
+    @ResponseBody
+    public MessageResponse insertCase(String jsons) throws Exception {
+        Case obj = JSON.parseObject(jsons, Case.class);
+        return this.caseService
+                .insertCase(obj, this.getCurUserProp());
+    }
+
     /**
-	 *
-	    * @Title:selectCaseByPrimaryKey
-	    * @Description:  TODO(获取案件)
-	 		* @param:        @param id
-	 		* @param:        @throws Exception
-	 		* @return:       SingleResult<Case>
-	 		* @throws
-	    * @author: 王恩
-	    * @version: 2018-03-21
-	 */
-	@RequestMapping(value = "/selectCaseByPrimaryKey")
-	@ResponseBody
-	public SingleResult<CaseVo> selectCaseByPrimaryKey(String id)
-			throws Exception {
-		return this.caseService.selectCaseByPrimaryKey(id);
-	}
+     * @throws
+     * @Title:updateCase
+     * @Description: TODO(更新案件)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 王恩
+     * @version: 2018-03-21
+     */
+    @RequestMapping(value = "/updateCase")
+    @ResponseBody
+    public MessageResponse updateCase(String jsons) throws Exception {
+        Case obj = JSON.parseObject(jsons, Case.class);
+        return this.caseService
+                .updateCase(obj, this.getCurUserProp());
+    }
+
     /**
-	 *
-	    * @Title:deleteCaseByCaseId
-	    * @Description:  TODO(删除案件)
-	 		* @param:        @param jsons
-	 		* @param:        @throws Exception
-	 		* @return:       MessageResponse
-	 		* @throws
-	    * @author: 王恩
-	    * @version: 2018-03-21
-	 */
-	@RequestMapping(value = "/deleteCaseByCaseId")
-	@ResponseBody
-	public MessageResponse deleteCaseByCaseId(String jsons)
-			throws Exception {
-		JSONObject json = JSON.parseObject(jsons);
-		String id = json.getString("id");
-		return this.caseService.deleteCaseByCaseId(id,
-				this.getCurUserProp());
-	}
+     * @throws
+     * @Title:selectCaseByPrimaryKey
+     * @Description: TODO(获取案件)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Case>
+     * @author: 王恩
+     * @version: 2018-03-21
+     */
+    @RequestMapping(value = "/selectCaseByPrimaryKey")
+    @ResponseBody
+    public SingleResult<CaseVo> selectCaseByPrimaryKey(String id)
+            throws Exception {
+        return this.caseService.selectCaseByPrimaryKey(id);
+    }
+
+    /**
+     * @throws
+     * @Title:deleteCaseByCaseId
+     * @Description: TODO(删除案件)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 王恩
+     * @version: 2018-03-21
+     */
+    @RequestMapping(value = "/deleteCaseByCaseId")
+    @ResponseBody
+    public MessageResponse deleteCaseByCaseId(String jsons)
+            throws Exception {
+        JSONObject json = JSON.parseObject(jsons);
+        String id = json.getString("id");
+        return this.caseService.deleteCaseByCaseId(id,
+                this.getCurUserProp());
+    }
 }
