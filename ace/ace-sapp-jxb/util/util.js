@@ -1,3 +1,4 @@
+var cfg = require("../config.js");
 function formatTime(time) {
     if (typeof time !== 'number' || time < 0) {
         return time
@@ -129,6 +130,42 @@ function formatDate(date) {
     return [year, month, day].map(formatNumber).join('-');
 }
 
+function login() {
+  var that = this;
+  wx.getLocation({
+    type: 'gcj02',
+    success: function (rst) {
+      wx.login({
+        success: function (o) {
+          wx.getUserInfo({
+            success: function (res) {
+              wx.request({
+                url: cfg.loginUrl,
+                data: {
+                  appid: cfg.appid,
+                  appsecret: cfg.appsecret,
+                  code: o.code,
+                  encryptedData: res.encryptedData,
+                  iv: res.iv,
+                  latitude: rst.latitude,
+                  longitude: rst.longitude
+                },
+                success: function (res) {
+                  wx.setStorageSync('WX-SESSION-ID', res.data.value['3rd_session']);
+                  console.log('login success', res);
+                },
+                fail: function ({ errMsg }) {
+                  console.log('request fail', errMsg)
+                }
+              })
+            }
+          })
+        }
+      })
+    }
+  });
+
+}
 module.exports = {
     formatTime: formatTime,
     formatLocation: formatLocation,
@@ -136,4 +173,5 @@ module.exports = {
     imageUtil: imageUtil,
     uuid: uuid,
     formatDate:formatDate,
+    login:login
 }

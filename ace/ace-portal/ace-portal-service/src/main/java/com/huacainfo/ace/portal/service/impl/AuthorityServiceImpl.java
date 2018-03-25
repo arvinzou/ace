@@ -49,12 +49,12 @@ public class AuthorityServiceImpl implements AuthorityService {
 	private String access_token;
 	//获取到的access_token
 	private int  expires_in; //有效时间（两个小时，7200s）
-
-	public SingleResult<Map<String, String>> authority(String appid, String appsecret, String code,
+	@Override
+	public SingleResult<Map<String, Object>> authority(String appid, String appsecret, String code,
 			String encryptedData, String iv,String latitude,String longitude) throws Exception {
 		// appid wxa09a5be5fd228680
 		// appsecret d520d29f8c26c7e3885d80b1812a8d91
-		SingleResult<Map<String, String>> rst = new SingleResult<Map<String, String>>(0, "OK");
+		SingleResult<Map<String, Object>> rst = new SingleResult<Map<String, Object>>(0, "OK");
 		StringBuffer url = new StringBuffer("");
 		url.append("https://api.weixin.qq.com");
 		url.append("/sns/jscode2session?");
@@ -70,7 +70,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 		logger.info("res -> {}", res);
 		JSONObject json = JSON.parseObject(res);
 		if (CommonUtils.isNotBlank(json.getString("errcode"))) {
-			return new SingleResult<Map<String, String>>(1, json.getString("errmsg"));
+			return new SingleResult<Map<String, Object>>(1, json.getString("errmsg"));
 		}
 		String session_key = json.getString("session_key");
 		String openid = json.getString("openid");
@@ -103,11 +103,12 @@ public class AuthorityServiceImpl implements AuthorityService {
 
 			}
 		}
-        Map<String, String> o = new HashMap<String, String>();
+        Map<String, Object> o = new HashMap<String, Object>();
         o.put("session_key", session_key);
         o.put("openid", openid);
         o.put("expires_in", expires_in);
         o.put("3rd_session", _3rd_session);
+        o.put("userinfo",user);
         redisTemplate.opsForValue().set(_3rd_session + "openid", openid);
         redisTemplate.opsForValue().set(_3rd_session + "session_key", session_key);
 		redisTemplate.opsForValue().set(_3rd_session, userinfo);
