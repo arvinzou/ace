@@ -1,5 +1,5 @@
 <view class='page' style="height:100%">
-    <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="3:4" orientation="vertical" beauty="10"  whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:100vh;" >
+    <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="9:16" orientation="horizontal" beauty="10"  whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:100vh;" >
    
     </live-pusher>
     

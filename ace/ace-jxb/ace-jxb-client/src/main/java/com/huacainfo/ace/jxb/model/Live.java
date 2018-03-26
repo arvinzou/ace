@@ -13,9 +13,12 @@ public class Live implements java.io.Serializable {
 
     private String category;
 
+    private String type;
+
     private String deptId;
 
     private Date endTime;
+
     private Date startTime;
 
     private String remark;

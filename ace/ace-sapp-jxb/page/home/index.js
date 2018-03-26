@@ -44,7 +44,6 @@ Page({
         mutedimg:"../../image/muted_on.png",
         rtmpurl: cfg.rtmpserver+"13922861673?id=249134995"
     },
-
     onReady: function (res) {
         console.log('index.js.onReady');
         var that=this;
@@ -82,7 +81,14 @@ Page({
     },
     play(e) {
       var that=this;
+      if (!util.security('admin')){
+        return;
+      }
       var pusherStatus = that.data.pusherStatus;
+      var userinfo = wx.getStorageSync('userinfo');
+      that.setData({
+        rtmpurl: cfg.rtmpserver + userinfo.mobile + "?id=" + util.uuid() + "&appid=" + cfg.appid
+      });
       if (pusherStatus=='stop'){
           wx.showModal({
             title: '系统提示',

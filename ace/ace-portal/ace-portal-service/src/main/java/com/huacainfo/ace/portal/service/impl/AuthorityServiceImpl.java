@@ -113,6 +113,7 @@ public class AuthorityServiceImpl implements AuthorityService {
         redisTemplate.opsForValue().set(_3rd_session + "session_key", session_key);
 		redisTemplate.opsForValue().set(_3rd_session, userinfo);
 		WxUser wxUser= JSON.parseObject(userinfo.toString(),WxUser.class);
+		wxUser.setAppId(appid);
 		if(CommonUtils.isNotEmpty(latitude)){
 			wxUser.setLatitude(new java.math.BigDecimal(latitude));
 		}

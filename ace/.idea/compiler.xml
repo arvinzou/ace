@@ -11,6 +11,9 @@
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
         <module name="ace-jave" />
+        <module name="ace-jxb-client" />
+        <module name="ace-jxb-service" />
+        <module name="ace-jxb-web" />
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />

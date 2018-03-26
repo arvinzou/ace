@@ -7,10 +7,12 @@ var config = {
     rtmpserver,
     server,
     serverfile,
-    appid: 'wxa09a5be5fd228680',
-    appsecret: 'd520d29f8c26c7e3885d80b1812a8d91',
+    appid: 'wxcf3d50130f9844f5',
+    appsecret: '10a109f311c9803c2a8fd17b14bf09dd',
     frontColor: '#ffffff',
     backgroundColor: "#3C3C3C",
     loginUrl: `${server}/portal/www/authority.do`
 };
+
+
 module.exports = config

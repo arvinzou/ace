@@ -112,7 +112,7 @@ function uuid() {
     }
     s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
     s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
-    s[8] = s[13] = s[18] = s[23] = "-";
+    s[8] = s[13] = s[18] = s[23] = "";
 
     var uuid = s.join("");
     return uuid;
@@ -123,13 +123,39 @@ function formatDate(date) {
     var year = date.getFullYear();
     var month = date.getMonth() + 1;
     var day = date.getDate();
-
-    // var hour = date.getHours();
-    // var minute = date.getMinutes();
-    // var second = date.getSeconds();
     return [year, month, day].map(formatNumber).join('-');
 }
-
+function security(role){
+  var userinfo = wx.getStorageSync('userinfo');
+  console.log(userinfo);
+  if (!userinfo){
+      wx.showToast({
+        title: '身份未识别',
+        icon: 'none',
+        duration: 5000
+      })
+      return false;
+  }
+  if (!userinfo.role) {
+    wx.showToast({
+      title: '系统未授权',
+      icon: 'none',
+      duration: 5000
+    })
+    return false;
+  }
+  if (role) {
+    if (userinfo.role!=role) {
+      wx.showToast({
+        title: '系统未授权',
+        icon: 'none',
+        duration: 5000
+      })
+      return false;
+    }
+  }
+  return true;
+}
 function login() {
   var that = this;
   wx.getLocation({
@@ -152,6 +178,7 @@ function login() {
                 },
                 success: function (res) {
                   wx.setStorageSync('WX-SESSION-ID', res.data.value['3rd_session']);
+                  wx.setStorageSync('userinfo', res.data.value['userinfo']);
                   console.log('login success', res);
                 },
                 fail: function ({ errMsg }) {
@@ -173,5 +200,7 @@ module.exports = {
     imageUtil: imageUtil,
     uuid: uuid,
     formatDate:formatDate,
-    login:login
+    login:login,
+    security: security
+
 }
