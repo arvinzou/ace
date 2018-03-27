@@ -17,6 +17,9 @@
         <module name="ace-jxb-client" />
         <module name="ace-jxb-service" />
         <module name="ace-jxb-web" />
+        <module name="ace-live-client" />
+        <module name="ace-live-service" />
+        <module name="ace-live-web" />
         <module name="ace-portal-client" />
         <module name="ace-portal-service" />
         <module name="ace-portal-web" />
@@ -43,6 +46,10 @@
       <module name="ace-jxb-client" target="1.7" />
       <module name="ace-jxb-service" target="1.7" />
       <module name="ace-jxb-web" target="1.7" />
+      <module name="ace-live" target="1.7" />
+      <module name="ace-live-client" target="1.7" />
+      <module name="ace-live-service" target="1.7" />
+      <module name="ace-live-web" target="1.7" />
       <module name="ace-portal" target="1.7" />
       <module name="ace-portal-client" target="1.7" />
       <module name="ace-portal-service" target="1.7" />

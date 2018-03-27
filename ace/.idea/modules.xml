@@ -16,6 +16,10 @@
       <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-web/ace-jxb-web.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-web/ace-jxb-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live.iml" filepath="$PROJECT_DIR$/ace-live/ace-live.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />

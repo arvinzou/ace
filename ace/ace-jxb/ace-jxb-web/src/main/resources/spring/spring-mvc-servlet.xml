@@ -29,5 +29,5 @@
 			</list>
 		</property>
 	</bean>
-	<import resource="classpath:spring/spring-ace-common-servlet.xml" />
+	<import resource="classpath:spring/spring-ace-servlet.xml" />
 </beans>

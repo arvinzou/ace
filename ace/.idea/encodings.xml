@@ -21,6 +21,10 @@
     <file url="file://$PROJECT_DIR$/ace-jxb/ace-jxb-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-jxb/ace-jxb-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-jxb/ace-jxb-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-live" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-live/ace-live-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-live/ace-live-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-live/ace-live-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-portal" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-portal/ace-portal-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-portal/ace-portal-service" charset="UTF-8" />
