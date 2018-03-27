@@ -11,45 +11,36 @@
   height: 130rpx;
   margin: 2rpx auto;
 }
-.circle-play{  
-  position: fixed;  
-  display: flex;  
-  align-items: center;  
-  justify-content: center;  
+
+.play{  
   bottom: 400rpx; 
-  right: 5%; 
-  width: 100rpx;  
-  height:100rpx;  
-  border-radius: 50%;  
-  font-size: 36rpx;  
-  background: #C8C8C8;  
 }
 
-.circle-camera{  
-  position: fixed;  
-  display: flex;  
-  align-items: center;  
-  justify-content: center;  
+.camera{  
   bottom: 100rpx; 
-  right: 5%; 
-  width: 100rpx;  
-  height:100rpx;  
-  border-radius: 50%;  
-  font-size: 36rpx;  
-  background: 	#C8C8C8; 
 }
-.circle-muted{  
+.muted{  
+  bottom: 250rpx; 
+}
+
+.orientation{    
+  bottom: 550rpx;   
+}
+
+.aspect{   
+  bottom: 700rpx; 
+}
+.circle{  
   position: fixed;  
   display: flex;  
   align-items: center;  
-  justify-content: center;  
-  bottom: 250rpx; 
+  justify-content: center; 
   right: 5%; 
   width: 100rpx;  
   height:100rpx;  
   border-radius: 50%;  
   font-size: 36rpx;  
-  background: 	#C8C8C8; 
+  background: #C8C8C8;   
 }
 .imgsmall {
   width: 80rpx;

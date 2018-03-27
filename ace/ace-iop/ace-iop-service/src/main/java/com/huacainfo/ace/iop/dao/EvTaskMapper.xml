@@ -15,19 +15,16 @@
 		<result column="dept_id" property="deptId" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 	</resultMap>
-	<resultMap id="ResultMapWithBLOBs" type="com.huacainfo.ace.iop.model.EvTaskWithBLOBs"
-		extends="BaseResultMap">
-		<result column="ev_discribtion" property="evDiscribtion"
-			jdbcType="LONGVARCHAR" />
-		<result column="ev_content" property="evContent" jdbcType="LONGVARCHAR" />
-	</resultMap>
 	<resultMap id="BaseResultMapVo" type="com.huacainfo.ace.iop.vo.EvTaskVo"
-		extends="ResultMapWithBLOBs">
+		extends="BaseResultMap">
 		<result column="adminName" property="adminName" jdbcType="VARCHAR" />
 		<result column="evObjName" property="evObjName" jdbcType="VARCHAR" />
 		<result column="allUsers" property="allUsers" jdbcType="DECIMAL" />
 		<result column="voteUsers" property="voteUsers" jdbcType="DECIMAL" />
 		<result column="deptName" property="deptName" jdbcType="VARCHAR" />
+		<result column="ev_discribtion" property="evDiscribtion"
+				jdbcType="LONGVARCHAR" />
+		<result column="ev_content" property="evContent" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		ev_task_id, category, ev_task_name, ev_obj, ev_templete_id,
@@ -90,7 +87,7 @@
 		where ev_task_id = #{evTaskId,jdbcType=VARCHAR};
 
 	</delete>
-	<insert id="insert" parameterType="com.huacainfo.ace.iop.model.EvTaskWithBLOBs">
+	<insert id="insert" parameterType="com.huacainfo.ace.iop.model.EvTask">
 		insert into ev_task
 		(ev_task_id, category, ev_task_name,
 		ev_obj, ev_templete_id,
@@ -112,7 +109,7 @@
 		#{evContent,jdbcType=LONGVARCHAR},#{deptId,jdbcType=VARCHAR}
 		)
 	</insert>
-	<insert id="insertSelective" parameterType="com.huacainfo.ace.iop.model.EvTaskWithBLOBs">
+	<insert id="insertSelective" parameterType="com.huacainfo.ace.iop.model.EvTask">
 		insert into ev_task
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="evTaskId != null">
@@ -191,7 +188,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.iop.model.EvTaskWithBLOBs">
+	<update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.iop.model.EvTask">
 		update ev_task
 		<set>
 			<if test="category != null">
@@ -222,9 +219,9 @@
 		</set>
 		where ev_task_id = #{evTaskId,jdbcType=VARCHAR}
 	</update>
-	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.iop.model.EvTaskWithBLOBs">
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.iop.model.EvTask">
 		update
-		ev_task
+		ev_task1
 		set category = #{category,jdbcType=VARCHAR},
 		ev_task_name =
 		#{evTaskName,jdbcType=VARCHAR},

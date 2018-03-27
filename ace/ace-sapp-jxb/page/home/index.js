@@ -42,7 +42,11 @@ Page({
         playimg:"../../image/play_on.png",
         cameraimg:"../../image/camera_on.png",
         mutedimg:"../../image/muted_on.png",
-        rtmpurl: cfg.rtmpserver+"13922861673?id=249134995"
+        rtmpurl: cfg.rtmpserver+"13922861673?id=249134995",
+        orientation:"horizontal",
+        orientationimg:"../../image/screen_horizontal.png",
+        aspectimg:"../../image/aspect_916.png",
+        aspect:"9:16"
     },
     onReady: function (res) {
         console.log('index.js.onReady');
@@ -155,6 +159,37 @@ Page({
         that.setData({
           muted: !muted,
           mutedimg: "../../image/muted_on.png",
+        });
+      }
+    },
+    orientation(e) {
+      var that = this;
+      var orientation = that.data.orientation;
+      if (orientation =='horizontal') {
+        that.setData({
+          orientation: "vertical",
+          orientationimg: "../../image/screen_vertical.png"
+          
+        });
+      } else {
+        that.setData({
+          orientation: "horizontal",
+          orientationimg: "../../image/screen_horizontal.png"
+        });
+      }
+    },
+    aspect(e) {
+      var that = this;
+      var aspect = that.data.aspect;
+      if (aspect == '9:16') {
+        that.setData({
+          aspect: "3:4",
+          aspectimg: "../../image/aspect_34.png"
+        });
+      } else {
+        that.setData({
+          aspect: "9:16",
+          aspectimg: "../../image/aspect_916.png"
         });
       }
     }
