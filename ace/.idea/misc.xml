@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/ace-iop/ace-iop-rest" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-iop/ace-iop-web" />
     <file type="web" url="file://$PROJECT_DIR$/ace-jxb/ace-jxb-web" />
     <file type="web" url="file://$PROJECT_DIR$/ace-portal/ace-portal-web" />
   </component>

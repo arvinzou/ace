@@ -17,7 +17,7 @@ public class LiveMsgCallBackThread extends Thread {
     private static final Logger LOGGER = LoggerFactory.getLogger(LiveMsgCallBackThread.class);
 
     private KafkaStream<byte[], byte[]> stream = null;
-    private LiveMsgService jxbMsgService;
+    private LiveMsgService liveMsgService;
 
     public LiveMsgCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
         super(name);
@@ -32,7 +32,7 @@ public class LiveMsgCallBackThread extends Thread {
     }
 
     private void init() {
-        this.jxbMsgService = (LiveMsgService) SpringUtils.getBean("jxbMsgService");
+        this.liveMsgService = (LiveMsgService) SpringUtils.getBean("liveMsgService");
     }
 
     @Override
@@ -59,7 +59,7 @@ public class LiveMsgCallBackThread extends Thread {
             o.setContent(data.get("message"));
             o.setRid(data.get("rid"));
             o.setUid(data.get("uid"));
-            MessageResponse rst = this.jxbMsgService.insertLiveMsg(o);
+            MessageResponse rst = this.liveMsgService.insertLiveMsg(o);
             LOGGER.info("{}", rst.getErrorMessage());
         } catch (Exception e) {
             LOGGER.error("系统出错{}", e);

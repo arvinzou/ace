@@ -32,14 +32,11 @@ import com.huacainfo.ace.jxb.vo.LiveCmtQVo;
  * @version: 2018-01-13
  * @Description: TODO(评论)
  */
-@Service("jxbCmtService")
+@Service("liveCmtService")
 public class LiveCmtServiceImpl implements LiveCmtService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private LiveCmtDao jxbCmtDao;
-    @Autowired
-    private LiveDao jxbDao;
-
+    private LiveCmtDao liveCmtDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -60,11 +57,11 @@ public class LiveCmtServiceImpl implements LiveCmtService {
     public PageResult<LiveCmtVo> findLiveCmtList(LiveCmtQVo condition, int start,
                                                  int limit, String orderBy) throws Exception {
         PageResult<LiveCmtVo> rst = new PageResult<LiveCmtVo>();
-        List<LiveCmtVo> list = this.jxbCmtDao.findList(condition,
+        List<LiveCmtVo> list = this.liveCmtDao.findList(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.jxbCmtDao.findCount(condition);
+            int allRows = this.liveCmtDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
@@ -97,7 +94,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
         }
         o.setStatus("1");
         o.setCreateTime(new Date());
-        this.jxbCmtDao.insert(o);
+        this.liveCmtDao.insert(o);
         return new MessageResponse(0, "添加评论完成！");
     }
 
@@ -121,7 +118,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
         if (CommonUtils.isBlank(status)) {
             return new MessageResponse(1, "状态不能为空！");
         }
-        this.jxbCmtDao.updateByPrimaryKey(id, status);
+        this.liveCmtDao.updateByPrimaryKey(id, status);
         return new MessageResponse(0, "变更互动内容完成！");
     }
 
@@ -138,7 +135,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
     @Override
     public SingleResult<LiveCmtVo> selectLiveCmtByPrimaryKey(String id) throws Exception {
         SingleResult<LiveCmtVo> rst = new SingleResult<LiveCmtVo>();
-        rst.setValue(this.jxbCmtDao.selectByPrimaryKey(id));
+        rst.setValue(this.liveCmtDao.selectByPrimaryKey(id));
         return rst;
     }
 
@@ -156,7 +153,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
     @Override
     public MessageResponse deleteLiveCmtByLiveCmtId(String id,
                                                     UserProp userProp) throws Exception {
-        this.jxbCmtDao.deleteByPrimaryKey(id);
+        this.liveCmtDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除评论", "评论", String.valueOf(id),
                 String.valueOf(id), "评论", userProp);
         return new MessageResponse(0, "评论删除完成！");
@@ -164,7 +161,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
 
     @Override
     public List<String> findSensitiveWordsList(String deptId) throws Exception {
-        List<String> list = this.jxbCmtDao.findSensitiveWordsListBydeptId(deptId);
+        List<String> list = this.liveCmtDao.findSensitiveWordsListBydeptId(deptId);
         return list;
     }
 }

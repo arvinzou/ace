@@ -22,7 +22,7 @@ public class LiveCmtCallBackThread extends Thread {
     private static final Logger LOGGER = LoggerFactory.getLogger(LiveCmtCallBackThread.class);
 
     private KafkaStream<byte[], byte[]> stream = null;
-    private LiveCmtService jxbCmtService;
+    private LiveCmtService liveCmtService;
 
 
     public LiveCmtCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
@@ -38,7 +38,7 @@ public class LiveCmtCallBackThread extends Thread {
     }
 
     private void init() {
-        this.jxbCmtService = (LiveCmtService) SpringUtils.getBean("jxbCmtService");
+        this.liveCmtService = (LiveCmtService) SpringUtils.getBean("liveCmtService");
     }
 
     @Override
@@ -65,7 +65,7 @@ public class LiveCmtCallBackThread extends Thread {
             o.setContent(JSON.parseObject(data.get("message")).getString("content"));
             o.setUid(data.get("uid"));
             o.setRptId(data.get("rptId"));
-            MessageResponse rst = this.jxbCmtService.insertLiveCmt(o,data.get("companyId"));
+            MessageResponse rst = this.liveCmtService.insertLiveCmt(o,data.get("companyId"));
             LOGGER.info("{}", rst.getErrorMessage());
         } catch (Exception e) {
             LOGGER.error("系统出错{}", e);

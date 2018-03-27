@@ -10,10 +10,6 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
-        <module name="ace-iop-client" />
-        <module name="ace-iop-rest" />
-        <module name="ace-iop-service" />
-        <module name="ace-iop-web" />
         <module name="ace-jxb-client" />
         <module name="ace-jxb-service" />
         <module name="ace-jxb-web" />

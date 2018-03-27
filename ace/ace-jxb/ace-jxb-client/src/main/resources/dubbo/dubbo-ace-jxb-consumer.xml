@@ -18,20 +18,20 @@
     <dubbo:reference interface="com.huacainfo.ace.jxb.service.AnalysisService"
                      id="analysisService"/>
     <dubbo:reference interface="com.huacainfo.ace.jxb.service.LiveService"
-                     id="jxbService"/>
+                     id="liveService"/>
 
     <dubbo:reference interface="com.huacainfo.ace.jxb.service.LiveRptService"
-                     id="jxbRptService"/>
+                     id="liveRptService"/>
 
     <dubbo:reference interface="com.huacainfo.ace.jxb.service.LiveMsgService"
-                     id="jxbMsgService"/>
+                     id="liveMsgService"/>
 
     <dubbo:reference interface="com.huacainfo.ace.jxb.service.WWWService"
                      id="wwwService"/>
 
     <dubbo:reference interface="com.huacainfo.ace.jxb.service.LiveImgService"
-                     id="jxbImgService"/>
+                     id="liveImgService"/>
 
     <dubbo:reference interface="com.huacainfo.ace.jxb.service.LiveCmtService"
-                     id="jxbCmtService"/>
+                     id="liveCmtService"/>
 </beans>

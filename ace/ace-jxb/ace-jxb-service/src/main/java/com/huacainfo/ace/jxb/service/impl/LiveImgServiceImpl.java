@@ -23,7 +23,7 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.jxb.service.LiveImgService;
 import com.huacainfo.ace.jxb.vo.LiveImgVo;
 
-@Service("jxbImgService")
+@Service("liveImgService")
 /**
  * @author: 陈晓克
  * @version: 2018-01-13
