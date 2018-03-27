@@ -10,6 +10,10 @@
         <module name="ace-common" />
         <module name="ace-common-dao" />
         <module name="ace-common-web" />
+        <module name="ace-fop-client" />
+        <module name="ace-fop-rest" />
+        <module name="ace-fop-service" />
+        <module name="ace-fop-web" />
         <module name="ace-jxb-client" />
         <module name="ace-jxb-service" />
         <module name="ace-jxb-web" />
@@ -24,6 +28,16 @@
       <module name="ace-common" target="1.7" />
       <module name="ace-common-dao" target="1.7" />
       <module name="ace-common-web" target="1.7" />
+      <module name="ace-fop" target="1.7" />
+      <module name="ace-fop-client" target="1.7" />
+      <module name="ace-fop-rest" target="1.7" />
+      <module name="ace-fop-service" target="1.7" />
+      <module name="ace-fop-web" target="1.7" />
+      <module name="ace-iop" target="1.7" />
+      <module name="ace-iop-client" target="1.7" />
+      <module name="ace-iop-rest" target="1.7" />
+      <module name="ace-iop-service" target="1.7" />
+      <module name="ace-iop-web" target="1.7" />
       <module name="ace-jave" target="1.7" />
       <module name="ace-jxb" target="1.7" />
       <module name="ace-jxb-client" target="1.7" />

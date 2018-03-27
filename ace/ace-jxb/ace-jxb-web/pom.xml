@@ -23,6 +23,11 @@
             <artifactId>ace-jxb-client</artifactId>
             <version>1.0</version>
         </dependency>
+		<dependency>
+			<groupId>com.huacainfo</groupId>
+			<artifactId>ace-jxb-service</artifactId>
+			<version>1.0</version>
+		</dependency>
         <dependency>
             <groupId>com.huacainfo</groupId>
             <artifactId>ace-portal-client</artifactId>
