@@ -6,6 +6,11 @@
     <file url="file://$PROJECT_DIR$/ace-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-common-dao" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-common-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-fop" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-fop/ace-fop-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-fop/ace-fop-rest" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-fop/ace-fop-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ace-fop/ace-fop-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-iop" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-client" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ace-iop/ace-iop-rest" charset="UTF-8" />
