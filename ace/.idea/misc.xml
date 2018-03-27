@@ -12,6 +12,15 @@
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ace-fop/ace-fop-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-fop/ace-fop-rest/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-fop/ace-fop-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-fop/ace-fop-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-fop/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
