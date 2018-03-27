@@ -17,7 +17,6 @@ var _colModel = function () {
             width : 100,
             editoptions : {
                 style : 'width:200px;',
-                size:'7',
                 maxlength : "8",
                 colspan : false
             },

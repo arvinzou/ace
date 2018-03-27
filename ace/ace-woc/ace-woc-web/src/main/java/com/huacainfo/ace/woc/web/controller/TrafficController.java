@@ -1,5 +1,6 @@
 package com.huacainfo.ace.woc.web.controller;
 
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import com.huacainfo.ace.woc.model.Traffic;
 import com.huacainfo.ace.woc.service.TrafficService;
 import com.huacainfo.ace.woc.vo.TrafficVo;
 import com.huacainfo.ace.woc.vo.TrafficQVo;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/traffic")

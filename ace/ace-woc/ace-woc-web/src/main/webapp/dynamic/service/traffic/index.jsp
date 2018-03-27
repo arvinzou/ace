@@ -10,29 +10,13 @@
     <title>通行记录</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
-<style>
-    .page-content > div {
-        padding: 10px;
-        float: left;
-    }
-
-    .left-container {
-        width: 20%;
-    }
-
-    .right-container {
-        width: 80%;
-    }
-</style>
 <body>
 <div class="page-content">
-    <div class="widget-box left-container" id="widget-box">
+    <div class="widget-box" id="widget-box">
         <div class="widget-header">
             <h5 class="widget-title smaller">设置查询条件</h5>
-
             <div class="widget-toolbar"></div>
         </div>
-
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
@@ -53,39 +37,33 @@
                         <i
                                 class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
-
                 </form>
                 <div class="space10"></div>
+                <div id="toolbar" class="toolbar">
+                    <button class="btn btn-info" id="btn-view-add"
+                            authority="${pageContext.request.contextPath}/traffic/insertTraffic">
+                        <i
+                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-info" id="btn-view-edit"
+                            authority="${pageContext.request.contextPath}/traffic/updateTraffic">
+                        <i
+                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-warning" id="btn-view-del"
+                            authority="${pageContext.request.contextPath}/traffic/deleteTrafficByTrafficId">
+                        <i
+                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="right-container">
-        <div id="toolbar" class="toolbar">
 
+    <table id="grid-table"></table>
 
-            <button class="btn btn-info" id="btn-view-add"
-                    authority="${pageContext.request.contextPath}/traffic/insertTraffic">
-                <i
-                        class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-            </button>
-            <button class="btn btn-info" id="btn-view-edit"
-                    authority="${pageContext.request.contextPath}/traffic/updateTraffic">
-                <i
-                        class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-            </button>
-            <button class="btn btn-warning" id="btn-view-del"
-                    authority="${pageContext.request.contextPath}/traffic/deleteTrafficByTrafficId">
-                <i
-                        class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-            </button>
+    <div id="grid-pager"></div>
 
-        </div>
-
-        <table id="grid-table"></table>
-
-        <div id="grid-pager"></div>
-    </div>
 </div>
 <div id="dialog-message" class="hide">
     <div id="uploader">
