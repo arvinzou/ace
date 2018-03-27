@@ -343,7 +343,7 @@
     </select>
 
     <select id="selectSite" resultType="map">
-        select t.id,concat('卡点名称：',t.siteName,'  卡点编号：',t.siteCode) as name
+        select t.id,t.siteName,t.siteCode
         from site t
         where 0=0
         <if test='params.q !=null and params.q!=""'>
