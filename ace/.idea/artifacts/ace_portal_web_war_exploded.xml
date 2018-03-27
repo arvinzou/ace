@@ -99,9 +99,6 @@
             <element id="module-output" name="ace-portal-client" />
           </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.2.RELEASE" />
-          <element id="archive" name="ace-common-dao-1.0.jar">
-            <element id="module-output" name="ace-common-dao" />
-          </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.2.RELEASE" />
           <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.2-pre5" />
           <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.3" />

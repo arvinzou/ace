@@ -7,7 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/ace-common/ace-common.iml" filepath="$PROJECT_DIR$/ace-common/ace-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-web/ace-common-web.iml" filepath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-jave/ace-jave.iml" filepath="$PROJECT_DIR$/ace-jave/ace-jave.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-web/ace-jxb-web.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-web/ace-jxb-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />

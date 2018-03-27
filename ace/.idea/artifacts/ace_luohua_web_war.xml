@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ace-luohua-web:war">
-    <output-path>$PROJECT_DIR$/ace-luohua/ace-luohua-web/target</output-path>
-    <root id="archive" name="ace-luohua-web-1.0.war">
-      <element id="artifact" artifact-name="ace-luohua-web:war exploded" />
-    </root>
-  </artifact>
-</component>
