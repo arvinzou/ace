@@ -1,0 +1,71 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+.controls {
+  position: relative;
+  display: flex;
+  height: 10vh;
+  margin-top: 95%;
+}
+.img {
+  width: 130rpx;
+  height: 130rpx;
+  margin: 2rpx auto;
+}
+.circle-play{  
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  bottom: 400rpx; 
+  right: 5%; 
+  width: 100rpx;  
+  height:100rpx;  
+  border-radius: 50%;  
+  font-size: 36rpx;  
+  background: #C8C8C8;  
+}
+
+.circle-camera{  
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  bottom: 100rpx; 
+  right: 5%; 
+  width: 100rpx;  
+  height:100rpx;  
+  border-radius: 50%;  
+  font-size: 36rpx;  
+  background: 	#C8C8C8; 
+}
+.circle-muted{  
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  bottom: 250rpx; 
+  right: 5%; 
+  width: 100rpx;  
+  height:100rpx;  
+  border-radius: 50%;  
+  font-size: 36rpx;  
+  background: 	#C8C8C8; 
+}
+.imgsmall {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 2rpx auto;
+}
+.info-tip{
+  position: fixed;  
+  display: flex; 
+  flex-direction: column; 
+  top: 10rpx; 
+  left: 2%; 
+  width: 400rpx;   
+  font-size: 25rpx;
+  padding: 2%;
+}
+.tip-item{
+    color: blue;
+}

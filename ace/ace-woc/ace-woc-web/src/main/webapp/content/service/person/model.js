@@ -85,7 +85,11 @@ var _colModel = function () {
                 required : false
             },
             renderer : function(value, cur) {
-                return $.jgrid.getAccessor(cur, 'deptName');
+                var val = $.jgrid.getAccessor(cur, 'deptName')
+                if (val) {
+                    return val;
+                }
+                return '';
             },
         },
         /*所在地区*/
@@ -103,7 +107,11 @@ var _colModel = function () {
                 required : false
             },
             renderer : function(value, cur) {
-                return $.jgrid.getAccessor(cur, 'areaName');
+                var val = $.jgrid.getAccessor(cur, 'areaName')
+                if (val) {
+                    return val;
+                }
+                return '';
             },
             formoptions : {
                 elmprefix : "",

@@ -48,13 +48,13 @@ public class AuthorityController extends PortalBaseController{
 
 	@RequestMapping(value = "/authority.do")
 	@ResponseBody
-	public SingleResult<Map<String,String>> authority(String appid,String appsecret,String code,String encryptedData,String iv,String latitude,String longitude)throws Exception {
-		SingleResult<Map<String,String>> rst= this.authorityService.authority(appid,appsecret,code,encryptedData,iv,latitude,longitude);
+	public SingleResult<Map<String,Object>> authority(String appid,String appsecret,String code,String encryptedData,String iv,String latitude,String longitude)throws Exception {
+		SingleResult<Map<String,Object>> rst= this.authorityService.authority(appid,appsecret,code,encryptedData,iv,latitude,longitude);
 		if(rst.getStatus()==0){
-			Map<String,String> o=rst.getValue();
-			String session_key=o.get("session_key");
-			String openid=o.get("openid");
-			String _3rd_session=o.get("3rd_session");
+			Map<String,Object> o=rst.getValue();
+			String session_key=(String) o.get("session_key");
+			String openid=(String)o.get("openid");
+			String _3rd_session=(String)o.get("3rd_session");
 			this.getRequest().getSession().setAttribute(_3rd_session,session_key+openid);
 			rst.getValue().remove("session_key");
 			rst.getValue().remove("openid");

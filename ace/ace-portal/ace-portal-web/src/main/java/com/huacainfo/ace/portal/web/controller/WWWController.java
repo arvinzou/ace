@@ -221,19 +221,21 @@ public class WWWController extends PortalBaseController {
 	public ResponseEntity on_publish()throws Exception{
 		Map<String,Object> p=this.getParams();
 		this.logger.info("on_publish->{}",p);
+		String swfurl=(String)p.get("swfurl");
+		Map<String,String> o=CommonUtils.urlSplit(swfurl);
+		if(o.containsKey("appid")){
+			p.put("appid",o.get("appid"));
+		}
 		MessageResponse rst=authorityService.authority(p);
 		if(!rst.getState()){
 			return new ResponseEntity<>(rst, HttpStatus.NOT_ACCEPTABLE);
 		}
 		this.logger.info("{}",rst);
-		String swfurl=(String)p.get("swfurl");
-		Map<String,String> o=CommonUtils.urlSplit(swfurl);
 		if(o.containsKey("id")){
 			String id=o.get("id");
 			if(CommonUtils.isNotEmpty(id)){
 				this.redisTemplate.opsForValue().set((String) p.get("name"),id);
 			}
-
 		}
 
 		return new ResponseEntity<>(p, HttpStatus.OK);

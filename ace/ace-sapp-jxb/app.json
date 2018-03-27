@@ -1,10 +1,11 @@
 {
   "pages": [
-    "page/index/index"
+    "page/home/index",
+    "page/me/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",
-    "navigationBarTitleText": "掌上统战",
+    "navigationBarTitleText": "微直播",
     "navigationBarBackgroundColor": "#3C3C3C",
     "backgroundColor": "#F8F8F8"
   },
@@ -15,9 +16,9 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "page/index/index",
-        "iconPath": "image/tongzhan.png",
-        "selectedIconPath": "image/tongzhan_s.png",
+        "pagePath": "page/home/index",
+        "iconPath": "image/home.png",
+        "selectedIconPath": "image/home_s.png",
         "text": "首页"
       },
       {

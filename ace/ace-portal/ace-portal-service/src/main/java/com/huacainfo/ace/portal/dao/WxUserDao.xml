@@ -24,13 +24,13 @@
   </resultMap>
   <sql id="Base_Column_List">
     unionId, openId, nickName, gender, city, province, country, avatarUrl, mobile, addr, 
-    email, name,latitude, longitude,areaCode,category,role,party,deptId,faceToken,photo
+    email, name,latitude, longitude,areaCode,category,role,party,deptId,appId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from wx_user
-    where (unionId = #{unionId,jdbcType=VARCHAR} or faceToken=#{unionId,jdbcType=VARCHAR})
+    where unionId = #{unionId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from wx_user
@@ -40,16 +40,17 @@
     insert into wx_user (unionId, openId, nickName, 
       gender, city, province, 
       country, avatarUrl, mobile, 
-      addr, email, name,latitude, longitude)
+      addr, email, name,latitude, longitude,appId)
     values (#{unionId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
       #{country,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{addr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL})
+      #{addr,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL},#{appId})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.common.model.WxUser">
     update wx_user
     set openId = #{openId,jdbcType=VARCHAR},
       nickName = #{nickName,jdbcType=VARCHAR},
+      appId = #{appId,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       province = #{province,jdbcType=VARCHAR},
@@ -124,7 +125,7 @@
   </update>
   <select id="selectWxUser" resultType="map">
     select  unionId, openId, nickName, gender, city, province, country, avatarUrl, mobile, addr,
-    email, name,latitude, longitude,areaCode,category,role,party,faceToken,photo from wx_user
+    email, name,latitude, longitude,areaCode,category,role,party,faceToken,appId from wx_user
     where 0=0
     <if test='condition.name!=null and condition.name!=""'>
       and name like
@@ -140,25 +141,20 @@
     <if test='condition.role!=null and condition.role!=""'>
       and role =#{condition.role,jdbcType=VARCHAR}
     </if>
-    <if test='condition.faceToken!=null and condition.faceToken!=""'>
-      and faceToken is not null
-    </if>
     ORDER BY unionId
   </select>
 
-  <update id="updateFaceToken">
-    update wx_user
-    set
-    faceToken = #{faceToken,jdbcType=VARCHAR},
-    photo = #{photo,jdbcType=VARCHAR}
-    where unionId = #{unionId,jdbcType=VARCHAR}
-  </update>
+
 
   <select id="selectByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from wx_user
-    where mobile=#{mobile} limit 0,1
+    where mobile=#{mobile}
+    <if test='appid!=null and appid!=""'>
+      and appId=#{appid,jdbcType=VARCHAR}
+    </if>
+    limit 0,1
   </select>
 
 </mapper>
