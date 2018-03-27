@@ -101,38 +101,6 @@ public class WxUserServiceImpl implements WxUserService {
 	public List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception{
 		return this.wxUserDao.selectWxUser(condition);
 	}
-	@Override
-	public MessageResponse updateFaceToken(String image_url,String unionId) throws Exception{
-		String faceToken=null;
-		WxUser o=this.wxUserDao.selectByPrimaryKey(unionId);
-		if(CommonUtils.isNotEmpty(o.getFaceToken())){
-			FaceUtils.faceSetDel(faceset_token,o.getFaceToken());
-		}
-		String text=FaceUtils.detect(image_url);
-		com.alibaba.fastjson.JSONObject rst = com.alibaba.fastjson.JSON.parseObject(text);
-		com.alibaba.fastjson.JSONArray list=rst.getJSONArray("faces");
-		if(CommonUtils.isNotEmpty(list)||list.size()>0){
-			com.alibaba.fastjson.JSONObject face=list.getJSONObject(0);
-			faceToken=face.getString("face_token");
-			FaceUtils.faceSetAdd(faceset_token,faceToken);
-			this.wxUserDao.updateFaceToken(unionId,faceToken,image_url);
-		}
-		return new MessageResponse(0, "更新faceToken完成！");
-	}
-	@Override
-	public  SingleResult<WxUser> searchFace(String image_url) throws Exception{
-		SingleResult<WxUser> rst = new SingleResult<WxUser>(1,null);
-		String faceToken=null;
-		String text=FaceUtils.search(faceset_token,image_url);
-		com.alibaba.fastjson.JSONObject json = com.alibaba.fastjson.JSON.parseObject(text);
-		com.alibaba.fastjson.JSONArray list=json.getJSONArray("results");
-		if(CommonUtils.isNotEmpty(list)||list.size()>0){
-			com.alibaba.fastjson.JSONObject face=list.getJSONObject(0);
-			faceToken=face.getString("face_token");
-			rst.setValue(this.wxUserDao.selectByPrimaryKey(faceToken));
-			rst.getOther().put("photo",image_url);
-			rst.setStatus(0);
-		}
-		return rst;
-	}
+
+
 }

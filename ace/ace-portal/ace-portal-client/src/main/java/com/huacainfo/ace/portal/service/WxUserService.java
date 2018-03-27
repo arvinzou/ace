@@ -20,7 +20,6 @@ public interface WxUserService {
 	public abstract MessageResponse updateRoleById(String id,String role,UserProp userProp) throws Exception;
 	List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception;
 
-	public abstract MessageResponse updateFaceToken(String image_url,String unionId) throws Exception;
-	public abstract SingleResult<WxUser> searchFace(String image_url) throws Exception;
+
 
 }
