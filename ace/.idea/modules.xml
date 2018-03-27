@@ -7,11 +7,11 @@
       <module fileurl="file://$PROJECT_DIR$/ace-common/ace-common.iml" filepath="$PROJECT_DIR$/ace-common/ace-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-web/ace-common-web.iml" filepath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop-client/ace-iop-client.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop-client/ace-iop-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop-rest/ace-iop-rest.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop-rest/ace-iop-rest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop-service/ace-iop-service.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop-service/ace-iop-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ace-iop/ace-iop-web/ace-iop-web.iml" filepath="$PROJECT_DIR$/ace-iop/ace-iop-web/ace-iop-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-fop/ace-fop.iml" filepath="$PROJECT_DIR$/ace-fop/ace-fop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-fop/ace-fop-client/ace-fop-client.iml" filepath="$PROJECT_DIR$/ace-fop/ace-fop-client/ace-fop-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-fop/ace-fop-rest/ace-fop-rest.iml" filepath="$PROJECT_DIR$/ace-fop/ace-fop-rest/ace-fop-rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-fop/ace-fop-service/ace-fop-service.iml" filepath="$PROJECT_DIR$/ace-fop/ace-fop-service/ace-fop-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-fop/ace-fop-web/ace-fop-web.iml" filepath="$PROJECT_DIR$/ace-fop/ace-fop-web/ace-fop-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" />
