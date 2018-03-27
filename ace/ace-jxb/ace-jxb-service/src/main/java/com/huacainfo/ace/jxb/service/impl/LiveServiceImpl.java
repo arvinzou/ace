@@ -26,7 +26,7 @@ import com.huacainfo.ace.jxb.service.LiveService;
 import com.huacainfo.ace.jxb.vo.LiveVo;
 import com.huacainfo.ace.jxb.vo.LiveQVo;
 
-@Service("jxbService")
+@Service("liveService")
 /**
  * @author: 陈晓克
  * @version: 2017-12-28

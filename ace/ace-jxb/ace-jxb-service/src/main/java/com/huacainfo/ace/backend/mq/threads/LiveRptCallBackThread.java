@@ -20,7 +20,7 @@ public class LiveRptCallBackThread extends Thread {
     private static final Logger LOGGER = LoggerFactory.getLogger(LiveRptCallBackThread.class);
 
     private KafkaStream<byte[], byte[]> stream = null;
-    private LiveRptService jxbRptService;
+    private LiveRptService liveRptService;
 
     public LiveRptCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
         super(name);
@@ -36,7 +36,7 @@ public class LiveRptCallBackThread extends Thread {
 
     private void init() {
 
-        this.jxbRptService = (LiveRptService) SpringUtils.getBean("jxbRptService");
+        this.liveRptService = (LiveRptService) SpringUtils.getBean("liveRptService");
     }
 
     @Override
@@ -62,7 +62,7 @@ public class LiveRptCallBackThread extends Thread {
             JSONObject json = JSON.parseObject(data.get("jsons"));
             LiveRpt o = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
             List<LiveImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), LiveImg.class);
-            MessageResponse rst = this.jxbRptService.insertLiveRpt(o, imgs);
+            MessageResponse rst = this.liveRptService.insertLiveRpt(o, imgs);
             LOGGER.info("{}", rst.getErrorMessage());
         } catch (Exception e) {
             LOGGER.error("系统出错{}", e);

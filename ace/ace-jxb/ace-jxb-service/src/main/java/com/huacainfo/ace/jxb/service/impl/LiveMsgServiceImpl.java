@@ -22,7 +22,7 @@ import com.huacainfo.ace.jxb.service.LiveMsgService;
 import com.huacainfo.ace.jxb.vo.LiveMsgVo;
 import com.huacainfo.ace.jxb.vo.LiveMsgQVo;
 
-@Service("jxbMsgService")
+@Service("liveMsgService")
 /**
  * @author: 陈晓克
  * @version: 2018-01-03

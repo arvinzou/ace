@@ -23,7 +23,7 @@ public class LiveCallBackThread extends Thread {
     private static final Logger LOGGER = LoggerFactory.getLogger(LiveCallBackThread.class);
 
     private KafkaStream<byte[], byte[]> stream = null;
-    private LiveService jxbService;
+    private LiveService liveService;
 
     public LiveCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
         super(name);
@@ -38,7 +38,7 @@ public class LiveCallBackThread extends Thread {
     }
 
     private void init() {
-        this.jxbService = (LiveService) SpringUtils.getBean("jxbService");
+        this.liveService = (LiveService) SpringUtils.getBean("liveService");
     }
 
 
@@ -55,7 +55,7 @@ public class LiveCallBackThread extends Thread {
                 String openid = (String) params.get("openid");
                 Live jxb = JsonUtil.toObject(data.get("jsons"), Live.class);
 
-                MessageResponse response = jxbService.insertLive(openid, jxb);
+                MessageResponse response = liveService.insertLive(openid, jxb);
 
                 LOGGER.info("{}", response.getErrorMessage());
             } catch (Exception ex) {

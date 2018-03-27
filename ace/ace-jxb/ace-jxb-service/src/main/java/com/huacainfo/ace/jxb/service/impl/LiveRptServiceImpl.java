@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Service("jxbRptService")
+@Service("liveRptService")
 /**
  * @author: 陈晓克
  * @version: 2018-01-03

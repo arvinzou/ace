@@ -22,22 +22,22 @@
     <dubbo:service interface="com.huacainfo.ace.jxb.service.AnalysisService"
                    ref="analysisService"/>
     <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveService"
-                   ref="jxbService"/>
+                   ref="liveService"/>
 
     <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveRptService"
-                   ref="jxbRptService"/>
+                   ref="liveRptService"/>
 
 
     <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveMsgService"
-                   ref="jxbMsgService"/>
+                   ref="liveMsgService"/>
 
     <dubbo:service interface="com.huacainfo.ace.jxb.service.WWWService"
                    ref="wwwService"/>
 
     <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveImgService"
-                   ref="jxbImgService"/>
+                   ref="liveImgService"/>
 
     <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveCmtService"
-                   ref="jxbCmtService"/>
+                   ref="liveCmtService"/>
 
 </beans>
