@@ -7,7 +7,7 @@ function getRandomColor() {
   }
   return '#' + rgb.join('')
 }
-var srcs = ['http://127.0.0.1:8008/hls/a69.m3u8','http://127.0.0.1:8008/hls/a69.m3u8'];
+var srcs = ['http://192.168.2.253:8008/hls/a69.m3u8','http://192.168.2.253:8008/hls/a69.m3u8'];
  
 Page({
   onReady: function (res) {
@@ -15,7 +15,7 @@ Page({
   },
   inputValue: '',
   data: {
-    src: 'http://127.0.0.1:8080/hls/a69.m3u8',
+    src: 'http://192.168.2.253:8080/hls/a69.m3u8',
     danmuList: [
       {
         text: '第 1s 出现的弹幕',

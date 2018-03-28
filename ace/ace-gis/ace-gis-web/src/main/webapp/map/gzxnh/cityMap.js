@@ -20,7 +20,7 @@ for (var city in cityMap) {
         getGeoJson: (function (c) {
             var geoJsonName = cityMap[c];
             return function (callback) {
-                $.getJSON('http://127.0.0.1:7001/map/js/echarts/util/mapData/geoJson/china-main-city/' + geoJsonName + '.json', callback);
+                $.getJSON('http://192.168.2.253:7001/map/js/echarts/util/mapData/geoJson/china-main-city/' + geoJsonName + '.json', callback);
             }
         })(city)
     }
