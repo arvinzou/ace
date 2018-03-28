@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * @author HuaCai003
- */
-public class Case implements Serializable{
-    private static final long serialVersionUID = 3910480763294285108L;
+public class Cases implements Serializable {
+    private static final long serialVersionUID = -4650198110083949096L;
+
+
     private String id;
 
     private String caseNo;

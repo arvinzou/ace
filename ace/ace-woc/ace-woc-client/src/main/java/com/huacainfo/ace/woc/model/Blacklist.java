@@ -1,8 +1,12 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Blacklist {
+public class Blacklist implements Serializable {
+    private static final long serialVersionUID = -4650198110083949096L;
+
+
     private String id;
 
     private String personId;

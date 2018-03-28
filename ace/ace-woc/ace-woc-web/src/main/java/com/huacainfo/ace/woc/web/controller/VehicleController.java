@@ -1,12 +1,5 @@
 package com.huacainfo.ace.woc.web.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
@@ -15,8 +8,16 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.woc.model.Vehicle;
 import com.huacainfo.ace.woc.service.VehicleService;
-import com.huacainfo.ace.woc.vo.VehicleVo;
 import com.huacainfo.ace.woc.vo.VehicleQVo;
+import com.huacainfo.ace.woc.vo.VehicleVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/vehicle")
@@ -131,4 +132,11 @@ public class VehicleController extends WocBaseController {
 		return this.vehicleService.deleteVehicleByVehicleId(id,
 				this.getCurUserProp());
 	}
+
+
+    @RequestMapping(value = "/selectListByKeyWord")
+    @ResponseBody
+    public Map<String, Object> selectListByKeyWord(String q) throws Exception {
+        return vehicleService.selectListByKeyWord(q);
+    }
 }

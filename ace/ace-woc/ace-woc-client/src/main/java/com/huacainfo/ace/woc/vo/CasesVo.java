@@ -1,13 +1,14 @@
 
 package com.huacainfo.ace.woc.vo;
 
-import com.huacainfo.ace.woc.model.Case;
+import com.huacainfo.ace.woc.model.Cases;
 
 import java.math.BigDecimal;
 
 
-public class CaseVo extends Case {
-    private static final long serialVersionUID = 1L;
+public class CasesVo extends Cases {
+	private static final long serialVersionUID = 1L;
+
     private String vehicleNo;
 
     private String partyName;
