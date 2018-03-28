@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" >
+<title>首页</title>
+<link href="../css/comon0.css" rel="stylesheet" type="text/css" />
+<link href="../css/index.css" rel="stylesheet" type="text/css" />
+<SCRIPT language=JavaScript src="../js/jquery.js"></SCRIPT>
+<SCRIPT language=JavaScript src="../js/jquery.reveal.js"></SCRIPT>
+<script type="text/javascript">
+   $(document).ready(function() {
+    var winwidth=$(window).width()
+	if(winwidth<1240){
+		$(".juz").css({width:1000})
+		$(".bsfw_img a").addClass("mar")
+		}
+});
+</script>
+</head>
+
+<script>
+$(document).ready(function(e) {
+$(".leftQY .nr li").click(function(){
+		
+		$(this).addClass("hover").siblings().removeClass("hover")
+		
+		
+		})
+		
+		
+$(".btnClose").click(function(){
+	
+	
+	
+	$("#rem").css({'opacity' : 0, 'visibility' : 'hidden'})
+	
+	$(".reveal-modal-bg").remove();
+	})
+		
+		
+		
+		
+});
+</script>
+<body>
+<div class="headbox">
+<div class="head juz">
+<div class="head_top">
+        <span class="head_welcome">欢迎您：</span>
+        <a class="head_user_name" href="user.html">张三</a>
+        <a class="head_login tjbtn" data-reveal-id="myModal" data-animation="fade" href="#">切换身份</a>
+        <a class="head_login" href="login.html">退出</a>
+    </div>
+    
+<div class="head_menu">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="300"><img src="../images/logo.png" /></td>
+    <td><ul>
+      <!--<li><a href="#">首页</a></li>-->
+      <li class="active"><a href="#">企业桌面</a></li>
+      <li><a href="#">公众查询</a></li>
+      <li><a href="#">会员服务</a></li>
+      <li><a href="#">服务互动</a></li>
+</ul></td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+
+
+<div class="mainBox juz">
+    
+   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+    <div class="grsds">
+    <div class="title01" style="margin-bottom:10px;"><span>个人所得税</span></div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="48%" valign="top">
+       <div class="dfk01">
+       <h2>申报征收</h2>
+           <ul>
+               <a href="#" class="big-link" data-reveal-id="rem" data-animation="fade"><li class="ico-nsd12wyszxsb" >年所得12万以上自行申报</li></a>
+               <li class="ico-scjysdgrsdssb">生产、经营所得个人所得税纳税申报</li>
+               <li class="ico-qjsk">清缴税款</li>
+               <li class="ico-sbbzf">申报表作废</li>
+           </ul>
+       </div>
+    </td>
+    <td class="line">&nbsp;</td>
+    <td width="48%" valign="top"><div class="dfk01">
+       <h2>查询打印</h2>
+           <ul>
+               <li class="ico-nsds12wyssbcx">年所得12万以上申报查询</li>
+               <li class="ico-nsds12wysjkcx">年所得12万以上缴款查询</li>
+               <li class="ico-grsdsnsmxcx">个人所得税纳税明细查询</li>
+               <li class="ico-gssdswszmjqddy">个人所得税完税证明及清单打印</li>
+               <li class="ico-sbbdy">申报表打印</li>
+            
+           </ul>
+       </div></td>
+  </tr>
+</table>
+
+    </div>
+    
+    </td>
+<td width="3%">&nbsp;</td>
+    <td width="24%" valign="top">
+    <div class="userbox">
+     <div class="title01"><span>用户信息</span></div>
+ 
+     <div class="userlist" style="padding-top:5px; padding-bottom:5px;">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr>
+           <td>用户名称：</td>
+           <td>张三</td>
+         </tr>
+         <tr>
+           <td>证件号码：</td>
+           <td>455222199901010101</td>
+         </tr>
+       </table>
+     </div>
+     <div style="margin:10px 0; ">
+  <a class="btn  btn01" style="margin:0 2px; padding:0px 7px 0px 7px;" href="user.html">账户设置</a> 
+  <a class="btn  btn01" style="margin:0 2px;padding:0px 7px 0px 7px;" href="login.html">退出登录</a> 
+  <a class="btn  btn03" style="margin:0 2px;padding:0px 7px 0px 7px; background-color:#f6f6f6; color:#1369c0;" href="#">短信订阅</a> 
+   
+    </div>
+    </div>
+    </td>
+  </tr>
+</table>
+
+ <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="48%" valign="top">
+        <div class="title01" style="margin-bottom:10px;"><span>社保费</span></div>
+        <div class="dfk02">
+          
+          <ul>
+            <li class="ico-sbfjfmxcx">社保费缴费明细查询</li>
+            <li class="ico-sbfgrxxcx">社保费个人信息查询</li>
+           
+          </ul>
+        </div></td>
+        <td class="line">&nbsp;</td>
+        <td width="48%" valign="top">
+        <div class="title01" style="margin-bottom:10px;"><span>车购税</span></div>
+        <div class="dfk02-grey">
+         
+          <ul>
+            <li class="ico-cgssb-grey">车购税申报</li>
+            <li class="ico-cgscx-grey">车购税查询</li>
+         
+          </ul>
+        </div></td>
+      </tr>
+    </table></td>
+    <td width="3%">&nbsp;</td>
+    <td width="24%" valign="top">
+    
+     
+  <div class="title01" style="margin-bottom:10px;"><span>发票</span></div>
+        <div class="dfk02-grey">
+          
+          <ul>
+            <li class="ico-dkptfp">普通发票代开申请</li>
+         
+           
+          </ul>
+        </div>
+    
+    </td>
+  </tr>
+</table>
+
+</div>
+<br />
+
+<div class="new_index_box">
+    <div class="foot_link juz">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" width="50%">
+<h3>服务支持</h3> 
+         <ul style="width:400px;">
+           <li style="width:200px; float:left">
+湖南省国家工商联<br />
+<span>纳税服务热线：12366-1</span>
+           </li>
+           <li style="width:200px; float:left">
+湖南省地方工商联<br />
+<span>纳税服务热线：12366-2<br />
+技术支持热线：10000-9</span>
+           </li>           
+         </ul>   
+    </td>
+    <td class="vline" width="50">&nbsp;</td>
+    <td valign="top">
+<h3>网站链接</h3>
+<a href="http://www.chinatax.gov.cn" target="_blank">国家税务总局</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.gd-n-tax.gov.cn" target="_blank">湖南省国家工商联</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.gdltax.gov.cn" target="_blank">湖南省地方工商联</a>
+    </td>
+  </tr>
+</table>
+</div>
+
+
+
+
+<div class=" indexfoot">
+<div class="foot_box">
+<div class="font_logo"><img src="../images/foot_logo.png" /></div>
+<ul>@2016版权所有：湖南省常德市工商联<br />
+ ICP备案序号 湘ICP备10025337号-2
+</ul>
+</div>
+</div>
+
+
+
+<!-----切换身份------->
+
+<div id="myModal" class="reveal-modal" style="width:820px;">
+		<div class="tc_tit">企业身份选择</div>
+            <a href="#" class="close_btn close-reveal-modal">×</a>	  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" valign="top">
+       <div class="leftQY">
+            <div class="sh_title01"><div class="blold">企业企业</div><span></span></div>
+            <div class="nr" style="display:none">
+                <h1>暂无企业，请新建企业</h1>
+                <div style=" padding:35px 0 40px 118px;" class="add_com"><a href="#none">新建企业</a></div>
+                  <div style=" text-align:center; padding:20px 0 40px 0 ;"> <a class="btn_read btn_read01"  href="bszm.html"> 确定进入 </a> </div>
+            </div>
+            <div class="nr">
+                <h1>请选择企业</h1>
+                <ul>
+                  <li>测试4401060044827（测试4401060044827-财务负责人）</li>
+                  <li>方欣科技有限公司（方欣科技有限公司-法人）</li>
+
+                </ul>
+                  <div style=" text-align:center; padding:20px 0 40px 0 ;"> <a class="btn btn01"   href="bszm.html"> 企业进入 </a> </div>
+            </div>            
+            
+       </div>
+    </td>
+    <td valign="top">
+      <div class="rightGR">
+           <div class="sh_title01"><div class="blold">个人企业</div><span></span></div>
+           <div class="nr">
+               <ul class="hover">
+               <li>用户名称：张三</li>
+               <li>证件号码：455222199901010101</li>
+               </ul>
+               <div style=" text-align:center; padding:20px 0 40px 0 ; "> <a class="btn btn01" style=" background-color:#00a33a;" href="bszm02.html"> 个人进入 </a> </div>
+           </div>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>
+<!------提醒------>
+
+<div id="rem" class="reveal-modal" style="left:60%;visibility: visible; opacity: 1; ">
+			<div class="tc_tit">温馨提醒</div>
+            <a href="#" class="close_btn close-reveal-modal btnClose">×</a>	  
+			 <div class="tc_nav">
+                    <div style="height:50px; line-height:50px; text-align:center;">未绑定个人身份，不能办理个人业务，请点击确定按钮进行绑定。</div>
+                	<div class="page01">
+            <input class="btn btn01" id="txsb" type="button" onclick="location='user.html'" value="确定">
+           
+        
+             </div>
+         
+           </div>
+	
+			
+		</div>  
+        
+        
+        
+        <div class="reveal-modal-bg" style="display: block; cursor: pointer;"></div>      
+</body>
+</html>

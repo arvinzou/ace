@@ -1,0 +1,519 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" >
+<title>首页</title>
+<link href="../css/comon0.css" rel="stylesheet" type="text/css" />
+<link href="../css/index.css" rel="stylesheet" type="text/css" />
+<SCRIPT language=JavaScript src="../js/jquery.js"></SCRIPT>
+<SCRIPT language=JavaScript src="../js/jquery.reveal.js"></SCRIPT>
+<script type="text/javascript">
+   $(document).ready(function() {
+    var winwidth=$(window).width()
+	if(winwidth<1240){
+		$(".juz").css({width:1000})
+		$(".sbjn ul").css({marginLeft:'-4.29%'})
+		$(".sbjn a").css({marginLeft:'4.29%'})
+		$(".bsfw_mar ul").css({marginLeft:'-158px'})
+		$(".bsfw_mar a").css({marginLeft:'160px'})
+		}
+		
+ 
+		
+		
+		
+});
+//征期日历
+ 
+
+var s,s2,s3,s4,timer;
+function init(){
+s=getid("div1");
+s2=getid("div2");
+s3=getid("div3");
+s4=getid("scroll");
+s4.style.width=(s2.offsetWidth*2+100)+"px";
+s3.innerHTML=s2.innerHTML;
+timer=setInterval(mar,100)
+} 
+function mar(){
+if(s2.offsetWidth<=s.scrollLeft){
+s.scrollLeft-=s2.offsetWidth;
+}else{s.scrollLeft++;}
+}
+function getid(id){
+return document.getElementById(id);
+} 
+window.onload=init;
+
+function setTab(name, cursel, n) {
+    for (var i = 1; i <= n; i++) {
+        var menu = document.getElementById(name + i);
+        var con = document.getElementById("con_" + name + "_" + i);
+        menu.className = i == cursel ? "ved" : "";
+        con.style.display = i == cursel ? "block" : "none";
+    }
+}
+
+</script>
+</head>
+<body>
+<div class="headbox">
+<div class="head juz">
+
+<div class="head_top">
+        <span class="head_welcome">欢迎您：</span>
+        <a class="head_user_name" href="user.html">湖南省常德市工商联测试用户</a>
+        <span class="head_welcome">所属企业：方欣科技有限公司</span>
+        <a class="head_login tjbtn" data-reveal-id="myModal" data-animation="fade" href="#">切换身份</a>
+        <a class="head_login tjbtn" data-reveal-id="swjg" data-animation="fade" href="#">子主体身份选择</a>
+        <a class="head_login" href="index.html">退出</a>
+    </div>
+<div class="head_menu">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="300"><img src="../images/logo.png" /></td>
+    <td><ul>
+      <li class="active"><a href="bszm.html">企业桌面</a></li>
+      <li><a href="sbjs.html">申报缴税</a></li>
+      <li><a href="sxbl.html">事项办理</a></li>
+      <li><a href="sscx.html">涉税查询</a></li>
+      <li><a href="dbtx.html">待办提醒</a></li>
+      <li><a href="xxcj.html">信息采集</a></li>
+      <li><a href="bsfw.html">会员服务</a></li>
+      <li><a href="znhd.html">服务互动</a></li>
+       <li><a href="#">信息互动</a></li>
+</ul></td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+
+
+<div class="mainBox juz">
+
+    <div class="dlhmall clearfloat">
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top"><div class="thing">
+     <div class="tittab">
+      <a href="#" class="ved" id="one1" onClick="setTab('one', 1, 3);">我的待办</a>
+      <a href="#" id="one2" onClick="setTab('one', 2, 3);">我的提醒<span>2</span></a>
+      <a href="#" id="one3" onClick="setTab('one', 3, 3);">我的通知<span>3</span></a>
+     </div>
+     <div class="dbbox1 indexfont" id="con_one_1" style="display:block;" >
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <th width="80"><span>事项来源</span></th>
+          <th><span>事项名称</span></th>
+          <th width="130"><span>办理期限</span></th>
+          <th width="80"><span>操作</span></th>
+        </tr>
+        <tr>
+          <td><span class="fontcolor01">[国税]</span></td>
+          <td>增值税一般纳税人申报</td>
+          <td>2016-03-15</td>
+          <td><div class="sbtnbox1"><a class="sbtn sbtn01" href="#">申报</a></div></td>
+        </tr>
+        <tr>
+          <td><span class="fontcolor02">[地税]</span></td>
+          <td>社保申报</td>
+          <td>2016-03-15</td>
+          <td><div class="sbtnbox1"><a class="sbtn sbtn01" href="#">申报</a></div></td>
+        </tr>
+        <tr>
+          <td><span class="fontcolor02">[地税]</span></td>
+          <td>个税申报</td>
+          <td>2016-03-15</td>
+          <td><div class="sbtnbox1"><a class="sbtn sbtn01" href="#">申报</a></div></td>
+        </tr>
+        <tr>
+          <td><span class="fontcolor01">[国税]</span></td>
+          <td>清缴税款</td>
+          <td>2016-03-15</td>
+          <td>
+            <div class="sbtnbox1"><a class="sbtn sbtn02" href="#">缴款</a></div>
+          </td>
+        </tr>
+      </table>
+     </div>
+     <div class="tzggbox indexfont" id="con_one_2" style="display:none;" >
+      <ul>
+        <li class="bold"><span>[地税]</span><a href="#" class="btn big-link " data-reveal-id="tzgg" data-animation="fade">增值税（适用于小规模纳税人）申报提醒[03-20]</a><p>2016-04-06</p></li>
+        <li class="bold"><span class="cor">[国税]</span><a href="#">催报催缴提醒[03-20]</a><p>2016-04-06</p></li>
+        <li><span>[地税]</span><a href="#">简易申报一批扣余额不足提醒信息[03-20]</a><p>2016-04-06</p></li>
+        <li><span class="cor">[国税]</span><a href="#">发票票种核定申请成功提醒[03-20]</a><p>2016-04-06</p></li>
+        <li><span>[地税]</span><a href="#">实时扣缴税（费）信息提醒[03-20]</a><p>2016-04-06</p></li>
+       </ul>
+     </div>
+     <div class="tzggbox indexfont" id="con_one_3" style="display:none;" >
+      <ul>
+        <li class="bold"><span>[地税]</span><a href="#" class="btn big-link " data-reveal-id="tzgg" data-animation="fade">增值税（适用于小规模纳税人）申报提醒[03-20]</a><p>2016-04-06</p></li>
+        <li class="bold"><span class="cor">[国税]</span><a href="#">催报催缴提醒[03-20]</a><p>2016-04-06</p></li>
+        <li><span>[地税]</span><a href="#">简易申报一批扣余额不足提醒信息[03-20]</a><p>2016-04-06</p></li>
+        <li><span class="cor">[国税]</span><a href="#">发票票种核定申请成功提醒[03-20]</a><p>2016-04-06</p></li>
+        <li><span class="cor">[国税]</span><a href="#">发票票种核定申请成功提醒[03-20]</a><p>2016-04-06</p></li>
+       </ul>
+     </div>
+ </div></td>
+    <td width="30">&nbsp;</td>
+    <td width="336" valign="top"><div class="calendar">
+     <div class="titsj">
+      <span>企业日历</span>
+      <div class="rbox">
+       <div class="qieh"><a href="#"><img src="../images/index/bs_ril.png"></a><i>2016年4月</i><a href="#"><img src="../images/index/bs_rir.png"></a></div>
+            <div class="datetext">
+                         <div class="d1" id="div1" onmouseover="clearInterval(timer)" onmouseout="timer=setInterval(mar,30)">
+                           <div class="scroll" id="scroll">
+                              <div class="div2" id="div2">
+                                   <ul>
+                                     <li><a href="#" target="_self">3月资源税月报截止日为4月13日 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+      
+                                    </ul>
+                               </div>
+                             <div id="div3" class="div2"></div>
+                            </div>
+                         </div> 
+           
+           </div>
+      </div>
+     </div>
+   <div class="userbox" style="margin-top:2px" >
+    <div class="tltlebox2"> <ul> <span style="font-size:22px;">用户信息</span></ul> </div> 
+     
+     <div class="userlist" style="padding-top:8px;padding-bottom:20px;  overflow:hidden;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="80">用户名称：</td>
+    <td>湖南省常德市工商联测试用户</td>
+  </tr>
+  <tr>
+    <td>所属企业：</td>
+    <td>方欣科技有限公司<br /></td>
+  </tr>
+</table>
+
+     </div>
+     <div style="margin:0px 0; ">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><a class="btn  btn01" style=" width:75%; text-align:center" href="#">账户设置</a> 
+   </td>
+    <td width="10">&nbsp;</td>
+    <td><a class="btn  btn01" style="width:75%;text-align:center" href="#">退出登录</a></td>
+  </tr>
+</table>
+
+
+   
+    </div>
+    </div>
+
+    </div></td>
+  </tr>
+</table>
+
+    
+    
+      
+  </div>  
+    
+<div class="tltlebox"> <ul> <span>申报缴税</span>
+</ul> </div>  
+
+<div class="bsfw_img sbjn">
+<ul>
+ <a href="#" class="limg"><img src="../images/index/sbjs_ico1.png"><span>申报清册</span></a>
+ <a href="#"><img src="../images/index/sbjs_ico2.png"><span>清缴税款</span></a>
+ <a href="#"><img src="../images/index/sbjs_ico3.png"><span>申报作废</span></a>
+ <a href="#"><img src="../images/index/sbjs_ico4.png"><span>社保费管理</span></a>
+ <a href="#"><img src="../images/index/sbjs_ico5.png"><span>申报查询及打印</span></a>
+ <a href="#" class="rimg"><img src="../images/index/sbjs_ico6.png"><span>缴款查询及打印</span></a>
+</ul>
+</div> 
+
+<div class="tltlebox"> <ul> <span>事项办理</span></ul> </div>  
+<div class="bsfw_img bsfw_mar">
+<ul>
+ <a href="#" class="limg"><img src="../images/index/sxbl_ico1.png"><span>涉税事项办理</span></a>
+ <a href="#"><img src="../images/index/sxbl_ico2.png"><span>事项进度管理</span></a>
+ 
+ <a href="#"><img src="../images/index/sxbl_ico3.png"><span>电子信息下载</span></a>
+ <a href="#" class="rimg"><img src="../images/index/sxbl_ico4.png"><span>电子资料管理</span></a>
+</ul>
+</div> 
+
+<div class="tltlebox"> <ul> <span>一户试查询</span></ul> </div>  
+<div class="yfsbox clearfloat">
+ <div class="yfs_left">
+ <a href="#none"  class="ved" id="two1" onClick="setTab('two', 1, 11);">税务登记查询</a>
+ <a href="#none" id="two2" onClick="setTab('two', 2, 11);">认定管理查询</a>
+ <a href="#none" id="two3" onClick="setTab('two', 3, 11);">申报征收查询</a>
+ <a href="#none" id="two4" onClick="setTab('two', 4, 11);">发票业务查询</a>
+ <a href="#none" id="two5" onClick="setTab('two', 5, 11);">优惠备案查询</a>
+ <a href="#none" id="two6" onClick="setTab('two', 6, 11);">纳税评估查询</a>
+ </div>
+ <div class="yfs_wid" id="con_two_1" style="display:block;" >
+  <ul>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">设立登记查询</a></li>
+  <li class="mar"><i><img src="../images/index/search02.png"></i><a href="#">变更登记查询</a></li>
+  <li><i><img src="../images/index/search03.png"></i><a href="#">停业复业登记查询</a></li>
+  <li class="mar"><i><img src="../images/index/search04.png"></i><a href="#">存款账户帐号报告查询</a></li>
+  <li><i><img src="../images/index/search05.png"></i><a href="#">财务会计制度备案查询</a></li>
+  <li class="mar"><i><img src="../images/index/search06.png"></i><a href="#">文化建设事业费登记查询</a></li>
+  <li><i><img src="../images/index/search07.png"></i><a href="#">电子税务登记证件查询</a></li>
+ </ul>
+ </div>
+ <div class="yfs_wid" id="con_two_2" style="display:none;" >
+   <ul>
+  <li><i><img src="../images/index/search02.png"></i><a href="#">税（费）种认定查询</a></li>
+  <li class="mar"><i><img src="../images/index/search03.png"></i><a href="#">一般纳税人资格登记查询</a></li>
+  <li><i><img src="../images/index/search05.png"></i><a href="#">一般纳税人简易征收认定查询</a></li>
+  <li class="mar"><i><img src="../images/index/search06.png"></i><a href="#">汇总纳税企业认定查询</a></li>
+   </ul>
+ </div>
+ <div class="yfs_wid" id="con_two_3" style="display:none;" >
+   <ul>
+  <li><i><img src="../images/index/search07.png"></i><a href="#">逾期未申报信息查询</a></li>
+  <li class="mar"><i><img src="../images/index/search06.png"></i><a href="#">申报信息查询</a></li>
+  <li><i><img src="../images/index/search05.png"></i><a href="#">核定信息查询</a></li>
+  <li class="mar"><i><img src="../images/index/search04.png"></i><a href="#">未缴税款查询</a></li>
+  <li><i><img src="../images/index/search03.png"></i><a href="#">已缴税款查询</a></li>
+  <li class="mar"><i><img src="../images/index/search02.png"></i><a href="#">退抵税（费）查询</a></li>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">个人所得税完税情况查询</a></li>
+   </ul> 
+ </div>
+ <div class="yfs_wid" id="con_two_4" style="display:none;" >
+   <ul>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">票种核定查询</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">发票领用信息查询</a></li>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">发票代开信息查询</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">抵扣联信息查询</a></li>
+   </ul>  
+ </div>
+ <div class="yfs_wid" id="con_two_5" style="display:none;" >
+   <ul>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">税收减免审批信息查询</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">税收减免备案信息查询</a></li>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">增值税即征即退审批信息查询</a></li>
+   </ul>
+ </div>
+ <div class="yfs_wid" id="con_two_6" style="display:none;" >
+   <ul>
+   <li><i><img src="../images/index/search01.png"></i><a href="#">纳税评估查询</a></li>
+   </ul>
+   
+ </div>
+ <div class="yfs_wid" id="con_two_7" style="display:none;" >
+   <ul>
+   <li><i><img src="../images/index/search01.png"></i><a href="#">资料报送查询</a></li>
+   </ul>
+ </div>
+ <div class="yfs_wid" id="con_two_8" style="display:none;" >
+   <ul>
+  <li><i><img src="../images/index/cx_ico1.png"></i><a href="#">纳税信用评价查询</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">纳税信用风险扫描</a></li>
+   </ul>
+
+ </div>
+ <div class="yfs_wid" id="con_two_9" style="display:none;" >
+   <ul>
+   <li><i><img src="../images/index/search01.png"></i><a href="#">违法违章查询</a></li>
+   </ul>
+ </div>
+ <div class="yfs_wid" id="con_two_10" style="display:none;" >
+   <ul>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">出口退（免）税备案信息查询</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">出口企业分类评定结果查询</a></li>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">出口退（免）税审核进度查询</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">出口企业经营变动查询</a></li>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">出口退（抵）税明细信息查询</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">出口退税与申报比对查询</a></li>
+  </ul>
+ </div>
+ <div class="yfs_wid" id="con_two_11" style="display:none;" >
+   <ul>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">单位综合信息查询</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">单位职工名册查询</a></li>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">单位核定信息查询</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">未缴税款查询</a></li>
+  <li><i><img src="../images/index/search01.png"></i><a href="#">单位内人员增减明细</a></li>
+  <li class="mar"><i><img src="../images/index/search01.png"></i><a href="#">申报缴款分户查询</a></li>
+   </ul>
+ </div>
+
+
+
+
+
+
+ <div class="yfs_left yfs_r">
+ <a href="#none" id="two7" onClick="setTab('two', 7, 11);">资料报送查询</a>
+ <a href="#none" id="two8" onClick="setTab('two', 8, 11);">信用等级查询</a>
+ <a href="#none" id="two9" onClick="setTab('two', 9, 11);">违法违章查询</a>
+ <a href="#none" id="two10" onClick="setTab('two', 10, 11);">出口退税查询</a>
+ <a href="#none" id="two11" onClick="setTab('two', 11, 11);">社保业务查询</a>
+ </div>
+</div>
+
+
+</div>
+
+<div class="new_index_box">
+    <div class="foot_link juz">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" width="50%">
+<h3>服务支持</h3> 
+         <ul style="width:400px;">
+           <li style="width:200px; float:left">
+湖南省国家工商联<br />
+<span>纳税服务热线：12366-1</span>
+           </li>
+           <li style="width:200px; float:left">
+湖南省地方工商联<br />
+<span>纳税服务热线：12366-2<br />
+技术支持热线：10000-9</span>
+           </li>           
+         </ul>   
+    </td>
+    <td class="vline" width="50">&nbsp;</td>
+    <td valign="top">
+<h3>网站链接</h3>
+<a href="http://www.chinatax.gov.cn" target="_blank">国家税务总局</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.gd-n-tax.gov.cn" target="_blank">湖南省国家工商联</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.gdltax.gov.cn" target="_blank">湖南省地方工商联</a>
+    </td>
+  </tr>
+</table>
+</div>
+
+
+
+
+<div class=" indexfoot">
+<div class="foot_box juz">
+<div class="font_logo"><img src="../images/foot_logo.png" /></div>
+<ul>@2016版权所有：湖南省常德市工商联<br />
+ ICP备案序号 湘ICP备10025337号-2
+</ul>
+</div>
+</div>
+
+
+
+<!-----切换身份------->
+
+<div id="myModal" class="reveal-modal" style="width:820px; margin-left:-410px;">
+		<div class="tc_tit">企业身份选择</div>
+            <a href="#" class="close_btn close-reveal-modal">×</a>	  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" valign="top">
+       <div class="leftQY">
+            <div class="sh_title01"><div class="blold">企业企业</div><span></span></div>
+            <div class="nr" style="display:none">
+                <h1>暂无企业，请新建企业</h1>
+                <div style=" padding:35px 0 40px 118px;" class="add_com"><a href="#none">新建企业</a></div>
+                  <div style=" text-align:center; padding:20px 0 40px 0 ;"> <a class="btn_read btn_read01"  href="bszm.html"> 确定进入 </a> </div>
+            </div>
+            <div class="nr">
+                <h1>请选择企业</h1>
+                <ul>
+                  <li class="hover">测试4401060044827（测试4401060044827-财务负责人）</li>
+                  <li>方欣科技有限公司（方欣科技有限公司-法人）</li>
+
+                </ul>
+                  <div style=" text-align:center; padding:20px 0 40px 0 ;"> <a class="btn btn01"   href="bszm.html"> 企业进入 </a> </div>
+            </div>            
+            
+       </div>
+    </td>
+    <td valign="top">
+      <div class="rightGR">
+           <div class="sh_title01"><div class="blold">个人企业</div><span></span></div>
+           <div class="nr">
+               <ul>
+               <li>用户名称：张三</li>
+               <li>证件号码：455222199901010101</li>
+               </ul>
+                <div style=" text-align:center; padding:20px 0 40px 0 ; "> <a class="btn btn01" style=" background-color:#00a33a;" href="bszm02.html"> 个人进入 </a> </div>
+           </div>
+      </div>
+    </td>
+  </tr>
+</table>
+</div><!------------>
+
+<div id="tzgg" class="reveal-modal" style="width:700px;">
+			<div class="tc_tit">增值税（适用于小规模纳税人）申报提醒</div>
+            <a href="#" class="close_btn close-reveal-modal">×</a>	  
+			 <div class="tc_nav">
+                  <div class="tc_text">
+                       <ul>
+                            尊敬的纳税人：<br />
+
+　　<span class="txt">根据现行增值税纳税申报相关规定，现将我市安装使用税控器具的增值税小规模纳税人（不含个体工商户，以下简称纳税人）纳税申报注意事项提示如下：</span><br />
+
+　<span class="txt">一、征期内按月抄报开票数据</span><br />
+
+　<span class="txt">纳税人应在每月纳税申报期内抄报上月（税款所属）税控器具开具发票的汇总和明细数据(下称抄报开票数据)。未按规定抄报开票数据的，将依据《中华人民共和国发票管理办法》的有关规定予以处罚。</span><br />
+
+ 
+
+　　<span class="txt">二、准确填报申报表3、5、7、9栏数据</span><br />
+
+　　<span class="txt">《增值税纳税申报表（小规模纳税人适用）》（以下简称《申报表》）第3、5、7、9栏填写纳税人本期通过税控器具开具的普通发票数据。上述数据包括纳税人自行开具和税务机关代开的普通发票数据，红字发票作为负数对冲，不含作废发票。</span>
+
+                       </ul>
+                  </div>
+           </div>
+	 
+			
+		</div>     
+ <!-----切换身份------->
+
+<div id="swjg" class="reveal-modal" style="width:620px; margin-left:-310px; top:230px;">
+		<div class="tc_tit">子主体身份选择</div>
+            <a href="#" class="close_btn close-reveal-modal">×</a>	  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" valign="top">
+      <div class="leftQY ">
+        <div class="sh_title01"><div class="blold">请选择主管税务机关</div><span></span></div>	
+        <div class="nr" style="display:none">
+          <h1>暂无企业，请新建企业</h1>
+          <div style=" padding:35px 0 40px 118px;" class="add_com"><a href="#none">新建企业</a></div>
+          <div style=" text-align:center; padding:20px 0 40px 0 ;"> <a class="btn_read btn_read01"  href="bszm.html"> 确定进入 </a> </div>
+          </div>
+        <div class="nr">
+          
+          <ul>
+            <li class="hover">常德市xxxx开发区</li>
+            
+            <li>常德市天河税务机关</li>
+            <li>常德市天河税务机关</li>
+            <li>常德市天河税务机关</li>
+            <li>常德市天河税务机关</li>
+            <li>常德市天河税务机关</li>
+            <li>常德市天河税务机关</li>
+            <li>常德市天河税务机关</li>
+            <li>常德市天河税务机关</li>
+            </ul>
+          
+          </div>            
+        
+        </div>
+    </td>
+    </tr>
+</table>
+
+ <div style=" text-align:center; padding:20px 0 40px 0 ;"> <a class="btn btn07"   href="bszm.html">返回联合业务</a><a class="btn btn01"   href="bszm.html">确定 </a><a class="btn btn01"   href="bszm.html"> 关闭 </a> </div>
+</div><!------------>    
+     
+     
+</body>
+</html>

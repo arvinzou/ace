@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" >
+<title>电子信息下载</title>
+<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
+<SCRIPT language=JavaScript src="../../js/jquery.js"></SCRIPT>
+<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+<SCRIPT language=JavaScript src="../../js/jquery.reveal.js"></SCRIPT>
+<style>
+
+.songhe_name{ display:none;
+    top: 50%; width:900px; margin-left:-450px; margin-top:-350px;
+    left: 50%;
+    border-radius: 3px;
+    background: #fff;
+    position: absolute;
+    z-index: 10;
+    -webkit-box-shadow: 0 0 40px rgba(0,0,0,.5);
+    -moz-box-shadow: 0 0 40px rgba(0,0,0,.5);
+    box-shadow: 0 0 40px rgba(0,0,0,.5);
+}
+.aaaa { 
+		position: fixed;height: 100%;width: 100%;background: #999;background: rgba(0,0,0,0.1);
+		z-index: 1;display: none;top: 0;left: 0;}
+</style>
+<script>
+$(document).ready(function(e) {
+    $(".open_songhename").on('click',function(){
+		$(".songhe_name").fadeIn()
+		$("body").append("<div class=aaaa></div>");
+		$(".aaaa").fadeIn()
+		})
+	$(".close_btn11").on('click',function(){
+		$(".songhe_name").fadeOut()
+		$(".aaaa").fadeOut()
+		})
+});
+</script>
+</head>
+<body>
+<a href="#" class="open_songhename">开关</a>
+<div class="songhe_name">
+			<div class="tc_tit">财务会计制度（准则）及核算软件备案</div>
+            <a href="#" class="close_btn11 close-reveal-modal">×</a>	  
+			 <div class="tc_nav">
+			   <div class="searchbox">
+			     <div class="sh_title01"><div class="blold">纳税人信息</div><span></span></div>
+     <div class="searchCriteria">
+     <table border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+ <tr>
+    <td>纳税人识别号：</td>
+    <td>547976543367678976543234367</td>
+    <td width="100"></td>
+    <td>纳税人名称：</td>
+    <td>方欣科技有限公司</td>
+    </tr>
+    </tbody>
+    </table>
+
+     </div>
+   
+     
+  <div class="searchTable"><div class="sh_title01"><div class="blold">已备案财务会计制度信息</div><span></span></div>
+  <div class="btn_more">
+  <a class="btn  btn01 big-link" href="#">新 增</a> 
+  <a class="btn  btn01 big-link" href="#">修 改</a> 
+  <a class="btn  btn01 big-link" href="#" data-reveal-id="myModal1" data-animation="fade">作 废</a> 
+  
+
+    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody><tr>
+    <th width="30">选择</th>
+    <th width="30">序号</th>
+    <th>国地标志</th>
+    <th>财务、会计制度名称</th>
+    <th>有效期起</th>
+    <th>有效期止</th>
+    </tr>
+  <tr>
+    <td height="330" align="center"><input type="radio" /></td>
+    <td align="center">01</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+  <tr class="searchTrColor">
+    <td align="center"><input type="radio" /></td>
+    <td align="center">02</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+  <tr>
+    <td align="center"><input type="radio" /></td>
+    <td align="center">03</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+  <tr class="searchTrColor">
+    <td align="center"><input type="radio" /></td>
+    <td align="center">04</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+
+  </div>
+</div>
+          <div style="padding-top:30px; color:#888;">
+               <strong style="color:#ff3300">温馨提示： </strong><br />
+1、点击“新增”按钮，可新增财务会计制度备案信息;选择已备案记录信息，点击“修改”按钮，可在当前备案记录基础上更新国地税财务备案信息；选择已备案记录信息，点击“作废”按钮，可以并且只会作废单方的备案记录信息。 <br />
+2、新增备案记录页面上，选择财务、会计制度，有效期起止，确认后填写并提交财务备案相关信息，系统受理后，双方 都同时备案。<br />
+3、在修改备案记录页面上，选择财务，会计制度，有效期起止，确认后填写并提交财务备案相关信息，系统受理后，会修改有已备案方数据，并备案另一方或修改别一方已备案数据。<br />
+4、如果国地税双方备案数据有效期起不一致，系统可能会受理失败，请到税局服务前台受理
+          </div>
+  </div>
+		<div class="page01">
+           
+             <input class="btn btn01" type="button" value="关 闭">
+        </div>
+			
+</div>
+        
+ 
+<div id="myModal1" class="reveal-modal" style="width: 500px; margin-left: -250px;  opacity: 1;">
+   
+   <div class="tc_tit">信息提示</div>
+            <a href="#" class="close_btn close-reveal-modal">×</a>	   
+             <div class="tc_nav">
+             <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><img src="../../images/common/info.png"/></td>
+    <td width="10"></td>
+    <td><span style="font-size:16px;">你确定要作废当前财务备案记录信息吗？</span></td>
+  </tr>
+</table>
+
+             </div>
+        <div class="page01">
+             <input class="btn btn01" type="button" value="确 定">
+             <input class="btn btn02" type="button" value="取 消">
+        </div>
+</div>
+</body>
+</html>
