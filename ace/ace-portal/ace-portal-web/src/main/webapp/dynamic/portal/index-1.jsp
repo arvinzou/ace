@@ -71,7 +71,7 @@ pageEncoding="utf-8"%>
             <div class="page-logo">
                 <a href="#">
                     <img src="${cfg.logo}"
-                         alt="logo" class="logo-default"/> </a>
+                         alt="logo" class="logo-defaults"/> </a>
                 <div class="menu-toggler sidebar-toggler" onclick="setTimeout('autoWidth()',100)">
                     <span></span>
                 </div>
@@ -279,8 +279,9 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     -moz-border-radius: 0!important;
     border-radius: 2px!important;
 }
-.logo-default{
-max-height:14px;
+.logo-defaults{
+margin:10px;
+
 }
 
 </style>
