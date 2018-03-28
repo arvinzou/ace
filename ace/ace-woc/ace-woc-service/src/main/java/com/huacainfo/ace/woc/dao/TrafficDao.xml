@@ -285,9 +285,18 @@
             and siteId like
             concat('%',#{condition.siteId,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.siteId!=null and condition.siteId!=''">
-            and siteId like
-            concat('%',#{condition.siteId,jdbcType=VARCHAR},'%')
+        <if test="condition.axleCount!=null and condition.axleCount!=''">
+            and axleCount =#{condition.axleCount,jdbcType=INTEGER}
+        </if>
+        <if test="condition.status!=null and condition.status!=''">
+            and status =#{condition.status,jdbcType=CHAR}
+        </if>
+        /*开始时间*/
+        <if test="condition.status!=null and condition.status!=''">
+            and status =#{condition.status,jdbcType=CHAR}
+        </if>
+        <if test="condition.status!=null and condition.status!=''">
+            and status =#{condition.status,jdbcType=CHAR}
         </if>
     </sql>
 
@@ -306,7 +315,6 @@
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-
     </select>
 
     <select id="findCount" resultType="int">
