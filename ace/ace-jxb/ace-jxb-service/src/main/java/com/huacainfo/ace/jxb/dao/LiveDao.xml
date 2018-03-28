@@ -428,13 +428,13 @@
     </select>
 
     <update id="updateRptLikeNum">
-        update jxb_rpt set likeNum=ifnull(likeNum,0)+1 where id=#{id}
+        update live_rpt set likeNum=ifnull(likeNum,0)+1 where id=#{id}
     </update>
     <update id="updateLiveLikeNum">
-        update jxb set pop=ifnull(pop,0)+1 where id=#{id}
+        update live set pop=ifnull(pop,0)+1 where id=#{id}
     </update>
     <update id="updateLiveVisitNum">
-        update jxb set nop=ifnull(nop,0)+1 where id=#{id}
+        update live set nop=ifnull(nop,0)+1 where id=#{id}
     </update>
 
     <resultMap id="SysUsersMap" type="com.huacainfo.ace.portal.model.Users">
