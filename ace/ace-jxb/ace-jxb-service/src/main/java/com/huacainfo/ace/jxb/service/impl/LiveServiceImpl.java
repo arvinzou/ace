@@ -137,6 +137,9 @@ public class LiveServiceImpl implements LiveService {
         if (CommonUtils.isBlank(o.getImageSrc())) {
             return new MessageResponse(1, "封面不能为空！");
         }
+        if (CommonUtils.isBlank(o.getType())) {
+            return new MessageResponse(1, "课程类型不能为空！");
+        }
         int temp = this.jxbDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "直播名称重复！");

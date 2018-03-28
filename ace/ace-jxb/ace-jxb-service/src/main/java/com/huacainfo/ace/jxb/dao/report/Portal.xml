@@ -6,7 +6,7 @@
     'jxb' id,
     count(1) value
     FROM
-    jxb
+    live
     WHERE
     deptId =#{deptId}
     union all
@@ -14,27 +14,27 @@
     'rpt' id,
     count(1) rpt
     FROM
-    jxb_rpt inner join jxb on jxb_rpt.rid=jxb.id
+    live_rpt inner join live on live_rpt.rid=live.id
     WHERE
-    jxb.deptId =#{deptId}
+    live.deptId =#{deptId}
     union all
     SELECT
     'cmt' id,
     count(1) cmt
     FROM
-    jxb_cmt
-    inner join jxb_rpt on jxb_rpt.id=jxb_cmt.rptId
-    inner join jxb on jxb_rpt.rid=jxb.id
+    live_cmt
+    inner join live_rpt on live_rpt.id=live_cmt.rptId
+    inner join live on live_rpt.rid=live.id
     WHERE
-    jxb.deptId =#{deptId}
+    live.deptId =#{deptId}
     union all
     SELECT
     'msg' id,
     count(1) msg
     FROM
-    jxb_msg
-    inner join jxb on jxb_msg.rid=jxb.id
+    live_msg
+    inner join live on live_msg.rid=live.id
     WHERE
-    jxb.deptId =#{deptId}
+    live.deptId =#{deptId}
   </select>
 </mapper>
