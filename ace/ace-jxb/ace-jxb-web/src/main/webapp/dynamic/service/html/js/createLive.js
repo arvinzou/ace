@@ -50,6 +50,7 @@ function releaseDo() {
         if(result.status==0){
             alert("创建直播成功");
             $(".form-control").val('');
+
             showUploadText();
         }else{
             $('.prompt').text(result.errorMessage);
