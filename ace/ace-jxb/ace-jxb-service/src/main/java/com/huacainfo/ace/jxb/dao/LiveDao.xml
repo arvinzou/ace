@@ -25,6 +25,7 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.jxb.model.Live">
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
@@ -36,7 +37,7 @@
     <sql id="Base_Column_List">
         id, areaCode, name, category, deptId,endTime,startTime, remark, nop, pop, addr, rtmpUrl,
         mp4Url, imageSrc, latitude, longitude, status, createUserId, createUserName, createDate,
-        lastModifyUserId, lastModifyUserName, lastModifyDate
+        lastModifyUserId, lastModifyUserName, lastModifyDate, type
     </sql>
     <sql id="Blob_Column_List">
         content
@@ -61,7 +62,7 @@
         latitude, longitude, status,
         createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
-        content)
+        content, type)
         values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
         #{category,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP},
         #{startTime,jdbcType=TIMESTAMP},
@@ -71,7 +72,8 @@
         #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
         #{lastModifyDate,jdbcType=TIMESTAMP},
-        #{content,jdbcType=LONGVARCHAR})
+        #{content,jdbcType=LONGVARCHAR},
+        #{type ,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Live">
@@ -94,7 +96,8 @@
         lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
         lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-        content = #{content,jdbcType=LONGVARCHAR}
+        content = #{content,jdbcType=LONGVARCHAR},
+        type = #{type,jdbcType=VARCHAR},
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
@@ -156,7 +159,10 @@
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
             <if test="content != null">
-                content = #{content,jdbcType=LONGVARCHAR}
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR}
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
