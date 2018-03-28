@@ -70,8 +70,8 @@ pageEncoding="utf-8"%>
         <div class="page-header-inner ">
             <div class="page-logo">
                 <a href="#">
-                    <img src="${pageContext.request.contextPath}/content/common/assets/layouts/layout/img/logo.png"
-                         alt="logo" class="logo-default"/> </a>
+                    <img src="${cfg.logo}"
+                         alt="logo" class="logo-defaults"/> </a>
                 <div class="menu-toggler sidebar-toggler" onclick="setTimeout('autoWidth()',100)">
                     <span></span>
                 </div>
@@ -278,6 +278,10 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     -webkit-border-radius: 0!important;
     -moz-border-radius: 0!important;
     border-radius: 2px!important;
+}
+.logo-defaults{
+margin:10px;
+
 }
 
 </style>

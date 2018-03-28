@@ -20,7 +20,8 @@ function releaseDo() {
     var nop=$('.nop').val().trim();
     var pop=$('.pop').val().trim();
     var imageSrc=$('.pictureContainer').data('imgSrc');
-    if(!(name&&imageSrc&&startTime&&remark&&content&&category&&addr&&rtmpUrl&&mp4Url&&nop&&pop)){
+    var type=$('#type option:selected').val().trim();
+    if(!(name&&imageSrc&&startTime&&remark&&content&&category&&addr&&rtmpUrl&&mp4Url&&nop&&pop&&type)){
         promptDo('带“ * ”为必填项');
         return;
     }
@@ -39,7 +40,8 @@ function releaseDo() {
         'category':category,
         'imageSrc':imageSrc,
         'nop':nop,
-        'pop':pop
+        'pop':pop,
+        'type' :type
     }
     var url="/jxb/jxb/insertLive.do";
     var data={
@@ -50,6 +52,7 @@ function releaseDo() {
         if(result.status==0){
             alert("创建直播成功");
             $(".form-control").val('');
+
             showUploadText();
         }else{
             $('.prompt').text(result.errorMessage);
@@ -69,3 +72,15 @@ function checkWordNumber() {
     });
     return flag;
 }
+
+
+$(function(){
+    var staticDictObjects;
+    if (!staticDictObjects) {
+        staticDictObjects = parent.staticDictObject;
+    }
+    var dict=staticDictObjects['121'];
+    for (var i = 0; i <dict .length; i++) {
+        $("#type").append("<option value='"+dict[i].CODE+"'>"+dict[i].NAME+"</option>");
+    }
+});

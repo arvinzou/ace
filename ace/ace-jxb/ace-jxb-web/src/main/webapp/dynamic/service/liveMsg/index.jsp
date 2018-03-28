@@ -82,13 +82,13 @@ pageEncoding="utf-8"%>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/reconnecting-websocket.js"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/jxbMsg/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/liveMsg/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/jxbMsg/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/liveMsg/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/jxbMsg/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/liveMsg/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/jxbMsg/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/liveMsg/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
 window.onresize = function () {

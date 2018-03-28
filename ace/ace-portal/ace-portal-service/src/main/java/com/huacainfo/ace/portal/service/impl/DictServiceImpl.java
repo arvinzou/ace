@@ -105,6 +105,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		}
 		o.setSpell(CommonUtils.getPinYinHeadChar(o.getName()));
 		this.dictMapper.updateByPrimaryKey(o);
+		logger.info(o.toString());
 		this.dataBaseLogService.log("变更字典", "字典", "", o.getName(),
 				o.getName(), userProp);
 		return new MessageResponse(0, "字典变更完成！");

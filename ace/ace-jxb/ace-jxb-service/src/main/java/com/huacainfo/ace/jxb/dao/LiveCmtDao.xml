@@ -19,11 +19,11 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Base_Column_List"/>
-        from jxb_cmt
+        from live_cmt
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from jxb_cmt
+        delete from live_cmt
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.LiveCmt">
@@ -35,14 +35,14 @@
         )
     </insert>
     <update id="updateByPrimaryKey">
-        update jxb_cmt
+        update live_cmt
         set
         status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <sql id="whereCondition">
-        from jxb_cmt where 0=0
+        from live_cmt where 0=0
         <if test='condition.content!=null and condition.content!=""'>
             and content like
             concat('%',#{condition.content,jdbcType=VARCHAR},'%')
@@ -79,7 +79,7 @@
 
     <select id="isExit" resultType="int">
         select count(*)
-        from jxb_cmt where
+        from live_cmt where
         content=#{content} and rptId =#{condition.rptId,jdbcType=VARCHAR}
     </select>
 

@@ -1,191 +1,293 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+<%@page language="java" contentType="text/html; charset=utf-8"
+pageEncoding="utf-8" %>
 <!DOCTYPE html>
-<html lang="cn">
+<html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
+    <meta name="description" content="overview &amp; stats"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>工商联</title>
+    <title>常德市工商联非公经济电子服务平台</title>
+
 </head>
+
 <jsp:include page="/dynamic/common/common.jsp"/>
-<link rel="stylesheet" href="${portalPath}/content/common/swiper/css/swiper.min.css">
+<link rel="stylesheet" href="${portalPath}/content/common/css/new.css?version=${cfg.version}"/>
+<link href="${portalPath}/content/common/assets/global/css/components.min.css" rel="stylesheet"
+      id="style_components" type="text/css"/>
 <style>
-.swiper-container1 {
-      padding-top: 50px;
-      padding-bottom: 50px;
+    .charts-portal-ct1 {
+        width: 500px;
+        height: 300px
     }
-    .swiper-container2 {
-      width: 50%;
-      padding-top: 50px;
-      padding-bottom: 50px;
-    }
-    .swiper-slide {
-      background-position: center;
-      background-size: cover;
-      width: 100px;
-      height: 100px;
-    }
-    .center{
-        text-align:center
-    }
-    .photo{
-        max-height:250px;
-        min-height:250px;
-    }
-.btn-sm {
-    border-width: 4px;
-    font-size: 13px;
-    padding: 4px 9px;
-    line-height: 1.39;
-}
 
-.search-box {
-    zoom: 1;
-    position: relative;
-    margin: 20px 0 24px;
-}
-.file-uploader-one {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-    opacity: 0;
-    width: 137px;
-    height: 42px;
-    cursor: pointer;
-}
-.upload-img {
-    position: relative;
-    width: 135px;
-    height: 40px;
-    line-height: 36px;
-    transition: all .3s ease 0s;
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
-    color: #4c4c4c;
-    border: 1px solid #cacaca;
-    background-color: #fff;
-    font-size: 14px;
-    float: left;
-}
-
-.icon-upload {
-    margin-right: 10px;
-}
-.icons.icon-upload {
-    width: 20px;
-    height: 24px;
-    background-image: url(https://www.faceplusplus.com.cn/images/icons/icon-upload.png);
-}
-.icons {
-    display: inline-block;
-    background-repeat: no-repeat;
-    vertical-align: middle;
-}
-.search-box button {
-    transition: all .3s ease 0s;
-    cursor: pointer;
-    text-align: center;
-    display: inline-block;
-    color: #fff;
-    border: 1px solid #379edf;
-    background-color: #379edf;
-    font-size: 14px;
-    width: 66px;
-    height: 40px;
-    float: right;
-}
-.search-box input.search-input {
-    border: 1px solid #59b1f5;
-    width: 60%;
-    height: 40px;
-    line-height: 40px;
-    text-indent: 1em;
-    float: right;
-}
-.result-box {
-    width: 100%;
-    border: 1px solid #cacaca;
-    padding: 20px;
-    margin: 5px;
-    text-align: left;
-}
-.btn-ck {
-    transition: all .3s ease 0s;
-    cursor: pointer;
-    text-align: center;
-    display: inline-block;
-    color: #fff;
-    border: 1px solid #379edf;
-    background-color: #379edf;
-    font-size: 14px;
-    width: 200px;
-    height: 40px;
-    margin: 10px;
-}
-.padding{
-    margin: 10px;
-}
-.img-box {
-    width: 200px;
-	height: 200px;
-	float: left;
-	margin: 5px;
-	text-align:center;
-}
-.box {
-    border: 0px solid #cacaca;
-	padding:5px;
-	margin: 5px;
-}
- .background {
-        background-color: #cacaca;
+    .charts-portal-ct2 {
+        width: 500px;
+        height: 300px
     }
-.resp-json{
-    resize: none;
-    background: #fbfbfb;
-    border: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    color:blue;
-    font-size: 14px;
-    line-height: 16px;
-}
-
 </style>
+
 <body>
-<div class="page-content">
-    <p>hello world</p>
+<div style="height:10px;" class="background-white"></div>
+<div class="page-content background">
+
+    <!-- PAGE CONTENT BEGINS -->
+    <!-- Row starts -->
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-red-haze">
+                            <span data-counter="counterup" data-value="0" id="dept">0</span>
+                            <small class="font-red-haze">家</small>
+                        </h3>
+                        <small>非公经济单位</small>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-bank"></i>
+                    </div>
+                </div>
+                <div class="progress-info">
+                    <div class="progress">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success red-haze">
+                                                <span class="sr-only"></span>
+                                            </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"></div>
+                        <div class="status-number"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-green-sharp">
+                            <span data-counter="counterup" data-value="" id="personage">0</span>
+                            <small class="font-green-sharp">家</small>
+                        </h3>
+                        <small>会员单位</small>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-user-circle-o"></i>
+                    </div>
+                </div>
+                <div class="progress-info">
+                    <div class="progress">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success green-sharp">
+                                                <span class="sr-only"></span>
+                                            </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"></div>
+                        <div class="status-number"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-blue-sharp">
+                            <span data-counter="counterup" data-value="0" id="feedback">0</span>
+                            <small class="font-blue-sharp">条</small>
+                        </h3>
+                        <small>建言献策</small>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-comment-o"></i>
+                    </div>
+                </div>
+                <div class="progress-info">
+                    <div class="progress">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success blue-sharp">
+                                                <span class="sr-only"></span>
+                                            </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"></div>
+                        <div class="status-number"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-purple-soft">
+                            <span data-counter="counterup" data-value="0" id="activity">0</span>
+                            <small class="font-purple-sharp">次</small>
+                        </h3>
+                        <small>提供服务</small>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-flag"></i>
+                    </div>
+                </div>
+                <div class="progress-info">
+                    <div class="progress">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success purple-soft">
+                                                <span class="sr-only"></span>
+                                            </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"></div>
+                        <div class="status-number"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
+<div class="page-content-2 background">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <!-- #section:custom/widget-box -->
+            <div class="widget-box transparent background-white padding1" id="recent-box">
+                <div class="widget-header">
+                    <h4 class="widget-title lighter smaller">
+                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>系统公告
+                    </h4>
+
+                    <div class="widget-toolbar no-border">
+
+                    </div>
+                </div>
+
+                <div class="widget-body" style="min-height:250px">
+                    <div class="widget-main padding-4">
+                        <table width="100%">
+
+
+                            <tbody id="notice-list-grid">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.widget-main -->
+                </div>
+                <!-- /.widget-body -->
+            </div>
+            <!-- /.widget-box -->
+
+            <!-- /section:custom/widget-box -->
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <!-- #section:custom/widget-box -->
+            <div class="widget-box transparent background-white padding1" id="recent-box">
+                <div class="widget-header">
+                    <h4 class="widget-title lighter smaller">
+                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>业务公告
+                    </h4>
+
+                    <div class="widget-toolbar no-border">
+
+                    </div>
+                </div>
+
+                <div class="widget-body" style="min-height:250px">
+                    <div class="widget-main padding-4">
+                        <table width="100%;">
+
+
+                            <tbody id="notice-list-grid-area">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.widget-main -->
+                </div>
+                <!-- /.widget-body -->
+            </div>
+            <!-- /.widget-box -->
+
+            <!-- /section:custom/widget-box -->
+        </div>
+        <!-- /.span -->
+    </div>
+</div>
+<!-- /.page-content -->
 
 
 <jsp:include page="/dynamic/common/footer-1.jsp"/>
 
-<link rel="stylesheet"
-      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
-      type="text/css" media="screen"/>
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/detect/controller.js?version=${cfg.version}"></script>
+        src="${portalPath}/content/common/js/echarts-2.27/echarts.js?version=${cfg.version}"></script>
+
 <script
-        src="${pageContext.request.contextPath}/content/service/detect/upload.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/person/face.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/swiper/js/swiper.min.js"></script>
+        src="${pageContext.request.contextPath}/content/index/config-1.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/index/config-2.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/index/controller.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/index/view.js?version=${cfg.version}"></script>
+<script
+        src="${portalPath}/content/common/js/jquery.stamper.js?version=${cfg.version}"></script>
+
 <jsp:include page="/dynamic/common/footer-2.jsp"/>
 
-<div id="dialog-message" class="hide">
-    <div id="uploader">
-        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-    </div>
-</div>
+<script type="text/javascript">
+    window.onresize = function () {
+        parent.autoWidth();
+    }
+</script>
+<script
+        src="${pageContext.request.contextPath}/content/index/index.js?version=${cfg.version}"></script>
+<style>
+    .padding1 {
+        padding: 15px 15px 15px 15px;
+    }
 
+    .page-content {
+        background-color: #fff;
+        position: relative;
+        margin: 0;
+        padding: 10px 10px 0px 10px;
+    }
+
+    .page-content-2 {
+        background-color: #fff;
+        position: relative;
+        margin: 0;
+        padding: 0px 10px 10px 10px;
+    }
+
+    .background {
+        background-color: #BFCAD1;
+    }
+
+    .background-white {
+        background-color: #fff;
+    }
+
+    .stamper {
+        padding-top: 10px;
+        height: 100px;
+    }
+
+    .stamper span {
+        float: right;
+        display: inline-block;
+        height: 100%;
+        width: 200px;
+    }
+
+</style>
 </body>
 </html>

@@ -25,6 +25,7 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.jxb.model.Live">
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
@@ -36,7 +37,7 @@
     <sql id="Base_Column_List">
         id, areaCode, name, category, deptId,endTime,startTime, remark, nop, pop, addr, rtmpUrl,
         mp4Url, imageSrc, latitude, longitude, status, createUserId, createUserName, createDate,
-        lastModifyUserId, lastModifyUserName, lastModifyDate
+        lastModifyUserId, lastModifyUserName, lastModifyDate, type
     </sql>
     <sql id="Blob_Column_List">
         content
@@ -46,22 +47,22 @@
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from jxb
+        from live
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from jxb
+        delete from live
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Live">
-        insert into jxb (id, areaCode, name,
+        insert into live (id, areaCode, name,
         category, deptId, endTime,startTime,
         remark, nop, pop, addr,
         rtmpUrl, mp4Url, imageSrc,
         latitude, longitude, status,
         createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
-        content)
+        content, type)
         values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
         #{category,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP},
         #{startTime,jdbcType=TIMESTAMP},
@@ -71,11 +72,12 @@
         #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
         #{lastModifyDate,jdbcType=TIMESTAMP},
-        #{content,jdbcType=LONGVARCHAR})
+        #{content,jdbcType=LONGVARCHAR},
+        #{type ,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Live">
-        update jxb
+        update live
         set areaCode = #{areaCode,jdbcType=VARCHAR},
         name = #{name,jdbcType=VARCHAR},
         category = #{category,jdbcType=VARCHAR},
@@ -94,12 +96,13 @@
         lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
         lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-        content = #{content,jdbcType=LONGVARCHAR}
+        content = #{content,jdbcType=LONGVARCHAR},
+        type = #{type,jdbcType=VARCHAR},
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.Live">
-        update jxb
+        update live
         <set>
             <if test="areaCode != null">
                 areaCode = #{areaCode,jdbcType=VARCHAR},
@@ -156,14 +159,17 @@
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
             <if test="content != null">
-                content = #{content,jdbcType=LONGVARCHAR}
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR}
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <sql id="whereCondition">
-        from jxb where deptId=#{condition.deptId}
+        from live where deptId=#{condition.deptId}
         <if test='condition.name!=null and condition.name!=""'>
             and name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
@@ -200,7 +206,7 @@
     <select id="isExit" resultType="int">
         select count(*)
         from
-        jxb where
+        live where
         name=#{name}
     </select>
     <select id="getLiveList" resultType="map">
@@ -221,7 +227,7 @@
         status state,
         name topic,
         category type,
-        null watermarkConfig from jxb where deptId=#{companyId}
+        null watermarkConfig from live where deptId=#{companyId}
         order by status, startTime desc
         limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
 
@@ -259,13 +265,13 @@
         name topic,
         category type,
         null watermarkConfig
-        from jxb where id=#{id}
+        from live where id=#{id}
 
         ]]>
     </select>
 
     <update id="updateNopPop">
-        update jxb
+        update live
         set
         nop = #{nop,jdbcType=BIGINT},
         pop = #{pop,jdbcType=BIGINT}
@@ -333,10 +339,10 @@
         d.openid c_openid,
         date_format(c.createTime,'%H:%i:%s') c_createTime
 
-        from jxb_rpt t
+        from live_rpt t
         left join portal.userinfo a on t.uid=a.openid
-        left join jxb_img b on t.id=b.rptId
-        left join jxb_cmt c on t.id=c.rptId
+        left join live_img b on t.id=b.rptId
+        left join live_cmt c on t.id=c.rptId
         left join portal.userinfo d on c.uid=d.openid
         left join portal.users e on t.uid=e.openId
         left join portal.department f on e.department_id=f.department_id
@@ -355,10 +361,10 @@
     </select>
     <select id="getLiveRptTotalNum" resultType="map">
         SELECT
-        count(1) totalNum from jxb_rpt where rid=#{rid}
+        count(1) totalNum from live_rpt where rid=#{rid}
     </select>
     <select id="getLiveMsgList" resultType="map">
-        select t.id, t.rid, t.uid, t.content, date_format(t.createTime,'%H:%i:%s') createTime from jxb_msg t where
+        select t.id, t.rid, t.uid, t.content, date_format(t.createTime,'%H:%i:%s') createTime from live_msg t where
         t.rid=#{rid}
         order by t.createTime
     </select>
@@ -373,7 +379,7 @@
         #{deptId} deptId,
         count(1) totalNum
         FROM
-        jxb_rpt
+        live_rpt
         WHERE
         rid = #{id}
         ) a
@@ -411,7 +417,7 @@
         deptId,
         count(1) totalNum
         FROM
-        jxb
+        live
         WHERE
         deptId = #{deptId}
         ) a
@@ -428,13 +434,13 @@
     </select>
 
     <update id="updateRptLikeNum">
-        update jxb_rpt set likeNum=ifnull(likeNum,0)+1 where id=#{id}
+        update live_rpt set likeNum=ifnull(likeNum,0)+1 where id=#{id}
     </update>
     <update id="updateLiveLikeNum">
-        update jxb set pop=ifnull(pop,0)+1 where id=#{id}
+        update live set pop=ifnull(pop,0)+1 where id=#{id}
     </update>
     <update id="updateLiveVisitNum">
-        update jxb set nop=ifnull(nop,0)+1 where id=#{id}
+        update live set nop=ifnull(nop,0)+1 where id=#{id}
     </update>
 
     <resultMap id="SysUsersMap" type="com.huacainfo.ace.portal.model.Users">
