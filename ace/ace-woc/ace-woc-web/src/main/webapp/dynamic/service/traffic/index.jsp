@@ -20,40 +20,58 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
+                    开始时间：<input id="startdate" class="easyui-datetimebox" name="startdate"
+                                data-options="showSeconds:false,onSelect:onSelect">
+                    结束时间：<input id="enddate" class="easyui-datetimebox" name="enddate"
+                                data-options="showSeconds:false,disabled:true">
+                    卡点名称： <input class="easyui-combogrid" name="siteId" style="height: 20px;"
+                                 data-options="
+                                        panelWidth: '300',
+                                        idField: 'id',
+                                        textField: 'siteName',
+                                        url: '${pageContext.request.contextPath}/site/selectSite',
+                                        mode: 'remote',
+                                        fitColumns: true,
+                                        onChange: function (newValue, oldValue) {
 
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
-                        data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                                        },
+                                        method: 'get',
+                                        columns: [[{
+                                            field: 'siteCode',
+                                            title: '卡点编码',
+                                            width: 50
+                                        }, {
+                                            field: 'siteName',
+                                            title: '卡点名称',
+                                            width: 100
+                                        }]]"/>
+                    是否超限：<input class="easyui-combobox" style="width: 100px" name="status"
+                                data-options="
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=120&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
-
-                    名称： <input name="name" type="text"
-                               style="width: 200px;"/>
+                    车牌： <input name="plateNo" type="text" style="width: 100px;"/>
+                    轴数： <input name="axleCount" type="text" style="width: 100px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/traffic/findTrafficList">
-                        <i
-                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
                     <button class="btn btn-info" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/traffic/insertTraffic">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-edit"
                             authority="${pageContext.request.contextPath}/traffic/updateTraffic">
-                        <i
-                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/traffic/deleteTrafficByTrafficId">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
                 </div>
             </div>
@@ -220,6 +238,30 @@
         $(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight - layoutTopHeight);
         parent.autoWidth();
     }
+
+    function onSelect(date) {  //开始日期选择时触发
+        $('#enddate').datebox('enable');    //启用结束日期控件
+        $('#enddate').datebox('reset')      //重置结束日期的值
+    };
+    $(function () {
+        //只能选择今日前365天的日期
+        $('#startdate').datebox('calendar').calendar({
+            validator: function (date) {
+                var now = new Date();
+                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
+                return d1 >= date;
+            }
+        });
+        $('#enddate').datebox('calendar').calendar({
+            validator: function (date) {
+                var now = new Date();
+                var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
+                var d3 = $('#startdate').datebox('getValue').replace(new RegExp(/-/gm), "/");
+                var d4 = new Date(d3);
+                return d1 >= date && date >= d4;
+            }
+        })
+    });
 </script>
 </body>
 </html>
