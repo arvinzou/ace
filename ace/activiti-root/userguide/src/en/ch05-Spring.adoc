@@ -494,7 +494,7 @@ To change the datasource, simply override the default by providing a Datasource 
 @Bean
 public DataSource database() {
     return DataSourceBuilder.create()
-        .url("jdbc:mysql://127.0.0.1:3306/activiti-spring-boot?characterEncoding=UTF-8")
+        .url("jdbc:mysql://192.168.2.253:3306/activiti-spring-boot?characterEncoding=UTF-8")
         .username("alfresco")
         .password("alfresco")
         .driverClassName("com.mysql.jdbc.Driver")

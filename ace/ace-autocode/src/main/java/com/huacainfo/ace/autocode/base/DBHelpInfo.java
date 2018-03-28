@@ -29,7 +29,7 @@ public class DBHelpInfo {
     //    private static String pwd = "huacai$2016";
 //    private static String user = "root";
     private static String url = "";
-    //        "jdbc:mysql://127.0.0.1/live" + "?user=" + user + "&password=" + pwd
+    //        "jdbc:mysql://192.168.2.253/live" + "?user=" + user + "&password=" + pwd
 //            + "&useUnicode=true&characterEncoding=UTF-8";
     private static Connection getConnection = null;
 

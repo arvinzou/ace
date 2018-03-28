@@ -65,7 +65,7 @@ public class DatabaseConfiguration {
         } else {
 
             String dataSourceDriver = env.getProperty("datasource.driver", "com.mysql.jdbc.Driver");
-            String dataSourceUrl = env.getProperty("datasource.url", "jdbc:mysql://127.0.0.1:3306/activiti6admin?characterEncoding=UTF-8");
+            String dataSourceUrl = env.getProperty("datasource.url", "jdbc:mysql://192.168.2.253:3306/activiti6admin?characterEncoding=UTF-8");
 
             String dataSourceUsername = env.getProperty("datasource.username", "alfresco");
             String dataSourcePassword = env.getProperty("datasource.password", "alfresco");

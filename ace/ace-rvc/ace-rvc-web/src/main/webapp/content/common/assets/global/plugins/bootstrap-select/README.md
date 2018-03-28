@@ -23,7 +23,7 @@ Bootstrap-select's documentation, included in this repo in the root directory, i
 
 1. If necessary, [install MkDocs](http://www.mkdocs.org/#installation).
 3. From the `/bootstrap-select/docs` directory, run `mkdocs serve` in the command line.
-4. Open `http://127.0.0.1:8000/` in your browser, and voilà.
+4. Open `http://192.168.2.253:8000/` in your browser, and voilà.
 
 Learn more about using MkDocs by reading its [documentation](http://www.mkdocs.org/).
 

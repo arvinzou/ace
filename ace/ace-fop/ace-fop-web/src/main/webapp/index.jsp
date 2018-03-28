@@ -7,7 +7,7 @@ pageEncoding="utf-8"%>
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>人脸检测</title>
+    <title>工商联</title>
 </head>
 <jsp:include page="/dynamic/common/common.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/swiper/css/swiper.min.css">

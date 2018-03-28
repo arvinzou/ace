@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ace-portal-web:war">
-    <output-path>$PROJECT_DIR$/ace-portal/ace-portal-web/target</output-path>
-    <root id="archive" name="ace-portal-web-1.0.war">
-      <element id="artifact" artifact-name="ace-portal-web:war exploded" />
-    </root>
-  </artifact>
-</component>

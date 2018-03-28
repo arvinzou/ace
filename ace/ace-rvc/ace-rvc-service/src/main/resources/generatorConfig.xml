@@ -16,7 +16,7 @@
         <!--userId="root" password="huacai$2016">-->
         <!--数据库连接信息。具体参看mybatis-generator -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/rvc"
+                        connectionURL="jdbc:mysql://192.168.2.253:3306/rvc"
                         userId="root" password="admin">
         </jdbcConnection>
 

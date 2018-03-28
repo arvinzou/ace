@@ -18,7 +18,7 @@ public class MyClientApp {
 
         WebSocketContainer container =  ContainerProvider.getWebSocketContainer();
 
-        String uri = "ws://127.0.0.1:6001/rvc/live/websocket/r001/u123456";
+        String uri = "ws://192.168.2.253:6001/rvc/live/websocket/r001/u123456";
 
         System.out.println("Connecting to" + uri);
 

@@ -64,8 +64,9 @@
         <module>ace-portal</module>
         <module>ace-jxb</module>
         <module>ace-fop</module>
-        <module>ace-live</module>
         <!--
+
+        <module>ace-live</module>
         <module>ace-iop</module>
         <module>ace-operana</module>
         <module>ace-woc</module>
