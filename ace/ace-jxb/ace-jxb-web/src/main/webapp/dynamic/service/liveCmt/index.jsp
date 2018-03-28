@@ -79,13 +79,13 @@
 <jsp:include page="../../common/footer-1.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/reconnecting-websocket.js"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/jxbCmt/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/liveCmt/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/jxbCmt/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/liveCmt/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/jxbCmt/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/liveCmt/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/jxbCmt/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/liveCmt/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

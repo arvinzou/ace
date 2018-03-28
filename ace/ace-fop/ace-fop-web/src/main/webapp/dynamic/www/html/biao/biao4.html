@@ -1,0 +1,277 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" >
+<title>涉税事项办理</title>
+<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
+<link href="../../css/table.css" rel="stylesheet" type="text/css" />
+<SCRIPT language=JavaScript src="../../js/jquery.js"></SCRIPT>
+<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+<SCRIPT language=JavaScript src="../../js/jquery.reveal.js"></SCRIPT>
+<script>
+$(document).ready(function(e) {
+    $(".tab_table li").click(function(){
+		var tabHover=$(this).index()
+		
+		$(".tab_table .active").removeClass()
+		$(this).addClass("active");
+		$(".tab_main").children("div").hide();
+		$(".tab_main").children("div").eq(tabHover).fadeIn();
+		})
+});100
+</script>
+</head>
+<body>
+
+<div class="head_11">
+<div class="juz02">
+<table width="100%" height="60" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="tab_name">
+    <span class="spangs">国税</span>
+    <span class="spanbm">变更税务登记表</span>
+    </div></td>
+    <td align="right">
+    <a class="btn btn06 " href="biao_hz.html">提 交</a>
+     
+      <a class="btn btn06" href="#">打 印</a>
+       <a class="btn btn06" href="#">返 回</a>
+
+    </td>
+  </tr>
+</table>
+</div>
+</div>
+<table width="100%" border="0" cellspacing="0"  class="all_table" cellpadding="0">
+  <tr>
+    <td valign="top">
+     <div class="tab_table">
+          <ul>
+              <li class="active">申请表</li>
+              <li>附列资料</li>
+          </ul>
+     </div> 
+  <div class="tab_main">
+    <div >
+     <div style="width:96%; margin:auto;" >
+  <div class="NewTableHead">
+    <h1>变更税务登记申请表表</h1>
+    
+  </div>
+    
+    
+  <div class="NewTableTop">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>纳税人名称：<input type="text"  datatype="string" jflag="1" readonly jpath="nsrmc" style="width:170px; " class="topInput"/> </td>
+      <td align="right">纳税人识别号：
+        <input type="text"  datatype="string" jflag="1" readonly jpath="tbrq1" style="width:170px;  " class="topInput"/></td>
+      </tr>
+  </table>
+  </div>
+    
+    
+  <div class="NewTableMain">
+    
+  <table width="100%" border="0" cellspacing="1" cellpadding="0">
+    <tr>
+      <td colspan="7" align="center" ><strong>变更登记事项</strong></td>
+      </tr>
+    <tr>
+      <td width="50" align="center" >序号</td>
+      <td align="center" >变更项目</td>
+      <td align="center" >国税变更前内容 </td>
+      <td align="center" >地税变更前内容</td>
+      <td align="center" >变更后内容</td>
+      <td align="center" >批准机关名称</td>
+      <td align="center" >批准文件</td>
+      </tr>
+    <tr>
+      <td align="center" >01</td>
+      <td>xxxxxxxxxxxxxx</td>
+      <td class="EditInput03"> 
+        <input  type="text" value="300" jflag="1"  datatype="number" jpath="flzlForm.bqfse">
+        </td>
+      <td class="EditInput03"><input  type="text" value="325" jflag="1"  datatype="number" jpath="flzlForm.bqfse"></td>
+      <td class="EditInput03"><input  type="text" value="300" jflag="1"  datatype="number" jpath="flzlForm.bqfse"></td>
+      <td class="EditInput02"><input  type="text" jflag="1"  datatype="number" jpath="flzlForm.bqfse"></td>
+      <td class="EditInput02">
+        <input  type="text" jflag="1"  datatype="number" jpath="flzlForm.bqfse">
+        </td>
+      </tr>
+    <tr>
+      <td colspan="2" align="center" >企业人名称</td>
+      <td colspan="2" class="EditInput03"> xxxxx</td>
+      <td align="center" >申请日期</td>
+      <td colspan="2" class="EditInput02">2016-05-10 </td>
+      </tr>
+  </table>
+  
+ 
+    
+    
+    
+  </div>
+    </div>
+    
+    </div>
+    <div style="display:none;">
+     
+     <div style="width:96%; margin:auto;" >
+   
+    <div class="btn_more" style="margin-top:20px;">
+  <a class="btn  btn01" href="#">查 看</a> 
+    </div>
+    <DIV class="textRM">备注：当前可以支持上传的附件类型包括：JPG、PNG、DOC、XLS、PDF、TIF等，单项付列资料可<span class="redtext">支持最大上传值为2M.</span></DIV>
+     <div class="NewTableTop">
+   
+  </div>
+    
+    
+  <div class="NewTableMain">
+    <table width="100%" border="0" cellspacing="1" cellpadding="0">
+      <tr>
+        <td width="40" align="center" ><input type="checkbox" name="checkbox" id="checkbox"></td>
+        <td width="60" align="center" ><strong>序号</strong></td>
+        <td align="center" ><strong>附列资料名称</strong></td>
+        <td align="center" ><strong>是否必填</strong></td>
+        <td align="center" ><strong>当前文件大小</strong></td>
+        <td align="center" ><strong>份数</strong></td>
+      </tr>
+      <tr>
+        <td align="center"><span >
+          <input type="checkbox" name="checkbox2" id="checkbox2">
+        </span></td>
+        <td align="center">01</td>
+        <td>税务登记正本</td>
+        <td align="center">必报</td>
+        <td align="center">0</td>
+        <td align="center">0</td>
+        
+      </tr>
+      <tr>
+        <td align="center"><span >
+          <input type="checkbox" name="checkbox3" id="checkbox3">
+        </span></td>
+        <td align="center">02</td>
+        <td>税务登记副本</td>
+        <td align="center">必报</td>
+        <td align="center">0</td>
+        <td align="center">0</td>
+        
+        </tr>
+      <tr>
+        <td align="center"><span >
+          <input type="checkbox" name="checkbox4" id="checkbox4">
+        </span></td>
+        <td align="center">03</td>
+        <td>纳税人变更登记内容的决议及有关证明文件复印件</td>
+        <td align="center">必报</td>
+        <td align="center">0</td>
+        <td align="center">0</td>
+       
+        </tr>
+      <tr>
+        <td align="center"><span >
+          <input type="checkbox" name="checkbox5" id="checkbox5">
+        </span></td>
+        <td align="center">04</td>
+        <td>纳税人变更登记内容的决议及有关证明文件 </td>
+        <td align="center">必报</td>
+        <td align="center">0</td>
+        <td align="center">0</td>
+       
+        </tr>
+      <tr>
+        <td align="center"><span >
+          <input type="checkbox" name="checkbox6" id="checkbox6">
+        </span></td>
+        <td align="center">05</td>
+        <td>工商变更登记表及工商营业执照</td>
+        <td align="center">条件报送</td>
+        <td align="center">0</td>
+        <td align="center">0</td>
+       
+        </tr>
+      <tr>
+        <td align="center"><span >
+          <input type="checkbox" name="checkbox7" id="checkbox7">
+        </span></td>
+        <td align="center">06</td>
+        <td>工商变更登记表及工商营业执照复印件</td>
+        <td align="center">条件报送</td>
+        <td align="center">0</td>
+        <td align="center">0</td>
+        
+        </tr>
+    </table>
+  
+  </div>
+    
+    
+    
+    
+  </div>
+    </div>
+    
+  </div>
+      
+    </td>
+  </tr>
+</table>
+<script>
+
+$(document).ready(function(e) {
+	$(".all_table").css({height:$(window).height()-60})
+	var i=0;
+    $(".close_btn").click(function(){		
+		if(i<1){
+			$(".biao_leftmenu").css("display","none");
+			i++
+			}else{
+				if(i==1){
+			    $(".biao_leftmenu").css("display","block");
+				 i=0
+					} 
+				}
+		})
+});
+</script>
+<!------------>
+
+<div id="jg" class="reveal-modal" style="width:800px;top:400px; " >
+			<div class="tc_tit">系统受理回执</div>
+            <a href="#" class="close_btn close-reveal-modal">×</a>	  
+			 <div class="tc_nav" style="margin-top:-20px;">
+    
+<div class="tltletc"> <ul> <span>变更税务登记<p>（系统受理回执）</p></span>
+</ul> </div>  
+
+
+         <div class="texthz">
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top">
+        <div class="textnr" style=" padding:0px 2%">
+       <h1> 尊敬的湖南省常德市工商联测试用户（441900092388259）:</h1>
+        您申请办理的涉税事项已进入受理程序。系统受理<span class=" redtext">流水号：0E93KDK93KD9993KD93KD9K10293</span>系统受理时间：2016年04月07日。税务机关受理后，系统将受理结果及受理意见即时推送给您，届时敬请查阅。感谢您使用电子工商联。
+        </div>
+    </td>
+   <!-- <td><img src="../../images/temp.png" width="201" height="199"  alt=""/></td>-->
+  </tr>
+</table>
+
+ </div>
+<br>
+     <div class="page01">
+            <a  class="btn btn01" type="button" href=""  >打印回执</a>
+            <a  class="btn btn01" type="button" href=""  onclick="window.close();">关闭</a>
+            <!--qjsk_pl.html-->
+          
+     </div>
+           </div>
+	
+			
+		</div>
+</body>
+</html>
