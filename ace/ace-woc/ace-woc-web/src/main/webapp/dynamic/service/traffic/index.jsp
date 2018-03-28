@@ -20,10 +20,10 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-                    开始时间：<input id="startdate" class="easyui-datetimebox" name="startdate"
-                                data-options="showSeconds:false,onSelect:onSelect">
-                    结束时间：<input id="enddate" class="easyui-datetimebox" name="enddate"
-                                data-options="showSeconds:false,disabled:true">
+                    开始时间：<input id="startTime" class="easyui-datetimebox" name="startTime"
+                                data-options="onSelect:onSelect">
+                    结束时间：<input id="endTime" class="easyui-datetimebox" name="endTime"
+                                data-options="disabled:true">
                     卡点名称： <input class="easyui-combogrid" name="siteId" style="height: 20px;"
                                  data-options="
                                         panelWidth: '300',
@@ -240,23 +240,23 @@
     }
 
     function onSelect(date) {  //开始日期选择时触发
-        $('#enddate').datebox('enable');    //启用结束日期控件
-        $('#enddate').datebox('reset')      //重置结束日期的值
+        $('#endTime').datebox('enable');    //启用结束日期控件
+        $('#endTime').datebox('reset')      //重置结束日期的值
     };
     $(function () {
         //只能选择今日前365天的日期
-        $('#startdate').datebox('calendar').calendar({
+        $('#startTime').datebox('calendar').calendar({
             validator: function (date) {
                 var now = new Date();
                 var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
                 return d1 >= date;
             }
         });
-        $('#enddate').datebox('calendar').calendar({
+        $('#endTime').datebox('calendar').calendar({
             validator: function (date) {
                 var now = new Date();
                 var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes());
-                var d3 = $('#startdate').datebox('getValue').replace(new RegExp(/-/gm), "/");
+                var d3 = $('#startTime').datebox('getValue').replace(new RegExp(/-/gm), "/");
                 var d4 = new Date(d3);
                 return d1 >= date && date >= d4;
             }
