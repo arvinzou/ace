@@ -81,7 +81,8 @@ function viewLiveList(data) {
         liLive = liLive.replace('[imageSrc]', imgHost + data[i].imageSrc);
         liLive = liLive.replace('[name]', data[i].name);
         liLive = liLive.replace('[createUserName]', data[i].createUserName);
-       // liLive = liLive.replace('[startTime]', data[i].startTime.substring(0, 16));
+        liLive = liLive.replace('[startTime]', getMyDate(new Date(data[i].startTime))
+        );
         //liLive = liLive.replace('[reportNum]', data[i].reportCount);
         var status = data[i].status == 1 ? '开始直播' : (data[i].status == 2 ? '结束直播' : (data[i].status == 3 ? '恢复直播' : ''));
         liLive = liLive.replace('[status]', status);
@@ -161,7 +162,7 @@ function modifyLiveDo(event) {
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
             $('#htmlLoad').load('./../html/floatTable.html', function () {
-                $('#floatTable').load('./../html/jxbForm.html', function () {
+                $('#floatTable').load('./../html/liveForm.html', function () {
                     $('#JSLoad').load('./../html/modifyLiveJS.html', function () {
                         showModifyWeb(result.value);
                     })
@@ -201,4 +202,24 @@ function changeCourseTab(type){
     if(type != null && type != undefined){
         loadLiveList(type);
     }
+}
+
+/* format 日期*/
+function getMyDate(str){
+    var oDate = new Date(str),
+        oYear = oDate.getFullYear(),
+        oMonth = oDate.getMonth()+1,
+        oDay = oDate.getDate(),
+        oHour = oDate.getHours(),
+        oMin = oDate.getMinutes(),
+        oSen = oDate.getSeconds(),
+        oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+    return oTime;
+};
+//补0操作
+function getzf(num){
+    if(parseInt(num) < 10){
+        num = '0'+num;
+    }
+    return num;
 }

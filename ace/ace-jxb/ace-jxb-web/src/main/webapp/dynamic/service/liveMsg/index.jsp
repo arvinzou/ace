@@ -39,9 +39,8 @@ pageEncoding="utf-8"%>
 
                     UID： <input name="uid" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/jxbMsg/findLiveMsgList.do">
-                        <i
-                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                            authority="${pageContext.request.contextPath}/jxbMsg/findLiveMsgList.do" >
+                       <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
 
 

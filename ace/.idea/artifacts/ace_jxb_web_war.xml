@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ace-jxb-web:war">
+    <output-path>$PROJECT_DIR$/ace-jxb/ace-jxb-web/target</output-path>
+    <root id="archive" name="ace-jxb-web-1.0.war">
+      <element id="artifact" artifact-name="ace-jxb-web:war exploded" />
+    </root>
+  </artifact>
+</component>
