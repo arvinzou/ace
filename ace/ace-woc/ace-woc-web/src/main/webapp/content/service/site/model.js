@@ -251,7 +251,6 @@ var _colModel = function () {
                 style: 'width:200px;height:25px;',
                 elmprefix: "",
                 elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>",
-
             },
             editoptions: {
                 value: odparse("119"),

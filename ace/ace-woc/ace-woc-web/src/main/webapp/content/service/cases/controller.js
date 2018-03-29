@@ -91,17 +91,158 @@ jQuery(function ($) {
             $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
             return;
         }
-        jQuery(cfg.grid_selector).jqGrid('delGridRow', gr, {
-            beforeShowForm: function (e) {
-                var form = $(e[0]);
-                form.closest('.ui-jqdialog')
-                    .find('.ui-jqdialog-titlebar')
-                    .wrapInner('<div class="widget-header" />')
-                style_edit_form(form);
-            }
-        })
+        var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+        // console.log(rowData);
+        // console.log(rowData.status);
+        if (confirm("是否确认案件审核?")) {
+            $.ajax({
+                type: "post",
+                url: contextPath + "/cases/audit",
+                data: {ids: rowData.id},
+                beforeSend: function (XMLHttpRequest) {
+                    sb('btn-view-deploy', true, 'glyphicon glyphicon-refresh');
+                },
+                success: function (rst, textStatus) {
+                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                    if (rst) {
+                        bootbox.dialog({
+                            title: '系统提示',
+                            message: rst.errorMessage,
+                            detail: rst.detail,
+                            buttons: {
+                                "success": {
+                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                    "className": "btn-sm btn-success",
+                                    "callback": function () {
+                                        //$( this ).dialog( "close" );
+                                    }
+                                }
+                            }
+                        });
 
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                },
+                error: function () {
+                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                }
+            });
+        }
     });
+
+    //提交审核
+    $('#btn-view-submit-audit').on('click', function () {
+        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+        if (!gr) {
+            $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
+            return;
+        }
+        var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+        // console.log(rowData);
+        // console.log(rowData.status);
+        if (confirm("是否确认提交案件审核?")) {
+            $.ajax({
+                type: "post",
+                url: contextPath + "/cases/submitAudit",
+                data: {ids: rowData.id},
+                beforeSend: function (XMLHttpRequest) {
+                    sb('btn-view-deploy', true, 'glyphicon glyphicon-refresh');
+                },
+                success: function (rst, textStatus) {
+                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                    if (rst) {
+                        bootbox.dialog({
+                            title: '系统提示',
+                            message: rst.errorMessage,
+                            detail: rst.detail,
+                            buttons: {
+                                "success": {
+                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                    "className": "btn-sm btn-success",
+                                    "callback": function () {
+                                        //$( this ).dialog( "close" );
+                                    }
+                                }
+                            }
+                        });
+
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                },
+                error: function () {
+                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                }
+            });
+        }
+    });
+
+    //案件撤销
+    $('#btn-view-repeal').on('click', function () {
+        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+        if (!gr) {
+            $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
+            return;
+        }
+        var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+        // console.log(rowData);
+        // console.log(rowData.status);
+        if (confirm("是否确认撤销案件?")) {
+            $.ajax({
+                type: "post",
+                url: contextPath + "/cases/repeal",
+                data: {ids: rowData.id},
+                beforeSend: function (XMLHttpRequest) {
+                    sb('btn-view-deploy', true, 'glyphicon glyphicon-refresh');
+                },
+                success: function (rst, textStatus) {
+                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                    if (rst) {
+                        bootbox.dialog({
+                            title: '系统提示',
+                            message: rst.errorMessage,
+                            detail: rst.detail,
+                            buttons: {
+                                "success": {
+                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                    "className": "btn-sm btn-success",
+                                    "callback": function () {
+                                        //$( this ).dialog( "close" );
+                                    }
+                                }
+                            }
+                        });
+
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                },
+                error: function () {
+                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                }
+            });
+        }
+    });
+
+    function sb(btnId, status, iconCss) {
+        console.log(status);
+        var btn = $('#' + btnId);
+        if (status) {
+            btn.find('i').removeClass(iconCss);
+            btn.find('i').addClass('fa-spinner fa-spin');
+            btn.attr('disabled', "true");
+
+        } else {
+            btn.find('i').removeClass('fa-spinner');
+            btn.find('i').removeClass('fa-spin');
+            btn.find('i').addClass(iconCss);
+            btn.removeAttr("disabled");
+        }
+    }
 });
 
 function preview(id, title) {
@@ -160,3 +301,16 @@ function loadView(id) {
         }
     });
 }
+
+//弹框组件demo
+// $("#btn7").click(function(){
+//     var txt=  "自定义呀";
+//     var option = {
+//         title: "自定义",
+//         btn: parseInt("0011",2),
+//         onOk: function(){
+//             console.log("确认啦");
+//         }
+//     }
+//     window.wxc.xcConfirm(txt, "custom", option);
+// });

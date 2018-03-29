@@ -8,6 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>案件</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/xcConfirm.css">
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -48,9 +49,19 @@
 
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
-                    <%--审核--%>
+                    <%--提交审核--%>
+                    <button class="btn btn-purple" id="btn-view-submit-audit"
+                            authority="${pageContext.request.contextPath}/cases/submitAudit">
+                        <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <%--案件审核--%>
                     <button class="btn btn-purple" id="btn-view-audit"
                             authority="${pageContext.request.contextPath}/cases/audit">
+                        <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <%--案件撤销--%>
+                    <button class="btn btn-purple" id="btn-view-repeal"
+                            authority="${pageContext.request.contextPath}/cases/repeal">
                         <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
                     </button>
 
@@ -215,10 +226,13 @@
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
+<script src="${pageContext.request.contextPath}/content/common/js/xcConfirm.js"></script>
 <script src="${pageContext.request.contextPath}/content/service/cases/config.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/cases/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/cases/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/cases/view.js?version=${cfg.version}"></script>
+<%--弹框插件--%>
+
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {
