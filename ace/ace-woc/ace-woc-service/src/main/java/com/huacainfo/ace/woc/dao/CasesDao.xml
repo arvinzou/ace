@@ -367,7 +367,7 @@
         </if>
     </sql>
 
-    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.woc.model.Case">
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.woc.model.Cases">
         select count(*)
         from woc.cases
         where id = #{id,jdbcType=VARCHAR}

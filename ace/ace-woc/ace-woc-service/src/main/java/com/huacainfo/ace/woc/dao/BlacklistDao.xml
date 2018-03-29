@@ -20,11 +20,7 @@
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
-    <sql id="Base_Column_List">
-    id, personId, vehicleId, departmentId, effectDate, effectReason, lapseDate, lapseReason, 
-    isBlack, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
-    lastModifyUserName, lastModifyDate
-  </sql>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -242,10 +238,7 @@
 
     <select id="findList" resultMap="BaseResultMapVo">
         select
-            p.name, v.plateNo , d.department_name,
-            b.id, b.personId, b.vehicleId, b.departmentId, b.effectDate, b.effectReason, b.lapseDate, b.lapseReason,
-            b.isBlack, b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId,
-            b.lastModifyUserName, b.lastModifyDate
+        <include refid="Base_Column_List"/>
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -258,7 +251,14 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-    <sql id="whereCondition">
+    <sql id="Base_Column_List_Vo">
+       p.name, v.plateNo , d.department_name,
+        b.id, b.personId, b.vehicleId, b.departmentId, b.effectDate, b.effectReason, b.lapseDate, b.lapseReason,
+        b.isBlack, b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId,
+        b.lastModifyUserName, b.lastModifyDate
+    </sql>
+
+    <sql id="whereCondition_Vo">
         from woc.blacklist b
         left join woc.person p on b.personId = p.id
         left join woc.vehicle v on b.vehicleId = v.id
@@ -268,6 +268,36 @@
             and b.id = #{condition.id,jdbcType=VARCHAR}
         </if>
     </sql>
+
+    <sql id="whereCondition">
+        from woc.blacklist b
+        where 0 = 0
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and b.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <sql id="Base_Column_List">
+        id, personId, vehicleId, departmentId, effectDate, effectReason, lapseDate, lapseReason,
+        isBlack, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate
+    </sql>
+
+    <select id="findLists" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List_Vo"/>
+        <include refid="whereCondition_Vo"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY b.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.woc.model.Device">
     select count(*)
@@ -282,10 +312,7 @@
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
-            p.name, v.plateNo , d.department_name,
-            b.id, b.personId, b.vehicleId, b.departmentId, b.effectDate, b.effectReason, b.lapseDate, b.lapseReason,
-            b.isBlack, b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId,
-            b.lastModifyUserName, b.lastModifyDate
+        <include refid="Base_Column_List_Vo"/>
         from woc.blacklist b
         LEFT JOIN woc.person p on b.personId = p.id
         LEFT JOIN woc.vehicle v on b.vehicleId = v.id
