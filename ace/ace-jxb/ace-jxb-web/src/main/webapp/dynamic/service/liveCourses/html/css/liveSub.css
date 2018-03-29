@@ -1,0 +1,194 @@
+/* CSS Document */
+/*上部分*/
+html{
+	height:100%
+}
+body{
+	height: 100%;
+}
+
+.topToolBtn{
+	list-style: none;
+	padding: 0px;
+}
+
+.topToolBtn >li{
+	height: 34px;
+	margin-right: 30px;
+	float: left;
+	line-height: 34px;
+}
+
+.input-group{
+	max-width: 10rem;
+	z-index: 0;
+}
+
+.headContainer{
+	padding: 10px 40px;
+	background-color:#e5e8ee;
+}
+
+.form-control option{
+	margin-top: 6px;
+}
+/*上部分end***********************************************************************************************************/
+/*下部分*/
+.sceneList{
+	list-style: none;
+	padding: 0px;
+}
+.sceneList .pic{
+	width: 100%;
+    height: 3rem;
+    overflow: hidden;
+}
+.sceneList>li{
+	float: left;
+	margin:0 0 0 0;
+	border: 1px solid #e2e7f6;
+}
+.sceneList .pic img{
+	width: 100%;
+	cursor: pointer;
+	/*height: 3rem; width: 100%; object-fit: cover;*/
+}
+
+
+.sceneList .picbar{
+	position: relative;
+	cursor: pointer;
+}
+
+.sceneList .reportNum{
+	position: absolute;
+	left: 10px;
+	color: #fff;
+	padding: 3px 6px;
+    border-radius: 4px;
+}
+
+.sceneList .reportNum{
+	top: 10px;
+	background-color: rgba(0,0,0,.5);
+}
+
+.sceneList .jxbtitle{
+	position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+    line-height: 40px;
+    padding: 0 6px;
+    color: #fff;
+}
+
+.sceneList .msgbar{
+    padding: 6px 6px 6px 0px;
+	color: #aaa;
+    overflow: hidden;
+}
+.sceneList .msgbar .creater{
+	max-width:110px;
+}
+
+.sceneList .msgbar-common{
+	float: left;
+	display: inline-block;
+	background: 0 0;
+    height: 38px;
+    line-height: 38px;
+	padding: 0 10px;
+}
+.sceneList .msgbar-time{
+	padding: 0;
+}
+.sceneList .msgbar a {
+	height: 38px;
+    line-height: 38px;
+    float: right;
+    padding: 0 5px;
+    color: #1a9fff;
+	cursor: pointer;
+}
+.jxbcontent{
+	height: 90%;
+	padding: 30px 40px;
+	overflow-y: scroll;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`*/
+/*.modify,.report-temp{*/
+	/*position:absolute;*/
+	/*top:0;*/
+	/*left: 0;*/
+	/*width:100%;*/
+	/*height: 100%;*/
+	/*background-color:rgba(0,0,0,0.56);*/
+	/*padding: 60px!important;*/
+	/*overflow-y: auto;*/
+/*}*/
+
+
+
+/*888888888888888888888888888888888888888888*/
+
+
+/*.report-temp{*/
+	/*mix-height: 100%;*/
+	/*overflow-y: scroll;*/
+/*}*/
+/*1111111111111111111111111*/
+/*.report-list {*/
+	/*list-style-type: none;*/
+	/*padding: 0px;*/
+/*}*/
+
+
+
+/*.report-temp-ul h1,.report-temp-ul button{*/
+	/*display: inline-block;*/
+/*}*/
+
+/*.report-temp-ul button{*/
+	/*margin: 0 0 10px 40px;*/
+
+/*}*/
+
+/*.report-list>li{*/
+	/*float: left;*/
+	/*margin:0 20px 20px 0;*/
+	/*border: 1px solid #e2e7f6;*/
+/*}*/
+
+/*.report-list video{*/
+	/*width: 100%;*/
+	/*height: 100%;*/
+/*}*/
+
+/*.report-list audio{*/
+	/*margin: 80px 3% 0 3%;*/
+	/*width: 94%;*/
+/*}*/
+
+
+/*.report-list img{*/
+	/*display: block;*/
+	/*width: 100%;*/
+	/*border: 0;*/
+	/*overflow: hidden;*/
+	/*object-fit:cover;*/
+/*}*/
+
+/*.textContent{*/
+	/*width: 376px;*/
+	/*padding: 6px 12px;*/
+	/*height: 212px;*/
+	/*font-size: 14px;*/
+	/*line-height: 28px;*/
+	/*background-color: #ebeef3;*/
+	/*color: #666;*/
+	/*overflow: auto;*/
+/*}*/
+
