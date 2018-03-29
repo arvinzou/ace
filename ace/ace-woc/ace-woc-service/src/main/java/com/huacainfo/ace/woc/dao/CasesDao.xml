@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.woc.dao.CaseDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.woc.model.Case">
+<mapper namespace="com.huacainfo.ace.woc.dao.CasesDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.woc.model.Cases">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="caseNo" jdbcType="VARCHAR" property="caseNo"/>
         <result column="caseDate" jdbcType="TIMESTAMP" property="caseDate"/>
@@ -34,15 +34,15 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from case
+        from cases
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from case
+    delete from cases
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.woc.model.Case">
-    insert into case (id, caseNo, caseDate, 
+    <insert id="insert" parameterType="com.huacainfo.ace.woc.model.Cases">
+    insert into cases (id, caseNo, caseDate, 
       trafficId, vehicleId, driver, 
       party, partyType, chp1, 
       lecn, chp2, recorder, 
@@ -59,8 +59,8 @@
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.Case">
-        insert into case
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.Cases">
+        insert into cases
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -204,8 +204,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.Case">
-        update case
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.Cases">
+        update cases
         <set>
             <if test="caseNo != null">
                 caseNo = #{caseNo,jdbcType=VARCHAR},
@@ -276,8 +276,8 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.woc.model.Case">
-    update case
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.woc.model.Cases">
+    update cases
     set caseNo = #{caseNo,jdbcType=VARCHAR},
       caseDate = #{caseDate,jdbcType=TIMESTAMP},
       trafficId = #{trafficId,jdbcType=VARCHAR},
@@ -303,32 +303,38 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-
-    <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.woc.vo.CaseVo">
+    <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.woc.vo.CasesVo">
         <result column="partyName" jdbcType="VARCHAR" property="partyName"/>
         <result column="partyDeptName" jdbcType="VARCHAR" property="partyDeptName"/>
         <result column="plateNo" jdbcType="VARCHAR" property="vehicleNo"/>
-        <result column="axleCount" jdbcType="INTEGER" property="axleCount" />
-        <result column="totalMass" jdbcType="DECIMAL" property="totalMass" />
-        <result column="overMass" jdbcType="DECIMAL" property="overMass" />
-        <result column="overRate" jdbcType="DECIMAL" property="overRate" />
-        <result column="speed" jdbcType="DECIMAL" property="speed" />
+        <result column="axleCount" jdbcType="INTEGER" property="axleCount"/>
+        <result column="totalMass" jdbcType="DECIMAL" property="totalMass"/>
+        <result column="overMass" jdbcType="DECIMAL" property="overMass"/>
+        <result column="overRate" jdbcType="DECIMAL" property="overRate"/>
+        <result column="speed" jdbcType="DECIMAL" property="speed"/>
     </resultMap>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
-        <include refid="Base_Column_List"/>
-        from case
+        <include refid="Base_Column_List_Vo"/>
+        from cases
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
+    <sql id="Base_Column_List_Vo">
+        p.`name` as partyName, d.department_name as partyDeptName,
+        (select p.name from woc.person p where t.driver= p.id) as driverName,
+		(select p.name from woc.person p where t.chp1= p.id) as chp1Name,
+        (select p.name from woc.person p where t.chp2= p.id) as chp2Name,
+        tc.plateNo, tc.axleCount,tc.totalMass, tc.overMass, tc.overRate, tc.speed,
+        t.id, t.caseNo, t.caseDate, t.trafficId, t.vehicleId, t.driver, t.party, t.partyType, t.chp1, t.lecn,
+        t.chp2, t.recorder, t.recordTime, t.fines, t.auditDept, t.remark, t.status, t.createUserId, t.createUserName,
+        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+    </sql>
+
     <select id="findList" resultMap="BaseResultMapVo">
         select
-            p.`name` as partyName, d.department_name as partyDeptName,
-            tc.plateNo, tc.axleCount,tc.totalMass, tc.overMass, tc.overRate, tc.speed,
-            t.id, t.caseNo, t.caseDate, t.trafficId, t.vehicleId, t.driver, t.party, t.partyType, t.chp1, t.lecn,
-            t.chp2, t.recorder, t.recordTime, t.fines, t.auditDept, t.remark, t.status, t.createUserId, t.createUserName,
-            t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        <include refid="Base_Column_List_Vo"/>
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -342,7 +348,7 @@
     </select>
 
     <sql id="whereCondition">
-        from woc.`case` t
+        from woc.cases t
         left join woc.traffic tc on t.trafficId = tc.id
         left join woc.person p on t.party = p.id
         left join portal.department d on p.companyId = d.department_id
@@ -350,11 +356,20 @@
         <if test="condition.caseNo!=null and condition.caseNo!=&quot;&quot;">
             and t.caseNo like concat(#{condition.caseNo,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.plateNo!=null and condition.plateNo!=&quot;&quot;">
+            and tc.plateNo = #{condition.plateNo,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
+            and t.caseDate >= #{condition.startDate,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.endDate!=null and condition.endDate!=&quot;&quot;">
+            and t.caseDate &lt;= #{condition.endDate,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.woc.model.Case">
         select count(*)
-        from woc.`case`
+        from woc.cases
         where id = #{id,jdbcType=VARCHAR}
     </select>
 

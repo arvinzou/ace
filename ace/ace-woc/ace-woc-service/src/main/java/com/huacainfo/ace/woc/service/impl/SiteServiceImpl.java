@@ -1,24 +1,22 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.*;
-
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.woc.dao.SiteDao;
+import com.huacainfo.ace.woc.model.Site;
+import com.huacainfo.ace.woc.service.SiteService;
+import com.huacainfo.ace.woc.vo.SiteQVo;
+import com.huacainfo.ace.woc.vo.SiteVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.woc.dao.SiteDao;
-import com.huacainfo.ace.woc.model.Site;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.woc.service.SiteService;
-import com.huacainfo.ace.woc.vo.SiteVo;
-import com.huacainfo.ace.woc.vo.SiteQVo;
+import java.util.*;
 @Service("siteService")
 /**
  * @author: 王恩
@@ -86,7 +84,7 @@ public class SiteServiceImpl implements SiteService {
 		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
-		this.siteDao.insert(o);
+		this.siteDao.insertSelective(o);
 		this.dataBaseLogService.log("添加卡点档案", "卡点档案", "", o.getSiteName(),
 				o.getSiteName(), userProp);
 		return new MessageResponse(0, "添加卡点档案完成！");
@@ -111,7 +109,7 @@ public class SiteServiceImpl implements SiteService {
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
-		this.siteDao.updateByPrimaryKey(o);
+		this.siteDao.updateByPrimaryKeySelective(o);
 		this.dataBaseLogService.log("变更卡点档案", "卡点档案", "", o.getSiteName(),
 				o.getSiteName(), userProp);
 		return new MessageResponse(0, "变更卡点档案完成！");

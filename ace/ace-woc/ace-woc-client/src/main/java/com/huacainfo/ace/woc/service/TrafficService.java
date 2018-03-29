@@ -1,11 +1,15 @@
 package com.huacainfo.ace.woc.service;
+
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.woc.model.Traffic;
-import com.huacainfo.ace.woc.vo.TrafficVo;
 import com.huacainfo.ace.woc.vo.TrafficQVo;
+import com.huacainfo.ace.woc.vo.TrafficVo;
+
+import java.util.Map;
+
 /**
  * @author: 王恩
  * @version: 2018-03-21
@@ -81,5 +85,6 @@ public interface TrafficService {
 	 */
 	public abstract MessageResponse deleteTrafficByTrafficId(String id,UserProp userProp) throws Exception;
 
-	
+
+    Map<String,Object> selectListByKeyWord(String keyWord);
 }

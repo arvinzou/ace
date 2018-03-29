@@ -1,10 +1,12 @@
 package com.huacainfo.ace.woc.dao;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.woc.model.Traffic;
 import com.huacainfo.ace.woc.vo.TrafficQVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface TrafficDao {
 
@@ -29,4 +31,5 @@ public interface TrafficDao {
 
 	int isExit(Traffic record);
 
+    List<TrafficVo> selectListByKeyWord(@Param("params") Map<String, Object> params);
 }

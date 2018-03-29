@@ -389,4 +389,17 @@
         where
         plateNo=#{plateNo}
     </select>
+
+    <select id="selectListByKeyWord" parameterType="java.util.Map" resultMap="BaseResultMapVo">
+        select  t.*
+        from vehicle t
+        where 1=1
+        <if test="params.keyWord!=null and params.keyWord!=''">
+            and (
+            t.plateNo like concat('%',#{params.keyWord,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        order by t.createDate
+        limit 0,20
+    </select>
 </mapper>

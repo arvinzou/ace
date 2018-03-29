@@ -1,63 +1,62 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.woc.dao.CaseDao;
-import com.huacainfo.ace.woc.model.Case;
+import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.woc.service.CaseService;
-import com.huacainfo.ace.woc.vo.CaseVo;
-import com.huacainfo.ace.woc.vo.CaseQVo;
+import com.huacainfo.ace.woc.dao.CasesDao;
+import com.huacainfo.ace.woc.model.Cases;
+import com.huacainfo.ace.woc.service.CasesService;
+import com.huacainfo.ace.woc.vo.CasesQVo;
+import com.huacainfo.ace.woc.vo.CasesVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@Service("caseService")
+import java.util.Date;
+import java.util.List;
+
+@Service("casesService")
 /**
- * @author: 王恩
- * @version: 2018-03-21
- * @Description: TODO(案件)
+ * @author: Arvin
+ * @version: 2018-03-28
+ * @Description: TODO(案件管理)
  */
-public class CaseServiceImpl implements CaseService {
+public class CasesServiceImpl implements CasesService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private CaseDao caseDao;
+    private CasesDao casesDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(案件分页查询)
+     * @Description: TODO(案件管理分页查询)
      * @param: @param condition
      * @param: @param start
      * @param: @param limit
      * @param: @param orderBy
      * @param: @throws Exception
-     * @return: PageResult<CaseVo>
-     * @author: 王恩
-     * @version: 2018-03-21
+     * @return: PageResult<CasesVo>
+     * @author: Arvin
+     * @version: 2018-03-28
      */
     @Override
-    public PageResult<CaseVo> findCaseList(CaseQVo condition, int start,
-                                           int limit, String orderBy) throws Exception {
-        PageResult<CaseVo> rst = new PageResult<CaseVo>();
-        List<CaseVo> list = this.caseDao.findList(condition,
+    public PageResult<CasesVo> findCasesList(CasesQVo condition, int start,
+                                             int limit, String orderBy) throws Exception {
+        PageResult<CasesVo> rst = new PageResult<CasesVo>();
+        List<CasesVo> list = this.casesDao.findList(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.caseDao.findCount(condition);
+            int allRows = this.casesDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
@@ -65,18 +64,19 @@ public class CaseServiceImpl implements CaseService {
 
     /**
      * @throws
-     * @Title:insertCase
-     * @Description: TODO(添加案件)
+     * @Title:insertCases
+     * @Description: TODO(添加案件管理)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
      * @return: MessageResponse
-     * @author: 王恩
-     * @version: 2018-03-21
+     * @author: Arvin
+     * @version: 2018-03-28
      */
     @Override
-    public MessageResponse insertCase(Case o, UserProp userProp)
+    public MessageResponse insertCases(Cases o, UserProp userProp)
             throws Exception {
+
         if (CommonUtils.isBlank(o.getCaseNo())) {
             return new MessageResponse(1, "案件号不能为空！");
         }
@@ -116,13 +116,11 @@ public class CaseServiceImpl implements CaseService {
         if (CommonUtils.isBlank(o.getAuditDept())) {
             return new MessageResponse(1, "审核部门不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
 
-        int temp = this.caseDao.isExit(o);
+
+        int temp = this.casesDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "案件名称重复！");
+            return new MessageResponse(1, "案件管理名称重复！");
         }
 
         o.setId(GUIDUtil.getGUID());
@@ -131,24 +129,25 @@ public class CaseServiceImpl implements CaseService {
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
-        this.caseDao.insertSelective(o);
-        this.dataBaseLogService.log("添加案件", "案件", "", o.getCaseNo(), o.getCaseNo(), userProp);
-        return new MessageResponse(0, "添加案件完成！");
+        this.casesDao.insertSelective(o);
+        this.dataBaseLogService.log("添加案件管理", "案件管理", "", o.getCaseNo(),
+                o.getCaseNo(), userProp);
+        return new MessageResponse(0, "添加案件管理完成！");
     }
 
     /**
      * @throws
-     * @Title:updateCase
-     * @Description: TODO(更新案件)
+     * @Title:updateCases
+     * @Description: TODO(更新案件管理)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
      * @return: MessageResponse
-     * @author: 王恩
-     * @version: 2018-03-21
+     * @author: Arvin
+     * @version: 2018-03-28
      */
     @Override
-    public MessageResponse updateCase(Case o, UserProp userProp)
+    public MessageResponse updateCases(Cases o, UserProp userProp)
             throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
@@ -193,50 +192,49 @@ public class CaseServiceImpl implements CaseService {
             return new MessageResponse(1, "审核部门不能为空！");
         }
 
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
-        this.caseDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更案件", "案件", "", o.getCaseNo(),
+        this.casesDao.updateByPrimaryKeySelective(o);
+        this.dataBaseLogService.log("变更案件管理", "案件管理", "", o.getCaseNo(),
                 o.getCaseNo(), userProp);
-        return new MessageResponse(0, "变更案件完成！");
+        return new MessageResponse(0, "变更案件管理完成！");
     }
 
     /**
      * @throws
-     * @Title:selectCaseByPrimaryKey
-     * @Description: TODO(获取案件)
+     * @Title:selectCasesByPrimaryKey
+     * @Description: TODO(获取案件管理)
      * @param: @param id
      * @param: @throws Exception
-     * @return: SingleResult<Case>
-     * @author: 王恩
-     * @version: 2018-03-21
+     * @return: SingleResult<Cases>
+     * @author: Arvin
+     * @version: 2018-03-28
      */
     @Override
-    public SingleResult<CaseVo> selectCaseByPrimaryKey(String id) throws Exception {
-        SingleResult<CaseVo> rst = new SingleResult<CaseVo>();
-        rst.setValue(this.caseDao.selectVoByPrimaryKey(id));
+    public SingleResult<CasesVo> selectCasesByPrimaryKey(String id) throws Exception {
+        SingleResult<CasesVo> rst = new SingleResult<CasesVo>();
+        rst.setValue(this.casesDao.selectVoByPrimaryKey(id));
         return rst;
     }
 
     /**
      * @throws
-     * @Title:deleteCaseByCaseId
-     * @Description: TODO(删除案件)
+     * @Title:deleteCasesByCasesId
+     * @Description: TODO(删除案件管理)
      * @param: @param id
      * @param: @param userProp
      * @param: @throws Exception
      * @return: MessageResponse
-     * @author: 王恩
-     * @version: 2018-03-21
+     * @author: Arvin
+     * @version: 2018-03-28
      */
     @Override
-    public MessageResponse deleteCaseByCaseId(String id,
-                                              UserProp userProp) throws Exception {
-        this.caseDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除案件", "案件", String.valueOf(id),
-                String.valueOf(id), "案件", userProp);
-        return new MessageResponse(0, "案件删除完成！");
+    public MessageResponse deleteCasesByCasesId(String id,
+                                                UserProp userProp) throws Exception {
+        this.casesDao.deleteByPrimaryKey(id);
+        this.dataBaseLogService.log("删除案件管理", "案件管理", String.valueOf(id),
+                String.valueOf(id), "案件管理", userProp);
+        return new MessageResponse(0, "案件管理删除完成！");
     }
 }
