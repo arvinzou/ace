@@ -1,25 +1,22 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.woc.dao.VehicleDao;
+import com.huacainfo.ace.woc.model.Vehicle;
+import com.huacainfo.ace.woc.service.VehicleService;
+import com.huacainfo.ace.woc.vo.VehicleQVo;
+import com.huacainfo.ace.woc.vo.VehicleVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.woc.dao.VehicleDao;
-import com.huacainfo.ace.woc.model.Vehicle;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.woc.service.VehicleService;
-import com.huacainfo.ace.woc.vo.VehicleVo;
-import com.huacainfo.ace.woc.vo.VehicleQVo;
+import java.util.*;
 @Service("vehicleService")
 /**
  * @author: 王恩
@@ -153,4 +150,22 @@ public class VehicleServiceImpl implements VehicleService {
 				String.valueOf(id), "人员信息", userProp);
 		return new MessageResponse(0, "人员信息删除完成！");
 	}
+
+    /**
+     * 根据关键词，查询车辆信息
+     *
+     * @param keyWord
+     * @return
+     */
+    @Override
+    public Map<String, Object> selectListByKeyWord(String keyWord) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("keyWord", keyWord);
+
+        List<VehicleVo> list = vehicleDao.selectListByKeyWord(params);
+        Map<String, Object> rtn = new HashMap<>();
+        rtn.put("total", list.size());
+        rtn.put("rows", list);
+        return rtn;
+    }
 }

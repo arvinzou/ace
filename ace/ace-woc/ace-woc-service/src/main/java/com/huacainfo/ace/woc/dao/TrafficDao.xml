@@ -292,12 +292,14 @@
             and status =#{condition.status,jdbcType=CHAR}
         </if>
         /*开始时间*/
-        <if test="condition.status!=null and condition.status!=''">
-            and status =#{condition.status,jdbcType=CHAR}
+        <if test="condition.startTime!=null and condition.startTime!=''">
+            and inspectTime>=#{condition.startTime,jdbcType=TIMESTAMP}
         </if>
-        <if test="condition.status!=null and condition.status!=''">
-            and status =#{condition.status,jdbcType=CHAR}
+        /*结束时间*/
+        <if test="condition.endTime!=null and condition.endTime!=''">
+            and inspectTime&lt;=#{condition.endTime,jdbcType=TIMESTAMP}
         </if>
+
     </sql>
 
     <select id="findList" resultMap="BaseResultMapVo">
@@ -328,4 +330,18 @@
     where
     name=#{name}
   </select>
+
+    <select id="selectListByKeyWord" parameterType="java.util.Map" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        from traffic t
+        where 1=1
+        <if test="params.keyWord!=null and params.keyWord!=''">
+          and (
+            t.plateNo like concat('%',#{params.keyWord,jdbcType=VARCHAR},'%')
+          )
+        </if>
+        order by t.createDate
+        limit 0,20
+    </select>
 </mapper>

@@ -28,6 +28,11 @@ p.id,p.name,p.paperworkId,p.headImgUrl,p.phoneNumber,p.companyId,p.areaCode,p.ad
 p.certNumber,p.driverLicenseCode,p.remark,p.status,p.createUserId,p.createUserName,p.createDate,
 p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.department_name as deptName
   </sql>
+    <sql id="Base_Column_List_Vo">
+        p.id,p.name,p.paperworkId,p.headImgUrl,p.phoneNumber,p.companyId,p.areaCode,p.address,
+        p.certNumber,p.driverLicenseCode,p.remark,p.status,p.createUserId,p.createUserName,p.createDate,
+        p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.department_name as deptName
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMapVo" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
@@ -277,7 +282,7 @@ p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.de
     <select id="findList" resultMap="BaseResultMapVo">
         select m.* from(
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List_Vo"/>
         <include refid="whereCondition"/>
         ) m
         <choose>
@@ -306,7 +311,7 @@ p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.de
     </select>
 
     <select id="selectPerson" resultType="map">
-        select t.id,concat(t.name,'+(',t.paperworkId,')') as name
+        select t.id, t.name, t.paperworkId
         from person t
         where 0=0
         <if test='params.q !=null and params.q!=""'>

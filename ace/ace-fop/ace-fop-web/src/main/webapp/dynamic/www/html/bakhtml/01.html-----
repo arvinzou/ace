@@ -28,7 +28,7 @@
 <div class="head_top">
         <span class="head_welcome">欢迎您：</span>
         <a class="head_user_name" href="user.html">湖南省常德市工商联测试用户</a>
-        <span class="head_welcome">所属企业：方欣科技有限公司</span>
+        <span class="head_welcome">所属企业：湖南华彩伟业网络科技有限公司</span>
         <a class="head_login" href="#">切换身份</a>
         <a class="head_login"  href="index-login.html">退出</a>
     </div>
@@ -44,7 +44,7 @@
       <h3></h3>
           <a href="#">按期应申报</a> 
           <a href="#">其他应申报</a>    
-          <a href="#">清缴税款</a>    
+          <a href="#">缴纳会费</a>
           <a href="#">申报作废</a>    
           <a href="#">社保费管理</a>    
           <a href="#">申报查询及打印</a>    
@@ -52,31 +52,31 @@
       </div>
       </div>
       </li>
-      <li><a href="03.html">申报缴税</a></li>
+      <li><a href="03.html">会员费用</a></li>
       <li><a href="04.html">事项办理</a></li>
       <li><a href="05.html">待办提醒</a></li>
-      <li><a href="06.html">涉税查询</a>
+      <li><a href="06.html">服务查询</a>
       <div class="head_menu_erji">
       <div>
       <h3>一户式查询</h3>
           <a href="#">按期应申报</a> 
           <a href="#">其他应申报</a>    
-          <a href="#">清缴税款</a>    
+          <a href="#">缴纳会费</a>
           <a href="#">申报作废</a>    
           <a href="#">社保费管理</a>    
           <a href="#">申报查询及打印</a>    
           <a href="#">缴款查询及打印</a> 
-        <h3>公众查询</h3>
+        <h3>企业服务</h3>
          <a href="#">按期应申报</a> 
           <a href="#">其他应申报</a>    
-          <a href="#">清缴税款</a>    
+          <a href="#">缴纳会费</a>
           <a href="#">申报作废</a>    
           <a href="#">社保费管理</a>    
           <a href="#">申报查询及打印</a>    
           <a href="#">缴款查询及打印</a> 
            <a href="#">按期应申报</a> 
           <a href="#">其他应申报</a>    
-          <a href="#">清缴税款</a>    
+          <a href="#">缴纳会费</a>
           <a href="#">申报作废</a>    
           <a href="#">社保费管理</a>    
           <a href="#">申报查询及打印</a>    
@@ -131,7 +131,7 @@
   <li><i><img src="../images/index/cx_ico13.png"></i><a href="#">出口企业管理类别查询</a></li>
   <li class="mar"><i><img src="../images/index/cx_ico3.png"></i><a href="#">发票流向查询</a></li>
   <li><i><img src="../images/index/cx_ico4.png"></i><a href="#">税务登记信息查询</a></li>
-  <li><i><img src="../images/index/cx_ico5.png"></i><a href="#">一般纳税人资格查询</a></li>
+  <li><i><img src="../images/index/cx_ico5.png"></i><a href="#">一般费用人资格查询</a></li>
   <li class="mar"><i><img src="../images/index/cx_ico6.png"></i><a href="#">申报情况查询</a></li>
   <li><i><img src="../images/index/cx_ico7.png"></i><a href="#">电子文书验证查询</a></li>
   <li><i><img src="../images/index/cx_ico8.png"></i><a href="#">出口退税率查询</a></li>
@@ -145,7 +145,7 @@
 <div class="tltlebox"> <ul> <span>智能、人性化的互动服务</span></ul> </div>
 <div class="hdfw_box">
 <ul>
- <a href="#"><img src="../images/index/hd_ico1.png"><span>涉税举报</span></a>
+ <a href="#"><img src="../images/index/hd_ico1.png"><span>服务举报</span></a>
  <a href="#"><img src="../images/index/hd_ico2.png"><span>服务投诉</span></a>
  <a href="#"><img src="../images/index/hd_ico3.png"><span>在线咨询</span></a>
  <a href="#"><img src="../images/index/hd_ico4.png"><span>满意度调查</span></a>

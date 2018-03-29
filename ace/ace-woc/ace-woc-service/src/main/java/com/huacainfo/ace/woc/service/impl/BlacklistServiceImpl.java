@@ -53,7 +53,7 @@ public class BlacklistServiceImpl implements BlacklistService {
     public PageResult<BlacklistVo> findBlacklistList(BlacklistQVo condition, int start,
                                                      int limit, String orderBy) throws Exception {
         PageResult<BlacklistVo> rst = new PageResult<BlacklistVo>();
-        List<BlacklistVo> list = this.blacklistDao.findList(condition,
+        List<BlacklistVo> list = this.blacklistDao.findLists(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {

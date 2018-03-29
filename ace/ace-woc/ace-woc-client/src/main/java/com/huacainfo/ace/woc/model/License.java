@@ -1,8 +1,10 @@
 package com.huacainfo.ace.woc.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class License {
+public class License implements Serializable{
+    private static final long serialVersionUID = 2648618122780760299L;
     private String id;
     /**
      * 1: '身份证', 2: '驾驶证', 3: '行驶证', 4: '营业证', 5: '交通运输许可证'

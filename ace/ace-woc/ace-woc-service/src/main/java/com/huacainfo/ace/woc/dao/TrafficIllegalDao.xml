@@ -174,4 +174,43 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.TrafficIllegalVo"></resultMap>
+
+  <sql id="whereCondition">
+    from traffic_illegal
+    where 0=0
+  </sql>
+
+  <select id="findList" resultMap="BaseResultMapVo">
+    select m.* from(
+    select
+    <include refid="Base_Column_List"/>
+    <include refid="whereCondition"/>
+    ) m
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY m.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY m.createDate
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from traffic_illegal
+    where
+    trafficId=#{trafficId}
+  </select>
+
+
 </mapper>

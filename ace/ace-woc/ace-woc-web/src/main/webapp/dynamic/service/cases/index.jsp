@@ -33,14 +33,15 @@
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
+                    车牌号： <input name="plateNo" type="text" style="width: 200px;"/>
+                    时间：
+                    <input class="easyui-datetimebox" name="startDate" style="width:200px;">
+                    至
+                    <input class="easyui-datetimebox" name="endDate" style="width:200px;">
 
-                    车牌号： <input name="s_vehicleno" type="text" style="width: 200px;"/>
-
-                    时间： <input name="s_startdt" type="text" style="width: 200px;"/>至
-                    <input name="s_enddt" type="text" style="width: 200px;"/>
-
+                    <%--查询按钮--%>
                     <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/case/findCaseList">
+                            authority="${pageContext.request.contextPath}/cases/findCasesList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
                 </form>
@@ -49,34 +50,29 @@
                 <div id="toolbar" class="toolbar">
                     <%--审核--%>
                     <button class="btn btn-purple" id="btn-view-audit"
-                            authority="${pageContext.request.contextPath}/case/audit">
+                            authority="${pageContext.request.contextPath}/cases/audit">
                         <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
                     </button>
 
                     <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/case/insertCase">
+                            authority="${pageContext.request.contextPath}/cases/insertCases">
                         <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/case/updateCase">
+                            authority="${pageContext.request.contextPath}/cases/updateCases">
                         <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/case/deleteCaseByCaseId">
+                            authority="${pageContext.request.contextPath}/cases/deleteCasesByCasesId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
-
                 </div>
             </div>
         </div>
     </div>
 
     <table id="grid-table"></table>
-
     <div id="grid-pager"></div>
-
-
 </div>
 <div id="dialog-message" class="hide">
     <div id="uploader">
@@ -106,25 +102,27 @@
             <span id="caseDate"></span>
         </div>
         <div class="labelItem">
-
-            <span class="labelItemHeader">通行记录主键</span>
+            <span class="labelItemHeader">通行记录</span>
             <br>
             <span id="trafficId"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">车辆记录主键</span>
+            <span class="labelItemHeader">车牌号</span>
             <br>
-            <span id="vehicleId"></span>
+            <span id="vehicleId" class="hide"></span>
+            <span id="plateNo"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">驾驶人记录主键</span>
+            <span class="labelItemHeader">驾驶人</span>
             <br>
-            <span id="driver"></span>
+            <span id="driver" class="hide"></span>
+            <span id="driverName"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">当事人记录主键</span>
+            <span class="labelItemHeader">当事人</span>
             <br>
-            <span id="party"></span>
+            <span id="party" class="hide"></span>
+            <span id="partyName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">当事人类型</span>
@@ -134,7 +132,8 @@
         <div class="labelItem">
             <span class="labelItemHeader">案件处理人1</span>
             <br>
-            <span id="chp1"></span>
+            <span id="chp1" class="hide"></span>
+            <span id="chp1Name"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">执法证号</span>
@@ -144,12 +143,14 @@
         <div class="labelItem">
             <span class="labelItemHeader">案件处理人2</span>
             <br>
-            <span id="chp2"></span>
+            <span id="chp2" class="hide"></span>
+            <span id="chp2Name"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">记录人</span>
             <br>
-            <span id="recorder"></span>
+            <span id="recorder" class="hide"></span>
+            <span id="recorderName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">笔录时间</span>
@@ -164,7 +165,8 @@
         <div class="labelItem">
             <span class="labelItemHeader">审核部门</span>
             <br>
-            <span id="auditDept"></span>
+            <span id="auditDept" class="hide"></span>
+            <span id="auditDeptName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">备注</span>
@@ -213,10 +215,10 @@
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
-<script src="${pageContext.request.contextPath}/content/service/case/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/case/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/case/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/case/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/cases/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/cases/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/cases/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/cases/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

@@ -1,9 +1,9 @@
 var cfg = {};
-cfg.view_load_data_url = contextPath + '/case/selectCaseByPrimaryKey';
-cfg.grid_load_data_url = contextPath + '/case/findCaseList';
-cfg.grid_add_data_url = contextPath + '/case/insertCase';
-cfg.grid_edit_data_url = contextPath + '/case/updateCase';
-cfg.grid_delete_data_url = contextPath + '/case/deleteCaseByCaseId';
+cfg.view_load_data_url = contextPath + '/cases/selectCasesByPrimaryKey';
+cfg.grid_load_data_url = contextPath + '/cases/findCasesList';
+cfg.grid_add_data_url = contextPath + '/cases/insertCases';
+cfg.grid_edit_data_url = contextPath + '/cases/updateCases';
+cfg.grid_delete_data_url = contextPath + '/cases/deleteCasesByCasesId';
 cfg.grid_selector= "#grid-table";
 cfg.pager_selector= "#grid-pager";
 //cfg.caption= "参数";
