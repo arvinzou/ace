@@ -201,7 +201,7 @@ var _colModel = function () {
             width: 100,
             edittype: "combogrid",
             dataoptions: {
-                panelWidth: 400,
+                panelWidth: 300,
                 idField: 'id',
                 textField: 'name',
                 url: contextPath + '/road/selectRoad',
@@ -209,9 +209,13 @@ var _colModel = function () {
                 fitColumns: true,
                 method: 'get',
                 columns: [[{
-                    field: 'name',
-                    title: '道路名称——道路编号',
-                    width: 200
+                    field: 'roadName',
+                    title: '道路名称',
+                    width: 100
+                }, {
+                    field: 'roadCode',
+                    title: '道路编号',
+                    width: 50
                 }]]
             },
             editoptions: {

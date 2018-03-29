@@ -290,7 +290,7 @@
     </select>
 
     <select id="selectRoad" resultType="map">
-        select t.id,concat(t.roadName,'+',t.roadCode) as name
+        select t.id,t.roadName,t.roadCode
         from road t
         where 0=0
         <if test='params.q !=null and params.q!=""'>
