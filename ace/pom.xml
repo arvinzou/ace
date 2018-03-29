@@ -63,8 +63,8 @@
         <module>ace-common-web</module>
         <module>ace-portal</module>
         <module>ace-jxb</module>
-        <module>ace-fop</module>
-        <!--
+
+              <!--
 
         <module>ace-live</module>
         <module>ace-iop</module>

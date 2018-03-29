@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/ace-iop/ace-iop-rest" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-iop/ace-iop-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-jxb/ace-jxb-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-live/ace-live-web" />
+    <file type="web" url="file://$PROJECT_DIR$/ace-portal/ace-portal-web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-portal/ace-portal-service/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ace-fop/ace-fop-client/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-fop/ace-fop-rest/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-fop/ace-fop-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-fop/ace-fop-web/pom.xml" />
+        <option value="$PROJECT_DIR$/ace-fop/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
