@@ -50,7 +50,7 @@ var _colModel = function () {
             width: 100,
             edittype: "combogrid",
             dataoptions: {
-                panelWidth: 400,
+                panelWidth: 300,
                 idField: 'id',
                 textField: 'name',
                 url: contextPath + '/person/selectPerson',
@@ -59,8 +59,12 @@ var _colModel = function () {
                 method: 'get',
                 columns: [[{
                     field: 'name',
-                    title: '姓名+(身份证)',
-                    width: 200
+                    title: '姓名',
+                    width: 50
+                }, {
+                    field: 'paperworkId',
+                    title: '身份证',
+                    width: 100
                 }]]
             },
             editoptions: {
