@@ -210,7 +210,6 @@
         name=#{name}
     </select>
     <select id="getLiveList" resultType="map">
-        <![CDATA[
 
         select
         2 commentApproveType,
@@ -219,19 +218,29 @@
         0 hasPassword,
         id,
         nop numOfPartake,
+        <![CDATA[
         (case  when nop<10000 then concat(nop,"") else concat(round(nop/10000,2),"万") end) numOfPartakeString,
+         ]]>
         0 partakeState,
         remark,
+        name,
+        createUserName,
+        imageSrc,
+        status,
         1 reportApproveType,
         startTime,
         status state,
         name topic,
         category type,
         null watermarkConfig from live where deptId=#{companyId}
+
+         <if test='type!=null and type!=""'>
+            and type like
+            concat('%',#{type,jdbcType=VARCHAR},'%')
+        </if>
         order by status, startTime desc
         limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
 
-        ]]>
     </select>
     <select id="getLive" resultType="map">
         <![CDATA[
