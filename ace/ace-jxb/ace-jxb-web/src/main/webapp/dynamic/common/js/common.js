@@ -135,3 +135,8 @@ var reportAudioTemplate = '<li id="[id]">' +
     '                </span>[btnSpace]' +
     '            </div>' +
     '        </li>';
+
+var sliceTextTemplate = '<div class="[activity]" style="border-bottom-radius: 80%;">' +
+    '                    <img src="[sliceImg]" alt="[slide]" style="height: 3rem; width: 100%; object-fit: cover; ;"/>' +
+    '               '
+    ' </div>';

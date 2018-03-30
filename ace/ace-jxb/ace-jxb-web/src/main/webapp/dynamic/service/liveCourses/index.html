@@ -20,14 +20,13 @@
     <script type="text/javascript" src="../../common/js/plupload.full.min.js"></script>
     <script type="text/javascript" src="../../common/js/common.js"></script>
     <script src="../../../content/www/js/init-rem.js"></script>
+    <script src="../../../content/www/js/juicer-min.js"></script>
+    <script src="../../../content/www/jxb/jxb.js"></script>
     <title>精品课程</title>
-    <style>
-
-    </style>
 </head>
 
-<body>
-<div class="container-fluid jxbcontent" style="width:10rem;">
+<body  style="width:10rem;">
+<div class="container-fluid jxbcontent">
     <div class="row" style="width:100%;height:4rem;">
         <div id="myCarousel" class="carousel slide">
             <!-- 轮播（Carousel）指标 -->
@@ -37,24 +36,24 @@
                 <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
             <!-- 轮播（Carousel）项目 -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="../liveCoursesbak/html/img/1.jpg"  alt="First slide" style="height: 3rem; width: 100%; object-fit: cover;">
+            <div class="carousel-inner" id="sliceImgContainer">
+               <!-- <div class="item active">
+                    <img src="html/img/1.png" alt="First slide" style="height: 3rem; width: 100%; object-fit: cover;"/>
                 </div>
                 <div class="item">
-                    <img src="../liveCoursesbak/html/img/2.jpg" alt="Second slide" style="height: 3rem; width: 100%; object-fit: cover;">
+                    <img src="html/img/2.png" alt="Second slide" style="height: 3rem; width: 100%; object-fit: cover;">
                 </div>
                 <div class="item">
-                    <img src="../liveCoursesbak/html/img/3.jpg" alt="Third slide" style="height: 3rem; width: 100%; object-fit: cover;">
-                </div>
+                    <img src="html/img/3.png" alt="Third slide" style="height: 3rem; width: 100%; object-fit: cover;">
+                </div>-->
             </div>
         </div>
     </div>
-    <div class="row" style="text-align:center;color: #aaa; width:100%;" >
+    <div class="row" style="text-align:center;color: #aaa; width:100%;margin-bottom: 1rem;" >
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
             <div class="formRow-content courseType" data-field="type"  onclick="changeCourseTab('01')">
                 <div style="width: 1.5rem;height:1.5rem;background-color: #7a8479;border-radius:50%;margin: 0 auto;">
-
+                    <img src="html/img/qzgy.png" height="100%" width="100%"/>
                 </div>
                 <div class="title" style="font-size: 0.05em;">亲子关系</div>
             </div>
@@ -62,7 +61,7 @@
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
             <div class="formRow-content courseType" data-field="type" onclick="changeCourseTab('02')">
                 <div style="width: 1.5rem;height:1.5rem;background-color: #7a8479;border-radius:50%;margin: 0 auto;">
-
+                    <img src="html/img/hyjt.png" height="100%" width="100%"/>
                 </div>
                 <div class="title" style="font-size: 0.05em;">婚姻家庭</div>
             </div>
@@ -70,7 +69,7 @@
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
             <div class="formRow-content courseType" data-field="type"  onclick="changeCourseTab('03')">
                 <div style="width: 1.5rem;height:1.5rem;background-color: #7a8479;border-radius:50%;margin: 0 auto;">
-
+                    <img src="html/img/qxtk.png" height="100%" width="100%"/>
                 </div>
                 <div class="title" style="font-size: 0.05em;">情绪调控</div>
             </div>
@@ -78,7 +77,7 @@
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
             <div class="formRow-content courseType" data-field="type"   onclick="changeCourseTab('04')">
                 <div style="width: 1.5rem;height:1.5rem;background-color: #7a8479;border-radius:50%;margin: 0 auto;">
-
+                    <img src="html/img/zcyl.png" height="100%" width="100%"/>
                 </div>
                 <div class="title" style="font-size: 0.05em;">职场压力</div>
             </div>

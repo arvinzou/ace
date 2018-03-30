@@ -3,7 +3,7 @@ var orderByStr = '';
 $(function () {
     initWeb();
     /*修改直播状态*/
-    $('.sceneList').on('click', '.changeLiveStatus', changeLiveStatusDo);
+   // $('.sceneList').on('click', '.changeLiveStatus', changeLiveStatusDo);
     $('.sceneList').on('click', '.reportNum', viewReportListByIdDo);
     /*根据直播名查找*/
     $('.search').click(searchByNameDo);
@@ -13,7 +13,15 @@ $(function () {
     $('.sceneList').on('click', '.picbar', modifyLiveDo);
     /*按时间排序*/
     $('.topToolBtn').on('click', '.sortLive', sortLiveByTimeDo);
+    /*进入直播页面*/
+    $('.sceneList').on('click', '.changeLiveStatus', viewLive);
 });
+
+/*进入直播页面*/
+function viewLive(){
+    var id = $(this).parents('li').data('Liveid');
+    location.href = "../../../www/view/jxb.html?companyId=0001" + "&id=" + id;
+}
 
 /*查看报道列表*/
 function viewReportListByIdDo() {
@@ -89,10 +97,24 @@ function viewLiveList(data) {
         var $li = $(liLive).data("Liveid", data[i].id);
         $('.sceneList').append($li);
     }
+    //渲染图片轮播页面
+    var slideData = ["First slide", "Second slide", "Third slide"];
+    for(var j=0; j < 3; j++){
+        var sliceImg = sliceTextTemplate;
+        //初始化时默认显示第一张图片
+        if(j <1) {
+            sliceImg = sliceImg.replace('[activity]', "item active");
+        }else{
+            sliceImg = sliceImg.replace('[activity]', "item");
+        }
+        sliceImg = sliceImg.replace('[sliceImg]', imgHost + data[j].imageSrc);
+        sliceImg = sliceImg.replace('[slide]', slideData[j]);
+        $('#sliceImgContainer').append($(sliceImg));
+    }
 }
 
 /*切换直播状态*/
-function changeLiveStatusDo() {
+/*function changeLiveStatusDo() {
     console.log('切换直播');
     var id = $(this).parents('li').data('Liveid');
     var url = '/jxb/jxb/selectLiveByPrimaryKey.do';
@@ -104,7 +126,7 @@ function changeLiveStatusDo() {
             modifyStatus(result.value);
         }
     });
-}
+}*/
 
 /*更改状态*/
 function modifyStatus(dataLive) {
@@ -223,3 +245,4 @@ function getzf(num){
     }
     return num;
 }
+
