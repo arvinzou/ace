@@ -109,6 +109,7 @@ function viewLiveList(data) {
         }
         sliceImg = sliceImg.replace('[sliceImg]', imgHost + data[j].imageSrc);
         sliceImg = sliceImg.replace('[slide]', slideData[j]);
+        sliceImg = sliceImg.replace('[sliceName]', data[j].name);
         $('#sliceImgContainer').append($(sliceImg));
     }
 }
