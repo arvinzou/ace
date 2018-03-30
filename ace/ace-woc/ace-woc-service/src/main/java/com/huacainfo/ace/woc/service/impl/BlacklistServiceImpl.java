@@ -1,27 +1,26 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.dao.BlacklistDao;
 import com.huacainfo.ace.woc.model.Blacklist;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.service.BlacklistService;
-import com.huacainfo.ace.woc.vo.BlacklistVo;
 import com.huacainfo.ace.woc.vo.BlacklistQVo;
+import com.huacainfo.ace.woc.vo.BlacklistVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service("blacklistService")
 /**
@@ -78,9 +77,9 @@ public class BlacklistServiceImpl implements BlacklistService {
     public MessageResponse insertBlacklist(Blacklist o, UserProp userProp)
             throws Exception {
 
-        if(CommonUtils.isBlank(o.getPersonId())
+        if (CommonUtils.isBlank(o.getPersonId())
                 && CommonUtils.isBlank(o.getVehicleId())
-                && CommonUtils.isBlank(o.getDepartmentId())){
+                && CommonUtils.isBlank(o.getDepartmentId())) {
             return new MessageResponse(1, "所属人，所属车辆，所属部门必选其一！");
         }
         if (CommonUtils.isBlank(o.getIsBlack())) {

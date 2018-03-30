@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.woc.constant.CaseStatus;
 import com.huacainfo.ace.woc.dao.CasesDao;
 import com.huacainfo.ace.woc.model.Cases;
 import com.huacainfo.ace.woc.service.CasesService;
@@ -126,7 +127,7 @@ public class CasesServiceImpl implements CasesService {
         o.setId(GUIDUtil.getGUID());
         o.setLastModifyDate(DateUtil.getNowDate());
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setStatus(CaseStatus.CASE_STATUS_SAVED);
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.casesDao.insertSelective(o);
@@ -230,11 +231,109 @@ public class CasesServiceImpl implements CasesService {
      * @version: 2018-03-28
      */
     @Override
-    public MessageResponse deleteCasesByCasesId(String id,
-                                                UserProp userProp) throws Exception {
+    public MessageResponse deleteCasesByCasesId(String id, UserProp userProp) throws Exception {
+
         this.casesDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除案件管理", "案件管理", String.valueOf(id),
                 String.valueOf(id), "案件管理", userProp);
         return new MessageResponse(0, "案件管理删除完成！");
+    }
+
+    /**
+     * 案件审核
+     *
+     * @param ids
+     * @param userProp
+     * @return
+     */
+    @Override
+    public MessageResponse auditCase(String ids, UserProp userProp) {
+        String[] idArray = ids.split(",");
+        Cases cases;
+        for (String id : idArray) {
+            cases = casesDao.selectByPrimaryKey(id);
+            if (null == cases) {
+                continue;
+            }
+            //非已提交状态案件，不允许更改为审核状态
+            if (CaseStatus.CASE_STATUS_SUBMIT.equals(cases.getStatus())) {
+                cases.setStatus(CaseStatus.CASE_STATUS_AUDITED);
+                cases.setLastModifyDate(DateUtil.getNowDate());
+                cases.setLastModifyUserId(userProp.getUserId());
+                cases.setLastModifyUserName(userProp.getName());
+                casesDao.updateByPrimaryKeySelective(cases);
+            } else {
+                return new MessageResponse(1, "案件状态异常！");
+            }
+        }
+
+        dataBaseLogService.log("案件审核管理", "案件审核", ids, ids, "案件管理", userProp);
+        return new MessageResponse(0, "案件审核完成！");
+    }
+
+    /**
+     * 案件提交审核
+     *
+     * @param ids
+     * @param userProp
+     * @return
+     */
+    @Override
+    public MessageResponse submitAuditCase(String ids, UserProp userProp) {
+        String[] idArray = ids.split(",");
+        Cases cases;
+        for (String id : idArray) {
+            cases = casesDao.selectByPrimaryKey(id);
+            if (null == cases) {
+                continue;
+            }
+            //非存盘/撤销状态案件，不允许提交审核
+            if (CaseStatus.CASE_STATUS_SAVED.equals(cases.getStatus()) ||
+                    CaseStatus.CASE_STATUS_REPEALED.equals(cases.getStatus())) {
+                cases.setStatus(CaseStatus.CASE_STATUS_SUBMIT);
+                cases.setLastModifyDate(DateUtil.getNowDate());
+                cases.setLastModifyUserId(userProp.getUserId());
+                cases.setLastModifyUserName(userProp.getName());
+                casesDao.updateByPrimaryKeySelective(cases);
+            } else {
+                return new MessageResponse(1, "案件状态异常！");
+            }
+        }
+
+        dataBaseLogService.log("案件提交审核", "案件提交审核", ids, ids, "案件管理", userProp);
+        return new MessageResponse(0, "案件提交审核完成！");
+    }
+
+    /**
+     * 案件撤销
+     *
+     * @param ids      ids串
+     * @param userProp 登录用户信息
+     * @return
+     */
+    @Override
+    public MessageResponse repealCase(String ids, UserProp userProp) {
+        String[] idArray = ids.split(",");
+        Cases cases;
+        for (String id : idArray) {
+            cases = casesDao.selectByPrimaryKey(id);
+            if (null == cases) {
+                continue;
+            }
+            //非存盘/待审核状态案件，不允许撤销
+            if (CaseStatus.CASE_STATUS_SUBMIT.equals(cases.getStatus()) ||
+                    CaseStatus.CASE_STATUS_SAVED.equals(cases.getStatus())) {
+                cases.setStatus(CaseStatus.CASE_STATUS_REPEALED);
+                cases.setLastModifyDate(DateUtil.getNowDate());
+                cases.setLastModifyUserId(userProp.getUserId());
+                cases.setLastModifyUserName(userProp.getName());
+                casesDao.updateByPrimaryKeySelective(cases);
+            } else {
+                return new MessageResponse(1, "案件状态异常！");
+            }
+        }
+
+        dataBaseLogService.log("案件撤销", "案件撤销", ids, ids, "案件管理", userProp);
+        return new MessageResponse(0, "案件撤销完成！");
     }
 }
