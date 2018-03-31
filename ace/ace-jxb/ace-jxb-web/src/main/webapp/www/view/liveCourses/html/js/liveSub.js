@@ -58,9 +58,29 @@ function initWeb() {
         loadLiveList();
     });
 }
-
-/*下载直播数据*/
 function loadLiveList(type) {
+    var url = '/jxb/www/jxb/getListByCompany.do';
+    var data = {
+        // 'name': name,
+        'start': start,
+        'limit': limit,
+        'orderBy': orderByStr,
+        // 'status': jxbStatus,
+        //'deptId': userProp.corpId,
+        'type' : type,
+        'page' : 1,
+        'companyId':'0001',
+        'sord': 'asc'
+    }
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            viewLiveList(result.data);
+            viewSliceList(result.data);
+        }
+    })
+}
+/*下载直播数据*/
+function loadLiveListByType(type) {
     var url = '/jxb/www/jxb/getListByCompany.do';
     var data = {
         // 'name': name,
@@ -98,11 +118,15 @@ function viewLiveList(data) {
         liLive = liLive.replace('[startTime]', getMyDate(new Date(data[i].startTime))
         );
         //liLive = liLive.replace('[reportNum]', data[i].reportCount);
-        var status = data[i].status == 1 ? '进入直播' : (data[i].status == 2 ? '结束直播' : (data[i].status == 3 ? '恢复直播' : ''));
+        var status = data[i].status == 1 ? '进入' : (data[i].status == 2 ? '结束直播' : (data[i].status == 3 ? '恢复直播' : ''));
         liLive = liLive.replace('[status]', status);
         var $li = $(liLive).data("Liveid", data[i].id);
         $('.sceneList').append($li);
     }
+}
+
+/*渲染图片轮播页面*/
+function viewSliceList(data){
     //渲染图片轮播页面
     var slideData = ["First slide", "Second slide", "Third slide"];
     for(var j=0; j < 3; j++){
@@ -229,7 +253,7 @@ function viewCover(img) {
 function changeCourseTab(type){
     console.log(type);
     if(type != null && type != undefined){
-        loadLiveList(type);
+        loadLiveListByType(type);
     }
 }
 
