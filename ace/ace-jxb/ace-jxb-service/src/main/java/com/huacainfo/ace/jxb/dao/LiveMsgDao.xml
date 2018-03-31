@@ -28,7 +28,7 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.LiveMsg">
-        insert into jxb_msg (id, rid, uid,
+        insert into live_msg (id, rid, uid,
         status, createTime, content
         )
         values (#{id,jdbcType=VARCHAR}, #{rid,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR},
