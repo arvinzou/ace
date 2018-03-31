@@ -84,11 +84,17 @@ function loadLiveList(type) {
 /*渲染直播列表*/
 function viewLiveList(data) {
     $('.sceneList').empty();
+    var dataType = {
+        "01" : "亲子关系",
+        "02" : "婚姻家庭",
+        "03" : "情绪调控",
+        "04" : "职场压力"
+    };
     for (var i = 0; i < data.length; i++) {
         var liLive = jxbTemplate;
         liLive = liLive.replace('[imageSrc]', imgHost + data[i].imageSrc);
         liLive = liLive.replace('[name]', data[i].name);
-        liLive = liLive.replace('[createUserName]', data[i].createUserName);
+        liLive = liLive.replace('[type]', dataType[data[i].type]);
         liLive = liLive.replace('[startTime]', getMyDate(new Date(data[i].startTime))
         );
         //liLive = liLive.replace('[reportNum]', data[i].reportCount);

@@ -17,9 +17,9 @@ var jxbTemplate = ' <li>' +
     '                <div class="jxbtitle omission">[name]</div>' +
     '            </div>' +
     '            <div class="msgbar fn-clear"> ' +
-    '            	<span class="omission msgbar-common creater">' +
-    '            		<i class="iconfont">&#xe61a;</i>[createUserName]' +
-    '            	</span>' +
+                    '<span class="omission msgbar-common creater">' +
+'            		  <i>#</i>[type]<i>#</i>' +
+'            	</span>' +
     '                <span class="msgbar-common msgbar-time">' +
     '            		<i class="iconfont">&#xe651;</i>[startTime]' +
     '            	</span>' +

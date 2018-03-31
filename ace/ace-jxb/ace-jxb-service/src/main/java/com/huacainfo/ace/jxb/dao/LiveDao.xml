@@ -231,7 +231,8 @@
         startTime,
         status state,
         name topic,
-        category type,
+        category,
+        type,
         null watermarkConfig from live where deptId=#{companyId}
 
          <if test='type!=null and type!=""'>
