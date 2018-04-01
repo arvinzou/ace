@@ -252,8 +252,8 @@
                     return 'video/ogg';
                 case '1a45dfa3':
                     return 'video/mkv';
-                case '000001ba':
-                case '000001b3':
+                case '000010007ba':
+                case '000010007b3':
                     return 'video/mpeg';
                 case '3026b275':
                     return 'video/wmv';

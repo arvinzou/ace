@@ -63,6 +63,7 @@
         <module>ace-common-web</module>
         <module>ace-portal</module>
         <module>ace-jxb</module>
+        <module>ace-kernel</module>
 
               <!--
 
@@ -75,7 +76,7 @@
 
         <module>ace-jave</module>
         <module>ace-uf</module>
-        <module>ace-kernel</module>
+
         <module>ace-rvc</module>
         <module>ace-luohua</module>
         <module>ace-workflow</module>

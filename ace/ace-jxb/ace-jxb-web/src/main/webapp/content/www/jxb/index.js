@@ -1,6 +1,6 @@
 function getList() {
     loadList || (loadList = !0, lvsCmd.ajax(apiServer + "/www/jxb/getListByCompany.do", {
-            companyId: "0001",
+            companyId: "0010007",
             page: listPage || 1
         },
         function (i, g) {
@@ -12,7 +12,7 @@ function getList() {
             $("#add_note_icon").on(tap,
                 function () {
                     console.log(i);
-                    location.href = "jxb_create.html?id=" + lvsCmd.urlParams.id + "&companyId=0001";
+                    location.href = "jxb_create.html?id=" + lvsCmd.urlParams.id + "&companyId=0010007";
                     // console.log("**********跳转创建直播*********");
                 });
 
@@ -24,7 +24,7 @@ function getList() {
                 $("#j-jxblist").append(e),
                     e.find("li").on(tap,
                         function () {
-                            location.href = "jxb.html?companyId=0001" + "&showlink=" + showlink + "&id=" + $(this).data("id")
+                            location.href = "jxb.html?companyId=0010007" + "&showlink=" + showlink + "&id=" + $(this).data("id")
                         })
             } else lvsCmd.alert(g.errMsg);
             loadList = !1
@@ -60,7 +60,7 @@ var listPage = 1,
         link: document.URL
     };
 lvsCmd.ajax(apiServer + "/www/jxb/getShareContent.do", {
-        companyId: "0001"
+        companyId: "0010007"
     },
     function (i, g) {
         if (i) {

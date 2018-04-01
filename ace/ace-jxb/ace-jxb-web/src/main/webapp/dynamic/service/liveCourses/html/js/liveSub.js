@@ -20,7 +20,7 @@ $(function () {
 /*进入直播页面*/
 function viewLive(){
     var id = $(this).parents('li').data('Liveid');
-    location.href = "../../../www/view/jxb.html?companyId=0001" + "&id=" + id;
+    location.href = "../../../www/view/jxb.html?companyId=0010007" + "&id=" + id;
 }
 
 /*查看报道列表*/
@@ -71,7 +71,7 @@ function loadLiveList(type) {
         //'deptId': userProp.corpId,
         'type' : type,
         'page' : 1,
-        'companyId':'0001',
+        'companyId':'0010007',
         'sord': 'asc'
     }
     $.getJSON(url, data, function (result) {
