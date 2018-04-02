@@ -96,7 +96,7 @@ var _colModel = function () {
                 required : false
             },
             renderer : function(value, cur) {
-                return $.jgrid.getAccessor(cur, 'deptName');
+                return $.jgrid.getAccessor(cur, 'departmentName');
             },
         },
         /*轴数*/

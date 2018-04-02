@@ -68,7 +68,9 @@
                 roadLength,
             </if>
             <if test="constructDate != null">
-                constructDate,
+                <if test="constructDate != ''">
+                    constructDate,
+                </if>
             </if>
             <if test="adminDepId != null">
                 adminDepId,
@@ -118,7 +120,9 @@
                 #{roadLength,jdbcType=BIGINT},
             </if>
             <if test="constructDate != null">
-                #{constructDate,jdbcType=TIMESTAMP},
+                <if test="constructDate != ''">
+                    #{constructDate,jdbcType=TIMESTAMP},
+                </if>
             </if>
             <if test="adminDepId != null">
                 #{adminDepId,jdbcType=VARCHAR},
@@ -168,7 +172,9 @@
                 roadLength = #{roadLength,jdbcType=BIGINT},
             </if>
             <if test="constructDate != null">
-                constructDate = #{constructDate,jdbcType=TIMESTAMP},
+                <if test="constructDate != ''">
+                    constructDate = #{constructDate,jdbcType=TIMESTAMP},
+                </if>
             </if>
             <if test="adminDepId != null">
                 adminDepId = #{adminDepId,jdbcType=VARCHAR},
@@ -258,18 +264,18 @@
     </sql>
 
     <!--<sql id="whereCondition">-->
-        <!--from road-->
-        <!--where 1 = 1-->
-        <!--<if test="condition.roadName!=null and condition.roadName!=&quot;&quot;">-->
-            <!--and roadName like-->
-            <!--concat(#{condition.roadName,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
+    <!--from road-->
+    <!--where 1 = 1-->
+    <!--<if test="condition.roadName!=null and condition.roadName!=&quot;&quot;">-->
+    <!--and roadName like-->
+    <!--concat(#{condition.roadName,jdbcType=VARCHAR},'%')-->
+    <!--</if>-->
     <!--</sql>-->
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.woc.model.Road">
         select count(*)
         from road
-        where id = #{id,jdbcType=VARCHAR}
+        where roadName = #{roadName,jdbcType=VARCHAR}
     </select>
 
     <select id="findCount" resultType="int">
@@ -290,12 +296,13 @@
     </select>
 
     <select id="selectRoad" resultType="map">
-        select t.id,concat(t.roadName,'+',t.roadCode) as name
+        select t.id,t.roadName,t.roadCode
         from road t
         where 0=0
         <if test='params.q !=null and params.q!=""'>
             and
-            t.id=#{params.q} or t.roadName like concat('%',#{params.q},'%') or t.roadCode like concat('%',#{params.q},'%')
+            t.id=#{params.q} or t.roadName like concat('%',#{params.q},'%') or t.roadCode like
+            concat('%',#{params.q},'%')
         </if>
         order by t.createDate
         limit 0,20
