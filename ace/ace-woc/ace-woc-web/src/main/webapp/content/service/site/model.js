@@ -156,7 +156,7 @@ var _colModel = function () {
                 required: false
             },
             renderer: function (value, cur) {
-                return $.jgrid.getAccessor(cur, 'deptName');
+                return $.jgrid.getAccessor(cur, 'buildDeptName');
             },
         },
         /*建造时间*/
@@ -203,7 +203,7 @@ var _colModel = function () {
             dataoptions: {
                 panelWidth: 300,
                 idField: 'id',
-                textField: 'name',
+                textField: 'roadName',
                 url: contextPath + '/road/selectRoad',
                 mode: 'remote',
                 fitColumns: true,
@@ -240,7 +240,7 @@ var _colModel = function () {
                 required: false
             },
             renderer: function (value, cur) {
-                return $.jgrid.getAccessor(cur, 'deptName');
+                return $.jgrid.getAccessor(cur, 'adminDeptName');
             },
         },
         /*卡点运行状态*/
