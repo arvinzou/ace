@@ -148,7 +148,7 @@ newTplform.render($("#j-jxbform .row-content"),
             var summaryLength = $("#j-summary .j-content").val().length;
             $("#j-summary .j-remark-length").html(summaryLength + "/500"),
                 summaryLength > 500 ? $("#j-summary .j-remark-length").addClass("fn-color-red") :
-                    $("#j-summary .j-remark-length").removeClass("fn-color-red")
+                    $("#j-summary .j-remark-length").removeClass("fn-color-red");
             //地点
             var addrLength = $("#j-addr .j-content").val().length;
             $("#j-addr .j-remark-length").html(addrLength + "/200"),
