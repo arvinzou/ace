@@ -180,6 +180,9 @@
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and status =#{condition.status,jdbcType=CHAR}
         </if>
+        <if test="condition.type!=null and condition.type!=&quot;&quot;">
+            and type =#{condition.type,jdbcType=VARCHAR}
+        </if>
     </sql>
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
