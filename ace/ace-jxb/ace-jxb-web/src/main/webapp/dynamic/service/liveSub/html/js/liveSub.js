@@ -60,7 +60,7 @@ function loadLiveList(name, jxbStatus) {
         'limit': limit,
         'orderBy': orderByStr,
         'status': jxbStatus,
-        'deptId': userProp.corpId,
+        'deptId': '0010007',
         'sord': 'asc'
     }
     $.getJSON(url, data, function (result) {
@@ -73,11 +73,17 @@ function loadLiveList(name, jxbStatus) {
 /*渲染直播列表*/
 function viewLiveList(data) {
     $('.sceneList').empty();
+    var dataType = {
+        "01" : "亲子关系",
+        "02" : "婚姻家庭",
+        "03" : "情绪调控",
+        "04" : "职场压力"
+    };
     for (var i = 0; i < data.length; i++) {
         var liLive = jxbTemplate;
         liLive = liLive.replace('[imageSrc]', imgHost + data[i].imageSrc);
         liLive = liLive.replace('[name]', data[i].name);
-        liLive = liLive.replace('[createUserName]', data[i].createUserName);
+        liLive = liLive.replace('[createUserName]', dataType[data[i].type]);
         liLive = liLive.replace('[startTime]', data[i].startTime.substring(0, 16));
         liLive = liLive.replace('[reportNum]', data[i].reportCount);
         var status = data[i].status == 1 ? '开始直播' : (data[i].status == 2 ? '结束直播' : (data[i].status == 3 ? '恢复直播' : ''));
@@ -158,7 +164,7 @@ function modifyLiveDo(event) {
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
             $('#htmlLoad').load('./../html/floatTable.html', function () {
-                $('#floatTable').load('./../html/jxbForm.html', function () {
+                $('#floatTable').load('./../html/liveForm.html', function () {
                     $('#JSLoad').load('./../html/modifyLiveJS.html', function () {
                         showModifyWeb(result.value);
                     })
