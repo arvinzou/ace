@@ -97,7 +97,8 @@
         lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
         content = #{content,jdbcType=LONGVARCHAR},
-        type = #{type,jdbcType=VARCHAR},
+        type = #{type,jdbcType=VARCHAR}
+
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
