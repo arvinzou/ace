@@ -10,7 +10,7 @@ $(function () {
     /*按照状态分类*/
     $('.topToolBtn').on('change', '.jxbStatus', searchByStatusDo);
     /*点击修改直播内容*/
-    $('.sceneList').on('click', '.picbar', modifyLiveDo);
+    $('.sceneList').on('click', '.picbar', viewLive);
     /*按时间排序*/
     $('.topToolBtn').on('click', '.sortLive', sortLiveByTimeDo);
     /*进入直播页面*/
