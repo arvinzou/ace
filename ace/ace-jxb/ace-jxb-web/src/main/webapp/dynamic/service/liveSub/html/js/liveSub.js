@@ -83,7 +83,7 @@ function viewLiveList(data) {
         var liLive = jxbTemplate;
         liLive = liLive.replace('[imageSrc]', imgHost + data[i].imageSrc);
         liLive = liLive.replace('[name]', data[i].name);
-        liLive = liLive.replace('[createUserName]', dataType[data[i].type]);
+        liLive = liLive.replace('[type]', dataType[data[i].type]);
         liLive = liLive.replace('[startTime]', data[i].startTime.substring(0, 16));
         liLive = liLive.replace('[reportNum]', data[i].reportCount);
         var status = data[i].status == 1 ? '开始直播' : (data[i].status == 2 ? '结束直播' : (data[i].status == 3 ? '恢复直播' : ''));
