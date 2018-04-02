@@ -24,7 +24,8 @@ function getList() {
                 $("#j-jxblist").append(e),
                     e.find("li").on(tap,
                         function () {
-                            location.href = "jxb.html?companyId=0010007" + "&showlink=" + showlink + "&id=" + $(this).data("id")
+                           // location.href = "jxb.html?companyId=0010007" + "&showlink=" + showlink + "&id=" + $(this).data("id")
+                            location.href = "jxb_create.html?id=" + $(this).data("id") + "&companyId=0010007";
                         })
             } else lvsCmd.alert(g.errMsg);
             loadList = !1
