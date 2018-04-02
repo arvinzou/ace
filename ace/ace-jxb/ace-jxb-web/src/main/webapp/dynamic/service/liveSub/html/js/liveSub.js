@@ -52,7 +52,7 @@ function initWeb() {
 }
 
 /*下载直播数据*/
-function loadLiveList(name, jxbStatus) {
+function loadLiveList(name, jxbStatus,type) {
     var url = '/jxb/jxb/findLiveList.do';
     var data = {
         'name': name,
@@ -61,7 +61,8 @@ function loadLiveList(name, jxbStatus) {
         'orderBy': orderByStr,
         'status': jxbStatus,
         'deptId': '0010007',
-        'sord': 'asc'
+        'sord': 'asc',
+        'type':type
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -142,7 +143,8 @@ function modifyStatus(dataLive) {
 function searchByNameDo() {
     var jxbStatus = $('.jxbStatus').val();
     var inputName = $('.searchByName').val();
-    loadLiveList(inputName, jxbStatus);
+    var type = $('#type').val();
+    loadLiveList(inputName, jxbStatus,type);
 }
 
 /*根据状态查找*/
@@ -197,3 +199,13 @@ function viewCover(img) {
     $('.viewPicture img').prop('src', imagePath);
     $('.uploadText').hide();
 }
+$(function(){
+    var staticDictObjects;
+    if (!staticDictObjects) {
+        staticDictObjects = parent.staticDictObject;
+    }
+    var dict=staticDictObjects['121'];
+    for (var i = 0; i <dict .length; i++) {
+        $("#type").append("<option value='"+dict[i].CODE+"'>"+dict[i].NAME+"</option>");
+    }
+});
