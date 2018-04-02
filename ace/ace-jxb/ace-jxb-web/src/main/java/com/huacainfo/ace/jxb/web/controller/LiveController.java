@@ -50,7 +50,7 @@ public class LiveController extends LiveBaseController {
     public PageResult<LiveVo> findLiveList(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<LiveVo> rst = this.jxbService.findLiveList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());
-        condition.setDeptId(this.getCurUserProp().getCorpId());
+//        condition.setDeptId(this.getCurUserProp().getCorpId());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }

@@ -13,6 +13,7 @@ function releaseDo() {
     var id=$('#htmlLoad').data('jxbId');
     var remark=$('.remark').val().trim();
     var content=$('.content').val().trim();
+    var type= $(".formContenRight").find("#type").val();
     var addr=$('.addr').val().trim();
     var rtmpUrl=$('.rtmpUrl').val().trim();
     var mp4Url=$('.mp4Url').val().trim();
@@ -38,7 +39,8 @@ function releaseDo() {
         'imageSrc':imageSrc,
         'nop':nop,
         'pop':pop,
-        'status':status
+        'status':status,
+        'type':type
     }
     var url="/jxb/jxb/updateLiveSelective.do";
     var data={

@@ -13,6 +13,9 @@ $(function () {
     $('.sceneList').on('click', '.picbar', modifyLiveDo);
     /*按时间排序*/
     $('.topToolBtn').on('click', '.sortLive', sortLiveByTimeDo);
+
+     /*按照状态分类*/
+        $('#type').on('change', searchByStatusDo);
 });
 
 /*查看报道列表*/
@@ -179,6 +182,22 @@ function modifyLiveDo(event) {
 /*进入修改页*/
 function showModifyWeb(data) {
     $('.modify').show();
+     $(function(){
+            var staticDictObjects;
+            if (!staticDictObjects) {
+                staticDictObjects = parent.staticDictObject;
+            }
+            var dict=staticDictObjects['121'];
+            for (var i = 0; i <dict .length; i++) {
+
+
+                if(data.type==+dict[i].CODE){
+                     $(".formContenRight").find("#type").append("<option value='"+dict[i].CODE+"' selected>"+dict[i].NAME+"</option>");
+                }else{
+                     $(".formContenRight").find("#type").append("<option value='"+dict[i].CODE+"'>"+dict[i].NAME+"</option>");
+                }
+            }
+        });
     for (var item in data) {
         if (item == 'imageSrc') {
             viewCover(data[item]);
@@ -190,6 +209,7 @@ function showModifyWeb(data) {
             $('.' + item).val(data[item]);
         }
     }
+
 }
 
 /*图片上传成功后*/
