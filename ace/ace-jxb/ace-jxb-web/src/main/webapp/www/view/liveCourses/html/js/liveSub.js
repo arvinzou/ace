@@ -1,5 +1,5 @@
 var orderByStr = '';
-
+var sliceImgIds = [];
 $(function () {
     initWeb();
     /*修改直播状态*/
@@ -74,8 +74,8 @@ function loadLiveList(type) {
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            viewLiveList(result.data);
             viewSliceList(result.data);
+            viewLiveList(result.data);
         }
     })
 }
@@ -111,17 +111,19 @@ function viewLiveList(data) {
         "04" : "职场压力"
     };
     for (var i = 0; i < data.length; i++) {
-        var liLive = jxbTemplate;
-        liLive = liLive.replace('[imageSrc]', imgHost + data[i].imageSrc);
-        liLive = liLive.replace('[name]', data[i].name);
-        liLive = liLive.replace('[type]', dataType[data[i].type]);
-        liLive = liLive.replace('[startTime]', getMyDate(new Date(data[i].startTime))
-        );
-        //liLive = liLive.replace('[reportNum]', data[i].reportCount);
-        var status = data[i].status == 1 ? '进入' : (data[i].status == 2 ? '结束直播' : (data[i].status == 3 ? '恢复直播' : ''));
-        liLive = liLive.replace('[status]', status);
-        var $li = $(liLive).data("Liveid", data[i].id);
-        $('.sceneList').append($li);
+            if(sliceImgIds.indexOf(data[i].id) < 0){
+                var liLive = jxbTemplate;
+                liLive = liLive.replace('[imageSrc]', imgHost + data[i].imageSrc);
+                liLive = liLive.replace('[name]', data[i].name);
+                liLive = liLive.replace('[type]', dataType[data[i].type]);
+                liLive = liLive.replace('[startTime]', getMyDate(new Date(data[i].startTime))
+                );
+                //liLive = liLive.replace('[reportNum]', data[i].reportCount);
+                var status = data[i].status == 1 ? '进入' : (data[i].status == 2 ? '结束直播' : (data[i].status == 3 ? '恢复直播' : ''));
+                liLive = liLive.replace('[status]', status);
+                var $li = $(liLive).data("Liveid", data[i].id);
+                $('.sceneList').append($li);
+            }
     }
 }
 
@@ -130,6 +132,7 @@ function viewSliceList(data){
     //渲染图片轮播页面
     var slideData = ["First slide", "Second slide", "Third slide"];
     for(var j=0; j < 3; j++){
+        sliceImgIds[j] = data[j].id;
         var sliceImg = sliceTextTemplate;
         //初始化时默认显示第一张图片
         if(j <1) {
