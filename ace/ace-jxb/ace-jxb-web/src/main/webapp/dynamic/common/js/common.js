@@ -17,9 +17,9 @@ var jxbTemplate = ' <li>' +
     '                <div class="jxbtitle omission">[name]</div>' +
     '            </div>' +
     '            <div class="msgbar fn-clear"> ' +
-    '            	<span class="omission msgbar-common creater">' +
-    '            		<i class="iconfont">&#xe61a;</i>[createUserName]' +
-    '            	</span>' +
+                    '<span class="omission msgbar-common creater">' +
+'            		  <i>#</i>[type]<i>#</i>' +
+'            	</span>' +
     '                <span class="msgbar-common msgbar-time">' +
     '            		<i class="iconfont">&#xe651;</i>[startTime]' +
     '            	</span>' +
@@ -135,3 +135,10 @@ var reportAudioTemplate = '<li id="[id]">' +
     '                </span>[btnSpace]' +
     '            </div>' +
     '        </li>';
+
+var sliceTextTemplate = '<div class="[activity]" style="border-bottom-radius: 80%;">'+
+                                '<img src="[sliceImg]" alt="[slide]" style="height: 3rem; width: 100%; object-fit: cover;"/>'+
+                                '<div class="carousel-caption">'+
+                                    '<h4>[sliceName]</h4>'+
+                                '</div>'+
+    '</div>';

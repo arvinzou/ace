@@ -304,9 +304,13 @@
   </update>
 
     <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.woc.vo.CasesVo">
+        <result column="driverName" jdbcType="VARCHAR" property="driverName"/>
+        <result column="chp1Name" jdbcType="VARCHAR" property="chp1Name"/>
+        <result column="chp2Name" jdbcType="VARCHAR" property="chp2Name"/>
+
         <result column="partyName" jdbcType="VARCHAR" property="partyName"/>
         <result column="partyDeptName" jdbcType="VARCHAR" property="partyDeptName"/>
-        <result column="plateNo" jdbcType="VARCHAR" property="vehicleNo"/>
+        <result column="plateNo" jdbcType="VARCHAR" property="plateNo"/>
         <result column="axleCount" jdbcType="INTEGER" property="axleCount"/>
         <result column="totalMass" jdbcType="DECIMAL" property="totalMass"/>
         <result column="overMass" jdbcType="DECIMAL" property="overMass"/>
@@ -317,8 +321,11 @@
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Base_Column_List_Vo"/>
-        from cases
-        where id = #{id,jdbcType=VARCHAR}
+        from woc.cases t
+        left join woc.traffic tc on t.trafficId = tc.id
+        left join woc.person p on t.party = p.id
+        left join portal.department d on p.companyId = d.department_id
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <sql id="Base_Column_List_Vo">

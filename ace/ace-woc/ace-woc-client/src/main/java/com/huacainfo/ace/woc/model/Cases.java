@@ -40,6 +40,9 @@ public class Cases implements Serializable {
 
     private String remark;
 
+    /**
+     * 1 - 存盘，2 - 提交审核，3 - 案件撤销 ，4 - 案件已审核
+     */
     private String status;
 
     private String createUserId;

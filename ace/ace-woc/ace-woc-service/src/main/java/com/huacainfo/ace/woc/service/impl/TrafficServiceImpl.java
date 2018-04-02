@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.dao.TrafficDao;
@@ -77,11 +78,8 @@ public class TrafficServiceImpl implements TrafficService {
     @Override
     public MessageResponse insertTraffic(Traffic o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+
+
         if (CommonUtils.isBlank(o.getInspectTime())) {
             return new MessageResponse(1, "检查时间不能为空！");
         }
@@ -106,17 +104,14 @@ public class TrafficServiceImpl implements TrafficService {
         if (CommonUtils.isBlank(o.getOverRate())) {
             return new MessageResponse(1, "超限率不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
 
         int temp = this.trafficDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "通行记录名称重复！");
         }
+
+        o.setId(GUIDUtil.getGUID());
+        o.setLastModifyDate(DateUtil.getNowDate());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -168,13 +163,6 @@ public class TrafficServiceImpl implements TrafficService {
         if (CommonUtils.isBlank(o.getOverRate())) {
             return new MessageResponse(1, "超限率不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());

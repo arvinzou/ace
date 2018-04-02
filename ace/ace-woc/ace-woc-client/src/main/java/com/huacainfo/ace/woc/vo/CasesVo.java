@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class CasesVo extends Cases {
 	private static final long serialVersionUID = 1L;
 
-    private String vehicleNo;
+    private String plateNo;
 
     private String partyName;
 
@@ -41,6 +41,34 @@ public class CasesVo extends Cases {
      */
     private BigDecimal speed;
 
+    private String  driverName;
+    private String  chp1Name;
+    private String  chp2Name;
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
+
+    public String getChp1Name() {
+        return chp1Name;
+    }
+
+    public void setChp1Name(String chp1Name) {
+        this.chp1Name = chp1Name;
+    }
+
+    public String getChp2Name() {
+        return chp2Name;
+    }
+
+    public void setChp2Name(String chp2Name) {
+        this.chp2Name = chp2Name;
+    }
+
     public String getPartyName() {
         return partyName;
     }
@@ -49,12 +77,12 @@ public class CasesVo extends Cases {
         this.partyName = partyName;
     }
 
-    public String getVehicleNo() {
-        return vehicleNo;
+    public String getPlateNo() {
+        return plateNo;
     }
 
-    public void setVehicleNo(String vehicleNo) {
-        this.vehicleNo = vehicleNo;
+    public void setPlateNo(String plateNo) {
+        this.plateNo = plateNo;
     }
 
     public String getPartyDeptName() {

@@ -4,9 +4,9 @@ var _colModel = function() {
 		name : 'roleId',
 		index : 'roleId',
 		width : 8,
-		hidden:true,
+		hidden:false,
 		sortable : false,
-		editable : true,
+		editable : false,
 		editoptions : {
 			readonly : true
 		}

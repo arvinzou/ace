@@ -116,7 +116,7 @@ public class MyWebSocket {
      */
     @OnMessage
     public void onMessage(String message, Session session, @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("topic") String topic) {
-        logger.debug("rid:{} uid:{} 来自客户端的消息:{}", rid, uid, message);
+        logger.debug("rid:{} uid:{} 来自客户端的消息:{} topic :{}", rid, uid, message,topic);
 
         Map<String, String> data = new HashMap<String, String>();
         data.put("rid", rid);
