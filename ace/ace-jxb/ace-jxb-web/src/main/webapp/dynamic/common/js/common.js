@@ -136,7 +136,7 @@ var reportAudioTemplate = '<li id="[id]">' +
     '            </div>' +
     '        </li>';
 
-var sliceTextTemplate = '<div class="[activity]" style="border-bottom-radius: 80%;">'+
+var sliceTextTemplate = '<div class="[activity]">'+
                                 '<img src="[sliceImg]" alt="[slide]" style="height: 3rem; width: 100%; object-fit: cover;"/>'+
                                 '<div class="carousel-caption">'+
                                     '<h4>[sliceName]</h4>'+
