@@ -187,7 +187,8 @@ function modifyStatus(id,rid,status){
 function searchByNameDo() {
     var status = $('#chooseStatus').val();
     var inputName = $('.searchByName').val();
-    loadReportList(inputName, status);
+    var type = $('#type').val();
+    loadReportList(inputName, status,null,type);
 }
 
 /*渲染直播列表*/
@@ -231,7 +232,7 @@ function viewReportList(data) {
 }
 
 /*下载直播数据*/
-function loadReportList(content, status,orderByStr) {
+function loadReportList(content, status,orderByStr,type) {
     console.log('loadReportList');
     var url = '/jxb/jxbRpt/findLiveRptList.do';
     var data = {
@@ -240,7 +241,8 @@ function loadReportList(content, status,orderByStr) {
         'limit': limit,
         'orderBy': orderByStr,
         'status': status,
-        'sord': 'asc'
+        'sord': 'asc',
+        'type':type
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -311,7 +313,16 @@ function viewPreviewReport(data) {
 }
 
 
-
+$(function(){
+    var staticDictObjects;
+    if (!staticDictObjects) {
+        staticDictObjects = parent.staticDictObject;
+    }
+    var dict=staticDictObjects['121'];
+    for (var i = 0; i <dict .length; i++) {
+        $("#type").append("<option value='"+dict[i].CODE+"'>"+dict[i].NAME+"</option>");
+    }
+});
 
 
 

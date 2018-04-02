@@ -61,7 +61,7 @@ public class TokenThread implements Runnable {
 
     public static void main(String args[]) {
         Logger logger = LoggerFactory.getLogger(TokenThread.class);
-        AccessToken o = AccessTokenUtil.getAccessToken("wx29ecb720b03ea466", "03ea9a47442c14208943043e62114fc6");
+        AccessToken o = AccessTokenUtil.getAccessToken("wx6a39a6f86925a42d", "cb637c9f653a6db86c42f8e788a52c4a");
         logger.info("{}", o);
     }
 
