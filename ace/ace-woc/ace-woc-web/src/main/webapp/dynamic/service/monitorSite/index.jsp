@@ -148,7 +148,7 @@
         <div class="labelItem">
             <span class="labelItemHeader">所在地区</span>
             <br>
-            <span id="areaCode"></span>
+            <span id="areaName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">所处道路方向</span>

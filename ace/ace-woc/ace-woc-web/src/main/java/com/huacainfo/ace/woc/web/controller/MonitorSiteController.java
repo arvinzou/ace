@@ -70,7 +70,6 @@ public class MonitorSiteController extends WocBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 

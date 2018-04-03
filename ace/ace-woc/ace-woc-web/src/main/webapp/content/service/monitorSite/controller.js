@@ -302,7 +302,7 @@ function tablePreview(data) {
     for(var i=0;i<data.length;i++){
         var t=tableView.replace('[index]',i+1+'');
         t=t.replace('[deviceName]',data[i].deviceName);
-        t=t.replace('[deviceType]',data[i].deviceType);
+        t = t.replace('[deviceType]', rsd(data[i].deviceType, '117'));
         t=t.replace('[deviceNo]',data[i].deviceNo);
         $('#device-table').append($(t));
     }
@@ -319,8 +319,8 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                if (key == 'category') {
-                    value = rsd(value, '83');
+                if (key == 'monitorSiteStatus') {
+                    value = rsd(value, '123');
                 }
                 if (key == 'status') {
                     value == "1" ? "正常" : "关闭";

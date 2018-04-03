@@ -138,8 +138,11 @@ function loadView(id) {
 		},
 		success : function(rst, textStatus) {
 			$.each(rst.value, function(key, value) {
-				if (key == 'category') {
-                	value = rsd(value, '83');
+                if (key == 'deviceType') {
+                    value = rsd(value, '117');
+                }
+                if (key == 'deviceStatus') {
+                    value = rsd(value, '118');
                 }
                 if (key == 'status') {
                    value == "1" ? "正常" : "关闭";

@@ -135,9 +135,9 @@ public class MonitorSiteServiceImpl implements MonitorSiteService {
         if (CommonUtils.isBlank(o.getMonitorSiteStatus())) {
             return new MessageResponse(1, "监控点状态不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
+//        if (CommonUtils.isBlank(o.getStatus())) {
+//            return new MessageResponse(1, "状态不能为空！");
+//        }
 
 
         o.setLastModifyDate(new Date());
