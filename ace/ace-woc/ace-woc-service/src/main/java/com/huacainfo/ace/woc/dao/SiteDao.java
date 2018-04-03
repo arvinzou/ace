@@ -20,6 +20,8 @@ public interface SiteDao {
 
     SiteVo selectByPrimaryKey(String id);
 
+    SiteVo selectByPrimaryKeyInfo(String id);
+
     int updateByPrimaryKeySelective(Site record);
 
     int updateByPrimaryKey(Site record);
@@ -27,8 +29,12 @@ public interface SiteDao {
     int updateByPrimaryKey(Vehicle record);
 
     List<SiteVo> findList(@Param("condition") SiteQVo condition,
-                            @Param("start") int start, @Param("limit") int limit,
-                            @Param("orderBy") String orderBy);
+                          @Param("start") int start, @Param("limit") int limit,
+                          @Param("orderBy") String orderBy);
+
+    List<SiteVo> findListInfo(@Param("condition") SiteQVo condition,
+                              @Param("start") int start, @Param("limit") int limit,
+                              @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") SiteQVo condition);
 

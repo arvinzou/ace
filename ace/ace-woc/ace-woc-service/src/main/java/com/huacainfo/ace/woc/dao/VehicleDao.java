@@ -11,7 +11,7 @@ import java.util.Map;
 public interface VehicleDao {
     int deleteByPrimaryKey(String id);
 
-    int insert(Vehicle record);
+//    int insert(Vehicle record);
 
     int insertSelective(Vehicle record);
 

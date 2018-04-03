@@ -96,7 +96,8 @@ var _colModel = function () {
                 required : false
             },
             renderer : function(value, cur) {
-                return $.jgrid.getAccessor(cur, 'departmentName');
+                var departmentName = $.jgrid.getAccessor(cur, 'departmentName');
+                return departmentName ? departmentName : '';
             },
         },
         /*轴数*/
@@ -152,7 +153,7 @@ var _colModel = function () {
         },
         /*车辆识别代码*/
         {
-            name: 'VIN',
+            name: 'vIN',
             editable: true,
             hidden: true,
             width: 200,
@@ -174,7 +175,7 @@ var _colModel = function () {
         },
         /*行驶证注册日期*/
         {
-            name: 'RegisterDate',
+            name: 'registerDate',
             editable: true,
             hidden: true,
             width: 100,
@@ -211,7 +212,7 @@ var _colModel = function () {
         },
         /*行驶证发证日期*/
         {
-            name: 'IssueDate',
+            name: 'issueDate',
             editable: true,
             hidden: true,
             width: 100,

@@ -48,7 +48,7 @@ public class SiteServiceImpl implements SiteService {
 	public PageResult<SiteVo> findSiteList(SiteQVo condition, int start,
 			int limit, String orderBy) throws Exception {
 		PageResult<SiteVo> rst = new PageResult<SiteVo>();
-		List<SiteVo> list = this.siteDao.findList(condition,
+		List<SiteVo> list = this.siteDao.findListInfo(condition,
 				start, start + limit, orderBy);
 		rst.setRows(list);
 		if (start <= 1) {
@@ -129,7 +129,7 @@ public class SiteServiceImpl implements SiteService {
     @Override
 	public SingleResult<SiteVo> selectSiteByPrimaryKey(String id) throws Exception {
 		SingleResult<SiteVo> rst = new SingleResult<SiteVo>();
-		rst.setValue(this.siteDao.selectByPrimaryKey(id));
+		rst.setValue(this.siteDao.selectByPrimaryKeyInfo(id));
 		return rst;
 	}
     /**

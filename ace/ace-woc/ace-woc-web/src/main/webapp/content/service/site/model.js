@@ -156,7 +156,8 @@ var _colModel = function () {
                 required: false
             },
             renderer: function (value, cur) {
-                return $.jgrid.getAccessor(cur, 'buildDeptName');
+                var departmentName = $.jgrid.getAccessor(cur, 'buildDeptName');
+                return departmentName ? departmentName : '';
             },
         },
         /*建造时间*/
@@ -218,12 +219,17 @@ var _colModel = function () {
                     width: 50
                 }]]
             },
-            editoptions: {
-                style: 'width:200px;height:25px;',
-            },
             renderer: function (value, cur) {
                 return $.jgrid.getAccessor(cur, 'roadName');
             },
+            formoptions: {
+                style: 'width:200px;height:25px;',
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>",
+            },
+            editrules: {
+                required: true
+            }
         },
         /*归属管辖单位*/
         {
@@ -240,7 +246,8 @@ var _colModel = function () {
                 required: false
             },
             renderer: function (value, cur) {
-                return $.jgrid.getAccessor(cur, 'adminDeptName');
+                var departmentName = $.jgrid.getAccessor(cur, 'adminDeptName');
+                return departmentName ? departmentName : '';
             },
         },
         /*卡点运行状态*/

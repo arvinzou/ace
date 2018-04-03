@@ -147,6 +147,9 @@ function loadView(id) {
                     || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
+                if (key == 'constructDate') {
+                    value = value.substring(0, 10);
+                }
                 $("#dialog-message-view").find('#' + key).html(value);
             });
         },

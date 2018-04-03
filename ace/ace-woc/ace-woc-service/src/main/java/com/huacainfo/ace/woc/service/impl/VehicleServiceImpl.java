@@ -21,7 +21,7 @@ import java.util.*;
 /**
  * @author: 王恩
  * @version: 2018-03-09
- * @Description:  TODO(人员信息)
+ * @Description: TODO(车辆信息)
  */
 public class VehicleServiceImpl implements VehicleService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -33,8 +33,8 @@ public class VehicleServiceImpl implements VehicleService {
     /**
 	 *
 	    * @Title:find!{bean.name}List
-	    * @Description:  TODO(人员信息分页查询)
-	 		* @param:        @param condition
+     * @Description: TODO(车辆信息分页查询)
+     * @param:        @param condition
 	 		* @param:        @param start
 	 		* @param:        @param limit
 	 		* @param:        @param orderBy
@@ -60,8 +60,8 @@ public class VehicleServiceImpl implements VehicleService {
     /**
 	 *
 	    * @Title:insertVehicle
-	    * @Description:  TODO(添加人员信息)
-	 		* @param:        @param o
+     * @Description: TODO(添加车辆信息)
+     * @param:        @param o
 	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
 	 		* @return:       MessageResponse
@@ -73,27 +73,25 @@ public class VehicleServiceImpl implements VehicleService {
 	public MessageResponse insertVehicle(Vehicle o, UserProp userProp)
 			throws Exception {
 		o.setId(UUID.randomUUID().toString());
-		//o.setId(String.valueOf(new Date().getTime()));
-		
 		int temp = this.vehicleDao.isExit(o);
 		if (temp > 0) {
-			return new MessageResponse(1, "人员信息名称重复！");
-		}
+            return new MessageResponse(1, "车辆信息名称重复！");
+        }
 		o.setCreateDate(new Date());
 		o.setLastModifyDate(new Date());
 		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
-		this.vehicleDao.insert(o);
-		this.dataBaseLogService.log("添加人员信息", "人员信息", "", o.getPlateNo(),
-				o.getPlateNo(), userProp);
-		return new MessageResponse(0, "添加人员信息完成！");
-	}
+        this.vehicleDao.insertSelective(o);
+        this.dataBaseLogService.log("添加车辆信息", "车辆信息", "", o.getPlateNo(),
+                o.getPlateNo(), userProp);
+        return new MessageResponse(0, "添加车辆信息完成！");
+    }
     /**
 	 *
 	    * @Title:updateVehicle
-	    * @Description:  TODO(更新人员信息)
-	 		* @param:        @param o
+     * @Description: TODO(更新车辆信息)
+     * @param:        @param o
 	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
 	 		* @return:       MessageResponse
@@ -108,16 +106,16 @@ public class VehicleServiceImpl implements VehicleService {
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
 		this.vehicleDao.updateByPrimaryKeySelective(o);
-		this.dataBaseLogService.log("变更人员信息", "人员信息", "", o.getPlateNo(),
-				o.getPlateNo(), userProp);
-		return new MessageResponse(0, "变更人员信息完成！");
-	}
+        this.dataBaseLogService.log("变更车辆信息", "车辆信息", "", o.getPlateNo(),
+                o.getPlateNo(), userProp);
+        return new MessageResponse(0, "变更车辆信息完成！");
+    }
 
     /**
 	 *
 	    * @Title:selectVehicleByPrimaryKey
-	    * @Description:  TODO(获取人员信息)
-	 		* @param:        @param id
+     * @Description: TODO(获取车辆信息)
+     * @param:        @param id
 	 		* @param:        @throws Exception
 	 		* @return:       SingleResult<Vehicle>
 	 		* @throws
@@ -133,8 +131,8 @@ public class VehicleServiceImpl implements VehicleService {
     /**
 	 *
 	    * @Title:deleteVehicleByVehicleId
-	    * @Description:  TODO(删除人员信息)
-	 		* @param:        @param id
+     * @Description: TODO(删除车辆信息)
+     * @param:        @param id
 	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
 	 		* @return:       MessageResponse
@@ -146,10 +144,10 @@ public class VehicleServiceImpl implements VehicleService {
 	public MessageResponse deleteVehicleByVehicleId(String id,
 			UserProp userProp) throws Exception {
 		this.vehicleDao.deleteByPrimaryKey(id);
-		this.dataBaseLogService.log("删除人员信息", "人员信息", String.valueOf(id),
-				String.valueOf(id), "人员信息", userProp);
-		return new MessageResponse(0, "人员信息删除完成！");
-	}
+        this.dataBaseLogService.log("删除车辆信息", "车辆信息", String.valueOf(id),
+                String.valueOf(id), "车辆信息", userProp);
+        return new MessageResponse(0, "车辆信息删除完成！");
+    }
 
     /**
      * 根据关键词，查询车辆信息
