@@ -8,6 +8,57 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>通行记录</title>
+    <style>
+        .traffic-file {
+            padding: 10px;
+        }
+
+        .fileList {
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .fileList > li {
+            position: relative;
+            float: left;
+            width: 100%;
+            margin-bottom: 10px;
+            text-align: center
+        }
+
+        .fileList img {
+            width: 100%;
+        }
+
+        .fileList video {
+            background-color: #333;
+            width: 100%;
+            height: 420px;
+        }
+
+        .fileList p {
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 35px;
+            padding: 0 20px;
+            background-color: rgba(100, 100, 100, 0.5);
+            margin: 0px;
+            color: #f8f8f8;
+            font-size: 18px;
+            line-height: 35px;
+            text-align: left;
+        }
+
+        .fileList p .time {
+            font-size: 14px;
+            float: right;
+        }
+
+    </style>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <body>
@@ -180,6 +231,19 @@
 </span>
         </div>
     </div>
+
+    <h5 class="header-title">通行画面</h5>
+    <div class="row traffic-file">
+        <ul class="fileList">
+            <%--<li>--%>
+            <%--<video src="http://www.w3school.com.cn/i/movie.ogg"  controls="controls">--%>
+            <%--</video>--%>
+            <%--<p>111111111111111111111111111111111111111111</p>--%>
+            <%--</li>--%>
+        </ul>
+    </div>
+
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">

@@ -144,6 +144,9 @@ function loadView(id) {
                 if (key == 'status') {
                    value == "1" ? "正常" : "关闭";
                 }
+                if (key == 'trafficSubVo') {
+                    viewImgAndVdo(value)
+                }
                 // if (key.indexOf('Date')!=-1||key.indexOf('time')!=-1||key.indexOf('Time')!=-1||key.indexOf('birthday')!=-1) {
                 //  	value = Common.DateFormatter(value);
                 // }
@@ -155,3 +158,34 @@ function loadView(id) {
 		}
 	});
 }
+
+function viewImgAndVdo(data) {
+    for (var i = 0; i < data.length; i++) {
+        var template = liImageTemplate;
+        if (data[i].category == '5') {
+            template = liVideoTempLate;
+        }
+        template = template.replace('[fileUrl]', fastdfs_server + data[i].fileUrl);
+        template = template.replace('[deviceName]', data[i].deviceName);
+        template = template.replace('[category]', rsd(data[i].category, '124'));
+        template = template.replace('[fileTime]', data[i].inspectTime);
+        $('.traffic-file .fileList').append($(template));
+    }
+}
+
+var liImageTemplate = '<li>' +
+    '       <img src="[fileUrl]">' +
+    '       <p>' +
+    '             <span>[deviceName]：[category]</span>' +
+    '             <span class="time">[fileTime]</span>' +
+    '       </p>' +
+    '</li>';
+
+var liVideoTempLate = '<li>' +
+    '       <video src="[fileUrl]"  controls="controls">' +
+    '       </video>' +
+    '       <p>' +
+    '             <span>[deviceName]：[category]</span>' +
+    '             <span class="time">[fileTime]</span>' +
+    '       </p>' +
+    '</li>';
