@@ -224,12 +224,6 @@
             <span id="remark">
 </span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
-            <br>
-            <span id="status">
-</span>
-        </div>
     </div>
 
     <h5 class="header-title">通行画面</h5>

@@ -160,6 +160,7 @@ function loadView(id) {
 }
 
 function viewImgAndVdo(data) {
+    $('.traffic-file .fileList').empty();
     for (var i = 0; i < data.length; i++) {
         var template = liImageTemplate;
         if (data[i].category == '5') {
