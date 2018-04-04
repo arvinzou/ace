@@ -10,9 +10,11 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.dao.TrafficDao;
+import com.huacainfo.ace.woc.dao.TrafficSubDao;
 import com.huacainfo.ace.woc.model.Traffic;
 import com.huacainfo.ace.woc.service.TrafficService;
 import com.huacainfo.ace.woc.vo.TrafficQVo;
+import com.huacainfo.ace.woc.vo.TrafficSubVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,8 @@ public class TrafficServiceImpl implements TrafficService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private TrafficDao trafficDao;
+    @Autowired
+    private TrafficSubDao trafficSubDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -186,7 +190,10 @@ public class TrafficServiceImpl implements TrafficService {
     @Override
     public SingleResult<TrafficVo> selectTrafficByPrimaryKey(String id) throws Exception {
         SingleResult<TrafficVo> rst = new SingleResult<TrafficVo>();
-        rst.setValue(this.trafficDao.selectByPrimaryKey(id));
+        TrafficVo t = this.trafficDao.selectByPrimaryKeyMsg(id);
+        List<TrafficSubVo> l = trafficSubDao.findListByTrafficId(t.getId());
+        t.setTrafficSubVo(l);
+        rst.setValue(t);
         return rst;
     }
 

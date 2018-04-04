@@ -20,10 +20,13 @@ public interface TrafficSubDao {
 
     int updateByPrimaryKeySelective(TrafficSub record);
 
+
     
     List<TrafficSubVo> findList(@Param("condition") TrafficSubQVo condition,
 			@Param("start") int start, @Param("limit") int limit,
 			@Param("orderBy") String orderBy);
+
+    List<TrafficSubVo> findListByTrafficId(String id);
 
 	int findCount(@Param("condition") TrafficSubQVo condition);
 

@@ -105,7 +105,7 @@
             <span class="labelItemHeader">所属个人</span>
             <br>
             <span id="personId" class="hide"></span>
-            <span id="personName" class="hide"></span>
+            <span id="personName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">所属车辆车牌号</span>
@@ -120,26 +120,6 @@
             <span id="departmentName"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">证件照片1</span>
-            <br>
-            <span id="licenseImg1"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">证件照片2</span>
-            <br>
-            <span id="licenseImg2"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">证件照片3</span>
-            <br>
-            <span id="licenseImg3"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">证件照片4</span>
-            <br>
-            <span id="licenseImg4"></span>
-        </div>
-        <div class="labelItem">
             <span class="labelItemHeader">备注</span>
             <br>
             <span id="remark"></span>
@@ -149,6 +129,15 @@
             <br>
             <span id="status"></span>
         </div>
+    </div>
+    <h5 class="header-title">照片</h5>
+    <div class="row" style="padding:10px">
+        <ul style="list-style: none;padding: 0px;margin: 0px;">
+            <li style="float: left;width: 50%;padding: 5px; text-align: center" id="licenseImg1"></li>
+            <li style="float: left;width: 50%;padding: 5px; text-align: center" id="licenseImg2"></li>
+            <li style="float: left;width: 50%;padding: 5px; text-align: center" id="licenseImg3"></li>
+            <li style="float: left;width: 50%;padding: 5px; text-align: center" id="licenseImg4"></li>
+        </ul>
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
@@ -179,6 +168,7 @@
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">更新时间</span>
+
             <br>
             <span id="lastModifyDate"></span>
         </div>
