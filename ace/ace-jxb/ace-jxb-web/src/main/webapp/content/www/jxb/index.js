@@ -12,7 +12,7 @@ function getList() {
             $("#add_note_icon").on(tap,
                 function () {
                     console.log(i);
-                    location.href = "jxb_create.html?id=" + lvsCmd.urlParams.id + "&companyId=0010007";
+                    location.href = "jxb_create.jsp?id=" + lvsCmd.urlParams.id + "&companyId=0010007";
                     // console.log("**********跳转创建直播*********");
                 });
 
@@ -24,7 +24,7 @@ function getList() {
                 $("#j-jxblist").append(e),
                     e.find("li").on(tap,
                         function () {
-                            location.href = "jxb.html?companyId=0010007" + "&showlink=" + showlink + "&id=" + $(this).data("id")
+                            location.href = "jxb.jsp?companyId=0010007" + "&showlink=" + showlink + "&id=" + $(this).data("id")
                             //location.href = "jxb_create.html?id=" + $(this).data("id") + "&companyId=0010007";
                         })
             } else lvsCmd.alert(g.errMsg);

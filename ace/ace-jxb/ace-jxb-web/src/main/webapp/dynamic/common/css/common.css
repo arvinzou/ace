@@ -1,7 +1,7 @@
 body {
 	font-family: "Microsoft YaHei",NSimSun,SimSun,"Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #666;
-	overflow-y: hidden;
+	//overflow-y: hidden;
 }
 /*超出省略*/
 .omission{
