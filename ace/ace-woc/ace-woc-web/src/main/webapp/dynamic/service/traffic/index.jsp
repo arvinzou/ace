@@ -104,13 +104,13 @@
         <div class="labelItem"><span class="labelItemHeader">
 记录卡点</span>
             <br>
-            <span id="siteId">
+            <span id="siteName">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
 记录监控点</span>
             <br>
-            <span id="monitorSiteId">
+            <span id="monitorSiteName">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">

@@ -12,6 +12,8 @@ public interface TrafficDao {
 
     TrafficVo selectByPrimaryKey(String id);
 
+    TrafficVo selectByPrimaryKeyMsg(String id);
+
     int deleteByPrimaryKey(String id);
 
     int insert(Traffic record);
