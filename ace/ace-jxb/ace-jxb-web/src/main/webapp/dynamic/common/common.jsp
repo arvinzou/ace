@@ -1,7 +1,5 @@
 <%@page import="java.util.Date"%>
 <%@page import="com.huacainfo.ace.common.tools.CommonUtils"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
 <%
 session.setAttribute("portalPath", "/portal");
 request.setAttribute("now", CommonUtils.formatDate(new Date()));
@@ -22,9 +20,13 @@ request.setAttribute("now", CommonUtils.formatDate(new Date()));
 <script type="text/javascript"
 	src="${portalPath}/system/getUserProp.do"></script>
 <script type="text/javascript"
+		src="${portalPath}/content/common/js/jquery-3.2.1.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
 	src="${portalPath}/content/common/js/base.js?version=${cfg.version}"></script>
 <link rel="stylesheet"
 	href="${portalPath}/content/common/assets/css/bootstrap.min.css?version=${cfg.version}" />
+<link rel="stylesheet"
+	  href="${portalPath}/content/common/bootstrap/css/bootstrap-theme.min.css?version=${cfg.version}" />
 <link rel="stylesheet"
 	href="${portalPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}" />
 <link rel="stylesheet"
@@ -35,6 +37,16 @@ request.setAttribute("now", CommonUtils.formatDate(new Date()));
 	href="${portalPath}/content/common/assets/css/ui.jqgrid.css?version=${cfg.version}" />
 <link rel="stylesheet"
 	href="${portalPath}/content/common/assets/css/ace-fonts.css?version=${cfg.version}" />
+<link rel="stylesheet"
+	  href="${portalPath}/content/common/bootstrap/css/iconfont.css?version=${cfg.version}" />
+<script type="text/javascript"
+		src="${portalPath}/content/common/bootstrap/js/bootstrap.minV3.3.7.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+		src="${portalPath}/content/common/bootstrap/js/bootstrap-datetimepicker.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+		src="${portalPath}/content/common/bootstrap/js/bootstrap-datetimepicker.zh-CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+		src="${portalPath}/content/common/bootstrap/js/iconfont.js?version=${cfg.version}"></script>
 	
 <link rel="stylesheet" href="${portalPath}/content/common/assets/css/ace-ie8.min.css?version=${cfg.version}" />
 
