@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.ExamScoreDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.ExamScore">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="testPaperId" jdbcType="VARCHAR" property="testPaperId" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.jxb.model.ExamScore">
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, testPaperId, userId, score, remark, status, createDate
+  </sql>
+  <sql id="whereCondition">
+    from exam_score where 0=0
+    <if test='condition.id!=null and condition.id!=""'>
+      and id =#{condition.id,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.testPaperId!=null and condition.testPaperId!=""'>
+      and testPaperId =#{condition.testPaperId,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.score!=null and condition.score!=""'>
+      and score =#{condition.score,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.remark!=null and condition.remark!=""'>
+      and remark like
+      concat('%',#{condition.remark,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.status!=null and condition.status!=""'>
+      and status =#{condition.status,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.createDate!=null and condition.createDate!=""'>
+      and createDate = #{condition.createDate,jdbcType=TIMESTAMP}
+    </if>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exam_score
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from exam_score
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.ExamScore">
+    insert into exam_score (id, testPaperId, userId, 
+      score, remark, status, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{testPaperId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.ExamScore">
+    insert into exam_score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="testPaperId != null">
+        testPaperId,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="testPaperId != null">
+        #{testPaperId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.ExamScore">
+    update exam_score
+    <set>
+      <if test="testPaperId != null">
+        testPaperId = #{testPaperId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.ExamScore">
+    update exam_score
+    set testPaperId = #{testPaperId,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="findList" resultMap="BaseResultMapVo">
+    select
+    <include refid="Base_Column_List"/>
+    <include refid="whereCondition"/>
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+  <select id="isExit" resultType="int">
+    select count(*)
+    from exam_score where
+    testPaperId=#{testPaperId} and id =#{condition.id,jdbcType=VARCHAR}
+  </select>
+</mapper>

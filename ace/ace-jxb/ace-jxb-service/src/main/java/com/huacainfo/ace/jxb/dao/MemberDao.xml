@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.MemberDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.Member">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="expiryTime" jdbcType="TIMESTAMP" property="expiryTime" />
+    <result column="account" jdbcType="DECIMAL" property="account" />
+    <result column="referee" jdbcType="VARCHAR" property="referee" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.jxb.model.Member">
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, level, status, expiryTime, account, referee, createDate
+  </sql>
+  <sql id="whereCondition">
+    from member where 0=0
+    <if test='condition.id!=null and condition.id!=""'>
+      and id =#{condition.id,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.level!=null and condition.level!=""'>
+      and level =#{condition.level,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.status!=null and condition.status!=""'>
+      and status =#{condition.status,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.expiryTime!=null and condition.expiryTime!=""'>
+      and expiryTime = #{condition.expiryTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test='condition.account!=null and condition.account!=""'>
+      and account =#{condition.account,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.referee!=null and condition.referee!=""'>
+      and referee =#{condition.referee,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.createDate!=null and condition.createDate!=""'>
+      and createDate = #{condition.createDate,jdbcType=TIMESTAMP}
+    </if>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from member
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Member">
+    insert into member (id, level, status, 
+      expiryTime, account, referee, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{expiryTime,jdbcType=TIMESTAMP}, #{account,jdbcType=DECIMAL}, #{referee,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Member">
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="expiryTime != null">
+        expiryTime,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="referee != null">
+        referee,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="expiryTime != null">
+        #{expiryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=DECIMAL},
+      </if>
+      <if test="referee != null">
+        #{referee,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.Member">
+    update member
+    <set>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="expiryTime != null">
+        expiryTime = #{expiryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=DECIMAL},
+      </if>
+      <if test="referee != null">
+        referee = #{referee,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Member">
+    update member
+    set level = #{level,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      expiryTime = #{expiryTime,jdbcType=TIMESTAMP},
+      account = #{account,jdbcType=DECIMAL},
+      referee = #{referee,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="findList" resultMap="BaseResultMapVo">
+    select
+    <include refid="Base_Column_List"/>
+    <include refid="whereCondition"/>
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+  <select id="isExit" resultType="int">
+    select count(*)
+    from member where
+    id =#{condition.id,jdbcType=VARCHAR}
+  </select>
+</mapper>
