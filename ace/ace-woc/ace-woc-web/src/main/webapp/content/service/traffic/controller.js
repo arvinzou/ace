@@ -66,10 +66,13 @@ jQuery(function($) {
 							viewPagerButtons : true,
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
+                                $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
 								form.closest('.ui-jqdialog').find(
 										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
+                                    '<div class="widget-header" />');
+                                var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
 								style_edit_form(form);
+                                initMedia(gd.id);
 							}
 						})
 			});
@@ -167,7 +170,7 @@ function viewImgAndVdo(data) {
             template = liVideoTempLate;
         }
         template = template.replace('[fileUrl]', fastdfs_server + data[i].fileUrl);
-        template = template.replace('[deviceName]', data[i].deviceName);
+        template = template.replace('[deviceName]', data[i].deviceName ? data[i].deviceName : "拍摄方式");
         template = template.replace('[category]', rsd(data[i].category, '124'));
         template = template.replace('[fileTime]', data[i].inspectTime);
         $('.traffic-file .fileList').append($(template));

@@ -7,6 +7,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>证件档案</title>
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -176,6 +177,9 @@
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
+
+<script src="${portalPath}/content/common/assets/js/uncompressed/jquery.colorbox.js"></script>
+
 <script
         src="${pageContext.request.contextPath}/content/service/license/config.js?version=${cfg.version}"></script>
 <script
