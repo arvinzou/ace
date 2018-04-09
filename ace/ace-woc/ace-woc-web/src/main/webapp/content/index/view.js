@@ -1,31 +1,29 @@
 var myChart1;
 var myChart2;
-var curTheme={};
-var theme="macarons";
+var curTheme = {};
+var theme = "macarons";
 var needRefresh = false;
 
 
-
-
-function requireCallback (ec, defaultTheme) {
+function requireCallback(ec, defaultTheme) {
     echarts = ec;
     refresh();
 }
-function refresh(isBtnRefresh){
-  initData(true);
+function refresh(isBtnRefresh) {
+    initData(true);
 }
 
-function needMap() {   
+function needMap() {
     return false
 }
 var echarts;
-jQuery(function($) {
-	require.config({
+jQuery(function ($) {
+    require.config({
         paths: {
-            echarts: portalPath+'/content/common/js/echarts-2.27'
+            echarts: portalPath  + '/content/common/js/echarts-2.27'
         }
     });
-	
+
 });
 var isExampleLaunched;
 function launchExample() {
@@ -34,9 +32,9 @@ function launchExample() {
     }
     // 按需加载
     isExampleLaunched = 1;
-    require(['echarts/theme/' + theme], function(tarTheme){
+    require(['echarts/theme/' + theme], function (tarTheme) {
         curTheme = tarTheme;
-    })
+    });
     require(
         [
             'echarts',

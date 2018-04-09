@@ -100,6 +100,11 @@
             <span id="vehicleColor"></span>
         </div>
         <div class="labelItem">
+            <span class="labelItemHeader">轴数</span>
+            <br>
+            <span id="axleCount"></span>
+        </div>
+        <div class="labelItem">
             <span class="labelItemHeader">车辆类型</span>
             <br>
             <span id="vehicleType"></span>
@@ -110,6 +115,29 @@
             <span id="model"></span>
         </div>
         <div class="labelItem">
+            <span class="labelItemHeader">总质量</span>
+            <br>
+            <span id="totalMass"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">整备质量</span>
+            <br>
+            <span id="unladedMass"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">核定载质量</span>
+            <br>
+            <span id="approvedMass"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">准牵引总量</span>
+            <br>
+            <span id="tractionMass"></span>
+        </div>
+    </div>
+    <h5 class="header-title">所属信息</h5>
+    <div class="row" style="padding:10px">
+        <div class="labelItem">
             <span class="labelItemHeader">所有人</span>
             <br>
             <span id="personName"></span>
@@ -119,20 +147,13 @@
             <br>
             <span id="departmentName"></span>
         </div>
+    </div>
+    <h5 class="header-title">行驶证信息</h5>
+    <div class="row" style="padding:10px">
         <div class="labelItem">
-            <span class="labelItemHeader">轴数</span>
+            <span class="labelItemHeader">领证单位</span>
             <br>
-            <span id="axleCount"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">发动机号码</span>
-            <br>
-            <span id="engineNo"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">车辆识别代码</span>
-            <br>
-            <span id="VIN"></span>
+            <span id="licenceIssuingAuthority"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">行驶证注册日期</span>
@@ -145,30 +166,19 @@
             <span id="IssueDate"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">领证单位</span>
+            <span class="labelItemHeader">发动机号码</span>
             <br>
-            <span id="licenceIssuingAuthority"></span>
+            <span id="engineNo"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">总质量</span>
+            <span class="labelItemHeader">车辆识别代码</span>
             <br>
-            <span id="totalMass"></span>
-        </div> <div class="labelItem">
-            <span class="labelItemHeader">整备质量</span>
-            <br>
-            <span id="unladedMass"></span>
-        </div> <div class="labelItem">
-            <span class="labelItemHeader">核定载质量</span>
-            <br>
-            <span id="approvedMass"></span>
-        </div> <div class="labelItem">
+            <span id="VIN"></span>
+        </div>
+        <div class="labelItem">
             <span class="labelItemHeader">外廓尺寸</span>
             <br>
             <span id="containerInsideSize"></span>
-        </div> <div class="labelItem">
-            <span class="labelItemHeader">准牵引总量</span>
-            <br>
-            <span id="tractionMass"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">备注</span>
@@ -209,7 +219,6 @@
             <span id="lastModifyDate"></span>
         </div>
     </div>
-
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script

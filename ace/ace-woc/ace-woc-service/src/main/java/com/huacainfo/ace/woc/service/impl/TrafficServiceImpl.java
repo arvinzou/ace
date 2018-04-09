@@ -218,9 +218,12 @@ public class TrafficServiceImpl implements TrafficService {
     }
 
     @Override
-    public Map<String, Object> selectListByKeyWord(String keyWord) {
+    public Map<String, Object> selectListByKeyWord(String keyWord, String id) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("keyWord", keyWord);
+        if (CommonUtils.isNotBlank(id)) {
+            params.put("id", id);
+        }
 
         List<TrafficVo> list = trafficDao.selectListByKeyWord(params);
         Map<String, Object> rtn = new HashMap<>();

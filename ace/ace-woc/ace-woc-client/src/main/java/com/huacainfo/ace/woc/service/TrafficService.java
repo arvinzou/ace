@@ -86,5 +86,5 @@ public interface TrafficService {
 	public abstract MessageResponse deleteTrafficByTrafficId(String id,UserProp userProp) throws Exception;
 
 
-    Map<String,Object> selectListByKeyWord(String keyWord);
+    Map<String,Object> selectListByKeyWord(String keyWord, String id);
 }

@@ -136,7 +136,7 @@ public class TrafficController extends WocBaseController {
 
     @RequestMapping(value = "/selectListByKeyWord")
     @ResponseBody
-    public Map<String, Object> selectListByKeyWord(String q) throws Exception {
-        return trafficService.selectListByKeyWord(q);
+    public Map<String, Object> selectListByKeyWord(String q, String id) throws Exception {
+        return trafficService.selectListByKeyWord(q, id);
     }
 }

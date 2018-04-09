@@ -1,17 +1,15 @@
 package com.huacainfo.ace.woc.web.controller;
 
-import java.util.Map;
-
+import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.woc.service.AnalysisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.woc.service.AnalysisService;
+import java.util.Map;
 
 /**
  * @author HuaCai003
@@ -29,7 +27,7 @@ public class AnalysisController extends WocBaseController {
     public ListResult<Map<String, Object>> query(
             String reportId)
             throws Exception {
-        Map<String, Object> condition = null;//this.getParams();
+        Map<String, Object> condition = getParams();
         return analysisService.query(condition, reportId, 0, 0);
     }
 
