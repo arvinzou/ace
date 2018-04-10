@@ -31,7 +31,7 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.LiveRpt">
-        insert into jxb_rpt (id, rid, uid,
+        insert into live_rpt (id, rid, uid,
         sort, mediaType, createTime,
         status, likeNum, content,
         mediaContent)

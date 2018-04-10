@@ -1,21 +1,4 @@
 var cfg = require("../config.js");
-function formatTime(time) {
-    if (typeof time !== 'number' || time < 0) {
-        return time
-    }
-
-    var hour = parseInt(time / 3600)
-    time = time % 3600
-    var minute = parseInt(time / 60)
-    time = time % 60
-    var second = time
-
-    return ([hour, minute, second]).map(function (n) {
-        n = n.toString()
-        return n[1] ? n : '0' + n
-    }).join(':')
-}
-
 function formatLocation(longitude, latitude) {
     if (typeof longitude === 'string' && typeof latitude === 'string') {
         longitude = parseFloat(longitude)
@@ -117,8 +100,27 @@ function uuid() {
     var uuid = s.join("");
     return uuid;
 }
+function formatNumber(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+} 
+function formatTime(date, format) {
+  var formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
+  var returnArr = [];
+  //var date = new Date(number * 1000);
+  returnArr.push(date.getFullYear());
+  returnArr.push(formatNumber(date.getMonth() + 1));
+  returnArr.push(formatNumber(date.getDate()));
 
+  returnArr.push(formatNumber(date.getHours()));
+  returnArr.push(formatNumber(date.getMinutes()));
+  returnArr.push(formatNumber(date.getSeconds()));
 
+  for (var i in returnArr) {
+    format = format.replace(formateArr[i], returnArr[i]);
+  }
+  return format;
+}
 function formatDate(date) {
     var year = date.getFullYear();
     var month = date.getMonth() + 1;

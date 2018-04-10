@@ -1,5 +1,7 @@
 var util = require("../../util/util.js");
+let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
+const app = getApp();
 var dict = {};
 dict['1001'] = '已经连接推流服务器';
 dict['1002'] = '开始推流';
@@ -32,11 +34,17 @@ dict['3002'] = 'RTMP服务器连接失败';
 dict['3003'] = 'RTMP服务器握手失败';
 dict['3004'] = 'RTMP服务器主动断开';
 dict['3005'] = 'RTMP 读/写失败';
+var wxuser={
+headimgurl:"http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJLnWlZ5QwperRWRswicfELLia3cqTuLJapz3jX27VY19mwRianduy9cibSefAlnGRxNH341Qnic5w9aEg/132", 
+nickname: "热情的沙漠", 
+openid: "oFvIjw8x1--0lQkUhO1Ta3L59o3c"
+};
 Page({
     data: {
         serverfile: cfg.serverfile,
         autopush:false,
         enablecamera:true,
+        autofocus:true,
         muted: false,
         pusherStatus:'stop',
         playimg:"../../image/play_on.png",
@@ -46,7 +54,14 @@ Page({
         orientation:"horizontal",
         orientationimg:"../../image/screen_horizontal.png",
         aspectimg:"../../image/aspect_916.png",
-        aspect:"9:16"
+        aspect:"9:16",
+        message:[],
+        toView:0,
+        contentText:'',
+        hiddenmodalput: true,
+        display:'show',
+        currentTab: 0,
+        id:null
     },
     onReady: function (res) {
         console.log('index.js.onReady');
@@ -76,8 +91,47 @@ Page({
        }
      );
     },
+    renderChartBox:function(data){
+      console.log(data);
+      var that=this;
+      var message = that.data.message;
+      if (data.header.type!='1'){
+        return;
+      }
+      message.push(data);
+      that.setData({ message: message });
+      that.setData({ toView: 1000 });
+    },
     onLoad: function () {
+        var that = this;
         console.log('index.js.onLoad');
+        var id ="c7b43a21-552d-4e52-9845-93e85add6e25";
+        that.setData({
+          id: id
+        });
+        that.initData(id);
+        var url = "wss://" + cfg.websocketurl + "/jxb/websocket/" + id + "/" + wxuser.openid + "/msg";
+        console.log(url);
+
+        openSocket.connect(function (data) { // WebSocket初始化连接
+          if (data) {
+            that.renderChartBox(data);
+          }
+        },url);
+        
+
+        setInterval(() => {
+          console.log("心跳检查websocket");
+          if (app.globalData.socketConnectFail) { // WebSocket断线重连
+            console.log("websocket -> " + app.globalData.socketConnectFail);
+            console.log("重新连接websocket->" + url);
+            openSocket.connect(function (data) {
+              if (data) {
+                that.renderChartBox(data);
+              }
+            }, url);
+          }
+        }, 5000)
        
     },
     error(e) {
@@ -88,7 +142,7 @@ Page({
       if (!util.security('admin')){
         return;
       }
-      var pusherStatus = that.data.pusherStatus;
+      var pusherStatus = that.data.pusherStatus;  
       var userinfo = wx.getStorageSync('userinfo');
       that.setData({
         rtmpurl: cfg.rtmpserver + userinfo.mobile + "?id=" + util.uuid() + "&appid=" + cfg.appid
@@ -104,9 +158,11 @@ Page({
                 });
                 that.setData({
                   playimg: "../../image/play_off.png",
-                  pusherStatus:'start'
+                  pusherStatus:'start',
+                  display: 'hide'
                 });
                 that.data.videoContext.start();
+                
               } else if (res.cancel) {
               }
             }
@@ -123,7 +179,8 @@ Page({
               });
               that.setData({
                 playimg: "../../image/play_on.png",
-                pusherStatus: 'stop'
+                pusherStatus: 'stop',
+                display: 'show'
               });
               that.data.videoContext.stop();
             } else if (res.cancel) {
@@ -192,5 +249,94 @@ Page({
           aspectimg: "../../image/aspect_916.png"
         });
       }
+    }
+  , 
+    formSubmit: function () {
+      var that=this;
+      var message = {};
+      message.header = {
+        type: 1,
+        wxuser: wxuser
+      };
+
+      message.createTime = util.formatTime(new Date(), 'h:m:s');
+      message.content = that.data.contentText;
+      wx.sendSocketMessage({
+        data: JSON.stringify(message),
+      });
+      that.setData({ contentText: '' });
+    },
+    initData(id){
+      var that = this;
+      util.request(cfg.getLiveMsgList, { rid: id},
+        function (data) {
+          
+          for (var i = 0; i < data.length; i++) {
+            var o = JSON.parse(data[i].content);
+            console.log(o);
+            that.renderChartBox(o);
+          } 
+        }
+      );
+    },
+    //点击按钮痰喘指定的hiddenmodalput弹出框  
+    modalinput: function () {
+      this.setData({
+        hiddenmodalput: !this.data.hiddenmodalput
+      })
+    },
+    //取消按钮  
+    cancel: function () {
+      this.setData({
+        hiddenmodalput: true
+      });
+    },
+    //确认  
+    confirm: function (e) {
+      console.log('form发生了submit事件，携带数据为：', e);
+      var that = this;
+      if (!that.data.contentText) {
+        wx.showToast({
+          title: '发送内容不为空',
+          icon: 'none',
+          duration: 1000
+        })
+        return false;
+      }
+      that.formSubmit();
+      that.setData({
+        hiddenmodalput: true
+      })
+    },
+    contentInput: function (e) {
+      this.setData({
+        contentText: e.detail.value
+      })
+    },
+    //滑动切换
+    swiperTab: function (e) {
+      var that = this;
+      that.setData({
+        currentTab: e.detail.current
+      });
+    },
+    //点击切换
+    clickTab: function (e) {
+      var that = this;
+      if (this.data.currentTab === e.target.dataset.current) {
+        return false;
+      } else {
+        that.setData({
+          currentTab: e.target.dataset.current
+        })
+      }
+    },
+    rpt:function(){
+      var that=this;
+      console.log('../rpt/index?id=' + that.data.id);
+      wx.navigateTo({
+        url: '../rpt/index?id='+that.data.id,
+      })
+
     }
 });

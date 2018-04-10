@@ -33,7 +33,7 @@
 
 
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.LiveImg">
-        insert into jxb_img (id, rptId, url,
+        insert into live_img (id, rptId, url,
         w, h, watermarkConfig,
         createTime)
         values (#{id,jdbcType=VARCHAR}, #{rptId,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},

@@ -8,7 +8,7 @@
  <label class="name">{{userinfo.name}}</label>
 </view>
 
-<!--表格-->
+<!--表格
  <block wx:for-items="{{items}}" wx:key="item.id">   
 <view class="item">
  <image class="icon" src="{{item.icon}}"></image>
@@ -17,7 +17,7 @@
 
 </view>
  </block>
-
+-->
 
 </scroll-view>
 

@@ -13,12 +13,12 @@ App({
   },
   globalData: {
     hasLogin: false,
+    socketConnectFail: false,
     openid: null
   },
   // lazy loading openid
   getUserOpenId: function(callback) {
     var self = this
-
     if (self.globalData.openid) {
       callback(null, self.globalData.openid)
     } else {

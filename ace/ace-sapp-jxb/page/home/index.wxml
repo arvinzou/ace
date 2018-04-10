@@ -1,37 +1,83 @@
-<view class='page' style="height:100%">
-    <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10"  whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:100vh;" >
-      <cover-view class="circle play" bindtap="play">
-       <cover-image class="imgsmall" src="{{playimg}}" />
-      </cover-view>
-
-       <cover-view class="circle camera" bindtap="camera">
-       <cover-image class="imgsmall" src="{{cameraimg}}" />
-      </cover-view>
-      <cover-view class="circle muted" bindtap="muted">
-       <cover-image class="imgsmall" src="{{mutedimg}}" />
-      </cover-view>
-
-      <cover-view class="circle aspect" bindtap="aspect">
-       <cover-image class="imgsmall" src="{{aspectimg}}" />
-      </cover-view>
-
-       <cover-view class="circle orientation" bindtap="orientation">
-       <cover-image class="imgsmall" src="{{orientationimg}}" />
-      </cover-view>
-
-
-       <cover-view class="info-tip">
+<view class='page' style="height:100%;background:#2c2c2c;">
+    <live-pusher  url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10"  whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:35vh;" waiting-image="../../image/chat.png" class="pusher">
+      <cover-view class="info-tip">
         <cover-view class="tip-item"  wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
         <cover-view class="tip-item" wx:if="{{info.audioBitrate}}">音频输出:{{info.audioBitrate}}kbps</cover-view>
-        <cover-view class="tip-item" wx:if="{{info.videoFPS}}">视频帧率:{{info.videoFPS}}</cover-view>
-        <cover-view class="tip-item" wx:if="{{info.videoGOP}}">视频GOP:{{info.videoGOP}}</cover-view>
         <cover-view class="tip-item" wx:if="{{info.netSpeed}}">发送速度:{{info.netSpeed}}</cover-view>
-        <cover-view class="tip-item" wx:if="{{info.netJitter}}">网络抖动:{{info.netJitter}}</cover-view>
-        <cover-view class="tip-item" wx:if="{{info.videoWidth}}">视频宽度:{{info.videoWidth}}</cover-view>
-        <cover-view class="tip-item" wx:if="{{info.videoHeight}}">视频高度:{{info.videoHeight}}</cover-view>
       </cover-view>
+      
+          <cover-image src='../../image/video-cover.jpg' mode="aspectFill" class='{{display}}' style="width:100%;height:35vh;position: fixed;top:0rpx;right:0rpx"></cover-image>
+
     </live-pusher>
+
+
+<view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">互动</view>
+    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">图文</view>
+</view>
+<swiper current="{{currentTab}}" duration="300"  bindchange="swiperTab" style="height:58vh">
+    <swiper-item>
+    <scroll-view scroll-y="true" class="chat-box" scroll-top="{{toView}}">
+            <block wx:for-items="{{message}}" wx:key="{{item.*}}">
+                <view class='chat-content'>
+               
+                    <image src='{{item.header.wxuser.headimgurl}}' class='headimg'></image>
+                
+                    <view class='chat-right'>
+                        <view class='chat-nickname'>
+                          {{item.header.wxuser.nickname}} {{item.createTime}}
+                        </view>
+                        <text class='chat-text' wx:if="{{item.content.length<=20}}">{{item.content}}</text>
+                        <text class='chat-text block' wx:if="{{item.content.length>20}}">{{item.content}}</text>
+                    </view>
+                </view>
+            </block>
+      </scroll-view> 
+
+
+
+       <view class="circle play" bindtap="play">
+       <image class="imgsmall" src="{{playimg}}" />
+      </view>
+
+       <view class="circle camera" bindtap="camera">
+       <image class="imgsmall" src="{{cameraimg}}" />
+      </view>
+      <view class="circle muted" bindtap="muted">
+       <image class="imgsmall" src="{{mutedimg}}" />
+      </view>
+<!--
+      <view class="circle aspect" bindtap="aspect">
+       <image class="imgsmall" src="{{aspectimg}}" />
+      </view>
+
+       <view class="circle orientation" bindtap="orientation">
+       <image class="imgsmall" src="{{orientationimg}}" />
+      </view>
+-->
+       <view class="circle chat" bindtap="modalinput">
+       <image class="imgsmall" src="../../image/chat.png" />
+      </view>
+
+    </swiper-item>
+    <swiper-item>
+
+
+     <view class="circle add" bindtap="rpt">
+       <image class="imgsmall" src="../../image/add.png" />
+      </view>
     
+    </swiper-item>
+</swiper>
+
+      
+      
+   
+  
+<modal hidden="{{hiddenmodalput}}" title="请输入要发表的内容" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">  
+     <input class="inputView" name="content" type="text" placeholder="说点啥唄" placeholder-style="color: #ccccc" bindblur="contentInput" value="{{contentText}}"/>
+</modal> 
+       
 </view>
 
    
