@@ -330,13 +330,43 @@
         </if>
 
     </sql>
+    <sql id="whereCondition_Vo">
+        where 0=0
+        <if test='condition.direction!=null and condition.direction!=""'>
+            and t.direction like
+            concat('%',#{condition.direction,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.plateNo!=null and condition.plateNo!=''">
+            and t.plateNo like
+            concat('%',#{condition.plateNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.siteId!=null and condition.siteId!=''">
+            and t.siteId like
+            concat('%',#{condition.siteId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.axleCount!=null and condition.axleCount!=''">
+            and t.axleCount =#{condition.axleCount,jdbcType=INTEGER}
+        </if>
+        <if test="condition.status!=null and condition.status!=''">
+            and t.status =#{condition.status,jdbcType=CHAR}
+        </if>
+        /*开始时间*/
+        <if test="condition.startTime!=null and condition.startTime!=''">
+            and t.inspectTime>=#{condition.startTime,jdbcType=TIMESTAMP}
+        </if>
+        /*结束时间*/
+        <if test="condition.endTime!=null and condition.endTime!=''">
+            and t.inspectTime&lt;=#{condition.endTime,jdbcType=TIMESTAMP}
+        </if>
+
+    </sql>
 
     <select id="findList" resultMap="BaseResultMapVo">
         select m.* from(
         select
         <include refid="Base_Column_List_Vo"/>
         <include refid="fromCondition_Vo"/>
-        <include refid="whereCondition"/>
+        <include refid="whereCondition_Vo"/>
         ) m
         <choose>
             <when test='orderBy!=null and orderBy!=""'>

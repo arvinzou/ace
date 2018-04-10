@@ -170,7 +170,7 @@ function viewImgAndVdo(data) {
             template = liVideoTempLate;
         }
         template = template.replace('[fileUrl]', fastdfs_server + data[i].fileUrl);
-        template = template.replace('[deviceName]', data[i].deviceName ? data[i].deviceName : "拍摄方式");
+        template = template.replace('[deviceName]', data[i].deviceName ? data[i].deviceName : "拍摄类型");
         template = template.replace('[category]', rsd(data[i].category, '124'));
         template = template.replace('[fileTime]', data[i].inspectTime);
         $('.traffic-file .fileList').append($(template));
@@ -193,3 +193,16 @@ var liVideoTempLate = '<li>' +
     '             <span class="time">[fileTime]</span>' +
     '       </p>' +
     '</li>';
+
+
+function handleTraffic(id) {
+    const url = cfg.grid_edit_status_url;
+    const data = {
+        id: id,
+    }
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+            jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+        }
+    })
+}
