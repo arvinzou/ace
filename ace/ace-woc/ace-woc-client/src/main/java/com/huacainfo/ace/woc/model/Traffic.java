@@ -19,6 +19,9 @@ public class Traffic implements Serializable {
 
     private String locale;
 
+    /**
+     * 车牌号
+     */
     private String plateNo;
 
     private String direction;

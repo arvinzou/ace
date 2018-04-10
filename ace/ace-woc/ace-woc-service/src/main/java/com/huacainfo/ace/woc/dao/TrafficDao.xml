@@ -280,7 +280,16 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.TrafficVo"></resultMap>
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.TrafficVo">
+        <result column="vehicleId" jdbcType="VARCHAR" property="vehicleId"/>
+        <result column="vehiclePlateNo" jdbcType="VARCHAR" property="vehiclePlateNo"/>
+        <result column="vehicleColor" jdbcType="VARCHAR" property="vehicleColor"/>
+        <result column="vehicleType" jdbcType="VARCHAR" property="vehicleType"/>
+        <result column="vehicleTotalMass" jdbcType="DECIMAL" property="vehicleTotalMass"/>
+        <result column="vehicleApprovedMass" jdbcType="DECIMAL" property="vehicleApprovedMass"/>
+
+    </resultMap>
     <sql id="fromCondition_Vo">
     from traffic t
 	LEFT JOIN monitor_site m ON t.monitorSiteId = m.id
@@ -321,13 +330,43 @@
         </if>
 
     </sql>
+    <sql id="whereCondition_Vo">
+        where 0=0
+        <if test='condition.direction!=null and condition.direction!=""'>
+            and t.direction like
+            concat('%',#{condition.direction,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.plateNo!=null and condition.plateNo!=''">
+            and t.plateNo like
+            concat('%',#{condition.plateNo,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.siteId!=null and condition.siteId!=''">
+            and t.siteId like
+            concat('%',#{condition.siteId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.axleCount!=null and condition.axleCount!=''">
+            and t.axleCount =#{condition.axleCount,jdbcType=INTEGER}
+        </if>
+        <if test="condition.status!=null and condition.status!=''">
+            and t.status =#{condition.status,jdbcType=CHAR}
+        </if>
+        /*开始时间*/
+        <if test="condition.startTime!=null and condition.startTime!=''">
+            and t.inspectTime>=#{condition.startTime,jdbcType=TIMESTAMP}
+        </if>
+        /*结束时间*/
+        <if test="condition.endTime!=null and condition.endTime!=''">
+            and t.inspectTime&lt;=#{condition.endTime,jdbcType=TIMESTAMP}
+        </if>
+
+    </sql>
 
     <select id="findList" resultMap="BaseResultMapVo">
         select m.* from(
         select
         <include refid="Base_Column_List_Vo"/>
         <include refid="fromCondition_Vo"/>
-        <include refid="whereCondition"/>
+        <include refid="whereCondition_Vo"/>
         ) m
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -353,15 +392,27 @@
     name=#{name}
   </select>
 
+    <sql id="Vo_Column_List">
+        v.id as vehicleId, v.plateNo as vehiclePlateNo , v.vehicleColor, v.vehicleType,
+        v.totalMass as vehicleTotalMass, v.approvedMass as vehicleApprovedMass,
+        t.id, t.siteId, t.monitorSiteId, t.inspectTime, t.locale, t.plateNo, t.direction, t.axleCount, t.totalMass,
+        t.overMass, t.overRate, t.speed, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+        t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+    </sql>
+
     <select id="selectListByKeyWord" parameterType="java.util.Map" resultMap="BaseResultMapVo">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Vo_Column_List"/>
         from traffic t
+        left join woc.vehicle v on t.plateNo = v.plateNo
         where 1=1
         <if test="params.keyWord!=null and params.keyWord!=''">
             and (
             t.plateNo like concat('%',#{params.keyWord,jdbcType=VARCHAR},'%')
             )
+        </if>
+        <if test="params.id!=null and params.id!=''">
+            and t.id = #{params.id,jdbcType=VARCHAR}
         </if>
         order by t.createDate
         limit 0,20

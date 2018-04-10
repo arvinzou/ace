@@ -95,13 +95,132 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
-    <h5 class="header-title">基本信息</h5>
+    <h5 class="header-title">超限信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem hide">
             <span class="labelItemHeader">主键</span>
             <br>
             <span id="id"></span>
         </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">通行记录</span>
+            <br>
+            <span id="trafficId"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">轴数</span>
+            <br>
+            <span id="axleCount"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">总重（吨）</span>
+            <br>
+            <span id="totalMass"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">超限（吨）</span>
+            <br>
+            <span id="overMass"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">速度（km/h）</span>
+            <br>
+            <span id="speed"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">罚款金额</span>
+            <br>
+            <span id="fines"></span>
+        </div>
+    </div>
+
+    <h5 class="header-title">车辆信息</h5>
+    <div class="row" style="padding:10px">
+        <div class="labelItem">
+            <span class="labelItemHeader">车牌号</span>
+            <br>
+            <span id="vehicleId" class="hide"></span>
+            <span id="plateNo"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">车辆颜色</span>
+            <br>
+            <span id="vehicleColor"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">车辆类型</span>
+            <br>
+            <span id="vehicleType"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">总质量</span>
+            <br>
+            <span id="vehicleTotalMass"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">核定载重量</span>
+            <br>
+            <span id="vehicleApprovedMass"></span>
+        </div>
+    </div>
+
+    <h5 class="header-title">驾驶人信息</h5>
+    <div class="row" style="padding:10px">
+        <div class="labelItem">
+            <span class="labelItemHeader">驾驶人</span>
+            <br>
+            <span id="driver" class="hide"></span>
+            <span id="driverName"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">证件号码</span>
+            <br>
+            <span id="paperworkId"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">手机号码</span>
+            <br>
+            <span id="phoneNumber"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">住址</span>
+            <br>
+            <span id="address"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">从业资格证</span>
+            <br>
+            <span id="certNumber"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">照片</span>
+            <br>
+            <span id="headImgUrl"></span>
+        </div>
+    </div>
+
+    <h5 class="header-title">当事人信息</h5>
+    <div class="row" style="padding:10px">
+        <div class="labelItem">
+            <span class="labelItemHeader">当事人</span>
+            <br>
+            <span id="party" class="hide"></span>
+            <span id="partyName"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">当事公司</span>
+            <br>
+            <span id="partyDeptName"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">当事人类型</span>
+            <br>
+            <span id="partyType"></span>
+        </div>
+    </div>
+
+    <h5 class="header-title">执法信息</h5>
+    <div class="row" style="padding:10px">
         <div class="labelItem">
             <span class="labelItemHeader">案件号</span>
             <br>
@@ -111,34 +230,6 @@
             <span class="labelItemHeader">立案日期</span>
             <br>
             <span id="caseDate"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">通行记录</span>
-            <br>
-            <span id="trafficId"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">车牌号</span>
-            <br>
-            <span id="vehicleId" class="hide"></span>
-            <span id="plateNo"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">驾驶人</span>
-            <br>
-            <span id="driver" class="hide"></span>
-            <span id="driverName"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">当事人</span>
-            <br>
-            <span id="party" class="hide"></span>
-            <span id="partyName"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">当事人类型</span>
-            <br>
-            <span id="partyType"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">案件处理人1</span>
@@ -168,11 +259,7 @@
             <br>
             <span id="recordTime"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">罚款金额</span>
-            <br>
-            <span id="fines"></span>
-        </div>
+
         <div class="labelItem">
             <span class="labelItemHeader">审核部门</span>
             <br>

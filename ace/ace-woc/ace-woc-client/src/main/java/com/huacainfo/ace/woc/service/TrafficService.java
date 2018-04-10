@@ -59,7 +59,10 @@ public interface TrafficService {
 	    * @version: 2018-03-21
 	 */
 	public abstract MessageResponse updateTraffic(Traffic obj,UserProp userProp) throws Exception;
-    /**
+
+	public abstract MessageResponse updateTrafficStatus(String id, UserProp userProp) throws Exception;
+
+	/**
 	 *
 	    * @Title:selectTrafficByPrimaryKey
 	    * @Description:  TODO(获取案件审核记录)
@@ -86,5 +89,5 @@ public interface TrafficService {
 	public abstract MessageResponse deleteTrafficByTrafficId(String id,UserProp userProp) throws Exception;
 
 
-    Map<String,Object> selectListByKeyWord(String keyWord);
+    Map<String,Object> selectListByKeyWord(String keyWord, String id);
 }

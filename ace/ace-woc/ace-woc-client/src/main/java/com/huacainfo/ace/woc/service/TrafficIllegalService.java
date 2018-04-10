@@ -42,6 +42,8 @@ public interface TrafficIllegalService {
 	 */
 	public abstract MessageResponse insertTrafficIllegal(TrafficIllegal obj,UserProp userProp) throws Exception;
 
+    public abstract MessageResponse insertTrafficIllegalII(TrafficIllegal obj, UserProp userProp) throws Exception;
+
     /**
 	 *
 	    * @Title:updateTrafficIllegal

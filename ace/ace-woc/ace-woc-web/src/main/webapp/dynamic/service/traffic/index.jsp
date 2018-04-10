@@ -8,6 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>通行记录</title>
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
     <style>
         .traffic-file {
             padding: 10px;
@@ -56,6 +57,41 @@
         .fileList p .time {
             font-size: 14px;
             float: right;
+        }
+
+        .layout-user {
+            width: 60px;
+            height: 20px;
+            float: left;
+            margin: 1px 1px 1px;
+        }
+
+        .photo {
+            height: 90px;
+            max-height: 90px;
+            max-width: 90px;
+            vertical-align: middle;
+        }
+
+        #cboxContent {
+            background-color: rgb(255, 255, 255);
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
+            padding: 5px;
+        }
+
+        .ace-thumbnails > li {
+            float: left;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            margin: 2px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
         }
 
     </style>
@@ -280,6 +316,7 @@
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
+<script src="${portalPath}/content/common/assets/js/uncompressed/jquery.colorbox.js"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/traffic/config.js?version=${cfg.version}"></script>
 <script
@@ -288,6 +325,20 @@
         src="${pageContext.request.contextPath}/content/service/traffic/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/traffic/view.js?version=${cfg.version}"></script>
+
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
+
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+
+<script
+        src="${pageContext.request.contextPath}/content/service/traffic/upload.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

@@ -6,7 +6,10 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.woc.dao.TrafficIllegalDao;
 import com.huacainfo.ace.woc.model.Traffic;
+import com.huacainfo.ace.woc.model.TrafficIllegal;
+import com.huacainfo.ace.woc.service.TrafficIllegalService;
 import com.huacainfo.ace.woc.service.TrafficService;
 import com.huacainfo.ace.woc.vo.TrafficQVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
@@ -33,6 +36,9 @@ public class TrafficController extends WocBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private TrafficService trafficService;
+
+    @Autowired
+    private TrafficIllegalService trafficIllegalService;
 
     /**
      * @throws
@@ -98,6 +104,25 @@ public class TrafficController extends WocBaseController {
 
     /**
      * @throws
+     * @Title:updateTraffic
+     * @Description: TODO(更新通行记录)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 王恩
+     * @version: 2018-03-21
+     */
+    @RequestMapping(value = "/updateTrafficStatus")
+    @ResponseBody
+    public MessageResponse updateTrafficStatus(String id) throws Exception {
+        this.trafficService.updateTrafficStatus(id, this.getCurUserProp());
+        TrafficIllegal tt = new TrafficIllegal();
+        tt.setTrafficId(id);
+        return this.trafficIllegalService.insertTrafficIllegalII(tt, this.getCurUserProp());
+    }
+
+    /**
+     * @throws
      * @Title:selectTrafficByPrimaryKey
      * @Description: TODO(获取通行记录)
      * @param: @param id
@@ -136,7 +161,7 @@ public class TrafficController extends WocBaseController {
 
     @RequestMapping(value = "/selectListByKeyWord")
     @ResponseBody
-    public Map<String, Object> selectListByKeyWord(String q) throws Exception {
-        return trafficService.selectListByKeyWord(q);
+    public Map<String, Object> selectListByKeyWord(String q, String id) throws Exception {
+        return trafficService.selectListByKeyWord(q, id);
     }
 }

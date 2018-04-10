@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.ConsultDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.Consult">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="procTime" jdbcType="TIMESTAMP" property="procTime" />
+    <result column="procUser" jdbcType="VARCHAR" property="procUser" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.jxb.model.Consult">
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, mobile, category, description, status, procTime, procUser, remark, createDate
+  </sql>
+  <sql id="whereCondition">
+    from consult where 0=0
+    <if test='condition.name!=null and condition.name!=""'>
+      and name like
+      concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.id!=null and condition.id!=""'>
+      and id =#{condition.id,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.mobile!=null and condition.mobile!=""'>
+      and mobile like
+      concat('%',#{condition.mobile,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.category!=null and condition.category!=""'>
+      and category =#{condition.category,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.description!=null and condition.description!=""'>
+      and description like
+      concat('%',#{condition.description,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.status!=null and condition.status!=""'>
+      and status = #{condition.status,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.procTime!=null and condition.procTime!=""'>
+      and procTime = #{condition.procTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test='condition.procUser!=null and condition.procUser!=""'>
+      and procUser = #{condition.procUser,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.remark!=null and condition.remark!=""'>
+      and remark like
+      concat('%',#{condition.remark,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.createDate!=null and condition.createDate!=""'>
+      and createDate = #{condition.createDate,jdbcType=TIMESTAMP}
+    </if>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from consult
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from consult
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Consult">
+    insert into consult (id, name, mobile, 
+      category, description, status, 
+      procTime, procUser, remark, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{procTime,jdbcType=TIMESTAMP}, #{procUser,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Consult">
+    update consult
+    set name = #{name,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      procTime = #{procTime,jdbcType=TIMESTAMP},
+      procUser = #{procUser,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="findList" resultMap="BaseResultMapVo">
+    select
+    <include refid="Base_Column_List"/>
+    <include refid="whereCondition"/>
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+  <select id="isExit" resultType="int">
+    select count(*)
+    from consult where
+    name=#{name} and id =#{condition.id,jdbcType=VARCHAR}
+  </select>
+</mapper>

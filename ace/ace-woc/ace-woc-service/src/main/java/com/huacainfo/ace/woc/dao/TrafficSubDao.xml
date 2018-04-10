@@ -262,10 +262,9 @@
 
   <sql id="whereCondition">
     from traffic_sub t
-    where 0=0
-    <!--<if test='condition.name!=null and condition.name!=""'>-->
-    <!--and t.name like-->
-    <!--concat('%',#{condition.name,jdbcType=VARCHAR},'%')-->
-    <!--</if>-->
+      where 0=0
+      <if test='condition.trafficId!=null and condition.trafficId!=""'>
+          and t.trafficId =#{condition.trafficId,jdbcType=VARCHAR}
+      </if>
   </sql>
 </mapper>

@@ -304,18 +304,30 @@
   </update>
 
     <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.woc.vo.CasesVo">
-        <result column="driverName" jdbcType="VARCHAR" property="driverName"/>
         <result column="chp1Name" jdbcType="VARCHAR" property="chp1Name"/>
         <result column="chp2Name" jdbcType="VARCHAR" property="chp2Name"/>
-
         <result column="partyName" jdbcType="VARCHAR" property="partyName"/>
         <result column="partyDeptName" jdbcType="VARCHAR" property="partyDeptName"/>
+        <!--通行记录信息-->
         <result column="plateNo" jdbcType="VARCHAR" property="plateNo"/>
         <result column="axleCount" jdbcType="INTEGER" property="axleCount"/>
         <result column="totalMass" jdbcType="DECIMAL" property="totalMass"/>
         <result column="overMass" jdbcType="DECIMAL" property="overMass"/>
         <result column="overRate" jdbcType="DECIMAL" property="overRate"/>
         <result column="speed" jdbcType="DECIMAL" property="speed"/>
+        <!--驾驶人信息-->
+        <result column="driverName" jdbcType="VARCHAR" property="driverName"/>
+        <result column="paperworkId" jdbcType="VARCHAR" property="paperworkId"/>
+        <result column="phoneNumber" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="certNumber" jdbcType="VARCHAR" property="certNumber"/>
+        <result column="headImgUrl" jdbcType="VARCHAR" property="headImgUrl"/>
+        <!--车辆信息-->
+        <result column="vehiclePlateNo" jdbcType="VARCHAR" property="vehiclePlateNo"/>
+        <result column="vehicleColor" jdbcType="VARCHAR" property="vehicleColor"/>
+        <result column="vehicleType" jdbcType="VARCHAR" property="vehicleType"/>
+        <result column="vehicleTotalMass" jdbcType="DECIMAL" property="vehicleTotalMass"/>
+        <result column="vehicleApprovedMass" jdbcType="DECIMAL" property="vehicleApprovedMass"/>
     </resultMap>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
@@ -323,15 +335,24 @@
         <include refid="Base_Column_List_Vo"/>
         from woc.cases t
         left join woc.traffic tc on t.trafficId = tc.id
-        left join woc.person p on t.party = p.id
-        left join portal.department d on p.companyId = d.department_id
+        left join woc.person p on t.driver = p.id
+        left join woc.vehicle v on  t.vehicleId = v.id
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <sql id="Base_Column_List_Vo">
-        p.`name` as partyName, d.department_name as partyDeptName,
-        (select p.name from woc.person p where t.driver= p.id) as driverName,
-		(select p.name from woc.person p where t.chp1= p.id) as chp1Name,
+        p.`name` as driverName, p.paperworkId, p.phoneNumber, p.address, p.certNumber, p.headImgUrl,
+        v.plateNo as vehiclePlateNo , v.vehicleColor, v.vehicleType,
+        v.totalMass as vehicleTotalMass, v.approvedMass as vehicleApprovedMass,
+        (select p.name from woc.person p where t.party= p.id) as partyName,
+        (SELECT
+			d.department_name
+		FROM
+			woc.person p
+		LEFT JOIN portal.department d ON p.companyId = d.department_id
+		WHERE
+			t.party = p.id) as partyDeptName,
+        (select p.name from woc.person p where t.chp1= p.id) as chp1Name,
         (select p.name from woc.person p where t.chp2= p.id) as chp2Name,
         tc.plateNo, tc.axleCount,tc.totalMass, tc.overMass, tc.overRate, tc.speed,
         t.id, t.caseNo, t.caseDate, t.trafficId, t.vehicleId, t.driver, t.party, t.partyType, t.chp1, t.lecn,
@@ -357,8 +378,8 @@
     <sql id="whereCondition">
         from woc.cases t
         left join woc.traffic tc on t.trafficId = tc.id
-        left join woc.person p on t.party = p.id
-        left join portal.department d on p.companyId = d.department_id
+        left join woc.person p on t.driver = p.id
+        left join woc.vehicle v on  t.vehicleId = v.id
         where 1 = 1
         <if test="condition.caseNo!=null and condition.caseNo!=&quot;&quot;">
             and t.caseNo like concat(#{condition.caseNo,jdbcType=VARCHAR},'%')

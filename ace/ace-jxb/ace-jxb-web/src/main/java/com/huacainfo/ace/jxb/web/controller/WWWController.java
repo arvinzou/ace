@@ -94,6 +94,7 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public Map<String, Object> getListByCompany(int page, String companyId) throws Exception {
         Map<String, Object> p = this.getPageParam(page, this.getParams());
+        logger.debug("=========================================================liveList"+this.wwwService.getLiveList(companyId, page, p));
         return this.wwwService.getLiveList(companyId, page, p);
     }
 

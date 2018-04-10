@@ -10,8 +10,10 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.dao.TrafficDao;
+import com.huacainfo.ace.woc.dao.TrafficIllegalDao;
 import com.huacainfo.ace.woc.dao.TrafficSubDao;
 import com.huacainfo.ace.woc.model.Traffic;
+import com.huacainfo.ace.woc.model.TrafficIllegal;
 import com.huacainfo.ace.woc.service.TrafficService;
 import com.huacainfo.ace.woc.vo.TrafficQVo;
 import com.huacainfo.ace.woc.vo.TrafficSubVo;
@@ -179,6 +181,31 @@ public class TrafficServiceImpl implements TrafficService {
 
     /**
      * @throws
+     * @Title:updateTraffic
+     * @Description: TODO(更新通行记录)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 王恩
+     * @version: 2018-03-21
+     */
+    @Override
+    public MessageResponse updateTrafficStatus(String id, UserProp userProp)
+            throws Exception {
+        Traffic t = new Traffic();
+        t.setId(id);
+        t.setStatus("0");
+        t.setLastModifyDate(new Date());
+        t.setLastModifyUserName(userProp.getName());
+        t.setLastModifyUserId(userProp.getUserId());
+        this.trafficDao.updateByPrimaryKeySelective(t);
+        this.dataBaseLogService.log("变更通行记录", "通行记录", "", t.getId(), t.getId(), userProp);
+        return new MessageResponse(0, "变更通行记录完成！");
+    }
+
+    /**
+     * @throws
      * @Title:selectTrafficByPrimaryKey
      * @Description: TODO(获取通行记录)
      * @param: @param id
@@ -218,9 +245,12 @@ public class TrafficServiceImpl implements TrafficService {
     }
 
     @Override
-    public Map<String, Object> selectListByKeyWord(String keyWord) {
+    public Map<String, Object> selectListByKeyWord(String keyWord, String id) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("keyWord", keyWord);
+        if (CommonUtils.isNotBlank(id)) {
+            params.put("id", id);
+        }
 
         List<TrafficVo> list = trafficDao.selectListByKeyWord(params);
         Map<String, Object> rtn = new HashMap<>();
