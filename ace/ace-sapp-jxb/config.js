@@ -17,7 +17,8 @@ var config = {
     checkImageUrl: `${server}/uf/www/captcha/image.do`,
     uploadUrl: `${server}/jxb/www/jxb/upload.do`,
     getLiveMsgList: `${server}/jxb/www/jxb/getLiveMsgList.do`,
-    insertLiveRptSapp: `${server}/jxb/www/jxb/insertLiveRptSapp.do`
+    insertLiveRptSapp: `${server}/jxb/www/jxb/insertLiveRptSapp.do`,
+    getLiveRptList: `${server}/jxb/www/jxb/getLiveRptList.do`
 };
 
 
