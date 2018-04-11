@@ -1,4 +1,4 @@
-package com.huacainfo.ace.woc.service.impl;
+package com.huacainfo.ace.jxb.service.impl;
 
 
 import java.util.Date;
@@ -77,7 +77,27 @@ public class QuestionServiceImpl implements QuestionService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getTestPaperId())) {return new MessageResponse(1, "所属试卷不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "类别不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "题目名称不能为空！");}if (CommonUtils.isBlank(o.getSort())) {return new MessageResponse(1, "顺序不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getTestPaperId())) {
+return new MessageResponse(1, "所属试卷不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "类别不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "题目名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getSort())) {
+return new MessageResponse(1, "顺序不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
 		int temp = this.questionDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "考题名称重复！");
@@ -106,7 +126,27 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
 	public MessageResponse updateQuestion(Question o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getTestPaperId())) {return new MessageResponse(1, "所属试卷不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "类别不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "题目名称不能为空！");}if (CommonUtils.isBlank(o.getSort())) {return new MessageResponse(1, "顺序不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getTestPaperId())) {
+return new MessageResponse(1, "所属试卷不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "类别不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "题目名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getSort())) {
+return new MessageResponse(1, "顺序不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
 		
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());

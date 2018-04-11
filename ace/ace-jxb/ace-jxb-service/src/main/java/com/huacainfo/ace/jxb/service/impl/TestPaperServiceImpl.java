@@ -1,4 +1,4 @@
-package com.huacainfo.ace.woc.service.impl;
+package com.huacainfo.ace.jxb.service.impl;
 
 
 import java.util.Date;
@@ -77,7 +77,21 @@ public class TestPaperServiceImpl implements TestPaperService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "试卷名称不能为空！");}if (CommonUtils.isBlank(o.getIntroduce())) {return new MessageResponse(1, "介绍不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "试卷名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getIntroduce())) {
+return new MessageResponse(1, "介绍不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
 		int temp = this.testPaperDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "试卷名称重复！");
@@ -106,7 +120,21 @@ public class TestPaperServiceImpl implements TestPaperService {
     @Override
 	public MessageResponse updateTestPaper(TestPaper o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "试卷名称不能为空！");}if (CommonUtils.isBlank(o.getIntroduce())) {return new MessageResponse(1, "介绍不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "试卷名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getIntroduce())) {
+return new MessageResponse(1, "介绍不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
 		
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());

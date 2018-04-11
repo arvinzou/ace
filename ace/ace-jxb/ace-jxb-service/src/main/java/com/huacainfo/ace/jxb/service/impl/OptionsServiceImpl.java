@@ -1,4 +1,4 @@
-package com.huacainfo.ace.woc.service.impl;
+package com.huacainfo.ace.jxb.service.impl;
 
 
 import java.util.Date;
@@ -77,7 +77,30 @@ public class OptionsServiceImpl implements OptionsService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getQuestionId())) {return new MessageResponse(1, "所属考题不能为空！");}if (CommonUtils.isBlank(o.getKeyName())) {return new MessageResponse(1, "选项名称不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "名称不能为空！");}if (CommonUtils.isBlank(o.getSort())) {return new MessageResponse(1, "顺序不能为空！");}if (CommonUtils.isBlank(o.getScore())) {return new MessageResponse(1, "分值不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getQuestionId())) {
+return new MessageResponse(1, "所属考题不能为空！");
+}
+if (CommonUtils.isBlank(o.getKeyName())) {
+return new MessageResponse(1, "选项名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getSort())) {
+return new MessageResponse(1, "顺序不能为空！");
+}
+if (CommonUtils.isBlank(o.getScore())) {
+return new MessageResponse(1, "分值不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
 		int temp = this.optionsDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "选项名称重复！");
@@ -106,7 +129,30 @@ public class OptionsServiceImpl implements OptionsService {
     @Override
 	public MessageResponse updateOptions(Options o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getQuestionId())) {return new MessageResponse(1, "所属考题不能为空！");}if (CommonUtils.isBlank(o.getKeyName())) {return new MessageResponse(1, "选项名称不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "名称不能为空！");}if (CommonUtils.isBlank(o.getSort())) {return new MessageResponse(1, "顺序不能为空！");}if (CommonUtils.isBlank(o.getScore())) {return new MessageResponse(1, "分值不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}if (CommonUtils.isBlank(o.getLastModifyDate())) {return new MessageResponse(1, "最后更新时间不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getQuestionId())) {
+return new MessageResponse(1, "所属考题不能为空！");
+}
+if (CommonUtils.isBlank(o.getKeyName())) {
+return new MessageResponse(1, "选项名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getSort())) {
+return new MessageResponse(1, "顺序不能为空！");
+}
+if (CommonUtils.isBlank(o.getScore())) {
+return new MessageResponse(1, "分值不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
+if (CommonUtils.isBlank(o.getLastModifyDate())) {
+return new MessageResponse(1, "最后更新时间不能为空！");
+}
 		
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
