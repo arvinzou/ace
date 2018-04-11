@@ -34,4 +34,6 @@ public interface TrafficDao {
 	int isExit(Traffic record);
 
     List<TrafficVo> selectListByKeyWord(@Param("params") Map<String, Object> params);
+
+    Map<String,Object> getStatisticsCounts(@Param("params")Map<String, Object> params);
 }

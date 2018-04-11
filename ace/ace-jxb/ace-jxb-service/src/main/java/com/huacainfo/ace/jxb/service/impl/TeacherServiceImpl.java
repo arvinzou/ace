@@ -77,15 +77,44 @@ public class TeacherServiceImpl implements TeacherService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "姓名不能为空！");}if (CommonUtils.isBlank(o.getMobile())) {return new MessageResponse(1, "手机号不能为空！");}if (CommonUtils.isBlank(o.getImagePhotoUrl())) {return new MessageResponse(1, "形象照不能为空！");}if (CommonUtils.isBlank(o.getIdCard())) {return new MessageResponse(1, "身份证号不能为空！");}if (CommonUtils.isBlank(o.getIdCardImgUrl())) {return new MessageResponse(1, "身份证件电子档不能为空！");}if (CommonUtils.isBlank(o.getCertificateNo())) {return new MessageResponse(1, "资格从业证书号不能为空！");}if (CommonUtils.isBlank(o.getCertificateImgUrl())) {return new MessageResponse(1, "资格从业证书电子档不能为空！");}if (CommonUtils.isBlank(o.getEvidenceImgUrl())) {return new MessageResponse(1, "身份证持胸前自拍照不能为空！");}if (CommonUtils.isBlank(o.getLevel())) {return new MessageResponse(1, "级别不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "姓名不能为空！");
+}
+if (CommonUtils.isBlank(o.getMobile())) {
+return new MessageResponse(1, "手机号不能为空！");
+}
+if (CommonUtils.isBlank(o.getImagePhotoUrl())) {
+return new MessageResponse(1, "形象照不能为空！");
+}
+if (CommonUtils.isBlank(o.getIdCard())) {
+return new MessageResponse(1, "身份证号不能为空！");
+}
+if (CommonUtils.isBlank(o.getIdCardImgUrl())) {
+return new MessageResponse(1, "身份证件电子档不能为空！");
+}
+if (CommonUtils.isBlank(o.getCertificateNo())) {
+return new MessageResponse(1, "资格从业证书号不能为空！");
+}
+if (CommonUtils.isBlank(o.getCertificateImgUrl())) {
+return new MessageResponse(1, "资格从业证书电子档不能为空！");
+}
+if (CommonUtils.isBlank(o.getEvidenceImgUrl())) {
+return new MessageResponse(1, "身份证持胸前自拍照不能为空！");
+}
+if (CommonUtils.isBlank(o.getLevel())) {
+return new MessageResponse(1, "级别不能为空！");
+}
 		int temp = this.teacherDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "老师名称重复！");
 		}
 		o.setCreateDate(new Date());
-		o.setStatus("1");
-		o.setCreateUserName(userProp.getName());
-		o.setCreateUserId(userProp.getUserId());
+		//o.setStatus("1");
+		//o.setCreateUserName(userProp.getName());
+		//o.setCreateUserId(userProp.getUserId());
 		this.teacherDao.insert(o);
 		this.dataBaseLogService.log("添加老师", "老师", "", o.getName(),
 				o.getName(), userProp);
@@ -106,11 +135,40 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
 	public MessageResponse updateTeacher(Teacher o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "姓名不能为空！");}if (CommonUtils.isBlank(o.getMobile())) {return new MessageResponse(1, "手机号不能为空！");}if (CommonUtils.isBlank(o.getImagePhotoUrl())) {return new MessageResponse(1, "形象照不能为空！");}if (CommonUtils.isBlank(o.getIdCard())) {return new MessageResponse(1, "身份证号不能为空！");}if (CommonUtils.isBlank(o.getIdCardImgUrl())) {return new MessageResponse(1, "身份证件电子档不能为空！");}if (CommonUtils.isBlank(o.getCertificateNo())) {return new MessageResponse(1, "资格从业证书号不能为空！");}if (CommonUtils.isBlank(o.getCertificateImgUrl())) {return new MessageResponse(1, "资格从业证书电子档不能为空！");}if (CommonUtils.isBlank(o.getEvidenceImgUrl())) {return new MessageResponse(1, "身份证持胸前自拍照不能为空！");}if (CommonUtils.isBlank(o.getLevel())) {return new MessageResponse(1, "级别不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "姓名不能为空！");
+}
+if (CommonUtils.isBlank(o.getMobile())) {
+return new MessageResponse(1, "手机号不能为空！");
+}
+if (CommonUtils.isBlank(o.getImagePhotoUrl())) {
+return new MessageResponse(1, "形象照不能为空！");
+}
+if (CommonUtils.isBlank(o.getIdCard())) {
+return new MessageResponse(1, "身份证号不能为空！");
+}
+if (CommonUtils.isBlank(o.getIdCardImgUrl())) {
+return new MessageResponse(1, "身份证件电子档不能为空！");
+}
+if (CommonUtils.isBlank(o.getCertificateNo())) {
+return new MessageResponse(1, "资格从业证书号不能为空！");
+}
+if (CommonUtils.isBlank(o.getCertificateImgUrl())) {
+return new MessageResponse(1, "资格从业证书电子档不能为空！");
+}
+if (CommonUtils.isBlank(o.getEvidenceImgUrl())) {
+return new MessageResponse(1, "身份证持胸前自拍照不能为空！");
+}
+if (CommonUtils.isBlank(o.getLevel())) {
+return new MessageResponse(1, "级别不能为空！");
+}
 		
-		o.setLastModifyDate(new Date());
-		o.setLastModifyUserName(userProp.getName());
-		o.setLastModifyUserId(userProp.getUserId());
+		o.setCreateDate(new Date());
+		//o.setLastModifyUserName(userProp.getName());
+		//o.setLastModifyUserId(userProp.getUserId());
 		this.teacherDao.updateByPrimaryKey(o);
 		this.dataBaseLogService.log("变更老师", "老师", "", o.getName(),
 				o.getName(), userProp);
