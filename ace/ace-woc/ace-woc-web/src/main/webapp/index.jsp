@@ -18,12 +18,12 @@
       id="style_components" type="text/css"/>
 <style>
     .charts-portal-ct1 {
-        width: 500px;
+        width: 100%;
         height: 300px
     }
 
     .charts-portal-ct2 {
-        width: 500px;
+        width: 100%;
         height: 300px
     }
 </style>
@@ -215,8 +215,13 @@
 
 <script type="text/javascript">
     window.onresize = function () {
+        console.log("-------------123-------------");
         parent.autoWidth();
+
+        //        console.log("-------------");
+        //        console.log($(".widget-main").width());
     }
+
 </script>
 <script src="${pageContext.request.contextPath}/content/index/index.js?version=${cfg.version}"></script>
 <style>

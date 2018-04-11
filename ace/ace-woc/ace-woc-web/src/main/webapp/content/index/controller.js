@@ -71,7 +71,6 @@ function chart1() {
     // 	}
     // });
 
-    //for test;
     // var o = "";
     // option1.series[0].data.push(o);
 
@@ -79,14 +78,20 @@ function chart1() {
 }
 
 function chart3() {
-    // $.ajax({
-    //     type: "post",
-    //     url: contextPath + '/anslysis/query.do',
-    //     data: {reportId: "portal"},
-    //     success: function (rst) {
-    //         $.each(rst.value, function (i, o) {
-    //             $('#' + o.id).html(o.value);
-    //         });
-    //     }
-    // });
+    $.ajax({
+        type: "post",
+        url: contextPath + '/anslysis/queryCounts',
+        data: {reportId: "portal"},
+        success: function (rst) {
+            // $.each(rst, function (i, o) {
+            //     $('#' + o.id).html(o.value);
+            //     console.log(o);
+            // });
+
+            $('#traffic-count').html(rst.trafficCounts);
+            $('#illegal-traffic-count').html(rst.trafficIllegalCounts);
+            $('#pt-traffic-count').html(rst.ptTrafficCounts);
+            $('#pt-cases-count').html(rst.ptCasesCounts);
+        }
+    });
 }

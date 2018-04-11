@@ -22,14 +22,38 @@ public class AnalysisController extends WocBaseController {
     @Autowired
     private AnalysisService analysisService;
 
-    @RequestMapping(value = "/query.do")
+    @RequestMapping(value = "/query")
     @ResponseBody
-    public ListResult<Map<String, Object>> query(
-            String reportId)
-            throws Exception {
+    public ListResult<Map<String, Object>> query(String reportId) throws Exception {
         Map<String, Object> condition = getParams();
         return analysisService.query(condition, reportId, 0, 0);
     }
 
 
+    /**
+     * 查询 以下累计数据
+     * 1.今日通行记录数
+     * 2.今日违章记录数
+     * 3.待审通行记录数
+     * 4.待审案件数
+     *
+     * @return
+     */
+    @RequestMapping(value = "/queryCounts")
+    @ResponseBody
+    public Map<String, Object> queryCounts() {
+        return analysisService.queryCounts(getCurUserProp());
+    }
+
+
+    /**
+     * 今日通行记录折线图
+     *
+     * @return
+     */
+    @RequestMapping(value = "/queryCounts")
+    @ResponseBody
+    public Map<String, Object> todayChart() {
+        return analysisService.todayChart(getCurUserProp());
+    }
 }

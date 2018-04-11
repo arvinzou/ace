@@ -1,85 +1,79 @@
-var option1 = {
-    title: {
-        text: '分时段通行情况',
-        subtext: ''
-    },
-    tooltip: {
-        trigger: 'item'
-    },
-    legend: {
-        data: []
-    },
-    toolbox: {
-        show: true,
-        feature: {
-            mark: {show: false},
-            dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ['line', 'bar']},
-            restore: {show: true},
-            saveAsImage: {show: true}
-        }
-    },
-    calculable: false,
-    xAxis: [{
-        type: 'category',
-        boundaryGap: false,
-        data: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-            '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
-        axisLabel: {
-            formatter: '{value} 时'
-        }
-    }],
-    yAxis: [{
-        type: 'value',
-        axisLabel: {
-            formatter: '{value} 次'
-        }
-    }],
-    series: [
-        {
-            name: '违章记录数',
-            type: 'line',
-            data: [0, 1, 2, 3, 4, 5, 6, 0, 4, 3, 2, 1],
-            markPoint: {
-                data: [
-                    {type: 'max', name: '最大值'},
-                    {type: 'min', name: '最小值'}
-                ]
-            },
-            // markLine: {
-            //     data: [
-            //         {type: 'average', name: '平均值'}
-            //     ]
-            // }
+var option1 =
+    {
+        title: {
+            text: '分时段通行情况',
+            subtext: ''
         },
-        // {
-        //     name: '最低气温',
-        //     type: 'line',
-        //     data: [1, -2, 2, 5, 3, 2, 0],
-        //     markPoint: {
-        //         data: [
-        //             {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
-        //         ]
-        //     },
-        //     markLine: {
-        //         data: [
-        //             {type: 'average', name: '平均值'}
-        //         ]
-        //     }
-        // }
-    ]
-};
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            data: ['违章记录数']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: false},
+                dataView: {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        calculable: false,
+        dataZoom: {
+            show: true,
+            realtime: true,
+            start: 0,
+            end: 50
+        },
+        xAxis: [{
+            type: 'category',
+            boundaryGap: false,
+            data: ['0~1', '1~2', '2~3', '3~4', '4~5', '5~6', '6-7', '7~8','8~9','9~10', '10~11', '11~12',
+                 '12~13', '13~14', '14~15', '15-16', '16~17','17~18','18~19','19~20','20~21', '21~22', '22~23','23~24'],
+            axisLabel: {
+                interval: 0,
+                formatter: '{value} 时'
+            },
+
+        }],
+        yAxis: [{
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} 次'
+            }
+        }],
+        series: [
+            {
+                name: '违章记录数',
+                type: 'line',
+                data: [0, 1, 2, 3, 4, 5, 6, 0, 4, 3, 2, 1],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
 
 var option2 = {
     title: {
         text: '每日通行情况',
-        subtext: ''
+        subtext: '',
     },
     tooltip: {
         trigger: 'item'
     },
     legend: {
-        data: []
+        data: ['违章记录数']
     },
     toolbox: {
         show: true,
@@ -92,12 +86,19 @@ var option2 = {
         }
     },
     calculable: false,
+    dataZoom: {
+        show: true,
+        realtime: true,
+        start: 0,
+        end: 50
+    },
     xAxis: [{
         type: 'category',
         boundaryGap: false,
         data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
             '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
         axisLabel: {
+            interval: 'auto',
             formatter: '{value} 日'
         }
     }],
@@ -118,27 +119,12 @@ var option2 = {
                     {type: 'min', name: '最小值'}
                 ]
             },
-            // markLine: {
-            //     data: [
-            //         {type: 'average', name: '平均值'}
-            //     ]
-            // }
-        },
-        // {
-        //     name: '最低气温',
-        //     type: 'line',
-        //     data: [1, -2, 2, 5, 3, 2, 0],
-        //     markPoint: {
-        //         data: [
-        //             {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
-        //         ]
-        //     },
-        //     markLine: {
-        //         data: [
-        //             {type: 'average', name: '平均值'}
-        //         ]
-        //     }
-        // }
+            markLine: {
+                data: [
+                    {type: 'average', name: '平均值'}
+                ]
+            }
+        }
     ]
 };
 

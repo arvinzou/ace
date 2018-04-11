@@ -328,6 +328,9 @@
         <if test="condition.endTime!=null and condition.endTime!=''">
             and inspectTime&lt;=#{condition.endTime,jdbcType=TIMESTAMP}
         </if>
+        <if test="condition.nowDate!=null and condition.nowDate!=''">
+            and DATEDIFF(createDate, #{condition.nowDate,jdbcType=VARCHAR}) =0
+        </if>
 
     </sql>
     <sql id="whereCondition_Vo">
@@ -416,5 +419,17 @@
         </if>
         order by t.createDate
         limit 0,20
+    </select>
+
+    <select id="getStatisticsCounts" parameterType="java.util.Map" resultType="java.util.Map">
+       select
+            (select COUNT(*) from woc.traffic
+              where DATEDIFF(createDate,#{params.nowDate,jdbcType=VARCHAR}) =0) as trafficCounts,
+            (select COUNT(*) from woc.traffic_illegal
+              where DATEDIFF(createDate,#{params.nowDate,jdbcType=VARCHAR}) =0 ) as trafficIllegalCounts,
+            (select count(*) from woc.traffic where status = 0 ) as ptTrafficCounts,
+            (select count(*) from woc.cases where status = 2) as ptCasesCounts
+        from woc.traffic
+        limit 0,1
     </select>
 </mapper>
