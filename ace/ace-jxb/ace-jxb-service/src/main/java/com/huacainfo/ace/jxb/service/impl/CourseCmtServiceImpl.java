@@ -77,18 +77,29 @@ public class CourseCmtServiceImpl implements CourseCmtService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getCourseId())) {return new MessageResponse(1, "课程主键不能为空！");}if (CommonUtils.isBlank(o.getUserId())) {return new MessageResponse(1, "评论人不能为空！");}if (CommonUtils.isBlank(o.getContent())) {return new MessageResponse(1, "评论内容不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCourseId())) {
+return new MessageResponse(1, "课程主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getUserId())) {
+return new MessageResponse(1, "评论人不能为空！");
+}
+if (CommonUtils.isBlank(o.getContent())) {
+return new MessageResponse(1, "评论内容不能为空！");
+}
 		int temp = this.courseCmtDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "课程评论名称重复！");
 		}
 		o.setCreateDate(new Date());
-		o.setStatus("1");
-		o.setCreateUserName(userProp.getName());
-		o.setCreateUserId(userProp.getUserId());
+		//o.setStatus("1");
+		//o.setCreateUserName(userProp.getName());
+		o.setUserId(userProp.getUserId());
 		this.courseCmtDao.insert(o);
-		this.dataBaseLogService.log("添加课程评论", "课程评论", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("添加课程评论", "课程评论", "", o.getCourseId(),
+				o.getCourseId(), userProp);
 		return new MessageResponse(0, "添加课程评论完成！");
 	}
     /**
@@ -106,14 +117,25 @@ public class CourseCmtServiceImpl implements CourseCmtService {
     @Override
 	public MessageResponse updateCourseCmt(CourseCmt o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getCourseId())) {return new MessageResponse(1, "课程主键不能为空！");}if (CommonUtils.isBlank(o.getUserId())) {return new MessageResponse(1, "评论人不能为空！");}if (CommonUtils.isBlank(o.getContent())) {return new MessageResponse(1, "评论内容不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCourseId())) {
+return new MessageResponse(1, "课程主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getUserId())) {
+return new MessageResponse(1, "评论人不能为空！");
+}
+if (CommonUtils.isBlank(o.getContent())) {
+return new MessageResponse(1, "评论内容不能为空！");
+}
 		
-		o.setLastModifyDate(new Date());
-		o.setLastModifyUserName(userProp.getName());
-		o.setLastModifyUserId(userProp.getUserId());
+		o.setCreateDate(new Date());
+		//o.setLastModifyUserName(userProp.getName());
+		o.setUserId(userProp.getUserId());
 		this.courseCmtDao.updateByPrimaryKey(o);
-		this.dataBaseLogService.log("变更课程评论", "课程评论", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("变更课程评论", "课程评论", "", o.getUserId(),
+				o.getUserId(), userProp);
 		return new MessageResponse(0, "变更课程评论完成！");
 	}
 

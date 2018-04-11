@@ -77,18 +77,26 @@ public class MemberServiceImpl implements MemberService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getLevel())) {return new MessageResponse(1, "会员级别不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "会员状态不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getLevel())) {
+return new MessageResponse(1, "会员级别不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "会员状态不能为空！");
+}
 		int temp = this.memberDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "会员名称重复！");
 		}
 		o.setCreateDate(new Date());
 		o.setStatus("1");
-		o.setCreateUserName(userProp.getName());
-		o.setCreateUserId(userProp.getUserId());
+		//o.setCreateUserName(userProp.getName());
+		//.setCreateUserId(userProp.getUserId());
 		this.memberDao.insert(o);
-		this.dataBaseLogService.log("添加会员", "会员", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("添加会员", "会员", "", o.getId(),
+				o.getId(), userProp);
 		return new MessageResponse(0, "添加会员完成！");
 	}
     /**
@@ -106,14 +114,22 @@ public class MemberServiceImpl implements MemberService {
     @Override
 	public MessageResponse updateMember(Member o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getLevel())) {return new MessageResponse(1, "会员级别不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "会员状态不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getLevel())) {
+return new MessageResponse(1, "会员级别不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "会员状态不能为空！");
+}
 		
-		o.setLastModifyDate(new Date());
-		o.setLastModifyUserName(userProp.getName());
-		o.setLastModifyUserId(userProp.getUserId());
+		o.setCreateDate(new Date());
+		//o.setLastModifyUserName(userProp.getName());
+		//o.setLastModifyUserId(userProp.getUserId());
 		this.memberDao.updateByPrimaryKey(o);
-		this.dataBaseLogService.log("变更会员", "会员", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("变更会员", "会员", "", o.getId(),
+				o.getId(), userProp);
 		return new MessageResponse(0, "变更会员完成！");
 	}
 

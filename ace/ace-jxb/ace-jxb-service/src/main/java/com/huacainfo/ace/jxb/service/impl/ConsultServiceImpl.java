@@ -77,15 +77,32 @@ public class ConsultServiceImpl implements ConsultService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "姓名不能为空！");}if (CommonUtils.isBlank(o.getMobile())) {return new MessageResponse(1, "联系方式不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "情感类型不能为空！");}if (CommonUtils.isBlank(o.getDescription())) {return new MessageResponse(1, "问题描述不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "处理状态不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "姓名不能为空！");
+}
+if (CommonUtils.isBlank(o.getMobile())) {
+return new MessageResponse(1, "联系方式不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "情感类型不能为空！");
+}
+if (CommonUtils.isBlank(o.getDescription())) {
+return new MessageResponse(1, "问题描述不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "处理状态不能为空！");
+}
 		int temp = this.consultDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "咨询预约名称重复！");
 		}
 		o.setCreateDate(new Date());
 		o.setStatus("1");
-		o.setCreateUserName(userProp.getName());
-		o.setCreateUserId(userProp.getUserId());
+		//o.setName(userProp.getName());
+		//o.setCreateUserId(userProp.getUserId());
 		this.consultDao.insert(o);
 		this.dataBaseLogService.log("添加咨询预约", "咨询预约", "", o.getName(),
 				o.getName(), userProp);
@@ -106,11 +123,28 @@ public class ConsultServiceImpl implements ConsultService {
     @Override
 	public MessageResponse updateConsult(Consult o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "姓名不能为空！");}if (CommonUtils.isBlank(o.getMobile())) {return new MessageResponse(1, "联系方式不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "情感类型不能为空！");}if (CommonUtils.isBlank(o.getDescription())) {return new MessageResponse(1, "问题描述不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "处理状态不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "姓名不能为空！");
+}
+if (CommonUtils.isBlank(o.getMobile())) {
+return new MessageResponse(1, "联系方式不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "情感类型不能为空！");
+}
+if (CommonUtils.isBlank(o.getDescription())) {
+return new MessageResponse(1, "问题描述不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "处理状态不能为空！");
+}
 		
-		o.setLastModifyDate(new Date());
-		o.setLastModifyUserName(userProp.getName());
-		o.setLastModifyUserId(userProp.getUserId());
+		o.setCreateDate(new Date());
+		//o.setLastModifyUserName(userProp.getName());
+		//o.setLastModifyUserId(userProp.getUserId());
 		this.consultDao.updateByPrimaryKey(o);
 		this.dataBaseLogService.log("变更咨询预约", "咨询预约", "", o.getName(),
 				o.getName(), userProp);
