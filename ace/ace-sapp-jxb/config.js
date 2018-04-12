@@ -18,7 +18,8 @@ var config = {
     uploadUrl: `${server}/jxb/www/jxb/upload.do`,
     getLiveMsgList: `${server}/jxb/www/jxb/getLiveMsgList.do`,
     insertLiveRptSapp: `${server}/jxb/www/jxb/insertLiveRptSapp.do`,
-    getLiveRptList: `${server}/jxb/www/jxb/getLiveRptList.do`
+    getLiveRptList: `${server}/jxb/www/jxb/getLiveRptList.do`,
+    insertLiveSapp: `${server}/jxb/www/jxb/insertLiveSapp.do`
 };
 
 

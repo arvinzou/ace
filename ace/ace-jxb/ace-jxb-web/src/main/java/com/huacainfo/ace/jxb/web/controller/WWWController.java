@@ -309,7 +309,10 @@ public class WWWController extends LiveBaseController {
         if(!captcha.equals(j_captcha_weui)){
             return new MessageResponse(1,"验证码错误！");
         }
-
+        MessageResponse checked = jxbService.checkIsBandUsers(this.getCurWxUser().getOpenId());
+        if (0 != checked.getStatus()) {
+            return checked;
+        }
         Map<String, String> data = new HashMap<String, String>();
         data.put("jsons", jsons);
         this.kafkaProducerService.sendMsg("rpt", data);
@@ -411,5 +414,28 @@ public class WWWController extends LiveBaseController {
             return checked;
 
         }
+    }
+
+    @RequestMapping(value = "/insertLiveSapp.do")
+    @ResponseBody
+    public MessageResponse insertLiveSapp(String jsons) throws Exception {
+        Map<String, Object> params = JsonUtil.toMap(jsons);
+        String captcha= (String) params.get("captcha");
+        String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+        String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
+        this.logger.info("captcha->{}",captcha);
+        this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+        if(CommonUtils.isBlank(captcha)){
+            return new MessageResponse(1,"验证码不能为空！");
+        }
+        if(!captcha.equals(j_captcha_weui)){
+            return new MessageResponse(1,"验证码错误！");
+        }
+        Live jxb= JsonUtil.toObject(jsons, Live.class);
+        MessageResponse checked = jxbService.checkIsBandUsers(this.getCurWxUser().getOpenId());
+        if (0 != checked.getStatus()) {
+            return checked;
+        }
+        return jxbService.insertLive(this.getCurWxUser().getOpenId(), jxb);
     }
 }
