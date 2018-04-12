@@ -1,4 +1,4 @@
-package com.huacainfo.ace.woc.service.impl;
+package com.huacainfo.ace.jxb.service.impl;
 
 
 import java.util.Date;
@@ -77,18 +77,38 @@ public class OrderServiceImpl implements OrderService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getConsumerId())) {return new MessageResponse(1, "客户主键不能为空！");}if (CommonUtils.isBlank(o.getCommodityId())) {return new MessageResponse(1, "商品主键不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "订单类型不能为空！");}if (CommonUtils.isBlank(o.getCommodityName())) {return new MessageResponse(1, "商品名称不能为空！");}if (CommonUtils.isBlank(o.getBusinessName())) {return new MessageResponse(1, "商家名称不能为空！");}if (CommonUtils.isBlank(o.getAmount())) {return new MessageResponse(1, "数量不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getConsumerId())) {
+return new MessageResponse(1, "客户主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCommodityId())) {
+return new MessageResponse(1, "商品主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "订单类型不能为空！");
+}
+if (CommonUtils.isBlank(o.getCommodityName())) {
+return new MessageResponse(1, "商品名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getBusinessName())) {
+return new MessageResponse(1, "商家名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getAmount())) {
+return new MessageResponse(1, "数量不能为空！");
+}
 		int temp = this.orderDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "订单名称重复！");
 		}
 		o.setCreateDate(new Date());
-		o.setStatus("1");
-		o.setCreateUserName(userProp.getName());
-		o.setCreateUserId(userProp.getUserId());
+		o.setPayStatus("1");
+		//o.setCreateUserName(userProp.getName());
+		o.setConsumerId(userProp.getUserId());
 		this.orderDao.insert(o);
-		this.dataBaseLogService.log("添加订单", "订单", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("添加订单", "订单", "", o.getCommodityName(),
+				o.getCommodityName(), userProp);
 		return new MessageResponse(0, "添加订单完成！");
 	}
     /**
@@ -106,14 +126,34 @@ public class OrderServiceImpl implements OrderService {
     @Override
 	public MessageResponse updateOrder(Order o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getConsumerId())) {return new MessageResponse(1, "客户主键不能为空！");}if (CommonUtils.isBlank(o.getCommodityId())) {return new MessageResponse(1, "商品主键不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "订单类型不能为空！");}if (CommonUtils.isBlank(o.getCommodityName())) {return new MessageResponse(1, "商品名称不能为空！");}if (CommonUtils.isBlank(o.getBusinessName())) {return new MessageResponse(1, "商家名称不能为空！");}if (CommonUtils.isBlank(o.getAmount())) {return new MessageResponse(1, "数量不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getConsumerId())) {
+return new MessageResponse(1, "客户主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCommodityId())) {
+return new MessageResponse(1, "商品主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "订单类型不能为空！");
+}
+if (CommonUtils.isBlank(o.getCommodityName())) {
+return new MessageResponse(1, "商品名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getBusinessName())) {
+return new MessageResponse(1, "商家名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getAmount())) {
+return new MessageResponse(1, "数量不能为空！");
+}
 		
-		o.setLastModifyDate(new Date());
-		o.setLastModifyUserName(userProp.getName());
-		o.setLastModifyUserId(userProp.getUserId());
+		o.setPayTime(new Date());
+		//o.setLastModifyUserName(userProp.getName());
+		o.setConsumerId(userProp.getUserId());
 		this.orderDao.updateByPrimaryKey(o);
-		this.dataBaseLogService.log("变更订单", "订单", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("变更订单", "订单", "", o.getCommodityName(),
+				o.getCommodityName(), userProp);
 		return new MessageResponse(0, "变更订单完成！");
 	}
 

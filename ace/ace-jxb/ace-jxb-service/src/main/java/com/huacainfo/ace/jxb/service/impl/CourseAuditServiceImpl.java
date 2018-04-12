@@ -1,4 +1,4 @@
-package com.huacainfo.ace.woc.service.impl;
+package com.huacainfo.ace.jxb.service.impl;
 
 
 import java.util.Date;
@@ -77,18 +77,32 @@ public class CourseAuditServiceImpl implements CourseAuditService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getCourseId())) {return new MessageResponse(1, "课程主键不能为空！");}if (CommonUtils.isBlank(o.getAuditor())) {return new MessageResponse(1, "审核人不能为空！");}if (CommonUtils.isBlank(o.getStatement())) {return new MessageResponse(1, "审核说明不能为空！");}if (CommonUtils.isBlank(o.getRst())) {return new MessageResponse(1, "审核结果不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCourseId())) {
+return new MessageResponse(1, "课程主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditor())) {
+return new MessageResponse(1, "审核人不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatement())) {
+return new MessageResponse(1, "审核说明不能为空！");
+}
+if (CommonUtils.isBlank(o.getRst())) {
+return new MessageResponse(1, "审核结果不能为空！");
+}
 		int temp = this.courseAuditDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "课程审核记录名称重复！");
 		}
 		o.setCreateDate(new Date());
-		o.setStatus("1");
-		o.setCreateUserName(userProp.getName());
-		o.setCreateUserId(userProp.getUserId());
+		o.setRst("1");
+		//o.setAuditor(userProp.getName());
+		o.setAuditor(userProp.getUserId());
 		this.courseAuditDao.insert(o);
-		this.dataBaseLogService.log("添加课程审核记录", "课程审核记录", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("添加课程审核记录", "课程审核记录", "", o.getCourseId(),
+				o.getCourseId(), userProp);
 		return new MessageResponse(0, "添加课程审核记录完成！");
 	}
     /**
@@ -106,14 +120,28 @@ public class CourseAuditServiceImpl implements CourseAuditService {
     @Override
 	public MessageResponse updateCourseAudit(CourseAudit o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getCourseId())) {return new MessageResponse(1, "课程主键不能为空！");}if (CommonUtils.isBlank(o.getAuditor())) {return new MessageResponse(1, "审核人不能为空！");}if (CommonUtils.isBlank(o.getStatement())) {return new MessageResponse(1, "审核说明不能为空！");}if (CommonUtils.isBlank(o.getRst())) {return new MessageResponse(1, "审核结果不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCourseId())) {
+return new MessageResponse(1, "课程主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getAuditor())) {
+return new MessageResponse(1, "审核人不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatement())) {
+return new MessageResponse(1, "审核说明不能为空！");
+}
+if (CommonUtils.isBlank(o.getRst())) {
+return new MessageResponse(1, "审核结果不能为空！");
+}
 		
-		o.setLastModifyDate(new Date());
-		o.setLastModifyUserName(userProp.getName());
-		o.setLastModifyUserId(userProp.getUserId());
+		o.setCreateDate(new Date());
+		//o.setLastModifyUserName(userProp.getName());
+		o.setAuditor(userProp.getUserId());
 		this.courseAuditDao.updateByPrimaryKey(o);
-		this.dataBaseLogService.log("变更课程审核记录", "课程审核记录", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("变更课程审核记录", "课程审核记录", "", o.getCourseId(),
+				o.getCourseId(), userProp);
 		return new MessageResponse(0, "变更课程审核记录完成！");
 	}
 

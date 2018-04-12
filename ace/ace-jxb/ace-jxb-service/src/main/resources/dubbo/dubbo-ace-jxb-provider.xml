@@ -40,4 +40,43 @@
     <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveCmtService"
                    ref="liveCmtService"/>
 
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.ConsultService"
+                   ref="consultService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.CourseAuditService"
+                   ref="courseAuditService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.CourseCmtService"
+                   ref="courseCmtService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.ExamScoreService"
+                   ref="examScoreService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.CourseService"
+                   ref="courseService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.ExamScoreSubService"
+                   ref="examScoreSubService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.MemberService"
+                   ref="memberService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.OptionsService"
+                   ref="optionsService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.OrderService"
+                   ref="orderService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.QuestionService"
+                   ref="questionService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.TeacherAuditService"
+                   ref="teacherAuditService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.TeacherService"
+                   ref="teacherService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.TestPaperService"
+                   ref="testPaperService"/>
+
 </beans>

@@ -1,4 +1,4 @@
-package com.huacainfo.ace.woc.service.impl;
+package com.huacainfo.ace.jxb.service.impl;
 
 
 import java.util.Date;
@@ -77,18 +77,29 @@ public class ExamScoreServiceImpl implements ExamScoreService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getTestPaperId())) {return new MessageResponse(1, "考卷不能为空！");}if (CommonUtils.isBlank(o.getUserId())) {return new MessageResponse(1, "考试人员不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getTestPaperId())) {
+return new MessageResponse(1, "考卷不能为空！");
+}
+if (CommonUtils.isBlank(o.getUserId())) {
+return new MessageResponse(1, "考试人员不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
 		int temp = this.examScoreDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "评测名称重复！");
 		}
 		o.setCreateDate(new Date());
 		o.setStatus("1");
-		o.setCreateUserName(userProp.getName());
-		o.setCreateUserId(userProp.getUserId());
+		//o.setCreateUserName(userProp.getName());
+		o.setUserId(userProp.getUserId());
 		this.examScoreDao.insert(o);
-		this.dataBaseLogService.log("添加评测", "评测", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("添加评测", "评测", "", o.getTestPaperId(),
+				o.getTestPaperId(), userProp);
 		return new MessageResponse(0, "添加评测完成！");
 	}
     /**
@@ -106,14 +117,25 @@ public class ExamScoreServiceImpl implements ExamScoreService {
     @Override
 	public MessageResponse updateExamScore(ExamScore o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getTestPaperId())) {return new MessageResponse(1, "考卷不能为空！");}if (CommonUtils.isBlank(o.getUserId())) {return new MessageResponse(1, "考试人员不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getTestPaperId())) {
+return new MessageResponse(1, "考卷不能为空！");
+}
+if (CommonUtils.isBlank(o.getUserId())) {
+return new MessageResponse(1, "考试人员不能为空！");
+}
+if (CommonUtils.isBlank(o.getStatus())) {
+return new MessageResponse(1, "状态不能为空！");
+}
 		
-		o.setLastModifyDate(new Date());
-		o.setLastModifyUserName(userProp.getName());
-		o.setLastModifyUserId(userProp.getUserId());
+		o.setCreateDate(new Date());
+		//o.setLastModifyUserName(userProp.getName());
+		o.setUserId(userProp.getUserId());
 		this.examScoreDao.updateByPrimaryKey(o);
-		this.dataBaseLogService.log("变更评测", "评测", "", o.getName(),
-				o.getName(), userProp);
+		this.dataBaseLogService.log("变更评测", "评测", "", o.getTestPaperId(),
+				o.getTestPaperId(), userProp);
 		return new MessageResponse(0, "变更评测完成！");
 	}
 

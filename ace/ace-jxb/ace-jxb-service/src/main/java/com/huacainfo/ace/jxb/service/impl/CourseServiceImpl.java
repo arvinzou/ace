@@ -1,4 +1,4 @@
-package com.huacainfo.ace.woc.service.impl;
+package com.huacainfo.ace.jxb.service.impl;
 
 
 import java.util.Date;
@@ -77,14 +77,43 @@ public class CourseServiceImpl implements CourseService {
 			throws Exception {
 		o.setId(GUIDUtil.getGUID());
 		//o.setId(String.valueOf(new Date().getTime()));
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "课程类别不能为空！");}if (CommonUtils.isBlank(o.getMediType())) {return new MessageResponse(1, "媒体类别不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "课程名称不能为空！");}if (CommonUtils.isBlank(o.getIntroduce())) {return new MessageResponse(1, "课程介绍不能为空！");}if (CommonUtils.isBlank(o.getCover())) {return new MessageResponse(1, "课程封面不能为空！");}if (CommonUtils.isBlank(o.getMediUrl())) {return new MessageResponse(1, "播放地址不能为空！");}if (CommonUtils.isBlank(o.getCostType())) {return new MessageResponse(1, "费用类型不能为空！");}if (CommonUtils.isBlank(o.getDemandNum())) {return new MessageResponse(1, "点播次数不能为空！");}if (CommonUtils.isBlank(o.getLikeNum())) {return new MessageResponse(1, "点赞次数不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "课程类别不能为空！");
+}
+if (CommonUtils.isBlank(o.getMediType())) {
+return new MessageResponse(1, "媒体类别不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "课程名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getIntroduce())) {
+return new MessageResponse(1, "课程介绍不能为空！");
+}
+if (CommonUtils.isBlank(o.getCover())) {
+return new MessageResponse(1, "课程封面不能为空！");
+}
+if (CommonUtils.isBlank(o.getMediUrl())) {
+return new MessageResponse(1, "播放地址不能为空！");
+}
+if (CommonUtils.isBlank(o.getCostType())) {
+return new MessageResponse(1, "费用类型不能为空！");
+}
+if (CommonUtils.isBlank(o.getDemandNum())) {
+return new MessageResponse(1, "点播次数不能为空！");
+}
+if (CommonUtils.isBlank(o.getLikeNum())) {
+return new MessageResponse(1, "点赞次数不能为空！");
+}
 		int temp = this.courseDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "课程名称重复！");
 		}
 		o.setCreateDate(new Date());
 		o.setStatus("1");
-		o.setCreateUserName(userProp.getName());
+		//o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
 		this.courseDao.insert(o);
 		this.dataBaseLogService.log("添加课程", "课程", "", o.getName(),
@@ -106,11 +135,40 @@ public class CourseServiceImpl implements CourseService {
     @Override
 	public MessageResponse updateCourse(Course o, UserProp userProp)
 			throws Exception {
-		if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getCategory())) {return new MessageResponse(1, "课程类别不能为空！");}if (CommonUtils.isBlank(o.getMediType())) {return new MessageResponse(1, "媒体类别不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "课程名称不能为空！");}if (CommonUtils.isBlank(o.getIntroduce())) {return new MessageResponse(1, "课程介绍不能为空！");}if (CommonUtils.isBlank(o.getCover())) {return new MessageResponse(1, "课程封面不能为空！");}if (CommonUtils.isBlank(o.getMediUrl())) {return new MessageResponse(1, "播放地址不能为空！");}if (CommonUtils.isBlank(o.getCostType())) {return new MessageResponse(1, "费用类型不能为空！");}if (CommonUtils.isBlank(o.getDemandNum())) {return new MessageResponse(1, "点播次数不能为空！");}if (CommonUtils.isBlank(o.getLikeNum())) {return new MessageResponse(1, "点赞次数不能为空！");}
+		if (CommonUtils.isBlank(o.getId())) {
+return new MessageResponse(1, "主键不能为空！");
+}
+if (CommonUtils.isBlank(o.getCategory())) {
+return new MessageResponse(1, "课程类别不能为空！");
+}
+if (CommonUtils.isBlank(o.getMediType())) {
+return new MessageResponse(1, "媒体类别不能为空！");
+}
+if (CommonUtils.isBlank(o.getName())) {
+return new MessageResponse(1, "课程名称不能为空！");
+}
+if (CommonUtils.isBlank(o.getIntroduce())) {
+return new MessageResponse(1, "课程介绍不能为空！");
+}
+if (CommonUtils.isBlank(o.getCover())) {
+return new MessageResponse(1, "课程封面不能为空！");
+}
+if (CommonUtils.isBlank(o.getMediUrl())) {
+return new MessageResponse(1, "播放地址不能为空！");
+}
+if (CommonUtils.isBlank(o.getCostType())) {
+return new MessageResponse(1, "费用类型不能为空！");
+}
+if (CommonUtils.isBlank(o.getDemandNum())) {
+return new MessageResponse(1, "点播次数不能为空！");
+}
+if (CommonUtils.isBlank(o.getLikeNum())) {
+return new MessageResponse(1, "点赞次数不能为空！");
+}
 		
-		o.setLastModifyDate(new Date());
-		o.setLastModifyUserName(userProp.getName());
-		o.setLastModifyUserId(userProp.getUserId());
+		o.setCreateDate(new Date());
+	//	o.setLastModifyUserName(userProp.getName());
+		o.setCreateUserId(userProp.getUserId());
 		this.courseDao.updateByPrimaryKey(o);
 		this.dataBaseLogService.log("变更课程", "课程", "", o.getName(),
 				o.getName(), userProp);

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    	.container {
+    		width: 49%;
+    		height: 500px;
+    		display: inline-block;
+    	}
+    </style>
+</head>
+
+<body>
+    <div class="container" id="wulin"></div>
+    <div class="container" id="lixian"></div>
+    <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <script src="https://img.hcharts.cn/highmaps/highmaps.js"></script>
+    <script type="text/javascript">
+    renderMap('wulin', 'wulin', '武陵区');
+    renderMap('lixian', 'lixian', '澧县');
+
+    function renderMap(container, mapname, title) {
+        $.getJSON('./' + mapname + '.geojson', function(mapdata) {
+            var data = [];
+            // 随机数据
+            Highcharts.each(mapdata.features, function(md, index) {
+                data.push({
+                    name: md.properties.name,
+                    value: Math.floor((Math.random() * 100) + 1)
+                });
+            });
+            return Highcharts.mapChart(container, {
+                title: {
+                    text: title
+                },
+                mapNavigation: {
+                    enabled: true,
+                    buttonOptions: {
+                        verticalAlign: 'bottom'
+                    }
+                },
+                tooltip: {
+                    useHTML: true,
+               			formatter: function() {
+               				return this.point.name;
+               			}
+                },
+                colorAxis: {
+                    min: 0,
+                    minColor: '#fff',
+                    maxColor: '#006cee',
+                    labels:{
+                        style:{
+                            "color":"red","fontWeight":"bold"
+                        }
+                    }
+                },
+                series: [{
+                    data: data,
+                    mapData: mapdata,
+                    joinBy: 'name',
+                    name: '中国地图',
+                    states: {
+                        hover: {
+                            color: '#a4edba'
+                        }
+                    }
+                }]
+            });
+        });
+    }
+    </script>
+</body>
+
+</html>
