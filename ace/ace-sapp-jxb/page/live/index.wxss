@@ -75,7 +75,9 @@
 .chat-content{  
   display: flex;  
   flex-direction: row; 
-  padding: 20rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 20rpx;
 }
 .chat-right{
   flex:1;
@@ -206,38 +208,50 @@ swiper{
   border-left: solid 1px #ebebeb;
   position: relative;
 }
-.pictures .imglist1 {
-	position: relative;
-	height: auto;
+.pictures {
+  width: 100%;
+  margin-bottom: 20rpx; 
 }
-
+.pictures .imglist1 {
+  display: flex;  
+  flex-direction: row; 
+  background: #000;
+}
+.pictures .imglist1 .img1 {
+  height: 36vh;
+}
 .pictures .imglist2 {
   display: flex;  
   flex-direction: row; 
-  height: 40vh;
+  height: 36vh;
 }
 
 .pictures .imglist2 .img1 {
-	flex: 1
+	flex: 1;
+  height: 36vh;
+  border-right: solid 1px #fff;
 }
 .pictures .imglist2 .img2 {
-	flex: 1
+	flex: 1;
+  height: 36vh;
 }
 
 .pictures .imglist3 {
-  height: 40vh;
+  height: 36vh;
+  background: #000;
 }
 
 .pictures .imglist3 .img1 {
-  height: 100%;
-  width: 50%;
+  height: 36vh;
+  width: 49%;
 	left: 0rpx;
   top:0rpx;
   position: relative;
+  border-right: solid 1px #fff;
 }
 
 .pictures .imglist3 .img2 {
-  height:  50%;
+  height:  18vh;
   width: 50%;
 	right:0%;
   bottom: 50%;
@@ -246,40 +260,42 @@ swiper{
 
 .pictures .imglist3 .img3 {
 	width: 50%;
-  height:50%;
+  height:18vh;
   left:50%;
-  bottom: 52%;
+  top: -54%;
+  border-top: solid 1px #fff;
   position: relative;
 }
 .pictures .imglist4 {
 	position: relative;
-  height: 40vh;
+  height: 36vh;
+  background: #000;
 }
 
 .pictures .imglist4 .img1 {
-  height: 50%;
-  width: 50%;
+  height: 18vh;
+  width: 49%;
 	left: 0rpx;
   top:0rpx;
 }
 
 .pictures .imglist4 .img2 {
-  height: 50%;
-  width: 50%;
+  height: 18vh;
+  width: 49%;
 	left: 50%;
   bottom:100%;
+  border-left: solid 1px #fff;
 }
 .pictures .imglist4 .img3 {
-  height: 50%;
-  width: 50%;
-	right: 50%;
-  top:50%;
+  height: 18vh;
+  width: 49%;
+  border-top: solid 1px #fff;
 }
 .pictures .imglist4 .img4 {
-  height: 50%;
-  width: 50%;
-	left: 50%;
-  bottom:50%;
+  height: 18vh;
+  width: 49%;
+  border-left: solid 1px #fff;
+  border-top: solid 1px #fff;
 }
 
 
@@ -320,4 +336,9 @@ swiper{
     width: 80rpx;
     margin: 0 auto;
     background: #d83e3f;
+}
+.comments{
+  background-color:#e5e5e5;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
 }
