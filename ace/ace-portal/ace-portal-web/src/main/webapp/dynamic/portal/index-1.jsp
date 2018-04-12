@@ -23,6 +23,7 @@ pageEncoding="utf-8"%>
 	var activeSyId ='${SESSION_USERPROP_KEY.activeSyId}';
 
     </script>
+    <link rel="shortcut icon" href="favicon.ico">
     <script type="text/javascript"
             src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
     <!-- bootstrap & fontawesome -->

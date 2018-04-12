@@ -180,9 +180,6 @@
   <sql id="whereCondition">
     from traffic_illegal
     where 0=0
-      <if test="condition.nowDate!=null and condition.nowDate!=''">
-          and DATEDIFF(createDate, #{condition.nowDate,jdbcType=VARCHAR}) = 0
-      </if>
 </sql>
 
   <select id="findList" resultMap="BaseResultMapVo">
