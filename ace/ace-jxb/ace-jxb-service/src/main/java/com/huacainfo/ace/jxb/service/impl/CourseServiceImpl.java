@@ -9,7 +9,6 @@ import java.util.Map;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.jxb.dao.LiveDao;
-import com.huacainfo.ace.jxb.model.Live;
 import com.huacainfo.ace.portal.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -246,7 +245,6 @@ public class CourseServiceImpl implements CourseService {
         if (null == users) {
             return new MessageResponse(1, "未授权的微信用户，请联系系统管理员！");
         }
-
         Map<String, Object> data = new HashMap<>();
         data.put("users", users);
         MessageResponse response = new MessageResponse(0, "身份合法");
