@@ -246,6 +246,8 @@ public class CourseServiceImpl implements CourseService {
         return rst;
     }
 
+
+
     private Long calPage(Long totalNum, int defaultPageSize) {
         Long totalpage = new Long(1);
         if (totalNum % defaultPageSize == 0) {
