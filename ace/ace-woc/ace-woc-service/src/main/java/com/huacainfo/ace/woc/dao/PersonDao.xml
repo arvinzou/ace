@@ -24,9 +24,9 @@
 
     <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.PersonVo"></resultMap>
     <sql id="Base_Column_List">
-p.id,p.name,p.paperworkId,p.headImgUrl,p.phoneNumber,p.companyId,p.areaCode,p.address,
-p.certNumber,p.driverLicenseCode,p.remark,p.status,p.createUserId,p.createUserName,p.createDate,
-p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.department_name as deptName
+        p.id,p.name,p.paperworkId,p.headImgUrl,p.phoneNumber,p.companyId,p.areaCode,p.address,
+        p.certNumber,p.driverLicenseCode,p.remark,p.status,p.createUserId,p.createUserName,p.createDate,
+        p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.department_name as deptName
   </sql>
     <sql id="Base_Column_List_Vo">
         p.id,p.name,p.paperworkId,p.headImgUrl,p.phoneNumber,p.companyId,p.areaCode,p.address,
@@ -321,5 +321,13 @@ p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.de
         </if>
         order by t.createDate
         limit 0,20
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+            id,name,paperworkId,headImgUrl,phoneNumber,companyId,areaCode,address,
+            certNumber,driverLicenseCode,remark,status,createUserId,createUserName,createDate,
+            lastModifyUserId,lastModifyUserName,lastModifyDate
+        from person
     </select>
 </mapper>

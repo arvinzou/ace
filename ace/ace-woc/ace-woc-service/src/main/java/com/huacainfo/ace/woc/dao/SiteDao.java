@@ -1,9 +1,7 @@
 package com.huacainfo.ace.woc.dao;
 
-import com.huacainfo.ace.woc.model.Person;
 import com.huacainfo.ace.woc.model.Site;
 import com.huacainfo.ace.woc.model.Vehicle;
-import com.huacainfo.ace.woc.vo.PersonVo;
 import com.huacainfo.ace.woc.vo.SiteQVo;
 import com.huacainfo.ace.woc.vo.SiteVo;
 import org.apache.ibatis.annotations.Param;
@@ -41,4 +39,6 @@ public interface SiteDao {
     int isExit(Site record);
     List<Map<String, String>> selectSite(
             @Param("params") Map<String, Object> params);
+
+    List<Site> selectAll();
 }

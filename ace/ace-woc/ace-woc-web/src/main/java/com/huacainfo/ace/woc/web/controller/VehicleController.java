@@ -139,4 +139,11 @@ public class VehicleController extends WocBaseController {
     public Map<String, Object> selectListByKeyWord(String q) throws Exception {
         return vehicleService.selectListByKeyWord(q);
     }
+
+
+    @RequestMapping(value = "/createData")
+    @ResponseBody
+    public MessageResponse createData(String dataNum) throws Exception {
+        return vehicleService.createData(dataNum);
+    }
 }

@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,6 +67,8 @@ public class AnslysisServiceImpl implements AnalysisService {
         params.put("nowDate", DateUtil.getNow());
         //今日通行记录数
         Map<String, Object> result = trafficDao.getStatisticsCounts(params);
+        if (CollectionUtils.isEmpty(result))
+            return null;
 
         Map<String, Object> rtnData = new HashMap<>();
         rtnData.put("trafficCounts", result.get("trafficCounts"));

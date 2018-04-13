@@ -53,7 +53,7 @@ var _colModel = function () {
                 style: 'width:200px;height:25px;',
             },
             dataoptions: {
-                url: portalPath + '/system/selectProvinceTreeList.do',
+                url: portalPath + '/system/selectProvinceTreeList.do?id=4307',
                 required: false
             },
             renderer: function (value, cur) {

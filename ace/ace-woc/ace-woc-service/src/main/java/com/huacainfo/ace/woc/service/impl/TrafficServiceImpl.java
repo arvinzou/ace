@@ -9,12 +9,16 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.woc.dao.SiteDao;
 import com.huacainfo.ace.woc.dao.TrafficDao;
-import com.huacainfo.ace.woc.dao.TrafficIllegalDao;
 import com.huacainfo.ace.woc.dao.TrafficSubDao;
+import com.huacainfo.ace.woc.dao.VehicleDao;
+import com.huacainfo.ace.woc.model.Site;
 import com.huacainfo.ace.woc.model.Traffic;
-import com.huacainfo.ace.woc.model.TrafficIllegal;
+import com.huacainfo.ace.woc.model.Vehicle;
 import com.huacainfo.ace.woc.service.TrafficService;
+import com.huacainfo.ace.woc.service.job.TrafficDataManager;
+import com.huacainfo.ace.woc.util.VehicleDataUtil;
 import com.huacainfo.ace.woc.vo.TrafficQVo;
 import com.huacainfo.ace.woc.vo.TrafficSubVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
@@ -23,10 +27,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Service("trafficService")
 /**
@@ -36,6 +38,11 @@ import java.util.Map;
  */
 public class TrafficServiceImpl implements TrafficService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private SiteDao siteDao;
+    @Autowired
+    private VehicleDao vehicleDao;
     @Autowired
     private TrafficDao trafficDao;
     @Autowired
@@ -111,10 +118,10 @@ public class TrafficServiceImpl implements TrafficService {
             return new MessageResponse(1, "超限率不能为空！");
         }
 
-        int temp = this.trafficDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "通行记录名称重复！");
-        }
+//        int temp = this.trafficDao.isExit(o);
+//        if (temp > 0) {
+//            return new MessageResponse(1, "通行记录名称重复！");
+//        }
 
         o.setId(GUIDUtil.getGUID());
         o.setLastModifyDate(DateUtil.getNowDate());
@@ -257,5 +264,53 @@ public class TrafficServiceImpl implements TrafficService {
         rtn.put("total", list.size());
         rtn.put("rows", list);
         return rtn;
+    }
+
+    /**
+     * 创建模拟数据
+     *
+     * @param date     日期时间 yyyy-MM-dd hh:mm:ss
+     * @param num      一次构建的数据条数
+     * @param userProp 当前登录用户信息
+     * @return 处理结果
+     */
+    @Override
+    public MessageResponse createData(String date, String num, UserProp userProp) {
+        date = CommonUtils.isBlank(date) ? DateUtil.getNow() : date;
+        num = CommonUtils.isBlank(num) ? "1" : num;
+
+        List<Vehicle> vehicleList = vehicleDao.selectAll();
+        List<Site> siteList = siteDao.selectAll();
+        Traffic t;
+        Vehicle v;
+        Site s;
+        int count = 0;
+        for (int i = 0; i < Integer.valueOf(num); i++) {
+            v = vehicleList.get(new Random().nextInt(vehicleList.size()));
+            s = siteList.get(new Random().nextInt(siteList.size()));
+            t = new Traffic();
+            t.setSiteId(s.getId());
+            t.setInspectTime(DateUtil.toDate(date));
+            t.setLocale(s.getSiteName());
+            t.setPlateNo(v.getPlateNo());
+            t.setDirection(VehicleDataUtil.getRandomData(TrafficDataManager.DIRECTION));
+            t.setAxleCount(v.getAxleCount());
+            int rate = TrafficDataManager.getRandomRate();
+            BigDecimal totalMass = TrafficDataManager.getCheckTotalMass(rate, v);
+            t.setTotalMass(totalMass);
+            t.setOverMass(totalMass.subtract(v.getTotalMass()));
+            t.setOverRate(new BigDecimal(rate).divide(new BigDecimal(100)));
+
+            try {
+                insertTraffic(t, userProp);
+            } catch (Exception e) {
+                logger.error("通行记录构建失败：{}", e);
+                continue;
+            }
+
+            count++;
+        }
+
+        return new MessageResponse(0, "数据构建完成！" + count);
     }
 }
