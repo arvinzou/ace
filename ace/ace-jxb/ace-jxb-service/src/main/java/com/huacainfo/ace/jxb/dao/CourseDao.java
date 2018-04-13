@@ -1,6 +1,8 @@
 package com.huacainfo.ace.jxb.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.jxb.model.Course;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
@@ -28,5 +30,10 @@ public interface CourseDao {
 	int findCount(@Param("condition") CourseQVo condition);
 
 	int isExit(Course record);
+
+
+    List<Map<String, Object>> getCourseList(Map<String, Object> p);
+
+    Map<String, Object> getCourseTotalNum(String userId);
 
 }

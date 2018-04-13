@@ -60,3 +60,13 @@ swiper{
   justify-content: center;
   padding: 10rpx;
 }
+
+.btn-img-small {
+  position:absolute;
+  width: 40rpx;
+  height: 40rpx;
+  right:3rpx;
+  top:3rpx;
+  background: #fff;
+  border-radius: 50%;
+}

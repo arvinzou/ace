@@ -61,7 +61,7 @@ Page({
         hiddenmodalput: true,
         display:'show',
         currentTab: 0,
-        navbar: ['互动', '图文'],
+        navbar: ['互动聊天', '图文直播'],
         id:null,
         list:[],
         pusherSizeH: 35,

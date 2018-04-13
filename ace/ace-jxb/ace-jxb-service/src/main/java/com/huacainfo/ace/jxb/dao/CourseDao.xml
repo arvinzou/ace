@@ -148,4 +148,22 @@
     from course where
     name=#{name}
   </select>
+
+  <select id="getCourseList" resultType="map">
+
+    select
+    id, category, mediType, name, cover, mediUrl, duration, costType, cost, demandNum,
+    likeNum, status, createUserId, createDate from course where createUserId=#{userId,jdbcType=VARCHAR}
+    <if test='name!=null and name!=""'>
+      and name like
+      concat('%',#{name,jdbcType=VARCHAR},'%')
+    </if>
+    order by status, createDate desc
+    limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+  </select>
+
+  <select id="getCourseTotalNum" resultType="map">
+    SELECT
+    count(1) totalNum from course where createUserId=#{userId}
+  </select>
 </mapper>

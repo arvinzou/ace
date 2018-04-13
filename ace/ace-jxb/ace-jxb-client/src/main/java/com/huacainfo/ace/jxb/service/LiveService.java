@@ -86,7 +86,4 @@ public interface LiveService {
     public abstract MessageResponse deleteLiveByLiveId(String id, UserProp userProp) throws Exception;
 
 
-    MessageResponse insertLive(String openid, Live jxb) throws Exception;
-
-    MessageResponse checkIsBandUsers(String openid);
 }

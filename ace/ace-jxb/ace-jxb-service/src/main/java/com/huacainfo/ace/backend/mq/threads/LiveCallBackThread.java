@@ -52,12 +52,7 @@ public class LiveCallBackThread extends Thread {
             Map<String, String> data = JSON.parseObject(o.get("content").toString(), Map.class);
             try {
                 Map<String, Object> params = JsonUtil.toMap(data.get("jsons"));
-                String openid = (String) params.get("openid");
                 Live jxb = JsonUtil.toObject(data.get("jsons"), Live.class);
-
-                MessageResponse response = liveService.insertLive(openid, jxb);
-
-                LOGGER.info("{}", response.getErrorMessage());
             } catch (Exception ex) {
                 LOGGER.error("处理失败", ex);
             }

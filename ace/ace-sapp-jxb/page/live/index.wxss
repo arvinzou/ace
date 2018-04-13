@@ -213,89 +213,101 @@ swiper{
   margin-bottom: 20rpx; 
 }
 .pictures .imglist1 {
-  display: flex;  
-  flex-direction: row; 
-  background: #000;
+  height: 36vh;
+  background: #fff;
+  position: relative;
 }
 .pictures .imglist1 .img1 {
-  height: 36vh;
+  height: 100%;
+  width: 100%;
+	left: 0rpx;
+  top:0rpx;
+  position: absolute;
 }
 .pictures .imglist2 {
-  display: flex;  
-  flex-direction: row; 
   height: 36vh;
+  background: #fff;
+  position: relative;
 }
 
 .pictures .imglist2 .img1 {
-	flex: 1;
-  height: 36vh;
-  border-right: solid 1px #fff;
+	height: 100%;
+  width: 49.5%;
+	left: 0rpx;
+  top:0rpx;
+  position: absolute;
 }
 .pictures .imglist2 .img2 {
-	flex: 1;
-  height: 36vh;
+	height: 100%;
+  width: 50%;
+	right: 0rpx;
+  top:0rpx;
+  position: absolute;
 }
 
 .pictures .imglist3 {
   height: 36vh;
-  background: #000;
+  background: #fff;
+  position: relative;
 }
 
 .pictures .imglist3 .img1 {
-  height: 36vh;
-  width: 49%;
+  height: 100%;
+  width: 49.5%;
 	left: 0rpx;
   top:0rpx;
-  position: relative;
-  border-right: solid 1px #fff;
+  position: absolute;
 }
 
 .pictures .imglist3 .img2 {
-  height:  18vh;
+  height:  49.5%;
   width: 50%;
 	right:0%;
-  bottom: 50%;
-  position: relative;
+  top:0%;
+  position: absolute;
 }
 
 .pictures .imglist3 .img3 {
 	width: 50%;
-  height:18vh;
-  left:50%;
-  top: -54%;
-  border-top: solid 1px #fff;
-  position: relative;
+  height:50%;
+  right:0%;
+  top: 50%;
+  position: absolute;
 }
 .pictures .imglist4 {
-	position: relative;
-  height: 36vh;
-  background: #000;
+	height: 36vh;
+  background: #fff;
+  position: relative;
 }
 
 .pictures .imglist4 .img1 {
-  height: 18vh;
-  width: 49%;
-	left: 0rpx;
-  top:0rpx;
+  width: 49.5%;
+  height:49.5%;
+  left:0%;
+  top: 0%;
+  position: absolute;
 }
 
 .pictures .imglist4 .img2 {
-  height: 18vh;
-  width: 49%;
-	left: 50%;
-  bottom:100%;
-  border-left: solid 1px #fff;
+  width: 50%;
+  height:49.5%;
+  right:0%;
+  top: 0%;
+  position: absolute;
 }
 .pictures .imglist4 .img3 {
-  height: 18vh;
-  width: 49%;
-  border-top: solid 1px #fff;
+  width: 49.5%;
+  height:50%;
+  left:0%;
+  bottom: 0%;
+  position: absolute;
 }
 .pictures .imglist4 .img4 {
-  height: 18vh;
-  width: 49%;
-  border-left: solid 1px #fff;
-  border-top: solid 1px #fff;
+  width: 50%;
+  height:50%;
+  right:0%;
+  bottom: 0%;
+  position: absolute;
 }
 
 
@@ -333,7 +345,7 @@ swiper{
     left: 0;
     right: 0;
     height: 6rpx;
-    width: 80rpx;
+    width: 60rpx;
     margin: 0 auto;
     background: #d83e3f;
 }
@@ -345,4 +357,22 @@ swiper{
 .comment-text{
   border-radius:15rpx;
   padding: 10rpx;
+}
+.btn-add-rpt{
+  right: 40rpx;
+  bottom: 30rpx; 
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center; 
+}
+.btn-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: #fff;
+}
+.active {
+  color:#F65959;
+  border-bottom:4rpx solid #fff;
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
@@ -279,22 +280,22 @@ public class WWWController extends LiveBaseController {
     @RequestMapping(value = "/insertLiveRpt.do")
     @ResponseBody
     public MessageResponse insertLiveRpt(String jsons) throws Exception {
-
-        Map<String, Object> params = JsonUtil.toMap(jsons);
-        String openid = (String) params.get("openid");
-        MessageResponse checked = jxbService.checkIsBandUsers(openid);
-        if (0 == checked.getStatus()) {
-            Map<String, String> data = new HashMap<String, String>();
-            data.put("jsons", jsons);
-            this.kafkaProducerService.sendMsg("rpt", data);
-            return new MessageResponse(0, "OK");
-        } else {
-            return checked;
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        if(srt.getStatus()==1){
+            return srt;
         }
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("jsons", jsons);
+        this.kafkaProducerService.sendMsg("rpt", data);
+        return new MessageResponse(0, "OK");
     }
     @RequestMapping(value = "/insertLiveRptSapp.do")
     @ResponseBody
     public MessageResponse insertLiveRptSapp(String jsons) throws Exception {
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        if(srt.getStatus()==1){
+            return srt;
+        }
         Map<String, Object> params = JsonUtil.toMap(jsons);
         String captcha= (String) params.get("captcha");
         String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
@@ -307,15 +308,13 @@ public class WWWController extends LiveBaseController {
         if(!captcha.equals(j_captcha_weui)){
             return new MessageResponse(1,"验证码错误！");
         }
-        MessageResponse checked = jxbService.checkIsBandUsers(this.getCurWxUser().getOpenId());
-        if (0 != checked.getStatus()) {
-            return checked;
-        }
         Map<String, String> data = new HashMap<String, String>();
         data.put("jsons", jsons);
         this.kafkaProducerService.sendMsg("rpt", data);
         return new MessageResponse(0, "发布成功");
     }
+
+
 
     @RequestMapping(value = "/upload.do")
     @ResponseBody
@@ -395,20 +394,23 @@ public class WWWController extends LiveBaseController {
     @RequestMapping(value = "/insertLive.do")
     @ResponseBody
     public MessageResponse insertLive(String jsons) throws Exception {
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        if(srt.getStatus()==1){
+            return srt;
+        }
         Map<String, Object> data = JsonUtil.toMap(jsons);
         String openid = (String) data.get("openid");
-        MessageResponse checked = jxbService.checkIsBandUsers(openid);
-        if (0 == checked.getStatus()) {
-            Live jxb = JSON.parseObject(jsons, Live.class);
-            return jxbService.insertLive(openid, jxb);
-        } else {
-            return checked;
-        }
+        Live jxb = JSON.parseObject(jsons, Live.class);
+        return jxbService.insertLive(jxb,srt.getValue());
     }
 
     @RequestMapping(value = "/insertLiveSapp.do")
     @ResponseBody
     public MessageResponse insertLiveSapp(String jsons) throws Exception {
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        if(srt.getStatus()==1){
+            return srt;
+        }
         Map<String, Object> params = JsonUtil.toMap(jsons);
         String captcha= (String) params.get("captcha");
         String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
@@ -422,12 +424,37 @@ public class WWWController extends LiveBaseController {
             return new MessageResponse(1,"验证码错误！");
         }
         Live jxb= JSON.parseObject(jsons, Live.class);
-        return jxbService.insertLive(this.getCurWxUser().getOpenId(), jxb);
+        return jxbService.insertLive(jxb,srt.getValue());
     }
-
+    @RequestMapping(value = "/updateLiveSapp.do")
+    @ResponseBody
+    public MessageResponse updateLiveSapp(String jsons) throws Exception {
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        if(srt.getStatus()==1){
+            return srt;
+        }
+        Map<String, Object> params = JsonUtil.toMap(jsons);
+        String captcha= (String) params.get("captcha");
+        String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+        String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
+        this.logger.info("captcha->{}",captcha);
+        this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+        if(CommonUtils.isBlank(captcha)){
+            return new MessageResponse(1,"验证码不能为空！");
+        }
+        if(!captcha.equals(j_captcha_weui)){
+            return new MessageResponse(1,"验证码错误！");
+        }
+        Live jxb= JSON.parseObject(jsons, Live.class);
+        return jxbService.updateLive(jxb,srt.getValue());
+    }
     @RequestMapping(value = "/insertCourseSapp.do")
     @ResponseBody
     public MessageResponse insertCourseSapp(String jsons) throws Exception {
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        if(srt.getStatus()==1){
+            return srt;
+        }
         Map<String, Object> params = JsonUtil.toMap(jsons);
         String captcha= (String) params.get("captcha");
         String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
@@ -442,6 +469,29 @@ public class WWWController extends LiveBaseController {
         }
         this.logger.info("{}",jsons);
         Course course= JSON.parseObject(jsons,Course.class);
-        return courseService.insertCourse(this.getCurWxUser().getOpenId(), course);
+        return courseService.insertCourse(course,srt.getValue());
+    }
+    @RequestMapping(value = "/updateCourseSapp.do")
+    @ResponseBody
+    public MessageResponse updateCourseSapp(String jsons) throws Exception {
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        if(srt.getStatus()==1){
+            return srt;
+        }
+        Map<String, Object> params = JsonUtil.toMap(jsons);
+        String captcha= (String) params.get("captcha");
+        String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+        String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
+        this.logger.info("captcha->{}",captcha);
+        this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+        if(CommonUtils.isBlank(captcha)){
+            return new MessageResponse(1,"验证码不能为空！");
+        }
+        if(!captcha.equals(j_captcha_weui)){
+            return new MessageResponse(1,"验证码错误！");
+        }
+        this.logger.info("{}",jsons);
+        Course course= JSON.parseObject(jsons,Course.class);
+        return courseService.updateCourse(course,srt.getValue());
     }
 }

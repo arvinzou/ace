@@ -2,6 +2,19 @@ var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 const app = getApp();
 var fileList=[];
+Array.prototype.indexOf = function (val) {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i] == val) return i;
+  }
+  return -1;
+};
+
+Array.prototype.remove = function (val) {
+  var index = this.indexOf(val);
+  if (index > -1) {
+    this.splice(index, 1);
+  }
+};
 Page({
   data: {
     serverfile: cfg.serverfile,
@@ -163,11 +176,13 @@ Page({
       }
     })
   },
-  delImage:function(){
+  delImage:function(e){
+    var idx = e.target.dataset.index;
+    console.log(idx);
     let that = this;
     var files = that.data.files;
     if (files.length>0){
-      files.pop();
+      files.remove(idx);
     }
     that.setData({ files: files});
   },
@@ -313,3 +328,4 @@ Page({
     that.setData({ displayAudio: 'none', mediUrl: null });
   }
 });
+

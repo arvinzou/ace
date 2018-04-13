@@ -5,7 +5,7 @@
 LIVE</view>
       <view class="navigator-arrow"></view>
 </navigator>
-  <view class="btn-circle btn-add" bindtap="add">
-      <image class="btn-img" src="../../image/add.png" />
+  <view class="btn-add" bindtap="add">
+      <image class="btn-img" src="../../image/add-red.png" />
     </view>
 </view>

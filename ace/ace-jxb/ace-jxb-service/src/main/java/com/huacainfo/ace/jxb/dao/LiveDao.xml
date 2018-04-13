@@ -243,6 +243,9 @@
             and type like
             concat('%',#{type,jdbcType=VARCHAR},'%')
         </if>
+        <if test='userId!=null and userId!=""'>
+            and createUserId=#{userId,jdbcType=VARCHAR}
+        </if>
         order by status, startTime desc
         limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
 

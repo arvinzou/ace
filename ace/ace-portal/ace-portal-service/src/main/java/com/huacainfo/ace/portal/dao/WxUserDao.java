@@ -2,6 +2,8 @@ package com.huacainfo.ace.portal.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import com.huacainfo.ace.portal.model.Users;
 import org.apache.ibatis.annotations.Param;
 
 import com.huacainfo.ace.common.model.WxUser;
@@ -37,5 +39,7 @@ public interface WxUserDao {
     List<Map<String,Object>> selectWxUser(@Param("condition") Map<String,Object> condition);
 
     WxUser selectByMobile(String mobile);
+
+    Users selectSysUserByOpenid(String openid);
 
 }

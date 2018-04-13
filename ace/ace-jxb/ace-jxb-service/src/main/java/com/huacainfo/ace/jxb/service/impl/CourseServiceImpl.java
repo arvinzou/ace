@@ -222,34 +222,38 @@ public class CourseServiceImpl implements CourseService {
     }
 
 
+    /**
+     * @throws
+     * @Title:getLiveList
+     * @Description: TODO(微网页获取直播列表)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-01-01
+     */
     @Override
-    public MessageResponse insertCourse(String openid, Course o) throws Exception {
-        MessageResponse response = checkIsBandUsers(openid);
-        if (1 == response.getStatus()) {
-            return response;
-        }
-        Users users = (Users) response.getOther().get("users");
-        UserProp userProp = new UserProp();
-        userProp.setName(users.getName());
-        userProp.setUserId(users.getUserId());
-        userProp.setCorpId(users.getDepartmentId());
-        userProp.setAreaCode(users.getAreaCode());
-        userProp.setOpenId(openid);
-        return insertCourse(o, userProp);
+    public Map<String, Object> getCourseList(String userId, int page, Map<String, Object> p) {
+        Map<String, Object> rst = this.courseDao.getCourseTotalNum(userId);
+        Long totalNum = (Long) rst.get("totalNum");
+        Long totalpage = this.calPage(totalNum, 10);
+        rst.put("data", this.courseDao.getCourseList(p));
+        rst.put("currentpage", page);
+        rst.put("pagecount", totalNum);
+        rst.put("status", 0);
+        rst.put("totalcount", totalNum);
+        rst.put("totalpage", totalpage);
+        return rst;
     }
-    public MessageResponse checkIsBandUsers(String openid) {
-        if (StringUtils.isEmpty(openid)) {
-            return new MessageResponse(1, "没有获取到微信用户信息openId！");
+
+    private Long calPage(Long totalNum, int defaultPageSize) {
+        Long totalpage = new Long(1);
+        if (totalNum % defaultPageSize == 0) {
+            totalpage = totalNum / defaultPageSize;
+        } else {
+            totalpage = (totalNum / defaultPageSize) + 1;
         }
-        Users users = jxbDao.selectSysUserByOpenid(openid);
-        if (null == users) {
-            return new MessageResponse(1, "未授权的微信用户，请联系系统管理员！");
-        }
-        Map<String, Object> data = new HashMap<>();
-        data.put("users", users);
-        MessageResponse response = new MessageResponse(0, "身份合法");
-        response.setOther(data);
-        return response;
+        return totalpage;
     }
 
 }

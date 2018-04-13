@@ -23,16 +23,17 @@
         <view class="weui-uploader">
           <view class="weui-uploader__hd">
             <view class="weui-uploader__title"></view>
-             <view bindtap="delImage" style='color:blue;padding-right:10rpx'>删除</view>
+            
         
             <view class="weui-uploader__info">{{files.length}}</view>
             
           </view>
           <view class="weui-uploader__bd">
             <view class="weui-uploader__files" id="uploaderFiles">
-              <block wx:for="{{files}}" wx:key="*this">
-                <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
-                  <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+              <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
+                <view class="weui-uploader__file"  id="{{item}}">
+                  <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" bindtap="previewImage"/>
+                  <image class="btn-img-small" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}"/>
                 </view>
               </block>
             </view>

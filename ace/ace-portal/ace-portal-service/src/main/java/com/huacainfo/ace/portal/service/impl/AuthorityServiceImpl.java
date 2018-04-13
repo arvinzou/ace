@@ -10,9 +10,11 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.portal.model.Users;
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.Arrays;
@@ -25,9 +27,6 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.Encryptor;
-import com.huacainfo.ace.common.tools.HttpUtils;
 import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.portal.dao.WxUserDao;
 
@@ -276,5 +275,24 @@ public class AuthorityServiceImpl implements AuthorityService {
 			return new MessageResponse(1,"权限非admin");
 		}
 		return new MessageResponse(0,"OK");
+	}
+	@Override
+	public  SingleResult<UserProp> getCurUserPropByOpenId(String openId)throws Exception{
+		UserProp o=new UserProp();
+		SingleResult<UserProp> rst=new SingleResult(0,"成功。");
+		if (StringUtils.isEmpty(openId)) {
+			return new SingleResult(1, "没有获取到微信用户信息openId！");
+		}
+		Users users = wxUserDao.selectSysUserByOpenid(openId);
+		if (null == users) {
+			return new SingleResult(1, "未授权的微信用户，请联系系统管理员！");
+		}
+		o.setName(users.getName());
+		o.setUserId(users.getUserId());
+		o.setCorpId(users.getDepartmentId());
+		o.setAreaCode(users.getAreaCode());
+		o.setOpenId(openId);
+		rst.setValue(o);
+		return rst;
 	}
 }

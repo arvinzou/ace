@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.tools.CommonKeys;
 
@@ -28,6 +28,7 @@ public class BaseController implements Serializable {
 
 	@Autowired
 	private RedisOperations<String, Object> redisTemplate;
+
 
 	protected HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes) RequestContextHolder
@@ -77,5 +78,7 @@ public class BaseController implements Serializable {
         logger.info("{}", object);
         return (Userinfo) object;
     }
+
+
 
 }

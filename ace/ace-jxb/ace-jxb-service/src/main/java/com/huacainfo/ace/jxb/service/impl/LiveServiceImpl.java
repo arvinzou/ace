@@ -291,40 +291,4 @@ public class LiveServiceImpl implements LiveService {
         return new MessageResponse(0, "直播删除完成！");
     }
 
-    @Override
-    public MessageResponse insertLive(String openid, Live jxb) throws Exception {
-        MessageResponse response = checkIsBandUsers(openid);
-        if (1 == response.getStatus()) {
-            return response;
-        }
-        Users users = (Users) response.getOther().get("users");
-        UserProp userProp = new UserProp();
-        userProp.setName(users.getName());
-        userProp.setUserId(users.getUserId());
-        userProp.setCorpId(users.getDepartmentId());
-        userProp.setAreaCode(users.getAreaCode());
-        userProp.setOpenId(openid);
-        jxb.setAreaCode(users.getAreaCode());
-        jxb.setDeptId(users.getDepartmentId());
-        return insertLive(jxb, userProp);
-    }
-
-    @Override
-    public MessageResponse checkIsBandUsers(String openid) {
-        if (StringUtils.isEmpty(openid)) {
-            return new MessageResponse(1, "没有获取到微信用户信息openId！");
-        }
-        Users users = jxbDao.selectSysUserByOpenid(openid);
-        if (null == users) {
-            return new MessageResponse(1, "未授权的微信用户，请联系系统管理员！");
-        }
-
-        Map<String, Object> data = new HashMap<>();
-        data.put("users", users);
-        MessageResponse response = new MessageResponse(0, "身份合法");
-        response.setOther(data);
-        return response;
-    }
-
-
 }

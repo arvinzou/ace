@@ -108,8 +108,8 @@
       </view>
     </block>
 
-    <view class="circle add" bindtap="rpt">
-      <image class="imgsmall" src="../../image/add.png" />
+    <view class="btn-add-rpt" bindtap="rpt">
+      <image class="btn-img" src="../../image/add-red.png" />
     </view>
 
 

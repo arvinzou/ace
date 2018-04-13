@@ -1,7 +1,8 @@
 {
   "pages": [
-    "page/courseAdd/index",
+    
     "page/home/index",
+    "page/courseAdd/index",
     "page/me/index",
     "page/live/index",
     "page/rpt/index",

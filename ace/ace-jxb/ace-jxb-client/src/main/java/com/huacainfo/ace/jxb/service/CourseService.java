@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.Course;
 import com.huacainfo.ace.jxb.vo.CourseVo;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
+
+import java.util.Map;
+
 /**
  * @author: lcan
  * @version: 2018-04-08
@@ -81,17 +84,18 @@ public interface CourseService {
 	 */
 	public abstract MessageResponse deleteCourseByCourseId(String id,UserProp userProp) throws Exception;
 
-	/**
-	 *
-	 * @Title:insertCourse
-	 * @Description:  TODO(添加课程通过小程序添加)
-	 * @param:        @param obj
-	 * @param:        @param userProp
-	 * @param:        @throws Exception
-	 * @return:       MessageResponse
-	 * @throws
-	 * @author: lcan
-	 * @version: 2018-04-08
-	 */
-	public MessageResponse insertCourse(String openid, Course o) throws Exception;
+	/*
+
+	  * @throws
+			  * @Title:getCourseList
+     * @Description: TODO(微网页获取课程列表)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-04-15
+	*/
+	Map<String, Object> getCourseList(String userId, int page, Map<String, Object> p) throws Exception;
+
+
 }

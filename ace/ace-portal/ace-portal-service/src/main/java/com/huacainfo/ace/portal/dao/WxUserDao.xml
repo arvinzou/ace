@@ -156,5 +156,32 @@
     </if>
     limit 0,1
   </select>
+  <resultMap id="SysUsersMap" type="com.huacainfo.ace.portal.model.Users">
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+    <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+    <result column="SEX" property="sex" jdbcType="CHAR"/>
+    <result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+    <result column="NAME" property="name" jdbcType="VARCHAR"/>
+    <result column="DEPARTMENT_ID" property="departmentId" jdbcType="VARCHAR"/>
+    <result column="AREA_CODE" property="areaCode" jdbcType="CHAR"/>
+    <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
+    <result column="STAUTS" property="stauts" jdbcType="CHAR"/>
+    <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+    <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+    <result column="SEAT" property="seat" jdbcType="VARCHAR"/>
+    <result column="USER_LEVEL" property="userLevel" jdbcType="VARCHAR"/>
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="cur_syid" property="curSyid" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <select id="selectSysUserByOpenid" parameterType="java.lang.String" resultMap="SysUsersMap">
+    select user_id,account,password,sex,id_card,name,
+    department_id,area_code,birthday,stauts, last_login_time,
+    mobile,email,seat,user_level,create_time,fax,telphone,qq,openId,cur_syid
+    from users
+    where (openid = #{openid,jdbcType=VARCHAR} or appOpenId = #{openid,jdbcType=VARCHAR})
+  </select>
 
 </mapper>

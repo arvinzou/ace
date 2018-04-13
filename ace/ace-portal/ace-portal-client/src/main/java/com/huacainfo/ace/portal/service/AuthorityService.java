@@ -1,5 +1,6 @@
 package com.huacainfo.ace.portal.service;
 
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -15,5 +16,7 @@ public interface AuthorityService {
 	public  SingleResult<WxUser> selectForExperienceUser(String id) throws Exception;
 
 	public abstract MessageResponse authority(Map<String,Object> p) throws Exception;
+
+	public  SingleResult<UserProp> getCurUserPropByOpenId(String openId)throws Exception;
 	
 }
