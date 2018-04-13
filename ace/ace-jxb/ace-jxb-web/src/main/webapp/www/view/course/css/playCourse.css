@@ -1,0 +1,301 @@
+ul{
+	padding: 0px;
+	margin: 0px;
+}
+.main{
+	width: 10rem;
+	/*height: 90%;*/
+	overflow: hidden;
+	margin-bottom: 13%;
+}
+.coursePlay {
+	width: 10rem;
+	height: 7rem;
+}
+.play{
+	width: 1.5rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	border-radius: 50%;
+	text-align: center;
+	margin:3% auto;
+	color: #FFFFFF;
+	background-color: #15BC83;
+	font-size: 0.6rem;
+}
+
+.play span{
+	display: block;
+	line-height: 1.5rem;
+}
+
+.audio {
+	text-align: center;
+	width: 90%;
+	margin: 5% auto;
+	height: 60%;
+}
+video {
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+}
+.navcontent{
+	width: 100%;
+	height: 2rem;
+}
+.news-title {
+	font-size: 0.4rem;
+	padding-top: 0.2rem;
+	position: relative;
+}
+
+.news-module>li {
+	float: left;
+	width: 50%;
+	text-align: center;
+	font-size: 0.4rem;
+	line-height: 1rem;
+	color: #798092;
+	background-color: #FFFFFF;
+	list-style: none;
+}
+
+.news-slider {
+	background-color: #15BC83;
+	height: 0.06rem;
+	width: 0.6rem;
+	transition: 0.5s;
+	position: absolute;
+	bottom: -1rem;
+	left: 0rem;
+	border-radius: 0.3rem;
+}
+
+.news-module .active {
+	color: #15BC83;
+	font-size: 0.4rem;
+	font-weight: bolder;
+}
+
+.tabs {
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+.courseInduc {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.courseTitle {
+	padding-left: 0.5rem;
+	margin-top: 0.05rem;
+	font-family: "微软雅黑";
+	font-size: 0.4rem;
+	color: #1C2843;
+	font-weight: bold;
+}
+
+.coursePrice {
+	padding-left: 0.5rem;
+	margin-top: 0.05rem;
+	font-family: "微软雅黑";
+	font-size: 0.4rem;
+	color: #FF7C12;
+	font-weight: bold;
+}
+
+.gap {
+	width: 100%;
+	height: 0.4rem;
+	margin-bottom: 0.2rem;
+	background-color: #F4F4F4;
+}
+
+.courseInfo {
+	padding-left: 0.5rem;
+	margin-top: 0.05rem;
+	font-family: "PingFang-SC-Medium";
+	font-size: 0.4rem;
+	color: #1C2843;
+	font-weight: bold;
+}
+
+.infos {
+	padding-left: 0.5rem;
+	margin-top: 0.05rem;
+	font-family: "PingFang-SC-Medium";
+	font-size: 0.35rem;
+	color: #798092;
+	line-height: 0.6rem;
+	overflow: hidden;
+}
+
+.ops {
+	width: 100%;
+	height: 8%;
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	background-color: #FFFFFF;
+}
+
+.buy {
+	font-weight: bold;
+	font-size: 0.4rem;
+	width: 34%;
+	height: 8%;
+	background-color: #FF7C12;
+	color: #FFFFFF;
+	cursor: pointer;
+	position: fixed;
+	right: 0px;
+	bottom: 0;
+	border: none;
+}
+
+.statInfoTitle {
+	padding-left: 0.5rem;
+	margin-top: 0.05rem;
+	font-family: "微软雅黑";
+	font-size: 0.35rem;
+	color: #798092;
+	line-height: 0.6rem;
+}
+
+.myStatement {
+	font-size: 0.4rem;
+	padding-top: 0.2rem;
+	color: #798092;
+	text-align: center;
+	padding-bottom: 1rem;
+}
+
+.myStatement span {
+	color: #E4E6E9;
+}
+
+#myModal {
+	width: 85%;
+	height: 50%;
+	margin:50% auto;
+}
+
+.userImg {
+	padding-left: 0.4rem;
+	width: 10%;
+	float: left;
+}
+
+.userInfo {
+	width: 40%;
+	float: left;
+	padding-left: 1rem;
+	font-size: 0.4rem;
+	color: #1C2843;
+}
+
+.commentTime {
+	color: #798092;
+	font-size: 0.3rem;
+}
+
+.userLevel {
+	padding-right: 0.2rem;
+	width: 50%;
+	text-align: right;
+	float: left;
+	padding-right: 0.2rem;
+	color: #15BC83;
+}
+
+.userComment {
+	width: 100%;
+	color: #1C2843;
+	font-size: 0.4rem;
+	padding-left: 2rem;
+	padding-right: 0.2rem;
+	line-height: 0.6rem;
+}
+
+.star {
+	text-align: center;
+}
+
+.demo {
+	color: #798092;
+	font-family: "PingFang-SC-Medium";
+	font-size: 0.4rem;
+}
+
+.point {
+	width: 100%;
+	height: 3rem;
+	padding-left: 0.2rem;
+	padding-right: 0.2rem;
+	background-color: #F7F9FC;
+	border: none;
+}
+
+.commit {
+	color: #15BC83;
+	font-family: "PingFang-SC-Medium";
+	font-size: 0.4rem;
+	font-weight: bolder;
+}
+a:visited { 
+    color: #15BC83;
+	font-family: "PingFang-SC-Medium";
+	font-size: 0.4rem;
+	font-weight: bolder;
+    text-underline: none; 
+    text-decoration: none;
+} 
+a:link { 
+ 	color: #15BC83;
+	font-family: "PingFang-SC-Medium";
+	font-size: 0.4rem;
+	font-weight: bolder;
+    text-underline: none;  
+    text-decoration: none;
+} 
+.show {
+	opacity: 1;
+}
+
+.hide {
+	opacity: 0;
+}
+
+#progressWrap {
+	background-color: #798092;
+	height: 0.06rem;
+	cursor: pointer;
+	/*border-left: 0.2rem solid #15BC83;*/
+}
+
+#playProgress {
+	background-color: #15BC83;
+	width: 0px;
+	height: 0.06rem;
+}
+#showVedioTime{
+	color: #15BC83;
+	font-size: 0.3rem;
+	float: right;
+	padding-right: 0.2rem;
+	padding-top: 0.2rem;
+}
+#showProgress {
+	color:  #15BC83;
+	font-size: 0.3rem;
+	float: left;
+	padding-left: 0.2rem;
+	padding-top: 0.2rem;
+}
+#videoTime{
+	height: 10%;
+}
+

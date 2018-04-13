@@ -48,17 +48,19 @@ request.setAttribute("now", CommonUtils.formatDate(new Date()));
 <script type="text/javascript"
 		src="${portalPath}/content/common/bootstrap/js/iconfont.js?version=${cfg.version}"></script>
 	
+<%--
 <link rel="stylesheet" href="${portalPath}/content/common/assets/css/ace-ie8.min.css?version=${cfg.version}" />
+--%>
 
 	
 <!--[if lte IE 9]>
 			<link rel="stylesheet" href="${portalPath}/content/common/assets/css/ace-part2.min.css?version=${cfg.version}" />
 <![endif]-->
 		
-<link rel="stylesheet"
+<%--<link rel="stylesheet"
 	href="${portalPath}/content/common/assets/css/ace-skins.min.css?version=${cfg.version}" />
 <link rel="stylesheet"
-	href="${portalPath}/content/common/assets/css/ace-rtl.min.css?version=${cfg.version}" />
+	href="${portalPath}/content/common/assets/css/ace-rtl.min.css?version=${cfg.version}" />--%>
 	
 <!--[if lte IE 9]>
 		  <link rel="stylesheet" href="${portalPath}/content/common/assets/css/ace-ie.min.css?version=${cfg.version}" />
@@ -71,5 +73,5 @@ request.setAttribute("now", CommonUtils.formatDate(new Date()));
 	<script src="${portalPath}/content/common/assets/js/gz/respond.min.js?version=${cfg.version}"></script>
 	<![endif]-->		
 
-<link rel="stylesheet" href="${portalPath}/content/common/css/ace-ui-custom.css?version=${cfg.version}" />
-<link rel="stylesheet" href="${portalPath}/content/common/css/ui.multiselect.css?version=${cfg.version}" />
+<%--<link rel="stylesheet" href="${portalPath}/content/common/css/ace-ui-custom.css?version=${cfg.version}" />
+<link rel="stylesheet" href="${portalPath}/content/common/css/ui.multiselect.css?version=${cfg.version}" />--%>
