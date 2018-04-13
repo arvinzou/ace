@@ -100,16 +100,21 @@ Page({
       var that=this;
       var message = that.data.message;
       if (data.header.type!='1'){
+        that.loadRpt();
         return;
       }
       message.push(data);
       that.setData({ message: message });
       that.setData({ toView: 1000 });
+      wx.pageScrollTo({
+        scrollTop: 1000
+      });
     },
     onLoad: function () {
         var that = this;
         console.log('index.js.onLoad');
         var id ="c7b43a21-552d-4e52-9845-93e85add6e25";
+        id ='9f4ebcc2-621b-4354-88ac-f2f7735e7e6b';
         that.setData({
           id: id
         });
@@ -364,10 +369,14 @@ Page({
     onPageScroll: function (res){
       let that=this;
       console.log(res);
-      if(res.scrollTop>=30){
-        that.setData({ pusherSizeH: 16, pusherSizeW:50});
+      if (res.scrollTop >= 30 ){
+        if (true){
+          that.setData({ pusherSizeH: 16, pusherSizeW: 50 });
+        }
       }else{
-        that.setData({ pusherSizeH: 35, pusherSizeW:100 });
+        if (true) {
+          that.setData({ pusherSizeH: 35, pusherSizeW: 100 });
+        }
       }
     },
     onReachBottom:function(){
@@ -388,5 +397,11 @@ Page({
           currentTab: e.target.dataset.idx
         })
       }
+    },
+    onPullDownRefresh:function(){
+      let that = this;
+      wx.stopPullDownRefresh();
+      that.loadRpt();
+      
     }
 });

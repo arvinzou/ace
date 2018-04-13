@@ -4,6 +4,7 @@ package com.huacainfo.ace.jxb.service.impl;
 import java.util.*;
 
 import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.jxb.dao.LiveRptDao;
 import com.huacainfo.ace.jxb.vo.LiveRptQVo;
@@ -93,9 +94,8 @@ public class LiveServiceImpl implements LiveService {
     @Override
     public MessageResponse insertLive(Live o, UserProp userProp)
             throws Exception {
-        o.setId(UUID.randomUUID().toString());
         if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
+            o.setId(GUIDUtil.getGUID());
         }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
@@ -130,9 +130,6 @@ public class LiveServiceImpl implements LiveService {
         }
         if (CommonUtils.isBlank(o.getRtmpUrl())) {
             return new MessageResponse(1, "直播流地址不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getMp4Url())) {
-            return new MessageResponse(1, "回放地址不能为空！");
         }
         if (CommonUtils.isBlank(o.getImageSrc())) {
             return new MessageResponse(1, "封面不能为空！");
@@ -200,9 +197,6 @@ public class LiveServiceImpl implements LiveService {
         if (CommonUtils.isBlank(o.getRtmpUrl())) {
             return new MessageResponse(1, "直播流地址不能为空！");
         }
-        if (CommonUtils.isBlank(o.getMp4Url())) {
-            return new MessageResponse(1, "回放地址不能为空！");
-        }
         if (CommonUtils.isBlank(o.getImageSrc())) {
             return new MessageResponse(1, "封面不能为空！");
         }
@@ -247,9 +241,6 @@ public class LiveServiceImpl implements LiveService {
         }
         if (CommonUtils.isBlank(o.getRtmpUrl())) {
             return new MessageResponse(1, "直播流地址不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getMp4Url())) {
-            return new MessageResponse(1, "回放地址不能为空！");
         }
         if (CommonUtils.isBlank(o.getImageSrc())) {
             return new MessageResponse(1, "封面不能为空！");
@@ -304,38 +295,32 @@ public class LiveServiceImpl implements LiveService {
     public MessageResponse insertLive(String openid, Live jxb) throws Exception {
         MessageResponse response = checkIsBandUsers(openid);
         if (1 == response.getStatus()) {
-            return new MessageResponse(1, "新增直播失败,当前用户不合法[openid=" + openid + "]");
+            return response;
         }
-
         Users users = (Users) response.getOther().get("users");
-        //
         UserProp userProp = new UserProp();
         userProp.setName(users.getName());
         userProp.setUserId(users.getUserId());
         userProp.setCorpId(users.getDepartmentId());
         userProp.setAreaCode(users.getAreaCode());
         userProp.setOpenId(openid);
-        //
         jxb.setAreaCode(users.getAreaCode());
         jxb.setDeptId(users.getDepartmentId());
-
         return insertLive(jxb, userProp);
     }
 
     @Override
     public MessageResponse checkIsBandUsers(String openid) {
         if (StringUtils.isEmpty(openid)) {
-            return new MessageResponse(1, "当前微信用户未绑定系统用户,请联系管理员!");
+            return new MessageResponse(1, "没有获取到微信用户信息openId！");
         }
-
         Users users = jxbDao.selectSysUserByOpenid(openid);
         if (null == users) {
-            return new MessageResponse(1, "当前微信用户未绑定系统用户,请联系管理员!");
+            return new MessageResponse(1, "未授权的微信用户，请联系系统管理员！");
         }
 
         Map<String, Object> data = new HashMap<>();
         data.put("users", users);
-
         MessageResponse response = new MessageResponse(0, "身份合法");
         response.setOther(data);
         return response;

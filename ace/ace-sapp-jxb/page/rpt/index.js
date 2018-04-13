@@ -86,6 +86,7 @@ Page({
               fileList = [];
               that.setData({
                 files: fileList,
+                checkImageUrl: cfg.checkImageUrl + "?id=" + util.uuid(),
                 docText:''
               });
             }
@@ -151,7 +152,6 @@ Page({
     let that = this;
     wx.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
-      itemColor: "#f7982a",
       success: function (res) {
         if (!res.cancel) {
           if (res.tapIndex == 0) {

@@ -483,6 +483,6 @@
 				department_id,area_code,birthday,stauts, last_login_time,
 				mobile,email,seat,user_level,create_time,fax,telphone,qq,openId,cur_syid
         from portal.users
-        where openid = #{openid,jdbcType=VARCHAR}
+        where (openid = #{openid,jdbcType=VARCHAR} or appOpenId = #{openid,jdbcType=VARCHAR})
     </select>
 </mapper>

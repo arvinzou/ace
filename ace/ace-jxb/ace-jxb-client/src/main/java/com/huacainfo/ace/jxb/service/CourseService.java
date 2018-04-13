@@ -81,5 +81,17 @@ public interface CourseService {
 	 */
 	public abstract MessageResponse deleteCourseByCourseId(String id,UserProp userProp) throws Exception;
 
-	
+	/**
+	 *
+	 * @Title:insertCourse
+	 * @Description:  TODO(添加课程通过小程序添加)
+	 * @param:        @param obj
+	 * @param:        @param userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: lcan
+	 * @version: 2018-04-08
+	 */
+	public MessageResponse insertCourse(String openid, Course o) throws Exception;
 }

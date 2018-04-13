@@ -1,7 +1,7 @@
 <view class='index'>
   <cover-view style='display:flex;flex-direction:row;position:fixed;width:100%'>
     <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:{{pusherSizeW}}%; height:{{pusherSizeH}}vh;flex:1"
-      waiting-image="../../image/chat.png">
+      waiting-image="../../image/video-cover.jpg">
       <cover-view class="info-tip" hidden="{{pusherSizeH==16}}">
         <cover-view class="tip-item" wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
         <cover-view class="tip-item" wx:if="{{info.audioBitrate}}">音频输出:{{info.audioBitrate}}kbps</cover-view>
@@ -18,6 +18,7 @@
     </cover-view>
   </cover-view>
   <!--导航条-->
+
   <view class="navbar" style='padding-top:{{pusherSizeH}}vh'>
     <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
   </view>
@@ -90,16 +91,14 @@
               </view>
 
               <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="{{item.*}}">
-                <view class="jxb_msg">
-                  <view class="wxuser">
-                    <view class="wxuser-img">
-                      <image src="{{citem.headimgurl}}" class="headimg" />
+                <view class='chat-content'>
+                  <image src='{{citem.headimgurl}}' class='headimg'></image>
+                  <view class='chat-right'>
+                    <view class='chat-nickname'>
+                      {{citem.nickname}} {{citem.createTime}}
                     </view>
-                  </view>
-                  <view class="bubbleItem">
-                    <view class="wxuser-nickname">{{citem.nickname}}</view>
-                    <view class="createTime">{{citem.createTime}}</view>
-                    <view>{{citem.content}}</view>
+                    <text class='comment-text' wx:if="{{item.content.length<=20}}">{{citem.content}}</text>
+                    <text class='comment-text block' wx:if="{{item.content.length>20}}">{{citem.content}}</text>
                   </view>
                 </view>
               </block>

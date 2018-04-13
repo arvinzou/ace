@@ -31,9 +31,9 @@ function initMyChartMap() {
 		mapGeoData.params[city] = {
 			getGeoJson : (function(c) {
 				var geoJsonName = cityMap[c];
+				//geoJsonName="430723";
 				return function(callback) {
-					$.getJSON('geoJson/china-main-city/' + geoJsonName
-							+ '.json', callback);
+					$.getJSON('geoJson/china-main-city/' + geoJsonName+ '.json', callback);
 				}
 			})(city)
 		}

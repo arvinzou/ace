@@ -89,4 +89,6 @@ public interface VehicleService {
      * @return
      */
     Map<String, Object> selectListByKeyWord(String keyWord);
+
+    MessageResponse createData(String dataNum);
 }
