@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
@@ -15,6 +17,8 @@ import com.huacainfo.ace.jxb.model.LiveImg;
 import com.huacainfo.ace.jxb.model.LiveMsg;
 import com.huacainfo.ace.jxb.model.LiveRpt;
 import com.huacainfo.ace.jxb.service.*;
+import com.huacainfo.ace.jxb.vo.CourseQVo;
+import com.huacainfo.ace.jxb.vo.CourseVo;
 import com.huacainfo.ace.jxb.web.websocket.WebSocketSub;
 import com.huacainfo.ace.jxb.web.websocket.MyWebSocket;
 import com.huacainfo.ace.portal.model.SensitiveWords;
@@ -77,6 +81,9 @@ public class WWWController extends LiveBaseController {
 
     @Autowired
     private LiveCmtService jxbCmtService;
+
+    @Autowired
+    private CourseService courseService;
 
 
 
@@ -411,5 +418,32 @@ public class WWWController extends LiveBaseController {
             return checked;
 
         }
+    }
+
+    /**
+     *
+     * @Title:find!{bean.name}List
+     * @Description:  TODO(课程分页查询)
+     * @param:        @param condition
+     * @param:        @param page
+     * @param:        @return
+     * @param:        @throws Exception
+     * @return:       PageResult<CourseVo>
+     * @throws
+     * @author: lcan
+     * @version: 2018-04-08
+     */
+    @RequestMapping(value = "/findCourseList.do")
+    @ResponseBody
+    public PageResult<CourseVo> findCourseList(CourseQVo condition,
+                                               PageParamNoChangeSord page) throws Exception {
+        PageResult<CourseVo> rst = this.courseService
+                .findCourseList(condition, page.getStart(), page.getLimit(),
+                        page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        logger.debug("===============================================\n"+rst.toString());
+        return rst;
     }
 }

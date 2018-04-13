@@ -142,3 +142,30 @@ var sliceTextTemplate = '<div class="[activity]">'+
                                     '<h4>[sliceName]</h4>'+
                                 '</div>'+
     '</div>';
+
+
+var courseTemplate = '<div style="width: 50%;float: left;" id="course">'+
+                            '<div style="width: 94%;  margin: 0 auto">'+
+                                '<div class="audio">'+
+                                    '<div class="audioContainer">'+
+                                        '<img src="[audioCover]" style="height: 100%;width: 100%; object-fit: cover;"/>'+
+                                    '</div>'+
+                                    '<span class="playTime"><img src="img/playTime@2x.png"/>[duration]</span>'+
+                                    '<span class="audioType">[audioType]</span>'+
+                                '</div>'+
+                                '<div class="remark">'+
+                                    '<div class="audioTitle">'+
+                                        '<p>[name]</p>'+
+                                    '</div>'+
+                                    '<div class="audioPrice">'+
+                                        '<div class="[costType]">'+
+                                            '<span>[cost]</span>'+
+                                        '</div>'+
+                                        '<div class="playsNum">'+
+                                            '<span>[demandNum]</span>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
+
