@@ -391,7 +391,11 @@
     </select>
 
     <select id="selectListByKeyWord" parameterType="java.util.Map" resultMap="BaseResultMapVo">
-        select  t.*
+        select
+        id, plateNo, vehicleColor, ownerId, ownerCompanyId, axleCount, vehicleType,
+        model, engineNo, VIN, RegisterDate, IssueDate, licenceIssuingAuthority, totalMass,
+        unladedMass, approvedMass, containerInsideSize, tractionMass, remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
         from vehicle t
         where 1=1
         <if test="params.keyWord!=null and params.keyWord!=''">
@@ -401,5 +405,14 @@
         </if>
         order by t.createDate
         limit 0,20
+    </select>
+
+    <select id="selectAll"  resultMap="BaseResultMap">
+        select
+        id, plateNo, vehicleColor, ownerId, ownerCompanyId, axleCount, vehicleType,
+        model, engineNo, VIN, RegisterDate, IssueDate, licenceIssuingAuthority, totalMass,
+        unladedMass, approvedMass, containerInsideSize, tractionMass, remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+        from vehicle
     </select>
 </mapper>

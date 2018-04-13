@@ -69,16 +69,18 @@
     <insert id="insert" parameterType="com.huacainfo.ace.woc.model.Site">
         insert into site (
         <include refid="Base_Column_List"/>
-      )
-    values (#{id,jdbcType=VARCHAR}, #{siteName,jdbcType=VARCHAR}, #{siteCode,jdbcType=VARCHAR}, 
-      #{areaCode,jdbcType=VARCHAR}, #{roadwayNum,jdbcType=INTEGER}, #{checkpointsNum,jdbcType=INTEGER}, 
-      #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, 
-      #{constructDate,jdbcType=TIMESTAMP},#{buildDeptId,jdbcType=VARCHAR}, #{roadId,jdbcType=VARCHAR}, #{adminDepId,jdbcType=VARCHAR},
-      #{sitStatus,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
-      )
-  </insert>
+        )
+        values (#{id,jdbcType=VARCHAR}, #{siteName,jdbcType=VARCHAR}, #{siteCode,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR}, #{roadwayNum,jdbcType=INTEGER}, #{checkpointsNum,jdbcType=INTEGER},
+        #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR},
+        #{constructDate,jdbcType=TIMESTAMP},#{buildDeptId,jdbcType=VARCHAR}, #{roadId,jdbcType=VARCHAR},
+        #{adminDepId,jdbcType=VARCHAR},
+        #{sitStatus,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.Site">
         insert into site
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -394,5 +396,11 @@
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from site
     </select>
 </mapper>

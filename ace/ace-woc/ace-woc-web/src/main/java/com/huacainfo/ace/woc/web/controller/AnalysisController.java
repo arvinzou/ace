@@ -51,7 +51,7 @@ public class AnalysisController extends WocBaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/tadayCounts")
+    @RequestMapping(value = "/queryCounts")
     @ResponseBody
     public Map<String, Object> todayChart() {
         return analysisService.todayChart(getCurUserProp());

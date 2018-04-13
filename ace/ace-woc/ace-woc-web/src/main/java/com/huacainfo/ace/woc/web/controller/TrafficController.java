@@ -6,7 +6,6 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.woc.dao.TrafficIllegalDao;
 import com.huacainfo.ace.woc.model.Traffic;
 import com.huacainfo.ace.woc.model.TrafficIllegal;
 import com.huacainfo.ace.woc.service.TrafficIllegalService;
@@ -163,5 +162,12 @@ public class TrafficController extends WocBaseController {
     @ResponseBody
     public Map<String, Object> selectListByKeyWord(String q, String id) throws Exception {
         return trafficService.selectListByKeyWord(q, id);
+    }
+
+    @RequestMapping(value = "/createData")
+    @ResponseBody
+    public MessageResponse createData(String date, String num) {
+
+        return trafficService.createData(date, num, getCurUserProp());
     }
 }

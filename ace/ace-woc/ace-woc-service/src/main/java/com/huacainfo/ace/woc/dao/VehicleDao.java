@@ -29,4 +29,10 @@ public interface VehicleDao {
     int isExit(Vehicle record);
 
     List<VehicleVo> selectListByKeyWord(@Param("params") Map<String, Object> params);
+
+    /***
+     *
+     * @return
+     */
+    List<Vehicle> selectAll();
 }

@@ -31,4 +31,6 @@ public interface PersonDao {
 
     List<Map<String, String>> selectPerson(
             @Param("params") Map<String, Object> params);
+
+    List<Person> selectAll();
 }

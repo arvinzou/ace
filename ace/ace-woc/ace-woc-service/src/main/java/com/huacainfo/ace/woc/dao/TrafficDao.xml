@@ -328,6 +328,9 @@
         <if test="condition.endTime!=null and condition.endTime!=''">
             and inspectTime&lt;=#{condition.endTime,jdbcType=TIMESTAMP}
         </if>
+        <if test="condition.nowDate!=null and condition.nowDate!=''">
+            and DATEDIFF(createDate, #{condition.nowDate,jdbcType=VARCHAR}) =0
+        </if>
 
     </sql>
     <sql id="whereCondition_Vo">
