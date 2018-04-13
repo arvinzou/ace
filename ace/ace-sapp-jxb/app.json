@@ -1,11 +1,12 @@
 {
   "pages": [
-    "page/liveAdd/index",
+    "page/courseAdd/index",
     "page/home/index",
     "page/me/index",
     "page/live/index",
     "page/rpt/index",
-    "page/courseAdd/index"
+    "page/liveAdd/index"
+    
   ],
   "window": {
     "navigationBarTextStyle": "#fff",

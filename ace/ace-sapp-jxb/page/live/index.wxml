@@ -97,8 +97,8 @@
                     <view class='chat-nickname'>
                       {{citem.nickname}} {{citem.createTime}}
                     </view>
-                    <text class='chat-text' wx:if="{{item.content.length<=20}}">{{citem.content}}</text>
-                    <text class='chat-text block' wx:if="{{item.content.length>20}}">{{citem.content}}</text>
+                    <text class='comment-text' wx:if="{{item.content.length<=20}}">{{citem.content}}</text>
+                    <text class='comment-text block' wx:if="{{item.content.length>20}}">{{citem.content}}</text>
                   </view>
                 </view>
               </block>

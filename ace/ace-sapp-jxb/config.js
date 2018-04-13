@@ -1,13 +1,14 @@
-var host = "14592619.qcloud.la";
 var server = "https://zx.huacainfo.com";
 var serverfile = "https://zx.huacainfo.com/";
 var rtmpserver ="rtmp://zx.huacainfo.com/live/";
+var hlsserver ="http://139.224.0.227:9999/hls/";
+var websocketurl= 'zx.huacainfo.com';
 var config = {
-    host,
     rtmpserver,
-    websocketurl:'zx.huacainfo.com',
+    websocketurl,
     server,
     serverfile,
+    hlsserver,
     appid: 'wxcf3d50130f9844f5',
     appsecret: '10a109f311c9803c2a8fd17b14bf09dd',
     companyId: '0010007',
@@ -21,6 +22,4 @@ var config = {
     getLiveRptList: `${server}/jxb/www/jxb/getLiveRptList.do`,
     insertLiveSapp: `${server}/jxb/www/jxb/insertLiveSapp.do`
 };
-
-
 module.exports = config
