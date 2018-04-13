@@ -27,6 +27,7 @@ function request(url, data, success, fail, complete) {
         _fail = fail,
         _complete = complete;
     wx.showNavigationBarLoading();
+    wx.showLoading({ title: "请求中" });
     wx.request({
         url: url,
         data: data,
@@ -38,12 +39,14 @@ function request(url, data, success, fail, complete) {
         success: function (res) {
             console.log(res);
             wx.hideNavigationBarLoading() //完成停止加载
+            wx.hideLoading();
             if (typeof _success == "function") {
                 _success(res.data);
             }
         },
         fail: function (res) {
             wx.hideNavigationBarLoading() //完成停止加载
+            wx.hideLoading();
             if (typeof _fail == "function") {
                 _fail(res);
             }

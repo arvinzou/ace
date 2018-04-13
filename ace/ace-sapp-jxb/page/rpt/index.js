@@ -86,6 +86,7 @@ Page({
               fileList = [];
               that.setData({
                 files: fileList,
+                checkImageUrl: cfg.checkImageUrl + "?id=" + util.uuid(),
                 docText:''
               });
             }

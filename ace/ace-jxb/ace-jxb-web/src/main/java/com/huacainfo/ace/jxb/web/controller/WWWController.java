@@ -399,7 +399,7 @@ public class WWWController extends LiveBaseController {
         String openid = (String) data.get("openid");
         MessageResponse checked = jxbService.checkIsBandUsers(openid);
         if (0 == checked.getStatus()) {
-            Live jxb = JsonUtil.toObject(jsons, Live.class);
+            Live jxb = JSON.parseObject(jsons, Live.class);
             return jxbService.insertLive(openid, jxb);
         } else {
             return checked;
@@ -421,7 +421,7 @@ public class WWWController extends LiveBaseController {
         if(!captcha.equals(j_captcha_weui)){
             return new MessageResponse(1,"验证码错误！");
         }
-        Live jxb= JsonUtil.toObject(jsons, Live.class);
+        Live jxb= JSON.parseObject(jsons, Live.class);
         return jxbService.insertLive(this.getCurWxUser().getOpenId(), jxb);
     }
 
@@ -440,7 +440,8 @@ public class WWWController extends LiveBaseController {
         if(!captcha.equals(j_captcha_weui)){
             return new MessageResponse(1,"验证码错误！");
         }
-        Course course= JsonUtil.toObject(jsons, Course.class);
+        this.logger.info("{}",jsons);
+        Course course= JSON.parseObject(jsons,Course.class);
         return courseService.insertCourse(this.getCurWxUser().getOpenId(), course);
     }
 }

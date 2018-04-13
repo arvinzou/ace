@@ -94,6 +94,4 @@ public interface CourseService {
 	 * @version: 2018-04-08
 	 */
 	public MessageResponse insertCourse(String openid, Course o) throws Exception;
-
-
 }

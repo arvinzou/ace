@@ -14,11 +14,11 @@ public interface CourseDao {
 
     int insert(Course record);
 
-    int insertSelective(Course record);
+
 
     int updateByPrimaryKey(Course record);
 
-    int updateByPrimaryKeySelective(Course record);
+
 
     
     List<CourseVo> findList(@Param("condition") CourseQVo condition,
