@@ -342,3 +342,7 @@ swiper{
   padding-top: 20rpx;
   padding-bottom: 20rpx;
 }
+.comment-text{
+  border-radius:15rpx;
+  padding: 10rpx;
+}
