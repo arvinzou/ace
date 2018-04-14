@@ -1,93 +1,66 @@
 <view class='index'>
-
-<form catchsubmit="formSubmit" catchreset="formReset">
-
-
-    <view class="kind-list" >
-      
+  <form catchsubmit="formSubmit" catchreset="formReset">
+    <view class="kind-list">
       <view class="kind-list-item">
         <textarea name="docText" value="{{docText}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入内容" style="height: 300rpx" />
         <view class="weui-textarea-counter">{{max}}/500</view>
       </view>
-
       <view class="kind-list-item">
-
-      <view class="swiper-tab">
-    <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">图片上传</view>
-    <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">视频上传</view>
-
-      <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">音频录制</view>
-</view>
-<swiper current="{{currentTab}}" duration="300"  bindchange="swiperTab" style="height:40vh">
-    <swiper-item>
-        <view class="weui-uploader">
-          <view class="weui-uploader__hd">
-            <view class="weui-uploader__title"></view>
-            
-        
-            <view class="weui-uploader__info">{{files.length}}</view>
-            
-          </view>
-          <view class="weui-uploader__bd">
-            <view class="weui-uploader__files" id="uploaderFiles">
-              <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
-                <view class="weui-uploader__file"  id="{{item}}">
-                  <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" bindtap="previewImage"/>
-                  <image class="btn-img-small" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}"/>
-                </view>
-              </block>
-            </view>
-            <view class="weui-uploader__input-box">
-              <view class="weui-uploader__input" bindtap="chooseImage"></view>
-            </view>
-          </view>
+        <view class="navbar" style='padding-top:{{pusherSizeH}}vh'>
+          <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
         </view>
-         </swiper-item>
-              
-
-          <swiper-item>
-              <view class="weui-uploader">
-              <view class="weui-uploader__hd">
-                <view class="weui-uploader__title"></view>
-                <view bindtap="delVideo" style='color:blue;padding-right:10rpx'>删除</view>
-            
-                
-                
-              </view>
-              <view class="weui-uploader__bd">
-                <view class="weui-uploader__files" id="uploaderFilesVideo">
-                <video src="{{mediUrl}}" style='width:100%;height:35vh' objectFit="contain" class='{{displayVideo}}'></video>
-                </view>
-                <view class="weui-uploader__input-box">
-                  <view class="weui-uploader__input" bindtap="chooseVideo"></view>
-                </view>
-              </view>
-            </view>
-          </swiper-item>
-          <swiper-item>
+        <view hidden="{{currentTab!==0}}">
           <view class="weui-uploader">
-          <view class="weui-uploader__hd">
-            <view class="weui-uploader__title"></view>
-             <view bindtap="delAideo" style='color:blue;padding-right:10rpx'>删除</view>
-        
-            
-            
-          </view>
-          <view class="weui-uploader__bd" style='flex-direction:column;'>
-            <audio src="{{mediUrl}}" name="录音" controls="{{1>0}}" class='recorder-box' style="display:{{displayAudio}}"></audio>
-            <view class='recorder-box' >
-           
-             
-            <view class="circle" bindtap="startRecorder">
-       <image class="playimg" src="{{playimg}}" />
-      </view>
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title"></view>
+              <view class="weui-uploader__info">{{files.length}}</view>
             </view>
-          
-
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
+                  <view class="weui-uploader__file" id="{{item}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" bindtap="previewImage" />
+                    <image class="btn-img-small" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+              </view>
+            </view>
           </view>
         </view>
-           </swiper-item>
-        </swiper>
+        <view hidden="{{currentTab!==1}}">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title"></view>
+             
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFilesVideo">
+        
+                <view style='position:relative;' class='{{displayVideo}} recorder'>
+                   <video src="{{mediUrl}}" style='width:100%;height:35vh' objectFit="contain" class='{{displayVideo}}'></video>
+            <cover-image class="removeImgBtnVideo {{displayVideo}}" bindtap="delVideo" src="../../image/del-red.png"/>
+         </view>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseVideo"></view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+        <view hidden="{{currentTab!==2}}" class='recorder-box'>
+          <view style='position:relative;' class='{{displayAudio}} recorder'>
+            <audio src="{{mediUrl}}" name="录音" controls="{{1>0}}" class='{{displayAudio}}'></audio>
+            <cover-image class="removeImgBtn {{displayAudio}}" bindtap="delAideo" src="../../image/del-red.png"/>
+         </view>
+            
+          <view class='recorder'>
+            <image class="playimg" src="{{playimg}}" bindtap="startRecorder" />
+          </view>
+        </view>
       </view>
 
       <view class="kind-list-item weui-flex">
@@ -99,7 +72,7 @@
       </view>
 
       <view>
-        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;"  formType="submit">提交</button>
+        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;" formType="submit">提交</button>
       </view>
     </view>
   </form>

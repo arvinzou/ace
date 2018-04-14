@@ -42,8 +42,6 @@ swiper{
 }
 
 .circle{
-  align-items: center;  
-  justify-content: center; 
   width: 250rpx;  
   height:250rpx;  
   border-radius: 50%;  
@@ -57,8 +55,15 @@ swiper{
 }
 .recorder-box{
   display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.recorder{
+  display: flex;
   justify-content: center;
-  padding: 10rpx;
+  padding-top: 30rpx;
+  width: 100%;
 }
 
 .btn-img-small {
@@ -69,4 +74,65 @@ swiper{
   top:3rpx;
   background: #fff;
   border-radius: 50%;
+}
+.removeImgBtn{
+  position:absolute;
+  width: 60rpx;
+  height: 60rpx;
+  right:90rpx;
+  bottom:10rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+.removeImgBtnVideo{
+  position:absolute;
+  width: 60rpx;
+  height: 60rpx;
+  right:10rpx;
+  top:50rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.navbar {
+   /* z-index: 100;*/
+    width: 100%;
+    /*position: fixed; */
+    font-weight: bold;
+    font-size: 32rpx;
+    color: #666;
+    flex: none;
+    display: flex;
+    background: #fff;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+.navbar .item {
+    position: relative;
+    flex: auto;
+    text-align: center;
+    line-height: 80rpx;
+}
+
+.navbar .item.active {
+    font-size: 34rpx;
+    color: #d83e3f;
+}
+
+.navbar .item.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6rpx;
+    width: 60rpx;
+    margin: 0 auto;
+    background: #d83e3f;
+    border-radius: 10%;
+}
+.active {
+  color:#F65959;
+  border-bottom:4rpx solid #fff;
 }

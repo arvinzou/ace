@@ -19,6 +19,7 @@ Page({
   data: {
     serverfile: cfg.serverfile,
     currentTab: 0,
+    navbar: ['图片上传', '视频上传','音频录制'],
     max: 0,
     loading: false,
     disabled: false,
@@ -28,7 +29,7 @@ Page({
     mediUrl:null,
     docText:'',
     displayVideo:'hide',
-    displayAudio: 'none',
+    displayAudio: 'hide',
     playimg: "../../image/record_on.png",
     recorderStatus: false
   },
@@ -320,12 +321,27 @@ Page({
     recorderManager.start(options);
   },
   delVideo: function () {
+    console.log("delVideo");
     let that = this;
     that.setData({ displayVideo: 'hide', mediUrl:null });
   },
   delAideo: function () {
     let that = this;
-    that.setData({ displayAudio: 'none', mediUrl: null });
-  }
+    that.setData({ displayAudio: 'hide', mediUrl: null });
+  },
+   /**
+    * 点击选项卡
+    */
+  navbarTap: function (e) {
+    console.log(e);
+    let that = this;
+    if (that.data.currentTab == e.target.dataset.idx) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.idx
+      })
+    }
+  },
 });
 
