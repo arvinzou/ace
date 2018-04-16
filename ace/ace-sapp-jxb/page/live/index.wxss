@@ -9,7 +9,7 @@
 .img {
   width: 80rpx;
   height: 80rpx;
-  margin: 2rpx auto;
+  margin: 0rpx auto;
 }
 
 
@@ -40,7 +40,6 @@
   height:80rpx;  
   border-radius: 50%;  
   font-size: 36rpx;  
-  background: #C8C8C8;  
   bottom: 30rpx; 
 }
 .imgsmall {
@@ -365,13 +364,15 @@ swiper{
   position: fixed;  
   display: flex;  
   align-items: center;  
-  justify-content: center; 
+  justify-content: center;  
+  border-radius: 50%;  
+  background: #930000; 
 }
 .btn-img {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
-  background: #fff;
+  background: #fff; 
 }
 .active {
   color:#F65959;
