@@ -1,8 +1,5 @@
 
 <view class='index'>
-    <navigator url="../search/index" class='navigator' hover-class="weui-cell_active">
-        <view class="navigator-text">违规查询</view>
-    </navigator>
     <view class='section'>
         <view class="section_title"><image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;'/>数据统计</view>
         <view class='num'>
@@ -52,18 +49,21 @@
                     <view class="th" style='width:20%'>超载率</view>
                 </view>
                 <block wx:for="{{detailData}}">
+                 <navigator url="../trafficPreview/index?id={{item.id}}" class='navigator' hover-class="weui-cell_active">
                     <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-                        <view class="td" style='width:45%;'>{{item.inspectTime}}</view>
-                        <view class="td" style='width:20%;'>{{item.plateNo}}</view>
-                        <view class="td" style='width:15%;'>{{item.axleCount}}</view>
-                        <view class="td" style='width:25%;'>{{item.overRate}}</view>
+                        <view class="td navigator-text" style='width:45%;'>{{item.inspectTime}}</view>
+                        <view class="td navigator-text" style='width:20%;'>{{item.plateNo}}</view>
+                        <view class="td navigator-text" style='width:15%;'>{{item.axleCount}}</view>
+                        <view class="td navigator-text" style='width:20%;'>{{item.overRate}}</view>
                     </view>
+                
                     <view class="tr" wx:else>
-                        <view class="td" style='width:45%;'>{{item.inspectTime}}</view>
-                        <view class="td" style='width:25%;'>{{item.plateNo}}</view>
-                        <view class="td" style='width:15%;'>{{item.axleCount}}</view>
-                        <view class="td" style='width:25%;'>{{item.overRate}}</view>
+                        <view class="td navigator-text" style='width:45%;'>{{item.inspectTime}}</view>
+                        <view class="td navigator-text" style='width:20%;'>{{item.plateNo}}</view>
+                        <view class="td navigator-text" style='width:15%;'>{{item.axleCount}}</view>
+                        <view class="td navigator-text" style='width:20%;'>{{item.overRate}}</view>
                     </view>
+                </navigator>
                 </block>
             </view>
         </view>
