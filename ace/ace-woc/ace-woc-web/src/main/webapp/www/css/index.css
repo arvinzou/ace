@@ -1,0 +1,251 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: MicrosoftYaHei;
+    list-style: none;
+}
+
+@font-face {
+    font-family: DigifaceWide;
+    src: url('../font/DIGIFAW.TTF');
+}
+
+body {
+    color: #333;
+    background: url(../img/bg.png) no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    min-width: 1666px;
+    min-height: 1000;
+}
+
+.chart-container {
+    height: 280px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .2);
+    border: 1px solid #4167E2;
+    position: relative;
+    margin: 0 0px 20px;
+}
+
+.chart-angle {
+    height: 14px;
+    width: 14px;
+    position: absolute;
+}
+
+.chart-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent transparent #00FFFF transparent;
+}
+
+.chart-triangle-right {
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Safari and Chrome */
+    -o-transform: rotate(45deg);
+    /* Opera */
+    -moz-transform: rotate(45deg);
+    top: -25px;
+    right: -25px;
+}
+
+.chart-triangle-left {
+    transform: rotate(-45);
+    -ms-transform: rotate(-45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(-45deg);
+    /* Safari and Chrome */
+    -o-transform: rotate(-45deg);
+    /* Opera */
+    -moz-transform: rotate(-45deg);
+    top: -25px;
+    left: -25px;
+}
+
+.chart-view {
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 29, 73, .5);
+}
+
+.chart-view .chart-title {
+    background: url(../img/titlebg.png) no-repeat;
+    height: 35px;
+    width: 254px;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    margin-top: -1px;
+}
+
+.chart-view .chart-title span {
+    font-size: 24px;
+    color: rgba(221, 223, 252, 1);
+    line-height: 35px;
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /*vertical-align:middle;*/
+}
+
+.chart-angle-right-mark {
+    border-right: 2px solid #00FFFF;
+    right: -1px;
+}
+
+.chart-angle-left-mark {
+    border-left: 2px solid #00FFFF;
+    left: -1px;
+}
+
+.chart-angle-top-mark {
+    border-top: 2px solid #00FFFF;
+    top: -1px;
+}
+
+.chart-angle-bottom-mark {
+    border-bottom: 2px solid #00FFFF;
+    bottom: -1px;
+}
+
+.right-container {
+    width: 440px;
+    padding-right: 40px;
+}
+
+.right-container .chart-view .chart-style {
+    height: 240px;
+    width: 100%;
+}
+
+.left-container {
+    width: 440px;
+    padding-left: 40px;
+}
+
+.left-container .chart-container .chart-view video {
+    width: 373px;
+    height: 211px;
+    margin: 15px auto 0 auto;
+    display: block;
+}
+
+.mid-contrainer {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.body-div {
+    display: flex;
+}
+
+.body-div::after {
+    content: '';
+    clear: left
+}
+
+.head-div .title {
+    background: url(../img/title.png) no-repeat;
+    background-size: 100% 100%;
+    height: 85px;
+    width: 1666px;
+    margin: 0 auto;
+}
+
+.head-div .title span {
+    font-size: 22px;
+    font-family: DigifaceWide;
+    color: rgba(255, 255, 255, 1);
+    float: right;
+    margin-top: 60px;
+}
+
+.head-div {
+    margin-bottom: 60px;
+}
+
+.mid-contrainer .top-module {
+    min-width: 100%;
+    display: table;
+}
+
+.mid-contrainer .top-module > div {
+    padding-left: 20px;
+    width: 33.3%;
+    float: left;
+}
+
+.mid-contrainer .top-module span {
+    font-size: 28px;
+    font-weight: bold;
+    color: rgba(1, 240, 255, 1);
+}
+
+.mid-contrainer .top-module .number {
+    width: 250px;
+    height: 67px;
+    border: rgba(65, 103, 226, 1) solid 1px;
+    margin-top: 10px;
+}
+
+.mid-contrainer .top-module .gauge-transfinite {
+    height: 170px;
+}
+
+.mid-contrainer .top-module .number ul li {
+    font-size: 47px;
+    float: left;
+    font-family: DigifaceWide;
+    line-height: 5px;
+    padding-top: 6px;
+    padding-left: 9px;
+}
+
+.mid-contrainer .top-module .number ul li::after {
+    content: '';
+    display: block;
+    width: 43px;
+    height: 23px;
+    background: rgba(4, 19, 52, 1);
+    margin-left: -4px;
+    margin-top: 1px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.mid-contrainer .top-module .number ul li::before {
+    content: '';
+    display: block;
+    width: 43px;
+    height: 23px;
+    background: rgba(4, 19, 52, 1);
+    margin-left: -4px;
+    margin-bottom: -1px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.mid-contrainer .bottom-module {
+    width: 100%;
+    height: 710px;
+}
+
+.font-red {
+    color: #FF0018;
+}
+
+.font-yellow {
+    color: rgba(255, 241, 0, 1);
+}
