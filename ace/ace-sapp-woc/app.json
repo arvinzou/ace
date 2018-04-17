@@ -1,11 +1,8 @@
 {
   "pages": [
-    
+    "page/trafficPreview/index",
     "page/home/index",
-    "page/me/index",
-    "page/live/index",
-    "page/rpt/index"
-    
+    "page/me/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",
