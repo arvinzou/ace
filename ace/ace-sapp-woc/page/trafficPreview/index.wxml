@@ -1,0 +1,55 @@
+<view class='index'>
+    <view class="kind-list" >
+      <view class="kind-list-item">
+        <view class="kind-list-item-hd kind-bottom-line">
+          <view class="kind-list-text">检测时间</view>
+          <view>{{o.inspectTime}}</view>
+        </view>
+         <view class="kind-list-item-hd kind-bottom-line">
+          <view class="kind-list-text">检测地点</view>
+          <view>{{o.siteName}}</view>
+        </view>
+         <view class="kind-list-item-hd kind-bottom-line">
+          <view class="kind-list-text">方向</view>
+          <view>{{o.direction}}</view>
+        </view>
+        <view class="kind-list-item-hd kind-bottom-line">
+          <view class="kind-list-text">车牌号</view>
+          <view>{{o.plateNo}}</view>
+        </view>
+        <view class="kind-list-item-hd kind-bottom-line">
+          <view class="kind-list-text">车货总量</view>
+          <view>{{o.totalMass}}kg</view>
+        </view>
+        <view class="kind-list-item-hd kind-bottom-line">
+          <view class="kind-list-text">轴数</view>
+          <view>{{o.axleCount}}</view>
+        </view>
+        <view class="kind-list-item-hd kind-bottom-line">
+          <view class="kind-list-text">超限</view>
+          <view>{{o.overMass}}kg</view>
+        </view>
+        <view class="kind-list-item-hd kind-bottom-line">
+          <view class="kind-list-text">超限率 </view>
+          <view>{{o.overRate}}</view>
+        </view>
+         <view class="kind-list-item-hd kind-bottom-line">
+          <view class="kind-list-text">速度</view>
+          <view>{{o.speed}}</view>
+        </view>
+         <view class="kind-list-item-hd">
+          <view class="kind-list-text">检测路段</view>
+          <view>{{o.locale}}</view>
+        </view>
+      </view>
+      
+        
+      <view class="kind-list-item" wx:if="{{o.trafficSubVo.length>0}}" style="text-align: center;padding:2px;">
+      <view style="padding:20rpx;font-weight:800;">现场拍摄画面</view>
+      <block wx:for-items="{{o.trafficSubVo}}" wx:key="{{item.*}}">
+        <image wx:if="{{item.fileUrl.length>0}}" id="{{serverfile}}{{item.fileUrl}}" mode="aspectFill" bindtap="previewImage"  src="{{serverfile}}{{item.fileUrl}}"/>
+        <view style="text-align: center;padding:2px;font-weight:800;font-size:14px">{{item.inspectTime}}</view>
+        </block>
+      </view>
+    </view>
+</view>
