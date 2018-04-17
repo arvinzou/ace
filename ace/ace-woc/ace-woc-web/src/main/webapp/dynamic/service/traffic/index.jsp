@@ -182,85 +182,74 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-主键</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">主键</span>
             <br>
-            <span id="id">
-</span>
+            <span id="id"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-记录卡点</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">记录卡点</span>
             <br>
-            <span id="siteName">
-</span>
+            <span id="siteName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-记录监控点</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">记录监控点</span>
             <br>
-            <span id="monitorSiteName">
-</span>
+            <span id="monitorSiteName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-检查时间</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">检查时间</span>
             <br>
-            <span id="inspectTime">
-</span>
+            <span id="inspectTime"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-地点</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">地点</span>
             <br>
-            <span id="locale">
-</span>
+            <span id="locale"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-车牌号</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">车牌号</span>
             <br>
-            <span id="plateNo">
-</span>
+            <span id="plateNo"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-方向</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">方向</span>
             <br>
-            <span id="direction">
-</span>
+            <span id="direction"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-轴数</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">轴数</span>
             <br>
-            <span id="axleCount">
-</span>
+            <span id="axleCount"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-总重量</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">总重量</span>
             <br>
-            <span id="totalMass">
-</span>
+            <span id="totalMass"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-超限</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">超限</span>
             <br>
-            <span id="overMass">
-</span>
+            <span id="overMass"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-超限率</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">超限率</span>
             <br>
-            <span id="overRate">
-</span>
+            <span id="overRate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-速度</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">速度</span>
             <br>
-            <span id="speed">
-</span>
+            <span id="speed"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-备注</span>
+
+        <div class="labelItem">
+            <span class="labelItemHeader">备注</span>
             <br>
-            <span id="remark">
-</span>
+            <span id="remark"></span>
         </div>
     </div>
+
 
     <h5 class="header-title">通行画面</h5>
     <div class="row traffic-file">
@@ -276,41 +265,35 @@
 
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-创建人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">创建人编号</span>
             <br>
-            <span id="createUserId">
-</span>
+            <span id="createUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-创建人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">创建人姓名</span>
             <br>
-            <span id="createUserName">
-</span>
+            <span id="createUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-入库日期</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">入库日期</span>
             <br>
-            <span id="createDate">
-</span>
+            <span id="createDate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">最后更新人编号</span>
             <br>
-            <span id="lastModifyUserId">
-</span>
+            <span id="lastModifyUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新人姓名</span>
             <br>
-            <span id="lastModifyUserName">
-</span>
+            <span id="lastModifyUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新时间</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新时间</span>
             <br>
-            <span id="lastModifyDate">
-</span>
+            <span id="lastModifyDate"></span>
         </div>
     </div>
 

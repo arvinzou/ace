@@ -41,8 +41,8 @@ public class AnalysisController extends WocBaseController {
      */
     @RequestMapping(value = "/queryCounts")
     @ResponseBody
-    public Map<String, Object> queryCounts() {
-        return analysisService.queryCounts(getCurUserProp());
+    public Map<String, Object> queryCounts(String siteId, String datetime) {
+        return analysisService.queryCounts(siteId, datetime, getCurUserProp());
     }
 
 
