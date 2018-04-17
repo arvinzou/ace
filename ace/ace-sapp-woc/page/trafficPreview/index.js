@@ -24,6 +24,13 @@ Page({
         timingFunc: 'easeIn'
       }
     });
+    var that = this;
+    util.request(cfg.illegalTrafficOneUrl, { "id": data.param.id, "start": 0, "limit": 9999 },
+        function (data) {
+            console.log(data);
+            that.setData({ o: data });
+        }
+    );
   },
   onLoad: function (param) {
     var that = this;

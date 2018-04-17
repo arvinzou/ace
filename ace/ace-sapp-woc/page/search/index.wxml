@@ -21,7 +21,7 @@
                 <input type='text' placeholder='请输入验证码' style='width:100%'></input>
             </view>
             <view class='searchBtn'>
-                <button size='default'>查询</button>
+                <button size='default' bindtap="search">查询</button>
             </view>
         </view>
         <!-- 省 -->
@@ -41,30 +41,32 @@
     </view>
 
     <!--超载记录列表-->
+    
     <view class='record'>
         <view class='recodeItem'>
             <view class='formTitle'>超载记录</view>
-            <view class='carNum'>湘N888888</view>
-            <view class='totalNum'>4条超载记录</view>
+            <view class='carNum' wx:if="{{list.length>0}}">{{list[0].plateNo}}</view>
+            <view class='totalNum'>{{list.length}}条超载记录</view>
         </view>
-        <view class='detail'>
-            <view class='checkTime'>检测时间2018/01/16 15：00：20</view>
+        <block wx:for-items="{{list}}" wx:key="{{item.*}}">
+        <view class='detail' >
+            <view class='checkTime'>检测时间{{item.inspectTime}}</view>
             <view class='loadDetail'>
                 <view class='location'>地点</view>
                 <view class='load'>超限</view>
                 <view class='loadPercent'>超限率</view>
             </view>
             <view class='loadDetail_1'>
-                <view class='location'>白云大道水泗村站点</view>
-                <view class='load'>1700</view>
-                <view class='loadPercent'>0.3</view>
+                <view class='location'>{{item.siteName}}</view>
+                <view class='load'>{{item.overMass}}</view>
+                <view class='loadPercent'>{{item.overRate}}</view>
             </view>
             <view class='more'>
-                <navigator url="../detail/index" class='navigator' hover-class="weui-cell_active">
+                <navigator url="../trafficPreview/index?id={{item.id}}" class='navigator' hover-class="weui-cell_active">
                     <view class="navigator-text">查看详情</view>
-                    <view class="navigator-arrow"></view>
                 </navigator>
             </view>
         </view>
+        </block>
     </view>
 </view>

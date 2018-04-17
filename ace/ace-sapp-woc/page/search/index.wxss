@@ -163,7 +163,7 @@
 .detail{
   width: 90%;
   height: 400rpx;
-  margin: 0 auto;
+  margin: 10% auto;
   background-color: #FFFFFF;
   border-radius: 5%;
 }
@@ -216,7 +216,10 @@
     height: 100rpx;
     line-height: 100rpx;
     color: #798092;
-    border-bottom: 2rpx solid #E4E6E9;
+    /* border-bottom: 2rpx solid #E4E6E9; */
+}
+.recodeItem{
+    padding-top: 50rpx;
 }
 
 
