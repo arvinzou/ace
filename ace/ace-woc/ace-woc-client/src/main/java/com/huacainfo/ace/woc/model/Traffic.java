@@ -38,6 +38,9 @@ public class Traffic implements Serializable {
 
     private String remark;
 
+    /**
+     * 0 - 违章记录 ，1-未违章记录
+     */
     private String status;
 
     private String createUserId;

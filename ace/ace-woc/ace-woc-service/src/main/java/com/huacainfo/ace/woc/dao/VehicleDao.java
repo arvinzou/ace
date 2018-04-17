@@ -35,4 +35,6 @@ public interface VehicleDao {
      * @return
      */
     List<Vehicle> selectAll();
+
+
 }

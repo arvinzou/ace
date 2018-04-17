@@ -9,13 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 public interface PersonDao {
+    Person selectByPrimaryKey(String id);
+
     int deleteByPrimaryKey(String id);
 
     int insert(Person record);
 
     int insertSelective(Person record);
 
-    PersonVo selectByPrimaryKey(String id);
+    PersonVo selectByPrimaryKeyVo(String id);
 
     int updateByPrimaryKeySelective(Person record);
 
@@ -33,4 +35,8 @@ public interface PersonDao {
             @Param("params") Map<String, Object> params);
 
     List<Person> selectAll();
+
+    Person findByPlateNo(String plateNo);
+
+    Map<String,Object> findWeChatInfo(String phoneNumber);
 }

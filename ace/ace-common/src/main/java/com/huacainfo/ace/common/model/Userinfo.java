@@ -34,6 +34,16 @@ public class Userinfo implements java.io.Serializable {
 
     private String role;
 
+    private String mobile;
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     public String getUnionid() {
         return unionid;
     }

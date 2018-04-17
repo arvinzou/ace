@@ -7,8 +7,6 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.woc.model.Traffic;
-import com.huacainfo.ace.woc.model.TrafficIllegal;
-import com.huacainfo.ace.woc.service.TrafficIllegalService;
 import com.huacainfo.ace.woc.service.TrafficService;
 import com.huacainfo.ace.woc.vo.TrafficQVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
@@ -35,9 +33,6 @@ public class TrafficController extends WocBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private TrafficService trafficService;
-
-    @Autowired
-    private TrafficIllegalService trafficIllegalService;
 
     /**
      * @throws
@@ -114,10 +109,7 @@ public class TrafficController extends WocBaseController {
     @RequestMapping(value = "/updateTrafficStatus")
     @ResponseBody
     public MessageResponse updateTrafficStatus(String id) throws Exception {
-        this.trafficService.updateTrafficStatus(id, this.getCurUserProp());
-        TrafficIllegal tt = new TrafficIllegal();
-        tt.setTrafficId(id);
-        return this.trafficIllegalService.insertTrafficIllegalII(tt, this.getCurUserProp());
+        return this.trafficService.updateTrafficStatus(id, this.getCurUserProp());
     }
 
     /**

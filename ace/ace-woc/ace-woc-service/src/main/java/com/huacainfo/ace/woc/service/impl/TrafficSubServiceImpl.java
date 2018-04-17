@@ -1,28 +1,27 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.woc.dao.TrafficDao;
+import com.huacainfo.ace.woc.dao.TrafficSubDao;
+import com.huacainfo.ace.woc.model.TrafficSub;
+import com.huacainfo.ace.woc.service.TrafficSubService;
+import com.huacainfo.ace.woc.vo.TrafficSubQVo;
+import com.huacainfo.ace.woc.vo.TrafficSubVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.woc.dao.TrafficSubDao;
-import com.huacainfo.ace.woc.model.TrafficSub;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.woc.service.TrafficSubService;
-import com.huacainfo.ace.woc.vo.TrafficSubVo;
-import com.huacainfo.ace.woc.vo.TrafficSubQVo;
-import com.huacainfo.ace.woc.dao.TrafficDao;
+import java.util.Date;
+import java.util.List;
 
 @Service("trafficSubService")
 /**
@@ -132,7 +131,9 @@ public class TrafficSubServiceImpl implements TrafficSubService {
     public MessageResponse insertTrafficSub(TrafficSub o, UserProp userProp)
             throws Exception {
         o.setId(GUIDUtil.getGUID());
-        TrafficVo t = trafficDao.selectByPrimaryKey(o.getTrafficId());
+        TrafficVo t = trafficDao.selectByPrimaryKeyVo(o.getTrafficId());
+        o.setInspectTime(t.getInspectTime());
+        o.setPlateNo(t.getPlateNo());
 
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
@@ -143,21 +144,13 @@ public class TrafficSubServiceImpl implements TrafficSubService {
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "资料类型不能为空！");
         }
-        o.setInspectTime(t.getInspectTime());
-        if (CommonUtils.isBlank(o.getInspectTime())) {
-            return new MessageResponse(1, "检查时间不能为空！");
-        }
-        o.setPlateNo(t.getPlateNo());
         if (CommonUtils.isBlank(o.getPlateNo())) {
             return new MessageResponse(1, "车牌号不能为空！");
         }
         if (CommonUtils.isBlank(o.getFileUrl())) {
             return new MessageResponse(1, "资料地址不能为空！");
         }
-//        int temp = this.trafficSubDao.isExit(o);
-//        if (temp > 0) {
-//            return new MessageResponse(1, "通行记录子表名称重复！");
-//        }
+
         o.setCreateDate(new Date());
         o.setLastModifyDate(new Date());
         o.setStatus("1");

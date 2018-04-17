@@ -24,18 +24,18 @@
 
     <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.PersonVo"></resultMap>
     <sql id="Base_Column_List">
-        p.id,p.name,p.paperworkId,p.headImgUrl,p.phoneNumber,p.companyId,p.areaCode,p.address,
-        p.certNumber,p.driverLicenseCode,p.remark,p.status,p.createUserId,p.createUserName,p.createDate,
-        p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.department_name as deptName
+       id,name,paperworkId,headImgUrl,phoneNumber,companyId,areaCode,address,
+       certNumber,driverLicenseCode,remark,status,createUserId,createUserName,createDate,
+       lastModifyUserId,lastModifyUserName,lastModifyDate
   </sql>
     <sql id="Base_Column_List_Vo">
         p.id,p.name,p.paperworkId,p.headImgUrl,p.phoneNumber,p.companyId,p.areaCode,p.address,
         p.certNumber,p.driverLicenseCode,p.remark,p.status,p.createUserId,p.createUserName,p.createDate,
         p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate,a.name as areaName,d.department_name as deptName
     </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMapVo" parameterType="java.lang.String">
+    <select id="selectByPrimaryKeyVo" resultMap="BaseResultMapVo" parameterType="java.lang.String">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List_Vo"/>
         from person p
         left join portal.province a on p.areaCode=a.code
         left join portal.department d on p.companyId=d.department_id
@@ -329,5 +329,33 @@
             certNumber,driverLicenseCode,remark,status,createUserId,createUserName,createDate,
             lastModifyUserId,lastModifyUserName,lastModifyDate
         from person
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from person
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByPlateNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select  p.id,p.name,p.paperworkId,p.headImgUrl,p.phoneNumber,p.companyId, p.areaCode ,p.address,
+            p.certNumber,p.driverLicenseCode,p.remark,p.status,p.createUserId,p.createUserName,p.createDate,
+            p.lastModifyUserId,p.lastModifyUserName,p.lastModifyDate
+     from woc.vehicle v
+        left join woc.person p on v.ownerId = p.id
+     where v.plateNo= #{plateNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findWeChatInfo" resultType="java.util.Map" parameterType="java.lang.String">
+        SELECT
+            c.appId, c.appScret, c.accessToken, c.expiresIn, c.name, c.deptId,
+            u.unionid, u.openid, u.appid, u.nickname, u.sex, u.city, u.province, u.country, u.headimgurl, u.access_token,
+            u.refresh_token, u.scope, u.expires_in,role, u.mobile
+        FROM
+          portal.userinfo u
+        LEFT JOIN woc.person p ON p.phoneNumber = u.mobile
+        LEFT JOIN portal.wx_cfg c ON u.appid = c.appid
+        WHERE p.phoneNumber = #{phoneNumber,jdbcType=VARCHAR}
     </select>
 </mapper>

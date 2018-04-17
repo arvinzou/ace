@@ -16,6 +16,7 @@
         <result column="scope" jdbcType="VARCHAR" property="scope"/>
         <result column="expires_in" jdbcType="BIGINT" property="expires_in"/>
         <result column="role" jdbcType="VARCHAR" property="role"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
     </resultMap>
 
     <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.UserinfoVo"
@@ -24,7 +25,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         unionid, openid, appid, nickname, sex, city, province, country, headimgurl, access_token,
-        refresh_token, scope, expires_in,role
+        refresh_token, scope, expires_in,role, mobile
     </sql>
     <sql id="Blob_Column_List">
         privilege
@@ -46,12 +47,12 @@
         nickname, sex, city,
         province, country, headimgurl,
         access_token, refresh_token, scope,
-        expires_in, privilege)
+        expires_in, privilege, mobile)
         values (#{unionid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR},
         #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
         #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR},
         #{access_token,jdbcType=VARCHAR}, #{refresh_token,jdbcType=VARCHAR}, #{scope,jdbcType=VARCHAR},
-        #{expires_in,jdbcType=BIGINT}, #{privilege,jdbcType=LONGVARCHAR})
+        #{expires_in,jdbcType=BIGINT}, #{privilege,jdbcType=LONGVARCHAR}, #{mobile,jdbcType=VARCHAR})
     </insert>
 
 
@@ -69,7 +70,8 @@
         refresh_token = #{refresh_token,jdbcType=VARCHAR},
         privilege = #{privilege,jdbcType=LONGVARCHAR},
         scope = #{scope,jdbcType=VARCHAR},
-        expires_in = #{expires_in,jdbcType=BIGINT}
+        expires_in = #{expires_in,jdbcType=BIGINT},
+        mobile = #{mobile,jdbcType=VARCHAR},
         where unionid = #{unionid,jdbcType=VARCHAR}
     </update>
 

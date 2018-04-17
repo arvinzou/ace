@@ -1,26 +1,25 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-
-import com.huacainfo.ace.common.tools.GUIDUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.dao.TrafficIllegalDao;
 import com.huacainfo.ace.woc.model.TrafficIllegal;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.service.TrafficIllegalService;
-import com.huacainfo.ace.woc.vo.TrafficIllegalVo;
 import com.huacainfo.ace.woc.vo.TrafficIllegalQVo;
+import com.huacainfo.ace.woc.vo.TrafficIllegalVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service("trafficIllegalService")
 /**
@@ -132,13 +131,14 @@ public class TrafficIllegalServiceImpl implements TrafficIllegalService {
         if (CommonUtils.isBlank(o.getTrafficId())) {
             return new MessageResponse(1, "通行记录主键不能为空！");
         }
-        o.setAuditTime(new Date());
-        o.setAuditor(userProp.getName());
-        o.setStatus("1");
+
         int temp = this.trafficIllegalDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "通行违章记录名称重复！");
         }
+
+        o.setAuditTime(new Date());
+        o.setAuditor(userProp.getName());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());

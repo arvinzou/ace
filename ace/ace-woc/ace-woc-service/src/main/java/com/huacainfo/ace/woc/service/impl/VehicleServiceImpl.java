@@ -184,7 +184,7 @@ public class VehicleServiceImpl implements VehicleService {
         Map<String, Object> axle;
 
         List<Person> personList = personDao.selectAll();
-        Person p ;//= personList.get(new Random().nextInt(personList.size()));
+        Person p;//= personList.get(new Random().nextInt(personList.size()));
         for (int i = 0; i < Integer.valueOf(dataNum); i++) {
             p = personList.get(new Random().nextInt(personList.size()));
             o = new Vehicle();
@@ -210,4 +210,6 @@ public class VehicleServiceImpl implements VehicleService {
 
         return new MessageResponse(0, "虚拟数据构建完成！" + count);
     }
+
+
 }
