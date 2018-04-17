@@ -1,7 +1,7 @@
-var flag = false;
+var hours;
 $(function () {
     oneSecondTimes();
-//	oneMinutesTimes();
+    //	oneMinutesTimes();
 });
 
 function oneSecondTimes() {
@@ -40,20 +40,28 @@ function viewNumber(_class, data) {
     }
 }
 
-
 function clockTime() {
     var date = new Date();
     var y = date.getFullYear();
     var m = date.getMonth() + 1;
     var d = date.getDate();
-    var h = date.getHours();
+    hours = date.getHours();
     var mm = date.getMinutes();
     var s = date.getSeconds();
     var dateTime = y +
         '-' + (m < 10 ? ('0' + m) : m) +
         '-' + (d < 10 ? ('0' + d) : d) +
-        ' ' + (h < 10 ? ('0' + h) : h) +
+        ' ' + (hours < 10 ? ('0' + hours) : hours) +
         ':' + (mm < 10 ? ('0' + mm) : mm) +
         ':' + (s < 10 ? ('0' + s) : s);
     $('.head-div .title span').html(dateTime)
+}
+
+function toDecimal(x) {
+    var f = parseFloat(x);
+    if (isNaN(f)) {
+        return;
+    }
+    f = Math.round(x * 100) / 100;
+    return f;    
 }

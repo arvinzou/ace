@@ -433,7 +433,8 @@ require(
                 viewNumber('.trafficCounts', result.trafficCounts);
                 viewNumber('.trafficIllegalCounts', result.trafficIllegalCounts);
                 console.log(result.trafficIllegalCounts);
-                optionGauge.series[0].data[0].value = (parseInt(result.trafficIllegalCounts) / parseInt(result.trafficCounts)).toFixed(4) * 100;
+                var numbers = toDecimal((result.trafficIllegalCounts / result.trafficCounts) * 100);
+                optionGauge.series[0].data[0].value = numbers;
                 myGauge.setOption(optionGauge, true);
             });
 
@@ -458,19 +459,14 @@ require(
             var url = 'http://106.75.69.81/woc/www/data/interval';
             data = {}
             $.getJSON(url, data, function (result) {
-                if (result.siteList.length) {
-                    var siteBar = [];
-                    var dataBar = [];
+                var dataLine = [];
                     var data = result.siteList;
-                    for (var i = 0; i < data.length; i++) {
-                        siteBar.push(data[i].siteCode);
-                        dataBar.push(data[i].count);
-                    }
-                    ;
-                    optionBar.xAxis[0].data = siteBar;
-                    optionBar.series[0].data = dataBar;
-                    myBar.setOption(optionBar);
+                for (var i = 0; i < hours; i++) {
+                    dataLine.push(result.countMap[result.interval[i]]);
                 }
+                ;
+                optionLine.series[0].data = dataLine;
+                myLine.setOption(optionLine);
             });
         }, 1000)
         myGauge.setOption(optionGauge);
@@ -480,3 +476,4 @@ require(
         myMap.setOption(optionMap);
     }
 );
+
