@@ -1,37 +1,14 @@
 {
   "pages": [
-    
     "page/home/index",
-    "page/me/index",
-    "page/live/index",
-    "page/rpt/index"
-    
+    "page/search/index",
+    "page/detail/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",
-    "navigationBarTitleText": "微直播",
+    "navigationBarTitleText": "超载掌上驾驶舱",
     "navigationBarBackgroundColor": "#3C3C3C",
     "backgroundColor": "#F8F8F8"
-  },
-  "tabBar": {
-    "color": "#353536",
-    "selectedColor": "#353536",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "page/home/index",
-        "iconPath": "image/home.png",
-        "selectedIconPath": "image/home_s.png",
-        "text": "首页"
-      },
-      {
-        "pagePath": "page/me/index",
-        "iconPath": "image/me.png",
-        "selectedIconPath": "image/me_s.png",
-        "text": "我的"
-      }
-    ]
   },
   "networkTimeout": {
     "request": 10000,

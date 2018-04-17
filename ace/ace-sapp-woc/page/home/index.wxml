@@ -1,53 +1,70 @@
 <view class='index'>
-  <view class='section'>
-    <view  class="section_title">数据统计</view>
-    <view class='flex-wrp' style='flex-direction:row;'>
-      <view class="flex-item">
-        <view class='caseNum'>810</view>
-        <view>检测次数</view>
-      </view>
-      <view class="flex-item">
-        <view class='caseNum'>20</view>
-        <view>超载次数</view>
-      </view>
-      <view class="flex-item">
-        <view>20</view>
-        <view>案件数</view>
-      </view>
-    </view>
-  </view>
-
-  <view>
-    <view>
-      <label>站点超载情况</label>
-      <view class=''>
-          <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
-      </view>
-    </view>
-
-     <view>
-      <label>时段超载情况</label>
-      <view class=''>
-          <canvas canvas-id="lineCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
-      </view>
-    </view>
-
-    <view>
-    <label>数据详情</label>
-      <view class='table'>
-        <view class="tr bg-w">
-            <view class="th">时间</view>
-            <view class="th">车牌号</view>
-            <view class="th ">轴数</view>
-            <view class="th ">超载率</view>
+    <navigator url="../search/index" class='navigator' hover-class="weui-cell_active">
+        <view class="navigator-text">违规查询</view>
+    </navigator>
+    <view class='section'>
+        <view class="section_title"><image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;'/>数据统计</view>
+        <view class='num'>
+            <view class='flex-wrp' style='flex-direction:row;'>
+                <view class="flex-item">
+                    <view class='caseNum'>810</view>
+                    <view class='caseTitle'>检测次数</view>
+                </view>
+                <view class="flex-item">
+                    <view class='caseNum'>20</view>
+                    <view class='caseTitle'>超载次数</view>
+                </view>
+                <view class="flex-item">
+                    <view class='caseNum'>20</view>
+                    <view class='caseTitle'>案件数</view>
+                </view>
+            </view>
+            <view class='deadline'>数据截止至时间：00:00:00</view>
         </view>
-        <view class="tr bg-g" wx:for="{{detailData}}"  wx:for-item="item">
-            <view class="td">{{item.time}}</view>
-            <view class="td">{{item.carNum}}</view>
-            <view class="td">{{item.zs}}</view>
-            <view class="td">{{item.loadPercent}}</view>
-        </view>
-      </view>
     </view>
-  </view>
+    <view>
+        <view>
+            <view class='section_title'><image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;'/>站点超载情况</view>
+            <view class='swiper-tab'>
+                <view class="swiper-tab-item{{currentTab == 0 ? '.active':''}} day" data-current="0" bindtap="clickTab">日</view>
+                <view class="swiper-tab-item{{currentTab == 1 ? '.active':''}} month" data-current="1" bindtap="clickTab">月</view>
+                <view class="swiper-tab-item{{currentTab == 2 ? '.active':''}} quarter" data-current="2" bindtap="clickTab">季度</view>
+            </view>
+            <view class='canvasContainer'>
+                <canvas canvas-id="columnCanvas" class="canvas"></canvas>
+            </view>
+        </view>
+        <view class='tabContent'>
+            <view class='section_title'><image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;'/>时段超载情况</view>
+            <view class=''>
+                <canvas canvas-id="lineCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
+            </view>
+        </view>
+
+        <view class='tabContent'>
+            <view class='section_title'><image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;'/>数据详情</view>
+            <view class='table'>
+                <view class="tr bg-w">
+                    <view class="th">时间</view>
+                    <view class="th">车牌号</view>
+                    <view class="th ">轴数</view>
+                    <view class="th ">超载率</view>
+                </view>
+                <block wx:for="{{detailData}}">
+                    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+                        <view class="td">{{item.time}}</view>
+                        <view class="td">{{item.carNum}}</view>
+                        <view class="td">{{item.zs}}</view>
+                        <view class="td">{{item.loadPercent}}</view>
+                    </view>
+                    <view class="tr" wx:else>
+                        <view class="td">{{item.time}}</view>
+                        <view class="td">{{item.carNum}}</view>
+                        <view class="td">{{item.zs}}</view>
+                        <view class="td">{{item.loadPercent}}</view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
 </view>

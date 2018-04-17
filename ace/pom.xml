@@ -65,27 +65,25 @@
         <module>ace-jxb</module>
 
         <module>ace-gis</module>
-              <!--
- <module>ace-kernel</module>
-        <module>ace-live</module>
-        <module>ace-iop</module>
-        <module>ace-operana</module>
+ <!--<module>ace-kernel</module>-->
+        <!--<module>ace-live</module>-->
+        <!--<module>ace-iop</module>-->
+        <!--<module>ace-operana</module>-->
         <module>ace-woc</module>
 
-        <module>ace-face</module>
+        <!--<module>ace-face</module>-->
 
-        <module>ace-jave</module>
-        <module>ace-uf</module>
+        <!--<module>ace-jave</module>-->
+        <!--<module>ace-uf</module>-->
 
-        <module>ace-rvc</module>
-        <module>ace-luohua</module>
-        <module>ace-workflow</module>
-        <module>ace-weuiluohua</module>
-        <module>ace-gesp</module>
-        <module>ace-weui</module>
-        <module>activiti-root</module>
+        <!--<module>ace-rvc</module>-->
+        <!--<module>ace-luohua</module>-->
+        <!--<module>ace-workflow</module>-->
+        <!--<module>ace-weuiluohua</module>-->
+        <!--<module>ace-gesp</module>-->
+        <!--<module>ace-weui</module>-->
+        <!--<module>activiti-root</module>-->
 
--->
         <module>ace-autocode</module>
 
     </modules>

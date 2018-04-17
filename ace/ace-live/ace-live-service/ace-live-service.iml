@@ -15,12 +15,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ace-portal-client" />
-    <orderEntry type="module" module-name="ace-common" />
-    <orderEntry type="module" module-name="ace-common-dao" />
-    <orderEntry type="module" module-name="ace-portal-client" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
-    <orderEntry type="module" module-name="ace-live-client" />
+    <orderEntry type="library" name="Maven: com.huacainfo:ace-live-client:1.0" level="project" />
     <orderEntry type="module" module-name="ace-common" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.2.RELEASE" level="project" />
