@@ -4,6 +4,7 @@ const app = getApp();
 
 Page({
   data: {
+
     serverfile: cfg.serverfile,
     loading: false,
     disabled: false,
@@ -29,6 +30,7 @@ Page({
     console.log('index.js.onLoad'); 
     console.log(param); 
     this.setData(param);
+
   },
   previewImage: function (e) {
     console.log(e);

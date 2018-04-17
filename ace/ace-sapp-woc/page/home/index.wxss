@@ -24,9 +24,9 @@
   align-items: center;
 }
 .td {
-    width:25%;
     justify-content: center;
     text-align: center;
+    font-size: 26rpx;
 }
 .bg-w{
   background-color: #F7F9FC;
@@ -35,7 +35,6 @@
   background: #FFFFFF;
 }
 .th {
-  width: 25%;
   justify-content: center;
   background: #ECF0F1;
   color: #616161;
@@ -44,6 +43,7 @@
   align-items: center;
 }
 .swiper-tab{
+  color: #798092;
   display: flex;
   width: 100%;
   text-align: center;

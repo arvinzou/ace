@@ -2,7 +2,7 @@
   "pages": [
     "page/home/index",
     "page/search/index",
-    "page/detail/index"
+    "page/trafficPreview/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",
