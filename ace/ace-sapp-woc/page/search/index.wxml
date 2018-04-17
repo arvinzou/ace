@@ -1,0 +1,70 @@
+<view class="container">
+    <view class='main'>
+        <view class='header'>
+            <image src='../../image/search_header.png' style='width:100%; height:100%'></image>
+        </view>
+        <view class='searchContainer'>
+            <view class='formTitle'>超载查询</view>
+            <view style='color:#798092;width:90%;margin:0 auto;'>请输入车牌号：</view>
+            <view class="chepai">
+                <view class="tel" bindtap="d1">{{carNo}}</view>
+            </view>
+            <view class='phoneContainer'>
+                <view>
+                    <input type='text' placeholder='请输入手机号'></input>
+                </view>
+                <view>
+                    <button class='getCheck' size='mini'>获取验证码</button>
+                </view>
+            </view>
+            <view class='randCode'>
+                <input type='text' placeholder='请输入验证码' style='width:100%'></input>
+            </view>
+            <view class='searchBtn'>
+                <button size='default'>查询</button>
+            </view>
+        </view>
+        <!-- 省 -->
+        <view class="provinces" hidden='{{hidden1}}'>
+            <view class="pro_li lf" wx:for="{{item1}}" bindtap='sheng' data-sh="{{item}}">{{item}}</view>
+            <view class="pro_del lf" bindtap='null'>清空</view>
+            <view class="pro_close lf" bindtap='d2'>关闭</view>
+        </view>
+        <!-- 号码	 -->
+        <view class="keyNums" hidden='{{hidden2}}'>
+            <view class="pro_li lf" wx:for="{{item2}}" bindtap='other' data-ot="{{item}}">{{item}}</view>
+            <view class="bot">
+                <view class="pro_ok lf" bindtap='ok'>OK</view>
+                <view class="pro_d lf" bindtap='del'>Del</view>
+            </view>
+        </view>
+    </view>
+
+    <!--超载记录列表-->
+    <view class='record'>
+        <view class='recodeItem'>
+            <view class='formTitle'>超载记录</view>
+            <view class='carNum'>湘N888888</view>
+            <view class='totalNum'>4条超载记录</view>
+        </view>
+        <view class='detail'>
+            <view class='checkTime'>检测时间2018/01/16 15：00：20</view>
+            <view class='loadDetail'>
+                <view class='location'>地点</view>
+                <view class='load'>超限</view>
+                <view class='loadPercent'>超限率</view>
+            </view>
+            <view class='loadDetail_1'>
+                <view class='location'>白云大道水泗村站点</view>
+                <view class='load'>1700</view>
+                <view class='loadPercent'>0.3</view>
+            </view>
+            <view class='more'>
+                <navigator url="../detail/index" class='navigator' hover-class="weui-cell_active">
+                    <view class="navigator-text">查看详情</view>
+                    <view class="navigator-arrow"></view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</view>
