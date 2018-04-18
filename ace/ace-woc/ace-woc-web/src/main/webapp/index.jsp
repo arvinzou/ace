@@ -200,7 +200,7 @@
     </div>
 </div>
 
-<div class="page-content background">
+<div class="hide page-content background">
     <div class="row">
         <div class="col-xs-12 col-sm-5">
             <div class="widget-box transparent background-white padding1">

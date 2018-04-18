@@ -9,6 +9,93 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>案件</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/xcConfirm.css">
+
+    <style>
+        .traffic-file {
+            padding: 10px;
+        }
+
+        .fileList {
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .fileList > li {
+            position: relative;
+            float: left;
+            width: 100%;
+            margin-bottom: 10px;
+            text-align: center
+        }
+
+        .fileList img {
+            width: 100%;
+        }
+
+        .fileList video {
+            background-color: #333;
+            width: 100%;
+            height: 420px;
+        }
+
+        .fileList p {
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 35px;
+            padding: 0 20px;
+            background-color: rgba(100, 100, 100, 0.5);
+            margin: 0px;
+            color: #f8f8f8;
+            font-size: 18px;
+            line-height: 35px;
+            text-align: left;
+        }
+
+        .fileList p .time {
+            font-size: 14px;
+            float: right;
+        }
+
+        .layout-user {
+            width: 60px;
+            height: 20px;
+            float: left;
+            margin: 1px 1px 1px;
+        }
+
+        .photo {
+            height: 90px;
+            max-height: 90px;
+            max-width: 90px;
+            vertical-align: middle;
+        }
+
+        #cboxContent {
+            background-color: rgb(255, 255, 255);
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
+            padding: 5px;
+        }
+
+        .ace-thumbnails > li {
+            float: left;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            margin: 2px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
+        }
+
+    </style>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -102,7 +189,7 @@
             <br>
             <span id="id"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">通行记录</span>
             <br>
             <span id="trafficId"></span>
@@ -277,6 +364,14 @@
             <span id="status"></span>
         </div>
     </div>
+
+    <h5 class="header-title">案件资料</h5>
+    <div class="row" style="padding:10px">
+        <ul class="fileList" style="list-style: none;padding: 0px;margin: 0px;">
+
+        </ul>
+    </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem hide">

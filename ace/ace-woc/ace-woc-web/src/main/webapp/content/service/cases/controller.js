@@ -283,14 +283,15 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                if (key == 'category') {
-                    value = rsd(value, '83');
+                if (key == 'caseResource') {
+                    loadResource(value)
                 }
-                if (key == 'status') {
-                    value == "1" ? "正常" : "关闭";
-                }
-                if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
-                    value = Common.DateFormatter(value);
+                if (key == 'headImgUrl') {
+                    if (value != '') {
+                        value = '<image style=" width:50px;height:50px;" src="' + fastdfs_server + value + '" />';
+                    } else {
+                        value = '待上传';
+                    }
                 }
 
                 $("#dialog-message-view").find('#' + key).html(value);
@@ -301,6 +302,42 @@ function loadView(id) {
         }
     });
 }
+
+// 加载显示案件资料
+function loadResource(data) {
+    $('.fileList').empty();
+    if (null == data)
+        return;
+    for (var i = 0; i < data.length; i++) {
+        var template = li_img_tmpl;
+        if (data[i].category == '5') {
+            template = li_video_tmpl;
+        }
+        template = template.replace('[fileUrl]', fastdfs_server + data[i].fileUrl);
+        template = template.replace('[deviceName]', data[i].deviceName ? data[i].deviceName : "拍摄类型");
+        template = template.replace('[category]', rsd(data[i].category, '124'));
+        template = template.replace('[fileTime]', data[i].inspectTime);
+        $('.fileList').append($(template));
+    }
+}
+
+
+var li_img_tmpl = '<li>' +
+    '       <img src="[fileUrl]">' +
+    '       <p>' +
+    '             <span>[deviceName]：[category]</span>' +
+    '             <span class="time">[fileTime]</span>' +
+    '       </p>' +
+    '</li>';
+
+var li_video_tmpl = '<li>' +
+    '       <video src="[fileUrl]"  controls="controls">' +
+    '       </video>' +
+    '       <p>' +
+    '             <span>[deviceName]：[category]</span>' +
+    '             <span class="time">[fileTime]</span>' +
+    '       </p>' +
+    '</li>';
 
 //弹框组件demo
 // $("#btn7").click(function(){

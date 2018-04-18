@@ -47,6 +47,10 @@ public class TemplateData implements Serializable {
         return miniprogram;
     }
 
+    public Miniprogram getMiniprogram() {
+        return miniprogram;
+    }
+
     public String getTouser() {
         return touser;
     }
