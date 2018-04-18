@@ -98,8 +98,10 @@
   width: 100%;
 }
 .formTitle{
+  padding-top: 50rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 38rpx;
+  font-weight: bolder;
   color: #25324E;
 }
 .phoneContainer{

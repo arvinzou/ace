@@ -78,7 +78,8 @@ var cfg2 = {
 Page({
     data: {
         isMainChartDisplay: true,
-        currentTab: 0
+        currentTab: 0,
+        currentTime: util.formatDate(new Date())
     },
     onReady: function (e) {
       var windowWidth = 320;
