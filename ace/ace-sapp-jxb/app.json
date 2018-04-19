@@ -3,7 +3,9 @@
     "page/home/index",
     "page/me/index",
     "page/live/index",
-    "page/rpt/index"
+    "page/rpt/index",
+    "page/liveAdd/index",
+    "page/courseAdd/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",
