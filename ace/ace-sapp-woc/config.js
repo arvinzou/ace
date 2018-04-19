@@ -12,6 +12,7 @@ var config = {
     siteUrl: `${server}/woc/www/data/site`,
     illegalTrafficUrl: `${server}/woc/www/data/illegalTraffic`,
     intervalUrl: `${server}/woc/www/data/interval`,
-    illegalTrafficOneUrl:`${server}/woc/www/data/illegalTrafficOne`
+    illegalTrafficOneUrl:`${server}/woc/www/data/illegalTrafficOne`,
+    allSiteUrl: `${server}/woc/www/data/allSite`
 };
 module.exports = config
