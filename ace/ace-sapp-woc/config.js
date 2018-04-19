@@ -14,5 +14,6 @@ var config = {
     intervalUrl: `${server}/woc/www/data/interval`,
     illegalTrafficOneUrl:`${server}/woc/www/data/illegalTrafficOne`,
     allSiteUrl: `${server}/woc/www/data/allSite`
+
 };
 module.exports = config

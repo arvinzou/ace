@@ -200,7 +200,6 @@ function login() {
       })
     }
   });
-
 }
 module.exports = {
     formatTime: formatTime,
