@@ -1,4 +1,5 @@
 var hours;
+var timer = 500;
 $(function () {
     oneSecondTimes();
     //	oneMinutesTimes();

@@ -4,6 +4,7 @@ package com.huacainfo.ace.woc.vo;
 import com.huacainfo.ace.woc.model.Cases;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 public class CasesVo extends Cases {
@@ -65,6 +66,20 @@ public class CasesVo extends Cases {
     private String address;
     private String certNumber;
     private String headImgUrl;
+
+    /**
+     * 案件资料
+     */
+    private List<TrafficSubVo> caseResource;
+
+
+    public List<TrafficSubVo> getCaseResource() {
+        return caseResource;
+    }
+
+    public void setCaseResource(List<TrafficSubVo> caseResource) {
+        this.caseResource = caseResource;
+    }
 
     public String getPaperworkId() {
         return paperworkId;

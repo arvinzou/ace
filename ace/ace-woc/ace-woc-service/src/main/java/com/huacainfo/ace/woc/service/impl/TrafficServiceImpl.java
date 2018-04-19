@@ -1,6 +1,7 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -246,18 +247,21 @@ public class TrafficServiceImpl implements TrafficService {
                 if (null == weChatInfo || CommonUtils.isBlank(weChatInfo.get("accessToken"))) {
                     return;
                 }
-                String openId = (String) weChatInfo.get("openid");//"oFvIjw9bgtJmgvqVv0XIayPsh2QI";
+                String openId = (String) weChatInfo.get("openid");
                 String templateId = "kdRZ39sBzGCXaXSz20-s3x8WAV1cyWxeKoaVaspl3qE";
-                String url = "www.qq.com";
+                String url = "www.qq.com";//跳转链接；"链接"，"小程序"同时存在时，优先小程序；
 
                 Map<String, String> params = new HashMap<>();
                 params.put("first", "违章记录通知");
                 params.put("keyword1", person.getName());
                 params.put("keyword2", traffic.getPlateNo());
-                params.put("keyword3", DateUtil.format(traffic.getInspectTime()));
+                params.put("keyword3", DateUtil.format(traffic.getInspectTime(), DateUtil.DEFAULT_DATE_TIME_REGEX));
                 params.put("keyword4", traffic.getLocale());
                 params.put("remark", "您有的车辆新违章，请及时查收!");
                 TemplateData data = MessageSendApi.buildTemplateData(openId, templateId, url, params);
+                //跳转小程序
+                data.setMiniAppid("wx70ba7c5dca85e4da");
+                data.setMiniPagePath("page/trafficPreview/index?id=" + traffic.getId());
 
                 String sendResult = MessageSendApi.sendTemplate((String) weChatInfo.get("accessToken"), data);
                 logger.info("通行记录[" + traffic.getId() + "],发送通知结果：" + sendResult);
@@ -407,5 +411,15 @@ public class TrafficServiceImpl implements TrafficService {
         }
 
         return new MessageResponse(0, "数据构建完成！" + count);
+    }
+
+    @Override
+    public MessageResponse buildIllegalTrafficData(Map<String, Object> params, UserProp userProp) throws Exception {
+        List<Traffic> illegalList = trafficDao.selectList(params);
+        for (Traffic o : illegalList) {
+            updateTrafficStatus(o.getId(), userProp);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "数据处理成功！");
     }
 }

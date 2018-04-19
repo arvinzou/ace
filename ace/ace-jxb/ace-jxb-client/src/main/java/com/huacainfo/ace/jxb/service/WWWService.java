@@ -127,4 +127,30 @@ public interface WWWService {
      * @version: 2018-01-14
      */
     Map<String, Object> updateRptVisitNum(String id);
+
+
+    /**
+     * @throws
+     * @Title:getLiveListByUserId
+     * @Description: TODO(小程序获取用户所属直播列表)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    Map<String, Object> getLiveListByUserId(String userId, int page, Map<String, Object> p);
+
+
+    /**
+     * @throws
+     * @Title:geCourseListByUserId
+     * @Description: TODO(小程序获取用户所属课程列表)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    Map<String, Object> getCourseListByUserId(String userId, int page, Map<String, Object> p);
 }

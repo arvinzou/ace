@@ -240,6 +240,7 @@
     <include refid="Base_Column_List_Vo"/>
     <include refid="fromCondition_Vo"/>
     where t.trafficId = #{id,jdbcType=VARCHAR}
+      order by t.category
   </select>
 
   <sql id="fromCondition_Vo">

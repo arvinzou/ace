@@ -505,11 +505,34 @@
         <if test="condition.startDt!=null and condition.startDt!=''">
             and UNIX_TIMESTAMP(t.inspectTime) >= UNIX_TIMESTAMP(#{condition.startDt,jdbcType=TIMESTAMP})
         </if>
-        <if test="condition.endTime!=null and condition.endTime!=''">
-            and UNIX_TIMESTAMP(t.inspectTime) &lt;= UNIX_TIMESTAMP(#{condition.endTime,jdbcType=TIMESTAMP})
+        <if test="condition.endDt!=null and condition.endDt!=''">
+            and UNIX_TIMESTAMP(t.inspectTime) &lt;= UNIX_TIMESTAMP(#{condition.endDt,jdbcType=TIMESTAMP})
         </if>
 
         ORDER BY m.createDate
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from woc.traffic
+        where 1=1
+        <if test="condition.status!=null and condition.status!=''">
+            and status in
+            <foreach collection="condition.status" open="(" close=")" item="item" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="condition.overRate!=null and condition.overRate!=''">
+            and  overRate >= #{condition.overRate,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.startDt!=null and condition.startDt!=''">
+            and UNIX_TIMESTAMP(inspectTime) >= UNIX_TIMESTAMP(#{condition.startDt,jdbcType=TIMESTAMP})
+        </if>
+        <if test="condition.endDt!=null and condition.endDt!=''">
+            and UNIX_TIMESTAMP(inspectTime) &lt;= UNIX_TIMESTAMP(#{condition.endDt,jdbcType=TIMESTAMP})
+        </if>
     </select>
 </mapper>

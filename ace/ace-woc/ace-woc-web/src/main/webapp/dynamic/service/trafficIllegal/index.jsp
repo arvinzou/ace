@@ -43,28 +43,30 @@
 							 <i
 								class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
 						</button>
-
-						
 					</form>
 					<div class="space10"></div>
 					<div id="toolbar" class="toolbar">
-
+                        <%--转录案件--%>
+                        <button class="btn btn-purple" id="btn-view-add-cases"
+                                authority="${pageContext.request.contextPath}/trafficIllegal/convertToCases">
+                            <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
+                        </button>
 						
-						<button class="btn btn-info" id="btn-view-add"
-							authority="${pageContext.request.contextPath}/trafficIllegal/insertTrafficIllegal">
-							 <i
-								class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-						</button>
+						<%--<button class="btn btn-info" id="btn-view-add"--%>
+							<%--authority="${pageContext.request.contextPath}/trafficIllegal/insertTrafficIllegal">--%>
+							 <%--<i--%>
+								<%--class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
+						<%--</button>--%>
 						<button class="btn btn-info" id="btn-view-edit"
 							authority="${pageContext.request.contextPath}/trafficIllegal/updateTrafficIllegal">
 							 <i
 								class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
 						</button>
-						<button class="btn btn-warning" id="btn-view-del"
-							authority="${pageContext.request.contextPath}/trafficIllegal/deleteTrafficIllegalByTrafficIllegalId">
-							 <i
-								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-						</button>
+						<%--<button class="btn btn-warning" id="btn-view-del"--%>
+							<%--authority="${pageContext.request.contextPath}/trafficIllegal/deleteTrafficIllegalByTrafficIllegalId">--%>
+							 <%--<i--%>
+								<%--class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
+						<%--</button>--%>
 						
 					</div>
 				</div>

@@ -169,6 +169,7 @@
 
     <div id="grid-pager"></div>
 
+    <%--<table id="grid-cases-table" class="hide"></table>--%>
 </div>
 <div id="dialog-message" class="hide">
     <div id="uploader">
@@ -179,6 +180,7 @@
     <div id="load" class="loading"></div>
 </div>
 
+<%--查看内容--%>
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
@@ -298,6 +300,7 @@
     </div>
 
 </div>
+
 <jsp:include page="../../common/footer-1.jsp"/>
 <script src="${portalPath}/content/common/assets/js/uncompressed/jquery.colorbox.js"></script>
 <script

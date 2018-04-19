@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: MicrosoftYaHei;
     list-style: none;
+    text-decoration: none;
 }
 
 @font-face {
@@ -142,11 +143,6 @@ body {
     display: block;
 }
 
-.mid-contrainer {
-    flex: 1;
-    padding: 0 10px;
-}
-
 .body-div {
     display: flex;
 }
@@ -174,6 +170,11 @@ body {
 
 .head-div {
     margin-bottom: 60px;
+}
+
+.mid-contrainer {
+    flex: 1;
+    padding: 0 10px;
 }
 
 .mid-contrainer .top-module {
@@ -248,4 +249,73 @@ body {
 
 .font-yellow {
     color: rgba(255, 241, 0, 1);
+}
+
+.tooltip-map {
+    background-color: rgba(65, 103, 226, 0.1);
+    border: 0px;
+    min-width: 197px;
+    height: 210px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tooltip-map .tooltip-title {
+    width: 100%;
+    height: 20%;
+    background: rgba(29, 32, 136, 1);
+}
+
+.tooltip-map .tooltip-title span {
+    padding: 0 20px;
+    margin: 0 auto;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 1);
+    height: 100%;
+    line-height: 42px;
+    display: block;
+}
+
+.tooltip-map .tooltip-warp {
+    width: 100%;
+    height: 55%;
+    border-bottom: 1px solid #4167E2;
+    font-size: 14px;
+    padding: 0px 20px;
+}
+
+.tooltip-map .tooltip-warp p {
+    padding-top: 10px;
+}
+
+.tooltip-map .tooltip-warp p::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.tooltip-map .tooltip-warp p .msg {
+    float: left;
+}
+
+.tooltip-map .tooltip-warp p .infobtn {
+    float: right;
+}
+
+.tooltip-map .tooltip-xc {
+    width: 100%;
+    height: 25%;
+}
+
+.tooltip-map .tooltip-xc a {
+    display: block;
+    width: 100%;
+    height: 52px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.tooltip-map a {
+    font-size: 14px;
+    color: rgba(0, 255, 255, 1);
 }

@@ -4,6 +4,9 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.woc.service.AnalysisService;
+import com.huacainfo.ace.woc.service.TrafficService;
+import com.huacainfo.ace.woc.vo.SiteQVo;
+import com.huacainfo.ace.woc.vo.SiteVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +28,8 @@ public class WWWAnalysisController extends WocBaseController {
     @Autowired
     private AnalysisService analysisService;
 
+    @Autowired
+    private TrafficService trafficService;
 
     /**
      * 手机端数据统计
@@ -48,13 +53,14 @@ public class WWWAnalysisController extends WocBaseController {
     /**
      * 站点超载情况
      *
-     * @param startDt 查询开始时间
-     * @param endDt   查询结束时间
+     * @param siteId  站点ID
+     * @param startDt 查询开始时间 -- yyyy-mm-dd hh:mm:ss
+     * @param endDt   查询结束时间 -- yyyy-mm-dd hh:mm:ss
      * @return map
      */
     @GetMapping("/site")
-    public Map<String, Object> siteReport(String startDt, String endDt) {
-        return analysisService.siteReport(startDt, endDt, this.getCurUserProp());
+    public Map<String, Object> siteReport(String siteId, String startDt, String endDt) {
+        return analysisService.siteReport(siteId, startDt, endDt, this.getCurUserProp());
     }
 
 
@@ -75,8 +81,8 @@ public class WWWAnalysisController extends WocBaseController {
      *
      * @param siteId  站点ID
      * @param plateNo 车牌号 可为空
-     * @param startDt 查询开始时间  可为空
-     * @param endDt   查询结束时间 可为空
+     * @param startDt 查询开始时间  可为空 -- yyyy-mm-dd hh:mm:ss
+     * @param endDt   查询结束时间 可为空  -- yyyy-mm-dd hh:mm:ss
      * @param start   页码，不能为空
      * @param limit   页数 不能为空
      * @return map
@@ -101,4 +107,38 @@ public class WWWAnalysisController extends WocBaseController {
 
         return analysisService.illegalTrafficOne(trafficId, this.getCurWxUser(), this.getCurUserProp());
     }
+
+    /**
+     * 所有站点列表
+     *
+     * @param condition 查询调节，可选
+     * @param start     页码 必填
+     * @param limit     页数 必填
+     * @return PageResult<SiteVo>
+     * @throws Exception
+     */
+    @GetMapping("/allSite")
+    public PageResult<SiteVo> allSite(SiteQVo condition, int start, int limit) throws Exception {
+        return analysisService.allSite(condition, start, limit);
+    }
+
+
+//    @GetMapping("/test")
+//    public MessageResponse test() throws Exception {
+//        String nowDateTime = DateUtil.getNow();
+//        String ymd = nowDateTime.substring(0, 11);
+//        String startDt = ymd + "00:00:00";
+//        String endDt = ymd + "23:59:59";
+//
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("overRate", "0.3");
+//        params.put("startDt", startDt);
+//        params.put("endDt", endDt);
+//        params.put("status", new String[]{"1"});
+//        UserProp userProp = new UserProp();
+//        userProp.setName("system");
+//        userProp.setUserId("88888888");
+//
+//        return trafficService.buildIllegalTrafficData(params, userProp);
+//    }
 }
