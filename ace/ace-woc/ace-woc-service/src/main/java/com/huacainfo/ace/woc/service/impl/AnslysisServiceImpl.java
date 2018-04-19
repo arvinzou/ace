@@ -124,6 +124,7 @@ public class AnslysisServiceImpl implements AnalysisService {
             condition.put("siteId", s.getId());
             illegalCount = trafficDao.selectCount(condition);
             s.setCount(illegalCount);
+
         }
 
         Map<String, Object> rtn = new HashMap<>();
