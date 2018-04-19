@@ -18,12 +18,13 @@
 	line-height:100rpx;
 }
 .provinces{
+    width: 90%;
 	overflow: hidden;
 	background-color: #FFFFFF;
 	padding:0 0;
 	position: absolute;
-	top: 400rpx;
-	left: 0;
+	top: 450rpx;
+	left: 5%;
 	z-index: 10000;
 }
 .pro_li{
@@ -37,7 +38,7 @@
 	background-color:#fff; 
 }
 .pro_close{
-	width: 100rpx;
+	width: 70rpx;
 	height: 70rpx;
 	line-height: 70rpx;
 	font-size: 32rpx;
@@ -47,22 +48,22 @@
 	margin: 5rpx ;
 }
 .pro_del{
-	width: 100rpx;
+	width: 70rpx;
 	height: 70rpx;
 	line-height: 70rpx;
 	font-size: 32rpx;
 	text-align: center;
-	background-color: #fff;
 	border: 2rpx solid #E4E6E9;
 	margin: 5rpx;
 }
 .keyNums{
+    width: 90%;
 	overflow: hidden;
 	background-color: #FFFFFF;
 	padding:0 0;
 	position: absolute;
-	top:400rpx;
-	left: 0;
+	top:450rpx;
+	left: 5%;
 	z-index: 10000;
 }
 .pro_ok{

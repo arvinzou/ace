@@ -34,15 +34,22 @@
         <!-- 省 -->
         <view class="provinces" hidden='{{hidden1}}'>
             <view class="pro_li lf" wx:for="{{item1}}" bindtap='sheng' data-sh="{{item}}">{{item}}</view>
-            <view class="pro_del lf" bindtap='null'>清空</view>
-            <view class="pro_close lf" bindtap='d2'>关闭</view>
+            <!-- <view class="pro_del lf" bindtap='null'>清空</view> -->
+            <view class="pro_close lf" bindtap='d2'>
+                <image src='../../image/close.png' style='width:70rpx; height:70rpx'></image>
+            </view>
         </view>
         <!-- 号码	 -->
         <view class="keyNums" hidden='{{hidden2}}'>
             <view class="pro_li lf" wx:for="{{item2}}" bindtap='other' data-ot="{{item}}">{{item}}</view>
             <view class="bot">
-                <view class="pro_ok lf" bindtap='ok'>OK</view>
-                <view class="pro_d lf" bindtap='del'>Del</view>
+               
+                <view class="pro_ok lf" bindtap='ok'>
+                     <image src='../../image/ok.png' style='width:70rpx; height:70rpx'></image>
+                </view>
+                <view class="pro_d lf" bindtap='del'>
+                     <image src='../../image/backdel.png' style='width:90rpx; height:50rpx;padding-top:10rpx;'></image>
+                </view>
             </view>
         </view>
     </view>

@@ -4,7 +4,6 @@ const app = getApp();
 
 Page({
   data: {
-
     serverfile: cfg.serverfile,
     loading: false,
     disabled: false,
@@ -25,10 +24,10 @@ Page({
       }
     });
     var that = this;
-    util.request(cfg.illegalTrafficOneUrl, { "id": data.param.id, "start": 0, "limit": 9999 },
+    util.request(cfg.illegalTrafficOneUrl, { "trafficId": that.data.id, "start": 0, "limit": 9999 },
         function (data) {
-            console.log(data);
-            that.setData({ o: data });
+            console.log(data.value);
+            that.setData({ o: data.value });
         }
     );
   },
@@ -36,7 +35,7 @@ Page({
     var that = this;
     console.log('index.js.onLoad'); 
     console.log(param); 
-    this.setData(param);
+    that.setData(param);
 
   },
   previewImage: function (e) {
