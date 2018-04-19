@@ -29,78 +29,76 @@ jQuery(function ($) {
         });
     });
 
-    $('#btn-view-add').on(
-        'click',
-        function () {
-            jQuery(cfg.grid_selector).jqGrid(
-                'editGridRow',
-                'new',
-                {
-                    closeAfterAdd: true,
-                    recreateForm: true,
-                    viewPagerButtons: false,
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                    }
-                })
-        });
-    $('#btn-view-edit').on(
-        'click',
-        function () {
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext)
-            }
-            jQuery(cfg.grid_selector).jqGrid(
-                'editGridRow',
-                gr,
-                {
-                    closeAfterAdd: true,
-                    recreateForm: true,
-                    viewPagerButtons: true,
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />');
-                        var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-                        style_edit_form(form);
-                        initMedia(gd.id);
-                    }
-                })
-        });
-    $('#btn-view-del').on(
-        'click',
-        function () {
+    $('#btn-view-add').on('click', function () {
+        jQuery(cfg.grid_selector).jqGrid(
+            'editGridRow',
+            'new',
+            {
+                closeAfterAdd: true,
+                recreateForm: true,
+                viewPagerButtons: false,
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    form.closest('.ui-jqdialog').find(
+                        '.ui-jqdialog-titlebar').wrapInner(
+                        '<div class="widget-header" />')
+                    style_edit_form(form);
+                }
+            })
+    });
 
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext);
-                return;
-            }
-            jQuery(cfg.grid_selector).jqGrid(
-                'delGridRow',
-                gr,
-                {
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                    }
-                })
-        });
+    $('#btn-view-edit').on('click', function () {
+        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
+            'selrow');
+        if (!gr) {
+            $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                $.jgrid.nav.alerttext)
+        }
+        jQuery(cfg.grid_selector).jqGrid(
+            'editGridRow',
+            gr,
+            {
+                closeAfterAdd: true,
+                recreateForm: true,
+                viewPagerButtons: true,
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
+                    form.closest('.ui-jqdialog').find(
+                        '.ui-jqdialog-titlebar').wrapInner(
+                        '<div class="widget-header" />');
+                    var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+                    style_edit_form(form);
+                    initMedia(gd.id);
+                }
+            })
+    });
+
+    $('#btn-view-del').on('click', function () {
+
+        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
+            'selrow');
+        if (!gr) {
+            $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                $.jgrid.nav.alerttext);
+            return;
+        }
+        jQuery(cfg.grid_selector).jqGrid(
+            'delGridRow',
+            gr,
+            {
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    form.closest('.ui-jqdialog').find(
+                        '.ui-jqdialog-titlebar').wrapInner(
+                        '<div class="widget-header" />')
+                    style_edit_form(form);
+                }
+            })
+    });
 });
+
+
 
 function preview(id, title) {
     var dialog = $("#dialog-message-view").removeClass('hide').dialog({

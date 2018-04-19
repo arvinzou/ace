@@ -1,14 +1,16 @@
 package com.huacainfo.ace.woc.dao;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.woc.model.TrafficIllegal;
 import com.huacainfo.ace.woc.vo.TrafficIllegalQVo;
 import com.huacainfo.ace.woc.vo.TrafficIllegalVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TrafficIllegalDao {
+    TrafficIllegal selectByPrimaryKey(String id);
 
-    TrafficIllegalVo selectByPrimaryKey(String id);
+    TrafficIllegalVo selectByPrimaryKeyVo(String id);
 
     int deleteByPrimaryKey(String id);
 

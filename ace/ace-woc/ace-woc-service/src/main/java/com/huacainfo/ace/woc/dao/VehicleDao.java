@@ -37,4 +37,5 @@ public interface VehicleDao {
     List<Vehicle> selectAll();
 
 
+    Vehicle selectByPlatNo(String plateNo);
 }

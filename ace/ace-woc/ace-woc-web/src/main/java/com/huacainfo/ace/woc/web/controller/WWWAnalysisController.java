@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.woc.service.AnalysisService;
+import com.huacainfo.ace.woc.service.TrafficService;
 import com.huacainfo.ace.woc.vo.SiteQVo;
 import com.huacainfo.ace.woc.vo.SiteVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
@@ -27,6 +28,8 @@ public class WWWAnalysisController extends WocBaseController {
     @Autowired
     private AnalysisService analysisService;
 
+    @Autowired
+    private TrafficService trafficService;
 
     /**
      * 手机端数据统计
@@ -118,4 +121,24 @@ public class WWWAnalysisController extends WocBaseController {
     public PageResult<SiteVo> allSite(SiteQVo condition, int start, int limit) throws Exception {
         return analysisService.allSite(condition, start, limit);
     }
+
+
+//    @GetMapping("/test")
+//    public MessageResponse test() throws Exception {
+//        String nowDateTime = DateUtil.getNow();
+//        String ymd = nowDateTime.substring(0, 11);
+//        String startDt = ymd + "00:00:00";
+//        String endDt = ymd + "23:59:59";
+//
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("overRate", "0.3");
+//        params.put("startDt", startDt);
+//        params.put("endDt", endDt);
+//        params.put("status", new String[]{"1"});
+//        UserProp userProp = new UserProp();
+//        userProp.setName("system");
+//        userProp.setUserId("88888888");
+//
+//        return trafficService.buildIllegalTrafficData(params, userProp);
+//    }
 }

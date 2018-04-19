@@ -11,6 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -60,8 +62,7 @@ public class TrafficDataManager {
      * 每1分钟产生一次通行记录
      */
     @Scheduled(cron = " 0 0/1 * * * ?")
-    public void createData() {
-        System.out.println("TrafficDataManager.working====================================================");
+    public void buildTrafficData() {
         try {
             UserProp userProp = new UserProp();
             userProp.setName("system");
@@ -69,7 +70,34 @@ public class TrafficDataManager {
 
             trafficService.createData(DateUtil.getNow(), "1", userProp);
         } catch (Exception e) {
-            logger.error("TrafficDataManager.error:{}", e);
+            logger.error("TrafficDataManager.createData.error:{}", e);
+        }
+    }
+
+
+    /**
+     * 每30分钟,对已产生的通行记录，进行确认违章处理
+     */
+    @Scheduled(cron = " 0 0/30 * * * ?")
+    public void buildIllegalTrafficData() {
+        try {
+            String nowDateTime = DateUtil.getNow();
+            String ymd = nowDateTime.substring(0,11);
+            String startDt = ymd + "00:00:00";
+            String endDt = ymd + "23:59:59";
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("overRate", 0.3);
+            params.put("status", new String[]{"1"});
+            params.put("startDt", startDt);
+            params.put("endDt", endDt);
+            UserProp userProp = new UserProp();
+            userProp.setName("system");
+            userProp.setUserId("88888888");
+
+            trafficService.buildIllegalTrafficData(params, userProp);
+        } catch (Exception e) {
+            logger.error("TrafficDataManager.buildIllegalTrafficData.error:{}", e);
         }
     }
 }

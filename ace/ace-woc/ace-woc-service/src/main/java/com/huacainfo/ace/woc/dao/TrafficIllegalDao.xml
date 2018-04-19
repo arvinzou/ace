@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.woc.dao.TrafficIllegalDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.woc.model.TrafficIllegal">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="trafficId" jdbcType="VARCHAR" property="trafficId" />
-    <result column="auditTime" jdbcType="TIMESTAMP" property="auditTime" />
-    <result column="auditor" jdbcType="VARCHAR" property="auditor" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.woc.model.TrafficIllegal">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="trafficId" jdbcType="VARCHAR" property="trafficId"/>
+        <result column="auditTime" jdbcType="TIMESTAMP" property="auditTime"/>
+        <result column="auditor" jdbcType="VARCHAR" property="auditor"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, trafficId, auditTime, auditor, remark, status, createUserId, createUserName, 
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from traffic_illegal
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from traffic_illegal
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from traffic_illegal
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.woc.model.TrafficIllegal">
+    <insert id="insert" parameterType="com.huacainfo.ace.woc.model.TrafficIllegal">
     insert into traffic_illegal (id, trafficId, auditTime, 
       auditor, remark, status, 
       createUserId, createUserName, createDate, 
@@ -41,125 +46,125 @@
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.TrafficIllegal">
-    insert into traffic_illegal
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="trafficId != null">
-        trafficId,
-      </if>
-      <if test="auditTime != null">
-        auditTime,
-      </if>
-      <if test="auditor != null">
-        auditor,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="createUserId != null">
-        createUserId,
-      </if>
-      <if test="createUserName != null">
-        createUserName,
-      </if>
-      <if test="createDate != null">
-        createDate,
-      </if>
-      <if test="lastModifyUserId != null">
-        lastModifyUserId,
-      </if>
-      <if test="lastModifyUserName != null">
-        lastModifyUserName,
-      </if>
-      <if test="lastModifyDate != null">
-        lastModifyDate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="trafficId != null">
-        #{trafficId,jdbcType=VARCHAR},
-      </if>
-      <if test="auditTime != null">
-        #{auditTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="auditor != null">
-        #{auditor,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="createUserId != null">
-        #{createUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="createUserName != null">
-        #{createUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUserId != null">
-        #{lastModifyUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyUserName != null">
-        #{lastModifyUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyDate != null">
-        #{lastModifyDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.TrafficIllegal">
-    update traffic_illegal
-    <set>
-      <if test="trafficId != null">
-        trafficId = #{trafficId,jdbcType=VARCHAR},
-      </if>
-      <if test="auditTime != null">
-        auditTime = #{auditTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="auditor != null">
-        auditor = #{auditor,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="createUserId != null">
-        createUserId = #{createUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="createUserName != null">
-        createUserName = #{createUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        createDate = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUserId != null">
-        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyUserName != null">
-        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyDate != null">
-        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.woc.model.TrafficIllegal">
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.TrafficIllegal">
+        insert into traffic_illegal
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="trafficId != null">
+                trafficId,
+            </if>
+            <if test="auditTime != null">
+                auditTime,
+            </if>
+            <if test="auditor != null">
+                auditor,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="trafficId != null">
+                #{trafficId,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null">
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditor != null">
+                #{auditor,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.TrafficIllegal">
+        update traffic_illegal
+        <set>
+            <if test="trafficId != null">
+                trafficId = #{trafficId,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null">
+                auditTime = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditor != null">
+                auditor = #{auditor,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.woc.model.TrafficIllegal">
     update traffic_illegal
     set trafficId = #{trafficId,jdbcType=VARCHAR},
       auditTime = #{auditTime,jdbcType=TIMESTAMP},
@@ -175,36 +180,55 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.TrafficIllegalVo"></resultMap>
+    <sql id="Vo_Column_List">
+        s.siteName,
+        m.inspectTime, m.locale, m.plateNo, m.direction, m.axleCount, m.totalMass, m.overMass, m.overRate, m.speed,
+        t.id, t.trafficId, t.auditTime, t.auditor, t.remark, t.status, t.createUserId, t.createUserName,
+        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+    </sql>
 
-  <sql id="whereCondition">
-    from traffic_illegal
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.TrafficIllegalVo">
+        <result column="siteName" jdbcType="VARCHAR" property="siteName"/>
+        <result column="inspectTime" jdbcType="TIMESTAMP" property="inspectTime"/>
+        <result column="plateNo" jdbcType="VARCHAR" property="plateNo"/>
+        <result column="direction" jdbcType="VARCHAR" property="direction"/>
+        <result column="axleCount" jdbcType="INTEGER" property="axleCount"/>
+        <result column="totalMass" jdbcType="DECIMAL" property="totalMass"/>
+        <result column="overMass" jdbcType="DECIMAL" property="overMass"/>
+        <result column="overRate" jdbcType="DECIMAL" property="overRate"/>
+        <result column="speed" jdbcType="DECIMAL" property="speed"/>
+    </resultMap>
+
+    <sql id="whereCondition">
+    from woc.traffic_illegal t
+    left join woc.traffic m on t.trafficId = m.id
+    left join woc.site s on m.siteId = s.id
     where 0=0
 </sql>
 
-  <select id="findList" resultMap="BaseResultMapVo">
-    select m.* from(
-    select
-    <include refid="Base_Column_List"/>
-    <include refid="whereCondition"/>
-    ) m
-    <choose>
-      <when test='orderBy!=null and orderBy!=""'>
-        ORDER BY m.${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY m.createDate
-      </otherwise>
-    </choose>
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-  </select>
+    <select id="findList" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*)
-    <include refid="whereCondition"/>
-  </select>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
 
-  <select id="isExit" resultType="int">
+    <select id="isExit" resultType="int">
     select count(*)
     from traffic_illegal
     where

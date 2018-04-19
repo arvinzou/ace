@@ -96,4 +96,6 @@ public interface TrafficService {
      * @return 处理结果
      */
     MessageResponse createData(String date, String num, UserProp userProp);
+
+    MessageResponse buildIllegalTrafficData(Map<String, Object> params, UserProp userProp) throws Exception;
 }
