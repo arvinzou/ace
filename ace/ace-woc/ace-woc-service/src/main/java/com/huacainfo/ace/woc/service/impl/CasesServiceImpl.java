@@ -11,6 +11,7 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.constant.CaseStatus;
 import com.huacainfo.ace.woc.dao.CasesDao;
+import com.huacainfo.ace.woc.dao.TrafficSubDao;
 import com.huacainfo.ace.woc.model.Cases;
 import com.huacainfo.ace.woc.service.CasesService;
 import com.huacainfo.ace.woc.vo.CasesQVo;
@@ -31,6 +32,9 @@ import java.util.List;
  */
 public class CasesServiceImpl implements CasesService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private TrafficSubDao trafficSubDao;
     @Autowired
     private CasesDao casesDao;
     @Autowired
@@ -214,8 +218,14 @@ public class CasesServiceImpl implements CasesService {
      */
     @Override
     public SingleResult<CasesVo> selectCasesByPrimaryKey(String id) throws Exception {
+
+        CasesVo vo = casesDao.selectVoByPrimaryKey(id);
+        if (null != vo) {
+            vo.setCaseResource(trafficSubDao.findListByTrafficId(vo.getTrafficId()));
+        }
+
         SingleResult<CasesVo> rst = new SingleResult<CasesVo>();
-        rst.setValue(this.casesDao.selectVoByPrimaryKey(id));
+        rst.setValue(vo);
         return rst;
     }
 

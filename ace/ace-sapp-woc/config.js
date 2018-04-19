@@ -1,5 +1,5 @@
 var server = "https://zx.huacainfo.com";
-var serverfile = "http://zx.huacainfo.com";
+var serverfile = "http://zx.huacainfo.com/";
 var config = {
     server,
     serverfile,
@@ -11,6 +11,7 @@ var config = {
     statisticsUrl: `${server}/woc/www/data/statistics`,
     siteUrl: `${server}/woc/www/data/site`,
     illegalTrafficUrl: `${server}/woc/www/data/illegalTraffic`,
-    intervalUrl: `${server}/woc/www/data/interval`
+    intervalUrl: `${server}/woc/www/data/interval`,
+    illegalTrafficOneUrl:`${server}/woc/www/data/illegalTrafficOne`
 };
 module.exports = config

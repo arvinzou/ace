@@ -5,6 +5,8 @@ import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.woc.vo.SiteQVo;
+import com.huacainfo.ace.woc.vo.SiteVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
 
 import java.util.Map;
@@ -38,11 +40,13 @@ public interface AnalysisService {
     /**
      * 站点超载情况
      *
+     *
+     * @param siteId
      * @param startDt 查询开始时间
      * @param endDt   查询结束时间
      * @return map
      */
-    Map<String, Object> siteReport(String startDt, String endDt, UserProp curUserProp);
+    Map<String, Object> siteReport(String siteId, String startDt, String endDt, UserProp curUserProp);
 
     /**
      * 时段超载情况
@@ -76,4 +80,15 @@ public interface AnalysisService {
      * @return map
      */
     SingleResult<TrafficVo> illegalTrafficOne(String trafficId, WxUser curWxUser, UserProp curUserProp) throws Exception;
+
+    /**
+     * 所有站点列表
+     *
+     * @param condition 查询调节，可选
+     * @param start     页码 必填
+     * @param limit     页数 必填
+     * @return PageResult<SiteVo>
+     * @throws Exception
+     */
+    PageResult<SiteVo> allSite(SiteQVo condition, int start, int limit) throws Exception;
 }

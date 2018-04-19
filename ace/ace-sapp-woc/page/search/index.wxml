@@ -4,7 +4,14 @@
             <image src='../../image/search_header.png' style='width:100%; height:100%'></image>
         </view>
         <view class='searchContainer'>
-            <view class='formTitle'>超载查询</view>
+            <view class='formTitle'>
+                <label style='color:#3C82FC;font-weight:normal'>/</label>
+                <label style='color:#3C82FB;font-weight:normal'>/</label>
+                <label style='padding-right:30rpx;color:#3C82FB;font-weight:normal'>/</label>超载查询
+                <label style='padding-left:30rpx;color:#3C82FB;font-weight:normal'>/</label>
+                <label style='color:#3C82FB;font-weight:normal'>/</label>
+                <label style='color:#3C82FC;font-weight:normal'>/</label>
+            </view>
             <view style='color:#798092;width:90%;margin:0 auto;'>请输入车牌号：</view>
             <view class="chepai">
                 <view class="tel" bindtap="d1">{{carNo}}</view>
@@ -41,32 +48,42 @@
     </view>
 
     <!--超载记录列表-->
-    
+
     <view class='record'>
         <view class='recodeItem'>
-            <view class='formTitle'>超载记录</view>
-            <view class='carNum' wx:if="{{list.length>0}}">{{list[0].plateNo}}</view>
-            <view class='totalNum'>{{list.length}}条超载记录</view>
+            <view class='formTitle'>
+                <label style='color:#3C82FC;font-weight:normal'>/</label>
+                <label style='color:#3C82FB;font-weight:normal'>/</label>
+                <label style='padding-right:30rpx;color:#3C82FB;font-weight:normal'>/</label>超载记录
+                <label style='padding-left:30rpx;color:#3C82FB;font-weight:normal'>/</label>
+                <label style='color:#3C82FB;font-weight:normal'>/</label>
+                <label style='color:#3C82FC;font-weight:normal'>/</label>
+            </view>
+            <view class='carNum'>{{carNo}}</view>
+            <view class='totalNum'>
+                {{list.length}}条超载记录
+
+            </view>
         </view>
         <block wx:for-items="{{list}}" wx:key="{{item.*}}">
-        <view class='detail' >
-            <view class='checkTime'>检测时间{{item.inspectTime}}</view>
-            <view class='loadDetail'>
-                <view class='location'>地点</view>
-                <view class='load'>超限</view>
-                <view class='loadPercent'>超限率</view>
+            <view class='detail'>
+                <view class='checkTime'>检测时间{{item.inspectTime}}</view>
+                <view class='loadDetail'>
+                    <view class='location'>地点</view>
+                    <view class='load'>超限</view>
+                    <view class='loadPercent'>超限率</view>
+                </view>
+                <view class='loadDetail_1'>
+                    <view class='location'>{{item.siteName}}</view>
+                    <view class='load'>{{item.overMass}}</view>
+                    <view class='loadPercent'>{{item.overRate}}</view>
+                </view>
+                <view class='more'>
+                    <navigator url="../trafficPreview/index?id={{item.id}}" class='navigator' hover-class="weui-cell_active">
+                        <view class="navigator-text">查看详情</view>
+                    </navigator>
+                </view>
             </view>
-            <view class='loadDetail_1'>
-                <view class='location'>{{item.siteName}}</view>
-                <view class='load'>{{item.overMass}}</view>
-                <view class='loadPercent'>{{item.overRate}}</view>
-            </view>
-            <view class='more'>
-                <navigator url="../trafficPreview/index?id={{item.id}}" class='navigator' hover-class="weui-cell_active">
-                    <view class="navigator-text">查看详情</view>
-                </navigator>
-            </view>
-        </view>
         </block>
     </view>
 </view>

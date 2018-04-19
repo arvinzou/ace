@@ -17,7 +17,7 @@
                     <view class='caseTitle'>案件数</view>
                 </view>
             </view>
-            <view class='deadline'>数据截止至时间：00:00:00</view>
+            <view class='deadline'>数据截止至时间：{{currentTime}}</view>
         </view>
     </view>
     <view>

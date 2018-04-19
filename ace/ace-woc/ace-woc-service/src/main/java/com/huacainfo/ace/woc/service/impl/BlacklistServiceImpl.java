@@ -86,11 +86,6 @@ public class BlacklistServiceImpl implements BlacklistService {
             return new MessageResponse(1, "是否黑名单不能为空！");
         }
 
-//        int temp = this.blacklistDao.isExit(o);
-//        if (temp > 0) {
-//            return new MessageResponse(1, "黑名单档案名称重复！");
-//        }
-
         o.setId(GUIDUtil.getGUID());
         o.setLastModifyDate(DateUtil.getNowDate());
         o.setCreateDate(new Date());

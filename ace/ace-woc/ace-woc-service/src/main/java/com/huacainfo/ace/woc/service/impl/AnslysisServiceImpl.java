@@ -13,7 +13,10 @@ import com.huacainfo.ace.woc.dao.TrafficDao;
 import com.huacainfo.ace.woc.dao.report.ReportDao;
 import com.huacainfo.ace.woc.model.Site;
 import com.huacainfo.ace.woc.service.AnalysisService;
+import com.huacainfo.ace.woc.service.SiteService;
 import com.huacainfo.ace.woc.service.TrafficService;
+import com.huacainfo.ace.woc.vo.SiteQVo;
+import com.huacainfo.ace.woc.vo.SiteVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +32,13 @@ import java.util.Map;
 public class AnslysisServiceImpl implements AnalysisService {
     private static final Logger logger = LoggerFactory.getLogger(AnslysisServiceImpl.class);
 
-    public static final String[] INTERVAL = new String[]{"0~1", "1~2", "2~3", "3~4", "4~5", "5~6", "6-7", "7~8", "8~9", "9~10",
+    public static final String[] PC_INTERVAL = new String[]{"0~1", "1~2", "2~3", "3~4", "4~5", "5~6", "6-7", "7~8", "8~9", "9~10",
             "10~11", "11~12", "12~13", "13~14", "14~15", "15-16", "16~17", "17~18", "18~19", "19~20", "20~21", "21~22", "22~23", "23~24"};
 
+    public static final String[] MOBILE_INTERVAL = new String[]{"0~4", "4~8", "8~12", "12~16", "16~20", "20~24"};
+
+    @Autowired
+    private SiteService siteService;
     @Autowired
     private TrafficService trafficService;
     @Autowired
@@ -100,13 +107,14 @@ public class AnslysisServiceImpl implements AnalysisService {
     /**
      * 站点超载情况
      *
+     * @param siteId
      * @param startDt 查询开始时间
      * @param endDt   查询结束时间
      * @param curUser 当前登录用户
      * @return map
      */
     @Override
-    public Map<String, Object> siteReport(String startDt, String endDt, UserProp curUser) {
+    public Map<String, Object> siteReport(String siteId, String startDt, String endDt, UserProp curUser) {
 
         List<Site> siteList = siteDao.selectAll();
         Map<String, Object> condition = new HashMap<>();
@@ -141,12 +149,62 @@ public class AnslysisServiceImpl implements AnalysisService {
      */
     @Override
     public Map<String, Object> intervalReport(String datetime, String siteId, UserProp curUser) {
+
+        if (null != curUser) {
+            return pcIntervalReport(datetime, siteId, curUser);
+        } else {
+            return mobileIntervalReport(datetime, siteId, curUser);
+        }
+    }
+
+    private Map<String, Object> mobileIntervalReport(String datetime, String siteId, UserProp curUser) {
         datetime = CommonUtils.isBlank(datetime) ? DateUtil.getNow() : datetime;
         String ymd = datetime.substring(0, 11);
         Map<String, Integer> countMap = new HashMap<>();
         int count;
-        Map<String, Object> c;
-        for (String period : INTERVAL) {
+        for (String period : MOBILE_INTERVAL) {
+            switch (period) {
+                case "0~4":
+                    count = getIllegalCount(siteId, ymd + "00:00:00", ymd + "04:00:00");
+                    countMap.put(period, count);
+                    continue;
+                case "4~8":
+                    count = getIllegalCount(siteId, ymd + "04:00:00", ymd + "08:00:00");
+                    countMap.put(period, count);
+                    continue;
+                case "8~12":
+                    count = getIllegalCount(siteId, ymd + "08:00:00", ymd + "12:00:00");
+                    countMap.put(period, count);
+                    continue;
+                case "12~16":
+                    count = getIllegalCount(siteId, ymd + "12:00:00", ymd + "16:00:00");
+                    countMap.put(period, count);
+                    continue;
+                case "16~20":
+                    count = getIllegalCount(siteId, ymd + "16:00:00", ymd + "20:00:00");
+                    countMap.put(period, count);
+                    continue;
+                case "20~24":
+                    count = getIllegalCount(siteId, ymd + "20:00:00", ymd + "24:00:00");
+                    countMap.put(period, count);
+                    continue;
+                default:
+                    continue;
+            }
+        }
+
+        Map<String, Object> rtn = new HashMap<>();
+        rtn.put("interval", MOBILE_INTERVAL);//横轴坐标
+        rtn.put("countMap", countMap);//key - 横轴坐标值，value - y轴坐标值
+        return rtn;
+    }
+
+    private Map<String, Object> pcIntervalReport(String datetime, String siteId, UserProp curUser) {
+        datetime = CommonUtils.isBlank(datetime) ? DateUtil.getNow() : datetime;
+        String ymd = datetime.substring(0, 11);
+        Map<String, Integer> countMap = new HashMap<>();
+        int count;
+        for (String period : PC_INTERVAL) {
             switch (period) {
                 case "0~1":
                     count = getIllegalCount(siteId, ymd + "00:00:00", ymd + "01:00:00");
@@ -251,7 +309,7 @@ public class AnslysisServiceImpl implements AnalysisService {
 
 
         Map<String, Object> rtn = new HashMap<>();
-        rtn.put("interval", INTERVAL);//横轴坐标
+        rtn.put("interval", PC_INTERVAL);//横轴坐标
         rtn.put("countMap", countMap);//key - 横轴坐标值，value - y轴坐标值
         return rtn;
     }
@@ -269,7 +327,8 @@ public class AnslysisServiceImpl implements AnalysisService {
      * @param curUserProp 当前登录用户信息   @return map
      */
     @Override
-    public PageResult<TrafficVo> illegalTraffic(String siteId, String plateNo, String startDt, String endDt, int start, int limit,
+    public PageResult<TrafficVo> illegalTraffic(String siteId, String plateNo, String startDt, String endDt,
+                                                int start, int limit,
                                                 WxUser curWxUser, UserProp curUserProp) {
 
         Map<String, Object> c = new HashMap<>();
@@ -297,6 +356,20 @@ public class AnslysisServiceImpl implements AnalysisService {
     public SingleResult<TrafficVo> illegalTrafficOne(String trafficId, WxUser curWxUser,
                                                      UserProp curUserProp) throws Exception {
         return trafficService.selectTrafficByPrimaryKey(trafficId);
+    }
+
+    /**
+     * 所有站点列表
+     *
+     * @param condition 查询调节，可选
+     * @param start     页码 必填
+     * @param limit     页数 必填
+     * @return PageResult<SiteVo>
+     * @throws Exception
+     */
+    @Override
+    public PageResult<SiteVo> allSite(SiteQVo condition, int start, int limit) throws Exception {
+        return siteService.findSiteList(condition, start, limit, "");
     }
 
 

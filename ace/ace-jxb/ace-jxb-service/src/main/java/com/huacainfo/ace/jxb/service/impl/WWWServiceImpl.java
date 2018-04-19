@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.jxb.dao.CourseDao;
 import com.huacainfo.ace.jxb.dao.LiveDao;
 import com.huacainfo.ace.jxb.model.Live;
 import com.huacainfo.ace.jxb.service.WWWService;
@@ -33,6 +34,10 @@ public class WWWServiceImpl implements WWWService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private LiveDao jxbDao;
+
+    @Autowired
+    private CourseDao courseDao;
+
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -223,6 +228,54 @@ public class WWWServiceImpl implements WWWService {
         Map<String, Object> rst = new HashMap<>();
         rst.put("status", 0);
         this.jxbDao.updateLiveVisitNum(id);
+        return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:getLiveListByUserId
+     * @Description: TODO(小程序获取用户所属直播列表)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @Override
+    public Map<String, Object> getLiveListByUserId(String userId, int page, Map<String, Object> p){
+        Map<String, Object> rst = this.jxbDao.getLiveTotalNumByUserId(userId);
+        Long totalNum = (Long) rst.get("totalNum");
+        Long totalpage = this.calPage(totalNum, this.defaultPageSize);
+        rst.put("data", this.jxbDao.getLiveListByUserId(p));
+        rst.put("currentpage", page);
+        rst.put("status", 0);
+        rst.put("totalcount", totalNum);
+        rst.put("totalpage", totalpage);
+        return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:geCourseListByUserId
+     * @Description: TODO(小程序获取用户所属课程列表)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @Override
+    public Map<String, Object> getCourseListByUserId(String userId, int page, Map<String, Object> p){
+        Map<String, Object> rst = this.courseDao.getCourseTotalNum(userId);
+        Long totalNum = (Long) rst.get("totalNum");
+        Long totalpage = this.calPage(totalNum, this.defaultPageSize);
+        rst.put("data", this.courseDao.getCourseList(p));
+        rst.put("currentpage", page);
+        rst.put("status", 0);
+        rst.put("totalcount", totalNum);
+        rst.put("totalpage", totalpage);
         return rst;
     }
 }

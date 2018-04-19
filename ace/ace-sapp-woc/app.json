@@ -16,5 +16,25 @@
     "uploadFile": 10000,
     "downloadFile": 10000
   },
-  "debug": false
+  "debug": false,
+  "tabBar": {
+    "color": "#353536",
+    "selectedColor": "#353536",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+        {
+            "pagePath": "page/home/index",
+            "iconPath": "image/home.png",
+            "selectedIconPath": "image/home_s.png",
+            "text": "掌上驾驶舱"
+        },
+        {
+            "pagePath": "page/search/index",
+            "iconPath": "image/search.png",
+            "selectedIconPath": "image/search_s.png",
+            "text": "超载查询"
+        }
+    ]
+}
 }

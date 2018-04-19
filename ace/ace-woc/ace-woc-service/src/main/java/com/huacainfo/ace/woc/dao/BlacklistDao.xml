@@ -252,7 +252,7 @@
     </select>
 
     <sql id="Base_Column_List_Vo">
-       p.name, v.plateNo , d.department_name,
+        p.name, v.plateNo , d.department_name,
         b.id, b.personId, b.vehicleId, b.departmentId, b.effectDate, b.effectReason, b.lapseDate, b.lapseReason,
         b.isBlack, b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId,
         b.lastModifyUserName, b.lastModifyDate
