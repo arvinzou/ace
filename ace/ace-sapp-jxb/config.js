@@ -21,6 +21,10 @@ var config = {
     insertLiveRptSapp: `${server}/jxb/www/jxb/insertLiveRptSapp.do`,
     getLiveRptList: `${server}/jxb/www/jxb/getLiveRptList.do`,
     insertLiveSapp: `${server}/jxb/www/jxb/insertLiveSapp.do`,
-    insertCourseSapp: `${server}/jxb/www/jxb/insertCourseSapp.do`
+    insertCourseSapp: `${server}/jxb/www/jxb/insertCourseSapp.do`,
+    updateLiveSapp: `${server}/jxb/www/jxb/updateLiveSapp.do`,
+    updateCourseSapp: `${server}/jxb/www/jxb/updateCourseSapp.do`,
+    geCoursById: `${server}/jxb/www/jxb/geCoursById.do`,
+    geLiveById: `${server}/jxb/www/jxb/geLiveById.do`
 };
 module.exports = config

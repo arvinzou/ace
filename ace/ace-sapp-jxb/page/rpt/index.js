@@ -1,7 +1,7 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 const app = getApp();
-var fileList=[];
+var fileList = [];
 Array.prototype.indexOf = function (val) {
   for (var i = 0; i < this.length; i++) {
     if (this[i] == val) return i;
@@ -19,16 +19,16 @@ Page({
   data: {
     serverfile: cfg.serverfile,
     currentTab: 0,
-    navbar: ['图片上传', '视频上传','音频录制'],
+    navbar: ['图片上传', '视频上传', '音频录制'],
     max: 0,
     loading: false,
     disabled: false,
     files: [],
     checkImageUrl: cfg.checkImageUrl,
-    id:null,
-    mediUrl:null,
-    docText:'',
-    displayVideo:'hide',
+    id: null,
+    mediUrl: null,
+    docText: '',
+    displayVideo: 'hide',
     displayAudio: 'hide',
     playimg: "../../image/record_on.png",
     recorderStatus: false
@@ -48,8 +48,8 @@ Page({
 
   onLoad: function (param) {
     var that = this;
-    console.log('index.js.onLoad'); 
-    console.log(param); 
+    console.log('index.js.onLoad');
+    console.log(param);
     this.setData(param);
     this.setData({
       WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
@@ -63,20 +63,20 @@ Page({
       loading: true,
       disabled: true
     });
-    var data={};
-    data.imgs=[];
-    data.rpt={};
+    var data = {};
+    data.imgs = [];
+    data.rpt = {};
     data.captcha = e.detail.value.captcha;
-    data.rpt.rid=that.data.id;
+    data.rpt.rid = that.data.id;
     data.rpt.uid = 'oFvIjw7bU8IN-GYgxYCwwf_fOKZY';
     data.rpt.mediaContent = that.data.mediUrl;
     data.rpt.content = e.detail.value.docText;
-    
+
     var files = that.data.files;
-    for(var i=0;i<files.length;i++){
-      data.imgs.push({ url: files[i],w:0,h:0});
+    for (var i = 0; i < files.length; i++) {
+      data.imgs.push({ url: files[i], w: 0, h: 0 });
     }
-    if (that.data.currentTab==0){
+    if (that.data.currentTab == 0) {
       data.rpt.mediaType = '2';
     }
     if (that.data.currentTab == 1) {
@@ -86,7 +86,7 @@ Page({
       data.rpt.mediaType = '3';
     }
     console.log(data);
-    util.request(cfg.insertLiveRptSapp, { jsons: JSON.stringify(data)},
+    util.request(cfg.insertLiveRptSapp, { jsons: JSON.stringify(data) },
       function (data) {
         that.setData({
           loading: false,
@@ -101,7 +101,7 @@ Page({
               that.setData({
                 files: fileList,
                 checkImageUrl: cfg.checkImageUrl + "?id=" + util.uuid(),
-                docText:''
+                docText: ''
               });
             }
           }
@@ -177,15 +177,15 @@ Page({
       }
     })
   },
-  delImage:function(e){
+  delImage: function (e) {
     var idx = e.target.dataset.index;
     console.log(idx);
     let that = this;
     var files = that.data.files;
-    if (files.length>0){
+    if (files.length > 0) {
       files.remove(idx);
     }
-    that.setData({ files: files});
+    that.setData({ files: files });
   },
   formReset: function (e) {
     console.log("clear");
@@ -194,8 +194,8 @@ Page({
       files: fileList
     });
   },
- //滑动切换
-    swiperTab: function (e) {
+  //滑动切换
+  swiperTab: function (e) {
     var that = this;
     that.setData({
       currentTab: e.detail.current
@@ -213,7 +213,7 @@ Page({
       that.setData({
         currentTab: e.target.dataset.current
       })
-      if (this.data.currentTab == 0 || this.data.currentTab == 2){
+      if (this.data.currentTab == 0 || this.data.currentTab == 2) {
         that.delVideo();
       }
     }
@@ -222,32 +222,32 @@ Page({
     let that = this;
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
-      success:function(res){
+      success: function (res) {
         wx.showLoading({ title: "正在上传" });
-       var file= res.tempFilePath;
-       wx.uploadFile({
-         url: cfg.uploadUrl,
-         filePath: file,
-         name: 'file',
-         header: {
-           'content-type': 'multipart/form-data'
-         },
-         formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
-         success: function (resp) {
-           console.log(resp);
-           wx.hideLoading();
-           var obj = JSON.parse(resp.data);
-           console.log(obj);
-           that.setData({
-             mediUrl: cfg.serverfile + obj.file_path,
-             displayVideo: 'show'
-           });
-         },
-         fail: function (res) {
-           wx.hideLoading();
-           wx.showModal({ title: "提示", content: "上传失败" })
-         }
-       })
+        var file = res.tempFilePath;
+        wx.uploadFile({
+          url: cfg.uploadUrl,
+          filePath: file,
+          name: 'file',
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
+          success: function (resp) {
+            console.log(resp);
+            wx.hideLoading();
+            var obj = JSON.parse(resp.data);
+            console.log(obj);
+            that.setData({
+              mediUrl: cfg.serverfile + obj.file_path,
+              displayVideo: 'show'
+            });
+          },
+          fail: function (res) {
+            wx.hideLoading();
+            wx.showModal({ title: "提示", content: "上传失败" })
+          }
+        })
       }
     });
   },
@@ -262,20 +262,20 @@ Page({
       format: 'mp3',
       frameSize: 50
     }
-    if (that.data.recorderStatus){
-        recorderManager.stop();
-        that.setData({
-          playimg: "../../image/record_on.png",
-          recorderStatus: false
-         
-        });
-    }else{
-        recorderManager.start(options);
-        that.setData({
-          playimg: "../../image/record_off.png",
-          recorderStatus: true,
-          displayAudio: 'none'
-        });
+    if (that.data.recorderStatus) {
+      recorderManager.stop();
+      that.setData({
+        playimg: "../../image/record_on.png",
+        recorderStatus: false
+
+      });
+    } else {
+      recorderManager.start(options);
+      that.setData({
+        playimg: "../../image/record_off.png",
+        recorderStatus: true,
+        displayAudio: 'none'
+      });
     }
     recorderManager.onStop((res) => {
       console.log('recorder stop', res);
@@ -312,7 +312,7 @@ Page({
     const options = {
       duration: 600000,
       sampleRate: 44100,
-      numberOfChannels:2,
+      numberOfChannels: 2,
       encodeBitRate: 192000,
       format: 'mp3',
       frameSize: 50
@@ -323,15 +323,15 @@ Page({
   delVideo: function () {
     console.log("delVideo");
     let that = this;
-    that.setData({ displayVideo: 'hide', mediUrl:null });
+    that.setData({ displayVideo: 'hide', mediUrl: null });
   },
   delAideo: function () {
     let that = this;
     that.setData({ displayAudio: 'hide', mediUrl: null });
   },
-   /**
-    * 点击选项卡
-    */
+  /**
+   * 点击选项卡
+   */
   navbarTap: function (e) {
     console.log(e);
     let that = this;
@@ -344,4 +344,3 @@ Page({
     }
   },
 });
-

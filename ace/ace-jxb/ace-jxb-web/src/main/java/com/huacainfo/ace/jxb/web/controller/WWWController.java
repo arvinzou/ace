@@ -316,6 +316,7 @@ public class WWWController extends LiveBaseController {
 
 
 
+
     @RequestMapping(value = "/upload.do")
     @ResponseBody
     public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName, String marktext, String companyId)
@@ -541,5 +542,43 @@ public class WWWController extends LiveBaseController {
             return rst;
         }
         return this.wwwService.getCourseListByUserId(srt.getValue().getUserId(), page, p);
+    }
+
+    /**
+     * @throws
+     * @Title:geCoursById
+     * @Description: TODO(小程序根据主键获取课程)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @RequestMapping(value = "/geCoursById.do")
+    @ResponseBody
+    public Map<String, Object> geCoursById(String id) throws Exception {
+        Map<String, Object> rst =new HashedMap();
+        rst.put("status", 0);
+        rst.put("data",this.courseService.selectCourseByPrimaryKey(id).getValue());
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:geLiveById
+     * @Description: TODO(小程序根据主键获取直播)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @RequestMapping(value = "/geLiveById.do")
+    @ResponseBody
+    public Map<String, Object> geLiveById(String id) throws Exception {
+        Map<String, Object> rst =new HashedMap();
+        rst.put("status", 0);
+        rst.put("data",this.jxbService.selectLiveByPrimaryKey(id));
+        return rst;
     }
 }
