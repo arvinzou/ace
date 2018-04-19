@@ -42,8 +42,7 @@
           <view>{{o.locale}}</view>
         </view>
       </view>
-      
-        
+
       <view class="kind-list-item" wx:if="{{o.trafficSubVo.length>0}}" style="text-align: center;padding:2px;">
       <view style="padding:20rpx;font-weight:800;">现场拍摄画面</view>
       <block wx:for-items="{{o.trafficSubVo}}" wx:key="{{item.*}}">

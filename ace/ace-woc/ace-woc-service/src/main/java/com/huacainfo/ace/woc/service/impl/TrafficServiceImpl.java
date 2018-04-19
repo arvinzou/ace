@@ -1,6 +1,7 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -410,5 +411,15 @@ public class TrafficServiceImpl implements TrafficService {
         }
 
         return new MessageResponse(0, "数据构建完成！" + count);
+    }
+
+    @Override
+    public MessageResponse buildIllegalTrafficData(Map<String, Object> params, UserProp userProp) throws Exception {
+        List<Traffic> illegalList = trafficDao.selectList(params);
+        for (Traffic o : illegalList) {
+            updateTrafficStatus(o.getId(), userProp);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "数据处理成功！");
     }
 }

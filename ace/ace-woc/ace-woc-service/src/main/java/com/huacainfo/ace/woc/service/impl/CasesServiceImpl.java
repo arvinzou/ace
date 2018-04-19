@@ -123,10 +123,10 @@ public class CasesServiceImpl implements CasesService {
         }
 
 
-        int temp = this.casesDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "案件管理名称重复！");
-        }
+//        int temp = this.casesDao.isExit(o);
+//        if (temp > 0) {
+//            return new MessageResponse(1, "案件管理名称重复！");
+//        }
 
         o.setId(GUIDUtil.getGUID());
         o.setLastModifyDate(DateUtil.getNowDate());

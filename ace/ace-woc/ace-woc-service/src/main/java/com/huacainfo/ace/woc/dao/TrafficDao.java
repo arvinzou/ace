@@ -43,4 +43,6 @@ public interface TrafficDao {
     List<TrafficVo> selectTrafficList(@Param("condition") Map<String, Object> c,
                                       @Param("start") int start,
                                       @Param("limit") int limit);
+
+    List<Traffic> selectList(@Param("condition") Map<String, Object> params);
 }

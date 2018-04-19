@@ -1,7 +1,11 @@
-
 <view class='index'>
     <view class='section'>
-        <view class="section_title"><image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;'/>数据统计</view>
+        <picker bindchange="bindPickerChange" value="{{objectArray[index].id}}" range="{{objectArray}}" data-selecthx="{{objectArray[index].id}}" range-key="{{'siteName'}}">
+            <view class="section_title_1">
+                <image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;' /> {{objectArray[index].siteName}}数据统计
+                <image src='../../image/down.png' style='width:25rpx;height:18rpx;padding-left:10rpx;' />
+            </view>
+        </picker>
         <view class='num'>
             <view class='flex-wrp' style='flex-direction:row;'>
                 <view class="flex-item">
@@ -21,8 +25,9 @@
         </view>
     </view>
     <view>
-        <view>
-            <view class='section_title'><image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;'/>站点超载情况</view>
+        <view class='site'>
+            <view class='section_title'>
+                <image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;' />站点超载情况</view>
             <view class='swiper-tab'>
                 <view class="swiper-tab-item{{currentTab == 0 ? '.active':''}} day" data-current="0" bindtap="clickTab">日</view>
                 <view class="swiper-tab-item{{currentTab == 1 ? '.active':''}} month" data-current="1" bindtap="clickTab">月</view>
@@ -32,15 +37,25 @@
                 <canvas canvas-id="columnCanvas" class="canvas"></canvas>
             </view>
         </view>
-        <view class='tabContent'>
-            <view class='section_title'><image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;'/>时段超载情况</view>
+        <view class='site'>
+             <picker bindchange="bindPickerChange1" value="{{objectArray1[index1].id}}" range="{{objectArray1}}" data-selecthx="{{objectArray1[index1].siteName}}" range-key="{{'siteName'}}">
+                <view class='section_title'>
+                    <image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;' />{{objectArray1[index1].siteName}}时段超载情况
+                    <image src='../../image/down.png' style='width:25rpx;height:18rpx;padding-left:10rpx;' />
+                </view>
+            </picker>
             <view class=''>
                 <canvas canvas-id="lineCanvas" class="canvas" bindtouchstart="touchHandler"></canvas>
             </view>
         </view>
 
         <view class='tabContent'>
-            <view class='section_title'><image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;'/>数据详情</view>
+            <picker bindchange="bindPickerChange2" value="{{objectArray2[index2].id}}" range="{{objectArray2}}" data-selecthx="{{objectArray2[index2].siteName}}" range-key="{{'siteName'}}">
+                <view class='section_title'>
+                    <image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;' />{{objectArray2[index2].siteName}}数据详情
+                    <image src='../../image/down.png' style='width:25rpx;height:18rpx;padding-left:10rpx;' />
+                </view>
+            </picker>
             <view class='table'>
                 <view class="tr bg-w">
                     <view class="th" style='width:45%;'>时间</view>
@@ -48,23 +63,28 @@
                     <view class="th" style='width:15%'>轴数</view>
                     <view class="th" style='width:20%'>超载率</view>
                 </view>
-                <block wx:for="{{detailData}}">
-                 <navigator url="../trafficPreview/index?id={{item.id}}" class='navigator' hover-class="weui-cell_active">
-                    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
-                        <view class="td navigator-text" style='width:45%;'>{{item.inspectTime}}</view>
-                        <view class="td navigator-text" style='width:20%;'>{{item.plateNo}}</view>
-                        <view class="td navigator-text" style='width:15%;'>{{item.axleCount}}</view>
-                        <view class="td navigator-text" style='width:20%;'>{{item.overRate}}</view>
-                    </view>
-                
-                    <view class="tr" wx:else>
-                        <view class="td navigator-text" style='width:45%;'>{{item.inspectTime}}</view>
-                        <view class="td navigator-text" style='width:20%;'>{{item.plateNo}}</view>
-                        <view class="td navigator-text" style='width:15%;'>{{item.axleCount}}</view>
-                        <view class="td navigator-text" style='width:20%;'>{{item.overRate}}</view>
-                    </view>
-                </navigator>
+                <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower" style='height:450rpx;'> 
+                <block wx:for="{{trafficList}}">
+                    <navigator url="../trafficPreview/index?id={{item.id}}" class='navigator' hover-class="weui-cell_active">
+                        <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+                            <view class="td navigator-text" style='width:45%;'>{{item.inspectTime}}</view>
+                            <view class="td navigator-text" style='width:20%;'>{{item.plateNo}}</view>
+                            <view class="td navigator-text" style='width:15%;'>{{item.axleCount}}</view>
+                            <view class="td navigator-text" style='width:20%;'>{{item.overRate}}</view>
+                        </view>
+
+                        <view class="tr bg-o" wx:else>
+                            <view class="td navigator-text" style='width:45%;'>{{item.inspectTime}}</view>
+                            <view class="td navigator-text" style='width:20%;'>{{item.plateNo}}</view>
+                            <view class="td navigator-text" style='width:15%;'>{{item.axleCount}}</view>
+                            <view class="td navigator-text" style='width:20%;'>{{item.overRate}}</view>
+                        </view>
+                    </navigator>
                 </block>
+                <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>  
+                <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
+                </scroll-view>
+
             </view>
         </view>
     </view>
