@@ -19,6 +19,7 @@ import com.huacainfo.ace.jxb.web.websocket.MyWebSocket;
 import com.huacainfo.ace.jxb.web.websocket.WebSocketSub;
 import com.huacainfo.ace.portal.service.FilesService;
 import com.huacainfo.ace.portal.service.WxCfgService;
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +97,6 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public Map<String, Object> getListByCompany(int page, String companyId) throws Exception {
         Map<String, Object> p = this.getPageParam(page, this.getParams());
-        logger.debug("=========================================================liveList"+this.wwwService.getLiveList(companyId, page, p));
         return this.wwwService.getLiveList(companyId, page, p);
     }
 
@@ -493,5 +493,53 @@ public class WWWController extends LiveBaseController {
         this.logger.info("{}",jsons);
         Course course= JSON.parseObject(jsons,Course.class);
         return courseService.updateCourse(course,srt.getValue());
+    }
+
+
+    /**
+     * @throws
+     * @Title:getLiveListByUserId
+     * @Description: TODO(小程序获取用户所属直播列表)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @RequestMapping(value = "/getLiveListByUserId.do")
+    @ResponseBody
+    public Map<String, Object> getLiveListByUserId(int page) throws Exception {
+        Map<String, Object> rst =new HashedMap();
+        Map<String, Object> p = this.getPageParam(page, this.getParams());
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        if(srt.getStatus()==1){
+            rst.put("status", 1);
+            rst.put("msg", srt.getErrorMessage());
+            return rst;
+        }
+        return this.wwwService.getLiveListByUserId(srt.getValue().getUserId(), page, p);
+    }
+    /**
+     * @throws
+     * @Title:geCourseListByUserId
+     * @Description: TODO(小程序获取用户所属课程列表)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @RequestMapping(value = "/getCourseListByUserId.do")
+    @ResponseBody
+    public Map<String, Object> getCourseListByUserId(int page) throws Exception {
+        Map<String, Object> rst =new HashedMap();
+        Map<String, Object> p = this.getPageParam(page, this.getParams());
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        if(srt.getStatus()==1){
+            rst.put("status", 1);
+            rst.put("msg", srt.getErrorMessage());
+            return rst;
+        }
+        return this.wwwService.getCourseListByUserId(srt.getValue().getUserId(), page, p);
     }
 }

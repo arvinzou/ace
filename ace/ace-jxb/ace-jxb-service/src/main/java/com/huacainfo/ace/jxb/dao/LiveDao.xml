@@ -450,6 +450,17 @@
         ) b ON a.deptId = b.deptId
     </select>
 
+    <select id="getLiveTotalNumByUserId" resultType="map">
+        SELECT count(1) totalNum FROM live  where and createUserId=#{userId,jdbcType=VARCHAR}
+        <if test='type!=null and type!=""'>
+            and type like
+            concat('%',#{type,jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+
+
+
+
     <update id="updateRptLikeNum">
         update live_rpt set likeNum=ifnull(likeNum,0)+1 where id=#{id}
     </update>
@@ -487,5 +498,39 @@
 				mobile,email,seat,user_level,create_time,fax,telphone,qq,openId,cur_syid
         from portal.users
         where (openid = #{openid,jdbcType=VARCHAR} or appOpenId = #{openid,jdbcType=VARCHAR})
+    </select>
+
+
+    <select id="getLiveListByUserId" resultType="map">
+
+        select
+        2 commentApproveType,
+        concat(#{fastdfs_server},imageSrc) cover,
+        endTime,
+        0 hasPassword,
+        id,
+        nop numOfPartake,
+        <![CDATA[
+        (case  when nop<10000 then concat(nop,"") else concat(round(nop/10000,2),"万") end) numOfPartakeString,
+         ]]>
+        0 partakeState,
+        remark,
+        name,
+        createUserName,
+        imageSrc,
+        status,
+        1 reportApproveType,
+        startTime,
+        status state,
+        name topic,
+        category,
+        type,
+        null watermarkConfig from live where createUserId=#{userId,jdbcType=VARCHAR}
+        <if test='type!=null and type!=""'>
+            and type like concat('%',#{type,jdbcType=VARCHAR},'%')
+        </if>
+        order by status, startTime desc
+        limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+
     </select>
 </mapper>

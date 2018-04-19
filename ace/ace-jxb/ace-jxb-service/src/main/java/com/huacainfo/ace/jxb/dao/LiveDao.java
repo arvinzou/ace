@@ -59,4 +59,11 @@ public interface LiveDao {
     int updateLiveVisitNum(String id);
 
     Users selectSysUserByOpenid(String openid);
+
+
+    Map<String, Object> getLiveTotalNumByUserId(@Param("userId") String userId);
+
+
+
+    List<Map<String, Object>> getLiveListByUserId(Map<String, Object> p);
 }
