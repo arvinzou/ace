@@ -336,5 +336,6 @@ Page({
             });
             that.fetchTrafficList();
         }
+
     }
 });

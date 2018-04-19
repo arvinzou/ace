@@ -93,7 +93,8 @@
   background-image: url(../../image/load.png) no-repeat;  
   background-size: contain;  
   animation: rotate 1s linear infinite;  
-}  
+}
+
 .loading.complete:before{  
   display: none;  
 }  
