@@ -184,6 +184,7 @@ Page({
     var files = that.data.files;
     if (files.length > 0) {
       files.remove(idx);
+      fileList.remove(idx);
     }
     that.setData({ files: files });
   },
