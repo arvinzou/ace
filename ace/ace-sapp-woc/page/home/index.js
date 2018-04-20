@@ -129,19 +129,9 @@ Page({
         );
 
         var that2 = this;
-        util.request(cfg.siteUrl, {},
-            function (data) {
-                var retData = data.siteList;
-                for (var i = 0; i < retData.length; i++) {
-                    //  console.log(retData[i]);
-                    cfg1.categories.push(retData[i].siteName);
-                    cfg1.series[0].data.push(retData[i].count);
-                }
-                console.log(cfg1);
-
-                columnChart = new wxCharts(cfg1);
-            }
-        );
+        var startTime = util.formatDate(new Date()) + ' 00:00:00';
+        var endTime = util.formatDate(new Date()) + ' 23:59:59';
+        that2.siteLoad(startTime, endTime);
 
         var that4 = this;
         util.request(cfg.intervalUrl, {},
@@ -226,13 +216,15 @@ Page({
         util.request(cfg.siteUrl, { startDt: startTime, endDt: endTime },
             function (data) {
                 var retData = data.siteList;
+                cfg1.categories.splice(0, cfg1.categories.length);
+                cfg1.series[0].data.splice(0, cfg1.series[0].data.length);
                 for (var i = 0; i < retData.length; i++) {
                     cfg1.categories.push(retData[i].siteName);
                     cfg1.series[0].data.push(retData[i].count);
                 }
                 console.log(cfg1);
 
-                // columnChart = new wxCharts(cfg1);
+                columnChart = new wxCharts(cfg1);
             }
         );
     },
