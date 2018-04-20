@@ -18,20 +18,22 @@ Array.prototype.remove = function (val) {
 Page({
   data: {
     serverfile: cfg.serverfile,
-    currentTab: 0,
-    navbar: ['图片上传', '视频上传', '音频录制'],
     max: 0,
+    maxRemark: 0,
     loading: false,
     disabled: false,
     files: [],
     checkImageUrl: cfg.checkImageUrl,
     id: null,
-    mediUrl: null,
-    docText: '',
-    displayVideo: 'hide',
-    displayAudio: 'hide',
-    playimg: "../../image/record_on.png",
-    recorderStatus: false
+    categoryItems: [
+      { name: '视频直播', value: '2', checked: true},
+      { name: '图文直播', value: '1' }
+    ],
+    date: util.formatDate(new Date()),
+    time: util.formatTime(new Date(),"h m:s"),
+    typeCodes: ["01", "02", "03", "04"],
+    typeCodeIndex: 0,
+    types: ["亲子关系", "婚姻家庭", "职场压力",'其他']
   },
   onReady: function (res) {
     console.log('index.js.onReady');
@@ -164,6 +166,11 @@ Page({
   },
   chooseImage: function () {
     let that = this;
+    var files = that.data.files;
+    if (files.length > 0) {
+      wx.showModal({ title: "提示", showCancel:false,content: "封面限制为单个图片" });
+      return ;
+    }
     wx.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       success: function (res) {
@@ -195,153 +202,38 @@ Page({
       files: fileList
     });
   },
-  //滑动切换
-  swiperTab: function (e) {
-    var that = this;
-    that.setData({
-      currentTab: e.detail.current
-    });
-    if (this.data.currentTab == 0 || this.data.currentTab == 2) {
-      that.delVideo();
+  categoryChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value);
+    var categoryItems = this.data.categoryItems;
+    for (var i = 0, len = categoryItems.length; i < len; ++i) {
+      categoryItems[i].checked = categoryItems[i].value == e.detail.value;
     }
-  },
-  //点击切换
-  clickTab: function (e) {
-    var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.current
-      })
-      if (this.data.currentTab == 0 || this.data.currentTab == 2) {
-        that.delVideo();
-      }
-    }
-  },
-  chooseVideo: function () {
-    let that = this;
-    wx.chooseVideo({
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        wx.showLoading({ title: "正在上传" });
-        var file = res.tempFilePath;
-        wx.uploadFile({
-          url: cfg.uploadUrl,
-          filePath: file,
-          name: 'file',
-          header: {
-            'content-type': 'multipart/form-data'
-          },
-          formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
-          success: function (resp) {
-            console.log(resp);
-            wx.hideLoading();
-            var obj = JSON.parse(resp.data);
-            console.log(obj);
-            that.setData({
-              mediUrl: cfg.serverfile + obj.file_path,
-              displayVideo: 'show'
-            });
-          },
-          fail: function (res) {
-            wx.hideLoading();
-            wx.showModal({ title: "提示", content: "上传失败" })
-          }
-        })
-      }
+    this.setData({
+      categoryItems: categoryItems
     });
   },
-  startRecorder: function () {
-    let that = this;
-    var recorderManager = wx.getRecorderManager();
-    const options = {
-      duration: 600000,
-      sampleRate: 44100,
-      numberOfChannels: 2,
-      encodeBitRate: 192000,
-      format: 'mp3',
-      frameSize: 50
-    }
-    if (that.data.recorderStatus) {
-      recorderManager.stop();
-      that.setData({
-        playimg: "../../image/record_on.png",
-        recorderStatus: false
-
-      });
-    } else {
-      recorderManager.start(options);
-      that.setData({
-        playimg: "../../image/record_off.png",
-        recorderStatus: true,
-        displayAudio: 'none'
+  remarkChange: function (e) {
+    console.log(e);
+    if (e.detail && e.detail.value.length > 0) {
+      this.setData({
+        maxRemark: e.detail.value.length
       });
     }
-    recorderManager.onStop((res) => {
-      console.log('recorder stop', res);
-      wx.showLoading({ title: "正在上传" });
-      var file = res.tempFilePath;
-      wx.uploadFile({
-        url: cfg.uploadUrl,
-        filePath: file,
-        name: 'file',
-        header: {
-          'content-type': 'multipart/form-data'
-        },
-        formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
-        success: function (resp) {
-          console.log(resp);
-          wx.hideLoading();
-          var obj = JSON.parse(resp.data);
-          console.log(obj);
-          that.setData({
-            mediUrl: cfg.serverfile + obj.file_path,
-            displayAudio: ' '
-          });
-        },
-        fail: function (res) {
-          wx.hideLoading();
-          wx.showModal({ title: "提示", content: "上传失败" })
-        }
-      })
+  },
+  bindDateChange: function (e) {
+    this.setData({
+      date: e.detail.value
     })
   },
-  stopRecorder: function () {
-    let that = this;
-    var recorderManager = wx.getRecorderManager();
-    const options = {
-      duration: 600000,
-      sampleRate: 44100,
-      numberOfChannels: 2,
-      encodeBitRate: 192000,
-      format: 'mp3',
-      frameSize: 50
-    }
-
-    recorderManager.start(options);
+  bindTimeChange: function (e) {
+    this.setData({
+      time: e.detail.value
+    })
   },
-  delVideo: function () {
-    console.log("delVideo");
-    let that = this;
-    that.setData({ displayVideo: 'hide', mediUrl: null });
-  },
-  delAideo: function () {
-    let that = this;
-    that.setData({ displayAudio: 'hide', mediUrl: null });
-  },
-  /**
-   * 点击选项卡
-   */
-  navbarTap: function (e) {
-    console.log(e);
-    let that = this;
-    if (that.data.currentTab == e.target.dataset.idx) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.idx
-      })
-    }
+  bindTypeChange: function (e) {
+    console.log('picker type code 发生选择改变，携带值为', e.detail.value);
+    this.setData({
+      typeCodeIndex: e.detail.value
+    })
   },
 });

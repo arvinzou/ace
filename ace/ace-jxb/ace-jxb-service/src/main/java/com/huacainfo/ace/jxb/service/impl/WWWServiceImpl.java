@@ -100,7 +100,7 @@ public class WWWServiceImpl implements WWWService {
     public Map<String, Object> getLiveRptList(String rid, int page, Map<String, Object> p) {
         SqlSession session = this.sqlSession.getSqlSessionFactory()
                 .openSession(ExecutorType.REUSE);
-        Configuration configuration = session.getConfiguration(); //反射得到configuration ,然后
+        Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);
         LiveDao dao = session.getMapper(LiveDao.class);
         Map<String, Object> rst = dao.getLiveRptTotalNum(rid);
