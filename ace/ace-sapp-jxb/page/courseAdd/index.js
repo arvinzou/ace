@@ -24,6 +24,7 @@ Page({
     disabled: false,
     files: [],
     checkImageUrl: cfg.checkImageUrl,
+    displayVideo: 'hide',
     userinfo:{},
     formData:{
      
@@ -39,7 +40,9 @@ Page({
     ],
     categoryCodes: ["01", "02", "03", "04"],
     categoryCodeIndex: 0,
-    categorys: ["亲子关系", "婚姻家庭", "职场压力",'其他']
+    categorys: ["亲子关系", "婚姻家庭", "职场压力",'其他'],
+    currentTab: 0,
+    navbar: ['地址', '上传']
   },
   onReady: function (res) {
     console.log('index.js.onReady');
@@ -156,7 +159,7 @@ Page({
             },
             fail: function (res) {
               wx.hideLoading();
-              wx.showModal({ title: "提示", content: "上传失败" })
+              wx.showModal({ title: "提示", content: "上传失败", showCancel: false })
             }
           })
         }
@@ -243,4 +246,56 @@ Page({
       categoryCodeIndex: e.detail.value
     })
   },
+  navbarTap: function (e) {
+    console.log(e);
+    let that = this;
+    if (that.data.currentTab == e.target.dataset.idx) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.idx
+      })
+    }
+  },
+  delVideo: function () {
+    console.log("delVideo");
+    let that = this;
+    that.setData({ displayVideo: 'hide', mediUrl: null });
+  },
+  chooseVideo: function () {
+    let that = this;
+    wx.chooseVideo({
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        wx.showLoading({ title: "正在上传" });
+        var file = res.tempFilePath;
+        wx.uploadFile({
+          url: cfg.uploadUrl,
+          filePath: file,
+          name: 'file',
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
+          success: function (resp) {
+            console.log(resp);
+            wx.hideLoading();
+            var obj = JSON.parse(resp.data);
+            console.log(obj);
+            var formData = that.data.formData;
+            formData.mediUrl = cfg.serverfile + obj.file_path;
+            that.setData({
+              mediUrl: formData.mediUrl,
+              formData: formData,
+              displayVideo: 'show'
+            });
+          },
+          fail: function (res) {
+            wx.hideLoading();
+            wx.showModal({ title: "提示", content: "上传失败", showCancel: false})
+          }
+        })
+      }
+    });
+  }
 });
