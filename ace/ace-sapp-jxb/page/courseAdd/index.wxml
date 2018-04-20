@@ -1,72 +1,75 @@
 <view class='index'>
   <form catchsubmit="formSubmit" catchreset="formReset">
     <view class="kind-list">
-     
+
       <view class="kind-list-item">
         <input name="name" class="weui-flex__item-body" maxlength="10" placeholder="请输入课题名称" />
       </view>
       <view class="kind-list-item">
-         <radio-group bindchange="mediTypeChange" name="mediType">
-                <label  wx:for="{{mediTypeItems}}" wx:key="value" class='radio'>
-                    <radio value="{{item.value}}" checked="{{item.checked}}"/>
-                    {{item.name}}
-                </label>
-            </radio-group>
+        <radio-group bindchange="mediTypeChange" name="mediType">
+          <label wx:for="{{mediTypeItems}}" wx:key="value" class='radio'>
+            <radio value="{{item.value}}" checked="{{item.checked}}" /> {{item.name}}
+          </label>
+        </radio-group>
       </view>
       <view class="kind-list-item">
         <textarea name="introduce" value="{{formData.introduce}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入课程介绍" style="height: 300rpx" />
         <view class="weui-textarea-counter">{{max}}/500</view>
       </view>
 
-       <view class="kind-list-item">
+      <view class="kind-list-item">
         <textarea name="remark" value="{{formData.remark}}" bindinput="remarkChange" maxlength="200" class="weui-textarea" placeholder="请输入课程简介" style="height: 100rpx" />
         <view class="weui-textarea-counter">{{maxRemark}}/200</view>
       </view>
 
-     
 
-      <view class="kind-list-item">
-                    <picker bindchange="bindCategroyChange" name="category" value="{{categoryCodeIndex}}" range="{{categorys}}">
-                        <view class="weui-select">{{categorys[categoryCodeIndex]}}</view>
-                    </picker>
+
+      <view class="kind-list-item" style='display: flex;flex-direction: row'>
+          <view class="packerDate">
+              内容类型
+          </view>
+          <view class="packerDate">
+            <picker bindchange="bindCategroyChange" name="category" value="{{categoryCodeIndex}}" range="{{categorys}}">
+              <view class="weui-select">{{categorys[categoryCodeIndex]}}</view>
+            </picker>
+          </view>
       </view>
 
 
       <view class="kind-list-item">
         <view class="weui-uploader">
-            <view class="weui-uploader__hd">
-              <view class="weui-uploader__title">封面</view>
-              <view class="weui-uploader__info">{{files.length}}</view>
+          <view class="weui-uploader__hd">
+            <view class="weui-uploader__title">封面</view>
+            <view class="weui-uploader__info">{{files.length}}</view>
+          </view>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files" id="uploaderFiles">
+              <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
+                <view class="cover" id="{{item}}">
+                  <image src="{{item}}" mode="aspectFill" class='coverImg' bindtap="previewImage" />
+                  <image class="removeImgBtn" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}" />
+                </view>
+              </block>
             </view>
-            <view class="weui-uploader__bd">
-              <view class="weui-uploader__files" id="uploaderFiles">
-                <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
-                  <view class="cover" id="{{item}}">
-                    <image  src="{{item}}" mode="aspectFill" class='coverImg' bindtap="previewImage" />
-                    <image class="removeImgBtn" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}" />
-                  </view>
-                </block>
-              </view>
-              <view class="weui-uploader__input-box">
-                <view class="weui-uploader__input" bindtap="chooseImage"></view>
-              </view>
+            <view class="weui-uploader__input-box">
+              <view class="weui-uploader__input" bindtap="chooseImage"></view>
             </view>
           </view>
+        </view>
       </view>
-      
 
-       <view class="kind-list-item">
-        <textarea name="mediUrl" value="{{formData.mediUrl}}"  maxlength="200" class="weui-textarea" placeholder="请输入课程地址" style="height: 100rpx" />
+
+      <view class="kind-list-item">
+        <textarea name="mediUrl" value="{{formData.mediUrl}}" maxlength="200" class="weui-textarea" placeholder="请输入课程地址" style="height: 100rpx" />
       </view>
-<view class="kind-list-item">
-         <radio-group bindchange="costTypeChange" name="costType">
-                <label  wx:for="{{costTypeItems}}" wx:key="value" class='radio'>
-                    <radio value="{{item.value}}" checked="{{item.checked}}"/>
-                    {{item.name}}
-                </label>
-            </radio-group>
+      <view class="kind-list-item">
+        <radio-group bindchange="costTypeChange" name="costType">
+          <label wx:for="{{costTypeItems}}" wx:key="value" class='radio'>
+            <radio value="{{item.value}}" checked="{{item.checked}}" /> {{item.name}}
+          </label>
+        </radio-group>
       </view>
-       <view class="kind-list-item">
+      <view class="kind-list-item">
         <input name="cost" value="{{formData.cost}}" class="weui-flex__item-body" maxlength="50" placeholder="请输入费用" />
       </view>
 
