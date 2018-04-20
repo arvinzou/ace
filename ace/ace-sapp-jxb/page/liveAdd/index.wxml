@@ -3,7 +3,7 @@
     <view class="kind-list">
      
       <view class="kind-list-item">
-        <input name="name" class="weui-flex__item-body" maxlength="10" placeholder="请输入标题" />
+        <input name="name" class="weui-flex__item-body" value="{{formData.name}}" maxlength="10" placeholder="请输入标题" />
       </view>
       <view class="kind-list-item">
          <radio-group bindchange="categoryChange" name="category">

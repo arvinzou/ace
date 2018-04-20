@@ -18,20 +18,28 @@ Array.prototype.remove = function (val) {
 Page({
   data: {
     serverfile: cfg.serverfile,
-    currentTab: 0,
-    navbar: ['图片上传', '视频上传', '音频录制'],
     max: 0,
+    maxRemark: 0,
     loading: false,
     disabled: false,
     files: [],
     checkImageUrl: cfg.checkImageUrl,
+    userinfo:{},
+    formData:{
+     
+    },
     id: null,
-    mediUrl: null,
-    docText: '',
-    displayVideo: 'hide',
-    displayAudio: 'hide',
-    playimg: "../../image/record_on.png",
-    recorderStatus: false
+    mediTypeItems: [
+      { name: '音频', value: '1', checked: true},
+      { name: '视频', value: '2' }
+    ],
+    costTypeItems: [
+      { name: '系列课程', value: '1', checked: true },
+      { name: '免费课程', value: '2' }
+    ],
+    categoryCodes: ["01", "02", "03", "04"],
+    categoryCodeIndex: 0,
+    categorys: ["亲子关系", "婚姻家庭", "职场压力",'其他']
   },
   onReady: function (res) {
     console.log('index.js.onReady');
@@ -45,17 +53,36 @@ Page({
       }
     });
   },
-
+  initData:function(res){
+    console.log('initData');
+    var that = this;
+    var id = util.uuid();
+    var userinfo = wx.getStorageSync('userinfo');
+    that.setData({
+      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
+      checkImageUrl: cfg.checkImageUrl,
+      fileList: [],
+      userinfo: userinfo,
+      formData: {
+        id: id,
+        mediUrl: cfg.server + userinfo.mobile + "?id=" + id
+      }
+    });
+  },
   onLoad: function (param) {
     var that = this;
     console.log('index.js.onLoad');
     console.log(param);
     this.setData(param);
-    this.setData({
-      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
-      checkImageUrl: cfg.checkImageUrl,
-      fileList: []
-    });
+    if (wx.getStorageSync('userinfo')){
+      console.log('logined');
+      that.initData(param);
+    }else{
+      console.log('logining');
+      util.login(function (res) {
+        that.initData(param);
+      });
+    }
   },
   formSubmit: function (e) {
     var that = this;
@@ -63,30 +90,16 @@ Page({
       loading: true,
       disabled: true
     });
-    var data = {};
-    data.imgs = [];
-    data.rpt = {};
-    data.captcha = e.detail.value.captcha;
-    data.rpt.rid = that.data.id;
-    data.rpt.uid = 'oFvIjw7bU8IN-GYgxYCwwf_fOKZY';
-    data.rpt.mediaContent = that.data.mediUrl;
-    data.rpt.content = e.detail.value.docText;
-
-    var files = that.data.files;
-    for (var i = 0; i < files.length; i++) {
-      data.imgs.push({ url: files[i], w: 0, h: 0 });
-    }
-    if (that.data.currentTab == 0) {
-      data.rpt.mediaType = '2';
-    }
-    if (that.data.currentTab == 1) {
-      data.rpt.mediaType = '1';
-    }
-    if (that.data.currentTab == 2) {
-      data.rpt.mediaType = '3';
-    }
+    var now = new Date();
+    now.setDate(now.getDate() + 10);
+    var data = e.detail.value;
+    data.id =that.data.formData.id;
+    data.cover = that.data.files[0];
+    data.duration=0;
+    data.demandNum=0;
+    data.likeNum = 0;
     console.log(data);
-    util.request(cfg.insertLiveRptSapp, { jsons: JSON.stringify(data) },
+    util.request(cfg.insertCourseSapp, { jsons: JSON.stringify(data) },
       function (data) {
         that.setData({
           loading: false,
@@ -95,14 +108,10 @@ Page({
         wx.showModal({
           title: '提示',
           content: data.errorMessage,
+          showCancel: false,
           success: function (res) {
-            if (res.confirm) {
-              fileList = [];
-              that.setData({
-                files: fileList,
-                checkImageUrl: cfg.checkImageUrl + "?id=" + util.uuid(),
-                docText: ''
-              });
+            if (res.confirm&&data.status==0) {
+              that.initData(that.data.param);
             }
           }
         })
@@ -164,6 +173,11 @@ Page({
   },
   chooseImage: function () {
     let that = this;
+    var files = that.data.files;
+    if (files.length > 0) {
+      wx.showModal({ title: "提示", showCancel:false,content: "封面限制为单个图片" });
+      return ;
+    }
     wx.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       success: function (res) {
@@ -195,153 +209,38 @@ Page({
       files: fileList
     });
   },
-  //滑动切换
-  swiperTab: function (e) {
-    var that = this;
-    that.setData({
-      currentTab: e.detail.current
-    });
-    if (this.data.currentTab == 0 || this.data.currentTab == 2) {
-      that.delVideo();
+  mediTypeChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value);
+    var mediTypeItems = this.data.mediTypeItems;
+    for (var i = 0, len = mediTypeItems.length; i < len; ++i) {
+      mediTypeItems[i].checked = mediTypeItems[i].value == e.detail.value;
     }
-  },
-  //点击切换
-  clickTab: function (e) {
-    var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.current
-      })
-      if (this.data.currentTab == 0 || this.data.currentTab == 2) {
-        that.delVideo();
-      }
-    }
-  },
-  chooseVideo: function () {
-    let that = this;
-    wx.chooseVideo({
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        wx.showLoading({ title: "正在上传" });
-        var file = res.tempFilePath;
-        wx.uploadFile({
-          url: cfg.uploadUrl,
-          filePath: file,
-          name: 'file',
-          header: {
-            'content-type': 'multipart/form-data'
-          },
-          formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
-          success: function (resp) {
-            console.log(resp);
-            wx.hideLoading();
-            var obj = JSON.parse(resp.data);
-            console.log(obj);
-            that.setData({
-              mediUrl: cfg.serverfile + obj.file_path,
-              displayVideo: 'show'
-            });
-          },
-          fail: function (res) {
-            wx.hideLoading();
-            wx.showModal({ title: "提示", content: "上传失败" })
-          }
-        })
-      }
+    this.setData({
+      mediTypeItems: mediTypeItems
     });
   },
-  startRecorder: function () {
-    let that = this;
-    var recorderManager = wx.getRecorderManager();
-    const options = {
-      duration: 600000,
-      sampleRate: 44100,
-      numberOfChannels: 2,
-      encodeBitRate: 192000,
-      format: 'mp3',
-      frameSize: 50
+  costTypeChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value);
+    var costTypeItems = this.data.costTypeItems;
+    for (var i = 0, len = costTypeItems.length; i < len; ++i) {
+      costTypeItems[i].checked = costTypeItems[i].value == e.detail.value;
     }
-    if (that.data.recorderStatus) {
-      recorderManager.stop();
-      that.setData({
-        playimg: "../../image/record_on.png",
-        recorderStatus: false
-
-      });
-    } else {
-      recorderManager.start(options);
-      that.setData({
-        playimg: "../../image/record_off.png",
-        recorderStatus: true,
-        displayAudio: 'none'
-      });
-    }
-    recorderManager.onStop((res) => {
-      console.log('recorder stop', res);
-      wx.showLoading({ title: "正在上传" });
-      var file = res.tempFilePath;
-      wx.uploadFile({
-        url: cfg.uploadUrl,
-        filePath: file,
-        name: 'file',
-        header: {
-          'content-type': 'multipart/form-data'
-        },
-        formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
-        success: function (resp) {
-          console.log(resp);
-          wx.hideLoading();
-          var obj = JSON.parse(resp.data);
-          console.log(obj);
-          that.setData({
-            mediUrl: cfg.serverfile + obj.file_path,
-            displayAudio: ' '
-          });
-        },
-        fail: function (res) {
-          wx.hideLoading();
-          wx.showModal({ title: "提示", content: "上传失败" })
-        }
-      })
-    })
+    this.setData({
+      costTypeItems: costTypeItems
+    });
   },
-  stopRecorder: function () {
-    let that = this;
-    var recorderManager = wx.getRecorderManager();
-    const options = {
-      duration: 600000,
-      sampleRate: 44100,
-      numberOfChannels: 2,
-      encodeBitRate: 192000,
-      format: 'mp3',
-      frameSize: 50
-    }
-
-    recorderManager.start(options);
-  },
-  delVideo: function () {
-    console.log("delVideo");
-    let that = this;
-    that.setData({ displayVideo: 'hide', mediUrl: null });
-  },
-  delAideo: function () {
-    let that = this;
-    that.setData({ displayAudio: 'hide', mediUrl: null });
-  },
-  /**
-   * 点击选项卡
-   */
-  navbarTap: function (e) {
+  remarkChange: function (e) {
     console.log(e);
-    let that = this;
-    if (that.data.currentTab == e.target.dataset.idx) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.idx
-      })
+    if (e.detail && e.detail.value.length > 0) {
+      this.setData({
+        maxRemark: e.detail.value.length
+      });
     }
+  },
+  bindCategroyChange: function (e) {
+    console.log('picker type code 发生选择改变，携带值为', e.detail.value);
+    this.setData({
+      categoryCodeIndex: e.detail.value
+    })
   },
 });
