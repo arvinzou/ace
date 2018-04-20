@@ -29,7 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.huacainfo.ace.common.tools.HttpUtils;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -580,5 +581,29 @@ public class WWWController extends LiveBaseController {
         rst.put("status", 0);
         rst.put("data",this.jxbService.selectLiveByPrimaryKey(id));
         return rst;
+    }
+
+    @RequestMapping(value = "/proxyService.do")
+    public void proxyService(HttpServletResponse response,String url) throws Exception{
+        Map<String,String> header=new HashedMap();
+        header.put("Content-Type","application/json");
+        String body=HttpUtils.httpsGet(url+"?"+this.getUrlParamsByMap(this.getParams()),header);
+        response.getOutputStream().write(body.getBytes());
+    }
+
+    private  String getUrlParamsByMap(Map<String, Object> map) {
+        if (map == null) {
+            return "";
+        }
+        StringBuffer sb = new StringBuffer();
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            sb.append(entry.getKey() + "=" + entry.getValue());
+            sb.append("&");
+        }
+        String s = sb.toString();
+        if (s.endsWith("&")) {
+            s = org.apache.commons.lang.StringUtils.substringBeforeLast(s, "&");
+        }
+        return s;
     }
 }

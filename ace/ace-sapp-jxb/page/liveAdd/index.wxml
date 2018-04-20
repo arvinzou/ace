@@ -6,7 +6,7 @@
         <input name="name" class="weui-flex__item-body" maxlength="10" placeholder="请输入标题" />
       </view>
       <view class="kind-list-item">
-         <radio-group bindchange="categoryChange">
+         <radio-group bindchange="categoryChange" name="category">
                 <label  wx:for="{{categoryItems}}" wx:key="value" class='radio'>
                     <radio value="{{item.value}}" checked="{{item.checked}}"/>
                     {{item.name}}
@@ -79,7 +79,7 @@
       </view>
 
        <view class="kind-list-item">
-        <input name="addr" class="weui-flex__item-body" maxlength="50" placeholder="请输入直播所在城市" />
+        <input name="addr" value="{{formData.addr}}" class="weui-flex__item-body" maxlength="50" placeholder="请输入直播所在城市" />
       </view>
 
       <view class="kind-list-item weui-flex">
@@ -91,7 +91,7 @@
       </view>
 
       <view>
-        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:100%;color:#fff;background-color:#BB3D00; border-radius: 2px;" formType="submit">提交</button>
+        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:#BB3D00; border-radius: 2px;" formType="submit">提交</button>
       </view>
     </view>
   </form>
