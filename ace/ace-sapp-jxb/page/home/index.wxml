@@ -13,7 +13,6 @@
         </view>
       </block>
     </view>
-
   </view>
   <view hidden="{{currentTab!==1}}" class='navbar-content'>
    <view class='live-list'>

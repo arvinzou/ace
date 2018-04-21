@@ -28,7 +28,8 @@ Page({
     },
     onPullDownRefresh:function(){
       let that = this;
-      wx.stopPullDownRefresh();
+      that.initData();
+     
     },
     add:function(){
       let that = this;
@@ -67,14 +68,16 @@ Page({
         function (data) {
           that.setData({
             listLive: data.data
-          })
+          });
+          wx.stopPullDownRefresh();
         }
       );
       util.request(cfg.getCourseListByUserId, { page: page },
         function (data) {
           that.setData({
             listCourse: data.data
-          })
+          });
+          wx.stopPullDownRefresh();
         }
       );
     }
