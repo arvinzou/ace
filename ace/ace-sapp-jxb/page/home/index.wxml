@@ -1,11 +1,33 @@
 <view class='index'>
-  
-<navigator url="../live/index" class='navigator' hover-class="weui-cell_active">
- <view class="navigator-text">
-LIVE</view>
-      <view class="navigator-arrow"></view>
-</navigator>
-  <view class="btn-add" bindtap="add">
-      <image class="btn-img" src="../../image/add-red.png" />
+  <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view>
+  <view hidden="{{currentTab!==0}}" class='navbar-content'>
+    <view class='live-list'>
+      <block wx:for-items="{{listLive}}" wx:key="{{item.*}}">
+        <view class="live-item" data-id="{{item.id}}">
+          <image src="{{item.cover}}" mode="aspectFill" class='coverImg'/>
+            <view class="live-title">
+              <view>{{item.name}}</view>
+            </view>
+        </view>
+      </block>
     </view>
+
+  </view>
+  <view hidden="{{currentTab!==1}}" class='navbar-content'>
+   <view class='live-list'>
+      <block wx:for-items="{{listCourse}}" wx:key="{{item.*}}">
+        <view class="live-item" data-id="{{item.id}}">
+          <image src="{{item.cover}}" mode="aspectFill" class='coverImg'/>
+            <view class="live-title">
+              <view>{{item.name}}</view>
+            </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="btn-add" bindtap="add">
+    <image class="btn-img" src="../../image/add-red.png" />
+  </view>
 </view>

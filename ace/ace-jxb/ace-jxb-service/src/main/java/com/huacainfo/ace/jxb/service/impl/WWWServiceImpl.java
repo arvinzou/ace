@@ -244,6 +244,8 @@ public class WWWServiceImpl implements WWWService {
      */
     @Override
     public Map<String, Object> getLiveListByUserId(String userId, int page, Map<String, Object> p){
+        p.put("userId",userId);
+        this.logger.info("=================={}",p);
         Map<String, Object> rst = this.jxbDao.getLiveTotalNumByUserId(userId);
         Long totalNum = (Long) rst.get("totalNum");
         Long totalpage = this.calPage(totalNum, this.defaultPageSize);
@@ -268,6 +270,8 @@ public class WWWServiceImpl implements WWWService {
      */
     @Override
     public Map<String, Object> getCourseListByUserId(String userId, int page, Map<String, Object> p){
+        p.put("userId",userId);
+        this.logger.info("=================={}",p);
         Map<String, Object> rst = this.courseDao.getCourseTotalNum(userId);
         Long totalNum = (Long) rst.get("totalNum");
         Long totalpage = this.calPage(totalNum, this.defaultPageSize);

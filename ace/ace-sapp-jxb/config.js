@@ -27,6 +27,8 @@ var config = {
     updateCourseSapp: `${server}/jxb/www/jxb/updateCourseSapp.do`,
     geCoursById: `${server}/jxb/www/jxb/geCoursById.do`,
     geLiveById: `${server}/jxb/www/jxb/geLiveById.do`,
-    proxyService: `${server}/jxb/www/jxb/proxyService.do`
+    proxyService: `${server}/jxb/www/jxb/proxyService.do`,
+    getLiveListByUserId: `${server}/jxb/www/jxb/getLiveListByUserId.do`,
+    getCourseListByUserId: `${server}/jxb/www/jxb/getCourseListByUserId.do`
 };
 module.exports = config

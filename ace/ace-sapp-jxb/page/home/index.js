@@ -2,9 +2,12 @@ var util = require("../../util/util.js");
 let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
 const app = getApp();
+var page=1;
 Page({
     data: {
-        serverfile: cfg.serverfile
+        serverfile: cfg.serverfile,
+        currentTab:0,
+        navbar: ['直播', '课程']
     },
     onReady: function (res) {
         console.log('index.js.onReady');
@@ -21,6 +24,7 @@ Page({
     },
     onLoad: function () {
         var that = this; 
+        that.initData();
     },
     onPullDownRefresh:function(){
       let that = this;
@@ -44,5 +48,34 @@ Page({
           }
         }
       })
+    },
+     navbarTap: function (e) {
+      console.log(e);
+      let that = this;
+      if (that.data.currentTab == e.target.dataset.idx) {
+        return false;
+
+      } else {
+        that.setData({
+          currentTab: e.target.dataset.idx
+        })
+      }
+    },
+    initData:function(){
+      var that=this;
+      util.request(cfg.getLiveListByUserId, {page:page},
+        function (data) {
+          that.setData({
+            listLive: data.data
+          })
+        }
+      );
+      util.request(cfg.getCourseListByUserId, { page: page },
+        function (data) {
+          that.setData({
+            listCourse: data.data
+          })
+        }
+      );
     }
 });
