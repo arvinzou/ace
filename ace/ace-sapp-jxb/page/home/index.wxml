@@ -4,24 +4,32 @@
   </view>
   <view hidden="{{currentTab!==0}}" class='navbar-content'>
     <view class='live-list'>
-      <block wx:for-items="{{listLive}}" wx:key="{{item.*}}">
-        <view class="live-item" data-id="{{item.id}}">
-          <image src="{{item.cover}}" mode="aspectFill" class='coverImg'/>
+      
+        <view wx:for="{{listLive}}" wx:key="" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+          <view class="content">
+            <image src="{{item.cover}}" mode="aspectFill" class='coverImg' />
             <view class="live-title">
               <view>{{item.name}}</view>
             </view>
+          </view>
+          <view class="opt">
+            <view class="opt-btn btn-edit" catchtap="edit" data-id="{{item.id}}">编辑</view>
+            <view class="opt-btn btn-live" catchtap="live" data-id="{{item.id}}">直播</view>
+            <view class="opt-btn btn-del" catchtap="del" data-index="{{index}}">删除</view>
+          </view>
         </view>
-      </block>
     </view>
   </view>
   <view hidden="{{currentTab!==1}}" class='navbar-content'>
-   <view class='live-list'>
+    <view class='live-list'>
       <block wx:for-items="{{listCourse}}" wx:key="{{item.*}}">
-        <view class="live-item" data-id="{{item.id}}">
-          <image src="{{item.cover}}" mode="aspectFill" class='coverImg'/>
-            <view class="live-title">
-              <view>{{item.name}}</view>
-            </view>
+        <view class='live-item'>
+
+          <image src="{{item.cover}}" mode="aspectFill" class='coverImg' />
+          <view class="live-title">
+            <view>{{item.name}}</view>
+          </view>
+
         </view>
       </block>
     </view>
