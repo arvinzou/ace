@@ -104,20 +104,31 @@ public class HttpUtils {
 	}
 
 	public static String httpsGet(String url, int timeoutMillseconds,
-			int requestTimeoutMillseconds, String encoding)
+			int requestTimeoutMillseconds, String encoding,Map<String,String> header)
 			throws URISyntaxException, MalformedURLException, IOException {
 		RequestConfig.Builder builder = getRequestConfigBuider(
 				timeoutMillseconds, requestTimeoutMillseconds);
 		HttpGet httpGet = new HttpGet();
 		httpGet.setConfig(builder.build());
 		httpGet.setURI(new URI(url));
+		if(header!=null){
+			for (Map.Entry<String, String> entry : header.entrySet()) {
+				httpGet.addHeader(entry.getKey(),entry.getValue());
+			}
+		}
+
 
 		return sendHttpsGet(httpGet, encoding);
 	}
 
 	public static String httpsGet(String url) throws URISyntaxException,
 			MalformedURLException, IOException {
-		return httpsGet(url, 30 * 1000, 30 * 1000, "UTF-8");
+		return httpsGet(url, 30 * 1000, 30 * 1000, "UTF-8",null);
+	}
+
+	public static String httpsGet(String url,Map<String,String> header) throws URISyntaxException,
+			MalformedURLException, IOException {
+		return httpsGet(url, 30 * 1000, 30 * 1000, "UTF-8",header);
 	}
 
 	public static String httpGet(String url) throws URISyntaxException,
@@ -262,6 +273,6 @@ public class HttpUtils {
 
 	public static void main(String args[]) throws URISyntaxException,
 			MalformedURLException, IOException {
-        System.out.println(HttpUtils.sslPost("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx29ecb720b03ea466&secret=03ea9a47442c14208943043e62114fc6&code=0012s83S0BIVL92VMV1S0lg63S02s83a&grant_type=authorization_code", null, "utf-8"));
+       // System.out.println(HttpUtils.sslPost("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx29ecb720b03ea466&secret=03ea9a47442c14208943043e62114fc6&code=0012s83S0BIVL92VMV1S0lg63S02s83a&grant_type=authorization_code", null, "utf-8"));
     }
 }

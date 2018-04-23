@@ -1,48 +1,84 @@
 <view class='index'>
   <form catchsubmit="formSubmit" catchreset="formReset">
     <view class="kind-list">
+
       <view class="kind-list-item">
-        <textarea name="docText" value="{{docText}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入内容" style="height: 300rpx" />
-        <view class="weui-textarea-counter">{{max}}/500</view>
+        <input name="name" class="weui-flex__item-body" maxlength="10" placeholder="请输入课题名称" />
       </view>
       <view class="kind-list-item">
-        <view class="navbar" style='padding-top:{{pusherSizeH}}vh'>
-          <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+        <radio-group bindchange="mediTypeChange" name="mediType">
+          <label wx:for="{{mediTypeItems}}" wx:key="value" class='radio'>
+            <radio value="{{item.value}}" checked="{{item.checked}}" /> {{item.name}}
+          </label>
+        </radio-group>
+      </view>
+      <view class="kind-list-item">
+        <textarea name="introduce" value="{{formData.introduce}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入课程介绍" style="height: 300rpx" />
+        <view class="weui-textarea-counter">{{max}}/500</view>
+      </view>
+
+      <view class="kind-list-item">
+        <textarea name="remark" value="{{formData.remark}}" bindinput="remarkChange" maxlength="200" class="weui-textarea" placeholder="请输入课程简介" style="height: 100rpx" />
+        <view class="weui-textarea-counter">{{maxRemark}}/200</view>
+      </view>
+
+
+
+      <view class="kind-list-item" style='display: flex;flex-direction: row'>
+        <view class="packerDate">
+          内容类型
         </view>
-        <view hidden="{{currentTab!==0}}">
-          <view class="weui-uploader">
-            <view class="weui-uploader__hd">
-              <view class="weui-uploader__title"></view>
-              <view class="weui-uploader__info">{{files.length}}</view>
+        <view class="packerDate">
+          <picker bindchange="bindCategroyChange" name="category" value="{{categoryCodeIndex}}" range="{{categorys}}">
+            <view class="weui-select">{{categorys[categoryCodeIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+
+
+      <view class="kind-list-item">
+        <view class="weui-uploader">
+          <view class="weui-uploader__hd">
+            <view class="weui-uploader__title">封面</view>
+            <view class="weui-uploader__info">{{files.length}}</view>
+          </view>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files" id="uploaderFiles">
+              <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
+                <view class="cover" id="{{item}}">
+                  <image src="{{item}}" mode="aspectFill" class='coverImg' bindtap="previewImage" />
+                  <image class="removeImgBtn" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}" />
+                </view>
+              </block>
             </view>
-            <view class="weui-uploader__bd">
-              <view class="weui-uploader__files" id="uploaderFiles">
-                <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
-                  <view class="weui-uploader__file" id="{{item}}">
-                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" bindtap="previewImage" />
-                    <image class="btn-img-small" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}" />
-                  </view>
-                </block>
-              </view>
-              <view class="weui-uploader__input-box">
-                <view class="weui-uploader__input" bindtap="chooseImage"></view>
-              </view>
+            <view class="weui-uploader__input-box">
+              <view class="weui-uploader__input" bindtap="chooseImage"></view>
             </view>
           </view>
         </view>
-        <view hidden="{{currentTab!==1}}">
+      </view>
+
+
+      <view class="kind-list-item">
+        <view class="navbar">
+          <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+        </view>
+        <view hidden="{{currentTab!==0}}" class='navbar-content'>
+          <textarea name="mediUrl" value="{{formData.mediUrl}}" maxlength="200" class="weui-textarea" placeholder="请输入课程地址" style="height: 100rpx" />
+        </view>
+        <view hidden="{{currentTab!==1}}" class='navbar-content'>
           <view class="weui-uploader">
             <view class="weui-uploader__hd">
               <view class="weui-uploader__title"></view>
-             
+
             </view>
             <view class="weui-uploader__bd">
               <view class="weui-uploader__files" id="uploaderFilesVideo">
-        
+
                 <view style='position:relative;' class='{{displayVideo}} recorder'>
-                   <video src="{{mediUrl}}" style='width:100%;height:35vh' objectFit="contain" class='{{displayVideo}}'></video>
-            <cover-image class="removeImgBtnVideo {{displayVideo}}" bindtap="delVideo" src="../../image/del-red.png"/>
-         </view>
+                  <video src="{{mediUrl}}" style='width:100%;height:35vh' objectFit="contain" class='{{displayVideo}}'></video>
+                  <cover-image class="removeImgBtnVideo {{displayVideo}}" bindtap="delVideo" src="../../image/del-red.png" />
+                </view>
               </view>
               <view class="weui-uploader__input-box">
                 <view class="weui-uploader__input" bindtap="chooseVideo"></view>
@@ -51,21 +87,22 @@
           </view>
 
         </view>
-        <view hidden="{{currentTab!==2}}" class='recorder-box'>
-          <view style='position:relative;' class='{{displayAudio}} recorder'>
-            <audio src="{{mediUrl}}" name="录音" controls="{{1>0}}" class='{{displayAudio}}'></audio>
-            <cover-image class="removeImgBtn {{displayAudio}}" bindtap="delAideo" src="../../image/del-red.png"/>
-         </view>
-            
-          <view class='recorder'>
-            <image class="playimg" src="{{playimg}}" bindtap="startRecorder" />
-          </view>
-        </view>
+
+      </view>
+      <view class="kind-list-item">
+        <radio-group bindchange="costTypeChange" name="costType">
+          <label wx:for="{{costTypeItems}}" wx:key="value" class='radio'>
+            <radio value="{{item.value}}" checked="{{item.checked}}" /> {{item.name}}
+          </label>
+        </radio-group>
+      </view>
+      <view class="kind-list-item">
+        <input name="cost" value="{{formData.cost}}" class="weui-flex__item-body" maxlength="50" placeholder="请输入费用" />
       </view>
 
       <view class="kind-list-item weui-flex">
         <view class="weui-flex__item-icon">
-          <image class="iconList20" src="../../image/checkcode.png" />
+          <image class="icon" src="../../image/checkcode.png" />
         </view>
         <input name="captcha" type="number" class="weui-flex__item-body" maxlength="10" placeholder="验证码" />
         <image class="weui-vcode-img weui-flex__item-body" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width:90px;height:30px;text-align:right"></image>

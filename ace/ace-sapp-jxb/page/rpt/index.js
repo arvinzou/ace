@@ -343,5 +343,5 @@ Page({
         currentTab: e.target.dataset.idx
       })
     }
-  },
+  }
 });

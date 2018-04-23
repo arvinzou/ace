@@ -136,8 +136,9 @@ function security(role){
   }
   return true;
 }
-function login() {
+function login(callback) {
   var that = this;
+  var _callback = callback;
   wx.getLocation({
     type: 'gcj02',
     success: function (rst) {
@@ -160,9 +161,14 @@ function login() {
                   wx.setStorageSync('WX-SESSION-ID', res.data.value['3rd_session']);
                   wx.setStorageSync('userinfo', res.data.value['userinfo']);
                   console.log('login success', res);
+                  if (_callback){
+                    console.log('login callback');
+                    _callback(res);
+                  }
                 },
                 fail: function ({ errMsg }) {
-                  console.log('request fail', errMsg)
+                  console.log('request fail', errMsg);
+                  wx.showModal({ title: "提示", showCancel: false, content: "鉴权失败" });
                 }
               })
             }

@@ -24,13 +24,17 @@ Page({
     disabled: false,
     files: [],
     checkImageUrl: cfg.checkImageUrl,
+    userinfo:{},
+    formData:{
+     
+    },
     id: null,
     categoryItems: [
       { name: '视频直播', value: '2', checked: true},
       { name: '图文直播', value: '1' }
     ],
     date: util.formatDate(new Date()),
-    time: util.formatTime(new Date(),"h m:s"),
+    time: util.formatTime(new Date(),"h:m:s"),
     typeCodes: ["01", "02", "03", "04"],
     typeCodeIndex: 0,
     types: ["亲子关系", "婚姻家庭", "职场压力",'其他']
@@ -47,17 +51,47 @@ Page({
       }
     });
   },
-
+  initData:function(res){
+    console.log('initData');
+    var that = this;
+    var id = util.uuid();
+    var userinfo = wx.getStorageSync('userinfo');
+    that.setData({
+      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
+      checkImageUrl: cfg.checkImageUrl,
+      fileList: [],
+      userinfo: userinfo,
+      formData: {
+        id: id,
+        rtmpUrl: cfg.rtmpserver + userinfo.mobile + "?id=" + id
+      }
+    });
+    var location = that.data.userinfo.latitude + "," + that.data.userinfo.longitude;
+    util.request(cfg.proxyService, { url: "https://api.map.baidu.com/geocoder/v2/", ak: cfg.ak, location: location, output: 'json' },
+      function (data) {
+        console.log(data.result.formatted_address);
+        var formData = that.data.formData;
+        formData.addr = data.result.formatted_address;
+        that.setData({
+          formData
+        });
+      }
+    );
+  },
   onLoad: function (param) {
     var that = this;
     console.log('index.js.onLoad');
     console.log(param);
     this.setData(param);
-    this.setData({
-      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
-      checkImageUrl: cfg.checkImageUrl,
-      fileList: []
-    });
+    if (wx.getStorageSync('userinfo')){
+      console.log('logined');
+      that.initData(param);
+    }else{
+      console.log('logining');
+      util.login(function (res) {
+        that.initData(param);
+      });
+    }
   },
   formSubmit: function (e) {
     var that = this;
@@ -65,30 +99,17 @@ Page({
       loading: true,
       disabled: true
     });
-    var data = {};
-    data.imgs = [];
-    data.rpt = {};
-    data.captcha = e.detail.value.captcha;
-    data.rpt.rid = that.data.id;
-    data.rpt.uid = 'oFvIjw7bU8IN-GYgxYCwwf_fOKZY';
-    data.rpt.mediaContent = that.data.mediUrl;
-    data.rpt.content = e.detail.value.docText;
-
-    var files = that.data.files;
-    for (var i = 0; i < files.length; i++) {
-      data.imgs.push({ url: files[i], w: 0, h: 0 });
-    }
-    if (that.data.currentTab == 0) {
-      data.rpt.mediaType = '2';
-    }
-    if (that.data.currentTab == 1) {
-      data.rpt.mediaType = '1';
-    }
-    if (that.data.currentTab == 2) {
-      data.rpt.mediaType = '3';
-    }
+    var now = new Date();
+    now.setDate(now.getDate() + 10);
+    var data = e.detail.value;
+    data.id =that.data.formData.id;
+    data.imageSrc = that.data.files[0];
+    data.startTime = that.data.date+" "+that.data.time
+    data.endTime = util.formatTime(now,"Y-M-D h:m:s");
+    data.nop=0;
+    data.pop=0;
     console.log(data);
-    util.request(cfg.insertLiveRptSapp, { jsons: JSON.stringify(data) },
+    util.request(cfg.insertLiveSapp, { jsons: JSON.stringify(data) },
       function (data) {
         that.setData({
           loading: false,
@@ -97,14 +118,10 @@ Page({
         wx.showModal({
           title: '提示',
           content: data.errorMessage,
+          showCancel: false,
           success: function (res) {
-            if (res.confirm) {
-              fileList = [];
-              that.setData({
-                files: fileList,
-                checkImageUrl: cfg.checkImageUrl + "?id=" + util.uuid(),
-                docText: ''
-              });
+            if (res.confirm&&data.status==0) {
+              that.initData(that.data.param);
             }
           }
         })
@@ -227,7 +244,7 @@ Page({
   },
   bindTimeChange: function (e) {
     this.setData({
-      time: e.detail.value
+      time: e.detail.value+":00"
     })
   },
   bindTypeChange: function (e) {
