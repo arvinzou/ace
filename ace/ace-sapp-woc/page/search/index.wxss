@@ -18,6 +18,33 @@
 	height: 100rpx;
 	line-height:100rpx;
 }
+.chepai_num{
+    width: 11%;
+    height: 80rpx;
+    float: left;
+    line-height: 80rpx;
+    text-align: center;
+    border: 2rpx solid #3C82FC;
+}
+.chepai3{
+    margin-left: 6%;
+}
+.default{
+    color: #E4E6E9;
+}
+.tap_select{
+    color: #3C82FC;
+}
+.chepai2{
+   margin-left: 1%;
+   background-color: #3C82FC;
+   color: #7FAEFF;
+}
+.chepai1{
+    margin-left: 6%;
+    background-color: #3C82FC;
+    color: #7FAEFF;
+}
 .provinces{
     width: 90%;
 	overflow: hidden;
@@ -27,15 +54,37 @@
 	top: 450rpx;
 	left: 5%;
 	z-index: 10000;
+    color: #000000;
+}
+.charac{
+    width: 90%;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	padding:0 0;
+	position: absolute;
+	top: 450rpx;
+	left: 5%;
+	z-index: 10000;
+    color: #000000;
 }
 .pro_li{
 	font-size: 36rpx;
 	height: 70rpx;
-	width: 70rpx;
+	width: 10%;
 	line-height: 70rpx;
 	text-align: center;
 	border: 2rpx solid #E4E6E9;
-	margin: 5rpx;
+	margin: 1% 1.6%;
+	background-color:#fff; 
+}
+.pro_li_bank{
+    font-size: 36rpx;
+	height: 70rpx;
+	width: 10%;
+	line-height: 70rpx;
+	text-align: center;
+	/* border: 2rpx solid #E4E6E9; */
+	margin: 1% 1.6%;
 	background-color:#fff; 
 }
 .pro_close{
@@ -45,8 +94,7 @@
 	font-size: 32rpx;
 	text-align: center;
 	background-color: #fff;
-	border: 2rpx solid #E4E6E9;
-	margin: 5rpx ;
+    margin-left: 1.6%;
 }
 .pro_del{
 	width: 70rpx;
@@ -66,6 +114,7 @@
 	top:450rpx;
 	left: 5%;
 	z-index: 10000;
+    color: #000000;
 }
 .pro_ok{
 	width: 100rpx;
