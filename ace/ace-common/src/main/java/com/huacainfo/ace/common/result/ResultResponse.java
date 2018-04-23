@@ -12,6 +12,16 @@ public class ResultResponse implements java.io.Serializable {
     public ResultResponse() {
     }
 
+    public ResultResponse(MessageResponse response){
+        this.status = response.getStatus();
+        this.info = response.getErrorMessage();
+    }
+
+    public ResultResponse(int status, String info) {
+        this.status = status;
+        this.info = info;
+    }
+
     public ResultResponse(int status, String info, Object data) {
         this.status = status;
         this.info = info;

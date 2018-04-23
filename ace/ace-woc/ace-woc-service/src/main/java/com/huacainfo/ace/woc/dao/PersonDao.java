@@ -38,5 +38,24 @@ public interface PersonDao {
 
     Person findByPlateNo(String plateNo);
 
-    Map<String,Object> findWeChatInfo(String phoneNumber);
+    /**
+     * 含accessToken等信息
+     *
+     * @param phoneNumber
+     * @return
+     */
+    Map<String, Object> findWeChatInfo(String phoneNumber);
+
+    int isExitByMobile(String mobile);
+
+    /**
+     * 含微信用户主体信息
+     *
+     * @param mobile
+     * @return
+     */
+    Map<String, Object> findWxInfoByMobile(String mobile);
+
+    int updateWxInfoByOpenId(@Param("mobile") String mobile,
+                             @Param("openId") String openId);
 }
