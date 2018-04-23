@@ -451,11 +451,7 @@
     </select>
 
     <select id="getLiveTotalNumByUserId" resultType="map">
-        SELECT count(1) totalNum FROM live  where and createUserId=#{userId,jdbcType=VARCHAR}
-        <if test='type!=null and type!=""'>
-            and type like
-            concat('%',#{type,jdbcType=VARCHAR},'%')
-        </if>
+        SELECT count(1) totalNum FROM live  where  createUserId=#{userId,jdbcType=VARCHAR}
     </select>
 
 
@@ -526,9 +522,6 @@
         category,
         type,
         null watermarkConfig from live where createUserId=#{userId,jdbcType=VARCHAR}
-        <if test='type!=null and type!=""'>
-            and type like concat('%',#{type,jdbcType=VARCHAR},'%')
-        </if>
         order by status, startTime desc
         limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
 

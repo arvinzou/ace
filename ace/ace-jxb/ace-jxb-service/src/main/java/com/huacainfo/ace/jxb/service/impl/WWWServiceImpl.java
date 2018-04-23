@@ -100,7 +100,7 @@ public class WWWServiceImpl implements WWWService {
     public Map<String, Object> getLiveRptList(String rid, int page, Map<String, Object> p) {
         SqlSession session = this.sqlSession.getSqlSessionFactory()
                 .openSession(ExecutorType.REUSE);
-        Configuration configuration = session.getConfiguration(); //反射得到configuration ,然后
+        Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);
         LiveDao dao = session.getMapper(LiveDao.class);
         Map<String, Object> rst = dao.getLiveRptTotalNum(rid);
@@ -244,6 +244,8 @@ public class WWWServiceImpl implements WWWService {
      */
     @Override
     public Map<String, Object> getLiveListByUserId(String userId, int page, Map<String, Object> p){
+        p.put("userId",userId);
+        this.logger.info("=================={}",p);
         Map<String, Object> rst = this.jxbDao.getLiveTotalNumByUserId(userId);
         Long totalNum = (Long) rst.get("totalNum");
         Long totalpage = this.calPage(totalNum, this.defaultPageSize);
@@ -268,6 +270,8 @@ public class WWWServiceImpl implements WWWService {
      */
     @Override
     public Map<String, Object> getCourseListByUserId(String userId, int page, Map<String, Object> p){
+        p.put("userId",userId);
+        this.logger.info("=================={}",p);
         Map<String, Object> rst = this.courseDao.getCourseTotalNum(userId);
         Long totalNum = (Long) rst.get("totalNum");
         Long totalpage = this.calPage(totalNum, this.defaultPageSize);

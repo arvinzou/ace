@@ -105,6 +105,35 @@ function formatDate(date) {
     var day = date.getDate();
     return [year, month, day].map(formatNumber).join('-');
 }
+function getCurrentMonthFirstDate(date){
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    return year+'-'+month+'-'+'01';
+}
+function getCurrentQuarter(date){
+    var dateSection = [];
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    var day = date.getDate();
+    if(month >=1 && month <=3){
+        //1~3月份为一个季度
+        dateSection[0] = year+'-'+'01'+'-'+'01';
+        dateSection[1] = year+'-'+month+'-'+day;
+    }else if(month >=4 && month <=6){
+        //4~6月份为一个季度
+        dateSection[0] = year + '-' + '04' + '-' + '01';
+        dateSection[1] = year + '-' + month + '-' + day;
+    }else if(month >=7 && month <=9){
+        //7~9月份为一个季度
+        dateSection[0] = year + '-' + '07' + '-' + '01';
+        dateSection[1] = year + '-' + month + '-' + day;
+    }else if(month >=10 && month <=12){
+        //10~12月份为一个季度
+        dateSection[0] = year + '-' + '10' + '-' + '01';
+        dateSection[1] = year + '-' + month + '-' + day;
+    }
+    return dateSection;
+}
 function security(role){
   var userinfo = wx.getStorageSync('userinfo');
   console.log(userinfo);
@@ -171,7 +200,6 @@ function login() {
       })
     }
   });
-
 }
 module.exports = {
     formatTime: formatTime,
@@ -180,5 +208,7 @@ module.exports = {
     uuid: uuid,
     formatDate:formatDate,
     login:login,
-    security: security
+    security: security,
+    getCurrentMonthFirstDate: getCurrentMonthFirstDate,
+    getCurrentQuarter: getCurrentQuarter
 }

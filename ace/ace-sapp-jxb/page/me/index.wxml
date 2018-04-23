@@ -1,24 +1,6 @@
-<view class="contain">
-
-<scroll-view>
-
-<!--头部-->
-<view class="headerView">
- <image class="picture" src="{{userinfo.avatarUrl}}"></image>
- <label class="name">{{userinfo.name}}</label>
-</view>
-
-<!--表格
- <block wx:for-items="{{items}}" wx:key="item.id">   
-<view class="item">
- <image class="icon" src="{{item.icon}}"></image>
- <label>{{item.text}}</label>
-  <image class="arrow" src="../../image/0106arrow3x.png"></image>
-
-</view>
- </block>
--->
-
-</scroll-view>
-
+<view class="container">
+  <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{items}}" wx:key="">
+    <view class="content">{{item.content}}</view>
+    <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+  </view>
 </view>

@@ -29,7 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.huacainfo.ace.common.tools.HttpUtils;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -316,6 +317,7 @@ public class WWWController extends LiveBaseController {
 
 
 
+
     @RequestMapping(value = "/upload.do")
     @ResponseBody
     public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName, String marktext, String companyId)
@@ -541,5 +543,67 @@ public class WWWController extends LiveBaseController {
             return rst;
         }
         return this.wwwService.getCourseListByUserId(srt.getValue().getUserId(), page, p);
+    }
+
+    /**
+     * @throws
+     * @Title:geCoursById
+     * @Description: TODO(小程序根据主键获取课程)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @RequestMapping(value = "/geCoursById.do")
+    @ResponseBody
+    public Map<String, Object> geCoursById(String id) throws Exception {
+        Map<String, Object> rst =new HashedMap();
+        rst.put("status", 0);
+        rst.put("data",this.courseService.selectCourseByPrimaryKey(id).getValue());
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:geLiveById
+     * @Description: TODO(小程序根据主键获取直播)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @RequestMapping(value = "/geLiveById.do")
+    @ResponseBody
+    public Map<String, Object> geLiveById(String id) throws Exception {
+        Map<String, Object> rst =new HashedMap();
+        rst.put("status", 0);
+        rst.put("data",this.jxbService.selectLiveByPrimaryKey(id));
+        return rst;
+    }
+
+    @RequestMapping(value = "/proxyService.do")
+    public void proxyService(HttpServletResponse response,String url) throws Exception{
+        Map<String,String> header=new HashedMap();
+        header.put("Content-Type","application/json");
+        String body=HttpUtils.httpsGet(url+"?"+this.getUrlParamsByMap(this.getParams()),header);
+        response.getOutputStream().write(body.getBytes());
+    }
+
+    private  String getUrlParamsByMap(Map<String, Object> map) {
+        if (map == null) {
+            return "";
+        }
+        StringBuffer sb = new StringBuffer();
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            sb.append(entry.getKey() + "=" + entry.getValue());
+            sb.append("&");
+        }
+        String s = sb.toString();
+        if (s.endsWith("&")) {
+            s = org.apache.commons.lang.StringUtils.substringBeforeLast(s, "&");
+        }
+        return s;
     }
 }

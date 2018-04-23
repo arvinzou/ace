@@ -12,6 +12,7 @@ var config = {
     appid: 'wxcf3d50130f9844f5',
     appsecret: '10a109f311c9803c2a8fd17b14bf09dd',
     companyId: '0010007',
+    ak: 'cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB',
     frontColor: '#ffffff',
     backgroundColor: "#3C3C3C",
     loginUrl: `${server}/portal/www/authority.do`,
@@ -21,6 +22,13 @@ var config = {
     insertLiveRptSapp: `${server}/jxb/www/jxb/insertLiveRptSapp.do`,
     getLiveRptList: `${server}/jxb/www/jxb/getLiveRptList.do`,
     insertLiveSapp: `${server}/jxb/www/jxb/insertLiveSapp.do`,
-    insertCourseSapp: `${server}/jxb/www/jxb/insertCourseSapp.do`
+    insertCourseSapp: `${server}/jxb/www/jxb/insertCourseSapp.do`,
+    updateLiveSapp: `${server}/jxb/www/jxb/updateLiveSapp.do`,
+    updateCourseSapp: `${server}/jxb/www/jxb/updateCourseSapp.do`,
+    geCoursById: `${server}/jxb/www/jxb/geCoursById.do`,
+    geLiveById: `${server}/jxb/www/jxb/geLiveById.do`,
+    proxyService: `${server}/jxb/www/jxb/proxyService.do`,
+    getLiveListByUserId: `${server}/jxb/www/jxb/getLiveListByUserId.do`,
+    getCourseListByUserId: `${server}/jxb/www/jxb/getCourseListByUserId.do`
 };
 module.exports = config
