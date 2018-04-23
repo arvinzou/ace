@@ -488,7 +488,12 @@
         from traffic t
         LEFT JOIN monitor_site m ON t.monitorSiteId = m.id
         LEFT JOIN site s ON s.id = t.siteId
+        left join woc.vehicle v on v.plateNo = t.plateNo
+        left join woc.person p on v.ownerId = p.id
         where 1=1
+        <if test="condition.mobile!=null and condition.mobile!=''">
+            and p.phoneNumber = #{condition.mobile,jdbcType=VARCHAR}
+        </if>
         <if test="condition.plateNo!=null and condition.plateNo!=''">
             and t.plateNo like
             concat('%',#{condition.plateNo,jdbcType=VARCHAR},'%')
@@ -509,7 +514,7 @@
             and UNIX_TIMESTAMP(t.inspectTime) &lt;= UNIX_TIMESTAMP(#{condition.endDt,jdbcType=TIMESTAMP})
         </if>
 
-        ORDER BY m.createDate
+        ORDER BY m.createDate desc
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
@@ -517,6 +522,28 @@
     <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
+        from woc.traffic
+        where 1=1
+        <if test="condition.status!=null and condition.status!=''">
+            and status in
+            <foreach collection="condition.status" open="(" close=")" item="item" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="condition.overRate!=null and condition.overRate!=''">
+            and  overRate >= #{condition.overRate,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.startDt!=null and condition.startDt!=''">
+            and UNIX_TIMESTAMP(inspectTime) >= UNIX_TIMESTAMP(#{condition.startDt,jdbcType=TIMESTAMP})
+        </if>
+        <if test="condition.endDt!=null and condition.endDt!=''">
+            and UNIX_TIMESTAMP(inspectTime) &lt;= UNIX_TIMESTAMP(#{condition.endDt,jdbcType=TIMESTAMP})
+        </if>
+    </select>
+
+    <select id="selectVoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Vo_Column_List"/>
         from woc.traffic
         where 1=1
         <if test="condition.status!=null and condition.status!=''">

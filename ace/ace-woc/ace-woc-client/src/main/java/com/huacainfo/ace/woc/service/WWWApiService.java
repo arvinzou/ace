@@ -29,4 +29,16 @@ public interface WWWApiService {
      * @throws Exception
      */
     ResultResponse mobileRegister(String mobile, String captcha, String wxSessionId, WxUser curWxUser);
+
+    /**
+     * 查询车牌对应违章记s录
+     *
+     * @param captcha     验证码
+     * @param mobile      车主手机号码
+     * @param plateNo     车牌号
+     * @param wxSessionId
+     * @param curWxUser
+     * @return
+     */
+    ResultResponse findIllegalTraffic(String captcha, String mobile, String plateNo, String wxSessionId, WxUser curWxUser);
 }
