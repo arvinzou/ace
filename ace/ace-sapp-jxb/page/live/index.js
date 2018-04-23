@@ -110,16 +110,16 @@ Page({
       scrollTop: 1000
     });
   },
-  onLoad: function () {
+  onLoad: function (params) {
     var that = this;
     console.log('index.js.onLoad');
-    var id = "c7b43a21-552d-4e52-9845-93e85add6e25";
-    id = '9f4ebcc2-621b-4354-88ac-f2f7735e7e6b';
+   // var id = "c7b43a21-552d-4e52-9845-93e85add6e25";
+    //id = '9f4ebcc2-621b-4354-88ac-f2f7735e7e6b';
     that.setData({
-      id: id
+      id: params.id
     });
-    that.initData(id);
-    var url = "wss://" + cfg.websocketurl + "/jxb/websocket/" + id + "/" + wxuser.openid + "/msg";
+    that.initData(that.data.id);
+    var url = "wss://" + cfg.websocketurl + "/jxb/websocket/" + that.data.id + "/" + wxuser.openid + "/msg";
     console.log(url);
 
     openSocket.connect(function (data) { // WebSocket初始化连接

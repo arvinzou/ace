@@ -43,11 +43,11 @@ Page({
         if (!res.cancel) {
           if (res.tapIndex == 0) {
             wx.navigateTo({
-              url: '../liveAdd/index',
+              url: '../liveCsl/index?act=add',
             });
           } else if (res.tapIndex == 1) {
             wx.navigateTo({
-              url: '../courseAdd/index',
+              url: '../courseCsl/index?act=add',
             });
           }
         }
@@ -91,15 +91,29 @@ Page({
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
     //开始触摸时 重置所有删除
-    this.data.listLive.forEach(function (v, i) {
-      if (v.isTouchMove)//只操作为true的
-        v.isTouchMove = false;
-    })
-    this.setData({
-      startX: e.changedTouches[0].clientX,
-      startY: e.changedTouches[0].clientY,
-      listLive: this.data.listLive
-    })
+    var that=this;
+    if (that.data.currentTab==0){
+      that.data.listLive.forEach(function (v, i) {
+        if (v.isTouchMove)//只操作为true的
+          v.isTouchMove = false;
+      })
+      that.setData({
+        startX: e.changedTouches[0].clientX,
+        startY: e.changedTouches[0].clientY,
+        listLive: that.data.listLive
+      })
+    }else{
+      that.data.listCourse.forEach(function (v, i) {
+        if (v.isTouchMove)//只操作为true的
+          v.isTouchMove = false;
+      })
+      that.setData({
+        startX: e.changedTouches[0].clientX,
+        startY: e.changedTouches[0].clientY,
+        listCourse: that.data.listCourse
+      })
+    }
+    
   },
   //滑动事件处理
   touchmove: function (e) {
@@ -111,21 +125,40 @@ Page({
     var touchMoveY = e.changedTouches[0].clientY;//滑动变化坐标
     //获取滑动角度
     var angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
-    that.data.listLive.forEach(function (v, i) {
-      v.isTouchMove = false
-      //滑动超过30度角 return
-      if (Math.abs(angle) > 30) return;
-      if (i == index) {
-        if (touchMoveX > startX) //右滑
-          v.isTouchMove = false
-        else //左滑
-          v.isTouchMove = true
-      }
-    })
-    //更新数据
-    that.setData({
-      listLive: that.data.listLive
-    })
+    if (that.data.currentTab == 0) {
+      that.data.listLive.forEach(function (v, i) {
+        v.isTouchMove = false
+        //滑动超过30度角 return
+        if (Math.abs(angle) > 30) return;
+        if (i == index) {
+          if (touchMoveX > startX) //右滑
+            v.isTouchMove = false
+          else //左滑
+            v.isTouchMove = true
+        }
+      })
+      //更新数据
+      that.setData({
+        listLive: that.data.listLive
+      })
+    }else{
+      that.data.listCourse.forEach(function (v, i) {
+        v.isTouchMove = false
+        //滑动超过30度角 return
+        if (Math.abs(angle) > 30) return;
+        if (i == index) {
+          if (touchMoveX > startX) //右滑
+            v.isTouchMove = false
+          else //左滑
+            v.isTouchMove = true
+        }
+      })
+      //更新数据
+      that.setData({
+        listCourse: that.data.listCourse
+      })
+    }
+    
   },
   /**
    * 计算滑动角度
@@ -140,13 +173,31 @@ Page({
   },
   //删除事件
   del: function (e) {
-    this.data.listLive.splice(e.currentTarget.dataset.index, 1)
-    this.setData({
-      listLive: this.data.listLive
-    })
+    var that=this;
+    if (that.data.currentTab == 0) {
+      that.data.listLive.splice(e.currentTarget.dataset.index, 1)
+      that.setData({
+        listLive: that.data.listLive
+      })
+    }else{
+      that.data.listCourse.splice(e.currentTarget.dataset.index, 1)
+      that.setData({
+        listCourse: that.data.listCourse
+      })
+    }
   },
   edit:function(e){
     console.log(e);
+    var that = this;
+    if (that.data.currentTab == 0) {
+      wx.navigateTo({
+        url: '../liveCsl/index?act=edit&id=' + e.currentTarget.dataset.id
+      });
+    }else{
+      wx.navigateTo({
+        url: '../courseCsl/index?act=edit&id=' + e.currentTarget.dataset.id
+      });
+    }
   },
   live: function (e) {
     console.log(e);

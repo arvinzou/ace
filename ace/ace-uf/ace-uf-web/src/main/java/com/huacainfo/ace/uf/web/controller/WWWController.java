@@ -99,7 +99,7 @@ public class WWWController extends UfBaseController {
 		this.logger.info("{}",o);
 		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
 		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
-		this.logger.info("captcha->{}",captcha);
+		this.logger.info("captcha->{}",c aptcha);
 		this.logger.info("j_captcha_weui->{}",j_captcha_weui);
 		if(CommonUtils.isBlank(captcha)){
 			return new MessageResponse(1,"验证码不能为空！");

@@ -4,8 +4,8 @@
   </view>
   <view hidden="{{currentTab!==0}}" class='navbar-content'>
     <view class='live-list'>
-      
-        <view wx:for="{{listLive}}" wx:key="" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+
+      <navigator url="../live/index?id={{item.id}}" wx:for="{{listLive}}" wx:key=""  class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
           <view class="content">
             <image src="{{item.cover}}" mode="aspectFill" class='coverImg' />
             <view class="live-title">
@@ -17,7 +17,7 @@
             <view class="opt-btn btn-live" catchtap="live" data-id="{{item.id}}">直播</view>
             <view class="opt-btn btn-del" catchtap="del" data-index="{{index}}">删除</view>
           </view>
-        </view>
+      </navigator>
     </view>
   </view>
   <view hidden="{{currentTab!==1}}" class='navbar-content'>
