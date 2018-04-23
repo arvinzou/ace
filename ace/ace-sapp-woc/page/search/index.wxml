@@ -15,7 +15,14 @@
             </view>
             <view style='color:#798092;width:90%;margin:0 auto;'>请输入车牌号：</view>
             <view class="chepai">
-                <view class="tel" bindtap="d1">{{carNo}}</view>
+                <!-- <view class="tel" bindtap="d1">{{carNo}}</view> -->
+                <view class='chepai1 chepai_num' bindtap='d1'>{{sheng}}</view>
+                <view class='chepai2 chepai_num' bindtap='charac'>{{carNo_1}}</view>
+                <view class='chepai3 chepai_num {{clazz_2}}' bindtap='d3' data-name="carNo_2">{{carNo_2}}</view>
+                <view class='chepai4 chepai_num {{clazz_3}}' bindtap='d3' data-name="carNo_3">{{carNo_3}}</view>
+                <view class='chepai5 chepai_num {{clazz_4}}' bindtap='d3' data-name="carNo_4">{{carNo_4}}</view>
+                <view class='chepai6 chepai_num {{clazz_5}}' bindtap='d3' data-name="carNo_5">{{carNo_5}}</view>
+                <view class='chepai7 chepai_num {{clazz_6}}' bindtap='d3' data-name="carNo_6">{{carNo_6}}</view>
             </view>
             <view class='phoneContainer'>
                 <view>
@@ -35,22 +42,31 @@
         <!-- 省 -->
         <view class="provinces" hidden='{{hidden1}}'>
             <view class="pro_li lf" wx:for="{{item1}}" bindtap='sheng' data-sh="{{item}}">{{item}}</view>
+            <view class="pro_li_bank lf"></view>
+            <view class="pro_li_bank lf"></view>
             <!-- <view class="pro_del lf" bindtap='null'>清空</view> -->
             <view class="pro_close lf" bindtap='d2'>
-                <image src='../../image/close.png' style='width:70rpx; height:70rpx'></image>
+                <image src='../../image/backdel.png' style='width:60rpx; height:30rpx'></image>
             </view>
         </view>
-        <!-- 号码	 -->
+        <!--字母-->
+        <view class='charac' hidden='{{hidden3}}'>
+            <view class="pro_li lf" wx:for="{{item3}}" bindtap='sheng_charac' data-ch="{{item}}">{{item}}</view>
+            <view class="pro_li_bank lf"></view>
+            <view class="pro_close lf" bindtap='d2'>
+                <image src='../../image/backdel.png' style='width:60rpx; height:30rpx'></image>
+            </view>
+        </view>
+        <!-- 数字和字母	 -->
         <view class="keyNums" hidden='{{hidden2}}'>
-            <view class="pro_li lf" wx:for="{{item2}}" bindtap='other' data-ot="{{item}}">{{item}}</view>
-            <view class="bot">
-               
-                <view class="pro_ok lf" bindtap='ok'>
-                     <image src='../../image/ok.png' style='width:70rpx; height:70rpx'></image>
-                </view>
-                <view class="pro_d lf" bindtap='del'>
-                     <image src='../../image/backdel.png' style='width:90rpx; height:50rpx;padding-top:10rpx;'></image>
-                </view>
+            <view class="pro_li lf" wx:for="{{item2}}" bindtap='other' data-name="" data-ot="{{item}}">{{item}}</view>
+            <view class="pro_li_bank lf"></view>
+            <view class="pro_li_bank lf"></view>
+            <view class="pro_li_bank lf"></view>
+            <view class="pro_li_bank lf"></view>
+            <view class="pro_li_bank lf"></view>
+            <view class="pro_close lf" bindtap='d2'>
+                <image src='../../image/backdel.png' style='width:60rpx; height:30rpx'></image>
             </view>
         </view>
     </view>
@@ -58,7 +74,7 @@
     <!--超载记录列表-->
 
     <view class='record'>
-        <view class='recodeItem'>
+        <view class='recodeItem' hidden='{{recordHidden}}'>
             <view class='formTitle'>
                 <label style='color:#3C82FC;font-weight:normal'>/</label>
                 <label style='color:#3C82FB;font-weight:normal'>/</label>
@@ -67,7 +83,7 @@
                 <label style='color:#3C82FB;font-weight:normal'>/</label>
                 <label style='color:#3C82FC;font-weight:normal'>/</label>
             </view>
-            <view class='carNum'>{{carNo}}</view>
+            <view class='carNum' wx>{{carNo}}</view>
             <view class='totalNum'>
                 {{list.length}}条超载记录
 

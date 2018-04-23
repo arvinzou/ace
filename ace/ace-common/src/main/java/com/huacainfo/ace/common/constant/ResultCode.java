@@ -5,5 +5,5 @@ package com.huacainfo.ace.common.constant;
  */
 public interface ResultCode {
     int SUCCESS = 0;
-    int FAIL =-1;
+    int FAIL = 1;
 }

@@ -121,7 +121,7 @@ jQuery(function ($) {
                     sb('btn-view-deploy', true, 'glyphicon glyphicon-refresh');
                 },
                 success: function (rst, textStatus) {
-                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                    sb('btn-view-add-cases', false, 'glyphicon glyphicon-refresh');
                     if (rst) {
                         bootbox.dialog({
                             title: '系统提示',
@@ -137,14 +137,17 @@ jQuery(function ($) {
                                 }
                             }
                         });
-
+                        if (rst.status == 0) {
+                            jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+                        }
                     }
+                    reload();
                 },
                 complete: function (XMLHttpRequest, textStatus) {
-                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                    sb('btn-view-add-cases', false, 'glyphicon glyphicon-refresh');
                 },
                 error: function () {
-                    sb('btn-view-deploy', false, 'glyphicon glyphicon-refresh');
+                    sb('btn-view-add-cases', false, 'glyphicon glyphicon-refresh');
                 }
             });
         }

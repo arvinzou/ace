@@ -91,4 +91,5 @@ public interface AnalysisService {
      * @throws Exception
      */
     PageResult<SiteVo> allSite(SiteQVo condition, int start, int limit) throws Exception;
+
 }

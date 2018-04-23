@@ -1,7 +1,20 @@
 package com.huacainfo.ace.common.tools;
 
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+import org.apache.commons.lang.CharUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
 import java.io.*;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -10,22 +23,26 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.math.BigDecimal;
-
-import org.apache.commons.lang.CharUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
-import net.sourceforge.pinyin4j.PinyinHelper;
-import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
-import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
-import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 public class CommonUtils extends StringUtils {
+    public static final int IDENTIFY_CODE_TYPE_NUMBER = 0;
+
+    /**
+     * 获取随机验证码
+     *
+     * @param length 验证码长度
+     * @param type   验证码类型 默认为0
+     * @return
+     */
+    public static String getIdentifyCode(int length, int type) {
+        Random random = new Random();
+        StringBuilder code = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            code.append(String.valueOf(random.nextInt(10)));
+        }
+        return code.toString();
+    }
+
     public static String parseDate2String(Date date, String formatStr)
             throws ParseException {
         java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat(
@@ -376,7 +393,7 @@ public class CommonUtils extends StringUtils {
         return pwd.toString();
     }
 
-    public static long getRandomNum(int maxNum){
+    public static long getRandomNum(int maxNum) {
         Random r = new Random();
         return Long.valueOf(r.nextInt(maxNum));
     }
@@ -790,10 +807,11 @@ public class CommonUtils extends StringUtils {
 
     }
 
-    public static boolean isNumber(String str){
+    public static boolean isNumber(String str) {
         String reg = "^[0-9]+(.[0-9]+)?$";
         return str.matches(reg);
     }
+
     public static Date randomDate(String beginDate, String endDate) {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -811,6 +829,7 @@ public class CommonUtils extends StringUtils {
         }
         return null;
     }
+
     public static int[] getrandomarray(int log) {
         int[] result = new int[log];
         for (int i = 0; i < log; i++) {
@@ -824,11 +843,13 @@ public class CommonUtils extends StringUtils {
         }
         return result;
     }
+
     public static long getRandomNum(long Min, long Max) {
         long Range = Max - Min;
         double Rand = Math.random();
         return (Min + Math.round(Rand * Range));
     }
+
     public static long random(long begin, long end) {
         long rtn = begin + (long) (Math.random() * (end - begin));
         // 如果返回的是开始时间和结束时间，则递归调用本函数查找随机值
@@ -837,6 +858,7 @@ public class CommonUtils extends StringUtils {
         }
         return rtn;
     }
+
     public static String parseDate(Date date) {
         SimpleDateFormat sdf = null;
         try {
@@ -846,46 +868,51 @@ public class CommonUtils extends StringUtils {
             return "";
         }
     }
+
     public static String getPrettyNumber(String number) {
         return BigDecimal.valueOf(Double.parseDouble(number))
                 .stripTrailingZeros().toPlainString();
     }
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         System.out.println(CommonUtils.getPrettyNumber("8711.1900"));
 
 
     }
+
     /**
-     *获取文件后缀。
+     * 获取文件后缀。
      */
-    public static String getSuffix(String url){
-        int index=url.lastIndexOf(".");
-        return url.substring(index+1,url.length());
+    public static String getSuffix(String url) {
+        int index = url.lastIndexOf(".");
+        return url.substring(index + 1, url.length());
     }
+
     /**
      * 解析出url参数中的键值对
      * 如 "index.jsp?Action=del&id=123"，解析出Action:del,id:123存入map中
-     * @param URL  url地址
-     * @return  url请求参数部分
+     *
+     * @param URL url地址
+     * @return url请求参数部分
      * @author lzf
      */
-    public static Map<String, String> urlSplit(String URL){
+    public static Map<String, String> urlSplit(String URL) {
         Map<String, String> mapRequest = new HashMap<String, String>();
-        String[] arrSplit=null;
-        String strUrlParam=TruncateUrlPage(URL);
-        if(strUrlParam==null){
+        String[] arrSplit = null;
+        String strUrlParam = TruncateUrlPage(URL);
+        if (strUrlParam == null) {
             return mapRequest;
         }
-        arrSplit=strUrlParam.split("[&]");
-        for(String strSplit:arrSplit){
-            String[] arrSplitEqual=null;
-            arrSplitEqual= strSplit.split("[=]");
+        arrSplit = strUrlParam.split("[&]");
+        for (String strSplit : arrSplit) {
+            String[] arrSplitEqual = null;
+            arrSplitEqual = strSplit.split("[=]");
             //解析出键值
-            if(arrSplitEqual.length>1){
+            if (arrSplitEqual.length > 1) {
                 //正确解析
                 mapRequest.put(arrSplitEqual[0], arrSplitEqual[1]);
-            }else{
-                if(arrSplitEqual[0]!=""){
+            } else {
+                if (arrSplitEqual[0] != "") {
                     //只有参数没有值，不加入
                     mapRequest.put(arrSplitEqual[0], "");
                 }
@@ -896,18 +923,19 @@ public class CommonUtils extends StringUtils {
 
     /**
      * 去掉url中的路径，留下请求参数部分
+     *
      * @param strURL url地址
      * @return url请求参数部分
      * @author lzf
      */
-    private static String TruncateUrlPage(String strURL){
-        String strAllParam=null;
-        String[] arrSplit=null;
-        strURL=strURL.trim().toLowerCase();
-        arrSplit=strURL.split("[?]");
-        if(strURL.length()>1){
-            if(arrSplit.length>1){
-                for (int i=1;i<arrSplit.length;i++){
+    private static String TruncateUrlPage(String strURL) {
+        String strAllParam = null;
+        String[] arrSplit = null;
+        strURL = strURL.trim().toLowerCase();
+        arrSplit = strURL.split("[?]");
+        if (strURL.length() > 1) {
+            if (arrSplit.length > 1) {
+                for (int i = 1; i < arrSplit.length; i++) {
                     strAllParam = arrSplit[i];
                 }
             }

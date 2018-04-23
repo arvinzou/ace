@@ -358,4 +358,24 @@
         LEFT JOIN portal.wx_cfg c ON u.appid = c.appid
         WHERE p.phoneNumber = #{phoneNumber,jdbcType=VARCHAR}
     </select>
+
+    <select id="findWxInfoByMobile" resultType="java.util.Map" parameterType="java.lang.String">
+        SELECT
+            u.unionid, u.openid, u.appid, u.nickname, u.sex, u.city, u.province, u.country, u.headimgurl, u.access_token,
+            u.refresh_token, u.scope, u.expires_in,role, u.mobile
+        FROM portal.userinfo u
+        WHERE u.mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExitByMobile" resultType="int">
+        select count(*)
+        from person
+        where phoneNumber = #{mobile,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateWxInfoByOpenId" parameterType="java.lang.String">
+      update portal.userinfo
+        set mobile = #{mobile,jdbcType=VARCHAR}
+      where unionid = #{unionid,jdbcType=VARCHAR}
+    </update>
 </mapper>

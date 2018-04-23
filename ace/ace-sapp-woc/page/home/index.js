@@ -76,6 +76,27 @@ var cfg2 = {
 }
 
 Page({
+    onPullDownRefresh: function () {
+        this.setData({ 
+                        currentTab: 0,
+                        objectArray: [
+
+                        ],
+                        index: -1,    //默认不显示站点
+                        index1: -1,
+                        index2: -1,
+                        isFromSearch: true, //用来判断返回的超载记录是否是空的数组
+                        searchPageNum: 1,   // 设置加载的第几次，默认是第一次  
+                        callbackcount: 7,      //返回数据的个数  
+                        searchLoading: false, //"上拉加载"的变量，默认false，隐藏  
+                        searchLoadingComplete: false,  //“没有数据”的变量，默认false，隐藏 
+                        trafficList: [],
+                        winHeight: 500
+                        
+                    });
+        this.onLoad();
+        wx.stopPullDownRefresh();
+    },
     data: {
         isMainChartDisplay: true,
         currentTab: 0,
