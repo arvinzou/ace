@@ -119,6 +119,8 @@ Page({
         winHeight: 500
     },
     onReady: function (e) {
+        util.login();
+
         var windowWidth = 320;
         var that = this;
         try {
@@ -140,9 +142,8 @@ Page({
         /**
          * 检测次数
          */
-        // util.login();
         var that1 = this;
-        util.request(cfg.statisticsUrl, {},
+        util.request(cfg.statisticsUrl, {}, 'GET',
             function (data) {
                 console.log(data);
                 that1.setData({ statics_total: data });
@@ -155,7 +156,7 @@ Page({
         that2.siteLoad(startTime, endTime);
 
         var that4 = this;
-        util.request(cfg.intervalUrl, {},
+        util.request(cfg.intervalUrl, {}, 'GET',
             function (data) {
                 var retData = data.countMap;
                 var retKey = data.interval;
@@ -170,7 +171,7 @@ Page({
         /**
          * 查询所有站点信息
          */
-        util.request(cfg.allSiteUrl, {start: 0, limit: 9999},
+        util.request(cfg.allSiteUrl, {start: 0, limit: 9999},'GET',
             function (data) {
                 var siteRows = data.rows;
                 var sites = [];
@@ -234,7 +235,7 @@ Page({
     },
 
     siteLoad: function(startTime, endTime){
-        util.request(cfg.siteUrl, { startDt: startTime, endDt: endTime },
+        util.request(cfg.siteUrl, { startDt: startTime, endDt: endTime }, 'GET',
             function (data) {
                 var retData = data.siteList;
                 cfg1.categories.splice(0, cfg1.categories.length);
@@ -256,7 +257,7 @@ Page({
             index: e.detail.value
         });
         var siteId = that.data.objectArray[e.detail.value].id;
-        util.request(cfg.statisticsUrl, {siteId : siteId},
+        util.request(cfg.statisticsUrl, {siteId : siteId}, 'GET',
             function (data) {
                 console.log(data);
                 that.setData({ statics_total: data });
@@ -269,7 +270,7 @@ Page({
             index1: e.detail.value
         });
         var siteId = that.data.objectArray1[e.detail.value].id;
-        util.request(cfg.intervalUrl, { siteId: siteId },
+        util.request(cfg.intervalUrl, { siteId: siteId }, 'GET',
             function (data) {
                 var retData = data.countMap;
                 var retKey = data.interval;
@@ -300,14 +301,14 @@ Page({
      */
     getTraffics: function(pageindex, callbackcount, siteId, callback){
         if(siteId == '' || siteId == undefined){
-            util.request(cfg.illegalTrafficUrl, { start: pageindex, limit: callbackcount},
+            util.request(cfg.illegalTrafficUrl, { start: pageindex, limit: callbackcount}, 'GET',
                 function (data) {
                     //that3.setData({ detailData: data.rows });
                     callback(data.rows);
                 }
             )
         }else{
-            util.request(cfg.illegalTrafficUrl, { start: pageindex, limit: callbackcount, siteId },
+            util.request(cfg.illegalTrafficUrl, { start: pageindex, limit: callbackcount, siteId }, 'GET',
                 function (data) {
                     //that3.setData({ detailData: data.rows });
                     callback(data.rows);

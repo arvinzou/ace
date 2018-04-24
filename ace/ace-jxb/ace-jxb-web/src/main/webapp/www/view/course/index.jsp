@@ -51,7 +51,7 @@
     </div>
     <!--视频直播栏-->
     <div class="audioContent">
-       <%-- <div style="width: 50%;float: left;">
+      <div style="width: 50%;float: left;">
         <div style="width: 94%;  margin: 0 auto">
             <div class="audio">
                 <div class="audioContainer">
@@ -147,7 +147,7 @@
             </div>
         </div>
     </div>
-    </div>--%>
+    </div>
 
     <%--<div class="audioContent">
         <div class="col-xs-6 col-md-6 col-lg-6">

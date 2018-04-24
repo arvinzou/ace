@@ -56,30 +56,16 @@ Page({
   initAdd: function (param){
     var that = this;
     var id = util.uuid();
-    var formData = {};
-    var fileList = [];
     that.setData({
-      fileList: fileList,
       formData: {
         id: id,
         files: [],
         date: util.formatDate(new Date()),
         time: util.formatTime(new Date(), "h:m:s"),
         type: 0,
-        rtmpUrl: cfg.rtmpserver + userinfo.mobile + "?id=" + id
+        rtmpUrl: cfg.rtmpserver + that.data.userinfo.mobile + "?id=" + id
       }
     });
-    var location = that.data.userinfo.latitude + "," + that.data.userinfo.longitude;
-    util.request(cfg.proxyService, { url: "https://api.map.baidu.com/geocoder/v2/", ak: cfg.ak, location: location, output: 'json' },
-      function (data) {
-        console.log(data.result.formatted_address);
-        var formData = that.data.formData;
-        formData.addr = data.result.formatted_address;
-        that.setData({
-          formData
-        });
-      }
-    );
   },
   initEdit: function (param) {
     var that=this;
@@ -90,15 +76,9 @@ Page({
         formData.files = [formData.imageSrc];
         formData.date = formData.startTime.substring(0, 10);
         formData.time = formData.startTime.substring(11, 20);
-        for (var i = 0, len = that.data.categoryItems.length; i < len; ++i) {
-          if (that.data.categoryItems[i].value == formData.category){
-            that.data.categoryItems[i].checked=true;
-          }else{
-            that.data.categoryItems[i].checked =false;
-          }
-        }
+        formData.typeIndex = util.indexOf(that.data.typeCodes, formData.type);
         that.setData({
-          categoryItems: that.data.categoryItems,
+          categoryItems: util.initRadioGroupData(that.data.categoryItems, formData.category),
           formData
         });
       }
@@ -286,7 +266,7 @@ Page({
   bindTypeChange: function (e) {
     console.log('picker type code 发生选择改变，携带值为', e.detail.value);
     var that=this;
-    that.data.formData.type = e.detail.value;
+    that.data.formData.typeIndex = e.detail.value;
     that.setData({
       formData: that.data.formData
     })

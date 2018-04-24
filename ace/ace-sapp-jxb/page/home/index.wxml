@@ -5,33 +5,59 @@
   <view hidden="{{currentTab!==0}}" class='navbar-content'>
     <view class='live-list'>
 
-      <navigator url="../live/index?id={{item.id}}" wx:for="{{listLive}}" wx:key=""  class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
-          <view class="content">
-            <image src="{{item.cover}}" mode="aspectFill" class='coverImg' />
-            <view class="live-title">
-              <view>{{item.name}}</view>
-            </view>
-          </view>
-          <view class="opt">
-            <view class="opt-btn btn-edit" catchtap="edit" data-id="{{item.id}}">编辑</view>
-            <view class="opt-btn btn-live" catchtap="preview" data-id="{{item.id}}">直播</view>
-            <view class="opt-btn btn-del" catchtap="del" data-id="{{item.id}}" data-index="{{index}}">删除</view>
-          </view>
-      </navigator>
-    </view>
-  </view>
-  <view hidden="{{currentTab!==1}}" class='navbar-content'>
-    <view class='live-list'>
-      <block wx:for-items="{{listCourse}}" wx:key="{{item.*}}">
-        <view class='live-item'>
+      <navigator url="../live/index?id={{item.id}}" wx:for="{{listLive}}" wx:key="" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" style='height: 450rpx;'>
 
+        <view class="content">
           <image src="{{item.cover}}" mode="aspectFill" class='coverImg' />
           <view class="live-title">
             <view>{{item.name}}</view>
           </view>
-
         </view>
-      </block>
+        <view class="opt">
+          <view class="opt-btn btn-edit" catchtap="edit" data-id="{{item.id}}">编辑</view>
+          <view class="opt-btn btn-preview" catchtap="preview" data-id="{{item.id}}">直播</view>
+          <view class="opt-btn btn-del" catchtap="del" data-id="{{item.id}}" data-index="{{index}}">删除</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <view hidden="{{currentTab!==1}}" class='navbar-content'>
+
+
+
+    <view class='live-list'>
+      <navigator url="../live/index?id={{item.id}}" wx:for="{{listCourse}}" wx:key="" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" style="width: 50%;float:{{index%2==0?'left':'right'}};">
+
+
+         <view  class='content'>
+        <view style="width: 94%;  margin: 0 auto">
+          <view class="audio">
+            <view class="audioContainer">
+              <image src="{{item.cover}}" mode="aspectFill" style="height: 100%;width: 100%; object-fit: cover;" />
+            </view>
+            <text class="audioType">{{item.mediType=='1'?'视频':'音频'}}</text>
+          </view>
+          <view class="remark">
+            <view class="audioTitle">
+              {{item.name}}
+            </view>
+            <view class="audioPrice">
+              <view class="{{item.costType=='1'?'pay':'free'}}">
+                <text>{{item.costType=='1'?'¥'+item.cost:'免费'}}</text>
+              </view>
+              <view class="playsNum">
+                <text>{{item.demandNum}}人学过</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+        <view class="opt">
+          <view class="opt-btn btn-edit" catchtap="edit" data-id="{{item.id}}">编辑</view>
+          <view class="opt-btn btn-preview" catchtap="preview" data-id="{{item.id}}">预览</view>
+          <view class="opt-btn btn-del" catchtap="del" data-id="{{item.id}}" data-index="{{index}}">删除</view>
+        </view>
+      </navigator>
     </view>
   </view>
   <view class="btn-add" bindtap="add">
