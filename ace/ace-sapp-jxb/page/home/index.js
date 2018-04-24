@@ -3,6 +3,7 @@ let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
 const app = getApp();
 var page = 1;
+
 Page({
   data: {
     serverfile: cfg.serverfile,
@@ -180,6 +181,7 @@ Page({
     } else {
       url = cfg.deleteCourseById;
     }
+    console.log();
     util.request(url, { id: e.currentTarget.dataset.id},
       function (data) {
         if(data.status==1){
