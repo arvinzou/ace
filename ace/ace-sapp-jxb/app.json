@@ -4,8 +4,8 @@
     "page/me/index",
     "page/live/index",
     "page/rpt/index",
-    "page/liveAdd/index",
-    "page/courseAdd/index"
+    "page/liveCsl/index",
+    "page/courseCsl/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",

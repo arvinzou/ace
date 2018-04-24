@@ -24,20 +24,25 @@ Page({
     disabled: false,
     files: [],
     checkImageUrl: cfg.checkImageUrl,
+    displayVideo: 'hide',
     userinfo:{},
     formData:{
      
     },
     id: null,
-    categoryItems: [
-      { name: '视频直播', value: '2', checked: true},
-      { name: '图文直播', value: '1' }
+    mediTypeItems: [
+      { name: '音频', value: '1', checked: true},
+      { name: '视频', value: '2' }
     ],
-    date: util.formatDate(new Date()),
-    time: util.formatTime(new Date(),"h:m:s"),
-    typeCodes: ["01", "02", "03", "04"],
-    typeCodeIndex: 0,
-    types: ["亲子关系", "婚姻家庭", "职场压力",'其他']
+    costTypeItems: [
+      { name: '系列课程', value: '1', checked: true },
+      { name: '免费课程', value: '2' }
+    ],
+    categoryCodes: ["01", "02", "03", "04"],
+    categoryCodeIndex: 0,
+    categorys: ["亲子关系", "婚姻家庭", "职场压力",'其他'],
+    currentTab: 0,
+    navbar: ['地址', '上传']
   },
   onReady: function (res) {
     console.log('index.js.onReady');
@@ -63,20 +68,9 @@ Page({
       userinfo: userinfo,
       formData: {
         id: id,
-        rtmpUrl: cfg.rtmpserver + userinfo.mobile + "?id=" + id
+        mediUrl: cfg.server + userinfo.mobile + "?id=" + id
       }
     });
-    var location = that.data.userinfo.latitude + "," + that.data.userinfo.longitude;
-    util.request(cfg.proxyService, { url: "https://api.map.baidu.com/geocoder/v2/", ak: cfg.ak, location: location, output: 'json' },
-      function (data) {
-        console.log(data.result.formatted_address);
-        var formData = that.data.formData;
-        formData.addr = data.result.formatted_address;
-        that.setData({
-          formData
-        });
-      }
-    );
   },
   onLoad: function (param) {
     var that = this;
@@ -103,13 +97,12 @@ Page({
     now.setDate(now.getDate() + 10);
     var data = e.detail.value;
     data.id =that.data.formData.id;
-    data.imageSrc = that.data.files[0];
-    data.startTime = that.data.date+" "+that.data.time
-    data.endTime = util.formatTime(now,"Y-M-D h:m:s");
-    data.nop=0;
-    data.pop=0;
+    data.cover = that.data.files[0];
+    data.duration=0;
+    data.demandNum=0;
+    data.likeNum = 0;
     console.log(data);
-    util.request(cfg.insertLiveSapp, { jsons: JSON.stringify(data) },
+    util.request(cfg.insertCourseSapp, { jsons: JSON.stringify(data) },
       function (data) {
         that.setData({
           loading: false,
@@ -166,7 +159,7 @@ Page({
             },
             fail: function (res) {
               wx.hideLoading();
-              wx.showModal({ title: "提示", content: "上传失败" })
+              wx.showModal({ title: "提示", content: "上传失败", showCancel: false })
             }
           })
         }
@@ -219,14 +212,24 @@ Page({
       files: fileList
     });
   },
-  categoryChange: function (e) {
+  mediTypeChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
-    var categoryItems = this.data.categoryItems;
-    for (var i = 0, len = categoryItems.length; i < len; ++i) {
-      categoryItems[i].checked = categoryItems[i].value == e.detail.value;
+    var mediTypeItems = this.data.mediTypeItems;
+    for (var i = 0, len = mediTypeItems.length; i < len; ++i) {
+      mediTypeItems[i].checked = mediTypeItems[i].value == e.detail.value;
     }
     this.setData({
-      categoryItems: categoryItems
+      mediTypeItems: mediTypeItems
+    });
+  },
+  costTypeChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value);
+    var costTypeItems = this.data.costTypeItems;
+    for (var i = 0, len = costTypeItems.length; i < len; ++i) {
+      costTypeItems[i].checked = costTypeItems[i].value == e.detail.value;
+    }
+    this.setData({
+      costTypeItems: costTypeItems
     });
   },
   remarkChange: function (e) {
@@ -237,20 +240,63 @@ Page({
       });
     }
   },
-  bindDateChange: function (e) {
-    this.setData({
-      date: e.detail.value
-    })
-  },
-  bindTimeChange: function (e) {
-    this.setData({
-      time: e.detail.value+":00"
-    })
-  },
-  bindTypeChange: function (e) {
+  bindCategroyChange: function (e) {
     console.log('picker type code 发生选择改变，携带值为', e.detail.value);
     this.setData({
-      typeCodeIndex: e.detail.value
+      categoryCodeIndex: e.detail.value
     })
   },
+  navbarTap: function (e) {
+    console.log(e);
+    let that = this;
+    if (that.data.currentTab == e.target.dataset.idx) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.idx
+      })
+    }
+  },
+  delVideo: function () {
+    console.log("delVideo");
+    let that = this;
+    that.setData({ displayVideo: 'hide', mediUrl: null });
+  },
+  chooseVideo: function () {
+    let that = this;
+    wx.chooseVideo({
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        wx.showLoading({ title: "正在上传" });
+        var file = res.tempFilePath;
+        wx.uploadFile({
+          url: cfg.uploadUrl,
+          filePath: file,
+          name: 'file',
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
+          success: function (resp) {
+            console.log(resp);
+            wx.hideLoading();
+            var obj = JSON.parse(resp.data);
+            console.log(obj);
+            var formData = that.data.formData;
+            formData.mediUrl = cfg.serverfile + obj.file_path;
+            that.setData({
+              mediUrl: formData.mediUrl,
+              formData: formData,
+              displayVideo: 'show'
+            });
+          },
+          fail: function (res) {
+            wx.hideLoading();
+            wx.showModal({ title: "提示", content: "上传失败", showCancel: false})
+          }
+        })
+      }
+    });
+  }
 });
+

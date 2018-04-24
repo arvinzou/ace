@@ -376,6 +376,6 @@
     <update id="updateWxInfoByOpenId" parameterType="java.lang.String">
       update portal.userinfo
         set mobile = #{mobile,jdbcType=VARCHAR}
-      where openid = #{openId,jdbcType=VARCHAR}
+      where unionid = #{unionid,jdbcType=VARCHAR}
     </update>
 </mapper>

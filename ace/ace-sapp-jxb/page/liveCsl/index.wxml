@@ -28,8 +28,8 @@
           内容类型
         </view>
         <view class="packerDate">
-          <picker bindchange="bindTypeChange" name="type" value="{{typeCodeIndex}}" range="{{types}}">
-            <view class="weui-select">{{types[typeCodeIndex]}}</view>
+          <picker bindchange="bindTypeChange" name="type" value="{{formData.type}}" range="{{types}}">
+            <view class="weui-select">{{types[formData.type]}}</view>
           </picker>
         </view>
       </view>
@@ -39,13 +39,13 @@
         <view class="weui-uploader">
           <view class="weui-uploader__hd">
             <view class="weui-uploader__title">直播封面</view>
-            <view class="weui-uploader__info">{{files.length}}</view>
+            <view class="weui-uploader__info">{{formData.files.length}}</view>
           </view>
           <view class="weui-uploader__bd">
             <view class="weui-uploader__files" id="uploaderFiles">
-              <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
+              <block wx:for="{{formData.files}}" wx:for-index="idx" wx:key="*this">
                 <view class="cover" id="{{item}}">
-                  <image src="{{item}}" mode="aspectFill" class='coverImg' bindtap="previewImage" />
+                  <image src="{{serverfile}}{{item}}" data-id="{{item}}" mode="aspectFill" class='coverImg' bindtap="previewImage" />
                   <image class="removeImgBtn" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}" />
                 </view>
               </block>
@@ -62,8 +62,8 @@
             <view class="weui-label">开始日期</view>
           </view>
           <view class="weui-cell__bd">
-            <picker mode="date" value="{{formData.date}}" start="{{date}}" bindchange="bindDateChange">
-              <view class="weui-input">{{date}}</view>
+            <picker mode="date" value="{{formData.date}}" start="{{formData.date}}" bindchange="bindDateChange">
+              <view class="weui-input">{{formData.date}}</view>
             </picker>
           </view>
         </view>
@@ -72,8 +72,8 @@
             <view class="weui-label">开始时间</view>
           </view>
           <view class="weui-cell__bd">
-            <picker mode="time" value="{{time}}" start="{{time}}" bindchange="bindTimeChange">
-              <view class="weui-input">{{time}}</view>
+            <picker mode="time" value="{{formData.time}}" start="{{formData.time}}" bindchange="bindTimeChange">
+              <view class="weui-input">{{formData.time}}</view>
             </picker>
           </view>
         </view>
