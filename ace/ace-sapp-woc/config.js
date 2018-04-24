@@ -13,7 +13,9 @@ var config = {
     illegalTrafficUrl: `${server}/woc/www/data/illegalTraffic`,
     intervalUrl: `${server}/woc/www/data/interval`,
     illegalTrafficOneUrl:`${server}/woc/www/data/illegalTrafficOne`,
-    allSiteUrl: `${server}/woc/www/data/allSite`
+    allSiteUrl: `${server}/woc/www/data/allSite`,
+    sendCmccByMobile: `${server}/woc/www/api/sendCmccByMobile`,
+    findIllegalTraffic: `${server}/woc/www/api/findIllegalTraffic`
 
 };
 module.exports = config
