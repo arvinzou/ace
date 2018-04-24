@@ -621,8 +621,10 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public MessageResponse deleteCoursById(String id) throws Exception {
         SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
-        MessageResponse rst=this.courseService.deleteCourseByCourseId(id,srt.getValue());
-        return rst;
+        if(srt.getStatus()==1){
+            return srt;
+        }
+        return this.courseService.deleteCourseByCourseId(id,srt.getValue());
     }
 
     /**
@@ -639,7 +641,9 @@ public class WWWController extends LiveBaseController {
     @ResponseBody
     public MessageResponse deleteLiveById(String id) throws Exception {
         SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
-        MessageResponse rst=this.jxbService.deleteLiveByLiveId(id,srt.getValue());
-        return rst;
+        if(srt.getStatus()==1){
+            return srt;
+        }
+        return this.jxbService.deleteLiveByLiveId(id,srt.getValue());
     }
 }

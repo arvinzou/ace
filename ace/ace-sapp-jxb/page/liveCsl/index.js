@@ -107,7 +107,6 @@ Page({
   onLoad: function (param) {
     var that = this;
     console.log('index.js.onLoad');
-    console.log(util.extend({ name: "张三" }, { sex: "男" }));
     console.log(param);
     this.setData({param: param});
     if (wx.getStorageSync('userinfo')){

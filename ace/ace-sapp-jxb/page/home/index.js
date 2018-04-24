@@ -174,17 +174,36 @@ Page({
   //删除事件
   del: function (e) {
     var that=this;
+    var url = '';
     if (that.data.currentTab == 0) {
-      that.data.listLive.splice(e.currentTarget.dataset.index, 1)
-      that.setData({
-        listLive: that.data.listLive
-      })
-    }else{
-      that.data.listCourse.splice(e.currentTarget.dataset.index, 1)
-      that.setData({
-        listCourse: that.data.listCourse
-      })
+      url = cfg.deleteLiveById;
+    } else {
+      url = cfg.deleteCourseById;
     }
+    util.request(url, { id: e.currentTarget.dataset.id},
+      function (data) {
+        if(data.status==1){
+          wx.showModal({
+            title: '提示',
+            content: data.errorMessage,
+            showCancel: false
+          })
+        }else{
+          if (that.data.currentTab == 0) {
+            that.data.listLive.splice(e.currentTarget.dataset.index, 1)
+            that.setData({
+              listLive: that.data.listLive
+            })
+          } else {
+            that.data.listCourse.splice(e.currentTarget.dataset.index, 1)
+            that.setData({
+              listCourse: that.data.listCourse
+            })
+          }
+        }
+      }
+    );
+    
   },
   edit:function(e){
     console.log(e);
