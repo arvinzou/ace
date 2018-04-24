@@ -56,30 +56,16 @@ Page({
   initAdd: function (param){
     var that = this;
     var id = util.uuid();
-    var formData = {};
-    var fileList = [];
     that.setData({
-      fileList: fileList,
       formData: {
         id: id,
         files: [],
         date: util.formatDate(new Date()),
         time: util.formatTime(new Date(), "h:m:s"),
         type: 0,
-        rtmpUrl: cfg.rtmpserver + userinfo.mobile + "?id=" + id
+        rtmpUrl: cfg.rtmpserver + that.data.userinfo.mobile + "?id=" + id
       }
     });
-    var location = that.data.userinfo.latitude + "," + that.data.userinfo.longitude;
-    util.request(cfg.proxyService, { url: "https://api.map.baidu.com/geocoder/v2/", ak: cfg.ak, location: location, output: 'json' },
-      function (data) {
-        console.log(data.result.formatted_address);
-        var formData = that.data.formData;
-        formData.addr = data.result.formatted_address;
-        that.setData({
-          formData
-        });
-      }
-    );
   },
   initEdit: function (param) {
     var that=this;

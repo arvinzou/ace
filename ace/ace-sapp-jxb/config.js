@@ -27,7 +27,7 @@ var config = {
     updateCourseSapp: `${server}/jxb/www/jxb/updateCourseSapp.do`,
     getCoursById: `${server}/jxb/www/jxb/getCoursById.do`,
     getLiveById: `${server}/jxb/www/jxb/getLiveById.do`,
-    deleteCoursById: `${server}/jxb/www/jxb/deleteCoursById.do`,
+    deleteCourseById: `${server}/jxb/www/jxb/deleteCoursById.do`,
     deleteLiveById: `${server}/jxb/www/jxb/deleteLiveById.do`,
     proxyService: `${server}/jxb/www/jxb/proxyService.do`,
     getLiveListByUserId: `${server}/jxb/www/jxb/getLiveListByUserId.do`,

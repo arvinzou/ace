@@ -102,7 +102,6 @@
   width: 100%;
   overflow: hidden;
   margin-bottom: 20rpx;
-  height: 450rpx;
 }
 .content {
   width: 100%;
@@ -150,4 +149,80 @@
 .btn-edit{
   background-color: green;
   margin-bottom: 3rpx;
+}
+
+
+.audioContainer {
+	width: 100%;
+	height: 100%;
+}
+.audioContent {
+	width: 100%;
+  height: 600rpx;
+}
+
+.audio {
+	width: 99%;
+	height: 160rpx;
+	margin: 0 auto;
+	position: relative;
+	/*border:1px dashed #798092; */
+}
+
+
+.audioType {
+	text-align: center;
+	width: 60rpx;
+	height: 30rpx;
+	line-height: 30rpx;
+	background-color: #15BC83;
+	color: #FFFFFF;
+	position: absolute;
+	right: 10%;
+	bottom: 5%;
+  font-size: 20rpx;
+}
+.audioTitle {
+	width: 100%;
+	color: #1C2843;
+  font-size: 30rpx;
+	font-weight: bold;
+	margin-top: 11.25rpx;
+	margin-bottom: 7.5rpx;
+}
+.audioTitle p{
+	text-overflow : ellipsis; 
+  white-space : nowrap; 
+  overflow : hidden; 
+
+}
+.audioPrice {
+	width: 100%;
+	height: 45rpx;
+}
+
+.free {
+	font-family: "PingFang-SC-Medium";
+	font-size: 25rpx;
+	color: #15BC83;
+	font-weight: bold;
+	text-align: left;
+	float: left;
+}
+
+.pay {
+	font-family: "PingFang-SC-Medium";
+	font-size: 25rpx;
+	color: #FF7C12;
+	font-weight: bold;
+	text-align: left;
+	float: left;
+}
+
+.playsNum {
+	font-family: "PingFang-SC-Medium";
+	font-size: 20rpx;
+	color: #798092;
+	text-align: right;
+	float: right;
 }
