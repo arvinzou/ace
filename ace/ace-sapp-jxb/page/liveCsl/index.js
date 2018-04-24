@@ -83,10 +83,10 @@ Page({
   },
   initEdit: function (param) {
     var that=this;
-    util.request(cfg.geLiveById, {id: that.data.param.id},
+    util.request(cfg.getLiveById, {id: that.data.param.id},
       function (data) {
-        console.log(data.data.value);
-        var formData = data.data.value;
+        console.log(data.data);
+        var formData = data.data;
         formData.files = [formData.imageSrc];
         formData.date = formData.startTime.substring(0, 10);
         formData.time = formData.startTime.substring(11, 20);

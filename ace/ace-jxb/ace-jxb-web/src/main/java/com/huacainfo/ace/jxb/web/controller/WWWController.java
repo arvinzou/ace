@@ -547,7 +547,7 @@ public class WWWController extends LiveBaseController {
 
     /**
      * @throws
-     * @Title:geCoursById
+     * @Title:getCoursById
      * @Description: TODO(小程序根据主键获取课程)
      * @param: @param p
      * @param: @throws Exception
@@ -555,9 +555,9 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-04-18
      */
-    @RequestMapping(value = "/geCoursById.do")
+    @RequestMapping(value = "/getCoursById.do")
     @ResponseBody
-    public Map<String, Object> geCoursById(String id) throws Exception {
+    public Map<String, Object> getCoursById(String id) throws Exception {
         Map<String, Object> rst =new HashedMap();
         rst.put("status", 0);
         rst.put("data",this.courseService.selectCourseByPrimaryKey(id).getValue());
@@ -566,7 +566,7 @@ public class WWWController extends LiveBaseController {
 
     /**
      * @throws
-     * @Title:geLiveById
+     * @Title:getLiveById
      * @Description: TODO(小程序根据主键获取直播)
      * @param: @param p
      * @param: @throws Exception
@@ -574,12 +574,12 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-04-18
      */
-    @RequestMapping(value = "/geLiveById.do")
+    @RequestMapping(value = "/getLiveById.do")
     @ResponseBody
-    public Map<String, Object> geLiveById(String id) throws Exception {
+    public Map<String, Object> getLiveById(String id) throws Exception {
         Map<String, Object> rst =new HashedMap();
         rst.put("status", 0);
-        rst.put("data",this.jxbService.selectLiveByPrimaryKey(id));
+        rst.put("data",this.jxbService.selectLiveByPrimaryKey(id).getValue());
         return rst;
     }
 
@@ -605,5 +605,41 @@ public class WWWController extends LiveBaseController {
             s = org.apache.commons.lang.StringUtils.substringBeforeLast(s, "&");
         }
         return s;
+    }
+
+    /**
+     * @throws
+     * @Title:deleteCoursById
+     * @Description: TODO(小程序根据主键删除课程)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @RequestMapping(value = "/deleteCoursById.do")
+    @ResponseBody
+    public MessageResponse deleteCoursById(String id) throws Exception {
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        MessageResponse rst=this.courseService.deleteCourseByCourseId(id,srt.getValue());
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:deleteLiveById
+     * @Description: TODO(小程序根据主键删除直播)
+     * @param: @param p
+     * @param: @throws Exception
+     * @return: Map<String,Object>
+     * @author: 陈晓克
+     * @version: 2018-04-18
+     */
+    @RequestMapping(value = "/deleteLiveById.do")
+    @ResponseBody
+    public MessageResponse deleteLiveById(String id) throws Exception {
+        SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+        MessageResponse rst=this.jxbService.deleteLiveByLiveId(id,srt.getValue());
+        return rst;
     }
 }

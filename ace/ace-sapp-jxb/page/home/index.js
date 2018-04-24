@@ -199,7 +199,17 @@ Page({
       });
     }
   },
-  live: function (e) {
+  preview: function (e) {
     console.log(e);
+    var that = this;
+    if (that.data.currentTab == 0) {
+      wx.navigateTo({
+        url: '../live/index?id=' + e.currentTarget.dataset.id
+      });
+    } else {
+      wx.navigateTo({
+        url: '../course/index?id=' + e.currentTarget.dataset.id
+      });
+    }
   }
 });
