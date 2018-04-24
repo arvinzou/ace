@@ -185,8 +185,8 @@ Page({
                 util.request(cfg.findIllegalTraffic, { "plateNo": carNo, "mobile": that.data.mobile, "captcha": that.data.captcha }, 'GET',
                     function (data) {
                         if (data.info.indexOf("成功") > 0){
-                            if (res.data.length > 0) {
-                                    that.setData({ list: res.data, carNo: carNo });
+                            if (data.data.length > 0) {
+                                that.setData({ list: data.data, carNo: carNo });
                                 }
                         }else{
                             wx.showModal({
@@ -265,7 +265,7 @@ Page({
         var btnName = "获取验证码";
         if (countdown == 0) {
             btnName = "获取验证码";
-            countdown = 30;
+            countdown = 50;
             stop = true;
         } else {
             stop = false;
