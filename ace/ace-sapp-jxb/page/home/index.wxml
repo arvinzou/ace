@@ -15,7 +15,7 @@
         </view>
         <view class="opt">
           <view class="opt-btn btn-edit" catchtap="edit" data-id="{{item.id}}">编辑</view>
-          <view class="opt-btn btn-live" catchtap="preview" data-id="{{item.id}}">直播</view>
+          <view class="opt-btn btn-preview" catchtap="preview" data-id="{{item.id}}">直播</view>
           <view class="opt-btn btn-del" catchtap="del" data-id="{{item.id}}" data-index="{{index}}">删除</view>
         </view>
       </navigator>
@@ -35,7 +35,7 @@
             <view class="audioContainer">
               <image src="{{item.cover}}" mode="aspectFill" style="height: 100%;width: 100%; object-fit: cover;" />
             </view>
-            <text class="audioType">视频</text>
+            <text class="audioType">{{item.mediType=='1'?'视频':'音频'}}</text>
           </view>
           <view class="remark">
             <view class="audioTitle">
@@ -54,7 +54,7 @@
       </view>
         <view class="opt">
           <view class="opt-btn btn-edit" catchtap="edit" data-id="{{item.id}}">编辑</view>
-          <view class="opt-btn btn-live" catchtap="preview" data-id="{{item.id}}">预览</view>
+          <view class="opt-btn btn-preview" catchtap="preview" data-id="{{item.id}}">预览</view>
           <view class="opt-btn btn-del" catchtap="del" data-id="{{item.id}}" data-index="{{index}}">删除</view>
         </view>
       </navigator>

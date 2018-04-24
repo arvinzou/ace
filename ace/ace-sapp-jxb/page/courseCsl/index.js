@@ -22,13 +22,10 @@ Page({
     maxRemark: 0,
     loading: false,
     disabled: false,
-    files: [],
     checkImageUrl: cfg.checkImageUrl,
+    userinfo:wx.getStorageSync('userinfo'),
+    WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
     displayVideo: 'hide',
-    userinfo:{},
-    formData:{
-     
-    },
     id: null,
     mediTypeItems: [
       { name: '音频', value: '1', checked: true},
@@ -39,7 +36,6 @@ Page({
       { name: '免费课程', value: '2' }
     ],
     categoryCodes: ["01", "02", "03", "04"],
-    categoryCodeIndex: 0,
     categorys: ["亲子关系", "婚姻家庭", "职场压力",'其他'],
     currentTab: 0,
     navbar: ['地址', '上传']
@@ -59,24 +55,45 @@ Page({
   initData:function(res){
     console.log('initData');
     var that = this;
+    if (that.data.param.act == 'add') {
+      that.initAdd();
+    } else {
+      that.initEdit();
+    }
+  },
+  initAdd: function (param) {
+    var that = this;
     var id = util.uuid();
-    var userinfo = wx.getStorageSync('userinfo');
     that.setData({
-      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
-      checkImageUrl: cfg.checkImageUrl,
-      fileList: [],
-      userinfo: userinfo,
       formData: {
         id: id,
-        mediUrl: cfg.server + userinfo.mobile + "?id=" + id
+        files: [],
+        categoryCodeIndex:0,
+        mediUrl: cfg.serverfile + that.data.userinfo.mobile + "?id=" + id
       }
     });
+  },
+  initEdit: function (param) {
+    var that = this;
+    util.request(cfg.getCoursById, { id: that.data.param.id },
+      function (data) {
+        console.log(data.data);
+        var formData = data.data;
+        formData.files = [formData.cover];
+        formData.categoryCodeIndex = util.indexOf(that.data.categoryCodes, formData.category);
+        that.setData({
+          mediTypeItems: util.initRadioGroupData(that.data.mediTypeItems, formData.mediType),
+          costTypeItems: util.initRadioGroupData(that.data.costTypeItems, formData.costType),
+          formData
+        });
+      }
+    );
   },
   onLoad: function (param) {
     var that = this;
     console.log('index.js.onLoad');
     console.log(param);
-    this.setData(param);
+    this.setData({ param: param });
     if (wx.getStorageSync('userinfo')){
       console.log('logined');
       that.initData(param);
@@ -95,14 +112,20 @@ Page({
     });
     var now = new Date();
     now.setDate(now.getDate() + 10);
-    var data = e.detail.value;
-    data.id =that.data.formData.id;
-    data.cover = that.data.files[0];
-    data.duration=0;
-    data.demandNum=0;
-    data.likeNum = 0;
+    var data = util.extend(that.data.formData, e.detail.value);
+    data.cover = that.data.formData.files[0];
+    var url = '';
+    if (that.data.param.act == 'add') {
+      url = cfg.insertCourseSapp;
+      data.duration = 0;
+      data.demandNum = 0;
+      data.likeNum = 0;
+    } else {
+      url = cfg.updateCourseSapp;
+    }
+  
     console.log(data);
-    util.request(cfg.insertCourseSapp, { jsons: JSON.stringify(data) },
+    util.request(url, { jsons: JSON.stringify(data) },
       function (data) {
         that.setData({
           loading: false,
@@ -152,9 +175,9 @@ Page({
               wx.hideLoading();
               var obj = JSON.parse(resp.data);
               console.log(obj);
-              fileList.push(cfg.serverfile + obj.file_path);
+              that.data.formData.files.push(cfg.serverfile + obj.file_path);
               that.setData({
-                files: fileList
+                formData: that.data.formData
               });
             },
             fail: function (res) {
@@ -171,12 +194,12 @@ Page({
   previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.files // 需要预览的图片http链接列表
+      urls: this.data.fromData.files // 需要预览的图片http链接列表
     })
   },
   chooseImage: function () {
     let that = this;
-    var files = that.data.files;
+    var files = that.data.formData.files;
     if (files.length > 0) {
       wx.showModal({ title: "提示", showCancel:false,content: "封面限制为单个图片" });
       return ;
@@ -198,19 +221,14 @@ Page({
     var idx = e.target.dataset.index;
     console.log(idx);
     let that = this;
-    var files = that.data.files;
+    var files = that.data.formData.files;
     if (files.length > 0) {
       files.remove(idx);
-      fileList.remove(idx);
     }
-    that.setData({ files: files });
+    that.setData({ formData: that.data.formData });
   },
   formReset: function (e) {
-    console.log("clear");
-    fileList = [];
-    this.setData({
-      files: fileList
-    });
+
   },
   mediTypeChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
@@ -242,8 +260,10 @@ Page({
   },
   bindCategroyChange: function (e) {
     console.log('picker type code 发生选择改变，携带值为', e.detail.value);
+    var that=this;
+    that.data.formData.categoryCodeIndex= e.detail.value;
     this.setData({
-      categoryCodeIndex: e.detail.value
+      formData: that.data.formData
     })
   },
   navbarTap: function (e) {
@@ -285,7 +305,6 @@ Page({
             var formData = that.data.formData;
             formData.mediUrl = cfg.serverfile + obj.file_path;
             that.setData({
-              mediUrl: formData.mediUrl,
               formData: formData,
               displayVideo: 'show'
             });
