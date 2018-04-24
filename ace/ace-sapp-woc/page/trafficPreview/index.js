@@ -25,7 +25,7 @@ Page({
       }
     });
     var that = this;
-    util.request(cfg.illegalTrafficOneUrl, { "trafficId": that.data.id, "start": 0, "limit": 9999 },
+    util.request(cfg.illegalTrafficOneUrl, { "trafficId": that.data.id, "start": 0, "limit": 9999 }, 'GET',
         function (data) {
             console.log(data.value);
             that.setData({ o: data.value });

@@ -26,14 +26,14 @@
             </view>
             <view class='phoneContainer'>
                 <view>
-                    <input type='text' placeholder='请输入手机号'></input>
+                    <input type='text' placeholder='请输入手机号'  bindinput ="mobileInput"></input>
                 </view>
                 <view>
-                    <button class='getCheck' size='mini'>获取验证码</button>
+                    <button class='getCheck' size='mini' disabled="{{!stop}}" bindtap="getPhoneNumber">{{btnName}}</button>
                 </view>
             </view>
             <view class='randCode'>
-                <input type='text' placeholder='请输入验证码' style='width:100%'></input>
+                <input type='text' placeholder='请输入验证码' style='width:100%' bindinput ="captchaInput"></input>
             </view>
             <view class='searchBtn'>
                 <button size='default' bindtap="search">查询</button>
