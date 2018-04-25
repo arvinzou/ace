@@ -70,14 +70,14 @@
 
                 var series = chartOption.series;
                 chartType = series[seriesIndex].type; // 系列类型
-                dataLen = series[seriesIndex].data.length; // 某个系列的数据个数
-
+                dataLen = series[seriesIndex]/*.markPoint*/.data.length; // 某个系列的数据个数
                 var tipParams = {seriesIndex: seriesIndex};
                 switch (chartType) {
                     case 'map':
                     case 'pie':
                     case 'chord':
-                        tipParams.name = series[seriesIndex].markPoint.data[dataIndex].name;
+                        console.log(dataIndex);
+                        tipParams.name = series[seriesIndex]/*.markPoint*/.data[dataIndex].name;
                         break;
                     case 'radar': // 雷达图
                         tipParams.seriesIndex = seriesIndex;
@@ -90,6 +90,7 @@
 
                 // 显示 tooltip
                 tipParams.type = 'showTip';
+                console.log(tipParams);
                 chart.dispatchAction(tipParams);
 
                 dataIndex = (dataIndex + 1) % dataLen;

@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8"/>
     <title></title>
     <link href="css/index.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.slimscroll.min.js"></script>
     <script type="application/javascript" src="js/echarts-tooltip-carousel.js"></script>
     <!--<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>-->
     <script src="js/echarts.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -17,15 +21,15 @@
     </div>
 </div>
 <div class="body-div">
-    <div class="left-container container">
-        <div class="chart-container">
+    <div class="left-wrappers wrappers">
+        <div class="chart-wrappers">
             <div class="chart-view">
                 <div class="chart-title">
 							<span>
 								现场执法监控一
 							</span>
                 </div>
-                <video src="img/1.mp4" autoplay="true" loop muted></video>
+                <video class="live1" src="img/1.mp4" autoplay="true" loop muted></video>
             </div>
             <div class="chart-angle chart-angle-top-mark chart-angle-left-mark">
 
@@ -43,15 +47,15 @@
 
             </div>
         </div>
-        <div class="chart-container">
+        <div class="chart-wrappers">
             <div class="chart-view">
                 <div class="chart-title">
 							<span>
 								现场执法监控二
 							</span>
                 </div>
-                <video src="http://mp4.vjshi.com/2017-06-19/10b533b358b6b7e4a8fe947958feaaf4.mp4" autoplay="true" loop
-                       muted></video>
+                <video class="live2" src="http://mp4.vjshi.com/2017-06-19/10b533b358b6b7e4a8fe947958feaaf4.mp4"
+                       autoplay="true" loop muted></video>
             </div>
             <div class="chart-angle chart-angle-top-mark chart-angle-left-mark">
 
@@ -69,15 +73,15 @@
 
             </div>
         </div>
-        <div class="chart-container">
+        <div class="chart-wrappers">
             <div class="chart-view">
                 <div class="chart-title">
 							<span>
 								现场执法监控三
 							</span>
                 </div>
-                <video src="http://mp4.vjshi.com/2016-04-25/0ae9d131a192c74f741c1a9e40fc9ab9.mp4" autoplay="true" loop
-                       muted></video>
+                <video class="live3" src="http://mp4.vjshi.com/2016-04-25/0ae9d131a192c74f741c1a9e40fc9ab9.mp4"
+                       autoplay="true" loop muted></video>
             </div>
             <div class="chart-angle chart-angle-top-mark chart-angle-left-mark">
 
@@ -97,7 +101,7 @@
         </div>
 
     </div>
-    <div class="mid-contrainer container">
+    <div class="mid-contrainer wrappers">
         <div class="top-module">
             <div class="number-chart-one">
                 <span>检测次数</span>
@@ -154,8 +158,8 @@
         </div>
     </div>
 
-    <div class="right-container container">
-        <div class="chart-container">
+    <div class="right-wrappers wrappers">
+        <div class="chart-wrappers">
             <div class="chart-view">
                 <div class="chart-title">
 							<span>
@@ -182,7 +186,7 @@
 
             </div>
         </div>
-        <div class="chart-container">
+        <div class="chart-wrappers">
             <div class="chart-view">
                 <div class="chart-title">
 							<span>
@@ -207,7 +211,7 @@
 
             </div>
         </div>
-        <div class="chart-container">
+        <div class="chart-wrappers">
             <div class="chart-view">
                 <div class="chart-title">
 							<span>
@@ -235,8 +239,78 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-title">
+                    通行记录明细
+                </div>
+                <div class="modal-table">
+                    <div class="thead-wrappers">
+                        <table class="table table-striped">
+                            <tr>
+                                <td style="width: 18%;">检查时间</td>
+                                <td style="width: 12%;">车牌号</td>
+                                <td style="width: 10%;">方向</td>
+                                <td style="width: 10%;">轴数</td>
+                                <td style="width: 13;">总质量(kg)</td>
+                                <td style="width: 12%;">超限(kg)</td>
+                                <td style="width: 10%;">超限率</td>
+                                <td style="width: 15%;">速度(km/h)</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tbody-wrappers" id="scrollbar">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <td style="width: 18%;"></td>
+                                <td style="width: 12%;"></td>
+                                <td style="width: 10%;"></td>
+                                <td style="width: 10%;"></td>
+                                <td style="width: 13%;"></td>
+                                <td style="width: 12%;"></td>
+                                <td style="width: 10%;"></td>
+                                <td style="width: 15%;"></td>
+                            </tr>
+                            </thead>
+                            <tbody id="passList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <div class="close-btn" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade show" id="myModalVideo" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-title">
+                    通行记录明细
+                    <button class="previewLive btn btn-info btn-sm" style="float: right;margin: 10px 20px 0px;">固定到主屏
+                    </button>
+                </div>
+                <div class="modal-video">
+                    <video src="http://mp4.vjshi.com/2017-06-19/10b533b358b6b7e4a8fe947958feaaf4.mp4" autoplay="true"
+                           loop muted></video>
+                </div>
+                <div>
+                    <div class="close-btn" data-dismiss="modal" aria-label="Close">
+                        &times;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 <script type="application/javascript" src="./js/index.js"></script>
 <script type="application/javascript" src="./js/chart.js"></script>
 <script type="application/javascript" src="js/ajaxdata.js"></script>
+
 </html>
