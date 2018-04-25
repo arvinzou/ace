@@ -12,6 +12,10 @@ import java.util.Map;
 public interface SiteDao {
     int deleteByPrimaryKey(String id);
 
+    int checkpointsNumAdd(String id);
+
+    int checkpointsNumSub(String id);
+
     int insert(Site record);
 
     int insertSelective(Site record);

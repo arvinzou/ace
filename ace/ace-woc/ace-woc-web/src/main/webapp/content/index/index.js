@@ -1,7 +1,6 @@
 jQuery(function ($) {
     initNoticeTopList1();
     initNoticeTopList2();
-    launchExample();
 
 
     $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {

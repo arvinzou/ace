@@ -197,7 +197,7 @@ function loadView(id) {
                     value = rsd(value, '83');
                 }
                 if (key == 'status') {
-                    value == "1" ? "正常" : "关闭";
+                    value = (value == "2" ? "转为案件" : value == "1" ? "未转为案件" : "删除");
                 }
                 if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);

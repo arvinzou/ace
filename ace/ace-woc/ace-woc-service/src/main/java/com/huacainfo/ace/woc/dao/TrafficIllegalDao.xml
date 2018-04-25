@@ -28,7 +28,8 @@
     <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         <include refid="Vo_Column_List"/>
-        <include refid="whereCondition"/>
+        <include refid="whereCondition_vo"/>
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from traffic_illegal
@@ -205,6 +206,12 @@
     left join woc.site s on m.siteId = s.id
     where 0=0
 </sql>
+
+    <sql id="whereCondition_vo">
+        from woc.traffic_illegal t
+        left join woc.traffic m on t.trafficId = m.id
+        left join woc.site s on m.siteId = s.id
+    </sql>
 
     <select id="findList" resultMap="BaseResultMapVo">
         select m.* from(

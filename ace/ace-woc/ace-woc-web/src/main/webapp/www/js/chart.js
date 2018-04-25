@@ -328,8 +328,8 @@ var optionMap = {
         trigger: 'none',
         showDelay: 0,
         hideDelay: 2000,
+        alwaysShowContent: true,
         backgroundColor: 'rgba(255,0,0,0)',
-        position: [90, 380],
         /*formatter: '<div class="tooltip-map">' +
             '<div class="tooltip-title">' +
             '<span>{@name}</span>' +
@@ -382,25 +382,57 @@ var optionMap = {
         },
         data: [],
         markPoint: {
-            symbol: 'circle',
-            symbolSize: 10,
+            symbolSize: 25,
             itemStyle: {
                 normal: {
-                    borderColor: '#FFF100',
-                    borderWidth: 0, // 标注边线线宽，单位px，默认为1
+                    color: 'orange',
                     label: {
                         show: false
-                    }
+                    },
                 },
                 emphasis: {
-                    borderColor: '#FFF100',
-                    borderWidth: 6,
+                    color: '#ff0',
                     label: {
                         show: false
-                    }
+                    },
                 }
             },
-            data: []
+            data: [{
+                symbol: 'pin',
+                name: "大堰垱超限检测站",
+                value: 9,
+                //siteId:
+                coord: [111.641135, 29.746159],
+                tooltip: { // Series config.
+                    trigger: 'item',
+                    position: [90, 380],
+                },
+            },
+                {
+                    symbol: 'triangle',
+                    symbolSize: 15,
+                    name: "熊家湾村站点",
+                    coord: [111.653709, 29.74083],
+                    tooltip: { // Series config.
+                        trigger: 'item',
+                        formatter: '{b}',
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: 'red',
+                            label: {
+                                show: false
+                            },
+                        },
+                        emphasis: {
+                            color: '#ff0',
+                            label: {
+                                show: false
+                            },
+                        }
+                    },
+                },
+            ]
         },
         textFixed: {
             '澧西街道': [0, 30],
@@ -417,8 +449,8 @@ function loadMap() {
     $.get('geojson/china-main-city/430723.json', function (geoJson) {
         echarts.registerMap('澧县', geoJson);
         myMap.setOption(optionMap);
-//		tools.loopShowTooltip(myMap, optionMap, {
-//			loopSeries: true
-//		});
+        //		tools.loopShowTooltip(myMap, optionMap, {
+        //			loopSeries: true
+        //		});
     });
 }
