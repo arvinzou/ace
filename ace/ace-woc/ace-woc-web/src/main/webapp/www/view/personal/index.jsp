@@ -19,7 +19,7 @@
 					<div class="home_top">
 						<div class="user_info">
 							<div class="user_img">
-								<img src="${pageContext.request.contextPath}/www/personal/img/header_img.png" />
+								<img id="headImg" src="${pageContext.request.contextPath}/www/personal/img/header_img.png" />
 							</div>
 							<div class="user_name">
 								小武先森
@@ -31,15 +31,15 @@
 			<div class="badding" >
 				<div class="badding_info">还未绑定任何车辆</div>
 				<div class="badding_opt">
-					<button id="bandBtn" onclick="location.href='${pageContext.request.contextPath}/www/view/personal/banding.html'">立即绑定</button>
+					<button id="bandBtn" onclick="location.href='${pageContext.request.contextPath}/www/view/personal/banding.jsp'">立即绑定</button>
 				</div>
 			</div>
-			<div class="cancle" hidden="true">
+			<div class="cancle" hidden="true" id="banded">
 				<div class="carInfo">
-					<span>湘N88888</span>
-					<button id="cancelBand">取消绑定</button>
+					<span id="driverLicence"></span><br />
+					<button id="cancelBand" onclick="cancelBand();">取消绑定</button>
 				</div>
-				<div class="info">已绑定车辆</div>
+				<!--<div class="info">已绑定车辆</div>-->
 			</div>
 			<div class="footer">
 				绑定后如有违章会实时推送相关违章详情
