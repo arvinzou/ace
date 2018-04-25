@@ -2,6 +2,7 @@ var myGauge;
 var myBar;
 var myLine;
 var myPie;
+var myMap;
 
 $(function () {
     myGauge = echarts.init(document.getElementById('transfinite'));
@@ -329,18 +330,32 @@ var optionMap = {
         hideDelay: 2000,
         backgroundColor: 'rgba(255,0,0,0)',
         position: [90, 380],
-        formatter: '<div class="tooltip-map">' +
-        '<div class="tooltip-title">' +
-        '<span>{b}</span>' +
-        '</div>' +
-        '<div class="tooltip-warp">' +
-        '<p><span class="msg">通行记录（{c}）</span><span class="infobtn"><a href="#">查看详情</a></span></p>' +
-        '<p><span class="msg">超限数（1）      </span><span class="infobtn"><a href="#">查看详情</a></span></p>' +
-        '</div>' +
-        '<div class="tooltip-xc">' +
-        '<a href="#">查看现场监控</a>' +
-        '</div>' +
-        '</div>',
+        /*formatter: '<div class="tooltip-map">' +
+            '<div class="tooltip-title">' +
+            '<span>{@name}</span>' +
+            '</div>' +
+            '<div class="tooltip-warp">' +
+            '<p><span class="msg">通行记录（{@count}）</span><span class="infobtn"><a href="javascript:preview(\'' + 123 + '\',\'' + 123 + '\')">查看详情</a></span></p>' +
+            '<p><span class="msg">超限数（1）      </span><span class="infobtn"><a href="javascript:preview(\'' + 123 + '\',\'' + 12312 + '\')">查看详情</a></span></p>' +
+            '</div>' +
+            '<div class="tooltip-xc">' +
+            '<a href="#">查看现场监控</a>' +
+            '</div>' +
+            '</div>',*/
+        formatter: function (params) {
+            return '<div style="z-index=0;" class="tooltip-map">' +
+                '<div class="tooltip-title">' +
+                '<span>' + params.data.name + '</span>' +
+                '</div>' +
+                '<div class="tooltip-warp">' +
+                '<p><span class="msg">通行记录（' + params.data.count + '）</span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\')">查看详情</a></span></p>' +
+                '<p><span class="msg">超限数（' + params.data.count + '）      </span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\',\'0\')">查看详情</a></span></p>' +
+                '</div>' +
+                '<div class="tooltip-xc">' +
+                '<a href="javascript:siteLive(\'' + params.data.siteId + '\')">查看现场监控</a>' +
+                '</div>' +
+                '</div>';
+        },
     },
     series: [{
         name: '澧县地图',
@@ -385,31 +400,7 @@ var optionMap = {
                     }
                 }
             },
-            data: [{
-                name: "大堰垱超限检测站",
-                value: 9,
-                coord: [111.641135, 29.746159],
-                tooltip: { // Series config.
-                    trigger: 'item',
-                },
-            },
-                {
-                    name: "水泗村站点",
-                    value: 9,
-                    coord: [111.654911, 29.727266],
-                    tooltip: { // Series config.
-                        trigger: 'item',
-                    },
-                },
-                {
-                    name: "熊家湾村站点",
-                    value: 9,
-                    coord: [111.653709, 29.74083],
-                    tooltip: { // Series config.
-                        trigger: 'item',
-                    },
-                },
-            ]
+            data: []
         },
         textFixed: {
             '澧西街道': [0, 30],
@@ -422,10 +413,12 @@ var optionMap = {
 };
 
 function loadMap() {
-    var myMap = echarts.init(document.getElementById('mapChart'));
+    myMap = echarts.init(document.getElementById('mapChart'));
     $.get('geojson/china-main-city/430723.json', function (geoJson) {
         echarts.registerMap('澧县', geoJson);
         myMap.setOption(optionMap);
-        //tools.loopShowTooltip(myMap,optionMap,{loopSeries: true});
+//		tools.loopShowTooltip(myMap, optionMap, {
+//			loopSeries: true
+//		});
     });
 }
