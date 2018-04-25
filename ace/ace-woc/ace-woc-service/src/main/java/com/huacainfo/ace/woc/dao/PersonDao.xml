@@ -373,9 +373,26 @@
         where phoneNumber = #{mobile,jdbcType=VARCHAR}
     </select>
 
-    <update id="updateWxInfoByOpenId" parameterType="java.lang.String">
+    <update id="updateMobileByOpenId" parameterType="java.lang.String">
       update portal.userinfo
         set mobile = #{mobile,jdbcType=VARCHAR}
       where unionid = #{unionid,jdbcType=VARCHAR}
     </update>
+
+    <select id="findUserInfoByOpenId" resultType="java.util.Map" parameterType="java.lang.String">
+        SELECT
+        u.unionid, u.openid, u.appid, u.nickname, u.sex, u.city, u.province, u.country, u.headimgurl, u.access_token,
+        u.refresh_token, u.scope, u.expires_in,role, u.mobile
+        FROM portal.userinfo u
+        WHERE u.openid = #{openid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByMobile" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List_Vo"/>
+        from person p
+        left join portal.province a on p.areaCode=a.code
+        left join portal.department d on p.companyId=d.department_id
+        where  p.phoneNumber = #{mobile,jdbcType=VARCHAR}
+    </select>
 </mapper>
