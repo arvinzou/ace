@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.huacainfo.ace.common.model.UserProp;
 import org.apache.ibatis.annotations.Param;
 
 import com.huacainfo.ace.portal.model.Role;
@@ -97,10 +98,21 @@ public interface UsersDao {
 	public int updateCurSyid(@Param("syid") String syid,
 			@Param("userId") String userId);
 
-	public int updateUserOpenId(
-							 @Param("userId") String userId,@Param("openId") String openId);
+	public int updateUserOpenId(@Param("userId") String userId,@Param("openId") String openId);
+
+
+	public int updateUserAppOpenId(@Param("userId") String userId,@Param("appOpenId") String appOpenId);
+
+
 
 	List<Map<String,Object>> selectWxUser(@Param("condition") Map<String,Object> condition);
+
+	List<Map<String,Object>> selectAppWxUser(@Param("condition") Map<String,Object> condition);
+
+	List<Map<String,Object>> selectAllAppWxUserList(UserProp userProp);
+
+	List<Map<String,Object>> selectAllWxUserList(UserProp userProp);
+
 
 
 }

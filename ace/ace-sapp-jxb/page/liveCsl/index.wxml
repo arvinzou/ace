@@ -28,8 +28,8 @@
           内容类型
         </view>
         <view class="packerDate">
-          <picker bindchange="bindTypeChange" name="type" value="{{formData.type}}" range="{{types}}">
-            <view class="weui-select">{{types[formData.type]}}</view>
+          <picker bindchange="bindTypeChange" name="type" value="{{typeCodes[formData.typeIndex]}}" range="{{types}}">
+            <view class="weui-select">{{types[formData.typeIndex]}}</view>
           </picker>
         </view>
       </view>

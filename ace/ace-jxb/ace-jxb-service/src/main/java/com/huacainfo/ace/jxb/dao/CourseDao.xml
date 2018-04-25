@@ -21,7 +21,7 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.jxb.model.Course">
     <result column="introduce" jdbcType="LONGVARCHAR" property="introduce" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.jxb.model.Course">
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.jxb.vo.CourseVo">
 
   </resultMap>
   <sql id="Base_Column_List">
@@ -81,7 +81,7 @@
       and createDate = #{condition.createDate,jdbcType=TIMESTAMP}
     </if>
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select 
     <include refid="Base_Column_List" />
     ,
@@ -117,12 +117,8 @@
       duration = #{duration,jdbcType=INTEGER},
       costType = #{costType,jdbcType=VARCHAR},
       cost = #{cost,jdbcType=DECIMAL},
-      demandNum = #{demandNum,jdbcType=INTEGER},
-      likeNum = #{likeNum,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP}
+      introduce = #{introduce,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="findList" resultMap="BaseResultMapVo">

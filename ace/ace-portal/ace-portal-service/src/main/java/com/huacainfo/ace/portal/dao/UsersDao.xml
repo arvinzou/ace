@@ -191,6 +191,7 @@
         left join province s2
         on users.area_code=s2.code
         left join userinfo s3 on users.openId=s3.openid
+        left join wx_user s4 on t.appOpenId=s4.openId
         where USERS.STAUTS='1' and USERS.cur_syid=#{condition.curSyid}
 
         <if test='condition.name!=null and condition.name!=""'>
@@ -224,6 +225,7 @@
         select USERS.user_id,
         USERS.account,
         USERS.openId,
+        t.appOpenId,
         USERS.sex,
         USERS.id_card,
         USERS.name,
@@ -243,7 +245,9 @@
         users.telphone,
         users.qq,
         s3.nickname,
-        s3.headimgurl
+        s3.headimgurl,
+        s4.nickName,
+        s4.avatarUrl
         <include refid="usersPagingWhereCondition"/>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -265,6 +269,7 @@
         t.account,
         t.sex,
         t.openId,
+        t.appOpenId,
         t.id_card,
         t.name,
         t.department_id,
@@ -283,11 +288,14 @@
         t.user_level,
         t.create_time,
         s3.nickname,
-        s3.headimgurl
+        s3.headimgurl,
+        s4.nickName,
+        s4.avatarUrl
         from users t left join department s
         on t.department_id=s.department_id
         left join province s2 on t.area_code=s2.code
         left join userinfo s3 on t.openId=s3.openid
+        left join wx_user s4 on t.appOpenId=s4.openId
         where t.user_id = #{userId}
 
     </select>
@@ -400,10 +408,46 @@
         where user_id = #{userId,jdbcType=VARCHAR}
     </update>
 
+    <update id="updateUserAppOpenId">
+        update users
+        set
+        appOpenId = #{appOpenId,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
     <select id="selectWxUser" resultType="map">
         select  t.unionid, t.openid, t.appid, t.nickname, t.sex, t.city, t.province, t.country, t.headimgurl, t.access_token,
         t.refresh_token, t.scope, t.expires_in,t.role from userinfo t inner join users a
         on t.openid=a.openId
         where a.user_id=#{condition.userId}
     </select>
+
+    <update id="updateUserOpenId">
+        update users
+        set
+        openId = #{openId,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectAppWxUser" resultType="map">
+        select  t.unionId, t.openId, t.appId, t.nickName,t.role,t.mobile,t.avatarUrl from wx_user t inner join users a
+        on t.openId=a.appOpenId
+        where a.user_id=#{condition.userId}
+    </select>
+
+    <select id="selectAllAppWxUserList" resultType="map">
+        select  t.unionId, t.openId, t.appId, t.nickName,t.role,t.mobile,t.avatarUrl from wx_user t where t.appId in(
+        select appId from wx_cfg where deptId=#{corpId}
+        )
+    </select>
+
+    <select id="selectAllWxUserList" resultType="map">
+        select t.unionid, t.openid, t.appid, t.nickname,t.role,t.mobile,t.headimgurl from userinfo t where t.appid in
+        (
+        select appId from wx_cfg where deptId=#{corpId}
+        )
+    </select>
+
+
+
 </mapper>

@@ -234,6 +234,22 @@ function extend(o1,o2){
   }
   return strMapToObj(map);
 }
+function initRadioGroupData(list,value){
+  for (var i = 0, len = list.length; i < len; ++i) {
+    if (list[i].value == value) {
+      list[i].checked = true;
+    } else {
+      list[i].checked = false;
+    }
+  }
+  return list;
+}
+function indexOf(arr, item) {
+  console.log("========indexOf=========");
+  console.log(arr);
+  console.log(item);
+  return arr.indexOf(item);
+}
 module.exports = {
     formatTime: formatTime,
     formatLocation: formatLocation,
@@ -248,5 +264,7 @@ module.exports = {
     jsonToMap: jsonToMap,
     strMapToObj: strMapToObj,
     objToStrMap: objToStrMap,
-    extend: extend
+    extend: extend,
+    initRadioGroupData: initRadioGroupData,
+    indexOf: indexOf
 }

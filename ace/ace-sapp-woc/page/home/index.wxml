@@ -2,7 +2,7 @@
     <view class='section'>
         <picker bindchange="bindPickerChange" value="{{objectArray[index].id}}" range="{{objectArray}}" data-selecthx="{{objectArray[index].id}}" range-key="{{'siteName'}}">
             <view class="section_title_1">
-                <image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;' /> {{objectArray[index].siteName}}数据统计
+                <image src='../../image/title_guide.png' style='width:6rpx;height:28rpx;padding-right:10rpx;' /> {{objectArray[index].siteName}}数据统计
                 <image src='../../image/down.png' style='width:25rpx;height:18rpx;padding-left:10rpx;' />
             </view>
         </picker>
@@ -27,7 +27,7 @@
     <view>
         <view class='site'>
             <view class='section_title'>
-                <image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;' />站点超载情况</view>
+                <image src='../../image/title_guide.png' style='width:6rpx;height:28rpx;padding-right:10rpx;' />站点超载情况</view>
             <view class='swiper-tab'>
                 <view class="swiper-tab-item{{currentTab == 0 ? '.active':''}} day" data-current="0" bindtap="clickTab">日</view>
                 <view class="swiper-tab-item{{currentTab == 1 ? '.active':''}} month" data-current="1" bindtap="clickTab">月</view>
@@ -40,7 +40,7 @@
         <view class='site'>
              <picker bindchange="bindPickerChange1" value="{{objectArray1[index1].id}}" range="{{objectArray1}}" data-selecthx="{{objectArray1[index1].siteName}}" range-key="{{'siteName'}}">
                 <view class='section_title'>
-                    <image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;' />{{objectArray1[index1].siteName}}时段超载情况
+                    <image src='../../image/title_guide.png' style='width:6rpx;height:28rpx;padding-right:10rpx;' />{{objectArray1[index1].siteName}}时段超载情况
                     <image src='../../image/down.png' style='width:25rpx;height:18rpx;padding-left:10rpx;' />
                 </view>
             </picker>
@@ -52,7 +52,7 @@
         <view class='tabContent'>
             <picker bindchange="bindPickerChange2" value="{{objectArray2[index2].id}}" range="{{objectArray2}}" data-selecthx="{{objectArray2[index2].siteName}}" range-key="{{'siteName'}}">
                 <view class='section_title'>
-                    <image src='../../image/title_guide.png' style='width:10rpx;height:30rpx;padding-right:10rpx;' />{{objectArray2[index2].siteName}}数据详情
+                    <image src='../../image/title_guide.png' style='width:6rpx;height:28rpx;padding-right:10rpx;' />{{objectArray2[index2].siteName}}数据详情
                     <image src='../../image/down.png' style='width:25rpx;height:18rpx;padding-left:10rpx;' />
                 </view>
             </picker>
