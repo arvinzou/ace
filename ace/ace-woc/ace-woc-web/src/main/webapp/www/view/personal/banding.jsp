@@ -1,15 +1,16 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>个人中心</title>
-		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="js/init-rem.js"></script>
-		<script type="text/javascript" src="js/personal.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/personal.css"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/personal/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/personal/js/init-rem.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/personal/js/personal.js"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/www/personal/css/personal.css"/>
 	</head>
 	<body>
 		<div class="index">

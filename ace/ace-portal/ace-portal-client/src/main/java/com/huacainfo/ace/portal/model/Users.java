@@ -59,6 +59,8 @@ public class Users implements java.io.Serializable{
 	private String formId;
 
 	private String openId;
+
+	private String appOpenId;
 	
 	
 	public String getCurSyid() {
@@ -221,7 +223,13 @@ public class Users implements java.io.Serializable{
 		this.openId = openId;
 	}
 
+	public String getAppOpenId() {
+		return appOpenId;
+	}
 
+	public void setAppOpenId(String appOpenId) {
+		this.appOpenId = appOpenId;
+	}
 
 	@Override
 	public String toString() {

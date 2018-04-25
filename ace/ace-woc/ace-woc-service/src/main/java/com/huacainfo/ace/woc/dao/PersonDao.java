@@ -56,6 +56,10 @@ public interface PersonDao {
      */
     Map<String, Object> findWxInfoByMobile(String mobile);
 
-    int updateWxInfoByOpenId(@Param("mobile") String mobile,
+    int updateMobileByOpenId(@Param("mobile") String mobile,
                              @Param("unionid") String unionid);
+
+    Map<String,Object> findUserInfoByOpenId(String openId);
+
+    PersonVo findByMobile(String mobile);
 }
