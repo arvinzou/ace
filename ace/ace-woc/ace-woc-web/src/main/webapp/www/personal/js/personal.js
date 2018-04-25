@@ -1,4 +1,4 @@
-var server = "https://zx.huacainfo.com";
+var server = "http://zx.huacainfo.com";
 var countdown = 50;
 var stop = true;
 
@@ -37,5 +37,9 @@ function settime(){
 }
 function bandFun(){
 	
-
+	var mobile = $("#mobile").val();
+	var captcha = $("#codeNum").val();
+	$.post( server+"/woc/www/api/mobileRegister",{mobile:mobile, captcha: captcha},function(result){
+	    	console.log(result);
+	 });
 }
