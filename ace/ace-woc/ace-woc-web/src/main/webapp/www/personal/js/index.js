@@ -15,6 +15,7 @@ window.onload = function(){
 	    	}
 	    	if(result.data.mobile != ''){
 	    		mobile = result.data.mobile;
+	    		$(".user_name").text(result.data.name);
 	    		//手机号码不为空，证明有绑定信息
 	    		$(".badding").attr("hidden",true);
 	    		$(".cancle").attr("hidden",false);
