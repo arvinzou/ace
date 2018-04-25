@@ -1,4 +1,4 @@
-var server = "https://zx.huacainfo.com";
+var server = "http://zx.huacainfo.com";
 var countdown = 50;
 var stop = true;
 
@@ -9,6 +9,7 @@ function getNumFun(){
 	}else{
 		$.post( server+"/woc/www/api/sendCmccByMobile",{mobile:mobile},function(result){
 	    	console.log(result);
+	    	alert(result.info);
 	  	});
 	  settime();	
 	}
@@ -37,5 +38,13 @@ function settime(){
 }
 function bandFun(){
 	
-
+	var mobile = $("#mobile").val();
+	var captcha = $("#codeNum").val();
+	$.post( server+"/woc/www/api/mobileRegister",{mobile:mobile, captcha: captcha},function(result){
+	    	console.log(result);
+	    	alert(result.info);
+	    	if(result.status == '0'){
+	    		location.href='/woc/www/view/personal/index.jsp'
+	    	}
+	 });
 }

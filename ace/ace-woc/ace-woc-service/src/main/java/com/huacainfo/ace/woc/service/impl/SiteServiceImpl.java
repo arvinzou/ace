@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.dao.SiteDao;
 import com.huacainfo.ace.woc.model.Site;
@@ -73,20 +74,20 @@ public class SiteServiceImpl implements SiteService {
 	public MessageResponse insertSite(Site o, UserProp userProp)
 			throws Exception {
 		o.setId(UUID.randomUUID().toString());
-		//o.setId(String.valueOf(new Date().getTime()));
-		
 		int temp = this.siteDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "卡点档案名称重复！");
 		}
 		o.setCreateDate(new Date());
 		o.setLastModifyDate(new Date());
-		o.setStatus("1");
+		if (CommonUtils.isBlank(o.getStatus())) {
+			return new MessageResponse(1, "站点类型不能为空！");
+		}
+		o.setCheckpointsNum(0);
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
 		this.siteDao.insertSelective(o);
-		this.dataBaseLogService.log("添加卡点档案", "卡点档案", "", o.getSiteName(),
-				o.getSiteName(), userProp);
+		this.dataBaseLogService.log("添加卡点档案", "卡点档案", "", o.getSiteName(), o.getSiteName(), userProp);
 		return new MessageResponse(0, "添加卡点档案完成！");
 	}
     /**

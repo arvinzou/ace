@@ -46,9 +46,9 @@ function updata() {
             ;
             optionBar.xAxis[0].data = siteBar;
             optionBar.series[0].data = dataBar;
-            optionMap.series[0].markPoint.data = dataMap;
+            //optionMap.series[0].markPoint.data = dataMap;
             myBar.setOption(optionBar);
-            myMap.setOption(optionMap);
+            //myMap.setOption(optionMap);
         }
     });
 

@@ -19,7 +19,6 @@ jQuery(function ($) {
                 $.extend(params, {
                     time: new Date()
                 });
-                // console.log(params);
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {
                     page: 1,
                     postData: params
@@ -79,9 +78,6 @@ jQuery(function ($) {
             return;
         }
         var r = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-
-        console.log(gr);
-        console.log(r);
         var dialog = $("#dialog-message").removeClass('hide').dialog({
             modal: true,
             width: 1000,
@@ -93,17 +89,6 @@ jQuery(function ($) {
                     "class": "btn btn-info btn-xs",
                     id: 'ajax_button',
                     click: function () {
-                        console.log('click');
-                        // var rowIds = jQuery("#mydevice-grid-table").jqGrid('getDataIDs');
-                        // console.log(rowIds);
-                        // if (rowIds.length < 1) {
-                        //     console.log('检测到没有添加设备');
-                        //     bootbox.confirm("<div><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> 至少要分配一个设备!</h4></div>",
-                        //         function (result) {
-                        //     });
-                        //     return;
-                        // }
-
                         $("#dialog-confirm").removeClass('hide').dialog({
                             resizable: false,
                             modal: false,
@@ -188,7 +173,7 @@ jQuery(function ($) {
     });
     $("#btn-view-da-add").on('click', function (e) {
         var gr = jQuery('#alldevice-grid-table').jqGrid('getGridParam', 'selrow');
-        console.log(gr);
+
         if (!gr) {
             bootbox.confirm("<div><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> 请选择要分配的设备!</h4></div>",
                 function (result) {
@@ -196,7 +181,7 @@ jQuery(function ($) {
             return;
         }
         var srows = jQuery('#alldevice-grid-table').jqGrid('getGridParam', 'selarrrow');
-        console.log(srows);
+
         var rowIds = jQuery("#mydevice-grid-table").jqGrid('getDataIDs');
         var repeat = false, rpn = [];
         $.each(srows, function (i, o) {
@@ -236,22 +221,16 @@ jQuery(function ($) {
         'click',
         function () {
 
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
             if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext);
+                $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
                 return;
             }
-            jQuery(cfg.grid_selector).jqGrid(
-                'delGridRow',
-                gr,
+            jQuery(cfg.grid_selector).jqGrid('delGridRow', gr,
                 {
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
                         style_edit_form(form);
                     }
                 })
@@ -297,7 +276,6 @@ function preview(id, title) {
 }
 
 function tablePreview(data) {
-    console.log(data);
     $('#device-table').empty();
     for(var i=0;i<data.length;i++){
         var t=tableView.replace('[index]',i+1+'');

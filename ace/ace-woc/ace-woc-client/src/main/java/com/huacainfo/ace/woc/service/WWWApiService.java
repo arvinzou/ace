@@ -1,6 +1,5 @@
 package com.huacainfo.ace.woc.service;
 
-import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.ResultResponse;
 
 /**
@@ -14,10 +13,11 @@ public interface WWWApiService {
      *
      * @param mobile      手机号码
      * @param wxSessionId
-     * @param curWxUser   当前微信用户信息  @return
+     * @param openid   当前微信用户信息
+     * @return
      * @throws Exception
      */
-    ResultResponse sendCmccByMobile(String mobile, String wxSessionId, WxUser curWxUser) throws Exception;
+    ResultResponse sendCmccByMobile(String mobile, String wxSessionId, String openid) throws Exception;
 
 
     /**
@@ -28,7 +28,7 @@ public interface WWWApiService {
      * @return
      * @throws Exception
      */
-    ResultResponse mobileRegister(String mobile, String captcha, String wxSessionId, WxUser curWxUser);
+    ResultResponse mobileRegister(String mobile, String captcha, String sessionId, String openid);
 
     /**
      * 查询车牌对应违章记s录
@@ -36,9 +36,29 @@ public interface WWWApiService {
      * @param captcha     验证码
      * @param mobile      车主手机号码
      * @param plateNo     车牌号
-     * @param wxSessionId
-     * @param curWxUser
+     * @param sessionId
      * @return
      */
-    ResultResponse findIllegalTraffic(String captcha, String mobile, String plateNo, String wxSessionId, WxUser curWxUser);
+    ResultResponse findIllegalTraffic(String captcha, String mobile, String plateNo, String sessionId, String openid);
+
+    /**
+     * 获取在库微信用户信息
+     *
+     * @return
+     */
+    ResultResponse getWxUserInfo(String openid);
+
+    /**
+     * 查询个人信息  -- woc.person
+     * @param openId
+     * @return
+     */
+    ResultResponse getPersonInfo(String openId);
+
+    /**
+     * 解除微信手机绑定
+     *
+     * @return
+     */
+    ResultResponse unbindMobile(String openId);
 }
