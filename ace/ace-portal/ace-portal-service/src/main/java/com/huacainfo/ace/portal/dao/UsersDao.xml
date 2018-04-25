@@ -422,12 +422,6 @@
         where a.user_id=#{condition.userId}
     </select>
 
-    <update id="updateUserOpenId">
-        update users
-        set
-        openId = #{openId,jdbcType=VARCHAR}
-        where user_id = #{userId,jdbcType=VARCHAR}
-    </update>
 
     <select id="selectAppWxUser" resultType="map">
         select  t.unionId, t.openId, t.appId, t.nickName,t.role,t.mobile,t.avatarUrl from wx_user t inner join users a
