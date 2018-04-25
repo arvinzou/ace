@@ -254,4 +254,51 @@ public interface UsersService {
 	 */
 	List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception;
 
+	/**
+	 * @throws
+	 * @Title:updateUserAppOpenId
+	 * @Description: TODO(绑定小程序用户)
+	 * @param: @param userId
+	 * @param: @param appOpenId
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	public  MessageResponse updateUserAppOpenId(String userId,String appOpenId,UserProp userProp)throws Exception;
+	/**
+	 * @throws
+	 * @Title:selectAppWxUser
+	 * @Description: TODO(查询已绑定的小程序用户)
+	 * @param: @param Map<String,Object> userId
+	 * @param: @throws Exception
+	 * @return: List<Map<String,Object>>
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	public List<Map<String,Object>> selectAppWxUser(Map<String,Object> condition)throws Exception;
+	/**
+	 * @throws
+	 * @Title:selectAllAppWxUserList
+	 * @Description: TODO(查询appId下所有小程序用户)
+	 * @param: @param userProp
+	 * @param: @throws Exception
+	 * @return: List<Map<String,Object>>
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	public List<Map<String,Object>> selectAllAppWxUserList(UserProp userProp)throws Exception;
+	/**
+	 * @throws
+	 * @Title:selectAllWxUserList
+	 * @Description: TODO(查询appId下所有公众号用户)
+	 * @param: @param userProp
+	 * @param: @throws Exception
+	 * @return: List<Map<String,Object>>
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	public List<Map<String,Object>> selectAllWxUserList(UserProp userProp)throws Exception;
+
 }

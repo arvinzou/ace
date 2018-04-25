@@ -420,4 +420,65 @@ public class UsersServiceImpl implements UsersService {
 		return this.usersDao.selectWxUser(condition);
 	}
 
+	/**
+	 * @throws
+	 * @Title:updateUserAppOpenId
+	 * @Description: TODO(绑定小程序用户)
+	 * @param: @param userId
+	 * @param: @param appOpenId
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	@Override
+	public  MessageResponse updateUserAppOpenId(String userId,String appOpenId,UserProp userProp)throws Exception{
+		this.usersDao.updateUserAppOpenId(userId,appOpenId);
+		this.dataBaseLogService.log("绑定微信", "用户", String.valueOf(userId),
+				String.valueOf(userId), "微信用户", userProp);
+		return new MessageResponse(0, "绑定完成！");
+	}
+	/**
+	 * @throws
+	 * @Title:selectAppWxUser
+	 * @Description: TODO(查询已绑定的小程序用户)
+	 * @param: @param Map<String,Object> userId
+	 * @param: @throws Exception
+	 * @return: List<Map<String,Object>>
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	@Override
+	public List<Map<String,Object>> selectAppWxUser(Map<String,Object> condition)throws Exception{
+		return  this.usersDao.selectAppWxUser(condition);
+	}
+	/**
+	 * @throws
+	 * @Title:selectAllAppWxUserList
+	 * @Description: TODO(查询appId下所有小程序用户)
+	 * @param: @param userProp
+	 * @param: @throws Exception
+	 * @return: List<Map<String,Object>>
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	@Override
+	public List<Map<String,Object>> selectAllAppWxUserList(UserProp userProp)throws Exception{
+		return this.usersDao.selectAllAppWxUserList(userProp);
+	}
+	/**
+	 * @throws
+	 * @Title:selectAllWxUserList
+	 * @Description: TODO(查询appId下所有公众号用户)
+	 * @param: @param userProp
+	 * @param: @throws Exception
+	 * @return: List<Map<String,Object>>
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	@Override
+	public List<Map<String,Object>> selectAllWxUserList(UserProp userProp)throws Exception{
+		return this.usersDao.selectAllWxUserList(userProp);
+	}
+
 }
