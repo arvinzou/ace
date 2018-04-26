@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.woc.dao.SiteDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class MonitorSiteServiceImpl implements MonitorSiteService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private MonitorSiteDao monitorSiteDao;
+    @Autowired
+    private SiteDao siteDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -104,6 +107,7 @@ public class MonitorSiteServiceImpl implements MonitorSiteService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.monitorSiteDao.insertSelective(o);
+        this.siteDao.checkpointsNumAdd(o.getSiteId());
         this.dataBaseLogService.log("添加监控点档案", "监控点档案", "", "insertMonitorSite",
                 "insertMonitorSite", userProp);
         return new MessageResponse(0, "添加监控点档案完成！");
@@ -178,9 +182,10 @@ public class MonitorSiteServiceImpl implements MonitorSiteService {
      * @version: 2018-03-12
      */
     @Override
-    public MessageResponse deleteMonitorSiteByMonitorSiteId(String id,
-                                                            UserProp userProp) throws Exception {
+    public MessageResponse deleteMonitorSiteByMonitorSiteId(String id, UserProp userProp) throws Exception {
+        MonitorSite ms = this.monitorSiteDao.selectByPrimaryKey(id);
         this.monitorSiteDao.deleteByPrimaryKey(id);
+        this.siteDao.checkpointsNumSub(ms.getSiteId());
         this.dataBaseLogService.log("删除监控点档案", "监控点档案", String.valueOf(id),
                 String.valueOf(id), "监控点档案", userProp);
         return new MessageResponse(0, "监控点档案删除完成！");

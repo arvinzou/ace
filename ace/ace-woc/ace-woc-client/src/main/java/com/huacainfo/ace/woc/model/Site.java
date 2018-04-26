@@ -60,6 +60,26 @@ public class Site implements Serializable {
      */
     private int count;
 
+    private int trafficCount;
+    private int illegalCount;
+
+    public int getTrafficCount() {
+        return trafficCount;
+    }
+
+    public void setTrafficCount(int trafficCount) {
+        this.trafficCount = trafficCount;
+    }
+
+    public int getIllegalCount() {
+        return illegalCount;
+    }
+
+    public void setIllegalCount(int illegalCount) {
+        this.illegalCount = illegalCount;
+    }
+
+
     public int getCount() {
         return count;
     }

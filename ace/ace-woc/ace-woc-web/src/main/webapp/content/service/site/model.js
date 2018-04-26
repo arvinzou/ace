@@ -1,6 +1,6 @@
 var _colNames = ['主键', '卡点名称', '卡点编码', '所在地区', '车道数',
     '检测点数量', '卡点详细地址', '维度', '经度', '建造单位', '建造时间', '归属道路编码',
-    '归属管辖单位', '卡点运营状态', '备注', '状态', '创建人编号', '创建人姓名',
+    '归属管辖单位', '卡点运营状态', '备注', '站点类型', '创建人编号', '创建人姓名',
     '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间', '操作'];
 var _colModel = function () {
     return [
@@ -85,19 +85,15 @@ var _colModel = function () {
         /*检测点数量*/
         {
             name: 'checkpointsNum',
-            editable: true,
+            editable: false,
             hidden: true,
             editoptions: {
                 style: 'width:200px;',
             },
             width: 100,
             editrules: {
-                required: true,
+                required: false,
                 number: true,
-            },
-            formoptions: {
-                elmprefix: "",
-                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
             },
         },
         /*卡点地址*/
@@ -288,28 +284,24 @@ var _colModel = function () {
         /*状态*/
         {
             name: 'status',
-            editable: false,
-            hidden: true,
-            width: 100,
-            edittype: "checkbox",
-            editoptions: {
-                value: "1:0"
-            },
-            unformat: aceSwitch,
+            editable: true,
+            edittype: "select",
             renderer: function (value) {
-                var rst = "";
-                switch (value) {
-                    case '1' :
-                        rst = "ON";
-                        break;
-                    case '0' :
-                        rst = "OFF";
-                        break;
-                    default :
-                        rst = "N/A";
-                }
-                return rst;
-            }
+                return rsd(value, "126");
+            },
+            formoptions: {
+                style: 'width:200px;height:25px;',
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>",
+            },
+            editoptions: {
+                value: odparse("126"),
+                colspan: true,
+            },
+            width: 80,
+            editrules: {
+                required: true
+            },
         },
         {
             name: 'createUserId',

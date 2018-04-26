@@ -340,8 +340,7 @@
             concat('%',#{condition.plateNo,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.siteId!=null and condition.siteId!=''">
-            and t.siteId like
-            concat('%',#{condition.siteId,jdbcType=VARCHAR},'%')
+            and t.siteId =#{condition.siteId,jdbcType=VARCHAR}
         </if>
         <if test="condition.axleCount!=null and condition.axleCount!=''">
             and t.axleCount =#{condition.axleCount,jdbcType=INTEGER}

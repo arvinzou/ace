@@ -220,6 +220,17 @@
             </if>
         </trim>
     </insert>
+
+    <update id="checkpointsNumAdd" parameterType="java.lang.String">
+        update site
+        set checkpointsNum=checkpointsNum+1
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="checkpointsNumSub" parameterType="java.lang.String">
+        update site
+        set checkpointsNum=checkpointsNum-1
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.Site">
         update site
         <set>
