@@ -9,7 +9,9 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.woc.common.utils.SessionUtils;
 import com.huacainfo.ace.woc.constant.TrafficConstant;
 import com.huacainfo.ace.woc.dao.SiteDao;
 import com.huacainfo.ace.woc.dao.TrafficDao;
@@ -22,6 +24,7 @@ import com.huacainfo.ace.woc.service.TrafficService;
 import com.huacainfo.ace.woc.service.TrafficSubService;
 import com.huacainfo.ace.woc.service.job.TrafficDataManager;
 import com.huacainfo.ace.woc.util.VehicleDataUtil;
+import com.huacainfo.ace.woc.vo.SocketDTO;
 import com.huacainfo.ace.woc.vo.TrafficQVo;
 import com.huacainfo.ace.woc.vo.TrafficSubVo;
 import com.huacainfo.ace.woc.vo.TrafficVo;
@@ -32,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.websocket.Session;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -238,34 +242,56 @@ public class TrafficServiceImpl implements TrafficService {
      * @param traffic 通行记录信息
      */
     private void sendIllegalTrafficMessage(Traffic traffic) {
-        int sendFlag = 1;
-        if (1 == sendFlag) {
-            Person person = personService.findVehicleOwner(traffic.getPlateNo());
-            if (null != person && CommonUtils.isNotBlank(person.getPhoneNumber())) {
+        try {
+            int sendFlag = 1;
+            //公众号模板消息
+            if (1 == sendFlag) {
+                Person person = personService.findVehicleOwner(traffic.getPlateNo());
+                if (null != person && CommonUtils.isNotBlank(person.getPhoneNumber())) {
 
-                Map<String, Object> weChatInfo = personService.findWeChatInfo(person.getPhoneNumber());
-                if (null == weChatInfo || CommonUtils.isBlank(weChatInfo.get("accessToken"))) {
-                    return;
+                    Map<String, Object> weChatInfo = personService.findWeChatInfo(person.getPhoneNumber());
+                    if (null == weChatInfo || CommonUtils.isBlank(weChatInfo.get("accessToken"))) {
+                        return;
+                    }
+                    String openId = (String) weChatInfo.get("openid");
+                    String templateId = "kdRZ39sBzGCXaXSz20-s3x8WAV1cyWxeKoaVaspl3qE";
+                    String url = "www.qq.com";//跳转链接；"链接"，"小程序"同时存在时，优先小程序；
+
+                    Map<String, String> params = new HashMap<>();
+                    params.put("first", "违章记录通知");
+                    params.put("keyword1", person.getName());
+                    params.put("keyword2", traffic.getPlateNo());
+                    params.put("keyword3", DateUtil.format(traffic.getInspectTime(), DateUtil.DEFAULT_DATE_TIME_REGEX));
+                    params.put("keyword4", traffic.getLocale());
+                    params.put("remark", "您有的车辆新违章，请及时查收!");
+                    TemplateData data = MessageSendApi.buildTemplateData(openId, templateId, url, params);
+                    //跳转小程序
+                    data.setMiniAppid("wx70ba7c5dca85e4da");
+                    data.setMiniPagePath("page/trafficPreview/index?id=" + traffic.getId());
+
+                    String sendResult = MessageSendApi.sendTemplate((String) weChatInfo.get("accessToken"), data);
+                    logger.info("通行记录[" + traffic.getId() + "],发送通知结果：" + sendResult);
                 }
-                String openId = (String) weChatInfo.get("openid");
-                String templateId = "kdRZ39sBzGCXaXSz20-s3x8WAV1cyWxeKoaVaspl3qE";
-                String url = "www.qq.com";//跳转链接；"链接"，"小程序"同时存在时，优先小程序；
-
-                Map<String, String> params = new HashMap<>();
-                params.put("first", "违章记录通知");
-                params.put("keyword1", person.getName());
-                params.put("keyword2", traffic.getPlateNo());
-                params.put("keyword3", DateUtil.format(traffic.getInspectTime(), DateUtil.DEFAULT_DATE_TIME_REGEX));
-                params.put("keyword4", traffic.getLocale());
-                params.put("remark", "您有的车辆新违章，请及时查收!");
-                TemplateData data = MessageSendApi.buildTemplateData(openId, templateId, url, params);
-                //跳转小程序
-                data.setMiniAppid("wx70ba7c5dca85e4da");
-                data.setMiniPagePath("page/trafficPreview/index?id=" + traffic.getId());
-
-                String sendResult = MessageSendApi.sendTemplate((String) weChatInfo.get("accessToken"), data);
-                logger.info("通行记录[" + traffic.getId() + "],发送通知结果：" + sendResult);
             }
+            //websocket 消息指令
+            String[] keyArray;
+            String rid;
+            String uid;
+            SocketDTO reply = new SocketDTO("system", SocketDTO.ACTION_NOTICE, traffic, "");
+            for (Map.Entry<String, Session> entry : SessionUtils.clients.entrySet()) {
+                keyArray = entry.getKey().split("_");
+//                sendMessage(keyArray[0], keyArray[1], reply.toString());
+                rid = keyArray[0];
+                uid = keyArray[1];
+                if (SessionUtils.hasConnection(rid, uid)) {
+                    //异步推送
+                    SessionUtils.get(rid, uid).getAsyncRemote().sendText(JsonUtil.toJson(reply));
+                }else {
+
+                }
+            }
+        } catch (Exception e) {
+            logger.info("sendIllegalTrafficMessage.error : {}", e);
         }
     }
 

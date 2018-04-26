@@ -19,7 +19,6 @@ public interface WWWApiService {
      */
     ResultResponse sendCmccByMobile(String mobile, String wxSessionId, String openid) throws Exception;
 
-
     /**
      * 手机号码注册
      *
