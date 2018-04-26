@@ -109,9 +109,9 @@ public interface UsersDao {
 
 	List<Map<String,Object>> selectAppWxUser(@Param("condition") Map<String,Object> condition);
 
-	List<Map<String,Object>> selectAllAppWxUserList(UserProp userProp);
+	List<Map<String,Object>> selectAllAppWxUserList(Map<String,Object> p);
 
-	List<Map<String,Object>> selectAllWxUserList(UserProp userProp);
+	List<Map<String,Object>> selectAllWxUserList(Map<String,Object> p);
 
 
 

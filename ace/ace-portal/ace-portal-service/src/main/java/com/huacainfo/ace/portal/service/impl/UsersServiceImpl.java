@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -463,8 +464,9 @@ public class UsersServiceImpl implements UsersService {
 	 * @version: 2018-04-25
 	 */
 	@Override
-	public List<Map<String,Object>> selectAllAppWxUserList(UserProp userProp)throws Exception{
-		return this.usersDao.selectAllAppWxUserList(userProp);
+	public List<Map<String,Object>> selectAllAppWxUserList(Map<String,Object> p)throws Exception{
+
+		return this.usersDao.selectAllAppWxUserList(p);
 	}
 	/**
 	 * @throws
@@ -477,8 +479,28 @@ public class UsersServiceImpl implements UsersService {
 	 * @version: 2018-04-25
 	 */
 	@Override
-	public List<Map<String,Object>> selectAllWxUserList(UserProp userProp)throws Exception{
-		return this.usersDao.selectAllWxUserList(userProp);
+	public List<Map<String,Object>> selectAllWxUserList(Map<String,Object> p)throws Exception{
+		return this.usersDao.selectAllWxUserList(p);
+	}
+
+
+	/**
+	 * @throws
+	 * @Title:deleteAppOpenIdById
+	 * @Description: TODO(删除微信用户的角色)
+	 * @param: @param id
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-04-26
+	 */
+	@Override
+	public  MessageResponse deleteAppOpenIdById(String userId,UserProp userProp) throws Exception{
+		this.usersDao.updateUserAppOpenId(userId,null);
+		this.dataBaseLogService.log("绑定微信", "用户", String.valueOf(userId),
+				String.valueOf(userId), "微信用户", userProp);
+		return new MessageResponse(0, "解除绑定完成！");
 	}
 
 }
