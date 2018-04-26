@@ -3,7 +3,6 @@ package com.huacainfo.ace.portal.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParam;
-import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -447,8 +446,8 @@ public class UsersController extends PortalBaseController {
 	 * @author: 陈晓克
 	 * @version: 2018-04-25
 	 */
-	@RequestMapping(value = "/selectAppWxUser.do")
-	@ResponseBody
+    @RequestMapping(value = "/selectAllAppWxUserList.do")
+    @ResponseBody
 	public List<Map<String,Object>> selectAllAppWxUserList()throws Exception{
 		return this.usersService.selectAllAppWxUserList(this.getCurUserProp());
 	}
