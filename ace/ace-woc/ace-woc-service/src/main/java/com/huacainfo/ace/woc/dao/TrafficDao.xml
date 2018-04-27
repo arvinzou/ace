@@ -424,22 +424,27 @@
                 <if test="params.siteId!=null and params.siteId!=''">
                     and siteId = #{params.siteId,jdbcType=VARCHAR}
                 </if>
-            ) AS trafficCounts,
+        ) AS trafficCounts,/*今日通行记录数，及检测数*/
+
             (
-              SELECT COUNT(1) FROM woc.traffic_illegal i
+        SELECT COUNT(1)
+        FROM woc.traffic_illegal i
               left join woc.traffic t on i.trafficId = t.id
-              WHERE DATEDIFF(i.createDate, '2018-04-16 18:21:00') = 0
+        WHERE
+        DATEDIFF(i.createDate, #{params.nowDate,jdbcType=VARCHAR}) = 0
                 <if test="params.siteId!=null and params.siteId!=''">
                     and t.siteId = #{params.siteId,jdbcType=VARCHAR}
                 </if>
-            ) AS trafficIllegalCounts,
+        ) AS trafficIllegalCounts,/*今日违章记录数，及超载次数*/
+
             (
               SELECT count(1) FROM woc.traffic
               WHERE STATUS = 0
                 <if test="params.siteId!=null and params.siteId!=''">
                     and siteId = #{params.siteId,jdbcType=VARCHAR}
                 </if>
-            ) AS ptTrafficCounts,
+        ) AS ptTrafficCounts,/*待审通行记录数*/
+
             (
               SELECT count(1) FROM woc.cases c
               left join woc.traffic t on c.trafficId =  t.id
@@ -447,7 +452,8 @@
                 <if test="params.siteId!=null and params.siteId!=''">
                     and t.siteId = #{params.siteId,jdbcType=VARCHAR}
                 </if>
-            ) AS ptCasesCounts
+        ) AS ptCasesCounts/*待审案件数，及案件数*/
+
         FROM woc.traffic
         LIMIT 0, 1
     </select>

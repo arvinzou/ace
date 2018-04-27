@@ -23,10 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("analysisService")
 public class AnslysisServiceImpl implements AnalysisService {
@@ -379,4 +376,24 @@ public class AnslysisServiceImpl implements AnalysisService {
         c.put("status", new String[]{"0"});
         return trafficDao.selectCount(c);
     }
+
+    @Override
+    public Map<String, Object> pcDayReport(String datetime, String siteId, UserProp curUser) throws Exception {
+        Date date = CommonUtils.isBlank(datetime) ? new Date() : DateUtil.parse(datetime, "yyyy-MM-dd HH:mm:ss");
+        ;
+        int count;
+        Map maps = new LinkedHashMap();
+        for (int i = 0; i < 31; i++) {
+            String ymdhms = DateUtil.format(date, "yyyy-MM-dd HH:mm:ss");
+            String ymd = ymdhms.substring(0, 11);
+            count = getIllegalCount(siteId, ymd + "00:00:00", ymd + "23:00:00");
+            date = DateUtil.getDateReduceHour(date, 24);
+            maps.put(ymd, count);
+        }
+        Map<String, Object> rtn = new HashMap<>();
+        rtn.put("countMap", maps);
+        return rtn;
+    }
+
+
 }

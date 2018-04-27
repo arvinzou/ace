@@ -7,9 +7,6 @@ $(function () {
     $('.modal').on('click', '.previewLive', fixThisLive);
     $('#scrollbar').scroll(
         function () {
-            console.log($('#scrollbar').scrollTop());
-            console.log($('#scrollbar .table').height());
-            console.log($('#scrollbar').height());
             if ($('#scrollbar .table').height() - $('#scrollbar').scrollTop() == $('#scrollbar').height()) {
                 page++;
                 preview();
@@ -18,7 +15,17 @@ $(function () {
     $('#myModal').on('hidden.bs.modal', function (e) {
         $('#passList').empty();
     });
-    //$('#myModal').modal('show');
+    $(document).keydown(function (event) {
+        if (event.keyCode == 13) {
+            console.log(11111111);
+            $('#targetDiv').addClass('move');
+            $('#embg')[0].play();
+        }
+        if (event.ctrlKey) {
+            $('#targetDiv').removeClass('move');
+        }
+    });
+    websocket();
 });
 
 function oneSecondTimes() {
@@ -141,3 +148,30 @@ var passTemplate = '<tr>' +
     '					<td class="dangerous">[overRate]</td>' +
     '				    <td>[speed]</td>' +
     '				</tr>';
+
+function websocket() {
+    if ("WebSocket" in window) {
+        var ws = new WebSocket("ws://localhost:9998/echo");
+
+        ws.onopen = function (evt) {
+            console.log(evt);
+        };
+
+        ws.onmessage = function (evt) {
+            console.log(evt);
+            var received_msg = evt.data;
+        };
+
+        ws.onclose = function (evt) {
+            console.log(evt);
+        };
+
+        ws.onerror = function (evt) {
+            console.log(evt)
+        }
+
+    } else {
+        //浏览器不支持 WebSocket
+        alert("您的浏览器不支持 WebSocket!");
+    }
+}

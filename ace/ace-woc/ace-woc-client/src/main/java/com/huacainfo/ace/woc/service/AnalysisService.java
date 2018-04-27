@@ -92,4 +92,5 @@ public interface AnalysisService {
      */
     PageResult<SiteVo> allSite(SiteQVo condition, int start, int limit) throws Exception;
 
+    Map<String, Object> pcDayReport(String datetime, String siteId, UserProp curUser) throws Exception;
 }
