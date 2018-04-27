@@ -37,10 +37,9 @@ public class WWWController extends WocBaseController {
         String sessionId = this.getRequest().getHeader("WX-SESSION-ID");
         if (CommonUtils.isEmpty(sessionId)) {
             sessionId = this.getRequest().getSession().getId();
-            //            return new ResultResponse(ResultCode.FAIL, "非法登录用户");
         }
-        logger.info("=================== sendCmccByMobile session id is [{}]", sessionId);
-        logger.info("=================== sendCmccByMobile session Object [{}]", JsonUtil.toJson(getCurUserinfo()));
+        logger.info("=================== mobileRegister getCurWxUser  is {}", JsonUtil.toJson(getCurWxUser()));
+        logger.info("=================== mobileRegister getCurUserinfo  is {}", JsonUtil.toJson(getCurUserinfo()));
 
         String openId = "";
         if (null != getCurWxUser()) {
@@ -65,7 +64,6 @@ public class WWWController extends WocBaseController {
         String sessionId = this.getRequest().getHeader("WX-SESSION-ID");
         if (CommonUtils.isEmpty(sessionId)) {
             sessionId = this.getRequest().getSession().getId();
-            //            return new ResultResponse(ResultCode.FAIL, "非法登录用户");
         }
         String openId = "";
         if (null != getCurWxUser()) {
@@ -92,7 +90,6 @@ public class WWWController extends WocBaseController {
         String sessionId = this.getRequest().getHeader("WX-SESSION-ID");
         if (CommonUtils.isBlank(sessionId)) {
             sessionId = this.getRequest().getSession().getId();
-            //            return new ResultResponse(ResultCode.FAIL, "非法登录用户");
         }
         String openId = "";
         if (null != getCurWxUser()) {

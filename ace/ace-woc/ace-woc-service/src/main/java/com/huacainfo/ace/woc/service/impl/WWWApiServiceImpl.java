@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import com.huacainfo.ace.woc.dao.PersonDao;
@@ -62,9 +63,10 @@ public class WWWApiServiceImpl implements WWWApiService {
             return new ResultResponse(ResultCode.FAIL, "手机号格式错误");
         }
 
-        Map<String, Object> wxInfo = personDao.findWxInfoByMobile(mobile);
-        String openidFromDB = null == wxInfo ? "" : (String) wxInfo.get("openid");
-        if (null != wxInfo
+        Map<String, Object> userInfo = personDao.findUserInfoByMobile(mobile);
+        String openidFromDB = null == userInfo ? "" : (String) userInfo.get("openid");
+        logger.info("=================== WWWApiService.sendCmccByMobile userInfo  is {}", JsonUtil.toJson(userInfo));
+        if (null != userInfo
                 && CommonUtils.isNotEmpty(openidFromDB)
                 && !openidFromDB.equals(openid)) {
             return new ResultResponse(ResultCode.FAIL, "该手机号码已存在其它绑定关系");
@@ -120,9 +122,9 @@ public class WWWApiServiceImpl implements WWWApiService {
             return new ResultResponse(ResultCode.FAIL, "验证码错误");
         }
 
-        Map<String, Object> wxInfo = personDao.findWxInfoByMobile(mobile);
-        String openidFromDB = null == wxInfo ? "" : (String) wxInfo.get("openid");
-        if (null != wxInfo
+        Map<String, Object> userInfo = personDao.findUserInfoByMobile(mobile);
+        String openidFromDB = null == userInfo ? "" : (String) userInfo.get("openid");
+        if (null != userInfo
                 && CommonUtils.isNotEmpty(openidFromDB)
                 && !openidFromDB.equals(openid)) {
             return new ResultResponse(ResultCode.FAIL, "该手机号码已存在其它绑定关系");

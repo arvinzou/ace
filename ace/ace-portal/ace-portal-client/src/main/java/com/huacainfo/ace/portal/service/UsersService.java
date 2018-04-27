@@ -288,7 +288,7 @@ public interface UsersService {
 	 * @author: 陈晓克
 	 * @version: 2018-04-25
 	 */
-	public List<Map<String,Object>> selectAllAppWxUserList(UserProp userProp)throws Exception;
+	public List<Map<String,Object>> selectAllAppWxUserList(Map<String,Object> p)throws Exception;
 	/**
 	 * @throws
 	 * @Title:selectAllWxUserList
@@ -299,6 +299,20 @@ public interface UsersService {
 	 * @author: 陈晓克
 	 * @version: 2018-04-25
 	 */
-	public List<Map<String,Object>> selectAllWxUserList(UserProp userProp)throws Exception;
+	public List<Map<String,Object>> selectAllWxUserList(Map<String,Object> p)throws Exception;
+
+
+	/**
+	 * @throws
+	 * @Title:deleteAppOpenIdById
+	 * @Description: TODO(删除微信用户的角色)
+	 * @param: @param id
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-04-26
+	 */
+	public abstract MessageResponse deleteAppOpenIdById(String userId,UserProp userProp) throws Exception;
 
 }

@@ -34,7 +34,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.huacainfo.ace.woc.web.controller.common.interceptor.CommonInterceptor"/>
+            <bean class="com.huacainfo.ace.woc.web.common.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

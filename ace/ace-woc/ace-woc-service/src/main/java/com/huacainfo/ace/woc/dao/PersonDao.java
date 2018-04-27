@@ -54,10 +54,10 @@ public interface PersonDao {
      * @param mobile
      * @return
      */
-    Map<String, Object> findWxInfoByMobile(String mobile);
+    Map<String, Object> findUserInfoByMobile(String mobile);
 
     int updateMobileByOpenId(@Param("mobile") String mobile,
-                             @Param("unionid") String unionid);
+                             @Param("openid") String openid);
 
     Map<String,Object> findUserInfoByOpenId(String openId);
 

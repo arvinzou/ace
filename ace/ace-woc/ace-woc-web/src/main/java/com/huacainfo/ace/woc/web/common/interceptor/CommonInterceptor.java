@@ -6,7 +6,7 @@
  * author:haing
  * Copyright (c) CD Technology Co.,Ltd. All rights reserved.
  */
-package com.huacainfo.ace.woc.web.controller.common.interceptor;
+package com.huacainfo.ace.woc.web.common.interceptor;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -27,6 +27,24 @@ import java.util.Enumeration;
  */
 public class CommonInterceptor extends HandlerInterceptorAdapter {
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    public static String getIp(HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        if (StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)) {
+            //多次反向代理后会有多个ip值，第一个ip才是真实ip
+            int index = ip.indexOf(",");
+            if (index != -1) {
+                return ip.substring(0, index);
+            } else {
+                return ip;
+            }
+        }
+        ip = request.getHeader("X-Real-IP");
+        if (StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)) {
+            return ip;
+        }
+        return request.getRemoteAddr();
+    }
 
     /**
      * 在业务处理器处理请求之前被调用 如果返回false
@@ -62,25 +80,5 @@ public class CommonInterceptor extends HandlerInterceptorAdapter {
         //设置通过所有跨域请求
         response.setHeader("Access-Control-Allow-Origin", "*");
         return true;
-    }
-
-
-
-    public static String getIp(HttpServletRequest request) {
-        String ip = request.getHeader("X-Forwarded-For");
-        if (StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)) {
-            //多次反向代理后会有多个ip值，第一个ip才是真实ip
-            int index = ip.indexOf(",");
-            if (index != -1) {
-                return ip.substring(0, index);
-            } else {
-                return ip;
-            }
-        }
-        ip = request.getHeader("X-Real-IP");
-        if (StringUtils.isNotEmpty(ip) && !"unKnown".equalsIgnoreCase(ip)) {
-            return ip;
-        }
-        return request.getRemoteAddr();
     }
 }

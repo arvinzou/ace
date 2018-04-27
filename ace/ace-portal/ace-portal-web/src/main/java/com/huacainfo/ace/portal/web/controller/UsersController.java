@@ -3,7 +3,6 @@ package com.huacainfo.ace.portal.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParam;
-import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -26,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -447,10 +447,12 @@ public class UsersController extends PortalBaseController {
 	 * @author: 陈晓克
 	 * @version: 2018-04-25
 	 */
-	@RequestMapping(value = "/selectAppWxUser.do")
-	@ResponseBody
+    @RequestMapping(value = "/selectAllAppWxUserList.do")
+    @ResponseBody
 	public List<Map<String,Object>> selectAllAppWxUserList()throws Exception{
-		return this.usersService.selectAllAppWxUserList(this.getCurUserProp());
+		Map<String,Object> p=this.getParams();
+		p.put("corpId",this.getCurUserProp().getCorpId());
+		return this.usersService.selectAllAppWxUserList(p);
 	}
 	/**
 	 * @throws
@@ -465,6 +467,15 @@ public class UsersController extends PortalBaseController {
 	@RequestMapping(value = "/selectAllWxUserList.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectAllWxUserList()throws Exception{
-		return this.usersService.selectAllWxUserList(this.getCurUserProp());
+		Map<String,Object> p=this.getParams();
+		p.put("corpId",this.getCurUserProp().getCorpId());
+		return this.usersService.selectAllWxUserList(p);
+	}
+
+
+	@RequestMapping(value = "/deleteAppOpenIdById.do")
+	@ResponseBody
+	public MessageResponse deleteAppOpenIdById(String userId) throws Exception {
+		return this.usersService.deleteAppOpenIdById(userId, this.getCurUserProp());
 	}
 }
