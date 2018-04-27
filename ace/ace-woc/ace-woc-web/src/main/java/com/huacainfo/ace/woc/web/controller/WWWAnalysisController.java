@@ -77,6 +77,18 @@ public class WWWAnalysisController extends WocBaseController {
     }
 
     /**
+     * 时段超载情况
+     *
+     * @param datetime 查询时间  -- yyyy-MM-dd hh:mm:ss
+     * @param siteId   站点ID  -- woc.site.id
+     * @return map
+     */
+    @GetMapping("/dayInterval")
+    public Map<String, Object> dayIntervalReport(String datetime, String siteId) throws Exception {
+        return analysisService.pcDayReport(datetime, siteId, this.getCurUserProp());
+    }
+
+    /**
      * 根据 车牌/时间，查询相关超载情况
      *
      * @param siteId  站点ID
@@ -102,8 +114,9 @@ public class WWWAnalysisController extends WocBaseController {
      */
     @GetMapping("/illegalTrafficOne")
     public SingleResult<TrafficVo> illegalTrafficOne(String trafficId) throws Exception {
-        if (CommonUtils.isBlank(trafficId))
+        if (CommonUtils.isBlank(trafficId)) {
             return null;
+        }
 
         return analysisService.illegalTrafficOne(trafficId, this.getCurWxUser(), this.getCurUserProp());
     }

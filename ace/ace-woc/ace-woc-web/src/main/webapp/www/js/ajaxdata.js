@@ -2,7 +2,6 @@ window.setInterval(function () {
     updata();
 }, 10000)
 
-
 function updata() {
     var url = 'http://106.75.69.81/woc/www/data/statistics';
     var data = {};
@@ -33,23 +32,55 @@ function updata() {
             for (var i = 0; i < data.length; i++) {
                 siteBar.push(data[i].siteCode);
                 dataBar.push(data[i].count);
-                dataMap.push({
-                    name: data[i].siteName,
-                    count: data[i].count,
-                    siteId: data[i].id,
-                    coord: [data[i].longitude, data[i].latitude],
-                    tooltip: { // Series config.
-                        trigger: 'item',
-                    },
-                });
+                if (data[i].status == 1) {
+                    dataMap.push({
+                        symbol: 'pin',
+                        name: data[i].siteName,
+                        count: data[i].count,
+                        siteId: data[i].id,
+                        coord: [data[i].longitude, data[i].latitude],
+                        tooltip: { // Series config.
+                            trigger: 'item',
+                            position: [90, 380],
+                        },
+                    });
+                } else if (data[i].status == 2) {
+                    dataMap.push({
+                        symbol: 'triangle',
+                        symbolSize: 15,
+                        name: data[i].siteName,
+                        coord: [data[i].longitude, data[i].latitude],
+                        count: data[i].count,
+                        siteId: data[i].id,
+                        tooltip: { // Series config.
+                            trigger: 'item',
+                            position: [90, 380],
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: 'red',
+                                label: {
+                                    show: false
+                                },
+                            },
+                            emphasis: {
+                                color: '#ff0',
+                                label: {
+                                    show: false
+                                },
+                            }
+                        },
+                    });
+                }
+                ;
             }
-            ;
             optionBar.xAxis[0].data = siteBar;
             optionBar.series[0].data = dataBar;
-            //optionMap.series[0].markPoint.data = dataMap;
+            optionMap.series[0].markPoint.data = dataMap;
             myBar.setOption(optionBar);
-            //myMap.setOption(optionMap);
+            myMap.setOption(optionMap);
         }
+
     });
 
     var url = 'http://106.75.69.81/woc/www/data/interval';
@@ -63,4 +94,9 @@ function updata() {
         optionLine.series[0].data = dataLine;
         myLine.setOption(optionLine);
     });
+}
+
+function showTooltip(geoData, trafficData) {
+    optionMap.series[1].data = geoData;
+    myMap.setOption(optionMap);
 }
