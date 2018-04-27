@@ -119,15 +119,13 @@ public class AnslysisServiceImpl implements AnalysisService {
         condition.put("endDt", endDt);
         int trafficCount;
         int illegalCount;
-        int count;
+
         for (Site s : siteList) {
             condition.put("siteId", s.getId());
             trafficCount = trafficDao.selectCount(condition);
             condition.put("status", new String[]{"0"});
             illegalCount = trafficDao.selectCount(condition);
-            count = trafficCount;
             s.setTrafficCount(trafficCount);
-            s.setCount(count);
             s.setIllegalCount(illegalCount);
         }
         Map<String, Object> rtn = new HashMap<>();
@@ -386,7 +384,7 @@ public class AnslysisServiceImpl implements AnalysisService {
         for (int i = 0; i < 31; i++) {
             String ymdhms = DateUtil.format(date, "yyyy-MM-dd HH:mm:ss");
             String ymd = ymdhms.substring(0, 11);
-            count = getIllegalCount(siteId, ymd + "00:00:00", ymd + "23:00:00");
+            count = getIllegalCount(siteId, ymd + "00:00:00", ymd + "23:59:59");
             date = DateUtil.getDateReduceHour(date, 24);
             maps.put(ymd, count);
         }
