@@ -49,7 +49,7 @@
             </view>
         </view>
 
-        <view class='tabContent'>
+        <view class='site'>
             <picker bindchange="bindPickerChange2" value="{{objectArray2[index2].id}}" range="{{objectArray2}}" data-selecthx="{{objectArray2[index2].siteName}}" range-key="{{'siteName'}}">
                 <view class='section_title'>
                     <image src='../../image/title_guide.png' style='width:6rpx;height:28rpx;padding-right:10rpx;' />{{objectArray2[index2].siteName}}数据详情
