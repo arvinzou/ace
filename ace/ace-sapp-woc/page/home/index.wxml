@@ -89,3 +89,8 @@
         </view>
     </view>
 </view>
+
+
+<modal class="modal" hidden="{{modalFlag}}" no-cancel confirmText="">  
+     <view>对不起，该用户没有分配权限！</view>
+</modal>  
