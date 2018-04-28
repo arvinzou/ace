@@ -2,6 +2,8 @@ var ct4 = echarts.init(document.getElementById('ct4'), 'shine');
 var ct3 = echarts.init(document.getElementById('ct3'), 'shine');
 var ct1 = echarts.init(document.getElementById('ct1'), 'shine');
 var ct2 = echarts.init(document.getElementById('ct2'), 'shine');
+
+
 var option1 =
     {
         tooltip: {
@@ -104,6 +106,9 @@ var option2 = {
 };
 
 var option3 = {
+    legend: {
+        data: ['通行次数', '超载次数']
+    },
     tooltip: {
         trigger: 'item'
     },
@@ -115,10 +120,8 @@ var option3 = {
             margin: 4,
             textStyle: {
                 color: '#333',
-                fontFamily: 'verdana',
                 fontSize: 10,
                 fontStyle: 'normal',
-                fontWeight: 'bold'
             }
         },
     }],
@@ -137,35 +140,19 @@ var option3 = {
             }
         },
     }],
-    series: [{
-        name: '',
-        type: 'bar',
-        barWidth: 21, // 系列级个性化，柱形宽度
-        itemStyle: {
-            normal: { // 系列级个性化，横向渐变填充
-                borderRadius: 5,
-                color: function (params) {
-                    // build a color map as your need.
-                    var colorList = [
-                        '#003CFF', '#FF971C', '#EF4F4F', '#FFFF00', '#22AC38',
-                        '#8400FF', '#9BCA63', '#FAD860', '#F3A43B', '#60C0DD',
-                        '#D7504B', '#C6E579', '#F4E001', '#F0805A', '#26C0C0'
-                    ];
-                    return colorList[params.dataIndex]
-                },
-                label: {
-                    show: true,
-                    textStyle: {
-                        fontSize: '10',
-                        fontFamily: '微软雅黑',
-                        fontWeight: 'bold',
-                        color: '#FFFFFF'
-                    }
-                }
-            }
+    series: [
+        {
+            name: '通行次数',
+            type: 'bar',
+            barGap: 0,
+            data: []
         },
-        data: [],
-    }]
+        {
+            name: '超载次数',
+            type: 'bar',
+            data: []
+        },
+    ]
 };
 
 var option4 = {

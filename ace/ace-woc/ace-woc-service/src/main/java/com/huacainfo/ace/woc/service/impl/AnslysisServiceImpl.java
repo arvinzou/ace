@@ -45,8 +45,7 @@ public class AnslysisServiceImpl implements AnalysisService {
 
 
     @Override
-    public ListResult<Map<String, Object>> query(Map<String, Object> condition,
-                                                 String reportId, int start, int limit) throws Exception {
+    public ListResult<Map<String, Object>> query(Map<String, Object> condition, String reportId, int start, int limit) throws Exception {
         ListResult<Map<String, Object>> rst = new ListResult<Map<String, Object>>();
         List<Map<String, Object>> p = new ArrayList<Map<String, Object>>();
         ReportDao dao = (ReportDao) SpringUtils.getBean(reportId);
@@ -121,6 +120,7 @@ public class AnslysisServiceImpl implements AnalysisService {
         int illegalCount;
         for (Site s : siteList) {
             condition.put("siteId", s.getId());
+            condition.put("status", null);
             trafficCount = trafficDao.selectCount(condition);
             condition.put("status", new String[]{"0"});
             illegalCount = trafficDao.selectCount(condition);

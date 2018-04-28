@@ -218,7 +218,6 @@ public class TrafficServiceImpl implements TrafficService {
         if (null == traffic) {
             return new MessageResponse(0, "通行记录不存在");
         }
-
         traffic.setStatus("0");
         traffic.setLastModifyDate(new Date());
         traffic.setLastModifyUserName(userProp.getName());
@@ -229,10 +228,8 @@ public class TrafficServiceImpl implements TrafficService {
         TrafficIllegal tt = new TrafficIllegal();
         tt.setTrafficId(id);
         trafficIllegalService.insertTrafficIllegalII(tt, userProp);
-
         //违章记录通知
         sendIllegalTrafficMessage(traffic);
-
         return new MessageResponse(0, "变更通行记录完成！");
     }
 

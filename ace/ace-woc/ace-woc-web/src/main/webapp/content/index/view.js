@@ -47,14 +47,17 @@ function viewEchart3() {
     $.getJSON(url, data, function (result) {
         if (result.siteList.length) {
             var siteBar = [];
-            var dataBar = [];
+            var dataBar1 = [];
+            var dataBar2 = [];
             var data = result.siteList;
             for (var i = 0; i < data.length; i++) {
                 siteBar.push(data[i].siteName);
-                dataBar.push(data[i].count);
+                dataBar1.push(data[i].trafficCount);
+                dataBar2.push(data[i].illegalCount);
             }
             option3.xAxis[0].data = siteBar;
-            option3.series[0].data = dataBar;
+            option3.series[0].data = dataBar1;
+            option3.series[1].data = dataBar2;
             ct3.setOption(option3);
         }
     });

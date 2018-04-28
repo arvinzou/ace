@@ -135,6 +135,11 @@ public class WWWAnalysisController extends WocBaseController {
         return analysisService.allSite(condition, start, limit);
     }
 
+    @GetMapping("/getTrafficByKey")
+    public SingleResult<TrafficVo> selectTrafficByPrimaryKey(String id)
+            throws Exception {
+        return this.trafficService.selectTrafficByPrimaryKey(id);
+    }
 
 
 

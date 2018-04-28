@@ -181,7 +181,7 @@
             <div class="widget-box transparent background-white padding1" id="month-box">
                 <div class="widget-header">
                     <h4 class="widget-title lighter smaller">
-                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>每日通行情况
+                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>每日超载情况
                     </h4>
                     <div class="widget-toolbar no-border"></div>
                 </div>
