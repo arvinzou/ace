@@ -117,14 +117,14 @@ public class AnslysisServiceImpl implements AnalysisService {
         Map<String, Object> condition = new HashMap<>();
         condition.put("startDt", startDt);
         condition.put("endDt", endDt);
-        int count;
+        int trafficCount;
         int illegalCount;
         for (Site s : siteList) {
             condition.put("siteId", s.getId());
-            count = trafficDao.selectCount(condition);
+            trafficCount = trafficDao.selectCount(condition);
             condition.put("status", new String[]{"0"});
             illegalCount = trafficDao.selectCount(condition);
-            s.setCount(count);
+            s.setTrafficCount(trafficCount);
             s.setIllegalCount(illegalCount);
         }
         Map<String, Object> rtn = new HashMap<>();

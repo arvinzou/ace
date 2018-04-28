@@ -36,15 +36,6 @@ function oneSecondTimes() {
     }, 1000);
 }
 
-function statisticalDisplay() {
-    var url = 'http://106.75.69.81/woc/www/data/statistics';
-    var data = {};
-    $.getJSON(url, data, function (result) {
-        viewNumber('.trafficCounts', result.trafficCounts);
-        viewNumber('.trafficIllegalCounts', result.trafficIllegalCounts);
-    });
-}
-
 function viewNumber(_class, data) {
     var number = parseInt(data);
     $(_class).empty();

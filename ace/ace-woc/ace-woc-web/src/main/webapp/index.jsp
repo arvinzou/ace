@@ -39,7 +39,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-red-haze">
-                            <span data-counter="counterup" data-value="0" id="traffic-count">0</span>
+                            <span data-counter="counterup" data-value="0" id="trafficCounts">0</span>
                             <small class="font-red-haze">次</small>
                         </h3>
                         <small>今日通行记录数</small>
@@ -67,7 +67,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-green-sharp">
-                            <span data-counter="counterup" data-value="" id="illegal-traffic-count">0</span>
+                            <span data-counter="counterup" data-value="" id="trafficIllegalCounts">0</span>
                             <small class="font-green-sharp">次</small>
                         </h3>
                         <small>今日违章记录数</small>
@@ -95,7 +95,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-blue-sharp">
-                            <span data-counter="counterup" data-value="0" id="pt-traffic-count">0</span>
+                            <span data-counter="counterup" data-value="0" id="ptTrafficCounts">0</span>
                             <small class="font-blue-sharp">次</small>
                         </h3>
                         <small>待审通行记录数</small>
@@ -123,7 +123,7 @@
                 <div class="display">
                     <div class="number">
                         <h3 class="font-purple-soft">
-                            <span data-counter="counterup" data-value="0" id="pt-cases-count">0</span>
+                            <span data-counter="counterup" data-value="0" id="ptCasesCounts">0</span>
                             <small class="font-purple-sharp">件</small>
                         </h3>
                         <small>
@@ -159,7 +159,7 @@
             <div class="widget-box transparent background-white padding1" id="day-box">
                 <div class="widget-header">
                     <h4 class="widget-title lighter smaller">
-                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>今日曲线
+                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>各时段超载曲线
                     </h4>
                     <div class="widget-toolbar no-border"></div>
                 </div>
@@ -181,7 +181,7 @@
             <div class="widget-box transparent background-white padding1" id="month-box">
                 <div class="widget-header">
                     <h4 class="widget-title lighter smaller">
-                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>当月曲线
+                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>每日通行情况
                     </h4>
                     <div class="widget-toolbar no-border"></div>
                 </div>
@@ -200,67 +200,81 @@
     </div>
 </div>
 
-<div class="hide page-content background">
+<div class="page-content background">
     <div class="row">
         <div class="col-xs-12 col-sm-5">
-            <div class="widget-box transparent background-white padding1">
-                <ul class="liveTraffic">
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                    <li>
-                        我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容 我是通行记录内容我是通行记录内容
-                    </li>
-                </ul>
+            <div class="widget-box transparent background-white padding1" id="recent-box">
+                <div class="widget-header">
+                    <h4 class="widget-title lighter smaller">
+                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>系统公告
+                    </h4>
+
+                    <div class="widget-toolbar no-border">
+
+                    </div>
+                </div>
+
+                <div class="widget-body" style="min-height:250px">
+                    <div class="widget-main padding-4">
+                        <table width="100%">
+
+
+                            <tbody id="notice-list-grid">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.widget-main -->
+                </div>
+                <!-- /.widget-body -->
             </div>
         </div>
         <div class="col-xs-12 col-sm-5">
+
             <div class="widget-box transparent background-white padding1">
-                <div id="ct3" style="height:300px"></div>
+                <div class="widget-header">
+                    <h4 class="widget-title lighter smaller">
+                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>各卡点通行数量
+                    </h4>
+
+                    <div class="widget-toolbar no-border">
+
+                    </div>
+                </div>
+
+                <div class="widget-body" id="ct3" style="min-height:250px">
+                    <div class="widget-main padding-4">
+                        <div class="widget-box transparent background-white padding1">
+                            <div style="height:250px"></div>
+                        </div>
+                    </div>
+                    <!-- /.widget-main -->
+                </div>
+                <!-- /.widget-body -->
             </div>
         </div>
         <div class="col-xs-12 col-sm-2">
+
             <div class="widget-box transparent background-white padding1">
-                <div id="ct4" style="height:300px"></div>
+                <div class="widget-header">
+                    <h4 class="widget-title lighter smaller">
+                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>案件处理率
+                    </h4>
+
+                    <div class="widget-toolbar no-border">
+
+                    </div>
+                </div>
+
+                <div class="widget-body" style="min-height:250px">
+                    <div class="widget-main padding-4">
+                        <div class="widget-box transparent background-white padding1">
+                            <div id="ct4" style="height:250px"></div>
+                        </div>
+                    </div>
+                    <!-- /.widget-main -->
+                </div>
+                <!-- /.widget-body -->
             </div>
         </div>
     </div>
@@ -270,7 +284,9 @@
 
 <jsp:include page="/dynamic/common/footer-1.jsp"/>
 
-<script src="${portalPath}/content/common/js/echarts-2.27/echarts.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/js/echarts4.0/echarts.js?version=${cfg.version}"></script>
+
+<script src="${portalPath}/content/common/js/echarts4.0/theme/shine.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/index/config-1.js?version=${cfg.version}"></script>
 <%--<script src="${pageContext.request.contextPath}/content/index/config-2.js?version=${cfg.version}"></script>--%>
 <script src="${pageContext.request.contextPath}/content/index/controller.js?version=${cfg.version}"></script>
