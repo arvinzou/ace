@@ -138,11 +138,11 @@ Page({
             util.login();
         }
         
-        // var userinfo =  wx.getStorageSync('userinfo');
-        // var userinfo_role = userinfo.role;
-        // if (userinfo_role != 'admin'){
-        //     that.setData({ modalFlag: false });
-        // }
+         var userinfo =  wx.getStorageSync('userinfo');
+         var userinfo_role = userinfo.role;
+         if (userinfo_role != 'admin'){
+             that.setData({ modalFlag: false });
+         }
         wx.getSystemInfo({
             success: (res) => { // 用这种方法调用，this指向Page
                 this.setData({
