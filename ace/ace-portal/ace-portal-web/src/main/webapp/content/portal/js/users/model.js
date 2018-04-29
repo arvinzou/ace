@@ -1,5 +1,5 @@
 var _colNames = ['姓名', '用户编号', '账户','密码', '性别', '身份证号',  '归属部门','所属地区', '出生日期', '状态',
-		'最后登录时间', '手机号', '电子邮箱', '职务','绑定微信', '座位', '创建时间' ];
+		'最后登录时间', '手机号', '电子邮箱', '职务','绑定微信','绑定小程序', '座位', '创建时间','绑定微信','绑定小程序' ];
 var _colModel = function() {
 	return [
             {
@@ -263,6 +263,16 @@ var _colModel = function() {
               					maxlength : "50"
               				}
               			}, {
+                                       				name : 'sappnickname',
+                                       				hidden:false,
+
+                                       				editable : true,
+                                       				editoptions : {
+                                       					size : "20",
+                                       					maxlength : "50"
+                                       				}
+
+                                       			}, {
 				name : 'seat',
 				hidden:true,
 				//width : 150,
@@ -276,7 +286,23 @@ var _colModel = function() {
 				//width : 200,
 				sortable : true,
 				editable : false
-			} ];
+			},
+             			{
+                         				name : 'title1',
+                         				editable : true,
+                         				hidden : true,
+                         				editoptions : {
+                         					title : true
+                         				}
+                         			},
+                         {
+                         				name : 'title2',
+                         				editable : true,
+                         				hidden : true,
+                         				editoptions : {
+                         					title : true
+                         				}
+                         			} ];
 }
 function aceSwitch(cellvalue, options, cell) {
 	//console.log('aceSwitch');

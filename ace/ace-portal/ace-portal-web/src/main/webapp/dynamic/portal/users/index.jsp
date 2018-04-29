@@ -151,16 +151,29 @@
 				<i class="ace-icon fa fa-hand-o-right blue bigger-120"></i> 您确定吗?
 			</p>
 		</div>
-		<div id="dialog-message-admin" class="hide">
+		<div id="dialog-message-weixin" class="hide">
 			<div>
-				昵称： <input type="text" name="q" id="q"/>
-				<button class="btn btn-info" id="btn-search-admin"
+				昵称： <input type="text" name="q" id="q1"/>
+				<button class="btn btn-info" id="btn-search-weixin"
 						authority="false">
 					查询
 					<i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
 				</button>
 			</div>
-			<div id="wxUserList">
+			<div id="box-weixin">
+
+			</div>
+		</div>
+		<div id="dialog-message-sapp" class="hide">
+			<div>
+				昵称： <input type="text" name="q" id="q2"/>
+				<button class="btn btn-info" id="btn-search-sapp"
+						authority="false">
+					查询
+					<i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+				</button>
+			</div>
+			<div id="box-sapp">
 
 			</div>
 		</div>

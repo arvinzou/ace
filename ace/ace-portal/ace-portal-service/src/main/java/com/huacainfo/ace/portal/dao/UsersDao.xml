@@ -246,7 +246,7 @@
         users.qq,
         s3.nickname,
         s3.headimgurl,
-        s4.nickName,
+        s4.nickName sappnickname,
         s4.avatarUrl
         <include refid="usersPagingWhereCondition"/>
         <choose>
