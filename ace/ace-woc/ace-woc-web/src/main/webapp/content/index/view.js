@@ -1,39 +1,16 @@
 $(function () {
-    // var url = contextPath + '/www/data/statistics';
-    // var data = {};
-    // $.getJSON(url, data, function(result) {
-    //     viewNumber('.trafficCounts', result.trafficCounts);
-    //     viewNumber('.trafficIllegalCounts', result.trafficIllegalCounts);
-    //     var numbers
-    //     if(result.trafficCounts==0||result.trafficIllegalCounts==0){
-    //         numbers=0;
-    //     }else{
-    //         numbers = toDecimal((result.trafficIllegalCounts / result.trafficCounts) * 100);
-    //     }
-    //     optionGauge.series[0].data[0].value = numbers;
-    //     myGauge.setOption(optionGauge, true);
-    // });
+    viewEchart1();
+    viewEchart2();
+    viewEchart3();
+    viewTopNumber();
+});
 
-    var url = contextPath + '/www/data/site';
-    data = {}
-    $.getJSON(url, data, function (result) {
-        if (result.siteList.length) {
-            var siteBar = [];
-            var dataBar = [];
-            var data = result.siteList;
-            for (var i = 0; i < data.length; i++) {
-                siteBar.push(data[i].siteName);
-                dataBar.push(data[i].count);
-            }
-            ;
-            console.log(siteBar);
-            console.log(dataBar);
-            option3.xAxis[0].data = siteBar;
-            option3.series[0].data = dataBar;
-            ct3.setOption(option3);
-        }
-    });
+function getHours() {
+    var date = new Date();
+    return date.getHours();
+}
 
+function viewEchart1() {
     var url = contextPath + '/www/data/interval';
     data = {}
     $.getJSON(url, data, function (result) {
@@ -45,9 +22,53 @@ $(function () {
         option1.series[0].data = dataLine;
         ct1.setOption(option1);
     });
-});
+}
 
-function getHours() {
-    var date = new Date();
-    return date.getHours();
+function viewEchart2() {
+    var url = contextPath + '/www/data/dayInterval';
+    data = {}
+    $.getJSON(url, data, function (result) {
+        var keylue = result.countMap;
+        var xdata = [];
+        var seriesdata = [];
+        for (var key in keylue) {
+            xdata.unshift(key);
+            seriesdata.unshift(keylue[key]);
+        }
+        option2.xAxis[0].data = xdata;
+        option2.series[0].data = seriesdata;
+        ct2.setOption(option2);
+    });
+}
+
+function viewEchart3() {
+    var url = contextPath + '/www/data/site';
+    data = {}
+    $.getJSON(url, data, function (result) {
+        if (result.siteList.length) {
+            var siteBar = [];
+            var dataBar1 = [];
+            var dataBar2 = [];
+            var data = result.siteList;
+            for (var i = 0; i < data.length; i++) {
+                siteBar.push(data[i].siteName);
+                dataBar1.push(data[i].trafficCount);
+                dataBar2.push(data[i].illegalCount);
+            }
+            option3.xAxis[0].data = siteBar;
+            option3.series[0].data = dataBar1;
+            option3.series[1].data = dataBar2;
+            ct3.setOption(option3);
+        }
+    });
+}
+
+function viewTopNumber() {
+    var url = contextPath + '/www/data/statistics';
+    data = {}
+    $.getJSON(url, data, function (result) {
+        for (var key in result) {
+            $('#' + key).text(result[key]);
+        }
+    });
 }

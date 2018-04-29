@@ -7,9 +7,6 @@ $(function () {
     $('.modal').on('click', '.previewLive', fixThisLive);
     $('#scrollbar').scroll(
         function () {
-            console.log($('#scrollbar').scrollTop());
-            console.log($('#scrollbar .table').height());
-            console.log($('#scrollbar').height());
             if ($('#scrollbar .table').height() - $('#scrollbar').scrollTop() == $('#scrollbar').height()) {
                 page++;
                 preview();
@@ -18,7 +15,18 @@ $(function () {
     $('#myModal').on('hidden.bs.modal', function (e) {
         $('#passList').empty();
     });
-    //$('#myModal').modal('show');
+    console.log(window.location.host);
+    $(document).keydown(function (event) {
+        if (event.keyCode == 13) {
+            getTraffic('c55ec3b6b5a24111a7e56c458be0bbab')
+//			 $('#targetDiv').addClass('move');
+//          $('#embg')[0].play();
+        }
+        if (event.ctrlKey) {
+            $('#targetDiv').removeClass('move');
+        }
+    });
+    websocket();
 });
 
 function oneSecondTimes() {
@@ -27,15 +35,6 @@ function oneSecondTimes() {
         clockTime();
         /*数据统计显示*/
     }, 1000);
-}
-
-function statisticalDisplay() {
-    var url = 'http://106.75.69.81/woc/www/data/statistics';
-    var data = {};
-    $.getJSON(url, data, function (result) {
-        viewNumber('.trafficCounts', result.trafficCounts);
-        viewNumber('.trafficIllegalCounts', result.trafficIllegalCounts);
-    });
 }
 
 function viewNumber(_class, data) {
@@ -121,7 +120,6 @@ function viewPassList(data) {
             .replace('[speed]', data[i].speed || '');
         $('#passList').append($(trpass));
     }
-    //	$("#scrollbar").slimScroll();
 }
 
 function fixThisLive() {
@@ -141,3 +139,4 @@ var passTemplate = '<tr>' +
     '					<td class="dangerous">[overRate]</td>' +
     '				    <td>[speed]</td>' +
     '				</tr>';
+

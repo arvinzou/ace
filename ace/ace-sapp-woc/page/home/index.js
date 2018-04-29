@@ -116,11 +116,11 @@ Page({
         searchLoading: false, //"上拉加载"的变量，默认false，隐藏  
         searchLoadingComplete: false,  //“没有数据”的变量，默认false，隐藏 
         trafficList: [],
-        winHeight: 500
+        winHeight: 500,
+        userinfo: wx.getStorageSync('userinfo'),
+        modalFlag: true
     },
     onReady: function (e) {
-        util.login();
-
         var windowWidth = 320;
         var that = this;
         try {
@@ -131,6 +131,18 @@ Page({
         }
     },
     onLoad: function (e) {
+        var that = this;
+        if (wx.getStorageSync('userinfo')){
+            console.log('logined');
+        }else{
+            util.login();
+        }
+        
+         var userinfo =  wx.getStorageSync('userinfo');
+         var userinfo_role = userinfo.role;
+         if (userinfo_role != 'admin'){
+             that.setData({ modalFlag: false });
+         }
         wx.getSystemInfo({
             success: (res) => { // 用这种方法调用，this指向Page
                 this.setData({
@@ -242,7 +254,7 @@ Page({
                 cfg1.series[0].data.splice(0, cfg1.series[0].data.length);
                 for (var i = 0; i < retData.length; i++) {
                     cfg1.categories.push(retData[i].siteName);
-                    cfg1.series[0].data.push(retData[i].count);
+                    cfg1.series[0].data.push(retData[i].illegalCount);
                 }
                 console.log(cfg1);
 

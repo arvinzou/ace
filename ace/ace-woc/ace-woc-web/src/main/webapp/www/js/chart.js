@@ -292,15 +292,16 @@ var optionPie = {
         roseType: 'radius',
         label: {
             normal: {
-                textStyle: {
-                    color: 'rgba(255, 255, 255, 0.3)'
+                formatter: '{b}:{c}',
+                borderColor: '#aaa',
+                fontSize: 14,
+                color: '#f4f4f4',
                 }
-            }
         },
         labelLine: {
             normal: {
                 lineStyle: {
-                    color: 'rgba(255, 255, 255, 0.3)'
+                    color: 'rgba(255, 255, 255, 1)'
                 },
                 smooth: 0.2,
                 length: 10,
@@ -309,9 +310,14 @@ var optionPie = {
         },
         itemStyle: {
             normal: {
-                color: '#4167E2',
-                shadowBlur: 200,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                color: function (params) {
+                    var colorList = [
+                        '#4167E2', '#5BE0F1', '#5C7DEE'
+                    ];
+                    return colorList[params.dataIndex]
+                },
+                shadowBlur: 600,
+                shadowColor: 'rgba(0, 0, 0, 1)'
             }
         },
 
@@ -324,32 +330,30 @@ var optionPie = {
 };
 
 var optionMap = {
+    geo: {
+        zoom: 1.25,
+        map: 'lixian',
+        itemStyle: {
+            normal: {
+                borderWidth: 0, // 省份的边框宽度
+                areaColor: 'rgba(0,0,0,0)',
+            }
+        }
+    },
     tooltip: {
         trigger: 'none',
         showDelay: 0,
-        hideDelay: 2000,
+        triggerOn: 'click',
         alwaysShowContent: true,
         backgroundColor: 'rgba(255,0,0,0)',
-        /*formatter: '<div class="tooltip-map">' +
-            '<div class="tooltip-title">' +
-            '<span>{@name}</span>' +
-            '</div>' +
-            '<div class="tooltip-warp">' +
-            '<p><span class="msg">通行记录（{@count}）</span><span class="infobtn"><a href="javascript:preview(\'' + 123 + '\',\'' + 123 + '\')">查看详情</a></span></p>' +
-            '<p><span class="msg">超限数（1）      </span><span class="infobtn"><a href="javascript:preview(\'' + 123 + '\',\'' + 12312 + '\')">查看详情</a></span></p>' +
-            '</div>' +
-            '<div class="tooltip-xc">' +
-            '<a href="#">查看现场监控</a>' +
-            '</div>' +
-            '</div>',*/
         formatter: function (params) {
             return '<div style="z-index=0;" class="tooltip-map">' +
                 '<div class="tooltip-title">' +
                 '<span>' + params.data.name + '</span>' +
                 '</div>' +
                 '<div class="tooltip-warp">' +
-                '<p><span class="msg">通行记录（' + params.data.count + '）</span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\')">查看详情</a></span></p>' +
-                '<p><span class="msg">超限数（' + params.data.count + '）      </span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\',\'0\')">查看详情</a></span></p>' +
+                '<p><span class="msg">通行记录（' + params.data.trafficCount + '）</span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\')">查看详情</a></span></p>' +
+                '<p><span class="msg">超限数（' + params.data.illegalCount + '）      </span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\',\'0\')">查看详情</a></span></p>' +
                 '</div>' +
                 '<div class="tooltip-xc">' +
                 '<a href="javascript:siteLive(\'' + params.data.siteId + '\')">查看现场监控</a>' +
@@ -357,100 +361,84 @@ var optionMap = {
                 '</div>';
         },
     },
-    series: [{
-        name: '澧县地图',
-        type: 'map',
-        zoom: 1.2,
-        mapType: '澧县',
-        selectedMode: 'single',
-        itemStyle: {
-            normal: {
-                borderWidth: 2, // 省份的边框宽度
-                borderColor: '#0195D3', // 省份的边框颜色
-                areaColor: 'rgba(0,0,0,0)',
-            },
-            emphasis: {
-                label: {
-                    show: true,
-                    color: '#f4f4f4',
-                    fontSize: 15,
-                    fontweight: 'bolder'
-                },
-                borderColor: '#0195D3',
-                areaColor: '#07142b',
-            }
-        },
-        data: [],
-        markPoint: {
-            symbolSize: 25,
+    series: [
+        {
+            name: '澧县地图',
+            type: 'map',
+            zoom: 1.25,
+            map: "lixian",
+            mapType: '澧县',
+            selectedMode: 'single',
             itemStyle: {
                 normal: {
-                    color: 'orange',
-                    label: {
-                        show: false
-                    },
+                    borderWidth: 2, // 省份的边框宽度
+                    borderColor: '#0195D3', // 省份的边框颜色
+                    areaColor: 'rgba(0,0,0,0)',
                 },
                 emphasis: {
-                    color: '#ff0',
                     label: {
-                        show: false
+                        show: true,
+                        color: '#f4f4f4',
+                        fontSize: 15,
+                        fontweight: 'bolder'
                     },
+                    borderColor: '#0195D3',
+                    areaColor: '#07142b',
                 }
             },
-            data: [{
-                symbol: 'pin',
-                name: "大堰垱超限检测站",
-                value: 9,
-                //siteId:
-                coord: [111.641135, 29.746159],
-                tooltip: { // Series config.
-                    trigger: 'item',
-                    position: [90, 380],
-                },
-            },
-                {
-                    symbol: 'triangle',
-                    symbolSize: 15,
-                    name: "熊家湾村站点",
-                    coord: [111.653709, 29.74083],
-                    tooltip: { // Series config.
-                        trigger: 'item',
-                        formatter: '{b}',
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: 'red',
-                            label: {
-                                show: false
-                            },
+            data: [],
+            markPoint: {
+                symbolSize: 25,
+                itemStyle: {
+                    normal: {
+                        color: 'orange',
+                        label: {
+                            show: false
                         },
-                        emphasis: {
-                            color: '#ff0',
-                            label: {
-                                show: false
-                            },
-                        }
                     },
+                    emphasis: {
+                        color: '#ff0',
+                        label: {
+                            show: false
+                        },
+                    }
                 },
-            ]
+                data: []
+            },
+            textFixed: {
+                '澧西街道': [0, 30],
+                '澧浦街道': [0, -10],
+                '城头山镇': [-10, -20],
+                '澧阳街道': [0, -10],
+                '澧澹街道': [0, 15],
+            },
         },
-        textFixed: {
-            '澧西街道': [0, 30],
-            '澧浦街道': [0, -10],
-            '城头山镇': [-10, -20],
-            '澧阳街道': [0, -10],
-            '澧澹街道': [0, 15],
-        },
-    }]
+        {
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: [{
+                value: []
+            }],
+            rippleEffect: {
+                period: 4,
+                scale: 10,
+                brushType: 'fill'
+            },
+            itemStyle: {
+                normal: {
+                    color: '#f00',
+                }
+            },
+            symbolSize: 15,
+            zlevel: 0,
+        }
+    ]
 };
 
 function loadMap() {
     myMap = echarts.init(document.getElementById('mapChart'));
     $.get('geojson/china-main-city/430723.json', function (geoJson) {
-        echarts.registerMap('澧县', geoJson);
+        echarts.registerMap('lixian', geoJson);
         myMap.setOption(optionMap);
-        //		tools.loopShowTooltip(myMap, optionMap, {
-        //			loopSeries: true
-        //		});
     });
 }
