@@ -97,10 +97,9 @@ public class AnslysisServiceImpl implements AnalysisService {
         //今日通行记录数
         Map<String, Object> result = casesDao.selectStatistics(params);
         Map<String, Object> rtnData = new HashMap<>();
-        rtnData.put("trafficCounts", null == result ? 0 : result.get("trafficCounts"));
-        rtnData.put("trafficIllegalCounts", null == result ? 0 : result.get("trafficIllegalCounts"));
-        rtnData.put("ptTrafficCounts", null == result ? 0 : result.get("ptTrafficCounts"));
-        rtnData.put("ptCasesCounts", null == result ? 0 : result.get("ptCasesCounts"));
+        rtnData.put("unauditedCases", null == result ? 0 : result.get("unauditedCases"));
+        rtnData.put("verifyCases", null == result ? 0 : result.get("verifyCases"));
+        rtnData.put("perfectionCases", null == result ? 0 : result.get("perfectionCases"));
         return rtnData;
     }
 
