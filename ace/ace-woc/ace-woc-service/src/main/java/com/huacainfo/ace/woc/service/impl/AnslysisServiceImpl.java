@@ -16,8 +16,6 @@ import com.huacainfo.ace.woc.service.AnalysisService;
 import com.huacainfo.ace.woc.service.SiteService;
 import com.huacainfo.ace.woc.service.TrafficService;
 import com.huacainfo.ace.woc.vo.SiteQVo;
-import com.huacainfo.ace.woc.vo.SiteVo;
-import com.huacainfo.ace.woc.vo.TrafficVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +40,8 @@ public class AnslysisServiceImpl implements AnalysisService {
     private SiteDao siteDao;
     @Autowired
     private TrafficDao trafficDao;
+    @Autowired
+    private CasesDao casesDao;
 
 
     @Override
@@ -85,6 +85,22 @@ public class AnslysisServiceImpl implements AnalysisService {
         rtnData.put("ptTrafficCounts", null == result ? 0 : result.get("ptTrafficCounts"));
         rtnData.put("ptCasesCounts", null == result ? 0 : result.get("ptCasesCounts"));
 
+        return rtnData;
+    }
+
+    @Override
+    public Map<String, Object> caseCounts(String siteId, String startDt, String endDt, UserProp curUserProp) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("startDt", startDt);
+        params.put("siteId", siteId);
+        params.put("endDt", endDt);
+        //今日通行记录数
+        Map<String, Object> result = casesDao.selectStatistics(params);
+        Map<String, Object> rtnData = new HashMap<>();
+        rtnData.put("trafficCounts", null == result ? 0 : result.get("trafficCounts"));
+        rtnData.put("trafficIllegalCounts", null == result ? 0 : result.get("trafficIllegalCounts"));
+        rtnData.put("ptTrafficCounts", null == result ? 0 : result.get("ptTrafficCounts"));
+        rtnData.put("ptCasesCounts", null == result ? 0 : result.get("ptCasesCounts"));
         return rtnData;
     }
 
@@ -391,6 +407,4 @@ public class AnslysisServiceImpl implements AnalysisService {
         rtn.put("countMap", maps);
         return rtn;
     }
-
-
 }

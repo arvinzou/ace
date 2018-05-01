@@ -29,6 +29,9 @@ public interface AnalysisService {
      */
     Map<String, Object> queryCounts(String siteId, String datetime, UserProp curUserProp);
 
+
+    Map<String, Object> caseCounts(String siteId, String startDt, String endDt,  UserProp curUserProp);
+
     /**
      * 今日通行记录折线图
      *
