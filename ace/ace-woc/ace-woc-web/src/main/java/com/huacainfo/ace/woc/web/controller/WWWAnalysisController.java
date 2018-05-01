@@ -60,7 +60,7 @@ public class WWWAnalysisController extends WocBaseController {
      * */
 
     @GetMapping("/casesStatistics")
-    public Map<String, Object> statistics(String siteId, String startDt,String endDt) {
+    public Map<String, Object> caseStatistics(String siteId, String startDt,String endDt) {
         return analysisService.caseCounts(siteId,startDt ,endDt, this.getCurUserProp());
     }
 
