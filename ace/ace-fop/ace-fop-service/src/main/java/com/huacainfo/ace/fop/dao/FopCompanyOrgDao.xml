@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopCompanyOrgDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopCompanyOrg">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="companyOrgType" jdbcType="CHAR" property="companyOrgType"/>
+        <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
+        <result column="orgType" jdbcType="CHAR" property="orgType"/>
+        <result column="peopleNum" jdbcType="INTEGER" property="peopleNum"/>
+        <result column="establishDate" jdbcType="TIMESTAMP" property="establishDate"/>
+        <result column="dutyPersonName" jdbcType="VARCHAR" property="dutyPersonName"/>
+        <result column="dutyPersonPhone" jdbcType="VARCHAR" property="dutyPersonPhone"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, companyId, companyOrgType, orgName, orgType, peopleNum, establishDate, dutyPersonName, 
+    dutyPersonPhone, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
+    lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_company_org
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fop_company_org
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopCompanyOrg">
+    insert into fop_company_org (id, companyId, companyOrgType, 
+      orgName, orgType, peopleNum, 
+      establishDate, dutyPersonName, dutyPersonPhone, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{companyOrgType,jdbcType=CHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{orgType,jdbcType=CHAR}, #{peopleNum,jdbcType=INTEGER}, 
+      #{establishDate,jdbcType=TIMESTAMP}, #{dutyPersonName,jdbcType=VARCHAR}, #{dutyPersonPhone,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopCompanyOrg">
+        insert into fop_company_org
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="companyId != null">
+                companyId,
+            </if>
+            <if test="companyOrgType != null">
+                companyOrgType,
+            </if>
+            <if test="orgName != null">
+                orgName,
+            </if>
+            <if test="orgType != null">
+                orgType,
+            </if>
+            <if test="peopleNum != null">
+                peopleNum,
+            </if>
+            <if test="establishDate != null">
+                establishDate,
+            </if>
+            <if test="dutyPersonName != null">
+                dutyPersonName,
+            </if>
+            <if test="dutyPersonPhone != null">
+                dutyPersonPhone,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyOrgType != null">
+                #{companyOrgType,jdbcType=CHAR},
+            </if>
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgType != null">
+                #{orgType,jdbcType=CHAR},
+            </if>
+            <if test="peopleNum != null">
+                #{peopleNum,jdbcType=INTEGER},
+            </if>
+            <if test="establishDate != null">
+                #{establishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dutyPersonName != null">
+                #{dutyPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="dutyPersonPhone != null">
+                #{dutyPersonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopCompanyOrg">
+        update fop_company_org
+        <set>
+            <if test="companyId != null">
+                companyId = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyOrgType != null">
+                companyOrgType = #{companyOrgType,jdbcType=CHAR},
+            </if>
+            <if test="orgName != null">
+                orgName = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgType != null">
+                orgType = #{orgType,jdbcType=CHAR},
+            </if>
+            <if test="peopleNum != null">
+                peopleNum = #{peopleNum,jdbcType=INTEGER},
+            </if>
+            <if test="establishDate != null">
+                establishDate = #{establishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dutyPersonName != null">
+                dutyPersonName = #{dutyPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="dutyPersonPhone != null">
+                dutyPersonPhone = #{dutyPersonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopCompanyOrg">
+    update fop_company_org
+    set companyId = #{companyId,jdbcType=VARCHAR},
+      companyOrgType = #{companyOrgType,jdbcType=CHAR},
+      orgName = #{orgName,jdbcType=VARCHAR},
+      orgType = #{orgType,jdbcType=CHAR},
+      peopleNum = #{peopleNum,jdbcType=INTEGER},
+      establishDate = #{establishDate,jdbcType=TIMESTAMP},
+      dutyPersonName = #{dutyPersonName,jdbcType=VARCHAR},
+      dutyPersonPhone = #{dutyPersonPhone,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

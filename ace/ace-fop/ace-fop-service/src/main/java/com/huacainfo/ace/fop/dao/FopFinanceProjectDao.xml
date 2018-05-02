@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopFinanceProjectDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopFinanceProject">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="financeTitle" jdbcType="VARCHAR" property="financeTitle"/>
+        <result column="financeCode" jdbcType="VARCHAR" property="financeCode"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
+        <result column="financeType" jdbcType="CHAR" property="financeType"/>
+        <result column="financeAmount" jdbcType="DECIMAL" property="financeAmount"/>
+        <result column="financeDate" jdbcType="TIMESTAMP" property="financeDate"/>
+        <result column="financeYear" jdbcType="VARCHAR" property="financeYear"/>
+        <result column="yearYield" jdbcType="DECIMAL" property="yearYield"/>
+        <result column="dayClicks" jdbcType="BIGINT" property="dayClicks"/>
+        <result column="weekClicks" jdbcType="BIGINT" property="weekClicks"/>
+        <result column="monthClicks" jdbcType="BIGINT" property="monthClicks"/>
+        <result column="likes" jdbcType="BIGINT" property="likes"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="financeContent" jdbcType="LONGVARCHAR" property="financeContent"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, financeTitle, financeCode, areaCode, companyId, releaseDate, financeType, financeAmount, 
+    financeDate, financeYear, yearYield, dayClicks, weekClicks, monthClicks, likes, remark, 
+    status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    lastModifyDate, financeContent
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_finance_project
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fop_finance_project
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopFinanceProject">
+    insert into fop_finance_project (id, financeTitle, financeCode, 
+      areaCode, companyId, releaseDate, 
+      financeType, financeAmount, financeDate, 
+      financeYear, yearYield, dayClicks, 
+      weekClicks, monthClicks, likes, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate, financeContent
+      )
+    values (#{id,jdbcType=VARCHAR}, #{financeTitle,jdbcType=VARCHAR}, #{financeCode,jdbcType=VARCHAR}, 
+      #{areaCode,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
+      #{financeType,jdbcType=CHAR}, #{financeAmount,jdbcType=DECIMAL}, #{financeDate,jdbcType=TIMESTAMP}, 
+      #{financeYear,jdbcType=VARCHAR}, #{yearYield,jdbcType=DECIMAL}, #{dayClicks,jdbcType=BIGINT}, 
+      #{weekClicks,jdbcType=BIGINT}, #{monthClicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{financeContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopFinanceProject">
+        insert into fop_finance_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="financeTitle != null">
+                financeTitle,
+            </if>
+            <if test="financeCode != null">
+                financeCode,
+            </if>
+            <if test="areaCode != null">
+                areaCode,
+            </if>
+            <if test="companyId != null">
+                companyId,
+            </if>
+            <if test="releaseDate != null">
+                releaseDate,
+            </if>
+            <if test="financeType != null">
+                financeType,
+            </if>
+            <if test="financeAmount != null">
+                financeAmount,
+            </if>
+            <if test="financeDate != null">
+                financeDate,
+            </if>
+            <if test="financeYear != null">
+                financeYear,
+            </if>
+            <if test="yearYield != null">
+                yearYield,
+            </if>
+            <if test="dayClicks != null">
+                dayClicks,
+            </if>
+            <if test="weekClicks != null">
+                weekClicks,
+            </if>
+            <if test="monthClicks != null">
+                monthClicks,
+            </if>
+            <if test="likes != null">
+                likes,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+            <if test="financeContent != null">
+                financeContent,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="financeTitle != null">
+                #{financeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="financeCode != null">
+                #{financeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="financeType != null">
+                #{financeType,jdbcType=CHAR},
+            </if>
+            <if test="financeAmount != null">
+                #{financeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="financeDate != null">
+                #{financeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="financeYear != null">
+                #{financeYear,jdbcType=VARCHAR},
+            </if>
+            <if test="yearYield != null">
+                #{yearYield,jdbcType=DECIMAL},
+            </if>
+            <if test="dayClicks != null">
+                #{dayClicks,jdbcType=BIGINT},
+            </if>
+            <if test="weekClicks != null">
+                #{weekClicks,jdbcType=BIGINT},
+            </if>
+            <if test="monthClicks != null">
+                #{monthClicks,jdbcType=BIGINT},
+            </if>
+            <if test="likes != null">
+                #{likes,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="financeContent != null">
+                #{financeContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopFinanceProject">
+        update fop_finance_project
+        <set>
+            <if test="financeTitle != null">
+                financeTitle = #{financeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="financeCode != null">
+                financeCode = #{financeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                areaCode = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                companyId = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="financeType != null">
+                financeType = #{financeType,jdbcType=CHAR},
+            </if>
+            <if test="financeAmount != null">
+                financeAmount = #{financeAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="financeDate != null">
+                financeDate = #{financeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="financeYear != null">
+                financeYear = #{financeYear,jdbcType=VARCHAR},
+            </if>
+            <if test="yearYield != null">
+                yearYield = #{yearYield,jdbcType=DECIMAL},
+            </if>
+            <if test="dayClicks != null">
+                dayClicks = #{dayClicks,jdbcType=BIGINT},
+            </if>
+            <if test="weekClicks != null">
+                weekClicks = #{weekClicks,jdbcType=BIGINT},
+            </if>
+            <if test="monthClicks != null">
+                monthClicks = #{monthClicks,jdbcType=BIGINT},
+            </if>
+            <if test="likes != null">
+                likes = #{likes,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="financeContent != null">
+                financeContent = #{financeContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopFinanceProject">
+    update fop_finance_project
+    set financeTitle = #{financeTitle,jdbcType=VARCHAR},
+      financeCode = #{financeCode,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      companyId = #{companyId,jdbcType=VARCHAR},
+      releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+      financeType = #{financeType,jdbcType=CHAR},
+      financeAmount = #{financeAmount,jdbcType=DECIMAL},
+      financeDate = #{financeDate,jdbcType=TIMESTAMP},
+      financeYear = #{financeYear,jdbcType=VARCHAR},
+      yearYield = #{yearYield,jdbcType=DECIMAL},
+      dayClicks = #{dayClicks,jdbcType=BIGINT},
+      weekClicks = #{weekClicks,jdbcType=BIGINT},
+      monthClicks = #{monthClicks,jdbcType=BIGINT},
+      likes = #{likes,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

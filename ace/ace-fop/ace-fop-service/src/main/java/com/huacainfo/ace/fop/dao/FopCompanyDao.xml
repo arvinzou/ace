@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopCompanyDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopCompany">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="departmentId" jdbcType="VARCHAR" property="departmentId"/>
+        <result column="creditCode" jdbcType="VARCHAR" property="creditCode"/>
+        <result column="companyType" jdbcType="CHAR" property="companyType"/>
+        <result column="fullName" jdbcType="VARCHAR" property="fullName"/>
+        <result column="shortName" jdbcType="VARCHAR" property="shortName"/>
+        <result column="companyCode" jdbcType="VARCHAR" property="companyCode"/>
+        <result column="companyLogo" jdbcType="VARCHAR" property="companyLogo"/>
+        <result column="companyLinkUrl" jdbcType="VARCHAR" property="companyLinkUrl"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="companyProperty" jdbcType="CHAR" property="companyProperty"/>
+        <result column="establishDate" jdbcType="TIMESTAMP" property="establishDate"/>
+        <result column="crewSize" jdbcType="INTEGER" property="crewSize"/>
+        <result column="registeredCapital" jdbcType="DECIMAL" property="registeredCapital"/>
+        <result column="fixedAssets" jdbcType="DECIMAL" property="fixedAssets"/>
+        <result column="workingCapital" jdbcType="DECIMAL" property="workingCapital"/>
+        <result column="ownSpace" jdbcType="DECIMAL" property="ownSpace"/>
+        <result column="tenancySpace" jdbcType="DECIMAL" property="tenancySpace"/>
+        <result column="personId" jdbcType="VARCHAR" property="personId"/>
+        <result column="adress" jdbcType="VARCHAR" property="adress"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="firstPersonId" jdbcType="VARCHAR" property="firstPersonId"/>
+        <result column="secPersonId" jdbcType="VARCHAR" property="secPersonId"/>
+        <result column="postcode" jdbcType="VARCHAR" property="postcode"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="majorVariety" jdbcType="VARCHAR" property="majorVariety"/>
+        <result column="laborContractNum" jdbcType="INTEGER" property="laborContractNum"/>
+        <result column="thirdLaborRelation" jdbcType="CHAR" property="thirdLaborRelation"/>
+        <result column="socialInsuranceAddr" jdbcType="VARCHAR" property="socialInsuranceAddr"/>
+        <result column="socialInsuranceNum" jdbcType="VARCHAR" property="socialInsuranceNum"/>
+        <result column="accTaxAmount" jdbcType="DECIMAL" property="accTaxAmount"/>
+        <result column="yearTaxAmount" jdbcType="DECIMAL" property="yearTaxAmount"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, departmentId, creditCode, companyType, fullName, shortName, companyCode, companyLogo, 
+    companyLinkUrl, areaCode, companyProperty, establishDate, crewSize, registeredCapital, 
+    fixedAssets, workingCapital, ownSpace, tenancySpace, personId, adress, latitude, 
+    longitude, firstPersonId, secPersonId, postcode, fax, email, majorVariety, laborContractNum, 
+    thirdLaborRelation, socialInsuranceAddr, socialInsuranceNum, accTaxAmount, yearTaxAmount, 
+    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_company
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fop_company
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopCompany">
+    insert into fop_company (id, departmentId, creditCode, 
+      companyType, fullName, shortName, 
+      companyCode, companyLogo, companyLinkUrl, 
+      areaCode, companyProperty, establishDate, 
+      crewSize, registeredCapital, fixedAssets, 
+      workingCapital, ownSpace, tenancySpace, 
+      personId, adress, latitude, 
+      longitude, firstPersonId, secPersonId, 
+      postcode, fax, email, 
+      majorVariety, laborContractNum, thirdLaborRelation, 
+      socialInsuranceAddr, socialInsuranceNum, 
+      accTaxAmount, yearTaxAmount, remark, 
+      status, createUserId, createUserName, 
+      createDate, lastModifyUserId, lastModifyUserName, 
+      lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR}, 
+      #{companyType,jdbcType=CHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
+      #{companyCode,jdbcType=VARCHAR}, #{companyLogo,jdbcType=VARCHAR}, #{companyLinkUrl,jdbcType=VARCHAR}, 
+      #{areaCode,jdbcType=VARCHAR}, #{companyProperty,jdbcType=CHAR}, #{establishDate,jdbcType=TIMESTAMP}, 
+      #{crewSize,jdbcType=INTEGER}, #{registeredCapital,jdbcType=DECIMAL}, #{fixedAssets,jdbcType=DECIMAL}, 
+      #{workingCapital,jdbcType=DECIMAL}, #{ownSpace,jdbcType=DECIMAL}, #{tenancySpace,jdbcType=DECIMAL}, 
+      #{personId,jdbcType=VARCHAR}, #{adress,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, 
+      #{longitude,jdbcType=DECIMAL}, #{firstPersonId,jdbcType=VARCHAR}, #{secPersonId,jdbcType=VARCHAR}, 
+      #{postcode,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{majorVariety,jdbcType=VARCHAR}, #{laborContractNum,jdbcType=INTEGER}, #{thirdLaborRelation,jdbcType=CHAR}, 
+      #{socialInsuranceAddr,jdbcType=VARCHAR}, #{socialInsuranceNum,jdbcType=VARCHAR}, 
+      #{accTaxAmount,jdbcType=DECIMAL}, #{yearTaxAmount,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopCompany">
+        insert into fop_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="departmentId != null">
+                departmentId,
+            </if>
+            <if test="creditCode != null">
+                creditCode,
+            </if>
+            <if test="companyType != null">
+                companyType,
+            </if>
+            <if test="fullName != null">
+                fullName,
+            </if>
+            <if test="shortName != null">
+                shortName,
+            </if>
+            <if test="companyCode != null">
+                companyCode,
+            </if>
+            <if test="companyLogo != null">
+                companyLogo,
+            </if>
+            <if test="companyLinkUrl != null">
+                companyLinkUrl,
+            </if>
+            <if test="areaCode != null">
+                areaCode,
+            </if>
+            <if test="companyProperty != null">
+                companyProperty,
+            </if>
+            <if test="establishDate != null">
+                establishDate,
+            </if>
+            <if test="crewSize != null">
+                crewSize,
+            </if>
+            <if test="registeredCapital != null">
+                registeredCapital,
+            </if>
+            <if test="fixedAssets != null">
+                fixedAssets,
+            </if>
+            <if test="workingCapital != null">
+                workingCapital,
+            </if>
+            <if test="ownSpace != null">
+                ownSpace,
+            </if>
+            <if test="tenancySpace != null">
+                tenancySpace,
+            </if>
+            <if test="personId != null">
+                personId,
+            </if>
+            <if test="adress != null">
+                adress,
+            </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+            <if test="longitude != null">
+                longitude,
+            </if>
+            <if test="firstPersonId != null">
+                firstPersonId,
+            </if>
+            <if test="secPersonId != null">
+                secPersonId,
+            </if>
+            <if test="postcode != null">
+                postcode,
+            </if>
+            <if test="fax != null">
+                fax,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="majorVariety != null">
+                majorVariety,
+            </if>
+            <if test="laborContractNum != null">
+                laborContractNum,
+            </if>
+            <if test="thirdLaborRelation != null">
+                thirdLaborRelation,
+            </if>
+            <if test="socialInsuranceAddr != null">
+                socialInsuranceAddr,
+            </if>
+            <if test="socialInsuranceNum != null">
+                socialInsuranceNum,
+            </if>
+            <if test="accTaxAmount != null">
+                accTaxAmount,
+            </if>
+            <if test="yearTaxAmount != null">
+                yearTaxAmount,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="creditCode != null">
+                #{creditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyType != null">
+                #{companyType,jdbcType=CHAR},
+            </if>
+            <if test="fullName != null">
+                #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null">
+                #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyCode != null">
+                #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyLogo != null">
+                #{companyLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="companyLinkUrl != null">
+                #{companyLinkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyProperty != null">
+                #{companyProperty,jdbcType=CHAR},
+            </if>
+            <if test="establishDate != null">
+                #{establishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crewSize != null">
+                #{crewSize,jdbcType=INTEGER},
+            </if>
+            <if test="registeredCapital != null">
+                #{registeredCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="fixedAssets != null">
+                #{fixedAssets,jdbcType=DECIMAL},
+            </if>
+            <if test="workingCapital != null">
+                #{workingCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="ownSpace != null">
+                #{ownSpace,jdbcType=DECIMAL},
+            </if>
+            <if test="tenancySpace != null">
+                #{tenancySpace,jdbcType=DECIMAL},
+            </if>
+            <if test="personId != null">
+                #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="adress != null">
+                #{adress,jdbcType=VARCHAR},
+            </if>
+            <if test="latitude != null">
+                #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="longitude != null">
+                #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="firstPersonId != null">
+                #{firstPersonId,jdbcType=VARCHAR},
+            </if>
+            <if test="secPersonId != null">
+                #{secPersonId,jdbcType=VARCHAR},
+            </if>
+            <if test="postcode != null">
+                #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="majorVariety != null">
+                #{majorVariety,jdbcType=VARCHAR},
+            </if>
+            <if test="laborContractNum != null">
+                #{laborContractNum,jdbcType=INTEGER},
+            </if>
+            <if test="thirdLaborRelation != null">
+                #{thirdLaborRelation,jdbcType=CHAR},
+            </if>
+            <if test="socialInsuranceAddr != null">
+                #{socialInsuranceAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="socialInsuranceNum != null">
+                #{socialInsuranceNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accTaxAmount != null">
+                #{accTaxAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="yearTaxAmount != null">
+                #{yearTaxAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopCompany">
+        update fop_company
+        <set>
+            <if test="departmentId != null">
+                departmentId = #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="creditCode != null">
+                creditCode = #{creditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyType != null">
+                companyType = #{companyType,jdbcType=CHAR},
+            </if>
+            <if test="fullName != null">
+                fullName = #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null">
+                shortName = #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyCode != null">
+                companyCode = #{companyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyLogo != null">
+                companyLogo = #{companyLogo,jdbcType=VARCHAR},
+            </if>
+            <if test="companyLinkUrl != null">
+                companyLinkUrl = #{companyLinkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                areaCode = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="companyProperty != null">
+                companyProperty = #{companyProperty,jdbcType=CHAR},
+            </if>
+            <if test="establishDate != null">
+                establishDate = #{establishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crewSize != null">
+                crewSize = #{crewSize,jdbcType=INTEGER},
+            </if>
+            <if test="registeredCapital != null">
+                registeredCapital = #{registeredCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="fixedAssets != null">
+                fixedAssets = #{fixedAssets,jdbcType=DECIMAL},
+            </if>
+            <if test="workingCapital != null">
+                workingCapital = #{workingCapital,jdbcType=DECIMAL},
+            </if>
+            <if test="ownSpace != null">
+                ownSpace = #{ownSpace,jdbcType=DECIMAL},
+            </if>
+            <if test="tenancySpace != null">
+                tenancySpace = #{tenancySpace,jdbcType=DECIMAL},
+            </if>
+            <if test="personId != null">
+                personId = #{personId,jdbcType=VARCHAR},
+            </if>
+            <if test="adress != null">
+                adress = #{adress,jdbcType=VARCHAR},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="firstPersonId != null">
+                firstPersonId = #{firstPersonId,jdbcType=VARCHAR},
+            </if>
+            <if test="secPersonId != null">
+                secPersonId = #{secPersonId,jdbcType=VARCHAR},
+            </if>
+            <if test="postcode != null">
+                postcode = #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                fax = #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="majorVariety != null">
+                majorVariety = #{majorVariety,jdbcType=VARCHAR},
+            </if>
+            <if test="laborContractNum != null">
+                laborContractNum = #{laborContractNum,jdbcType=INTEGER},
+            </if>
+            <if test="thirdLaborRelation != null">
+                thirdLaborRelation = #{thirdLaborRelation,jdbcType=CHAR},
+            </if>
+            <if test="socialInsuranceAddr != null">
+                socialInsuranceAddr = #{socialInsuranceAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="socialInsuranceNum != null">
+                socialInsuranceNum = #{socialInsuranceNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accTaxAmount != null">
+                accTaxAmount = #{accTaxAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="yearTaxAmount != null">
+                yearTaxAmount = #{yearTaxAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopCompany">
+    update fop_company
+    set departmentId = #{departmentId,jdbcType=VARCHAR},
+      creditCode = #{creditCode,jdbcType=VARCHAR},
+      companyType = #{companyType,jdbcType=CHAR},
+      fullName = #{fullName,jdbcType=VARCHAR},
+      shortName = #{shortName,jdbcType=VARCHAR},
+      companyCode = #{companyCode,jdbcType=VARCHAR},
+      companyLogo = #{companyLogo,jdbcType=VARCHAR},
+      companyLinkUrl = #{companyLinkUrl,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      companyProperty = #{companyProperty,jdbcType=CHAR},
+      establishDate = #{establishDate,jdbcType=TIMESTAMP},
+      crewSize = #{crewSize,jdbcType=INTEGER},
+      registeredCapital = #{registeredCapital,jdbcType=DECIMAL},
+      fixedAssets = #{fixedAssets,jdbcType=DECIMAL},
+      workingCapital = #{workingCapital,jdbcType=DECIMAL},
+      ownSpace = #{ownSpace,jdbcType=DECIMAL},
+      tenancySpace = #{tenancySpace,jdbcType=DECIMAL},
+      personId = #{personId,jdbcType=VARCHAR},
+      adress = #{adress,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      firstPersonId = #{firstPersonId,jdbcType=VARCHAR},
+      secPersonId = #{secPersonId,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      majorVariety = #{majorVariety,jdbcType=VARCHAR},
+      laborContractNum = #{laborContractNum,jdbcType=INTEGER},
+      thirdLaborRelation = #{thirdLaborRelation,jdbcType=CHAR},
+      socialInsuranceAddr = #{socialInsuranceAddr,jdbcType=VARCHAR},
+      socialInsuranceNum = #{socialInsuranceNum,jdbcType=VARCHAR},
+      accTaxAmount = #{accTaxAmount,jdbcType=DECIMAL},
+      yearTaxAmount = #{yearTaxAmount,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopCompanyVo">
+
+    </resultMap>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_company
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

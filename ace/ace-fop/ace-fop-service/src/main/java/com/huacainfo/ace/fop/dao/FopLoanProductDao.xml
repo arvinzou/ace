@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopLoanProductDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopLoanProduct">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="productName" jdbcType="VARCHAR" property="productName"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="loanAmount" jdbcType="DECIMAL" property="loanAmount"/>
+        <result column="rateType" jdbcType="CHAR" property="rateType"/>
+        <result column="loadRate" jdbcType="DECIMAL" property="loadRate"/>
+        <result column="loadType" jdbcType="CHAR" property="loadType"/>
+        <result column="loadYear" jdbcType="DECIMAL" property="loadYear"/>
+        <result column="repaymentType" jdbcType="CHAR" property="repaymentType"/>
+        <result column="suretyType" jdbcType="CHAR" property="suretyType"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, companyId, areaCode, productName, description, loanAmount, rateType, loadRate, 
+    loadType, loadYear, repaymentType, suretyType, remark, status, createUserId, createUserName, 
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_loan_product
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fop_loan_product
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopLoanProduct">
+    insert into fop_loan_product (id, companyId, areaCode, 
+      productName, description, loanAmount, 
+      rateType, loadRate, loadType, 
+      loadYear, repaymentType, suretyType, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{loanAmount,jdbcType=DECIMAL}, 
+      #{rateType,jdbcType=CHAR}, #{loadRate,jdbcType=DECIMAL}, #{loadType,jdbcType=CHAR}, 
+      #{loadYear,jdbcType=DECIMAL}, #{repaymentType,jdbcType=CHAR}, #{suretyType,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopLoanProduct">
+        insert into fop_loan_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="companyId != null">
+                companyId,
+            </if>
+            <if test="areaCode != null">
+                areaCode,
+            </if>
+            <if test="productName != null">
+                productName,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="loanAmount != null">
+                loanAmount,
+            </if>
+            <if test="rateType != null">
+                rateType,
+            </if>
+            <if test="loadRate != null">
+                loadRate,
+            </if>
+            <if test="loadType != null">
+                loadType,
+            </if>
+            <if test="loadYear != null">
+                loadYear,
+            </if>
+            <if test="repaymentType != null">
+                repaymentType,
+            </if>
+            <if test="suretyType != null">
+                suretyType,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="loanAmount != null">
+                #{loanAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="rateType != null">
+                #{rateType,jdbcType=CHAR},
+            </if>
+            <if test="loadRate != null">
+                #{loadRate,jdbcType=DECIMAL},
+            </if>
+            <if test="loadType != null">
+                #{loadType,jdbcType=CHAR},
+            </if>
+            <if test="loadYear != null">
+                #{loadYear,jdbcType=DECIMAL},
+            </if>
+            <if test="repaymentType != null">
+                #{repaymentType,jdbcType=CHAR},
+            </if>
+            <if test="suretyType != null">
+                #{suretyType,jdbcType=CHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopLoanProduct">
+        update fop_loan_product
+        <set>
+            <if test="companyId != null">
+                companyId = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                areaCode = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                productName = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="loanAmount != null">
+                loanAmount = #{loanAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="rateType != null">
+                rateType = #{rateType,jdbcType=CHAR},
+            </if>
+            <if test="loadRate != null">
+                loadRate = #{loadRate,jdbcType=DECIMAL},
+            </if>
+            <if test="loadType != null">
+                loadType = #{loadType,jdbcType=CHAR},
+            </if>
+            <if test="loadYear != null">
+                loadYear = #{loadYear,jdbcType=DECIMAL},
+            </if>
+            <if test="repaymentType != null">
+                repaymentType = #{repaymentType,jdbcType=CHAR},
+            </if>
+            <if test="suretyType != null">
+                suretyType = #{suretyType,jdbcType=CHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopLoanProduct">
+    update fop_loan_product
+    set companyId = #{companyId,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      loanAmount = #{loanAmount,jdbcType=DECIMAL},
+      rateType = #{rateType,jdbcType=CHAR},
+      loadRate = #{loadRate,jdbcType=DECIMAL},
+      loadType = #{loadType,jdbcType=CHAR},
+      loadYear = #{loadYear,jdbcType=DECIMAL},
+      repaymentType = #{repaymentType,jdbcType=CHAR},
+      suretyType = #{suretyType,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopLoanProductVo">
+
+    </resultMap>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_loan_product
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>
