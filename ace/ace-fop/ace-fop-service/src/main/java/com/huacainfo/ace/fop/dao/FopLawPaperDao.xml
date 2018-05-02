@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopLawPaperDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopLawPaper">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
+        <result column="keyWord" jdbcType="VARCHAR" property="keyWord"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, title, releaseDate, keyWord, remark, status, createUserId, createUserName, createDate, 
+    lastModifyUserId, lastModifyUserName, lastModifyDate, content
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_law_paper
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fop_law_paper
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopLawPaper">
+    insert into fop_law_paper (id, title, releaseDate, 
+      keyWord, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate, 
+      content)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
+      #{keyWord,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopLawPaper">
+        insert into fop_law_paper
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="releaseDate != null">
+                releaseDate,
+            </if>
+            <if test="keyWord != null">
+                keyWord,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="keyWord != null">
+                #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopLawPaper">
+        update fop_law_paper
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="keyWord != null">
+                keyWord = #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopLawPaper">
+    update fop_law_paper
+    set title = #{title,jdbcType=VARCHAR},
+      releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+      keyWord = #{keyWord,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopLawPaperVo">
+
+    </resultMap>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_law_paper
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

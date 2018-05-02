@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopPersonDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopPerson">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="realName" jdbcType="VARCHAR" property="realName"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="birthDate" jdbcType="TIMESTAMP" property="birthDate"/>
+        <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace"/>
+        <result column="nationality" jdbcType="VARCHAR" property="nationality"/>
+        <result column="political" jdbcType="VARCHAR" property="political"/>
+        <result column="recruitmentDate" jdbcType="TIMESTAMP" property="recruitmentDate"/>
+        <result column="education" jdbcType="VARCHAR" property="education"/>
+        <result column="skillJobTitle" jdbcType="VARCHAR" property="skillJobTitle"/>
+        <result column="deptPost" jdbcType="VARCHAR" property="deptPost"/>
+        <result column="identityCard" jdbcType="VARCHAR" property="identityCard"/>
+        <result column="societyPost" jdbcType="VARCHAR" property="societyPost"/>
+        <result column="phoneNumber" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="mobileNumer" jdbcType="VARCHAR" property="mobileNumer"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="resume" jdbcType="LONGVARCHAR" property="resume"/>
+        <result column="achievement" jdbcType="LONGVARCHAR" property="achievement"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, realName, sex, birthDate, nativePlace, nationality, political, recruitmentDate, 
+    education, skillJobTitle, deptPost, identityCard, societyPost, phoneNumber, mobileNumer, 
+    email, remark, status, createUserId, createUserName, createDate, lastModifyUserId, resume, achievement,
+    lastModifyUserName, lastModifyDate
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_person
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fop_person
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopPerson">
+    insert into fop_person (id, realName, sex, 
+      birthDate, nativePlace, nationality, 
+      political, recruitmentDate, education, 
+      skillJobTitle, deptPost, identityCard, 
+      societyPost, phoneNumber, mobileNumer, 
+      email, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate, 
+      resume, achievement)
+    values (#{id,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{birthDate,jdbcType=TIMESTAMP}, #{nativePlace,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, 
+      #{political,jdbcType=VARCHAR}, #{recruitmentDate,jdbcType=TIMESTAMP}, #{education,jdbcType=VARCHAR}, 
+      #{skillJobTitle,jdbcType=VARCHAR}, #{deptPost,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR}, 
+      #{societyPost,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{mobileNumer,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
+      #{resume,jdbcType=LONGVARCHAR}, #{achievement,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopPerson">
+        insert into fop_person
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="realName != null">
+                realName,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="birthDate != null">
+                birthDate,
+            </if>
+            <if test="nativePlace != null">
+                nativePlace,
+            </if>
+            <if test="nationality != null">
+                nationality,
+            </if>
+            <if test="political != null">
+                political,
+            </if>
+            <if test="recruitmentDate != null">
+                recruitmentDate,
+            </if>
+            <if test="education != null">
+                education,
+            </if>
+            <if test="skillJobTitle != null">
+                skillJobTitle,
+            </if>
+            <if test="deptPost != null">
+                deptPost,
+            </if>
+            <if test="identityCard != null">
+                identityCard,
+            </if>
+            <if test="societyPost != null">
+                societyPost,
+            </if>
+            <if test="phoneNumber != null">
+                phoneNumber,
+            </if>
+            <if test="mobileNumer != null">
+                mobileNumer,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+            <if test="resume != null">
+                resume,
+            </if>
+            <if test="achievement != null">
+                achievement,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=CHAR},
+            </if>
+            <if test="birthDate != null">
+                #{birthDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nativePlace != null">
+                #{nativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="nationality != null">
+                #{nationality,jdbcType=VARCHAR},
+            </if>
+            <if test="political != null">
+                #{political,jdbcType=VARCHAR},
+            </if>
+            <if test="recruitmentDate != null">
+                #{recruitmentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="education != null">
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="skillJobTitle != null">
+                #{skillJobTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="deptPost != null">
+                #{deptPost,jdbcType=VARCHAR},
+            </if>
+            <if test="identityCard != null">
+                #{identityCard,jdbcType=VARCHAR},
+            </if>
+            <if test="societyPost != null">
+                #{societyPost,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileNumer != null">
+                #{mobileNumer,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="resume != null">
+                #{resume,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="achievement != null">
+                #{achievement,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopPerson">
+        update fop_person
+        <set>
+            <if test="realName != null">
+                realName = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=CHAR},
+            </if>
+            <if test="birthDate != null">
+                birthDate = #{birthDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nativePlace != null">
+                nativePlace = #{nativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="nationality != null">
+                nationality = #{nationality,jdbcType=VARCHAR},
+            </if>
+            <if test="political != null">
+                political = #{political,jdbcType=VARCHAR},
+            </if>
+            <if test="recruitmentDate != null">
+                recruitmentDate = #{recruitmentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="skillJobTitle != null">
+                skillJobTitle = #{skillJobTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="deptPost != null">
+                deptPost = #{deptPost,jdbcType=VARCHAR},
+            </if>
+            <if test="identityCard != null">
+                identityCard = #{identityCard,jdbcType=VARCHAR},
+            </if>
+            <if test="societyPost != null">
+                societyPost = #{societyPost,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileNumer != null">
+                mobileNumer = #{mobileNumer,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="resume != null">
+                resume = #{resume,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="achievement != null">
+                achievement = #{achievement,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.fop.model.FopPerson">
+    update fop_person
+    set realName = #{realName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      birthDate = #{birthDate,jdbcType=TIMESTAMP},
+      nativePlace = #{nativePlace,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      political = #{political,jdbcType=VARCHAR},
+      recruitmentDate = #{recruitmentDate,jdbcType=TIMESTAMP},
+      education = #{education,jdbcType=VARCHAR},
+      skillJobTitle = #{skillJobTitle,jdbcType=VARCHAR},
+      deptPost = #{deptPost,jdbcType=VARCHAR},
+      identityCard = #{identityCard,jdbcType=VARCHAR},
+      societyPost = #{societyPost,jdbcType=VARCHAR},
+      phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
+      mobileNumer = #{mobileNumer,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      resume = #{resume,jdbcType=LONGVARCHAR},
+      achievement = #{achievement,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopPerson">
+    update fop_person
+    set realName = #{realName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      birthDate = #{birthDate,jdbcType=TIMESTAMP},
+      nativePlace = #{nativePlace,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      political = #{political,jdbcType=VARCHAR},
+      recruitmentDate = #{recruitmentDate,jdbcType=TIMESTAMP},
+      education = #{education,jdbcType=VARCHAR},
+      skillJobTitle = #{skillJobTitle,jdbcType=VARCHAR},
+      deptPost = #{deptPost,jdbcType=VARCHAR},
+      identityCard = #{identityCard,jdbcType=VARCHAR},
+      societyPost = #{societyPost,jdbcType=VARCHAR},
+      phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
+      mobileNumer = #{mobileNumer,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopPersonVo">
+
+    </resultMap>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_person
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>
