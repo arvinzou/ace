@@ -292,15 +292,16 @@ var optionPie = {
         roseType: 'radius',
         label: {
             normal: {
-                textStyle: {
-                    color: 'rgba(255, 255, 255, 0.3)'
+                formatter: '{b}:{c}',
+                borderColor: '#aaa',
+                fontSize: 14,
+                color: '#f4f4f4',
                 }
-            }
         },
         labelLine: {
             normal: {
                 lineStyle: {
-                    color: 'rgba(255, 255, 255, 0.3)'
+                    color: 'rgba(255, 255, 255, 1)'
                 },
                 smooth: 0.2,
                 length: 10,
@@ -309,9 +310,14 @@ var optionPie = {
         },
         itemStyle: {
             normal: {
-                color: '#4167E2',
-                shadowBlur: 200,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                color: function (params) {
+                    var colorList = [
+                        '#4167E2', '#5BE0F1', '#5C7DEE'
+                    ];
+                    return colorList[params.dataIndex]
+                },
+                shadowBlur: 600,
+                shadowColor: 'rgba(0, 0, 0, 1)'
             }
         },
 
@@ -346,8 +352,8 @@ var optionMap = {
                 '<span>' + params.data.name + '</span>' +
                 '</div>' +
                 '<div class="tooltip-warp">' +
-                '<p><span class="msg">通行记录（' + params.data.count + '）</span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\')">查看详情</a></span></p>' +
-                '<p><span class="msg">超限数（' + params.data.count + '）      </span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\',\'0\')">查看详情</a></span></p>' +
+                '<p><span class="msg">通行记录（' + params.data.trafficCount + '）</span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\')">查看详情</a></span></p>' +
+                '<p><span class="msg">超限数（' + params.data.illegalCount + '）      </span><span class="infobtn"><a href="javascript:preview(\'' + params.data.siteId + '\',\'0\')">查看详情</a></span></p>' +
                 '</div>' +
                 '<div class="tooltip-xc">' +
                 '<a href="javascript:siteLive(\'' + params.data.siteId + '\')">查看现场监控</a>' +
@@ -411,8 +417,7 @@ var optionMap = {
             type: 'effectScatter',
             coordinateSystem: 'geo',
             data: [{
-                name: '水泗村站',
-                value: [111.654911, 29.717266]
+                value: []
             }],
             rippleEffect: {
                 period: 4,

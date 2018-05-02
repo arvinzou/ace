@@ -16,8 +16,6 @@ import com.huacainfo.ace.woc.service.AnalysisService;
 import com.huacainfo.ace.woc.service.SiteService;
 import com.huacainfo.ace.woc.service.TrafficService;
 import com.huacainfo.ace.woc.vo.SiteQVo;
-import com.huacainfo.ace.woc.vo.SiteVo;
-import com.huacainfo.ace.woc.vo.TrafficVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +40,12 @@ public class AnslysisServiceImpl implements AnalysisService {
     private SiteDao siteDao;
     @Autowired
     private TrafficDao trafficDao;
+    @Autowired
+    private CasesDao casesDao;
 
 
     @Override
-    public ListResult<Map<String, Object>> query(Map<String, Object> condition,
-                                                 String reportId, int start, int limit) throws Exception {
+    public ListResult<Map<String, Object>> query(Map<String, Object> condition, String reportId, int start, int limit) throws Exception {
         ListResult<Map<String, Object>> rst = new ListResult<Map<String, Object>>();
         List<Map<String, Object>> p = new ArrayList<Map<String, Object>>();
         ReportDao dao = (ReportDao) SpringUtils.getBean(reportId);
@@ -89,6 +88,21 @@ public class AnslysisServiceImpl implements AnalysisService {
         return rtnData;
     }
 
+    @Override
+    public Map<String, Object> caseCounts(String siteId, String startDt, String endDt, UserProp curUserProp) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("startDt", startDt);
+        params.put("siteId", siteId);
+        params.put("endDt", endDt);
+        //今日通行记录数
+        Map<String, Object> result = casesDao.selectStatistics(params);
+        Map<String, Object> rtnData = new HashMap<>();
+        rtnData.put("unauditedCases", null == result ? 0 : result.get("unauditedCases"));
+        rtnData.put("verifyCases", null == result ? 0 : result.get("verifyCases"));
+        rtnData.put("perfectionCases", null == result ? 0 : result.get("perfectionCases"));
+        return rtnData;
+    }
+
     /**
      * 今日通行记录折线图
      *
@@ -119,9 +133,9 @@ public class AnslysisServiceImpl implements AnalysisService {
         condition.put("endDt", endDt);
         int trafficCount;
         int illegalCount;
-
         for (Site s : siteList) {
             condition.put("siteId", s.getId());
+            condition.put("status", null);
             trafficCount = trafficDao.selectCount(condition);
             condition.put("status", new String[]{"0"});
             illegalCount = trafficDao.selectCount(condition);
@@ -392,6 +406,4 @@ public class AnslysisServiceImpl implements AnalysisService {
         rtn.put("countMap", maps);
         return rtn;
     }
-
-
 }

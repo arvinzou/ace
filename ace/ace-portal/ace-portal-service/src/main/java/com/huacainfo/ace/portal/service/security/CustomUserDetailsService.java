@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +22,6 @@ import com.huacainfo.ace.common.security.spring.BasicUsers;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.SystemService;
-
 /**
  * 该类的主要作用是为Spring Security提供一个经过用户认证后的UserDetails。
  * 该UserDetails包括用户名、密码、是否可用、是否过期等信息。 sparta 11/3/29
@@ -32,9 +32,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private SystemService systemService;
+
+	@Autowired
+	private RedisOperations<String, Map<String,Object>> redisTemplate;
+
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
+		Map<String,Object> params =redisTemplate.opsForValue().get(username);
+		this.logger.info("loadUserByUsername redisTemplate.opsForValue(username) ============================{}",params);
+
 		Users syUser = systemService.selectUsersByAccount(username);
 		Collection<GrantedAuthority> auths = new HashSet<GrantedAuthority>();
 		if (syUser != null) {

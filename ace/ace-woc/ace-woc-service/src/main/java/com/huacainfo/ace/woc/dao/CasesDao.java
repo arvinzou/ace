@@ -6,6 +6,7 @@ import com.huacainfo.ace.woc.vo.CasesVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CasesDao {
 
@@ -31,4 +32,6 @@ public interface CasesDao {
     int findCount(@Param("condition") CasesQVo condition);
 
     int isExit(Cases record);
+
+    Map<String, Object> selectStatistics(@Param("params") Map<String, Object> params);
 }

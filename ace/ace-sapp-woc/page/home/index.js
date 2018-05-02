@@ -138,11 +138,11 @@ Page({
             util.login();
         }
         
-        // var userinfo =  wx.getStorageSync('userinfo');
-        // var userinfo_role = userinfo.role;
-        // if (userinfo_role != 'admin'){
-        //     that.setData({ modalFlag: false });
-        // }
+         var userinfo =  wx.getStorageSync('userinfo');
+         var userinfo_role = userinfo.role;
+         if (userinfo_role != 'admin'){
+             that.setData({ modalFlag: false });
+         }
         wx.getSystemInfo({
             success: (res) => { // 用这种方法调用，this指向Page
                 this.setData({
@@ -254,7 +254,7 @@ Page({
                 cfg1.series[0].data.splice(0, cfg1.series[0].data.length);
                 for (var i = 0; i < retData.length; i++) {
                     cfg1.categories.push(retData[i].siteName);
-                    cfg1.series[0].data.push(retData[i].count);
+                    cfg1.series[0].data.push(retData[i].illegalCount);
                 }
                 console.log(cfg1);
 

@@ -55,16 +55,13 @@ public class Site implements Serializable {
 
     private String buildDeptId;
 
+    /**
+     * 数据统计时使用
+     */
     private int trafficCount;
+
     private int illegalCount;
 
-    public int getTrafficCount() {
-        return trafficCount;
-    }
-
-    public void setTrafficCount(int trafficCount) {
-        this.trafficCount = trafficCount;
-    }
 
     public int getIllegalCount() {
         return illegalCount;
@@ -74,6 +71,14 @@ public class Site implements Serializable {
         this.illegalCount = illegalCount;
     }
 
+
+    public int getTrafficCount() {
+        return trafficCount;
+    }
+
+    public void setTrafficCount(int trafficCount) {
+        this.trafficCount = trafficCount;
+    }
 
     public String getBuildDeptId() {
         return buildDeptId;

@@ -31,12 +31,13 @@ function updata() {
             var data = result.siteList;
             for (var i = 0; i < data.length; i++) {
                 siteBar.push(data[i].siteCode);
-                dataBar.push(data[i].count);
+                dataBar.push(data[i].illegalCount);
                 if (data[i].status == 1) {
                     dataMap.push({
                         symbol: 'pin',
                         name: data[i].siteName,
-                        count: data[i].count,
+                        trafficCount: data[i].trafficCount,
+                        illegalCount: data[i].illegalCount,
                         siteId: data[i].id,
                         coord: [data[i].longitude, data[i].latitude],
                         tooltip: { // Series config.
@@ -50,7 +51,8 @@ function updata() {
                         symbolSize: 15,
                         name: data[i].siteName,
                         coord: [data[i].longitude, data[i].latitude],
-                        count: data[i].count,
+                        trafficCount: data[i].trafficCount,
+                        illegalCount: data[i].illegalCount,
                         siteId: data[i].id,
                         tooltip: { // Series config.
                             trigger: 'item',
@@ -90,7 +92,6 @@ function updata() {
         for (var i = 0; i < hours + 1; i++) {
             dataLine.push(result.countMap[result.interval[i]]);
         }
-        ;
         optionLine.series[0].data = dataLine;
         myLine.setOption(optionLine);
     });
@@ -99,4 +100,86 @@ function updata() {
 function showTooltip(geoData, trafficData) {
     optionMap.series[1].data = geoData;
     myMap.setOption(optionMap);
+}
+
+function websocket() {
+    if ("WebSocket" in window) {
+        var ws = new WebSocket("ws://127.0.0.1:6006/woc/websocket/D9F7E76732A24488BCCD652B7EEBFD09/E341A7084C56499AB0390BCAA3AA5BCD");
+        ws.onopen = function (evt) {
+            console.log("链接成功");
+            console.log(evt);
+        };
+
+        ws.onmessage = function (evt) {
+            console.log(evt);
+            var received_msg = evt.data;
+            getTraffic(tid);
+        };
+
+        ws.onclose = function (evt) {
+            console.log("链接关闭");
+            console.log(evt);
+        };
+
+        ws.onerror = function (evt) {
+            console.log('链接错误');
+            console.log(evt)
+        }
+
+    } else {
+
+        alert("您的浏览器不支持 WebSocket!");
+    }
+}
+
+function getTraffic(tid) {
+    var url = 'http://localhost/woc/www/data/getTrafficByKey';
+    data = {
+        id: tid
+    }
+    $.getJSON(url, data, function (result) {
+        console.log(result);
+        if (result.status == 0) {
+            hideTooltip();
+            clearTimeout(timer1);
+            activeTooltip(result.value);
+        }
+    });
+}
+
+function activeTooltip(data) {
+    $.each(data, function (key, value) {
+        if (key == 'siteId') {
+            activelocal(value);
+        }
+        $('#tp' + key).text(value);
+    });
+    $('#targetDiv').addClass('move');
+    $('#embg')[0].play();
+    time3second();
+}
+
+
+function activelocal(siteId) {
+    var gisData = optionMap.series[0].markPoint.data;
+    for (var i = 0; i < gisData.length; i++) {
+        if (gisData[i].siteId == siteId) {
+            optionMap.series[1].data = [];
+            optionMap.series[1].data.push({value: gisData[i].coord});
+            myMap.setOption(optionMap);
+            return;
+        }
+    }
+}
+
+var timer1;
+
+function time3second() {
+    timer1 = setTimeout(hideTooltip, 3000);
+}
+
+function hideTooltip() {
+    optionMap.series[1].data = [];
+    myMap.setOption(optionMap);
+    $('#targetDiv').removeClass('move');
 }

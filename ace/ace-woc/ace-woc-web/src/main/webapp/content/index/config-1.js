@@ -2,12 +2,10 @@ var ct4 = echarts.init(document.getElementById('ct4'), 'shine');
 var ct3 = echarts.init(document.getElementById('ct3'), 'shine');
 var ct1 = echarts.init(document.getElementById('ct1'), 'shine');
 var ct2 = echarts.init(document.getElementById('ct2'), 'shine');
+
+
 var option1 =
     {
-        title: {
-            text: '分时段通行情况',
-            subtext: ''
-        },
         tooltip: {
             trigger: 'item'
         },
@@ -18,8 +16,8 @@ var option1 =
         dataZoom: {
             show: true,
             realtime: true,
-            start: 0,
-            end: 50
+            start: 50,
+            end: 100
         },
         xAxis: [{
             type: 'category',
@@ -42,7 +40,7 @@ var option1 =
             {
                 name: '违章记录数',
                 type: 'line',
-                data: [0, 1, 2, 3, 4, 5, 6, 0, 4, 3, 2, 1],
+                data: [],
                 markPoint: {
                     data: [
                         {type: 'max', name: '最大值'},
@@ -59,28 +57,23 @@ var option1 =
     };
 
 var option2 = {
-    title: {
-        text: '每日通行情况',
-        subtext: '',
-    },
     tooltip: {
         trigger: 'item'
     },
     legend: {
-        data: ['违章记录数']
+        data: ['通行次数']
     },
     calculable: false,
     dataZoom: {
         show: true,
         realtime: true,
-        start: 0,
-        end: 50
+        start: 50,
+        end: 100
     },
     xAxis: [{
         type: 'category',
         boundaryGap: false,
-        data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-            '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
+        data: [],
         axisLabel: {
             interval: 'auto',
             formatter: '{value} 日'
@@ -94,9 +87,9 @@ var option2 = {
     }],
     series: [
         {
-            name: '违章记录数',
+            name: '通行次数',
             type: 'line',
-            data: [0, 1, 2, 3, 4, 5, 6, 0, 4, 3, 2, 1],
+            data: [],
             markPoint: {
                 data: [
                     {type: 'max', name: '最大值'},
@@ -113,22 +106,22 @@ var option2 = {
 };
 
 var option3 = {
+    legend: {
+        data: ['通行次数', '超载次数']
+    },
     tooltip: {
         trigger: 'item'
     },
     xAxis: [{
-
         type: 'category',
         data: [],
         axisLabel: {
             interval: 0, // {number}
             margin: 4,
             textStyle: {
-                color: '#fff',
-                fontFamily: 'verdana',
+                color: '#333',
                 fontSize: 10,
                 fontStyle: 'normal',
-                fontWeight: 'bold'
             }
         },
     }],
@@ -139,7 +132,7 @@ var option3 = {
             //					rotate: -45,
             margin: 5,
             textStyle: {
-                color: '#fff',
+                color: '#333',
                 fontFamily: 'verdana',
                 fontSize: 10,
                 fontStyle: 'normal',
@@ -147,35 +140,19 @@ var option3 = {
             }
         },
     }],
-    series: [{
-        name: '',
-        type: 'bar',
-        barWidth: 21, // 系列级个性化，柱形宽度
-        itemStyle: {
-            normal: { // 系列级个性化，横向渐变填充
-                borderRadius: 5,
-                color: function (params) {
-                    // build a color map as your need.
-                    var colorList = [
-                        '#003CFF', '#FF971C', '#EF4F4F', '#FFFF00', '#22AC38',
-                        '#8400FF', '#9BCA63', '#FAD860', '#F3A43B', '#60C0DD',
-                        '#D7504B', '#C6E579', '#F4E001', '#F0805A', '#26C0C0'
-                    ];
-                    return colorList[params.dataIndex]
-                },
-                label: {
-                    show: true,
-                    textStyle: {
-                        fontSize: '10',
-                        fontFamily: '微软雅黑',
-                        fontWeight: 'bold',
-                        color: '#FFFFFF'
-                    }
-                }
-            }
+    series: [
+        {
+            name: '通行次数',
+            type: 'bar',
+            barGap: 0,
+            data: []
         },
-        data: [],
-    }]
+        {
+            name: '超载次数',
+            type: 'bar',
+            data: []
+        },
+    ]
 };
 
 var option4 = {
@@ -192,9 +169,9 @@ var option4 = {
     },
     series: [
         {
-            name: '案件处理率',
+
             type: 'gauge',
-            center: ['50%', '50%'],    // 默认全局居中
+            center: ['40%', '40%'],    // 默认全局居中
             startAngle: 140,
             endAngle: -140,
             min: 0,                     // 最小值
@@ -275,7 +252,7 @@ var option4 = {
                     fontSize: 30
                 }
             },
-            data: [{value: 50, name: '案件处理率'}]
+            data: [{value: 50}]
         }
     ]
 };

@@ -34,7 +34,6 @@ public class MyClientApp {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void start() {
