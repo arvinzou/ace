@@ -336,7 +336,7 @@
         from woc.cases t
         left join woc.traffic tc on t.trafficId = tc.id
         left join woc.person p on t.driver = p.id
-        left join woc.vehicle v on  t.vehicleId = v.id
+        left join woc.vehicle v on t.vehicleId = v.id
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -379,7 +379,7 @@
         from woc.cases t
         left join woc.traffic tc on t.trafficId = tc.id
         left join woc.person p on t.driver = p.id
-        left join woc.vehicle v on  t.vehicleId = v.id
+        left join woc.vehicle v on t.vehicleId = v.id
         where 1 = 1
         <if test="condition.caseNo!=null and condition.caseNo!=&quot;&quot;">
             and t.caseNo like concat(#{condition.caseNo,jdbcType=VARCHAR},'%')
@@ -404,5 +404,56 @@
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
         <include refid="whereCondition"/>
+    </select>
+
+
+    <select id="selectStatistics" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        (
+        SELECT COUNT(1)
+        FROM cases
+        WHERE STATUS='1'
+        <if test="params.siteId!=null and params.siteId!=''">
+            AND siteId = #{params.siteId,jdbcType=VARCHAR}
+        </if>
+        <if test="params.startDt!=null and params.startDt!=''">
+            AND UNIX_TIMESTAMP(caseDate) >UNIX_TIMESTAMP(#{params.startDt,jdbcType=TIMESTAMP})
+        </if>
+        <if test="params.endDt!=null and params.endDt!=''">
+            AND UNIX_TIMESTAMP(caseDate) &lt;=UNIX_TIMESTAMP(#{params.endDt,jdbcType=TIMESTAMP})
+        </if>
+        ) perfectionCases,
+
+        (
+        SELECT COUNT(1)
+        FROM cases
+        WHERE STATUS='2'
+        <if test="params.siteId!=null and params.siteId!=''">
+            AND siteId = #{params.siteId,jdbcType=VARCHAR}
+        </if>
+        <if test="params.startDt!=null and params.startDt!=''">
+            AND UNIX_TIMESTAMP(caseDate) >UNIX_TIMESTAMP(#{params.startDt,jdbcType=TIMESTAMP})
+        </if>
+        <if test="params.endDt!=null and params.endDt!=''">
+            AND UNIX_TIMESTAMP(caseDate) &lt;=UNIX_TIMESTAMP(#{params.endDt,jdbcType=TIMESTAMP})
+        </if>
+        ) unauditedCases,
+
+        (
+        SELECT COUNT(1)
+        FROM cases
+        WHERE STATUS='4'
+        <if test="params.siteId!=null and params.siteId!=''">
+            AND siteId = #{params.siteId,jdbcType=VARCHAR}
+        </if>
+        <if test="params.startDt!=null and params.startDt!=''">
+            AND UNIX_TIMESTAMP(caseDate) >UNIX_TIMESTAMP(#{params.startDt,jdbcType=TIMESTAMP})
+        </if>
+        <if test="params.endDt!=null and params.endDt!=''">
+            AND UNIX_TIMESTAMP(caseDate) &lt;=UNIX_TIMESTAMP(#{params.endDt,jdbcType=TIMESTAMP})
+        </if>
+        ) verifyCases
+        FROM cases
+        LIMIT 0, 1
     </select>
 </mapper>

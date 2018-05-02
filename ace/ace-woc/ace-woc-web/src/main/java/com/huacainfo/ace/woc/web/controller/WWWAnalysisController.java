@@ -49,6 +49,21 @@ public class WWWAnalysisController extends WocBaseController {
         return analysisService.queryCounts(siteId, datetime, this.getCurUserProp());
     }
 
+    /**
+     * 对案件进行统计
+     * unauditedCases :未审核案件
+     * verifyCases：审核案件
+     * perfectionCases 完成的案件
+     ** @param siteId  站点ID
+     * @param startDt 查询开始时间 -- yyyy-mm-dd hh:mm:ss
+     * @param endDt   查询结束时间 -- yyyy-mm-dd hh:mm:ss
+     * */
+
+    @GetMapping("/casesStatistics")
+    public Map<String, Object> caseStatistics(String siteId, String startDt,String endDt) {
+        return analysisService.caseCounts(siteId,startDt ,endDt, this.getCurUserProp());
+    }
+
 
     /**
      * 站点超载情况
