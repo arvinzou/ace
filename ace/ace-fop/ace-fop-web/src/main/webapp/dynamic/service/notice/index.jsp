@@ -98,19 +98,19 @@
         <div class="labelItem"><span class="labelItemHeader">
 标题</span>
             <br>
-            <span id="companyId">
+            <span id="title">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
 副标题</span>
             <br>
-            <span id="activityType">
+            <span id="subTitle">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
 封面地址</span>
             <br>
-            <span id="title">
+            <span id="coverUrl">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/fopNotice")
 /**
  * @author: Arvin
- * @version: 2018-05-02
+ * @version: 2018-05-03
  * @Description: 通知公告
  */
 public class FopNoticeController extends FopBaseController {
@@ -40,15 +40,18 @@ public class FopNoticeController extends FopBaseController {
      * @param: @param page
      * @param: @return
      * @param: @throws Exception
-     * @return: PageResult<FopNoticeVo>
+     * @return: PageResult
+     * <FopNoticeVo>
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @RequestMapping(value = "/findFopNoticeList")
     @ResponseBody
-    public PageResult<FopNoticeVo> findFopNoticeList(FopNoticeQVo condition,
-                                                     PageParamNoChangeSord page) throws Exception {
-        PageResult<FopNoticeVo> rst = this.fopNoticeService
+    public PageResult
+            <FopNoticeVo> findFopNoticeList(FopNoticeQVo condition,
+                                            PageParamNoChangeSord page) throws Exception {
+        PageResult
+                <FopNoticeVo> rst = this.fopNoticeService
                 .findFopNoticeList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());
         if (rst.getTotal() == 0) {
@@ -66,7 +69,7 @@ public class FopNoticeController extends FopBaseController {
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @RequestMapping(value = "/insertFopNotice")
     @ResponseBody
@@ -84,7 +87,7 @@ public class FopNoticeController extends FopBaseController {
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @RequestMapping(value = "/updateFopNotice")
     @ResponseBody
@@ -102,11 +105,12 @@ public class FopNoticeController extends FopBaseController {
      * @param: @throws Exception
      * @return: SingleResult<FopNotice>
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @RequestMapping(value = "/selectFopNoticeByPrimaryKey")
     @ResponseBody
-    public SingleResult<FopNoticeVo> selectFopNoticeByPrimaryKey(String id)
+    public SingleResult
+            <FopNoticeVo> selectFopNoticeByPrimaryKey(String id)
             throws Exception {
         return this.fopNoticeService.selectFopNoticeByPrimaryKey(id);
     }
@@ -119,7 +123,7 @@ public class FopNoticeController extends FopBaseController {
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @RequestMapping(value = "/deleteFopNoticeByFopNoticeId")
     @ResponseBody
@@ -129,5 +133,5 @@ public class FopNoticeController extends FopBaseController {
         String id = json.getString("id");
         return this.fopNoticeService.deleteFopNoticeByFopNoticeId(id,
                 this.getCurUserProp());
-    }
-}
+                }
+                }
