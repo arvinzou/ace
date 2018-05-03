@@ -3,9 +3,9 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.FopNoticeDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopNotice">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
-        <result column="activityType" jdbcType="CHAR" property="activityType"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="subTitle" jdbcType="VARCHAR" property="subTitle"/>
+        <result column="coverUrl" jdbcType="VARCHAR" property="coverUrl"/>
         <result column="noticeType" jdbcType="CHAR" property="noticeType"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -18,13 +18,11 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
         <result column="description" jdbcType="LONGVARCHAR" property="description"/>
     </resultMap>
-
     <sql id="Base_Column_List">
-    id, companyId, activityType, title, noticeType, releaseDate, remark, status, createUserId, 
+        id, title, subTitle, coverUrl, noticeType, releaseDate, remark, status, createUserId,
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
   </sql>
-
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from fop_notice
@@ -35,14 +33,14 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopNotice">
-    insert into fop_notice (id, companyId, activityType, 
-      title, noticeType, releaseDate, 
+        insert into fop_notice (id, title, subTitle,
+        coverUrl, noticeType, releaseDate,
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate, description
       )
-    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{activityType,jdbcType=CHAR}, 
-      #{title,jdbcType=VARCHAR}, #{noticeType,jdbcType=CHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
+        values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR},
+        #{coverUrl,jdbcType=VARCHAR}, #{noticeType,jdbcType=CHAR}, #{releaseDate,jdbcType=TIMESTAMP},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
@@ -54,14 +52,14 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="companyId != null">
-                companyId,
-            </if>
-            <if test="activityType != null">
-                activityType,
-            </if>
             <if test="title != null">
                 title,
+            </if>
+            <if test="subTitle != null">
+                subTitle,
+            </if>
+            <if test="coverUrl != null">
+                coverUrl,
             </if>
             <if test="noticeType != null">
                 noticeType,
@@ -101,14 +99,14 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
-            </if>
-            <if test="activityType != null">
-                #{activityType,jdbcType=CHAR},
-            </if>
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="subTitle != null">
+                #{subTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="coverUrl != null">
+                #{coverUrl,jdbcType=VARCHAR},
             </if>
             <if test="noticeType != null">
                 #{noticeType,jdbcType=CHAR},
@@ -148,14 +146,14 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopNotice">
         update fop_notice
         <set>
-            <if test="companyId != null">
-                companyId = #{companyId,jdbcType=VARCHAR},
-            </if>
-            <if test="activityType != null">
-                activityType = #{activityType,jdbcType=CHAR},
-            </if>
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="subTitle != null">
+                subTitle = #{subTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="coverUrl != null">
+                coverUrl = #{coverUrl,jdbcType=VARCHAR},
             </if>
             <if test="noticeType != null">
                 noticeType = #{noticeType,jdbcType=CHAR},
@@ -195,9 +193,9 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopNotice">
     update fop_notice
-    set companyId = #{companyId,jdbcType=VARCHAR},
-      activityType = #{activityType,jdbcType=CHAR},
-      title = #{title,jdbcType=VARCHAR},
+        set title = #{title,jdbcType=VARCHAR},
+        subTitle = #{subTitle,jdbcType=VARCHAR},
+        coverUrl = #{coverUrl,jdbcType=VARCHAR},
       noticeType = #{noticeType,jdbcType=CHAR},
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR},
@@ -214,7 +212,6 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopNoticeVo">
 
     </resultMap>
-
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>

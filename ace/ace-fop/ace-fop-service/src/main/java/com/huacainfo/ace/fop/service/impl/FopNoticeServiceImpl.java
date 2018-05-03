@@ -24,8 +24,8 @@ import java.util.List;
 @Service("fopNoticeService")
 /**
  * @author: Arvin
- * @version: 2018-05-02
- * @Description: TODO(通知公告)
+ * @version: 2018-05-03
+ * @Description: 通知公告
  */
 public class FopNoticeServiceImpl implements FopNoticeService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -43,15 +43,19 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      * @param: @param limit
      * @param: @param orderBy
      * @param: @throws Exception
-     * @return: PageResult<FopNoticeVo>
+     * @return: PageResult
+     * <FopNoticeVo>
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @Override
     public PageResult<FopNoticeVo> findFopNoticeList(FopNoticeQVo condition, int start,
                                                      int limit, String orderBy) throws Exception {
-        PageResult<FopNoticeVo> rst = new PageResult<FopNoticeVo>();
-        List<FopNoticeVo> list = this.fopNoticeDao.findList(condition,
+        PageResult
+                <FopNoticeVo> rst = new PageResult
+                <FopNoticeVo>();
+        List
+                <FopNoticeVo> list = this.fopNoticeDao.findList(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
@@ -70,18 +74,15 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @Override
     public MessageResponse insertFopNotice(FopNotice o, UserProp userProp)
             throws Exception {
-        if (CommonUtils.isBlank(o.getCompanyId())) {
+        if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }
-        if (CommonUtils.isBlank(o.getActivityType())) {
-            return new MessageResponse(1, "副标题不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getTitle())) {
+        if (CommonUtils.isBlank(o.getCoverUrl())) {
             return new MessageResponse(1, "封面地址不能为空！");
         }
         if (CommonUtils.isBlank(o.getReleaseDate())) {
@@ -105,7 +106,8 @@ public class FopNoticeServiceImpl implements FopNoticeService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopNoticeDao.insertSelective(o);
-        this.dataBaseLogService.log("添加通知公告", "通知公告", "", o.getId(),
+        this.dataBaseLogService.log("添加通知公告", "通知公告", "",
+                o.getId(),
                 o.getId(), userProp);
         return new MessageResponse(0, "添加通知公告完成！");
     }
@@ -119,7 +121,7 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @Override
     public MessageResponse updateFopNotice(FopNotice o, UserProp userProp)
@@ -127,13 +129,10 @@ public class FopNoticeServiceImpl implements FopNoticeService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCompanyId())) {
+        if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }
-        if (CommonUtils.isBlank(o.getActivityType())) {
-            return new MessageResponse(1, "副标题不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getTitle())) {
+        if (CommonUtils.isBlank(o.getCoverUrl())) {
             return new MessageResponse(1, "封面地址不能为空！");
         }
         if (CommonUtils.isBlank(o.getReleaseDate())) {
@@ -151,7 +150,8 @@ public class FopNoticeServiceImpl implements FopNoticeService {
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopNoticeDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更通知公告", "通知公告", "", o.getId(),
+        this.dataBaseLogService.log("变更通知公告", "通知公告", "",
+                o.getId(),
                 o.getId(), userProp);
         return new MessageResponse(0, "变更通知公告完成！");
     }
@@ -164,11 +164,13 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      * @param: @throws Exception
      * @return: SingleResult<FopNotice>
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @Override
     public SingleResult<FopNoticeVo> selectFopNoticeByPrimaryKey(String id) throws Exception {
-        SingleResult<FopNoticeVo> rst = new SingleResult<FopNoticeVo>();
+        SingleResult
+                <FopNoticeVo> rst = new SingleResult
+                <FopNoticeVo>();
         rst.setValue(this.fopNoticeDao.selectVoByPrimaryKey(id));
         return rst;
     }
@@ -182,13 +184,14 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: Arvin
-     * @version: 2018-05-02
+     * @version: 2018-05-03
      */
     @Override
     public MessageResponse deleteFopNoticeByFopNoticeId(String id,
                                                         UserProp userProp) throws Exception {
         this.fopNoticeDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除通知公告", "通知公告", String.valueOf(id),
+        this.dataBaseLogService.log("删除通知公告", "通知公告",
+                String.valueOf(id),
                 String.valueOf(id), "通知公告", userProp);
         return new MessageResponse(0, "通知公告删除完成！");
     }

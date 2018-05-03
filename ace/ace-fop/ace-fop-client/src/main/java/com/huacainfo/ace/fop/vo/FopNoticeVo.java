@@ -1,4 +1,3 @@
-
 package com.huacainfo.ace.fop.vo;
 
 import com.huacainfo.ace.fop.model.FopNotice;

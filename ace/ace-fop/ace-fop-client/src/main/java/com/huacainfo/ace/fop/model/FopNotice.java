@@ -5,11 +5,11 @@ import java.util.Date;
 public class FopNotice {
     private String id;
 
-    private String companyId;
-
-    private String activityType;
-
     private String title;
+
+    private String subTitle;
+
+    private String coverUrl;
 
     private String noticeType;
 
@@ -41,28 +41,28 @@ public class FopNotice {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId == null ? null : companyId.trim();
-    }
-
-    public String getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(String activityType) {
-        this.activityType = activityType == null ? null : activityType.trim();
-    }
-
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle == null ? null : subTitle.trim();
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl == null ? null : coverUrl.trim();
     }
 
     public String getNoticeType() {

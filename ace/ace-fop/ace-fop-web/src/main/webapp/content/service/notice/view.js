@@ -263,11 +263,14 @@ jQuery(function ($) {
         $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon')
             .each(function () {
                 var icon = $(this);
-                var $class = $.trim(icon.attr('class').replace('ui-icon',
+                var $class =
+                    $.trim(icon.attr('class').replace('ui-icon',
                     ''));
 
-                if ($class in replacement)
-                    icon.attr('class', 'ui-icon ' + replacement[$class]);
+                if ($classin
+                    replacement
+                )
+                icon.attr('class', 'ui-icon ' + replacement[$class]);
             })
     }
 
