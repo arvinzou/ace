@@ -25,35 +25,12 @@ pageEncoding="utf-8"%>
 
     </script>
     <link rel="shortcut icon" href="favicon.ico">
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
-    <!-- bootstrap & fontawesome -->
-    <script
-            src="${pageContext.request.contextPath}/content/common/js/base.js?version=${cfg.version}"></script>
-
-
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}"/>
-
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/css/components.min.css" rel="stylesheet"
-          id="style_components" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/css/plugins.min.css" rel="stylesheet"
-          type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/css/layout.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/css/themes/default.min.css"
-          rel="stylesheet" type="text/css" id="style_color"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/css/custom.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link rel="shortcut icon" href="favicon.ico"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
+    <script src="${pageContext.request.contextPath}/content/common/js/base.js?version=${cfg.version}"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css"/>
 
 
 </head>
@@ -65,7 +42,7 @@ pageEncoding="utf-8"%>
             <div class="page-header">
                 <!-- BEGIN HEADER TOP -->
                 <div class="page-header-top">
-                    <div class="container">
+                    <div class="">
 
                         <div class="page-logo">
                             <a href="index.html">
@@ -81,12 +58,12 @@ pageEncoding="utf-8"%>
                         <div class="top-menu">
                             <ul class="nav navbar-nav pull-right">
                                 <li class="dropdown dropdown-user dropdown-dark">
-                                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
-                                       data-hover="dropdown" data-close-others="true">
+                                    <div  class="dropdown-toggle" data-toggle="dropdown"
+                                       data-hover="dropdown" data-close-others="true" style="cursor:pointer">
                                         <img alt="" class="img-circle"
                                              src="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/img/avatar9.jpg">
                                         <span class="username username-hide-mobile">${SESSION_USERPROP_KEY.name}</span>
-                                    </a>
+                                    </div>
                                     <ul class="dropdown-menu dropdown-menu-default">
                                         <li><a href="javascript:userCfg();">
                                             <i class="ace-icon fa fa-cog"></i>
@@ -116,17 +93,8 @@ pageEncoding="utf-8"%>
                 <div class="page-header-menu">
                     <div class="container">
                         <!-- BEGIN HEADER SEARCH BOX -->
-                        <form class="search-form" action="page_general_search.html" method="GET">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search" name="query">
-                                <span class="input-group-btn">
-                                            <a href="javascript:;" class="btn submit">
-                                                <i class="icon-magnifier"></i>
-                                            </a>
-                                        </span>
-                            </div>
-                        </form>
-                           <div class="hor-menu ">
+
+                        <div class="hor-menu ">
                             <ul class="nav navbar-nav" id="menu">
 
                             </ul>
@@ -232,28 +200,14 @@ pageEncoding="utf-8"%>
     </div>
 </div>
 <!--[if lt IE 9]>
-
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/respond.min.js"></script>
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/excanvas.min.js"></script>
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/ie8.fix.min.js"></script>
 <![endif]-->
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/jquery.min.js"
-        type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js"
-        type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/scripts/app.min.js"
-        type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/scripts/layout.min.js"
-        type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/ui-modals.min.js"
-        type="text/javascript"></script>
-<script
-        src="${pageContext.request.contextPath}/content/portal/js/main/menu4.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/portal/js/main/portal.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
-
+<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/content/portal/js/main/menu4.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/portal/js/main/portal.js?version=${cfg.version}"></script>
 </body>
 
 </html>

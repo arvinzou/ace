@@ -68,7 +68,9 @@ public class SystemController extends PortalBaseController{
 	public List<Tree> getTreeList(String loadButton)throws Exception {
 		//loadbutton=false;
 		boolean lb=Boolean.valueOf(loadButton);
-		List<Tree> list=this.systemService.getTreeList(this.getSessionUserResources(),"0",lb);
+		String rootId="0";
+
+		List<Tree> list=this.systemService.getTreeList(this.getSessionUserResources(),rootId,lb);
 		return list;
 	}
 	/**
@@ -86,11 +88,7 @@ public class SystemController extends PortalBaseController{
 		List<Resources> list=null;
 		List<Resources> rst=new ArrayList<Resources>();
 		Object o=this.getSession(SESSION_USER_RESOURCES);
-		System.out.println("=====================1=====================");
-		this.logger.info("=======================1================================");
-		//如果没有获取到SESSION_USER_RESOUCES的值，
 		if(CommonUtils.isBlank(o)){
-			this.logger.info("==========================is blank========================="+this.getCurUserProp().getUserId());
 			list=this.systemService.getResourcesByUserId(this.getCurUserProp().getUserId());
 			this.getRequest().getSession().setAttribute(SESSION_USER_RESOURCES, list);
 		}else{
@@ -100,10 +98,6 @@ public class SystemController extends PortalBaseController{
 			if(e.getSyid().equals(this.getCurUserProp().getActiveSyId())||e.getSyid().equals("sys")){
 				rst.add(e);
 			}
-		}
-		//测试
-		for(Resources li:list){
-			this.logger.info(li.toString());
 		}
 		return list;
 	}
