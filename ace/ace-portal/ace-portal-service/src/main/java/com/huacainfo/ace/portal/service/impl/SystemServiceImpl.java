@@ -54,8 +54,6 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 	private UserCfgDao userCfgDao;
 
 	public List<Resources> getResourcesByUserId(String id) {
-		System.out.println("UserId=========================================="+id);
-		this.logger.info("UserId=========================================="+id);
 		return this.systemDao.selectResourcesByUserId(id, "ace");
 	}
 

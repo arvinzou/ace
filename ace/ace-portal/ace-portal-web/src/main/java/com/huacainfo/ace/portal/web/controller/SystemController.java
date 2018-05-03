@@ -65,11 +65,17 @@ public class SystemController extends PortalBaseController{
 	 */
 	@RequestMapping(value = "/getTreeList.do")
 	@ResponseBody
-	public List<Tree> getTreeList(String loadButton)throws Exception {
+	public List<Tree> getTreeList(String loadButton,String client)throws Exception {
 		//loadbutton=false;
 		boolean lb=Boolean.valueOf(loadButton);
 		String rootId="0";
-
+		if(CommonUtils.isNotEmpty(client)){
+			Map<String,String> cfg=(Map<String,String>)this.getSession("cfg");
+			if(CommonUtils.isNotEmpty(cfg.get("menuRootId"))){
+				rootId=cfg.get("menuRootId");
+			}
+		}
+		this.logger.info("=======================rootId:{}",rootId);
 		List<Tree> list=this.systemService.getTreeList(this.getSessionUserResources(),rootId,lb);
 		return list;
 	}

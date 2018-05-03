@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
-<%
-session.setAttribute("portalPath", "/portal");
-%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -17,16 +14,7 @@ session.setAttribute("portalPath", "/portal");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <script type="text/javascript">
-	var contextPath = '${pageContext.request.contextPath}';
-	var portalPath = '${portalPath}';
-    </script>
-    <link rel="shortcut icon" href="favicon.ico">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css"/>
+    <jsp:include page="../common/base.jsp" />
 </head>
 <body>
 <div class="page-wrapper">
@@ -59,14 +47,6 @@ session.setAttribute("portalPath", "/portal");
     <div class="bottom"></div>
 
 </div>
-
-<!--[if lt IE 9]>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/respond.min.js"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/excanvas.min.js"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/ie8.fix.min.js"></script>
-<![endif]-->
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/portal/js/main/menu4.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/common/js/loader.js?version=${cfg.version}"></script>
 </body>
 </html>
