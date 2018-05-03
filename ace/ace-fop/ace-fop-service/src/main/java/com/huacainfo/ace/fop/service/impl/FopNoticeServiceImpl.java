@@ -66,6 +66,21 @@ public class FopNoticeServiceImpl implements FopNoticeService {
     }
 
     /**
+     * @param start
+     * @param limit
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public PageResult<FopNoticeVo> findNoticeList(int start, int limit) throws Exception {
+        FopNoticeQVo condition = new FopNoticeQVo();
+        PageResult<FopNoticeVo> rst = new PageResult<FopNoticeVo>();
+        List<FopNoticeVo> list = this.fopNoticeDao.findList(condition, start, limit, null);
+        rst.setRows(list);
+        return rst;
+    }
+
+    /**
      * @throws
      * @Title:insertFopNotice
      * @Description: TODO(添加通知公告)
