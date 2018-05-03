@@ -3,6 +3,15 @@ window.setInterval(function () {
 }, 10000)
 
 function updata() {
+    var url = 'http://106.75.69.81/woc/www/data/caseStatistics';
+    var data = {};
+    $.getJSON(url, data, function (result) {
+        optionPie.series[0].data[0].value = result.verifyCases;
+        optionPie.series[0].data[1].value = result.unauditedCases;
+        optionPie.series[0].data[2].value = result.perfectionCases;
+        myPie.setOption(optionPie);
+    });
+    
     var url = 'http://106.75.69.81/woc/www/data/statistics';
     var data = {};
     $.getJSON(url, data, function (result) {
@@ -17,6 +26,7 @@ function updata() {
         optionGauge.series[0].data[0].value = numbers;
         myGauge.setOption(optionGauge, true);
     });
+
 
     var url = 'http://106.75.69.81/woc/www/data/site';
     data = {

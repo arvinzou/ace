@@ -270,7 +270,6 @@ var optionPie = {
         }
     },
     series: [{
-        name: '访问来源',
         type: 'pie',
         radius: '70%',
         center: ['50%', '50%'],
