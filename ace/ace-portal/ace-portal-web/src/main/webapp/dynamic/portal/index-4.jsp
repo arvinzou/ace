@@ -13,16 +13,9 @@ pageEncoding="utf-8"%>
     <title>${cfg.sys_name}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="${cfg.sys_name}"
-          name="description"/>
-    <meta content="" name="author"/>
+    <meta content="${cfg.sys_name}" name="description"/>
     <script type="text/javascript">
 	var contextPath = '${pageContext.request.contextPath}';
-	var portalType='${SESSION_USERPROP_KEY.cfg.portalType}';
-	var layoutTopHeight=0;
-	var activeSyId ='${SESSION_USERPROP_KEY.activeSyId}';
-
-
     </script>
     <link rel="shortcut icon" href="favicon.ico">
     <script type="text/javascript" src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
@@ -31,10 +24,8 @@ pageEncoding="utf-8"%>
     <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/content/common/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
     <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css"/>
-
-
 </head>
-<body class="page-container-bg-solid">
+<body>
 <div class="page-wrapper">
     <div class="page-wrapper-row">
         <div class="page-wrapper-top">
@@ -85,40 +76,26 @@ pageEncoding="utf-8"%>
 
                             </ul>
                         </div>
-                        <!-- END TOP NAVIGATION MENU -->
                     </div>
                 </div>
-                <!-- END HEADER TOP -->
-                <!-- BEGIN HEADER MENU -->
                 <div class="page-header-menu">
                     <div class="container">
-                        <!-- BEGIN HEADER SEARCH BOX -->
-
                         <div class="hor-menu ">
                             <ul class="nav navbar-nav" id="menu">
 
                             </ul>
                         </div>
-                        <!-- END MEGA MENU -->
                     </div>
                 </div>
-                <!-- END HEADER MENU -->
             </div>
-            <!-- END HEADER -->
         </div>
     </div>
     <div class="page-wrapper-row full-height">
         <div class="page-wrapper-middle">
-            <!-- BEGIN CONTAINER -->
             <div class="page-container">
-                <!-- BEGIN CONTENT -->
                 <div class="page-content-wrapper">
-                    <!-- BEGIN CONTENT BODY -->
-
-                    <!-- BEGIN PAGE CONTENT BODY -->
                     <div class="page-content">
                         <div class="container">
-                            <!-- BEGIN PAGE BREADCRUMBS -->
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
                                     <a href="index.html">Home</a>
@@ -132,44 +109,27 @@ pageEncoding="utf-8"%>
                                     <span>Color Library</span>
                                 </li>
                             </ul>
-                            <!-- END PAGE BREADCRUMBS -->
-                            <!-- BEGIN PAGE CONTENT INNER -->
                             <div class="page-content-inner">
 
                             </div>
-                            <!-- END PAGE CONTENT INNER -->
                         </div>
                     </div>
-                    <!-- END PAGE CONTENT BODY -->
-                    <!-- END CONTENT BODY -->
                 </div>
-                <!-- END CONTENT -->
             </div>
-            <!-- END CONTAINER -->
         </div>
     </div>
     <div class="page-wrapper-row">
         <div class="page-wrapper-bottom">
-
-
-            <!-- BEGIN INNER FOOTER -->
             <div class="page-footer">
                 <div class="container"> 2016 &copy; Metronic Theme By
-                    <a target="_blank" href="http://keenthemes.com">Keenthemes</a> &nbsp;|&nbsp;
-                    <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes"
-                       title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase
-                        Metronic!</a>
+                    &nbsp;|&nbsp;
+                   Purchase
+                        Metronic!
                 </div>
             </div>
-            <div class="scroll-to-top">
-                <i class="icon-arrow-up"></i>
-            </div>
-            <!-- END INNER FOOTER -->
-            <!-- END FOOTER -->
         </div>
     </div>
 </div>
-
 <div id="stack1" class="modal fade" tabindex="-1" data-width="300">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -207,7 +167,6 @@ pageEncoding="utf-8"%>
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/content/portal/js/main/menu4.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/portal/js/main/portal.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/portal/js/main/portal4.js?version=${cfg.version}"></script>
 </body>
-
 </html>
