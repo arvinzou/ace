@@ -47,4 +47,36 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <sql id="whereCondition">
+    from article_cmt where 0=0
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition" />
+  </select>
+  <select id="findList" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    <include refid="whereCondition" />
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY createDate
+      </otherwise>
+    </choose>
+
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+  </select>
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    article_cmt where
+    content=#{content} and articleId=#{articleId} and openid=#{openid}
+  </select>
 </mapper>
