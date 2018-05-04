@@ -186,14 +186,13 @@
     </update>
 
     <sql id="usersPagingWhereCondition">
-        from USERS left join department s
-        on USERS.department_id=s.department_id
-        left join province s2
-        on users.area_code=s2.code
+        from USERS
+        left join department s on USERS.department_id=s.department_id
+        left join province s2 on users.area_code=s2.code
         left join userinfo s3 on users.openId=s3.openid
         left join wx_user s4 on USERS.appOpenId=s4.openId
-        where USERS.STAUTS='1' and USERS.cur_syid=#{condition.curSyid}
-
+        where USERS.STAUTS='1'
+        and USERS.cur_syid=#{condition.curSyid}
         <if test='condition.name!=null and condition.name!=""'>
             and USERS.name like
             concat(#{condition.name,jdbcType=VARCHAR},'%')

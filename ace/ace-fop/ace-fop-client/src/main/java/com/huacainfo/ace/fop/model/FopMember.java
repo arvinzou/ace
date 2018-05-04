@@ -1,30 +1,29 @@
 package com.huacainfo.ace.fop.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author HuaCai003
- */
-public class FopResource implements Serializable {
-    private static final long serialVersionUID = 6215358127259345213L;
+public class FopMember {
     private String id;
 
     private String relationId;
-
+    /**
+     * 0-企业会员 1-团体会员
+     */
     private String relationType;
 
-    private String resCategroy;
+    private String mermberName;
 
-    private String resName;
+    private String memberCode;
 
-    private String resSize;
+    private String memberLevel;
 
-    private String resUrl;
+    private String memberType;
 
-    private String resType;
+    private Date joinDate;
 
-    private Integer sort;
+    private Date validDate;
+
+    private Date quitDate;
 
     private String remark;
 
@@ -66,52 +65,60 @@ public class FopResource implements Serializable {
         this.relationType = relationType == null ? null : relationType.trim();
     }
 
-    public String getResCategroy() {
-        return resCategroy;
+    public String getMermberName() {
+        return mermberName;
     }
 
-    public void setResCategroy(String resCategroy) {
-        this.resCategroy = resCategroy == null ? null : resCategroy.trim();
+    public void setMermberName(String mermberName) {
+        this.mermberName = mermberName == null ? null : mermberName.trim();
     }
 
-    public String getResName() {
-        return resName;
+    public String getMemberCode() {
+        return memberCode;
     }
 
-    public void setResName(String resName) {
-        this.resName = resName == null ? null : resName.trim();
+    public void setMemberCode(String memberCode) {
+        this.memberCode = memberCode == null ? null : memberCode.trim();
     }
 
-    public String getResSize() {
-        return resSize;
+    public String getMemberLevel() {
+        return memberLevel;
     }
 
-    public void setResSize(String resSize) {
-        this.resSize = resSize == null ? null : resSize.trim();
+    public void setMemberLevel(String memberLevel) {
+        this.memberLevel = memberLevel == null ? null : memberLevel.trim();
     }
 
-    public String getResUrl() {
-        return resUrl;
+    public String getMemberType() {
+        return memberType;
     }
 
-    public void setResUrl(String resUrl) {
-        this.resUrl = resUrl == null ? null : resUrl.trim();
+    public void setMemberType(String memberType) {
+        this.memberType = memberType == null ? null : memberType.trim();
     }
 
-    public String getResType() {
-        return resType;
+    public Date getJoinDate() {
+        return joinDate;
     }
 
-    public void setResType(String resType) {
-        this.resType = resType == null ? null : resType.trim();
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
     }
 
-    public Integer getSort() {
-        return sort;
+    public Date getValidDate() {
+        return validDate;
     }
 
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setValidDate(Date validDate) {
+        this.validDate = validDate;
+    }
+
+    public Date getQuitDate() {
+        return quitDate;
+    }
+
+    public void setQuitDate(Date quitDate) {
+        this.quitDate = quitDate;
     }
 
     public String getRemark() {

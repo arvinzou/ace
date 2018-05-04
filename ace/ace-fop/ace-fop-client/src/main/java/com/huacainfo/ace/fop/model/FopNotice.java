@@ -1,8 +1,13 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FopNotice {
+/**
+ * @author HuaCai003
+ */
+public class FopNotice implements Serializable {
+    private static final long serialVersionUID = -3903908919789961318L;
     private String id;
 
     private String title;
@@ -32,6 +37,16 @@ public class FopNotice {
     private Date lastModifyDate;
 
     private String description;
+
+    private String top;
+
+    public String getTop() {
+        return top;
+    }
+
+    public void setTop(String top) {
+        this.top = top;
+    }
 
     public String getId() {
         return id;
@@ -151,5 +166,27 @@ public class FopNotice {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "FopNotice{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", subTitle='" + subTitle + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                ", noticeType='" + noticeType + '\'' +
+                ", releaseDate=" + releaseDate +
+                ", remark='" + remark + '\'' +
+                ", status='" + status + '\'' +
+                ", createUserId='" + createUserId + '\'' +
+                ", createUserName='" + createUserName + '\'' +
+                ", createDate=" + createDate +
+                ", lastModifyUserId='" + lastModifyUserId + '\'' +
+                ", lastModifyUserName='" + lastModifyUserName + '\'' +
+                ", lastModifyDate=" + lastModifyDate +
+                ", description='" + description + '\'' +
+                ", top='" + top + '\'' +
+                '}';
     }
 }

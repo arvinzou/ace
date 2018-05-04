@@ -44,19 +44,18 @@ public interface FopNoticeService {
      */
     public abstract MessageResponse insertFopNotice(FopNotice obj, UserProp userProp) throws Exception;
 
-        /**
-        *
-        * @Title:updateFopNotice
-         * @Description: TODO(更新通知公告)
-         * @param: @param obj
-         * @param: @param userProp
-         * @param: @throws Exception
-         * @return: MessageResponse
-         * @throws
-         * @author: Arvin
-         * @version: 2018-05-03
-         */
-        public abstract MessageResponse updateFopNotice(FopNotice obj, UserProp userProp) throws Exception;
+    /**
+     * @throws
+     * @Title:updateFopNotice
+     * @Description: TODO(更新通知公告)
+     * @param: @param obj
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-05-03
+     */
+    public abstract MessageResponse updateFopNotice(FopNotice obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -82,8 +81,12 @@ public interface FopNoticeService {
      * @author: Arvin
      * @version: 2018-05-03
      */
-    public abstract MessageResponse deleteFopNoticeByFopNoticeId(String id,UserProp userProp) throws
-            Exception;
+    public abstract MessageResponse deleteFopNoticeByFopNoticeId(String id, UserProp userProp) throws Exception;
+
+    public abstract PageResult<FopNoticeVo> findNoticeList(FopNoticeQVo condition, String sort, int start, int limit) throws Exception;
 
 
-            }
+    public abstract PageResult<FopNoticeVo> homepageNoticeList() throws Exception;
+
+
+}

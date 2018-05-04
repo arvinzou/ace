@@ -28,15 +28,15 @@
                 <form action="#" id="fm-search">
 
                     类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
+                        class="easyui-combobox" style="width: 200px" name="noticeType"
                         data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=127&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
 
-                    名称： <input name="name" type="text"
+                    名称： <input name="title" type="text"
                                style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopNotice/findFopNoticeList">
@@ -70,9 +70,7 @@
             </div>
         </div>
     </div>
-
     <table id="grid-table"></table>
-
     <div id="grid-pager"></div>
 
 
@@ -194,6 +192,15 @@
         src="${pageContext.request.contextPath}/content/service/notice/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/notice/view.js?version=${cfg.version}"></script>
+
+<script src="${pageContext.request.contextPath}/content/service/notice/upload.js?version=${cfg.version}"></script>
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

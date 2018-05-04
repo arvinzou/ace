@@ -175,13 +175,13 @@
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLawPaper/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/lawPaper/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLawPaper/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/lawPaper/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLawPaper/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/lawPaper/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLawPaper/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/lawPaper/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

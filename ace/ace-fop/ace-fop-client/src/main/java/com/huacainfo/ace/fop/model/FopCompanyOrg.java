@@ -1,8 +1,10 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FopCompanyOrg {
+public class FopCompanyOrg implements Serializable {
+    private static final long serialVersionUID = 314007139990724959L;
     private String id;
 
     private String companyId;

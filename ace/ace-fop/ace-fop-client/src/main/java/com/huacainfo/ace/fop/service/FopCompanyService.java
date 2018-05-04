@@ -4,7 +4,6 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
 
@@ -40,7 +39,7 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse insertFopCompany(FopCompany obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse insertFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -53,7 +52,7 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse updateFopCompany(FopCompany obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse updateFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
