@@ -85,8 +85,8 @@
         <div class="login-box no-longlogin module-static" id="J_LoginBox">
             <div class="hd">
                 <div class="login-switch" onselectstart="return false;">
-                    <i class="iconfont quick" style="display:none" id="J_Static2Quick" onclick="javascript:switchLoginType('J_Static2Quick','J_Quick2Static')" ></i>
-                    <i class="iconfont static" style="display:block" id="J_Quick2Static" onclick="javascript:switchLoginType('J_Quick2Static','J_Static2Quick')"></i>
+                    <i class="iconfont quick" style="display:none" id="J_Static2Quick" onclick="javascript:switchLoginType('J_Static2Quick','J_Quick2Static')" ></i>
+                    <i class="iconfont static" style="display:block" id="J_Quick2Static" onclick="javascript:switchLoginType('J_Quick2Static','J_Static2Quick')"></i>
                 </div>
             </div>
 
@@ -101,7 +101,7 @@
             <span style="color: red;font-size:16px">${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}${sessionScope['j_captcha_error']}</span>
         </div>
         <div class="form-title">
-            <span class="form-subtitle">欢迎，请登录.</span>
+            <span class="form-subtitle">密码登录.</span>
         </div>
         <div id="J_Static2Quick_box" style="display:none;width:100%;text-align:center">
                 <img src="http://www.xmypage.com/images/erweima.png" class="qrcode"/>
@@ -259,6 +259,10 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/login.min.js"
         type="text/javascript"></script>
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"
+        type="text/javascript"></script>
+
+
 
 <script type="text/javascript">
 
@@ -384,11 +388,21 @@
          $("#"+cur+"_box").css("display","none");
         $("#"+other+"_box").css("display","block");
         if(cur=='J_Quick2Static'){
-             $(".form-subtitle").html("微信扫二维码登录");
+             $(".form-subtitle").html("微信扫码，安全登录");
         }else{
-             $(".form-subtitle").html("欢迎,请登录");
+             $(".form-subtitle").html("密码登录");
         }
     }
+ /*var obj = new WxLogin({
+     self_redirect:true,
+     id:"login_container",
+     appid: "",
+     scope: "",
+     redirect_uri: "",
+      state: "",
+     style: "",
+     href: ""
+ });*/
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
