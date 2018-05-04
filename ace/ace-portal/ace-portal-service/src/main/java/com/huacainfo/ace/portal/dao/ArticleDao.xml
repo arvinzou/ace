@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.ArticleDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Article">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="tplPageId" jdbcType="VARCHAR" property="tplPageId" />
+    <result column="articleCategory" jdbcType="VARCHAR" property="articleCategory" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="hrefUrl" jdbcType="VARCHAR" property="hrefUrl" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+    <result column="mediType" jdbcType="VARCHAR" property="mediType" />
+    <result column="mediUrl" jdbcType="VARCHAR" property="mediUrl" />
+    <result column="bgMusicUrl" jdbcType="VARCHAR" property="bgMusicUrl" />
+    <result column="likeNum" jdbcType="BIGINT" property="likeNum" />
+    <result column="hitNum" jdbcType="BIGINT" property="hitNum" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.ArticleVo"
+             extends="BaseResultMap">
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, tplPageId, articleCategory, title, cover, remark, hrefUrl, tags, mediType, mediUrl, 
+    bgMusicUrl, likeNum, hitNum, sort, status, createUserId, createUserName, createDate, 
+    lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from article
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.Article">
+    insert into article (id, tplPageId, articleCategory, 
+      title, cover, remark, 
+      hrefUrl, tags, mediType, 
+      mediUrl, bgMusicUrl, likeNum, 
+      hitNum, sort, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate, content
+      )
+    values (#{id,jdbcType=VARCHAR}, #{tplPageId,jdbcType=VARCHAR}, #{articleCategory,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{hrefUrl,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{mediType,jdbcType=VARCHAR}, 
+      #{mediUrl,jdbcType=VARCHAR}, #{bgMusicUrl,jdbcType=VARCHAR}, #{likeNum,jdbcType=BIGINT}, 
+      #{hitNum,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Article">
+    update article
+    set tplPageId = #{tplPageId,jdbcType=VARCHAR},
+      articleCategory = #{articleCategory,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      hrefUrl = #{hrefUrl,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      mediType = #{mediType,jdbcType=VARCHAR},
+      mediUrl = #{mediUrl,jdbcType=VARCHAR},
+      bgMusicUrl = #{bgMusicUrl,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>
