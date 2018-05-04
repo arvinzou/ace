@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,12 +52,8 @@ public class FopNoticeServiceImpl implements FopNoticeService {
     @Override
     public PageResult<FopNoticeVo> findFopNoticeList(FopNoticeQVo condition, int start,
                                                      int limit, String orderBy) throws Exception {
-        PageResult
-                <FopNoticeVo> rst = new PageResult
-                <FopNoticeVo>();
-        List
-                <FopNoticeVo> list = this.fopNoticeDao.findList(condition,
-                start, start + limit, orderBy);
+        PageResult<FopNoticeVo> rst = new PageResult<FopNoticeVo>();
+        List<FopNoticeVo> list = this.fopNoticeDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.fopNoticeDao.findCount(condition);
@@ -72,11 +69,29 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      * @throws Exception
      */
     @Override
-    public PageResult<FopNoticeVo> findNoticeList(int start, int limit) throws Exception {
+    public PageResult<FopNoticeVo> findNoticeList(FopNoticeQVo condition, String sort, int start, int limit) throws Exception {
+        if (!CommonUtils.isBlank(sort)) {
+            sort = "releaseDate asc";
+        }
+        PageResult<FopNoticeVo> rst = new PageResult<FopNoticeVo>();
+        List<FopNoticeVo> list = this.fopNoticeDao.findList(condition, (start - 1) * limit, limit, sort);
+        rst.setRows(list);
+        return rst;
+    }
+
+
+    /**
+     *
+     */
+    @Override
+    public PageResult<FopNoticeVo> homepageNoticeList() throws Exception {
         FopNoticeQVo condition = new FopNoticeQVo();
         PageResult<FopNoticeVo> rst = new PageResult<FopNoticeVo>();
-        List<FopNoticeVo> list = this.fopNoticeDao.findList(condition, start, limit, null);
-        rst.setRows(list);
+        condition.setTop("1");
+        List<FopNoticeVo> toplist = this.fopNoticeDao.findList(condition, 0, 4, null);
+        condition.setTop("0");
+        toplist.addAll(this.fopNoticeDao.findList(condition, 0, 7, null));
+        rst.setRows(toplist);
         return rst;
     }
 
@@ -97,33 +112,23 @@ public class FopNoticeServiceImpl implements FopNoticeService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCoverUrl())) {
-            return new MessageResponse(1, "封面地址不能为空！");
+        if (o.getTop().equals("1")) {
+            if (CommonUtils.isBlank(o.getCoverUrl())) {
+                return new MessageResponse(1, "置顶时封面地址不能为空！");
+            }
         }
-        if (CommonUtils.isBlank(o.getReleaseDate())) {
-            return new MessageResponse(1, "发布时间不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
         int temp = this.fopNoticeDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "通知公告名称重复！");
         }
-
         o.setId(GUIDUtil.getGUID());
-        o.setCreateDate(new Date());
         o.setStatus("1");
+        o.setReleaseDate(new Date());
+        o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopNoticeDao.insertSelective(o);
-        this.dataBaseLogService.log("添加通知公告", "通知公告", "",
-                o.getId(),
-                o.getId(), userProp);
+        this.dataBaseLogService.log("添加通知公告", "通知公告", "", o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "添加通知公告完成！");
     }
 
@@ -147,20 +152,12 @@ public class FopNoticeServiceImpl implements FopNoticeService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCoverUrl())) {
-            return new MessageResponse(1, "封面地址不能为空！");
+        if (o.getTop().equals("1")) {
+            if (CommonUtils.isBlank(o.getCoverUrl())) {
+                return new MessageResponse(1, "置顶时封面地址不能为空！");
+            }
+            o.setReleaseDate(new Date());
         }
-        if (CommonUtils.isBlank(o.getReleaseDate())) {
-            return new MessageResponse(1, "发布时间不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());

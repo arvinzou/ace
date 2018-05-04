@@ -10,6 +10,7 @@
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="top" jdbcType="CHAR" property="top"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
@@ -19,7 +20,7 @@
         <result column="description" jdbcType="LONGVARCHAR" property="description"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, subTitle, coverUrl, noticeType, releaseDate, remark, status, createUserId,
+        id, title, subTitle, coverUrl, noticeType, releaseDate, remark, status, top,createUserId,
         createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -35,13 +36,13 @@
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopNotice">
         insert into fop_notice (id, title, subTitle,
         coverUrl, noticeType, releaseDate,
-        remark, status, createUserId,
+        remark, status, top,createUserId,
         createUserName, createDate, lastModifyUserId,
         lastModifyUserName, lastModifyDate, description
         )
         values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR},
         #{coverUrl,jdbcType=VARCHAR}, #{noticeType,jdbcType=CHAR}, #{releaseDate,jdbcType=TIMESTAMP},
-        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},#{top,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
         #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
         #{description,jdbcType=LONGVARCHAR}
@@ -73,6 +74,9 @@
             </if>
             <if test="status != null">
                 status,
+            </if>
+            <if test="top != null">
+                top,
             </if>
             <if test="createUserId != null">
                 createUserId,
@@ -121,6 +125,9 @@
             <if test="status != null">
                 #{status,jdbcType=CHAR},
             </if>
+            <if test="top != null">
+                #{top,jdbcType=CHAR},
+            </if>
             <if test="createUserId != null">
                 #{createUserId,jdbcType=VARCHAR},
             </if>
@@ -168,6 +175,9 @@
             <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
+            <if test="top != null">
+                top = #{top,jdbcType=CHAR},
+            </if>
             <if test="createUserId != null">
                 createUserId = #{createUserId,jdbcType=VARCHAR},
             </if>
@@ -201,6 +211,7 @@
         releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
         remark = #{remark,jdbcType=VARCHAR},
         status = #{status,jdbcType=CHAR},
+        top = #{top,jdbcType=CHAR},
         createUserId = #{createUserId,jdbcType=VARCHAR},
         createUserName = #{createUserName,jdbcType=VARCHAR},
         createDate = #{createDate,jdbcType=TIMESTAMP},
@@ -248,28 +259,31 @@
         select count(*)
         from fop_notice
         where
-        name=#{name}
+        title=#{title}
     </select>
 
     <sql id="whereCondition">
         from fop_notice
         where 0=0
-        <!--<if test='condition.name!=null and condition.name!=""'>
-            and name like
-            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        <if test='condition.title!=null and condition.title!=""'>
+            and title like
+            concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">
-            and name like
-            concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')
-        </if>
+        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
 
-        <if test="condition.dept!=null and condition.dept!=&quot;&quot;">
-            and name like
-            concat('%',#{condition.dept,jdbcType=VARCHAR},'%')
+        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+        <if test="condition.top!=null and condition.top!=&quot;&quot;">
+            and top =#{condition.top,jdbcType=CHAR}
         </if>
-        <if test="condition.category!=null and condition.category!=&quot;&quot;">
-            and category =#{condition.category,jdbcType=CHAR}
-        </if>-->
+        <if test="condition.noticeType!=null and condition.noticeType!=&quot;&quot;">
+            and top =#{condition.noticeType,jdbcType=CHAR}
+        </if>
     </sql>
 
 

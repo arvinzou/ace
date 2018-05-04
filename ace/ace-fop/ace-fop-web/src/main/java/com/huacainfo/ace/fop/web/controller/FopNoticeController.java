@@ -74,8 +74,7 @@ public class FopNoticeController extends FopBaseController {
     @ResponseBody
     public MessageResponse insertFopNotice(String jsons) throws Exception {
         FopNotice obj = JSON.parseObject(jsons, FopNotice.class);
-        return this.fopNoticeService
-                .insertFopNotice(obj, this.getCurUserProp());
+        return this.fopNoticeService.insertFopNotice(obj, this.getCurUserProp());
     }
 
     /**
@@ -131,5 +130,5 @@ public class FopNoticeController extends FopBaseController {
         String id = json.getString("id");
         return this.fopNoticeService.deleteFopNoticeByFopNoticeId(id,
                 this.getCurUserProp());
-                }
-                }
+    }
+}

@@ -1,8 +1,13 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FopLawPaper {
+/**
+ * @author HuaCai003
+ */
+public class FopLawPaper implements Serializable {
+    private static final long serialVersionUID = 2410999546961012414L;
     private String id;
 
     private String title;

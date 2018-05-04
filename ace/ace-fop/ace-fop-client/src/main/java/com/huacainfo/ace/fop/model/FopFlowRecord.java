@@ -1,8 +1,13 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FopFlowRecord {
+/**
+ * @author HuaCai003
+ */
+public class FopFlowRecord implements Serializable {
+    private static final long serialVersionUID = -8050637412256192872L;
     private String id;
 
     private String fromId;
