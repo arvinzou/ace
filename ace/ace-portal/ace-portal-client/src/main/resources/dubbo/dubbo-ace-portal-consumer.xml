@@ -93,4 +93,21 @@
     <dubbo:reference interface="com.huacainfo.ace.portal.service.SensitiveWordsService"
                      id="sensitiveWordsService"/>
 
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.ArticleService"
+                     id="articleService"/>
+
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.ArticleCategoryService"
+                     id="articleCategoryService"/>
+
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.ArticleCmtService"
+                     id="articleCmtService"/>
+
+
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.TplService"
+                     id="tplService"/>
+
+
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.TplPageService"
+                     id="tplPageService"/>
+
 </beans>
