@@ -18,9 +18,8 @@ import com.huacainfo.ace.fop.service.AnalysisService;
 public class AnslysisServiceImpl implements AnalysisService {
 	private static final Logger logger = LoggerFactory.getLogger(AnslysisServiceImpl.class);
 	@Override
-	public ListResult<Map<String, Object>> query(Map<String, Object> condition,
-			String reportId,int start,int limit) throws Exception {
-		ListResult<Map<String, Object>> rst = new ListResult<Map<String, Object>>();
+    public ListResult<Map<String, Object>> query(Map<String, Object> condition, String reportId, int start, int limit) throws Exception {
+        ListResult<Map<String, Object>> rst = new ListResult<Map<String, Object>>();
 		List<Map<String, Object>> p=new ArrayList<Map<String, Object>>();
 		ReportDao dao = (ReportDao) SpringUtils.getBean(reportId);
 		condition.put("start",start);
