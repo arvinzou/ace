@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
+import com.huacainfo.ace.fop.vo.FopCompanyVo;
 import com.huacainfo.ace.fop.vo.FopFlowRecordQVo;
 import com.huacainfo.ace.fop.vo.FopFlowRecordVo;
 
@@ -80,5 +81,13 @@ public interface FopFlowRecordService {
      */
     public abstract MessageResponse deleteFopFlowRecordByFopFlowRecordId(String id, UserProp userProp) throws Exception;
 
-
+    /**
+     * 企业会员注册，自动审核通过，成为会员
+     *
+     * @param flowType  流程类型  ： FlowType.java
+     * @param companyVo 企业会员资料
+     * @param userProp  操作人
+     * @return 处理结果
+     */
+    MessageResponse memberJoinAutoAudit(String flowType, FopCompanyVo companyVo, UserProp userProp) throws Exception;
 }

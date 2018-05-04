@@ -805,6 +805,8 @@ public final class DateUtil {
      * @return String
      */
     public static String getDate(String type, String date, int value, String format) {
+        format = StringUtils.isEmpty(format) ? DateUtil.DEFAULT_DATE_TIME_REGEX : format;
+
         Calendar curr = Calendar.getInstance();
         curr.setTime(getDate(date, format));
         if ("week".equals(type)) {

@@ -3,8 +3,10 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopPerson;
+import com.huacainfo.ace.fop.vo.FopCompanyVo;
 import com.huacainfo.ace.fop.vo.FopPersonQVo;
 import com.huacainfo.ace.fop.vo.FopPersonVo;
 
@@ -81,4 +83,5 @@ public interface FopPersonService {
     public abstract MessageResponse deleteFopPersonByFopPersonId(String id, UserProp userProp) throws Exception;
 
 
+    ResultResponse insertPerson(FopCompanyVo o, UserProp userProp);
 }

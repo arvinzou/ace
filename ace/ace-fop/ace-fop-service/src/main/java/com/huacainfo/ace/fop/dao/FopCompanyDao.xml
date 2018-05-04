@@ -21,7 +21,7 @@
         <result column="ownSpace" jdbcType="DECIMAL" property="ownSpace"/>
         <result column="tenancySpace" jdbcType="DECIMAL" property="tenancySpace"/>
         <result column="personId" jdbcType="VARCHAR" property="personId"/>
-        <result column="adress" jdbcType="VARCHAR" property="adress"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
         <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
         <result column="firstPersonId" jdbcType="VARCHAR" property="firstPersonId"/>
@@ -47,8 +47,8 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, departmentId, creditCode, companyType, fullName, shortName, companyCode, companyLogo, 
-    companyLinkUrl, areaCode, companyProperty, establishDate, crewSize, registeredCapital, 
-    fixedAssets, workingCapital, ownSpace, tenancySpace, personId, adress, latitude, 
+    companyLinkUrl, areaCode, companyProperty, establishDate, crewSize, registeredCapital,
+        fixedAssets, workingCapital, ownSpace, tenancySpace, personId, address, latitude,
     longitude, firstPersonId, secPersonId, postcode, fax, email, majorVariety, laborContractNum, 
     thirdLaborRelation, socialInsuranceAddr, socialInsuranceNum, accTaxAmount, yearTaxAmount, 
     remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
@@ -70,8 +70,8 @@
       companyCode, companyLogo, companyLinkUrl, 
       areaCode, companyProperty, establishDate, 
       crewSize, registeredCapital, fixedAssets, 
-      workingCapital, ownSpace, tenancySpace, 
-      personId, adress, latitude, 
+      workingCapital, ownSpace, tenancySpace,
+        personId, address, latitude,
       longitude, firstPersonId, secPersonId, 
       postcode, fax, email, 
       majorVariety, laborContractNum, thirdLaborRelation, 
@@ -85,8 +85,8 @@
       #{companyCode,jdbcType=VARCHAR}, #{companyLogo,jdbcType=VARCHAR}, #{companyLinkUrl,jdbcType=VARCHAR}, 
       #{areaCode,jdbcType=VARCHAR}, #{companyProperty,jdbcType=CHAR}, #{establishDate,jdbcType=TIMESTAMP}, 
       #{crewSize,jdbcType=INTEGER}, #{registeredCapital,jdbcType=DECIMAL}, #{fixedAssets,jdbcType=DECIMAL}, 
-      #{workingCapital,jdbcType=DECIMAL}, #{ownSpace,jdbcType=DECIMAL}, #{tenancySpace,jdbcType=DECIMAL}, 
-      #{personId,jdbcType=VARCHAR}, #{adress,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, 
+      #{workingCapital,jdbcType=DECIMAL}, #{ownSpace,jdbcType=DECIMAL}, #{tenancySpace,jdbcType=DECIMAL},
+        #{personId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL},
       #{longitude,jdbcType=DECIMAL}, #{firstPersonId,jdbcType=VARCHAR}, #{secPersonId,jdbcType=VARCHAR}, 
       #{postcode,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{majorVariety,jdbcType=VARCHAR}, #{laborContractNum,jdbcType=INTEGER}, #{thirdLaborRelation,jdbcType=CHAR}, 
@@ -156,8 +156,8 @@
             <if test="personId != null">
                 personId,
             </if>
-            <if test="adress != null">
-                adress,
+            <if test="address != null">
+                address,
             </if>
             <if test="latitude != null">
                 latitude,
@@ -284,8 +284,8 @@
             <if test="personId != null">
                 #{personId,jdbcType=VARCHAR},
             </if>
-            <if test="adress != null">
-                #{adress,jdbcType=VARCHAR},
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
             </if>
             <if test="latitude != null">
                 #{latitude,jdbcType=DECIMAL},
@@ -412,8 +412,8 @@
             <if test="personId != null">
                 personId = #{personId,jdbcType=VARCHAR},
             </if>
-            <if test="adress != null">
-                adress = #{adress,jdbcType=VARCHAR},
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
             </if>
             <if test="latitude != null">
                 latitude = #{latitude,jdbcType=DECIMAL},
@@ -504,7 +504,7 @@
       ownSpace = #{ownSpace,jdbcType=DECIMAL},
       tenancySpace = #{tenancySpace,jdbcType=DECIMAL},
       personId = #{personId,jdbcType=VARCHAR},
-      adress = #{adress,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
       latitude = #{latitude,jdbcType=DECIMAL},
       longitude = #{longitude,jdbcType=DECIMAL},
       firstPersonId = #{firstPersonId,jdbcType=VARCHAR},
@@ -534,10 +534,65 @@
 
     </resultMap>
 
+    <sql id="Vo_Column_List">
+        id, departmentId, creditCode, companyType, fullName, shortName, companyCode, companyLogo,
+        companyLinkUrl, areaCode, companyProperty, establishDate, crewSize, registeredCapital,
+        fixedAssets, workingCapital, ownSpace, tenancySpace, personId, address, latitude,
+        longitude, firstPersonId, secPersonId, postcode, fax, email, majorVariety, laborContractNum,
+        thirdLaborRelation, socialInsuranceAddr, socialInsuranceNum, accTaxAmount, yearTaxAmount,
+        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate
+    </sql>
+
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
         from fop_company
         where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_company
+        where 1 = 1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopCompany">
+        select count(*)
+        from fop_company
+        where fullName = #{fullName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="selectRoleList" resultType="java.util.Map" parameterType="java.lang.String">
+        SELECT
+            t.role_id,	t.role_name,	t.create_time,
+            t.create_user_id,	t.remark,	t.type,	t.syid
+        FROM
+            portal.role t
+        WHERE t.syid = 'fop'
+        AND t.type IN (4)
     </select>
 </mapper>

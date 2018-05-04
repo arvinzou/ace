@@ -45,6 +45,8 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        //添加额外按钮显示
+                        appendButtons();
                     }
                 })
         });
@@ -70,6 +72,8 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        //添加额外按钮显示
+                        appendButtons();
                     }
                 })
         });
@@ -154,4 +158,39 @@ function loadView(id) {
             alert("加载错误！");
         }
     });
+}
+
+
+function appendButtons() {
+    //企业通讯地址
+    appendMapBtn("address");
+    //图片logo上传
+    appendUploadBtn("companyLogo");
+}
+
+/**
+ * 1、添加地图位置的指针*/
+function appendMapBtn(id) {
+    var html = new Array();
+    html.push("<a id='btn-map-add-"
+        + id
+        + "' class='ace-icon fa fa-location-arrow bigger-110' href='javascript:false'>选取</a>");
+    $("#" + id).after(html.join(''));
+    $('#btn-map-add-' + id).on('click', function () {
+        window.open(portalPath + "/dynamic/common/map.jsp");
+    });
+}
+
+/**
+ * 2、自动填写地址
+ * @param latitude
+ */
+function latitude(latitude) {
+    $("#latitude").val(latitude);
+}
+function longitude(longitude) {
+    $("#longitude").val(longitude);
+}
+function addr(addr) {
+    $("#address").val(addr);
 }

@@ -42,7 +42,7 @@ public class FopCompany {
 
     private String personId;
 
-    private String adress;
+    private String address;
 
     private BigDecimal latitude;
 
@@ -240,12 +240,12 @@ public class FopCompany {
         this.personId = personId == null ? null : personId.trim();
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress == null ? null : adress.trim();
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public BigDecimal getLatitude() {

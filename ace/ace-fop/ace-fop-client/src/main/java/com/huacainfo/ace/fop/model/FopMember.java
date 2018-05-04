@@ -2,22 +2,28 @@ package com.huacainfo.ace.fop.model;
 
 import java.util.Date;
 
-public class FopFlowRecord {
+public class FopMember {
     private String id;
 
-    private String fromId;
-
-    private String flowType;
-
-    private String personId;
+    private String relationId;
     /**
-     * 0 - 通过，1 -不通过
+     * 0-企业会员 1-团体会员
      */
-    private String auditResult;
+    private String relationType;
 
-    private String auditOpinion;
+    private String mermberName;
 
-    private Date auditDate;
+    private String memberCode;
+
+    private String memberLevel;
+
+    private String memberType;
+
+    private Date joinDate;
+
+    private Date validDate;
+
+    private Date quitDate;
 
     private String remark;
 
@@ -43,52 +49,76 @@ public class FopFlowRecord {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getFromId() {
-        return fromId;
+    public String getRelationId() {
+        return relationId;
     }
 
-    public void setFromId(String fromId) {
-        this.fromId = fromId == null ? null : fromId.trim();
+    public void setRelationId(String relationId) {
+        this.relationId = relationId == null ? null : relationId.trim();
     }
 
-    public String getFlowType() {
-        return flowType;
+    public String getRelationType() {
+        return relationType;
     }
 
-    public void setFlowType(String flowType) {
-        this.flowType = flowType == null ? null : flowType.trim();
+    public void setRelationType(String relationType) {
+        this.relationType = relationType == null ? null : relationType.trim();
     }
 
-    public String getPersonId() {
-        return personId;
+    public String getMermberName() {
+        return mermberName;
     }
 
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
+    public void setMermberName(String mermberName) {
+        this.mermberName = mermberName == null ? null : mermberName.trim();
     }
 
-    public String getAuditResult() {
-        return auditResult;
+    public String getMemberCode() {
+        return memberCode;
     }
 
-    public void setAuditResult(String auditResult) {
-        this.auditResult = auditResult == null ? null : auditResult.trim();
+    public void setMemberCode(String memberCode) {
+        this.memberCode = memberCode == null ? null : memberCode.trim();
     }
 
-    public String getAuditOpinion() {
-        return auditOpinion;
+    public String getMemberLevel() {
+        return memberLevel;
     }
 
-    public void setAuditOpinion(String auditOpinion) {
-        this.auditOpinion = auditOpinion == null ? null : auditOpinion.trim();
+    public void setMemberLevel(String memberLevel) {
+        this.memberLevel = memberLevel == null ? null : memberLevel.trim();
     }
 
-    public Date getAuditDate() {
-        return auditDate;
+    public String getMemberType() {
+        return memberType;
     }
 
-    public void setAuditDate(Date auditDate) {
-        this.auditDate = auditDate;
+    public void setMemberType(String memberType) {
+        this.memberType = memberType == null ? null : memberType.trim();
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    public Date getValidDate() {
+        return validDate;
+    }
+
+    public void setValidDate(Date validDate) {
+        this.validDate = validDate;
+    }
+
+    public Date getQuitDate() {
+        return quitDate;
+    }
+
+    public void setQuitDate(Date quitDate) {
+        this.quitDate = quitDate;
     }
 
     public String getRemark() {

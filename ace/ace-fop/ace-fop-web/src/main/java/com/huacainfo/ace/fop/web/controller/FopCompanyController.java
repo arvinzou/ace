@@ -6,7 +6,6 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.service.FopCompanyService;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
@@ -71,9 +70,8 @@ public class FopCompanyController extends FopBaseController {
     @RequestMapping(value = "/insertFopCompany")
     @ResponseBody
     public MessageResponse insertFopCompany(String jsons) throws Exception {
-        FopCompany obj = JSON.parseObject(jsons, FopCompany.class);
-        return this.fopCompanyService
-                .insertFopCompany(obj, this.getCurUserProp());
+        FopCompanyVo obj = JSON.parseObject(jsons, FopCompanyVo.class);
+        return this.fopCompanyService.insertFopCompany(obj, this.getCurUserProp());
     }
 
     /**
@@ -89,9 +87,8 @@ public class FopCompanyController extends FopBaseController {
     @RequestMapping(value = "/updateFopCompany")
     @ResponseBody
     public MessageResponse updateFopCompany(String jsons) throws Exception {
-        FopCompany obj = JSON.parseObject(jsons, FopCompany.class);
-        return this.fopCompanyService
-                .updateFopCompany(obj, this.getCurUserProp());
+        FopCompanyVo obj = JSON.parseObject(jsons, FopCompanyVo.class);
+        return this.fopCompanyService.updateFopCompany(obj, this.getCurUserProp());
     }
 
     /**
