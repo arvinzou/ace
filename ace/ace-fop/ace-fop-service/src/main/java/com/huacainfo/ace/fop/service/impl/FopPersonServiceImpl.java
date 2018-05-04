@@ -1,15 +1,19 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.dao.FopPersonDao;
 import com.huacainfo.ace.fop.model.FopPerson;
 import com.huacainfo.ace.fop.service.FopPersonService;
+import com.huacainfo.ace.fop.vo.FopCompanyVo;
 import com.huacainfo.ace.fop.vo.FopPersonQVo;
 import com.huacainfo.ace.fop.vo.FopPersonVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -25,7 +29,7 @@ import java.util.List;
 /**
  * @author: Arvin
  * @version: 2018-05-02
- * @Description: TODO(企业管理)
+ * @Description:人员档案
  */
 public class FopPersonServiceImpl implements FopPersonService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -75,39 +79,32 @@ public class FopPersonServiceImpl implements FopPersonService {
     @Override
     public MessageResponse insertFopPerson(FopPerson o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getRealName())) {
-            return new MessageResponse(1, "姓名不能为空！");
+            return new MessageResponse(1, "姓名不能为空");
         }
         if (CommonUtils.isBlank(o.getSex())) {
-            return new MessageResponse(1, "性别不能为空！");
+            return new MessageResponse(1, "性别不能为空");
         }
         if (CommonUtils.isBlank(o.getIdentityCard())) {
-            return new MessageResponse(1, "身份证号码不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
+            return new MessageResponse(1, "身份证号码不能为空");
         }
         if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
+            return new MessageResponse(1, "最后更新时间不能为空");
         }
-
         int temp = this.fopPersonDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "企业管理名称重复！");
+            return new MessageResponse(1, "个人档案重复");
         }
+
+        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopPersonDao.insertSelective(o);
-        this.dataBaseLogService.log("添加企业管理", "企业管理", "", o.getId(),
+        this.dataBaseLogService.log("添加个人档案", "个人档案", "", o.getId(),
                 o.getId(), userProp);
-        return new MessageResponse(0, "添加企业管理完成！");
+        return new MessageResponse(0, "添加个人档案完成");
     }
 
     /**
@@ -188,5 +185,38 @@ public class FopPersonServiceImpl implements FopPersonService {
         this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(id),
                 String.valueOf(id), "企业管理", userProp);
         return new MessageResponse(0, "企业管理删除完成！");
+    }
+
+    @Override
+    public ResultResponse insertPerson(FopCompanyVo companyVo, UserProp userProp) {
+        FopPerson person = new FopPerson();
+        person.setRealName(companyVo.getPersonId());
+        person.setMobileNumer(companyVo.getLpMobile());
+        person.setSex(companyVo.getLpSex());
+        person.setBirthDate(companyVo.getLpBirthDt());
+        person.setNativePlace(companyVo.getLpNativePlace());
+        person.setNationality(companyVo.getLpNationality());
+        person.setPolitical(companyVo.getLpPolitical());
+        person.setRecruitmentDate(companyVo.getLpRecruitmentDate());
+        person.setEducation(companyVo.getLpEducation());
+        person.setSkillJobTitle(companyVo.getLpSkillJobTitle());
+        person.setDeptPost(companyVo.getLpDeptPost());
+        person.setIdentityCard(companyVo.getLpIdentityCard());
+        person.setSocietyPost(companyVo.getLpSocietyPost());
+
+        int temp = this.fopPersonDao.isExit(person);
+        if (temp > 0) {
+            return new ResultResponse(ResultCode.FAIL, "个人档案重复");
+        }
+        person.setId(GUIDUtil.getGUID());
+        person.setCreateDate(DateUtil.getNowDate());
+        person.setStatus("1");
+        person.setCreateUserName(userProp.getName());
+        person.setCreateUserId(userProp.getUserId());
+        fopPersonDao.insertSelective(person);
+        dataBaseLogService.log("添加个人档案", "企业注册-自动插入", "", person.getId(),
+                person.getId(), userProp);
+
+        return new ResultResponse(ResultCode.SUCCESS, "添加个人档案完成", person);
     }
 }

@@ -6,10 +6,12 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.dao.FopFlowRecordDao;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
+import com.huacainfo.ace.fop.vo.FopCompanyVo;
 import com.huacainfo.ace.fop.vo.FopFlowRecordQVo;
 import com.huacainfo.ace.fop.vo.FopFlowRecordVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -90,16 +92,8 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         if (CommonUtils.isBlank(o.getAuditDate())) {
             return new MessageResponse(1, "审核时间不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
         if (CommonUtils.isBlank(o.getLastModifyDate())) {
             return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
-        int temp = this.fopFlowRecordDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "流程记录名称重复！");
         }
 
         o.setId(GUIDUtil.getGUID());
@@ -197,5 +191,29 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         this.dataBaseLogService.log("删除流程记录", "流程记录", String.valueOf(id),
                 String.valueOf(id), "流程记录", userProp);
         return new MessageResponse(0, "流程记录删除完成！");
+    }
+
+    /**
+     * 企业会员注册，自动审核通过，成为会员
+     *
+     * @param flowType  流程类型  ： FlowType.java
+     * @param companyVo 企业会员资料
+     * @param userProp  操作人
+     * @return 处理结果
+     */
+    @Override
+    public MessageResponse memberJoinAutoAudit(String flowType, FopCompanyVo companyVo, UserProp userProp) throws Exception {
+
+        //插入审核流程
+        FopFlowRecord flowRecord = new FopFlowRecord();
+        flowRecord.setId(GUIDUtil.getGUID());
+        flowRecord.setFromId(companyVo.getId());
+        flowRecord.setFlowType(flowType);
+        flowRecord.setPersonId(userProp.getUserId());
+        flowRecord.setAuditResult("0");
+        flowRecord.setAuditOpinion("系统自动审核");
+        flowRecord.setAuditDate(DateUtil.getNowDate());
+
+        return insertFopFlowRecord(flowRecord, userProp);
     }
 }

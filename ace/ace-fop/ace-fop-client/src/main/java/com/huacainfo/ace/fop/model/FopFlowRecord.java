@@ -15,7 +15,9 @@ public class FopFlowRecord implements Serializable {
     private String flowType;
 
     private String personId;
-
+    /**
+     * 0 - 通过，1 -不通过
+     */
     private String auditResult;
 
     private String auditOpinion;

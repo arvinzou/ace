@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.ArticleCategoryDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.ArticleCategory">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="tplPageId" jdbcType="VARCHAR" property="tplPageId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.ArticleCategoryVo"
+             extends="BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, tplPageId, name, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
+    lastModifyUserName, lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select 
+    <include refid="Base_Column_List" />
+    from article_category
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from article_category
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.ArticleCategory">
+    insert into article_category (id, tplPageId, name, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{tplPageId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.ArticleCategory">
+    update article_category
+    set tplPageId = #{tplPageId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <sql id="whereCondition">
+    from article_category where 0=0
+    <if test='condition.name!=null and condition.name!=""'>
+      and name like
+      concat(#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition" />
+  </select>
+  <select id="findList" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    <include refid="whereCondition" />
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY createDate
+      </otherwise>
+    </choose>
+
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+  </select>
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    article_category where
+    name=#{name}
+  </select>
+</mapper>
