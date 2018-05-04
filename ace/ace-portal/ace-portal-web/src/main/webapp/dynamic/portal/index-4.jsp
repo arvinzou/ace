@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
-<%
-session.setAttribute("portalPath", "/portal");
-%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -17,16 +14,8 @@ session.setAttribute("portalPath", "/portal");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <script type="text/javascript">
-	var contextPath = '${pageContext.request.contextPath}';
-	var portalPath = '${portalPath}';
-    </script>
-    <link rel="shortcut icon" href="favicon.ico">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css"/>
+    <jsp:include page="../common/base.jsp" />
+    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?version=${cfg.version}"></script>
 </head>
 <body>
 <div class="page-wrapper">
@@ -43,10 +32,129 @@ session.setAttribute("portalPath", "/portal");
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>类别</span>
+                                    <span>仪表盘</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
+
+                                <!---==============================================-->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="dashboard-stat2 ">
+                                            <div class="display">
+                                                <div class="number">
+                                                    <h3 class="font-red-haze">
+                                                        <span data-counter="counterup" data-value="0" id="dept">0</span>
+                                                        <small class="font-red-haze">个</small>
+                                                    </h3>
+                                                    <small>模板</small>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-bank"></i>
+                                                </div>
+                                            </div>
+                                            <div class="progress-info">
+                                                <div class="progress">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success red-haze">
+                                                <span class="sr-only"></span>
+                                            </span>
+                                                </div>
+                                                <div class="status">
+                                                    <div class="status-title"></div>
+                                                    <div class="status-number"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="dashboard-stat2 ">
+                                            <div class="display">
+                                                <div class="number">
+                                                    <h3 class="font-green-sharp">
+                                                        <span data-counter="counterup" data-value="" id="personage">0</span>
+                                                        <small class="font-green-sharp">个</small>
+                                                    </h3>
+                                                    <small>页面</small>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-user-circle-o"></i>
+                                                </div>
+                                            </div>
+                                            <div class="progress-info">
+                                                <div class="progress">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success green-sharp">
+                                                <span class="sr-only"></span>
+                                            </span>
+                                                </div>
+                                                <div class="status">
+                                                    <div class="status-title"></div>
+                                                    <div class="status-number"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="dashboard-stat2 ">
+                                            <div class="display">
+                                                <div class="number">
+                                                    <h3 class="font-blue-sharp">
+                                                        <span data-counter="counterup" data-value="0" id="feedback">0</span>
+                                                        <small class="font-blue-sharp">个</small>
+                                                    </h3>
+                                                    <small>图片</small>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-comment-o"></i>
+                                                </div>
+                                            </div>
+                                            <div class="progress-info">
+                                                <div class="progress">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success blue-sharp">
+                                                <span class="sr-only"></span>
+                                            </span>
+                                                </div>
+                                                <div class="status">
+                                                    <div class="status-title"></div>
+                                                    <div class="status-number"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                        <div class="dashboard-stat2 ">
+                                            <div class="display">
+                                                <div class="number">
+                                                    <h3 class="font-purple-soft">
+                                                        <span data-counter="counterup" data-value="0" id="activity">0</span>
+                                                        <small class="font-purple-sharp">次</small>
+                                                    </h3>
+                                                    <small>留言</small>
+                                                </div>
+                                                <div class="icon">
+                                                    <i class="fa fa-flag"></i>
+                                                </div>
+                                            </div>
+                                            <div class="progress-info">
+                                                <div class="progress">
+                                            <span style="width: 100%;"
+                                                  class="progress-bar progress-bar-success purple-soft">
+                                                <span class="sr-only"></span>
+                                            </span>
+                                                </div>
+                                                <div class="status">
+                                                    <div class="status-title"></div>
+                                                    <div class="status-number"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--=======================================-->
 
                             </div>
                         </div>
@@ -60,13 +168,5 @@ session.setAttribute("portalPath", "/portal");
 
 </div>
 
-<!--[if lt IE 9]>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/respond.min.js"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/excanvas.min.js"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/ie8.fix.min.js"></script>
-<![endif]-->
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/content/portal/js/main/menu4.js?version=${cfg.version}"></script>
 </body>
 </html>

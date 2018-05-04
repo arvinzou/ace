@@ -1685,3 +1685,23 @@ Page Loading
   .page-on-load > .clearfix {
     display: none;
     transition: all 2s; }
+ .active{
+    background:#3fc9d5;
+    color:#fff
+ }
+ .active a{
+     color:#fff
+  }
+    .page-header .page-header-menu .hor-menu .navbar-nav > li:hover > a,
+      .page-header .page-header-menu .hor-menu .navbar-nav > li.open > a,
+      .page-header .page-header-menu .hor-menu .navbar-nav > li > a:hover,
+      .page-header .page-header-menu .hor-menu .navbar-nav > li > a:focus,
+      .page-header .page-header-menu .hor-menu .navbar-nav > li > a:active {
+        color: #ffffff;
+        background: #32c5d2 !important; }
+        .page-header .page-header-menu .hor-menu .navbar-nav > li:hover > a > i,
+        .page-header .page-header-menu .hor-menu .navbar-nav > li.open > a > i,
+        .page-header .page-header-menu .hor-menu .navbar-nav > li > a:hover > i,
+        .page-header .page-header-menu .hor-menu .navbar-nav > li > a:focus > i,
+        .page-header .page-header-menu .hor-menu .navbar-nav > li > a:active > i {
+          color: #ffffff; }

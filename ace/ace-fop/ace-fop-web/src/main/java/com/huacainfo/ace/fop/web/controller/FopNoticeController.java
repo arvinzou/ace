@@ -57,7 +57,6 @@ public class FopNoticeController extends FopBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 
@@ -93,8 +92,7 @@ public class FopNoticeController extends FopBaseController {
     @ResponseBody
     public MessageResponse updateFopNotice(String jsons) throws Exception {
         FopNotice obj = JSON.parseObject(jsons, FopNotice.class);
-        return this.fopNoticeService
-                .updateFopNotice(obj, this.getCurUserProp());
+        return this.fopNoticeService.updateFopNotice(obj, this.getCurUserProp());
     }
 
     /**

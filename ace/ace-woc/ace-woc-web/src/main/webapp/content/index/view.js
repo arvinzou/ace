@@ -2,6 +2,7 @@ $(function () {
     viewEchart1();
     viewEchart2();
     viewEchart3();
+    viewEchart4();
     viewTopNumber();
 });
 
@@ -71,4 +72,29 @@ function viewTopNumber() {
             $('#' + key).text(result[key]);
         }
     });
+}
+
+function viewEchart4() {
+    var url = contextPath + '/www/data/casesStatistics';
+    data = {}
+    $.getJSON(url, data, function (result) {
+        var numbers
+        if (result.perfectionCases == 0 || result.unauditedCases == 0) {
+            numbers = 0;
+        } else {
+            numbers = toDecimal((result.perfectionCases / result.unauditedCases) * 100);
+        }
+        option4.series[0].data[0].value = numbers;
+        ct4.setOption(option4);
+    });
+}
+
+
+function toDecimal(x) {
+    var f = parseFloat(x);
+    if (isNaN(f)) {
+        return;
+    }
+    f = Math.round(x * 100) / 100;
+    return f;
 }

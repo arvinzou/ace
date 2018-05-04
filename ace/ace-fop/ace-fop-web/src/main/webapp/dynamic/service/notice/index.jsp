@@ -187,13 +187,13 @@
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopNotice/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/notice/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopNotice/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/notice/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopNotice/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/notice/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopNotice/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/notice/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

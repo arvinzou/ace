@@ -38,7 +38,7 @@
 
     <script type="text/javascript">
         var ws = null;
-        var url = "ws://127.0.0.1:6006/woc/websocket/D9F7E76732A24488BCCD652B7EEBFD09/E341A7084C56499AB0390BCAA3AA5BCD";
+        var url = "ws://localhost:6006/woc/websocket";
         var transports = [];
 
         function setConnected(connected) {
@@ -57,14 +57,17 @@
             ws.onopen = function () {
                 setConnected(true);
                 log('Info: connection opened.');
+                console.log(event);
             };
             ws.onmessage = function (event) {
                 log('Received: ' + event.data);
+                console.log(event);
             };
             ws.onclose = function (event) {
                 setConnected(false);
                 log('Info: connection closed.');
                 log(event);
+                console.log(event);
             };
         }
 

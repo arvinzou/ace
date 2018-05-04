@@ -1,13 +1,31 @@
+
+
+
 var buildMenu = function(menus) {
 	var buildMenuHtml = function(menus) {
 		var html = [];
 		var num = 0;
+
 		$.each(menus,function(i, menu) {
-		                    html.push('<li class="menu-dropdown mega-menu-dropdown" aria-haspopup="true">');
+
+
+		                    if(urlParams.id){
+		                        if(urlParams.id==menu.id){
+                                    html.push('<li class="menu-dropdown mega-menu-dropdown active" aria-haspopup="true">');
+                                }else{
+                                    html.push('<li class="menu-dropdown mega-menu-dropdown" aria-haspopup="true">');
+                                }
+		                    }else{
+		                        if(i==0){
+		                            html.push('<li class="menu-dropdown mega-menu-dropdown active" aria-haspopup="true">');
+		                        }else{
+		                            html.push('<li class="menu-dropdown mega-menu-dropdown" aria-haspopup="true">');
+		                        }
+		                    }
 							if (menu.leaf != true && menu.leaf != 'true') {
 								html.push('<a class="nav-link nav-toggle" href="#" url="'+menu.href+'"><i class=""></i>'+ menu.text + '<span class="arrow"></span>');
 							}else{
-							    html.push('<a class="nav-link" href="#" url="'+menu.href+'"><i class="'+ menu.icon+ '"></i>'+ menu.text + '<span class="arrow"></span>');
+							    html.push('<a class="nav-link" href="#" url="'+menu.href+'"><i class=""></i>'+ menu.text + '<span class="arrow"></span>');
 							}
 							html.push('</a>');
 							//html.push('<b class="arrow"></b>');
@@ -94,7 +112,7 @@ function initBottom(){
 }
 function initMenu(){
     $.ajax({
-            url : portalPath + '/system/getTreeList.do?loadButton=false&icon=ace',
+            url : portalPath + '/system/getTreeList.do?loadButton=false&client=c',
             type : 'POST',
             timeout : 30000,
             dataType : 'json',
@@ -198,3 +216,4 @@ function submitform() {
 		});
 	}
 }
+

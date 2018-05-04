@@ -20,8 +20,8 @@
     </resultMap>
     <sql id="Base_Column_List">
         id, title, subTitle, coverUrl, noticeType, releaseDate, remark, status, createUserId,
-    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
-  </sql>
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -29,23 +29,24 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from fop_notice
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
+        delete from fop_notice
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopNotice">
         insert into fop_notice (id, title, subTitle,
         coverUrl, noticeType, releaseDate,
-      remark, status, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate, description
-      )
+        remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate, description
+        )
         values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR},
         #{coverUrl,jdbcType=VARCHAR}, #{noticeType,jdbcType=CHAR}, #{releaseDate,jdbcType=TIMESTAMP},
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
-      )
-  </insert>
+        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{description,jdbcType=LONGVARCHAR}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopNotice">
         insert into fop_notice
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -192,22 +193,22 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopNotice">
-    update fop_notice
+        update fop_notice
         set title = #{title,jdbcType=VARCHAR},
         subTitle = #{subTitle,jdbcType=VARCHAR},
         coverUrl = #{coverUrl,jdbcType=VARCHAR},
-      noticeType = #{noticeType,jdbcType=CHAR},
-      releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
-      remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+        noticeType = #{noticeType,jdbcType=CHAR},
+        releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopNoticeVo">
 
@@ -218,4 +219,58 @@
         from fop_notice
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.fop.vo.FopNoticeVo"></resultMap>
+
+    <select id="findList" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.releaseDate DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from fop_notice
+        where
+        name=#{name}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_notice
+        where 0=0
+        <!--<if test='condition.name!=null and condition.name!=""'>
+            and name like
+            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">
+            and name like
+            concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')
+        </if>
+
+        <if test="condition.dept!=null and condition.dept!=&quot;&quot;">
+            and name like
+            concat('%',#{condition.dept,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and category =#{condition.category,jdbcType=CHAR}
+        </if>-->
+    </sql>
+
+
 </mapper>

@@ -13,7 +13,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.2.253:3306/fop"
+                        connectionURL="jdbc:mysql://192.168.2.253:3306/portal"
                         userId="root" password="123456"><!--数据库连接信息。具体参看mybatis-generator-->
         </jdbcConnection>
 
@@ -24,31 +24,34 @@
         <!--以下三个标签主要解析targetPackage和targetProject。其它的具体参看mybatis-generator-->
         <!--targetPackage，是生成文件所在的包路径-->
         <!--targetProject，是相对于本xml配置文件的相对路径，是targetPackage包路径的父级目录。-->
-        <javaModelGenerator targetPackage="com.huacainfo.ace.fop.model"
+        <javaModelGenerator targetPackage="com.huacainfo.ace.portal.model"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.huacainfo.ace.fop.dao"
+        <sqlMapGenerator targetPackage="com.huacainfo.ace.portal.dao"
                          targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.huacainfo.ace.fop.dao" targetProject="src/main/java">
+                             targetPackage="com.huacainfo.ace.portal.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <!--与原来mybatis-generator不一样，这个table标签不是必须的。只有对生成的映射有复杂要求时，才需要在这里详细配置-->
-        <table tableName="fop_association"
-               domainObjectName="FopAssociation"
-               mapperName="FopAssociationDao"
+
+
+        <table tableName="article_cmt"
+               domainObjectName="ArticleCmt"
+               mapperName="ArticleCmtDao"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="true"/>
         </table>
+
 
 
     </context>
