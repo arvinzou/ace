@@ -196,4 +196,58 @@
         from fop_law_paper
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+
+    <select id="findList" resultMap="VoResultMap">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.releaseDate DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from fop_law_paper
+        where
+        title=#{title}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_law_paper
+        where 0=0
+        <if test='condition.title!=null and condition.title!=""'>
+            and
+            (title like
+            concat('%',#{condition.title,jdbcType=VARCHAR},'%') or
+            keyWord like
+            concat('%',#{condition.keyWord,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+
+        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+    </sql>
+
+
 </mapper>
