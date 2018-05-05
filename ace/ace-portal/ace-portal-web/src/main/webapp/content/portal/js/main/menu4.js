@@ -1,7 +1,4 @@
-var loading=getBusyOverlay('viewport',{color:'#eff3f8', opacity:0.75, text:'viewport: loading...', style:'font-size:14px;color:#000000'},{color:'#00000', size:80, type:'o'});
-if(loading){
-      loading.remove();
-}
+var loading;
 
 var buildMenu = function(menus) {
 	var buildMenuHtml = function(menus) {
@@ -146,6 +143,7 @@ function initMenu(){
                     timeout : 30000,
                     dataType : 'json',
                     beforeSend:function(){
+                        loading=startLoading();
                         if(loading) {
                            loading.settext("正在加载，请稍后......");
                         }
@@ -260,4 +258,6 @@ function submitform() {
 		});
 	}
 }
+
+
 
