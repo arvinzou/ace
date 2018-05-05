@@ -37,6 +37,7 @@
      }
      function loadCommon(){
          var urls=[];
+         urls.push({path:portalPath,url:'/content/common/js/loading.js',type:'js'});
          urls.push({path:portalPath,url:'/system/getUserProp.do',type:'js'});
          urls.push({path:portalPath,url:'/content/common/assets/css/font-awesome.min.css',type:'css'});
          urls.push({path:portalPath,url:'/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css',type:'css'});

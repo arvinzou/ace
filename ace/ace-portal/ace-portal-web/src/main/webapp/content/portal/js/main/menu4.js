@@ -1,5 +1,7 @@
-
-
+var loading=getBusyOverlay('viewport',{color:'#eff3f8', opacity:0.75, text:'viewport: loading...', style:'font-size:14px;color:#000000'},{color:'#00000', size:80, type:'o'});
+if(loading){
+      loading.remove();
+}
 
 var buildMenu = function(menus) {
 	var buildMenuHtml = function(menus) {
@@ -86,40 +88,82 @@ var buildMenu = function(menus) {
 
 
 jQuery(function($) {
-    $.ajax({
-        url : portalPath + '/dynamic/common/tpl/html_nav.jsp',
-        type : 'POST',
-        timeout : 30000,
-        dataType : 'text',
-        success : function(data) {
-           $("body .page-wrapper div:first").before(data);
-           initMenu();
-           initBottom();
-        }
-    });
-
-});
-function initBottom(){
-   $.ajax({
-            url : portalPath + '/dynamic/common/tpl/html_bottom.jsp',
+    if(sessionStorage&&sessionStorage.getItem("html_nav")){
+        var data=sessionStorage.getItem("html_nav");
+         $("body .page-wrapper div:first").before(data);
+         initMenu();
+         initBottom();
+     }else{
+        $.ajax({
+            url : portalPath + '/dynamic/common/tpl/html_nav.jsp',
             type : 'POST',
             timeout : 30000,
             dataType : 'text',
             success : function(data) {
-               $(".bottom").before(data);
+               $("body .page-wrapper div:first").before(data);
+               initMenu();
+               initBottom();
+               if(sessionStorage){
+                   console.log("sessionStorage");
+                   sessionStorage.setItem("html_nav",data);
+               }
             }
         });
+    }
+
+});
+function initBottom(){
+    if(sessionStorage&&sessionStorage.getItem("html_bottom")){
+        var data=sessionStorage.getItem("html_bottom");
+         $(".bottom").before(data);
+     }else{
+        $.ajax({
+                 url : portalPath + '/dynamic/common/tpl/html_bottom.jsp',
+                 type : 'POST',
+                 timeout : 30000,
+                 dataType : 'text',
+                 success : function(data) {
+                    $(".bottom").before(data);
+                    if(sessionStorage){
+                       console.log("sessionStorage");
+                       sessionStorage.setItem("html_bottom",data);
+                    }
+                 }
+             });
+     }
+
 }
 function initMenu(){
-    $.ajax({
-            url : portalPath + '/system/getTreeList.do?loadButton=false&client=c',
-            type : 'POST',
-            timeout : 30000,
-            dataType : 'json',
-            success : function(data) {
-                buildMenu(data);
-            }
-        });
+    if(sessionStorage&&sessionStorage.getItem("menu")){
+        var srt=sessionStorage.getItem("menu");
+        var data=JSON.parse(srt);
+        console.log(data);
+        buildMenu(data);
+     }else{
+        $.ajax({
+                    url : portalPath + '/system/getTreeList.do?loadButton=false&client=c',
+                    type : 'POST',
+                    timeout : 30000,
+                    dataType : 'json',
+                    beforeSend:function(){
+                        if(loading) {
+                           loading.settext("正在加载，请稍后......");
+                        }
+
+                    },
+                    success : function(data) {
+                        buildMenu(data);
+                        if(loading){
+                            loading.remove();
+                        }
+                        if(sessionStorage){
+                            console.log("sessionStorage");
+                            sessionStorage.setItem("menu",JSON.stringify(data));
+                        }
+                    }
+                });
+     }
+
 }
 function modifyPasswd() {
 	var dialog = $("#dialog-message").removeClass('hide').dialog({

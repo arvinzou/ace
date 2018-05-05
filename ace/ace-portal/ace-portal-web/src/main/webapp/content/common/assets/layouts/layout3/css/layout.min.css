@@ -47,7 +47,9 @@ Page Header
   width: 100%;
   margin: 0;
   border: 0;
-  padding: 0;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 0px;
   box-shadow: none;
  /* height: 126px;*/
   background-image: none;
