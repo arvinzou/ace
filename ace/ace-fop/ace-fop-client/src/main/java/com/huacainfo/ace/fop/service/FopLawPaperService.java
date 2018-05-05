@@ -29,6 +29,9 @@ public interface FopLawPaperService {
      */
     public abstract PageResult<FopLawPaperVo> findFopLawPaperList(FopLawPaperQVo condition, int start, int limit, String orderBy) throws Exception;
 
+
+    public abstract PageResult<FopLawPaperVo> findLawPaperList(String keyWord, int page, int limit) throws Exception;
+
     /**
      * @throws
      * @Title:insertFopLawPaper

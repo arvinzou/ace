@@ -51,6 +51,7 @@ public class FopLawPaperServiceImpl implements FopLawPaperService {
     public PageResult<FopLawPaperVo> findFopLawPaperList(FopLawPaperQVo condition, int start,
                                                          int limit, String orderBy) throws Exception {
         PageResult<FopLawPaperVo> rst = new PageResult<FopLawPaperVo>();
+        condition.setKeyWord(condition.getTitle());
         List<FopLawPaperVo> list = this.fopLawPaperDao.findList(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
@@ -58,6 +59,17 @@ public class FopLawPaperServiceImpl implements FopLawPaperService {
             int allRows = this.fopLawPaperDao.findCount(condition);
             rst.setTotal(allRows);
         }
+        return rst;
+    }
+
+    @Override
+    public PageResult<FopLawPaperVo> findLawPaperList(String keyWord, int page, int limit) throws Exception {
+        FopLawPaperQVo condition = new FopLawPaperQVo();
+        PageResult<FopLawPaperVo> rst = new PageResult<FopLawPaperVo>();
+        condition.setTitle(keyWord);
+        condition.setKeyWord(keyWord);
+        List<FopLawPaperVo> list = this.fopLawPaperDao.findList(condition, (page - 1) * limit, limit, null);
+        rst.setRows(list);
         return rst;
     }
 
@@ -78,21 +90,14 @@ public class FopLawPaperServiceImpl implements FopLawPaperService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "文书标题不能为空！");
         }
-        if (CommonUtils.isBlank(o.getReleaseDate())) {
-            return new MessageResponse(1, "发布时间不能为空！");
+        if (CommonUtils.isBlank(o.getContent())) {
+            return new MessageResponse(1, "法律内容不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
         int temp = this.fopLawPaperDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "法律文书名称重复！");
+            return new MessageResponse(1, "文书文本名称重复！");
         }
-
+        o.setReleaseDate(new Date());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -123,15 +128,6 @@ public class FopLawPaperServiceImpl implements FopLawPaperService {
         }
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "文书标题不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getReleaseDate())) {
-            return new MessageResponse(1, "发布时间不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
         }
 
 

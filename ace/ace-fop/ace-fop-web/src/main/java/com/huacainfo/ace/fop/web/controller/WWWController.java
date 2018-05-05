@@ -4,12 +4,11 @@ package com.huacainfo.ace.fop.web.controller;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.fop.dao.FopLawPaperDao;
 import com.huacainfo.ace.fop.service.FopCompanyService;
+import com.huacainfo.ace.fop.service.FopLawPaperService;
 import com.huacainfo.ace.fop.service.FopNoticeService;
-import com.huacainfo.ace.fop.vo.FopCompanyQVo;
-import com.huacainfo.ace.fop.vo.FopCompanyVo;
-import com.huacainfo.ace.fop.vo.FopNoticeQVo;
-import com.huacainfo.ace.fop.vo.FopNoticeVo;
+import com.huacainfo.ace.fop.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +22,9 @@ public class WWWController {
 
     @Autowired
     private FopNoticeService fopNoticeService;
+
+    @Autowired
+    private FopLawPaperService fopLawPaperService;
 
     /**
      * gis地图
@@ -77,4 +79,22 @@ public class WWWController {
         PageResult<FopNoticeVo> rst = this.fopNoticeService.homepageNoticeList();
         return rst;
     }
+
+    /**
+     * @param: @param keyWord:搜索关键字
+     * @param: @param page ：页码
+     * @param: @param limit ：每页数目
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult<FopLawPaperVo>
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @RequestMapping(value = "/findLawPaperList")
+    @ResponseBody
+    public PageResult<FopLawPaperVo> findLawPaperList(String keyWord, int page, int limit) throws Exception {
+        PageResult<FopLawPaperVo> rst = this.fopLawPaperService.findLawPaperList(keyWord, page, limit);
+        return rst;
+    }
+
 }
