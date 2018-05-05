@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.service.impl;
 
 import java.util.*;
 
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +75,19 @@ public class TplPageServiceImpl implements TplPageService {
     @Override
 	public MessageResponse insertTplPage(TplPage o, UserProp userProp)
 			throws Exception {
-		o.setId(UUID.randomUUID().toString());
-		//o.setId(String.valueOf(new Date().getTime()));
-		
+		o.setId(GUIDUtil.getGUID());
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getTplId())) {
+			return new MessageResponse(1, "所属模板不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getName())) {
+			return new MessageResponse(1, "页面名称不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getLastModifyDate())) {
+			return new MessageResponse(1, "最后更新时间不能为空！");
+		}
 		int temp = this.tplPageDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "页面名称重复！");
@@ -105,8 +116,19 @@ public class TplPageServiceImpl implements TplPageService {
     @Override
 	public MessageResponse updateTplPage(TplPage o, UserProp userProp)
 			throws Exception {
-		
-		
+
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getTplId())) {
+			return new MessageResponse(1, "所属模板不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getName())) {
+			return new MessageResponse(1, "页面名称不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getLastModifyDate())) {
+			return new MessageResponse(1, "最后更新时间不能为空！");
+		}
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());

@@ -1,5 +1,6 @@
 package com.huacainfo.ace.portal.web.controller;
 
+import com.huacainfo.ace.portal.model.SensitiveWords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,9 +146,11 @@ public class TplPageController extends PortalBaseController {
 	 * @author: 陈晓克
 	 * @version: 2018-05-04
 	 */
-	@RequestMapping(value = "/www/getList.do")
+	@RequestMapping(value = "/getList.do")
 	@ResponseBody
 	public Map<String,Object> getList() throws Exception{
-		return this.tplPageService.getList(this.getParams());
+		Map<String,Object> params=this.getParams();
+		params.put("userId",this.getCurUserProp().getUserId());
+		return this.tplPageService.getList(params);
 	}
 }
