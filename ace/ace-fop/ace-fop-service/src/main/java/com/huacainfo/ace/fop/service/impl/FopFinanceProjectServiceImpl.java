@@ -89,14 +89,8 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(o.getReleaseDate())) {
             return new MessageResponse(1, "发布日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getFinanceType())) {
-            return new MessageResponse(1, "融资类型不能为空！");
-        }
         if (CommonUtils.isBlank(o.getFinanceAmount())) {
             return new MessageResponse(1, "融资金额不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getFinanceDate())) {
-            return new MessageResponse(1, "融资时间不能为空！");
         }
         if (CommonUtils.isBlank(o.getFinanceYear())) {
             return new MessageResponse(1, "融资年限不能为空！");
@@ -154,14 +148,8 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(o.getReleaseDate())) {
             return new MessageResponse(1, "发布日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getFinanceType())) {
-            return new MessageResponse(1, "融资类型不能为空！");
-        }
         if (CommonUtils.isBlank(o.getFinanceAmount())) {
             return new MessageResponse(1, "融资金额不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getFinanceDate())) {
-            return new MessageResponse(1, "融资时间不能为空！");
         }
         if (CommonUtils.isBlank(o.getFinanceYear())) {
             return new MessageResponse(1, "融资年限不能为空！");

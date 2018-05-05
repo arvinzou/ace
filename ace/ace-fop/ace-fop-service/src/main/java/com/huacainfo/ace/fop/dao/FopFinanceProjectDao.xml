@@ -8,9 +8,7 @@
         <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
         <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
-        <result column="financeType" jdbcType="CHAR" property="financeType"/>
         <result column="financeAmount" jdbcType="DECIMAL" property="financeAmount"/>
-        <result column="financeDate" jdbcType="TIMESTAMP" property="financeDate"/>
         <result column="financeYear" jdbcType="VARCHAR" property="financeYear"/>
         <result column="yearYield" jdbcType="DECIMAL" property="yearYield"/>
         <result column="dayClicks" jdbcType="BIGINT" property="dayClicks"/>
@@ -29,8 +27,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, financeTitle, financeCode, areaCode, companyId, releaseDate, financeType, financeAmount, 
-    financeDate, financeYear, yearYield, dayClicks, weekClicks, monthClicks, likes, remark, 
+        id, financeTitle, financeCode, areaCode, companyId, releaseDate, financeAmount,
+        financeYear, yearYield, dayClicks, weekClicks, monthClicks, likes, remark,
     status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
     lastModifyDate, financeContent
   </sql>
@@ -46,8 +44,8 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopFinanceProject">
     insert into fop_finance_project (id, financeTitle, financeCode, 
-      areaCode, companyId, releaseDate, 
-      financeType, financeAmount, financeDate, 
+      areaCode, companyId, releaseDate,
+        financeAmount,
       financeYear, yearYield, dayClicks, 
       weekClicks, monthClicks, likes, 
       remark, status, createUserId, 
@@ -55,8 +53,8 @@
       lastModifyUserName, lastModifyDate, financeContent
       )
     values (#{id,jdbcType=VARCHAR}, #{financeTitle,jdbcType=VARCHAR}, #{financeCode,jdbcType=VARCHAR}, 
-      #{areaCode,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
-      #{financeType,jdbcType=CHAR}, #{financeAmount,jdbcType=DECIMAL}, #{financeDate,jdbcType=TIMESTAMP}, 
+      #{areaCode,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP},
+        #{financeAmount,jdbcType=DECIMAL},
       #{financeYear,jdbcType=VARCHAR}, #{yearYield,jdbcType=DECIMAL}, #{dayClicks,jdbcType=BIGINT}, 
       #{weekClicks,jdbcType=BIGINT}, #{monthClicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
@@ -85,14 +83,8 @@
             <if test="releaseDate != null">
                 releaseDate,
             </if>
-            <if test="financeType != null">
-                financeType,
-            </if>
             <if test="financeAmount != null">
                 financeAmount,
-            </if>
-            <if test="financeDate != null">
-                financeDate,
             </if>
             <if test="financeYear != null">
                 financeYear,
@@ -159,14 +151,8 @@
             <if test="releaseDate != null">
                 #{releaseDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="financeType != null">
-                #{financeType,jdbcType=CHAR},
-            </if>
             <if test="financeAmount != null">
                 #{financeAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="financeDate != null">
-                #{financeDate,jdbcType=TIMESTAMP},
             </if>
             <if test="financeYear != null">
                 #{financeYear,jdbcType=VARCHAR},
@@ -233,14 +219,8 @@
             <if test="releaseDate != null">
                 releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="financeType != null">
-                financeType = #{financeType,jdbcType=CHAR},
-            </if>
             <if test="financeAmount != null">
                 financeAmount = #{financeAmount,jdbcType=DECIMAL},
-            </if>
-            <if test="financeDate != null">
-                financeDate = #{financeDate,jdbcType=TIMESTAMP},
             </if>
             <if test="financeYear != null">
                 financeYear = #{financeYear,jdbcType=VARCHAR},
@@ -297,9 +277,7 @@
       areaCode = #{areaCode,jdbcType=VARCHAR},
       companyId = #{companyId,jdbcType=VARCHAR},
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
-      financeType = #{financeType,jdbcType=CHAR},
       financeAmount = #{financeAmount,jdbcType=DECIMAL},
-      financeDate = #{financeDate,jdbcType=TIMESTAMP},
       financeYear = #{financeYear,jdbcType=VARCHAR},
       yearYield = #{yearYield,jdbcType=DECIMAL},
       dayClicks = #{dayClicks,jdbcType=BIGINT},
@@ -316,5 +294,63 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopFinanceProjectVo">
+
+    </resultMap>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_finance_project
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="findList" resultMap="VoResultMap">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.releaseDate DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from fop_finance_project
+        where
+        financeTitle=#{financeTitle}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_finance_project
+        where 0=0
+        <if test='condition.financeTitle!=null and condition.financeTitle!=""'>
+            and financeTitle like
+            concat('%',#{condition.financeTitle,jdbcType=VARCHAR},'%')
+        </if>
+        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+
+        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+    </sql>
 
 </mapper>

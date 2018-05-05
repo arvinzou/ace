@@ -19,14 +19,15 @@
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, companyId, areaCode, productName, description, loanAmount, rateType, loadRate, 
-    loadType, loadYear, repaymentType, suretyType, remark, status, createUserId, createUserName, 
-    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    loadType, loadYear, repaymentType, suretyType, remark, status, createUserId, createUserName,
+        createDate, releaseDate,lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -43,15 +44,16 @@
       productName, description, loanAmount, 
       rateType, loadRate, loadType, 
       loadYear, repaymentType, suretyType, 
-      remark, status, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
+      remark, status, createUserId,
+        createUserName, createDate,releaseDate, lastModifyUserId,
       lastModifyUserName, lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
       #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{loanAmount,jdbcType=DECIMAL}, 
       #{rateType,jdbcType=CHAR}, #{loadRate,jdbcType=DECIMAL}, #{loadType,jdbcType=CHAR}, 
       #{loadYear,jdbcType=DECIMAL}, #{repaymentType,jdbcType=CHAR}, #{suretyType,jdbcType=CHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{releaseDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR},
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopLoanProduct">
@@ -107,6 +109,9 @@
             </if>
             <if test="createDate != null">
                 createDate,
+            </if>
+            <if test="releaseDate != null">
+                releaseDate,
             </if>
             <if test="lastModifyUserId != null">
                 lastModifyUserId,
@@ -170,6 +175,9 @@
             <if test="createDate != null">
                 #{createDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
             <if test="lastModifyUserId != null">
                 #{lastModifyUserId,jdbcType=VARCHAR},
             </if>
@@ -232,6 +240,9 @@
             <if test="createDate != null">
                 createDate = #{createDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="releaseDate != null">
+                releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
             <if test="lastModifyUserId != null">
                 lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
             </if>
@@ -262,6 +273,7 @@
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP},
+        releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
@@ -277,4 +289,51 @@
         from fop_loan_product
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="findList" resultMap="VoResultMap">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.releaseDate DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from fop_loan_product
+        where
+        productName=#{productName}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_loan_product
+        where 0=0
+        <if test='condition.productName!=null and condition.productName!=""'>
+            and productName like
+            concat('%',#{condition.productName,jdbcType=VARCHAR},'%')
+        </if>
+        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+
+        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+    </sql>
 </mapper>

@@ -27,6 +27,7 @@ public interface FopLoanProductDao {
                                     @Param("start") int start, @Param("limit") int limit,
                                     @Param("orderBy") String orderBy);
 
+
     int findCount(@Param("condition") FopLoanProductQVo condition);
 
     int isExit(FopLoanProduct record);
