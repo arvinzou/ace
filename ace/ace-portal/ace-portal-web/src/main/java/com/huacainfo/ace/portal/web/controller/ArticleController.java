@@ -18,6 +18,8 @@ import com.huacainfo.ace.portal.service.ArticleService;
 import com.huacainfo.ace.portal.vo.ArticleVo;
 import com.huacainfo.ace.portal.vo.ArticleQVo;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/article")
 /**
@@ -130,5 +132,21 @@ public class ArticleController extends PortalBaseController {
 		String id = json.getString("id");
 		return this.articleService.deleteArticleByArticleId(id,
 				this.getCurUserProp());
+	}
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取页面文章列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@RequestMapping(value = "/www/getList.do")
+	@ResponseBody
+	public Map<String,Object> getList() throws Exception{
+		return this.articleService.getList(this.getParams());
 	}
 }

@@ -131,4 +131,16 @@
     title=#{title} and tplPageId=#{tplPageId}
   </select>
 
+  <select id="getList" resultType="map">
+    select id, tplPageId, articleCategory, title, cover, remark, hrefUrl, tags, mediType, mediUrl,
+    bgMusicUrl, likeNum, hitNum, sort
+    from
+    article where
+    tplPageId =#{pageId,jdbcType=VARCHAR}
+    <if test='category!=null and category!=""'>
+      and articleCategory =#{category,jdbcType=VARCHAR}
+    </if>
+    ORDER BY sort,createDate
+  </select>
+
 </mapper>

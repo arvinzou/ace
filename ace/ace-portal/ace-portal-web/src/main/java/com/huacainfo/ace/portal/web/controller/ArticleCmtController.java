@@ -18,6 +18,8 @@ import com.huacainfo.ace.portal.service.ArticleCmtService;
 import com.huacainfo.ace.portal.vo.ArticleCmtVo;
 import com.huacainfo.ace.portal.vo.ArticleCmtQVo;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/articleCmt")
 /**
@@ -96,5 +98,21 @@ public class ArticleCmtController extends PortalBaseController {
 		String id = json.getString("id");
 		return this.articleCmtService.deleteArticleCmtByArticleCmtId(id,
 				this.getCurUserProp());
+	}
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取页面文章评论列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@RequestMapping(value = "/www/getList.do")
+	@ResponseBody
+	public Map<String,Object> getList() throws Exception{
+		return this.articleCmtService.getList(this.getParams());
 	}
 }

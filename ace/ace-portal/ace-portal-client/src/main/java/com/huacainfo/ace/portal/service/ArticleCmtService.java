@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.ArticleCmt;
 import com.huacainfo.ace.portal.vo.ArticleCmtVo;
 import com.huacainfo.ace.portal.vo.ArticleCmtQVo;
+
+import java.util.Map;
+
 /**
  * @author: 陈晓克
  * @version: 2018-05-04
@@ -68,6 +71,19 @@ public interface ArticleCmtService {
 	    * @version: 2018-05-04
 	 */
 	public abstract MessageResponse deleteArticleCmtByArticleCmtId(String id,UserProp userProp) throws Exception;
+
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取文章留言列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	public Map<String,Object> getList(Map<String,Object> params) throws Exception;
 
 	
 }
