@@ -75,8 +75,7 @@ public class ArticleCmtController extends PortalBaseController {
 	@ResponseBody
 	public MessageResponse insertArticleCmt(String jsons) throws Exception {
 		ArticleCmt obj = JSON.parseObject(jsons, ArticleCmt.class);
-		return this.articleCmtService
-				.insertArticleCmt(obj, this.getCurUserProp());
+		return this.articleCmtService.insertArticleCmt(obj);
 	}
 
     /**

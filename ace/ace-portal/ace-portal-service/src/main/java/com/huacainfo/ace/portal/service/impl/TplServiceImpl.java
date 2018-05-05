@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.service.impl;
 
 import java.util.*;
 
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +75,19 @@ public class TplServiceImpl implements TplService {
     @Override
 	public MessageResponse insertTpl(Tpl o, UserProp userProp)
 			throws Exception {
-		o.setId(UUID.randomUUID().toString());
-		//o.setId(String.valueOf(new Date().getTime()));
+		o.setId(GUIDUtil.getGUID());
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getName())) {
+			return new MessageResponse(1, "模板名称不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getCover())) {
+			return new MessageResponse(1, "课程封面不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getQrcoteUrl())) {
+			return new MessageResponse(1, "效果二维码不能为空！");
+		}
 		
 		int temp = this.tplDao.isExit(o);
 		if (temp > 0) {
@@ -105,8 +117,18 @@ public class TplServiceImpl implements TplService {
     @Override
 	public MessageResponse updateTpl(Tpl o, UserProp userProp)
 			throws Exception {
-		
-		
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getName())) {
+			return new MessageResponse(1, "模板名称不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getCover())) {
+			return new MessageResponse(1, "课程封面不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getQrcoteUrl())) {
+			return new MessageResponse(1, "效果二维码不能为空！");
+		}
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());

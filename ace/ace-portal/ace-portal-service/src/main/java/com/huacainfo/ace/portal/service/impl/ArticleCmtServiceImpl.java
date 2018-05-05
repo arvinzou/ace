@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.service.impl;
 
 import java.util.*;
 
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,10 +73,24 @@ public class ArticleCmtServiceImpl implements ArticleCmtService {
 	    * @version: 2018-05-04
 	 */
     @Override
-	public MessageResponse insertArticleCmt(ArticleCmt o, UserProp userProp)
+	public MessageResponse insertArticleCmt(ArticleCmt o)
 			throws Exception {
-		o.setId(UUID.randomUUID().toString());
-		//o.setId(String.valueOf(new Date().getTime()));
+		o.setId(GUIDUtil.getGUID());
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getArticleId())) {
+			return new MessageResponse(1, "所属页面不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getOpenid())) {
+			return new MessageResponse(1, "留言人openid不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getNickname())) {
+			return new MessageResponse(1, "留言人昵称不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getHeadimgurl())) {
+			return new MessageResponse(1, "留言人头像地址不能为空！");
+		}
 		
 		int temp = this.articleCmtDao.isExit(o);
 		if (temp > 0) {

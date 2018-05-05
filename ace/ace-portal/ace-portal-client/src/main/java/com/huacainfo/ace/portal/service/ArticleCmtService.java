@@ -43,7 +43,7 @@ public interface ArticleCmtService {
 	    * @author: 陈晓克
 	    * @version: 2018-05-04
 	 */
-	public abstract MessageResponse insertArticleCmt(ArticleCmt obj,UserProp userProp) throws Exception;
+	public abstract MessageResponse insertArticleCmt(ArticleCmt obj) throws Exception;
 
 
     /**
