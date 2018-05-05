@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.ArticleCategory;
 import com.huacainfo.ace.portal.vo.ArticleCategoryVo;
 import com.huacainfo.ace.portal.vo.ArticleCategoryQVo;
+
+import java.util.Map;
+
 /**
  * @author: 陈晓克
  * @version: 2018-05-04
@@ -80,6 +83,18 @@ public interface ArticleCategoryService {
 	    * @version: 2018-05-04
 	 */
 	public abstract MessageResponse deleteArticleCategoryByArticleCategoryId(String id,UserProp userProp) throws Exception;
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取页面文章分类列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	public Map<String,Object> getList(Map<String,Object> params) throws Exception;
 
 	
 }

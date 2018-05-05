@@ -1,9 +1,8 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,5 +152,23 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
 		this.dataBaseLogService.log("删除模板", "模板", String.valueOf(id),
 				String.valueOf(id), "模板", userProp);
 		return new MessageResponse(0, "模板删除完成！");
+	}
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取页面文章分类列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@Override
+	public Map<String,Object> getList(Map<String,Object> params) throws Exception{
+		Map<String,Object> rst=new HashMap<>();
+		rst.put("status",0);
+		rst.put("data",this.articleCategoryDao.getList(params));
+		return rst;
 	}
 }

@@ -79,4 +79,12 @@
     article_cmt where
     content=#{content} and articleId=#{articleId} and openid=#{openid}
   </select>
+
+  <select id="getList" resultType="map">
+    select id, articleId, content, status, openid, nickname, headimgurl, createDate
+    from
+    article_cmt where
+    articleId =#{articleId,jdbcType=VARCHAR}
+    ORDER BY createDate
+  </select>
 </mapper>

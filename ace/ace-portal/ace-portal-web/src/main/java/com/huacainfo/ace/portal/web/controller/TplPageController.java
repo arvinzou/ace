@@ -18,6 +18,8 @@ import com.huacainfo.ace.portal.service.TplPageService;
 import com.huacainfo.ace.portal.vo.TplPageVo;
 import com.huacainfo.ace.portal.vo.TplPageQVo;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/tplPage")
 /**
@@ -130,5 +132,22 @@ public class TplPageController extends PortalBaseController {
 		String id = json.getString("id");
 		return this.tplPageService.deleteTplPageByTplPageId(id,
 				this.getCurUserProp());
+	}
+
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取页面列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@RequestMapping(value = "/www/getList.do")
+	@ResponseBody
+	public Map<String,Object> getList() throws Exception{
+		return this.tplPageService.getList(this.getParams());
 	}
 }
