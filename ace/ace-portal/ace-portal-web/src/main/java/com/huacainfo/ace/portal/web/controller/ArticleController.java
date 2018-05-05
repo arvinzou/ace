@@ -144,7 +144,7 @@ public class ArticleController extends PortalBaseController {
 	 * @author: 陈晓克
 	 * @version: 2018-05-04
 	 */
-	@RequestMapping(value = "/www/getList.do")
+	@RequestMapping(value = "/getList.do")
 	@ResponseBody
 	public Map<String,Object> getList() throws Exception{
 		return this.articleService.getList(this.getParams());
