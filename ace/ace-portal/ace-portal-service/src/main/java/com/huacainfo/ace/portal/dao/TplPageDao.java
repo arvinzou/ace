@@ -1,6 +1,8 @@
 package com.huacainfo.ace.portal.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.portal.model.TplPage;
 import com.huacainfo.ace.portal.vo.TplPageQVo;
@@ -24,5 +26,7 @@ public interface TplPageDao {
 	int findCount(@Param("condition") TplPageQVo condition);
 
 	int isExit(TplPage record);
+
+    List<Map<String,Object>> getList(Map<String,Object> params);
 
 }

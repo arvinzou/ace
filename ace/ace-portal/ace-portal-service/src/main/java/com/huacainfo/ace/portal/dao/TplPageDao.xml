@@ -107,4 +107,13 @@
     tpl_page where
     name=#{name} and createUserId=#{createUserId}
   </select>
+
+  <select id="getList" resultType="map">
+    select id, tplId, name, domainName, shareName, shareCover, shareContent, remark
+    from
+    tpl_page where
+    createUserId =#{userId,jdbcType=VARCHAR}
+
+    ORDER BY createDate
+  </select>
 </mapper>

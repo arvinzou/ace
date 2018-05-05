@@ -1,9 +1,8 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -153,5 +152,23 @@ public class TplPageServiceImpl implements TplPageService {
 		this.dataBaseLogService.log("删除页面", "页面", String.valueOf(id),
 				String.valueOf(id), "页面", userProp);
 		return new MessageResponse(0, "页面删除完成！");
+	}
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取个人页面列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@Override
+	public Map<String,Object> getList(Map<String,Object> params) throws Exception{
+		Map<String,Object> rst=new HashMap<>();
+		rst.put("status",0);
+		rst.put("data",this.tplPageDao.getList(params));
+		return rst;
 	}
 }

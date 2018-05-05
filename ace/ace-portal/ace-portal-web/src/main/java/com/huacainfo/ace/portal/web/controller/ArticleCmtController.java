@@ -76,41 +76,7 @@ public class ArticleCmtController extends PortalBaseController {
 		return this.articleCmtService
 				.insertArticleCmt(obj, this.getCurUserProp());
 	}
-    /**
-	 *
-	    * @Title:updateArticleCmt
-	    * @Description:  TODO(更新模板)
-	 		* @param:        @param jsons
-	 		* @param:        @throws Exception
-	 		* @return:       MessageResponse
-	 		* @throws
-	    * @author: 陈晓克
-	    * @version: 2018-05-04
-	 */
-	@RequestMapping(value = "/updateArticleCmt.do")
-	@ResponseBody
-	public MessageResponse updateArticleCmt(String jsons) throws Exception {
-		ArticleCmt obj = JSON.parseObject(jsons, ArticleCmt.class);
-		return this.articleCmtService
-				.updateArticleCmt(obj, this.getCurUserProp());
-	}
-    /**
-	 *
-	    * @Title:selectArticleCmtByPrimaryKey
-	    * @Description:  TODO(获取模板)
-	 		* @param:        @param id
-	 		* @param:        @throws Exception
-	 		* @return:       SingleResult<ArticleCmt>
-	 		* @throws
-	    * @author: 陈晓克
-	    * @version: 2018-05-04
-	 */
-	@RequestMapping(value = "/selectArticleCmtByPrimaryKey.do")
-	@ResponseBody
-	public SingleResult<ArticleCmtVo> selectArticleCmtByPrimaryKey(String id)
-			throws Exception {
-		return this.articleCmtService.selectArticleCmtByPrimaryKey(id);
-	}
+
     /**
 	 *
 	    * @Title:deleteArticleCmtByArticleCmtId

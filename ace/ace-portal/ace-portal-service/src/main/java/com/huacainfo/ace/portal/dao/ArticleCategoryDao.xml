@@ -92,4 +92,13 @@
     article_category where
     name=#{name}
   </select>
+
+  <select id="getList" resultType="map">
+    select id, tplPageId, name, remark
+    from
+    article_category where
+    createUserId =#{userId,jdbcType=VARCHAR}
+
+    ORDER BY createDate
+  </select>
 </mapper>

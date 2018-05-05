@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.TplPage;
 import com.huacainfo.ace.portal.vo.TplPageVo;
 import com.huacainfo.ace.portal.vo.TplPageQVo;
+
+import java.util.Map;
+
 /**
  * @author: 陈晓克
  * @version: 2018-05-04
@@ -80,6 +83,19 @@ public interface TplPageService {
 	    * @version: 2018-05-04
 	 */
 	public abstract MessageResponse deleteTplPageByTplPageId(String id,UserProp userProp) throws Exception;
+
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取个人页面列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	public Map<String,Object> getList(Map<String,Object> params) throws Exception;
 
 	
 }
