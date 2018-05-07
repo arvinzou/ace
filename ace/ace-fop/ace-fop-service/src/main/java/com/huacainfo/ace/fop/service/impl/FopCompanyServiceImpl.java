@@ -4,10 +4,12 @@ package com.huacainfo.ace.fop.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -297,5 +299,13 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(id),
                 String.valueOf(id), "企业管理", userProp);
         return new MessageResponse(0, "企业管理删除完成");
+    }
+
+    @Override
+    public List<Tree> selectCompanyTreeList(String id, String syid) throws Exception {
+
+        CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
+                this.fopCompanyDao.selectCompanyTreeList(id, syid));
+        return commonTreeUtils.getTreeList(id);
     }
 }
