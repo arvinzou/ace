@@ -1,0 +1,125 @@
+.list_box {
+    border: 1px solid #e7e7eb;
+    margin: 0px 25px 30px;
+    float: left;
+    position: relative;
+    text-align: left;
+    width: 350px;
+    box-shadow: 0px 0px 3px #e7e7eb;
+    box-sizing: border-box;
+    background:#fff;
+}
+.sys {
+    position: absolute;
+    right: 10px;
+    top: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+.switch {
+    position: absolute;
+    right: 43px;
+    top: 16px;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+}
+.domain {
+    position: absolute;
+    right: 80px;
+    top: 16px;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+}
+.domain img {
+    width: 22px;
+    height: 22px;
+    background-color: #888;
+}
+.switch img {
+    width: 22px;
+    height: 22px;
+    background-color: #888;
+}
+.sys img:first-child {
+    width: 22px;
+    height: 22px;
+    background-color: #888;
+}
+.page_name {
+    overflow: hidden;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 25px;
+    height: 25px;
+    max-width: 220px;
+    word-wrap: normal;
+    margin-left: 10px;
+    white-space: pre-wrap;
+}
+.update_time {
+    font-size: 13px;
+    line-height: 20px;
+    margin-left: 10px;
+    margin-bottom: 12px;
+    color: #8d8d8d;
+}
+.list {
+    width: 350px;
+    height: 495px;
+    vertical-align: top;
+    text-align: left;
+}
+.simulator_hd {
+    position: relative;
+    height: 65px;
+    background: #333;
+    height: 40px;
+    font-size: 14px;
+}
+.simulator_hd .title {
+    position: absolute;
+    bottom: -8px;
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
+    left: 60px;
+    right: 50px;
+    height: 1.6em;
+    overflow: hidden;
+}
+.list_menu {
+    width: 100%;
+    height: 44px;
+    background-color: #ececec;
+    box-sizing: border-box;
+}
+.list_menu img {
+    float: left;
+    cursor: pointer;
+    background-color: #777;
+    width: 97px;
+    margin: 0px 8px;
+}
+.list_menu span {
+    float: left;
+    display: inline-block;
+    height: 19px;
+    width: 1px;
+    margin-top: 12px;
+}
+.title-black {
+    position: absolute;
+    bottom: 45px;
+    display: none;
+}
+.list_frame {
+    width: 100%;
+    height: 446px;
+    border: none;
+}
+.pageurlinput {
+    display: none;
+}
