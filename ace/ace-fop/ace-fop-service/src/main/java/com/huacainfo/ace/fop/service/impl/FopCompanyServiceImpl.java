@@ -17,6 +17,7 @@ import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopMember;
 import com.huacainfo.ace.fop.service.FopCompanyService;
+import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopMemberService;
 import com.huacainfo.ace.fop.service.FopPersonService;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
@@ -44,14 +45,14 @@ import java.util.Map;
  */
 public class FopCompanyServiceImpl implements FopCompanyService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @Autowired
     private FopCompanyDao fopCompanyDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
     @Autowired
     private FopPersonService fopPersonService;
+    @Autowired
+    private FopFlowRecordService fopFlowRecordService;
 
     @Autowired
     private DepartmentService departmentService;
@@ -127,8 +128,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new MessageResponse(ResultCode.FAIL, rs2.getInfo());
         }
         //入库企业信息
-        Department department = (Department) rs1.getData();
-        o.setDepartmentId(department.getDepartmentId());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -139,60 +138,40 @@ public class FopCompanyServiceImpl implements FopCompanyService {
                 o.getId(), userProp);
 
         //自动审核会员处理
-//        MessageResponse rs3 = memberJoinAutoAudit(o, "0", userProp);
-//        if (ResultCode.FAIL == rs3.getStatus()) {
-//            return rs3;
-//        }
+        MessageResponse rs3 = memberJoinAutoAudit(o, userProp);
+        if (ResultCode.FAIL == rs3.getStatus()) {
+            return rs3;
+        }
 
         return new MessageResponse(0, "添加企业管理完成！");
-    }
-
-
-    /**
-     * 分类用户角色
-     *
-     * @param userId    portal.users.user_id
-     * @param userProp
-     * @param roleTypes 角色类型
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public ResultResponse dispatchRole(String userId, UserProp userProp, String[] roleTypes) throws Exception {
-        List<Map<String, Object>> roleList = fopCompanyDao.selectRoleList(userProp.getActiveSyId(), roleTypes);
-        if (CollectionUtils.isEmpty(roleList)) {
-            return new ResultResponse(ResultCode.FAIL, "未预设用户角色，用户赋权失败");
-        }
-        Map<String, Object> role = roleList.get(0);
-        String[] roleId = new String[]{(String) role.get("role_id")};
-        MessageResponse rs3 = usersService.insertUsersRole(userId, roleId, userProp);
-
-        return new ResultResponse(rs3);
     }
 
     /**
      * 加入会员
      *
-     * @param obj         企业资料
-     * @param userProp    操作员
-     * @param auditResult 审核结果 0 - 通过，1 -不通过;
+     * @param o
+     * @param userProp
      * @return
      * @throws Exception
      */
-    public MessageResponse memberJoinAutoAudit(FopCompanyVo obj, String auditResult, UserProp userProp) throws Exception {
-
-        if ("0".equals(auditResult)) {
-            //会员记录
-            FopMember member = new FopMember();
-            member.setRelationId(obj.getId());
-            member.setRelationType("0");//0-企业会员 1-团体会员
-            member.setMermberName(obj.getFullName());
-
-            return fopMemberService.memberJoinAudit(member, FlowType.MEMBER_JOIN_COMPANY, auditResult, userProp);
+    private MessageResponse memberJoinAutoAudit(FopCompanyVo o, UserProp userProp) throws Exception {
+        //审核流程记录
+        MessageResponse rs = fopFlowRecordService.memberJoinAutoAudit(FlowType.MEMBER_JOIN_COMPANY, o, userProp);
+        if (ResultCode.FAIL == rs.getStatus()) {
+            return rs;
         }
+        //
+        FopMember member = new FopMember();
+        member.setRelationId(o.getId());
+        member.setRelationType("0");//0-企业会员 1-团体会员
+        member.setMermberName(o.getFullName());
+        member.setMemberCode(System.currentTimeMillis() + "");
+        member.setMemberLevel("0");
+        member.setJoinDate(DateUtil.getNowDate());
+        String validDate = DateUtil.getDate("year", DateUtil.getNow(), 1, "");
+        member.setValidDate(DateUtil.format(validDate, DateUtil.DEFAULT_DATE_TIME_REGEX));
 
-
-        return new MessageResponse(ResultCode.SUCCESS, "审核完成");
+        return fopMemberService.insertFopMember(member, userProp);
     }
 
     /**
@@ -214,25 +193,28 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new ResultResponse(rs1);
         }
         //portal.users
-        Users initUser = new Users();
-        initUser.setDepartmentId(department.getDepartmentId());
-        initUser.setAccount(o.getLpMobile());
-        initUser.setName(o.getFullName());
-        initUser.setPassword("123456");
-        initUser.setSex("1");
-        initUser.setUserLevel("1");
-        ResultResponse rs2 = usersService.insertUsersRecord(initUser, userProp, "市工商联 -- 企业注册");
+        Users users = new Users();
+        users.setDepartmentId(department.getDepartmentId());
+        users.setAccount(o.getLpMobile());
+        users.setPassword("123456");
+        users.setSex("1");
+        users.setName(o.getFullName());
+        ResultResponse rs2 = usersService.insertUsersRecord(users, userProp, "市工商联 -- 企业注册");
         if (ResultCode.FAIL == rs2.getStatus()) {
             return rs2;
         }
-        //分配用户角色 默认分配非会员权限，注册申请成功后，分配会员权限
-        Users users = (Users) rs2.getData();
-        ResultResponse rs3 = dispatchRole(users.getUserId(), userProp, new String[]{"5"});
-        if (ResultCode.FAIL == rs3.getStatus()) {
-            return rs3;
+        //分配用户角色
+        List<Map<String, Object>> roleList = fopCompanyDao.selectRoleList(userProp.getActiveSyId(), new String[]{"4"});
+        if (CollectionUtils.isEmpty(roleList)) {
+            return new ResultResponse(ResultCode.FAIL, "未预设用户角色，用户赋权失败");
         }
-
-        //TODO 分配成功通知
+        Map<String, Object> role = roleList.get(0);
+        String[] roleId = new String[]{(String) role.get("role_id")};
+        Users users1 = (Users) rs2.getData();
+        MessageResponse rs3 = usersService.insertUsersRole(users1.getId(), roleId, userProp);
+        if (ResultCode.FAIL == rs3.getStatus()) {
+            return new ResultResponse(rs3);
+        }
 
         return new ResultResponse(ResultCode.SUCCESS, "初始化系统用户成功", department);
     }
