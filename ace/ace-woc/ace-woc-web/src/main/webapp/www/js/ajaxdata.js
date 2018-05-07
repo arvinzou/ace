@@ -11,7 +11,7 @@ function updata() {
         optionPie.series[0].data[2].value = result.perfectionCases;
         myPie.setOption(optionPie);
     });
-    
+
     var url = 'http://106.75.69.81/woc/www/data/statistics';
     var data = {};
     $.getJSON(url, data, function (result) {
@@ -114,16 +114,18 @@ function showTooltip(geoData, trafficData) {
 
 function websocket() {
     if ("WebSocket" in window) {
-        var ws = new WebSocket("ws://127.0.0.1:6006/woc/websocket/D9F7E76732A24488BCCD652B7EEBFD09/E341A7084C56499AB0390BCAA3AA5BCD");
+        var ws = new WebSocket("ws://106.75.69.81/woc/www/websocket/r123/u123");
         ws.onopen = function (evt) {
             console.log("链接成功");
             console.log(evt);
         };
 
         ws.onmessage = function (evt) {
-            console.log(evt);
-            var received_msg = evt.data;
-            getTraffic(tid);
+            var received_msg = JSON.parse(evt.data);
+            console.log(received_msg);
+            hideTooltip();
+            clearTimeout(timer1);
+            activeTooltip(received_msg.content);
         };
 
         ws.onclose = function (evt) {
@@ -140,21 +142,6 @@ function websocket() {
 
         alert("您的浏览器不支持 WebSocket!");
     }
-}
-
-function getTraffic(tid) {
-    var url = 'http://localhost/woc/www/data/getTrafficByKey';
-    data = {
-        id: tid
-    }
-    $.getJSON(url, data, function (result) {
-        console.log(result);
-        if (result.status == 0) {
-            hideTooltip();
-            clearTimeout(timer1);
-            activeTooltip(result.value);
-        }
-    });
 }
 
 function activeTooltip(data) {
