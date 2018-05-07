@@ -1,7 +1,8 @@
 jQuery(function ($) {
     $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
         _title: function (title) {
-            var $title = this.options.title || '&nbsp;'
+            var $title =
+                this.options.title || '&nbsp;'
             if (("title_html" in this.options)
                 && this.options.title_html == true)
                 title.html($title);
@@ -45,8 +46,6 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
-                        //
-                        appendButtons();
                     }
                 })
         });
@@ -72,8 +71,6 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
-                        //
-                        appendButtons();
                     }
                 })
         });
@@ -131,6 +128,7 @@ function preview(id, title) {
     $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
     loadView(id);
 }
+
 function loadView(id) {
     $.ajax({
         type: "post",
@@ -159,37 +157,3 @@ function loadView(id) {
         }
     });
 }
-
-function appendButtons() {
-    //企业通讯地址
-    appendMapBtn("address");
-}
-
-/*地图组件 1、2、 */
-/**
- * 1、添加地图位置的指针*/
-function appendMapBtn(id) {
-    var html = new Array();
-    html.push("<a id='btn-map-add-"
-        + id
-        + "' class='ace-icon fa fa-location-arrow bigger-110' href='javascript:false'>选取</a>");
-    $("#" + id).after(html.join(''));
-    $('#btn-map-add-' + id).on('click', function () {
-        window.open(portalPath + "/dynamic/common/map.jsp");
-    });
-}
-/** 1、 end */
-/**
- * 2、自动填写地址
- * @param latitude
- */
-function latitude(latitude) {
-    $("#latitude").val(latitude);
-}
-function longitude(longitude) {
-    $("#longitude").val(longitude);
-}
-function addr(addr) {
-    $("#address").val(addr);
-}
-/** 2、 end */

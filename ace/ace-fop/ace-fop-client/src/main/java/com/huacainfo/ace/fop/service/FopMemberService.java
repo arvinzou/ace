@@ -8,6 +8,8 @@ import com.huacainfo.ace.fop.model.FopMember;
 import com.huacainfo.ace.fop.vo.FopMemberQVo;
 import com.huacainfo.ace.fop.vo.FopMemberVo;
 
+import java.util.List;
+
 /**
  * @author: Arvin
  * @version: 2018-05-04
@@ -84,4 +86,25 @@ public interface FopMemberService {
             Exception;
 
 
+    /**
+     * 功能描述: 加入会员审核
+     *
+     * @param params      会员资料参数
+     * @param flowType    审核流程类型
+     * @param auditResult 审核结果
+     * @param userProp    操作员
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/5 12:12
+     */
+    MessageResponse memberJoinAudit(FopMember params, String flowType, String auditResult, UserProp userProp) throws Exception;
+
+    /**
+     * @param relationType 关联类型  0-企业会员 1-团体会员
+     * @param relationId   关联ID
+     * @param status       数据状态 1-正常  -1-已删除
+     * @return
+     * @Author Arvin
+     */
+    List<FopMember> selectByRelationType(String relationType, String relationId, String[] status);
 }

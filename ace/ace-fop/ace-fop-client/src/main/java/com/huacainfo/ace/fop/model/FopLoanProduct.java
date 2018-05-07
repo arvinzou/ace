@@ -43,11 +43,21 @@ public class FopLoanProduct implements Serializable {
 
     private Date createDate;
 
+    private Date releaseDate;
+
     private String lastModifyUserId;
 
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 
     public String getId() {
         return id;

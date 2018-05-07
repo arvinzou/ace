@@ -1,5 +1,6 @@
 package com.huacainfo.ace.fop.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -7,6 +8,11 @@ import java.util.Date;
  */
 public class FopAssociation {
     private String id;
+
+    /**
+     * portal.department.department_id
+     */
+    private String departmentId;
 
     private String fullName;
 
@@ -41,6 +47,34 @@ public class FopAssociation {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    private BigDecimal latitude;
+
+    private BigDecimal longitude;
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
 
     public String getId() {
         return id;

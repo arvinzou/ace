@@ -20,11 +20,14 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="departmentId" jdbcType="VARCHAR" property="departmentId"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, fullName, shortName, abcCode, address, phoneNumber, establishDate, pseronId, 
-    directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
-    lastModifyUserName, lastModifyDate
+    directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -41,15 +44,18 @@
       abcCode, address, phoneNumber, 
       establishDate, pseronId, directorNum, 
       viceNum, remark, status, 
-      createUserId, createUserName, createDate, 
-      lastModifyUserId, lastModifyUserName, lastModifyDate
+      createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate,
+        latitude ,longitude, departmentId
       )
     values (#{id,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
       #{abcCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
       #{establishDate,jdbcType=TIMESTAMP}, #{pseronId,jdbcType=VARCHAR}, #{directorNum,jdbcType=INTEGER}, 
       #{viceNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{departmentId,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
@@ -109,6 +115,15 @@
             <if test="lastModifyDate != null">
                 lastModifyDate,
             </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+            <if test="longitude != null">
+                longitude,
+            </if>
+            <if test="departmentId != null">
+                departmentId,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -164,6 +179,15 @@
             </if>
             <if test="lastModifyDate != null">
                 #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="latitude != null">
+                #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="longitude != null">
+                #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -221,6 +245,15 @@
             <if test="lastModifyDate != null">
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="latitude != null">
+                latitude = #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="departmentId != null">
+                departmentId = #{departmentId,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -242,10 +275,20 @@
       createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+        latitude = #{latitude,jdbcType=DECIMAL},
+        longitude = #{longitude,jdbcType=DECIMAL},
+        departmentId = #{departmentId,jdbcType=VARCHAR}
+
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+
+    <sql id="Vo_Column_List">
+        id, fullName, shortName, abcCode, address, phoneNumber, establishDate, pseronId,
+        directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId
+    </sql>
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopAssociationVo">
 
     </resultMap>
@@ -254,5 +297,39 @@
         <include refid="Base_Column_List"/>
         from fop_association
         where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <sql id="whereCondition">
+        from fop_association
+        where 1 = 1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
+        select count(*)
+        from fop_association
+        where phoneNumber = #{phoneNumber,jdbcType=VARCHAR}
+        or fullName = #{fullName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
     </select>
 </mapper>

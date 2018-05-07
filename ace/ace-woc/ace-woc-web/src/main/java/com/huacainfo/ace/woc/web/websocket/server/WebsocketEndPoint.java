@@ -19,24 +19,9 @@ import java.util.Map;
 
 // rid 和 uid 是我的业务标识参数, /websocket 是连接的路径，可以自行定义
 
-@ServerEndpoint("/websocket/{rid}/{uid}")
+@ServerEndpoint(value = "/www/websocket/{rid}/{uid}")
 public class WebsocketEndPoint {
 
-
-//    private ChatLogService chatLogService;
-//
-//    /**
-//     * 解决无法自动注入问题
-//     *
-//     * @return ChatLogService
-//     */
-//    private ChatLogService getInstance() {
-//        if (null == chatLogService) {
-//            return (ChatLogService) SpringUtils.getBean("chatLogServiceImpl");
-//        }
-//
-//        return chatLogService;
-//    }
 
     //日志处理
     private final Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.portal.dao.DepartmentDao">
-	<resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Department">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Department">
 		<id column="department_id" jdbcType="VARCHAR" property="departmentId" />
 		<result column="parent_department_id" jdbcType="VARCHAR"
-			property="parentDepartmentId" />
-		<result column="department_name" jdbcType="VARCHAR" property="departmentName" />
-		<result column="short_name" jdbcType="VARCHAR" property="shortName" />
+                property="parentDepartmentId" />
+		<result column="department_name" jdbcType="VARCHAR" property="departmentName"/>
+        <result column="short_name" jdbcType="VARCHAR" property="shortName" />
 		<result column="category" jdbcType="CHAR" property="category" />
-		<result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+		<result column="area_code" jdbcType="VARCHAR" property="areaCode"/>
 		<result column="pcode" jdbcType="VARCHAR" property="pcode" />
 		<result column="contact_name" jdbcType="VARCHAR" property="contactName" />
 		<result column="contact_tel" jdbcType="VARCHAR" property="contactTel" />
@@ -18,31 +18,31 @@
 		<result column="contact_fax" jdbcType="VARCHAR" property="contactFax" />
 		<result column="legal_person_name" jdbcType="VARCHAR" property="legalPersonName" />
 		<result column="legal_person_id_type" jdbcType="VARCHAR"
-			property="legalPersonIdType" />
+                property="legalPersonIdType" />
 		<result column="legal_person_id_no" jdbcType="VARCHAR"
-			property="legalPersonIdNo" />
+                property="legalPersonIdNo" />
 		<result column="legal_person_tel" jdbcType="VARCHAR" property="legalPersonTel" />
-		<result column="legal_person_mobile" jdbcType="VARCHAR"
-			property="legalPersonMobile" />
-		<result column="legal_person_addr" jdbcType="VARCHAR" property="legalPersonAddr" />
+        <result column="legal_person_mobile" jdbcType="VARCHAR"
+                property="legalPersonMobile" />
+        <result column="legal_person_addr" jdbcType="VARCHAR" property="legalPersonAddr" />
 		<result column="reg_date" jdbcType="TIMESTAMP" property="regDate" />
 		<result column="reg_capital" jdbcType="VARCHAR" property="regCapital" />
 		<result column="reg_area_code" jdbcType="VARCHAR" property="regAreaCode" />
-		<result column="reg_addr" jdbcType="VARCHAR" property="regAddr" />
+        <result column="reg_addr" jdbcType="VARCHAR" property="regAddr" />
 		<result column="nature" jdbcType="CHAR" property="nature" />
 		<result column="buss_license_no" jdbcType="VARCHAR" property="bussLicenseNo" />
-		<result column="buss_addr" jdbcType="VARCHAR" property="bussAddr" />
+		<result column="buss_addr" jdbcType="VARCHAR" property="bussAddr"/>
 		<result column="buss_area_code" jdbcType="VARCHAR" property="bussAreaCode" />
-		<result column="fax" jdbcType="VARCHAR" property="fax" />
-		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="email" jdbcType="VARCHAR" property="email" />
 		<result column="trans_depart_approval_no" jdbcType="VARCHAR"
-			property="transDepartApprovalNo" />
+                property="transDepartApprovalNo" />
 		<result column="trans_buss_license_no" jdbcType="VARCHAR"
-			property="transBussLicenseNo" />
+                property="transBussLicenseNo" />
 		<result column="trans_buss_license_valid_date" jdbcType="TIMESTAMP"
-			property="transBussLicenseValidDate" />
-		<result column="trans_buss_scope" jdbcType="VARCHAR" property="transBussScope" />
-		<result column="employees_num" jdbcType="INTEGER" property="employeesNum" />
+                property="transBussLicenseValidDate"/>
+        <result column="trans_buss_scope" jdbcType="VARCHAR" property="transBussScope" />
+        <result column="employees_num" jdbcType="INTEGER" property="employeesNum" />
 		<result column="driver_num" jdbcType="INTEGER" property="driverNum" />
 		<result column="unlicensed_driver_num" jdbcType="INTEGER"
 			property="unlicensedDriverNum" />
@@ -595,4 +595,71 @@
 	<update id="updateActivateBySeat">
 		update users set stauts='1' where seat=#{seat}
 	</update>
+
+    <insert id="insertDepartmentWithDepId" parameterType="com.huacainfo.ace.portal.model.Department">
+        insert into department (department_id, parent_department_id,
+        department_name, short_name, category,
+        area_code, pcode, contact_name,
+        contact_tel, contact_mobile, contact_qq,
+        contact_email, contact_fax,
+        legal_person_name,
+        legal_person_id_type, legal_person_id_no,
+        legal_person_tel,
+        legal_person_mobile, legal_person_addr, reg_date,
+        reg_capital, reg_area_code, reg_addr,
+        nature, buss_license_no,
+        buss_addr,
+        buss_area_code, fax, email,
+        trans_depart_approval_no,
+        trans_buss_license_no,
+        trans_buss_license_valid_date, trans_buss_scope,
+        employees_num, driver_num, unlicensed_driver_num,
+        licensed_driver_num,
+        status, type,
+        simage, bimage, create_user_id,
+        create_user_name,
+        create_time, last_modify_time,
+        last_modify_user_id,
+        last_modify_user_name, accident_of_year,
+        complaints_remark,latitude, longitude,serviceTimeStart,serviceTimeEnd,qrcode,serviceWay,syid,logo,watermark1,watermark2)
+        values
+        (#{departmentId,jdbcType=VARCHAR},
+        #{parentDepartmentId,jdbcType=VARCHAR},
+        #{departmentName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
+        #{category,jdbcType=CHAR},
+        #{areaCode,jdbcType=VARCHAR},
+        #{pcode,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR},
+        #{contactTel,jdbcType=VARCHAR}, #{contactMobile,jdbcType=VARCHAR},
+        #{contactQq,jdbcType=VARCHAR},
+        #{contactEmail,jdbcType=VARCHAR},
+        #{contactFax,jdbcType=VARCHAR}, #{legalPersonName,jdbcType=VARCHAR},
+        #{legalPersonIdType,jdbcType=VARCHAR},
+        #{legalPersonIdNo,jdbcType=VARCHAR},
+        #{legalPersonTel,jdbcType=VARCHAR},
+        #{legalPersonMobile,jdbcType=VARCHAR},
+        #{legalPersonAddr,jdbcType=VARCHAR}, #{regDate,jdbcType=TIMESTAMP},
+        #{regCapital,jdbcType=VARCHAR}, #{regAreaCode,jdbcType=VARCHAR},
+        #{regAddr,jdbcType=VARCHAR},
+        #{nature,jdbcType=CHAR},
+        #{bussLicenseNo,jdbcType=VARCHAR}, #{bussAddr,jdbcType=VARCHAR},
+        #{bussAreaCode,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR},
+        #{transDepartApprovalNo,jdbcType=VARCHAR},
+        #{transBussLicenseNo,jdbcType=VARCHAR},
+        #{transBussLicenseValidDate,jdbcType=TIMESTAMP},
+        #{transBussScope,jdbcType=VARCHAR},
+        #{employeesNum,jdbcType=INTEGER},
+        #{driverNum,jdbcType=INTEGER},
+        #{unlicensedDriverNum,jdbcType=INTEGER},
+        #{licensedDriverNum,jdbcType=INTEGER}, #{status,jdbcType=CHAR},
+        #{type,jdbcType=CHAR},
+        #{simage,jdbcType=VARCHAR},
+        #{bimage,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR},
+        #{accidentOfYear,jdbcType=LONGVARCHAR},
+        #{complaintsRemark,jdbcType=LONGVARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL},#{serviceTimeStart,jdbcType=VARCHAR},#{serviceTimeEnd,jdbcType=VARCHAR},#{qrcode,jdbcType=VARCHAR},#{serviceWay,jdbcType=VARCHAR},#{syid,jdbcType=VARCHAR},#{logo,jdbcType=VARCHAR},#{watermark1,jdbcType=VARCHAR},#{watermark2,jdbcType=VARCHAR})
+    </insert>
 </mapper>

@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>通知公告</title>
+    <title>流程记录</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -39,7 +39,7 @@
                     名称： <input name="name" type="text"
                                style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/fopLoanProduct/findFopLoanProductList">
+                            authority="${pageContext.request.contextPath}/fopFinanceProject/findFopFinanceProjectList">
                         <i
                                 class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
@@ -51,17 +51,17 @@
 
 
                     <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/fopLoanProduct/insertFopLoanProduct">
+                            authority="${pageContext.request.contextPath}/fopFinanceProject/insertFopFinanceProject">
                         <i
                                 class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/fopLoanProduct/updateFopLoanProduct">
+                            authority="${pageContext.request.contextPath}/fopFinanceProject/updateFopFinanceProject">
                         <i
                                 class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/fopLoanProduct/deleteFopLoanProductByFopLoanProductId">
+                            authority="${pageContext.request.contextPath}/fopFinanceProject/deleteFopFinanceProjectByFopFinanceProjectId">
                         <i
                                 class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
@@ -96,9 +96,15 @@
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-所属公司</span>
+融资名称</span>
             <br>
-            <span id="companyId">
+            <span id="financeTitle">
+</span>
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">
+融资代码</span>
+            <br>
+            <span id="financeCode">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
@@ -108,57 +114,63 @@
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-产品名称</span>
+所属公司</span>
             <br>
-            <span id="productName">
+            <span id="companyId">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-产品描述</span>
+发布日期</span>
             <br>
-            <span id="description">
+            <span id="releaseDate">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-贷款额度</span>
+融资金额</span>
             <br>
-            <span id="loanAmount">
+            <span id="financeAmount">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-利率计算方式</span>
+融资年限</span>
             <br>
-            <span id="rateType">
+            <span id="financeYear">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-贷款利率</span>
+融资内容</span>
             <br>
-            <span id="loadRate">
+            <span id="financeContent">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-贷款类型</span>
+预期年收益</span>
             <br>
-            <span id="loadType">
+            <span id="yearYield">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-贷款年限</span>
+天点击数</span>
             <br>
-            <span id="loadYear">
+            <span id="dayClicks">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-还款方式</span>
+周点击数</span>
             <br>
-            <span id="repaymentType">
+            <span id="weekClicks">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-担保方式</span>
+月点击数</span>
             <br>
-            <span id="suretyType">
+            <span id="monthClicks">
+</span>
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">
+点赞数</span>
+            <br>
+            <span id="likes">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
@@ -217,13 +229,13 @@
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
-        src="${pageContext.request.contextPath}/content/service/loanProduct/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/financeProject/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/loanProduct/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/financeProject/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/loanProduct/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/financeProject/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/loanProduct/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/financeProject/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {
