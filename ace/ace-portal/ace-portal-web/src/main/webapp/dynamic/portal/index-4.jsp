@@ -17,6 +17,11 @@
     <jsp:include page="../common/base.jsp" />
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?version=${cfg.version}"></script>
 </head>
+<script>
+    function App(){
+    console.log("=============================App Start==============================");
+}
+</script>
 <body>
 <div class="page-wrapper">
 

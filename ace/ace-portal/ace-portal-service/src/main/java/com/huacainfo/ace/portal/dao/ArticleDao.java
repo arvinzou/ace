@@ -1,6 +1,8 @@
 package com.huacainfo.ace.portal.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.portal.model.Article;
 import com.huacainfo.ace.portal.vo.ArticleQVo;
@@ -24,5 +26,7 @@ public interface ArticleDao {
 	int findCount(@Param("condition") ArticleQVo condition);
 
 	int isExit(Article record);
+
+    List<Map<String,Object>> getList(Map<String,Object> params);
 
 }

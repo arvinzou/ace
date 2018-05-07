@@ -1,9 +1,9 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,10 +73,24 @@ public class ArticleCmtServiceImpl implements ArticleCmtService {
 	    * @version: 2018-05-04
 	 */
     @Override
-	public MessageResponse insertArticleCmt(ArticleCmt o, UserProp userProp)
+	public MessageResponse insertArticleCmt(ArticleCmt o)
 			throws Exception {
-		o.setId(UUID.randomUUID().toString());
-		//o.setId(String.valueOf(new Date().getTime()));
+		o.setId(GUIDUtil.getGUID());
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getArticleId())) {
+			return new MessageResponse(1, "所属页面不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getOpenid())) {
+			return new MessageResponse(1, "留言人openid不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getNickname())) {
+			return new MessageResponse(1, "留言人昵称不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getHeadimgurl())) {
+			return new MessageResponse(1, "留言人头像地址不能为空！");
+		}
 		
 		int temp = this.articleCmtDao.isExit(o);
 		if (temp > 0) {
@@ -127,5 +141,23 @@ public class ArticleCmtServiceImpl implements ArticleCmtService {
 		this.dataBaseLogService.log("删除模板", "模板", String.valueOf(id),
 				String.valueOf(id), "模板", userProp);
 		return new MessageResponse(0, "模板删除完成！");
+	}
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取文章留言列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@Override
+	public Map<String,Object> getList(Map<String,Object> params) throws Exception{
+		Map<String,Object> rst=new HashMap<>();
+		rst.put("status",0);
+		rst.put("data",this.articleCmtDao.getList(params));
+		return rst;
 	}
 }

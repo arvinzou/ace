@@ -18,6 +18,8 @@ import com.huacainfo.ace.portal.service.ArticleCmtService;
 import com.huacainfo.ace.portal.vo.ArticleCmtVo;
 import com.huacainfo.ace.portal.vo.ArticleCmtQVo;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/articleCmt")
 /**
@@ -73,44 +75,9 @@ public class ArticleCmtController extends PortalBaseController {
 	@ResponseBody
 	public MessageResponse insertArticleCmt(String jsons) throws Exception {
 		ArticleCmt obj = JSON.parseObject(jsons, ArticleCmt.class);
-		return this.articleCmtService
-				.insertArticleCmt(obj, this.getCurUserProp());
+		return this.articleCmtService.insertArticleCmt(obj);
 	}
-    /**
-	 *
-	    * @Title:updateArticleCmt
-	    * @Description:  TODO(更新模板)
-	 		* @param:        @param jsons
-	 		* @param:        @throws Exception
-	 		* @return:       MessageResponse
-	 		* @throws
-	    * @author: 陈晓克
-	    * @version: 2018-05-04
-	 */
-	@RequestMapping(value = "/updateArticleCmt.do")
-	@ResponseBody
-	public MessageResponse updateArticleCmt(String jsons) throws Exception {
-		ArticleCmt obj = JSON.parseObject(jsons, ArticleCmt.class);
-		return this.articleCmtService
-				.updateArticleCmt(obj, this.getCurUserProp());
-	}
-    /**
-	 *
-	    * @Title:selectArticleCmtByPrimaryKey
-	    * @Description:  TODO(获取模板)
-	 		* @param:        @param id
-	 		* @param:        @throws Exception
-	 		* @return:       SingleResult<ArticleCmt>
-	 		* @throws
-	    * @author: 陈晓克
-	    * @version: 2018-05-04
-	 */
-	@RequestMapping(value = "/selectArticleCmtByPrimaryKey.do")
-	@ResponseBody
-	public SingleResult<ArticleCmtVo> selectArticleCmtByPrimaryKey(String id)
-			throws Exception {
-		return this.articleCmtService.selectArticleCmtByPrimaryKey(id);
-	}
+
     /**
 	 *
 	    * @Title:deleteArticleCmtByArticleCmtId
@@ -130,5 +97,21 @@ public class ArticleCmtController extends PortalBaseController {
 		String id = json.getString("id");
 		return this.articleCmtService.deleteArticleCmtByArticleCmtId(id,
 				this.getCurUserProp());
+	}
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取页面文章评论列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@RequestMapping(value = "/getList.do")
+	@ResponseBody
+	public Map<String,Object> getList() throws Exception{
+		return this.articleCmtService.getList(this.getParams());
 	}
 }

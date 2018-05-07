@@ -37,6 +37,7 @@
      }
      function loadCommon(){
          var urls=[];
+         urls.push({path:portalPath,url:'/content/common/js/loading.js',type:'js'});
          urls.push({path:portalPath,url:'/system/getUserProp.do',type:'js'});
          urls.push({path:portalPath,url:'/content/common/assets/css/font-awesome.min.css',type:'css'});
          urls.push({path:portalPath,url:'/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css',type:'css'});
@@ -44,6 +45,13 @@
          urls.push({path:portalPath,url:'/content/common/assets/layouts/layout3/css/layout.min.css',type:'css'});
          urls.push({path:portalPath,url:'/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js',type:'js'});
          urls.push({path:portalPath,url:'/content/portal/js/main/menu4.js',type:'js'});
+         try{
+            if(typeof(eval("App")) == "function"){
+               urls.push({path:portalPath,url:'/content/common/juicer/juicer-min.js',type:'js',callback:App});
+            }
+         }catch(e){
+            urls.push({path:portalPath,url:'/content/common/juicer/juicer-min.js',type:'js'});
+         }
           for(var i=0;i<urls.length;i++){
              loader(urls[i]);
           }

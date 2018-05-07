@@ -1,9 +1,12 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class FopFinanceProject {
+public class
+FopFinanceProject implements Serializable {
+    private static final long serialVersionUID = 8457105589824024743L;
     private String id;
 
     private String financeTitle;
@@ -16,11 +19,7 @@ public class FopFinanceProject {
 
     private Date releaseDate;
 
-    private String financeType;
-
     private BigDecimal financeAmount;
-
-    private Date financeDate;
 
     private String financeYear;
 
@@ -100,13 +99,6 @@ public class FopFinanceProject {
         this.releaseDate = releaseDate;
     }
 
-    public String getFinanceType() {
-        return financeType;
-    }
-
-    public void setFinanceType(String financeType) {
-        this.financeType = financeType == null ? null : financeType.trim();
-    }
 
     public BigDecimal getFinanceAmount() {
         return financeAmount;
@@ -114,14 +106,6 @@ public class FopFinanceProject {
 
     public void setFinanceAmount(BigDecimal financeAmount) {
         this.financeAmount = financeAmount;
-    }
-
-    public Date getFinanceDate() {
-        return financeDate;
-    }
-
-    public void setFinanceDate(Date financeDate) {
-        this.financeDate = financeDate;
     }
 
     public String getFinanceYear() {

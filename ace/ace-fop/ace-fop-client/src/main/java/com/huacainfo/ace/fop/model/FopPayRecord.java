@@ -1,9 +1,14 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class FopPayRecord {
+/**
+ * @author HuaCai003
+ */
+public class FopPayRecord implements Serializable {
+    private static final long serialVersionUID = 2554182205777657537L;
     private String id;
 
     private String companyId;

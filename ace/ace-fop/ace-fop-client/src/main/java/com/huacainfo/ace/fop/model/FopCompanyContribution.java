@@ -1,8 +1,13 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FopCompanyContribution {
+/**
+ * @author HuaCai003
+ */
+public class FopCompanyContribution implements Serializable {
+    private static final long serialVersionUID = 6831589071472909271L;
     private String id;
 
     private String companyId;

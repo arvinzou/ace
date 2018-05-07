@@ -7,7 +7,6 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopNotice;
 import com.huacainfo.ace.fop.vo.FopNoticeQVo;
 import com.huacainfo.ace.fop.vo.FopNoticeVo;
-
 /**
  * @author: Arvin
  * @version: 2018-05-03
@@ -83,4 +82,11 @@ public interface FopNoticeService {
      * @version: 2018-05-03
      */
     public abstract MessageResponse deleteFopNoticeByFopNoticeId(String id, UserProp userProp) throws Exception;
+
+    public abstract PageResult<FopNoticeVo> findNoticeList(FopNoticeQVo condition, String sort, int start, int limit) throws Exception;
+
+
+    public abstract PageResult<FopNoticeVo> homepageNoticeList() throws Exception;
+
+
 }

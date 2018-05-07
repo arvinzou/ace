@@ -27,16 +27,7 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
-                        data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
-
-                    名称： <input name="name" type="text"
+                    名称： <input name="title" type="text"
                                style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopLawPaper/findFopLawPaperList">
@@ -175,13 +166,13 @@
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLawPaper/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/lawPaper/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLawPaper/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/lawPaper/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLawPaper/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/lawPaper/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLawPaper/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/lawPaper/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

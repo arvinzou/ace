@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.Tpl;
 import com.huacainfo.ace.portal.vo.TplVo;
 import com.huacainfo.ace.portal.vo.TplQVo;
+
+import java.util.Map;
+
 /**
  * @author: 陈晓克
  * @version: 2018-05-04
@@ -80,6 +83,19 @@ public interface TplService {
 	    * @version: 2018-05-04
 	 */
 	public abstract MessageResponse deleteTplByTplId(String id,UserProp userProp) throws Exception;
+
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取模板列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	public  Map<String,Object> getList() throws Exception;
 
 	
 }

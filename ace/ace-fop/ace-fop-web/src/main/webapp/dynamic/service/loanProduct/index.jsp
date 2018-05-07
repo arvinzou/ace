@@ -217,13 +217,13 @@
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLoanProduct/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/loanProduct/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLoanProduct/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/loanProduct/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLoanProduct/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/loanProduct/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopLoanProduct/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/loanProduct/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

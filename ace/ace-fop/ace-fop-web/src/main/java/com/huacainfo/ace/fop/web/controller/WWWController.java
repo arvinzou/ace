@@ -3,11 +3,12 @@ package com.huacainfo.ace.fop.web.controller;
 
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.fop.dao.FopLawPaperDao;
 import com.huacainfo.ace.fop.service.FopCompanyService;
+import com.huacainfo.ace.fop.service.FopLawPaperService;
 import com.huacainfo.ace.fop.service.FopNoticeService;
-import com.huacainfo.ace.fop.vo.FopCompanyQVo;
-import com.huacainfo.ace.fop.vo.FopCompanyVo;
-import com.huacainfo.ace.fop.vo.FopNoticeVo;
+import com.huacainfo.ace.fop.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,9 @@ public class WWWController {
 
     @Autowired
     private FopNoticeService fopNoticeService;
+
+    @Autowired
+    private FopLawPaperService fopLawPaperService;
 
     /**
      * gis地图
@@ -48,13 +52,49 @@ public class WWWController {
      *
      * @param page  页码
      * @param limit 每页数目
-     * @return
+     * @param title 搜索关键字
+     * @param sort  排序 null：降序，不为null：升序
+     * @param noticeType  信息类型 1、市场信息 2、产品信息 3、项目信息 4 、招商信息
+     * @return return rst;
+     *
      * @throws Exception
      */
     @RequestMapping(value = "/findNoticeList")
     @ResponseBody
-    public PageResult<FopNoticeVo> findFopNoticeList(int page, int limit) throws Exception {
-        PageResult<FopNoticeVo> rst = null;// this.fopNoticeService.findNoticeList((page - 1) * limit, limit);
+    public PageResult<FopNoticeVo> findFopNoticeList(FopNoticeQVo condition, int page, int limit, String sort) throws Exception {
+        PageResult<FopNoticeVo> rst = this.fopNoticeService.findNoticeList(condition, sort, page, limit);
         return rst;
     }
+
+
+    /**
+     * 查询公告列表
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/homepageNoticeList")
+    @ResponseBody
+    public PageResult<FopNoticeVo> homepageNoticeList() throws Exception {
+        PageResult<FopNoticeVo> rst = this.fopNoticeService.homepageNoticeList();
+        return rst;
+    }
+
+    /**
+     * @param: @param keyWord:搜索关键字
+     * @param: @param page ：页码
+     * @param: @param limit ：每页数目
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult<FopLawPaperVo>
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @RequestMapping(value = "/findLawPaperList")
+    @ResponseBody
+    public PageResult<FopLawPaperVo> findLawPaperList(String keyWord, int page, int limit) throws Exception {
+        PageResult<FopLawPaperVo> rst = this.fopLawPaperService.findLawPaperList(keyWord, page, limit);
+        return rst;
+    }
+
 }

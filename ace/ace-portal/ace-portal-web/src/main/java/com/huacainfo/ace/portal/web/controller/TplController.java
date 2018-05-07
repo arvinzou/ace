@@ -18,6 +18,8 @@ import com.huacainfo.ace.portal.service.TplService;
 import com.huacainfo.ace.portal.vo.TplVo;
 import com.huacainfo.ace.portal.vo.TplQVo;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/tpl")
 /**
@@ -130,5 +132,22 @@ public class TplController extends PortalBaseController {
 		String id = json.getString("id");
 		return this.tplService.deleteTplByTplId(id,
 				this.getCurUserProp());
+	}
+
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取页面模板列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@RequestMapping(value = "/getList.do")
+	@ResponseBody
+	public Map<String,Object> getList() throws Exception{
+		return this.tplService.getList();
 	}
 }

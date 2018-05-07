@@ -46,6 +46,7 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        appendUploadBtn("coverUrl");
                     }
                 })
         });
@@ -71,6 +72,7 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        appendUploadBtn("coverUrl");
                     }
                 })
         });
@@ -139,8 +141,8 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                if (key == 'category') {
-                    value = rsd(value, '83');
+                if (key == 'releaseDate') {
+                    value = rsd(value, '127');
                 }
                 if (key == 'status') {
                     value == "1" ? "正常" : "关闭";

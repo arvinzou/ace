@@ -1,9 +1,9 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import com.huacainfo.ace.portal.vo.ArticleQVo;
 /**
  * @author: 陈晓克
  * @version: 2018-05-04
- * @Description:  TODO(模板)
+ * @Description:  TODO(文章)
  */
 public class ArticleServiceImpl implements ArticleService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -36,7 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
     /**
 	 *
 	    * @Title:find!{bean.name}List
-	    * @Description:  TODO(模板分页查询)
+	    * @Description:  TODO(文章分页查询)
 	 		* @param:        @param condition
 	 		* @param:        @param start
 	 		* @param:        @param limit
@@ -63,7 +63,7 @@ public class ArticleServiceImpl implements ArticleService {
     /**
 	 *
 	    * @Title:insertArticle
-	    * @Description:  TODO(添加模板)
+	    * @Description:  TODO(添加文章)
 	 		* @param:        @param o
 	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
@@ -75,26 +75,50 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
 	public MessageResponse insertArticle(Article o, UserProp userProp)
 			throws Exception {
-		o.setId(UUID.randomUUID().toString());
-		//o.setId(String.valueOf(new Date().getTime()));
-		
+		o.setId(GUIDUtil.getGUID());
+		o.setHitNum(Long.valueOf(0));
+		o.setLikeNum(Long.valueOf(0));
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getTplPageId())) {
+			return new MessageResponse(1, "所属页面不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getArticleCategory())) {
+			return new MessageResponse(1, "所属栏目不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getTitle())) {
+			return new MessageResponse(1, "标题不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getCover())) {
+			return new MessageResponse(1, "封面不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getMediType())) {
+			return new MessageResponse(1, "媒体类型不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getLikeNum())) {
+			return new MessageResponse(1, "点赞次数不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getHitNum())) {
+			return new MessageResponse(1, "浏览次数不能为空！");
+		}
 		int temp = this.articleDao.isExit(o);
 		if (temp > 0) {
-			return new MessageResponse(1, "模板名称重复！");
+			return new MessageResponse(1, "文章名称重复！");
 		}
 		o.setCreateDate(new Date());
 		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
 		this.articleDao.insert(o);
-		this.dataBaseLogService.log("添加模板", "模板", "", o.getTitle(),
+		this.dataBaseLogService.log("添加文章", "文章", "", o.getTitle(),
 				o.getTitle(), userProp);
-		return new MessageResponse(0, "添加模板完成！");
+		return new MessageResponse(0, "添加文章完成！");
 	}
     /**
 	 *
 	    * @Title:updateArticle
-	    * @Description:  TODO(更新模板)
+	    * @Description:  TODO(更新文章)
 	 		* @param:        @param o
 	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
@@ -106,21 +130,38 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
 	public MessageResponse updateArticle(Article o, UserProp userProp)
 			throws Exception {
-		
-		
+
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getTplPageId())) {
+			return new MessageResponse(1, "所属页面不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getArticleCategory())) {
+			return new MessageResponse(1, "所属栏目不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getTitle())) {
+			return new MessageResponse(1, "标题不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getCover())) {
+			return new MessageResponse(1, "封面不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getMediType())) {
+			return new MessageResponse(1, "媒体类型不能为空！");
+		}
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
 		this.articleDao.updateByPrimaryKey(o);
-		this.dataBaseLogService.log("变更模板", "模板", "", o.getTitle(),
+		this.dataBaseLogService.log("变更文章", "文章", "", o.getTitle(),
 				o.getTitle(), userProp);
-		return new MessageResponse(0, "变更模板完成！");
+		return new MessageResponse(0, "变更文章完成！");
 	}
 
     /**
 	 *
 	    * @Title:selectArticleByPrimaryKey
-	    * @Description:  TODO(获取模板)
+	    * @Description:  TODO(获取文章)
 	 		* @param:        @param id
 	 		* @param:        @throws Exception
 	 		* @return:       SingleResult<Article>
@@ -137,7 +178,7 @@ public class ArticleServiceImpl implements ArticleService {
     /**
 	 *
 	    * @Title:deleteArticleByArticleId
-	    * @Description:  TODO(删除模板)
+	    * @Description:  TODO(删除文章)
 	 		* @param:        @param id
 	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
@@ -150,8 +191,26 @@ public class ArticleServiceImpl implements ArticleService {
 	public MessageResponse deleteArticleByArticleId(String id,
 			UserProp userProp) throws Exception {
 		this.articleDao.deleteByPrimaryKey(id);
-		this.dataBaseLogService.log("删除模板", "模板", String.valueOf(id),
-				String.valueOf(id), "模板", userProp);
-		return new MessageResponse(0, "模板删除完成！");
+		this.dataBaseLogService.log("删除文章", "文章", String.valueOf(id),
+				String.valueOf(id), "文章", userProp);
+		return new MessageResponse(0, "文章删除完成！");
+	}
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取页面文章列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@Override
+	public Map<String,Object> getList(Map<String,Object> params) throws Exception{
+		Map<String,Object> rst=new HashMap<>();
+		rst.put("status",0);
+		rst.put("data",this.articleDao.getList(params));
+		return rst;
 	}
 }

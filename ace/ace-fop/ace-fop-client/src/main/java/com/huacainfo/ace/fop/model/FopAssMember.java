@@ -1,8 +1,10 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FopAssMember {
+public class FopAssMember implements Serializable {
+    private static final long serialVersionUID = 2857330421702866594L;
     private String id;
 
     private String assId;

@@ -1,5 +1,6 @@
 package com.huacainfo.ace.portal.web.controller;
 
+import com.huacainfo.ace.portal.model.SensitiveWords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import com.huacainfo.ace.portal.model.TplPage;
 import com.huacainfo.ace.portal.service.TplPageService;
 import com.huacainfo.ace.portal.vo.TplPageVo;
 import com.huacainfo.ace.portal.vo.TplPageQVo;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/tplPage")
@@ -130,5 +133,24 @@ public class TplPageController extends PortalBaseController {
 		String id = json.getString("id");
 		return this.tplPageService.deleteTplPageByTplPageId(id,
 				this.getCurUserProp());
+	}
+
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取页面列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@RequestMapping(value = "/getList.do")
+	@ResponseBody
+	public Map<String,Object> getList() throws Exception{
+		Map<String,Object> params=this.getParams();
+		params.put("userId",this.getCurUserProp().getUserId());
+		return this.tplPageService.getList(params);
 	}
 }

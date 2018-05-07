@@ -1,8 +1,13 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FopPerson {
+/**
+ * @author HuaCai003
+ */
+public class FopPerson implements Serializable {
+    private static final long serialVersionUID = -815386538512458937L;
     private String id;
 
     private String realName;

@@ -3,6 +3,9 @@ package com.huacainfo.ace.fop.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * @author HuaCai003
+ */
 public class FopAssociation {
     private String id;
 

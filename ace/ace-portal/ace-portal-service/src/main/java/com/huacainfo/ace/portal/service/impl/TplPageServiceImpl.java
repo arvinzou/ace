@@ -1,9 +1,9 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,9 +75,19 @@ public class TplPageServiceImpl implements TplPageService {
     @Override
 	public MessageResponse insertTplPage(TplPage o, UserProp userProp)
 			throws Exception {
-		o.setId(UUID.randomUUID().toString());
-		//o.setId(String.valueOf(new Date().getTime()));
-		
+		o.setId(GUIDUtil.getGUID());
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getTplId())) {
+			return new MessageResponse(1, "所属模板不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getName())) {
+			return new MessageResponse(1, "页面名称不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getLastModifyDate())) {
+			return new MessageResponse(1, "最后更新时间不能为空！");
+		}
 		int temp = this.tplPageDao.isExit(o);
 		if (temp > 0) {
 			return new MessageResponse(1, "页面名称重复！");
@@ -106,8 +116,19 @@ public class TplPageServiceImpl implements TplPageService {
     @Override
 	public MessageResponse updateTplPage(TplPage o, UserProp userProp)
 			throws Exception {
-		
-		
+
+		if (CommonUtils.isBlank(o.getId())) {
+			return new MessageResponse(1, "主键不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getTplId())) {
+			return new MessageResponse(1, "所属模板不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getName())) {
+			return new MessageResponse(1, "页面名称不能为空！");
+		}
+		if (CommonUtils.isBlank(o.getLastModifyDate())) {
+			return new MessageResponse(1, "最后更新时间不能为空！");
+		}
 		o.setLastModifyDate(new Date());
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
@@ -153,5 +174,23 @@ public class TplPageServiceImpl implements TplPageService {
 		this.dataBaseLogService.log("删除页面", "页面", String.valueOf(id),
 				String.valueOf(id), "页面", userProp);
 		return new MessageResponse(0, "页面删除完成！");
+	}
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取个人页面列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@Override
+	public Map<String,Object> getList(Map<String,Object> params) throws Exception{
+		Map<String,Object> rst=new HashMap<>();
+		rst.put("status",0);
+		rst.put("data",this.tplPageDao.getList(params));
+		return rst;
 	}
 }
