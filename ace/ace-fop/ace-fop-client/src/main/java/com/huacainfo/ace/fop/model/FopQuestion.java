@@ -6,32 +6,29 @@ import java.util.Date;
 /**
  * @author HuaCai003
  */
-public class FopProject implements Serializable {
-    private static final long serialVersionUID = 3747651985465042863L;
+public class FopQuestion implements Serializable {
+    private static final long serialVersionUID = -5574944998022479242L;
     private String id;
-
-    private String projectName;
-
-    private String projectCode;
-
-    private String process;
-
-    private String personId;
-
-    private String areaCode;
 
     private String companyId;
 
-    private String sector;
+    private String title;
 
-    private String coopType;
+    private String sourceId;
+
+    private String sourceType;
+
+    private String subType;
+
+    private String parentId;
 
     private Date releaseDate;
 
+    private String reply;
 
-    private Long clicks;
+    private String keyWord;
 
-    private Long likes;
+    private Long accCount;
 
     private String remark;
 
@@ -49,54 +46,12 @@ public class FopProject implements Serializable {
 
     private Date lastModifyDate;
 
-    private String coopDesc;
-
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName == null ? null : projectName.trim();
-    }
-
-    public String getProjectCode() {
-        return projectCode;
-    }
-
-    public void setProjectCode(String projectCode) {
-        this.projectCode = projectCode == null ? null : projectCode.trim();
-    }
-
-    public String getProcess() {
-        return process;
-    }
-
-    public void setProcess(String process) {
-        this.process = process == null ? null : process.trim();
-    }
-
-    public String getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
-    }
-
-    public String getAreaCode() {
-        return areaCode;
-    }
-
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode == null ? null : areaCode.trim();
     }
 
     public String getCompanyId() {
@@ -107,20 +62,44 @@ public class FopProject implements Serializable {
         this.companyId = companyId == null ? null : companyId.trim();
     }
 
-    public String getSector() {
-        return sector;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSector(String sector) {
-        this.sector = sector == null ? null : sector.trim();
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
-    public String getCoopType() {
-        return coopType;
+    public String getSourceId() {
+        return sourceId;
     }
 
-    public void setCoopType(String coopType) {
-        this.coopType = coopType == null ? null : coopType.trim();
+    public void setSourceId(String sourceId) {
+        this.sourceId = sourceId == null ? null : sourceId.trim();
+    }
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType == null ? null : sourceType.trim();
+    }
+
+    public String getSubType() {
+        return subType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType == null ? null : subType.trim();
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId == null ? null : parentId.trim();
     }
 
     public Date getReleaseDate() {
@@ -131,21 +110,28 @@ public class FopProject implements Serializable {
         this.releaseDate = releaseDate;
     }
 
-
-    public Long getclicks() {
-        return clicks;
+    public String getReply() {
+        return reply;
     }
 
-    public void setclicks(Long clicks) {
-        this.clicks = clicks;
+    public void setReply(String reply) {
+        this.reply = reply == null ? null : reply.trim();
     }
 
-    public Long getLikes() {
-        return likes;
+    public String getKeyWord() {
+        return keyWord;
     }
 
-    public void setLikes(Long likes) {
-        this.likes = likes;
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord == null ? null : keyWord.trim();
+    }
+
+    public Long getAccCount() {
+        return accCount;
+    }
+
+    public void setAccCount(Long accCount) {
+        this.accCount = accCount;
     }
 
     public String getRemark() {
@@ -210,13 +196,5 @@ public class FopProject implements Serializable {
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
-    }
-
-    public String getCoopDesc() {
-        return coopDesc;
-    }
-
-    public void setCoopDesc(String coopDesc) {
-        this.coopDesc = coopDesc == null ? null : coopDesc.trim();
     }
 }

@@ -150,21 +150,9 @@
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-天点击数</span>
+点击数</span>
             <br>
-            <span id="dayClicks">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-周点击数</span>
-            <br>
-            <span id="weekClicks">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-月点击数</span>
-            <br>
-            <span id="monthClicks">
+            <span id="clicks">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
