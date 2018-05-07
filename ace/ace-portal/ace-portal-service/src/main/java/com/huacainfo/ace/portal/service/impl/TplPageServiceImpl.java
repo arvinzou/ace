@@ -4,11 +4,19 @@ package com.huacainfo.ace.portal.service.impl;
 import java.util.*;
 
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.dao.ArticleCategoryDao;
+import com.huacainfo.ace.portal.dao.ArticleDao;
+import com.huacainfo.ace.portal.model.Article;
+import com.huacainfo.ace.portal.model.ArticleCategory;
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.apache.ibatis.session.Configuration;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -32,6 +40,12 @@ public class TplPageServiceImpl implements TplPageService {
 	private TplPageDao tplPageDao;
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
+	@Autowired
+	private ArticleCategoryDao articleCategoryDao;
+	@Autowired
+	private ArticleDao articleDao;
+	@Autowired
+	private SqlSessionTemplate sqlSession;
 
     /**
 	 *
@@ -191,6 +205,106 @@ public class TplPageServiceImpl implements TplPageService {
 		Map<String,Object> rst=new HashMap<>();
 		rst.put("status",0);
 		rst.put("data",this.tplPageDao.getList(params));
+		return rst;
+	}
+
+	/**
+	 *
+	 * @Title:insertTplPageByTplId
+	 * @Description:  TODO(根据模板ID创建默认页面元素)
+	 * @param:        @param tplId
+	 * @param:        @param userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@Override
+	public  MessageResponse insertTplPageByTplId(String tplId,UserProp userProp) throws Exception{
+		String id=GUIDUtil.getGUID();
+		TplPage o=new TplPage();
+		o.setId(id);
+		o.setTplId(tplId);
+		o.setName("页面标题请修改");
+		o.setCreateDate(new Date());
+		o.setStatus("1");
+		o.setCreateUserName(userProp.getName());
+		o.setCreateUserId(userProp.getUserId());
+		this.tplPageDao.insert(o);
+		String [] catgorys={"分类1","分类2"};
+		String [] ids={GUIDUtil.getGUID(),GUIDUtil.getGUID()};
+		int i=0;
+		for(String name:catgorys){
+			ArticleCategory ac=new ArticleCategory();
+			ac.setId(ids[i]);
+			ac.setTplPageId(id);
+			ac.setName(name);
+			ac.setCreateDate(new Date());
+			ac.setStatus("1");
+			ac.setCreateUserName(userProp.getName());
+			ac.setCreateUserId(userProp.getUserId());
+			this.articleCategoryDao.insert(ac);
+			String [] titles={"标题","标题"};
+			for(String title:titles){
+				Article at=new Article();
+				at.setId(GUIDUtil.getGUID());
+				at.setTplPageId(id);
+				at.setArticleCategory(ids[i]);
+				at.setTitle(title);
+				at.setRemark("摘要文字");
+				at.setCover("http://zx.huacainfo.com/portal/www/img/640.jpg");
+				at.setHitNum(Long.valueOf(0));
+				at.setLikeNum(Long.valueOf(0));
+				at.setMediType("1");
+				at.setHrefUrl("");
+				at.setCreateDate(new Date());
+				at.setStatus("1");
+				at.setCreateUserName(userProp.getName());
+				at.setCreateUserId(userProp.getUserId());
+				this.articleDao.insert(at);
+			}
+			i++;
+		}
+
+		return new MessageResponse(0, "OK！");
+	}
+
+	/**
+	 *
+	 * @Title:getTplPageById
+	 * @Description:  TODO(根据页面ID获取页面所有数据)
+	 * @param:        @param id
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-07
+	 */
+	@Override
+	public  Map<String, java.lang.Object> getTplPageById(String id) throws Exception{
+
+		SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+		Configuration configuration = session.getConfiguration();
+		configuration.setSafeResultHandlerEnabled(false);
+		TplPageDao dao=session.getMapper(TplPageDao.class);
+		Map<String,java.lang.Object> rst=new HashedMap();
+		rst.put("status","0");
+		Map<String,java.lang.Object> data=new HashedMap();
+		try {
+			data.put("page", dao.getById(id));
+			data.put("categorys", dao.getPageData(id));
+			data.put("covers", dao.getArticleTopListByPageId(id));
+			rst.put("data", data);
+		}catch (Exception e){
+			if(session!=null){
+				session.close();
+			}
+		}finally {
+			if(session!=null){
+				session.close();
+			}
+		}
 		return rst;
 	}
 }

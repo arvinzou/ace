@@ -28,5 +28,6 @@ public interface ArticleDao {
 	int isExit(Article record);
 
     List<Map<String,Object>> getList(Map<String,Object> params);
+    List<Map<String,Object>> getListById(@Param("pageId")String pageId,@Param("pageId")String category);
 
 }

@@ -97,5 +97,33 @@ public interface TplPageService {
 	 */
 	public Map<String,Object> getList(Map<String,Object> params) throws Exception;
 
+	/**
+	 *
+	 * @Title:insertTplPageByTplId
+	 * @Description:  TODO(根据模板ID创建默认页面元素)
+	 * @param:        @param tplId
+	 * @param:        @param userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	public abstract MessageResponse insertTplPageByTplId(String tplId,UserProp userProp) throws Exception;
+
+
+	/**
+	 *
+	 * @Title:getTplPageById
+	 * @Description:  TODO(根据页面ID获取页面所有数据)
+	 * @param:        @param id
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-07
+	 */
+	public abstract Map<String,Object> getTplPageById(String id) throws Exception;
+
 	
 }
