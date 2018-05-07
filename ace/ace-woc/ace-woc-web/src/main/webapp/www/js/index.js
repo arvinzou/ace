@@ -18,7 +18,7 @@ $(function () {
     console.log(window.location.host);
     $(document).keydown(function (event) {
         if (event.keyCode == 13) {
-            getTraffic('c55ec3b6b5a24111a7e56c458be0bbab')
+//getTraffic('c55ec3b6b5a24111a7e56c458be0bbab');
 //			 $('#targetDiv').addClass('move');
 //          $('#embg')[0].play();
         }

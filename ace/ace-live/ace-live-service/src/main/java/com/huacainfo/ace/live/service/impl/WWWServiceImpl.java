@@ -107,6 +107,7 @@ public class WWWServiceImpl implements WWWService {
         rst.put("status", 0);
         rst.put("totalcount", totalNum);
         rst.put("totalpage", totalpage);
+        session.close();
         return rst;
     }
 

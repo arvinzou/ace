@@ -1,11 +1,14 @@
 package com.huacainfo.ace.fop.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
+
+import java.util.List;
 
 /**
  * @author: Arvin
@@ -26,7 +29,7 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    PageResult<FopCompanyVo> findFopCompanyList(FopCompanyQVo condition, int start, int limit, String orderBy) throws Exception;
+    public abstract PageResult<FopCompanyVo> findFopCompanyList(FopCompanyQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -39,7 +42,7 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    MessageResponse insertFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse insertFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -52,7 +55,7 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    MessageResponse updateFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse updateFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -64,7 +67,7 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    SingleResult<FopCompanyVo> selectFopCompanyByPrimaryKey(String id) throws Exception;
+    public abstract SingleResult<FopCompanyVo> selectFopCompanyByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -77,6 +80,10 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    MessageResponse deleteFopCompanyByFopCompanyId(String id, UserProp userProp) throws Exception;
+    public abstract MessageResponse deleteFopCompanyByFopCompanyId(String id, UserProp userProp) throws Exception;
+
+
+    public abstract List<Tree> selectCompanyTreeList(String id, String syid) throws Exception;
+
 
 }

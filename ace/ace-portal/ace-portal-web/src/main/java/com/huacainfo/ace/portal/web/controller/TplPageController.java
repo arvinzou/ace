@@ -1,6 +1,4 @@
 package com.huacainfo.ace.portal.web.controller;
-
-import com.huacainfo.ace.portal.model.SensitiveWords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,5 +150,23 @@ public class TplPageController extends PortalBaseController {
 		Map<String,Object> params=this.getParams();
 		params.put("userId",this.getCurUserProp().getUserId());
 		return this.tplPageService.getList(params);
+	}
+
+	/**
+	 *
+	 * @Title:insertTplPageByTplId
+	 * @Description:  TODO(根据模板ID创建默认页面元素)
+	 * @param:        @param tplId
+	 * @param:        @param userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@RequestMapping(value = "/insertTplPageByTplId.do")
+	@ResponseBody
+	public  MessageResponse insertTplPageByTplId(String tplId) throws Exception{
+		return this.tplPageService.insertTplPageByTplId(tplId,this.getCurUserProp());
 	}
 }

@@ -28,6 +28,10 @@ public interface FopFinanceProjectDao {
                                        @Param("start") int start, @Param("limit") int limit,
                                        @Param("orderBy") String orderBy);
 
+    List<FopFinanceProjectVo> findListVo(@Param("condition") FopFinanceProjectQVo condition,
+                                         @Param("start") int start, @Param("limit") int limit,
+                                         @Param("orderBy") String orderBy);
+
     int findCount(@Param("condition") FopFinanceProjectQVo condition);
 
     int isExit(FopFinanceProject record);

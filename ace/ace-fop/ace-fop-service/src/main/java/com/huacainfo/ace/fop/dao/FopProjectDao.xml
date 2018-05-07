@@ -12,9 +12,7 @@
         <result column="sector" jdbcType="VARCHAR" property="sector"/>
         <result column="coopType" jdbcType="CHAR" property="coopType"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
-        <result column="dayClicks" jdbcType="BIGINT" property="dayClicks"/>
-        <result column="weekClicks" jdbcType="BIGINT" property="weekClicks"/>
-        <result column="monthClicks" jdbcType="BIGINT" property="monthClicks"/>
+        <result column="clicks" jdbcType="BIGINT" property="clicks"/>
         <result column="likes" jdbcType="BIGINT" property="likes"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -28,8 +26,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, projectName, projectCode, process, personId, areaCode, companyId, sector, coopType, 
-    releaseDate, dayClicks, weekClicks, monthClicks, likes, remark, status, createUserId, 
+    id, projectName, projectCode, process, personId, areaCode, companyId, sector, coopType,
+        releaseDate, clicks, likes, remark, status, createUserId,
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, coopDesc
   </sql>
 
@@ -46,17 +44,17 @@
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopProject">
     insert into fop_project (id, projectName, projectCode, 
       process, personId, areaCode, 
-      companyId, sector, coopType, 
-      releaseDate, dayClicks, weekClicks, 
-      monthClicks, likes, remark, 
+      companyId, sector, coopType,
+        releaseDate,
+        clicks, likes, remark,
       status, createUserId, createUserName, 
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate, coopDesc)
     values (#{id,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{projectCode,jdbcType=VARCHAR}, 
       #{process,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
-      #{companyId,jdbcType=VARCHAR}, #{sector,jdbcType=VARCHAR}, #{coopType,jdbcType=CHAR}, 
-      #{releaseDate,jdbcType=TIMESTAMP}, #{dayClicks,jdbcType=BIGINT}, #{weekClicks,jdbcType=BIGINT}, 
-      #{monthClicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
+      #{companyId,jdbcType=VARCHAR}, #{sector,jdbcType=VARCHAR}, #{coopType,jdbcType=CHAR},
+        #{releaseDate,jdbcType=TIMESTAMP},
+        #{clicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR},
       #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
       #{lastModifyDate,jdbcType=TIMESTAMP}, #{coopDesc,jdbcType=LONGVARCHAR})
@@ -94,14 +92,8 @@
             <if test="releaseDate != null">
                 releaseDate,
             </if>
-            <if test="dayClicks != null">
-                dayClicks,
-            </if>
-            <if test="weekClicks != null">
-                weekClicks,
-            </if>
-            <if test="monthClicks != null">
-                monthClicks,
+            <if test="clicks != null">
+                clicks,
             </if>
             <if test="likes != null">
                 likes,
@@ -165,14 +157,8 @@
             <if test="releaseDate != null">
                 #{releaseDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="dayClicks != null">
-                #{dayClicks,jdbcType=BIGINT},
-            </if>
-            <if test="weekClicks != null">
-                #{weekClicks,jdbcType=BIGINT},
-            </if>
-            <if test="monthClicks != null">
-                #{monthClicks,jdbcType=BIGINT},
+            <if test="clicks != null">
+                #{clicks,jdbcType=BIGINT},
             </if>
             <if test="likes != null">
                 #{likes,jdbcType=BIGINT},
@@ -236,14 +222,8 @@
             <if test="releaseDate != null">
                 releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="dayClicks != null">
-                dayClicks = #{dayClicks,jdbcType=BIGINT},
-            </if>
-            <if test="weekClicks != null">
-                weekClicks = #{weekClicks,jdbcType=BIGINT},
-            </if>
-            <if test="monthClicks != null">
-                monthClicks = #{monthClicks,jdbcType=BIGINT},
+            <if test="clicks != null">
+                clicks = #{clicks,jdbcType=BIGINT},
             </if>
             <if test="likes != null">
                 likes = #{likes,jdbcType=BIGINT},
@@ -289,9 +269,7 @@
       sector = #{sector,jdbcType=VARCHAR},
       coopType = #{coopType,jdbcType=CHAR},
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
-      dayClicks = #{dayClicks,jdbcType=BIGINT},
-      weekClicks = #{weekClicks,jdbcType=BIGINT},
-      monthClicks = #{monthClicks,jdbcType=BIGINT},
+        clicks = #{clicks,jdbcType=BIGINT},
       likes = #{likes,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},

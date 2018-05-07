@@ -41,4 +41,7 @@ public interface FopCompanyDao {
      */
     List<Map<String, Object>> selectRoleList(@Param("") String sysId,
                                              @Param("types") String[] types);
+
+
+    public List<Map<String, Object>> selectCompanyTreeList(@Param("pid") String pid, @Param("syid") String syid);
 }

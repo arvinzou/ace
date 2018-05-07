@@ -3,9 +3,11 @@ package com.huacainfo.ace.fop.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.service.FopCompanyService;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
@@ -15,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/fopCompany")
@@ -126,5 +130,26 @@ public class FopCompanyController extends FopBaseController {
         String id = json.getString("id");
         return this.fopCompanyService.deleteFopCompanyByFopCompanyId(id,
                 this.getCurUserProp());
+    }
+
+
+    /**
+     * @throws
+     * @Title:selectDepartmentTreeList
+     * @Description: TODO(获取机构树)
+     * @param: @return
+     * @param: @throws Exception
+     * @return: List<Tree>
+     * @author: chenxiaoke
+     * @version: 2016年11月17日 下午1:40:45
+     */
+    @RequestMapping(value = "/selectCompanyTreeList.do")
+    @ResponseBody
+    public List<Tree> selectDepartmentTreeList(String id) throws Exception {
+        if (CommonUtils.isBlank(id)) {
+            id = this.getCurUserProp().getCorpId();
+        }
+        List<Tree> list = this.fopCompanyService.selectCompanyTreeList(id, this.getCurUserProp().getActiveSyId());
+        return list;
     }
 }
