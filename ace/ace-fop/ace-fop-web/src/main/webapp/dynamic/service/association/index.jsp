@@ -26,7 +26,6 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-
                     类别：<input
                         class="easyui-combobox" style="width: 200px" name="category"
                         data-options="
@@ -38,34 +37,26 @@
 
                     名称： <input name="name" type="text"
                                style="width: 200px;"/>
+
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopAssociation/findFopAssociationList">
-                        <i
-                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
-
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
-
-
                     <button class="btn btn-info" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/fopAssociation/insertFopAssociation">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-edit"
                             authority="${pageContext.request.contextPath}/fopAssociation/updateFopAssociation">
-                        <i
-                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/fopAssociation/deleteFopAssociationByFopAssociationId">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
                 </div>
             </div>
         </div>
@@ -89,129 +80,121 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-主键</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader ">主键</span>
             <br>
-            <span id="id">
-</span>
+            <span id="id"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-协会全称</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">协会全称</span>
             <br>
-            <span id="fullName">
-</span>
+            <span id="fullName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-协会简称</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">协会简称</span>
             <br>
-            <span id="shortName">
-</span>
+            <span id="shortName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-拼音代码</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">拼音代码</span>
             <br>
-            <span id="abcCode">
-</span>
+            <span id="abcCode"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-协会地址</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">协会地址</span>
             <br>
-            <span id="address">
-</span>
+            <span id="address"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-办公电话</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">维度</span>
             <br>
-            <span id="phoneNumber">
-</span>
+            <span id="latitude"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-创建时间</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">精度</span>
             <br>
-            <span id="establishDate">
-</span>
+            <span id="longitude"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-会长ID</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">办公电话</span>
             <br>
-            <span id="pseronId">
-</span>
+            <span id="phoneNumber"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-理事数量</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">创建时间</span>
             <br>
-            <span id="directorNum">
-</span>
+            <span id="establishDate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-副会长数量</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">会长姓名</span>
             <br>
-            <span id="viceNum">
-</span>
+            <span id="pseronId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-备注</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">理事数量</span>
             <br>
-            <span id="remark">
-</span>
+            <span id="directorNum"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">副会长数量</span>
             <br>
-            <span id="status">
-</span>
+            <span id="viceNum"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">备注</span>
+            <br>
+            <span id="remark"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">状态</span>
+            <br>
+            <span id="status"></span>
         </div>
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-创建人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">创建人编号</span>
             <br>
-            <span id="createUserId">
-</span>
+            <span id="createUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-创建人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">创建人姓名</span>
             <br>
-            <span id="createUserName">
-</span>
+            <span id="createUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-入库日期</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">入库日期</span>
             <br>
-            <span id="createDate">
-</span>
+            <span id="createDate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">最后更新人编号</span>
             <br>
-            <span id="lastModifyUserId">
-</span>
+            <span id="lastModifyUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新人姓名</span>
             <br>
-            <span id="lastModifyUserName">
-</span>
+            <span id="lastModifyUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新时间</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新时间</span>
             <br>
-            <span id="lastModifyDate">
-</span>
+            <span id="lastModifyDate"></span>
         </div>
     </div>
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopAssociation/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/association/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopAssociation/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/association/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopAssociation/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/association/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/fopAssociation/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/association/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

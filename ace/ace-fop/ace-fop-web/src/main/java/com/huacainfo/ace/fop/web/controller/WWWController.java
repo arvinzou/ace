@@ -7,7 +7,6 @@ import com.huacainfo.ace.fop.service.FopCompanyService;
 import com.huacainfo.ace.fop.service.FopNoticeService;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
-import com.huacainfo.ace.fop.vo.FopNoticeQVo;
 import com.huacainfo.ace.fop.vo.FopNoticeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,7 +54,7 @@ public class WWWController {
     @RequestMapping(value = "/findNoticeList")
     @ResponseBody
     public PageResult<FopNoticeVo> findFopNoticeList(int page, int limit) throws Exception {
-        PageResult<FopNoticeVo> rst = this.fopNoticeService.findNoticeList((page - 1) * limit, limit);
+        PageResult<FopNoticeVo> rst = null;// this.fopNoticeService.findNoticeList((page - 1) * limit, limit);
         return rst;
     }
 }

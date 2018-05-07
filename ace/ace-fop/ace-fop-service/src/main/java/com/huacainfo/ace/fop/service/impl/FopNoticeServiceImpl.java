@@ -71,7 +71,7 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      * @return
      * @throws Exception
      */
-    @Override
+//    @Override
     public PageResult<FopNoticeVo> findNoticeList(int start, int limit) throws Exception {
         FopNoticeQVo condition = new FopNoticeQVo();
         PageResult<FopNoticeVo> rst = new PageResult<FopNoticeVo>();

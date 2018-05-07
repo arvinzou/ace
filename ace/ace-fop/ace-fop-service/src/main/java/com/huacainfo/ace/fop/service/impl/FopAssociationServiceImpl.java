@@ -1,18 +1,29 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
+import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.model.FopAssociation;
-import com.huacainfo.ace.fop.service.FopAssociationService;
+import com.huacainfo.ace.fop.model.FopMember;
+import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.FopAssociationQVo;
 import com.huacainfo.ace.fop.vo.FopAssociationVo;
+import com.huacainfo.ace.portal.model.Department;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.DepartmentService;
+import com.huacainfo.ace.portal.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +36,7 @@ import java.util.List;
 /**
  * @author: Arvin
  * @version: 2018-05-02
- * @Description: TODO(企业管理)
+ * @Description:
  */
 public class FopAssociationServiceImpl implements FopAssociationService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -34,16 +45,27 @@ public class FopAssociationServiceImpl implements FopAssociationService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    @Autowired
+    private FopPersonService fopPersonService;
+    @Autowired
+    private FopFlowRecordService fopFlowRecordService;
+
+    @Autowired
+    private DepartmentService departmentService;
+
+    @Autowired
+    private UsersService usersService;
+
+    @Autowired
+    private FopMemberService fopMemberService;
+
+    @Autowired
+    private FopCompanyDao fopCompanyDao;
+
+    @Autowired
+    private FopCompanyService companyService;
+
     /**
-     * @throws
-     * @Title:find!{bean.name}List
-     * @Description: TODO(企业管理分页查询)
-     * @param: @param condition
-     * @param: @param start
-     * @param: @param limit
-     * @param: @param orderBy
-     * @param: @throws Exception
-     * @return: PageResult<FopAssociationVo>
      * @author: Arvin
      * @version: 2018-05-02
      */
@@ -62,56 +84,124 @@ public class FopAssociationServiceImpl implements FopAssociationService {
     }
 
     /**
-     * @throws
-     * @Title:insertFopAssociation
-     * @Description: TODO(添加企业管理)
-     * @param: @param o
-     * @param: @param userProp
-     * @param: @throws Exception
-     * @return: MessageResponse
      * @author: Arvin
      * @version: 2018-05-02
      */
     @Override
     public MessageResponse insertFopAssociation(FopAssociation o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getFullName())) {
             return new MessageResponse(1, "协会全称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
+        if (CommonUtils.isBlank(o.getPhoneNumber())) {
+            return new MessageResponse(1, "协会号码不能为空！");
         }
 
         int temp = this.fopAssociationDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "企业管理名称重复！");
+            return new MessageResponse(1, "协会名称/办公号码重复！");
         }
+
+        //初始化系统用户
+        ResultResponse rs1 = initSysUser(o, userProp);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
+        }
+        //TODO 构建会长个人信息
+
+        //团体信息入库
+        Department department = (Department) rs1.getData();
+        o.setDepartmentId(department.getDepartmentId());
+        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopAssociationDao.insertSelective(o);
-        this.dataBaseLogService.log("添加企业管理", "企业管理", "", o.getId(),
+        this.dataBaseLogService.log("添加商协会", "商协会", "", o.getId(),
                 o.getId(), userProp);
-        return new MessageResponse(0, "添加企业管理完成！");
+
+
+        //自动审核会员处理
+//        MessageResponse rs3 = memberJoinAutoAudit(o, "0", userProp);
+//        if (ResultCode.FAIL == rs3.getStatus()) {
+//            return rs3;
+//        }
+
+        return new MessageResponse(0, "添加商协会完成");
+    }
+
+
+    /**
+     * 加入会员
+     *
+     * @param o           商协会
+     * @param userProp    操作员
+     * @param auditResult 审核结果 0 - 通过，1 -不通过;
+     * @return
+     * @throws Exception
+     */
+    private MessageResponse memberJoinAutoAudit(FopAssociation o, String auditResult, UserProp userProp) throws Exception {
+        if ("0".equals(auditResult)) {
+            //会员记录
+            FopMember member = new FopMember();
+            member.setRelationId(o.getId());
+            member.setRelationType("1");//0-企业会员 1-团体会员
+            member.setMermberName(o.getFullName());
+
+            return fopMemberService.memberJoinAudit(member, FlowType.MEMBER_JOIN_ASSOCIATION, auditResult, userProp);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核完成");
     }
 
     /**
-     * @throws
-     * @Title:updateFopAssociation
-     * @Description: TODO(更新企业管理)
-     * @param: @param o
-     * @param: @param userProp
-     * @param: @throws Exception
-     * @return: MessageResponse
+     * 自动分配系统登录用户
+     *
+     * @param o        obj
+     * @param userProp 登录用户
+     * @return
+     * @throws Exception
+     */
+    private ResultResponse initSysUser(FopAssociation o, UserProp userProp) throws Exception {
+        //portal.department
+        Department department = new Department();
+        department.setDepartmentId(GUIDUtil.getGUID());
+        department.setParentDepartmentId("0010006");//市工商联
+        department.setDepartmentName(o.getFullName());
+        department.setContactMobile(o.getPhoneNumber());
+        department.setSyid(userProp.getActiveSyId());
+        department.setAreaCode(userProp.getAreaCode());
+        MessageResponse rs1 = departmentService.insertDepartmentWithDepId(department, userProp);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getErrorMessage());
+        }
+
+        //portal.users
+        Users initUser = new Users();
+        initUser.setDepartmentId(department.getDepartmentId());
+        initUser.setAccount(o.getPhoneNumber());
+        initUser.setName(o.getFullName());
+        initUser.setPassword("123456");
+        initUser.setSex("1");
+        initUser.setUserLevel("1");
+        ResultResponse rs2 = usersService.insertUsersRecord(initUser, userProp, "市工商联 -- 团体注册");
+        if (ResultCode.FAIL == rs2.getStatus()) {
+            throw new CustomException(rs2.getInfo());
+        }
+        //分配用户角色  默认分配非会员权限，注册申请成功后，分配会员权限
+        Users users = (Users) rs2.getData();
+        ResultResponse rs3 = companyService.dispatchRole(users.getUserId(), userProp, new String[]{"5"});
+        if (ResultCode.FAIL == rs3.getStatus()) {
+            throw new CustomException(rs3.getInfo());
+        }
+
+        //TODO 分配成功通知
+
+        return new ResultResponse(ResultCode.SUCCESS, "初始化系统用户成功", department);
+    }
+
+    /**
      * @author: Arvin
      * @version: 2018-05-02
      */
@@ -124,13 +214,6 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         if (CommonUtils.isBlank(o.getFullName())) {
             return new MessageResponse(1, "协会全称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -141,13 +224,8 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         return new MessageResponse(0, "变更企业管理完成！");
     }
 
+
     /**
-     * @throws
-     * @Title:selectFopAssociationByPrimaryKey
-     * @Description: TODO(获取企业管理)
-     * @param: @param id
-     * @param: @throws Exception
-     * @return: SingleResult<FopAssociation>
      * @author: Arvin
      * @version: 2018-05-02
      */
@@ -159,22 +237,24 @@ public class FopAssociationServiceImpl implements FopAssociationService {
     }
 
     /**
-     * @throws
-     * @Title:deleteFopAssociationByFopAssociationId
-     * @Description: TODO(删除企业管理)
-     * @param: @param id
-     * @param: @param userProp
-     * @param: @throws Exception
-     * @return: MessageResponse
      * @author: Arvin
      * @version: 2018-05-02
      */
     @Override
     public MessageResponse deleteFopAssociationByFopAssociationId(String id,
                                                                   UserProp userProp) throws Exception {
-        this.fopAssociationDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(id),
-                String.valueOf(id), "企业管理", userProp);
-        return new MessageResponse(0, "企业管理删除完成！");
+        FopAssociation association = fopAssociationDao.selectByPrimaryKey(id);
+        if (null == association) {
+            return new MessageResponse(ResultCode.FAIL, "企业管理删除完成！");
+        }
+        association.setLastModifyDate(DateUtil.getNowDate());
+        association.setLastModifyUserId(userProp.getUserId());
+        association.setLastModifyUserName(userProp.getName());
+        association.setStatus("-1");
+
+        this.fopAssociationDao.updateByPrimaryKeySelective(association);
+        this.dataBaseLogService.log("删除商协会资料", "商协会资料", String.valueOf(id),
+                String.valueOf(id), "商协会资料", userProp);
+        return new MessageResponse(0, "商协会资料删除完成");
     }
 }

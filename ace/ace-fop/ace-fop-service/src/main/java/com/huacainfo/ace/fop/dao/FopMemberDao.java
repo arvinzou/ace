@@ -31,4 +31,16 @@ public interface FopMemberDao {
 
     int isExit(FopMember record);
 
+
+    /**
+     * @param relationType 关联类型  0-企业会员 1-团体会员
+     * @param relationId   关联ID
+     * @param status       数据状态 1-正常  -1-已删除
+     * @return
+     * @Author Arvin
+     */
+    List<FopMember> selectByRelationType(@Param("relationType") String relationType,
+                                         @Param("relationId") String relationId,
+                                         @Param("status") String[] status);
+
 }
