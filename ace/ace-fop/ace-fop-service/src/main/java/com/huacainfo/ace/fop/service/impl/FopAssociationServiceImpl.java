@@ -12,10 +12,10 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
+import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
-import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.model.FopAssociation;
-import com.huacainfo.ace.fop.model.FopMember;
+import com.huacainfo.ace.fop.model.FopPayRecord;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.FopAssociationQVo;
 import com.huacainfo.ace.fop.vo.FopAssociationVo;
@@ -60,10 +60,7 @@ public class FopAssociationServiceImpl implements FopAssociationService {
     private FopMemberService fopMemberService;
 
     @Autowired
-    private FopCompanyDao fopCompanyDao;
-
-    @Autowired
-    private FopCompanyService companyService;
+    private FopPayRecordService fopPayRecordService;
 
     /**
      * @author: Arvin
@@ -121,38 +118,34 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         this.dataBaseLogService.log("添加商协会", "商协会", "", o.getId(),
                 o.getId(), userProp);
 
-
-        //自动审核会员处理
-//        MessageResponse rs3 = memberJoinAutoAudit(o, "0", userProp);
-//        if (ResultCode.FAIL == rs3.getStatus()) {
-//            return rs3;
-//        }
+        //自动提交会员申请流程
+        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(FlowType.MEMBER_JOIN_ASSOCIATION, o.getId(), userProp);
+        if (ResultCode.FAIL == rs3.getStatus()) {
+            return rs3;
+        }
+        //自动提交缴费记录
+        MessageResponse rs4 = submitPayRecord(o, userProp);
+        if (ResultCode.FAIL == rs4.getStatus()) {
+            return rs4;
+        }
 
         return new MessageResponse(0, "添加商协会完成");
     }
 
-
     /**
-     * 加入会员
+     * 功能描述: 自动提交缴费记录
      *
-     * @param o           商协会
-     * @param userProp    操作员
-     * @param auditResult 审核结果 0 - 通过，1 -不通过;
-     * @return
-     * @throws Exception
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/7 16:28
      */
-    private MessageResponse memberJoinAutoAudit(FopAssociation o, String auditResult, UserProp userProp) throws Exception {
-        if ("0".equals(auditResult)) {
-            //会员记录
-            FopMember member = new FopMember();
-            member.setRelationId(o.getId());
-            member.setRelationType("1");//0-企业会员 1-团体会员
-            member.setMermberName(o.getFullName());
+    private MessageResponse submitPayRecord(FopAssociation o, UserProp userProp) throws Exception {
+        FopPayRecord payRecord = new FopPayRecord();
+        payRecord.setRelationId(o.getId());
+        payRecord.setRelationType(PayType.PAY_TYPE_MEMBER_JOIN);
 
-            return fopMemberService.memberJoinAudit(member, FlowType.MEMBER_JOIN_ASSOCIATION, auditResult, userProp);
-        }
-
-        return new MessageResponse(ResultCode.SUCCESS, "审核完成");
+        return fopPayRecordService.submitPayRecord(payRecord, userProp);
     }
 
     /**
@@ -191,7 +184,7 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         }
         //分配用户角色  默认分配非会员权限，注册申请成功后，分配会员权限
         Users users = (Users) rs2.getData();
-        ResultResponse rs3 = companyService.dispatchRole(users.getUserId(), userProp, new String[]{"5"});
+        ResultResponse rs3 = fopMemberService.dispatchRoleRight(users.getUserId(), userProp, new String[]{"5"});
         if (ResultCode.FAIL == rs3.getStatus()) {
             throw new CustomException(rs3.getInfo());
         }

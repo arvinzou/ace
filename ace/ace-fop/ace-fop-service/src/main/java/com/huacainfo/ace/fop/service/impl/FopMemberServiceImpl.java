@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
@@ -16,6 +17,7 @@ import com.huacainfo.ace.fop.service.FopMemberService;
 import com.huacainfo.ace.fop.vo.FopMemberQVo;
 import com.huacainfo.ace.fop.vo.FopMemberVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopMemberService")
 /**
@@ -39,6 +42,9 @@ public class FopMemberServiceImpl implements FopMemberService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private FopFlowRecordService fopFlowRecordService;
+
+    @Autowired
+    private UsersService usersService;
 
     /**
      * @throws
@@ -173,6 +179,28 @@ public class FopMemberServiceImpl implements FopMemberService {
     }
 
     /**
+     * 分类用户角色
+     *
+     * @param userId    portal.users.user_id
+     * @param userProp
+     * @param roleTypes 角色类型 4- 	企业/团体会员, 5-	企业/团体非会员
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public ResultResponse dispatchRoleRight(String userId, UserProp userProp, String[] roleTypes) throws Exception {
+        List<Map<String, Object>> roleList = fopMemberDao.selectRoleList(userProp.getActiveSyId(), roleTypes);
+        if (CollectionUtils.isEmpty(roleList)) {
+            return new ResultResponse(ResultCode.FAIL, "未预设用户角色，用户赋权失败");
+        }
+        Map<String, Object> role = roleList.get(0);
+        String[] roleId = new String[]{(String) role.get("role_id")};
+        MessageResponse rs3 = usersService.insertUsersRole(userId, roleId, userProp);
+
+        return new ResultResponse(rs3);
+    }
+
+    /**
      * 功能描述: 加入会员审核
      *
      * @param params      会员资料参数
@@ -185,11 +213,7 @@ public class FopMemberServiceImpl implements FopMemberService {
      */
     @Override
     public MessageResponse memberJoinAudit(FopMember params, String flowType, String auditResult, UserProp userProp) throws Exception {
-        //审核流程记录
-        MessageResponse rs = fopFlowRecordService.memberJoinAutoAudit(flowType, params.getRelationId(), auditResult, userProp);
-        if (ResultCode.FAIL == rs.getStatus()) {
-            return rs;
-        }
+
         List<FopMember> memberList = fopMemberDao.selectByRelationType(
                 params.getRelationType(),
                 params.getRelationId(),

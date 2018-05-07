@@ -1,3 +1,4 @@
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
 /**
@@ -7,6 +8,6 @@ public class TestDemo {
 
     @Test
     public void test() {
-        System.out.println();
+        System.out.println(GUIDUtil.getGUID());
     }
 }

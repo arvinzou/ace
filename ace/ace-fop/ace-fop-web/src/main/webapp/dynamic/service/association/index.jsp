@@ -111,7 +111,7 @@
             <span id="latitude"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">精度</span>
+            <span class="labelItemHeader">经度</span>
             <br>
             <span id="longitude"></span>
         </div>

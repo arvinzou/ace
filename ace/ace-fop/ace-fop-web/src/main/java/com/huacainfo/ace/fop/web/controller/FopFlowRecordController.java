@@ -130,4 +130,22 @@ public class FopFlowRecordController extends FopBaseController {
         return this.fopFlowRecordService.deleteFopFlowRecordByFopFlowRecordId(id,
                 this.getCurUserProp());
     }
+
+
+    /**
+     * 功能描述: 流程审核
+     *
+     * @param: jsons 传入参数
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/7 11:45
+     */
+    @RequestMapping(value = "/audit")
+    @ResponseBody
+    public MessageResponse audit(String jsons)
+            throws Exception {
+        FopFlowRecord record = JSON.parseObject(jsons, FopFlowRecord.class);
+        return fopFlowRecordService.audit(record, this.getCurUserProp());
+
+    }
 }

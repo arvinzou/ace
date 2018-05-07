@@ -11,7 +11,8 @@ public class FopPayRecord implements Serializable {
     private static final long serialVersionUID = 2554182205777657537L;
     private String id;
 
-    private String companyId;
+    private String relationId;
+    private String relationType;
 
     private String payYear;
 
@@ -49,6 +50,22 @@ public class FopPayRecord implements Serializable {
 
     private Date lastModifyDate;
 
+    public String getRelationId() {
+        return relationId;
+    }
+
+    public void setRelationId(String relationId) {
+        this.relationId = relationId;
+    }
+
+    public String getRelationType() {
+        return relationType;
+    }
+
+    public void setRelationType(String relationType) {
+        this.relationType = relationType;
+    }
+
     public String getId() {
         return id;
     }
@@ -57,13 +74,6 @@ public class FopPayRecord implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId == null ? null : companyId.trim();
-    }
 
     public String getPayYear() {
         return payYear;

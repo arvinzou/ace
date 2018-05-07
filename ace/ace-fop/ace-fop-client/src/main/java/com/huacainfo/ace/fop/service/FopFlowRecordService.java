@@ -27,7 +27,7 @@ public interface FopFlowRecordService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract PageResult<FopFlowRecordVo> findFopFlowRecordList(FopFlowRecordQVo condition, int start, int limit, String orderBy) throws Exception;
+    PageResult<FopFlowRecordVo> findFopFlowRecordList(FopFlowRecordQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -40,7 +40,7 @@ public interface FopFlowRecordService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse insertFopFlowRecord(FopFlowRecord obj, UserProp userProp) throws Exception;
+    MessageResponse insertFopFlowRecord(FopFlowRecord obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -53,7 +53,7 @@ public interface FopFlowRecordService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse updateFopFlowRecord(FopFlowRecord obj, UserProp userProp) throws Exception;
+    MessageResponse updateFopFlowRecord(FopFlowRecord obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -65,7 +65,7 @@ public interface FopFlowRecordService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract SingleResult<FopFlowRecordVo> selectFopFlowRecordByPrimaryKey(String id) throws Exception;
+    SingleResult<FopFlowRecordVo> selectFopFlowRecordByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -78,18 +78,25 @@ public interface FopFlowRecordService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse deleteFopFlowRecordByFopFlowRecordId(String id, UserProp userProp) throws Exception;
+    MessageResponse deleteFopFlowRecordByFopFlowRecordId(String id, UserProp userProp) throws Exception;
 
     /**
-     * 企业会员注册，自动审核通过，成为会员
+     * 提交流程记录
      *
      * @param flowType    流程类型  ： FlowType.java
      * @param fromId      来源ID
-     * @param auditResult 审核结果 0 - 通过，1 -不通过
      * @param userProp    操作人
      * @return 处理结果
      */
-    MessageResponse memberJoinAutoAudit(String flowType, String fromId, String auditResult, UserProp userProp) throws Exception;
+    MessageResponse submitFlowRecord(String flowType, String fromId, UserProp userProp) throws Exception;
 
-
+    /**
+     * 功能描述: 流程审核
+     *
+     * @param: jsons 传入参数
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/7 11:45
+     */
+    MessageResponse audit(FopFlowRecord record, UserProp curUserProp);
 }

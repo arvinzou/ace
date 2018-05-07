@@ -25,7 +25,9 @@ public class FopFlowRecord implements Serializable {
     private Date auditDate;
 
     private String remark;
-
+    /**
+     * 1-未审核，2-已审核
+     */
     private String status;
 
     private String createUserId;

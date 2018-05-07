@@ -2,6 +2,7 @@ package com.huacainfo.ace.fop.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -11,12 +12,11 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
+import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.model.FopCompany;
-import com.huacainfo.ace.fop.model.FopMember;
-import com.huacainfo.ace.fop.service.FopCompanyService;
-import com.huacainfo.ace.fop.service.FopMemberService;
-import com.huacainfo.ace.fop.service.FopPersonService;
+import com.huacainfo.ace.fop.model.FopPayRecord;
+import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
 import com.huacainfo.ace.portal.model.Department;
@@ -28,11 +28,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service("fopCompanyService")
 /**
@@ -58,7 +56,13 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     private UsersService usersService;
 
     @Autowired
+    private FopFlowRecordService fopFlowRecordService;
+
+    @Autowired
     private FopMemberService fopMemberService;
+
+    @Autowired
+    private FopPayRecordService fopPayRecordService;
 
     /**
      * @throws
@@ -136,61 +140,35 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         this.dataBaseLogService.log("添加企业管理", "企业管理", "", o.getId(),
                 o.getId(), userProp);
 
-        //自动审核会员处理
-//        MessageResponse rs3 = memberJoinAutoAudit(o, "0", userProp);
-//        if (ResultCode.FAIL == rs3.getStatus()) {
-//            return rs3;
-//        }
+        //自动提交会员申请流程
+        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
+        if (ResultCode.FAIL == rs3.getStatus()) {
+            return rs3;
+        }
+        //自动提交缴费记录
+        MessageResponse rs4 = submitPayRecord(o, userProp);
+        if (ResultCode.FAIL == rs4.getStatus()) {
+            return rs4;
+        }
 
         return new MessageResponse(0, "添加企业管理完成！");
     }
 
-
     /**
-     * 分类用户角色
      *
-     * @param userId    portal.users.user_id
-     * @param userProp
-     * @param roleTypes 角色类型
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public ResultResponse dispatchRole(String userId, UserProp userProp, String[] roleTypes) throws Exception {
-        List<Map<String, Object>> roleList = fopCompanyDao.selectRoleList(userProp.getActiveSyId(), roleTypes);
-        if (CollectionUtils.isEmpty(roleList)) {
-            return new ResultResponse(ResultCode.FAIL, "未预设用户角色，用户赋权失败");
-        }
-        Map<String, Object> role = roleList.get(0);
-        String[] roleId = new String[]{(String) role.get("role_id")};
-        MessageResponse rs3 = usersService.insertUsersRole(userId, roleId, userProp);
-
-        return new ResultResponse(rs3);
-    }
-
-    /**
-     * 加入会员
+     * 功能描述: 自动提交缴费记录
      *
-     * @param obj         企业资料
-     * @param userProp    操作员
-     * @param auditResult 审核结果 0 - 通过，1 -不通过;
-     * @return
-     * @throws Exception
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/7 16:28
      */
-    public MessageResponse memberJoinAutoAudit(FopCompanyVo obj, String auditResult, UserProp userProp) throws Exception {
+    private MessageResponse submitPayRecord(FopCompanyVo o, UserProp userProp) throws Exception {
+        FopPayRecord payRecord = new FopPayRecord();
+        payRecord.setRelationId(o.getId());
+        payRecord.setRelationType(PayType.PAY_TYPE_MEMBER_JOIN);
 
-        if ("0".equals(auditResult)) {
-            //会员记录
-            FopMember member = new FopMember();
-            member.setRelationId(obj.getId());
-            member.setRelationType("0");//0-企业会员 1-团体会员
-            member.setMermberName(obj.getFullName());
-
-            return fopMemberService.memberJoinAudit(member, FlowType.MEMBER_JOIN_COMPANY, auditResult, userProp);
-        }
-
-
-        return new MessageResponse(ResultCode.SUCCESS, "审核完成");
+        return fopPayRecordService.submitPayRecord(payRecord, userProp);
     }
 
     /**
@@ -209,7 +187,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         department.setAreaCode(userProp.getAreaCode());
         MessageResponse rs1 = departmentService.insertDepartment(department, userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
-            return new ResultResponse(rs1);
+            throw new CustomException(rs1.getErrorMessage());
         }
         //portal.users
         Users initUser = new Users();
@@ -221,13 +199,13 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         initUser.setUserLevel("1");
         ResultResponse rs2 = usersService.insertUsersRecord(initUser, userProp, "市工商联 -- 企业注册");
         if (ResultCode.FAIL == rs2.getStatus()) {
-            return rs2;
+            throw new CustomException(rs2.getInfo());
         }
         //分配用户角色 默认分配非会员权限，注册申请成功后，分配会员权限
         Users users = (Users) rs2.getData();
-        ResultResponse rs3 = dispatchRole(users.getUserId(), userProp, new String[]{"5"});
+        ResultResponse rs3 = fopMemberService.dispatchRoleRight(users.getUserId(), userProp, new String[]{"5"});
         if (ResultCode.FAIL == rs3.getStatus()) {
-            return rs3;
+            throw new CustomException(rs3.getInfo());
         }
 
         //TODO 分配成功通知

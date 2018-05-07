@@ -80,5 +80,13 @@ public interface FopPayRecordService {
      */
     public abstract MessageResponse deleteFopPayRecordByFopPayRecordId(String id, UserProp userProp) throws Exception;
 
-
+    /**
+     * 提交缴费记录
+     *
+     * @param record
+     * @param userProp
+     * @return
+     * @throws Exception
+     */
+    MessageResponse submitPayRecord(FopPayRecord record, UserProp userProp) throws Exception;
 }

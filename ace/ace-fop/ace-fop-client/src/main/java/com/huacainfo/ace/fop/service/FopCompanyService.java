@@ -3,7 +3,6 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
@@ -80,16 +79,4 @@ public interface FopCompanyService {
      */
     MessageResponse deleteFopCompanyByFopCompanyId(String id, UserProp userProp) throws Exception;
 
-
-    /**
-     * 功能描述: 分配用户角色
-     *
-     * @param userId    portal.users.user_id
-     * @param userProp
-     * @param roleTypes 角色类型 4-团体/企业会员，5-团体/企业非会员
-     * @return:
-     * @auther: Arvin Zou
-     * @date: 2018/5/7 11:02
-     */
-    ResultResponse dispatchRole(String userId, UserProp userProp, String[] roleTypes) throws Exception;
 }

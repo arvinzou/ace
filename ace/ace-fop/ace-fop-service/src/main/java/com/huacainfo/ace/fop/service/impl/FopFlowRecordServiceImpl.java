@@ -91,15 +91,14 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         if (CommonUtils.isBlank(o.getAuditDate())) {
             return new MessageResponse(1, "审核时间不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
+
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
+        o.setLastModifyDate(DateUtil.getNowDate());
         this.fopFlowRecordDao.insertSelective(o);
         this.dataBaseLogService.log("添加流程记录", "流程记录", "", o.getId(),
                 o.getId(), userProp);
@@ -193,29 +192,46 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     }
 
     /**
-     * 企业会员注册，自动审核通过，成为会员
+     * 提交流程记录
      *
      * @param flowType    流程类型  ： FlowType.java
      * @param fromId      来源ID
-     * @param auditResult 审核结果 0 - 通过，1 -不通过
      * @param userProp    操作人
      * @return 处理结果
      */
     @Override
-    public MessageResponse memberJoinAutoAudit(String flowType, String fromId, String auditResult,
-                                               UserProp userProp) throws Exception {
+    public MessageResponse submitFlowRecord(String flowType, String fromId,
+                                            UserProp userProp) throws Exception {
 
         //插入审核流程
         FopFlowRecord flowRecord = new FopFlowRecord();
         flowRecord.setId(GUIDUtil.getGUID());
         flowRecord.setFromId(fromId);
         flowRecord.setFlowType(flowType);
-        flowRecord.setPersonId(userProp.getUserId());
-        flowRecord.setAuditResult(auditResult);
-        flowRecord.setAuditOpinion("系统自动审核");
-        flowRecord.setAuditDate(DateUtil.getNowDate());
+//        flowRecord.setPersonId(userProp.getUserId());
+//        flowRecord.setAuditResult(auditResult);
+//        flowRecord.setAuditOpinion("系统自动审核");
+//        flowRecord.setAuditDate(DateUtil.getNowDate());
+//        flowRecord.setStatus("1");//1-未审核，2-已审核
 
         return insertFopFlowRecord(flowRecord, userProp);
+    }
+
+    /**
+     * 功能描述: 流程审核
+     *
+     * @param record
+     * @param curUserProp
+     * @param: jsons 传入参数
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/7 11:45
+     */
+    @Override
+    public MessageResponse audit(FopFlowRecord record, UserProp curUserProp) {
+
+
+        return null;
     }
 
 

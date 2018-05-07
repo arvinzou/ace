@@ -3,7 +3,8 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.FopPayRecordDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopPayRecord">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
+        <result column="relationType" jdbcType="VARCHAR" property="relationType"/>
         <result column="payYear" jdbcType="VARCHAR" property="payYear"/>
         <result column="payQuarter" jdbcType="VARCHAR" property="payQuarter"/>
         <result column="payMonth" jdbcType="VARCHAR" property="payMonth"/>
@@ -24,7 +25,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, companyId, payYear, payQuarter, payMonth, payDay, payCategory, payLevel, payDate, 
+        id, relationId, relationType, payYear, payQuarter, payMonth, payDay, payCategory, payLevel, payDate,
     payAmount, dendline, payResult, remark, status, createUserId, createUserName, createDate, 
     lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
@@ -39,29 +40,28 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopPayRecord">
-    insert into fop_pay_record (id, companyId, payYear, 
+        insert into fop_pay_record (id, payYear,
       payQuarter, payMonth, payDay, 
       payCategory, payLevel, payDate, 
       payAmount, dendline, payResult, 
       remark, status, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{payYear,jdbcType=VARCHAR}, 
+      createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate,
+        relationId, relationType)
+        values (#{id,jdbcType=VARCHAR}, #{payYear,jdbcType=VARCHAR},
       #{payQuarter,jdbcType=VARCHAR}, #{payMonth,jdbcType=VARCHAR}, #{payDay,jdbcType=VARCHAR}, 
       #{payCategory,jdbcType=CHAR}, #{payLevel,jdbcType=CHAR}, #{payDate,jdbcType=TIMESTAMP}, 
       #{payAmount,jdbcType=DECIMAL}, #{dendline,jdbcType=TIMESTAMP}, #{payResult,jdbcType=CHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopPayRecord">
         insert into fop_pay_record
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
-            </if>
-            <if test="companyId != null">
-                companyId,
             </if>
             <if test="payYear != null">
                 payYear,
@@ -117,13 +117,16 @@
             <if test="lastModifyDate != null">
                 lastModifyDate,
             </if>
+            <if test="relationId != null">
+                relationId,
+            </if>
+            <if test="relationType != null">
+                relationType,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
-            </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
             </if>
             <if test="payYear != null">
                 #{payYear,jdbcType=VARCHAR},
@@ -179,14 +182,17 @@
             <if test="lastModifyDate != null">
                 #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationType != null">
+                #{relationType,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopPayRecord">
         update fop_pay_record
         <set>
-            <if test="companyId != null">
-                companyId = #{companyId,jdbcType=VARCHAR},
-            </if>
             <if test="payYear != null">
                 payYear = #{payYear,jdbcType=VARCHAR},
             </if>
@@ -241,12 +247,20 @@
             <if test="lastModifyDate != null">
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
+
+            <if test="relationId != null">
+                relationId = #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationType != null">
+                relationType = #{relationType,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopPayRecord">
     update fop_pay_record
-    set companyId = #{companyId,jdbcType=VARCHAR},
+        set relationId = #{relationId,jdbcType=VARCHAR},
+        relationType = #{relationType,jdbcType=VARCHAR},
       payYear = #{payYear,jdbcType=VARCHAR},
       payQuarter = #{payQuarter,jdbcType=VARCHAR},
       payMonth = #{payMonth,jdbcType=VARCHAR},
