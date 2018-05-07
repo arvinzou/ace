@@ -241,6 +241,8 @@ public class TrafficServiceImpl implements TrafficService {
     private void sendIllegalTrafficMessage(Traffic traffic) {
         try {
             int sendFlag = 1;
+            //websocket 消息指令
+            broadcastWs(traffic);
             //公众号模板消息
             if (1 == sendFlag) {
                 Person person = personService.findVehicleOwner(traffic.getPlateNo());
@@ -270,25 +272,26 @@ public class TrafficServiceImpl implements TrafficService {
                     logger.info("通行记录[" + traffic.getId() + "],发送通知结果：" + sendResult);
                 }
             }
-            //websocket 消息指令
-            String[] keyArray;
-            String rid;
-            String uid;
-            SocketDTO reply = new SocketDTO("system", SocketDTO.ACTION_NOTICE, traffic, "");
-            for (Map.Entry<String, Session> entry : SessionUtils.clients.entrySet()) {
-                keyArray = entry.getKey().split("_");
-//                sendMessage(keyArray[0], keyArray[1], reply.toString());
-                rid = keyArray[0];
-                uid = keyArray[1];
-                if (SessionUtils.hasConnection(rid, uid)) {
-                    //异步推送
-                    SessionUtils.get(rid, uid).getAsyncRemote().sendText(JsonUtil.toJson(reply));
-                }else {
-
-                }
-            }
         } catch (Exception e) {
             logger.info("sendIllegalTrafficMessage.error : {}", e);
+        }
+    }
+
+    private void broadcastWs(Traffic traffic) {
+        String[] keyArray;
+        String rid;
+        String uid;
+        SocketDTO reply = new SocketDTO("system", SocketDTO.ACTION_NOTICE, traffic, "");
+        for (Map.Entry<String, Session> entry : SessionUtils.clients.entrySet()) {
+            keyArray = entry.getKey().split("_");
+//                sendMessage(keyArray[0], keyArray[1], reply.toString());
+            rid = keyArray[0];
+            uid = keyArray[1];
+            if (SessionUtils.hasConnection(rid, uid)) {
+                //异步推送
+                SessionUtils.get(rid, uid).getAsyncRemote().sendText(JsonUtil.toJson(reply));
+            } else {
+            }
         }
     }
 
