@@ -29,4 +29,6 @@ public interface ArticleCategoryDao {
 
     List<Map<String,Object>> getList(Map<String,Object> params);
 
+    List<Map<String,Object>> getListById(String id);
+
 }

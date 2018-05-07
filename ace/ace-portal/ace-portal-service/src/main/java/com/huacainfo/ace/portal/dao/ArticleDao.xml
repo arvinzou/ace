@@ -143,4 +143,16 @@
     ORDER BY sort,createDate
   </select>
 
+  <select id="getListById" resultType="map">
+    select id,title, cover, remark, hrefUrl, tags, mediType, mediUrl,
+    bgMusicUrl, likeNum, hitNum, sort
+    from
+    article where
+    tplPageId =#{pageId,jdbcType=VARCHAR}
+    <if test='category!=null and category!=""'>
+      and articleCategory =#{category,jdbcType=VARCHAR}
+    </if>
+    ORDER BY sort,createDate
+  </select>
+
 </mapper>

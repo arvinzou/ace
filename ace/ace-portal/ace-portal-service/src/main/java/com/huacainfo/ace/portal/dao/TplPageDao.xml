@@ -109,11 +109,57 @@
   </select>
 
   <select id="getList" resultType="map">
-    select id, tplId, name, domainName, shareName, shareCover, shareContent, remark
+    select id, tplId, name, domainName, shareName, shareCover, shareContent, remark,DATE_FORMAT(lastModifyDate,'%Y-%m-%d %T') lastModifyDate
     from
     tpl_page where
     createUserId =#{userId,jdbcType=VARCHAR}
 
     ORDER BY createDate
+  </select>
+
+  <select id="getById" resultType="map">
+    select id, tplId, name, domainName, shareName, shareCover, shareContent, remark,DATE_FORMAT(lastModifyDate,'%Y-%m-%d %T') lastModifyDate
+    from
+    tpl_page where
+    id =#{id,jdbcType=VARCHAR}
+  </select>
+
+  <resultMap id="pageData" type="com.huacainfo.ace.portal.model.PageData">
+    <id property="id" column="id"/>
+    <result property="name" column="name"/>
+    <collection property="articles" ofType="com.huacainfo.ace.portal.model.Article">
+      <id property="id" column="articleId"/>
+      <result column="title" jdbcType="VARCHAR" property="title" />
+      <result column="cover" jdbcType="VARCHAR" property="cover" />
+      <result column="remark" jdbcType="VARCHAR" property="remark" />
+      <result column="hrefUrl" jdbcType="VARCHAR" property="hrefUrl" />
+      <result column="tags" jdbcType="VARCHAR" property="tags" />
+      <result column="mediType" jdbcType="VARCHAR" property="mediType" />
+      <result column="mediUrl" jdbcType="VARCHAR" property="mediUrl" />
+      <result column="bgMusicUrl" jdbcType="VARCHAR" property="bgMusicUrl" />
+      <result column="likeNum" jdbcType="BIGINT" property="likeNum" />
+      <result column="hitNum" jdbcType="BIGINT" property="hitNum" />
+      <result column="sort" jdbcType="INTEGER" property="sort" />
+    </collection>
+  </resultMap>
+  <select id="getPageData" resultMap="pageData">
+    select t.id,t.name,
+    a.id articleId,a.title, a.cover, a.remark, a.hrefUrl, a.tags, a.mediType, a.mediUrl,
+    a.bgMusicUrl, a.likeNum, a.hitNum, a.sort
+    from
+    article_category t
+    left join article a on t.id=a.articleCategory
+    where
+    t.tplPageId =#{pageId,jdbcType=VARCHAR}
+    and a.tplPageId =#{pageId,jdbcType=VARCHAR}
+    ORDER BY t.sort,t.createDate,a.sort,a.createDate
+  </select>
+  <select id="getArticleTopListByPageId" resultType="map">
+    select id,title, cover, remark, hrefUrl
+    from
+    article where
+    tplPageId =#{pageId,jdbcType=VARCHAR}
+    ORDER BY sort,createDate
+    limit 0, 3
   </select>
 </mapper>

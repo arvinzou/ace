@@ -58,6 +58,22 @@ public class WWWPageController extends PortalBaseController {
 
 	@Autowired
 	private ArticleCmtService articleCmtService;
+	/**
+	 *
+	 * @Title:getTplPageById
+	 * @Description:  TODO(根据页面ID获取页面所有数据)
+	 * @param:        @param id
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-07
+	 */
+	@RequestMapping(value = "/getTplPageById.do")
+	@ResponseBody
+	public  Map<String, java.lang.Object> getTplPageById(String id) throws Exception{
+		return tplPageService.getTplPageById(id);
+	}
 
 
 

@@ -100,4 +100,12 @@
     tplPageId =#{pageId,jdbcType=VARCHAR}
     ORDER BY createDate
   </select>
+
+  <select id="getListById" resultType="map">
+    select id,name
+    from
+    article_category where
+    tplPageId =#{id,jdbcType=VARCHAR}
+    ORDER BY sort,createDate
+  </select>
 </mapper>
