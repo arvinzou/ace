@@ -27,8 +27,7 @@
 				<div class="widget-main padding-6">
 					<form action="#" id="fm-search">
 					
-				类别：<input
-							class="easyui-combobox" style="width: 200px" name="category"
+				类别：<input name="category" class="easyui-combobox" style="width: 200px"
 							data-options="
                     url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
                     method:'get',
@@ -36,36 +35,26 @@
                     textField:'name',
                     panelHeight:'auto'">
 
-                     名称： <input name="name" type="text"
-                                        							style="width: 200px;" />
+                     名称： <input name="name" type="text" style="width: 200px;" />
 						<button class="btn btn-info" id="btn-search"
 							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/find$!{bean.name}List">
-							 <i
-								class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+							 <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
 						</button>
-
-						
 					</form>
 					<div class="space10"></div>
 					<div id="toolbar" class="toolbar">
-
-						
 						<button class="btn btn-info" id="btn-view-add"
 							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/insert$!{bean.name}">
-							 <i
-								class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+							 <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
 						</button>
 						<button class="btn btn-info" id="btn-view-edit"
 							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/update$!{bean.name}">
-							 <i
-								class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+							 <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
 						</button>
 						<button class="btn btn-warning" id="btn-view-del"
 							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/delete$!{bean.name}By$!{bean.name}Id">
-							 <i
-								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+							 <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
 						</button>
-						
 					</div>
 				</div>
 			</div>

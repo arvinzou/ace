@@ -27,7 +27,7 @@ public interface $!{bean.name}Service {
     * @author: $!{annotation.authorName}
     * @version: $!{annotation.version}
     */
-    public abstract PageResult
+    PageResult
     <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start, int limit, String orderBy) throws
         Exception;
 
@@ -43,7 +43,7 @@ public interface $!{bean.name}Service {
         * @author: $!{annotation.authorName}
         * @version: $!{annotation.version}
         */
-        public abstract MessageResponse insert$!{bean.name}($!{bean.name} obj,UserProp userProp) throws Exception;
+        MessageResponse insert$!{bean.name}($!{bean.name} obj,UserProp userProp) throws Exception;
 
         /**
         *
@@ -57,7 +57,7 @@ public interface $!{bean.name}Service {
         * @author: $!{annotation.authorName}
         * @version: $!{annotation.version}
         */
-        public abstract MessageResponse update$!{bean.name}($!{bean.name} obj,UserProp userProp) throws Exception;
+        MessageResponse update$!{bean.name}($!{bean.name} obj,UserProp userProp) throws Exception;
         /**
         *
         * @Title:select$!{bean.name}ByPrimaryKey
@@ -69,7 +69,7 @@ public interface $!{bean.name}Service {
         * @author: $!{annotation.authorName}
         * @version: $!{annotation.version}
         */
-        public abstract SingleResult
+        SingleResult
         <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception;
             /**
             *
@@ -83,7 +83,7 @@ public interface $!{bean.name}Service {
             * @author: $!{annotation.authorName}
             * @version: $!{annotation.version}
             */
-            public abstract MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,UserProp userProp) throws
+            MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,UserProp userProp) throws
             Exception;
 
 
