@@ -32,7 +32,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopCompanyService")
 /**
@@ -302,10 +304,12 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     @Override
-    public List<Tree> selectCompanyTreeList(String id, String syid) throws Exception {
-
-        CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
-                this.fopCompanyDao.selectCompanyTreeList(id, syid));
-        return commonTreeUtils.getTreeList(id);
+    public Map<String, Object> selectCompany(Map<String, Object> params) throws Exception {
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, String>> list = this.fopCompanyDao.selectPerson(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+        return rst;
     }
+
 }

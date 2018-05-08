@@ -23,9 +23,15 @@ public interface FopLoanProductDao {
 
     FopLoanProductVo selectVoByPrimaryKey(String id);
 
+    FopLoanProductVo selectVoByPrimaryKeyVo(String id);
+
     List<FopLoanProductVo> findList(@Param("condition") FopLoanProductQVo condition,
                                     @Param("start") int start, @Param("limit") int limit,
                                     @Param("orderBy") String orderBy);
+
+    List<FopLoanProductVo> findListVo(@Param("condition") FopLoanProductQVo condition,
+                                      @Param("start") int start, @Param("limit") int limit,
+                                      @Param("orderBy") String orderBy);
 
 
     int findCount(@Param("condition") FopLoanProductQVo condition);

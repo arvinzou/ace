@@ -27,21 +27,25 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
+                    担保方式：<input
+                        class="easyui-combobox" style="width: 200px" name="suretyType"
                         data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=130&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
-                    panelHeight:'auto'">
+                    panelHeight:'auto'">&nbsp;&nbsp;
 
-                    名称： <input name="name" type="text"
-                               style="width: 200px;"/>
+                    贷款名称： <input name="productName" type="text"
+                                 style="width: 200px;"/>&nbsp;&nbsp;
+                    贷款额度<input name="btmAmount" type="text" style="width: 50px;"/>万元 —
+                    <input name="topAmount" type="text" style="width: 50px;"/>万元&nbsp;&nbsp;
+
+                    贷款年利率<input name="btmRate" type="text" style="width: 50px;"/>% —
+                    <input name="topRate" type="text" style="width: 50px;"/>%
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopLoanProduct/findFopLoanProductList">
-                        <i
-                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
 
 
@@ -134,19 +138,19 @@
         <div class="labelItem"><span class="labelItemHeader">
 贷款利率</span>
             <br>
-            <span id="loadRate">
+            <span id="loanRate">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
 贷款类型</span>
             <br>
-            <span id="loadType">
+            <span id="loanType">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
 贷款年限</span>
             <br>
-            <span id="loadYear">
+            <span id="loanYear">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">

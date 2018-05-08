@@ -61,6 +61,29 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         return rst;
     }
 
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(流程记录分页查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult<FopFinanceProjectVo>
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @Override
+    public PageResult<FopFinanceProjectVo> findFinanceProjectList(FopFinanceProjectQVo condition, int page,
+                                                                  int limit, String orderBy) throws Exception {
+        PageResult<FopFinanceProjectVo> rst = new PageResult<FopFinanceProjectVo>();
+        List<FopFinanceProjectVo> list = this.fopFinanceProjectDao.findListVo(condition, (page - 1) * limit, limit, orderBy);
+        rst.setRows(list);
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:insertFopFinanceProject
@@ -86,9 +109,6 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(o.getCompanyId())) {
             return new MessageResponse(1, "所属公司不能为空！");
         }
-        if (CommonUtils.isBlank(o.getReleaseDate())) {
-            return new MessageResponse(1, "发布日期不能为空！");
-        }
         if (CommonUtils.isBlank(o.getFinanceAmount())) {
             return new MessageResponse(1, "融资金额不能为空！");
         }
@@ -101,17 +121,11 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(o.getYearYield())) {
             return new MessageResponse(1, "预期年收益不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
         int temp = this.fopFinanceProjectDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "流程记录名称重复！");
         }
+        o.setReleaseDate(new Date());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -145,9 +159,6 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(o.getCompanyId())) {
             return new MessageResponse(1, "所属公司不能为空！");
         }
-        if (CommonUtils.isBlank(o.getReleaseDate())) {
-            return new MessageResponse(1, "发布日期不能为空！");
-        }
         if (CommonUtils.isBlank(o.getFinanceAmount())) {
             return new MessageResponse(1, "融资金额不能为空！");
         }
@@ -160,10 +171,6 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(o.getYearYield())) {
             return new MessageResponse(1, "预期年收益不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());

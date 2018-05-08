@@ -51,13 +51,38 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     public PageResult<FopLoanProductVo> findFopLoanProductList(FopLoanProductQVo condition, int start,
                                                                int limit, String orderBy) throws Exception {
         PageResult<FopLoanProductVo> rst = new PageResult<FopLoanProductVo>();
-        List<FopLoanProductVo> list = this.fopLoanProductDao.findList(condition,
+        List<FopLoanProductVo> list = this.fopLoanProductDao.findListVo(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.fopLoanProductDao.findCount(condition);
             rst.setTotal(allRows);
         }
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(通知公告分页查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult<FopLoanProductVo>
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @Override
+    public PageResult<FopLoanProductVo> findLoanProductList(FopLoanProductQVo condition, int page,
+                                                            int limit, String orderBy) throws Exception {
+        PageResult<FopLoanProductVo> rst = new PageResult<FopLoanProductVo>();
+        List<FopLoanProductVo> list = this.fopLoanProductDao.findListVo(condition,
+                (page - 1) * limit, limit, orderBy);
+        rst.setRows(list);
+        int allRows = this.fopLoanProductDao.findCount(condition);
+        rst.setTotal(allRows);
         return rst;
     }
 
@@ -84,31 +109,18 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         if (CommonUtils.isBlank(o.getLoanAmount())) {
             return new MessageResponse(1, "贷款额度不能为空！");
         }
-        if (CommonUtils.isBlank(o.getRateType())) {
-            return new MessageResponse(1, "利率计算方式不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoadRate())) {
+        if (CommonUtils.isBlank(o.getLoanRate())) {
             return new MessageResponse(1, "贷款利率不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLoadType())) {
+        if (CommonUtils.isBlank(o.getLoanType())) {
             return new MessageResponse(1, "贷款类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLoadYear())) {
+        if (CommonUtils.isBlank(o.getLoanYear())) {
             return new MessageResponse(1, "贷款年限不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getRepaymentType())) {
-            return new MessageResponse(1, "还款方式不能为空！");
         }
         if (CommonUtils.isBlank(o.getSuretyType())) {
             return new MessageResponse(1, "担保方式不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
         int temp = this.fopLoanProductDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "通知公告名称重复！");
@@ -117,11 +129,12 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
+        o.setReleaseDate(new Date());
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopLoanProductDao.insertSelective(o);
-        this.dataBaseLogService.log("添加通知公告", "通知公告", "", o.getId(),
-                o.getId(), userProp);
+//        this.dataBaseLogService.log("添加通知公告", "通知公告", "", o.getId(),
+//                o.getId(), userProp);
         return new MessageResponse(0, "添加通知公告完成！");
     }
 
@@ -151,29 +164,17 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         if (CommonUtils.isBlank(o.getLoanAmount())) {
             return new MessageResponse(1, "贷款额度不能为空！");
         }
-        if (CommonUtils.isBlank(o.getRateType())) {
-            return new MessageResponse(1, "利率计算方式不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoadRate())) {
+        if (CommonUtils.isBlank(o.getLoanRate())) {
             return new MessageResponse(1, "贷款利率不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLoadType())) {
+        if (CommonUtils.isBlank(o.getLoanType())) {
             return new MessageResponse(1, "贷款类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLoadYear())) {
+        if (CommonUtils.isBlank(o.getLoanYear())) {
             return new MessageResponse(1, "贷款年限不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getRepaymentType())) {
-            return new MessageResponse(1, "还款方式不能为空！");
         }
         if (CommonUtils.isBlank(o.getSuretyType())) {
             return new MessageResponse(1, "担保方式不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
         }
 
 
@@ -181,8 +182,8 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopLoanProductDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更通知公告", "通知公告", "", o.getId(),
-                o.getId(), userProp);
+//        this.dataBaseLogService.log("变更通知公告", "通知公告", "", o.getId(),
+//                o.getId(), userProp);
         return new MessageResponse(0, "变更通知公告完成！");
     }
 
@@ -199,7 +200,7 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     @Override
     public SingleResult<FopLoanProductVo> selectFopLoanProductByPrimaryKey(String id) throws Exception {
         SingleResult<FopLoanProductVo> rst = new SingleResult<FopLoanProductVo>();
-        rst.setValue(this.fopLoanProductDao.selectVoByPrimaryKey(id));
+        rst.setValue(this.fopLoanProductDao.selectVoByPrimaryKeyVo(id));
         return rst;
     }
 
