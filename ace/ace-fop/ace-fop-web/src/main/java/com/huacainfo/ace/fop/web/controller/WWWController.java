@@ -212,4 +212,15 @@ public class WWWController extends FopBaseController {
                 .insertFopLoanProduct(obj, this.getCurUserProp());
     }
 
+
+    /**
+     * @param: @param id
+     */
+    @RequestMapping(value = "/selectLoanProductByPrimaryKey")
+    @ResponseBody
+    public SingleResult<FopLoanProductVo> selectFopLoanProductByPrimaryKey(String id)
+            throws Exception {
+        return this.fopLoanProductService.selectFopLoanProductByPrimaryKey(id);
+    }
+
 }
