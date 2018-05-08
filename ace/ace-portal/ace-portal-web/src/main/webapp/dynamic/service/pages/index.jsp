@@ -71,7 +71,7 @@
                 <div class="simulator_hd">
                     <h4 class="title">\${item.name}</h4>
                 </div>
-                <iframe src="http://www.xmypage.com//model1.php?pageid=63635" class="list_frame" scrolling="no" onload="sort_overflow_hidden(this)"></iframe>
+                <iframe src="${pageContext.request.contextPath}/www/page/\${item.tplId}/index.jsp" class="list_frame" scrolling="no" onload="sort_overflow_hidden(this)"></iframe>
                 <input type="text" id="pageurlinput_0" value="http://www.xmypage.com/model1_63635.html" class="pageurlinput">
             </div>
             <div class="list_menu">
