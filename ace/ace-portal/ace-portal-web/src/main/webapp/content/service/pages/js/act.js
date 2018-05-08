@@ -41,3 +41,8 @@ function getList(){
     });
 
 }
+function sort_overflow_hidden(th){
+	if(th.contentWindow.document.getElementsByClassName('tab_sort')[0]){
+	    th.contentWindow.document.getElementsByClassName('tab_sort')[0].style.overflow="hidden";
+	}
+}
