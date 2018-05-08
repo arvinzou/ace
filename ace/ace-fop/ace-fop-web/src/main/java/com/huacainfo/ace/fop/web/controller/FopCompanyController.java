@@ -18,7 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/fopCompany")
@@ -133,23 +135,15 @@ public class FopCompanyController extends FopBaseController {
     }
 
 
-    /**
-     * @throws
-     * @Title:selectDepartmentTreeList
-     * @Description: TODO(获取机构树)
-     * @param: @return
-     * @param: @throws Exception
-     * @return: List<Tree>
-     * @author: chenxiaoke
-     * @version: 2016年11月17日 下午1:40:45
-     */
-    @RequestMapping(value = "/selectCompanyTreeList.do")
+    @RequestMapping(value = "/selectCompany")
     @ResponseBody
-    public List<Tree> selectDepartmentTreeList(String id) throws Exception {
-        if (CommonUtils.isBlank(id)) {
-            id = this.getCurUserProp().getCorpId();
+    public Map<String, Object> selectAuthor(String q, String id) throws Exception {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("q", id);
+        if (!CommonUtils.isBlank(q)) {
+            params.put("q", q);
         }
-        List<Tree> list = this.fopCompanyService.selectCompanyTreeList(id, this.getCurUserProp().getActiveSyId());
-        return list;
+        this.logger.info("", params);
+        return this.fopCompanyService.selectCompany(params);
     }
 }

@@ -43,5 +43,6 @@ public interface FopCompanyDao {
                                              @Param("types") String[] types);
 
 
-    public List<Map<String, Object>> selectCompanyTreeList(@Param("pid") String pid, @Param("syid") String syid);
+    List<Map<String, String>> selectPerson(
+            @Param("params") Map<String, Object> params);
 }

@@ -29,6 +29,9 @@ public interface FopFinanceProjectService {
      */
     public abstract PageResult<FopFinanceProjectVo> findFopFinanceProjectList(FopFinanceProjectQVo condition, int start, int limit, String orderBy) throws Exception;
 
+    public abstract PageResult<FopFinanceProjectVo> findFinanceProjectList(FopFinanceProjectQVo condition, int page, int limit, String orderBy) throws Exception;
+
+
     /**
      * @throws
      * @Title:insertFopFinanceProject

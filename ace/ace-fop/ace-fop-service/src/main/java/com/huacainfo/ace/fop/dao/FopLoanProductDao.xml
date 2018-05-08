@@ -9,9 +9,9 @@
         <result column="description" jdbcType="VARCHAR" property="description"/>
         <result column="loanAmount" jdbcType="DECIMAL" property="loanAmount"/>
         <result column="rateType" jdbcType="CHAR" property="rateType"/>
-        <result column="loadRate" jdbcType="DECIMAL" property="loadRate"/>
-        <result column="loadType" jdbcType="CHAR" property="loadType"/>
-        <result column="loadYear" jdbcType="DECIMAL" property="loadYear"/>
+        <result column="loanRate" jdbcType="DECIMAL" property="loanRate"/>
+        <result column="loanType" jdbcType="CHAR" property="loanType"/>
+        <result column="loanYear" jdbcType="CHAR" property="loanYear"/>
         <result column="repaymentType" jdbcType="CHAR" property="repaymentType"/>
         <result column="suretyType" jdbcType="CHAR" property="suretyType"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -25,8 +25,8 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, companyId, areaCode, productName, description, loanAmount, rateType, loadRate, 
-    loadType, loadYear, repaymentType, suretyType, remark, status, createUserId, createUserName,
+        id, companyId, areaCode, productName, description, loanAmount, rateType, loanRate,
+        loanType, loanYear, repaymentType, suretyType, remark, status, createUserId, createUserName,
         createDate, releaseDate,lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -41,16 +41,16 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopLoanProduct">
     insert into fop_loan_product (id, companyId, areaCode, 
-      productName, description, loanAmount, 
-      rateType, loadRate, loadType, 
-      loadYear, repaymentType, suretyType, 
+      productName, description, loanAmount,
+        rateType, loanRate, loanType,
+        loanYear, repaymentType, suretyType,
       remark, status, createUserId,
         createUserName, createDate,releaseDate, lastModifyUserId,
       lastModifyUserName, lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
-      #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{loanAmount,jdbcType=DECIMAL}, 
-      #{rateType,jdbcType=CHAR}, #{loadRate,jdbcType=DECIMAL}, #{loadType,jdbcType=CHAR}, 
-      #{loadYear,jdbcType=DECIMAL}, #{repaymentType,jdbcType=CHAR}, #{suretyType,jdbcType=CHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{loanAmount,jdbcType=DECIMAL},
+        #{rateType,jdbcType=CHAR}, #{loanRate,jdbcType=DECIMAL}, #{loanType,jdbcType=CHAR},
+        #{loanYear,jdbcType=CHAR}, #{repaymentType,jdbcType=CHAR}, #{suretyType,jdbcType=CHAR},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{releaseDate,jdbcType=TIMESTAMP},
         #{lastModifyUserId,jdbcType=VARCHAR},
@@ -80,14 +80,14 @@
             <if test="rateType != null">
                 rateType,
             </if>
-            <if test="loadRate != null">
-                loadRate,
+            <if test="loanRate != null">
+                loanRate,
             </if>
-            <if test="loadType != null">
-                loadType,
+            <if test="loanType != null">
+                loanType,
             </if>
-            <if test="loadYear != null">
-                loadYear,
+            <if test="loanYear != null">
+                loanYear,
             </if>
             <if test="repaymentType != null">
                 repaymentType,
@@ -145,14 +145,14 @@
             <if test="rateType != null">
                 #{rateType,jdbcType=CHAR},
             </if>
-            <if test="loadRate != null">
-                #{loadRate,jdbcType=DECIMAL},
+            <if test="loanRate != null">
+                #{loanRate,jdbcType=DECIMAL},
             </if>
-            <if test="loadType != null">
-                #{loadType,jdbcType=CHAR},
+            <if test="loanType != null">
+                #{loanType,jdbcType=CHAR},
             </if>
-            <if test="loadYear != null">
-                #{loadYear,jdbcType=DECIMAL},
+            <if test="loanYear != null">
+                #{loanYear,jdbcType=CHAR},
             </if>
             <if test="repaymentType != null">
                 #{repaymentType,jdbcType=CHAR},
@@ -210,14 +210,14 @@
             <if test="rateType != null">
                 rateType = #{rateType,jdbcType=CHAR},
             </if>
-            <if test="loadRate != null">
-                loadRate = #{loadRate,jdbcType=DECIMAL},
+            <if test="loanRate != null">
+                loanRate = #{loanRate,jdbcType=DECIMAL},
             </if>
-            <if test="loadType != null">
-                loadType = #{loadType,jdbcType=CHAR},
+            <if test="loanType != null">
+                loanType = #{loanType,jdbcType=CHAR},
             </if>
-            <if test="loadYear != null">
-                loadYear = #{loadYear,jdbcType=DECIMAL},
+            <if test="loanYear != null">
+                loanYear = #{loanYear,jdbcType=CHAR},
             </if>
             <if test="repaymentType != null">
                 repaymentType = #{repaymentType,jdbcType=CHAR},
@@ -263,9 +263,9 @@
       description = #{description,jdbcType=VARCHAR},
       loanAmount = #{loanAmount,jdbcType=DECIMAL},
       rateType = #{rateType,jdbcType=CHAR},
-      loadRate = #{loadRate,jdbcType=DECIMAL},
-      loadType = #{loadType,jdbcType=CHAR},
-      loadYear = #{loadYear,jdbcType=DECIMAL},
+        loanRate = #{loanRate,jdbcType=DECIMAL},
+        loanType = #{loanType,jdbcType=CHAR},
+        loanYear = #{loanYear,jdbcType=CHAR},
       repaymentType = #{repaymentType,jdbcType=CHAR},
       suretyType = #{suretyType,jdbcType=CHAR},
       remark = #{remark,jdbcType=VARCHAR},
@@ -289,12 +289,19 @@
         from fop_loan_product
         where id = #{id,jdbcType=VARCHAR}
     </select>
+    <select id="selectVoByPrimaryKeyVo" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List_Vo"/>
+        <include refid="fromCondition_Vo"/>
+        where f.id = #{id,jdbcType=VARCHAR}
+    </select>
 
-    <select id="findList" resultMap="VoResultMap">
+    <select id="findListVo" resultMap="VoResultMap">
         select m.* from(
         select
-        <include refid="Base_Column_List"/>
-        <include refid="whereCondition"/>
+        <include refid="Base_Column_List_Vo"/>
+        <include refid="fromCondition_Vo"/>
+        <include refid="whereCondition_Vo"/>
         ) m
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -320,20 +327,84 @@
     </select>
 
     <sql id="whereCondition">
-        from fop_loan_product
+        from fop_loan_product f
         where 0=0
         <if test='condition.productName!=null and condition.productName!=""'>
-            and productName like
+            and f.productName like
             concat('%',#{condition.productName,jdbcType=VARCHAR},'%')
         </if>
-        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-
-        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
+        <if test="condition.btmRate!=null and condition.btmRate!=''">
+            and f.loanRate>=#{condition.btmRate,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.topRate!=null and condition.topRate!=''">
+            and f.loanRate&lt;=#{condition.topRate,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.btmAmount!=null and condition.btmAmount!=''">
+            and f.loanAmount>=#{condition.btmAmount,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.topAmount!=null and condition.topAmount!=''">
+            and f.loanAmount&lt;=#{condition.topAmount,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.suretyType!=null and condition.suretyType!=''">
+            and f.suretyType=#{condition.suretyType,jdbcType=CHAR}
+        </if>
+        <if test="condition.loanYear!=null and condition.loanYear!=''">
+            and f.loanYear=#{condition.loanYear,jdbcType=CHAR}
+        </if>
     </sql>
+
+
+    <sql id="Base_Column_List_Vo">
+        f.id, f.companyId, f.areaCode, f.productName, f.description, f.loanAmount, f.rateType, f.loanRate,
+    f.loanType, f.loanYear, f.repaymentType, f.suretyType,  f.remark,f.releaseDate,
+        f.status, f.createUserId, f.createUserName, f.createDate, f.lastModifyUserId, f.lastModifyUserName,
+        f.lastModifyDate, c.fullName as companyName
+    </sql>
+
+    <sql id="fromCondition_Vo">
+        from fop_loan_product f
+        left join fop_company c on f.companyId=c.id
+    </sql>
+    <sql id="whereCondition_Vo">
+        where 0=0
+        <if test='condition.productName!=null and condition.productName!=""'>
+            and f.productName like
+            concat('%',#{condition.productName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.btmRate!=null and condition.btmRate!=''">
+            and f.loanRate>=#{condition.btmRate,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.topRate!=null and condition.topRate!=''">
+            and f.loanRate&lt;=#{condition.topRate,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.btmAmount!=null and condition.btmAmount!=''">
+            and f.loanAmount>=#{condition.btmAmount,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.topAmount!=null and condition.topAmount!=''">
+            and f.loanAmount&lt;=#{condition.topAmount,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.suretyType!=null and condition.suretyType!=''">
+            and f.suretyType=#{condition.suretyType,jdbcType=CHAR}
+        </if>
+        <if test="condition.loanYear!=null and condition.loanYear!=''">
+            and f.loanYear=#{condition.loanYear,jdbcType=CHAR}
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="VoResultMap">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.releaseDate DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 </mapper>

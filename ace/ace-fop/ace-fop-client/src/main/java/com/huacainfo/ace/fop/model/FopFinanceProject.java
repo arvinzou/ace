@@ -25,8 +25,15 @@ FopFinanceProject implements Serializable {
 
     private BigDecimal yearYield;
 
-
     private Long clicks;
+
+    public Long getClicks() {
+        return clicks;
+    }
+
+    public void setClicks(Long clicks) {
+        this.clicks = clicks;
+    }
 
     private Long likes;
 
@@ -121,14 +128,6 @@ FopFinanceProject implements Serializable {
         this.yearYield = yearYield;
     }
 
-
-    public Long getclicks() {
-        return clicks;
-    }
-
-    public void setclicks(Long clicks) {
-        this.clicks = clicks;
-    }
 
     public Long getLikes() {
         return likes;

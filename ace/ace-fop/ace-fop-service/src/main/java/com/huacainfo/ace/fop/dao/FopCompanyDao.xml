@@ -597,11 +597,15 @@
     </select>
 
 
-    <select id="selectCompanyTreeList" resultType="map">
-       SELECT
-	t.id ID,
-	t.fullName TEXT,
-    FROM fop_company t
-        ORDER BY t.fullName
+    <select id="selectPerson" resultType="map">
+        select t.id, t.fullName
+        from fop_company t
+        where 0=0
+        <if test='params.q !=null and params.q!=""'>
+            and
+            t.fullName like concat('%',#{params.q},'%')
+        </if>
+        order by t.createDate
+        limit 0,20
     </select>
 </mapper>

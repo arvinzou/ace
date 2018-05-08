@@ -9,6 +9,7 @@ import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -83,7 +84,7 @@ public interface FopCompanyService {
     public abstract MessageResponse deleteFopCompanyByFopCompanyId(String id, UserProp userProp) throws Exception;
 
 
-    public abstract List<Tree> selectCompanyTreeList(String id, String syid) throws Exception;
+    public Map<String, Object> selectCompany(Map<String, Object> params) throws Exception;
 
 
 }
