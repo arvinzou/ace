@@ -51,7 +51,7 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
     public PageResult<FopFinanceProjectVo> findFopFinanceProjectList(FopFinanceProjectQVo condition, int start,
                                                                      int limit, String orderBy) throws Exception {
         PageResult<FopFinanceProjectVo> rst = new PageResult<FopFinanceProjectVo>();
-        List<FopFinanceProjectVo> list = this.fopFinanceProjectDao.findList(condition,
+        List<FopFinanceProjectVo> list = this.fopFinanceProjectDao.findListVo(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {

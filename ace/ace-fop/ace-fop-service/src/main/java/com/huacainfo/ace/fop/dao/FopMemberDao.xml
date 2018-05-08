@@ -257,4 +257,17 @@
             #{item}
         </foreach>
     </select>
+
+    <select id="selectRoleList" resultType="java.util.Map" parameterType="java.lang.String">
+        SELECT
+        t.role_id, t.role_name, t.create_time,
+        t.create_user_id, t.remark, t.type, t.syid
+        FROM
+        portal.role t
+        WHERE t.syid = #{activeSyId,jdbcType=VARCHAR}
+        AND t.type IN
+        <foreach collection="roleTypes" item="item" open="(" close=")" separator=",">
+            ${item}
+        </foreach>
+    </select>
 </mapper>

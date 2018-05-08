@@ -115,6 +115,7 @@ public class TrafficIllegalServiceImpl implements TrafficIllegalService {
         if (temp > 0) {
             return new MessageResponse(1, "通行违章记录名称重复！");
         }
+
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());

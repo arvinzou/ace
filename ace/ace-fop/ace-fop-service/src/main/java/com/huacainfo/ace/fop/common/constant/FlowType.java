@@ -11,5 +11,6 @@ public interface FlowType {
     String MEMBER_JOIN_COMPANY = "0";
     String MEMBER_JOIN_ASSOCIATION = "1";
     String MEMBER_PAY = "2";
-    String MEMBER_QUIT = "3";
+    String MEMBER_QUIT_COMPANY = "3";
+    String MEMBER_QUIT_ASSOCIATION = "4";
 }

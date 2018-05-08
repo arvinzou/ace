@@ -6,28 +6,32 @@ import java.util.Date;
 /**
  * @author HuaCai003
  */
-public class FopFlowRecord implements Serializable {
-    private static final long serialVersionUID = -8050637412256192872L;
+public class FopQuestion implements Serializable {
+    private static final long serialVersionUID = -5574944998022479242L;
     private String id;
 
-    private String fromId;
+    private String companyId;
 
-    private String flowType;
+    private String title;
 
-    private String personId;
-    /**
-     * 0 - 通过，1 -不通过
-     */
-    private String auditResult;
+    private String sourceId;
 
-    private String auditOpinion;
+    private String sourceType;
 
-    private Date auditDate;
+    private String subType;
+
+    private String parentId;
+
+    private Date releaseDate;
+
+    private String reply;
+
+    private String keyWord;
+
+    private Long accCount;
 
     private String remark;
-    /**
-     * 1-未审核，2-已审核
-     */
+
     private String status;
 
     private String createUserId;
@@ -50,52 +54,84 @@ public class FopFlowRecord implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getFromId() {
-        return fromId;
+    public String getCompanyId() {
+        return companyId;
     }
 
-    public void setFromId(String fromId) {
-        this.fromId = fromId == null ? null : fromId.trim();
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId == null ? null : companyId.trim();
     }
 
-    public String getFlowType() {
-        return flowType;
+    public String getTitle() {
+        return title;
     }
 
-    public void setFlowType(String flowType) {
-        this.flowType = flowType == null ? null : flowType.trim();
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
-    public String getPersonId() {
-        return personId;
+    public String getSourceId() {
+        return sourceId;
     }
 
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
+    public void setSourceId(String sourceId) {
+        this.sourceId = sourceId == null ? null : sourceId.trim();
     }
 
-    public String getAuditResult() {
-        return auditResult;
+    public String getSourceType() {
+        return sourceType;
     }
 
-    public void setAuditResult(String auditResult) {
-        this.auditResult = auditResult == null ? null : auditResult.trim();
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType == null ? null : sourceType.trim();
     }
 
-    public String getAuditOpinion() {
-        return auditOpinion;
+    public String getSubType() {
+        return subType;
     }
 
-    public void setAuditOpinion(String auditOpinion) {
-        this.auditOpinion = auditOpinion == null ? null : auditOpinion.trim();
+    public void setSubType(String subType) {
+        this.subType = subType == null ? null : subType.trim();
     }
 
-    public Date getAuditDate() {
-        return auditDate;
+    public String getParentId() {
+        return parentId;
     }
 
-    public void setAuditDate(Date auditDate) {
-        this.auditDate = auditDate;
+    public void setParentId(String parentId) {
+        this.parentId = parentId == null ? null : parentId.trim();
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply == null ? null : reply.trim();
+    }
+
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord == null ? null : keyWord.trim();
+    }
+
+    public Long getAccCount() {
+        return accCount;
+    }
+
+    public void setAccCount(Long accCount) {
+        this.accCount = accCount;
     }
 
     public String getRemark() {

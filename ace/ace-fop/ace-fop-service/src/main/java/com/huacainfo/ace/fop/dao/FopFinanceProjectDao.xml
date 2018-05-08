@@ -11,9 +11,7 @@
         <result column="financeAmount" jdbcType="DECIMAL" property="financeAmount"/>
         <result column="financeYear" jdbcType="VARCHAR" property="financeYear"/>
         <result column="yearYield" jdbcType="DECIMAL" property="yearYield"/>
-        <result column="dayClicks" jdbcType="BIGINT" property="dayClicks"/>
-        <result column="weekClicks" jdbcType="BIGINT" property="weekClicks"/>
-        <result column="monthClicks" jdbcType="BIGINT" property="monthClicks"/>
+        <result column="clicks" jdbcType="BIGINT" property="clicks"/>
         <result column="likes" jdbcType="BIGINT" property="likes"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -28,9 +26,15 @@
 
     <sql id="Base_Column_List">
         id, financeTitle, financeCode, areaCode, companyId, releaseDate, financeAmount,
-        financeYear, yearYield, dayClicks, weekClicks, monthClicks, likes, remark,
+        financeYear, yearYield, clicks, likes, remark,
     status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
     lastModifyDate, financeContent
+  </sql>
+    <sql id="Base_Column_List_Vo">
+        f.id, f.financeTitle, f.financeCode, f.areaCode, f.companyId, f.releaseDate, f.financeAmount,
+        f.financeYear, f.yearYield, f.clicks, f.likes, f.remark,
+    f.status, f.createUserId, f.createUserName, f.createDate, f.lastModifyUserId, f.lastModifyUserName,
+    f.lastModifyDate, f.financeContent,c.fullName as companyName
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -46,8 +50,8 @@
     insert into fop_finance_project (id, financeTitle, financeCode, 
       areaCode, companyId, releaseDate,
         financeAmount,
-      financeYear, yearYield, dayClicks, 
-      weekClicks, monthClicks, likes, 
+        financeYear, yearYield,
+        clicks, likes,
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate, financeContent
@@ -55,8 +59,8 @@
     values (#{id,jdbcType=VARCHAR}, #{financeTitle,jdbcType=VARCHAR}, #{financeCode,jdbcType=VARCHAR}, 
       #{areaCode,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP},
         #{financeAmount,jdbcType=DECIMAL},
-      #{financeYear,jdbcType=VARCHAR}, #{yearYield,jdbcType=DECIMAL}, #{dayClicks,jdbcType=BIGINT}, 
-      #{weekClicks,jdbcType=BIGINT}, #{monthClicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT}, 
+        #{financeYear,jdbcType=VARCHAR}, #{yearYield,jdbcType=DECIMAL},
+        #{clicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{financeContent,jdbcType=LONGVARCHAR}
@@ -92,14 +96,8 @@
             <if test="yearYield != null">
                 yearYield,
             </if>
-            <if test="dayClicks != null">
-                dayClicks,
-            </if>
-            <if test="weekClicks != null">
-                weekClicks,
-            </if>
-            <if test="monthClicks != null">
-                monthClicks,
+            <if test="clicks != null">
+                clicks,
             </if>
             <if test="likes != null">
                 likes,
@@ -160,14 +158,8 @@
             <if test="yearYield != null">
                 #{yearYield,jdbcType=DECIMAL},
             </if>
-            <if test="dayClicks != null">
-                #{dayClicks,jdbcType=BIGINT},
-            </if>
-            <if test="weekClicks != null">
-                #{weekClicks,jdbcType=BIGINT},
-            </if>
-            <if test="monthClicks != null">
-                #{monthClicks,jdbcType=BIGINT},
+            <if test="clicks != null">
+                #{clicks,jdbcType=BIGINT},
             </if>
             <if test="likes != null">
                 #{likes,jdbcType=BIGINT},
@@ -228,14 +220,8 @@
             <if test="yearYield != null">
                 yearYield = #{yearYield,jdbcType=DECIMAL},
             </if>
-            <if test="dayClicks != null">
-                dayClicks = #{dayClicks,jdbcType=BIGINT},
-            </if>
-            <if test="weekClicks != null">
-                weekClicks = #{weekClicks,jdbcType=BIGINT},
-            </if>
-            <if test="monthClicks != null">
-                monthClicks = #{monthClicks,jdbcType=BIGINT},
+            <if test="clicks != null">
+                clicks = #{clicks,jdbcType=BIGINT},
             </if>
             <if test="likes != null">
                 likes = #{likes,jdbcType=BIGINT},
@@ -280,9 +266,7 @@
       financeAmount = #{financeAmount,jdbcType=DECIMAL},
       financeYear = #{financeYear,jdbcType=VARCHAR},
       yearYield = #{yearYield,jdbcType=DECIMAL},
-      dayClicks = #{dayClicks,jdbcType=BIGINT},
-      weekClicks = #{weekClicks,jdbcType=BIGINT},
-      monthClicks = #{monthClicks,jdbcType=BIGINT},
+        clicks = #{clicks,jdbcType=BIGINT},
       likes = #{likes,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
@@ -323,6 +307,24 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
+    <select id="findListVo" resultMap="VoResultMap">
+        select m.* from(
+        select
+        <include refid="Base_Column_List_Vo"/>
+        <include refid="fromCondition_Vo"/>
+        <include refid="whereCondition_Vo"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.releaseDate DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
         <include refid="whereCondition"/>
@@ -351,6 +353,18 @@
         <!--and name like-->
         <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
         <!--</if>-->
+    </sql>
+
+    <sql id="fromCondition_Vo">
+        from fop_finance_project f
+        left join fop_company c on f.companyId=c.id
+    </sql>
+    <sql id="whereCondition_Vo">
+        where 0=0
+        <if test='condition.financeTitle!=null and condition.financeTitle!=""'>
+            and f.financeTitle like
+            concat('%',#{condition.financeTitle,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
 </mapper>

@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @author: Arvin
  * @version: 2018-05-02
- * @Description: TODO(支付记录)
+ * @Description: (缴费记录)
  */
 public class FopPayRecordServiceImpl implements FopPayRecordService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -37,7 +37,7 @@ public class FopPayRecordServiceImpl implements FopPayRecordService {
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(支付记录分页查询)
+     * @Description: (缴费记录分页查询)
      * @param: @param condition
      * @param: @param start
      * @param: @param limit
@@ -64,7 +64,7 @@ public class FopPayRecordServiceImpl implements FopPayRecordService {
     /**
      * @throws
      * @Title:insertFopPayRecord
-     * @Description: TODO(添加支付记录)
+     * @Description: (添加缴费记录)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -75,50 +75,29 @@ public class FopPayRecordServiceImpl implements FopPayRecordService {
     @Override
     public MessageResponse insertFopPayRecord(FopPayRecord o, UserProp userProp)
             throws Exception {
-        if (CommonUtils.isBlank(o.getCompanyId())) {
-            return new MessageResponse(1, "企业ID不能为空！");
+        if (CommonUtils.isBlank(o.getRelationId())) {
+            return new MessageResponse(1, "关联ID不能为空！");
         }
-        if (CommonUtils.isBlank(o.getPayYear())) {
-            return new MessageResponse(1, "缴费年度不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getPayCategory())) {
-            return new MessageResponse(1, "缴费项目不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getPayLevel())) {
-            return new MessageResponse(1, "缴费级别不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getPayAmount())) {
-            return new MessageResponse(1, "缴纳金额不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getDendline())) {
-            return new MessageResponse(1, "有效截止日期不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
+        if (CommonUtils.isBlank(o.getRelationType())) {
+            return new MessageResponse(1, "关联类型不能为空！");
         }
 
-        int temp = this.fopPayRecordDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "支付记录名称重复！");
-        }
+
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopPayRecordDao.insertSelective(o);
-        this.dataBaseLogService.log("添加支付记录", "支付记录", "", o.getId(),
+        this.dataBaseLogService.log("添加缴费记录", "缴费记录", "", o.getId(),
                 o.getId(), userProp);
-        return new MessageResponse(0, "添加支付记录完成！");
+        return new MessageResponse(0, "添加缴费记录完成！");
     }
 
     /**
      * @throws
      * @Title:updateFopPayRecord
-     * @Description: TODO(更新支付记录)
+     * @Description: (更新缴费记录)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -132,8 +111,11 @@ public class FopPayRecordServiceImpl implements FopPayRecordService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCompanyId())) {
-            return new MessageResponse(1, "企业ID不能为空！");
+        if (CommonUtils.isBlank(o.getRelationId())) {
+            return new MessageResponse(1, "关联ID不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getRelationType())) {
+            return new MessageResponse(1, "关联类型不能为空！");
         }
         if (CommonUtils.isBlank(o.getPayYear())) {
             return new MessageResponse(1, "缴费年度不能为空！");
@@ -150,27 +132,20 @@ public class FopPayRecordServiceImpl implements FopPayRecordService {
         if (CommonUtils.isBlank(o.getDendline())) {
             return new MessageResponse(1, "有效截止日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopPayRecordDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更支付记录", "支付记录", "", o.getId(),
+        this.dataBaseLogService.log("变更缴费记录", "缴费记录", "", o.getId(),
                 o.getId(), userProp);
-        return new MessageResponse(0, "变更支付记录完成！");
+        return new MessageResponse(0, "变更缴费记录完成！");
     }
 
     /**
      * @throws
      * @Title:selectFopPayRecordByPrimaryKey
-     * @Description: TODO(获取支付记录)
+     * @Description: (获取缴费记录)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<FopPayRecord>
@@ -187,7 +162,7 @@ public class FopPayRecordServiceImpl implements FopPayRecordService {
     /**
      * @throws
      * @Title:deleteFopPayRecordByFopPayRecordId
-     * @Description: TODO(删除支付记录)
+     * @Description: (删除缴费记录)
      * @param: @param id
      * @param: @param userProp
      * @param: @throws Exception
@@ -199,8 +174,24 @@ public class FopPayRecordServiceImpl implements FopPayRecordService {
     public MessageResponse deleteFopPayRecordByFopPayRecordId(String id,
                                                               UserProp userProp) throws Exception {
         this.fopPayRecordDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除支付记录", "支付记录", String.valueOf(id),
-                String.valueOf(id), "支付记录", userProp);
-        return new MessageResponse(0, "支付记录删除完成！");
+        this.dataBaseLogService.log("删除缴费记录", "缴费记录", String.valueOf(id),
+                String.valueOf(id), "缴费记录", userProp);
+        return new MessageResponse(0, "缴费记录删除完成！");
+    }
+
+
+    /**
+     * 功能描述: 添加缴费记录
+     *
+     * @param record   支付流水
+     * @param userProp 操作员
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/7 16:18
+     */
+    @Override
+    public MessageResponse submitPayRecord(FopPayRecord record, UserProp userProp) throws Exception {
+
+        return insertFopPayRecord(record, userProp);
     }
 }

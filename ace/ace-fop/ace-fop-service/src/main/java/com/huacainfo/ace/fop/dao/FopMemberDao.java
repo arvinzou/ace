@@ -6,6 +6,7 @@ import com.huacainfo.ace.fop.vo.FopMemberVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FopMemberDao {
 
@@ -42,5 +43,8 @@ public interface FopMemberDao {
     List<FopMember> selectByRelationType(@Param("relationType") String relationType,
                                          @Param("relationId") String relationId,
                                          @Param("status") String[] status);
+
+    List<Map<String, Object>> selectRoleList(@Param("activeSyId") String activeSyId,
+                                             @Param("roleTypes") String[] roleTypes);
 
 }

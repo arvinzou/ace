@@ -209,4 +209,52 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopFlowRecordVo">
+
+    </resultMap>
+    <sql id="Vo_Column_List">
+        id, fromId, flowType, personId, auditResult, auditOpinion, auditDate, remark, status,
+        createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from fop_flow_record
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_flow_record
+        where 1 = 1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
+        select count(*)
+        from fop_flow_record
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
 </mapper>
