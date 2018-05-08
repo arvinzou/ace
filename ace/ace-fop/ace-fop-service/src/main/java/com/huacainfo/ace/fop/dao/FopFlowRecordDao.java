@@ -31,4 +31,6 @@ public interface FopFlowRecordDao {
 
     int isExit(FopFlowRecord record);
 
+    FopFlowRecord findByFromId(@Param("fromId") String fromId,
+                               @Param("flowType") String flowType);
 }

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.fop.dao.FopFlowRecordDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopFlowRecord">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopGeHelpDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopGeHelp">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="fromId" jdbcType="VARCHAR" property="fromId"/>
-        <result column="flowType" jdbcType="CHAR" property="flowType"/>
-        <result column="personId" jdbcType="VARCHAR" property="personId"/>
-        <result column="auditResult" jdbcType="CHAR" property="auditResult"/>
-        <result column="auditOpinion" jdbcType="VARCHAR" property="auditOpinion"/>
-        <result column="auditDate" jdbcType="TIMESTAMP" property="auditDate"/>
+        <result column="requestId" jdbcType="VARCHAR" property="requestId"/>
+        <result column="requestType" jdbcType="CHAR" property="requestType"/>
+        <result column="parentId" jdbcType="VARCHAR" property="parentId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="reply" jdbcType="VARCHAR" property="reply"/>
+        <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
+        <result column="keyWord" jdbcType="VARCHAR" property="keyWord"/>
+        <result column="accCount" jdbcType="BIGINT" property="accCount"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -19,56 +21,63 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, fromId, flowType, personId, auditResult, auditOpinion, auditDate, remark, status, 
-    createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    id, requestId, requestType, parentId, title, reply, releaseDate, keyWord, accCount, 
+    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fop_flow_record
+        from fop_ge_help
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from fop_flow_record
+    delete from fop_ge_help
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
-    insert into fop_flow_record (id, fromId, flowType, 
-      personId, auditResult, auditOpinion, 
-      auditDate, remark, status, 
-      createUserId, createUserName, createDate, 
-      lastModifyUserId, lastModifyUserName, lastModifyDate
-      )
-    values (#{id,jdbcType=VARCHAR}, #{fromId,jdbcType=VARCHAR}, #{flowType,jdbcType=CHAR}, 
-      #{personId,jdbcType=VARCHAR}, #{auditResult,jdbcType=CHAR}, #{auditOpinion,jdbcType=VARCHAR}, 
-      #{auditDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
-      )
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
+    insert into fop_ge_help (id, requestId, requestType, 
+      parentId, title, reply, 
+      releaseDate, keyWord, accCount, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{requestId,jdbcType=VARCHAR}, #{requestType,jdbcType=CHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR}, 
+      #{releaseDate,jdbcType=TIMESTAMP}, #{keyWord,jdbcType=VARCHAR}, #{accCount,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
-        insert into fop_flow_record
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
+        insert into fop_ge_help
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="fromId != null">
-                fromId,
+            <if test="requestId != null">
+                requestId,
             </if>
-            <if test="flowType != null">
-                flowType,
+            <if test="requestType != null">
+                requestType,
             </if>
-            <if test="personId != null">
-                personId,
+            <if test="parentId != null">
+                parentId,
             </if>
-            <if test="auditResult != null">
-                auditResult,
+            <if test="title != null">
+                title,
             </if>
-            <if test="auditOpinion != null">
-                auditOpinion,
+            <if test="reply != null">
+                reply,
             </if>
-            <if test="auditDate != null">
-                auditDate,
+            <if test="releaseDate != null">
+                releaseDate,
+            </if>
+            <if test="keyWord != null">
+                keyWord,
+            </if>
+            <if test="accCount != null">
+                accCount,
             </if>
             <if test="remark != null">
                 remark,
@@ -99,23 +108,29 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="fromId != null">
-                #{fromId,jdbcType=VARCHAR},
+            <if test="requestId != null">
+                #{requestId,jdbcType=VARCHAR},
             </if>
-            <if test="flowType != null">
-                #{flowType,jdbcType=CHAR},
+            <if test="requestType != null">
+                #{requestType,jdbcType=CHAR},
             </if>
-            <if test="personId != null">
-                #{personId,jdbcType=VARCHAR},
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
             </if>
-            <if test="auditResult != null">
-                #{auditResult,jdbcType=CHAR},
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
             </if>
-            <if test="auditOpinion != null">
-                #{auditOpinion,jdbcType=VARCHAR},
+            <if test="reply != null">
+                #{reply,jdbcType=VARCHAR},
             </if>
-            <if test="auditDate != null">
-                #{auditDate,jdbcType=TIMESTAMP},
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="keyWord != null">
+                #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="accCount != null">
+                #{accCount,jdbcType=BIGINT},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -143,26 +158,32 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
-        update fop_flow_record
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
+        update fop_ge_help
         <set>
-            <if test="fromId != null">
-                fromId = #{fromId,jdbcType=VARCHAR},
+            <if test="requestId != null">
+                requestId = #{requestId,jdbcType=VARCHAR},
             </if>
-            <if test="flowType != null">
-                flowType = #{flowType,jdbcType=CHAR},
+            <if test="requestType != null">
+                requestType = #{requestType,jdbcType=CHAR},
             </if>
-            <if test="personId != null">
-                personId = #{personId,jdbcType=VARCHAR},
+            <if test="parentId != null">
+                parentId = #{parentId,jdbcType=VARCHAR},
             </if>
-            <if test="auditResult != null">
-                auditResult = #{auditResult,jdbcType=CHAR},
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="auditOpinion != null">
-                auditOpinion = #{auditOpinion,jdbcType=VARCHAR},
+            <if test="reply != null">
+                reply = #{reply,jdbcType=VARCHAR},
             </if>
-            <if test="auditDate != null">
-                auditDate = #{auditDate,jdbcType=TIMESTAMP},
+            <if test="releaseDate != null">
+                releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="keyWord != null">
+                keyWord = #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="accCount != null">
+                accCount = #{accCount,jdbcType=BIGINT},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -191,14 +212,16 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
-    update fop_flow_record
-    set fromId = #{fromId,jdbcType=VARCHAR},
-      flowType = #{flowType,jdbcType=CHAR},
-      personId = #{personId,jdbcType=VARCHAR},
-      auditResult = #{auditResult,jdbcType=CHAR},
-      auditOpinion = #{auditOpinion,jdbcType=VARCHAR},
-      auditDate = #{auditDate,jdbcType=TIMESTAMP},
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
+    update fop_ge_help
+    set requestId = #{requestId,jdbcType=VARCHAR},
+      requestType = #{requestType,jdbcType=CHAR},
+      parentId = #{parentId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      reply = #{reply,jdbcType=VARCHAR},
+      releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+      keyWord = #{keyWord,jdbcType=VARCHAR},
+      accCount = #{accCount,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -210,24 +233,20 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopFlowRecordVo">
-        <result column="requestName" jdbcType="CHAR" property="requestName"/>
-    </resultMap>
     <sql id="Vo_Column_List">
-        CASE
-        when t.flowType = '0'
-        then (select fullName from fop.fop_company where id = t.fromId)
-        when t.flowType = '1'
-        then (select fullName from fop.fop_association where id = t.fromId)
-        END as requestName
-        ,
-        t.id, t.fromId, t.flowType, t.personId, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
-        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        t.id, t.requestId, t.requestType, t.parentId, t.title, t.reply, t.releaseDate, t.keyWord, t.accCount,
+        t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
+        t.lastModifyDate
     </sql>
-    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopGeHelpVo">
+
+    </resultMap>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
-        from fop_flow_record
+        <include refid="Base_Column_List"/>
+        from fop_ge_help
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -240,14 +259,14 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY createDate
+                ORDER BY t.createDate
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
     <sql id="whereCondition">
-        from fop_flow_record t
+        from fop_ge_help t
         where 1 = 1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
@@ -256,21 +275,12 @@
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
         select count(*)
-        from fop_flow_record
+        from fop_ge_help
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
         <include refid="whereCondition"/>
-    </select>
-
-
-    <select id="findByFromId" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from fop_flow_record
-        where fromId = #{fromId,jdbcType=VARCHAR}
-        and flowType = #{flowType,jdbcType=VARCHAR}
     </select>
 </mapper>

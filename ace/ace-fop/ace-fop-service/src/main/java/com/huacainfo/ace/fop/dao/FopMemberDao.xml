@@ -253,7 +253,7 @@
         where relationType = #{relationType,jdbcType=VARCHAR}
         and relationId = #{relationId,jdbcType=VARCHAR}
         and status in
-        <foreach collection="stauts" open="(" separator="," close=")" item="item">
+        <foreach collection="status" open="(" separator="," close=")" item="item">
             #{item}
         </foreach>
     </select>

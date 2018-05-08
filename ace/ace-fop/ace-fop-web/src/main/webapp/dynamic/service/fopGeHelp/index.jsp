@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>流程记录</title>
+    <title>政企服务</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -27,9 +27,9 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    流程类别：<input name="category" class="easyui-combobox" style="width: 200px"
-                                data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=129&selected=false',
+                    类别：<input name="category" class="easyui-combobox" style="width: 200px"
+                              data-options="
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
@@ -37,16 +37,28 @@
 
                     名称： <input name="name" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/fopFlowRecord/findFopFlowRecordList">
+                            authority="${pageContext.request.contextPath}/fopGeHelp/findFopGeHelpList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
+                    <%--<button class="btn btn-info" id="btn-view-add"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopGeHelp/insertFopGeHelp">--%>
+                    <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
+                    <button class="btn btn-info" id="btn-view-edit"
+                            authority="${pageContext.request.contextPath}/fopGeHelp/updateFopGeHelp">
+                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <%--<button class="btn btn-warning" id="btn-view-del"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopGeHelp/deleteFopGeHelpByFopGeHelpId">--%>
+                    <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
 
                     <button class="btn btn-purple" id="btn-view-audit"
-                            authority="${pageContext.request.contextPath}/fopFlowRecord/audit">
-                        <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
+                            authority="${pageContext.request.contextPath}/fopGeHelp/audit">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
                 </div>
             </div>
@@ -56,6 +68,8 @@
     <table id="grid-table"></table>
 
     <div id="grid-pager"></div>
+
+
 </div>
 <div id="dialog-message" class="hide">
     <div id="uploader">
@@ -75,34 +89,44 @@
             <span id="id"></span>
         </div>
         <div class="labelItem hide">
-            <span class="labelItemHeader">记录来源ID</span>
+            <span class="labelItemHeader">发起人ID</span>
             <br>
-            <span id="fromId"></span>
+            <span id="requestId"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">发起人类型</span>
+            <br>
+            <span id="requestType"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">父节点ID</span>
+            <br>
+            <span id="parentId"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">流程类型</span>
+            <span class="labelItemHeader">标题</span>
             <br>
-            <span id="flowType"></span>
+            <span id="title"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">审核人</span>
+            <span class="labelItemHeader">回复内容</span>
             <br>
-            <span id="personId"></span>
+            <span id="reply"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">审核结果</span>
+            <span class="labelItemHeader">发布时间</span>
             <br>
-            <span id="auditResult"></span>
+            <span id="releaseDate"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">审核意见</span>
+            <span class="labelItemHeader">所含关键字</span>
             <br>
-            <span id="auditOpinion"></span>
+            <span id="keyWord"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">审核时间</span>
+            <span class="labelItemHeader">累计提问次数</span>
             <br>
-            <span id="auditDate"></span>
+            <span id="accCount"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">备注</span>
@@ -151,10 +175,14 @@
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
-<script src="${pageContext.request.contextPath}/content/service/flowRecord/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/flowRecord/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/flowRecord/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/flowRecord/view.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/service/fopGeHelp/config.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/service/fopGeHelp/model.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/service/fopGeHelp/controller.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/service/fopGeHelp/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

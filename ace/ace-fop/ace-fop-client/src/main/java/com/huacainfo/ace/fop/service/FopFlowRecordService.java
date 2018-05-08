@@ -83,9 +83,9 @@ public interface FopFlowRecordService {
     /**
      * 提交流程记录
      *
-     * @param flowType    流程类型  ： FlowType.java
-     * @param fromId      来源ID
-     * @param userProp    操作人
+     * @param flowType 流程类型  ： FlowType.java
+     * @param fromId   来源ID
+     * @param userProp 操作人
      * @return 处理结果
      */
     MessageResponse submitFlowRecord(String flowType, String fromId, UserProp userProp) throws Exception;
@@ -98,5 +98,16 @@ public interface FopFlowRecordService {
      * @auther: Arvin Zou
      * @date: 2018/5/7 11:45
      */
-    MessageResponse audit(FopFlowRecord record, UserProp curUserProp);
+    MessageResponse audit(FopFlowRecord record, UserProp curUserProp) throws Exception;
+
+    /**
+     * 功能描述: 查询流程记录
+     *
+     * @param fromId   来源ID
+     * @param flowType 流程类型
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 14:20
+     */
+    FopFlowRecord findByFromId(String fromId, String flowType);
 }

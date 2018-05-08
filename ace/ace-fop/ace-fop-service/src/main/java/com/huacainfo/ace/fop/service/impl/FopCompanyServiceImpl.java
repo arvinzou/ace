@@ -157,7 +157,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     /**
-     *
      * 功能描述: 自动提交缴费记录
      *
      * @param:
@@ -168,7 +167,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     private MessageResponse submitPayRecord(FopCompanyVo o, UserProp userProp) throws Exception {
         FopPayRecord payRecord = new FopPayRecord();
         payRecord.setRelationId(o.getId());
-        payRecord.setRelationType(PayType.PAY_TYPE_MEMBER_JOIN);
+        payRecord.setRelationType(PayType.PAY_TYPE_MEMBER_JOIN_COMPANY);
+        payRecord.setPayCategory(PayType.PAY_CATEGORY_MEMBER_JOIN);
+        payRecord.setPayDate(DateUtil.getNowDate());
 
         return fopPayRecordService.submitPayRecord(payRecord, userProp);
     }

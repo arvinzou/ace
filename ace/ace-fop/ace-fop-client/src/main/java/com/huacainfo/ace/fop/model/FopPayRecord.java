@@ -32,6 +32,9 @@ public class FopPayRecord implements Serializable {
 
     private Date dendline;
 
+    /**
+     * 0-未缴纳，1-已缴纳
+     */
     private String payResult;
 
     private String remark;

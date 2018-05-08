@@ -108,7 +108,7 @@ public interface FopMemberService {
      * @auther: Arvin Zou
      * @date: 2018/5/5 12:12
      */
-    MessageResponse memberJoinAudit(FopMember params, String flowType, String auditResult, UserProp userProp) throws Exception;
+    MessageResponse memberJoinAudit(FopMember params, UserProp userProp) throws Exception;
 
     /**
      * @param relationType 关联类型  0-企业会员 1-团体会员
