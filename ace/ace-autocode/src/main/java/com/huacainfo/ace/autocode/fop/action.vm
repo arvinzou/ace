@@ -25,7 +25,7 @@ import com.huacainfo.ace.fop.vo.$!{bean.name}QVo;
 * @version: $!{annotation.version}
 * @Description:  TODO($!{bean.tableChineseName})
 */
-public class $!{bean.name}Controller extends fopBaseController {
+public class $!{bean.name}Controller extends FopBaseController {
 
 
 private static final long serialVersionUID = 1L;
@@ -49,18 +49,17 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
     @RequestMapping(value = "/find$!{bean.name}List")
     @ResponseBody
     public PageResult
-    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition,
-        PageParamNoChangeSord page) throws Exception {
+    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult
         <$!{bean.name}Vo> rst = this.$!{bean.lowerName}Service
-            .find$!{bean.name}List(condition, page.getStart(), page.getLimit(),
-            page.getOrderBy());
+            .find$!{bean.name}List(condition, page.getStart(), page.getLimit(), page.getOrderBy());
             if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
             }
 
             return rst;
             }
+
             /**
             *
             * @Title:insert$!{bean.name}
@@ -76,9 +75,9 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
             @ResponseBody
             public MessageResponse insert$!{bean.name}(String jsons) throws Exception {
             $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
-            return this.$!{bean.lowerName}Service
-            .insert$!{bean.name}(obj, this.getCurUserProp());
+            return this.$!{bean.lowerName}Service.insert$!{bean.name}(obj, this.getCurUserProp());
             }
+
             /**
             *
             * @Title:update$!{bean.name}
@@ -94,9 +93,9 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
             @ResponseBody
             public MessageResponse update$!{bean.name}(String jsons) throws Exception {
             $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
-            return this.$!{bean.lowerName}Service
-            .update$!{bean.name}(obj, this.getCurUserProp());
+            return this.$!{bean.lowerName}Service.update$!{bean.name}(obj, this.getCurUserProp());
             }
+
             /**
             *
             * @Title:select$!{bean.name}ByPrimaryKey
@@ -111,8 +110,7 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
             @RequestMapping(value = "/select$!{bean.name}ByPrimaryKey")
             @ResponseBody
             public SingleResult
-            <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id)
-                throws Exception {
+            <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id)throws Exception {
                 return this.$!{bean.lowerName}Service.select$!{bean.name}ByPrimaryKey(id);
                 }
                 /**
@@ -128,11 +126,9 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 */
                 @RequestMapping(value = "/delete$!{bean.name}By$!{bean.name}Id")
                 @ResponseBody
-                public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String jsons)
-                throws Exception {
+                public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String jsons) throws Exception {
                 JSONObject json = JSON.parseObject(jsons);
                 String id = json.getString("id");
-                return this.$!{bean.lowerName}Service.delete$!{bean.name}By$!{bean.name}Id(id,
-                this.getCurUserProp());
+                return this.$!{bean.lowerName}Service.delete$!{bean.name}By$!{bean.name}Id(id, this.getCurUserProp());
                 }
                 }

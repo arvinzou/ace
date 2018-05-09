@@ -58,6 +58,7 @@ public interface $!{bean.name}Service {
         * @version: $!{annotation.version}
         */
         MessageResponse update$!{bean.name}($!{bean.name} obj,UserProp userProp) throws Exception;
+
         /**
         *
         * @Title:select$!{bean.name}ByPrimaryKey
@@ -71,6 +72,7 @@ public interface $!{bean.name}Service {
         */
         SingleResult
         <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception;
+
             /**
             *
             * @Title:delete$!{bean.name}By$!{bean.name}Id
@@ -83,8 +85,6 @@ public interface $!{bean.name}Service {
             * @author: $!{annotation.authorName}
             * @version: $!{annotation.version}
             */
-            MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,UserProp userProp) throws
-            Exception;
-
+            MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,UserProp userProp) throws Exception;
 
             }

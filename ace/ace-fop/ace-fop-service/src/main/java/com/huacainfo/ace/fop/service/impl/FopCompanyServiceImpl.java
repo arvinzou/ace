@@ -286,7 +286,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     @Override
     public MessageResponse deleteFopCompanyByFopCompanyId(String id,
                                                           UserProp userProp) throws Exception {
-
         FopCompany company = fopCompanyDao.selectByPrimaryKey(id);
         if (null == company) {
             return new MessageResponse(ResultCode.FAIL, "无效企业编号");
@@ -311,5 +310,4 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         rst.put("rows", list);
         return rst;
     }
-
 }

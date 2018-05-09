@@ -4,6 +4,7 @@ package com.huacainfo.ace.fop.service.impl;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -69,13 +70,9 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      * @throws Exception
      */
     @Override
-    public PageResult<FopNoticeVo> findNoticeList(FopNoticeQVo condition, String sort, int start, int limit) throws Exception {
-        if (!CommonUtils.isBlank(sort)) {
-            sort = "releaseDate asc";
-        }
-        PageResult<FopNoticeVo> rst = new PageResult<FopNoticeVo>();
-        List<FopNoticeVo> list = this.fopNoticeDao.findList(condition, (start - 1) * limit, limit, sort);
-        rst.setRows(list);
+    public ResultResponse findNoticeList(FopNoticeQVo condition, int page, int limit, String orderBy) throws Exception {
+        List<FopNoticeVo> list = this.fopNoticeDao.findList(condition, (page - 1) * limit, limit, orderBy);
+        ResultResponse rst = new ResultResponse(0, "信息公告列表", list);
         return rst;
     }
 
@@ -84,14 +81,14 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      *
      */
     @Override
-    public PageResult<FopNoticeVo> homepageNoticeList() throws Exception {
+    public ResultResponse homepageNoticeList() throws Exception {
         FopNoticeQVo condition = new FopNoticeQVo();
-        PageResult<FopNoticeVo> rst = new PageResult<FopNoticeVo>();
+        ResultResponse rst = new ResultResponse(0, "首页信息列表");
         condition.setTop("1");
         List<FopNoticeVo> toplist = this.fopNoticeDao.findList(condition, 0, 4, null);
         condition.setTop("0");
         toplist.addAll(this.fopNoticeDao.findList(condition, 0, 7, null));
-        rst.setRows(toplist);
+        rst.setData(toplist);
         return rst;
     }
 
@@ -184,6 +181,13 @@ public class FopNoticeServiceImpl implements FopNoticeService {
                 <FopNoticeVo> rst = new SingleResult
                 <FopNoticeVo>();
         rst.setValue(this.fopNoticeDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
+
+    @Override
+    public ResultResponse selectNoticeByPrimaryKey(String id) throws Exception {
+        ResultResponse rst = new ResultResponse(0, "信息公告详情", this.fopNoticeDao.selectVoByPrimaryKey(id));
         return rst;
     }
 
