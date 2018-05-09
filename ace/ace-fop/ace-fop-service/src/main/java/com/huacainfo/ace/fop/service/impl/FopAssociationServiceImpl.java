@@ -119,7 +119,8 @@ public class FopAssociationServiceImpl implements FopAssociationService {
                 o.getId(), userProp);
 
         //自动提交会员申请流程
-        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(FlowType.MEMBER_JOIN_ASSOCIATION, o.getId(), userProp);
+        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
+                FlowType.MEMBER_JOIN_ASSOCIATION, o.getId(), userProp);
         if (ResultCode.FAIL == rs3.getStatus()) {
             return rs3;
         }

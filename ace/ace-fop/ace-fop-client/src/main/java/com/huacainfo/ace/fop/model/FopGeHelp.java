@@ -3,6 +3,19 @@ package com.huacainfo.ace.fop.model;
 import java.util.Date;
 
 public class FopGeHelp {
+    /**
+     * 接待和协调科室
+     */
+    private String optDeptName;
+    /**
+     * 经办领导
+     */
+    private String optLeaderName;
+    /**
+     * 服务进展
+     */
+    private String processDetail;
+
     private String id;
 
     private String requestId;
@@ -39,6 +52,30 @@ public class FopGeHelp {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getOptDeptName() {
+        return optDeptName;
+    }
+
+    public void setOptDeptName(String optDeptName) {
+        this.optDeptName = optDeptName;
+    }
+
+    public String getOptLeaderName() {
+        return optLeaderName;
+    }
+
+    public void setOptLeaderName(String optLeaderName) {
+        this.optLeaderName = optLeaderName;
+    }
+
+    public String getProcessDetail() {
+        return processDetail;
+    }
+
+    public void setProcessDetail(String processDetail) {
+        this.processDetail = processDetail;
+    }
 
     public String getId() {
         return id;

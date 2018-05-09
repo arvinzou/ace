@@ -51,10 +51,10 @@
                             authority="${pageContext.request.contextPath}/fopGeHelp/updateFopGeHelp">
                         <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
-                    <%--<button class="btn btn-warning" id="btn-view-del"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopGeHelp/deleteFopGeHelpByFopGeHelpId">--%>
-                    <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
+                        <button class="btn btn-warning" id="btn-view-del"
+                                authority="${pageContext.request.contextPath}/fopGeHelp/deleteFopGeHelpByFopGeHelpId">
+                            <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                        </button>
 
                     <button class="btn btn-purple" id="btn-view-audit"
                             authority="${pageContext.request.contextPath}/fopGeHelp/audit">

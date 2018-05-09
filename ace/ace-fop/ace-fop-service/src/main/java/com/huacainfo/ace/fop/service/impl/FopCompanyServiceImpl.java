@@ -4,12 +4,10 @@ package com.huacainfo.ace.fop.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -145,7 +143,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
                 o.getId(), userProp);
 
         //自动提交会员申请流程
-        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
+        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
+                FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
         if (ResultCode.FAIL == rs3.getStatus()) {
             return rs3;
         }

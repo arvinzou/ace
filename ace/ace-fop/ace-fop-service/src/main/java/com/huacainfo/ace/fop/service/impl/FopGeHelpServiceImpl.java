@@ -1,6 +1,8 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -8,8 +10,12 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.fop.common.constant.AuditResult;
+import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.dao.FopGeHelpDao;
+import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopGeHelp;
+import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopGeHelpService;
 import com.huacainfo.ace.fop.vo.FopGeHelpQVo;
 import com.huacainfo.ace.fop.vo.FopGeHelpVo;
@@ -34,6 +40,8 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
     private FopGeHelpDao fopGeHelpDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private FopFlowRecordService fopFlowRecordService;
 
     /**
      * @throws
@@ -122,6 +130,14 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
+        FopGeHelp fopGeHelp = fopGeHelpDao.selectByPrimaryKey(o.getId());
+        if (null == fopGeHelp) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        o.setRequestId(fopGeHelp.getRequestId());
+        o.setRequestType(fopGeHelp.getRequestType());
+        o.setParentId(fopGeHelp.getParentId());
+
         if (CommonUtils.isBlank(o.getRequestId())) {
             return new MessageResponse(1, "发起人ID不能为空！");
         }
@@ -177,6 +193,9 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
     public MessageResponse deleteFopGeHelpByFopGeHelpId(String id, UserProp userProp) throws Exception {
 
         FopGeHelp fopGeHelp = fopGeHelpDao.selectByPrimaryKey(id);
+        if (null == fopGeHelp) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
         fopGeHelp.setStatus("-1");
         fopGeHelp.setLastModifyUserId(userProp.getUserId());
         fopGeHelp.setLastModifyUserName(userProp.getName());
@@ -199,7 +218,35 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
      * @date: 2018/5/8 18:18
      */
     @Override
-    public MessageResponse audit(String id, UserProp userProp) {
-        return null;
+    public MessageResponse audit(String id, UserProp userProp) throws Exception {
+        FopGeHelp fopGeHelp = fopGeHelpDao.selectByPrimaryKey(id);
+        if (null == fopGeHelp) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失");
+        }
+        if (fopGeHelp.getStatus().equals("2")) {
+            return new MessageResponse(ResultCode.FAIL, "请勿重复发布");
+        }
+        //提交审核流程
+        String flowId = GUIDUtil.getGUID();
+        MessageResponse rs = fopFlowRecordService.submitFlowRecord(flowId, FlowType.GE_HELP, id, userProp);
+        if (ResultCode.FAIL == rs.getStatus()) {
+            return rs;
+        }
+        //自动审核通过
+        FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
+        record.setAuditResult(AuditResult.PASS);
+        record.setAuditOpinion("系统自动审核");
+        record.setRemark("系统自动审核");
+        MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getErrorMessage());
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "发布成功");
+    }
+
+    @Override
+    public FopGeHelp selectByPrimaryKey(String id) {
+        return fopGeHelpDao.selectByPrimaryKey(id);
     }
 }

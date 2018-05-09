@@ -89,5 +89,7 @@ public interface FopGeHelpService {
      * @auther: Arvin Zou
      * @date: 2018/5/8 18:18
      */
-    MessageResponse audit(String id, UserProp curUserProp);
+    MessageResponse audit(String id, UserProp curUserProp) throws Exception;
+
+    FopGeHelp selectByPrimaryKey(String fromId);
 }

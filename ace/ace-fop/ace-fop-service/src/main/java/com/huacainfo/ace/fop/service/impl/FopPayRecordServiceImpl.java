@@ -246,7 +246,8 @@ public class FopPayRecordServiceImpl implements FopPayRecordService {
             return new MessageResponse(ResultCode.FAIL, "缴费记录信息不全,请补充完整");
         }
         //提交流程，并审核通过
-        MessageResponse rs = fopFlowRecordService.submitFlowRecord(FlowType.MEMBER_PAY, payRecord.getId(), userProp);
+        MessageResponse rs = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
+                FlowType.MEMBER_PAY, payRecord.getId(), userProp);
         if (ResultCode.FAIL == rs.getStatus()) {
             return rs;
         }

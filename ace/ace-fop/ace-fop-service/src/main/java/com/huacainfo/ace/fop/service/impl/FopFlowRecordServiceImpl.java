@@ -8,7 +8,6 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
@@ -16,6 +15,7 @@ import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopFlowRecordDao;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
+import com.huacainfo.ace.fop.service.FopGeHelpService;
 import com.huacainfo.ace.fop.service.FopMemberService;
 import com.huacainfo.ace.fop.service.FopPayRecordService;
 import com.huacainfo.ace.fop.vo.FopFlowRecordQVo;
@@ -50,6 +50,8 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     private FopAssociationDao fopAssociationDao;
     @Autowired
     private FopPayRecordService fopPayRecordService;
+    @Autowired
+    private FopGeHelpService fopGeHelpService;
 
     /**
      * @throws
@@ -113,7 +115,6 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
 //        }
 
 
-//        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -220,12 +221,12 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
      * @return 处理结果
      */
     @Override
-    public MessageResponse submitFlowRecord(String flowType, String fromId,
+    public MessageResponse submitFlowRecord(String flowId, String flowType, String fromId,
                                             UserProp userProp) throws Exception {
 
         //插入审核流程
         FopFlowRecord flowRecord = new FopFlowRecord();
-        flowRecord.setId(GUIDUtil.getGUID());
+        flowRecord.setId(flowId);
         flowRecord.setFromId(fromId);
         flowRecord.setFlowType(flowType);
 //        flowRecord.setPersonId(userProp.getUserId());
@@ -285,6 +286,9 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
             case FlowType.MEMBER_QUIT_ASSOCIATION:
                 rs = null;// TODO: 2018/5/7 团体会员退会审核
                 break;
+            case FlowType.GE_HELP:
+                rs = geHelpRelease(record, userProp);// 政企服务审核
+                break;
             default:
                 rs = null;
                 break;
@@ -305,6 +309,32 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         this.dataBaseLogService.log("变更流程记录", "流程记录", "",
                 record.getId(), record.getId(), userProp);
         return new MessageResponse(0, "流程审核成功");
+    }
+
+    /**
+     * 功能描述:  政企服务发布审核
+     *
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/9 11:23
+     */
+    private MessageResponse geHelpRelease(FopFlowRecord record, UserProp userProp) throws Exception {
+        if (AuditResult.PASS.equals(record.getAuditResult())) {
+            FopGeHelp fopGeHelp = fopGeHelpService.selectByPrimaryKey(record.getFromId());
+            if (null == fopGeHelp) {
+                return new MessageResponse(ResultCode.FAIL, "记录丢失");
+            }
+
+            //状态变更
+            fopGeHelp.setStatus("2");
+
+            return fopGeHelpService.updateFopGeHelp(fopGeHelp, userProp);
+        }
+
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+
     }
 
     /**
@@ -345,6 +375,11 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     public FopFlowRecord findByFromId(String fromId, String flowType) {
 
         return fopFlowRecordDao.findByFromId(fromId, flowType);
+    }
+
+    @Override
+    public FopFlowRecord selectByPrimaryKey(String flowId) {
+        return fopFlowRecordDao.selectByPrimaryKey(flowId);
     }
 
     /**

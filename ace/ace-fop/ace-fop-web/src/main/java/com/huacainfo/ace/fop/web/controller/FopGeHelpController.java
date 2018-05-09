@@ -143,7 +143,7 @@ public class FopGeHelpController extends FopBaseController {
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
-    public MessageResponse audit(String id) {
+    public MessageResponse audit(String id) throws Exception {
         if (CommonUtils.isEmpty(id)) {
             return new MessageResponse(ResultCode.FAIL, "缺少必备参数");
         }

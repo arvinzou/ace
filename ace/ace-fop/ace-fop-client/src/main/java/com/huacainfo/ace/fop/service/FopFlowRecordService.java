@@ -88,7 +88,7 @@ public interface FopFlowRecordService {
      * @param userProp 操作人
      * @return 处理结果
      */
-    MessageResponse submitFlowRecord(String flowType, String fromId, UserProp userProp) throws Exception;
+    MessageResponse submitFlowRecord(String flowId, String flowType, String fromId, UserProp userProp) throws Exception;
 
     /**
      * 功能描述: 流程审核
@@ -110,4 +110,6 @@ public interface FopFlowRecordService {
      * @date: 2018/5/8 14:20
      */
     FopFlowRecord findByFromId(String fromId, String flowType);
+
+    FopFlowRecord selectByPrimaryKey(String flowId);
 }
