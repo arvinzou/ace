@@ -280,7 +280,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopLoanProductVo">
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo. ">
 
     </resultMap>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">

@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopNotice;
 import com.huacainfo.ace.fop.vo.FopNoticeQVo;
@@ -67,8 +68,9 @@ public interface FopNoticeService {
      * @author: Arvin
      * @version: 2018-05-03
      */
-    public abstract SingleResult
-            <FopNoticeVo> selectFopNoticeByPrimaryKey(String id) throws Exception;
+    public abstract SingleResult<FopNoticeVo> selectFopNoticeByPrimaryKey(String id) throws Exception;
+
+    public abstract ResultResponse selectNoticeByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -83,10 +85,10 @@ public interface FopNoticeService {
      */
     public abstract MessageResponse deleteFopNoticeByFopNoticeId(String id, UserProp userProp) throws Exception;
 
-    public abstract PageResult<FopNoticeVo> findNoticeList(FopNoticeQVo condition, String sort, int start, int limit) throws Exception;
+    public abstract ResultResponse findNoticeList(FopNoticeQVo condition, int page, int limit, String orderBy) throws Exception;
 
 
-    public abstract PageResult<FopNoticeVo> homepageNoticeList() throws Exception;
+    public abstract ResultResponse homepageNoticeList() throws Exception;
 
 
 }
