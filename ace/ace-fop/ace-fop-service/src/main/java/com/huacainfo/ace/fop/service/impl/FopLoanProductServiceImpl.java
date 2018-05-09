@@ -100,9 +100,6 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     @Override
     public MessageResponse insertFopLoanProduct(FopLoanProduct o, UserProp userProp)
             throws Exception {
-        if (CommonUtils.isBlank(o.getCompanyId())) {
-            return new MessageResponse(1, "所属公司不能为空！");
-        }
         if (CommonUtils.isBlank(o.getProductName())) {
             return new MessageResponse(1, "产品名称不能为空！");
         }
@@ -154,9 +151,6 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
             throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getCompanyId())) {
-            return new MessageResponse(1, "所属公司不能为空！");
         }
         if (CommonUtils.isBlank(o.getProductName())) {
             return new MessageResponse(1, "产品名称不能为空！");

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.dao.FopLawPaperDao;
@@ -64,7 +65,7 @@ public class WWWController extends FopBaseController {
      * @param page  页码
      * @param limit 每页数目
      * @param title 搜索关键字
-     * @param sort  排序 null：降序，不为null：升序
+     * @param sord  排序 null：降序，asc：升序
      * @param noticeType  信息类型 1、市场信息 2、产品信息 3、项目信息 4 、招商信息
      * @return return rst;
      *
@@ -72,9 +73,11 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/findNoticeList")
     @ResponseBody
-    public PageResult<FopNoticeVo> findFopNoticeList(FopNoticeQVo condition, int page, int limit, String sort) throws Exception {
-        PageResult<FopNoticeVo> rst = this.fopNoticeService.findNoticeList(condition, sort, page, limit);
-        return rst;
+    public ResultResponse findFopNoticeList(FopNoticeQVo condition, PageParamNoChangeSord page) throws Exception {
+        if (page.getSord().equals("asc")) {
+            page.setOrderBy("releaseDate");
+        }
+        return this.fopNoticeService.findNoticeList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
     }
 
 
@@ -83,9 +86,9 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/selectNoticeByPrimaryKey")
     @ResponseBody
-    public SingleResult<FopNoticeVo> selectFopNoticeByPrimaryKey(String id)
+    public ResultResponse selectFopNoticeByPrimaryKey(String id)
             throws Exception {
-        return this.fopNoticeService.selectFopNoticeByPrimaryKey(id);
+        return this.fopNoticeService.selectNoticeByPrimaryKey(id);
     }
 
 
@@ -97,8 +100,8 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/homepageNoticeList")
     @ResponseBody
-    public PageResult<FopNoticeVo> homepageNoticeList() throws Exception {
-        PageResult<FopNoticeVo> rst = this.fopNoticeService.homepageNoticeList();
+    public ResultResponse homepageNoticeList() throws Exception {
+        ResultResponse rst = this.fopNoticeService.homepageNoticeList();
         return rst;
     }
 
