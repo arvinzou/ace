@@ -5,12 +5,12 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
         <result column="relationType" jdbcType="CHAR" property="relationType"/>
-        <result column="resCategroy" jdbcType="CHAR" property="resCategroy"/>
+        <result column="resCategory" jdbcType="CHAR" property="resCategory"/>
         <result column="resName" jdbcType="VARCHAR" property="resName"/>
         <result column="resSize" jdbcType="VARCHAR" property="resSize"/>
         <result column="resUrl" jdbcType="VARCHAR" property="resUrl"/>
         <result column="resType" jdbcType="VARCHAR" property="resType"/>
-        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="sequence" jdbcType="INTEGER" property="sequence"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -21,7 +21,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, relationId, relationType, resCategroy, resName, resSize, resUrl, resType, sort, 
+        id, relationId, relationType, resCategory, resName, resSize, resUrl, resType, sequence,
     remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
     lastModifyDate
   </sql>
@@ -36,15 +36,15 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopResource">
-    insert into fop_resource (id, relationId, relationType, 
-      resCategroy, resName, resSize, 
-      resUrl, resType, sort, 
+    insert into fop_resource (id, relationId, relationType,
+        resCategory, resName, resSize,
+        resUrl, resType, sequence,
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR}, 
-      #{resCategroy,jdbcType=CHAR}, #{resName,jdbcType=VARCHAR}, #{resSize,jdbcType=VARCHAR}, 
-      #{resUrl,jdbcType=VARCHAR}, #{resType,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR},
+        #{resCategory,jdbcType=CHAR}, #{resName,jdbcType=VARCHAR}, #{resSize,jdbcType=VARCHAR},
+        #{resUrl,jdbcType=VARCHAR}, #{resType,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
@@ -61,8 +61,8 @@
             <if test="relationType != null">
                 relationType,
             </if>
-            <if test="resCategroy != null">
-                resCategroy,
+            <if test="resCategory != null">
+                resCategory,
             </if>
             <if test="resName != null">
                 resName,
@@ -76,8 +76,8 @@
             <if test="resType != null">
                 resType,
             </if>
-            <if test="sort != null">
-                sort,
+            <if test="sequence != null">
+                sequence,
             </if>
             <if test="remark != null">
                 remark,
@@ -114,8 +114,8 @@
             <if test="relationType != null">
                 #{relationType,jdbcType=CHAR},
             </if>
-            <if test="resCategroy != null">
-                #{resCategroy,jdbcType=CHAR},
+            <if test="resCategory != null">
+                #{resCategory,jdbcType=CHAR},
             </if>
             <if test="resName != null">
                 #{resName,jdbcType=VARCHAR},
@@ -129,8 +129,8 @@
             <if test="resType != null">
                 #{resType,jdbcType=VARCHAR},
             </if>
-            <if test="sort != null">
-                #{sort,jdbcType=INTEGER},
+            <if test="sequence != null">
+                #{sequence,jdbcType=INTEGER},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -167,8 +167,8 @@
             <if test="relationType != null">
                 relationType = #{relationType,jdbcType=CHAR},
             </if>
-            <if test="resCategroy != null">
-                resCategroy = #{resCategroy,jdbcType=CHAR},
+            <if test="resCategory != null">
+                resCategory = #{resCategory,jdbcType=CHAR},
             </if>
             <if test="resName != null">
                 resName = #{resName,jdbcType=VARCHAR},
@@ -182,8 +182,8 @@
             <if test="resType != null">
                 resType = #{resType,jdbcType=VARCHAR},
             </if>
-            <if test="sort != null">
-                sort = #{sort,jdbcType=INTEGER},
+            <if test="sequence != null">
+                sequence = #{sequence,jdbcType=INTEGER},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -216,12 +216,12 @@
     update fop_resource
     set relationId = #{relationId,jdbcType=VARCHAR},
       relationType = #{relationType,jdbcType=CHAR},
-      resCategroy = #{resCategroy,jdbcType=CHAR},
+        resCategory = #{resCategory,jdbcType=CHAR},
       resName = #{resName,jdbcType=VARCHAR},
       resSize = #{resSize,jdbcType=VARCHAR},
       resUrl = #{resUrl,jdbcType=VARCHAR},
       resType = #{resType,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER},
+        sequence = #{sequence,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},

@@ -82,13 +82,13 @@ public class FopResourceServiceImpl implements FopResourceService {
         if (CommonUtils.isBlank(o.getRelationType())) {
             return new MessageResponse(1, "关联类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getResCategroy())) {
+        if (CommonUtils.isBlank(o.getResCategory())) {
             return new MessageResponse(1, "资源分类不能为空！");
         }
         if (CommonUtils.isBlank(o.getResType())) {
             return new MessageResponse(1, "资源类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSort())) {
+        if (CommonUtils.isBlank(o.getSequence())) {
             return new MessageResponse(1, "显示排序不能为空！");
         }
         if (CommonUtils.isBlank(o.getStatus())) {
@@ -137,13 +137,13 @@ public class FopResourceServiceImpl implements FopResourceService {
         if (CommonUtils.isBlank(o.getRelationType())) {
             return new MessageResponse(1, "关联类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getResCategroy())) {
+        if (CommonUtils.isBlank(o.getResCategory())) {
             return new MessageResponse(1, "资源分类不能为空！");
         }
         if (CommonUtils.isBlank(o.getResType())) {
             return new MessageResponse(1, "资源类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSort())) {
+        if (CommonUtils.isBlank(o.getSequence())) {
             return new MessageResponse(1, "显示排序不能为空！");
         }
         if (CommonUtils.isBlank(o.getStatus())) {

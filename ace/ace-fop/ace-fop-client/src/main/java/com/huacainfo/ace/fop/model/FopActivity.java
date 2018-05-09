@@ -1,24 +1,21 @@
 package com.huacainfo.ace.fop.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author HuaCai003
- */
-public class FopCompanyActivity implements Serializable {
-    private static final long serialVersionUID = -6865213493936475233L;
+public class FopActivity {
     private String id;
 
-    private String companyId;
+    private String relationId;
+
+    private String relationType;
 
     private String activityType;
 
     private String title;
 
-    private String category;
-
     private Date releaseDate;
+
+    private String category;
 
     private String remark;
 
@@ -36,7 +33,7 @@ public class FopCompanyActivity implements Serializable {
 
     private Date lastModifyDate;
 
-    private String description;
+    private String content;
 
     public String getId() {
         return id;
@@ -46,12 +43,20 @@ public class FopCompanyActivity implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getCompanyId() {
-        return companyId;
+    public String getRelationId() {
+        return relationId;
     }
 
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId == null ? null : companyId.trim();
+    public void setRelationId(String relationId) {
+        this.relationId = relationId == null ? null : relationId.trim();
+    }
+
+    public String getRelationType() {
+        return relationType;
+    }
+
+    public void setRelationType(String relationType) {
+        this.relationType = relationType == null ? null : relationType.trim();
     }
 
     public String getActivityType() {
@@ -70,20 +75,20 @@ public class FopCompanyActivity implements Serializable {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
-    }
-
     public Date getReleaseDate() {
         return releaseDate;
     }
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category == null ? null : category.trim();
     }
 
     public String getRemark() {
@@ -150,11 +155,11 @@ public class FopCompanyActivity implements Serializable {
         this.lastModifyDate = lastModifyDate;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 }

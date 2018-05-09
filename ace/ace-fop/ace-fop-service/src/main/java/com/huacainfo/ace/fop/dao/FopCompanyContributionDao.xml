@@ -7,7 +7,7 @@
         <result column="contributionType" jdbcType="CHAR" property="contributionType"/>
         <result column="itemCode" jdbcType="VARCHAR" property="itemCode"/>
         <result column="itemName" jdbcType="VARCHAR" property="itemName"/>
-        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="sequence" jdbcType="INTEGER" property="sequence"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -22,7 +22,7 @@
         <result column="itemValue" jdbcType="LONGVARCHAR" property="itemValue"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, companyId, contributionType, itemCode, itemName, sort, remark, status, createUserId, 
+        id, companyId, contributionType, itemCode, itemName, sequence, remark, status, createUserId,
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <sql id="Blob_Column_List">
@@ -41,14 +41,14 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopCompanyContribution">
-    insert into fop_company_contribution (id, companyId, contributionType, 
-      itemCode, itemName, sort, 
+    insert into fop_company_contribution (id, companyId, contributionType,
+        itemCode, itemName, sequence,
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate, itemValue
       )
-    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{contributionType,jdbcType=CHAR}, 
-      #{itemCode,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{contributionType,jdbcType=CHAR},
+        #{itemCode,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{itemValue,jdbcType=LONGVARCHAR}
@@ -72,8 +72,8 @@
             <if test="itemName != null">
                 itemName,
             </if>
-            <if test="sort != null">
-                sort,
+            <if test="sequence != null">
+                sequence,
             </if>
             <if test="remark != null">
                 remark,
@@ -119,8 +119,8 @@
             <if test="itemName != null">
                 #{itemName,jdbcType=VARCHAR},
             </if>
-            <if test="sort != null">
-                #{sort,jdbcType=INTEGER},
+            <if test="sequence != null">
+                #{sequence,jdbcType=INTEGER},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -166,8 +166,8 @@
             <if test="itemName != null">
                 itemName = #{itemName,jdbcType=VARCHAR},
             </if>
-            <if test="sort != null">
-                sort = #{sort,jdbcType=INTEGER},
+            <if test="sequence != null">
+                sequence = #{sequence,jdbcType=INTEGER},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -205,7 +205,7 @@
       contributionType = #{contributionType,jdbcType=CHAR},
       itemCode = #{itemCode,jdbcType=VARCHAR},
       itemName = #{itemName,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER},
+        sequence = #{sequence,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -223,7 +223,7 @@
       contributionType = #{contributionType,jdbcType=CHAR},
       itemCode = #{itemCode,jdbcType=VARCHAR},
       itemName = #{itemName,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER},
+        sequence = #{sequence,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},

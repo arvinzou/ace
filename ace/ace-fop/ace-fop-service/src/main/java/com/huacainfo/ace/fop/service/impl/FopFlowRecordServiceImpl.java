@@ -14,10 +14,7 @@ import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopFlowRecordDao;
 import com.huacainfo.ace.fop.model.*;
-import com.huacainfo.ace.fop.service.FopFlowRecordService;
-import com.huacainfo.ace.fop.service.FopGeHelpService;
-import com.huacainfo.ace.fop.service.FopMemberService;
-import com.huacainfo.ace.fop.service.FopPayRecordService;
+import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.FopFlowRecordQVo;
 import com.huacainfo.ace.fop.vo.FopFlowRecordVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -52,6 +49,8 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     private FopPayRecordService fopPayRecordService;
     @Autowired
     private FopGeHelpService fopGeHelpService;
+    @Autowired
+    private FopActivityService fopActivityService;
 
     /**
      * @throws
@@ -289,6 +288,9 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
             case FlowType.GE_HELP:
                 rs = geHelpRelease(record, userProp);// 政企服务审核
                 break;
+            case FlowType.PARTY_WORK:
+                rs = partWork(record, userProp);// 党建工作发布审核
+                break;
             default:
                 rs = null;
                 break;
@@ -309,6 +311,31 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         this.dataBaseLogService.log("变更流程记录", "流程记录", "",
                 record.getId(), record.getId(), userProp);
         return new MessageResponse(0, "流程审核成功");
+    }
+
+    /**
+     * 功能描述: 党建工作发布审核
+     *
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/9 15:49
+     */
+    private MessageResponse partWork(FopFlowRecord record, UserProp userProp) throws Exception {
+        if (AuditResult.PASS.equals(record.getAuditResult())) {
+            FopActivity activity = fopActivityService.selectByPrimaryKey(record.getFromId());
+            if (null == activity) {
+                return new MessageResponse(ResultCode.FAIL, "记录丢失");
+            }
+
+            //状态变更
+            activity.setStatus("2");
+
+            return fopActivityService.updateFopActivity(activity, userProp);
+        }
+
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 
     /**

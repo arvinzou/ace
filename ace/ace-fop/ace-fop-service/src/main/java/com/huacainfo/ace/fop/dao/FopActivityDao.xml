@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.fop.dao.FopCompanyActivityDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopCompanyActivity">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopActivityDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopActivity">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
+        <result column="relationType" jdbcType="CHAR" property="relationType"/>
         <result column="activityType" jdbcType="CHAR" property="activityType"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="category" jdbcType="CHAR" property="category"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -16,46 +17,51 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
-        <result column="description" jdbcType="LONGVARCHAR" property="description"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
-
     <sql id="Base_Column_List">
-    id, companyId, activityType, title, category, releaseDate, remark, status, createUserId, 
-    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
+    id, relationId, relationType, activityType, title, releaseDate, category, remark, 
+    status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    lastModifyDate, content
   </sql>
-
+    <sql id="Blob_Column_List">
+    content
+  </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fop_company_activity
+        from fop_activity
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from fop_company_activity
+    delete from fop_activity
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopCompanyActivity">
-    insert into fop_company_activity (id, companyId, activityType, 
-      title, category, releaseDate, 
-      remark, status, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate, description
-      )
-    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{activityType,jdbcType=CHAR}, 
-      #{title,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
-      )
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopActivity">
+    insert into fop_activity (id, relationId, relationType, 
+      activityType, title, releaseDate, 
+      category, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate, 
+      content)
+    values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR}, 
+      #{activityType,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
+      #{category,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopCompanyActivity">
-        insert into fop_company_activity
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopActivity">
+        insert into fop_activity
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="companyId != null">
-                companyId,
+            <if test="relationId != null">
+                relationId,
+            </if>
+            <if test="relationType != null">
+                relationType,
             </if>
             <if test="activityType != null">
                 activityType,
@@ -63,11 +69,11 @@
             <if test="title != null">
                 title,
             </if>
-            <if test="category != null">
-                category,
-            </if>
             <if test="releaseDate != null">
                 releaseDate,
+            </if>
+            <if test="category != null">
+                category,
             </if>
             <if test="remark != null">
                 remark,
@@ -93,16 +99,19 @@
             <if test="lastModifyDate != null">
                 lastModifyDate,
             </if>
-            <if test="description != null">
-                description,
+            <if test="content != null">
+                content,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationType != null">
+                #{relationType,jdbcType=CHAR},
             </if>
             <if test="activityType != null">
                 #{activityType,jdbcType=CHAR},
@@ -110,11 +119,11 @@
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
             </if>
-            <if test="category != null">
-                #{category,jdbcType=CHAR},
-            </if>
             <if test="releaseDate != null">
                 #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=CHAR},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -140,16 +149,19 @@
             <if test="lastModifyDate != null">
                 #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="description != null">
-                #{description,jdbcType=LONGVARCHAR},
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopCompanyActivity">
-        update fop_company_activity
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopActivity">
+        update fop_activity
         <set>
-            <if test="companyId != null">
-                companyId = #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                relationId = #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationType != null">
+                relationType = #{relationType,jdbcType=CHAR},
             </if>
             <if test="activityType != null">
                 activityType = #{activityType,jdbcType=CHAR},
@@ -157,11 +169,11 @@
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="category != null">
-                category = #{category,jdbcType=CHAR},
-            </if>
             <if test="releaseDate != null">
                 releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="category != null">
+                category = #{category,jdbcType=CHAR},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -187,19 +199,21 @@
             <if test="lastModifyDate != null">
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="description != null">
-                description = #{description,jdbcType=LONGVARCHAR},
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopCompanyActivity">
-    update fop_company_activity
-    set companyId = #{companyId,jdbcType=VARCHAR},
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopActivity">
+    update fop_activity
+    set relationId = #{relationId,jdbcType=VARCHAR},
+      relationType = #{relationType,jdbcType=CHAR},
       activityType = #{activityType,jdbcType=CHAR},
       title = #{title,jdbcType=VARCHAR},
-      category = #{category,jdbcType=CHAR},
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+      category = #{category,jdbcType=CHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -207,17 +221,56 @@
       createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopCompanyActivityVo">
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopActivityVo">
 
     </resultMap>
+    <sql id="Vo_Column_List">
+        id, relationId, relationType, activityType, title, releaseDate, category, remark,
+        status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate, content
+    </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fop_company_activity
+        from fop_activity
         where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <sql id="whereCondition">
+        from fop_activity t
+        where 1 = 1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
+        select count(*)
+        from fop_activity
+        where 0=1
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
     </select>
 </mapper>
