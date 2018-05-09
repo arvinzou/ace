@@ -43,7 +43,7 @@
                             <div class="page-content-inner row">
 
                                 <!---==============================================-->
-                              <div class="﻿col-md-4">
+                              <div class="col-md-4">
                                   <div class="box">
                                       <div class="simulator_hd">
                                           <h4 class="title" id="js_preview_title">页面模板</h4>
@@ -54,25 +54,33 @@
                                   </div>
                               </div>
                                 <div class="col-md-8">
-                                    <div class="tools-bar">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-success">Action</button>
-                                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <span class="caret"></span>
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">Action</a></li>
-                                                <li><a href="#">Another action</a></li>
-                                                <li><a href="#">Something else here</a></li>
-                                                <li role="separator" class="divider"></li>
-                                                <li><a href="#">Separated link</a></li>
-                                            </ul>
-                                        </div>
-                                        <div id="categoryItems" class="navigation">
+                                    <nav id="navbar-example" class="navbar navbar-default navbar-static">
+                                        <div class="row">
+                                            <div class="col-md-8" id="categoryItems">
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="collapse navbar-collapse" style="float:right">
+                                                    <ul class="nav navbar-nav">
+                                                        <li class="dropdown">
+                                                            <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                                栏目管理
+                                                                <span class="caret"></span>
+                                                            </a>
+                                                            <ul class="dropdown-menu" aria-labelledby="drop2">
+                                                                <li data-toggle="modal" data-action="add" data-target="#model1"><a href="#">添加</a></li>
+                                                                <li data-toggle="modal" data-action="edit" data-target="#model1"><a href="#">修改</a></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
 
                                         </div>
-                                    </div>
+
+
+                                    </nav>
+
                                     <div class="edit" id="edit_bottom">
                                     </div>
 
@@ -96,7 +104,7 @@
 
 
 
-    <div class="news-title">
+    <div class="nav-bar">
         <ul class="news-module clear" id="bar">
             {@each data.data as item,index}
             {@if index==0}
@@ -107,8 +115,32 @@
             {@/each}
         </ul>
     </div>
-</script>
 
+</script>
+<div class="modal fade" id="model1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">栏目管理</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">栏目名称:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="name">
+                        <input type="hidden" name="id"/>
+                        <input type="hidden" name="action"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
 
