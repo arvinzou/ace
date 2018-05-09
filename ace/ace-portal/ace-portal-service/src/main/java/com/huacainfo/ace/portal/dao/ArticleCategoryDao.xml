@@ -94,11 +94,11 @@
   </select>
 
   <select id="getList" resultType="map">
-    select id, tplPageId, name, remark
+    select id, name
     from
     article_category where
     tplPageId =#{pageId,jdbcType=VARCHAR}
-    ORDER BY createDate
+    ORDER BY sort
   </select>
 
   <select id="getListById" resultType="map">
@@ -106,6 +106,13 @@
     from
     article_category where
     tplPageId =#{id,jdbcType=VARCHAR}
-    ORDER BY sort,createDate
+    ORDER BY sort
   </select>
+
+  <update id="updateSort">
+    update article_category
+    set sort = #{sort,jdbcType=VARCHAR}
+
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

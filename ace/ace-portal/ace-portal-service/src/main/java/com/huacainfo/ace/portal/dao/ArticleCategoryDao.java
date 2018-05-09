@@ -31,4 +31,6 @@ public interface ArticleCategoryDao {
 
     List<Map<String,Object>> getListById(String id);
 
+    int updateSort(@Param("id") String id,@Param("sort") int sort);
+
 }

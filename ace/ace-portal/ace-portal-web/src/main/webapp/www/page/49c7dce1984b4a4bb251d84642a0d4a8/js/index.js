@@ -14,7 +14,7 @@ function getList() {
         url: contextPath + '/www/getTplPageById.do',
         type: 'POST',
         timeout: 30000,
-				data:{id:tplId},
+				data:{id:pageId},
         dataType: 'json',
         beforeSend: function () {
             loading = startLoading();
@@ -41,8 +41,8 @@ function getList() {
                 data: data
             });
             $("#navitem").append(html);
-						
-						
+						$('.carousel').carousel();
+						$("title").html(data.data.page.name);
 						initTabs();
             if (loading) {
                 loading.remove();

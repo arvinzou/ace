@@ -150,4 +150,19 @@ public class ArticleCategoryController extends PortalBaseController {
 	public Map<String,Object> getList() throws Exception{
 		return this.articleCategoryService.getList(this.getParams());
 	}
+	/**
+	 *
+	 * @Title:updateSort
+	 * @Description:  TODO(排序)
+	 * @param:        ids
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-09
+	 */
+	@RequestMapping(value = "/updateSort.do")
+	@ResponseBody
+	public MessageResponse updateSort(String ids) throws Exception{
+		return this.articleCategoryService.updateSort(ids.split(","));
+	}
 }
