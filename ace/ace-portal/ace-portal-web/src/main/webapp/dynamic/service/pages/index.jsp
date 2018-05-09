@@ -71,11 +71,11 @@
                 <div class="simulator_hd">
                     <h4 class="title">\${item.name}</h4>
                 </div>
-                <iframe src="${pageContext.request.contextPath}/www/page/\${item.tplId}/index.jsp" class="list_frame" scrolling="no" onload="sort_overflow_hidden(this)"></iframe>
+                <iframe src="${pageContext.request.contextPath}/www/page/\${item.tplId}/index.jsp?pageId=\${item.id}" class="list_frame" scrolling="no" onload="sort_overflow_hidden(this)"></iframe>
                 <input type="text" id="pageurlinput_0" value="http://www.xmypage.com/model1_63635.html" class="pageurlinput">
             </div>
             <div class="list_menu">
-                <img src="${pageContext.request.contextPath}/www/img/BaiduShurufa_2016-9-14_1-55-40.png" onclick="" data-toggle="tooltip" data-placement="top" title="编辑">
+                <a href="../pageEdit/index.jsp?tplId=\${item.tplId}&pageId=\${item.id}&id=4504"><img src="${pageContext.request.contextPath}/www/img/BaiduShurufa_2016-9-14_1-55-40.png"  data-toggle="tooltip" data-placement="top" title="编辑"></a>
                 <span></span>
                 <img src="${pageContext.request.contextPath}/www/img/BaiduShurufa_2016-9-14_1-55-53.png" data-toggle="tooltip" data-placement="top" title="复制链接" >
                 <span></span>

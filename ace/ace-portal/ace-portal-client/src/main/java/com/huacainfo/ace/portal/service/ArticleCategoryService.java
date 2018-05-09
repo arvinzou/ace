@@ -95,6 +95,17 @@ public interface ArticleCategoryService {
 	 * @version: 2018-05-04
 	 */
 	public Map<String,Object> getList(Map<String,Object> params) throws Exception;
+	/**
+	 *
+	 * @Title:updateSort
+	 * @Description:  TODO(排序)
+	 * @param:        ids
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-09
+	 */
+	public MessageResponse updateSort(String []id) throws Exception;
 
 	
 }

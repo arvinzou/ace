@@ -187,4 +187,23 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
 		rst.put("data",this.articleCategoryDao.getList(params));
 		return rst;
 	}
+	/**
+	 *
+	 * @Title:updateSort
+	 * @Description:  TODO(排序)
+	 * @param:        ids
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-09
+	 */
+	@Override
+	public MessageResponse updateSort(String []ids) throws Exception{
+		int i=0;
+		for(String id:ids){
+			this.articleCategoryDao.updateSort(id,i);
+			i++;
+		}
+		return new MessageResponse(0, "OK！");
+	}
 }

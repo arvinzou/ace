@@ -152,7 +152,7 @@
     where
     t.tplPageId =#{pageId,jdbcType=VARCHAR}
     and a.tplPageId =#{pageId,jdbcType=VARCHAR}
-    ORDER BY t.sort,t.createDate,a.sort,a.createDate
+    ORDER BY t.sort,t.createDate desc,a.sort,a.createDate desc
   </select>
   <select id="getArticleTopListByPageId" resultType="map">
     select id,title, cover, remark, hrefUrl
