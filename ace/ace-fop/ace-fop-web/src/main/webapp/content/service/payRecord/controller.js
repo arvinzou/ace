@@ -9,6 +9,7 @@ jQuery(function ($) {
                 title.text($title);
         }
     }));
+    //查询
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -28,7 +29,7 @@ jQuery(function ($) {
             }
         });
     });
-
+    //新增
     $('#btn-view-add').on(
         'click',
         function () {
@@ -48,6 +49,7 @@ jQuery(function ($) {
                     }
                 })
         });
+    //修改
     $('#btn-view-edit').on(
         'click',
         function () {
@@ -57,6 +59,13 @@ jQuery(function ($) {
                 $.jgrid.info_dialog($.jgrid.nav.alertcap,
                     $.jgrid.nav.alerttext)
             }
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            //1-未审核，2-已审核
+            if (rowData.payResult == "1") {
+                alert("记录已确认，不允许再修改");
+                return;
+            }
+
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
                 gr,
@@ -73,6 +82,7 @@ jQuery(function ($) {
                     }
                 })
         });
+    //删除
     $('#btn-view-del').on(
         'click',
         function () {
@@ -97,6 +107,132 @@ jQuery(function ($) {
                     }
                 })
         });
+    //缴费确认
+    $('#btn-view-audit').on(
+        'click',
+        function () {
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
+                'selrow');
+            if (!gr) {
+                $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                    $.jgrid.nav.alerttext);
+                return;
+            }
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            //0-未缴纳 ， 1-已缴纳
+            if (rowData.payResult == "1") {
+                alert("请勿重复确认!");
+                return;
+            }
+            if (confirm("是否确认已缴费?")) {
+                $.ajax({
+                    type: "post",
+                    url: contextPath + "/fopPayRecord/audit",
+                    data: {id: rowData.id},
+                    beforeSend: function (XMLHttpRequest) {
+                        sb('btn-view-audit', true, 'glyphicon glyphicon-refresh');
+                    },
+                    success: function (rst, textStatus) {
+                        sb('btn-view-audit', false, 'glyphicon glyphicon-refresh');
+                        if (rst) {
+                            bootbox.dialog({
+                                title: '系统提示',
+                                message: rst.errorMessage,
+                                detail: rst.detail,
+                                buttons: {
+                                    "success": {
+                                        "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                        "className": "btn-sm btn-success",
+                                        "callback": function () {
+                                            //刷新查询数据
+                                            jQuery(cfg.grid_selector).jqGrid('setGridParam',
+                                                {
+                                                    page: 1
+                                                }).trigger("reloadGrid");
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    complete: function (XMLHttpRequest, textStatus) {
+                        sb('btn-view-audit', false, 'glyphicon glyphicon-refresh');
+                    },
+                    error: function () {
+                        sb('btn-view-audit', false, 'glyphicon glyphicon-refresh');
+                    }
+                });
+            }
+        });
+
+    //催缴通知
+    $('#btn-view-send-notice').on(
+        'click',
+        function () {
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
+                'selrow');
+            if (!gr) {
+                $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                    $.jgrid.nav.alerttext);
+                return;
+            }
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            if (confirm("是否确认发送催缴通知?")) {
+                $.ajax({
+                    type: "post",
+                    url: contextPath + "/fopPayRecord/sendNotice",
+                    data: {id: rowData.id},
+                    beforeSend: function (XMLHttpRequest) {
+                        sb('btn-view-audit', true, 'glyphicon glyphicon-refresh');
+                    },
+                    success: function (rst, textStatus) {
+                        sb('btn-view-audit', false, 'glyphicon glyphicon-refresh');
+                        if (rst) {
+                            bootbox.dialog({
+                                title: '系统提示',
+                                message: rst.errorMessage,
+                                detail: rst.detail,
+                                buttons: {
+                                    "success": {
+                                        "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                        "className": "btn-sm btn-success",
+                                        "callback": function () {
+                                            //刷新查询数据
+                                            jQuery(cfg.grid_selector).jqGrid('setGridParam',
+                                                {
+                                                    page: 1
+                                                }).trigger("reloadGrid");
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    complete: function (XMLHttpRequest, textStatus) {
+                        sb('btn-view-audit', false, 'glyphicon glyphicon-refresh');
+                    },
+                    error: function () {
+                        sb('btn-view-audit', false, 'glyphicon glyphicon-refresh');
+                    }
+                });
+            }
+        });
+
+    function sb(btnId, status, iconCss) {
+        console.log(status);
+        var btn = $('#' + btnId);
+        if (status) {
+            btn.find('i').removeClass(iconCss);
+            btn.find('i').addClass('fa-spinner fa-spin');
+            btn.attr('disabled', "true");
+
+        } else {
+            btn.find('i').removeClass('fa-spinner');
+            btn.find('i').removeClass('fa-spin');
+            btn.find('i').addClass(iconCss);
+            btn.removeAttr("disabled");
+        }
+    };
 });
 
 function preview(id, title) {

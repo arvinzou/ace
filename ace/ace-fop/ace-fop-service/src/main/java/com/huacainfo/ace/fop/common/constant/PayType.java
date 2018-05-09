@@ -6,5 +6,12 @@ package com.huacainfo.ace.fop.common.constant;
  */
 public interface PayType {
 
-    String PAY_TYPE_MEMBER_JOIN = "0";
+    String PAY_TYPE_MEMBER_JOIN_COMPANY = "0";
+    String PAY_TYPE_MEMBER_JOIN_ASSOCIATION = "1";
+
+
+    /**
+     * 会员申请
+     */
+    String PAY_CATEGORY_MEMBER_JOIN = "0";
 }

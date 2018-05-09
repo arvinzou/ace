@@ -211,11 +211,18 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopFlowRecordVo">
-
+        <result column="requestName" jdbcType="CHAR" property="requestName"/>
     </resultMap>
     <sql id="Vo_Column_List">
-        id, fromId, flowType, personId, auditResult, auditOpinion, auditDate, remark, status,
-        createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+        CASE
+        when t.flowType = '0'
+        then (select fullName from fop.fop_company where id = t.fromId)
+        when t.flowType = '1'
+        then (select fullName from fop.fop_association where id = t.fromId)
+        END as requestName
+        ,
+        t.id, t.fromId, t.flowType, t.personId, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -240,10 +247,10 @@
     </select>
 
     <sql id="whereCondition">
-        from fop_flow_record
+        from fop_flow_record t
         where 1 = 1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
-            and id = #{condition.id,jdbcType=VARCHAR}
+            and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
     </sql>
 
@@ -256,5 +263,14 @@
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
         <include refid="whereCondition"/>
+    </select>
+
+
+    <select id="findByFromId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_flow_record
+        where fromId = #{fromId,jdbcType=VARCHAR}
+        and flowType = #{flowType,jdbcType=VARCHAR}
     </select>
 </mapper>

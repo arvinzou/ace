@@ -23,11 +23,11 @@ public class FopLoanProduct implements Serializable {
 
     private String rateType;
 
-    private BigDecimal loadRate;
+    private BigDecimal loanRate;
 
-    private String loadType;
+    private String loanType;
 
-    private BigDecimal loadYear;
+    private String loanYear;
 
     private String repaymentType;
 
@@ -115,28 +115,28 @@ public class FopLoanProduct implements Serializable {
         this.rateType = rateType == null ? null : rateType.trim();
     }
 
-    public BigDecimal getLoadRate() {
-        return loadRate;
+    public BigDecimal getLoanRate() {
+        return loanRate;
     }
 
-    public void setLoadRate(BigDecimal loadRate) {
-        this.loadRate = loadRate;
+    public void setLoanRate(BigDecimal loanRate) {
+        this.loanRate = loanRate;
     }
 
-    public String getLoadType() {
-        return loadType;
+    public String getLoanType() {
+        return loanType;
     }
 
-    public void setLoadType(String loadType) {
-        this.loadType = loadType == null ? null : loadType.trim();
+    public void setLoanType(String loanType) {
+        this.loanType = loanType == null ? null : loanType.trim();
     }
 
-    public BigDecimal getLoadYear() {
-        return loadYear;
+    public String getLoanYear() {
+        return loanYear;
     }
 
-    public void setLoadYear(BigDecimal loadYear) {
-        this.loadYear = loadYear;
+    public void setLoanYear(String loanYear) {
+        this.loanYear = loanYear;
     }
 
     public String getRepaymentType() {

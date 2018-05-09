@@ -29,6 +29,8 @@ public interface FopLoanProductService {
      */
     public abstract PageResult<FopLoanProductVo> findFopLoanProductList(FopLoanProductQVo condition, int start, int limit, String orderBy) throws Exception;
 
+    public abstract PageResult<FopLoanProductVo> findLoanProductList(FopLoanProductQVo condition, int page, int limit, String orderBy) throws Exception;
+
     /**
      * @throws
      * @Title:insertFopLoanProduct

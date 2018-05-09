@@ -27,17 +27,20 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
+                    年限：<input
+                        class="easyui-combobox" style="width: 200px" name="financeYear"
                         data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=128&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
 
-                    名称： <input name="name" type="text"
+                    名称： <input name="financeTitle" type="text"
                                style="width: 200px;"/>
+                    年收益： <input name="btmYield" type="text"
+                                style="width: 50px;"/>% — <input name="topYield" type="text"
+                                                                 style="width: 50px;"/>%
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopFinanceProject/findFopFinanceProjectList">
                         <i

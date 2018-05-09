@@ -2,10 +2,12 @@ package com.huacainfo.ace.fop.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.model.FopPayRecord;
 import com.huacainfo.ace.fop.service.FopPayRecordService;
 import com.huacainfo.ace.fop.vo.FopPayRecordQVo;
@@ -129,5 +131,42 @@ public class FopPayRecordController extends FopBaseController {
         String id = json.getString("id");
         return this.fopPayRecordService.deleteFopPayRecordByFopPayRecordId(id,
                 this.getCurUserProp());
+    }
+
+
+    /**
+     * 功能描述: 确认缴费审核
+     *
+     * @param: +
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 13:56
+     */
+    @RequestMapping(value = "/audit")
+    @ResponseBody
+    public MessageResponse audit(String id) throws Exception {
+        if (CommonUtils.isEmpty(id)) {
+            return new MessageResponse(ResultCode.FAIL, "传入参数不能为空");
+        }
+
+        return fopPayRecordService.audit(id, getCurUserProp());
+    }
+
+    /**
+     * 功能描述: 推送催缴通知
+     *
+     * @param: id  fop_pay_record.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 13:56
+     */
+    @RequestMapping(value = "/sendNotice")
+    @ResponseBody
+    public MessageResponse sendNotice(String id) throws Exception {
+        if (CommonUtils.isEmpty(id)) {
+            return new MessageResponse(ResultCode.FAIL, "传入参数不能为空");
+        }
+
+        return fopPayRecordService.sendNotice(id, getCurUserProp());
     }
 }

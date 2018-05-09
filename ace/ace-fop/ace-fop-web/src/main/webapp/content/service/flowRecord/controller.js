@@ -48,7 +48,9 @@ jQuery(function ($) {
                     }
                 })
         });
-    $('#btn-view-edit').on(
+
+    //btn-view-edit
+    $('#btn-view-audit').on(
         'click',
         function () {
             var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
@@ -57,6 +59,13 @@ jQuery(function ($) {
                 $.jgrid.info_dialog($.jgrid.nav.alertcap,
                     $.jgrid.nav.alerttext)
             }
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            //1-未审核，2-已审核
+            if (rowData.status == "2") {
+                alert("该流程已被处理过了!");
+                return;
+            }
+
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
                 gr,

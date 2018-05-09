@@ -89,4 +89,26 @@ public interface FopPayRecordService {
      * @throws Exception
      */
     MessageResponse submitPayRecord(FopPayRecord record, UserProp userProp) throws Exception;
+
+    /**
+     * 功能描述: 确认缴费审核
+     *
+     * @param: id fop_pay_record.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 13:56
+     */
+    MessageResponse audit(String id, UserProp userProp) throws Exception;
+
+    /**
+     * 功能描述: 推送催缴通知
+     *
+     * @param: id fop_pay_record.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 13:56
+     */
+    MessageResponse sendNotice(String id, UserProp userProp) throws Exception;
+
+    FopPayRecord selectByPrimaryKey(String fromId);
 }

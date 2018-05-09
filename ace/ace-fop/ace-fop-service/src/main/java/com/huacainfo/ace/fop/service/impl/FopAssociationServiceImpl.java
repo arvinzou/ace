@@ -119,7 +119,8 @@ public class FopAssociationServiceImpl implements FopAssociationService {
                 o.getId(), userProp);
 
         //自动提交会员申请流程
-        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(FlowType.MEMBER_JOIN_ASSOCIATION, o.getId(), userProp);
+        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
+                FlowType.MEMBER_JOIN_ASSOCIATION, o.getId(), userProp);
         if (ResultCode.FAIL == rs3.getStatus()) {
             return rs3;
         }
@@ -143,7 +144,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
     private MessageResponse submitPayRecord(FopAssociation o, UserProp userProp) throws Exception {
         FopPayRecord payRecord = new FopPayRecord();
         payRecord.setRelationId(o.getId());
-        payRecord.setRelationType(PayType.PAY_TYPE_MEMBER_JOIN);
+        payRecord.setRelationType(PayType.PAY_TYPE_MEMBER_JOIN_ASSOCIATION);
+        payRecord.setPayCategory(PayType.PAY_CATEGORY_MEMBER_JOIN);
+        payRecord.setPayDate(DateUtil.getNowDate());
 
         return fopPayRecordService.submitPayRecord(payRecord, userProp);
     }

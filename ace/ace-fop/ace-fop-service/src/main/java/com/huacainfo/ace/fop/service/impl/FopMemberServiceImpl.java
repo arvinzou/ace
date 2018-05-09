@@ -91,13 +91,19 @@ public class FopMemberServiceImpl implements FopMemberService {
     @Override
     public MessageResponse insertFopMember(FopMember o, UserProp userProp)
             throws Exception {
+        if (CommonUtils.isBlank(o.getRelationId())) {
+            return new MessageResponse(1, "关联不能为空");
+        }
+        if (CommonUtils.isBlank(o.getRelationType())) {
+            return new MessageResponse(1, "关联类型不能为空");
+        }
         if (CommonUtils.isBlank(o.getMermberName())) {
             return new MessageResponse(1, "会员名称不能为空");
         }
-        int temp = this.fopMemberDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "会员重复");
-        }
+//        int temp = this.fopMemberDao.isExit(o);
+//        if (temp > 0) {
+//            return new MessageResponse(1, "会员重复");
+//        }
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
@@ -203,43 +209,31 @@ public class FopMemberServiceImpl implements FopMemberService {
     /**
      * 功能描述: 加入会员审核
      *
-     * @param params      会员资料参数
-     * @param flowType    审核流程类型
-     * @param auditResult 审核结果
-     * @param userProp    操作员
+     * @param params   会员资料参数
+     * @param userProp 操作员
      * @return:
      * @auther: Arvin Zou
      * @date: 2018/5/5 12:12
      */
     @Override
-    public MessageResponse memberJoinAudit(FopMember params, String flowType, String auditResult, UserProp userProp) throws Exception {
+    public MessageResponse memberJoinAudit(FopMember params, UserProp userProp) throws Exception {
 
         List<FopMember> memberList = fopMemberDao.selectByRelationType(
                 params.getRelationType(),
                 params.getRelationId(),
                 new String[]{"1"});
-        FopMember member;
-        if ("0".equals(auditResult)) {
-            //
-            if (CollectionUtils.isEmpty(memberList)) {
-                return insertFopMember(params, userProp);
-            } else {
-                member = memberList.get(0);
-                member.setMemberCode(System.currentTimeMillis() + "");
-                member.setMemberLevel("0");
-                member.setJoinDate(DateUtil.getNowDate());
-                String validDate = DateUtil.getDate("year", DateUtil.getNow(), 1, "");
-                member.setValidDate(DateUtil.format(validDate, DateUtil.DEFAULT_DATE_TIME_REGEX));
 
-                return updateFopMember(member, userProp);
-            }
-        } else {
-            if (!CollectionUtils.isEmpty(memberList)) {
+        if (CollectionUtils.isEmpty(memberList)) {
+            params.setMemberCode(System.currentTimeMillis() + "");
+            params.setMemberLevel("0");
+            params.setJoinDate(DateUtil.getNowDate());
+            String validDate = DateUtil.getDate("year", DateUtil.getNow(), 1, "");
+            params.setValidDate(DateUtil.format(validDate, DateUtil.DEFAULT_DATE_TIME_REGEX));
 
-            }
-
-            return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+            return insertFopMember(params, userProp);
         }
+
+        return new MessageResponse(ResultCode.FAIL, "已经是会员，无需再审");
     }
 
     /**

@@ -4,12 +4,10 @@ package com.huacainfo.ace.fop.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -32,7 +30,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopCompanyService")
 /**
@@ -143,7 +143,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
                 o.getId(), userProp);
 
         //自动提交会员申请流程
-        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
+        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
+                FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
         if (ResultCode.FAIL == rs3.getStatus()) {
             return rs3;
         }
@@ -157,7 +158,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     /**
-     *
      * 功能描述: 自动提交缴费记录
      *
      * @param:
@@ -168,7 +168,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     private MessageResponse submitPayRecord(FopCompanyVo o, UserProp userProp) throws Exception {
         FopPayRecord payRecord = new FopPayRecord();
         payRecord.setRelationId(o.getId());
-        payRecord.setRelationType(PayType.PAY_TYPE_MEMBER_JOIN);
+        payRecord.setRelationType(PayType.PAY_TYPE_MEMBER_JOIN_COMPANY);
+        payRecord.setPayCategory(PayType.PAY_CATEGORY_MEMBER_JOIN);
+        payRecord.setPayDate(DateUtil.getNowDate());
 
         return fopPayRecordService.submitPayRecord(payRecord, userProp);
     }
@@ -302,10 +304,12 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     @Override
-    public List<Tree> selectCompanyTreeList(String id, String syid) throws Exception {
-
-        CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
-                this.fopCompanyDao.selectCompanyTreeList(id, syid));
-        return commonTreeUtils.getTreeList(id);
+    public Map<String, Object> selectCompany(Map<String, Object> params) throws Exception {
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, String>> list = this.fopCompanyDao.selectPerson(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+        return rst;
     }
+
 }

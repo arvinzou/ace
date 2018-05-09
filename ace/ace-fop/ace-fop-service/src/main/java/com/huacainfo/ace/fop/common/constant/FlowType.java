@@ -13,4 +13,9 @@ public interface FlowType {
     String MEMBER_PAY = "2";
     String MEMBER_QUIT_COMPANY = "3";
     String MEMBER_QUIT_ASSOCIATION = "4";
+
+    /**
+     * 政企服务发布审核
+     */
+    String GE_HELP = "5";
 }

@@ -365,6 +365,15 @@
             and f.financeTitle like
             concat('%',#{condition.financeTitle,jdbcType=VARCHAR},'%')
         </if>
+        <if test='condition.financeYear!=null and condition.financeYear!=""'>
+            and f.financeYear =#{condition.financeYear,jdbcType=CHAR}
+        </if>
+        <if test="condition.btmYield!=null and condition.btmYield!=''">
+            and f.yearYield>=#{condition.btmYield,jdbcType=DECIMAL}
+        </if>
+        <if test="condition.topYield!=null and condition.topYield!=''">
+            and f.yearYield&lt;=#{condition.topYield,jdbcType=DECIMAL}
+        </if>
     </sql>
 
 </mapper>

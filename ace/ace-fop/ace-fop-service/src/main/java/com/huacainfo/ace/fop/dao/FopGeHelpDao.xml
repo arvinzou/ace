@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopGeHelpDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopGeHelp">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="requestId" jdbcType="VARCHAR" property="requestId"/>
+        <result column="requestType" jdbcType="CHAR" property="requestType"/>
+        <result column="parentId" jdbcType="VARCHAR" property="parentId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="reply" jdbcType="VARCHAR" property="reply"/>
+        <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
+        <result column="keyWord" jdbcType="VARCHAR" property="keyWord"/>
+        <result column="accCount" jdbcType="BIGINT" property="accCount"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="optDeptName" jdbcType="VARCHAR" property="optDeptName"/>
+        <result column="optLeaderName" jdbcType="VARCHAR" property="optLeaderName"/>
+        <result column="processDetail" jdbcType="VARCHAR" property="processDetail"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, requestId, requestType, parentId, title, reply, releaseDate, keyWord, accCount, 
+    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate, optDeptName, optLeaderName, processDetail
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_ge_help
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fop_ge_help
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
+    insert into fop_ge_help (id, requestId, requestType, 
+      parentId, title, reply, 
+      releaseDate, keyWord, accCount, 
+      remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
+        optDeptName, optLeaderName, processDetail)
+    values (#{id,jdbcType=VARCHAR}, #{requestId,jdbcType=VARCHAR}, #{requestType,jdbcType=CHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR}, 
+      #{releaseDate,jdbcType=TIMESTAMP}, #{keyWord,jdbcType=VARCHAR}, #{accCount,jdbcType=BIGINT}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{optDeptName,jdbcType=VARCHAR}, #{optLeaderName,jdbcType=VARCHAR}, #{processDetail,jdbcType=CHAR} )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
+        insert into fop_ge_help
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="requestId != null">
+                requestId,
+            </if>
+            <if test="requestType != null">
+                requestType,
+            </if>
+            <if test="parentId != null">
+                parentId,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="reply != null">
+                reply,
+            </if>
+            <if test="releaseDate != null">
+                releaseDate,
+            </if>
+            <if test="keyWord != null">
+                keyWord,
+            </if>
+            <if test="accCount != null">
+                accCount,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+            <if test="optDeptName != null">
+                optDeptName,
+            </if>
+            <if test="optLeaderName != null">
+                optLeaderName,
+            </if>
+            <if test="processDetail != null">
+                processDetail,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="requestId != null">
+                #{requestId,jdbcType=VARCHAR},
+            </if>
+            <if test="requestType != null">
+                #{requestType,jdbcType=CHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="reply != null">
+                #{reply,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="keyWord != null">
+                #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="accCount != null">
+                #{accCount,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="optDeptName != null">
+                #{optDeptName,jdbcType=VARCHAR},
+            </if>
+            <if test="optLeaderName != null">
+                #{optLeaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="processDetail != null">
+                #{processDetail,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
+        update fop_ge_help
+        <set>
+            <if test="requestId != null">
+                requestId = #{requestId,jdbcType=VARCHAR},
+            </if>
+            <if test="requestType != null">
+                requestType = #{requestType,jdbcType=CHAR},
+            </if>
+            <if test="parentId != null">
+                parentId = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="reply != null">
+                reply = #{reply,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="keyWord != null">
+                keyWord = #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="accCount != null">
+                accCount = #{accCount,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="optDeptName != null">
+                optDeptName = #{optDeptName,jdbcType=VARCHAR},
+            </if>
+            <if test="optLeaderName != null">
+                optLeaderName = #{optLeaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="processDetail != null">
+                processDetail = #{processDetail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
+    update fop_ge_help
+    set requestId = #{requestId,jdbcType=VARCHAR},
+      requestType = #{requestType,jdbcType=CHAR},
+      parentId = #{parentId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      reply = #{reply,jdbcType=VARCHAR},
+      releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+      keyWord = #{keyWord,jdbcType=VARCHAR},
+      accCount = #{accCount,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+        optDeptName = #{optDeptName,jdbcType=VARCHAR},
+        optLeaderName = #{optLeaderName,jdbcType=VARCHAR},
+        processDetail = #{processDetail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <sql id="Vo_Column_List">
+        t.id, t.requestId, t.requestType, t.parentId, t.title, t.reply, t.releaseDate, t.keyWord, t.accCount,
+        t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
+        t.lastModifyDate, t.optDeptName, t.optLeaderName, t.processDetail
+    </sql>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopGeHelpVo">
+
+    </resultMap>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_ge_help
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_ge_help t
+        where 1 = 1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
+        select count(*)
+        from fop_ge_help
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+</mapper>
