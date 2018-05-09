@@ -18,4 +18,9 @@ public interface FlowType {
      * 政企服务发布审核
      */
     String GE_HELP = "5";
+
+    /**
+     * 党建工作发布审核
+     */
+    String PARTY_WORK = "6";
 }

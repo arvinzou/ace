@@ -14,7 +14,7 @@ public class FopResource implements Serializable {
 
     private String relationType;
 
-    private String resCategroy;
+    private String resCategory;
 
     private String resName;
 
@@ -24,7 +24,7 @@ public class FopResource implements Serializable {
 
     private String resType;
 
-    private Integer sort;
+    private Integer sequence;
 
     private String remark;
 
@@ -66,12 +66,12 @@ public class FopResource implements Serializable {
         this.relationType = relationType == null ? null : relationType.trim();
     }
 
-    public String getResCategroy() {
-        return resCategroy;
+    public String getResCategory() {
+        return resCategory;
     }
 
-    public void setResCategroy(String resCategroy) {
-        this.resCategroy = resCategroy == null ? null : resCategroy.trim();
+    public void setResCategory(String resCategory) {
+        this.resCategory = resCategory == null ? null : resCategory.trim();
     }
 
     public String getResName() {
@@ -106,12 +106,12 @@ public class FopResource implements Serializable {
         this.resType = resType == null ? null : resType.trim();
     }
 
-    public Integer getSort() {
-        return sort;
+    public Integer getSequence() {
+        return sequence;
     }
 
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
 
     public String getRemark() {

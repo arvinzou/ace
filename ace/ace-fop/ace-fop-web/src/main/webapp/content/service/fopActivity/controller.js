@@ -1,8 +1,7 @@
 jQuery(function ($) {
     $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
         _title: function (title) {
-            var $title =
-                this.options.title || '&nbsp;'
+            var $title = this.options.title || '&nbsp;'
             if (("title_html" in this.options)
                 && this.options.title_html == true)
                 title.html($title);
@@ -99,7 +98,6 @@ jQuery(function ($) {
                 })
         });
 
-
     //发布审核
     $('#btn-view-audit').on(
         'click',
@@ -119,7 +117,7 @@ jQuery(function ($) {
             if (confirm("是否确认发布?")) {
                 $.ajax({
                     type: "post",
-                    url: contextPath + "/fopGeHelp/audit",
+                    url: contextPath + "/fopActivity/audit",
                     data: {id: rowData.id},
                     beforeSend: function (XMLHttpRequest) {
                         sb('btn-view-audit', true, 'glyphicon glyphicon-refresh');

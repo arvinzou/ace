@@ -7,11 +7,10 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>企业管理</title>
+    <title>企业/协会活动</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
-
 
 </script>
 <body>
@@ -19,53 +18,44 @@
     <div class="widget-box" id="widget-box">
         <div class="widget-header">
             <h5 class="widget-title smaller">设置查询条件</h5>
-
             <div class="widget-toolbar"></div>
         </div>
-
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
+                    类别：<input name="category" class="easyui-combobox" style="width: 200px"
+                              data-options="
+                        url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                        method:'get',
+                        valueField:'code',
+                        textField:'name',
+                        panelHeight:'auto'">
 
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
-                        data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
-
-                    名称： <input name="name" type="text"
-                               style="width: 200px;"/>
+                    名称： <input name="name" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/fopResource/findFopResourceList">
-                        <i
-                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                            authority="${pageContext.request.contextPath}/fopActivity/findFopActivityList">
+                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
-
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
 
-
-                    <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/fopResource/insertFopResource">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/fopResource/updateFopResource">
-                        <i
-                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+                    <%--<button class="btn btn-info" id="btn-view-add"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopActivity/insertFopActivity">--%>
+                    <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
+                    <%--<button class="btn btn-info" id="btn-view-edit"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopActivity/updateFopActivity">--%>
+                    <%--<i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
                     <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/fopResource/deleteFopResourceByFopResourceId">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                            authority="${pageContext.request.contextPath}/fopActivity/deleteFopActivityByFopActivityId">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
+                    <button class="btn btn-purple" id="btn-view-audit"
+                            authority="${pageContext.request.contextPath}/fopActivity/audit">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -89,50 +79,46 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">主键</span>
             <br>
             <span id="id"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">关联ID</span>
             <br>
             <span id="relationId"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">关联类型</span>
             <br>
             <span id="relationType"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">资源分类</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">活动类型</span>
             <br>
-            <span id="resCategory"></span>
+            <span id="activityType"></span>
+        </div>
+
+        <div class="labelItem">
+            <span class="labelItemHeader">工作分类</span>
+            <br>
+            <span id="category"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">资源名称</span>
+            <span class="labelItemHeader">工作标题</span>
             <br>
-            <span id="resName"></span>
+            <span id="title"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">资源大小</span>
+            <span class="labelItemHeader">发布时间</span>
             <br>
-            <span id="resSize"></span>
+            <span id="releaseDate"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">资源地址</span>
+            <span class="labelItemHeader">活动内容</span>
             <br>
-            <span id="resUrl"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">资源类型</span>
-            <br>
-            <span id="resType"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">显示排序</span>
-            <br>
-            <span id="sequence"></span>
+            <span id="content"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">备注</span>
@@ -147,7 +133,7 @@
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">创建人编号</span>
             <br>
             <span id="createUserId"></span>
@@ -162,7 +148,7 @@
             <br>
             <span id="createDate"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">最后更新人编号</span>
             <br>
             <span id="lastModifyUserId"></span>
@@ -181,14 +167,10 @@
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
-<script
-        src="${pageContext.request.contextPath}/content/service/resource/config.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/resource/model.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/resource/controller.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/resource/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/fopActivity/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/fopActivity/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/fopActivity/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/fopActivity/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

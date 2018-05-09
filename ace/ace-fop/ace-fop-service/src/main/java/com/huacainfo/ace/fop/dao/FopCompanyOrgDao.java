@@ -1,6 +1,5 @@
 package com.huacainfo.ace.fop.dao;
 
-import com.huacainfo.ace.fop.model.FopCompanyActivity;
 import com.huacainfo.ace.fop.model.FopCompanyOrg;
 import com.huacainfo.ace.fop.vo.FopCompanyOrgQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyOrgVo;
@@ -30,6 +29,6 @@ public interface FopCompanyOrgDao {
 
     int findCount(@Param("condition") FopCompanyOrgQVo condition);
 
-    int isExit(FopCompanyActivity record);
+    int isExit(FopCompanyOrg record);
 
 }
