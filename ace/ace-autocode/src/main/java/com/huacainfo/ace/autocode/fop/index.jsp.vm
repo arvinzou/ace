@@ -19,14 +19,11 @@
 		<div class="widget-box" id="widget-box">
 			<div class="widget-header">
 				<h5 class="widget-title smaller">设置查询条件</h5>
-
 				<div class="widget-toolbar"></div>
 			</div>
-
 			<div class="widget-body">
 				<div class="widget-main padding-6">
 					<form action="#" id="fm-search">
-					
 				类别：<input name="category" class="easyui-combobox" style="width: 200px"
 							data-options="
                     url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
@@ -43,6 +40,7 @@
 					</form>
 					<div class="space10"></div>
 					<div id="toolbar" class="toolbar">
+
 						<button class="btn btn-info" id="btn-view-add"
 							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/insert$!{bean.name}">
 							 <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
@@ -55,6 +53,7 @@
 							authority="${pageContext.request.contextPath}/$!{bean.lowerName}/delete$!{bean.name}By$!{bean.name}Id">
 							 <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
 						</button>
+						
 					</div>
 				</div>
 			</div>
@@ -79,22 +78,18 @@
 $!{bean.view}
     </div>
 	<jsp:include page="../../common/footer-1.jsp" />
-	<script
-		src="${pageContext.request.contextPath}/content/service/$!{bean.lowerName}/config.js?version=${cfg.version}"></script>
-	<script
-		src="${pageContext.request.contextPath}/content/service/$!{bean.lowerName}/model.js?version=${cfg.version}"></script>
-	<script
-		src="${pageContext.request.contextPath}/content/service/$!{bean.lowerName}/controller.js?version=${cfg.version}"></script>
-	<script
-		src="${pageContext.request.contextPath}/content/service/$!{bean.lowerName}/view.js?version=${cfg.version}"></script>
+	<script src="${pageContext.request.contextPath}/content/service/$!{bean.lowerName}/config.js?version=${cfg.version}"></script>
+	<script src="${pageContext.request.contextPath}/content/service/$!{bean.lowerName}/model.js?version=${cfg.version}"></script>
+	<script src="${pageContext.request.contextPath}/content/service/$!{bean.lowerName}/controller.js?version=${cfg.version}"></script>
+	<script src="${pageContext.request.contextPath}/content/service/$!{bean.lowerName}/view.js?version=${cfg.version}"></script>
 	<jsp:include page="../../common/footer-2.jsp" />
-	<script type="text/javascript">
-window.onresize = function () {
-	console.log('autoWidthJqgrid');
-	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
-	parent.autoWidth();
-}
+<script type="text/javascript">
+    window.onresize = function () {
+        console.log('autoWidthJqgrid');
+        $(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
+        $(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
+        parent.autoWidth();
+    }
 </script>
 </body>
 </html>

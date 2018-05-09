@@ -24,7 +24,8 @@ $!{bean.name}Vo selectVoByPrimaryKey(String id);
 
 List
 <$!{bean.name}Vo> findList(@Param("condition") $!{bean.name}QVo condition,
-    @Param("start") int start, @Param("limit") int limit,
+    @Param("start") int start,
+    @Param("limit") int limit,
     @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") $!{bean.name}QVo condition);

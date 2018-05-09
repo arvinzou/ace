@@ -65,6 +65,7 @@ private DataBaseLogService dataBaseLogService;
                     }
                     return rst;
                     }
+
                     /**
                     *
                     * @Title:insert$!{bean.name}
@@ -78,25 +79,27 @@ private DataBaseLogService dataBaseLogService;
                     * @version: $!{annotation.version}
                     */
                     @Override
-                    public MessageResponse insert$!{bean.name}($!{bean.name} o, UserProp userProp)
-                    throws Exception {
-                    o.setId(GUIDUtil.getGUID());
-                    //o.setId(String.valueOf(new Date().getTime()));
+                    public MessageResponse insert$!{bean.name}($!{bean.name} o, UserProp userProp) throws Exception {
+
                     $!{bean.validate}
+
                     int temp = this.$!{bean.lowerName}Dao.isExit(o);
                     if (temp > 0) {
                     return new MessageResponse(1, "$!{bean.tableChineseName}名称重复！");
                     }
+
+                    o.setId(GUIDUtil.getGUID());
                     o.setCreateDate(new Date());
                     o.setStatus("1");
                     o.setCreateUserName(userProp.getName());
                     o.setCreateUserId(userProp.getUserId());
                     this.$!{bean.lowerName}Dao.insertSelective(o);
                     this.dataBaseLogService.log("添加$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
-                    o.getId(),
-                    o.getId(), userProp);
+                    o.getId(),o.getId(), userProp);
+
                     return new MessageResponse(0, "添加$!{bean.tableChineseName}完成！");
                     }
+
                     /**
                     *
                     * @Title:update$!{bean.name}
@@ -110,8 +113,7 @@ private DataBaseLogService dataBaseLogService;
                     * @version: $!{annotation.version}
                     */
                     @Override
-                    public MessageResponse update$!{bean.name}($!{bean.name} o, UserProp userProp)
-                    throws Exception {
+                    public MessageResponse update$!{bean.name}($!{bean.name} o, UserProp userProp) throws Exception {
                     $!{bean.validate}
 
                     o.setLastModifyDate(new Date());
@@ -119,8 +121,8 @@ private DataBaseLogService dataBaseLogService;
                     o.setLastModifyUserId(userProp.getUserId());
                     this.$!{bean.lowerName}Dao.updateByPrimaryKeySelective(o);
                     this.dataBaseLogService.log("变更$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
-                    o.getId(),
-                    o.getId(), userProp);
+                    o.getId(), o.getId(), userProp);
+
                     return new MessageResponse(0, "变更$!{bean.tableChineseName}完成！");
                     }
 
@@ -141,9 +143,10 @@ private DataBaseLogService dataBaseLogService;
                         SingleResult
                         <$!{bean.name}Vo> rst = new SingleResult
                             <$!{bean.name}Vo>();
-                                rst.setValue(this.$!{bean.lowerName}Dao.selectByPrimaryKey(id));
+                                rst.setValue(this.$!{bean.lowerName}Dao.selectVoByPrimaryKey(id));
                                 return rst;
                                 }
+
                                 /**
                                 *
                                 * @Title:delete$!{bean.name}By$!{bean.name}Id
@@ -157,12 +160,13 @@ private DataBaseLogService dataBaseLogService;
                                 * @version: $!{annotation.version}
                                 */
                                 @Override
-                                public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,
-                                UserProp userProp) throws Exception {
+                                public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id, UserProp
+                                userProp) throws Exception {
                                 this.$!{bean.lowerName}Dao.deleteByPrimaryKey(id);
                                 this.dataBaseLogService.log("删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}",
                                 String.valueOf(id),
                                 String.valueOf(id), "$!{bean.tableChineseName}", userProp);
                                 return new MessageResponse(0, "$!{bean.tableChineseName}删除完成！");
                                 }
+
                                 }
