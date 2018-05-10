@@ -24,10 +24,10 @@
         <result column="processDetail" jdbcType="VARCHAR" property="processDetail"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, requestId, requestType, parentId, title, reply, releaseDate, keyWord, accCount, 
-    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        id, requestId, requestType, parentId, title, reply, releaseDate, keyWord, accCount,
+        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
         lastModifyDate, optDeptName, optLeaderName, processDetail
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -35,24 +35,24 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from fop_ge_help
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
+        delete from fop_ge_help
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
-    insert into fop_ge_help (id, requestId, requestType, 
-      parentId, title, reply, 
-      releaseDate, keyWord, accCount, 
-      remark, status, createUserId,
+        insert into fop_ge_help (id, requestId, requestType,
+        parentId, title, reply,
+        releaseDate, keyWord, accCount,
+        remark, status, createUserId,
         createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
         optDeptName, optLeaderName, processDetail)
-    values (#{id,jdbcType=VARCHAR}, #{requestId,jdbcType=VARCHAR}, #{requestType,jdbcType=CHAR}, 
-      #{parentId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR}, 
-      #{releaseDate,jdbcType=TIMESTAMP}, #{keyWord,jdbcType=VARCHAR}, #{accCount,jdbcType=BIGINT}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR}, #{requestId,jdbcType=VARCHAR}, #{requestType,jdbcType=CHAR},
+        #{parentId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR},
+        #{releaseDate,jdbcType=TIMESTAMP}, #{keyWord,jdbcType=VARCHAR}, #{accCount,jdbcType=BIGINT},
+        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
         #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
         #{optDeptName,jdbcType=VARCHAR}, #{optLeaderName,jdbcType=VARCHAR}, #{processDetail,jdbcType=CHAR} )
-  </insert>
+    </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
         insert into fop_ge_help
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -244,28 +244,28 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
-    update fop_ge_help
-    set requestId = #{requestId,jdbcType=VARCHAR},
-      requestType = #{requestType,jdbcType=CHAR},
-      parentId = #{parentId,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      reply = #{reply,jdbcType=VARCHAR},
-      releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
-      keyWord = #{keyWord,jdbcType=VARCHAR},
-      accCount = #{accCount,jdbcType=BIGINT},
-      remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        update fop_ge_help
+        set requestId = #{requestId,jdbcType=VARCHAR},
+        requestType = #{requestType,jdbcType=CHAR},
+        parentId = #{parentId,jdbcType=VARCHAR},
+        title = #{title,jdbcType=VARCHAR},
+        reply = #{reply,jdbcType=VARCHAR},
+        releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+        keyWord = #{keyWord,jdbcType=VARCHAR},
+        accCount = #{accCount,jdbcType=BIGINT},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
         optDeptName = #{optDeptName,jdbcType=VARCHAR},
         optLeaderName = #{optLeaderName,jdbcType=VARCHAR},
         processDetail = #{processDetail,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 
     <sql id="Vo_Column_List">
         t.id, t.requestId, t.requestType, t.parentId, t.title, t.reply, t.releaseDate, t.keyWord, t.accCount,

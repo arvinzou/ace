@@ -1,6 +1,7 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -72,7 +73,7 @@ public class FopNoticeServiceImpl implements FopNoticeService {
     @Override
     public ResultResponse findNoticeList(FopNoticeQVo condition, int page, int limit, String orderBy) throws Exception {
         List<FopNoticeVo> list = this.fopNoticeDao.findList(condition, (page - 1) * limit, limit, orderBy);
-        ResultResponse rst = new ResultResponse(0, "信息公告列表", list);
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "信息公告列表", list);
         return rst;
     }
 
@@ -83,7 +84,7 @@ public class FopNoticeServiceImpl implements FopNoticeService {
     @Override
     public ResultResponse homepageNoticeList() throws Exception {
         FopNoticeQVo condition = new FopNoticeQVo();
-        ResultResponse rst = new ResultResponse(0, "首页信息列表");
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "首页信息列表");
         condition.setTop("1");
         List<FopNoticeVo> toplist = this.fopNoticeDao.findList(condition, 0, 4, null);
         condition.setTop("0");
