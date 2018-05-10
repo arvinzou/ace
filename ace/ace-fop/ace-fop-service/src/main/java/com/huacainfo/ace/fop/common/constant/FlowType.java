@@ -23,4 +23,14 @@ public interface FlowType {
      * 党建工作发布审核
      */
     String PARTY_WORK = "6";
+
+    /**
+     * 合作交流项目审核
+     */
+    String COOP_PROJECT = "7";
+
+    /**
+     * 诉求服务确认
+     */
+    String REQUEST_HELP = "8";
 }

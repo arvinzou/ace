@@ -1,14 +1,21 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.fop.common.constant.AuditResult;
+import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.dao.FopProjectDao;
+import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopProject;
+import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopProjectService;
 import com.huacainfo.ace.fop.vo.FopProjectQVo;
 import com.huacainfo.ace.fop.vo.FopProjectVo;
@@ -25,7 +32,7 @@ import java.util.List;
 /**
  * @author: Arvin
  * @version: 2018-05-02
- * @Description: TODO(合作项目)
+ * @Description: 合作项目)
  */
 public class FopProjectServiceImpl implements FopProjectService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -33,11 +40,13 @@ public class FopProjectServiceImpl implements FopProjectService {
     private FopProjectDao fopProjectDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private FopFlowRecordService fopFlowRecordService;
 
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(合作项目分页查询)
+     * @Description: 合作项目分页查询)
      * @param: @param condition
      * @param: @param start
      * @param: @param limit
@@ -64,7 +73,7 @@ public class FopProjectServiceImpl implements FopProjectService {
     /**
      * @throws
      * @Title:insertFopProject
-     * @Description: TODO(添加合作项目)
+     * @Description: 添加合作项目)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -75,28 +84,24 @@ public class FopProjectServiceImpl implements FopProjectService {
     @Override
     public MessageResponse insertFopProject(FopProject o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getProjectName())) {
             return new MessageResponse(1, "项目名称不能为空！");
         }
         if (CommonUtils.isBlank(o.getCoopType())) {
             return new MessageResponse(1, "合作方式不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
+
 
         int temp = this.fopProjectDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "合作项目名称重复！");
         }
+
+
+        o.setReleaseDate(DateUtil.getNowDate());
+
+        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -110,7 +115,7 @@ public class FopProjectServiceImpl implements FopProjectService {
     /**
      * @throws
      * @Title:updateFopProject
-     * @Description: TODO(更新合作项目)
+     * @Description: 更新合作项目)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -133,10 +138,6 @@ public class FopProjectServiceImpl implements FopProjectService {
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -150,7 +151,7 @@ public class FopProjectServiceImpl implements FopProjectService {
     /**
      * @throws
      * @Title:selectFopProjectByPrimaryKey
-     * @Description: TODO(获取合作项目)
+     * @Description: 获取合作项目)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<FopProject>
@@ -167,7 +168,7 @@ public class FopProjectServiceImpl implements FopProjectService {
     /**
      * @throws
      * @Title:deleteFopProjectByFopProjectId
-     * @Description: TODO(删除合作项目)
+     * @Description: 删除合作项目)
      * @param: @param id
      * @param: @param userProp
      * @param: @throws Exception
@@ -176,11 +177,73 @@ public class FopProjectServiceImpl implements FopProjectService {
      * @version: 2018-05-02
      */
     @Override
-    public MessageResponse deleteFopProjectByFopProjectId(String id,
-                                                          UserProp userProp) throws Exception {
-        this.fopProjectDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除合作项目", "合作项目", String.valueOf(id),
-                String.valueOf(id), "合作项目", userProp);
+    public MessageResponse deleteFopProjectByFopProjectId(String id, UserProp userProp) throws Exception {
+
+        FopProject fopProject = fopProjectDao.selectByPrimaryKey(id);
+        if (CommonUtils.isBlank(fopProject)) {
+            new MessageResponse(0, "合作项目记录丢失");
+        }
+        fopProject.setStatus("-1");
+        fopProject.setLastModifyDate(DateUtil.getNowDate());
+        fopProject.setLastModifyUserName(userProp.getName());
+        fopProject.setLastModifyUserId(userProp.getUserId());
+        fopProjectDao.updateByPrimaryKeySelective(fopProject);
+        dataBaseLogService.log("删除合作项目", "合作项目", id, id, "合作项目", userProp);
         return new MessageResponse(0, "合作项目删除完成！");
+    }
+
+    /**
+     * 功能描述: 审核发布项目
+     *
+     * @param id
+     * @param curUserProp
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/10 15:47
+     */
+    @Override
+    public MessageResponse audit(String id, UserProp userProp) throws Exception {
+
+        FopProject fopProject = fopProjectDao.selectByPrimaryKey(id);
+        if (CommonUtils.isBlank(fopProject)) {
+            new MessageResponse(0, "合作项目记录丢失");
+        }
+
+        if (fopProject.getStatus().equals("2")) {
+            return new MessageResponse(ResultCode.FAIL, "请勿重复发布");
+        }
+        //提交审核流程
+        String flowId = GUIDUtil.getGUID();
+        MessageResponse rs = fopFlowRecordService.submitFlowRecord(flowId, FlowType.COOP_PROJECT, id, userProp);
+        if (ResultCode.FAIL == rs.getStatus()) {
+            return rs;
+        }
+        //自动审核通过
+        FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
+        record.setAuditResult(AuditResult.PASS);
+        record.setAuditOpinion("系统自动审核");
+        record.setRemark("系统自动审核");
+        MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getErrorMessage());
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "发布成功");
+    }
+
+    /**
+     * 功能描述:  根据主键查询记录-单表
+     *
+     * @param id
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/10 17:11
+     */
+    @Override
+    public FopProject selectByPrimaryKey(String id) {
+
+        return fopProjectDao.selectByPrimaryKey(id);
     }
 }

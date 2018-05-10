@@ -1,7 +1,8 @@
 jQuery(function ($) {
     $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
         _title: function (title) {
-            var $title = this.options.title || '&nbsp;'
+            var $title =
+                this.options.title || '&nbsp;'
             if (("title_html" in this.options)
                 && this.options.title_html == true)
                 title.html($title);
@@ -84,12 +85,6 @@ jQuery(function ($) {
                     $.jgrid.nav.alerttext);
                 return;
             }
-
-            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            if (rowData.status == "2") {
-                alert("项目已审核，无法删除")
-                return;
-            }
             jQuery(cfg.grid_selector).jqGrid(
                 'delGridRow',
                 gr,
@@ -104,7 +99,6 @@ jQuery(function ($) {
                 })
         });
 
-
     //发布审核
     $('#btn-view-audit').on(
         'click',
@@ -116,15 +110,16 @@ jQuery(function ($) {
                     $.jgrid.nav.alerttext);
                 return;
             }
+
             var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
             if (rowData.status == "2") {
-                alert("请不要重复审核")
+                alert("请不要重复确认")
                 return;
             }
-            if (confirm("是否确认发布?")) {
+            if (confirm("是否确认回复?")) {
                 $.ajax({
                     type: "post",
-                    url: contextPath + "/fopProject/audit",
+                    url: contextPath + "/fopAppealHelp/audit",
                     data: {id: rowData.id},
                     beforeSend: function (XMLHttpRequest) {
                         sb('btn-view-audit', true, 'glyphicon glyphicon-refresh');

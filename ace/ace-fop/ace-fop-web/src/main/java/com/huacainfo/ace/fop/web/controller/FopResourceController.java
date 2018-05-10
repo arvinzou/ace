@@ -48,9 +48,8 @@ public class FopResourceController extends FopBaseController {
     @ResponseBody
     public PageResult<FopResourceVo> findFopResourceList(FopResourceQVo condition,
                                                          PageParamNoChangeSord page) throws Exception {
-        PageResult<FopResourceVo> rst = this.fopResourceService
-                .findFopResourceList(condition, page.getStart(), page.getLimit(),
-                        page.getOrderBy());
+        PageResult<FopResourceVo> rst = this.fopResourceService.findFopResourceList(condition,
+                page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -71,8 +70,7 @@ public class FopResourceController extends FopBaseController {
     @ResponseBody
     public MessageResponse insertFopResource(String jsons) throws Exception {
         FopResource obj = JSON.parseObject(jsons, FopResource.class);
-        return this.fopResourceService
-                .insertFopResource(obj, this.getCurUserProp());
+        return this.fopResourceService.insertFopResource(obj, this.getCurUserProp());
     }
 
     /**
@@ -89,8 +87,7 @@ public class FopResourceController extends FopBaseController {
     @ResponseBody
     public MessageResponse updateFopResource(String jsons) throws Exception {
         FopResource obj = JSON.parseObject(jsons, FopResource.class);
-        return this.fopResourceService
-                .updateFopResource(obj, this.getCurUserProp());
+        return this.fopResourceService.updateFopResource(obj, this.getCurUserProp());
     }
 
     /**

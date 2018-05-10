@@ -3,12 +3,13 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.FopProjectDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopProject">
         <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
+        <result column="relationType" jdbcType="VARCHAR" property="relationType"/>
         <result column="projectName" jdbcType="VARCHAR" property="projectName"/>
         <result column="projectCode" jdbcType="VARCHAR" property="projectCode"/>
         <result column="process" jdbcType="VARCHAR" property="process"/>
         <result column="personId" jdbcType="VARCHAR" property="personId"/>
         <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
-        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
         <result column="sector" jdbcType="VARCHAR" property="sector"/>
         <result column="coopType" jdbcType="CHAR" property="coopType"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
@@ -26,9 +27,10 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, projectName, projectCode, process, personId, areaCode, companyId, sector, coopType,
-        releaseDate, clicks, likes, remark, status, createUserId,
-    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, coopDesc
+        id, projectName, projectCode, process, personId, areaCode, relationId, sector, coopType,
+        releaseDate, clicks, likes, remark, status, createUserId, coopDesc,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
+        relationType
   </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -42,22 +44,18 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopProject">
-    insert into fop_project (id, projectName, projectCode, 
-      process, personId, areaCode, 
-      companyId, sector, coopType,
-        releaseDate,
-        clicks, likes, remark,
-      status, createUserId, createUserName, 
-      createDate, lastModifyUserId, lastModifyUserName, 
-      lastModifyDate, coopDesc)
+    insert into fop_project (id, projectName, projectCode,
+        process, personId, areaCode, relationId, sector, coopType, releaseDate,
+        clicks, likes, remark, status, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, coopDesc, relationType)
     values (#{id,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{projectCode,jdbcType=VARCHAR}, 
-      #{process,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
-      #{companyId,jdbcType=VARCHAR}, #{sector,jdbcType=VARCHAR}, #{coopType,jdbcType=CHAR},
-        #{releaseDate,jdbcType=TIMESTAMP},
-        #{clicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR},
-      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
-      #{lastModifyDate,jdbcType=TIMESTAMP}, #{coopDesc,jdbcType=LONGVARCHAR})
+      #{process,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR},
+        #{relationId,jdbcType=VARCHAR}, #{sector,jdbcType=VARCHAR}, #{coopType,jdbcType=CHAR},
+        #{releaseDate,jdbcType=TIMESTAMP}, #{clicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT},
+        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP}, #{coopDesc,jdbcType=LONGVARCHAR}, #{relationType,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopProject">
         insert into fop_project
@@ -80,8 +78,8 @@
             <if test="areaCode != null">
                 areaCode,
             </if>
-            <if test="companyId != null">
-                companyId,
+            <if test="relationId != null">
+                relationId,
             </if>
             <if test="sector != null">
                 sector,
@@ -125,6 +123,9 @@
             <if test="coopDesc != null">
                 coopDesc,
             </if>
+            <if test="relationType != null">
+                relationType,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -145,8 +146,8 @@
             <if test="areaCode != null">
                 #{areaCode,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="sector != null">
                 #{sector,jdbcType=VARCHAR},
@@ -190,6 +191,9 @@
             <if test="coopDesc != null">
                 #{coopDesc,jdbcType=LONGVARCHAR},
             </if>
+            <if test="relationType != null">
+                #{relationType,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopProject">
@@ -210,8 +214,8 @@
             <if test="areaCode != null">
                 areaCode = #{areaCode,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                companyId = #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                relationId = #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="sector != null">
                 sector = #{sector,jdbcType=VARCHAR},
@@ -255,6 +259,9 @@
             <if test="coopDesc != null">
                 coopDesc = #{coopDesc,jdbcType=LONGVARCHAR},
             </if>
+            <if test="relationType != null">
+                relationType = #{relationType,jdbcType=LONGVARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -265,7 +272,7 @@
       process = #{process,jdbcType=VARCHAR},
       personId = #{personId,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
-      companyId = #{companyId,jdbcType=VARCHAR},
+        relationId = #{relationId,jdbcType=VARCHAR},
       sector = #{sector,jdbcType=VARCHAR},
       coopType = #{coopType,jdbcType=CHAR},
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
@@ -278,14 +285,61 @@
       createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+        coopDesc = #{coopDesc,jdbcType=VARCHAR},
+        relationType = #{relationType,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopProjectVo">
+
+    </resultMap>
+    <sql id="Vo_Column_List">
+        id, projectName, projectCode, process, personId, areaCode, relationId, sector, coopType,
+        releaseDate, clicks, likes, remark, status, createUserId, coopDesc,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
+        relationType
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
         from fop_project
         where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_project t
+        where 1 = 1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopProject">
+        select count(*)
+        from fop_project
+        where projectName = #{projectName,jdbcType=VARCHAR}
+        and status in ('1','2')
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
     </select>
 </mapper>

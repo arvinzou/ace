@@ -10,6 +10,9 @@ public class FopProject implements Serializable {
     private static final long serialVersionUID = 3747651985465042863L;
     private String id;
 
+    private String relationId;
+    private String relationType;
+
     private String projectName;
 
     private String projectCode;
@@ -20,14 +23,13 @@ public class FopProject implements Serializable {
 
     private String areaCode;
 
-    private String companyId;
-
     private String sector;
 
     private String coopType;
 
-    private Date releaseDate;
+    private String coopDesc;
 
+    private Date releaseDate;
 
     private Long clicks;
 
@@ -49,7 +51,13 @@ public class FopProject implements Serializable {
 
     private Date lastModifyDate;
 
-    private String coopDesc;
+    public String getRelationType() {
+        return relationType;
+    }
+
+    public void setRelationType(String relationType) {
+        this.relationType = relationType;
+    }
 
     public String getId() {
         return id;
@@ -99,12 +107,12 @@ public class FopProject implements Serializable {
         this.areaCode = areaCode == null ? null : areaCode.trim();
     }
 
-    public String getCompanyId() {
-        return companyId;
+    public String getRelationId() {
+        return relationId;
     }
 
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId == null ? null : companyId.trim();
+    public void setRelationId(String relationId) {
+        this.relationId = relationId == null ? null : relationId.trim();
     }
 
     public String getSector() {

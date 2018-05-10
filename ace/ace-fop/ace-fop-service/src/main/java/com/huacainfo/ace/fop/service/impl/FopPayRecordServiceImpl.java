@@ -241,8 +241,7 @@ public class FopPayRecordServiceImpl implements FopPayRecordService {
         if (null == payRecord) {
             return new MessageResponse(ResultCode.FAIL, "缴费记录不存在");
         }
-        if (null == payRecord.getPayDate()
-                || BigDecimal.ZERO.compareTo(payRecord.getPayAmount()) > -1) {
+        if (null == payRecord.getPayDate() || BigDecimal.ZERO.compareTo(payRecord.getPayAmount()) > -1) {
             return new MessageResponse(ResultCode.FAIL, "缴费记录信息不全,请补充完整");
         }
         //提交流程，并审核通过

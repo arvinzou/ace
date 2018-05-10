@@ -263,7 +263,7 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopActivity">
         select count(*)
         from fop_activity
         where 0=1

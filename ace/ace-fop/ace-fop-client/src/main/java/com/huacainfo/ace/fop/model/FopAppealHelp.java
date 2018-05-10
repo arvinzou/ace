@@ -2,22 +2,7 @@ package com.huacainfo.ace.fop.model;
 
 import java.util.Date;
 
-public class FopGeHelp {
-    /**
-     * 接待和协调科室
-     */
-    private String optDeptName;
-    /**
-     * 经办领导
-     */
-    private String optLeaderName;
-    /**
-     * 服务进展
-     */
-    private String processDetail;
-
-    private String content;
-
+public class FopAppealHelp {
     private String id;
 
     private String requestId;
@@ -26,11 +11,13 @@ public class FopGeHelp {
 
     private String parentId;
 
-    private String title;
+    private String requestTitle;
 
-    private String reply;
+    private String requestDesc;
 
-    private Date releaseDate;
+    private Date submitDate;
+
+    private String response;
 
     private String keyWord;
 
@@ -38,9 +25,6 @@ public class FopGeHelp {
 
     private String remark;
 
-    /**
-     * 1-未发布，2-已发布
-     */
     private String status;
 
     private String createUserId;
@@ -54,38 +38,6 @@ public class FopGeHelp {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getOptDeptName() {
-        return optDeptName;
-    }
-
-    public void setOptDeptName(String optDeptName) {
-        this.optDeptName = optDeptName;
-    }
-
-    public String getOptLeaderName() {
-        return optLeaderName;
-    }
-
-    public void setOptLeaderName(String optLeaderName) {
-        this.optLeaderName = optLeaderName;
-    }
-
-    public String getProcessDetail() {
-        return processDetail;
-    }
-
-    public void setProcessDetail(String processDetail) {
-        this.processDetail = processDetail;
-    }
 
     public String getId() {
         return id;
@@ -119,28 +71,36 @@ public class FopGeHelp {
         this.parentId = parentId == null ? null : parentId.trim();
     }
 
-    public String getTitle() {
-        return title;
+    public String getRequestTitle() {
+        return requestTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setRequestTitle(String requestTitle) {
+        this.requestTitle = requestTitle == null ? null : requestTitle.trim();
     }
 
-    public String getReply() {
-        return reply;
+    public String getRequestDesc() {
+        return requestDesc;
     }
 
-    public void setReply(String reply) {
-        this.reply = reply == null ? null : reply.trim();
+    public void setRequestDesc(String requestDesc) {
+        this.requestDesc = requestDesc == null ? null : requestDesc.trim();
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
+    public Date getSubmitDate() {
+        return submitDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setSubmitDate(Date submitDate) {
+        this.submitDate = submitDate;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response == null ? null : response.trim();
     }
 
     public String getKeyWord() {

@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.FopLoanProductDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopLoanProduct">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
         <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
         <result column="productName" jdbcType="VARCHAR" property="productName"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
@@ -25,7 +25,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, companyId, areaCode, productName, description, loanAmount, rateType, loanRate,
+        id, relationId, areaCode, productName, description, loanAmount, rateType, loanRate,
         loanType, loanYear, repaymentType, suretyType, remark, status, createUserId, createUserName,
         createDate, releaseDate,lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
@@ -40,14 +40,14 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopLoanProduct">
-    insert into fop_loan_product (id, companyId, areaCode, 
+        insert into fop_loan_product (id, relationId, areaCode,
       productName, description, loanAmount,
         rateType, loanRate, loanType,
         loanYear, repaymentType, suretyType,
       remark, status, createUserId,
         createUserName, createDate,releaseDate, lastModifyUserId,
       lastModifyUserName, lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+        values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR},
       #{productName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{loanAmount,jdbcType=DECIMAL},
         #{rateType,jdbcType=CHAR}, #{loanRate,jdbcType=DECIMAL}, #{loanType,jdbcType=CHAR},
         #{loanYear,jdbcType=CHAR}, #{repaymentType,jdbcType=CHAR}, #{suretyType,jdbcType=CHAR},
@@ -62,8 +62,8 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="companyId != null">
-                companyId,
+            <if test="relationId != null">
+                relationId,
             </if>
             <if test="areaCode != null">
                 areaCode,
@@ -127,8 +127,8 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="areaCode != null">
                 #{areaCode,jdbcType=VARCHAR},
@@ -192,8 +192,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopLoanProduct">
         update fop_loan_product
         <set>
-            <if test="companyId != null">
-                companyId = #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                relationId = #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="areaCode != null">
                 areaCode = #{areaCode,jdbcType=VARCHAR},
@@ -257,7 +257,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopLoanProduct">
     update fop_loan_product
-    set companyId = #{companyId,jdbcType=VARCHAR},
+        set relationId = #{relationId,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
       productName = #{productName,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
@@ -280,7 +280,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo. ">
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopLoanProductVo">
 
     </resultMap>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -355,7 +355,7 @@
 
 
     <sql id="Base_Column_List_Vo">
-        f.id, f.companyId, f.areaCode, f.productName, f.description, f.loanAmount, f.rateType, f.loanRate,
+        f.id, f.relationId, f.areaCode, f.productName, f.description, f.loanAmount, f.rateType, f.loanRate,
     f.loanType, f.loanYear, f.repaymentType, f.suretyType,  f.remark,f.releaseDate,
         f.status, f.createUserId, f.createUserName, f.createDate, f.lastModifyUserId, f.lastModifyUserName,
         f.lastModifyDate, c.fullName as companyName
@@ -363,7 +363,7 @@
 
     <sql id="fromCondition_Vo">
         from fop_loan_product f
-        left join fop_company c on f.companyId=c.id
+        left join fop_company c on f.relationId=c.id
     </sql>
     <sql id="whereCondition_Vo">
         where 0=0

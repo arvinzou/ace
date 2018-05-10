@@ -209,8 +209,8 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
      * @version: 2018-05-02
      */
     @Override
-    public MessageResponse deleteFopFinanceProjectByFopFinanceProjectId(String id,
-                                                                        UserProp userProp) throws Exception {
+    public MessageResponse deleteFopFinanceProjectByFopFinanceProjectId(String id, UserProp userProp) throws Exception {
+
         this.fopFinanceProjectDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除流程记录", "流程记录", String.valueOf(id),
                 String.valueOf(id), "流程记录", userProp);

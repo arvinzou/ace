@@ -11,13 +11,13 @@ import com.huacainfo.ace.fop.vo.FopResourceVo;
 /**
  * @author: Arvin
  * @version: 2018-05-02
- * @Description: TODO(企业管理)
+ * @Description: 资源文件
  */
 public interface FopResourceService {
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(企业管理分页查询)
+     * @Description: 资源文件分页查询
      * @param: @param condition
      * @param: @param start
      * @param: @param limit
@@ -27,12 +27,12 @@ public interface FopResourceService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract PageResult<FopResourceVo> findFopResourceList(FopResourceQVo condition, int start, int limit, String orderBy) throws Exception;
+    PageResult<FopResourceVo> findFopResourceList(FopResourceQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
      * @Title:insertFopResource
-     * @Description: TODO(添加企业管理)
+     * @Description: 添加资源文件
      * @param: @param obj
      * @param: @param userProp
      * @param: @throws Exception
@@ -40,12 +40,12 @@ public interface FopResourceService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse insertFopResource(FopResource obj, UserProp userProp) throws Exception;
+    MessageResponse insertFopResource(FopResource obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
      * @Title:updateFopResource
-     * @Description: TODO(更新企业管理)
+     * @Description: 更新资源文件
      * @param: @param obj
      * @param: @param userProp
      * @param: @throws Exception
@@ -53,24 +53,24 @@ public interface FopResourceService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse updateFopResource(FopResource obj, UserProp userProp) throws Exception;
+    MessageResponse updateFopResource(FopResource obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
      * @Title:selectFopResourceByPrimaryKey
-     * @Description: TODO(获取企业管理)
+     * @Description: 获取资源文件
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<FopResource>
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract SingleResult<FopResourceVo> selectFopResourceByPrimaryKey(String id) throws Exception;
+    SingleResult<FopResourceVo> selectFopResourceByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
      * @Title:deleteFopResourceByFopResourceId
-     * @Description: TODO(删除企业管理)
+     * @Description: 删除资源文件
      * @param: @param id
      * @param: @param  userProp
      * @param: @throws Exception
@@ -78,7 +78,6 @@ public interface FopResourceService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse deleteFopResourceByFopResourceId(String id, UserProp userProp) throws Exception;
-
+    MessageResponse deleteFopResourceByFopResourceId(String id, UserProp userProp) throws Exception;
 
 }
