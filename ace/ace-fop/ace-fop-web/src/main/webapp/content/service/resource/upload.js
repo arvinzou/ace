@@ -42,7 +42,6 @@ function init_uploader(config) {
             uploader.splice(1, 999);
         }
     });
-
     uploader.bind("FileUploaded", function (uploader, file, responseObject) {
         console.log(responseObject.response);
         var rst = JSON.parse(responseObject.response);
@@ -64,7 +63,12 @@ function init_uploader(config) {
         }
         else {
             if (config.target) {
-                $('input[name=' + config.target + ']').val(rst.value);
+                $('input[name=' + config.target + ']').val(rst.value.fileNames);
+                var resName = rst.value.fileName;
+                $('input[name=resName]').val(resName);
+                $('input[name=resSize]').val(rst.value.fileSize);
+                $('input[name=resType]').val(resName.substring(resName.lastIndexOf(".") + 1));
+
                 if (config.target == 'grid') {
                     jQuery(cfgsub.grid_selector).jqGrid('setGridParam', {
                         page: 1,
@@ -86,10 +90,10 @@ function init_uploader(config) {
                         }
                     }
                 });
+
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {
                     page: 1,
-                    postData: {
-                    }
+                    postData: {}
                 }).trigger("reloadGrid");
             }
             $("#dialog-message").dialog("close");
@@ -113,8 +117,8 @@ function appendUploadBtn(id) {
         function (e) {
             e.preventDefault();
             var config = {
-                extensions: "jpg,gif,png,bmp",
-                url: portalPath + '/files/uploadFile.do',
+                extensions: "doc,docx,xlsx,xls,pdf,pptx,ppt,jpg,gif,png,bmp",
+                url: portalPath + '/files/uploadFilePlus.do',
                 target: id,
                 multipart_params: {}
             };

@@ -87,7 +87,7 @@ public class FopResource implements Serializable {
     }
 
     public void setResSize(String resSize) {
-        this.resSize = resSize == null ? null : resSize.trim();
+        this.resSize = resSize == null ? resSize : resSize.trim();
     }
 
     public String getResUrl() {

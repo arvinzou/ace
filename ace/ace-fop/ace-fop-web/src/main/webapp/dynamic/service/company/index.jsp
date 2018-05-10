@@ -10,8 +10,12 @@
     <title>企业管理</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
-<script type="text/javascript">
 
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
+<script type="text/javascript">
 
 </script>
 <body>
@@ -302,16 +306,16 @@
 <script src="${pageContext.request.contextPath}/content/service/company/view.js?version=${cfg.version}"></script>
 
 <script src="${pageContext.request.contextPath}/content/service/company/upload.js?version=${cfg.version}"></script>
-<link rel="stylesheet"
-      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
-      type="text/css" media="screen"/>
+
+
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
-<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+
+
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
