@@ -4,7 +4,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.collections.map.HashedMap;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.ImageCut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,8 +104,8 @@ public class FilesController extends PortalBaseController {
 
 	@RequestMapping(value = "/uploadImage.do")
 	@ResponseBody
-	public Map<String,Object> uploadImage(@RequestParam MultipartFile[] file, String collectionName)
-			throws Exception {
+	public Map<String,Object> uploadImage(@RequestParam MultipartFile[] file, String collectionName,String x, String y, String desWidth, String desHeight, String srcWidth,
+										  String srcHeight)throws Exception {
 
 		Map<String,Object> rst = new HashMap<String,Object>();
 		String fastdfs_server=((Map)this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
@@ -117,7 +118,11 @@ public class FilesController extends PortalBaseController {
 		int i = 0;
 		for (MultipartFile o : file) {
 			File dest = new File(dir + File.separator + o.getName());
-			o.transferTo(dest);
+			if(CommonUtils.isNotEmpty(x)){
+				ImageCut.imgCut(o.getInputStream(),Integer.valueOf(x),Integer.valueOf(y),Integer.valueOf(desWidth),Integer.valueOf(desHeight),Integer.valueOf(srcWidth),Integer.valueOf(srcHeight),dest);
+			}else{
+				o.transferTo(dest);
+			}
 			fileNames[i] = this.fileSaver.saveFile(dest,
 					o.getOriginalFilename());
 			dest.delete();
