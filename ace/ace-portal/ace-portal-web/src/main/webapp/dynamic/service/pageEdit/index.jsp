@@ -82,7 +82,13 @@
                                     </nav>
 
                                     <div class="edit" id="edit_bottom">
+
+                                        <div id="navitem">
+
+                                        </div>
                                     </div>
+
+
 
                                 </div>
 
@@ -115,6 +121,33 @@
             {@/each}
         </ul>
     </div>
+
+</script>
+<script id="tpl-navitem" type="text/template">
+    {@each data.data.categorys as item,index}
+    {@if index==0}
+    <div class="navitem" data-id="\${item.id}" style="display: block;">
+        {@else}
+        <div class="navitem" data-id="\${item.id}" style="display: none;">
+            {@/if}
+            {@each item.articles as o}
+            <a class="list_item" href="{@if o.hrefUrl}\${o.hrefUrl}{@else}preview.jsp?id=\${o.id}{@/if}">
+                <h2 class="title">\${o.title}</h2>
+                <div class="cover ">
+                    <img class="img js_img" src="\${o.cover}">
+                </div>
+                <div class="cont">
+
+                    <p class="desc">\${o.remark}</p>
+                </div>
+                <p>
+                    <span style="background-color:#9e28b8;color:#FFFFFF">\${o.tags}</span>
+
+                </p>
+            </a>
+            {@/each}
+        </div>
+        {@/each}
 
 </script>
 <div class="modal fade" id="model1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
