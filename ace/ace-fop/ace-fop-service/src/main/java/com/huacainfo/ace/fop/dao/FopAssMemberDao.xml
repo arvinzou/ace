@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopAssMember">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="assId" jdbcType="VARCHAR" property="assId"/>
-        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
         <result column="assPost" jdbcType="VARCHAR" property="assPost"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -16,7 +16,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, assId, companyId, assPost, remark, status, createUserId, createUserName, createDate, 
+        id, assId, relationId, assPost, remark, status, createUserId, createUserName, createDate,
     lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -30,12 +30,12 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopAssMember">
-    insert into fop_ass_member (id, assId, companyId, 
+        insert into fop_ass_member (id, assId, relationId,
       assPost, remark, status, 
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate
       )
-    values (#{id,jdbcType=VARCHAR}, #{assId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+        values (#{id,jdbcType=VARCHAR}, #{assId,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR},
       #{assPost,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
@@ -50,8 +50,8 @@
             <if test="assId != null">
                 assId,
             </if>
-            <if test="companyId != null">
-                companyId,
+            <if test="relationId != null">
+                relationId,
             </if>
             <if test="assPost != null">
                 assPost,
@@ -88,8 +88,8 @@
             <if test="assId != null">
                 #{assId,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="assPost != null">
                 #{assPost,jdbcType=VARCHAR},
@@ -126,8 +126,8 @@
             <if test="assId != null">
                 assId = #{assId,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                companyId = #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                relationId = #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="assPost != null">
                 assPost = #{assPost,jdbcType=VARCHAR},
@@ -162,7 +162,7 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopAssMember">
     update fop_ass_member
     set assId = #{assId,jdbcType=VARCHAR},
-      companyId = #{companyId,jdbcType=VARCHAR},
+        relationId = #{relationId,jdbcType=VARCHAR},
       assPost = #{assPost,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},

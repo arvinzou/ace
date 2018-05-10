@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title> 支付记录</title>
+    <title>诉求服务</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -19,14 +19,11 @@
     <div class="widget-box" id="widget-box">
         <div class="widget-header">
             <h5 class="widget-title smaller">设置查询条件</h5>
-
             <div class="widget-toolbar"></div>
         </div>
-
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-
                     类别：<input name="category" class="easyui-combobox" style="width: 200px"
                               data-options="
                     url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
@@ -37,46 +34,37 @@
 
                     名称： <input name="name" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/fopPayRecord/findFopPayRecordList">
+                            authority="${pageContext.request.contextPath}/fopAppealHelp/findFopAppealHelpList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
 
                     <%--<button class="btn btn-info" id="btn-view-add"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopPayRecord/insertFopPayRecord">--%>
+                    <%--authority="${pageContext.request.contextPath}/fopAppealHelp/insertFopAppealHelp">--%>
                     <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
                     <%--</button>--%>
                     <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/fopPayRecord/updateFopPayRecord">
+                            authority="${pageContext.request.contextPath}/fopAppealHelp/updateFopAppealHelp">
                         <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
-                    <%--<button class="btn btn-warning" id="btn-view-del"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopPayRecord/deleteFopPayRecordByFopPayRecordId">--%>
-                    <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
+                    <button class="btn btn-warning" id="btn-view-del"
+                            authority="${pageContext.request.contextPath}/fopAppealHelp/deleteFopAppealHelpByFopAppealHelpId">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
 
                     <button class="btn btn-purple" id="btn-view-audit"
-                            authority="${pageContext.request.contextPath}/fopPayRecord/audit">
-                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                            authority="${pageContext.request.contextPath}/fopAppealHelp/audit">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
-                    <button class="btn btn-purple" id="btn-view-send-notice"
-                            authority="${pageContext.request.contextPath}/fopPayRecord/sendNotice">
-                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-
                 </div>
             </div>
         </div>
     </div>
 
     <table id="grid-table"></table>
-
     <div id="grid-pager"></div>
-
 </div>
 <div id="dialog-message" class="hide">
     <div id="uploader">
@@ -95,60 +83,50 @@
             <br>
             <span id="id"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">企业ID</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">发起人ID</span>
             <br>
-            <span id="relationId"></span>
+            <span id="requestId"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">发起人类型</span>
+            <br>
+            <span id="requestType"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">父节点ID</span>
+            <br>
+            <span id="parentId"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">缴费年度</span>
+            <span class="labelItemHeader">诉求标题</span>
             <br>
-            <span id="payYear"></span>
+            <span id="requestTitle"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">缴费季度</span>
+            <span class="labelItemHeader">诉求内容</span>
             <br>
-            <span id="payQuarter"></span>
+            <span id="requestDesc"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">缴费月度</span>
+            <span class="labelItemHeader">提交时间</span>
             <br>
-            <span id="payMonth"></span>
+            <span id="submitDate"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">缴费日</span>
+            <span class="labelItemHeader">回复内容</span>
             <br>
-            <span id="payDay"></span>
+            <span id="response"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">缴费项目</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">所含关键字</span>
             <br>
-            <span id="payCategory"></span>
+            <span id="keyWord"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">缴费级别</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">累计提问次数</span>
             <br>
-            <span id="payLevel"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">缴费时间</span>
-            <br>
-            <span id="payDate"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">缴纳金额</span>
-            <br>
-            <span id="payAmount"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">有效截止日期</span>
-            <br>
-            <span id="dendline"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">是否已缴纳</span>
-            <br>
-            <span id="payResult"></span>
+            <span id="accCount"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">备注</span>
@@ -197,14 +175,10 @@
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
-<script
-        src="${pageContext.request.contextPath}/content/service/payRecord/config.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/payRecord/model.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/payRecord/controller.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/payRecord/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/fopAppealHelp/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/fopAppealHelp/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/fopAppealHelp/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/fopAppealHelp/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

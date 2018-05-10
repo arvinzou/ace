@@ -119,7 +119,7 @@
         <div class="labelItem"><span class="labelItemHeader">
 所属公司</span>
             <br>
-            <span id="companyId">
+            <span id="relationId">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">

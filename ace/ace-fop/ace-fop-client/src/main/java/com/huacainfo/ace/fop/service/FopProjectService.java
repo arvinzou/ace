@@ -80,5 +80,23 @@ public interface FopProjectService {
      */
     public abstract MessageResponse deleteFopProjectByFopProjectId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 功能描述: 审核发布项目
+     *
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/10 15:47
+     */
+    MessageResponse audit(String id, UserProp curUserProp) throws Exception;
 
+    /**
+     * 功能描述:  根据主键查询记录-单表
+     *
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/10 17:11
+     */
+    FopProject selectByPrimaryKey(String fromId);
 }

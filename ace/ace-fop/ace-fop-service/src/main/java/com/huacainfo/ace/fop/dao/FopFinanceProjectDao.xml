@@ -6,7 +6,7 @@
         <result column="financeTitle" jdbcType="VARCHAR" property="financeTitle"/>
         <result column="financeCode" jdbcType="VARCHAR" property="financeCode"/>
         <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
-        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
         <result column="financeAmount" jdbcType="DECIMAL" property="financeAmount"/>
         <result column="financeYear" jdbcType="VARCHAR" property="financeYear"/>
@@ -25,13 +25,13 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, financeTitle, financeCode, areaCode, companyId, releaseDate, financeAmount,
+        id, financeTitle, financeCode, areaCode, relationId, releaseDate, financeAmount,
         financeYear, yearYield, clicks, likes, remark,
     status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
     lastModifyDate, financeContent
   </sql>
     <sql id="Base_Column_List_Vo">
-        f.id, f.financeTitle, f.financeCode, f.areaCode, f.companyId, f.releaseDate, f.financeAmount,
+        f.id, f.financeTitle, f.financeCode, f.areaCode, f.relationId, f.releaseDate, f.financeAmount,
         f.financeYear, f.yearYield, f.clicks, f.likes, f.remark,
     f.status, f.createUserId, f.createUserName, f.createDate, f.lastModifyUserId, f.lastModifyUserName,
     f.lastModifyDate, f.financeContent,c.fullName as companyName
@@ -47,8 +47,8 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopFinanceProject">
-    insert into fop_finance_project (id, financeTitle, financeCode, 
-      areaCode, companyId, releaseDate,
+    insert into fop_finance_project (id, financeTitle, financeCode,
+        areaCode, relationId, releaseDate,
         financeAmount,
         financeYear, yearYield,
         clicks, likes,
@@ -56,8 +56,8 @@
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate, financeContent
       )
-    values (#{id,jdbcType=VARCHAR}, #{financeTitle,jdbcType=VARCHAR}, #{financeCode,jdbcType=VARCHAR}, 
-      #{areaCode,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP},
+    values (#{id,jdbcType=VARCHAR}, #{financeTitle,jdbcType=VARCHAR}, #{financeCode,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP},
         #{financeAmount,jdbcType=DECIMAL},
         #{financeYear,jdbcType=VARCHAR}, #{yearYield,jdbcType=DECIMAL},
         #{clicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT},
@@ -81,8 +81,8 @@
             <if test="areaCode != null">
                 areaCode,
             </if>
-            <if test="companyId != null">
-                companyId,
+            <if test="relationId != null">
+                relationId,
             </if>
             <if test="releaseDate != null">
                 releaseDate,
@@ -143,8 +143,8 @@
             <if test="areaCode != null">
                 #{areaCode,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="releaseDate != null">
                 #{releaseDate,jdbcType=TIMESTAMP},
@@ -205,8 +205,8 @@
             <if test="areaCode != null">
                 areaCode = #{areaCode,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                companyId = #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                relationId = #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="releaseDate != null">
                 releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
@@ -261,7 +261,7 @@
     set financeTitle = #{financeTitle,jdbcType=VARCHAR},
       financeCode = #{financeCode,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
-      companyId = #{companyId,jdbcType=VARCHAR},
+        relationId = #{relationId,jdbcType=VARCHAR},
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
       financeAmount = #{financeAmount,jdbcType=DECIMAL},
       financeYear = #{financeYear,jdbcType=VARCHAR},
@@ -357,7 +357,7 @@
 
     <sql id="fromCondition_Vo">
         from fop_finance_project f
-        left join fop_company c on f.companyId=c.id
+        left join fop_company c on f.relationId=c.id
     </sql>
     <sql id="whereCondition_Vo">
         where 0=0
