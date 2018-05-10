@@ -151,11 +151,11 @@
             </script>
             <script id="tpl-navitem" type="text/template">
                 {@each data.data.categorys as item,index} {@if index==0}
-                <div class="navitem" data-id="\${item.id}" style="display: block;">
+                <div class="navitem" data-id="\${item.id}" style="display: block;" id="\${item.id}">
                     {@else}
-                    <div class="navitem" data-id="\${item.id}" style="display: none;">
+                    <div class="navitem" data-id="\${item.id}" data-tags="\${o.tags}" style="display: none;" id="\${item.id}">
                         {@/if} {@each item.articles as o}
-                        <a class="list_item" href="javascript:false">
+                        <div class="list_item" data-id="\${o.id}" data-category="\${item.id}">
                             <h2 class="title">\${o.title}</h2>
                             <div class="cover ">
                                 <img class="img js_img" src="\${o.cover}">
@@ -166,9 +166,8 @@
                             </div>
                             <p>
                                 <span style="background-color:#9e28b8;color:#FFFFFF">\${o.tags}</span>
-
                             </p>
-                        </a>
+                        </div>
                         {@/each}
                     </div>
                     {@/each}
