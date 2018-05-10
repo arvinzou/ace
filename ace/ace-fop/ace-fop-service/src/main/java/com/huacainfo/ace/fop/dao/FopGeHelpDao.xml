@@ -22,11 +22,12 @@
         <result column="optDeptName" jdbcType="VARCHAR" property="optDeptName"/>
         <result column="optLeaderName" jdbcType="VARCHAR" property="optLeaderName"/>
         <result column="processDetail" jdbcType="VARCHAR" property="processDetail"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, requestId, requestType, parentId, title, reply, releaseDate, keyWord, accCount,
         remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
-        lastModifyDate, optDeptName, optLeaderName, processDetail
+        lastModifyDate, optDeptName, optLeaderName, processDetail,content
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -44,14 +45,15 @@
         releaseDate, keyWord, accCount,
         remark, status, createUserId,
         createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
-        optDeptName, optLeaderName, processDetail)
+        optDeptName, optLeaderName, processDetail,content)
         values (#{id,jdbcType=VARCHAR}, #{requestId,jdbcType=VARCHAR}, #{requestType,jdbcType=CHAR},
         #{parentId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{reply,jdbcType=VARCHAR},
         #{releaseDate,jdbcType=TIMESTAMP}, #{keyWord,jdbcType=VARCHAR}, #{accCount,jdbcType=BIGINT},
         #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
         #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
-        #{optDeptName,jdbcType=VARCHAR}, #{optLeaderName,jdbcType=VARCHAR}, #{processDetail,jdbcType=CHAR} )
+        #{optDeptName,jdbcType=VARCHAR}, #{optLeaderName,jdbcType=VARCHAR},
+        #{processDetail,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR} )
     </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopGeHelp">
         insert into fop_ge_help
@@ -116,6 +118,9 @@
             <if test="processDetail != null">
                 processDetail,
             </if>
+            <if test="content != null">
+                content,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -177,6 +182,9 @@
             </if>
             <if test="processDetail != null">
                 #{processDetail,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -240,6 +248,9 @@
             <if test="processDetail != null">
                 processDetail = #{processDetail,jdbcType=VARCHAR},
             </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -264,13 +275,14 @@
         optDeptName = #{optDeptName,jdbcType=VARCHAR},
         optLeaderName = #{optLeaderName,jdbcType=VARCHAR},
         processDetail = #{processDetail,jdbcType=VARCHAR}
+        content = #{content,jdbcType=VARCHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <sql id="Vo_Column_List">
         t.id, t.requestId, t.requestType, t.parentId, t.title, t.reply, t.releaseDate, t.keyWord, t.accCount,
         t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
-        t.lastModifyDate, t.optDeptName, t.optLeaderName, t.processDetail
+        t.lastModifyDate, t.optDeptName, t.optLeaderName, t.processDetail,t.content
     </sql>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopGeHelpVo">
@@ -293,7 +305,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.createDate
+                ORDER BY t.releaseDate DESC
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -304,6 +316,20 @@
         where 1 = 1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.replied!=null and condition.replied!=&quot;&quot;">
+            <if test="condition.replied!='true'">
+                and t.reply is not null
+            </if>
+            <if test="condition.replied!='false'">
+                and t.reply is null
+            </if>
+        </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=CHAR}
+        </if>
+        <if test='condition.title!=null and condition.title!=""'>
+            and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 

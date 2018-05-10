@@ -6,13 +6,19 @@ import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.dao.FopAssociationDao;
+import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopGeHelpDao;
+import com.huacainfo.ace.fop.model.FopAssociation;
+import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
@@ -20,6 +26,8 @@ import com.huacainfo.ace.fop.service.FopGeHelpService;
 import com.huacainfo.ace.fop.vo.FopGeHelpQVo;
 import com.huacainfo.ace.fop.vo.FopGeHelpVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +46,18 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private FopGeHelpDao fopGeHelpDao;
+
+    @Autowired
+    private FopCompanyDao fopCompanyDao;
+
+    @Autowired
+    private FopAssociationDao fopAssociationDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private FopFlowRecordService fopFlowRecordService;
+    @Autowired
+    private UsersService usersService;
 
     /**
      * @throws
@@ -71,6 +87,13 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         return rst;
     }
 
+    @Override
+    public ResultResponse findGeHelpList(FopGeHelpQVo condition, int page, int limit, String orderBy) throws Exception {
+        List<FopGeHelpVo> list = this.fopGeHelpDao.findList(condition, (page - 1) * limit, limit, orderBy);
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "获取政企服务列表", list);
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:insertFopGeHelp
@@ -86,7 +109,6 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
     public MessageResponse insertFopGeHelp(FopGeHelp o, UserProp userProp)
             throws Exception {
         o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -102,14 +124,77 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }
+        if (CommonUtils.isBlank(o.getContent())) {
+            return new MessageResponse(1, "内容不能为空！");
+        }
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        o.setReleaseDate(new Date());
+        o.setCreateUserName(userProp.getName());
+        o.setCreateUserId(userProp.getUserId());
+        this.fopGeHelpDao.insertSelective(o);
+        /*this.dataBaseLogService.log("添加政企服务", "政企服务", "",
+                o.getId(), o.getId(), userProp);*/
+        return new MessageResponse(0, "添加政企服务完成！");
+    }
 
+    /**
+     * @throws
+     * @Title:insertFopGeHelp
+     * @Description: TODO(添加政企服务)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-05-08
+     */
+    @Override
+    public MessageResponse insertGeHelp(FopGeHelp o, UserProp userProp)
+            throws Exception {
+        o.setId(GUIDUtil.getGUID());
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        o.setRequestId(userProp.getUserId());
+        if (CommonUtils.isBlank(o.getRequestId())) {
+            return new MessageResponse(1, "没有登陆");
+        }
+        UsersVo user = usersService.selectUsersByPrimaryKey(userProp.getUserId()).getValue();
+        if (null == user) {
+            return new MessageResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new MessageResponse(1, "账户没有绑定企业！");
+        }
+        FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+        FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+        if (null != fc) {
+            o.setRequestType(FopConstant.COMPANY);
+        }
+        if (null != fa) {
+            o.setRequestType(FopConstant.ASSOCIATION);
+        }
+        if (CommonUtils.isBlank(o.getRequestType())) {
+            return new MessageResponse(1, "发起人类型不能为空！");
+        }
+        o.setParentId("0");
+        if (CommonUtils.isBlank(o.getParentId())) {
+            return new MessageResponse(1, "父节点ID不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "标题不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getContent())) {
+            return new MessageResponse(1, "内容不能为空！");
+        }
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopGeHelpDao.insertSelective(o);
-        this.dataBaseLogService.log("添加政企服务", "政企服务", "",
-                o.getId(), o.getId(), userProp);
+        /*this.dataBaseLogService.log("添加政企服务", "政企服务", "",
+                o.getId(), o.getId(), userProp);*/
         return new MessageResponse(0, "添加政企服务完成！");
     }
 
@@ -137,7 +222,6 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         o.setRequestId(fopGeHelp.getRequestId());
         o.setRequestType(fopGeHelp.getRequestType());
         o.setParentId(fopGeHelp.getParentId());
-
         if (CommonUtils.isBlank(o.getRequestId())) {
             return new MessageResponse(1, "发起人ID不能为空！");
         }
@@ -150,14 +234,42 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }
-
-
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "内容不能为空！");
+        }
         o.setLastModifyDate(new Date());
+        o.setReleaseDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopGeHelpDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更政企服务", "政企服务", "",
-                o.getId(), o.getId(), userProp);
+        /*this.dataBaseLogService.log("变更政企服务", "政企服务", "",
+                o.getId(), o.getId(), userProp);*/
+        return new MessageResponse(0, "变更政企服务完成！");
+    }
+
+    @Override
+    public MessageResponse updateGeHelp(FopGeHelp o, UserProp userProp)
+            throws Exception {
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        FopGeHelp fopGeHelp = fopGeHelpDao.selectByPrimaryKey(o.getId());
+        if (null == fopGeHelp) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "标题不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "内容不能为空！");
+        }
+        o.setLastModifyDate(new Date());
+        o.setReleaseDate(new Date());
+        o.setLastModifyUserName(userProp.getName());
+        o.setLastModifyUserId(userProp.getUserId());
+        this.fopGeHelpDao.updateByPrimaryKeySelective(o);
+        /*this.dataBaseLogService.log("变更政企服务", "政企服务", "",
+                o.getId(), o.getId(), userProp);*/
         return new MessageResponse(0, "变更政企服务完成！");
     }
 
@@ -203,9 +315,9 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         fopGeHelpDao.updateByPrimaryKeySelective(fopGeHelp);
 
 
-        dataBaseLogService.log("删除政企服务", "政企服务",
+        /*dataBaseLogService.log("删除政企服务", "政企服务",
                 String.valueOf(id),
-                String.valueOf(id), "政企服务", userProp);
+                String.valueOf(id), "政企服务", userProp);*/
         return new MessageResponse(0, "政企服务删除完成！");
     }
 
@@ -219,6 +331,7 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
      */
     @Override
     public MessageResponse audit(String id, UserProp userProp) throws Exception {
+
         FopGeHelp fopGeHelp = fopGeHelpDao.selectByPrimaryKey(id);
         if (null == fopGeHelp) {
             return new MessageResponse(ResultCode.FAIL, "记录数据丢失");

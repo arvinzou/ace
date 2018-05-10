@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.fop.vo.FopGeHelpQVo;
@@ -30,6 +31,9 @@ public interface FopGeHelpService {
      */
     PageResult<FopGeHelpVo> findFopGeHelpList(FopGeHelpQVo condition, int start, int limit, String orderBy) throws Exception;
 
+
+    ResultResponse findGeHelpList(FopGeHelpQVo condition, int page, int limit, String orderBy) throws Exception;
+
     /**
      * @throws
      * @Title:insertFopGeHelp
@@ -43,6 +47,8 @@ public interface FopGeHelpService {
      */
     MessageResponse insertFopGeHelp(FopGeHelp obj, UserProp userProp) throws Exception;
 
+    MessageResponse insertGeHelp(FopGeHelp obj, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateFopGeHelp
@@ -55,6 +61,8 @@ public interface FopGeHelpService {
      * @version: 2018-05-08
      */
     MessageResponse updateFopGeHelp(FopGeHelp obj, UserProp userProp) throws Exception;
+
+    MessageResponse updateGeHelp(FopGeHelp obj, UserProp userProp) throws Exception;
 
     /**
      * @throws

@@ -17,6 +17,8 @@ public interface FopAssociationDao {
 
     FopAssociation selectByPrimaryKey(String id);
 
+    FopAssociation selectByDepartmentId(String selectByDepartmentId);
+
     int updateByPrimaryKeySelective(FopAssociation record);
 
     int updateByPrimaryKey(FopAssociation record);

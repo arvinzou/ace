@@ -18,6 +18,8 @@ public interface FopCompanyDao {
 
     FopCompany selectByPrimaryKey(String id);
 
+    FopCompany selectByDepartmentId(String selectByDepartmentId);
+
     int updateByPrimaryKeySelective(FopCompany record);
 
     int updateByPrimaryKey(FopCompany record);
