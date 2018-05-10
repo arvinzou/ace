@@ -16,6 +16,8 @@ public class FopGeHelp {
      */
     private String processDetail;
 
+    private String content;
+
     private String id;
 
     private String requestId;
@@ -52,6 +54,14 @@ public class FopGeHelp {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getOptDeptName() {
         return optDeptName;

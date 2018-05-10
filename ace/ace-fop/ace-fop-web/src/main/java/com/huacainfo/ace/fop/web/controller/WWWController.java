@@ -10,9 +10,11 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.dao.FopLawPaperDao;
 import com.huacainfo.ace.fop.model.FopFinanceProject;
+import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
+import com.huacainfo.ace.portal.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import java.math.BigDecimal;
 @Controller
 @RequestMapping("/www")
 public class WWWController extends FopBaseController {
+
     @Autowired
     private FopCompanyService fopCompanyService;
 
@@ -37,6 +40,10 @@ public class WWWController extends FopBaseController {
 
     @Autowired
     private FopLoanProductService fopLoanProductService;
+
+    @Autowired
+    private FopGeHelpService fopGeHelpService;
+
 
     /**
      * gis地图
@@ -62,19 +69,19 @@ public class WWWController extends FopBaseController {
     /**
      * 查询公告列表
      *
-     * @param page  页码
-     * @param limit 每页数目
-     * @param title 搜索关键字
-     * @param sord  排序 null：降序，asc：升序
-     * @param noticeType  信息类型 1、市场信息 2、产品信息 3、项目信息 4 、招商信息
-     * @return return rst;
+     * page  页码
+     *  limit 每页数目
+     *  title 搜索关键字
+     *  sord  排序 null：降序，asc：升序
+     * noticeType  信息类型 1、市场信息 2、产品信息 3、项目信息 4 、招商信息
+     *  return rst;
      *
      * @throws Exception
      */
     @RequestMapping(value = "/findNoticeList")
     @ResponseBody
     public ResultResponse findFopNoticeList(FopNoticeQVo condition, PageParamNoChangeSord page) throws Exception {
-        if (page.getSord().equals("asc")) {
+        if ("asc".equals(page.getSord())) {
             page.setOrderBy("releaseDate");
         }
         return this.fopNoticeService.findNoticeList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
@@ -123,10 +130,10 @@ public class WWWController extends FopBaseController {
     }
 
     /**
-     * @param financeTitle 融资名称
-     * @param financeYear  融资年限
-     * @param btmYield     起始收益率
-     * @param topYield     截至收益率
+     *  financeTitle 融资名称
+     * financeYear  融资年限
+     * btmYield     起始收益率
+     *  topYield     截至收益率
      * @param: page ：页码
      * @param: limit ：每页数目
      */
@@ -157,11 +164,11 @@ public class WWWController extends FopBaseController {
 
 
     /**
-     * @param financeTitle   融资名称
-     * @param financeAmount  融资金额
-     * @param financeYear    融资年限
-     * @param financeContent 融资内容
-     * @param yearYield      融资年收益
+     *  financeTitle   融资名称
+     *  financeAmount  融资金额
+     * financeYear    融资年限
+     * financeContent 融资内容
+     * yearYield      融资年收益
      */
     @RequestMapping(value = "/insertFinanceProject")
     @ResponseBody
@@ -171,15 +178,15 @@ public class WWWController extends FopBaseController {
     }
 
     /**
-     * @param productName 产品名称
-     * @param suretyType  担保方式
-     * @param btmRate     最低低利率
-     * @param topRate     最高低利率
-     * @param btmAmount   最低金额
-     * @param topAmount   最高金额
-     * @param loanYear    贷款年限
-     * @param page        页码
-     * @param limit       每页条目数
+     * productName 产品名称
+     *  suretyType  担保方式
+     *  btmRate     最低低利率
+     *  topRate     最高低利率
+     *  btmAmount   最低金额
+     *  topAmount   最高金额
+     *  loanYear    贷款年限
+     *  page        页码
+     *  limit       每页条目数
      * @return
      * @throws Exception
      */
@@ -224,6 +231,67 @@ public class WWWController extends FopBaseController {
     public SingleResult<FopLoanProductVo> selectFopLoanProductByPrimaryKey(String id)
             throws Exception {
         return this.fopLoanProductService.selectFopLoanProductByPrimaryKey(id);
+    }
+
+
+    /**
+     * 获取政企服务列表
+     *
+     * @param condition title  (标题)
+     *                  sord  (默认:降序，asc：升序)
+     *                  replied  (true:回复，false：未回复）
+     *                  status (1:未发布，2：已发布)
+     *                  page:页数
+     *                  limit：每页目数
+     * @param page
+     */
+    @RequestMapping(value = "/findGeHelpList")
+    @ResponseBody
+    public ResultResponse findGeHelpList(FopGeHelpQVo condition, PageParamNoChangeSord page) throws Exception {
+        if ("asc".equals(page.getSord())) {
+            page.setOrderBy("releaseDate");
+        }
+        ResultResponse rst = this.fopGeHelpService.findGeHelpList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
+
+
+    /**
+     * 发布政企诉求
+     *
+     * @param: fg
+     * title:标题
+     * content:内容
+     */
+    @RequestMapping(value = "/insertGeHelp")
+    @ResponseBody
+    public MessageResponse insertGeHelp(FopGeHelp fg) throws Exception {
+        return this.fopGeHelpService.insertGeHelp(fg, this.getCurUserProp());
+    }
+
+    /**
+     * 修改政企诉求
+     *
+     * @param fg id:政企诉求id
+     *           title：题目
+     *           content：内容
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updateGeHelp")
+    @ResponseBody
+    public MessageResponse updateFopGeHelp(FopGeHelp fg) throws Exception {
+        return this.fopGeHelpService.updateFopGeHelp(fg, this.getCurUserProp());
+    }
+
+    /**
+     * 查看诉求详细
+     * id :政企诉求
+     */
+    @RequestMapping(value = "/selectFopGeHelpByPrimaryKey")
+    @ResponseBody
+    public SingleResult<FopGeHelpVo> selectFopGeHelpByPrimaryKey(String id) throws Exception {
+        return this.fopGeHelpService.selectFopGeHelpByPrimaryKey(id);
     }
 
 }
