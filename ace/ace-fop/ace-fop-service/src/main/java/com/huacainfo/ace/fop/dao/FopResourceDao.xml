@@ -22,8 +22,8 @@
     </resultMap>
     <sql id="Base_Column_List">
         id, relationId, relationType, resCategory, resName, resSize, resUrl, resType, sequence,
-    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
-    lastModifyDate
+        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -235,11 +235,50 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopResourceVo">
 
     </resultMap>
+    <sql id="Vo_Column_List">
+        id, relationId, relationType, resCategory, resName, resSize, resUrl, resType, sequence,
+        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate
+    </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
         from fop_resource
         where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_resource t
+        where 1 = 1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
+        select count(*)
+        from fop_resource
+        where resName = #{resName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
     </select>
 </mapper>

@@ -45,6 +45,8 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        //给按钮附加属性
+                        appendButtons();
                     }
                 })
         });
@@ -70,6 +72,9 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+
+                        //给按钮附加属性
+                        appendButtons();
                     }
                 })
         });
@@ -138,15 +143,25 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                if (key == 'category') {
-                    value = rsd(value, '83');
+                // if (key == 'category') {
+                //     value = rsd(value, '83');
+                // }
+                // if (key == 'status') {
+                //     value == "1" ? "正常" : "关闭";
+                // }
+                // if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
+                //     value = Common.DateFormatter(value);
+                // }
+                if (key == 'resUrl') {
+                    if (value != '') {
+                        value = '<a download="' + rst.value.name + '" href="' + fastdfs_server + value + '"><span class="badge badge-info">下载</span> </a>';
+                    } else {
+                        value = '待上传';
+                    }
+
                 }
-                if (key == 'status') {
-                    value == "1" ? "正常" : "关闭";
-                }
-                if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
-                    value = Common.DateFormatter(value);
-                }
+
+
                 $("#dialog-message-view").find('#' + key).html(value);
             });
         },
@@ -154,4 +169,11 @@ function loadView(id) {
             alert("加载错误！");
         }
     });
+}
+
+
+function appendButtons() {
+
+    //图片logo上传
+    appendUploadBtn("resUrl");
 }
