@@ -70,8 +70,7 @@
   
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Article">
     update article
-    set tplPageId = #{tplPageId,jdbcType=VARCHAR},
-      articleCategory = #{articleCategory,jdbcType=VARCHAR},
+    set
       title = #{title,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
@@ -81,8 +80,6 @@
       mediUrl = #{mediUrl,jdbcType=VARCHAR},
       bgMusicUrl = #{bgMusicUrl,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
-      sort = #{sort,jdbcType=INTEGER},
-      status = #{status,jdbcType=CHAR},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}

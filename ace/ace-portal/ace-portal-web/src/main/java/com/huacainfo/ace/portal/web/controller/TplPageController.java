@@ -169,4 +169,22 @@ public class TplPageController extends PortalBaseController {
 	public  MessageResponse insertTplPageByTplId(String tplId) throws Exception{
 		return this.tplPageService.insertTplPageByTplId(tplId,this.getCurUserProp());
 	}
+	/**
+	 *
+	 * @Title:updateNameById
+	 * @Description:  TODO(根据页面ID更新标题)
+	 * @param:        @param id
+	 * @param:        @param name
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-11
+	 */
+	@RequestMapping(value = "/updateNameById.do")
+	@ResponseBody
+	public  MessageResponse updateNameById(String id,String name) throws Exception{
+		this.tplPageService.updateNameById(id,name);
+		return new MessageResponse(0, "OK！");
+	}
 }

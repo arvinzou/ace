@@ -15,12 +15,10 @@
 }
 .simulator_hd .title {
     position: absolute;
-    bottom: -8px;
+    bottom: -2px;
     font-weight: normal;
     color: #fff;
     text-align: center;
-    left: 60px;
-    right: 50px;
     height: 1.6em;
     overflow: hidden;
 }
@@ -218,3 +216,105 @@ a:hover {color:#535353;text-decoration:none;}
 .active-bg{
 	background-color: #21B100;
 }
+
+
+.popover {
+    width: 290px;
+    position: absolute;
+    margin-top: 12px;
+    top: 122px;
+    z-index: 99999;
+}
+.popover .popover_inner {
+    border: 1px solid #d9dadc;
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.popover .popover_inner{    border: 1px solid #d9dadc;
+    word-wrap: break-word;
+    word-break: break-all;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;}
+.popover .popover_arrow_out{    top: 0;}
+.popover .popover_arrow{    position: absolute;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 8px;
+    border-style: dashed;
+    border-color: transparent;
+    border-top-width: 0;
+    border-bottom-color: #d9dadc;
+    border-bottom-style: solid;}
+.popover .popover_arrow_in{    border-bottom-color: #fff;
+    top: 1px;}
+.popover .popover_bar{text-align: justify;    margin-top: 20px;
+    text-justify: distribute-all-lines;
+    font-size: 0;}
+.popover .popover_bar .btn{       min-width: 60px; margin: 0;}
+.popover .popover_bar:after{display: inline-block;
+    width: 100%;
+    height: 0;
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    content: ".";}
+.frm_label{
+    width: 5em;
+    margin-top: .3em;
+    margin-right: 1em;
+    font-size: 14px;    color: #222;}
+.frm_controls{    vertical-align: top;
+    float: none;
+    width: auto;    display: block;
+    margin-top: 10px;}
+.popover .frm_input_box{    display: block;
+    width: auto;    display: inline-block;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    width: 207px;
+    font-size: 14px;
+    padding: 0 10px;
+    border: 1px solid #e7e7eb;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    background-color: #fff;}
+.frm_input{  width: 100%;
+    background-color: transparent;
+    border: 0;    color: #222;
+    outline: 0;  height: 22px;
+    margin: 4px 0;}
+.frm_controls:after{    content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ";
+    visibility: hidden;
+    clear: both;
+    height: 0!important;
+    display: block;
+    line-height: 0;}
+
+    .greenBtn {
+        border-radius: 3px;
+        background: #44b549;
+        color: #fff;
+    }
+    .popover .popover_bar .btn {
+        min-width: 60px;
+        margin: 0;
+    }

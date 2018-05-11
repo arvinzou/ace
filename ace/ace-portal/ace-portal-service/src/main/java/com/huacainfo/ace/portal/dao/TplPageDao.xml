@@ -162,4 +162,7 @@
     ORDER BY sort,createDate
     limit 0, 3
   </select>
+  <update id="updateNameById">
+    update tpl_page set name=#{name} where id=#{id}
+  </update>
 </mapper>

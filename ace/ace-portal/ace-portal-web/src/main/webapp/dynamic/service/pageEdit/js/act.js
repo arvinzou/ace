@@ -262,9 +262,11 @@ function initEvents() {
         modal.find('.modal-body input[name=action]').val(action);
         if (action == 'edit') {
 			console.log($(o).find("img").attr("src"));
+			var remark=$(o).find(".desc").html();
             modal.find('.modal-body input[name=id]').val(id);
+             modal.find('.modal-body input[name=hrefUrl]').val($(o).data("hrefurl"));
             modal.find('.modal-body input[name=title]').val($(o).find(".title").html());
-            modal.find('.modal-body input[name=remark]').val($(o).find(".desc").html());
+            modal.find('.modal-body textarea[name=remark]').val($(o).find(".desc").html());
             modal.find('.modal-body input[name=tags]').val($(o).data("tags"));
             $("#cover-img").attr("src", $(o).find("img").attr("src"));
             $("#cover-img").css("display", "block");
@@ -330,8 +332,48 @@ function initEvents() {
             return false;
         }
     });
-}
 
+     $("#js_preview_title").on("click", function () {
+           $("#modify_title_box").css("display",'block');
+     });
+
+}
+function cancel_modify_title(){
+    $("#modify_title_box").css("display",'none');
+}
+function do_modify_title(){
+    $.ajax({
+        url: contextPath + '/tplPage/updateNameById.do',
+        type: 'POST',
+        timeout: 30000,
+        dataType: 'json',
+        data: {
+            id: pageId,
+            name:$("#js_hname_input").val()
+        },
+        beforeSend: function () {
+            try {
+                loading = startLoading();
+            } catch (e) {};
+            if (loading) {
+                loading.settext("请求中，请稍后......");
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (loading) {
+                loading.remove();
+            }
+            if (data.status == 0) {
+                $("#modify_title_box").css("display",'none');
+                 getPageList(pageId);
+                ifr.window.location.reload()
+            } else {
+                alert(data.errorMessage);
+            }
+        }
+    });
+}
 function getPageList(pageId) {
     $.ajax({
         url: contextPath + '/www/getTplPageById.do',
@@ -356,6 +398,8 @@ function getPageList(pageId) {
                 data: data
             });
             $("#navitem").html(html);
+            $("#js_preview_title").html(data.data.page.name);
+            $("#js_hname_input").val(data.data.page.name)
 			initArticleClickEvent();
             if (loading) {
                 loading.remove();

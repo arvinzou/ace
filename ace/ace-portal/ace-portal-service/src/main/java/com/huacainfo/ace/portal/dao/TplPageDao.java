@@ -36,4 +36,6 @@ public interface TplPageDao {
 
     List<Map<String,Object>> getArticleTopListByPageId(String pageId);
 
+    int updateNameById(@Param("id")String id,@Param("name")String name);
+
 }
