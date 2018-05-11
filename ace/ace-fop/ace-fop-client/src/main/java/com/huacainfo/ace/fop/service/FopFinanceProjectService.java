@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopFinanceProject;
 import com.huacainfo.ace.fop.vo.FopFinanceProjectQVo;
@@ -69,6 +70,8 @@ public interface FopFinanceProjectService {
      * @version: 2018-05-02
      */
     public abstract SingleResult<FopFinanceProjectVo> selectFopFinanceProjectByPrimaryKey(String id) throws Exception;
+
+    public abstract ResultResponse selectFinanceProjectByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

@@ -333,4 +333,15 @@
         <!--and top =#{condition.noticeType,jdbcType=CHAR}-->
         <!--</if>-->
     </sql>
+
+
+    <select id="findCommentList" resultMap="VoResultMap">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        FROM fop_question
+        WHERE parentId = #{parentId,jdbcType=VARCHAR}
+        ) m
+        ORDER BY m.releaseDate DESC
+    </select>
 </mapper>

@@ -4,6 +4,8 @@ package com.huacainfo.ace.fop.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,20 +52,21 @@ public class FopQuestionServiceImpl implements FopQuestionService {
      * @version: 2018-05-07
      */
     @Override
-    public PageResult
-            <FopQuestionVo> findFopQuestionList(FopQuestionQVo condition, int start,
-                                                int limit, String orderBy) throws Exception {
-        PageResult
-                <FopQuestionVo> rst = new PageResult
-                <FopQuestionVo>();
-        List
-                <FopQuestionVo> list = this.fopQuestionDao.findList(condition,
-                start, start + limit, orderBy);
+    public PageResult<FopQuestionVo> findFopQuestionList(FopQuestionQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<FopQuestionVo> rst = new PageResult<FopQuestionVo>();
+        List<FopQuestionVo> list = this.fopQuestionDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.fopQuestionDao.findCount(condition);
             rst.setTotal(allRows);
         }
+        return rst;
+    }
+
+    @Override
+    public ResultResponse findQuestionList(FopQuestionQVo condition, int page, int limit, String orderBy) throws Exception {
+        List<FopQuestionVo> list = this.fopQuestionDao.findList(condition, (page - 1) * limit, limit, orderBy);
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "获取法律帮助或诉求列表", list);
         return rst;
     }
 
@@ -163,5 +166,20 @@ public class FopQuestionServiceImpl implements FopQuestionService {
 //                String.valueOf(id),
 //                String.valueOf(id), "法律帮助/政府诉求", userProp);
         return new MessageResponse(0, "法律帮助/政府诉求删除完成！");
+    }
+
+
+    @Override
+    public List<FopQuestionVo> findCommentList(String parentId) throws Exception {
+        List<FopQuestionVo> list = this.fopQuestionDao.findCommentList(parentId);
+        if (list.size() == 0) {
+            return null;
+        }
+        for (FopQuestionVo fp : list) {
+            String parent = fp.getId();
+            List<FopQuestionVo> list1 = findCommentList(parent);
+            fp.setChildren(list1);
+        }
+        return list;
     }
 }

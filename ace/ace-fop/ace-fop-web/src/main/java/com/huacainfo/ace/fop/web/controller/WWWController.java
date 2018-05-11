@@ -161,9 +161,9 @@ public class WWWController extends FopBaseController {
 
     @RequestMapping(value = "/selectFinanceProjectByPrimaryKey")
     @ResponseBody
-    public SingleResult<FopFinanceProjectVo> selectFopFinanceProjectByPrimaryKey(String id)
+    public ResultResponse selectFopFinanceProjectByPrimaryKey(String id)
             throws Exception {
-        return this.fopFinanceProjectService.selectFopFinanceProjectByPrimaryKey(id);
+        return this.fopFinanceProjectService.selectFinanceProjectByPrimaryKey(id);
     }
 
 
@@ -316,6 +316,7 @@ public class WWWController extends FopBaseController {
 
 
     /**
+     * 查看企业详情
      * id 企业ID
      */
     @RequestMapping(value = "/selectCompanyByPrimaryKey")
@@ -325,17 +326,25 @@ public class WWWController extends FopBaseController {
         return this.fopCompanyService.selectCompanyByPrimaryKey(id);
     }
 
+    /**
+     * 获取法律帮助列表
+     */
 
-    @RequestMapping(value = "/findQuestionList")
+    @RequestMapping(value = "/findLawQuestionList")
     @ResponseBody
-    public PageResult<FopQuestionVo> findQuestionList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult
-                <FopQuestionVo> rst = this.fopQuestionService.findFopQuestionList(condition, page.getStart(), page.getLimit(),
-                page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
+    public ResultResponse findLawQuestionList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
 
+    /**
+     * 获取评论列表
+     */
+
+    @RequestMapping(value = "/findCommentList")
+    @ResponseBody
+    public ResultResponse findCommentList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
     }
 }
