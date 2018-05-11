@@ -17,7 +17,9 @@ function getList() {
 				data:{id:pageId},
         dataType: 'json',
         beforeSend: function () {
-            loading = startLoading();
+            try {
+                loading = startLoading();
+            } catch (e) {};
             if (loading) {
                 loading.settext("正在加载，请稍后......");
             }

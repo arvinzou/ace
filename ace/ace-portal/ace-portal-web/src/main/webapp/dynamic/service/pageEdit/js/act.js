@@ -169,7 +169,7 @@ function initTabs() {
     $(".news-module li").on("click", function () {
         var n = $(this).index();
         var id = $(this).data("id");
-        console.log(id);
+        console.log("click->"+ id);
         var th_width = $(this).width();
         var th_left = $(this).offset().left;
         var slider_width = $(".news-slider").width();
@@ -177,10 +177,10 @@ function initTabs() {
         $(".news-slider").css("left", slider_left);
         $(this).addClass("actives").siblings().removeClass("actives");
         $(".navitem").each(function (i, o) {
-            console.log(o);
-            console.log($(o).data('id'));
+            
             if ($(o).data('id') == id) {
                 $(o).css("display", 'block');
+				console.log(o);
             } else {
                 $(o).css("display", 'none');
             }
@@ -224,6 +224,7 @@ function initEvents() {
                     loading.remove();
                 }
                 if (data.status == 0) {
+					$('#model1').modal('hide');
                     getCategoryItemsList(pageId);
                     ifr.window.location.reload()
                 } else {
@@ -257,8 +258,10 @@ function initEvents() {
         var id = $(o).data("id");
         $(".modal-title").html(name);
         console.log(id);
+		console.log(action);
         modal.find('.modal-body input[name=action]').val(action);
         if (action == 'edit') {
+			console.log($(o).find("img").attr("src"));
             modal.find('.modal-body input[name=id]').val(id);
             modal.find('.modal-body input[name=title]').val($(o).find(".title").html());
             modal.find('.modal-body input[name=remark]').val($(o).find(".desc").html());
@@ -279,7 +282,10 @@ function initEvents() {
             $.extend(data, {
                 tplPageId: pageId,
                 articleCategory: $("#bar").find(".actives").data("id"),
-                cover: $("#cover-img").attr("src");
+                cover: $("#cover-img").attr("src"),
+				mediType:'1',
+				likeNum:0,
+				hitNum:0
             });
             $.extend(data, {
                 time: new Date()
@@ -313,6 +319,7 @@ function initEvents() {
                         loading.remove();
                     }
                     if (data.status == 0) {
+						$('#model2').modal('hide');
                         getPageList(pageId);
                         ifr.window.location.reload()
                     } else {
@@ -348,7 +355,8 @@ function getPageList(pageId) {
             var html = juicer(navitem, {
                 data: data
             });
-            $("#navitem").append(html);
+            $("#navitem").html(html);
+			initArticleClickEvent();
             if (loading) {
                 loading.remove();
             }

@@ -153,9 +153,9 @@
                 {@each data.data.categorys as item,index} {@if index==0}
                 <div class="navitem" data-id="\${item.id}" style="display: block;" id="\${item.id}">
                     {@else}
-                    <div class="navitem" data-id="\${item.id}" data-tags="\${o.tags}" style="display: none;" id="\${item.id}">
+                    <div class="navitem" data-id="\${item.id}"  style="display: none;" id="\${item.id}">
                         {@/if} {@each item.articles as o}
-                        <div class="list_item" data-id="\${o.id}" data-category="\${item.id}">
+                        <div class="list_item" data-id="\${o.id}" data-tags="\${o.tags}" data-category="\${item.id}">
                             <h2 class="title">\${o.title}</h2>
                             <div class="cover ">
                                 <img class="img js_img" src="\${o.cover}">
