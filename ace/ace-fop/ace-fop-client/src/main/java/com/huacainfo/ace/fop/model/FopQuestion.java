@@ -14,6 +14,8 @@ public class FopQuestion implements Serializable {
 
     private String title;
 
+    private String content;
+
     private String sourceId;
 
     private String sourceType;
@@ -45,6 +47,14 @@ public class FopQuestion implements Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getId() {
         return id;

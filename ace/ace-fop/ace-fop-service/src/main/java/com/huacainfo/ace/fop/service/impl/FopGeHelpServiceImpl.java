@@ -290,6 +290,13 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         return rst;
     }
 
+
+    @Override
+    public ResultResponse selectGeHelpByPrimaryKey(String id) throws Exception {
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "政企诉求详情", this.fopGeHelpDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:deleteFopGeHelpByFopGeHelpId
