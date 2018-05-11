@@ -27,21 +27,18 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
-                        data-options="
+                    类别：<input class="easyui-combobox" style="width: 200px" name="category"
+                              data-options="
                     url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
 
-                    名称： <input name="name" type="text"
-                               style="width: 200px;"/>
+                    名称： <input name="name" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopProject/findFopProjectList">
-                        <i
-                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
 
 
@@ -49,22 +46,23 @@
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
 
-
-                    <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/fopProject/insertFopProject">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/fopProject/updateFopProject">
-                        <i
-                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+                    <%--<button class="btn btn-info" id="btn-view-add"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopProject/insertFopProject">--%>
+                    <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
+                    <%--<button class="btn btn-info" id="btn-view-edit"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopProject/updateFopProject">--%>
+                    <%--<i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/fopProject/deleteFopProjectByFopProjectId">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
+                    <button class="btn btn-purple" id="btn-view-audit"
+                            authority="${pageContext.request.contextPath}/fopProject/audit">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+
 
                 </div>
             </div>
@@ -89,147 +87,118 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-主键</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">主键</span>
             <br>
-            <span id="id">
-</span>
+            <span id="id"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-项目名称</span>
+
+        <div class="labelItem">
+            <span class="labelItemHeader">项目名称</span>
             <br>
-            <span id="projectName">
-</span>
+            <span id="projectName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-项目代码</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">项目代码</span>
             <br>
-            <span id="projectCode">
-</span>
+            <span id="projectCode"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-项目阶段</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">项目阶段</span>
             <br>
-            <span id="process">
-</span>
+            <span id="process"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-项目负责人</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">项目负责人</span>
             <br>
-            <span id="personId">
-</span>
+            <span id="personId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-所属区域</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">所属区域</span>
             <br>
-            <span id="areaCode">
-</span>
+            <span id="areaCode"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-所属公司</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">所属领域</span>
             <br>
-            <span id="companyId">
-</span>
+            <span id="sector"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-所属领域</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">合作方式</span>
             <br>
-            <span id="sector">
-</span>
+            <span id="coopType"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-合作方式</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">合作内容</span>
             <br>
-            <span id="coopType">
-</span>
+            <span id="coopDesc"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-合作内容</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">发布日期</span>
             <br>
-            <span id="coopDesc">
-</span>
+            <span id="releaseDate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-发布日期</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">点击数</span>
             <br>
-            <span id="releaseDate">
-</span>
+            <span id="clicks"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-点击数</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">点赞数</span>
             <br>
-            <span id="clicks">
-</span>
+            <span id="likes"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-点赞数</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">备注</span>
             <br>
-            <span id="likes">
-</span>
+            <span id="remark"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-备注</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">状态</span>
             <br>
-            <span id="remark">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
-            <br>
-            <span id="status">
-</span>
+            <span id="status"></span>
         </div>
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-创建人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">创建人编号</span>
             <br>
-            <span id="createUserId">
-</span>
+            <span id="createUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-创建人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">创建人姓名</span>
             <br>
-            <span id="createUserName">
-</span>
+            <span id="createUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-入库日期</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">入库日期</span>
             <br>
-            <span id="createDate">
-</span>
+            <span id="createDate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">最后更新人编号</span>
             <br>
-            <span id="lastModifyUserId">
-</span>
+            <span id="lastModifyUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新人姓名</span>
             <br>
-            <span id="lastModifyUserName">
-</span>
+            <span id="lastModifyUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新时间</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新时间</span>
             <br>
-            <span id="lastModifyDate">
-</span>
+            <span id="lastModifyDate"></span>
         </div>
     </div>
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
-<script
-        src="${pageContext.request.contextPath}/content/service/fopProject/config.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/fopProject/model.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/fopProject/controller.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/fopProject/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/project/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/project/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/project/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/project/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

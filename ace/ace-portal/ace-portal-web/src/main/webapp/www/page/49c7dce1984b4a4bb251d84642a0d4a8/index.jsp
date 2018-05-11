@@ -56,14 +56,14 @@
 											{@if index==0}
 											
 										<div class="item active">
-												<a href="{@if item.hrefUrl}\${item.hrefUrl}{@else}preview.jsp?id=\${item.id}{@/if}">
+												<a href="{@if item.hrefUrl!=null}\${item.hrefUrl}{@else}preview.jsp?id=\${item.id}{@/if}">
 													<img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;" />
 												</a>
 												<div class="carousel-caption">\${item.title}</div>
                     </div>
 											{@else}
 												<div class="item">
-													<a href="{@if item.hrefUrl}\${item.hrefUrl}{@else}preview.jsp?id=\${item.id}{@/if}">
+													<a href="{@if item.hrefUrl!=null}\${item.hrefUrl}{@else}preview.jsp?id=\${item.id}{@/if}">
 														<img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;" />
 													</a>
 												</div>
@@ -96,7 +96,7 @@
 														<div class="navitem" data-id="\${item.id}" style="display: none;">
 													{@/if}
 														{@each item.articles as o}
-															<a class="list_item" href="{@if o.hrefUrl}\${o.hrefUrl}{@else}preview.jsp?id=\${o.id}{@/if}">
+															<a class="list_item" href="{@if o.hrefUrl!=null}\${o.hrefUrl}{@else}preview.jsp?id=\${o.id}{@/if}">
 															<h2 class="title">\${o.title}</h2>
 															<div class="cover ">
 																	<img class="img js_img" src="\${o.cover}">

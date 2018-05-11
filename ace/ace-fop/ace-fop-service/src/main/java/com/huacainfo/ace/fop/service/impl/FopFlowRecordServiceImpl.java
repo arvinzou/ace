@@ -51,6 +51,10 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     private FopGeHelpService fopGeHelpService;
     @Autowired
     private FopActivityService fopActivityService;
+    @Autowired
+    private FopProjectService fopProjectService;
+    @Autowired
+    private FopAppealHelpService fopAppealHelpService;
 
     /**
      * @throws
@@ -291,6 +295,12 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
             case FlowType.PARTY_WORK:
                 rs = partWork(record, userProp);// 党建工作发布审核
                 break;
+            case FlowType.COOP_PROJECT:
+                rs = coopProject(record, userProp);// 合作交流项目审核
+                break;
+            case FlowType.REQUEST_HELP:
+                rs = requestHelp(record, userProp);// 诉求服务回复确认
+                break;
             default:
                 rs = null;
                 break;
@@ -311,6 +321,55 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         this.dataBaseLogService.log("变更流程记录", "流程记录", "",
                 record.getId(), record.getId(), userProp);
         return new MessageResponse(0, "流程审核成功");
+    }
+
+    /**
+     * 功能描述:  诉求服务回复确认
+     *
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/10 18:52
+     */
+    private MessageResponse requestHelp(FopFlowRecord record, UserProp userProp) throws Exception {
+
+        if (AuditResult.PASS.equals(record.getAuditResult())) {
+            FopAppealHelp obj = fopAppealHelpService.selectByPrimaryKey(record.getFromId());
+            if (null == obj) {
+                return new MessageResponse(ResultCode.FAIL, "记录丢失");
+            }
+
+            //状态变更
+            obj.setStatus("2");
+
+            return fopAppealHelpService.updateFopAppealHelp(obj, userProp);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+    }
+
+    /**
+     * 功能描述: 合作交流项目审核
+     *
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/10 17:10
+     */
+    private MessageResponse coopProject(FopFlowRecord record, UserProp userProp) throws Exception {
+        if (AuditResult.PASS.equals(record.getAuditResult())) {
+            FopProject project = fopProjectService.selectByPrimaryKey(record.getFromId());
+            if (null == project) {
+                return new MessageResponse(ResultCode.FAIL, "记录丢失");
+            }
+
+            //状态变更
+            project.setStatus("2");
+
+            return fopProjectService.updateFopProject(project, userProp);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 
     /**

@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.FopCompanyContributionDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopCompanyContribution">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
         <result column="contributionType" jdbcType="CHAR" property="contributionType"/>
         <result column="itemCode" jdbcType="VARCHAR" property="itemCode"/>
         <result column="itemName" jdbcType="VARCHAR" property="itemName"/>
@@ -22,7 +22,7 @@
         <result column="itemValue" jdbcType="LONGVARCHAR" property="itemValue"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, companyId, contributionType, itemCode, itemName, sequence, remark, status, createUserId,
+        id, relationId, contributionType, itemCode, itemName, sequence, remark, status, createUserId,
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <sql id="Blob_Column_List">
@@ -41,13 +41,13 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopCompanyContribution">
-    insert into fop_company_contribution (id, companyId, contributionType,
+        insert into fop_company_contribution (id, relationId, contributionType,
         itemCode, itemName, sequence,
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate, itemValue
       )
-    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{contributionType,jdbcType=CHAR},
+        values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{contributionType,jdbcType=CHAR},
         #{itemCode,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
@@ -60,8 +60,8 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="companyId != null">
-                companyId,
+            <if test="relationId != null">
+                relationId,
             </if>
             <if test="contributionType != null">
                 contributionType,
@@ -107,8 +107,8 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="contributionType != null">
                 #{contributionType,jdbcType=CHAR},
@@ -154,8 +154,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopCompanyContribution">
         update fop_company_contribution
         <set>
-            <if test="companyId != null">
-                companyId = #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                relationId = #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="contributionType != null">
                 contributionType = #{contributionType,jdbcType=CHAR},
@@ -201,7 +201,7 @@
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.fop.model.FopCompanyContribution">
     update fop_company_contribution
-    set companyId = #{companyId,jdbcType=VARCHAR},
+        set relationId = #{relationId,jdbcType=VARCHAR},
       contributionType = #{contributionType,jdbcType=CHAR},
       itemCode = #{itemCode,jdbcType=VARCHAR},
       itemName = #{itemName,jdbcType=VARCHAR},
@@ -219,7 +219,7 @@
   </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopCompanyContribution">
     update fop_company_contribution
-    set companyId = #{companyId,jdbcType=VARCHAR},
+        set relationId = #{relationId,jdbcType=VARCHAR},
       contributionType = #{contributionType,jdbcType=CHAR},
       itemCode = #{itemCode,jdbcType=VARCHAR},
       itemName = #{itemName,jdbcType=VARCHAR},

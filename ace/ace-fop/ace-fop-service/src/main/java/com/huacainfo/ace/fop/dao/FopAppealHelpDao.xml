@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.fop.dao.FopResourceDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopResource">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopAppealHelpDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopAppealHelp">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
-        <result column="relationType" jdbcType="CHAR" property="relationType"/>
-        <result column="resCategory" jdbcType="CHAR" property="resCategory"/>
-        <result column="resName" jdbcType="VARCHAR" property="resName"/>
-        <result column="resSize" jdbcType="VARCHAR" property="resSize"/>
-        <result column="resUrl" jdbcType="VARCHAR" property="resUrl"/>
-        <result column="resType" jdbcType="VARCHAR" property="resType"/>
-        <result column="sequence" jdbcType="INTEGER" property="sequence"/>
+        <result column="requestId" jdbcType="VARCHAR" property="requestId"/>
+        <result column="requestType" jdbcType="CHAR" property="requestType"/>
+        <result column="parentId" jdbcType="VARCHAR" property="parentId"/>
+        <result column="requestTitle" jdbcType="VARCHAR" property="requestTitle"/>
+        <result column="requestDesc" jdbcType="VARCHAR" property="requestDesc"/>
+        <result column="submitDate" jdbcType="TIMESTAMP" property="submitDate"/>
+        <result column="response" jdbcType="VARCHAR" property="response"/>
+        <result column="keyWord" jdbcType="VARCHAR" property="keyWord"/>
+        <result column="accCount" jdbcType="BIGINT" property="accCount"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -21,63 +22,68 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, relationId, relationType, resCategory, resName, resSize, resUrl, resType, sequence,
-        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
-        lastModifyDate
+    id, requestId, requestType, parentId, requestTitle, requestDesc, submitDate, response, 
+    keyWord, accCount, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
+    lastModifyUserName, lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fop_resource
+        from fop_appeal_help
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from fop_resource
+    delete from fop_appeal_help
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopResource">
-    insert into fop_resource (id, relationId, relationType,
-        resCategory, resName, resSize,
-        resUrl, resType, sequence,
-      remark, status, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR},
-        #{resCategory,jdbcType=CHAR}, #{resName,jdbcType=VARCHAR}, #{resSize,jdbcType=VARCHAR},
-        #{resUrl,jdbcType=VARCHAR}, #{resType,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER},
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopAppealHelp">
+    insert into fop_appeal_help (id, requestId, requestType, 
+      parentId, requestTitle, requestDesc, 
+      submitDate, response, keyWord, 
+      accCount, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{requestId,jdbcType=VARCHAR}, #{requestType,jdbcType=CHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{requestTitle,jdbcType=VARCHAR}, #{requestDesc,jdbcType=VARCHAR}, 
+      #{submitDate,jdbcType=TIMESTAMP}, #{response,jdbcType=VARCHAR}, #{keyWord,jdbcType=VARCHAR}, 
+      #{accCount,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
   </insert>
-    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopResource">
-        insert into fop_resource
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopAppealHelp">
+        insert into fop_appeal_help
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="relationId != null">
-                relationId,
+            <if test="requestId != null">
+                requestId,
             </if>
-            <if test="relationType != null">
-                relationType,
+            <if test="requestType != null">
+                requestType,
             </if>
-            <if test="resCategory != null">
-                resCategory,
+            <if test="parentId != null">
+                parentId,
             </if>
-            <if test="resName != null">
-                resName,
+            <if test="requestTitle != null">
+                requestTitle,
             </if>
-            <if test="resSize != null">
-                resSize,
+            <if test="requestDesc != null">
+                requestDesc,
             </if>
-            <if test="resUrl != null">
-                resUrl,
+            <if test="submitDate != null">
+                submitDate,
             </if>
-            <if test="resType != null">
-                resType,
+            <if test="response != null">
+                response,
             </if>
-            <if test="sequence != null">
-                sequence,
+            <if test="keyWord != null">
+                keyWord,
+            </if>
+            <if test="accCount != null">
+                accCount,
             </if>
             <if test="remark != null">
                 remark,
@@ -108,29 +114,32 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="relationId != null">
-                #{relationId,jdbcType=VARCHAR},
+            <if test="requestId != null">
+                #{requestId,jdbcType=VARCHAR},
             </if>
-            <if test="relationType != null">
-                #{relationType,jdbcType=CHAR},
+            <if test="requestType != null">
+                #{requestType,jdbcType=CHAR},
             </if>
-            <if test="resCategory != null">
-                #{resCategory,jdbcType=CHAR},
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
             </if>
-            <if test="resName != null">
-                #{resName,jdbcType=VARCHAR},
+            <if test="requestTitle != null">
+                #{requestTitle,jdbcType=VARCHAR},
             </if>
-            <if test="resSize != null">
-                #{resSize,jdbcType=VARCHAR},
+            <if test="requestDesc != null">
+                #{requestDesc,jdbcType=VARCHAR},
             </if>
-            <if test="resUrl != null">
-                #{resUrl,jdbcType=VARCHAR},
+            <if test="submitDate != null">
+                #{submitDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="resType != null">
-                #{resType,jdbcType=VARCHAR},
+            <if test="response != null">
+                #{response,jdbcType=VARCHAR},
             </if>
-            <if test="sequence != null">
-                #{sequence,jdbcType=INTEGER},
+            <if test="keyWord != null">
+                #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="accCount != null">
+                #{accCount,jdbcType=BIGINT},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -158,32 +167,35 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopResource">
-        update fop_resource
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopAppealHelp">
+        update fop_appeal_help
         <set>
-            <if test="relationId != null">
-                relationId = #{relationId,jdbcType=VARCHAR},
+            <if test="requestId != null">
+                requestId = #{requestId,jdbcType=VARCHAR},
             </if>
-            <if test="relationType != null">
-                relationType = #{relationType,jdbcType=CHAR},
+            <if test="requestType != null">
+                requestType = #{requestType,jdbcType=CHAR},
             </if>
-            <if test="resCategory != null">
-                resCategory = #{resCategory,jdbcType=CHAR},
+            <if test="parentId != null">
+                parentId = #{parentId,jdbcType=VARCHAR},
             </if>
-            <if test="resName != null">
-                resName = #{resName,jdbcType=VARCHAR},
+            <if test="requestTitle != null">
+                requestTitle = #{requestTitle,jdbcType=VARCHAR},
             </if>
-            <if test="resSize != null">
-                resSize = #{resSize,jdbcType=VARCHAR},
+            <if test="requestDesc != null">
+                requestDesc = #{requestDesc,jdbcType=VARCHAR},
             </if>
-            <if test="resUrl != null">
-                resUrl = #{resUrl,jdbcType=VARCHAR},
+            <if test="submitDate != null">
+                submitDate = #{submitDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="resType != null">
-                resType = #{resType,jdbcType=VARCHAR},
+            <if test="response != null">
+                response = #{response,jdbcType=VARCHAR},
             </if>
-            <if test="sequence != null">
-                sequence = #{sequence,jdbcType=INTEGER},
+            <if test="keyWord != null">
+                keyWord = #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="accCount != null">
+                accCount = #{accCount,jdbcType=BIGINT},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -212,16 +224,17 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopResource">
-    update fop_resource
-    set relationId = #{relationId,jdbcType=VARCHAR},
-      relationType = #{relationType,jdbcType=CHAR},
-        resCategory = #{resCategory,jdbcType=CHAR},
-      resName = #{resName,jdbcType=VARCHAR},
-      resSize = #{resSize,jdbcType=VARCHAR},
-      resUrl = #{resUrl,jdbcType=VARCHAR},
-      resType = #{resType,jdbcType=VARCHAR},
-        sequence = #{sequence,jdbcType=INTEGER},
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopAppealHelp">
+    update fop_appeal_help
+    set requestId = #{requestId,jdbcType=VARCHAR},
+      requestType = #{requestType,jdbcType=CHAR},
+      parentId = #{parentId,jdbcType=VARCHAR},
+      requestTitle = #{requestTitle,jdbcType=VARCHAR},
+      requestDesc = #{requestDesc,jdbcType=VARCHAR},
+      submitDate = #{submitDate,jdbcType=TIMESTAMP},
+      response = #{response,jdbcType=VARCHAR},
+      keyWord = #{keyWord,jdbcType=VARCHAR},
+      accCount = #{accCount,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -232,24 +245,23 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopResourceVo">
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopAppealHelpVo">
 
     </resultMap>
     <sql id="Vo_Column_List">
-        id, relationId, relationType, resCategory, resName, resSize, resUrl, resType, sequence,
-        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
-        lastModifyDate
+        id, requestId, requestType, parentId, requestTitle, requestDesc, submitDate, response,
+        keyWord, accCount, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate
     </sql>
-
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fop_resource
+        from fop_appeal_help
         where id = #{id,jdbcType=VARCHAR}
     </select>
-
     <sql id="whereCondition">
-        from fop_resource t
+        from fop_appeal_help t
         where 1 = 1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
@@ -271,10 +283,10 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopResource">
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopAppealHelp">
         select count(*)
-        from fop_resource
-        where resName = #{resName,jdbcType=VARCHAR}
+        from fop_appeal_help
+        where 0=1
     </select>
 
     <select id="findCount" resultType="int">
