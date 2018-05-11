@@ -151,6 +151,14 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
+        FopAppealHelp db = fopAppealHelpDao.selectByPrimaryKey(o.getId());
+        if (CommonUtils.isBlank(db)) {
+            new MessageResponse(0, "记录丢失");
+        }
+        o.setRequestId(db.getRequestId());
+        o.setRequestType(db.getRequestType());
+        o.setParentId(db.getParentId());
+
         if (CommonUtils.isBlank(o.getRequestId())) {
             return new MessageResponse(1, "发起人ID不能为空！");
         }
@@ -168,9 +176,6 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
         }
         if (CommonUtils.isBlank(o.getSubmitDate())) {
             return new MessageResponse(1, "提交时间不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
         }
 
         o.setLastModifyDate(new Date());
