@@ -74,6 +74,8 @@ public interface FopGeHelpService {
      * @author: Arvin
      * @version: 2018-05-08
      */
+    ResultResponse selectGeHelpByPrimaryKey(String id) throws Exception;
+
     SingleResult<FopGeHelpVo> selectFopGeHelpByPrimaryKey(String id) throws Exception;
 
     /**

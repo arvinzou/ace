@@ -106,10 +106,10 @@ public class FopGeHelpController extends FopBaseController {
      */
     @RequestMapping(value = "/selectFopGeHelpByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <FopGeHelpVo> selectFopGeHelpByPrimaryKey(String id) throws Exception {
+    public SingleResult<FopGeHelpVo> selectFopGeHelpByPrimaryKey(String id) throws Exception {
         return this.fopGeHelpService.selectFopGeHelpByPrimaryKey(id);
     }
+
 
     /**
      * @throws

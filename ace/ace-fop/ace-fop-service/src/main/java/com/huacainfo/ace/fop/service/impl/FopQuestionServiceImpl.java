@@ -93,8 +93,8 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopQuestionDao.insertSelective(o);
-        this.dataBaseLogService.log("添加法律帮助/政府诉求", "法律帮助/政府诉求", "",
-                o.getTitle(), o.getTitle(), userProp);
+//        this.dataBaseLogService.log("添加法律帮助/政府诉求", "法律帮助/政府诉求", "",
+//                o.getTitle(), o.getTitle(), userProp);
         return new MessageResponse(0, "添加法律帮助/政府诉求完成！");
     }
 
@@ -118,9 +118,9 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopQuestionDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更法律帮助/政府诉求", "法律帮助/政府诉求", "",
-                o.getTitle(),
-                o.getTitle(), userProp);
+//        this.dataBaseLogService.log("变更法律帮助/政府诉求", "法律帮助/政府诉求", "",
+//                o.getTitle(),
+//                o.getTitle(), userProp);
         return new MessageResponse(0, "变更法律帮助/政府诉求完成！");
     }
 
@@ -159,9 +159,9 @@ public class FopQuestionServiceImpl implements FopQuestionService {
     public MessageResponse deleteFopQuestionByFopQuestionId(String id,
                                                             UserProp userProp) throws Exception {
         this.fopQuestionDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除法律帮助/政府诉求", "法律帮助/政府诉求",
-                String.valueOf(id),
-                String.valueOf(id), "法律帮助/政府诉求", userProp);
+//        this.dataBaseLogService.log("删除法律帮助/政府诉求", "法律帮助/政府诉求",
+//                String.valueOf(id),
+//                String.valueOf(id), "法律帮助/政府诉求", userProp);
         return new MessageResponse(0, "法律帮助/政府诉求删除完成！");
     }
 }
