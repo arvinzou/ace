@@ -1,32 +1,13 @@
 package com.huacainfo.ace.fop.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author HuaCai003
- */
-public class FopQuestion implements Serializable {
-    private static final long serialVersionUID = -5574944998022479242L;
+public class FopAiQuestion {
     private String id;
 
-    private String companyId;
+    private String question;
 
-    private String title;
-
-    private String content;
-
-    private String sourceId;
-
-    private String sourceType;
-
-    private String subType;
-
-    private String parentId;
-
-    private Date releaseDate;
-
-    private String reply;
+    private String answer;
 
     private String keyWord;
 
@@ -48,14 +29,6 @@ public class FopQuestion implements Serializable {
 
     private Date lastModifyDate;
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public String getId() {
         return id;
     }
@@ -64,68 +37,20 @@ public class FopQuestion implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getCompanyId() {
-        return companyId;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId == null ? null : companyId.trim();
+    public void setQuestion(String question) {
+        this.question = question == null ? null : question.trim();
     }
 
-    public String getTitle() {
-        return title;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public String getSourceId() {
-        return sourceId;
-    }
-
-    public void setSourceId(String sourceId) {
-        this.sourceId = sourceId == null ? null : sourceId.trim();
-    }
-
-    public String getSourceType() {
-        return sourceType;
-    }
-
-    public void setSourceType(String sourceType) {
-        this.sourceType = sourceType == null ? null : sourceType.trim();
-    }
-
-    public String getSubType() {
-        return subType;
-    }
-
-    public void setSubType(String subType) {
-        this.subType = subType == null ? null : subType.trim();
-    }
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId == null ? null : parentId.trim();
-    }
-
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public String getReply() {
-        return reply;
-    }
-
-    public void setReply(String reply) {
-        this.reply = reply == null ? null : reply.trim();
+    public void setAnswer(String answer) {
+        this.answer = answer == null ? null : answer.trim();
     }
 
     public String getKeyWord() {

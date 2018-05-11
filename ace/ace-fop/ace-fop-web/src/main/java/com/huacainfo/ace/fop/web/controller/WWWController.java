@@ -44,6 +44,9 @@ public class WWWController extends FopBaseController {
     @Autowired
     private FopGeHelpService fopGeHelpService;
 
+    @Autowired
+    private FopQuestionService fopQuestionService;
+
 
     /**
      * gis地图
@@ -68,13 +71,13 @@ public class WWWController extends FopBaseController {
 
     /**
      * 查询公告列表
-     *
+     * <p>
      * page  页码
-     *  limit 每页数目
-     *  title 搜索关键字
-     *  sord  排序 null：降序，asc：升序
+     * limit 每页数目
+     * title 搜索关键字
+     * sord  排序 null：降序，asc：升序
      * noticeType  信息类型 1、市场信息 2、产品信息 3、项目信息 4 、招商信息
-     *  return rst;
+     * return rst;
      *
      * @throws Exception
      */
@@ -130,10 +133,11 @@ public class WWWController extends FopBaseController {
     }
 
     /**
-     *  financeTitle 融资名称
+     * financeTitle 融资名称
      * financeYear  融资年限
      * btmYield     起始收益率
-     *  topYield     截至收益率
+     * topYield     截至收益率
+     *
      * @param: page ：页码
      * @param: limit ：每页数目
      */
@@ -157,15 +161,15 @@ public class WWWController extends FopBaseController {
 
     @RequestMapping(value = "/selectFinanceProjectByPrimaryKey")
     @ResponseBody
-    public SingleResult<FopFinanceProjectVo> selectFopFinanceProjectByPrimaryKey(String id)
+    public ResultResponse selectFopFinanceProjectByPrimaryKey(String id)
             throws Exception {
-        return this.fopFinanceProjectService.selectFopFinanceProjectByPrimaryKey(id);
+        return this.fopFinanceProjectService.selectFinanceProjectByPrimaryKey(id);
     }
 
 
     /**
-     *  financeTitle   融资名称
-     *  financeAmount  融资金额
+     * financeTitle   融资名称
+     * financeAmount  融资金额
      * financeYear    融资年限
      * financeContent 融资内容
      * yearYield      融资年收益
@@ -179,14 +183,15 @@ public class WWWController extends FopBaseController {
 
     /**
      * productName 产品名称
-     *  suretyType  担保方式
-     *  btmRate     最低低利率
-     *  topRate     最高低利率
-     *  btmAmount   最低金额
-     *  topAmount   最高金额
-     *  loanYear    贷款年限
-     *  page        页码
-     *  limit       每页条目数
+     * suretyType  担保方式
+     * btmRate     最低低利率
+     * topRate     最高低利率
+     * btmAmount   最低金额
+     * topAmount   最高金额
+     * loanYear    贷款年限
+     * page        页码
+     * limit       每页条目数
+     *
      * @return
      * @throws Exception
      */
@@ -205,14 +210,14 @@ public class WWWController extends FopBaseController {
 
 
     /**
-     * @param productName 产品名称
-     * @param loanAmount  贷款额度
-     * @param loanType    贷款用途
-     * @param suretyType  担保方式
-     * @param loanYear    贷款年限
-     * @param loanYear    贷款年限
-     * @param loanRate    贷款年利率
-     * @param description 产品描述
+     * productName 产品名称
+     * loanAmount  贷款额度
+     * loanType    贷款用途
+     * suretyType  担保方式
+     * loanYear    贷款年限
+     * loanYear    贷款年限
+     * loanRate    贷款年利率
+     * description 产品描述
      */
     @RequestMapping(value = "/insertLoanProduct")
     @ResponseBody
@@ -288,10 +293,58 @@ public class WWWController extends FopBaseController {
      * 查看诉求详细
      * id :政企诉求
      */
-    @RequestMapping(value = "/selectFopGeHelpByPrimaryKey")
+    @RequestMapping(value = "/selectGeHelpByPrimaryKey")
     @ResponseBody
-    public SingleResult<FopGeHelpVo> selectFopGeHelpByPrimaryKey(String id) throws Exception {
-        return this.fopGeHelpService.selectFopGeHelpByPrimaryKey(id);
+    public ResultResponse selectFopGeHelpByPrimaryKey(String id) throws Exception {
+        return this.fopGeHelpService.selectGeHelpByPrimaryKey(id);
     }
 
+
+    /**
+     * fullName：标题
+     * areaCode：所属区域
+     * companyProperty：公司性质（见portal.dic_134）
+     * page:页码
+     * limit：每页目数
+     */
+    @RequestMapping(value = "/findCompanyList")
+    @ResponseBody
+    public ResultResponse findCompanyList(FopCompanyQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopCompanyService.findCompanyList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
+
+
+    /**
+     * 查看企业详情
+     * id 企业ID
+     */
+    @RequestMapping(value = "/selectCompanyByPrimaryKey")
+    @ResponseBody
+    public ResultResponse selectCompanyByPrimaryKey(String id)
+            throws Exception {
+        return this.fopCompanyService.selectCompanyByPrimaryKey(id);
+    }
+
+    /**
+     * 获取法律帮助列表
+     */
+
+    @RequestMapping(value = "/findLawQuestionList")
+    @ResponseBody
+    public ResultResponse findLawQuestionList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
+
+    /**
+     * 获取评论列表
+     */
+
+    @RequestMapping(value = "/findCommentList")
+    @ResponseBody
+    public ResultResponse findCommentList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
 }

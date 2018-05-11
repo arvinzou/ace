@@ -1,17 +1,21 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.dao.FopFinanceProjectDao;
 import com.huacainfo.ace.fop.model.FopFinanceProject;
 import com.huacainfo.ace.fop.service.FopFinanceProjectService;
+import com.huacainfo.ace.fop.service.FopQuestionService;
 import com.huacainfo.ace.fop.vo.FopFinanceProjectQVo;
 import com.huacainfo.ace.fop.vo.FopFinanceProjectVo;
+import com.huacainfo.ace.fop.vo.FopQuestionVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +37,9 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
     private FopFinanceProjectDao fopFinanceProjectDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private FopQuestionService fopQuestionService;
 
     /**
      * @throws
@@ -194,6 +201,15 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
     public SingleResult<FopFinanceProjectVo> selectFopFinanceProjectByPrimaryKey(String id) throws Exception {
         SingleResult<FopFinanceProjectVo> rst = new SingleResult<FopFinanceProjectVo>();
         rst.setValue(this.fopFinanceProjectDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
+
+    @Override
+    public ResultResponse selectFinanceProjectByPrimaryKey(String id) throws Exception {
+        FopFinanceProjectVo ffp = this.fopFinanceProjectDao.selectVoByPrimaryKey(id);
+        ffp.setComments(fopQuestionService.findCommentList(ffp.getId()));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "融资详情", ffp);
         return rst;
     }
 

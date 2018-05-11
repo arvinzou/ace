@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
@@ -31,6 +32,8 @@ public interface FopCompanyService {
      * @version: 2018-05-02
      */
     public abstract PageResult<FopCompanyVo> findFopCompanyList(FopCompanyQVo condition, int start, int limit, String orderBy) throws Exception;
+
+    public abstract ResultResponse findCompanyList(FopCompanyQVo condition, int page, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -69,6 +72,8 @@ public interface FopCompanyService {
      * @version: 2018-05-02
      */
     public abstract SingleResult<FopCompanyVo> selectFopCompanyByPrimaryKey(String id) throws Exception;
+
+    public abstract ResultResponse selectCompanyByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

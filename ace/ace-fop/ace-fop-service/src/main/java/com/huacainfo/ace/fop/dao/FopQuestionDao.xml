@@ -3,8 +3,9 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.FopQuestionDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopQuestion">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
+        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="sourceId" jdbcType="VARCHAR" property="sourceId"/>
         <result column="sourceType" jdbcType="CHAR" property="sourceType"/>
         <result column="subType" jdbcType="CHAR" property="subType"/>
@@ -23,7 +24,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, relationId, title, sourceId, sourceType, subType, parentId, releaseDate, reply,
+        id, companyId, title, content, sourceId, sourceType, subType, parentId, releaseDate, reply,
         keyWord, accCount, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
         lastModifyUserName, lastModifyDate
     </sql>
@@ -38,14 +39,14 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopQuestion">
-        insert into fop_question (id, relationId, title,
+        insert into fop_question (id, companyId, title, content,
         sourceId, sourceType, subType,
         parentId, releaseDate, reply,
         keyWord, accCount, remark,
         status, createUserId, createUserName,
         createDate, lastModifyUserId, lastModifyUserName,
         lastModifyDate)
-        values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},
         #{sourceId,jdbcType=VARCHAR}, #{sourceType,jdbcType=CHAR}, #{subType,jdbcType=CHAR},
         #{parentId,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, #{reply,jdbcType=VARCHAR},
         #{keyWord,jdbcType=VARCHAR}, #{accCount,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR},
@@ -59,11 +60,14 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="relationId != null">
-                relationId,
+            <if test="companyId != null">
+                companyId,
             </if>
             <if test="title != null">
                 title,
+            </if>
+            <if test="content != null">
+                content,
             </if>
             <if test="sourceId != null">
                 sourceId,
@@ -118,11 +122,14 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="relationId != null">
-                #{relationId,jdbcType=VARCHAR},
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
             </if>
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
             </if>
             <if test="sourceId != null">
                 #{sourceId,jdbcType=VARCHAR},
@@ -177,11 +184,14 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopQuestion">
         update fop_question
         <set>
-            <if test="relationId != null">
-                relationId = #{relationId,jdbcType=VARCHAR},
+            <if test="companyId != null">
+                companyId = #{companyId,jdbcType=VARCHAR},
             </if>
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
             </if>
             <if test="sourceId != null">
                 sourceId = #{sourceId,jdbcType=VARCHAR},
@@ -236,8 +246,9 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopQuestion">
         update fop_question
-        set relationId = #{relationId,jdbcType=VARCHAR},
+        set companyId = #{companyId,jdbcType=VARCHAR},
         title = #{title,jdbcType=VARCHAR},
+        content = #{content,jdbcType=VARCHAR},
         sourceId = #{sourceId,jdbcType=VARCHAR},
         sourceType = #{sourceType,jdbcType=CHAR},
         subType = #{subType,jdbcType=CHAR},
@@ -294,13 +305,13 @@
 
     <select id="isExit" resultType="int">
         select count(*)
-        from fop_notice
+        from fop_question
         where
         title=#{title}
     </select>
 
     <sql id="whereCondition">
-        from fop_notice
+        from fop_question
         where 0=0
         <if test='condition.title!=null and condition.title!=""'>
             and title like
@@ -315,11 +326,22 @@
         <!--and name like-->
         <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
         <!--</if>-->
-        <if test="condition.top!=null and condition.top!=&quot;&quot;">
-            and top =#{condition.top,jdbcType=CHAR}
-        </if>
-        <if test="condition.noticeType!=null and condition.noticeType!=&quot;&quot;">
-            and top =#{condition.noticeType,jdbcType=CHAR}
-        </if>
+        <!--<if test="condition.top!=null and condition.top!=&quot;&quot;">-->
+        <!--and top =#{condition.top,jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="condition.noticeType!=null and condition.noticeType!=&quot;&quot;">-->
+        <!--and top =#{condition.noticeType,jdbcType=CHAR}-->
+        <!--</if>-->
     </sql>
+
+
+    <select id="findCommentList" resultMap="VoResultMap">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        FROM fop_question
+        WHERE parentId = #{parentId,jdbcType=VARCHAR}
+        ) m
+        ORDER BY m.releaseDate DESC
+    </select>
 </mapper>
