@@ -238,10 +238,7 @@
 
                                 <div class="form-group">
                                     <span>摘要:</span>
-
-                                    <textarea name="remark">
-
-                                    </textarea>
+                                    <textarea name="remark"></textarea>
                                 </div>
 
 
