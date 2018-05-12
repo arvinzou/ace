@@ -1,0 +1,124 @@
+<!DOCTYPE>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+		<title>首页</title>
+		<link href="../css/comon0.css" rel="stylesheet" type="text/css" />
+		<link href="../css/index.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+		<SCRIPT language=JavaScript src="../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	</head>
+
+	<script>
+		$(document).ready(function(e) {
+			$(".leftQY .nr li").click(function() {
+				$(this).addClass("hover").siblings().removeClass("hover")
+
+			});
+
+			$(".venus-menu li").hover(
+				/*找父亲（li）下面的ul*/
+				function() {
+					$(this).find("ul").show(200);
+				},
+				function() {
+					$(this).find("ul").hide(300);
+				}
+			);
+
+		});
+
+		function setIframeHeight(iframe) {
+			if(iframe) {
+				var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+				if(iframeWin.document.body) {
+					iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+				}
+			}
+		};
+	</script>
+
+	<body>
+		<div class="headbox">
+			<div class="head juz">
+				<div class="head_top"><span class="head_welcome">欢迎访问湖南省常德市工商联合会！</span>
+					<a class="head_login" href="login/login.html">登录</a>
+					<a class="head_login" href="login/regist.html">注册</a>
+				</div>
+				<div class="head_menu head_menu01">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="300"><img src="../images/logo.png" /></td>
+							<td>
+								<ul>
+									<li class="active">
+										<a href="index.html">首页</a>
+									</li>
+									<li>
+										<a href="member/member.html">会员服务</a>
+										<dl>
+											<dt><span class="arrow"></span></dt>
+											<dd>
+												<a href="information/information_index.html" target="iframe">信息平台</a>
+											</dd>
+											<dd>
+												<a href="gov_service/gov_service1.html" target="iframe">政企服务</a>
+											</dd>
+											<dd>
+												<a href="law/lawer_index.html" target="iframe">法律服务</a>
+											</dd>
+											<dd>
+												<a href="finance/finance.html" target="iframe">融资服务</a>
+											</dd>
+											<dd>
+												<a href="party/party_work.html" target="iframe">党建工作</a>
+											</dd>
+											<dd>
+												<a href="GISmap/map.html" target="iframe">GIS地图</a>
+											</dd>
+											<dd>
+												<a href="publicity/publicity.html" target="iframe">企业公示</a>
+											</dd>
+											<dd>
+												<a href="#">文件下载</a>
+											</dd>
+										</dl>
+									</li>
+									<li>
+										<a href="#common_service">公共服务</a>
+
+									</li>
+									<li>
+										<a href="#interact_service">互动服务</a>
+										<dl>
+											<dt><span class="arrow"></span></dt>
+											<dd>
+												<a href="#">合作交流</a>
+											</dd>
+											<dd>
+												<a href="appeal/apeal.html" target="iframe">服务诉求</a>
+											</dd>
+											<dd>
+												<a href="satisfy/satisfy.html" target="iframe">满意度调差</a>
+											</dd>
+										</dl>
+									</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="wwwww" style="width: 100%;">
+			<iframe name="iframe" id="iframe" class="iframe" frameborder="no" scrolling="no" name="allbox" width="100%" src="index_child.html" onload='setIframeHeight(this);'>
+				
+			</iframe>
+		</div>
+
+	</body>
+
+</html>
