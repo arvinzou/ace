@@ -9,89 +9,35 @@
 		<link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/information/market.css"/>
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<script type="text/javascript" src="js/infomation.js"></script>
 	</head>
 
 	<body>
-		<div class="main">
+		<!--用于标注信息类型-->
+		<input hidden="hidden" value="2" id="noticeType">
+		<div class="main" ng-app="angularjsApp" ng-controller="angularjsCtrl">
 			<div class="title">
 				<span class="title_lager">产品信息</span><span class="title_small">/&nbsp;Product&nbsp;Information</span>
 			</div>
 			<div class="searchTable">
 				<div class="search_condition">
-					<div class="search_left"><span>发布日期</span><span class="glyphicon glyphicon-arrow-down" style="color: #1A56A8;"></span></div>
+					<div class="search_left" ng-click="sortList('asc');"  id="asc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-up" style="color: #1A56A8;"></span></div>
+					<div class="search_left" ng-click="sortList('desc');" hidden="true" id = "desc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-down" style="color: #1A56A8;"></span></div>
 					<div class="search_right">
 						<span class="s_title"><input type="text" placeholder="请输入关键字搜索"/><button class="glyphicon glyphicon-search"></button></span>
 					</div>
 				</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tbody>
-						<tr class="tr_bottom">
+						<tr class="tr_bottom" ng-repeat="item in items">
 							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>2018年度GSI GSMP行业与标准春季大会同时召开</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>超星数控高端Z5换刀排钻开料机 定制板式家具生产线</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>12V单作用电磁阀8L邮箱液压动力单元</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>2018年度GSI GSMP行业与标准春季大会同时召开</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>超星数控高端Z5换刀排钻开料机 定制板式家具生产线</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>12V单作用电磁阀8L邮箱液压动力单元</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>2018年度GSI GSMP行业与标准春季大会同时召开</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>2018年度GSI GSMP行业与标准春季大会同时召开</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>2018年度GSI GSMP行业与标准春季大会同时召开</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>2018年度GSI GSMP行业与标准春季大会同时召开</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
-						</tr>
-						<tr class="tr_bottom">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="10%">04-22</td>
-							<td>2018年度GSI GSMP行业与标准春季大会同时召开</td>
-							<td align="right" width="20%" class="from_info">来源：中国物品编码中心网站</td>
+							<td align="center" width="25%" ng-bind="item.releaseDate"></td>
+							<td ng-bind="item.title"></td>
+							<td align="right" width="20%" class="from_info">来源：中国物品网站</td>
 						</tr>
 					</tbody>
 				</table>
