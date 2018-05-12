@@ -282,7 +282,7 @@
             and top =#{condition.top,jdbcType=CHAR}
         </if>
         <if test="condition.noticeType!=null and condition.noticeType!=&quot;&quot;">
-            and top =#{condition.noticeType,jdbcType=CHAR}
+            and top =#{condition.top,jdbcType=CHAR}
         </if>
     </sql>
 

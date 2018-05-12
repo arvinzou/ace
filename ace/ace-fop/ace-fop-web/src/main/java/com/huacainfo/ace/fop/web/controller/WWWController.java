@@ -12,6 +12,7 @@ import com.huacainfo.ace.fop.dao.FopLawPaperDao;
 import com.huacainfo.ace.fop.model.FopFinanceProject;
 import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
+import com.huacainfo.ace.fop.model.FopQuestion;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.service.UsersService;
@@ -71,7 +72,6 @@ public class WWWController extends FopBaseController {
 
     /**
      * 查询公告列表
-     * <p>
      * page  页码
      * limit 每页数目
      * title 搜索关键字
@@ -233,9 +233,9 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/selectLoanProductByPrimaryKey")
     @ResponseBody
-    public SingleResult<FopLoanProductVo> selectFopLoanProductByPrimaryKey(String id)
+    public ResultResponse selectFopLoanProductByPrimaryKey(String id)
             throws Exception {
-        return this.fopLoanProductService.selectFopLoanProductByPrimaryKey(id);
+        return this.fopLoanProductService.selectLoanProductByPrimaryKey(id);
     }
 
 
@@ -340,11 +340,24 @@ public class WWWController extends FopBaseController {
     /**
      * 获取评论列表
      */
-
     @RequestMapping(value = "/findCommentList")
     @ResponseBody
     public ResultResponse findCommentList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
         ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
+    }
+
+    /**
+     * 插入评论
+     * parentId：被评论的id
+     * sourceType:0-法律帮助Q&A, 1-政府诉求Q&A,
+     * 2-融资项目评论&留言, 3-融资产品评论&留言,4-项目评论&留言
+     * reply：回复内容.
+     */
+
+    @RequestMapping(value = "/insertQuestion")
+    @ResponseBody
+    public MessageResponse insertFopQuestion(FopQuestion obj) throws Exception {
+        return this.fopQuestionService.insertQuestion(obj, this.getCurUserProp());
     }
 }

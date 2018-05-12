@@ -64,7 +64,7 @@
         select
         <include refid="Base_Column_List"/>
         from fop_company
-        where selectByDepartmentId = #{selectByDepartmentId,jdbcType=VARCHAR}
+        where departmentId = #{departmentId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from fop_company

@@ -3,10 +3,12 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.FopQuestionDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopQuestion">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
+        <result column="relationType" jdbcType="CHAR" property="relationType"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="sourceId" jdbcType="VARCHAR" property="sourceId"/>
+        <result column="displayName" jdbcType="VARCHAR" property="displayName"/>
         <result column="sourceType" jdbcType="CHAR" property="sourceType"/>
         <result column="subType" jdbcType="CHAR" property="subType"/>
         <result column="parentId" jdbcType="VARCHAR" property="parentId"/>
@@ -24,14 +26,21 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, companyId, title, content, sourceId, sourceType, subType, parentId, releaseDate, reply,
-        keyWord, accCount, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate
+        CASE
+        WHEN t.relationType='0'
+        THEN (select fullName from fop_company where id = t.relationId)
+        WHEN t.relationType='1'
+        THEN (select fullName from fop_association where id = t.relationId)
+        END displayName,
+        t.id, t.relationId, t.relationType,t.title, t.content, t.sourceId, t.sourceType, t.subType, t.parentId,
+        t.releaseDate, t.reply,
+        t.keyWord, t.accCount, t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
+        t.lastModifyUserName, t.lastModifyDate
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fop_question
+        from fop_question t
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -39,14 +48,15 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopQuestion">
-        insert into fop_question (id, companyId, title, content,
+        insert into fop_question (id, relationId, relationType,title, content,
         sourceId, sourceType, subType,
         parentId, releaseDate, reply,
         keyWord, accCount, remark,
         status, createUserId, createUserName,
         createDate, lastModifyUserId, lastModifyUserName,
         lastModifyDate)
-        values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR},
+        #{title,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},
         #{sourceId,jdbcType=VARCHAR}, #{sourceType,jdbcType=CHAR}, #{subType,jdbcType=CHAR},
         #{parentId,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, #{reply,jdbcType=VARCHAR},
         #{keyWord,jdbcType=VARCHAR}, #{accCount,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR},
@@ -60,8 +70,11 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="companyId != null">
-                companyId,
+            <if test="relationId != null">
+                relationId,
+            </if>
+            <if test="relationType != null">
+                relationType,
             </if>
             <if test="title != null">
                 title,
@@ -122,8 +135,11 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="companyId != null">
-                #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationType != null">
+                #{relationType,jdbcType=VARCHAR},
             </if>
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
@@ -184,8 +200,11 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopQuestion">
         update fop_question
         <set>
-            <if test="companyId != null">
-                companyId = #{companyId,jdbcType=VARCHAR},
+            <if test="relationId != null">
+                relationId = #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationType != null">
+                relationType = #{relationType,jdbcType=VARCHAR},
             </if>
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
@@ -246,7 +265,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopQuestion">
         update fop_question
-        set companyId = #{companyId,jdbcType=VARCHAR},
+        set relationId = #{relationId,jdbcType=VARCHAR},relationType = #{relationType,jdbcType=CHAR},
         title = #{title,jdbcType=VARCHAR},
         content = #{content,jdbcType=VARCHAR},
         sourceId = #{sourceId,jdbcType=VARCHAR},
@@ -276,7 +295,7 @@
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fop_question
+        from fop_question t
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -311,10 +330,10 @@
     </select>
 
     <sql id="whereCondition">
-        from fop_question
+        from fop_question t
         where 0=0
         <if test='condition.title!=null and condition.title!=""'>
-            and title like
+            and t.title like
             concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
         <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
@@ -329,9 +348,9 @@
         <!--<if test="condition.top!=null and condition.top!=&quot;&quot;">-->
         <!--and top =#{condition.top,jdbcType=CHAR}-->
         <!--</if>-->
-        <!--<if test="condition.noticeType!=null and condition.noticeType!=&quot;&quot;">-->
-        <!--and top =#{condition.noticeType,jdbcType=CHAR}-->
-        <!--</if>-->
+        <if test="condition.sourceType!=null and condition.sourceType!=&quot;&quot;">
+            and sourceType =#{condition.sourceType,jdbcType=CHAR}
+        </if>
     </sql>
 
 
@@ -339,7 +358,7 @@
         select m.* from(
         select
         <include refid="Base_Column_List"/>
-        FROM fop_question
+        FROM fop_question t
         WHERE parentId = #{parentId,jdbcType=VARCHAR}
         ) m
         ORDER BY m.releaseDate DESC
