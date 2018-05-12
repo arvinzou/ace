@@ -94,9 +94,8 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 			int level) {
 
 		@SuppressWarnings("unchecked")
-		List<Map<String, Object>> list = (List<Map<String, Object>>) cacheService
-				.get(key);
-		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
+        List<Map<String, Object>> list = (List<Map<String, Object>>) cacheService.get(key);
+        CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
 				getAreaListByLevel(list, level));
 		if (isRoot) {
 			return commonTreeUtils.getTreeListCaseSelf(pid);

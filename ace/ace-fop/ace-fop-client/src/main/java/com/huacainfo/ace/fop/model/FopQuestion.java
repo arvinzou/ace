@@ -10,13 +10,15 @@ public class FopQuestion implements Serializable {
     private static final long serialVersionUID = -5574944998022479242L;
     private String id;
 
-    private String companyId;
+    private String relationId;
 
     private String title;
 
     private String content;
 
     private String sourceId;
+
+    private String relationType;
 
     private String sourceType;
 
@@ -48,6 +50,14 @@ public class FopQuestion implements Serializable {
 
     private Date lastModifyDate;
 
+    public String getRelationType() {
+        return relationType;
+    }
+
+    public void setRelationType(String relationType) {
+        this.relationType = relationType;
+    }
+
     public String getContent() {
         return content;
     }
@@ -64,12 +74,12 @@ public class FopQuestion implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getCompanyId() {
-        return companyId;
+    public String getRelationId() {
+        return relationId;
     }
 
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId == null ? null : companyId.trim();
+    public void setRelationId(String relationId) {
+        this.relationId = relationId == null ? null : relationId.trim();
     }
 
     public String getTitle() {

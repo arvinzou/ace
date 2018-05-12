@@ -11,6 +11,17 @@ public class FopQuestionVo extends FopQuestion {
 
     private List<FopQuestionVo> children;
 
+
+    private String displayName;
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     public List<FopQuestionVo> getChildren() {
         return children;
     }
