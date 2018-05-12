@@ -125,5 +125,19 @@ public interface TplPageService {
 	 */
 	public abstract Map<String,Object> getTplPageById(String id) throws Exception;
 
+	/**
+	 *
+	 * @Title:updateNameById
+	 * @Description:  TODO(根据页面ID更新标题)
+	 * @param:        @param id
+	 * @param:        @param name
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-11
+	 */
+	public abstract MessageResponse updateNameById(String id,String name) throws Exception;
+
 	
 }

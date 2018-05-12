@@ -307,4 +307,22 @@ public class TplPageServiceImpl implements TplPageService {
 		}
 		return rst;
 	}
+
+	/**
+	 *
+	 * @Title:updateNameById
+	 * @Description:  TODO(根据页面ID更新标题)
+	 * @param:        @param id
+	 * @param:        @param name
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-11
+	 */
+	@Override
+	public  MessageResponse updateNameById(String id,String name) throws Exception{
+		this.tplPageDao.updateNameById(id,name);
+		return new MessageResponse(0, "OK！");
+	}
 }

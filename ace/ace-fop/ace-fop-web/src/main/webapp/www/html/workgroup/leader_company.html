@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>商协会领导班子企业情况</title>
+		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/workgroup.css"/>
+		<SCRIPT language=JavaScript src="../../js/jquery.js"></SCRIPT>
+		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<script type="text/javascript">
+			$(function(){
+				var text = '<tr>'+
+						   '<td colspan="2" width="65%"><input class="left" type="text" placeholder="输入企业名称"/></td>'+
+					       '<td width="35%" align="right">&nbsp;</td>'+
+						   '</tr>';
+				$(".add_company").click(function(){
+					$(".member_table").append(text);
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="member_main">
+			<div class="member_title01"><h3>团体信息</h3></div>
+			<div class="member_center_title02">>商协会领导班子企业情况</div>
+			<table class="member_table" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td width="30%">姓名</td>
+					<td width="35%">商协会职务</td>
+					<td width="35%">联系电话</td>
+				</tr>
+				<tr>
+					<td width="30%"><input class="left" type="text" placeholder="输入姓名"/></td>
+					<td width="35%"><input class="left" type="text" placeholder="输入商协会职务"/></td>
+					<td width="35%"><input class="right" type="text" placeholder="输入联系电话"/></td>
+				</tr>
+				<tr>
+					<td colspan="2" width="65%">企业名称</td>
+					<td width="35%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="2" width="65%"><input class="left" type="text" placeholder="输入企业名称"/></td>
+					<td width="35%" align="right"><button class="add_company">添加</button></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

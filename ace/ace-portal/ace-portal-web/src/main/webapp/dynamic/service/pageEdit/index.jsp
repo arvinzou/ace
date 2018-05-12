@@ -49,7 +49,9 @@
                                             <div class="box">
                                                 <div class="simulator_hd">
                                                     <h4 class="title" id="js_preview_title">页面模板</h4>
+
                                                 </div>
+
 
                                                 <iframe id="ifr" src="${portalPath}/www/page/${param.tplId}/index.jsp?pageId=${param.pageId}" name="ifr" class="list_frame"></iframe>
 
@@ -155,7 +157,7 @@
                     {@else}
                     <div class="navitem" data-id="\${item.id}"  style="display: none;" id="\${item.id}">
                         {@/if} {@each item.articles as o}
-                        <div class="list_item" data-id="\${o.id}" data-tags="\${o.tags}" data-category="\${item.id}">
+                        <div class="list_item" data-id="\${o.id}" data-tags="\${o.tags}" data-category="\${item.id}" data-hrefurl="\${o.hrefUrl}">
                             <h2 class="title">\${o.title}</h2>
                             <div class="cover ">
                                 <img class="img js_img" src="\${o.cover}">
@@ -165,7 +167,9 @@
                                 <p class="desc">\${o.remark}</p>
                             </div>
                             <p>
-                                <span style="background-color:#9e28b8;color:#FFFFFF">\${o.tags}</span>
+                                {@each o.tags.split(',') as tag,num}
+                                <span style="background-color:#21b080;color:#FFFFFF">\${tag}</span>
+                                {@/each}
                             </p>
                         </div>
                         {@/each}
@@ -212,7 +216,7 @@
                             <form class="add_item" onsubmit="return false">
                                 <div class="form-group">
                                     <span>链接:</span>
-                                    <input type="text" name="herfUrl" placeholder="请输入文章网址">
+                                    <input type="text" name="hrefUrl" placeholder="请输入文章网址">
                                     <input type="hidden" name="id" />
                                     <input type="hidden" name="action" />
                                 </div>
@@ -234,10 +238,7 @@
 
                                 <div class="form-group">
                                     <span>摘要:</span>
-
-                                    <textarea name="remark">
-
-                                    </textarea>
+                                    <textarea name="remark"></textarea>
                                 </div>
 
 
@@ -292,6 +293,24 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="popover  pos_center" style="top: 170px; left: 130px; display: none;" id="modify_title_box">
+                <div class="popover_inner">
+                    <div class="popover_content jsPopOverContent">
+                        <div class="popover_edit">
+                            <label for="" class="frm_label">模板名称</label>
+                            <div class="frm_controls">
+                            <span class="frm_input_box">
+                                <input type="text" class="frm_input" id="js_hname_input">
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popover_bar"><a href="javascript:do_modify_title();" class="btn btn_primary jsPopoverBt greenBtn">确定</a>&nbsp;<a href="javascript:cancel_modify_title();" style="border: 1px solid #eee;" class="btn btn_default jsPopoverBt">取消</a></div>
+                </div>
+                <i class="popover_arrow popover_arrow_out"></i>
+                <i class="popover_arrow popover_arrow_in"></i>
             </div>
     </body>
 

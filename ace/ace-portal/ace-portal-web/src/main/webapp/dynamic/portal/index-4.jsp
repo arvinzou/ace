@@ -15,13 +15,10 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="../common/base.jsp" />
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?version=${cfg.version}"></script>
+    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+    <script src="${pageContext.request.contextPath}/content/portal/js/main/portal4.js?v=${cfg.version}"></script>
 </head>
-<script>
-    function App(){
-    console.log("=============================App Start==============================");
-}
-</script>
+
 <body>
 <div class="page-wrapper">
 
@@ -49,13 +46,13 @@
                                             <div class="display">
                                                 <div class="number">
                                                     <h3 class="font-red-haze">
-                                                        <span data-counter="counterup" data-value="0" id="dept">0</span>
+                                                        <span data-counter="counterup" data-value="0" id="tpl">0</span>
                                                         <small class="font-red-haze">个</small>
                                                     </h3>
                                                     <small>模板</small>
                                                 </div>
                                                 <div class="icon">
-                                                    <i class="fa fa-bank"></i>
+                                                    <i class="glyphicon glyphicon-th"></i>
                                                 </div>
                                             </div>
                                             <div class="progress-info">
@@ -78,13 +75,13 @@
                                             <div class="display">
                                                 <div class="number">
                                                     <h3 class="font-green-sharp">
-                                                        <span data-counter="counterup" data-value="" id="personage">0</span>
+                                                        <span data-counter="counterup" data-value="" id="page">0</span>
                                                         <small class="font-green-sharp">个</small>
                                                     </h3>
                                                     <small>页面</small>
                                                 </div>
                                                 <div class="icon">
-                                                    <i class="fa fa-user-circle-o"></i>
+                                                    <i class="glyphicon  glyphicon-book"></i>
                                                 </div>
                                             </div>
                                             <div class="progress-info">
@@ -107,13 +104,13 @@
                                             <div class="display">
                                                 <div class="number">
                                                     <h3 class="font-blue-sharp">
-                                                        <span data-counter="counterup" data-value="0" id="feedback">0</span>
+                                                        <span data-counter="counterup" data-value="0" id="category">0</span>
                                                         <small class="font-blue-sharp">个</small>
                                                     </h3>
-                                                    <small>图片</small>
+                                                    <small>栏目</small>
                                                 </div>
                                                 <div class="icon">
-                                                    <i class="fa fa-comment-o"></i>
+                                                    <i class="glyphicon glyphicon-list-alt"></i>
                                                 </div>
                                             </div>
                                             <div class="progress-info">
@@ -135,13 +132,13 @@
                                             <div class="display">
                                                 <div class="number">
                                                     <h3 class="font-purple-soft">
-                                                        <span data-counter="counterup" data-value="0" id="activity">0</span>
-                                                        <small class="font-purple-sharp">次</small>
+                                                        <span data-counter="counterup" data-value="0" id="article">0</span>
+                                                        <small class="font-purple-sharp">篇</small>
                                                     </h3>
-                                                    <small>留言</small>
+                                                    <small>文章</small>
                                                 </div>
                                                 <div class="icon">
-                                                    <i class="fa fa-flag"></i>
+                                                    <i class="glyphicon glyphicon-book"></i>
                                                 </div>
                                             </div>
                                             <div class="progress-info">
