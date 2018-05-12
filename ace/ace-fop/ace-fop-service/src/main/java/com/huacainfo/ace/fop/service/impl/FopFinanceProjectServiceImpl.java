@@ -23,7 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopFinanceProjectService")
 /**
@@ -83,11 +85,11 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
      * @version: 2018-05-02
      */
     @Override
-    public PageResult<FopFinanceProjectVo> findFinanceProjectList(FopFinanceProjectQVo condition, int page,
-                                                                  int limit, String orderBy) throws Exception {
-        PageResult<FopFinanceProjectVo> rst = new PageResult<FopFinanceProjectVo>();
-        List<FopFinanceProjectVo> list = this.fopFinanceProjectDao.findListVo(condition, (page - 1) * limit, limit, orderBy);
-        rst.setRows(list);
+    public ResultResponse findFinanceProjectList(FopFinanceProjectQVo condition, int page, int limit, String orderBy) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopFinanceProjectDao.findListVo(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopFinanceProjectDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "融资列表", map);
         return rst;
     }
 

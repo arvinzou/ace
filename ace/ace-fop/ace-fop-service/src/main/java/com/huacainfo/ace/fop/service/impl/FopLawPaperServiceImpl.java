@@ -1,9 +1,11 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -19,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopLawPaperService")
 /**
@@ -48,8 +52,7 @@ public class FopLawPaperServiceImpl implements FopLawPaperService {
      * @version: 2018-05-02
      */
     @Override
-    public PageResult<FopLawPaperVo> findFopLawPaperList(FopLawPaperQVo condition, int start,
-                                                         int limit, String orderBy) throws Exception {
+    public PageResult<FopLawPaperVo> findFopLawPaperList(FopLawPaperQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<FopLawPaperVo> rst = new PageResult<FopLawPaperVo>();
         condition.setKeyWord(condition.getTitle());
         List<FopLawPaperVo> list = this.fopLawPaperDao.findList(condition,
@@ -62,16 +65,16 @@ public class FopLawPaperServiceImpl implements FopLawPaperService {
         return rst;
     }
 
+
     @Override
-    public PageResult<FopLawPaperVo> findLawPaperList(String keyWord, int page, int limit) throws Exception {
-        FopLawPaperQVo condition = new FopLawPaperQVo();
-        PageResult<FopLawPaperVo> rst = new PageResult<FopLawPaperVo>();
-        condition.setTitle(keyWord);
-        condition.setKeyWord(keyWord);
-        List<FopLawPaperVo> list = this.fopLawPaperDao.findList(condition, (page - 1) * limit, limit, null);
-        rst.setRows(list);
+    public ResultResponse findLawPaperList(FopLawPaperQVo condition, int page, int limit, String orderBy) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopLawPaperDao.findList(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopLawPaperDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "法律文书列表", map);
         return rst;
     }
+
 
     /**
      * @throws

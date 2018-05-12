@@ -2,7 +2,9 @@ package com.huacainfo.ace.fop.service.impl;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -81,8 +83,10 @@ public class FopQuestionServiceImpl implements FopQuestionService {
     @Override
     public ResultResponse findQuestionList(FopQuestionQVo condition, int page, int limit, String orderBy) throws Exception {
         condition.setSourceType("0");
-        List<FopQuestionVo> list = this.fopQuestionDao.findList(condition, (page - 1) * limit, limit, orderBy);
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "获取法律帮助或诉求列表", list);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopQuestionDao.findList(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopQuestionDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "法律帮助列表", map);
         return rst;
     }
 

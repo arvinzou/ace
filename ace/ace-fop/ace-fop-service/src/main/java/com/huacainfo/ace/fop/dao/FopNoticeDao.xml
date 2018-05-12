@@ -5,6 +5,7 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="subTitle" jdbcType="VARCHAR" property="subTitle"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
         <result column="coverUrl" jdbcType="VARCHAR" property="coverUrl"/>
         <result column="noticeType" jdbcType="CHAR" property="noticeType"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
@@ -20,7 +21,7 @@
         <result column="description" jdbcType="LONGVARCHAR" property="description"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, title, subTitle, coverUrl, noticeType, releaseDate, remark, status, top,createUserId,
+        id, title, subTitle,source, coverUrl, noticeType, releaseDate, remark, status, top,createUserId,
         createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -34,13 +35,14 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopNotice">
-        insert into fop_notice (id, title, subTitle,
+        insert into fop_notice (id, title, subTitle,source,
         coverUrl, noticeType, releaseDate,
         remark, status, top,createUserId,
         createUserName, createDate, lastModifyUserId,
         lastModifyUserName, lastModifyDate, description
         )
-        values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{subTitle,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+        #{subTitle,jdbcType=VARCHAR},#{source,jdbcType=VARCHAR},
         #{coverUrl,jdbcType=VARCHAR}, #{noticeType,jdbcType=CHAR}, #{releaseDate,jdbcType=TIMESTAMP},
         #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},#{top,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
@@ -59,6 +61,9 @@
             </if>
             <if test="subTitle != null">
                 subTitle,
+            </if>
+            <if test="source != null">
+                source,
             </if>
             <if test="coverUrl != null">
                 coverUrl,
@@ -110,6 +115,9 @@
             <if test="subTitle != null">
                 #{subTitle,jdbcType=VARCHAR},
             </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR},
+            </if>
             <if test="coverUrl != null">
                 #{coverUrl,jdbcType=VARCHAR},
             </if>
@@ -160,6 +168,9 @@
             <if test="subTitle != null">
                 subTitle = #{subTitle,jdbcType=VARCHAR},
             </if>
+            <if test="source != null">
+                source = #{source,jdbcType=VARCHAR},
+            </if>
             <if test="coverUrl != null">
                 coverUrl = #{coverUrl,jdbcType=VARCHAR},
             </if>
@@ -205,7 +216,7 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopNotice">
         update fop_notice
         set title = #{title,jdbcType=VARCHAR},
-        subTitle = #{subTitle,jdbcType=VARCHAR},
+        subTitle = #{subTitle,jdbcType=VARCHAR},source = #{source,jdbcType=VARCHAR},
         coverUrl = #{coverUrl,jdbcType=VARCHAR},
         noticeType = #{noticeType,jdbcType=CHAR},
         releaseDate = #{releaseDate,jdbcType=TIMESTAMP},

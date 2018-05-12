@@ -96,8 +96,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
     @Override
     public ResultResponse findCompanyList(FopCompanyQVo condition, int page, int limit, String orderBy) throws Exception {
-        List<FopCompanyVo> list = this.fopCompanyDao.findList(condition, (page - 1) * limit, limit, orderBy);
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "获取企业列表", list);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopCompanyDao.findList(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopCompanyDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "企业列表", map);
         return rst;
     }
 

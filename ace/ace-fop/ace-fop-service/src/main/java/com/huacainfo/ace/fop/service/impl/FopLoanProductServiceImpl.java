@@ -23,7 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopLoanProductService")
 /**
@@ -82,14 +84,11 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
      * @version: 2018-05-02
      */
     @Override
-    public PageResult<FopLoanProductVo> findLoanProductList(FopLoanProductQVo condition, int page,
-                                                            int limit, String orderBy) throws Exception {
-        PageResult<FopLoanProductVo> rst = new PageResult<FopLoanProductVo>();
-        List<FopLoanProductVo> list = this.fopLoanProductDao.findListVo(condition,
-                (page - 1) * limit, limit, orderBy);
-        rst.setRows(list);
-        int allRows = this.fopLoanProductDao.findCount(condition);
-        rst.setTotal(allRows);
+    public ResultResponse findLoanProductList(FopLoanProductQVo condition, int page, int limit, String orderBy) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopLoanProductDao.findListVo(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopLoanProductDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "金融产品列表", map);
         return rst;
     }
 
