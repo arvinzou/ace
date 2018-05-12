@@ -32,7 +32,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from tpl_page
+    update tpl_page set status='3'
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.portal.model.TplPage">
@@ -111,9 +111,8 @@
   <select id="getList" resultType="map">
     select id, tplId, name, domainName, shareName, shareCover, shareContent, remark,DATE_FORMAT(lastModifyDate,'%Y-%m-%d %T') lastModifyDate
     from
-    tpl_page where
+    tpl_page where status='1' and
     createUserId =#{userId,jdbcType=VARCHAR}
-
     ORDER BY createDate
   </select>
 
