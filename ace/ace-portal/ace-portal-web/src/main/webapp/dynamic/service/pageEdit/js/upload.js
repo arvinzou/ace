@@ -164,7 +164,7 @@
 		  $("#cover-img").css("display","block");
 		  $("#cover-img").css("max-width",300);
 		  $("#cover-img").css("max-height",300);
-		  $('#img-uploader').modal('hide')
+		  $('#img-uploader').modal('hide');
 
       });
       //会在文件上传过程中不断触发，可以用此事件来显示上传进度监听（比如说上传进度）

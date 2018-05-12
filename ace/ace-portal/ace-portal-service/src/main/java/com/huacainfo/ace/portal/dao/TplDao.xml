@@ -95,7 +95,7 @@
   <select id="getList" resultType="map">
     select id, name, cover, qrcoteUrl, remark
     from
-    tpl ORDER BY createDate
+    tpl where status='1' ORDER BY createDate
   </select>
 
 </mapper>

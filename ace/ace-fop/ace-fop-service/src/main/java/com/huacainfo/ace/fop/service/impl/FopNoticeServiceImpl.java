@@ -20,9 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service("fopNoticeService")
 /**
@@ -65,15 +63,17 @@ public class FopNoticeServiceImpl implements FopNoticeService {
     }
 
     /**
-     * @param start
+     * @param page
      * @param limit
      * @return
      * @throws Exception
      */
     @Override
     public ResultResponse findNoticeList(FopNoticeQVo condition, int page, int limit, String orderBy) throws Exception {
-        List<FopNoticeVo> list = this.fopNoticeDao.findList(condition, (page - 1) * limit, limit, orderBy);
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "信息公告列表", list);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopNoticeDao.findList(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopNoticeDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "信息公告列表", map);
         return rst;
     }
 

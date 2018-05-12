@@ -106,7 +106,9 @@
 																	<p class="desc">\${o.remark}</p>
 															</div>
 															<p>
-																	<span style="background-color:#9e28b8;color:#FFFFFF">\${o.tags}</span>
+																{@each o.tags.split(',') as tag,num}
+																<span style="background-color:#21b080;color:#FFFFFF">\${tag}</span>
+																{@/each}
 																	
 															</p>
 															</a>

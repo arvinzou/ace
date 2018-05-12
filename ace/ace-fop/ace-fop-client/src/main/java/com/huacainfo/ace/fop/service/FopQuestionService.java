@@ -3,10 +3,13 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopQuestion;
 import com.huacainfo.ace.fop.vo.FopQuestionVo;
 import com.huacainfo.ace.fop.vo.FopQuestionQVo;
+
+import java.util.List;
 
 /**
  * @author: Arvin
@@ -28,9 +31,9 @@ public interface FopQuestionService {
      * @author: Arvin
      * @version: 2018-05-07
      */
-    public abstract PageResult
-            <FopQuestionVo> findFopQuestionList(FopQuestionQVo condition, int start, int limit, String orderBy) throws
-            Exception;
+    public abstract PageResult<FopQuestionVo> findFopQuestionList(FopQuestionQVo condition, int start, int limit, String orderBy) throws Exception;
+
+    public abstract ResultResponse findQuestionList(FopQuestionQVo condition, int page, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -44,6 +47,9 @@ public interface FopQuestionService {
      * @version: 2018-05-07
      */
     public abstract MessageResponse insertFopQuestion(FopQuestion obj, UserProp userProp) throws Exception;
+
+
+    public abstract MessageResponse insertQuestion(FopQuestion obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -84,6 +90,9 @@ public interface FopQuestionService {
      */
     public abstract MessageResponse deleteFopQuestionByFopQuestionId(String id, UserProp userProp) throws
             Exception;
+
+
+    public abstract List<FopQuestionVo> findCommentList(String parentId) throws Exception;
 
 
 }

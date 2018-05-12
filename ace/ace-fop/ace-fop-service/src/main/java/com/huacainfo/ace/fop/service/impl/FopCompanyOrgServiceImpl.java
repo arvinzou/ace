@@ -51,8 +51,7 @@ public class FopCompanyOrgServiceImpl implements FopCompanyOrgService {
     public PageResult<FopCompanyOrgVo> findFopCompanyOrgList(FopCompanyOrgQVo condition, int start,
                                                              int limit, String orderBy) throws Exception {
         PageResult<FopCompanyOrgVo> rst = new PageResult<FopCompanyOrgVo>();
-        List<FopCompanyOrgVo> list = this.fopCompanyOrgDao.findList(condition,
-                start, start + limit, orderBy);
+        List<FopCompanyOrgVo> list = this.fopCompanyOrgDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.fopCompanyOrgDao.findCount(condition);

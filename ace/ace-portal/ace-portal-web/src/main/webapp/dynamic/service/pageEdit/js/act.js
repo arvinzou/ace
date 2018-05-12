@@ -169,7 +169,7 @@ function initTabs() {
     $(".news-module li").on("click", function () {
         var n = $(this).index();
         var id = $(this).data("id");
-        console.log("click->"+ id);
+        console.log("click->" + id);
         var th_width = $(this).width();
         var th_left = $(this).offset().left;
         var slider_width = $(".news-slider").width();
@@ -177,10 +177,10 @@ function initTabs() {
         $(".news-slider").css("left", slider_left);
         $(this).addClass("actives").siblings().removeClass("actives");
         $(".navitem").each(function (i, o) {
-            
+
             if ($(o).data('id') == id) {
                 $(o).css("display", 'block');
-				console.log(o);
+                console.log(o);
             } else {
                 $(o).css("display", 'none');
             }
@@ -224,7 +224,7 @@ function initEvents() {
                     loading.remove();
                 }
                 if (data.status == 0) {
-					$('#model1').modal('hide');
+                    $('#model1').modal('hide');
                     getCategoryItemsList(pageId);
                     ifr.window.location.reload()
                 } else {
@@ -258,19 +258,27 @@ function initEvents() {
         var id = $(o).data("id");
         $(".modal-title").html(name);
         console.log(id);
-		console.log(action);
+        console.log(action);
         modal.find('.modal-body input[name=action]').val(action);
         if (action == 'edit') {
-			console.log($(o).find("img").attr("src"));
+            console.log($(o).find("img").attr("src"));
+            var remark = $(o).find(".desc").html();
             modal.find('.modal-body input[name=id]').val(id);
+            modal.find('.modal-body input[name=hrefUrl]').val($(o).data("hrefurl"));
             modal.find('.modal-body input[name=title]').val($(o).find(".title").html());
-            modal.find('.modal-body input[name=remark]').val($(o).find(".desc").html());
+            modal.find('.modal-body textarea[name=remark]').val($(o).find(".desc").html());
             modal.find('.modal-body input[name=tags]').val($(o).data("tags"));
             $("#cover-img").attr("src", $(o).find("img").attr("src"));
             $("#cover-img").css("display", "block");
             $("#cover-img").css("max-width", 300);
             $("#cover-img").css("max-height", 300);
-        }
+        }else{
+						modal.find('.modal-body input[name=hrefUrl]').val("");
+            modal.find('.modal-body input[name=title]').val("");
+            modal.find('.modal-body textarea[name=remark]').val("");
+            modal.find('.modal-body input[name=tags]').val("");
+            $("#cover-img").css("display", "none");
+				}
 
     });
     $('#model2 form').ajaxForm({
@@ -283,9 +291,9 @@ function initEvents() {
                 tplPageId: pageId,
                 articleCategory: $("#bar").find(".actives").data("id"),
                 cover: $("#cover-img").attr("src"),
-				mediType:'1',
-				likeNum:0,
-				hitNum:0
+                mediType: '1',
+                likeNum: 0,
+                hitNum: 0
             });
             $.extend(data, {
                 time: new Date()
@@ -319,7 +327,7 @@ function initEvents() {
                         loading.remove();
                     }
                     if (data.status == 0) {
-						$('#model2').modal('hide');
+                        $('#model2').modal('hide');
                         getPageList(pageId);
                         ifr.window.location.reload()
                     } else {
@@ -328,6 +336,49 @@ function initEvents() {
                 }
             });
             return false;
+        }
+    });
+
+    $("#js_preview_title").on("click", function () {
+        $("#modify_title_box").css("display", 'block');
+    });
+
+}
+
+function cancel_modify_title() {
+    $("#modify_title_box").css("display", 'none');
+}
+
+function do_modify_title() {
+    $.ajax({
+        url: contextPath + '/tplPage/updateNameById.do',
+        type: 'POST',
+        timeout: 30000,
+        dataType: 'json',
+        data: {
+            id: pageId,
+            name: $("#js_hname_input").val()
+        },
+        beforeSend: function () {
+            try {
+                loading = startLoading();
+            } catch (e) {};
+            if (loading) {
+                loading.settext("请求中，请稍后......");
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (loading) {
+                loading.remove();
+            }
+            if (data.status == 0) {
+                $("#modify_title_box").css("display", 'none');
+                getPageList(pageId);
+                ifr.window.location.reload()
+            } else {
+                alert(data.errorMessage);
+            }
         }
     });
 }
@@ -356,7 +407,9 @@ function getPageList(pageId) {
                 data: data
             });
             $("#navitem").html(html);
-			initArticleClickEvent();
+            $("#js_preview_title").html(data.data.page.name);
+            $("#js_hname_input").val(data.data.page.name)
+            initArticleClickEvent();
             if (loading) {
                 loading.remove();
             }

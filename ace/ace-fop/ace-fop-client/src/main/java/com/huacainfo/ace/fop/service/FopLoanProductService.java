@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
 import com.huacainfo.ace.fop.vo.FopLoanProductQVo;
@@ -29,7 +30,7 @@ public interface FopLoanProductService {
      */
     public abstract PageResult<FopLoanProductVo> findFopLoanProductList(FopLoanProductQVo condition, int start, int limit, String orderBy) throws Exception;
 
-    public abstract PageResult<FopLoanProductVo> findLoanProductList(FopLoanProductQVo condition, int page, int limit, String orderBy) throws Exception;
+    public abstract ResultResponse findLoanProductList(FopLoanProductQVo condition, int page, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,6 +69,8 @@ public interface FopLoanProductService {
      * @version: 2018-05-02
      */
     public abstract SingleResult<FopLoanProductVo> selectFopLoanProductByPrimaryKey(String id) throws Exception;
+
+    public abstract ResultResponse selectLoanProductByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

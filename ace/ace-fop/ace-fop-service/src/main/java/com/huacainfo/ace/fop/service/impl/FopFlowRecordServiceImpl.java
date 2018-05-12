@@ -73,8 +73,7 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     public PageResult<FopFlowRecordVo> findFopFlowRecordList(FopFlowRecordQVo condition, int start,
                                                              int limit, String orderBy) throws Exception {
         PageResult<FopFlowRecordVo> rst = new PageResult<FopFlowRecordVo>();
-        List<FopFlowRecordVo> list = this.fopFlowRecordDao.findList(condition,
-                start, start + limit, orderBy);
+        List<FopFlowRecordVo> list = this.fopFlowRecordDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.fopFlowRecordDao.findCount(condition);

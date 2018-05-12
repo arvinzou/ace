@@ -21,7 +21,7 @@ public interface FopLoanProductDao {
 
     int updateByPrimaryKeySelective(FopLoanProduct record);
 
-    FopLoanProductVo selectVoByPrimaryKey(String id);
+    FopLoanProduct selectVoByPrimaryKey(String id);
 
     FopLoanProductVo selectVoByPrimaryKeyVo(String id);
 

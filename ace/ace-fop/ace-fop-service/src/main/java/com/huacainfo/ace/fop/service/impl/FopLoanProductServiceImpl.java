@@ -1,15 +1,19 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.dao.FopLoanProductDao;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
 import com.huacainfo.ace.fop.service.FopLoanProductService;
+import com.huacainfo.ace.fop.service.FopQuestionService;
+import com.huacainfo.ace.fop.vo.FopFinanceProjectVo;
 import com.huacainfo.ace.fop.vo.FopLoanProductQVo;
 import com.huacainfo.ace.fop.vo.FopLoanProductVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -19,7 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopLoanProductService")
 /**
@@ -33,6 +39,9 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     private FopLoanProductDao fopLoanProductDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private FopQuestionService fopQuestionService;
 
     /**
      * @throws
@@ -75,14 +84,11 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
      * @version: 2018-05-02
      */
     @Override
-    public PageResult<FopLoanProductVo> findLoanProductList(FopLoanProductQVo condition, int page,
-                                                            int limit, String orderBy) throws Exception {
-        PageResult<FopLoanProductVo> rst = new PageResult<FopLoanProductVo>();
-        List<FopLoanProductVo> list = this.fopLoanProductDao.findListVo(condition,
-                (page - 1) * limit, limit, orderBy);
-        rst.setRows(list);
-        int allRows = this.fopLoanProductDao.findCount(condition);
-        rst.setTotal(allRows);
+    public ResultResponse findLoanProductList(FopLoanProductQVo condition, int page, int limit, String orderBy) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopLoanProductDao.findListVo(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopLoanProductDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "金融产品列表", map);
         return rst;
     }
 
@@ -195,6 +201,14 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     public SingleResult<FopLoanProductVo> selectFopLoanProductByPrimaryKey(String id) throws Exception {
         SingleResult<FopLoanProductVo> rst = new SingleResult<FopLoanProductVo>();
         rst.setValue(this.fopLoanProductDao.selectVoByPrimaryKeyVo(id));
+        return rst;
+    }
+
+    @Override
+    public ResultResponse selectLoanProductByPrimaryKey(String id) throws Exception {
+        FopLoanProductVo ffp = this.fopLoanProductDao.selectVoByPrimaryKeyVo(id);
+        ffp.setComments(fopQuestionService.findCommentList(ffp.getId()));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "金融产品详情", ffp);
         return rst;
     }
 
