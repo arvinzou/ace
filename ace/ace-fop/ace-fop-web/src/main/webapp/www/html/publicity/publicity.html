@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -11,8 +11,10 @@
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
 		<script type="text/javascript" src="filter/Filter.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
-		<script type="text/javascript" src="js/finance.js"></script>
+		<script type="text/javascript" src="js/publicity.js"></script>
 		<style type="text/css">
 			body {
 				background-color: #F4F4F4;
@@ -298,7 +300,7 @@
 						<div class="search_combox">
 							<div class="search_box">
 								<div style="width: 12%;float: left;">精准搜索：</div>
-								<div style="width: 88%;float: left;"><input type="text" placeholder="请输入关键字搜索" /><button style="width:50px;border:none;background-color: #1A56A8;color: #FFFFFF;">搜索</button></div>
+								<div style="width: 88%;float: left;"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button style="width:50px;border:none;background-color: #1A56A8;color: #FFFFFF;">搜索</button></div>
 							</div>
 							<div class="search_filter1">
 								<div class="filter_title1">所属区域：</div>
@@ -313,7 +315,7 @@
 					</div>
 					<div class="search_list">
 						<div class="finance_list_title">
-							共1024条企业公示
+							共{{totalCount}}条企业公示
 						</div>
 						<div class="project_list">
 							<div class="table_div">
@@ -324,109 +326,16 @@
 										<th width="15%">成立时间</th>
 										<th width="35%">通讯地址</th>
 									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
-									</tr>
-									<tr>
-										<td width="35%">常德市创意电气机械制造有限公司</td>
-										<td width="15%">钱治超</td>
-										<td width="15%">2017-04-26</td>
-										<td width="35%">常德市武陵区东江工业</td>
+									<tr ng-repeat="item in items">
+										<td width="35%" ng-bind="item.fullName"></td>
+										<td width="15%"></td>
+										<td width="15%" ng-bind="item.establishDate"></td>
+										<td width="35%" ng-bind="item.areaCode"></td>
 									</tr>
 								</table>
 							</div>
 						</div>
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tbody>
-								<tr>
-									<td width="50">
-										<select class="inputstyle inputstyle02" name="">
-											<option>10</option>
-											<option>20</option>
-											<option>30</option>
-										</select>
-									</td>
-									<td>10条/页，共40条信息</td>
-									<td>
-										<div class="page">
-
-											<div class="page_box">
-												<a href="#">上一页</a>
-												<a class="active" href="#">01</a>
-												<a href="#">02</a>
-												<a href="#">03</a>
-												<a href="#">04</a>
-												<a href="#">下一页</a>
-											</div>
-
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+						<div id="paganation"></div>
 					</div>
 				</div>
 
