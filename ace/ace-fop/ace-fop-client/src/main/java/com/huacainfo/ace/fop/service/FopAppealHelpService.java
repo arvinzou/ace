@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopAppealHelp;
 import com.huacainfo.ace.fop.vo.FopAppealHelpQVo;
@@ -28,8 +29,9 @@ public interface FopAppealHelpService {
      * @author: Arvin
      * @version: 2018-05-10
      */
-    PageResult<FopAppealHelpVo> findFopAppealHelpList(FopAppealHelpQVo condition,
-                                                      int start, int limit, String orderBy) throws Exception;
+    PageResult<FopAppealHelpVo> findFopAppealHelpList(FopAppealHelpQVo condition, int start, int limit, String orderBy) throws Exception;
+
+    ResultResponse findAppealHelpList(FopAppealHelpQVo condition, int page, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,6 +70,8 @@ public interface FopAppealHelpService {
      * @version: 2018-05-10
      */
     SingleResult<FopAppealHelpVo> selectFopAppealHelpByPrimaryKey(String id) throws Exception;
+
+    ResultResponse selectAppealHelpByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

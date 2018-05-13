@@ -540,28 +540,29 @@
 
     </resultMap>
 
-    <sql id="Vo_Column_List">
-        id, departmentId, creditCode, companyType, fullName, shortName, companyCode, companyLogo,
-        companyLinkUrl, areaCode, companyProperty, establishDate, crewSize, registeredCapital,
-        fixedAssets, workingCapital, ownSpace, tenancySpace, personId, address, latitude,
-        longitude, firstPersonId, secPersonId, postcode, fax, email, majorVariety, laborContractNum,
-        thirdLaborRelation, socialInsuranceAddr, socialInsuranceNum, accTaxAmount, yearTaxAmount,
-        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
-        lastModifyDate
+    <sql id="column_List_Vo">
+        c.id, c.departmentId, c.creditCode, c.companyType, c.fullName, c.shortName, c.companyCode, c.companyLogo,
+        c.companyLinkUrl, c.areaCode, c.companyProperty, c.establishDate, c.crewSize, c.registeredCapital,
+        c.fixedAssets, c.workingCapital, c.ownSpace, c.tenancySpace, c.personId, c.address, c.latitude,
+        c.longitude, c.firstPersonId, c.secPersonId, c.postcode, c.fax, c.email, c.majorVariety, c.laborContractNum,
+        c.thirdLaborRelation, c.socialInsuranceAddr, c.socialInsuranceNum, c.accTaxAmount, c.yearTaxAmount,
+        c.remark, c.status, c.createUserId, c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName,
+        c.lastModifyDate, p.realName
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from fop_company
+        <include refid="column_List_Vo"/>
+        <include refid="fromCondition_Vo"/>
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
 
     <select id="findList" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
-        <include refid="whereCondition"/>
+        <include refid="column_List_Vo"/>
+        <include refid="fromCondition_Vo"/>
+        <include refid="whereCondition_Vo"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
@@ -573,8 +574,30 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
+    <sql id="fromCondition_Vo">
+            from fop_company c
+            left join fop_person p
+            on p.id=c.personId
+    </sql>
+
     <sql id="whereCondition">
         from fop_company
+        where 1 = 1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.fullName!=null and condition.fullName!=""'>
+            and fullName like
+            concat('%',#{condition.fullName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+    <sql id="whereCondition_Vo">
         where 1 = 1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and id = #{condition.id,jdbcType=VARCHAR}

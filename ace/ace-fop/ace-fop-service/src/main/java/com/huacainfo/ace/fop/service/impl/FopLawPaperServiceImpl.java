@@ -160,6 +160,12 @@ public class FopLawPaperServiceImpl implements FopLawPaperService {
         return rst;
     }
 
+    @Override
+    public ResultResponse selectLawPaperByPrimaryKey(String id) throws Exception {
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "法律文书详情", this.fopLawPaperDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:deleteFopLawPaperByFopLawPaperId

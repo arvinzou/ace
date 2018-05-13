@@ -132,6 +132,20 @@ public class WWWController extends FopBaseController {
         return rst;
     }
 
+
+    /**
+     * 获取法律文书
+     *
+     * @param id;
+     */
+
+    @RequestMapping(value = "/selectLawPaperByPrimaryKey")
+    @ResponseBody
+    public ResultResponse selectFopLawPaperByPrimaryKey(String id)
+            throws Exception {
+        return this.fopLawPaperService.selectLawPaperByPrimaryKey(id);
+    }
+
     /**
      * financeTitle 融资名称
      * financeYear  融资年限
@@ -355,15 +369,37 @@ public class WWWController extends FopBaseController {
 
 
     /**
+     *获取诉求列表
      */
     @RequestMapping(value = "/findAppealHelpList")
     @ResponseBody
-    public PageResult<FopAppealHelpVo> findFopAppealHelpList(FopAppealHelpQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<FopAppealHelpVo> rst = this.fopAppealHelpService.findFopAppealHelpList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
-
+    public ResultResponse findFopAppealHelpList(FopAppealHelpQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopAppealHelpService.findAppealHelpList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
+    }
+
+    /**
+     * 获取诉求服务详情。
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectAppealHelpByPrimaryKey")
+    @ResponseBody
+    public ResultResponse selectAppealHelpByPrimaryKey(String id) throws Exception {
+        return this.fopAppealHelpService.selectAppealHelpByPrimaryKey(id);
+    }
+
+    /**
+     * 发布诉求
+     * requestTitle 标题
+     * requestDesc 内容
+     */
+
+    @RequestMapping(value = "/insertAppealHelp")
+    @ResponseBody
+    public MessageResponse insertAppealHelp(FopAppealHelp obj) throws Exception {
+        return this.fopAppealHelpService.insertFopAppealHelp(obj, this.getCurUserProp());
     }
 }
