@@ -117,4 +117,7 @@
 
     <dubbo:service interface="com.huacainfo.ace.portal.service.AppealCaseService"
                    ref="appealCaseService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.MessageTemplateService"
+                   ref="messageTemplateService"/>
 </beans>

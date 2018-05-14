@@ -23,33 +23,6 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<property name="driverClass">
-			<value>#{configProps['dao.db.driverClassName']}</value>
-		</property>
-		<property name="jdbcUrl">
-			<value>#{configProps['dao.db.url']}</value>
-		</property>
-		<property name="user">
-			<value>#{configProps['dao.db.username']}</value>
-		</property>
-		<property name="password">
-			<value>#{configProps['dao.db.password']}</value>
-		</property>
-		<property name="initialPoolSize">
-			<value>#{configProps['dao.db.initialPoolSize']}</value>
-		</property>
-		<property name="maxPoolSize">
-			<value>#{configProps['dao.db.maxActive']}</value>
-		</property>
-		<property name="preferredTestQuery">
-			<value>#{configProps['dao.db.preferredTestQuery']}</value>
-		</property>
-		<property name="idleConnectionTestPeriod">
-			<value>#{configProps['dao.db.idleConnectionTestPeriod']}</value>
-		</property>
-	</bean>
 	<import resource="classpath:dubbo/dubbo-ace-common-consumer.xml" />
 	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
 	<import resource="classpath:spring/spring-ace-common-fastdfs.xml" />
