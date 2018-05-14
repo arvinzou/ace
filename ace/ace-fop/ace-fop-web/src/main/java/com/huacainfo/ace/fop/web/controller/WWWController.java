@@ -189,8 +189,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/insertFinanceProject")
     @ResponseBody
-    public MessageResponse insertFinanceProject(String jsons) throws Exception {
-        FopFinanceProject obj = JSON.parseObject(jsons, FopFinanceProject.class);
+    public MessageResponse insertFinanceProject(FopFinanceProject obj) throws Exception {
         return this.fopFinanceProjectService.insertFopFinanceProject(obj, this.getCurUserProp());
     }
 
@@ -230,8 +229,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/insertLoanProduct")
     @ResponseBody
-    public MessageResponse insertLoanProduct(String jsons) throws Exception {
-        FopLoanProduct obj = JSON.parseObject(jsons, FopLoanProduct.class);
+    public MessageResponse insertLoanProduct(FopLoanProduct obj) throws Exception {
         return this.fopLoanProductService
                 .insertFopLoanProduct(obj, this.getCurUserProp());
     }
@@ -463,7 +461,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/selectProjectByPrimaryKey")
     @ResponseBody
-    public ResultResponse selectFopProjectByPrimaryKey(String id) throws Exception {
+    public ResultResponse selectProjectByPrimaryKey(String id) throws Exception {
         return this.fopProjectService.selectProjectByPrimaryKey(id);
     }
 
@@ -477,8 +475,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/updateProject")
     @ResponseBody
-    public MessageResponse updateFopProject(String jsons) throws Exception {
-        FopProject obj = JSON.parseObject(jsons, FopProject.class);
+    public MessageResponse updateProject(FopProject obj) throws Exception {
         return this.fopProjectService.updateFopProject(obj, this.getCurUserProp());
     }
 
