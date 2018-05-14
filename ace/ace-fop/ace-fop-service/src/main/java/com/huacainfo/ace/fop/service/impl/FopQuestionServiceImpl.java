@@ -125,6 +125,7 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         o.setId(GUIDUtil.getGUID());
         o.setSourceType("0");
         o.setReleaseDate(new Date());
+        o.setParentId("0");
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }

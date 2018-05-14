@@ -13,6 +13,26 @@ public class FopFinanceProjectVo extends FopFinanceProject {
 
     private List<FopQuestionVo> comments;
 
+    private String companyProperty;
+
+    private String address;
+
+    public String getCompanyProperty() {
+        return companyProperty;
+    }
+
+    public void setCompanyProperty(String companyProperty) {
+        this.companyProperty = companyProperty;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public List<FopQuestionVo> getComments() {
         return comments;
     }

@@ -352,7 +352,7 @@ public class WWWController extends FopBaseController {
     /**
      * 发布法律帮助
      * title：标题
-     * subType：子标题
+     * subType：类型
      * content：内容
      */
 
@@ -450,7 +450,6 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/insertProject")
     @ResponseBody
     public MessageResponse insertFopProject(FopProject obj) throws Exception {
-
         return this.fopProjectService.insertFopProject(obj, this.getCurUserProp());
     }
 
@@ -469,18 +468,18 @@ public class WWWController extends FopBaseController {
     }
 
     /**
-     * 更新项目
-     *
-     * @param jsons
-     * @return
+     * projectName:项目名称
+     * coopType：合作方式 1、投资合作，2、合作开发，3、出资+资源合作，4、其他
+     * areaCode：所属区域
+     * projectType:项目类型。
+     * coopDesc：内容
      * @throws Exception
      */
-    @RequestMapping(value = "/updateFopProject")
+    @RequestMapping(value = "/updateProject")
     @ResponseBody
     public MessageResponse updateFopProject(String jsons) throws Exception {
         FopProject obj = JSON.parseObject(jsons, FopProject.class);
-        return this.fopProjectService
-                .updateFopProject(obj, this.getCurUserProp());
+        return this.fopProjectService.updateFopProject(obj, this.getCurUserProp());
     }
 
 }
