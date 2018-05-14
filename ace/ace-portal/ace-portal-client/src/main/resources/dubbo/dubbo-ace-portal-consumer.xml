@@ -110,4 +110,10 @@
     <dubbo:reference interface="com.huacainfo.ace.portal.service.TplPageService"
                      id="tplPageService"/>
 
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.AppealService"
+                     id="appealService"/>
+
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.AppealCaseService"
+                     id="appealCaseService"/>
+
 </beans>

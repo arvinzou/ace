@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.AppealDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Appeal">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="qrcoteUrl" jdbcType="VARCHAR" property="qrcoteUrl" />
+    <result column="openId" jdbcType="VARCHAR" property="openId" />
+    <result column="tplCode" jdbcType="VARCHAR" property="tplCode" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.AppealVo"
+             extends="BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, cover, qrcoteUrl, openId, tplCode, status, createUserId, createUserName, 
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from appeal
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from appeal
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.Appeal">
+    insert into appeal (id, name, cover, 
+      qrcoteUrl, openId, tplCode, 
+      status, createUserId, createUserName, 
+      createDate, lastModifyUserId, lastModifyUserName, 
+      lastModifyDate, remark)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
+      #{qrcoteUrl,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{tplCode,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Appeal">
+    update appeal
+    set name = #{name,jdbcType=VARCHAR},
+    cover = #{cover,jdbcType=VARCHAR},
+    qrcoteUrl = #{qrcoteUrl,jdbcType=VARCHAR},
+    openId = #{openId,jdbcType=VARCHAR},
+    tplCode = #{tplCode,jdbcType=VARCHAR},
+    status = #{status,jdbcType=CHAR},
+    lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+    lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+    lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+    remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <sql id="whereCondition">
+    from appeal where 0=0
+    <if test='condition.name!=null and condition.name!=""'>
+      and name like
+      concat(#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition" />
+  </select>
+  <select id="findList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    <include refid="whereCondition" />
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY createDate
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    appeal where
+    name=#{name} and createUserId=#{createUserId}
+  </select>
+</mapper>
