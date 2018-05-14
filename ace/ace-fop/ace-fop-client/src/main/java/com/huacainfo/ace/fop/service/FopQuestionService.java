@@ -79,6 +79,8 @@ public interface FopQuestionService {
     public abstract SingleResult
             <FopQuestionVo> selectFopQuestionByPrimaryKey(String id) throws Exception;
 
+    public abstract ResultResponse selectQuestionByPrimaryKey(String id) throws Exception;
+
     /**
      * @throws
      * @Title:deleteFopQuestionByFopQuestionId

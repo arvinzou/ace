@@ -593,8 +593,11 @@
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
             and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
-        <if test='condition.areaCode!=null and condition.areaCode!=""'>
-            and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        <if test='condition.companyType!=null and condition.companyType!=""'>
+            and companyType =#{condition.companyType,jdbcType=CHAR}
+        </if>
+        <if test='condition.companyProperty!=null and condition.companyProperty!=""'>
+            and companyProperty=#{condition.companyProperty,jdbcType=CHAR}
         </if>
     </sql>
     <sql id="whereCondition_Vo">
@@ -609,8 +612,11 @@
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
             and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
-        <if test='condition.areaCode!=null and condition.areaCode!=""'>
-            and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        <if test='condition.companyType!=null and condition.companyType!=""'>
+            and companyType=#{condition.companyType,jdbcType=CHAR}
+        </if>
+        <if test='condition.companyProperty!=null and condition.companyProperty!=""'>
+            and companyProperty=#{condition.companyProperty,jdbcType=CHAR}
         </if>
     </sql>
 

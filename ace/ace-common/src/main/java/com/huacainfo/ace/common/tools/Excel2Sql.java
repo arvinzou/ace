@@ -18,7 +18,7 @@ public class Excel2Sql {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Excel2Sql.class);
     public static void main(String [] args) throws Exception{
         //logger.info("start excel2sql ");
-        File file=new File("/Users/chenxiaoke/Documents/table.xls");
+        File file=new File("/Users/chenxiaoke/Documents/sq.xls");
         InputStream is=new java.io.FileInputStream(file);
         WorkbookSettings workbookSettings = new WorkbookSettings();
         workbookSettings.setEncoding("GBK"); //解决中文乱码，或GBK

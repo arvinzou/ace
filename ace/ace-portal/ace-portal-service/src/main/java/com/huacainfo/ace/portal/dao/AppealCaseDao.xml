@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.AppealCaseDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.AppealCase">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="appealId" jdbcType="VARCHAR" property="appealId" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="mediType" jdbcType="VARCHAR" property="mediType" />
+    <result column="mediUrl" jdbcType="VARCHAR" property="mediUrl" />
+    <result column="submitTime" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="submitOpenId" jdbcType="VARCHAR" property="submitOpenId" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="answerTime" jdbcType="TIMESTAMP" property="answerTime" />
+    <result column="answerOpenId" jdbcType="VARCHAR" property="answerOpenId" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="answerContent" jdbcType="LONGVARCHAR" property="answerContent" />
+  </resultMap>
+  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.AppealCaseVo"
+             extends="BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, appealId, category, title, mediType, mediUrl, submitTime, submitOpenId, latitude, 
+    longitude, answerTime, answerOpenId, status, createDate
+  </sql>
+  <sql id="Blob_Column_List">
+    content, answerContent
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from appeal_case
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from appeal_case
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.AppealCase">
+    insert into appeal_case (id, appealId, category, 
+      title, mediType, mediUrl, 
+      submitTime, submitOpenId, latitude, 
+      longitude, answerTime, answerOpenId, 
+      status, createDate, content, 
+      answerContent)
+    values (#{id,jdbcType=VARCHAR}, #{appealId,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{mediType,jdbcType=VARCHAR}, #{mediUrl,jdbcType=VARCHAR}, 
+      #{submitTime,jdbcType=TIMESTAMP}, #{submitOpenId,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, 
+      #{longitude,jdbcType=DECIMAL}, #{answerTime,jdbcType=TIMESTAMP}, #{answerOpenId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}, 
+      #{answerContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.AppealCase">
+    update appeal_case
+    set
+    category = #{category,jdbcType=VARCHAR},
+    title = #{title,jdbcType=VARCHAR},
+    mediType = #{mediType,jdbcType=VARCHAR},
+    mediUrl = #{mediUrl,jdbcType=VARCHAR},
+    submitTime = #{submitTime,jdbcType=TIMESTAMP},
+    submitOpenId = #{submitOpenId,jdbcType=VARCHAR},
+    latitude = #{latitude,jdbcType=DECIMAL},
+    longitude = #{longitude,jdbcType=DECIMAL},
+    answerTime = #{answerTime,jdbcType=TIMESTAMP},
+    answerOpenId = #{answerOpenId,jdbcType=VARCHAR},
+    content = #{content,jdbcType=LONGVARCHAR},
+    answerContent = #{answerContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <sql id="whereCondition">
+    from appeal_case where appealId=#{condition.appealId}
+    <if test='condition.title!=null and condition.title!=""'>
+      and title like
+      concat(#{condition.title,jdbcType=VARCHAR},'%')
+    </if>
+  </sql>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition" />
+  </select>
+  <select id="findList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    <include refid="whereCondition" />
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY createDate
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    appeal_case where
+    title=#{title} and appealId=#{appealId} and submitOpenId=#{submitOpenId}
+  </select>
+</mapper>

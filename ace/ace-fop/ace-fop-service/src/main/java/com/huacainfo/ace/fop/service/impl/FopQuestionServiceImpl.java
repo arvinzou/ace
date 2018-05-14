@@ -249,6 +249,12 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         return rst;
     }
 
+    @Override
+    public ResultResponse selectQuestionByPrimaryKey(String id) throws Exception {
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "Question详情", this.fopQuestionDao.selectByPrimaryKey(id));
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:deleteFopQuestionByFopQuestionId
