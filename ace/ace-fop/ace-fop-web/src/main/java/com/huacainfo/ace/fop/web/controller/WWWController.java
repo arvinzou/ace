@@ -358,8 +358,7 @@ public class WWWController extends FopBaseController {
 
     @RequestMapping(value = "/insertLawQuestion")
     @ResponseBody
-    public MessageResponse insertFopQuestion(String jsons) throws Exception {
-        FopQuestion obj = JSON.parseObject(jsons, FopQuestion.class);
+    public MessageResponse insertFopQuestion(FopQuestion obj) throws Exception {
         return this.fopQuestionService.insertLawQuestion(obj, this.getCurUserProp());
     }
 
@@ -432,8 +431,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/findProjectList")
     @ResponseBody
-    public ResultResponse findFopProjectList(FopProjectQVo condition,
-                                             PageParamNoChangeSord page) throws Exception {
+    public ResultResponse findFopProjectList(FopProjectQVo condition, PageParamNoChangeSord page) throws Exception {
         ResultResponse rst = this.fopProjectService.findProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
     }
@@ -464,11 +462,10 @@ public class WWWController extends FopBaseController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/selectFopProjectByPrimaryKey")
+    @RequestMapping(value = "/selectProjectByPrimaryKey")
     @ResponseBody
-    public SingleResult<FopProjectVo> selectFopProjectByPrimaryKey(String id)
-            throws Exception {
-        return this.fopProjectService.selectFopProjectByPrimaryKey(id);
+    public ResultResponse selectFopProjectByPrimaryKey(String id) throws Exception {
+        return this.fopProjectService.selectProjectByPrimaryKey(id);
     }
 
     /**
