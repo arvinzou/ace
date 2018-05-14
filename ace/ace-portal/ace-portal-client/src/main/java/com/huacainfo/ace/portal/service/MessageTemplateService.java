@@ -86,7 +86,7 @@ public interface MessageTemplateService {
 
 
     /**
-     * 功能描述: 发送模板消息
+     * 功能描述: 发送模板消息   -- 采用kafka完成此部分逻辑运行
      *
      * @param sysId    系统ID
      * @param tmplCode 模板代码
@@ -107,4 +107,5 @@ public interface MessageTemplateService {
      * @date: 2018/5/12 10:57
      */
     ResultResponse insertSendRecord();
+
 }

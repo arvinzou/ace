@@ -1,12 +1,12 @@
 package com.huacainfo.ace.portal.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.portal.vo.UserinfoQVo;
 import com.huacainfo.ace.portal.vo.UserinfoVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface UserinfoDao {
     int deleteByPrimaryKey(String unionid);
@@ -27,7 +27,9 @@ public interface UserinfoDao {
 
     int isExit(Userinfo record);
 
-    int updateRole(@Param("unionid") String unionid,@Param("role") String role);
-    List<Map<String,Object>> selectWxUser(@Param("condition") Map<String,Object> condition);
+    int updateRole(@Param("unionid") String unionid, @Param("role") String role);
 
+    List<Map<String, Object>> selectWxUser(@Param("condition") Map<String, Object> condition);
+
+    Map<String, Object> selectUserInfoVo(@Param("condition") Map<String, Object> where);
 }
