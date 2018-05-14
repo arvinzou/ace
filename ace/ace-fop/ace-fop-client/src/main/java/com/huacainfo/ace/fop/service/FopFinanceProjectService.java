@@ -30,7 +30,7 @@ public interface FopFinanceProjectService {
      */
     public abstract PageResult<FopFinanceProjectVo> findFopFinanceProjectList(FopFinanceProjectQVo condition, int start, int limit, String orderBy) throws Exception;
 
-    public abstract PageResult<FopFinanceProjectVo> findFinanceProjectList(FopFinanceProjectQVo condition, int page, int limit, String orderBy) throws Exception;
+    public abstract ResultResponse findFinanceProjectList(FopFinanceProjectQVo condition, int page, int limit, String orderBy) throws Exception;
 
 
     /**
@@ -45,6 +45,8 @@ public interface FopFinanceProjectService {
      * @version: 2018-05-02
      */
     public abstract MessageResponse insertFopFinanceProject(FopFinanceProject obj, UserProp userProp) throws Exception;
+
+    public abstract MessageResponse insertFinanceProject(FopFinanceProject obj, UserProp userProp) throws Exception;
 
     /**
      * @throws

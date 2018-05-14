@@ -34,7 +34,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopGeHelpService")
 /**
@@ -89,8 +91,10 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
 
     @Override
     public ResultResponse findGeHelpList(FopGeHelpQVo condition, int page, int limit, String orderBy) throws Exception {
-        List<FopGeHelpVo> list = this.fopGeHelpDao.findList(condition, (page - 1) * limit, limit, orderBy);
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "获取政企服务列表", list);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopGeHelpDao.findList(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopGeHelpDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "政企服务列表", map);
         return rst;
     }
 
@@ -189,6 +193,7 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
             return new MessageResponse(1, "内容不能为空！");
         }
         o.setCreateDate(new Date());
+        o.setReleaseDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());

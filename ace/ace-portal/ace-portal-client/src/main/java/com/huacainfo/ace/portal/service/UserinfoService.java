@@ -1,12 +1,12 @@
 package com.huacainfo.ace.portal.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.model.Userinfo;
-import com.huacainfo.ace.portal.vo.UserinfoVo;
 import com.huacainfo.ace.portal.vo.UserinfoQVo;
+import com.huacainfo.ace.portal.vo.UserinfoVo;
 
 import java.util.List;
 import java.util.Map;
@@ -124,4 +124,5 @@ public interface UserinfoService {
     List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception;
 
 
+    Map<String, Object> selectUserInfoVo(Map<String, Object> where);
 }

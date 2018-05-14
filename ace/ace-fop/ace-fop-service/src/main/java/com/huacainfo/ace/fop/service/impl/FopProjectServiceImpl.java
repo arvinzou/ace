@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
@@ -26,7 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopProjectService")
 /**
@@ -67,6 +70,15 @@ public class FopProjectServiceImpl implements FopProjectService {
             int allRows = this.fopProjectDao.findCount(condition);
             rst.setTotal(allRows);
         }
+        return rst;
+    }
+
+    @Override
+    public ResultResponse findProjectList(FopProjectQVo condition, int page, int limit, String orderBy) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopProjectDao.findList(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopProjectDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "项目列表", map);
         return rst;
     }
 
@@ -165,6 +177,12 @@ public class FopProjectServiceImpl implements FopProjectService {
         return rst;
     }
 
+    @Override
+    public ResultResponse selectProjectByPrimaryKey(String id) throws Exception {
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "项目详情", this.fopProjectDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:deleteFopProjectByFopProjectId
@@ -194,10 +212,8 @@ public class FopProjectServiceImpl implements FopProjectService {
 
     /**
      * 功能描述: 审核发布项目
-     *
-     * @param id
-     * @param curUserProp
-     * @param:
+     *@param id
+     * @param: userProp
      * @return:
      * @auther: Arvin Zou
      * @date: 2018/5/10 15:47

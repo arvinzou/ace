@@ -266,6 +266,10 @@
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
+        <if test='condition.requestTitle!=null and condition.requestTitle!=""'>
+            and requestTitle like
+            concat('%',#{condition.requestTitle,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">

@@ -59,7 +59,6 @@ public class FopCompanyController extends FopBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 

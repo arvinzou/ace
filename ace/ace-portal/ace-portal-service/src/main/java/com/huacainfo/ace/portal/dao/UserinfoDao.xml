@@ -132,4 +132,14 @@
         </if>
         ORDER BY unionid
     </select>
+
+    <select id="selectUserInfoVo" resultType="map">
+        select
+            w.appScret,w.accessToken,w.ticket,
+            t.unionid, t.openid, t.appid, t.nickname, t.sex, t.city, t.province, t.country, t.headimgurl, t.access_token,
+            t.refresh_token, t.scope, t.expires_in, t.role
+        from userinfo t
+        left join wx_cfg w on t.appid = w.appId
+        where t.openid = #{condition.openid,jdbcType=VARCHAR}
+    </select>
 </mapper>

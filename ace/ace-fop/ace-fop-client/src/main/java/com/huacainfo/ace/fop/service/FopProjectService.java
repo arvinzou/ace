@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopProject;
 import com.huacainfo.ace.fop.vo.FopProjectQVo;
@@ -28,6 +29,8 @@ public interface FopProjectService {
      * @version: 2018-05-02
      */
     public abstract PageResult<FopProjectVo> findFopProjectList(FopProjectQVo condition, int start, int limit, String orderBy) throws Exception;
+
+    public abstract ResultResponse findProjectList(FopProjectQVo condition, int page, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -66,6 +69,8 @@ public interface FopProjectService {
      * @version: 2018-05-02
      */
     public abstract SingleResult<FopProjectVo> selectFopProjectByPrimaryKey(String id) throws Exception;
+
+    public abstract ResultResponse selectProjectByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

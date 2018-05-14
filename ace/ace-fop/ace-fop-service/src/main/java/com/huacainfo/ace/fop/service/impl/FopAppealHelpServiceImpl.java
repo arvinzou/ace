@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
@@ -26,7 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopAppealHelpService")
 /**
@@ -58,20 +61,24 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
      * @version: 2018-05-10
      */
     @Override
-    public PageResult
-            <FopAppealHelpVo> findFopAppealHelpList(FopAppealHelpQVo condition, int start,
-                                                    int limit, String orderBy) throws Exception {
-        PageResult
-                <FopAppealHelpVo> rst = new PageResult
-                <FopAppealHelpVo>();
-        List
-                <FopAppealHelpVo> list = this.fopAppealHelpDao.findList(condition,
-                start, start + limit, orderBy);
+    public PageResult<FopAppealHelpVo> findFopAppealHelpList(FopAppealHelpQVo condition, int start,
+                                                             int limit, String orderBy) throws Exception {
+        PageResult<FopAppealHelpVo> rst = new PageResult<FopAppealHelpVo>();
+        List<FopAppealHelpVo> list = this.fopAppealHelpDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.fopAppealHelpDao.findCount(condition);
             rst.setTotal(allRows);
         }
+        return rst;
+    }
+
+    @Override
+    public ResultResponse findAppealHelpList(FopAppealHelpQVo condition, int page, int limit, String orderBy) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.fopAppealHelpDao.findList(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.fopAppealHelpDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "诉求服务列表", map);
         return rst;
     }
 
@@ -88,13 +95,15 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
      */
     @Override
     public MessageResponse insertFopAppealHelp(FopAppealHelp o, UserProp userProp) throws Exception {
-
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
+        o.setRequestId(userProp.getUserId());
         if (CommonUtils.isBlank(o.getRequestId())) {
             return new MessageResponse(1, "发起人ID不能为空！");
         }
+
         if (CommonUtils.isBlank(o.getRequestType())) {
             return new MessageResponse(1, "发起人类型不能为空！");
         }
@@ -107,6 +116,7 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
         if (CommonUtils.isBlank(o.getRequestDesc())) {
             return new MessageResponse(1, "诉求内容不能为空！");
         }
+        o.setSubmitDate(new Date());
         if (CommonUtils.isBlank(o.getSubmitDate())) {
             return new MessageResponse(1, "提交时间不能为空！");
         }
@@ -122,8 +132,6 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
         if (temp > 0) {
             return new MessageResponse(1, "诉求服务名称重复！");
         }
-
-        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -201,6 +209,12 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
     public SingleResult<FopAppealHelpVo> selectFopAppealHelpByPrimaryKey(String id) throws Exception {
         SingleResult<FopAppealHelpVo> rst = new SingleResult<>();
         rst.setValue(this.fopAppealHelpDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
+    @Override
+    public ResultResponse selectAppealHelpByPrimaryKey(String id) throws Exception {
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "诉求详情", this.fopAppealHelpDao.selectVoByPrimaryKey(id));
         return rst;
     }
 

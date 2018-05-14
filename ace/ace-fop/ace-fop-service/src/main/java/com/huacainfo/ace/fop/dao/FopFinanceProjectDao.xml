@@ -34,7 +34,7 @@
         f.id, f.financeTitle, f.financeCode, f.areaCode, f.companyId, f.releaseDate, f.financeAmount,
         f.financeYear, f.yearYield, f.clicks, f.likes, f.remark,
     f.status, f.createUserId, f.createUserName, f.createDate, f.lastModifyUserId, f.lastModifyUserName,
-    f.lastModifyDate, f.financeContent,c.fullName as companyName
+        f.lastModifyDate, f.financeContent,c.fullName as companyName, c.companyProperty,c.address
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -284,8 +284,8 @@
     </resultMap>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from fop_finance_project
+        <include refid="Base_Column_List_Vo"/>
+        <include refid="fromCondition_Vo"/>
         where id = #{id,jdbcType=VARCHAR}
     </select>
 

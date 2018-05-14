@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopLawPaper;
 import com.huacainfo.ace.fop.vo.FopLawPaperQVo;
@@ -29,8 +30,9 @@ public interface FopLawPaperService {
      */
     public abstract PageResult<FopLawPaperVo> findFopLawPaperList(FopLawPaperQVo condition, int start, int limit, String orderBy) throws Exception;
 
+    public abstract ResultResponse findLawPaperList(FopLawPaperQVo condition, int page, int limit, String orderBy) throws Exception;
 
-    public abstract PageResult<FopLawPaperVo> findLawPaperList(String keyWord, int page, int limit) throws Exception;
+
 
     /**
      * @throws
@@ -69,6 +71,8 @@ public interface FopLawPaperService {
      * @version: 2018-05-02
      */
     public abstract SingleResult<FopLawPaperVo> selectFopLawPaperByPrimaryKey(String id) throws Exception;
+
+    public abstract ResultResponse selectLawPaperByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

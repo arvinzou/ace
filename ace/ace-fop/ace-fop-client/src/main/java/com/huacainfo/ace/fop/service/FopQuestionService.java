@@ -48,6 +48,11 @@ public interface FopQuestionService {
      */
     public abstract MessageResponse insertFopQuestion(FopQuestion obj, UserProp userProp) throws Exception;
 
+    public abstract MessageResponse insertLawQuestion(FopQuestion obj, UserProp userProp) throws Exception;
+
+
+    public abstract MessageResponse insertQuestion(FopQuestion obj, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateFopQuestion
@@ -73,6 +78,8 @@ public interface FopQuestionService {
      */
     public abstract SingleResult
             <FopQuestionVo> selectFopQuestionByPrimaryKey(String id) throws Exception;
+
+    public abstract ResultResponse selectQuestionByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

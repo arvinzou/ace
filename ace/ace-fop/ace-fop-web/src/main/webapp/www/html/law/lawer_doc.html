@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>法律文书</title>
+		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css" />
+		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<script type="text/javascript" src="js/lawer_doc.js"></script>
+	</head>
+
+	<body ng-app="angularjsApp" ng-controller="angularjsCtrl">
+		<div class="main">
+			<div class="title">
+				<span class="title_lager">法律文书</span><span class="title_small">/&nbsp;Legal&nbsp;Document</span>
+				<div class="search_right">
+					<span class="s_title"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button class="glyphicon glyphicon-search" ng-click="search();"></button></span>
+				</div>
+			</div>
+			<div class="searchTable">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr class="tr_bottom"  ng-repeat="item in items">
+							<td align="center" width="5%"><div class="dot"></div></td>
+							<td align="center" width="25%" ng-bind="item.releaseDate"></td>
+							<td ng-bind="item.title"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="paganation"></div>
+		</div>
+		</div>
+	</body>
+
+</html>
