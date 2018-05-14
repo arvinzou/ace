@@ -79,6 +79,7 @@
       concat(#{condition.title,jdbcType=VARCHAR},'%')
     </if>
   </sql>
+
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
     <include refid="whereCondition" />
