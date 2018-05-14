@@ -1,27 +1,23 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.portal.dao.UserinfoDao;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UserinfoService;
+import com.huacainfo.ace.portal.vo.UserinfoQVo;
+import com.huacainfo.ace.portal.vo.UserinfoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.portal.dao.UserinfoDao;
-import com.huacainfo.ace.common.model.Userinfo;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.portal.service.UserinfoService;
-import com.huacainfo.ace.portal.vo.UserinfoVo;
-import com.huacainfo.ace.portal.vo.UserinfoQVo;
+import java.util.List;
+import java.util.Map;
 
 @Service("userinfoService")
 /**
@@ -153,12 +149,13 @@ public class UserinfoServiceImpl implements UserinfoService {
      * @version: 2018-02-04
      */
     @Override
-    public  MessageResponse deleteRoleById(String id,UserProp userProp) throws Exception{
-        this.userinfoDao.updateRole(id,null);
+    public MessageResponse deleteRoleById(String id, UserProp userProp) throws Exception {
+        this.userinfoDao.updateRole(id, null);
         this.dataBaseLogService.log("删除角色", "微信用户", String.valueOf(id),
                 String.valueOf(id), "微信用户", userProp);
         return new MessageResponse(0, "删除角色完成！");
     }
+
     /**
      * @throws
      * @Title:updateRoleById
@@ -172,8 +169,8 @@ public class UserinfoServiceImpl implements UserinfoService {
      * @version: 2018-02-04
      */
     @Override
-    public  MessageResponse updateRoleById(String id,String role,UserProp userProp) throws Exception{
-        this.userinfoDao.updateRole(id,role);
+    public MessageResponse updateRoleById(String id, String role, UserProp userProp) throws Exception {
+        this.userinfoDao.updateRole(id, role);
         this.dataBaseLogService.log("分配角色", "微信用户", String.valueOf(id),
                 String.valueOf(id), "微信用户", userProp);
         return new MessageResponse(0, "分配角色完成！");
@@ -192,7 +189,12 @@ public class UserinfoServiceImpl implements UserinfoService {
      * @version: 2018-02-04
      */
     @Override
-    public List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception{
+    public List<Map<String, Object>> selectWxUser(Map<String, Object> condition) throws Exception {
         return this.userinfoDao.selectWxUser(condition);
+    }
+
+    @Override
+    public Map<String, Object> selectUserInfoVo(Map<String, Object> where) {
+        return userinfoDao.selectUserInfoVo(where);
     }
 }
