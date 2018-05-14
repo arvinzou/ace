@@ -74,7 +74,7 @@ public class AppealCaseController extends PortalBaseController {
 	public MessageResponse insertAppealCase(String jsons) throws Exception {
 		AppealCase obj = JSON.parseObject(jsons, AppealCase.class);
 		return this.appealCaseService
-				.insertAppealCase(obj, this.getCurUserProp());
+				.insertAppealCase(obj);
 	}
     /**
 	 *
@@ -92,7 +92,7 @@ public class AppealCaseController extends PortalBaseController {
 	public MessageResponse updateAppealCase(String jsons) throws Exception {
 		AppealCase obj = JSON.parseObject(jsons, AppealCase.class);
 		return this.appealCaseService
-				.updateAppealCase(obj, this.getCurUserProp());
+				.updateAppealCase(obj);
 	}
     /**
 	 *
