@@ -48,6 +48,8 @@ public interface FopQuestionService {
      */
     public abstract MessageResponse insertFopQuestion(FopQuestion obj, UserProp userProp) throws Exception;
 
+    public abstract MessageResponse insertLawQuestion(FopQuestion obj, UserProp userProp) throws Exception;
+
 
     public abstract MessageResponse insertQuestion(FopQuestion obj, UserProp userProp) throws Exception;
 

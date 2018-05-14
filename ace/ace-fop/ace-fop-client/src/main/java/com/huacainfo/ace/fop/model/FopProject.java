@@ -51,6 +51,24 @@ public class FopProject implements Serializable {
 
     private Date lastModifyDate;
 
+    private String projectType;
+
+    public String getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(String projectType) {
+        this.projectType = projectType;
+    }
+
+    public Long getClicks() {
+        return clicks;
+    }
+
+    public void setClicks(Long clicks) {
+        this.clicks = clicks;
+    }
+
     public String getRelationType() {
         return relationType;
     }

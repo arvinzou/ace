@@ -105,11 +105,53 @@ public class FopQuestionServiceImpl implements FopQuestionService {
     public MessageResponse insertFopQuestion(FopQuestion o, UserProp userProp)
             throws Exception {
         o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
-
         int temp = this.fopQuestionDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "法律帮助/政府诉求名称重复！");
+        }
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        o.setCreateUserName(userProp.getName());
+        o.setCreateUserId(userProp.getUserId());
+        this.fopQuestionDao.insertSelective(o);
+        this.dataBaseLogService.log("添加法律帮助/政府诉求", "法律帮助/政府诉求", "",
+                o.getTitle(), o.getTitle(), userProp);
+        return new MessageResponse(0, "添加法律帮助/政府诉求完成！");
+    }
+
+    @Override
+    public MessageResponse insertLawQuestion(FopQuestion o, UserProp userProp)
+            throws Exception {
+        o.setId(GUIDUtil.getGUID());
+        o.setSourceType("0");
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "标题不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getSubType())) {
+            return new MessageResponse(1, "类型不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getSubType())) {
+            return new MessageResponse(1, "内容不能为空！");
+        }
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new MessageResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new MessageResponse(1, "账户没有绑定企业！");
+        }
+        FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+        FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+        if (null == fc) {
+            if (null == fa) {
+                return new MessageResponse(1, "账户没有绑定企业！");
+            }
+            o.setRelationId(fa.getId());
+            o.setRelationType(FopConstant.ASSOCIATION);
+        } else {
+            o.setRelationId(fc.getId());
+            o.setRelationType(FopConstant.COMPANY);
         }
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -127,7 +169,7 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         if (CommonUtils.isBlank(o.getReply())) {
             return new MessageResponse(1, "留言不能为空");
         }
-        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey("1522198886381");
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
         UsersVo user = singleResult.getValue();
         if (null == user) {
             return new MessageResponse(1, "没有注册");

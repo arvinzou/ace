@@ -48,6 +48,9 @@ public class WWWController extends FopBaseController {
     @Autowired
     private FopAppealHelpService fopAppealHelpService;
 
+    @Autowired
+    private FopProjectService fopProjectService;
+
 
 //    /**
 //     * gis地图
@@ -344,6 +347,20 @@ public class WWWController extends FopBaseController {
     }
 
     /**
+     * 发布法律帮助
+     * title：标题
+     * subType：子标题
+     * content：内容
+     */
+
+    @RequestMapping(value = "/insertLawQuestion")
+    @ResponseBody
+    public MessageResponse insertFopQuestion(String jsons) throws Exception {
+        FopQuestion obj = JSON.parseObject(jsons, FopQuestion.class);
+        return this.fopQuestionService.insertLawQuestion(obj, this.getCurUserProp());
+    }
+
+    /**
      * 获取评论列表
      */
     @RequestMapping(value = "/findCommentList")
@@ -402,4 +419,66 @@ public class WWWController extends FopBaseController {
     public MessageResponse insertAppealHelp(FopAppealHelp obj) throws Exception {
         return this.fopAppealHelpService.insertFopAppealHelp(obj, this.getCurUserProp());
     }
+
+
+    /**
+     * 查找所有项目
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findProjectList")
+    @ResponseBody
+    public ResultResponse findFopProjectList(FopProjectQVo condition,
+                                             PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopProjectService.findProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
+
+    /**
+     * 发布项目
+     * projectName:项目名称
+     * coopType：合作方式 1、投资合作，2、合作开发，3、出资+资源合作，4、其他
+     * areaCode：所属区域
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/insertProject")
+    @ResponseBody
+    public MessageResponse insertFopProject(FopProject obj) throws Exception {
+
+        return this.fopProjectService.insertFopProject(obj, this.getCurUserProp());
+    }
+
+
+    /**
+     * 查看项目详情
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectFopProjectByPrimaryKey")
+    @ResponseBody
+    public SingleResult<FopProjectVo> selectFopProjectByPrimaryKey(String id)
+            throws Exception {
+        return this.fopProjectService.selectFopProjectByPrimaryKey(id);
+    }
+
+    /**
+     * 更新项目
+     *
+     * @param jsons
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updateFopProject")
+    @ResponseBody
+    public MessageResponse updateFopProject(String jsons) throws Exception {
+        FopProject obj = JSON.parseObject(jsons, FopProject.class);
+        return this.fopProjectService
+                .updateFopProject(obj, this.getCurUserProp());
+    }
+
 }
