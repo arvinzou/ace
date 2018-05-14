@@ -177,6 +177,12 @@ public class FopProjectServiceImpl implements FopProjectService {
         return rst;
     }
 
+    @Override
+    public ResultResponse selectProjectByPrimaryKey(String id) throws Exception {
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "项目详情", this.fopProjectDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:deleteFopProjectByFopProjectId
@@ -206,10 +212,8 @@ public class FopProjectServiceImpl implements FopProjectService {
 
     /**
      * 功能描述: 审核发布项目
-     *
-     * @param id
-     * @param curUserProp
-     * @param:
+     *@param id
+     * @param: userProp
      * @return:
      * @auther: Arvin Zou
      * @date: 2018/5/10 15:47

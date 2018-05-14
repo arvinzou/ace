@@ -70,6 +70,8 @@ public interface FopProjectService {
      */
     public abstract SingleResult<FopProjectVo> selectFopProjectByPrimaryKey(String id) throws Exception;
 
+    public abstract ResultResponse selectProjectByPrimaryKey(String id) throws Exception;
+
     /**
      * @throws
      * @Title:deleteFopProjectByFopProjectId
