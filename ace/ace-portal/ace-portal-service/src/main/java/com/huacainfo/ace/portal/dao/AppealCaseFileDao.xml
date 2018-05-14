@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.AppealCaseFileDao">
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.AppealCaseFile">
+    insert into appeal_case_file (id, appealCaseId, name, 
+      Type, mediType, mediUrl, 
+      status, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{appealCaseId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{mediType,jdbcType=VARCHAR}, #{mediUrl,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from appeal_case_file
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+</mapper>
