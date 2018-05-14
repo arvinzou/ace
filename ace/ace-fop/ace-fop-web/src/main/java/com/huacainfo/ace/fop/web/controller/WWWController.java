@@ -190,7 +190,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/insertFinanceProject")
     @ResponseBody
     public MessageResponse insertFinanceProject(FopFinanceProject obj) throws Exception {
-        return this.fopFinanceProjectService.insertFopFinanceProject(obj, this.getCurUserProp());
+        return this.fopFinanceProjectService.insertFinanceProject(obj, this.getCurUserProp());
     }
 
     /**
@@ -370,6 +370,22 @@ public class WWWController extends FopBaseController {
         return rst;
     }
 
+
+    /**
+     * 获取question 详情
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectQuestionByPrimaryKey")
+    @ResponseBody
+    public ResultResponse selectFopQuestionByPrimaryKey(String id)
+            throws Exception {
+        return this.fopQuestionService.selectQuestionByPrimaryKey(id);
+    }
+
+
     /**
      * 插入评论
      * parentId：被评论的id
@@ -386,11 +402,18 @@ public class WWWController extends FopBaseController {
 
 
     /**
-     *获取诉求列表
+     * 发布诉求
+     * requestTitle 标题
+     * replied  (true:回复，false：未回复）
+     * page：页码
+     * limit 每页目数
      */
     @RequestMapping(value = "/findAppealHelpList")
     @ResponseBody
     public ResultResponse findFopAppealHelpList(FopAppealHelpQVo condition, PageParamNoChangeSord page) throws Exception {
+        if ("asc".equals(page.getSord())) {
+            page.setOrderBy("submitDate");
+        }
         ResultResponse rst = this.fopAppealHelpService.findAppealHelpList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
     }
@@ -429,7 +452,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/findProjectList")
     @ResponseBody
-    public ResultResponse findFopProjectList(FopProjectQVo condition, PageParamNoChangeSord page) throws Exception {
+    public ResultResponse findProjectList(FopProjectQVo condition, PageParamNoChangeSord page) throws Exception {
         ResultResponse rst = this.fopProjectService.findProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
     }
@@ -447,7 +470,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/insertProject")
     @ResponseBody
-    public MessageResponse insertFopProject(FopProject obj) throws Exception {
+    public MessageResponse insertProject(FopProject obj) throws Exception {
         return this.fopProjectService.insertFopProject(obj, this.getCurUserProp());
     }
 
@@ -478,5 +501,14 @@ public class WWWController extends FopBaseController {
     public MessageResponse updateProject(FopProject obj) throws Exception {
         return this.fopProjectService.updateFopProject(obj, this.getCurUserProp());
     }
+
+
+    @RequestMapping(value = "/sign")
+    @ResponseBody
+    public MessageResponse signUp(FopProject obj) throws Exception {
+        return null;
+    }
+
+
 
 }
