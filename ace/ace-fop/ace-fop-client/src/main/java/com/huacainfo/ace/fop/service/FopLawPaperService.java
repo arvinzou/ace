@@ -72,6 +72,8 @@ public interface FopLawPaperService {
      */
     public abstract SingleResult<FopLawPaperVo> selectFopLawPaperByPrimaryKey(String id) throws Exception;
 
+    public abstract ResultResponse selectLawPaperByPrimaryKey(String id) throws Exception;
+
     /**
      * @throws
      * @Title:deleteFopLawPaperByFopLawPaperId

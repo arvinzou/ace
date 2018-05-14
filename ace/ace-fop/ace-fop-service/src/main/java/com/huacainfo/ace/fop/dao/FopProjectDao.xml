@@ -10,6 +10,7 @@
         <result column="process" jdbcType="VARCHAR" property="process"/>
         <result column="personId" jdbcType="VARCHAR" property="personId"/>
         <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="projectType" jdbcType="VARCHAR" property="projectType"/>
         <result column="sector" jdbcType="VARCHAR" property="sector"/>
         <result column="coopType" jdbcType="CHAR" property="coopType"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
@@ -27,7 +28,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, projectName, projectCode, process, personId, areaCode, relationId, sector, coopType,
+        id, projectName, projectCode, process, personId, areaCode,projectType, relationId, sector, coopType,
         releaseDate, clicks, likes, remark, status, createUserId, coopDesc,
         createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
         relationType
@@ -45,11 +46,12 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopProject">
     insert into fop_project (id, projectName, projectCode,
-        process, personId, areaCode, relationId, sector, coopType, releaseDate,
+        process, personId, areaCode, projectType, relationId, sector, coopType, releaseDate,
         clicks, likes, remark, status, createUserId, createUserName,
         createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, coopDesc, relationType)
-    values (#{id,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{projectCode,jdbcType=VARCHAR}, 
-      #{process,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR},
+    values (#{id,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{projectCode,jdbcType=VARCHAR},
+        #{process,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR},#{projectType,jdbcType=VARCHAR},
         #{relationId,jdbcType=VARCHAR}, #{sector,jdbcType=VARCHAR}, #{coopType,jdbcType=CHAR},
         #{releaseDate,jdbcType=TIMESTAMP}, #{clicks,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT},
         #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
@@ -77,6 +79,9 @@
             </if>
             <if test="areaCode != null">
                 areaCode,
+            </if>
+            <if test="projectType != null">
+                projectType,
             </if>
             <if test="relationId != null">
                 relationId,
@@ -146,6 +151,9 @@
             <if test="areaCode != null">
                 #{areaCode,jdbcType=VARCHAR},
             </if>
+            <if test="projectType != null">
+                #{projectType,jdbcType=VARCHAR},
+            </if>
             <if test="relationId != null">
                 #{relationId,jdbcType=VARCHAR},
             </if>
@@ -214,6 +222,9 @@
             <if test="areaCode != null">
                 areaCode = #{areaCode,jdbcType=VARCHAR},
             </if>
+            <if test="projectType != null">
+                projectType = #{projectType,jdbcType=VARCHAR},
+            </if>
             <if test="relationId != null">
                 relationId = #{relationId,jdbcType=VARCHAR},
             </if>
@@ -272,6 +283,7 @@
       process = #{process,jdbcType=VARCHAR},
       personId = #{personId,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
+        projectType = #{projectType,jdbcType=VARCHAR},
         relationId = #{relationId,jdbcType=VARCHAR},
       sector = #{sector,jdbcType=VARCHAR},
       coopType = #{coopType,jdbcType=CHAR},
@@ -295,7 +307,7 @@
 
     </resultMap>
     <sql id="Vo_Column_List">
-        id, projectName, projectCode, process, personId, areaCode, relationId, sector, coopType,
+        id, projectName, projectCode, process, personId, areaCode, projectType, relationId, sector, coopType,
         releaseDate, clicks, likes, remark, status, createUserId, coopDesc,
         createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
         relationType

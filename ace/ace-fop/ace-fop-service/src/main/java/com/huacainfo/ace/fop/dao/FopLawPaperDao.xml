@@ -199,17 +199,15 @@
 
 
     <select id="findList" resultMap="VoResultMap">
-        select m.* from(
-        select
+        SELECT
         <include refid="Base_Column_List"/>
         <include refid="whereCondition"/>
-        ) m
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
-                ORDER BY m.${orderBy}
+                ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY m.releaseDate DESC
+                ORDER BY releaseDate DESC
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -232,8 +230,7 @@
         where 0=0
         <if test='condition.title!=null and condition.title!=""'>
             and
-            (title like
-            concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+            title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
         <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
         <!--and name like-->

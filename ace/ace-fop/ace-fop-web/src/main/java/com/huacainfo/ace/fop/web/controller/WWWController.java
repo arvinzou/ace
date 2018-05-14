@@ -9,10 +9,7 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.dao.FopLawPaperDao;
-import com.huacainfo.ace.fop.model.FopFinanceProject;
-import com.huacainfo.ace.fop.model.FopGeHelp;
-import com.huacainfo.ace.fop.model.FopLoanProduct;
-import com.huacainfo.ace.fop.model.FopQuestion;
+import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.service.UsersService;
@@ -48,26 +45,32 @@ public class WWWController extends FopBaseController {
     @Autowired
     private FopQuestionService fopQuestionService;
 
+    @Autowired
+    private FopAppealHelpService fopAppealHelpService;
 
-    /**
-     * gis地图
-     *
-     * @param condition
-     * @param page
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/companyGis")
-    @ResponseBody
-    public PageResult<FopCompanyVo> findFopCompanyList(FopCompanyQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<FopCompanyVo> rst = this.fopCompanyService
-                .findFopCompanyList(condition, page.getStart(), page.getLimit(),
-                        page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
-        return rst;
-    }
+    @Autowired
+    private FopProjectService fopProjectService;
+
+
+//    /**
+//     * gis地图
+//     *
+//     * @param condition
+//     * @param page
+//     * @return
+//     * @throws Exception
+//     */
+//    @RequestMapping(value = "/companyGis")
+//    @ResponseBody
+//    public PageResult<FopCompanyVo> findCompanyList(FopCompanyQVo condition, PageParamNoChangeSord page) throws Exception {
+//        PageResult<FopCompanyVo> rst = this.fopCompanyService
+//                .findFopCompanyList(condition, page.getStart(), page.getLimit(),
+//                        page.getOrderBy());
+//        if (rst.getTotal() == 0) {
+//            rst.setTotal(page.getTotalRecord());
+//        }
+//        return rst;
+//    }
 
 
     /**
@@ -83,7 +86,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/findNoticeList")
     @ResponseBody
-    public ResultResponse findFopNoticeList(FopNoticeQVo condition, PageParamNoChangeSord page) throws Exception {
+    public ResultResponse findNoticeList(FopNoticeQVo condition, PageParamNoChangeSord page) throws Exception {
         if ("asc".equals(page.getSord())) {
             page.setOrderBy("releaseDate");
         }
@@ -96,7 +99,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/selectNoticeByPrimaryKey")
     @ResponseBody
-    public ResultResponse selectFopNoticeByPrimaryKey(String id)
+    public ResultResponse selectNoticeByPrimaryKey(String id)
             throws Exception {
         return this.fopNoticeService.selectNoticeByPrimaryKey(id);
     }
@@ -127,9 +130,23 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/findLawPaperList")
     @ResponseBody
-    public PageResult<FopLawPaperVo> findLawPaperList(String keyWord, int page, int limit) throws Exception {
-        PageResult<FopLawPaperVo> rst = this.fopLawPaperService.findLawPaperList(keyWord, page, limit);
+    public ResultResponse findLawPaperList(FopLawPaperQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopLawPaperService.findLawPaperList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
+    }
+
+
+    /**
+     * 获取法律文书
+     *
+     * @param id;
+     */
+
+    @RequestMapping(value = "/selectLawPaperByPrimaryKey")
+    @ResponseBody
+    public ResultResponse selectFopLawPaperByPrimaryKey(String id)
+            throws Exception {
+        return this.fopLawPaperService.selectLawPaperByPrimaryKey(id);
     }
 
     /**
@@ -144,12 +161,8 @@ public class WWWController extends FopBaseController {
 
     @RequestMapping(value = "/findFinanceProjectList")
     @ResponseBody
-    public PageResult<FopFinanceProjectVo>
-    findFopFinanceProjectList(FopFinanceProjectQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<FopFinanceProjectVo> rst = this.fopFinanceProjectService.findFinanceProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
+    public ResultResponse findFinanceProjectList(FopFinanceProjectQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopFinanceProjectService.findFinanceProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
     }
 
@@ -161,7 +174,7 @@ public class WWWController extends FopBaseController {
 
     @RequestMapping(value = "/selectFinanceProjectByPrimaryKey")
     @ResponseBody
-    public ResultResponse selectFopFinanceProjectByPrimaryKey(String id)
+    public ResultResponse selectFinanceProjectByPrimaryKey(String id)
             throws Exception {
         return this.fopFinanceProjectService.selectFinanceProjectByPrimaryKey(id);
     }
@@ -176,7 +189,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/insertFinanceProject")
     @ResponseBody
-    public MessageResponse insertFopFinanceProject(String jsons) throws Exception {
+    public MessageResponse insertFinanceProject(String jsons) throws Exception {
         FopFinanceProject obj = JSON.parseObject(jsons, FopFinanceProject.class);
         return this.fopFinanceProjectService.insertFopFinanceProject(obj, this.getCurUserProp());
     }
@@ -199,12 +212,8 @@ public class WWWController extends FopBaseController {
 
     @RequestMapping(value = "/findLoanProductList")
     @ResponseBody
-    public PageResult<FopLoanProductVo> findFopLoanProductList(FopLoanProductQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<FopLoanProductVo> rst = this.fopLoanProductService
-                .findFopLoanProductList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
+    public ResultResponse findLoanProductList(FopLoanProductQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopLoanProductService.findLoanProductList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
     }
 
@@ -221,7 +230,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/insertLoanProduct")
     @ResponseBody
-    public MessageResponse insertFopLoanProduct(String jsons) throws Exception {
+    public MessageResponse insertLoanProduct(String jsons) throws Exception {
         FopLoanProduct obj = JSON.parseObject(jsons, FopLoanProduct.class);
         return this.fopLoanProductService
                 .insertFopLoanProduct(obj, this.getCurUserProp());
@@ -233,7 +242,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/selectLoanProductByPrimaryKey")
     @ResponseBody
-    public ResultResponse selectFopLoanProductByPrimaryKey(String id)
+    public ResultResponse selectLoanProductByPrimaryKey(String id)
             throws Exception {
         return this.fopLoanProductService.selectLoanProductByPrimaryKey(id);
     }
@@ -285,7 +294,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/updateGeHelp")
     @ResponseBody
-    public MessageResponse updateFopGeHelp(FopGeHelp fg) throws Exception {
+    public MessageResponse updateGeHelp(FopGeHelp fg) throws Exception {
         return this.fopGeHelpService.updateFopGeHelp(fg, this.getCurUserProp());
     }
 
@@ -295,7 +304,7 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/selectGeHelpByPrimaryKey")
     @ResponseBody
-    public ResultResponse selectFopGeHelpByPrimaryKey(String id) throws Exception {
+    public ResultResponse selectGeHelpByPrimaryKey(String id) throws Exception {
         return this.fopGeHelpService.selectGeHelpByPrimaryKey(id);
     }
 
@@ -333,8 +342,24 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/findLawQuestionList")
     @ResponseBody
     public ResultResponse findLawQuestionList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
+        if ("asc".equals(page.getSord())) {
+            page.setOrderBy("releaseDate");
+        }
         ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
+    }
+
+    /**
+     * 发布法律帮助
+     * title：标题
+     * subType：类型
+     * content：内容
+     */
+
+    @RequestMapping(value = "/insertLawQuestion")
+    @ResponseBody
+    public MessageResponse insertFopQuestion(FopQuestion obj) throws Exception {
+        return this.fopQuestionService.insertLawQuestion(obj, this.getCurUserProp());
     }
 
     /**
@@ -357,7 +382,104 @@ public class WWWController extends FopBaseController {
 
     @RequestMapping(value = "/insertQuestion")
     @ResponseBody
-    public MessageResponse insertFopQuestion(FopQuestion obj) throws Exception {
+    public MessageResponse insertQuestion(FopQuestion obj) throws Exception {
         return this.fopQuestionService.insertQuestion(obj, this.getCurUserProp());
     }
+
+
+    /**
+     *获取诉求列表
+     */
+    @RequestMapping(value = "/findAppealHelpList")
+    @ResponseBody
+    public ResultResponse findFopAppealHelpList(FopAppealHelpQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopAppealHelpService.findAppealHelpList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
+
+    /**
+     * 获取诉求服务详情。
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectAppealHelpByPrimaryKey")
+    @ResponseBody
+    public ResultResponse selectAppealHelpByPrimaryKey(String id) throws Exception {
+        return this.fopAppealHelpService.selectAppealHelpByPrimaryKey(id);
+    }
+
+    /**
+     * 发布诉求
+     * requestTitle 标题
+     * requestDesc 内容
+     */
+
+    @RequestMapping(value = "/insertAppealHelp")
+    @ResponseBody
+    public MessageResponse insertAppealHelp(FopAppealHelp obj) throws Exception {
+        return this.fopAppealHelpService.insertFopAppealHelp(obj, this.getCurUserProp());
+    }
+
+
+    /**
+     * 查找所有项目
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findProjectList")
+    @ResponseBody
+    public ResultResponse findFopProjectList(FopProjectQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopProjectService.findProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
+
+    /**
+     * 发布项目
+     * projectName:项目名称
+     * coopType：合作方式 1、投资合作，2、合作开发，3、出资+资源合作，4、其他
+     * areaCode：所属区域
+     * projectType:项目类型。
+     * coopDesc：内容
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/insertProject")
+    @ResponseBody
+    public MessageResponse insertFopProject(FopProject obj) throws Exception {
+        return this.fopProjectService.insertFopProject(obj, this.getCurUserProp());
+    }
+
+
+    /**
+     * 查看项目详情
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectProjectByPrimaryKey")
+    @ResponseBody
+    public ResultResponse selectFopProjectByPrimaryKey(String id) throws Exception {
+        return this.fopProjectService.selectProjectByPrimaryKey(id);
+    }
+
+    /**
+     * projectName:项目名称
+     * coopType：合作方式 1、投资合作，2、合作开发，3、出资+资源合作，4、其他
+     * areaCode：所属区域
+     * projectType:项目类型。
+     * coopDesc：内容
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updateProject")
+    @ResponseBody
+    public MessageResponse updateFopProject(String jsons) throws Exception {
+        FopProject obj = JSON.parseObject(jsons, FopProject.class);
+        return this.fopProjectService.updateFopProject(obj, this.getCurUserProp());
+    }
+
 }
