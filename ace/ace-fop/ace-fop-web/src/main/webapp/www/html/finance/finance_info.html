@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,8 +7,11 @@
 		<title>融资详情</title>
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css" />
-		<SCRIPT language=JavaScript src="../../js/jquery.js"></SCRIPT>
+		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<script type="text/javascript" src="js/finance_info.js"></script>
 		<style type="text/css">
 			body {
 				background-color: #F4F4F4;
@@ -197,19 +200,19 @@
 				</div>
 			</div>
 		</div>
-		<div class="current_site">当前位置：融资服务 >> 金融产品 >> 年产120万吨精对苯二甲酸PAT项目</div>
+		<div class="current_site">当前位置：融资服务 >> 金融产品 >> {{financeInfo.financeTitle}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
 				<div class="appeal_title">
-					<h3>年产120万吨精对苯二甲酸PTA项目</h3>
-					<span>发布时间：2018-05-03</span>
+					<h3>{{financeInfo.financeTitle}}</h3>
+					<span>发布时间：{{financeInfo.releaseDate}}</span>
 				</div>
 			</div>
 			<div class="appeal_info">
 				<table class="finance_table" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td width="15%" align="right">预期年收益：</td>
-						<td width="35%" class="highLight">25%~30%</td>
+						<td width="35%" class="highLight" ng-bind="financeInfo.yearYield"></td>
 						<td width="15%" align="right">企业名称：</td>
 						<td width="35%">德山化工</td>
 					</tr>
@@ -221,13 +224,13 @@
 					</tr>
 					<tr>
 						<td width="15%" align="right">融资金额：</td>
-						<td width="35%" class="highLight">500万</td>
+						<td width="35%" class="highLight" ng-bind="financeInfo.financeAmount"></td>
 						<td width="15%" align="right">企业地址：</td>
 						<td width="35%">常德市德山经开区桃林路28号</td>
 					</tr>
 					<tr>
 						<td width="15%" align="right">融资年限：</td>
-						<td colspan="3">3年</td>
+						<td colspan="3" ng-bind="financeInfo.financeYear"></td>
 					</tr>
 				</table>
 			</div>
@@ -236,24 +239,7 @@
 				 <span class="title_lager">内容</span><span class="title_small">/&nbsp;Legal&nbsp;Document</span>
 				</div>
 				<div class="content_info">
-					<p>精对苯二甲酸PTA：是重要的大宗有机原料之一，其主要用途是和乙二醇生产聚酯纤维(涤纶)、聚酯薄膜和聚酯瓶，广泛用于与化学纤维、轻工、电子、建筑等国民经济的各个方面，与人民生活水平的高低密切相关。</p>
-					<p>项目投资要求一：</p>
-					　　<p class="indent">1、全国地区、行业不限、需实体企业；必须要有实体公司，股权清晰，企业要有部分资产、对项目要有详细的前景规划，符合国家的产业政策，属于国家允许和鼓励的项目。</p>
-					　　<p class="indent">2、合作项目必须具有良好的投资环境和可行性条件，项目发展前景和显著的经济效益与社会效益。</p>
-					　　<p class="indent">3、项目方所提供的资料、相关法律文件必须真实合法。</p>
-					　　<p class="indent">4、企业或项目在合作条件上必须是成熟的。</p>
-					
-					<p>项目资金要求二：</p>
-					　　<p class="indent">1、借贷时间1-6年；合作方式借贷，项目抵押或股权质押（资金必须专款专用，同时全程资金监控）。</p>
-					　　<p class="indent">资金要求：</p>
-					　　<p class="indent">2、投资额度在500万-1亿人民币；资金方年利息为12%-16%（具体点数可商讨，项目的风险度，用款的时间长短来评定）。</p>
-					　　<p class="indent">3、借贷时间1-6年（可协商）；合作方式借贷，项目抵押或股权质押（资金必须专款专用，同时全程资金监控）。</p>
-					　　<p>投资借款项目范围：房地产、基础建设项目、酒店、矿产品开发项目，水资源开发项目、医药化工房地产项目、种植养殖项目，企业技改、市场的短缺项目、旅游环保项目、机器设备改造与升级项目等等实体项目。</p>
-					
-					<p>项目办理程序三：</p>
-					　　<p class="indent">1、项目方将公司相关资料的电子文档发来我邮箱，经资金方进行审核认可（如未审核通过，则及时通知项目方）两至三个工作日天内会尽快答复项目方。</p>
-					　　<p class="indent">2、项目通过资金方审核后，我方会以电子邀请函方式通知项目方，或直接电话通知项目方，项目负责人接到通知函后按期尽快回复，商谈面洽时间。如有意向请尽快与我联系，或直接发项目有关资料到我邮箱，审核之后我会尽快给您答复。真诚祝我们合作成功。</p>
-
+					{{financeInfo.financeContent}}
 				</div>
 			</div>	
 			<!--发表留言-->
@@ -278,70 +264,32 @@
 				</div>
 			</div>
 			<div class="msg_list">
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table border="0" cellpadding="0" cellspacing="0" ng-repeat="item in comments">
 					<tr>
-						<td align="left" class="msg_list_title">湖南启明创投有限公司</td>
-						<td align="right">2018-05-03</td>
+						<td align="left" class="msg_list_title" ng-bind="item.displayName"></td>
+						<td align="right" ng-bind="item.releaseDate"></td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							你好，我设想了一个休闲农业旅游的好项目，投资少见效快，今年投资今年就可以收回全部成本，并获丰厚利润，投资规模几佰万或几千万均可，投资多就获利多，规模就更大，知名度就更高，助公司更快发展！只是现已处春耕时节，还没跟农民兄弟租好田土！所以，有这个投资意愿的话需要尽快与我联系哟！至于利润分配，我项目方只求一成利润，投资方可获九成利润，而且我项目方可全程负责设计一套包赢不赔休闲旅游农业的运作计划书（可行性分析报告）及极富成效生产经营管理，不知贵公司可否感兴趣？
+							{{item.reply}}
 						</td>
 					</tr>
 				</table>
-				<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td align="left" class="msg_list_title">湖南启明创投有限公司</td>
-						<td align="right">2018-05-03</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							你好，我设想了一个休闲农业旅游的好项目，投资少见效快，今年投资今年就可以收回全部成本，并获丰厚利润，投资规模几佰万或几千万均可，投资多就获利多，规模就更大，知名度就更高，助公司更快发展！只是现已处春耕时节，还没跟农民兄弟租好田土！所以，有这个投资意愿的话需要尽快与我联系哟！至于利润分配，我项目方只求一成利润，投资方可获九成利润，而且我项目方可全程负责设计一套包赢不赔休闲旅游农业的运作计划书（可行性分析报告）及极富成效生产经营管理，不知贵公司可否感兴趣？
-						</td>
-					</tr>
-				</table>
-				<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td align="left" class="msg_list_title">湖南启明创投有限公司</td>
-						<td align="right">2018-05-03</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							你好，我设想了一个休闲农业旅游的好项目，投资少见效快，今年投资今年就可以收回全部成本，并获丰厚利润，投资规模几佰万或几千万均可，投资多就获利多，规模就更大，知名度就更高，助公司更快发展！只是现已处春耕时节，还没跟农民兄弟租好田土！所以，有这个投资意愿的话需要尽快与我联系哟！至于利润分配，我项目方只求一成利润，投资方可获九成利润，而且我项目方可全程负责设计一套包赢不赔休闲旅游农业的运作计划书（可行性分析报告）及极富成效生产经营管理，不知贵公司可否感兴趣？
-						</td>
-					</tr>
-				</table>
-				
-				<!--底部分页-->
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			</div>
+			<!-- 分页位置 -->
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tbody>
-					<tr>
-						<td width="50">
-							<select class="inputstyle inputstyle02" name="">
-								<option>10</option>
-								<option>20</option>
-								<option>30</option>
-							</select>
-						</td>
-						<td>10条/页，共40条信息</td>
-						<td>
-							<div class="page">
-
-								<div class="page_box">
-									<a href="#">上一页</a>
-									<a class="active" href="#">01</a>
-									<a href="#">02</a>
-									<a href="#">03</a>
-									<a href="#">04</a>
-									<a href="#">下一页</a>
-								</div>
-
-							</div>
-						</td>
-					</tr>
+				<tr>
+					<td class="custom_layper_page_info"></td>
+					<td>
+						<div style="padding: 10px 0; float: right;">
+							<div class="custom_page_box" id="layper_page_box" style="margin-right: 0px"></div>
+						</div>
+					</td>
+				</tr>
 				</tbody>
 			</table>
-			</div>
+			<!-- 分页位置 -->
 		</div>
 	</body>
 
