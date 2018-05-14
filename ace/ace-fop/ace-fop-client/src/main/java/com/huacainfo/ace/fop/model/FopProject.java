@@ -61,14 +61,6 @@ public class FopProject implements Serializable {
         this.projectType = projectType;
     }
 
-    public Long getClicks() {
-        return clicks;
-    }
-
-    public void setClicks(Long clicks) {
-        this.clicks = clicks;
-    }
-
     public String getRelationType() {
         return relationType;
     }
@@ -158,11 +150,11 @@ public class FopProject implements Serializable {
     }
 
 
-    public Long getclicks() {
+    public Long getClicks() {
         return clicks;
     }
 
-    public void setclicks(Long clicks) {
+    public void setClicks(Long clicks) {
         this.clicks = clicks;
     }
 
