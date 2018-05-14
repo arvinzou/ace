@@ -284,8 +284,8 @@
     </resultMap>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from fop_finance_project
+        <include refid="Base_Column_List_Vo"/>
+        <include refid="fromCondition_Vo"/>
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
