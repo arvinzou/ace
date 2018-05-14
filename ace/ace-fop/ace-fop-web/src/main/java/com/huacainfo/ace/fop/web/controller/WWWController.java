@@ -342,6 +342,9 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/findLawQuestionList")
     @ResponseBody
     public ResultResponse findLawQuestionList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
+        if ("asc".equals(page.getSord())) {
+            page.setOrderBy("releaseDate");
+        }
         ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
     }
@@ -440,6 +443,8 @@ public class WWWController extends FopBaseController {
      * projectName:项目名称
      * coopType：合作方式 1、投资合作，2、合作开发，3、出资+资源合作，4、其他
      * areaCode：所属区域
+     * projectType:项目类型。
+     * coopDesc：内容
      *
      * @return
      * @throws Exception
