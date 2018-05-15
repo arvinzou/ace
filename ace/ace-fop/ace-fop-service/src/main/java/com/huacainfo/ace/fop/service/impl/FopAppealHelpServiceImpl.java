@@ -100,7 +100,13 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
             return new MessageResponse(1, "主键不能为空！");
         }
         o.setRequestId(userProp.getUserId());
-        o.setParentId("0");
+        if (CommonUtils.isBlank(o.getRequestId())) {
+            return new MessageResponse(1, "发起人ID不能为空！");
+        }
+
+        if (CommonUtils.isBlank(o.getParentId())) {
+            o.setParentId("0");
+        }
         if (CommonUtils.isBlank(o.getRequestTitle())) {
             return new MessageResponse(1, "诉求标题不能为空！");
         }
