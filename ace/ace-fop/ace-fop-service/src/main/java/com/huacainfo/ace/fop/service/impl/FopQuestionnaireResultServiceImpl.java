@@ -87,7 +87,7 @@ public class FopQuestionnaireResultServiceImpl implements FopQuestionnaireResult
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("list", this.fopQuestionnaireResultDao.findList(condition, (page - 1) * limit, limit, orderBy));
         map.put("total", this.fopQuestionnaireResultDao.findCount(condition));
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "法律帮助列表", map);
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "满意度列表", map);
         return rst;
     }
 
@@ -159,7 +159,7 @@ public class FopQuestionnaireResultServiceImpl implements FopQuestionnaireResult
             o.setAnswerId(fc.getId());
             o.setAnswerType(FopConstant.COMPANY);
         }
-        if (CommonUtils.isBlank(o.getQuestionnaireId())) {
+        if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "内容不能为空！");
         }
         if (CommonUtils.isBlank(o.getResult())) {
@@ -180,6 +180,17 @@ public class FopQuestionnaireResultServiceImpl implements FopQuestionnaireResult
                 o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加满意度调查完成！");
+    }
+
+    @Override
+    public ResultResponse statisticalData() throws Exception {
+        List<Map<String, Integer>> list = this.fopQuestionnaireResultDao.statisticalData("1");
+        List<Map<String, Integer>> list1 = this.fopQuestionnaireResultDao.statisticalData("2");
+        Map map = new HashMap<String, Object>();
+        map.put("suqiu", list);
+        map.put("hezuo", list1);
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "统计数据", map);
+        return rst;
     }
 
     /**

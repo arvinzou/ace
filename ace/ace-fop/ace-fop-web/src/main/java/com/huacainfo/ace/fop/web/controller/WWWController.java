@@ -530,6 +530,9 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/findQuestionnaireResultList")
     @ResponseBody
     public ResultResponse findFopQuestionnaireResultList(FopQuestionnaireResultQVo condition, PageParamNoChangeSord page) throws Exception {
+        if ("asc".equals(page.getSord())) {
+            page.setOrderBy("releaseDate");
+        }
         ResultResponse rst = this.fopQuestionnaireResultService
                 .findQuestionnaireResultList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
@@ -537,7 +540,7 @@ public class WWWController extends FopBaseController {
 
     /**
      * opinionType 意见类型
-     * result 调查结果
+     * result 调查结果 1、很满意，2、一半，3、不满意
      * content 内容
      */
 
@@ -545,5 +548,14 @@ public class WWWController extends FopBaseController {
     @ResponseBody
     public MessageResponse insertQuestionnaireResult(FopQuestionnaireResultQVo condition) throws Exception {
         return this.fopQuestionnaireResultService.insertQuestionnaireResult(condition, this.getCurUserProp());
+    }
+
+    /**
+     * 统计数据
+     */
+    @RequestMapping(value = "/statisticalData")
+    @ResponseBody
+    public ResultResponse statisticalData() throws Exception {
+        return this.fopQuestionnaireResultService.statisticalData();
     }
 }

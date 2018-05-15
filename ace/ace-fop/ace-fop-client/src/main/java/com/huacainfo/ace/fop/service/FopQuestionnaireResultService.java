@@ -50,6 +50,8 @@ public interface FopQuestionnaireResultService {
 
     MessageResponse insertQuestionnaireResult(FopQuestionnaireResult obj, UserProp userProp) throws Exception;
 
+    ResultResponse statisticalData() throws Exception;
+
     /**
      * @throws
      * @Title:updateFopQuestionnaireResult
