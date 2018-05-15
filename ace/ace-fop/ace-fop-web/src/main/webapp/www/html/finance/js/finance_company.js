@@ -1,55 +1,262 @@
-$(function() {
-	//预期年收益
-	var data1 = [{
-			"id": 1,
-			"text": "10%-20%"
-		},
-		{
-			"id": 2,
-			"text": "21%-30%"
-		},
-		{
-			"id": 3,
-			"text": "31-40%"
-		}
-	];
-	//单选
-	$('#demo1').comboboxfilter({
-		url: '',
-		scope: 'FilterQuery1',
-		data: data1,
-		onChange: function(newValue) {
-			$('#demo_value').val(newValue);
-		}
-	});
+var pageSize=5;
+var ngControllerName = "angularjsCtrl";
+var ngAppName = "angularjsApp";
+var currentPage = 1;
+//angularjs Controller初始化
+var app =angular.module(ngAppName, []);
 
-	//融资年限
-	var data2 = [{
-			"id": "0",
-			"text": "半年"
-		},
-		{
-			"id": "1",
-			"text": "1-2年"
-		},
-		{
-			"id": 3,
-			"text": "3-4年"
-		},
-		{
-			"id": 4,
-			"text": "5年以上"
-		}
-	];
-	//例子1
-	//单选
-	$('#demo2').comboboxfilter({
-		url: '',
-		scope: 'FilterQuery1',
-		data: data2,
-		onChange: function(newValue) {
-			$('#demo_value').val(newValue);
-		}
-	});
+var rateRange = null;
+var yearRange = null;
+var data1 = [{
+    "id": "10,20",
+    "text": "10%-20%"
+},
+    {
+        "id": "21,30",
+        "text": "21%-30%"
+    },
+    {
+        "id": "31,40",
+        "text": "31-40%"
+    }
+];
 
+//融资年限
+var data2 = [{
+    "id": "0",
+    "text": "半年"
+},
+    {
+        "id": "1",
+        "text": "一年"
+    },
+    {
+        "id": "2",
+        "text": "两年"
+    },
+    {
+        "id": "3",
+        "text": "三年"
+    },
+    {
+        "id": "4",
+        "text": "四年"
+    },
+    {
+        "id": "5",
+        "text": "五年以上"
+    },
+];
+
+app.controller(ngControllerName,function($scope){
+	//初始化预期年收益
+    $('#demo1').comboboxfilter({
+        url: '',
+        scope: 'FilterQuery1',
+        data: data1,
+        onChange: function(newValue) {
+            rateRange = newValue;
+            console.log(rateRange);
+        }
+    });
+
+    //初始化融资年限
+    $('#demo2').comboboxfilter({
+        url: '',
+        scope: 'FilterQuery1',
+        data: data2,
+        onChange: function(newValue) {
+            yearRange = newValue;
+            console.log(yearRange);
+        }
+    });
+
+    $.ajax({
+        url: "/fop/www/findFinanceProjectList",
+        type:"post",
+        async:false,
+        data:{limit:pageSize, page: currentPage},
+        success:function(result){
+            if(result.status == 0) {
+                $scope.items = result.data.list;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+                var totalSize = result.data.total;
+                $scope.totalSize = totalSize;
+                var totalPage;
+                if(totalSize % pageSize == 0){
+                    totalPage = totalSize / pageSize;
+                }else{
+                    totalPage = totalSize / pageSize +1;
+                }
+                laypage({
+                    cont: $("#paganation"),   //容器名
+                    pages: totalPage,           //总页数
+                    curr: currentPage,         //当前页
+                    skip: true,
+                    skin: '#1A56A8',
+                    groups: 5,                  //连续显示分页数
+                    jump: function(obj, first){ //触发分页后的回调
+                        if(!first){
+                            currentPage = obj.curr;
+                            $scope.searchList(currentPage, pageSize);
+                        }
+                    }
+
+                });
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("内部服务异常");
+        }
+    });
+
+    $scope.searchList = function(currentPage, pageSize){
+        $.ajax({
+            url: "/fop/www/findFinanceProjectList",
+            type:"post",
+            async:false,
+            data:{page:currentPage, limit: pageSize},
+            success:$scope.responseHandle,
+            error:function(){
+                alert("内部服务异常");
+            }
+        });
+    }
+
+    $scope.responseHandle = function(result){
+        if(result.status == 0) {
+            $scope.items = result.data.list;
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        }else {
+            alert(result.errorMessage);
+        }
+    }
+
+    /**
+     * 查看融资详情
+     * @param index
+     */
+    $scope.showFinanceInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('finance_info.html?id='+primaryId);
+    }
+
+    /**
+     * 发布融资项目
+     */
+    $scope.relaseFinance = function(){
+
+        var flag = true;
+        var projectName = $("input[name='projectName']").val();
+        var projectMoney = $("input[name='projectMoney']").val();
+        var financeYear = $("input[name='financeYear']").val();
+        // var projectType = $("input[name='projectType']").val();
+        var rate = $("input[name='rate']").val();
+        var content = $("textarea[name='content']").val();
+        if(projectName == '' || projectName == undefined){
+            flag = false;
+            alert("请输入融资名称！");
+        }
+        if(projectMoney == '' || projectMoney == undefined){
+            flag = false;
+            alert("请输入融资金额！");
+        }
+        if(financeYear == '' || financeYear == undefined){
+            flag = false;
+            alert("请输入融资年限！");
+        }
+        // if(projectType == '' || projectType == undefined){
+        //     flag = false;
+        //     alert("请输入项目类型！");
+        // }
+        if(rate == '' || rate == undefined){
+            flag = false;
+            alert("请输入预期年收益！");
+        }
+        if(content == '' || content == undefined){
+            flag = false;
+            alert("请输入内容！");
+        }
+        if(flag){
+            $.ajax({
+                url: "/fop/www/insertFinanceProject",
+                type:"post",
+                async:false,
+                data:{financeTitle:projectName, financeAmount: projectMoney, financeYear:financeYear, financeContent: content, yearYield: rate},
+                success:function(result){
+                    if(result.status == 0) {
+                        $scope.searchByParam();
+                       alert("发布成功！")
+                    }else {
+                        alert(result.errorMessage);
+                    }
+                },
+                error:function(){
+                    alert("内部服务异常");
+                }
+            });
+        }
+    }
+
+    /**
+     * 根据条件进行检索
+     */
+    $scope.searchByParam = function(){
+        var btmYield = null;
+        var topYield = null;
+        if(rateRange != null && rateRange !='' && rateRange != undefined){
+            btmYield = rateRange.split(",")[0];     //起始收益率
+            topYield = rateRange.split(",")[1];     //截止收益率
+        }
+        var financeTitle = $("#financeTitle").val();
+        $.ajax({
+            url: "/fop/www/findFinanceProjectList",
+            type: "post",
+            async: false,
+            data: {limit: pageSize, page: currentPage, btmYield: btmYield, topYield: topYield, financeTitle: financeTitle,financeYear: yearRange},
+            success: function (result) {
+                if (result.status == 0) {
+                    $scope.items = result.data.list;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                    var totalSize = result.data.total;
+                    $scope.totalSize = totalSize;
+                    var totalPage;
+                    if (totalSize % pageSize == 0) {
+                        totalPage = totalSize / pageSize;
+                    } else {
+                        totalPage = totalSize / pageSize + 1;
+                    }
+                    laypage({
+                        cont: $("#paganation"),   //容器名
+                        pages: totalPage,           //总页数
+                        curr: currentPage,         //当前页
+                        skip: true,
+                        skin: '#1A56A8',
+                        groups: 5,                  //连续显示分页数
+                        jump: function (obj, first) { //触发分页后的回调
+                            if (!first) {
+                                currentPage = obj.curr;
+                                $scope.searchList(currentPage, pageSize);
+                            }
+                        }
+
+                    });
+                } else {
+                    alert(result.errorMessage);
+                }
+            },
+            error: function () {
+                alert("内部服务异常");
+            }
+        });
+    }
 });
