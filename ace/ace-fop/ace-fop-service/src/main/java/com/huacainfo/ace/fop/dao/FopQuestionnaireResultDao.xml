@@ -275,11 +275,24 @@
         from fop_questionnaire_result
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="statisticalData" parameterType="java.lang.String" resultType="java.util.Map">
+        select (case when t.result=1 then '很满意' when t.result=2 then '一般' else '不满意' end) as result , count(*) as count
+        from (
+        select opinionType,result
+        from fop_questionnaire_result
+        where opinionType=#{opinionType,jdbcType=VARCHAR}
+        ) t
+        group by t.result
+    </select>
     <sql id="whereCondition">
         from fop_questionnaire_result t
         where 1 = 1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.opinionType!=null and condition.opinionType!=&quot;&quot;">
+            and t.opinionType = #{condition.opinionType,jdbcType=VARCHAR}
         </if>
     </sql>
 
@@ -292,7 +305,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.createDate
+                ORDER BY t.releaseDate DESC
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -301,7 +314,7 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopQuestionnaireResult">
         select count(*)
         from fop_questionnaire_result
-        where question = #{question,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findCount" resultType="int">
