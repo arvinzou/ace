@@ -21,6 +21,15 @@
   </resultMap>
   <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.AppealCaseVo"
              extends="BaseResultMap">
+    <collection property="list" ofType="com.huacainfo.ace.portal.model.AppealCaseFile">
+      <id property="id" column="appealCaseFileId"/>
+      <result column="_appealCaseId" jdbcType="VARCHAR" property="appealCaseId" />
+      <result column="_name" jdbcType="VARCHAR" property="name" />
+      <result column="_Type" jdbcType="VARCHAR" property="type" />
+      <result column="_mediType" jdbcType="VARCHAR" property="mediType" />
+      <result column="_mediUrl" jdbcType="VARCHAR" property="mediUrl" />
+      <result column="_createDate" jdbcType="TIMESTAMP" property="createDate" />
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, appealId, category, title, mediType, mediUrl, submitTime, submitOpenId, latitude, 
@@ -30,12 +39,12 @@
     content, answerContent
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from appeal_case
-    where id = #{id,jdbcType=VARCHAR}
+    select
+    t.id, t.appealId, t.category, t.title, t.mediType, t.mediUrl, t.submitTime, t.submitOpenId, t.latitude,
+    t.longitude, t.answerTime, t.answerOpenId, t.status, t.createDate,
+    a.id appealCaseFileId, a.appealCaseId _appealCaseId, a.name _name, a.Type _Type, a.mediType _mediType, a.mediUrl _mediUrl, a.createDate _createDate
+    from appeal_case,left join appeal_case_file a on t.id=a.appealCaseId
+    where t.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from appeal_case
@@ -58,17 +67,9 @@
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.AppealCase">
     update appeal_case
     set
-    category = #{category,jdbcType=VARCHAR},
-    title = #{title,jdbcType=VARCHAR},
-    mediType = #{mediType,jdbcType=VARCHAR},
-    mediUrl = #{mediUrl,jdbcType=VARCHAR},
-    submitTime = #{submitTime,jdbcType=TIMESTAMP},
-    submitOpenId = #{submitOpenId,jdbcType=VARCHAR},
-    latitude = #{latitude,jdbcType=DECIMAL},
-    longitude = #{longitude,jdbcType=DECIMAL},
+    status=#{status,jdbcType=VARCHAR},
     answerTime = #{answerTime,jdbcType=TIMESTAMP},
     answerOpenId = #{answerOpenId,jdbcType=VARCHAR},
-    content = #{content,jdbcType=LONGVARCHAR},
     answerContent = #{answerContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -79,7 +80,6 @@
       concat(#{condition.title,jdbcType=VARCHAR},'%')
     </if>
   </sql>
-
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
     <include refid="whereCondition" />
@@ -103,5 +103,22 @@
     from
     appeal_case where
     title=#{title} and appealId=#{appealId} and submitOpenId=#{submitOpenId}
+  </select>
+
+  <select id="getList" resultType="map">
+    select
+    t.id, t.appealId, t.category, t.title, t.mediType, t.mediUrl, t.submitTime, t.submitOpenId, t.latitude,
+    t.longitude, t.answerTime, t.answerOpenId, t.status, t.createDate from appeal_case t
+    inner join appeal a on t.appealId=a.id
+    <if test='submitOpenId!=null and submitOpenId!=""'>
+      and t.submitOpenId =#{submitOpenId,jdbcType=VARCHAR}
+    </if>
+    <if test='answerOpenId!=null and answerOpenId!=""'>
+      and a.openId =#{answerOpenId,jdbcType=VARCHAR}
+    </if>
+    <if test='status!=null and status!=""'>
+      and status =#{status,jdbcType=VARCHAR}
+    </if>
+    ORDER BY createDate desc
   </select>
 </mapper>

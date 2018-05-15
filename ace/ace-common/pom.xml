@@ -248,7 +248,6 @@
             <artifactId>xstream</artifactId>
             <version>1.4.7</version>
         </dependency>
-        <!--wechat plugins dependency   ending -->
     </dependencies>
     <build>
         <plugins>

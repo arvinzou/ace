@@ -93,9 +93,6 @@ public class AppealServiceImpl implements AppealService {
         if (CommonUtils.isBlank(o.getRemark())) {
             return new MessageResponse(1, "诉求简介不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
         if (CommonUtils.isBlank(o.getLastModifyDate())) {
             return new MessageResponse(1, "最后更新时间不能为空！");
         }

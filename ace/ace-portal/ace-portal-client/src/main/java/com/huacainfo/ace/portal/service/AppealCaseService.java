@@ -4,8 +4,12 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.AppealCase;
+import com.huacainfo.ace.portal.model.AppealCaseFile;
 import com.huacainfo.ace.portal.vo.AppealCaseVo;
 import com.huacainfo.ace.portal.vo.AppealCaseQVo;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author: 陈晓克
  * @version: 2018-05-14
@@ -40,9 +44,10 @@ public interface AppealCaseService {
 	    * @author: 陈晓克
 	    * @version: 2018-05-14
 	 */
-	public abstract MessageResponse insertAppealCase(AppealCase obj) throws Exception;
+	public abstract MessageResponse insertAppealCase(AppealCase obj, List<AppealCaseFile> list) throws Exception;
 
     /**
+	 *
 	 *
 	    * @Title:updateAppealCase
 	    * @Description:  TODO(更新诉求)
@@ -54,7 +59,7 @@ public interface AppealCaseService {
 	    * @author: 陈晓克
 	    * @version: 2018-05-14
 	 */
-	public abstract MessageResponse updateAppealCase(AppealCase obj) throws Exception;
+	public abstract MessageResponse updateAppealCase(AppealCase obj, List<AppealCaseFile> list) throws Exception;
     /**
 	 *
 	    * @Title:selectAppealCaseByPrimaryKey
@@ -80,6 +85,19 @@ public interface AppealCaseService {
 	    * @version: 2018-05-14
 	 */
 	public abstract MessageResponse deleteAppealCaseByAppealCaseId(String id,UserProp userProp) throws Exception;
+
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-15
+	 */
+	public Map<String,Object> getList(Map<String,Object> params) throws Exception;
 
 	
 }
