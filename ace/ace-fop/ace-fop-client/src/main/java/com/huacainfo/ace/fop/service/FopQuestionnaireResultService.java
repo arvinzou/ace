@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopQuestionnaireResult;
 import com.huacainfo.ace.fop.vo.FopQuestionnaireResultQVo;
@@ -31,6 +32,9 @@ public interface FopQuestionnaireResultService {
     PageResult<FopQuestionnaireResultVo> findFopQuestionnaireResultList(FopQuestionnaireResultQVo condition,
                                                                         int start, int limit, String orderBy) throws Exception;
 
+    ResultResponse findQuestionnaireResultList(FopQuestionnaireResultQVo condition,
+                                               int page, int limit, String orderBy) throws Exception;
+
     /**
      * @throws
      * @Title:insertFopQuestionnaireResult
@@ -43,6 +47,8 @@ public interface FopQuestionnaireResultService {
      * @version: 2018-05-11
      */
     MessageResponse insertFopQuestionnaireResult(FopQuestionnaireResult obj, UserProp userProp) throws Exception;
+
+    MessageResponse insertQuestionnaireResult(FopQuestionnaireResult obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
