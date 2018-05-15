@@ -1,8 +1,10 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FopAppealHelp {
+public class FopAppealHelp implements Serializable {
+    private static final long serialVersionUID = 984423033659922256L;
     private String id;
 
     private String requestId;
@@ -38,6 +40,16 @@ public class FopAppealHelp {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    private String annexUrl;
+
+    public String getAnnexUrl() {
+        return annexUrl;
+    }
+
+    public void setAnnexUrl(String annexUrl) {
+        this.annexUrl = annexUrl;
+    }
 
     public String getId() {
         return id;
