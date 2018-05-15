@@ -1,5 +1,6 @@
 package com.huacainfo.ace.portal.web.controller;
 
+import com.huacainfo.ace.portal.model.AppealCaseFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,11 @@ import com.huacainfo.ace.portal.service.AppealCaseService;
 import com.huacainfo.ace.portal.vo.AppealCaseVo;
 import com.huacainfo.ace.portal.vo.AppealCaseQVo;
 
+import java.util.List;
+import java.util.Map;
+
 @Controller
-@RequestMapping("/appealCase")
+@RequestMapping("/www/appealCase")
 /**
  * @author: 陈晓克
  * @version: 2018-05-14
@@ -72,9 +76,14 @@ public class AppealCaseController extends PortalBaseController {
 	@RequestMapping(value = "/insertAppealCase.do")
 	@ResponseBody
 	public MessageResponse insertAppealCase(String jsons) throws Exception {
-		AppealCase obj = JSON.parseObject(jsons, AppealCase.class);
+		JSONObject o=JSON.parseObject(jsons);
+		AppealCase obj = JSON.parseObject(o.get("o").toString(), AppealCase.class);
+		obj.setSubmitOpenId(this.getCurWxUser().getOpenId());
+		obj.setLatitude(this.getCurWxUser().getLatitude());
+		obj.setLongitude(this.getCurWxUser().getLongitude());
+		List<AppealCaseFile> list=JSON.parseArray(o.get("list").toString(),AppealCaseFile.class);
 		return this.appealCaseService
-				.insertAppealCase(obj);
+				.insertAppealCase(obj,list);
 	}
     /**
 	 *
@@ -90,9 +99,12 @@ public class AppealCaseController extends PortalBaseController {
 	@RequestMapping(value = "/updateAppealCase.do")
 	@ResponseBody
 	public MessageResponse updateAppealCase(String jsons) throws Exception {
-		AppealCase obj = JSON.parseObject(jsons, AppealCase.class);
+		JSONObject o=JSON.parseObject(jsons);
+		AppealCase obj = JSON.parseObject(o.get("o").toString(), AppealCase.class);
+		obj.setAnswerOpenId(this.getCurUserProp().getOpenId());
+		List<AppealCaseFile> list=JSON.parseArray(o.get("list").toString(),AppealCaseFile.class);
 		return this.appealCaseService
-				.updateAppealCase(obj);
+				.updateAppealCase(obj,list);
 	}
     /**
 	 *
@@ -130,5 +142,21 @@ public class AppealCaseController extends PortalBaseController {
 		String id = json.getString("id");
 		return this.appealCaseService.deleteAppealCaseByAppealCaseId(id,
 				this.getCurUserProp());
+	}
+
+	/**
+	 *
+	 * @Title:getList
+	 * @Description:  TODO(获取列表)
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-04
+	 */
+	@RequestMapping(value = "/getList.do")
+	@ResponseBody
+	public Map<String,Object> getList() throws Exception{
+		return this.appealCaseService.getList(this.getParams());
 	}
 }
