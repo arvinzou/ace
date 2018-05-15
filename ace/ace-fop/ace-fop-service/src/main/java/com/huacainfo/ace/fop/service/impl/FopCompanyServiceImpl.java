@@ -167,6 +167,69 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         return new MessageResponse(0, "添加企业管理完成！");
     }
 
+//    @Override
+//    public MessageResponse insertCompany(String fullName, String lpMobile) throws Exception {
+//        if (CommonUtils.isBlank(fullName)) {
+//            return new MessageResponse(ResultCode.FAIL, "企业全称不能为空！");
+//        }
+//        if (CommonUtils.isBlank(lpMobile)) {
+//            return new MessageResponse(ResultCode.FAIL, "企业法人不能为空！");
+//        }
+//
+//        FopCompanyVo o = new FopCompanyVo();
+//        o.setLpMobile(lpMobile);
+//        o.setFullName(fullName);
+//        ResultResponse rs1 = initSysUser(o);
+//        if (ResultCode.FAIL == rs1.getStatus()) {
+//            return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
+//        }
+//        //构建法人信息
+//        ResultResponse rs2 = fopPersonService.insertPerson(o, userProp);
+//        if (ResultCode.FAIL == rs2.getStatus()) {
+//            return new MessageResponse(ResultCode.FAIL, rs2.getInfo());
+//        }
+//        return null;
+//
+//    }
+
+//    private ResultResponse initSysUser(FopCompanyVo o) throws Exception {
+//
+//        //portal.users
+//        Users initUser = new Users();
+//        String departmentId=GUIDUtil.getGUID();
+//
+//        initUser.setDepartmentId(departmentId);
+//        initUser.setAccount(o.getLpMobile());
+//        initUser.setName(o.getFullName());
+//        initUser.setPassword("123456");
+//        initUser.setSex("1");
+//        initUser.setUserLevel("1");
+//        ResultResponse rs2 = usersService.insertUsersRecord(initUser,"市工商联 -- 企业注册");
+//        if (ResultCode.FAIL == rs2.getStatus()) {
+//            throw new CustomException(rs2.getInfo());
+//        }
+//        Users users=(Users)rs2.getData();
+//        Department department = new Department();
+//        department.setDepartmentId(departmentId);
+//        department.setDepartmentName(o.getFullName());
+//        department.setSyid(users.getCurSyid());
+//        //市工商联
+//        department.setParentDepartmentId("0010006");
+//        MessageResponse rs1 = departmentService.insertDepartment(department);
+//        if (ResultCode.FAIL == rs1.getStatus()) {
+//            throw new CustomException(rs1.getErrorMessage());
+//        }
+//        //portal.users
+//        //分配用户角色 默认分配非会员权限，注册申请成功后，分配会员权限
+//        ResultResponse rs3 = fopMemberService.dispatchRoleRight(users.getUserId(), new UserProp(), new String[]{"5"});
+//        if (ResultCode.FAIL == rs3.getStatus()) {
+//            throw new CustomException(rs3.getInfo());
+//        }
+//        //TODO 分配成功通知
+//        return new ResultResponse(ResultCode.SUCCESS, "初始化系统用户成功", department);
+//    }
+
+
     /**
      * 功能描述: 自动提交缴费记录
      *
@@ -199,6 +262,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         department.setDepartmentName(o.getFullName());
         department.setSyid(userProp.getActiveSyId());
         department.setAreaCode(userProp.getAreaCode());
+        //市工商联
+        department.setParentDepartmentId("0010006");
         MessageResponse rs1 = departmentService.insertDepartment(department, userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
             throw new CustomException(rs1.getErrorMessage());
@@ -223,7 +288,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         }
 
         //TODO 分配成功通知
-
         return new ResultResponse(ResultCode.SUCCESS, "初始化系统用户成功", department);
     }
 

@@ -15,6 +15,31 @@ public class FopQuestionnaireResult {
 
     private String questionnaireId;
 
+    private String content;
+
+    private String opinionType;
+    private Date releaseDate;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getOpinionType() {
+        return opinionType;
+    }
+
+    public void setOpinionType(String opinionType) {
+        this.opinionType = opinionType;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
     private String result;
 
     private String remark;
@@ -26,6 +51,10 @@ public class FopQuestionnaireResult {
     private String createUserName;
 
     private Date createDate;
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 
     private String lastModifyUserId;
 

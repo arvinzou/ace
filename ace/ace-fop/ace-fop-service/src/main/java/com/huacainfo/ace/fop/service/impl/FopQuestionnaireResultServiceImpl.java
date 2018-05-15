@@ -76,12 +76,6 @@ public class FopQuestionnaireResultServiceImpl implements FopQuestionnaireResult
     @Override
     public MessageResponse insertFopQuestionnaireResult(FopQuestionnaireResult o, UserProp userProp) throws Exception {
 
-        if (CommonUtils.isBlank(o.getRelationId())) {
-            return new MessageResponse(1, "关联ID不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getRelationType())) {
-            return new MessageResponse(1, "关联类型不能为空！");
-        }
         if (CommonUtils.isBlank(o.getAnswerId())) {
             return new MessageResponse(1, "答题人ID不能为空！");
         }
@@ -89,16 +83,13 @@ public class FopQuestionnaireResultServiceImpl implements FopQuestionnaireResult
             return new MessageResponse(1, "答题人类型不能为空！");
         }
         if (CommonUtils.isBlank(o.getQuestionnaireId())) {
-            return new MessageResponse(1, "问卷ID不能为空！");
+            return new MessageResponse(1, "内容不能为空！");
         }
         if (CommonUtils.isBlank(o.getResult())) {
             return new MessageResponse(1, "调查结果不能为空！");
         }
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
         }
 
 
@@ -109,6 +100,7 @@ public class FopQuestionnaireResultServiceImpl implements FopQuestionnaireResult
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
+        o.setReleaseDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
@@ -135,12 +127,6 @@ public class FopQuestionnaireResultServiceImpl implements FopQuestionnaireResult
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getRelationId())) {
-            return new MessageResponse(1, "关联ID不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getRelationType())) {
-            return new MessageResponse(1, "关联类型不能为空！");
-        }
         if (CommonUtils.isBlank(o.getAnswerId())) {
             return new MessageResponse(1, "答题人ID不能为空！");
         }
@@ -148,19 +134,11 @@ public class FopQuestionnaireResultServiceImpl implements FopQuestionnaireResult
             return new MessageResponse(1, "答题人类型不能为空！");
         }
         if (CommonUtils.isBlank(o.getQuestionnaireId())) {
-            return new MessageResponse(1, "问卷ID不能为空！");
+            return new MessageResponse(1, "内容不能为空！");
         }
         if (CommonUtils.isBlank(o.getResult())) {
             return new MessageResponse(1, "调查结果不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());

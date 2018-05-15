@@ -7,20 +7,23 @@
         <result column="relationType" jdbcType="INTEGER" property="relationType"/>
         <result column="answerId" jdbcType="VARCHAR" property="answerId"/>
         <result column="answerType" jdbcType="INTEGER" property="answerType"/>
-        <result column="questionnaireId" jdbcType="VARCHAR" property="questionnaireId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="result" jdbcType="VARCHAR" property="result"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="opinionType" jdbcType="CHAR" property="opinionType"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, relationId, relationType, answerId, answerType, questionnaireId, result, remark, 
-    status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+        id, relationId, relationType, answerId, answerType, title, content, result, remark,
+        status,opinionType, createUserId, createUserName, createDate, releaseDate, lastModifyUserId, lastModifyUserName,
     lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -34,16 +37,18 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopQuestionnaireResult">
-    insert into fop_questionnaire_result (id, relationId, relationType, 
-      answerId, answerType, questionnaireId, 
-      result, remark, status, 
-      createUserId, createUserName, createDate, 
+    insert into fop_questionnaire_result (id, relationId, relationType,
+        answerId, answerType, title,content,
+        result, remark, status, opinionType,
+        createUserId, createUserName, createDate, releaseDate,
       lastModifyUserId, lastModifyUserName, lastModifyDate
       )
-    values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=INTEGER}, 
-      #{answerId,jdbcType=VARCHAR}, #{answerType,jdbcType=INTEGER}, #{questionnaireId,jdbcType=VARCHAR}, 
-      #{result,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=INTEGER},
+        #{answerId,jdbcType=VARCHAR}, #{answerType,jdbcType=INTEGER},
+        #{title,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},
+        #{result,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{opinionType,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{releaseDate,jdbcType=TIMESTAMP},
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -65,8 +70,11 @@
             <if test="answerType != null">
                 answerType,
             </if>
-            <if test="questionnaireId != null">
-                questionnaireId,
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
             </if>
             <if test="result != null">
                 result,
@@ -77,6 +85,9 @@
             <if test="status != null">
                 status,
             </if>
+            <if test="opinionType != null">
+                opinionType,
+            </if>
             <if test="createUserId != null">
                 createUserId,
             </if>
@@ -85,6 +96,9 @@
             </if>
             <if test="createDate != null">
                 createDate,
+            </if>
+            <if test="releaseDate != null">
+                releaseDate,
             </if>
             <if test="lastModifyUserId != null">
                 lastModifyUserId,
@@ -112,8 +126,11 @@
             <if test="answerType != null">
                 #{answerType,jdbcType=INTEGER},
             </if>
-            <if test="questionnaireId != null">
-                #{questionnaireId,jdbcType=VARCHAR},
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
             </if>
             <if test="result != null">
                 #{result,jdbcType=VARCHAR},
@@ -124,6 +141,9 @@
             <if test="status != null">
                 #{status,jdbcType=CHAR},
             </if>
+            <if test="opinionType != null">
+                #{opinionType,jdbcType=CHAR},
+            </if>
             <if test="createUserId != null">
                 #{createUserId,jdbcType=VARCHAR},
             </if>
@@ -132,6 +152,9 @@
             </if>
             <if test="createDate != null">
                 #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=TIMESTAMP},
             </if>
             <if test="lastModifyUserId != null">
                 #{lastModifyUserId,jdbcType=VARCHAR},
@@ -159,8 +182,11 @@
             <if test="answerType != null">
                 answerType = #{answerType,jdbcType=INTEGER},
             </if>
-            <if test="questionnaireId != null">
-                questionnaireId = #{questionnaireId,jdbcType=VARCHAR},
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
             </if>
             <if test="result != null">
                 result = #{result,jdbcType=VARCHAR},
@@ -171,6 +197,9 @@
             <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
+            <if test="opinionType != null">
+                opinionType = #{opinionType,jdbcType=CHAR},
+            </if>
             <if test="createUserId != null">
                 createUserId = #{createUserId,jdbcType=VARCHAR},
             </if>
@@ -179,6 +208,9 @@
             </if>
             <if test="createDate != null">
                 createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releaseDate != null">
+                releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
             </if>
             <if test="lastModifyUserId != null">
                 lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
@@ -198,13 +230,16 @@
       relationType = #{relationType,jdbcType=INTEGER},
       answerId = #{answerId,jdbcType=VARCHAR},
       answerType = #{answerType,jdbcType=INTEGER},
-      questionnaireId = #{questionnaireId,jdbcType=VARCHAR},
+        title = #{title,jdbcType=VARCHAR},
+        content = #{content,jdbcType=VARCHAR},
       result = #{result,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
+        opinionType = #{opinionType,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP},
+        releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
@@ -228,8 +263,9 @@
         then (select fullName from fop_association where id = t.answerId)
         ELSE ''
         end as answerName,
-        t.id, t.relationId, t.relationType, t.answerId, t.answerType, t.questionnaireId, t.result, t.remark,
-        t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
+        t.id, t.relationId, t.relationType, t.answerId, t.answerType, t.title,t.content, t.result, t.remark,
+        t.status, t.opinionType, t.createUserId, t.createUserName, t.createDate, t.releaseDate, t.lastModifyUserId,
+        t.lastModifyUserName,
         t.lastModifyDate
     </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
