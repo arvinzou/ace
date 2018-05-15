@@ -4,10 +4,10 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopQuestionnaireResult">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
-        <result column="relationType" jdbcType="INTEGER" property="relationType"/>
+        <result column="relationType" jdbcType="CHAR" property="relationType"/>
         <result column="answerId" jdbcType="VARCHAR" property="answerId"/>
-        <result column="answerType" jdbcType="INTEGER" property="answerType"/>
-        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="answerType" jdbcType="CHAR" property="answerType"/>
+        <result column="questionnaireId" jdbcType="VARCHAR" property="questionnaireId"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="result" jdbcType="VARCHAR" property="result"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -22,7 +22,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, relationId, relationType, answerId, answerType, title, content, result, remark,
+        id, relationId, relationType, answerId, answerType, questionnaireId, content, result, remark,
         status,opinionType, createUserId, createUserName, createDate, releaseDate, lastModifyUserId, lastModifyUserName,
     lastModifyDate
   </sql>
@@ -38,14 +38,14 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopQuestionnaireResult">
     insert into fop_questionnaire_result (id, relationId, relationType,
-        answerId, answerType, title,content,
+        answerId, answerType, questionnaireId,content,
         result, remark, status, opinionType,
         createUserId, createUserName, createDate, releaseDate,
       lastModifyUserId, lastModifyUserName, lastModifyDate
       )
-    values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=INTEGER},
-        #{answerId,jdbcType=VARCHAR}, #{answerType,jdbcType=INTEGER},
-        #{title,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR},
+        #{answerId,jdbcType=VARCHAR}, #{answerType,jdbcType=CHAR},
+        #{questionnaireId,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},
         #{result,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{opinionType,jdbcType=CHAR},
         #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
         #{releaseDate,jdbcType=TIMESTAMP},
@@ -70,8 +70,8 @@
             <if test="answerType != null">
                 answerType,
             </if>
-            <if test="title != null">
-                title,
+            <if test="questionnaireId != null">
+                questionnaireId,
             </if>
             <if test="content != null">
                 content,
@@ -118,16 +118,16 @@
                 #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="relationType != null">
-                #{relationType,jdbcType=INTEGER},
+                #{relationType,jdbcType=CHAR},
             </if>
             <if test="answerId != null">
                 #{answerId,jdbcType=VARCHAR},
             </if>
             <if test="answerType != null">
-                #{answerType,jdbcType=INTEGER},
+                #{answerType,jdbcType=CHAR},
             </if>
-            <if test="title != null">
-                #{title,jdbcType=VARCHAR},
+            <if test="questionnaireId != null">
+                #{questionnaireId,jdbcType=VARCHAR},
             </if>
             <if test="content != null">
                 #{content,jdbcType=VARCHAR},
@@ -174,16 +174,16 @@
                 relationId = #{relationId,jdbcType=VARCHAR},
             </if>
             <if test="relationType != null">
-                relationType = #{relationType,jdbcType=INTEGER},
+                relationType = #{relationType,jdbcType=CHAR},
             </if>
             <if test="answerId != null">
                 answerId = #{answerId,jdbcType=VARCHAR},
             </if>
             <if test="answerType != null">
-                answerType = #{answerType,jdbcType=INTEGER},
+                answerType = #{answerType,jdbcType=CHAR},
             </if>
-            <if test="title != null">
-                title = #{title,jdbcType=VARCHAR},
+            <if test="questionnaireId != null">
+                questionnaireId = #{questionnaireId,jdbcType=VARCHAR},
             </if>
             <if test="content != null">
                 content = #{content,jdbcType=VARCHAR},
@@ -227,10 +227,10 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopQuestionnaireResult">
     update fop_questionnaire_result
     set relationId = #{relationId,jdbcType=VARCHAR},
-      relationType = #{relationType,jdbcType=INTEGER},
+        relationType = #{relationType,jdbcType=CHAR},
       answerId = #{answerId,jdbcType=VARCHAR},
-      answerType = #{answerType,jdbcType=INTEGER},
-        title = #{title,jdbcType=VARCHAR},
+        answerType = #{answerType,jdbcType=CHAR},
+        questionnaireId = #{questionnaireId,jdbcType=VARCHAR},
         content = #{content,jdbcType=VARCHAR},
       result = #{result,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
@@ -256,6 +256,7 @@
         then (select requestTitle from fop_appeal_help where id = t.relationId)
         ELSE ''
         end as requestTopic,
+
         case
         when  t.answerType = 0
         then (select fullName from fop_company where id = t.answerId)
@@ -263,7 +264,7 @@
         then (select fullName from fop_association where id = t.answerId)
         ELSE ''
         end as answerName,
-        t.id, t.relationId, t.relationType, t.answerId, t.answerType, t.title,t.content, t.result, t.remark,
+        t.id, t.relationId, t.relationType, t.answerId, t.answerType, t.questionnaireId,t.content, t.result, t.remark,
         t.status, t.opinionType, t.createUserId, t.createUserName, t.createDate, t.releaseDate, t.lastModifyUserId,
         t.lastModifyUserName,
         t.lastModifyDate

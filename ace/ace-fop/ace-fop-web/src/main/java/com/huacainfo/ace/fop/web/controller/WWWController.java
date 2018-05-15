@@ -1,8 +1,10 @@
 package com.huacainfo.ace.fop.web.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
@@ -45,6 +47,9 @@ public class WWWController extends FopBaseController {
 
     @Autowired
     private FopAssociationService fopAssociationService;
+
+    @Autowired
+    private FopQuestionnaireResultService fopQuestionnaireResultService;
 
 
 //    /**
@@ -446,6 +451,9 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/findProjectList")
     @ResponseBody
     public ResultResponse findProjectList(FopProjectQVo condition, PageParamNoChangeSord page) throws Exception {
+        if ("asc".equals(page.getSord())) {
+            page.setOrderBy("releaseDate");
+        }
         ResultResponse rst = this.fopProjectService.findProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
     }
@@ -513,4 +521,29 @@ public class WWWController extends FopBaseController {
 //        }
 //        return this.fopAssociationService.insertAssociation(name,phoneNumber);
 //    }
+
+
+    /**
+     * 满意度列表
+     * opinionType：1、诉求满意度 2、合作交流
+     */
+    @RequestMapping(value = "/findQuestionnaireResultList")
+    @ResponseBody
+    public ResultResponse findFopQuestionnaireResultList(FopQuestionnaireResultQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.fopQuestionnaireResultService
+                .findQuestionnaireResultList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
+
+    /**
+     * opinionType 意见类型
+     * result 调查结果
+     * content 内容
+     */
+
+    @RequestMapping(value = "/insertQuestionnaireResult")
+    @ResponseBody
+    public MessageResponse insertQuestionnaireResult(FopQuestionnaireResultQVo condition) throws Exception {
+        return this.fopQuestionnaireResultService.insertQuestionnaireResult(condition, this.getCurUserProp());
+    }
 }
