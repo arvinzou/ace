@@ -306,17 +306,24 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopProjectVo">
 
     </resultMap>
-    <sql id="Vo_Column_List">
-        id, projectName, projectCode, process, personId, areaCode, projectType, relationId, sector, coopType,
-        releaseDate, clicks, likes, remark, status, createUserId, coopDesc,
-        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
-        relationType
+    <sql id="Column_List_Vo">
+        CASE
+        WHEN t.relationType='0'
+        THEN (select fullName from fop_company where id = t.relationId)
+        WHEN t.relationType='1'
+        THEN (select fullName from fop_association where id = t.relationId)
+        END displayName,
+        t.id, t.projectName, t.projectCode, t.process, t.personId, t.areaCode, t.projectType, t.relationId, t.sector,
+        t.coopType,
+        t.releaseDate, t.clicks, t.likes, t.remark, t.status, t.createUserId, t.coopDesc,
+        t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
+        t.relationType
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from fop_project
+        <include refid="Column_List_Vo"/>
+        from fop_project t
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -326,18 +333,28 @@
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
+        <if test="condition.coopType!=null and condition.coopType!=&quot;&quot;">
+            and t.coopType = #{condition.coopType,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and t.areaCode like
+            concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.process!=null and condition.process!=""'>
+            and t.process=#{condition.process,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
+        <include refid="Column_List_Vo"/>
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.createDate
+                ORDER BY t.releaseDate DESC
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

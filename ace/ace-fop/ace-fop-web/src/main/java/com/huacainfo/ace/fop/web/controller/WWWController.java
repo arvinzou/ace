@@ -1,24 +1,16 @@
 package com.huacainfo.ace.fop.web.controller;
 
 
-import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.fop.dao.FopLawPaperDao;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
-import com.huacainfo.ace.portal.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/www")
@@ -50,6 +42,9 @@ public class WWWController extends FopBaseController {
 
     @Autowired
     private FopProjectService fopProjectService;
+
+    @Autowired
+    private FopAssociationService fopAssociationService;
 
 
 //    /**
@@ -405,6 +400,7 @@ public class WWWController extends FopBaseController {
      * 发布诉求
      * requestTitle 标题
      * replied  (true:回复，false：未回复）
+     * sord  (默认:降序，asc：升序)
      * page：页码
      * limit 每页目数
      */
@@ -420,10 +416,7 @@ public class WWWController extends FopBaseController {
 
     /**
      * 获取诉求服务详情。
-     *
-     * @param id
-     * @return
-     * @throws Exception
+     * id 诉求ID
      */
     @RequestMapping(value = "/selectAppealHelpByPrimaryKey")
     @ResponseBody
@@ -471,7 +464,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/insertProject")
     @ResponseBody
     public MessageResponse insertProject(FopProject obj) throws Exception {
-        return this.fopProjectService.insertFopProject(obj, this.getCurUserProp());
+        return this.fopProjectService.insertProject(obj, this.getCurUserProp());
     }
 
 
@@ -503,12 +496,21 @@ public class WWWController extends FopBaseController {
     }
 
 
-    @RequestMapping(value = "/sign")
-    @ResponseBody
-    public MessageResponse signUp(FopProject obj) throws Exception {
-        return null;
-    }
+    /**
+     * name：企业，团体名称
+     * phoneNumber：电话
+     * isCompany :true, false。
+     *
+     * @return
+     * @throws Exception
+     */
 
-
-
+//    @RequestMapping(value = "/sign")
+//    @ResponseBody
+//    public MessageResponse signUp(String name,String phoneNumber,boolean isCompany) throws Exception {
+//        if(isCompany){
+//            return this.fopCompanyService.insertCompany(name,phoneNumber);
+//        }
+//        return this.fopAssociationService.insertAssociation(name,phoneNumber);
+//    }
 }
