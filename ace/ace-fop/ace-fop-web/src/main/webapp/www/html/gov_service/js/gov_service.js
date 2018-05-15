@@ -156,8 +156,10 @@ app.controller(ngControllerName,function($scope){
      * 查看诉求详情
      * @param obj
      */
-    $scope.showInfo = function(obj){
-        window.open('appeal_info.html?id=c6a5092b37094cc38a7c793912bc2543');
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('appeal_info.html?id='+primaryId);
     }
 
     $scope.searchList = function(currentPage, pageSize){

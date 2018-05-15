@@ -1,7 +1,11 @@
 body {
 	background-color: #F4F4F4;
 }
-
+html{
+	background-color: #ffffff;
+	padding-left: 20px;
+	padding-right: 20px;
+}
 .index {
 	width: 60%;
 	margin: auto;
@@ -179,4 +183,23 @@ option {
 
 .table_div table:hover {
 	border: 1px solid #FF9F00;
+}
+.title_lager {
+	color: #565B70;
+	font-weight: bolder;
+	font-size: 18px;
+	width: 12%;
+	display: inline-block;
+	border-bottom: 3px solid #FF9F00;
+	height: 62px;
+	line-height: 62px;
+}
+
+.title_small {
+	color: #C3CBD6;
+	display: inline-block;
+	width: 88%;
+	border-bottom: 1px solid #E1E5ED;
+	height: 62px;
+	line-height: 62px;
 }

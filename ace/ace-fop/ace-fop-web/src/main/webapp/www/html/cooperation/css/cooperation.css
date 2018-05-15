@@ -1,7 +1,11 @@
 body {
 	background-color: #F4F4F4;
 }
-
+html{
+	background-color: #ffffff;
+	padding-left: 20px;
+	padding-right: 20px;
+}
 .index {
 	width: 60%;
 	margin: auto;
