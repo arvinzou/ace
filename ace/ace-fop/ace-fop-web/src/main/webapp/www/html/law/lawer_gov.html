@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
 	<head>
 		<meta charset="UTF-8">
 		<title>合作机构</title>
 		<link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css"/>
+		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+		<script type="text/javascript" src="js/lawer_gov.js"></script>
 	</head>
 	<body>
 		<div class="main">
@@ -12,11 +16,10 @@
 			</div>
 			<div class="body_content">
 				<ul>
-				  <li class="marl"><a href="#"><img src="../../images/lawer/law_1.png"/></a></li>
-				  <li class="mar"><a href="#"><img src="../../images/lawer/law_2.png"/></a></li>
-				  <li><a href="#"><img src="../../images/lawer/3.png"/></a></li>
+				  <li class="marl" ng-repeat="item in items"><a href="#"><img style="width: 100%;height: 100%;object-fit: cover;" src="http://zx.huacainfo.com/{{item.companyLogo}}" /></a></li>
 				 </ul>
 			</div>
+			<div id="paganation" style="margin-top: 30px"></div>
 		</div>
 	</body>
 </html>

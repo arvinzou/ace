@@ -40,7 +40,7 @@ body {
 }
 
 .body_content li.marl {
-	margin-left: 0;
+	margin-right: 2%;
 }
 
 .body_content ul {
@@ -48,8 +48,8 @@ body {
 }
 
 .body_content li {
-	width: 20%;
-	height: 100px;
+	width: 25%;
+	height: 130px;
 	overflow: hidden;
 	display: inline-block;
 	margin-left: 5%;
