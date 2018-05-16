@@ -259,39 +259,44 @@ app.controller(ngControllerName,function($scope) {
     }
 
     $scope.insertSatify = function(){
-        var flag = true;
-        var commentType = $("#commentType option:checked").val();
-        var satifyFlag = $("input[name='radio']:checked").val();
-        var content = $("textarea[name='content']").val();
-        if(commentType == '' || commentType == undefined){
-            flag = false;
-            alert("意见类型不能为空！");
-        }
-        if(satifyFlag == '' || satifyFlag == undefined){
-            flag = false;
-            alert("诉求服务满意度不能为空！");
-        }
-        if(flag){
-            $.ajax({
-                url: "/fop/www/insertQuestionnaireResult",
-                type: "post",
-                async: false,
-                data: {opinionType:commentType, result: satifyFlag, content: content},
-                success: function (result) {
-                    if (result.status == 0) {
-                        alert("评价成功！");
-                        $scope.search();
-                        if (!$scope.$$phase) {
-                            $scope.$apply();
+        var userProp = parent.userProp;
+        if(userProp == null || userProp == ''){
+            location.href='/portal/dynamic/portal/security/login.jsp';
+        }else{
+            var flag = true;
+            var commentType = $("#commentType option:checked").val();
+            var satifyFlag = $("input[name='radio']:checked").val();
+            var content = $("textarea[name='content']").val();
+            if(commentType == '' || commentType == undefined){
+                flag = false;
+                alert("意见类型不能为空！");
+            }
+            if(satifyFlag == '' || satifyFlag == undefined){
+                flag = false;
+                alert("诉求服务满意度不能为空！");
+            }
+            if(flag){
+                $.ajax({
+                    url: "/fop/www/insertQuestionnaireResult",
+                    type: "post",
+                    async: false,
+                    data: {opinionType:commentType, result: satifyFlag, content: content},
+                    success: function (result) {
+                        if (result.status == 0) {
+                            alert("评价成功！");
+                            $scope.search();
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
+                        } else {
+                            alert(result.errorMessage);
                         }
-                    } else {
-                        alert(result.errorMessage);
+                    },
+                    error: function () {
+                        alert("内部服务异常");
                     }
-                },
-                error: function () {
-                    alert("内部服务异常");
-                }
-            });
+                });
+            }
         }
     }
 });

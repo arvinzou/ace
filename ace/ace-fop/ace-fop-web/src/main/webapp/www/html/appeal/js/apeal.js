@@ -240,35 +240,40 @@ app.controller(ngControllerName,function($scope){
 	 * 发布诉求
      */
     $scope.insertApeal = function(){
-        var flag = true;
-        var apealTitle = $("input[name = 'apealTitle']").val();
-        var content = $("textarea[name = 'content']").val();
-        if(apealTitle == '' || apealTitle == undefined){
-            flag = false;
-            alert("诉求标题不能为空！");
-        }
-        if(content == '' || content == undefined){
-            flag = false;
-            alert("诉求内容不能为空！");
-        }
-        if(flag){
-            $.ajax({
-                url: "/fop/www/insertAppealHelp",
-                type:"post",
-                async:false,
-                data:{requestTitle:apealTitle, requestDesc:content, annexUrl:filePath},
-                success:function(result){
-                    if(result.status == 0) {
-                        $scope.search();
-                        alert("发布成功！");
-                    }else {
-                        alert(result.errorMessage);
+        var userProp = parent.parent.userProp;
+        if(userProp == null || userProp == '' ){
+            location.href='/portal/dynamic/portal/security/login.jsp';
+        }else {
+            var flag = true;
+            var apealTitle = $("input[name = 'apealTitle']").val();
+            var content = $("textarea[name = 'content']").val();
+            if (apealTitle == '' || apealTitle == undefined) {
+                flag = false;
+                alert("诉求标题不能为空！");
+            }
+            if (content == '' || content == undefined) {
+                flag = false;
+                alert("诉求内容不能为空！");
+            }
+            if (flag) {
+                $.ajax({
+                    url: "/fop/www/insertAppealHelp",
+                    type: "post",
+                    async: false,
+                    data: {requestTitle: apealTitle, requestDesc: content, annexUrl: filePath},
+                    success: function (result) {
+                        if (result.status == 0) {
+                            $scope.search();
+                            alert("发布成功！");
+                        } else {
+                            alert(result.errorMessage);
+                        }
+                    },
+                    error: function () {
+                        alert("内部服务异常");
                     }
-                },
-                error:function(){
-                    alert("内部服务异常");
-                }
-            });
+                });
+            }
         }
 	}
 

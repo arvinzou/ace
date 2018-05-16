@@ -152,57 +152,62 @@ app.controller(ngControllerName,function($scope){
      * 发布融资项目
      */
     $scope.relaseFinance = function(){
-
-        var flag = true;
-        var projectName = $("input[name='projectName']").val();
-        var projectMoney = $("input[name='projectMoney']").val();
-        var financeYear = $("input[name='financeYear']").val();
-        // var projectType = $("input[name='projectType']").val();
-        var rate = $("input[name='rate']").val();
-        var content = $("textarea[name='content']").val();
-        if(projectName == '' || projectName == undefined){
-            flag = false;
-            alert("请输入融资名称！");
-        }
-        if(projectMoney == '' || projectMoney == undefined){
-            flag = false;
-            alert("请输入融资金额！");
-        }
-        if(financeYear == '' || financeYear == undefined){
-            flag = false;
-            alert("请输入融资年限！");
-        }
-        // if(projectType == '' || projectType == undefined){
-        //     flag = false;
-        //     alert("请输入项目类型！");
-        // }
-        if(rate == '' || rate == undefined){
-            flag = false;
-            alert("请输入预期年收益！");
-        }
-        if(content == '' || content == undefined){
-            flag = false;
-            alert("请输入内容！");
-        }
-        if(flag){
-            $.ajax({
-                url: "/fop/www/insertFinanceProject",
-                type:"post",
-                async:false,
-                data:{financeTitle:projectName, financeAmount: projectMoney, financeYear:financeYear, financeContent: content, yearYield: rate},
-                success:function(result){
-                    if(result.status == 0) {
-                        $scope.searchByParam();
-                       alert("发布成功！")
-                    }else {
-                        alert(result.errorMessage);
+        var userProp = parent.parent.userProp;
+        if(userProp == null || userProp == ''){
+            location.href='/portal/dynamic/portal/security/login.jsp';
+        }else{
+            var flag = true;
+            var projectName = $("input[name='projectName']").val();
+            var projectMoney = $("input[name='projectMoney']").val();
+            var financeYear = $("input[name='financeYear']").val();
+            // var projectType = $("input[name='projectType']").val();
+            var rate = $("input[name='rate']").val();
+            var content = $("textarea[name='content']").val();
+            if(projectName == '' || projectName == undefined){
+                flag = false;
+                alert("请输入融资名称！");
+            }
+            if(projectMoney == '' || projectMoney == undefined){
+                flag = false;
+                alert("请输入融资金额！");
+            }
+            if(financeYear == '' || financeYear == undefined){
+                flag = false;
+                alert("请输入融资年限！");
+            }
+            // if(projectType == '' || projectType == undefined){
+            //     flag = false;
+            //     alert("请输入项目类型！");
+            // }
+            if(rate == '' || rate == undefined){
+                flag = false;
+                alert("请输入预期年收益！");
+            }
+            if(content == '' || content == undefined){
+                flag = false;
+                alert("请输入内容！");
+            }
+            if(flag){
+                $.ajax({
+                    url: "/fop/www/insertFinanceProject",
+                    type:"post",
+                    async:false,
+                    data:{financeTitle:projectName, financeAmount: projectMoney, financeYear:financeYear, financeContent: content, yearYield: rate},
+                    success:function(result){
+                        if(result.status == 0) {
+                            $scope.searchByParam();
+                            alert("发布成功！")
+                        }else {
+                            alert(result.errorMessage);
+                        }
+                    },
+                    error:function(){
+                        alert("内部服务异常");
                     }
-                },
-                error:function(){
-                    alert("内部服务异常");
-                }
-            });
+                });
+            }
         }
+
     }
 
     /**
