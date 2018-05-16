@@ -7,7 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.dao.TplPageDao;
 import com.huacainfo.ace.portal.model.AppealCaseFile;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +45,9 @@ public class AppealCaseServiceImpl implements AppealCaseService {
     private AppealCaseFileDao appealCaseFileDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
     /**
      * @throws
@@ -180,8 +188,22 @@ public class AppealCaseServiceImpl implements AppealCaseService {
      */
     @Override
     public SingleResult<AppealCaseVo> selectAppealCaseByPrimaryKey(String id) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        AppealCaseDao dao=session.getMapper(AppealCaseDao.class);
         SingleResult<AppealCaseVo> rst = new SingleResult<AppealCaseVo>();
-        rst.setValue(this.appealCaseDao.selectByPrimaryKey(id));
+        try {
+            rst.setValue(dao.selectByPrimaryKey(id));
+        }catch (Exception e){
+            if(session!=null){
+                session.close();
+            }
+        }finally {
+            if(session!=null){
+                session.close();
+            }
+        }
         return rst;
     }
 
