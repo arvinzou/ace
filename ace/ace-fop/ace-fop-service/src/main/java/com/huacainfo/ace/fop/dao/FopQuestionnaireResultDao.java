@@ -6,6 +6,7 @@ import com.huacainfo.ace.fop.vo.FopQuestionnaireResultVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FopQuestionnaireResultDao {
 
@@ -22,6 +23,8 @@ public interface FopQuestionnaireResultDao {
     int updateByPrimaryKeySelective(FopQuestionnaireResult record);
 
     FopQuestionnaireResultVo selectVoByPrimaryKey(String id);
+
+    List<Map<String, Integer>> statisticalData(String opinionType);
 
     List<FopQuestionnaireResultVo> findList(@Param("condition") FopQuestionnaireResultQVo condition,
                                             @Param("start") int start,

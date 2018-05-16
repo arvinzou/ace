@@ -11,6 +11,7 @@
         <result column="submitDate" jdbcType="TIMESTAMP" property="submitDate"/>
         <result column="response" jdbcType="VARCHAR" property="response"/>
         <result column="keyWord" jdbcType="VARCHAR" property="keyWord"/>
+        <result column="annexUrl" jdbcType="VARCHAR" property="annexUrl"/>
         <result column="accCount" jdbcType="BIGINT" property="accCount"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -23,7 +24,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, requestId, requestType, parentId, requestTitle, requestDesc, submitDate, response, 
-    keyWord, accCount, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
+    keyWord,annexUrl, accCount, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
     lastModifyUserName, lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -39,14 +40,14 @@
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopAppealHelp">
     insert into fop_appeal_help (id, requestId, requestType, 
       parentId, requestTitle, requestDesc, 
-      submitDate, response, keyWord, 
+      submitDate, response, keyWord, annexUrl,
       accCount, remark, status, 
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate
       )
     values (#{id,jdbcType=VARCHAR}, #{requestId,jdbcType=VARCHAR}, #{requestType,jdbcType=CHAR}, 
       #{parentId,jdbcType=VARCHAR}, #{requestTitle,jdbcType=VARCHAR}, #{requestDesc,jdbcType=VARCHAR}, 
-      #{submitDate,jdbcType=TIMESTAMP}, #{response,jdbcType=VARCHAR}, #{keyWord,jdbcType=VARCHAR}, 
+      #{submitDate,jdbcType=TIMESTAMP}, #{response,jdbcType=VARCHAR}, #{keyWord,jdbcType=VARCHAR}, #{annexUrl,jdbcType=VARCHAR},
       #{accCount,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
@@ -81,6 +82,9 @@
             </if>
             <if test="keyWord != null">
                 keyWord,
+            </if>
+            <if test="annexUrl != null">
+                annexUrl,
             </if>
             <if test="accCount != null">
                 accCount,
@@ -138,6 +142,9 @@
             <if test="keyWord != null">
                 #{keyWord,jdbcType=VARCHAR},
             </if>
+            <if test="annexUrl != null">
+                #{annexUrl,jdbcType=VARCHAR},
+            </if>
             <if test="accCount != null">
                 #{accCount,jdbcType=BIGINT},
             </if>
@@ -194,6 +201,9 @@
             <if test="keyWord != null">
                 keyWord = #{keyWord,jdbcType=VARCHAR},
             </if>
+            <if test="annexUrl != null">
+                annexUrl = #{annexUrl,jdbcType=VARCHAR},
+            </if>
             <if test="accCount != null">
                 accCount = #{accCount,jdbcType=BIGINT},
             </if>
@@ -234,6 +244,7 @@
       submitDate = #{submitDate,jdbcType=TIMESTAMP},
       response = #{response,jdbcType=VARCHAR},
       keyWord = #{keyWord,jdbcType=VARCHAR},
+      annexUrl = #{annexUrl,jdbcType=VARCHAR},
       accCount = #{accCount,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
@@ -251,7 +262,7 @@
     </resultMap>
     <sql id="Vo_Column_List">
         id, requestId, requestType, parentId, requestTitle, requestDesc, submitDate, response,
-        keyWord, accCount, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        keyWord, annexUrl, accCount, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
         lastModifyUserName, lastModifyDate
     </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -270,6 +281,14 @@
             and requestTitle like
             concat('%',#{condition.requestTitle,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.replied!=null and condition.replied!=&quot;&quot;">
+            <if test="condition.replied!='true'">
+                and t.reply is not null
+            </if>
+            <if test="condition.replied!='false'">
+                and t.reply is null
+            </if>
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">
@@ -281,7 +300,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.createDate
+                ORDER BY t.submitDate DESC
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

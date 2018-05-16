@@ -104,11 +104,8 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
             return new MessageResponse(1, "发起人ID不能为空！");
         }
 
-        if (CommonUtils.isBlank(o.getRequestType())) {
-            return new MessageResponse(1, "发起人类型不能为空！");
-        }
         if (CommonUtils.isBlank(o.getParentId())) {
-            return new MessageResponse(1, "父节点ID不能为空！");
+            o.setParentId("0");
         }
         if (CommonUtils.isBlank(o.getRequestTitle())) {
             return new MessageResponse(1, "诉求标题不能为空！");
@@ -120,14 +117,6 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
         if (CommonUtils.isBlank(o.getSubmitDate())) {
             return new MessageResponse(1, "提交时间不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
-
         int temp = this.fopAppealHelpDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "诉求服务名称重复！");

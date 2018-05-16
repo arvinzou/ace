@@ -45,6 +45,8 @@ public interface FopProjectService {
      */
     public abstract MessageResponse insertFopProject(FopProject obj, UserProp userProp) throws Exception;
 
+    public abstract MessageResponse insertProject(FopProject obj, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateFopProject

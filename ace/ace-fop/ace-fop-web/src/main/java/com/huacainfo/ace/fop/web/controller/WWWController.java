@@ -6,19 +6,13 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.fop.dao.FopLawPaperDao;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
-import com.huacainfo.ace.portal.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("/www")
@@ -50,6 +44,12 @@ public class WWWController extends FopBaseController {
 
     @Autowired
     private FopProjectService fopProjectService;
+
+    @Autowired
+    private FopAssociationService fopAssociationService;
+
+    @Autowired
+    private FopQuestionnaireResultService fopQuestionnaireResultService;
 
 
 //    /**
@@ -405,6 +405,7 @@ public class WWWController extends FopBaseController {
      * 发布诉求
      * requestTitle 标题
      * replied  (true:回复，false：未回复）
+     * sord  (默认:降序，asc：升序)
      * page：页码
      * limit 每页目数
      */
@@ -420,10 +421,7 @@ public class WWWController extends FopBaseController {
 
     /**
      * 获取诉求服务详情。
-     *
-     * @param id
-     * @return
-     * @throws Exception
+     * id 诉求ID
      */
     @RequestMapping(value = "/selectAppealHelpByPrimaryKey")
     @ResponseBody
@@ -453,6 +451,9 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/findProjectList")
     @ResponseBody
     public ResultResponse findProjectList(FopProjectQVo condition, PageParamNoChangeSord page) throws Exception {
+        if ("asc".equals(page.getSord())) {
+            page.setOrderBy("releaseDate");
+        }
         ResultResponse rst = this.fopProjectService.findProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
     }
@@ -471,7 +472,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/insertProject")
     @ResponseBody
     public MessageResponse insertProject(FopProject obj) throws Exception {
-        return this.fopProjectService.insertFopProject(obj, this.getCurUserProp());
+        return this.fopProjectService.insertProject(obj, this.getCurUserProp());
     }
 
 
@@ -503,12 +504,58 @@ public class WWWController extends FopBaseController {
     }
 
 
-    @RequestMapping(value = "/sign")
+    /**
+     * name：企业，团体名称
+     * phoneNumber：电话
+     * isCompany :true, false。
+     * @return
+     * @throws Exception
+     */
+
+//    @RequestMapping(value = "/sign")
+//    @ResponseBody
+//    public MessageResponse signUp(String name,String phoneNumber,boolean isCompany) throws Exception {
+//        if(isCompany){
+//            return this.fopCompanyService.insertCompany(name,phoneNumber);
+//        }
+//        return this.fopAssociationService.insertAssociation(name,phoneNumber);
+//    }
+
+
+    /**
+     * 满意度列表
+     * opinionType：1、诉求满意度 2、合作交流
+     */
+    @RequestMapping(value = "/findQuestionnaireResultList")
     @ResponseBody
-    public MessageResponse signUp(FopProject obj) throws Exception {
-        return null;
+    public ResultResponse findFopQuestionnaireResultList(FopQuestionnaireResultQVo condition, PageParamNoChangeSord page) throws Exception {
+        if ("asc".equals(page.getSord())) {
+            page.setOrderBy("releaseDate");
+        }
+        ResultResponse rst = this.fopQuestionnaireResultService
+                .findQuestionnaireResultList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
     }
 
+    /**
+     * opinionType 意见类型
+     * result 调查结果 1、很满意，2、一半，3、不满意
+     * content 内容
+     */
 
+    @RequestMapping(value = "/insertQuestionnaireResult")
+    @ResponseBody
+    public MessageResponse insertQuestionnaireResult(FopQuestionnaireResultQVo condition) throws Exception {
+        return this.fopQuestionnaireResultService.insertQuestionnaireResult(condition, this.getCurUserProp());
+    }
+
+    /**
+     * 统计数据
+     */
+    @RequestMapping(value = "/statisticalData")
+    @ResponseBody
+    public ResultResponse statisticalData() throws Exception {
+        return this.fopQuestionnaireResultService.statisticalData();
+    }
 
 }

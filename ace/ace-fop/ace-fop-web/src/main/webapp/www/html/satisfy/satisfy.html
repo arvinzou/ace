@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -9,6 +9,8 @@
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="css/satify.css" />
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
 		<script type="text/javascript" src="js/satisfy.js"></script>
@@ -18,114 +20,33 @@
 		<div class="satify_main">
 			<div class="satify_body">
 				<div class="suggest">
-					<div class="left_list">
-						<div class="left_list_title">
+					<div class="left_list" style="height: 700px;">
+						<div class="left_list_title" style="position: relative;">
 							<span class="title_lager">意见列表</span><span class="title_small">&nbsp;/Comments List</span>
+							<div class="search_condition" style="position: absolute;top:5px;right: 0;">
+								<div class="search_right">
+									<select id="list_type" ng-model="defaultType" ng-options="type.name as type.name for type in selectType" ng-change="change();">
+										<!--<option value="">全部</option>-->
+										<!--<option value="1">诉求满意度</option>-->
+										<!--<option value="2">合作交流</option>-->
+									</select>
+								</div>
+							</div>
 						</div>
 						<div class="searchTable">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout: fixed">
 								<tbody>
-									<tr class="tr_bottom" onclick="click_tr();">
+									<tr class="tr_bottom" ng-repeat="item in items">
 										<td align="center" width="5%">
 											<div class="dot"></div>
 										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>五一假期接待游客超1000万人次 旅游总收入超80亿元</td>
-									</tr>
-									<tr class="tr_bottom">
-										<td align="center" width="5%">
-											<div class="dot"></div>
-										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>3月物价涨幅或现明显回调</td>
-									</tr>
-									<tr class="tr_bottom">
-										<td align="center" width="5%">
-											<div class="dot"></div>
-										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>透过年报看高质量发展</td>
-									</tr>
-									<tr class="tr_bottom" onclick="click_tr();">
-										<td align="center" width="5%">
-											<div class="dot"></div>
-										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>五一假期接待游客超1000万人次 旅游总收入超80亿元</td>
-									</tr>
-									<tr class="tr_bottom">
-										<td align="center" width="5%">
-											<div class="dot"></div>
-										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>3月物价涨幅或现明显回调</td>
-									</tr>
-									<tr class="tr_bottom">
-										<td align="center" width="5%">
-											<div class="dot"></div>
-										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>透过年报看高质量发展</td>
-									</tr>
-									<tr class="tr_bottom">
-										<td align="center" width="5%">
-											<div class="dot"></div>
-										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>透过年报看高质量发展</td>
-									</tr>
-									<tr class="tr_bottom" onclick="click_tr();">
-										<td align="center" width="5%">
-											<div class="dot"></div>
-										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>五一假期接待游客超1000万人次 旅游总收入超80亿元</td>
-									</tr>
-									<tr class="tr_bottom">
-										<td align="center" width="5%">
-											<div class="dot"></div>
-										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>3月物价涨幅或现明显回调</td>
-									</tr>
-									<tr class="tr_bottom">
-										<td align="center" width="5%">
-											<div class="dot"></div>
-										</td>
-										<td align="center" width="10%">04-22</td>
-										<td>透过年报看高质量发展</td>
+										<td align="center" width="25%" ng-bind="item.releaseDate"></td>
+										<td width="75%" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden; " ng-bind="item.content"></td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tbody>
-								<tr>
-									<td width="50">
-										<select class="inputstyle inputstyle02" name="">
-											<option>10</option>
-											<option>20</option>
-											<option>30</option>
-										</select>
-									</td>
-									<td>10条/页，共40条信息</td>
-									<td>
-										<div class="page">
-
-											<div class="page_box">
-												<a href="#">上一页</a>
-												<a class="active" href="#">01</a>
-												<a href="#">02</a>
-												<a href="#">03</a>
-												<a href="#">04</a>
-												<a href="#">下一页</a>
-											</div>
-
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+						<div id="paganation"></div>
 					</div>
 					<div class="right_research">
 						<div class="appeal_research research">
@@ -156,22 +77,26 @@
             </div>
             <div class="modal-body">
             	<div style="margin-bottom: 10px;">
-	            	<label>标题</label><br />
-	            	<input type="text" placeholder="请用一句话概括您需要提供的帮助" style="width: 100%;height: 30px;"/>
+	            	<label>意见类型</label><br />
+	            	<select id="commentType">
+						<option value="">请选择</option>
+						<option value="1">诉求满意度</option>
+						<option value="2">合作交流</option>
+					</select>
             	</div>
             	<div style="margin-bottom: 10px;">
             		<label>是否对诉求你服务满意？</label><br />
-    				<input type="radio" name="radio" value="1" checked="">满意
+    				<input type="radio" name="radio" value="1" checked="checked">满意
 					<input type="radio" name="radio" value="2">一般满意
 					<input type="radio" name="radio" value="3">不满意
             	</div>
             	<div style="margin-bottom: 10px;">
             		<label>您对我们的服务有什么意见</label><br />
-            		<textarea placeholder="请发表您的意见~" style="width: 100%;height: 100px;"></textarea>
+            		<textarea name="content" placeholder="请发表您的意见~" style="width: 100%;height: 100px;"></textarea>
             	</div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-primary" ng-click="insertSatify();" data-dismiss="modal">提交</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

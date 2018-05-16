@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+		<title>合作交流详情</title>
+		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css" />
+		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<script type="text/javascript" src="js/cooperation_info.js"></script>
+		<style type="text/css">
+			body {
+				background-color: #F4F4F4;
+			}
+			
+			.appeal_index {
+				width: 60%;
+				background-color: #FBFCFD;
+				margin: auto;
+			}
+			
+			.current_site {
+				width: 60%;
+				background-color: #F4F4F4;
+				margin: auto;
+				margin-top: 20px;
+				margin-bottom: 20px;
+			}
+			
+			.appeal_title {
+				text-align: center;
+				padding-top: 20px;
+				margin-bottom: 20px;
+			}
+			
+			.appeal_title h3 {
+				font-size: 24px;
+				font-weight: bolder;
+				color: #1A56A8;
+			}
+			
+			.appeal_title span {
+				font-size: 14px;
+				color: #9EA7B4;
+			}
+			
+			.appeal_info p {
+				padding-left: 20px;
+				padding-right: 20px;
+				text-indent: 2em;
+				color: #31364B;
+				line-height: 30px;
+			}
+			.finance_table{
+				width: 60%;
+				margin: auto;
+				color: #657180;
+			}
+			.finance_table tr{
+				height: 40px;
+				line-height: 40px;
+			}
+			.highLight{
+				font-size: 18px;
+				font-weight: bolder;
+				color: #FF9F00;
+			}
+			.title_lager {
+				color: #565B70;
+				font-weight: bolder;
+				font-size: 18px;
+				width: 10%;
+				display: inline-block;
+				border-bottom: 3px solid #FF9F00;
+				height: 62px;
+				line-height: 62px;
+			}
+			
+			.title_small {
+				color: #FFFFFF;
+				display: inline-block;
+				width: 80%;
+				border-bottom: 1px solid #E1E5ED;
+				height: 62px;
+				line-height: 62px;
+			}
+			.indent{
+				text-indent: 2em;
+			}
+			.content_info{
+				color: #657180;
+				margin-top: 30px;
+			}
+			.finance_content{
+				width: 90%;
+				margin: auto;
+			}
+			.message{
+				width: 90%;
+				margin: auto;
+				border-top: 1px solid #E1E5ED;
+				margin-top: 30px;
+			}
+			.msg_title{
+				width: 100%;
+				height: 62px;
+				line-height: 62px;
+			}
+			.leave_1{
+				width: 50%;
+				float: left;
+			}
+			.leave_2{
+				width: 50%;
+				float: left;
+				text-align: right;
+			}
+			.msg_info{
+				width: 100%;
+				height: 200px;
+			}
+			.msg_info textarea{
+				width: 100%;
+				height: 100%;
+			}
+			.msg_footer{
+				width: 100%;
+				height: 62px;
+				line-height: 62px;
+				background-color: #EDF4F9;
+			}
+			.msg_footer button{
+				width: 80px;
+				height: 32px;
+				border: none;
+				background-color: #1A56A8;
+				color: #FFFFFF;
+				border-radius: 5px;
+			}
+			.msg_list{
+				width: 90%;
+				margin: auto;
+				color: #657180;
+			}
+			.msg_list_title{
+				color: #1A56A8;
+				font-size: 16px;
+				font-weight: bolder;
+			}
+			.msg_list table{
+				margin-top: 40px;
+				border-top: 1px solid #E1E5ED;
+				padding-top: 30px;
+			}
+			.leave_msg{
+				font-size: 18px;
+				font-weight: bolder;
+				color: #1A56A8;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="headbox">
+			<div class="head juz">
+				<div class="head_top">
+					<span class="head_welcome">欢迎您：</span>
+					<a class="head_user_name" href="user.html">广东省电子税务局测试用户</a>
+					<span class="head_welcome">所属企业：方欣科技有限公司</span>
+					<a class="head_login" href="#">切换身份</a>
+					<a class="head_login" href="../login/login.html">退出</a>
+				</div>
+				<div class="head_menu">
+
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="300"><img src="../../images/logo.png" /></td>
+							<td>
+								<ul>
+									<li>
+										<a href="../../html/index.html">首页</a>
+									</li>
+									<li>
+										<a href="#">企业服务</a>
+									</li>
+									<li class="active">
+										<a href="../member/member.html">会员服务</a>
+									</li>
+									<li>
+										<a href="#">服务互动</a>
+									</li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="current_site">当前位置：合作交流  >> {{projectInfo.projectName}}</div>
+		<div class="appeal_index">
+			<div class="appeal_doc">
+				<div class="appeal_title">
+					<h3>{{projectInfo.projectName}}</h3>
+					<span>发布时间：{{projectInfo.releaseDate}}</span>
+				</div>
+			</div>
+			<div class="appeal_info">
+				<table class="finance_table" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td width="15%" align="right">合作方式：</td>
+						<td width="35%" class="" ng-bind="projectInfo.coopType"></td>
+						<td width="15%" align="right">企业名称：</td>
+						<td width="35%">德山化工</td>
+					</tr>
+					<tr>
+						<td width="15%" align="right">所属区域：</td>
+						<td width="35%" ng-bind="projectInfo.areaCode"></td>
+						<td width="15%" align="right">企业性质：</td>
+						<td width="35%">合资</td>
+					</tr>
+					<tr>
+						<td width="15%" align="right">项目类型：</td>
+						<td width="35%" class="" ng-bind="projectInfo.projectType"></td>
+						<td width="15%" align="right">企业通讯地址：</td>
+						<td width="35%">常德市德山经开区桃林路28号</td>
+					</tr>
+				</table>
+			</div>
+			<div class="finance_content">
+				<div>
+				 <span class="title_lager">内容</span><span class="title_small">/&nbsp;Legal&nbsp;Document</span>
+				</div>
+				<div class="content_info" ng-bind="projectInfo.coopDesc">
+
+				</div>
+			</div>	
+			<!--发表留言-->
+			<div class="message">
+				<div class="msg_title">
+					<div class="leave_1 leave_msg">发表留言</div>
+					<div class="leave_2"><span>剩余字数</span><span>300</span><span>个</span></div>
+				</div>
+				<div class="msg_info">
+					<textarea>
+						
+					</textarea>
+				</div>
+				<div class="msg_footer">
+					<div class="leave_1">
+						<span>注册企业才可发表留言</span>
+						<a href="#">登录</a>/<a href="#">注册</a>
+					</div>
+					<div class="leave_2">
+						<button>发表</button>
+					</div>
+				</div>
+			</div>
+			<div class="msg_list">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td align="left" class="msg_list_title" ></td>
+						<td align="right"></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- 分页位置 -->
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
+				<tr>
+					<td class="custom_layper_page_info"></td>
+					<td>
+						<div style="padding: 10px 0; float: right;">
+							<div class="custom_page_box" id="layper_page_box" style="margin-right: 0px"></div>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<!-- 分页位置 -->
+		</div>
+	</body>
+
+</html>

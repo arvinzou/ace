@@ -13,14 +13,22 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.dao.FopAssociationDao;
+import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopProjectDao;
+import com.huacainfo.ace.fop.model.FopAssociation;
+import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopProject;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopProjectService;
+import com.huacainfo.ace.fop.service.FopQuestionService;
 import com.huacainfo.ace.fop.vo.FopProjectQVo;
 import com.huacainfo.ace.fop.vo.FopProjectVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +53,15 @@ public class FopProjectServiceImpl implements FopProjectService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private FopFlowRecordService fopFlowRecordService;
+    @Autowired
+    private UsersService usersService;
+    @Autowired
+    private FopCompanyDao fopCompanyDao;
+
+    @Autowired
+    private FopAssociationDao fopAssociationDao;
+    @Autowired
+    private FopQuestionService fopQuestionService;
 
     /**
      * @throws
@@ -124,6 +141,51 @@ public class FopProjectServiceImpl implements FopProjectService {
         return new MessageResponse(0, "添加合作项目完成！");
     }
 
+    @Override
+    public MessageResponse insertProject(FopProject o, UserProp userProp)
+            throws Exception {
+
+        if (CommonUtils.isBlank(o.getProjectName())) {
+            return new MessageResponse(1, "项目名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getCoopType())) {
+            return new MessageResponse(1, "合作方式不能为空！");
+        }
+        int temp = this.fopProjectDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "合作项目名称重复！");
+        }
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new MessageResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new MessageResponse(1, "账户没有绑定企业！");
+        }
+        FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+        FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+        if (null == fc) {
+            if (null == fa) {
+                return new MessageResponse(1, "账户没有绑定企业！");
+            }
+            o.setRelationId(fa.getId());
+            o.setRelationType(FopConstant.ASSOCIATION);
+        } else {
+            o.setRelationId(fc.getId());
+            o.setRelationType(FopConstant.COMPANY);
+        }
+        o.setReleaseDate(DateUtil.getNowDate());
+        o.setId(GUIDUtil.getGUID());
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        o.setCreateUserName(userProp.getName());
+        o.setCreateUserId(userProp.getUserId());
+        this.fopProjectDao.insertSelective(o);
+        this.dataBaseLogService.log("添加合作项目", "合作项目", "", o.getId(), o.getId(), userProp);
+        return new MessageResponse(0, "添加合作项目完成！");
+    }
+
     /**
      * @throws
      * @Title:updateFopProject
@@ -179,7 +241,9 @@ public class FopProjectServiceImpl implements FopProjectService {
 
     @Override
     public ResultResponse selectProjectByPrimaryKey(String id) throws Exception {
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "项目详情", this.fopProjectDao.selectVoByPrimaryKey(id));
+        FopProjectVo fp = this.fopProjectDao.selectVoByPrimaryKey(id);
+        fp.setComments(this.fopQuestionService.findCommentList(id));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "项目详情", fp);
         return rst;
     }
 

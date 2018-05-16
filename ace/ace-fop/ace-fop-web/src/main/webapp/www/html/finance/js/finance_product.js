@@ -246,6 +246,67 @@ app.controller(ngControllerName,function($scope){
         console.log(primaryId);
         window.open('product_info.html?id='+primaryId);
     }
+
+    /**
+     * 发布产品
+     */
+    $scope.releaseProduct = function(){
+        var flag = true;
+        var productName = $("input[name='productName']").val();
+        var productMoney = $("input[name='productMoney']").val();
+        var usage = $("input[name='usage']").val();
+        var method = $("#method option:checked").val();
+        var year = $("input[name = 'year']").val();
+        var rate = $("input[name = 'rate']").val();
+        var content = $("textarea[name ='content']").val();
+        if(productName == '' || productName == undefined){
+            flag = false;
+            alert("请输入产品名称！");
+        }
+        if(productMoney == '' || productMoney == undefined){
+            flag = false;
+            alert("请输入产品额度!");
+        }
+        if(usage == '' || usage == undefined){
+            flag = false;
+            alert("请输入贷款用途!");
+        }
+        if(method == '' || method == undefined){
+            flag = false;
+            alert("请选择担保方式！");
+        }
+        if(year == '' || year == undefined){
+            flag = false;
+            alert("请输入贷款年限！");
+        }
+        if(rate == '' || rate == undefined){
+            flag = false;
+            alert("请输入贷款利率!");
+        }
+        if(content == '' || content == undefined){
+            flag = false;
+            alert("请描述融资项目!");
+        }
+        if(flag){
+            $.ajax({
+                url: "/fop/www/insertLoanProduct",
+                type:"post",
+                async:false,
+                data:{financeTitle:projectName, financeAmount: projectMoney, financeYear:financeYear, financeContent: content, yearYield: rate},
+                success:function(result){
+                    if(result.status == 0) {
+                        $scope.searchByParam();
+                        alert("发布成功！")
+                    }else {
+                        alert(result.errorMessage);
+                    }
+                },
+                error:function(){
+                    alert("内部服务异常");
+                }
+            });
+        }
+    }
 });
 
 	

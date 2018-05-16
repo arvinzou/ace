@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
-
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
 		<title>诉求详情</title>
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css" />
-		<SCRIPT language=JavaScript src="../../js/jquery.js"></SCRIPT>
+		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<script type="text/javascript" src="js/apeal_detail.js"></script>
 		<style type="text/css">
 			body {
 				background-color: #F4F4F4;
@@ -90,12 +92,16 @@
 				height: 62px;
 				line-height: 62px;
 			}
-			.file_download span{
-				width: 40%;
+			.file_name{
+				width: 80%;
 				height: 62px;
 				display: inline-block;
 			}
-
+			.download{
+				width: 15%;
+				height: 62px;
+				display: inline-block;
+			}
 		</style>
 	</head>
 
@@ -135,16 +141,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="current_site">当前位置：政企服务 >> 泓鑫·中苑等9个项目选用沸石硅质刚性防水技术施工，建设局用行政手段干预市场经济…</div>
+		<div class="current_site">当前位置：诉求服务 >> {{apealInfo.requestTitle}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
 				<div class="appeal_title">
-					<h3>泓鑫·中苑等9个项目选用沸石硅质刚性防水技术施工建设局用行政手段干预市场经济</h3>
-					<span>发布时间：2018-05-03</span>
+					<h3>{{apealInfo.requestTitle}}</h3>
+					<span>发布时间：{{apealInfo.submitDate}}</span>
 				</div>
 			</div>
 			<div class="appeal_info">
-				<p>市住建局常建通【2017】96号文件对泓鑫·中苑等9个项目（约100万平方米）选用沸石硅质刚性防水技术施工，建设局用行政手段干预市场经济，直接损害到防水行业整体利益，与国家有关法律法规相违背，与市场经济规律相违背，与公平、公正原则相违背，与公平竞争机制相违背，与依法行政、秉公行政相违背，并且文件下发前未征求协会意见，协会不知情，协会要求解除对泓鑫·中苑等9个项目选用沸石硅质刚性防水技术施工的通知。</p>
+				<p>{{apealInfo.requestDesc}}</p>
 			</div>
 			<div class="progress">
 				<div class="progress_title">
@@ -187,7 +193,7 @@
 			<div class="enclosure">
 				<div class="handle_title">附件</div>
 				<div class="file_download">
-					<span class="file_name"><img src="../../images/file.png"/></span>
+					<span class="file_name" ng-bind="apealInfo.annexUrl"></span>
 					<span class="download"><a href="#">下载</a></span>
 				</div>
 			</div>
