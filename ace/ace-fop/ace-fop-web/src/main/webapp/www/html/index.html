@@ -8,12 +8,19 @@
 		<link href="../css/comon0.css" rel="stylesheet" type="text/css" />
 		<link href="../css/index.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-		<SCRIPT language=JavaScript src="../js/jquery-3.2.1.min.js"></SCRIPT>
+        <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-	</head>
+        <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+
+    </head>
 
 	<script>
 		$(document).ready(function(e) {
+		    var userName = null;
+		    if(userProp != null && userProp != undefined){
+                userName = userProp.name;
+                $("#username").text(userName);
+            }
 			$(".leftQY .nr li").click(function() {
 				$(this).addClass("hover").siblings().removeClass("hover")
 
@@ -44,8 +51,9 @@
 	<body>
 		<div class="headbox">
 			<div class="head juz">
-				<div class="head_top"><span class="head_welcome">欢迎访问湖南省常德市工商联合会！</span>
-					<a class="head_login" href="login/login.html">登录</a>
+				<div class="head_top"><span class="head_welcome">[<span id="username"></span>]欢迎访问湖南省常德市工商联合会！</span>
+					<a class="head_login" href="/portal/dynamic/portal/security/login.jsp">登录</a>
+					<a class="head_login" href="/portal/dynamic/portal/security/loginOut.jsp">退出</a>
 					<a class="head_login" href="login/regist.html">注册</a>
 				</div>
 				<div class="head_menu head_menu01">
@@ -83,7 +91,7 @@
 												<a href="publicity/publicity.html" target="iframe">企业公示</a>
 											</dd>
 											<dd>
-												<a href="#" target="iframe">扶持政策</a>
+												<a href="support/support.html" target="iframe">扶持政策</a>
 											</dd>
 											<dd>
 												<a href="product/product.html" target="iframe">企业产品</a>

@@ -1,5 +1,7 @@
 package com.huacainfo.ace.portal.web.controller;
 
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.model.AppealCaseFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +55,7 @@ public class AppealCaseController extends PortalBaseController {
 	@ResponseBody
 	public PageResult<AppealCaseVo> findAppealCaseList(AppealCaseQVo condition,
 			PageParamNoChangeSord page) throws Exception {
+		condition.setCorpId(this.getCurUserProp().getCorpId());
 		PageResult<AppealCaseVo> rst = this.appealCaseService
 				.findAppealCaseList(condition, page.getStart(), page.getLimit(),
 						page.getOrderBy());
@@ -98,13 +101,20 @@ public class AppealCaseController extends PortalBaseController {
 	 */
 	@RequestMapping(value = "/updateAppealCase.do")
 	@ResponseBody
-	public MessageResponse updateAppealCase(String jsons) throws Exception {
+	public MessageResponse updateAppealCase(String jsons,String client) throws Exception {
 		JSONObject o=JSON.parseObject(jsons);
 		AppealCase obj = JSON.parseObject(o.get("o").toString(), AppealCase.class);
 		obj.setAnswerOpenId(this.getCurUserProp().getOpenId());
 		List<AppealCaseFile> list=JSON.parseArray(o.get("list").toString(),AppealCaseFile.class);
-		return this.appealCaseService
-				.updateAppealCase(obj,list);
+
+		if(CommonUtils.isNotEmpty(client)){
+			SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+			if(srt.getStatus()==1){
+				return srt;
+			}
+			return this.appealCaseService.updateAppealCase(obj,list,srt.getValue());
+		}
+		return this.appealCaseService.updateAppealCase(obj,list,this.getCurUserProp());
 	}
     /**
 	 *
@@ -158,5 +168,55 @@ public class AppealCaseController extends PortalBaseController {
 	@ResponseBody
 	public Map<String,Object> getList() throws Exception{
 		return this.appealCaseService.getList(this.getParams());
+	}
+	/**
+	 *
+	 * @Title:updateAccept
+	 * @Description:  TODO(接受处理诉求)
+	 * @param:        @param id
+	 * @param:        @param answerDept
+	 * @param:        @param  userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-16
+	 */
+	@RequestMapping(value = "/updateAccept.do")
+	@ResponseBody
+	public  MessageResponse updateAccept(String id,String answerDept,String client) throws Exception{
+		if(CommonUtils.isNotEmpty(client)){
+			SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+			if(srt.getStatus()==1){
+				return srt;
+			}
+			return this.appealCaseService.updateAccept(id,answerDept,srt.getValue());
+		}
+		return this.appealCaseService.updateAccept(id,answerDept,this.getCurUserProp());
+	}
+	/**
+	 *
+	 * @Title:updateDetailsOfProgress
+	 * @Description:  TODO(诉求进展情况更新)
+	 * @param:        @param id
+	 * @param:        @param detailsOfProgress
+	 * @param:        @param  userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-16
+	 */
+	@RequestMapping(value = "/updateDetailsOfProgress.do")
+	@ResponseBody
+	public  MessageResponse updateDetailsOfProgress(String id,String detailsOfProgress,String client) throws Exception{
+		if(CommonUtils.isNotEmpty(client)){
+			SingleResult<UserProp> srt=this.getCurUserPropByOpenId();
+			if(srt.getStatus()==1){
+				return srt;
+			}
+			return this.appealCaseService.updateDetailsOfProgress(id,detailsOfProgress,srt.getValue());
+		}
+		return this.appealCaseService.updateDetailsOfProgress(id,detailsOfProgress,this.getCurUserProp());
 	}
 }
