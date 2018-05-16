@@ -172,7 +172,6 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         if (ResultCode.FAIL == rs1.getStatus()) {
             throw new CustomException(rs1.getErrorMessage());
         }
-
         //portal.users
         Users initUser = new Users();
         initUser.setDepartmentId(department.getDepartmentId());
@@ -191,9 +190,7 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         if (ResultCode.FAIL == rs3.getStatus()) {
             throw new CustomException(rs3.getInfo());
         }
-
         //TODO 分配成功通知
-
         return new ResultResponse(ResultCode.SUCCESS, "初始化系统用户成功", department);
     }
 

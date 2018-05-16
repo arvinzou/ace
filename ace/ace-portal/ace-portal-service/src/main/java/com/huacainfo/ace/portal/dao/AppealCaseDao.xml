@@ -51,25 +51,30 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.portal.model.AppealCase">
-    insert into appeal_case (id, appealId, category, 
-      title, mediType, mediUrl, 
-      submitTime, submitOpenId, latitude, 
-      longitude, answerTime, answerOpenId, 
-      status, createDate, content, 
-      answerContent)
-    values (#{id,jdbcType=VARCHAR}, #{appealId,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{mediType,jdbcType=VARCHAR}, #{mediUrl,jdbcType=VARCHAR}, 
-      #{submitTime,jdbcType=TIMESTAMP}, #{submitOpenId,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, 
-      #{longitude,jdbcType=DECIMAL}, #{answerTime,jdbcType=TIMESTAMP}, #{answerOpenId,jdbcType=VARCHAR}, 
-      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}, 
-      #{answerContent,jdbcType=LONGVARCHAR})
+    insert into appeal_case (id, appealId, category,
+    title, mediType, mediUrl,
+    companyName, submitName, tel,
+    submitTime, submitOpenId, latitude,
+    longitude, answerDept, answerTime,
+    answerOpenId, remak, status,
+    createDate, content, answerContent,
+    detailsOfProgress)
+    values (#{id,jdbcType=VARCHAR}, #{appealId,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+    #{title,jdbcType=VARCHAR}, #{mediType,jdbcType=VARCHAR}, #{mediUrl,jdbcType=VARCHAR},
+    #{companyName,jdbcType=VARCHAR}, #{submitName,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},
+    #{submitTime,jdbcType=TIMESTAMP}, #{submitOpenId,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL},
+    #{longitude,jdbcType=DECIMAL}, #{answerDept,jdbcType=VARCHAR}, #{answerTime,jdbcType=TIMESTAMP},
+    #{answerOpenId,jdbcType=VARCHAR}, #{remak,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+    #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}, #{answerContent,jdbcType=LONGVARCHAR},
+    #{detailsOfProgress,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.AppealCase">
     update appeal_case
     set
-    status=#{status,jdbcType=VARCHAR},
+    status='3',
     answerTime = #{answerTime,jdbcType=TIMESTAMP},
     answerOpenId = #{answerOpenId,jdbcType=VARCHAR},
+    remak=#{remak,jdbcType=VARCHAR},
     answerContent = #{answerContent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -121,4 +126,15 @@
     </if>
     ORDER BY createDate desc
   </select>
+  <update id="updateAccept">
+    update appeal_case
+    set
+    status='2',answerDept=#{answerDept,jdbcType=VARCHAR}  where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateDetailsOfProgress">
+    update appeal_case
+    set
+    status='2' ,detailsOfProgress= #{detailsOfProgress,jdbcType=LONGVARCHAR} where id = #{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

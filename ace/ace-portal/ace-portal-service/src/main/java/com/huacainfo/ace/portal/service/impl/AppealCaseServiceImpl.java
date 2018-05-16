@@ -92,6 +92,15 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "类型不能为空！");
         }
+        if (CommonUtils.isBlank(o.getCompanyName())) {
+            return new MessageResponse(1, "企业/单位不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getSubmitName())) {
+            return new MessageResponse(1, "姓名不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getTel())) {
+            return new MessageResponse(1, "联系电话不能为空！");
+        }
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }
@@ -100,9 +109,6 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         }
         if (CommonUtils.isBlank(o.getMediType())) {
             return new MessageResponse(1, "媒体类型不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getSubmitTime())) {
-            return new MessageResponse(1, "提交时间不能为空！");
         }
         if (CommonUtils.isBlank(o.getSubmitOpenId())) {
             return new MessageResponse(1, "提交人openId不能为空！");
@@ -113,6 +119,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         }
         o.setCreateDate(new Date());
         o.setStatus("1");
+        o.setSubmitTime(new Date());
         this.appealCaseDao.insert(o);
         for(AppealCaseFile e:list){
             e.setId(GUIDUtil.getGUID());
@@ -126,7 +133,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
     /**
      * @throws
      * @Title:updateAppealCase
-     * @Description: TODO(更新诉求)
+     * @Description: TODO(诉求答复)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -135,7 +142,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
      * @version: 2018-05-14
      */
     @Override
-    public MessageResponse updateAppealCase(AppealCase o, List<AppealCaseFile> list)
+    public MessageResponse updateAppealCase(AppealCase o, List<AppealCaseFile> list,UserProp userProp)
             throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
@@ -156,7 +163,9 @@ public class AppealCaseServiceImpl implements AppealCaseService {
             e.setCreateDate(new Date());
             this.appealCaseFileDao.insert(e);
         }
-        return new MessageResponse(0, "变更诉求完成！");
+        this.dataBaseLogService.log("诉求答复", "诉求", o.getId(),
+                o.getId(), "诉求", userProp);
+        return new MessageResponse(0, "完成！");
     }
 
     /**
@@ -212,5 +221,48 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         rst.put("status",0);
         rst.put("data",this.appealCaseDao.getList(params));
         return rst;
+    }
+
+    /**
+     *
+     * @Title:updateAccept
+     * @Description:  TODO(接受处理诉求)
+     * @param:        @param id
+     * @param:        @param answerDept
+     * @param:        @param  userProp
+     * @param:        @throws Exception
+     * @return:       MessageResponse
+     * @throws
+     * @author: 陈晓克
+     * @version: 2018-05-16
+     */
+    @Override
+    public  MessageResponse updateAccept(String id,String answerDept,UserProp userProp) throws Exception{
+        this.appealCaseDao.updateAccept(id,answerDept);
+        this.dataBaseLogService.log("接受处理诉求", "诉求", String.valueOf(id),
+                String.valueOf(id), "诉求", userProp);
+        return new MessageResponse(0, "完成！");
+    }
+
+
+    /**
+     *
+     * @Title:updateDetailsOfProgress
+     * @Description:  TODO(诉求进展情况更新)
+     * @param:        @param id
+     * @param:        @param detailsOfProgress
+     * @param:        @param  userProp
+     * @param:        @throws Exception
+     * @return:       MessageResponse
+     * @throws
+     * @author: 陈晓克
+     * @version: 2018-05-16
+     */
+    @Override
+    public  MessageResponse updateDetailsOfProgress(String id,String detailsOfProgress,UserProp userProp) throws Exception{
+        this.appealCaseDao.updateDetailsOfProgress(id,detailsOfProgress);
+        this.dataBaseLogService.log("诉求进展情况更新", "诉求", String.valueOf(id),
+                String.valueOf(id), "诉求", userProp);
+        return new MessageResponse(0, "完成！");
     }
 }

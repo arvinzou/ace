@@ -17,6 +17,12 @@ public class AppealCase implements java.io.Serializable {
 
     private String mediUrl;
 
+    private String companyName;
+
+    private String submitName;
+
+    private String tel;
+
     private Date submitTime;
 
     private String submitOpenId;
@@ -25,13 +31,19 @@ public class AppealCase implements java.io.Serializable {
 
     private BigDecimal longitude;
 
+    private String answerDept;
+
     private Date answerTime;
 
     private String answerOpenId;
 
+    private String remak;
+
     private String content;
 
     private String answerContent;
+
+    private String detailsOfProgress;
 
     private String status;
 
@@ -85,6 +97,30 @@ public class AppealCase implements java.io.Serializable {
         this.mediUrl = mediUrl == null ? null : mediUrl.trim();
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName == null ? null : companyName.trim();
+    }
+
+    public String getSubmitName() {
+        return submitName;
+    }
+
+    public void setSubmitName(String submitName) {
+        this.submitName = submitName == null ? null : submitName.trim();
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel == null ? null : tel.trim();
+    }
+
     public Date getSubmitTime() {
         return submitTime;
     }
@@ -117,6 +153,14 @@ public class AppealCase implements java.io.Serializable {
         this.longitude = longitude;
     }
 
+    public String getAnswerDept() {
+        return answerDept;
+    }
+
+    public void setAnswerDept(String answerDept) {
+        this.answerDept = answerDept == null ? null : answerDept.trim();
+    }
+
     public Date getAnswerTime() {
         return answerTime;
     }
@@ -131,6 +175,14 @@ public class AppealCase implements java.io.Serializable {
 
     public void setAnswerOpenId(String answerOpenId) {
         this.answerOpenId = answerOpenId == null ? null : answerOpenId.trim();
+    }
+
+    public String getRemak() {
+        return remak;
+    }
+
+    public void setRemak(String remak) {
+        this.remak = remak == null ? null : remak.trim();
     }
 
     public String getStatus() {
@@ -163,5 +215,13 @@ public class AppealCase implements java.io.Serializable {
 
     public void setAnswerContent(String answerContent) {
         this.answerContent = answerContent;
+    }
+
+    public String getDetailsOfProgress() {
+        return detailsOfProgress;
+    }
+
+    public void setDetailsOfProgress(String detailsOfProgress) {
+        this.detailsOfProgress = detailsOfProgress;
     }
 }

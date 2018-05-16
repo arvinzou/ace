@@ -29,4 +29,9 @@ public interface AppealCaseDao {
 
     List<Map<String,Object>> getList(Map<String,Object> params);
 
+
+    int updateAccept(@Param("id")String id,@Param("answerDept")String answerDept);
+
+    int updateDetailsOfProgress(@Param("id")String id,@Param("detailsOfProgress")String detailsOfProgress);
+
 }
