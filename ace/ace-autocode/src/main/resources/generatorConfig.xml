@@ -43,14 +43,7 @@
         <!--与原来mybatis-generator不一样，这个table标签不是必须的。只有对生成的映射有复杂要求时，才需要在这里详细配置-->
 
 
-        <table tableName="appeal"
-               domainObjectName="Appeal"
-               mapperName="AppealDao"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="true"/>
-        </table>
+
         <table tableName="appeal_case"
                domainObjectName="AppealCase"
                mapperName="AppealCaseDao"
@@ -59,14 +52,7 @@
                selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="true"/>
         </table>
-        <table tableName="appeal_case_file"
-               domainObjectName="AppealCaseFile"
-               mapperName="AppealCaseFileDao"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="true"/>
-        </table>
+
 
 
 

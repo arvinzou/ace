@@ -50,7 +50,7 @@ public interface AppealCaseService {
 	 *
 	 *
 	    * @Title:updateAppealCase
-	    * @Description:  TODO(更新诉求)
+	    * @Description:  TODO(诉求答复)
 	 		* @param:        @param obj
 	 		* @param:        @param userProp
 	 		* @param:        @throws Exception
@@ -59,7 +59,7 @@ public interface AppealCaseService {
 	    * @author: 陈晓克
 	    * @version: 2018-05-14
 	 */
-	public abstract MessageResponse updateAppealCase(AppealCase obj, List<AppealCaseFile> list) throws Exception;
+	public abstract MessageResponse updateAppealCase(AppealCase obj, List<AppealCaseFile> list,UserProp userProp) throws Exception;
     /**
 	 *
 	    * @Title:selectAppealCaseByPrimaryKey
@@ -98,6 +98,38 @@ public interface AppealCaseService {
 	 * @version: 2018-05-15
 	 */
 	public Map<String,Object> getList(Map<String,Object> params) throws Exception;
+
+
+	/**
+	 *
+	 * @Title:updateAccept
+	 * @Description:  TODO(接受处理诉求)
+	 * @param:        @param id
+	 * @param:        @param answerDept
+	 * @param:        @param  userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-16
+	 */
+	public abstract MessageResponse updateAccept(String id,String answerDept,UserProp userProp) throws Exception;
+
+
+	/**
+	 *
+	 * @Title:updateDetailsOfProgress
+	 * @Description:  TODO(诉求进展情况更新)
+	 * @param:        @param id
+	 * @param:        @param detailsOfProgress
+	 * @param:        @param  userProp
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-16
+	 */
+	public abstract MessageResponse updateDetailsOfProgress(String id,String detailsOfProgress,UserProp userProp) throws Exception;
 
 	
 }
