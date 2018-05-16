@@ -41,6 +41,7 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     private ResourcesService resourceService;
 
+    @Override
     public PageResult<Map<String, String>> findUsersSearchList(Users condition, int start,
                                                                int limit, String orderBy) throws Exception {
         PageResult<Map<String, String>> rst = new PageResult<Map<String, String>>();
@@ -52,6 +53,7 @@ public class UsersServiceImpl implements UsersService {
         return rst;
     }
 
+    @Override
     public PageResult<UsersVo> findUsersList(Users condition, int start, int limit,
                                              String orderBy) throws Exception {
         PageResult<UsersVo> rst = new PageResult<UsersVo>();
@@ -65,6 +67,7 @@ public class UsersServiceImpl implements UsersService {
         return rst;
     }
 
+    @Override
     public MessageResponse insertUsers(Users users, UserProp userProp, String flag)
             throws Exception {
         if (CommonUtils.isBlank(users.getDepartmentId())) {
@@ -96,7 +99,7 @@ public class UsersServiceImpl implements UsersService {
         users.setAreaCode(dept.getAreaCode());
         users.setStauts("1");
         users.setPassword(CommonUtils.getMd5(users.getPassword()));
-        String id = String.valueOf(new Date().getTime());
+        String id = String.valueOf(System.currentTimeMillis());
         users.setUserId(id);
         users.setCreateTime(new Date());
         users.setCurSyid(userProp.getActiveSyId());
@@ -107,6 +110,7 @@ public class UsersServiceImpl implements UsersService {
         return new MessageResponse(0, "添加员工户完成！");
     }
 
+    @Override
     public MessageResponse insertReg(Users users)
             throws Exception {
         if (CommonUtils.isBlank(users.getDepartmentId())) {
@@ -138,7 +142,7 @@ public class UsersServiceImpl implements UsersService {
         users.setAreaCode(dept.getAreaCode());
         users.setStauts("1");
         users.setPassword(CommonUtils.getMd5(users.getPassword()));
-        String id = String.valueOf(new Date().getTime());
+        String id = String.valueOf(System.currentTimeMillis());
         users.setUserId(id);
         users.setCreateTime(new Date());
         users.setCurSyid("uf");
@@ -146,6 +150,7 @@ public class UsersServiceImpl implements UsersService {
         return new MessageResponse(0, "注册成功！");
     }
 
+    @Override
     public MessageResponse updateUsers(Users users, UserProp userProp, String flag)
             throws Exception {
         if (CommonUtils.isBlank(users.getUserId())) {
@@ -180,6 +185,7 @@ public class UsersServiceImpl implements UsersService {
         return new MessageResponse(0, "变更员工户完成！");
     }
 
+    @Override
     public MessageResponse updateUsersStautsByPrimaryKey(String usersId,
                                                          String struts, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(usersId)) {
@@ -196,6 +202,7 @@ public class UsersServiceImpl implements UsersService {
         return new MessageResponse(0, "员工状态变更完成！");
     }
 
+    @Override
     public MessageResponse updateUsersForInitPassword(String usersId,
                                                       String password, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(usersId)) {
@@ -213,6 +220,7 @@ public class UsersServiceImpl implements UsersService {
         return new MessageResponse(0, "员工初始化密码完成！");
     }
 
+    @Override
     public SingleResult<UsersVo> selectUsersByPrimaryKey(String usersId)
             throws Exception {
         SingleResult<UsersVo> rst = new SingleResult<UsersVo>();
@@ -221,6 +229,7 @@ public class UsersServiceImpl implements UsersService {
         return rst;
     }
 
+    @Override
     public MessageResponse insertUsersRole(String userId, String[] roleId,
                                            UserProp userProp) throws Exception {
         this.usersDao.insertUsersRole(userId, roleId);
@@ -232,6 +241,7 @@ public class UsersServiceImpl implements UsersService {
         return new MessageResponse(0, "角色分配完成！");
     }
 
+    @Override
     public PageResult<Role> selectRoleList(UserProp userProp) throws Exception {
         PageResult<Role> rst = new PageResult<Role>();
         List<Role> list = this.usersDao.selectRoleList(userProp.getActiveSyId());
@@ -240,6 +250,7 @@ public class UsersServiceImpl implements UsersService {
         return rst;
     }
 
+    @Override
     public PageResult<Role> selectRoleListByUserId(String userId) throws Exception {
         PageResult<Role> rst = new PageResult<Role>();
         List<Role> list = this.usersDao.selectRoleListByUserId(userId);
@@ -257,6 +268,7 @@ public class UsersServiceImpl implements UsersService {
      * @return MessageResponse
      * @version: 2017年02月28日 下午16:47
      */
+    @Override
     public MessageResponse deleteUsers(String id, UserProp userProp) {
 
         if (CommonUtils.isBlank(id)) {
@@ -281,6 +293,7 @@ public class UsersServiceImpl implements UsersService {
      * @return: MessageResponse
      * @version: 2017年02月28日 下午2:43:34
      */
+    @Override
     public MessageResponse updateUsersById(Users obj, UserProp curUserProp) {
         if (CommonUtils.isBlank(obj.getUserId())) {
 
@@ -301,6 +314,7 @@ public class UsersServiceImpl implements UsersService {
      * @param orderBy
      * @return PageResult<Map<String,String>>
      */
+    @Override
     public PageResult<Map<String, String>> findDeIdByUsersList(Users condition, int start, int limit, String orderBy) {
         PageResult<Map<String, String>> rst = new PageResult<Map<String, String>>();
         List<Map<String, String>> list = this.usersDao.findDeIdByUsersList(condition, start, limit, orderBy);
@@ -312,6 +326,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
 
+    @Override
     public MessageResponse deleteConUsers(String id, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(id)) {
             return new MessageResponse(1, "编号不能为空！");
@@ -325,6 +340,8 @@ public class UsersServiceImpl implements UsersService {
         return new MessageResponse(0, "删除成功！");
     }
 
+
+    @Override
     public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
         int i = 1;
         for (Map<String, Object> row : list) {
@@ -540,7 +557,7 @@ public class UsersServiceImpl implements UsersService {
         users.setAreaCode(dept.getAreaCode());
         users.setStauts("1");
         users.setPassword(CommonUtils.getMd5(users.getPassword()));
-        String id = String.valueOf(new Date().getTime());
+        String id = String.valueOf(System.currentTimeMillis());
         users.setUserId(id);
         users.setCreateTime(new Date());
         users.setCurSyid(userProp.getActiveSyId());
@@ -550,5 +567,4 @@ public class UsersServiceImpl implements UsersService {
 
         return new ResultResponse(0, "添加员工户完成！", users);
     }
-
 }
