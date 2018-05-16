@@ -55,6 +55,7 @@ public class AppealCaseController extends PortalBaseController {
 	@ResponseBody
 	public PageResult<AppealCaseVo> findAppealCaseList(AppealCaseQVo condition,
 			PageParamNoChangeSord page) throws Exception {
+		condition.setCorpId(this.getCurUserProp().getCorpId());
 		PageResult<AppealCaseVo> rst = this.appealCaseService
 				.findAppealCaseList(condition, page.getStart(), page.getLimit(),
 						page.getOrderBy());

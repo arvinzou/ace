@@ -32,16 +32,18 @@
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    id, appealId, category, title, mediType, mediUrl, submitTime, submitOpenId, latitude, 
-    longitude, answerTime, answerOpenId, status, createDate
+    id, appealId, category, title, mediType, mediUrl, companyName, submitName, tel, submitTime,
+    submitOpenId, latitude, longitude, answerDept, answerTime, answerOpenId, remak, status,
+    createDate, content, answerContent, detailsOfProgress
   </sql>
   <sql id="Blob_Column_List">
     content, answerContent
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
-    t.id, t.appealId, t.category, t.title, t.mediType, t.mediUrl, t.submitTime, t.submitOpenId, t.latitude,
-    t.longitude, t.answerTime, t.answerOpenId, t.status, t.createDate,
+    t.id, t.appealId, t.category, t.title, t.mediType, t.mediUrl, t.companyName, t.submitName, t.tel, t.submitTime,
+    t.submitOpenId, t.latitude, t.longitude, t.answerDept, t.answerTime, t.answerOpenId, t.remak, t.status,
+    t.createDate, t.content, t.answerContent, t.detailsOfProgress,
     a.id appealCaseFileId, a.appealCaseId _appealCaseId, a.name _name, a.Type _Type, a.mediType _mediType, a.mediUrl _mediUrl, a.createDate _createDate
     from appeal_case,left join appeal_case_file a on t.id=a.appealCaseId
     where t.id = #{id,jdbcType=VARCHAR}
@@ -79,10 +81,17 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="whereCondition">
-    from appeal_case where appealId=#{condition.appealId}
+    from appeal_case t
+    inner join appeal a on t.appealId=a.id
+    inner join users b on a.createUserId=b.user_id
+
+    where b.department_id=#{condition.corpId}
     <if test='condition.title!=null and condition.title!=""'>
-      and title like
+      and t.title like
       concat(#{condition.title,jdbcType=VARCHAR},'%')
+    </if>
+    <if test='condition.status!=null and condition.status!=""'>
+      and t.status =#{condition.status,jdbcType=VARCHAR}
     </if>
   </sql>
   <select id="findCount" resultType="int">
@@ -91,14 +100,16 @@
   </select>
   <select id="findList" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    t.id, t.appealId, t.category, t.title, t.mediType, t.mediUrl, t.companyName, t.submitName, t.tel, t.submitTime,
+    t.submitOpenId, t.latitude, t.longitude, t.answerDept, t.answerTime, t.answerOpenId, t.remak, t.status,
+    t.createDate, t.content, t.answerContent, t.detailsOfProgress
     <include refid="whereCondition" />
     <choose>
       <when test='orderBy!=null and orderBy!=""'>
-        ORDER BY ${orderBy}
+        ORDER BY t.${orderBy}
       </when>
       <otherwise>
-        ORDER BY createDate
+        ORDER BY t.createDate
       </otherwise>
     </choose>
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
