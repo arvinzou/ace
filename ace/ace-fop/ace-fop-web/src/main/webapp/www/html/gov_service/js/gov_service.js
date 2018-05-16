@@ -117,38 +117,43 @@ app.controller(ngControllerName,function($scope){
      * 发布诉求
      */
     $scope.release = function(){
-        var flag= true;
-        var name = $("input[name='title']").val();
-        var content = $("textarea[name='content']").val();
-        console.log(name);
-        if(name == '' && name == undefined){
-            flag = false;
-            alert("请输入诉求标题");
-        }
-        if(content == '' && content == undefined){
-            flag = false;
-            alert("请输入诉求内容");
-        }
-        if(flag){
-            $.ajax({
-                url: "/fop/www/insertGeHelp",
-                type:"post",
-                async:false,
-                data:{title:name, content:content},
-                success:function(result){
-                    if(result.status == 0) {
-                       alert("发布成功");
-                        if (!$scope.$$phase) {
-                            $scope.$apply();
+        var userProp = parent.parent.userProp;
+        if(userProp == null || userProp == ''){
+            location.href='/portal/dynamic/portal/security/login.jsp';
+        }else{
+            var flag= true;
+            var name = $("input[name='title']").val();
+            var content = $("textarea[name='content']").val();
+            console.log(name);
+            if(name == '' && name == undefined){
+                flag = false;
+                alert("请输入诉求标题");
+            }
+            if(content == '' && content == undefined){
+                flag = false;
+                alert("请输入诉求内容");
+            }
+            if(flag){
+                $.ajax({
+                    url: "/fop/www/insertGeHelp",
+                    type:"post",
+                    async:false,
+                    data:{title:name, content:content},
+                    success:function(result){
+                        if(result.status == 0) {
+                            alert("发布成功");
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
+                        }else {
+                            alert(result.info);
                         }
-                    }else {
-                        alert(result.info);
+                    },
+                    error:function(){
+                        alert("内部服务异常");
                     }
-                },
-                error:function(){
-                    alert("内部服务异常");
-                }
-            });
+                });
+            }
         }
     }
 

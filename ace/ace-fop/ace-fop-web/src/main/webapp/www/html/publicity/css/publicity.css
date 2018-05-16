@@ -161,3 +161,15 @@ option {
     margin-bottom: 30px;
     border-bottom: 1px solid #E1E5ED;
 }
+#key_word{
+    width: 200px;
+    height: 35px;
+}
+.searchButton{
+    padding-top: 0;
+    width:50px;
+    height: 35px;
+    border:none;
+    background-color: #1A56A8;
+    color: #FFFFFF;
+}

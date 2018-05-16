@@ -141,7 +141,7 @@ body {
 }
 .search_left :hover{
 	cursor: pointer;
-	border: 1px solid #1A56A8;
+	/*border: 1px solid #1A56A8;*/
 }
 
 .search_right {

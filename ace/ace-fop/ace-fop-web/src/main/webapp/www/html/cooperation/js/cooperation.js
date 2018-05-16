@@ -139,44 +139,49 @@ app.controller(ngControllerName,function($scope){
      * 发布项目
      */
     $scope.relaseProject = function(){
-
-        var flag = true;
-        var projectName = $("input[name='projectName']").val();
-        var cooType = $("#cooType option:checked").val();
-        var area = $("input[name ='area']").val();
-        var projectType = $("input[name='projectType']").val();
-        var content = $("textarea[name='content']").val();
-        if(projectName == '' || projectName == undefined){
-            flag = false;
-            alert("项目名称不能为空！");
-        }
-        if(cooType == '' || cooType == undefined){
-            flag = false;
-            alert("合作方式不能为空！");
-        }
-        if(area == '' || area == undefined){
-            flag = false;
-            alert("所属区域不能为空！");
-        }
-        if(flag){
-            $.ajax({
-                url: "/fop/www/insertProject",
-                type:"post",
-                async:false,
-                data:{projectName:projectName, coopType: cooType, areaCode: area, projectType: projectType, coopDesc:content},
-                success:function(result){
-                    if(result.status == 0) {
-                        $scope.searchByParam();
-                       alert("发布成功！")
-                    }else {
-                        alert(result.errorMessage);
+        var userProp = parent.parent.userProp;
+        if(userProp == null || userProp == ''){
+            location.href='/portal/dynamic/portal/security/login.jsp';
+        }else{
+            var flag = true;
+            var projectName = $("input[name='projectName']").val();
+            var cooType = $("#cooType option:checked").val();
+            var area = $("input[name ='area']").val();
+            var projectType = $("input[name='projectType']").val();
+            var content = $("textarea[name='content']").val();
+            if(projectName == '' || projectName == undefined){
+                flag = false;
+                alert("项目名称不能为空！");
+            }
+            if(cooType == '' || cooType == undefined){
+                flag = false;
+                alert("合作方式不能为空！");
+            }
+            if(area == '' || area == undefined){
+                flag = false;
+                alert("所属区域不能为空！");
+            }
+            if(flag){
+                $.ajax({
+                    url: "/fop/www/insertProject",
+                    type:"post",
+                    async:false,
+                    data:{projectName:projectName, coopType: cooType, areaCode: area, projectType: projectType, coopDesc:content},
+                    success:function(result){
+                        if(result.status == 0) {
+                            $scope.searchByParam();
+                            alert("发布成功！")
+                        }else {
+                            alert(result.errorMessage);
+                        }
+                    },
+                    error:function(){
+                        alert("内部服务异常");
                     }
-                },
-                error:function(){
-                    alert("内部服务异常");
-                }
-            });
+                });
+            }
         }
+
     }
 
     /**

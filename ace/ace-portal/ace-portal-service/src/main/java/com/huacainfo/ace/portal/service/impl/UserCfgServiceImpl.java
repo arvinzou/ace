@@ -45,7 +45,6 @@ public class UserCfgServiceImpl implements UserCfgService {
 
     public MessageResponse saveOrUpdateUserCfg(List<UserCfg> list, UserProp userProp) throws Exception {
         for (UserCfg o : list) {
-            o.setUserId(userProp.getUserId());
             int temp = this.userCfgDao.isExit(o);
             if (temp > 0) {
                 this.userCfgDao.updateByPrimaryKey(o);

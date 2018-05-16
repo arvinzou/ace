@@ -192,6 +192,7 @@ public class FopPersonServiceImpl implements FopPersonService {
         FopPerson person = new FopPerson();
         person.setRealName(companyVo.getPersonId());
         person.setMobileNumer(companyVo.getLpMobile());
+        person.setRealName(companyVo.getFullName());
         person.setSex(companyVo.getLpSex());
         person.setBirthDate(companyVo.getLpBirthDt());
         person.setNativePlace(companyVo.getLpNativePlace());
@@ -216,7 +217,6 @@ public class FopPersonServiceImpl implements FopPersonService {
         fopPersonDao.insertSelective(person);
         dataBaseLogService.log("添加个人档案", "企业注册-自动插入", "", person.getId(),
                 person.getId(), userProp);
-
         return new ResultResponse(ResultCode.SUCCESS, "添加个人档案完成", person);
     }
 }

@@ -20,6 +20,8 @@ public interface FopAssociationService {
 
     MessageResponse insertFopAssociation(FopAssociation obj, UserProp userProp) throws Exception;
 
+    MessageResponse insertAssociation(String name, String phoneNumber) throws Exception;
+
     MessageResponse updateFopAssociation(FopAssociation obj, UserProp userProp) throws Exception;
 
     SingleResult<FopAssociationVo> selectFopAssociationByPrimaryKey(String id) throws Exception;
