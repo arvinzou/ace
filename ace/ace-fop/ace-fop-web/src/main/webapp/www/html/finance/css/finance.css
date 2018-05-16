@@ -203,3 +203,15 @@ option {
 	height: 62px;
 	line-height: 62px;
 }
+#financeTitle{
+	width: 200px;
+	height: 35px;
+}
+.searchButton{
+	padding-top: 0;
+	width:50px;
+	height: 35px;
+	border:none;
+	background-color: #1A56A8;
+	color: #FFFFFF;
+}

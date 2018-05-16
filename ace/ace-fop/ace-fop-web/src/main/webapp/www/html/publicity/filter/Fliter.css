@@ -4,14 +4,14 @@
 
 /* 最小高度 */
 .hotel-filter-list-min {
-	height: 36px;
+	height: 84px;
 }
 
 /* 筛选外容器 */
 .hotel-filter-list {
 	position: relative;
 	font-size: 12px;
-	border-bottom: 1px solid #eff2f5;
+	/*border-bottom: 1px solid #eff2f5;*/
 	overflow: hidden;
 	zoom: 1;
 }
@@ -21,7 +21,7 @@
 	position: absolute;
 	overflow: hidden;
 	cursor: pointer;
-	background: transparent url("./images/list_i.gif") 0 0 no-repeat;
+	/*background: transparent url("./images/list_i.gif") 0 0 no-repeat;*/
 }
 
 /* reset */
@@ -51,10 +51,10 @@
 .hotel-filter-list .tit {
 	float: left;
 	width: 40px;
-	height: 24px;
+	height: 35px;
 	color: #8fa0ac;
 	margin-top: 6px;
-	line-height: 24px;
+	line-height: 30px;
 	padding-left: 3px;
 }
 
@@ -68,27 +68,31 @@
 /* 筛选全局 */
 .hotel-filter-list .con li {
 	float: left;
-	height: 24px;
+	height: 30px;
 	display: inline;
-	margin-top: 6px;
-	line-height: 24px;
+	/*margin-top: 6px;*/
+	line-height: 30px;
+	border-radius: 3px;
 }
 
 .hotel-filter-list .con a {
+	width: 100%;
+	height: 100%;
 	position: relative;
 	float: left;
 	color: #43647f;
 	padding: 0 16px;
 	text-decoration: none;
+	border-radius: 3px;
 }
 
 /* 筛选不限 */
 .hotel-filter-list .con .any {
 	float: left;
 	width: 54px;
-	height: 24px;
-	margin-top: 6px;
-	line-height: 24px;
+	height: 35px;
+	/*margin-top: 6px;*/
+	line-height: 35px;
 }
 
 .hotel-filter-list .con .any li {
@@ -135,8 +139,8 @@
 .hotel-filter-list .checkbox a i {
 	top: 50%;
 	left: 10px;
-	width: 13px;
-	height: 13px;
+	width: 100%;
+	height: 100%;
 	margin-top: -7px;
 	background: transparent url("./images/checkbox.png") 0 -50px no-repeat;
 }
