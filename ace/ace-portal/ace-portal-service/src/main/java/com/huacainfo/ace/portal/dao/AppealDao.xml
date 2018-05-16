@@ -66,10 +66,10 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <sql id="whereCondition">
-    from appeal t inner join users a on t.user_id=a.createUserId
-    where a.department_id=#{corpId}
+    from appeal t inner join users a on a.user_id=t.createUserId
+    where a.department_id=#{condition.corpId}
     <if test='condition.name!=null and condition.name!=""'>
-      and name like
+      and t.name like
       concat(#{condition.name,jdbcType=VARCHAR},'%')
     </if>
   </sql>
@@ -81,6 +81,7 @@
     select
     t.id, t.name, t.cover, t.qrcoteUrl, t.openId, t.tplCode, t.status, t.createUserId, t.createUserName,
     t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.remark
+    <include refid="whereCondition" />
     <choose>
       <when test='orderBy!=null and orderBy!=""'>
         ORDER BY t.${orderBy}
