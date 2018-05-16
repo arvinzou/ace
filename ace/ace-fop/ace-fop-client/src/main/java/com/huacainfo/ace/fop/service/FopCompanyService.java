@@ -48,6 +48,8 @@ public interface FopCompanyService {
      */
     public abstract MessageResponse insertFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
 
+//    public abstract MessageResponse insertCompany(String  fullName, String lpMobile) throws Exception;
+
     /**
      * @throws
      * @Title:updateFopCompany

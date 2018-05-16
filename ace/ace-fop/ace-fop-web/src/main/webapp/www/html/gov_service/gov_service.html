@@ -32,7 +32,7 @@
 				</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tbody>
-						<tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo(this);">
+						<tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo($index);">
 							<td align="center" width="5%"><div class="dot"></div></td>
 							<td align="center" width="25%" ng-bind="item.releaseDate"></td>
 							<td ng-bind="item.title"></td>

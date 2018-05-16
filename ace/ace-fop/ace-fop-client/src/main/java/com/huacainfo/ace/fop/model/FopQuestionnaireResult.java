@@ -7,13 +7,38 @@ public class FopQuestionnaireResult {
 
     private String relationId;
 
-    private Integer relationType;
+    private String relationType;
 
     private String answerId;
 
-    private Integer answerType;
+    private String answerType;
 
     private String questionnaireId;
+
+    private String content;
+
+    private String opinionType;
+    private Date releaseDate;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getOpinionType() {
+        return opinionType;
+    }
+
+    public void setOpinionType(String opinionType) {
+        this.opinionType = opinionType;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
 
     private String result;
 
@@ -26,6 +51,10 @@ public class FopQuestionnaireResult {
     private String createUserName;
 
     private Date createDate;
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 
     private String lastModifyUserId;
 
@@ -49,11 +78,11 @@ public class FopQuestionnaireResult {
         this.relationId = relationId == null ? null : relationId.trim();
     }
 
-    public Integer getRelationType() {
+    public String getRelationType() {
         return relationType;
     }
 
-    public void setRelationType(Integer relationType) {
+    public void setRelationType(String relationType) {
         this.relationType = relationType;
     }
 
@@ -65,11 +94,11 @@ public class FopQuestionnaireResult {
         this.answerId = answerId == null ? null : answerId.trim();
     }
 
-    public Integer getAnswerType() {
+    public String getAnswerType() {
         return answerType;
     }
 
-    public void setAnswerType(Integer answerType) {
+    public void setAnswerType(String answerType) {
         this.answerType = answerType;
     }
 

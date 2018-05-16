@@ -44,15 +44,16 @@ public class FopQuestionServiceImpl implements FopQuestionService {
     @Autowired
     private FopQuestionDao fopQuestionDao;
 
+
+    @Autowired
+    private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private UsersService usersService;
     @Autowired
     private FopCompanyDao fopCompanyDao;
 
     @Autowired
     private FopAssociationDao fopAssociationDao;
-    @Autowired
-    private DataBaseLogService dataBaseLogService;
-    @Autowired
-    private UsersService usersService;
 
     /**
      * @throws
