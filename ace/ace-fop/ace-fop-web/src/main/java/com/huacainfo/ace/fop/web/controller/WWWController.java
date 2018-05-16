@@ -508,7 +508,6 @@ public class WWWController extends FopBaseController {
      * name：企业，团体名称
      * phoneNumber：电话
      * isCompany :true, false。
-     *
      * @return
      * @throws Exception
      */
@@ -558,4 +557,5 @@ public class WWWController extends FopBaseController {
     public ResultResponse statisticalData() throws Exception {
         return this.fopQuestionnaireResultService.statisticalData();
     }
+
 }
