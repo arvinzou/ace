@@ -20,15 +20,18 @@ import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.FopAssociationQVo;
 import com.huacainfo.ace.fop.vo.FopAssociationVo;
 import com.huacainfo.ace.portal.model.Department;
+import com.huacainfo.ace.portal.model.UserCfg;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.DepartmentService;
+import com.huacainfo.ace.portal.service.UserCfgService;
 import com.huacainfo.ace.portal.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +64,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
 
     @Autowired
     private FopPayRecordService fopPayRecordService;
+
+    @Autowired
+    private UserCfgService userCfgService;
 
     /**
      * @author: Arvin
@@ -163,7 +169,8 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         //portal.department
         Department department = new Department();
         department.setDepartmentId(GUIDUtil.getGUID());
-        department.setParentDepartmentId("0010006");//市工商联
+        //市工商联
+        department.setParentDepartmentId("0010006");
         department.setDepartmentName(o.getFullName());
         department.setContactMobile(o.getPhoneNumber());
         department.setSyid(userProp.getActiveSyId());
@@ -191,6 +198,15 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         if (ResultCode.FAIL == rs3.getStatus()) {
             throw new CustomException(rs3.getInfo());
         }
+
+        //插入登录后，默认跳转页配置
+        List<UserCfg> cfgList = new ArrayList<>();
+        UserCfg userCfg = new UserCfg();
+        userCfg.setUserId(users.getUserId());
+        userCfg.setCfgKey("portalType");
+        userCfg.setCfgValue("5");
+        cfgList.add(userCfg);
+        userCfgService.saveOrUpdateUserCfg(cfgList, userProp);
 
         //TODO 分配成功通知
 
@@ -252,5 +268,59 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         this.dataBaseLogService.log("删除商协会资料", "商协会资料", String.valueOf(id),
                 String.valueOf(id), "商协会资料", userProp);
         return new MessageResponse(0, "商协会资料删除完成");
+    }
+
+
+    @Override
+    public MessageResponse insertAssociation(String name, String phoneNumber) throws Exception {
+        FopAssociation o = new FopAssociation();
+        o.setFullName(name);
+        o.setPhoneNumber(phoneNumber);
+        if (CommonUtils.isBlank(o.getFullName())) {
+            return new MessageResponse(1, "协会全称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPhoneNumber())) {
+            return new MessageResponse(1, "协会号码不能为空！");
+        }
+
+        int temp = this.fopAssociationDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "协会名称/办公号码重复！");
+        }
+        UserProp userProp = new UserProp();
+        userProp.setActiveSyId("fop");
+        userProp.setName("工商联管理员");
+        userProp.setUserId("1522198886381");
+        //初始化系统用户
+        ResultResponse rs1 = initSysUser(o, userProp);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
+        }
+        //TODO 构建会长个人信息
+
+        //团体信息入库
+        Department department = (Department) rs1.getData();
+        o.setDepartmentId(department.getDepartmentId());
+        o.setId(GUIDUtil.getGUID());
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        o.setCreateUserName(userProp.getName());
+        o.setCreateUserId(userProp.getUserId());
+        this.fopAssociationDao.insertSelective(o);
+        this.dataBaseLogService.log("添加商协会", "商协会", "", o.getId(),
+                o.getId(), userProp);
+        //自动提交会员申请流程
+        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
+                FlowType.MEMBER_JOIN_ASSOCIATION, o.getId(), userProp);
+        if (ResultCode.FAIL == rs3.getStatus()) {
+            return rs3;
+        }
+        //自动提交缴费记录
+        MessageResponse rs4 = submitPayRecord(o, userProp);
+        if (ResultCode.FAIL == rs4.getStatus()) {
+            return rs4;
+        }
+
+        return new MessageResponse(0, "添加商协会完成");
     }
 }

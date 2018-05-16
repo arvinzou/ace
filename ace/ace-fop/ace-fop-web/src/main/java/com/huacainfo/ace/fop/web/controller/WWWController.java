@@ -512,14 +512,14 @@ public class WWWController extends FopBaseController {
      * @throws Exception
      */
 
-//    @RequestMapping(value = "/sign")
-//    @ResponseBody
-//    public MessageResponse signUp(String name,String phoneNumber,boolean isCompany) throws Exception {
-//        if(isCompany){
-//            return this.fopCompanyService.insertCompany(name,phoneNumber);
-//        }
-//        return this.fopAssociationService.insertAssociation(name,phoneNumber);
-//    }
+    @RequestMapping(value = "/sign")
+    @ResponseBody
+    public MessageResponse signUp(String name, String phoneNumber, boolean isCompany) throws Exception {
+        if (isCompany) {
+            return this.fopCompanyService.insertCompany(name, phoneNumber);
+        }
+        return this.fopAssociationService.insertAssociation(name, phoneNumber);
+    }
 
 
     /**
@@ -539,7 +539,7 @@ public class WWWController extends FopBaseController {
 
     /**
      * opinionType 意见类型
-     * result 调查结果 1、很满意，2、一半，3、不满意
+     * result 调查结果 1、很满意，2、一般，3、不满意
      * content 内容
      */
 

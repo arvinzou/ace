@@ -84,4 +84,5 @@ public interface FopPersonService {
 
 
     ResultResponse insertPerson(FopCompanyVo o, UserProp userProp);
+
 }
