@@ -11,10 +11,31 @@ public class FopCompanyVo extends FopCompany {
 
 
     /**
+     * */
+    private String areaCodeName;
+
+    private String realName;
+    /**
      * =======================================
      * 法人信息
      */
     private String lpMobile;
+
+    public String getAreaCodeName() {
+        return areaCodeName;
+    }
+
+    public void setAreaCodeName(String areaCodeName) {
+        this.areaCodeName = areaCodeName;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
     private String lpSex;
     private Date lpBirthDt;
     private String lpNativePlace;
