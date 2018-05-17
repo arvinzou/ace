@@ -11,13 +11,13 @@ import com.huacainfo.ace.fop.vo.EnterpriseProductsQVo;
 /**
  * @author: huacai003
  * @version: 2018-05-17
- * @Description: TODO(企业风采)
+ * @Description: TODO(企业产品)
  */
 public interface EnterpriseProductsService {
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(企业风采分页查询)
+     * @Description: TODO(企业产品分页查询)
      * @param: @param condition
      * @param: @param start
      * @param: @param limit
@@ -35,7 +35,7 @@ public interface EnterpriseProductsService {
     /**
      * @throws
      * @Title:insertEnterpriseProducts
-     * @Description: TODO(添加企业风采)
+     * @Description: TODO(添加企业产品)
      * @param: @param obj
      * @param: @param userProp
      * @param: @throws Exception
@@ -48,7 +48,7 @@ public interface EnterpriseProductsService {
     /**
      * @throws
      * @Title:updateEnterpriseProducts
-     * @Description: TODO(更新企业风采)
+     * @Description: TODO(更新企业产品)
      * @param: @param obj
      * @param: @param userProp
      * @param: @throws Exception
@@ -61,7 +61,7 @@ public interface EnterpriseProductsService {
     /**
      * @throws
      * @Title:selectEnterpriseProductsByPrimaryKey
-     * @Description: TODO(获取企业风采)
+     * @Description: TODO(获取企业产品)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<EnterpriseProducts>
@@ -74,7 +74,7 @@ public interface EnterpriseProductsService {
     /**
      * @throws
      * @Title:deleteEnterpriseProductsByEnterpriseProductsId
-     * @Description: TODO(删除企业风采)
+     * @Description: TODO(删除企业产品)
      * @param: @param id
      * @param: @param userProp
      * @param: @throws Exception

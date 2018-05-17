@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>企业风采</title>
+    <title>企业产品</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">

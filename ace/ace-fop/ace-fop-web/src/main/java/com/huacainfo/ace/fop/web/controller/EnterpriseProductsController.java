@@ -23,7 +23,7 @@ import com.huacainfo.ace.fop.vo.EnterpriseProductsQVo;
 /**
  * @author: huacai003
  * @version: 2018-05-17
- * @Description: TODO(企业风采)
+ * @Description: TODO(企业产品)
  */
 public class EnterpriseProductsController extends FopBaseController {
 
@@ -36,7 +36,7 @@ public class EnterpriseProductsController extends FopBaseController {
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(企业风采分页查询)
+     * @Description: TODO(企业产品分页查询)
      * @param: @param condition
      * @param: @param page
      * @param: @return
@@ -63,7 +63,7 @@ public class EnterpriseProductsController extends FopBaseController {
     /**
      * @throws
      * @Title:insertEnterpriseProducts
-     * @Description: TODO(添加企业风采)
+     * @Description: TODO(添加企业产品)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
@@ -80,7 +80,7 @@ public class EnterpriseProductsController extends FopBaseController {
     /**
      * @throws
      * @Title:updateEnterpriseProducts
-     * @Description: TODO(更新企业风采)
+     * @Description: TODO(更新企业产品)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
@@ -97,7 +97,7 @@ public class EnterpriseProductsController extends FopBaseController {
     /**
      * @throws
      * @Title:selectEnterpriseProductsByPrimaryKey
-     * @Description: TODO(获取企业风采)
+     * @Description: TODO(获取企业产品)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<EnterpriseProducts>
@@ -114,7 +114,7 @@ public class EnterpriseProductsController extends FopBaseController {
     /**
      * @throws
      * @Title:deleteEnterpriseProductsByEnterpriseProductsId
-     * @Description: TODO(删除企业风采)
+     * @Description: TODO(删除企业产品)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse

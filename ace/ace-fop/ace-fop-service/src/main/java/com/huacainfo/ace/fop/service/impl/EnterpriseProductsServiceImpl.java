@@ -26,7 +26,7 @@ import com.huacainfo.ace.fop.vo.EnterpriseProductsQVo;
 /**
  * @author: huacai003
  * @version: 2018-05-17
- * @Description: TODO(企业风采)
+ * @Description: TODO(企业产品)
  */
 public class EnterpriseProductsServiceImpl implements EnterpriseProductsService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -38,7 +38,7 @@ public class EnterpriseProductsServiceImpl implements EnterpriseProductsService 
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(企业风采分页查询)
+     * @Description: TODO(企业产品分页查询)
      * @param: @param condition
      * @param: @param start
      * @param: @param limit
@@ -70,7 +70,7 @@ public class EnterpriseProductsServiceImpl implements EnterpriseProductsService 
     /**
      * @throws
      * @Title:insertEnterpriseProducts
-     * @Description: TODO(添加企业风采)
+     * @Description: TODO(添加企业产品)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -109,7 +109,7 @@ public class EnterpriseProductsServiceImpl implements EnterpriseProductsService 
 
         int temp = this.enterpriseProductsDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "企业风采名称重复！");
+            return new MessageResponse(1, "企业产品名称重复！");
         }
 
         o.setId(GUIDUtil.getGUID());
@@ -118,16 +118,16 @@ public class EnterpriseProductsServiceImpl implements EnterpriseProductsService 
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.enterpriseProductsDao.insertSelective(o);
-        this.dataBaseLogService.log("添加企业风采", "企业风采", "",
+        this.dataBaseLogService.log("添加企业产品", "企业产品", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "添加企业风采完成！");
+        return new MessageResponse(0, "添加企业产品完成！");
     }
 
     /**
      * @throws
      * @Title:updateEnterpriseProducts
-     * @Description: TODO(更新企业风采)
+     * @Description: TODO(更新企业产品)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -167,16 +167,16 @@ public class EnterpriseProductsServiceImpl implements EnterpriseProductsService 
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.enterpriseProductsDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更企业风采", "企业风采", "",
+        this.dataBaseLogService.log("变更企业产品", "企业产品", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "变更企业风采完成！");
+        return new MessageResponse(0, "变更企业产品完成！");
     }
 
     /**
      * @throws
      * @Title:selectEnterpriseProductsByPrimaryKey
-     * @Description: TODO(获取企业风采)
+     * @Description: TODO(获取企业产品)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<EnterpriseProducts>
@@ -196,7 +196,7 @@ public class EnterpriseProductsServiceImpl implements EnterpriseProductsService 
     /**
      * @throws
      * @Title:deleteEnterpriseProductsByEnterpriseProductsId
-     * @Description: TODO(删除企业风采)
+     * @Description: TODO(删除企业产品)
      * @param: @param id
      * @param: @param userProp
      * @param: @throws Exception
@@ -208,10 +208,10 @@ public class EnterpriseProductsServiceImpl implements EnterpriseProductsService 
     public MessageResponse deleteEnterpriseProductsByEnterpriseProductsId(String id, UserProp
             userProp) throws Exception {
         this.enterpriseProductsDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除企业风采", "企业风采",
+        this.dataBaseLogService.log("删除企业产品", "企业产品",
                 String.valueOf(id),
-                String.valueOf(id), "企业风采", userProp);
-        return new MessageResponse(0, "企业风采删除完成！");
+                String.valueOf(id), "企业产品", userProp);
+        return new MessageResponse(0, "企业产品删除完成！");
     }
 
 }
