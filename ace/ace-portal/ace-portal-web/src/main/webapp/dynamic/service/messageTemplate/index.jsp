@@ -89,7 +89,8 @@
         <div class="labelItem">
             <span class="labelItemHeader">模板编码</span>
             <br>
-            <span id="tmplCode"></span>
+            <span id="tmplCode">
+            </span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">模板内容</span>

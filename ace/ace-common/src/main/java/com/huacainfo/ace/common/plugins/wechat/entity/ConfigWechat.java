@@ -1,8 +1,9 @@
 package com.huacainfo.ace.common.plugins.wechat.entity;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class ConfigWechat {
+public class ConfigWechat implements Serializable {
     private String id;
 
     private String jdbcId;
@@ -31,7 +32,6 @@ public class ConfigWechat {
      * token令牌
      */
     private String wxToken;
-
 
     private String wxDeviceInfo;
 

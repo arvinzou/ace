@@ -1,7 +1,9 @@
 package com.huacainfo.ace.common.plugins.wechat.entity;
 
 
-public class DataItem {
+import java.io.Serializable;
+
+public class DataItem implements Serializable {
     private Object value;
     private String color;
 
