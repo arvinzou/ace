@@ -16,112 +16,17 @@
 		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
 		<script type="text/javascript" src="js/publicity.js"></script>
+        <script type="text/javascript" src="js/Popt.js"></script>
+        <script type="text/javascript" src="js/city.json.js"></script>
+        <script type="text/javascript" src="js/citySet.js"></script>
 		<script>
 			$(function() {
-				$('#myTab li:eq(0) a').tab('show');
-
-				//预期年收益
-				var data = [{
-						"id": 1,
-						"text": "全部"
-					},
-					{
-						"id": 2,
-						"text": "常德市"
-					},
-					{
-						"id": 3,
-						"text": "武陵区"
-					},
-					{
-						"id": 4,
-						"text": "鼎城区"
-					},
-					{
-						"id": 5,
-						"text": "安乡县"
-					},
-					{
-						"id": 6,
-						"text": "汉寿县"
-					},
-					{
-						"id": 7,
-						"text": "临澧县"
-					},
-					{
-						"id": 8,
-						"text": "桃源县"
-					},
-					{
-						"id": 9,
-						"text": "石门县"
-					},
-					{
-						"id": 10,
-						"text": "澧县"
-					},
-					{
-						"id": 10,
-						"text": "津市市"
-					}
-				];
-				//例子1
-				//单选
-				$('#demo1').comboboxfilter({
-					url: '',
-					scope: 'FilterQuery1',
-					data: data,
-					onChange: function(newValue) {
-						$('#demo_value').val(newValue);
-					}
-				});
-
-				//融资年限
-				var data = [{
-						"id": 1,
-						"text": "私营企业"
-					},
-					{
-						"id": 2,
-						"text": "港澳台商投资企业"
-					},
-					{
-						"id": 3,
-						"text": "外商投资企业"
-					},
-					{
-						"id": 4,
-						"text": "股份合作企业"
-					},
-					{
-						"id": 5,
-						"text": "其他联营企业"
-					},
-					{
-						"id": 6,
-						"text": "有限责任公司"
-					},
-					{
-						"id": 7,
-						"text": "股份有限公司"
-					},
-					{
-						"id": 8,
-						"text": "其他企业"
-					}
-				];
-				//例子1
-				//单选
-				$('#demo2').comboboxfilter({
-					url: '',
-					scope: 'FilterQuery1',
-					data: data,
-					onChange: function(newValue) {
-						$('#demo_value').val(newValue);
-					}
-				});
-
+                $("#city").click(function (e) {
+                    SelCity(this,e);
+                });
+                $("s").click(function (e) {
+                    SelCity(document.getElementById("city"),e);
+                });
 			});
 		</script>
 	</head>
@@ -137,17 +42,18 @@
 						<div class="search_combox">
 							<div class="search_box">
 								<div style="width: 12%;float: left;">精准搜索：</div>
-								<div style="width: 88%;float: left;"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button class="searchButton">搜索</button></div>
-							</div>
-							<div class="search_filter1">
-								<div class="filter_title1">所属区域：</div>
-								<div id="demo1"></div>
+								<div style="width: 88%;float: left;"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button class="searchButton" ng-click="search();">搜索</button></div>
 							</div>
 							<div style="clear: both;"></div>
 							<div class="search_filter2">
 								<div class="filter_title2">企业性质：</div>
 								<div id="demo2"></div>
 							</div>
+                            <div style="clear: both;"></div>
+                            <div class="search_filter1">
+                                <div class="filter_title1">所属区域：</div>
+                                <div class="wrap"><input class="input" name="" id="city" type="text" placeholder="请选择" autocomplete="off" readonly="true"/></div>
+                            </div>
 						</div>
 					</div>
 					<div class="search_list">
