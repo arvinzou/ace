@@ -1,41 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.portal.dao.WxCfgDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.WxCfg">
-    <id column="appId" jdbcType="VARCHAR" property="appId" />
-    <result column="appScret" jdbcType="VARCHAR" property="appScret" />
-    <result column="accessToken" jdbcType="VARCHAR" property="accessToken" />
-    <result column="expiresIn" jdbcType="INTEGER" property="expiresIn" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    appId, appScret, accessToken, expiresIn, name,deptId
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.WxCfg">
+        <id column="appId" jdbcType="VARCHAR" property="appId"/>
+        <result column="originalId" jdbcType="VARCHAR" property="originalId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="appScret" jdbcType="VARCHAR" property="appScret"/>
+        <result column="accessToken" jdbcType="VARCHAR" property="accessToken"/>
+        <result column="ticket" jdbcType="VARCHAR" property="ticket"/>
+        <result column="expiresIn" jdbcType="INTEGER" property="expiresIn"/>
+        <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
+        <result column="serverToken" jdbcType="VARCHAR" property="serverToken"/>
+        <result column="mchId" jdbcType="VARCHAR" property="mchId"/>
+        <result column="apiKey" jdbcType="VARCHAR" property="apiKey"/>
+        <result column="certUrl" jdbcType="VARCHAR" property="certUrl"/>
+        <result column="sysId" jdbcType="VARCHAR" property="sysId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        appId, originalId, name, appScret, accessToken, ticket, expiresIn, deptId, serverToken,
+        mchId, apiKey, certUrl, sysId
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from wx_cfg
-    where appId = #{appId,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from wx_cfg
-    where appId = #{appId,jdbcType=VARCHAR}
-  </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.WxCfg">
-    insert into wx_cfg (appId, appScret, accessToken,
-    expiresIn, name,deptId)
-    values (#{appId,jdbcType=VARCHAR}, #{appScret,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR},
-    #{expiresIn,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{deptId})
-  </insert>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wx_cfg
+        where appId = #{appId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from wx_cfg
+        where appId = #{appId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.portal.model.WxCfg">
+        insert into wx_cfg (appId, originalId, name,
+        appScret, accessToken, ticket,
+        expiresIn, deptId, serverToken,
+        mchId, apiKey, certUrl,
+        sysId)
+        values (#{appId,jdbcType=VARCHAR}, #{originalId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{appScret,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, #{ticket,jdbcType=VARCHAR},
+        #{expiresIn,jdbcType=INTEGER}, #{deptId,jdbcType=VARCHAR}, #{serverToken,jdbcType=VARCHAR},
+        #{mchId,jdbcType=VARCHAR}, #{apiKey,jdbcType=VARCHAR}, #{certUrl,jdbcType=VARCHAR},
+        #{sysId,jdbcType=VARCHAR})
+    </insert>
 
-
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.WxCfg">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.WxCfg">
     update wx_cfg
-    set appScret = #{appScret,jdbcType=VARCHAR},
+        set originalId = #{originalId,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        appScret = #{appScret,jdbcType=VARCHAR},
       accessToken = #{accessToken,jdbcType=VARCHAR},
+        ticket = #{ticket,jdbcType=VARCHAR},
       expiresIn = #{expiresIn,jdbcType=INTEGER},
-    name = #{name,jdbcType=VARCHAR},
-    deptId = #{deptId,jdbcType=VARCHAR}
+        deptId = #{deptId,jdbcType=VARCHAR},
+        serverToken = #{serverToken,jdbcType=VARCHAR},
+        mchId = #{mchId,jdbcType=VARCHAR},
+        apiKey = #{apiKey,jdbcType=VARCHAR},
+        certUrl = #{certUrl,jdbcType=VARCHAR},
+        sysId = #{sysId,jdbcType=VARCHAR}
     where appId = #{appId,jdbcType=VARCHAR}
   </update>
 
@@ -47,7 +68,7 @@
     expiresIn = #{expiresIn,jdbcType=INTEGER}
     where appId = #{appId,jdbcType=VARCHAR}
   </update>
-  <select id="selectAppList" resultType="map">
+    <select id="selectAppList" resultType="map">
     select appId, appScret, accessToken, expiresIn, name from wx_cfg order by appId
   </select>
 
@@ -57,4 +78,29 @@
         from wx_cfg
         where deptId=#{id}
   </select>
+
+    <select id="findByOriginalId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wx_cfg
+        where originalId = #{originalId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectQuestion" parameterType="java.lang.String" resultType="java.util.Map">
+        select
+         id, question, answer, keyWord, accCount, remark, status, createUserId, createUserName,
+         createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+        from fop.fop_ai_question t
+        where t.question like concat(#{keyWord,jdbcType=VARCHAR},'%')
+		 or t.answer like  concat(#{keyWord,jdbcType=VARCHAR},'%')
+    </select>
+
+    <insert id="insertQuestion" parameterType="java.util.Map">
+        insert into fop.fop_ai_question (id, question, answer, createDate, status,
+		createUserName, createUserId, lastModifyDate, accCount)
+        VALUES
+        (#{params.id,jdbcType=VARCHAR}, #{params.question,jdbcType=VARCHAR}, '',
+         #{params.createDate,jdbcType=VARCHAR}, '1', 'system', '0000-0000',
+         #{params.lastModifyDate,jdbcType=VARCHAR}, 1)
+    </insert>
 </mapper>

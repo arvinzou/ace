@@ -106,11 +106,17 @@ app.controller(ngControllerName,function($scope){
 
                 });
             }else {
-                alert(result.errorMessage);
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         },
         error:function(){
-            alert("内部服务异常");
+            layer.alert("系统内部服务异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     });
 
@@ -122,7 +128,10 @@ app.controller(ngControllerName,function($scope){
             data:{page:currentPage, limit: pageSize},
             success:$scope.responseHandle,
             error:function(){
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -134,7 +143,10 @@ app.controller(ngControllerName,function($scope){
                 $scope.$apply();
             }
         }else {
-            alert(result.errorMessage);
+            layer.alert(result.errorMessage, {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     }
 
@@ -165,15 +177,27 @@ app.controller(ngControllerName,function($scope){
             var content = $("textarea[name='content']").val();
             if(projectName == '' || projectName == undefined){
                 flag = false;
-                alert("请输入融资名称！");
+                layer.alert("融资名称不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             if(projectMoney == '' || projectMoney == undefined){
                 flag = false;
-                alert("请输入融资金额！");
+                layer.alert("融资金额不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             if(financeYear == '' || financeYear == undefined){
                 flag = false;
-                alert("请输入融资年限！");
+                layer.alert("融资年限不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             // if(projectType == '' || projectType == undefined){
             //     flag = false;
@@ -181,11 +205,19 @@ app.controller(ngControllerName,function($scope){
             // }
             if(rate == '' || rate == undefined){
                 flag = false;
-                alert("请输入预期年收益！");
+                layer.alert("预期年收益不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             if(content == '' || content == undefined){
                 flag = false;
-                alert("请输入内容！");
+                layer.alert("内容不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             if(flag){
                 $.ajax({
@@ -196,13 +228,22 @@ app.controller(ngControllerName,function($scope){
                     success:function(result){
                         if(result.status == 0) {
                             $scope.searchByParam();
-                            alert("发布成功！")
+                            layer.alert("发布成功！", {
+                                icon: 1,
+                                skin: 'myskin'
+                            });
                         }else {
-                            alert(result.errorMessage);
+                            layer.alert(result.errorMessage, {
+                                icon: 5,
+                                skin: 'myskin'
+                            });
                         }
                     },
                     error:function(){
-                        alert("内部服务异常");
+                        layer.alert("系统内部服务异常！", {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
                     }
                 });
             }

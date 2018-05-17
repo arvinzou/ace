@@ -144,11 +144,17 @@ app.controller(ngControllerName,function($scope){
 
                 });
             }else {
-                alert(result.errorMessage);
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         },
         error:function(){
-            alert("内部服务异常");
+            layer.alert("系统内部服务异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     });
 
@@ -160,7 +166,10 @@ app.controller(ngControllerName,function($scope){
             data:{page:currentPage, limit: pageSize},
             success:$scope.responseHandle,
             error:function(){
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -172,7 +181,10 @@ app.controller(ngControllerName,function($scope){
                 $scope.$apply();
             }
         }else {
-            alert(result.errorMessage);
+            layer.alert(result.errorMessage, {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     }
 
@@ -228,11 +240,17 @@ app.controller(ngControllerName,function($scope){
 
                     });
                 } else {
-                    alert(result.errorMessage);
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
                 }
             },
             error: function () {
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -261,31 +279,59 @@ app.controller(ngControllerName,function($scope){
         var content = $("textarea[name ='content']").val();
         if(productName == '' || productName == undefined){
             flag = false;
-            alert("请输入产品名称！");
+            layer.alert("产品名称不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
         }
         if(productMoney == '' || productMoney == undefined){
             flag = false;
-            alert("请输入产品额度!");
+            layer.alert("产品额度不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
         }
         if(usage == '' || usage == undefined){
             flag = false;
-            alert("请输入贷款用途!");
+            layer.alert("贷款用途不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
         }
         if(method == '' || method == undefined){
             flag = false;
-            alert("请选择担保方式！");
+            layer.alert("担保方式不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
         }
         if(year == '' || year == undefined){
             flag = false;
-            alert("请输入贷款年限！");
+            layer.alert("贷款年限不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
         }
         if(rate == '' || rate == undefined){
             flag = false;
-            alert("请输入贷款利率!");
+            layer.alert("贷款利率不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
         }
         if(content == '' || content == undefined){
             flag = false;
-            alert("请描述融资项目!");
+            layer.alert("融资项目内容不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
         }
         if(flag){
             $.ajax({
@@ -296,13 +342,22 @@ app.controller(ngControllerName,function($scope){
                 success:function(result){
                     if(result.status == 0) {
                         $scope.searchByParam();
-                        alert("发布成功！")
+                        layer.alert("发布成功！", {
+                            icon: 1,
+                            skin: 'myskin'
+                        });
                     }else {
-                        alert(result.errorMessage);
+                        layer.alert(result.errorMessage, {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
                     }
                 },
                 error:function(){
-                    alert("内部服务异常");
+                    layer.alert("系统内部服务异常！", {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
                 }
             });
         }

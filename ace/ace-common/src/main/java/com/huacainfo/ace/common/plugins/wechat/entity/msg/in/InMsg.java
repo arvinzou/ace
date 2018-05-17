@@ -11,6 +11,8 @@ package com.huacainfo.ace.common.plugins.wechat.entity.msg.in;
 
 import com.huacainfo.ace.common.tools.JsonUtil;
 
+import java.io.Serializable;
+
 /**
  * description:
  * 接收消息，以下是接收文本消息的例子
@@ -29,7 +31,8 @@ import com.huacainfo.ace.common.tools.JsonUtil;
  * @version 1.0
  * @since JDK 1.8
  */
-public abstract class InMsg {
+public abstract class InMsg implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     // 开发者微信号
     protected String toUserName;

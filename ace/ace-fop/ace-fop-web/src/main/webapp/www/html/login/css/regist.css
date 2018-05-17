@@ -126,3 +126,9 @@ body{
 .unhover_border{
 	border: 1px solid #E1E5ED;
 }
+.default{
+	display: none;
+}
+.appear{
+	display: block;
+}

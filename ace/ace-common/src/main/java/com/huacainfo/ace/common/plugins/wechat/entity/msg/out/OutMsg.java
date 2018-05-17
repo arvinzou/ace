@@ -19,6 +19,8 @@ package com.huacainfo.ace.common.plugins.wechat.entity.msg.out;
 
 import com.huacainfo.ace.common.plugins.wechat.entity.msg.in.InMsg;
 
+import java.io.Serializable;
+
 /**
  * 回复文本消息
  * <xml>
@@ -29,7 +31,7 @@ import com.huacainfo.ace.common.plugins.wechat.entity.msg.in.InMsg;
  * <Content><![CDATA[你好]]></Content>
  * </xml>
  */
-public abstract class OutMsg {
+public abstract class OutMsg implements Serializable {
 
     // 接收方帐号（收到的OpenID）
     protected String toUserName;

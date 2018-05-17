@@ -57,6 +57,8 @@ jQuery(function ($) {
                 $.jgrid.info_dialog($.jgrid.nav.alertcap,
                     $.jgrid.nav.alerttext)
             }
+
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
                 gr,
@@ -70,9 +72,28 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        //加载body数据
+                        $.ajax({
+                            type: "post",
+                            url: contextPath + "/messageTemplate/selectVoByPrimaryKey.do",
+                            data: {id: rowData.id},
+                            beforeSend: function (XMLHttpRequest) {
+                            },
+                            success: function (rst, textStatus) {
+                                //加载正确配置内容
+                                form.find('textarea[name=tmplBody]').val(rst.value.tmplBody);
+                            },
+                            complete: function (XMLHttpRequest, textStatus) {
+                            },
+                            error: function () {
+                            }
+                        });
+
                     }
                 })
         });
+
+
     $('#btn-view-del').on(
         'click',
         function () {
@@ -138,17 +159,22 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                if (key == 'category') {
-                    value = rsd(value, '83');
-                }
-                if (key == 'status') {
-                    value == "1" ? "正常" : "关闭";
+                // if (key == 'category') {
+                //     value = rsd(value, '83');
+                // }
+                if (key == 'tmplBody') {
+                    value = "<textarea id='tmplBodyTxtArea' cols='30' rows='10'>" + value + "</textarea>";
                 }
                 if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
                 $("#dialog-message-view").find('#' + key).html(value);
             });
+
+            //body内容显示
+            console.log("body内容显示");
+            console.log(rst.value.tmplBody);
+            $("#tmplCodeTxtArea").val(rst.value.tmplBody);
         },
         error: function () {
             alert("加载错误！");
