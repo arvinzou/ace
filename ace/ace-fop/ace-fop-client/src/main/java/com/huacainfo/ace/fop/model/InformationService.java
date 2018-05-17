@@ -2,7 +2,7 @@ package com.huacainfo.ace.fop.model;
 
 import java.util.Date;
 
-public class CorporateStyle {
+public class InformationService {
     private String id;
 
     private String relationId;
@@ -11,7 +11,7 @@ public class CorporateStyle {
 
     private String title;
 
-    private String coverUrl;
+    private String fileUrl;
 
     private Date releaseDate;
 
@@ -34,6 +34,16 @@ public class CorporateStyle {
     private Date lastModifyDate;
 
     private String content;
+
+    private String modules;
+
+    public String getModules() {
+        return modules;
+    }
+
+    public void setModules(String modules) {
+        this.modules = modules;
+    }
 
     public String getId() {
         return id;
@@ -67,12 +77,12 @@ public class CorporateStyle {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getCoverUrl() {
-        return coverUrl;
+    public String getFileUrl() {
+        return fileUrl;
     }
 
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl == null ? null : coverUrl.trim();
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl == null ? null : fileUrl.trim();
     }
 
     public Date getReleaseDate() {

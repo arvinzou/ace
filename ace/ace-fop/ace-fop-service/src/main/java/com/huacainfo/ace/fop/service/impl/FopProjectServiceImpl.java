@@ -155,6 +155,7 @@ public class FopProjectServiceImpl implements FopProjectService {
         if (temp > 0) {
             return new MessageResponse(1, "合作项目名称重复！");
         }
+
         SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
         UsersVo user = singleResult.getValue();
         if (null == user) {
@@ -175,6 +176,7 @@ public class FopProjectServiceImpl implements FopProjectService {
             o.setRelationId(fc.getId());
             o.setRelationType(FopConstant.COMPANY);
         }
+
         o.setReleaseDate(DateUtil.getNowDate());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());

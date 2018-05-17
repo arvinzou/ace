@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.InformationServiceDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.InformationService">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
+        <result column="relationType" jdbcType="CHAR" property="relationType"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="fileUrl" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
+        <result column="click" jdbcType="BIGINT" property="click"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="modules" jdbcType="CHAR" property="modules"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.fop.model.InformationService">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, relationId, relationType, title, fileUrl, releaseDate, click, remark, status, modules,
+    createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+    <sql id="Blob_Column_List">
+    content
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from information_service
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from information_service
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.InformationService">
+    insert into information_service (id, relationId, relationType, 
+      title, fileUrl, releaseDate, 
+      click, remark, status, modules,
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate, 
+      content)
+    values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR}, 
+      #{title,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
+      #{click,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{modules,jdbcType=CHAR},
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.InformationService">
+        insert into information_service
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="relationId != null">
+                relationId,
+            </if>
+            <if test="relationType != null">
+                relationType,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="fileUrl != null">
+                fileUrl,
+            </if>
+            <if test="releaseDate != null">
+                releaseDate,
+            </if>
+            <if test="click != null">
+                click,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="modules != null">
+                modules,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="relationId != null">
+                #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationType != null">
+                #{relationType,jdbcType=CHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="fileUrl != null">
+                #{fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="click != null">
+                #{click,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="modules != null">
+                #{modules,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.InformationService">
+        update information_service
+        <set>
+            <if test="relationId != null">
+                relationId = #{relationId,jdbcType=VARCHAR},
+            </if>
+            <if test="relationType != null">
+                relationType = #{relationType,jdbcType=CHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="fileUrl != null">
+                fileUrl = #{fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="click != null">
+                click = #{click,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="modules != null">
+                modules = #{modules,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.InformationService">
+    update information_service
+    set relationId = #{relationId,jdbcType=VARCHAR},
+      relationType = #{relationType,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      fileUrl = #{fileUrl,jdbcType=VARCHAR},
+      releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+      click = #{click,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      modules = #{modules,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List_Vo"/>
+        from information_service t
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo"
+               type="com.huacainfo.ace.fop.vo.InformationServiceVo"></resultMap>
+
+    <select id="findList" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        <include refid="Base_Column_List_Vo"/>
+        <include refid="whereCondition_Vo"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.releaseDate DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int">
+    select count(*)
+    from information_service
+    where
+    title=#{title}
+  </select>
+
+    <sql id="whereCondition">
+        from information_service
+        where 0=0
+        <if test='condition.title!=null and condition.title!=""'>
+            and title like
+            concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
+        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+
+        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+        <!--<if test="condition.top!=null and condition.top!=&quot;&quot;">-->
+        <!--and top =#{condition.top,jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="condition.noticeType!=null and condition.noticeType!=&quot;&quot;">-->
+        <!--and noticeType =#{condition.noticeType,jdbcType=CHAR}-->
+        <!--</if>-->
+    </sql>
+
+    <sql id="whereCondition_Vo">
+        from information_service t
+        where 0=0
+        <if test='condition.title!=null and condition.title!=""'>
+            and t.title like
+            concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
+        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+
+        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+        <!--<if test="condition.top!=null and condition.top!=&quot;&quot;">-->
+        <!--and top =#{condition.top,jdbcType=CHAR}-->
+        <!--</if>-->
+        <if test="condition.modules!=null and condition.modules!=&quot;&quot;">
+            and modules =#{condition.modules,jdbcType=CHAR}
+        </if>
+    </sql>
+
+    <sql id="Base_Column_List_Vo">
+        CASE
+        WHEN t.relationType='0'
+         THEN (select fullName from fop_company where id = t.relationId)
+        WHEN t.relationType='1'
+         THEN (select fullName from fop_association where id = t.relationId)
+        END companyName,
+        t.id, t.relationId, t.relationType, t.title, t.fileUrl, t.releaseDate, t.click, t.remark, t.status, t.modules,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+    </sql>
+
+</mapper>

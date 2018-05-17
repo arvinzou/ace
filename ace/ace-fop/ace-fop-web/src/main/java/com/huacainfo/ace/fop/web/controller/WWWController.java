@@ -1,10 +1,8 @@
 package com.huacainfo.ace.fop.web.controller;
 
 
-import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
@@ -50,6 +48,9 @@ public class WWWController extends FopBaseController {
 
     @Autowired
     private FopQuestionnaireResultService fopQuestionnaireResultService;
+
+    @Autowired
+    private InformationServiceService informationServiceService;
 
 
 //    /**
@@ -558,4 +559,68 @@ public class WWWController extends FopBaseController {
         return this.fopQuestionnaireResultService.statisticalData();
     }
 
+
+    /**
+     * 获取信息服务列表
+     *
+     * @param condition
+     * @param page
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findInformationServiceListDo")
+    @ResponseBody
+    public ResultResponse findInformationServiceList(InformationServiceQVo condition, PageParamNoChangeSord page) throws Exception {
+        if ("asc".equals(page.getSord())) {
+            page.setOrderBy("releaseDate");
+        }
+        ResultResponse rst = this.informationServiceService.InformationServiceList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
+
+    /**
+     * 查看信息服务详情
+     * id
+     */
+    @RequestMapping(value = "/selectInformationServiceByPrimaryKeyoDo")
+    @ResponseBody
+    public ResultResponse selectInformationServiceByPrimaryKey(String id) throws Exception {
+        return this.informationServiceService.InformationServiceByPrimaryKey(id);
+    }
+
+    /**
+     * @Description: TODO(添加信息服务)
+     * title
+     * content
+     * modules
+     * fileUrl
+     */
+    @RequestMapping(value = "/insertInformationServiceDo")
+    @ResponseBody
+    public MessageResponse insertInformationService(InformationService condition) throws Exception {
+        return this.informationServiceService.insertInformationService(condition, this.getCurUserProp());
+    }
+
+    /**
+     * @Description: TODO(更新信息服务)
+     * id
+     * title
+     * content
+     * fileUrl
+     */
+    @RequestMapping(value = "/updateInformationServiceDo")
+    @ResponseBody
+    public MessageResponse updateInformationService(InformationService condition) throws Exception {
+        return this.informationServiceService.updateInformationService(condition, this.getCurUserProp());
+    }
+
+    /**
+     * @Description: TODO(删除信息服务)
+     * @param: id
+     */
+    @RequestMapping(value = "/deleteInformationServiceByInformationServiceIdDo")
+    @ResponseBody
+    public MessageResponse deleteInformationServiceByInformationServiceId(String id) throws Exception {
+        return this.informationServiceService.deleteInformationServiceByInformationServiceId(id, this.getCurUserProp());
+    }
 }
