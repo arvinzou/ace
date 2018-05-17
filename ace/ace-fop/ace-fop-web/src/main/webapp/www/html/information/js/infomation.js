@@ -43,11 +43,17 @@ app.controller(ngControllerName,function($scope){
 
                 });
             }else {
-                alert(result.info);
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         },
         error:function(){
-            alert("内部服务异常");
+            layer.alert("系统内部服务异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     });
 
@@ -68,11 +74,17 @@ app.controller(ngControllerName,function($scope){
                         $scope.$apply();
                     }
                 }else {
-                    alert(result.info);
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
                 }
             },
             error:function(){
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -104,11 +116,17 @@ app.controller(ngControllerName,function($scope){
                         $scope.$apply();
                     }
                 }else {
-                    alert(result.info);
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
                 }
             },
             error:function(){
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -122,7 +140,10 @@ app.controller(ngControllerName,function($scope){
             data:{page:currentPage, limit: pageSize, title: key_word ,noticeType:noticeType},
             success:$scope.responseHandle,
             error:function(){
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -134,7 +155,10 @@ app.controller(ngControllerName,function($scope){
                 $scope.$apply();
             }
         }else {
-            alert(result.info);
+            layer.alert(result.errorMessage, {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     }
 });

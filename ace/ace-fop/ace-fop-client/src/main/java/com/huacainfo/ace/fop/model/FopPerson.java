@@ -38,6 +38,10 @@ public class FopPerson implements Serializable {
 
     private String mobileNumer;
 
+    private String postcode;
+
+    private String fax;
+
     private String email;
 
     private String remark;
@@ -59,6 +63,22 @@ public class FopPerson implements Serializable {
     private String resume;
 
     private String achievement;
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
 
     public String getResume() {
         return resume;

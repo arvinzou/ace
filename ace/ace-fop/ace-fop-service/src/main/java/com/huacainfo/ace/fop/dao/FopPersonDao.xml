@@ -17,6 +17,8 @@
         <result column="societyPost" jdbcType="VARCHAR" property="societyPost"/>
         <result column="phoneNumber" jdbcType="VARCHAR" property="phoneNumber"/>
         <result column="mobileNumer" jdbcType="VARCHAR" property="mobileNumer"/>
+        <result column="postcode" jdbcType="VARCHAR" property="postcode"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -31,8 +33,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, realName, sex, birthDate, nativePlace, nationality, political, recruitmentDate, 
-    education, skillJobTitle, deptPost, identityCard, societyPost, phoneNumber, mobileNumer, 
+    id, realName, sex, birthDate, nativePlace, nationality, political, recruitmentDate,
+        education, skillJobTitle, deptPost, identityCard, societyPost, phoneNumber, mobileNumer, postcode,fax,
     email, remark, status, createUserId, createUserName, createDate, lastModifyUserId, resume, achievement,
     lastModifyUserName, lastModifyDate
   </sql>
@@ -51,8 +53,8 @@
     insert into fop_person (id, realName, sex, 
       birthDate, nativePlace, nationality, 
       political, recruitmentDate, education, 
-      skillJobTitle, deptPost, identityCard, 
-      societyPost, phoneNumber, mobileNumer, 
+      skillJobTitle, deptPost, identityCard,
+        societyPost, phoneNumber, mobileNumer, postcode,fax,
       email, remark, status, 
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
@@ -60,8 +62,9 @@
     values (#{id,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
       #{birthDate,jdbcType=TIMESTAMP}, #{nativePlace,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, 
       #{political,jdbcType=VARCHAR}, #{recruitmentDate,jdbcType=TIMESTAMP}, #{education,jdbcType=VARCHAR}, 
-      #{skillJobTitle,jdbcType=VARCHAR}, #{deptPost,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR}, 
-      #{societyPost,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{mobileNumer,jdbcType=VARCHAR}, 
+      #{skillJobTitle,jdbcType=VARCHAR}, #{deptPost,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR},
+        #{societyPost,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{mobileNumer,jdbcType=VARCHAR},
+        #{postcode,jdbcType=VARCHAR},#{fax,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
@@ -114,6 +117,12 @@
             </if>
             <if test="mobileNumer != null">
                 mobileNumer,
+            </if>
+            <if test="postcode != null">
+                postcode,
+            </if>
+            <if test="fax != null">
+                fax,
             </if>
             <if test="email != null">
                 email,
@@ -195,6 +204,12 @@
             <if test="mobileNumer != null">
                 #{mobileNumer,jdbcType=VARCHAR},
             </if>
+            <if test="postcode != null">
+                #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                #{fax,jdbcType=VARCHAR},
+            </if>
             <if test="email != null">
                 #{email,jdbcType=VARCHAR},
             </if>
@@ -275,6 +290,12 @@
             <if test="mobileNumer != null">
                 mobileNumer = #{mobileNumer,jdbcType=VARCHAR},
             </if>
+            <if test="postcode != null">
+                postcode = #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                fax = #{fax,jdbcType=VARCHAR},
+            </if>
             <if test="email != null">
                 email = #{email,jdbcType=VARCHAR},
             </if>
@@ -327,6 +348,8 @@
       societyPost = #{societyPost,jdbcType=VARCHAR},
       phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
       mobileNumer = #{mobileNumer,jdbcType=VARCHAR},
+        postcode = #{postcode,jdbcType=VARCHAR},
+        fax = #{fax,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
@@ -356,6 +379,8 @@
       societyPost = #{societyPost,jdbcType=VARCHAR},
       phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
       mobileNumer = #{mobileNumer,jdbcType=VARCHAR},
+        postcode = #{postcode,jdbcType=VARCHAR},
+        fax = #{fax,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},

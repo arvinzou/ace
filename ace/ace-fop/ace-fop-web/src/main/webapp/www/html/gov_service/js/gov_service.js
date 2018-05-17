@@ -42,11 +42,17 @@ app.controller(ngControllerName,function($scope){
 
                 });
             }else {
-                alert(result.info);
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         },
         error:function(){
-            alert("内部服务异常");
+            layer.alert("系统内部服务异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     });
 
@@ -68,11 +74,17 @@ app.controller(ngControllerName,function($scope){
                         $scope.$apply();
                     }
                 }else {
-                    alert(result.info);
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
                 }
             },
             error:function(){
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -104,11 +116,17 @@ app.controller(ngControllerName,function($scope){
                         $scope.$apply();
                     }
                 }else {
-                    alert(result.info);
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
                 }
             },
             error:function(){
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -127,11 +145,19 @@ app.controller(ngControllerName,function($scope){
             console.log(name);
             if(name == '' && name == undefined){
                 flag = false;
-                alert("请输入诉求标题");
+                layer.alert("诉求标题不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             if(content == '' && content == undefined){
                 flag = false;
-                alert("请输入诉求内容");
+                layer.alert("诉求内容不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             if(flag){
                 $.ajax({
@@ -146,11 +172,17 @@ app.controller(ngControllerName,function($scope){
                                 $scope.$apply();
                             }
                         }else {
-                            alert(result.info);
+                            layer.alert(result.errorMessage, {
+                                icon: 5,
+                                skin: 'myskin'
+                            });
                         }
                     },
                     error:function(){
-                        alert("内部服务异常");
+                        layer.alert("系统内部服务异常！", {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
                     }
                 });
             }
@@ -176,7 +208,10 @@ app.controller(ngControllerName,function($scope){
             data:{page:currentPage, limit: pageSize, title: key_word },
             success:$scope.responseHandle,
             error:function(){
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -188,7 +223,10 @@ app.controller(ngControllerName,function($scope){
                 $scope.$apply();
             }
         }else {
-            alert(result.info);
+            layer.alert(result.errorMessage, {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     }
 });

@@ -93,11 +93,17 @@ app.controller(ngControllerName,function($scope){
 
                 });
             }else {
-                alert(result.errorMessage);
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         },
         error:function(){
-            alert("内部服务异常");
+            layer.alert("系统内部服务异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     });
 
@@ -109,7 +115,10 @@ app.controller(ngControllerName,function($scope){
             data:{page:currentPage, limit: pageSize},
             success:$scope.responseHandle,
             error:function(){
-                alert("内部服务异常");
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
@@ -121,7 +130,10 @@ app.controller(ngControllerName,function($scope){
                 $scope.$apply();
             }
         }else {
-            alert(result.errorMessage);
+            layer.alert(result.errorMessage, {
+                icon: 5,
+                skin: 'myskin'
+            });
         }
     }
 
@@ -151,15 +163,27 @@ app.controller(ngControllerName,function($scope){
             var content = $("textarea[name='content']").val();
             if(projectName == '' || projectName == undefined){
                 flag = false;
-                alert("项目名称不能为空！");
+                layer.alert("项目名称不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             if(cooType == '' || cooType == undefined){
                 flag = false;
-                alert("合作方式不能为空！");
+                layer.alert("合作方式不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             if(area == '' || area == undefined){
                 flag = false;
-                alert("所属区域不能为空！");
+                layer.alert("所属区域不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
             }
             if(flag){
                 $.ajax({
@@ -170,13 +194,22 @@ app.controller(ngControllerName,function($scope){
                     success:function(result){
                         if(result.status == 0) {
                             $scope.searchByParam();
-                            alert("发布成功！")
+                            layer.alert("发布成功！", {
+                                icon: 1,
+                                skin: 'myskin'
+                            });
                         }else {
-                            alert(result.errorMessage);
+                            layer.alert(result.errorMessage, {
+                                icon: 5,
+                                skin: 'myskin'
+                            });
                         }
                     },
                     error:function(){
-                        alert("内部服务异常");
+                        layer.alert("系统内部服务异常！", {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
                     }
                 });
             }

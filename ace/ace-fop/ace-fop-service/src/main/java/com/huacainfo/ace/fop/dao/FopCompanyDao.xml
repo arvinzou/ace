@@ -547,7 +547,7 @@
         c.longitude, c.firstPersonId, c.secPersonId, c.postcode, c.fax, c.email, c.majorVariety, c.laborContractNum,
         c.thirdLaborRelation, c.socialInsuranceAddr, c.socialInsuranceNum, c.accTaxAmount, c.yearTaxAmount,
         c.remark, c.status, c.createUserId, c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName,
-        c.lastModifyDate, p.realName
+        c.lastModifyDate, p.realName,pp.name as areaCodeName
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -576,8 +576,8 @@
 
     <sql id="fromCondition_Vo">
             from fop_company c
-            left join fop_person p
-            on p.id=c.personId
+        left join fop_person p on p.id=c.personId
+        left join portal.province pp on pp.code=c.areaCode
     </sql>
 
     <sql id="whereCondition">
