@@ -117,6 +117,9 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "内容不能为空！");
         }
+        if (CommonUtils.isBlank(o.getModules())) {
+            return new MessageResponse(1, "模块不能为空！");
+        }
         int temp = this.informationServiceDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "信息服务名称重复！");
