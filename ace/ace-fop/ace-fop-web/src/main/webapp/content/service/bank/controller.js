@@ -21,7 +21,7 @@ jQuery(function ($) {
                 });
                 // console.log(params);
                 //公司类型筛选
-                params['companyType'] = "0";
+                params['companyType'] = "3";
 
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {
                     page: 1,

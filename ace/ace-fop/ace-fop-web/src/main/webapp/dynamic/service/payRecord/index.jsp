@@ -45,10 +45,10 @@
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
 
-                    <%--<button class="btn btn-info" id="btn-view-add"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopPayRecord/insertFopPayRecord">--%>
-                    <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
+                    <button class="btn btn-info" id="btn-view-add"
+                            authority="${pageContext.request.contextPath}/fopPayRecord/insertFopPayRecord">
+                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                    </button>
                     <button class="btn btn-info" id="btn-view-edit"
                             authority="${pageContext.request.contextPath}/fopPayRecord/updateFopPayRecord">
                         <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
