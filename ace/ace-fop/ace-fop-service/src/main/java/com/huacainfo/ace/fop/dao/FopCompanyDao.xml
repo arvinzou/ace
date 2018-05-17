@@ -594,7 +594,7 @@
             and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.companyType!=null and condition.companyType!=""'>
-            and companyType =#{condition.companyType,jdbcType=CHAR}
+            and companyType = #{condition.companyType,jdbcType=CHAR}
         </if>
         <if test='condition.companyProperty!=null and condition.companyProperty!=""'>
             and companyProperty=#{condition.companyProperty,jdbcType=CHAR}
@@ -613,7 +613,7 @@
             and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.companyType!=null and condition.companyType!=""'>
-            and companyType=#{condition.companyType,jdbcType=CHAR}
+            and companyType = #{condition.companyType,jdbcType=CHAR}
         </if>
         <if test='condition.companyProperty!=null and condition.companyProperty!=""'>
             and companyProperty=#{condition.companyProperty,jdbcType=CHAR}

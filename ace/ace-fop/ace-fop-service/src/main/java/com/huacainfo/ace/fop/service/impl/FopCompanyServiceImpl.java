@@ -145,6 +145,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         }
         //入库企业信息
         Department department = (Department) rs1.getData();
+        o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
         o.setDepartmentId(department.getDepartmentId());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
@@ -154,7 +155,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         this.fopCompanyDao.insertSelective(o);
         this.dataBaseLogService.log("添加企业管理", "企业管理", "", o.getId(),
                 o.getId(), userProp);
-
         //自动提交会员申请流程
         MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
                 FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
@@ -162,10 +162,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return rs3;
         }
         //自动提交缴费记录
-        MessageResponse rs4 = submitPayRecord(o, userProp);
-        if (ResultCode.FAIL == rs4.getStatus()) {
-            return rs4;
-        }
+//        MessageResponse rs4 = submitPayRecord(o, userProp);
+//        if (ResultCode.FAIL == rs4.getStatus()) {
+//            return rs4;
+//        }
         return new MessageResponse(0, "添加企业管理完成！");
     }
 
@@ -199,11 +199,11 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new MessageResponse(ResultCode.FAIL, rs2.getInfo());
         }
         //入库企业信息
-
         FopPerson fp = (FopPerson) rs2.getData();
 
         Department department = (Department) rs1.getData();
         o.setDepartmentId(department.getDepartmentId());
+        o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
