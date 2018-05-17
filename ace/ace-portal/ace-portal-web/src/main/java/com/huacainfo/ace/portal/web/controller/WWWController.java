@@ -253,5 +253,14 @@ public class WWWController extends PortalBaseController {
 		this.kafkaProducerService.sendMsg("topic.sys.msg", p);
 		return new ResponseEntity<>(p, HttpStatus.OK);
 	}
+	@RequestMapping(value = "/kafka.do")
+	@ResponseBody
+	public ResponseEntity  kafkatest()throws Exception{
+		Map<String,Object> p=this.getParams();
+		p.put("service","backendService");
+		this.logger.info("backendService->{}",p);
+		this.kafkaProducerService.sendMsg("topic.sys.msg", p);
+		return new ResponseEntity<>(p, HttpStatus.OK);
+	}
 
 }

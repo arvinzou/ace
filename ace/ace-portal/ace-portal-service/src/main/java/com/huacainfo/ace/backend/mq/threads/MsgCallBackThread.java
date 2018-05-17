@@ -51,7 +51,7 @@ public class MsgCallBackThread extends Thread {
     }
 
     public void doCallBack(Map<String, Object> data) {
-        LOGGER.error("doCallBack -> {}", data);
+        LOGGER.error("=======================================doCallBack -> {}", data);
         BackendService service= (BackendService)SpringUtils.getBean((String) data.get("service"));
         try {
             service.service(data);
