@@ -17,9 +17,11 @@ jQuery(function ($) {
                 $.each(formData, function (n, obj) {
                     params[obj.name] = obj.value;
                 });
+
                 $.extend(params, {
                     time: new Date()
                 });
+
                 // console.log(params);
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {
                     page: 1,

@@ -158,11 +158,11 @@
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
-<script src="${pageContext.request.contextPath}/content/service/corporateStyle/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/corporateStyle/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/corporateStyle/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/corporateStyle/view.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/corporateStyle/upload.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/investmentInfo/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/investmentInfo/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/investmentInfo/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/investmentInfo/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/investmentInfo/upload.js?version=${cfg.version}"></script>
 
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
