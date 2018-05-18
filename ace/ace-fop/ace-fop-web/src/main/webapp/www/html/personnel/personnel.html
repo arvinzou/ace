@@ -43,7 +43,7 @@
 										<td width="20%" align="left">发布时间</td>
 									</tr>
 									<tr ng-repeat="item in items">
-										<td width="40%"><a href="#">{{item.title}}</a> </td>
+										<td width="40%"><a href="#" ng-click="showInfo($index)">{{item.title}}</a> </td>
 										<td width="40%" ng-bind="item.companyName"></td>
 										<td width="20%" ng-bind="item.releaseDate"></td>
 									</tr>

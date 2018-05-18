@@ -144,4 +144,10 @@ app.controller(ngControllerName,function($scope){
             }
         });
     }
+
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('recruit.html?id='+primaryId);
+    }
 });
