@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopCallRecordDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopCallRecord">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="payTitle" jdbcType="VARCHAR" property="payTitle"/>
+        <result column="payCategory" jdbcType="CHAR" property="payCategory"/>
+        <result column="closingDate" jdbcType="TIMESTAMP" property="closingDate"/>
+        <result column="msgTmplCode" jdbcType="VARCHAR" property="msgTmplCode"/>
+        <result column="payAmount" jdbcType="DECIMAL" property="payAmount"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, payTitle, payCategory, closingDate, msgTmplCode, payAmount, remark, status, createUserId, 
+    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_call_record
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fop_call_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopCallRecord">
+    insert into fop_call_record (id, payTitle, payCategory, 
+      closingDate, msgTmplCode, payAmount, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{payTitle,jdbcType=VARCHAR}, #{payCategory,jdbcType=CHAR}, 
+      #{closingDate,jdbcType=TIMESTAMP}, #{msgTmplCode,jdbcType=VARCHAR}, #{payAmount,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopCallRecord">
+        insert into fop_call_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="payTitle != null">
+                payTitle,
+            </if>
+            <if test="payCategory != null">
+                payCategory,
+            </if>
+            <if test="closingDate != null">
+                closingDate,
+            </if>
+            <if test="msgTmplCode != null">
+                msgTmplCode,
+            </if>
+            <if test="payAmount != null">
+                payAmount,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="payTitle != null">
+                #{payTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="payCategory != null">
+                #{payCategory,jdbcType=CHAR},
+            </if>
+            <if test="closingDate != null">
+                #{closingDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="msgTmplCode != null">
+                #{msgTmplCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payAmount != null">
+                #{payAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopCallRecord">
+        update fop_call_record
+        <set>
+            <if test="payTitle != null">
+                payTitle = #{payTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="payCategory != null">
+                payCategory = #{payCategory,jdbcType=CHAR},
+            </if>
+            <if test="closingDate != null">
+                closingDate = #{closingDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="msgTmplCode != null">
+                msgTmplCode = #{msgTmplCode,jdbcType=VARCHAR},
+            </if>
+            <if test="payAmount != null">
+                payAmount = #{payAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopCallRecord">
+    update fop_call_record
+    set payTitle = #{payTitle,jdbcType=VARCHAR},
+      payCategory = #{payCategory,jdbcType=CHAR},
+      closingDate = #{closingDate,jdbcType=TIMESTAMP},
+      msgTmplCode = #{msgTmplCode,jdbcType=VARCHAR},
+      payAmount = #{payAmount,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <sql id="Vo_Column_List">
+        id, payTitle, payCategory, closingDate, msgTmplCode, payAmount, remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopCallRecordVo">
+
+    </resultMap>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_call_record
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <sql id="whereCondition">
+        from fop_call_record
+        where 1 = 1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopCallRecord">
+        select count(*)
+        from fop_call_record
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="selectAllSendObject" parameterType="java.lang.String" resultType="java.util.Map">
+        SELECT
+            t.id AS toUserId,
+            '0' AS toUserType,
+            p.mobileNumer AS mobile,
+            t.fullName AS nickName
+        FROM fop_company t
+        LEFT JOIN fop_person p ON t.personId = p.id
+        WHERE p.mobileNumer IS NOT NULL
+        UNION ALL
+        SELECT
+            t.id AS toUserId,
+            '1' AS toUserType,
+            t.phoneNumber AS mobile,
+            t.fullName AS nickName
+        FROM fop_association t
+        WHERE t.phoneNumber IS NOT NULL
+    </select>
+</mapper>
