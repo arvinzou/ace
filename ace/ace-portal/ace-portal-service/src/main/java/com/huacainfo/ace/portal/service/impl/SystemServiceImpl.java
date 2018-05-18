@@ -24,6 +24,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.dao.SystemDao;
 import com.huacainfo.ace.portal.dao.UsersDao;
 import com.huacainfo.ace.portal.dao.UserCfgDao;
+import com.huacainfo.ace.portal.dao.UserinfoDao;
 import com.huacainfo.ace.portal.model.Config;
 import com.huacainfo.ace.portal.model.Resources;
 import com.huacainfo.ace.portal.model.Users;
@@ -52,6 +53,8 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 	private SysInfoService sysInfoService;
 	@Autowired
 	private UserCfgDao userCfgDao;
+	@Autowired
+	private UserinfoDao userinfoDao;
 
 	public List<Resources> getResourcesByUserId(String id) {
 		return this.systemDao.selectResourcesByUserId(id, "ace");
@@ -361,5 +364,13 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 			cfg.put((String)o.get("cfgKey"),o.get("value"));
 		}
 		return cfg;
+	}
+
+	public Map<String, Object> selectUserinfo(Map<String,Object> params)  throws Exception{
+		Map<String, Object> rst = new HashMap<String, Object>();
+		List<Map<String, Object>> list =this.userinfoDao.getListByDeptId(params);
+		rst.put("total", list.size());
+		rst.put("rows", list);
+		return rst;
 	}
 }
