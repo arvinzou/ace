@@ -284,21 +284,9 @@
             and title like
             concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
-        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-
-        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-        <!--<if test="condition.top!=null and condition.top!=&quot;&quot;">-->
-        <!--and top =#{condition.top,jdbcType=CHAR}-->
-        <!--</if>-->
-        <!--<if test="condition.noticeType!=null and condition.noticeType!=&quot;&quot;">-->
-        <!--and noticeType =#{condition.noticeType,jdbcType=CHAR}-->
-        <!--</if>-->
+        <if test="condition.modules!=null and condition.modules!=&quot;&quot;">
+            and modules =#{condition.modules,jdbcType=CHAR}
+        </if>
     </sql>
 
     <sql id="whereCondition_Vo">
@@ -308,18 +296,6 @@
             and t.title like
             concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
-        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-
-        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-        <!--<if test="condition.top!=null and condition.top!=&quot;&quot;">-->
-        <!--and top =#{condition.top,jdbcType=CHAR}-->
-        <!--</if>-->
         <if test="condition.modules!=null and condition.modules!=&quot;&quot;">
             and modules =#{condition.modules,jdbcType=CHAR}
         </if>
