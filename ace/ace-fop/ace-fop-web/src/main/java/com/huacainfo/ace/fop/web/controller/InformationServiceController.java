@@ -19,7 +19,7 @@ import com.huacainfo.ace.fop.vo.InformationServiceVo;
 import com.huacainfo.ace.fop.vo.InformationServiceQVo;
 
 @Controller
-@RequestMapping("/corporateStyle")
+@RequestMapping("/informationService")
 /**
  * @author: huacai003
  * @version: 2018-05-17
