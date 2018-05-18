@@ -79,7 +79,7 @@
     SELECT COUNT(*)
     <include refid="whereCondition" />
   </select>
-  <select id="findList" resultMap="BaseResultMap">
+  <select id="findList" resultMap="BaseResultMapVo">
     select
     t.id, t.name, t.cover, t.qrcoteUrl, t.openId, t.tplCode,t.answerTplCode, t.status, t.createUserId, t.createUserName,
     t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.remark,b.nickname
