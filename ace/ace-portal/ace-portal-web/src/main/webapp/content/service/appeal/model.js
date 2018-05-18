@@ -1,4 +1,4 @@
-var _colNames = ['主键', '诉求名称', '封面', '二维码', '处理人', '答复消息模板', '诉求简介', '状态', '创建人编号', '创建人姓名', '入库日期', '最后更新人编码',
+var _colNames = ['主键', '诉求名称', '封面', '二维码', '处理人', '处理通知模板','答复通知模板', '状态', '诉求简介', '创建人编号', '创建人姓名', '入库日期', '最后更新人编码',
     '最后更新人姓名', '最后更新时间'
 ];
 var _colModel = function () {
@@ -67,24 +67,129 @@ var _colModel = function () {
                 required: true
             }
         }, {
-            name: 'openId',
-            hidden: true,
-            editable: true,
-            width: 100,
-            editoptions: {
-                size: "20",
-                maxlength: "50"
-            },
-        }, {
-            name: 'tplCode',
-            hidden: true,
-            editable: true,
-            width: 100,
-            editoptions: {
-                size: "20",
-                maxlength: "50"
-            },
-        }, {
+           				name : 'openId',
+           				editable : true,
+           				width : 100,
+           				edittype : "combogrid",
+           				dataoptions : {
+           					panelWidth : 400,
+           					idField : 'openid',
+           					textField : 'nickname',
+           					url : portalPath + '/system/selectUserinfo.do',
+           					mode : 'remote',
+           					fitColumns : true,
+           					method : 'get',
+           					columns : [[{
+                                                   						field : 'openid',
+                                                   						title : 'OPENID',
+                                                   						width:200
+                                                   					}, {
+           						field : 'nickname',
+           						title : '昵称',
+           						width:100
+           					}]]
+           				},
+           				editoptions : {
+           					style : 'height:25px'
+           				},
+           				renderer : function(value, cur) {
+           					return $.jgrid.getAccessor(cur, 'nickname');
+           				},
+           				formoptions : {
+           					elmprefix : "",
+           					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+           				},
+           				editrules : {
+           					required : true
+           				}
+           			},
+           			{
+                    				name : 'tplCode',
+                    				width : 100,
+                    				editable : true,
+                    				hidden:true,
+                    				edittype : "select",
+                    				renderer : function(value) {
+                    					return rsd(value, "136");
+                    				},
+                    				editoptions : {
+                    					value : odparse("136")
+                    				},
+                    				formoptions : {
+                                        elmprefix : "",
+                                        elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+                                    },
+                                    editrules : {
+                                        required : true
+                                    }
+                    			},{
+                                                      				name : 'answerTplCode',
+                                                      				width : 100,
+                                                      				editable : true,
+                                                      				hidden:true,
+                                                      				edittype : "select",
+                                                      				renderer : function(value) {
+                                                      					return rsd(value, "136");
+                                                      				},
+                                                      				editoptions : {
+                                                      					value : odparse("136")
+                                                      				},
+                                                      				formoptions : {
+                                                                          elmprefix : "",
+                                                                          elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+                                                                      },
+                                                                      editrules : {
+                                                                          required : true
+                                                                      }
+                                                      			}, {
+                                                                             name: 'status',
+                                                                             editable: true,
+                                                                             width: 50,
+                                                                             edittype: "checkbox",
+                                                                             editoptions: {
+                                                                                 value: "1:0"
+                                                                             },
+                                                                             cellattr: function (rowId, val, rawObject, cm, rdata) {
+                                                                                 if (rawObject.status == '0') {
+                                                                                     return "style='background:red;color:#fff'";
+                                                                                 }
+                                                                                 if (rawObject.status == '1') {
+                                                                                     return "style='background:green;color:#fff'";
+                                                                                 }
+                                                                                 if (rawObject.status == '2') {
+                                                                                     return "style='background:green;color:#fff'";
+                                                                                 }
+                                                                                 if (rawObject.status == '3') {
+                                                                                     return "style='background:#F9F900;color:#000000'";
+                                                                                 }
+                                                                                 if (rawObject.status == '4') {
+                                                                                     return "style='background:#FF9224;color:#000000'";
+                                                                                 }
+                                                                             },
+                                                                             unformat: aceSwitch,
+                                                                             renderer: function (value) {
+                                                                                 var rst = "";
+                                                                                 switch (value) {
+                                                                                     case '1':
+                                                                                         rst = "ON";
+                                                                                         break;
+                                                                                     case '0':
+                                                                                         rst = "OFF";
+                                                                                         break;
+                                                                                     default:
+                                                                                         rst = "N/A";
+                                                                                 }
+                                                                                 return rst;
+                                                                             },
+
+                                                                             formoptions: {
+                                                                                 elmprefix: "",
+                                                                                 elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+                                                                             },
+                                                                             editrules: {
+                                                                                 required: true
+                                                                             }
+                                                                         }, {
             name: 'remark',
             hidden: true,
             edittype: 'textarea',
@@ -95,54 +200,6 @@ var _colModel = function () {
 				rows:"10" ,
 				cols:"63"
             },
-            formoptions: {
-                elmprefix: "",
-                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
-            },
-            editrules: {
-                required: true
-            }
-        }, {
-            name: 'status',
-            editable: true,
-            width: 50,
-            edittype: "checkbox",
-            editoptions: {
-                value: "1:0"
-            },
-            cellattr: function (rowId, val, rawObject, cm, rdata) {
-                if (rawObject.status == '0') {
-                    return "style='background:red;color:#fff'";
-                }
-                if (rawObject.status == '1') {
-                    return "style='background:green;color:#fff'";
-                }
-                if (rawObject.status == '2') {
-                    return "style='background:green;color:#fff'";
-                }
-                if (rawObject.status == '3') {
-                    return "style='background:#F9F900;color:#000000'";
-                }
-                if (rawObject.status == '4') {
-                    return "style='background:#FF9224;color:#000000'";
-                }
-            },
-            unformat: aceSwitch,
-            renderer: function (value) {
-                var rst = "";
-                switch (value) {
-                    case '1':
-                        rst = "ON";
-                        break;
-                    case '0':
-                        rst = "OFF";
-                        break;
-                    default:
-                        rst = "N/A";
-                }
-                return rst;
-            },
-
             formoptions: {
                 elmprefix: "",
                 elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"

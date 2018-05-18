@@ -146,9 +146,9 @@
         select t.openid,t.nickname from userinfo t where t.appid in(
         select appid from wx_cfg a WHERE a.type='app' and a.deptId=#{deptId}
         )
-        <if test='params.q !=null and params.q!=""'>
-            and (t.openid=#{params.q} or t.nickname like
-            concat('%',#{params.q},'%'))
+        <if test='q!=null and q!=""'>
+            and (t.openid=#{q} or t.nickname like
+            concat('%',#{q},'%'))
         </if>
 
         order by t.openid
