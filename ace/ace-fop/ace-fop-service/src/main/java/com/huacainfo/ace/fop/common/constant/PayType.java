@@ -14,4 +14,6 @@ public interface PayType {
      * 会员申请
      */
     String PAY_CATEGORY_MEMBER_JOIN = "0";
+
+
 }
