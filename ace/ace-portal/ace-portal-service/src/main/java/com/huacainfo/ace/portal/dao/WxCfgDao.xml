@@ -41,6 +41,8 @@
         #{expiresIn,jdbcType=INTEGER}, #{deptId,jdbcType=VARCHAR}, #{serverToken,jdbcType=VARCHAR},
         #{mchId,jdbcType=VARCHAR}, #{apiKey,jdbcType=VARCHAR}, #{certUrl,jdbcType=VARCHAR},
         #{sysId,jdbcType=VARCHAR})
+
+
     </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.WxCfg">
