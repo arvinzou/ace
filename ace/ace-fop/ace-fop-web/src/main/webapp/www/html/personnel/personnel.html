@@ -14,6 +14,11 @@
 		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+		<script type="text/javascript" src="/portal/content/common/simditor/scripts/module.js"></script>
+		<script type="text/javascript" src="/portal/content/common/simditor/scripts/hotkeys.js"></script>
+		<script type="text/javascript" src="/portal/content/common/simditor/scripts/uploader.js"></script>
+		<script type="text/javascript" src="/portal/content/common/simditor/scripts/simditor.js"></script>
+		<link rel="stylesheet" type="text/css" href="/portal/content/common/simditor/styles/simditor.css"/>
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
 		<script type="text/javascript" src="js/personnel.js"></script>
 	</head>
@@ -62,68 +67,32 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">发布融资</h4>
+					<h4 class="modal-title" id="myModalLabel">发布招聘</h4>
 				</div>
 				<div class="modal-body">
 					<div class="product_form">
-						<table class="product_table" cellpadding="0" cellspacing="0" border="0">
+						<table class="product_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
 							<tr>
-								<td width="15%" align="right"><span class="required">*</span><span>产品名称</span></td>
+								<td width="15%" align="right"><span class="required">*</span><span>职位名称</span></td>
 								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入产品名称" name="productName"  onfocus="this.placeholder=''" onblur="this.placeholder='请输入产品名称'"/></td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span class="required">*</span><span>产品额度</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入产品金额" name="productMoney" onfocus="this.placeholder=''" onblur="this.placeholder='请输入产品金额'"/></td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span class="required">*</span><span>贷款用途</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入贷款用途" name="usage" onfocus="this.placeholder=''" onblur="this.placeholder='请输入贷款用途'"/></td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span class="required">*</span><span>担保方式</span></td>
-								<td width="5%"></td>
-								<td>
-									<select name="method">
-										<option value="" selected="selected">请选择担保方式</option>
-										<option value="信用贷">信用贷</option>
-										<option value="抵押贷">抵押贷</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span>贷款年限</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入贷款年限" name="year" onfocus="this.placeholder=''" onblur="this.placeholder='请输入贷款年限'"/></td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span>贷款利率</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入贷款利率" name="rate" onfocus="this.placeholder=''" onblur="this.placeholder='请输入贷款利率'"/></td>
+								<td><input type="text" placeholder="请输入职位名称" name="postname"  onfocus="this.placeholder=''" onblur="this.placeholder='请输入职位名称'"/></td>
 							</tr>
 							<tr style="height: 186px;">
-								<td width="15%" align="right" style="height: 186px;"><span>内容</span></td>
+								<td width="15%" align="right" style="height: 186px;"><span>具体内容</span></td>
 								<td width="5%" style="height: 186px;"></td>
-								<td style="height: 186px;">
-									<textarea name="content" placeholder="描述融资项目" onfocus="this.placeholder=''" onblur="this.placeholder='描述融资项目'"></textarea>
+								<td style="height: 300px;">
+									<textarea name="content" id="editor" placeholder="请描述职位的具体内容" onfocus="this.placeholder=''" onblur="this.placeholder='请描述职位的具体内容'"></textarea>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="3" align="center">
-									<button class="submit" data-dismiss="modal" onclick="submitForm();">提交</button>
+									<button class="submit" data-dismiss="modal" ng-click="releaseInfo();">发布</button>
 								</td>
 							</tr>
 						</table>
 					</div>
 				</div>
-				<!--<div class="modal-footer">
-                <button type="button" class="btn btn-primary">提交</button>
-            </div>-->
 			</div>
-			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal -->
 	</div>
 </html>
