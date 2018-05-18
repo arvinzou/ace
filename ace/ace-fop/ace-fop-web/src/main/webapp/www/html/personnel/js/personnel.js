@@ -6,7 +6,7 @@ var currentPage = 1;
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
-    //初始化记事本
+    //初始化文本框
     var editor = new Simditor({
         textarea: $('#editor')
 
