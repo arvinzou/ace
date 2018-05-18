@@ -9,7 +9,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Base_Column_List">
-    appId, appScret, accessToken, expiresIn, name,deptId
+    appId, appScret, accessToken, expiresIn, name,deptId,type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -23,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.portal.model.WxCfg">
     insert into wx_cfg (appId, appScret, accessToken,
-    expiresIn, name,deptId)
+    expiresIn, name,deptId,type)
     values (#{appId,jdbcType=VARCHAR}, #{appScret,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR},
-    #{expiresIn,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{deptId})
+    #{expiresIn,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},#{deptId},#{type})
   </insert>
 
 
@@ -35,7 +35,8 @@
       accessToken = #{accessToken,jdbcType=VARCHAR},
       expiresIn = #{expiresIn,jdbcType=INTEGER},
     name = #{name,jdbcType=VARCHAR},
-    deptId = #{deptId,jdbcType=VARCHAR}
+    deptId = #{deptId,jdbcType=VARCHAR},
+    type = #{type,jdbcType=VARCHAR}
     where appId = #{appId,jdbcType=VARCHAR}
   </update>
 

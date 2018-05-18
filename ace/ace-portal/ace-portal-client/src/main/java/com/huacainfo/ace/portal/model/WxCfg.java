@@ -17,6 +17,8 @@ public class WxCfg implements java.io.Serializable {
     private String name;
     private String deptId;
 
+    private String type;
+
     public String getAppId() {
         return appId;
     }
@@ -63,5 +65,13 @@ public class WxCfg implements java.io.Serializable {
 
     public void setDeptId(String deptId) {
         this.deptId = deptId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -142,4 +142,16 @@
         left join wx_cfg w on t.appid = w.appId
         where t.openid = #{condition.openid,jdbcType=VARCHAR}
     </select>
+    <select id="getListByDeptId" resultType="map">
+        select t.openid,t.nickname from userinfo t where t.appid in(
+        select appid from wx_cfg a WHERE a.type='app' and a.deptId=#{deptId}
+        )
+        <if test='params.q !=null and params.q!=""'>
+            and (t.openid=#{params.q} or t.nickname like
+            concat('%',#{params.q},'%'))
+        </if>
+
+        order by t.openid
+        limit 0,20
+    </select>
 </mapper>
