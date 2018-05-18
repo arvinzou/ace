@@ -21,6 +21,7 @@ jQuery(function ($) {
             rows: "limit"
         },
         datatype: "json",
+        postData: {modules: 1},
         url: cfg.grid_load_data_url,
         jsonReader: {
             root: "rows",
@@ -268,10 +269,8 @@ jQuery(function ($) {
                     $.trim(icon.attr('class').replace('ui-icon',
                         ''));
 
-                if ($classin
-                    replacement
-            )
-                icon.attr('class', 'ui-icon ' + replacement[$class]);
+                if ($class in replacement)
+                    icon.attr('class', 'ui-icon ' + replacement[$class]);
             })
     }
 

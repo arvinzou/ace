@@ -15,6 +15,9 @@ public class FopCompany implements Serializable {
 
     private String creditCode;
 
+    /***
+     * 0-普通企业 1-团体企业 2-律师事务所 3-银行
+     */
     private String companyType;
 
     private String fullName;

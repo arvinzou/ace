@@ -176,7 +176,9 @@ public class MessageTemplateServiceImpl implements MessageTemplateService, Backe
     @Override
     public SingleResult<MessageTemplateVo> selectVoByPrimaryKey(String id) throws Exception {
         SingleResult<MessageTemplateVo> rst = new SingleResult<>();
-        rst.setValue(this.messageTemplateDao.selectVoByPrimaryKey(id));
+        MessageTemplateVo vo = messageTemplateDao.selectVoByPrimaryKey(id);
+        rst.setValue(vo);
+
         return rst;
     }
 

@@ -43,7 +43,6 @@
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
-
                     <button class="btn btn-purple" id="btn-view-audit"
                             authority="${pageContext.request.contextPath}/fopFlowRecord/audit">
                         <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	id="WebApp_ID" version="2.5">
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="WebApp_ID" version="2.5">
 	<display-name>webRoot</display-name>
 	<context-param>
 		<param-name>webAppRootKey</param-name>
@@ -88,7 +88,7 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/j_spring_security_check</url-pattern>
 	</filter-mapping>
-	<!-- spring security filter end -->
+    spring security filter end
 	<!-- spring mvc filter start -->
 	<servlet>
         <servlet-name>springServlet</servlet-name>
@@ -103,8 +103,9 @@
     </servlet>
      <servlet-mapping>
         <servlet-name>springServlet</servlet-name>
-        <url-pattern>*.do</url-pattern>
+         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <!--*.do-->
 	<!-- spring mvc filter end -->
 
 	<servlet>

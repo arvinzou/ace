@@ -9,6 +9,8 @@ import com.huacainfo.ace.common.plugins.wechat.entity.msg.in.event.InQrCodeEvent
 import com.huacainfo.ace.common.plugins.wechat.entity.msg.out.OutTextMsg;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.plugins.wechat.util.WeChatUtil;
+import com.huacainfo.ace.portal.service.WechatService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +29,9 @@ import java.io.PrintWriter;
 @Controller
 @RequestMapping("/www/wechat")
 public class WeChatController extends MsgControllerAdapter {
+
+    @Autowired
+    private WechatService wechatService;
 
     /**
      * 服务器配置 验证
@@ -130,23 +135,20 @@ public class WeChatController extends MsgControllerAdapter {
     @Override
     protected String processInTextMsg(InTextMsg inTextMsg) {
         logger.debug("processInTextMsg[" + inTextMsg.toString() + "]");
-        String userInput = inTextMsg.getContent();
+
         //讲消息转送客服处理
-        OutTextMsg customMsg = new OutTextMsg(inTextMsg);
-//        if ("guoni123-token".equals(userContent)) {
-//            ConfigWechat wechat = AccessUtil.getWechatByOriId(inTextMsg.getToUserName());
-//            String token = AccessUtil.getAccessToken(wechat.getSysId());
-//            customMsg.setContent(token);
-//        } else if ("guoni123".equals(userContent)) {
-//            customMsg.setContent("openid = " + inTextMsg.getFromUserName());
-//        } else {
-//            customMsg.setContent("尊敬的会员您好，客服智能对话功能尚未开启，敬请期待");
-//        }
+        OutTextMsg customMsg = wechatService.getCustomerResponse(inTextMsg);
 
-        customMsg.setContent("here is your input:" + userInput + "," +
-                "\nhello world!, this is testing time.....");
+//        new OutTextMsg(inTextMsg);
+//        customMsg.setContent("here is your input:" + userInput + "," +
+//                "\nhello world!, this is testing time.....");
 
+
+        if (null == customMsg) {
+            return "success";
+        }
         return render(customMsg);
+
     }
 
     /**

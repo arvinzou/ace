@@ -1,6 +1,6 @@
 var cfg = {};
 cfg.view_load_data_url = contextPath + '/fopCompany/selectFopCompanyByPrimaryKey';
-cfg.grid_load_data_url = contextPath + '/fopCompany/findFopCompanyList';
+cfg.grid_load_data_url = contextPath + '/fopCompany/findFopCompanyList?companyType=0';
 cfg.grid_add_data_url = contextPath + '/fopCompany/insertFopCompany';
 cfg.grid_edit_data_url = contextPath + '/fopCompany/updateFopCompany';
 cfg.grid_delete_data_url = contextPath + '/fopCompany/deleteFopCompanyByFopCompanyId';

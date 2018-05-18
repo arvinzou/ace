@@ -11,7 +11,6 @@ import java.util.*;
  */
 public class WeChatUtil {
     private static Logger logger = LoggerFactory.getLogger(WeChatUtil.class);
-
     /**
      * <原始ID,公众号配置信息>
      */
@@ -27,10 +26,12 @@ public class WeChatUtil {
         hcwy.setSysId("hcwy");
         hcwy.setWxSecretKey("680XkW466zc5v56agjHBgGmANVKRb2zrizeWscX60p2");
 
-
         configs.put(hcwy.getWxOriginalId(), hcwy);
     }
 
+    public static ConfigWechat getConfigByOrgId(String orgId) {
+        return configs.get("orgId");
+    }
 
     /**
      * 微信签名校验，设置服务器时用到
