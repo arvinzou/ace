@@ -243,4 +243,6 @@ public interface SystemService extends WebContextParamService {
 
 	public Map<String,Object> selectUserCfgByUserId(String userId);
 
+	public Map<String, Object> selectUserinfo(Map<String,Object> params)  throws Exception;
+
 }

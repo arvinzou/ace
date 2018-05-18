@@ -415,4 +415,30 @@ public class SystemController extends PortalBaseController{
 		}
 		return rst;
 	}
+
+	/**
+	 *
+	 * @Title:selectUserinfo
+	 * @Description:  TODO(获取微信用户)
+	 * @param:        @param q
+	 * @param:        @param id
+	 * @param:        @return
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: chenxiaoke
+	 * @version: 2018年05月17日 下午2:39:33
+	 */
+	@RequestMapping(value = "/selectUserinfo.do")
+	@ResponseBody
+	public Map<String,Object> selectUserinfo(String q,String id)throws Exception {
+		Map<String,Object> params=new HashMap<String,Object>();
+		params.put("q", id);
+		if(!CommonUtils.isBlank(q)){
+			params.put("q", q);
+		}
+		params.put("deptId", this.getCurUserProp().getCorpId());
+		this.logger.info("",params);
+		return this.systemService.selectUserinfo(params);
+	}
 }
