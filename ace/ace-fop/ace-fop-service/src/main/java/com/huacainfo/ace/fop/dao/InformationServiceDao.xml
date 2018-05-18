@@ -23,7 +23,7 @@
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, relationId, relationType, title, fileUrl, releaseDate, click, remark, status, modules,
+    id, relationId, relationType, title, content,fileUrl, releaseDate, click, remark, status, modules,
     createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <sql id="Blob_Column_List">
@@ -308,7 +308,7 @@
         WHEN t.relationType='1'
          THEN (select fullName from fop_association where id = t.relationId)
         END companyName,
-        t.id, t.relationId, t.relationType, t.title, t.fileUrl, t.releaseDate, t.click, t.remark, t.status, t.modules,
+        t.id, t.relationId, t.relationType, t.title, t.content,t.fileUrl, t.releaseDate, t.click, t.remark, t.status, t.modules,
         t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
 
