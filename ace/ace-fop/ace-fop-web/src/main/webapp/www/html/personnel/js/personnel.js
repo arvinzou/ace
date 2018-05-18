@@ -95,53 +95,64 @@ app.controller(ngControllerName,function($scope){
      * 发布人才信息
      */
     $scope.releaseInfo = function(){
-        var title = $("input[name='postname']").val();
-        var content = $("textarea[name='content']").val();
-        if(title == '' || title == undefined){
-            layer.alert("岗位名称不能为空！", {
-                icon: 5,
-                skin: 'myskin'
-            });
-            return;
-        }
-        if(content == '' || content == undefined){
-            layer.alert("岗位具体内容不能为空！", {
-                icon: 5,
-                skin: 'myskin'
-            });
-            return;
-        }
-        $.ajax({
-            url: "/fop/www/insertInformationServiceDo",
-            type:"post",
-            async:false,
-            data:{title: title, content: content, modules: "3"},
-            success:function(result){
-                if(result.status == 0) {
-                    console.log(result);
-                    $scope.searchList(currentPage, pageSize);
-                    layer.alert("发布成功！", {
-                        icon: 1,
-                        skin: 'myskin'
-                    });
-                    $("input[name='postname']").val("");
-                    $("textarea[name='content']").val("");
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
+        var userProp = parent.parent.userProp;
+        if(userProp == null || userProp == '' ) {
+            location.href = '/portal/dynamic/portal/security/login.jsp';
+        }else{
+            var title = $("input[name='postname']").val();
+            var content = $("textarea[name='content']").val();
+            if(title == '' || title == undefined){
+                layer.alert("岗位名称不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
+            }
+            if(content == '' || content == undefined){
+                layer.alert("岗位具体内容不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
+            }
+            $.ajax({
+                url: "/fop/www/insertInformationServiceDo",
+                type:"post",
+                async:false,
+                data:{title: title, content: content, modules: "3"},
+                success:function(result){
+                    if(result.status == 0) {
+                        console.log(result);
+                        $scope.searchList(currentPage, pageSize);
+                        layer.alert("发布成功！", {
+                            icon: 1,
+                            skin: 'myskin'
+                        });
+                        $("input[name='postname']").val("");
+                        $("textarea[name='content']").val("");
+                        if (!$scope.$$phase) {
+                            $scope.$apply();
+                        }
+                    }else {
+                        layer.alert(result.errorMessage, {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
                     }
-                }else {
-                    layer.alert(result.errorMessage, {
+                },
+                error:function(){
+                    layer.alert("系统内部服务异常！", {
                         icon: 5,
                         skin: 'myskin'
                     });
                 }
-            },
-            error:function(){
-                layer.alert("系统内部服务异常！", {
-                    icon: 5,
-                    skin: 'myskin'
-                });
-            }
-        });
+            });
+        }
+    }
+
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('recruit.html?id='+primaryId);
     }
 });
