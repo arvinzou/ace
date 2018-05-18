@@ -1,6 +1,5 @@
 ﻿*{ margin:0px; padding:0px; font-family:"微软雅黑";font-size:14px;}
-body{ font-size:14px; padding:0px; margin:0px;}
-td{ font-size:12px;}
+body{ font-size:16px; padding:0px; margin:0px;}
 img{ border:none; display:block;}
 a{ text-decoration:none; color:#31364B}
 a:focus {outline:none;-moz-outline:none;}
@@ -259,7 +258,7 @@ border-left:1px solid #ddd; }
 .fontcolor02{ color:#fe823e; font-size:12px;font-weight:bold;}
 .fontcolor03{ color:#12Be00; font-size:12px;}
 .fontcolor04{ color:red; font-size:12px;}
-.searchTable td{ font-size:12px;}
+.searchTable td{ font-size:16px;}
 .footText01{ background-color:#fdf8e4; height:60px; line-height:60px; text-align:right; margin-top:5px;}
 .footBtn01{ background-color:#eeeeee; text-align:center; padding: 30px 0 30px 0;}
 .footBtn01 a{ background-color:#ff6600; padding:10px 50px 10px 50px; font-size:16px; color:#fff;}

@@ -21,7 +21,7 @@
              extends="BaseResultMap">
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, cover, qrcoteUrl, openId, tplCode, status, createUserId, createUserName, 
+    id, name, cover, qrcoteUrl, openId, tplCode,answerTplCode, status, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
   <sql id="Blob_Column_List">
@@ -41,12 +41,12 @@
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.portal.model.Appeal">
     insert into appeal (id, name, cover, 
-      qrcoteUrl, openId, tplCode, 
+      qrcoteUrl, openId, tplCode, answerTplCode,
       status, createUserId, createUserName, 
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate, remark)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
-      #{qrcoteUrl,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{tplCode,jdbcType=VARCHAR}, 
+      #{qrcoteUrl,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{tplCode,jdbcType=VARCHAR}, #{answerTplCode,jdbcType=VARCHAR},
       #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
       #{lastModifyDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=LONGVARCHAR})
@@ -58,6 +58,7 @@
     qrcoteUrl = #{qrcoteUrl,jdbcType=VARCHAR},
     openId = #{openId,jdbcType=VARCHAR},
     tplCode = #{tplCode,jdbcType=VARCHAR},
+    answerTplCode=#{answerTplCode,jdbcType=VARCHAR},
     status = #{status,jdbcType=CHAR},
     lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
     lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
@@ -67,6 +68,7 @@
   </update>
   <sql id="whereCondition">
     from appeal t inner join users a on a.user_id=t.createUserId
+    left join userinfo b on t.openId=b.openid
     where a.department_id=#{condition.corpId}
     <if test='condition.name!=null and condition.name!=""'>
       and t.name like
@@ -77,10 +79,10 @@
     SELECT COUNT(*)
     <include refid="whereCondition" />
   </select>
-  <select id="findList" resultMap="BaseResultMap">
+  <select id="findList" resultMap="BaseResultMapVo">
     select
-    t.id, t.name, t.cover, t.qrcoteUrl, t.openId, t.tplCode, t.status, t.createUserId, t.createUserName,
-    t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.remark
+    t.id, t.name, t.cover, t.qrcoteUrl, t.openId, t.tplCode,t.answerTplCode, t.status, t.createUserId, t.createUserName,
+    t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.remark,b.nickname
     <include refid="whereCondition" />
     <choose>
       <when test='orderBy!=null and orderBy!=""'>

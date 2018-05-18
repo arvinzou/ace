@@ -16,6 +16,8 @@ public class Appeal implements java.io.Serializable {
 
     private String tplCode;
 
+    private String answerTplCode;
+
     private String status;
 
     private String createUserId;
@@ -142,5 +144,13 @@ public class Appeal implements java.io.Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getAnswerTplCode() {
+        return answerTplCode;
+    }
+
+    public void setAnswerTplCode(String answerTplCode) {
+        this.answerTplCode = answerTplCode;
     }
 }

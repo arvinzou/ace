@@ -32,4 +32,8 @@ public interface UserinfoDao {
     List<Map<String, Object>> selectWxUser(@Param("condition") Map<String, Object> condition);
 
     Map<String, Object> selectUserInfoVo(@Param("condition") Map<String, Object> where);
+
+    List<Map<String, Object>> getListByDeptId(Map<String,Object> params);
+
+
 }

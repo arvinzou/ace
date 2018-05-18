@@ -10,6 +10,10 @@
     <title>企业风采</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
 <script type="text/javascript">
 
 
@@ -24,17 +28,9 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-                    类别：<input name="category" class="easyui-combobox" style="width: 200px"
-                              data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
-
-                    名称： <input name="name" type="text" style="width: 200px;"/>
+                    标题： <input name="title" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/corporateStyle/findCorporateStyleList">
+                            authority="${pageContext.request.contextPath}/informationService/findInformationServiceList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
                 </form>
@@ -42,15 +38,15 @@
                 <div id="toolbar" class="toolbar">
 
                     <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/corporateStyle/insertCorporateStyle">
+                            authority="${pageContext.request.contextPath}/informationService/insertInformationService">
                         <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/corporateStyle/updateCorporateStyle">
+                            authority="${pageContext.request.contextPath}/informationService/updateInformationService">
                         <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/corporateStyle/deleteCorporateStyleByCorporateStyleId">
+                            authority="${pageContext.request.contextPath}/informationService/deleteInformationServiceByInformationServiceId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
 
@@ -78,39 +74,15 @@
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">
-主键</span>
+发布单位</span>
             <br>
-            <span id="id">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-关联ID</span>
-            <br>
-            <span id="relationId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-关联类型</span>
-            <br>
-            <span id="relationType">
+            <span id="companyName">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
 标题</span>
             <br>
             <span id="title">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-内容</span>
-            <br>
-            <span id="content">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-封面地址</span>
-            <br>
-            <span id="coverUrl">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
@@ -137,6 +109,12 @@
             <span id="status">
 </span>
         </div>
+    </div>
+    <h5 class="header-title">调研封面</h5>
+    <div class="row" style="padding:10px" id="fileUrl">
+    </div>
+    <h5 class="header-title">详细情况</h5>
+    <div class="row" style="padding:10px" id="content">
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
@@ -184,6 +162,17 @@
 <script src="${pageContext.request.contextPath}/content/service/corporateStyle/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/corporateStyle/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/corporateStyle/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/corporateStyle/upload.js?version=${cfg.version}"></script>
+
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {
