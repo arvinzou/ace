@@ -1,11 +1,12 @@
 package com.huacainfo.ace.portal.web.controller;
-
+import com.huacainfo.ace.common.tools.CommonUtils;
+import org.springframework.data.redis.core.RedisOperations;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,9 @@ public class CaptchaController extends PortalBaseController {
 	 */
 	private static final long serialVersionUID = 1L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private RedisOperations<String, Object> redisTemplate;
 
 	/**
 	 * 
@@ -88,6 +92,12 @@ public class CaptchaController extends PortalBaseController {
 		// 保存进session
 		this.getRequest().getSession().setAttribute("j_captcha",sRand);
 		logger.debug("j_captcha:{}",this.getRequest().getSession().getAttribute("j_captcha"));
+
+		String id = request.getParameter("id");
+		if(CommonUtils.isNotEmpty(id)) {
+			this.getRequest().getSession().setAttribute("j_captcha_weui",sRand);
+			redisTemplate.opsForValue().set(id + "j_captcha_weui", sRand);
+		}
 		// 显示图片
 		g.dispose();
 		//转换成一张图片，格式为JPEG
