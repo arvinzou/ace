@@ -11,6 +11,10 @@ app.controller(ngControllerName,function($scope){
          textarea: $('#editor')
 
      });
+    var editor = new Simditor({
+        textarea: $('#editor_release')
+
+    });
     $.ajax({
         url: "/fop/www/findInformationServiceListDo",
         type:"post",
@@ -190,6 +194,57 @@ app.controller(ngControllerName,function($scope){
                         skin: 'myskin'
                     });
                     $scope.items.splice(index,1);
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+
+                }else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error:function(){
+                layer.alert("系统服务内部异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        });
+    }
+
+    $scope.release = function(){
+        var title = $("input[name='pname']").val();
+        var content = $("textarea[name='pcontent']").val();
+        if(title == '' || title == undefined){
+            layer.alert("人才信息标题不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+        if(content == '' || content == undefined){
+            layer.alert("人才信息内容不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+        $.ajax({
+            url: "/fop/www/insertInformationServiceDo",
+            type:"post",
+            async:false,
+            data:{modules: "3", title: title, content: content},
+            success:function(result){
+                if(result.status == 0) {
+                    console.log(result);
+                    $scope.search();
+                    layer.alert("发布成功！", {
+                        icon: 1,
+                        skin: 'myskin'
+                    });
+
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
