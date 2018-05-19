@@ -573,6 +573,12 @@
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
+    <select id="findGisList" resultMap="VoResultMap">
+        select
+        <include refid="column_List_Vo"/>
+        <include refid="fromCondition_Vo"/>
+        <include refid="whereCondition_Vo"/>
+    </select>
 
     <sql id="fromCondition_Vo">
             from fop_company c
@@ -599,24 +605,30 @@
         <if test='condition.companyProperty!=null and condition.companyProperty!=""'>
             and companyProperty=#{condition.companyProperty,jdbcType=CHAR}
         </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and status = #{condition.status,jdbcType=CHAR}
+        </if>
     </sql>
     <sql id="whereCondition_Vo">
         where 1 = 1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
-            and id = #{condition.id,jdbcType=VARCHAR}
+            and c.id = #{condition.id,jdbcType=VARCHAR}
         </if>
         <if test='condition.fullName!=null and condition.fullName!=""'>
-            and fullName like
+            and c.fullName like
             concat('%',#{condition.fullName,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
-            and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+            and c.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.companyType!=null and condition.companyType!=""'>
-            and companyType = #{condition.companyType,jdbcType=CHAR}
+            and c.companyType = #{condition.companyType,jdbcType=CHAR}
         </if>
         <if test='condition.companyProperty!=null and condition.companyProperty!=""'>
-            and companyProperty=#{condition.companyProperty,jdbcType=CHAR}
+            and c.companyProperty=#{condition.companyProperty,jdbcType=CHAR}
+        </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and c.status = #{condition.status,jdbcType=CHAR}
         </if>
     </sql>
 

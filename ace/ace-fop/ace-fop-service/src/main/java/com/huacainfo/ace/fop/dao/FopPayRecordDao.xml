@@ -312,6 +312,9 @@
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and status = #{condition.status,jdbcType=CHAR}
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">

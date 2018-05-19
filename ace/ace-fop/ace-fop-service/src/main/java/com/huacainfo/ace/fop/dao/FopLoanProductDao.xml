@@ -351,6 +351,9 @@
         <if test="condition.loanYear!=null and condition.loanYear!=''">
             and f.loanYear=#{condition.loanYear,jdbcType=CHAR}
         </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and f.status = #{condition.status,jdbcType=CHAR}
+        </if>
     </sql>
 
 
@@ -388,6 +391,9 @@
         </if>
         <if test="condition.loanYear!=null and condition.loanYear!=''">
             and f.loanYear=#{condition.loanYear,jdbcType=CHAR}
+        </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and f.status = #{condition.status,jdbcType=CHAR}
         </if>
     </sql>
 

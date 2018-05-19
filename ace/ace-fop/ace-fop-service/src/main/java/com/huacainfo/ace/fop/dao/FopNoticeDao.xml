@@ -280,6 +280,9 @@
             and title like
             concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and status = #{condition.status,jdbcType=CHAR}
+        </if>
         <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
         <!--and name like-->
         <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->

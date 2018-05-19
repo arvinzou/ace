@@ -281,6 +281,9 @@
             and requestTitle like
             concat('%',#{condition.requestTitle,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=CHAR}
+        </if>
         <if test="condition.replied!=null and condition.replied!=&quot;&quot;">
             <if test="condition.replied!='true'">
                 and t.reply is not null
