@@ -1,0 +1,54 @@
+.content{
+	width: 100%;
+}
+.menu{
+	width: 100%;
+}
+.menu ul, .menu li{
+	text-decoration: none;
+}
+.menu li{
+	width: 20%;
+	height: 100px;
+	display: inline-block;
+	margin-left: 4%;
+	border: 1px dashed #E1E5ED;
+	margin-bottom: 30px;
+}
+
+.menu_li span{
+	width: 45%;
+	display: inline-block;
+	text-align: center;
+}
+.content_top{
+	width: 84%;
+	height: 212px;
+	margin: auto;
+}
+.title{
+	width: 100px;
+	height: 62px;
+	line-height: 62px;
+	display: block;
+	float: left;
+	font-size: 16px;
+	color: #1A56A8;
+}
+.perfect{
+	width: 80px;
+	height: 62px;
+	line-height: 62px;
+	display: block;
+	float: right;
+	color: #1A56A8;
+}
+.company_info{
+	width: 100%;
+	height: 150px;
+	margin: auto;
+}
+.company_info table{
+	width: 100%;
+	height: 100%;
+}

@@ -1,0 +1,49 @@
+.box{
+    width: 90%;
+    margin: auto;
+}
+.child_title{
+    width: 100%;
+    height: 62px;
+}
+.child_title_1{
+    width: 150px;
+    height: 62px;
+    line-height: 62px;
+    display: block;
+    float: left;
+    font-size: 16px;
+    color: #1A56A8;
+}
+.child_title_2{
+    width: 100px;
+    height: 62px;
+    line-height: 62px;
+    display: block;
+    float: right;
+    font-size: 16px;
+    color: #1A56A8;
+}
+.menu-nav ul, .menu-nav li{
+    text-decoration: none;
+}
+.menu-nav li{
+    width: 80px;
+    height: 35px;
+    line-height: 35px;
+    display: inline-block;
+}
+.nav-content{
+    width: 100%;
+}
+.table-div{
+    width: 100%;
+    border-bottom: 30px;
+    border: 1px solid #E1E5ED;
+}
+.table-div table{
+    width: 100%;
+}
+.tr_title{
+    height: 35px;
+}
