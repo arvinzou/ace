@@ -25,12 +25,6 @@
         <result column="content" jdbcType="VARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
-        CASE
-        WHEN relationType='0'
-        THEN (select fullName from fop_company fc where fc.id = relationId)
-        WHEN relationType='1'
-        THEN (select fullName from fop_association fc where fc.id = relationId)
-        END companyName,
         id, requestId, requestType, parentId, title, reply, releaseDate, keyWord, accCount,
         remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
         lastModifyDate, optDeptName, optLeaderName, processDetail,content
