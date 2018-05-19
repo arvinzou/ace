@@ -1,6 +1,7 @@
 package com.huacainfo.ace.common.tools;
-
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.HttpEntity;
+import org.apache.commons.httpclient.*;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
@@ -22,19 +23,18 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
+import org.apache.http.entity.StringEntity;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-
+import com.alibaba.fastjson.JSONObject;
 public class HttpUtils {
 
 	public static String httpPost(String url, Map<String, Object> params)
@@ -270,9 +270,42 @@ public class HttpUtils {
         }
         return result;
     }
-
+	/**
+	 * post请求
+	 * @param url
+	 * @param json
+	 * @return
+	 */
+	public static int getwxacodeunlimit(String url, JSONObject json, OutputStream out){
+		DefaultHttpClient client = new DefaultHttpClient();
+		HttpPost post = new HttpPost(url);
+		JSONObject response = null;
+		try {
+			StringEntity s = new StringEntity(json.toString());
+			s.setContentEncoding("UTF-8");
+			s.setContentType("application/json");//发送json数据需要设置contentType
+			post.setEntity(s);
+			HttpResponse res = client.execute(post);
+			if(res.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				HttpEntity entity = res.getEntity();
+				res.getEntity().writeTo(out);
+			}
+			return res.getStatusLine().getStatusCode();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 	public static void main(String args[]) throws URISyntaxException,
 			MalformedURLException, IOException {
-       // System.out.println(HttpUtils.sslPost("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx29ecb720b03ea466&secret=03ea9a47442c14208943043e62114fc6&code=0012s83S0BIVL92VMV1S0lg63S02s83a&grant_type=authorization_code", null, "utf-8"));
+		JSONObject p=new JSONObject();
+		//p.put("access_token","9_lWtH0NqTR9mkO_g-e7s9sZtsmr4PryiU1DirS90vV9qVmjQCuvaFbtzNKbPh_QoAe_WHLyMfBJQmiTlJz_9k6mdBd4B0CD9iGeEYYYBOMJIWNqXh4Yjhh7tHEB0NUKcAHAHOE");
+		p.put("scene","0987654321");
+		p.put("page","page/search/index");
+        //System.out.println(HttpUtils.sslPost("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=9_lWtH0NqTR9mkO_g-e7s9sZtsmr4PryiU1DirS90vV9qVmjQCuvaFbtzNKbPh_QoAe_WHLyMfBJQmiTlJz_9k6mdBd4B0CD9iGeEYYYBOMJIWNqXh4Yjhh7tHEB0NUKcAHAHOE", p, "utf-8"));
+		String url="https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=9_lWtH0NqTR9mkO_g-e7s9sZtsmr4PryiU1DirS90vV9qVmjQCuvaFbtzNKbPh_QoAe_WHLyMfBJQmiTlJz_9k6mdBd4B0CD9iGeEYYYBOMJIWNqXh4Yjhh7tHEB0NUKcAHAHOE";
+		File img=new File("/Users/chenxiaoke/Documents/"+GUIDUtil.getGUID()+".jpg");
+		OutputStream out=new FileOutputStream(img);
+
+		HttpUtils.getwxacodeunlimit(url,p,out);
     }
 }

@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.web.controller;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.model.AppealCaseFile;
+import com.huacainfo.ace.portal.service.AppealService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import com.huacainfo.ace.portal.model.AppealCase;
 import com.huacainfo.ace.portal.service.AppealCaseService;
 import com.huacainfo.ace.portal.vo.AppealCaseVo;
 import com.huacainfo.ace.portal.vo.AppealCaseQVo;
-
+import com.huacainfo.ace.portal.vo.AppealVo;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,9 @@ public class AppealCaseController extends PortalBaseController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private AppealCaseService appealCaseService;
+
+	@Autowired
+	private AppealService appealService;
      /**
 	 *
 	    * @Title:find!{bean.name}List
@@ -218,5 +222,23 @@ public class AppealCaseController extends PortalBaseController {
 			return this.appealCaseService.updateDetailsOfProgress(id,detailsOfProgress,srt.getValue());
 		}
 		return this.appealCaseService.updateDetailsOfProgress(id,detailsOfProgress,this.getCurUserProp());
+	}
+
+	/**
+	 *
+	 * @Title:selectAppealCaseByPrimaryKey
+	 * @Description:  TODO(获取诉求)
+	 * @param:        @param id
+	 * @param:        @throws Exception
+	 * @return:       SingleResult<AppealCase>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-05-14
+	 */
+	@RequestMapping(value = "/getAppealById.do")
+	@ResponseBody
+	public SingleResult<AppealVo> getAppealById(String id)
+			throws Exception {
+		return this.appealService.selectAppealByPrimaryKey(id);
 	}
 }
