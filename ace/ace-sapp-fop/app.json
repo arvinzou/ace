@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "page/home/index",
+    "page/appeal/index",
+    "page/login/index",
+    "page/me/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "#fff",
+    "navigationBarTitleText": "诉求",
+    "navigationBarBackgroundColor": "#1A56A8",
+    "backgroundColor": "#1A56A8"
+  },
+  "tabBar": {
+    "color": "#353536",
+    "selectedColor": "#353536",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "page/home/index",
+        "iconPath": "image/appeal-normal.png",
+        "selectedIconPath": "image/appeal-active.png",
+        "text": "诉求"
+      },
+      {
+        "pagePath": "page/me/index",
+        "iconPath": "image/me-normal.png",
+        "selectedIconPath": "image/me-active.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false
+}
