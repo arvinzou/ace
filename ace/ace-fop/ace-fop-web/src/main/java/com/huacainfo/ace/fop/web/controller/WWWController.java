@@ -452,6 +452,38 @@ public class WWWController extends FopBaseController {
 
 
     /**
+     * @Description: TODO(更新法律帮助/政府诉求)
+     * id ：法律帮助主键
+     * * 发布法律帮助
+     * title：标题
+     * subType：类型
+     * content：内容
+     */
+    @RequestMapping(value = "/updateQuestion")
+    @ResponseBody
+    public MessageResponse updateFopQuestion(String jsons) throws Exception {
+        FopQuestion obj = JSON.parseObject(jsons, FopQuestion.class);
+        return this.fopQuestionService
+                .updateFopQuestion(obj, this.getCurUserProp());
+    }
+
+
+    /**
+     * @Description: TODO(删除法律帮助/政府诉求)
+     * id ：主键
+     */
+    @RequestMapping(value = "/deleteQuestionByFopQuestionId")
+    @ResponseBody
+    public MessageResponse deleteFopQuestionByFopQuestionId(String jsons)
+            throws Exception {
+        JSONObject json = JSON.parseObject(jsons);
+        String id = json.getString("id");
+        return this.fopQuestionService.deleteFopQuestionByFopQuestionId(id,
+                this.getCurUserProp());
+    }
+
+
+    /**
      * 发布诉求
      * requestTitle 标题
      * replied  (true:回复，false：未回复）
@@ -539,12 +571,15 @@ public class WWWController extends FopBaseController {
         return this.fopProjectService.selectProjectByPrimaryKey(id);
     }
 
+
     /**
+     * id 项目主键
      * projectName:项目名称
      * coopType：合作方式 1、投资合作，2、合作开发，3、出资+资源合作，4、其他
      * areaCode：所属区域
      * projectType:项目类型。
      * coopDesc：内容
+     *
      * @throws Exception
      */
     @RequestMapping(value = "/updateProject")
@@ -553,11 +588,24 @@ public class WWWController extends FopBaseController {
         return this.fopProjectService.updateFopProject(obj, this.getCurUserProp());
     }
 
+    /**
+     * id 删除主键
+     *
+     * @Description: TODO(删除合作项目)
+     */
+    @RequestMapping(value = "/deleteProjectByFopProjectId")
+    @ResponseBody
+    public MessageResponse deleteFopProjectByFopProjectId(String id) throws Exception {
+        return this.fopProjectService.deleteFopProjectByFopProjectId(id,
+                this.getCurUserProp());
+    }
+
 
     /**
      * name：企业，团体名称
      * phoneNumber：电话
      * isCompany :true, false。
+     *
      * @return
      * @throws Exception
      */
