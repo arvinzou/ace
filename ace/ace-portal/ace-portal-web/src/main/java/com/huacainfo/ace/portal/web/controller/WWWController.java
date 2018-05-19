@@ -312,9 +312,9 @@ public class WWWController extends PortalBaseController {
         return messageTemplateService.send(sysId, tmplCode, params);
     }
 
-    @RequestMapping(value = "/uploadImage.do")
+    @RequestMapping(value = "/upload.do")
     @ResponseBody
-    public Map<String,Object> uploadImage(@RequestParam MultipartFile[] file, String collectionName,String x, String y, String desWidth, String desHeight, String srcWidth,
+    public Map<String,Object> upload(@RequestParam MultipartFile[] file, String collectionName,String x, String y, String desWidth, String desHeight, String srcWidth,
                                           String srcHeight)throws Exception {
 
         Map<String,Object> rst = new HashMap<String,Object>();
