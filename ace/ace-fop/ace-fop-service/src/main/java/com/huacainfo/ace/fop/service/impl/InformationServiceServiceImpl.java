@@ -8,12 +8,14 @@ import java.util.Map;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
+import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
@@ -232,10 +234,15 @@ public class InformationServiceServiceImpl implements InformationServiceService 
     @Override
     public MessageResponse deleteInformationServiceByInformationServiceId(String id, UserProp
             userProp) throws Exception {
-        this.informationServiceDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除信息服务", "信息服务",
-                String.valueOf(id),
-                String.valueOf(id), "信息服务", userProp);
+        InformationService informationService = informationServiceDao.selectByPrimaryKey(id);
+        if (null == informationService) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        informationService.setStatus("0");
+        informationService.setLastModifyUserId(userProp.getUserId());
+        informationService.setLastModifyUserName(userProp.getName());
+        informationService.setLastModifyDate(DateUtil.getNowDate());
+        informationServiceDao.updateByPrimaryKeySelective(informationService);
         return new MessageResponse(0, "信息服务删除完成！");
     }
 

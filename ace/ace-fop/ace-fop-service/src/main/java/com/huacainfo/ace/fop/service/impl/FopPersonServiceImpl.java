@@ -179,8 +179,7 @@ public class FopPersonServiceImpl implements FopPersonService {
      * @version: 2018-05-02
      */
     @Override
-    public MessageResponse deleteFopPersonByFopPersonId(String id,
-                                                        UserProp userProp) throws Exception {
+    public MessageResponse deleteFopPersonByFopPersonId(String id, UserProp userProp) throws Exception {
         this.fopPersonDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(id),
                 String.valueOf(id), "企业管理", userProp);

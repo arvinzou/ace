@@ -23,7 +23,7 @@ import com.huacainfo.ace.fop.vo.FopGeHelpQVo;
 /**
  * @author: Arvin
  * @version: 2018-05-09
- * @Description: TODO(企业/协会活动)
+ * @Description: TODO(政企服务)
  */
 public class FopGeHelpController extends FopBaseController {
 
@@ -36,7 +36,7 @@ public class FopGeHelpController extends FopBaseController {
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(企业/协会活动分页查询)
+     * @Description: TODO(政企服务分页查询)
      * @param: @param condition
      * @param: @param page
      * @param: @return
@@ -63,7 +63,7 @@ public class FopGeHelpController extends FopBaseController {
     /**
      * @throws
      * @Title:insertFopGeHelp
-     * @Description: TODO(添加企业/协会活动)
+     * @Description: TODO(添加政企服务)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
@@ -80,7 +80,7 @@ public class FopGeHelpController extends FopBaseController {
     /**
      * @throws
      * @Title:updateFopGeHelp
-     * @Description: TODO(更新企业/协会活动)
+     * @Description: TODO(更新政企服务)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
@@ -97,7 +97,7 @@ public class FopGeHelpController extends FopBaseController {
     /**
      * @throws
      * @Title:selectFopGeHelpByPrimaryKey
-     * @Description: TODO(获取企业/协会活动)
+     * @Description: TODO(获取政企服务)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<FopGeHelp>
@@ -114,7 +114,7 @@ public class FopGeHelpController extends FopBaseController {
     /**
      * @throws
      * @Title:deleteFopGeHelpByFopGeHelpId
-     * @Description: TODO(删除企业/协会活动)
+     * @Description: TODO(删除政企服务)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse

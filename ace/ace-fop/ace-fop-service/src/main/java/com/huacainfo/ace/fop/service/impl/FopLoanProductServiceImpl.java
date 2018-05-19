@@ -8,8 +8,10 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.dao.FopLoanProductDao;
+import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
 import com.huacainfo.ace.fop.service.FopLoanProductService;
 import com.huacainfo.ace.fop.service.FopQuestionService;
@@ -128,7 +130,6 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         if (temp > 0) {
             return new MessageResponse(1, "通知公告名称重复！");
         }
-
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -226,9 +227,18 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     @Override
     public MessageResponse deleteFopLoanProductByFopLoanProductId(String id,
                                                                   UserProp userProp) throws Exception {
-        this.fopLoanProductDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除通知公告", "通知公告", String.valueOf(id),
-                String.valueOf(id), "通知公告", userProp);
+        FopLoanProduct fopLoanProduct = fopLoanProductDao.selectByPrimaryKey(id);
+        if (null == fopLoanProduct) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        fopLoanProduct.setStatus("0");
+        fopLoanProduct.setLastModifyUserId(userProp.getUserId());
+        fopLoanProduct.setLastModifyUserName(userProp.getName());
+        fopLoanProduct.setLastModifyDate(DateUtil.getNowDate());
+        fopLoanProductDao.updateByPrimaryKeySelective(fopLoanProduct);
+        dataBaseLogService.log("删除金融产品", "金融产品",
+                String.valueOf(id),
+                String.valueOf(id), "金融产品", userProp);
         return new MessageResponse(0, "通知公告删除完成！");
     }
 }

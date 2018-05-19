@@ -8,6 +8,16 @@ public class FopGeHelpVo extends FopGeHelp {
 
     private String replied;
 
+    private String companyName;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     public String getReplied() {
         return replied;
     }

@@ -35,6 +35,8 @@ public interface FopCompanyService {
 
     public abstract ResultResponse findCompanyList(FopCompanyQVo condition, int page, int limit, String orderBy) throws Exception;
 
+    public abstract ResultResponse findCompanyGisList() throws Exception;
+
     /**
      * @throws
      * @Title:insertFopCompany

@@ -22,6 +22,15 @@
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.fop.model.InformationService">
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
+
+    <!--
+    1、企业风采
+    2、企业产品
+    3、人才信息
+    4、招商信息
+    5、政策文件
+    6、品牌推广
+    -->
     <sql id="Base_Column_List">
     id, relationId, relationType, title, content,fileUrl, releaseDate, click, remark, status, modules,
     createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate

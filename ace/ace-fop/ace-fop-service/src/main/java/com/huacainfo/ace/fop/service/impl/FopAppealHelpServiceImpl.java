@@ -225,7 +225,7 @@ public class FopAppealHelpServiceImpl implements FopAppealHelpService {
             new MessageResponse(0, "记录丢失");
         }
 
-        o.setStatus("-1");
+        o.setStatus("0");
         o.setLastModifyDate(DateUtil.getNowDate());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
