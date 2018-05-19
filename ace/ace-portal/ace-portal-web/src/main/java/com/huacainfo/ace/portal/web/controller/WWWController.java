@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.ImageCut;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.model.Attach;
 import com.huacainfo.ace.portal.model.Users;
@@ -28,10 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @RequestMapping("/www")
@@ -312,5 +310,38 @@ public class WWWController extends PortalBaseController {
 //        params.put("consultingTel", "400-12345678");
 
         return messageTemplateService.send(sysId, tmplCode, params);
+    }
+
+    @RequestMapping(value = "/uploadImage.do")
+    @ResponseBody
+    public Map<String,Object> uploadImage(@RequestParam MultipartFile[] file, String collectionName,String x, String y, String desWidth, String desHeight, String srcWidth,
+                                          String srcHeight)throws Exception {
+
+        Map<String,Object> rst = new HashMap<String,Object>();
+        String fastdfs_server=((Map)this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
+        String[] fileNames = new String[file.length];
+        String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+        File tmp = new File(dir);
+        if (!tmp.exists()) {
+            tmp.mkdirs();
+        }
+        int i = 0;
+        for (MultipartFile o : file) {
+            File dest = new File(dir + File.separator + o.getName());
+            if(CommonUtils.isNotEmpty(x)){
+                ImageCut.imgCut(o.getInputStream(),Integer.valueOf(x),Integer.valueOf(y),Integer.valueOf(desWidth),Integer.valueOf(desHeight),Integer.valueOf(srcWidth),Integer.valueOf(srcHeight),dest);
+            }else{
+                o.transferTo(dest);
+            }
+            fileNames[i] = this.fileSaver.saveFile(dest,
+                    o.getOriginalFilename());
+            dest.delete();
+            filesService.insertFiles(fileNames[i], this.getCurUserProp());
+            rst.put("success",true);
+            rst.put("msg","成功");
+            rst.put("file_path",fastdfs_server+fileNames[i]);
+            i++;
+        }
+        return rst;
     }
 }
