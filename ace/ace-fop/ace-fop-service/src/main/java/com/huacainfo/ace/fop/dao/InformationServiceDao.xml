@@ -287,6 +287,9 @@
         <if test="condition.modules!=null and condition.modules!=&quot;&quot;">
             and modules =#{condition.modules,jdbcType=CHAR}
         </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and status = #{condition.status,jdbcType=CHAR}
+        </if>
     </sql>
 
     <sql id="whereCondition_Vo">
@@ -297,7 +300,10 @@
             concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.modules!=null and condition.modules!=&quot;&quot;">
-            and modules =#{condition.modules,jdbcType=CHAR}
+            and t.modules =#{condition.modules,jdbcType=CHAR}
+        </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=CHAR}
         </if>
     </sql>
 

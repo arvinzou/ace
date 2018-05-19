@@ -343,6 +343,9 @@
         <if test='condition.process!=null and condition.process!=""'>
             and t.process=#{condition.process,jdbcType=VARCHAR}
         </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=CHAR}
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">

@@ -30,6 +30,8 @@ public interface FopCompanyDao {
                                 @Param("start") int start, @Param("limit") int limit,
                                 @Param("orderBy") String orderBy);
 
+    List<FopCompanyVo> findGisList();
+
     int findCount(@Param("condition") FopCompanyQVo condition);
 
     int isExit(FopCompany record);

@@ -294,6 +294,9 @@
         <if test="condition.opinionType!=null and condition.opinionType!=&quot;&quot;">
             and t.opinionType = #{condition.opinionType,jdbcType=VARCHAR}
         </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=CHAR}
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">
