@@ -8,12 +8,14 @@ import java.util.Map;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
+import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
@@ -270,8 +272,16 @@ public class FopQuestionServiceImpl implements FopQuestionService {
     @Override
     public MessageResponse deleteFopQuestionByFopQuestionId(String id,
                                                             UserProp userProp) throws Exception {
-        this.fopQuestionDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除法律帮助/政府诉求", "法律帮助/政府诉求",
+        FopQuestion fopQuestion = fopQuestionDao.selectByPrimaryKey(id);
+        if (null == fopQuestion) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        fopQuestion.setStatus("0");
+        fopQuestion.setLastModifyUserId(userProp.getUserId());
+        fopQuestion.setLastModifyUserName(userProp.getName());
+        fopQuestion.setLastModifyDate(DateUtil.getNowDate());
+        fopQuestionDao.updateByPrimaryKeySelective(fopQuestion);
+        dataBaseLogService.log("删除法律帮助/政府诉求", "法律帮助/政府诉求",
                 String.valueOf(id),
                 String.valueOf(id), "法律帮助/政府诉求", userProp);
         return new MessageResponse(0, "法律帮助/政府诉求删除完成！");

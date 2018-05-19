@@ -179,7 +179,7 @@ public class FopAiQuestionServiceImpl implements FopAiQuestionService {
             return new MessageResponse(ResultCode.FAIL, "记录丢失");
         }
 
-        fopAiQuestion.setStatus("-1");
+        fopAiQuestion.setStatus("0");
         fopAiQuestion.setLastModifyDate(new Date());
         fopAiQuestion.setLastModifyUserName(userProp.getName());
         fopAiQuestion.setLastModifyUserId(userProp.getUserId());

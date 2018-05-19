@@ -220,7 +220,7 @@ public class FopActivityServiceImpl implements FopActivityService {
         }
 
 
-        activity.setStatus("-1");
+        activity.setStatus("0");
         activity.setLastModifyDate(DateUtil.getNowDate());
         activity.setLastModifyUserId(userProp.getUserId());
         activity.setLastModifyUserName(userProp.getName());

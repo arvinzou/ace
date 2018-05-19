@@ -287,7 +287,7 @@
     </select>
     <sql id="whereCondition">
         from fop_questionnaire_result t
-        where 1 = 1
+        where t.status <![CDATA[ <> ]]> 0
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>

@@ -160,11 +160,10 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        o.setRequestId(userProp.getUserId());
-        if (CommonUtils.isBlank(o.getRequestId())) {
-            return new MessageResponse(1, "没有登陆");
-        }
-        UsersVo user = usersService.selectUsersByPrimaryKey(userProp.getUserId()).getValue();
+
+        /*获取登陆用户信息*/
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+        UsersVo user = singleResult.getValue();
         if (null == user) {
             return new MessageResponse(1, "没有注册");
         }
@@ -173,12 +172,17 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         }
         FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
         FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
-        if (null != fc) {
+        if (null == fc) {
+            if (null == fa) {
+                return new MessageResponse(1, "账户没有绑定企业！");
+            }
+            o.setRequestId(fa.getId());
+            o.setRequestType(FopConstant.ASSOCIATION);
+        } else {
+            o.setRequestId(fc.getId());
             o.setRequestType(FopConstant.COMPANY);
         }
-        if (null != fa) {
-            o.setRequestType(FopConstant.ASSOCIATION);
-        }
+
         if (CommonUtils.isBlank(o.getRequestType())) {
             return new MessageResponse(1, "发起人类型不能为空！");
         }
@@ -315,21 +319,18 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
      */
     @Override
     public MessageResponse deleteFopGeHelpByFopGeHelpId(String id, UserProp userProp) throws Exception {
-
         FopGeHelp fopGeHelp = fopGeHelpDao.selectByPrimaryKey(id);
         if (null == fopGeHelp) {
             return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
         }
-        fopGeHelp.setStatus("-1");
+        fopGeHelp.setStatus("0");
         fopGeHelp.setLastModifyUserId(userProp.getUserId());
         fopGeHelp.setLastModifyUserName(userProp.getName());
         fopGeHelp.setLastModifyDate(DateUtil.getNowDate());
         fopGeHelpDao.updateByPrimaryKeySelective(fopGeHelp);
-
-
-        /*dataBaseLogService.log("删除政企服务", "政企服务",
+        dataBaseLogService.log("删除政企服务", "政企服务",
                 String.valueOf(id),
-                String.valueOf(id), "政企服务", userProp);*/
+                String.valueOf(id), "政企服务", userProp);
         return new MessageResponse(0, "政企服务删除完成！");
     }
 

@@ -182,8 +182,7 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
      * @version: 2018-05-02
      */
     @Override
-    public MessageResponse deleteFopAssMemberByFopAssMemberId(String id,
-                                                              UserProp userProp) throws Exception {
+    public MessageResponse deleteFopAssMemberByFopAssMemberId(String id, UserProp userProp) throws Exception {
         this.fopAssMemberDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(id),
                 String.valueOf(id), "企业管理", userProp);

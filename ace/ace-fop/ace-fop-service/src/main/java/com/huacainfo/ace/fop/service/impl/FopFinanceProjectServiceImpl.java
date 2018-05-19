@@ -179,17 +179,11 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(user.getDepartmentId())) {
             return new MessageResponse(1, "账户没有绑定企业！");
         }
-        FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
         FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
         if (null == fc) {
-            if (null == fa) {
-                return new MessageResponse(1, "账户没有绑定企业！");
-            }
-            o.setCompanyId(fa.getId());
-
-        } else {
-            o.setCompanyId(fc.getId());
+            return new MessageResponse(1, "注册账号不是企业账号！");
         }
+        o.setCompanyId(fc.getId());
         if (CommonUtils.isBlank(o.getFinanceAmount())) {
             return new MessageResponse(1, "融资金额不能为空！");
         }
@@ -237,9 +231,7 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(o.getFinanceTitle())) {
             return new MessageResponse(1, "融资名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCompanyId())) {
-            return new MessageResponse(1, "所属公司不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getFinanceAmount())) {
             return new MessageResponse(1, "融资金额不能为空！");
         }
@@ -253,6 +245,7 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
             return new MessageResponse(1, "预期年收益不能为空！");
         }
         o.setLastModifyDate(new Date());
+        o.setStatus("1");
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopFinanceProjectDao.updateByPrimaryKeySelective(o);

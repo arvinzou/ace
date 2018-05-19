@@ -267,7 +267,7 @@ public class FopProjectServiceImpl implements FopProjectService {
         if (CommonUtils.isBlank(fopProject)) {
             new MessageResponse(0, "合作项目记录丢失");
         }
-        fopProject.setStatus("-1");
+        fopProject.setStatus("0");
         fopProject.setLastModifyDate(DateUtil.getNowDate());
         fopProject.setLastModifyUserName(userProp.getName());
         fopProject.setLastModifyUserId(userProp.getUserId());

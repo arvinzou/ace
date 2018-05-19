@@ -106,6 +106,22 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         return rst;
     }
 
+    @Override
+    public ResultResponse findCompanyGisList() throws Exception {
+//        List rst=new ArrayList();
+//        List gis=new ArrayList();
+//        List<FopCompanyVo> datas=this.fopCompanyDao.findGisList();
+//
+//        Map<String,Object> itmp =new HashMap<String,Object>();
+//        for(FopCompanyVo data:datas){
+//            itmp.put("name",data.getFullName());
+//            itmp.put("value",);
+//        }
+
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "企业列表", null);
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:insertFopCompany
@@ -378,7 +394,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (null == company) {
             return new MessageResponse(ResultCode.FAIL, "无效企业编号");
         }
-        company.setStatus("-1");
+        company.setStatus("0");
         company.setLastModifyDate(DateUtil.getNowDate());
         company.setLastModifyUserId(userProp.getUserId());
         company.setLastModifyUserName(userProp.getName());

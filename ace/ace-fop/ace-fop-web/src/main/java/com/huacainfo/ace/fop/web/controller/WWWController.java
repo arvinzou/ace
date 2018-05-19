@@ -1,6 +1,8 @@
 package com.huacainfo.ace.fop.web.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -53,25 +55,18 @@ public class WWWController extends FopBaseController {
     private InformationServiceService informationServiceService;
 
 
-//    /**
-//     * gis地图
-//     *
-//     * @param condition
-//     * @param page
-//     * @return
-//     * @throws Exception
-//     */
-//    @RequestMapping(value = "/companyGis")
-//    @ResponseBody
-//    public PageResult<FopCompanyVo> findCompanyList(FopCompanyQVo condition, PageParamNoChangeSord page) throws Exception {
-//        PageResult<FopCompanyVo> rst = this.fopCompanyService
-//                .findFopCompanyList(condition, page.getStart(), page.getLimit(),
-//                        page.getOrderBy());
-//        if (rst.getTotal() == 0) {
-//            rst.setTotal(page.getTotalRecord());
-//        }
-//        return rst;
-//    }
+    /**
+     * gis地图
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/companyGis")
+    @ResponseBody
+    public ResultResponse findCompanyGisList() throws Exception {
+        ResultResponse rst = this.fopCompanyService.findCompanyGisList();
+        return rst;
+    }
 
 
     /**
@@ -195,6 +190,34 @@ public class WWWController extends FopBaseController {
     }
 
     /**
+     * 修改融资
+     * id              融资主键
+     * *financeTitle   融资名称
+     * financeAmount  融资金额
+     * financeYear    融资年限
+     * financeContent 融资内容
+     * yearYield      融资年收益
+     */
+    @RequestMapping(value = "/updateFinanceProject")
+    @ResponseBody
+    public MessageResponse updateFopFinanceProject(FopFinanceProject obj) throws Exception {
+        return this.fopFinanceProjectService.updateFopFinanceProject(obj, this.getCurUserProp());
+    }
+
+    /**
+     * TODO(删除流程记录)
+     * id 主键
+     */
+    @RequestMapping(value = "/deleteFinanceProjectByFopFinanceProjectId")
+    @ResponseBody
+    public MessageResponse deleteFopFinanceProjectByFopFinanceProjectId(String id)
+            throws Exception {
+        return this.fopFinanceProjectService.deleteFopFinanceProjectByFopFinanceProjectId(id,
+                this.getCurUserProp());
+    }
+
+
+    /**
      * productName 产品名称
      * suretyType  担保方式
      * btmRate     最低低利率
@@ -208,8 +231,6 @@ public class WWWController extends FopBaseController {
      * @return
      * @throws Exception
      */
-
-
     @RequestMapping(value = "/findLoanProductList")
     @ResponseBody
     public ResultResponse findLoanProductList(FopLoanProductQVo condition, PageParamNoChangeSord page) throws Exception {
@@ -246,6 +267,24 @@ public class WWWController extends FopBaseController {
         return this.fopLoanProductService.selectLoanProductByPrimaryKey(id);
     }
 
+
+    /**
+     * @Description: TODO(更新金融产品)
+     * id 金融产品主键
+     * productName 产品名称
+     * loanAmount  贷款额度
+     * loanType    贷款用途
+     * suretyType  担保方式
+     * loanYear    贷款年限
+     * loanYear    贷款年限
+     * loanRate    贷款年利率
+     * description 产品描述
+     */
+    @RequestMapping(value = "/updateLoanProduct")
+    @ResponseBody
+    public MessageResponse updateFopLoanProduct(FopLoanProduct obj) throws Exception {
+        return this.fopLoanProductService.updateFopLoanProduct(obj, this.getCurUserProp());
+    }
 
     /**
      * 获取政企服务列表
@@ -305,6 +344,16 @@ public class WWWController extends FopBaseController {
     @ResponseBody
     public ResultResponse selectGeHelpByPrimaryKey(String id) throws Exception {
         return this.fopGeHelpService.selectGeHelpByPrimaryKey(id);
+    }
+
+    /**
+     * @Description: TODO(删除政企服务)
+     * id：
+     */
+    @RequestMapping(value = "/deleteGeHelpByFopGeHelpId")
+    @ResponseBody
+    public MessageResponse deleteFopGeHelpByFopGeHelpId(String id) throws Exception {
+        return this.fopGeHelpService.deleteFopGeHelpByFopGeHelpId(id, this.getCurUserProp());
     }
 
 
@@ -403,6 +452,38 @@ public class WWWController extends FopBaseController {
 
 
     /**
+     * @Description: TODO(更新法律帮助/政府诉求)
+     * id ：法律帮助主键
+     * * 发布法律帮助
+     * title：标题
+     * subType：类型
+     * content：内容
+     */
+    @RequestMapping(value = "/updateQuestion")
+    @ResponseBody
+    public MessageResponse updateFopQuestion(String jsons) throws Exception {
+        FopQuestion obj = JSON.parseObject(jsons, FopQuestion.class);
+        return this.fopQuestionService
+                .updateFopQuestion(obj, this.getCurUserProp());
+    }
+
+
+    /**
+     * @Description: TODO(删除法律帮助/政府诉求)
+     * id ：主键
+     */
+    @RequestMapping(value = "/deleteQuestionByFopQuestionId")
+    @ResponseBody
+    public MessageResponse deleteFopQuestionByFopQuestionId(String jsons)
+            throws Exception {
+        JSONObject json = JSON.parseObject(jsons);
+        String id = json.getString("id");
+        return this.fopQuestionService.deleteFopQuestionByFopQuestionId(id,
+                this.getCurUserProp());
+    }
+
+
+    /**
      * 发布诉求
      * requestTitle 标题
      * replied  (true:回复，false：未回复）
@@ -490,12 +571,15 @@ public class WWWController extends FopBaseController {
         return this.fopProjectService.selectProjectByPrimaryKey(id);
     }
 
+
     /**
+     * id 项目主键
      * projectName:项目名称
      * coopType：合作方式 1、投资合作，2、合作开发，3、出资+资源合作，4、其他
      * areaCode：所属区域
      * projectType:项目类型。
      * coopDesc：内容
+     *
      * @throws Exception
      */
     @RequestMapping(value = "/updateProject")
@@ -504,11 +588,24 @@ public class WWWController extends FopBaseController {
         return this.fopProjectService.updateFopProject(obj, this.getCurUserProp());
     }
 
+    /**
+     * id 删除主键
+     *
+     * @Description: TODO(删除合作项目)
+     */
+    @RequestMapping(value = "/deleteProjectByFopProjectId")
+    @ResponseBody
+    public MessageResponse deleteFopProjectByFopProjectId(String id) throws Exception {
+        return this.fopProjectService.deleteFopProjectByFopProjectId(id,
+                this.getCurUserProp());
+    }
+
 
     /**
      * name：企业，团体名称
      * phoneNumber：电话
      * isCompany :true, false。
+     *
      * @return
      * @throws Exception
      */

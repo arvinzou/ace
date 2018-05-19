@@ -259,7 +259,7 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         association.setLastModifyDate(DateUtil.getNowDate());
         association.setLastModifyUserId(userProp.getUserId());
         association.setLastModifyUserName(userProp.getName());
-        association.setStatus("-1");
+        association.setStatus("0");
 
         this.fopAssociationDao.updateByPrimaryKeySelective(association);
         this.dataBaseLogService.log("删除商协会资料", "商协会资料", String.valueOf(id),

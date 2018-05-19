@@ -588,7 +588,7 @@
 
     <sql id="whereCondition">
         from fop_company
-        where 1 = 1
+        where status <![CDATA[ <> ]]> 0
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and id = #{condition.id,jdbcType=VARCHAR}
         </if>
@@ -610,7 +610,7 @@
         </if>
     </sql>
     <sql id="whereCondition_Vo">
-        where 1 = 1
+        where c.status <![CDATA[ <> ]]> 0
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and c.id = #{condition.id,jdbcType=VARCHAR}
         </if>

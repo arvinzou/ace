@@ -8,8 +8,10 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.dao.FopNoticeDao;
+import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.fop.model.FopNotice;
 import com.huacainfo.ace.fop.service.FopNoticeService;
 import com.huacainfo.ace.fop.vo.FopNoticeQVo;
@@ -204,10 +206,17 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      * @version: 2018-05-03
      */
     @Override
-    public MessageResponse deleteFopNoticeByFopNoticeId(String id,
-                                                        UserProp userProp) throws Exception {
-        this.fopNoticeDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除通知公告", "通知公告",
+    public MessageResponse deleteFopNoticeByFopNoticeId(String id, UserProp userProp) throws Exception {
+        FopNotice fopNotice = fopNoticeDao.selectByPrimaryKey(id);
+        if (null == fopNotice) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        fopNotice.setStatus("0");
+        fopNotice.setLastModifyUserId(userProp.getUserId());
+        fopNotice.setLastModifyUserName(userProp.getName());
+        fopNotice.setLastModifyDate(DateUtil.getNowDate());
+        fopNoticeDao.updateByPrimaryKeySelective(fopNotice);
+        dataBaseLogService.log("删除通知公告", "通知公告",
                 String.valueOf(id),
                 String.valueOf(id), "通知公告", userProp);
         return new MessageResponse(0, "通知公告删除完成！");

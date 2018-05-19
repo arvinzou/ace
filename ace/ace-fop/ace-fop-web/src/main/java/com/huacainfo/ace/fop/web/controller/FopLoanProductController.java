@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * @author: Arvin
  * @version: 2018-05-02
- * @Description: 通知公告
+ * @Description: 金融产品
  */
 public class FopLoanProductController extends FopBaseController {
 
@@ -35,7 +35,7 @@ public class FopLoanProductController extends FopBaseController {
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(通知公告分页查询)
+     * @Description: TODO(金融产品分页查询)
      * @param: @param condition
      * @param: @param page
      * @param: @return
@@ -61,7 +61,7 @@ public class FopLoanProductController extends FopBaseController {
     /**
      * @throws
      * @Title:insertFopLoanProduct
-     * @Description: TODO(添加通知公告)
+     * @Description: TODO(添加金融产品)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
@@ -79,7 +79,7 @@ public class FopLoanProductController extends FopBaseController {
     /**
      * @throws
      * @Title:updateFopLoanProduct
-     * @Description: TODO(更新通知公告)
+     * @Description: TODO(更新金融产品)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
@@ -97,7 +97,7 @@ public class FopLoanProductController extends FopBaseController {
     /**
      * @throws
      * @Title:selectFopLoanProductByPrimaryKey
-     * @Description: TODO(获取通知公告)
+     * @Description: TODO(获取金融产品)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<FopLoanProduct>
@@ -114,7 +114,7 @@ public class FopLoanProductController extends FopBaseController {
     /**
      * @throws
      * @Title:deleteFopLoanProductByFopLoanProductId
-     * @Description: TODO(删除通知公告)
+     * @Description: TODO(删除金融产品)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
