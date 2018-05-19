@@ -79,7 +79,20 @@
                             <td width="15%" align="right" style="height: 186px;"><span>具体内容</span></td>
                             <td width="5%" style="height: 186px;"></td>
                             <td style="height: 300px;">
-                                <textarea name="content" id="editor" ng-model="infoData.content"></textarea>
+                                <div class="product_container" ng-repeat="item in items">
+                                    <div class="content_container">
+                                        <div class="img_container">
+                                            <img src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
+                                        </div>
+                                        <div class="words_container">
+                                            <h3 ng-bind="item.title"></h3>
+                                            <p ng-bind="item.content">
+
+                                            </p>
+                                            <p class="createDate">2018-05-16</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr>
