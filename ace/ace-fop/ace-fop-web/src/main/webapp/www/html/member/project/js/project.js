@@ -6,14 +6,16 @@ var status = null;
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
-    var editor2 = new Simditor({
+    //初始化文本框
+    var editor = new Simditor({
         textarea: $('#editor_release')
+
     });
     $.ajax({
-        url: "/fop/www/findInformationServiceListDo",
+        url: "/fop/www/findProjectList",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, modules: "3"},
+        data:{limit:pageSize, page: currentPage},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -58,12 +60,11 @@ app.controller(ngControllerName,function($scope){
     });
 
     $scope.searchList = function(currentPage, pageSize, status){
-        var key_word = $("#key_word").val();
         $.ajax({
-            url: "/fop/www/findInformationServiceListDo",
+            url: "/fop/www/findProjectList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, modules: "3", status: status},
+            data:{limit:pageSize, page: currentPage, status: status},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -90,10 +91,10 @@ app.controller(ngControllerName,function($scope){
 
     $scope.search = function(status){
         $.ajax({
-            url: "/fop/www/findInformationServiceListDo",
+            url: "/fop/www/findProjectList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, modules: "3", status: status},
+            data:{limit:pageSize, page: 1, status: status},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -141,10 +142,8 @@ app.controller(ngControllerName,function($scope){
     $scope.update_click = function(index){
         var info = $scope.items[index];
         $scope.infoData = info;
-        //初始化文本框
         var editor = new Simditor({
             textarea: $('#editor')
-
         });
         editor.setValue($scope.infoData.content);
     }
@@ -153,7 +152,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/updateInformationServiceDo",
             type:"post",
             async:false,
-            data:{modules: "3", id: id, title: $scope.infoData.title, content: $scope.infoData.content},
+            data:{modules: "4", id: id, title: $scope.infoData.title, content: $scope.infoData.content},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
@@ -185,7 +184,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/deleteInformationServiceByInformationServiceIdDo",
             type:"post",
             async:false,
-            data:{modules: "3", id: id},
+            data:{modules: "4", id: id},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
@@ -215,27 +214,44 @@ app.controller(ngControllerName,function($scope){
     }
 
     $scope.release = function(){
-        var title = $("input[name='pname']").val();
+        var title = $("input[name='projectName']").val();
+        var cooType = $("#cooType option:checked").val();
+        var area = $("input[name='area']").val();
+        var projectType = $("input[name='projectType']").val();
         var content = $("textarea[name='pcontent']").val();
         if(title == '' || title == undefined){
-            layer.alert("人才信息标题不能为空！", {
+            layer.alert("项目名称不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+        if(cooType == '' || cooType == undefined){
+            layer.alert("合作方式不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+        if(area == '' || cooType == undefined){
+            layer.alert("所属区域不能为空！", {
                 icon: 5,
                 skin: 'myskin'
             });
             return;
         }
         if(content == '' || content == undefined){
-            layer.alert("人才信息内容不能为空！", {
+            layer.alert("项目内容不能为空！", {
                 icon: 5,
                 skin: 'myskin'
             });
             return;
         }
         $.ajax({
-            url: "/fop/www/insertInformationServiceDo",
+            url: "/fop/www/insertProject",
             type:"post",
             async:false,
-            data:{modules: "3", title: title, content: content},
+            data:{projectName: title, coopType: cooType, areaCode: area, projectType: projectType, coopDesc: content},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
@@ -263,16 +279,5 @@ app.controller(ngControllerName,function($scope){
                 });
             }
         });
-    }
-});
-app.filter('convertText',function(){
-    return function(content){
-        content = content.replace(/(\n)/g, "");
-        content = content.replace(/(\t)/g, "");
-        content = content.replace(/(\r)/g, "");
-        content = content.replace(/<\/?[^>]*>/g, "");
-        content = content.replace(/\s*/g, "");
-        content = content.replace("&nbsp", "");
-        return content;
     }
 });

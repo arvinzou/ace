@@ -1,12 +1,15 @@
 package com.huacainfo.ace.portal.web.controller;
 
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.model.AppealCaseFile;
 import com.huacainfo.ace.portal.service.AppealService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,7 +45,13 @@ public class AppealCaseController extends PortalBaseController {
 
 	@Autowired
 	private AppealService appealService;
-     /**
+
+	@Autowired
+	private RedisOperations<String, Object> redisTemplate;
+	@Autowired
+	private KafkaProducerService kafkaProducerService;
+
+	/**
 	 *
 	    * @Title:find!{bean.name}List
 	    * @Description:  TODO(诉求分页查询)
@@ -83,6 +92,18 @@ public class AppealCaseController extends PortalBaseController {
 	@RequestMapping(value = "/insertAppealCase.do")
 	@ResponseBody
 	public MessageResponse insertAppealCase(String jsons) throws Exception {
+		Map<String, Object> params = JsonUtil.toMap(jsons);
+		String captcha= (String) params.get("captcha");
+		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
+		this.logger.info("captcha->{}",captcha);
+		this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+		if(CommonUtils.isBlank(captcha)){
+			return new MessageResponse(1,"验证码不能为空！");
+		}
+		if(!captcha.equals(j_captcha_weui)){
+			return new MessageResponse(1,"验证码错误！");
+		}
 		JSONObject o=JSON.parseObject(jsons);
 		AppealCase obj = JSON.parseObject(o.get("o").toString(), AppealCase.class);
 		obj.setSubmitOpenId(this.getCurWxUser().getOpenId());
