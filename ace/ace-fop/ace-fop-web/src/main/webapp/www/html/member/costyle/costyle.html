@@ -30,7 +30,7 @@
             <li><a href="#" ng-click="search();">全部</a> </li>
             <li><a href="#" ng-click="search('1');">审核中</a> </li>
             <li><a href="#" ng-click="search('2');">审核通过</a> </li>
-            <li><a href="#">审核未通过</a> </li>
+            <li><a href="#" ng-click="search('3');">审核未通过</a> </li>
         </ul>
         <div id="nav-content">
             <div class="table-div" ng-repeat="item in items">
@@ -40,6 +40,7 @@
                         <td width="10%">
                             <span ng-if="item.status == '1'">审核中</span>
                             <span ng-if="item.status == '2'">审核通过</span>
+                            <span ng-if="item.status == '3'">审核未通过</span>
                         </td>
                         <td>&nbsp;</td>
                         <td width="15%"><button id="update" data-toggle="modal" data-target="#myModal" ng-click="update_click($index);">编辑</button><button id="delete" ng-click="delete($index);">删除</button></td>
