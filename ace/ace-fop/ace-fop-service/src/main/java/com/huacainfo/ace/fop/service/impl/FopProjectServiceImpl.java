@@ -211,10 +211,7 @@ public class FopProjectServiceImpl implements FopProjectService {
         if (CommonUtils.isBlank(o.getCoopType())) {
             return new MessageResponse(1, "合作方式不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-
+        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
