@@ -35,6 +35,15 @@ public class InformationService {
 
     private String content;
 
+    /**
+     * modules:模块分类
+     * 1、企业风采
+     * 2、企业产品
+     * 3、人才信息
+     * 4、招商信息
+     * 5、政策文件
+     * 6、品牌推广
+     */
     private String modules;
 
     public String getModules() {
