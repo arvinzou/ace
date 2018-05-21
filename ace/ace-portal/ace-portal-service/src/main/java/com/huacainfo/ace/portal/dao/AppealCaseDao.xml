@@ -18,6 +18,13 @@
     <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="answerContent" jdbcType="LONGVARCHAR" property="answerContent" />
+
+    <result column="companyName" jdbcType="VARCHAR" property="companyName" />
+    <result column="submitName" jdbcType="VARCHAR" property="submitName" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+
+    <result column="answerDept" jdbcType="VARCHAR" property="answerDept" />
+    <result column="detailsOfProgress" jdbcType="VARCHAR" property="detailsOfProgress" />
   </resultMap>
   <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.AppealCaseVo"
              extends="BaseResultMap">
@@ -40,13 +47,52 @@
     content, answerContent
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
-    select
-    t.id, t.appealId, t.category, t.title, t.mediType, t.mediUrl, t.companyName, t.submitName, t.tel, t.submitTime,
-    t.submitOpenId, t.latitude, t.longitude, t.answerDept, t.answerTime, t.answerOpenId, t.remak, t.status,
-    t.createDate, t.content, t.answerContent, t.detailsOfProgress,
-    a.id appealCaseFileId, a.appealCaseId _appealCaseId, a.name _name, a.Type _Type, a.mediType _mediType, a.mediUrl _mediUrl, a.createDate _createDate
-    from appeal_case,left join appeal_case_file a on t.id=a.appealCaseId
-    where t.id = #{id,jdbcType=VARCHAR}
+    SELECT
+    t.id,
+    t.appealId,
+    t.category,
+    t.title,
+    t.mediType,
+    t.mediUrl,
+    t.companyName,
+    t.submitName,
+    t.tel,
+    t.submitTime,
+    t.submitOpenId,
+    t.latitude,
+    t.longitude,
+    t.answerDept,
+    t.answerTime,
+    t.answerOpenId,
+    t.remak,
+    t. STATUS,
+    t.createDate,
+    t.content,
+    t.answerContent,
+    t.detailsOfProgress,
+    (
+    CASE
+    WHEN t. STATUS = '1' THEN
+    '待受理'
+    WHEN t. STATUS = '2' THEN
+    '已受理'
+    WHEN t. STATUS = '3' THEN
+    '办结'
+    ELSE
+    '其他'
+    END
+    ) statusName,
+    a.id appealCaseFileId,
+    a.appealCaseId _appealCaseId,
+    a. name _name,
+    a.Type _Type,
+    a.mediType _mediType,
+    a.mediUrl _mediUrl,
+    a.createDate _createDate
+    FROM
+    appeal_case t
+    LEFT JOIN appeal_case_file a ON t.id = a.appealCaseId
+    WHERE t.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from appeal_case
@@ -102,7 +148,18 @@
     select
     t.id, t.appealId, t.category, t.title, t.mediType, t.mediUrl, t.companyName, t.submitName, t.tel, t.submitTime,
     t.submitOpenId, t.latitude, t.longitude, t.answerDept, t.answerTime, t.answerOpenId, t.remak, t.status,
-    t.createDate, t.content, t.answerContent, t.detailsOfProgress
+    t.createDate, t.content, t.answerContent, t.detailsOfProgress,
+    (
+    CASE
+    WHEN t.status = '1'
+    THEN '待受理'
+    WHEN t.status = '2'
+    THEN '已受理'
+    WHEN t.status = '3'
+    THEN '办结'
+    ELSE '其他'
+    END
+    ) statusName
     <include refid="whereCondition" />
     <choose>
       <when test='orderBy!=null and orderBy!=""'>
@@ -123,8 +180,20 @@
 
   <select id="getList" resultType="map">
     select
-    t.id, t.appealId, t.category, t.title, t.mediType, t.mediUrl, t.submitTime, t.submitOpenId, t.latitude,
-    t.longitude, t.answerTime, t.answerOpenId, t.status, t.createDate from appeal_case t
+    t.id, t.appealId, t.category, t.title,t.content,t.answerContent, t.mediType, t.mediUrl,DATE_FORMAT(t.submitTime,'%Y-%m-%d %T') submitTime, t.submitOpenId, t.latitude,
+    t.longitude, t.answerTime, t.answerOpenId, t.status, t.createDate,t.companyName, t.submitName, t.tel, t.detailsOfProgress,
+    (
+     CASE
+     WHEN t.status = '1'
+     THEN '待受理'
+     WHEN t.status = '2'
+     THEN '已受理'
+     WHEN t.status = '3'
+     THEN '办结'
+    ELSE '其他'
+    END
+     ) statusName
+    from appeal_case t
     inner join appeal a on t.appealId=a.id
     <if test='submitOpenId!=null and submitOpenId!=""'>
       and t.submitOpenId =#{submitOpenId,jdbcType=VARCHAR}

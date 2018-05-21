@@ -133,9 +133,11 @@ public class AppealCaseServiceImpl implements AppealCaseService {
             e.setId(GUIDUtil.getGUID());
             e.setAppealCaseId(o.getId());
             e.setCreateDate(new Date());
+            e.setStatus("1");
+            e.setType("1");
             this.appealCaseFileDao.insert(e);
         }
-        return new MessageResponse(0, "添加诉求完成！");
+        return new MessageResponse(0, "提交诉求完成！");
     }
 
     /**
