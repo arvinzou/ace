@@ -26,6 +26,19 @@ FopFinanceProject implements Serializable {
     private BigDecimal yearYield;
 
     private Long clicks;
+    private Long likes;
+    private String remark;
+    /**
+     * 审核状态 1- 审核中，2-审核通过，3-审核不通过
+     */
+    private String status;
+    private String createUserId;
+    private String createUserName;
+    private Date createDate;
+    private String lastModifyUserId;
+    private String lastModifyUserName;
+    private Date lastModifyDate;
+    private String financeContent;
 
     public Long getClicks() {
         return clicks;
@@ -34,26 +47,6 @@ FopFinanceProject implements Serializable {
     public void setClicks(Long clicks) {
         this.clicks = clicks;
     }
-
-    private Long likes;
-
-    private String remark;
-
-    private String status;
-
-    private String createUserId;
-
-    private String createUserName;
-
-    private Date createDate;
-
-    private String lastModifyUserId;
-
-    private String lastModifyUserName;
-
-    private Date lastModifyDate;
-
-    private String financeContent;
 
     public String getId() {
         return id;

@@ -112,8 +112,8 @@ jQuery(function ($) {
             }
 
             var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            if (rowData.status == "2") {
-                alert("请不要重复确认")
+            if (rowData.status != "1") {
+                alert("不能重复审核！")
                 return;
             }
             if (confirm("是否确认回复?")) {

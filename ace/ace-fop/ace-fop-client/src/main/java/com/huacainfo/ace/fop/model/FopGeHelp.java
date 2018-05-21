@@ -39,7 +39,7 @@ public class FopGeHelp {
     private String remark;
 
     /**
-     * 1-未发布，2-已发布
+     * 审核状态 1- 审核中，2-审核通过，3-审核不通过
      */
     private String status;
 

@@ -19,6 +19,9 @@ public class FopActivity {
 
     private String remark;
 
+    /*
+   审核状态 1- 审核中，2-审核通过，3-审核不通过
+    */
     private String status;
 
     private String createUserId;

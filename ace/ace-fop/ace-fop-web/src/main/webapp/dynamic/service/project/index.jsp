@@ -73,6 +73,19 @@
 
     <div id="grid-pager"></div>
 
+    <div id="dialog-message-audit" class="hide">
+        <form action="/fopProject/audit" id="fm-audit">
+            <fieldset>
+                审核结果：
+                <input id="audit_pass" name="audit_result" type="radio" value="0"/> 通过
+                <input id="audit_unpass" name="audit_result" type="radio" value="1"/> 不通过
+            </fieldset>
+            <div class="space-6"></div>
+            <fieldset>
+                审核备注： <textarea id="audit_opinion" cols="30" rows="10"></textarea>
+            </fieldset>
+        </form>
+    </div>
 
 </div>
 <div id="dialog-message" class="hide">

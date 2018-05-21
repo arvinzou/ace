@@ -144,11 +144,11 @@ public class FopProjectController extends FopBaseController {
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
-    public MessageResponse audit(String id) throws Exception {
+    public MessageResponse audit(String id, String auditResult, String auditOpinion) throws Exception {
         if (CommonUtils.isBlank(id)) {
             return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
         }
 
-        return fopProjectService.audit(id, getCurUserProp());
+        return fopProjectService.audit(id, auditResult, auditOpinion, getCurUserProp());
     }
 }
