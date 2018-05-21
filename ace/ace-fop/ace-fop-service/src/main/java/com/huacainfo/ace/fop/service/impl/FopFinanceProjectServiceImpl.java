@@ -2,6 +2,7 @@ package com.huacainfo.ace.fop.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -9,18 +10,18 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopFinanceProjectDao;
-import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFinanceProject;
+import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.service.FopFinanceProjectService;
+import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopQuestionService;
 import com.huacainfo.ace.fop.vo.FopFinanceProjectQVo;
 import com.huacainfo.ace.fop.vo.FopFinanceProjectVo;
-import com.huacainfo.ace.fop.vo.FopQuestionVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
@@ -58,6 +59,8 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
 
     @Autowired
     private FopAssociationDao fopAssociationDao;
+    @Autowired
+    private FopFlowRecordService fopFlowRecordService;
 
     /**
      * @throws
@@ -245,12 +248,10 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
             return new MessageResponse(1, "预期年收益不能为空！");
         }
         o.setLastModifyDate(new Date());
-        o.setStatus("1");
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopFinanceProjectDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更流程记录", "流程记录", "", o.getId(),
-                o.getId(), userProp);
+        this.dataBaseLogService.log("变更流程记录", "流程记录", "", o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "变更流程记录完成！");
     }
 
@@ -298,5 +299,44 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         this.dataBaseLogService.log("删除流程记录", "流程记录", String.valueOf(id),
                 String.valueOf(id), "流程记录", userProp);
         return new MessageResponse(0, "流程记录删除完成！");
+    }
+
+    /**
+     * 功能描述:  审核
+     *
+     * @param id
+     * @param auditResult  审核结果 -- 0-通过，1-不通过
+     * @param auditOpinion 审核备注
+     * @param userProp
+     * @param: id Fop_Finance_Project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @Override
+    public MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp userProp) throws Exception {
+        FopFinanceProject obj = fopFinanceProjectDao.selectByPrimaryKey(id);
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失");
+        }
+        if (obj.getStatus().equals("2")) {
+            return new MessageResponse(ResultCode.FAIL, "请勿重复发布");
+        }
+        //提交审核流程
+        String flowId = GUIDUtil.getGUID();
+        MessageResponse rs = fopFlowRecordService.submitFlowRecord(flowId, FlowType.FINANCE_PROJECT, id, userProp);
+        if (ResultCode.FAIL == rs.getStatus()) {
+            return rs;
+        }
+        //审核
+        FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
+        record.setAuditResult(auditResult);
+        record.setAuditOpinion(auditOpinion);
+        MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getErrorMessage());
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 }

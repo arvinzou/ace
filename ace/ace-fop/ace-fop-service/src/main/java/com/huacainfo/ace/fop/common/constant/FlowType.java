@@ -33,4 +33,19 @@ public interface FlowType {
      * 诉求服务确认
      */
     String REQUEST_HELP = "8";
+
+    /**
+     * 银企服务
+     */
+    String FINANCE_PROJECT = "9";
+
+    /**
+     * 金融产品
+     */
+    String LOAN_PROJECT = "10";
+
+    /**
+     * 信息服务
+     */
+    String INFORMATION_SERVICE = "11";
 }

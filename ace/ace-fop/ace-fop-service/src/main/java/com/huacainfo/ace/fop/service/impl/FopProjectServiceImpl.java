@@ -11,7 +11,6 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
@@ -275,14 +274,16 @@ public class FopProjectServiceImpl implements FopProjectService {
 
     /**
      * 功能描述: 审核发布项目
-     *@param id
-     * @param: userProp
+     *
+     * @param id
+     * @param auditResult
+     * @param auditOpinion @param: userProp
      * @return:
      * @auther: Arvin Zou
      * @date: 2018/5/10 15:47
      */
     @Override
-    public MessageResponse audit(String id, UserProp userProp) throws Exception {
+    public MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp userProp) throws Exception {
 
         FopProject fopProject = fopProjectDao.selectByPrimaryKey(id);
         if (CommonUtils.isBlank(fopProject)) {
@@ -300,9 +301,8 @@ public class FopProjectServiceImpl implements FopProjectService {
         }
         //自动审核通过
         FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
-        record.setAuditResult(AuditResult.PASS);
-        record.setAuditOpinion("系统自动审核");
-        record.setRemark("系统自动审核");
+        record.setAuditResult(auditResult);
+        record.setAuditOpinion(auditOpinion);
         MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
             throw new CustomException(rs1.getErrorMessage());

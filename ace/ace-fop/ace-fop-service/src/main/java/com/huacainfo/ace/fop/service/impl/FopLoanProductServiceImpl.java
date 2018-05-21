@@ -2,6 +2,7 @@ package com.huacainfo.ace.fop.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -10,12 +11,13 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.dao.FopLoanProductDao;
-import com.huacainfo.ace.fop.model.FopGeHelp;
+import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
+import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopLoanProductService;
 import com.huacainfo.ace.fop.service.FopQuestionService;
-import com.huacainfo.ace.fop.vo.FopFinanceProjectVo;
 import com.huacainfo.ace.fop.vo.FopLoanProductQVo;
 import com.huacainfo.ace.fop.vo.FopLoanProductVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -44,6 +46,8 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
 
     @Autowired
     private FopQuestionService fopQuestionService;
+    @Autowired
+    private FopFlowRecordService fopFlowRecordService;
 
     /**
      * @throws
@@ -240,5 +244,43 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
                 String.valueOf(id),
                 String.valueOf(id), "金融产品", userProp);
         return new MessageResponse(0, "通知公告删除完成！");
+    }
+
+    /**
+     * 功能描述:  审核
+     *
+     * @param id
+     * @param auditResult  审核结果 -- 0-通过，1-不通过
+     * @param auditOpinion 审核备注
+     * @param: id Fop_Finance_Project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @Override
+    public MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp userProp) throws Exception {
+        FopLoanProduct obj = fopLoanProductDao.selectByPrimaryKey(id);
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失");
+        }
+        if (obj.getStatus().equals("2")) {
+            return new MessageResponse(ResultCode.FAIL, "请勿重复发布");
+        }
+        //提交审核流程
+        String flowId = GUIDUtil.getGUID();
+        MessageResponse rs = fopFlowRecordService.submitFlowRecord(flowId, FlowType.LOAN_PROJECT, id, userProp);
+        if (ResultCode.FAIL == rs.getStatus()) {
+            return rs;
+        }
+        //审核
+        FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
+        record.setAuditResult(auditResult);
+        record.setAuditOpinion(auditOpinion);
+        MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getErrorMessage());
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 }

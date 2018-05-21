@@ -2,10 +2,12 @@ package com.huacainfo.ace.fop.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
 import com.huacainfo.ace.fop.service.FopLoanProductService;
 import com.huacainfo.ace.fop.vo.FopLoanProductQVo;
@@ -129,5 +131,23 @@ public class FopLoanProductController extends FopBaseController {
         String id = json.getString("id");
         return this.fopLoanProductService.deleteFopLoanProductByFopLoanProductId(id,
                 this.getCurUserProp());
+    }
+
+    /**
+     * 功能描述:  审核
+     *
+     * @param: id Fop_loan_Project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @RequestMapping(value = "/audit")
+    @ResponseBody
+    public MessageResponse audit(String id, String auditResult, String auditOpinion) throws Exception {
+        if (CommonUtils.isEmpty(id)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必备参数");
+        }
+
+        return fopLoanProductService.audit(id, auditResult, auditOpinion, getCurUserProp());
     }
 }

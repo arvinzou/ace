@@ -1,21 +1,30 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
+import com.huacainfo.ace.fop.dao.InformationServiceDao;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
-import com.huacainfo.ace.fop.model.FopGeHelp;
+import com.huacainfo.ace.fop.model.FopFlowRecord;
+import com.huacainfo.ace.fop.model.InformationService;
+import com.huacainfo.ace.fop.service.FopFlowRecordService;
+import com.huacainfo.ace.fop.service.InformationServiceService;
+import com.huacainfo.ace.fop.vo.InformationServiceQVo;
+import com.huacainfo.ace.fop.vo.InformationServiceVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
@@ -23,17 +32,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.fop.dao.InformationServiceDao;
-import com.huacainfo.ace.fop.model.InformationService;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.fop.service.InformationServiceService;
-import com.huacainfo.ace.fop.vo.InformationServiceVo;
-import com.huacainfo.ace.fop.vo.InformationServiceQVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("informationServiceService")
 /**
@@ -55,6 +57,9 @@ public class InformationServiceServiceImpl implements InformationServiceService 
 
     @Autowired
     private FopAssociationDao fopAssociationDao;
+
+    @Autowired
+    private FopFlowRecordService fopFlowRecordService;
 
     /**
      * @throws
@@ -188,8 +193,7 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.informationServiceDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更信息服务", "信息服务", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("变更信息服务", "信息服务", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更信息服务完成！");
     }
@@ -244,6 +248,44 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         informationService.setLastModifyDate(DateUtil.getNowDate());
         informationServiceDao.updateByPrimaryKeySelective(informationService);
         return new MessageResponse(0, "信息服务删除完成！");
+    }
+
+    /**
+     * 功能描述:  审核
+     *
+     * @param id
+     * @param auditResult  审核结果 -- 0-通过，1-不通过
+     * @param auditOpinion 审核备注
+     * @param: id Fop_Finance_Project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @Override
+    public MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp userProp) throws Exception {
+        InformationService obj = informationServiceDao.selectByPrimaryKey(id);
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失");
+        }
+        if (obj.getStatus().equals("2")) {
+            return new MessageResponse(ResultCode.FAIL, "请勿重复发布");
+        }
+        //提交审核流程
+        String flowId = GUIDUtil.getGUID();
+        MessageResponse rs = fopFlowRecordService.submitFlowRecord(flowId, FlowType.INFORMATION_SERVICE, id, userProp);
+        if (ResultCode.FAIL == rs.getStatus()) {
+            return rs;
+        }
+        //审核
+        FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
+        record.setAuditResult(auditResult);
+        record.setAuditOpinion(auditOpinion);
+        MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getErrorMessage());
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 
 }
