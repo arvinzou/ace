@@ -19,6 +19,8 @@ public class AppealCase implements java.io.Serializable {
 
     private String companyName;
 
+
+
     private String submitName;
 
     private String tel;

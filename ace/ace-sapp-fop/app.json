@@ -3,6 +3,7 @@
     "page/home/index",
     "page/appeal/index",
     "page/login/index",
+    "page/appealCasePreview/index",
     "page/me/index"
   ],
   "window": {

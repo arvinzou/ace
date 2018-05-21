@@ -11,7 +11,9 @@ var config = {
     checkImageUrl: `${server}/portal/captcha/image.do`,
     uploadUrl: `${server}/portal/www/upload.do`,
     getAppealById: `${server}/portal/www/appealCase/getAppealById.do`,
-    insertAppealCase: `${server}/portal/www/appealCase/insertAppealCase.do`
+    insertAppealCase: `${server}/portal/www/appealCase/insertAppealCase.do`,
+    getList: `${server}/portal/www/appealCase/getList.do`,
+    selectAppealCaseByPrimaryKey: `${server}/portal/www/appealCase/selectAppealCaseByPrimaryKey.do`
 
 };
 module.exports = config

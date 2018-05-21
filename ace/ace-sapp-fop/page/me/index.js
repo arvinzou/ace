@@ -1,20 +1,26 @@
+var util = require("../../util/util.js");
+let openSocket = require('../../util/socket.js');
+var cfg = require("../../config.js");
 var app = getApp()
 Page({
   data: {
     items: [],
     startX: 0, //开始坐标
-    startY: 0
+    startY: 0,
+    userinfo: wx.getStorageSync('userinfo')
   },
   onLoad: function () {
-    for (var i = 0; i < 10; i++) {
+    /*for (var i = 0; i < 10; i++) {
       this.data.items.push({
         content: i + " 向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦",
-        isTouchMove: false //默认全隐藏删除
+        isTouchMove: false 
       })
     }
     this.setData({
       items: this.data.items
-    })
+    })*/
+    var that=this;
+    that.initData();
   },
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
@@ -72,5 +78,19 @@ Page({
     this.setData({
       items: this.data.items
     })
+  },
+  initData: function () {
+    var that = this;
+    util.request(cfg.getList, { submitOpenId: that.data.userinfo.openId },
+      function (data) {
+        that.setData({
+          items: data.data
+        });
+        console.log(data.value);
+        if (data.status != 0) {
+          wx.showModal({ title: "系统提示", showCancel: false, content: data.errorMessage });
+        }
+      }
+    );
   }
 })

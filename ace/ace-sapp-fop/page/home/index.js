@@ -27,7 +27,7 @@ Page({
   },
   onPullDownRefresh: function () {
     let that = this;
-    that.initData();
+    that.initData(that.data.scene);
   },
   initData: function (id) {
     var that = this;
