@@ -74,14 +74,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 					syUser.getDepartmentId(), syUser.getCorpName(),
 					syUser.getAreaCode(), syUser.getStauts().equals("1"), true,
 					true, true, auths, roleType, syUser.getParentCorpId(),
-					syUser.getEmail(), syUser.getAccount(), role, syid, syUser.getCurSyid(),cfg,syUser.getOpenId());
+					syUser.getEmail(), syUser.getAccount(), role, syid, syUser.getCurSyid(),cfg,syUser.getOpenId(),syUser.getAppOpenId());
 			logger.info("加载用户信息:{}", o);
 			return o;
 		} else {
 			return new BasicUsers("0", "default", "default", "default",
 					"default", "default", "default", "default", false, true,
 					true, false, auths, null, "default", null, null, null,
-					null, null,null,null);
+					null, null,null,null,null);
 		}
 	}
 }

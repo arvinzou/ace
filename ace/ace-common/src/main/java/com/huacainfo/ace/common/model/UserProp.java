@@ -54,6 +54,7 @@ public class UserProp implements Serializable {
 	private String email;
 
 	private String openId;
+	private String appOpenId;
 
 	private List<String> roleType;
 	private List<String> role;
@@ -74,7 +75,7 @@ public class UserProp implements Serializable {
 
 	public UserProp(String userId, String name, String nickName, String corpId,
 			String corpName, String areaCode, List<String> roleType,
-			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg,String openId) {
+			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg,String openId,String appOpenId) {
 		this.userId = userId;
 		this.name = name;
 		this.nickName = nickName;
@@ -90,13 +91,14 @@ public class UserProp implements Serializable {
 		this.activeSyId=activeSyId;
 		this.cfg=cfg;
 		this.openId=openId;
+		this.appOpenId=appOpenId;
 	}
 
 	public UserProp(String userId, String name, String nickName, String corpId,
 			String corpName, String areaCode, String ip, List<String> roleType,
-			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg,String openId) {
+			String parentCorpId, List<String> role, String email, String account,String[] syid,String activeSyId,Map<String,Object> cfg,String openId,String appOpenId) {
 		this(userId, name, nickName, corpId, corpName, areaCode, roleType,
-				parentCorpId, role, email, account,syid, activeSyId,cfg, openId);
+				parentCorpId, role, email, account,syid, activeSyId,cfg, openId,appOpenId);
 		this.ip = ip;
 	}
 
@@ -280,5 +282,13 @@ public class UserProp implements Serializable {
 
 	public void setOpenId(String openId) {
 		this.openId = openId;
+	}
+
+	public String getAppOpenId() {
+		return appOpenId;
+	}
+
+	public void setAppOpenId(String appOpenId) {
+		this.appOpenId = appOpenId;
 	}
 }

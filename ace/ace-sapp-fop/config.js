@@ -16,5 +16,8 @@ var config = {
     getList: `${server}/portal/www/appealCase/getList.do`,
     selectAppealCaseByPrimaryKey: `${server}/portal/www/appealCase/selectAppealCaseByPrimaryKey.do`,
     sendCmccByMobile: `${server}/portal/www/sendCmccByMobile.do`,
+    updateAccept: `${server}/portal/www/appealCase/updateAccept.do`,
+    updateDetailsOfProgress: `${server}/portal/www/appealCase/updateDetailsOfProgress.do`,
+    updateAppealCase: `${server}/portal/www/appealCase/updateAppealCase.do`
 };
 module.exports = config

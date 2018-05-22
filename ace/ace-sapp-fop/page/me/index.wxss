@@ -127,7 +127,7 @@ font-weight:800;
   font-size: 40rpx;
   font-weight: 800;
   color: #ffffff;
-  padding: 30rpx;
+  padding: 10rpx;
 }
 .index{
   background: #1A56A8;
@@ -178,4 +178,10 @@ font-weight:800;
 .active {
   color:#1A56A8;
   border-bottom:4rpx solid #fff;
+}
+
+.name {
+  font-size: 30rpx;
+  color: #ffffff;
+  padding: 10rpx;
 }
