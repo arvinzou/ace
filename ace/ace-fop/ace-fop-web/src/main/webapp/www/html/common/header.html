@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="myapp" ng-controller="myctrl">
 <head>
     <meta charset="UTF-8">
     <title>头部</title>
@@ -8,8 +8,8 @@
     <script type="text/javascript" src="/fop/www/js/angular/angular.min.js"></script>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
     <script type="text/javascript">
-        var ngControllerName = "angularjsCtrl";
-        var ngAppName = "angularjsApp";
+        var ngControllerName = "myctrl";
+        var ngAppName = "myapp";
         var app =angular.module(ngAppName, []);
         app.controller(ngControllerName,function($scope){
             try{
