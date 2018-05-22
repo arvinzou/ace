@@ -718,4 +718,14 @@ public class WWWController extends FopBaseController {
     public MessageResponse deleteInformationServiceByInformationServiceId(String id) throws Exception {
         return this.informationServiceService.deleteInformationServiceByInformationServiceId(id, this.getCurUserProp());
     }
+
+    /**
+     * 统计发布数量
+     * id
+     */
+    @RequestMapping(value = "/publishStatistics")
+    @ResponseBody
+    public ResultResponse publishStatistics() throws Exception {
+        return this.informationServiceService.publishStatistics(this.getCurUserProp());
+    }
 }

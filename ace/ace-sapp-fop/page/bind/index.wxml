@@ -1,0 +1,32 @@
+<view class='index'>
+  <view class='kind-list'>
+    <view class='kind-list-item'>
+      <view class="reg-top">
+        <view class="reg-logo-panel">
+          <image src="../../image/账号绑定.png" mode="aspectFit" class="reg-icon" />
+          <view class="reg-logo-text">绑定手机</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <form catchsubmit="formSubmit" report-submit catchreset="formReset">
+    <view class="kind-list">
+      <view class="kind-list-item weui-flex">
+        <view class="weui-flex__item-icon">
+          <image class="iconList20" src="../../image/tel.png" />
+        </view>
+        <input name="mobile" bindinput="bindinputMobile" value="{{formData.mobile}}" type="number" class="weui-flex__item-body" maxlength="11" placeholder="手机号" />
+      </view>
+      <view class="kind-list-item weui-flex">
+        <view class="weui-flex__item-icon">
+          <image class="iconList20" src="../../image/checkcode.png" />
+        </view>
+        <input name="captcha" bindinput="bindinputCaptcha" type="number" class="weui-flex__item-body" maxlength="10" placeholder="短信验证码" />
+        <button size="mini" open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo" disabled="{{!stop}}"  style="color:#fff;background-color:#C5D1E2; border-radius: 2px;margin-left:0px">{{btnName}}</button>
+      </view>
+    </view>
+    <view>
+      <button class="weui-btn" bindtap="bind"  style="position:fixed; bottom:0; width:100%;color:#fff;background-color:#1A56A8; border-radius: 2px;">提交绑定</button>
+    </view>
+  </form>
+</view>

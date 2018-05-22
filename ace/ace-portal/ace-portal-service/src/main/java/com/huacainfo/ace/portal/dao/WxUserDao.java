@@ -42,4 +42,8 @@ public interface WxUserDao {
 
     Users selectSysUserByOpenid(String openid);
 
+    Map<String,Object> selectSysUserByMobile(String mobile);
+
+    int updateBindMiniApp(@Param("openId") String openId,@Param("userId") String userId);
+
 }

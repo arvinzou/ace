@@ -2,7 +2,7 @@
   "pages": [
     "page/home/index",
     "page/appeal/index",
-    "page/login/index",
+    "page/bind/index",
     "page/appealCasePreview/index",
     "page/me/index"
   ],

@@ -53,13 +53,14 @@ Page({
     console.log('index.js.onLoad');
     console.log(param);
     if(!util.isLogin()){
-      wx.navigateTo({ url: "../login/index?url=../appeal/index?scene=" + that.data.scene });
+      wx.navigateTo({ url: "../bind/index?url=../appeal/index?scene=" + that.data.scene });
     }
     this.setData(param);
     this.setData({
       WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
       checkImageUrl: cfg.checkImageUrl,
-      fileList: []
+      fileList: [],
+      userProp: wx.getStorageSync('userProp')
     });
   },
   formSubmit: function (e) {

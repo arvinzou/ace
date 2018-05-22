@@ -7,20 +7,20 @@ Page({
     items: [],
     startX: 0, //开始坐标
     startY: 0,
-    userinfo: wx.getStorageSync('userinfo')
+    userinfo: wx.getStorageSync('userinfo'),
+    currentTab: 0,
+    navbar: ['我提交', '我答复']
   },
   onLoad: function () {
-    /*for (var i = 0; i < 10; i++) {
-      this.data.items.push({
-        content: i + " 向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦",
-        isTouchMove: false 
-      })
+    if (!util.isLogin()) {
+      wx.navigateTo({ url: "../bind/index?url=../me/index"});
     }
-    this.setData({
-      items: this.data.items
-    })*/
     var that=this;
     that.initData();
+    that.setData({
+      userinfo: wx.getStorageSync('userinfo'),
+      userProp: wx.getStorageSync('userProp'),
+    });
   },
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
@@ -83,8 +83,9 @@ Page({
     var that = this;
     util.request(cfg.getList, { submitOpenId: that.data.userinfo.openId },
       function (data) {
+        wx.stopPullDownRefresh();
         that.setData({
-          items: data.data
+          submititems: data.data
         });
         console.log(data.value);
         if (data.status != 0) {
@@ -92,5 +93,32 @@ Page({
         }
       }
     );
+    util.request(cfg.getList, { answerOpenId: that.data.userinfo.openId },
+      function (data) {
+        wx.stopPullDownRefresh();
+        that.setData({
+          answeritems: data.data
+        });
+        console.log(data.value);
+        if (data.status != 0) {
+          wx.showModal({ title: "系统提示", showCancel: false, content: data.errorMessage });
+        }
+      }
+    );
+  },
+  onPullDownRefresh: function () {
+    let that = this;
+    that.initData();
+  },
+  navbarTap: function (e) {
+    console.log(e);
+    let that = this;
+    if (that.data.currentTab == e.target.dataset.idx) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.idx
+      })
+    }
   }
 })

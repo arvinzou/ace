@@ -184,4 +184,12 @@
     where (openid = #{openid,jdbcType=VARCHAR} or appOpenId = #{openid,jdbcType=VARCHAR})
   </select>
 
+  <select id="selectSysUserByMobile" resultType="map">
+    select t.user_id userId,t.mobile tel,t.name,a.department_name corpName from users t left join department a
+    on t.department_id=a.department_id
+    where t.mobile=#{mobile} limit 0,1
+  </select>
+  <update id="updateBindMiniApp">
+    update users set appOpenId=#{openId} where user_id=#{userId}
+  </update>
 </mapper>
