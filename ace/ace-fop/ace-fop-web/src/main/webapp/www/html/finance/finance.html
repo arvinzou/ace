@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html   ng-app="angularjsApp" ng-controller="angularjsCtrl">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
@@ -9,8 +8,9 @@
 		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/finance.css" />
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+        <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<SCRIPT language=JavaScript src="js/finance.js"></SCRIPT>
 		<script type="text/javascript">
 			function setIframeHeight(iframe) {
 				if(iframe) {
@@ -20,21 +20,11 @@
 					}
 				}
 			};
-
-//			$(function() {
-//				$("#afinance").click(function() {
-//					var frame = $("#frame1");
-//					setIframeHeight(frame);
-//				});
-//				$("#aproduct").click(function() {
-//					var frame = $("#frame2");
-//					setIframeHeight(frame);
-//				});
-//			});
 		</script>
 	</head>
 
 	<body>
+    <div ng-include="'../common/header.html'"></div>
     <div id="body">
         <div class="index">
             <div class="tab_title">

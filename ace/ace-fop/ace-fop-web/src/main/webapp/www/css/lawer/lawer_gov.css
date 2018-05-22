@@ -8,7 +8,7 @@
 body {
 	font-size: 14px;
 	padding: 0px;
-	margin: 0 0 10% 10%;
+	margin: 0 0 auto;
 }
 
 .title_lager {
@@ -100,7 +100,7 @@ body {
 	border-right: 1px solid #FF9F00 !important;
 }
 
-.title {
+.title01{
 	height: 62px;
 	position: relative;
 }
