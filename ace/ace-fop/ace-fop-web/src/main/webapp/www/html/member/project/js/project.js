@@ -145,16 +145,21 @@ app.controller(ngControllerName,function($scope){
         var editor = new Simditor({
             textarea: $('#editor')
         });
-        editor.setValue($scope.infoData.content);
+        editor.setValue($scope.infoData.coopDesc);
     }
     $scope.update = function(id){
+        var status = $scope.infoData.status;
+        var content = $("#editor").val();
         $.ajax({
-            url: "/fop/www/updateInformationServiceDo",
+            url: "/fop/www/updateProject",
             type:"post",
             async:false,
-            data:{modules: "4", id: id, title: $scope.infoData.title, content: $scope.infoData.content},
+            data:{id: id, projectName: $scope.infoData.projectName, coopType: $scope.infoData.coopType,
+                areaCode: $scope.infoData.areaCode, projectType: $scope.infoData.projectType,
+                coopDesc: $scope.infoData.coopDesc},
             success:function(result){
                 if(result.status == 0) {
+                    $scope.search(status);
                     console.log(result);
                     if (!$scope.$$phase) {
                         $scope.$apply();
@@ -181,10 +186,10 @@ app.controller(ngControllerName,function($scope){
     $scope.delete = function(index){
         var id = $scope.items[index].id;
         $.ajax({
-            url: "/fop/www/deleteInformationServiceByInformationServiceIdDo",
+            url: "/fop/www/deleteProjectByFopProjectId",
             type:"post",
             async:false,
-            data:{modules: "4", id: id},
+            data:{id: id},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);

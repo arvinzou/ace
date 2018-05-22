@@ -240,7 +240,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY createDate
+                ORDER BY createDate desc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

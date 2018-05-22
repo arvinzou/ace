@@ -103,74 +103,91 @@ jQuery(function ($) {
     //发布审核
     $('#btn-view-audit').on(
         'click',
-        function () {
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
+        function (e) {
+            e.preventDefault();
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
             if (!gr) {
                 $.jgrid.info_dialog($.jgrid.nav.alertcap,
                     $.jgrid.nav.alerttext);
                 return;
             }
             var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            if (rowData.status == "2") {
-                alert("请不要重复发布")
+            if (rowData.status != "1") {
+                alert("不能重复审核！")
                 return;
             }
-            if (confirm("是否确认发布?")) {
-                $.ajax({
-                    type: "post",
-                    url: contextPath + "/fopGeHelp/audit",
-                    data: {id: rowData.id},
-                    beforeSend: function (XMLHttpRequest) {
-                        sb('btn-view-audit', true, 'glyphicon glyphicon-refresh');
-                    },
-                    success: function (rst, textStatus) {
-                        sb('btn-view-audit', false, 'glyphicon glyphicon-refresh');
-                        if (rst) {
-                            bootbox.dialog({
-                                title: '系统提示',
-                                message: rst.errorMessage,
-                                detail: rst.detail,
-                                buttons: {
-                                    "success": {
-                                        "label": "<i class='ace-icon fa fa-check'></i>确定",
-                                        "className": "btn-sm btn-success",
-                                        "callback": function () {
-                                            //刷新查询数据
-                                            jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                                                page: 1
-                                            }).trigger("reloadGrid");
-                                        }
+            var dialog = $("#dialog-message-audit").removeClass('hide').dialog({
+                modal: true,
+                width: 380,
+                title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-cog'></i> " + rowData.title + " 审核</h4></div>",
+                title_html: true,
+                buttons: [
+                    {
+                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+                        "class": "btn btn-info btn-xs",
+                        id: 'ajax_button_audit',
+                        click: function () {
+                            //for testing
+                            var audit_result = $('input[name="audit_result"]:checked').val();
+                            var audit_opinion = $('#audit_opinion').val();
+                            console.log("audit_result:" + audit_result);
+                            console.log("audit_opinion:" + audit_opinion);
+                            if (audit_result == undefined) {
+                                alert("请选择审核结果!");
+                                return;
+                            }
+                            $(this).dialog("close");
+                            $.ajax({
+                                type: "post",
+                                url: contextPath + "/fopGeHelp/audit",
+                                data: {id: rowData.id, auditResult: audit_result, auditOpinion: audit_opinion},
+                                beforeSend: function (XMLHttpRequest) {
+                                    style_ajax_button('ajax_button_audit', true);
+                                },
+                                success: function (rst, textStatus) {
+                                    style_ajax_button('ajax_button_audit', false);
+                                    if (rst) {
+                                        bootbox.dialog({
+                                            title: '系统提示',
+                                            message: rst.errorMessage,
+                                            buttons: {
+                                                "success": {
+                                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                                    "className": "btn-sm btn-success",
+                                                    "callback": function () {
+                                                        dialog.dialog("close");
+                                                        //重载数据
+                                                        jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                                                            page: 1
+                                                        }).trigger("reloadGrid");
+
+                                                    }
+                                                }
+                                            }
+                                        });
                                     }
+                                    ;
+                                },
+                                complete: function (XMLHttpRequest, textStatus) {
+                                    style_ajax_button('ajax_button_audit', false);
+                                },
+                                error: function () {
+                                    style_ajax_button('ajax_button_audit', true);
                                 }
                             });
                         }
                     },
-                    complete: function (XMLHttpRequest, textStatus) {
-                        sb('btn-view-audit', false, 'glyphicon glyphicon-refresh');
-                    },
-                    error: function () {
-                        sb('btn-view-audit', false, 'glyphicon glyphicon-refresh');
+                    {
+                        html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
+                        "class": "btn btn-xs",
+                        click: function () {
+                            $(this).dialog("close");
+                        }
                     }
-                });
-            }
+                ]
+            });
         });
 
-    function sb(btnId, status, iconCss) {
-        console.log(status);
-        var btn = $('#' + btnId);
-        if (status) {
-            btn.find('i').removeClass(iconCss);
-            btn.find('i').addClass('fa-spinner fa-spin');
-            btn.attr('disabled', "true");
-
-        } else {
-            btn.find('i').removeClass('fa-spinner');
-            btn.find('i').removeClass('fa-spin');
-            btn.find('i').addClass(iconCss);
-            btn.removeAttr("disabled");
-        }
-    };
 });
 
 function preview(id, title) {
@@ -228,4 +245,37 @@ function loadView(id) {
             alert("加载错误！");
         }
     });
+}
+
+
+function style_ajax_button(btnId, status) {
+    console.log(status);
+    var btn = $('#' + btnId);
+    if (status) {
+        btn.find('i').removeClass('fa-check');
+        btn.find('i').addClass('fa-spinner fa-spin');
+        btn.attr('disabled', "true");
+
+    } else {
+        btn.find('i').removeClass('fa-spinner');
+        btn.find('i').removeClass('fa-spin');
+        btn.find('i').addClass('fa-check');
+        btn.removeAttr("disabled");
+    }
+}
+
+function sb(btnId, status, iconCss) {
+    console.log(status);
+    var btn = $('#' + btnId);
+    if (status) {
+        btn.find('i').removeClass(iconCss);
+        btn.find('i').addClass('fa-spinner fa-spin');
+        btn.attr('disabled', "true");
+
+    } else {
+        btn.find('i').removeClass('fa-spinner');
+        btn.find('i').removeClass('fa-spin');
+        btn.find('i').addClass(iconCss);
+        btn.removeAttr("disabled");
+    }
 }

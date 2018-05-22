@@ -29,7 +29,7 @@
                 <li><a href="#" ng-click="search();">全部</a> </li>
                 <li><a href="#" ng-click="search('1');">审核中</a> </li>
                 <li><a href="#" ng-click="search('2');">审核通过</a> </li>
-                <li><a href="#">审核未通过</a> </li>
+                <li><a href="#" ng-click="search('3');">审核未通过</a> </li>
             </ul>
             <div id="nav-content">
                 <div class="table-div" ng-repeat="item in items">
@@ -39,6 +39,7 @@
                             <td width="10%">
                                 <span ng-if="item.status == '1'">审核中</span>
                                 <span ng-if="item.status == '2'">审核通过</span>
+                                <span ng-if="item.status == '3'">审核未通过</span>
                             </td>
                             <td>&nbsp;</td>
                             <td width="15%"><button id="update" data-toggle="modal" data-target="#myModal" ng-click="update_click($index);">编辑</button><button id="delete" ng-click="delete($index);">删除</button></td>
@@ -69,30 +70,40 @@
             </div>
             <div class="modal-body">
                 <div class="product_form">
-                    <table class="product_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+                    <table class="product_table" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>招商名称</span></td>
+                            <td width="15%" align="right"><span class="required">*</span><span>项目名称</span></td>
                             <td width="5%"></td>
-                            <td><input type="text"  name="postname"  ng-model="infoData.title"/></td>
+                            <td><input type="text" ng-model="infoData.projectName"   onfocus="this.placeholder=''" /></td>
+                        </tr>
+                        <tr>
+                            <td width="15%" align="right"><span class="required">*</span><span>合作方式</span></td>
+                            <td width="5%"></td>
+                            <td>
+                                <select ng-model="infoData.coopType">
+                                    <option value="">请选择合作方式</option>
+                                    <option value="1">投资合作</option>
+                                    <option value="2">合作开发</option>
+                                    <option value="3">出资+资源合作</option>
+                                    <option value="4">其他</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="15%" align="right"><span class="required">*</span><span>所属区域</span></td>
+                            <td width="5%"></td>
+                            <td><input type="text" ng-model="infoData.areaCode"  /></td>
+                        </tr>
+                        <tr>
+                            <td width="15%" align="right"><span>项目类型</span></td>
+                            <td width="5%"></td>
+                            <td><input type="text" ng-model="infoData.projectType"/></td>
                         </tr>
                         <tr style="height: 186px;">
-                            <td width="15%" align="right" style="height: 186px;"><span>具体内容</span></td>
+                            <td width="15%" align="right" style="height: 186px;"><span>内容</span></td>
                             <td width="5%" style="height: 186px;"></td>
-                            <td style="height: 300px;">
-                                <div class="product_container" ng-repeat="item in items">
-                                    <div class="content_container">
-                                        <div class="img_container">
-                                            <img src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
-                                        </div>
-                                        <div class="words_container">
-                                            <h3 ng-bind="item.title"></h3>
-                                            <p ng-bind="item.content">
-
-                                            </p>
-                                            <p class="createDate">2018-05-16</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            <td style="height: 186px;">
+                                <textarea  id="editor"></textarea>
                             </td>
                         </tr>
                         <tr>

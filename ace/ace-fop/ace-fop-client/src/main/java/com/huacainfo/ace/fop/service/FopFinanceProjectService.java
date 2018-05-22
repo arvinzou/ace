@@ -89,4 +89,15 @@ public interface FopFinanceProjectService {
     public abstract MessageResponse deleteFopFinanceProjectByFopFinanceProjectId(String id, UserProp userProp) throws Exception;
 
 
+    /**
+     * 功能描述:  审核
+     *
+     * @param auditOpinion 审核备注
+     * @param auditResult  审核结果 -- 0-通过，1-不通过
+     * @param: id Fop_Finance_Project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp curUserProp) throws Exception;
 }

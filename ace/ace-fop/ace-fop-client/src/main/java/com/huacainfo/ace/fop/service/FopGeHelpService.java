@@ -94,12 +94,14 @@ public interface FopGeHelpService {
     /**
      * 功能描述: 审核发布
      *
+     * @param auditOpinion 审核备注
+     * @param auditResult  审核结果 -- 0-通过，1-不通过
      * @param:id fop_ge_help.id
      * @return:
      * @auther: Arvin Zou
      * @date: 2018/5/8 18:18
      */
-    MessageResponse audit(String id, UserProp curUserProp) throws Exception;
+    MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp curUserProp) throws Exception;
 
     FopGeHelp selectByPrimaryKey(String fromId);
 }

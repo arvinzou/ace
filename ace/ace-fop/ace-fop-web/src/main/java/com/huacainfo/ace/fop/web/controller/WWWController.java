@@ -474,10 +474,8 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/deleteQuestionByFopQuestionId")
     @ResponseBody
-    public MessageResponse deleteFopQuestionByFopQuestionId(String jsons)
+    public MessageResponse deleteFopQuestionByFopQuestionId(String id)
             throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
         return this.fopQuestionService.deleteFopQuestionByFopQuestionId(id,
                 this.getCurUserProp());
     }
