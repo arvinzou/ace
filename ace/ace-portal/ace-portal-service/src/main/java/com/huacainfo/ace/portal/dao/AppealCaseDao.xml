@@ -204,7 +204,6 @@
     <if test='status!=null and status!=""'>
       and t.status =#{status,jdbcType=VARCHAR}
     </if>
-
     ORDER BY createDate desc
   </select>
   <update id="updateAccept">
