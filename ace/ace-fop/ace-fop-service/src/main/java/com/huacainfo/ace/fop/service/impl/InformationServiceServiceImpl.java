@@ -13,20 +13,19 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
-import com.huacainfo.ace.fop.dao.FopAssociationDao;
-import com.huacainfo.ace.fop.dao.FopCompanyDao;
-import com.huacainfo.ace.fop.dao.InformationServiceDao;
+import com.huacainfo.ace.fop.common.constant.ModulesType;
+import com.huacainfo.ace.fop.dao.*;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.InformationService;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.InformationServiceService;
-import com.huacainfo.ace.fop.vo.InformationServiceQVo;
-import com.huacainfo.ace.fop.vo.InformationServiceVo;
+import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
+import javassist.bytecode.analysis.MultiType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +60,21 @@ public class InformationServiceServiceImpl implements InformationServiceService 
     @Autowired
     private FopFlowRecordService fopFlowRecordService;
 
+    @Autowired
+    private FopProjectDao fopProjectDao;
+    @Autowired
+    private FopGeHelpDao fopGeHelpDao;
+    @Autowired
+    private FopQuestionDao fopQuestionDao;
+
+    @Autowired
+    private FopQuestionnaireResultDao fopQuestionnaireResultDao;
+
+    @Autowired
+    private FopFinanceProjectDao fopFinanceProjectDao;
+
+    @Autowired
+    private FopLoanProductDao fopLoanProductDao;
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -288,4 +302,86 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 
+    @Override
+    public ResultResponse publishStatistics(UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(userProp)) {
+            return new ResultResponse(1, "没有登陆");
+        }
+        Map<String, Object> map = new HashMap<String, Object>();
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new ResultResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new ResultResponse(1, "账户没有绑定企业1！");
+        }
+        FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+        String relationId;
+        FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+        if (fa != null) {
+            relationId = fa.getId();
+        } else if (fc != null) {
+            relationId = fc.getId();
+        } else {
+            return new ResultResponse(1, "账户没有绑定企业2");
+        }
+        ;
+        String status = "2";
+        InformationServiceQVo condition = new InformationServiceQVo();
+        condition.setRelationId(relationId);
+        condition.setStatus(status);
+        condition.setModules(ModulesType.CORPORATE_STYLE);
+        map.put("CORPORATE_STYLE", this.informationServiceDao.findCount(condition));
+
+        condition.setModules(ModulesType.ENTERPRISE_PRODUCTS);
+        map.put("ENTERPRISE_PRODUCTS", this.informationServiceDao.findCount(condition));
+
+        condition.setModules(ModulesType.TALENT_INFO);
+        map.put("TALENT_INFO", this.informationServiceDao.findCount(condition));
+
+        condition.setModules(ModulesType.INVESTMENT_INFO);
+        map.put("INVESTMENT_INFO", this.informationServiceDao.findCount(condition));
+
+        condition.setModules(ModulesType.POLICY_DOCUMENTS);
+        map.put("POLICY_DOCUMENTS", this.informationServiceDao.findCount(condition));
+
+        condition.setModules(ModulesType.BRAND_PROMOTION);
+        map.put("BRAND_PROMOTION", this.informationServiceDao.findCount(condition));
+        /*项目统计*/
+        FopProjectQVo fopProjectQVo = new FopProjectQVo();
+        fopProjectQVo.setStatus("2");
+        fopProjectQVo.setRelationId(relationId);
+        map.put("PROJECT", this.fopProjectDao.findCount(fopProjectQVo));
+        /*政企服务*/
+        FopGeHelpQVo fopGeHelpQVo = new FopGeHelpQVo();
+        fopGeHelpQVo.setStatus("2");
+        fopGeHelpQVo.setRequestId(relationId);
+        map.put("GEHELP", this.fopGeHelpDao.findCount(fopGeHelpQVo));
+        /*法律帮助*/
+        FopQuestionQVo fopQuestionQVo = new FopQuestionQVo();
+        fopQuestionQVo.setStatus("2");
+        fopQuestionQVo.setSourceType("0");
+        fopQuestionQVo.setRelationId(relationId);
+        map.put("LOWHELP", this.fopQuestionDao.findCount(fopQuestionQVo));
+
+        /*满意度调查*/
+        FopQuestionnaireResultQVo fopQuestionnaireResultQVo = new FopQuestionnaireResultQVo();
+        fopQuestionnaireResultQVo.setStatus("2");
+        fopQuestionnaireResultQVo.setRelationId(relationId);
+        map.put("QUESTION_RESULT", this.fopQuestionnaireResultDao.findCount(fopQuestionnaireResultQVo));
+
+         /*金融*/
+        FopFinanceProjectQVo fopFinanceProject = new FopFinanceProjectQVo();
+        fopFinanceProject.setStatus("2");
+        fopFinanceProject.setCompanyId(relationId);
+        map.put("financial", this.fopFinanceProjectDao.findCount(fopFinanceProject));
+
+          /*金融*/
+        FopLoanProductQVo fopLoanProductQVo = new FopLoanProductQVo();
+        fopLoanProductQVo.setStatus("2");
+        fopLoanProductQVo.setCompanyId(relationId);
+        map.put("loan_product", this.fopLoanProductDao.findCount(fopLoanProductQVo));
+        return new ResultResponse(ResultCode.SUCCESS, "获取数据统计", map);
+    }
 }
