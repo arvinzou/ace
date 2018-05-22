@@ -132,41 +132,7 @@
 	</head>
 
 	<body>
-		<div class="headbox">
-			<div class="head juz">
-				<div class="head_top">
-					<span class="head_welcome">欢迎您：</span>
-					<a class="head_user_name" href="user.html">广东省电子税务局测试用户</a>
-					<span class="head_welcome">所属企业：方欣科技有限公司</span>
-					<a class="head_login" href="#">切换身份</a>
-					<a class="head_login" href="../login/login.html">退出</a>
-				</div>
-				<div class="head_menu">
-
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td width="300"><img src="../../images/logo.png" /></td>
-							<td>
-								<ul>
-									<li>
-										<a href="../index.html">首页</a>
-									</li>
-									<li>
-										<a href="#">企业服务</a>
-									</li>
-									<li class="active">
-										<a href="../member/member.html">会员服务</a>
-									</li>
-									<li>
-										<a href="#">服务互动</a>
-									</li>
-								</ul>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
+		<div ng-include="'../common/header.html'"></div>
 		<div class="current_site">当前位置：政企服务 >> {{apealData.title}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
@@ -231,6 +197,7 @@
 				</div>
 			</div>
 		</div>
+		<div ng-include="'../common/footer.html'"></div>
 	</body>
 
 </html>

@@ -12,7 +12,7 @@
 
     <script>
         window.onload = function(){
-            window.location.href = '/fop/www/html/index.html';
+            window.location.href = '/fop/www/index.html';
         }
     </script>
 </head>

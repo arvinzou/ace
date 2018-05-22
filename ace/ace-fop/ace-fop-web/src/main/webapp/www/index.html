@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
+	<head>
+		<meta charset="UTF-8">
+		<title>常德市非公经济公共服务平台</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/common_index.css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<!--<script type="text/javascript" src="js/index.js"></script>-->
+		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+		<script type="text/javascript">
+            var ngControllerName = "angularjsCtrl";
+            var ngAppName = "angularjsApp";
+            var app =angular.module(ngAppName, []);
+            app.controller(ngControllerName,function($scope){
+                try{
+                    $scope.userProp = userProp;
+                    console.log(userProp);
+                    if(userProp != null && userProp != undefined){
+                        $scope.username = userProp.name;
+                    }
+				}catch (e){
+
+				}
+
+            });
+		</script>
+   </head>
+
+	<body>
+		<div ng-include="'html/common/header.html'"></div>
+		<div class="main">
+			<div class="content_box">
+				<div class="content">
+					<!--公告栏区域-->
+					<div class="banner_box">
+						<div class="banner">
+							<div class="banner_image">
+								<div id="myCarousel" class="carousel slide" data-ride="carousel">
+									<!-- 轮播（Carousel）指标 -->
+									<ol class="carousel-indicators">
+										<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+										<li data-target="#myCarousel" data-slide-to="1"></li>
+										<li data-target="#myCarousel" data-slide-to="2"></li>
+										<li data-target="#myCarousel" data-slide-to="3"></li>
+									</ol>
+									<!-- 轮播（Carousel）项目 -->
+									<div class="carousel-inner">
+										<div class="item active">
+											<img src="images/slice.png" style="width: 100%;height: 100%;object-fit: cover;" alt="First slide">
+										</div>
+										<div class="item">
+											<img src="images/slice.png" style="width: 100%;height: 100%;object-fit: cover;" alt="Second slide">
+										</div>
+										<div class="item">
+											<img src="images/slice.png" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+										</div>
+										<div class="item">
+											<img src="images/slice.png" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="banner_menu">
+								<ul>
+									<li class="menu">领导之窗</li>
+									<li class="menu-a">
+										<a href="#">常德市委</a>
+									</li>
+									<li class="menu-a">
+										<a href="#">常德市政府</a>
+									</li>
+									<li class="menu-a">
+										<a href="#">常德市工商联</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="notice">
+							<div class="notice_box">
+								<span class="title">市情要闻</span>
+								<a class="link" href="#">更多>></a>
+								<div style="clear: both;"></div>
+							</div>
+							<div class="notice_list">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+									<tr>
+										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
+										<td width="20%" align="right" class="text02">2018-03-28</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--菜单面板区域-->
+				<div class="menu_panel">
+					<div class="menu_panel_01">
+						<ul>
+							<li class="left policy" onclick="window.open('/fop/www/html/policy/policy.html')">
+								<span class="menu_img"><img src="images/icon-policy.png"/></span>
+								<span class="menu_title">政策文件</span>
+							</li>
+							<li class="left investment" onclick="window.open('/fop/www/html/investment/investment.html')">
+								<span class="menu_img"><img src="images/icon-investment.png"/></span>
+								<span class="menu_title">招商信息</span>
+							</li>
+							<li class="left personnel" onclick="window.open('/fop/www/html/personnel/personnel.html')">
+								<span class="menu_img"><img src="images/icon-personnel.png"/></span>
+								<span class="menu_title">人才信息</span>
+							</li>
+							<li class="left project" onclick="window.open('/fop/www/html/cooperation/cooperation_index.html')">
+								<span class="menu_img"><img src="images/icon-project.png"/></span>
+								<span class="menu_title">项目信息</span>
+							</li>
+							<li class="left finance" onclick="window.open('/fop/www/html/finance/finance.html')">
+								<span class="menu_img"><img src="images/icon-finance.png"/></span>
+								<span class="menu_title">金融产品</span>
+							</li>
+							<li class="left product" onclick="window.open('/fop/www/html/product/product.html')">
+								<span class="menu_img"><img src="images/icon-product.png"/></span>
+								<span class="menu_title">企业产品</span>
+							</li>
+							<li class="left style" onclick="window.open('/fop/www/html/corporateStyle/costyle.html')">
+								<span class="menu_img"><img src="images/icon-style.png"/></span>
+								<span class="menu_title">企业风采</span>
+							</li>
+							<li class="left sincerity">
+								<span class="menu_img"><img src="images/icon-sincerity.png"/></span>
+								<span class="menu_title">诚信公示</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!--品牌推广-->
+				<div class="product_box">
+					<div class="product_title">
+						<span class="title">品牌推广</span>
+						<a class="link" href="#">更多>></a>
+						<div style="clear: both;"></div>
+					</div>
+					<div class="product_list">
+						<ul>
+							<li class="left">
+								<img src="images/product.png" />
+								<span>推荐克莱门特地源热泵空调机组</span>
+							</li>
+							<li class="left">
+								<img src="images/product.png" />
+								<span>推荐克莱门特地源热泵空调机组</span>
+							</li>
+							<li class="left">
+								<img src="images/product.png" />
+								<span>推荐克莱门特地源热泵空调机组</span>
+							</li>
+							<li class="left">
+								<img src="images/product.png" />
+								<span>推荐克莱门特地源热泵空调机组</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!--在线服务、共享窗口、留言箱-->
+				<div class="help_box">
+					<div class="online_box">
+						<div class="online_box_title">
+							<span class="title">在线服务</span>
+							<div style="clear: both;"></div>
+						</div>
+						<div class="online_content">
+							<ul style="padding-top: 15px;">
+								<li onclick="window.open('/fop/www/html/gov_service/gov_service1.html')">
+									<span class="online_img"><img src="images/icon-gov.png"/></span>
+									<span class="online_title">政企服务</span>
+								</li>
+								<li>
+									<span class="online_img"><img src="images/icon-bank.png"/></span>
+									<span class="online_title">银企服务</span>
+								</li>
+								<li onclick="window.open('/fop/www/html/law/lawer_index.html')">
+									<span class="online_img"><img src="images/icon-law.png"/></span>
+									<span class="online_title">法务服务</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="share_box">
+						<div class="share_box_title">
+							<span class="title">共享窗口</span>
+							<div style="clear: both;"></div>
+						</div>
+						<div class="share_content">
+							<div class="share_title">
+								<div class="left_opt" id="prevTop"><span class="glyphicon glyphicon-chevron-left"></span></div>
+								<div class="share_menu" id="listBox">
+									<ul>
+										<li><a href="#">统战部</a></li>
+										<li><a href="#">发改委</a></li>
+										<li><a href="#">经信委</a></li>
+										<li><a href="#">商务局</a></li>
+										<li><a href="#">工商局</a></li>
+										<li><a href="#">国税局</a></li>
+										<li><a href="#">地税局</a></li>
+										<li><a href="#">科技局</a></li>
+										<li><a href="#">农委</a></li>
+										<li><a href="#">财政局</a></li>
+										<li><a href="#">国土资源局</a></li>
+										<li><a href="#">环保局</a></li>
+										<li><a href="#">住建局</a></li>
+										<li><a href="#">林业局</a></li>
+										<li><a href="#">规划局</a></li>
+										<li><a href="#">国资委</a></li>
+										<li><a href="#">民政局</a></li>
+										<li><a href="#">人社局</a></li>
+										<li><a href="#">质监局</a></li>
+										<li><a href="#">安监局</a></li>
+										<li><a href="#">食药监管局</a></li>
+										<li><a href="#">司法局</a></li>
+										<li><a href="#">人民银行</a></li>
+									</ul>
+								</div>
+								<div class="right_opt" id="nextTop"><span class="glyphicon glyphicon-chevron-right"></span></div>
+								<div style="clear: both;"></div>
+							</div>
+							<div id="picBox" class="share">
+								<ul>
+									<li class="on">
+										统战部
+									</li>
+									<li>
+										发改委
+									</li>
+									<li>
+										经信委
+									</li>
+									<li>
+										商务局
+									</li>
+									<li>
+										工商局
+									</li>
+									<li>
+										国税局
+									</li>
+									<li>
+										地税局
+									</li>
+									<li>
+										科技局
+									</li>
+									<li>
+										农委
+									</li>
+									<li>
+										财政局
+									</li>
+									<li>
+										国土资源局
+									</li>
+									<li>
+										环保局
+									</li>
+									<li>
+										住建局
+									</li>
+									<li>
+										林业局
+									</li>
+									<li>
+										规划局
+									</li>
+									<li>
+										国资委
+									</li>
+									<li>
+										民政局
+									</li>
+									<li>
+										人社局
+									</li>
+									<li>
+										质监局
+									</li>
+									<li>
+										安监局
+									</li>
+									<li>
+										食药监管局
+									</li>
+									<li>
+										司法局
+									</li>
+									<li>
+										人民银行
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="message_box">
+						<div class="message_box_title">
+							<span class="title">留言箱</span>
+							<div style="clear: both;"></div>
+						</div>
+						<div class="message_content">
+							<div class="message_01"><img src="images/msg.png" /></div>
+							<div class="message_02">
+								<span><img src="images/icon-opinion.png"/></span>
+								<span>意见直通车</span>
+							</div>
+							<div class="message_03" onclick="window.open('/fop/www/html/satisfy/satisfy.html')">
+								<span><img src="images/icon-satify.png"/></span>
+								<span>满意度调查</span>
+							</div>
+						</div>
+					</div>
+					<div style="clear: both;"></div>
+				</div>
+
+				<!--GIS地图-->
+				<div class="map">
+					<div class="map_title">
+						<span class="title">GIS地图</span>
+					</div>
+					<div style="clear: both;"></div>
+					<div class="map_content">
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-include="'html/common/footer.html'"></div>
+	</body>
+
+</html>
