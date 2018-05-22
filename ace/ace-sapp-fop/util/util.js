@@ -214,7 +214,6 @@ function bind(captcha,mobile,callback) {
       wx.hideNavigationBarLoading() //完成停止加载
       wx.hideLoading();
       if (res.data.status == 0) {
-        wx.setStorageSync('WX-SESSION-ID', res.data.value['3rd_session']);
         wx.setStorageSync('userinfo', res.data.value['userinfo']);
         wx.setStorageSync('userProp', res.data.value['userProp']);
         console.log('login success', res);

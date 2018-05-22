@@ -85,6 +85,7 @@
 	t.account,
 	t.password,
 		t.openId,
+		t.appOpenId,
 	t.sex,
 	t.id_card,
 	t.name,

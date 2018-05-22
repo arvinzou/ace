@@ -127,9 +127,21 @@ public class AppealCaseController extends PortalBaseController {
 	@RequestMapping(value = "/updateAppealCase.do")
 	@ResponseBody
 	public MessageResponse updateAppealCase(String jsons,String client) throws Exception {
+		Map<String, Object> params = JsonUtil.toMap(jsons);
+		String captcha= (String) params.get("captcha");
+		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
+		this.logger.info("captcha->{}",captcha);
+		this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+		if(CommonUtils.isBlank(captcha)){
+			return new MessageResponse(1,"验证码不能为空！");
+		}
+		if(!captcha.equals(j_captcha_weui)){
+			return new MessageResponse(1,"验证码错误！");
+		}
 		JSONObject o=JSON.parseObject(jsons);
 		AppealCase obj = JSON.parseObject(o.get("o").toString(), AppealCase.class);
-		obj.setAnswerOpenId(this.getCurUserProp().getOpenId());
+
 		List<AppealCaseFile> list=JSON.parseArray(o.get("list").toString(),AppealCaseFile.class);
 
 		if(CommonUtils.isNotEmpty(client)){
@@ -137,6 +149,7 @@ public class AppealCaseController extends PortalBaseController {
 			if(srt.getStatus()==1){
 				return srt;
 			}
+			obj.setAnswerOpenId(this.getCurWxUser().getOpenId());
 			return this.appealCaseService.updateAppealCase(obj,list,srt.getValue());
 		}
 		return this.appealCaseService.updateAppealCase(obj,list,this.getCurUserProp());
