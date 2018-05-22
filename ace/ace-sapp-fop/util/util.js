@@ -107,9 +107,9 @@ function formatDate(date) {
 }
 function isLogin(){
   console.log("==============isLogin===============");
-  var userinfo = wx.getStorageSync('userinfo');
-  console.log(userinfo);
-  if (!userinfo) {
+  var userProp = wx.getStorageSync('userProp');
+  console.log(userProp);
+  if (!userProp) {
     return false;
   }
   return true;
@@ -161,7 +161,6 @@ function login(callback) {
               wx.showModal({ title: "提示", showCancel: false, content: "获取用户失败" });
             },
             success: function (res) {
-              console.log("8888888");
               wx.request({
                 url: cfg.loginUrl,
                 data: {
@@ -193,6 +192,48 @@ function login(callback) {
       })
     }
   });
+
+}
+
+function bind(captcha,mobile,callback) {
+  console.log("start bind");
+  var that = this;
+  var _callback = callback;
+  wx.showNavigationBarLoading();
+  wx.showLoading({ title: "请求中" });
+  wx.request({
+    url: cfg.bindUrl,
+    data: {
+      captcha: captcha,
+      mobile
+    },
+    header: {
+      'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志
+    },
+    success: function (res) {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.hideLoading();
+      if (res.data.status == 0) {
+        wx.setStorageSync('WX-SESSION-ID', res.data.value['3rd_session']);
+        wx.setStorageSync('userinfo', res.data.value['userinfo']);
+        wx.setStorageSync('userProp', res.data.value['userProp']);
+        console.log('login success', res);
+        if (_callback) {
+          console.log('bind callback');
+          _callback(res);
+        }
+      } else {
+        wx.showModal({ title: "提示", showCancel: false, content: res.data.errorMessage });
+      }
+
+    },
+    fail: function ({ errMsg }) {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.hideLoading();
+      console.log('request fail', errMsg);
+      wx.showModal({ title: "提示", showCancel: false, content: "鉴权失败" });
+    }
+  })
 
 }
 /** 
@@ -273,6 +314,7 @@ module.exports = {
     uuid: uuid,
     formatDate:formatDate,
     login:login,
+    bind: bind,
     isLogin: isLogin,
     security: security,
     stringToJson: stringToJson,

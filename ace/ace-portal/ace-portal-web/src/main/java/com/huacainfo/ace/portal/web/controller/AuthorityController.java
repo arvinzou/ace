@@ -62,6 +62,23 @@ public class AuthorityController extends PortalBaseController{
 		return rst;
 	}
 
+	@RequestMapping(value = "/bind.do")
+	@ResponseBody
+	public SingleResult<Map<String,Object>> bind(String captcha,String mobile)throws Exception {
+		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
+		this.logger.info("captcha->{}",captcha);
+		this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+		if(CommonUtils.isBlank(captcha)){
+			return new SingleResult(1,"验证码不能为空！");
+		}
+		if(!captcha.equals(j_captcha_weui)){
+			return new SingleResult(1,"验证码错误！");
+		}
+		SingleResult<Map<String,Object>> rst= this.authorityService.bind(_3rd_session,mobile);
+		return rst;
+	}
+
 	@RequestMapping(value = "/reg.do")
 	@ResponseBody
 	public SingleResult<WxUser> reg(String mobile,String addr,String email,String name,String captcha,String formId)throws Exception {

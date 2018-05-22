@@ -16,6 +16,7 @@ import com.huacainfo.ace.portal.model.Attach;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.model.WxFormid;
 import com.huacainfo.ace.portal.service.*;
+import com.huacainfo.ace.portal.model.TaskCmcc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 
 import java.io.File;
 import java.util.*;
@@ -51,8 +53,7 @@ public class WWWController extends PortalBaseController {
     private SystemService systemService;
     @Autowired
     private WxCfgService wxCfgService;
-    @Autowired
-    private TaskCmccService taskCmccService;
+
 
     @Autowired
     private WxUserService wxUserService;
@@ -67,6 +68,9 @@ public class WWWController extends PortalBaseController {
 
     @Autowired
     private MessageTemplateService messageTemplateService;
+
+    @Autowired
+    private TaskCmccService taskCmccService;
 
     /**
      * @throws @author: chenxiaoke
@@ -343,5 +347,26 @@ public class WWWController extends PortalBaseController {
             i++;
         }
         return rst;
+    }
+
+    @RequestMapping(value = "/sendCmccByMobile.do")
+    @ResponseBody
+    public MessageResponse sendCmccByMobile(String mobile) throws Exception {
+        String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+        String j_captcha_cmcc=this.getRandCode();
+        TaskCmcc o=new TaskCmcc();
+        if(CommonUtils.isBlank(mobile)){
+            return new MessageResponse(1,"手机号不能为空");
+        }
+        if(!CommonUtils.isValidMobile(mobile)){
+            return new MessageResponse(1,"手机号格式错误");
+        }
+        Map<String, Object> msg = new HashMap<String, Object>();
+        msg.put("taskName", "验证码" + mobile);
+        msg.put("msg", "本次提交验证码为" + j_captcha_cmcc + "，请及时输入。【华彩鉴权平台】");
+        msg.put("tel", mobile + "," + mobile);
+        CommonBeanUtils.copyMap2Bean(o,msg);
+        redisTemplate.opsForValue().set(_3rd_session+"j_captcha_weui", j_captcha_cmcc);
+        return this.taskCmccService.insertTaskCmcc(o);
     }
 }

@@ -1,7 +1,6 @@
 @import "../common/index.wxss";
 @import "../common/lib/weui.wxss";
 .reg-top{
-  background: #fff;
   flex-direction:column;
   padding: 20px;
 }
@@ -22,6 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+     
 }
 .reg-logo-text{
   line-height: 42px;
@@ -58,4 +58,19 @@ margin-top:0rpx;
 margin-bottom:0rpx;
 }
 
-
+.reg-icon{
+  width:42px; 
+  height: 42px; 
+}
+.iconList20{
+  width:20px; height: 20px;
+  padding-right: 10rpx;
+  vertical-align: top;
+  
+}
+.weui-flex__item-body{
+  line-height: 25px;
+}
+.kind-list-item{
+  padding: 10px;
+}

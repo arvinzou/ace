@@ -1,4 +1,5 @@
 <view class='index'>
+ <image src="../../image/首图.png" class="banner" mode="aspectFit" />
   <form catchsubmit="formSubmit" catchreset="formReset">
     <view class="kind-list">
       <view class="kind-list-item">
@@ -9,7 +10,7 @@
               <view class="weui-label">企业名称</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" name="companyName" placeholder="请输入企业名称" />
+              <input class="weui-input" name="companyName" value="{{userProp.corpName}}" placeholder="请输入企业名称" />
             </view>
           </view>
           <view class="weui-cell weui-cell_input">
@@ -17,7 +18,7 @@
               <view class="weui-label">姓名</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" name="submitName" placeholder="请输入姓名" />
+              <input class="weui-input" name="submitName" value="{{userProp.name}}" placeholder="请输入姓名" />
             </view>
           </view>
           <view class="weui-cell weui-cell_input">
@@ -25,7 +26,7 @@
               <view class="weui-label">联系电话</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" name="tel" placeholder="请输入联系电话" />
+              <input class="weui-input" name="tel" value="{{userProp.tel}}" placeholder="请输入联系电话" />
             </view>
           </view>
            </view>
@@ -123,7 +124,7 @@
       </view>
 
       <view>
-        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:#C5D1E2; border-radius: 2px;" formType="submit">提交</button>
+        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:{{max>1?'#1A56A8':'#C5D1E2'}}; border-radius: 2px;" formType="submit">提交</button>
       </view>
     </view>
   </form>

@@ -75,8 +75,6 @@ public class AuthorityServiceImpl implements AuthorityService {
 		String openid = json.getString("openid");
 		String expires_in = json.getString("expires_in");
         JSONObject userinfo = this.getUserInfo(encryptedData,session_key,iv);
-
-
 		logger.info("session_key -> {} openid -> {} expires_in -> {} userinfo ->{}", session_key, openid, expires_in,
 				userinfo);
         String _3rd_session =userinfo.getString("unionId");
@@ -102,7 +100,8 @@ public class AuthorityServiceImpl implements AuthorityService {
 
 			}
 		}
-        Map<String, Object> o = new HashMap<String, Object>();
+		Map<String, Object> o = new HashMap<String, Object>();
+		o.put("status","0");
         o.put("session_key", session_key);
         o.put("openid", openid);
         o.put("expires_in", expires_in);
@@ -122,6 +121,30 @@ public class AuthorityServiceImpl implements AuthorityService {
 		this.saveOrUpdateWxUser(wxUser);
 		rst.setValue(o);
 		return rst;
+	}
+
+	@Override
+	public SingleResult<Map<String, Object>> bind(String _3rd_session,String mobile) throws Exception {
+		SingleResult<Map<String, Object>> rst = new SingleResult<Map<String, Object>>(0, "OK");
+		Map<String, Object> o = new HashMap<String, Object>();
+		o.put("status","1");
+		WxUser user=this.wxUserDao.selectByPrimaryKey(_3rd_session);
+		if(CommonUtils.isNotEmpty(mobile)) {
+			Map<String, Object> userProp=this.wxUserDao.selectSysUserByMobile(mobile);
+			if(CommonUtils.isNotEmpty(userProp)){
+				user.setDeptId((String) userProp.get("corpName"));
+				user.setName((String) userProp.get("name"));
+				user.setMobile((String) userProp.get("tel"));
+				this.wxUserDao.updateReg(user);
+				this.wxUserDao.updateBindMiniApp(user.getOpenId(),(String) userProp.get("userId"));
+				o.put("status","0");
+				o.put("userProp",userProp);
+				o.put("userinfo",user);
+
+			}
+		}
+		rst.setValue(o);
+		return  rst;
 	}
 	private void saveOrUpdateWxUser(WxUser o){
 		int t=this.wxUserDao.isExit(o);
