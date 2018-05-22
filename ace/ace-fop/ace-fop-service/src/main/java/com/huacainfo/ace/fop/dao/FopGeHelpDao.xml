@@ -282,7 +282,7 @@
     <sql id="Vo_Column_List">
         t.id, t.requestId, t.requestType, t.parentId, t.title, t.reply, t.releaseDate, t.keyWord, t.accCount,
         t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
-        t.lastModifyDate, t.optDeptName, t.optLeaderName, t.processDetail,t.content
+        t.lastModifyDate, t.optDeptName, t.optLeaderName, t.processDetail,t.content,c.fullName as companName
     </sql>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopGeHelpVo">
@@ -291,14 +291,15 @@
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from fop_ge_help
-        where id = #{id,jdbcType=VARCHAR}
+        <include refid="Vo_Column_List"/>
+        <include refid="fromCondition"/>
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
+        <include refid="fromCondition"/>
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -311,8 +312,12 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-    <sql id="whereCondition">
+    <sql id="fromCondition">
         from fop_ge_help t
+        left join fop_company c on c.id=t.requestId
+    </sql>
+
+    <sql id="whereCondition">
         where t.status <![CDATA[ <> ]]> 0
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
@@ -341,6 +346,7 @@
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
+        from fop_ge_help t
         <include refid="whereCondition"/>
     </select>
 </mapper>

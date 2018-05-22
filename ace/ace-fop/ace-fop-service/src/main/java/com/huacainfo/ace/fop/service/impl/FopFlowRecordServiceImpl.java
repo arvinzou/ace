@@ -10,9 +10,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
-import com.huacainfo.ace.fop.dao.FopAssociationDao;
-import com.huacainfo.ace.fop.dao.FopCompanyDao;
-import com.huacainfo.ace.fop.dao.FopFlowRecordDao;
+import com.huacainfo.ace.fop.dao.*;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.FopFlowRecordQVo;
@@ -55,6 +53,20 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     private FopProjectService fopProjectService;
     @Autowired
     private FopAppealHelpService fopAppealHelpService;
+    @Autowired
+    private FopFinanceProjectDao fopFinanceProjectDao;
+    @Autowired
+    private FopFinanceProjectService fopFinanceProjectService;
+
+    @Autowired
+    private FopLoanProductDao fopLoanProductDao;
+    @Autowired
+    private FopLoanProductService fopLoanProductService;
+
+    @Autowired
+    private InformationServiceDao informationServiceDao;
+    @Autowired
+    private InformationServiceService informationServiceService;
 
     /**
      * @throws
@@ -270,7 +282,6 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
             return new MessageResponse(ResultCode.FAIL, "流程丢失");
         }
         record.setFromId(db.getFromId());
-
         MessageResponse rs;
         switch (record.getFlowType()) {
             case FlowType.MEMBER_JOIN_COMPANY:
@@ -300,6 +311,15 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
             case FlowType.REQUEST_HELP:
                 rs = requestHelp(record, userProp);// 诉求服务回复确认
                 break;
+            case FlowType.FINANCE_PROJECT:
+                rs = financeProject(record, userProp);// 银企服务
+                break;
+            case FlowType.LOAN_PROJECT:
+                rs = loanProject(record, userProp);// 诉求服务回复确认
+                break;
+            case FlowType.INFORMATION_SERVICE:
+                rs = informationService(record, userProp);// 诉求服务回复确认
+                break;
             default:
                 rs = null;
                 break;
@@ -323,6 +343,65 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     }
 
     /**
+     * 信息服务 -- 审核逻辑
+     *
+     * @param record
+     * @param userProp
+     * @return
+     * @throws Exception
+     */
+    private MessageResponse informationService(FopFlowRecord record, UserProp userProp) throws Exception {
+        InformationService obj = informationServiceDao.selectByPrimaryKey(record.getFromId());
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录丢失");
+        }
+        //状态变更
+        String status = AuditResult.PASS.equals(record.getAuditResult()) ? "2" : "3";
+        obj.setStatus(status);
+
+        return informationServiceService.updateInformationService(obj, userProp);
+    }
+
+    /**
+     * 金融产品 -- 审核逻辑
+     *
+     * @param record
+     * @param userProp
+     * @return
+     * @throws Exception
+     */
+    private MessageResponse loanProject(FopFlowRecord record, UserProp userProp) throws Exception {
+        FopLoanProduct obj = fopLoanProductDao.selectByPrimaryKey(record.getFromId());
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录丢失");
+        }
+        //状态变更
+        String status = AuditResult.PASS.equals(record.getAuditResult()) ? "2" : "3";
+        obj.setStatus(status);
+
+        return fopLoanProductService.updateFopLoanProduct(obj, userProp);
+    }
+
+    /**
+     * 银企服务审核逻辑
+     *
+     * @param record
+     * @param userProp
+     * @return
+     */
+    private MessageResponse financeProject(FopFlowRecord record, UserProp userProp) throws Exception {
+        FopFinanceProject obj = fopFinanceProjectDao.selectByPrimaryKey(record.getFromId());
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录丢失");
+        }
+        //状态变更
+        String status = AuditResult.PASS.equals(record.getAuditResult()) ? "2" : "3";
+        obj.setStatus(status);
+
+        return fopFinanceProjectService.updateFopFinanceProject(obj, userProp);
+    }
+
+    /**
      * 功能描述:  诉求服务回复确认
      *
      * @param:
@@ -332,19 +411,20 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
      */
     private MessageResponse requestHelp(FopFlowRecord record, UserProp userProp) throws Exception {
 
-        if (AuditResult.PASS.equals(record.getAuditResult())) {
-            FopAppealHelp obj = fopAppealHelpService.selectByPrimaryKey(record.getFromId());
-            if (null == obj) {
-                return new MessageResponse(ResultCode.FAIL, "记录丢失");
-            }
-
-            //状态变更
-            obj.setStatus("2");
-
-            return fopAppealHelpService.updateFopAppealHelp(obj, userProp);
+//        if (AuditResult.PASS.equals(record.getAuditResult())) {
+        FopAppealHelp obj = fopAppealHelpService.selectByPrimaryKey(record.getFromId());
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录丢失");
         }
 
-        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+        //状态变更
+        String status = AuditResult.PASS.equals(record.getAuditResult()) ? "2" : "3";
+        obj.setStatus(status);
+
+        return fopAppealHelpService.updateFopAppealHelp(obj, userProp);
+//        }
+//
+//        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 
     /**
@@ -356,19 +436,20 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
      * @date: 2018/5/10 17:10
      */
     private MessageResponse coopProject(FopFlowRecord record, UserProp userProp) throws Exception {
-        if (AuditResult.PASS.equals(record.getAuditResult())) {
-            FopProject project = fopProjectService.selectByPrimaryKey(record.getFromId());
-            if (null == project) {
-                return new MessageResponse(ResultCode.FAIL, "记录丢失");
-            }
-
-            //状态变更
-            project.setStatus("2");
-
-            return fopProjectService.updateFopProject(project, userProp);
+//        if (AuditResult.PASS.equals(record.getAuditResult())) {
+        FopProject obj = fopProjectService.selectByPrimaryKey(record.getFromId());
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录丢失");
         }
 
-        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+        //状态变更
+        String status = AuditResult.PASS.equals(record.getAuditResult()) ? "2" : "3";
+        obj.setStatus(status);
+
+        return fopProjectService.updateFopProject(obj, userProp);
+//        }
+//
+//        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 
     /**
@@ -380,20 +461,21 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
      * @date: 2018/5/9 15:49
      */
     private MessageResponse partWork(FopFlowRecord record, UserProp userProp) throws Exception {
-        if (AuditResult.PASS.equals(record.getAuditResult())) {
-            FopActivity activity = fopActivityService.selectByPrimaryKey(record.getFromId());
-            if (null == activity) {
-                return new MessageResponse(ResultCode.FAIL, "记录丢失");
-            }
-
-            //状态变更
-            activity.setStatus("2");
-
-            return fopActivityService.updateFopActivity(activity, userProp);
+//        if (AuditResult.PASS.equals(record.getAuditResult())) {
+        FopActivity obj = fopActivityService.selectByPrimaryKey(record.getFromId());
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录丢失");
         }
 
+        //状态变更
+        String status = AuditResult.PASS.equals(record.getAuditResult()) ? "2" : "3";
+        obj.setStatus(status);
 
-        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+        return fopActivityService.updateFopActivity(obj, userProp);
+//        }
+//
+//
+//        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 
     /**
@@ -405,20 +487,18 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
      * @date: 2018/5/9 11:23
      */
     private MessageResponse geHelpRelease(FopFlowRecord record, UserProp userProp) throws Exception {
-        if (AuditResult.PASS.equals(record.getAuditResult())) {
-            FopGeHelp fopGeHelp = fopGeHelpService.selectByPrimaryKey(record.getFromId());
-            if (null == fopGeHelp) {
-                return new MessageResponse(ResultCode.FAIL, "记录丢失");
-            }
-
-            //状态变更
-            fopGeHelp.setStatus("2");
-
-            return fopGeHelpService.updateFopGeHelp(fopGeHelp, userProp);
+//        if (AuditResult.PASS.equals(record.getAuditResult())) {
+        FopGeHelp obj = fopGeHelpService.selectByPrimaryKey(record.getFromId());
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录丢失");
         }
+        //状态变更
+        String status = AuditResult.PASS.equals(record.getAuditResult()) ? "2" : "3";
+        obj.setStatus(status);
 
-
-        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+        return fopGeHelpService.updateFopGeHelp(obj, userProp);
+//        }
+//        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
 
     }
 
@@ -442,8 +522,6 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
             payRecord.setLastModifyUserName(userProp.getName());
             return fopPayRecordService.updateFopPayRecord(payRecord, userProp);
         }
-
-
         return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 

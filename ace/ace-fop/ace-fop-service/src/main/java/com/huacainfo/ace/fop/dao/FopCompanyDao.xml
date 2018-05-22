@@ -554,7 +554,7 @@
         select
         <include refid="column_List_Vo"/>
         <include refid="fromCondition_Vo"/>
-        where id = #{id,jdbcType=VARCHAR}
+        where c.id = #{id,jdbcType=VARCHAR}
     </select>
 
 
@@ -562,7 +562,7 @@
         select
         <include refid="column_List_Vo"/>
         <include refid="fromCondition_Vo"/>
-        <include refid="whereCondition_Vo"/>
+        <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
@@ -577,39 +577,15 @@
         select
         <include refid="column_List_Vo"/>
         <include refid="fromCondition_Vo"/>
-        <include refid="whereCondition_Vo"/>
+        <include refid="whereCondition"/>
     </select>
 
     <sql id="fromCondition_Vo">
-            from fop_company c
+        from fop_company c
         left join fop_person p on p.id=c.personId
         left join portal.province pp on pp.code=c.areaCode
     </sql>
-
     <sql id="whereCondition">
-        from fop_company
-        where status <![CDATA[ <> ]]> 0
-        <if test="condition.id!=null and condition.id!=&quot;&quot;">
-            and id = #{condition.id,jdbcType=VARCHAR}
-        </if>
-        <if test='condition.fullName!=null and condition.fullName!=""'>
-            and fullName like
-            concat('%',#{condition.fullName,jdbcType=VARCHAR},'%')
-        </if>
-        <if test='condition.areaCode!=null and condition.areaCode!=""'>
-            and areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
-        </if>
-        <if test='condition.companyType!=null and condition.companyType!=""'>
-            and companyType = #{condition.companyType,jdbcType=CHAR}
-        </if>
-        <if test='condition.companyProperty!=null and condition.companyProperty!=""'>
-            and companyProperty=#{condition.companyProperty,jdbcType=CHAR}
-        </if>
-        <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and status = #{condition.status,jdbcType=CHAR}
-        </if>
-    </sql>
-    <sql id="whereCondition_Vo">
         where c.status <![CDATA[ <> ]]> 0
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and c.id = #{condition.id,jdbcType=VARCHAR}
@@ -640,6 +616,7 @@
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
+        from fop_company c
         <include refid="whereCondition"/>
     </select>
 

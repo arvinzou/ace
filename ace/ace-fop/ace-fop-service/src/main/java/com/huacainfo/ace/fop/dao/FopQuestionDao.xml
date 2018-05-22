@@ -37,7 +37,7 @@
         t.keyWord, t.accCount, t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
         t.lastModifyUserName, t.lastModifyDate
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
         from fop_question t

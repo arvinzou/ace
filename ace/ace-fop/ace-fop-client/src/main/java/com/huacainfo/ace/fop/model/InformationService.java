@@ -19,6 +19,9 @@ public class InformationService {
 
     private String remark;
 
+    /**
+     * 审核状态 1- 审核中，2-审核通过，3-审核不通过
+     */
     private String status;
 
     private String createUserId;
@@ -34,7 +37,15 @@ public class InformationService {
     private Date lastModifyDate;
 
     private String content;
-
+    /**
+     * modules:模块分类
+     * 1、企业风采
+     * 2、企业产品
+     * 3、人才信息
+     * 4、招商信息
+     * 5、政策文件
+     * 6、品牌推广
+     */
     private String modules;
 
     public String getModules() {

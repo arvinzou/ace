@@ -1,8 +1,13 @@
 body {
 	width: 100%;
 	color: #9EA7B4;
+	padding: 0px;
+	margin: 0px;
 }
 
+* {
+	background-color: #fff;
+}
 /**
  * 左边菜单样式
  */
@@ -16,27 +21,30 @@ body {
 	line-height: 35px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	padding-left: 10px;
+	padding-left: 40px;
 }
 
-.member_menu li:hover {
+.member_menu li:hover, .member_menu li:hover a {
 	background-color: #1A56A8;
 	color: #FFFFFF;
 }
 
-.member_menu li:hover a {
-	color: #FFFFFF;
-}
 
 .member_center_title01 {
 	color: #1A56A8;
-	font-size: 18px;
+	font-size: 22px;
 	font-weight: bolder;
 	width: 100%;
 	height: 60px;
 	line-height: 60px;
-	margin-bottom: 20px;
+	padding-top: 20px;
+	padding-left: 22px;
 	border-bottom: 1px solid #E1E5ED;
+}
+
+.member_center_title01 span {
+	font-size: 12px;
+	color: rgba(195, 203, 214, 1);
 }
 
 .member_center_title02 {
@@ -44,10 +52,10 @@ body {
 	font-size: 14px;
 	color: #31364B;
 	font-weight: bolder;
-	margin-bottom: 20px;
-	height: 40px;
-	line-height: 40px;
-	border-bottom: 1px solid #E1E5ED;
+	height: 45px;
+	line-height: 45px;
+	border-bottom: 1px dotted #E1E5ED;
+	padding-left: 40px;
 }
 
 /**
