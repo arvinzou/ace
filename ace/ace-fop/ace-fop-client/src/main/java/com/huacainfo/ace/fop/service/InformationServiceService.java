@@ -74,6 +74,8 @@ public interface InformationServiceService {
 
     ResultResponse InformationServiceByPrimaryKey(String id) throws Exception;
 
+    ResultResponse publishStatistics(UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:deleteInformationServiceByInformationServiceId
