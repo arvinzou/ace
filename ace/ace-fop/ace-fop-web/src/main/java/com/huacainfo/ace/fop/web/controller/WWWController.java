@@ -721,7 +721,6 @@ public class WWWController extends FopBaseController {
 
     /**
      * 统计发布数量
-     * id
      */
     @RequestMapping(value = "/publishStatistics")
     @ResponseBody
