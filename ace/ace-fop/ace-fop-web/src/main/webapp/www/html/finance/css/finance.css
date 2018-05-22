@@ -1,14 +1,16 @@
-body {
+#body {
 	background-color: #F4F4F4;
 }
-html{
-	background-color: #ffffff;
-	padding-left: 20px;
-	padding-right: 20px;
-}
+
+/*html{*/
+/*background-color: #ffffff;*/
+/*padding-left: 20px;*/
+/*padding-right: 20px;*/
+/*}*/
 .index {
 	width: 60%;
 	margin: auto;
+    padding: 0 20px;
 	background-color: #FFFFFF;
 }
 .content{
@@ -43,7 +45,7 @@ html{
 }
 
 .search {
-	margin-top: 30px;
+    padding-top: 30px;
 }
 
 .search_list {
@@ -150,8 +152,8 @@ option {
 
 .tab_title_ul {
 	width: 100%;
-	height: 62px;
-	margin-top: 30px;
+    height: 92px;
+    padding-top: 30px;
 	position: relative;
 }
 
@@ -181,6 +183,10 @@ option {
 	border-bottom: 1px solid #E1E5ED;
 }
 
+.table_div table {
+    border: 1px solid transparent;
+}
+
 .table_div table:hover {
 	border: 1px solid #FF9F00;
 }
@@ -206,6 +212,8 @@ option {
 #financeTitle{
 	width: 200px;
 	height: 35px;
+    float: left;
+    background-color: #fff;
 }
 .searchButton{
 	padding-top: 0;
