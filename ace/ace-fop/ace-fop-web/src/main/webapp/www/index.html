@@ -181,12 +181,12 @@
 							<div id="myTabContent"  class="share tab-content">
 									<div  ng-repeat="temp in shares" ng-if="$index == 0" class="tab-pane fade in active" id="{{temp.id}}">
 										<ul class="alink">
-											<li ng-repeat="item in (temp.child)"><span></span><a href="#">{{item.content}}</a> </li>
+											<li ng-repeat="item in (temp.child)"><span></span><a href="{{item.url}}" target="_blank">{{item.content}}</a> </li>
 										</ul>
 									</div>
 									<div ng-repeat="temp in shares" ng-if="$index > 0" class="tab-pane fade" id="{{temp.id}}">
 										<ul class="alink">
-											<li ng-repeat="item in (temp.child)"><span></span><a href="#">{{item.content}}</a> </li>
+											<li ng-repeat="item in (temp.child)"><span></span><a href="{{item.url}}" target="_blank">{{item.content}}</a> </li>
 										</ul>
 									</div>
 
