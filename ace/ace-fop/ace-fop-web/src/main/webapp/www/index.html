@@ -8,25 +8,9 @@
 		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<!--<script type="text/javascript" src="js/index.js"></script>-->
+		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
-		<script type="text/javascript">
-            var ngControllerName = "angularjsCtrl";
-            var ngAppName = "angularjsApp";
-            var app =angular.module(ngAppName, []);
-            app.controller(ngControllerName,function($scope){
-                try{
-                    $scope.userProp = userProp;
-                    console.log(userProp);
-                    if(userProp != null && userProp != undefined){
-                        $scope.username = userProp.name;
-                    }
-				}catch (e){
-
-				}
-
-            });
-		</script>
+		<script type="text/javascript" src="js/common.js"></script>
    </head>
 
 	<body>
@@ -175,26 +159,14 @@
 				<div class="product_box">
 					<div class="product_title">
 						<span class="title">品牌推广</span>
-						<a class="link" href="#">更多>></a>
+						<a class="link" href="html/band/band.html" target="_blank">更多>></a>
 						<div style="clear: both;"></div>
 					</div>
 					<div class="product_list">
 						<ul>
-							<li class="left">
-								<img src="images/product.png" />
-								<span>推荐克莱门特地源热泵空调机组</span>
-							</li>
-							<li class="left">
-								<img src="images/product.png" />
-								<span>推荐克莱门特地源热泵空调机组</span>
-							</li>
-							<li class="left">
-								<img src="images/product.png" />
-								<span>推荐克莱门特地源热泵空调机组</span>
-							</li>
-							<li class="left">
-								<img src="images/product.png" />
-								<span>推荐克莱门特地源热泵空调机组</span>
+							<li class="left" ng-repeat="band in bands">
+								<img src="http://zx.huacainfo.com/{{band.fileUrl}}" />
+								<span>{{band.title}}</span>
 							</li>
 						</ul>
 					</div>
