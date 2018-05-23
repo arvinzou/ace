@@ -15,7 +15,8 @@ app.controller(ngControllerName,function($scope) {
         data: {},
         success: function (result) {
             if (result.status == 0) {
-                $scope.items = result.data.list;
+                $scope.notice_slices = result.data.top1;
+                $scope.notice_list = result.data.top0
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
