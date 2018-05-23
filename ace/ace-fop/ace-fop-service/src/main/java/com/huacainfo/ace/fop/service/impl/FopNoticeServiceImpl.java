@@ -86,13 +86,12 @@ public class FopNoticeServiceImpl implements FopNoticeService {
     @Override
     public ResultResponse homepageNoticeList() throws Exception {
         FopNoticeQVo condition = new FopNoticeQVo();
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "首页信息列表");
+        Map<String, Object> map = new HashMap<String, Object>();
         condition.setTop("1");
-        List<FopNoticeVo> toplist = this.fopNoticeDao.findList(condition, 0, 4, null);
+        map.put("top1", this.fopNoticeDao.findList(condition, 0, 4, null));
         condition.setTop("0");
-        toplist.addAll(this.fopNoticeDao.findList(condition, 0, 7, null));
-        rst.setData(toplist);
-        return rst;
+        map.put("top0", this.fopNoticeDao.findList(condition, 0, 10, null));
+        return new ResultResponse(ResultCode.SUCCESS, "首页公告列表", map);
     }
 
     /**
