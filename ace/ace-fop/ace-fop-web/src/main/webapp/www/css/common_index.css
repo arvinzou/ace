@@ -481,3 +481,25 @@ body{
 	height: 100%;
 	overflow: hidden;
 }
+@-webkit-keyframes fadeInOut {
+	0% {
+		opacity:1;
+	}
+	25% {
+		opacity:0;
+	}
+	50% {
+		opacity: 0;
+	}
+	75% {
+		opacity:1;
+	}
+}
+.anim_fade_image {
+	position:absolute;
+	-webkit-animation-name: fadeInOut;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-duration: 12s;
+	-webkit-animation-direction: alternate;
+}

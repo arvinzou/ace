@@ -18,8 +18,8 @@ html.push("<div class=\"logo_image\"><img src=\"/fop/www/images/logo.png\" /></d
 html.push("<div class=\"logo_word\">承办单位：常德市工商业联合会</div>");
 html.push("</div>");
 html.push("<div class=\"words\">");
-html.push("<div class=\"words_1\"><img src=\"/fop/www/images/words1.png\" /></div>");
-html.push("<div class=\"words_2\"><img src=\"/fop/www/images/words2.png\" /></div>");
+html.push("<div class=\"words_1\"><img class='anim_fade_image' src=\"/fop/www/images/words1.png\" /></div>");
+html.push("<div class=\"words_2\"><img class='anim_fade_image' src=\"/fop/www/images/words2.png\" /></div>");
 html.push("</div>");
 html.push("</div>");
 var text=html.join("\n");
