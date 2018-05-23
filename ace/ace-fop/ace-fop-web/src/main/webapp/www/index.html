@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
 		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/share.json.js"></script>
    </head>
 
 	<body>
@@ -167,37 +168,28 @@
 						</div>
 						<div class="share_content">
 							<div class="share_title">
-								<div class="left_opt" id="prevTop"><span class="glyphicon glyphicon-chevron-left"></span></div>
+								<div class="left_opt" id="prevTop"><span class="glyphicon glyphicon-chevron-left" ng-click="pre();"></span></div>
 								<div class="share_menu" id="listBox">
 									<ul id="myTab" class="nav nav-pills">
-										<li class="active"><a href="#menu1" data-toggle="tab">统战部</a></li>
-										<li><a href="#menu2" data-toggle="tab">发改委</a></li>
-										<li><a href="#menu3" data-toggle="tab">经信委</a></li>
-										<li><a href="#menu4" data-toggle="tab">商务局</a></li>
-										<li><a href="#menu5" data-toggle="tab">工商局</a></li>
+										<li ng-if="$index == 0" class="active" ng-repeat="share in shares"><a href="#{{share.id}}" data-toggle="tab">{{share.title}}</a></li>
+										<li ng-if="$index > 0" ng-repeat="share in shares"><a href="#{{share.id}}" data-toggle="tab">{{share.title}}</a></li>
 									</ul>
 								</div>
-								<div class="right_opt" id="nextTop"><span class="glyphicon glyphicon-chevron-right"></span></div>
+								<div class="right_opt" id="nextTop"><span class="glyphicon glyphicon-chevron-right" ng-click="next();"></span></div>
 								<div style="clear: both;"></div>
 							</div>
-							<div id="myTabContent"  class="share">
-								<ul>
-									<li class="tab-pane fade in active" id="menu1">
-										统战部
-									</li>
-									<li class="tab-pane fade" id="menu2">
-										发改委
-									</li>
-									<li class="tab-pane fade" id="menu3">
-										经信委
-									</li>
-									<li class="tab-pane fade" id="menu4">
-										商务局
-									</li>
-									<li class="tab-pane fade" id="menu5">
-										工商局
-									</li>
-								</ul>
+							<div id="myTabContent"  class="share tab-content">
+									<div  ng-repeat="temp in shares" ng-if="$index == 0" class="tab-pane fade in active" id="{{temp.id}}">
+										<ul class="alink">
+											<li ng-repeat="item in (temp.child)"><span></span><a href="#">{{item.content}}</a> </li>
+										</ul>
+									</div>
+									<div ng-repeat="temp in shares" ng-if="$index > 0" class="tab-pane fade" id="{{temp.id}}">
+										<ul class="alink">
+											<li ng-repeat="item in (temp.child)"><span></span><a href="#">{{item.content}}</a> </li>
+										</ul>
+									</div>
+
 							</div>
 						</div>
 					</div>
