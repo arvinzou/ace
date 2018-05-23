@@ -45,9 +45,10 @@
 	text-align: center;
 }
 .content_top{
-	width: 84%;
+    width: 90%;
 	height: 212px;
-	margin-left: 30px;
+    padding: 0 100px 0 30px;
+    background-color: #fff;
 }
 .title{
 	width: 100px;

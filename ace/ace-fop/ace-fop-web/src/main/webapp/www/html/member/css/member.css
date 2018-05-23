@@ -4,10 +4,6 @@ body {
 	padding: 0px;
 	margin: 0px;
 }
-
-* {
-	background-color: #fff;
-}
 /**
  * 左边菜单样式
  */
@@ -21,6 +17,9 @@ body {
 	line-height: 35px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.member_menu li a {
 	padding-left: 40px;
 }
 

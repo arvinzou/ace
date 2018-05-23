@@ -1,8 +1,10 @@
 package com.huacainfo.ace.fop.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class FopQuestionnaireResult {
+public class FopQuestionnaireResult implements Serializable {
+    private static final long serialVersionUID = 1138712676415378050L;
     private String id;
 
     private String relationId;

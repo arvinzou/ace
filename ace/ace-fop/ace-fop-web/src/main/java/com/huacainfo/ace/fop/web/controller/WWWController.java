@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -53,6 +54,9 @@ public class WWWController extends FopBaseController {
 
     @Autowired
     private InformationServiceService informationServiceService;
+
+    @Autowired
+    private RelatedLinksService relatedLinksService;
 
 
     /**
@@ -727,4 +731,15 @@ public class WWWController extends FopBaseController {
     public ResultResponse publishStatistics() throws Exception {
         return this.informationServiceService.publishStatistics(this.getCurUserProp());
     }
+
+    /**
+     * 查询链接树形列表
+     */
+    @RequestMapping(value = "/relatedLinksTree")
+    @ResponseBody
+    public ResultResponse relatedLinksTree() throws Exception {
+        return new ResultResponse(ResultCode.SUCCESS, "获得成功", this.relatedLinksService.relatedLinksTree("1"));
+    }
+
+
 }
