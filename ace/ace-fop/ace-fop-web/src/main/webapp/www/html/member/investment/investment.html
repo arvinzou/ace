@@ -33,13 +33,13 @@
             </ul>
             <div id="nav-content">
                 <div class="table-div" ng-repeat="item in items">
-                    <table border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed">
+                    <table class="info_list" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed">
                         <tr class="tr_title">
-                            <td width="15%" ng-bind="item.title"></td>
-                            <td width="10%">
-                                <span ng-if="item.status == '1'">审核中</span>
-                                <span ng-if="item.status == '2'">审核通过</span>
-                                <span ng-if="item.status == '3'">审核未通过</span>
+                            <td width="30%" class="info_title" ng-bind="item.title"></td>
+                            <td width="20%">
+                                <span class="info_status info_status2" ng-if="item.status == '1'">审核中</span>
+                                <span class="info_status info_status1" ng-if="item.status == '2'">审核通过</span>
+                                <span class="info_status info_status3" ng-if="item.status == '3'">审核未通过</span>
                             </td>
                             <td>&nbsp;</td>
                             <td width="15%"><button id="update" data-toggle="modal" data-target="#myModal" ng-click="update_click($index);">编辑</button><button id="delete" ng-click="delete($index);">删除</button></td>

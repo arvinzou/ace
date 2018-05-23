@@ -1,29 +1,31 @@
 package com.huacainfo.ace.fop.model;
 
 import java.io.Serializable;
+import java.io.SerializablePermission;
 import java.util.Date;
 
-public class InformationService implements Serializable {
-    private static final long serialVersionUID = -5035698300856959098L;
+/**
+ * @author HuaCai003
+ */
+public class RelatedLinks implements Serializable {
+
+    private static final long serialVersionUID = -3659486117311180125L;
     private String id;
 
-    private String relationId;
+    private String parentId;
 
-    private String relationType;
+    private String name;
 
-    private String title;
+    private String url;
 
-    private String fileUrl;
+    private String alternateFields1;
 
-    private Date releaseDate;
+    private String alternateFields2;
 
-    private Long click;
+    private String alternateFields3;
 
     private String remark;
 
-    /**
-     * 审核状态 1- 审核中，2-审核通过，3-审核不通过
-     */
     private String status;
 
     private String createUserId;
@@ -38,26 +40,6 @@ public class InformationService implements Serializable {
 
     private Date lastModifyDate;
 
-    private String content;
-    /**
-     * modules:模块分类
-     * 1、企业风采
-     * 2、企业产品
-     * 3、人才信息
-     * 4、招商信息
-     * 5、政策文件
-     * 6、品牌推广
-     */
-    private String modules;
-
-    public String getModules() {
-        return modules;
-    }
-
-    public void setModules(String modules) {
-        this.modules = modules;
-    }
-
     public String getId() {
         return id;
     }
@@ -66,52 +48,52 @@ public class InformationService implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getRelationId() {
-        return relationId;
+    public String getParentId() {
+        return parentId;
     }
 
-    public void setRelationId(String relationId) {
-        this.relationId = relationId == null ? null : relationId.trim();
+    public void setParentId(String parentId) {
+        this.parentId = parentId == null ? null : parentId.trim();
     }
 
-    public String getRelationType() {
-        return relationType;
+    public String getName() {
+        return name;
     }
 
-    public void setRelationType(String relationType) {
-        this.relationType = relationType == null ? null : relationType.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getTitle() {
-        return title;
+    public String getUrl() {
+        return url;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
     }
 
-    public String getFileUrl() {
-        return fileUrl;
+    public String getAlternateFields1() {
+        return alternateFields1;
     }
 
-    public void setFileUrl(String fileUrl) {
-        this.fileUrl = fileUrl == null ? null : fileUrl.trim();
+    public void setAlternateFields1(String alternateFields1) {
+        this.alternateFields1 = alternateFields1 == null ? null : alternateFields1.trim();
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
+    public String getAlternateFields2() {
+        return alternateFields2;
     }
 
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setAlternateFields2(String alternateFields2) {
+        this.alternateFields2 = alternateFields2 == null ? null : alternateFields2.trim();
     }
 
-    public Long getClick() {
-        return click;
+    public String getAlternateFields3() {
+        return alternateFields3;
     }
 
-    public void setClick(Long click) {
-        this.click = click;
+    public void setAlternateFields3(String alternateFields3) {
+        this.alternateFields3 = alternateFields3 == null ? null : alternateFields3.trim();
     }
 
     public String getRemark() {
@@ -176,13 +158,5 @@ public class InformationService implements Serializable {
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
     }
 }

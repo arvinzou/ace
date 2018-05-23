@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: #657180;
+}
+
 .box{
     width: 90%;
     margin: auto;
@@ -24,14 +30,38 @@
     font-size: 16px;
     color: #1A56A8;
 }
+
+.menu-nav ul {
+    border-bottom: 1px solid #E1E5ED;
+    margin-bottom: 20px;
+}
+
 .menu-nav ul, .menu-nav li{
     text-decoration: none;
 }
+
+.menu-nav li a {
+    display: inline-block;
+    color: #9EA7B4;
+    font-weight: bold;
+}
+
+.menu-nav li a:hover {
+    color: #949CA8;
+    TEXT-DECORATION: none
+}
+
 .menu-nav li{
     width: 80px;
     height: 35px;
     line-height: 35px;
+    padding-bottom: 5px;
     display: inline-block;
+}
+
+.menu-nav ul .checked {
+    border-bottom: 2px #FF9F00 solid;
+    color: #31364B;
 }
 .nav-content{
     width: 100%;
@@ -39,7 +69,6 @@
 .table-div{
     width: 100%;
     border-bottom: 30px;
-    border: 1px solid #E1E5ED;
 }
 .table-div table{
     width: 100%;
@@ -118,4 +147,58 @@ textarea {
     /*color: #E1E5ED;*/
     width: 100%;
     height: 100%;
+}
+
+.info_list .info_title {
+    font-size: 16px;
+    color: rgba(26, 86, 168, 1);
+    font-weight: bold;
+}
+
+.info_list .info_status1 {
+    background-color: #1A56A8;
+}
+
+.info_list .info_status2 {
+    background-color: #FF9F00;
+}
+
+.info_list .info_status3 {
+    background-color: #FE234C;
+
+}
+
+.info_list .info_status {
+    color: #fff;
+    border-radius: 3px;
+    display: inline-block;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.info_list button {
+    border: 0;
+    background-color: transparent;
+    margin-right: 20px;
+}
+
+#update {
+    color: #1A56A8;
+}
+
+#delete {
+    color: #FE234C;
+}
+
+#content {
+    font-size: 14px;
+    color: rgba(101, 113, 128, 1);
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+
+.info_list {
+    margin-bottom: 20px;
 }

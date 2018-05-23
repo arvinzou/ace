@@ -18,7 +18,8 @@ img {
 
 a {
     text-decoration: none;
-    color: #31364B
+    color: #31364B;
+    display: block;
 }
 
 a:focus {
@@ -184,6 +185,10 @@ input[type="checkbox"] {
 .right_box {
     background-color: #F5F7F9;
     padding: 0 20px;
+}
+
+.left_box > div {
+    background-color: #fff;
 }
 
 .left_box {
