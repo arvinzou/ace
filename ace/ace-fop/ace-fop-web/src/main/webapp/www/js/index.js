@@ -4,7 +4,6 @@ var ngAppName = "angularjsApp";
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope) {
-
     /**
      * 查询公告栏信息
      */
