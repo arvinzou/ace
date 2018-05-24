@@ -81,7 +81,7 @@ app.controller(ngControllerName,function($scope){
         scope: 'FilterQuery1',
         data: data_rate,
         onChange: function(newValue) {
-            data_rate = newValue;
+            rateRange = newValue;
         }
     });
     $('#product_year').comboboxfilter({
@@ -204,12 +204,12 @@ app.controller(ngControllerName,function($scope){
             btmAmount = amountRange.split(",")[0];
             btmAmount = amountRange.split(",")[1];
         }
-        var productName = $("#key_word").val();
+        var productName = $("#financeTitle").val();
         $.ajax({
             url: "/fop/www/findLoanProductList",
             type: "post",
             async: false,
-            data: {limit: pageSize, page: currentPage,btmRate: btmRate, topRate: topRate,btmAmount: btmAmount, topAmount: topAmount, productName: productName, suretyType: suretyType },
+            data: {limit: pageSize, page: currentPage,btmRate: btmRate, topRate: topRate,btmAmount: btmAmount, topAmount: topAmount, productName: productName, suretyType: suretyType ,loanYear:loanYear},
             success: function (result) {
                 if (result.status == 0) {
                     $scope.items = result.data.list;
