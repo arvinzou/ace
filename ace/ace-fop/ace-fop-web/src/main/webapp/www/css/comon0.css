@@ -174,8 +174,9 @@ input[type="checkbox"] {
 }
 
 .juz {
-    width: 1220px;
+    width: 60%;
     margin: 0px auto;
+    background-color: #ffffff;
 }
 
 .left_menu {
@@ -1003,8 +1004,15 @@ input[type="checkbox"] {
 }
 
 .searchbox .searchTable { /* overflow:auto;*/
+    min-height: 700px;
+    max-height: 1400px;
 }
-
+.searchTable{
+    padding-left: 30px;
+    padding-right: 30px;
+    min-height: 700px;
+    max-height: 1400px;
+}
 .searchbox .searchTable table {
     border-top: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
