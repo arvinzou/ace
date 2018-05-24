@@ -167,7 +167,11 @@ app.controller(ngControllerName,function($scope){
                     data:{title:name, content:content},
                     success:function(result){
                         if(result.status == 0) {
-                            alert("发布成功");
+                            layer.alert("发布成功！", {
+                                icon: 1,
+                                skin: 'myskin'
+                            });
+                            $scope.search();
                             if (!$scope.$$phase) {
                                 $scope.$apply();
                             }

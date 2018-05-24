@@ -1,4 +1,5 @@
-﻿* {
+﻿html, body { height:auto}
+* {
     margin: 0px;
     padding: 0px;
     font-family: "微软雅黑";
@@ -169,7 +170,7 @@ input[type="checkbox"] {
 
 .bodybg {
     padding-top: 30px;
-    background-color: #F5F7F9;
+    padding-bottom: 30px;
 }
 
 .juz {
@@ -2428,3 +2429,4 @@ input[type="checkbox"] {
 .myskin .layui-layer-btn a {
     background-color: #1A56A8;
 }
+
