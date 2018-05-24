@@ -12,6 +12,16 @@
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
 		<script type="text/javascript" src="js/common.js"></script>
 		<script type="text/javascript" src="js/share.json.js"></script>
+		<script type="text/javascript">
+			$(function(){
+                $(".banner_menu ul li").eq(0).removeClass("menu-a").addClass("menu");
+				$(".banner_menu ul li").hover(function(){
+				    $(this).removeClass("menu-a").addClass("menu");
+				    $(this).siblings().removeClass("menu").addClass("menu-a");
+				});
+			});
+
+		</script>
    </head>
 
 	<body>
@@ -55,15 +65,15 @@
 							</div>
 							<div class="banner_menu">
 								<ul>
-									<li class="menu">领导之窗</li>
+									<li class="menu-a">领导之窗</li>
 									<li class="menu-a">
-										<a href="#">常德市委</a>
+										常德市委
 									</li>
 									<li class="menu-a">
-										<a href="#">常德市政府</a>
+										常德市政府
 									</li>
 									<li class="menu-a">
-										<a href="#">常德市工商联</a>
+										常德市工商联
 									</li>
 								</ul>
 							</div>

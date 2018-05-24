@@ -59,11 +59,11 @@ app.controller(ngControllerName,function($scope) {
                 success: function (result) {
                     if (result.status == 0) {
                        console.log(result);
-                        layer.alert("注册成功！", {
+                        layer.alert("注册成功,5秒后将跳转登录页面！", {
                             icon: 1,
                             skin: 'myskin'
                         });
-                       location.href = "/portal/dynamic/portal/security/login.jsp";
+                        showTime();
                         if (!$scope.$$phase) {
                             $scope.$apply();
                         }
@@ -84,3 +84,11 @@ app.controller(ngControllerName,function($scope) {
         }
     }
 });
+var t = 5;
+function showTime(){
+    t -= 1;
+    if(t == 0){
+        location.href = "/portal/dynamic/portal/security/login.jsp";
+    }
+    setTimeout("showTime()",1000);
+}
