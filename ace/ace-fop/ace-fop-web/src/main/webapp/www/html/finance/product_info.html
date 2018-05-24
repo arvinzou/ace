@@ -4,15 +4,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-    <title>融资详情</title>
+    <title>金融产品详情</title>
     <link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
     <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
     <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
     <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
     <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
     <SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
     <script type="text/javascript" src="js/product_info.js"></script>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
     <style type="text/css">
         body {
             background-color: #F4F4F4;
@@ -166,42 +169,8 @@
 </head>
 
 <body>
-<div class="headbox">
-    <div class="head juz">
-        <div class="head_top">
-            <span class="head_welcome">欢迎您：</span>
-            <a class="head_user_name" href="user.html">工商联测试用户</a>
-            <span class="head_welcome">所属企业：方欣科技有限公司</span>
-            <a class="head_login" href="#">切换身份</a>
-            <a class="head_login" href="../login/login.html">退出</a>
-        </div>
-        <div class="head_menu">
-
-            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td width="300"><img src="../../images/logo.png" /></td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="../../html/index.html">首页</a>
-                            </li>
-                            <li>
-                                <a href="#">企业服务</a>
-                            </li>
-                            <li class="active">
-                                <a href="../member/member.html">会员服务</a>
-                            </li>
-                            <li>
-                                <a href="#">服务互动</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
-<div class="current_site">当前位置：融资服务 >> 金融产品 >> {{projectInfo.productName}}</div>
+<div id="header"></div>
+<div class="current_site">当前位置：  金融产品 >> {{projectInfo.productName}}</div>
 <div class="appeal_index">
     <div class="appeal_doc">
         <div class="appeal_title">
