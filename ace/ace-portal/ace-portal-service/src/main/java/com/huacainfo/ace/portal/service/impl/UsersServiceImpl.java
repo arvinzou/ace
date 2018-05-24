@@ -536,7 +536,6 @@ public class UsersServiceImpl implements UsersService {
             return new ResultResponse(1, "账户不能为空!");
         }
         if (this.usersDao.isExitUsersAccount(users.getAccount()) > 0) {
-
             return new ResultResponse(1, "账户已存在!");
         }
         if (CommonUtils.isBlank(users.getPassword())) {
