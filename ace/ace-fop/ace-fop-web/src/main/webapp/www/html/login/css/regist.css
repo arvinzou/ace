@@ -7,9 +7,10 @@ body{
 }
 .regist_div{
 	width: 60%;
-	height: 550px;
+	height: auto;
 	margin: auto;
 	margin-top: 30px;
+	padding-bottom: 30px;
 	background-color: #FFFFFF;
 }
 .regist_title{

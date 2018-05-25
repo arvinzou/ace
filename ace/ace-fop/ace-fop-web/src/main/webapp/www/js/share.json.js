@@ -4,16 +4,12 @@ var shareJson = [
         "title":"统战部",
         "child":[
             {
-                "content":"政策法规",
-                "url":""
+                "content":"非公经济",
+                "url":"http://tzb.changde.gov.cn/col/col16109/index.html"
              },
             {
-                "content":"政策解读",
-                "url":""
-            },
-            {
-                "content":"本级规划",
-                "url":""
+                "content":"统战文化",
+                "url":"http://tzb.changde.gov.cn/col/col16123/index.html"
             }
         ]
     },
