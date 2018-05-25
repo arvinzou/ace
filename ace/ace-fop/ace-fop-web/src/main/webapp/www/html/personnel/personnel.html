@@ -27,6 +27,7 @@
 
 	<body>
 	<div id="header"></div>
+	<div ng-include="'../common/nav.html'"></div>
 		<p style="padding-left: 20%;padding-top: 30px;">当前位置：首页>>人才信息</p>
 		<div class="index">
 			<div id="myTabContent" class="tab-content">
@@ -34,7 +35,8 @@
 					<div class="search_list">
 						<div class="finance_list_title">
 							<span>共{{totalCount}}条人才信息</span>
-							<button class="release" data-toggle="modal" data-target="#myModal">发布招聘</button>
+							<button ng-if="userProp" class="release" data-toggle="modal" data-target="#myModal" ng-click="before_release();">发布招聘</button>
+							<button ng-if="!userProp" class="release" data-toggle="modal" data-dismiss="#myModal" ng-click="before_release();">发布招聘</button>
 						</div>
 
 						<div class="project_list">

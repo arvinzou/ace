@@ -1,12 +1,13 @@
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
-
+var index = 0;
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope) {
     /**
      * 查询公告栏信息
      */
+    $scope.shares = shareJson.slice(0,10);
     $.ajax({
         url: "/fop/www/homepageNoticeList",
         type: "post",
@@ -62,4 +63,21 @@ app.controller(ngControllerName,function($scope) {
             });
         }
     });
+
+    $scope.next = function(){
+        index = index + 10;
+        if(index <30){
+            $scope.shares = shareJson.slice(index, index+10);
+        }else{
+            index = index - 10;
+        }
+    }
+    $scope.pre = function(){
+        index = index -10;
+        if(index >= 0){
+            $scope.shares = shareJson.slice(index, index+10);
+        }else{
+            index = index +10;
+        }
+    }
 });

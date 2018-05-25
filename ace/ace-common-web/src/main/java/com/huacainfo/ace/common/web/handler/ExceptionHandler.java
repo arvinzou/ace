@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.huacainfo.ace.common.exception.CustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -29,8 +30,12 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 	private void dealException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception exception) {
 		String exceptionStack = CommonUtils.getExceptionStack(exception);
-		MessageResponse messageResponse = new MessageResponse(1, "内部错误",
-				exceptionStack);
+
+		MessageResponse messageResponse = new MessageResponse(1, "内部错误",	exceptionStack);
+		if(exception instanceof CustomException){
+			messageResponse = new MessageResponse(1, "内部错误",((CustomException) exception).getMsg());
+		}
+
 		String rString = JSONObject.toJSONString(messageResponse);
 		outJsonString(response, rString);
 	}

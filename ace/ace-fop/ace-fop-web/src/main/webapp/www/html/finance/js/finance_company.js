@@ -49,6 +49,10 @@ var data2 = [{
 ];
 
 app.controller(ngControllerName,function($scope){
+    try{
+        $scope.userProp = userProp;
+    }catch(e){}
+
 	//初始化预期年收益
     $('#demo1').comboboxfilter({
         url: '',
@@ -161,13 +165,22 @@ app.controller(ngControllerName,function($scope){
     }
 
     /**
+     * 发布之前判断是否已经登录
+     */
+    $scope.before_release = function () {
+        var userProp = parent.parent.userProp;
+        if (userProp == null || userProp == ''){
+            layer.alert("请先登录后再发布！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+    }
+    /**
      * 发布融资项目
      */
     $scope.relaseFinance = function(){
-        var userProp = parent.parent.userProp;
-        if(userProp == null || userProp == ''){
-            location.href='/portal/dynamic/portal/security/login.jsp';
-        }else{
             var flag = true;
             var projectName = $("input[name='projectName']").val();
             var projectMoney = $("input[name='projectMoney']").val();
@@ -246,7 +259,6 @@ app.controller(ngControllerName,function($scope){
                         });
                     }
                 });
-            }
         }
 
     }

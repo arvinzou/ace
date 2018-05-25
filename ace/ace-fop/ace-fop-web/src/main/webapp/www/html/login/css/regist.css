@@ -132,3 +132,7 @@ body{
 .appear{
 	display: block;
 }
+.footer{
+	position: fixed;
+	bottom: 0;
+}

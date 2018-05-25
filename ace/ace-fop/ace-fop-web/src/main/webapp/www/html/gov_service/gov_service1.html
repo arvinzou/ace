@@ -26,12 +26,14 @@
 
 	<body>
 	<div id="header"></div>
+	<div ng-include="'../common/nav.html'"></div>
 		<div class="bodybg">
 			<div class="juz body_box">
 				<div class="main">
 					<div class="title01">
 						<span class="title_lager">政企服务</span><span class="title_small">/&nbsp;Investment&nbsp;Information</span>
-						<button class="law_help" data-toggle="modal" data-target="#myModal">发布诉求</button>
+						<button ng-if="userProp" class="law_help" data-toggle="modal" data-target="#myModal" ng-click="before_release();">发布诉求</button>
+						<button ng-if="!userProp" class="law_help" data-toggle="modal" data-dismiss="#myModal" ng-click="before_release();">发布诉求</button>
 					</div>
 					<div class="searchTable">
 						<div class="search_condition">

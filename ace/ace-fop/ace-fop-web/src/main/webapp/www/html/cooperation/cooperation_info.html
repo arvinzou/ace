@@ -169,6 +169,7 @@
 
 	<body>
 	<div id="header"></div>
+	<div ng-include="'../common/nav.html'"></div>
 		<div class="current_site">当前位置：合作交流  >> {{projectInfo.projectName}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
@@ -214,7 +215,7 @@
 					<div class="leave_2"><span>剩余字数</span><span>300</span><span>个</span></div>
 				</div>
 				<div class="msg_info">
-					<textarea>
+					<textarea id="release_msg">
 						
 					</textarea>
 				</div>
@@ -224,18 +225,19 @@
 						<a href="#">登录</a>/<a href="#">注册</a>
 					</div>
 					<div class="leave_2">
-						<button>发表</button>
+						<button ng-click="releaseMsg();">发表</button>
 					</div>
 				</div>
 			</div>
 			<div class="msg_list">
-				<table border="0" cellpadding="0" cellspacing="0">
+				<table border="0" cellpadding="0" cellspacing="0" ng-repeat="item in comments">
 					<tr>
-						<td align="left" class="msg_list_title" ></td>
-						<td align="right"></td>
+						<td align="left" class="msg_list_title" ng-bind="item.displayName"></td>
+						<td align="right" ng-bind="item.releaseDate"></td>
 					</tr>
 					<tr>
 						<td colspan="2">
+							{{item.reply}}
 						</td>
 					</tr>
 				</table>
