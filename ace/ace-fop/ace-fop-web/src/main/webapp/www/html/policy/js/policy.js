@@ -83,4 +83,14 @@ app.controller(ngControllerName,function($scope){
             });
         }
     }
+
+    /**
+     * 查看政策文件详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('policy_info.html?id='+primaryId);
+    }
 });

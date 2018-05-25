@@ -159,4 +159,14 @@ app.controller(ngControllerName,function($scope){
                 }
             });
         }
+
+    /**
+     * 查看招商详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('investment_info.html?id='+primaryId);
+    }
 });
