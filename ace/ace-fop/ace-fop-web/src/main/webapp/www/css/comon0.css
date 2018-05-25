@@ -174,7 +174,7 @@ input[type="checkbox"] {
 }
 
 .juz {
-    width: 60%;
+    width: 70%;
     margin: 0px auto;
     padding-left: 30px;
     padding-right: 30px;
@@ -187,7 +187,7 @@ input[type="checkbox"] {
 }
 
 .right_box {
-    background-color: #F5F7F9;
+    /*background-color: #F5F7F9;*/
     padding: 0 20px;
 }
 
@@ -197,7 +197,7 @@ input[type="checkbox"] {
 
 .left_box {
     width: 244px;
-    background-color: #F5F7F9;
+    /*background-color: #F5F7F9;*/
 }
 
 .left_menu .title {
