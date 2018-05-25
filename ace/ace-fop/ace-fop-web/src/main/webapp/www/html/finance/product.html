@@ -31,7 +31,8 @@
                 <span class="title_lager">金融产品</span><span class="title_small">/Financial products</span>
             </ul>
             <div class="tab_title_load">
-                <button data-toggle="modal" data-target="#myModal">发布产品</button>
+                <button ng-if="userProp" data-toggle="modal" data-target="#myModal" ng-click="before_release();">发布产品</button>
+                <button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal" ng-click="before_release();">发布产品</button>
             </div>
         </div>
     </div>

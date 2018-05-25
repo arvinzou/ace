@@ -55,13 +55,21 @@
 					</div>
 					<div class="right_research">
 						<div class="appeal_research research">
-							<div class="research_title"><span>诉求满意度调查</span><a href="#" data-toggle="modal" data-target="#myModal">我要评价</a></div>
+							<div class="research_title">
+								<span>诉求满意度调查</span>
+								<a ng-if="userProp" href="#" data-toggle="modal" data-target="#myModal" ng-click="before_release();">我要评价</a>
+								<a ng-if="!userProp" href="#" data-toggle="modal" data-dismiss="#myModal" ng-click="before_release();">我要评价</a>
+							</div>
 							<div class="research_body">
 								<canvas id="appeal"></canvas>
 							</div>
 						</div>
 						<div class="react_research research">
-							<div class="research_title"><span>合作交流满意度调查</span><a href="#" data-toggle="modal" data-target="#myModal">我要评价</a></div>
+							<div class="research_title">
+								<span>合作交流满意度调查</span>
+								<a ng-if="userProp" href="#" data-toggle="modal" data-target="#myModal" ng-click="before_release();">我要评价</a>
+								<a ng-if="!userProp" href="#" data-toggle="modal" data-dismiss="#myModal" ng-click="before_release();">我要评价</a>
+							</div>
 							<div class="research_body">
 								<canvas id="react"></canvas>
 							</div>

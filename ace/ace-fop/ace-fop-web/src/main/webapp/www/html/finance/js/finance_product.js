@@ -76,6 +76,10 @@ var data_method = [{
 ];
 
 app.controller(ngControllerName,function($scope){
+    try{
+        $scope.userProp = userProp;
+    }catch(e){}
+
     $('#product_rate').comboboxfilter({
         url: '',
         scope: 'FilterQuery1',
@@ -265,6 +269,19 @@ app.controller(ngControllerName,function($scope){
         window.open('product_info.html?id='+primaryId);
     }
 
+    /**
+     * 发布之前判断是否已经登录
+     */
+    $scope.before_release = function () {
+        var userProp = parent.parent.userProp;
+        if (userProp == null || userProp == ''){
+            layer.alert("请先登录后再发布！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+    }
     /**
      * 发布产品
      */

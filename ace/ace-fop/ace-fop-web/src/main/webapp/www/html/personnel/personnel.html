@@ -35,7 +35,8 @@
 					<div class="search_list">
 						<div class="finance_list_title">
 							<span>共{{totalCount}}条人才信息</span>
-							<button class="release" data-toggle="modal" data-target="#myModal">发布招聘</button>
+							<button ng-if="userProp" class="release" data-toggle="modal" data-target="#myModal" ng-click="before_release();">发布招聘</button>
+							<button ng-if="!userProp" class="release" data-toggle="modal" data-dismiss="#myModal" ng-click="before_release();">发布招聘</button>
 						</div>
 
 						<div class="project_list">

@@ -28,7 +28,8 @@
         <div class="main">
             <div class="title01">
                 <span class="title_lager">企业产品</span><span class="title_small">/&nbsp;Enterprise Style</span>
-                <button class="law_help" data-toggle="modal" data-target="#myModal">发布产品</button>
+                <button ng-if="userProp" class="law_help" data-toggle="modal" data-target="#myModal" ng-click="before_release();">发布产品</button>
+                <button ng-if="!userProp" class="law_help" data-toggle="modal" data-dismiss="#myModal" ng-click="before_release();">发布产品</button>
             </div>
             <div class="product_container" ng-repeat="item in items">
                 <div class="content_container">

@@ -7,6 +7,9 @@ var currentPage = 1;
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
+    try{
+        $scope.userProp = userProp;
+    }catch(e){}
     // 初始化查询所有
     $.ajax({
         url: "/fop/www/findGeHelpList",
@@ -132,13 +135,22 @@ app.controller(ngControllerName,function($scope){
     }
 
     /**
+     * 发布之前判断是否已经登录
+     */
+    $scope.before_release = function () {
+        var userProp = parent.parent.userProp;
+        if (userProp == null || userProp == ''){
+            layer.alert("请先登录后再发布！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+    }
+    /**
      * 发布诉求
      */
     $scope.release = function(){
-        var userProp = parent.parent.userProp;
-        if(userProp == null || userProp == ''){
-            location.href='/portal/dynamic/portal/security/login.jsp';
-        }else{
             var flag= true;
             var name = $("input[name='title']").val();
             var content = $("textarea[name='content']").val();
@@ -190,7 +202,6 @@ app.controller(ngControllerName,function($scope){
                     }
                 });
             }
-        }
     }
 
     /**

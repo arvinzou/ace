@@ -32,7 +32,8 @@
                         <span class="title_lager">企业融资</span><span class="title_small">/Enterprise financing</span>
                     </ul>
                     <div class="tab_title_load">
-                        <button data-toggle="modal" data-target="#myModal1">发布融资</button>
+                        <button ng-if="userProp" data-toggle="modal" data-target="#myModal1" ng-click="before_release();">发布融资</button>
+                        <button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">发布融资</button>
                     </div>
                 </div>
             </div>
