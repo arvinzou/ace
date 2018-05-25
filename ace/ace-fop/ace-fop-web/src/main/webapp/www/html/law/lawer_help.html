@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
 		<SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
-		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
 		<script type="text/javascript" src="js/lawer_help.js"></script>
 	</head>
 
@@ -19,8 +19,8 @@
 		<div class="main">
 			<div class="title">
 				<span class="title_lager">法律帮助</span><span class="title_small">/&nbsp;Legal&nbsp;Aid</span>
-				<button class="law_help" ng-if="userProp" data-toggle="modal" data-target="#myModal"  ng-click="before_release();">发布法律帮助</button>
-				<button class="law_help" ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal"  ng-click="before_release();">发布法律帮助</button>
+				<button ng-if="userProp" class="law_help"  data-toggle="modal" data-target="#myModal"  ng-click="before_release();">发布法律帮助</button>
+				<button ng-if="!userProp" class="law_help"  data-toggle="modal" data-dismiss="#myModal"  ng-click="before_release();">发布法律帮助</button>
 			</div>
 			<div class="searchTable">
 				<div class="search_condition">
@@ -33,8 +33,8 @@
 				<table width="100%" border="0"  cellspacing="0" cellpadding="0">
 					<tbody>
 						<tr class="tr_bottom" ng-repeat="item in items">
-							<td align="center" width="5%"><div class="dot"></div></td>
-							<td align="center" width="25%" ng-bind="item.releaseDate"></td>
+							<td align="center" width="15px"><div class="dot"></div></td>
+							<td align="left" width="25%" ng-bind="item.releaseDate"></td>
 							<td ng-bind="item.title"></td>
 							<td align="center" width="10%" ng-if="item.reply == '' || item.reply == null || item.reply== undefined">未回复</td>
 							<td align="center" width="10%" ng-if="item.reply != '' && item.reply != null && item.reply!= undefined">已回复</td>
@@ -47,7 +47,7 @@
 		</div>
 	</body>
 	
-	<!--消息回复模态框-->
+	<!--发布法律帮助模态框-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
