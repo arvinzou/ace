@@ -577,7 +577,7 @@
         select
         <include refid="column_List_Vo"/>
         <include refid="fromCondition_Vo"/>
-        <include refid="whereCondition"/>
+        where c.status <![CDATA[ <> ]]> 0
     </select>
 
     <sql id="fromCondition_Vo">
