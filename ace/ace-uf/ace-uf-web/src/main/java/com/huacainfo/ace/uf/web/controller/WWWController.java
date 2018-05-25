@@ -1,24 +1,23 @@
 package com.huacainfo.ace.uf.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import com.huacainfo.ace.common.model.PageParam;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.HttpUtils;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.service.GroupService;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import com.huacainfo.ace.portal.vo.TaskCmccQVo;
 import com.huacainfo.ace.portal.vo.TaskCmccVo;
 import com.huacainfo.ace.uf.model.ActivityComment;
+import com.huacainfo.ace.uf.model.Feedback;
 import com.huacainfo.ace.uf.service.*;
 import com.huacainfo.ace.uf.vo.*;
 import org.slf4j.Logger;
@@ -29,12 +28,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.uf.model.Feedback;
-import com.huacainfo.ace.common.tools.HttpUtils;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 @Controller
 @RequestMapping("/www/")
 public class WWWController extends UfBaseController {
@@ -81,6 +76,45 @@ public class WWWController extends UfBaseController {
 
 	@Autowired
 	private FileService fileService;
+    /**
+     * ****************************同心工程——————开始********************************************************
+     */
+
+    @Autowired
+    private TongXinService tongXinService;
+    /**
+     * ****************************培训教育——————开始********************************************************
+     */
+
+    @Autowired
+    private PeiXunService peiXunService;
+    /**
+     * ****************************精准扶贫——————开始********************************************************
+     */
+
+
+    @Autowired
+    private FuPinService fuPinService;
+    /**
+     * ****************************统战信息——————开始********************************************************
+     */
+
+
+    @Autowired
+    private XinXiService xinXiService;
+    /**
+     * ****************************统战调研——————开始********************************************************
+     */
+
+
+    @Autowired
+    private DiaoYanService diaoYanService;
+    /**
+     * ****************************统战宣传——————开始********************************************************
+     */
+
+    @Autowired
+    private XuanChuanService xuanChuanService;
 
 	@RequestMapping(value = "/findTaskCmccList.do")
 	@ResponseBody
@@ -91,6 +125,7 @@ public class WWWController extends UfBaseController {
 		}
 		return rst;
 	}
+
 	@RequestMapping(value = "/insertTaskCmcc.do")
 	@ResponseBody
 	public  MessageResponse insertTaskCmcc(TaskCmcc o,String captcha) throws Exception{
@@ -98,9 +133,9 @@ public class WWWController extends UfBaseController {
 		o.setMsg(o.getMsg()+"【武陵区委统战部】");
 		this.logger.info("{}",o);
 		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
-		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session+"j_captcha_weui");
-		this.logger.info("captcha->{}",c aptcha);
-		this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+		String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session + "j_captcha_weui");
+        this.logger.info("captcha->{}",captcha);
+        this.logger.info("j_captcha_weui->{}",j_captcha_weui);
 		if(CommonUtils.isBlank(captcha)){
 			return new MessageResponse(1,"验证码不能为空！");
 		}
@@ -109,11 +144,13 @@ public class WWWController extends UfBaseController {
 		}
 		return this.taskCmccService.insertTaskCmcc(o);
 	}
+
 	@RequestMapping(value = "/selectTaskCmccById.do")
 	@ResponseBody
 	public SingleResult<TaskCmcc> selectTaskCmccById(String id) throws Exception{
 		return taskCmccService.selectBYId(id);
 	}
+
 	/*统战服务*/
 	@RequestMapping(value = "/selectOrganizationList.do")
 	@ResponseBody
@@ -121,30 +158,35 @@ public class WWWController extends UfBaseController {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.organizationService.selectOrganizationList(q,this.getCurWxUser());
 	}
+
 	@RequestMapping(value = "/selectOrganizationListMap.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectOrganizationListMap(String longitude,String latitude) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.organizationService.selectOrganizationListMap(this.getCurWxUser(),longitude,latitude);
 	}
+
 	@RequestMapping(value = "/selectOrganizationCategoryList.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectOrganizationCategoryList() throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.organizationService.selectOrganizationCategoryList(this.getCurWxUser());
 	}
+
 	@RequestMapping(value = "/selectOrganization.do")
 	@ResponseBody
 	public Map<String,Object> selectOrganization(String id) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.organizationService.selectOrganization(id,this.getCurWxUser());
 	}
+
 	@RequestMapping(value = "/selectOrganizationByCategory.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectOrganizationByCategory(String category) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.organizationService.selectOrganizationByCategory(category,this.getCurWxUser());
 	}
+
 	@RequestMapping(value = "/selectAreaCodeList.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectAreaCodeList(String areaCode) throws Exception {
@@ -158,6 +200,7 @@ public class WWWController extends UfBaseController {
 		}
 		return list;
 	}
+
 	/*建言献策*/
 	@RequestMapping(value = "/insertFeedback.do")
 	@ResponseBody
@@ -178,6 +221,7 @@ public class WWWController extends UfBaseController {
 		return this.feedbackService
 				.insertFeedback(obj, this.getCurUserProp());
 	}
+
 	@RequestMapping(value = "/query.do")
 	@ResponseBody
 	public ListResult<Map<String,Object>> query(
@@ -200,12 +244,14 @@ public class WWWController extends UfBaseController {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.deptService.selectDeptList(q,this.getCurWxUser(),areaCode);
 	}
+
 	@RequestMapping(value = "/selectDeptListMap.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectDeptListMap(String longitude,String latitude,String q) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.deptService.selectDeptListMap(this.getCurWxUser(),longitude,latitude,q);
 	}
+
 	@RequestMapping(value = "/selectDept.do")
 	@ResponseBody
 	public Map<String,Object> selectDept(String id) throws Exception {
@@ -220,33 +266,39 @@ public class WWWController extends UfBaseController {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.personageService.selectPersonageListMap(this.getCurWxUser(),longitude,latitude,q);
 	}
+
 	@RequestMapping(value = "/selectPersonageList.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectPersonageList(String q) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.personageService.selectPersonageList(q,this.getCurWxUser());
 	}
+
 	@RequestMapping(value = "/selectPersonage.do")
 	@ResponseBody
 	public Map<String,Object> selectPersonage(String id) throws Exception {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.personageService.selectPersonageById(id);
 	}
+
 	@RequestMapping(value = "/search.do")
 	public void search(HttpServletResponse response) throws Exception{
 		String body=HttpUtils.httpsGet("https://api.map.baidu.com/place/v2/search?"+this.getUrlParamsByMap(this.getParams()));
 		response.getOutputStream().write(body.getBytes());
 	}
+
 	@RequestMapping(value = "/selectActivityPageList.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectActivityPageList(){
 		return this.activityService.selectActivityPageList(this.getParams());
 	}
+
 	@RequestMapping(value = "/selectPhotoListById.do")
 	@ResponseBody
 	public List<Map<String,Object>> selectPhotoListById(String id){
 		return this.activityService.selectPhotoListById(id);
 	}
+
 	@RequestMapping(value = "/selectActivityById.do")
 	@ResponseBody
 	public Map<String,Object> selectActivityById(String id){
@@ -281,6 +333,7 @@ public class WWWController extends UfBaseController {
 		}
 		return this.activityCommentService.insertActivityComment(obj, this.getCurWxUser());
 	}
+
 	@RequestMapping(value = "/updateActivity.do")
 	@ResponseBody
 	public MessageResponse updateActivity(String id,String type) throws Exception {
@@ -310,66 +363,75 @@ public class WWWController extends UfBaseController {
 		return list;
 	}
 
-
 	@RequestMapping(value = "/queryPersonage.do")
 	@ResponseBody
-	public Map<String, Object> queryPersonage(String q)throws Exception {
-		return this.personageService.selectPersonage(q);
-	}
+    public Map<String, Object> queryPersonage(String q)throws Exception {
+        return this.personageService.selectPersonage(q);
+    }
 
-	@RequestMapping(value = "/selectFreeGroupTree.do")
-	@ResponseBody
-	public List<Tree> selectFreeGroupTree() throws Exception {
-		return this.groupService.selectFreeGroupTree("uf");
-	}
+    /**
+     * ****************************统战文件——————开始********************************************************
+     */
+
+    @RequestMapping(value = "/selectFreeGroupTree.do")
+    @ResponseBody
+    public List<Tree> selectFreeGroupTree() throws Exception {
+        return this.groupService.selectFreeGroupTree("uf");
+    }
 
 	@RequestMapping(value = "/selectPersonageTree.do")
 	@ResponseBody
-	public List<Tree> selectPersonageTree(String q)throws Exception {
-		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
-		Map<String,Object> p=this.personageService.selectPersonage(q);
-		List<Map<String,Object>> items=(List<Map<String,Object>>)p.get("rows");
-		Map<String,Object> o=new HashMap<String,Object>();
-		o.put("ID","01");
-		o.put("PID","0");
-		o.put("TEXT","搜索");
-		list.add(o);
-		for(Map<String,Object> e:items){
-			Map<String,Object> m=new HashMap<String,Object>();
-			m.put("ID",e.get("id"));
-			m.put("PID","01");
-			m.put("TEXT",e.get("name"));
-			m.put("HREF",e.get("name"));
-			m.put("ICONCLS",e.get("mobile"));
-			list.add(m);
-		}
-		CommonTreeUtils ctu=new CommonTreeUtils(list);
-		return ctu.getTreeList("0");
-	}
-	@RequestMapping(value = "/sendCmccByMobile.do")
-	@ResponseBody
-	public MessageResponse sendCmccByMobile(String mobile) throws Exception {
-		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
-		String j_captcha_cmcc=this.getRandCode();
-		TaskCmcc o=new TaskCmcc();
-		if(CommonUtils.isBlank(mobile)){
-			return new MessageResponse(1,"手机号不能为空");
-		}
-		if(!CommonUtils.isValidMobile(mobile)){
-			return new MessageResponse(1,"手机号格式错误");
-		}
-		int t=this.personageService.isExitPersonageByMobile(mobile);
-		if(t==0){
-			return new MessageResponse(1,"非统战人士手机号或统战人士手机号信息错误。");
-		}
-		Map<String, Object> msg = new HashMap<String, Object>();
-		msg.put("taskName", "验证码" + mobile);
-		msg.put("msg", "本次提交验证码为" + j_captcha_cmcc + "，请及时输入。【武陵区委统战部】");
-		msg.put("tel", mobile + "," + mobile);
-		CommonBeanUtils.copyMap2Bean(o,msg);
-		redisTemplate.opsForValue().set(_3rd_session+"j_captcha_weui", j_captcha_cmcc);
-		return this.taskCmccService.insertTaskCmcc(o);
-	}
+    public List<Tree> selectPersonageTree(String q)throws Exception {
+        List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+        Map<String,Object> p=this.personageService.selectPersonage(q);
+        List<Map<String,Object>> items=(List<Map<String,Object>>)p.get("rows");
+        Map<String,Object> o=new HashMap<String,Object>();
+        o.put("ID","01");
+        o.put("PID","0");
+        o.put("TEXT","搜索");
+        list.add(o);
+        for(Map<String,Object> e:items){
+            Map<String,Object> m=new HashMap<String,Object>();
+            m.put("ID",e.get("id"));
+            m.put("PID","01");
+            m.put("TEXT",e.get("name"));
+            m.put("HREF",e.get("name"));
+            m.put("ICONCLS",e.get("mobile"));
+            list.add(m);
+        }
+        CommonTreeUtils ctu=new CommonTreeUtils(list);
+        return ctu.getTreeList("0");
+    }
+
+    /**
+     * ****************************统战文件——————结束********************************************************
+     */
+
+    @RequestMapping(value = "/sendCmccByMobile.do")
+    @ResponseBody
+    public MessageResponse sendCmccByMobile(String mobile) throws Exception {
+        String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+        String j_captcha_cmcc=this.getRandCode();
+        TaskCmcc o=new TaskCmcc();
+        if(CommonUtils.isBlank(mobile)){
+            return new MessageResponse(1,"手机号不能为空");
+        }
+        if(!CommonUtils.isValidMobile(mobile)){
+            return new MessageResponse(1,"手机号格式错误");
+        }
+        int t=this.personageService.isExitPersonageByMobile(mobile);
+        if(t==0){
+            return new MessageResponse(1,"非统战人士手机号或统战人士手机号信息错误。");
+        }
+        Map<String, Object> msg = new HashMap<String, Object>();
+        msg.put("taskName", "验证码" + mobile);
+        msg.put("msg", "本次提交验证码为" + j_captcha_cmcc + "，请及时输入。【武陵区委统战部】");
+        msg.put("tel", mobile + "," + mobile);
+        CommonBeanUtils.copyMap2Bean(o,msg);
+        redisTemplate.opsForValue().set(_3rd_session+"j_captcha_weui", j_captcha_cmcc);
+        return this.taskCmccService.insertTaskCmcc(o);
+    }
+
 	private String getRandCode() {
 		Random random = new Random();
 		String sRand = "";
@@ -379,6 +441,7 @@ public class WWWController extends UfBaseController {
 		}
 		return sRand;
 	}
+
 	@RequestMapping(value = "/insertWWWTaskCmcc.do")
 	@ResponseBody
 	public  MessageResponse insertWWWTaskCmcc(String mobile,String j_captcha_cmcc) throws Exception{
@@ -389,8 +452,11 @@ public class WWWController extends UfBaseController {
 		TaskCmcc o=new TaskCmcc();
 		CommonBeanUtils.copyMap2Bean(o,msg);
 		return this.taskCmccService.insertTaskCmcc(o);
-	}
+    }
 
+    /**
+     * ****************************同心工程——————结束********************************************************
+     */
 
 	@RequestMapping(value = "/selectPersonageCfgById.do")
 	@ResponseBody
@@ -398,10 +464,6 @@ public class WWWController extends UfBaseController {
 		this.logger.debug("{}",this.getCurWxUser());
 		return this.personageService.selectPersonageCfgById(id);
 	}
-
-	/**
-	 * ****************************统战文件——————开始********************************************************
-	 */
 
 	/**
 	 * 查找全部file列表。
@@ -427,18 +489,11 @@ public class WWWController extends UfBaseController {
 	@ResponseBody
 	public SingleResult<FileVo> selectFileByPrimaryKey(String id) throws Exception {
 		return this.fileService.selectFileByPrimaryKey(id);
-	}
+    }
 
-	/**
-	 * ****************************统战文件——————结束********************************************************
-	 */
-
-	/**
-	 * ****************************同心工程——————开始********************************************************
-	 */
-
-	@Autowired
-	private TongXinService tongXinService;
+    /**
+     * ****************************培训教育——————结束********************************************************
+     */
 
 	/**
 	 * 获取同心列表
@@ -471,17 +526,6 @@ public class WWWController extends UfBaseController {
 			throws Exception {
 		return this.tongXinService.selectTongXinByPrimaryKey(id);
 	}
-	/**
-	 * ****************************同心工程——————结束********************************************************
-	 */
-
-
-	/**
-	 * ****************************培训教育——————开始********************************************************
-	 */
-
-	@Autowired
-	private PeiXunService peiXunService;
 
 	/**
 	 * 获取培训教育列表
@@ -493,16 +537,19 @@ public class WWWController extends UfBaseController {
 	@RequestMapping(value = "/findPeiXunList.do")
 	@ResponseBody
 	public PageResult<PeiXunVo> findPeiXunList(PeiXunQVo condition,
-											   PageParamNoChangeSord page) throws Exception {
-		PageResult<PeiXunVo> rst = this.peiXunService
-				.findPeiXunList(condition, page.getStart(), page.getLimit(),
-						page.getOrderBy());
-		if (rst.getTotal() == 0) {
-			rst.setTotal(page.getTotalRecord());
-		}
+                                               PageParamNoChangeSord page) throws Exception {
+        PageResult<PeiXunVo> rst = this.peiXunService
+                .findPeiXunList(condition, page.getStart(), page.getLimit(),
+                        page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
 
-		return rst;
-	}
+        return rst;
+    }
+    /**
+     * ****************************精准扶贫——————结束********************************************************
+     */
 
 	/**
 	 * 根据id查找
@@ -516,18 +563,6 @@ public class WWWController extends UfBaseController {
 			throws Exception {
 		return this.peiXunService.selectPeiXunByPrimaryKey(id);
 	}
-
-	/**
-	 * ****************************培训教育——————结束********************************************************
-	 */
-
-	/**
-	 * ****************************精准扶贫——————开始********************************************************
-	 */
-
-
-	@Autowired
-	private FuPinService fuPinService;
 
 	@RequestMapping(value = "/findFuPinList.do")
 	@ResponseBody
@@ -554,18 +589,11 @@ public class WWWController extends UfBaseController {
 	public SingleResult<FuPinVo> selectFuPinByPrimaryKey(String id)
 			throws Exception {
 		return this.fuPinService.selectFuPinByPrimaryKey(id);
-	}
-	/**
-	 * ****************************精准扶贫——————结束********************************************************
-	 */
+    }
 
-	/**
-	 * ****************************统战信息——————开始********************************************************
-	 */
-
-
-	@Autowired
-	private XinXiService xinXiService;
+    /**
+     * ****************************统战信息——————结束********************************************************
+     */
 
 	@RequestMapping(value = "/findXinXiList.do")
 	@ResponseBody
@@ -580,38 +608,31 @@ public class WWWController extends UfBaseController {
 
 		return rst;
 	}
+
 	@RequestMapping(value = "/selectXinXiByPrimaryKey.do")
 	@ResponseBody
 	public SingleResult<XinXiVo> selectXinXiByPrimaryKey(String id)
 			throws Exception {
 		return this.xinXiService.selectXinXiByPrimaryKey(id);
 	}
-	/**
-	 * ****************************统战信息——————结束********************************************************
-	 */
-
-	/**
-	 * ****************************统战调研——————开始********************************************************
-	 */
-
-
-
-	@Autowired
-	private DiaoYanService diaoYanService;
 
 	@RequestMapping(value = "/findDiaoYanList.do")
 	@ResponseBody
 	public PageResult<DiaoYanVo> findDiaoYanList(DiaoYanQVo condition,
-												 PageParamNoChangeSord page) throws Exception {
-		PageResult<DiaoYanVo> rst = this.diaoYanService
-				.findDiaoYanList(condition, page.getStart(), page.getLimit(),
-						page.getOrderBy());
-		if (rst.getTotal() == 0) {
-			rst.setTotal(page.getTotalRecord());
-		}
+                                                 PageParamNoChangeSord page) throws Exception {
+        PageResult<DiaoYanVo> rst = this.diaoYanService
+                .findDiaoYanList(condition, page.getStart(), page.getLimit(),
+                        page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
 
-		return rst;
-	}
+        return rst;
+    }
+
+    /**
+     * ****************************统战调研——————结束********************************************************
+     */
 
 	/**
 	 *
@@ -626,17 +647,6 @@ public class WWWController extends UfBaseController {
 			throws Exception {
 		return this.diaoYanService.selectDiaoYanByPrimaryKey(id);
 	}
-
-	/**
-	 * ****************************统战调研——————结束********************************************************
-	 */
-
-	/**
-	 * ****************************统战宣传——————开始********************************************************
-	 */
-
-	@Autowired
-	private XuanChuanService xuanChuanService;
 
 	@RequestMapping(value = "/findXuanChuanList.do")
 	@ResponseBody

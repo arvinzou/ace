@@ -71,7 +71,7 @@
         privilege = #{privilege,jdbcType=LONGVARCHAR},
         scope = #{scope,jdbcType=VARCHAR},
         expires_in = #{expires_in,jdbcType=BIGINT},
-        mobile = #{mobile,jdbcType=VARCHAR},
+        mobile = #{mobile,jdbcType=VARCHAR}
         where unionid = #{unionid,jdbcType=VARCHAR}
     </update>
 
