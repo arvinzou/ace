@@ -34,3 +34,57 @@
 	width: 100%;
 	height: 100%;
 }
+.product_table input,
+select,
+textarea {
+	/*color: #E1E5ED;*/
+	width: 100%;
+	height: 100%;
+}
+.pictureContainer{
+	position: relative;
+	width: 240px;
+	height: 135px;
+	margin: 5px;
+	cursor: pointer;
+	border: 1px dashed #b4bed3;
+}
+.pictureContainer .viewPicture{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	/*border: 1px dashed #b4bed3;*/
+	border-radius: 5px;
+}
+
+.uploadText{
+	position: absolute;
+	top:0;
+	left: 0;
+	padding: 20px;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+.uploadText img{
+	margin: auto;
+}
+#myModal{
+	width: 80%;
+	margin: 0 auto;
+}
+.modal-dialog{
+	width: 100%;
+}
+.submit{
+	width: 80px;
+	height: 35px;
+	background-color: #1A56A8;
+	color: #ffffff;
+	border: none;
+	border-radius: 3px;
+}
+.required {
+	color: red;
+}
