@@ -25,10 +25,10 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, financeTitle, financeCode, areaCode, companyId, releaseDate, financeAmount,
-        financeYear, yearYield, clicks, likes, remark,
-    status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
-    lastModifyDate, financeContent
+        f.id, f.financeTitle, f.financeCode, f.areaCode, f.companyId, f.releaseDate, f.financeAmount,
+        f.financeYear, f.yearYield, f.clicks, f.likes, f.remark,
+        f.status, f.createUserId, f.createUserName, f.createDate, f.lastModifyUserId, f.lastModifyUserName,
+        f.lastModifyDate, f.financeContent
   </sql>
     <sql id="Base_Column_List_Vo">
         f.id, f.financeTitle, f.financeCode, f.areaCode, f.companyId, f.releaseDate, f.financeAmount,
@@ -39,7 +39,7 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from fop_finance_project
+        from fop_finance_project f
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -285,7 +285,7 @@
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List_Vo"/>
-        <include refid="fromCondition_Vo"/>
+        <include refid="fromCondition"/>
         where f.id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -294,6 +294,7 @@
         select m.* from(
         select
         <include refid="Base_Column_List"/>
+        from fop_finance_project f
         <include refid="whereCondition"/>
         ) m
         <choose>
@@ -311,8 +312,8 @@
         select m.* from(
         select
         <include refid="Base_Column_List_Vo"/>
-        <include refid="fromCondition_Vo"/>
-        <include refid="whereCondition_Vo"/>
+        <include refid="fromCondition"/>
+        <include refid="whereCondition"/>
         ) m
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -327,6 +328,7 @@
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
+        from fop_finance_project f
         <include refid="whereCondition"/>
     </select>
 
@@ -337,42 +339,12 @@
         financeTitle=#{financeTitle}
     </select>
 
-    <sql id="whereCondition">
-        from fop_finance_project
-        where 0=0
-        <if test='condition.financeTitle!=null and condition.financeTitle!=""'>
-            and financeTitle like
-            concat('%',#{condition.financeTitle,jdbcType=VARCHAR},'%')
-        </if>
-        <if test='condition.financeYear!=null and condition.financeYear!=""'>
-            and financeYear =#{condition.financeYear,jdbcType=CHAR}
-        </if>
-        <if test="condition.btmYield!=null and condition.btmYield!=''">
-            and yearYield>=#{condition.btmYield,jdbcType=DECIMAL}
-        </if>
-        <if test="condition.topYield!=null and condition.topYield!=''">
-            and yearYield&lt;=#{condition.topYield,jdbcType=DECIMAL}
-        </if>
-        <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and status = #{condition.status,jdbcType=CHAR}
-        </if>
-        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-
-        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-    </sql>
-
-    <sql id="fromCondition_Vo">
+    <sql id="fromCondition">
         from fop_finance_project f
         left join fop_company c on f.companyId=c.id
     </sql>
-    <sql id="whereCondition_Vo">
-        where 0=0
+    <sql id="whereCondition">
+        where f.status <![CDATA[ <> ]]> 0
         <if test='condition.financeTitle!=null and condition.financeTitle!=""'>
             and f.financeTitle like
             concat('%',#{condition.financeTitle,jdbcType=VARCHAR},'%')
@@ -390,5 +362,4 @@
             and f.status = #{condition.status,jdbcType=CHAR}
         </if>
     </sql>
-
 </mapper>

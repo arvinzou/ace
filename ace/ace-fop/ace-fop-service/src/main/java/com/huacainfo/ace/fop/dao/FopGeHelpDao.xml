@@ -282,7 +282,8 @@
     <sql id="Vo_Column_List">
         t.id, t.requestId, t.requestType, t.parentId, t.title, t.reply, t.releaseDate, t.keyWord, t.accCount,
         t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
-        t.lastModifyDate, t.optDeptName, t.optLeaderName, t.processDetail,t.content,c.fullName as companName
+        t.lastModifyDate, t.optDeptName, t.optLeaderName, t.processDetail,t.content,c.fullName as
+        companName,c.companyProperty,c.address
     </sql>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopGeHelpVo">
