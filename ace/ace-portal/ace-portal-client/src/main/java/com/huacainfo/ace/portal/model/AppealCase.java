@@ -13,13 +13,19 @@ public class AppealCase implements java.io.Serializable {
 
     private String title;
 
+    /**
+     * 1-图片，2-视频，3-音频
+     */
     private String mediType;
 
     private String mediUrl;
 
     private String companyName;
 
-
+    /**
+     * 经办领导
+     */
+    private String operator;
 
     private String submitName;
 
@@ -50,6 +56,44 @@ public class AppealCase implements java.io.Serializable {
     private String status;
 
     private Date createDate;
+
+    private String appealName;
+
+    private String realName;
+
+    private String nickName;
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getAppealName() {
+        return appealName;
+    }
+
+    public void setAppealName(String appealName) {
+        this.appealName = appealName;
+    }
 
     public String getId() {
         return id;

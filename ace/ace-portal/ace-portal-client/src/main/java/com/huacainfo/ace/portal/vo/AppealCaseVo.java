@@ -8,15 +8,16 @@ import java.util.List;
 
 
 public class AppealCaseVo extends AppealCase {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private List<AppealCaseFile> list;
 
-	public List<AppealCaseFile> getList() {
-		return list;
-	}
+    private List<AppealCaseFile> list;
 
-	public void setList(List<AppealCaseFile> list) {
-		this.list = list;
-	}
+    public List<AppealCaseFile> getList() {
+        return list;
+    }
+
+    public void setList(List<AppealCaseFile> list) {
+        this.list = list;
+    }
 }
