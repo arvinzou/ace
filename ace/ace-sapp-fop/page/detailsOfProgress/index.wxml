@@ -1,0 +1,13 @@
+<view class='index'>
+  <form catchsubmit="formSubmit" catchreset="formReset">
+    <view class="kind-list">
+      <view class="kind-list-item">
+        <textarea name="content" value="{{appeal.detailsOfProgress}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入进展详情" style="height: 90vh;padding:30rpx" />
+        <view class="weui-textarea-counter">{{max}}/500</view>
+      </view>
+      <view>
+        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:{{max>1?'#1A56A8':'#C5D1E2'}}; border-radius: 2px;" formType="submit">提交</button>
+      </view>
+    </view>
+  </form>
+</view>

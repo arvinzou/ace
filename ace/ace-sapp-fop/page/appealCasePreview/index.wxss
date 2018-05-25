@@ -27,15 +27,12 @@
 .slide-image{
   width: 100%;
 }
-.swiper {
-  height: 400rpx;
-  width: 100%;
-}
+
 .swiper image {
   width: 100%;
 }
 .swiper {
-  height: 300rpx;
+  height: 600rpx;
   width: 94%;
   margin-top:10px;
   margin-left:10px;

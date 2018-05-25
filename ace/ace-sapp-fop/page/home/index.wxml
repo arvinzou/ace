@@ -1,11 +1,11 @@
 <view class='index'>
-  <image src="{{serverfile}}{{appeal.cover}}" wx:if="{{appeal.cover.length>0}}" class="swiper" mode="aspectFit"  />
+  <image src="{{serverfile}}{{appeal.cover}}" wx:if="{{appeal.cover.length>0}}" class="swiper" mode="aspectFit" />
 
   <view class="text-content-center">
     <view class="title-strong"> {{appeal.name}}</view>
   </view>
   <view class="rich-text">
-  <rich-text  style="text-indent:40px;" nodes="{{appeal.remark}}"></rich-text>
+    <rich-text style="text-indent:40px;" nodes="{{appeal.remark}}"></rich-text>
   </view>
   <navigator bindtap="previewImage" data-url="{{serverfile}}{{appeal.qrcoteUrl}}">
     <view style="flex-direction:column;" class='text-content-center'>
@@ -13,7 +13,7 @@
     </view>
   </navigator>
 
-   <view>
-      <button class="weui-btn" bindtap="bindtap"  style=" width:100%;color:#fff;background-color:#1A56A8; border-radius: 2px;">提交诉求</button>
-    </view>
+  <view>
+    <button class="weui-btn" bindtap="bindtap" style=" width:100%;color:#fff;background-color:#1A56A8; border-radius: 2px;">提交诉求</button>
+  </view>
 </view>
