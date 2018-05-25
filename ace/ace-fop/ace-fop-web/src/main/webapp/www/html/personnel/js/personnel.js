@@ -6,6 +6,10 @@ var currentPage = 1;
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
+
+    try{
+        $scope.userProp = userProp;
+    }catch(e){}
     //初始化文本框
     var editor = new Simditor({
         textarea: $('#editor')
@@ -92,13 +96,22 @@ app.controller(ngControllerName,function($scope){
     }
 
     /**
+     * 发布之前判断是否已经登录
+     */
+    $scope.before_release = function () {
+        var userProp = parent.parent.userProp;
+        if (userProp == null || userProp == ''){
+            layer.alert("请先登录后再发布！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+    }
+    /**
      * 发布人才信息
      */
     $scope.releaseInfo = function(){
-        var userProp = parent.parent.userProp;
-        if(userProp == null || userProp == '' ) {
-            location.href = '/portal/dynamic/portal/security/login.jsp';
-        }else{
             var title = $("input[name='postname']").val();
             var content = $("textarea[name='content']").val();
             if(title == '' || title == undefined){
@@ -147,7 +160,6 @@ app.controller(ngControllerName,function($scope){
                     });
                 }
             });
-        }
     }
 
     $scope.showInfo = function(index){

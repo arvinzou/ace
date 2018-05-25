@@ -1,5 +1,6 @@
 body {
 	width: 100%;
+	height: auto;
 	background-color: #F4F4F4;
 }
 html{
@@ -8,6 +9,9 @@ html{
 .index {
 	width: 60%;
 	margin: auto;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
 	background-color: #FFFFFF;
 }
 .content{

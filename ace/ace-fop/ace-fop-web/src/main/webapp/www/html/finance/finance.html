@@ -3,28 +3,27 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-		<title>融资服务</title>
+		<title>银企服务</title>
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
 		<link rel="stylesheet" type="text/css" href="css/finance.css" />
+        <link rel="stylesheet" type="text/css" href="filter/Fliter.css" />
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
         <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+        <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+        <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="filter/Filter.js"></script>
+        <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+        <script type="text/javascript" src="../../js/common.js"></script>
 		<SCRIPT language=JavaScript src="js/finance.js"></SCRIPT>
-		<script type="text/javascript">
-			function setIframeHeight(iframe) {
-				if(iframe) {
-					var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-					if(iframeWin.document.body) {
-						iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-					}
-				}
-			};
-		</script>
+        <script type="text/javascript" src="js/finance_company.js"></script>
 	</head>
 
 	<body>
-    <div ng-include="'../common/header.html'"></div>
+    <div id="header"></div>
+    <div ng-include="'../common/nav.html'"></div>
     <div id="body">
         <div class="index">
             <div class="tab_title">
@@ -32,16 +31,140 @@
                     <ul id="myTab" class="nav nav-tabs">
                         <span class="title_lager">企业融资</span><span class="title_small">/Enterprise financing</span>
                     </ul>
+                    <div class="tab_title_load">
+                        <button ng-if="userProp" data-toggle="modal" data-target="#myModal1" ng-click="before_release();">发布融资</button>
+                        <button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">发布融资</button>
+                    </div>
                 </div>
             </div>
             <div id="myTabContent" class="tab-content">
-                <div style="background-color: #fff">
-                    <iframe id="finance" name="finance" class="iframe1" frameborder="no" scrolling="no" name="allbox"
-                            width="100%" height="1600px;" src="finance_company.html"
-                            style="background-color: #fff"></iframe>
+                <div style="background-color: #ffffff">
+                    <div class="search">
+                        <div class="finance_list_title">
+                            精选企业融资信息
+                        </div>
+                        <div class="search_combox">
+                            <div class="search_box">
+                                <div style="width: 12%;float: left;height: 35px;">精准搜索：</div>
+                                <div style="width: 88%;float: left;height: 35px;"><input type="text" id="financeTitle"
+                                                                                         placeholder="请输入关键字搜索"/>
+                                    <button class="searchButton" ng-click="searchByParam();">搜索</button>
+                                </div>
+                            </div>
+                            <div class="search_filter1">
+                                <div class="filter_title1">预期年收益：</div>
+                                <div id="demo1"></div>
+                            </div>
+                            <div style="clear: both;"></div>
+                            <div class="search_filter2">
+                                <div class="filter_title2">融资年限：</div>
+                                <div id="demo2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search_list">
+                        <div class="finance_list_title">
+                            共发现{{totalSize}}条企业融资信息
+                        </div>
+                        <div class="project_list">
+                            <div class="table_div"  ng-repeat="item in items" ng-click="showFinanceInfo($index);">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td colspan="3" class="project_title" ng-bind="item.financeTitle"></td>
+                                        <td>&nbsp;</td>
+                                        <td><span class="income_title">预计年收益：</span><span class="income" ng-bind="item.yearYield"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>企业名称：{{item.companyName}}</td>
+                                        <td>企业性质：合资</td>
+                                        <td>&nbsp;</td>
+                                        <td>企业地址：常德市德山经开区桃林路28号</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>融资金额：{{item.financeAmount}}</td>
+                                        <td>融资年限：{{item.financeYear}}年</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" ng-bind="item.financeContent" style="word-break: break-all; word-wrap:break-word;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">发布时间：{{item.releaseDate}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="paganation"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 	</body>
+
+    <!--融资产品模态框发布-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">发布融资</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="product_form">
+                        <table class="product_table" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td width="15%" align="right"><span class="required">*</span><span>融资名称</span></td>
+                                <td width="5%"></td>
+                                <td><input type="text" placeholder="请输入产品名称" name="projectName" onfocus="this.placeholder=''" onblur="this.placeholder='请输入融资名称'" /></td>
+                            </tr>
+                            <tr>
+                                <td width="15%" align="right"><span class="required">*</span><span>融资金额</span></td>
+                                <td width="5%"></td>
+                                <td><input type="text" placeholder="请输入产品金额" name="projectMoney" onfocus="this.placeholder=''" onblur="this.placeholder='请输入融资金额'" /></td>
+                            </tr>
+                            <tr>
+                                <td width="15%" align="right"><span class="required">*</span><span>融资年限</span></td>
+                                <td width="5%"></td>
+                                <td><input type="text" placeholder="请输入融资年限" name="financeYear" onfocus="this.placeholder=''" onblur="this.placeholder='请输入融资年限'" /></td>
+                            </tr>
+                            <!--<tr>
+                                <td width="15%" align="right"><span class="required">*</span><span>项目类型</span></td>
+                                <td width="5%"></td>
+                                <td>
+                                    <input type="text" placeholder="请输入项目类型" name="projectType" onfocus="this.placeholder=''" onblur="this.placeholder='请输入项目类型'" />
+                                </td>
+                            </tr>-->
+                            <tr>
+                                <td width="15%" align="right"><span>预期年收益</span></td>
+                                <td width="5%"></td>
+                                <td><input type="text" placeholder="请输入预期年收益" name="rate" onfocus="this.placeholder=''" onblur="this.placeholder='请输入预期年收益'" /></td>
+                            </tr>
+                            <tr style="height: 186px;">
+                                <td width="15%" align="right" style="height: 186px;"><span>内容</span></td>
+                                <td width="5%" style="height: 186px;"></td>
+                                <td style="height: 186px;">
+                                    <textarea name="content" placeholder="描述融资项目" onfocus="this.placeholder=''" onblur="this.placeholder='描述融资项目'"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="center">
+                                    <button class="submit" data-dismiss="modal" ng-click="relaseFinance();">提交</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--<div class="modal-footer">
+                <button type="button" class="btn btn-primary">提交</button>
+            </div>-->
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
 </html>

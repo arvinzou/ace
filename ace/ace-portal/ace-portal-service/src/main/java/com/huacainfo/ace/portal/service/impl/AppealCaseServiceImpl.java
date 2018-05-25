@@ -1,14 +1,23 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.portal.dao.TplPageDao;
+import com.huacainfo.ace.portal.dao.AppealCaseDao;
+import com.huacainfo.ace.portal.dao.AppealCaseFileDao;
+import com.huacainfo.ace.portal.model.AppealCase;
 import com.huacainfo.ace.portal.model.AppealCaseFile;
+import com.huacainfo.ace.portal.service.AppealCaseService;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.vo.AppealCaseQVo;
+import com.huacainfo.ace.portal.vo.AppealCaseVo;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -18,18 +27,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.portal.dao.AppealCaseDao;
-import com.huacainfo.ace.portal.dao.AppealCaseFileDao;
-import com.huacainfo.ace.portal.model.AppealCase;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.portal.service.AppealCaseService;
-import com.huacainfo.ace.portal.vo.AppealCaseVo;
-import com.huacainfo.ace.portal.vo.AppealCaseQVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("appealCaseService")
 /**
@@ -49,6 +50,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
     @Autowired
     private SqlSessionTemplate sqlSession;
 
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -65,9 +67,9 @@ public class AppealCaseServiceImpl implements AppealCaseService {
     @Override
     public PageResult<AppealCaseVo> findAppealCaseList(AppealCaseQVo condition, int start,
                                                        int limit, String orderBy) throws Exception {
-        PageResult<AppealCaseVo> rst = new PageResult<AppealCaseVo>();
-        List<AppealCaseVo> list = this.appealCaseDao.findList(condition,
-                start, start + limit, orderBy);
+
+        PageResult<AppealCaseVo> rst = new PageResult<>();
+        List<AppealCaseVo> list = appealCaseDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.appealCaseDao.findCount(condition);
@@ -129,7 +131,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         o.setStatus("1");
         o.setSubmitTime(new Date());
         this.appealCaseDao.insert(o);
-        for(AppealCaseFile e:list){
+        for (AppealCaseFile e : list) {
             e.setId(GUIDUtil.getGUID());
             e.setAppealCaseId(o.getId());
             e.setCreateDate(new Date());
@@ -152,7 +154,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
      * @version: 2018-05-14
      */
     @Override
-    public MessageResponse updateAppealCase(AppealCase o, List<AppealCaseFile> list,UserProp userProp)
+    public MessageResponse updateAppealCase(AppealCase o, List<AppealCaseFile> list, UserProp userProp)
             throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
@@ -167,7 +169,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         o.setStatus("2");
         o.setAnswerTime(new Date());
         this.appealCaseDao.updateByPrimaryKey(o);
-        for(AppealCaseFile e:list){
+        for (AppealCaseFile e : list) {
             e.setAppealCaseId(o.getId());
             e.setId(GUIDUtil.getGUID());
             e.setCreateDate(new Date());
@@ -193,16 +195,16 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
         Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);
-        AppealCaseDao dao=session.getMapper(AppealCaseDao.class);
+        AppealCaseDao dao = session.getMapper(AppealCaseDao.class);
         SingleResult<AppealCaseVo> rst = new SingleResult<AppealCaseVo>();
         try {
             rst.setValue(dao.selectByPrimaryKey(id));
-        }catch (Exception e){
-            if(session!=null){
+        } catch (Exception e) {
+            if (session != null) {
                 session.close();
             }
-        }finally {
-            if(session!=null){
+        } finally {
+            if (session != null) {
                 session.close();
             }
         }
@@ -221,8 +223,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
      * @version: 2018-05-14
      */
     @Override
-    public MessageResponse deleteAppealCaseByAppealCaseId(String id,
-                                                          UserProp userProp) throws Exception {
+    public MessageResponse deleteAppealCaseByAppealCaseId(String id, UserProp userProp) throws Exception {
         this.appealCaseDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除诉求", "诉求", String.valueOf(id),
                 String.valueOf(id), "诉求", userProp);
@@ -230,39 +231,37 @@ public class AppealCaseServiceImpl implements AppealCaseService {
     }
 
     /**
-     *
-     * @Title:getList
-     * @Description:  TODO(获取列表)
-     * @param:        @throws Exception
-     * @return:       Map<String,Object>
      * @throws
+     * @Title:getList
+     * @Description: TODO(获取列表)
+     * @param: @throws Exception
+     * @return: Map<String,Object>
      * @author: 陈晓克
      * @version: 2018-05-15
      */
     @Override
-    public Map<String,Object> getList(Map<String,Object> params) throws Exception{
-        Map<String,Object> rst=new HashMap<>();
-        rst.put("status",0);
-        rst.put("data",this.appealCaseDao.getList(params));
+    public Map<String, Object> getList(Map<String, Object> params) throws Exception {
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("status", 0);
+        rst.put("data", this.appealCaseDao.getList(params));
         return rst;
     }
 
     /**
-     *
-     * @Title:updateAccept
-     * @Description:  TODO(接受处理诉求)
-     * @param:        @param id
-     * @param:        @param answerDept
-     * @param:        @param  userProp
-     * @param:        @throws Exception
-     * @return:       MessageResponse
      * @throws
+     * @Title:updateAccept
+     * @Description: TODO(接受处理诉求)
+     * @param: @param id
+     * @param: @param answerDept
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
      * @author: 陈晓克
      * @version: 2018-05-16
      */
     @Override
-    public  MessageResponse updateAccept(String id,String answerDept,UserProp userProp) throws Exception{
-        this.appealCaseDao.updateAccept(id,answerDept);
+    public MessageResponse updateAccept(String id, String answerDept, String operator, UserProp userProp) throws Exception {
+        this.appealCaseDao.updateAccept(id, answerDept, operator);
         this.dataBaseLogService.log("接受处理诉求", "诉求", String.valueOf(id),
                 String.valueOf(id), "诉求", userProp);
         return new MessageResponse(0, "完成！");
@@ -270,23 +269,91 @@ public class AppealCaseServiceImpl implements AppealCaseService {
 
 
     /**
-     *
-     * @Title:updateDetailsOfProgress
-     * @Description:  TODO(诉求进展情况更新)
-     * @param:        @param id
-     * @param:        @param detailsOfProgress
-     * @param:        @param  userProp
-     * @param:        @throws Exception
-     * @return:       MessageResponse
      * @throws
+     * @Title:updateDetailsOfProgress
+     * @Description: TODO(诉求进展情况更新)
+     * @param: @param id
+     * @param: @param detailsOfProgress
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
      * @author: 陈晓克
      * @version: 2018-05-16
      */
     @Override
-    public  MessageResponse updateDetailsOfProgress(String id,String detailsOfProgress,UserProp userProp) throws Exception{
-        this.appealCaseDao.updateDetailsOfProgress(id,detailsOfProgress);
+    public MessageResponse updateDetailsOfProgress(String id, String detailsOfProgress, UserProp userProp) throws Exception {
+        this.appealCaseDao.updateDetailsOfProgress(id, detailsOfProgress);
         this.dataBaseLogService.log("诉求进展情况更新", "诉求", String.valueOf(id),
                 String.valueOf(id), "诉求", userProp);
         return new MessageResponse(0, "完成！");
     }
+
+    /**
+     * 获取附件列表
+     *
+     * @param appealCaseId
+     * @param type         类型（1诉求2答复）
+     * @param curUserProp  @return
+     */
+    @Override
+    public ResultResponse findFileList(String appealCaseId, String type, UserProp curUserProp) {
+        type = CommonUtils.isEmpty(type) ? "2" : type;
+
+        List<AppealCaseFile> list = appealCaseFileDao.findByAppealCaseId(appealCaseId, new String[]{type});
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
+    }
+
+    /**
+     * 删除附件
+     *
+     * @param id
+     * @param userProp
+     * @return
+     */
+    @Override
+    public ResultResponse deleteAppealCaseFile(String id, UserProp userProp) {
+        appealCaseFileDao.deleteByPrimaryKey(id);
+        return new ResultResponse(ResultCode.SUCCESS, "删除成功");
+    }
+
+    @Override
+    public AppealCaseFile insertAppealCaseFile(String appealCaseId, String name, String mediType, String url) {
+        AppealCaseFile obj = new AppealCaseFile();
+        obj.setId(GUIDUtil.getGUID());
+        obj.setAppealCaseId(appealCaseId);
+        obj.setName(name);
+        obj.setType("2");//类型（1诉求2答复）
+        obj.setMediType(mediType);
+        obj.setMediUrl(url);
+        obj.setStatus("1");
+        obj.setCreateDate(DateUtil.getNowDate());
+        appealCaseFileDao.insert(obj);
+
+        return obj;
+    }
+
+    /**
+     * pc端，诉求答复
+     *
+     * @param obj
+     * @param userProp
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse updateAppealCase(AppealCase obj, UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(obj.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(obj.getAnswerContent())) {
+            return new MessageResponse(1, "答复内容不能为空！");
+        }
+
+        obj.setAnswerTime(new Date());
+        this.appealCaseDao.updateByPrimaryKey(obj);
+
+        this.dataBaseLogService.log("诉求答复", "诉求", obj.getId(), obj.getId(), "诉求", userProp);
+        return new MessageResponse(0, "完成！");
+    }
+
 }

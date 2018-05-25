@@ -8,29 +8,28 @@
 		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<!--<script type="text/javascript" src="js/index.js"></script>-->
+		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/echarts.min.js"></script>
+		<script type="text/javascript" src="js/china-main-city-map.js"></script>
+		<script type="text/javascript" src="js/echartmap.js"></script>
+		<script type="text/javascript" src="js/share.json.js"></script>
 		<script type="text/javascript">
-            var ngControllerName = "angularjsCtrl";
-            var ngAppName = "angularjsApp";
-            var app =angular.module(ngAppName, []);
-            app.controller(ngControllerName,function($scope){
-                try{
-                    $scope.userProp = userProp;
-                    console.log(userProp);
-                    if(userProp != null && userProp != undefined){
-                        $scope.username = userProp.name;
-                    }
-				}catch (e){
+			$(function(){
+                $(".banner_menu ul li").eq(0).removeClass("menu-a").addClass("menu");
+				$(".banner_menu ul li").hover(function(){
+				    $(this).removeClass("menu-a").addClass("menu");
+				    $(this).siblings().removeClass("menu").addClass("menu-a");
+				});
+			});
 
-				}
-
-            });
 		</script>
    </head>
 
 	<body>
-		<div ng-include="'html/common/header.html'"></div>
+		<div id="header"></div>
+		<div ng-include="'html/common/nav.html'"></div>
 		<div class="main">
 			<div class="content_box">
 				<div class="content">
@@ -49,31 +48,35 @@
 									<!-- 轮播（Carousel）项目 -->
 									<div class="carousel-inner">
 										<div class="item active">
-											<img src="images/slice.png" style="width: 100%;height: 100%;object-fit: cover;" alt="First slide">
+											<img src="http://zx.huacainfo.com/{{notice_slices[0].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="First slide">
+											<span class="slice_title">{{notice_slices[0].title}}</span>
 										</div>
 										<div class="item">
-											<img src="images/slice.png" style="width: 100%;height: 100%;object-fit: cover;" alt="Second slide">
+											<img src="http://zx.huacainfo.com/{{notice_slices[1].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Second slide">
+											<span class="slice_title">{{notice_slices[1].title}}</span>
 										</div>
 										<div class="item">
-											<img src="images/slice.png" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+											<img src="http://zx.huacainfo.com/{{notice_slices[2].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+											<span class="slice_title">{{notice_slices[2].title}}</span>
 										</div>
 										<div class="item">
-											<img src="images/slice.png" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+											<img src="http://zx.huacainfo.com/{{notice_slices[3].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+											<span class="slice_title">{{notice_slices[3].title}}</span>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="banner_menu">
 								<ul>
-									<li class="menu">领导之窗</li>
+									<li class="menu-a">领导之窗</li>
 									<li class="menu-a">
-										<a href="#">常德市委</a>
+										常德市委
 									</li>
 									<li class="menu-a">
-										<a href="#">常德市政府</a>
+										常德市政府
 									</li>
 									<li class="menu-a">
-										<a href="#">常德市工商联</a>
+										常德市工商联
 									</li>
 								</ul>
 							</div>
@@ -81,50 +84,14 @@
 						<div class="notice">
 							<div class="notice_box">
 								<span class="title">市情要闻</span>
-								<a class="link" href="#">更多>></a>
+								<a class="link" href="html/information/information_index.html" target="_blank">更多>></a>
 								<div style="clear: both;"></div>
 							</div>
 							<div class="notice_list">
 								<table border="0" cellpadding="0" cellspacing="0">
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
-									</tr>
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
-									</tr>
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
-									</tr>
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
-									</tr>
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
-									</tr>
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
-									</tr>
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
-									</tr>
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
-									</tr>
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
-									</tr>
-									<tr>
-										<td width="80%" align="left" class="text01">高云龙：民营经济对社会经济发展做出了贡献</td>
-										<td width="20%" align="right" class="text02">2018-03-28</td>
+									<tr ng-repeat="temp in notice_list">
+										<td width="80%" align="left" class="text01" ng-bind="temp.title"></td>
+										<td width="20%" align="right" class="text02" ng-bind="temp.releaseDate"></td>
 									</tr>
 								</table>
 							</div>
@@ -151,7 +118,7 @@
 								<span class="menu_img"><img src="images/icon-project.png"/></span>
 								<span class="menu_title">项目信息</span>
 							</li>
-							<li class="left finance" onclick="window.open('/fop/www/html/finance/finance.html')">
+							<li class="left finance" onclick="window.open('/fop/www/html/finance/product.html')">
 								<span class="menu_img"><img src="images/icon-finance.png"/></span>
 								<span class="menu_title">金融产品</span>
 							</li>
@@ -175,26 +142,14 @@
 				<div class="product_box">
 					<div class="product_title">
 						<span class="title">品牌推广</span>
-						<a class="link" href="#">更多>></a>
+						<a class="link" href="html/band/band.html" target="_blank">更多>></a>
 						<div style="clear: both;"></div>
 					</div>
 					<div class="product_list">
 						<ul>
-							<li class="left">
-								<img src="images/product.png" />
-								<span>推荐克莱门特地源热泵空调机组</span>
-							</li>
-							<li class="left">
-								<img src="images/product.png" />
-								<span>推荐克莱门特地源热泵空调机组</span>
-							</li>
-							<li class="left">
-								<img src="images/product.png" />
-								<span>推荐克莱门特地源热泵空调机组</span>
-							</li>
-							<li class="left">
-								<img src="images/product.png" />
-								<span>推荐克莱门特地源热泵空调机组</span>
+							<li class="left" ng-repeat="band in bands">
+								<img src="http://zx.huacainfo.com/{{band.fileUrl}}" />
+								<span>{{band.title}}</span>
 							</li>
 						</ul>
 					</div>
@@ -213,7 +168,7 @@
 									<span class="online_img"><img src="images/icon-gov.png"/></span>
 									<span class="online_title">政企服务</span>
 								</li>
-								<li>
+								<li onclick="window.open('/fop/www/html/finance/finance.html')">
 									<span class="online_img"><img src="images/icon-bank.png"/></span>
 									<span class="online_title">银企服务</span>
 								</li>
@@ -231,109 +186,28 @@
 						</div>
 						<div class="share_content">
 							<div class="share_title">
-								<div class="left_opt" id="prevTop"><span class="glyphicon glyphicon-chevron-left"></span></div>
+								<div class="left_opt" id="prevTop"><span class="glyphicon glyphicon-chevron-left" ng-click="pre();"></span></div>
 								<div class="share_menu" id="listBox">
-									<ul>
-										<li><a href="#">统战部</a></li>
-										<li><a href="#">发改委</a></li>
-										<li><a href="#">经信委</a></li>
-										<li><a href="#">商务局</a></li>
-										<li><a href="#">工商局</a></li>
-										<li><a href="#">国税局</a></li>
-										<li><a href="#">地税局</a></li>
-										<li><a href="#">科技局</a></li>
-										<li><a href="#">农委</a></li>
-										<li><a href="#">财政局</a></li>
-										<li><a href="#">国土资源局</a></li>
-										<li><a href="#">环保局</a></li>
-										<li><a href="#">住建局</a></li>
-										<li><a href="#">林业局</a></li>
-										<li><a href="#">规划局</a></li>
-										<li><a href="#">国资委</a></li>
-										<li><a href="#">民政局</a></li>
-										<li><a href="#">人社局</a></li>
-										<li><a href="#">质监局</a></li>
-										<li><a href="#">安监局</a></li>
-										<li><a href="#">食药监管局</a></li>
-										<li><a href="#">司法局</a></li>
-										<li><a href="#">人民银行</a></li>
+									<ul id="myTab" class="nav nav-pills">
+										<li ng-if="$index == 0" class="active" ng-repeat="share in shares"><a href="#{{share.id}}" data-toggle="tab">{{share.title}}</a></li>
+										<li ng-if="$index > 0" ng-repeat="share in shares"><a href="#{{share.id}}" data-toggle="tab">{{share.title}}</a></li>
 									</ul>
 								</div>
-								<div class="right_opt" id="nextTop"><span class="glyphicon glyphicon-chevron-right"></span></div>
+								<div class="right_opt" id="nextTop"><span class="glyphicon glyphicon-chevron-right" ng-click="next();"></span></div>
 								<div style="clear: both;"></div>
 							</div>
-							<div id="picBox" class="share">
-								<ul>
-									<li class="on">
-										统战部
-									</li>
-									<li>
-										发改委
-									</li>
-									<li>
-										经信委
-									</li>
-									<li>
-										商务局
-									</li>
-									<li>
-										工商局
-									</li>
-									<li>
-										国税局
-									</li>
-									<li>
-										地税局
-									</li>
-									<li>
-										科技局
-									</li>
-									<li>
-										农委
-									</li>
-									<li>
-										财政局
-									</li>
-									<li>
-										国土资源局
-									</li>
-									<li>
-										环保局
-									</li>
-									<li>
-										住建局
-									</li>
-									<li>
-										林业局
-									</li>
-									<li>
-										规划局
-									</li>
-									<li>
-										国资委
-									</li>
-									<li>
-										民政局
-									</li>
-									<li>
-										人社局
-									</li>
-									<li>
-										质监局
-									</li>
-									<li>
-										安监局
-									</li>
-									<li>
-										食药监管局
-									</li>
-									<li>
-										司法局
-									</li>
-									<li>
-										人民银行
-									</li>
-								</ul>
+							<div id="myTabContent"  class="share tab-content">
+									<div  ng-repeat="temp in shares" ng-if="$index == 0" class="tab-pane fade in active" id="{{temp.id}}">
+										<ul class="alink">
+											<li ng-repeat="item in (temp.child)"><span></span><a href="{{item.url}}" target="_blank">{{item.content}}</a> </li>
+										</ul>
+									</div>
+									<div ng-repeat="temp in shares" ng-if="$index > 0" class="tab-pane fade" id="{{temp.id}}">
+										<ul class="alink">
+											<li ng-repeat="item in (temp.child)"><span></span><a href="{{item.url}}" target="_blank">{{item.content}}</a> </li>
+										</ul>
+									</div>
+
 							</div>
 						</div>
 					</div>
@@ -363,7 +237,7 @@
 						<span class="title">GIS地图</span>
 					</div>
 					<div style="clear: both;"></div>
-					<div class="map_content">
+					<div class="map_content" id="mapgis">
 
 					</div>
 				</div>

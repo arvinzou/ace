@@ -76,12 +76,16 @@ var data_method = [{
 ];
 
 app.controller(ngControllerName,function($scope){
+    try{
+        $scope.userProp = userProp;
+    }catch(e){}
+
     $('#product_rate').comboboxfilter({
         url: '',
         scope: 'FilterQuery1',
         data: data_rate,
         onChange: function(newValue) {
-            data_rate = newValue;
+            rateRange = newValue;
         }
     });
     $('#product_year').comboboxfilter({
@@ -204,12 +208,12 @@ app.controller(ngControllerName,function($scope){
             btmAmount = amountRange.split(",")[0];
             btmAmount = amountRange.split(",")[1];
         }
-        var productName = $("#key_word").val();
+        var productName = $("#financeTitle").val();
         $.ajax({
             url: "/fop/www/findLoanProductList",
             type: "post",
             async: false,
-            data: {limit: pageSize, page: currentPage,btmRate: btmRate, topRate: topRate,btmAmount: btmAmount, topAmount: topAmount, productName: productName, suretyType: suretyType },
+            data: {limit: pageSize, page: currentPage,btmRate: btmRate, topRate: topRate,btmAmount: btmAmount, topAmount: topAmount, productName: productName, suretyType: suretyType ,loanYear:loanYear},
             success: function (result) {
                 if (result.status == 0) {
                     $scope.items = result.data.list;
@@ -265,6 +269,19 @@ app.controller(ngControllerName,function($scope){
         window.open('product_info.html?id='+primaryId);
     }
 
+    /**
+     * 发布之前判断是否已经登录
+     */
+    $scope.before_release = function () {
+        var userProp = parent.parent.userProp;
+        if (userProp == null || userProp == ''){
+            layer.alert("请先登录后再发布！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+    }
     /**
      * 发布产品
      */

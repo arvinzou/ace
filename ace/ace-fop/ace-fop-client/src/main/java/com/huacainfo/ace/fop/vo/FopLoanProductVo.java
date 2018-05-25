@@ -11,6 +11,26 @@ public class FopLoanProductVo extends FopLoanProduct {
 
     private String companyName;
 
+    private String companyProperty;
+
+    private String address;
+
+    public String getCompanyProperty() {
+        return companyProperty;
+    }
+
+    public void setCompanyProperty(String companyProperty) {
+        this.companyProperty = companyProperty;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getCompanyName() {
         return companyName;
     }

@@ -9,6 +9,7 @@
 		<link href="css/publicity.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/personnel.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
@@ -19,12 +20,14 @@
 		<script type="text/javascript" src="/portal/content/common/simditor/scripts/uploader.js"></script>
 		<script type="text/javascript" src="/portal/content/common/simditor/scripts/simditor.js"></script>
 		<link rel="stylesheet" type="text/css" href="/portal/content/common/simditor/styles/simditor.css"/>
-		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" src="js/personnel.js"></script>
 	</head>
 
 	<body>
-	<div ng-include="'../common/header.html'"></div>
+	<div id="header"></div>
+	<div ng-include="'../common/nav.html'"></div>
 		<p style="padding-left: 20%;padding-top: 30px;">当前位置：首页>>人才信息</p>
 		<div class="index">
 			<div id="myTabContent" class="tab-content">
@@ -32,7 +35,8 @@
 					<div class="search_list">
 						<div class="finance_list_title">
 							<span>共{{totalCount}}条人才信息</span>
-							<button class="release" data-toggle="modal" data-target="#myModal">发布招聘</button>
+							<button ng-if="userProp" class="release" data-toggle="modal" data-target="#myModal" ng-click="before_release();">发布招聘</button>
+							<button ng-if="!userProp" class="release" data-toggle="modal" data-dismiss="#myModal" ng-click="before_release();">发布招聘</button>
 						</div>
 
 						<div class="project_list">

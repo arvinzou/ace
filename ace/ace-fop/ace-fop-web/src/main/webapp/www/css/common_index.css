@@ -6,7 +6,7 @@ ul,li{
 	text-decoration: none;
 }
 body{
-	background-color: #E1E5ED;
+	background-color: #F5F7F9;
 }
 .main{
 	width: 100%;
@@ -72,13 +72,13 @@ body{
 	float: right;
 }
 .content_box{
-	width: 60%;
+	width: 70%;
 	height: 100%;
 	margin: auto;
 }
 .content{
 	width: 100%;
-	height: 400px;
+	height: 415px;
 	background-color: #FFFFFF;
 }
 .banner_box{
@@ -87,6 +87,7 @@ body{
 	margin-left: 2%;
 	margin-right: 2%;
 	margin-top: 15px;
+	padding-top: 15px;
 }
 .banner{
 	width: 60%;
@@ -101,6 +102,17 @@ body{
 .banner_image{
 	width: 100%;
 	height: 320px;
+	position: relative;
+}
+.slice_title{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	position: absolute;
+	bottom: 0;
+	color: #ffffff;
+	padding-left: 15px;
+	background-color: rgba(0,0,0,.4);
 }
 .item{
 	width:100%;
@@ -181,6 +193,7 @@ body{
 }
 .menu-a{
 	font-size: 14px;
+	text-align: center;
 	background-color: #f5f7f9;
 }
 .menu{
@@ -191,7 +204,8 @@ body{
 .menu_panel_01{
 	width: 100%;
 	margin-top: 15px;
-	height: 194px;
+	padding-top: 15px;
+	height: 209px;
 	background-color: #FFFFFF;
 }
 
@@ -258,7 +272,6 @@ body{
 .product_list{
 	width: 100%;
 	height: 250px;
-	margin-top: 15px;
 	background-color: #FFFFFF;
 	
 }
@@ -386,9 +399,8 @@ body{
 }
 .share_title{
 	width: 100%;
-	height: 40px;
+	height: 100px;
 	line-height: 40px;
-	border: 1px solid red;
 }
 .map{
 	width: 100%;
@@ -396,7 +408,7 @@ body{
 }
 .map_content{
 	width: 100%;
-	height: 300px;
+	height: 500px;
 	background-color: #FFFFFF;
 }
 .footer{
@@ -434,12 +446,19 @@ body{
 	position: relative;
 }
 .share_menu ul{
+	width: 100%;
+	height: 100%;
 	position:absolute;
 }
 .share_menu li{
-	width: 70px;
-	height: 100%;
+	width: 19%;
+	height: 40px;
+	text-align: center;
 	display: inline-block;
+}
+.share_menu a{
+	width: 100%;
+	height: 100%;
 }
 .left_opt{
 	width: 10%;
@@ -448,7 +467,8 @@ body{
 }
 .left_opt span{
 	width: 100%;
-	height: 100%;
+	height: 100px;
+	line-height: 100px;
 	color: #ACACAE;
 	text-align: center;
 }
@@ -459,7 +479,8 @@ body{
 }
 .right_opt span{
 	width: 100%;
-	height: 100%;
+	height: 100px;
+	line-height: 100px;
 	color: #ACACAE;
 	text-align: center;
 }
@@ -468,16 +489,56 @@ body{
 	height: 170px;
 	overflow: hidden;
 	position: relative;
-	border: 1px solid #000000;
+	padding-top: 15px;
+	border-top: 2px solid #E1E5ED;
 }
-.share ul{
+.share div{
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
-	position: absolute;
 }
-.share ul li{
-	width: 167px;
+@-webkit-keyframes fadeInOut {
+	0% {
+		opacity:1;
+	}
+	25% {
+		opacity:0;
+	}
+	50% {
+		opacity: 0;
+	}
+	75% {
+		opacity:1;
+	}
+}
+.anim_fade_image {
+	position:absolute;
+	-webkit-animation-name: fadeInOut;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-duration: 12s;
+	-webkit-animation-direction: alternate;
+}
+.alink{
+	width: 100%;
 	height: 100%;
-	overflow: hidden;
+}
+.alink li{
+	width: 25%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	display: block;
+	float: left;
+}
+.alink a{
+	width: 100%;
+	height: 100%;
+	padding-left: 5px;
+	text-decoration: none;
+}
+.alink span{
+	width: 5px;
+	height: 5px;
+	display: inline-block;
+	background-color: #FF9F00;
 }

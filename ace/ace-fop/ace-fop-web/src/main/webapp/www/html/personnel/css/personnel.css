@@ -11,6 +11,8 @@ body {
 
 .project_list {
     color: #657180;
+    min-height: 500px;
+    max-height: 1400px;
 }
 
 .project_title {

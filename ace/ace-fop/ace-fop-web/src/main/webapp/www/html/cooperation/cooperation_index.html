@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="filter/Fliter.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/cooperation.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
 		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
@@ -15,17 +16,21 @@
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
 		<script type="text/javascript" src="filter/Filter.js"></script>
+		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" src="js/cooperation.js"></script>
 	</head>
 
 	<body>
-	<div ng-include="'../common/header.html'"></div>
+	<div id="header"></div>
+	<div ng-include="'../common/nav.html'"></div>
 		<div class="index">
 			<div class="tab_title">
 				<div class="tab_title_ul">
 					<span class="title_lager">合作交流</span><span class="title_small">/ Cooperation and communication</span>
 					<div class="tab_title_load">
-						<button data-toggle="modal" data-target="#myModal1">发布项目</button>
+						<button ng-if="userProp" data-toggle="modal" data-target="#myModal1" ng-click="before_release();">发布项目</button>
+						<button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">发布项目</button>
 					</div>
 				</div>
 			</div>

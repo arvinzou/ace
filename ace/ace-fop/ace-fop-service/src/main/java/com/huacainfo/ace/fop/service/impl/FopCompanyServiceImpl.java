@@ -1,6 +1,7 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
@@ -108,18 +109,23 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
     @Override
     public ResultResponse findCompanyGisList() throws Exception {
-//        List rst=new ArrayList();
-//        List gis=new ArrayList();
-//        List<FopCompanyVo> datas=this.fopCompanyDao.findGisList();
-//
-//        Map<String,Object> itmp =new HashMap<String,Object>();
-//        for(FopCompanyVo data:datas){
-//            itmp.put("name",data.getFullName());
-//            itmp.put("value",);
-//        }
-
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "企业列表", null);
-        return rst;
+        List<FopCompanyVo> datas = this.fopCompanyDao.findGisList();
+        String[] value = new String[3];
+        String rst = "[";
+        Map<String, Object> itmp = new HashMap<String, Object>();
+        for (FopCompanyVo data : datas) {
+            itmp.put("name", data.getFullName());
+            if (null == data.getLatitude()) {
+                continue;
+            }
+            value[0] = data.getLongitude().toString();
+            value[1] = data.getLatitude().toString();
+            value[2] = data.getId();
+            itmp.put("value", value);
+            rst = rst + JSON.toJSONString(itmp) + ",";
+        }
+        rst = rst + "{}]";
+        return new ResultResponse(ResultCode.SUCCESS, "企业列表", rst);
     }
 
     /**

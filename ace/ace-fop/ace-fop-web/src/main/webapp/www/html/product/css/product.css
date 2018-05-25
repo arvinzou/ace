@@ -23,7 +23,9 @@
     display: inline-block;
     vertical-align: middle;
     color: #C3CBD6;
+    overflow: hidden;
 }
+
 .img_container img{
     width: 100%;
     height: 100%;

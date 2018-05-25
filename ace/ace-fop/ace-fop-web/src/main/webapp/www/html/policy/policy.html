@@ -1,52 +1,59 @@
 <!DOCTYPE html>
-<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-		<title>政策文件</title>
-		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css" />
-		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
-		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
-		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
-		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
-		<SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
-		<script type="text/javascript" src="js/policy.js"></script>
-	</head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <title>政策文件</title>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="js/policy.js"></script>
+</head>
 
-	<body>
-	<div ng-include="'../common/header.html'"></div>
-	<div class="bodybg">
-		<div class="juz body_box">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td class="main_box" valign="top">
-										<div class="main">
-											<div class="title01">
-												<span class="title_lager">政策文件</span><span class="title_small">/&nbsp;Policy Document</span>
-											</div>
-											<div class="searchTable">
-												<table width="100%" border="0" cellspacing="0" cellpadding="0">
-													<tbody>
-													<tr class="tr_bottom" ng-repeat="item in items">
-														<td align="center" width="5%"><div class="dot"></div></td>
-														<td align="center" width="25%" ng-bind="item.releaseDate"></td>
-														<td ng-bind="item.title"></td>
-													</tr>
-													</tbody>
-												</table>
-											</div>
-											<div id="paganation"></div>
-										</div>
-								<div>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	</body>
+<body>
+<div id="header"></div>
+<div ng-include="'../common/nav.html'"></div>
+<div class="bodybg">
+    <div class="juz">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="main_box" valign="top">
+                    <div class="main">
+                        <div class="title01">
+                            <span class="title_lager">政策文件</span><span class="title_small">/&nbsp;Policy Document</span>
+                        </div>
+                        <div class="searchTable">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                <tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo($index);">
+                                    <td align="center" width="9px">
+                                        <div class="dot"></div>
+                                    </td>
+                                    <td align="center" width="20%" ng-bind="item.releaseDate"></td>
+                                    <td ng-bind="item.title"></td>
+                                    <td width="10%"><a href="http://zx.huacainfo.com/{{item.fileUrl}}" download="policy" style="color: #1A56A8;">下载</a> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="paganation"></div>
+                    </div>
+                    <div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
 
 </html>
