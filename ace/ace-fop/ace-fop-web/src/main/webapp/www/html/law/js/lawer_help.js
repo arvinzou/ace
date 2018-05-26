@@ -234,4 +234,14 @@ app.controller(ngControllerName,function($scope){
             }
 
     }
+
+    /**
+     * 查看法律帮助详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('help_info.html?id='+primaryId);
+    }
 });

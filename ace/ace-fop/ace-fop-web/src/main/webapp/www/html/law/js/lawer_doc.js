@@ -113,4 +113,13 @@ app.controller(ngControllerName,function($scope){
         });
     }
 
+    /**
+     * 查看法律文书详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('doc_info.html?id='+primaryId);
+    }
 });
