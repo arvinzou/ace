@@ -20,7 +20,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findInformationServiceListDo",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, modules: "3"},  //3代表人才信息
+        data:{limit:pageSize, page: currentPage, modules: "3",  status: "2"},  //3代表人才信息
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -70,7 +70,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, modules: "3"},
+            data:{limit:pageSize, page: currentPage, modules: "3", status: "2"},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {

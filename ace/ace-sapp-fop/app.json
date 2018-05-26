@@ -3,6 +3,8 @@
     "page/home/index",
     "page/appeal/index",
     "page/bind/index",
+    "page/detailsOfProgress/index",
+    "page/answer/index",
     "page/appealCasePreview/index",
     "page/me/index"
   ],

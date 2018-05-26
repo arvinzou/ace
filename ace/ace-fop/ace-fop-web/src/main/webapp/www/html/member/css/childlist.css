@@ -3,7 +3,9 @@
     padding: 0;
     color: #657180;
 }
-
+body{
+    background-color: #FFFFFF;
+}
 .box{
     width: 90%;
     margin: auto;

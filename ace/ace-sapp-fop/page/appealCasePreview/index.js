@@ -132,9 +132,8 @@ Page({
     util.request(cfg.updateAccept, { id: that.data.o.id, answerDept: that.data.answerDept,client:'app' },
       function (data) {
         console.log(data.value);
-        if (data.status != 0) {
-          wx.showModal({ title: "系统提示", showCancel: false, content: data.errorMessage });
-        }else{
+        wx.showModal({ title: "系统提示", showCancel: false, content: data.errorMessage });
+        if (data.status== 0) {
           that.setData({
             hidden: true
           });
@@ -146,5 +145,17 @@ Page({
     console.log(e);
     answerDept = e.detail.value;
     this.setData({ answerDept: answerDept});
+  },
+  updateDetailsOfProgress:function(e){
+    var that=this;
+    wx.navigateTo({
+      url: '../detailsOfProgress/index?id='+that.data.id,
+    })
+  }, 
+  answer:function(e){
+    var that = this;
+    wx.navigateTo({
+      url: '../answer/index?id=' + that.data.id,
+    })
   }
 });

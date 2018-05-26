@@ -79,7 +79,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findFinanceProjectList",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage},
+        data:{limit:pageSize, page: currentPage,  status: "2"},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -129,7 +129,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findFinanceProjectList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize},
+            data:{page:currentPage, limit: pageSize,  status: "2"},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {
@@ -278,7 +278,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findFinanceProjectList",
             type: "post",
             async: false,
-            data: {limit: pageSize, page: currentPage, btmYield: btmYield, topYield: topYield, financeTitle: financeTitle,financeYear: yearRange},
+            data: {limit: pageSize, page: currentPage, btmYield: btmYield, topYield: topYield, financeTitle: financeTitle,financeYear: yearRange,  status: "2"},
             success: function (result) {
                 if (result.status == 0) {
                     $scope.items = result.data.list;

@@ -1,0 +1,41 @@
+<view class='index'>
+  <form catchsubmit="formSubmit" catchreset="formReset">
+    <view class="kind-list">
+      <view class="kind-list-item">
+        <textarea name="content" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入诉求内容" style="height: 300rpx;padding:30rpx" />
+        <view class="weui-textarea-counter">{{max}}/500</view>
+      </view>
+      <view class="kind-list-item">
+        <view class="weui-uploader">
+          <view class="weui-uploader__hd">
+            <view class="weui-uploader__title"></view>
+            <view class="weui-uploader__info">{{files.length}}</view>
+          </view>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files" id="uploaderFiles">
+              <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
+                <view class="weui-uploader__file" id="{{item}}">
+                  <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" bindtap="previewImage" />
+                  <image class="btn-img-small" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}" />
+                </view>
+              </block>
+            </view>
+            <view class="weui-uploader__input-box">
+              <view class="weui-uploader__input" bindtap="chooseImage"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="kind-list-item weui-flex">
+        <view class="weui-flex__item-icon">
+          <image class="iconList20" src="../../image/checkcode.png" />
+        </view>
+        <input name="captcha" type="number" class="weui-flex__item-body" maxlength="10" placeholder="验证码" />
+        <image class="weui-vcode-img weui-flex__item-body" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width:90px;height:30px;text-align:right"></image>
+      </view>
+      <view>
+        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:{{max>1?'#1A56A8':'#C5D1E2'}}; border-radius: 2px;" formType="submit">提交</button>
+      </view>
+    </view>
+  </form>
+</view>

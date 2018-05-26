@@ -15,7 +15,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findGeHelpList",
         type:"post",
         async:false,
-        data:{page:currentPage, limit: pageSize},
+        data:{page:currentPage, limit: pageSize,  status: "2"},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -69,7 +69,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findGeHelpList",
             type:"post",
             async:false,
-            data:{page:1, limit: pageSize, title: key_word},
+            data:{page:1, limit: pageSize, title: key_word,  status: "2"},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -111,7 +111,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findGeHelpList",
             type:"post",
             async:false,
-            data:{page:1, limit: pageSize, sord: orderParam},
+            data:{page:1, limit: pageSize, sord: orderParam,  status: "2"},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -220,7 +220,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findGeHelpList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, title: key_word },
+            data:{page:currentPage, limit: pageSize, title: key_word , status: "2"},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {

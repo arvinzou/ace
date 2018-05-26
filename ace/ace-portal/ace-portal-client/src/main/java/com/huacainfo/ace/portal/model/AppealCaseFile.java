@@ -12,6 +12,9 @@ public class AppealCaseFile implements java.io.Serializable {
 
     private String type;
 
+    /**
+     * img - 图片，file - 文件 ，video- 视频，audio - 音频
+     */
     private String mediType;
 
     private String mediUrl;

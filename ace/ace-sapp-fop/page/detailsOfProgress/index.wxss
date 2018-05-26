@@ -1,0 +1,25 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+.banner {
+  width: 100%;
+  height: 200rpx;
+  background: #1A56A8;
+}
+.index{
+  background: #1A56A8;
+}
+.kind-list{
+  background-color:#F8F8F8;
+}
+.kind-list-item{
+  padding: 10px;
+}
+.weui-btn {
+  margin-top: 15px;
+  border-radius: 2px;
+}
+.iconList20{
+  width:20px; height: 20px;
+  padding-right: 10rpx;
+  vertical-align: top;
+}
