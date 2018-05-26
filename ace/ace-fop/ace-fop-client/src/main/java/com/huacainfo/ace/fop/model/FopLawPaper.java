@@ -34,6 +34,16 @@ public class FopLawPaper implements Serializable {
 
     private String content;
 
+    private String fileUrl;
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
     public String getId() {
         return id;
     }

@@ -54,54 +54,59 @@
     remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
     lastModifyDate
   </sql>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from fop_company
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
     <select id="selectByDepartmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from fop_company
         where departmentId = #{departmentId,jdbcType=VARCHAR}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from fop_company
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopCompany">
-    insert into fop_company (id, departmentId, creditCode, 
-      companyType, fullName, shortName, 
-      companyCode, companyLogo, companyLinkUrl, 
-      areaCode, companyProperty, establishDate, 
-      crewSize, registeredCapital, fixedAssets, 
+        insert into fop_company (id, departmentId, creditCode,
+        companyType, fullName, shortName,
+        companyCode, companyLogo, companyLinkUrl,
+        areaCode, companyProperty, establishDate,
+        crewSize, registeredCapital, fixedAssets,
       workingCapital, ownSpace, tenancySpace,
         personId, address, latitude,
-      longitude, firstPersonId, secPersonId, 
-      postcode, fax, email, 
-      majorVariety, laborContractNum, thirdLaborRelation, 
-      socialInsuranceAddr, socialInsuranceNum, 
-      accTaxAmount, yearTaxAmount, remark, 
-      status, createUserId, createUserName, 
-      createDate, lastModifyUserId, lastModifyUserName, 
+        longitude, firstPersonId, secPersonId,
+        postcode, fax, email,
+        majorVariety, laborContractNum, thirdLaborRelation,
+        socialInsuranceAddr, socialInsuranceNum,
+        accTaxAmount, yearTaxAmount, remark,
+        status, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName,
       lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR}, 
-      #{companyType,jdbcType=CHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
-      #{companyCode,jdbcType=VARCHAR}, #{companyLogo,jdbcType=VARCHAR}, #{companyLinkUrl,jdbcType=VARCHAR}, 
-      #{areaCode,jdbcType=VARCHAR}, #{companyProperty,jdbcType=CHAR}, #{establishDate,jdbcType=TIMESTAMP}, 
-      #{crewSize,jdbcType=INTEGER}, #{registeredCapital,jdbcType=DECIMAL}, #{fixedAssets,jdbcType=DECIMAL}, 
+        values (#{id,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR},
+        #{companyType,jdbcType=CHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
+        #{companyCode,jdbcType=VARCHAR}, #{companyLogo,jdbcType=VARCHAR}, #{companyLinkUrl,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR}, #{companyProperty,jdbcType=CHAR}, #{establishDate,jdbcType=TIMESTAMP},
+        #{crewSize,jdbcType=INTEGER}, #{registeredCapital,jdbcType=DECIMAL}, #{fixedAssets,jdbcType=DECIMAL},
       #{workingCapital,jdbcType=DECIMAL}, #{ownSpace,jdbcType=DECIMAL}, #{tenancySpace,jdbcType=DECIMAL},
         #{personId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL},
-      #{longitude,jdbcType=DECIMAL}, #{firstPersonId,jdbcType=VARCHAR}, #{secPersonId,jdbcType=VARCHAR}, 
-      #{postcode,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{majorVariety,jdbcType=VARCHAR}, #{laborContractNum,jdbcType=INTEGER}, #{thirdLaborRelation,jdbcType=CHAR}, 
-      #{socialInsuranceAddr,jdbcType=VARCHAR}, #{socialInsuranceNum,jdbcType=VARCHAR}, 
-      #{accTaxAmount,jdbcType=DECIMAL}, #{yearTaxAmount,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
-      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+        #{longitude,jdbcType=DECIMAL}, #{firstPersonId,jdbcType=VARCHAR}, #{secPersonId,jdbcType=VARCHAR},
+        #{postcode,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+        #{majorVariety,jdbcType=VARCHAR}, #{laborContractNum,jdbcType=INTEGER}, #{thirdLaborRelation,jdbcType=CHAR},
+        #{socialInsuranceAddr,jdbcType=VARCHAR}, #{socialInsuranceNum,jdbcType=VARCHAR},
+        #{accTaxAmount,jdbcType=DECIMAL}, #{yearTaxAmount,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
       #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
+
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopCompany">
         insert into fop_company
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -361,6 +366,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopCompany">
         update fop_company
         <set>
@@ -490,6 +496,7 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopCompany">
     update fop_company
     set departmentId = #{departmentId,jdbcType=VARCHAR},
@@ -537,7 +544,6 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopCompanyVo">
-
     </resultMap>
 
     <sql id="column_List_Vo">
@@ -557,7 +563,6 @@
         where c.id = #{id,jdbcType=VARCHAR}
     </select>
 
-
     <select id="findList" resultMap="VoResultMap">
         select
         <include refid="column_List_Vo"/>
@@ -573,6 +578,7 @@
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
+
     <select id="findGisList" resultMap="VoResultMap">
         select
         <include refid="column_List_Vo"/>
@@ -585,6 +591,7 @@
         left join fop_person p on p.id=c.personId
         left join portal.province pp on pp.code=c.areaCode
     </sql>
+
     <sql id="whereCondition">
         where c.status <![CDATA[ <> ]]> 0
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
@@ -629,7 +636,6 @@
         WHERE t.syid = 'fop'
         AND t.type IN (4)
     </select>
-
 
     <select id="selectPerson" resultType="map">
         select t.id, t.fullName

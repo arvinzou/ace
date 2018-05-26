@@ -6,6 +6,7 @@
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
         <result column="keyWord" jdbcType="VARCHAR" property="keyWord"/>
+        <result column="fileUrl" jdbcType="VARCHAR" property="fileUrl"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -18,7 +19,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, title, releaseDate, keyWord, remark, status, createUserId, createUserName, createDate, 
+        id, title, releaseDate, keyWord, fileUrl, remark, status, createUserId, createUserName, createDate,
     lastModifyUserId, lastModifyUserName, lastModifyDate, content
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -32,13 +33,13 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopLawPaper">
-    insert into fop_law_paper (id, title, releaseDate, 
-      keyWord, remark, status, 
+    insert into fop_law_paper (id, title, releaseDate,
+        keyWord, fileUrl, remark, status,
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
       content)
-    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
-      #{keyWord,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP},
+        #{keyWord,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
@@ -57,6 +58,9 @@
             </if>
             <if test="keyWord != null">
                 keyWord,
+            </if>
+            <if test="fileUrl != null">
+                fileUrl,
             </if>
             <if test="remark != null">
                 remark,
@@ -99,6 +103,9 @@
             <if test="keyWord != null">
                 #{keyWord,jdbcType=VARCHAR},
             </if>
+            <if test="fileUrl != null">
+                #{fileUrl,jdbcType=VARCHAR},
+            </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
@@ -140,6 +147,9 @@
             <if test="keyWord != null">
                 keyWord = #{keyWord,jdbcType=VARCHAR},
             </if>
+            <if test="fileUrl != null">
+                fileUrl = #{fileUrl,jdbcType=VARCHAR},
+            </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
@@ -175,6 +185,7 @@
     set title = #{title,jdbcType=VARCHAR},
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
       keyWord = #{keyWord,jdbcType=VARCHAR},
+        fileUrl = #{fileUrl,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},

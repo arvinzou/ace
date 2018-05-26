@@ -10,6 +10,10 @@
     <title>法律文书</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
 <script type="text/javascript">
 
 
@@ -173,6 +177,13 @@
         src="${pageContext.request.contextPath}/content/service/lawPaper/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/lawPaper/view.js?version=${cfg.version}"></script>
+
+<script src="${pageContext.request.contextPath}/content/service/lawPaper/upload.js?version=${cfg.version}"></script>
+
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

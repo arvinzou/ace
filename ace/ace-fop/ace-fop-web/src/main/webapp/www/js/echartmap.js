@@ -38,7 +38,7 @@ var option = {
     },
     geo: {
         map: '中国',
-        roam: true,
+        //roam: true,
         move: false,
         label: {
             normal: {
@@ -53,9 +53,7 @@ var option = {
                 areaColor: '#fff',
                 borderColor: '#1A56A8'
             },
-            emphasis: {
-                areaColor: '#fff'
-            }
+
         }
     },
     series: [{
