@@ -198,6 +198,16 @@ app.controller(ngControllerName,function($scope){
             }
         });
     }
+
+    /**
+     * 查看企业产品详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('product_info.html?id='+primaryId);
+    }
 });
 
 /*图片上传成功后*/
