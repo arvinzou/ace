@@ -166,13 +166,15 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         if (CommonUtils.isBlank(o.getAnswerContent())) {
             return new MessageResponse(1, "答复内容不能为空！");
         }
-        o.setStatus("2");
+        o.setStatus("3");
         o.setAnswerTime(new Date());
         this.appealCaseDao.updateByPrimaryKey(o);
         for (AppealCaseFile e : list) {
             e.setAppealCaseId(o.getId());
             e.setId(GUIDUtil.getGUID());
             e.setCreateDate(new Date());
+            e.setStatus("1");
+            e.setType("2");
             this.appealCaseFileDao.insert(e);
         }
         this.dataBaseLogService.log("诉求答复", "诉求", o.getId(),

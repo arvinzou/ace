@@ -118,7 +118,7 @@ public class TaskCmccServiceImpl implements TaskCmccService, ThreadProcess {
             return new MessageResponse(1, "短信不能为空！");
         }
         this.taskCmccMapper.insert(o);
-        return new MessageResponse(0, "成功！");
+        return new MessageResponse(0, "短信已发送，请注意查收！");
     }
 
     public MessageResponse updateTaskCmcc(TaskCmcc o, UserProp userProp) throws Exception {
