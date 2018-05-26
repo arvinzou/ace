@@ -4,55 +4,54 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-		<title>信息平台</title>
+		<title>市情要闻</title>
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/information/market.css"/>
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
-		<script type="text/javascript">
-            var ngControllerName = "angularjsCtrl";
-            var ngAppName = "angularjsApp";
-            var app =angular.module(ngAppName, []);
-            app.controller(ngControllerName,function($scope){
-
-            });
-		</script>
+		<script type="text/javascript" src="js/infomation.js"></script>
 	</head>
 
 	<body>
 	<div id="header"></div>
 	<div ng-include="'../common/nav.html'"></div>
 		<div class="bodybg">
-			<div class="juz body_box">
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td class="left_box" valign="top">
-							<div class="left_menu">
-								<ul class="leftmenuul"><span style="display: inline-block;">信息平台</span><span style="display:inline-block;color: #C3CBD6;font-size: 12px;">/Information platform</span>
-									<li>
-										<a href="market_info.html" target="allbox" active>市场信息</a>
-									</li>
-									<li>
-										<a href="product_info.html" target="allbox">产品信息</a>
-									</li>
-									<li>
-										<a href="project_info.html" target="allbox">项目信息</a>
-									</li>
-									<li>
-										<a href="business_info.html" target="allbox">招商信息</a>
-									</li>
-								</ul>
+			<div class="juz">
+				<!--用于标注信息类型-->
+				<div class="main" ng-app="angularjsApp" ng-controller="angularjsCtrl">
+					<div class="title01">
+						<span class="title_lager">市情要闻</span><span class="title_small">/&nbsp;Information</span>
+					</div>
+					<div class="searchTable">
+						<div class="search_condition">
+							<div class="search_left" ng-click="sortList('asc');"  id="asc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-up" style="color: #1A56A8;"></span></div>
+							<div class="search_left" ng-click="sortList('desc');" hidden="true" id = "desc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-down" style="color: #1A56A8;"></span></div>
+							<div class="search_right">
+								<span class="s_title"><input type="text" placeholder="请输入关键字搜索"/><button class="glyphicon glyphicon-search"></button></span>
 							</div>
-
-						</td>
-						<td class="right_box" valign="top">
-							<iframe class="iframe1" frameborder="no" scrolling="no" name="allbox" width="100%" height="700" src="market_info.html"></iframe>
-						</td>
-					</tr>
-				</table>
-
+						</div>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+							<tr class="tr_bottom" ng-repeat="item in items">
+								<td align="left" width="15px"><div class="dot"></div></td>
+								<td align="left" width="25%" ng-bind="item.releaseDate"></td>
+								<td ng-bind="item.title"></td>
+								<td align="right" width="20%" class="from_info">来源：常德市工商联</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="paganation"></div>
+				</div>
+			</div>
 			</div>
 
 		</div>

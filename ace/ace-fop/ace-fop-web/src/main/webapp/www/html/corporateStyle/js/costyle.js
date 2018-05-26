@@ -54,7 +54,7 @@ app.controller(ngControllerName, function ($scope) {
         url: "/fop/www/findInformationServiceListDo",
         type: "post",
         async: false,
-        data: {limit: pageSize, page: currentPage, modules: "1"},   //1表示企业风采
+        data: {limit: pageSize, page: currentPage, modules: "1", status: "2"},   //1表示企业风采
         success: function (result) {
             if (result.status == 0) {
                 $scope.items = result.data.list;
@@ -103,7 +103,7 @@ app.controller(ngControllerName, function ($scope) {
             url: "/fop/www/findInformationServiceListDo",
             type: "post",
             async: false,
-            data: {limit: pageSize, page: currentPage, modules: "1"},
+            data: {limit: pageSize, page: currentPage, modules: "1",  status: "2"},
             success: $scope.responseHandle,
             error: function () {
                 layer.alert("系统内部服务异常！", {
@@ -199,6 +199,16 @@ app.controller(ngControllerName, function ($scope) {
                 });
             }
         });
+    }
+
+    /**
+     * 查看企业风采详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('coinfo.html?id='+primaryId);
     }
 });
 

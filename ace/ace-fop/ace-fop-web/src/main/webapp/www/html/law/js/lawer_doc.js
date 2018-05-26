@@ -10,7 +10,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findLawPaperList",
         type:"post",
         async:false,
-        data:{"limit":pageSize, page: currentPage},
+        data:{"limit":pageSize, page: currentPage, status: "2"},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -60,7 +60,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findLawPaperList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, title: key_word },
+            data:{page:currentPage, limit: pageSize, title: key_word , status: "2"},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {
@@ -90,7 +90,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findLawPaperList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, title : key_word},
+            data:{limit:pageSize, page: currentPage, title : key_word, status: "2"},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -113,4 +113,13 @@ app.controller(ngControllerName,function($scope){
         });
     }
 
+    /**
+     * 查看法律文书详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('doc_info.html?id='+primaryId);
+    }
 });
