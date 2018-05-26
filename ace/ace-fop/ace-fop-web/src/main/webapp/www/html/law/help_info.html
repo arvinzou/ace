@@ -166,6 +166,20 @@
             font-weight: bolder;
             color: #1A56A8;
         }
+        .reply{
+            width: 100%;
+            padding-top: 30px;
+            padding-botom:30px;
+        }
+        .reply h3{
+            font-size: 16px;
+            color: #1A56A8;
+            font-weight: bolder;
+        }
+        .reply p{
+            color: #657180;
+            font-size: 14px;
+        }
     </style>
 </head>
 
@@ -185,6 +199,10 @@
             <span class="title_lager">内容</span><span class="title_small">/&nbsp;Content</span>
         </div>
         <div class="content_info" ng-bind="info.content">
+        </div>
+        <div class="reply">
+            <h3>回复信息</h3>
+            <p ng-bind="info.reply"></p>
         </div>
     </div>
 </div>
