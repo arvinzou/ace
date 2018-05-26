@@ -200,6 +200,16 @@ app.controller(ngControllerName, function ($scope) {
             }
         });
     }
+
+    /**
+     * 查看企业风采详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('coinfo.html?id='+primaryId);
+    }
 });
 
 /*图片上传成功后*/
