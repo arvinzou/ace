@@ -13,7 +13,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findNoticeList",
         type:"post",
         async:false,
-        data:{"limit":pageSize, noticeType:noticeType, page: currentPage},
+        data:{"limit":pageSize, noticeType:noticeType, page: currentPage,  status: "2"},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -66,7 +66,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{"limit":pageSize, noticeType:noticeType, page: 1, title : key_word},
+            data:{"limit":pageSize, noticeType:noticeType, page: 1, title : key_word,  status: "2"},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -108,7 +108,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{"limit":pageSize, noticeType:noticeType, page: 1, sord : orderParam},
+            data:{"limit":pageSize, noticeType:noticeType, page: 1, sord : orderParam,  status: "2"},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -137,7 +137,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, title: key_word ,noticeType:noticeType},
+            data:{page:currentPage, limit: pageSize, title: key_word ,noticeType:noticeType,  status: "2"},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {
