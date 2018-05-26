@@ -7,13 +7,12 @@ var currentPage = 1;
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
-    // 初始化查询所有
-    noticeType = $("#noticeType").val();
+
     $.ajax({
         url: "/fop/www/findNoticeList",
         type:"post",
         async:false,
-        data:{"limit":pageSize, noticeType:noticeType, page: currentPage,  status: "2"},
+        data:{"limit":pageSize, page: currentPage},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -66,7 +65,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{"limit":pageSize, noticeType:noticeType, page: 1, title : key_word,  status: "2"},
+            data:{"limit":pageSize, page: 1, title : key_word},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -108,7 +107,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{"limit":pageSize, noticeType:noticeType, page: 1, sord : orderParam,  status: "2"},
+            data:{"limit":pageSize,  page: 1, sord : orderParam},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -137,7 +136,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, title: key_word ,noticeType:noticeType,  status: "2"},
+            data:{page:currentPage, limit: pageSize, title: key_word},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {
