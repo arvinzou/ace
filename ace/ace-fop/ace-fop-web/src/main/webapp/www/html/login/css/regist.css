@@ -27,6 +27,7 @@ body{
 	color: #565B70;
 	font-size: 16px;
 	font-weight: bolder;
+	overflow:hidden;
 }
 .regist_title_02{
 	width: 89%;
@@ -70,6 +71,7 @@ body{
 	text-align: center;
 	margin-bottom: 30px;
 	position: relative;
+	margin-right: 10%;
 }
 .company_member span{
 	display: block;
@@ -91,7 +93,6 @@ body{
 	width: 180px;
 	height: 100px;
 	float: left;
-	margin-left: 10%;
 	color: #657180;
 	text-align: center;
 	margin-bottom: 30px;
@@ -133,7 +134,4 @@ body{
 .appear{
 	display: block;
 }
-.footer{
-	position: fixed;
-	bottom: 0;
-}
+
