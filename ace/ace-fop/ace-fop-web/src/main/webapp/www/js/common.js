@@ -5,12 +5,12 @@ html.push("<div class=\"login\">");
 try{
     if(userProp){
         html.push("<span ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" target=\"_blank\">"+userProp.name+"</a></span>");
-        html.push("<span ng-if=\"userProp\"><a href=\"/portal/dynamic/portal/security/loginOut.jsp\">退出</a></span>");
+        html.push("<span ng-if=\"userProp\"><a href=\"/portal/dynamic/portal/security/loginOut_fop.jsp\">退出</a></span>");
     }else{
-        html.push("<span ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login.jsp\">登录</a></span>");
+        html.push("<span ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
     }
 }catch(e){
-    html.push("<span ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login.jsp\">登录</a></span>");
+    html.push("<span ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
 }
 
 html.push("<span>|</span>");
