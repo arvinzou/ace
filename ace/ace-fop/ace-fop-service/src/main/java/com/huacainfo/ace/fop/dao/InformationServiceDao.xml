@@ -261,7 +261,7 @@
         select m.* from(
         select
         <include refid="Base_Column_List_Vo"/>
-        <include refid="whereCondition_Vo"/>
+        <include refid="whereCondition"/>
         ) m
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -287,23 +287,8 @@
   </select>
 
     <sql id="whereCondition">
-        from information_service
-        where 0=0
-        <if test='condition.title!=null and condition.title!=""'>
-            and title like
-            concat('%',#{condition.title,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.modules!=null and condition.modules!=&quot;&quot;">
-            and modules =#{condition.modules,jdbcType=CHAR}
-        </if>
-        <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and status = #{condition.status,jdbcType=CHAR}
-        </if>
-    </sql>
-
-    <sql id="whereCondition_Vo">
         from information_service t
-        where 0=0
+        where t.status <![CDATA[ <> ]]> 0
         <if test='condition.title!=null and condition.title!=""'>
             and t.title like
             concat('%',#{condition.title,jdbcType=VARCHAR},'%')

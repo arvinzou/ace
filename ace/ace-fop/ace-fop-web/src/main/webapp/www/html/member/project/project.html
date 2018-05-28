@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html   ng-app="angularjsApp" ng-controller="angularjsCtrl">
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 <head>
     <meta charset="UTF-8">
     <title>会员中心-项目信息</title>
@@ -18,49 +18,57 @@
     <script type="text/javascript" src="js/project.js"></script>
 </head>
 <body>
-    <div class="box">
-        <div class="child_title">
-            <span class="child_title_1">我发布的项目</span>
-            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release">发布</a> </span>
-        </div>
-        <div style="clear: both;"></div>
-        <div class="menu-nav">
-            <ul>
-                <li><a href="#" ng-click="search();">全部</a> </li>
-                <li><a href="#" ng-click="search('1');">审核中</a> </li>
-                <li><a href="#" ng-click="search('2');">审核通过</a> </li>
-                <li><a href="#" ng-click="search('3');">审核未通过</a> </li>
-            </ul>
-            <div id="nav-content">
-                <div class="table-div" ng-repeat="item in items">
-                    <table border="0" class="info_list" cellspacing="0" cellpadding="0" style="table-layout:fixed">
-                        <tr class="tr_title">
-                            <td width="30%" class="info_title" ng-bind="item.projectName"></td>
-                            <td width="20%">
-                                <span class="info_status info_status2" ng-if="item.status == '1'">审核中</span>
-                                <span class="info_status info_status1" ng-if="item.status == '2'">审核通过</span>
-                                <span class="info_status info_status3" ng-if="item.status == '3'">审核未通过</span>
-                            </td>
-                            <td>&nbsp;</td>
-                            <td width="15%"><button id="update" data-toggle="modal" data-target="#myModal" ng-click="update_click($index);">编辑</button><button id="delete" ng-click="delete($index);">删除</button></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" id="content" style="word-wrap:break-word;height: 100px;text-overflow: ellipsis;overflow: hidden;" ng-bind="item.coopDesc">
+<div class="box">
+    <div class="child_title">
+        <span class="child_title_1">我发布的项目</span>
+        <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release">发布</a> </span>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="menu-nav">
+        <ul>
+            <li><a href="#" ng-click="search();">全部</a></li>
+            <li><a href="#" ng-click="search('1');">审核中</a></li>
+            <li><a href="#" ng-click="search('2');">审核通过</a></li>
+            <li><a href="#" ng-click="search('3');">审核未通过</a></li>
+        </ul>
+        <div id="nav-content">
+            <div class="table-div" ng-repeat="item in items">
+                <table border="0" class="info_list" cellspacing="0" cellpadding="0" style="table-layout:fixed">
+                    <tr class="tr_title">
+                        <td width="30%" class="info_title" ng-bind="item.projectName"></td>
+                        <td width="20%">
+                            <span class="info_status info_status2" ng-if="item.status == '1'">审核中</span>
+                            <span class="info_status info_status1" ng-if="item.status == '2'">审核通过</span>
+                            <span class="info_status info_status3" ng-if="item.status == '3'">审核未通过</span>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td width="15%">
+                            <button id="update" data-toggle="modal" data-target="#myModal"
+                                    ng-click="update_click($index);">编辑
+                            </button>
+                            <button id="delete" ng-click="delete($index);">删除</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" id="content"
+                            style="word-wrap:break-word;height: 100px;text-overflow: ellipsis;overflow: hidden;"
+                            ng-bind="item.coopDesc">
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="tr_title" ng-bind="item.releaseDate"></td>
-                        </tr>
-                    </table>
-             </div>
-                <div id="paganation"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="tr_title" ng-bind="item.releaseDate"></td>
+                    </tr>
+                </table>
             </div>
+            <div id="paganation"></div>
         </div>
     </div>
+</div>
 </body>
 
 <!--编辑模态框-->
+<!--
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -76,6 +84,7 @@
                             <td width="5%"></td>
                             <td><input type="text" ng-model="infoData.projectName"   onfocus="this.placeholder=''" /></td>
                         </tr>
+
                         <tr>
                             <td width="15%" align="right"><span class="required">*</span><span>合作方式</span></td>
                             <td width="5%"></td>
@@ -92,7 +101,7 @@
                         <tr>
                             <td width="15%" align="right"><span class="required">*</span><span>所属区域</span></td>
                             <td width="5%"></td>
-                            <td><input type="text" ng-model="infoData.areaCode"  /></td>
+                            <td><input type="text" ng-model="infoData.areaCode"/></td>
                         </tr>
                         <tr>
                             <td width="15%" align="right"><span>项目类型</span></td>
@@ -117,60 +126,102 @@
         </div>
     </div>
 </div>
+-->
 
-<!--发布模态框-->
-<div class="modal fade" id="myModal_release" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     data-backdrop="false">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel_release">发布项目</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">编辑项目信息</h4>
             </div>
             <div class="modal-body">
-                <div class="product_form">
-                    <table class="product_table" cellpadding="0" cellspacing="0" border="0">
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>项目名称</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" placeholder="请输入项目名称" name="projectName" onfocus="this.placeholder=''" onblur="this.placeholder='请输入项目名称'" /></td>
-                        </tr>
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>合作方式</span></td>
-                            <td width="5%"></td>
-                            <td>
-                                <select id="cooType">
-                                    <option value="">请选择合作方式</option>
-                                    <option value="1">投资合作</option>
-                                    <option value="2">合作开发</option>
-                                    <option value="3">出资+资源合作</option>
-                                    <option value="4">其他</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>所属区域</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" placeholder="请输入所属区域" name="area" onfocus="this.placeholder=''" onblur="this.placeholder='请输入所属区域'" /></td>
-                        </tr>
-                        <tr>
-                            <td width="15%" align="right"><span>项目类型</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" placeholder="请输入项目类型" name="projectType" onfocus="this.placeholder=''" onblur="this.placeholder='请输入项目类型'" /></td>
-                        </tr>
-                        <tr style="height: 186px;">
-                            <td width="15%" align="right" style="height: 186px;"><span>内容</span></td>
-                            <td width="5%" style="height: 186px;"></td>
-                            <td style="height: 186px;">
-                                <textarea name="pcontent" id="editor_release" placeholder="描述项目内容" onfocus="this.placeholder=''" onblur="this.placeholder='描述项目内容'"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center">
-                                <button class="submit" data-dismiss="modal" ng-click="release();">提交</button>
-                            </td>
-                        </tr>
-                    </table>
+                <div><label>项目名称</label><br/>
+                    <input class="input_style" type="text" ng-model="infoData.projectName"
+                           onfocus="this.placeholder=''"/></div>
+
+                <div><label>合作方式</label><br/>
+                    <select class="input_style" ng-model="infoData.coopType">
+                        <option value="">请选择合作方式</option>
+                        <option value="1">投资合作</option>
+                        <option value="2">合作开发</option>
+                        <option value="3">出资+资源合作</option>
+                        <option value="4">其他</option>
+                    </select>
                 </div>
+
+                <div><label>所属区域</label><br/>
+                    <input class="input_style" type="text" ng-model="infoData.areaCode"/></div>
+
+
+                <div><label>项目类型</label><br/>
+                    <input class="input_style" type="text" ng-model="infoData.projectType"/></div>
+
+
+                <div><label>项目内容</label><br/>
+                    <textarea id="editor"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="submit btn btn-primary" data-dismiss="modal"
+                        ng-click="update(infoData.id);">提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bs-example-modal-lg" id="myModal_release" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel"
+     data-backdrop="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel_release">发布项目信息</h4>
+            </div>
+            <div class="modal-body">
+                <div><label>项目名称</label><br/>
+                    <input class="input_style" type="text" placeholder="请输入项目名称" name="projectName"
+                           onfocus="this.placeholder=''" onblur="this.placeholder='请输入项目名称'"/></div>
+
+                <div><label>合作方式</label><br/>
+                    <select class="input_style" id="cooType">
+                        <option value="">请选择合作方式</option>
+                        <option value="1">投资合作</option>
+                        <option value="2">合作开发</option>
+                        <option value="3">出资+资源合作</option>
+                        <option value="4">其他</option>
+                    </select>
+                </div>
+
+                <div><label>所属区域</label><br/>
+                    <input class="input_style" type="text" placeholder="请输入所属区域" name="area"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='请输入所属区域'"/></div>
+
+
+                <div><label>项目类型</label><br/>
+                    <input class="input_style" type="text" placeholder="请输入项目类型" name="projectType"
+                           onfocus="this.placeholder=''" onblur="this.placeholder='请输入项目类型'"/></div>
+
+
+                <div><label>项目内容</label><br/>
+                    <textarea name="pcontent" id="editor_release" placeholder="描述项目内容"
+                              onfocus="this.placeholder=''" onblur="this.placeholder='描述项目内容'"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="submit btn btn-primary" data-dismiss="modal"
+                        ng-click="release();">提交
+                </button>
             </div>
         </div>
     </div>

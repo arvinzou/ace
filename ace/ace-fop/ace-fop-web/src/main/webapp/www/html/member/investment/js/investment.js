@@ -150,14 +150,17 @@ app.controller(ngControllerName,function($scope){
         editor.setValue($scope.infoData.content);
     }
     $scope.update = function(id){
+        var content = $("textarea[name='content']").val();
         $.ajax({
             url: "/fop/www/updateInformationServiceDo",
             type:"post",
             async:false,
-            data:{modules: "4", id: id, title: $scope.infoData.title, content: $scope.infoData.content},
+            data: {modules: "4", id: id, title: $scope.infoData.title, content: content},
             success:function(result){
                 if(result.status == 0) {
+                    $scope.search();
                     console.log(result);
+
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
