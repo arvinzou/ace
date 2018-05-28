@@ -2,6 +2,7 @@ package com.huacainfo.ace.portal.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -12,6 +13,8 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.dao.AppealCaseDao;
 import com.huacainfo.ace.portal.dao.AppealCaseFileDao;
+import com.huacainfo.ace.portal.dao.AppealDao;
+import com.huacainfo.ace.portal.model.Appeal;
 import com.huacainfo.ace.portal.model.AppealCase;
 import com.huacainfo.ace.portal.model.AppealCaseFile;
 import com.huacainfo.ace.portal.service.AppealCaseService;
@@ -49,7 +52,10 @@ public class AppealCaseServiceImpl implements AppealCaseService {
 
     @Autowired
     private SqlSessionTemplate sqlSession;
-
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
+    @Autowired
+    private AppealDao appealDao;
 
     /**
      * @throws
@@ -139,7 +145,43 @@ public class AppealCaseServiceImpl implements AppealCaseService {
             e.setType("1");
             this.appealCaseFileDao.insert(e);
         }
+
+        //企业发布诉求，通知管理员
+        sendNoticeToAdministrator(o);
+
         return new MessageResponse(0, "提交诉求完成！");
+    }
+
+    /**
+     * 企业发布诉求，通知管理员
+     *
+     * @param obj
+     */
+    private void sendNoticeToAdministrator(AppealCase obj) {
+        try {
+            Appeal appeal = appealDao.selectByPrimaryKey(obj.getAppealId());
+            if (null == appeal) {
+                logger.error("企业发布诉求[{}]，通知管理员异常：{}", obj.getId(), "诉求主题不存在");
+                return;
+            }
+            Map<String, Object> params = new HashMap<>();
+            //kafka所需内容
+            params.put("service", "messageTemplateService");
+            params.put("sysId", "fop");
+            params.put("tmplCode", appeal.getTplCode());//处理通知模板
+            //data
+            params.put("openid", appeal.getOpenId());
+            params.put("url", "www.baidu.com");
+//        params.put("first", "哈哈哈哈哈");
+            //data
+            params.put("appealContent", obj.getTitle());
+            params.put("dealResult", "待处理");
+            params.put("dealDate", DateUtil.getNow(DateUtil.DEFAULT_DATE_REGEX));
+            params.put("consultingTel", "400-12345678");
+            kafkaProducerService.sendMsg("topic.sys.msg", params);
+        } catch (Exception e) {
+            logger.error("企业发布诉求[{}]，通知管理员异常：{}", obj.getId(), e);
+        }
     }
 
     /**
@@ -179,7 +221,43 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         }
         this.dataBaseLogService.log("诉求答复", "诉求", o.getId(),
                 o.getId(), "诉求", userProp);
+
+        //管理员答复诉求，通知诉求人
+        sendNoticeToAppealPerson(o);
+
         return new MessageResponse(0, "完成！");
+    }
+
+    /**
+     * 管理员答复诉求，通知诉求人
+     *
+     * @param obj
+     */
+    private void sendNoticeToAppealPerson(AppealCase obj) {
+        try {
+            Appeal appeal = appealDao.selectByPrimaryKey(obj.getAppealId());
+            if (null == appeal) {
+                logger.error("企业发布诉求[{}]，通知管理员异常：{}", obj.getId(), "诉求主题不存在");
+                return;
+            }
+            Map<String, Object> params = new HashMap<>();
+            //kafka所需内容
+            params.put("service", "messageTemplateService");
+            params.put("sysId", "fop");
+            params.put("tmplCode", appeal.getAnswerTplCode());//答复通知模板
+            //data
+            params.put("openid", appeal.getOpenId());
+            params.put("url", "www.baidu.com");
+//        params.put("first", "哈哈哈哈哈");
+            //data
+            params.put("appealContent", obj.getTitle());
+            params.put("dealResult", "已完成");
+            params.put("dealDate", DateUtil.getNow(DateUtil.DEFAULT_DATE_REGEX));
+            params.put("consultingTel", "400-12345678");
+            kafkaProducerService.sendMsg("topic.sys.msg", params);
+        } catch (Exception e) {
+            logger.error("管理员答复诉求[{}]，通知诉求人异常：{}", obj.getId(), e);
+        }
     }
 
     /**
@@ -353,8 +431,11 @@ public class AppealCaseServiceImpl implements AppealCaseService {
 
         obj.setAnswerTime(new Date());
         this.appealCaseDao.updateByPrimaryKey(obj);
-
         this.dataBaseLogService.log("诉求答复", "诉求", obj.getId(), obj.getId(), "诉求", userProp);
+
+
+        //管理员答复诉求，通知诉求人
+        sendNoticeToAppealPerson(obj);
         return new MessageResponse(0, "完成！");
     }
 
