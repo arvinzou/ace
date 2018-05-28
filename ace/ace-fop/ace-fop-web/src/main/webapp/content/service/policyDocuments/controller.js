@@ -108,8 +108,6 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
-                        loadText(gd.id);
-                        appendUploadBtn("fileUrl");
                     }
                 })
         });
