@@ -26,7 +26,7 @@
                 <form action="#" id="fm-search">
                     类别：<input name="category" class="easyui-combobox" style="width: 200px"
                               data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=141&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
@@ -60,10 +60,7 @@
     </div>
 
     <table id="grid-table"></table>
-
     <div id="grid-pager"></div>
-
-
 </div>
 <div id="dialog-message" class="hide">
     <div id="uploader">
