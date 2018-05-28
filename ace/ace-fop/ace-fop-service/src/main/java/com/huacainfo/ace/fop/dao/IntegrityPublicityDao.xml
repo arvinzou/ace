@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.fop.dao.InformationServiceDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.InformationService">
+<mapper namespace="com.huacainfo.ace.fop.dao.IntegrityPublicityDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.IntegrityPublicity">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
         <result column="relationType" jdbcType="CHAR" property="relationType"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="fileUrl" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
-        <result column="click" jdbcType="BIGINT" property="click"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="alternateFields1" jdbcType="CHAR" property="alternateFields1"/>
+        <result column="alternateFields2" jdbcType="CHAR" property="alternateFields2"/>
         <result column="status" jdbcType="CHAR" property="status"/>
-        <result column="modules" jdbcType="CHAR" property="modules"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
@@ -19,21 +19,13 @@
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.fop.model.InformationService">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.fop.model.IntegrityPublicity">
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
-
-    <!--
-    1、企业风采
-    2、企业产品
-    3、人才信息
-    4、招商信息
-    5、政策文件
-    6、品牌推广
-    -->
     <sql id="Base_Column_List">
-    id, relationId, relationType, title, content,fileUrl, releaseDate, click, remark, status, modules,
-    createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    id, relationId, relationType, title, category, releaseDate, remark, alternateFields1, 
+    alternateFields2, status, createUserId, createUserName, createDate, lastModifyUserId, 
+    lastModifyUserName, lastModifyDate
   </sql>
     <sql id="Blob_Column_List">
     content
@@ -43,29 +35,29 @@
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from information_service
+        from integrity_publicity
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from information_service
+    delete from integrity_publicity
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.InformationService">
-    insert into information_service (id, relationId, relationType, 
-      title, fileUrl, releaseDate, 
-      click, remark, status, modules,
-      createUserId, createUserName, createDate, 
-      lastModifyUserId, lastModifyUserName, lastModifyDate, 
-      content)
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.IntegrityPublicity">
+    insert into integrity_publicity (id, relationId, relationType, 
+      title, category, releaseDate, 
+      remark, alternateFields1, alternateFields2, 
+      status, createUserId, createUserName, 
+      createDate, lastModifyUserId, lastModifyUserName, 
+      lastModifyDate, content)
     values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR}, 
-      #{title,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
-      #{click,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{modules,jdbcType=CHAR},
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{title,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{alternateFields1,jdbcType=CHAR}, #{alternateFields2,jdbcType=CHAR}, 
+      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.InformationService">
-        insert into information_service
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.IntegrityPublicity">
+        insert into integrity_publicity
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -79,23 +71,23 @@
             <if test="title != null">
                 title,
             </if>
-            <if test="fileUrl != null">
-                fileUrl,
+            <if test="category != null">
+                category,
             </if>
             <if test="releaseDate != null">
                 releaseDate,
             </if>
-            <if test="click != null">
-                click,
-            </if>
             <if test="remark != null">
                 remark,
             </if>
+            <if test="alternateFields1 != null">
+                alternateFields1,
+            </if>
+            <if test="alternateFields2 != null">
+                alternateFields2,
+            </if>
             <if test="status != null">
                 status,
-            </if>
-            <if test="modules != null">
-                modules,
             </if>
             <if test="createUserId != null">
                 createUserId,
@@ -132,23 +124,23 @@
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
             </if>
-            <if test="fileUrl != null">
-                #{fileUrl,jdbcType=VARCHAR},
+            <if test="category != null">
+                #{category,jdbcType=CHAR},
             </if>
             <if test="releaseDate != null">
                 #{releaseDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="click != null">
-                #{click,jdbcType=BIGINT},
-            </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
+            <if test="alternateFields1 != null">
+                #{alternateFields1,jdbcType=CHAR},
+            </if>
+            <if test="alternateFields2 != null">
+                #{alternateFields2,jdbcType=CHAR},
+            </if>
             <if test="status != null">
                 #{status,jdbcType=CHAR},
-            </if>
-            <if test="modules != null">
-                #{modules,jdbcType=CHAR},
             </if>
             <if test="createUserId != null">
                 #{createUserId,jdbcType=VARCHAR},
@@ -173,8 +165,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.InformationService">
-        update information_service
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.IntegrityPublicity">
+        update integrity_publicity
         <set>
             <if test="relationId != null">
                 relationId = #{relationId,jdbcType=VARCHAR},
@@ -185,23 +177,23 @@
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="fileUrl != null">
-                fileUrl = #{fileUrl,jdbcType=VARCHAR},
+            <if test="category != null">
+                category = #{category,jdbcType=CHAR},
             </if>
             <if test="releaseDate != null">
                 releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="click != null">
-                click = #{click,jdbcType=BIGINT},
-            </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
+            <if test="alternateFields1 != null">
+                alternateFields1 = #{alternateFields1,jdbcType=CHAR},
+            </if>
+            <if test="alternateFields2 != null">
+                alternateFields2 = #{alternateFields2,jdbcType=CHAR},
+            </if>
             <if test="status != null">
                 status = #{status,jdbcType=CHAR},
-            </if>
-            <if test="modules != null">
-                modules = #{modules,jdbcType=CHAR},
             </if>
             <if test="createUserId != null">
                 createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -227,17 +219,17 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.InformationService">
-    update information_service
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.IntegrityPublicity">
+    update integrity_publicity
     set relationId = #{relationId,jdbcType=VARCHAR},
       relationType = #{relationType,jdbcType=CHAR},
       title = #{title,jdbcType=VARCHAR},
-      fileUrl = #{fileUrl,jdbcType=VARCHAR},
+      category = #{category,jdbcType=CHAR},
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
-      click = #{click,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
+      alternateFields1 = #{alternateFields1,jdbcType=CHAR},
+      alternateFields2 = #{alternateFields2,jdbcType=CHAR},
       status = #{status,jdbcType=CHAR},
-      modules = #{modules,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP},
@@ -249,19 +241,18 @@
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
-        <include refid="Base_Column_List_Vo"/>
-        from information_service t
+        <include refid="Base_Column_List"/>
+        from integrity_publicity
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
     <resultMap extends="BaseResultMap" id="BaseResultMapVo"
-               type="com.huacainfo.ace.fop.vo.InformationServiceVo"></resultMap>
+               type="com.huacainfo.ace.fop.vo.IntegrityPublicityVo"></resultMap>
 
     <select id="findList" resultMap="BaseResultMapVo">
         select m.* from(
         select
-        <include refid="Base_Column_List_Vo"/>
-        from information_service t
+        <include refid="Base_Column_List"/>
         <include refid="whereCondition"/>
         ) m
         <choose>
@@ -277,40 +268,37 @@
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
-        from information_service t
         <include refid="whereCondition"/>
     </select>
 
     <select id="isExit" resultType="int">
     select count(*)
-    from information_service
+    from integrity_publicity
     where
     title=#{title}
   </select>
 
     <sql id="whereCondition">
-        where t.status <![CDATA[ <> ]]> 0
+        from integrity_publicity
+        where status <![CDATA[ <> ]]> 0
         <if test='condition.title!=null and condition.title!=""'>
-            and t.title like
+            and title like
             concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.modules!=null and condition.modules!=&quot;&quot;">
-            and t.modules =#{condition.modules,jdbcType=CHAR}
-        </if>
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and t.status = #{condition.status,jdbcType=CHAR}
+            and status = #{condition.status,jdbcType=CHAR}
         </if>
-    </sql>
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and category = #{condition.category,jdbcType=CHAR}
+        </if>
+        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
 
-    <sql id="Base_Column_List_Vo">
-        CASE
-        WHEN t.relationType='0'
-         THEN (select fullName from fop_company where id = t.relationId)
-        WHEN t.relationType='1'
-         THEN (select fullName from fop_association where id = t.relationId)
-        END companyName,
-        t.id, t.relationId, t.relationType, t.title, t.content,t.fileUrl, t.releaseDate, t.click, t.remark, t.status, t.modules,
-        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
     </sql>
-
 </mapper>

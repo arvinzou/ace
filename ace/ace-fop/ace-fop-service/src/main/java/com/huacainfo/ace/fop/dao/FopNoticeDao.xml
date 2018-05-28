@@ -275,7 +275,7 @@
 
     <sql id="whereCondition">
         from fop_notice
-        where 0=0
+        where status <![CDATA[ <> ]]> 0
         <if test='condition.title!=null and condition.title!=""'>
             and title like
             concat('%',#{condition.title,jdbcType=VARCHAR},'%')
