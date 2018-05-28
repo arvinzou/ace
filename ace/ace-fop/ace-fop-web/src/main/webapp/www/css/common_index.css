@@ -2,6 +2,9 @@
 	margin: 0;
 	padding: 0;
 }
+li{
+    cursor: pointer;
+}
 ul,li{
 	text-decoration: none;
 }
@@ -542,3 +545,8 @@ body{
 	display: inline-block;
 	background-color: #FF9F00;
 }
+.weixin{position:relative;}
+.weixin_nr{width:100px; height:120px; padding:10px; background:#fff; text-align:center; position:absolute; left:30%; top:45px; display:none;}
+.weixin_nr img{ margin-bottom:5px;}
+.weixin_nr .arrow{ width:0; height:0; border-bottom:10px solid #fff;border-left:10px solid transparent;border-right:10px solid transparent; position:absolute; left:50px; top:-10px;}
+.weixin.on .weixin_nr{ display:block;}
