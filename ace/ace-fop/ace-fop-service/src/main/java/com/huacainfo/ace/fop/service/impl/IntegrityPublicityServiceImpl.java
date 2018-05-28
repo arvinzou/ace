@@ -2,8 +2,12 @@ package com.huacainfo.ace.fop.service.impl;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,17 +57,24 @@ public class IntegrityPublicityServiceImpl implements IntegrityPublicityService 
     public PageResult
             <IntegrityPublicityVo> findIntegrityPublicityList(IntegrityPublicityQVo condition, int start,
                                                               int limit, String orderBy) throws Exception {
-        PageResult
-                <IntegrityPublicityVo> rst = new PageResult
+        PageResult<IntegrityPublicityVo> rst = new PageResult
                 <IntegrityPublicityVo>();
-        List
-                <IntegrityPublicityVo> list = this.integrityPublicityDao.findList(condition,
+        List<IntegrityPublicityVo> list = this.integrityPublicityDao.findList(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.integrityPublicityDao.findCount(condition);
             rst.setTotal(allRows);
         }
+        return rst;
+    }
+
+    @Override
+    public ResultResponse findIntegrityPublicityListDo(IntegrityPublicityQVo condition, int page, int limit, String orderBy) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.integrityPublicityDao.findList(condition, (page - 1) * limit, limit, orderBy));
+        map.put("total", this.integrityPublicityDao.findCount(condition));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "诚信公示列表", map);
         return rst;
     }
 

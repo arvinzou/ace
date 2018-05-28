@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.IntegrityPublicity;
 import com.huacainfo.ace.fop.vo.IntegrityPublicityVo;
@@ -28,9 +29,9 @@ public interface IntegrityPublicityService {
      * @author: huacai003
      * @version: 2018-05-28
      */
-    PageResult
-            <IntegrityPublicityVo> findIntegrityPublicityList(IntegrityPublicityQVo condition, int start, int limit, String orderBy) throws
-            Exception;
+    PageResult<IntegrityPublicityVo> findIntegrityPublicityList(IntegrityPublicityQVo condition, int start, int limit, String orderBy) throws Exception;
+
+    ResultResponse findIntegrityPublicityListDo(IntegrityPublicityQVo condition, int page, int limit, String orderBy) throws Exception;
 
     /**
      * @throws

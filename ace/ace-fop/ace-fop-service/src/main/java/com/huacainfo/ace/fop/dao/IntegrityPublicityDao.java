@@ -23,11 +23,10 @@ public interface IntegrityPublicityDao {
 
     IntegrityPublicityVo selectVoByPrimaryKey(String id);
 
-    List
-            <IntegrityPublicityVo> findList(@Param("condition") IntegrityPublicityQVo condition,
-                                            @Param("start") int start,
-                                            @Param("limit") int limit,
-                                            @Param("orderBy") String orderBy);
+    List<IntegrityPublicityVo> findList(@Param("condition") IntegrityPublicityQVo condition,
+                                        @Param("start") int start,
+                                        @Param("limit") int limit,
+                                        @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") IntegrityPublicityQVo condition);
 
