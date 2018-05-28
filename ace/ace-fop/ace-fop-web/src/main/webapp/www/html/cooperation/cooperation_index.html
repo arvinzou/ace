@@ -18,7 +18,20 @@
 		<script type="text/javascript" src="filter/Filter.js"></script>
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="js/Popt.js"></script>
+		<script type="text/javascript" src="js/city.json.js"></script>
+		<script type="text/javascript" src="js/citySet.js"></script>
 		<script type="text/javascript" src="js/cooperation.js"></script>
+		<script type="text/javascript">
+            $(function() {
+                $("#city").click(function (e) {
+                    SelCity(this,e);
+                });
+                $("s").click(function (e) {
+                    SelCity(document.getElementById("city"),e);
+                });
+            });
+		</script>
 	</head>
 
 	<body>
@@ -44,7 +57,10 @@
 						<div class="search_combox">
 							<div class="search_box">
 								<div style="width: 12%;float: left;">精准搜索：</div>
-								<div style="width: 88%;float: left;"><input type="text" id="financeTitle" placeholder="请输入关键字搜索" /><button style="width:50px;border:none;background-color: #1A56A8;color: #FFFFFF;" ng-click="searchByParam();">搜索</button></div>
+								<div style="width: 88%;float: left;height: 35px;">
+									<input type="text" id="financeTitle" placeholder="请输入关键字搜索"/>
+									<button class="searchButton" ng-click="searchByParam();">搜索</button>
+								</div>
 							</div>
 							<div style="clear: both;"></div>
 							<div class="search_filter1">
@@ -56,9 +72,16 @@
 								<div class="filter_title2">项目阶段：</div>
 								<div id="projectStep"></div>
 							</div>
+							<div style="clear: both;"></div>
+							<div class="search_filter2">
+								<div class="filter_title2">所属区域：</div>
+								<div class="wrap"><input class="input" name="" id="city" type="text" placeholder="请选择" autocomplete="off" readonly="true"/></div>
+							</div>
+							<div style="clear: both;"></div>
 							<div class="search_filter2">
 								<div class="filter_title2">排序：</div>
-								<div id="sord"></div>
+								<div class="search_left" ng-click="sortList('asc');"  id="asc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-up" style="color: #1A56A8;"></span></div>
+								<div class="search_left" ng-click="sortList('desc');" hidden="true" id = "desc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-down" style="color: #1A56A8;"></span></div>
 							</div>
 						</div>
 					</div>

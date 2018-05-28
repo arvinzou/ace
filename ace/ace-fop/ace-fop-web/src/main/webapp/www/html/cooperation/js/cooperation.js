@@ -6,28 +6,41 @@ var currentPage = 1;
 var app =angular.module(ngAppName, []);
 var cotype = null;
 var costep = null;
-var cosord = null;
 
 //合作方式
 var data_cotype = [{
-    "id": "1",
-    "text": "股份制"
+        "id": "1",
+        "text": "投资合作"
+    },
+    {
+        "id":"2",
+        "text":"合作开发"
+    },
+    {
+        "id":"3",
+        "text":"出资+资源合作"
+    },
+    {
+        "id":"4",
+        "text":"其他"
     }
 ];
 
 //项目阶段
-var data_costep = [{
-    "id": "1",
-    "text": "种子轮"
-}
-];
-//排序
-var  data_sord=[
+var data_costep = [
     {
-        "id":"desc",
-        "text":"发布时间降序"
+        "id": "1",
+        "text": "启动期"
+    },
+    {
+        "id": "2",
+        "text": "计划期"
+    },
+    {
+        "id": "3",
+        "text": "执行期"
     }
-]
+];
 app.controller(ngControllerName,function($scope){
     try{
         $scope.userProp = userProp;
@@ -50,15 +63,6 @@ app.controller(ngControllerName,function($scope){
         onChange: function(newValue) {
             costep = newValue;
             console.log(costep);
-        }
-    });
-    $('#sord').comboboxfilter({
-        url: '',
-        scope: 'FilterQuery1',
-        data: data_sord,
-        onChange: function(newValue) {
-            cosord = newValue;
-            console.log(cosord);
         }
     });
 
@@ -234,11 +238,13 @@ app.controller(ngControllerName,function($scope){
      * 根据条件进行检索
      */
     $scope.searchByParam = function(){
+        var key_word = $("#financeTitle").val();
+
         $.ajax({
             url: "/fop/www/findProjectList",
             type: "post",
             async: false,
-            data: {limit: pageSize, page: currentPage, status: "2"},
+            data: {limit: pageSize, page: currentPage, status: "2", projectName: key_word, coopType: cotype, areaCode: areaCode, process: costep},
             success: function (result) {
                 if (result.status == 0) {
                     $scope.items = result.data.list;
@@ -274,6 +280,48 @@ app.controller(ngControllerName,function($scope){
             },
             error: function () {
                 alert("内部服务异常");
+            }
+        });
+    }
+
+    /**
+     * 列表排序
+     */
+    $scope.sortList = function(name){
+        var flag = name;
+        var orderParam = "";
+        if(flag == 'asc'){
+            orderParam = 'asc';
+            $("#"+flag).hide();
+            $("#desc").show();
+        }else{
+            orderParam = 'desc';
+            $("#"+flag).hide();
+            $("#asc").show();
+        }
+        $.ajax({
+            url: "/fop/www/findProjectList",
+            type:"post",
+            async:false,
+            data:{"limit":pageSize,  page: 1, sord : orderParam, status: "2"},
+            success:function(result){
+                if(result.status == 0) {
+                    $scope.items = result.data.list;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error:function(){
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
         });
     }
