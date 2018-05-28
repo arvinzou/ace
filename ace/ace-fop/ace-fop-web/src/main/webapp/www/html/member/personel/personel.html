@@ -62,72 +62,54 @@
 
 <!--编辑模态框-->
 <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
+     data-backdrop="false">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="myModalLabel">编辑人才信息</h4>
             </div>
             <div class="modal-body">
-                <div class="product_form">
-                    <table class="product_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>职位名称</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text"  name="postname"  ng-model="infoData.title"/></td>
-                        </tr>
-                        <tr style="height: 186px;">
-                            <td width="15%" align="right" style="height: 186px;"><span>具体内容</span></td>
-                            <td width="5%" style="height: 186px;"></td>
-                            <td style="height: 300px;">
-                                <textarea name="content" id="editor"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center">
-                                <button class="submit" data-dismiss="modal" ng-click="update(infoData.id);">提交</button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                <div><label>职位名称</label><br/>
+                    <input class="input_style" type="text" name="postname" ng-model="infoData.title"/></div>
+                <div><label>具体内容</label><br/>
+                    <textarea name="content" id="editor"></textarea></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="submit btn btn-primary" data-dismiss="modal"
+                        ng-click="update(infoData.id);">提交
+                </button>
             </div>
         </div>
     </div>
 </div>
 
+
 <!--发布模态框-->
-<div class="modal fade" id="myModal_release" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="myModal_release" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-backdrop="false">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="myModalLabel_release">发布人才信息</h4>
             </div>
             <div class="modal-body">
-                <div class="product_form">
-                    <table class="product_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>职位名称</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text"  name="pname" /></td>
-                        </tr>
-                        <tr style="height: 186px;">
-                            <td width="15%" align="right" style="height: 186px;"><span>具体内容</span></td>
-                            <td width="5%" style="height: 186px;"></td>
-                            <td style="height: 300px;">
-                                <textarea name="pcontent" id="editor_release"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center">
-                                <button class="submit" data-dismiss="modal" ng-click="release();">发布</button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                <div><label>职位名称</label><br>
+                    <input class="input_style" type="text" name="pname" ng-model="infoData.title"/></div>
+                <div><label>具体内容</label><br>
+                    <textarea name="pcontent" id="editor_release"></textarea></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="submit btn btn-primary" data-dismiss="modal" ng-click="release();">提交
+                </button>
             </div>
         </div>
     </div>
 </div>
+
 </html>
