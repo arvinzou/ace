@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-    <title>企业产品</title>
+    <title>品牌推广</title>
     <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css"/>
@@ -29,7 +29,7 @@
             <div class="title01">
                 <span class="title_lager">品牌推广</span><span class="title_small">/&nbsp;Enterprise Style</span>
             </div>
-            <div class="product_container" ng-repeat="item in items">
+            <div class="product_container" ng-repeat="item in items" ng-click="showBrand($index);">
                 <div class="content_container">
                     <div class="img_container">
                         <img src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
