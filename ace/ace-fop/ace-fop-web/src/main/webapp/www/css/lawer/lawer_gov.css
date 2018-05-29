@@ -179,3 +179,8 @@ body {
 .glyphicon{
 	top:0;
 }
+.sincerity_type{
+	position: absolute;
+	right: 10px;
+	top: 20px;
+}

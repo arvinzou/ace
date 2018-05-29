@@ -6,6 +6,7 @@
         <result column="companyName" jdbcType="VARCHAR" property="companyName"/>
         <result column="relationType" jdbcType="CHAR" property="relationType"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="category" jdbcType="CHAR" property="category"/>
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -23,7 +24,7 @@
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, companyName, relationType, title, category, releaseDate, remark, alternateFields1,
+        id, companyName, relationType, content, title, category, releaseDate, remark, alternateFields1,
     alternateFields2, status, createUserId, createUserName, createDate, lastModifyUserId, 
     lastModifyUserName, lastModifyDate
   </sql>
