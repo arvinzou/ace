@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.IntegrityPublicityDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.IntegrityPublicity">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
+        <result column="companyName" jdbcType="VARCHAR" property="companyName"/>
         <result column="relationType" jdbcType="CHAR" property="relationType"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="category" jdbcType="CHAR" property="category"/>
@@ -23,7 +23,7 @@
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, relationId, relationType, title, category, releaseDate, remark, alternateFields1, 
+        id, companyName, relationType, title, category, releaseDate, remark, alternateFields1,
     alternateFields2, status, createUserId, createUserName, createDate, lastModifyUserId, 
     lastModifyUserName, lastModifyDate
   </sql>
@@ -43,13 +43,13 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.IntegrityPublicity">
-    insert into integrity_publicity (id, relationId, relationType, 
+        insert into integrity_publicity (id, companyName, relationType,
       title, category, releaseDate, 
       remark, alternateFields1, alternateFields2, 
       status, createUserId, createUserName, 
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate, content)
-    values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR}, 
+        values (#{id,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR},
       #{title,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
       #{remark,jdbcType=VARCHAR}, #{alternateFields1,jdbcType=CHAR}, #{alternateFields2,jdbcType=CHAR}, 
       #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
@@ -62,8 +62,8 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="relationId != null">
-                relationId,
+            <if test="companyName != null">
+                companyName,
             </if>
             <if test="relationType != null">
                 relationType,
@@ -115,8 +115,8 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="relationId != null">
-                #{relationId,jdbcType=VARCHAR},
+            <if test="companyName != null">
+                #{companyName,jdbcType=VARCHAR},
             </if>
             <if test="relationType != null">
                 #{relationType,jdbcType=CHAR},
@@ -168,8 +168,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.IntegrityPublicity">
         update integrity_publicity
         <set>
-            <if test="relationId != null">
-                relationId = #{relationId,jdbcType=VARCHAR},
+            <if test="companyName != null">
+                companyName = #{companyName,jdbcType=VARCHAR},
             </if>
             <if test="relationType != null">
                 relationType = #{relationType,jdbcType=CHAR},
@@ -221,7 +221,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.IntegrityPublicity">
     update integrity_publicity
-    set relationId = #{relationId,jdbcType=VARCHAR},
+        set companyName = #{companyName,jdbcType=VARCHAR},
       relationType = #{relationType,jdbcType=CHAR},
       title = #{title,jdbcType=VARCHAR},
       category = #{category,jdbcType=CHAR},

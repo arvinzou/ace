@@ -57,10 +57,8 @@ public class IntegrityPublicityServiceImpl implements IntegrityPublicityService 
     public PageResult
             <IntegrityPublicityVo> findIntegrityPublicityList(IntegrityPublicityQVo condition, int start,
                                                               int limit, String orderBy) throws Exception {
-        PageResult<IntegrityPublicityVo> rst = new PageResult
-                <IntegrityPublicityVo>();
-        List<IntegrityPublicityVo> list = this.integrityPublicityDao.findList(condition,
-                start, start + limit, orderBy);
+        PageResult<IntegrityPublicityVo> rst = new PageResult<IntegrityPublicityVo>();
+        List<IntegrityPublicityVo> list = this.integrityPublicityDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.integrityPublicityDao.findCount(condition);
@@ -91,9 +89,7 @@ public class IntegrityPublicityServiceImpl implements IntegrityPublicityService 
      */
     @Override
     public MessageResponse insertIntegrityPublicity(IntegrityPublicity o, UserProp userProp) throws Exception {
-
-
-        if (CommonUtils.isBlank(o.getRelationId())) {
+        if (CommonUtils.isBlank(o.getCompanyName())) {
             return new MessageResponse(1, "关联ID不能为空！");
         }
         if (CommonUtils.isBlank(o.getRelationType())) {
@@ -122,7 +118,6 @@ public class IntegrityPublicityServiceImpl implements IntegrityPublicityService 
         this.integrityPublicityDao.insertSelective(o);
         this.dataBaseLogService.log("添加诚信公示", "诚信公示", "",
                 o.getId(), o.getId(), userProp);
-
         return new MessageResponse(0, "添加诚信公示完成！");
     }
 
@@ -142,11 +137,8 @@ public class IntegrityPublicityServiceImpl implements IntegrityPublicityService 
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getRelationId())) {
+        if (CommonUtils.isBlank(o.getCompanyName())) {
             return new MessageResponse(1, "关联ID不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getRelationType())) {
-            return new MessageResponse(1, "关联类型不能为空！");
         }
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");

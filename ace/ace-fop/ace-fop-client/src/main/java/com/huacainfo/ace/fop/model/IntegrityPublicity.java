@@ -11,7 +11,7 @@ public class IntegrityPublicity implements Serializable {
     private static final long serialVersionUID = -7991309151309065356L;
     private String id;
 
-    private String relationId;
+    private String companyName;
 
     private String relationType;
 
@@ -51,12 +51,12 @@ public class IntegrityPublicity implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getRelationId() {
-        return relationId;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setRelationId(String relationId) {
-        this.relationId = relationId == null ? null : relationId.trim();
+    public void setCompanyName(String relationId) {
+        this.companyName = relationId == null ? null : relationId.trim();
     }
 
     public String getRelationType() {
