@@ -144,4 +144,14 @@ app.controller(ngControllerName,function($scope){
             }
         });
     }
+
+    /**
+     * 查看诚信公示详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('sincerity_info.html?id='+primaryId);
+    }
 });

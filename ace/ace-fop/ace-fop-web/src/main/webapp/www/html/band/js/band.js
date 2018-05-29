@@ -85,4 +85,10 @@ app.controller(ngControllerName,function($scope){
             });
         }
     }
+
+    $scope.showBrand = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('band_info.html?id='+primaryId);
+    }
 });
