@@ -15,6 +15,7 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
+import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopPayRecord;
 import com.huacainfo.ace.fop.model.FopPerson;
@@ -423,4 +424,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         rst.put("rows", list);
         return rst;
     }
+
+    @Override
+    public FopCompany selectByDepartmentId(String departmentId) throws Exception {
+        return fopCompanyDao.selectByDepartmentId(departmentId);
+    }
+
 }

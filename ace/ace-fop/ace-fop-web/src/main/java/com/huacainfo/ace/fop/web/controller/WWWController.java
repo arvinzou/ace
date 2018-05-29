@@ -8,9 +8,14 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
+import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.UsersVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +66,9 @@ public class WWWController extends FopBaseController {
 
     @Autowired
     private IntegrityPublicityService integrityPublicityService;
+
+    @Autowired
+    private UsersService usersService;
 
 
     /**
@@ -746,11 +754,41 @@ public class WWWController extends FopBaseController {
     }
 
 
+    /**
+     * 获取诚信公告列表
+     *
+     * @param condition
+     * @param page
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/findIntegrityPublicityListDo")
     @ResponseBody
     public ResultResponse findIntegrityPublicityList(IntegrityPublicityQVo condition, PageParamNoChangeSord page) throws Exception {
         ResultResponse rst = this.integrityPublicityService.findIntegrityPublicityListDo(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
+    }
+
+    @RequestMapping(value = "/organizationType")
+    @ResponseBody
+    public ResultResponse organizationType() throws Exception {
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(this.getCurUserProp().getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new ResultResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new ResultResponse(1, "账户没有绑定企业！");
+        }
+        FopAssociation fa = fopAssociationService.selectByDepartmentId(user.getDepartmentId());
+        FopCompany fc = fopCompanyService.selectByDepartmentId(user.getDepartmentId());
+        if (null != fa) {
+            return new ResultResponse(ResultCode.SUCCESS, "团体账户", 1);
+        } else if (null != fc) {
+            return new ResultResponse(ResultCode.SUCCESS, "企业账号", 2);
+        }
+        return new ResultResponse(1, "账户没有绑定企业！");
+
     }
 
 }

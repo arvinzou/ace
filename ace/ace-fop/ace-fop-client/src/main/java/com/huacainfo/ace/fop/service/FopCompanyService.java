@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
 
@@ -94,6 +95,8 @@ public interface FopCompanyService {
 
 
     public Map<String, Object> selectCompany(Map<String, Object> params) throws Exception;
+
+    FopCompany selectByDepartmentId(String departmentId) throws Exception;
 
 
 }
