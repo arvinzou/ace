@@ -174,7 +174,7 @@ public class CommonUtils extends StringUtils {
     public static boolean isValidMobile(String paramStr) {
         String str = paramStr;
         String check = "^0?1[3,5][0-9]\\d{8}$";
-        check = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+        check = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
         Pattern regex = Pattern.compile(check);
         Matcher matcher = regex.matcher(str);
         boolean isMatched = matcher.matches();

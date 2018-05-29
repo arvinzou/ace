@@ -142,6 +142,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
      */
     @Override
     public MessageResponse insertFopCompany(FopCompanyVo o, UserProp userProp) throws Exception {
+        if (!CommonUtils.isValidMobile(o.getLpMobile())) {
+            return new MessageResponse(ResultCode.FAIL, "不是手机号码");
+        }
+
         //设置主键标识
         o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getFullName())) {
@@ -196,6 +200,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
     @Override
     public MessageResponse insertCompany(String fullName, String lpMobile) throws Exception {
+        if (!CommonUtils.isValidMobile(lpMobile)) {
+            return new MessageResponse(ResultCode.FAIL, "不是手机号码");
+        }
         FopCompanyVo o = new FopCompanyVo();
         o.setFullName(fullName);
         o.setLpMobile(lpMobile);

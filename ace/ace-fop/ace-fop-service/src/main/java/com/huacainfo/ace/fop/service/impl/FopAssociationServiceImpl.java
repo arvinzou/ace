@@ -93,6 +93,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
     @Override
     public MessageResponse insertFopAssociation(FopAssociation o, UserProp userProp)
             throws Exception {
+        if (!CommonUtils.isValidMobile(o.getPhoneNumber())) {
+            return new MessageResponse(ResultCode.FAIL, "不是手机号码");
+        }
         if (CommonUtils.isBlank(o.getFullName())) {
             return new MessageResponse(1, "协会全称不能为空！");
         }
@@ -269,6 +272,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
 
     @Override
     public MessageResponse insertAssociation(String name, String phoneNumber) throws Exception {
+        if (!CommonUtils.isValidMobile(phoneNumber)) {
+            return new MessageResponse(ResultCode.FAIL, "不是手机号码");
+        }
         FopAssociation o = new FopAssociation();
         o.setFullName(name);
         o.setPhoneNumber(phoneNumber);

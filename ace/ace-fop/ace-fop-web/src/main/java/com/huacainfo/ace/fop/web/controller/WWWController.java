@@ -815,6 +815,4 @@ public class WWWController extends FopBaseController {
     public ResultResponse selectIntegrityPublicityByPrimaryKey(String id) throws Exception {
         return this.integrityPublicityService.selectIntegrityPublicityByPrimaryKeyDo(id);
     }
-
-
 }
