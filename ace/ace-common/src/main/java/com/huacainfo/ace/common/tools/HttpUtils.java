@@ -300,7 +300,7 @@ public class HttpUtils {
 		JSONObject p=new JSONObject();
 		//p.put("access_token","9_lWtH0NqTR9mkO_g-e7s9sZtsmr4PryiU1DirS90vV9qVmjQCuvaFbtzNKbPh_QoAe_WHLyMfBJQmiTlJz_9k6mdBd4B0CD9iGeEYYYBOMJIWNqXh4Yjhh7tHEB0NUKcAHAHOE");
 		p.put("scene","0987654321");
-		p.put("page","page/search/index");
+		p.put("page","page/home/index");
         //System.out.println(HttpUtils.sslPost("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=9_lWtH0NqTR9mkO_g-e7s9sZtsmr4PryiU1DirS90vV9qVmjQCuvaFbtzNKbPh_QoAe_WHLyMfBJQmiTlJz_9k6mdBd4B0CD9iGeEYYYBOMJIWNqXh4Yjhh7tHEB0NUKcAHAHOE", p, "utf-8"));
 		String url="https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=9_lWtH0NqTR9mkO_g-e7s9sZtsmr4PryiU1DirS90vV9qVmjQCuvaFbtzNKbPh_QoAe_WHLyMfBJQmiTlJz_9k6mdBd4B0CD9iGeEYYYBOMJIWNqXh4Yjhh7tHEB0NUKcAHAHOE";
 		File img=new File("/Users/chenxiaoke/Documents/"+GUIDUtil.getGUID()+".jpg");

@@ -116,10 +116,6 @@ public class FopNoticeServiceImpl implements FopNoticeService {
                 return new MessageResponse(1, "置顶时封面地址不能为空！");
             }
         }
-        int temp = this.fopNoticeDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "通知公告名称重复！");
-        }
         o.setId(GUIDUtil.getGUID());
         o.setStatus("1");
         o.setReleaseDate(new Date());

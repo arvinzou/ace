@@ -544,6 +544,7 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopCompanyVo">
+        <result column="realName" jdbcType="VARCHAR" property="realName"/>
     </resultMap>
 
     <sql id="column_List_Vo">
@@ -619,6 +620,7 @@
         select count(*)
         from fop_company
         where fullName = #{fullName,jdbcType=VARCHAR}
+        and id != #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findCount" resultType="int">

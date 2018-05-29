@@ -7,7 +7,7 @@ Page({
     serverfile: cfg.serverfile,
     max: 0,
     loading: false,
-    disabled: false,
+    disabled: true,
     files: [],
     attachments: [],
     checkImageUrl: cfg.checkImageUrl + "?id="+wx.getStorageSync('WX-SESSION-ID'),
@@ -15,16 +15,7 @@ Page({
     mediUrl: null
   },
   onReady: function (res) {
-    console.log('index.js.onReady');
-    var that = this;
-    wx.setNavigationBarColor({
-      frontColor: cfg.frontColor,
-      backgroundColor: cfg.backgroundColor,
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    });
+
   },
 
   onLoad: function (param) {
@@ -34,13 +25,15 @@ Page({
     if(!util.isLogin()){
       wx.navigateTo({ url: "../bind/index?url=../answer/index?id=" + that.data.id });
     }
-    this.setData(param);
-    this.setData({
+    that.setData(param);
+    that.setData({
       WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
       checkImageUrl: cfg.checkImageUrl,
       fileList: [],
       userProp: wx.getStorageSync('userProp')
     });
+    that.initData(that.data.id);
+
   },
   formSubmit: function (e) {
     //console.log(e.detail.value);
@@ -57,11 +50,10 @@ Page({
     data.list = [];
     data.o = e.detail.value;
     data.captcha = e.detail.value.captcha;
-    data.o.mediUrl = that.data.mediUrl;
     data.o.id = that.data.id;
     var files = that.data.files;
     for (var i = 0; i < files.length; i++) {
-      data.list.push({ name:'', mediUrl: files[i], mediType:'img' });
+      data.list.push({ name:'附件'+(i+1), mediUrl: files[i], mediType:'img' });
     }
     data.o.mediType = '1';
     console.log(data);
@@ -71,7 +63,8 @@ Page({
     console.log(e);
     if (e.detail && e.detail.value.length > 0) {
       this.setData({
-        max: e.detail.value.length
+        max: e.detail.value.length,
+        disabled: false
       });
     }
   },
@@ -174,7 +167,7 @@ Page({
   },
   updateAppealCase: function (data){
     var that=this;
-    util.request(cfg.updateAppealCase, { jsons: JSON.stringify(data) },
+    util.request(cfg.updateAppealCase, { jsons: JSON.stringify(data),client:"miniApp" },
       function (data) {
         that.setData({
           loading: false,
@@ -206,5 +199,22 @@ Page({
     this.setData({
       categoryIndex: e.detail.value
     })
+  },
+  initData: function (id) {
+    var that = this;
+    util.request(cfg.selectAppealCaseByPrimaryKey, { id: id },
+      function (data) {
+        that.setData({
+          appeal: data.value
+        });
+        console.log(data.value);
+        if (data.status != 0) {
+          wx.showModal({ title: "系统提示", showCancel: false, content: data.errorMessage });
+        } else {
+          wx.setNavigationBarTitle({ title: that.data.appeal.title });
+        }
+        wx.stopPullDownRefresh();
+      }
+    );
   }
 });

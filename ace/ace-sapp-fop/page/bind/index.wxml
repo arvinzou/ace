@@ -26,7 +26,7 @@
       </view>
     </view>
     <view>
-      <button class="weui-btn" bindtap="bind"  style="position:fixed; bottom:0; width:100%;color:#fff;background-color:#1A56A8; border-radius: 2px;">提交绑定</button>
+      <button class="weui-btn" bindtap="bind"  style="position:absolute; bottom:1rpx; width:100%;color:#fff;background-color:#1A56A8; border-radius: 2px;">提交绑定</button>
     </view>
   </form>
 </view>

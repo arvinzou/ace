@@ -436,7 +436,6 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
      * @date: 2018/5/10 17:10
      */
     private MessageResponse coopProject(FopFlowRecord record, UserProp userProp) throws Exception {
-//        if (AuditResult.PASS.equals(record.getAuditResult())) {
         FopProject obj = fopProjectService.selectByPrimaryKey(record.getFromId());
         if (null == obj) {
             return new MessageResponse(ResultCode.FAIL, "记录丢失");
@@ -447,9 +446,6 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         obj.setStatus(status);
 
         return fopProjectService.updateFopProject(obj, userProp);
-//        }
-//
-//        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 
     /**

@@ -203,7 +203,7 @@ jQuery(function ($) {
 });
 
 function preview(id, title) {
-    var dialog = $("#dialog-message-view").removeClass('hide').dialog({
+    var dialog = $("#dialog-message-accept").removeClass('hide').dialog({
         modal: false,
         width: 800,
         title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
