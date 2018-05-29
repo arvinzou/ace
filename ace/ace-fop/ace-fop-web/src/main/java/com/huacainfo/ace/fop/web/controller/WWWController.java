@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
@@ -57,6 +58,9 @@ public class WWWController extends FopBaseController {
 
     @Autowired
     private RelatedLinksService relatedLinksService;
+
+    @Autowired
+    private IntegrityPublicityService integrityPublicityService;
 
 
     /**
@@ -741,5 +745,12 @@ public class WWWController extends FopBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "获得成功", this.relatedLinksService.relatedLinksTree("1"));
     }
 
+
+    @RequestMapping(value = "/findIntegrityPublicityListDo")
+    @ResponseBody
+    public ResultResponse findIntegrityPublicityList(IntegrityPublicityQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.integrityPublicityService.findIntegrityPublicityListDo(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        return rst;
+    }
 
 }

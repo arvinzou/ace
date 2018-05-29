@@ -148,15 +148,19 @@ app.controller(ngControllerName,function($scope){
         editor.setValue($scope.infoData.coopDesc);
     }
     $scope.update = function(id){
-        var status = $scope.infoData.status;
         var content = $("#editor").val();
         $.ajax({
             url: "/fop/www/updateProject",
             type:"post",
             async:false,
-            data:{id: id, projectName: $scope.infoData.projectName, coopType: $scope.infoData.coopType,
-                areaCode: $scope.infoData.areaCode, projectType: $scope.infoData.projectType,
-                coopDesc: $scope.infoData.coopDesc},
+            data: {
+                id: id,
+                projectName: $scope.infoData.projectName,
+                coopType: $scope.infoData.coopType,
+                areaCode: $scope.infoData.areaCode,
+                projectType: $scope.infoData.projectType,
+                coopDesc: content,
+            },
             success:function(result){
                 if(result.status == 0) {
                     $scope.search(status);

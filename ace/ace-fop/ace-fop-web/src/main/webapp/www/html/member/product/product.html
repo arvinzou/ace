@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html   ng-app="angularjsApp" ng-controller="angularjsCtrl">
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 <head>
     <meta charset="UTF-8">
     <title>会员中心-法律帮助</title>
@@ -21,16 +21,17 @@
 <body>
 <div class="box">
     <div class="child_title">
-        <span class="child_title_1">我发布的政企服务</span>
-        <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release" ng-click="init_release();">发布</a> </span>
+        <span class="child_title_1">我发布的企业产品</span>
+        <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release"
+                                       ng-click="init_release();">发布</a> </span>
     </div>
     <div style="clear: both;"></div>
     <div class="menu-nav">
         <ul>
-            <li><a href="#" ng-click="search();">全部</a> </li>
-            <li><a href="#" ng-click="search('1');">审核中</a> </li>
-            <li><a href="#" ng-click="search('2');">审核通过</a> </li>
-            <li><a href="#" ng-click="search('3');">审核未通过</a> </li>
+            <li><a href="#" ng-click="search();">全部</a></li>
+            <li><a href="#" ng-click="search('1');">审核中</a></li>
+            <li><a href="#" ng-click="search('2');">审核通过</a></li>
+            <li><a href="#" ng-click="search('3');">审核未通过</a></li>
         </ul>
         <div id="nav-content">
             <div class="table-div" ng-repeat="item in items">
@@ -43,7 +44,12 @@
                             <span class="info_status info_status3" ng-if="item.status == '3'">审核未通过</span>
                         </td>
                         <td>&nbsp;</td>
-                        <td width="15%"><button id="update" data-toggle="modal" data-target="#myModal" ng-click="update_click($index);">编辑</button><button id="delete" ng-click="delete($index);">删除</button></td>
+                        <td width="15%">
+                            <button id="update" data-toggle="modal" data-target="#myModal"
+                                    ng-click="update_click($index);">编辑
+                            </button>
+                            <button id="delete" ng-click="delete($index);">删除</button>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="4" id="content">
@@ -69,103 +75,95 @@
 </div>
 </body>
 
+
 <!--编辑模态框-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     data-backdrop="false">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="myModalLabel">编辑产品</h4>
             </div>
             <div class="modal-body">
-                <div class="product_form">
-                    <table class="product_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>标题</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" placeholder="请输入产品标题" ng-model="infoData.title"  onfocus="this.placeholder=''" onblur="this.placeholder='请输入产品标题 '"/></td>
-                        </tr>
-                        <tr style="height:200px;">
-                            <td width="15%" align="right"><span class="required">*</span><span>封面</span></td>
-                            <td width="5%"></td>
-                            <td>
-                                <div class="pictureContainer">
-                                    <div class="viewPicture">
-                                        <img src="http://zx.huacainfo.com/{{infoData.fileUrl}}" style="width: 100%;height: 100%;object-fit: cover;">
-                                    </div>
-                                    <div class="uploadText" style="display: none;">
-                                        <img src="../../../images/icons/upload_img_2.png" style="width: 100px;height: auto;"/>
-                                        <p class="uploadPloadprogress">点击上传封面</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15%" align="right" style="height: 186px;"><span class="required">*</span><span>具体内容</span></td>
-                            <td width="5%" style="height: 186px;"></td>
-                            <td style="height: 300px;">
-                                <textarea ng-model="infoData.content"   placeholder="请描述产品具体内容" onfocus="this.placeholder=''" onblur="this.placeholder='请描述产品具体内容'"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center">
-                                <button class="submit" data-dismiss="modal" ng-click="update(infoData.id);">发布</button>
-                            </td>
-                        </tr>
-                    </table>
+                <div><label>标题</label><br>
+                    <input class="input_style" type="text" placeholder="请输入产品标题" ng-model="infoData.title"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='请输入产品标题 '"/>
                 </div>
+                <div><label>封面</label><br>
+                    <div class="pictureContainer">
+                        <div class="viewPicture">
+                            <img src="http://zx.huacainfo.com/{{infoData.fileUrl}}"
+                                 style="width: 100%;height: 100%;object-fit: cover;">
+                        </div>
+                        <div class="uploadText" style="display: none;">
+                            <img src="../../../images/icons/upload_img_2.png" style="width: 100px;height: auto;"/>
+                            <p class="uploadPloadprogress">点击上传封面</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div><label>具体内容</label><br>
+                    <textarea ng-model="infoData.content" placeholder="请描述产品具体内容" onfocus="this.placeholder=''"
+                              onblur="this.placeholder='请描述产品具体内容'"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="submit btn btn-primary" data-dismiss="modal"
+                        ng-click="update(infoData.id);">提交
+                </button>
             </div>
         </div>
     </div>
 </div>
 
-<!--发布企业产品模态框-->
-<div class="modal fade" id="myModal_release" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+
+<div class="modal fade bs-example-modal-lg" id="myModal_release" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-backdrop="false">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel_release">发布产品</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel_release">发布企业风采</h4>
             </div>
             <div class="modal-body">
-                <div class="product_form">
-                    <table class="product_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>标题</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" placeholder="请输入产品标题" name="name"  onfocus="this.placeholder=''" onblur="this.placeholder='请输入产品标题 '"/></td>
-                        </tr>
-                        <tr style="height:200px;">
-                            <td width="15%" align="right"><span class="required">*</span><span>封面</span></td>
-                            <td width="5%"></td>
-                            <td>
-                                <div class="pictureContainer" id="upbtn">
-                                    <div class="viewPicture">
-                                        <img src="" style="width: 100%;height: 100%;object-fit: cover;">
-                                    </div>
-                                    <div class="uploadText">
-                                        <img src="../../../images/icons/upload_img_2.png" style="width: 100px;height: auto;"/>
-                                        <p class="uploadPloadprogress">点击上传封面</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15%" align="right" style="height: 186px;"><span class="required">*</span><span>具体内容</span></td>
-                            <td width="5%" style="height: 186px;"></td>
-                            <td style="height: 300px;">
-                                <textarea name="pcontent" id="editor" placeholder="请描述产品具体内容" onfocus="this.placeholder=''" onblur="this.placeholder='请描述产品具体内容'"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center">
-                                <button class="submit" data-dismiss="modal" ng-click="release();">发布</button>
-                            </td>
-                        </tr>
-                    </table>
+                <div><label>标题</label><br>
+                    <div>
+                        <input class="input_style" type="text" placeholder="请输入产品标题" name="name"
+                               onfocus="this.placeholder=''"
+                               onblur="this.placeholder='请输入产品标题 '"/>
+                    </div>
+                    <div><label>封面</label><br>
+                        <div class="pictureContainer" id="upbtn">
+                            <div class="viewPicture">
+                                <img src="" style="width: 100%;height: 100%;object-fit: cover;">
+                            </div>
+                            <div class="uploadText">
+                                <img src="../../../images/icons/upload_img_2.png"
+                                     style="width: 100px;height: auto;"/>
+                                <p class="uploadPloadprogress">点击上传封面</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div><label>具体内容</label><br>
+                        <textarea name="pcontent" id="editor" placeholder="请描述产品具体内容"
+                                  onfocus="this.placeholder=''"
+                                  onblur="this.placeholder='请描述产品具体内容'"></textarea>
+                    </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="submit btn btn-primary" data-dismiss="modal" ng-click="release();">提交
+                </button>
             </div>
         </div>
     </div>
 </div>
+
 </html>

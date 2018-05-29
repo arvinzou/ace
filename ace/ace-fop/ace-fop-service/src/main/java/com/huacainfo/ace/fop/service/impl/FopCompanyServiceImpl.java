@@ -197,6 +197,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         o.setFullName(fullName);
         o.setLpMobile(lpMobile);
         UserProp userProp = new UserProp();
+        o.setLpSex("1");
         userProp.setActiveSyId("fop");
         userProp.setName("工商联管理员");
         userProp.setUserId("1522198886381");

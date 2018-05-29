@@ -143,6 +143,7 @@ public class FopCompanyController extends FopBaseController {
             params.put("q", q);
         }
         this.logger.info("", params);
+
         return this.fopCompanyService.selectCompany(params);
     }
 }
