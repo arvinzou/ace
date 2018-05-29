@@ -40,7 +40,7 @@
 						</div>
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tbody>
-							<tr class="tr_bottom" ng-repeat="item in items">
+							<tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo($index);">
 								<td align="left" width="15px"><div class="dot"></div></td>
 								<td align="left" width="25%" ng-bind="item.releaseDate"></td>
 								<td ng-bind="item.title"></td>

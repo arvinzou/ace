@@ -160,4 +160,10 @@ app.controller(ngControllerName,function($scope){
             });
         }
     }
+
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('information_info.html?id='+primaryId);
+    }
 });

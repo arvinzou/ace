@@ -86,4 +86,10 @@ app.controller(ngControllerName,function($scope) {
         console.log(primaryId);
         window.open('html/band/band_info.html?id='+primaryId);
     }
+
+    $scope.showInfo = function(index){
+        var primaryId = $scope.notice_list[index].id;
+        console.log(primaryId);
+        window.open('html/information/information_info.html?id='+primaryId);
+    }
 });
