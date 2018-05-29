@@ -42,7 +42,7 @@
                     <input type="text" name="fullName" placeholder="输入企业名称"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="personName" placeholder="输入法人代表"/>
+                    <input type="text" name="realName" placeholder="输入法人代表"/>
                 </div>
             </div>
             <div class="row">
@@ -58,15 +58,23 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <select>
+                    <select name="companyType">
                         <option value="">请选择企业性质</option>
+                        <option value="1">私营企业</option>
+                        <option value="2">港澳台商投资企业</option>
+                        <option value="3">外商投资企业</option>
+                        <option value="4">股份合作企业</option>
+                        <option value="5">其他联营企业</option>
+                        <option value="6">有限责任公司</option>
+                        <option value="7">股份有限公司</option>
+                        <option value="8">其他企业</option>
                     </select>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="请选择成立时间"/>
+                    <input type="text" name="establishDate" placeholder="请选择成立时间"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="请输入职工人数"/>
+                    <input type="text" name="crewSize" placeholder="请输入职工人数"/>
                 </div>
             </div>
             <div class="row">
@@ -82,13 +90,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入金额"/>
+                    <input type="text" name="registeredCapital" placeholder="输入金额"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入金额"/>
+                    <input type="text" name="fixedAssets" placeholder="输入金额"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入金额"/>
+                    <input type="text" name="workingCapital" placeholder="输入金额"/>
                 </div>
             </div>
             <div class="row">
@@ -98,7 +106,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    <input type="text" placeholder="输入地址"/>
+                    <input type="text" name="address" placeholder="输入地址"/>
                 </div>
             </div>
         </div>
@@ -122,20 +130,20 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input type="text" placeholder="输入姓名"/>
+                    <input type="text" name="realName" placeholder="输入姓名"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <select>
+                    <select name="sex">
                         <option value="">请选择性别</option>
-                        <option value="">男</option>
-                        <option value="">女</option>
+                        <option value="2">男</option>
+                        <option value="1">女</option>
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input type="text" placeholder="选择出生年月"/>
+                    <input name="birthDate" type="text" placeholder="选择出生年月"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input type="text" placeholder="输入籍贯"/>
+                    <input name="nativePlace" type="text" placeholder="输入籍贯"/>
                 </div>
             </div>
             <div class="row">
@@ -154,16 +162,16 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input type="text" placeholder="输入民族"/>
+                    <input name="nationality" type="text" placeholder="输入民族"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input type="text" placeholder="输入政治面貌"/>
+                    <input name="political" type="text" placeholder="输入政治面貌"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input type="text" placeholder="请选择时间"/>
+                    <input name="recruitmentDate" type="text" placeholder="请选择时间"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input type="text" placeholder="输入文化程度"/>
+                    <input name="education" type="text" placeholder="输入文化程度"/>
                 </div>
             </div>
             <div class="row">
@@ -179,13 +187,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入技术职称"/>
+                    <input name="skillJobTitle" type="text" placeholder="输入技术职称"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入单位职务"/>
+                    <input name="deptPost" type="text" placeholder="输入单位职务"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入主要社会职务"/>
+                    <input name="societyPost" type="text" placeholder="输入主要社会职务"/>
                 </div>
             </div>
             <div class="row">
@@ -201,13 +209,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入邮政编码"/>
+                    <input name="postcode" type="text" placeholder="输入邮政编码"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入传真"/>
+                    <input name="fax" type="text" placeholder="输入传真"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入电子信箱"/>
+                    <input name="email" type="text" placeholder="输入电子信箱"/>
                 </div>
             </div>
             <div class="row">
@@ -217,7 +225,7 @@
             </div>
             <div class="row" style="height: 100px;">
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    <textarea placeholder="介绍自己~"></textarea>
+                    <textarea name="resume" placeholder="介绍自己~"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -227,7 +235,7 @@
             </div>
             <div class="row" style="height: 100px;">
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    <textarea placeholder="描述特长及成就~"></textarea>
+                    <textarea name="achievement" placeholder="描述特长及成就~"></textarea>
                 </div>
             </div>
         </div>
@@ -245,10 +253,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input type="text" placeholder="输入面积"/>
+                    <input name="ownSpace" type="text" placeholder="输入面积"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input type="text" placeholder="输入面积"/>
+                    <input name="tenancySpace" type="text" placeholder="输入面积"/>
                 </div>
             </div>
             <div class="row">
@@ -258,7 +266,7 @@
             </div>
             <div class="row" style="height: 100px;">
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    <textarea placeholder="描述主要品种~"></textarea>
+                    <textarea name="majorVariety" placeholder="描述主要品种~"></textarea>
                 </div>
             </div>
         </div>
@@ -279,13 +287,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="请选择党组织类型"/>
+                    <input name="companyOrgType" type="text" placeholder="请选择党组织类型"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="输入党员人数"/>
+                    <input name="peopleNum" type="text" placeholder="输入党员人数"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="选择党组织成立时间"/>
+                    <input name="establishDate" type="text" placeholder="选择党组织成立时间"/>
                 </div>
             </div>
             <div class="row">
@@ -298,10 +306,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input type="text" placeholder="输入负责人姓名"/>
+                    <input name="dutyPersonName" type="text" placeholder="输入负责人姓名"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input type="text" placeholder="输入负责人联系电话"/>
+                    <input name="dutyPersonPhone" type="text" placeholder="输入负责人联系电话"/>
                 </div>
             </div>
         </div>
@@ -346,10 +354,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input type="text" placeholder="输入人数"/>
+                    <input name="laborContractNum" type="text" placeholder="输入人数"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <select>
+                    <select name="thirdLaborRelation">
                         <option value=""> 请选择</option>
                         <option value=""> 是</option>
                         <option value=""> 否</option>
@@ -366,10 +374,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input type="text" placeholder="输入参保地"/>
+                    <input name="socialInsuranceAddr" type="text" placeholder="输入参保地"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input type="text" placeholder="输入等级证号"/>
+                    <input name="socialInsuranceNum" type="text" placeholder="输入登记证号"/>
                 </div>
             </div>
         </div>
@@ -426,10 +434,10 @@
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <input type="text" placeholder="输入金额"/>
+                <input name="accTaxAmount" type="text" placeholder="输入金额"/>
             </div>
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <input type="text" placeholder="输入金额"/>
+                <input name="yearTaxAmount" type="text" placeholder="输入金额"/>
             </div>
         </div>
     </div>

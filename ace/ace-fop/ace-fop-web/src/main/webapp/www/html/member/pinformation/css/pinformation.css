@@ -51,7 +51,6 @@
     width: 100%;
     margin-top: 15px;
     margin-bottom: 15px;
-    text-align: center;
 }
 .form_footer button{
     width: 80px;
@@ -60,11 +59,13 @@
 }
 .save{
     background-color: #E1E5ED;
+    float: right;
 }
 .commit{
     border: none;
     color: #ffffff;
     background-color: #1A56A8;
+    float: left;
 }
 .add{
     border: none;
