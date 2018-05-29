@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-    <title>企业产品详情</title>
+    <title>诚信公示详情</title>
     <link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
-    <script type="text/javascript" src="js/product_info.js"></script>
+    <script type="text/javascript" src="js/sincerity_info.js"></script>
     <style type="text/css">
         body {
             background-color: #F4F4F4;
@@ -172,11 +172,12 @@
 <body>
 <div id="header"></div>
 <div ng-include="'../common/nav.html'"></div>
-<div class="current_site">当前位置：企业产品  >> {{info.title}}</div>
+<div class="current_site">当前位置：诚信公示  >> {{info.title}}</div>
 <div class="appeal_index">
     <div class="appeal_doc">
         <div class="appeal_title">
             <h3>{{info.title}}</h3>
+            <p>{{info.companyName}}</p>
             <span>{{info.releaseDate}}</span>
         </div>
     </div>

@@ -12,10 +12,10 @@ app.controller(ngControllerName,function($scope){
     var primaryId = url.substring(url.indexOf('=')+1);
     console.log(primaryId);
     $.ajax({
-        url: "/fop/www/selectInformationServiceByPrimaryKeyoDo",
+        url: "/fop/www/selectIntegrityPublicityByPrimaryKey",
         type:"post",
         async:false,
-        data:{id: primaryId, modules: "2"},
+        data:{id: primaryId},
         success:function(result){
             if(result.status == 0) {
                 $scope.info = result.data;
