@@ -23,6 +23,7 @@
     display: inline-block;
     vertical-align: middle;
     color: #C3CBD6;
+    word-wrap: break-word;
 }
 .img_container img{
     width: 100%;

@@ -157,6 +157,64 @@ app.controller(ngControllerName,function($scope) {
         }
     });
 
+    $scope.initChart = function(){
+        $.ajax({
+            url: "/fop/www/statisticalData",
+            type: "post",
+            async: false,
+            data: {},
+            success: function (result) {
+                if (result.status == 0) {
+                    console.log(result);
+                    var text_suqiu = [];
+                    var data_suqiu = [];
+                    var color_suqiu = ['#1D60BC', '#4167E2', '#5C7DEE'];
+                    var suqiu_list = result.data.suqiu;
+                    var hezuo_list = result.data.hezuo;
+                    var suqiu_sum = 0;
+                    for (var i = 0; i < suqiu_list.length; i++) {
+                        suqiu_sum += suqiu_list[i].count;
+                        text_suqiu[i] = suqiu_list[i].result;
+                    }
+                    for (var i = 0; i < suqiu_list.length; i++) {
+                        if (suqiu_sum > 0) {
+                            data_suqiu[i] = ((suqiu_list[i].count) / suqiu_sum).toFixed(3);
+                        }
+                    }
+                    drawCircle('appeal', data_suqiu, color_suqiu, text_suqiu);
+
+                    var text_hezuo = [];
+                    var data_hezuo = [];
+                    var color_hezuo = ['#FF9F00', '#FA8C35', '#FFBC4C'];
+                    var hezuo_sum = 0;
+                    for (var i = 0; i < hezuo_list.length; i++) {
+                        hezuo_sum += hezuo_list[i].count;
+                        text_hezuo[i] = hezuo_list[i].result;
+                    }
+                    for (var i = 0; i < hezuo_list.length; i++) {
+                        if (hezuo_sum > 0) {
+                            data_hezuo[i] = ((hezuo_list[i].count) / hezuo_sum).toFixed(2);
+                        }
+                    }
+                    drawCircle('react', data_hezuo, color_hezuo, text_hezuo);
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                } else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error: function () {
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        });
+    }
 
     $scope.searchList = function (currentPage, pageSize) {
         var key_word = $("#key_word").val();
@@ -341,6 +399,7 @@ app.controller(ngControllerName,function($scope) {
                                 skin: 'myskin'
                             });
                             $scope.search();
+                            $scope.initChart();
                             if (!$scope.$$phase) {
                                 $scope.$apply();
                             }
