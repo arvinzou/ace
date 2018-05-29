@@ -12,7 +12,12 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.dao.FopAssociationDao;
+import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopLoanProductDao;
+import com.huacainfo.ace.fop.model.FopAssociation;
+import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
@@ -21,6 +26,8 @@ import com.huacainfo.ace.fop.service.FopQuestionService;
 import com.huacainfo.ace.fop.vo.FopLoanProductQVo;
 import com.huacainfo.ace.fop.vo.FopLoanProductVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +55,12 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     private FopQuestionService fopQuestionService;
     @Autowired
     private FopFlowRecordService fopFlowRecordService;
+
+    @Autowired
+    private FopCompanyDao fopCompanyDao;
+
+    @Autowired
+    private UsersService usersService;
 
     /**
      * @throws
@@ -112,6 +125,24 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     @Override
     public MessageResponse insertFopLoanProduct(FopLoanProduct o, UserProp userProp)
             throws Exception {
+
+         /*获取登陆用户信息*/
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new MessageResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new MessageResponse(1, "账户没有绑定企业！");
+        }
+        FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+        if (null == fc) {
+            return new MessageResponse(1, "账户没有绑定企业！");
+        }
+        if (!"3".equals(fc.getCompanyType())) {
+            return new MessageResponse(1, "非银行不能发布金融产品");
+        }
+        o.setCompanyId(fc.getId());
         if (CommonUtils.isBlank(o.getProductName())) {
             return new MessageResponse(1, "产品名称不能为空！");
         }
@@ -134,6 +165,7 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         if (temp > 0) {
             return new MessageResponse(1, "通知公告名称重复！");
         }
+
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");

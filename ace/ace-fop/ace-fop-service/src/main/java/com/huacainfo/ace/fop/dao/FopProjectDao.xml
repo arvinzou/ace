@@ -313,6 +313,16 @@
         WHEN t.relationType='1'
         THEN (select fullName from fop_association where id = t.relationId)
         END displayName,
+        CASE
+        WHEN t.relationType='0'
+        THEN (select address from fop_company where id = t.relationId)
+        WHEN t.relationType='1'
+        THEN (select address from fop_association where id = t.relationId)
+        END address,
+        CASE
+        WHEN t.relationType='0'
+        THEN (select companyProperty from fop_company where id = t.relationId)
+        END companyProperty,
         t.id, t.projectName, t.projectCode, t.process, t.personId, t.areaCode, t.projectType, t.relationId, t.sector,
         t.coopType,
         t.releaseDate, t.clicks, t.likes, t.remark, t.status, t.createUserId, t.coopDesc,

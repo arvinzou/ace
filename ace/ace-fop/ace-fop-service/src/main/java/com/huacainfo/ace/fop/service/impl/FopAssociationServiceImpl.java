@@ -319,4 +319,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
 
         return new MessageResponse(0, "添加商协会完成");
     }
+
+    @Override
+    public FopAssociation selectByDepartmentId(String departmentId) throws Exception {
+        return fopAssociationDao.selectByDepartmentId(departmentId);
+    }
 }

@@ -128,14 +128,6 @@ html{
 	color: red;
 }
 
-.product_table input,
-select,
-textarea {
-	/*color: #E1E5ED;*/
-	width: 80%;
-	height: 100%;
-}
-
 .submit {
 	width: 200px;
 	height: 32px;

@@ -9,10 +9,19 @@ import java.util.List;
 public class FopLoanProductVo extends FopLoanProduct {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 企业名称
+     */
     private String companyName;
 
+    /**
+     * 企业性质
+     */
     private String companyProperty;
 
+    /**
+     * 地址
+     */
     private String address;
 
     public String getCompanyProperty() {

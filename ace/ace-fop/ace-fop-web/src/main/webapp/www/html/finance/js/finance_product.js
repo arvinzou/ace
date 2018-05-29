@@ -355,7 +355,15 @@ app.controller(ngControllerName,function($scope){
                 url: "/fop/www/insertLoanProduct",
                 type:"post",
                 async:false,
-                data:{financeTitle:projectName, financeAmount: projectMoney, financeYear:financeYear, financeContent: content, yearYield: rate},
+                data: {
+                    productName: productName,
+                    loanAmount: productMoney,
+                    loanYear: year,
+                    description: content,
+                    loanRate: rate,
+                    loanType: usage,
+                    suretyType: method
+                },
                 success:function(result){
                     if(result.status == 0) {
                         $scope.searchByParam();

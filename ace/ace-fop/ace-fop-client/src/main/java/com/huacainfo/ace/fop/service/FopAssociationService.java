@@ -28,4 +28,6 @@ public interface FopAssociationService {
 
     MessageResponse deleteFopAssociationByFopAssociationId(String id, UserProp userProp) throws Exception;
 
+    FopAssociation selectByDepartmentId(String departmentId) throws Exception;
+
 }
