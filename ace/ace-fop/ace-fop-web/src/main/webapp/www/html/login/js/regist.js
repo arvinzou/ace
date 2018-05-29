@@ -88,7 +88,7 @@ var t = 5;
 function showTime(){
     t -= 1;
     if(t == 0){
-        location.href = "/portal/dynamic/portal/security/login.jsp";
+        location.href = "/portal/dynamic/portal/security/login_fop.jsp";
     }
     setTimeout("showTime()",1000);
 }
