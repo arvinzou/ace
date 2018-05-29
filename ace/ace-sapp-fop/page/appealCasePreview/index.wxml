@@ -30,9 +30,20 @@
 
 
           <view class="text-line"></view>
+         
           <view class="text-content">
-            <rich-text style="text-indent:0px;" nodes="{{o.content}}"></rich-text>
+           <view class="title-strong-big2">诉求内容</view>
+            <rich-text class='item-text' style="text-indent:0px;" nodes="{{o.content}}"></rich-text>
           </view>
+          <view class="title-strong" wx:if="{{o.list.length>0}}">附件</view>
+          <view class="text-line" wx:if="{{o.list.length>0}}"></view>
+           <block wx:for-items="{{o.list}}" wx:for-item="file" wx:key="*item">
+  
+          <navigator bindtap="previewFile" wx:if="{{file.type==1}}" data-url="{{file.mediUrl}}">
+              <view class="title-strong-file item-text"> {{file.name}}</view>
+          </navigator>
+       
+      </block>
         </view>
       </view>
       <view class="kind-list-item" wx:if="{{o.mediType == '2'&&o.mediUrl.length>0}}">
@@ -44,22 +55,7 @@
 
     </view>
   </view>
-  <view class="index-bd">
-    <view class="kind-list">
-      <block wx:for-items="{{o.list}}" wx:for-item="file" wx:key="*item">
-        <view class="kind-list-item" wx:if="{{file.type==1}}">
-          <navigator bindtap="previewImage" data-url="{{file.mediUrl}}">
-            <view style="flex-direction:column;">
-              <image src="{{file.mediUrl}}" class="swiper" mode="aspectFill" />
-              <view class="text-content-center" style="flex-direction:column;">
-                <view class="title-strong-big2"> {{file.name}}</view>
-              </view>
-            </view>
-          </navigator>
-        </view>
-      </block>
-    </view>
-  </view>
+
 
   <view class="index-bd" wx:if="{{o.status==3}}">
     <view class="kind-list">
@@ -69,36 +65,34 @@
             <view class="title-strong-big2">答复内容</view>
             <view class="item-text"> 答复时间：{{o.answerTime}}</view>
             <view class="item-text"> 处理科室：{{o.answerDept}}</view>
+            <view class="item-text">经办领导：{{o.operator}}</view>
           </view>
           <view class="text-line"></view>
           <view class="text-content">
-            <rich-text style="text-indent:0px;" nodes="{{o.answerContent}}"></rich-text>
+            <rich-text style="text-indent:0px;" class='item-text' nodes="{{o.answerContent}}"></rich-text>
           </view>
+         <view class="title-strong" wx:if="{{o.list.length>0}}">附件</view>
+          <view class="text-line" wx:if="{{o.list.length>0}}"></view>
+          <block wx:for-items="{{o.list}}" wx:for-item="file" wx:key="*item">
+  
+          <navigator bindtap="previewFile" wx:if="{{file.type==2}}" data-url="{{file.mediUrl}}">
+           <view class="title-strong-file item-text"> {{file.name}}</view>
+          </navigator>
+ 
+      </block>
         </view>
       </view>
     </view>
   </view>
 
-  <view class="index-bd" wx:if="{{o.status==3}}">
-    <view class="kind-list">
-      <block wx:for-items="{{o.list}}" wx:for-item="file" wx:key="*item">
-        <view class="kind-list-item" wx:if="{{file.type==2}}">
-          <navigator bindtap="previewImage" data-url="{{file.mediUrl}}">
-            <view style="flex-direction:column;">
-              <image src="{{file.mediUrl}}" class="swiper" mode="aspectFill" />
-              <view class="text-content-center" style="flex-direction:column;">
-                <view class="title-strong-big2"> {{file.name}}</view>
-              </view>
-            </view>
-          </navigator>
-        </view>
-      </block>
-    </view>
-  </view>
+
 
 
 <modal hidden="{{hidden}}" title="接收处理" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" no-cancel="{{nocancel}}">
     <input class="weui-input" name="answerDept" value="{{answerDept}}" placeholder="请输入处理部门或科室" bindinput="bindinputAnswerDept"/>
+     <input class="weui-input" name="operator" value="{{operator}}" placeholder="请输入经办领导" bindinput="bindinputOperator"/>
+
+    
 </modal>
 
 </view>

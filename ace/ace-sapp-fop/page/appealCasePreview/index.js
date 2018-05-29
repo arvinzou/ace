@@ -5,24 +5,15 @@ const app = getApp();
 Page({
   data: {
     serverfile: cfg.serverfile,
-    items: [{id:'1',name:""}],
+    items: [{ id: '1', name: "" }],
     startX: 0, //开始坐标
     startY: 0,
     hidden: true,
     nocancel: false,
-    answerDept:"非公经济服务中心"
+    answerDept: "非公经济服务中心",
+    operator: ""
   },
   onReady: function (res) {
-    console.log('index.js.onReady');
-    var that = this;
-    wx.setNavigationBarColor({
-      frontColor: cfg.frontColor,
-      backgroundColor: cfg.backgroundColor,
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    });
 
   },
   onLoad: function (params) {
@@ -36,17 +27,17 @@ Page({
   },
   initData: function (id) {
     var that = this;
-    util.request(cfg.selectAppealCaseByPrimaryKey, {id:id},
+    util.request(cfg.selectAppealCaseByPrimaryKey, { id: id },
       function (data) {
         that.setData({
           o: data.value
         });
-      
+
         console.log(data.value);
-        if(data.status!=0){
+        if (data.status != 0) {
           wx.showModal({ title: "系统提示", showCancel: false, content: data.errorMessage });
-        }else{
-          wx.setNavigationBarTitle({ title: that.data.o.title});
+        } else {
+          wx.setNavigationBarTitle({ title: that.data.o.title });
         }
         wx.stopPullDownRefresh();
       }
@@ -58,6 +49,34 @@ Page({
     wx.previewImage({
       current: '', // 当前显示图片的http链接
       urls: [e.currentTarget.dataset.url] // 需要预览的图片http链接列表
+    })
+  },
+  previewFile: function (e) {
+    console.log(e);
+    var that = this;
+    wx.showNavigationBarLoading();
+    wx.downloadFile({
+      url: e.currentTarget.dataset.url,
+      success: function (res) {
+        let path = res.tempFilePath
+        console.log(path)
+        wx.hideNavigationBarLoading(); //完成停止加载
+        wx.openDocument({
+          filePath: path,
+          success: function (res) {
+          },
+          fail: function (err) {
+            console.log(err);
+            wx.previewImage({
+              current: e.currentTarget.dataset.url, 
+              urls: [e.currentTarget.dataset.url] 
+            })
+          }
+        })
+      },
+      fail(err) {
+        typeof op.fail === 'function' && op.fail(err)
+      }
     })
   },
   //手指触摸动作开始 记录起点X坐标
@@ -117,7 +136,7 @@ Page({
       items: this.data.items
     })
   },
-  updateAccept:function(e){
+  updateAccept: function (e) {
     this.setData({
       hidden: false
     });
@@ -129,11 +148,11 @@ Page({
   },
   confirm: function () {
     var that = this;
-    util.request(cfg.updateAccept, { id: that.data.o.id, answerDept: that.data.answerDept,client:'app' },
+    util.request(cfg.updateAccept, { id: that.data.o.id, answerDept: that.data.answerDept, operator: that.data.operator, client: 'app' },
       function (data) {
         console.log(data.value);
         wx.showModal({ title: "系统提示", showCancel: false, content: data.errorMessage });
-        if (data.status== 0) {
+        if (data.status == 0) {
           that.setData({
             hidden: true
           });
@@ -143,16 +162,19 @@ Page({
   },
   bindinputAnswerDept: function (e) {
     console.log(e);
-    answerDept = e.detail.value;
-    this.setData({ answerDept: answerDept});
+    this.setData({ answerDept: e.detail.value });
   },
-  updateDetailsOfProgress:function(e){
-    var that=this;
+  bindinputOperator: function (e) {
+    console.log(e);
+    this.setData({ operator: e.detail.value });
+  },
+  updateDetailsOfProgress: function (e) {
+    var that = this;
     wx.navigateTo({
-      url: '../detailsOfProgress/index?id='+that.data.id,
+      url: '../detailsOfProgress/index?id=' + that.data.id,
     })
-  }, 
-  answer:function(e){
+  },
+  answer: function (e) {
     var that = this;
     wx.navigateTo({
       url: '../answer/index?id=' + that.data.id,
