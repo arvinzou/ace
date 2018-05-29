@@ -70,6 +70,9 @@ public class WWWController extends FopBaseController {
     @Autowired
     private UsersService usersService;
 
+    @Autowired
+    private FopAssMemberService fopAssMemberService;
+
 
     /**
      * gis地图
@@ -793,9 +796,12 @@ public class WWWController extends FopBaseController {
 
     @RequestMapping(value = "/insertAssociationInfo")
     @ResponseBody
-    public ResultResponse insertAssociationInfo(FopAssMember fopAssMember, FopAssociation fopAssociation) throws Exception {
-
-        return new ResultResponse(1, "账户没有绑定企业！");
+    public MessageResponse insertAssociationInfo(FopAssMember fopAssMember, FopAssociation fopAssociation) throws Exception {
+        MessageResponse result = fopAssociationService.insertFopAssociation(fopAssociation, this.getCurUserProp());
+        if (ResultCode.FAIL == result.getStatus()) {
+            return result;
+        }
+        return fopAssMemberService.insertFopAssMember(fopAssMember, this.getCurUserProp());
     }
 
     @RequestMapping(value = "/insertCompanyInfo")
