@@ -147,7 +147,7 @@
 					</div>
 					<div class="product_list">
 						<ul>
-							<li class="left" ng-repeat="band in bands">
+							<li class="left" ng-repeat="band in bands" ng-click="showBrand(band.id);">
 								<img src="http://zx.huacainfo.com/{{band.fileUrl}}" />
 								<span>{{band.title}}</span>
 							</li>

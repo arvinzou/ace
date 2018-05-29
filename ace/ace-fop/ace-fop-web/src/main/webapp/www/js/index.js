@@ -80,4 +80,32 @@ app.controller(ngControllerName,function($scope) {
             index = index +10;
         }
     }
+
+    $scope.showBrand = function(id){
+        $.ajax({
+            url: "/fop/www/selectInformationServiceByPrimaryKeyoDo",
+            type:"post",
+            async:false,
+            data:{id: id, modules: "6",status: "2"},  //2代表企业产品
+            success:function(result){
+                if(result.status == 0) {
+                    $scope.items = result.data.list;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error:function(){
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        });
+    }
 });
