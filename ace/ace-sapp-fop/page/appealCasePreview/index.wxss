@@ -233,3 +233,12 @@ font-weight:800;
   background-color: green;
   margin-bottom: 3rpx;
 }
+.title-strong-file{
+  padding-left: 20rpx;
+  padding-bottom: 10rpx;
+}
+.title-strong{
+  padding-left: 20rpx;
+  padding-bottom: 10rpx;
+  font-weight:800;
+}

@@ -36,16 +36,7 @@ Page({
     categoryIndex: 0,
   },
   onReady: function (res) {
-    console.log('index.js.onReady');
-    var that = this;
-    wx.setNavigationBarColor({
-      frontColor: cfg.frontColor,
-      backgroundColor: cfg.backgroundColor,
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    });
+
   },
 
   onLoad: function (param) {
@@ -82,11 +73,12 @@ Page({
     data.o.appealId = that.data.scene;
     var files = that.data.files;
     for (var i = 0; i < files.length; i++) {
-      data.list.push({ name:'', mediUrl: files[i], mediType:'img' });
+      data.list.push({ name: '附件' + (i + 1), mediUrl: files[i], mediType:'img' });
     }
     if (that.data.currentTab == 0) {
       data.o.mediType = '1';
     }
+    
     if (that.data.currentTab == 1) {
       data.o.mediType = '2';
     }

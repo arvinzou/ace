@@ -1,6 +1,3 @@
 <view class="container">
-  <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{items}}" wx:key="">
-    <view class="content">{{item.content}}</view>
-    <view class="del" catchtap="del" data-index="{{index}}">删除</view>
-  </view>
+ <button  open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo"   style="color:#fff;background-color:green; border-radius: 2px;margin-left:0px">申请授权</button>
 </view>

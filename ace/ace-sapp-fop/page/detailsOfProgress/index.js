@@ -5,19 +5,10 @@ Page({
   data: {
     max: 0,
     loading: false,
-    disabled: false
+    disabled: true
   },
   onReady: function (res) {
-    console.log('index.js.onReady');
-    var that = this;
-    wx.setNavigationBarColor({
-      frontColor: cfg.frontColor,
-      backgroundColor: cfg.backgroundColor,
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    });
+
   },
   onLoad: function (param) {
     var that = this;
@@ -43,7 +34,8 @@ Page({
     console.log(e);
     if (e.detail && e.detail.value.length > 0) {
       this.setData({
-        max: e.detail.value.length
+        max: e.detail.value.length,
+        disabled: false
       });
     }
   },
