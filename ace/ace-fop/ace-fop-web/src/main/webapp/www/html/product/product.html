@@ -55,55 +55,44 @@
 
 
 <!--发布企业产品模态框-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">发布产品</h4>
             </div>
             <div class="modal-body">
-                <div class="product_form">
-                    <table class="product_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>标题</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" placeholder="请输入产品标题" name="name" onfocus="this.placeholder=''"
-                                       onblur="this.placeholder='请输入产品标题 '"/></td>
-                        </tr>
-                        <tr style="height:200px;">
-                            <td width="15%" align="right"><span class="required">*</span><span>封面</span></td>
-                            <td width="5%"></td>
-                            <td>
-                                <div class="pictureContainer" id="upbtn">
-                                    <div class="viewPicture">
-                                        <img src="" style="width: 100%;height: 100%;object-fit: cover;">
-                                    </div>
-                                    <div class="uploadText">
-                                        <img src="../../images/icons/upload_img_2.png"
-                                             style="width: 100px;height: auto;"/>
-                                        <p class="uploadPloadprogress">点击上传封面</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15%" align="right" style="height: 186px;"><span class="required">*</span><span>具体内容</span>
-                            </td>
-                            <td width="5%" style="height: 186px;"></td>
-                            <td style="height: 300px;">
-                                <textarea name="content" id="editor" placeholder="请描述产品具体内容"
-                                          onfocus="this.placeholder=''"
-                                          onblur="this.placeholder='请描述产品具体内容'"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center">
-                                <button class="submit" data-dismiss="modal" ng-click="releaseInfo();">发布</button>
-                            </td>
-                        </tr>
-                    </table>
+                <div><label>标题</label><br>
+                    <input class="input_style" type="text" placeholder="请输入产品标题" name="name"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='请输入产品标题 '"/>
                 </div>
+
+                <div><label>封面</label><br>
+                    <div class="pictureContainer" id="upbtn">
+                        <div class="viewPicture">
+                            <img src="" style="width: 100%;height: 100%;object-fit: cover;">
+                        </div>
+                        <div class="uploadText">
+                            <img src="../../images/icons/upload_img_2.png"
+                                 style="width: 100px;height: auto;"/>
+                            <p class="uploadPloadprogress">点击上传封面</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div><label>具体内容</label><br>
+                    <textarea name="content" id="editor" placeholder="请描述产品具体内容"
+                              onfocus="this.placeholder=''"
+                              onblur="this.placeholder='请描述产品具体内容'"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="releaseInfo();">提交
+                </button>
             </div>
         </div>
     </div>

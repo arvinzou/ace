@@ -2465,3 +2465,9 @@ textarea {
     resize: none;
 }
 
+.modal-title {
+    font-size: 18px;
+    font-weight: bolder;
+    color: #1A56A8;
+}
+

@@ -76,26 +76,24 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
     public MessageResponse insertFopAssMember(FopAssMember o, UserProp userProp)
             throws Exception {
         o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getAssId())) {
             return new MessageResponse(1, "协会ID不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCompanyId())) {
-            return new MessageResponse(1, "企业ID不能为空！");
+        if (CommonUtils.isBlank(o.getCompanyName())) {
+            return new MessageResponse(1, "企业名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPname())) {
+            return new MessageResponse(1, "姓名不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPhoneNum())) {
+            return new MessageResponse(1, "电话不能为空！");
         }
         if (CommonUtils.isBlank(o.getAssPost())) {
             return new MessageResponse(1, "商协会职务不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
         int temp = this.fopAssMemberDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "企业管理名称重复！");
@@ -130,20 +128,18 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
         if (CommonUtils.isBlank(o.getAssId())) {
             return new MessageResponse(1, "协会ID不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCompanyId())) {
-            return new MessageResponse(1, "企业ID不能为空！");
+        if (CommonUtils.isBlank(o.getCompanyName())) {
+            return new MessageResponse(1, "企业名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPname())) {
+            return new MessageResponse(1, "姓名不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPhoneNum())) {
+            return new MessageResponse(1, "电话不能为空！");
         }
         if (CommonUtils.isBlank(o.getAssPost())) {
             return new MessageResponse(1, "商协会职务不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());

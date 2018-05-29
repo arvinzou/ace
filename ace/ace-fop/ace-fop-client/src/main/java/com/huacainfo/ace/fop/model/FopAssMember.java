@@ -9,7 +9,7 @@ public class FopAssMember implements Serializable {
 
     private String assId;
 
-    private String companyId;
+    private String companyName;
 
     private String assPost;
 
@@ -29,6 +29,26 @@ public class FopAssMember implements Serializable {
 
     private Date lastModifyDate;
 
+    private String pname;
+
+    private String phoneNum;
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
     public String getId() {
         return id;
     }
@@ -45,12 +65,12 @@ public class FopAssMember implements Serializable {
         this.assId = assId == null ? null : assId.trim();
     }
 
-    public String getCompanyId() {
-        return companyId;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId == null ? null : companyId.trim();
+    public void setCompanyName(String companyId) {
+        this.companyName = companyId == null ? null : companyId.trim();
     }
 
     public String getAssPost() {

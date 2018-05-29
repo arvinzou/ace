@@ -791,4 +791,30 @@ public class WWWController extends FopBaseController {
 
     }
 
+    @RequestMapping(value = "/insertAssociationInfo")
+    @ResponseBody
+    public ResultResponse insertAssociationInfo(FopAssMember fopAssMember, FopAssociation fopAssociation) throws Exception {
+
+        return new ResultResponse(1, "账户没有绑定企业！");
+    }
+
+    @RequestMapping(value = "/insertCompanyInfo")
+    @ResponseBody
+    public ResultResponse insertAssociationInfo() throws Exception {
+
+        return new ResultResponse(1, "账户没有绑定企业！");
+    }
+
+
+    /**
+     * @Description: TODO(获取诚信公示)
+     * @param: @param id
+     */
+    @RequestMapping(value = "/selectIntegrityPublicityByPrimaryKey")
+    @ResponseBody
+    public ResultResponse selectIntegrityPublicityByPrimaryKey(String id) throws Exception {
+        return this.integrityPublicityService.selectIntegrityPublicityByPrimaryKeyDo(id);
+    }
+
+
 }
