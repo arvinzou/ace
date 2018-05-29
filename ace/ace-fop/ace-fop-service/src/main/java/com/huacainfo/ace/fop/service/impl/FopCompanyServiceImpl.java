@@ -140,8 +140,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
      * @version: 2018-05-02
      */
     @Override
-    public MessageResponse insertFopCompany(FopCompanyVo o, UserProp userProp)
-            throws Exception {
+    public MessageResponse insertFopCompany(FopCompanyVo o, UserProp userProp) throws Exception {
+        //设置主键标识
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getFullName())) {
             return new MessageResponse(ResultCode.FAIL, "企业全称不能为空！");
         }
@@ -160,16 +161,17 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (ResultCode.FAIL == rs1.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
         }
+        Department department = (Department) rs1.getData();
         //构建法人信息
         ResultResponse rs2 = fopPersonService.insertPerson(o, userProp);
         if (ResultCode.FAIL == rs2.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs2.getInfo());
         }
+        FopPerson person = (FopPerson) rs2.getData();
         //入库企业信息
-        Department department = (Department) rs1.getData();
+        o.setPersonId(person.getId());
         o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
         o.setDepartmentId(department.getDepartmentId());
-        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
