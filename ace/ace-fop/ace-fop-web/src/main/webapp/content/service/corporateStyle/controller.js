@@ -82,6 +82,10 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
+                        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+                        var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+                        loadText(gd.id);
                         initSimditor($("textarea[name=content]"), null);
                         appendUploadBtn("fileUrl");
                     }

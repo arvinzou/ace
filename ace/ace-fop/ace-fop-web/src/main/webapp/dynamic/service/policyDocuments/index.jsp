@@ -110,7 +110,7 @@
 </span>
         </div>
     </div>
-    <h5 class="header-title">调研封面</h5>
+    <h5 class="header-title">上传文件</h5>
     <div class="row" style="padding:10px" id="fileUrl">
     </div>
     <h5 class="header-title">详细情况</h5>
