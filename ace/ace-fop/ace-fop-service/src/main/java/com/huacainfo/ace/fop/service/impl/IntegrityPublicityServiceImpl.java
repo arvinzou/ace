@@ -170,13 +170,15 @@ public class IntegrityPublicityServiceImpl implements IntegrityPublicityService 
      * @version: 2018-05-28
      */
     @Override
-    public SingleResult
-            <IntegrityPublicityVo> selectIntegrityPublicityByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <IntegrityPublicityVo> rst = new SingleResult
-                <IntegrityPublicityVo>();
+    public SingleResult<IntegrityPublicityVo> selectIntegrityPublicityByPrimaryKey(String id) throws Exception {
+        SingleResult<IntegrityPublicityVo> rst = new SingleResult<IntegrityPublicityVo>();
         rst.setValue(this.integrityPublicityDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+
+    @Override
+    public ResultResponse selectIntegrityPublicityByPrimaryKeyDo(String id) throws Exception {
+        return new ResultResponse(ResultCode.SUCCESS, "诚信公示详情", this.integrityPublicityDao.selectVoByPrimaryKey(id));
     }
 
     /**
