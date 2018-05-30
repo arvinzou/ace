@@ -8,7 +8,7 @@ var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
     $scope.category = "1";
-    $scope.categorys = [{"id": "1", "name": "守信光荣榜"}, {"id" :"2","name": "失信光荣榜"}];
+    $scope.categorys = [{"id": "1", "name": "守信光荣榜"}, {"id": "2", "name": "失信警示榜"}];
 
     $.ajax({
         url: "/fop/www/findIntegrityPublicityListDo",

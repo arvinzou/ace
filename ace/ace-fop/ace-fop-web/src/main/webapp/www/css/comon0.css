@@ -2463,6 +2463,10 @@ textarea {
     height: 200px;
     width: 100%;
     resize: none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */;
+    border: #C9D8DB 1px solid;
 }
 
 .modal-title {
