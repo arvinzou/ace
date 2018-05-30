@@ -42,7 +42,7 @@
 					<div class="cooperate">
 						<ul>
 							<li ng-repeat="item in items" ng-click="showInfo($index);">
-								<span class="coimg"><img src="http://zx.huacainfo.com/{{item.fileUrl}}" style="width:100%;height: 100%;object-fit: cover;"/></span>
+								<span class="coimg"><img ng-src="http://zx.huacainfo.com/{{item.fileUrl}}" style="width:100%;height: 100%;object-fit: cover;"/></span>
 								<span class="coinfo" ng-bind="item.title"></span>
 							</li>
 						</ul>

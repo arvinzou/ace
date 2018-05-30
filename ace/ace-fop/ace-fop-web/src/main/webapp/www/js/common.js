@@ -29,6 +29,6 @@ html.push("</div>");
 html.push("</div>");
 var text=html.join("\n");
 
-$(function(){
+window.onload = function(){
     $("#header").append(text);
-});
+}
