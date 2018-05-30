@@ -2,7 +2,7 @@ var myMap;
 
 $(function () {
     myMap = echarts.init(document.getElementById('mapgis'));
-    var url = "http://localhost/fop/www/companyGis";
+    var url = "/fop/www/companyGis";
     $.getJSON(url, function (result) {
         option.series[0].data = JSON.parse(result.data);
         myMap.setOption(option);
