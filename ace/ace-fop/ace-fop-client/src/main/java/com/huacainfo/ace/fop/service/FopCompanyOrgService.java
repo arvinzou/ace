@@ -8,6 +8,8 @@ import com.huacainfo.ace.fop.model.FopCompanyOrg;
 import com.huacainfo.ace.fop.vo.FopCompanyOrgQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyOrgVo;
 
+import java.util.List;
+
 /**
  * @author: Arvin
  * @version: 2018-05-02
@@ -28,6 +30,9 @@ public interface FopCompanyOrgService {
      * @version: 2018-05-02
      */
     public abstract PageResult<FopCompanyOrgVo> findFopCompanyOrgList(FopCompanyOrgQVo condition, int start, int limit, String orderBy) throws Exception;
+
+
+    public abstract List<FopCompanyOrgVo> findFopCompanyOrgListByCID(String companyId) throws Exception;
 
     /**
      * @throws

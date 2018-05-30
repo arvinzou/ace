@@ -4,6 +4,7 @@ package com.huacainfo.ace.fop.vo;
 import com.huacainfo.ace.fop.model.FopCompany;
 
 import java.util.Date;
+import java.util.List;
 
 
 public class FopCompanyVo extends FopCompany {
@@ -58,6 +59,39 @@ public class FopCompanyVo extends FopCompany {
      * 第二联系人号码
      */
     private String spMobile;
+
+    /**
+     * 关联信息
+     */
+    private FopPersonVo person;
+
+    private List<FopCompanyOrgVo> olist;
+
+    private List<FopCompanyContributionVo> clist;
+
+    public FopPersonVo getPerson() {
+        return person;
+    }
+
+    public void setPerson(FopPersonVo person) {
+        this.person = person;
+    }
+
+    public List<FopCompanyOrgVo> getOlist() {
+        return olist;
+    }
+
+    public void setOlist(List<FopCompanyOrgVo> olist) {
+        this.olist = olist;
+    }
+
+    public List<FopCompanyContributionVo> getClist() {
+        return clist;
+    }
+
+    public void setClist(List<FopCompanyContributionVo> clist) {
+        this.clist = clist;
+    }
 
     public String getFpMobile() {
         return fpMobile;

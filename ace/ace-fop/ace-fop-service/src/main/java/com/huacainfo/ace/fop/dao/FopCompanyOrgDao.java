@@ -27,6 +27,8 @@ public interface FopCompanyOrgDao {
                                    @Param("start") int start, @Param("limit") int limit,
                                    @Param("orderBy") String orderBy);
 
+    List<FopCompanyOrgVo> findListByCID(@Param("companyId") String companyId);
+
     int findCount(@Param("condition") FopCompanyOrgQVo condition);
 
     int isExit(FopCompanyOrg record);

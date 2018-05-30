@@ -10,6 +10,8 @@ import java.util.List;
 public interface FopAssMemberDao {
     int deleteByPrimaryKey(String id);
 
+    int deleteByAssociationId(String assId);
+
     int insert(FopAssMember record);
 
     int insertSelective(FopAssMember record);
@@ -29,4 +31,9 @@ public interface FopAssMemberDao {
     int findCount(@Param("condition") FopAssMemberQVo condition);
 
     int isExit(FopAssMember record);
+
+    List<FopAssMemberVo> selectVoByAssociationId(@Param("assId") String assId);
+
+
+
 }

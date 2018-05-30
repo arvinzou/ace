@@ -813,27 +813,15 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/insertAssociationInfo")
     @ResponseBody
     public MessageResponse insertAssociationInfo(FopAssMember fopAssMember, FopAssociation fopAssociation) throws Exception {
-
-        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(this.getCurUserProp().getUserId());
-        UsersVo user = singleResult.getValue();
-        if (null == user) {
-            return new MessageResponse(1, "没有注册");
+        if (CommonUtils.isBlank(fopAssMember.getAssId())) {
+            return new MessageResponse(ResultCode.FAIL, "id不能为空");
         }
-        if (CommonUtils.isBlank(user.getDepartmentId())) {
-            return new MessageResponse(1, "账户没有绑定团体！");
-        }
-        FopAssociation fa = fopAssociationService.selectByDepartmentId(user.getDepartmentId());
-
-        if (null == fa) {
-            return new MessageResponse(ResultCode.FAIL, "fop团体不存在");
-        }
-        fopAssociation.setId(fa.getId());
-        fopAssMember.setAssId(fa.getId());
+        fopAssociation.setId(fopAssMember.getAssId());
         MessageResponse result = fopAssociationService.updateFopAssociation(fopAssociation, this.getCurUserProp());
         if (ResultCode.FAIL == result.getStatus()) {
             throw new CustomException(result.getErrorMessage());
         }
-
+        fopAssMemberService.deleteFopAssMemberByFopAssId(fopAssMember.getAssId(), this.getCurUserProp());
         MessageResponse result1 = fopAssMemberService.insertFopAssMember(fopAssMember, this.getCurUserProp());
         if (ResultCode.FAIL == result1.getStatus()) {
             throw new CustomException(result1.getErrorMessage());
@@ -858,4 +846,24 @@ public class WWWController extends FopBaseController {
     public ResultResponse selectIntegrityPublicityByPrimaryKey(String id) throws Exception {
         return this.integrityPublicityService.selectIntegrityPublicityByPrimaryKeyDo(id);
     }
+
+    /**
+     * @Description: TODO(获取团体详情)
+     */
+    @RequestMapping(value = "/selectAssociationInfo")
+    @ResponseBody
+    public ResultResponse selectFopAssociationByPrimaryKey() throws Exception {
+        return this.fopAssociationService.selectAssociationByPrimaryKey(this.getCurUserProp());
+    }
+
+
+    /**
+     * @Description: TODO(获取企业详情)
+     */
+    @RequestMapping(value = "/selectCompanyInfo")
+    @ResponseBody
+    public ResultResponse selectFopCompanyByPrimaryKey() throws Exception {
+        return this.fopCompanyService.selectCompanyInfo(this.getCurUserProp());
+    }
+
 }

@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.dao.FopAssMemberDao;
 import com.huacainfo.ace.fop.model.FopAssMember;
+import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.service.FopAssMemberService;
 import com.huacainfo.ace.fop.vo.FopAssMemberQVo;
 import com.huacainfo.ace.fop.vo.FopAssMemberVo;
@@ -184,4 +185,13 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
                 String.valueOf(id), "企业管理", userProp);
         return new MessageResponse(0, "企业管理删除完成！");
     }
+
+    @Override
+    public MessageResponse deleteFopAssMemberByFopAssId(String assId, UserProp userProp) throws Exception {
+        this.fopAssMemberDao.deleteByPrimaryKey(assId);
+        this.dataBaseLogService.log("添加更新删除企业管理", "关联团体ID", String.valueOf(assId),
+                String.valueOf(assId), "企业管理", userProp);
+        return new MessageResponse(0, "企业管理删除完成！");
+    }
+
 }

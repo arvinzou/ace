@@ -80,6 +80,8 @@ public interface FopCompanyService {
 
     public abstract ResultResponse selectCompanyByPrimaryKey(String id) throws Exception;
 
+    public abstract ResultResponse selectCompanyInfo(UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:deleteFopCompanyByFopCompanyId

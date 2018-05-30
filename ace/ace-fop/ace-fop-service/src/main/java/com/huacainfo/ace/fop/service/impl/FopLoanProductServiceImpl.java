@@ -162,8 +162,8 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopLoanProductDao.insertSelective(o);
-//        this.dataBaseLogService.log("添加通知公告", "通知公告", "", o.getId(),
-//                o.getId(), userProp);
+        this.dataBaseLogService.log("添加通知公告", "通知公告", "", o.getId(),
+                o.getId(), userProp);
         return new MessageResponse(0, "添加通知公告完成！");
     }
 
@@ -187,29 +187,16 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         if (CommonUtils.isBlank(o.getProductName())) {
             return new MessageResponse(1, "产品名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLoanAmount())) {
-            return new MessageResponse(1, "贷款额度不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoanRate())) {
-            return new MessageResponse(1, "贷款利率不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoanType())) {
-            return new MessageResponse(1, "贷款类型不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoanYear())) {
-            return new MessageResponse(1, "贷款年限不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getSuretyType())) {
-            return new MessageResponse(1, "担保方式不能为空！");
-        }
 
-
+        if (CommonUtils.isBlank(o.getDescription())) {
+            return new MessageResponse(1, "产品内容不能为空！");
+        }
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopLoanProductDao.updateByPrimaryKeySelective(o);
-//        this.dataBaseLogService.log("变更通知公告", "通知公告", "", o.getId(),
-//                o.getId(), userProp);
+        this.dataBaseLogService.log("变更通知公告", "通知公告", "", o.getId(),
+                o.getId(), userProp);
         return new MessageResponse(0, "变更通知公告完成！");
     }
 

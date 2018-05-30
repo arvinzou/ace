@@ -60,6 +60,11 @@ public class FopCompanyOrgServiceImpl implements FopCompanyOrgService {
         return rst;
     }
 
+    @Override
+    public List<FopCompanyOrgVo> findFopCompanyOrgListByCID(String companyId) throws Exception {
+        return this.fopCompanyOrgDao.findListByCID(companyId);
+    }
+
     /**
      * @throws
      * @Title:insertFopCompanyOrg

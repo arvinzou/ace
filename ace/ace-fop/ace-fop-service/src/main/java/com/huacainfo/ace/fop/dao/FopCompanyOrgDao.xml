@@ -232,4 +232,13 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopCompanyOrgVo"></resultMap>
+
+    <select id="findListByCID" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_company_org
+        WHERE companyId = #{companyId,jdbcType=VARCHAR}
+    </select>
 </mapper>

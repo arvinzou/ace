@@ -3,7 +3,9 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.fop.model.FopAssMember;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.vo.FopAssociationQVo;
 import com.huacainfo.ace.fop.vo.FopAssociationVo;
@@ -25,6 +27,8 @@ public interface FopAssociationService {
     MessageResponse updateFopAssociation(FopAssociation obj, UserProp userProp) throws Exception;
 
     SingleResult<FopAssociationVo> selectFopAssociationByPrimaryKey(String id) throws Exception;
+
+    ResultResponse selectAssociationByPrimaryKey(UserProp userProp) throws Exception;
 
     MessageResponse deleteFopAssociationByFopAssociationId(String id, UserProp userProp) throws Exception;
 

@@ -31,6 +31,10 @@
     delete from fop_ass_member
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+    <delete id="deleteByAssociationId" parameterType="java.lang.String">
+        delete from fop_ass_member
+        where assId = #{assId,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopAssMember">
         insert into fop_ass_member (id, assId, companyName,pname,phoneNum,
       assPost, remark, status, 
@@ -195,6 +199,8 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopAssMemberVo"></resultMap>
+
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopAssMember">
         select count(*)
         from fop_ass_member
@@ -202,4 +208,11 @@
         and phoneNum = #{phoneNum,jdbcType=VARCHAR}
     </select>
 
+
+    <select id="selectVoByAssociationId" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_ass_member
+        WHERE assId = #{assId,jdbcType=VARCHAR}
+    </select>
 </mapper>
