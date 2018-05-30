@@ -61,6 +61,11 @@ public class FopCompanyContributionServiceImpl implements FopCompanyContribution
         return rst;
     }
 
+    @Override
+    public List<FopCompanyContributionVo> findFopCompanyContributionListByCID(String companyId) throws Exception {
+        return this.fopCompanyContributionDao.findListCID(companyId);
+    }
+
     /**
      * @throws
      * @Title:insertFopCompanyContribution

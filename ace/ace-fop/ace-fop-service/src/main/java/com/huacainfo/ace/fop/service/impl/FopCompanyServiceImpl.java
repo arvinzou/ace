@@ -15,7 +15,6 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
-import com.huacainfo.ace.fop.dao.FopCompanyOrgDao;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopPayRecord;
@@ -440,6 +439,11 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     @Override
+    public FopCompany selectByDepartmentId(String departmentId) throws Exception {
+        return fopCompanyDao.selectByDepartmentId(departmentId);
+    }
+
+    @Override
     public ResultResponse selectCompanyInfo(UserProp userProp) throws Exception {
         ResultResponse rr = getCompanyId(userProp);
         if (ResultCode.FAIL == rr.getStatus()) {
@@ -449,14 +453,13 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         FopCompanyVo fc = fopCompanyDao.selectVoByPrimaryKey(id);
         FopPersonVo person = fopPersonService.selectFopPersonByPrimaryKey(fc.getPersonId()).getValue();
         List<FopCompanyOrgVo> olist = fopCompanyOrgService.findFopCompanyOrgListByCID(id);
-//
-//
-//       List<FopCompanyContributionVo> clist;
-
-        return null;
+        List<FopCompanyContributionVo> clist = fopCompanyContributionService.findFopCompanyContributionListByCID(id);
+        fc.setPerson(person);
+        fc.setOlist(olist);
+        fc.setClist(clist);
+        return new ResultResponse(ResultCode.SUCCESS, "企业详细信息", fc);
 
     }
-
 
     private ResultResponse getCompanyId(UserProp userProp) throws Exception {
         SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
@@ -474,9 +477,4 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         return new ResultResponse(ResultCode.SUCCESS, "id获取", fc.getId());
     }
 
-
-    @Override
-    public FopCompany selectByDepartmentId(String departmentId) throws Exception {
-        return null;
-    }
 }
