@@ -1,4 +1,4 @@
-$(function(){
+window.onload = function(){
     $('.nav-list>li').hover(function(){
         var $ul=$(this).find('ul');
         var oW=$(this).width();//li
@@ -36,4 +36,4 @@ $(function(){
         $(this).find('ul').hide();
         $(this).find('.trig').hide();
     });
-});
+}

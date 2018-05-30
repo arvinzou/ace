@@ -5,12 +5,14 @@
 		<title>常德市非公经济公共服务平台</title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/common_index.css" />
-
+		<link href="css/nav.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/angular/angular.min.js"></script>
    </head>
 
 	<body   ng-app="angularjsApp" ng-controller="angularjsCtrl">
 		<div id="header"></div>
-		<div ng-include="'html/common/nav.html'"></div>
 		<div class="main">
 			<div class="content_box">
 				<div class="content">
@@ -230,16 +232,15 @@
 			</div>
 		</div>
 		<div ng-include="'html/common/footer.html'"></div>
-		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/angular/angular.min.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+		<!--<script type="text/javascript" src="/portal/system/getUserProp.do"></script>-->
 		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/nav.js"></script>
+		<script type="text/javascript" src="js/share.json.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/echarts.min.js"></script>
 		<script type="text/javascript" src="js/china-main-city-map.js"></script>
 		<script type="text/javascript" src="js/echartmap.js"></script>
-		<script type="text/javascript" src="js/share.json.js"></script>
+
 		<script type="text/javascript">
             $(function(){
                 $(".banner_menu ul li").eq(0).removeClass("menu-a").addClass("menu");
