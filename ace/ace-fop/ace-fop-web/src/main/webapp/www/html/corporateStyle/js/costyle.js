@@ -12,6 +12,11 @@ app.controller(ngControllerName, function ($scope) {
         $scope.userProp = userProp;
     }catch(e){}
 
+    //初始化文本框
+    var editor = new Simditor({
+        textarea: $('#editor')
+
+    });
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'upbtn',
