@@ -1,111 +1,104 @@
 <!DOCTYPE html>
 <html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-		<title>企业风采</title>
-		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css"/>
-		<link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
-		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
-		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
-		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
-		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
-		<SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
-		<script type="text/javascript" src="../../js/plupload/plupload.full.min.js"></script>
-		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
-		<script type="text/javascript" src="../../js/common.js"></script>
-		<script type="text/javascript" src="js/costyle.js"></script>
-		<style type="text/css">
-			.main_box{
-				width: 60%;
-				margin: auto;
-			}
-		</style>
-	</head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <title>企业风采</title>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/plupload/plupload.full.min.js"></script>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="js/costyle.js"></script>
+    <style type="text/css">
+        .main_box {
+            width: 60%;
+            margin: auto;
+        }
+    </style>
+</head>
 
-	<body>
-	<div id="header"></div>
-	<div ng-include="'../common/nav.html'"></div>
-	<div class="banner_style"><img src="../../images/banner_style.png"/></div>
-		<div class="bodybg">
-			<div class="juz body_box">
-				<div class="main">
-					<div class="title01">
-						<span class="title_lager">企业风采</span><span class="title_small">/&nbsp;Enterprise Style</span>
-						<button ng-if="!userProp" class="law_help" data-toggle="modal" data-dismiss="#myModal" ng-click="before_release();">发布风采</button>
-						<button ng-if="userProp" class="law_help" data-toggle="modal" data-target="#myModal" ng-click="before_release();">发布风采</button>
-					</div>
-					<div class="cooperate">
-						<ul>
-							<li ng-repeat="item in items" ng-click="showInfo($index);">
-								<span class="coimg"><img ng-src="http://zx.huacainfo.com/{{item.fileUrl}}" style="width:100%;height: 100%;object-fit: cover;"/></span>
-								<span class="coinfo" ng-bind="item.title"></span>
-							</li>
-						</ul>
-					</div>
-					<div id="paganation"></div>
-				</div>
-			</div>
-			</div>
-		</div>
-	</body>
+<body>
+<div id="header"></div>
+<div ng-include="'../common/nav.html'"></div>
+<div class="banner_style"><img src="../../images/banner_style.png"/></div>
+<div class="bodybg">
+    <div class="juz body_box">
+        <div class="main">
+            <div class="title01">
+                <span class="title_lager">企业风采</span><span class="title_small">/&nbsp;Enterprise Style</span>
+                <button ng-if="!userProp" class="law_help" data-toggle="modal" data-dismiss="#myModal"
+                        ng-click="before_release();">发布风采
+                </button>
+                <button ng-if="userProp" class="law_help" data-toggle="modal" data-target="#myModal"
+                        ng-click="before_release();">发布风采
+                </button>
+            </div>
+            <div class="cooperate">
+                <ul>
+                    <li ng-repeat="item in items" ng-click="showInfo($index);">
+                        <span class="coimg"><img src="http://zx.huacainfo.com/{{item.fileUrl}}"
+                                                 style="width:100%;height: 100%;object-fit: cover;"/></span>
+                        <span class="coinfo" ng-bind="item.title"></span>
+                    </li>
+                </ul>
+            </div>
+            <div id="paganation"></div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
 
-	<!--发布企业风采模态框-->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">发布企业风采</h4>
-				</div>
-				<div class="modal-body">
-					<div class="product_form">
-						<table class="product_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
-							<tr>
-								<td width="15%" align="right"><span class="required">*</span><span>标题</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入风采标题" name="name" onfocus="this.placeholder=''"
-										   onblur="this.placeholder='请输入风采标题'"/></td>
-							</tr>
-							<tr style="height:200px;">
-								<td width="15%" align="right"><span class="required">*</span><span>封面</span></td>
-								<td width="5%"></td>
-								<td>
-									<div class="pictureContainer" id="upbtn">
-										<div class="viewPicture">
-											<img src="" style="width: 100%;height: 100%;object-fit: cover;">
-										</div>
-										<div class="uploadText">
-											<img src="../../images/icons/upload_img_2.png"
-												 style="width: 100px;height: auto;"/>
-											<p class="uploadPloadprogress">点击上传封面</p>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td width="15%" align="right" style="height: 186px;"><span class="required">*</span><span>具体内容</span>
-								</td>
-								<td width="5%" style="height: 186px;"></td>
-								<td style="height: 300px;">
-                                <textarea name="content" id="editor" placeholder="请描述风采具体内容"
-										  onfocus="this.placeholder=''"
-										  onblur="this.placeholder='请描述风采具体内容'"></textarea>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3" align="center">
-									<button class="submit" data-dismiss="modal" ng-click="releaseInfo();">发布</button>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<!--发布企业风采模态框-->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">发布企业风采</h4>
+            </div>
+            <div class="modal-body">
+                <div><label>标题</label><br>
+                    <input class="input_style" type="text" placeholder="请输入风采标题" name="name"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='请输入风采标题'"/>
+                </div>
+                <div><label>封面</label><br>
+                    <div class="pictureContainer" id="upbtn">
+                        <div class="viewPicture">
+                            <img src="" style="width: 100%;height: 100%;object-fit: cover;">
+                        </div>
+                        <div class="uploadText">
+                            <img src="../../images/icons/upload_img_2.png"
+                                 style="width: 100px;height: auto;"/>
+                            <p class="uploadPloadprogress">点击上传封面</p>
+                        </div>
+                    </div>
+                </div>
+                <div><label>具体内容</label><br>
+                    <textarea name="content" id="editor" placeholder="请描述风采具体内容"
+                              onfocus="this.placeholder=''"
+                              onblur="this.placeholder='请描述风采具体内容'"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="releaseInfo();">提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </html>
