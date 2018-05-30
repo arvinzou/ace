@@ -4,6 +4,37 @@ var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
+    $("#establishDate").datetimepicker({
+        format: "yyyy-mm-dd",
+        language: 'zh-CN',
+        autoclose: true,
+        todayBtn: true,
+    });
+    $("#birthDate").datetimepicker({
+        format: "yyyy-mm-dd",
+        language: 'zh-CN',
+        autoclose: true,
+        todayBtn: true,
+    });
+    $("#recruitmentDate").datetimepicker({
+        format: "yyyy-mm-dd",
+        language: 'zh-CN',
+        autoclose: true,
+        todayBtn: true,
+    });
+    $("#dzz_establishDate").datetimepicker({
+        format: "yyyy-mm-dd",
+        language: 'zh-CN',
+        autoclose: true,
+        todayBtn: true,
+    });
+    $("#gh_establishDate").datetimepicker({
+        format: "yyyy-mm-dd",
+        language: 'zh-CN',
+        autoclose: true,
+        todayBtn: true,
+    });
+
     $scope.insertInformation = function(){
         var fullName = $("input[name='fullName']").val();
         var realName = $("input[name='realName']").val();

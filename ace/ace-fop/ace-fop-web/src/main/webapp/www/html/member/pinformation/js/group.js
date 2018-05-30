@@ -4,6 +4,13 @@ var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
+    $("#establishDate").datetimepicker({
+        format: "yyyy-mm-dd",
+        language: 'zh-CN',
+        autoclose: true,
+        todayBtn: true,
+    });
+
     $scope.insertInformation = function(){
         var fullName = $("input[name='fullName']").val();
         var establishDate = $("input[name='establishDate']").val();
@@ -48,3 +55,4 @@ app.controller(ngControllerName,function($scope){
         });
     }
 });
+

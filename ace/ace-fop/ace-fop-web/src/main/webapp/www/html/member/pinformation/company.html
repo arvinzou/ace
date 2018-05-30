@@ -5,14 +5,18 @@
     <title>完善资料</title>
     <link rel="stylesheet" type="text/css" href="css/pinformation.css"/>
     <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../../css/common_index.css"/>
     <SCRIPT language=JavaScript src="../../../js/jquery-3.2.1.min.js"></SCRIPT>
     <script type="text/javascript" src="../../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="../../../js/angular/angular.min.js"></script>
     <script type="text/javascript" src="../../../js/layer-v3.1.1/layer/layer.js"></script>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
     <script type="text/javascript" src="../../../js/common.js"></script>
     <link rel="shortcut icon" href="../../../images/favicon.ico">
+    <script type="text/javascript" src="js/company.js"></script>
 </head>
 <body>
 <div id="header"></div>
@@ -71,7 +75,7 @@
                     </select>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="establishDate" placeholder="请选择成立时间"/>
+                    <input type="text" name="establishDate" id="establishDate" placeholder="请选择成立时间"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
                     <input type="text" name="crewSize" placeholder="请输入职工人数"/>
@@ -140,7 +144,7 @@
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input name="birthDate" type="text" placeholder="选择出生年月"/>
+                    <input name="birthDate" id="birthDate" type="text" placeholder="选择出生年月"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
                     <input name="nativePlace" type="text" placeholder="输入籍贯"/>
@@ -168,7 +172,7 @@
                     <input name="political" type="text" placeholder="输入政治面貌"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input name="recruitmentDate" type="text" placeholder="请选择时间"/>
+                    <input name="recruitmentDate" id="recruitmentDate" type="text" placeholder="请选择时间"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
                     <input name="education" type="text" placeholder="输入文化程度"/>
@@ -293,7 +297,7 @@
                     <input name="peopleNum" type="text" placeholder="输入党员人数"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="establishDate" type="text" placeholder="选择党组织成立时间"/>
+                    <input name="establishDate" id="dzz_establishDate" type="text" placeholder="选择党组织成立时间"/>
                 </div>
             </div>
             <div class="row">
@@ -330,7 +334,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="gh_establishDate" type="text" placeholder="请选择成立时间"/>
+                    <input name="gh_establishDate" id="gh_establishDate" type="text" placeholder="请选择成立时间"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
                     <input name="gh_dutyPersonName" type="text" placeholder="请输入工会组织负责人"/>

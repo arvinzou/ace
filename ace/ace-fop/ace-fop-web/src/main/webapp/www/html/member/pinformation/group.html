@@ -5,14 +5,18 @@
     <title>完善资料</title>
     <link rel="stylesheet" type="text/css" href="css/pinformation.css"/>
     <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../../css/common_index.css"/>
     <SCRIPT language=JavaScript src="../../../js/jquery-3.2.1.min.js"></SCRIPT>
     <script type="text/javascript" src="../../../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../js/angular/angular.min.js"></script>
     <script type="text/javascript" src="../../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
     <script type="text/javascript" src="../../../js/common.js"></script>
     <script type="text/javascript" src="js/group.js"></script>
+
     <link rel="shortcut icon" href="../../../images/favicon.ico">
     <script>
         var htmlText = ' <div class="row">\n' +
@@ -55,7 +59,7 @@
                     <input type="text" name="fullName" placeholder="输入团体名称"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="establishDate" placeholder="选择时间"/>
+                    <input type="text" name="establishDate" id="establishDate" placeholder="选择时间"/>
                 </div>
             </div>
             <div class="row">
