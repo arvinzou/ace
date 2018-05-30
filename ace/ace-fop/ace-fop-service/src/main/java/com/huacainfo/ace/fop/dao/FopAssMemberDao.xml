@@ -29,7 +29,7 @@
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from fop_ass_member
-    where id = #{id,jdbcType=VARCHAR}
+    where assId = #{assId,jdbcType=VARCHAR}
   </delete>
     <delete id="deleteByAssociationId" parameterType="java.lang.String">
         delete from fop_ass_member

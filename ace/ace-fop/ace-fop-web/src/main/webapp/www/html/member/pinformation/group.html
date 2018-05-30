@@ -56,10 +56,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-xs-8">
-                    <input type="text" name="fullName" placeholder="输入团体名称"/>
+                    <input type="text" name="fullName" ng-model="information.fullName" placeholder="输入团体名称"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="establishDate" id="establishDate" placeholder="选择时间"/>
+                    <input type="text" name="establishDate" ng-model="information.establishDate" id="establishDate" placeholder="选择时间"/>
                 </div>
             </div>
             <div class="row">
@@ -72,10 +72,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-xs-8">
-                    <input type="text" name="phoneNumber" placeholder="输入电话"/>
+                    <input type="text" name="phoneNumber" ng-model="information.phoneNumber" placeholder="输入电话"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="address" placeholder="输入地址"/>
+                    <input type="text" name="address" ng-model="information.address" placeholder="输入地址"/>
                 </div>
             </div>
         </div>
@@ -93,10 +93,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input type="text" name="directorNum" placeholder="输入数量"/>
+                    <input type="text" name="directorNum" ng-model="information.directorNum" placeholder="输入数量"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input type="text" name="viceNum" placeholder="输入数量"/>
+                    <input type="text" name="viceNum" ng-model="information.viceNum" placeholder="输入数量"/>
                 </div>
             </div>
         </div>
@@ -117,13 +117,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="pname" placeholder="输入姓名"/>
+                    <input type="text" name="pname" ng-model="group.pname" placeholder="输入姓名"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="assPost" placeholder="输入职务"/>
+                    <input type="text" name="assPost" ng-model="group.assPost" placeholder="输入职务"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="phoneNum" placeholder="输入电话"/>
+                    <input type="text" name="phoneNum" ng-model="group.phoneNum" placeholder="输入电话"/>
                 </div>
             </div>
             <div class="row">
@@ -131,13 +131,13 @@
                     企业名称
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <!--<button id="add" class="add">添加</button>-->
+                    <span style="color: #9EA7B4;">多个企业用逗号隔开</span>
                 </div>
             </div>
             <div class="addpanel">
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-xs-8">
-                        <input type="text" name="companyName" placeholder="输入企业名称"/>
+                        <input type="text" name="companyName" ng-model="group.companyName" placeholder="输入企业名称"/>
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-4">
                     </div>

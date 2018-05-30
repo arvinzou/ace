@@ -11,6 +11,36 @@ app.controller(ngControllerName,function($scope){
         todayBtn: true,
     });
 
+    var assId = null;
+    $.ajax({
+        url: "/fop/www/selectAssociationInfo",
+        type:"post",
+        async:false,
+        data:{},
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                $scope.information = result.data;
+                $scope.group = result.data.list[0];
+                assId = result.data.id;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            }else {
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        },
+        error:function(){
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    });
+
     $scope.insertInformation = function(){
         var fullName = $("input[name='fullName']").val();
         var establishDate = $("input[name='establishDate']").val();
@@ -27,7 +57,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/insertAssociationInfo",
             type:"post",
             async:false,
-            data:{fullName:fullName, phoneNumber:phoneNumber, address: address, directorNum: directorNum,
+            data:{assId: assId,fullName:fullName, phoneNumber:phoneNumber, address: address, directorNum: directorNum,
                     viceNum :viceNum, pname: pname, assPost: assPost, phoneNum: phoneNum, companyName: companyName},
             success:function(result){
                 if(result.status == 0) {
