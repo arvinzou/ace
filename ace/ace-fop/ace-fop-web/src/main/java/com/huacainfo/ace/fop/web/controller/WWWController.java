@@ -801,6 +801,15 @@ public class WWWController extends FopBaseController {
 
     }
 
+
+    /**
+     * 完善团体信息
+     *
+     * @param fopAssMember
+     * @param fopAssociation
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/insertAssociationInfo")
     @ResponseBody
     public MessageResponse insertAssociationInfo(FopAssMember fopAssMember, FopAssociation fopAssociation) throws Exception {
@@ -824,7 +833,12 @@ public class WWWController extends FopBaseController {
         if (ResultCode.FAIL == result.getStatus()) {
             throw new CustomException(result.getErrorMessage());
         }
-        return fopAssMemberService.insertFopAssMember(fopAssMember, this.getCurUserProp());
+
+        MessageResponse result1 = fopAssMemberService.insertFopAssMember(fopAssMember, this.getCurUserProp());
+        if (ResultCode.FAIL == result1.getStatus()) {
+            throw new CustomException(result1.getErrorMessage());
+        }
+        return result1;
     }
 
     @RequestMapping(value = "/insertCompanyInfo")
