@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
 <head>
     <meta charset="UTF-8">
     <title>完善资料</title>
@@ -16,7 +16,6 @@
 </head>
 <body>
 <div id="header"></div>
-<div ng-include="'../common/nav.html'"></div>
 <div class="main_box">
     <div class="title_box">
         <div class="col-lg-6 col-md-6 col-xs-6">
@@ -59,7 +58,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <select name="companyType">
+                    <select name="companyType" id="companyType">
                         <option value="">请选择企业性质</option>
                         <option value="1">私营企业</option>
                         <option value="2">港澳台商投资企业</option>
@@ -134,7 +133,7 @@
                     <input type="text" name="realName" placeholder="输入姓名"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <select name="sex">
+                    <select name="sex" id="sex">
                         <option value="">请选择性别</option>
                         <option value="2">男</option>
                         <option value="1">女</option>
@@ -331,13 +330,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="请选择成立时间"/>
+                    <input name="gh_establishDate" type="text" placeholder="请选择成立时间"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="请输入工会组织负责人"/>
+                    <input name="gh_dutyPersonName" type="text" placeholder="请输入工会组织负责人"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" placeholder="请输入联系电话"/>
+                    <input name="gh_dutyPersonPhone" type="text" placeholder="请输入联系电话"/>
                 </div>
             </div>
         </div>
@@ -358,7 +357,7 @@
                     <input name="laborContractNum" type="text" placeholder="输入人数"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <select name="thirdLaborRelation">
+                    <select name="thirdLaborRelation" id="thirdLaborRelation">
                         <option value=""> 请选择</option>
                         <option value=""> 是</option>
                         <option value=""> 否</option>
@@ -397,10 +396,10 @@
         </div>
         <div class="row" style="height: 100px;">
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <textarea type="text" placeholder="输入详情"></textarea>
+                <textarea type="text" name="xg_work" placeholder="输入详情"></textarea>
             </div>
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <textarea type="text" placeholder="输入详情"></textarea>
+                <textarea type="text" name="education" placeholder="输入详情"></textarea>
             </div>
         </div>
         <div class="row">
@@ -413,10 +412,10 @@
         </div>
         <div class="row" style="height: 100px;">
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <textarea type="text" placeholder="输入详情"></textarea>
+                <textarea type="text" name="poverty" placeholder="输入详情"></textarea>
             </div>
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <textarea type="text" placeholder="输入详情"></textarea>
+                <textarea type="text" name="others" placeholder="输入详情"></textarea>
             </div>
         </div>
     </div>

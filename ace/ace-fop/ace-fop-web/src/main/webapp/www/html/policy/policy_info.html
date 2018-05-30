@@ -25,8 +25,7 @@
             width: 60%;
             background-color: #FBFCFD;
             margin: auto;
-            min-height: 600px;
-            max-height: 1000px;
+            height: auto;
         }
 
         .current_site {
@@ -172,7 +171,6 @@
 
 <body>
 <div id="header"></div>
-<div ng-include="'../common/nav.html'"></div>
 <div class="current_site">当前位置：政策文件  >> {{info.title}}</div>
 <div class="appeal_index">
     <div class="appeal_doc">
@@ -185,7 +183,7 @@
         <div>
             <span class="title_lager">内容</span><span class="title_small">/&nbsp;Content</span>
         </div>
-        <div class="content_info" ng-bind="info.content">
+        <div class="content_info">
         </div>
     </div>
 </div>

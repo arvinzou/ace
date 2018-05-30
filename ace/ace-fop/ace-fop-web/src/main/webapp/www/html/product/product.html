@@ -19,11 +19,15 @@
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/product.js"></script>
     <link rel="shortcut icon" href="../../images/favicon.ico">
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/module.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/hotkeys.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/uploader.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/simditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="/portal/content/common/simditor/styles/simditor.css"/>
 </head>
 
 <body>
 <div id="header"></div>
-<div ng-include="'../common/nav.html'"></div>
 <div class="bodybg">
     <div class="juz">
         <div class="main">
@@ -39,7 +43,7 @@
                     </div>
                     <div class="words_container">
                         <h3 ng-bind="item.title"></h3>
-                        <p ng-bind="item.content">
+                        <p ng-bind="item.remark">
 
                         </p>
                         <p class="createDate" ng-bind="item.releaseDate"></p>
@@ -83,7 +87,11 @@
                         </div>
                     </div>
                 </div>
-
+                <div><label>描述</label><br>
+                    <textarea name="remark" id="remark" placeholder="简要描述下产品"
+                              onfocus="this.placeholder=''"
+                              onblur="this.placeholder='简要描述下产品'"></textarea>
+                </div>
                 <div><label>具体内容</label><br>
                     <textarea name="content" id="editor" placeholder="请描述产品具体内容"
                               onfocus="this.placeholder=''"

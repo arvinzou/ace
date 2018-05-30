@@ -19,6 +19,7 @@ app.controller(ngControllerName,function($scope){
         success:function(result){
             if(result.status == 0) {
                 $scope.info = result.data;
+                $(".content_info").html(result.data.content);
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
