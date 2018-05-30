@@ -829,7 +829,7 @@ public class WWWController extends FopBaseController {
         }
         fopAssociation.setId(fa.getId());
         fopAssMember.setAssId(fa.getId());
-        MessageResponse result = fopAssociationService.insertFopAssociation(fopAssociation, this.getCurUserProp());
+        MessageResponse result = fopAssociationService.updateFopAssociation(fopAssociation, this.getCurUserProp());
         if (ResultCode.FAIL == result.getStatus()) {
             throw new CustomException(result.getErrorMessage());
         }
