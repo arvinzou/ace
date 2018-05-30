@@ -30,91 +30,15 @@
             <span>发布时间：{{projectInfo.releaseDate}}</span>
         </div>
     </div>
-    <div class="appeal_info">
-        <table class="finance_table" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-                <td width="15%" align="right">贷款利率：</td>
-                <td width="35%" class="highLight">{{projectInfo.loanRate}}%</td>
-                <td width="15%" align="right">企业名称：</td>
-                <td width="35%">{{projectInfo.companyName}}</td>
-            </tr>
-            <tr>
-                <td width="15%" align="right">融资类型：</td>
-                <td width="35%">能源</td>
-                <td width="15%" align="right">企业性质：</td>
-                <td width="35%">合资</td>
-            </tr>
-            <tr>
-                <td width="15%" align="right">贷款额度：</td>
-                <td width="35%" class="highLight" ng-bind="projectInfo.loanAmount"></td>
-                <td width="15%" align="right">企业地址：</td>
-                <td width="35%">常德市德山经开区桃林路28号</td>
-            </tr>
-            <tr>
-                <td width="15%" align="right">贷款年限：</td>
-                <td colspan="3" ng-bind="projectInfo.loanYear"></td>
-            </tr>
-        </table>
-    </div>
+
     <div class="finance_content">
         <div>
             <span class="title_lager">内容</span><span class="title_small">/&nbsp;Legal&nbsp;Document</span>
         </div>
         <div class="content_info">
-            {{projectInfo.description}}
-        </div>
-    </div>
-    <!--发表留言-->
-    <div class="message">
-        <div class="msg_title">
-            <div class="leave_1 leave_msg">发表留言</div>
-            <div class="leave_2"><span>剩余字数</span><span>300</span><span>个</span></div>
-        </div>
-        <div class="msg_info">
-					<textarea id="release_msg">
 
-					</textarea>
-        </div>
-        <div class="msg_footer">
-            <div class="leave_1">
-                <span>注册企业才可发表留言</span>
-                <a href="#">登录</a>/<a href="#">注册</a>
-            </div>
-            <div class="leave_2">
-                <button ng-click="releaseMsg();">发表</button>
-            </div>
         </div>
     </div>
-    <div class="msg_list">
-        <table border="0" cellpadding="0" cellspacing="0" ng-repeat="item in comments">
-            <tr>
-                <td align="left" class="msg_list_title" ng-bind="item.displayName"></td>
-                <td align="right" ng-bind="item.releaseDate"></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    {{item.reply}}
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="page">
-        <!-- 分页位置 -->
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tbody>
-            <tr>
-                <td class="custom_layper_page_info"></td>
-                <td>
-                    <div style="padding: 10px 0; float: right;">
-                        <div class="custom_page_box" id="layper_page_box" style="margin-right: 0px"></div>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <!-- 分页位置 -->
-    </div>
-
 </div>
 </body>
 
