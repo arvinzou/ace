@@ -4,6 +4,7 @@ package com.huacainfo.ace.fop.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -772,6 +773,12 @@ public class WWWController extends FopBaseController {
         return rst;
     }
 
+    /**
+     * 登陆人属性
+     *
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/organizationType")
     @ResponseBody
     public ResultResponse organizationType() throws Exception {
@@ -797,9 +804,25 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/insertAssociationInfo")
     @ResponseBody
     public MessageResponse insertAssociationInfo(FopAssMember fopAssMember, FopAssociation fopAssociation) throws Exception {
+
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(this.getCurUserProp().getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new MessageResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new MessageResponse(1, "账户没有绑定团体！");
+        }
+        FopAssociation fa = fopAssociationService.selectByDepartmentId(user.getDepartmentId());
+
+        if (null == fa) {
+            return new MessageResponse(ResultCode.FAIL, "fop团体不存在");
+        }
+        fopAssociation.setId(fa.getId());
+        fopAssMember.setAssId(fa.getId());
         MessageResponse result = fopAssociationService.insertFopAssociation(fopAssociation, this.getCurUserProp());
         if (ResultCode.FAIL == result.getStatus()) {
-            return result;
+            throw new CustomException(result.getErrorMessage());
         }
         return fopAssMemberService.insertFopAssMember(fopAssMember, this.getCurUserProp());
     }
