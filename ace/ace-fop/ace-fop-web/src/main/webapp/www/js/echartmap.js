@@ -1,6 +1,6 @@
 var myMap;
 
-$(function () {
+window.onload = function(){
     myMap = echarts.init(document.getElementById('mapgis'));
     var url = "/fop/www/companyGis";
     $.getJSON(url, function (result) {
@@ -12,7 +12,7 @@ $(function () {
     myMap.on('click', function (params) {
         loadMap(params.name);
     });
-});
+}
 
 var option = {
     backgroundColor: '#fff',
