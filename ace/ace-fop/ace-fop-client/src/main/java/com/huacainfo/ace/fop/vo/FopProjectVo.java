@@ -12,7 +12,26 @@ public class FopProjectVo extends FopProject {
 
     private String address;
 
+    private String codeFullName;
+    private String coopTypeName;
+
+    public String getCodeFullName() {
+        return codeFullName;
+    }
+
     private String companyProperty;
+
+    public void setCodeFullName(String codeFullName) {
+        this.codeFullName = codeFullName;
+    }
+
+    public String getCoopTypeName() {
+        return coopTypeName;
+    }
+
+    public void setCoopTypeName(String coopTypeName) {
+        this.coopTypeName = coopTypeName;
+    }
 
     public String getAddress() {
         return address;

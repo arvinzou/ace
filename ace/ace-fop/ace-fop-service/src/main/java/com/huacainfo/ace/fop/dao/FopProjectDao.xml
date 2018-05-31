@@ -321,24 +321,35 @@
         END address,
         CASE
         WHEN t.relationType='0'
-        THEN (select companyProperty from fop_company where id = t.relationId)
+        THEN (select name
+        from (fop_company x
+        LEFT JOIN (SELECT *
+        FROM portal.dict
+        where category_id="134") y ON y.code=x.companyProperty)
+        where x.id = t.relationId)
         END companyProperty,
         t.id, t.projectName, t.projectCode, t.process, t.personId, t.areaCode, t.projectType, t.relationId, t.sector,
         t.coopType,
         t.releaseDate, t.clicks, t.likes, t.remark, t.status, t.createUserId, t.coopDesc,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-        t.relationType
+        t.relationType ,p.fullname as codeFullName,z.name as coopTypeName
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Column_List_Vo"/>
-        from fop_project t
+        <include refid="fromCondition"/>
+
         where id = #{id,jdbcType=VARCHAR}
     </select>
 
-    <sql id="whereCondition">
+    <sql id="fromCondition">
         from fop_project t
+        LEFT JOIN portal.province p ON t.areaCode=p.code
+        LEFT JOIN (SELECT *FROM portal.dict where category_id="137") z on z.code=t.coopType
+    </sql>
+
+    <sql id="whereCondition">
         where t.status <![CDATA[ <> ]]> 0
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
@@ -368,6 +379,7 @@
     <select id="findList" resultMap="VoResultMap">
         select
         <include refid="Column_List_Vo"/>
+        <include refid="fromCondition"/>
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -389,6 +401,7 @@
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
+        from fop_project t
         <include refid="whereCondition"/>
     </select>
 </mapper>
