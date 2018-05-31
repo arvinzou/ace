@@ -97,7 +97,7 @@ app.controller(ngControllerName,function($scope){
         var accTaxAmount = $("input[name='accTaxAmount']").val();
         var yearTaxAmount = $("input[name='yearTaxAmount']").val();
 
-        var data = {
+        var json = {
             "basicInfo":{
                 "fullName": fullName,
                 "realName": realName,
@@ -171,11 +171,11 @@ app.controller(ngControllerName,function($scope){
             ]
         }
         $.ajax({
-            url: "/fop/www/insertAssociationInfo",
+            url: "/fop/www/insertCompanyInfo",
             type:"post",
             async:false,
-            data:{fullName:fullName, phoneNumber:phoneNumber, address: address, directorNum: directorNum,
-                viceNum :viceNum, pname: pname, assPost: assPost, phoneNum: phoneNum, companyName: companyName},
+            dataType:"json",
+            data:{json:JSON.stringify(json)},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
