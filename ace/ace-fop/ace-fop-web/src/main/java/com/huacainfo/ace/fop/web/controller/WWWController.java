@@ -839,7 +839,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/insertCompanyInfo")
     @ResponseBody
     public ResultResponse insertAssociationInfo(String json) throws Exception {
-        return new ResultResponse(1, "账户没有绑定企业！",json);
+        return new ResultResponse(1, "返回xi！", json);
     }
 
 

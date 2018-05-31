@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.FopCompanyOrgDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopCompanyOrg">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="relationId" jdbcType="VARCHAR" property="relationId"/>
+        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
         <result column="companyOrgType" jdbcType="CHAR" property="companyOrgType"/>
         <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
         <result column="orgType" jdbcType="CHAR" property="orgType"/>
@@ -21,7 +21,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, relationId, companyOrgType, orgName, orgType, peopleNum, establishDate, dutyPersonName,
+        id, companyId, companyOrgType, orgName, orgType, peopleNum, establishDate, dutyPersonName,
     dutyPersonPhone, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
     lastModifyUserName, lastModifyDate
   </sql>
