@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-    <title>合作交流</title>
+    <title>项目信息</title>
     <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="filter/Fliter.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
@@ -14,6 +14,11 @@
     <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
     <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
     <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/module.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/hotkeys.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/uploader.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/simditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="/portal/content/common/simditor/styles/simditor.css"/>
     <SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
     <script type="text/javascript" src="filter/Filter.js"></script>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
@@ -108,10 +113,10 @@
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>企业名称:没给出</td>
+                                <td ng-cloak>企业名称:{{item.displayName}}</td>
                                 <td>企业性质：合资</td>
-                                <td>&nbsp;</td>
-                                <td>企业通讯地址：常德市德山经开区桃林路28号</td>
+                                <td ng-cloak>&nbsp;</td>
+                                <td>企业通讯地址：{{item.address}}</td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
@@ -120,12 +125,6 @@
                                 <td ng-cloak>项目类型：{{item.projectType}}</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" ng-bind="item.coopDesc"
-                                    style="word-break: break-all; word-wrap:break-word;">
-
-                                </td>
                             </tr>
                             <tr>
                                 <td colspan="5" ng-cloak>发布时间：{{item.releaseDate}}</td>
@@ -173,7 +172,7 @@
 
 
                 <div><label>项目内容</label><br/>
-                    <textarea name="content" placeholder="描述项目内容" onfocus="this.placeholder=''"
+                    <textarea name="content" id="content" placeholder="描述项目内容" onfocus="this.placeholder=''"
                               onblur="this.placeholder='描述项目内容'"></textarea>
                 </div>
             </div>

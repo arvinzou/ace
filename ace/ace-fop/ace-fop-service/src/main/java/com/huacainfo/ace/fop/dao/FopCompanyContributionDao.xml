@@ -6,6 +6,7 @@
         <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
         <result column="contributionType" jdbcType="CHAR" property="contributionType"/>
         <result column="itemCode" jdbcType="VARCHAR" property="itemCode"/>
+        <result column="itemValue" jdbcType="VARCHAR" property="itemValue"/>
         <result column="itemName" jdbcType="VARCHAR" property="itemName"/>
         <result column="sort" jdbcType="INTEGER" property="sort"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -22,7 +23,7 @@
         <result column="itemValue" jdbcType="LONGVARCHAR" property="itemValue"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, companyId, contributionType, itemCode, itemName, sort, remark, status, createUserId,
+        id, companyId, contributionType, itemCode, itemValue, itemName, sort, remark, status, createUserId,
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <sql id="Blob_Column_List">

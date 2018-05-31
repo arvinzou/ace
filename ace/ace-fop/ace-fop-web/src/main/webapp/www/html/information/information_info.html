@@ -41,6 +41,7 @@
             text-align: center;
             padding-top: 20px;
             margin-bottom: 20px;
+            line-height: 30px;
         }
 
         .appeal_title h3 {
@@ -49,7 +50,7 @@
             color: #1A56A8;
         }
 
-        .appeal_title span {
+        .appeal_title p {
             font-size: 14px;
             color: #9EA7B4;
         }
@@ -177,8 +178,8 @@
     <div class="appeal_doc">
         <div class="appeal_title">
             <h3 ng-cloak>{{info.title}}</h3>
-            <span ng-cloak>来源:{{info.source}}</span>
-            <span ng-cloak>{{info.releaseDate}}</span>
+            <p ng-cloak>来源:{{info.source}}</p>
+            <p ng-cloak>{{info.releaseDate}}</p>
         </div>
     </div>
     <div class="finance_content">

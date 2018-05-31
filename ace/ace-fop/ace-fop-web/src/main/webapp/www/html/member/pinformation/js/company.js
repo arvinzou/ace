@@ -38,6 +38,8 @@ app.controller(ngControllerName,function($scope){
     /**
      * 初始化查询企业信息
      */
+    var companyId = "";
+    var personId = "";
     $.ajax({
         url: "/fop/www/selectCompanyInfo",
         type:"post",
@@ -48,6 +50,32 @@ app.controller(ngControllerName,function($scope){
                 console.log(result);
                 $scope.companyInfo = result.data;
                 $scope.person = result.data.person;
+                var clistObj= result.data.clist;
+                for(var i=0; i< clistObj.length; i++){
+                    if(clistObj[i].itemCode == "1"){ //安排下岗职工再就业
+                        $scope.work = clistObj[i];
+                    }
+                    if(clistObj[i].itemCode == "2"){ //助学兴教
+                        $scope.edu = clistObj[i];
+                    }
+                    if(clistObj[i].itemCode == "3"){//帮困扶贫
+                        $scope.poverty = clistObj[i];
+                    }
+                    if(clistObj[i].itemCode == "4"){
+                        $scope.others = clistObj[i];
+                    }
+                }
+                var orgObj = result.data.olist;
+                for(var i=0; i<orgObj.length; i++){
+                    if(orgObj[i].orgType == "1"){ //党组织
+                        $scope.dang = orgObj[i];
+                    }
+                    if(orgObj[i].orgType == "2"){//工会组织
+                        $scope.gonghui = orgObj[i];
+                    }
+                }
+                companyId = result.data.id;
+                personId = result.data.personId;
 
                 if (!$scope.$$phase) {
                     $scope.$apply();
@@ -131,11 +159,13 @@ app.controller(ngControllerName,function($scope){
         /*纳税情况*/
         var accTaxAmount = $("input[name='accTaxAmount']").val();
         var yearTaxAmount = $("input[name='yearTaxAmount']").val();
+        var identityCard = $("input[name='identityCard']").val();
 
         var json = {
             "basicInfo":{
+                "id":companyId,
+                "personId": personId,
                 "fullName": fullName,
-                "realName": realName,
                 "companyType": companyType,
                 "establishDate": establishDate,
                 "crewSize": crewSize,
@@ -154,6 +184,7 @@ app.controller(ngControllerName,function($scope){
                 "yearTaxAmount":yearTaxAmount
             },
             "legalPerson":{
+                "identityCard":identityCard,
                 "sex": sex,
                 "birthDate": birthDate,
                 "nativePlace": nativePlace,
@@ -168,20 +199,25 @@ app.controller(ngControllerName,function($scope){
                 "fax":fax,
                 "email":email,
                 "resume":resume,
-                "achievement":achievement
+                "achievement":achievement,
+                "realName": realName,
             },
-            "dang":{
-                "companyOrgType":companyOrgType,
-                "peopleNum":peopleNum,
-                "establishDate":dzz_establishDate,
-                "dutyPersonName":dutyPersonName,
-                "dutyPersonPhone":dutyPersonPhone
-            },
-            "gonghui":{
-                "establishDate":gh_establishDate,
-                "dutyPersonName":gh_dutyPersonName,
-                "dutyPersonPhone":gh_dutyPersonPhone,
-            },
+            "org":[
+                {
+                    "orgType":"1",    //1表示党组织
+                    "companyOrgType":companyOrgType,
+                    "peopleNum":peopleNum,
+                    "establishDate":dzz_establishDate,
+                    "dutyPersonName":dutyPersonName,
+                    "dutyPersonPhone":dutyPersonPhone
+                },
+                {
+                    "orgType":"2",    //2代表工会组织
+                    "establishDate":gh_establishDate,
+                    "dutyPersonName":gh_dutyPersonName,
+                    "dutyPersonPhone":gh_dutyPersonPhone
+                }
+            ],
             "contribute":[
                 {
                     "itemCode": "1",
@@ -214,7 +250,7 @@ app.controller(ngControllerName,function($scope){
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
-                    layer.alert(result.errorMessage, {
+                    layer.alert(result.info, {
                         icon: 1,
                         skin: 'myskin'
                     });
