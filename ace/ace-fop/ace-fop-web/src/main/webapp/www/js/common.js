@@ -41,7 +41,7 @@ html.push("<a href=\"#\">领导之窗<span class=\"trig\"></span></a>");
 html.push("<ul>");
 html.push("<li><a href=\"/fop/www/html/leader/shiwei_index.html\" target=\"_blank\">常德市委</a></li>");
 html.push("<li><a href=\"/fop/www/html/leader/zhengfu_index.html\" target=\"_blank\">常德市政府</a></li>");
-html.push("<li><a href=\"#\">常德市工商联</a></li>");
+html.push("<li><a href=\"/fop/www/html/leader/gongshanglian_index.html\" target=\"_blank\">常德市工商联</a></li>");
 html.push("</ul>");
 html.push("</li>");
 html.push("<li>");
