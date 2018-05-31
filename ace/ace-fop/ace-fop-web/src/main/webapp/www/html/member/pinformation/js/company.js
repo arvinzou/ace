@@ -109,6 +109,8 @@ app.controller(ngControllerName,function($scope){
         var fixedAssets = $("input[name='fixedAssets']").val();
         var workingCapital = $("input[name='workingCapital']").val();
         var address = $("input[name='address']").val();
+        var latitude = $("#latitude").val();
+        var longitude = $("#longitude").val();
 
         /*法人代表*/
         var sex = $("#sex option:checked").val();
@@ -166,7 +168,7 @@ app.controller(ngControllerName,function($scope){
                 "id":companyId,
                 "personId": personId,
                 "fullName": fullName,
-                "companyType": companyType,
+                "companyProperty": companyType,
                 "establishDate": establishDate,
                 "crewSize": crewSize,
                 "registeredCapital": registeredCapital,
@@ -181,7 +183,9 @@ app.controller(ngControllerName,function($scope){
                 "socialInsuranceAddr":socialInsuranceAddr,
                 "socialInsuranceNum":socialInsuranceNum,
                 "accTaxAmount":accTaxAmount,
-                "yearTaxAmount":yearTaxAmount
+                "yearTaxAmount":yearTaxAmount,
+                "latitude": latitude,
+                "longitude": longitude
             },
             "legalPerson":{
                 "identityCard":identityCard,
@@ -273,3 +277,17 @@ app.controller(ngControllerName,function($scope){
         });
     }
 });
+/**
+ * 2、自动填写地址
+ * @param latitude
+ */
+function latitude(latitude) {
+    $("#latitude").val(latitude);
+}
+function longitude(longitude) {
+    $("#longitude").val(longitude);
+}
+function addr(addr) {
+    $("#address").val(addr);
+}
+/** 2、 end */
