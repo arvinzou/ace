@@ -34,7 +34,7 @@
         <div class="tab-pane fade in active" id="finance">
             <div class="search_list">
                 <div class="finance_list_title">
-                    <span>共{{totalCount}}条人才信息</span>
+                    <span ng-cloak>共{{totalCount}}条人才信息</span>
                     <button ng-if="userProp" class="release" data-toggle="modal" data-target="#myModal"
                             ng-click="before_release();">发布招聘
                     </button>
@@ -52,7 +52,7 @@
                                 <td width="20%" align="left">发布时间</td>
                             </tr>
                             <tr ng-repeat="item in items">
-                                <td width="40%"><a href="#" ng-click="showInfo($index)">{{item.title}}</a></td>
+                                <td width="40%" ng-cloak><a href="#" ng-click="showInfo($index)">{{item.title}}</a></td>
                                 <td width="40%" ng-bind="item.companyName"></td>
                                 <td width="20%" ng-bind="item.releaseDate"></td>
                             </tr>

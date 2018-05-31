@@ -143,16 +143,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="current_site">当前位置：诉求服务 >> {{apealInfo.requestTitle}}</div>
+		<div class="current_site" ng-cloak>当前位置：诉求服务 >> {{apealInfo.requestTitle}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
 				<div class="appeal_title">
-					<h3>{{apealInfo.requestTitle}}</h3>
-					<span>发布时间：{{apealInfo.submitDate}}</span>
+					<h3 ng-cloak>{{apealInfo.requestTitle}}</h3>
+					<span ng-cloak>发布时间：{{apealInfo.submitDate}}</span>
 				</div>
 			</div>
 			<div class="appeal_info">
-				<p>{{apealInfo.requestDesc}}</p>
+				<p ng-cloak>{{apealInfo.requestDesc}}</p>
 			</div>
 			<div class="progress">
 				<div class="progress_title">

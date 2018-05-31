@@ -21,12 +21,12 @@
 
 	<body>
 	<div id="header"></div>
-		<div class="current_site">当前位置：融资服务 >> 金融产品 >> {{financeInfo.financeTitle}}</div>
+		<div class="current_site" ng-cloak>当前位置：融资服务 >> 金融产品 >> {{financeInfo.financeTitle}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
 				<div class="appeal_title">
-					<h3>{{financeInfo.financeTitle}}</h3>
-					<span>发布时间：{{financeInfo.releaseDate}}</span>
+					<h3 ng-cloak>{{financeInfo.financeTitle}}</h3>
+					<span ng-cloak>发布时间：{{financeInfo.releaseDate}}</span>
 				</div>
 			</div>
 			<div class="appeal_info">
@@ -59,7 +59,7 @@
 				<div>
 				 <span class="title_lager">内容</span><span class="title_small">/&nbsp;Legal&nbsp;Document</span>
 				</div>
-				<div class="content_info">
+				<div class="content_info" ng-cloak>
 					{{financeInfo.financeContent}}
 				</div>
 			</div>	
@@ -91,7 +91,7 @@
 						<td align="right" ng-bind="item.releaseDate"></td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td colspan="2" ng-cloak>
 							{{item.reply}}
 						</td>
 					</tr>

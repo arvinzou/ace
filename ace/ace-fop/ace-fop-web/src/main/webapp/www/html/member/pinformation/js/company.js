@@ -35,6 +35,41 @@ app.controller(ngControllerName,function($scope){
         todayBtn: true,
     });
 
+    /**
+     * 初始化查询企业信息
+     */
+    $.ajax({
+        url: "/fop/www/selectCompanyInfo",
+        type:"post",
+        async:false,
+        data:{},
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                $scope.companyInfo = result.data;
+                $scope.person = result.data.person;
+
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            }else {
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        },
+        error:function(){
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    });
+
+    /**
+     * 完善企业信息
+     */
     $scope.insertInformation = function(){
         /*基本信息*/
         var fullName = $("input[name='fullName']").val();

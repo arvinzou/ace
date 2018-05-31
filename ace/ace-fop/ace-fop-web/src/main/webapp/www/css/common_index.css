@@ -165,6 +165,10 @@ body{
 	height: 35px;
 	line-height: 35px;
 }
+.notice_list tr.change :hover{
+	background-color: #E1E5ED;
+	cursor: pointer;
+}
 .text01{
 	color: #565B70;
 	font-size: 14px;
@@ -220,6 +224,10 @@ body{
 	font-size: 16px;
 	text-align: center;
 	line-height: 82px;
+}
+.menu_panel_01 li :hover{
+	font-size: 18px;
+	font-weight: bolder;
 }
 .left{
 	margin-left: 2%;
@@ -386,6 +394,7 @@ body{
 	text-align: center;
 	font-size: 14px;
 	font-weight: bolder;
+	cursor: pointer;
 }
 .message_03{
 	width: 90%;
@@ -399,6 +408,7 @@ body{
 	text-align: center;
 	font-size: 14px;
 	font-weight: bolder;
+	cursor: pointer;
 }
 .share_title{
 	width: 100%;
