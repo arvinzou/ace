@@ -52,13 +52,15 @@ app.controller(ngControllerName,function($scope){
         var assPost = $("input[name='assPost']").val();
         var phoneNum = $("input[name='phoneNum']").val();
         var companyName = $("input[name='companyName']").val();
+        var latitude = $("#latitude").val();
+        var longitude = $("#longitude").val();
 
         $.ajax({
             url: "/fop/www/insertAssociationInfo",
             type:"post",
             async:false,
             data:{assId: assId,fullName:fullName, phoneNumber:phoneNumber, address: address, directorNum: directorNum,
-                    viceNum :viceNum, pname: pname, assPost: assPost, phoneNum: phoneNum, companyName: companyName},
+                    viceNum :viceNum, pname: pname, assPost: assPost, phoneNum: phoneNum, companyName: companyName, latitude: latitude, longitude: longitude},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
@@ -85,4 +87,19 @@ app.controller(ngControllerName,function($scope){
         });
     }
 });
+
+/**
+ * 2、自动填写地址
+ * @param latitude
+ */
+function latitude(latitude) {
+    $("#latitude").val(latitude);
+}
+function longitude(longitude) {
+    $("#longitude").val(longitude);
+}
+function addr(addr) {
+    $("#address").val(addr);
+}
+/** 2、 end */
 
