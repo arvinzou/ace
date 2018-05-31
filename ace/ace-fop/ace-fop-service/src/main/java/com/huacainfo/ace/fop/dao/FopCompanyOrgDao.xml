@@ -35,14 +35,19 @@
     delete from fop_company_org
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+    <delete id="deleteByCID" parameterType="java.lang.String">
+    delete from fop_company_org
+    where companyId = #{cid,jdbcType=VARCHAR}
+  </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopCompanyOrg">
-        insert into fop_company_org (id, relationId, companyOrgType,
+        insert into fop_company_org (id, companyId, companyOrgType,
       orgName, orgType, peopleNum, 
       establishDate, dutyPersonName, dutyPersonPhone, 
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate)
-        values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{companyOrgType,jdbcType=CHAR},
+        values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{companyOrgType,jdbcType=CHAR},
       #{orgName,jdbcType=VARCHAR}, #{orgType,jdbcType=CHAR}, #{peopleNum,jdbcType=INTEGER}, 
       #{establishDate,jdbcType=TIMESTAMP}, #{dutyPersonName,jdbcType=VARCHAR}, #{dutyPersonPhone,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
@@ -55,8 +60,8 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="relationId != null">
-                relationId,
+            <if test="companyId != null">
+                companyId,
             </if>
             <if test="companyOrgType != null">
                 companyOrgType,
@@ -108,8 +113,8 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="relationId != null">
-                #{relationId,jdbcType=VARCHAR},
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
             </if>
             <if test="companyOrgType != null">
                 #{companyOrgType,jdbcType=CHAR},
@@ -161,8 +166,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopCompanyOrg">
         update fop_company_org
         <set>
-            <if test="relationId != null">
-                relationId = #{relationId,jdbcType=VARCHAR},
+            <if test="companyId != null">
+                companyId = #{companyId,jdbcType=VARCHAR},
             </if>
             <if test="companyOrgType != null">
                 companyOrgType = #{companyOrgType,jdbcType=CHAR},
@@ -214,7 +219,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopCompanyOrg">
     update fop_company_org
-        set relationId = #{relationId,jdbcType=VARCHAR},
+        set companyId = #{companyId,jdbcType=VARCHAR},
       companyOrgType = #{companyOrgType,jdbcType=CHAR},
       orgName = #{orgName,jdbcType=VARCHAR},
       orgType = #{orgType,jdbcType=CHAR},

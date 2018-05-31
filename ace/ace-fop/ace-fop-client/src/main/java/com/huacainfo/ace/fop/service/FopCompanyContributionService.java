@@ -85,5 +85,7 @@ public interface FopCompanyContributionService {
      */
     public abstract MessageResponse deleteFopCompanyContributionByFopCompanyContributionId(String id, UserProp userProp) throws Exception;
 
+    MessageResponse deleteFopCompanyContributionByCID(String cid, UserProp userProp) throws Exception;
+
 
 }

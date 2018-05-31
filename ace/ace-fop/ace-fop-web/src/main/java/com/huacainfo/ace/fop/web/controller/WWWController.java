@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
@@ -21,6 +22,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 @Controller
 @RequestMapping("/www")
@@ -74,6 +78,14 @@ public class WWWController extends FopBaseController {
     @Autowired
     private FopAssMemberService fopAssMemberService;
 
+    @Autowired
+    private FopPersonService fopPersonService;
+
+    @Autowired
+    private FopCompanyContributionService fopCompanyContributionService;
+
+    @Autowired
+    private FopCompanyOrgService fopCompanyOrgService;
 
     /**
      * gis地图
@@ -839,7 +851,56 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/insertCompanyInfo")
     @ResponseBody
     public ResultResponse insertAssociationInfo(String json) throws Exception {
-        return new ResultResponse(1, "返回xi！", json);
+        JSONObject jsonObj = JSON.parseObject(json);
+        FopCompanyVo company = JSON.parseObject(jsonObj.getString("basicInfo"), FopCompanyVo.class);
+        FopPersonVo person = JSON.parseObject(jsonObj.getString("legalPerson"), FopPersonVo.class);
+        Type type = new TypeReference<List<FopCompanyOrg>>() {
+        }.getType();
+        List<FopCompanyOrg> orgs = JSON.parseObject(jsonObj.getString("org"), type);
+        Type type1 = new TypeReference<List<FopCompanyContribution>>() {
+        }.getType();
+        List<FopCompanyContribution> contributes = JSON.parseObject(jsonObj.getString("contribute"), type1);
+
+        /*更新企业*/
+        MessageResponse rs1 = fopCompanyService.updateFopCompany(company, this.getCurUserProp());
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getErrorMessage());
+        }
+        String cid = company.getId();
+        /*更新法人信息*/
+        MessageResponse rs2 = fopPersonService.updateFopPerson(person, this.getCurUserProp());
+        if (ResultCode.FAIL == rs2.getStatus()) {
+            throw new CustomException(rs2.getErrorMessage());
+        }
+        /*删除贡献*/
+        MessageResponse rs3 = fopCompanyContributionService.deleteFopCompanyContributionByCID(cid, this.getCurUserProp());
+        if (ResultCode.FAIL == rs3.getStatus()) {
+            throw new CustomException(rs3.getErrorMessage());
+        }
+        /*插入贡献*/
+        for (FopCompanyContribution contribute : contributes) {
+            contribute.setCompanyId(cid);
+            MessageResponse rs4 = fopCompanyContributionService.insertFopCompanyContribution(contribute, this.getCurUserProp());
+            if (ResultCode.FAIL == rs4.getStatus()) {
+                throw new CustomException(rs4.getErrorMessage());
+            }
+        }
+
+
+        /*删除团体*/
+        MessageResponse rs5 = fopCompanyOrgService.deleteFopCompanyOrgByCID(cid, this.getCurUserProp());
+        if (ResultCode.FAIL == rs5.getStatus()) {
+            throw new CustomException(rs5.getErrorMessage());
+        }
+        /*插入团体*/
+        for (FopCompanyOrg org : orgs) {
+            org.setCompanyId(cid);
+            MessageResponse rs6 = fopCompanyOrgService.insertFopCompanyOrg(org, this.getCurUserProp());
+            if (ResultCode.FAIL == rs6.getStatus()) {
+                throw new CustomException(rs6.getErrorMessage());
+            }
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "企业完善成功");
     }
 
 

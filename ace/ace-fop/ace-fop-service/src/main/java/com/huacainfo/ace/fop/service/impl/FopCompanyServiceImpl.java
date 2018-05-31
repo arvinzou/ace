@@ -157,9 +157,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (CommonUtils.isBlank(o.getFullName())) {
             return new MessageResponse(ResultCode.FAIL, "企业全称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getPersonId())) {
-            return new MessageResponse(ResultCode.FAIL, "企业法人不能为空！");
-        }
         if (CommonUtils.isBlank(o.getLpMobile())) {
             return new MessageResponse(ResultCode.FAIL, "企业法人联系方式不能为空!");
         }

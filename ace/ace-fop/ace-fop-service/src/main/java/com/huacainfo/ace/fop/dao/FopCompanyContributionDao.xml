@@ -40,15 +40,20 @@
     delete from fop_company_contribution
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+    <delete id="deleteByCID" parameterType="java.lang.String">
+        delete from fop_company_contribution
+        where companyId = #{cid,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopCompanyContribution">
-        insert into fop_company_contribution (id, relationId, contributionType,
-        itemCode, itemName, sequence,
+        insert into fop_company_contribution (id, companyId, contributionType,
+        itemCode, itemName, sort,
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate, itemValue
       )
-        values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{contributionType,jdbcType=CHAR},
-        #{itemCode,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER},
+        values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{contributionType,jdbcType=CHAR},
+        #{itemCode,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{itemValue,jdbcType=LONGVARCHAR}
@@ -60,8 +65,8 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="relationId != null">
-                relationId,
+            <if test="companyId != null">
+                companyId,
             </if>
             <if test="contributionType != null">
                 contributionType,
@@ -72,8 +77,8 @@
             <if test="itemName != null">
                 itemName,
             </if>
-            <if test="sequence != null">
-                sequence,
+            <if test="sort != null">
+                sort,
             </if>
             <if test="remark != null">
                 remark,
@@ -107,8 +112,8 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="relationId != null">
-                #{relationId,jdbcType=VARCHAR},
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
             </if>
             <if test="contributionType != null">
                 #{contributionType,jdbcType=CHAR},
@@ -119,8 +124,8 @@
             <if test="itemName != null">
                 #{itemName,jdbcType=VARCHAR},
             </if>
-            <if test="sequence != null">
-                #{sequence,jdbcType=INTEGER},
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -154,8 +159,8 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopCompanyContribution">
         update fop_company_contribution
         <set>
-            <if test="relationId != null">
-                relationId = #{relationId,jdbcType=VARCHAR},
+            <if test="companyId != null">
+                companyId = #{companyId,jdbcType=VARCHAR},
             </if>
             <if test="contributionType != null">
                 contributionType = #{contributionType,jdbcType=CHAR},
@@ -166,8 +171,8 @@
             <if test="itemName != null">
                 itemName = #{itemName,jdbcType=VARCHAR},
             </if>
-            <if test="sequence != null">
-                sequence = #{sequence,jdbcType=INTEGER},
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -201,11 +206,11 @@
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.fop.model.FopCompanyContribution">
     update fop_company_contribution
-        set relationId = #{relationId,jdbcType=VARCHAR},
+        set companyId = #{companyId,jdbcType=VARCHAR},
       contributionType = #{contributionType,jdbcType=CHAR},
       itemCode = #{itemCode,jdbcType=VARCHAR},
       itemName = #{itemName,jdbcType=VARCHAR},
-        sequence = #{sequence,jdbcType=INTEGER},
+        sort = #{sort,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -219,11 +224,11 @@
   </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopCompanyContribution">
     update fop_company_contribution
-        set relationId = #{relationId,jdbcType=VARCHAR},
+        set companyId = #{companyId,jdbcType=VARCHAR},
       contributionType = #{contributionType,jdbcType=CHAR},
       itemCode = #{itemCode,jdbcType=VARCHAR},
       itemName = #{itemName,jdbcType=VARCHAR},
-        sequence = #{sequence,jdbcType=INTEGER},
+        sort = #{sort,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},

@@ -90,12 +90,6 @@ public class FopCompanyOrgServiceImpl implements FopCompanyOrgService {
         if (CommonUtils.isBlank(o.getCompanyOrgType())) {
             return new MessageResponse(1, "企业组织类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
 
 //        int temp = this.fopCompanyOrgDao.isExit(o);
 //        if (temp > 0) {
@@ -185,6 +179,14 @@ public class FopCompanyOrgServiceImpl implements FopCompanyOrgService {
         this.fopCompanyOrgDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(id),
                 String.valueOf(id), "企业管理", userProp);
+        return new MessageResponse(0, "企业管理删除完成！");
+    }
+
+    @Override
+    public MessageResponse deleteFopCompanyOrgByCID(String cid, UserProp userProp) throws Exception {
+        this.fopCompanyOrgDao.deleteByCID(cid);
+        this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(cid),
+                String.valueOf(cid), "企业管理", userProp);
         return new MessageResponse(0, "企业管理删除完成！");
     }
 }

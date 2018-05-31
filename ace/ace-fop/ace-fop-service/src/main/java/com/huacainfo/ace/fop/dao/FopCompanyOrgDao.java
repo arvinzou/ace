@@ -11,6 +11,8 @@ public interface FopCompanyOrgDao {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteByCID(String cid);
+
     int insert(FopCompanyOrg record);
 
     int insertSelective(FopCompanyOrg record);
