@@ -868,6 +868,7 @@ public class WWWController extends FopBaseController {
         }
         String cid = company.getId();
         /*更新法人信息*/
+        person.setId(company.getPersonId());
         MessageResponse rs2 = fopPersonService.updateFopPerson(person, this.getCurUserProp());
         if (ResultCode.FAIL == rs2.getStatus()) {
             throw new CustomException(rs2.getErrorMessage());

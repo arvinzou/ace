@@ -87,9 +87,7 @@ public class FopCompanyOrgServiceImpl implements FopCompanyOrgService {
         if (CommonUtils.isBlank(o.getCompanyId())) {
             return new MessageResponse(1, "企业ID不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCompanyOrgType())) {
-            return new MessageResponse(1, "企业组织类型不能为空！");
-        }
+
 
 //        int temp = this.fopCompanyOrgDao.isExit(o);
 //        if (temp > 0) {

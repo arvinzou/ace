@@ -50,14 +50,12 @@
                                 <tbody>
                                 <tr></tr>
                                 <tr class="tr_bottom" style="line-height: 15px" ng-repeat="item in items" ng-click="showInfo($index);">
-                                    <td align="center" width="5%">
+                                    <td align="center" width="10px">
                                         <div class="dot"></div>
                                     </td>
-                                    <td align="center" width="25%" ng-bind="item.releaseDate"></td>
-                                    <td>
-                                        <p style="font-size: 16px" ng-bind="item.title"></p>
-                                        <p style="font-size: 12px" ng-bind="item.companyName"></p>
-                                    </td>
+                                    <td align="center" width="15%" ng-bind="item.releaseDate"></td>
+                                    <td  ng-bind="item.title"></td>
+                                    <td width="20" ng-bind="item.companyName"></td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -5,6 +5,14 @@
 li{
     cursor: pointer;
 }
+table{
+	table-layout: fixed;
+}
+td{
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
 ul,li{
 	text-decoration: none;
 }
@@ -116,6 +124,15 @@ body{
 	color: #ffffff;
 	padding-left: 15px;
 	background-color: rgba(0,0,0,.4);
+
+}
+.slice_title_01{
+	width: 80%;
+	height: 50px;
+	display: block;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 }
 .item{
 	width:100%;

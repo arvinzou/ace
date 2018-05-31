@@ -325,7 +325,7 @@
         document.getElementById("j_username").focus();
         if (window.top != window.self)
             window.top.window.location.href = contextPath
-                + "/dynamic/portal/security/login.jsp";
+                + "/dynamic/portal/security/login_fop.jsp";
 
     }
     jQuery(function ($) {

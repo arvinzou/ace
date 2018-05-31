@@ -38,7 +38,7 @@
                     企业名称
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <!--法人代表-->
+                    法人代表身份证号码
                 </div>
             </div>
             <div class="row">
@@ -46,7 +46,7 @@
                     <input type="text" ng-model="companyInfo.fullName" name="fullName" placeholder="输入企业名称"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <!--<input type="text" name="realName" placeholder="输入法人代表"/>--><!--关联法人代表信息，所以界面不展示-->
+                    <input type="text" name="identityCard" ng-model="person.identityCard" placeholder="输入法人代表身份证号码"/>
                 </div>
             </div>
             <div class="row">
@@ -291,13 +291,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="companyOrgType" type="text" placeholder="请选择党组织类型"/>
+                    <input name="companyOrgType" ng-model="dang.companyOrgType" type="text" placeholder="请选择党组织类型"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="peopleNum" type="text" placeholder="输入党员人数"/>
+                    <input name="peopleNum" ng-model="dang.peopleNum" type="text" placeholder="输入党员人数"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="dzz_establishDate" id="dzz_establishDate" type="text" placeholder="选择党组织成立时间"/>
+                    <input name="dzz_establishDate" ng-model="dang.establishDate" id="dzz_establishDate" type="text" placeholder="选择党组织成立时间"/>
                 </div>
             </div>
             <div class="row">
@@ -310,10 +310,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input name="dutyPersonName" type="text" placeholder="输入负责人姓名"/>
+                    <input name="dutyPersonName" ng-model="dang.dutyPersonName" type="text" placeholder="输入负责人姓名"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input name="dutyPersonPhone" type="text" placeholder="输入负责人联系电话"/>
+                    <input name="dutyPersonPhone" ng-model="dang.dutyPersonPhone" type="text" placeholder="输入负责人联系电话"/>
                 </div>
             </div>
         </div>
@@ -334,13 +334,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="gh_establishDate" id="gh_establishDate" type="text" placeholder="请选择成立时间"/>
+                    <input name="gh_establishDate" ng-model="gonghui.establishDate" id="gh_establishDate" type="text" placeholder="请选择成立时间"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="gh_dutyPersonName" type="text" placeholder="请输入工会组织负责人"/>
+                    <input name="gh_dutyPersonName" ng-model="gonghui.dutyPersonName" type="text" placeholder="请输入工会组织负责人"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="gh_dutyPersonPhone" type="text" placeholder="请输入联系电话"/>
+                    <input name="gh_dutyPersonPhone" ng-model="gonghui.dutyPersonPhone" type="text" placeholder="请输入联系电话"/>
                 </div>
             </div>
         </div>
@@ -363,8 +363,8 @@
                 <div class="col-lg-6 col-md-6 col-xs-6">
                     <select name="thirdLaborRelation" id="thirdLaborRelation" ng-model="companyInfo.thirdLaborRelation">
                         <option value=""> 请选择</option>
-                        <option value=""> 是</option>
-                        <option value=""> 否</option>
+                        <option value="1"> 是</option>
+                        <option value="0"> 否</option>
                     </select>
                 </div>
             </div>
@@ -400,10 +400,10 @@
         </div>
         <div class="row" style="height: 100px;">
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <textarea type="text" name="xg_work" placeholder="输入详情"></textarea>
+                <textarea type="text" name="xg_work" ng-model="work.itemValue" placeholder="输入详情"></textarea>
             </div>
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <textarea type="text" name="education" placeholder="输入详情"></textarea>
+                <textarea type="text" name="education" ng-model="edu.itemValue" placeholder="输入详情"></textarea>
             </div>
         </div>
         <div class="row">
@@ -416,10 +416,10 @@
         </div>
         <div class="row" style="height: 100px;">
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <textarea type="text" name="poverty" placeholder="输入详情"></textarea>
+                <textarea type="text" name="poverty" ng-model="poverty.itemValue" placeholder="输入详情"></textarea>
             </div>
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <textarea type="text" name="others" placeholder="输入详情"></textarea>
+                <textarea type="text" name="others" ng-model="others.itemValue" placeholder="输入详情"></textarea>
             </div>
         </div>
     </div>
@@ -448,11 +448,8 @@
 
     <div class="form_footer">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-xs-6">
-                <button class="save">保存</button>
-            </div>
-            <div class="col-lg-6 col-md-6 col-xs-6">
-                <button class="commit" ng-click="insertInformation();">提交</button>
+            <div class="col-lg-12 col-md-12 col-xs-12 commit">
+                <button  ng-click="insertInformation();">提交</button>
             </div>
         </div>
     </div>
