@@ -24,7 +24,7 @@ var option = {
     tooltip: {
         trigger: 'item',
         formatter: function (params) {
-            return params.name + ' : ' + params.value[2];
+            return params.name/* + ' : ' + params.value[2]*/;
         }
     },
     legend: {
@@ -39,13 +39,14 @@ var option = {
     geo: {
         map: '中国',
         //roam: true,
-        move: false,
         label: {
             normal: {
-                show: true,
+                show: false,
+                fontSize: 10,
             },
             emphasis: {
                 show: true,
+                fontSize: 12,
             }
         },
         itemStyle: {
@@ -88,9 +89,12 @@ function loadMap(cityName) {
         cityCode = 'china';
     }
     $.get('china-main-city/' + cityCode + '.json', function (geoJson) {
+        option.geo.roam = false;
+        myMap.setOption(option);
+        echarts.registerMap(cityName, geoJson);
+        option.geo.roam = true;
         option.geo.map = cityName;
         option.title.text = cityName + "地区";
-        echarts.registerMap(cityName, geoJson);
         myMap.setOption(option);
     });
 }
