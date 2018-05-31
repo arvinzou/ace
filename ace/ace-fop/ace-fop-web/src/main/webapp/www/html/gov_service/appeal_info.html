@@ -134,16 +134,16 @@
 
 	<body>
 	<div id="header"></div>
-		<div class="current_site">当前位置：政企服务 >> {{apealData.title}}</div>
+		<div class="current_site" ng-cloak>当前位置：政企服务 >> {{apealData.title}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
 				<div class="appeal_title">
-					<h3>{{apealData.title}}</h3>
-					<span>发布时间：{{apealData.releaseDate}}</span>
+					<h3 ng-cloak>{{apealData.title}}</h3>
+					<span ng-cloak>发布时间：{{apealData.releaseDate}}</span>
 				</div>
 			</div>
 			<div class="appeal_info">
-				<p>{{apealData.content}}</p>
+				<p ng-cloak>{{apealData.content}}</p>
 			</div>
 			<!--回复诉求-->
 			<div class="replay">

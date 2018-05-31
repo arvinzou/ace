@@ -172,13 +172,13 @@
 
 <body>
 <div id="header"></div>
-<div class="current_site">当前位置：市情要闻  >> {{info.title}}</div>
+<div class="current_site" ng-cloak>当前位置：市情要闻  >> {{info.title}}</div>
 <div class="appeal_index">
     <div class="appeal_doc">
         <div class="appeal_title">
-            <h3>{{info.title}}</h3>
-            <span>来源:{{info.source}}</span>
-            <span>{{info.releaseDate}}</span>
+            <h3 ng-cloak>{{info.title}}</h3>
+            <span ng-cloak>来源:{{info.source}}</span>
+            <span ng-cloak>{{info.releaseDate}}</span>
         </div>
     </div>
     <div class="finance_content">

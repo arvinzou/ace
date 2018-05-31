@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="search_list">
-                <div class="finance_list_title">
+                <div class="finance_list_title" ng-cloak>
                     共发现{{totalSize}}条项目信息
                 </div>
                 <div class="project_list">
@@ -115,9 +115,9 @@
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>合作方式：{{item.coopType}}</td>
-                                <td>所属区域：{{item.sector}}</td>
-                                <td>项目类型：{{item.projectType}}</td>
+                                <td ng-cloak>合作方式：{{item.coopType}}</td>
+                                <td ng-cloak>所属区域：{{item.sector}}</td>
+                                <td ng-cloak>项目类型：{{item.projectType}}</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                             </tr>
@@ -128,7 +128,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="5">发布时间：{{item.releaseDate}}</td>
+                                <td colspan="5" ng-cloak>发布时间：{{item.releaseDate}}</td>
                             </tr>
                         </table>
                     </div>

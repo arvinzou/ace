@@ -170,12 +170,12 @@
 
 	<body>
 	<div id="header"></div>
-		<div class="current_site">当前位置：合作交流  >> {{projectInfo.projectName}}</div>
+		<div class="current_site" ng-cloak>当前位置：合作交流  >> {{projectInfo.projectName}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
 				<div class="appeal_title">
-					<h3>{{projectInfo.projectName}}</h3>
-					<span>发布时间：{{projectInfo.releaseDate}}</span>
+					<h3 ng-cloak>{{projectInfo.projectName}}</h3>
+					<span ng-cloak>发布时间：{{projectInfo.releaseDate}}</span>
 				</div>
 			</div>
 			<div class="appeal_info">
@@ -236,7 +236,7 @@
 						<td align="right" ng-bind="item.releaseDate"></td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td colspan="2" ng-cloak>
 							{{item.reply}}
 						</td>
 					</tr>

@@ -38,12 +38,12 @@
                     企业名称
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    法人代表
+                    <!--法人代表-->
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-xs-8">
-                    <input type="text" name="fullName" placeholder="输入企业名称"/>
+                    <input type="text" ng-model="companyInfo.fullName" name="fullName" placeholder="输入企业名称"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
                     <!--<input type="text" name="realName" placeholder="输入法人代表"/>--><!--关联法人代表信息，所以界面不展示-->
@@ -62,7 +62,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <select name="companyType" id="companyType">
+                    <select name="companyType" id="companyType" ng-model="companyInfo.companyType">
                         <option value="">请选择企业性质</option>
                         <option value="1">私营企业</option>
                         <option value="2">港澳台商投资企业</option>
@@ -75,10 +75,10 @@
                     </select>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="establishDate" id="establishDate" placeholder="请选择成立时间"/>
+                    <input type="text" ng-model="companyInfo.establishDate" name="establishDate" id="establishDate" placeholder="请选择成立时间"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="crewSize" placeholder="请输入职工人数"/>
+                    <input type="text" ng-model="companyInfo.crewSize" name="crewSize" placeholder="请输入职工人数"/>
                 </div>
             </div>
             <div class="row">
@@ -94,13 +94,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="registeredCapital" placeholder="输入金额"/>
+                    <input type="text" ng-model="companyInfo.registeredCapital" name="registeredCapital" placeholder="输入金额"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="fixedAssets" placeholder="输入金额"/>
+                    <input type="text" ng-model="companyInfo.fixedAssets" name="fixedAssets" placeholder="输入金额"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input type="text" name="workingCapital" placeholder="输入金额"/>
+                    <input type="text" ng-model="companyInfo.workingCapital" name="workingCapital" placeholder="输入金额"/>
                 </div>
             </div>
             <div class="row">
@@ -110,7 +110,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    <input type="text" name="address" placeholder="输入地址"/>
+                    <input type="text" ng-model="companyInfo.address" name="address" placeholder="输入地址"/>
                 </div>
             </div>
         </div>
@@ -134,20 +134,20 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input type="text" name="realName" placeholder="输入姓名"/>
+                    <input type="text" ng-model="person.realName" name="realName" placeholder="输入姓名"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <select name="sex" id="sex">
+                    <select name="sex" id="sex" ng-model="person.sex">
                         <option value="">请选择性别</option>
                         <option value="2">男</option>
                         <option value="1">女</option>
                     </select>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input name="birthDate" id="birthDate" type="text" placeholder="选择出生年月"/>
+                    <input ng-model="person.birthDate" name="birthDate" id="birthDate" type="text" placeholder="选择出生年月"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input name="nativePlace" type="text" placeholder="输入籍贯"/>
+                    <input ng-model="person.nativePlace" name="nativePlace" type="text" placeholder="输入籍贯"/>
                 </div>
             </div>
             <div class="row">
@@ -166,16 +166,16 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input name="nationality" type="text" placeholder="输入民族"/>
+                    <input ng-model="person.nationality" name="nationality" type="text" placeholder="输入民族"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input name="political" type="text" placeholder="输入政治面貌"/>
+                    <input ng-model="person.political" name="political" type="text" placeholder="输入政治面貌"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input name="recruitmentDate" id="recruitmentDate" type="text" placeholder="请选择时间"/>
+                    <input ng-model="person.recruitmentDate" name="recruitmentDate" id="recruitmentDate" type="text" placeholder="请选择时间"/>
                 </div>
                 <div class="col-lg-3 col-md-3 col-xs-3">
-                    <input name="education" type="text" placeholder="输入文化程度"/>
+                    <input ng-model="person.education" name="education" type="text" placeholder="输入文化程度"/>
                 </div>
             </div>
             <div class="row">
@@ -191,13 +191,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="skillJobTitle" type="text" placeholder="输入技术职称"/>
+                    <input ng-model="person.skillJobTitle" name="skillJobTitle" type="text" placeholder="输入技术职称"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="deptPost" type="text" placeholder="输入单位职务"/>
+                    <input ng-model="person.deptPost" name="deptPost" type="text" placeholder="输入单位职务"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="societyPost" type="text" placeholder="输入主要社会职务"/>
+                    <input ng-model="person.societyPost" name="societyPost" type="text" placeholder="输入主要社会职务"/>
                 </div>
             </div>
             <div class="row">
@@ -213,13 +213,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="postcode" type="text" placeholder="输入邮政编码"/>
+                    <input ng-model="person.postcode" name="postcode" type="text" placeholder="输入邮政编码"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="fax" type="text" placeholder="输入传真"/>
+                    <input ng-model="person.fax" name="fax" type="text" placeholder="输入传真"/>
                 </div>
                 <div class="col-lg-4 col-md-4 col-xs-4">
-                    <input name="email" type="text" placeholder="输入电子信箱"/>
+                    <input ng-model="person.email" name="email" type="text" placeholder="输入电子信箱"/>
                 </div>
             </div>
             <div class="row">
@@ -229,7 +229,7 @@
             </div>
             <div class="row" style="height: 100px;">
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    <textarea name="resume" placeholder="介绍自己~"></textarea>
+                    <textarea ng-model="person.resume" name="resume" placeholder="介绍自己~"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -239,7 +239,7 @@
             </div>
             <div class="row" style="height: 100px;">
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    <textarea name="achievement" placeholder="描述特长及成就~"></textarea>
+                    <textarea ng-model="person.achievement" name="achievement" placeholder="描述特长及成就~"></textarea>
                 </div>
             </div>
         </div>
@@ -257,10 +257,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input name="ownSpace" type="text" placeholder="输入面积"/>
+                    <input ng-model="companyInfo.ownSpace" name="ownSpace" type="text" placeholder="输入面积"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input name="tenancySpace" type="text" placeholder="输入面积"/>
+                    <input ng-model="companyInfo.tenancySpace" name="tenancySpace" type="text" placeholder="输入面积"/>
                 </div>
             </div>
             <div class="row">
@@ -270,7 +270,7 @@
             </div>
             <div class="row" style="height: 100px;">
                 <div class="col-lg-12 col-md-12 col-xs-12">
-                    <textarea name="majorVariety" placeholder="描述主要品种~"></textarea>
+                    <textarea ng-model="companyInfo.majorVariety" name="majorVariety" placeholder="描述主要品种~"></textarea>
                 </div>
             </div>
         </div>
@@ -358,10 +358,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input name="laborContractNum" type="text" placeholder="输入人数"/>
+                    <input ng-model="companyInfo.laborContractNum" name="laborContractNum" type="text" placeholder="输入人数"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <select name="thirdLaborRelation" id="thirdLaborRelation">
+                    <select name="thirdLaborRelation" id="thirdLaborRelation" ng-model="companyInfo.thirdLaborRelation">
                         <option value=""> 请选择</option>
                         <option value=""> 是</option>
                         <option value=""> 否</option>
@@ -378,10 +378,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input name="socialInsuranceAddr" type="text" placeholder="输入参保地"/>
+                    <input ng-model="companyInfo.socialInsuranceAddr" name="socialInsuranceAddr" type="text" placeholder="输入参保地"/>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-6">
-                    <input name="socialInsuranceNum" type="text" placeholder="输入登记证号"/>
+                    <input ng-model="companyInfo.socialInsuranceNum" name="socialInsuranceNum" type="text" placeholder="输入登记证号"/>
                 </div>
             </div>
         </div>
@@ -438,10 +438,10 @@
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <input name="accTaxAmount" type="text" placeholder="输入金额"/>
+                <input ng-model="companyInfo.accTaxAmount" name="accTaxAmount" type="text" placeholder="输入金额"/>
             </div>
             <div class="col-lg-6 col-md-6 col-xs-6">
-                <input name="yearTaxAmount" type="text" placeholder="输入金额"/>
+                <input ng-model="companyInfo.yearTaxAmount" name="yearTaxAmount" type="text" placeholder="输入金额"/>
             </div>
         </div>
     </div>
