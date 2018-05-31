@@ -184,7 +184,7 @@
 						<td width="15%" align="right">合作方式：</td>
 						<td width="35%" class="" ng-bind="projectInfo.coopType"></td>
 						<td width="15%" align="right">企业名称：</td>
-						<td width="35%">德山化工</td>
+						<td width="35%" ng-bind="projectInfo.displayName"></td>
 					</tr>
 					<tr>
 						<td width="15%" align="right">所属区域：</td>
@@ -196,7 +196,7 @@
 						<td width="15%" align="right">项目类型：</td>
 						<td width="35%" class="" ng-bind="projectInfo.projectType"></td>
 						<td width="15%" align="right">企业通讯地址：</td>
-						<td width="35%">常德市德山经开区桃林路28号</td>
+						<td width="35%" ng-bind="projectInfo.address"></td>
 					</tr>
 				</table>
 			</div>
@@ -204,7 +204,7 @@
 				<div>
 				 <span class="title_lager">内容</span><span class="title_small">/&nbsp;Legal&nbsp;Document</span>
 				</div>
-				<div class="content_info" ng-bind="projectInfo.coopDesc">
+				<div class="content_info">
 
 				</div>
 			</div>	

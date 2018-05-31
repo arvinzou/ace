@@ -35,7 +35,7 @@
 							<div class="search_left" ng-click="sortList('asc');"  id="asc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-up" style="color: #1A56A8;"></span></div>
 							<div class="search_left" ng-click="sortList('desc');" hidden="true" id = "desc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-down" style="color: #1A56A8;"></span></div>
 							<div class="search_right">
-								<span class="s_title"><input type="text" placeholder="请输入关键字搜索"/><button class="glyphicon glyphicon-search"></button></span>
+								<span class="s_title"><input id="key_word" type="text" placeholder="请输入关键字搜索"/><button class="glyphicon glyphicon-search" ng-click="search();"></button></span>
 							</div>
 						</div>
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">

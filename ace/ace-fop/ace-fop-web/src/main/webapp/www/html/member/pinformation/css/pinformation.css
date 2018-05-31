@@ -39,8 +39,9 @@
 }
 .title_box_title{
     font-size: 16px;
-    text-align: left;
     color: #1A56A8;
+    font-weight: bolder;
+
 }
 .title_box_link{
     font-size: 16px;

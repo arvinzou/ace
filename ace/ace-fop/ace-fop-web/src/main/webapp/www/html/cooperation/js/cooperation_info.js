@@ -20,6 +20,7 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 $scope.projectInfo = result.data;
                 $scope.comments = result.data.comments;
+                $(".content_info").html(result.data.coopDesc);
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
