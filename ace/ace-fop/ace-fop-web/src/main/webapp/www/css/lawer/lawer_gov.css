@@ -84,20 +84,21 @@ body {
 }
 
 .searchTable tr {
-	/*	border-bottom: 1px solid #E1E5ED;
-*/
-	border-top: 1px solid transparent;
+	border-bottom: 1px solid #E1E5ED;
+	cursor: pointer;
+
+/*	border-top: 1px solid transparent;
 	border-left: 1px solid transparent;
 	border-right: 1px solid transparent;
 	/*border: 1px solid red;*/
 }
 
 .searchTable tr:hover {
-	color: #FF9F00;
-	border-bottom: 1px solid #FF9F00 !important;
-	border-top: 1px solid #FF9F00 !important;
-	border-left: 1px solid #FF9F00 !important;
-	border-right: 1px solid #FF9F00 !important;
+	/*color: #FF9F00;*/
+	/*border-bottom: 1px solid #FF9F00 !important;*/
+	/*border-top: 1px solid #FF9F00 !important;*/
+	/*border-left: 1px solid #FF9F00 !important;*/
+	/*border-right: 1px solid #FF9F00 !important;*/
 }
 
 .title01{
