@@ -5,10 +5,12 @@ var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
     $("#establishDate").datetimepicker({
-        format: "yyyy-mm-dd hh:ii:ss",
+        format: "yyyy-mm-dd",
         language: 'zh-CN',
         autoclose: true,
         todayBtn: true,
+        startView: 2,
+        minView: 2
     });
 
     var assId = null;
@@ -21,6 +23,7 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 console.log(result);
                 $scope.information = result.data;
+                $scope.date = result.data.establishDate.substring(0,10);
                 $scope.group = result.data.list[0];
                 assId = result.data.id;
                 if (!$scope.$$phase) {
@@ -43,7 +46,7 @@ app.controller(ngControllerName,function($scope){
 
     $scope.insertInformation = function(){
         var fullName = $("input[name='fullName']").val();
-        var establishDate = $("input[name='establishDate']").val();
+        var establishDate = $("input[name='establishDate']").val()+" 00:00:00";
         var formatDate = new Date(establishDate.replace(/-/,"/"))
         var phoneNumber = $("input[name='phoneNumber']").val();
         var address = $("input[name='address']").val();
@@ -103,4 +106,10 @@ function addr(addr) {
     $("#address").val(addr);
 }
 /** 2、 end */
+
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        return text.substring(0,10);
+    }
+});
 
