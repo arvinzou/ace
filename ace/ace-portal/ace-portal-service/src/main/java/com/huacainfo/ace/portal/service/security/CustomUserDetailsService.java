@@ -45,19 +45,22 @@ public class CustomUserDetailsService implements UserDetailsService {
 		String passwd=null;
 		if(username!=null&&username.length()==36){
 			String code =(String) redisTemplate.opsForValue().get(username);
-			account=username;
-			passwd="4297f44b13955235245b2497399d7a93";
 			this.logger.info("微信扫描登录 ============================>{}",code);
 			try {
 				syUser = systemService.selectUsersByCode(code, null);
+				if(syUser != null){
+					account=username;
+					passwd="4297f44b13955235245b2497399d7a93";
+				}
 			}catch (Exception e){
 				this.logger.error("{}",e);
 			}
 		}else{
 			syUser = systemService.selectUsersByAccount(username);
-			account=syUser.getAccount();
-			passwd=syUser.getPassword();
-
+			if(syUser != null){
+				account=syUser.getAccount();
+				passwd=syUser.getPassword();
+			}
 		}
 		Collection<GrantedAuthority> auths = new HashSet<GrantedAuthority>();
 		this.logger.info("========================================================");
