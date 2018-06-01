@@ -563,13 +563,13 @@ $.ajax({
 		}
 	});
 }
-function insertWeixinUser(userId,openId){
+function insertWeixinUser(unionid,openId){
 var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
 var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
 $.ajax({
 		type : "post",
 		url : contextPath + "/users/updateOpenIdById.do",
-		data:{userId:r.userId,openId:openId},
+		data:{userId:r.userId,openId:unionid},
 		success : function(rst, textStatus) {
 			initWeixin(r.userId);
 			 $(dialog1).dialog("close");
@@ -676,13 +676,13 @@ $.ajax({
 		}
 	});
 }
-function insertSappUser(userId,openId){
+function insertSappUser(unionid,openId){
 var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam','selrow');
 var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
 $.ajax({
 		type : "post",
 		url : contextPath + "/users/updateUserAppOpenId.do",
-		data:{userId:r.userId,appOpenId:openId},
+		data:{userId:r.userId,appOpenId:unionid},
 		success : function(rst, textStatus) {
 			initSapp(r.userId);
 			 $(dialog2).dialog("close");
