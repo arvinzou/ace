@@ -3,7 +3,6 @@ package com.huacainfo.ace.portal.web.controller;
 import java.util.*;
 import java.util.Date;
 import java.util.Calendar;
-import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.WxFormid;
@@ -16,16 +15,7 @@ import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.alibaba.fastjson.JSON;
-import com.huacainfo.ace.common.model.view.Tree;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.DictUtils;
-import com.huacainfo.ace.portal.model.Resources;
-import com.huacainfo.ace.portal.service.SystemService;
 
 @Controller
 @RequestMapping("/www/")
