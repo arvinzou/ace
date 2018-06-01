@@ -89,10 +89,9 @@ function loadMap(cityName) {
         cityCode = 'china';
     }
     $.get('china-main-city/' + cityCode + '.json', function (geoJson) {
-        option.geo.roam = false;
-        myMap.setOption(option);
+        // option.geo.roam = false;
+        // myMap.setOption(option);
         echarts.registerMap(cityName, geoJson);
-        option.geo.roam = true;
         option.geo.map = cityName;
         option.title.text = cityName + "地区";
         myMap.setOption(option);
