@@ -69,8 +69,9 @@ public interface IntegrityPublicityService {
      * @author: huacai003
      * @version: 2018-05-28
      */
-    SingleResult
-            <IntegrityPublicityVo> selectIntegrityPublicityByPrimaryKey(String id) throws Exception;
+    SingleResult<IntegrityPublicityVo> selectIntegrityPublicityByPrimaryKey(String id) throws Exception;
+
+    ResultResponse selectIntegrityPublicityByPrimaryKeyDo(String id) throws Exception;
 
     /**
      * @throws

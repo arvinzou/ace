@@ -184,3 +184,9 @@ body {
 	right: 10px;
 	top: 20px;
 }
+td{
+	WORD-WRAP: break-word;
+	/*overflow: hidden;*/
+	/*white-space: nowrap;*/
+	/*text-overflow: ellipsis;*/
+}

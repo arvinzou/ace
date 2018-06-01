@@ -11,6 +11,8 @@ public interface FopCompanyOrgDao {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteByCID(String cid);
+
     int insert(FopCompanyOrg record);
 
     int insertSelective(FopCompanyOrg record);
@@ -26,6 +28,8 @@ public interface FopCompanyOrgDao {
     List<FopCompanyOrgVo> findList(@Param("condition") FopCompanyOrgQVo condition,
                                    @Param("start") int start, @Param("limit") int limit,
                                    @Param("orderBy") String orderBy);
+
+    List<FopCompanyOrgVo> findListByCID(@Param("companyId") String companyId);
 
     int findCount(@Param("condition") FopCompanyOrgQVo condition);
 

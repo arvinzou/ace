@@ -57,7 +57,7 @@ app.controller(ngControllerName,function($scope) {
                 async: false,
                 data: {name: regist_name, phoneNumber: regist_num, isCompany: flag},
                 success: function (result) {
-                    if (result.status == 0) {
+                    if (result.status == 0 && result.errorMessage == '') {
                        console.log(result);
                         layer.alert("注册成功,5秒后将跳转登录页面！", {
                             icon: 1,
@@ -67,6 +67,11 @@ app.controller(ngControllerName,function($scope) {
                         if (!$scope.$$phase) {
                             $scope.$apply();
                         }
+                    }else if(result.errorMessage != ''){
+                        layer.alert(result.errorMessage, {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
                     } else {
                         layer.alert(result.detail, {
                             icon: 5,
@@ -88,7 +93,7 @@ var t = 5;
 function showTime(){
     t -= 1;
     if(t == 0){
-        location.href = "/portal/dynamic/portal/security/login.jsp";
+        location.href = "/portal/dynamic/portal/security/login_fop.jsp";
     }
     setTimeout("showTime()",1000);
 }

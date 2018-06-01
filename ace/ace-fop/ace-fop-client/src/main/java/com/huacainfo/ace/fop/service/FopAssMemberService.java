@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopAssMember;
+import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.vo.FopAssMemberQVo;
 import com.huacainfo.ace.fop.vo.FopAssMemberVo;
 
@@ -79,6 +80,8 @@ public interface FopAssMemberService {
      * @version: 2018-05-02
      */
     public abstract MessageResponse deleteFopAssMemberByFopAssMemberId(String id, UserProp userProp) throws Exception;
+
+    public abstract MessageResponse deleteFopAssMemberByFopAssId(String assId, UserProp userProp) throws Exception;
 
 
 }

@@ -8,6 +8,8 @@ import com.huacainfo.ace.fop.model.FopCompanyContribution;
 import com.huacainfo.ace.fop.vo.FopCompanyContributionQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyContributionVo;
 
+import java.util.List;
+
 /**
  * @author: Arvin
  * @version: 2018-05-02
@@ -28,6 +30,9 @@ public interface FopCompanyContributionService {
      * @version: 2018-05-02
      */
     public abstract PageResult<FopCompanyContributionVo> findFopCompanyContributionList(FopCompanyContributionQVo condition, int start, int limit, String orderBy) throws Exception;
+
+
+    public abstract List<FopCompanyContributionVo> findFopCompanyContributionListByCID(String companyId) throws Exception;
 
     /**
      * @throws
@@ -79,6 +84,8 @@ public interface FopCompanyContributionService {
      * @version: 2018-05-02
      */
     public abstract MessageResponse deleteFopCompanyContributionByFopCompanyContributionId(String id, UserProp userProp) throws Exception;
+
+    MessageResponse deleteFopCompanyContributionByCID(String cid, UserProp userProp) throws Exception;
 
 
 }

@@ -13,10 +13,13 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.PayType;
+import com.huacainfo.ace.fop.dao.FopAssMemberDao;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
+import com.huacainfo.ace.fop.model.FopAssMember;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopPayRecord;
 import com.huacainfo.ace.fop.service.*;
+import com.huacainfo.ace.fop.vo.FopAssMemberVo;
 import com.huacainfo.ace.fop.vo.FopAssociationQVo;
 import com.huacainfo.ace.fop.vo.FopAssociationVo;
 import com.huacainfo.ace.portal.model.Department;
@@ -26,6 +29,7 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.DepartmentService;
 import com.huacainfo.ace.portal.service.UserCfgService;
 import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +72,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
     @Autowired
     private UserCfgService userCfgService;
 
+    @Autowired
+    private FopAssMemberDao fopAssMemberDao;
+
     /**
      * @author: Arvin
      * @version: 2018-05-02
@@ -93,6 +100,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
     @Override
     public MessageResponse insertFopAssociation(FopAssociation o, UserProp userProp)
             throws Exception {
+        if (!CommonUtils.isValidMobile(o.getPhoneNumber())) {
+            return new MessageResponse(ResultCode.FAIL, "不是手机号码");
+        }
         if (CommonUtils.isBlank(o.getFullName())) {
             return new MessageResponse(1, "协会全称不能为空！");
         }
@@ -250,6 +260,23 @@ public class FopAssociationServiceImpl implements FopAssociationService {
      * @version: 2018-05-02
      */
     @Override
+    public ResultResponse selectAssociationByPrimaryKey(UserProp userProp) throws Exception {
+        ResultResponse rr = getAssociationId(userProp);
+        if (ResultCode.FAIL == rr.getStatus()) {
+            return rr;
+        }
+        String id = (String) rr.getData();
+        FopAssociationVo fm = this.fopAssociationDao.selectVoByPrimaryKey(id);
+        List<FopAssMemberVo> list = fopAssMemberDao.selectVoByAssociationId(id);
+        fm.setList(list);
+        return new ResultResponse(ResultCode.SUCCESS, "获取团体详情", fm);
+    }
+
+    /**
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @Override
     public MessageResponse deleteFopAssociationByFopAssociationId(String id,
                                                                   UserProp userProp) throws Exception {
         FopAssociation association = fopAssociationDao.selectByPrimaryKey(id);
@@ -269,6 +296,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
 
     @Override
     public MessageResponse insertAssociation(String name, String phoneNumber) throws Exception {
+        if (!CommonUtils.isValidMobile(phoneNumber)) {
+            return new MessageResponse(ResultCode.FAIL, "不是手机号码");
+        }
         FopAssociation o = new FopAssociation();
         o.setFullName(name);
         o.setPhoneNumber(phoneNumber);
@@ -318,5 +348,27 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         }
 
         return new MessageResponse(0, "添加商协会完成");
+    }
+
+    @Override
+    public FopAssociation selectByDepartmentId(String departmentId) throws Exception {
+        return fopAssociationDao.selectByDepartmentId(departmentId);
+    }
+
+
+    private ResultResponse getAssociationId(UserProp userProp) throws Exception {
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new ResultResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new ResultResponse(1, "账户没有绑定团体！");
+        }
+        FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+        if (null == fa) {
+            return new ResultResponse(ResultCode.FAIL, "fop团体不存在");
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "id获取", fa.getId());
     }
 }

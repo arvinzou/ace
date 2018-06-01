@@ -11,6 +11,13 @@ app.controller(ngControllerName,function($scope){
     try{
         $scope.userProp = userProp;
     }catch(e){}
+
+    //初始化文本框
+    var editor = new Simditor({
+        textarea: $('#editor')
+
+    });
+
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'upbtn',
@@ -146,6 +153,7 @@ app.controller(ngControllerName,function($scope){
         console.log(coverImg);
         var title = $("input[name='name']").val();
         var content = $("textarea[name='content']").val();
+        var remark = $("textarea[name='remark']").val();
         if (title == '' || title == undefined) {
             layer.alert("标题不能为空！", {
                 icon: 5,
@@ -167,11 +175,18 @@ app.controller(ngControllerName,function($scope){
             });
             return;
         }
+        if(remark == '' || remark == undefined){
+            layer.alert("产品简介不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
         $.ajax({
             url: "/fop/www/insertInformationServiceDo",
             type: "post",
             async: false,
-            data: {title: title, content: content, modules: "2", fileUrl: coverImg},
+            data: {title: title, content: content, modules: "2", fileUrl: coverImg, remark: remark},
             success: function (result) {
                 if (result.status == 0) {
                     console.log(result);

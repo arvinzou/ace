@@ -80,13 +80,13 @@ body{
 }
 .product_container{
     width: 100%;
-    height: 200px;
+    height: 150px;
     border: 1px solid #E1E5ED;
     margin-top: 30px;
 }
 .content_container{
     width: 94%;
-    height: 90%;
+    height: 150px;
     margin-top: 10px;
     margin-left: 3%;
 }
@@ -105,6 +105,9 @@ body{
     color: #C3CBD6;
     word-break: break-all;
     word-wrap:break-word;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .img_container img{
     width: 100%;

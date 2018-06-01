@@ -80,4 +80,21 @@ app.controller(ngControllerName,function($scope) {
             index = index +10;
         }
     }
+
+    $scope.showBrand = function(index){
+        var primaryId = $scope.bands[index].id;
+        console.log(primaryId);
+        window.open('html/band/band_info.html?id='+primaryId);
+    }
+
+    $scope.showInfo = function(index){
+        var primaryId = $scope.notice_list[index].id;
+        console.log(primaryId);
+        window.open('html/information/information_info.html?id='+primaryId);
+    }
+    $scope.showBannerInfo = function(index){
+        var primaryId = $scope.notice_slices[index].id;
+        console.log(primaryId);
+        window.open('html/information/information_info.html?id='+primaryId);
+    }
 });

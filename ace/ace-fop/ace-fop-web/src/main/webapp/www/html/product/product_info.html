@@ -15,6 +15,7 @@
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/product_info.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
     <style type="text/css">
         body {
             background-color: #F4F4F4;
@@ -171,20 +172,19 @@
 
 <body>
 <div id="header"></div>
-<div ng-include="'../common/nav.html'"></div>
-<div class="current_site">当前位置：企业产品  >> {{info.title}}</div>
+<div class="current_site" ng-cloak>当前位置：企业产品  >> {{info.title}}</div>
 <div class="appeal_index">
     <div class="appeal_doc">
         <div class="appeal_title">
-            <h3>{{info.title}}</h3>
-            <span>{{info.releaseDate}}</span>
+            <h3 ng-cloak>{{info.title}}</h3>
+            <span ng-cloak>{{info.releaseDate}}</span>
         </div>
     </div>
     <div class="finance_content">
         <div>
             <span class="title_lager">内容</span><span class="title_small">/&nbsp;Content</span>
         </div>
-        <div class="content_info" ng-bind="info.content">
+        <div class="content_info">
         </div>
     </div>
 </div>

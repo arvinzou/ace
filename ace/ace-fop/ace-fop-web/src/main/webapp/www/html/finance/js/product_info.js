@@ -19,11 +19,11 @@ app.controller(ngControllerName,function($scope){
         success:function(result){
             if(result.status == 0) {
                 $scope.projectInfo = result.data;
-                $scope.comments = result.data.comments;
+                $(".content_info").html(result.data.description);
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
-                if($(".custom_layper_page_info").length>0){
+               /* if($(".custom_layper_page_info").length>0){
                     setTimeout(function(){
                         var itemSize=$(".msg_list table").length;//直接从html取出已经渲染的tr
                         var pages = Math.ceil(itemSize/pageSize); //得到总页数
@@ -41,7 +41,7 @@ app.controller(ngControllerName,function($scope){
                         });
                         staticPages(1);//静态分页
                     });
-                }
+                }*/
             }else {
                 layer.alert(result.errorMessage, {
                     icon: 5,

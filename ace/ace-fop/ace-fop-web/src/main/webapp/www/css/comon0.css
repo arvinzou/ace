@@ -2444,3 +2444,34 @@ input[type="checkbox"] {
     background-color: #1A56A8;
 }
 
+.modal .modal-body .input_style {
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */;
+    height: 40px;
+    padding-left: 10px;
+    border: #C9D8DB 1px solid;
+}
+
+.modal .modal-body > div {
+    margin-bottom: 10px;
+}
+
+textarea {
+    height: 200px;
+    width: 100%;
+    resize: none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */;
+    border: #C9D8DB 1px solid;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: bolder;
+    color: #1A56A8;
+}
+

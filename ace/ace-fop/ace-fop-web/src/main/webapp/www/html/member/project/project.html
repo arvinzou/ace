@@ -49,13 +49,13 @@
                             <button id="delete" ng-click="delete($index);">删除</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="4" id="content"
-                            style="word-wrap:break-word;height: 100px;text-overflow: ellipsis;overflow: hidden;"
-                            ng-bind="item.coopDesc">
+                    <!--<tr>-->
+                        <!--<td colspan="4" id="content"-->
+                            <!--style="word-wrap:break-word;height: 100px;text-overflow: ellipsis;overflow: hidden;"-->
+                            <!--ng-bind="item.coopDesc">-->
 
-                        </td>
-                    </tr>
+                        <!--</td>-->
+                    <!--</tr>-->
                     <tr>
                         <td colspan="4" class="tr_title" ng-bind="item.releaseDate"></td>
                     </tr>
@@ -66,68 +66,6 @@
     </div>
 </div>
 </body>
-
-<!--编辑模态框-->
-<!--
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">编辑项目信息</h4>
-            </div>
-            <div class="modal-body">
-                <div class="product_form">
-                    <table class="product_table" cellpadding="0" cellspacing="0" border="0">
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>项目名称</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" ng-model="infoData.projectName"   onfocus="this.placeholder=''" /></td>
-                        </tr>
-
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>合作方式</span></td>
-                            <td width="5%"></td>
-                            <td>
-                                <select ng-model="infoData.coopType">
-                                    <option value="">请选择合作方式</option>
-                                    <option value="1">投资合作</option>
-                                    <option value="2">合作开发</option>
-                                    <option value="3">出资+资源合作</option>
-                                    <option value="4">其他</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>所属区域</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" ng-model="infoData.areaCode"/></td>
-                        </tr>
-                        <tr>
-                            <td width="15%" align="right"><span>项目类型</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" ng-model="infoData.projectType"/></td>
-                        </tr>
-                        <tr style="height: 186px;">
-                            <td width="15%" align="right" style="height: 186px;"><span>内容</span></td>
-                            <td width="5%" style="height: 186px;"></td>
-                            <td style="height: 186px;">
-                                <textarea  id="editor"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center">
-                                <button class="submit" data-dismiss="modal" ng-click="update(infoData.id);">提交</button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
-
 
 <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      data-backdrop="false">
@@ -166,7 +104,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="submit btn btn-primary" data-dismiss="modal"
                         ng-click="update(infoData.id);">提交
                 </button>
@@ -218,7 +156,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="submit btn btn-primary" data-dismiss="modal"
                         ng-click="release();">提交
                 </button>

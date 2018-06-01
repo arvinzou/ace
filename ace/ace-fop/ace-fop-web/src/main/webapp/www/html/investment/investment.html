@@ -24,91 +24,77 @@
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/investment.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
 </head>
 
 <body>
 <div id="header"></div>
-<div ng-include="'../common/nav.html'"></div>
 <div class="bodybg">
-    <div class="juz body_box">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td class="main_box" valign="top">
-                    <div class="main">
-                        <div class="title01">
-                            <span class="title_lager">招商信息</span><span
-                                class="title_small">/&nbsp;Investment Information</span>
-                            <button ng-if="userProp" class="law_help" data-toggle="modal" data-target="#myModal"
-                                    ng-click="before_release();">发布招商
-                            </button>
-                            <button ng-if="!userProp" class="law_help" data-toggle="modal" data-dismiss="#myModal"
-                                    ng-click="before_release();">发布招商
-                            </button>
-                        </div>
-                        <div class="searchTable">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tbody>
-                                <tr></tr>
-                                <tr class="tr_bottom" style="line-height: 15px" ng-repeat="item in items" ng-click="showInfo($index);">
-                                    <td align="center" width="5%">
-                                        <div class="dot"></div>
-                                    </td>
-                                    <td align="center" width="25%" ng-bind="item.releaseDate"></td>
-                                    <td>
-                                        <p style="font-size: 16px" ng-bind="item.title"></p>
-                                        <p style="font-size: 12px" ng-bind="item.companyName"></p>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="paganation"></div>
-                    </div>
-                    <div>
-                    </div>
-                </td>
-            </tr>
-        </table>
+    <div class="juz">
+        <div class="main">
+            <div class="title01">
+                <span class="title_lager">招商信息</span><span
+                    class="title_small">/&nbsp;Investment Information</span>
+                <button ng-if="userProp" class="law_help" data-toggle="modal" data-target="#myModal"
+                        ng-click="before_release();">发布招商
+                </button>
+                <button ng-if="!userProp" class="law_help" data-toggle="modal" data-dismiss="#myModal"
+                        ng-click="before_release();">发布招商
+                </button>
+            </div>
+            <div class="searchTable">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr class="tr_bottom" style="line-height: 15px" ng-repeat="item in items"
+                        ng-click="showInfo($index);">
+                        <td align="center" width="15px">
+                            <div class="dot"></div>
+                        </td>
+                        <td align="center" width="20%" ng-bind="item.releaseDate"></td>
+                        <td ng-bind="item.title"></td>
+                        <td width="20%" ng-bind="item.companyName"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="paganation"></div>
+        </div>
+        <div>
+        </div>
     </div>
 </div>
 </body>
 
 
-<!--发布招商模态框-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">发布招商</h4>
             </div>
             <div class="modal-body">
-                <div class="product_form">
-                    <table class="product_table" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
-                        <tr>
-                            <td width="15%" align="right"><span class="required">*</span><span>标题</span></td>
-                            <td width="5%"></td>
-                            <td><input type="text" placeholder="请输入招商信息标题" name="name" onfocus="this.placeholder=''"
-                                       onblur="this.placeholder='请输入招商信息标题 '"/></td>
-                        </tr>
-                        <tr style="height: 186px;">
-                            <td width="15%" align="right" style="height: 186px;"><span>具体内容</span></td>
-                            <td width="5%" style="height: 186px;"></td>
-                            <td style="height: 300px;">
-                                <textarea name="content" id="editor" placeholder="请描述招商信息具体内容"
-                                          onfocus="this.placeholder=''"
-                                          onblur="this.placeholder='请描述招商信息具体内容'"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center">
-                                <button class="submit" data-dismiss="modal" ng-click="releaseInfo();">发布</button>
-                            </td>
-                        </tr>
-                    </table>
+                <div><label>标题</label><br>
+                    <input class="input_style" type="text" placeholder="请输入招商信息标题" name="name"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='请输入招商信息标题 '"/>
                 </div>
+                <div><label>具体内容</label><br>
+                    <textarea name="content" id="editor" placeholder="请描述招商信息具体内容"
+                              onfocus="this.placeholder=''"
+                              onblur="this.placeholder='请描述招商信息具体内容'"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="submit btn btn-primary" data-dismiss="modal" ng-click="releaseInfo();">
+                    提交
+                </button>
             </div>
         </div>
     </div>
 </div>
+
+
 </html>

@@ -15,12 +15,12 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
+import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopPayRecord;
 import com.huacainfo.ace.fop.model.FopPerson;
 import com.huacainfo.ace.fop.service.*;
-import com.huacainfo.ace.fop.vo.FopCompanyQVo;
-import com.huacainfo.ace.fop.vo.FopCompanyVo;
+import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.model.Department;
 import com.huacainfo.ace.portal.model.UserCfg;
 import com.huacainfo.ace.portal.model.Users;
@@ -28,6 +28,7 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.DepartmentService;
 import com.huacainfo.ace.portal.service.UserCfgService;
 import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,12 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
     @Autowired
     private UserCfgService userCfgService;
+
+    @Autowired
+    private FopCompanyOrgService fopCompanyOrgService;
+
+    @Autowired
+    private FopCompanyContributionService fopCompanyContributionService;
 
     /**
      * @throws
@@ -140,13 +147,15 @@ public class FopCompanyServiceImpl implements FopCompanyService {
      * @version: 2018-05-02
      */
     @Override
-    public MessageResponse insertFopCompany(FopCompanyVo o, UserProp userProp)
-            throws Exception {
+    public MessageResponse insertFopCompany(FopCompanyVo o, UserProp userProp) throws Exception {
+        if (!CommonUtils.isValidMobile(o.getLpMobile())) {
+            return new MessageResponse(ResultCode.FAIL, "不是手机号码");
+        }
+
+        //设置主键标识
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getFullName())) {
             return new MessageResponse(ResultCode.FAIL, "企业全称不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getPersonId())) {
-            return new MessageResponse(ResultCode.FAIL, "企业法人不能为空！");
         }
         if (CommonUtils.isBlank(o.getLpMobile())) {
             return new MessageResponse(ResultCode.FAIL, "企业法人联系方式不能为空!");
@@ -160,16 +169,17 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (ResultCode.FAIL == rs1.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
         }
+        Department department = (Department) rs1.getData();
         //构建法人信息
         ResultResponse rs2 = fopPersonService.insertPerson(o, userProp);
         if (ResultCode.FAIL == rs2.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs2.getInfo());
         }
+        FopPerson person = (FopPerson) rs2.getData();
         //入库企业信息
-        Department department = (Department) rs1.getData();
+        o.setPersonId(person.getId());
         o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
         o.setDepartmentId(department.getDepartmentId());
-        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -193,6 +203,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
     @Override
     public MessageResponse insertCompany(String fullName, String lpMobile) throws Exception {
+        if (!CommonUtils.isValidMobile(lpMobile)) {
+            return new MessageResponse(ResultCode.FAIL, "不是手机号码");
+        }
         FopCompanyVo o = new FopCompanyVo();
         o.setFullName(fullName);
         o.setLpMobile(lpMobile);
@@ -421,4 +434,44 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         rst.put("rows", list);
         return rst;
     }
+
+    @Override
+    public FopCompany selectByDepartmentId(String departmentId) throws Exception {
+        return fopCompanyDao.selectByDepartmentId(departmentId);
+    }
+
+    @Override
+    public ResultResponse selectCompanyInfo(UserProp userProp) throws Exception {
+        ResultResponse rr = getCompanyId(userProp);
+        if (ResultCode.FAIL == rr.getStatus()) {
+            return rr;
+        }
+        String id = (String) rr.getData();
+        FopCompanyVo fc = fopCompanyDao.selectVoByPrimaryKey(id);
+        FopPersonVo person = fopPersonService.selectFopPersonByPrimaryKey(fc.getPersonId()).getValue();
+        List<FopCompanyOrgVo> olist = fopCompanyOrgService.findFopCompanyOrgListByCID(id);
+        List<FopCompanyContributionVo> clist = fopCompanyContributionService.findFopCompanyContributionListByCID(id);
+        fc.setPerson(person);
+        fc.setOlist(olist);
+        fc.setClist(clist);
+        return new ResultResponse(ResultCode.SUCCESS, "企业详细信息", fc);
+
+    }
+
+    private ResultResponse getCompanyId(UserProp userProp) throws Exception {
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new ResultResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new ResultResponse(1, "账户没有绑定团体！");
+        }
+        FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+        if (null == fc) {
+            return new ResultResponse(ResultCode.FAIL, "fop团体不存在");
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "id获取", fc.getId());
+    }
+
 }

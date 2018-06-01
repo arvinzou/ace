@@ -3,18 +3,28 @@ package com.huacainfo.ace.fop.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
+import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.UsersVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 @Controller
 @RequestMapping("/www")
@@ -62,6 +72,20 @@ public class WWWController extends FopBaseController {
     @Autowired
     private IntegrityPublicityService integrityPublicityService;
 
+    @Autowired
+    private UsersService usersService;
+
+    @Autowired
+    private FopAssMemberService fopAssMemberService;
+
+    @Autowired
+    private FopPersonService fopPersonService;
+
+    @Autowired
+    private FopCompanyContributionService fopCompanyContributionService;
+
+    @Autowired
+    private FopCompanyOrgService fopCompanyOrgService;
 
     /**
      * gis地图
@@ -746,11 +770,168 @@ public class WWWController extends FopBaseController {
     }
 
 
+    /**
+     * 获取诚信公告列表
+     *
+     * @param condition
+     * @param page
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/findIntegrityPublicityListDo")
     @ResponseBody
     public ResultResponse findIntegrityPublicityList(IntegrityPublicityQVo condition, PageParamNoChangeSord page) throws Exception {
         ResultResponse rst = this.integrityPublicityService.findIntegrityPublicityListDo(condition, page.getPage(), page.getLimit(), page.getOrderBy());
         return rst;
+    }
+
+    /**
+     * 登陆人属性
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/organizationType")
+    @ResponseBody
+    public ResultResponse organizationType() throws Exception {
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(this.getCurUserProp().getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new ResultResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new ResultResponse(1, "账户没有绑定企业！");
+        }
+        FopAssociation fa = fopAssociationService.selectByDepartmentId(user.getDepartmentId());
+        FopCompany fc = fopCompanyService.selectByDepartmentId(user.getDepartmentId());
+        if (null != fa) {
+            return new ResultResponse(ResultCode.SUCCESS, "团体账户", 1);
+        } else if (null != fc) {
+            return new ResultResponse(ResultCode.SUCCESS, "企业账号", 2);
+        }
+        return new ResultResponse(1, "账户没有绑定企业！");
+
+    }
+
+
+    /**
+     * 完善团体信息
+     *
+     * @param fopAssMember
+     * @param fopAssociation
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/insertAssociationInfo")
+    @ResponseBody
+    public MessageResponse insertAssociationInfo(FopAssMember fopAssMember, FopAssociation fopAssociation) throws Exception {
+        if (CommonUtils.isBlank(fopAssMember.getAssId())) {
+            return new MessageResponse(ResultCode.FAIL, "id不能为空");
+        }
+        fopAssociation.setId(fopAssMember.getAssId());
+        MessageResponse result = fopAssociationService.updateFopAssociation(fopAssociation, this.getCurUserProp());
+        if (ResultCode.FAIL == result.getStatus()) {
+            throw new CustomException(result.getErrorMessage());
+        }
+        fopAssMemberService.deleteFopAssMemberByFopAssId(fopAssMember.getAssId(), this.getCurUserProp());
+        MessageResponse result1 = fopAssMemberService.insertFopAssMember(fopAssMember, this.getCurUserProp());
+        if (ResultCode.FAIL == result1.getStatus()) {
+            throw new CustomException(result1.getErrorMessage());
+        }
+        return result1;
+    }
+
+    /**
+     * 完善企业信息
+     *
+     * @param json
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/insertCompanyInfo")
+    @ResponseBody
+    public ResultResponse insertAssociationInfo(String json) throws Exception {
+        JSONObject jsonObj = JSON.parseObject(json);
+        FopCompanyVo company = JSON.parseObject(jsonObj.getString("basicInfo"), FopCompanyVo.class);
+        FopPersonVo person = JSON.parseObject(jsonObj.getString("legalPerson"), FopPersonVo.class);
+        Type type = new TypeReference<List<FopCompanyOrg>>() {
+        }.getType();
+        List<FopCompanyOrg> orgs = JSON.parseObject(jsonObj.getString("org"), type);
+        Type type1 = new TypeReference<List<FopCompanyContribution>>() {
+        }.getType();
+        List<FopCompanyContribution> contributes = JSON.parseObject(jsonObj.getString("contribute"), type1);
+
+        /*更新企业*/
+        MessageResponse rs1 = fopCompanyService.updateFopCompany(company, this.getCurUserProp());
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getErrorMessage());
+        }
+        String cid = company.getId();
+        /*更新法人信息*/
+        person.setId(company.getPersonId());
+        MessageResponse rs2 = fopPersonService.updateFopPerson(person, this.getCurUserProp());
+        if (ResultCode.FAIL == rs2.getStatus()) {
+            throw new CustomException(rs2.getErrorMessage());
+        }
+        /*删除贡献*/
+        MessageResponse rs3 = fopCompanyContributionService.deleteFopCompanyContributionByCID(cid, this.getCurUserProp());
+        if (ResultCode.FAIL == rs3.getStatus()) {
+            throw new CustomException(rs3.getErrorMessage());
+        }
+        /*插入贡献*/
+        for (FopCompanyContribution contribute : contributes) {
+            contribute.setCompanyId(cid);
+            MessageResponse rs4 = fopCompanyContributionService.insertFopCompanyContribution(contribute, this.getCurUserProp());
+            if (ResultCode.FAIL == rs4.getStatus()) {
+                throw new CustomException(rs4.getErrorMessage());
+            }
+        }
+
+
+        /*删除团体*/
+        MessageResponse rs5 = fopCompanyOrgService.deleteFopCompanyOrgByCID(cid, this.getCurUserProp());
+        if (ResultCode.FAIL == rs5.getStatus()) {
+            throw new CustomException(rs5.getErrorMessage());
+        }
+        /*插入团体*/
+        for (FopCompanyOrg org : orgs) {
+            org.setCompanyId(cid);
+            MessageResponse rs6 = fopCompanyOrgService.insertFopCompanyOrg(org, this.getCurUserProp());
+            if (ResultCode.FAIL == rs6.getStatus()) {
+                throw new CustomException(rs6.getErrorMessage());
+            }
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "企业完善成功");
+    }
+
+
+    /**
+     * @Description: TODO(获取诚信公示)
+     * @param: @param id
+     */
+    @RequestMapping(value = "/selectIntegrityPublicityByPrimaryKey")
+    @ResponseBody
+    public ResultResponse selectIntegrityPublicityByPrimaryKey(String id) throws Exception {
+        return this.integrityPublicityService.selectIntegrityPublicityByPrimaryKeyDo(id);
+    }
+
+    /**
+     * @Description: TODO(获取团体详情)
+     */
+    @RequestMapping(value = "/selectAssociationInfo")
+    @ResponseBody
+    public ResultResponse selectFopAssociationByPrimaryKey() throws Exception {
+        return this.fopAssociationService.selectAssociationByPrimaryKey(this.getCurUserProp());
+    }
+
+
+    /**
+     * @Description: TODO(获取企业详情)
+     */
+    @RequestMapping(value = "/selectCompanyInfo")
+    @ResponseBody
+    public ResultResponse selectFopCompanyByPrimaryKey() throws Exception {
+        return this.fopCompanyService.selectCompanyInfo(this.getCurUserProp());
     }
 
 }

@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-		<title>合作交流详情</title>
+		<title>项目信息详情</title>
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
@@ -15,6 +15,7 @@
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" src="js/cooperation_info.js"></script>
+		<link rel="shortcut icon" href="../../images/favicon.ico">
 		<style type="text/css">
 			body {
 				background-color: #F4F4F4;
@@ -169,26 +170,25 @@
 
 	<body>
 	<div id="header"></div>
-	<div ng-include="'../common/nav.html'"></div>
-		<div class="current_site">当前位置：合作交流  >> {{projectInfo.projectName}}</div>
+		<div class="current_site" ng-cloak>当前位置：项目信息  >> {{projectInfo.projectName}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
 				<div class="appeal_title">
-					<h3>{{projectInfo.projectName}}</h3>
-					<span>发布时间：{{projectInfo.releaseDate}}</span>
+					<h3 ng-cloak>{{projectInfo.projectName}}</h3>
+					<span ng-cloak>发布时间：{{projectInfo.releaseDate}}</span>
 				</div>
 			</div>
 			<div class="appeal_info">
 				<table class="finance_table" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td width="15%" align="right">合作方式：</td>
-						<td width="35%" class="" ng-bind="projectInfo.coopType"></td>
+						<td width="35%" class="" ng-bind="projectInfo.coopTypeName"></td>
 						<td width="15%" align="right">企业名称：</td>
-						<td width="35%">德山化工</td>
+						<td width="35%" ng-bind="projectInfo.displayName"></td>
 					</tr>
 					<tr>
 						<td width="15%" align="right">所属区域：</td>
-						<td width="35%" ng-bind="projectInfo.areaCode"></td>
+						<td width="35%" ng-bind="projectInfo.codeFullName"></td>
 						<td width="15%" align="right">企业性质：</td>
 						<td width="35%">合资</td>
 					</tr>
@@ -196,7 +196,7 @@
 						<td width="15%" align="right">项目类型：</td>
 						<td width="35%" class="" ng-bind="projectInfo.projectType"></td>
 						<td width="15%" align="right">企业通讯地址：</td>
-						<td width="35%">常德市德山经开区桃林路28号</td>
+						<td width="35%" ng-bind="projectInfo.address"></td>
 					</tr>
 				</table>
 			</div>
@@ -204,7 +204,7 @@
 				<div>
 				 <span class="title_lager">内容</span><span class="title_small">/&nbsp;Legal&nbsp;Document</span>
 				</div>
-				<div class="content_info" ng-bind="projectInfo.coopDesc">
+				<div class="content_info">
 
 				</div>
 			</div>	
@@ -236,7 +236,7 @@
 						<td align="right" ng-bind="item.releaseDate"></td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td colspan="2" ng-cloak>
 							{{item.reply}}
 						</td>
 					</tr>

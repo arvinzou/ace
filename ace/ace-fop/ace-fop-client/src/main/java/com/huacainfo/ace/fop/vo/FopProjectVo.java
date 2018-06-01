@@ -10,6 +10,45 @@ public class FopProjectVo extends FopProject {
 
     private String displayName;
 
+    private String address;
+
+    private String codeFullName;
+    private String coopTypeName;
+
+    public String getCodeFullName() {
+        return codeFullName;
+    }
+
+    private String companyProperty;
+
+    public void setCodeFullName(String codeFullName) {
+        this.codeFullName = codeFullName;
+    }
+
+    public String getCoopTypeName() {
+        return coopTypeName;
+    }
+
+    public void setCoopTypeName(String coopTypeName) {
+        this.coopTypeName = coopTypeName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCompanyProperty() {
+        return companyProperty;
+    }
+
+    public void setCompanyProperty(String companyProperty) {
+        this.companyProperty = companyProperty;
+    }
+
     private List<FopQuestionVo> comments;
 
     public String getDisplayName() {

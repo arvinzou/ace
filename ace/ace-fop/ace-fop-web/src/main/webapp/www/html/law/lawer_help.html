@@ -13,6 +13,7 @@
 		<SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
 		<script type="text/javascript" src="js/lawer_help.js"></script>
+		<link rel="shortcut icon" href="../../images/favicon.ico">
 	</head>
 
 	<body>
@@ -48,21 +49,22 @@
 	</body>
 	
 	<!--发布法律帮助模态框-->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		 aria-hidden="true" data-backdrop="false">
+		<div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">填写我需要的法律帮助</h4>
             </div>
             <div class="modal-body">
-            	<div style="margin-bottom: 10px;">
+				<div>
 	            	<label>标题</label><br />
-	            	<input name="law_title" type="text" placeholder="请用一句话概括您需要提供的帮助" style="width: 100%;height: 30px;"/>
+					<input class="input_style" name="law_title" type="text" placeholder="请用一句话概括您需要提供的帮助"/>
             	</div>
-            	<div style="margin-bottom: 10px;">
+				<div>
             		<label>类型</label><br />
-            		<select style="width: 100%; height: 30px;" id="law_type">
+					<select class="input_style" id="law_type">
 					  <option value="" selected="selected">请选择类型</option>
 					  <option value="1">刑事诉讼</option>
 					  <option value="2">非诉业务</option>
@@ -72,12 +74,13 @@
 					  <option value="6">其他</option>
 					</select>
             	</div>
-            	<div style="margin-bottom: 10px;">
+				<div>
             		<label>内容</label><br />
-            		<textarea name="law_content" placeholder="请在这里描述您遇到的问题" style="width: 100%;height: 100px;"></textarea>
+					<textarea name="law_content" placeholder="请在这里描述您遇到的问题"></textarea>
             	</div>
             </div>
             <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" ng-click="insertLawHelp();" data-dismiss="modal">提交法律帮助</button>
             </div>
         </div><!-- /.modal-content -->

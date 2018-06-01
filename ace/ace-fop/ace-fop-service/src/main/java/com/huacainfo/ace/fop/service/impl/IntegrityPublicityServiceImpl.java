@@ -90,10 +90,7 @@ public class IntegrityPublicityServiceImpl implements IntegrityPublicityService 
     @Override
     public MessageResponse insertIntegrityPublicity(IntegrityPublicity o, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(o.getCompanyName())) {
-            return new MessageResponse(1, "关联ID不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getRelationType())) {
-            return new MessageResponse(1, "关联类型不能为空！");
+            return new MessageResponse(1, "公司名称不能为空！");
         }
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
@@ -138,7 +135,7 @@ public class IntegrityPublicityServiceImpl implements IntegrityPublicityService 
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getCompanyName())) {
-            return new MessageResponse(1, "关联ID不能为空！");
+            return new MessageResponse(1, "公司名称不能为空！");
         }
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
@@ -170,13 +167,15 @@ public class IntegrityPublicityServiceImpl implements IntegrityPublicityService 
      * @version: 2018-05-28
      */
     @Override
-    public SingleResult
-            <IntegrityPublicityVo> selectIntegrityPublicityByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <IntegrityPublicityVo> rst = new SingleResult
-                <IntegrityPublicityVo>();
+    public SingleResult<IntegrityPublicityVo> selectIntegrityPublicityByPrimaryKey(String id) throws Exception {
+        SingleResult<IntegrityPublicityVo> rst = new SingleResult<IntegrityPublicityVo>();
         rst.setValue(this.integrityPublicityDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+
+    @Override
+    public ResultResponse selectIntegrityPublicityByPrimaryKeyDo(String id) throws Exception {
+        return new ResultResponse(ResultCode.SUCCESS, "诚信公示详情", this.integrityPublicityDao.selectVoByPrimaryKey(id));
     }
 
     /**

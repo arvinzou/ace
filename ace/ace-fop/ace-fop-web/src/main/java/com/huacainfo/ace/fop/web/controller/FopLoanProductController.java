@@ -74,8 +74,7 @@ public class FopLoanProductController extends FopBaseController {
     @ResponseBody
     public MessageResponse insertFopLoanProduct(String jsons) throws Exception {
         FopLoanProduct obj = JSON.parseObject(jsons, FopLoanProduct.class);
-        return this.fopLoanProductService
-                .insertFopLoanProduct(obj, this.getCurUserProp());
+        return this.fopLoanProductService.insertFopLoanProduct(obj, this.getCurUserProp());
     }
 
     /**

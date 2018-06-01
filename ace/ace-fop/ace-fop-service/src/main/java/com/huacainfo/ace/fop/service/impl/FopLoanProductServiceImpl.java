@@ -12,7 +12,12 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.dao.FopAssociationDao;
+import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopLoanProductDao;
+import com.huacainfo.ace.fop.model.FopAssociation;
+import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
@@ -21,6 +26,8 @@ import com.huacainfo.ace.fop.service.FopQuestionService;
 import com.huacainfo.ace.fop.vo.FopLoanProductQVo;
 import com.huacainfo.ace.fop.vo.FopLoanProductVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +55,12 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     private FopQuestionService fopQuestionService;
     @Autowired
     private FopFlowRecordService fopFlowRecordService;
+
+    @Autowired
+    private FopCompanyDao fopCompanyDao;
+
+    @Autowired
+    private UsersService usersService;
 
     /**
      * @throws
@@ -112,28 +125,36 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
     @Override
     public MessageResponse insertFopLoanProduct(FopLoanProduct o, UserProp userProp)
             throws Exception {
+
+         /*获取登陆用户信息*/
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new MessageResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new MessageResponse(1, "账户没有绑定企业！");
+        }
+        FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+        if (null == fc) {
+            return new MessageResponse(1, "账户没有绑定企业！");
+        }
+        if (!"3".equals(fc.getCompanyType())) {
+            return new MessageResponse(1, "非银行不能发布金融产品");
+        }
+        o.setCompanyId(fc.getId());
         if (CommonUtils.isBlank(o.getProductName())) {
             return new MessageResponse(1, "产品名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLoanAmount())) {
-            return new MessageResponse(1, "贷款额度不能为空！");
+        if (CommonUtils.isBlank(o.getDescription())) {
+            return new MessageResponse(1, "产品内容不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLoanRate())) {
-            return new MessageResponse(1, "贷款利率不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoanType())) {
-            return new MessageResponse(1, "贷款类型不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoanYear())) {
-            return new MessageResponse(1, "贷款年限不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getSuretyType())) {
-            return new MessageResponse(1, "担保方式不能为空！");
-        }
+
         int temp = this.fopLoanProductDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "通知公告名称重复！");
         }
+
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -141,8 +162,8 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopLoanProductDao.insertSelective(o);
-//        this.dataBaseLogService.log("添加通知公告", "通知公告", "", o.getId(),
-//                o.getId(), userProp);
+        this.dataBaseLogService.log("添加通知公告", "通知公告", "", o.getId(),
+                o.getId(), userProp);
         return new MessageResponse(0, "添加通知公告完成！");
     }
 
@@ -166,29 +187,16 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         if (CommonUtils.isBlank(o.getProductName())) {
             return new MessageResponse(1, "产品名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLoanAmount())) {
-            return new MessageResponse(1, "贷款额度不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoanRate())) {
-            return new MessageResponse(1, "贷款利率不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoanType())) {
-            return new MessageResponse(1, "贷款类型不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLoanYear())) {
-            return new MessageResponse(1, "贷款年限不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getSuretyType())) {
-            return new MessageResponse(1, "担保方式不能为空！");
-        }
 
-
+        if (CommonUtils.isBlank(o.getDescription())) {
+            return new MessageResponse(1, "产品内容不能为空！");
+        }
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopLoanProductDao.updateByPrimaryKeySelective(o);
-//        this.dataBaseLogService.log("变更通知公告", "通知公告", "", o.getId(),
-//                o.getId(), userProp);
+        this.dataBaseLogService.log("变更通知公告", "通知公告", "", o.getId(),
+                o.getId(), userProp);
         return new MessageResponse(0, "变更通知公告完成！");
     }
 

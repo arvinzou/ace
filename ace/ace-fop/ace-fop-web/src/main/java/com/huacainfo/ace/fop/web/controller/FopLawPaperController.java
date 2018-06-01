@@ -72,8 +72,7 @@ public class FopLawPaperController extends FopBaseController {
     @ResponseBody
     public MessageResponse insertFopLawPaper(String jsons) throws Exception {
         FopLawPaper obj = JSON.parseObject(jsons, FopLawPaper.class);
-        return this.fopLawPaperService
-                .insertFopLawPaper(obj, this.getCurUserProp());
+        return this.fopLawPaperService.insertFopLawPaper(obj, this.getCurUserProp());
     }
 
     /**

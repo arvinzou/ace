@@ -61,6 +61,11 @@ public class FopCompanyContributionServiceImpl implements FopCompanyContribution
         return rst;
     }
 
+    @Override
+    public List<FopCompanyContributionVo> findFopCompanyContributionListByCID(String companyId) throws Exception {
+        return this.fopCompanyContributionDao.findListCID(companyId);
+    }
+
     /**
      * @throws
      * @Title:insertFopCompanyContribution
@@ -76,15 +81,11 @@ public class FopCompanyContributionServiceImpl implements FopCompanyContribution
     public MessageResponse insertFopCompanyContribution(FopCompanyContribution o, UserProp userProp)
             throws Exception {
         o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getCompanyId())) {
             return new MessageResponse(1, "企业ID不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getContributionType())) {
-            return new MessageResponse(1, "贡献类别不能为空！");
         }
         if (CommonUtils.isBlank(o.getItemCode())) {
             return new MessageResponse(1, "属性编码不能为空！");
@@ -92,20 +93,7 @@ public class FopCompanyContributionServiceImpl implements FopCompanyContribution
         if (CommonUtils.isBlank(o.getItemName())) {
             return new MessageResponse(1, "属性名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSort())) {
-            return new MessageResponse(1, "显示排序不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
 
-        int temp = this.fopCompanyContributionDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "企业管理名称重复！");
-        }
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -199,6 +187,14 @@ public class FopCompanyContributionServiceImpl implements FopCompanyContribution
         this.fopCompanyContributionDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(id),
                 String.valueOf(id), "企业管理", userProp);
+        return new MessageResponse(0, "企业管理删除完成！");
+    }
+
+    @Override
+    public MessageResponse deleteFopCompanyContributionByCID(String cid, UserProp userProp) throws Exception {
+        this.fopCompanyContributionDao.deleteByCID(cid);
+        this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(cid),
+                String.valueOf(cid), "企业管理", userProp);
         return new MessageResponse(0, "企业管理删除完成！");
     }
 }

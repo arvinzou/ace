@@ -83,7 +83,10 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
-                        initSimditor($("textarea[name=content]"), null);
+                        $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
+                        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+                        var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+                        loadText(gd.id);
                         appendUploadBtn("fileUrl");
                     }
                 })
@@ -201,6 +204,7 @@ jQuery(function ($) {
             });
         });
 });
+
 
 function preview(id, title) {
     var dialog = $("#dialog-message-view").removeClass('hide').dialog({

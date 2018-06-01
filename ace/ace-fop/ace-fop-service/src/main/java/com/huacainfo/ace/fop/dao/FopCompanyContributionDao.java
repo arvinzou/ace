@@ -11,6 +11,8 @@ public interface FopCompanyContributionDao {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteByCID(String cid);
+
     int insert(FopCompanyContribution record);
 
     int insertSelective(FopCompanyContribution record);
@@ -28,6 +30,8 @@ public interface FopCompanyContributionDao {
     List<FopCompanyContributionVo> findList(@Param("condition") FopCompanyContributionQVo condition,
                                             @Param("start") int start, @Param("limit") int limit,
                                             @Param("orderBy") String orderBy);
+
+    List<FopCompanyContributionVo> findListCID(@Param("companyId") String companyId);
 
     int findCount(@Param("condition") FopCompanyContributionQVo condition);
 

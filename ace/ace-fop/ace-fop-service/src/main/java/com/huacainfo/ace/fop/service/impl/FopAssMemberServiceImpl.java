@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.dao.FopAssMemberDao;
 import com.huacainfo.ace.fop.model.FopAssMember;
+import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.service.FopAssMemberService;
 import com.huacainfo.ace.fop.vo.FopAssMemberQVo;
 import com.huacainfo.ace.fop.vo.FopAssMemberVo;
@@ -76,26 +77,24 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
     public MessageResponse insertFopAssMember(FopAssMember o, UserProp userProp)
             throws Exception {
         o.setId(GUIDUtil.getGUID());
-        //o.setId(String.valueOf(new Date().getTime()));
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getAssId())) {
             return new MessageResponse(1, "协会ID不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCompanyId())) {
-            return new MessageResponse(1, "企业ID不能为空！");
+        if (CommonUtils.isBlank(o.getCompanyName())) {
+            return new MessageResponse(1, "企业名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPname())) {
+            return new MessageResponse(1, "姓名不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPhoneNum())) {
+            return new MessageResponse(1, "电话不能为空！");
         }
         if (CommonUtils.isBlank(o.getAssPost())) {
             return new MessageResponse(1, "商协会职务不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
         int temp = this.fopAssMemberDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "企业管理名称重复！");
@@ -130,20 +129,18 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
         if (CommonUtils.isBlank(o.getAssId())) {
             return new MessageResponse(1, "协会ID不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCompanyId())) {
-            return new MessageResponse(1, "企业ID不能为空！");
+        if (CommonUtils.isBlank(o.getCompanyName())) {
+            return new MessageResponse(1, "企业名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPname())) {
+            return new MessageResponse(1, "姓名不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPhoneNum())) {
+            return new MessageResponse(1, "电话不能为空！");
         }
         if (CommonUtils.isBlank(o.getAssPost())) {
             return new MessageResponse(1, "商协会职务不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -188,4 +185,13 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
                 String.valueOf(id), "企业管理", userProp);
         return new MessageResponse(0, "企业管理删除完成！");
     }
+
+    @Override
+    public MessageResponse deleteFopAssMemberByFopAssId(String assId, UserProp userProp) throws Exception {
+        this.fopAssMemberDao.deleteByPrimaryKey(assId);
+        this.dataBaseLogService.log("添加更新删除企业管理", "关联团体ID", String.valueOf(assId),
+                String.valueOf(assId), "企业管理", userProp);
+        return new MessageResponse(0, "企业管理删除完成！");
+    }
+
 }

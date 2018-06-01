@@ -1,35 +1,20 @@
 <!DOCTYPE html>
-<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
+<html>
 	<head>
 		<meta charset="UTF-8">
 		<title>常德市非公经济公共服务平台</title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/common_index.css" />
+		<link href="css/nav.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
-		<script type="text/javascript" src="js/common.js"></script>
-		<script type="text/javascript" src="js/echarts.min.js"></script>
-		<script type="text/javascript" src="js/china-main-city-map.js"></script>
-		<script type="text/javascript" src="js/echartmap.js"></script>
-		<script type="text/javascript" src="js/share.json.js"></script>
-		<script type="text/javascript">
-			$(function(){
-                $(".banner_menu ul li").eq(0).removeClass("menu-a").addClass("menu");
-				$(".banner_menu ul li").hover(function(){
-				    $(this).removeClass("menu-a").addClass("menu");
-				    $(this).siblings().removeClass("menu").addClass("menu-a");
-				});
-			});
-
-		</script>
+		<script type="text/javascript" src="js/angular/angular.min.js"></script>
+        <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+		<link rel="shortcut icon" href="images/favicon.ico">
    </head>
 
-	<body>
+	<body   ng-app="angularjsApp" ng-controller="angularjsCtrl">
 		<div id="header"></div>
-		<div ng-include="'html/common/nav.html'"></div>
 		<div class="main">
 			<div class="content_box">
 				<div class="content">
@@ -47,21 +32,21 @@
 									</ol>
 									<!-- 轮播（Carousel）项目 -->
 									<div class="carousel-inner">
-										<div class="item active">
-											<img src="http://zx.huacainfo.com/{{notice_slices[0].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="First slide">
-											<span class="slice_title">{{notice_slices[0].title}}</span>
+										<div class="item active" ng-click="showBannerInfo(0);">
+											<img ng-src="http://zx.huacainfo.com/{{notice_slices[0].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="First slide">
+											<div class="slice_title"><span class="slice_title_01"  ng-cloak>{{notice_slices[0].title}}</span></div>
 										</div>
-										<div class="item">
-											<img src="http://zx.huacainfo.com/{{notice_slices[1].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Second slide">
-											<span class="slice_title">{{notice_slices[1].title}}</span>
+										<div class="item" ng-click="showBannerInfo(0);">
+											<img ng-src="http://zx.huacainfo.com/{{notice_slices[1].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Second slide">
+											<div class="slice_title"><span class="slice_title_01" ng-cloak>{{notice_slices[1].title}}</span></div>
 										</div>
-										<div class="item">
-											<img src="http://zx.huacainfo.com/{{notice_slices[2].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
-											<span class="slice_title">{{notice_slices[2].title}}</span>
+										<div class="item" ng-click="showBannerInfo(0);">
+											<img ng-src="http://zx.huacainfo.com/{{notice_slices[2].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+											<div class="slice_title"><span class="slice_title_01" ng-cloak>{{notice_slices[2].title}}</span></div>
 										</div>
-										<div class="item">
-											<img src="http://zx.huacainfo.com/{{notice_slices[3].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
-											<span class="slice_title">{{notice_slices[3].title}}</span>
+										<div class="item" ng-click="showBannerInfo(0);">
+											<img ng-src="http://zx.huacainfo.com/{{notice_slices[3].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+											<div class="slice_title"><span class="slice_title_01" ng-cloak>{{notice_slices[3].title}}</span></div>
 										</div>
 									</div>
 								</div>
@@ -75,7 +60,7 @@
 									<li class="menu-a" onclick="window.open('/fop/www/html/leader/zhengfu_index.html')">
 										常德市政府
 									</li>
-									<li class="menu-a">
+									<li class="menu-a" onclick="window.open('/fop/www/html/leader/gongshanglian_index.html')">
 										常德市工商联
 									</li>
 								</ul>
@@ -89,7 +74,7 @@
 							</div>
 							<div class="notice_list">
 								<table border="0" cellpadding="0" cellspacing="0">
-									<tr ng-repeat="temp in notice_list">
+									<tr ng-repeat="temp in notice_list" ng-click="showInfo($index);" class="change">
 										<td width="80%" align="left" class="text01" ng-bind="temp.title"></td>
 										<td width="20%" align="right" class="text02" ng-bind="temp.releaseDate"></td>
 									</tr>
@@ -147,9 +132,9 @@
 					</div>
 					<div class="product_list">
 						<ul>
-							<li class="left" ng-repeat="band in bands">
-								<img src="http://zx.huacainfo.com/{{band.fileUrl}}" />
-								<span>{{band.title}}</span>
+							<li class="left" ng-repeat="band in bands" ng-click="showBrand($index);">
+								<img ng-src="http://zx.huacainfo.com/{{band.fileUrl}}" />
+								<span ng-cloak>{{band.title}}</span>
 							</li>
 						</ul>
 					</div>
@@ -223,7 +208,7 @@
 								<span>意见直通车</span>
 								<div class="weixin_nr">
 									<div class="arrow"></div>
-									<img src="images/weixin/weixin.jpg" width="100" height="100" />
+									<img src="images/weixin/weixin.png" width="100%" height="100%" />
 									关注官方微信
 								</div>
 							</div>
@@ -249,6 +234,25 @@
 			</div>
 		</div>
 		<div ng-include="'html/common/footer.html'"></div>
+		<!--<script type="text/javascript" src="/portal/system/getUserProp.do"></script>-->
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/nav.js"></script>
+		<script type="text/javascript" src="js/share.json.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/echarts.min.js"></script>
+		<script type="text/javascript" src="js/china-main-city-map.js"></script>
+		<script type="text/javascript" src="js/echartmap.js"></script>
+
+		<script type="text/javascript">
+            $(function(){
+                $(".banner_menu ul li").eq(0).removeClass("menu-a").addClass("menu");
+                $(".banner_menu ul li").hover(function(){
+                    $(this).removeClass("menu-a").addClass("menu");
+                    $(this).siblings().removeClass("menu").addClass("menu-a");
+                });
+            });
+
+		</script>
 	</body>
 
 </html>

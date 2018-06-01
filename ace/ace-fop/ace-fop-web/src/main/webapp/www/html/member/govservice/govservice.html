@@ -16,6 +16,7 @@
     <script type="text/javascript" src="/portal/content/common/simditor/scripts/simditor.js"></script>
     <link rel="stylesheet" type="text/css" href="/portal/content/common/simditor/styles/simditor.css"/>
     <script type="text/javascript" src="js/govservice.js"></script>
+    <link rel="shortcut icon" href="../../../images/favicon.ico">
 </head>
 <body>
 <div class="box">
@@ -44,11 +45,11 @@
                         <td>&nbsp;</td>
                         <td width="15%"><button id="update" data-toggle="modal" data-target="#myModal" ng-click="update_click($index);">编辑</button><button id="delete" ng-click="delete($index);">删除</button></td>
                     </tr>
-                    <tr>
-                        <td colspan="4" id="content" style="word-wrap:break-word;height: 100px;text-overflow: ellipsis;overflow: hidden;" ng-bind="item.content | convertText">
+                    <!--<tr>-->
+                        <!--<td colspan="4" id="content" style="word-wrap:break-word;height: 100px;text-overflow: ellipsis;overflow: hidden;" ng-bind="item.content | convertText">-->
 
-                        </td>
-                    </tr>
+                        <!--</td>-->
+                    <!--</tr>-->
                     <tr>
                         <td colspan="4" class="tr_title" ng-bind="item.releaseDate"></td>
                     </tr>
@@ -80,6 +81,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" ng-click="update(infoData.id);" data-dismiss="modal">编辑</button>
             </div>
         </div>
@@ -106,6 +108,7 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-primary" ng-click="release();" data-dismiss="modal">提交我的诉求</button>
             </div>
         </div>

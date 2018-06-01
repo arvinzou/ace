@@ -8,7 +8,7 @@ var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
     $scope.category = "1";
-    $scope.categorys = [{"id": "1", "name": "守信光荣榜"}, {"id" :"2","name": "失信光荣榜"}];
+    $scope.categorys = [{"id": "1", "name": "守信光荣榜"}, {"id": "2", "name": "失信警示榜"}];
 
     $.ajax({
         url: "/fop/www/findIntegrityPublicityListDo",
@@ -143,5 +143,15 @@ app.controller(ngControllerName,function($scope){
                 });
             }
         });
+    }
+
+    /**
+     * 查看诚信公示详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('sincerity_info.html?id='+primaryId);
     }
 });

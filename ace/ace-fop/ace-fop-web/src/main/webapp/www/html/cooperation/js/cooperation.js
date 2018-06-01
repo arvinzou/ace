@@ -45,6 +45,11 @@ app.controller(ngControllerName,function($scope){
     try{
         $scope.userProp = userProp;
     }catch(e){}
+    //初始化文本框
+    var editor = new Simditor({
+        textarea: $('#content')
+
+    });
 
     $('#coperationType').comboboxfilter({
         url: '',

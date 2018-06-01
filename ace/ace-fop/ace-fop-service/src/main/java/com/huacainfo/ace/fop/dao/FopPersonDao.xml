@@ -106,7 +106,7 @@
             <if test="deptPost != null">
                 deptPost,
             </if>
-            <if test="identityCard != null">
+            <if test="identityCard != null and identityCard!=&quot;&quot;">
                 identityCard,
             </if>
             <if test="societyPost != null">
@@ -192,7 +192,7 @@
             <if test="deptPost != null">
                 #{deptPost,jdbcType=VARCHAR},
             </if>
-            <if test="identityCard != null">
+            <if test="identityCard != null and identityCard!=&quot;&quot;">
                 #{identityCard,jdbcType=VARCHAR},
             </if>
             <if test="societyPost != null">

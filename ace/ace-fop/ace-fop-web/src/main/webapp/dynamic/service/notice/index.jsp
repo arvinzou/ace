@@ -26,36 +26,28 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-                    名称： <input name="title" type="text"
-                               style="width: 200px;"/>
+                    名称： <input name="title" type="text" style="width: 200px;"/>
+
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopNotice/findFopNoticeList">
-                        <i
-                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
-
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
 
-
                     <button class="btn btn-info" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/fopNotice/insertFopNotice">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-edit"
                             authority="${pageContext.request.contextPath}/fopNotice/updateFopNotice">
-                        <i
-                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/fopNotice/deleteFopNoticeByFopNoticeId">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
                 </div>
             </div>
         </div>
