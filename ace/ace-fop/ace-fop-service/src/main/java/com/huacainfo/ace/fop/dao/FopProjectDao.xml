@@ -319,6 +319,7 @@
         WHEN t.relationType='1'
         THEN (select address from fop_association where id = t.relationId)
         END address,
+
         CASE
         WHEN t.relationType='0'
         THEN (select name
