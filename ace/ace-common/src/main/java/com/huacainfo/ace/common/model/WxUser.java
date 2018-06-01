@@ -1,6 +1,7 @@
 package com.huacainfo.ace.common.model;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class WxUser implements java.io.Serializable {
 	private static final long serialVersionUID = 1302490874428907510L;
@@ -43,6 +44,8 @@ public class WxUser implements java.io.Serializable {
 	private BigDecimal longitude;
 
 	private String appId;
+
+	private java.util.Map<String,Object> userProp;
 
 
 	public String getUnionId() {
@@ -229,5 +232,13 @@ public class WxUser implements java.io.Serializable {
 				", longitude=" + longitude +
 				", appId='" + appId + '\'' +
 				'}';
+	}
+
+	public Map<String, Object> getUserProp() {
+		return userProp;
+	}
+
+	public void setUserProp(Map<String, Object> userProp) {
+		this.userProp = userProp;
 	}
 }

@@ -95,4 +95,12 @@ public class OAuth2Controller extends LiveBaseController {
         mav.addObject("js", sb.toString());
         return mav;
     }
+
+   /* @RequestMapping(value = "/bind.do")
+    @ResponseBody
+    public SingleResult<Map<String,Object>> bind(String mobile)throws Exception {
+
+        SingleResult<Map<String,Object>> rst= this.oAuth2Service.bind(,mobile);
+        return rst;
+    }*/
 }

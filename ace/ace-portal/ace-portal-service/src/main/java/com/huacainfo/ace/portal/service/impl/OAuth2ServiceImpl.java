@@ -178,14 +178,15 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         o.put("status","1");
         Userinfo user=this.userinfoDao.selectByPrimaryKey(unionid);
         user.setMobile(mobile);
+        o.put("userinfo",user);
         this.userinfoDao.updateReg(user);
         if(CommonUtils.isNotEmpty(mobile)) {
             Map<String, Object> userProp=this.userinfoDao.selectSysUserByMobile(mobile);
             if(CommonUtils.isNotEmpty(userProp)){
                 user.setMobile((String) userProp.get("tel"));
                 this.userinfoDao.updateBindApp(user.getUnionid(),(String) userProp.get("userId"));
+                user.setUserProp(userProp);
                 o.put("status","0");
-                o.put("userProp",userProp);
                 o.put("userinfo",user);
             }
         }
