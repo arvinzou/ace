@@ -5,6 +5,9 @@ var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
 
+    /**
+     * 查询统计信息
+     */
     $.ajax({
         url: "/fop/www/publishStatistics",
         type:"post",
@@ -31,6 +34,38 @@ app.controller(ngControllerName,function($scope){
             });
         }
     });
+
+    /**
+     * 查询企业信息
+     */
+    $.ajax({
+        url: "/fop/www/getUserInfo",
+        type:"post",
+        async:false,
+        data:{},
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                $scope.companyInfo = result.data.data;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            }else {
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        },
+        error:function(){
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    });
+
+
 
     $scope.writeInfo = function(){
         var dataType = "";
@@ -70,5 +105,11 @@ app.controller(ngControllerName,function($scope){
                 });
             }
         });
+    }
+});
+
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        return text.substring(0,10);
     }
 });

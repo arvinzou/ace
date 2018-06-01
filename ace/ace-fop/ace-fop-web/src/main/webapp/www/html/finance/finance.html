@@ -29,14 +29,14 @@
         <div class="tab_title">
             <div class="tab_title_ul">
                 <ul id="myTab" class="nav nav-tabs">
-                    <span class="title_lager">企业融资</span><span class="title_small">/Enterprise financing</span>
+                    <span class="title_lager">银企服务</span><span class="title_small">/Enterprise financing</span>
                 </ul>
                 <div class="tab_title_load">
                     <button ng-if="userProp" data-toggle="modal" data-target="#myModal1" ng-click="before_release();">
-                        发布融资
+                        发布服务
                     </button>
                     <button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">
-                        发布融资
+                        发布服务
                     </button>
                 </div>
             </div>
@@ -76,16 +76,14 @@
                                 <tr>
                                     <td colspan="3" class="project_title" ng-bind="item.financeTitle"></td>
                                     <td>&nbsp;</td>
-                                    <td><span class="income_title">预计年收益：</span><span class="income"
-                                                                                      ng-bind="item.yearYield"></span>
+                                    <td><span class="income_title" ng-cloak>预计年收益：</span><span class="income">{{item.yearYield}}%</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td ng-cloak>企业名称：{{item.companyName}}</td>
-                                    <td>企业性质：合资</td>
+                                    <td ng-cloak>企业性质：{{item.companyProperty}}</td>
                                     <td>&nbsp;</td>
-                                    <td>企业地址：常德市德山经开区桃林路28号</td>
-                                    <td>&nbsp;</td>
+                                    <td colspan="2" ng-cloak>企业地址：{{item.address}}</td>
                                 </tr>
                                 <tr>
                                     <td ng-cloak>融资金额：{{item.financeAmount}}</td>
@@ -100,7 +98,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" ng-cloak>发布时间：{{item.releaseDate}}</td>
+                                    <td colspan="5" ng-cloak style="color: #9EA7B4">发布时间：{{item.releaseDate}}</td>
                                 </tr>
                             </table>
                         </div>

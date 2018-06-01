@@ -34,7 +34,7 @@
         f.id, f.financeTitle, f.financeCode, f.areaCode, f.companyId, f.releaseDate, f.financeAmount,
         f.financeYear, f.yearYield, f.clicks, f.likes, f.remark,
     f.status, f.createUserId, f.createUserName, f.createDate, f.lastModifyUserId, f.lastModifyUserName,
-        f.lastModifyDate, f.financeContent,c.fullName as companyName, c.companyProperty,c.address
+        f.lastModifyDate, f.financeContent,c.fullName as companyName,c.address,d.name as companyProperty
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -342,6 +342,7 @@
     <sql id="fromCondition">
         from fop_finance_project f
         left join fop_company c on f.companyId=c.id
+        left join (SELECT * FROM portal.dict where category_id="134") d on c.companyProperty=d.code
     </sql>
     <sql id="whereCondition">
         where f.status <![CDATA[ <> ]]> 0

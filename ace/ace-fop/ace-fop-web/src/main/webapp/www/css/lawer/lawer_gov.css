@@ -191,3 +191,8 @@ td{
 	/*white-space: nowrap;*/
 	/*text-overflow: ellipsis;*/
 }
+.show_info{
+	cursor: pointer;
+	color: #1A56A8;
+	font-size: 14px;
+}

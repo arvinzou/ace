@@ -934,4 +934,27 @@ public class WWWController extends FopBaseController {
         return this.fopCompanyService.selectCompanyInfo(this.getCurUserProp());
     }
 
+    /**
+     * 获取用户信息
+     */
+    @RequestMapping(value = "/getUserInfo")
+    @ResponseBody
+    public ResultResponse getUserInfo() throws Exception {
+        SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(this.getCurUserProp().getUserId());
+        UsersVo user = singleResult.getValue();
+        if (null == user) {
+            return new ResultResponse(1, "没有注册");
+        }
+        if (CommonUtils.isBlank(user.getDepartmentId())) {
+            return new ResultResponse(1, "账户没有绑定企业！");
+        }
+        FopAssociation fa = fopAssociationService.selectByDepartmentId(user.getDepartmentId());
+        FopCompany fc = fopCompanyService.selectByDepartmentId(user.getDepartmentId());
+        if (null != fa) {
+            return new ResultResponse(ResultCode.SUCCESS, "个人中心信息", this.fopAssociationService.selectAssociationByPrimaryKey(this.getCurUserProp()));
+        } else if (null != fc) {
+            return new ResultResponse(ResultCode.SUCCESS, "个人中心信息", this.fopCompanyService.selectCompanyInfo(this.getCurUserProp()));
+        }
+        return new ResultResponse(1, "账户没有绑定企业！");
+    }
 }

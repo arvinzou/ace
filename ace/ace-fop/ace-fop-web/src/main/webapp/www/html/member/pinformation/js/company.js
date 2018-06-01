@@ -9,30 +9,40 @@ app.controller(ngControllerName,function($scope){
         language: 'zh-CN',
         autoclose: true,
         todayBtn: true,
+        startView: 2,
+        minView: 2
     });
     $("#birthDate").datetimepicker({
         format: "yyyy-mm-dd",
         language: 'zh-CN',
         autoclose: true,
         todayBtn: true,
+        startView: 2,
+        minView: 2
     });
     $("#recruitmentDate").datetimepicker({
         format: "yyyy-mm-dd",
         language: 'zh-CN',
         autoclose: true,
         todayBtn: true,
+        startView: 2,
+        minView: 2
     });
     $("#dzz_establishDate").datetimepicker({
         format: "yyyy-mm-dd",
         language: 'zh-CN',
         autoclose: true,
         todayBtn: true,
+        startView: 2,
+        minView: 2
     });
     $("#gh_establishDate").datetimepicker({
         format: "yyyy-mm-dd",
         language: 'zh-CN',
         autoclose: true,
         todayBtn: true,
+        startView: 2,
+        minView: 2
     });
 
     /**
@@ -262,7 +272,7 @@ app.controller(ngControllerName,function($scope){
                         $scope.$apply();
                     }
                 }else {
-                    layer.alert(result.errorMessage, {
+                    layer.alert(result.detail, {
                         icon: 5,
                         skin: 'myskin'
                     });

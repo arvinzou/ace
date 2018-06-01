@@ -167,3 +167,8 @@ app.controller(ngControllerName,function($scope){
         window.open('information_info.html?id='+primaryId);
     }
 });
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        return text.substring(0,10);
+    }
+});
