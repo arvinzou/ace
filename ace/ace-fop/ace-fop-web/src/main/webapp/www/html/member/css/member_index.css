@@ -62,11 +62,16 @@
 }
 .perfect{
 	width: 80px;
-	height: 62px;
-	line-height: 62px;
+	height: 35px;
+	line-height: 35px;
 	display: block;
 	float: right;
-	color: #1A56A8;
+	color: #FFFFFF;
+	background-color: #1A56A8;
+	border-radius: 3px;
+	margin-top: 15px;
+	text-align: center;
+	cursor: pointer;
 }
 .company_info{
 	width: 100%;
