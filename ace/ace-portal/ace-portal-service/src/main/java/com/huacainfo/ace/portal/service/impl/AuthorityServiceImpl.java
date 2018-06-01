@@ -51,8 +51,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 	@Override
 	public SingleResult<Map<String, Object>> authority(String appid, String appsecret, String code,
 			String encryptedData, String iv,String latitude,String longitude) throws Exception {
-		// appid wxa09a5be5fd228680
-		// appsecret d520d29f8c26c7e3885d80b1812a8d91
+		logger.info("============================================================================");
 		SingleResult<Map<String, Object>> rst = new SingleResult<Map<String, Object>>(0, "OK");
 		StringBuffer url = new StringBuffer("");
 		url.append("https://api.weixin.qq.com");
@@ -64,7 +63,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 		url.append("&js_code=");
 		url.append(code);
 		url.append("&grant_type=authorization_code");
-		//logger.info("url -> {}", url.toString());
+		logger.info("url -> {}", url.toString());
 		String res = HttpUtils.httpGet(url.toString());
 		logger.info("res -> {}", res);
 		JSONObject json = JSON.parseObject(res);
@@ -87,7 +86,7 @@ public class AuthorityServiceImpl implements AuthorityService {
         	if(CommonUtils.isNotEmpty(user.getMobile())){
 				Map<String, Object> userProp=this.wxUserDao.selectSysUserByMobile(user.getMobile());
 				user.setUserProp(userProp);
-				userinfo.put("userProp",userProp);
+				userinfo.put("userProp",JSON.parseObject(JSON.toJSONString(userProp)));
 			}
 		}
 
