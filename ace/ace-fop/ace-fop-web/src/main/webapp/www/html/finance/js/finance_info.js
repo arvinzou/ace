@@ -151,4 +151,17 @@ app.controller(ngControllerName,function($scope){
             }
         });
     }
+
+    $('#release_msg').on('keyup',function(){
+        var txtval = $('#release_msg').val().length;
+        console.log(txtval);
+        var str = parseInt(300-txtval);
+        console.log(str);
+        if(str > 0 ){
+            $('#num_txt1').html(str);
+        }else{
+            $('#num_txt1').html('0');
+            $('#release_msg').val($('#release_msg').val().substring(0,300)); //这里意思是当里面的文字小于等于0的时候，那么字数不能再增加，只能是600个字
+        }
+    });
 });

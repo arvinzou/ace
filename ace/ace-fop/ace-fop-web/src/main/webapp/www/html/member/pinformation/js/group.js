@@ -9,6 +9,8 @@ app.controller(ngControllerName,function($scope){
         language: 'zh-CN',
         autoclose: true,
         todayBtn: true,
+        startView: 2,
+        minView: 2
     });
 
     var assId = null;
@@ -21,6 +23,7 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 console.log(result);
                 $scope.information = result.data;
+                $scope.date = result.data.establishDate.substring(0,10);
                 $scope.group = result.data.list[0];
                 assId = result.data.id;
                 if (!$scope.$$phase) {
@@ -43,7 +46,8 @@ app.controller(ngControllerName,function($scope){
 
     $scope.insertInformation = function(){
         var fullName = $("input[name='fullName']").val();
-        var establishDate = $("input[name='establishDate']").val();
+        var establishDate = $("input[name='establishDate']").val()+" 00:00:00";
+        var formatDate = new Date(establishDate.replace(/-/,"/"))
         var phoneNumber = $("input[name='phoneNumber']").val();
         var address = $("input[name='address']").val();
         var directorNum = $("input[name='directorNum']").val();
@@ -59,7 +63,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/insertAssociationInfo",
             type:"post",
             async:false,
-            data:{assId: assId,fullName:fullName, phoneNumber:phoneNumber, address: address, directorNum: directorNum,
+            data:{assId: assId,fullName:fullName,establishDate: formatDate, phoneNumber:phoneNumber, address: address, directorNum: directorNum,
                     viceNum :viceNum, pname: pname, assPost: assPost, phoneNum: phoneNum, companyName: companyName, latitude: latitude, longitude: longitude},
             success:function(result){
                 if(result.status == 0) {
@@ -102,4 +106,10 @@ function addr(addr) {
     $("#address").val(addr);
 }
 /** 2、 end */
+
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        return text.substring(0,10);
+    }
+});
 
