@@ -27,6 +27,8 @@ public interface FopGeHelpDao {
                                @Param("start") int start, @Param("limit") int limit,
                                @Param("orderBy") String orderBy);
 
+    List<FopGeHelp> findProcessList(@Param("id") String id);
+
     int findCount(@Param("condition") FopGeHelpQVo condition);
 
     int isExit(FopGeHelp record);

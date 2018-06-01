@@ -22,19 +22,19 @@
 				<div class="company_info">
 					<table border="0" cellpadding="0" cellspacing="0">
 						<tr>
-							<td colspan="4"><h4>湖南华彩伟业网络科技有限公司</h4></td>
+							<td colspan="4" ng-cloak><h4>{{companyInfo.fullName}}</h4></td>
 						</tr>
 						<tr class="company_info_title">
 							<td width="15%">企业性质：</td>
-							<td>有限责任公司</td>
+							<td ng-bind="companyInfo.companyProperty"></td>
 							<td width="15%">企业法人代表：</td>
-							<td>余跃辉</td>
+							<td ng-bind="companyInfo.realName"></td>
 						</tr>
 						<tr class="company_info_title">
 							<td width="15%">成立时间：</td>
-							<td>2014-04-21</td>
+							<td ng-bind="companyInfo.establishDate | formatDate"></td>
 							<td width="15%">企业通讯地址：</td>
-							<td>常德市武陵区移动互联网创业园A02栋第三层303号</td>
+							<td ng-bind="companyInfo.address"></td>
 						</tr>
 					</table>
 				</div>

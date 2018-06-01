@@ -31,6 +31,8 @@ public interface FopGeHelpService {
      */
     PageResult<FopGeHelpVo> findFopGeHelpList(FopGeHelpQVo condition, int start, int limit, String orderBy) throws Exception;
 
+    PageResult<FopGeHelpVo> findFopGeHelpListVo(FopGeHelpQVo condition, int start, int limit, String orderBy) throws Exception;
+
 
     ResultResponse findGeHelpList(FopGeHelpQVo condition, int page, int limit, String orderBy) throws Exception;
 
@@ -64,6 +66,8 @@ public interface FopGeHelpService {
 
     MessageResponse updateGeHelp(FopGeHelp obj, UserProp userProp) throws Exception;
 
+    MessageResponse insertProcess(FopGeHelp o, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:selectFopGeHelpByPrimaryKey
@@ -77,6 +81,8 @@ public interface FopGeHelpService {
     ResultResponse selectGeHelpByPrimaryKey(String id) throws Exception;
 
     SingleResult<FopGeHelpVo> selectFopGeHelpByPrimaryKey(String id) throws Exception;
+
+    SingleResult<FopGeHelpVo> selectFopGeHelpByPrimaryKeyVo(String id) throws Exception;
 
     /**
      * @throws

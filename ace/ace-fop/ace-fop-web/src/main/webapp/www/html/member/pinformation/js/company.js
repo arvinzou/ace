@@ -272,7 +272,7 @@ app.controller(ngControllerName,function($scope){
                         $scope.$apply();
                     }
                 }else {
-                    layer.alert(result.errorMessage, {
+                    layer.alert(result.detail, {
                         icon: 5,
                         skin: 'myskin'
                     });

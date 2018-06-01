@@ -51,9 +51,7 @@ public class FopGeHelpController extends FopBaseController {
     @ResponseBody
     public PageResult
             <FopGeHelpVo> findFopGeHelpList(FopGeHelpQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult
-                <FopGeHelpVo> rst = this.fopGeHelpService
-                .findFopGeHelpList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<FopGeHelpVo> rst = this.fopGeHelpService.findFopGeHelpListVo(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -92,6 +90,18 @@ public class FopGeHelpController extends FopBaseController {
     @ResponseBody
     public MessageResponse updateFopGeHelp(String jsons) throws Exception {
         FopGeHelp obj = JSON.parseObject(jsons, FopGeHelp.class);
+        JSONObject json = JSONObject.parseObject(jsons);
+        String addProcess = (String) json.get("addProcess");
+        if (null != addProcess && (!"".equals(addProcess.trim()))) {
+            obj.setProcessDetail(null);
+            FopGeHelp fg = new FopGeHelp();
+            fg.setParentId(obj.getId());
+            fg.setProcessDetail(addProcess);
+            MessageResponse rs = fopGeHelpService.insertProcess(fg, this.getCurUserProp());
+            if (ResultCode.FAIL == rs.getStatus()) {
+                return rs;
+            }
+        }
         return this.fopGeHelpService.updateFopGeHelp(obj, this.getCurUserProp());
     }
 
@@ -108,7 +118,10 @@ public class FopGeHelpController extends FopBaseController {
     @RequestMapping(value = "/selectFopGeHelpByPrimaryKey")
     @ResponseBody
     public SingleResult<FopGeHelpVo> selectFopGeHelpByPrimaryKey(String id) throws Exception {
-        return this.fopGeHelpService.selectFopGeHelpByPrimaryKey(id);
+
+
+        // return this.fopGeHelpService.selectFopGeHelpByPrimaryKey(id);
+        return this.fopGeHelpService.selectFopGeHelpByPrimaryKeyVo(id);
     }
 
 

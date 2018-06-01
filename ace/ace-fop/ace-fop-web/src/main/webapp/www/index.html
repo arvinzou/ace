@@ -76,7 +76,7 @@
 								<table border="0" cellpadding="0" cellspacing="0">
 									<tr ng-repeat="temp in notice_list" ng-click="showInfo($index);" class="change">
 										<td width="80%" align="left" class="text01" ng-bind="temp.title"></td>
-										<td width="20%" align="right" class="text02" ng-bind="temp.releaseDate"></td>
+										<td width="20%" align="right" class="text02" ng-bind="temp.releaseDate | formatDate"></td>
 									</tr>
 								</table>
 							</div>
