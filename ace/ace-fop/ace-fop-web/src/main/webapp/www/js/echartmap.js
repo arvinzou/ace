@@ -47,6 +47,7 @@ var option = {
             emphasis: {
                 show: true,
                 fontSize: 12,
+                areaColor: '#ADC2DE',
             }
         },
         itemStyle: {
@@ -54,6 +55,9 @@ var option = {
                 areaColor: '#fff',
                 borderColor: '#1A56A8'
             },
+            emphasis: {
+                areaColor: '#ADC2DE',
+            }
 
         }
     },
