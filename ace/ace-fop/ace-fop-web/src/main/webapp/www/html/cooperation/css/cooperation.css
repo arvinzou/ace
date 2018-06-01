@@ -176,8 +176,13 @@ option {
 	border-bottom: 1px solid #E1E5ED;
 }
 
-.table_div table:hover {
-	border: 1px solid #FF9F00;
+/*.table_div table:hover {*/
+	/*border: 1px solid #FF9F00;*/
+/*}*/
+
+.table_div table{
+	border-bottom: 1px solid #E1E5ED;
+	cursor: pointer;
 }
 .title_lager {
 	color: #565B70;
