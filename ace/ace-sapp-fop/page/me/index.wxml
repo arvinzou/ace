@@ -1,5 +1,5 @@
 <view class="index">
-  <view class="text-content-center" style="flex-direction:column;">
+  <view class="text-content-center" style="flex-direction:column;background: #1A56A8;" wx:if="{{userinfo.name.length>0}}">
     <view class="title-strong"> {{userinfo.deptId}}</view>
     <view class="name"> {{userinfo.name}}</view>
   </view>

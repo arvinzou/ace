@@ -129,6 +129,9 @@ public class AuthorityServiceImpl implements AuthorityService {
 		Map<String, Object> o = new HashMap<String, Object>();
 		o.put("status","1");
 		WxUser user=this.wxUserDao.selectByPrimaryKey(_3rd_session);
+		this.wxUserDao.updateMobile(_3rd_session,mobile);
+		user.setMobile(mobile);
+		o.put("userinfo",user);
 		if(CommonUtils.isNotEmpty(mobile)) {
 			Map<String, Object> userProp=this.wxUserDao.selectSysUserByMobile(mobile);
 			if(CommonUtils.isNotEmpty(userProp)){
@@ -140,7 +143,6 @@ public class AuthorityServiceImpl implements AuthorityService {
 				o.put("status","0");
 				o.put("userProp",userProp);
 				o.put("userinfo",user);
-
 			}
 		}
 		rst.setValue(o);

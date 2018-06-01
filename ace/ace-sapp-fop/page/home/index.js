@@ -10,9 +10,14 @@ Page({
     
 
   },
-  onLoad: function () {
+  onLoad: function (options) {
     var that = this;
-    var id = '2e968824893a4ec19a00b62bfede0b14';
+    var id = null;
+    if (options.scene){
+      id=decodeURIComponent(options.scene);
+    }else{
+      id = '2e968824893a4ec19a00b62bfede0b14';
+    }
     that.setData({scene:id});
     that.initData(id);
   },
