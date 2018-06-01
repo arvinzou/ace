@@ -7,7 +7,7 @@ html{
 	background-color: #ffffff;
 }
 .index {
-	width: 60%;
+	width: 70%;
 	margin: auto;
 	padding-left: 30px;
 	padding-right: 30px;
@@ -94,7 +94,7 @@ html{
 	color: #565B70;
 	font-weight: bolder;
 	font-size: 18px;
-	width: 10%;
+	width: 8%;
 	display: inline-block;
 	border-bottom: 3px solid #FF9F00;
 	height: 62px;
@@ -104,7 +104,7 @@ html{
 .title_small {
 	color: #FFFFFF;
 	display: inline-block;
-	width: 90%;
+	width: 92%;
 	border-bottom: 1px solid #E1E5ED;
 	height: 62px;
 	line-height: 62px;
@@ -239,7 +239,7 @@ html, body {width:100%; }
 ._citys span { color: #1A56A8; height: 15px; width: 15px; line-height: 15px; text-align: center; border-radius: 3px; position: absolute; right: 10px; top: 10px; border: 1px solid #1A56A8; cursor: pointer; }
 ._citys0 { width: 95%; height: 34px; line-height: 34px; display: inline-block; border-bottom: 2px solid #1A56A8; padding: 0px 5px; font-size:14px; font-weight:bold; margin-left:6px; }
 ._citys0 li { display: inline-block; line-height: 34px; font-size: 15px; color: #888; width: 80px; text-align: center; cursor: pointer; }
-._citys1 { width: 100%; display: inline-block; padding: 10px 0; }
+._citys1 { width: 100%; display: inline-block; padding: 10px 0; background-color: #ffffff}
 ._citys1 a { width: 83px; height: 35px; display: inline-block; background-color: #f5f5f5; color: #666; margin-left: 6px; margin-top: 3px; line-height: 35px; text-align: center; cursor: pointer; font-size: 12px; border-radius: 5px; overflow: hidden; }
 ._citys1 a:hover { color: #fff; background-color: #1A56A8; }
 .AreaS { background-color: #05920a !important; color: #fff !important; }
