@@ -26,21 +26,21 @@ var data_cotype = [{
     }
 ];
 
-//项目阶段
-var data_costep = [
-    {
-        "id": "1",
-        "text": "启动期"
-    },
-    {
-        "id": "2",
-        "text": "计划期"
-    },
-    {
-        "id": "3",
-        "text": "执行期"
-    }
-];
+// //项目阶段
+// var data_costep = [
+//     {
+//         "id": "1",
+//         "text": "启动期"
+//     },
+//     {
+//         "id": "2",
+//         "text": "计划期"
+//     },
+//     {
+//         "id": "3",
+//         "text": "执行期"
+//     }
+// ];
 app.controller(ngControllerName,function($scope){
     try{
         $scope.userProp = userProp;
@@ -61,15 +61,15 @@ app.controller(ngControllerName,function($scope){
         }
     });
 
-    $('#projectStep').comboboxfilter({
-        url: '',
-        scope: 'FilterQuery1',
-        data: data_costep,
-        onChange: function(newValue) {
-            costep = newValue;
-            console.log(costep);
-        }
-    });
+    // $('#projectStep').comboboxfilter({
+    //     url: '',
+    //     scope: 'FilterQuery1',
+    //     data: data_costep,
+    //     onChange: function(newValue) {
+    //         costep = newValue;
+    //         console.log(costep);
+    //     }
+    // });
 
     $.ajax({
         url: "/fop/www/findProjectList",
@@ -249,7 +249,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findProjectList",
             type: "post",
             async: false,
-            data: {limit: pageSize, page: currentPage, status: "2", projectName: key_word, coopType: cotype, areaCode: areaCode, process: costep},
+            data: {limit: pageSize, page: currentPage, status: "2", projectName: key_word, coopType: cotype, areaCode: areaCode},
             success: function (result) {
                 if (result.status == 0) {
                     $scope.items = result.data.list;
