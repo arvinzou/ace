@@ -106,14 +106,16 @@ $('#btn-search-weixin').on('click', function() {
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
 								style_edit_form(form);
+
 							}
 						});
-                        var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
-                        console.log(r);
-                         $("#tr_title1 h5").after("<div id='custom-weixin'></div>");
-                         $("#tr_title2 h5").after("<div id='custom-sapp'></div>");
-						initWeixin(r.userId);
-						initSapp(r.userId);
+						console.log("==============================================");
+	                        var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
+                             $("#tr_title1 h5").after("<div id='custom-weixin'></div>");
+                             $("#tr_title2 h5").after("<div id='custom-sapp'></div>");
+                            initWeixin(r.userId);
+                            initSapp(r.userId);
+
 			});
 	
 	
