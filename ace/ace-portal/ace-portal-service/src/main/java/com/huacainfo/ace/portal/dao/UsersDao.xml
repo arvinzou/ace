@@ -189,8 +189,8 @@
         from USERS
         left join department s on USERS.department_id=s.department_id
         left join province s2 on users.area_code=s2.code
-        left join userinfo s3 on users.openId=s3.openid
-        left join wx_user s4 on USERS.appOpenId=s4.openId
+        left join userinfo s3 on users.openId=s3.unionid
+        left join wx_user s4 on USERS.appOpenId=s4.unionId
         where USERS.STAUTS='1'
         and USERS.cur_syid=#{condition.curSyid}
         <if test='condition.name!=null and condition.name!=""'>
@@ -293,8 +293,8 @@
         from users t left join department s
         on t.department_id=s.department_id
         left join province s2 on t.area_code=s2.code
-        left join userinfo s3 on t.openId=s3.openid
-        left join wx_user s4 on t.appOpenId=s4.openId
+        left join userinfo s3 on t.openId=s3.unionid
+        left join wx_user s4 on t.appOpenId=s4.unionId
         where t.user_id = #{userId}
 
     </select>
@@ -417,14 +417,14 @@
     <select id="selectWxUser" resultType="map">
         select  t.unionid, t.openid, t.appid, t.nickname, t.sex, t.city, t.province, t.country, t.headimgurl, t.access_token,
         t.refresh_token, t.scope, t.expires_in,t.role from userinfo t inner join users a
-        on t.openid=a.openId
+        on t.unionid=a.openId
         where a.user_id=#{condition.userId}
     </select>
 
 
     <select id="selectAppWxUser" resultType="map">
         select  t.unionId, t.openId, t.appId, t.nickName,t.role,t.mobile,t.avatarUrl from wx_user t inner join users a
-        on t.openId=a.appOpenId
+        on t.unionId=a.appOpenId
         where a.user_id=#{condition.userId}
     </select>
 
