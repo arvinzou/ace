@@ -9,6 +9,7 @@
     height: 90%;
     margin-top: 10px;
     margin-left: 3%;
+    cursor: pointer;
 }
 .img_container{
     width: 25%;

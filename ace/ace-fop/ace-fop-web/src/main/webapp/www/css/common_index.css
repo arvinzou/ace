@@ -242,9 +242,10 @@ body{
 	text-align: center;
 	line-height: 82px;
 }
-.menu_panel_01 li :hover{
-	font-size: 18px;
-	font-weight: bolder;
+
+.menu_panel_01 .left:hover img {
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 .left{
 	margin-left: 2%;

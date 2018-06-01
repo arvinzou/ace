@@ -34,13 +34,13 @@
                         <div class="searchTable">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tbody>
-                                <tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo($index);">
+                                <tr class="tr_bottom" ng-repeat="item in items" >
                                     <td align="center" width="9px">
                                         <div class="dot"></div>
                                     </td>
                                     <td align="center" width="20%" ng-bind="item.releaseDate"></td>
-                                    <td ng-bind="item.title"></td>
-                                    <td width="10%"><a href="http://zx.huacainfo.com/{{item.fileUrl}}" download="policy" style="color: #1A56A8;">下载</a> </td>
+                                    <td><a class="show_info" href="javascript:void(0);" ng-click="showInfo($index);">{{item.title}}</a> </td>
+                                    <td width="10%" ng-if="item.fileUrl!='' && item.fileUrl!=undefined"><a href="http://zx.huacainfo.com/{{item.fileUrl}}" download="policy" style="color: #1A56A8;">下载</a> </td>
                                 </tr>
                                 </tbody>
                             </table>

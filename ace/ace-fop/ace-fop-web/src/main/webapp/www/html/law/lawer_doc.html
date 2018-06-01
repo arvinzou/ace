@@ -26,10 +26,11 @@
 			<div class="searchTable">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tbody>
-						<tr class="tr_bottom"  ng-repeat="item in items" ng-click="showInfo($index);">
+						<tr class="tr_bottom"  ng-repeat="item in items">
 							<td align="left" width="15px"><div class="dot"></div></td>
 							<td align="left" width="25%" ng-bind="item.releaseDate"></td>
-							<td ng-bind="item.title"></td>
+							<td ng-cloak><a class="show_info" href="javascript:void(0);"  ng-click="showInfo($index);">{{item.title}}</a> </td>
+							<td width="10%" ng-if="item.fileUrl!='' && item.fileUrl!=undefined"><a ng-href="http://zx.huacainfo.com/{{item.fileUrl}}" download="{{item.title}}">下载</a></td>
 						</tr>
 					</tbody>
 				</table>

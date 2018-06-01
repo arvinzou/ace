@@ -340,8 +340,7 @@
         select
         <include refid="Column_List_Vo"/>
         <include refid="fromCondition"/>
-
-        where id = #{id,jdbcType=VARCHAR}
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <sql id="fromCondition">
