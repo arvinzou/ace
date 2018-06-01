@@ -1,5 +1,4 @@
 <view class='index'>
- <image src="../../image/首图.png" class="banner" mode="aspectFit" />
   <form catchsubmit="formSubmit" catchreset="formReset">
     <view class="kind-list">
       <view class="kind-list-item">

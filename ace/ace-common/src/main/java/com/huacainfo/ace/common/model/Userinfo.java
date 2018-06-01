@@ -1,5 +1,7 @@
 package com.huacainfo.ace.common.model;
 
+import java.util.Map;
+
 public class Userinfo implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,6 +37,8 @@ public class Userinfo implements java.io.Serializable {
     private String role;
 
     private String mobile;
+
+    private java.util.Map<String,Object> userProp;
 
     public String getMobile() {
         return mobile;
@@ -162,5 +166,13 @@ public class Userinfo implements java.io.Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Map<String, Object> getUserProp() {
+        return userProp;
+    }
+
+    public void setUserProp(Map<String, Object> userProp) {
+        this.userProp = userProp;
     }
 }

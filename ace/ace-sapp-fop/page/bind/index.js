@@ -14,15 +14,6 @@ Page({
   },
   onReady: function (res) {
     var that = this;
-    wx.setNavigationBarColor({
-      frontColor: cfg.frontColor,
-      backgroundColor: cfg.backgroundColor,
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    });
-
   },
   onLoad: function (params) {
     var that = this;

@@ -176,12 +176,10 @@ option {
 }
 
 .table_div table {
-    border: 1px solid transparent;
+	border-bottom: 1px solid #E1E5ED;
+	cursor: pointer;
 }
 
-.table_div table:hover {
-	border: 1px solid #FF9F00;
-}
 .title_lager {
 	color: #565B70;
 	font-weight: bolder;

@@ -32,6 +32,7 @@ public interface WxUserDao {
     int updateReg(WxUser record);
 
     int updateRole(@Param("unionId") String unionId,@Param("role") String role);
+    int updateMobile(@Param("unionId") String unionId,@Param("mobile") String mobile);
 
 
     java.util.Map<String,Object> selectPersonageByMobile(String mobile);

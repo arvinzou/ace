@@ -154,4 +154,21 @@
         order by t.openid
         limit 0,20
     </select>
+
+
+    <select id="selectSysUserByMobile" resultType="map">
+        select t.user_id userId,t.mobile tel,t.name,a.department_name corpName from users t left join department a
+        on t.department_id=a.department_id
+        where t.mobile=#{mobile} limit 0,1
+    </select>
+    <update id="updateBindApp">
+        update users set openId=#{openId} where user_id=#{userId}
+    </update>
+
+    <update id="updateReg" parameterType="com.huacainfo.ace.common.model.Userinfo">
+        update userinfo
+        set
+        mobile = #{mobile,jdbcType=VARCHAR}
+        where unionid = #{unionid,jdbcType=VARCHAR}
+    </update>
 </mapper>

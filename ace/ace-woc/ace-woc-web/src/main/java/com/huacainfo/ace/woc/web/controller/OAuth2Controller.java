@@ -46,6 +46,9 @@ public class OAuth2Controller extends WocBaseController {
     @Autowired
     private OAuth2Service oAuth2Service;
 
+    @Autowired
+    private TaskCmccService taskCmccService;
+
     @RequestMapping(value = "/redirect.do")
     public String redirect(String code, String state, HttpServletResponse response) throws Exception {
         String viewName = "index";
@@ -94,5 +97,57 @@ public class OAuth2Controller extends WocBaseController {
         ModelAndView mav = new ModelAndView("js");
         mav.addObject("js", sb.toString());
         return mav;
+    }
+
+    @RequestMapping(value = "/bind.do")
+    @ResponseBody
+    public SingleResult<Map<String,Object>> bind(String mobile,String captcha)throws Exception {
+        if(CommonUtils.isBlank(mobile)){
+            return new SingleResult(1,"手机号不能为空");
+        }
+        if(CommonUtils.isBlank(captcha)){
+            return new SingleResult(1,"短信验证码不能为空");
+        }
+        String j_captcha_cmcc=(String) this.getRequest().getSession().getAttribute("j_captcha_cmcc");
+        logger.debug("captcha:{}",captcha);
+        logger.debug("j_captcha_cmcc:{}",j_captcha_cmcc);
+        if(!captcha.equals(j_captcha_cmcc)){
+            return new SingleResult(1,"短信验证码错误");
+        }
+        SingleResult<Map<String,Object>> rst= this.oAuth2Service.bind(this.getCurUserinfo().getUnionid(),mobile);
+        Userinfo userinfo=(Userinfo)rst.getValue().get("userinfo");
+        this.getRequest().getSession().setAttribute(CommonKeys.SESSION_USERINFO_KEY, userinfo);
+        return rst;
+    }
+
+    @RequestMapping(value = "/sendCmccByMobile.do")
+    @ResponseBody
+    public MessageResponse sendCmccByMobile(String mobile,) throws Exception {
+        String sRand=this.getRandCode();
+        TaskCmcc o=new TaskCmcc();
+        if(CommonUtils.isBlank(mobile)){
+            return new MessageResponse(1,"手机号不能为空");
+        }
+        if(!CommonUtils.isValidMobile(mobile)){
+            return new MessageResponse(1,"手机号格式错误");
+        }
+        Map<String, Object> msg = new HashMap<String, Object>();
+        msg.put("taskName", "验证码" + mobile);
+        msg.put("msg", "本次提交验证码为" + sRand + "，请及时输入。【工商联】");
+        msg.put("tel", mobile + "," + mobile);
+        CommonBeanUtils.copyMap2Bean(o,msg);
+        logger.debug("j_captcha_cmcc:{}",this.getRequest().getSession().getAttribute("j_captcha_cmcc"));
+        return this.taskCmccService.insertTaskCmcc(o);
+    }
+    private String getRandCode() {
+        Random random = new Random();
+        String sRand = "";
+        for (int i = 0; i < 4; i++) {
+            String rand = String.valueOf(random.nextInt(10));
+            sRand += rand;
+        }
+        // 保存进session
+        this.getRequest().getSession().setAttribute("j_captcha_cmcc", sRand);
+        return sRand;
     }
 }

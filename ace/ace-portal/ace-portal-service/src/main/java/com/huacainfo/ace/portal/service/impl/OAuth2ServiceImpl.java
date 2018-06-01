@@ -170,4 +170,27 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         System.out.println(url.toString());
 
     }
+
+    @Override
+    public SingleResult<Map<String, Object>> bind(String unionid,String mobile) throws Exception {
+        SingleResult<Map<String, Object>> rst = new SingleResult<Map<String, Object>>(0, "OK");
+        Map<String, Object> o = new HashMap<String, Object>();
+        o.put("status","1");
+        Userinfo user=this.userinfoDao.selectByPrimaryKey(unionid);
+        user.setMobile(mobile);
+        o.put("userinfo",user);
+        this.userinfoDao.updateReg(user);
+        if(CommonUtils.isNotEmpty(mobile)) {
+            Map<String, Object> userProp=this.userinfoDao.selectSysUserByMobile(mobile);
+            if(CommonUtils.isNotEmpty(userProp)){
+                user.setMobile((String) userProp.get("tel"));
+                this.userinfoDao.updateBindApp(user.getUnionid(),(String) userProp.get("userId"));
+                user.setUserProp(userProp);
+                o.put("status","0");
+                o.put("userinfo",user);
+            }
+        }
+        rst.setValue(o);
+        return  rst;
+    }
 }

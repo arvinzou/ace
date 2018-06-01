@@ -36,4 +36,12 @@ public interface UserinfoDao {
     List<Map<String, Object>> getListByDeptId(Map<String,Object> params);
 
 
+    Map<String,Object> selectSysUserByMobile(String mobile);
+
+    int updateBindApp(@Param("openId") String openId,@Param("userId") String userId);
+
+
+    int updateReg(Userinfo record);
+
+
 }
