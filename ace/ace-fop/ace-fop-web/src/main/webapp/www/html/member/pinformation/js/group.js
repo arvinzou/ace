@@ -5,7 +5,7 @@ var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
     $("#establishDate").datetimepicker({
-        format: "yyyy-mm-dd",
+        format: "yyyy-mm-dd hh:ii:ss",
         language: 'zh-CN',
         autoclose: true,
         todayBtn: true,
@@ -44,6 +44,7 @@ app.controller(ngControllerName,function($scope){
     $scope.insertInformation = function(){
         var fullName = $("input[name='fullName']").val();
         var establishDate = $("input[name='establishDate']").val();
+        var formatDate = new Date(establishDate.replace(/-/,"/"))
         var phoneNumber = $("input[name='phoneNumber']").val();
         var address = $("input[name='address']").val();
         var directorNum = $("input[name='directorNum']").val();
@@ -59,7 +60,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/insertAssociationInfo",
             type:"post",
             async:false,
-            data:{assId: assId,fullName:fullName, phoneNumber:phoneNumber, address: address, directorNum: directorNum,
+            data:{assId: assId,fullName:fullName,establishDate: formatDate, phoneNumber:phoneNumber, address: address, directorNum: directorNum,
                     viceNum :viceNum, pname: pname, assPost: assPost, phoneNum: phoneNum, companyName: companyName, latitude: latitude, longitude: longitude},
             success:function(result){
                 if(result.status == 0) {
