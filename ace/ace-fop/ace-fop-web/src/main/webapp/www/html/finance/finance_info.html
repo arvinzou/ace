@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-		<title>融资详情</title>
+		<title>银企服务详情</title>
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
@@ -21,7 +21,7 @@
 
 	<body>
 	<div id="header"></div>
-		<div class="current_site" ng-cloak>当前位置：融资服务 >> 金融产品 >> {{financeInfo.financeTitle}}</div>
+		<div class="current_site" ng-cloak>当前位置：银企服务 >> {{financeInfo.financeTitle}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
 				<div class="appeal_title">
@@ -35,23 +35,19 @@
 						<td width="15%" align="right">预期年收益：</td>
 						<td width="35%" class="highLight" ng-bind="financeInfo.yearYield"></td>
 						<td width="15%" align="right">企业名称：</td>
-						<td width="35%">德山化工</td>
+						<td width="35%" ng-bind="financeInfo.companyName"></td>
 					</tr>
 					<tr>
-						<td width="15%" align="right">融资类型：</td>
-						<td width="35%">能源</td>
+						<td width="15%" align="right">融资年限：</td>
+						<td width="35%"  ng-bind="financeInfo.financeYear"></td>
 						<td width="15%" align="right">企业性质：</td>
-						<td width="35%">合资</td>
+						<td width="35%" ng-bind="financeInfo.companyProperty"></td>
 					</tr>
 					<tr>
 						<td width="15%" align="right">融资金额：</td>
 						<td width="35%" class="highLight" ng-bind="financeInfo.financeAmount"></td>
 						<td width="15%" align="right">企业地址：</td>
-						<td width="35%">常德市德山经开区桃林路28号</td>
-					</tr>
-					<tr>
-						<td width="15%" align="right">融资年限：</td>
-						<td colspan="3" ng-bind="financeInfo.financeYear"></td>
+						<td width="35%" ng-bind="financeInfo.address"></td>
 					</tr>
 				</table>
 			</div>

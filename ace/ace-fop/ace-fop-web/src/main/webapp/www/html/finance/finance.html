@@ -29,14 +29,14 @@
         <div class="tab_title">
             <div class="tab_title_ul">
                 <ul id="myTab" class="nav nav-tabs">
-                    <span class="title_lager">企业融资</span><span class="title_small">/Enterprise financing</span>
+                    <span class="title_lager">银企服务</span><span class="title_small">/Enterprise financing</span>
                 </ul>
                 <div class="tab_title_load">
                     <button ng-if="userProp" data-toggle="modal" data-target="#myModal1" ng-click="before_release();">
-                        发布融资
+                        发布服务
                     </button>
                     <button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">
-                        发布融资
+                        发布服务
                     </button>
                 </div>
             </div>
@@ -82,9 +82,9 @@
                                 </tr>
                                 <tr>
                                     <td ng-cloak>企业名称：{{item.companyName}}</td>
-                                    <td>企业性质：合资</td>
+                                    <td ng-cloak>企业性质：{{item.companyProperty}}</td>
                                     <td>&nbsp;</td>
-                                    <td colspan="2">企业地址：常德市德山经开区桃林路28号</td>
+                                    <td colspan="2" ng-cloak>企业地址：{{item.address}}</td>
                                 </tr>
                                 <tr>
                                     <td ng-cloak>融资金额：{{item.financeAmount}}</td>
