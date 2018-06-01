@@ -957,7 +957,4 @@ public class WWWController extends FopBaseController {
         }
         return new ResultResponse(1, "账户没有绑定企业！");
     }
-
-
-
 }

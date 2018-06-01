@@ -89,6 +89,26 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
     }
 
     @Override
+    public PageResult<FopGeHelpVo> findFopGeHelpListVo(FopGeHelpQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<FopGeHelpVo> rst = new PageResult<FopGeHelpVo>();
+        List<FopGeHelpVo> lists = this.fopGeHelpDao.findList(condition, start, start + limit, orderBy);
+        for (FopGeHelpVo list : lists) {
+            List<FopGeHelp> itmps = this.fopGeHelpDao.findProcessList(list.getId());
+            String ProcessDetail = "";
+            for (FopGeHelp itmp : itmps) {
+                ProcessDetail += "      " + itmp.getProcessDetail() + "——" + DateUtil.toStr(itmp.getReleaseDate(), "yyyy-MM-dd HH:mm:ss") + "\n\n";
+            }
+            list.setProcessDetail(ProcessDetail);
+        }
+        rst.setRows(lists);
+        if (start <= 1) {
+            int allRows = this.fopGeHelpDao.findCount(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
+    }
+
+    @Override
     public ResultResponse findGeHelpList(FopGeHelpQVo condition, int page, int limit, String orderBy) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("list", this.fopGeHelpDao.findList(condition, (page - 1) * limit, limit, orderBy));
@@ -139,6 +159,31 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         /*this.dataBaseLogService.log("添加政企服务", "政企服务", "",
                 o.getId(), o.getId(), userProp);*/
         return new MessageResponse(0, "添加政企服务完成！");
+    }
+
+
+    @Override
+    public MessageResponse insertProcess(FopGeHelp o, UserProp userProp)
+            throws Exception {
+        o.setId(GUIDUtil.getGUID());
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getProcessDetail())) {
+            return new MessageResponse(1, "添加的进度不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getParentId())) {
+            return new MessageResponse(1, "父节点ID不能为空！");
+        }
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        o.setReleaseDate(new Date());
+        o.setCreateUserName(userProp.getName());
+        o.setCreateUserId(userProp.getUserId());
+        this.fopGeHelpDao.insertSelective(o);
+        this.dataBaseLogService.log("添加进度信息", "进度信息", "",
+                o.getId(), o.getId(), userProp);
+        return new MessageResponse(0, "添加进度信息完成！");
     }
 
     /**
@@ -298,10 +343,27 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         return rst;
     }
 
+    @Override
+    public SingleResult<FopGeHelpVo> selectFopGeHelpByPrimaryKeyVo(String id) throws Exception {
+        SingleResult<FopGeHelpVo> rst = new SingleResult<FopGeHelpVo>();
+        List<FopGeHelp> lists = this.fopGeHelpDao.findProcessList(id);
+        String ProcessDetail = "";
+        for (FopGeHelp list : lists) {
+            ProcessDetail += "\\t" + list.getProcessDetail() + "\\n" + "\\t\\t\\t" + list.getReleaseDate().toString() + "\\n";
+        }
+        FopGeHelpVo result = this.fopGeHelpDao.selectVoByPrimaryKey(id);
+        result.setProcessDetail(ProcessDetail);
+        rst.setValue(result);
+        return rst;
+    }
+
 
     @Override
     public ResultResponse selectGeHelpByPrimaryKey(String id) throws Exception {
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "政企诉求详情", this.fopGeHelpDao.selectVoByPrimaryKey(id));
+        List<FopGeHelp> lists = this.fopGeHelpDao.findProcessList(id);
+        FopGeHelpVo list = this.fopGeHelpDao.selectVoByPrimaryKey(id);
+        list.setProcess(lists);
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "政企诉求详情", list);
         return rst;
     }
 
