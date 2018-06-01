@@ -9,7 +9,7 @@
               <view class="weui-label">企业名称</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" name="companyName" value="{{userProp.corpName}}" placeholder="请输入企业名称" />
+              <input class="weui-input" name="companyName" value="{{userinfo.userProp.corpName}}" placeholder="请输入企业名称" />
             </view>
           </view>
           <view class="weui-cell weui-cell_input">
@@ -17,7 +17,7 @@
               <view class="weui-label">姓名</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" name="submitName" value="{{userProp.name}}" placeholder="请输入姓名" />
+              <input class="weui-input" name="submitName" value="{{userinfo.userProp.name}}" placeholder="请输入姓名" />
             </view>
           </view>
           <view class="weui-cell weui-cell_input">
@@ -25,7 +25,7 @@
               <view class="weui-label">联系电话</view>
             </view>
             <view class="weui-cell__bd">
-              <input class="weui-input" name="tel" value="{{userProp.tel}}" placeholder="请输入联系电话" />
+              <input class="weui-input" name="tel" value="{{userinfo.userProp.tel}}" placeholder="请输入联系电话" />
             </view>
           </view>
            </view>

@@ -51,7 +51,7 @@ Page({
       WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
       checkImageUrl: cfg.checkImageUrl,
       fileList: [],
-      userProp: wx.getStorageSync('userProp')
+      userinfo: wx.getStorageSync('userinfo')
     });
   },
   formSubmit: function (e) {

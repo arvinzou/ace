@@ -330,5 +330,30 @@
 		from users_role t where t.user_id = #{userId})) and syid!='sys'
 		group by syid
 	</select>
-
+	<select id="selectUsersByOpenId" resultMap="users">
+		select t.user_id,
+		t.account,
+		t.password,
+		t.openId,
+		t.appOpenId,
+		t.sex,
+		t.id_card,
+		t.name,
+		t.department_id,
+		a.area_code,
+		birthday,
+		t.stauts,
+		t.last_login_time,
+		t.mobile,
+		t.email,
+		t.seat,
+		t.user_level,
+		t.create_time,
+		a.parent_department_id
+		parentCorpId,a.department_name corpName,
+		t.cur_syid
+		from users t left join
+		department a on t.department_id=a.department_id where
+		t.openId=#{openId}
+	</select>
 </mapper>

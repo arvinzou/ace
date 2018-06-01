@@ -78,6 +78,9 @@ public interface SystemDao {
 	 */
 	public abstract Users selectUsersByAccount(@Param("account") String account);
 
+
+	public abstract Users  selectUsersByOpenId(@Param("openId") String openId);
+
 	public abstract List<Map<String, String>> selectRoleListByUserId(
 			@Param("userId") String userId);
 

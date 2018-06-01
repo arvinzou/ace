@@ -1,7 +1,7 @@
 <view class="index">
-  <view class="text-content-center" style="flex-direction:column;background: #1A56A8;" wx:if="{{userinfo.name.length>0}}">
-    <view class="title-strong"> {{userinfo.deptId}}</view>
-    <view class="name"> {{userinfo.name}}</view>
+  <view class="text-content-center" style="flex-direction:column;background: #1A56A8;" wx:if="{{userinfo.userProp}}">
+    <view class="title-strong"> {{userinfo.userProp.corpName}}</view>
+    <view class="name"> {{userinfo.userProp.name}}</view>
   </view>
   <view class="index-bd">
 

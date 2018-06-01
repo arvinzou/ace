@@ -104,7 +104,7 @@
             <span class="form-subtitle">密码登录.</span>
         </div>
         <div id="J_Static2Quick_box" style="display:none;width:100%;text-align:center">
-                <img src="http://www.xmypage.com/images/erweima.png" class="qrcode"/>
+
 
         </div>
         <div id="J_Quick2Static_box" style="display:block">
@@ -117,6 +117,8 @@
                 <label class="control-label visible-ie8 visible-ie9">账号</label>
                 <div class="input-icon">
                     <i class="fa fa-user"></i>
+
+
                     <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
                            placeholder="账号" name="j_username" id="j_username" value="${username}"/>
                 </div>
@@ -393,16 +395,22 @@
              $(".form-subtitle").html("密码登录");
         }
     }
- /*var obj = new WxLogin({
-     self_redirect:true,
-     id:"login_container",
-     appid: "",
-     scope: "",
-     redirect_uri: "",
-      state: "",
+function guid() {
+    function S4() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    }
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+ var obj = new WxLogin({
+     self_redirect:false,
+     id:"J_Static2Quick_box",
+     appid: "wx8571545c5cc9d78c",
+     scope: "snsapi_login",
+     redirect_uri: encodeURI('http://zx.huacainfo.com/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
+     state: "huacai",
      style: "",
      href: ""
- });*/
+ });
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->

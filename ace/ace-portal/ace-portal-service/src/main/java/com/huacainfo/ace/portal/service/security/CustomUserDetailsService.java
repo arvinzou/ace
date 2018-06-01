@@ -34,17 +34,35 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private SystemService systemService;
 
 	@Autowired
-	private RedisOperations<String, Map<String,Object>> redisTemplate;
+	private RedisOperations<String,Object> redisTemplate;
 
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
-		Map<String,Object> params =redisTemplate.opsForValue().get(username);
-		this.logger.info("loadUserByUsername redisTemplate.opsForValue(username) ============================{}",params);
+		this.logger.info("============================>{}",username);
+		Users syUser =null;
+		String account=null;
+		String passwd=null;
+		if(username!=null&&username.length()==36){
+			String code =(String) redisTemplate.opsForValue().get(username);
+			account=username;
+			passwd="4297f44b13955235245b2497399d7a93";
+			this.logger.info("微信扫描登录 ============================>{}",code);
+			try {
+				syUser = systemService.selectUsersByCode(code, null);
+			}catch (Exception e){
+				this.logger.error("{}",e);
+			}
+		}else{
+			syUser = systemService.selectUsersByAccount(username);
+			account=syUser.getAccount();
+			passwd=syUser.getPassword();
 
-		Users syUser = systemService.selectUsersByAccount(username);
+		}
 		Collection<GrantedAuthority> auths = new HashSet<GrantedAuthority>();
+		this.logger.info("========================================================");
 		if (syUser != null) {
+			this.logger.info("============================>开始登录挂载权限信息：{}",username);
 			List<Map<String, String>> roles = this.systemService
 					.selectRoleListByUserId(syUser.getUserId());
 			List<String> role = new ArrayList<String>();
@@ -66,16 +84,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 			Map<String,Object> cfg=this.systemService.selectUserCfgByUserId(syUser.getUserId());
 			this.logger.info("授予用户：{}的角色列表：{} 归属社保类型 {} 系统 {}",
 					syUser.getAccount(), auths, roleType, syid);
-			this.logger
-					.info("============load UserProp from db===============");
+			logger.info("===========================加载用户信息开始=====================================");
 			BasicUsers o = new BasicUsers(syUser.getUserId(),
-					syUser.getPassword(), syUser.getAccount(),
+					passwd, account,
 					syUser.getName(), syUser.getName(),
 					syUser.getDepartmentId(), syUser.getCorpName(),
 					syUser.getAreaCode(), syUser.getStauts().equals("1"), true,
 					true, true, auths, roleType, syUser.getParentCorpId(),
 					syUser.getEmail(), syUser.getAccount(), role, syid, syUser.getCurSyid(),cfg,syUser.getOpenId(),syUser.getAppOpenId());
-			logger.info("加载用户信息:{}", o);
+			logger.info("============加载用户信息完成============:{}", o);
 			return o;
 		} else {
 			return new BasicUsers("0", "default", "default", "default",
