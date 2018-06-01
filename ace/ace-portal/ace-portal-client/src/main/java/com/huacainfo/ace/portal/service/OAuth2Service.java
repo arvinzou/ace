@@ -24,5 +24,7 @@ public interface OAuth2Service {
 
     public abstract String authorize(String appid, String redirect_uri, String scope, String state) throws Exception;
 
+    public abstract SingleResult<Map<String,Object>> bind(String unionid,String mobile) throws Exception;
+
 
 }

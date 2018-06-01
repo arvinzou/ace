@@ -83,6 +83,14 @@ public class AuthorityServiceImpl implements AuthorityService {
 			userinfo.put("unionId",_3rd_session);
 		}
 		WxUser user=this.wxUserDao.selectByPrimaryKey(_3rd_session);
+        if(CommonUtils.isNotEmpty(user)){
+        	if(CommonUtils.isNotEmpty(user.getMobile())){
+				Map<String, Object> userProp=this.wxUserDao.selectSysUserByMobile(user.getMobile());
+				user.setUserProp(userProp);
+				userinfo.put("userProp",userProp);
+			}
+		}
+
 		if(CommonUtils.isNotEmpty(user)){
 			userinfo.put("areaCode",user.getAreaCode());
 			userinfo.put("category",user.getCategory());
@@ -91,13 +99,11 @@ public class AuthorityServiceImpl implements AuthorityService {
 			if(CommonUtils.isNotEmpty(user)){
 				if(CommonUtils.isNotEmpty(user.getRole())){
 					if(user.getRole().equals("admin")){
-
 						userinfo.put("category","");
 						userinfo.put("party","");
 						logger.info("admin in login");
 					}
 				}
-
 			}
 		}
 		Map<String, Object> o = new HashMap<String, Object>();
@@ -129,6 +135,9 @@ public class AuthorityServiceImpl implements AuthorityService {
 		Map<String, Object> o = new HashMap<String, Object>();
 		o.put("status","1");
 		WxUser user=this.wxUserDao.selectByPrimaryKey(_3rd_session);
+		this.wxUserDao.updateMobile(_3rd_session,mobile);
+		user.setMobile(mobile);
+		o.put("userinfo",user);
 		if(CommonUtils.isNotEmpty(mobile)) {
 			Map<String, Object> userProp=this.wxUserDao.selectSysUserByMobile(mobile);
 			if(CommonUtils.isNotEmpty(userProp)){
@@ -137,10 +146,10 @@ public class AuthorityServiceImpl implements AuthorityService {
 				user.setMobile((String) userProp.get("tel"));
 				this.wxUserDao.updateReg(user);
 				this.wxUserDao.updateBindMiniApp(user.getOpenId(),(String) userProp.get("userId"));
+				user.setUserProp(userProp);
 				o.put("status","0");
 				o.put("userProp",userProp);
 				o.put("userinfo",user);
-
 			}
 		}
 		rst.setValue(o);

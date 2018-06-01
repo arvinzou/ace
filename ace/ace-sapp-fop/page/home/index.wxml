@@ -10,10 +10,11 @@
   <navigator bindtap="previewImage" data-url="{{serverfile}}{{appeal.qrcoteUrl}}">
     <view style="flex-direction:column;" class='text-content-center'>
       <image src="{{serverfile}}{{appeal.qrcoteUrl}}" wx:if="{{appeal.qrcoteUrl.length>0}}" class="qrcode" mode="aspectFill" />
+      <view>二维码</view>
     </view>
   </navigator>
 
-  <view>
-    <button class="weui-btn" bindtap="bindtap" style=" width:100%;color:#fff;background-color:#1A56A8; border-radius: 2px;position:absolute;bottom:1rpx;">提交诉求</button>
-  </view>
+  
+    <button class="weui-btn" bindtap="bindtap" style=" width:100%;color:#fff;background-color:#1A56A8; border-radius: 2px;">提交诉求</button>
+ 
 </view>

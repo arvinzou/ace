@@ -192,4 +192,11 @@
   <update id="updateBindMiniApp">
     update users set appOpenId=#{openId} where user_id=#{userId}
   </update>
+
+  <update id="updateMobile">
+    update wx_user
+    set
+    mobile = #{mobile,jdbcType=VARCHAR}
+    where unionId = #{unionId,jdbcType=VARCHAR}
+  </update>
 </mapper>

@@ -130,7 +130,7 @@ font-weight:800;
   padding: 10rpx;
 }
 .index{
-  background: #1A56A8;
+  background: #fff;
 }
 .kind-list{
   background-color:#F8F8F8;
