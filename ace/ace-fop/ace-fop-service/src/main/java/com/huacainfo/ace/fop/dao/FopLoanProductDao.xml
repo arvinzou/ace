@@ -324,7 +324,7 @@
         select count(*)
         from fop_loan_product
         where
-        productName=#{productName}
+        productName=#{productName} and status <![CDATA[ <> ]]> 0
     </select>
 
     <sql id="Base_Column_List_Vo">

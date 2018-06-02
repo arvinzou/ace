@@ -318,7 +318,7 @@
         <include refid="Base_Column_List"/>
         from fop_ge_help
         where parentId = #{id,jdbcType=VARCHAR}
-        ORDER BY releaseDate DESC
+        ORDER BY releaseDate asc
     </select>
 
     <sql id="fromCondition">
@@ -350,7 +350,7 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
         select count(*)
         from fop_ge_help
-        where id = #{id,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR} and status <![CDATA[ <> ]]> 0
     </select>
 
     <select id="findCount" resultType="int">
