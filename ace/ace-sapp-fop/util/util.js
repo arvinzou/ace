@@ -107,9 +107,9 @@ function formatDate(date) {
 }
 function isLogin(){
   console.log("==============isLogin===============");
-  var userProp = wx.getStorageSync('userProp');
-  console.log(userProp);
-  if (!userProp) {
+  var userinfo = wx.getStorageSync('userinfo');
+  console.log(userinfo);
+  if (!userinfo.userProp) {
     return false;
   }
   return true;
@@ -215,7 +215,7 @@ function bind(captcha,mobile,callback) {
       wx.hideLoading();
       if (res.data.status == 0) {
         wx.setStorageSync('userinfo', res.data.value['userinfo']);
-        wx.setStorageSync('userProp', res.data.value['userProp']);
+        //wx.setStorageSync('userProp', res.data.value['userProp']);
         console.log('login success', res);
         if (_callback) {
           console.log('bind callback');

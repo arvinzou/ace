@@ -117,7 +117,29 @@ public class TaskCmccServiceImpl implements TaskCmccService, ThreadProcess {
         if (CommonUtils.isBlank(o.getMsg())) {
             return new MessageResponse(1, "短信不能为空！");
         }
-        this.taskCmccMapper.insert(o);
+        //this.taskCmccMapper.insert(o);
+
+        String[] telArr = o.getTel().split(";");
+        for (int i = 0; i < telArr.length; i++) {
+            if (telArr[i] != null && telArr[i].indexOf(",") != -1) {
+                QueueCmccWait q = new QueueCmccWait();
+                q.setCreateTime(new Date());
+                q.setMsg(o.getMsg());
+                q.setQueueId(UUID.randomUUID().toString());
+                q.setName(telArr[i].split(",")[1]);
+                q.setTel(telArr[i].split(",")[0]);
+                //queueCmccWaitMapper.insert(q);
+                if (!threadPool.dataQueue.contains(o)) {
+                    threadPool.addData(o);
+                    this.logger.info("====================短信通道==================");
+                    logger.info("add new task 1");
+                    logger.info("dataQueue " + threadPool.dataQueue.procSize());
+                    logger.info("threadSize " + threadPool.getThreadList().size());
+                }
+            }
+
+        }
+
         return new MessageResponse(0, "短信已发送，请注意查收！");
     }
 

@@ -4,7 +4,7 @@ var config = {
     server,
     serverfile,
     appid: 'wxaa3c6d0676f4d11a',
-    appsecret: ' 3cd4297949c84c976c0758ad068aa2f3',
+    appsecret: 'c275f7ed74795ed580c23a77d97b7457',
     frontColor: '#1A56A8',
     backgroundColor: "blue",
     loginUrl: `${server}/portal/www/authority.do`,

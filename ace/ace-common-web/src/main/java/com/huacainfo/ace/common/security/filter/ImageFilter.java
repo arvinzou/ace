@@ -25,12 +25,9 @@ public class ImageFilter implements Filter {
 	private  String portalPath="portalPath";
 	private  String j_captcha_error="j_captcha_error";
 
-	private  String authType="authType";
 
-	private  String  username="j_username";
-	private  String  password="j_password";
 
-	private RedisOperations<String, Map<String,Object>> redisTemplate;
+	private RedisOperations<String, Object> redisTemplate;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Override
@@ -43,19 +40,14 @@ public class ImageFilter implements Filter {
 			FilterChain arg2) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
-		String authType=request.getParameter(this.authType);
-		String username=request.getParameter(this.username);
-		String password=request.getParameter(this.password);
-		if(CommonUtils.isBlank(authType)){
-			authType="default";
-		}
-		Map<String,Object> params=new HashMap<>();
-		params.put("authType",authType);
-		params.put("username",username);
-		params.put("password",password);
-		redisTemplate.opsForValue().set(username,params);
-
-		if(CommonUtils.isNotEmpty(authType)){
+		String username=request.getParameter("j_username");
+		String code=request.getParameter("code");
+		if(CommonUtils.isNotEmpty(code)){
+			this.logger.info("==================>username:{}",username);
+			this.logger.info("==================>code:{}",code);
+			redisTemplate.opsForValue().set(username,code);
+			code =(String) redisTemplate.opsForValue().get(username);
+			this.logger.info("微信扫描登录 ============================>{}",code);
 			arg2.doFilter(request, response);
 		}else {
 			request.getSession().removeAttribute(this.j_captcha_error);
@@ -76,7 +68,7 @@ public class ImageFilter implements Filter {
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		if(redisTemplate==null){
-			redisTemplate = (RedisOperations<String, Map<String,Object>>) SpringUtils
+			redisTemplate = (RedisOperations<String,Object>) SpringUtils
 					.getBean("redisTemplate");
 		}
 	}
