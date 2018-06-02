@@ -143,15 +143,15 @@
         where t.openid = #{condition.openid,jdbcType=VARCHAR}
     </select>
     <select id="getListByDeptId" resultType="map">
-        select t.openid,t.nickname from userinfo t where t.appid in(
+        select t.unionid openid,t.nickname from userinfo t where t.appid in(
         select appid from wx_cfg a WHERE a.type='app' and a.deptId=#{deptId}
         )
         <if test='q!=null and q!=""'>
-            and (t.openid=#{q} or t.nickname like
+            and (t.unionid=#{q} or t.nickname like
             concat('%',#{q},'%'))
         </if>
 
-        order by t.openid
+        order by t.unionid
         limit 0,20
     </select>
 

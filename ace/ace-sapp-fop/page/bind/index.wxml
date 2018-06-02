@@ -22,7 +22,7 @@
           <image class="iconList20" src="../../image/checkcode.png" />
         </view>
         <input name="captcha" bindinput="bindinputCaptcha" type="number" class="weui-flex__item-body" maxlength="10" placeholder="短信验证码" />
-        <button size="mini" open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo" disabled="{{!stop}}"  style="color:#fff;background-color:#C5D1E2; border-radius: 2px;margin-left:0px">{{btnName}}</button>
+        <button size="mini" open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo" disabled="{{!stop}}"  style="color:#fff;background-color:{{stop?'#1A56A8':'#C5D1E2'}}; border-radius: 2px;margin-left:0px">{{btnName}}</button>
       </view>
     </view>
     <view>

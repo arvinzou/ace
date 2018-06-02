@@ -313,6 +313,13 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
+    <select id="findProcessList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_ge_help
+        where parentId = #{id,jdbcType=VARCHAR}
+    </select>
+
     <sql id="fromCondition">
         from fop_ge_help t
         left join fop_company c on c.id=t.requestId

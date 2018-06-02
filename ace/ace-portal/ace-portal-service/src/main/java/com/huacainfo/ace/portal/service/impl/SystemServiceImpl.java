@@ -8,10 +8,17 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.HttpUtils;
+import com.huacainfo.ace.portal.service.*;
 import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.huacainfo.ace.common.model.UserProp;
@@ -28,10 +35,6 @@ import com.huacainfo.ace.portal.dao.UserinfoDao;
 import com.huacainfo.ace.portal.model.Config;
 import com.huacainfo.ace.portal.model.Resources;
 import com.huacainfo.ace.portal.model.Users;
-import com.huacainfo.ace.portal.service.CacheService;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.portal.service.SysInfoService;
-import com.huacainfo.ace.portal.service.SystemService;
 import com.huacainfo.ace.portal.tools.TreeUtils;
 
 @Service("systemService")
@@ -55,6 +58,20 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 	private UserCfgDao userCfgDao;
 	@Autowired
 	private UserinfoDao userinfoDao;
+
+	@Value("#{config[appid]}")
+	private String appid;
+	@Value("#{config[secret]}")
+	private String secret;
+	@Value("#{config[redirect_uri]}")
+	private String redirect_uri;
+	@Value("#{config[scope]}")
+	private String scope;
+	@Value("#{config[state]}")
+	private String state;
+
+	@Autowired
+	private OAuth2Service oAuth2Service;
 
 	public List<Resources> getResourcesByUserId(String id) {
 		return this.systemDao.selectResourcesByUserId(id, "ace");
@@ -372,5 +389,14 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 		rst.put("total", list.size());
 		rst.put("rows", list);
 		return rst;
+	}
+	@Override
+	public  Users selectUsersByCode(String code,String state) throws Exception{
+		this.logger.info("code-> {}", code);
+		SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);
+		this.logger.info("===============>unionid-> {}",rst.getValue().getUnionid());
+		Users u=this.systemDao.selectUsersByOpenId(rst.getValue().getUnionid());
+		this.logger.info("===============>selectUsersByOpenId-> {}",u);
+		return u;
 	}
 }
