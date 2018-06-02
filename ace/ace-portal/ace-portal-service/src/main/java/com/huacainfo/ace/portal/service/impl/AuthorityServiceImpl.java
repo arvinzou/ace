@@ -84,7 +84,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 		WxUser user=this.wxUserDao.selectByPrimaryKey(_3rd_session);
         if(CommonUtils.isNotEmpty(user)){
         	if(CommonUtils.isNotEmpty(user.getMobile())){
-				Map<String, Object> userProp=this.wxUserDao.selectSysUserByMobile(user.getMobile());
+				Map<String, Object> userProp=this.wxUserDao.selectSysUserByUnionId(user.getUnionId());
 				user.setUserProp(userProp);
 				userinfo.put("userProp",JSON.parseObject(JSON.toJSONString(userProp)));
 			}

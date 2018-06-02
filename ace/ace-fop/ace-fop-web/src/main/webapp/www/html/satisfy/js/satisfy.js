@@ -457,5 +457,10 @@ app.controller(ngControllerName,function($scope) {
         });
     }
 });
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        return text.substring(0,10);
+    }
+});
 
 

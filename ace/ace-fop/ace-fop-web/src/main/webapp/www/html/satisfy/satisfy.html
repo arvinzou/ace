@@ -25,7 +25,7 @@
 		<div class="satify_main">
 			<div class="satify_body">
 				<div class="suggest">
-					<div class="left_list" style="height: 700px;">
+					<div class="left_list">
 						<div class="left_list_title" style="position: relative;">
 							<span class="title_lager">意见列表</span><span class="title_small">&nbsp;/Comments List</span>
 							<div class="search_condition" style="position: absolute;top:5px;right: 0;">
@@ -38,20 +38,20 @@
 								</div>
 							</div>
 						</div>
-						<div class="searchTable">
+						<div class="searchTable" style="position: relative">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout: fixed">
 								<tbody>
 									<tr class="tr_bottom" ng-repeat="item in items">
 										<td align="center" width="5%">
 											<div class="dot"></div>
 										</td>
-										<td align="center" width="25%" ng-bind="item.releaseDate"></td>
-										<td width="75%" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden; " ng-bind="item.content"></td>
+										<td  width="15%" ng-bind="item.releaseDate | formatDate"></td>
+										<td style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden; " ng-bind="item.content"></td>
 									</tr>
 								</tbody>
 							</table>
+							<div id="paganation" style="position: absolute;bottom: 0;"></div>
 						</div>
-						<div id="paganation"></div>
 					</div>
 					<div class="right_research">
 						<div class="appeal_research research">
