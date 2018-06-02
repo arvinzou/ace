@@ -45,14 +45,16 @@ app.controller(ngControllerName,function($scope){
             }else {
                 layer.alert(result.errorMessage, {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    top: 200
                 });
             }
         },
         error:function(){
             layer.alert("系统服务内部异常！", {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                top: 200
             });
         }
     });
@@ -68,7 +70,8 @@ app.controller(ngControllerName,function($scope){
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    top: 200
                 });
             }
         });
@@ -83,7 +86,8 @@ app.controller(ngControllerName,function($scope){
         }else {
             layer.alert(result.errorMessage, {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                top: 200
             });
         }
     }
@@ -125,14 +129,16 @@ app.controller(ngControllerName,function($scope){
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        top: 200
                     });
                 }
             },
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    top: 200
                 });
             }
         });
@@ -156,19 +162,22 @@ app.controller(ngControllerName,function($scope){
                     }
                     layer.alert("编辑成功！", {
                         icon: 1,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        top: 200
                     });
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        top: 200
                     });
                 }
             },
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    top: 200
                 });
             }
         });
@@ -185,7 +194,8 @@ app.controller(ngControllerName,function($scope){
                     console.log(result);
                     layer.alert("删除成功！", {
                         icon: 1,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        top: 200
                     });
                     $scope.items.splice(index,1);
                     if (!$scope.$$phase) {
@@ -195,14 +205,16 @@ app.controller(ngControllerName,function($scope){
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        top: 200
                     });
                 }
             },
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    top: 200
                 });
             }
         });
@@ -253,21 +265,24 @@ app.controller(ngControllerName,function($scope){
         if(title == '' || title == undefined){
             layer.alert("标题不能为空！", {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                top: 200
             });
             return;
         }
         if(coverImg == null || coverImg == undefined){
             layer.alert("产品封面不能为空！", {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                top: 200
             });
             return;
         }
         if(content == '' || content == undefined){
             layer.alert("产品具体内容不能为空！", {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                top: 200
             });
             return;
         }
@@ -282,7 +297,8 @@ app.controller(ngControllerName,function($scope){
                     $scope.search();
                     layer.alert("发布成功！", {
                         icon: 1,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        top: 200
                     });
 
                     if (!$scope.$$phase) {
@@ -292,14 +308,16 @@ app.controller(ngControllerName,function($scope){
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        top: 200
                     });
                 }
             },
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    top: 200
                 });
             }
         });
