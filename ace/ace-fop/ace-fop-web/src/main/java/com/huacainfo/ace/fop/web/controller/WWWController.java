@@ -16,6 +16,7 @@ import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -833,6 +834,16 @@ public class WWWController extends FopBaseController {
         if (ResultCode.FAIL == result.getStatus()) {
             throw new CustomException(result.getErrorMessage());
         }
+
+         /*更新用户信息*/
+        Users user = new Users();
+        user.setUserId(this.getCurUserProp().getUserId());
+        user.setName(fopAssociation.getFullName());
+        MessageResponse rr = usersService.updateUsersById(user, this.getCurUserProp());
+        if (ResultCode.FAIL == rr.getStatus()) {
+            throw new CustomException(rr.getErrorMessage());
+        }
+
         fopAssMemberService.deleteFopAssMemberByFopAssId(fopAssMember.getAssId(), this.getCurUserProp());
         MessageResponse result1 = fopAssMemberService.insertFopAssMember(fopAssMember, this.getCurUserProp());
         if (ResultCode.FAIL == result1.getStatus()) {
@@ -867,6 +878,15 @@ public class WWWController extends FopBaseController {
             throw new CustomException(rs1.getErrorMessage());
         }
         String cid = company.getId();
+
+        /*更新用户信息*/
+        Users user = new Users();
+        user.setUserId(this.getCurUserProp().getUserId());
+        user.setName(company.getFullName());
+        MessageResponse rr = usersService.updateUsersById(user, this.getCurUserProp());
+        if (ResultCode.FAIL == rr.getStatus()) {
+            throw new CustomException(rr.getErrorMessage());
+        }
         /*更新法人信息*/
         person.setId(company.getPersonId());
         MessageResponse rs2 = fopPersonService.updateFopPerson(person, this.getCurUserProp());
