@@ -20,6 +20,7 @@ body {
 	border-bottom: 3px solid #FF9F00;
 	height: 62px;
 	line-height: 62px;
+	vertical-align: bottom;
 }
 
 .title_small {
@@ -29,6 +30,7 @@ body {
 	border-bottom: 1px solid #E1E5ED;
 	height: 62px;
 	line-height: 62px;
+	vertical-align: bottom;
 }
 
 .body_content {
