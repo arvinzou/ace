@@ -106,6 +106,7 @@ app.controller(ngControllerName,function($scope){
             }
         });
     }
+
 });
 
 app.filter('formatDate', function() { //可以注入依赖
