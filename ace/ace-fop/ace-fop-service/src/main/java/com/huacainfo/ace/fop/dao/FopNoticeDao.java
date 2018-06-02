@@ -30,5 +30,4 @@ public interface FopNoticeDao {
     int findCount(@Param("condition") FopNoticeQVo condition);
 
     int isExit(FopNotice record);
-
 }
