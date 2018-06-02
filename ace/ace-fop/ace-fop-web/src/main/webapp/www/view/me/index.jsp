@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="badding" >
-        <div class="badding_info">还未绑定任何车辆</div>
+        <div class="badding_info">还未绑定账号</div>
         <div class="badding_opt">
             <button id="bandBtn" onclick="location.href='../bind/index.jsp'">立即绑定</button>
         </div>
@@ -41,7 +41,7 @@
         <!--<div class="info">已绑定车辆</div>-->
     </div>
     <div class="footer">
-        绑定后如有违章会实时推送相关违章详情
+        常德市非公经济公共服务平台
     </div>
 </div>
 </body>
