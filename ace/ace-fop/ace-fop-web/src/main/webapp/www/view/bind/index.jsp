@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="footer">
-        绑定后如有违章会实时推送相关违章详情
+        常德市非公经济公共服务平台
     </div>
 </div>
 </body>

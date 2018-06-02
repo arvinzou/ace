@@ -1,16 +1,14 @@
 package com.huacainfo.ace.fop.web.controller;
 import com.alibaba.fastjson.JSON;
-import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.model.Userinfo;
-import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.PropertyUtil;
-import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.service.OAuth2Service;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import org.apache.commons.collections.map.HashedMap;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +52,7 @@ public class OAuth2Controller extends FopBaseController {
     private TaskCmccService taskCmccService;
 
     @RequestMapping(value = "/redirect.do")
-    public ModelAndView redirect(String code, String state) throws Exception {
-        String viewName = "index";
+    public void redirect(String code, String state, HttpServletRequest request, HttpServletResponse response) throws Exception {
         this.logger.info("code->{} state -> {}", code, state);
         logger.info("=========================  start get Userinfo from weixin pltfrom======================");
         SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);
@@ -63,12 +60,10 @@ public class OAuth2Controller extends FopBaseController {
         if (rst.getState()) {
             this.logger.info("==================={}  in session ======================", rst.getValue().getNickname());
             this.getRequest().getSession().setAttribute(CommonKeys.SESSION_USERINFO_KEY, rst.getValue());
+            response.sendRedirect(request.getContextPath()+"/www/view/me/index.jsp");
         } else {
-            viewName = "error";
+            response.sendRedirect(request.getContextPath()+"/www/view/me/error.jsp");
         }
-        logger.info("=========================  complete get Userinfo from weixin pltfrom rst {} ======================", rst.getState());
-        ModelAndView mav = new ModelAndView(viewName);
-        return mav;
     }
 
     @RequestMapping(value = "/cfg.do")

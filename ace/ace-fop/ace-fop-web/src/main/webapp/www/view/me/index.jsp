@@ -16,7 +16,11 @@
     <div class="main">
         <div class="box">
             <div class="home_top">
+				
                 <div class="user_info">
+					<div class="corpName">
+                        
+                    </div>
                     <div class="user_img">
                         <img id="headImg" src="img/header_img.png" />
                     </div>
@@ -28,14 +32,12 @@
         </div>
     </div>
     <div class="badding" >
-        <div class="badding_info">还未绑定账号</div>
         <div class="badding_opt">
             <button id="bandBtn" onclick="location.href='../bind/index.jsp'">立即绑定</button>
         </div>
     </div>
     <div class="cancle" hidden="true" id="banded">
-        <div class="carInfo">
-            <span id="driverLicence"></span><br />
+        <div class="badding_opt">
             <button id="cancelBand" onclick="cancelBand();">取消绑定</button>
         </div>
         <!--<div class="info">已绑定车辆</div>-->

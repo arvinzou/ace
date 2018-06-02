@@ -39,10 +39,7 @@ body {
 }
 
 .user_info {
-	width: 4rem;
 	height: 4rem;
-	margin-left: 3rem;
-	padding-top: 1.2rem;
 }
 
 .user_img {
@@ -129,10 +126,10 @@ body {
 
 .badding_opt {
 	width: 2.5rem;
-	height: 0.8rem;
 	line-height: 0.8rem;
 	text-align: center;
 	margin: auto;
+	margin-top: 1.1rem;
 }
 .badding_opt button{
 	width: 100%;
@@ -143,4 +140,12 @@ body {
 	font-size: 0.4rem;
 	background-color: #FFFFFF;
 	outline: none;
+}
+.corpName{
+	margin: auto;
+	text-align: center;
+	color: #fff;
+	font-size: 0.5rem;
+	margin-bottom: 0.3rem;
+	padding: 0.3rem;
 }

@@ -13,18 +13,15 @@ function userinfo(){
 	    	}else{
 	    		$(".user_name").text("未登录");
 	    	}
-	    	if(result.mobile != ''){
-	    		mobile = result.data.mobile;
-	    		$(".user_name").text(result.data.name);
-	    		//手机号码不为空，证明有绑定信息
-	    		$(".badding").attr("hidden",true);
-	    		$(".cancle").attr("hidden",false);
-	    		
-	    		//查询绑定信息
-	    		$.get( server+"/woc/www/api/getPerson",{},function(ret){
-	    			console.log(ret);
-	    			$("#driverLicence").text("驾驶证号码"+ret.data.driverLicenseCode);
-	  			});
+	    	if(result.userProp){
+	    		mobile = result.userProp.tel;
+	    		$(".user_name").text(result.userProp.name);
+				$(".corpName").text(result.userProp.corpName);
+	    		//$(".badding").attr("hidden",true);
+	    		//$(".cancle").attr("hidden",false);
+				
+				$(".badding").attr("hidden",false);
+	    		$(".cancle").attr("hidden",true);	
 	    	}
 	  	});
 }

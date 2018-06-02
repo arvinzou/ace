@@ -38,7 +38,6 @@
      function loadCommon(){
          var urls=[];
          urls.push({path:portalPath,url:'/content/common/js/init-rem.js',type:'js'});
-         urls.push({path:contextPath,url:'/www/view/bind/css/index.css',type:'css'});
          try{
             if(typeof(eval("App")) == "function"){
                urls.push({path:portalPath,url:'/content/common/juicer/juicer-min.js',type:'js',callback:App});

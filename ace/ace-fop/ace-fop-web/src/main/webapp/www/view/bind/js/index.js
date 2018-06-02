@@ -1,15 +1,14 @@
-var server = "http://zx.huacainfo.com";
+
 var countdown = 50;
 var stop = true;
-
 function getNumFun(){
 	var mobile = $("#mobile").val();
 	if(mobile == '' || mobile == undefined){
 		alert("请输入手机号码！");
 	}else{
-		$.post( server+"/woc/www/api/sendCmccByMobile",{mobile:mobile},function(result){
+		$.post( portalPath+"/www/oauth2/sendCmccByMobile.do",{mobile:mobile,signature:'常德市工商联'},function(result){
 	    	console.log(result);
-	    	alert(result.info);
+	    	alert(result.errorMessage);
 	  	});
 	  settime();	
 	}
@@ -37,14 +36,17 @@ function settime(){
         }
 }
 function bandFun(){
-	
 	var mobile = $("#mobile").val();
 	var captcha = $("#codeNum").val();
-	$.post( server+"/woc/www/api/mobileRegister",{mobile:mobile, captcha: captcha},function(result){
+	$.post( portalPath+"/www/oauth2/bind.do",{mobile:mobile, captcha: captcha},function(result){
 	    	console.log(result);
-	    	alert(result.info);
+	    	alert(result.errorMessage);
 	    	if(result.status == '0'){
-	    		location.href='/woc/www/view/personal/index.jsp'
+	    		location.href='../me/index.jsp'
 	    	}
 	 });
+}
+function App(){
+	console.log("start App");
+	
 }
