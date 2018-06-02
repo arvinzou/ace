@@ -216,6 +216,13 @@
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and id = #{condition.id,jdbcType=VARCHAR}
         </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.payTitle!=null and condition.payTitle!=&quot;&quot;">
+            and payTitle like
+            concat('%',#{condition.payTitle,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">
