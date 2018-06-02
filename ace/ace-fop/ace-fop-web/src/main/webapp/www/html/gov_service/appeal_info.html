@@ -21,13 +21,14 @@
 			}
 			
 			.appeal_index {
-				width: 60%;
+				width: 70%;
 				background-color: #FBFCFD;
 				margin: auto;
+				padding-bottom: 30px;
 			}
 			
 			.current_site {
-				width: 60%;
+				width: 70%;
 				background-color: #F4F4F4;
 				margin: auto;
 				margin-top: 20px;
@@ -145,7 +146,33 @@
 			<div class="appeal_info">
 				<p ng-cloak>{{apealData.content}}</p>
 			</div>
-		</div>
+            <div class="progress">
+                <div class="progress_title">
+                    服务进展
+                </div>
+                <div class="peogress_info">
+                    <ul class="layui-timeline">
+                        <li class="layui-timeline-item" ng-repeat="item in process">
+                            <i class="layui-icon layui-timeline-axis"></i>
+                            <div class="layui-timeline-content layui-text">
+                                <div class="layui-timeline-title">
+                                    <span ng-cloak>{{item.releaseDate}}{{item.processDetail}}</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="handle_result">
+                <div class="handle_title">处理结果</div>
+                <div class="handle_info">
+                    <p ng-bind="apealData.reply">
+
+                    </p>
+                </div>
+            </div>
+        </div>
 	</body>
 
 </html>
