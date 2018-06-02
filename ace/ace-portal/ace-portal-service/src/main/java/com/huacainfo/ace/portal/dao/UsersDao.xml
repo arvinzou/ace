@@ -429,19 +429,14 @@
     </select>
 
     <select id="selectAllAppWxUserList" resultType="map">
-        select  t.unionId, t.openId, t.appId, t.nickName,t.role,t.mobile,t.avatarUrl from wx_user t where t.appId in(
-        select appId from wx_cfg where deptId=#{corpId}
-        )
+        select  t.unionId, t.openId, t.appId, t.nickName,t.role,t.mobile,t.avatarUrl from wx_user t where t.unionId !=t.openId
         <if test='nickname!=null and nickname!=""'>
             and t.nickName =#{nickname,jdbcType=VARCHAR}
         </if>
     </select>
 
     <select id="selectAllWxUserList" resultType="map">
-        select t.unionid, t.openid, t.appid, t.nickname,t.role,t.mobile,t.headimgurl from userinfo t where t.appid in
-        (
-        select appId from wx_cfg where deptId=#{corpId}
-        )
+        select t.unionid, t.openid, t.appid, t.nickname,t.role,t.mobile,t.headimgurl from userinfo t where t.unionid!=t.openid
 
         <if test='nickname!=null and nickname!=""'>
             and t.nickname =#{nickname,jdbcType=VARCHAR}
