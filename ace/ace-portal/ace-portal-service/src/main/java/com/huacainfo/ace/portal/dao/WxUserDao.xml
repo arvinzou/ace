@@ -184,6 +184,12 @@
     where (openid = #{openid,jdbcType=VARCHAR} or appOpenId = #{openid,jdbcType=VARCHAR})
   </select>
 
+  <select id="selectSysUserByUnionId" resultType="map">
+    select t.user_id userId,t.mobile tel,t.name,a.department_name corpName from users t left join department a
+    on t.department_id=a.department_id
+    where t.appOpenId=#{unionId} limit 0,1
+  </select>
+
   <select id="selectSysUserByMobile" resultType="map">
     select t.user_id userId,t.mobile tel,t.name,a.department_name corpName from users t left join department a
     on t.department_id=a.department_id

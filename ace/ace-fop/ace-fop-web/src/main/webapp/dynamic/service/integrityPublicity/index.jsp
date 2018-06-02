@@ -32,7 +32,7 @@
                     textField:'name',
                     panelHeight:'auto'">
 
-                    名称： <input name="name" type="text" style="width: 200px;"/>
+                    名称： <input name="title" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/integrityPublicity/findIntegrityPublicityList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>

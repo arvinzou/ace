@@ -161,6 +161,12 @@
         on t.department_id=a.department_id
         where t.mobile=#{mobile} limit 0,1
     </select>
+
+    <select id="selectSysUserByUnionId" resultType="map">
+        select t.user_id userId,t.mobile tel,t.name,a.department_name corpName from users t left join department a
+        on t.department_id=a.department_id
+        where t.openId=#{unionId} limit 0,1
+    </select>
     <update id="updateBindApp">
         update users set openId=#{openId} where user_id=#{userId}
     </update>

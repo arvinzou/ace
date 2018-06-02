@@ -38,6 +38,8 @@ public interface UserinfoDao {
 
     Map<String,Object> selectSysUserByMobile(String mobile);
 
+    Map<String,Object> selectSysUserByUnionId(String unionId);
+
     int updateBindApp(@Param("openId") String openId,@Param("userId") String userId);
 
 

@@ -37,9 +37,6 @@
      }
      function loadCommon(){
          var urls=[];
-         urls.push({path:portalPath,url:'/content/common/js/loading.js',type:'js'});
-         urls.push({path:portalPath,url:'/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css',type:'css'});
-         urls.push({path:portalPath,url:'/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js',type:'js'});
          urls.push({path:portalPath,url:'/content/common/js/init-rem.js',type:'js'});
          urls.push({path:contextPath,url:'/www/view/bind/css/index.css',type:'css'});
          try{
