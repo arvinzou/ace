@@ -313,6 +313,13 @@
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and status = #{condition.status,jdbcType=CHAR}
         </if>
+        <if test="condition.fullName!=null and condition.fullName!=&quot;&quot;">
+            and fullName like
+            concat('%',#{condition.fullName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.phoneNumber!=null and condition.phoneNumber!=&quot;&quot;">
+            and phoneNumber = #{condition.phoneNumber,jdbcType=CHAR}
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">

@@ -24,15 +24,13 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-                    类别：<input name="category" class="easyui-combobox" style="width: 200px"
-                              data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
+                    类别：<select name="status" style="width: 200px; height: 25px">
+                    <option value="">-请选择-</option>
+                    <option value="1">未发送</option>
+                    <option value="2">已发送</option>
+                </select>
 
-                    名称： <input name="name" type="text" style="width: 200px;"/>
+                    名称： <input name="payTitle" type="text" style="width: 200px;height: 25px"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopCallRecord/findFopCallRecordList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
