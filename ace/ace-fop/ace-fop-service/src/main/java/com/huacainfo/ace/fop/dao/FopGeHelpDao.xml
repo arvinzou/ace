@@ -318,7 +318,7 @@
         <include refid="Base_Column_List"/>
         from fop_ge_help
         where parentId = #{id,jdbcType=VARCHAR}
-        ORDER BY releaseDate asc
+        ORDER BY releaseDate DESC
     </select>
 
     <sql id="fromCondition">
