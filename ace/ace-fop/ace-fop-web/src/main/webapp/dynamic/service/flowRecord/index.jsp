@@ -27,15 +27,19 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    流程类别：<input name="category" class="easyui-combobox" style="width: 200px"
+                    流程类别：<input name="flowType" class="easyui-combobox" style="width: 200px ;height: 25px"
                                 data-options="
                     url:'${portalPath}/dict/findListByCategoryId.do?categoryId=129&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
-
-                    名称： <input name="name" type="text" style="width: 200px;"/>
+                    审查结果：<select name="status" style="width: 200px; height: 25px">
+                    <option value="">-请选择-</option>
+                    <option value="1">未审查</option>
+                    <option value="2">已审查</option>
+                    <option value="3">未通过</option>
+                </select>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopFlowRecord/findFopFlowRecordList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
