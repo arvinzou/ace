@@ -10,7 +10,7 @@ var app =angular.module(ngAppName, []);
                 var context = drawing.getContext('2d');
                 var radius = drawing.height/2 -20,//半径
                     ox = radius +20, oy = radius +20;//圆心
-                var width = 30, height = 10, //图例宽高
+                var width = 15, height = 10, //图例宽高
                     posX = ox * 2 +20, posY = 30;//图例位置
                 var textX = posX + width + 5, textY = posY + 10;//文本位置
                 var startAngle = 0, endAngle = 0;//起始、结束弧度
@@ -365,19 +365,12 @@ app.controller(ngControllerName,function($scope) {
         }
     }
 
-    $scope.insertSatify = function(){
-            var flag = true;
-            var commentType = $("#commentType option:checked").val();
-            var satifyFlag = $("input[name='radio']:checked").val();
-            var content = $("textarea[name='content']").val();
-            if(commentType == '' || commentType == undefined){
-                flag = false;
-                layer.alert("意见类型不能为空！", {
-                    icon: 5,
-                    skin: 'myskin'
-                });
-                return;
-            }
+    /**
+     * 在线诉求评价
+     */
+    $scope.insertSatify_1 = function(){
+            var satifyFlag = $("input[name='radio1']:checked").val();
+            var content = $("textarea[name='content1']").val();
             if(satifyFlag == '' || satifyFlag == undefined){
                 flag = false;
                 layer.alert("诉求服务满意度不能为空！", {
@@ -386,12 +379,11 @@ app.controller(ngControllerName,function($scope) {
                 });
                 return;
             }
-            if(flag){
-                $.ajax({
+            $.ajax({
                     url: "/fop/www/insertQuestionnaireResult",
                     type: "post",
                     async: false,
-                    data: {opinionType:commentType, result: satifyFlag, content: content},
+                    data: {opinionType:"1", result: satifyFlag, content: content},
                     success: function (result) {
                         if (result.status == 0) {
                             layer.alert("评价成功！", {
@@ -417,7 +409,52 @@ app.controller(ngControllerName,function($scope) {
                         });
                     }
                 });
+    }
+
+    /**
+     * 平台服务评价
+     */
+    $scope.insertSatify_2 = function(){
+        var satifyFlag = $("input[name='radio2']:checked").val();
+        var content = $("textarea[name='content2']").val();
+        if(satifyFlag == '' || satifyFlag == undefined){
+            flag = false;
+            layer.alert("诉求服务满意度不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+        $.ajax({
+            url: "/fop/www/insertQuestionnaireResult",
+            type: "post",
+            async: false,
+            data: {opinionType:"2", result: satifyFlag, content: content},
+            success: function (result) {
+                if (result.status == 0) {
+                    layer.alert("评价成功！", {
+                        icon: 1,
+                        skin: 'myskin'
+                    });
+                    $scope.search();
+                    $scope.initChart();
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                } else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error: function () {
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
             }
+        });
     }
 });
 

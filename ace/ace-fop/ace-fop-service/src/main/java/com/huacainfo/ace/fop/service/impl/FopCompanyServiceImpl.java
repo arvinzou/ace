@@ -15,7 +15,6 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
-import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopPayRecord;
 import com.huacainfo.ace.fop.model.FopPerson;
@@ -151,7 +150,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (!CommonUtils.isValidMobile(o.getLpMobile())) {
             return new MessageResponse(ResultCode.FAIL, "不是手机号码");
         }
-
         //设置主键标识
         o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getFullName())) {
@@ -173,7 +171,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         //构建法人信息
         ResultResponse rs2 = fopPersonService.insertPerson(o, userProp);
         if (ResultCode.FAIL == rs2.getStatus()) {
-            return new MessageResponse(ResultCode.FAIL, rs2.getInfo());
+            throw new CustomException(rs2.getInfo());
         }
         FopPerson person = (FopPerson) rs2.getData();
         //入库企业信息
@@ -232,7 +230,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         //构建法人信息
         ResultResponse rs2 = fopPersonService.insertPerson(o, userProp);
         if (ResultCode.FAIL == rs2.getStatus()) {
-            return new MessageResponse(ResultCode.FAIL, rs2.getInfo());
+            throw new CustomException(rs2.getInfo());
         }
         //入库企业信息
         FopPerson fp = (FopPerson) rs2.getData();

@@ -447,6 +447,9 @@
         margin-right: -30px;
 
     }
+    .form-actions{
+        margin-bottom: 15px;
+    }
     .login .content .form-actions .rememberme {
         margin-top: 0px;
         display: inline-block;
@@ -527,7 +530,7 @@ i, cite, em, var, address, dfn {
     }
     .logo_image{
         margin-left: 10%;
-        width: 300px;
+        width: 350px;
         height: 50px;
         background: url(image/logo@3x.png) no-repeat;
         background-size:100% 100%;
@@ -552,13 +555,13 @@ i, cite, em, var, address, dfn {
     }
     .login_panel{
         position: fixed;
-        width: 400px;
+        width: 350px;
         height: 400px;
         /* margin-top: 10%; */
         /* margin-right: 100px; */
         top: 200px;
         background-color: #FFFFFF;
-        right: 100px;
+        right: 20%;
     }
     .login_form{
         width: 80%;
