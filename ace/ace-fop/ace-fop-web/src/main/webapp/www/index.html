@@ -53,7 +53,7 @@
 							</div>
 							<div class="banner_menu">
 								<ul>
-									<li class="menu-a">领导之窗</li>
+									<li class="menu-b menu-a">领导之窗</li>
 									<li class="menu-a" onclick="window.open('/fop/www/html/leader/shiwei_index.html')">
 										常德市委
 									</li>
@@ -242,17 +242,6 @@
 		<script type="text/javascript" src="js/echarts.min.js"></script>
 		<script type="text/javascript" src="js/china-main-city-map.js"></script>
 		<script type="text/javascript" src="js/echartmap.js"></script>
-
-		<script type="text/javascript">
-            $(function(){
-                $(".banner_menu ul li").eq(0).removeClass("menu-a").addClass("menu");
-                $(".banner_menu ul li").hover(function(){
-                    $(this).removeClass("menu-a").addClass("menu");
-                    $(this).siblings().removeClass("menu").addClass("menu-a");
-                });
-            });
-
-		</script>
 	</body>
 
 </html>

@@ -177,4 +177,9 @@
         mobile = #{mobile,jdbcType=VARCHAR}
         where unionid = #{unionid,jdbcType=VARCHAR}
     </update>
+
+    <update id="updateUnbind">
+        update users set openId=null where openId=#{unionid};
+        update userinfo set mobile = null where unionid = #{unionid,jdbcType=VARCHAR};
+    </update>
 </mapper>

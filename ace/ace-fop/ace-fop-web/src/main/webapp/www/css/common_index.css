@@ -200,6 +200,8 @@ body{
 	width: 100%;
 	margin-top: 10px;
 	height: 55px;
+    color: #1A56A8;
+    font-size: 18px;
 }
 .banner_menu li{
 	width: 25%;
@@ -208,22 +210,37 @@ body{
 	display: block;
 	float: left;
 }
-.banner_menu a{
-	height: 30px;
-	width: 100%;
-	line-height: 30px;
-	margin-top: 12.5px;
-	display: block;
-	text-align: center;
-	border-left: 2px solid #E1E5ED;
+
+.banner_menu .menu-b {
+    color: #FFFFFF;
+    background-color: #1A56A8;
+
 }
+
+.banner_menu .menu-b::after {
+    content: "";
+	display: block;
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border: 10px solid transparent;
+    border-left-color: #1A56A8;
+    left: 100%;
+    top: -36px;
+}
+
+.banner_menu ul::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
 .menu-a{
-	font-size: 14px;
 	text-align: center;
 	background-color: #f5f7f9;
 }
-.menu{
-	text-align: center;
+
+.banner_menu ul li:hover {
 	color: #FFFFFF;
 	background-color: #1A56A8;
 }
