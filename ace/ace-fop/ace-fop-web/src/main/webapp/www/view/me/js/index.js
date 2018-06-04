@@ -19,7 +19,6 @@ function userinfo(){
 				$(".corpName").text(result.userProp.corpName);
 	    		$(".badding").attr("hidden",true);
 	    		$(".cancle").attr("hidden",false);
-				
 				//$(".badding").attr("hidden",false);
 	    		//$(".cancle").attr("hidden",true);	
 	    	}
