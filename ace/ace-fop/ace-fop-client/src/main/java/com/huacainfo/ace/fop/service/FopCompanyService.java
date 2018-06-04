@@ -64,6 +64,8 @@ public interface FopCompanyService {
      */
     MessageResponse updateFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
 
+    MessageResponse updateCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:selectFopCompanyByPrimaryKey

@@ -323,6 +323,42 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
     /**
      * @throws
+     * @Title:updateFopCompany
+     * @Description: 更新企业管理
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @Override
+    public MessageResponse updateCompany(FopCompanyVo o, UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getFullName())) {
+            return new MessageResponse(1, "企业/机构全称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getPersonId())) {
+            return new MessageResponse(1, "企业法人id不能为空！");
+        }
+        int temp = this.fopCompanyDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(ResultCode.FAIL, "企业/机构名称重复！");
+        }
+
+        o.setLastModifyDate(new Date());
+        o.setLastModifyUserName(userProp.getName());
+        o.setLastModifyUserId(userProp.getUserId());
+        this.fopCompanyDao.updateByPrimaryKeySelective(o);
+        this.dataBaseLogService.log("变更企业/机构管理", "企业/机构管理", "", o.getId(),
+                o.getId(), userProp);
+        return new MessageResponse(0, "变更企业/机构管理完成！");
+    }
+
+    /**
+     * @throws
      * @Title:selectFopCompanyByPrimaryKey
      * @Description: TODO(获取企业管理)
      * @param: @param id
