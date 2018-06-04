@@ -36,7 +36,7 @@ body {
 	border-radius: 0 0 30% 30%;
 	background-image: url(../img/BG.png);
 	background-size: 100% 100%;
-	
+
 }
 
 .badding {
@@ -64,15 +64,19 @@ body {
 .phoneNum {
 	width: 100%;
 	height: 2rem;
-	line-height: 2rem;
+	/*line-height: 2rem;*/
 	border-bottom: 1px solid #E4E6E9;
+	padding-top: 0.5rem;
 }
-
+.phoneNum input{
+	color: #000000;
+}
 .code {
 	width: 100%;
 	height: 2rem;
-	color: #798092;
+	/*line-height: 2rem;*/
 	border-bottom: 1px solid #E4E6E9;
+	padding-top: 0.5rem;
 }
 
 .code input {
@@ -81,6 +85,7 @@ body {
 	height: 1rem;
 	padding-left: 0.5rem;
 	outline: none;
+	color: #000000;
 }
 
 .option {
@@ -92,7 +97,7 @@ body {
 
 .phoneNum button {
 	width: 25%;
-	height: 0.6rem;
+	height: 1rem;
 	color: #FFFFFF;
 	background-color: #3C82FC;
 	font-size: 0.3rem;
@@ -116,6 +121,7 @@ body {
 .option button {
 	width: 70%;
 	height: 1rem;
+	line-height: 1rem;
 	color: #FFFFFF;
 	background-color: #3C82FC;
 	border: none;
