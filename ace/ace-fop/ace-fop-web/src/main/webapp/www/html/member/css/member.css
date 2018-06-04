@@ -3,6 +3,7 @@ body {
 	color: #9EA7B4;
 	padding: 0px;
 	margin: 0px;
+	min-width: 900px;
 }
 /**
  * 左边菜单样式

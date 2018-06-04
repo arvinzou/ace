@@ -67,11 +67,6 @@ app.controller(ngControllerName,function($scope) {
                         if (!$scope.$$phase) {
                             $scope.$apply();
                         }
-                    }else if(result.errorMessage != ''){
-                        layer.alert(result.errorMessage, {
-                            icon: 5,
-                            skin: 'myskin'
-                        });
                     } else {
                         layer.alert(result.detail, {
                             icon: 5,
