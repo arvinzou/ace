@@ -17,11 +17,11 @@ function userinfo(){
 	    		mobile = result.userProp.tel;
 	    		$(".user_name").text(result.userProp.name);
 				$(".corpName").text(result.userProp.corpName);
-	    		//$(".badding").attr("hidden",true);
-	    		//$(".cancle").attr("hidden",false);
+	    		$(".badding").attr("hidden",true);
+	    		$(".cancle").attr("hidden",false);
 				
-				$(".badding").attr("hidden",false);
-	    		$(".cancle").attr("hidden",true);	
+				//$(".badding").attr("hidden",false);
+	    		//$(".cancle").attr("hidden",true);	
 	    	}
 	  	});
 }
