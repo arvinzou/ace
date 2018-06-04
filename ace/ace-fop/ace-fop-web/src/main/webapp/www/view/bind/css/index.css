@@ -5,6 +5,7 @@ body {
 
 .index {
 	width: 10rem;
+    height: 100%;
 }
 
 .main {
@@ -34,9 +35,9 @@ body {
 	z-index: -1;
 	content: '';
 	border-radius: 0 0 30% 30%;
-	background-image: url(../img/BG.png);
+	background-image: url(../img/bg_1.png);
 	background-size: 100% 100%;
-	
+
 }
 
 .badding {
@@ -64,15 +65,19 @@ body {
 .phoneNum {
 	width: 100%;
 	height: 2rem;
-	line-height: 2rem;
+	/*line-height: 2rem;*/
 	border-bottom: 1px solid #E4E6E9;
+	padding-top: 0.5rem;
 }
-
+.phoneNum input{
+	color: #000000;
+}
 .code {
 	width: 100%;
 	height: 2rem;
-	color: #798092;
+	/*line-height: 2rem;*/
 	border-bottom: 1px solid #E4E6E9;
+	padding-top: 0.5rem;
 }
 
 .code input {
@@ -81,6 +86,7 @@ body {
 	height: 1rem;
 	padding-left: 0.5rem;
 	outline: none;
+	color: #000000;
 }
 
 .option {
@@ -92,9 +98,9 @@ body {
 
 .phoneNum button {
 	width: 25%;
-	height: 0.6rem;
+	height: 1rem;
 	color: #FFFFFF;
-	background-color: #3C82FC;
+	background-color: #1A56A8;
 	font-size: 0.3rem;
 	border: none;
 	border-radius: 0.05rem;
@@ -116,10 +122,20 @@ body {
 .option button {
 	width: 70%;
 	height: 1rem;
+	line-height: 1rem;
 	color: #FFFFFF;
-	background-color: #3C82FC;
+	background-color: #1A56A8;
 	border: none;
 	border-radius: 0.1rem;
 	font-size: 0.4rem;
 	outline: none;
+}
+.footer_logo{
+	width: 4rem;
+	height: 0.8rem;
+	margin: auto;
+}
+.footer_logo img{
+	width: 100%;
+	height: 100%;
 }

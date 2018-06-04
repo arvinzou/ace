@@ -35,7 +35,7 @@ body {
 	z-index: -1;
 	content: '';
 	border-radius: 0 0 50% 50%;
-	background-image: url(../img/BG_1.png);
+	background-image: url(../img/bg@3x.png);
 }
 
 .user_info {
@@ -126,6 +126,7 @@ body {
 
 .badding_opt {
 	width: 2.5rem;
+	height: 0.8rem;
 	line-height: 0.8rem;
 	text-align: center;
 	margin: auto;
@@ -134,18 +135,28 @@ body {
 .badding_opt button{
 	width: 100%;
 	height: 100%;
-	border: 1px solid #3C82FC;
+	border: 1px solid #1A56A8;
 	border-radius: 0.2rem;
-	color: #3C82FC;
+	color: #1A56A8;
 	font-size: 0.4rem;
 	background-color: #FFFFFF;
 	outline: none;
 }
 .corpName{
+	width: 100%;
 	margin: auto;
 	text-align: center;
 	color: #fff;
 	font-size: 0.5rem;
 	margin-bottom: 0.3rem;
 	padding: 0.3rem;
+}
+.footer_logo{
+	width: 4rem;
+	height: 0.8rem;
+	margin: auto;
+}
+.footer_logo img{
+	width: 100%;
+	height: 100%;
 }
