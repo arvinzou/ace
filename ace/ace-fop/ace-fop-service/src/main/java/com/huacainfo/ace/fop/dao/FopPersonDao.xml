@@ -407,6 +407,6 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopPerson">
         select count(*)
         from fop_person
-        where identityCard = #{identityCard,jdbcType=VARCHAR}
+        where mobileNumer = #{mobileNumer,jdbcType=VARCHAR}
     </select>
 </mapper>

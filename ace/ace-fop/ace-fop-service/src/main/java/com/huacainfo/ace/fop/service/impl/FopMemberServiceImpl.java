@@ -5,7 +5,6 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
@@ -26,7 +25,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service("fopMemberService")
 /**
@@ -182,28 +180,6 @@ public class FopMemberServiceImpl implements FopMemberService {
                 String.valueOf(id),
                 String.valueOf(id), "会员", userProp);
         return new MessageResponse(0, "会员删除完成！");
-    }
-
-    /**
-     * 分类用户角色
-     *
-     * @param userId    portal.users.user_id
-     * @param userProp
-     * @param roleTypes 角色类型 4- 	企业/团体会员, 5-	企业/团体非会员
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public ResultResponse dispatchRoleRight(String userId, UserProp userProp, String[] roleTypes) throws Exception {
-        List<Map<String, Object>> roleList = fopMemberDao.selectRoleList(userProp.getActiveSyId(), roleTypes);
-        if (CollectionUtils.isEmpty(roleList)) {
-            return new ResultResponse(ResultCode.FAIL, "未预设用户角色，用户赋权失败");
-        }
-        Map<String, Object> role = roleList.get(0);
-        String[] roleId = new String[]{(String) role.get("role_id")};
-        MessageResponse rs3 = usersService.insertUsersRole(userId, roleId, userProp);
-
-        return new ResultResponse(rs3);
     }
 
     /**

@@ -1,12 +1,5 @@
 package com.huacainfo.ace.fop.web.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
@@ -15,8 +8,14 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopQuestion;
 import com.huacainfo.ace.fop.service.FopQuestionService;
-import com.huacainfo.ace.fop.vo.FopQuestionVo;
 import com.huacainfo.ace.fop.vo.FopQuestionQVo;
+import com.huacainfo.ace.fop.vo.FopQuestionVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/fopQuestion")
@@ -48,9 +47,8 @@ public class FopQuestionController extends FopBaseController {
      */
     @RequestMapping(value = "/findFopQuestionList")
     @ResponseBody
-    public PageResult
-            <FopQuestionVo> findFopQuestionList(FopQuestionQVo condition,
-                                                PageParamNoChangeSord page) throws Exception {
+    public PageResult<FopQuestionVo> findFopQuestionList(FopQuestionQVo condition,
+                                                         PageParamNoChangeSord page) throws Exception {
         PageResult
                 <FopQuestionVo> rst = this.fopQuestionService
                 .findFopQuestionList(condition, page.getStart(), page.getLimit(),
@@ -110,9 +108,7 @@ public class FopQuestionController extends FopBaseController {
      */
     @RequestMapping(value = "/selectFopQuestionByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <FopQuestionVo> selectFopQuestionByPrimaryKey(String id)
-            throws Exception {
+    public SingleResult<FopQuestionVo> selectFopQuestionByPrimaryKey(String id) throws Exception {
         return this.fopQuestionService.selectFopQuestionByPrimaryKey(id);
     }
 

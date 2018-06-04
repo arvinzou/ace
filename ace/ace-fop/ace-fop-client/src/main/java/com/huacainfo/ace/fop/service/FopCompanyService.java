@@ -1,7 +1,6 @@
 package com.huacainfo.ace.fop.service;
 
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -10,7 +9,6 @@ import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.vo.FopCompanyQVo;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,11 +30,11 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract PageResult<FopCompanyVo> findFopCompanyList(FopCompanyQVo condition, int start, int limit, String orderBy) throws Exception;
+    PageResult<FopCompanyVo> findFopCompanyList(FopCompanyQVo condition, int start, int limit, String orderBy) throws Exception;
 
-    public abstract ResultResponse findCompanyList(FopCompanyQVo condition, int page, int limit, String orderBy) throws Exception;
+    ResultResponse findCompanyList(FopCompanyQVo condition, int page, int limit, String orderBy) throws Exception;
 
-    public abstract ResultResponse findCompanyGisList() throws Exception;
+    ResultResponse findCompanyGisList() throws Exception;
 
     /**
      * @throws
@@ -49,9 +47,9 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse insertFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
+    MessageResponse insertFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
 
-    public abstract MessageResponse insertCompany(String fullName, String lpMobile) throws Exception;
+    MessageResponse insertCompany(String fullName, String lpMobile) throws Exception;
 
     /**
      * @throws
@@ -64,7 +62,7 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse updateFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
+    MessageResponse updateFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -76,11 +74,11 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract SingleResult<FopCompanyVo> selectFopCompanyByPrimaryKey(String id) throws Exception;
+    SingleResult<FopCompanyVo> selectFopCompanyByPrimaryKey(String id) throws Exception;
 
-    public abstract ResultResponse selectCompanyByPrimaryKey(String id) throws Exception;
+    ResultResponse selectCompanyByPrimaryKey(String id) throws Exception;
 
-    public abstract ResultResponse selectCompanyInfo(UserProp userProp) throws Exception;
+    ResultResponse selectCompanyInfo(UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -93,7 +91,7 @@ public interface FopCompanyService {
      * @author: Arvin
      * @version: 2018-05-02
      */
-    public abstract MessageResponse deleteFopCompanyByFopCompanyId(String id, UserProp userProp) throws Exception;
+    MessageResponse deleteFopCompanyByFopCompanyId(String id, UserProp userProp) throws Exception;
 
 
     public Map<String, Object> selectCompany(Map<String, Object> params) throws Exception;

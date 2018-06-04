@@ -86,11 +86,11 @@ jQuery(function ($) {
     // navButtons
     jQuery(cfg.grid_selector).jqGrid('navGrid', cfg.pager_selector, { // navbar
         // options
-        edit: authorConfig.hasOwnProperty(cfg.grid_edit_data_url) || false,
+        edit: false,//authorConfig.hasOwnProperty(cfg.grid_edit_data_url) || false,
         editicon: 'ace-icon fa fa-pencil blue',
-        add: authorConfig.hasOwnProperty(cfg.grid_add_data_url) || false,
+        add: false,//authorConfig.hasOwnProperty(cfg.grid_add_data_url) || false,
         addicon: 'ace-icon fa fa-plus-circle purple',
-        del: authorConfig.hasOwnProperty(cfg.grid_delete_data_url) || false,
+        del: false,
         delicon: 'ace-icon fa fa-trash-o red',
         search: false,
         searchicon: 'ace-icon fa fa-search orange',
