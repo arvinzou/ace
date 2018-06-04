@@ -198,4 +198,9 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         rst.setValue(o);
         return  rst;
     }
+    @Override
+    public  MessageResponse unbind(String unionid) throws Exception{
+        this.userinfoDao.updateUnbind(unionid);
+        return new MessageResponse(0,"解除绑定成功。");
+    }
 }

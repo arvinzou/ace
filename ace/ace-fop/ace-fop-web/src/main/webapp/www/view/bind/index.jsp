@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="footer">
-        常德市非公经济公共服务平台
+        <div class="footer_logo"><img src="img/logo@3x.png"/></div>
     </div>
 </div>
 </body>

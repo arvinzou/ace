@@ -58,6 +58,13 @@ public class OAuth2Controller extends PortalBaseController {
         return rst;
     }
 
+
+    @RequestMapping(value = "/unbind.do")
+    @ResponseBody
+    public MessageResponse unbind()throws Exception {
+       return this.oAuth2Service.unbind(this.getCurUserinfo().getUnionid());
+    }
+
     @RequestMapping(value = "/sendCmccByMobile.do")
     @ResponseBody
     public MessageResponse sendCmccByMobile(String mobile,String signature) throws Exception {

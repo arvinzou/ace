@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="${cfg.sys_name}" name="description" />
-        <jsp:include page="../../common/base.jsp" />
+        <jsp:include page="../../../common/base.jsp" />
         <script src="js/act.js?v=${cfg.version}"></script>
         <script src="${portalPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 		     <script type="text/javascript">

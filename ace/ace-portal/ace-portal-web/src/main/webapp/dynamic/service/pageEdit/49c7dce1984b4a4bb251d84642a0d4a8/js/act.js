@@ -9,7 +9,7 @@ function App() {
     console.log("=============================App Start==============================");
     loader({
         path: contextPath,
-        url: '/dynamic/service/pageEdit/css/style.css',
+        url: '/dynamic/service/pageEdit/49c7dce1984b4a4bb251d84642a0d4a8/css/style.css',
         type: 'css'
     });
     loader({
@@ -28,7 +28,7 @@ function App() {
     });
     loader({
         path: contextPath,
-        url: '/dynamic/service/pageEdit/js/upload.js',
+        url: '/dynamic/service/pageEdit/49c7dce1984b4a4bb251d84642a0d4a8/js/upload.js',
         type: 'js',
         callback: function () {
 
