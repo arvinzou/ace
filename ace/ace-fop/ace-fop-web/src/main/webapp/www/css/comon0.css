@@ -5,7 +5,12 @@
     font-family: "微软雅黑";
     font-size: 14px;
 }
-
+.simditor .simditor-body{
+    overflow: auto;
+}
+textarea{
+    overflow: auto!important;
+}
 body {
     font-size: 16px;
     padding: 0px;

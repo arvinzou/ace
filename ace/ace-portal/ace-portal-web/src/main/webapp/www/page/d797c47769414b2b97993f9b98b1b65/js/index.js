@@ -38,7 +38,7 @@ function App() {
             type: 2,
             content: url,
             btn: '关闭',
-            closeBtn: 0,
+			closeBtn:1,
             resize: false,
             scrollbar: false,
             area: ['90%', '60%'],

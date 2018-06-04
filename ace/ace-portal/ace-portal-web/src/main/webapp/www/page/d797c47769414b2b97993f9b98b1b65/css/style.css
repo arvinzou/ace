@@ -151,4 +151,4 @@ a img {
 body .layer-class{overflow:hidden}
 body .layer-class .layui-layer-btn{padding:10px 0px 15px;text-align:right}
 body .layer-class .layui-layer-btn a{border-radius:20px}
-body .layer-class .layui-layer-btn .layui-layer-btn0{border-color:#44b549}
+body .layer-class .layui-layer-btn .layui-layer-btn0{border-color:#44b549;background-color:#44b549}

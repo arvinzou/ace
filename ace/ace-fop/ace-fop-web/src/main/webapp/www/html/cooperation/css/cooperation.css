@@ -1,5 +1,6 @@
 body {
 	width: 100%;
+	min-width: 900px;
 	height: auto;
 	background-color: #F4F4F4;
 }
@@ -99,6 +100,8 @@ html{
 	border-bottom: 3px solid #FF9F00;
 	height: 62px;
 	line-height: 62px;
+	vertical-align: middle;
+	overflow: hidden;
 }
 
 .title_small {
@@ -108,6 +111,7 @@ html{
 	border-bottom: 1px solid #E1E5ED;
 	height: 62px;
 	line-height: 62px;
+	vertical-align: middle;
 }
 
 .product_form {

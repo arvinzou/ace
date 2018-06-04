@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+body{
+    min-width: 900px;
+}
 h3{
     color: #1A56A8;
 }
