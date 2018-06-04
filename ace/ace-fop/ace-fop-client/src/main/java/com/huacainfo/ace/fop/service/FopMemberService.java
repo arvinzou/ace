@@ -3,7 +3,6 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopMember;
 import com.huacainfo.ace.fop.vo.FopMemberQVo;
@@ -85,17 +84,6 @@ public interface FopMemberService {
      */
     MessageResponse deleteFopMemberByFopMemberId(String id, UserProp userProp) throws
             Exception;
-
-    /**
-     * 分类用户角色
-     *
-     * @param userId    portal.users.user_id
-     * @param userProp
-     * @param roleTypes 角色类型 4- 	企业/团体会员, 5-	企业/团体非会员
-     * @return
-     * @throws Exception
-     */
-    ResultResponse dispatchRoleRight(String userId, UserProp userProp, String[] roleTypes) throws Exception;
 
     /**
      * 功能描述: 加入会员审核

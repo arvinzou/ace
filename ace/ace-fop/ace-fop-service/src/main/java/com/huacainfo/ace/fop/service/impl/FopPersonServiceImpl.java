@@ -135,7 +135,6 @@ public class FopPersonServiceImpl implements FopPersonService {
         }
 
 
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -184,9 +183,8 @@ public class FopPersonServiceImpl implements FopPersonService {
     @Override
     public ResultResponse insertPerson(FopCompanyVo companyVo, UserProp userProp) {
         FopPerson person = new FopPerson();
-        person.setRealName(companyVo.getPersonId());
+        person.setRealName(companyVo.getRealName());
         person.setMobileNumer(companyVo.getLpMobile());
-        person.setRealName(companyVo.getFullName());
         person.setSex(companyVo.getLpSex());
         person.setBirthDate(companyVo.getLpBirthDt());
         person.setNativePlace(companyVo.getLpNativePlace());

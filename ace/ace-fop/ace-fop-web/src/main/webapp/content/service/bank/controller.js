@@ -50,6 +50,8 @@ jQuery(function ($) {
                         style_edit_form(form);
                         //添加额外按钮显示
                         appendButtons();
+                        //设置企业类型默认值
+                        $("#companyType").find("option[value = '3']").attr("selected", "selected");
                     }
                 })
         });
@@ -77,6 +79,8 @@ jQuery(function ($) {
                         style_edit_form(form);
                         //添加额外按钮显示
                         appendButtons();
+                        //法人号码一经注册，则不能修改
+                        $("#lpMobile").attr("readOnly", "true");
                     }
                 })
         });

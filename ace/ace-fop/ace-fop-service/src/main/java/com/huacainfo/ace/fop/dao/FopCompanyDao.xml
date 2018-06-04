@@ -545,6 +545,18 @@
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopCompanyVo">
         <result column="realName" jdbcType="VARCHAR" property="realName"/>
+
+        <result column="lpSex" jdbcType="VARCHAR" property="lpSex"/>
+        <result column="lpBirthDt" jdbcType="TIMESTAMP" property="lpBirthDt"/>
+        <result column="lpNativePlace" jdbcType="VARCHAR" property="lpNativePlace"/>
+        <result column="lpNationality" jdbcType="VARCHAR" property="lpNationality"/>
+        <result column="lpPolitical" jdbcType="VARCHAR" property="lpPolitical"/>
+        <result column="lpRecruitmentDate" jdbcType="TIMESTAMP" property="lpRecruitmentDate"/>
+        <result column="lpEducation" jdbcType="VARCHAR" property="lpEducation"/>
+        <result column="lpSkillJobTitle" jdbcType="VARCHAR" property="lpSkillJobTitle"/>
+        <result column="lpDeptPost" jdbcType="VARCHAR" property="lpDeptPost"/>
+        <result column="lpIdentityCard" jdbcType="VARCHAR" property="lpIdentityCard"/>
+        <result column="lpSocietyPost" jdbcType="VARCHAR" property="lpSocietyPost"/>
     </resultMap>
 
     <sql id="column_List_Vo">
@@ -554,7 +566,11 @@
         c.longitude, c.firstPersonId, c.secPersonId, c.postcode, c.fax, c.email, c.majorVariety, c.laborContractNum,
         c.thirdLaborRelation, c.socialInsuranceAddr, c.socialInsuranceNum, c.accTaxAmount, c.yearTaxAmount,
         c.remark, c.status, c.createUserId, c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName,
-        c.lastModifyDate, p.realName,pp.name as areaCodeName
+        c.lastModifyDate, p.realName,pp.name as areaCodeName,
+        p.mobileNumer AS lpMobile, p.sex AS lpSex, p.birthDate AS lpBirthDt,
+        p.nationality as lpNationality, p.nativePlace AS lpNativePlace,p.political AS lpPolitical,
+        p.recruitmentDate AS lpRecruitmentDate,p.education AS lpEducation,p.skillJobTitle AS lpSkillJobTitle,
+        p.deptPost AS lpDeptPost,p.identityCard AS lpIdentityCard,p.societyPost AS lpSocietyPost
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

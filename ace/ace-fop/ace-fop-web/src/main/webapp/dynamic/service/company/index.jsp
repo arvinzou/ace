@@ -31,15 +31,15 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    类别：<input class="easyui-combobox" style="width: 200px" name="category"
-                              data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
+                    <%--类别：<input class="easyui-combobox" style="width: 200px" name="category"--%>
+                    <%--data-options="--%>
+                    <%--url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',--%>
+                    <%--method:'get',--%>
+                    <%--valueField:'code',--%>
+                    <%--textField:'name',--%>
+                    <%--panelHeight:'auto'">--%>
 
-                    名称： <input name="name" type="text"
+                    名称： <input name="fullName" type="text"
                                style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopCompany/findFopCompanyList">
