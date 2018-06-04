@@ -80,113 +80,121 @@
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
 <div class="login_index">
-    <div class="login_logo">
-        <div class="logo_image"></div>
-    </div>
-    <div class="login_body">
-        <div class="login_panel">
-            <div class="content">
-            <!-- BEGIN LOGIN FORM -->
-            <div class="login-box-warp">
-                <div class="login-box no-longlogin module-static" id="J_LoginBox">
-                    <div class="hd">
-                        <div class="login-switch" onselectstart="return false;">
-                            <i class="iconfont quick" style="display:none" id="J_Static2Quick" onclick="javascript:switchLoginType('J_Static2Quick','J_Quick2Static')" ></i>
-                            <i class="iconfont static" style="display:block" id="J_Quick2Static" onclick="javascript:switchLoginType('J_Quick2Static','J_Static2Quick')"></i>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <form class="login_form" id="login_form" name="login_form"
-                  action="${pageContext.request.contextPath}/j_spring_security_check"
-                  method="post">
-
-                <div class="form-title">
-                    <span style="color: red;font-size:16px">${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}${sessionScope['j_captcha_error']}</span>
-                </div>
-                <div class="form-title">
-                    <span class="form-subtitle">密码登录.</span>
-                </div>
-                <div id="J_Static2Quick_box" style="display:none;width:100%;text-align:center">
-                    <img src="http://www.xmypage.com/images/erweima.png" class="qrcode"/>
-
-                </div>
-                <div id="J_Quick2Static_box" style="display:block">
-                    <div class="alert alert-danger display-hide">
-                        <button class="close" data-close="alert"></button>
-                        <span> 请输入账号与密码. </span>
-                    </div>
-                    <div class="form-group">
-                        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-                        <label class="control-label visible-ie8 visible-ie9">账号</label>
-                        <div class="input-icon">
-                            <i class="fa fa-user"></i>
-                            <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
-                                   placeholder="账号" name="j_username" id="j_username" value="${username}"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label visible-ie8 visible-ie9">密码</label>
-                        <div class="input-icon">
-                            <i class="fa fa-lock"></i>
-                            <input class="form-control  placeholder-no-fix" type="password" autocomplete="off"
-                                   placeholder="密码" name="j_password" id="j_password" value="${password}"/>
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label visible-ie8 visible-ie9">验证码</label>
-                        <input class="form-control  placeholder-no-fix" type="text" name="j_captcha"
-                               autocomplete="off" id="j_captcha"
-                               placeholder="验证码" value=""/>
-
-
-                        </label>
-                    </div>
-                    <div class="form-group-captcha">
-                        <label class="control-label visible-ie8 visible-ie9">验证码</label>
-
-
-                        <a href="#" id="flashImage"><img id="imageF"
-                                                         src="${pageContext.request.contextPath}/captcha/image.do?date=${date}"/>
-                        </a>
-
-
-                        </label>
-                    </div>
-
-                    <div class="form-actions">
-                        <label class="rememberme mt-checkbox mt-checkbox-outline">
-                            <input type="checkbox" name="ch" ${ch} value="true"/> 两周之内记住我
-                            <span></span>
-                        </label>
-                        <div class="pull-right forget-password-block">
-                            <a data-target="#stack1" data-toggle="modal" class="forget-password">忘记密码了</a>
-                        </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="button" id="btn-login-submit" class="btn red btn-block uppercase">登录</button>
-                    </div>
-                </div>
-
-
-            </form>
-            <!-- /.main-content -->
-            <div align="center">
-                <h6>
-                    <span style="font-family: '微软雅黑'">建议WIN7以上系统使用IE9以上浏览器，XP、MAC系统使用</span><a
-                        href="http://rj.baidu.com/soft/detail/14744.html?ald"
-                        target="_blank" style="font-family: '微软雅黑'">谷歌浏览器</a> <span
-                        style="font-family: '微软雅黑'">分辨率1024*768以上为佳</span>
-                </h6>
-            </div>
-
+    <div class="login_logo_temp">
+        <div class="logo_img">
 
         </div>
+        <div class="logo_title">
+            <div class="title">常德市非公经济公共服务平台</div>
+            <div class="sub_title">Chang De city non-public economic public service platform</div>
+        </div>
+    </div>
+    <div class="login_body">
+        <div class="login_body_temp">
+            <div class="login_panel">
+                <div class="content">
+                    <!-- BEGIN LOGIN FORM -->
+                    <div class="login-box-warp">
+                        <div class="login-box no-longlogin module-static" id="J_LoginBox">
+                            <div class="hd">
+                                <div class="login-switch" onselectstart="return false;">
+                                    <i class="iconfont quick" style="display:none" id="J_Static2Quick" onclick="javascript:switchLoginType('J_Static2Quick','J_Quick2Static')" ></i>
+                                    <i class="iconfont static" style="display:block" id="J_Quick2Static" onclick="javascript:switchLoginType('J_Quick2Static','J_Static2Quick')"></i>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <form class="login_form" id="login_form" name="login_form"
+                          action="${pageContext.request.contextPath}/j_spring_security_check"
+                          method="post">
+
+                        <div class="form-title">
+                            <span style="color: red;font-size:16px">${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}${sessionScope['j_captcha_error']}</span>
+                        </div>
+                        <div class="form-title">
+                            <span class="form-subtitle">密码登录.</span>
+                        </div>
+                        <div id="J_Static2Quick_box" style="display:none;width:100%;text-align:center">
+                            <img src="http://www.xmypage.com/images/erweima.png" class="qrcode"/>
+
+                        </div>
+                        <div id="J_Quick2Static_box" style="display:block">
+                            <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                <span> 请输入账号与密码. </span>
+                            </div>
+                            <div class="form-group">
+                                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                                <label class="control-label visible-ie8 visible-ie9">账号</label>
+                                <div class="input-icon">
+                                    <i class="fa fa-user"></i>
+                                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
+                                           placeholder="账号" name="j_username" id="j_username" value="${username}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label visible-ie8 visible-ie9">密码</label>
+                                <div class="input-icon">
+                                    <i class="fa fa-lock"></i>
+                                    <input class="form-control  placeholder-no-fix" type="password" autocomplete="off"
+                                           placeholder="密码" name="j_password" id="j_password" value="${password}"/>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label visible-ie8 visible-ie9">验证码</label>
+                                <input class="form-control  placeholder-no-fix" type="text" name="j_captcha"
+                                       autocomplete="off" id="j_captcha"
+                                       placeholder="验证码" value=""/>
+
+
+                                </label>
+                            </div>
+                            <div class="form-group-captcha">
+                                <label class="control-label visible-ie8 visible-ie9">验证码</label>
+
+
+                                <a href="#" id="flashImage"><img id="imageF"
+                                                                 src="${pageContext.request.contextPath}/captcha/image.do?date=${date}"/>
+                                </a>
+
+
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <label class="rememberme mt-checkbox mt-checkbox-outline">
+                                    <input type="checkbox" name="ch" ${ch} value="true"/> 两周之内记住我
+                                    <span></span>
+                                </label>
+                                <div class="pull-right forget-password-block">
+                                    <a data-target="#stack1" data-toggle="modal" class="forget-password">忘记密码了</a>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" id="btn-login-submit" class="btn red btn-block uppercase">登录</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <!-- /.main-content -->
+                    <div align="center">
+                        <h6>
+                            <span style="font-family: '微软雅黑'">建议WIN7以上系统使用IE9以上浏览器，XP、MAC系统使用</span><a
+                                href="http://rj.baidu.com/soft/detail/14744.html?ald"
+                                target="_blank" style="font-family: '微软雅黑'">谷歌浏览器</a> <span
+                                style="font-family: '微软雅黑'">分辨率1024*768以上为佳</span>
+                        </h6>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
     </div>
     <div class="login_footer">技术支持：湖南华彩伟业网络科技有限公司</div>
@@ -460,10 +468,6 @@
     .form-group-captcha {
         margin-bottom: 5px;
     }
-    body {
-        background-image: url(${cfg.sys_login_bg_img});
-        background-size: cover;
-    }
     .content {
         border: 1px solid #eee;
     }
@@ -489,7 +493,7 @@
 .login-switch .iconfont {
     font-size: 52px;
     cursor: pointer;
-    color: #f40;
+    color: #1A56A8;
 }
 .iconfont {
     font-family: iconfont!important;
@@ -521,47 +525,81 @@ i, cite, em, var, address, dfn {
     .login_index{
         width: 100%;
     }
-    .login_logo{
-        width: 100%;
-        height: 80px;
-        position: absolute;
-        background-color: #FFFFFF;
-        top: 0;
+
+    .login_logo_temp {
+        width: 1400px;
+        height: 100px;
+        padding-top: 10px;
+        margin: 0 auto;
+        background-color: #fff;
     }
-    .logo_image{
-        margin-left: 10%;
-        width: 350px;
-        height: 50px;
-        background: url(image/logo@3x.png) no-repeat;
+
+    .login_logo_temp > div {
+        float: left;
+    }
+
+    .login_logo_temp .logo_img {
+        width: 80px;
+        height: 80px;
+        background-image: url("image/logo.png");
         background-size:100% 100%;
+    }
+
+    .login_logo_temp .logo_title {
+        margin-left: 20px;
+        color: #000;
+        font-family: "Microsoft YaHei";
+        font-weight: bolder;
+    }
+
+    .login_logo_temp .logo_title .title {
+        font-size: 35px;
+        height: 50px;
+        line-height: 50px;
+
+    }
+
+    .login_logo_temp .logo_title .sub_title {
+        font-size: 15px;
+        height: 30px;
+        line-height: 30px;
     }
     .login_body{
-        width: 100%;
-        background: url(image/login_bg.png) no-repeat;
+        min-width: 100%;
+        background: -moz-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
+        background: -webkit-gradient(linear, left top, left bottom, from(#1A56A8), color-stop(36%, #1A56A8), to(#6FDFF6));
+        background: -webkit-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
+        background: -o-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
+        background: -ms-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
+        background: linear-gradient(to right, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
         background-size:100% 100%;
         position: absolute;
-        top: 50px;
-        bottom: 50px;
+        top: 100px;
+        bottom: 150px;
     }
+
+    .login_body .login_body_temp {
+        width: 1400px;
+        margin: 120px auto 0 auto;
+        background: url("image/body.png") no-repeat;
+        height: 500px;
+        background-size: auto 100%;
+    }
+
     .login_footer{
-        height: 50px;
+        height: 150px;
         width: 100%;
-        background-color: #FFFFFF;
         position: absolute;
         bottom: 0;
         color: #657180;
         text-align: center;
-        line-height: 50px;
+        line-height: 150px;
     }
     .login_panel{
-        position: fixed;
+        float: right;
         width: 350px;
         height: 400px;
-        /* margin-top: 10%; */
-        /* margin-right: 100px; */
-        top: 200px;
-        background-color: #FFFFFF;
-        right: 20%;
+        background-color: #fff;
     }
     .login_form{
         width: 80%;
@@ -575,10 +613,17 @@ i, cite, em, var, address, dfn {
         width: 100%;
         height: 35px;
         background-color: #1A56A8;
-        color: #FFFFFF;
         border-radius: 5px;
         border: none;
     }
+
+    .btn.red:not(.btn-outline) {
+        color: #fff;
+        background-color: #1A56A8 !important;
+        border-color: #1A56A8 !important;
+    }
+
+
 
 </style>
 </html>
