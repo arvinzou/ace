@@ -147,7 +147,7 @@ var shareJson = [
     },
    {
        "id":"06",
-        "title":"国税局",
+        "title":"税务局",
         "child":[
             {
                 "content":"税收法规",
@@ -164,23 +164,17 @@ var shareJson = [
             {
                 "content": "湖南省国税局",
                 "url": "http://www.hntax.gov.cn/zhuanti/ygzzt/"
-            }
-        ]
-    },
-    {
-        "id":"07",
-        "title":"地税局",
-        "child":[
+            },
             {
-                "content":"行政处罚公示",
+                "content":"行政许可和处罚公示",
                 "url":"http://www.hnds.gov.cn/hncd/zwgk/sszt/xzxkhxzcf/default.htm"
             },
             {
-                "content": "最新文件",
+                "content":"最新文件",
                 "url":"http://www.hnds.gov.cn/hncd/zwgk/zcfg/zxwj/default.htm"
             },
             {
-                "content": "税收法规库",
+                "content":"税收法规库",
                 "url":"http://www.hnds.gov.cn/hnmh/bsfw/zcfgk/default.htm"
             },
             {
@@ -191,7 +185,24 @@ var shareJson = [
                 "content":"信用等级查询",
                 "url":"http://www.hnds.gov.cn/hnmh/bsfw/zxcx/djcx/default.htm"
             }
-
+        ]
+    },
+    {
+        "id":"07",
+        "title":"信用常德",
+        "child":[
+            {
+                "content":"守信光荣榜",
+                "url":"http://xycd.changde.gov.cn/25/index.html"
+            },
+            {
+                "content": "失信警示榜",
+                "url":"http://xycd.changde.gov.cn/26/index.html"
+            },
+            {
+                "content": "企业查询",
+                "url":"http://xycd.changde.gov.cn/index.html"
+            }
         ]
     },
     {
@@ -254,7 +265,7 @@ var shareJson = [
     },
     {
         "id":"11",
-        "title":"国土资源局",
+        "title":"国土局",
         "child":[
             {
                 "content":"政策法规",
@@ -436,6 +447,38 @@ var shareJson = [
             {
                 "content":"区域金融",
                 "url":"http://rhszxzh.changde.gov.cn/col/col28093/index.html"
+            }
+        ]
+    },
+    {
+        "id":"24",
+        "title":"经开区",
+        "child":[
+            {
+                "content":"企事业办事窗口",
+                "url":"http://wsbs.hunan.gov.cn/virtualhall/instance/baseinfo.jsp?parentid_index=430705999000_1&parentid=430705999000_81&areaCode=430705999000"
+            },
+            {
+                "content":"招商引资",
+                "url":"http://cdjkq.changde.gov.cn/col/col17080/index.html"
+            },
+            {
+                "content":"专业园区",
+                "url":"http://cdjkq.changde.gov.cn/col/col17085/index.html"
+            }
+        ]
+    },
+    {
+        "id":"25",
+        "title":"高新区",
+        "child":[
+            {
+                "content":"办事指南",
+                "url":"http://www.dingcheng.gov.cn/gxq/bsfw/bszn/"
+            },
+            {
+                "content":"政策文件",
+                "url":"http://www.dingcheng.gov.cn/gxq/xxgk/zcwj/"
             }
         ]
     }
