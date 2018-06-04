@@ -133,8 +133,6 @@ public class FopPersonServiceImpl implements FopPersonService {
         if (CommonUtils.isBlank(o.getIdentityCard())) {
             return new MessageResponse(1, "身份证号码不能为空！");
         }
-
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
