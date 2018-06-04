@@ -166,7 +166,7 @@ var shareJson = [
                 "url": "http://www.hntax.gov.cn/zhuanti/ygzzt/"
             },
             {
-                "content":"行政许可和处罚公示",
+                "content":"行政许可和处罚",
                 "url":"http://www.hnds.gov.cn/hncd/zwgk/sszt/xzxkhxzcf/default.htm"
             },
             {

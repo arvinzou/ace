@@ -494,6 +494,7 @@ body{
 	float: left;
 	overflow: hidden;
 	position: relative;
+	padding-top: 10px;
 }
 .share_menu ul{
 	width: 100%;
@@ -574,8 +575,8 @@ body{
 }
 .alink li{
 	width: 25%;
-	height: 50px;
-	line-height: 50px;
+	height: 30px;
+	line-height: 30px;
 	text-align: center;
 	display: block;
 	float: left;
