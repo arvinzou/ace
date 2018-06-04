@@ -130,7 +130,7 @@ public class TaskCmccServiceImpl implements TaskCmccService, ThreadProcess {
                 q.setTel(telArr[i].split(",")[0]);
                 //queueCmccWaitMapper.insert(q);
                 if (!threadPool.dataQueue.contains(q)) {
-                    threadPool.addData(o);
+                    threadPool.addData(q);
                     this.logger.info("====================短信通道==================");
                     logger.info("add new task 1");
                     logger.info("dataQueue " + threadPool.dataQueue.procSize());
