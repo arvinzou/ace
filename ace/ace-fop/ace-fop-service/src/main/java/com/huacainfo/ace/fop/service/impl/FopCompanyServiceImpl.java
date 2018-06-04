@@ -21,11 +21,7 @@ import com.huacainfo.ace.fop.model.FopPerson;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.model.Department;
-import com.huacainfo.ace.portal.model.UserCfg;
-import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.portal.service.DepartmentService;
-import com.huacainfo.ace.portal.service.UserCfgService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
@@ -33,7 +29,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("fopCompanyService")
 /**
@@ -53,28 +52,23 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     private FopPersonService fopPersonService;
 
     @Autowired
-    private DepartmentService departmentService;
-
-    @Autowired
-    private UsersService usersService;
-
-    @Autowired
     private FopFlowRecordService fopFlowRecordService;
-
-    @Autowired
-    private FopMemberService fopMemberService;
 
     @Autowired
     private FopPayRecordService fopPayRecordService;
 
-    @Autowired
-    private UserCfgService userCfgService;
 
     @Autowired
     private FopCompanyOrgService fopCompanyOrgService;
 
     @Autowired
     private FopCompanyContributionService fopCompanyContributionService;
+
+    @Autowired
+    private SysAccountService sysAccountService;
+
+    @Autowired
+    private UsersService usersService;
 
     /**
      * @throws
@@ -155,6 +149,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (CommonUtils.isBlank(o.getFullName())) {
             return new MessageResponse(ResultCode.FAIL, "企业全称不能为空！");
         }
+        if (CommonUtils.isBlank(o.getRealName())) {
+            return new MessageResponse(ResultCode.FAIL, "企业法人姓名!");
+        }
         if (CommonUtils.isBlank(o.getLpMobile())) {
             return new MessageResponse(ResultCode.FAIL, "企业法人联系方式不能为空!");
         }
@@ -163,7 +160,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new MessageResponse(ResultCode.FAIL, "企业名称重复！");
         }
         //初始化系统用户
-        ResultResponse rs1 = initSysUser(o, userProp);
+        ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getLpMobile(),
+                "市工商联 -- 企业注册", userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
         }
@@ -223,7 +221,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new MessageResponse(ResultCode.FAIL, "企业名称重复！");
         }
         //初始化系统用户
-        ResultResponse rs1 = initSysUser(o, userProp);
+        ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getLpMobile(),
+                "市工商联 -- 企业注册", userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
         }
@@ -282,58 +281,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     /**
-     * 初始化系统用户
-     *
-     * @param o
-     * @param userProp
-     * @return
-     */
-    private ResultResponse initSysUser(FopCompanyVo o, UserProp userProp) throws Exception {
-        //portal.department
-        Department department = new Department();
-        department.setDepartmentId(GUIDUtil.getGUID());
-        department.setDepartmentName(o.getFullName());
-        department.setSyid(userProp.getActiveSyId());
-        department.setAreaCode(userProp.getAreaCode());
-        //市工商联
-        department.setParentDepartmentId("0010006");
-        MessageResponse rs1 = departmentService.insertDepartmentWithDepId(department, userProp);
-        if (ResultCode.FAIL == rs1.getStatus()) {
-            throw new CustomException(rs1.getErrorMessage());
-        }
-        //portal.users
-        Users initUser = new Users();
-        initUser.setDepartmentId(department.getDepartmentId());
-        initUser.setAccount(o.getLpMobile());
-        initUser.setName(o.getFullName());
-        initUser.setPassword("123456");
-        initUser.setSex("1");
-        initUser.setUserLevel("1");
-        ResultResponse rs2 = usersService.insertUsersRecord(initUser, userProp, "市工商联 -- 企业注册");
-        if (ResultCode.FAIL == rs2.getStatus()) {
-            throw new CustomException(rs2.getInfo());
-        }
-        //分配用户角色 默认分配非会员权限，注册申请成功后，分配会员权限
-        Users users = (Users) rs2.getData();
-        ResultResponse rs3 = fopMemberService.dispatchRoleRight(users.getUserId(), userProp, new String[]{"5"});
-        if (ResultCode.FAIL == rs3.getStatus()) {
-            throw new CustomException(rs3.getInfo());
-        }
-
-        //插入登录后，默认跳转页配置
-        List<UserCfg> cfgList = new ArrayList<>();
-        UserCfg userCfg = new UserCfg();
-        userCfg.setUserId(users.getUserId());
-        userCfg.setCfgKey("portalType");
-        userCfg.setCfgValue("5");
-        cfgList.add(userCfg);
-        userCfgService.saveOrUpdateUserCfg(cfgList, userProp);
-
-        //TODO 分配成功通知
-        return new ResultResponse(ResultCode.SUCCESS, "初始化系统用户成功", department);
-    }
-
-    /**
      * @throws
      * @Title:updateFopCompany
      * @Description: 更新企业管理
@@ -351,24 +298,27 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getFullName())) {
-            return new MessageResponse(1, "企业全称不能为空！");
+            return new MessageResponse(1, "企业/机构全称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getPersonId())) {
-            return new MessageResponse(1, "企业法人代表不能为空！");
+        if (CommonUtils.isBlank(o.getRealName())) {
+            return new MessageResponse(ResultCode.FAIL, "企业/机构法人姓名!");
+        }
+        if (CommonUtils.isBlank(o.getLpMobile())) {
+            return new MessageResponse(ResultCode.FAIL, "企业/机构法人联系方式不能为空!");
         }
 
         int temp = this.fopCompanyDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(ResultCode.FAIL, "企业名称重复！");
+            return new MessageResponse(ResultCode.FAIL, "企业/机构名称重复！");
         }
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopCompanyDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更企业管理", "企业管理", "", o.getId(),
+        this.dataBaseLogService.log("变更企业/机构管理", "企业/机构管理", "", o.getId(),
                 o.getId(), userProp);
-        return new MessageResponse(0, "变更企业管理完成！");
+        return new MessageResponse(0, "变更企业/机构管理完成！");
     }
 
     /**

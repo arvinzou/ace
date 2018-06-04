@@ -19,9 +19,6 @@ jQuery(function ($) {
                 $.extend(params, {
                     time: new Date()
                 });
-                // console.log(params);
-                //公司类型筛选
-                params['companyType'] = "0";
 
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {
                     page: 1,
@@ -77,6 +74,8 @@ jQuery(function ($) {
                         style_edit_form(form);
                         //添加额外按钮显示
                         appendButtons();
+                        //法人号码一经注册，则不能修改
+                        $("#lpMobile").attr("readOnly", "true");
                     }
                 })
         });

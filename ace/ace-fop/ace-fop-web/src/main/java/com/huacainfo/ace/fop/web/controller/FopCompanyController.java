@@ -74,7 +74,7 @@ public class FopCompanyController extends FopBaseController {
      */
     @RequestMapping(value = "/insertFopCompany")
     @ResponseBody
-    public MessageResponse insertFopCompany(String jsons) {
+    public MessageResponse insertFopCompany(String jsons) throws Exception {
         try {
             FopCompanyVo obj = JSON.parseObject(jsons, FopCompanyVo.class);
 

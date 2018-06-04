@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.SysAccountDao">
+
+    <resultMap id="DeptResultMap" type="com.huacainfo.ace.portal.model.Department">
+        <id column="department_id" jdbcType="VARCHAR" property="departmentId"/>
+        <result column="parent_department_id" jdbcType="VARCHAR" property="parentDepartmentId"/>
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName"/>
+        <result column="short_name" jdbcType="VARCHAR" property="shortName"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
+        <result column="area_code" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="pcode" jdbcType="VARCHAR" property="pcode"/>
+        <result column="contact_name" jdbcType="VARCHAR" property="contactName"/>
+        <result column="contact_tel" jdbcType="VARCHAR" property="contactTel"/>
+        <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile"/>
+        <result column="contact_qq" jdbcType="VARCHAR" property="contactQq"/>
+        <result column="contact_email" jdbcType="VARCHAR" property="contactEmail"/>
+        <result column="contact_fax" jdbcType="VARCHAR" property="contactFax"/>
+        <result column="legal_person_name" jdbcType="VARCHAR" property="legalPersonName"/>
+        <result column="legal_person_id_type" jdbcType="VARCHAR" property="legalPersonIdType"/>
+        <result column="legal_person_id_no" jdbcType="VARCHAR" property="legalPersonIdNo"/>
+        <result column="legal_person_tel" jdbcType="VARCHAR" property="legalPersonTel"/>
+        <result column="legal_person_mobile" jdbcType="VARCHAR" property="legalPersonMobile"/>
+        <result column="legal_person_addr" jdbcType="VARCHAR" property="legalPersonAddr"/>
+        <result column="reg_date" jdbcType="TIMESTAMP" property="regDate"/>
+        <result column="reg_capital" jdbcType="VARCHAR" property="regCapital"/>
+        <result column="reg_area_code" jdbcType="VARCHAR" property="regAreaCode"/>
+        <result column="reg_addr" jdbcType="VARCHAR" property="regAddr"/>
+        <result column="nature" jdbcType="CHAR" property="nature"/>
+        <result column="buss_license_no" jdbcType="VARCHAR" property="bussLicenseNo"/>
+        <result column="buss_addr" jdbcType="VARCHAR" property="bussAddr"/>
+        <result column="buss_area_code" jdbcType="VARCHAR" property="bussAreaCode"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="trans_depart_approval_no" jdbcType="VARCHAR" property="transDepartApprovalNo"/>
+        <result column="trans_buss_license_no" jdbcType="VARCHAR" property="transBussLicenseNo"/>
+        <result column="trans_buss_license_valid_date" jdbcType="TIMESTAMP" property="transBussLicenseValidDate"/>
+        <result column="trans_buss_scope" jdbcType="VARCHAR" property="transBussScope"/>
+        <result column="employees_num" jdbcType="INTEGER" property="employeesNum"/>
+        <result column="driver_num" jdbcType="INTEGER" property="driverNum"/>
+        <result column="unlicensed_driver_num" jdbcType="INTEGER" property="unlicensedDriverNum"/>
+        <result column="licensed_driver_num" jdbcType="INTEGER" property="licensedDriverNum"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="type" jdbcType="CHAR" property="type"/>
+        <result column="simage" jdbcType="VARCHAR" property="simage"/>
+        <result column="bimage" jdbcType="VARCHAR" property="bimage"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime"/>
+        <result column="last_modify_user_id" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="last_modify_user_name" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="accident_of_year" jdbcType="LONGVARCHAR" property="accidentOfYear"/>
+        <result column="complaints_remark" jdbcType="LONGVARCHAR" property="complaintsRemark"/>
+        <result column="serviceTimeStart" jdbcType="VARCHAR" property="serviceTimeStart"/>
+        <result column="serviceTimeEnd" jdbcType="VARCHAR" property="serviceTimeEnd"/>
+        <result column="qrcode" jdbcType="VARCHAR" property="qrcode"/>
+        <result column="serviceWay" jdbcType="VARCHAR" property="serviceWay"/>
+        <result column="logo" jdbcType="VARCHAR" property="logo"/>
+        <result column="watermark1" jdbcType="VARCHAR" property="watermark1"/>
+        <result column="watermark2" jdbcType="VARCHAR" property="watermark2"/>
+    </resultMap>
+    <resultMap id="DeptResultMapVo" extends="DeptResultMap" type="com.huacainfo.ace.portal.vo.DepartmentVo">
+        <result column="parent_department_name" property="parentDepartmentName" jdbcType="VARCHAR"/>
+        <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertDepartmentWithDepId" parameterType="com.huacainfo.ace.portal.model.Department">
+        insert into portal.department (department_id, parent_department_id,
+        department_name, short_name, category,
+        area_code, pcode, contact_name,
+        contact_tel, contact_mobile, contact_qq,
+        contact_email, contact_fax,
+        legal_person_name,
+        legal_person_id_type, legal_person_id_no,
+        legal_person_tel,
+        legal_person_mobile, legal_person_addr, reg_date,
+        reg_capital, reg_area_code, reg_addr,
+        nature, buss_license_no,
+        buss_addr,
+        buss_area_code, fax, email,
+        trans_depart_approval_no,
+        trans_buss_license_no,
+        trans_buss_license_valid_date, trans_buss_scope,
+        employees_num, driver_num, unlicensed_driver_num,
+        licensed_driver_num,
+        status, type,
+        simage, bimage, create_user_id,
+        create_user_name,
+        create_time, last_modify_time,
+        last_modify_user_id,
+        last_modify_user_name, accident_of_year,
+        complaints_remark,latitude, longitude,serviceTimeStart,serviceTimeEnd,qrcode,serviceWay,syid,logo,watermark1,watermark2)
+        values
+        (#{departmentId,jdbcType=VARCHAR},
+        #{parentDepartmentId,jdbcType=VARCHAR},
+        #{departmentName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
+        #{category,jdbcType=CHAR},
+        #{areaCode,jdbcType=VARCHAR},
+        #{pcode,jdbcType=VARCHAR}, #{contactName,jdbcType=VARCHAR},
+        #{contactTel,jdbcType=VARCHAR}, #{contactMobile,jdbcType=VARCHAR},
+        #{contactQq,jdbcType=VARCHAR},
+        #{contactEmail,jdbcType=VARCHAR},
+        #{contactFax,jdbcType=VARCHAR}, #{legalPersonName,jdbcType=VARCHAR},
+        #{legalPersonIdType,jdbcType=VARCHAR},
+        #{legalPersonIdNo,jdbcType=VARCHAR},
+        #{legalPersonTel,jdbcType=VARCHAR},
+        #{legalPersonMobile,jdbcType=VARCHAR},
+        #{legalPersonAddr,jdbcType=VARCHAR}, #{regDate,jdbcType=TIMESTAMP},
+        #{regCapital,jdbcType=VARCHAR}, #{regAreaCode,jdbcType=VARCHAR},
+        #{regAddr,jdbcType=VARCHAR},
+        #{nature,jdbcType=CHAR},
+        #{bussLicenseNo,jdbcType=VARCHAR}, #{bussAddr,jdbcType=VARCHAR},
+        #{bussAreaCode,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR},
+        #{transDepartApprovalNo,jdbcType=VARCHAR},
+        #{transBussLicenseNo,jdbcType=VARCHAR},
+        #{transBussLicenseValidDate,jdbcType=TIMESTAMP},
+        #{transBussScope,jdbcType=VARCHAR},
+        #{employeesNum,jdbcType=INTEGER},
+        #{driverNum,jdbcType=INTEGER},
+        #{unlicensedDriverNum,jdbcType=INTEGER},
+        #{licensedDriverNum,jdbcType=INTEGER}, #{status,jdbcType=CHAR},
+        #{type,jdbcType=CHAR},
+        #{simage,jdbcType=VARCHAR},
+        #{bimage,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{lastModifyTime,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR},
+        #{accidentOfYear,jdbcType=LONGVARCHAR},
+        #{complaintsRemark,jdbcType=LONGVARCHAR}, #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL},#{serviceTimeStart,jdbcType=VARCHAR},#{serviceTimeEnd,jdbcType=VARCHAR},#{qrcode,jdbcType=VARCHAR},#{serviceWay,jdbcType=VARCHAR},#{syid,jdbcType=VARCHAR},#{logo,jdbcType=VARCHAR},#{watermark1,jdbcType=VARCHAR},#{watermark2,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="isExitUsersAccount" resultType="int">
+        select count(*)
+        from portal.users
+        where account=#{account}
+    </select>
+
+    <select id="selectDepartmentVoByPrimaryKey" resultMap="DeptResultMapVo" parameterType="java.lang.String">
+        select
+        t.department_id,        t.parent_department_id,        t.department_name,
+        t.short_name,        t.create_time,        t.create_user_id,
+        t.status,        t.category,        t.area_code,        a.fullname area_name,
+        t.pcode, t.contact_name, t.contact_tel,        t.contact_mobile, t.contact_qq, t.contact_email,
+        t.contact_fax,        t.legal_person_name, t.legal_person_id_type, t.legal_person_id_no,
+        t.legal_person_tel,        t.legal_person_mobile,        t.legal_person_addr,
+        t.reg_date,        t.reg_capital, t.reg_area_code, t.reg_addr, t.nature,
+        t.buss_license_no,        t.buss_addr, t.buss_area_code, t.fax, t.email,
+        t.trans_depart_approval_no,        t.trans_buss_license_no,
+        t.trans_buss_license_valid_date, t.trans_buss_scope,        t.employees_num,
+        t.driver_num, t.unlicensed_driver_num,        t.licensed_driver_num,
+        t.type,        t.simage, t.bimage, t.create_user_id,        t.create_user_name,
+        t.last_modify_time, t.last_modify_user_id,        t.last_modify_user_name,
+        t.latitude,        t.longitude,        t.serviceTimeStart,
+        t.serviceTimeEnd,        t.qrcode,        t.serviceWay,        t.logo,
+        t.watermark1,        t.watermark2
+
+        from portal.department t
+        left join  portal.province a on t.area_code = a.code
+        where t.department_id = #{departmentId,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insertUsers" parameterType="com.huacainfo.ace.portal.model.Users">
+        <!-- <selectKey keyProperty="ids" resultType="string" order="BEFORE">
+            select ifnull(max(user_id)+1,1) from users
+        </selectKey> -->
+        insert into portal.USERS (USER_ID, ACCOUNT, PASSWORD,
+        SEX, ID_CARD, NAME, DEPARTMENT_ID,
+        AREA_CODE, BIRTHDAY, STAUTS,
+        LAST_LOGIN_TIME, MOBILE, EMAIL,
+        SEAT, USER_LEVEL, CREATE_TIME,TELPHONE,QQ,FAX,cur_syid
+        )
+        values (#{users.userId,jdbcType=VARCHAR}, #{users.account,jdbcType=VARCHAR},
+        #{users.password,jdbcType=VARCHAR},
+        #{users.sex,jdbcType=CHAR}, #{users.idCard,jdbcType=VARCHAR}, #{users.name,jdbcType=VARCHAR},
+        #{users.departmentId,jdbcType=VARCHAR},
+        #{users.areaCode,jdbcType=CHAR}, #{users.birthday,jdbcType=TIMESTAMP},
+        #{users.stauts,jdbcType=CHAR},
+        now(), #{users.mobile,jdbcType=VARCHAR}, #{users.email,jdbcType=VARCHAR},
+        #{users.seat,jdbcType=VARCHAR},
+        #{users.userLevel,jdbcType=VARCHAR},now(),
+        #{users.telphone,jdbcType=VARCHAR},
+        #{users.qq,jdbcType=VARCHAR},
+        #{users.fax,jdbcType=VARCHAR}, #{users.curSyid,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertUsersRole">
+
+        update portal.USERS_ROLE set role_id='0' where 0=1;
+        <if test="userId!=null and userId!=''">
+            delete from portal.users_role where user_id=#{userId};
+        </if>
+        <if test='roleId!=null and userId!=null and userId!="" and roleId!=""'>
+            <foreach item="item" index="index" collection="roleId" open=""
+                     separator="" close="">
+                insert into portal.users_role
+                (user_id, role_id, create_time)
+                values
+                (#{userId,jdbcType=VARCHAR}, #{item,jdbcType=VARCHAR}, now());
+            </foreach>
+        </if>
+    </insert>
+
+    <select id="isExitUserCfg" resultType="int">
+        select count(*)
+        from
+        portal.user_cfg
+        where  userId=#{userId}
+           and cfgKey=#{cfgKey}
+    </select>
+
+    <select id="selectRoleList" resultType="java.util.Map" parameterType="java.lang.String">
+        SELECT
+        t.role_id, t.role_name, t.create_time,
+        t.create_user_id, t.remark, t.type, t.syid
+        FROM portal.role t
+        WHERE t.syid = #{activeSyId,jdbcType=VARCHAR}
+        AND t.type IN
+        <foreach collection="roleTypes" item="item" open="(" close=")" separator=",">
+            ${item}
+        </foreach>
+    </select>
+
+
+    <update id="updateUserCfgByPKey" parameterType="com.huacainfo.ace.portal.model.UserCfg">
+        update portal.user_cfg
+        set cfgValue = #{cfgValue,jdbcType=VARCHAR}
+        where userId = #{userId,jdbcType=VARCHAR}
+          and  cfgKey = #{cfgKey,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="insertUserCfg" parameterType="com.huacainfo.ace.portal.model.UserCfg">
+        insert into portal.user_cfg  (id, userId, cfgKey,  cfgValue)
+        values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+          #{cfgKey,jdbcType=VARCHAR}, #{cfgValue,jdbcType=VARCHAR}
+         )
+    </insert>
+</mapper>

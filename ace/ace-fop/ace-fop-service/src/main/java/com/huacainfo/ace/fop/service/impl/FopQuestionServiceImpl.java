@@ -1,21 +1,26 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
+import com.huacainfo.ace.fop.dao.FopQuestionDao;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
-import com.huacainfo.ace.fop.model.FopGeHelp;
+import com.huacainfo.ace.fop.model.FopQuestion;
+import com.huacainfo.ace.fop.service.FopQuestionService;
+import com.huacainfo.ace.fop.vo.FopQuestionQVo;
+import com.huacainfo.ace.fop.vo.FopQuestionVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
 import org.slf4j.Logger;
@@ -23,17 +28,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.fop.dao.FopQuestionDao;
-import com.huacainfo.ace.fop.model.FopQuestion;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.fop.service.FopQuestionService;
-import com.huacainfo.ace.fop.vo.FopQuestionVo;
-import com.huacainfo.ace.fop.vo.FopQuestionQVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("fopQuestionService")
 /**
@@ -72,7 +70,8 @@ public class FopQuestionServiceImpl implements FopQuestionService {
      * @version: 2018-05-07
      */
     @Override
-    public PageResult<FopQuestionVo> findFopQuestionList(FopQuestionQVo condition, int start, int limit, String orderBy) throws Exception {
+    public PageResult<FopQuestionVo> findFopQuestionList(FopQuestionQVo condition,
+                                                         int start, int limit, String orderBy) throws Exception {
         PageResult<FopQuestionVo> rst = new PageResult<FopQuestionVo>();
         List<FopQuestionVo> list = this.fopQuestionDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
