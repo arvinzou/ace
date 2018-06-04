@@ -575,7 +575,7 @@ i, cite, em, var, address, dfn {
         background-size:100% 100%;
         position: absolute;
         top: 100px;
-        bottom: 100px;
+        bottom: 150px;
     }
 
     .login_body .login_body_temp {
@@ -587,13 +587,13 @@ i, cite, em, var, address, dfn {
     }
 
     .login_footer{
-        height: 100px;
+        height: 150px;
         width: 100%;
         position: absolute;
         bottom: 0;
         color: #657180;
         text-align: center;
-        line-height: 100px;
+        line-height: 150px;
     }
     .login_panel{
         float: right;
