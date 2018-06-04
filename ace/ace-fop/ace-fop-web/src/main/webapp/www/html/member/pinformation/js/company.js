@@ -195,7 +195,8 @@ app.controller(ngControllerName,function($scope){
                 "accTaxAmount":accTaxAmount,
                 "yearTaxAmount":yearTaxAmount,
                 "latitude": latitude,
-                "longitude": longitude
+                "longitude": longitude,
+                "realName": realName
             },
             "legalPerson":{
                 "identityCard":identityCard,
