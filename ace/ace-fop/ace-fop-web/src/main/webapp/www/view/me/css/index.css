@@ -126,6 +126,7 @@ body {
 
 .badding_opt {
 	width: 2.5rem;
+	height: 0.8rem;
 	line-height: 0.8rem;
 	text-align: center;
 	margin: auto;
@@ -142,6 +143,7 @@ body {
 	outline: none;
 }
 .corpName{
+	width: 100%;
 	margin: auto;
 	text-align: center;
 	color: #fff;

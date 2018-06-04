@@ -45,5 +45,7 @@ public interface UserinfoDao {
 
     int updateReg(Userinfo record);
 
+    int updateUnbind(@Param("unionid") String unionid);
+
 
 }

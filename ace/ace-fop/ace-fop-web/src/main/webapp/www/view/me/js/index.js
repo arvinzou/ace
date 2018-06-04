@@ -19,7 +19,6 @@ function userinfo(){
 				$(".corpName").text(result.userProp.corpName);
 	    		$(".badding").attr("hidden",true);
 	    		$(".cancle").attr("hidden",false);
-				
 				//$(".badding").attr("hidden",false);
 	    		//$(".cancle").attr("hidden",true);	
 	    	}
@@ -30,10 +29,9 @@ function userinfo(){
  * 取消绑定
  */
 function cancelBand(){
-
-	$.post( server+"/woc/www/api/unbindMobile",{},function(ret){
+	$.post( portalPath+"/www/oauth2/unbind.do",{},function(ret){
 	    console.log(ret);
-	    alert(ret.info);
+	    alert(ret.errorMessage);
 	    if(ret.status == '0'){
 	    	$(".badding").attr("hidden",false);
 	    	$(".cancle").attr("hidden",true);

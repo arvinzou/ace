@@ -74,7 +74,7 @@
                 <iframe src="${pageContext.request.contextPath}/www/page/\${item.tplId}/index.jsp?pageId=\${item.id}" class="list_frame" scrolling="no" onload="sort_overflow_hidden(this)"></iframe>
             </div>
             <div class="list_menu">
-                <a href="../pageEdit/index.jsp?tplId=\${item.tplId}&pageId=\${item.id}&id=4504"><img src="${pageContext.request.contextPath}/www/img/BaiduShurufa_2016-9-14_1-55-40.png"  data-toggle="tooltip" data-placement="top" title="编辑"></a>
+                <a href="../pageEdit/\${item.tplId}/index.jsp?tplId=\${item.tplId}&pageId=\${item.id}&id=4504"><img src="${pageContext.request.contextPath}/www/img/BaiduShurufa_2016-9-14_1-55-40.png"  data-toggle="tooltip" data-placement="top" title="编辑"></a>
                 <span></span>
                 <img  class="btn-url" src="${pageContext.request.contextPath}/www/img/BaiduShurufa_2016-9-14_1-55-53.png" data-toggle="tooltip" data-placement="top" title="复制链接" data-clipboard-text="${cfg.fastdfs_server}portal/www/page/\${item.tplId}/index.jsp?pageId=\${item.id}">
                 <span></span>
