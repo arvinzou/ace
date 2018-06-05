@@ -412,16 +412,23 @@
              $(".form-subtitle").html("密码登录");
         }
     }
- /*var obj = new WxLogin({
-     self_redirect:true,
-     id:"login_container",
-     appid: "",
-     scope: "",
-     redirect_uri: "",
-      state: "",
-     style: "",
-     href: ""
- });*/
+    function guid() {
+        function S4() {
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        }
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+    }
+    var obj = new WxLogin({
+        self_redirect:false,
+        id:"J_Static2Quick_box",
+        appid: "wx8571545c5cc9d78c",
+        scope: "snsapi_login",
+        redirect_uri: encodeURI('http://zx.huacainfo.com/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
+        state: "huacai",
+        style: "",
+        href: ""
+    });
+
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
