@@ -57,9 +57,9 @@ app.controller(ngControllerName,function($scope) {
                 async: false,
                 data: {name: regist_name, phoneNumber: regist_num, isCompany: flag},
                 success: function (result) {
-                    if (result.status == 0 && result.errorMessage == '') {
+                    if (result.status == 0) {
                        console.log(result);
-                        layer.alert("注册成功,5秒后将跳转登录页面！", {
+                        layer.alert("注册成功," + t + "秒后将跳转登录页面！", {
                             icon: 1,
                             skin: 'myskin'
                         });

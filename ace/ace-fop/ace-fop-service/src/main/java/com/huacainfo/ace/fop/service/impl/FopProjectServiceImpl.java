@@ -172,10 +172,12 @@ public class FopProjectServiceImpl implements FopProjectService {
             o.setRelationId(fa.getId());
             o.setRelationType(FopConstant.ASSOCIATION);
         } else {
+            if ("3" == fc.getCompanyType()) {
+                return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
+            }
             o.setRelationId(fc.getId());
             o.setRelationType(FopConstant.COMPANY);
         }
-
         o.setReleaseDate(DateUtil.getNowDate());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
