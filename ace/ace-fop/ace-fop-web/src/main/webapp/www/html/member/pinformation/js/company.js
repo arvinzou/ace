@@ -28,6 +28,7 @@ app.controller(ngControllerName,function($scope){
         startView: 2,
         minView: 2
     });
+
     $("#dzz_establishDate").datetimepicker({
         format: "yyyy-mm-dd",
         language: 'zh-CN',
