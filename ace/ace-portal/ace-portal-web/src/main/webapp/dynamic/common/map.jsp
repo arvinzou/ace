@@ -101,7 +101,7 @@ pageEncoding="utf-8"%>
 
 .poi {
     width: 570px;
-    height: 41;
+    height: 41px;
     padding-top: 12px;
     float: left;
     position: relative;

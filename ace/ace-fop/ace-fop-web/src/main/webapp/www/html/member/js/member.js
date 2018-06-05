@@ -127,3 +127,13 @@ function setIframeHeight(iframe) {
         }
     }
 };
+
+$(function () {
+    $('.member_menu_ul').on('click', 'li', actionClick);
+})
+
+function actionClick() {
+    console.log(11111111111111111);
+    $(this).siblings().removeClass("hover_li");
+    $(this).addClass("hover_li");
+}

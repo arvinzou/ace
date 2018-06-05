@@ -8,6 +8,7 @@ var coverImg = null;
 var coverImg_edit = null;
 
 var app =angular.module(ngAppName, []);
+
 app.controller(ngControllerName,function($scope){
 
     $.ajax({
