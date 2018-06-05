@@ -11,6 +11,17 @@ app.controller(ngControllerName,function($scope){
         textarea: $('#editor_release')
 
     });
+
+    $("#city").click(function (e) {
+        SelCity(this, e);
+    });
+    $("#city_edit").click(function (e) {
+        SelCity(this, e);
+    });
+    $("s").click(function (e) {
+        SelCity(document.getElementById("city"), e);
+    });
+
     $.ajax({
         url: "/fop/www/findProjectList",
         type:"post",
@@ -157,13 +168,13 @@ app.controller(ngControllerName,function($scope){
                 id: id,
                 projectName: $scope.infoData.projectName,
                 coopType: $scope.infoData.coopType,
-                areaCode: $scope.infoData.areaCode,
+                areaCode: areaCode,
                 projectType: $scope.infoData.projectType,
                 coopDesc: content,
             },
             success:function(result){
                 if(result.status == 0) {
-                    $scope.search(status);
+                    $scope.search();
                     console.log(result);
                     if (!$scope.$$phase) {
                         $scope.$apply();
@@ -225,7 +236,7 @@ app.controller(ngControllerName,function($scope){
     $scope.release = function(){
         var title = $("input[name='projectName']").val();
         var cooType = $("#cooType option:checked").val();
-        var area = $("input[name='area']").val();
+        var area = areaCode;
         var projectType = $("input[name='projectType']").val();
         var content = $("textarea[name='pcontent']").val();
         if(title == '' || title == undefined){
