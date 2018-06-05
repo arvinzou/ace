@@ -5,10 +5,10 @@ var currentPage = 1;
 var status = null;
 var imgHost = "http://zx.huacainfo.com/";
 var coverImg = null;
+var coverImg_edit = null;
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
-
     $.ajax({
         url: "/fop/www/findInformationServiceListDo",
         type:"post",
@@ -45,14 +45,16 @@ app.controller(ngControllerName,function($scope){
             }else {
                 layer.alert(result.errorMessage, {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    offset:'400px'
                 });
             }
         },
         error:function(){
             layer.alert("系统服务内部异常！", {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                offset:'400px'
             });
         }
     });
@@ -68,7 +70,8 @@ app.controller(ngControllerName,function($scope){
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    offset:'400px'
                 });
             }
         });
@@ -83,7 +86,8 @@ app.controller(ngControllerName,function($scope){
         }else {
             layer.alert(result.errorMessage, {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                offset:'400px'
             });
         }
     }
@@ -125,14 +129,16 @@ app.controller(ngControllerName,function($scope){
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        offset:'400px'
                     });
                 }
             },
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    offset:'400px'
                 });
             }
         });
@@ -143,32 +149,42 @@ app.controller(ngControllerName,function($scope){
         $scope.infoData = info;
     }
     $scope.update = function(id){
+        var fileUrl = null;
+        if(coverImg_edit != null){
+            fileUrl = coverImg_edit;
+        }else{
+            fileUrl = $scope.infoData.fileUrl;
+        }
         $.ajax({
             url: "/fop/www/updateInformationServiceDo",
             type:"post",
             async:false,
-            data:{modules: "2", id: id, title: $scope.infoData.title, content: $scope.infoData.content},
+            data:{modules: "2", id: id, title: $scope.infoData.title, content: $scope.infoData.content, fileUrl: fileUrl},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
+                    $scope.search();
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
                     layer.alert("编辑成功！", {
                         icon: 1,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        offset:'400px'
                     });
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        offset:'400px'
                     });
                 }
             },
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    offset:'400px'
                 });
             }
         });
@@ -185,7 +201,8 @@ app.controller(ngControllerName,function($scope){
                     console.log(result);
                     layer.alert("删除成功！", {
                         icon: 1,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        offset:'400px'
                     });
                     $scope.items.splice(index,1);
                     if (!$scope.$$phase) {
@@ -195,23 +212,25 @@ app.controller(ngControllerName,function($scope){
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        offset:'400px'
                     });
                 }
             },
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    offset:'400px'
                 });
             }
         });
     }
 
-    $scope.init_release = function(){
+    $scope.init_release = function(id){
         var uploader = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
-            browse_button: 'upbtn',
+            browse_button: id,
             url: '/portal/files/uploadFile.do',
             file_data_name: 'file',
             multi_selection: false,
@@ -230,7 +249,7 @@ app.controller(ngControllerName,function($scope){
             },
             init: {
                 FileFiltered: function (up, files) {
-                    showUploadText();
+                    showUploadText('.viewPicture2 img', '.uploadText2');
                     up.start();
                     return false;
                 },
@@ -240,8 +259,47 @@ app.controller(ngControllerName,function($scope){
                 },
                 FileUploaded: function (uploader, file, responseObject) {
                     var rst = JSON.parse(responseObject.response);
-                    viewCover(rst.value[0]);
+                    viewCover(rst.value[0], '.pictureContainer2','.viewPicture2 img','.uploadText2');
                     coverImg = rst.value[0];
+                }
+            }
+        });
+        uploader.init();
+    }
+    $scope.init_update = function(id){
+        var uploader = new plupload.Uploader({
+            runtimes: 'html5,flash,silverlight,html4',
+            browse_button: id,
+            url: '/portal/files/uploadFile.do',
+            file_data_name: 'file',
+            multi_selection: false,
+            resize: {
+                width: 1024,
+                height: 1024,
+                crop: true,
+                quality: 60,
+                preserve_headers: false
+            },
+            filters: {
+                max_file_size: '2048mb',
+                mime_types: [
+                    {title: "Image files", extensions: "jpg,gif,png"}
+                ]
+            },
+            init: {
+                FileFiltered: function (up, files) {
+                    showUploadText('.viewPicture1 img','.uploadText1');
+                    up.start();
+                    return false;
+                },
+                UploadProgress: function(e, t) {
+                    var r = t.percent;
+                    $(".uploadPloadprogress").html("开始上传（" + r + "%）")
+                },
+                FileUploaded: function (uploader, file, responseObject) {
+                    var rst = JSON.parse(responseObject.response);
+                    viewCover(rst.value[0], '.pictureContainer1','.viewPicture1 img', '.uploadText1');
+                    coverImg_edit = rst.value[0];
                 }
             }
         });
@@ -253,21 +311,24 @@ app.controller(ngControllerName,function($scope){
         if(title == '' || title == undefined){
             layer.alert("标题不能为空！", {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                offset:'400px'
             });
             return;
         }
         if(coverImg == null || coverImg == undefined){
             layer.alert("产品封面不能为空！", {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                offset:'400px'
             });
             return;
         }
         if(content == '' || content == undefined){
             layer.alert("产品具体内容不能为空！", {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                offset:'400px'
             });
             return;
         }
@@ -282,7 +343,8 @@ app.controller(ngControllerName,function($scope){
                     $scope.search();
                     layer.alert("发布成功！", {
                         icon: 1,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        offset:'400px'
                     });
 
                     if (!$scope.$$phase) {
@@ -292,34 +354,37 @@ app.controller(ngControllerName,function($scope){
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        offset:'400px'
                     });
                 }
             },
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    offset:'400px'
                 });
             }
         });
     }
 });
 /*图片上传成功后*/
-function viewCover(img) {
-    $('.pictureContainer').data('imgSrc',img);
+function viewCover(img, clazz, imgClazz, textClazz) {
+    $(clazz).data('imgSrc',img);
     var imagePath=imgHost+img;
-    showUploadImg(imagePath);
+    showUploadImg(imagePath, imgClazz, textClazz);
 }
 
 /*显示上传文字*/
-function showUploadText() {
-    $('.viewPicture img').prop('src','');
-    $('.uploadText').show();
+function showUploadText(imgClazz, textClazz) {
+    $(imgClazz).prop('src','');
+    $(textClazz).show();
 }
 
 /*显示上传图片*/
-function showUploadImg(imgpath) {
-    $('.viewPicture img').prop('src',imgpath);
-    $('.uploadText').hide();
+function showUploadImg(imgpath, imgClazz, textClazz) {
+    $(imgClazz).removeClass('hidder').addClass('displayer');
+    $(imgClazz).prop('src',imgpath);
+    $(textClazz).hide();
 }

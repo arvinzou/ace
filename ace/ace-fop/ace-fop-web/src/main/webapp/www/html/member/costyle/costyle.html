@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>会员中心-法律帮助</title>
     <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/comon0.css"/>
     <link rel="stylesheet" type="text/css" href="../css/childlist.css"/>
     <SCRIPT language=JavaScript src="../../../js/jquery-3.2.1.min.js"></SCRIPT>
     <script type="text/javascript" src="../../../js/bootstrap.min.js"></script>
@@ -47,7 +48,7 @@
                         <td>&nbsp;</td>
                         <td width="15%">
                             <button id="update" data-toggle="modal" data-target="#myModal"
-                                    ng-click="update_click($index);">编辑
+                                    ng-click="update_click($index);init_update();">编辑
                             </button>
                             <button id="delete" ng-click="delete($index);">删除</button>
                         </td>
@@ -88,12 +89,12 @@
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入产品标题 '"/>
                 </div>
                 <div><label>封面</label><br>
-                    <div class="pictureContainer">
-                        <div class="viewPicture">
+                    <div class="pictureContainer1" id="upbtn_update">
+                        <div class="viewPicture1">
                             <img src="http://zx.huacainfo.com/{{infoData.fileUrl}}"
                                  style="width: 100%;height: 100%;object-fit: cover;">
                         </div>
-                        <div class="uploadText" style="display: none;">
+                        <div class="uploadText1" style="display: none;">
                             <img src="../../../images/icons/upload_img_2.png" style="width: 100px;height: auto;"/>
                             <p class="uploadPloadprogress">点击上传封面</p>
                         </div>
@@ -133,11 +134,11 @@
                                onblur="this.placeholder='请输入标题 '"/>
                     </div>
                     <div><label>封面</label><br>
-                        <div class="pictureContainer" id="upbtn">
-                            <div class="viewPicture">
-                                <img src="" style="width: 100%;height: 100%;object-fit: cover;">
+                        <div class="pictureContainer2" id="upbtn">
+                            <div class="viewPicture2">
+                                <img class="hidder" src="" style="width: 100%;height: 100%;object-fit: cover;">
                             </div>
-                            <div class="uploadText">
+                            <div class="uploadText2">
                                 <img ng-src="../../../images/icons/upload_img_2.png" style="width: 100px;height: auto;"/>
                                 <p class="uploadPloadprogress">点击上传封面</p>
                             </div>

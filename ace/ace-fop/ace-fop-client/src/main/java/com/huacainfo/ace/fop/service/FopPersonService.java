@@ -83,6 +83,6 @@ public interface FopPersonService {
     public abstract MessageResponse deleteFopPersonByFopPersonId(String id, UserProp userProp) throws Exception;
 
 
-    ResultResponse insertPerson(FopCompanyVo o, UserProp userProp);
+    ResultResponse insertPerson(FopCompanyVo o, UserProp userProp) throws Exception;
 
 }

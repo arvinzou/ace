@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.ValidateUtils;
 import com.huacainfo.ace.fop.dao.FopPersonDao;
 import com.huacainfo.ace.fop.model.FopPerson;
 import com.huacainfo.ace.fop.service.FopPersonService;
@@ -91,6 +92,10 @@ public class FopPersonServiceImpl implements FopPersonService {
         if (CommonUtils.isBlank(o.getLastModifyDate())) {
             return new MessageResponse(1, "最后更新时间不能为空");
         }
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
+        }
         int temp = this.fopPersonDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "个人档案重复");
@@ -132,6 +137,10 @@ public class FopPersonServiceImpl implements FopPersonService {
         }
         if (CommonUtils.isBlank(o.getIdentityCard())) {
             return new MessageResponse(1, "身份证号码不能为空！");
+        }
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
         }
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -179,9 +188,9 @@ public class FopPersonServiceImpl implements FopPersonService {
     }
 
     @Override
-    public ResultResponse insertPerson(FopCompanyVo companyVo, UserProp userProp) {
+    public ResultResponse insertPerson(FopCompanyVo companyVo, UserProp userProp) throws Exception {
         FopPerson person = new FopPerson();
-        person.setRealName(companyVo.getRealName());
+        person.setRealName(companyVo.getFullName());
         person.setMobileNumer(companyVo.getLpMobile());
         person.setSex(companyVo.getLpSex());
         person.setBirthDate(companyVo.getLpBirthDt());
@@ -194,7 +203,10 @@ public class FopPersonServiceImpl implements FopPersonService {
         person.setDeptPost(companyVo.getLpDeptPost());
         person.setIdentityCard(companyVo.getLpIdentityCard());
         person.setSocietyPost(companyVo.getLpSocietyPost());
-
+        MessageResponse mm = validate(person);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return new ResultResponse(ResultCode.FAIL, mm.getErrorMessage());
+        }
         int temp = this.fopPersonDao.isExit(person);
         if (temp > 0) {
             return new ResultResponse(ResultCode.FAIL, "个人档案重复");
@@ -209,4 +221,25 @@ public class FopPersonServiceImpl implements FopPersonService {
                 person.getId(), userProp);
         return new ResultResponse(ResultCode.SUCCESS, "添加个人档案完成", person);
     }
+
+    private MessageResponse validate(FopPerson o) throws Exception {
+        if (!CommonUtils.isBlank(o.getRealName())) {
+            if (!ValidateUtils.Chinese(o.getRealName())) {
+                return new MessageResponse(ResultCode.FAIL, "姓名格式不对，必须中文");
+            }
+        }
+
+        if (!CommonUtils.isBlank(o.getIdentityCard())) {
+            if (!ValidateUtils.IDcard(String.valueOf(o.getIdentityCard()))) {
+                return new MessageResponse(ResultCode.FAIL, "身份证号码格式不正确");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getMobileNumer())) {
+            if (!ValidateUtils.Mobile(String.valueOf(o.getMobileNumer()))) {
+                return new MessageResponse(ResultCode.FAIL, "手机号码格式不正确");
+            }
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "数据格式正确");
+    }
+
 }
