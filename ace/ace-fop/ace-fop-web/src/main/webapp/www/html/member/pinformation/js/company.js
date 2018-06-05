@@ -176,6 +176,7 @@ app.controller(ngControllerName,function($scope){
         var yearTaxAmount = $("input[name='yearTaxAmount']").val();
         var identityCard = $("input[name='identityCard']").val();
 
+        if(fullName)
         var json = {
             "basicInfo":{
                 "id":companyId,
