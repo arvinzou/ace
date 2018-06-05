@@ -94,14 +94,16 @@ app.controller(ngControllerName,function($scope){
             }else {
                 layer.alert(result.errorMessage, {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    offset:'400px'
                 });
             }
         },
         error:function(){
             layer.alert("系统服务内部异常！", {
                 icon: 5,
-                skin: 'myskin'
+                skin: 'myskin',
+                offset:'400px'
             });
         }
     });
@@ -268,7 +270,8 @@ app.controller(ngControllerName,function($scope){
                     console.log(result);
                     layer.alert(result.info, {
                         icon: 1,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        offset:'400px'
                     });
                     if (!$scope.$$phase) {
                         $scope.$apply();
@@ -276,14 +279,16 @@ app.controller(ngControllerName,function($scope){
                 }else {
                     layer.alert(result.detail, {
                         icon: 5,
-                        skin: 'myskin'
+                        skin: 'myskin',
+                        offset:'400px'
                     });
                 }
             },
             error:function(){
                 layer.alert("系统服务内部异常！", {
                     icon: 5,
-                    skin: 'myskin'
+                    skin: 'myskin',
+                    offset:'400px'
                 });
             }
         });
