@@ -223,6 +223,9 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
             o.setRequestId(fa.getId());
             o.setRequestType(FopConstant.ASSOCIATION);
         } else {
+            if ("3" == fc.getCompanyType()) {
+                return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
+            }
             o.setRequestId(fc.getId());
             o.setRequestType(FopConstant.COMPANY);
         }
