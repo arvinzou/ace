@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.ValidateUtils;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopAssMemberDao;
@@ -97,11 +98,15 @@ public class FopAssociationServiceImpl implements FopAssociationService {
             return new MessageResponse(1, "协会号码不能为空！");
         }
 
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
+        }
+
         int temp = this.fopAssociationDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "协会名称/办公号码重复！");
         }
-
         //初始化系统用户
         ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getPhoneNumber(),
                 "市工商联 -- 团体注册", userProp);
@@ -169,6 +174,10 @@ public class FopAssociationServiceImpl implements FopAssociationService {
             return new MessageResponse(1, "协会全称不能为空！");
         }
 
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
+        }
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -244,6 +253,10 @@ public class FopAssociationServiceImpl implements FopAssociationService {
             return new MessageResponse(1, "协会号码不能为空！");
         }
 
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
+        }
         int temp = this.fopAssociationDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "协会名称/办公号码重复！");
@@ -306,5 +319,25 @@ public class FopAssociationServiceImpl implements FopAssociationService {
             return new ResultResponse(ResultCode.FAIL, "fop团体不存在");
         }
         return new ResultResponse(ResultCode.SUCCESS, "id获取", fa.getId());
+    }
+
+
+    private MessageResponse validate(FopAssociation o) throws Exception {
+        if (!CommonUtils.isBlank(o.getPhoneNumber())) {
+            if (!ValidateUtils.Mobile(String.valueOf(o.getPhoneNumber()))) {
+                return new MessageResponse(ResultCode.FAIL, "办公号码格式不正确");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getDirectorNum())) {
+            if (!ValidateUtils.Number(String.valueOf(o.getDirectorNum()))) {
+                return new MessageResponse(ResultCode.FAIL, "理事数量格式不正确，为数字");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getViceNum())) {
+            if (!ValidateUtils.Number(String.valueOf(o.getViceNum()))) {
+                return new MessageResponse(ResultCode.FAIL, "副会长数量格式不正确，为数字");
+            }
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "数据格式正确");
     }
 }
