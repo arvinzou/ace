@@ -51,6 +51,16 @@ app.controller(ngControllerName,function($scope){
 
     });
 
+    $("#city").click(function (e) {
+        SelCity(this, e);
+    });
+    $("#city_modal").click(function (e) {
+        SelmCity(this, e);
+    });
+    $("s").click(function (e) {
+        SelCity(document.getElementById("city"), e);
+    });
+
     $('#coperationType').comboboxfilter({
         url: '',
         scope: 'FilterQuery1',
@@ -181,7 +191,6 @@ app.controller(ngControllerName,function($scope){
             var flag = true;
             var projectName = $("input[name='projectName']").val();
             var cooType = $("#cooType option:checked").val();
-            var area = $("input[name ='area']").val();
             var projectType = $("input[name='projectType']").val();
             var content = $("textarea[name='content']").val();
             if(projectName == '' || projectName == undefined){
@@ -200,7 +209,7 @@ app.controller(ngControllerName,function($scope){
                 });
                 return;
             }
-            if(area == '' || area == undefined){
+            if(areaCode_modal == '' || areaCode_modal == null){
                 flag = false;
                 layer.alert("所属区域不能为空！", {
                     icon: 5,
@@ -213,7 +222,7 @@ app.controller(ngControllerName,function($scope){
                     url: "/fop/www/insertProject",
                     type:"post",
                     async:false,
-                    data:{projectName:projectName, coopType: cooType, areaCode: area, projectType: projectType, coopDesc:content},
+                    data:{projectName:projectName, coopType: cooType, areaCode: areaCode_modal, projectType: projectType, coopDesc:content},
                     success:function(result){
                         if(result.status == 0) {
                             $scope.searchByParam();
@@ -244,7 +253,7 @@ app.controller(ngControllerName,function($scope){
      */
     $scope.searchByParam = function(){
         var key_word = $("#financeTitle").val();
-
+        console.log("areaCode",areaCode);
         $.ajax({
             url: "/fop/www/findProjectList",
             type: "post",
