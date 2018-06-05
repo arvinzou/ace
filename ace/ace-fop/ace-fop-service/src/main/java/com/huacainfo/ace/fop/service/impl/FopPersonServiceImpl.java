@@ -190,7 +190,7 @@ public class FopPersonServiceImpl implements FopPersonService {
     @Override
     public ResultResponse insertPerson(FopCompanyVo companyVo, UserProp userProp) throws Exception {
         FopPerson person = new FopPerson();
-        person.setRealName(companyVo.getRealName());
+        person.setRealName(companyVo.getFullName());
         person.setMobileNumer(companyVo.getLpMobile());
         person.setSex(companyVo.getLpSex());
         person.setBirthDate(companyVo.getLpBirthDt());
