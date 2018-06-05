@@ -133,7 +133,6 @@ $(function () {
 })
 
 function actionClick() {
-    console.log(11111111111111111);
     $(this).siblings().removeClass("hover_li");
     $(this).addClass("hover_li");
 }
