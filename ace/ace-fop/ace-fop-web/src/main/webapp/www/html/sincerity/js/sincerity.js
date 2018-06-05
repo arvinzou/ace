@@ -93,7 +93,7 @@ app.controller(ngControllerName,function($scope){
         if(category == '0'){
             category = '1';
         }
-        if(category == '1'){
+        else if(category == '1'){
             category = '2';
         }
         $.ajax({
