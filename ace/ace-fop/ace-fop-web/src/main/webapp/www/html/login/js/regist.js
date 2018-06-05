@@ -59,7 +59,7 @@ app.controller(ngControllerName,function($scope) {
                 success: function (result) {
                     if (result.status == 0) {
                        console.log(result);
-                        layer.alert("注册成功," + t + "秒后将跳转登录页面！", {
+                        layer.alert("注册成功,"+t+"秒后将跳转登录页面！", {
                             icon: 1,
                             skin: 'myskin'
                         });
