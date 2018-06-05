@@ -4,6 +4,10 @@ var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
+    var iframe = $("#iframe");
+    if (iframe.readyState == "complete"){
+        setIframeHeight(iframe);
+    }
 
     /**
      * 查询统计信息
@@ -114,3 +118,12 @@ app.filter('formatDate', function() { //可以注入依赖
         return text.substring(0,10);
     }
 });
+
+function setIframeHeight(iframe) {
+    if(iframe) {
+        var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+        if(iframeWin.document.body) {
+            iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+        }
+    }
+};
