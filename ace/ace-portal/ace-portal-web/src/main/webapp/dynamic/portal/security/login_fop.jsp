@@ -117,7 +117,7 @@
                             <span class="form-subtitle">密码登录.</span>
                         </div>
                         <div id="J_Static2Quick_box" style="display:none;width:100%;text-align:center">
-                            <img src="http://www.xmypage.com/images/erweima.png" class="qrcode"/>
+                            <img src="image/weixin.png" class="qrcode"/>
 
                         </div>
                         <div id="J_Quick2Static_box" style="display:block">
@@ -262,6 +262,7 @@
         type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"
         type="text/javascript"></script>
+
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js"
@@ -605,7 +606,8 @@ i, cite, em, var, address, dfn {
     .login_panel{
         float: right;
         width: 350px;
-        height: 400px;
+        min-height: 400px;
+        max-height: 600px;
         background-color: #fff;
     }
     .login_form{
