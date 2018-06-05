@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.ValidateUtils;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
@@ -148,6 +149,10 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(o.getYearYield())) {
             return new MessageResponse(1, "预期年收益不能为空！");
         }
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
+        }
         int temp = this.fopFinanceProjectDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "流程记录名称重复！");
@@ -199,6 +204,10 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (CommonUtils.isBlank(o.getYearYield())) {
             return new MessageResponse(1, "预期年收益不能为空！");
         }
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
+        }
         int temp = this.fopFinanceProjectDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "流程记录名称重复！");
@@ -246,6 +255,11 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         }
         if (CommonUtils.isBlank(o.getYearYield())) {
             return new MessageResponse(1, "预期年收益不能为空！");
+        }
+
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
         }
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -338,5 +352,20 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         }
 
         return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+    }
+
+
+    private MessageResponse validate(FopFinanceProject o) throws Exception {
+        if (!CommonUtils.isBlank(o.getFinanceAmount())) {
+            if (!ValidateUtils.Two_point(String.valueOf(o.getFinanceAmount()))) {
+                return new MessageResponse(ResultCode.FAIL, "融资金额(万元) 精确到小数点后两位");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getYearYield())) {
+            if (!ValidateUtils.Two_point(String.valueOf(o.getFinanceAmount()))) {
+                return new MessageResponse(ResultCode.FAIL, "预期年收益(%) 精确到小数点后两位");
+            }
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "数据格式正确");
     }
 }

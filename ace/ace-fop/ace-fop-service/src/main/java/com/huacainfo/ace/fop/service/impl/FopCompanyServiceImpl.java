@@ -12,6 +12,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.ValidateUtils;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
@@ -158,6 +159,11 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         int temp = this.fopCompanyDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(ResultCode.FAIL, "企业名称重复！");
+        }
+
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
         }
         //初始化系统用户
         ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getLpMobile(),
@@ -307,6 +313,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new MessageResponse(ResultCode.FAIL, "企业/机构法人联系方式不能为空!");
         }
 
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
+        }
         int temp = this.fopCompanyDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(ResultCode.FAIL, "企业/机构名称重复！");
@@ -343,6 +353,12 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (CommonUtils.isBlank(o.getPersonId())) {
             return new MessageResponse(1, "企业法人id不能为空！");
         }
+
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
+        }
+
         int temp = this.fopCompanyDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(ResultCode.FAIL, "企业/机构名称重复！");
@@ -456,6 +472,66 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new ResultResponse(ResultCode.FAIL, "fop团体不存在");
         }
         return new ResultResponse(ResultCode.SUCCESS, "id获取", fc.getId());
+    }
+
+    private MessageResponse validate(FopCompanyVo o) throws Exception {
+        if (!CommonUtils.isBlank(o.getFullName())) {
+            if (!ValidateUtils.Chinese(o.getFullName())) {
+                return new MessageResponse(ResultCode.FAIL, "企业名称有非中文字符");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getRegisteredCapital())) {
+            if (!ValidateUtils.Two_point(String.valueOf(o.getRegisteredCapital()))) {
+                return new MessageResponse(ResultCode.FAIL, "注册资金（万元）精确到小数点后两位");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getFixedAssets())) {
+            if (!ValidateUtils.Two_point(String.valueOf(o.getFixedAssets()))) {
+                return new MessageResponse(ResultCode.FAIL, "固有资产（万元）精确到小数点后两位");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getWorkingCapital())) {
+            if (!ValidateUtils.Two_point(String.valueOf(o.getWorkingCapital()))) {
+                return new MessageResponse(ResultCode.FAIL, "自有流动资金（万元）精确到小数点后两位");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getOwnSpace())) {
+            if (!ValidateUtils.Two_point(String.valueOf(o.getOwnSpace()))) {
+                return new MessageResponse(ResultCode.FAIL, "自有生产（经营）场地（㎡ ）精确到小数点后两位");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getTenancySpace())) {
+            if (!ValidateUtils.Two_point(String.valueOf(o.getTenancySpace()))) {
+                return new MessageResponse(ResultCode.FAIL, "租赁生产（经营）场地（㎡ ）精确到小数点后两位");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getPostcode())) {
+            if (!ValidateUtils.Zipcode(String.valueOf(o.getPostcode()))) {
+                return new MessageResponse(ResultCode.FAIL, "邮政编码数据格式不对");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getEmail())) {
+            if (!ValidateUtils.Email(String.valueOf(o.getEmail()))) {
+                return new MessageResponse(ResultCode.FAIL, "电子邮箱的格式不对");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getLaborContractNum())) {
+            if (!ValidateUtils.Number(String.valueOf(o.getLaborContractNum()))) {
+                return new MessageResponse(ResultCode.FAIL, "劳动合同签订人数为数字");
+            }
+        }
+
+        if (!CommonUtils.isBlank(o.getAccTaxAmount())) {
+            if (!ValidateUtils.Two_point(String.valueOf(o.getAccTaxAmount()))) {
+                return new MessageResponse(ResultCode.FAIL, "累计纳税(万元) 精确到小数点后两位");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getYearTaxAmount())) {
+            if (!ValidateUtils.Two_point(String.valueOf(o.getYearTaxAmount()))) {
+                return new MessageResponse(ResultCode.FAIL, "当年纳税(万元) 精确到小数点后两位");
+            }
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "数据格式正确");
     }
 
 }
