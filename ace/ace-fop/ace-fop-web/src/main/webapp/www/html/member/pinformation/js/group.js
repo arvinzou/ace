@@ -111,7 +111,10 @@ function addr(addr) {
 
 app.filter('formatDate', function() { //可以注入依赖
     return function(text) {
-        return text.substring(0,10);
+        if(text.length > 10){
+            return text.substring(0,10);
+        }
+        return text;
     }
 });
 
