@@ -6,6 +6,10 @@
 body{
     background-color: #FFFFFF;
 }
+a:link{text-decoration:none; }
+a:visited{text-decoration:none; }
+a:hover{text-decoration:none;}
+a:active{text-decoration:none;}
 .box{
     width: 90%;
     margin: auto;
@@ -61,7 +65,7 @@ body{
     display: inline-block;
 }
 
-.menu-nav ul .checked {
+.menu-nav ul .checked{
     border-bottom: 2px #FF9F00 solid;
     color: #31364B;
 }

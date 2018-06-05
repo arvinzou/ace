@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/childlist.css"/>
     <SCRIPT language=JavaScript src="../../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../js/childlist.js"></script>
     <script type="text/javascript" src="../../../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../js/angular/angular.min.js"></script>
     <script type="text/javascript" src="../../../js/laypage-v1.3/laypage/laypage.js"></script>
@@ -27,10 +28,10 @@
         <div style="clear: both;"></div>
         <div class="menu-nav">
             <ul>
-                <li><a class="checked" href="#" ng-click="search();">全部</a></li>
-                <li><a href="#" ng-click="search('1');">审核中</a> </li>
-                <li><a href="#" ng-click="search('2');">审核通过</a> </li>
-                <li><a href="#" ng-click="search('3');">审核未通过</a> </li>
+                <li><a  href="#" ng-click="search();">全部</a></li>
+                <li><a  href="#" ng-click="search('1');">审核中</a> </li>
+                <li><a  href="#" ng-click="search('2');">审核通过</a> </li>
+                <li><a  href="#" ng-click="search('3');">审核未通过</a> </li>
             </ul>
             <div id="nav-content">
                 <div class="table-div" ng-repeat="item in items">
