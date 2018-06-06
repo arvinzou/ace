@@ -4,17 +4,17 @@ html.push("<div class=\"login_box\">");
 html.push("<div class=\"login\">");
 try{
     if(userProp){
-        html.push("<span ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" target=\"_blank\">"+userProp.name+"</a></span>");
-        html.push("<span ng-if=\"userProp\"><a href=\"/portal/dynamic/portal/security/loginOut_fop.jsp\">退出</a></span>");
+        html.push("<span class=\"companyName\" title='"+userProp.name+"' ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" target=\"_blank\">"+userProp.name+"</a></span>");
+        html.push("<span class=\"userNav\" ng-if=\"userProp\"><a href=\"/portal/dynamic/portal/security/loginOut_fop.jsp\">退出</a></span>");
     }else{
-        html.push("<span ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
+        html.push("<span class=\"userNav\" ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
     }
 }catch(e){
-    html.push("<span ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
+    html.push("<span class=\"userNav\" ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
 }
 
 html.push("<span>|</span>");
-html.push("<span><a href=\"/fop/www/html/login/regist.html\">注册</a></span>");
+html.push("<span class=\"userNav\"><a href=\"/fop/www/html/login/regist.html\">注册</a></span>");
 html.push("</div>");
 html.push("</div>");
 html.push("<div class=\"logo_box\">");
