@@ -220,7 +220,7 @@ app.controller(ngControllerName,function($scope){
     $scope.release = function(){
         var financeName = $("input[name = 'financeName']").val();
         var financeMoney = $("input[name = 'financeMoney']").val();
-        var financeYear = $("input[name = 'financeYear']").val();
+        var financeYear = $("#financeYear option:checked").val();
         var rate = $("input[name = 'rate']").val();
         var content = $("textarea[name = 'pcontent']").val();
         if(financeName == '' || financeName == undefined){

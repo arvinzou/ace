@@ -74,7 +74,16 @@
                     <input class="input_style" type="text" ng-model="infoData.financeAmount"/>
                 </div>
                 <div><label>融资年限 </label><br>
-                    <input class="input_style" type="text" ng-model="infoData.financeYear"/>
+                    <!--<input class="input_style" type="text" ng-model="infoData.financeYear"/>-->
+                    <select class="input_style" ng-model="infoData.financeYear">
+                        <option value="" selected>请选择</option>
+                        <option value="0">半年</option>
+                        <option value="1">一年</option>
+                        <option value="2">两年</option>
+                        <option value="3">三年</option>
+                        <option value="4">四年</option>
+                        <option value="5">五年以上</option>
+                    </select>
                 </div>
                 <div><label>预期年收益 </label><br>
                     <input class="input_style" type="text" ng-model="infoData.yearYield"/>
@@ -112,8 +121,15 @@
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入金额'"/>
                 </div>
                 <div><label>融资年限 </label><br>
-                    <input class="input_style" type="text" placeholder="请输入年限" name="financeYear"
-                           onfocus="this.placeholder=''" onblur="this.placeholder='请输入年限'"/>
+                    <select id="financeYear" class="input_style" ng-model="infoData.financeYear">
+                        <option value="" selected>请选择</option>
+                        <option value="0">半年</option>
+                        <option value="1">一年</option>
+                        <option value="2">两年</option>
+                        <option value="3">三年</option>
+                        <option value="4">四年</option>
+                        <option value="5">五年以上</option>
+                    </select>
                 </div>
                 <div><label>预期年收益 </label><br>
                     <input class="input_style" type="text" placeholder="请输入年收益" name="rate"

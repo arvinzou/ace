@@ -53,6 +53,7 @@ app.controller(ngControllerName,function($scope){
         $scope.userProp = userProp;
     }catch(e){}
 
+    $scope.money = "";
 	//初始化预期年收益
     $('#demo1').comboboxfilter({
         url: '',
@@ -184,7 +185,7 @@ app.controller(ngControllerName,function($scope){
             var flag = true;
             var projectName = $("input[name='projectName']").val();
             var projectMoney = $("input[name='projectMoney']").val();
-            var financeYear = $("input[name='financeYear']").val();
+            var financeYear = $("#financeYear option:checked").val();
             // var projectType = $("input[name='projectType']").val();
             var rate = $("input[name='rate']").val();
             var content = $("textarea[name='content']").val();
@@ -316,5 +317,20 @@ app.controller(ngControllerName,function($scope){
                 alert("内部服务异常");
             }
         });
+    }
+
+    /**
+     *
+     * @param val
+     */
+    $scope.isNumber = function(){
+        var temp = /^[0-9]*(\.[0-9]{1,2})?$/;
+        if(!temp.test($scope.money)){
+            layer.alert("输入金额格式不正确！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            $scope.money = "";
+        }
     }
 });
