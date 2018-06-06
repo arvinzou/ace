@@ -65,6 +65,11 @@
                                 class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
 
+                    <button class="btn btn-purple" id="btn-view-audit"
+                            authority="${pageContext.request.contextPath}/fopQuestion/audit">
+                        <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -74,6 +79,21 @@
 
     <div id="grid-pager"></div>
 
+    <div id="dialog-message-audit" class="hide">
+        <form action="/fopQuestion/audit" id="fm-audit">
+            <fieldset>
+                审核结果：
+                <input id="audit_pass" name="audit_result" type="radio" value="0"/> 通过
+                <input id="audit_unpass" name="audit_result" type="radio" value="1"/> 不通过
+            </fieldset>
+            <div class="space-6"></div>
+            <fieldset>
+                审核备注： <textarea id="audit_opinion" cols="30" rows="10"></textarea>
+
+                <%--<input id="" type="password" style="width: 200px;"/>--%>
+            </fieldset>
+        </form>
+    </div>
 
 </div>
 <div id="dialog-message" class="hide">
