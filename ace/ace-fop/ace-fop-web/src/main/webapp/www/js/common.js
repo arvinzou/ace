@@ -20,7 +20,7 @@ html.push("</div>");
 html.push("<div class=\"logo_box\">");
 html.push("<div class=\"logo\">");
 html.push("<div class=\"logo_image\"><img src=\"/fop/www/images/logo.png\" /></div>");
-html.push("<div class=\"logo_word\">承办单位：常德市工商业联合会</div>");
+html.push("<div class=\"logo_word\">承办单位：常德市工商业联合会·总商会</div>");
 html.push("</div>");
 html.push("<div class=\"words\">");
 html.push("<div class=\"words_1\"><img class='anim_fade_image' src=\"/fop/www/images/words1.png\" /></div>");
