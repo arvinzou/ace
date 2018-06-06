@@ -309,3 +309,10 @@ function addr(addr) {
     $("#address").val(addr);
 }
 /** 2、 end */
+function divtoggle(div, obj){
+    var spread = $('#'+div);
+    var up = "收起<i class='glyphicon glyphicon-chevron-up'></i>";
+    var down ="展开<i class='glyphicon glyphicon-chevron-down'></i>";
+    obj.innerHTML = spread.is(":hidden") ? up : down;
+    spread.slideToggle();
+}
