@@ -193,6 +193,8 @@ public class OAuth2ServiceImpl implements OAuth2Service {
                 user.setUserProp(userProp);
                 o.put("status","0");
                 o.put("userinfo",user);
+            }else{
+                rst.setErrorMessage("绑定失败，没有找到系统用户，请确认手机号是否已注册为系统用户。");
             }
         }
         rst.setValue(o);

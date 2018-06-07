@@ -8,6 +8,7 @@ function getNumFun(){
 	}else{
 		$.post( portalPath+"/www/oauth2/sendCmccByMobile.do",{mobile:mobile,signature:'常德市工商联'},function(result){
 	    	console.log(result);
+
 	    	alert(result.errorMessage);
 	  	});
 	  settime();	
@@ -41,7 +42,7 @@ function bandFun(){
 	$.post( portalPath+"/www/oauth2/bind.do",{mobile:mobile, captcha: captcha},function(result){
 	    	console.log(result);
 	    	alert(result.errorMessage);
-	    	if(result.status == '0'){
+	    	if(result.status == '0'&&result.value.status == '0'){
 	    		location.href='../me/index.jsp'
 	    	}
 	 });

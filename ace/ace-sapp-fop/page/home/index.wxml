@@ -15,6 +15,6 @@
   </navigator>
 
   
-    <button class="weui-btn" bindtap="bindtap" style=" width:100%;color:#fff;background-color:#1A56A8; border-radius: 2px;">提交诉求</button>
+    <button class="weui-btn" bindtap="bindtap" style=" width:60%;color:#fff;background-color:#1A56A8; border-radius: 10rpx;">提交诉求</button>
  
 </view>
