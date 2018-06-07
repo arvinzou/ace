@@ -108,12 +108,6 @@
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">
-主键</span>
-            <br>
-            <span id="id">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
 所属公司</span>
             <br>
             <span id="relationId">
@@ -129,12 +123,6 @@
 产品名称</span>
             <br>
             <span id="productName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-产品描述</span>
-            <br>
-            <span id="description">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
@@ -192,6 +180,11 @@
 </span>
         </div>
     </div>
+
+    <h5 class="header-title">详细情况</h5>
+    <div class="row" style="padding:10px" id="description">
+    </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">

@@ -75,12 +75,6 @@
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">
-主键</span>
-            <br>
-            <span id="id">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
 关联ID</span>
             <br>
             <span id="relationId">
@@ -96,12 +90,6 @@
 标题</span>
             <br>
             <span id="title">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-内容</span>
-            <br>
-            <span id="content">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
@@ -123,24 +111,17 @@
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-备用字段1</span>
-            <br>
-            <span id="alternateFields1">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-备用字段2</span>
-            <br>
-            <span id="alternateFields2">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
 状态</span>
             <br>
             <span id="status">
 </span>
         </div>
     </div>
+
+    <h5 class="header-title">内容</h5>
+    <div class="row" style="padding:10px" id="content">
+    </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">
