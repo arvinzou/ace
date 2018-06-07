@@ -168,7 +168,7 @@
         where t.openId=#{unionId} limit 0,1
     </select>
     <update id="updateBindApp">
-        update users set openId=#{openId} where user_id=#{userId}
+        update users set openId=#{openId},appOpenId=#{openId} where user_id=#{userId}
     </update>
 
     <update id="updateReg" parameterType="com.huacainfo.ace.common.model.Userinfo">
@@ -179,7 +179,7 @@
     </update>
 
     <update id="updateUnbind">
-        update users set openId=null where openId=#{unionid};
+        update users set openId=null,appOpenId=null where openId=#{unionid};
         update userinfo set mobile = null where unionid = #{unionid,jdbcType=VARCHAR};
     </update>
 </mapper>

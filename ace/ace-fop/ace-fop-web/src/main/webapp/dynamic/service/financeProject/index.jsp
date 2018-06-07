@@ -109,12 +109,6 @@
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">
-主键</span>
-            <br>
-            <span id="id">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
 融资名称</span>
             <br>
             <span id="financeTitle">
@@ -157,12 +151,6 @@
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-融资内容</span>
-            <br>
-            <span id="financeContent">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
 预期年收益</span>
             <br>
             <span id="yearYield">
@@ -193,6 +181,11 @@
 </span>
         </div>
     </div>
+
+    <h5 class="header-title">详细情况</h5>
+    <div class="row" style="padding:10px" id="financeContent">
+    </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">

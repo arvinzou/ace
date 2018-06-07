@@ -100,12 +100,6 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem hide">
-            <span class="labelItemHeader">主键</span>
-            <br>
-            <span id="id"></span>
-        </div>
-
         <div class="labelItem">
             <span class="labelItemHeader">项目名称</span>
             <br>

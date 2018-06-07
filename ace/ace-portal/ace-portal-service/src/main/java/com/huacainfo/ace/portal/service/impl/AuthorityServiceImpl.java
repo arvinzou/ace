@@ -149,6 +149,8 @@ public class AuthorityServiceImpl implements AuthorityService {
 				o.put("status","0");
 				o.put("userProp",userProp);
 				o.put("userinfo",user);
+			}else{
+				rst.setErrorMessage("绑定失败，没有找到系统用户，请确认手机号是否已注册为系统用户。");
 			}
 		}
 		rst.setValue(o);
