@@ -22,6 +22,9 @@ body {
 
 .member_menu li a {
 	padding-left: 40px;
+	width: 100%;
+	height: 100%;
+	display: block;
 }
 
 .member_menu li:hover, .member_menu li:hover a {
@@ -31,10 +34,12 @@ body {
 
 .hover_li {
 	background-color: #1A56A8;
-	color: #FFFFFF;
+
 }
 
-
+.hover_li >a{
+	color: #FFFFFF;
+}
 .member_center_title01 {
 	color: #1A56A8;
 	font-size: 22px;
