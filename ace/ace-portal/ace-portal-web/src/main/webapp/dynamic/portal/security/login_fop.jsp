@@ -535,7 +535,8 @@ i, cite, em, var, address, dfn {
     }
 
     .login_logo_temp {
-        max-width: 1400px;
+        max-width: 1200px;
+        min-width: 900px;
         height: 100px;
         padding-top: 10px;
         margin: 0 auto;
@@ -587,7 +588,8 @@ i, cite, em, var, address, dfn {
     }
 
     .login_body .login_body_temp {
-        max-width: 1400px;
+        max-width: 1200px;
+        min-width: 900px;
         margin: 120px auto 0 auto;
         background: url("image/body.png") no-repeat;
         height: 460px;
