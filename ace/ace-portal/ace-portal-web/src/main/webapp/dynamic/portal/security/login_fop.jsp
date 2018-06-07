@@ -590,7 +590,7 @@ i, cite, em, var, address, dfn {
         max-width: 1400px;
         margin: 120px auto 0 auto;
         background: url("image/body.png") no-repeat;
-        height: 500px;
+        height: 460px;
         background-size: auto 100%;
     }
 
