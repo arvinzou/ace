@@ -1,5 +1,6 @@
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
+var userStatus = null;
 
 var app =angular.module(ngAppName, []);
 
@@ -51,6 +52,8 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 console.log(result);
                 $scope.companyInfo = result.data.data;
+                $scope.companyType = result.data.data.companyType;
+                userStatus = result.data.data.status;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
@@ -111,11 +114,25 @@ app.controller(ngControllerName,function($scope){
         });
     }
 
+    $scope.checkUserUrl = function($event, url){
+        if(userStatus != '2'){
+            layer.alert("对不起，您还不是会员，请先完善资料！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }else{
+            $event.target.href = url;
+        }
+    }
 });
 
 app.filter('formatDate', function() { //可以注入依赖
     return function(text) {
-        return text.substring(0,10);
+        if(text != ''){
+            return text.substring(0,10);
+        }else{
+            return text;
+        }
     }
 });
 
@@ -127,3 +144,13 @@ function setIframeHeight(iframe) {
         }
     }
 };
+
+$(function () {
+    $('.member_menu_ul').on('click', 'li', actionClick);
+})
+
+function actionClick() {
+    $(this).siblings().removeClass("hover_li");
+    $(this).addClass("hover_li");
+}
+

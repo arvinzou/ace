@@ -12,7 +12,15 @@ app.controller(ngControllerName,function($scope){
     }catch(e){}
     //初始化文本框
     var editor = new Simditor({
-        textarea: $('#content')
+        textarea: $('#content'),
+        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
+        upload: {
+            url: '/portal/files/uploadImage.do', //文件上传的接口地址
+            params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+            fileKey: 'file', //服务器端获取文件数据的参数名
+            connectionCount: 3,
+            leaveConfirm: '正在上传文件'
+        }
 
     });
     $.ajax({
@@ -162,7 +170,7 @@ app.controller(ngControllerName,function($scope){
     /**
      * 发布之前判断是否已经登录
      */
-    $scope.before_release = function () {
+    $scope.before_release = function ($event) {
         var userProp = parent.parent.userProp;
         if (userProp == null || userProp == ''){
             layer.alert("请先登录后再发布！", {
@@ -170,6 +178,15 @@ app.controller(ngControllerName,function($scope){
                 skin: 'myskin'
             });
             return;
+        }else if(userStatus != '2'){
+            //非会员也不能发布
+            layer.alert("对不起，您还不是会员，请先完善信息！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }else{
+            $event.target.dataset.target='#myModal';
         }
     }
     /**

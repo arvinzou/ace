@@ -20,10 +20,10 @@ app.controller(ngControllerName,function($scope){
         }
     });
     $.ajax({
-        url: "/fop/www/findInformationServiceListDo",
+        url: "/fop/www/findFinanceProjectList",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, modules: "4"},
+        data:{limit:pageSize, page: currentPage},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -70,10 +70,10 @@ app.controller(ngControllerName,function($scope){
     $scope.searchList = function(currentPage, pageSize, status){
         var key_word = $("#key_word").val();
         $.ajax({
-            url: "/fop/www/findInformationServiceListDo",
+            url: "/fop/www/findFinanceProjectList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, modules: "4", status: status},
+            data:{limit:pageSize, page: currentPage, status: status},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -100,10 +100,10 @@ app.controller(ngControllerName,function($scope){
 
     $scope.search = function(status){
         $.ajax({
-            url: "/fop/www/findInformationServiceListDo",
+            url: "/fop/www/findFinanceProjectList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, modules: "4", status: status},
+            data:{limit:pageSize, page: 1, status: status},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -152,7 +152,7 @@ app.controller(ngControllerName,function($scope){
         var info = $scope.items[index];
         $scope.infoData = info;
         var editor = new Simditor({
-            textarea: $('#editor'),
+            textarea: $('#editor_update'),
             toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
             upload: {
                 url: '/portal/files/uploadImage.do', //文件上传的接口地址
@@ -162,15 +162,15 @@ app.controller(ngControllerName,function($scope){
                 leaveConfirm: '正在上传文件'
             }
         });
-        editor.setValue($scope.infoData.content);
+        editor.setValue($scope.infoData.financeContent);
     }
     $scope.update = function(id){
         var content = $("textarea[name='content']").val();
         $.ajax({
-            url: "/fop/www/updateInformationServiceDo",
+            url: "/fop/www/updateFinanceProject",
             type:"post",
             async:false,
-            data: {modules: "4", id: id, title: $scope.infoData.title, content: content},
+            data:{id:id,financeTitle:$scope.infoData.financeTitle, financeAmount: $scope.infoData.financeAmount, financeYear:$scope.infoData.financeYear, financeContent: content, yearYield: $scope.infoData.yearYield},
             success:function(result){
                 if(result.status == 0) {
                     $scope.search();
@@ -201,10 +201,10 @@ app.controller(ngControllerName,function($scope){
     $scope.delete = function(index){
         var id = $scope.items[index].id;
         $.ajax({
-            url: "/fop/www/deleteInformationServiceByInformationServiceIdDo",
+            url: "/fop/www/deleteFinanceProjectByFopFinanceProjectId",
             type:"post",
             async:false,
-            data:{modules: "4", id: id},
+            data:{id: id},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
@@ -234,27 +234,51 @@ app.controller(ngControllerName,function($scope){
     }
 
     $scope.release = function(){
-        var title = $("input[name='pname']").val();
-        var content = $("textarea[name='pcontent']").val();
-        if(title == '' || title == undefined){
-            layer.alert("人才信息标题不能为空！", {
+        var financeName = $("input[name = 'financeName']").val();
+        var financeMoney = $("input[name = 'financeMoney']").val();
+        var financeYear = $("#financeYear option:checked").val();
+        var rate = $("input[name = 'rate']").val();
+        var content = $("textarea[name = 'pcontent']").val();
+        if(financeName == '' || financeName == undefined){
+            layer.alert("名称不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+        if(financeMoney == '' || financeMoney == undefined){
+            layer.alert("金额不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+        if(financeYear == '' || financeYear == undefined){
+            layer.alert("年限不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+        if(rate == '' || rate == undefined){
+            layer.alert("年收益不能为空！", {
                 icon: 5,
                 skin: 'myskin'
             });
             return;
         }
         if(content == '' || content == undefined){
-            layer.alert("人才信息内容不能为空！", {
+            layer.alert("内容不能为空！", {
                 icon: 5,
                 skin: 'myskin'
             });
             return;
         }
         $.ajax({
-            url: "/fop/www/insertInformationServiceDo",
+            url: "/fop/www/insertFinanceProject",
             type:"post",
             async:false,
-            data:{modules: "4", title: title, content: content},
+            data:{financeTitle:financeName, financeAmount: financeMoney, financeYear:financeYear, financeContent: content, yearYield: rate},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
@@ -282,16 +306,5 @@ app.controller(ngControllerName,function($scope){
                 });
             }
         });
-    }
-});
-app.filter('convertText',function(){
-    return function(content){
-        content = content.replace(/(\n)/g, "");
-        content = content.replace(/(\t)/g, "");
-        content = content.replace(/(\r)/g, "");
-        content = content.replace(/<\/?[^>]*>/g, "");
-        content = content.replace(/\s*/g, "");
-        content = content.replace("&nbsp", "");
-        return content;
     }
 });

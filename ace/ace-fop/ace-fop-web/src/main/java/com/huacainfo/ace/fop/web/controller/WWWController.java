@@ -291,6 +291,25 @@ public class WWWController extends FopBaseController {
 
 
     /**
+     * @throws
+     * @Title:deleteFopLoanProductByFopLoanProductId
+     * @Description: TODO(删除金融产品)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @RequestMapping(value = "/deleteLoanProductByFopLoanProductId")
+    @ResponseBody
+    public MessageResponse deleteFopLoanProductByFopLoanProductId(String id)
+            throws Exception {
+        return this.fopLoanProductService.deleteFopLoanProductByFopLoanProductId(id,
+                this.getCurUserProp());
+    }
+
+
+    /**
      * @param: @param id
      */
     @RequestMapping(value = "/selectLoanProductByPrimaryKey")

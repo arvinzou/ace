@@ -6,8 +6,8 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopQuestion;
-import com.huacainfo.ace.fop.vo.FopQuestionVo;
 import com.huacainfo.ace.fop.vo.FopQuestionQVo;
+import com.huacainfo.ace.fop.vo.FopQuestionVo;
 
 import java.util.List;
 
@@ -99,4 +99,5 @@ public interface FopQuestionService {
     public abstract List<FopQuestionVo> findCommentList(String parentId) throws Exception;
 
 
+    MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp curUserProp) throws Exception;
 }

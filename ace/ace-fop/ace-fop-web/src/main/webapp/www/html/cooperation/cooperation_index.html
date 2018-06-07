@@ -22,25 +22,13 @@
     <SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
     <script type="text/javascript" src="filter/Filter.js"></script>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/user.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/Popt.js"></script>
     <script type="text/javascript" src="js/city.json.js"></script>
     <script type="text/javascript" src="js/citySet.js"></script>
     <script type="text/javascript" src="js/citySet_modal.js"></script>
     <script type="text/javascript" src="js/cooperation.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $("#city").click(function (e) {
-                SelCity(this, e);
-            });
-            $("#city_modal").click(function (e) {
-                SelCity(this, e);
-            });
-            $("s").click(function (e) {
-                SelCity(document.getElementById("city"), e);
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -50,11 +38,14 @@
         <div class="tab_title_ul">
             <span class="title_lager">项目信息</span><span class="title_small">/ Project</span>
             <div class="tab_title_load">
-                <button ng-if="userProp" data-toggle="modal" data-target="#myModal1" ng-click="before_release();">发布项目
+                <button  data-toggle="modal" data-target="" ng-click="before_release($event);">发布项目
                 </button>
-                <button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">
-                    发布项目
-                </button>
+                <!--<button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">-->
+                    <!--发布项目-->
+                <!--</button>-->
+                <!--<button ng-if="userProp&&userStatus!='2'" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">-->
+                    <!--发布项目-->
+                <!--</button>-->
             </div>
         </div>
     </div>

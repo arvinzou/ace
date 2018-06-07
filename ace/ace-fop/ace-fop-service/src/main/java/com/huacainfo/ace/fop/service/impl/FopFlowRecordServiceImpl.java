@@ -68,6 +68,11 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     @Autowired
     private InformationServiceService informationServiceService;
 
+    @Autowired
+    private FopQuestionDao fopQuestionDao;
+    @Autowired
+    private FopQuestionService fopQuestionService;
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -320,6 +325,9 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
             case FlowType.INFORMATION_SERVICE:
                 rs = informationService(record, userProp);// 诉求服务回复确认
                 break;
+            case FlowType.LAW_HELP:
+                rs = lawHelp(record, userProp);// 法律帮助审核
+                break;
             default:
                 rs = null;
                 break;
@@ -340,6 +348,25 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         this.dataBaseLogService.log("变更流程记录", "流程记录", "",
                 record.getId(), record.getId(), userProp);
         return new MessageResponse(0, "流程审核成功");
+    }
+
+    /**
+     * 法律帮助审核
+     *
+     * @param record
+     * @param userProp
+     * @return
+     */
+    private MessageResponse lawHelp(FopFlowRecord record, UserProp userProp) throws Exception {
+        FopQuestion obj = fopQuestionDao.selectByPrimaryKey(record.getFromId());
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录丢失");
+        }
+        //状态变更
+        String status = AuditResult.PASS.equals(record.getAuditResult()) ? "2" : "3";
+        obj.setStatus(status);
+
+        return fopQuestionService.updateFopQuestion(obj, userProp);
     }
 
     /**

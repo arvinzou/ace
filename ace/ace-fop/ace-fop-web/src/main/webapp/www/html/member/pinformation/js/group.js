@@ -23,7 +23,9 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 console.log(result);
                 $scope.information = result.data;
-                $scope.date = result.data.establishDate.substring(0,10);
+                if(result.data.establishDate != '' && result.data.establishDate != null){
+                    $scope.date = result.data.establishDate.substring(0,10);
+                }
                 $scope.group = result.data.list[0];
                 assId = result.data.id;
                 if (!$scope.$$phase) {
@@ -76,7 +78,7 @@ app.controller(ngControllerName,function($scope){
                         $scope.$apply();
                     }
                 }else {
-                    layer.alert(result.errorMessage, {
+                    layer.alert(result.detail, {
                         icon: 5,
                         skin: 'myskin'
                     });
@@ -109,7 +111,10 @@ function addr(addr) {
 
 app.filter('formatDate', function() { //可以注入依赖
     return function(text) {
-        return text.substring(0,10);
+        if(text.length > 10){
+            return text.substring(0,10);
+        }
+        return text;
     }
 });
 

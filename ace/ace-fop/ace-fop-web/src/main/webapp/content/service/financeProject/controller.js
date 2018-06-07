@@ -100,6 +100,8 @@ jQuery(function ($) {
                     $.jgrid.nav.alerttext);
                 return;
             }
+            // var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+
             jQuery(cfg.grid_selector).jqGrid(
                 'delGridRow',
                 gr,
@@ -110,6 +112,9 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+
+                        //    render
+                        //     $(".combo").val(rowData.companyName);
                     }
                 })
         });

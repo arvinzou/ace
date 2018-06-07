@@ -22,6 +22,7 @@
     <script type="text/javascript" src="/portal/content/common/simditor/scripts/simditor.js"></script>
     <link rel="stylesheet" type="text/css" href="/portal/content/common/simditor/styles/simditor.css"/>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/user.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/investment.js"></script>
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -35,11 +36,8 @@
             <div class="title01">
                 <span class="title_lager">招商信息</span><span
                     class="title_small">/&nbsp;Investment Information</span>
-                <button ng-if="userProp" class="law_help" data-toggle="modal" data-target="#myModal"
-                        ng-click="before_release();">发布招商
-                </button>
-                <button ng-if="!userProp" class="law_help" data-toggle="modal" data-dismiss="#myModal"
-                        ng-click="before_release();">发布招商
+                <button class="law_help" data-toggle="modal" data-target=""
+                        ng-click="before_release($event);">发布招商
                 </button>
             </div>
             <div class="searchTable">

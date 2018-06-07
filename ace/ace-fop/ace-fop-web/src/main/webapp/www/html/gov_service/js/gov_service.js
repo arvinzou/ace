@@ -137,7 +137,7 @@ app.controller(ngControllerName,function($scope){
     /**
      * 发布之前判断是否已经登录
      */
-    $scope.before_release = function () {
+    $scope.before_release = function ($event) {
         var userProp = parent.parent.userProp;
         if (userProp == null || userProp == ''){
             layer.alert("请先登录后再发布！", {
@@ -145,6 +145,15 @@ app.controller(ngControllerName,function($scope){
                 skin: 'myskin'
             });
             return;
+        }else if(userStatus != '2'){
+            //非会员也不能发布
+            layer.alert("对不起，您还不是会员，请先完善信息！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }else{
+            $event.target.dataset.target='#myModal';
         }
     }
     /**

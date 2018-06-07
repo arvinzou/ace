@@ -93,10 +93,31 @@ app.controller(ngControllerName,function($scope){
         console.log(primaryId);
         window.open('policy_info.html?id='+primaryId);
     }
+
+    /**
+     * 政策文件下载
+     */
+    $scope.download = function($event, file, title){
+        if(file != '' && file != null){
+            var downTitle = file.substring(file.indexOf("filename=")+9,file.length);
+            $event.target.download = downTitle;
+            $event.target.href="http://zx.huacainfo.com/"+file;
+        }else{
+            layer.alert("对不起，该政策没有可下载的附件！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+    }
 });
 
 app.filter('formatDate', function() { //可以注入依赖
     return function(text) {
-        return text.substring(0,10);
+        if(text.length > 10){
+            return text.substring(0,10);
+        }else {
+            return text;
+        }
     }
 });

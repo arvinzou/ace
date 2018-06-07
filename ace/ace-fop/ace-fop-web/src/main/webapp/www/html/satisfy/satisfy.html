@@ -15,6 +15,7 @@
 		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+		<script type="text/javascript" src="../../js/user.js"></script>
 		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" src="js/satisfy.js"></script>
 		<link rel="shortcut icon" href="../../images/favicon.ico">
@@ -57,8 +58,7 @@
 						<div class="appeal_research research">
 							<div class="research_title">
 								<span>在线诉求</span>
-								<a ng-if="userProp" href="#" data-toggle="modal" data-target="#myModal_1" ng-click="before_release();">我要评价</a>
-								<a ng-if="!userProp" href="#" data-toggle="modal" data-dismiss="#myModal_1" ng-click="before_release();">我要评价</a>
+								<a  href="#" data-toggle="modal" data-target="" ng-click="before_release($event,'#myModal_1');">我要评价</a>
 							</div>
 							<div class="research_body">
 								<canvas id="appeal"></canvas>
@@ -67,8 +67,7 @@
 						<div class="react_research research">
 							<div class="research_title">
 								<span>平台服务</span>
-								<a ng-if="userProp" href="#" data-toggle="modal" data-target="#myModal_2" ng-click="before_release();">我要评价</a>
-								<a ng-if="!userProp" href="#" data-toggle="modal" data-dismiss="#myModal_2" ng-click="before_release();">我要评价</a>
+								<a  href="#" data-toggle="modal" data-target="" ng-click="before_release($event,'#myModal_2');">我要评价</a>
 							</div>
 							<div class="research_body">
 								<canvas id="react"></canvas>

@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="filter/Filter.js"></script>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/user.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <SCRIPT language=JavaScript src="js/finance.js"></SCRIPT>
     <script type="text/javascript" src="js/finance_company.js"></script>
@@ -32,10 +33,7 @@
                     <span class="title_lager">银企服务</span><span class="title_small">/Enterprise financing</span>
                 </ul>
                 <div class="tab_title_load">
-                    <button ng-if="userProp" data-toggle="modal" data-target="#myModal1" ng-click="before_release();">
-                        发布服务
-                    </button>
-                    <button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">
+                    <button  data-toggle="modal" data-target="" ng-click="before_release($event);">
                         发布服务
                     </button>
                 </div>
@@ -125,18 +123,26 @@
                     <input class="input_style" type="text" placeholder="请输入产品名称" name="projectName"
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入融资名称'"/>
                 </div>
-                <div><label>融资金额 </label><br>
-                    <input class="input_style" type="text" placeholder="请输入产品金额" name="projectMoney"
-                           onfocus="this.placeholder=''" onblur="this.placeholder='请输入融资金额'"/>
+                <div><label>融资金额(单位：万元，精确到两位小数) </label><br>
+                    <input ng-model="money" class="input_style" type="text" placeholder="请输入产品金额" name="projectMoney"
+                           onfocus="this.placeholder=''" onblur="this.placeholder='请输入融资金额'" ng-blur="isNumber(this);"/>
                 </div>
                 <div><label>融资年限 </label><br>
-                    <input class="input_style" type="text" placeholder="请输入融资年限" name="financeYear"
-                           onfocus="this.placeholder=''" onblur="this.placeholder='请输入融资年限'"/>
+                      <select id="financeYear" class="input_style">
+                          <option value="" selected>请选择</option>
+                          <option value="0">半年</option>
+                          <option value="1">一年</option>
+                          <option value="2">两年</option>
+                          <option value="3">三年</option>
+                          <option value="4">四年</option>
+                          <option value="5">五年以上</option>
+                      </select>
                 </div>
-                <div><label>预期年收益 </label><br>
+                <div><label>预期年收益(%) </label><br>
                     <input class="input_style" type="text" placeholder="请输入预期年收益" name="rate"
                            onfocus="this.placeholder=''"
-                           onblur="this.placeholder='请输入预期年收益'"/>
+                           onblur="this.placeholder='请输入预期年收益'"
+                           onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
                 </div>
                 <div><label>内容 </label><br>
                     <textarea name="content" placeholder="描述融资项目" onfocus="this.placeholder=''"

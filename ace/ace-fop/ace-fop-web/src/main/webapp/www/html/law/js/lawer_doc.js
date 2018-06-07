@@ -122,4 +122,30 @@ app.controller(ngControllerName,function($scope){
         console.log(primaryId);
         window.open('doc_info.html?id='+primaryId);
     }
+
+    /**
+     * 法律文书下载
+     */
+    $scope.download = function($event, file, title){
+        if(file != '' && file != null){
+            $event.target.download = title;
+            $event.target.href="http://zx.huacainfo.com/"+file;
+        }else{
+            layer.alert("对不起，该政策没有可下载的附件！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+    }
+});
+
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        if(text.length > 10){
+            return text.substring(0,10);
+        }else {
+            return text;
+        }
+    }
 });

@@ -48,4 +48,9 @@ public interface FlowType {
      * 信息服务
      */
     String INFORMATION_SERVICE = "11";
+
+    /**
+     * 法律帮助
+     */
+    String LAW_HELP = "12";
 }
