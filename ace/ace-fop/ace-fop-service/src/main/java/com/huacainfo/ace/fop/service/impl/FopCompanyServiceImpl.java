@@ -475,11 +475,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     private MessageResponse validate(FopCompanyVo o) throws Exception {
-        if (!CommonUtils.isBlank(o.getFullName())) {
-            if (!ValidateUtils.Chinese(o.getFullName())) {
-                return new MessageResponse(ResultCode.FAIL, "企业名称有非中文字符");
-            }
-        }
         if (!CommonUtils.isBlank(o.getRegisteredCapital())) {
             if (!ValidateUtils.Two_point(String.valueOf(o.getRegisteredCapital()))) {
                 return new MessageResponse(ResultCode.FAIL, "注册资金（万元）精确到小数点后两位");

@@ -189,7 +189,7 @@ app.controller(ngControllerName,function($scope){
     $scope.delete = function(index){
         var id = $scope.items[index].id;
         $.ajax({
-            url: "/fop/www/deleteLoanProduct",
+            url: "/fop/www/deleteLoanProductByFopLoanProductId",
             type:"post",
             async:false,
             data:{id: id},
