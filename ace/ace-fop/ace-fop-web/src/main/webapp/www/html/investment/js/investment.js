@@ -11,8 +11,15 @@ app.controller(ngControllerName,function($scope){
     }catch(e){}
     //初始化文本框
     var editor = new Simditor({
-        textarea: $('#editor')
-
+        textarea: $('#editor'),
+        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
+        upload: {
+            url: '/portal/files/uploadImage.do', //文件上传的接口地址
+            params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+            fileKey: 'file', //服务器端获取文件数据的参数名
+            connectionCount: 3,
+            leaveConfirm: '正在上传文件'
+        }
     });
     $.ajax({
         url: "/fop/www/findInformationServiceListDo",
