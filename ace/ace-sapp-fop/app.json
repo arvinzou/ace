@@ -2,6 +2,7 @@
   "pages": [
     "page/home/index",
     "page/appeal/index",
+    "page/userinfo/index",
     "page/bind/index",
     "page/detailsOfProgress/index",
     "page/answer/index",
