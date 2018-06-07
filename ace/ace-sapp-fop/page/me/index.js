@@ -13,13 +13,12 @@ Page({
   },
   onLoad: function () {
     if (!util.isLogin()) {
-      wx.navigateTo({ url: "../bind/index?url=../me/index"});
+      wx.navigateTo({ url: "../userinfo/index?url=../me/index"});
     }
     var that=this;
     that.initData();
     that.setData({
-      userinfo: wx.getStorageSync('userinfo'),
-      userProp: wx.getStorageSync('userProp'),
+      userinfo: wx.getStorageSync('userinfo')
     });
   },
   //手指触摸动作开始 记录起点X坐标

@@ -213,15 +213,16 @@ function bind(captcha,mobile,callback) {
     success: function (res) {
       wx.hideNavigationBarLoading() //完成停止加载
       wx.hideLoading();
-      wx.showModal({ title: "提示", showCancel: false, content: res.data.errorMessage });
-      if (res.data.status == 0) {
+      
+      if (res.data.status == 0 && res.data.value.status == 0) {
         wx.setStorageSync('userinfo', res.data.value['userinfo']);
-        //wx.setStorageSync('userProp', res.data.value['userProp']);
         console.log('login success', res);
         if (_callback) {
           console.log('bind callback');
           _callback(res);
         }
+      }else{
+        wx.showModal({ title: "提示", showCancel: false, content: res.data.errorMessage });
       }
 
     },
