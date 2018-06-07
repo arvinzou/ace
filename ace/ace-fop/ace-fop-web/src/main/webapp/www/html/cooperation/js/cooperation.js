@@ -217,6 +217,22 @@ app.controller(ngControllerName,function($scope){
                 });
                 return;
             }
+            if(content == '' || content == null){
+                flag = false;
+                layer.alert("内容不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
+            }
+            if(projectType == '' || projectType == null){
+                flag = false;
+                layer.alert("项目类型不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
+            }
             if(flag){
                 $.ajax({
                     url: "/fop/www/insertProject",
