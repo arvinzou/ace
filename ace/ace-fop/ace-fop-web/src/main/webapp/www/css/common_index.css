@@ -287,10 +287,6 @@ body{
 	line-height: 82px;
 }
 
-.menu_panel_01 .left:hover img {
-    margin-top: 0px;
-    margin-bottom: 10px;
-}
 .left{
 	margin-left: 2%;
 	margin-bottom: 15px;
@@ -333,6 +329,16 @@ body{
 .menu_img{
 	width: 15%;
 	height: 60%;
+}
+.image{
+	-webkit-transform-style:preserve-3d;
+	-webkit-transition:0.5s;
+	-moz-transform-style:preserve-3d;
+	-moz-transition:0.5s;
+}
+.menu_panel_01  li:hover .image{
+	-webkit-transform:rotateY(180deg);
+	-moz-transform:rotateY(180deg);
 }
 .product_box{
 	margin-top: 15px;
