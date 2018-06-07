@@ -162,7 +162,7 @@ app.controller(ngControllerName,function($scope){
     /**
      * 发布之前判断是否已经登录
      */
-    $scope.before_release = function () {
+    $scope.before_release = function ($event) {
         var userProp = parent.parent.userProp;
         if (userProp == null || userProp == ''){
             layer.alert("请先登录后再发布！", {
@@ -177,6 +177,8 @@ app.controller(ngControllerName,function($scope){
                 skin: 'myskin'
             });
             return;
+        }else{
+            $event.target.dataset.target='#myModal';
         }
     }
     /**

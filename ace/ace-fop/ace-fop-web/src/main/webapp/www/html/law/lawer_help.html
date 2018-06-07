@@ -21,9 +21,7 @@
 		<div class="main">
 			<div class="title">
 				<span class="title_lager">法律帮助</span><span class="title_small">/&nbsp;Legal&nbsp;Aid</span>
-				<button ng-if="userProp&&userStatus=='2'" class="law_help"  data-toggle="modal" data-target="#myModal"  ng-click="before_release();">发布法律帮助</button>
-				<button ng-if="!userProp" class="law_help"  data-toggle="modal" data-dismiss="#myModal"  ng-click="before_release();">发布法律帮助</button>
-				<button ng-if="userProp&&userStatus!='2'" class="law_help"  data-toggle="modal" data-dismiss="#myModal"  ng-click="before_release();">发布法律帮助</button>
+				<button class="law_help"  data-toggle="modal" data-target=""  ng-click="before_release($event);">发布法律帮助</button>
 			</div>
 			<div class="searchTable">
 				<div class="search_condition">

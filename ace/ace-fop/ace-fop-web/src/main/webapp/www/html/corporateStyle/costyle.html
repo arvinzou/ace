@@ -42,14 +42,8 @@
         <div class="main">
             <div class="title01">
                 <span class="title_lager">企业风采</span><span class="title_small">/&nbsp;Enterprise Style</span>
-                <button ng-if="!userProp" class="law_help" data-toggle="modal" data-dismiss="#myModal"
-                        ng-click="before_release();">发布风采
-                </button>
-                <button ng-if="userProp&&userStatus=='2'" class="law_help" data-toggle="modal" data-target="#myModal"
-                        ng-click="before_release();">发布风采
-                </button>
-                <button ng-if="userProp&&userStatus!='2'" class="law_help" data-toggle="modal" data-dismiss="#myModal"
-                        ng-click="before_release();">发布风采
+                <button  class="law_help" data-toggle="modal" data-target=""
+                        ng-click="before_release($event);">发布风采
                 </button>
             </div>
             <div class="cooperate">
