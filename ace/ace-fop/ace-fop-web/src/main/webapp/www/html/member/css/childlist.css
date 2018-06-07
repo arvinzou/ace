@@ -25,6 +25,7 @@ a:active{text-decoration:none;}
     display: block;
     float: left;
     font-size: 16px;
+    font-weight: bolder;
     color: #1A56A8;
 }
 .child_title_2{
@@ -34,9 +35,18 @@ a:active{text-decoration:none;}
     display: block;
     float: right;
     font-size: 16px;
-    color: #1A56A8;
 }
-
+.child_title_2 a {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    background-color: #1A56A8;
+    border-radius: 3px;
+    color: #ffffff;
+}
 .menu-nav ul {
     border-bottom: 1px solid #E1E5ED;
     margin-bottom: 20px;
