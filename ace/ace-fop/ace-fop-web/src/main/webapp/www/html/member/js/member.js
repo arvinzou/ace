@@ -51,6 +51,7 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 console.log(result);
                 $scope.companyInfo = result.data.data;
+                $scope.companyType = result.data.data.companyType;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
