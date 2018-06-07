@@ -2,6 +2,7 @@ package com.huacainfo.ace.fop.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -10,13 +11,16 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopQuestionDao;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
+import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopQuestion;
+import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopQuestionService;
 import com.huacainfo.ace.fop.vo.FopQuestionQVo;
 import com.huacainfo.ace.fop.vo.FopQuestionVo;
@@ -54,6 +58,8 @@ public class FopQuestionServiceImpl implements FopQuestionService {
 
     @Autowired
     private FopAssociationDao fopAssociationDao;
+    @Autowired
+    private FopFlowRecordService fopFlowRecordService;
 
     /**
      * @throws
@@ -245,8 +251,7 @@ public class FopQuestionServiceImpl implements FopQuestionService {
      * @version: 2018-05-07
      */
     @Override
-    public SingleResult
-            <FopQuestionVo> selectFopQuestionByPrimaryKey(String id) throws Exception {
+    public SingleResult<FopQuestionVo> selectFopQuestionByPrimaryKey(String id) throws Exception {
         SingleResult
                 <FopQuestionVo> rst = new SingleResult
                 <FopQuestionVo>();
@@ -302,5 +307,32 @@ public class FopQuestionServiceImpl implements FopQuestionService {
             fp.setChildren(list1);
         }
         return list;
+    }
+
+    @Override
+    public MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp userProp) throws Exception {
+        FopQuestion obj = fopQuestionDao.selectByPrimaryKey(id);
+        if (null == obj) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失");
+        }
+        if (obj.getStatus().equals("2")) {
+            return new MessageResponse(ResultCode.FAIL, "请勿重复发布");
+        }
+        //提交审核流程
+        String flowId = GUIDUtil.getGUID();
+        MessageResponse rs = fopFlowRecordService.submitFlowRecord(flowId, FlowType.LAW_HELP, id, userProp);
+        if (ResultCode.FAIL == rs.getStatus()) {
+            return rs;
+        }
+        //自动审核通过
+        FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
+        record.setAuditResult(auditResult);
+        record.setAuditOpinion(auditOpinion);
+        MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getErrorMessage());
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "发布成功");
     }
 }
