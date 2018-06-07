@@ -1,12 +1,14 @@
 package com.huacainfo.ace.fop.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.ValidateUtils;
 import com.huacainfo.ace.fop.dao.FopAssMemberDao;
 import com.huacainfo.ace.fop.model.FopAssMember;
 import com.huacainfo.ace.fop.model.FopAssociation;
@@ -95,6 +97,10 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
         if (CommonUtils.isBlank(o.getAssPost())) {
             return new MessageResponse(1, "商协会职务不能为空！");
         }
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
+        }
         int temp = this.fopAssMemberDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "企业管理名称重复！");
@@ -140,6 +146,10 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
         }
         if (CommonUtils.isBlank(o.getAssPost())) {
             return new MessageResponse(1, "商协会职务不能为空！");
+        }
+        MessageResponse mm = validate(o);
+        if (ResultCode.FAIL == mm.getStatus()) {
+            return mm;
         }
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -192,6 +202,16 @@ public class FopAssMemberServiceImpl implements FopAssMemberService {
         this.dataBaseLogService.log("添加更新删除企业管理", "关联团体ID", String.valueOf(assId),
                 String.valueOf(assId), "企业管理", userProp);
         return new MessageResponse(0, "企业管理删除完成！");
+    }
+
+
+    private MessageResponse validate(FopAssMember o) throws Exception {
+        if (!CommonUtils.isBlank(o.getPhoneNum())) {
+            if (!ValidateUtils.Mobile(String.valueOf(o.getPhoneNum()))) {
+                return new MessageResponse(ResultCode.FAIL, "电话号码格式不正确");
+            }
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "数据格式正确");
     }
 
 }
