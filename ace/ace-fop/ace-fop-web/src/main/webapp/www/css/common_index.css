@@ -78,13 +78,15 @@ body{
 	height: 60px;
 }
 .logo_image img{
-	width: 100%;
-	height: 100%;
+    width: auto;
+    height: 70px;
 }
 .logo_word{
-	font-size: 12px;
+    font-size: 16px;
 	color: #1A56A8;
-	padding-left: 62px;
+    padding-left: 84px;
+    font-weight: 700;
+    padding-top: 7px;
 }
 .words{
 	width: 300px;
