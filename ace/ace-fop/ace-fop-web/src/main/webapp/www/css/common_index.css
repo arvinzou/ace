@@ -110,8 +110,8 @@ body{
 	float: right;
 }
 .content_box{
-	width: 70%;
 	height: 100%;
+    width: 1205px;
 	margin: auto;
 }
 .content{
