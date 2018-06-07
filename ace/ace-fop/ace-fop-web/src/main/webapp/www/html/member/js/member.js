@@ -114,6 +114,16 @@ app.controller(ngControllerName,function($scope){
         });
     }
 
+    $scope.checkUserUrl = function($event, url){
+        if(userStatus != '2'){
+            layer.alert("对不起，您还不是会员，请先完善资料！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }else{
+            $event.target.href = url;
+        }
+    }
 });
 
 app.filter('formatDate', function() { //可以注入依赖
@@ -143,3 +153,4 @@ function actionClick() {
     $(this).siblings().removeClass("hover_li");
     $(this).addClass("hover_li");
 }
+
