@@ -21,6 +21,7 @@
     <script type="text/javascript" src="/portal/content/common/simditor/scripts/simditor.js"></script>
     <link rel="stylesheet" type="text/css" href="/portal/content/common/simditor/styles/simditor.css"/>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/user.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/personnel.js"></script>
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -35,10 +36,13 @@
             <div class="search_list">
                 <div class="finance_list_title">
                     <span ng-cloak>共{{totalCount}}条人才信息</span>
-                    <button ng-if="userProp" class="release" data-toggle="modal" data-target="#myModal"
+                    <button ng-if="userProp&&userStatus=='2'" class="release" data-toggle="modal" data-target="#myModal"
                             ng-click="before_release();">发布招聘
                     </button>
                     <button ng-if="!userProp" class="release" data-toggle="modal" data-dismiss="#myModal"
+                            ng-click="before_release();">发布招聘
+                    </button>
+                    <button ng-if="userProp&&userStatus!='2'" class="release" data-toggle="modal" data-dismiss="#myModal"
                             ng-click="before_release();">发布招聘
                     </button>
                 </div>

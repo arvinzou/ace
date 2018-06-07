@@ -1,5 +1,6 @@
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
+var userStatus = null;
 
 var app =angular.module(ngAppName, []);
 
@@ -52,6 +53,7 @@ app.controller(ngControllerName,function($scope){
                 console.log(result);
                 $scope.companyInfo = result.data.data;
                 $scope.companyType = result.data.data.companyType;
+                userStatus = result.data.data.status;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }

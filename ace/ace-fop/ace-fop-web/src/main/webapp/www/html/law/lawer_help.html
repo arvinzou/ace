@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
 		<SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
 		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+		<script type="text/javascript" src="../../js/user.js"></script>
 		<script type="text/javascript" src="js/lawer_help.js"></script>
 		<link rel="shortcut icon" href="../../images/favicon.ico">
 	</head>
@@ -20,8 +21,9 @@
 		<div class="main">
 			<div class="title">
 				<span class="title_lager">法律帮助</span><span class="title_small">/&nbsp;Legal&nbsp;Aid</span>
-				<button ng-if="userProp" class="law_help"  data-toggle="modal" data-target="#myModal"  ng-click="before_release();">发布法律帮助</button>
+				<button ng-if="userProp&&userStatus=='2'" class="law_help"  data-toggle="modal" data-target="#myModal"  ng-click="before_release();">发布法律帮助</button>
 				<button ng-if="!userProp" class="law_help"  data-toggle="modal" data-dismiss="#myModal"  ng-click="before_release();">发布法律帮助</button>
+				<button ng-if="userProp&&userStatus!='2'" class="law_help"  data-toggle="modal" data-dismiss="#myModal"  ng-click="before_release();">发布法律帮助</button>
 			</div>
 			<div class="searchTable">
 				<div class="search_condition">

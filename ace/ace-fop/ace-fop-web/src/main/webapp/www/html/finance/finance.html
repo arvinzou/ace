@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="filter/Filter.js"></script>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/user.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <SCRIPT language=JavaScript src="js/finance.js"></SCRIPT>
     <script type="text/javascript" src="js/finance_company.js"></script>
@@ -32,10 +33,13 @@
                     <span class="title_lager">银企服务</span><span class="title_small">/Enterprise financing</span>
                 </ul>
                 <div class="tab_title_load">
-                    <button ng-if="userProp" data-toggle="modal" data-target="#myModal1" ng-click="before_release();">
+                    <button ng-if="userProp&&userStatus=='2'" data-toggle="modal" data-target="#myModal1" ng-click="before_release();">
                         发布服务
                     </button>
                     <button ng-if="!userProp" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">
+                        发布服务
+                    </button>
+                    <button ng-if="userProp&&userStatus!='2'" data-toggle="modal" data-dismiss="#myModal1" ng-click="before_release();">
                         发布服务
                     </button>
                 </div>
