@@ -241,5 +241,4 @@ public class FopPersonServiceImpl implements FopPersonService {
         }
         return new MessageResponse(ResultCode.SUCCESS, "数据格式正确");
     }
-
 }
