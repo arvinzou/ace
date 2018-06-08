@@ -438,7 +438,7 @@ body {
     height: 40px;
     line-height: 40px;
     display: block;
-    background-color: #4C6965;
+    background-color: rgba(76, 105, 101, 0.5);
     position: absolute;
     bottom: 0;
     color: #FFFFFF;
