@@ -121,7 +121,7 @@ app.controller(ngControllerName,function($scope){
                 skin: 'myskin'
             });
         }else{
-            $event.target.href()
+            $event.target.href = url;
         }
     }
 });
