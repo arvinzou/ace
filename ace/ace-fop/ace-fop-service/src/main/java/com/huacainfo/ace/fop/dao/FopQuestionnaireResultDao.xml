@@ -297,6 +297,9 @@
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=CHAR}
         </if>
+        <if test="condition.relationId!=null and condition.relationId!=&quot;&quot;">
+            and t.relationId = #{condition.relationId,jdbcType=CHAR}
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">
