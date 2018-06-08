@@ -11,8 +11,11 @@
 .index {
 	width: 70%;
 	margin: auto;
-    padding: 0 20px;
 	background-color: #FFFFFF;
+	margin-bottom: 62px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 30px;
 }
 .content{
 	width: 100%;
