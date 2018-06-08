@@ -374,6 +374,9 @@
             and t.projectName like
             concat('%',#{condition.projectName,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.relationId!=null and condition.relationId!=&quot;&quot;">
+            and t.relationId = #{condition.relationId,jdbcType=CHAR}
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">
