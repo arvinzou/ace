@@ -195,6 +195,12 @@ app.controller(ngControllerName,function($scope){
                     skin: 'myskin'
                 });
                 return;
+        }else if(userTypes == '3'){ //3代表银行，不能发表
+                layer.alert("对不起，您属于银行企业类型，不能发表！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
         }else{
             $event.target.dataset.target='#myModal1';
         }
