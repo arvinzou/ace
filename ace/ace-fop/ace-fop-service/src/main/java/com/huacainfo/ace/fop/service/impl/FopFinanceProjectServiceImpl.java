@@ -189,7 +189,7 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         }
         FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
         if (null == fc) {
-            if ("3" == fc.getCompanyType()) {
+            if ("3".equals(fc.getCompanyType())) {
                 return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
             }
             return new MessageResponse(1, "注册账号不是企业账号！");

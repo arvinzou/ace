@@ -43,7 +43,7 @@ function bandFun(){
 	    	console.log(result);
 	    	alert(result.errorMessage);
 	    	if(result.status == '0'&&result.value.status == '0'){
-	    		location.href='../me/index.jsp'
+	    		location.href='../me/index.jsp?t='+new Date();
 	    	}
 	 });
 }

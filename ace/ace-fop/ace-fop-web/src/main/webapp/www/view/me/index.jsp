@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>个人中心</title>
+    <title>企业中心</title>
     <jsp:include page="../../../dynamic/common/base.jsp"/>
     <link href="css/index.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/loader.js"></script>
@@ -25,7 +25,7 @@
                         <img id="headImg" src="img/header_img.png" />
                     </div>
                     <div class="user_name">
-                        小武先森
+                        请登录
                     </div>
                 </div>
             </div>

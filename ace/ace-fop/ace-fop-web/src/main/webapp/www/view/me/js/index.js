@@ -35,6 +35,8 @@ function cancelBand(){
 	     if(ret.status == '0'){
 	    	$(".badding").attr("hidden",false);
 	    	$(".cancle").attr("hidden",true);
+	    	$(".user_name").text("请登录");
+            $(".corpName").text("");
 	     }
 	  });
 }
