@@ -82,12 +82,6 @@
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-封面地址</span>
-            <br>
-            <span id="coverUrl">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
 公告类型</span>
             <br>
             <span id="noticeType">
@@ -97,12 +91,6 @@
 发布时间</span>
             <br>
             <span id="releaseDate">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-内容描述</span>
-            <br>
-            <span id="description">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
@@ -118,6 +106,15 @@
 </span>
         </div>
     </div>
+
+    <h5 class="header-title">封面地址</h5>
+    <div class="row" style="padding:10px" id="coverUrl">
+    </div>
+
+    <h5 class="header-title">内容描述</h5>
+    <div class="row" style="padding:10px" id="description">
+    </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">
@@ -177,6 +174,13 @@
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {
