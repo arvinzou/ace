@@ -361,6 +361,7 @@ input[type="checkbox"] {
     color: #1A56A8;
     font-size: 18px;
     font-weight: bolder;
+    padding-left: 10px;
 }
 
 .left_menu ul li {
