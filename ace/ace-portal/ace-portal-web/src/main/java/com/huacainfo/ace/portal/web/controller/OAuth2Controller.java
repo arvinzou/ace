@@ -62,7 +62,12 @@ public class OAuth2Controller extends PortalBaseController {
     @RequestMapping(value = "/unbind.do")
     @ResponseBody
     public MessageResponse unbind()throws Exception {
-       return this.oAuth2Service.unbind(this.getCurUserinfo().getUnionid());
+        MessageResponse rst= this.oAuth2Service.unbind(this.getCurUserinfo().getUnionid());
+        if(rst.getState()){
+            this.getRequest().getSession().invalidate();
+        }
+
+         return rst;
     }
 
     @RequestMapping(value = "/sendCmccByMobile.do")
