@@ -39,12 +39,18 @@ jQuery(function ($) {
                     closeAfterAdd: true,
                     recreateForm: true,
                     viewPagerButtons: false,
+                    beforeSubmit: function (postdata) {
+                        postdata.content = editor.getValue();
+                        return [true, "", ""];
+
+                    },
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
                         form.closest('.ui-jqdialog').find(
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        initSimditor($("textarea[name=content]"), null);
                         appendUploadBtn("fileUrl");
                     }
                 })
@@ -65,12 +71,20 @@ jQuery(function ($) {
                     closeAfterAdd: true,
                     recreateForm: true,
                     viewPagerButtons: true,
+                    beforeSubmit: function (postdata) {
+                        postdata.content = editor.getValue();
+                        return [true, "", ""];
+                    },
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
                         form.closest('.ui-jqdialog').find(
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
+                        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+                        var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+                        loadText(gd.id);
                         appendUploadBtn("fileUrl");
                     }
                 })
@@ -151,6 +165,42 @@ function loadView(id) {
                 }
                 $("#dialog-message-view").find('#' + key).html(value);
             });
+        },
+        error: function () {
+            alert("加载错误！");
+        }
+    });
+}
+
+function initSimditor(textarea, text) {
+    editor = new Simditor({
+        textarea: textarea,//jQuery对象，HTML元素或选择器字符串可以传递给这个选项
+        params: {},// 在textarea中插入隐藏的输入来存储参数（键值对）。
+        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
+        upload: {
+            url: portalPath + '/files/uploadImage.do', //文件上传的接口地址
+            params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+            fileKey: 'file', //服务器端获取文件数据的参数名
+            connectionCount: 3,
+            leaveConfirm: '正在上传文件'
+        }
+    });
+    if (text) {
+        editor.setValue(text);
+    }
+}
+
+function loadText(id) {
+    $.ajax({
+        type: "post",
+        url: cfg.view_load_data_url,
+        data: {
+            id: id
+        },
+        beforeSend: function (XMLHttpRequest) {
+        },
+        success: function (rst, textStatus) {
+            initSimditor($("textarea[name=content]"), rst.value.content);
         },
         error: function () {
             alert("加载错误！");
