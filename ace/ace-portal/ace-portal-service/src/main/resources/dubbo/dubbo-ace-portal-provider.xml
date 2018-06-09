@@ -132,4 +132,7 @@
                    ref="evaluatTplService"/>
     <dubbo:service interface="com.huacainfo.ace.portal.service.EvaluatTypeService"
                    ref="evaluatTypeService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.EvaluatDataService"
+                   ref="evaluatDataService"/>
 </beans>
