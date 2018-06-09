@@ -67,22 +67,22 @@ html{
 }
 
 .filter_title1 {
-	width: 12%;
+	width: 100px;
 	float: left;
 }
 
 #demo1 {
-	width: 88%;
+	width: 400px;
 	float: left;
 }
 
 .filter_title2 {
-	width: 12%;
+	width: 100px;
 	float: left;
 }
 
 #demo2 {
-	width: 88%;
+	width: 400px;
 	float: left;
 }
 
@@ -232,7 +232,7 @@ html{
 * { -ms-word-wrap: break-word; word-wrap: break-word; }
 html { -webkit-text-size-adjust: none; text-size-adjust: none; }
 html, body {width:100%; }
-.wrap{width:88%;height:62px;margin-top:13.5px;border:0;position:relative;float: right;}
+.wrap{width:400px;height:62px;margin-top:13.5px;border:0;position:relative;float: left;}
 .input{position:absolute;top:0;left:0;width:457px;margin:0;padding-left:5px;height:35px;line-height:30px;font-size:12px;border:1px solid #c9cacb;}
 /*s{position:absolute;top:1px;right:0;width:32px;height:32px;background:url("../../images/icons/arrow.png") no-repeat;}*/
 ._citys { width: 450px; display: inline-block; border: 2px solid #eee; padding: 5px; position: relative; }

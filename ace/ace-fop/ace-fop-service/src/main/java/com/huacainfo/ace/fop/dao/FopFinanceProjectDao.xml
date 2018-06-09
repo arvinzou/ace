@@ -362,5 +362,8 @@
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and f.status = #{condition.status,jdbcType=CHAR}
         </if>
+        <if test="condition.companyId!=null and condition.companyId!=&quot;&quot;">
+            and f.companyId = #{condition.companyId,jdbcType=CHAR}
+        </if>
     </sql>
 </mapper>

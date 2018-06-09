@@ -1,5 +1,6 @@
 var user = null;
 var userStatus = null;   //状态为0表示已删除，1代表非会员，2代表会员
+var userTypes = null;
 $(function(){
     try{
         user = userProp;
@@ -14,6 +15,7 @@ $(function(){
             success: function (result) {
                 if (result.status == 0) {
                     userStatus = result.data.data.status;
+                    userTypes = result.data.data.companyType;
                 } else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
