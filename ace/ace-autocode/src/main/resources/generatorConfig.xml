@@ -98,6 +98,15 @@
             <property name="useActualColumnNames" value="true"/>
         </table>
 
+        <table tableName="evaluat_data"
+               domainObjectName="EvaluatData"
+               mapperName="EvaluatDataDao"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
 
     </context>
 </generatorConfiguration> 

@@ -4,8 +4,8 @@ import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 
 public class AutoCode {
 	public static void main(String[] args) throws Exception{
-        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("portal", "评测评论", "陈晓克");
-        Class<?> c = com.huacainfo.ace.portal.model.EvaluatCmt.class;
+        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("portal", "测评结果", "陈晓克");
+        Class<?> c = com.huacainfo.ace.portal.model.EvaluatData.class;
         autoCodeUtils.init(c);
 		autoCodeUtils.createVO(c);
 		autoCodeUtils.createQVO(c);
