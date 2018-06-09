@@ -136,7 +136,7 @@
               width: 1024,
               height: 1024,
               crop: true,
-              quality: 60,
+              quality: 90,
               preserve_headers: false
           },
           filters: [{
