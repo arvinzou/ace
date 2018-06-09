@@ -4,8 +4,8 @@ import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 
 public class AutoCode {
 	public static void main(String[] args) throws Exception{
-        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("portal", "诉求", "陈晓克");
-        Class<?> c = com.huacainfo.ace.portal.model.AppealCase.class;
+        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("portal", "评测评论", "陈晓克");
+        Class<?> c = com.huacainfo.ace.portal.model.EvaluatCmt.class;
         autoCodeUtils.init(c);
 		autoCodeUtils.createVO(c);
 		autoCodeUtils.createQVO(c);
@@ -14,9 +14,9 @@ public class AutoCode {
 		autoCodeUtils.createServiceImpl(c);
 		autoCodeUtils.createAction(c);
 		autoCodeUtils.createJsp(c);
-		autoCodeUtils.createJsConfig(c);
-		autoCodeUtils.createJsView(c);
-		autoCodeUtils.createJsController(c);
-		autoCodeUtils.createModel(c);
+		//autoCodeUtils.createJsConfig(c);
+		//autoCodeUtils.createJsView(c);
+		//autoCodeUtils.createJsController(c);
+		//autoCodeUtils.createModel(c);
 	}
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.EvaluatCmtDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.EvaluatCmt">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="evaluatTplId" jdbcType="VARCHAR" property="evaluatTplId" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="scoreA" jdbcType="DECIMAL" property="scoreA" />
+    <result column="scoreB" jdbcType="DECIMAL" property="scoreB" />
+    <result column="scoreC" jdbcType="DECIMAL" property="scoreC" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.portal.model.EvaluatCmt">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, evaluatTplId, userId, scoreA, scoreB, scoreC, createDate
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from evaluat_cmt
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from evaluat_cmt
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatCmt">
+    insert into evaluat_cmt (id, evaluatTplId, userId, 
+      scoreA, scoreB, scoreC, 
+      createDate, content)
+    values (#{id,jdbcType=VARCHAR}, #{evaluatTplId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{scoreA,jdbcType=DECIMAL}, #{scoreB,jdbcType=DECIMAL}, #{scoreC,jdbcType=DECIMAL}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+
+</mapper>

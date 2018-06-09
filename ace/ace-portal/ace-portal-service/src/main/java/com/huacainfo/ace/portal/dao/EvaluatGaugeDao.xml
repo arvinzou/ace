@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.EvaluatGaugeDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.EvaluatGauge">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="evaluatTplId" jdbcType="VARCHAR" property="evaluatTplId" />
+    <result column="scoreStart" jdbcType="INTEGER" property="scoreStart" />
+    <result column="scoreEnd" jdbcType="INTEGER" property="scoreEnd" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.portal.model.EvaluatGauge">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, evaluatTplId, scoreStart, scoreEnd, createDate
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from evaluat_gauge
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from evaluat_gauge
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatGauge">
+    insert into evaluat_gauge (id, evaluatTplId, scoreStart, 
+      scoreEnd, createDate, content
+      )
+    values (#{id,jdbcType=VARCHAR}, #{evaluatTplId,jdbcType=VARCHAR}, #{scoreStart,jdbcType=INTEGER}, 
+      #{scoreEnd,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatGauge">
+    update evaluat_gauge
+    set evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR},
+      scoreStart = #{scoreStart,jdbcType=INTEGER},
+      scoreEnd = #{scoreEnd,jdbcType=INTEGER},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.EvaluatTplDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.EvaluatTpl">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="qrcoteUrl" jdbcType="VARCHAR" property="qrcoteUrl" />
+    <result column="originalCost" jdbcType="DECIMAL" property="originalCost" />
+    <result column="discountCost" jdbcType="DECIMAL" property="discountCost" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="introduce" jdbcType="LONGVARCHAR" property="introduce" />
+    <result column="notice" jdbcType="LONGVARCHAR" property="notice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, category, cover, qrcoteUrl, originalCost, discountCost, score, status, 
+    createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+  <sql id="Blob_Column_List">
+    introduce, notice
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from evaluat_tpl
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from evaluat_tpl
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatTpl">
+    insert into evaluat_tpl (id, name, category, 
+      cover, qrcoteUrl, originalCost, 
+      discountCost, score, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate, 
+      introduce, notice)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{cover,jdbcType=VARCHAR}, #{qrcoteUrl,jdbcType=VARCHAR}, #{originalCost,jdbcType=DECIMAL}, 
+      #{discountCost,jdbcType=DECIMAL}, #{score,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
+      #{introduce,jdbcType=LONGVARCHAR}, #{notice,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatTpl">
+    update evaluat_tpl
+    set name = #{name,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      qrcoteUrl = #{qrcoteUrl,jdbcType=VARCHAR},
+      originalCost = #{originalCost,jdbcType=DECIMAL},
+      discountCost = #{discountCost,jdbcType=DECIMAL},
+      score = #{score,jdbcType=INTEGER},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      introduce = #{introduce,jdbcType=LONGVARCHAR},
+      notice = #{notice,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

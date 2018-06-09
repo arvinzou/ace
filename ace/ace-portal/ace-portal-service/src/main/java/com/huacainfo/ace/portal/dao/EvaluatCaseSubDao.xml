@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.EvaluatCaseSubDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.EvaluatCaseSub">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="evaluatCaseId" jdbcType="VARCHAR" property="evaluatCaseId" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="cntImg" jdbcType="VARCHAR" property="cntImg" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, evaluatCaseId, key, name, cntImg, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from evaluat_case_sub
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from evaluat_case_sub
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatCaseSub">
+    insert into evaluat_case_sub (id, evaluatCaseId, key, 
+      name, cntImg, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{evaluatCaseId,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{cntImg,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatCaseSub">
+    update evaluat_case_sub
+    set evaluatCaseId = #{evaluatCaseId,jdbcType=VARCHAR},
+      key = #{key,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      cntImg = #{cntImg,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

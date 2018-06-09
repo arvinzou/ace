@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.EvaluatCaseDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.EvaluatCase">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="evaluatTplId" jdbcType="VARCHAR" property="evaluatTplId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="cntImg" jdbcType="VARCHAR" property="cntImg" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="solution" jdbcType="VARCHAR" property="solution" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, evaluatTplId, title, type, cntImg, score, solution, sort, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from evaluat_case
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from evaluat_case
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatCase">
+    insert into evaluat_case (id, evaluatTplId, title, 
+      type, cntImg, score, 
+      solution, sort, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{evaluatTplId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{cntImg,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{solution,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatCase">
+    update evaluat_case
+    set evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      cntImg = #{cntImg,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      solution = #{solution,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,6 +1,7 @@
 package com.huacainfo.ace.portal.dao;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.portal.model.$!{bean.name};
 import com.huacainfo.ace.portal.vo.$!{bean.name}QVo;
@@ -24,5 +25,9 @@ public interface $!{bean.name}Dao {
 	int findCount(@Param("condition") $!{bean.name}QVo condition);
 
 	int isExit($!{bean.name} record);
+
+	List<Map<String,Object>> getList(Map<String,Object> params);
+
+    Map<String,Object> getById(String id);
 
 }

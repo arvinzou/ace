@@ -103,5 +103,11 @@ public class Excel2Sql {
         sql.append(" ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='"+remark+"';");
         sql.append("\n\r");
         System.out.println(sql.toString());
+        java.io.File fileOut=new java.io.File("/Users/chenxiaoke/Documents/sql/"+GUIDUtil.getGUID()+".sql");
+        java.io.FileOutputStream out=new java.io.FileOutputStream(fileOut);
+        out.write(sql.toString().getBytes());
+        out.flush();
+        out.close();
+
     }
 }

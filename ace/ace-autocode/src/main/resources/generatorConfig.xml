@@ -44,16 +44,59 @@
 
 
 
-        <table tableName="appeal_case"
-               domainObjectName="AppealCase"
-               mapperName="AppealCaseDao"
+        <table tableName="evaluat_type"
+               domainObjectName="EvaluatType"
+               mapperName="EvaluatTypeDao"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="true"/>
         </table>
 
+        <table tableName="evaluat_tpl"
+               domainObjectName="EvaluatTpl"
+               mapperName="EvaluatTplDao"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
 
+        <table tableName="evaluat_case"
+               domainObjectName="EvaluatCase"
+               mapperName="EvaluatCaseDao"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="evaluat_case_sub"
+               domainObjectName="EvaluatCaseSub"
+               mapperName="EvaluatCaseSubDao"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="evaluat_gauge"
+               domainObjectName="EvaluatGauge"
+               mapperName="EvaluatGaugeDao"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="evaluat_cmt"
+               domainObjectName="EvaluatCmt"
+               mapperName="EvaluatCmtDao"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
 
 
     </context>

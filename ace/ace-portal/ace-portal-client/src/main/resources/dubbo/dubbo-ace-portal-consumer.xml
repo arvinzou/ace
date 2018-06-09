@@ -116,4 +116,19 @@
 
     <dubbo:reference interface="com.huacainfo.ace.portal.service.WechatService"
                      id="wechatService"/>
+
+
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.EvaluatCaseService"
+                     id="evaluatCaseService"/>
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.EvaluatCaseSubService"
+                     id="evaluatCaseSubService"/>
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.EvaluatCmtService"
+                     id="evaluatCmtService"/>
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.EvaluatGaugeService"
+                     id="evaluatGaugeService"/>
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.EvaluatTplService"
+                     id="evaluatTplService"/>
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.EvaluatTypeService"
+                     id="evaluatTypeService"/>
+
 </beans>
