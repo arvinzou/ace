@@ -901,6 +901,7 @@ public class WWWController extends FopBaseController {
 
         /*更新用户信息*/
         Users user = new Users();
+        user.setEmail(person.getEmail());
         user.setUserId(this.getCurUserProp().getUserId());
         user.setName(company.getFullName());
         MessageResponse rr = usersService.updateUsersById(user, this.getCurUserProp());
