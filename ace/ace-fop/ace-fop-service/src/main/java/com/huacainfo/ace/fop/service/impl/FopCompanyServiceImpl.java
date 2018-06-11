@@ -160,7 +160,6 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (temp > 0) {
             return new MessageResponse(ResultCode.FAIL, "企业名称重复！");
         }
-
         MessageResponse mm = validate(o);
         if (ResultCode.FAIL == mm.getStatus()) {
             return mm;
@@ -183,17 +182,21 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
         o.setDepartmentId(department.getDepartmentId());
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        String companyType = o.getCompanyType();
+        String status = "3".equals(companyType) ? "2" : "1";
+        o.setStatus(status);
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopCompanyDao.insertSelective(o);
         this.dataBaseLogService.log("添加企业管理", "企业管理", "", o.getId(),
                 o.getId(), userProp);
         //自动提交会员申请流程
-        MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
-                FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
-        if (ResultCode.FAIL == rs3.getStatus()) {
-            return rs3;
+        if (!"3".equals(companyType)) {//银行添加无需提交审核
+            MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
+                    FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
+            if (ResultCode.FAIL == rs3.getStatus()) {
+                return rs3;
+            }
         }
         //自动提交缴费记录
 //        MessageResponse rs4 = submitPayRecord(o, userProp);
@@ -298,8 +301,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
      * @version: 2018-05-02
      */
     @Override
-    public MessageResponse updateFopCompany(FopCompanyVo o, UserProp userProp)
-            throws Exception {
+    public MessageResponse updateFopCompany(FopCompanyVo o, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }

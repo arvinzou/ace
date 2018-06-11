@@ -610,7 +610,7 @@
     </sql>
 
     <sql id="whereCondition">
-        where c.status <![CDATA[ <> ]]> 0
+        where c.status != 0
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and c.id = #{condition.id,jdbcType=VARCHAR}
         </if>

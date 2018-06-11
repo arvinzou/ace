@@ -56,4 +56,6 @@ public interface SysAccountService {
 
     ResultResponse initSysUser(String deptName, String account, String logTag,
                                UserProp userProp) throws Exception;
+
+    String getAccount(String relationType, String relationId);
 }

@@ -7,7 +7,6 @@ public interface FlowType {
     /**
      * 0-企业会员申请 1-团体会员申请 2-会员缴费 3-会员退会
      */
-
     String MEMBER_JOIN_COMPANY = "0";
     String MEMBER_JOIN_ASSOCIATION = "1";
     String MEMBER_PAY = "2";
