@@ -23,12 +23,16 @@ public class AnalysisController extends BaseController implements Serializable {
 
     @RequestMapping(value = "/query.do")
     @ResponseBody
-    public ListResult<Map<String, Object>> query(
-            String reportId)
-            throws Exception {
+    public ListResult<Map<String, Object>> query(String reportId) throws Exception {
         Map<String, Object> condition = null;//this.getParams();
         return analysisService.query(condition, reportId, 0, 0);
     }
 
+
+    @RequestMapping(value = "/portalCount")
+    @ResponseBody
+    public Map<String, Object> portalCount() throws Exception {
+        return analysisService.portalCount();
+    }
 
 }

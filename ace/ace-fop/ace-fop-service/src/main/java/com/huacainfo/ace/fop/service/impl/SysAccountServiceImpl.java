@@ -240,6 +240,7 @@ public class SysAccountServiceImpl implements SysAccountService {
         }
     }
 
+
     private ResultResponse dispatchRoleRight(String userId, UserProp userProp, String[] roleTypes) throws Exception {
         List<Map<String, Object>> roleList = sysAccountDao.selectRoleList(userProp.getActiveSyId(), roleTypes);
         if (CollectionUtils.isEmpty(roleList)) {

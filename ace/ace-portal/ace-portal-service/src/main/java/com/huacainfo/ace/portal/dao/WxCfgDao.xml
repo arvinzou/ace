@@ -16,11 +16,13 @@
         <result column="certUrl" jdbcType="VARCHAR" property="certUrl"/>
         <result column="sysId" jdbcType="VARCHAR" property="sysId"/>
     </resultMap>
+    <resultMap id="VoResultMap" type="com.huacainfo.ace.portal.vo.WxCfgVo" extends="BaseResultMap">
+    </resultMap>
     <sql id="Base_Column_List">
         appId, originalId, name, appScret, accessToken, ticket, expiresIn, deptId, serverToken,
         mchId, apiKey, certUrl, sysId
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
         from wx_cfg
@@ -105,4 +107,6 @@
          #{params.createDate,jdbcType=VARCHAR}, '1', 'system', '0000-0000',
          #{params.lastModifyDate,jdbcType=VARCHAR}, 1)
     </insert>
+
+
 </mapper>
