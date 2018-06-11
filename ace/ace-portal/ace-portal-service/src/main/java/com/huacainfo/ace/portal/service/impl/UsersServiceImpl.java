@@ -566,4 +566,9 @@ public class UsersServiceImpl implements UsersService {
 
         return new ResultResponse(0, "添加员工户完成！", users);
     }
+
+    @Override
+    public UsersVo selectByAccount(String account) {
+        return usersDao.selectByAccount(account);
+    }
 }

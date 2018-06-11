@@ -444,6 +444,40 @@
 
     </select>
 
+    <select id="selectByAccount" resultMap="usersVo" parameterType="java.lang.String">
+        select t.user_id,
+        t.account,
+        t.sex,
+        t.openId,
+        t.appOpenId,
+        t.id_card,
+        t.name,
+        t.department_id,
+        s.department_name,
+        t.area_code,
+        s2.name area_name,
+        t.birthday,
+        t.stauts,
+        t.last_login_time,
+        t.mobile,
+        t.email,
+        t.telphone,
+        t.qq,
+        t.fax,
+        t.seat,
+        t.user_level,
+        t.create_time,
+        s3.nickname,
+        s3.headimgurl,
+        s4.nickName,
+        s4.avatarUrl
+        from users t left join department s
+        on t.department_id=s.department_id
+        left join province s2 on t.area_code=s2.code
+        left join userinfo s3 on t.openId=s3.unionid
+        left join wx_user s4 on t.appOpenId=s4.unionId
+        where t.account = #{account,jdbcType=VARCHAR}
 
+    </select>
 
 </mapper>

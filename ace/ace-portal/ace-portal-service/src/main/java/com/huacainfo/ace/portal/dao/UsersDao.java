@@ -1,14 +1,12 @@
 package com.huacainfo.ace.portal.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import com.huacainfo.ace.common.model.UserProp;
-import org.apache.ibatis.annotations.Param;
-
 import com.huacainfo.ace.portal.model.Role;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.vo.UsersVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface UsersDao {
 	/**
@@ -114,5 +112,5 @@ public interface UsersDao {
 	List<Map<String,Object>> selectAllWxUserList(Map<String,Object> p);
 
 
-
+    UsersVo selectByAccount(String account);
 }

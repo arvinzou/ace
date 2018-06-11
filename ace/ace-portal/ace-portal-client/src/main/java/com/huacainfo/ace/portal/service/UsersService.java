@@ -329,4 +329,5 @@ public interface UsersService {
      */
     ResultResponse insertUsersRecord(Users users, UserProp userProp, String logTag) throws Exception;
 
+    UsersVo selectByAccount(String account);
 }
