@@ -224,11 +224,11 @@
         t.id, t.fromId, t.flowType, t.personId, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
         t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
-    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
-        from fop_flow_record
-        where id = #{id,jdbcType=VARCHAR}
+        from fop_flow_record t
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" resultMap="VoResultMap">
@@ -249,14 +249,12 @@
     <sql id="whereCondition">
         from fop_flow_record t
         where t.status <![CDATA[ <> ]]> 0
+        and t.flowType in ('0','1')
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=CHAR}
-        </if>
-        <if test="condition.flowType!=null and condition.flowType!=&quot;&quot;">
-            and t.flowType = #{condition.flowType,jdbcType=CHAR}
         </if>
     </sql>
 

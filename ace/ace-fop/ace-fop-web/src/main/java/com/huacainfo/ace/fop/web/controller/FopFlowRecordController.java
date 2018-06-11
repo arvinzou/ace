@@ -106,8 +106,7 @@ public class FopFlowRecordController extends FopBaseController {
      */
     @RequestMapping(value = "/selectFopFlowRecordByPrimaryKey")
     @ResponseBody
-    public SingleResult<FopFlowRecordVo> selectFopFlowRecordByPrimaryKey(String id)
-            throws Exception {
+    public SingleResult<FopFlowRecordVo> selectFopFlowRecordByPrimaryKey(String id) throws Exception {
         return this.fopFlowRecordService.selectFopFlowRecordByPrimaryKey(id);
     }
 

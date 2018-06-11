@@ -21,6 +21,8 @@ jQuery(function ($) {
             rows: "limit"
         },
         datatype: "json",
+        postData: {status: 2},
+        formData: {status: 2},
         url: cfg.grid_load_data_url,
         jsonReader: {
             root: "rows",

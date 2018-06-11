@@ -108,14 +108,26 @@ jQuery(function ($) {
         });
 });
 
-function preview(id, title) {
-    var dialog = $("#dialog-message-view").removeClass('hide').dialog({
+function preview(id, title, flowType, fromId) {
+    var dialogId = "#fc-dialog-message-view";
+    var postUrl = cfg.view_load_data_url;
+    if (flowType == '0') {
+        id = fromId;
+        dialogId = "#c-dialog-message-view";
+        postUrl = contextPath + '/fopCompany/selectFopCompanyByPrimaryKey';
+    } else if (flowType == '1') {
+        id = fromId;
+        dialogId = "#a-dialog-message-view";
+        postUrl = contextPath + '/fopAssociation/selectFopAssociationByPrimaryKey';
+    }
+
+    //show dialog
+    var dialog = $(dialogId).removeClass('hide').dialog({
         modal: false,
         width: 800,
         title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
         title_html: true,
         buttons: [
-
             {
                 html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
                 "class": "btn btn-info btn-xs",
@@ -134,12 +146,13 @@ function preview(id, title) {
     });
     $(dialog).parent().css("top", "1px");
     $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
-    loadView(id);
+    //render data
+    loadView(id, postUrl, dialogId);
 }
-function loadView(id) {
+function loadView(id, postUrl, dialogId) {
     $.ajax({
         type: "post",
-        url: cfg.view_load_data_url,
+        url: postUrl,
         data: {
             id: id
         },
@@ -147,16 +160,9 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                if (key == 'category') {
-                    value = rsd(value, '83');
-                }
-                if (key == 'status') {
-                    value == "1" ? "正常" : "关闭";
-                }
-                if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
-                    value = Common.DateFormatter(value);
-                }
-                $("#dialog-message-view").find('#' + key).html(value);
+
+                // $(dialogId).find('#' + key).html(value);
+                $(dialogId).find('span[name=' + key + ']').html(value);
             });
         },
         error: function () {

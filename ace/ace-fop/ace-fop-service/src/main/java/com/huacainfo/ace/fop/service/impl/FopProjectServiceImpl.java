@@ -11,8 +11,10 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopProjectDao;
@@ -23,8 +25,10 @@ import com.huacainfo.ace.fop.model.FopProject;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopProjectService;
 import com.huacainfo.ace.fop.service.FopQuestionService;
+import com.huacainfo.ace.fop.service.SysAccountService;
 import com.huacainfo.ace.fop.vo.FopProjectQVo;
 import com.huacainfo.ace.fop.vo.FopProjectVo;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
@@ -61,6 +65,8 @@ public class FopProjectServiceImpl implements FopProjectService {
     private FopAssociationDao fopAssociationDao;
     @Autowired
     private FopQuestionService fopQuestionService;
+    @Autowired
+    private SysAccountService sysAccountService;
 
     /**
      * @throws
@@ -165,18 +171,21 @@ public class FopProjectServiceImpl implements FopProjectService {
         }
         FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
         FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+        String nickName = "unknown";
         if (null == fc) {
             if (null == fa) {
                 return new MessageResponse(1, "账户没有绑定企业！");
             }
             o.setRelationId(fa.getId());
             o.setRelationType(FopConstant.ASSOCIATION);
+            nickName = fa.getFullName();
         } else {
             if ("3".equals(fc.getCompanyType())) {
                 return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
             }
             o.setRelationId(fc.getId());
             o.setRelationType(FopConstant.COMPANY);
+            nickName = fc.getFullName();
         }
         o.setReleaseDate(DateUtil.getNowDate());
         o.setId(GUIDUtil.getGUID());
@@ -186,7 +195,41 @@ public class FopProjectServiceImpl implements FopProjectService {
         o.setCreateUserId(userProp.getUserId());
         this.fopProjectDao.insertSelective(o);
         this.dataBaseLogService.log("添加合作项目", "合作项目", "", o.getId(), o.getId(), userProp);
+
+        //添加成功，通知管理员
+        sendNoticeToAdministrator(nickName, o, userProp);
+
         return new MessageResponse(0, "添加合作项目完成！");
+    }
+
+    /**
+     * 新增项目信息，推送给工商联管理员
+     *
+     * @param projectInfo
+     * @param userProp
+     */
+    private void sendNoticeToAdministrator(String nickName, FopProject projectInfo, UserProp userProp) {
+        try {
+            Users users = usersService.selectByAccount("fop");
+
+            String openid = users.getOpenId();
+            String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
+            Map<String, Object> params = new HashMap<>();
+            //kafka所需内容
+            params.put("service", "messageTemplateService");
+            params.put("sysId", "fop");
+            params.put("tmplCode", tmplCode);
+            //发送消息内容
+            params.put("openid", openid);
+            params.put("url", "www.baidu.com");
+//        params.put("first", "哈哈哈哈哈");
+            //data
+            params.put("name", nickName);
+            params.put("title", projectInfo.getProjectName());
+            params.put("content", "项目信息发布");
+        } catch (Exception e) {
+            logger.error("项目信息 -[{}]- 新增 - 消息推送失败", projectInfo.getId());
+        }
     }
 
     /**
@@ -310,7 +353,48 @@ public class FopProjectServiceImpl implements FopProjectService {
             throw new CustomException(rs1.getErrorMessage());
         }
 
+        String nickName = "";
+        //
+        sendNoticeToUser(nickName, fopProject, record, userProp);
+
         return new MessageResponse(ResultCode.SUCCESS, "发布成功");
+    }
+
+    /**
+     * 推送通知给用户
+     *
+     * @param nickName
+     * @param fopProject
+     * @param record
+     * @param userProp
+     */
+    private void sendNoticeToUser(String nickName, FopProject fopProject, FopFlowRecord record, UserProp userProp) {
+        try {
+            String account = sysAccountService.getAccount(fopProject.getRelationType(), fopProject.getRelationId());
+            Users users = usersService.selectByAccount(account);
+
+            String openid = users.getOpenId();
+            String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
+            Map<String, Object> params = new HashMap<>();
+            //kafka所需内容
+            params.put("service", "messageTemplateService");
+            params.put("sysId", "fop");
+            params.put("tmplCode", tmplCode);
+            //发送消息内容
+            params.put("openid", openid);
+            params.put("url", "www.baidu.com");
+//        params.put("first", "哈哈哈哈哈");
+            //data
+            params.put("name", nickName);
+            params.put("title", fopProject.getProjectName());
+            String rs = AuditResult.PASS.equals(record.getAuditResult()) ? "已通过" : "被驳回";
+            params.put("content", "项目信息审核\n" +
+                    "审核结果：" + rs + "\n" +
+                    "审核意见：" + (CommonUtils.isEmpty(record.getAuditOpinion()) ? "" : record.getAuditOpinion()));
+
+        } catch (Exception e) {
+            logger.error("项目信息 -[{}]- 审核 - 消息推送失败", fopProject.getId());
+        }
     }
 
     /**

@@ -34,6 +34,9 @@ public class FopAssociation {
 
     private String remark;
 
+    /**
+     * 0-已删除 1 - 非会员 2 - 会员
+     */
     private String status;
 
     private String createUserId;
