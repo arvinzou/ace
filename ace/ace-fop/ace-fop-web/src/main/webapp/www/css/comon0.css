@@ -368,7 +368,7 @@ input[type="checkbox"] {
     display: block;
     list-style: none;
     overflow: visible;
-    border-bottom: 1px solid #E1E5ED;
+    /*border-bottom: 1px solid #E1E5ED;*/
     border-top: 1px solid #E1E5ED;
     padding-left: 10px;
 }
@@ -2481,5 +2481,4 @@ textarea {
     font-weight: bolder;
     color: #1A56A8;
 }
-
 

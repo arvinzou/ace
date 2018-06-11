@@ -892,6 +892,7 @@ public class WWWController extends FopBaseController {
         List<FopCompanyContribution> contributes = JSON.parseObject(jsonObj.getString("contribute"), type1);
 
         /*更新企业*/
+        company.setEmail(person.getEmail());
         MessageResponse rs1 = fopCompanyService.updateCompany(company, this.getCurUserProp());
         if (ResultCode.FAIL == rs1.getStatus()) {
             throw new CustomException(rs1.getErrorMessage());
@@ -900,6 +901,7 @@ public class WWWController extends FopBaseController {
 
         /*更新用户信息*/
         Users user = new Users();
+        user.setEmail(person.getEmail());
         user.setUserId(this.getCurUserProp().getUserId());
         user.setName(company.getFullName());
         MessageResponse rr = usersService.updateUsersById(user, this.getCurUserProp());
