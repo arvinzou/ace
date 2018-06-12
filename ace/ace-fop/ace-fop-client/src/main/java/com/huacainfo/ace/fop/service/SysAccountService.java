@@ -58,4 +58,5 @@ public interface SysAccountService {
                                UserProp userProp) throws Exception;
 
     String getAccount(String relationType, String relationId);
+
 }

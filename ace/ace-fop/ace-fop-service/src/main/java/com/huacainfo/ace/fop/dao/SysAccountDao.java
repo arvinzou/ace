@@ -33,4 +33,6 @@ public interface SysAccountDao {
 
     List<Map<String, Object>> selectRoleList(@Param("activeSyId") String activeSyId,
                                              @Param("roleTypes") String[] roleTypes);
+
+
 }

@@ -2,7 +2,9 @@ package com.huacainfo.ace.common.plugins.wechat.api;
 
 
 import com.huacainfo.ace.common.plugins.wechat.constant.ApiURL;
+import com.huacainfo.ace.common.plugins.wechat.entity.UserList;
 import com.huacainfo.ace.common.plugins.wechat.entity.pojo.base.AccessToken;
+import com.huacainfo.ace.common.plugins.wechat.entity.pojo.base.Menu;
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
@@ -78,4 +80,33 @@ public class WeChatApi {
         return accessToken;
     }
 
+
+    /**
+     * 创建菜单
+     *
+     * @param accessToken
+     * @param menu
+     * @return
+     */
+    public static String createMenu(String accessToken, Menu menu) {
+        String url = ApiURL.MENU_CREATE_API_URL.replace("#ACCESS_TOKEN#", accessToken);
+        return HttpKit.post(url, JsonUtil.toJson(menu));
+
+    }
+
+    /**
+     * 获取公众号用户列表
+     *
+     * @param accessToken 调用接口凭证
+     * @param nextOpenid  第一个拉取的OPENID，不填默认从头开始拉取
+     * @return
+     */
+    public static UserList getUserList(String accessToken, String nextOpenid) {
+        String url = ApiURL.USER_LIST_API_URL
+                .replace("#ACCESS_TOKEN#", accessToken)
+                .replace("#NEXT_OPENID#", nextOpenid);
+        String r = HttpKit.get(url);
+
+        return JsonUtil.toObject(r, UserList.class);
+    }
 }

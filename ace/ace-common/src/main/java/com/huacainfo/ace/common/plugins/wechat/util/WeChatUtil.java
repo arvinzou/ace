@@ -26,7 +26,15 @@ public class WeChatUtil {
         hcwy.setSysId("hcwy");
         hcwy.setWxSecretKey("680XkW466zc5v56agjHBgGmANVKRb2zrizeWscX60p2");
 
+        ConfigWechat fop = new ConfigWechat();
+        fop.setWxOriginalId("gh_959a710a5fc2");
+        fop.setWxAppId("wxfdb1e4819dee7b62");
+        fop.setWxToken("fop20180608_fwh");//令牌(Token)
+        fop.setSysId("fop");
+        fop.setWxSecretKey("dc51907c900e5bcb9527daec79d05e61");
+        //
         configs.put(hcwy.getWxOriginalId(), hcwy);
+        configs.put(fop.getWxOriginalId(), fop);
     }
 
     public static ConfigWechat getConfigByOrgId(String orgId) {
