@@ -97,6 +97,7 @@ public class ArticleCategoryController extends PortalBaseController {
 		return this.articleCategoryService
 				.updateArticleCategory(obj, this.getCurUserProp());
 	}
+
     /**
 	 *
 	    * @Title:selectArticleCategoryByPrimaryKey

@@ -74,7 +74,4 @@ public class WWWPageController extends PortalBaseController {
 	public  Map<String, java.lang.Object> getTplPageById(String id) throws Exception{
 		return tplPageService.getTplPageById(id);
 	}
-
-
-
 }

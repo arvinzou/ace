@@ -1,0 +1,115 @@
+/**
+搜索框样式
+ */
+.search_box{
+    width: 70%;
+    margin: auto;
+}
+.criteria{
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.criteria span{
+    width: 200px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    display: inline-block;
+}
+.search_opt{
+    width: 100%;
+}
+.operation{
+    width: 465px;
+    height: 42px;
+    line-height: 40px;
+    margin: 60px auto;
+    border: 1px solid #1A56A8;
+}
+.search_opt input{
+    width: 400px;
+    height: 40px;
+    line-height: 40px;
+    border: none;
+}
+.search_opt button{
+    width: 60px;
+    height: 40px;
+    line-height: 40px;
+    color: #FFFFFF;
+    background-color: #1A56A8;
+    border: none;
+}
+/**
+搜索列表样式
+ */
+#nav li{
+    list-style:none;
+    width:194px;
+    margin-top:0;
+    padding:4px 6px;
+}
+#nav li ul > li{
+    width: 188px
+}
+.aa {
+    cursor:hand;
+    border-top:3px solid #AAC7E9;
+    color:#1A56A8;
+    font-size:18px;
+    font-weight: bolder;
+}
+.aa ul > li{
+    font-size: 14px;
+    color: #31364B;
+}
+.bb {
+    border:1px solid #AAC7E9;
+    background:#FFFFDD;
+    cursor:hand;
+    border-top:3px solid #ff9900;
+}
+.cc {
+    border-top:4px solid #ff66ff;
+    background:#fcf;
+    cursor:hand;
+}
+.list2{
+    font-size:13px;
+    line-height:20px;
+    padding:3px;
+    text-align:left;
+    background:#FFFFFF;
+}
+.list2  li{
+    color:#555;
+    font-size:13px;
+    line-height:24px;
+    padding:0 0 0 10px;
+}
+.lfloat {
+    float:left;
+}
+.rfloat {
+    float:right;
+}
+.ctt{
+    padding:0;clear:both;
+    /*border-top:1px solid #AAC7E9;border-right:1px solid #AAC7E9;border-bottom:1px solid #AAC7E9;*/
+    text-align:left;
+    min-height:800px;
+    max-height: 1200px
+}
+.dis{
+    display:block;
+}
+.undis{
+    display:none;
+}
+li{
+    list-style: none;
+}
+form, ul {
+    padding:0; margin:0;
+}

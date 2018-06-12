@@ -96,6 +96,12 @@ public class ArticleController extends PortalBaseController {
 		return this.articleService
 				.updateArticle(obj, this.getCurUserProp());
 	}
+
+	@RequestMapping(value = "deleteArticleById.do")
+	@ResponseBody
+	public MessageResponse deleteArticle(String id)throws Exception{
+		return this.articleService.deleteArticleByArticleId(id, this.getCurUserProp());
+	}
     /**
 	 *
 	    * @Title:selectArticleByPrimaryKey

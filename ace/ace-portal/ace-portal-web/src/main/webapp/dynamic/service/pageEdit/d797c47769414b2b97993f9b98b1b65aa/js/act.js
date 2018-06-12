@@ -189,6 +189,43 @@ function initTabs() {
     });
 }
 
+function delActile(){
+    var url = contextPath + '/articleCategory/deleteArticleCategoryByArticleCategoryId.do';
+    $.ajax({
+        url: url,
+        type: 'POST',
+        timeout: 30000,
+        dataType: 'json',
+        data: {
+            jsons: JSON.stringify({
+                id: id,
+                name: name,
+                tplPageId: pageId
+            })
+        },
+        beforeSend: function () {
+            try {
+                loading = startLoading();
+            } catch (e) {};
+            if (loading) {
+                loading.settext("请求中，请稍后......");
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (loading) {
+                loading.remove();
+            }
+            if (data.status == 0) {
+                $('#model1').modal('hide');
+                getCategoryItemsList(pageId);
+                ifr.window.location.reload()
+            } else {
+                alert(data.errorMessage);
+            }
+        }
+    });
+}
 function initEvents() {
     $('#model1 .btn-primary').on('click', function () {
         var name = $("#model1").find('.modal-body input[name=name]').val();
@@ -417,3 +454,79 @@ function getPageList(pageId) {
     });
 
 }
+function delActile(){
+    var url = contextPath + '/article/deleteArticleById.do';
+    var id =  $("#bar").find(".actives").data("id");
+    $.ajax({
+        url: url,
+        type: 'POST',
+        timeout: 30000,
+        dataType: 'json',
+        data: {
+            id: id
+        },
+        beforeSend: function () {
+            try {
+                loading = startLoading();
+            } catch (e) {};
+            if (loading) {
+                loading.settext("请求中，请稍后......");
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (loading) {
+                loading.remove();
+            }
+            if (data.status == 0) {
+                $('#model1').modal('hide');
+                getCategoryItemsList(pageId);
+                ifr.window.location.reload()
+            } else {
+                alert(data.errorMessage);
+            }
+        }
+    });
+}
+
+function delActile(){
+    var url = contextPath + '/article/deleteArticleById.do';
+    var category = $("#bar").find(".actives").data("id");
+    var o = $("#" + category).find(".active-bg");
+    var id = $(o).data("id");
+    if(id == "" || id == undefined){
+        alert("请选择要删除的记录！");
+        return;
+    }
+    $.ajax({
+        url: url,
+        type: 'POST',
+        timeout: 30000,
+        dataType: 'json',
+        data: {
+            id: id
+        },
+        beforeSend: function () {
+            try {
+                loading = startLoading();
+            } catch (e) {};
+            if (loading) {
+                loading.settext("请求中，请稍后......");
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (loading) {
+                loading.remove();
+            }
+            if (data.status == 0) {
+                $('#model1').modal('hide');
+                getCategoryItemsList(pageId);
+                ifr.window.location.reload()
+            } else {
+                alert(data.errorMessage);
+            }
+        }
+    });
+}
+
