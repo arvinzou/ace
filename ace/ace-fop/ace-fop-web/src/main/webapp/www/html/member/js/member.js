@@ -58,10 +58,17 @@ app.controller(ngControllerName,function($scope){
                     $scope.$apply();
                 }
             }else {
-                layer.alert(result.errorMessage, {
-                    icon: 5,
-                    skin: 'myskin'
-                });
+                if(result.errorMessage != '' && result.errorMessage != undefined){
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }else{
+                    layer.alert(result.info, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
             }
         },
         error:function(){

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>信用常德</title>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <style>
+        .search_box{
+            width: 70%;
+            margin: auto;
+        }
+        .criteria{
+            width: 100%;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .criteria span{
+            width: 200px;
+            height: 35px;
+            text-align: center;
+            line-height: 35px;
+            display: inline-block;
+        }
+        .search_opt{
+            width: 100%;
+        }
+        .operation{
+            width: 465px;
+            height: 42px;
+            line-height: 40px;
+            margin: 60px auto;
+            border: 1px solid #1A56A8;
+        }
+        .search_opt input{
+            width: 400px;
+            height: 40px;
+            line-height: 40px;
+            border: none;
+        }
+        .search_opt button{
+            width: 60px;
+            height: 40px;
+            line-height: 40px;
+            color: #FFFFFF;
+            background-color: #1A56A8;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <div class="search_box">
+        <div class="criteria">
+            <span><input type="radio" name="radio" />主体身份代码</span>
+            <span><input type="radio" name="radio"/>统一社会信用代码</span>
+            <span><input type="radio" name="radio"/>证件号码</span>
+            <span><input type="radio" name="radio"/>抵押人证件号码</span>
+            <span><input type="radio" name="radio"/>社会信用代码</span>
+            <span><input type="radio" name="radio"/>法人代表</span>
+            <span><input type="radio" name="radio"/>律师事务所名称</span>
+            <span><input type="radio" name="radio"/>单位名称</span>
+            <span><input type="radio" name="radio"/>组织机构代码</span>
+            <span><input type="radio" name="radio"/>主要产品名称</span>
+            <span><input type="radio" name="radio"/>专利名称</span>
+        </div>
+        <div class="search_opt">
+            <div class="operation">
+                <input type="text" name="keyword"/>
+                <button id="searchBtn" onclick="window.location.href='searchRet.html'">查询</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
