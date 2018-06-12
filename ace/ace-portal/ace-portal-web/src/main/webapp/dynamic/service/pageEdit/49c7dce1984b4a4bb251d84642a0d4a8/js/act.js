@@ -449,7 +449,7 @@ function delActile(){
             }
             if (data.status == 0) {
                 $('#model1').modal('hide');
-                getCategoryItemsList(pageId);
+                getPageList(pageId);
                 ifr.window.location.reload()
             } else {
                 alert(data.errorMessage);
