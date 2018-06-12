@@ -17,10 +17,17 @@ $(function(){
                     userStatus = result.data.data.status;
                     userTypes = result.data.data.companyType;
                 } else {
-                    layer.alert(result.errorMessage, {
-                        icon: 5,
-                        skin: 'myskin'
-                    });
+                    if(result.errorMessage != '' && result.errorMessage != undefined){
+                        layer.alert(result.errorMessage, {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
+                    }else{
+                        layer.alert(result.info, {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
+                    }
                 }
             },
             error: function () {

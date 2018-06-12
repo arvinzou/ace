@@ -348,6 +348,9 @@
         <if test="condition.requestId!=null and condition.requestId!=&quot;&quot;">
             and t.requestId = #{condition.requestId,jdbcType=CHAR}
         </if>
+        <if test="condition.parentId!=null and condition.parentId!=&quot;&quot;">
+            and t.parentId = #{condition.parentId,jdbcType=CHAR}
+        </if>
     </sql>
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
