@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <title>银企服务详情</title>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/finance_info.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/user.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="js/finance_info.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+</head>
+
+<body>
+<div id="header"></div>
+<div class="current_site" ng-cloak>当前位置：银企服务 >> {{financeInfo.financeTitle}}</div>
+<div class="appeal_index">
+    <div class="appeal_doc">
+        <div class="appeal_title">
+            <h3 ng-cloak>{{financeInfo.financeTitle}}</h3>
+            <span ng-cloak>发布时间：{{financeInfo.releaseDate}}</span>
+        </div>
+    </div>
+    <div class="appeal_info">
+        <table class="finance_table" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="15%" align="right">预期年收益：</td>
+                <td width="35%" class="highLight" ng-bind="financeInfo.yearYield"></td>
+                <td width="15%" align="right">企业名称：</td>
+                <td width="35%" ng-bind="financeInfo.companyName"></td>
+            </tr>
+            <tr>
+                <td width="15%" align="right">融资年限：</td>
+                <td width="35%" ng-bind="financeInfo.financeYear"></td>
+                <td width="15%" align="right">企业性质：</td>
+                <td width="35%" ng-bind="financeInfo.companyProperty"></td>
+            </tr>
+            <tr>
+                <td width="15%" align="right">融资金额：</td>
+                <td width="35%" class="highLight" ng-bind="financeInfo.financeAmount"></td>
+                <td width="15%" align="right">企业地址：</td>
+                <td width="35%" ng-bind="financeInfo.address"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="finance_content">
+        <!--<div>-->
+        <!--<span class="title_lager">内容</span><span class="title_small">/&nbsp;Legal&nbsp;Document</span>-->
+        <!--</div>-->
+        <div class="content_info" ng-cloak>
+            {{financeInfo.financeContent}}
+        </div>
+    </div>
+    <!--发表留言-->
+    <div class="message">
+        <div class="msg_title">
+            <div class="leave_1 leave_msg">发表留言</div>
+            <div class="leave_2"><span>剩余字数</span><span id="num_txt1">300</span><span>个</span></div>
+        </div>
+        <div class="msg_info">
+            <textarea id="release_msg"></textarea>
+        </div>
+        <div class="msg_footer">
+            <div class="leave_1">
+                <span>注册企业才可发表留言</span>
+                <a href="#">登录</a>/<a href="#">注册</a>
+            </div>
+            <div class="leave_2">
+                <button ng-click="releaseMsg();">发表</button>
+            </div>
+        </div>
+    </div>
+    <div class="msg_list">
+        <table border="0" cellpadding="0" cellspacing="0" ng-repeat="item in comments">
+            <tr>
+                <td align="left" class="msg_list_title" ng-bind="item.displayName"></td>
+                <td align="right" ng-bind="item.releaseDate"></td>
+            </tr>
+            <tr>
+                <td colspan="2" ng-cloak>
+                    {{item.reply}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="page">
+        <!-- 分页位置 -->
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr>
+                <td class="custom_layper_page_info"></td>
+                <td>
+                    <div style="padding: 10px 0; float: right;">
+                        <div class="custom_page_box" id="layper_page_box" style="margin-right: 0px"></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 分页位置 -->
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <title>诉求详情</title>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../js/layui/css/layui.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="js/apeal_info.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <style type="text/css">
+        body {
+            background-color: #F4F4F4;
+        }
+
+        .appeal_index {
+            width: 70%;
+            background-color: #FBFCFD;
+            margin: auto;
+            padding-bottom: 30px;
+            margin-bottom: 62px;
+        }
+
+        .current_site {
+            width: 70%;
+            background-color: #F4F4F4;
+            margin: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .appeal_title {
+            text-align: center;
+            padding-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .appeal_title h3 {
+            font-size: 24px;
+            font-weight: bolder;
+            color: #1A56A8;
+        }
+
+        .appeal_title span {
+            font-size: 14px;
+            color: #9EA7B4;
+        }
+
+        .appeal_info p {
+            padding-left: 20px;
+            padding-right: 20px;
+            text-indent: 2em;
+            color: #31364B;
+            line-height: 30px;
+        }
+
+        .progress_title {
+            margin-top: 30px;
+            border-top: 1px solid #E1E5ED;
+            font-size: 18px;
+            font-weight: bolder;
+            color: #31364B;
+            padding-left: 20px;
+            padding-top: 30px;
+        }
+
+        .peogress_info {
+            margin-top: 30px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .handle_result {
+            margin-top: 30px;
+            border-top: 1px solid #E1E5ED;
+        }
+
+        .handle_title {
+            font-size: 18px;
+            font-weight: bolder;
+            color: #31364B;
+            padding-left: 20px;
+            padding-top: 30px;
+        }
+
+        .handle_info p {
+            padding-left: 20px;
+            padding-right: 20px;
+            text-indent: 2em;
+            color: #657180;
+            line-height: 30px;
+        }
+
+        .replay {
+            margin-top: 30px;
+            border-top: 1px solid #E1E5ED;
+            margin-bottom: 30px;
+        }
+
+        .replay_title {
+            margin-top: 20px;
+            color: #1A56A8;
+            font-size: 18px;
+            font-weight: bolder;
+            padding-left: 20px;
+        }
+
+        .replay_content {
+            margin-top: 20px;
+            width: 80%;
+            height: 200px;
+            margin: auto;
+        }
+
+        .replay_content textarea {
+            width: 100%;
+            height: 100%;
+        }
+
+        .replay_button {
+            position: relative;
+            width: 80%;
+            height: 100px;
+            margin: auto;
+        }
+
+        .replay_button button {
+            border: none;
+            position: absolute;
+            top: 10px;
+            right: 0;
+            width: 100px;
+            height: 40px;
+            border-radius: 5px;
+            color: #FFFFFF;
+            background-color: #1A56A8;
+        }
+    </style>
+</head>
+
+<body>
+<div id="header"></div>
+<div class="current_site" ng-cloak>当前位置：政企服务 >> {{apealData.title}}</div>
+<div class="appeal_index">
+    <div class="appeal_doc">
+        <div class="appeal_title">
+            <h3 ng-cloak>{{apealData.title}}</h3>
+            <span ng-cloak>发布时间：{{apealData.releaseDate | formatDate}}</span>
+        </div>
+    </div>
+    <div class="appeal_info">
+        <p ng-cloak>{{apealData.content}}</p>
+    </div>
+    <div class="progress">
+        <div class="progress_title">
+            服务进展
+        </div>
+        <div class="peogress_info">
+            <ul class="layui-timeline">
+                <li class="layui-timeline-item" ng-repeat="item in process">
+                    <i class="layui-icon layui-timeline-axis"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <div class="layui-timeline-title">
+                            <span ng-cloak>{{item.releaseDate}}{{item.processDetail}}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="handle_result">
+        <div class="handle_title">处理结果</div>
+        <div class="handle_info">
+            <p ng-bind="apealData.reply">
+
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

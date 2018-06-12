@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+<head>
+    <meta charset="UTF-8">
+    <title>完善资料</title>
+    <link rel="stylesheet" type="text/css" href="css/pinformation.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/comon0.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../../js/common.js"></script>
+    <script type="text/javascript" src="js/group.js"></script>
+
+    <link rel="shortcut icon" href="../../../images/favicon.ico">
+    <script>
+        var htmlText = ' <div class="row">\n' +
+            '                    <div class="col-lg-8 col-md-8 col-xs-8">\n' +
+            '                        <input type="text" placeholder="输入企业名称"/>\n' +
+            '                    </div>\n' +
+            '                    <div class="col-lg-4 col-md-4 col-xs-4">\n' +
+            '                    </div>\n' +
+            '                </div>';
+        $("#add").click(function () {
+            $("#addpanel").append(htmlText);
+        });
+    </script>
+</head>
+<body>
+<div id="header"></div>
+<div class="main_box">
+    <div class="title_box">
+        <div class="col-lg-12 col-md-12 col-xs-12" style="text-align: center">
+            <span class="title_box_title">团体信息</span>
+        </div>
+    </div>
+    <div class="form_box">
+        <!--基本信息-->
+        <div class="info">
+            <div class="info_title"><span class="info_title_01">基本信息</span></div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-xs-8">
+                    团体名称
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    创建时间
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-xs-8">
+                    <input type="text" name="fullName" ng-model="information.fullName" placeholder="输入团体名称"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    <input type="text" name="establishDate" ng-model="date" id="establishDate" placeholder="选择时间"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-xs-8">
+                    办公电话
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    地址
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <input type="text" name="phoneNumber" ng-model="information.phoneNumber" placeholder="输入电话"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    <input type="text" id="address" name="address" ng-model="information.address"/>
+                </div>
+                <div class="col-lg-2 col-md-2 col-xs-2"><a href="/portal/dynamic/common/map.jsp" target="_blank">选取</a>
+                </div>
+            </div>
+            <div class="row" style="display: none;">
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <input type="text" id="latitude"/>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <input type="text" id="longitude"/>
+                </div>
+            </div>
+        </div>
+
+        <!--商协会领导班子情况-->
+        <div class="info">
+            <div class="info_title"><span class="info_title_01">商协会领导班子情况</span></div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    理事数量
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    副会长数量
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <input type="text" name="directorNum" ng-model="information.directorNum" placeholder="输入数量"/>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-6">
+                    <input type="text" name="viceNum" ng-model="information.viceNum" placeholder="输入数量"/>
+                </div>
+            </div>
+        </div>
+
+        <!--商协会领导班子企业情况-->
+        <div class="info">
+            <div class="info_title"><span class="info_title_01">商协会领导班子企业情况</span></div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    姓名
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    商协会职务
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    联系电话
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    <input type="text" name="pname" ng-model="group.pname" placeholder="输入姓名"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    <input type="text" name="assPost" ng-model="group.assPost" placeholder="输入职务"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    <input type="text" name="phoneNum" ng-model="group.phoneNum" placeholder="输入电话"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-xs-8">
+                    企业名称
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-4">
+
+                </div>
+            </div>
+            <div class="addpanel">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-xs-8">
+                        <input type="text" name="companyName" ng-model="group.companyName" placeholder="输入企业名称"/>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-4">
+                        <span style="color: #9EA7B4;">多个企业用逗号隔开</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form_footer">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12 commit">
+                    <button ng-click="insertInformation();">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

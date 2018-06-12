@@ -1,0 +1,95 @@
+body {
+    min-width: 900px;
+}
+
+.cooperate {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.cooperate ul, .cooperate li {
+    list-style: none;
+}
+
+.cooperate li {
+    display: inline-block;
+    width: 30%;
+    height: 200px;
+    border: 1px solid #E1E5ED;
+    margin-left: 2%;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.coimg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.coinfo {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .3);
+    color: #FFF;
+}
+
+.banner_style {
+    width: 100%;
+    height: 200px;
+}
+
+.banner_style img {
+    width: 100%;
+    height: 100%;
+}
+
+.pictureContainer {
+    position: relative;
+    width: 240px;
+    height: 135px;
+    margin: 5px;
+    cursor: pointer;
+    border: 1px dashed #b4bed3;
+}
+
+.pictureContainer .viewPicture {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /*border: 1px dashed #b4bed3;*/
+    border-radius: 5px;
+}
+
+.uploadText {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #FFF;
+}
+
+.uploadText img {
+    margin: auto;
+}
+
+.submit {
+    width: 80px;
+    height: 35px;
+    background-color: #1A56A8;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+}
+
+.required {
+    color: red;
+}

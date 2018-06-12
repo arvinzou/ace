@@ -1,0 +1,293 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <title>服务事项办理</title>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/table.css" rel="stylesheet" type="text/css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery.js"></SCRIPT>
+    <SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+    <script>
+        $(document).ready(function (e) {
+            $(".tab_table li").click(function () {
+                var tabHover = $(this).index()
+
+                $(".tab_table .active").removeClass()
+                $(this).addClass("active");
+                $(".tab_main").children("div").hide();
+                $(".tab_main").children("div").eq(tabHover).fadeIn();
+            })
+        });
+        100
+    </script>
+</head>
+<body>
+
+<div class="head_11">
+    <div class="juz02">
+        <table width="100%" height="60" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>
+                    <div class="tab_name">
+                        <span class="spangs">国税</span>
+                        <span class="spanbm">变更税务登记表</span>
+                    </div>
+                </td>
+                <td align="right">
+                    <a class="btn btn06" href="biao4.html">保 存</a>
+                    <a class="btn btn06" href="biao4.html">下一步</a>
+                    <a class="btn btn06" href="#">重 置</a>
+                    <a class="btn btn06" href="#">关 闭</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<table width="100%" border="0" cellspacing="0" class="all_table" cellpadding="0">
+    <tr>
+        <td valign="top">
+            <div class="tab_table">
+                <ul>
+                    <li class="active">申请表</li>
+                    <li>附列资料</li>
+                </ul>
+            </div>
+            <div class="tab_main">
+                <div>
+                    <div style="width:96%; margin:auto;">
+                        <div class="NewTableHead">
+                            <h1>变更税务登记表</h1>
+
+                        </div>
+
+
+                        <div class="NewTableTop">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td>费用人名称：<input type="text" datatype="string" jflag="1" readonly jpath="nsrmc"
+                                                     style="width:170px; " class="topInput"/></td>
+                                    <td align="right">费用人识别号：
+                                        <input type="text" datatype="string" jflag="1" readonly jpath="tbrq1"
+                                               style="width:170px;  " class="topInput"/></td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                        <div class="NewTableMain">
+
+                            <table width="100%" border="0" cellspacing="1" cellpadding="0">
+                                <tr>
+                                    <td colspan="7" align="center" class="title01"><strong>变更登记事项</strong></td>
+                                </tr>
+                                <tr>
+                                    <td width="50" align="center" class="title01">序号</td>
+                                    <td align="center" class="title01">变更项目</td>
+                                    <td align="center" class="title01">国税变更前内容</td>
+                                    <td align="center" class="title01">地税变更前内容</td>
+                                    <td align="center" class="title01">变更后内容</td>
+                                    <td align="center" class="title01">批准机关名称</td>
+                                    <td align="center" class="title01">批准文件</td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="title01">1</td>
+                                    <td><select name="select" id="select">
+                                        <option>1</option>
+                                    </select></td>
+                                    <td class="EditInput03">
+                                        <input type="text" value="300" jflag="1" datatype="number"
+                                               jpath="flzlForm.bqfse">
+                                    </td>
+                                    <td class="EditInput03"><input type="text" value="325" jflag="1" datatype="number"
+                                                                   jpath="flzlForm.bqfse"></td>
+                                    <td class="EditInput03"><input type="text" value="300" jflag="1" datatype="number"
+                                                                   jpath="flzlForm.bqfse"></td>
+                                    <td class="EditInput02"><input type="text" jflag="1" datatype="number"
+                                                                   jpath="flzlForm.bqfse"></td>
+                                    <td class="EditInput02">
+                                        <input type="text" jflag="1" datatype="number" jpath="flzlForm.bqfse">
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div class="btncz">
+                                <ul>
+                                    <a href="#"><img src="../../images/common/dot01.png" alt=""/>增加行</a>
+                                    <a href="#"><img src="../../images/common/dot02.png" alt=""/>删除行</a>
+                                </ul>
+                            </div>
+
+                            <table width="100%" border="0" cellspacing="1" cellpadding="0">
+                                <tr>
+                                    <td align="center" class="title01">企业人姓名</td>
+                                    <td colspan="2" class="EditInput02">
+                                        <input type="text" jflag="1" datatype="number" jpath="flzlForm.bqfse">
+                                    </td>
+                                    <td align="center" class="title01">申请日期</td>
+                                    <td class="ReadInput01"><input jflag="1" readonly type="text" datatype="number"
+                                                                   jpath=""></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" class="title01">领购方式</td>
+                                    <td><select name="select2" id="select2">
+                                        <option>上门领购</option>
+                                    </select></td>
+                                    <td colspan="3">&nbsp;</td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div style="display:none;">
+
+                    <div style="width:96%; margin:auto;">
+
+                        <div class="btn_more" style="margin-top:20px;">
+                            <a class="btn  btn01" href="#">上 传</a>
+                            <a class="btn  btn01" href="#">查 看</a>
+                            <a class="btn  btn01" href="#">删 除</a>
+
+                        </div>
+                        <DIV class="textRM">备注：当前可以支持上传的附件类型包括：JPG、PNG、DOC、XLS、PDF、TIF等，单项付列资料可<span class="redtext">支持最大上传值为2M.</span>
+                        </DIV>
+                        <div class="NewTableTop">
+
+                        </div>
+
+
+                        <div class="NewTableMain">
+                            <table width="100%" border="0" cellspacing="1" cellpadding="0">
+                                <tr>
+                                    <td width="40" align="center" class="title01"><input type="checkbox" name="checkbox"
+                                                                                         id="checkbox"></td>
+                                    <td width="60" align="center" class="title01"><strong>序号</strong></td>
+                                    <td align="center" class="title01"><strong>附列资料名称</strong></td>
+                                    <td align="center" class="title01"><strong>是否必填</strong></td>
+                                    <td align="center" class="title01"><strong>当前文件大小</strong></td>
+                                    <td align="center" class="title01"><strong>份数</strong></td>
+                                    <td align="center" class="title01"><strong>操作</strong></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><span class="title01">
+          <input type="checkbox" name="checkbox2" id="checkbox2">
+        </span></td>
+                                    <td align="center">01</td>
+                                    <td>税务登记正本</td>
+                                    <td align="center">必报</td>
+                                    <td align="center">0</td>
+                                    <td align="center">0</td>
+                                    <td>
+                                        <div class="sbtnbox">
+                                            <a class="sbtn sbtn01" href="#">本地选择</a>
+                                            <a class="sbtn sbtn01" href="#">从资料库中选择</a>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><span class="title01">
+          <input type="checkbox" name="checkbox3" id="checkbox3">
+        </span></td>
+                                    <td align="center">02</td>
+                                    <td>税务登记副本</td>
+                                    <td align="center">必报</td>
+                                    <td align="center">0</td>
+                                    <td align="center">0</td>
+                                    <td>
+                                        <div class="sbtnbox"><a class="sbtn sbtn01" href="#">本地选择</a> <a
+                                                class="sbtn sbtn01" href="#">从资料库中选择</a></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><span class="title01">
+          <input type="checkbox" name="checkbox4" id="checkbox4">
+        </span></td>
+                                    <td align="center">03</td>
+                                    <td>费用人变更登记内容的决议及有关证明文件复印件</td>
+                                    <td align="center">必报</td>
+                                    <td align="center">0</td>
+                                    <td align="center">0</td>
+                                    <td>
+                                        <div class="sbtnbox"><a class="sbtn sbtn01" href="#">本地选择</a> <a
+                                                class="sbtn sbtn01" href="#">从资料库中选择</a></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><span class="title01">
+          <input type="checkbox" name="checkbox5" id="checkbox5">
+        </span></td>
+                                    <td align="center">04</td>
+                                    <td>费用人变更登记内容的决议及有关证明文件</td>
+                                    <td align="center">必报</td>
+                                    <td align="center">0</td>
+                                    <td align="center">0</td>
+                                    <td>
+                                        <div class="sbtnbox"><a class="sbtn sbtn01" href="#">本地选择</a> <a
+                                                class="sbtn sbtn01" href="#">从资料库中选择</a></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><span class="title01">
+          <input type="checkbox" name="checkbox6" id="checkbox6">
+        </span></td>
+                                    <td align="center">05</td>
+                                    <td>工商变更登记表及工商营业执照</td>
+                                    <td align="center">条件报送</td>
+                                    <td align="center">0</td>
+                                    <td align="center">0</td>
+                                    <td>
+                                        <div class="sbtnbox"><a class="sbtn sbtn01" href="#">本地选择</a> <a
+                                                class="sbtn sbtn01" href="#">从资料库中选择</a></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><span class="title01">
+          <input type="checkbox" name="checkbox7" id="checkbox7">
+        </span></td>
+                                    <td align="center">06</td>
+                                    <td>工商变更登记表及工商营业执照复印件</td>
+                                    <td align="center">条件报送</td>
+                                    <td align="center">0</td>
+                                    <td align="center">0</td>
+                                    <td>
+                                        <div class="sbtnbox"><a class="sbtn sbtn01" href="#">本地选择</a> <a
+                                                class="sbtn sbtn01" href="#">从资料库中选择</a></div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </td>
+    </tr>
+</table>
+<script>
+
+    $(document).ready(function (e) {
+        $(".all_table").css({height: $(window).height() - 60})
+        var i = 0;
+        $(".close_btn").click(function () {
+            if (i < 1) {
+                $(".biao_leftmenu").css("display", "none");
+                i++
+            } else {
+                if (i == 1) {
+                    $(".biao_leftmenu").css("display", "block");
+                    i = 0
+                }
+            }
+        })
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+<head>
+    <meta charset="UTF-8">
+    <title>法律帮助</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/user.js"></script>
+    <script type="text/javascript" src="js/lawer_help.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+</head>
+
+<body>
+<div class="main">
+    <div class="title">
+        <span class="title_lager">法律帮助</span><span class="title_small">/&nbsp;Legal&nbsp;Aid</span>
+        <button class="law_help" data-toggle="modal" data-target="" ng-click="before_release($event);">发布法律帮助</button>
+    </div>
+    <div class="searchTable">
+        <div class="search_condition">
+            <div class="search_left" ng-click="sortList('asc');" id="asc"><span>发布日期</span><span
+                    class="glyphicon glyphicon-arrow-up" style="color: #1A56A8;"></span></div>
+            <div class="search_left" ng-click="sortList('desc');" hidden="true" id="desc"><span>发布日期</span><span
+                    class="glyphicon glyphicon-arrow-down" style="color: #1A56A8;"></span></div>
+            <div class="search_right">
+                <span class="s_title"><input type="text" id="key_word" placeholder="请输入关键字搜索"/><button
+                        class="glyphicon glyphicon-search" ng-click="search();"></button></span>
+            </div>
+        </div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+            <tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo($index);">
+                <td align="center" width="15px">
+                    <div class="dot"></div>
+                </td>
+                <td align="left" width="25%" ng-bind="item.releaseDate"></td>
+                <td ng-bind="item.title"></td>
+                <td align="center" width="10%" ng-if="item.reply == '' || item.reply == null || item.reply== undefined">
+                    未回复
+                </td>
+                <td align="center" width="10%" ng-if="item.reply != '' && item.reply != null && item.reply!= undefined">
+                    已回复
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="paganation"></div>
+    </div>
+</div>
+</div>
+</body>
+
+<!--发布法律帮助模态框-->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">填写我需要的法律帮助</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label>标题</label><br/>
+                    <input class="input_style" name="law_title" type="text" placeholder="请用一句话概括您需要提供的帮助"/>
+                </div>
+                <div>
+                    <label>类型</label><br/>
+                    <select class="input_style" id="law_type">
+                        <option value="" selected="selected">请选择类型</option>
+                        <option value="1">刑事诉讼</option>
+                        <option value="2">非诉业务</option>
+                        <option value="3">劳动纠纷</option>
+                        <option value="4">合同纠纷</option>
+                        <option value="5">知识产权纠纷</option>
+                        <option value="6">其他</option>
+                    </select>
+                </div>
+                <div>
+                    <label>内容</label><br/>
+                    <textarea name="law_content" placeholder="请在这里描述您遇到的问题"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" ng-click="insertLawHelp();" data-dismiss="modal">提交法律帮助
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</html>

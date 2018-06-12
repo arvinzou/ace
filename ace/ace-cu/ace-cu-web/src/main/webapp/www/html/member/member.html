@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <title>会员中心</title>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="css/member.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <SCRIPT language=JavaScript src="js/member.js"></SCRIPT>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <link rel="shortcut icon" href="../../../images/favicon.ico">
+</head>
+
+<body>
+<div id="header"></div>
+<div class="bodybg">
+    <div class="juz1">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="left_box" style="min-height: 700px;max-height: 900px;background-color: #ffffff;"
+                    valign="top">
+                    <div class="member_center_title01">会员中心<span>/ Member Center</span></div>
+                    <div class="member_menu">
+                        <ul class=""><span class="member_center_title02"><a href="/fop/www/index.html">我的首页</a></span>
+                        </ul>
+                    </div>
+                    <div class="member_menu">
+                        <ul class="member_menu_ul">
+									<span class="member_center_title02"><a href="member_index.html"
+                                                                           target="allbox">会员服务</a></span>
+                            <li ng-if="companyType != '3'">
+                                <a href="javascript:void(0);" target="allbox"
+                                   ng-click="checkUserUrl($event,'personel/personel.html');">人才信息</a>
+                            </li>
+                            <li ng-if="companyType != '3'">
+                                <a href="javascript:void(0);" target="allbox"
+                                   ng-click="checkUserUrl($event,'investment/investment.html');">招商信息</a>
+                            </li>
+                            <li ng-if="companyType != '3'">
+                                <a href="javascript:void(0);" target="allbox"
+                                   ng-click="checkUserUrl($event,'project/project.html');">项目信息</a>
+                            </li>
+                            <li ng-if="companyType != '3'">
+                                <a href="javascript:void(0);" target="allbox"
+                                   ng-click="checkUserUrl($event,'product/product.html');">企业产品</a>
+                            </li>
+                            <li ng-if="companyType != '3'">
+                                <a href="javascript:void(0);" target="allbox"
+                                   ng-click="checkUserUrl($event,'costyle/costyle.html');">企业风采</a>
+                            </li>
+                            <li ng-if="companyType != '3'">
+                                <a href="javascript:void(0);" target="allbox"
+                                   ng-click="checkUserUrl($event,'govservice/govservice.html');">政企服务</a>
+                            </li>
+                            <li ng-if="companyType != '3'">
+                                <a href="javascript:void(0);" target="allbox"
+                                   ng-click="checkUserUrl($event,'law/law.html');">法律帮助</a>
+                            </li>
+                            <!--<li>-->
+                            <!--<a href="" target="allbox">意见直通车</a>-->
+                            <!--</li>-->
+                            <li ng-if="companyType == '3'">
+                                <a href="javascript:void(0);" target="allbox"
+                                   ng-click="checkUserUrl($event,'financial/financial.html');">银企服务</a>
+                            </li>
+                            <li ng-if="companyType == '3'">
+                                <a href="javascript:void(0);" target="allbox"
+                                   ng-click="checkUserUrl($event,'financial_product/financial_product.html');">金融产品</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td class="right_box" valign="top">
+                    <iframe id="iframe" class="iframe1" frameborder="no" scrolling="no" name="allbox" width="100%"
+                            src="member_index.html"></iframe>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div ng-include="'../common/footer.html'"></div>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+body {
+    min-width: 900px;
+}
+
+.submit {
+    width: 80px;
+    height: 35px;
+    background-color: #1A56A8;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+}
+
+.product_form {
+    width: 80%;
+    margin: auto;
+}
+
+.product_table {
+    width: 100%;
+}
+
+.product_table tr {
+    height: 62px;
+    /*line-height: 62px;*/
+}
+
+.required {
+    color: red;
+}
+
+.product_table input,
+select,
+textarea {
+    /*color: #E1E5ED;*/
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myapp" ng-controller="myctrl">
+<head>
+    <meta charset="UTF-8">
+    <title>头部</title>
+    <link rel="stylesheet" type="text/css" href="/fop/www/css/common_index.css"/>
+    <script type="text/javascript" src="/fop/www/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/fop/www/js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="/fop/www/js/common.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+</head>
+<body>
+<div class="login_box">
+    <div class="login">
+        <span ng-if="userProp"><a href="/fop/www/html/member/member.html" target="_blank">{{username}}</a></span>
+        <span ng-if="userProp"><a href="/portal/dynamic/portal/security/loginOut_fop.jsp">退出</a></span>
+        <span ng-if="!userProp"><a href="/portal/dynamic/portal/security/login_fop.jsp">登录</a></span>
+        <span>|</span>
+        <span><a href="/fop/www/html/login/regist.html">注册</a></span>
+    </div>
+</div>
+<div class="logo_box">
+    <div class="logo">
+        <div class="logo_image"><img src="/fop/www/images/logo.png"/></div>
+        <div class="logo_word">承办单位：常德市工商业联合会</div>
+    </div>
+    <div class="words">
+        <div class="words_1"><img src="/fop/www/images/words1.png"/></div>
+        <div class="words_2"><img src="/fop/www/images/words2.png"/></div>
+    </div>
+</div>
+</body>
+</html>
