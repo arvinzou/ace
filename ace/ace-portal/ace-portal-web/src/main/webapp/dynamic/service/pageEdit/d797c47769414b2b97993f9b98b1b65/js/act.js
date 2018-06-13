@@ -458,3 +458,39 @@ function delActile(){
         }
     });
 }
+function delCatadory(){
+    var url = contextPath + '/articleCategory/deleteArticleCategoryByArticleCategoryId.do';
+    var category = $("#bar").find(".actives").data("id");
+    $.ajax({
+        url: url,
+        type: 'POST',
+        timeout: 30000,
+        dataType: 'json',
+        data: {
+            jsons: JSON.stringify({
+                id: category
+            })
+        },
+        beforeSend: function () {
+            try {
+                loading = startLoading();
+            } catch (e) {};
+            if (loading) {
+                loading.settext("请求中，请稍后......");
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (loading) {
+                loading.remove();
+            }
+            if (data.status == 0) {
+                $('#model1').modal('hide');
+                getCategoryItemsList(pageId);
+                ifr.window.location.reload()
+            } else {
+                alert(data.errorMessage);
+            }
+        }
+    });
+}
