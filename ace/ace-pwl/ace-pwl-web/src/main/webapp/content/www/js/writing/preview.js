@@ -1,6 +1,5 @@
 jQuery(function ($) {
     loadText(id);
-    updateReading(id);
 });
 
 function loadText(id) {
@@ -68,16 +67,6 @@ function loadText(id) {
     });
 }
 
-function updateReading(id) {
-    $.ajax({
-        type: "post",
-        url: contextPath + "/www/anslysis/updateReading.do",
-        data: {
-            id: id,
-            reportId: 'loadWriting'
-        }
-    });
-}
 
 var imglist;
 //安卓4.0+等高版本不支持window.screen.width，安卓2.3.3系统支持

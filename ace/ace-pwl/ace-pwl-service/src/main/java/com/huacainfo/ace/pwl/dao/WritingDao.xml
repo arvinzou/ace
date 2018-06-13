@@ -20,7 +20,6 @@
         <result column="docText" jdbcType="LONGVARCHAR" property="docText"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.pwl.vo.WritingVo">
-        <result column="authorName" jdbcType="VARCHAR" property="authorName"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, name, author, category, dateOfPublication, everPublished, reading, status, createUserId, 
@@ -30,7 +29,7 @@
     select
     t.id, t.name, t.author, t.category, t.dateOfPublication, t.everPublished, t.reading, t.status, t.createUserId,
     t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.intro, t.docText
-    from writing t left join writer a on t.author=a.id
+        from writing t
     where t.id = #{id,jdbcType=VARCHAR}
   </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -69,7 +68,8 @@
   </update>
 
     <sql id="whereCondition">
-        from writing t left join writer a on t.author=a.id where 0=0
+        from writing t
+        where 0=0
         <if test='condition.name!=null and condition.name!=""'>
             and t.name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
@@ -87,7 +87,7 @@
     </select>
     <select id="findList" resultMap="BaseResultMapVo">
         select
-        t.id, t.name, t.author,a.name authorName, t.intro, t.docText, t.category, t.dateOfPublication, t.everPublished,
+        t.id, t.name, t.author, t.intro, t.docText, t.category, t.dateOfPublication, t.everPublished,
         t.reading, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
         <include refid="whereCondition"/>
