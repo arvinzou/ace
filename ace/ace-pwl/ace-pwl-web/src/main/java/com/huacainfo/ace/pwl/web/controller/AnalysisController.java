@@ -20,6 +20,7 @@ public class AnalysisController extends PwlBaseController {
     @Autowired
     private WritingService writingService;
 
+
     @RequestMapping(value = "/query.do")
     @ResponseBody
     public PageResult<WritingVo> findWritingList(WritingQVo condition, String reportId, int page, int limit) throws Exception {
