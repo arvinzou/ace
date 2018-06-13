@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.pwl.dao.WritingDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.pwl.model.Writing">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="dateOfPublication" jdbcType="DATE" property="dateOfPublication"/>
+        <result column="everPublished" jdbcType="VARCHAR" property="everPublished"/>
+        <result column="reading" jdbcType="BIGINT" property="reading"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="intro" jdbcType="LONGVARCHAR" property="intro"/>
+        <result column="docText" jdbcType="LONGVARCHAR" property="docText"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.pwl.vo.WritingVo">
+        <result column="authorName" jdbcType="VARCHAR" property="authorName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, author, category, dateOfPublication, everPublished, reading, status, createUserId, 
+    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,intro, docText
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    t.id, t.name, t.author, t.category, t.dateOfPublication, t.everPublished, t.reading, t.status, t.createUserId,
+    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.intro, t.docText
+    from writing t left join writer a on t.author=a.id
+    where t.id = #{id,jdbcType=VARCHAR}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from writing
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.pwl.model.Writing">
+    insert into writing (id, name, author, 
+      category, dateOfPublication, everPublished, 
+      reading, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate, intro, 
+      docText)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{dateOfPublication,jdbcType=DATE}, #{everPublished,jdbcType=VARCHAR}, 
+      #{reading,jdbcType=BIGINT}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{intro,jdbcType=LONGVARCHAR}, 
+      #{docText,jdbcType=LONGVARCHAR})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.pwl.model.Writing">
+    update writing
+    set name = #{name,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      dateOfPublication = #{dateOfPublication,jdbcType=DATE},
+      everPublished = #{everPublished,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+    author= #{author,jdbcType=VARCHAR},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      intro = #{intro,jdbcType=LONGVARCHAR},
+      docText = #{docText,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <sql id="whereCondition">
+        from writing t left join writer a on t.author=a.id where 0=0
+        <if test='condition.name!=null and condition.name!=""'>
+            and t.name like
+            concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and t.category =#{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and t.id =#{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMapVo">
+        select
+        t.id, t.name, t.author,a.name authorName, t.intro, t.docText, t.category, t.dateOfPublication, t.everPublished,
+        t.reading, t.status, t.createUserId,
+        t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        <include refid="whereCondition"/>
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY t.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate
+            </otherwise>
+        </choose>
+
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+    </select>
+
+    <select id="isExit" resultType="int">
+    select count(*)
+    from
+    writing where
+    name=#{name}
+  </select>
+
+    <update id="updateReading">
+    update writing set reading=reading+1 where id=#{condition.id}
+  </update>
+</mapper>
