@@ -282,7 +282,7 @@ public class TplPageServiceImpl implements TplPageService {
 	 * @version: 2018-05-07
 	 */
 	@Override
-	public  Map<String, java.lang.Object> getTplPageById(String id) throws Exception{
+	public  Map<String, java.lang.Object>  getTplPageById(String id) throws Exception{
 
 		SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
 		Configuration configuration = session.getConfiguration();

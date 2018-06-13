@@ -78,6 +78,9 @@
                                                                         <li data-toggle="modal" data-action="edit" data-target="#model1">
                                                                             <a href="#">修改</a>
                                                                         </li>
+                                                                        <li data-action="del" onclick="delCatadory();">
+                                                                            <a href="#">删除</a>
+                                                                        </li>
                                                                     </ul>
                                                                 </li>
                                                             </ul>
@@ -109,6 +112,9 @@
                                                                             </li>
                                                                             <li data-toggle="modal" data-action="edit" data-target="#model2">
                                                                                 <a href="#">修改</a>
+                                                                            </li>
+                                                                            <li data-action="del" onclick="delActile();">
+                                                                                <a href="#">删除</a>
                                                                             </li>
                                                                         </ul>
                                                                     </li>
