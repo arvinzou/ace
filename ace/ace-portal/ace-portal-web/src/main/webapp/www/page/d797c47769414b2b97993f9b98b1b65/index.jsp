@@ -59,7 +59,7 @@
 												<a href="{@if item.hrefUrl!=null}\${item.hrefUrl}{@else}preview.jsp?id=\${item.id}{@/if}">
 													<img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;" />
 												</a>
-												<div class="carousel-caption">\${item.title}</div>
+												<%--<div class="carousel-caption">\${item.title}</div>--%>
                     </div>
 											{@else}
 												<div class="item">

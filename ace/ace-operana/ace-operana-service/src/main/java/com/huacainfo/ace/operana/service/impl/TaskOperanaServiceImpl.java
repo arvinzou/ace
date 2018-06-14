@@ -51,6 +51,13 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
             return;
         }
         StringBuffer html=new StringBuffer("<table class='hovertable'>");
+
+       html.append("<tr>");
+       html.append("<td colspan='6' style='text-align:center;font-weight:800'>");
+       html.append("电装会议纪要进度跟踪报告");
+       html.append("</td>");
+       html.append("</tr>");
+
         html.append("<tr style='font-weight:800'>");
         html.append("<th>");
         html.append("序号");
@@ -77,6 +84,8 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
         html.append("</th>");
 
         html.append("</tr>");
+
+
         int i=1;
         for(Map<String,Object> e:tasks){
             html.append("<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#fff';\">");
@@ -107,12 +116,21 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
             html.append("</tr>");
             i++;
         }
-        html.append("</table>");
+
         StringBuffer userList=new StringBuffer();
         for( Map<String,Object> e:emails) {
             userList.append(e.get("name"));
             userList.append(" ");
         }
+
+       html.append("<tr>");
+       html.append("<td colspan='6' style='text-align:left;font-weight:800'>");
+       html.append("抄送：");
+       html.append(userList.toString());
+       html.append("</td>");
+       html.append("</tr>");
+       html.append("</table>");
+
         Map<String,Object> model=new HashMap<String,Object>();
         model.put("tasklist", html.toString());
         model.put("userlist", userList.toString());
@@ -133,6 +151,7 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
     }
 
     @Scheduled(cron="${jobs.autoSendEmailLiableLongTime}")
+   // @Scheduled(fixedDelay = 5000)
     public  void autoSendEmailLiableLongTime() throws Exception{
         this.logger.info("autoSendEmailLiableLongTime executed");
         List<Map<String,Object>> emails=meetingDao.selectLiableEmailForNotice();
@@ -179,6 +198,13 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
 
     private String getTableContent(List<Map<String,Object>> tasks ){
         StringBuffer html=new StringBuffer("<table class='hovertable'>");
+
+        html.append("<tr>");
+        html.append("<td colspan='9' style='text-align:center'>");
+        html.append("电装会议纪要进度跟踪报告");
+        html.append("</td>");
+        html.append("</tr>");
+
         html.append("<tr style='font-weight:800'>");
         html.append("<th>");
         html.append("序号");
@@ -214,7 +240,10 @@ public class TaskOperanaServiceImpl implements TaskOperanaService{
         html.append("状态");
         html.append("</th>");
 
+
         html.append("</tr>");
+
+
         int i=1;
         for(Map<String,Object> e:tasks){
             html.append("<tr onmouseover=\"this.style.backgroundColor='#ffff66';\" onmouseout=\"this.style.backgroundColor='#fff';\">");

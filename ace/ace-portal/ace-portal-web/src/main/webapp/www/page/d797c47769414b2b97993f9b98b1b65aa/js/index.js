@@ -27,10 +27,10 @@ function getList() {
         },
         success: function (data) {
             console.log(data);
-            var carousel = document.getElementById('tpl-carousel').innerHTML;
-            var html = juicer(carousel, {
+            /*var carousel = document.getElementById('tpl-carousel').innerHTML;*/
+          /*  var html = juicer(carousel, {
                 data: data
-            });
+            });*/
             $("#myCarousel").append(html);
 
             var navigation = document.getElementById('tpl-navigation').innerHTML;

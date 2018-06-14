@@ -1,10 +1,8 @@
 <html>
 <body>
-<h1>电装运行会议任务处理进度报告</h1>
+各位：请查收电装会议纪要进度跟踪报告 </br>
+确认明细，请访问：<a href='http://10.10.90.135/portal/dynamic/portal/index-1.jsp'>http://10.10.90.135/portal/dynamic/portal/index-1.jsp</a> </br>
 $!{o.tasklist}
-<div style="font-size:16px;font-weight:800">
-    抄送：$!{o.userlist}
-</div>
 <div style="font-size:16px">
     <h3>$!{o.sysDate}</h3>
 </div>
