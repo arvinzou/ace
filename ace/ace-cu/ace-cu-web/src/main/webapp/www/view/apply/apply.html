@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>申请</title>
+		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../js/init-rem.js"></script>
+		<script type="text/javascript" src="../js/simditor/scripts/module.js"></script>
+		<script type="text/javascript" src="../js/simditor/scripts/hotkeys.js"></script>
+		<script type="text/javascript" src="../js/simditor/scripts/uploader.js"></script>
+		<script type="text/javascript" src="../js/simditor/scripts/simditor.js"></script>
+		<link rel="stylesheet" type="text/css" href="../js/simditor/styles/simditor.css" />
+		<link rel="stylesheet" type="text/css" href="css/apply.css" />
+	</head>
+
+	<body>
+		<div class="applybox">
+			<div class="plate_01">
+				<div class="title01">申请求助</div>
+				<div class="form_01">
+					<div class="title02">
+						<span class="imagebox"><img src="img/identity.png" width="100%" height="100%"/></span>
+						<span class="titlebox">身份认证</span>
+					</div>
+					<div class="form">
+						<p>
+							<span class="form_title">真实姓名</span>
+							<input class="form_text" type="text" placeholder="请输入真实姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入真实姓名'" />
+						</p>
+					</div>
+					<div class="form">
+						<p>
+							<span class="form_title">身份证号</span>
+							<input class="form_text" type="text" placeholder="请输入受助人身份证号码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入受助人身份证号码'" />
+						</p>
+					</div>
+					<div class="form">
+						<p>
+							<span class="form_title">联系方式</span>
+							<input class="form_text" type="text" placeholder="请输入手机号码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入手机号码'" />
+						</p>
+					</div>
+					<div class="form">
+						<p>
+							<span class="form_title">上传身份证</span>
+						</p>
+					</div>
+					<div class="identify">
+						<!--身份证正面-->
+						<div class="positive">
+							<div class="pictureContainer" id="positive">
+								<div class="viewPicture undis">
+									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
+								</div>
+								<div class="uploadText">
+									<img src="img/add.png" style="width:1rem;height:1rem;" />
+									<p class="uploadPloadprogress">身份证正面</p>
+								</div>
+							</div>
+						</div>
+						<!--身份证反面-->
+						<div class="unpositive">
+							<div class="pictureContainer" id="unpositive">
+								<div class="viewPicture undis">
+									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
+								</div>
+								<div class="uploadText">
+									<img src="img/add.png" style="width:1rem;height:1rem" />
+									<p class="uploadPloadprogress">身份证反面</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="plate_02">
+				<div class="form_01">
+					<div class="title02">
+						<span class="imagebox"><img src="img/project.png" width="100%" height="100%"/></span>
+						<span class="titlebox">项目设置</span>
+					</div>
+					<div class="form">
+						<p>
+							<span class="form_title">目标金额</span>
+							<input class="form_text" type="text" placeholder="请填写整数" onfocus="this.placeholder=''" onblur="this.placeholder='请填写整数'" />
+						</p>
+					</div>
+					<div class="form">
+						<p>
+							<span class="form_title">筹款标题</span>
+							<input class="form_text" type="text" placeholder="9个字以内" onfocus="this.placeholder=''" onblur="this.placeholder='9个字以内'" />
+						</p>
+					</div>
+					<div class="form_cmt">
+						<p>
+							<span class="form_title">筹款说明</span>
+						</p>
+						<p>
+							<textarea class="project_cmt" type="text" placeholder="请详细填写筹款原因、筹款目的、自身状况和善款用途等信息（10个字以上）" onfocus="this.placeholder=''" onblur="this.placeholder='请详细填写筹款原因、筹款目的、自身状况和善款用途等信息（10个字以上）'" ></textarea></textarea>
+						</p>
+					</div>
+					<div class="form">
+						<p>
+							<span class="form_title">相关证明</span>
+						</p>
+					</div>
+					<div class="identify">
+						<!--证明-->
+						<div class="positive">
+							<div class="pictureContainer" id="prove1">
+								<div class="viewPicture undis">
+									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
+								</div>
+								<div class="uploadText">
+									<img src="img/add.png" style="width:1rem;height:1rem;" />
+									<p class="uploadPloadprogress">上传证明</p>
+								</div>
+							</div>
+						</div>
+						<!--证明-->
+						<div class="unpositive">
+							<div class="pictureContainer" id="prove2">
+								<div class="viewPicture undis">
+									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
+								</div>
+								<div class="uploadText">
+									<img src="img/add.png" style="width:1rem;height:1rem" />
+									<p class="uploadPloadprogress">上传证明</p>
+								</div>
+							</div>
+						</div>
+						<div style="clear: both;"></div>
+					</div>
+					<div class="warn">
+						<span class="warn_img">
+							<img  src="img/warn.png" style="width: 100%;height: 100%;" />
+						</span>
+						<span class="warn_info">
+							求助者介绍不得出现任何联系方式和银行卡等收款信息，包括但不限于手机号码、座机号码、微信号、支付宝账号、银行卡等私人信息，否则项目验证均不予以通过。
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="operation">
+				<button>提交申请</button>
+			</div>
+		</div>
+	</body>
+
+</html>
