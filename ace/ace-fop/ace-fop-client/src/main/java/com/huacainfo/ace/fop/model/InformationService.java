@@ -21,6 +21,8 @@ public class InformationService implements Serializable {
 
     private String remark;
 
+    private String category;
+
     /**
      * 审核状态 1- 审核中，2-审核通过，3-审核不通过
      */
@@ -49,6 +51,14 @@ public class InformationService implements Serializable {
      * 6、品牌推广
      */
     private String modules;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getModules() {
         return modules;

@@ -97,6 +97,12 @@
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
+类别</span>
+            <br>
+            <span id="category">
+</span>
+        </div>
+        <div class="labelItem"><span class="labelItemHeader">
 标题</span>
             <br>
             <span id="title">
