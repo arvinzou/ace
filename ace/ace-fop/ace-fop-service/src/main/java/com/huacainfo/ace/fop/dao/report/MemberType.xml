@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.report.MemberType">
+    <select id="query" resultType="map">
+        select
+            d.`name` 'name',
+            count(1) 'value'
+        from fop.fop_company c
+        left join portal.dict d on d.`code` = c.companyProperty
+        where  c.`status`=2
+         and d.category_id = '134'
+        GROUP BY d.`name`
+    </select>
+</mapper>

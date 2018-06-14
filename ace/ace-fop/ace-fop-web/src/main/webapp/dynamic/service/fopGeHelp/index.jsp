@@ -107,35 +107,34 @@
             <span id="title"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">回复内容</span>
-            <br>
-            <span id="reply"></span>
-        </div>
-        <div class="labelItem">
             <span class="labelItemHeader">发布时间</span>
             <br>
             <span id="releaseDate"></span>
         </div>
-        <div class="labelItem">
+
+        <div class="labelItem hide">
             <span class="labelItemHeader">所含关键字</span>
             <br>
             <span id="keyWord"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">累计提问次数</span>
             <br>
             <span id="accCount"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">备注</span>
             <br>
             <span id="remark"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">状态</span>
             <br>
             <span id="status"></span>
         </div>
+    </div>
+    <h5 class="header-title">回复内容</h5>
+    <div class="row" style="padding:10px" id="reply">
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
