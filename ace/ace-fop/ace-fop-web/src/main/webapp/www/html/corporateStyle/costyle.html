@@ -42,6 +42,8 @@
         <div class="main">
             <div class="title01">
                 <span class="title_lager">企业风采</span><span class="title_small">/&nbsp;Enterprise Style</span>
+                <select class="category" id="category" ng-model="defaultType" ng-options="type.name as type.name for type in selectType" ng-change="change();">
+                </select>
                 <button  class="law_help" data-toggle="modal" data-target=""
                         ng-click="before_release($event);">发布风采
                 </button>
