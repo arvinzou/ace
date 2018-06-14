@@ -6,7 +6,7 @@ public class AutoCode {
 
     public static void main(String[] args) throws Exception {
         AutoCodeUtils autoCodeUtils = new AutoCodeUtils("fop", "企业/协会活动", "Arvin");
-//        Class<?> c = com.huacainfo.ace.fop.model.FopActivity.class;
+//        Class<?> c = com.huacainfo.ace.fop.model.FopCallRecordDetail.class;
         Class<?> c = null;
         autoCodeUtils.init(c);
 
