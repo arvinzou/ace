@@ -242,6 +242,9 @@ app.controller(ngControllerName, function ($scope) {
 
     $scope.change = function(){
         var category = $("#category option:checked").val();
+        if(category == "0"){
+            category = "";
+        }
         $.ajax({
             url: "/fop/www/findInformationServiceListDo",
             type: "post",
