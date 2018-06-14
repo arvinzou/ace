@@ -19,6 +19,8 @@ public class Writing implements java.io.Serializable {
 
     private Long reading;
 
+    private Long likes;
+
     private String status;
 
     private String createUserId;
@@ -36,6 +38,14 @@ public class Writing implements java.io.Serializable {
     private String intro;
 
     private String docText;
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
+    }
 
     public String getId() {
         return id;

@@ -23,4 +23,7 @@ public interface WritingService {
     public abstract MessageResponse deleteWritingByWritingId(String id, UserProp userProp) throws Exception;
 
 
+    public abstract MessageResponse updatalike(Writing condition) throws Exception;
+
+
 }
