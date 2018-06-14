@@ -82,3 +82,12 @@ body{
 .required {
 	color: red;
 }
+.category {
+	position: absolute;
+	top: 25px;
+	right: 150px;
+	width: 100px;
+	height: 30px;
+	border: 1px solid #000000;
+	border-radius: 5px;
+}
