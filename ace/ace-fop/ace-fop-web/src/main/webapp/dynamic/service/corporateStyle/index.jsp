@@ -30,7 +30,7 @@
                 <form action="#" id="fm-search">
                     类别：<input name="category" class="easyui-combobox" style="width: 200px"
                               data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=142&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=143&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',

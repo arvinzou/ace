@@ -245,7 +245,7 @@ function loadView(id) {
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
                 if (key == 'category') {
-                    value = rsd(value, '142');
+                    value = rsd(value, '143');
                 }
                 if (key == 'status') {
                     value == "1" ? "正常" : "关闭";
