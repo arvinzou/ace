@@ -29,4 +29,6 @@ public interface WritingDao {
 
     int updateReading(@Param("condition") WritingQVo condition);
 
+    int addlike(@Param("condition") Writing condition);
+
 }

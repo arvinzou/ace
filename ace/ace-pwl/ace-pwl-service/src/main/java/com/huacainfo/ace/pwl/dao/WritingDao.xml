@@ -9,6 +9,7 @@
         <result column="dateOfPublication" jdbcType="DATE" property="dateOfPublication"/>
         <result column="everPublished" jdbcType="VARCHAR" property="everPublished"/>
         <result column="reading" jdbcType="BIGINT" property="reading"/>
+        <result column="likes" jdbcType="BIGINT" property="likes"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
@@ -27,7 +28,8 @@
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-    t.id, t.name, t.author, t.category, t.dateOfPublication, t.everPublished, t.reading, t.status, t.createUserId,
+        t.id, t.name, t.author, t.category, t.dateOfPublication, t.everPublished, t.reading,t.likes, t.status,
+        t.createUserId,
     t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.intro, t.docText
         from writing t
     where t.id = #{id,jdbcType=VARCHAR}
@@ -38,14 +40,14 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.pwl.model.Writing">
     insert into writing (id, name, author, 
-      category, dateOfPublication, everPublished, 
-      reading, status, createUserId, 
+      category, dateOfPublication, everPublished,
+        reading, likes, status, createUserId,
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate, intro, 
       docText)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
-      #{category,jdbcType=VARCHAR}, #{dateOfPublication,jdbcType=DATE}, #{everPublished,jdbcType=VARCHAR}, 
-      #{reading,jdbcType=BIGINT}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{dateOfPublication,jdbcType=DATE}, #{everPublished,jdbcType=VARCHAR},
+        #{reading,jdbcType=BIGINT}, #{likes,jdbcType=BIGINT}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{intro,jdbcType=LONGVARCHAR}, 
       #{docText,jdbcType=LONGVARCHAR})
@@ -71,7 +73,7 @@
         from writing t
         where 0=0
         <if test='condition.name!=null and condition.name!=""'>
-            and t.name like
+            and t.name likes
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.category!=null and condition.category!=&quot;&quot;">
@@ -88,7 +90,7 @@
     <select id="findList" resultMap="BaseResultMapVo">
         select
         t.id, t.name, t.author, t.intro, t.docText, t.category, t.dateOfPublication, t.everPublished,
-        t.reading, t.status, t.createUserId,
+        t.reading,t.likes, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
         <include refid="whereCondition"/>
         <choose>
@@ -113,5 +115,9 @@
 
     <update id="updateReading">
     update writing set reading=reading+1 where id=#{condition.id}
-  </update>
+    </update>
+
+    <update id="addlike">
+        update writing set likes=likes+1 where id=#{condition.id}
+    </update>
 </mapper>

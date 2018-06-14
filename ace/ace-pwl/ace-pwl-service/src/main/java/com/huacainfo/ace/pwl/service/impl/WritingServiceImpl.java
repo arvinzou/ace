@@ -133,4 +133,11 @@ public class WritingServiceImpl implements WritingService {
                 String.valueOf(id), "作品", userProp);
         return new MessageResponse(0, "作品删除完成！");
     }
+
+
+    @Override
+    public MessageResponse updatalike(Writing condition) throws Exception {
+        this.writingDao.addlike(condition);
+        return new MessageResponse(0, "喜欢！");
+    }
 }

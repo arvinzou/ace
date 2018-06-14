@@ -10,6 +10,7 @@
         <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
         <result column="click" jdbcType="BIGINT" property="click"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="modules" jdbcType="CHAR" property="modules"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -32,7 +33,7 @@
     6、品牌推广
     -->
     <sql id="Base_Column_List">
-    id, relationId, relationType, title, content,fileUrl, releaseDate, click, remark, status, modules,
+        id, relationId, relationType, title, content,fileUrl, releaseDate, click, remark, category, status, modules,
     createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <sql id="Blob_Column_List">
@@ -52,14 +53,15 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.InformationService">
     insert into information_service (id, relationId, relationType, 
-      title, fileUrl, releaseDate, 
-      click, remark, status, modules,
+      title, fileUrl, releaseDate,
+        click, remark, category, status, modules,
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
       content)
     values (#{id,jdbcType=VARCHAR}, #{relationId,jdbcType=VARCHAR}, #{relationType,jdbcType=CHAR}, 
-      #{title,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, 
-      #{click,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{modules,jdbcType=CHAR},
+      #{title,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP},
+        #{click,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{modules,jdbcType=CHAR},
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
@@ -90,6 +92,9 @@
             </if>
             <if test="remark != null">
                 remark,
+            </if>
+            <if test="category != null">
+                category,
             </if>
             <if test="status != null">
                 status,
@@ -144,6 +149,9 @@
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
+            </if>
             <if test="status != null">
                 #{status,jdbcType=CHAR},
             </if>
@@ -197,6 +205,9 @@
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
             <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
@@ -236,6 +247,7 @@
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
       click = #{click,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
+        category = #{category,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       modules = #{modules,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -303,6 +315,9 @@
         <if test="condition.relationId!=null and condition.relationId!=&quot;&quot;">
             and t.relationId = #{condition.relationId,jdbcType=CHAR}
         </if>
+        <if test="condition.category!=null and condition.category!=&quot;&quot;">
+            and t.category = #{condition.category,jdbcType=CHAR}
+        </if>
     </sql>
 
     <sql id="Base_Column_List_Vo">
@@ -312,7 +327,8 @@
         WHEN t.relationType='1'
          THEN (select fullName from fop_association where id = t.relationId)
         END companyName,
-        t.id, t.relationId, t.relationType, t.title, t.content,t.fileUrl, t.releaseDate, t.click, t.remark, t.status, t.modules,
+        t.id, t.relationId, t.relationType, t.title, t.content,t.fileUrl, t.releaseDate, t.click, t.remark,t.category,
+        t.status, t.modules,
         t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
 
