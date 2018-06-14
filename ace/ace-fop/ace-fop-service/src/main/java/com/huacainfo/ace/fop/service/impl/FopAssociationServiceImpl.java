@@ -22,6 +22,7 @@ import com.huacainfo.ace.fop.vo.FopAssMemberVo;
 import com.huacainfo.ace.fop.vo.FopAssociationQVo;
 import com.huacainfo.ace.fop.vo.FopAssociationVo;
 import com.huacainfo.ace.portal.model.Department;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
@@ -221,12 +222,18 @@ public class FopAssociationServiceImpl implements FopAssociationService {
      * @version: 2018-05-02
      */
     @Override
-    public MessageResponse deleteFopAssociationByFopAssociationId(String id,
-                                                                  UserProp userProp) throws Exception {
+    public MessageResponse deleteFopAssociationByFopAssociationId(String id, UserProp userProp) throws Exception {
         FopAssociation association = fopAssociationDao.selectByPrimaryKey(id);
         if (null == association) {
             return new MessageResponse(ResultCode.FAIL, "企业管理删除完成！");
         }
+        //注销系统账户
+        Users users = usersService.selectByAccount(association.getPhoneNumber());
+        MessageResponse rs = usersService.updateUsersStautsByPrimaryKey(users.getUserId(), "0", userProp);
+        if (rs.getStatus() == ResultCode.FAIL) {
+            return rs;
+        }
+
         association.setLastModifyDate(DateUtil.getNowDate());
         association.setLastModifyUserId(userProp.getUserId());
         association.setLastModifyUserName(userProp.getName());

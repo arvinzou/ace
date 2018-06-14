@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.report.ServiceStatistics">
+    <select id="query" resultType="map">
+        select
+        case
+        when i.modules = 1 then '企业风采'
+        when i.modules = 2 then '企业产品'
+        when i.modules = 3 then '人才信息'
+        when i.modules = 4 then '招商信息'
+        when i.modules = 5 then '政策文件'
+        else '' END 'name',
+        count(1) 'value'
+        from fop.information_service i
+        where i.`status`=2
+        and i.modules in (1,2,3,4,5)
+        GROUP BY i.modules
+        UNION ALL
+        select '品牌推广' as 'name',
+        count(1) 'value'
+        from fop.information_service t
+        where t.`status`=1
+        UNION ALL
+        select '项目信息' as 'name',
+        count(1) 'value'
+        from fop.fop_project p
+        where p.`status`=2
+        UNION ALL
+        select '金融产品' as 'name',
+        count(1) 'value'
+        from fop.fop_loan_product p
+        where p.`status`=2
+        UNION ALL
+        select '诚信公示' as 'name',
+        count(1) 'value'
+        from fop.integrity_publicity t
+        where t.`status`=1
+        UNION ALL
+        select '法律文书' as 'name',
+        count(1) 'value'
+        from fop.fop_law_paper t
+        where t.`status`=1
+        UNION ALL
+        select '法律帮助' as 'name',
+        count(1) 'value'
+        from fop.fop_question t
+        where t.`status`=2
+        UNION ALL
+        select '银企服务' as 'name',
+        count(1) 'value'
+        from fop.fop_finance_project t
+        where t.`status`=2
+    </select>
+</mapper>

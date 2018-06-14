@@ -14,6 +14,7 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.ValidateUtils;
 import com.huacainfo.ace.fop.common.constant.FlowType;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.model.FopCompany;
@@ -22,6 +23,7 @@ import com.huacainfo.ace.fop.model.FopPerson;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.model.Department;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
@@ -410,18 +412,24 @@ public class FopCompanyServiceImpl implements FopCompanyService {
      * @version: 2018-05-02
      */
     @Override
-    public MessageResponse deleteFopCompanyByFopCompanyId(String id,
-                                                          UserProp userProp) throws Exception {
+    public MessageResponse deleteFopCompanyByFopCompanyId(String id, UserProp userProp) throws Exception {
         FopCompany company = fopCompanyDao.selectByPrimaryKey(id);
         if (null == company) {
             return new MessageResponse(ResultCode.FAIL, "无效企业编号");
         }
+        //注销系统账户
+        String account = sysAccountService.getAccount(FopConstant.COMPANY, id);
+        Users users = usersService.selectByAccount(account);
+        MessageResponse rs = usersService.updateUsersStautsByPrimaryKey(users.getUserId(), "0", userProp);
+        if (rs.getStatus() == ResultCode.FAIL) {
+            return rs;
+        }
+        //注销企业资料
         company.setStatus("0");
         company.setLastModifyDate(DateUtil.getNowDate());
         company.setLastModifyUserId(userProp.getUserId());
         company.setLastModifyUserName(userProp.getName());
         fopCompanyDao.updateByPrimaryKeySelective(company);
-
 
         this.dataBaseLogService.log("删除企业管理", "企业管理", String.valueOf(id),
                 String.valueOf(id), "企业管理", userProp);

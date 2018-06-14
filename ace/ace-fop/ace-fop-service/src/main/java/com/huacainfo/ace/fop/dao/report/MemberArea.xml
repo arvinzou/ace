@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.report.MemberArea">
+    <select id="query" resultType="map">
+        select
+          count(1) 'value' ,
+          p.`name` 'name'
+        from fop.fop_company c
+         left join portal.province p on c.areaCode = p.`code`
+        where p.`code` like concat(#{areaCode},'%')
+         and c.`status`=2
+        GROUP BY p.`name`
+    </select>
+</mapper>

@@ -1,6 +1,7 @@
 package com.huacainfo.ace.fop.web.controller;
 
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.web.controller.BaseController;
 import com.huacainfo.ace.fop.service.AnalysisService;
 import org.slf4j.Logger;
@@ -24,7 +25,13 @@ public class AnalysisController extends BaseController implements Serializable {
     @RequestMapping(value = "/query.do")
     @ResponseBody
     public ListResult<Map<String, Object>> query(String reportId) throws Exception {
-        Map<String, Object> condition = null;//this.getParams();
+        Map<String, Object> condition = this.getParams();
+        if (CommonUtils.isBlank(condition.get("deptId"))) {
+            condition.put("deptId", this.getCurUserProp().getCorpId());
+        }
+        if (CommonUtils.isBlank(condition.get("areaCode"))) {
+            condition.put("areaCode", this.getCurUserProp().getAreaCode());
+        }
         return analysisService.query(condition, reportId, 0, 0);
     }
 
@@ -34,5 +41,6 @@ public class AnalysisController extends BaseController implements Serializable {
     public Map<String, Object> portalCount() throws Exception {
         return analysisService.portalCount();
     }
+
 
 }
