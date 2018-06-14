@@ -10,17 +10,17 @@ import org.slf4j.LoggerFactory;
 import com.huacainfo.ace.common.model.view.Tree;
 
 public class CommonTreeUtils {
-	
-	
-	private List<Map<String,Object>> resources;
+
+
+    private List<Map<String,Object>> resources;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	public CommonTreeUtils(List<Map<String,Object>> resources){
 		this.resources=resources;
 	}
 	public  List<Tree> getTreeList(String id){
 		List<Tree> list=new ArrayList<Tree>();
-		 List<Map<String,Object>> temp=this.getChildResourcesList(id);
-		if(temp!=null){
+        List<Map<String, Object>> temp = this.getChildResourcesList(id);
+        if(temp!=null){
 			for(int i=0;i<temp.size();i++){
 				Map<String,Object> row=temp.get(i);
 				Tree tree=this.getChildTreeList(row);
@@ -39,10 +39,10 @@ public class CommonTreeUtils {
 			}
 		}
 		Tree o=this.getChildTreeList(resources);
-		
+
 		List<Tree> list=new ArrayList<Tree>();
-		 List<Map<String,Object>> temp=this.getChildResourcesList(id);
-		if(temp!=null){
+        List<Map<String, Object>> temp = this.getChildResourcesList(id);
+        if(temp!=null){
 			for(int i=0;i<temp.size();i++){
 				Map<String,Object> row=temp.get(i);
 				Tree tree=this.getChildTreeList(row);
@@ -60,8 +60,8 @@ public class CommonTreeUtils {
 			for(int i=0;i<this.resources.size();i++){
 				Map<String,Object> row=(Map<String,Object>)this.resources.get(i);
 				if(String.valueOf(row.get("PID")).equals(id)){
-						list.add(row);
-				}
+                    list.add(row);
+                }
 			}
 		}
 		return list;
@@ -90,8 +90,8 @@ public class CommonTreeUtils {
 			List<Map<String,Object>> list=this.getChildResourcesList(tree.getId());
 			for(Map<String,Object> childResources:list){
 				children.add(getChildTreeList(childResources));
-				
-			}
+
+            }
 			tree.setChildren(children);
 		}
 		return tree;

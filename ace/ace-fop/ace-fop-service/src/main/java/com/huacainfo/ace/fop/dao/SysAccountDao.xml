@@ -238,4 +238,5 @@
           #{cfgKey,jdbcType=VARCHAR}, #{cfgValue,jdbcType=VARCHAR}
          )
     </insert>
+
 </mapper>

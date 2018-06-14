@@ -78,6 +78,9 @@
                                                                         <li data-toggle="modal" data-action="edit" data-target="#model1">
                                                                             <a href="#">修改</a>
                                                                         </li>
+                                                                        <li data-action="del" onclick="delCatadory();">
+                                                                            <a href="#">删除</a>
+                                                                        </li>
                                                                     </ul>
                                                                 </li>
                                                             </ul>
@@ -109,6 +112,9 @@
                                                                             </li>
                                                                             <li data-toggle="modal" data-action="edit" data-target="#model2">
                                                                                 <a href="#">修改</a>
+                                                                            </li>
+                                                                            <li data-action="del" onclick="delActile();">
+                                                                                <a href="#">删除</a>
                                                                             </li>
                                                                         </ul>
                                                                     </li>
@@ -152,10 +158,10 @@
 
             </script>
             <script id="tpl-navitem" type="text/template">
-                {@each data.data.categorys as item,index} {@if index==0}
+                {@each data.data.categorys as item,index} {@if index==0}aaaaa
                 <div class="navitem" data-id="\${item.id}" style="display: block;" id="\${item.id}">
                     {@else}
-                    <div class="navitem" data-id="\${item.id}"  style="display: none;" id="\${item.id}">
+                    <div class="navitem" data-id="\${item.id}"  style="display: none;" id="\${item.id}" >
                         {@/if} {@each item.articles as o}
                         <div class="list_item" data-id="\${o.id}" data-tags="\${o.tags}" data-category="\${item.id}" data-hrefurl="\${o.hrefUrl}">
                             <h2 class="title">\${o.title}</h2>

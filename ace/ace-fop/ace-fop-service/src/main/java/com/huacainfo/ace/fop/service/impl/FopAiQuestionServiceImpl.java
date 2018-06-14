@@ -126,20 +126,12 @@ public class FopAiQuestionServiceImpl implements FopAiQuestionService {
         if (CommonUtils.isBlank(o.getAnswer())) {
             return new MessageResponse(1, "答案不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.fopAiQuestionDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更AI客服", "AI客服", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("变更AI客服", "AI客服", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更AI客服完成！");
     }

@@ -158,7 +158,7 @@
     from
     article where
     tplPageId =#{pageId,jdbcType=VARCHAR}
-    ORDER BY sort,createDate
+    ORDER BY sort,createDate desc
     limit 0, 3
   </select>
   <update id="updateNameById">

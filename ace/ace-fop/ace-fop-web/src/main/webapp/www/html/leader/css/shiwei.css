@@ -19,6 +19,10 @@ p{
     margin-top: 30px;
     color: #657180;
 }
+.leader_nav a{
+    text-decoration: none;
+    cursor: pointer;
+}
 .basic_info{
     width: 100%;
     margin-top: 30px;

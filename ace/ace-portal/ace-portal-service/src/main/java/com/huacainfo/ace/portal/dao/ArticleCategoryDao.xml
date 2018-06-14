@@ -86,7 +86,7 @@
     select count(*)
     from
     article_category where
-    name=#{name}
+    name=#{name} and tplPageId=#{tplPageId}
   </select>
 
   <select id="getList" resultType="map">

@@ -87,8 +87,7 @@ public class FopMemberServiceImpl implements FopMemberService {
      * @version: 2018-05-04
      */
     @Override
-    public MessageResponse insertFopMember(FopMember o, UserProp userProp)
-            throws Exception {
+    public MessageResponse insertFopMember(FopMember o, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(o.getRelationId())) {
             return new MessageResponse(1, "关联不能为空");
         }
@@ -208,6 +207,7 @@ public class FopMemberServiceImpl implements FopMemberService {
 
             return insertFopMember(params, userProp);
         }
+
 
         return new MessageResponse(ResultCode.FAIL, "已经是会员，无需再审");
     }

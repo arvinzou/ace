@@ -81,7 +81,7 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
-    <h5 class="header-title">基本信息</h5>
+    <h5 class="header-title">企业基本信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem hide">
             <span class="labelItemHeader">portal.department.id</span>
@@ -93,7 +93,7 @@
             <br>
             <span id="creditCode"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">企业类型</span>
             <br>
             <span id="companyType"></span>
@@ -112,11 +112,6 @@
             <span class="labelItemHeader">企业编码</span>
             <br>
             <span id="companyCode"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">企业LOGO</span>
-            <br>
-            <span id="companyLogo"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">企业门户地址</span>
@@ -144,6 +139,15 @@
             <span id="crewSize"></span>
         </div>
         <div class="labelItem">
+            <span class="labelItemHeader">企业LOGO</span>
+            <br>
+            <span id="companyLogo"></span>
+        </div>
+    </div>
+
+    <h5 class="header-title">企业资本信息</h5>
+    <div class="row" style="padding:10px">
+        <div class="labelItem">
             <span class="labelItemHeader">注册资金（万元）</span>
             <br>
             <span id="registeredCapital"></span>
@@ -168,15 +172,88 @@
             <br>
             <span id="tenancySpace"></span>
         </div>
-        <div class="labelItem">
+    </div>
+
+    <h5 class="header-title">法人信息</h5>
+    <div class="row" style="padding:10px">
+        <div class="labelItem hide">
             <span class="labelItemHeader">企业法人代表</span>
             <br>
             <span id="personId"></span>
         </div>
         <div class="labelItem">
+            <span class="labelItemHeader">法人姓名</span>
+            <br>
+            <span id="realName"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">手机号码</span>
+            <br>
+            <span id="lpMobile"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">性别</span>
+            <br>
+            <span id="lpSex"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">出生年月</span>
+            <br>
+            <span id="lpBirthDt"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">籍贯</span>
+            <br>
+            <span id="lpNativePlace"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">民族</span>
+            <br>
+            <span id="lpNationality"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">政治面貌</span>
+            <br>
+            <span id="lpPolitical"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">参加工作时间</span>
+            <br>
+            <span id="lpRecruitmentDate"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">文化程度</span>
+            <br>
+            <span id="lpEducation"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">技术职称</span>
+            <br>
+            <span id="lpSkillJobTitle"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">单位职务</span>
+            <br>
+            <span id="lpDeptPost"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">身份证号码</span>
+            <br>
+            <span id="lpIdentityCard"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">主要社会职务</span>
+            <br>
+            <span id="lpSocietyPost"></span>
+        </div>
+    </div>
+
+    <h5 class="header-title">企业联系方式</h5>
+    <div class="row" style="padding:10px">
+        <div class="labelItem">
             <span class="labelItemHeader">企业通讯地址</span>
             <br>
-            <span id="adress"></span>
+            <span id="address"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">维度</span>
@@ -194,9 +271,19 @@
             <span id="firstPersonId"></span>
         </div>
         <div class="labelItem">
+            <span class="labelItemHeader">联系号码</span>
+            <br>
+            <span id="fpMobile"></span>
+        </div>
+        <div class="labelItem">
             <span class="labelItemHeader">第二联系人</span>
             <br>
             <span id="secPersonId"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">联系号码</span>
+            <br>
+            <span id="spMobile"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">邮政编码</span>
@@ -218,6 +305,10 @@
             <br>
             <span id="majorVariety"></span>
         </div>
+    </div>
+
+    <h5 class="header-title">劳动关系信息</h5>
+    <div class="row" style="padding:10px">
         <div class="labelItem">
             <span class="labelItemHeader">劳动合同签订人数</span>
             <br>
@@ -238,6 +329,10 @@
             <br>
             <span id="socialInsuranceNum"></span>
         </div>
+    </div>
+
+    <h5 class="header-title">纳税信息</h5>
+    <div class="row" style="padding:10px">
         <div class="labelItem">
             <span class="labelItemHeader">累计纳税</span>
             <br>
@@ -248,6 +343,10 @@
             <br>
             <span id="yearTaxAmount"></span>
         </div>
+    </div>
+
+    <h5 class="header-title">其他</h5>
+    <div class="row" style="padding:10px">
         <div class="labelItem">
             <span class="labelItemHeader">备注</span>
             <br>
@@ -259,6 +358,7 @@
             <span id="status"></span>
         </div>
     </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem">

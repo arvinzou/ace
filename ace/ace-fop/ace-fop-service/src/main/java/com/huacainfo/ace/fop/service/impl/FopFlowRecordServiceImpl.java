@@ -10,19 +10,25 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
 import com.huacainfo.ace.fop.dao.*;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.FopFlowRecordQVo;
 import com.huacainfo.ace.fop.vo.FopFlowRecordVo;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopFlowRecordService")
 /**
@@ -42,7 +48,11 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     @Autowired
     private FopCompanyDao fopCompanyDao;
     @Autowired
+    private FopCompanyService companyService;
+    @Autowired
     private FopAssociationDao fopAssociationDao;
+    @Autowired
+    private FopAssociationService fopAssociationService;
     @Autowired
     private FopPayRecordService fopPayRecordService;
     @Autowired
@@ -72,6 +82,11 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     private FopQuestionDao fopQuestionDao;
     @Autowired
     private FopQuestionService fopQuestionService;
+    @Autowired
+    private SysAccountService sysAccountService;
+    @Autowired
+    private UsersService usersService;
+
 
     /**
      * @throws
@@ -472,6 +487,7 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         String status = AuditResult.PASS.equals(record.getAuditResult()) ? "2" : "3";
         obj.setStatus(status);
 
+
         return fopProjectService.updateFopProject(obj, userProp);
     }
 
@@ -577,39 +593,92 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
      */
     private MessageResponse memberJoinAudit(FopFlowRecord record, UserProp userProp) throws Exception {
         if (FlowType.MEMBER_JOIN_COMPANY.equals(record.getFlowType())) {
+            FopCompany fopCompany = fopCompanyDao.selectByPrimaryKey(record.getFromId());
+            if (null == fopCompany) {
+                return new MessageResponse(ResultCode.FAIL, "企业资料丢失");
+            }
+            //审核通过 - 加入会员
             if (AuditResult.PASS.equals(record.getAuditResult())) {
-                FopCompany fopCompany = fopCompanyDao.selectByPrimaryKey(record.getFromId());
-                if (null == fopCompany) {
-                    return new MessageResponse(ResultCode.FAIL, "企业资料丢失");
-                }
-
                 FopMember fopMember = new FopMember();
                 fopMember.setRelationId(record.getFromId());
                 fopMember.setRelationType("0");// 0-企业会员 1-团体会员
                 fopMember.setMermberName(fopCompany.getFullName());
-
-                return fopMemberService.memberJoinAudit(fopMember, userProp);
+                MessageResponse rs = fopMemberService.memberJoinAudit(fopMember, userProp);
+                if (rs.getStatus() == ResultCode.SUCCESS) {
+                    fopCompany.setStatus("2");//0-已删除 1 - 非会员 2 - 会员
+                    fopCompany.setLastModifyDate(new Date());
+                    fopCompany.setLastModifyUserName(userProp.getName());
+                    fopCompany.setLastModifyUserId(userProp.getUserId());
+                    fopCompanyDao.updateByPrimaryKeySelective(fopCompany);
+                }
             }
+            //推送微信结果通知
+            sendNoticeToUser(fopCompany.getFullName(), FopConstant.COMPANY, fopCompany.getId(), record);
 
             return new MessageResponse(ResultCode.SUCCESS, "审核成功");
         } else if (FlowType.MEMBER_JOIN_ASSOCIATION.equals(record.getFlowType())) {
+            FopAssociation association = fopAssociationDao.selectByPrimaryKey(record.getFromId());
+            if (null == association) {
+                return new MessageResponse(ResultCode.FAIL, "商协会资料丢失");
+            }
             if (AuditResult.PASS.equals(record.getAuditResult())) {
-                FopAssociation association = fopAssociationDao.selectByPrimaryKey(record.getFromId());
-                if (null == association) {
-                    return new MessageResponse(ResultCode.FAIL, "商协会资料丢失");
-                }
-
                 FopMember fopMember = new FopMember();
                 fopMember.setRelationId(record.getFromId());
                 fopMember.setRelationType("1");// 0-企业会员 1-团体会员
                 fopMember.setMermberName(association.getFullName());
-
-                return fopMemberService.memberJoinAudit(fopMember, userProp);
+                MessageResponse rs = fopMemberService.memberJoinAudit(fopMember, userProp);
+                if (rs.getStatus() == ResultCode.SUCCESS) {
+                    association.setLastModifyDate(new Date());
+                    association.setLastModifyUserName(userProp.getName());
+                    association.setLastModifyUserId(userProp.getUserId());
+                    association.setStatus("2");//0-已删除 1 - 非会员 2 - 会员
+                    fopAssociationDao.updateByPrimaryKeySelective(association);
+                }
             }
+            //推送微信结果通知
+            sendNoticeToUser(association.getFullName(), FopConstant.ASSOCIATION, association.getId(), record);
+
             return new MessageResponse(ResultCode.SUCCESS, "审核成功");
         }
 
         return new MessageResponse(ResultCode.FAIL, "未知会员类型");
+    }
+
+    /**
+     * 推送微信结果通知
+     *
+     * @param nickName
+     * @param relationType
+     * @param relationId
+     * @param record
+     */
+    private void sendNoticeToUser(String nickName, String relationType, String relationId, FopFlowRecord record) {
+        try {
+            String account = sysAccountService.getAccount(relationType, relationId);
+            Users users = usersService.selectByAccount(account);
+
+            String openid = users.getOpenId();
+            String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
+            Map<String, Object> params = new HashMap<>();
+            //kafka所需内容
+            params.put("service", "messageTemplateService");
+            params.put("sysId", "fop");
+            params.put("tmplCode", tmplCode);
+            //发送消息内容
+            params.put("openid", openid);
+            params.put("url", "www.baidu.com");
+//        params.put("first", "哈哈哈哈哈");
+            //data
+            params.put("name", nickName);
+            params.put("title", "会员资质审核");
+            String rs = AuditResult.PASS.equals(record.getAuditResult()) ? "已通过" : "被驳回";
+            params.put("content", "会员资质审核\n" +
+                    "审核结果：" + rs + "\n" +
+                    "审核意见：" + (CommonUtils.isEmpty(record.getAuditOpinion()) ? "" : record.getAuditOpinion()));
+
+        } catch (Exception e) {
+            logger.error("会员资质审核 -[{}]- 审核 - 消息推送失败", relationId);
+        }
     }
 
 

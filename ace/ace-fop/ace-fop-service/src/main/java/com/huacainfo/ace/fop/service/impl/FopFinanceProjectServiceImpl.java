@@ -11,7 +11,10 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.ValidateUtils;
+import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopFinanceProjectDao;
@@ -21,8 +24,10 @@ import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.service.FopFinanceProjectService;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopQuestionService;
+import com.huacainfo.ace.fop.service.SysAccountService;
 import com.huacainfo.ace.fop.vo.FopFinanceProjectQVo;
 import com.huacainfo.ace.fop.vo.FopFinanceProjectVo;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
@@ -62,6 +67,8 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
     private FopAssociationDao fopAssociationDao;
     @Autowired
     private FopFlowRecordService fopFlowRecordService;
+    @Autowired
+    private SysAccountService sysAccountService;
 
     /**
      * @throws
@@ -189,10 +196,11 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         }
         FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
         if (null == fc) {
-            if ("3".equals(fc.getCompanyType())) {
-                return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
-            }
+
             return new MessageResponse(1, "注册账号不是企业账号！");
+        }
+        if ("3" == fc.getCompanyType()) {
+            return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
         }
         o.setCompanyId(fc.getId());
         if (CommonUtils.isBlank(o.getFinanceAmount())) {
@@ -223,7 +231,41 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         this.fopFinanceProjectDao.insertSelective(o);
         this.dataBaseLogService.log("添加流程记录", "流程记录", "", o.getId(),
                 o.getId(), userProp);
+
+        //企业发布融资项目，通知管理员审核
+        sendNoticeToAdministrator(fc.getFullName(), o, userProp);
+
         return new MessageResponse(0, "添加流程记录完成！");
+    }
+
+    /**
+     * 新增项目信息，推送给工商联管理员
+     *
+     * @param projectInfo
+     * @param userProp
+     */
+    private void sendNoticeToAdministrator(String nickName, FopFinanceProject projectInfo, UserProp userProp) {
+        try {
+            Users users = usersService.selectByAccount("fop");
+
+            String openid = users.getOpenId();
+            String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
+            Map<String, Object> params = new HashMap<>();
+            //kafka所需内容
+            params.put("service", "messageTemplateService");
+            params.put("sysId", "fop");
+            params.put("tmplCode", tmplCode);
+            //发送消息内容
+            params.put("openid", openid);
+            params.put("url", "www.baidu.com");
+//        params.put("first", "哈哈哈哈哈");
+            //data
+            params.put("name", nickName);
+            params.put("title", projectInfo.getFinanceTitle());
+            params.put("content", "银企服务发布");
+        } catch (Exception e) {
+            logger.error("银企服务 -[{}]- 新增 - 消息推送失败", projectInfo.getId());
+        }
     }
 
     /**
@@ -353,8 +395,47 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (ResultCode.FAIL == rs1.getStatus()) {
             throw new CustomException(rs1.getErrorMessage());
         }
+        //
+        sendNoticeToUser("", obj, record, userProp);
 
         return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+    }
+
+    /**
+     * 推送通知给用户
+     *
+     * @param nickName
+     * @param obj
+     * @param record
+     * @param userProp
+     */
+    private void sendNoticeToUser(String nickName, FopFinanceProject obj, FopFlowRecord record, UserProp userProp) {
+        try {
+            String account = sysAccountService.getAccount(FopConstant.COMPANY, obj.getCompanyId());
+            Users users = usersService.selectByAccount(account);
+
+            String openid = users.getOpenId();
+            String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
+            Map<String, Object> params = new HashMap<>();
+            //kafka所需内容
+            params.put("service", "messageTemplateService");
+            params.put("sysId", "fop");
+            params.put("tmplCode", tmplCode);
+            //发送消息内容
+            params.put("openid", openid);
+            params.put("url", "www.baidu.com");
+//        params.put("first", "哈哈哈哈哈");
+            //data
+            params.put("name", nickName);
+            params.put("title", obj.getFinanceTitle());
+            String rs = AuditResult.PASS.equals(record.getAuditResult()) ? "已通过" : "被驳回";
+            params.put("content", "银企服务 - 审核\n" +
+                    "审核结果：" + rs + "\n" +
+                    "审核意见：" + (CommonUtils.isEmpty(record.getAuditOpinion()) ? "" : record.getAuditOpinion()));
+
+        } catch (Exception e) {
+            logger.error("银企服务 -[{}]- 审核 - 消息推送失败", obj.getId());
+        }
     }
 
 

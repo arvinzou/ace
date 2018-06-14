@@ -29,9 +29,15 @@ public interface ApiURL {
      */
     String WX_PAY_PATH_API_URL = https + "api.mch.weixin.qq.com/pay/unifiedorder";
 
-
     /**
      * jsapi_ticket
      */
     String WX_JSAPI_TICKET_API_URL = https + "api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=#ACCESS_TOKEN#&type=jsapi";
+
+    /**
+     * 获取用户列表
+     */
+    String USER_LIST_API_URL = https + "api.weixin.qq.com/cgi-bin/user/get?access_token=#ACCESS_TOKEN#&next_openid=#NEXT_OPENID#";
+
+
 }

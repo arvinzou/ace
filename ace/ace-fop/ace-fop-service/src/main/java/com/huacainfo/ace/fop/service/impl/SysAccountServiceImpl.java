@@ -10,8 +10,13 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.common.web.tools.WebUtils;
+import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.dao.FopAssociationDao;
+import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.SysAccountDao;
+import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.service.SysAccountService;
+import com.huacainfo.ace.fop.vo.FopCompanyVo;
 import com.huacainfo.ace.portal.model.Department;
 import com.huacainfo.ace.portal.model.UserCfg;
 import com.huacainfo.ace.portal.model.Users;
@@ -41,6 +46,11 @@ public class SysAccountServiceImpl implements SysAccountService {
 
     @Autowired
     private ResourcesService resourceService;
+
+    @Autowired
+    private FopCompanyDao fopCompanyDao;
+    @Autowired
+    private FopAssociationDao fopAssociationDao;
 
     /**
      * 新增部门
@@ -217,6 +227,19 @@ public class SysAccountServiceImpl implements SysAccountService {
         //TODO 分配成功通知
         return new ResultResponse(ResultCode.SUCCESS, "初始化系统用户成功", department);
     }
+
+    @Override
+    public String getAccount(String relationType, String relationId) {
+        if (FopConstant.COMPANY.equals(relationType)) {
+            FopCompanyVo company = fopCompanyDao.selectVoByPrimaryKey(relationId);
+            return null == company ? "" : company.getLpMobile();
+        } else {
+            FopAssociation association = fopAssociationDao.selectByPrimaryKey(relationId);
+
+            return null == association ? "" : association.getPhoneNumber();
+        }
+    }
+
 
     private ResultResponse dispatchRoleRight(String userId, UserProp userProp, String[] roleTypes) throws Exception {
         List<Map<String, Object>> roleList = sysAccountDao.selectRoleList(userProp.getActiveSyId(), roleTypes);

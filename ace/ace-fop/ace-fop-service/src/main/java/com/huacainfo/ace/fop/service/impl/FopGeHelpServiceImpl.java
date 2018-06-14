@@ -249,8 +249,8 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopGeHelpDao.insertSelective(o);
-        /*this.dataBaseLogService.log("添加政企服务", "政企服务", "",
-                o.getId(), o.getId(), userProp);*/
+        this.dataBaseLogService.log("添加政企服务", "政企服务", "",
+                o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "添加政企服务完成！");
     }
 

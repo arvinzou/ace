@@ -209,6 +209,9 @@
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=CHAR}
         </if>
+        <if test="condition.question!=null and condition.question!=&quot;&quot;">
+            and t.question like concat('%',#{condition.question,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">

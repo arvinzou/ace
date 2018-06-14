@@ -27,6 +27,12 @@ function getList() {
         success: function (data) {
             console.log(data);
             var carousel = document.getElementById('tpl-carousel').innerHTML;
+            var covers = data.data.covers;
+            var newcovers = [];
+            for(var i=2; i>=0; i--){
+                newcovers.push(covers[i]);
+            }
+            data.data.covers = newcovers;
             var html = juicer(carousel, {
                 data: data
             });
