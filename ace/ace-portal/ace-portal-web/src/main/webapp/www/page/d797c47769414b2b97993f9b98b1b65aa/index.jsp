@@ -26,9 +26,9 @@
     <body>
         <div class="page">
             <!--图片轮播栏-->
-            <div id="myCarousel" class="carousel slide">
-               
-            </div>
+           <%-- <div id="myCarousel" class="carousel slide">
+
+            </div>--%>
             <div class="navigation">
                
             </div>
@@ -37,9 +37,9 @@
             </div>
 
         </div>
-        <script id="tpl-carousel" type="text/template">
-           
-                
+       <%-- <script id="tpl-carousel" type="text/template">
+
+
                  <!-- 轮播（Carousel）指标 -->
                 <ol class="carousel-indicators" style="padding-bottom: 0.02rem; padding-top: 0.02rem;">
 										{@each data.data.covers as item,index}
@@ -54,12 +54,12 @@
                 <div class="carousel-inner" id="sliceImgContainer">
 									{@each data.data.covers as item,index}
 											{@if index==0}
-											
+
 										<div class="item active">
 												<a href="{@if item.hrefUrl!=null}\${item.hrefUrl}{@else}preview.jsp?id=\${item.id}{@/if}">
 													<img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;" />
 												</a>
-												<div class="carousel-caption">\${item.title}</div>
+												&lt;%&ndash;<div class="carousel-caption">\${item.title}</div>&ndash;%&gt;
                     </div>
 											{@else}
 												<div class="item">
@@ -70,9 +70,9 @@
 											{@/if}
                   {@/each}
                 </div>
-                
-           
-        </script>
+
+
+        </script>--%>
 				
 				<script id="tpl-navigation" type="text/template">
                  <div class="news-title">
@@ -97,10 +97,10 @@
 													{@/if}
 														{@each item.articles as o}
 															<a class="list_item" href="{@if o.hrefUrl!=null}\${o.hrefUrl}{@else}preview.jsp?id=\${o.id}{@/if}">
-															<h2 class="title">\${o.title}</h2>
 															<div class="cover">
 																	<img class="img js_img" src="\${o.cover}">
 															</div>
+                                                                <h2 class="title">\${o.title}</h2>
 															<div class="cont">
 																	<p class="desc">\${o.remark}</p>
 															</div>
