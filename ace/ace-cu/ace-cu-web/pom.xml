@@ -7,7 +7,7 @@
         <version>1.0</version>
     </parent>
     <properties>
-        <maven.tomcat.port>6002</maven.tomcat.port>
+        <maven.tomcat.port>6010</maven.tomcat.port>
         <maven.tomcat.path>/cu</maven.tomcat.path>
     </properties>
     <artifactId>ace-cu-web</artifactId>

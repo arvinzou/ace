@@ -1,5 +1,4 @@
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
-import com.huacainfo.ace.common.tools.JsonUtil;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -21,12 +20,11 @@ public class TestDemo {
 //        menuApi(accessToken);
 
 //        System.out.println(GUIDUtil.getGUID());
-        String ACCESS_TOKEN = "10_Kr_BogFEbbEcIZdhIi8mVROtrEz-A_KtRr16Z5ojEBk4zpqWOPs-0zSz-zXem3_yHZlr9N7JzoLMWF8Nz4N2-Z2tlDxTYW3iIMrW9-NqlbeEaUAZCoZd2cIFqrxPNqUKZ1lXiFUH8kO_xENJCSBeADAQGP";
-        String a = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=" + ACCESS_TOKEN + "&next_openid=";
-        String r = HttpKit.get(a);
-        UserList u = JsonUtil.toObject(r, UserList.class);
+//        String ACCESS_TOKEN = "10_Kr_BogFEbbEcIZdhIi8mVROtrEz-A_KtRr16Z5ojEBk4zpqWOPs-0zSz-zXem3_yHZlr9N7JzoLMWF8Nz4N2-Z2tlDxTYW3iIMrW9-NqlbeEaUAZCoZd2cIFqrxPNqUKZ1lXiFUH8kO_xENJCSBeADAQGP";
+//        String a = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=" + ACCESS_TOKEN + "&next_openid=";
+//        String r = HttpKit.get(a);
+//
 
-        System.out.println(r);
     }
 
 

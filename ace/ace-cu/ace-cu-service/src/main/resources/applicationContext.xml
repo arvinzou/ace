@@ -19,8 +19,8 @@
     <import resource="classpath:spring/spring-ace-common-redis.xml"/>
     <import resource="classpath:spring/spring-ace-common-kafka.xml"/>
     <import resource="classpath:spring/spring-ace-common-dao.xml"/>
-    <import resource="classpath:spring/spring-ace-fop-service.xml"/>
+    <import resource="classpath:spring/spring-ace-cu-service.xml"/>
     <import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml"/>
-    <import resource="classpath:dubbo/dubbo-ace-fop-provider.xml"/>
+    <import resource="classpath:dubbo/dubbo-ace-cu-provider.xml"/>
 
 </beans>
