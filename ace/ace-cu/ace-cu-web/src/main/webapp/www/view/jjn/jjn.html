@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"  />
@@ -7,7 +7,9 @@
 		<title>救急难</title>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
+		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/jjn.css"/>
+		<script type="text/javascript" src="js/jjn.js"></script>
 	</head>
 	<body>
 		<div class="mainbox">
@@ -16,68 +18,23 @@
 				<div class="banner_info">爱的帮助，见证爱心奇迹</div>
 			</div>
 			<div class="raisebox">
-				<div class="raise_item">
+				<div class="raise_item" ng-repeat="item in items" ng-click="showProjectInfo(item.id)">
 					<div class="raise_item_image">
-						<img src="img/raise.png" width="100%" height="100%"/>
+						<img ng-src="{{item.coverUrl}}" width="100%" height="100%"/>
 					</div>
 					<div class="raise_item_cnt">
-						<div class="raise_item_title">宝宝妈妈在等你回家</div>
-						<div class="raise_item_info">每一份善心我们都无比感恩，谢谢您！</div>
+						<div class="raise_item_title" ng-bind="item.projectName"></div>
+						<div class="raise_item_info" ng-bind="item.title"></div>
 						<div class="raise_item_detail">
-							<div class="detail01">已募集<span>26000</span>元</div>
-							<div class="detail02">剩余<span>20</span>天</div>
-							<div style="clear: both;"></div>
-						</div>
-					</div>
-					<div style="clear: both;"></div>
-				</div>
-				<div class="raise_item">
-					<div class="raise_item_image">
-						<img src="img/raise.png" width="100%" height="100%"/>
-					</div>
-					<div class="raise_item_cnt">
-						<div class="raise_item_title">宝宝妈妈在等你回家</div>
-						<div class="raise_item_info">每一份善心我们都无比感恩，谢谢您！</div>
-						<div class="raise_item_detail">
-							<div class="detail01">已募集<span>26000</span>元</div>
-							<div class="detail02">剩余<span>20</span>天</div>
-							<div style="clear: both;"></div>
-						</div>
-					</div>
-					<div style="clear: both;"></div>
-				</div>
-				<div class="raise_item">
-					<div class="raise_item_image">
-						<img src="img/raise.png" width="100%" height="100%"/>
-					</div>
-					<div class="raise_item_cnt">
-						<div class="raise_item_title">宝宝妈妈在等你回家</div>
-						<div class="raise_item_info">每一份善心我们都无比感恩，谢谢您！</div>
-						<div class="raise_item_detail">
-							<div class="detail01">已募集<span>26000</span>元</div>
-							<div class="detail02">剩余<span>20</span>天</div>
-							<div style="clear: both;"></div>
-						</div>
-					</div>
-					<div style="clear: both;"></div>
-				</div>
-				<div class="raise_item">
-					<div class="raise_item_image">
-						<img src="img/raise.png" width="100%" height="100%"/>
-					</div>
-					<div class="raise_item_cnt">
-						<div class="raise_item_title">宝宝妈妈在等你回家</div>
-						<div class="raise_item_info">每一份善心我们都无比感恩，谢谢您！</div>
-						<div class="raise_item_detail">
-							<div class="detail01">已募集<span>26000</span>元</div>
-							<div class="detail02">剩余<span>20</span>天</div>
+							<div class="detail01">已募集<span ng-bind="item.collectAmount"></span>元</div>
+							<div class="detail02">剩余<span></span>天</div>
 							<div style="clear: both;"></div>
 						</div>
 					</div>
 					<div style="clear: both;"></div>
 				</div>
 				<div class="raise_btnbox">
-					<button class="raise_btn">发起筹款</button>
+					<button class="raise_btn" ng-click="raiseMoney();">发起筹款</button>
 				</div>
 			</div>
 		</div>
