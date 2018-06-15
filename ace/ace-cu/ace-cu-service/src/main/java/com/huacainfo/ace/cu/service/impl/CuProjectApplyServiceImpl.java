@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.cu.dao.CuProjectApplyDao;
 import com.huacainfo.ace.cu.dao.CuProjectApplyResDao;
 import com.huacainfo.ace.cu.model.CuProjectApply;
@@ -239,14 +240,21 @@ public class CuProjectApplyServiceImpl implements CuProjectApplyService {
         vo.setLastModifyDate(DateUtil.getNowDate());
         cuProjectApplyDao.insertSelective(vo);
         //添加附件资料
+        String resUrl;
         for (CuProjectApplyRes res : vo.getResList()) {
             res.setApplyId(applyId);
             res.setId(GUIDUtil.getGUID());
-            vo.setCreateDate(DateUtil.getNowDate());
-            vo.setStatus("1");
-            vo.setCreateUserName("system");
-            vo.setCreateUserId("0000-0000");
-            vo.setLastModifyDate(DateUtil.getNowDate());
+            //图片地址处理
+            resUrl = res.getResUrl();
+            if (!resUrl.startsWith("http")) {
+                resUrl = PropertyUtil.getProperty("fastdfs_server") + resUrl;
+                res.setResUrl(resUrl);
+            }
+            res.setCreateDate(DateUtil.getNowDate());
+            res.setStatus("1");
+            res.setCreateUserName("system");
+            res.setCreateUserId("0000-0000");
+            res.setLastModifyDate(DateUtil.getNowDate());
             cuProjectApplyResDao.insertSelective(res);
         }
 

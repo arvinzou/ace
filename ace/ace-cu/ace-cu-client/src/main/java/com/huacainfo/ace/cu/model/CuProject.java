@@ -1,9 +1,12 @@
 package com.huacainfo.ace.cu.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class CuProject {
+public class CuProject implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     private String parentId;
@@ -33,6 +36,12 @@ public class CuProject {
 
     private String remark;
 
+    /**
+     * '0' : "已删除";
+     * '1' : "待审核";
+     * '2' : "通过";
+     * '3' : "驳回";
+     */
     private String status;
 
     private String createUserId;

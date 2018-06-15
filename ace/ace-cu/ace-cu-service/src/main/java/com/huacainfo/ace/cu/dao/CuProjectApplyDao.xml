@@ -9,6 +9,7 @@
         <result column="realName" jdbcType="VARCHAR" property="realName"/>
         <result column="mobileNumber" jdbcType="VARCHAR" property="mobileNumber"/>
         <result column="idCard" jdbcType="VARCHAR" property="idCard"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -21,8 +22,8 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, applyUserId, applyOpenId, targetAmount, realName, mobileNumber, idCard, description, 
-    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
-    lastModifyDate
+    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate, title
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -39,14 +40,14 @@
       targetAmount, realName, mobileNumber, 
       idCard, description, remark, 
       status, createUserId, createUserName, 
-      createDate, lastModifyUserId, lastModifyUserName, 
-      lastModifyDate)
+      createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate, title)
     values (#{id,jdbcType=VARCHAR}, #{applyUserId,jdbcType=VARCHAR}, #{applyOpenId,jdbcType=VARCHAR}, 
       #{targetAmount,jdbcType=DECIMAL}, #{realName,jdbcType=VARCHAR}, #{mobileNumber,jdbcType=VARCHAR}, 
       #{idCard,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
-      #{lastModifyDate,jdbcType=TIMESTAMP})
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.cu.model.CuProjectApply">
         insert into cu_project_apply
@@ -71,6 +72,9 @@
             </if>
             <if test="idCard != null">
                 idCard,
+            </if>
+            <if test="title != null">
+                title,
             </if>
             <if test="description != null">
                 description,
@@ -122,6 +126,9 @@
             <if test="idCard != null">
                 #{idCard,jdbcType=VARCHAR},
             </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
             <if test="description != null">
                 #{description,jdbcType=VARCHAR},
             </if>
@@ -172,6 +179,9 @@
             <if test="idCard != null">
                 idCard = #{idCard,jdbcType=VARCHAR},
             </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
             <if test="description != null">
                 description = #{description,jdbcType=VARCHAR},
             </if>
@@ -210,6 +220,7 @@
       realName = #{realName,jdbcType=VARCHAR},
       mobileNumber = #{mobileNumber,jdbcType=VARCHAR},
       idCard = #{idCard,jdbcType=VARCHAR},
+        title = #{title,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
