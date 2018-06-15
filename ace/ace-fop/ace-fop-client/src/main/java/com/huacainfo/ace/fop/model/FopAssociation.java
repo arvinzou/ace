@@ -20,6 +20,8 @@ public class FopAssociation {
 
     private String abcCode;
 
+    private String areaCode;
+
     private String address;
 
     private String phoneNumber;
@@ -54,6 +56,14 @@ public class FopAssociation {
     private BigDecimal latitude;
 
     private BigDecimal longitude;
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
 
     public String getDepartmentId() {
         return departmentId;

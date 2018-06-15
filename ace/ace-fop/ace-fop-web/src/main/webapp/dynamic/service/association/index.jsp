@@ -86,6 +86,11 @@
             <br>
             <span id="abcCode"></span>
         </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">所在地区</span>
+            <br>
+            <span id="areaCode"></span>
+        </div>
         <div class="labelItem">
             <span class="labelItemHeader">协会地址</span>
             <br>
