@@ -3,12 +3,22 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.report.MemberArea">
     <select id="query" resultType="map">
         select
-          count(1) 'value' ,
-          p.`name` 'name'
+        count(1) 'value' ,
+        p.`name` 'name'
         from fop.fop_company c
          left join portal.province p on c.areaCode = p.`code`
         where p.`code` like concat(#{areaCode},'%')
-         and c.`status`=2
+        and c.`status`= 2
+        and c.companyType = 0
         GROUP BY p.`name`
+        UNION ALL
+        select
+        count(1) 'value' ,
+        p.`name` 'name'
+        from fop.fop_association t
+        left join portal.province p on t.areaCode = p.`code`
+        where p.`code` like concat(#{areaCode},'%')
+        and t.`status`=2
+        group by p.`name`
     </select>
 </mapper>

@@ -31,5 +31,4 @@
     <import resource="classpath:spring/spring-ace-common-session.xml"/>
     <import resource="classpath:spring/spring-ace-cu-service.xml"/>
     <import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml"/>
-    <!--<import resource="classpath:dubbo/dubbo-ace-fop-consumer.xml" />-->
 </beans>
