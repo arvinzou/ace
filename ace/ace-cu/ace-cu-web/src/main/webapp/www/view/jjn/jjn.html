@@ -27,7 +27,8 @@
 						<div class="raise_item_info" ng-bind="item.title"></div>
 						<div class="raise_item_detail">
 							<div class="detail01">已募集<span ng-bind="item.collectAmount"></span>元</div>
-							<div class="detail02">剩余<span></span>天</div>
+							<div class="detail02" ng-if="item.balanceDays != '0'">剩余<span  ng-bind="item.balanceDays"></span>天</div>
+							<div class="detail02" ng-if="item.balanceDays == '0'">已结束</div>
 							<div style="clear: both;"></div>
 						</div>
 					</div>
