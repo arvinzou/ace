@@ -63,7 +63,7 @@
 											<div class="project_record_title01" ng-bind="record.useToProjectName"></div>
 											<div class="project_record_title02">使用资金：<span class="donation_money" ng-bind="record.useAmount"></span></div>
 										</div>
-										<div class="project_record_info" ng-bind="record.useToProjectDesc">
+										<div class="project_record_info" ng-bind-html="record.useToProjectDesc | to_trusted">
 										</div>
 									</div>
 								</div>

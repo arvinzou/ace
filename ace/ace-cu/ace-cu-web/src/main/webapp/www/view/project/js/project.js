@@ -85,7 +85,13 @@ app.controller(ngControllerName,function($scope){
     	}
     }
 });
-
+app.filter(
+    'to_trusted', ['$sce', function ($sce) {
+        return function (text) {
+            return $sce.trustAsHtml(text);
+        }
+    }]
+);
 function hoverli(divId){
 	$("#"+divId).removeClass('undis').addClass('dis');
 	$("#"+divId).siblings().removeClass('dis').addClass('undis');
