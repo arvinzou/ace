@@ -1,4 +1,5 @@
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -25,6 +26,10 @@ public class TestDemo {
 //        String r = HttpKit.get(a);
 //
 
+
+        for (int i = 0; i < 4; i++) {
+            System.out.println(GUIDUtil.getGUID());
+        }
     }
 
 
