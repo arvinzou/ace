@@ -1,6 +1,6 @@
 jQuery(function ($) {
     init_uploader({
-        extensions: "ppt,doc,xls,pdf,txt,docx,pptx,xlsx",
+        extensions: "jpg,gif,png,bmp",
         url: portalPath + '/files/uploadFile.do',
         target: "url",
         multipart_params: {}
@@ -122,7 +122,7 @@ function appendUploadBtn(id) {
             function (e) {
                 e.preventDefault();
                 var config = {
-                    extensions: "ppt,doc,xls,pdf,txt,docx,pptx,xlsx",
+                    extensions: "jpg,gif,png,bmp,jpeg",
                     url: portalPath + '/files/uploadFile.do',
                     target: id,
                     multipart_params: {}

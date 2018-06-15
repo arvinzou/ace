@@ -42,7 +42,11 @@ jQuery(function ($) {
                     viewPagerButtons: false,
                     beforeSubmit: function (postdata) {
                         postdata.description = editor.getValue();
-                        postdata.coverUrl = fastdfs_server + postdata.coverUrl;
+                        var coverUrl = postdata.coverUrl;
+                        if (!coverUrl.startWith("http")) {
+                            coverUrl = fastdfs_server + coverUrl;
+                        }
+                        postdata.coverUrl = coverUrl;
                         return [true, "", ""];
                     },
                     beforeShowForm: function (e) {
@@ -75,7 +79,11 @@ jQuery(function ($) {
                     viewPagerButtons: true,
                     beforeSubmit: function (postdata) {
                         postdata.description = editor.getValue();
-                        postdata.coverUrl = fastdfs_server + postdata.coverUrl;
+                        var coverUrl = postdata.coverUrl;
+                        if (!coverUrl.startWith("http")) {
+                            coverUrl = fastdfs_server + coverUrl;
+                        }
+                        postdata.coverUrl = coverUrl;
                         return [true, "", ""];
                     },
                     beforeShowForm: function (e) {
@@ -194,7 +202,6 @@ function initSimditor(textarea, text) {
     }
 }
 
-
 function loadText(id) {
     $.ajax({
         type: "post",
@@ -209,4 +216,13 @@ function loadText(id) {
             alert("加载错误！");
         }
     });
+}
+
+String.prototype.startWith = function (str) {
+    var reg = new RegExp("^" + str);
+    return reg.test(this);
+}
+String.prototype.endWith = function (str) {
+    var reg = new RegExp(str + "$");
+    return reg.test(this);
 }

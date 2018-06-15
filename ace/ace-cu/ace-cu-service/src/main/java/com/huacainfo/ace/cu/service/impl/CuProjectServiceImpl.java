@@ -218,6 +218,15 @@ public class CuProjectServiceImpl implements CuProjectService {
         condition.setType(type);
 
         PageResult<CuProjectVo> rs = findCuProjectList(condition, start, limit, orderBy);
+        long balanceDays = 0;
+        List<CuProjectVo> list = rs.getRows();
+        for (CuProjectVo projectVo : list) {
+            if (null != projectVo.getEndDate()) {
+                balanceDays = getDiffDays(DateUtil.getNowDate(), projectVo.getEndDate());
+            }
+            projectVo.setBalanceDays(balanceDays < 0 ? 0 : balanceDays);
+        }
+
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rs);
     }
 
@@ -274,4 +283,8 @@ public class CuProjectServiceImpl implements CuProjectService {
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rs);
     }
 
+    private long getDiffDays(Date begin, Date end) {
+        long between = (end.getTime() - begin.getTime()) / 1000;// 除以1000是为了转换成秒
+        return between / (24 * 3600);
+    }
 }
