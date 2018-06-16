@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
@@ -8,12 +7,10 @@
 		<title>申请</title>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
-		<script type="text/javascript" src="../js/simditor/scripts/module.js"></script>
-		<script type="text/javascript" src="../js/simditor/scripts/hotkeys.js"></script>
-		<script type="text/javascript" src="../js/simditor/scripts/uploader.js"></script>
-		<script type="text/javascript" src="../js/simditor/scripts/simditor.js"></script>
-		<link rel="stylesheet" type="text/css" href="../js/simditor/styles/simditor.css" />
+		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../js/plupload/plupload.full.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/apply.css" />
+		<script type="text/javascript" src="js/apply.js"></script>
 	</head>
 
 	<body>
@@ -51,25 +48,25 @@
 					<div class="identify">
 						<!--身份证正面-->
 						<div class="positive">
-							<div class="pictureContainer" id="positive">
-								<div class="viewPicture undis">
+							<div class="pictureContainer container_01" id="positive">
+								<div class="viewPicture undis picture_01">
 									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
 								</div>
-								<div class="uploadText">
+								<div class="uploadText text_01">
 									<img src="img/add.png" style="width:1rem;height:1rem;" />
-									<p class="uploadPloadprogress">身份证正面</p>
+									<p class="uploadPloadprogress progress_01">身份证正面</p>
 								</div>
 							</div>
 						</div>
 						<!--身份证反面-->
 						<div class="unpositive">
-							<div class="pictureContainer" id="unpositive">
-								<div class="viewPicture undis">
+							<div class="pictureContainer container_02" id="unpositive">
+								<div class="viewPicture undis picture_02">
 									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
 								</div>
-								<div class="uploadText">
+								<div class="uploadText text_02">
 									<img src="img/add.png" style="width:1rem;height:1rem" />
-									<p class="uploadPloadprogress">身份证反面</p>
+									<p class="uploadPloadprogress progress_02">身份证反面</p>
 								</div>
 							</div>
 						</div>
@@ -110,25 +107,25 @@
 					<div class="identify">
 						<!--证明-->
 						<div class="positive">
-							<div class="pictureContainer" id="prove1">
-								<div class="viewPicture undis">
+							<div class="pictureContainer container_03" id="prove1">
+								<div class="viewPicture undis picture_03">
 									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
 								</div>
-								<div class="uploadText">
+								<div class="uploadText text_03">
 									<img src="img/add.png" style="width:1rem;height:1rem;" />
-									<p class="uploadPloadprogress">上传证明</p>
+									<p class="uploadPloadprogress progress_03">上传证明</p>
 								</div>
 							</div>
 						</div>
 						<!--证明-->
 						<div class="unpositive">
-							<div class="pictureContainer" id="prove2">
-								<div class="viewPicture undis">
+							<div class="pictureContainer container_04" id="prove2">
+								<div class="viewPicture undis picture_04">
 									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
 								</div>
-								<div class="uploadText">
+								<div class="uploadText text_04">
 									<img src="img/add.png" style="width:1rem;height:1rem" />
-									<p class="uploadPloadprogress">上传证明</p>
+									<p class="uploadPloadprogress progress_04">上传证明</p>
 								</div>
 							</div>
 						</div>
