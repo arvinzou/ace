@@ -182,12 +182,13 @@
   <sql id="sqlCommon">
     t.productId, t.probDiscri, t.probAnsys, t.actions, t.liable,
     f.name statusName,ifnull(b.name,'') userName,DATE_FORMAT(t.lastModifyDate,'%Y-%m-%d %h:%i') DateEnd,DATE_FORMAT(t.createDate,'%Y-%m-%d %h:%i') DateStart,e.name meetingName,
-    d.name topicName,e.name normName
+    d.name topicName,e.name normName,p.department_name deptName,(case  when t.category='2' then'短期' else '长期' end) typeName
     from tpa t
     left join portal.users b on t.liable=b.user_id
     left join meeting c on t.meetingId=c.id
     left join topic d on t.topicId=d.id
     left join norm e on t.normId=e.id
+    left join portal.department p on b.department_id=p.department_id
     left join (select code,name from portal.dict where category_id='92') f on t.`status`=f.code
   </sql>
   <select id="selectTaskAByUserId" resultType="map">
