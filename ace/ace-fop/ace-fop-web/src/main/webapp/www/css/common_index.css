@@ -588,10 +588,54 @@ body {
 .map .company_list {
     position: absolute;
     right: 40px;
-    top: 40px;
-    height: 480px;
-    width: 350px;
-    border: 1px solid red;
+    top: 70px;
+    height: 440px;
+    width: 520px;
+    font-size: 12px;
+}
+
+.map .company_list .list_more > span {
+    float: right;
+    font-size: 14px;
+    color: rgba(26, 86, 168, 1);
+    line-height: 53px;
+    cursor: pointer;
+}
+
+.map .company_list .list_more:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.map .company_list .lists {
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    width: 100%;
+
+}
+
+.map .company_list table {
+    width: 100%;
+}
+
+.map .company_list thead, .map .company_list tbody {
+    text-align: center;
+
+    color: rgba(22, 90, 183, 1);
+    line-height: 53px;
+    font-weight: 600;
+}
+
+.map .company_list tbody {
+    line-height: 46px;
+    color: rgba(86, 91, 112, 1);
+
+}
+
+.map .company_list tbody td {
+    margin-left: 20px;
+    overflow: hidden;
 }
 
 .map_content {
