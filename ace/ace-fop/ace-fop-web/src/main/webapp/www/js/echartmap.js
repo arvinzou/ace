@@ -30,7 +30,6 @@ var option = {
     geo: {
         map: '中国',
         //roam: true,
-        left: 50,
         label: {
             normal: {
                 show: false,
