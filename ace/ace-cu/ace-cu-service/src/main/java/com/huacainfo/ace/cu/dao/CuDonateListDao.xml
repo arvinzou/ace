@@ -211,11 +211,14 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.cu.vo.CuDonateListVo">
+        <result column="projectName" jdbcType="VARCHAR" property="projectName"/>
+        <result column="points" jdbcType="DECIMAL" property="points"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
-        id, projectId, userId, orderId, openId, donateAmount, donateDate, remark, status,
-        createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+        p.projectName, o.points,
+        t.id, t.projectId, t.userId, t.orderId, t.openId, t.donateAmount, t.donateDate, t.remark, t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -242,9 +245,11 @@
 
     <sql id="whereCondition">
         from cu_donate_list t
+        left join cu.cu_project p on t.projectId = p.id
+        left join cu_donate_order o on o.id = t.orderId
         where 1=1
-        <if test="condition.id!=null and condition.id!=&quot;&quot;">
-            and t.id = #{condition.id,jdbcType=VARCHAR}
+        <if test="condition.openId!=null and condition.openId!=&quot;&quot;">
+            and t.openId = #{condition.openId,jdbcType=VARCHAR}
         </if>
         <if test="condition.projectId!=null and condition.projectId!=&quot;&quot;">
             and t.projectId = #{condition.projectId,jdbcType=VARCHAR}
@@ -260,5 +265,22 @@
         select count(1)
         from cu_donate_list
         where 1=1
+    </select>
+
+    <select id="getAccDonateCount" resultType="int" parameterType="java.lang.String">
+        SELECT
+            count(1)
+        FROM
+            cu.cu_donate_list t
+        WHERE
+            t.openId =  #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="getAccDonateAmount" resultType="java.math.BigDecimal" parameterType="java.lang.String">
+        SELECT
+            sum(donateAmount)
+        FROM
+            cu.cu_donate_list t
+        WHERE
+            t.openId= #{openId,jdbcType=VARCHAR}
     </select>
 </mapper>

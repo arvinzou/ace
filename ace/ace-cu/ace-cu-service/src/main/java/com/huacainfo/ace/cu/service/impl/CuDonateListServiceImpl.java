@@ -1,14 +1,18 @@
 package com.huacainfo.ace.cu.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.cu.dao.CuDonateListDao;
 import com.huacainfo.ace.cu.model.CuDonateList;
+import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.service.CuDonateListService;
 import com.huacainfo.ace.cu.vo.CuDonateListQVo;
 import com.huacainfo.ace.cu.vo.CuDonateListVo;
@@ -18,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -210,5 +215,60 @@ public class CuDonateListServiceImpl implements CuDonateListService {
                 String.valueOf(id), "慈善项目-捐献列表", userProp);
         return new MessageResponse(0, "慈善项目-捐献列表删除完成！");
     }
+
+    /**
+     * 增加捐献记录
+     *
+     * @param order
+     * @return
+     */
+    @Override
+    public ResultResponse addDonateList(CuDonateOrder order) {
+        CuDonateList donateList = new CuDonateList();
+        donateList.setId(GUIDUtil.getGUID());
+        donateList.setProjectId(order.getProjectId());
+        donateList.setUserId(order.getUserId());
+        donateList.setOrderId(order.getId());
+        donateList.setOpenId(order.getOpenId());
+        donateList.setDonateAmount(order.getDonateAmount());
+        donateList.setDonateDate(order.getDonateDate());
+
+        donateList.setStatus("1");
+        donateList.setCreateUserId("0000-0000");
+        donateList.setCreateUserName("system");
+        donateList.setCreateDate(DateUtil.getNowDate());
+        donateList.setLastModifyDate(DateUtil.getNowDate());
+
+        int count = cuDonateListDao.insertSelective(donateList);
+        if (count == 1) {
+            return new ResultResponse(ResultCode.SUCCESS, "新增成功", donateList);
+        }
+
+        return new ResultResponse(ResultCode.FAIL, "新增失败");
+    }
+
+    /**
+     * 获取某人的累计捐款金额
+     *
+     * @param openId
+     * @return
+     */
+    @Override
+    public BigDecimal getAccDonateAmount(String openId) {
+        return cuDonateListDao.getAccDonateAmount(openId);
+    }
+
+    /**
+     * 获取某人的累计捐款次数
+     *
+     * @param openId
+     * @return
+     */
+    @Override
+    public int getAccDonateCount(String openId) {
+        return cuDonateListDao.getAccDonateCount(openId);
+    }
+
+
 
 }
