@@ -27,18 +27,10 @@ var option = {
             return params.name/* + ' : ' + params.value[2]*/;
         }
     },
-    legend: {
-        orient: 'vertical',
-        y: 'bottom',
-        x: 'right',
-        data: ['会员企业'],
-        textStyle: {
-            color: '#000'
-        }
-    },
     geo: {
         map: '中国',
         //roam: true,
+        left: 50,
         label: {
             normal: {
                 show: false,
