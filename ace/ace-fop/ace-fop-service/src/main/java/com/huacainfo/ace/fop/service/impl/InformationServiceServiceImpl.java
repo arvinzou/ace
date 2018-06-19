@@ -232,6 +232,7 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         if (ModulesType.TALENT_INFO.equals(ffp.getModules())) {
             ffp.setComments(fopQuestionService.findCommentList(ffp.getId()));
         }
+
         return rst;
     }
 
