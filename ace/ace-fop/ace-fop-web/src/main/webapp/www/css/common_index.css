@@ -581,14 +581,22 @@ body {
 
 .map {
     width: 100%;
+    padding-right: 40%;
     margin-top: 15px;
     position: relative;
+    background-color: #fff;
+}
+
+.map .title_gis {
+    position: absolute;
+    top: -36px;
+    left: 0px;
 }
 
 .map .company_list {
     position: absolute;
     right: 40px;
-    top: 70px;
+    top: 16px;
     height: 440px;
     width: 520px;
     font-size: 12px;
@@ -624,7 +632,7 @@ body {
 }
 
 .map .company_list .table_content {
-    height: 320px;
+    height: 350px;
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
