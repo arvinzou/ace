@@ -70,9 +70,7 @@
 				ORDER BY category_id
 			</otherwise>
 		</choose>
-
 		limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-
 	</select>
 	<select id="findListAll" resultMap="BaseResultMap">
 

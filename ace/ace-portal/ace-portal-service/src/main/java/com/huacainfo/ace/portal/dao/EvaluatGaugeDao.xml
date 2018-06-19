@@ -12,22 +12,22 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, evaluatTplId, scoreStart, scoreEnd, createDate
+    id, evaluatTplId, scoreStart, scoreEnd, createDate,content
   </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from evaluat_gauge
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from evaluat_gauge
     where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByEvaluatTplId" parameterType="java.lang.String">
+    delete from evaluat_gauge
+    where evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatGauge">
     insert into evaluat_gauge (id, evaluatTplId, scoreStart, 
@@ -37,8 +37,71 @@
       #{scoreEnd,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatGauge">
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.portal.model.EvaluatGauge">
+    insert into evaluat_gauge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="evaluatTplId != null">
+        evaluatTplId,
+      </if>
+      <if test="scoreStart != null">
+        scoreStart,
+      </if>
+      <if test="scoreEnd != null">
+        scoreEnd,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="evaluatTplId != null">
+        #{evaluatTplId,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreStart != null">
+        #{scoreStart,jdbcType=INTEGER},
+      </if>
+      <if test="scoreEnd != null">
+        #{scoreEnd,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.portal.model.EvaluatGauge">
+    update evaluat_gauge
+    <set>
+      <if test="evaluatTplId != null">
+        evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreStart != null">
+        scoreStart = #{scoreStart,jdbcType=INTEGER},
+      </if>
+      <if test="scoreEnd != null">
+        scoreEnd = #{scoreEnd,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.portal.model.EvaluatGauge">
     update evaluat_gauge
     set evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR},
       scoreStart = #{scoreStart,jdbcType=INTEGER},
@@ -47,4 +110,21 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatGauge">
+    update evaluat_gauge
+    set evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR},
+    scoreStart = #{scoreStart,jdbcType=INTEGER},
+    scoreEnd = #{scoreEnd,jdbcType=INTEGER},
+    createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="findLists" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    FROM evaluat_gauge
+    WHERE evaluatTplId = #{evaluatTplId}
+    ORDER BY scoreStart
+  </select>
+
 </mapper>

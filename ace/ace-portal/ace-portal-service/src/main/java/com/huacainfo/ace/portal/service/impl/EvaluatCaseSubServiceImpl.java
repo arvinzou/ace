@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,12 +86,15 @@ public class EvaluatCaseSubServiceImpl implements EvaluatCaseSubService {
         if (CommonUtils.isBlank(o.getEvaluatCaseId())) {
             return new MessageResponse(1, "所属评测不能为空！");
         }
-        int temp = this.evaluatCaseSubDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "题目选项名称重复！");
+        if (CommonUtils.isBlank(o.getCntImg()) && CommonUtils.isBlank(o.getName())) {
+            return new MessageResponse(1, "选项不能为空！");
         }
+//        int temp = this.evaluatCaseSubDao.isExit(o);
+//        if (temp > 0) {
+//            return new MessageResponse(1, "题目选项名称重复！");
+//        }
         o.setCreateDate(new Date());
-        this.evaluatCaseSubDao.insert(o);
+        this.evaluatCaseSubDao.insertSelective(o);
         this.dataBaseLogService.log("添加题目选项", "题目选项", "", o.getName(),
                 o.getName(), userProp);
         return new MessageResponse(0, "添加题目选项完成！");

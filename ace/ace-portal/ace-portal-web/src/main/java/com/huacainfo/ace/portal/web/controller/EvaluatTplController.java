@@ -1,6 +1,9 @@
 package com.huacainfo.ace.portal.web.controller;
 import java.util.List;
 import java.util.Map;
+
+import com.huacainfo.ace.common.model.view.Tree;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +53,9 @@ public class EvaluatTplController extends PortalBaseController {
 	@ResponseBody
 	public PageResult<EvaluatTplVo> findEvaluatTplList(EvaluatTplQVo condition,
 			PageParamNoChangeSord page) throws Exception {
-		PageResult<EvaluatTplVo> rst = this.evaluatTplService
-				.findEvaluatTplList(condition, page.getStart(), page.getLimit(),
-						page.getOrderBy());
-		if (rst.getTotal() == 0) {
+        condition.setSyid(this.getCurUserProp().getActiveSyId());
+        PageResult<EvaluatTplVo> rst = this.evaluatTplService.findEvaluatTplList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
 			rst.setTotal(page.getTotalRecord());
 		}
 	
@@ -73,10 +75,8 @@ public class EvaluatTplController extends PortalBaseController {
 	@RequestMapping(value = "/insertEvaluatTpl.do")
 	@ResponseBody
 	public MessageResponse insertEvaluatTpl(String jsons) throws Exception {
-		EvaluatTpl obj = JSON.parseObject(jsons, EvaluatTpl.class);
-		return this.evaluatTplService
-				.insertEvaluatTpl(obj, this.getCurUserProp());
-	}
+        return this.evaluatTplService.insertEvaluatTpl(jsons, this.getCurUserProp());
+    }
     /**
 	 *
 	    * @Title:updateEvaluatTpl
@@ -91,10 +91,8 @@ public class EvaluatTplController extends PortalBaseController {
 	@RequestMapping(value = "/updateEvaluatTpl.do")
 	@ResponseBody
 	public MessageResponse updateEvaluatTpl(String jsons) throws Exception {
-		EvaluatTpl obj = JSON.parseObject(jsons, EvaluatTpl.class);
-		return this.evaluatTplService
-				.updateEvaluatTpl(obj, this.getCurUserProp());
-	}
+        return this.evaluatTplService.updateEvaluatTpl(jsons, this.getCurUserProp());
+    }
     /**
 	 *
 	    * @Title:selectEvaluatTplByPrimaryKey
@@ -166,4 +164,27 @@ public class EvaluatTplController extends PortalBaseController {
     public Map<String,Object> getById(String id) throws Exception{
         return this.evaluatTplService.getById(id);
     }
+
+    /**
+     * @throws
+     * @Title:getDictTreeList
+     * @Description: TODO(获取字典树)
+     * @param: @param id
+     * @param: @return
+     * @param: @throws Exception
+     * @return: List<Tree>
+     * @author: chenxiaoke
+     * @version: 2016年11月17日 下午1:54:10
+     */
+    @RequestMapping(value = "/getEvaluatTplTreeList.do")
+    @ResponseBody
+    public List<Tree> getDictTreeList(String id) throws Exception {
+        if (CommonUtils.isBlank(id)) {
+            id = "0";
+        }
+        logger.info("=================getDictTreeList===>{}", id);
+        List<Tree> list = this.evaluatTplService.selectEvaluatTplTreeList(id, this.getCurUserProp().getActiveSyId());
+        return list;
+    }
+
 }

@@ -6,7 +6,14 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.dao.EvaluatCaseSubDao;
+import com.huacainfo.ace.portal.model.EvaluatCaseSub;
+import com.huacainfo.ace.portal.service.EvaluatCaseSubService;
+import com.huacainfo.ace.portal.vo.EvaluatCaseSubVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +44,12 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    @Autowired
+    private EvaluatCaseSubDao evaluatCaseSubDao;
+
+    @Autowired
+    private EvaluatCaseSubService evaluatCaseSubService;
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -51,11 +64,36 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
      * @version: 2018-06-09
      */
     @Override
-    public PageResult<EvaluatCaseVo> findEvaluatCaseList(EvaluatCaseQVo condition, int start,
-                                                         int limit, String orderBy) throws Exception {
+    public PageResult<EvaluatCaseVo> findEvaluatCaseList(EvaluatCaseQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<EvaluatCaseVo> rst = new PageResult<EvaluatCaseVo>();
-        List<EvaluatCaseVo> list = this.evaluatCaseDao.findList(condition,
-                start, start + limit, orderBy);
+        List<EvaluatCaseVo> list = this.evaluatCaseDao.findList(condition, start, limit, orderBy);
+        for (EvaluatCaseVo item : list) {
+            List<EvaluatCaseSubVo> listsub = this.evaluatCaseSubDao.findLists(item.getId());
+            EvaluatCaseSubVo evaluatCaseSubVo = null;
+            switch (listsub.size()) {
+                case 4:
+                    evaluatCaseSubVo = listsub.get(3);
+                    item.setaCntImg4(evaluatCaseSubVo.getCntImg());
+                    item.setIsAnswer4(evaluatCaseSubVo.getIsAnswer());
+                    item.setaName4(evaluatCaseSubVo.getName());
+
+                case 3:
+                    evaluatCaseSubVo = listsub.get(2);
+                    item.setaCntImg3(evaluatCaseSubVo.getCntImg());
+                    item.setIsAnswer3(evaluatCaseSubVo.getIsAnswer());
+                    item.setaName3(evaluatCaseSubVo.getName());
+
+                case 2:
+                    evaluatCaseSubVo = listsub.get(1);
+                    item.setaCntImg2(evaluatCaseSubVo.getCntImg());
+                    item.setIsAnswer2(evaluatCaseSubVo.getIsAnswer());
+                    item.setaName2(evaluatCaseSubVo.getName());
+                    evaluatCaseSubVo = listsub.get(0);
+                    item.setaCntImg1(evaluatCaseSubVo.getCntImg());
+                    item.setIsAnswer1(evaluatCaseSubVo.getIsAnswer());
+                    item.setaName1(evaluatCaseSubVo.getName());
+            }
+        }
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.evaluatCaseDao.findCount(condition);
@@ -76,9 +114,15 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
      * @version: 2018-06-09
      */
     @Override
-    public MessageResponse insertEvaluatCase(EvaluatCase o, UserProp userProp)
-            throws Exception {
-        o.setId(GUIDUtil.getGUID());
+    public MessageResponse insertEvaluatCase(String json, UserProp userProp) throws Exception {
+        EvaluatCase o = JSON.parseObject(json, EvaluatCase.class);
+        JSONObject jsonObj = JSON.parseObject(json);
+        EvaluatCaseSub evaluatCaseSub = new EvaluatCaseSub();
+        String evaluatCaseId = GUIDUtil.getGUID();
+        o.setId(evaluatCaseId);
+        if (CommonUtils.isBlank(jsonObj.getString("aName2"))) {
+            return new MessageResponse(1, "至少要填写两个选项！");
+        }
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -94,13 +138,15 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
         if (CommonUtils.isBlank(o.getScore())) {
             return new MessageResponse(1, "分值不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSolution())) {
-            return new MessageResponse(1, "答案不能为空！");
+        MessageResponse rr = insertCaseSub(jsonObj, userProp, evaluatCaseId);
+        if (rr.getStatus() == 1) {
+            throw new CustomException(rr.getErrorMessage());
         }
-        int temp = this.evaluatCaseDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "题目名称重复！");
-        }
+        o.setSolution(rr.getErrorMessage());
+//        int temp = this.evaluatCaseDao.isExit(o);
+//        if (temp > 0) {
+//            return new MessageResponse(1, "题目名称重复！");
+//        }
         o.setCreateDate(new Date());
         this.evaluatCaseDao.insert(o);
         this.dataBaseLogService.log("添加题目", "题目", "", o.getTitle(),
@@ -120,8 +166,16 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
      * @version: 2018-06-09
      */
     @Override
-    public MessageResponse updateEvaluatCase(EvaluatCase o, UserProp userProp)
+    public MessageResponse updateEvaluatCase(String jsons, UserProp userProp)
             throws Exception {
+
+        EvaluatCase o = JSON.parseObject(jsons, EvaluatCase.class);
+        JSONObject jsonObj = JSON.parseObject(jsons);
+        EvaluatCaseSub evaluatCaseSub = new EvaluatCaseSub();
+        String evaluatCaseId = o.getId();
+        if (CommonUtils.isBlank(jsonObj.getString("aName2"))) {
+            return new MessageResponse(1, "至少要填写两个选项！");
+        }
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -137,9 +191,13 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
         if (CommonUtils.isBlank(o.getScore())) {
             return new MessageResponse(1, "分值不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSolution())) {
-            return new MessageResponse(1, "答案不能为空！");
+        this.evaluatCaseSubDao.deleteByEvaluatCaseId(evaluatCaseId);
+
+        MessageResponse rr = insertCaseSub(jsonObj, userProp, evaluatCaseId);
+        if (rr.getStatus() == 1) {
+            throw new CustomException(rr.getErrorMessage());
         }
+        o.setSolution(rr.getErrorMessage());
         this.evaluatCaseDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更题目", "题目", "", o.getTitle(),
                 o.getTitle(), userProp);
@@ -216,5 +274,41 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
         rst.put("status", 0);
         rst.put("data", this.evaluatCaseDao.getById(id));
         return rst;
+    }
+
+
+    private MessageResponse insertCaseSub(JSONObject jsonObj, UserProp userProp, String evaluatCaseId) throws Exception {
+        EvaluatCaseSub evaluatCaseSub = new EvaluatCaseSub();
+        evaluatCaseSub.setEvaluatCaseId(evaluatCaseId);
+        String answer = "";
+        for (int i = 1; i < 5; i++) {
+            if (jsonObj.getString("aName" + i).equals("")) {
+                return new MessageResponse(0, answer);
+            }
+            evaluatCaseSub.setName(jsonObj.getString("aName" + i));
+            evaluatCaseSub.setCntImg(jsonObj.getString("aCntImg" + i));
+            evaluatCaseSub.setIsAnswer(jsonObj.getString("isAnswer" + i));
+            evaluatCaseSub.setSort(i);
+            if ("1".equals(jsonObj.getString("isAnswer" + i))) {
+                if (!answer.equals("")) {
+                    answer += ",";
+                }
+                answer = answer + i;
+            }
+            MessageResponse mr = this.evaluatCaseSubService.insertEvaluatCaseSub(evaluatCaseSub, userProp);
+            if (mr.getStatus() == 1) {
+                return new MessageResponse(1, mr.getErrorMessage());
+            }
+        }
+        if (Integer.parseInt(jsonObj.getString("type")) == 2 && answer.length() < 2) {
+            return new MessageResponse(1, "多选题只有一个选项");
+        }
+        if (Integer.parseInt(jsonObj.getString("type")) == 1 && answer.length() > 1) {
+            return new MessageResponse(1, "单选题有多个选项");
+        }
+        if (answer.equals("")) {
+            return new MessageResponse(1, "没有填写答案");
+        }
+        return new MessageResponse(0, answer);
     }
 }

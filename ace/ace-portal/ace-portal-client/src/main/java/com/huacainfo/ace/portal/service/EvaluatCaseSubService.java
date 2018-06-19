@@ -29,6 +29,7 @@ public interface EvaluatCaseSubService {
 	 */
 	public abstract PageResult<EvaluatCaseSubVo> findEvaluatCaseSubList(EvaluatCaseSubQVo condition, int start, int limit, String orderBy) throws Exception;
 
+
     /**
 	 *
 	    * @Title:insertEvaluatCaseSub

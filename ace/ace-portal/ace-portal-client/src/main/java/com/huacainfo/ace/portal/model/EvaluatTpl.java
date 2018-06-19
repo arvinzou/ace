@@ -18,6 +18,7 @@ public class EvaluatTpl implements java.io.Serializable {
     private BigDecimal originalCost;
 
     private BigDecimal discountCost;
+
     private String introduce;
 
     private String notice;
@@ -25,6 +26,8 @@ public class EvaluatTpl implements java.io.Serializable {
     private Integer score;
 
     private String status;
+
+    private String syid;
 
     private String createUserId;
 
@@ -37,6 +40,14 @@ public class EvaluatTpl implements java.io.Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getSyid() {
+        return syid;
+    }
+
+    public void setSyid(String syid) {
+        this.syid = syid;
+    }
 
     public String getId() {
         return id;

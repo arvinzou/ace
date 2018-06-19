@@ -5,12 +5,14 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="evaluatCaseId" jdbcType="VARCHAR" property="evaluatCaseId" />
     <result column="key" jdbcType="VARCHAR" property="key" />
+      <result column="sort" jdbcType="INTEGER" property="sort"/>
+      <result column="isAnswer" jdbcType="CHAR" property="isAnswer"/>
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="cntImg" jdbcType="VARCHAR" property="cntImg" />
     <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, evaluatCaseId, key, name, cntImg, createDate
+      id, evaluatCaseId, sort,isAnswer, name, cntImg, createDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -22,21 +24,135 @@
     delete from evaluat_case_sub
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+    <delete id="deleteByEvaluatCaseId" parameterType="java.lang.String">
+    delete from evaluat_case_sub
+    where evaluatCaseId = #{evaluatCaseId,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatCaseSub">
-    insert into evaluat_case_sub (id, evaluatCaseId, key, 
+      insert into evaluat_case_sub (id, evaluatCaseId, key, sort, isAnswer,
       name, cntImg, createDate
       )
-    values (#{id,jdbcType=VARCHAR}, #{evaluatCaseId,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
+      values (#{id,jdbcType=VARCHAR}, #{evaluatCaseId,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR},
+      #{sort,jdbcType=INTEGER}, #{isAnswer,jdbcType=CHAR},
       #{name,jdbcType=VARCHAR}, #{cntImg,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
       )
   </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.portal.model.EvaluatCaseSub">
+        insert into evaluat_case_sub
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="evaluatCaseId != null">
+                evaluatCaseId,
+            </if>
+            <if test="key != null">
+                key,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="isAnswer != null">
+                isAnswer,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="cntImg != null">
+                cntImg,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="evaluatCaseId != null">
+                #{evaluatCaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="key != null">
+                #{key,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isAnswer != null">
+                #{isAnswer,jdbcType=CHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="cntImg != null">
+                #{cntImg,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.portal.model.EvaluatCaseSub">
+        update evaluat_case_sub
+        <set>
+            <if test="evaluatCaseId != null">
+                evaluatCaseId = #{evaluatCaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="key != null">
+                key = #{key,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isAnswer != null">
+                isAnswer = #{isAnswer,jdbcType=CHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="cntImg != null">
+                cntImg = #{cntImg,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatCaseSub">
     update evaluat_case_sub
     set evaluatCaseId = #{evaluatCaseId,jdbcType=VARCHAR},
       key = #{key,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      isAnswer = #{isAnswer,jdbcType=CHAR},
       name = #{name,jdbcType=VARCHAR},
       cntImg = #{cntImg,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="findLists" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from evaluat_case_sub
+        where evaluatCaseId =#{evaluatCaseId}
+        ORDER BY sort
+    </select>
+
+    <sql id="whereCondition">
+        from evaluat_case_sub where 0=0
+        <if test='condition.title!=null and condition.title!=""'>
+            and title like
+            concat(#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.evaluatCaseId!=null and condition.evaluatCaseId!=""'>
+            and evaluatCaseId =#{condition.evaluatCaseId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.portal.vo.EvaluatCaseSubVo">
+
+    </resultMap>
+
 </mapper>

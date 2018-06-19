@@ -10,7 +10,9 @@ import com.huacainfo.ace.portal.vo.EvaluatGaugeVo;
 public interface EvaluatGaugeDao {
     int deleteByPrimaryKey(String EvaluatGaugeId);
 
-    int insert(EvaluatGauge record);
+    int deleteByEvaluatTplId(String evaluatTplId);
+
+    int insertSelective(EvaluatGauge record);
 
 
     EvaluatGaugeVo selectByPrimaryKey(String EvaluatGaugeId);
@@ -21,6 +23,8 @@ public interface EvaluatGaugeDao {
     List<EvaluatGaugeVo> findList(@Param("condition") EvaluatGaugeQVo condition,
 			@Param("start") int start, @Param("limit") int limit,
 			@Param("orderBy") String orderBy);
+
+    List<EvaluatGauge> findLists(@Param("evaluatTplId") String evaluatTplId);
 
 	int findCount(@Param("condition") EvaluatGaugeQVo condition);
 
