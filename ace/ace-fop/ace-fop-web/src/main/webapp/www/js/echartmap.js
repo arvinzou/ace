@@ -16,24 +16,15 @@ window.onload = function(){
 
 var option = {
     backgroundColor: '#fff',
-    title: {
-        text: '中国地区',
-        subtext: '企业会员分布图',
-        x: 'center'
-    },
+    // title: {
+    //     text: '中国地区',
+    //     subtext: '企业会员分布图',
+    //     x: 'center'
+    // },
     tooltip: {
         trigger: 'item',
         formatter: function (params) {
             return params.name/* + ' : ' + params.value[2]*/;
-        }
-    },
-    legend: {
-        orient: 'vertical',
-        y: 'bottom',
-        x: 'right',
-        data: ['会员企业'],
-        textStyle: {
-            color: '#000'
         }
     },
     geo: {
@@ -97,7 +88,7 @@ function loadMap(cityName) {
         // myMap.setOption(option);
         echarts.registerMap(cityName, geoJson);
         option.geo.map = cityName;
-        option.title.text = cityName + "地区";
+        // option.title.text = cityName + "地区";
         myMap.setOption(option);
     });
 }
