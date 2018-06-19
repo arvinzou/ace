@@ -12,6 +12,7 @@
     <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
     <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
     <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/user.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/recruit.js"></script>
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -25,6 +26,8 @@
             background-color: #FBFCFD;
             margin: auto;
             margin-bottom: 62px;
+            min-height: 900px;
+            max-height: 1400px;
         }
 
         .current_site {
@@ -58,6 +61,10 @@
             text-indent: 2em;
             color: #31364B;
             line-height: 30px;
+        }
+        .appeal_info{
+            width: 100%;
+            margin-bottom: 30px;
         }
         .finance_table{
             width: 60%;
@@ -165,6 +172,69 @@
             font-weight: bolder;
             color: #1A56A8;
         }
+        .message{
+            width: 90%;
+            margin: auto;
+            border-top: 1px solid #E1E5ED;
+            margin-top: 30px;
+        }
+        .msg_title{
+            width: 100%;
+            height: 62px;
+            line-height: 62px;
+        }
+        .leave_1{
+            width: 50%;
+            float: left;
+        }
+        .leave_2{
+            width: 50%;
+            float: left;
+            text-align: right;
+        }
+        .msg_info{
+            width: 100%;
+            height: 200px;
+        }
+        .msg_info textarea{
+            width: 100%;
+            height: 100%;
+        }
+        .msg_footer{
+            width: 100%;
+            height: 62px;
+            line-height: 62px;
+            background-color: #EDF4F9;
+        }
+        .msg_footer button{
+            width: 80px;
+            height: 32px;
+            border: none;
+            background-color: #1A56A8;
+            color: #FFFFFF;
+            border-radius: 5px;
+        }
+        .msg_list{
+            width: 90%;
+            margin: auto;
+            color: #657180;
+            margin-bottom: 30px;
+        }
+        .msg_list_title{
+            color: #1A56A8;
+            font-size: 16px;
+            font-weight: bolder;
+        }
+        .msg_list table{
+            margin-top: 40px;
+            border-top: 1px solid #E1E5ED;
+            padding-top: 30px;
+        }
+        .leave_msg{
+            font-size: 18px;
+            font-weight: bolder;
+            color: #1A56A8;
+        }
     </style>
 </head>
 
@@ -180,6 +250,52 @@
     </div>
     <div class="appeal_info">
 
+    </div>
+    <!--发表留言-->
+    <div class="message">
+        <div class="msg_title">
+            <div class="leave_1 leave_msg">发表留言</div>
+            <div class="leave_2"><span>剩余字数</span><span id="num_txt1">300</span><span>个</span></div>
+        </div>
+        <div class="msg_info">
+            <textarea id="release_msg"></textarea>
+        </div>
+        <div class="msg_footer">
+            <div class="leave_1">
+                <span>注册企业才可发表留言</span>
+                <a href="#">登录</a>/<a href="#">注册</a>
+            </div>
+            <div class="leave_2">
+                <button ng-click="releaseMsg();">发表</button>
+            </div>
+        </div>
+    </div>
+    <div class="msg_list">
+        <table border="0" cellpadding="0" cellspacing="0" ng-repeat="item in comments">
+            <tr>
+                <td align="left" class="msg_list_title" ng-bind="item.displayName"></td>
+                <td align="right" ng-bind="item.releaseDate"></td>
+            </tr>
+            <tr>
+                <td colspan="2" ng-cloak>
+                    {{item.reply}}
+                </td>
+            </tr>
+        </table>
+        <!-- 分页位置 -->
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 30px;">
+            <tbody>
+            <tr>
+                <td class="custom_layper_page_info"></td>
+                <td>
+                    <div style="padding: 10px 0; float: right;">
+                        <div class="custom_page_box" id="layper_page_box" style="margin-right: 0px"></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 分页位置 -->
     </div>
 </div>
 </body>

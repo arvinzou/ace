@@ -48,7 +48,7 @@ app.controller(ngControllerName,function($scope) {
      * @type {string}
      */
     $scope.defaultType = "全部";
-    $scope.selectType = [{id: "", name: "全部"}, {id: "1", name: "诉求满意度"}, {id: "2", name: "合作交流"}];
+    $scope.selectType = [{id: "", name: "全部"}, {id: "1", name: "在线诉求"}, {id: "2", name: "平台服务"}];
 
     //意见列表
     $.ajax({

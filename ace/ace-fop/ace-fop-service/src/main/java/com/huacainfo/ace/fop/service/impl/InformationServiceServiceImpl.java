@@ -238,10 +238,11 @@ public class InformationServiceServiceImpl implements InformationServiceService 
 
     @Override
     public ResultResponse InformationServiceByPrimaryKey(String id) throws Exception {
-        if (CommonUtils.isBlank(id)) {
-            return new ResultResponse(1, "主键不能为空！");
+        InformationServiceVo ffp = this.informationServiceDao.selectVoByPrimaryKey(id);
+        if (ModulesType.TALENT_INFO.equals(ffp.getModules())) {
+            ffp.setComments(fopQuestionService.findCommentList(ffp.getId()));
         }
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "信息服务详情", this.informationServiceDao.selectVoByPrimaryKey(id));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "信息服务详情", ffp);
         return rst;
     }
 
