@@ -210,12 +210,12 @@
     </select>
     <select id="selectTaskForEmail" resultType="map">
         <![CDATA[
-        SELECT
+       SELECT
         a.department_name 'name',
         t.opened,
         t.closed,
         t.total,
-		t.normName
+		CONCAT(TRUNCATE((t.closed/t.total),2)*100,'%') normName
         FROM
         (
         SELECT
@@ -239,7 +239,7 @@
         k.deptId,
 		group_concat(distinct(b.name) separator ',') normName
         FROM
-        tpa k left join  norm b on k.normId=b.id where hour(timediff(k.lastModifyDate,now()))<=#{tasktime}
+        tpa k left join  norm b on k.normId=b.id
         GROUP BY
         k.deptId
         ) t
@@ -247,9 +247,12 @@
         ORDER BY
         t.opened
         ]]>
+        <!--
+        where hour(timediff(k.lastModifyDate,now()))<=#{tasktime}
+        -->
     </select>
     <select id="selectEmailForNotice" resultType="map">
-        select email,name from portal.users t where t.user_level='5' and email is not null
+        select email,name from portal.users t where t.user_level='5' and email is not null and stauts='1'
     </select>
     <select id="selectLiableEmailForNotice" resultType="map">
         select user_id userId,email,name from portal.users t where t.user_id in(select DISTINCT(liable) from tpa where status !='2') and email is not null
