@@ -128,4 +128,6 @@ public interface CuProjectService {
      * @throws Exception
      */
     ResultResponse findDonateList(String projectId, int start, int limit, String orderBy) throws Exception;
+
+    CuProjectVo selectVoByPrimaryKey(String projectId);
 }

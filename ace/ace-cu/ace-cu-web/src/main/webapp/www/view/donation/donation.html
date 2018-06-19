@@ -6,11 +6,14 @@
 		<meta name="format-detection" content="telephone=no" />
 		<title>我要捐款</title>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../js/nav.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
 		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/donation.css" />
+		<link rel="stylesheet" type="text/css" href="../css/nav.css"/>
 		<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" />
 		<script type="text/javascript" src="js/donation.js"></script>
+		
 	</head>
 
 	<body>
@@ -40,11 +43,22 @@
 				</div>
 			</div>
 			<div class="project_nav">
-				<ul class="project_nav_ul">
+				<!--<ul class="project_nav_ul">
 					<li onclick="hoverli('nav_info01');">项目详情</li>
 					<li onclick="hoverli('nav_info02');">使用记录</li>
 					<li onclick="hoverli('nav_info03');">捐赠列表</li>
-				</ul>
+				</ul>-->
+				<!--导航栏-->
+			    <div class="navigation">
+			        <div class="news-title">
+			            <ul class="news-module project_nav_ul clear">
+			                <li class="active" onclick="hoverli('nav_info01');">项目详情</li>
+			                <li onclick="hoverli('nav_info02');">使用记录</li>
+			                <li onclick="hoverli('nav_info03');">捐赠列表</li>
+			            </ul>
+			            <div class="news-slider"></div>
+			        </div>
+			    </div>
 			</div>
 			<div class="nav_info">
 				<div id="nav_info01" class="nav_info_content dis">

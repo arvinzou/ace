@@ -10,11 +10,12 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuDonateOrderDao;
-import com.huacainfo.ace.cu.dao.CuProjectDao;
 import com.huacainfo.ace.cu.dao.CuUserDao;
 import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.service.CuDonateOrderService;
+import com.huacainfo.ace.cu.service.CuProjectService;
 import com.huacainfo.ace.cu.vo.CuDonateOrderQVo;
 import com.huacainfo.ace.cu.vo.CuDonateOrderVo;
 import com.huacainfo.ace.cu.vo.CuProjectVo;
@@ -43,7 +44,7 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
     @Autowired
-    private CuProjectDao cuProjectDao;
+    private CuProjectService cuProjectService;
     @Autowired
     private CuUserDao cuUserDao;
 
@@ -239,9 +240,15 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
      */
     @Override
     public ResultResponse createDonateOrder(CuDonateOrderVo data) {
-        CuProjectVo projectVo = cuProjectDao.selectVoByPrimaryKey(data.getProjectId());
+        CuProjectVo projectVo = cuProjectService.selectVoByPrimaryKey(data.getProjectId());
         if (null == projectVo) {
             return new ResultResponse(ResultCode.FAIL, "项目信息不存在！");
+        }
+        if (!ProjectConstant.P_STATUS_PASSED.equals(projectVo.getStatus())) {
+            return new ResultResponse(ResultCode.FAIL, "该项目未通过审核！");
+        }
+        if (projectVo.getBalanceDays() == 0) {
+            return new ResultResponse(ResultCode.FAIL, "项目已结束，捐款通道关闭！");
         }
         CuUserVo userVo = cuUserDao.findByOpenId(data.getOpenId());
         if (null == userVo) {

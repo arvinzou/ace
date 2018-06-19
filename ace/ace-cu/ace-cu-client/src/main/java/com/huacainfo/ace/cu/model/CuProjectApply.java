@@ -1,9 +1,12 @@
 package com.huacainfo.ace.cu.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class CuProjectApply {
+public class CuProjectApply implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     private String applyUserId;
@@ -17,6 +20,8 @@ public class CuProjectApply {
     private String mobileNumber;
 
     private String idCard;
+
+    private String title;
 
     private String description;
 
@@ -35,6 +40,14 @@ public class CuProjectApply {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getId() {
         return id;

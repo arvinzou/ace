@@ -19,7 +19,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, title, releaseDate, keyWord, fileUrl, remark, status, createUserId, createUserName, createDate,
+        id, title, category, releaseDate, keyWord, fileUrl, remark, status, createUserId, createUserName, createDate,
     lastModifyUserId, lastModifyUserName, lastModifyDate, content
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -33,7 +33,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopLawPaper">
-    insert into fop_law_paper (id, title, releaseDate,
+        insert into fop_law_paper (id, title, category, releaseDate,
         keyWord, fileUrl, remark, status,
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
@@ -52,6 +52,9 @@
             </if>
             <if test="title != null">
                 title,
+            </if>
+            <if test="category != null">
+                category,
             </if>
             <if test="releaseDate != null">
                 releaseDate,
@@ -97,6 +100,9 @@
             <if test="title != null">
                 #{title,jdbcType=VARCHAR},
             </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
+            </if>
             <if test="releaseDate != null">
                 #{releaseDate,jdbcType=TIMESTAMP},
             </if>
@@ -141,6 +147,9 @@
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
             </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
             <if test="releaseDate != null">
                 releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
             </if>
@@ -183,6 +192,7 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopLawPaper">
     update fop_law_paper
     set title = #{title,jdbcType=VARCHAR},
+        category = #{category,jdbcType=VARCHAR},
       releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
       keyWord = #{keyWord,jdbcType=VARCHAR},
         fileUrl = #{fileUrl,jdbcType=VARCHAR},

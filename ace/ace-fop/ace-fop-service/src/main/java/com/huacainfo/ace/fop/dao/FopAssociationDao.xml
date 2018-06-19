@@ -6,6 +6,7 @@
         <result column="fullName" jdbcType="VARCHAR" property="fullName"/>
         <result column="shortName" jdbcType="VARCHAR" property="shortName"/>
         <result column="abcCode" jdbcType="VARCHAR" property="abcCode"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="phoneNumber" jdbcType="VARCHAR" property="phoneNumber"/>
         <result column="establishDate" jdbcType="TIMESTAMP" property="establishDate"/>
@@ -27,7 +28,7 @@
     <sql id="Base_Column_List">
     id, fullName, shortName, abcCode, address, phoneNumber, establishDate, pseronId, 
     directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId
+        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId, areaCode
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -52,7 +53,7 @@
       viceNum, remark, status, 
       createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
-        latitude ,longitude, departmentId
+        latitude ,longitude, departmentId, areaCode
       )
     values (#{id,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
       #{abcCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
@@ -61,7 +62,8 @@
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
         #{lastModifyDate,jdbcType=TIMESTAMP},
-        #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{departmentId,jdbcType=VARCHAR}
+        #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{departmentId,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
@@ -78,6 +80,9 @@
             </if>
             <if test="abcCode != null">
                 abcCode,
+            </if>
+            <if test="areaCode != null">
+                areaCode,
             </if>
             <if test="address != null">
                 address,
@@ -144,6 +149,9 @@
             <if test="abcCode != null">
                 #{abcCode,jdbcType=VARCHAR},
             </if>
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
             <if test="address != null">
                 #{address,jdbcType=VARCHAR},
             </if>
@@ -209,6 +217,9 @@
             <if test="abcCode != null">
                 abcCode = #{abcCode,jdbcType=VARCHAR},
             </if>
+            <if test="areaCode != null">
+                areaCode = #{areaCode,jdbcType=VARCHAR},
+            </if>
             <if test="address != null">
                 address = #{address,jdbcType=VARCHAR},
             </if>
@@ -268,6 +279,7 @@
     set fullName = #{fullName,jdbcType=VARCHAR},
       shortName = #{shortName,jdbcType=VARCHAR},
       abcCode = #{abcCode,jdbcType=VARCHAR},
+        areaCode = #{areaCode,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
       establishDate = #{establishDate,jdbcType=TIMESTAMP},
@@ -293,7 +305,7 @@
     <sql id="Vo_Column_List">
         id, fullName, shortName, abcCode, address, phoneNumber, establishDate, pseronId,
         directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId
+        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId, areaCode
     </sql>
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopAssociationVo">
 

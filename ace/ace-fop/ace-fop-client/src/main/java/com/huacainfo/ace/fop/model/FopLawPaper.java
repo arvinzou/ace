@@ -12,6 +12,8 @@ public class FopLawPaper implements Serializable {
 
     private String title;
 
+    private String category;
+
     private Date releaseDate;
 
     private String keyWord;
@@ -35,6 +37,14 @@ public class FopLawPaper implements Serializable {
     private String content;
 
     private String fileUrl;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getFileUrl() {
         return fileUrl;

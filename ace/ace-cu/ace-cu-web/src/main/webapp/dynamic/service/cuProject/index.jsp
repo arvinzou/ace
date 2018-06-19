@@ -10,8 +10,10 @@
     <title>慈善项目</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
+<link rel="stylesheet" type="text/css" media="screen"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"/>
 <script type="text/javascript">
-
 
 </script>
 <body>
@@ -24,15 +26,15 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-                    类别：<input name="category" class="easyui-combobox" style="width: 200px"
+                    类别：<input name="type" class="easyui-combobox" style="width: 200px"
                               data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=142&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
 
-                    名称： <input name="name" type="text" style="width: 200px;"/>
+                    名称： <input name="projectName" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/cuProject/findCuProjectList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
@@ -193,6 +195,18 @@
 <script src="${pageContext.request.contextPath}/content/service/cuProject/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/cuProject/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/cuProject/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/cuProject/upload.js?version=${cfg.version}"></script>
+
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

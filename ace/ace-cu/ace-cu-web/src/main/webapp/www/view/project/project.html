@@ -7,8 +7,10 @@
 		<title>我要捐款</title>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
+		<script type="text/javascript" src="../js/nav.js"></script>
 		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/project.css" />
+		<link rel="stylesheet" type="text/css" href="../css/nav.css"/>
 		<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" />
 		<script type="text/javascript" src="js/project.js"></script>
 	</head>
@@ -40,11 +42,21 @@
 				</div>
 			</div>
 			<div class="project_nav">
-				<ul class="project_nav_ul">
+				<!--<ul class="project_nav_ul">
 					<li onclick="hoverli('nav_info01');">项目详情</li>
 					<li onclick="hoverli('nav_info02');">使用记录</li>
 					<li onclick="hoverli('nav_info03');">捐赠列表</li>
-				</ul>
+				</ul>-->
+				<div class="navigation">
+					<div class="news-title">
+						<ul class="news-module project_nav_ul clear">
+							<li class="active" onclick="hoverli('nav_info01');">项目详情</li>
+							<li onclick="hoverli('nav_info02');">使用记录</li>
+							<li onclick="hoverli('nav_info03');">捐赠列表</li>
+						</ul>
+						<div class="news-slider"></div>
+					</div>
+				</div>
 			</div>
 			<div class="nav_info">
 				<div id="nav_info01" class="nav_info_content dis">
@@ -63,7 +75,7 @@
 											<div class="project_record_title01" ng-bind="record.useToProjectName"></div>
 											<div class="project_record_title02">使用资金：<span class="donation_money" ng-bind="record.useAmount"></span></div>
 										</div>
-										<div class="project_record_info" ng-bind="record.useToProjectDesc">
+										<div class="project_record_info" ng-bind-html="record.useToProjectDesc | to_trusted">
 										</div>
 									</div>
 								</div>
