@@ -33,5 +33,6 @@ public interface CuUserDao {
     int isExit(CuUser record);
 
 
-    CuUserVo findByOpenId(String openId);
+    CuUserVo findByOpenId(@Param("openId") String openId,
+                          @Param("appid") String appid);
 }

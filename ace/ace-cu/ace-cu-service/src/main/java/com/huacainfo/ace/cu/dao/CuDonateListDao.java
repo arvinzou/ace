@@ -5,6 +5,7 @@ import com.huacainfo.ace.cu.vo.CuDonateListQVo;
 import com.huacainfo.ace.cu.vo.CuDonateListVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface CuDonateListDao {
@@ -31,5 +32,10 @@ public interface CuDonateListDao {
     int findCount(@Param("condition") CuDonateListQVo condition);
 
     int isExit(CuDonateList record);
+
+    BigDecimal getAccDonateAmount(String openId);
+
+    int getAccDonateCount(String openId);
+
 
 }

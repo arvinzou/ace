@@ -7,9 +7,6 @@
         <result column="realName" jdbcType="VARCHAR" property="realName"/>
         <result column="mobileNumber" jdbcType="VARCHAR" property="mobileNumber"/>
         <result column="idCard" jdbcType="VARCHAR" property="idCard"/>
-        <result column="country" jdbcType="VARCHAR" property="country"/>
-        <result column="province" jdbcType="VARCHAR" property="province"/>
-        <result column="city" jdbcType="VARCHAR" property="city"/>
         <result column="district" jdbcType="VARCHAR" property="district"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="hisPoints" jdbcType="DECIMAL" property="hisPoints"/>
@@ -25,7 +22,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, openId, realName, mobileNumber, idCard, country, province, city, district, address, 
+        id, openId, realName, mobileNumber, idCard, district, address,
     hisPoints, curPoints, usedPoints, remark, status, createUserId, createUserName, createDate, 
     lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
@@ -40,17 +37,15 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.cu.model.CuUser">
-    insert into cu_user (id, openId, realName, 
-      mobileNumber, idCard, country, 
-      province, city, district, 
+    insert into cu_user (id, openId, realName,
+        mobileNumber, idCard, district,
       address, hisPoints, curPoints, 
       usedPoints, remark, status, 
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate
       )
-    values (#{id,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
-      #{mobileNumber,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
-      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},
+        #{mobileNumber,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR},
       #{address,jdbcType=VARCHAR}, #{hisPoints,jdbcType=DECIMAL}, #{curPoints,jdbcType=DECIMAL}, 
       #{usedPoints,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
@@ -74,15 +69,6 @@
             </if>
             <if test="idCard != null">
                 idCard,
-            </if>
-            <if test="country != null">
-                country,
-            </if>
-            <if test="province != null">
-                province,
-            </if>
-            <if test="city != null">
-                city,
             </if>
             <if test="district != null">
                 district,
@@ -140,15 +126,6 @@
             <if test="idCard != null">
                 #{idCard,jdbcType=VARCHAR},
             </if>
-            <if test="country != null">
-                #{country,jdbcType=VARCHAR},
-            </if>
-            <if test="province != null">
-                #{province,jdbcType=VARCHAR},
-            </if>
-            <if test="city != null">
-                #{city,jdbcType=VARCHAR},
-            </if>
             <if test="district != null">
                 #{district,jdbcType=VARCHAR},
             </if>
@@ -205,15 +182,6 @@
             <if test="idCard != null">
                 idCard = #{idCard,jdbcType=VARCHAR},
             </if>
-            <if test="country != null">
-                country = #{country,jdbcType=VARCHAR},
-            </if>
-            <if test="province != null">
-                province = #{province,jdbcType=VARCHAR},
-            </if>
-            <if test="city != null">
-                city = #{city,jdbcType=VARCHAR},
-            </if>
             <if test="district != null">
                 district = #{district,jdbcType=VARCHAR},
             </if>
@@ -262,9 +230,6 @@
       realName = #{realName,jdbcType=VARCHAR},
       mobileNumber = #{mobileNumber,jdbcType=VARCHAR},
       idCard = #{idCard,jdbcType=VARCHAR},
-      country = #{country,jdbcType=VARCHAR},
-      province = #{province,jdbcType=VARCHAR},
-      city = #{city,jdbcType=VARCHAR},
       district = #{district,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       hisPoints = #{hisPoints,jdbcType=DECIMAL},
@@ -283,10 +248,11 @@
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.cu.vo.CuUserVo">
         <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
     </resultMap>
     <sql id="Vo_Column_List">
-        u.headimgurl,
-        t.id, t.openId, t.realName, t.mobileNumber, t.idCard, t.country, t.province, t.city, t.district, t.address,
+        u.headimgurl,u.nickname,u.sex,u.country , u.province ,u.city,
+        t.id, t.openId, t.realName, t.mobileNumber, t.idCard, t.district, t.address,
         t.hisPoints, t.curPoints, t.usedPoints, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
@@ -342,5 +308,6 @@
         from cu_user t
         left join portal.userinfo u on t.openId = u.openid
         where t.openId = #{openId,jdbcType=VARCHAR}
+        and u.appid = #{appid,jdbcType=VARCHAR}
     </select>
 </mapper>
