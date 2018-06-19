@@ -146,7 +146,7 @@ app.controller(ngControllerName, function ($scope) {
      * 发布之前判断是否已经登录
      */
     $scope.before_release = function ($event) {
-        var userProp = parent.parent.userProp;
+       /* var userProp = parent.parent.userProp;
         if (userProp == null || userProp == ''){
             layer.alert("请先登录后再发布！", {
                 icon: 5,
@@ -166,9 +166,9 @@ app.controller(ngControllerName, function ($scope) {
                 skin: 'myskin'
             });
             return;
-        }else{
+        }else{*/
             $event.target.dataset.target='#myModal';
-        }
+        /*}*/
     }
     /**
      * 发布企业风采
