@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+		<title>商会动态</title>
+		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/common_index.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/information/market.css"/>
+		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="js/commerce.js"></script>
+		<link rel="shortcut icon" href="../../images/favicon.ico">
+	</head>
+
+	<body>
+	<div id="header"></div>
+		<div class="bodybg">
+			<div class="juz">
+				<!--用于标注信息类型-->
+				<div class="main" ng-app="angularjsApp" ng-controller="angularjsCtrl">
+					<div class="title01">
+						<span class="title_lager">商会动态</span><span class="title_small">/&nbsp;Information</span>
+					</div>
+					<div class="searchTable">
+						<div class="search_condition">
+							<div class="search_left" ng-click="sortList('asc');"  id="asc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-up" style="color: #1A56A8;"></span></div>
+							<div class="search_left" ng-click="sortList('desc');" hidden="true" id = "desc"><span>发布日期</span><span  class="glyphicon glyphicon-arrow-down" style="color: #1A56A8;"></span></div>
+							<div class="search_right">
+								<span class="s_title"><input id="key_word" type="text" placeholder="请输入关键字搜索"/><button class="glyphicon glyphicon-search" ng-click="search();"></button></span>
+							</div>
+						</div>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody>
+							<tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo($index);">
+								<td align="left" width="15px"><div class="dot"></div></td>
+								<td align="left" width="25%" ng-bind="item.releaseDate | formatDate"></td>
+								<td ng-bind="item.title"></td>
+								<td align="right" width="20%" class="from_info" ng-cloak>来源：{{item.source}}</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="paganation"></div>
+				</div>
+			</div>
+			</div>
+
+		</div>
+	</body>
+
+</html>

@@ -66,11 +66,11 @@
                             <li class="menu-a" onclick="window.open('/fop/www/html/leader/shiwei_index.html')">
                                 常德市委
                             </li>
-                            <li class="menu-a" onclick="window.open('/fop/www/html/leader/zhengfu_index.html')">
-                                常德市政府
-                            </li>
                             <li class="menu-a" onclick="window.open('/fop/www/html/leader/shirenda_index.html')">
                                 常德市人大
+                            </li>
+                            <li class="menu-a" onclick="window.open('/fop/www/html/leader/zhengfu_index.html')">
+                                常德市政府
                             </li>
                             <li class="menu-a" onclick="window.open('/fop/www/html/leader/shizhengxie_index.html')">
                                 常德市政协
@@ -80,7 +80,9 @@
                 </div>
                 <div class="notice">
                     <div class="notice_box">
-                        <span id="news_span" class="news news_active" ng-click="changeNews('news');">市情要闻</span><span id="dynamics_span" class="news news_unactive"  ng-click="changeNews('dynamics');">工作动态</span>
+                        <span id="news_span" class="news news_active" ng-click="changeNews('news');">市情要闻</span>
+                        <span id="dynamics_span" class="news news_unactive"  ng-click="changeNews('dynamics');">工作动态</span>
+                        <span id="commerce_span" class="news news_unactive"  ng-click="changeNews('commerce');">商会动态</span>
                         <a class="link" ng-click="moreInformation();" href="javascript:void(0);" target="_blank">更多>></a>
                         <div style="clear: both;"></div>
                     </div>
@@ -95,8 +97,18 @@
                                 </tr>
                             </table>
                         </div>
-                        <!--市情要闻-->
+                        <!--工作动态-->
                         <div class="notice_list undis" id="dynamics">
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr ng-repeat="temp in news_list" ng-click="showInfo($index);" class="change">
+                                    <td width="80%" align="left" class="text01" ng-bind="temp.title"></td>
+                                    <td width="20%" align="right" class="text02"
+                                        ng-bind="temp.releaseDate | formatDate"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--商会动态-->
+                        <div class="notice_list undis" id="commerce">
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr ng-repeat="temp in news_list" ng-click="showInfo($index);" class="change">
                                     <td width="80%" align="left" class="text01" ng-bind="temp.title"></td>
@@ -139,7 +151,7 @@
                     </li>
                     <li class="left style" onclick="window.open('/fop/www/html/corporateStyle/costyle.html')">
                         <span class="menu_img"><img class="image" src="images/icon-style.png"/></span>
-                        <span class="menu_title">企业风采</span>
+                        <span class="menu_title">风采展示</span>
                     </li>
                     <li class="left sincerity" onclick="window.open('/fop/www/html/sincerity/sincerity.html')">
                         <span class="menu_img"><img class="image" src="images/icon-sincerity.png"/></span>
@@ -288,19 +300,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>湖南华彩伟业网络科技有限公司</td>
-
-                                <td>企业地址企业地址企业地址企业地址企业地址企业地址企业地址</td>
-                            </tr>
-                            <tr>
-                                <td>湖南华彩伟业网络科技有限公司</td>
-                                <td>企业地址企业地址企业地址企业地址企业地址企业地址企业地址</td>
-                            </tr>
-                            <tr>
-                                <td>湖南华彩伟业网络科技有限公司</td>
-
-                                <td>企业地址企业地址企业地址企业地址企业地址企业地址企业地址</td>
+                            <tr ng-repeat="company in companyMap">
+                                <td ng-bind="company.name"></td>
+                                <td ng-bind="company.value[3]"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -317,7 +319,6 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/echarts.min.js"></script>
 <script type="text/javascript" src="js/china-main-city-map.js"></script>
-<script type="text/javascript" src="js/echartmap.js"></script>
 </body>
 
 </html>
