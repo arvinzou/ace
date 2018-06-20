@@ -285,4 +285,7 @@ textarea {
 .displayer{
     display: block;
 }
-
+.tr_date{
+    font-size: 12px;
+    color: #657180;
+}
