@@ -2,6 +2,7 @@ var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var index = 0;
 var myMap;
+var brandIndex =1 ;
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope) {
     /**
@@ -66,7 +67,7 @@ app.controller(ngControllerName,function($scope) {
         url: "/fop/www/findInformationServiceListDo",
         type: "post",
         async: false,
-        data: {modules : "6", page: 1, limit: 4},  //首页只展示4条信息
+        data: {modules : "6", page: brandIndex, limit: 4},  //首页只展示4条信息
         success: function (result) {
             if (result.status == 0) {
                 $scope.bands = result.data.list;
@@ -87,6 +88,28 @@ app.controller(ngControllerName,function($scope) {
             });
         }
     });
+    var i = 0, page = 4;
+    setInterval(function(){
+
+        var arr = $scope.brandHover();
+        if(i <= page-4 && page <arr.length){
+            i ++;
+            page ++
+            $scope.bands = arr.slice(i,page);
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
+        }else{
+            i--;
+            page --;
+            $scope.bands = arr.slice(i,page);
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        }
+
+    },2000);
 
     myMap = echarts.init(document.getElementById('mapgis'));
     var url = "/fop/www/companyGis";
@@ -205,7 +228,35 @@ app.controller(ngControllerName,function($scope) {
     }
 
     $scope.brandHover = function(){
+        var data = [];
+        $.ajax({
+            url: "/fop/www/findInformationServiceListDo",
+            type: "post",
+            async: false,
+            data: {modules : "6", page: brandIndex, limit: 20},  //轮播20条信息
+            success: function (result) {
+                if (result.status == 0) {
+                    data = result.data.list;
+                    $scope.bands = result.data.list;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                } else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error: function () {
+                layer.alert("系统服务内部异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        });
 
+        return data;
     }
 });
 

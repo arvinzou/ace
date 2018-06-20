@@ -61,7 +61,7 @@ html.push("<li><a href=\"/fop/www/html/cooperation/cooperation_index.html\" targ
 html.push("<li><a href=\"/fop/www/html/finance/product.html\" target=\"_blank\">金融产品</a></li>");
 html.push("<li><a href=\"/fop/www/html/product/product.html\" target=\"_blank\">企业产品</a></li>");
 html.push("<li><a href=\"/fop/www/html/corporateStyle/costyle.html\" target=\"_blank\">风采展示</a></li>");
-html.push("<li><a href=\"/fop/www/html/sincerity/sincerity.html\">诚信建设</a></li>");
+html.push("<li><a href=\"/fop/www/html/sincerity/sincerity.html\">诚信建设 </a></li>");
 html.push("</ul>");
 html.push("</li>");
 html.push("<li>");
