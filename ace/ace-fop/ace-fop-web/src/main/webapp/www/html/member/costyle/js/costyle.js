@@ -186,7 +186,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/updateInformationServiceDo",
             type:"post",
             async:false,
-            data:{modules: "1", id: id, title: $scope.infoData.title, content: $scope.infoData.content, fileUrl: fileUrl},
+            data:{modules: "1", id: id, title: $scope.infoData.title, content: $scope.infoData.content, fileUrl: fileUrl, category: $scope.infoData.category},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
@@ -336,8 +336,17 @@ app.controller(ngControllerName,function($scope){
     $scope.release = function(){
         var title = $("input[name='name']").val();
         var content = $("textarea[name='pcontent']").val();
+        var categoryType = $("#categoryType option:checked").val();
         if(title == '' || title == undefined){
             layer.alert("标题不能为空！", {
+                icon: 5,
+                skin: 'myskin',
+                offset:'400px'
+            });
+            return;
+        }
+        if(categoryType == '' || categoryType == undefined){
+            layer.alert("风采类型不能为空！", {
                 icon: 5,
                 skin: 'myskin',
                 offset:'400px'
@@ -364,7 +373,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/insertInformationServiceDo",
             type:"post",
             async:false,
-            data:{title: title, content: content, fileUrl: coverImg, modules: "1"},
+            data:{title: title, content: content, fileUrl: coverImg, modules: "1", category: categoryType},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);

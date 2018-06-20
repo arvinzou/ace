@@ -1,4 +1,5 @@
 var pageSize=10;
+var noticeType = "";
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var currentPage = 1;
@@ -6,24 +7,12 @@ var currentPage = 1;
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
-    console.log(window.location.search);
-    var url =   window.location.search.substring(1);
-    var docType = url.substring(url.indexOf('=')+1);
-    console.log(docType);
-    if(docType == "0"){
-        $(".title_lager").text("法律规范");
-    }else if(docType == "1"){
-        $(".title_lager").text("案例指导");
-    }else if(docType == "2"){
-        $(".title_lager").text("法律公益");
-    }else{
-        $(".title_lager").text("法律文书");
-    }
+
     $.ajax({
-        url: "/fop/www/findLawPaperList",
+        url: "/fop/www/findNoticeList",
         type:"post",
         async:false,
-        data:{"limit":pageSize, page: currentPage, category : docType},
+        data:{"limit":pageSize, page: currentPage, noticeType: "3"},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -67,43 +56,16 @@ app.controller(ngControllerName,function($scope){
         }
     });
 
-    $scope.searchList = function(currentPage, pageSize){
-        var key_word = $("#key_word").val();
-        $.ajax({
-            url: "/fop/www/findLawPaperList",
-            type:"post",
-            async:false,
-            data:{page:currentPage, limit: pageSize, title: key_word, category : docType},
-            success:$scope.responseHandle,
-            error:function(){
-                layer.alert("系统内部服务异常！", {
-                    icon: 5,
-                    skin: 'myskin'
-                });
-            }
-        });
-    }
-
-    $scope.responseHandle = function(result){
-        if(result.status == 0) {
-            $scope.items = result.data.list;
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
-        }else {
-            layer.alert(result.errorMessage, {
-                icon: 5,
-                skin: 'myskin'
-            });
-        }
-    }
+    /**
+     * 按关键字搜索
+     */
     $scope.search = function(){
         var key_word = $("#key_word").val();
         $.ajax({
-            url: "/fop/www/findLawPaperList",
+            url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, title : key_word, category : docType},
+            data:{"limit":pageSize, page: 1, title : key_word, noticeType: "3"},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -127,38 +89,86 @@ app.controller(ngControllerName,function($scope){
     }
 
     /**
-     * 查看法律文书详情
-     * @param index
+     * 列表排序
      */
-    $scope.showInfo = function(index){
-        var primaryId = $scope.items[index].id;
-        console.log(primaryId);
-        window.open('doc_info.html?id='+primaryId);
+    $scope.sortList = function(name){
+        var flag = name;
+        var orderParam = "";
+        if(flag == 'asc'){
+            orderParam = 'asc';
+            $("#"+flag).hide();
+            $("#desc").show();
+        }else{
+            orderParam = 'desc';
+            $("#"+flag).hide();
+            $("#asc").show();
+        }
+        $.ajax({
+            url: "/fop/www/findNoticeList",
+            type:"post",
+            async:false,
+            data:{"limit":pageSize,  page: 1, sord : orderParam, noticeType: "3"},
+            success:function(result){
+                if(result.status == 0) {
+                    $scope.items = result.data.list;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                }else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error:function(){
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        });
     }
 
-    /**
-     * 法律文书下载
-     */
-    $scope.download = function($event, file, title){
-        if(file != '' && file != null){
-            $event.target.download = title;
-            $event.target.href="http://zx.huacainfo.com/"+file;
-        }else{
-            layer.alert("对不起，该政策没有可下载的附件！", {
+    $scope.searchList = function(currentPage, pageSize){
+        var key_word = $("#key_word").val();
+        $.ajax({
+            url: "/fop/www/findNoticeList",
+            type:"post",
+            async:false,
+            data:{page:currentPage, limit: pageSize, title: key_word, noticeType: "3"},
+            success:$scope.responseHandle,
+            error:function(){
+                layer.alert("系统内部服务异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        });
+    }
+
+    $scope.responseHandle = function(result){
+        if(result.status == 0) {
+            $scope.items = result.data.list;
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        }else {
+            layer.alert(result.errorMessage, {
                 icon: 5,
                 skin: 'myskin'
             });
-            return;
         }
     }
-});
 
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('information_info.html?id='+primaryId);
+    }
+});
 app.filter('formatDate', function() { //可以注入依赖
     return function(text) {
-        if(text.length > 10){
-            return text.substring(0,10);
-        }else {
-            return text;
-        }
+        return text.substring(0,10);
     }
 });

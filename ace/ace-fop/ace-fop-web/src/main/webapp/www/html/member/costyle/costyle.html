@@ -63,7 +63,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="tr_title" ng-bind="item.releaseDate"></td>
+                        <td colspan="4" class="tr_date" ng-bind="item.releaseDate"></td>
                     </tr>
                 </table>
             </div>
@@ -87,6 +87,15 @@
                 <div><label>标题</label><br>
                     <input class="input_style" type="text" placeholder="请输入产品标题" ng-model="infoData.title"
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入产品标题 '"/>
+                </div>
+                <div><label>类型</label><br>
+                    <select  class="input_style" ng-model="infoData.category">
+                        <option value="">请选择</option>
+                        <option value="1">非公党建</option>
+                        <option value="2">社会公益</option>
+                        <option value="3">德诚德星</option>
+                        <option value="4">其他</option>
+                    </select>
                 </div>
                 <div class="pictureContainer1" id="upbtn_update">
                     <div class="viewPicture1">
@@ -127,11 +136,19 @@
                 <h4 class="modal-title" id="myModalLabel_release">发布企业风采</h4>
             </div>
             <div class="modal-body">
-                <div><label>标题</label><br>
-                    <div>
+                    <div><label>标题</label><br>
                         <input class="input_style" type="text" placeholder="请输入标题" name="name"
                                onfocus="this.placeholder=''"
                                onblur="this.placeholder='请输入标题 '"/>
+                    </div>
+                    <div><label>类型</label><br>
+                        <select id="categoryType"  class="input_style">
+                            <option value="">请选择</option>
+                            <option value="1">非公党建</option>
+                            <option value="2">社会公益</option>
+                            <option value="3">德诚德星</option>
+                            <option value="4">其他</option>
+                        </select>
                     </div>
                     <div><label>封面</label><br>
                         <div class="pictureContainer2" id="upbtn">
@@ -146,15 +163,14 @@
                     </div>
 
                     <div><label>具体内容</label><br>
-                        <textarea name="pcontent" id="editor" placeholder="简单介绍下企业风采吧~" onfocus="this.placeholder=''"
-                                  onblur="this.placeholder='简单介绍下企业风采吧~'"></textarea>
+                        <textarea  name="pcontent" id="editor"></textarea>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="submit btn btn-primary" data-dismiss="modal" ng-click="release();">提交
-                </button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="submit btn btn-primary" data-dismiss="modal" ng-click="release();">提交
+                    </button>
+                </div>
             </div>
         </div>
     </div>

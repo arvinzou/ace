@@ -12,7 +12,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findNoticeList",
         type:"post",
         async:false,
-        data:{"limit":pageSize, page: currentPage},
+        data:{"limit":pageSize, page: currentPage, noticeType: "2"},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -65,7 +65,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{"limit":pageSize, page: 1, title : key_word},
+            data:{"limit":pageSize, page: 1, title : key_word, noticeType: "2"},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -107,7 +107,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{"limit":pageSize,  page: 1, sord : orderParam},
+            data:{"limit":pageSize,  page: 1, sord : orderParam, noticeType: "2"},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -136,7 +136,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findNoticeList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, title: key_word},
+            data:{page:currentPage, limit: pageSize, title: key_word, noticeType: "2"},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {
