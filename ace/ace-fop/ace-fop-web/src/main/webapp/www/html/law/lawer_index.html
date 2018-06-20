@@ -29,10 +29,16 @@
 							<div class="left_menu">
 								<ul class="leftmenuul"><span>法律服务</span>
 									<li>
-										<a href="lawer_doc.html" target="allbox" active>法律文书</a>
+										<a ng-click="openLawDoc($event,'0');" href="javascript:void(0);" target="allbox" active>法律规范</a>
 									</li>
 									<li>
-										<a href="lawer_help.html" target="allbox">法律帮助</a>
+										<a ng-click="openLawDoc($event,'1');" href="javascript:void(0);" target="allbox" active>案例指导</a>
+									</li>
+									<li>
+										<a ng-click="openLawDoc($event,'2');" href="javascript:void(0);" target="allbox" active>法律公益</a>
+									</li>
+									<li>
+										<a href="lawer_help.html" target="allbox">法律诉求</a>
 									</li>
 									<li>
 										<a href="lawer_gov.html" target="allbox">合作机构</a>
@@ -42,7 +48,7 @@
 
 						</td>
 						<td class="right_box" valign="top">
-							<iframe class="iframe1" frameborder="no" scrolling="auto" name="allbox" width="100%" height="900"  src="lawer_doc.html"></iframe>
+							<iframe class="iframe1" frameborder="no" scrolling="auto" name="allbox" width="100%" height="900"  src="lawer_doc.html?docType=0"></iframe>
 						</td>
 					</tr>
 				</table>

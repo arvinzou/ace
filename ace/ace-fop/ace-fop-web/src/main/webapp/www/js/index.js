@@ -38,7 +38,7 @@ app.controller(ngControllerName,function($scope) {
         url: "/fop/www/homepageNoticeList",
         type: "post",
         async: false,
-        data: {category: "1"},
+        data: {noticeType: "1"},
         success: function (result) {
             if (result.status == 0) {
                 $scope.news_list = result.data.top0;
@@ -143,7 +143,7 @@ app.controller(ngControllerName,function($scope) {
             url: "/fop/www/homepageNoticeList",
             type: "post",
             async: false,
-            data: {category: type},
+            data: {noticeType: type},
             success: function (result) {
                 if (result.status == 0) {
                     $scope.news_list = result.data.top0;
