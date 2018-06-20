@@ -142,8 +142,8 @@ public class WWWController extends FopBaseController {
      */
     @RequestMapping(value = "/homepageNoticeList")
     @ResponseBody
-    public ResultResponse homepageNoticeList() throws Exception {
-        ResultResponse rst = this.fopNoticeService.homepageNoticeList();
+    public ResultResponse homepageNoticeList(FopNoticeQVo condition) throws Exception {
+        ResultResponse rst = this.fopNoticeService.homepageNoticeList(condition);
         return rst;
     }
 
