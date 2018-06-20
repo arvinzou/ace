@@ -88,7 +88,7 @@ public interface FopNoticeService {
     public abstract ResultResponse findNoticeList(FopNoticeQVo condition, int page, int limit, String orderBy) throws Exception;
 
 
-    public abstract ResultResponse homepageNoticeList() throws Exception;
+    public abstract ResultResponse homepageNoticeList(FopNoticeQVo condition) throws Exception;
 
 
 }
