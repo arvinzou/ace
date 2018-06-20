@@ -27,7 +27,8 @@ public interface DictMapper {
 	List<Dict> findListByCategoryId(@Param("categoryId")String categoryId);
 	
 	int isExitByNameAndCategoryId(@Param("name")String name,@Param("categoryId")String categoryId);
-	List<Map<String,Object>> selectDictTreeList(@Param("pid")String pid,@Param("syid")String syid);
+
+    List<Map<String,Object>> selectDictTreeList(@Param("pid")String pid,@Param("syid")String syid);
 
 	int isExit(Dict record);
 	List<Map<String,String>> selectAreaCode();

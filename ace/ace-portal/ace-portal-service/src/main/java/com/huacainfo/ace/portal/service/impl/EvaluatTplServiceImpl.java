@@ -1,13 +1,24 @@
 package com.huacainfo.ace.portal.service.impl;
 
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.model.view.Tree;
+import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.dao.EvaluatGaugeDao;
+import com.huacainfo.ace.portal.model.EvaluatGauge;
+import com.huacainfo.ace.portal.service.EvaluatGaugeService;
+import org.apache.ibatis.jdbc.SqlRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +46,15 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private EvaluatTplDao evaluatTplDao;
+
+    @Autowired
+    private EvaluatGaugeService evaluatGaugeService;
+
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private EvaluatGaugeDao evaluatGaugeDao;
 
     /**
      * @throws
@@ -52,11 +70,35 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
      * @version: 2018-06-09
      */
     @Override
-    public PageResult<EvaluatTplVo> findEvaluatTplList(EvaluatTplQVo condition, int start,
-                                                       int limit, String orderBy) throws Exception {
+    public PageResult<EvaluatTplVo> findEvaluatTplList(EvaluatTplQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<EvaluatTplVo> rst = new PageResult<EvaluatTplVo>();
-        List<EvaluatTplVo> list = this.evaluatTplDao.findList(condition,
-                start, start + limit, orderBy);
+        List<EvaluatTplVo> list = this.evaluatTplDao.findList(condition, start, limit, orderBy);
+        for (EvaluatTplVo item : list) {
+            List<EvaluatGauge> listGa = this.evaluatGaugeDao.findLists(item.getId());
+            EvaluatGauge evaluatGauge = null;
+            switch (listGa.size()) {
+                case 5:
+                    evaluatGauge = listGa.get(0);
+                    item.setContent5(evaluatGauge.getContent());
+                    item.setInterval5(evaluatGauge.getScoreEnd());
+                case 4:
+                    evaluatGauge = listGa.get(1);
+                    item.setContent4(evaluatGauge.getContent());
+                    item.setInterval4(evaluatGauge.getScoreEnd());
+                case 3:
+                    evaluatGauge = listGa.get(2);
+                    item.setContent3(evaluatGauge.getContent());
+                    item.setInterval3(evaluatGauge.getScoreEnd());
+                case 2:
+                    evaluatGauge = listGa.get(3);
+                    item.setContent2(evaluatGauge.getContent());
+                    item.setInterval2(evaluatGauge.getScoreEnd());
+                case 1:
+                    evaluatGauge = listGa.get(4);
+                    item.setContent1(evaluatGauge.getContent());
+                    item.setInterval1(evaluatGauge.getScoreEnd());
+            }
+        }
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.evaluatTplDao.findCount(condition);
@@ -77,9 +119,13 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
      * @version: 2018-06-09
      */
     @Override
-    public MessageResponse insertEvaluatTpl(EvaluatTpl o, UserProp userProp)
+    public MessageResponse insertEvaluatTpl(String jsons, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
+        EvaluatTpl o = JSON.parseObject(jsons, EvaluatTpl.class);
+        String evaluatTplId = GUIDUtil.getGUID();
+        o.setId(evaluatTplId);
+        o.setSyid(userProp.getActiveSyId());
+        JSONObject jsonObject = JSONObject.parseObject(jsons);
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -92,27 +138,30 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
         if (CommonUtils.isBlank(o.getCover())) {
             return new MessageResponse(1, "封面不能为空！");
         }
-        if (CommonUtils.isBlank(o.getQrcoteUrl())) {
-            return new MessageResponse(1, "二维码不能为空！");
-        }
         if (CommonUtils.isBlank(o.getIntroduce())) {
             return new MessageResponse(1, "测评介绍不能为空！");
         }
         if (CommonUtils.isBlank(o.getScore())) {
             return new MessageResponse(1, "满分值不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        int temp = this.evaluatTplDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "评测名称重复！");
-        }
+//        int temp = this.evaluatTplDao.isExit(o);
+//        if (temp > 0) {
+//            return new MessageResponse(1, "评测名称重复！");
+//        }
+
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.evaluatTplDao.insert(o);
+
+        if (!CommonUtils.isBlank(jsonObject.getString("interval1"))) {
+            MessageResponse rr = insertGauge(jsonObject, userProp, evaluatTplId, o.getScore());
+            if (rr.getStatus() == 1) {
+                throw new CustomException(rr.getErrorMessage());
+            }
+        }
+
         this.dataBaseLogService.log("添加评测", "评测", "", o.getName(),
                 o.getName(), userProp);
         return new MessageResponse(0, "添加评测完成！");
@@ -130,8 +179,10 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
      * @version: 2018-06-09
      */
     @Override
-    public MessageResponse updateEvaluatTpl(EvaluatTpl o, UserProp userProp)
-            throws Exception {
+    public MessageResponse updateEvaluatTpl(String jsons, UserProp userProp) throws Exception {
+        EvaluatTpl o = JSON.parseObject(jsons, EvaluatTpl.class);
+        String evaluatTplId = o.getId();
+        JSONObject jsonObject = JSONObject.parseObject(jsons);
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -144,23 +195,26 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
         if (CommonUtils.isBlank(o.getCover())) {
             return new MessageResponse(1, "封面不能为空！");
         }
-        if (CommonUtils.isBlank(o.getQrcoteUrl())) {
-            return new MessageResponse(1, "二维码不能为空！");
-        }
         if (CommonUtils.isBlank(o.getIntroduce())) {
             return new MessageResponse(1, "测评介绍不能为空！");
         }
         if (CommonUtils.isBlank(o.getScore())) {
             return new MessageResponse(1, "满分值不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.evaluatTplDao.updateByPrimaryKey(o);
+
+        this.evaluatGaugeDao.deleteByEvaluatTplId(evaluatTplId);
+        if (!CommonUtils.isBlank(jsonObject.getString("interval1"))) {
+            MessageResponse rr = insertGauge(jsonObject, userProp, evaluatTplId, o.getScore());
+            if (rr.getStatus() == 1) {
+                throw new CustomException(rr.getErrorMessage());
+            }
+        }
+
         this.dataBaseLogService.log("变更评测", "评测", "", o.getName(),
                 o.getName(), userProp);
         return new MessageResponse(0, "变更评测完成！");
@@ -236,5 +290,31 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
         rst.put("status", 0);
         rst.put("data", this.evaluatTplDao.getById(id));
         return rst;
+    }
+
+
+    @Override
+    public List<Tree> selectEvaluatTplTreeList(String pid, String syid) throws Exception {
+        logger.info("=================getDictTreeList-pid===>{}", pid);
+        CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
+                this.evaluatTplDao.selectEvaluatTplTreeList(pid, syid));
+        return commonTreeUtils.getTreeList(pid);
+    }
+
+    private MessageResponse insertGauge(JSONObject jsonObject, UserProp userProp, String evaluatTplId, int score) throws Exception {
+        EvaluatGauge evaluatGauge = new EvaluatGauge();
+        evaluatGauge.setEvaluatTplId(evaluatTplId);
+        evaluatGauge.setScoreStart(score);
+        for (int i = 1; i < 6; i++) {
+            if (CommonUtils.isBlank(jsonObject.getString("interval" + i))) {
+                continue;
+            }
+            score = Integer.parseInt(jsonObject.getString("interval" + i));
+            evaluatGauge.setScoreEnd(score);
+            evaluatGauge.setContent(jsonObject.getString("content" + i));
+            this.evaluatGaugeService.insertEvaluatGauge(evaluatGauge, userProp);
+            evaluatGauge.setScoreStart(score);
+        }
+        return new MessageResponse(0, "完成");
     }
 }

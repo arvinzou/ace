@@ -27,6 +27,9 @@ public class CuProjectApply implements Serializable {
 
     private String remark;
 
+    /**
+     * 0- 数据逻辑删除，1-待审核 2-审核通过 3-驳回
+     */
     private String status;
 
     private String createUserId;
@@ -40,6 +43,16 @@ public class CuProjectApply implements Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    private String projectId;
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
 
     public String getTitle() {
         return title;

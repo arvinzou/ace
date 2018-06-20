@@ -94,12 +94,8 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "内容不能为空！");
         }
-        int temp = this.evaluatGaugeDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "评测量表名称重复！");
-        }
         o.setCreateDate(new Date());
-        this.evaluatGaugeDao.insert(o);
+        this.evaluatGaugeDao.insertSelective(o);
         this.dataBaseLogService.log("添加评测量表", "评测量表", "", o.getEvaluatTplId(),
                 o.getEvaluatTplId(), userProp);
         return new MessageResponse(0, "添加评测量表完成！");

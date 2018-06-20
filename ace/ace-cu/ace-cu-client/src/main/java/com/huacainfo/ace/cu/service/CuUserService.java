@@ -5,6 +5,8 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.cu.model.CuUser;
+import com.huacainfo.ace.cu.vo.CuDonateListVo;
+import com.huacainfo.ace.cu.vo.CuProjectApplyVo;
 import com.huacainfo.ace.cu.vo.CuUserQVo;
 import com.huacainfo.ace.cu.vo.CuUserVo;
 
@@ -90,4 +92,22 @@ public interface CuUserService {
      * @throws Exception
      */
     CuUserVo findByOpenId(String openId);
+
+    /**
+     * 查询会员 -- 爱心记录/爱心积分
+     *
+     * @param openId 微信openid
+     * @return
+     * @throws Exception
+     */
+    PageResult<CuDonateListVo> findDonateList(String openId, int start, int limit, String orderBy) throws Exception;
+
+    /**
+     * 查询会员 -- 我的求助
+     *
+     * @param openId 微信openid
+     * @return
+     * @throws Exception
+     */
+    PageResult<CuProjectApplyVo> findMyProject(String openId, int start, int limit, String orderBy) throws Exception;
 }

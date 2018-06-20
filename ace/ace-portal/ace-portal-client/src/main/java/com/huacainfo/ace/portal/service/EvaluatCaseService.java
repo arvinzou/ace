@@ -42,7 +42,7 @@ public interface EvaluatCaseService {
      * @author: 陈晓克
      * @version: 2018-06-09
      */
-    public abstract MessageResponse insertEvaluatCase(EvaluatCase obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse insertEvaluatCase(String json, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -55,7 +55,7 @@ public interface EvaluatCaseService {
      * @author: 陈晓克
      * @version: 2018-06-09
      */
-    public abstract MessageResponse updateEvaluatCase(EvaluatCase obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse updateEvaluatCase(String jsons, UserProp userProp) throws Exception;
 
     /**
      * @throws

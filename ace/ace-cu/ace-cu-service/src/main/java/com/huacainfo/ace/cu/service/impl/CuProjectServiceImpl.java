@@ -11,6 +11,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.cu.dao.CuProjectDao;
+import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.model.CuProject;
 import com.huacainfo.ace.cu.service.CuDonateListService;
 import com.huacainfo.ace.cu.service.CuProjectService;
@@ -22,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -284,6 +286,30 @@ public class CuProjectServiceImpl implements CuProjectService {
 
         CuProjectVo vo = cuProjectDao.selectVoByPrimaryKey(projectId);
         return setBalanceDays(vo);
+    }
+
+    /**
+     * 项目付款成功，增加“已筹集”，“结余”金额
+     *
+     * @param order 订单信息
+     * @return 处理结果
+     */
+    @Override
+    public ResultResponse pay(CuDonateOrder order) {
+        CuProject project = cuProjectDao.selectByPrimaryKey(order.getProjectId());
+        BigDecimal amount = order.getDonateAmount();
+        BigDecimal collectAmount = null == project.getCollectAmount() ? BigDecimal.ZERO : project.getCollectAmount();
+        BigDecimal balanceAmount = null == project.getBalanceAmount() ? BigDecimal.ZERO : project.getBalanceAmount();
+        project.setCollectAmount(collectAmount.add(amount));
+        project.setBalanceAmount(balanceAmount.add(amount));
+        project.setLastModifyDate(DateUtil.getNowDate());
+
+        int count = cuProjectDao.updateByPrimaryKeySelective(project);
+        if (count == 1) {
+            return new ResultResponse(ResultCode.SUCCESS, "更新成功", project);
+        }
+
+        return new ResultResponse(ResultCode.FAIL, "更新失败", project);
     }
 
     /**

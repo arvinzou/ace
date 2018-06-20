@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.cu.model.CuDonateOrder;
+import com.huacainfo.ace.cu.model.WxPayLog;
 import com.huacainfo.ace.cu.vo.CuDonateOrderQVo;
 import com.huacainfo.ace.cu.vo.CuDonateOrderVo;
 
@@ -91,4 +92,23 @@ public interface CuDonateOrderService {
      * @throws Exception
      */
     ResultResponse createDonateOrder(CuDonateOrderVo data);
+
+
+    /**
+     * 订单校验
+     *
+     * @param attach 附加数据 --  此处存放 cu_donate_order.id
+     * @param fee    支付金额
+     * @return
+     */
+    ResultResponse orderCheck(String attach, String fee);
+
+    /**
+     * 订单支付逻辑
+     *
+     * @param wxPayLog 支付回调日志
+     * @param payType  支付方式类型
+     * @return
+     */
+    ResultResponse pay(WxPayLog wxPayLog, String payType);
 }
