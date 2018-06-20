@@ -33,19 +33,27 @@ public interface UserinfoDao {
 
     Map<String, Object> selectUserInfoVo(@Param("condition") Map<String, Object> where);
 
-    List<Map<String, Object>> getListByDeptId(Map<String,Object> params);
+    List<Map<String, Object>> getListByDeptId(Map<String, Object> params);
 
 
-    Map<String,Object> selectSysUserByMobile(String mobile);
+    Map<String, Object> selectSysUserByMobile(String mobile);
 
-    Map<String,Object> selectSysUserByUnionId(String unionId);
+    Map<String, Object> selectSysUserByUnionId(String unionId);
 
-    int updateBindApp(@Param("openId") String openId,@Param("userId") String userId);
+    int updateBindApp(@Param("openId") String openId, @Param("userId") String userId);
 
 
     int updateReg(Userinfo record);
 
     int updateUnbind(@Param("unionid") String unionid);
 
-
+    /**
+     * 根据openid，appid，查询公众号用户信息
+     *
+     * @param openid 微信openid，公众号内唯一
+     * @param appid  公众号应用识别ID
+     * @return
+     */
+    Userinfo findByOpenId(@Param("openid") String openid,
+                          @Param("appid") String appid);
 }
