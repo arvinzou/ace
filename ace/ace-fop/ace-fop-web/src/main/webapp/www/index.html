@@ -288,19 +288,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>湖南华彩伟业网络科技有限公司</td>
-
-                                <td>企业地址企业地址企业地址企业地址企业地址企业地址企业地址</td>
-                            </tr>
-                            <tr>
-                                <td>湖南华彩伟业网络科技有限公司</td>
-                                <td>企业地址企业地址企业地址企业地址企业地址企业地址企业地址</td>
-                            </tr>
-                            <tr>
-                                <td>湖南华彩伟业网络科技有限公司</td>
-
-                                <td>企业地址企业地址企业地址企业地址企业地址企业地址企业地址</td>
+                            <tr ng-repeat="company in companyMap">
+                                <td ng-bind="company.name"></td>
+                                <td ng-bind="company.value[3]"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -317,7 +307,6 @@
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/echarts.min.js"></script>
 <script type="text/javascript" src="js/china-main-city-map.js"></script>
-<script type="text/javascript" src="js/echartmap.js"></script>
 </body>
 
 </html>
