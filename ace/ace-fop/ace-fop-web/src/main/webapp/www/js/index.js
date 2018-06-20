@@ -142,13 +142,22 @@ app.controller(ngControllerName,function($scope) {
             type = "1";
             $("#news_span").removeClass("news_unactive").addClass("news_active");
             $("#dynamics_span").removeClass("news_active").addClass("news_unactive");
+            $("#commerce_span").removeClass("news_active").addClass("news_unactive");
             moreType = "1";
         }
         if(id == 'dynamics'){
             type = "2";
             $("#dynamics_span").removeClass("news_unactive").addClass("news_active");
             $("#news_span").removeClass("news_active").addClass("news_unactive");
+            $("#commerce_span").removeClass("news_active").addClass("news_unactive");
             moreType = "2";
+        }
+        if(id == 'commerce'){
+            type = "3";
+            $("#commerce_span").removeClass("news_unactive").addClass("news_active");
+            $("#dynamics_span").removeClass("news_active").addClass("news_unactive");
+            $("#news_span").removeClass("news_active").addClass("news_unactive");
+            moreType = "3";
         }
         $("#"+id).removeClass("undis").addClass("dis");
         $("#"+id).siblings().removeClass("dis").addClass("undis");
@@ -185,12 +194,18 @@ app.controller(ngControllerName,function($scope) {
             window.open('html/information/information_index.html');
         }else if(moreType == "2"){
             window.open('html/information/information_dynamic.html');
+        }else if(moreType == "3"){
+            window.open('html/information/information_commerce.html');
         }else{
             layer.alert("系统服务内部异常！", {
                 icon: 5,
                 skin: 'myskin'
             });
         }
+    }
+
+    $scope.brandHover = function(){
+
     }
 });
 
