@@ -12,8 +12,6 @@ app.controller(ngControllerName, function ($scope) {
         $scope.userProp = userProp;
     }catch(e){}
 
-    $scope.defaultType = "全部";
-    $scope.selectType = [{id: "", name: "全部"}, {id: "1", name: "非公党建"}, {id: "2", name: "社会公益"}, {id: "3", name: "德诚德星"}, {id: "4", name: "其他"}];
     //初始化文本框
     var editor = new Simditor({
         textarea: $('#editor'),
@@ -68,7 +66,7 @@ app.controller(ngControllerName, function ($scope) {
         url: "/fop/www/findInformationServiceListDo",
         type: "post",
         async: false,
-        data: {limit: pageSize, page: currentPage, modules: "1", status: "2"},   //1表示企业风采
+        data: {limit: pageSize, page: currentPage, modules: "1", status: "2", category: "1"},   //1表示企业风采
         success: function (result) {
             if (result.status == 0) {
                 $scope.items = result.data.list;
@@ -146,7 +144,7 @@ app.controller(ngControllerName, function ($scope) {
      * 发布之前判断是否已经登录
      */
     $scope.before_release = function ($event) {
-       /* var userProp = parent.parent.userProp;
+        var userProp = parent.parent.userProp;
         if (userProp == null || userProp == ''){
             layer.alert("请先登录后再发布！", {
                 icon: 5,
@@ -166,9 +164,9 @@ app.controller(ngControllerName, function ($scope) {
                 skin: 'myskin'
             });
             return;
-        }else{*/
+        }else{
             $event.target.dataset.target='#myModal';
-        /*}*/
+        }
     }
     /**
      * 发布企业风采
@@ -177,6 +175,7 @@ app.controller(ngControllerName, function ($scope) {
         console.log(coverImg);
         var title = $("input[name='name']").val();
         var content = $("textarea[name='content']").val();
+        var categoryType = $("#categoryType option:checked").val();
         if (title == '' || title == undefined) {
             layer.alert("标题不能为空！", {
                 icon: 5,
@@ -186,6 +185,13 @@ app.controller(ngControllerName, function ($scope) {
         }
         if (coverImg == null || coverImg == undefined) {
             layer.alert("封面不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+        if(categoryType == '' || categoryType == undefined){
+            layer.alert("风采类型不能为空！", {
                 icon: 5,
                 skin: 'myskin'
             });
@@ -202,7 +208,7 @@ app.controller(ngControllerName, function ($scope) {
             url: "/fop/www/insertInformationServiceDo",
             type: "post",
             async: false,
-            data: {title: title, content: content, modules: "1", fileUrl: coverImg},
+            data: {title: title, content: content, modules: "1", fileUrl: coverImg, category: categoryType},
             success: function (result) {
                 if (result.status == 0) {
                     console.log(result);
@@ -240,17 +246,16 @@ app.controller(ngControllerName, function ($scope) {
         window.open('coinfo.html?id='+primaryId);
     }
 
-    $scope.change = function(){
-        var category = $("#category option:checked").val();
-        if(category == "0"){
-            category = "";
-        }
+    $scope.change = function($event,category){
         $.ajax({
             url: "/fop/www/findInformationServiceListDo",
             type: "post",
             async: false,
             data: {limit: pageSize, page: currentPage, modules: "1", status: "2", category: category},   //1表示企业风采
             success: function (result) {
+                $event.currentTarget.className = "active";
+                var spanId = $event.currentTarget.id;
+                $("#"+spanId).siblings().removeClass("active").addClass("unactive");
                 if (result.status == 0) {
                     $scope.items = result.data.list;
                     if (!$scope.$$phase) {

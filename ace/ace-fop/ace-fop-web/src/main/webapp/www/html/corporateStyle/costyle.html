@@ -42,11 +42,15 @@
         <div class="main">
             <div class="title01">
                 <span class="title_lager">企业风采</span><span class="title_small">/&nbsp;Enterprise Style</span>
-                <select class="category" id="category" ng-model="defaultType" ng-options="type.name as type.name for type in selectType" ng-change="change();">
-                </select>
                 <button  class="law_help" data-toggle="modal" data-target=""
                         ng-click="before_release($event);">发布风采
                 </button>
+            </div>
+            <div class="category">
+                <span id="span1" class="active" ng-click="change($event,'1')">非公党建</span>
+                <span id="span2" class="unactive" ng-click="change($event,'2')">社会公益</span>
+                <span id="span3" class="unactive" ng-click="change($event,'3')">德诚德星</span>
+                <span id="span4" class="unactive" ng-click="change($event,'4')">其他</span>
             </div>
             <div class="cooperate">
                 <ul>
@@ -90,6 +94,15 @@
                             <p class="uploadPloadprogress">点击上传封面</p>
                         </div>
                     </div>
+                </div>
+                <div><label>类型</label><br>
+                    <select id="categoryType"  class="input_style">
+                        <option value="">请选择</option>
+                        <option value="1">非公党建</option>
+                        <option value="2">社会公益</option>
+                        <option value="3">德诚德星</option>
+                        <option value="4">其他</option>
+                    </select>
                 </div>
                 <div><label>具体内容</label><br>
                     <textarea name="content" id="editor" placeholder="请描述风采具体内容"

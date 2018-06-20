@@ -82,12 +82,26 @@ body{
 .required {
 	color: red;
 }
-.category {
-	position: absolute;
-	top: 25px;
-	right: 150px;
-	width: 100px;
+.category{
+	margin-top: 15px;
+	margin-bottom: 15px;
 	height: 30px;
-	border: 1px solid #000000;
-	border-radius: 5px;
+}
+.category span{
+	width: 80px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	display: inline-block;
+	font-size: 16px;
+	font-weight: bolder;
+}
+.unactive{
+	background-color: #f5f7f9;
+	color: #565b70;
+	cursor: pointer;
+}
+.active{
+	background-color: #1A56A8;
+	color: #ffffff;
 }
