@@ -16,7 +16,6 @@ app.controller(ngControllerName,function($scope) {
         success: function (result) {
             if (result.status == 0) {
                 $scope.notice_slices = result.data.top1;
-                $scope.notice_list = result.data.top0
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
@@ -35,6 +34,31 @@ app.controller(ngControllerName,function($scope) {
         }
     });
 
+    $.ajax({
+        url: "/fop/www/homepageNoticeList",
+        type: "post",
+        async: false,
+        data: {category: "1"},
+        success: function (result) {
+            if (result.status == 0) {
+                $scope.news_list = result.data.top0;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            } else {
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        },
+        error: function () {
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    });
     /**
      *  查询品牌推广信息
      */
@@ -96,6 +120,64 @@ app.controller(ngControllerName,function($scope) {
         var primaryId = $scope.notice_slices[index].id;
         console.log(primaryId);
         window.open('html/information/information_info.html?id='+primaryId);
+    }
+
+    var moreType = "1";
+    $scope.changeNews = function(id){
+        var type = null;
+        if(id == 'news'){
+            type = "1";
+            $("#news_span").removeClass("news_unactive").addClass("news_active");
+            $("#dynamics_span").removeClass("news_active").addClass("news_unactive");
+            moreType = "1";
+        }
+        if(id == 'dynamics'){
+            type = "2";
+            $("#dynamics_span").removeClass("news_unactive").addClass("news_active");
+            $("#news_span").removeClass("news_active").addClass("news_unactive");
+            moreType = "2";
+        }
+        $("#"+id).removeClass("undis").addClass("dis");
+        $("#"+id).siblings().removeClass("dis").addClass("undis");
+        $.ajax({
+            url: "/fop/www/homepageNoticeList",
+            type: "post",
+            async: false,
+            data: {category: type},
+            success: function (result) {
+                if (result.status == 0) {
+                    $scope.news_list = result.data.top0;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                } else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error: function () {
+                layer.alert("系统服务内部异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        });
+    }
+
+    $scope.moreInformation = function(){
+        //html/information/information_index.html
+        if(moreType == "1"){
+            window.open('html/information/information_index.html');
+        }else if(moreType == "2"){
+            window.open('html/information/information_dynamic.html');
+        }else{
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
     }
 });
 

@@ -80,18 +80,31 @@
                 </div>
                 <div class="notice">
                     <div class="notice_box">
-                        <span class="title" style="width: 220px;">市情要闻\工作动态</span>
-                        <a class="link" href="html/information/information_index.html" target="_blank">更多>></a>
+                        <span id="news_span" class="news news_active" ng-click="changeNews('news');">市情要闻</span><span id="dynamics_span" class="news news_unactive"  ng-click="changeNews('dynamics');">工作动态</span>
+                        <a class="link" ng-click="moreInformation();" href="javascript:void(0);" target="_blank">更多>></a>
                         <div style="clear: both;"></div>
                     </div>
-                    <div class="notice_list">
-                        <table border="0" cellpadding="0" cellspacing="0">
-                            <tr ng-repeat="temp in notice_list" ng-click="showInfo($index);" class="change">
-                                <td width="80%" align="left" class="text01" ng-bind="temp.title"></td>
-                                <td width="20%" align="right" class="text02"
-                                    ng-bind="temp.releaseDate | formatDate"></td>
-                            </tr>
-                        </table>
+                    <!--市情要闻-->
+                    <div style="width: 100%;height: 100%;">
+                        <div class="notice_list dis" id="news">
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr ng-repeat="temp in news_list" ng-click="showInfo($index);" class="change">
+                                    <td width="80%" align="left" class="text01" ng-bind="temp.title"></td>
+                                    <td width="20%" align="right" class="text02"
+                                        ng-bind="temp.releaseDate | formatDate"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--市情要闻-->
+                        <div class="notice_list undis" id="dynamics">
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr ng-repeat="temp in news_list" ng-click="showInfo($index);" class="change">
+                                    <td width="80%" align="left" class="text01" ng-bind="temp.title"></td>
+                                    <td width="20%" align="right" class="text02"
+                                        ng-bind="temp.releaseDate | formatDate"></td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
