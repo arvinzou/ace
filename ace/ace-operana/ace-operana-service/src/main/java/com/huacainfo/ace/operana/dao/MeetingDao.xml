@@ -215,7 +215,8 @@
         t.opened,
         t.closed,
         t.total,
-		CONCAT(TRUNCATE((t.closed/t.total),2)*100,'%') normName
+		t.normName,
+		CONCAT(TRUNCATE((t.closed/t.total),2)*100,'%') pt
         FROM
         (
         SELECT
@@ -240,6 +241,7 @@
 		group_concat(distinct(b.name) separator ',') normName
         FROM
         tpa k left join  norm b on k.normId=b.id
+		where k.meetingId=#{meetingId}
         GROUP BY
         k.deptId
         ) t
@@ -257,4 +259,8 @@
     <select id="selectLiableEmailForNotice" resultType="map">
         select user_id userId,email,name from portal.users t where t.user_id in(select DISTINCT(liable) from tpa where status !='2') and email is not null
     </select>
+    <select id="selectMeetingListForNotice" resultType="map">
+        select id,name from meeting where status in('1','2')
+    </select>
+
 </mapper>

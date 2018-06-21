@@ -193,12 +193,12 @@
   </sql>
   <select id="selectTaskAByUserId" resultType="map">
     select  <include refid="sqlCommon"/>
-    where t.liable=#{userId} and t.category='1'
+    where t.liable=#{userId} and t.category='1' and t.meetingId=#{meetingId}
   </select>
   <select id="selectTaskBByUserId" resultType="map">
     select  <include refid="sqlCommon"/>
     <![CDATA[
-    where t.liable=#{userId} and hour(timediff(t.lastModifyDate,now()))<=#{tasktime}
+    where t.liable=#{userId} and hour(timediff(t.lastModifyDate,now()))<=#{tasktime} and t.meetingId=#{meetingId}
      ]]>
   </select>
 
