@@ -16,6 +16,26 @@ public class EvaluatCaseSub implements java.io.Serializable {
 
     private Date createDate;
 
+    private Integer sort;
+
+    private String isAnswer;
+
+    public String getIsAnswer() {
+        return isAnswer;
+    }
+
+    public void setIsAnswer(String isAnswer) {
+        this.isAnswer = isAnswer;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
     public String getId() {
         return id;
     }

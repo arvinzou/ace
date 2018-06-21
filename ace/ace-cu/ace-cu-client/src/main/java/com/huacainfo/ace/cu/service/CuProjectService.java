@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.model.CuProject;
 import com.huacainfo.ace.cu.vo.CuProjectQVo;
 import com.huacainfo.ace.cu.vo.CuProjectVo;
@@ -130,4 +131,6 @@ public interface CuProjectService {
     ResultResponse findDonateList(String projectId, int start, int limit, String orderBy) throws Exception;
 
     CuProjectVo selectVoByPrimaryKey(String projectId);
+
+    ResultResponse pay(CuDonateOrder order);
 }

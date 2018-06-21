@@ -1,6 +1,7 @@
 package com.huacainfo.ace.portal.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -8,6 +9,7 @@ import com.huacainfo.ace.portal.model.EvaluatTpl;
 import com.huacainfo.ace.portal.vo.EvaluatTplVo;
 import com.huacainfo.ace.portal.vo.EvaluatTplQVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,7 +44,7 @@ public interface EvaluatTplService {
      * @author: 陈晓克
      * @version: 2018-06-09
      */
-    public abstract MessageResponse insertEvaluatTpl(EvaluatTpl obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse insertEvaluatTpl(String jsons, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -55,7 +57,7 @@ public interface EvaluatTplService {
      * @author: 陈晓克
      * @version: 2018-06-09
      */
-    public abstract MessageResponse updateEvaluatTpl(EvaluatTpl obj, UserProp userProp) throws Exception;
+    public abstract MessageResponse updateEvaluatTpl(String jsons, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -105,6 +107,8 @@ public interface EvaluatTplService {
      * @version: 2018-06-09
      */
     public abstract Map<String, Object> getById(String id) throws Exception;
+
+    public abstract List<Tree> selectEvaluatTplTreeList(String pid, String syid) throws Exception;
 
 
 }

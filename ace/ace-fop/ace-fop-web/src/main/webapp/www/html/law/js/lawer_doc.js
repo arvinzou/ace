@@ -6,11 +6,24 @@ var currentPage = 1;
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
+    console.log(window.location.search);
+    var url =   window.location.search.substring(1);
+    var docType = url.substring(url.indexOf('=')+1);
+    console.log(docType);
+    if(docType == "0"){
+        $(".title_lager").text("法律规范");
+    }else if(docType == "1"){
+        $(".title_lager").text("案例指导");
+    }else if(docType == "2"){
+        $(".title_lager").text("法律公益");
+    }else{
+        $(".title_lager").text("法律文书");
+    }
     $.ajax({
         url: "/fop/www/findLawPaperList",
         type:"post",
         async:false,
-        data:{"limit":pageSize, page: currentPage},
+        data:{"limit":pageSize, page: currentPage, category : docType},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -60,7 +73,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findLawPaperList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, title: key_word},
+            data:{page:currentPage, limit: pageSize, title: key_word, category : docType},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {
@@ -90,7 +103,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findLawPaperList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, title : key_word},
+            data:{limit:pageSize, page: currentPage, title : key_word, category : docType},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;

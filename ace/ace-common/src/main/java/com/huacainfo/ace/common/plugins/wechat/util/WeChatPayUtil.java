@@ -1,7 +1,6 @@
 package com.huacainfo.ace.common.plugins.wechat.util;
 
 
-import com.huacainfo.ace.common.plugins.wechat.entity.ConfigWechat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -46,50 +45,48 @@ public class WeChatPayUtil {
 //    request.put("nonce_str", RandomStringGenerator.getRandomStringByLength(32));//随机字符串，不长于32位。
 //    request.put("sign",PaymentKit.createSign(request, PATERNERKEY));//签名
 
-    public static String initXML(ConfigWechat wechat, String openid, String total_fee, String sign, String body, String attch, String nonceStr, String outTradeNo, String notifyUrl) {
-//        double sessionmoney = Double.parseDouble(total_fee) * 100;
-//        String finalmoney = String.valueOf((int) sessionmoney);
-        String finalmoney = AmountKit.changeY2F(total_fee);
+    public static String initXML(String appid, String deviceInfo, String mchId,
+                                 String openid, String total_fee, String sign, String body,
+                                 String attch, String nonceStr, String outTradeNo, String notifyUrl) {
+        String moneyFen = AmountKit.changeY2F(total_fee);
         String XML = "<xml>" +
-                "<appid>" + wechat.getWxAppId() + "</appid>" +
+                "<appid>" + appid + "</appid>" +
                 "<attach>" + attch + "</attach>" +
                 "<body>" + body + "</body>" +
-                "<device_info>" + wechat.getWxDeviceInfo() + "</device_info>" +
-                "<mch_id>" + wechat.getWxPartner() + "</mch_id>" +
+                "<device_info>" + deviceInfo + "</device_info>" +
+                "<mch_id>" + mchId + "</mch_id>" +
                 "<nonce_str>" + nonceStr + "</nonce_str>" +
-//                "<notify_url>" + String.valueOf(PropUtils.getString("wx.path.pay.notify_url")) + "</notify_url>" +
                 "<notify_url>" + notifyUrl + "</notify_url>" +
                 "<openid>" + openid + "</openid>" +
                 "<out_trade_no>" + outTradeNo + "</out_trade_no>" +
                 "<spbill_create_ip>127.0.0.1</spbill_create_ip>" +
-                "<total_fee>" + finalmoney + "</total_fee>" +
+                "<total_fee>" + moneyFen + "</total_fee>" +
                 "<trade_type>JSAPI</trade_type>" +
                 "<sign>" + sign + "</sign>" +
                 "</xml>";
         return XML;
     }
 
-    public static String getSign(ConfigWechat wechat, String openid, String total_fee, String body, String attch, String nonceStr, String outTradeNo, String notifyUrl) {
-//        double sessionmoney = Double.parseDouble(total_fee) * 100;
-//        String finalmoney = String.valueOf((int) sessionmoney); //上述处理，丢失精度
-        String finalmoney = AmountKit.changeY2F(total_fee);
+    public static String getSign(String appid, String deviceInfo, String mchId, String apiKey,
+                                 String openid, String total_fee, String body, String attch,
+                                 String nonceStr, String outTradeNo, String notifyUrl) {
+        String moneyFen = AmountKit.changeY2F(total_fee);
         SortedMap<String, Object> parameters = new TreeMap<String, Object>();
-        parameters.put("appid", wechat.getWxAppId());
+        parameters.put("appid", appid);
         parameters.put("attach", attch);
         parameters.put("body", body);
-        parameters.put("device_info", wechat.getWxDeviceInfo());
-        parameters.put("mch_id", wechat.getWxPartner());
+        parameters.put("device_info", deviceInfo);
+        parameters.put("mch_id", mchId);
         parameters.put("nonce_str", nonceStr);
         parameters.put("notify_url", notifyUrl);
 
         parameters.put("openid", openid);
         parameters.put("out_trade_no", outTradeNo);
         parameters.put("spbill_create_ip", "127.0.0.1");//手机访问IP地址
-        parameters.put("total_fee", finalmoney);
+        parameters.put("total_fee", moneyFen);
         parameters.put("trade_type", "JSAPI");
 
-        String Sign = createSign("MD5", "UTF-8", parameters, wechat.getWxApiKey());
-        return Sign;
+        return createSign("MD5", "UTF-8", parameters, apiKey);
     }
 
     /**

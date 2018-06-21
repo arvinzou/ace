@@ -50,13 +50,10 @@ public class EvaluatCaseController extends PortalBaseController {
 	@ResponseBody
 	public PageResult<EvaluatCaseVo> findEvaluatCaseList(EvaluatCaseQVo condition,
 			PageParamNoChangeSord page) throws Exception {
-		PageResult<EvaluatCaseVo> rst = this.evaluatCaseService
-				.findEvaluatCaseList(condition, page.getStart(), page.getLimit(),
-						page.getOrderBy());
+		PageResult<EvaluatCaseVo> rst = this.evaluatCaseService.findEvaluatCaseList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
 		if (rst.getTotal() == 0) {
 			rst.setTotal(page.getTotalRecord());
 		}
-	
 		return rst;
 	}
     /**
@@ -73,9 +70,7 @@ public class EvaluatCaseController extends PortalBaseController {
 	@RequestMapping(value = "/insertEvaluatCase.do")
 	@ResponseBody
 	public MessageResponse insertEvaluatCase(String jsons) throws Exception {
-		EvaluatCase obj = JSON.parseObject(jsons, EvaluatCase.class);
-		return this.evaluatCaseService
-				.insertEvaluatCase(obj, this.getCurUserProp());
+		return this.evaluatCaseService.insertEvaluatCase(jsons, this.getCurUserProp());
 	}
     /**
 	 *
@@ -91,9 +86,7 @@ public class EvaluatCaseController extends PortalBaseController {
 	@RequestMapping(value = "/updateEvaluatCase.do")
 	@ResponseBody
 	public MessageResponse updateEvaluatCase(String jsons) throws Exception {
-		EvaluatCase obj = JSON.parseObject(jsons, EvaluatCase.class);
-		return this.evaluatCaseService
-				.updateEvaluatCase(obj, this.getCurUserProp());
+		return this.evaluatCaseService.updateEvaluatCase(jsons, this.getCurUserProp());
 	}
     /**
 	 *

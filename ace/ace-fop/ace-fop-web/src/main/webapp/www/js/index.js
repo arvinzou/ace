@@ -1,7 +1,8 @@
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var index = 0;
-
+var myMap;
+var brandIndex =1 ;
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope) {
     /**
@@ -16,7 +17,6 @@ app.controller(ngControllerName,function($scope) {
         success: function (result) {
             if (result.status == 0) {
                 $scope.notice_slices = result.data.top1;
-                $scope.notice_list = result.data.top0
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
@@ -35,6 +35,31 @@ app.controller(ngControllerName,function($scope) {
         }
     });
 
+    $.ajax({
+        url: "/fop/www/homepageNoticeList",
+        type: "post",
+        async: false,
+        data: {noticeType: "1"},
+        success: function (result) {
+            if (result.status == 0) {
+                $scope.news_list = result.data.top0;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            } else {
+                layer.alert(result.errorMessage, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        },
+        error: function () {
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    });
     /**
      *  查询品牌推广信息
      */
@@ -42,7 +67,7 @@ app.controller(ngControllerName,function($scope) {
         url: "/fop/www/findInformationServiceListDo",
         type: "post",
         async: false,
-        data: {modules : "6", page: 1, limit: 4},  //首页只展示4条信息
+        data: {modules : "6", page: brandIndex, limit: 4},  //首页只展示4条信息
         success: function (result) {
             if (result.status == 0) {
                 $scope.bands = result.data.list;
@@ -62,6 +87,41 @@ app.controller(ngControllerName,function($scope) {
                 skin: 'myskin'
             });
         }
+    });
+    var i = 0, page = 4;
+    setInterval(function(){
+
+        var arr = $scope.brandHover();
+        if(i <= page-4 && page <arr.length){
+            i ++;
+            page ++
+            $scope.bands = arr.slice(i,page);
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+
+        }else{
+            i--;
+            page --;
+            $scope.bands = arr.slice(i,page);
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        }
+
+    },2000);
+
+    myMap = echarts.init(document.getElementById('mapgis'));
+    var url = "/fop/www/companyGis";
+    $.getJSON(url, function (result) {
+        option.series[0].data = JSON.parse(result.data);
+        myMap.setOption(option);
+        $scope.companyMap = JSON.parse(result.data);
+    });
+    loadMap();
+
+    myMap.on('click', function (params) {
+        loadMap(params.name);
     });
 
     $scope.next = function(){
@@ -97,6 +157,107 @@ app.controller(ngControllerName,function($scope) {
         console.log(primaryId);
         window.open('html/information/information_info.html?id='+primaryId);
     }
+
+    var moreType = "1";
+    $scope.changeNews = function(id){
+        var type = null;
+        if(id == 'news'){
+            type = "1";
+            $("#news_span").removeClass("news_unactive").addClass("news_active");
+            $("#dynamics_span").removeClass("news_active").addClass("news_unactive");
+            $("#commerce_span").removeClass("news_active").addClass("news_unactive");
+            moreType = "1";
+        }
+        if(id == 'dynamics'){
+            type = "2";
+            $("#dynamics_span").removeClass("news_unactive").addClass("news_active");
+            $("#news_span").removeClass("news_active").addClass("news_unactive");
+            $("#commerce_span").removeClass("news_active").addClass("news_unactive");
+            moreType = "2";
+        }
+        if(id == 'commerce'){
+            type = "3";
+            $("#commerce_span").removeClass("news_unactive").addClass("news_active");
+            $("#dynamics_span").removeClass("news_active").addClass("news_unactive");
+            $("#news_span").removeClass("news_active").addClass("news_unactive");
+            moreType = "3";
+        }
+        $("#"+id).removeClass("undis").addClass("dis");
+        $("#"+id).siblings().removeClass("dis").addClass("undis");
+        $.ajax({
+            url: "/fop/www/homepageNoticeList",
+            type: "post",
+            async: false,
+            data: {noticeType: type},
+            success: function (result) {
+                if (result.status == 0) {
+                    $scope.news_list = result.data.top0;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                } else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error: function () {
+                layer.alert("系统服务内部异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        });
+    }
+
+    $scope.moreInformation = function(){
+        //html/information/information_index.html
+        if(moreType == "1"){
+            window.open('html/information/information_index.html');
+        }else if(moreType == "2"){
+            window.open('html/information/information_dynamic.html');
+        }else if(moreType == "3"){
+            window.open('html/information/information_commerce.html');
+        }else{
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    }
+
+    $scope.brandHover = function(){
+        var data = [];
+        $.ajax({
+            url: "/fop/www/findInformationServiceListDo",
+            type: "post",
+            async: false,
+            data: {modules : "6", page: brandIndex, limit: 20},  //轮播20条信息
+            success: function (result) {
+                if (result.status == 0) {
+                    data = result.data.list;
+                    $scope.bands = result.data.list;
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
+                } else {
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            },
+            error: function () {
+                layer.alert("系统服务内部异常！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            }
+        });
+
+        return data;
+    }
 });
 
 app.filter('formatDate', function() { //可以注入依赖
@@ -104,3 +265,82 @@ app.filter('formatDate', function() { //可以注入依赖
         return text.substring(0,10);
     }
 });
+
+var option = {
+    backgroundColor: '#fff',
+    // title: {
+    //     text: '中国地区',
+    //     subtext: '企业会员分布图',
+    //     x: 'center'
+    // },
+    tooltip: {
+        trigger: 'item',
+        formatter: function (params) {
+            return params.name/* + ' : ' + params.value[2]*/;
+        }
+    },
+    geo: {
+        map: '中国',
+        //roam: true,
+        label: {
+            normal: {
+                show: false,
+                fontSize: 10,
+            },
+            emphasis: {
+                show: true,
+                fontSize: 12,
+                areaColor: '#ADC2DE',
+            }
+        },
+        itemStyle: {
+            normal: {
+                areaColor: '#fff',
+                borderColor: '#1A56A8'
+            },
+            emphasis: {
+                areaColor: '#ADC2DE',
+            }
+
+        }
+    },
+    series: [{
+        name: '会员企业',
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        data: [],
+        symbolSize: 12,
+        symbol: 'pin',
+        label: {
+            normal: {
+                show: false
+            },
+            emphasis: {
+                show: false
+            }
+        },
+        itemStyle: {
+            emphasis: {
+                borderColor: '#fff',
+                borderWidth: 1
+            }
+        }
+    }
+    ]
+};
+
+function loadMap(cityName) {
+    var cityCode = cityMap[cityName];
+    if (!cityCode) {
+        cityName = '中国';
+        cityCode = 'china';
+    }
+    $.get('china-main-city/' + cityCode + '.json', function (geoJson) {
+        // option.geo.roam = false;
+        // myMap.setOption(option);
+        echarts.registerMap(cityName, geoJson);
+        option.geo.map = cityName;
+        // option.title.text = cityName + "地区";
+        myMap.setOption(option);
+    });
+}

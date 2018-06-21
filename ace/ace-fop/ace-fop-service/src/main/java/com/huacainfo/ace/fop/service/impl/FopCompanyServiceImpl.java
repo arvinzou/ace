@@ -113,7 +113,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     @Override
     public ResultResponse findCompanyGisList() throws Exception {
         List<FopCompanyVo> datas = this.fopCompanyDao.findGisList();
-        String[] value = new String[3];
+        String[] value = new String[4];
         String rst = "[";
         Map<String, Object> itmp = new HashMap<String, Object>();
         for (FopCompanyVo data : datas) {
@@ -124,6 +124,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             value[0] = data.getLongitude().toString();
             value[1] = data.getLatitude().toString();
             value[2] = data.getId();
+            value[3] = data.getAddress();
             itmp.put("value", value);
             rst = rst + JSON.toJSONString(itmp) + ",";
         }

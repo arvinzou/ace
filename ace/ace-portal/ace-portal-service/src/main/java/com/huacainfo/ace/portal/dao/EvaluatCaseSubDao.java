@@ -8,19 +8,23 @@ import com.huacainfo.ace.portal.vo.EvaluatCaseSubQVo;
 import com.huacainfo.ace.portal.vo.EvaluatCaseSubVo;
 
 public interface EvaluatCaseSubDao {
-    int deleteByPrimaryKey(String EvaluatCaseSubId);
+    int deleteByPrimaryKey(String id);
 
-    int insert(EvaluatCaseSub record);
+    int deleteByEvaluatCaseId(String evaluatCaseSubId);
+
+    int insertSelective(EvaluatCaseSub record);
 
 
-    EvaluatCaseSubVo selectByPrimaryKey(String EvaluatCaseSubId);
+    EvaluatCaseSubVo selectByPrimaryKey(String evaluatCaseId);
 
 
     int updateByPrimaryKey(EvaluatCaseSub record);
-    
+
     List<EvaluatCaseSubVo> findList(@Param("condition") EvaluatCaseSubQVo condition,
 			@Param("start") int start, @Param("limit") int limit,
 			@Param("orderBy") String orderBy);
+
+    List<EvaluatCaseSubVo> findLists(String EvaluatCaseId);
 
 	int findCount(@Param("condition") EvaluatCaseSubQVo condition);
 

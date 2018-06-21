@@ -24,10 +24,12 @@ public interface EvaluatTplDao {
 
 	int findCount(@Param("condition") EvaluatTplQVo condition);
 
-	int isExit(EvaluatTpl record);
+    int isExit(@Param("condition") EvaluatTpl condition);
 
 	List<Map<String,Object>> getList(Map<String,Object> params);
 
     Map<String,Object> getById(String id);
+
+    List<Map<String, Object>> selectEvaluatTplTreeList(@Param("pid") String pid, @Param("syid") String syid);
 
 }

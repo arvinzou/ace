@@ -84,8 +84,7 @@ public class FopNoticeServiceImpl implements FopNoticeService {
      *
      */
     @Override
-    public ResultResponse homepageNoticeList() throws Exception {
-        FopNoticeQVo condition = new FopNoticeQVo();
+    public ResultResponse homepageNoticeList(FopNoticeQVo condition) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
         condition.setTop("1");
         map.put("top1", this.fopNoticeDao.findList(condition, 0, 4, null));

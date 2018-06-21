@@ -25,19 +25,19 @@
 					<div class="form">
 						<p>
 							<span class="form_title">真实姓名</span>
-							<input class="form_text" type="text" placeholder="请输入真实姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入真实姓名'" />
+							<input class="form_text" name="realName" type="text" placeholder="请输入真实姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入真实姓名'" />
 						</p>
 					</div>
 					<div class="form">
 						<p>
 							<span class="form_title">身份证号</span>
-							<input class="form_text" type="text" placeholder="请输入受助人身份证号码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入受助人身份证号码'" />
+							<input class="form_text" name="idCard" type="text" placeholder="请输入受助人身份证号码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入受助人身份证号码'" />
 						</p>
 					</div>
 					<div class="form">
 						<p>
 							<span class="form_title">联系方式</span>
-							<input class="form_text" type="text" placeholder="请输入手机号码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入手机号码'" />
+							<input class="form_text" name="phoneNum" type="text" placeholder="请输入手机号码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入手机号码'" />
 						</p>
 					</div>
 					<div class="form">
@@ -49,8 +49,8 @@
 						<!--身份证正面-->
 						<div class="positive">
 							<div class="pictureContainer container_01" id="positive">
-								<div class="viewPicture undis picture_01">
-									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
+								<div class="viewPicture picture_01">
+									<img class="undis" src="" style="width: 100%;height: 100%;object-fit: cover;">
 								</div>
 								<div class="uploadText text_01">
 									<img src="img/add.png" style="width:1rem;height:1rem;" />
@@ -61,8 +61,8 @@
 						<!--身份证反面-->
 						<div class="unpositive">
 							<div class="pictureContainer container_02" id="unpositive">
-								<div class="viewPicture undis picture_02">
-									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
+								<div class="viewPicture picture_02">
+									<img class="undis" src="" style="width: 100%;height: 100%;object-fit: cover;">
 								</div>
 								<div class="uploadText text_02">
 									<img src="img/add.png" style="width:1rem;height:1rem" />
@@ -82,13 +82,13 @@
 					<div class="form">
 						<p>
 							<span class="form_title">目标金额</span>
-							<input class="form_text" type="text" placeholder="请填写整数" onfocus="this.placeholder=''" onblur="this.placeholder='请填写整数'" />
+							<input class="form_text" name="flagAmount" type="text" placeholder="请填写整数" onfocus="this.placeholder=''" onblur="this.placeholder='请填写整数'" />
 						</p>
 					</div>
 					<div class="form">
 						<p>
 							<span class="form_title">筹款标题</span>
-							<input class="form_text" type="text" placeholder="9个字以内" onfocus="this.placeholder=''" onblur="this.placeholder='9个字以内'" />
+							<input class="form_text" name="raiseTitle" type="text" placeholder="9个字以内" onfocus="this.placeholder=''" onblur="this.placeholder='9个字以内'" />
 						</p>
 					</div>
 					<div class="form_cmt">
@@ -96,7 +96,7 @@
 							<span class="form_title">筹款说明</span>
 						</p>
 						<p>
-							<textarea class="project_cmt" type="text" placeholder="请详细填写筹款原因、筹款目的、自身状况和善款用途等信息（10个字以上）" onfocus="this.placeholder=''" onblur="this.placeholder='请详细填写筹款原因、筹款目的、自身状况和善款用途等信息（10个字以上）'" ></textarea></textarea>
+							<textarea class="project_cmt" name="raiseDes" type="text" placeholder="请详细填写筹款原因、筹款目的、自身状况和善款用途等信息（10个字以上）" onfocus="this.placeholder=''" onblur="this.placeholder='请详细填写筹款原因、筹款目的、自身状况和善款用途等信息（10个字以上）'" ></textarea></textarea>
 						</p>
 					</div>
 					<div class="form">
@@ -108,8 +108,8 @@
 						<!--证明-->
 						<div class="positive">
 							<div class="pictureContainer container_03" id="prove1">
-								<div class="viewPicture undis picture_03">
-									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
+								<div class="viewPicture picture_03">
+									<img class="undis" src="" style="width: 100%;height: 100%;object-fit: cover;">
 								</div>
 								<div class="uploadText text_03">
 									<img src="img/add.png" style="width:1rem;height:1rem;" />
@@ -120,8 +120,8 @@
 						<!--证明-->
 						<div class="unpositive">
 							<div class="pictureContainer container_04" id="prove2">
-								<div class="viewPicture undis picture_04">
-									<img src="" style="width: 100%;height: 100%;object-fit: cover;">
+								<div class="viewPicture picture_04">
+									<img class="undis" src="" style="width: 100%;height: 100%;object-fit: cover;">
 								</div>
 								<div class="uploadText text_04">
 									<img src="img/add.png" style="width:1rem;height:1rem" />
@@ -142,7 +142,7 @@
 				</div>
 			</div>
 			<div class="operation">
-				<button>提交申请</button>
+				<button ng-click="applyProject();">提交申请</button>
 			</div>
 		</div>
 	</body>

@@ -197,4 +197,16 @@ public class UserinfoServiceImpl implements UserinfoService {
     public Map<String, Object> selectUserInfoVo(Map<String, Object> where) {
         return userinfoDao.selectUserInfoVo(where);
     }
+
+    /**
+     * 根据openid，appid，查询公众号用户信息
+     *
+     * @param openId 微信openid，公众号内唯一
+     * @param appid  公众号应用识别ID
+     * @return
+     */
+    @Override
+    public Userinfo findByOpenId(String openId, String appid) {
+        return userinfoDao.findByOpenId(openId, appid);
+    }
 }

@@ -19,11 +19,12 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="projectId" jdbcType="VARCHAR" property="projectId"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, applyUserId, applyOpenId, targetAmount, realName, mobileNumber, idCard, description, 
     remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
-        lastModifyDate, title
+        lastModifyDate, title, projectId
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -41,13 +42,13 @@
       idCard, description, remark, 
       status, createUserId, createUserName, 
       createDate, lastModifyUserId, lastModifyUserName,
-        lastModifyDate, title)
+        lastModifyDate, title, projectId)
     values (#{id,jdbcType=VARCHAR}, #{applyUserId,jdbcType=VARCHAR}, #{applyOpenId,jdbcType=VARCHAR}, 
       #{targetAmount,jdbcType=DECIMAL}, #{realName,jdbcType=VARCHAR}, #{mobileNumber,jdbcType=VARCHAR}, 
       #{idCard,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
-        #{lastModifyDate,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR})
+        #{lastModifyDate,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.cu.model.CuProjectApply">
         insert into cu_project_apply
@@ -103,6 +104,9 @@
             <if test="lastModifyDate != null">
                 lastModifyDate,
             </if>
+            <if test="projectId != null">
+                projectId,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -155,6 +159,9 @@
             </if>
             <if test="lastModifyDate != null">
                 #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -209,6 +216,9 @@
             <if test="lastModifyDate != null">
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="projectId != null">
+                projectId = #{projectId,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -221,6 +231,7 @@
       mobileNumber = #{mobileNumber,jdbcType=VARCHAR},
       idCard = #{idCard,jdbcType=VARCHAR},
         title = #{title,jdbcType=VARCHAR},
+        projectId = #{projectId,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
@@ -235,12 +246,19 @@
 
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.cu.vo.CuProjectApplyVo">
+        <result column="projectName" jdbcType="VARCHAR" property="projectName"/>
+        <result column="collectAmount" jdbcType="DECIMAL" property="collectAmount"/>
+        <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="coverUrl" jdbcType="VARCHAR" property="coverUrl"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
-        id, applyUserId, applyOpenId, targetAmount, realName, mobileNumber, idCard, description,
-        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
-        lastModifyDate
+        p.projectName, p.collectAmount, p.endDate, p.coverUrl,
+        CASE when t.`status`=2 THEN p.title else t.title END as title,
+        CASE when t.`status`=2 then p.description ELSE t.description end as description,
+        t.id, t.applyUserId, t.applyOpenId, t.targetAmount, t.realName, t.mobileNumber, t.idCard,
+        t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
+        t.lastModifyDate, t.projectId
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -267,9 +285,10 @@
 
     <sql id="whereCondition">
         from cu_project_apply t
+        left join cu_project p on t.projectId = p.id
         where 1=1
-        <if test="condition.id!=null and condition.id!=&quot;&quot;">
-            and t.id = #{condition.id,jdbcType=VARCHAR}
+        <if test="condition.applyOpenId!=null and condition.applyOpenId!=&quot;&quot;">
+            and t.applyOpenId = #{condition.applyOpenId,jdbcType=VARCHAR}
         </if>
     </sql>
 

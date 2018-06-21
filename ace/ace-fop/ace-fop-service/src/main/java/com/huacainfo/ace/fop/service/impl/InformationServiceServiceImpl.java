@@ -20,6 +20,7 @@ import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.InformationService;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
+import com.huacainfo.ace.fop.service.FopQuestionService;
 import com.huacainfo.ace.fop.service.InformationServiceService;
 import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -66,6 +67,9 @@ public class InformationServiceServiceImpl implements InformationServiceService 
     private FopGeHelpDao fopGeHelpDao;
     @Autowired
     private FopQuestionDao fopQuestionDao;
+
+    @Autowired
+    private FopQuestionService fopQuestionService;
 
     @Autowired
     private FopQuestionnaireResultDao fopQuestionnaireResultDao;
@@ -224,16 +228,21 @@ public class InformationServiceServiceImpl implements InformationServiceService 
     @Override
     public SingleResult<InformationServiceVo> selectInformationServiceByPrimaryKey(String id) throws Exception {
         SingleResult<InformationServiceVo> rst = new SingleResult<InformationServiceVo>();
-        rst.setValue(this.informationServiceDao.selectVoByPrimaryKey(id));
+        InformationServiceVo ffp = this.informationServiceDao.selectVoByPrimaryKey(id);
+        if (ModulesType.TALENT_INFO.equals(ffp.getModules())) {
+            ffp.setComments(fopQuestionService.findCommentList(ffp.getId()));
+        }
+
         return rst;
     }
 
     @Override
     public ResultResponse InformationServiceByPrimaryKey(String id) throws Exception {
-        if (CommonUtils.isBlank(id)) {
-            return new ResultResponse(1, "主键不能为空！");
+        InformationServiceVo ffp = this.informationServiceDao.selectVoByPrimaryKey(id);
+        if (ModulesType.TALENT_INFO.equals(ffp.getModules())) {
+            ffp.setComments(fopQuestionService.findCommentList(ffp.getId()));
         }
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "信息服务详情", this.informationServiceDao.selectVoByPrimaryKey(id));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "信息服务详情", ffp);
         return rst;
     }
 

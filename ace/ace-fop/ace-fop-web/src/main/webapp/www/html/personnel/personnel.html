@@ -9,6 +9,7 @@
     <link href="css/publicity.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/personnel.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
     <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
     <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
@@ -28,47 +29,49 @@
 </head>
 
 <body>
+<body>
 <div id="header"></div>
-<p style="padding-left: 15%;padding-top: 30px;">当前位置：首页>>人才信息</p>
-<div class="index">
-    <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade in active" id="finance">
-            <div class="search_list">
-                <div class="finance_list_title">
-                    <span ng-cloak>共{{totalCount}}条人才信息</span>
-                    <button  class="release" data-toggle="modal" data-target=""
-                            ng-click="before_release($event);">发布招聘
-                    </button>
-                </div>
-
-                <div class="project_list">
-                    <div class="table_div">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr style="font-weight: bolder;">
-                                <td width="40%" align="left">岗位名称</td>
-                                <td width="40%" align="left">发布公司</td>
-                                <td width="20%" align="left">发布时间</td>
-                            </tr>
-                            <tr ng-repeat="item in items">
-                                <td width="40%" ng-cloak><a href="#" ng-click="showInfo($index)">{{item.title}}</a></td>
-                                <td width="40%" ng-bind="item.companyName"></td>
-                                <td width="20%" ng-bind="item.releaseDate"></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div id="paganation"></div>
+<div class="bodybg">
+    <div class="juz">
+        <div class="main">
+            <div class="title01">
+                <span class="title_lager">人才信息</span><span
+                    class="title_small">/&nbsp;Talent information</span>
+                <button class="law_help" data-toggle="modal" data-target=""
+                         ng-click="before_release($event);">发布招聘
+                 </button>
             </div>
+            <div class="searchTable">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr style="font-weight: bolder;">
+                        <td width="15px"></td>
+                        <td align="left">岗位名称</td>
+                        <td width="40%" align="left">发布公司</td>
+                        <td width="20%" align="left">发布时间</td>
+                    </tr>
+                    <tr class="tr_bottom" style="line-height: 15px" ng-repeat="item in items"
+                        ng-click="showInfo($index)">
+                        <td align="center" width="15px">
+                            <div class="dot"></div>
+                        </td>
+                        <td ng-bind="item.title"></td>
+                        <td width="40%" ng-bind="item.companyName"></td>
+                        <td width="20%" ng-bind="item.releaseDate"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="paganation"></div>
         </div>
-
-        <div class="tab-pane fade" id="product">
-            金融产品
+        <div>
         </div>
     </div>
 </div>
 </body>
 
-<!--发布融资模态框-->
+
+<!--发布招聘模态框-->
 <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true" labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-lg">

@@ -137,7 +137,7 @@ body {
 
 .content_box {
     height: 100%;
-    width: 1205px;
+    width:1280px;
     margin: auto;
 }
 
@@ -275,7 +275,7 @@ body {
 }
 
 .banner_menu li {
-    width: 25%;
+    width: 20%;
     height: 55px;
     line-height: 55px;
     display: block;
@@ -581,7 +581,80 @@ body {
 
 .map {
     width: 100%;
-    margin-top: 15px;
+    padding-right: 40%;
+    margin-top: 52px;
+    position: relative;
+    background-color: #fff;
+}
+
+.map .title_gis {
+    position: absolute;
+    top: -36px;
+    left: 0px;
+}
+
+.map .company_list {
+    position: absolute;
+    right: 40px;
+    top: 16px;
+    height: 440px;
+    width: 520px;
+    font-size: 12px;
+}
+
+.map .company_list .list_more > span {
+    float: right;
+    font-size: 14px;
+    color: rgba(26, 86, 168, 1);
+    line-height: 53px;
+    cursor: pointer;
+}
+
+.map .company_list .list_more:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.map .company_list .lists {
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    width: 100%;
+
+}
+
+.map .company_list table {
+    width: 100%;
+}
+
+.map .company_list .table_title {
+    height: 0px;
+}
+
+.map .company_list .table_content {
+    height: 350px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.map .company_list thead, .map .company_list tbody {
+    text-align: center;
+
+    color: rgba(22, 90, 183, 1);
+    line-height: 53px;
+    font-weight: 600;
+}
+
+.map .company_list tbody {
+    line-height: 46px;
+    color: rgba(86, 91, 112, 1);
+
+}
+
+.map .company_list tbody td {
+    margin-left: 20px;
+    overflow: hidden;
 }
 
 .map_content {
@@ -874,7 +947,7 @@ a {
 
 .nav-list {
     position: relative;
-    width: 60%;
+    width: 960px;
     margin: 0 auto;
     height: 40px;
     z-index: 2;
@@ -885,7 +958,7 @@ a {
 .nav-list > li {
     position: relative;
     float: left;
-    width: 12.5%;
+    width: 80px;
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -931,4 +1004,28 @@ a:hover {
 
 a:active {
     text-decoration: none;
+}
+.dis{
+    display: block;
+}
+.undis{
+    display: none;
+}
+.news{
+    width: 100px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bolder;
+    display: inline-block;
+    cursor: pointer;
+}
+.news_unactive{
+    background-color: #f5f7f9;
+    color: #565b70;
+}
+.news_active{
+    background-color: #1A56A8;
+    color: #ffffff;
 }

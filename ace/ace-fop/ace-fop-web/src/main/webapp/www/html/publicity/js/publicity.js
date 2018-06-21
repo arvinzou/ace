@@ -103,11 +103,12 @@ app.controller(ngControllerName,function($scope){
 
     $scope.searchList = function(currentPage, pageSize){
         var key_word = $("#key_word").val();
+        var areaCode = $("#areaCode option:checked").val();
         $.ajax({
             url: "/fop/www/findCompanyList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, title: key_word , areaCode: areaCode, companyProperty: companyProperty},
+            data:{page:currentPage, limit: pageSize, fullName: key_word , areaCode: areaCode, companyProperty: companyProperty},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {
@@ -137,12 +138,13 @@ app.controller(ngControllerName,function($scope){
      */
     $scope.search = function(){
         var key_word = $("#key_word").val();
+        var areaCode = $("#areaCode option:checked").val();
         console.log("地区代码：",areaCode);
         $.ajax({
             url: "/fop/www/findCompanyList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, title: key_word , areaCode: areaCode, companyProperty: companyProperty},
+            data:{page:currentPage, limit: pageSize, fullName: key_word , areaCode: areaCode, companyProperty: companyProperty},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;

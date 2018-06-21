@@ -20,7 +20,9 @@ body {
 	height: 62px;
 	line-height: 62px;
 	vertical-align: bottom;
-	overflow: hidden;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
 }
 
 .title_small {

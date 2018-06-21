@@ -9,13 +9,18 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.cu.common.constant.OrderConstant;
 import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuDonateOrderDao;
-import com.huacainfo.ace.cu.dao.CuUserDao;
+import com.huacainfo.ace.cu.dao.WxPayLogDao;
 import com.huacainfo.ace.cu.model.CuDonateOrder;
+import com.huacainfo.ace.cu.model.WxPayLog;
+import com.huacainfo.ace.cu.service.CuDonateListService;
 import com.huacainfo.ace.cu.service.CuDonateOrderService;
 import com.huacainfo.ace.cu.service.CuProjectService;
+import com.huacainfo.ace.cu.service.CuUserService;
 import com.huacainfo.ace.cu.vo.CuDonateOrderQVo;
 import com.huacainfo.ace.cu.vo.CuDonateOrderVo;
 import com.huacainfo.ace.cu.vo.CuProjectVo;
@@ -35,7 +40,7 @@ import java.util.Random;
 /**
  * @author: Arvin
  * @version: 2018-06-14
- * @Description: TODO(捐款支付订单)
+ * @Description: (捐款支付订单)
  */
 public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -46,12 +51,16 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     @Autowired
     private CuProjectService cuProjectService;
     @Autowired
-    private CuUserDao cuUserDao;
+    private CuUserService cuUserService;
+    @Autowired
+    private WxPayLogDao wxPayLogDao;
+    @Autowired
+    private CuDonateListService cuDonateListService;
 
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(捐款支付订单分页查询)
+     * @Description: (捐款支付订单分页查询)
      * @param: @param condition
      * @param: @param start
      * @param: @param limit
@@ -79,7 +88,7 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     /**
      * @throws
      * @Title:insertCuDonateOrder
-     * @Description: TODO(添加捐款支付订单)
+     * @Description: (添加捐款支付订单)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -142,7 +151,7 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     /**
      * @throws
      * @Title:updateCuDonateOrder
-     * @Description: TODO(更新捐款支付订单)
+     * @Description: (更新捐款支付订单)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -197,7 +206,7 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     /**
      * @throws
      * @Title:selectCuDonateOrderByPrimaryKey
-     * @Description: TODO(获取捐款支付订单)
+     * @Description: (获取捐款支付订单)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<CuDonateOrder>
@@ -214,7 +223,7 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     /**
      * @throws
      * @Title:deleteCuDonateOrderByCuDonateOrderId
-     * @Description: TODO(删除捐款支付订单)
+     * @Description: (删除捐款支付订单)
      * @param: @param id
      * @param: @param userProp
      * @param: @throws Exception
@@ -250,7 +259,7 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         if (projectVo.getBalanceDays() == 0) {
             return new ResultResponse(ResultCode.FAIL, "项目已结束，捐款通道关闭！");
         }
-        CuUserVo userVo = cuUserDao.findByOpenId(data.getOpenId());
+        CuUserVo userVo = cuUserService.findByOpenId(data.getOpenId());
         if (null == userVo) {
             return new ResultResponse(ResultCode.FAIL, "用户信息不存在！");
         }
@@ -278,6 +287,71 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
             return new ResultResponse(ResultCode.SUCCESS, "订单创建成功", data);
         }
         return new ResultResponse(ResultCode.FAIL, "订单创建失败");
+    }
+
+
+    /**
+     * 订单校验
+     *
+     * @param attach 附加数据 --  此处存放 cu_donate_order.id
+     * @param fee    支付金额
+     * @return
+     */
+    @Override
+    public ResultResponse orderCheck(String attach, String fee) {
+        CuDonateOrder order = cuDonateOrderDao.selectByPrimaryKey(attach);
+        if (null == order) {
+            return new ResultResponse(ResultCode.FAIL, "订单数据丢失");
+        }
+        if (!order.getStatus().equals(OrderConstant.ORDER_STATUS_NEW_ORDER)) {
+            return new ResultResponse(ResultCode.FAIL, "订单状态异常");
+        }
+        if (order.getDonateAmount().compareTo(new BigDecimal(fee)) != 0) {
+            return new ResultResponse(ResultCode.FAIL, "订单支付金额不匹配");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "单据合法");
+    }
+
+    /**
+     * 订单支付逻辑
+     *
+     * @param wxPayLog 支付回调日志
+     * @param payType  支付方式类型
+     * @return
+     */
+    @Override
+    public ResultResponse pay(WxPayLog wxPayLog, String payType) {
+        logger.debug("WxPayLog[payType={}]:{}", payType, wxPayLog);
+        if (null == wxPayLog) {
+            return new ResultResponse(ResultCode.FAIL, "回调日志信息异常");
+        }
+        if (OrderConstant.PAY_TYPE_WX.equals(payType)) {
+            wxPayLogDao.insert(wxPayLog);
+        }
+        if (!"SUCCESS".equals(wxPayLog.getResult_code())) {
+            return new ResultResponse(ResultCode.FAIL, "回调支付结果异常");
+        }
+        //查询订单
+        String orderId = wxPayLog.getAttach();
+        CuDonateOrder order = cuDonateOrderDao.selectByPrimaryKey(orderId);
+        if (null == order) {
+            return new ResultResponse(ResultCode.FAIL, "订单信息异常");
+        }
+        if (OrderConstant.ORDER_STATUS_NEW_ORDER.equals(order.getStatus())) {
+            return new ResultResponse(ResultCode.FAIL, "订单状态异常");
+        }
+        //订单状态修改
+        order.setStatus(OrderConstant.ORDER_STATUS_PAID);
+        order.setPayDate(DateUtil.getNowDate());
+        order.setDonateDate(DateUtil.getNowDate());
+        order.setLastModifyDate(DateUtil.getNowDate());
+        //增加捐献记录
+        ResultResponse rs1 = cuDonateListService.addDonateList(order);
+        //调整项目属性
+        ResultResponse rs2 = cuProjectService.pay(order);
+
+        return new ResultResponse(ResultCode.SUCCESS, "订单支付处理成功");
     }
 
     /**

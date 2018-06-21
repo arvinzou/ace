@@ -18,19 +18,19 @@
 }
 
 .menu .menu_li {
-	width: 220px;
+	width: 235px;
 	display: block;
 	height: 80px;
 	float: left;
 	margin-bottom: 20px;
 	padding-top: 15px;
-	margin-right: 11px;
+	margin-right: 20px;
 	background-color: #fff;
 }
 
-/*.menu li:nth-child(4n+0) {*/
-	/*margin-right: 0px;*/
-/*}*/
+.menu li:nth-child(4n+0) {
+	margin-right: 0px;
+}
 
 .menu_ul:after {
 	content: "";

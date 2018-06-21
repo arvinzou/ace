@@ -28,12 +28,12 @@
     <div class="juz">
         <div class="main">
             <div class="title01">
-                <span class="title_lager">品牌推广</span><span class="title_small">/&nbsp;Enterprise Style</span>
+                <span class="title_lager">品牌推广</span><span class="title_small">/&nbsp;Brand promotion</span>
             </div>
             <div class="product_container" ng-repeat="item in items" ng-click="showBrand($index);">
                 <div class="content_container">
                     <div class="img_container" ng-cloak>
-                        <img ng-src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
+                        <img ng-if="item.fileUrl!=''" ng-src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
                     </div>
                     <div class="words_container">
                         <h3 ng-bind="item.title"></h3>

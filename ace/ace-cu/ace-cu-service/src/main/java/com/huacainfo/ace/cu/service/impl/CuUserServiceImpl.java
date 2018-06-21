@@ -2,22 +2,28 @@ package com.huacainfo.ace.cu.service.impl;
 
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.cu.dao.CuUserDao;
 import com.huacainfo.ace.cu.model.CuUser;
+import com.huacainfo.ace.cu.service.CuDonateListService;
+import com.huacainfo.ace.cu.service.CuProjectApplyService;
 import com.huacainfo.ace.cu.service.CuUserService;
-import com.huacainfo.ace.cu.vo.CuUserQVo;
-import com.huacainfo.ace.cu.vo.CuUserVo;
+import com.huacainfo.ace.cu.vo.*;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UserinfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +39,12 @@ public class CuUserServiceImpl implements CuUserService {
     private CuUserDao cuUserDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private UserinfoService userinfoService;
+    @Autowired
+    private CuDonateListService cuDonateListService;
+    @Autowired
+    private CuProjectApplyService cuProjectApplyService;
 
     /**
      * @throws
@@ -196,7 +208,109 @@ public class CuUserServiceImpl implements CuUserService {
      */
     @Override
     public CuUserVo findByOpenId(String openId) {
-        return cuUserDao.findByOpenId(openId);
+        String appid = PropertyUtil.getProperty("appid");
+        CuUserVo vo = cuUserDao.findByOpenId(openId, appid);
+        if (null == vo) {
+            //查询userinfo
+            Userinfo userinfo = userinfoService.findByOpenId(openId, appid);
+            if (null == userinfo) {
+                return null;
+            }
+            //构建CuUser
+            vo = new CuUserVo();
+            vo.setId(GUIDUtil.getGUID());
+            vo.setOpenId(openId);
+            vo.setStatus("1");
+            vo.setCreateUserId("0000-0000");
+            vo.setCreateUserName("system");
+            vo.setCreateDate(DateUtil.getNowDate());
+            vo.setLastModifyDate(DateUtil.getNowDate());
+            int count = cuUserDao.insertSelective(vo);
+            if (count == 0) {
+                return null;
+            }
+            vo = cuUserDao.findByOpenId(openId, appid);
+        }
+        //统计数据
+        BigDecimal accDonateAmount = cuDonateListService.getAccDonateAmount(vo.getOpenId());
+        int accDonateCount = cuDonateListService.getAccDonateCount(vo.getOpenId());
+        vo.setAccDonateAmount(accDonateAmount);
+        vo.setAccDonateCount(accDonateCount);
+
+        return vo;
+    }
+
+
+    /**
+     * 查询会员爱心记录
+     *
+     * @param openId 微信openid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public PageResult<CuDonateListVo> findDonateList(String openId,
+                                                     int start, int limit, String orderBy) throws Exception {
+        CuDonateListQVo condition = new CuDonateListQVo();
+        condition.setOpenId(openId);
+
+        return cuDonateListService.findCuDonateListList(condition, start, limit, orderBy);
+    }
+
+    /**
+     * 查询会员 -- 我的求助
+     *
+     * @param openId  微信openid
+     * @param start
+     * @param limit
+     * @param orderBy @return
+     * @throws Exception
+     */
+    @Override
+    public PageResult<CuProjectApplyVo> findMyProject(String openId, int start, int limit, String orderBy) throws Exception {
+        CuProjectApplyQVo condition = new CuProjectApplyQVo();
+        condition.setApplyOpenId(openId);
+
+        PageResult<CuProjectApplyVo> data = cuProjectApplyService.findCuProjectApplyList(condition, start, limit, orderBy);
+        List<CuProjectApplyVo> list = data.getRows();
+        long balanceDays = 0;
+        for (CuProjectApplyVo vo : list) {
+            if (null != vo.getEndDate()) {
+                balanceDays = getDiffDays(DateUtil.getNowDate(), vo.getEndDate());
+            }
+            vo.setBalanceDays(balanceDays < 0 ? 0 : balanceDays);
+        }
+
+        return data;
+    }
+
+
+    /**
+     * 计算项目剩余天数
+     *
+     * @param projectVo
+     * @return
+     */
+    private CuProjectVo setBalanceDays(CuProjectVo projectVo) {
+        long balanceDays = 0;
+        if (null != projectVo.getEndDate()) {
+            balanceDays = getDiffDays(DateUtil.getNowDate(), projectVo.getEndDate());
+        }
+        projectVo.setBalanceDays(balanceDays < 0 ? 0 : balanceDays);
+
+        return projectVo;
+    }
+
+    /**
+     * 计算2个date时间的 差距天数
+     *
+     * @param begin
+     * @param end
+     * @return
+     */
+    private long getDiffDays(Date begin, Date end) {
+        long between = (end.getTime() - begin.getTime()) / 1000;// 除以1000是为了转换成秒
+        return between / (24 * 3600);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.huacainfo.ace.cu.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.JsonUtil;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/www/project")
-public class WWWProjectController {
+public class WWWProjectController extends CuBaseController {
     @Autowired
     private CuProjectService cuProjectService;
 
@@ -117,10 +118,16 @@ public class WWWProjectController {
     @RequestMapping(value = "/applyProject")
     @ResponseBody
     public ResultResponse applyProject(String json) throws Exception {
+        //公众号用户信息
+        Userinfo userinfo = getCurUserinfo();
+        if (null == userinfo) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
         if (StringUtil.isEmpty(json)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         CuProjectApplyVo vo = JsonUtil.toObject(json, CuProjectApplyVo.class);
+        vo.setApplyOpenId(userinfo.getOpenid());
 
         return cuProjectApplyService.applyProject(vo);
     }
@@ -135,10 +142,16 @@ public class WWWProjectController {
     @RequestMapping(value = "/createDonateOrder")
     @ResponseBody
     public ResultResponse createDonateOrder(String json) throws Exception {
+        //公众号用户信息
+        Userinfo userinfo = getCurUserinfo();
+        if (null == userinfo) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
         if (StringUtil.isEmpty(json)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         CuDonateOrderVo data = JsonUtil.toObject(json, CuDonateOrderVo.class);
+        data.setOpenId(userinfo.getOpenid());
 
         return cuDonateOrderService.createDonateOrder(data);
     }
