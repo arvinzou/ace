@@ -94,7 +94,8 @@ public interface UserinfoService {
      * @author: 陈晓克
      * @version: 2018-02-04
      */
-    public abstract MessageResponse deleteRoleById(String id,UserProp userProp) throws Exception;
+    public abstract MessageResponse deleteRoleById(String id, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateRoleById
@@ -107,7 +108,7 @@ public interface UserinfoService {
      * @author: 陈晓克
      * @version: 2018-02-04
      */
-    public abstract MessageResponse updateRoleById(String id,String role,UserProp userProp) throws Exception;
+    public abstract MessageResponse updateRoleById(String id, String role, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -121,8 +122,17 @@ public interface UserinfoService {
      * @author: 陈晓克
      * @version: 2018-02-04
      */
-    List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception;
+    List<Map<String, Object>> selectWxUser(Map<String, Object> condition) throws Exception;
 
 
     Map<String, Object> selectUserInfoVo(Map<String, Object> where);
+
+    /**
+     * 根据openid，appid，查询公众号用户信息
+     *
+     * @param openId 微信openid，公众号内唯一
+     * @param appid  公众号应用识别ID
+     * @return
+     */
+    Userinfo findByOpenId(String openId, String appid);
 }

@@ -182,4 +182,14 @@
         update users set openId=null,appOpenId=null where openId=#{unionid};
         update userinfo set mobile = null where unionid = #{unionid,jdbcType=VARCHAR};
     </update>
+
+    <select id="findByOpenId" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from userinfo
+        where openid = #{openid,jdbcType=VARCHAR}
+        AND appid = #{appid,jdbcType=VARCHAR}
+    </select>
 </mapper>

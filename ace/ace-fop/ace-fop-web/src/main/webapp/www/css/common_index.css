@@ -137,7 +137,7 @@ body {
 
 .content_box {
     height: 100%;
-    width: 1205px;
+    width:1280px;
     margin: auto;
 }
 
@@ -947,7 +947,7 @@ a {
 
 .nav-list {
     position: relative;
-    width: 60%;
+    width: 960px;
     margin: 0 auto;
     height: 40px;
     z-index: 2;
@@ -958,7 +958,7 @@ a {
 .nav-list > li {
     position: relative;
     float: left;
-    width: 12.5%;
+    width: 80px;
     height: 40px;
     line-height: 40px;
     text-align: center;

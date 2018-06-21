@@ -271,7 +271,46 @@ public class CuUserServiceImpl implements CuUserService {
         CuProjectApplyQVo condition = new CuProjectApplyQVo();
         condition.setApplyOpenId(openId);
 
-        return cuProjectApplyService.findCuProjectApplyList(condition, start, limit, orderBy);
+        PageResult<CuProjectApplyVo> data = cuProjectApplyService.findCuProjectApplyList(condition, start, limit, orderBy);
+        List<CuProjectApplyVo> list = data.getRows();
+        long balanceDays = 0;
+        for (CuProjectApplyVo vo : list) {
+            if (null != vo.getEndDate()) {
+                balanceDays = getDiffDays(DateUtil.getNowDate(), vo.getEndDate());
+            }
+            vo.setBalanceDays(balanceDays < 0 ? 0 : balanceDays);
+        }
+
+        return data;
+    }
+
+
+    /**
+     * 计算项目剩余天数
+     *
+     * @param projectVo
+     * @return
+     */
+    private CuProjectVo setBalanceDays(CuProjectVo projectVo) {
+        long balanceDays = 0;
+        if (null != projectVo.getEndDate()) {
+            balanceDays = getDiffDays(DateUtil.getNowDate(), projectVo.getEndDate());
+        }
+        projectVo.setBalanceDays(balanceDays < 0 ? 0 : balanceDays);
+
+        return projectVo;
+    }
+
+    /**
+     * 计算2个date时间的 差距天数
+     *
+     * @param begin
+     * @param end
+     * @return
+     */
+    private long getDiffDays(Date begin, Date end) {
+        long between = (end.getTime() - begin.getTime()) / 1000;// 除以1000是为了转换成秒
+        return between / (24 * 3600);
     }
 
 }

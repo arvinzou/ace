@@ -228,6 +228,8 @@
                                 </div>
                                 <div class="form-group">
 
+
+
                                     <span>封面:</span>
 																		
 																		
