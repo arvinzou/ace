@@ -100,7 +100,7 @@
 									<span>已筹集<span ng-if="project.status=='2'" class="money" ng-bind="project.collectAmount"></span>
 												<span ng-if="project.status!='2'" class="money">0</span>
 										元</span>
-									<span style="padding-left: 1rem;" ng-if="project.status=='2'">剩余<span class="money">20</span>天</span>
+									<span style="padding-left: 1rem;" ng-if="project.status=='2'">剩余<span class="money" ng-bind="project.balanceDays"></span>天</span>
 									<span style="padding-left: 1rem;" ng-if="project.status!='2'">未通过</span>
 								</p>
 							</div>
