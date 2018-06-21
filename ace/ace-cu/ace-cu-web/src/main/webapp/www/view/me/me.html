@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="js/me.js"></script>
 	</head>
 	<body>
-		<div class="contactbox"><img src="img/contact.png" style="width: 100%; height: 100%;"/></div>
+		<div class="contactbox" ng-click="aboutus();"><img src="img/contact.png" style="width: 100%; height: 100%;"/></div>
 		<div class="mebox">
 			<div class="bg">
 				<div class="userinfo">
@@ -80,7 +80,8 @@
 					<div class="help_box">
 						<div class="help_list" ng-repeat="project in projectList">
 							<div class="help_list_left">
-								<img ng-if="project.coverUrl" ng-src="img/raise.png" style="width: 100%;height: 100%;" />
+								<img ng-if="project.coverUrl == '' || project.coverUrl== null" src="img/default.png" style="width: 100%;height: 100%;" />
+								<img ng-if="project.coverUrl != ''" ng-src="project.coverUrl" style="width: 100%;height: 100%;" />
 							</div>
 							<div class="help_list_right">
 								<p class="help_title" ng-bind="project.title"></p>
@@ -95,7 +96,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="raise_btn"><button>发起筹款</button></div>
+					<div class="raise_btn"><button ng-click="apply();">发起筹款</button></div>
 				</div>
 				<div class="undis" id="nav_score">
 					<div class="scores_box">
@@ -105,7 +106,7 @@
 								<p class="score_time" ng-bind="record.donateDate"></p>
 							</div>
 							<div class="score_list_right">
-								<p ng-bind="record.point"></p>
+								<p ng-bind="record.points"></p>
 							</div>
 						</div>
 					</div>
