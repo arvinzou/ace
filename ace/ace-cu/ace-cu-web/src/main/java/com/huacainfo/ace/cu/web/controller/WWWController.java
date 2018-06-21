@@ -20,5 +20,4 @@ public class WWWController extends CuBaseController {
         response.sendRedirect("http://localhost/cu/www/oauth2/redirect.do");
         return "success";
     }
-
 }
