@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.EvaluatTpl;
 import com.huacainfo.ace.portal.vo.EvaluatTplVo;
@@ -32,6 +33,9 @@ public interface EvaluatTplService {
      * @version: 2018-06-09
      */
     public abstract PageResult<EvaluatTplVo> findEvaluatTplList(EvaluatTplQVo condition, int start, int limit, String orderBy) throws Exception;
+
+
+    public abstract ResultResponse getEvaluatTplList(EvaluatTplQVo condition, int page, int limit, String orderBy) throws Exception;
 
     /**
      * @throws

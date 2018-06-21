@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.huacainfo.ace.common.result.ResultResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,13 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
             rst.setTotal(allRows);
         }
         return rst;
+    }
+
+    @Override
+    public ResultResponse getEvaluation(EvaluatGaugeQVo condition) throws Exception {
+        PageResult<EvaluatGaugeVo> rst = new PageResult<EvaluatGaugeVo>();
+        EvaluatGauge list = this.evaluatGaugeDao.getEvaluation(condition);
+        return new ResultResponse(0, "评价获取成功", list);
     }
 
     /**

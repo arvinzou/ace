@@ -2,6 +2,7 @@ package com.huacainfo.ace.portal.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.EvaluatGauge;
 import com.huacainfo.ace.portal.vo.EvaluatGaugeVo;
@@ -28,6 +29,9 @@ public interface EvaluatGaugeService {
 	    * @version: 2018-06-09
 	 */
 	public abstract PageResult<EvaluatGaugeVo> findEvaluatGaugeList(EvaluatGaugeQVo condition, int start, int limit, String orderBy) throws Exception;
+
+
+    public abstract ResultResponse getEvaluation(EvaluatGaugeQVo condition) throws Exception;
 
     /**
 	 *
