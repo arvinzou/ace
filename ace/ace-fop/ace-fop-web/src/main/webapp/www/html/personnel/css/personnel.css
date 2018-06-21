@@ -30,7 +30,7 @@ body {
 
 .table_div tr {
     height: 35px;
-    border-bottom: 1px solid #E1E5ED;
+  /*  border-bottom: 1px solid #E1E5ED;*/
 }
 
 .search {
