@@ -71,7 +71,7 @@ html.push("<li><a href=\"/fop/www/html/law/lawer_index.html\" target=\"_blank\">
 html.push("</ul>");
 html.push("</li>");
 html.push("<li>");
-html.push("<a href=\"\" target=\"_blank\">组织建设<span class=\"trig\"></span></a>");
+html.push("<a href=\"/fop/www/html/group/group.html\" target=\"_blank\">组织建设<span class=\"trig\"></span></a>");
 html.push("</li>");
 html.push("<li>");
 html.push("<a href=\"/fop/www/html/publicity/publicity.html\" target=\"_blank\">会员信息<span class=\"trig\"></span></a>");
