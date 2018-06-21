@@ -8,6 +8,7 @@ body {
     background-color: #ffffff;
     padding-left: 20px;
     padding-right: 20px;
+    margin-bottom: 62px;
 }
 
 .project_list {
@@ -128,10 +129,6 @@ textarea {
     /*color: #E1E5ED;*/
     width: 80%;
     height: 100%;
-}
-
-option {
-    color: #E1E5ED;
 }
 
 .tab_title_ul {

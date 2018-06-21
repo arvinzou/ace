@@ -4,12 +4,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
-		<title>企业公示</title>
+		<title>企业信息</title>
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
 		<link href="css/publicity.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="filter/Fliter.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" src="filter/Filter.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
@@ -17,23 +19,11 @@
 		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
 		<script type="text/javascript" src="js/publicity.js"></script>
-        <script type="text/javascript" src="js/Popt.js"></script>
-        <script type="text/javascript" src="js/city.json.js"></script>
-        <script type="text/javascript" src="js/citySet.js"></script>
 		<link rel="shortcut icon" href="../../images/favicon.ico">
-		<script>
-			$(function() {
-                $("#city").click(function (e) {
-                    SelCity(this,e);
-                });
-                $("s").click(function (e) {
-                    SelCity(document.getElementById("city"),e);
-                });
-			});
-		</script>
 	</head>
 
 	<body>
+	    <div id="header"></div>
 		<div class="index">
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane fade in active" id="finance">
@@ -53,14 +43,31 @@
 							</div>
                             <div style="clear: both;"></div>
                             <div class="search_filter1">
-                                <div class="filter_title1">所属区域：</div>
-                                <div class="wrap"><input class="input" name="" id="city" type="text" placeholder="请选择" autocomplete="off" readonly="true"/></div>
+								<div style="width: 12%;float: left;">所属区域：</div>
+								<div style="width: 88%;float: left;height: 30px;">
+									<select id="areaCode">
+										<option value="">请选择</option>
+										<option value="430702">武陵区</option>
+										<option value="43070201">东江街道</option>
+										<option value="43070202">启明街道</option>
+										<option value="43070203">永安街道</option>
+										<option value="430721">安乡县</option>
+										<option value="430722">汉寿县</option>
+										<option value="430723">澧县</option>
+										<option value="43072301">大堰垱镇</option>
+										<option value="430724">临澧县</option>
+										<option value="430725">桃源县</option>
+										<option value="430725">石门县</option>
+										<option value="430725">津市市</option>
+										<option value="430782">其他</option>
+									</select>
+								</div>
                             </div>
 						</div>
 					</div>
 					<div class="search_list">
 						<div class="finance_list_title">
-							共{{totalCount}}条企业公示
+							共{{totalCount}}条企业信息
 						</div>
 						<div class="project_list">
 							<div class="table_div">
@@ -68,13 +75,13 @@
 									<tr style="font-weight: bolder;">
 										<td width="35%" align="left">企业名称</td>
 										<td width="15%" align="left">企业法人</td>
-										<td width="15%" align="left">成立时间</td>
-										<td width="35%" align="right">通讯地址</td>
+										<td width="15%" align="left">企业性质</td>
+										<td width="35%" align="right">所属区域</td>
 									</tr>
 									<tr ng-repeat="item in items">
 										<td width="35%" ng-bind="item.fullName"></td>
-										<td width="15%"></td>
-										<td width="15%" ng-bind="item.establishDate"></td>
+										<td width="15%" ng-bind="item.realName"></td>
+										<td width="15%" ng-bind="item.companyPropertyName"></td>
 										<td width="35%" align="right" ng-bind="item.areaCodeName"></td>
 									</tr>
 								</table>
