@@ -127,4 +127,17 @@
     ORDER BY scoreStart
   </select>
 
+  <select id="getEvaluation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    <include refid="whereCondition"/>
+  </select>
+
+  <sql id="whereCondition">
+    from evaluat_gauge
+    where evaluatTplId =#{condition.evaluatTplId,jdbcType=VARCHAR}
+    and scoreEnd <![CDATA[ <= ]]> #{condition.score,jdbcType=INTEGER}
+    and scoreStart <![CDATA[ > ]]> #{condition.score,jdbcType=INTEGER}
+  </sql>
+
 </mapper>

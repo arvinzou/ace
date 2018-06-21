@@ -24,6 +24,8 @@ public interface EvaluatGaugeDao {
 			@Param("start") int start, @Param("limit") int limit,
 			@Param("orderBy") String orderBy);
 
+    EvaluatGauge getEvaluation(@Param("condition") EvaluatGaugeQVo condition);
+
     List<EvaluatGauge> findLists(@Param("evaluatTplId") String evaluatTplId);
 
 	int findCount(@Param("condition") EvaluatGaugeQVo condition);
