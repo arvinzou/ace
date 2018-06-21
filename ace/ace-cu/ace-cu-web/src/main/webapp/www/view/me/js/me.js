@@ -43,7 +43,7 @@ app.controller(ngControllerName,function($scope){
                 var points = 0;
                 for(var i=0; i<len; i++){
                     total += parseFloat(arr[i].donateAmount);
-                    points += parseInt(arr[i].point);
+                    points += parseInt(arr[i].points);
                 }
                 $scope.totalAmount = total;
                 $scope.totalPoint = points;
@@ -81,6 +81,14 @@ app.controller(ngControllerName,function($scope){
             alert("系统服务内部异常！");
         }
     });
+
+    $scope.aboutus = function(){
+        window.location.href = '/cu/www/view/about/about.html';
+    }
+
+    $scope.apply = function(){
+        window.location.href = '/cu/www/view/apply/apply.html';
+    }
 });
 
 function hoverli(divId){
