@@ -33,7 +33,7 @@
             <div class="product_container" ng-repeat="item in items" ng-click="showBrand($index);">
                 <div class="content_container">
                     <div class="img_container" ng-cloak>
-                        <img ng-src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
+                        <img ng-if="item.fileUrl!=''" ng-src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
                     </div>
                     <div class="words_container">
                         <h3 ng-bind="item.title"></h3>

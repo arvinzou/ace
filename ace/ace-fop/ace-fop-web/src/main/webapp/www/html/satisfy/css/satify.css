@@ -6,7 +6,7 @@ body{
 	width: 100%;
 }
 .satify_body{
-	width: 70%;
+	width: 1280px;
 	margin-left: 15%;
 	margin-right: 15%;
 	margin-top: 30px;
@@ -111,7 +111,7 @@ canvas{
 	height: 200px;
 	border: 0;
 }
-..research_body{
+.research_body{
 	width: 100%;
 	height: 238px;
 }
