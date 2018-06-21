@@ -6,7 +6,9 @@ var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
 });
+function setFrame(){
 
+}
 function setIframeHeight(iframe) {
     if(iframe) {
         var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
