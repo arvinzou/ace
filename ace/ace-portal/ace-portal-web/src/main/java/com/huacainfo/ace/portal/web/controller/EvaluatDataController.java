@@ -50,7 +50,6 @@ public class EvaluatDataController extends PortalBaseController {
 	@ResponseBody
 	public PageResult<EvaluatDataVo> findEvaluatDataList(EvaluatDataQVo condition,
 			PageParamNoChangeSord page) throws Exception {
-		condition.setSyid(this.getCurUserProp().getActiveSyId());
 		PageResult<EvaluatDataVo> rst = this.evaluatDataService.findEvaluatDataList(condition, page.getStart(), page.getLimit(),
 						page.getOrderBy());
 		if (rst.getTotal() == 0) {

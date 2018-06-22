@@ -91,7 +91,7 @@
     <sql id="whereCondition">
         from evaluat_data
         where (
-        evaluatTplId any (
+        evaluatTplId = any (
          SELECT evaluatTplId
          FROM evaluat_tpl
          WHERE syid =#{condition.syid}
