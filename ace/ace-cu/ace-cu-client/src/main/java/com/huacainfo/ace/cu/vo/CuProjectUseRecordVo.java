@@ -21,6 +21,46 @@ public class CuProjectUseRecordVo extends CuProjectUseRecord {
      */
     private String useToProjectDesc;
 
+
+    /**
+     * 源项目的 项目名称
+     */
+    private String projectName;
+
+    /**
+     * 源项目的 项目标题
+     */
+    private String projectTitle;
+
+    /**
+     * 源项目的 项目描述
+     */
+    private String projectDesc;
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectTitle() {
+        return projectTitle;
+    }
+
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle;
+    }
+
+    public String getProjectDesc() {
+        return projectDesc;
+    }
+
+    public void setProjectDesc(String projectDesc) {
+        this.projectDesc = projectDesc;
+    }
+
     public String getUseToProjectTitle() {
         return useToProjectTitle;
     }

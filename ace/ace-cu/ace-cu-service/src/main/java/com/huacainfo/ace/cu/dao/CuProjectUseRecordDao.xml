@@ -179,8 +179,12 @@
         <result column="useToProjectName" jdbcType="VARCHAR" property="useToProjectName"/>
         <result column="useToProjectTitle" jdbcType="VARCHAR" property="useToProjectTitle"/>
         <result column="useToProjectDesc" jdbcType="VARCHAR" property="useToProjectDesc"/>
+        <result column="projectName" jdbcType="VARCHAR" property="projectName"/>
+        <result column="projectTitle" jdbcType="VARCHAR" property="projectTitle"/>
+        <result column="projectDesc" jdbcType="VARCHAR" property="projectDesc"/>
     </resultMap>
     <sql id="Vo_Column_List">
+        p.projectName, p.title as projectTitle, p.description as projectDesc,
         up.projectName as useToProjectName,up.title as useToProjectTitle,up.description as useToProjectDesc,
         t.id, t.projectId, t.useProjectId, t.useAmount, t.remark, t.status, t.createUserId, t.createUserName,
         t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
@@ -210,6 +214,7 @@
     <sql id="whereCondition">
         from cu_project_use_record t
         left join cu_project up on t.useProjectId = up.id
+        left join cu_project p on t.projectId = p.id
         where 1=1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
