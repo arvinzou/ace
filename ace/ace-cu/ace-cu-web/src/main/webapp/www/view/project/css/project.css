@@ -188,3 +188,15 @@ ul,li{
 	bottom: 5rem;
 	cursor: pointer;
 }
+.titleActive{
+	color: #EA4436;
+}
+.nav_box_ul{
+	width: 10rem;
+	line-height: 1.5rem;
+}
+.nav_box_ul li{
+	width: 5rem;
+	height: 1rem;
+	text-align: center;
+}

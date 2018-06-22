@@ -7,7 +7,6 @@ var app =angular.module(ngAppName, []);
 var defaultProjectId = null;
 
 app.controller(ngControllerName,function($scope){
-	
 	$.ajax({
         url: "/cu/www/project/findList",
         type:"post",
@@ -126,6 +125,23 @@ app.controller(ngControllerName,function($scope){
     		}
     	}
     }
+
+    $scope.doSomething = function(){
+        var th_width1 = $(".news-module1 li").eq(0).width();
+        var th_left1 = $(".news-module1 li").eq(0).offset().left;
+        var slider_width1 = $(".news-slider1").width();
+        var slider_left1 = th_left1 + (th_width1/2) - slider_width1/2;
+        $(".news-slider1").css("left",slider_left1);
+        $(".news-module1 li").on("click",function(){
+            var n = $(this).index();
+            var th_width = $(this).width();
+            var th_left = $(this).offset().left;
+            var slider_width = $(".news-slider1").width();
+            var slider_left = th_left + (th_width/2) - slider_width/2;
+            $(".news-slider1").css("left",slider_left);
+            $(this).addClass("active").siblings().removeClass("active");
+        });
+    }
 });
 app.filter(
     'to_trusted', ['$sce', function ($sce) {
@@ -134,6 +150,15 @@ app.filter(
         }
     }]
 );
+app.directive('repeatDone', function() {
+    return {
+        link: function(scope, element, attrs) {
+            if (scope.$last) {                   // 这个判断意味着最后一个 OK
+                scope.$eval(attrs.repeatDone)    // 执行绑定的表达式
+            }
+        }
+    }
+})
 function hoverli(divId){
 	$("#"+divId).removeClass('undis').addClass('dis');
 	$("#"+divId).siblings().removeClass('dis').addClass('undis');
