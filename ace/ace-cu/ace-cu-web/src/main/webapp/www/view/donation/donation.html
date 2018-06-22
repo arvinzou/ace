@@ -92,10 +92,10 @@
 					<div class="donation_list">
 						<div class="donation_item" ng-repeat="dua in donationList">
 							<div class="donation_user_image">
-								<img src="img/user.png" width="100%" height="100%" />
+								<img ng-src="{{dua.headimgurl}}" width="100%" height="100%" />
 							</div>
 							<div class="donation_user_info">
-								<div class="donation_users"><span class="username" >半分</span>捐赠了<span class="donation_money" ng-bind="dua.donateAmount"></span>元</div>
+								<div class="donation_users"><span class="username" ng-bind="dua.nickname"></span>捐赠了<span class="donation_money" ng-bind="dua.donateAmount"></span>元</div>
 								<div class="donation_msg" ng-bind="dua.remark"></div>
 								<div class="donation_time" ng-bind="dua.donateDate"></div>
 							</div>
