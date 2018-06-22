@@ -7,6 +7,7 @@
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+      <result column="syid" jdbcType="VARCHAR" property="syid"/>
     <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
     <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
     <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
@@ -14,7 +15,7 @@
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, sort, status, createUserId, createUserName, createDate, lastModifyUserId, 
+      id, name, sort, status, createUserId, syid,createUserName, createDate, lastModifyUserId,
     lastModifyUserName, lastModifyDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -27,16 +28,7 @@
     delete from evaluat_type
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatType">
-    insert into evaluat_type (id, name, sort, 
-      status, createUserId, createUserName, 
-      createDate, lastModifyUserId, lastModifyUserName, 
-      lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
-      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
-      #{lastModifyDate,jdbcType=TIMESTAMP})
-  </insert>
+
     <insert id="insertSelective" parameterType="com.huacainfo.ace.portal.model.EvaluatType">
         insert into evaluat_type
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -54,6 +46,9 @@
             </if>
             <if test="createUserId != null">
                 createUserId,
+            </if>
+            <if test="syid != null">
+                syid,
             </if>
             <if test="createUserName != null">
                 createUserName,
@@ -87,6 +82,9 @@
             <if test="createUserId != null">
                 #{createUserId,jdbcType=VARCHAR},
             </if>
+            <if test="syid != null">
+                #{syid,jdbcType=VARCHAR},
+            </if>
             <if test="createUserName != null">
                 #{createUserName,jdbcType=VARCHAR},
             </if>
@@ -119,6 +117,9 @@
             <if test="createUserId != null">
                 createUserId = #{createUserId,jdbcType=VARCHAR},
             </if>
+            <if test="syid != null">
+                syid = #{syid,jdbcType=VARCHAR},
+            </if>
             <if test="createUserName != null">
                 createUserName = #{createUserName,jdbcType=VARCHAR},
             </if>
@@ -137,17 +138,68 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatType">
-    update evaluat_type
-    set name = #{name,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=INTEGER},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+
+    <sql id="whereCondition">
+        from evaluat_type where (syid =#{condition.syid})
+        <if test='condition.name!=null and condition.name!=""'>
+            and name like
+            concat(#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        evaluat_type where
+        name=#{condition.name,jdbcType=VARCHAR}
+        and
+        syid=#{condition.syid,jdbcType=VARCHAR}
+    </select>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.portal.vo.EvaluatTypeVo"></resultMap>
+
+
+    <!--  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatType">
+        update evaluat_type
+        set name = #{name,jdbcType=VARCHAR},
+          sort = #{sort,jdbcType=INTEGER},
+          status = #{status,jdbcType=CHAR},
+          createUserId = #{createUserId,jdbcType=VARCHAR},
+          createUserName = #{createUserName,jdbcType=VARCHAR},
+          createDate = #{createDate,jdbcType=TIMESTAMP},
+          lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+          lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+          lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+      </update>
+        <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatType">
+            insert into evaluat_type (id, name, sort,
+            status, createUserId, createUserName,
+            createDate, lastModifyUserId, lastModifyUserName,
+            lastModifyDate)
+            values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER},
+            #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+            #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+            #{lastModifyDate,jdbcType=TIMESTAMP})
+        </insert>-->
 </mapper>
