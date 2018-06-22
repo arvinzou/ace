@@ -24,6 +24,17 @@ public class EvaluatType implements java.io.Serializable {
 
     private Date lastModifyDate;
 
+
+    private String syid;
+
+    public String getSyid() {
+        return syid;
+    }
+
+    public void setSyid(String syid) {
+        this.syid = syid;
+    }
+
     public String getId() {
         return id;
     }
