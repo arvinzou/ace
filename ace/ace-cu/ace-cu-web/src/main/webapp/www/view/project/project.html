@@ -18,8 +18,17 @@
 	<body>
 		<div class="projectbox">
 			<div class="project_title">
-				<span ng-repeat="item in items" ng-bind="item.projectName" ng-click="showInfo(item.id)"></span>
-				<div style="clear: both;"></div>
+				<!--<span id="projectTitle" ng-repeat="item in items" ng-bind="item.projectName" ng-click="showInfo(item.id, $event)"></span>
+				<div style="clear: both;"></div>-->
+				<div class="navigation1">
+					<div class="news-title1">
+						<ul class="news-module1 nav_box_ul clear">
+							<li ng-if="$index == 0" class="active" ng-repeat="item in items" ng-bind="item.projectName" ng-click="showInfo(item.id)" repeat-done="doSomething();"></li>
+							<li ng-if="$index != 0"  ng-repeat="item in items" ng-bind="item.projectName" ng-click="showInfo(item.id)" repeat-done="doSomething();"></li>
+						</ul>
+						<div class="news-slider1"></div>
+					</div>
+				</div>
 			</div>
 			<div class="project_item">
 				<div class="project_item_image">
