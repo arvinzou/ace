@@ -570,7 +570,8 @@
         p.mobileNumer AS lpMobile, p.sex AS lpSex, p.birthDate AS lpBirthDt,
         p.nationality as lpNationality, p.nativePlace AS lpNativePlace,p.political AS lpPolitical,
         p.recruitmentDate AS lpRecruitmentDate,p.education AS lpEducation,p.skillJobTitle AS lpSkillJobTitle,
-        p.deptPost AS lpDeptPost,p.identityCard AS lpIdentityCard,p.societyPost AS lpSocietyPost
+        p.deptPost AS lpDeptPost,p.identityCard AS lpIdentityCard,p.societyPost AS lpSocietyPost,z.name as
+        companyPropertyName
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -607,6 +608,7 @@
         from fop_company c
         left join fop_person p on p.id=c.personId
         left join portal.province pp on pp.code=c.areaCode
+        LEFT JOIN (SELECT *FROM portal.dict where category_id="134") z on z.code=c.companyProperty
     </sql>
 
     <sql id="whereCondition">
