@@ -51,6 +51,11 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        appendUploadBtn("cntImg");
+                        appendUploadBtn("aCntImg1");
+                        appendUploadBtn("aCntImg2");
+                        appendUploadBtn("aCntImg3");
+                        appendUploadBtn("aCntImg4");
                     }
                 })
             initForm();
@@ -77,6 +82,11 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        appendUploadBtn("cntImg");
+                        appendUploadBtn("aCntImg1");
+                        appendUploadBtn("aCntImg2");
+                        appendUploadBtn("aCntImg3");
+                        appendUploadBtn("aCntImg4");
                     }
                 })
         });
@@ -282,7 +292,7 @@ function treeappend() {
                 var re = $(form).find("input[name=evaluatTplId]").val();
                 var FormPost = $("form[name=FormPost]");
                 $(FormPost).find("input[name=evaluatTplId]").val(re);
-                $(FormPost).find("input[name=pcode]").val(node.id);
+                $(FormPost).find("input[name=evaluatTplId]").val(node.id);
             }
         })
 
