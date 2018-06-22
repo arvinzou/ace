@@ -139,10 +139,8 @@
 
 		</div>
 	<jsp:include page="../../common/footer-1.jsp" />
-	<script
-		src="${pageContext.request.contextPath}/content/portal/js/dict/config.js?version=${cfg.version}"></script>
-	<script
-		src="${pageContext.request.contextPath}/content/portal/js/dict/model.js?version=${cfg.version}"></script>
+        <script src="${pageContext.request.contextPath}/content/portal/js/dict/config.js?version=${cfg.version}"></script>
+        <script src="${pageContext.request.contextPath}/content/portal/js/dict/model.js?version=${cfg.version}"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/portal/js/dict/controller.js?version=${cfg.version}"></script>
 	<script
@@ -187,11 +185,13 @@ jQuery(function($) {
 });
 </script>
 
-	<script
-			src="${pageContext.request.contextPath}/content/portal/js/dict/upload.js?version=${cfg.version}"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+        <script src="${pageContext.request.contextPath}/content/portal/js/dict/upload.js?version=${cfg.version}"></script>
+        <script type="text/javascript"
+                src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+        <script type="text/javascript"
+                src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+        <script type="text/javascript"
+                src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 
 </body>
 </html>
