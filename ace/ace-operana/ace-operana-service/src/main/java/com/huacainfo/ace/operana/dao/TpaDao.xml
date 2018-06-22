@@ -207,6 +207,10 @@
     from tpa t
     left join portal.users b on t.liable=b.user_id
     left join portal.department c on t.deptId=c.department_id
+
+    where t.meetingId=#{condition.meetingId}
+    and   t.topicId=#{condition.topicId}
+    and   t.normId=#{condition.normId}
   </sql>
   <select id="findCountCommon" resultType="int">
     SELECT COUNT(*)
