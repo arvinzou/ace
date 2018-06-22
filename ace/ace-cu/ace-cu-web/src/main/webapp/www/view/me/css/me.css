@@ -67,9 +67,8 @@ ul,li{
 	width: 10rem;
 	height: 1rem;
 }
-.nav_box{
+.nav_box_ul{
 	width: 9rem;
-	height: 1rem;
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
 }

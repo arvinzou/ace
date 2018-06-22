@@ -44,6 +44,10 @@ body{
 	width: 1.5rem;
 	height: 1.5rem;
 	float: left;
+	border-radius: 50%;
+}
+.list_img img{
+	border-radius: 50%;
 }
 .list_name{
 	width: 3.3rem;

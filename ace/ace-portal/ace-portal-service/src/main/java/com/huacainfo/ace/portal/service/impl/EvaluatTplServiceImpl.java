@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.view.Tree;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.dao.EvaluatGaugeDao;
@@ -105,6 +106,27 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
             rst.setTotal(allRows);
         }
         return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(评测分页查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult<EvaluatTplVo>
+     * @author: 陈晓克
+     * @version: 2018-06-09
+     */
+    @Override
+    public ResultResponse getEvaluatTplList(EvaluatTplQVo condition, int page, int limit, String orderBy) throws Exception {
+        int start = (page - 1) * limit;
+        List<EvaluatTplVo> list = this.evaluatTplDao.findList(condition, start, limit, orderBy);
+        return new ResultResponse(0, "获取测试模板", list);
     }
 
     /**
@@ -317,4 +339,6 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
         }
         return new MessageResponse(0, "完成");
     }
+
+
 }

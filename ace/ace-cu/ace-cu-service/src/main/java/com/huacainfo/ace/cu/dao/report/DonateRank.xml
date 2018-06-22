@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.cu.dao.report.DonateRank">
+    <select id="query" resultType="map">
+        select a.nickname,a.headimgurl,a.openid,a.totalDonateAmount
+        FROM (
+        SELECT u.nickname,u.headimgurl,u.openid,sum(t.donateAmount) as totalDonateAmount
+        FROM cu.cu_donate_list t
+        LEFT JOIN portal.userinfo u on t.openId = u.openid
+        WHERE u.appid = #{appid,jdbcType=VARCHAR}
+        GROUP BY u.nickname,u.headimgurl,u.openid
+        ) a
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.totalDonateAmount DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+</mapper>

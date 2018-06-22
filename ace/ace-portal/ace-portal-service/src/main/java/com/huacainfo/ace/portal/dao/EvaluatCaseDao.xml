@@ -143,8 +143,10 @@
     <sql id="whereCondition">
         from evaluat_case where 0=0
         <if test='condition.title!=null and condition.title!=""'>
-            and title like
-            concat(#{condition.title,jdbcType=VARCHAR},'%')
+            and title like concat(#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.evaluatTplId!=null and condition.evaluatTplId!=""'>
+            and evaluatTplId =#{condition.evaluatTplId,jdbcType=VARCHAR}
         </if>
     </sql>
 
