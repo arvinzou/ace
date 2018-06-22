@@ -50,9 +50,9 @@ public class EvaluatTypeController extends PortalBaseController {
 	@ResponseBody
 	public PageResult<EvaluatTypeVo> findEvaluatTypeList(EvaluatTypeQVo condition,
 			PageParamNoChangeSord page) throws Exception {
-		PageResult<EvaluatTypeVo> rst = this.evaluatTypeService
-				.findEvaluatTypeList(condition, page.getStart(), page.getLimit(),
-						page.getOrderBy());
+        condition.setSyid(this.getCurUserProp().getActiveSyId());
+        PageResult<EvaluatTypeVo> rst = this.evaluatTypeService.findEvaluatTypeList(condition, page.getStart(), page.getLimit(),
+                page.getOrderBy());
 		if (rst.getTotal() == 0) {
 			rst.setTotal(page.getTotalRecord());
 		}
