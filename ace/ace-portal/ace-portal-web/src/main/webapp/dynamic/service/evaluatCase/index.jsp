@@ -8,8 +8,15 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>题目</title>
+
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
+    <link rel="stylesheet"
+          href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+          type="text/css" media="screen"/>
+
 </head>
 <jsp:include page="../../common/common.jsp"/>
+
 <script type="text/javascript">
 
 
@@ -50,11 +57,11 @@
                 <div id="toolbar" class="toolbar">
 
 
-                    <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/evaluatCase/insertEvaluatCase.do">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+                    <%--<button class="btn btn-info" id="btn-view-add"--%>
+                    <%--authority="${pageContext.request.contextPath}/evaluatCase/insertEvaluatCase.do">--%>
+                    <%--<i--%>
+                    <%--class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
                     <button class="btn btn-info" id="btn-view-edit"
                             authority="${pageContext.request.contextPath}/evaluatCase/updateEvaluatCase.do">
                         <i
@@ -234,5 +241,14 @@
         });
     });
 </script>
+
+<script src="${pageContext.request.contextPath}/content/portal/js/dict/upload.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
 </body>
 </html>

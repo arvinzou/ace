@@ -18,6 +18,31 @@ public class CuDonateListVo extends CuDonateList {
      */
     private BigDecimal points;
 
+    /**
+     * 微信用户头像
+     */
+    private String headimgurl;
+    /**
+     * 微信用户昵称
+     */
+    private String nickname;
+
+    public String getHeadimgurl() {
+        return headimgurl;
+    }
+
+    public void setHeadimgurl(String headimgurl) {
+        this.headimgurl = headimgurl;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public BigDecimal getPoints() {
         return points;
     }
