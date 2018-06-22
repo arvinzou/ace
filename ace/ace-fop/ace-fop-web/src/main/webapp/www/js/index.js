@@ -148,7 +148,8 @@ app.controller(ngControllerName,function($scope) {
     }
 
     $scope.showInfo = function(index){
-        var primaryId = $scope.notice_list[index].id;
+        var primaryId = $scope.news_list[index].id;
+        var noticeType = $scope.news_list[index].noticeType;
         console.log(primaryId);
         window.open('html/information/information_info.html?id='+primaryId);
     }
