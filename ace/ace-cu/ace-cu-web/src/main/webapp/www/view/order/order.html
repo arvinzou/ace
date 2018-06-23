@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
-
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>我要捐款</title>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="js/jweixin-1.2.0.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
 		<script type="text/javascript" src="js/LAreaData1.js"></script>
 		<script type="text/javascript" src="js/LAreaData2.js"></script>
@@ -23,9 +24,9 @@
 				<div class="order_form">
 					<div class="title_01">选择捐款金额</div>
 					<div class="money_01">
-						<span class="lightborder" onclick="selectMoney(this);" style="margin-right: 0.4rem;">¥ 10.00</span>
-						<span onclick="selectMoney(this);" style="margin-right: 0.4rem;">¥ 50.00</span>
-						<span onclick="selectMoney(this);">¥ 100.00</span>
+						<span class="lightborder" onclick="selectMoney(this, 10.00);" style="margin-right: 0.4rem;">¥ 10.00</span>
+						<span onclick="selectMoney(this, 50.00);" style="margin-right: 0.4rem;">¥ 50.00</span>
+						<span onclick="selectMoney(this, 100.00);">¥ 100.00</span>
 					</div>
 					<div class="money_02">
 						<span onclick="inputMoney(this);" class="other_amount">输入其他金额</span>
@@ -35,19 +36,19 @@
 					<div class="form">
 						<p>
 							<span class="form_title">捐款人姓名</span>
-							<input class="form_text" type="text" placeholder="请输入捐款人姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款人姓名'" />
+							<input id="realName" class="form_text" type="text" placeholder="请输入捐款人姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款人姓名'" />
 						</p>
 					</div>
 					<div class="form">
 						<p>
 							<span class="form_title">联系电话</span>
-							<input class="form_text" type="text" placeholder="请输入联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入联系电话'" />
+							<input id="phoneNum" class="form_text" type="text" placeholder="请输入联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入联系电话'" />
 						</p>
 					</div>
 					<div class="form_max">
 						<p style="padding-top: 0.3rem;">留言</p>
 						<p>
-							<textarea placeholder="请填写留言内容" onfocus="this.placeholder=''" onblur="this.placeholder='请填写留言内容'"></textarea>
+							<textarea id="message" placeholder="请填写留言内容" onfocus="this.placeholder=''" onblur="this.placeholder='请填写留言内容'"></textarea>
 						</p>
 					</div>
 					<div class="form">
@@ -79,12 +80,13 @@
 						<div class="form">
 							<p>
 								<span class="form_title">详细地址</span>
-								<input class="form_text" type="text" placeholder="请输入详细地址" onfocus="this.placeholder=''" onblur="this.placeholder='请输入详细地址'" />
+								<input id="detailAddress" class="form_text" type="text" placeholder="请输入详细地址" onfocus="this.placeholder=''" onblur="this.placeholder='请输入详细地址'" />
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="btnDiv"><button class="donateBtn" ng-click="donateMoney();">立即捐款</button></div>
 		</div>
 	</body>
 
