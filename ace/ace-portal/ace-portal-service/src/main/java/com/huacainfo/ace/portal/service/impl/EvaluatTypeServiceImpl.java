@@ -56,7 +56,7 @@ public class EvaluatTypeServiceImpl implements EvaluatTypeService {
                                                          int limit, String orderBy) throws Exception {
         PageResult<EvaluatTypeVo> rst = new PageResult<EvaluatTypeVo>();
         List<EvaluatTypeVo> list = this.evaluatTypeDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.evaluatTypeDao.findCount(condition);
@@ -86,21 +86,17 @@ public class EvaluatTypeServiceImpl implements EvaluatTypeService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
         int temp = this.evaluatTypeDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "评测类型名称重复！");
         }
+
+        o.setSyid(userProp.getActiveSyId());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
-        this.evaluatTypeDao.insert(o);
+        this.evaluatTypeDao.insertSelective(o);
         this.dataBaseLogService.log("添加评测类型", "评测类型", "", o.getName(),
                 o.getName(), userProp);
         return new MessageResponse(0, "添加评测类型完成！");
@@ -129,14 +125,12 @@ public class EvaluatTypeServiceImpl implements EvaluatTypeService {
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
+
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
-        this.evaluatTypeDao.updateByPrimaryKey(o);
+        this.evaluatTypeDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更评测类型", "评测类型", "", o.getName(),
                 o.getName(), userProp);
         return new MessageResponse(0, "变更评测类型完成！");

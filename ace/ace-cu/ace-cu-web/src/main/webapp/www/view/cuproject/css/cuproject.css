@@ -10,7 +10,7 @@ body{
 }
 .projectlist{
 	width: 10rem;
-	height: 9rem;
+	height: 8.2rem;
 	background-color: #FFFFFF;
 	margin-bottom: 0.6rem;
 }
@@ -27,6 +27,9 @@ body{
 	color: #EA4436;
 	font-size: 0.5rem;
 	font-weight: bold;
+}
+.project_item{
+	padding-top: 0.5rem;
 }
 .project_image{
 	width: 9rem;

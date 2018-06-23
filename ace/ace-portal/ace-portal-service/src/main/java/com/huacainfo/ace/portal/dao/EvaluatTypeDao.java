@@ -10,13 +10,13 @@ import com.huacainfo.ace.portal.vo.EvaluatTypeVo;
 public interface EvaluatTypeDao {
     int deleteByPrimaryKey(String EvaluatTypeId);
 
-    int insert(EvaluatType record);
+    int insertSelective(EvaluatType record);
 
 
     EvaluatTypeVo selectByPrimaryKey(String EvaluatTypeId);
 
 
-    int updateByPrimaryKey(EvaluatType record);
+    int updateByPrimaryKeySelective(EvaluatType record);
     
     List<EvaluatTypeVo> findList(@Param("condition") EvaluatTypeQVo condition,
 			@Param("start") int start, @Param("limit") int limit,

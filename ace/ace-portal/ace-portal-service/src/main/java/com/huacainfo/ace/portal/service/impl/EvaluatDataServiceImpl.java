@@ -54,8 +54,9 @@ public class EvaluatDataServiceImpl implements EvaluatDataService {
     public PageResult<EvaluatDataVo> findEvaluatDataList(EvaluatDataQVo condition, int start,
                                                          int limit, String orderBy) throws Exception {
         PageResult<EvaluatDataVo> rst = new PageResult<EvaluatDataVo>();
+
         List<EvaluatDataVo> list = this.evaluatDataDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.evaluatDataDao.findCount(condition);
@@ -98,7 +99,7 @@ public class EvaluatDataServiceImpl implements EvaluatDataService {
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserId(userProp.getUserId());
-        this.evaluatDataDao.insert(o);
+        this.evaluatDataDao.insertSelective(o);
         return new MessageResponse(0, "添加测评结果完成！");
     }
 
@@ -130,7 +131,7 @@ public class EvaluatDataServiceImpl implements EvaluatDataService {
         }
 
 
-        this.evaluatDataDao.updateByPrimaryKey(o);
+        this.evaluatDataDao.updateByPrimaryKeySelective(o);
         return new MessageResponse(0, "变更测评结果完成！");
     }
 

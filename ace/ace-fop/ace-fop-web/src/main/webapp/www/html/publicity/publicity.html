@@ -76,15 +76,15 @@
 										<td width="30%" align="left">企业名称</td>
 										<td width="15%" align="left">企业法人</td>
 										<td width="15%" align="left">企业性质</td>
+										<td width="15%" align="left">所属区域</td>
 										<td width="25%" align="left">企业地址</td>
-										<td width="15%" align="right">所属区域</td>
 									</tr>
 									<tr ng-repeat="item in items">
 										<td width="35%" ng-bind="item.fullName"></td>
 										<td width="15%" ng-bind="item.realName"></td>
 										<td width="15%" ng-bind="item.companyPropertyName"></td>
+										<td width="35%" ng-bind="item.areaCodeName"></td>
 										<td width="15%" ng-bind="item.address"></td>
-										<td width="35%" align="right" ng-bind="item.areaCodeName"></td>
 									</tr>
 								</table>
 							</div>

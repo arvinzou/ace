@@ -60,6 +60,17 @@ public class FopCompanyVo extends FopCompany {
      */
     private String spMobile;
 
+
+    private String companyPropertyName;
+
+    public String getCompanyPropertyName() {
+        return companyPropertyName;
+    }
+
+    public void setCompanyPropertyName(String companyPropertyName) {
+        this.companyPropertyName = companyPropertyName;
+    }
+
     /**
      * 关联信息
      */
