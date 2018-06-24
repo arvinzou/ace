@@ -55,7 +55,7 @@ function isAnswerAll() {
 
 function loadTest() {
     var id = localStorage["id"];
-    var url = serviceUrl + "/www/test/getEvaluatCaseList.do";
+    var url = "/portal/www/test/getEvaluatCaseList.do";
     var data = {
         evaluatTplId: id,
     }
@@ -72,7 +72,7 @@ function loadTest() {
 
 function loadTestInfo() {
     var id = localStorage["id"];
-    var url = serviceUrl + "/www/test/getEvaluatTpl.do";
+    var url = "/portal/www/test/getEvaluatTpl.do";
     var data = {
         id: id,
     }
