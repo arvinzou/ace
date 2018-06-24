@@ -1,0 +1,19 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+html, body {
+    font-size: 0.1333333333vw;
+}
+
+body {
+    width: 750rem;
+}
+
+.content {
+    width: 750rem;
+    border: 1px solid red;
+    font-size: 16rem;
+}
