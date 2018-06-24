@@ -31,7 +31,7 @@ public interface EvaluatGaugeService {
 	public abstract PageResult<EvaluatGaugeVo> findEvaluatGaugeList(EvaluatGaugeQVo condition, int start, int limit, String orderBy) throws Exception;
 
 
-    public abstract ResultResponse getEvaluation(EvaluatGaugeQVo condition) throws Exception;
+	public abstract ResultResponse getEvaluation(EvaluatGaugeQVo condition, UserProp userProp) throws Exception;
 
     /**
 	 *
@@ -72,7 +72,9 @@ public interface EvaluatGaugeService {
 	    * @version: 2018-06-09
 	 */
 	public abstract SingleResult<EvaluatGaugeVo> selectEvaluatGaugeByPrimaryKey(String id) throws Exception;
-    /**
+
+
+	/**
 	 *
 	    * @Title:deleteEvaluatGaugeByEvaluatGaugeId
 	    * @Description:  TODO(删除评测量表)

@@ -71,6 +71,8 @@ app.controller(ngControllerName,function($scope){
     });
 
     $scope.showInfo = function(id){
+        defaultProjectId = id;
+        console.log("defaultProjectId",defaultProjectId);
     	var datas = $scope.items;
     	for(var i=0; i<datas.length; i++){
     		if(id == datas[i].id){
@@ -141,6 +143,10 @@ app.controller(ngControllerName,function($scope){
             $(".news-slider1").css("left",slider_left);
             $(this).addClass("active").siblings().removeClass("active");
         });
+    }
+
+    $scope.donate = function(){
+        window.location.href = '/cu/www/view/order/order.html?projectId='+defaultProjectId;
     }
 });
 app.filter(
