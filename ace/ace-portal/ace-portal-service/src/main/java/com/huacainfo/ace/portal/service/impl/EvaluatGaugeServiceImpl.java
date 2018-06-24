@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.portal.dao.EvaluatDataDao;
+import com.huacainfo.ace.portal.model.EvaluatData;
+import com.huacainfo.ace.portal.service.EvaluatDataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,10 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private EvaluatGaugeDao evaluatGaugeDao;
+
+    @Autowired
+    private EvaluatDataService evaluatDataService;
+
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -66,8 +73,13 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
     }
 
     @Override
-    public ResultResponse getEvaluation(EvaluatGaugeQVo condition) throws Exception {
+    public ResultResponse getEvaluation(EvaluatGaugeQVo condition, UserProp userProp) throws Exception {
         PageResult<EvaluatGaugeVo> rst = new PageResult<EvaluatGaugeVo>();
+
+        EvaluatData evaluatData = new EvaluatData();
+        evaluatData.setEvaluatTplId(condition.getEvaluatTplId());
+        evaluatData.setScore(condition.getScore());
+        evaluatDataService.insertEvaluatData(evaluatData, userProp);
         EvaluatGauge list = this.evaluatGaugeDao.getEvaluation(condition);
         return new ResultResponse(0, "评价获取成功", list);
     }

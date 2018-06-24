@@ -9,7 +9,7 @@ public class EvaluatData implements java.io.Serializable {
 
     private String evaluatTplId;
 
-    private BigDecimal score;
+    private Integer score;
 
     private String status;
 
@@ -33,11 +33,11 @@ public class EvaluatData implements java.io.Serializable {
         this.evaluatTplId = evaluatTplId == null ? null : evaluatTplId.trim();
     }
 
-    public BigDecimal getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(BigDecimal score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 

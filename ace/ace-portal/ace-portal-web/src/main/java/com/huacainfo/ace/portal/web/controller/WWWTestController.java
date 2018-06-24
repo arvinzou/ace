@@ -38,6 +38,7 @@ public class WWWTestController extends PortalBaseController {
         return this.evaluatTplService.getEvaluatTplByPrimaryKey(id);
     }
 
+
     /**
      * 获取测试模板列表
      *
@@ -82,7 +83,7 @@ public class WWWTestController extends PortalBaseController {
     @RequestMapping(value = "/getEvaluation.do")
     @ResponseBody
     public ResultResponse getEvaluation(EvaluatGaugeQVo condition) throws Exception {
-        return this.evaluatGaugeService.getEvaluation(condition);
+        return this.evaluatGaugeService.getEvaluation(condition, this.getCurUserProp());
     }
 
 }

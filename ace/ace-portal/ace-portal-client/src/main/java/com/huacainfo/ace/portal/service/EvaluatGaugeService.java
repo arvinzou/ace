@@ -31,7 +31,7 @@ public interface EvaluatGaugeService {
 	public abstract PageResult<EvaluatGaugeVo> findEvaluatGaugeList(EvaluatGaugeQVo condition, int start, int limit, String orderBy) throws Exception;
 
 
-    public abstract ResultResponse getEvaluation(EvaluatGaugeQVo condition) throws Exception;
+	public abstract ResultResponse getEvaluation(EvaluatGaugeQVo condition, UserProp userProp) throws Exception;
 
     /**
 	 *
