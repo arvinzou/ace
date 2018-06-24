@@ -72,7 +72,9 @@ public interface EvaluatGaugeService {
 	    * @version: 2018-06-09
 	 */
 	public abstract SingleResult<EvaluatGaugeVo> selectEvaluatGaugeByPrimaryKey(String id) throws Exception;
-    /**
+
+
+	/**
 	 *
 	    * @Title:deleteEvaluatGaugeByEvaluatGaugeId
 	    * @Description:  TODO(删除评测量表)

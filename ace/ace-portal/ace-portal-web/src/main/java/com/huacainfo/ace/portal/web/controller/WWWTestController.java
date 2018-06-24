@@ -32,6 +32,19 @@ public class WWWTestController extends PortalBaseController {
      * @return
      * @throws Exception
      */
+    @RequestMapping(value = "/getEvaluatTpl.do")
+    @ResponseBody
+    public ResultResponse getEvaluatTplList(String id) throws Exception {
+        return this.evaluatTplService.getEvaluatTplByPrimaryKey(id);
+    }
+
+    /**
+     * 获取测试模板列表
+     *
+     * @param
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/getEvaluatTplList.do")
     @ResponseBody
     public ResultResponse getEvaluatTplList(EvaluatTplQVo condition, PageParamNoChangeSord page) throws Exception {
@@ -58,6 +71,14 @@ public class WWWTestController extends PortalBaseController {
         return rst;
     }
 
+
+    /**
+     * 成绩评判
+     *
+     * @param condition
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/getEvaluation.do")
     @ResponseBody
     public ResultResponse getEvaluation(EvaluatGaugeQVo condition) throws Exception {

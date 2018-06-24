@@ -259,6 +259,12 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
         return rst;
     }
 
+
+    @Override
+    public ResultResponse getEvaluatTplByPrimaryKey(String id) throws Exception {
+        return new ResultResponse(0, "模板详情", this.evaluatTplDao.selectByPrimaryKey(id));
+    }
+
     /**
      * @throws
      * @Title:deleteEvaluatTplByEvaluatTplId

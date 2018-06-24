@@ -75,6 +75,9 @@ public interface EvaluatTplService {
      */
     public abstract SingleResult<EvaluatTplVo> selectEvaluatTplByPrimaryKey(String id) throws Exception;
 
+
+    public abstract ResultResponse getEvaluatTplByPrimaryKey(String id) throws Exception;
+
     /**
      * @throws
      * @Title:deleteEvaluatTplByEvaluatTplId
