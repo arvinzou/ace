@@ -5,7 +5,7 @@ var Qnum = 0, //问题数量
     timer = null,
     userName = null,
     totalScore = 0;
-serviceUrl = "http://localhost/portal",
+// serviceUrl = "http://localhost/portal",
     serviceImg = "http://zx.huacainfo.com",
     syid = 'pwl';
 
@@ -64,7 +64,7 @@ function Submit() {
 
 function resultsAndEvaluation() {
     var id = localStorage["id"];
-    var url = serviceUrl + "/www/test/getEvaluation.do";
+    var url = "/portal/www/test/getEvaluation.do";
     var data = {
         evaluatTplId: id,
         score: totalScore

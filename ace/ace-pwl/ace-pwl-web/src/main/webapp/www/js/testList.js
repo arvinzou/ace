@@ -1,4 +1,4 @@
-var serviceUrl = "http://localhost/portal";
+// var serviceUrl = "http://localhost/portal";
 var serviceImg = "http://zx.huacainfo.com/";
 var syid = 'pwl';
 
@@ -19,7 +19,7 @@ function enterTest() {
 }
 
 function loadTestList() {
-    var url = serviceUrl + "/www/test/getEvaluatTplList.do";
+    var url = "/portal/www/test/getEvaluatTplList.do";
     var data = {
         page: 1,
         limit: 1000,
