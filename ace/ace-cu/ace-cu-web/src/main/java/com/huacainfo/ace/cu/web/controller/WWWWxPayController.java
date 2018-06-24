@@ -57,7 +57,9 @@ public class WWWWxPayController extends CuBaseController {
             if (null == userinfo) {
                 return new ResultResponse(ResultCode.FAIL, "微信授权失败");
             }
+            openid = userinfo.getOpenid();
         }
+
         fee = fee.trim();
         ResultResponse checkRs = cuDonateOrderService.orderCheck(attach, fee);
         if (ResultCode.FAIL == checkRs.getStatus()) {
@@ -115,7 +117,7 @@ public class WWWWxPayController extends CuBaseController {
         logger.debug("WWWWxPayController.weChatPayCallBack.reqXml={}", xml);
         String rs = "<xml><return_code>SUCCESS</return_code><return_msg>OK</return_msg></xml>";
         if (StringUtil.isNotEmpty(xml)) {
-            String json = XmlConverUtil.xmltoJson(xml);
+            String json = XmlUtil.xmltoJson(xml);
             logger.debug("WWWWxPayController.weChatPayCallBack.json={}", json);
             WxPayLog wxPayLog = JsonUtil.toObject(json, WxPayLog.class);
             try {

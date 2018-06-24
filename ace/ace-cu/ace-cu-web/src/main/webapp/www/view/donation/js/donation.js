@@ -93,6 +93,10 @@ app.controller(ngControllerName,function($scope){
             $("#record"+i).html(recordList[i].useToProjectDesc);
         }
     });
+
+    $scope.donate = function(){
+        window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
+    }
 });
 app.filter('to_trusted', function ($sce) {
         return function (text) {

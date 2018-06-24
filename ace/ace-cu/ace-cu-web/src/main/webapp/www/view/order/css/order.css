@@ -82,13 +82,13 @@ body{
 }
 .form_title{
 	display:inline-block;
-	width:2rem;
+	width:2.5rem;
 	text-align:left;
 	font-size: 0.4rem;
 }
 
 .form_text{
-	width: 5.5rem;
+	width: 5rem;
 	height: 0.6rem;
 	border: none;
 }
@@ -131,4 +131,20 @@ body{
 	height: 1.5rem;
 	float: left;
 	padding-top: 0.1rem;
+}
+.btnDiv{
+	width: 10rem;
+	height: 1.5rem;
+	margin-top: 1rem;
+	text-align: center;
+	margin-bottom: 1rem;
+}
+.donateBtn{
+	width: 6rem;
+	height: 1rem;
+	border-radius: 0.2rem;
+	color: #ffffff;
+	background-color: #EA4436;
+	border: none;
+	font-size: 0.4rem;
 }
