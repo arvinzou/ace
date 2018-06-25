@@ -2,44 +2,54 @@
 搜索框样式
  */
 .search_box{
-    width: 70%;
+    width: 1280px;
     margin: auto;
+    min-height: 700px;
+    max-height: 1200px;
+    background-color: #ffffff;
 }
 .criteria{
-    width: 100%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    width: 800px;
+    height: 35px;
+    margin: 15px auto;
+    padding-top: 30px;
 }
 .criteria span{
     width: 200px;
     height: 35px;
     text-align: center;
     line-height: 35px;
-    display: inline-block;
+    display: block;
+    float: left;
 }
 .search_opt{
     width: 100%;
 }
 .operation{
-    width: 465px;
+    width: 665px;
     height: 42px;
     line-height: 40px;
     margin: 60px auto;
     border: 1px solid #1A56A8;
+    position: relative;
 }
 .search_opt input{
-    width: 400px;
+    width: 580px;
     height: 40px;
     line-height: 40px;
     border: none;
 }
 .search_opt button{
-    width: 60px;
-    height: 40px;
+    width: 80px;
+    height: 42px;
     line-height: 40px;
     color: #FFFFFF;
     background-color: #1A56A8;
     border: none;
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    right: 0;
 }
 /**
 搜索列表样式
