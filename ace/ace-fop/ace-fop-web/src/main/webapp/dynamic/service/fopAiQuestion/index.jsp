@@ -75,20 +75,14 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
+    <h5 class="header-title">问题</h5>
+    <div class="row" style="padding:10px" id="question">
+    </div>
+    <h5 class="header-title">答案</h5>
+    <div class="row" style="padding:10px" id="answer">
+    </div>
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-问题</span>
-            <br>
-            <span id="question">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-答案</span>
-            <br>
-            <span id="answer">
-</span>
-        </div>
         <div class="labelItem"><span class="labelItemHeader">
 所含关键字</span>
             <br>
