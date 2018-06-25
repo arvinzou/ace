@@ -202,4 +202,15 @@ public class EvaluatTypeServiceImpl implements EvaluatTypeService {
         rst.put("data", this.evaluatTypeDao.getById(id));
         return rst;
     }
+
+    @Override
+    public Map<String, Object> selectType(Map<String, Object> params) throws Exception {
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, String>> list = this.evaluatTypeDao.selectType(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+        return rst;
+    }
+
+
 }

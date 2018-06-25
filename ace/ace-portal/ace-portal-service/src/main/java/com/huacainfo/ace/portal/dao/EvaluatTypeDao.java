@@ -32,4 +32,7 @@ public interface EvaluatTypeDao {
 
     Map<String,Object> getById(String id);
 
+    List<Map<String, String>> selectType(
+            @Param("params") Map<String, Object> params);
+
 }
