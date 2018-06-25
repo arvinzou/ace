@@ -229,10 +229,7 @@ public class InformationServiceServiceImpl implements InformationServiceService 
     public SingleResult<InformationServiceVo> selectInformationServiceByPrimaryKey(String id) throws Exception {
         SingleResult<InformationServiceVo> rst = new SingleResult<InformationServiceVo>();
         InformationServiceVo ffp = this.informationServiceDao.selectVoByPrimaryKey(id);
-        if (ModulesType.TALENT_INFO.equals(ffp.getModules())) {
-            ffp.setComments(fopQuestionService.findCommentList(ffp.getId()));
-        }
-
+        rst.setValue(this.informationServiceDao.selectVoByPrimaryKey(id));
         return rst;
     }
 

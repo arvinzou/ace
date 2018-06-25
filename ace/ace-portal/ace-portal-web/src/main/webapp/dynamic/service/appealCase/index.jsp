@@ -31,16 +31,9 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
-                        data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
 
-                    名称： <input name="name" type="text" style="width: 200px;"/>
+
+                    标题： <input name="title" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/appealCase/findAppealCaseList.do">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
@@ -107,92 +100,40 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
-    <h5 class="header-title">基本信息</h5>
+
+
+
+    <h5 class="header-title">诉求内容</h5>
+
     <div class="row" style="padding:10px">
-        <div class="labelItem">
-            <span class="labelItemHeader">主键</span>
-            <br>
-            <span id="id"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">所属诉求</span>
-            <br>
-            <span id="appealId"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">类型</span>
-            <br>
-            <span id="category"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">标题</span>
-            <br>
-            <span id="title"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">内容</span>
-            <br>
-            <span id="content"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">媒体类型</span>
-            <br>
-            <span id="mediType"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">媒体资源</span>
-            <br>
-            <span id="mediUrl"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">提交时间</span>
-            <br>
-            <span id="submitTime"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">提交人openId</span>
-            <br>
-            <span id="submitOpenId"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">提交人经度</span>
-            <br>
-            <span id="latitude"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">提交人维度</span>
-            <br>
-            <span id="longitude"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">答复内容</span>
-            <br>
-            <span id="answerContent"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">答复时间</span>
-            <br>
-            <span id="answerTime"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">答复人openId</span>
-            <br>
-            <span id="answerOpenId"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">状态</span>
-            <br>
-            <span id="status"></span>
-        </div>
+        <span id="content"></span>
+
     </div>
-    <h5 class="header-title">操作信息</h5>
+
     <div class="row" style="padding:10px">
-        <div class="labelItem">
-            <span class="labelItemHeader">入库日期</span>
-            <br>
-            <span id="createDate"></span>
-        </div>
+        <span id="createDate"></span>
+
     </div>
+
+    <h5 class="header-title">处理详情</h5>
+
+    <div class="row" style="padding:10px">
+        <span id="detailsOfProgress"></span>
+
+    </div>
+
+
+    <h5 class="header-title">答复内容</h5>
+
+    <div class="row" style="padding:10px">
+        <span id="answerContent"></span>
+
+    </div>
+    <div class="row" style="padding:10px">
+        <span id="answerTime"></span>
+
+    </div>
+
 </div>
 
 <jsp:include page="../../common/footer-1.jsp"/>

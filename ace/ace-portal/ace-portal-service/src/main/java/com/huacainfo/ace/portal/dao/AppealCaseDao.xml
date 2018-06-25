@@ -149,8 +149,8 @@
     <select id="findList" resultMap="BaseResultMap">
         select
         a.name as appealName,
-        (select c.name from users c where c.appOpenId = t.submitOpenId ) as realName,
-        (select c.nickName from wx_user c where c.openId = t.submitOpenId ) as nickName,
+        (select c.name from users c where c.appOpenId = t.submitOpenId limit 1) as realName,
+        (select c.nickName from wx_user c where c.openId = t.submitOpenId limit 1) as nickName,
         t.id, t.appealId, t.category, t.title, t.mediType, t.mediUrl, t.companyName, t.submitName, t.tel, t.submitTime,
         t.submitOpenId, t.latitude, t.longitude, t.answerDept, t.answerTime, t.answerOpenId, t.remak, t.status,
         t.createDate, t.content, t.answerContent, t.detailsOfProgress, t.operator,

@@ -89,16 +89,9 @@ public class EvaluatDataServiceImpl implements EvaluatDataService {
         if (CommonUtils.isBlank(o.getScore())) {
             return new MessageResponse(1, "成绩不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        int temp = this.evaluatDataDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "测评结果名称重复！");
-        }
         o.setCreateDate(new Date());
         o.setStatus("1");
-        o.setCreateUserId(userProp.getUserId());
+        o.setCreateUserId(userProp.getOpenId());
         this.evaluatDataDao.insertSelective(o);
         return new MessageResponse(0, "添加测评结果完成！");
     }

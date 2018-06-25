@@ -1,0 +1,66 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    background-color: #eee;
+}
+
+.content {
+    font-size: 16px;
+}
+
+.content .test_list li {
+    padding: 0.2rem;
+    margin: 0.2rem;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.content .test_list li:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.content .test_list .img {
+    float: left;
+    width: 3rem;
+    height: 3rem;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.content .test_list .img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content .test_list .text {
+    background-color: #fff;
+    float: left;
+}
+
+.content .test_list .text > p {
+    display: block;
+    width: 6rem;
+    margin-left: .2rem;
+    background-color: #fff;
+}
+
+.content .test_list .text .title {
+    line-height: 20px;
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content .test_list .text .remark {
+    font-size: 14px;
+    margin-top: 10px;
+    line-height: 18px;
+    color: #888;
+    height: 54px;
+    overflow: hidden;
+}

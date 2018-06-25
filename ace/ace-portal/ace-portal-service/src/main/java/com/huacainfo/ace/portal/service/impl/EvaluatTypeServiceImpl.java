@@ -122,11 +122,6 @@ public class EvaluatTypeServiceImpl implements EvaluatTypeService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());

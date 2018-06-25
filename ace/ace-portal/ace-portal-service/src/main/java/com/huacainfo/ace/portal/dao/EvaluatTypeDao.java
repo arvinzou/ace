@@ -2,6 +2,8 @@ package com.huacainfo.ace.portal.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import com.huacainfo.ace.portal.model.EvaluatTpl;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.portal.model.EvaluatType;
 import com.huacainfo.ace.portal.vo.EvaluatTypeQVo;
@@ -24,7 +26,7 @@ public interface EvaluatTypeDao {
 
 	int findCount(@Param("condition") EvaluatTypeQVo condition);
 
-	int isExit(EvaluatType record);
+    int isExit(@Param("condition") EvaluatType condition);
 
 	List<Map<String,Object>> getList(Map<String,Object> params);
 

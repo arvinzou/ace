@@ -24,10 +24,10 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 
-public class XmlConverUtil {
-    protected static Logger logger = LoggerFactory.getLogger(XmlConverUtil.class);
+public class XmlUtil {
+    protected static Logger logger = LoggerFactory.getLogger(XmlUtil.class);
 
-    public XmlConverUtil() {
+    public XmlUtil() {
     }
 
     public static String maptoXml(Map map) {
