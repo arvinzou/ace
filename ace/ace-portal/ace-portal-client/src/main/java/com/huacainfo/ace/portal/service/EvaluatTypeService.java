@@ -106,5 +106,7 @@ public interface EvaluatTypeService {
      */
     public abstract Map<String, Object> getById(String id) throws Exception;
 
+    public Map<String, Object> selectType(Map<String, Object> params) throws Exception;
+
 
 }
