@@ -375,6 +375,10 @@ progress::-webkit-progress-bar {
     -o-animation: action 0.5s;
     /* Opera */
     animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+
 }
 
 @keyframes action {

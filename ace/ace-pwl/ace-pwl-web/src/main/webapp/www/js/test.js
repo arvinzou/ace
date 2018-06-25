@@ -55,6 +55,9 @@ function isAnswerAll() {
 
 function loadTest() {
     var id = localStorage["id"];
+    if (!id) {
+        location.href = 'testList.html';
+    }
     var url = "/portal/www/test/getEvaluatCaseList.do";
     var data = {
         evaluatTplId: id,
@@ -84,7 +87,6 @@ function loadTestInfo() {
 
 function viewInfo(data) {
     for (var key in data) {
-        console.log(key)
         $('.info_' + key).text(data[key]);
     }
 }

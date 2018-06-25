@@ -89,12 +89,12 @@ function statisticsScore() {
         flag = true;
         $test.find('.active').addClass('error');
         for (var j = 0; j < answerArray.length; j++) {
-
+            console.log(answerArray[j]);
             $test.find('.option').eq(answerArray[j] - 1).removeClass('error').addClass('right');
             if (!($test.find('.option').eq(answerArray[j] - 1)).is('.active')) {
                 console.log('错误');
                 flag = false;
-                break;
+                continue;
             }
         }
         if (flag) {
@@ -113,7 +113,7 @@ function initWeb() {
         prevButton: '.swiper-button-prev',
         grabCursor: true, //鼠标变手型
         parallax: true,
-        shortSwipes: false, //进行快速短距离的拖动无法触发Swiper
+        shortSwipes: true, //进行快速短距离的拖动无法触发Swiper
         paginationBulletRender: function (index, className) {
             return '<span class="' + className + '">' + (index + 1) + '</span>';
         },
