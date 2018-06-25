@@ -136,11 +136,6 @@
             <span id="coopType"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">合作内容</span>
-            <br>
-            <span id="coopDesc"></span>
-        </div>
-        <div class="labelItem">
             <span class="labelItemHeader">发布日期</span>
             <br>
             <span id="releaseDate"></span>
@@ -166,6 +161,11 @@
             <span id="status"></span>
         </div>
     </div>
+
+    <h5 class="header-title">合作内容</h5>
+    <div class="row" style="padding:10px" id="coopDesc">
+    </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem hide">
