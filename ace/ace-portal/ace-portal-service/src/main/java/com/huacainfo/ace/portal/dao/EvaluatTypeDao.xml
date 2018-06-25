@@ -202,4 +202,17 @@
             #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
             #{lastModifyDate,jdbcType=TIMESTAMP})
         </insert>-->
+
+    <select id="selectType" resultType="map">
+        select t.id,t.name
+        from evaluat_type t
+        where t.syid=#{params.syid}
+        <if test='params.q !=null and params.q!=""'>
+            and
+            t.id=#{params.q} or t.name like concat('%',#{params.q},'%')
+        </if>
+        order by t.createDate
+        limit 0,20
+    </select>
+
 </mapper>

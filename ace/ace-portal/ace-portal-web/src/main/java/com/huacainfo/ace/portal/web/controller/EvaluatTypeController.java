@@ -1,6 +1,10 @@
 package com.huacainfo.ace.portal.web.controller;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,4 +170,17 @@ public class EvaluatTypeController extends PortalBaseController {
     public Map<String,Object> getById(String id) throws Exception{
         return this.evaluatTypeService.getById(id);
     }
+
+	@RequestMapping(value = "/selectType.do")
+	@ResponseBody
+	public Map<String, Object> selectAuthor(String q, String id) throws Exception {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("q", id);
+		params.put("syid", this.getCurUserProp().getSyid());
+		if (!CommonUtils.isBlank(q)) {
+			params.put("q", q);
+		}
+		this.logger.info("", params);
+		return this.evaluatTypeService.selectType(params);
+	}
 }

@@ -10,6 +10,8 @@ import com.huacainfo.ace.portal.vo.EvaluatCaseVo;
 public interface EvaluatCaseDao {
     int deleteByPrimaryKey(String EvaluatCaseId);
 
+    int deleteByEvaluatTplId(String evaluatTplId);
+
     int insert(EvaluatCase record);
 
 

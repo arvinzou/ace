@@ -16,6 +16,7 @@ import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.dao.EvaluatCaseDao;
 import com.huacainfo.ace.portal.dao.EvaluatDataDao;
 import com.huacainfo.ace.portal.dao.EvaluatGaugeDao;
 import com.huacainfo.ace.portal.model.EvaluatGauge;
@@ -60,6 +61,9 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
 
     @Autowired
     private EvaluatGaugeDao evaluatGaugeDao;
+
+    @Autowired
+    private EvaluatCaseDao evaluatCaseDao;
 
     /**
      * @throws
@@ -284,6 +288,7 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
     public MessageResponse deleteEvaluatTplByEvaluatTplId(String id,
                                                           UserProp userProp) throws Exception {
         this.evaluatGaugeDao.deleteByEvaluatTplId(id);
+        this.evaluatCaseDao.deleteByPrimaryKey(id);
         this.evaluatDataDao.deleteByEvaluatTplId(id);
         this.evaluatTplDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除评测", "评测", String.valueOf(id),
