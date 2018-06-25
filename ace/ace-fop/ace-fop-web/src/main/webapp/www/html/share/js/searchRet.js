@@ -5,7 +5,7 @@ var type = null;
 var keyword = null;
 var layerIndex = null;
 app.controller(ngControllerName,function($scope){
-    layerIndex = layer.load(1)
+    layerIndex = layer.load(1);
     console.log(window.location.search);
     var url =   window.location.search.substring(1);
     var paramArr = url.split("&");
@@ -93,3 +93,10 @@ app.directive('onFinishRender',['$timeout', '$parse', function ($timeout, $parse
         }
     }
 }]);
+function hideshow(obj){
+    if($(obj).siblings("table")[0].hidden){
+        $(obj).siblings("table").show();
+    }else{
+        $(obj).siblings("table").hide();
+    }
+}
