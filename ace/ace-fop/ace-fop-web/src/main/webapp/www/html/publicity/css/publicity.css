@@ -35,7 +35,9 @@ body {
 }
 
 .table_div tr {
-    height: 35px;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #E1E5ED;
 }
 
 .search {
@@ -66,17 +68,17 @@ body {
 }
 
 #demo1 {
-    width: 88%;
+    width: 400px;
     float: left;
 }
 
 .filter_title2 {
-    width: 12%;
+    width: 100px;
     float: left;
 }
 
 #demo2 {
-    width: 88%;
+    width: 600px;
     float: left;
 }
 

@@ -33,8 +33,8 @@
 						</div>
 						<div class="search_combox">
 							<div class="search_box">
-								<div style="width: 12%;float: left;">精准搜索：</div>
-								<div style="width: 88%;float: left;"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button class="searchButton" ng-click="search();">搜索</button></div>
+								<div style="width: 100px;float: left;">精准搜索：</div>
+								<div style="width: 400px;float: left;"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button class="searchButton" ng-click="search();">搜索</button></div>
 							</div>
 							<div style="clear: both;"></div>
 							<div class="search_filter2">
@@ -43,8 +43,8 @@
 							</div>
                             <div style="clear: both;"></div>
                             <div class="search_filter1">
-								<div style="width: 12%;float: left;">所属区域：</div>
-								<div style="width: 88%;float: left;height: 30px;">
+								<div style="width: 100px;float: left;">所属区域：</div>
+								<div style="width: 400px;float: left;height: 30px;">
 									<select id="areaCode">
 										<option value="">请选择</option>
 										<option value="430702">武陵区</option>
@@ -77,14 +77,14 @@
 										<td width="15%" align="left">企业法人</td>
 										<td width="15%" align="left">企业性质</td>
 										<td width="15%" align="left">所属区域</td>
-										<td width="25%" align="left">企业地址</td>
+										<td width="25%" align="right">企业地址</td>
 									</tr>
 									<tr ng-repeat="item in items">
 										<td width="35%" ng-bind="item.fullName"></td>
 										<td width="15%" ng-bind="item.realName"></td>
 										<td width="15%" ng-bind="item.companyPropertyName"></td>
 										<td width="35%" ng-bind="item.areaCodeName"></td>
-										<td width="15%" ng-bind="item.address"></td>
+										<td width="15%" align="right" ng-bind="item.address"></td>
 									</tr>
 								</table>
 							</div>
