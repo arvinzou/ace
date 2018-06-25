@@ -58,6 +58,8 @@ body{
 	font-size: 0.4rem;
 	color: #EA4436;
 	margin-right: 0.2rem;
+	border: none;
+	outline:none;
 }
 .amount{
 	width: 4.6rem;

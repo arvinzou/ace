@@ -43,7 +43,7 @@ app.controller(ngControllerName,function($scope) {
     });
     area1.value = [1, 13, 3]; //控制初始位置，注意：该方法并不会影响到input的value
 
-    $("#no").click(function(){
+   /* $("#no").click(function(){
         $(this).hide();
         $(this).siblings().show();
         isName = true;
@@ -52,7 +52,7 @@ app.controller(ngControllerName,function($scope) {
         $(this).hide();
         $(this).siblings().show();
         isName = false;
-    });
+    });*/
 
     $scope.donateMoney = function(){
     	var realName = $("#realName").val();    //捐款人姓名
@@ -63,13 +63,13 @@ app.controller(ngControllerName,function($scope) {
 		var sheng = null;    //省份
 		var shi  = null;     //市
 		var qu = null;       //区
-		if(phoneNum == null || phoneNum == undefined || phoneNum == ''){
-			alert("电话不能为空！");
-			return;
-		}
 		if(isBill){
             largeAddress = $("#demo1").val();
             smallAddress = $("#detailAddress").val();
+            if(phoneNum == null || phoneNum == undefined || phoneNum == ''){
+                alert("电话不能为空！");
+                return;
+            }
             if(largeAddress == null || largeAddress == undefined || largeAddress == ''){
             	alert("请选择地址！");
             	return;
@@ -114,7 +114,7 @@ app.controller(ngControllerName,function($scope) {
 					"city": shi,
 					"district": qu,
 					"address":smallAddress,
-					"donateDate":"2016-06-23"
+					"remark": message
 				})
 			    },
             success:function(result){
