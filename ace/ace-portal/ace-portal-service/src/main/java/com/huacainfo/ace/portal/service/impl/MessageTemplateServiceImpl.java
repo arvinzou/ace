@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.api.MessageSendApi;
 import com.huacainfo.ace.common.plugins.wechat.entity.TemplateData;
+import com.huacainfo.ace.common.plugins.wechat.util.XmlKit;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -12,7 +13,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.common.tools.XmlConverUtil;
+import com.huacainfo.ace.common.tools.XmlUtil;
 import com.huacainfo.ace.portal.dao.MessageTemplateDao;
 import com.huacainfo.ace.portal.model.MessageSendRecord;
 import com.huacainfo.ace.portal.model.MessageTemplate;
@@ -252,7 +253,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService, Backe
         //tmplType:消息正文 xml/json/text格式
         Map<String, Object> map = new HashMap<>();
         if ("1".equals(template.getTmplType())) {//xml
-            return XmlConverUtil.xmltoLinkMap(template.getTmplBody());
+            return XmlUtil.xmltoLinkMap(template.getTmplBody());
 
         } else if ("0".equals(template.getTmplType())) {//text格式
             map.put("wechat", template.getTmplBody());
