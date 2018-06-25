@@ -96,6 +96,10 @@ app.controller(ngControllerName,function($scope) {
             	alert("请输入捐款金额！");
             	return;
             }
+            if(!isMoney(donateMoney)){
+                alert("输入金额格式不正确！");
+                return;
+            }
         }
 
         $.ajax({
@@ -218,4 +222,19 @@ function inputMoney(obj) {
 	$(obj).parent().siblings(".money_01").find("span").removeClass("lightborder");
 	$("#amountMoney").show();
     isCustom = true;
+}
+
+/**
+ * 判断输入金额是否合法
+ * @param s
+ * @returns {boolean}
+ */
+function isMoney(s) {
+    var regu = "^[0-9]+[\.][0-9]{0,3}$";
+    var re = new RegExp(regu);
+    if (re.test(s)) {
+        return true;
+    } else {
+        return false;
+    }
 }
