@@ -94,9 +94,18 @@ app.directive('onFinishRender',['$timeout', '$parse', function ($timeout, $parse
     }
 }]);
 function hideshow(obj){
-    if($(obj).siblings("table")[0].hidden){
+    var tables = $(obj).siblings("table");
+    for(var i=0; i<tables.length; i++){
+        if(tables[i].style.display=='none'){
+            tables[i].style.display='block';
+        }else{
+            tables[i].style.display='none';
+        }
+    }
+
+  /*  if($(obj).siblings("table")[0].hidden){
         $(obj).siblings("table").show();
     }else{
         $(obj).siblings("table").hide();
-    }
+    }*/
 }

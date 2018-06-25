@@ -30,8 +30,8 @@
                 <div class="cnt list2">
                     <div class="dis tbc" ng-repeat="(key1, value1) in listData" on-finish-render>
                         <div ng-repeat="(key2, value2) in value1">
-                            <span class="tableTitle" ng-cloak>{{key1}}->{{key2}}</span>
-                            <table cellpadding="0" cellspacing="0" class="information" ng-repeat="item in value2">
+                            <span class="tableTitle" ng-cloak onclick="hideshow(this);">{{key1}}->{{key2}}</span>
+                            <table cellpadding="0" style="display: block;" cellspacing="0" class="information" ng-repeat="item in value2">
                                 <tr ng-repeat="(key3, value3) in item">
                                     <td width="200px" ng-cloak>{{key3}}</td>
                                     <td width="500px" ng-cloak>{{value3}}</td>

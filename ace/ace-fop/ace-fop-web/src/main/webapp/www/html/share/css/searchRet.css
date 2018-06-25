@@ -26,6 +26,7 @@ td{
     text-align: center;
     display: block;
     margin: auto;
+    cursor: pointer;
 }
 .tbc{
     margin-bottom: 30px;
