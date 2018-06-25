@@ -139,5 +139,9 @@
         where id = #{id,jdbcType=VARCHAR}
       </update>-->
 
+    <delete id="deleteByEvaluatTplId" parameterType="java.lang.String">
+        delete from evaluat_data
+        where evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR}
+    </delete>
 
 </mapper>
