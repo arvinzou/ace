@@ -6,16 +6,17 @@
     margin: auto;
 }
 .criteria{
-    width: 100%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    width: 800px;
+    height: 35px;
+    margin: 15px auto;
 }
 .criteria span{
     width: 200px;
     height: 35px;
     text-align: center;
     line-height: 35px;
-    display: inline-block;
+    display: block;
+    float: left;
 }
 .search_opt{
     width: 100%;

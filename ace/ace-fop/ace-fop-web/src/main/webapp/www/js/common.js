@@ -83,7 +83,7 @@ html.push("<li><a href=\"/fop/www/html/satisfy/satisfy.html\" >满意度调查</
 html.push("</ul>");
 html.push("</li>");
 html.push("<li>");
-html.push("<a href=\"\">信息搜索<span class=\"trig\"></span></a>");
+html.push("<a href=\"/fop/www/html/share/search.html\">信息搜索<span class=\"trig\"></span></a>");
 html.push("</li>");
 html.push("</ul>");
 html.push("</div>");

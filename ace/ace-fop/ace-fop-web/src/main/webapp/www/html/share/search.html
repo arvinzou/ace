@@ -10,25 +10,23 @@
     <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <link rel="shortcut icon" href="../../images/favicon.ico">
-    <style>
+    <script type="text/javascript" src="js/search.js"></script>
 
-    </style>
 </head>
 <body>
     <div id="header"></div>
     <div class="search_box">
         <div class="criteria">
-            <span><input type="radio" name="radio" />主体身份代码</span>
-            <span><input type="radio" name="radio"/>统一社会信用代码</span>
-            <span><input type="radio" name="radio"/>抵押人证件号码</span>
-            <span><input type="radio" name="radio"/>组织机构代码</span>
-            <span><input type="radio" name="radio"/>纳税人识别号</span>
-            <span><input type="radio" name="radio"/>专利名称</span>
+            <span><input type="radio" name="radio" value="0"/>主体身份代码</span>
+            <span><input type="radio" name="radio" value="1"/>统一社会信用代码</span>
+            <span><input type="radio" name="radio" value="2"/>纳税人识别号</span>
+            <span><input type="radio" name="radio" value="3"/>组织机构代码</span>
+            <span style="clear: both;"></span>
         </div>
         <div class="search_opt">
             <div class="operation">
                 <input type="text" name="keyword"/>
-                <button id="searchBtn" onclick="window.location.href='searchRet.html'">查询</button>
+                <button id="searchBtn">查询</button>
             </div>
         </div>
     </div>
