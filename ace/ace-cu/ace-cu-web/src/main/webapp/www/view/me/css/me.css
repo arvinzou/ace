@@ -158,7 +158,7 @@ ul,li{
 	float: left;
 }
 .help_box{
-	width: 10rem;
+	width: 100%;
 	margin-bottom: 1rem;
 }
 .help_list_right{
