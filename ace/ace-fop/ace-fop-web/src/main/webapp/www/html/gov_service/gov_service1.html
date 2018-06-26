@@ -47,10 +47,10 @@
 							<tbody>
 							<tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo($index);">
 								<td align="center" width="5%"><div class="dot"></div></td>
-								<td width="25%" ng-bind="item.releaseDate | formatDate"></td>
 								<td ng-bind="item.title"></td>
 								<td align="right" width="20%" class="from_info" ng-if="item.reply!=''">已回复</td>
 								<td align="right" width="20%" class="from_info" ng-if="item.reply==''">未回复</td>
+								<td class="time" width="25%" ng-bind="item.releaseDate | formatDate"></td>
 							</tr>
 							</tbody>
 						</table>

@@ -62,9 +62,7 @@
 			</div>
 			<div class="nav_info">
 				<div id="nav_info01" class="nav_info_content dis">
-					<p ng-bind="projectInfo.description">
-						
-					</p>
+					<p id="projectDetail"></p>
 				</div>
 
 				<div id="nav_info02" class="nav_info_content undis">
@@ -78,9 +76,9 @@
 											<div class="project_record_title01" ng-bind="record.useToProjectName"></div>
 											<div class="project_record_title02">使用资金：<span class="donation_money" ng-bind="record.useAmount"></span></div>
 										</div>
-										<div class="project_record_info" ng-bind="record.useToProjectDesc">
-											
+										<div class="project_record_info troggle" ng-bind-html="record.useToProjectDesc | to_trusted">
 										</div>
+										<div class="upordown"><p name="down" onclick="troggle(this);"><span class="opt">展开</span><img src="img/down.png" style="width: 0.3rem;height: 0.2rem;"></p></div>
 									</div>
 								</div>
 							</li>

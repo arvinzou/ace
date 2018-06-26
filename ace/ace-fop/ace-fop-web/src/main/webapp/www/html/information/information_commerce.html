@@ -42,9 +42,9 @@
 							<tbody>
 							<tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo($index);">
 								<td align="left" width="15px"><div class="dot"></div></td>
-								<td align="left" width="25%" ng-bind="item.releaseDate | formatDate"></td>
+
 								<td ng-bind="item.title"></td>
-								<td align="right" width="20%" class="from_info" ng-cloak>来源：{{item.source}}</td>
+								<td class="time" align="left" width="25%" ng-bind="item.releaseDate | formatDate"></td>
 							</tr>
 							</tbody>
 						</table>
