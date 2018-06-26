@@ -32,4 +32,14 @@ public interface FopAiQuestionDao {
 
     int isExit(FopAiQuestion record);
 
+    /**
+     * 功能描述: 根据关键字，查询问题答案
+     * <p> 目前仅市工商联使用，查询是工商联数据库数据</p>
+     *
+     * @param:
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/16 11:54
+     */
+    List<FopAiQuestion> findQuestion(String userInput);
 }

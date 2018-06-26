@@ -51,11 +51,11 @@
                     </button>
 
 
-                    <%--审核--%>
-                    <button class="btn btn-purple" id="btn-view-audit"
-                            authority="${pageContext.request.contextPath}/informationService/audit">
-                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+                    <%--&lt;%&ndash;审核&ndash;%&gt;--%>
+                    <%--<button class="btn btn-purple" id="btn-view-audit"--%>
+                    <%--authority="${pageContext.request.contextPath}/informationService/audit">--%>
+                    <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
 
                 </div>
             </div>

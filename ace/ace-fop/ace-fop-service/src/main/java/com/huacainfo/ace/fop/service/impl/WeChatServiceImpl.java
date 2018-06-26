@@ -6,6 +6,8 @@ import com.huacainfo.ace.common.plugins.wechat.entity.msg.out.OutTextMsg;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
+import com.huacainfo.ace.fop.dao.FopAiQuestionDao;
+import com.huacainfo.ace.fop.model.FopAiQuestion;
 import com.huacainfo.ace.fop.service.WeChatService;
 import com.huacainfo.ace.portal.service.WxCfgService;
 import org.slf4j.Logger;
@@ -31,6 +33,8 @@ public class WeChatServiceImpl implements WeChatService {
     private WxCfgService wxCfgService;
     @Autowired
     private KafkaProducerService kafkaProducerService;
+    @Autowired
+    private FopAiQuestionDao fopAiQuestionDao;
 
     /**
      * 获取回复客服消息
@@ -45,22 +49,18 @@ public class WeChatServiceImpl implements WeChatService {
         String openid = inTextMsg.getFromUserName();//用户openid
         String userInput = inTextMsg.getContent();//用户键入消息
         //TODO 以后考虑异步回复问题 ,根据用户输入查询AI问题结果
-        List<Map<String, Object>> questionList = wxCfgService.selectQuestion(userInput);
+        List<FopAiQuestion> questionList = fopAiQuestionDao.findQuestion(userInput);
         if (!CollectionUtils.isEmpty(questionList)) {
             Random r = new Random();
             int index = r.nextInt(questionList.size());
-            Map<String, Object> question = questionList.get(index);
-            outTextMsg.setContent((String) question.get("answer"));
+            FopAiQuestion question = questionList.get(index);
+            outTextMsg.setContent(question.getAnswer());
 
             return outTextMsg;
         }
 
         //题库中无相关答案,则记录问题，并通知相关人员
         try {
-//        WxCfg wxCfg = wxCfgService.findByOriginalId(orgId);
-//        if (null == wxCfg) {
-//            outTextMsg.setContent("公众号信息未配置");
-//        }
             //记录问题
             String recordId = insertQuestion(userInput);
             //推送模板消息

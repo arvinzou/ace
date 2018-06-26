@@ -26,7 +26,6 @@ import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
-import javassist.bytecode.analysis.MultiType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +78,7 @@ public class InformationServiceServiceImpl implements InformationServiceService 
 
     @Autowired
     private FopLoanProductDao fopLoanProductDao;
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -179,6 +179,9 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         this.informationServiceDao.insertSelective(o);
         this.dataBaseLogService.log("添加信息服务", "信息服务", "",
                 o.getId(), o.getId(), userProp);
+
+        //招商信息自动审核通过
+        audit(o.getId(), "0", "自动审核通过", userProp);
 
         return new MessageResponse(0, "添加信息服务完成！");
     }
