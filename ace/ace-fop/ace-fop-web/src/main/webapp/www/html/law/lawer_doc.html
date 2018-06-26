@@ -18,7 +18,7 @@
 	<body ng-app="angularjsApp" ng-controller="angularjsCtrl">
 		<div class="main">
 			<div class="title">
-				<span class="title_lager">法律文书</span><span class="title_small">/&nbsp;Legal&nbsp;Document</span>
+				<span class="title_lager" style="width: 10%">法律规范</span><span style="width: 90%" class="title_small">/&nbsp;Legal&nbsp;Document</span>
 				<div class="search_right">
 					<span class="s_title"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button class="glyphicon glyphicon-search" ng-click="search();"></button></span>
 				</div>
@@ -28,9 +28,9 @@
 					<tbody>
 						<tr class="tr_bottom"  ng-repeat="item in items">
 							<td align="left" width="15px"><div class="dot"></div></td>
-							<td align="left" width="15%" ng-bind="item.releaseDate | formatDate"></td>
 							<td ng-cloak><a class="show_info" href="javascript:void(0);"  ng-click="showInfo($index);">{{item.title}}</a> </td>
 							<td width="10%"><a id="download" href="javascript:void(0);" ng-click="ownload($event,item.fileUrl, item.title);"   style="color: #1A56A8;">下载</a></td>
+							<td class="time" align="left" width="15%" ng-bind="item.releaseDate | formatDate"></td>
 						</tr>
 					</tbody>
 				</table>
