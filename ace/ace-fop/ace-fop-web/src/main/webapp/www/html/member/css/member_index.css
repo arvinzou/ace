@@ -2,8 +2,9 @@
 	margin: 0px;
 	padding: 0px;
 }
+
 .content{
-	width: 100%;
+	width: 82%;
 }
 .menu{
 	width: 100%;
@@ -18,7 +19,7 @@
 }
 
 .menu .menu_li {
-	width: 235px;
+	width: 190px;
 	display: block;
 	height: 80px;
 	float: left;
@@ -45,8 +46,8 @@
 }
 .content_top{
     width: 100%;
-	height: 212px;
-    padding: 0 100px 0 30px;
+	height: auto;
+	padding: 0 34px 0 30px;
     background-color: #fff;
 }
 .title{

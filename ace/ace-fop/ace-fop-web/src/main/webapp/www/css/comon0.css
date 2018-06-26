@@ -1015,9 +1015,15 @@ input[type="checkbox"] {
     max-height: 1400px;
 }
 .searchTable{
-    min-height: 700px;
+    min-height: 600px;
     max-height: 1400px;
 }
+
+#paganation {
+    padding-bottom: 25px;
+}
+
+
 .searchbox .searchTable table {
     border-top: 1px solid #dddddd;
     border-left: 1px solid #dddddd;
@@ -1171,6 +1177,10 @@ input[type="checkbox"] {
     white-space:nowrap;
     text-overflow:ellipsis;
     overflow: hidden;
+}
+
+.searchTable td:hover {
+    color: #1a56a8;
 }
 
 .searchTable tr > .time {
