@@ -26,7 +26,7 @@ app.controller(ngControllerName,function($scope){
                 }
                 if($(".custom_layper_page_info").length>0){
                     setTimeout(function(){
-                        var itemSize=$(".msg_list table").length;//直接从html取出已经渲染的tr
+                        var itemSize=$(".msg_list table").length -1;//直接从html取出已经渲染的tr
                         var pages = Math.ceil(itemSize/pageSize); //得到总页数
                         $(".custom_layper_page_info").html(pageSize+"条/页，共"+itemSize+"条信息");
                         laypage({
