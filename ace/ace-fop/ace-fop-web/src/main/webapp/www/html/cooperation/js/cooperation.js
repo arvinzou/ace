@@ -25,22 +25,6 @@ var data_cotype = [{
         "text":"其他"
     }
 ];
-
-// //项目阶段
-// var data_costep = [
-//     {
-//         "id": "1",
-//         "text": "启动期"
-//     },
-//     {
-//         "id": "2",
-//         "text": "计划期"
-//     },
-//     {
-//         "id": "3",
-//         "text": "执行期"
-//     }
-// ];
 app.controller(ngControllerName,function($scope){
     try{
         $scope.userProp = userProp;
@@ -63,11 +47,13 @@ app.controller(ngControllerName,function($scope){
     });
     $("#city_modal").click(function (e) {
         SelmCity(this, e);
-        $scope.searchByParam();
     });
     $("s").click(function (e) {
         SelCity(document.getElementById("city"), e);
     });
+    $("#city").change = function(){
+        $scope.searchByParam();
+    }
 
     $('#coperationType').comboboxfilter({
         url: '',
@@ -78,16 +64,6 @@ app.controller(ngControllerName,function($scope){
             console.log(cotype);
         }
     });
-
-    // $('#projectStep').comboboxfilter({
-    //     url: '',
-    //     scope: 'FilterQuery1',
-    //     data: data_costep,
-    //     onChange: function(newValue) {
-    //         costep = newValue;
-    //         console.log(costep);
-    //     }
-    // });
 
     $.ajax({
         url: "/fop/www/findProjectList",
