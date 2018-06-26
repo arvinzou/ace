@@ -2,7 +2,6 @@ var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
 var isBill = false;        //是否需要票据信息
-var isName = false;        //是否匿名捐赠
 var isCustom = false;      //是否选择自定义金额
 var donateMoney = 0;       //捐款金额
 var needReceipt = 0;       //是否需要票据，0不需要，1是需要
@@ -66,10 +65,6 @@ app.controller(ngControllerName,function($scope) {
 		if(isBill){
             largeAddress = $("#demo1").val();
             smallAddress = $("#detailAddress").val();
-            if(phoneNum == null || phoneNum == undefined || phoneNum == ''){
-                alert("电话不能为空！");
-                return;
-            }
             if(largeAddress == null || largeAddress == undefined || largeAddress == ''){
             	alert("请选择地址！");
             	return;
@@ -83,12 +78,6 @@ app.controller(ngControllerName,function($scope) {
             	return;
 			}
             needReceipt = 1;
-		}
-		if(!isName){      //非匿名捐赠，姓名不能为空
-			if(realName == null || realName == undefined || realName == ''){
-				alert("捐款人姓名不能为空！");
-				return;
-			}
 		}
 		if(isCustom){
             donateMoney = $("#amountMoney").val();
