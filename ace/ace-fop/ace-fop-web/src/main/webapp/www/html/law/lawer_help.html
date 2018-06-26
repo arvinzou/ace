@@ -20,7 +20,7 @@
 	<body>
 		<div class="main">
 			<div class="title">
-				<span class="title_lager">法律诉求</span><span class="title_small">/&nbsp;Legal&nbsp;Aid</span>
+				<span class="title_lager" style="width: 10%">法律诉求</span><span style="width: 90%" class="title_small">/&nbsp;Legal&nbsp;Aid</span>
 				<button class="law_help"  data-toggle="modal" data-target=""  ng-click="before_release($event);">发布法律帮助</button>
 			</div>
 			<div class="searchTable">
@@ -35,10 +35,10 @@
 					<tbody>
 						<tr class="tr_bottom" ng-repeat="item in items" ng-click="showInfo($index);">
 							<td align="center" width="15px"><div class="dot"></div></td>
-							<td align="left" width="25%" ng-bind="item.releaseDate"></td>
 							<td ng-bind="item.title"></td>
 							<td align="center" width="10%" ng-if="item.reply == '' || item.reply == null || item.reply== undefined">未回复</td>
 							<td align="center" width="10%" ng-if="item.reply != '' && item.reply != null && item.reply!= undefined">已回复</td>
+							<td class="time" align="left" width="25%" ng-bind="item.releaseDate"></td>
 						</tr>
 					</tbody>
 				</table>

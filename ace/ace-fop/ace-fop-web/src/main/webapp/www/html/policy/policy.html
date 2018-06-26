@@ -38,9 +38,11 @@
                                     <td align="center" width="9px">
                                         <div class="dot"></div>
                                     </td>
-                                    <td align="left" width="20%" ng-bind="item.releaseDate | formatDate"></td>
+
                                     <td><a class="show_info" href="javascript:void(0);" ng-click="showInfo($index);">{{item.title}}</a> </td>
                                     <td width="10%" align="right"><a  href="#" ng-click="download($event,item.fileUrl, item.title);"  style="color: #1A56A8;">下载</a> </td>
+                                    <td class="time" align="left" width="20%"
+                                        ng-bind="item.releaseDate | formatDate"></td>
                                 </tr>
                                 </tbody>
                             </table>

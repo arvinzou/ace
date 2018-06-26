@@ -14,7 +14,7 @@ body {
 	color: #565B70;
 	font-weight: bolder;
 	font-size: 18px;
-	width: 12%;
+    width: 8%;
 	display: inline-block;
 	border-bottom: 3px solid #FF9F00;
 	height: 62px;
@@ -28,7 +28,7 @@ body {
 .title_small {
 	color: #C3CBD6;
 	display: inline-block;
-	width: 88%;
+    width: 92%;
 	border-bottom: 1px solid #E1E5ED;
 	height: 62px;
 	line-height: 62px;
@@ -82,13 +82,13 @@ body {
 }
 
 .searchTable tr .dot {
-	width: 8px;
-	height: 8px;
+    width: 6px;
+    height: 6px;
 	background-color: #E1E5ED;
 }
 
 .searchTable tr {
-	border-bottom: 1px solid #E1E5ED;
+    border-bottom: 1px dashed #E1E5ED;
 	cursor: pointer;
 
 /*	border-top: 1px solid transparent;
@@ -160,15 +160,16 @@ body {
 	height: 32px;
 	display: block;
 	margin-top: 16px;
-	border: 1px solid #1A56A8;
 }
 
 .s_title input {
 	width: 198px;
 	height: 30px;
+    padding-left: 8px;
 	line-height: 30px;
 	float: left;
-	border: none;
+    border: 1px #E1E5ED solid;
+
 }
 
 .s_title button {
