@@ -43,6 +43,10 @@ var data = [{
 ];
 
 app.controller(ngControllerName,function($scope){
+    try{
+        $scope.userProp = userProp;
+    }catch(e){}
+
     // 初始化查询所有
     $('#demo2').comboboxfilter({
         url: '',
