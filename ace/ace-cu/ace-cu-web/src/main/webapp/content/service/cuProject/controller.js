@@ -70,6 +70,12 @@ jQuery(function ($) {
                 $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext)
             }
             var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            var targetAmount = gd.targetAmount;
+            if (!isNull(targetAmount) && !isAmount(targetAmount)) {
+                alert("请输入正确的目标金额!");
+                return;
+            }
+
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
                 gr,
@@ -122,6 +128,154 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                    }
+                })
+        });
+
+    //审核按钮
+    $('#btn-view-audit').on(
+        'click',
+        function (e) {
+            e.preventDefault();
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+            if (!gr) {
+                $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                    $.jgrid.nav.alerttext);
+                return;
+            }
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            if (rowData.status != "1") {
+                alert("不能重复审核！")
+                return;
+            }
+            var dialog = $("#dialog-message-audit").removeClass('hide').dialog({
+                modal: true,
+                width: 380,
+                title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-cog'></i> " + rowData.title + "</h4></div>",
+                title_html: true,
+                buttons: [
+                    {
+                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+                        "class": "btn btn-info btn-xs",
+                        id: 'ajax_button_audit',
+                        click: function () {
+                            //for testing
+                            var audit_result = $('input[name="audit_result"]:checked').val();
+                            var audit_opinion = $('#audit_opinion').val();
+                            if (audit_result == undefined) {
+                                alert("请选择审核结果!");
+                                return;
+                            }
+                            $(this).dialog("close");
+                            $.ajax({
+                                type: "post",
+                                url: contextPath + "/cuProject/audit",
+                                data: {id: rowData.id, auditResult: audit_result, auditOpinion: audit_opinion},
+                                beforeSend: function (XMLHttpRequest) {
+                                    style_ajax_button('ajax_button_audit', true);
+                                },
+                                success: function (rst, textStatus) {
+                                    style_ajax_button('ajax_button_audit', false);
+                                    if (rst) {
+                                        bootbox.dialog({
+                                            title: '系统提示',
+                                            message: rst.errorMessage,
+                                            buttons: {
+                                                "success": {
+                                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                                    "className": "btn-sm btn-success",
+                                                    "callback": function () {
+                                                        dialog.dialog("close");
+                                                        //重载数据
+                                                        jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                                                            page: 1
+                                                        }).trigger("reloadGrid");
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+                                    ;
+                                },
+                                complete: function (XMLHttpRequest, textStatus) {
+                                    style_ajax_button('ajax_button_audit', false);
+                                },
+                                error: function () {
+                                    style_ajax_button('ajax_button_audit', true);
+                                }
+                            });
+                        }
+                    },
+                    {
+                        html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
+                        "class": "btn btn-xs",
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+        });
+
+    //添加使用记录
+    $('#btn-view-add-use-record').on(
+        'click',
+        function (e) {
+            e.preventDefault();
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+            if (!gr) {
+                $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                    $.jgrid.nav.alerttext);
+                return;
+            }
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            var pProjectId = rowData.id;
+
+            //new form
+            jQuery(cfg.grid_selector).jqGrid(
+                'editGridRow',
+                'new',
+                {
+                    closeAfterAdd: true,
+                    recreateForm: true,
+                    viewPagerButtons: false,
+                    beforeSubmit: function (postdata) {
+                        postdata.description = editor.getValue();
+                        var coverUrl = postdata.coverUrl;
+                        if (!coverUrl.startWith("http") && !isNull(coverUrl)) {
+                            coverUrl = fastdfs_server + coverUrl;
+                        }
+                        postdata.coverUrl = coverUrl;
+                        postdata.parentId = pProjectId;
+
+                        var amount = postdata.targetAmount;
+                        console.log("amount:" + amount);
+                        console.log("isNull:" + isNull(amount));
+                        console.log("isAmount:" + isAmount(amount));
+                        if (isNull(amount) || !isAmount(amount) || 0 == amount) {
+                            alert("请输入正确的支出金额!");
+                            return [false, "", ""];
+                        }
+                        // return [false, "", ""];//for test
+
+                        return [true, "", ""];
+                    },
+                    beforeShowForm: function (e) {
+
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find(
+                            '.ui-jqdialog-titlebar').wrapInner(
+                            '<div class="widget-header" />')
+                        style_edit_form(form);
+                        //富文本编辑器
+                        initSimditor($("textarea[name=description]"), "");
+                        //封面上传
+                        appendUploadBtn("coverUrl");
+                        //使用记录标题
+                        var recordTitle = '"' + rowData.projectName + '"' + " - " + "添加使用记录";
+                        $('.ui-jqdialog-title').html(recordTitle);
+                        //重设控件属性
+                        retSetWidgetAttr(rowData);
                     }
                 })
         });
@@ -225,4 +379,27 @@ String.prototype.startWith = function (str) {
 String.prototype.endWith = function (str) {
     var reg = new RegExp(str + "$");
     return reg.test(this);
+}
+
+function retSetWidgetAttr(rowData) {
+    //项目类型
+    $("#type").get(0).selectedIndex = 4;//.attr("selected", true);
+    $('#type').attr("disabled", true);
+    //目标金额 => 支出金额
+    $('#tr_targetAmount').find(".CaptionTD").html("支出金额");
+    $('#targetAmount').after('<span style="color:red;font-size:16px;font-weight:800">*</span>');
+
+}
+
+
+function isNull(str) {
+    if (str == "") return true;
+    var regu = "^[ ]+$";
+    var re = new RegExp(regu);
+    return re.test(str);
+}
+
+function isAmount(amount) {
+    var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+    return reg.test(amount);
 }

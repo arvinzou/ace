@@ -8,6 +8,9 @@
         FROM cu.cu_donate_list t
         LEFT JOIN portal.userinfo u on t.openId = u.openid
         WHERE u.appid = #{appid,jdbcType=VARCHAR}
+        <if test="projectId!=null and projectId!=&quot;&quot;">
+            and t.projectId = #{projectId,jdbcType=VARCHAR}
+        </if>
         GROUP BY u.nickname,u.headimgurl,u.openid
         ) a
         <choose>

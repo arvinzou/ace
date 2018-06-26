@@ -333,4 +333,14 @@
         where projectName = #{projectName,jdbcType=VARCHAR}
           and id != #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="findListByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cu_project
+        where type in
+        <foreach collection="types" open="(" separator="," close=")" item="item">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

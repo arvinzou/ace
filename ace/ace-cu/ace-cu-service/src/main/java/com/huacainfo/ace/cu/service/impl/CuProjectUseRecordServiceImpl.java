@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.cu.dao.CuProjectUseRecordDao;
 import com.huacainfo.ace.cu.model.CuProjectUseRecord;
@@ -75,27 +76,11 @@ public class CuProjectUseRecordServiceImpl implements CuProjectUseRecordService 
      */
     @Override
     public MessageResponse insertCuProjectUseRecord(CuProjectUseRecord o, UserProp userProp) throws Exception {
-
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getProjectId())) {
             return new MessageResponse(1, "所属项目ID不能为空！");
         }
         if (CommonUtils.isBlank(o.getUseProjectId())) {
             return new MessageResponse(1, "支出项目ID不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
-
-        int temp = this.cuProjectUseRecordDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "慈善项目-使用记录名称重复！");
         }
 
         o.setId(GUIDUtil.getGUID());
@@ -103,9 +88,10 @@ public class CuProjectUseRecordServiceImpl implements CuProjectUseRecordService 
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
+        o.setLastModifyDate(DateUtil.getNowDate());
         this.cuProjectUseRecordDao.insertSelective(o);
-        this.dataBaseLogService.log("添加慈善项目-使用记录", "慈善项目-使用记录", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("添加慈善项目-使用记录",
+                "慈善项目-使用记录", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加慈善项目-使用记录完成！");
     }

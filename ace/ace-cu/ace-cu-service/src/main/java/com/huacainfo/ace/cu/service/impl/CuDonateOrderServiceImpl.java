@@ -2,6 +2,7 @@ package com.huacainfo.ace.cu.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -14,8 +15,9 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.cu.common.constant.OrderConstant;
 import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuDonateOrderDao;
-import com.huacainfo.ace.cu.dao.WxPayLogDao;
+import com.huacainfo.ace.cu.dao.CuUserDao;
 import com.huacainfo.ace.cu.model.CuDonateOrder;
+import com.huacainfo.ace.cu.model.CuUser;
 import com.huacainfo.ace.cu.model.WxPayLog;
 import com.huacainfo.ace.cu.service.CuDonateListService;
 import com.huacainfo.ace.cu.service.CuDonateOrderService;
@@ -53,9 +55,10 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     @Autowired
     private CuUserService cuUserService;
     @Autowired
-    private WxPayLogDao wxPayLogDao;
-    @Autowired
     private CuDonateListService cuDonateListService;
+    @Autowired
+    private CuUserDao cuUserDao;
+
 
     /**
      * @throws
@@ -275,6 +278,7 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
             return new ResultResponse(ResultCode.FAIL, "收货信息不全！");
         }
 
+        data.setPoints(new BigDecimal(data.getDonateAmount().intValue()));//1块钱=1积分,无小数
         data.setOrderNo(generateOrderNo());
         data.setUserId(userVo.getId());
         data.setId(GUIDUtil.getGUID());
@@ -327,9 +331,6 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         if (null == wxPayLog) {
             return new ResultResponse(ResultCode.FAIL, "回调日志信息异常");
         }
-        if (OrderConstant.PAY_TYPE_WX.equals(payType)) {
-            wxPayLogDao.insert(wxPayLog);
-        }
         if (!"SUCCESS".equals(wxPayLog.getResult_code())) {
             return new ResultResponse(ResultCode.FAIL, "回调支付结果异常");
         }
@@ -339,7 +340,7 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         if (null == order) {
             return new ResultResponse(ResultCode.FAIL, "订单信息异常");
         }
-        if (OrderConstant.ORDER_STATUS_NEW_ORDER.equals(order.getStatus())) {
+        if (!OrderConstant.ORDER_STATUS_NEW_ORDER.equals(order.getStatus())) {
             return new ResultResponse(ResultCode.FAIL, "订单状态异常");
         }
         //订单状态修改
@@ -349,10 +350,45 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         order.setLastModifyDate(DateUtil.getNowDate());
         //增加捐献记录
         ResultResponse rs1 = cuDonateListService.addDonateList(order);
+        if (ResultCode.FAIL == rs1.getStatus()) {
+            throw new CustomException(rs1.getInfo());
+        }
         //调整项目属性
         ResultResponse rs2 = cuProjectService.pay(order);
+        if (ResultCode.FAIL == rs2.getStatus()) {
+            throw new CustomException(rs2.getInfo());
+        }
+        //增加个人积分
+        ResultResponse rs3 = updateUserPoints(order);
+        if (ResultCode.FAIL == rs3.getStatus()) {
+            throw new CustomException(rs3.getInfo());
+        }
+        //订单更新
+        cuDonateOrderDao.updateByPrimaryKey(order);
 
         return new ResultResponse(ResultCode.SUCCESS, "订单支付处理成功");
+    }
+
+    private ResultResponse updateUserPoints(CuDonateOrder order) {
+        CuUser user = cuUserService.findByOpenId(order.getOpenId());
+        BigDecimal hisPoints = null == user.getHisPoints() ?
+                BigDecimal.ZERO.add(order.getPoints()) : user.getHisPoints().add(order.getPoints());
+        BigDecimal curPoints = null == user.getCurPoints() ?
+                BigDecimal.ZERO.add(order.getPoints()) : user.getCurPoints().add(order.getPoints());
+        BigDecimal usedPoints = null == user.getUsedPoints() ? BigDecimal.ZERO : user.getUsedPoints();
+        user.setHisPoints(hisPoints);
+        user.setCurPoints(curPoints);
+        user.setUsedPoints(usedPoints);
+        user.setLastModifyDate(DateUtil.getNowDate());
+        user.setLastModifyUserId("0000-0000");
+        user.setLastModifyUserName("system");
+
+        int count = cuUserDao.updateByPrimaryKey(user);
+        if (count < 1) {
+            return new ResultResponse(ResultCode.FAIL, "用户积分变更失败");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "用户积分变更成功");
     }
 
     /**

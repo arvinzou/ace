@@ -10,6 +10,8 @@ import com.huacainfo.ace.cu.model.CuProject;
 import com.huacainfo.ace.cu.vo.CuProjectQVo;
 import com.huacainfo.ace.cu.vo.CuProjectVo;
 
+import java.util.List;
+
 /**
  * @author: Arvin
  * @version: 2018-06-13
@@ -133,4 +135,26 @@ public interface CuProjectService {
     CuProjectVo selectVoByPrimaryKey(String projectId);
 
     ResultResponse pay(CuDonateOrder order);
+
+    /**
+     * 功能描述:  慈善项目审核审核
+     *
+     * @param: id cu_project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp curUserProp);
+
+    /**
+     * 分类插入项目
+     *
+     * @param obj
+     * @param type
+     * @param curUserProp
+     * @return
+     */
+    MessageResponse insertCuProjectByType(CuProject obj, String type, UserProp curUserProp) throws Exception;
+
+    List<CuProject> findAllProjectList(String projectType);
 }

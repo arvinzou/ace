@@ -13,16 +13,19 @@ public interface AnalysisService {
      * 财务公开数额统计
      *
      * @return
+     * @param projectId
      */
-    Map<String, Object> financeStatistics();
+    Map<String, Object> financeStatistics(String projectId);
 
     /**
      * 慈善榜单
      *
+     *
+     * @param projectId
      * @param start
      * @param limit
      * @param orderBy
      * @return
      */
-    List<Map<String, Object>> donateRank(int start, int limit, String orderBy);
+    List<Map<String, Object>> donateRank(String projectId, int start, int limit, String orderBy);
 }

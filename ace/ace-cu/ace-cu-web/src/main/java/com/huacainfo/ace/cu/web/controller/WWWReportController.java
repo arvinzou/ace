@@ -3,8 +3,11 @@ package com.huacainfo.ace.cu.web.controller;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.cu.model.CuProject;
 import com.huacainfo.ace.cu.service.AnalysisService;
 import com.huacainfo.ace.cu.service.CuDonateListService;
+import com.huacainfo.ace.cu.service.CuProjectService;
 import com.huacainfo.ace.cu.service.CuProjectUseRecordService;
 import com.huacainfo.ace.cu.vo.CuDonateListQVo;
 import com.huacainfo.ace.cu.vo.CuDonateListVo;
@@ -12,7 +15,6 @@ import com.huacainfo.ace.cu.vo.CuProjectUseRecordQVo;
 import com.huacainfo.ace.cu.vo.CuProjectUseRecordVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,6 +35,8 @@ public class WWWReportController extends CuBaseController {
     private CuDonateListService cuDonateListService;
     @Autowired
     private CuProjectUseRecordService cuProjectUseRecordService;
+    @Autowired
+    private CuProjectService cuProjectService;
 
     /**
      * 财务公开数额统计
@@ -41,9 +45,8 @@ public class WWWReportController extends CuBaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/financeStatistics")
-    @ResponseBody
-    public ResultResponse financeStatistics() throws Exception {
-        Map<String, Object> data = analysisService.financeStatistics();
+    public ResultResponse financeStatistics(String projectId) throws Exception {
+        Map<String, Object> data = analysisService.financeStatistics(projectId);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", data);
     }
 
@@ -54,10 +57,11 @@ public class WWWReportController extends CuBaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/findDonateList")
-    @ResponseBody
-    public ResultResponse findDonateList(int start, int limit, String orderBy) throws Exception {
+    public ResultResponse findDonateList(String projectId,
+                                         int start, int limit, String orderBy) throws Exception {
 
         CuDonateListQVo condition = new CuDonateListQVo();
+        condition.setProjectId(projectId);
         PageResult<CuDonateListVo> list = cuDonateListService.findCuDonateListList(condition, start, limit, orderBy);
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
@@ -70,10 +74,11 @@ public class WWWReportController extends CuBaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/findUsedRecord")
-    @ResponseBody
-    public ResultResponse findUsedRecord(int start, int limit, String orderBy) throws Exception {
+    public ResultResponse findUsedRecord(String projectId,
+                                         int start, int limit, String orderBy) throws Exception {
 
         CuProjectUseRecordQVo condition = new CuProjectUseRecordQVo();
+        condition.setProjectId(projectId);
         PageResult<CuProjectUseRecordVo> list = cuProjectUseRecordService.findCuProjectUseRecordList(condition,
                 start, limit, orderBy);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
@@ -86,10 +91,26 @@ public class WWWReportController extends CuBaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/donateRank")
-    @ResponseBody
-    public ResultResponse donateRank(int start, int limit, String orderBy) throws Exception {
+    public ResultResponse donateRank(String projectId,
+                                     int start, int limit, String orderBy) throws Exception {
 
-        List<Map<String, Object>> list = analysisService.donateRank(start, limit, orderBy);
+        List<Map<String, Object>> list = analysisService.donateRank(projectId, start, limit, orderBy);
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
+    }
+
+    /**
+     * 所有项目名称列表
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/projectList")
+    public ResultResponse projectList(String projectType) throws Exception {
+        if (CommonUtils.isEmpty(projectType)) {
+            projectType = "0,1,2";
+        }
+
+        List<CuProject> list = cuProjectService.findAllProjectList(projectType);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
     }
 }

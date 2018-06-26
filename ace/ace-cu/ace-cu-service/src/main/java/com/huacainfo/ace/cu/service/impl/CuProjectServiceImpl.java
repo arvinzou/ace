@@ -2,6 +2,7 @@ package com.huacainfo.ace.cu.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -10,9 +11,11 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuProjectDao;
 import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.model.CuProject;
+import com.huacainfo.ace.cu.model.CuProjectUseRecord;
 import com.huacainfo.ace.cu.service.CuDonateListService;
 import com.huacainfo.ace.cu.service.CuProjectService;
 import com.huacainfo.ace.cu.service.CuProjectUseRecordService;
@@ -310,6 +313,131 @@ public class CuProjectServiceImpl implements CuProjectService {
         }
 
         return new ResultResponse(ResultCode.FAIL, "更新失败", project);
+    }
+
+    /**
+     * 功能描述:  慈善项目审核
+     *
+     * @param: id cu_project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @Override
+    public MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp userProp) {
+        CuProject project = cuProjectDao.selectByPrimaryKey(id);
+        if (null == project) {
+            return new MessageResponse(ResultCode.FAIL, "项目资料丢失");
+        }
+        if (ProjectConstant.P_STATUS_PASSED.equals(project.getStatus())) {
+            return new MessageResponse(ResultCode.FAIL, "项目已审核，请勿重复审核!");
+        }
+
+        String status = "0".equals(auditResult.trim()) ?
+                ProjectConstant.P_STATUS_PASSED : ProjectConstant.P_STATUS_REJECTED;
+        project.setStatus(status);
+        project.setLastModifyDate(DateUtil.getNowDate());
+        project.setLastModifyUserId(userProp.getUserId());
+        project.setLastModifyUserName(userProp.getName());
+        cuProjectDao.updateByPrimaryKeySelective(project);
+
+
+        return new MessageResponse(ResultCode.FAIL, "审核成功!");
+    }
+
+    /**
+     * 分类插入项目
+     *
+     * @param obj
+     * @param type
+     * @param curUserProp
+     * @return
+     */
+    @Override
+    public MessageResponse insertCuProjectByType(CuProject obj, String type, UserProp curUserProp) throws Exception {
+        if (ProjectConstant.P_TYPE_PAY_OUT.equals(type)) {
+            return insertPayOutProject(obj, curUserProp);
+        }
+        return insertCuProject(obj, curUserProp);
+    }
+
+    @Override
+    public List<CuProject> findAllProjectList(String projectType) {
+
+        return cuProjectDao.findListByType(projectType.split(","));
+    }
+
+    /**
+     * 新增支出项目& 使用记录
+     *
+     * @param o
+     * @param userProp
+     * @return
+     */
+    private MessageResponse insertPayOutProject(CuProject o, UserProp userProp) throws Exception {
+        //生成支出项目资料
+        if (CommonUtils.isBlank(o.getProjectName())) {
+            return new MessageResponse(1, "项目名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getType())) {
+            return new MessageResponse(1, "项目类型不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getDescription())) {
+            return new MessageResponse(1, "项目详情不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getStartDate())) {
+            return new MessageResponse(1, "项目开始时间不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getEndDate())) {
+            return new MessageResponse(1, "项目结束时间不能为空！");
+        }
+        if (o.getTargetAmount().compareTo(BigDecimal.ZERO) <= 0) {
+            return new MessageResponse(1, "支出金额输入有误！");
+        }
+        //源头项目
+        CuProject srcProject = cuProjectDao.selectByPrimaryKey(o.getParentId());
+        if (null == srcProject) {
+            return new MessageResponse(1, "源项目资料丢失！");
+        }
+        int temp = this.cuProjectDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "慈善项目名称重复！");
+        }
+        o.setId(GUIDUtil.getGUID());
+        o.setParentId("0");
+        o.setStatus("1");
+        o.setCreateDate(DateUtil.getNowDate());
+        o.setCreateUserName(userProp.getName());
+        o.setCreateUserId(userProp.getUserId());
+        o.setLastModifyDate(DateUtil.getNowDate());
+        cuProjectDao.insertSelective(o);
+        dataBaseLogService.log("添加慈善项目", "慈善项目", "", o.getId(), o.getId(), userProp);
+
+        //生成使用记录;
+        CuProjectUseRecord record = new CuProjectUseRecord();
+        record.setProjectId(o.getParentId());
+        record.setUseProjectId(o.getId());
+        record.setUseAmount(o.getTargetAmount());
+        MessageResponse recordRs = cuProjectUseRecordService.insertCuProjectUseRecord(record, userProp);
+        if (!recordRs.getState()) {
+            throw new CustomException(ResultCode.FAIL, recordRs.getErrorMessage());
+        }
+        //调整源项目支出金额
+        BigDecimal useAmount = o.getTargetAmount();
+        BigDecimal payOutAmount = null == srcProject.getPayoutAmount() ?
+                useAmount : srcProject.getPayoutAmount().add(useAmount);
+        BigDecimal balanceAmount = srcProject.getCollectAmount().subtract(payOutAmount);
+        if (balanceAmount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new CustomException(ResultCode.FAIL, "项目资金不足");
+        }
+        srcProject.setPayoutAmount(payOutAmount);
+        srcProject.setBalanceAmount(balanceAmount);
+        srcProject.setLastModifyUserName(userProp.getName());
+        srcProject.setLastModifyUserId(userProp.getUserId());
+        srcProject.setLastModifyDate(DateUtil.getNowDate());
+        cuProjectDao.updateByPrimaryKeySelective(srcProject);
+
+        return new MessageResponse(ResultCode.SUCCESS, "成功添加使用记录！");
     }
 
     /**

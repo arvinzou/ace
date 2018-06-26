@@ -2,10 +2,12 @@ package com.huacainfo.ace.cu.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.cu.model.CuProject;
 import com.huacainfo.ace.cu.service.CuProjectService;
 import com.huacainfo.ace.cu.vo.CuProjectQVo;
@@ -71,7 +73,8 @@ public class CuProjectController extends CuBaseController {
     @ResponseBody
     public MessageResponse insertCuProject(String jsons) throws Exception {
         CuProject obj = JSON.parseObject(jsons, CuProject.class);
-        return this.cuProjectService.insertCuProject(obj, this.getCurUserProp());
+        return this.cuProjectService.insertCuProjectByType(obj, obj.getType(), this.getCurUserProp());
+        //insertCuProject(obj, this.getCurUserProp());
     }
 
     /**
@@ -123,5 +126,24 @@ public class CuProjectController extends CuBaseController {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
         return this.cuProjectService.deleteCuProjectByCuProjectId(id, this.getCurUserProp());
+    }
+
+
+    /**
+     * 功能描述:  慈善项目审核审核
+     *
+     * @param: id cu_project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @RequestMapping(value = "/audit")
+    @ResponseBody
+    public MessageResponse audit(String id, String auditResult, String auditOpinion) throws Exception {
+        if (CommonUtils.isEmpty(id)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必备参数");
+        }
+
+        return cuProjectService.audit(id, auditResult, auditOpinion, getCurUserProp());
     }
 }

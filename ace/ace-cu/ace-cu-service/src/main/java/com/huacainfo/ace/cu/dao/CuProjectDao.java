@@ -32,4 +32,5 @@ public interface CuProjectDao {
 
     int isExit(CuProject record);
 
+    List<CuProject> findListByType(@Param("types") String[] types);
 }

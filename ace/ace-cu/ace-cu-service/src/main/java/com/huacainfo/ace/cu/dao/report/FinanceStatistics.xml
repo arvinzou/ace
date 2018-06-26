@@ -8,5 +8,11 @@
         from cu.cu_project t
         where t.`status`=2
         and t.type in (0,1,2)
+        <if test="ids!=null and ids!=&quot;&quot;">
+            and t.id in
+            <foreach collection="ids" open="(" separator="," close=")" item="item">
+                #{item}
+            </foreach>
+        </if>
     </select>
 </mapper>

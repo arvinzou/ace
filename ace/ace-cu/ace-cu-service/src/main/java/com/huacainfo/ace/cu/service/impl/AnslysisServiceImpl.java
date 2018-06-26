@@ -1,6 +1,7 @@
 package com.huacainfo.ace.cu.service.impl;
 
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.cu.dao.report.ReportDao;
@@ -38,13 +39,18 @@ public class AnslysisServiceImpl implements AnalysisService {
     /**
      * 财务公开数额统计
      *
+     * @param projectId
      * @returnf
      */
     @Override
-    public Map<String, Object> financeStatistics() {
+    public Map<String, Object> financeStatistics(String projectId) {
         ReportDao dao = (ReportDao) SpringUtils.getBean("financeStatistics");
 
         Map<String, Object> condition = new HashMap<>();
+        if (!CommonUtils.isEmpty(projectId)) {
+            condition.put("ids", projectId.split(","));
+        }
+
         List<Map<String, Object>> mapList = dao.query(condition);
 
         return CollectionUtils.isEmpty(mapList) ? null : mapList.get(0);
@@ -53,16 +59,18 @@ public class AnslysisServiceImpl implements AnalysisService {
     /**
      * 慈善榜单
      *
+     * @param projectId
      * @param start
      * @param limit
      * @param orderBy
      * @return
      */
     @Override
-    public List<Map<String, Object>> donateRank(int start, int limit, String orderBy) {
+    public List<Map<String, Object>> donateRank(String projectId, int start, int limit, String orderBy) {
         ReportDao dao = (ReportDao) SpringUtils.getBean("donateRank");
 
         Map<String, Object> condition = new HashMap<>();
+        condition.put("projectId", projectId);
         condition.put("start", start);
         condition.put("limit", limit);
         condition.put("orderBy", orderBy);

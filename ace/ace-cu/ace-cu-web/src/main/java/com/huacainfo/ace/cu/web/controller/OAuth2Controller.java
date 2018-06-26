@@ -62,6 +62,7 @@ public class OAuth2Controller extends CuBaseController {
             this.logger.info("==================={}  in session ======================", rst.getValue().getNickname());
             this.getRequest().getSession().setAttribute(CommonKeys.SESSION_USERINFO_KEY, rst.getValue());
 //            response.sendRedirect(request.getContextPath()+"/www/view/me/index.jsp");
+            response.sendRedirect(request.getHeader("referer"));
         } else {
             response.sendRedirect(request.getContextPath() + "/www/view/me/error.jsp");
         }

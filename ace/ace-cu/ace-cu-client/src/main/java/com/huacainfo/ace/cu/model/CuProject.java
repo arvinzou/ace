@@ -9,7 +9,15 @@ public class CuProject implements Serializable {
 
     private String id;
 
+    /**
+     * 父类项目ID
+     */
     private String parentId;
+
+    /**
+     * 父类项目名称
+     */
+    private String parentProjectName;
 
     private String projectName;
 
@@ -57,6 +65,14 @@ public class CuProject implements Serializable {
     private Date lastModifyDate;
 
     private String description;
+
+    public String getParentProjectName() {
+        return parentProjectName;
+    }
+
+    public void setParentProjectName(String parentProjectName) {
+        this.parentProjectName = parentProjectName;
+    }
 
     public String getId() {
         return id;

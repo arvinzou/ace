@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.plugins.wechat.util.WeChatPayUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.cu.common.constant.OrderConstant;
+import com.huacainfo.ace.cu.dao.WxPayLogDao;
 import com.huacainfo.ace.cu.model.WxPayLog;
 import com.huacainfo.ace.cu.service.CuDonateOrderService;
 import org.slf4j.Logger;
@@ -33,6 +34,8 @@ import java.util.TreeMap;
 public class WWWWxPayController extends CuBaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired
+    private WxPayLogDao wxPayLogDao;
 
     @Autowired
     private CuDonateOrderService cuDonateOrderService;
@@ -120,6 +123,13 @@ public class WWWWxPayController extends CuBaseController {
             String json = XmlUtil.xmltoJson(xml);
             logger.debug("WWWWxPayController.weChatPayCallBack.json={}", json);
             WxPayLog wxPayLog = JsonUtil.toObject(json, WxPayLog.class);
+            wxPayLog.setId(GUIDUtil.getGUID());
+            wxPayLog.setStatus("1");
+            wxPayLog.setCreateUserId("0000-0000");
+            wxPayLog.setCreateUserName("system");
+            wxPayLog.setCreateDate(DateUtil.getNowDate());
+            wxPayLog.setLastModifyDate(DateUtil.getNowDate());
+            wxPayLogDao.insert(wxPayLog);
             try {
                 //订单支付逻辑
                 ResultResponse resultResponse = cuDonateOrderService.pay(wxPayLog, OrderConstant.PAY_TYPE_WX);
@@ -132,5 +142,21 @@ public class WWWWxPayController extends CuBaseController {
                 logger.error("WWWWxPayController.weChatPayCallBack/wechat/pay/callback.pay.error => {}", e);
             }
         }
+    }
+
+
+    @RequestMapping(value = "/payBackTest")
+    @ResponseBody
+    public ResultResponse payBackTest(String xml) {
+
+        String json = XmlUtil.xmltoJson(xml);
+        logger.debug("WWWWxPayController.weChatPayCallBack.json={}", json);
+        WxPayLog wxPayLog = JsonUtil.toObject(json, WxPayLog.class);
+        //订单支付逻辑
+        ResultResponse resultResponse = cuDonateOrderService.pay(wxPayLog, OrderConstant.PAY_TYPE_WX);
+        logger.info("Xml: {},\n  DealResult:{}", xml, resultResponse);
+
+
+        return resultResponse;
     }
 }
