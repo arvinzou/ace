@@ -121,3 +121,15 @@ function hoverli(divId){
 	$("#"+divId).removeClass('undis').addClass('dis');
 	$("#"+divId).siblings().removeClass('dis').addClass('undis');
 }
+
+function troggle(obj){
+    if($(obj).attr("name") == "down"){   //down展开，up收起
+        $(obj).parent().siblings(".project_record_info").removeClass("troggle");
+        $(obj).html("<span class=\"opt\">收起</span><img src=\"img/up.png\" style=\"width: 0.3rem;height: 0.2rem;\">");
+        $(obj).attr("name", "up");
+    }else{
+        $(obj).parent().siblings(".project_record_info").addClass("troggle");
+        $(obj).html("<span class=\"opt\">展开</span><img  src=\"img/down.png\" style=\"width: 0.3rem;height: 0.2rem;\">");
+        $(obj).attr("name", "down");
+    }
+}
