@@ -51,10 +51,6 @@ app.controller(ngControllerName,function($scope){
     $("s").click(function (e) {
         SelCity(document.getElementById("city"), e);
     });
-    $("#city").change = function(){
-        $scope.searchByParam();
-    }
-
     $('#coperationType').comboboxfilter({
         url: '',
         scope: 'FilterQuery1',

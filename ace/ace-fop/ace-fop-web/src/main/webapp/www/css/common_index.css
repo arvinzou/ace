@@ -7,11 +7,11 @@ li {
     cursor: pointer;
 }
 
-table {
+.notice_list table {
     table-layout: fixed;
 }
 
-td {
+.notice_list td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
