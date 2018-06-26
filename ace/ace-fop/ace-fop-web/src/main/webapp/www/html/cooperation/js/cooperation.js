@@ -63,6 +63,7 @@ app.controller(ngControllerName,function($scope){
     });
     $("#city_modal").click(function (e) {
         SelmCity(this, e);
+        $scope.searchByParam();
     });
     $("s").click(function (e) {
         SelCity(document.getElementById("city"), e);
