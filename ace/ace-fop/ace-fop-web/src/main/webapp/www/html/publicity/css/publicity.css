@@ -166,6 +166,8 @@ textarea {
 #key_word{
     width: 200px;
     height: 35px;
+    float: left;
+    background-color: #fff;
 }
 .searchButton{
     padding-top: 0;
