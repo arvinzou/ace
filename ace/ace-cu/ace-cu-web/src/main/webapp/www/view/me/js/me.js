@@ -42,8 +42,12 @@ app.controller(ngControllerName,function($scope){
                 var total=0;
                 var points = 0;
                 for(var i=0; i<len; i++){
-                    total += parseFloat(arr[i].donateAmount);
-                    points += parseInt(arr[i].points);
+                    if(arr[i].donateAmount !='' && arr[i].donateAmount!=undefined){
+                        total += parseFloat(arr[i].donateAmount);
+                    }
+                    if(arr[i].points !='' && arr[i].points!=undefined){
+                        points += parseInt(arr[i].points);
+                    }
                 }
                 $scope.totalAmount = total;
                 $scope.totalPoint = points;

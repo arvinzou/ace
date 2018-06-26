@@ -2,7 +2,6 @@ var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
 var isBill = false;        //是否需要票据信息
-var isName = false;        //是否匿名捐赠
 var isCustom = false;      //是否选择自定义金额
 var donateMoney = 0;       //捐款金额
 var needReceipt = 0;       //是否需要票据，0不需要，1是需要
@@ -43,7 +42,7 @@ app.controller(ngControllerName,function($scope) {
     });
     area1.value = [1, 13, 3]; //控制初始位置，注意：该方法并不会影响到input的value
 
-    $("#no").click(function(){
+   /* $("#no").click(function(){
         $(this).hide();
         $(this).siblings().show();
         isName = true;
@@ -52,7 +51,7 @@ app.controller(ngControllerName,function($scope) {
         $(this).hide();
         $(this).siblings().show();
         isName = false;
-    });
+    });*/
 
     $scope.donateMoney = function(){
     	var realName = $("#realName").val();    //捐款人姓名
@@ -63,10 +62,6 @@ app.controller(ngControllerName,function($scope) {
 		var sheng = null;    //省份
 		var shi  = null;     //市
 		var qu = null;       //区
-		if(phoneNum == null || phoneNum == undefined || phoneNum == ''){
-			alert("电话不能为空！");
-			return;
-		}
 		if(isBill){
             largeAddress = $("#demo1").val();
             smallAddress = $("#detailAddress").val();
@@ -84,17 +79,15 @@ app.controller(ngControllerName,function($scope) {
 			}
             needReceipt = 1;
 		}
-		if(!isName){      //非匿名捐赠，姓名不能为空
-			if(realName == null || realName == undefined || realName == ''){
-				alert("捐款人姓名不能为空！");
-				return;
-			}
-		}
 		if(isCustom){
             donateMoney = $("#amountMoney").val();
             if(donateMoney == null || donateMoney == undefined || donateMoney == ''){
             	alert("请输入捐款金额！");
             	return;
+            }
+            if(!isMoney(donateMoney)){
+                alert("输入金额格式不正确！");
+                return;
             }
         }
 
@@ -114,7 +107,7 @@ app.controller(ngControllerName,function($scope) {
 					"city": shi,
 					"district": qu,
 					"address":smallAddress,
-					"donateDate":"2016-06-23"
+					"remark": message
 				})
 			    },
             success:function(result){
@@ -218,4 +211,19 @@ function inputMoney(obj) {
 	$(obj).parent().siblings(".money_01").find("span").removeClass("lightborder");
 	$("#amountMoney").show();
     isCustom = true;
+}
+
+/**
+ * 判断输入金额是否合法
+ * @param s
+ * @returns {boolean}
+ */
+function isMoney(s) {
+    var regu = "^[0-9]+[\.][0-9]{0,3}$";
+    var re = new RegExp(regu);
+    if (re.test(s)) {
+        return true;
+    } else {
+        return false;
+    }
 }

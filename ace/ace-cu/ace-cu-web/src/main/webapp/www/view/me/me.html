@@ -116,7 +116,8 @@
 								<p class="score_time" ng-bind="record.donateDate"></p>
 							</div>
 							<div class="score_list_right">
-								<p ng-bind="record.points"></p>
+								<p ng-if="record.points!=''&&record.points!=undefined" ng-cloak>+{{record.points}}</p>
+								<p ng-if="record.points==''||record.points==undefined" ng-cloak>+0</p>
 							</div>
 						</div>
 					</div>

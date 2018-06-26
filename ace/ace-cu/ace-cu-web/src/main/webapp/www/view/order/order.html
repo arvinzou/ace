@@ -29,20 +29,20 @@
 						<span onclick="selectMoney(this, 100.00);">¥ 100.00</span>
 					</div>
 					<div class="money_02">
-						<span onclick="inputMoney(this);" class="other_amount">输入其他金额</span>
-						<input id="amountMoney" style="display: none;" class="amount" type="text" placeholder="请输入金额" />
+						<!--<span onclick="inputMoney(this);" class="other_amount">输入其他金额</span>-->
+						<input onclick="inputMoney(this);" id="amountMoney"   class="other_amount" type="text" placeholder="请输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='请输入金额'" />
 					</div>
 					<div class="title_01">捐款信息</div>
 					<div class="form">
 						<p>
 							<span class="form_title">捐款人姓名</span>
-							<input id="realName" class="form_text" type="text" placeholder="请输入捐款人姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款人姓名'" />
+							<input id="realName" class="form_text" maxlength="10" type="text" placeholder="请输入捐款人姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款人姓名'" />
 						</p>
 					</div>
 					<div class="form">
 						<p>
 							<span class="form_title">联系电话</span>
-							<input id="phoneNum" class="form_text" type="text" placeholder="请输入联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入联系电话'" />
+							<input id="phoneNum" maxlength="11" class="form_text" type="text" placeholder="请输入联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入联系电话'" />
 						</p>
 					</div>
 					<div class="form_max">
@@ -51,13 +51,13 @@
 							<textarea id="message" placeholder="请填写留言内容" onfocus="this.placeholder=''" onblur="this.placeholder='请填写留言内容'"></textarea>
 						</p>
 					</div>
-					<div class="form">
+					<!--<div class="form">
 						<div class="left_none">匿名捐赠</div>
 						<div class="right_none">
 							<span id="no"><img src="img/no.png" style="width: 0.5rem;height: 0.5rem;"/></span>
 							<span id="yes" style="display: none;"><img src="img/yes.png" style="width: 0.5rem;height: 0.5rem;"/></span>
 						</div>
-					</div>
+					</div>-->
 					<div class="form">
 						<div class="switch_title">是否需要票据</div>
 						<div class="testswitch">
@@ -89,5 +89,4 @@
 			<div class="btnDiv"><button class="donateBtn" ng-click="donateMoney();">立即捐款</button></div>
 		</div>
 	</body>
-
 </html>
