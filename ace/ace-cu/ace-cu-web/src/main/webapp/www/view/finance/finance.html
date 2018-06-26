@@ -2,14 +2,18 @@
 <html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>财务公开</title>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
 		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="js/mobileSelect.min.js"></script>
 		<script type="text/javascript" src="../js/nav.js"></script>
 		<link rel="stylesheet" type="text/css" href="../css/nav.css"/>
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<link rel="stylesheet" type="text/css" href="css/mobileSelect.css"/>
 		<link rel="stylesheet" type="text/css" href="css/finance.css"/>
 		<script type="text/javascript" src="js/finance.js"></script>
 	</head>
@@ -17,7 +21,10 @@
 		<div class="financebox">
 			<div class="finance_total">
 				<div class="finance_total_01" ng-bind="staticsTotal"></div>
-				<div class="finance_total_02">募集总金额(元)</div>
+				<div class="finance_total_02">
+					<span>募集总金额(元)</span>
+					<span id="trigger1">筛选</span>
+				</div>
 			</div>
 			<div class="finance_title_nav">
 				<!--<div class="finance_nav">-->
@@ -28,7 +35,7 @@
 					<div class="navigation">
 						<div class="news-title">
 							<ul class="news-module finance_nav_ul clear">
-								<li class="active" onclick="hoverli('raise');">募集资金</li>
+								<li class="active"  onclick="hoverli('raise');">募集资金</li>
 								<li onclick="hoverli('pay');">支出资金</li>
 							</ul>
 							<div class="news-slider"></div>
