@@ -205,6 +205,7 @@ function selectMoney(obj, amount) {
 	$(obj).addClass("lightborder");
 	$(obj).siblings().removeClass("lightborder");
 	$(obj).parent().siblings(".money_02").find("span").removeClass("lightborder");
+    $("#amountMoney").removeClass("lightborder");
     donateMoney = amount;
     console.log(donateMoney);
     isCustom = false;
