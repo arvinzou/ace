@@ -30,7 +30,7 @@
 					</div>
 					<div class="money_02">
 						<!--<span onclick="inputMoney(this);" class="other_amount">输入其他金额</span>-->
-						<input onclick="inputMoney(this);" id="amountMoney"   class="other_amount" type="text" placeholder="请输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='请输入金额'" />
+						<input onclick="inputMoney(this);" type='number' id="amountMoney"   class="other_amount" type="text" placeholder="请输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='请输入金额'"  />
 					</div>
 					<div class="title_01">捐款信息</div>
 					<div class="form">
@@ -89,4 +89,49 @@
 			<div class="btnDiv"><button class="donateBtn" ng-click="donateMoney();">立即捐款</button></div>
 		</div>
 	</body>
+<script type="text/javascript">
+    var me = window;
+    (function init(){
+        me.number = getId('amountMoney');
+        me.n = '';
+        initEvent();
+
+        function initEvent(){
+            me.number.addEventListener('keyup', number, false);
+        }
+        function getId(id){
+            return document.getElementById(id);
+        }
+        function number(){//金额，
+            console.log(this.value);
+            if(this.value == ''){//校验，用户输入后，输入框的值是否为数字，当不为数字时，取到的为空
+                this.value='';
+                this.value = me.n;
+                return
+            }
+            if(!/^\d{0,9}\.{0,1}(\d{1,2})?$/.test(this.value)){//校验不超过两位小数
+                this.value = me.n;
+            }
+            if(window.event.keyCode != 8){
+                if(this.value%1==0 && me.n==this.value){//当用户按下非删除键时，新值和旧值相同,旧值为整数
+                    return
+                }
+                if(me.n.indexOf(".")>-1 && me.n==this.value){//当用户按下非删除键时，新值和旧值相同,旧值为小数
+                    this.value='';
+                    this.value = me.n;
+                    return
+                }
+            }else{
+                if(me.n.indexOf(".")>-1 && this.value.indexOf(".")<0){//当按下删除时，删掉小数点时
+                    me.n = this.value;
+                    return
+                }
+            }
+            /* me.n = this.value*/
+            if(me.n.indexOf(".")>0){
+                this.value = me.n;
+            }
+        }
+    }())
+</script>
 </html>

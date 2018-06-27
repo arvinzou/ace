@@ -85,10 +85,6 @@ app.controller(ngControllerName,function($scope) {
             	alert("请输入捐款金额！");
             	return;
             }
-            if(!isMoney(donateMoney)){
-                alert("输入金额格式不正确！");
-                return;
-            }
         }
 
         $.ajax({
@@ -200,7 +196,6 @@ function selectMoney(obj, amount) {
 	$(obj).addClass("lightborder");
 	$(obj).siblings().removeClass("lightborder");
 	$(obj).parent().siblings(".money_02").find("span").removeClass("lightborder");
-	$("#amountMoney").hide();
     donateMoney = amount;
     console.log(donateMoney);
     isCustom = false;
