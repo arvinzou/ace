@@ -20,7 +20,8 @@
 		<div class="projectbox">
 			<div class="project_item">
 				<div class="project_item_image">
-					<img src="img/project.png" width="100%" height="100%" />
+					<img ng-if="projectInfo.coverUrl!=''&&projectInfo.coverUrl!=undefined&&projectInfo.coverUrl!=null" ng-src="{{projectInfo.coverUrl}}" width="100%" height="100%" />
+					<img ng-if="projectInfo.coverUrl==''||projectInfo.coverUrl==undefined||projectInfo.coverUrl==null" ng-src="img/default.png" width="100%" height="100%" />
 				</div>
 				<div class="project_item_name">
 					<p class="name_01" ng-bind="projectInfo.projectName"></p>
