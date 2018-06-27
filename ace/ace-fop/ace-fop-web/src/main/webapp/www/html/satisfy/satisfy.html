@@ -46,8 +46,9 @@
 										<td align="center" width="5%">
 											<div class="dot"></div>
 										</td>
-										<td  width="15%" ng-bind="item.releaseDate | formatDate"></td>
+
 										<td style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden; " ng-bind="item.content"></td>
+										<td class="time" width="15%" ng-bind="item.releaseDate | formatDate"></td>
 									</tr>
 								</tbody>
 							</table>
