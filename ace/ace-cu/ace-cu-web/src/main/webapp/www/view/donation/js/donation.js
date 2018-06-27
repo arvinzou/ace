@@ -3,6 +3,7 @@ var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
 var recordList = [];
 var type = "";
+var status = null;
 app.controller(ngControllerName,function($scope){
 	var locaUrl = window.location.href;
     var url = window.location.href.substring(locaUrl.indexOf("?")+1);
@@ -35,6 +36,7 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 $scope.projectInfo = result.data;
                 $("#projectDetail").html(result.data.description);
+                status = result.data.status;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
@@ -110,7 +112,11 @@ app.controller(ngControllerName,function($scope){
     });
 
     $scope.donate = function(){
-        window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
+        if(status != '2'){
+            alert("该项目未审核通过！")
+        }else{
+            window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
+        }
     }
 });
 app.filter('to_trusted', function ($sce) {
