@@ -5,6 +5,9 @@
 body{
 	background-color: #F7F9FC;
 }
+input,textarea{
+	outline: none;
+}
 .order_box{
 	width: 10rem;
 }

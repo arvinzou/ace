@@ -8,13 +8,16 @@ body{
 .applybox{
 	width: 10rem;
 }
+input, textarea{
+	outline: none;
+}
 .plate_01{
 	width: 9rem;
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
 	background-color: #FFFFFF;
 	margin-top: 0.5rem;
-	height: 12rem;
+	height: 12.5rem;
 }
 .plate_02{
 	width: 9rem;
@@ -32,14 +35,17 @@ body{
 	font-size: 0.45rem;
 	font-weight: bold;
 	text-align: center;
+	padding-top: 0.2rem;
 }
 .title02{
 	width: 8rem;
 	height: 1rem;
+	line-height: 1rem;
 	margin: auto;
-	font-size: 0.45rem;
+	font-size: 0.4rem;
 	color: #333333;
 	font-weight: bold;
+	padding-top: 0.2rem;
 }
 .imagebox{
 	width: 0.6rem;
