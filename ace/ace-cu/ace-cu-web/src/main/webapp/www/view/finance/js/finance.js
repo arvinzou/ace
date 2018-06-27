@@ -93,6 +93,8 @@ app.controller(ngControllerName,function($scope){
                     project.push(item);
                     item = {id : "", value: ""};
                 }
+                item = {id: null, value: "全部"};
+                project.push(item);
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
