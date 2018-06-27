@@ -348,8 +348,9 @@ input[type="checkbox"] {
 
 .leftmenuul {
     border: 1px solid #E1E5ED;
-    border-top: 3px solid #FF9F00;
+
     margin-top: 20px;
+    padding: 4px 20px 20px 20px;
 }
 
 .leftmenuul span {
@@ -367,7 +368,7 @@ input[type="checkbox"] {
     list-style: none;
     overflow: visible;
     /*border-bottom: 1px solid #E1E5ED;*/
-    border-top: 1px solid #E1E5ED;
+    border-top: 1px dashed #E1E5ED;
     padding-left: 10px;
 }
 

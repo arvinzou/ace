@@ -88,13 +88,14 @@ body{
 	height: 30px;
 }
 .category span{
-	width: 80px;
-	height: 30px;
-	line-height: 30px;
+    width: 102px;
+    height: 36px;
+    line-height: 36px;
 	text-align: center;
 	display: inline-block;
-	font-size: 16px;
-	font-weight: bolder;
+    font-size: 14px;
+    /* font-weight: bolder; */
+    margin-right: 11px;
 }
 .unactive{
 	background-color: #f5f7f9;

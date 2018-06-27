@@ -29,9 +29,12 @@
                 <td class="main_box" valign="top">
                     <div class="main">
                         <div class="title01">
-                            <span class="title_lager">诚信建设</span><span class="title_small">/&nbsp;credit construction</span>
+                            <span class="title_lager">诚信建设</span><span
+                                class="title_small">/&nbsp;Credit Construction</span>
                             <div class="sincerity_type">
-                                <select  id="sincerity_type" ng-model="category" ng-options="s.id as s.name for s in categorys" ng-change="change();">
+                                <select style=" border: 1px solid #e1e5ed;height: 30px;padding: 0px 9px;"
+                                        id="sincerity_type" ng-model="category"
+                                        ng-options="s.id as s.name for s in categorys" ng-change="change();">
                                 </select>
                             </div>
                         </div>
@@ -42,9 +45,10 @@
                                     <td align="center" width="15px">
                                         <div class="dot"></div>
                                     </td>
-                                    <td align="center" width="20%" ng-bind="item.releaseDate"></td>
+
                                     <td ng-bind="item.title"></td>
                                     <td width="10%" ng-bind="item.companyName"></td>
+                                    <td class="time" align="center" width="20%" ng-bind="item.releaseDate"></td>
                                 </tr>
                                 </tbody>
                             </table>

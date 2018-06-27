@@ -17,12 +17,23 @@
 	padding-right: 15px;
 	padding-bottom: 30px;
 }
+
 .content{
 	width: 100%;
 	background-color: #FFFFFF;
 }
 .project_list {
 	color: #657180;
+}
+
+.search {
+	padding-top: 20px;
+}
+
+.search:after {
+	content: "";
+	display: block;
+	clear: both;
 }
 
 .project_title {
@@ -48,12 +59,9 @@
 	height: 30px;
 }
 
-.search {
-    padding-top: 30px;
-}
 
 .search_list {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 .search_filter1 {
@@ -109,7 +117,6 @@
 	color: #FFFFFF;
 	display: inline-block;
 	width: 90%;
-	border-bottom: 1px solid #E1E5ED;
 	height: 62px;
 	line-height: 62px;
 	vertical-align: bottom;
@@ -147,7 +154,7 @@
 .tab_title_ul {
 	width: 100%;
     height: 92px;
-    padding-top: 30px;
+	padding-top: 12px;
 	position: relative;
 }
 
@@ -167,17 +174,16 @@
 	background-color: #1A56A8;
 	border: none;
 	border-radius: 5px;
-	margin-top: 30px;
+	margin-top: 14px;
 }
 
 .finance_list_title {
 	height: 62px;
 	line-height: 62px;
-	margin-bottom: 30px;
 }
 
 .table_div table {
-	border-bottom: 1px solid #E1E5ED;
+	border-bottom: 1px dashed #E1E5ED;
 	cursor: pointer;
 }
 
@@ -185,7 +191,7 @@
 	color: #565B70;
 	font-weight: bolder;
 	font-size: 18px;
-	width: 12%;
+	width: 8%;
 	display: inline-block;
 	border-bottom: 3px solid #FF9F00;
 	height: 62px;
@@ -195,8 +201,7 @@
 .title_small {
 	color: #C3CBD6;
 	display: inline-block;
-	width: 88%;
-	border-bottom: 1px solid #E1E5ED;
+	width: 92%;
 	height: 62px;
 	line-height: 62px;
 }
