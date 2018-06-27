@@ -25,7 +25,7 @@
 				</div>
 				<div class="project_item_name">
 					<p class="name_01" ng-bind="projectInfo.projectName"></p>
-					<p class="name_02" ng-bind="projectInfo.title"></p>
+					<p ng-if="type != 2" class="name_02" ng-bind="projectInfo.title"></p>
 				</div>
 				<div class="project_item_raise">
 					<div class="raise_01">
