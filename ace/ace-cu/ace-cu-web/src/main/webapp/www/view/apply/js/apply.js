@@ -11,7 +11,7 @@ app.controller(ngControllerName,function($scope){
 	var uploader1 = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
             browse_button: 'positive',
-            url: '/portal/www//upload.do',
+            url: '/portal/www/upload.do',
             file_data_name: 'file',
             multi_selection: false,
             resize: {
@@ -24,7 +24,7 @@ app.controller(ngControllerName,function($scope){
             filters: {
                 max_file_size: '2048mb',
                 mime_types: [
-                    {title: "Image files", extensions: "jpg,gif,png"}
+                   /* {title: "Image files", extensions: "jpg,gif,png,jpeg"}*/
                 ]
             },
             init: {
@@ -50,7 +50,7 @@ app.controller(ngControllerName,function($scope){
         var uploader2 = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
             browse_button: 'unpositive',
-            url: '/portal/www//upload.do',
+            url: '/portal/www/upload.do',
             file_data_name: 'file',
             multi_selection: false,
             resize: {
@@ -63,7 +63,7 @@ app.controller(ngControllerName,function($scope){
             filters: {
                 max_file_size: '2048mb',
                 mime_types: [
-                    {title: "Image files", extensions: "jpg,gif,png"}
+                   /* {title: "Image files", extensions: "jpg,gif,png,jpeg"}*/
                 ]
             },
             init: {
@@ -88,7 +88,7 @@ app.controller(ngControllerName,function($scope){
          var uploader3 = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
             browse_button: 'prove1',
-            url: '/portal/www//upload.do',
+            url: '/portal/www/upload.do',
             file_data_name: 'file',
             multi_selection: false,
             resize: {
@@ -101,7 +101,7 @@ app.controller(ngControllerName,function($scope){
             filters: {
                 max_file_size: '2048mb',
                 mime_types: [
-                    {title: "Image files", extensions: "jpg,gif,png"}
+                    {title: "Image files", extensions: "jpg,gif,png,jpeg"}
                 ]
             },
             init: {
@@ -126,7 +126,7 @@ app.controller(ngControllerName,function($scope){
         var uploader4 = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
             browse_button: 'prove2',
-            url: '/portal/www//upload.do',
+            url: '/portal/www/upload.do',
             file_data_name: 'file',
             multi_selection: false,
             resize: {
@@ -139,7 +139,7 @@ app.controller(ngControllerName,function($scope){
             filters: {
                 max_file_size: '2048mb',
                 mime_types: [
-                    {title: "Image files", extensions: "jpg,gif,png"}
+                   /* {title: "Image files", extensions: "jpg,gif,png,jpeg"}*/
                 ]
             },
             init: {
