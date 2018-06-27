@@ -77,6 +77,14 @@ app.controller(ngControllerName,function($scope) {
             	alert("请输入详细地址！");
             	return;
 			}
+			if(realName == null || realName == undefined || realName ==''){
+                alert("收货人姓名不能为空！");
+                return;
+            }
+            if(phoneNum == null || phoneNum == undefined || phoneNum ==''){
+                alert("联系电话不能为空！");
+                return;
+            }
             needReceipt = 1;
 		}
 		if(isCustom){
@@ -84,10 +92,6 @@ app.controller(ngControllerName,function($scope) {
             if(donateMoney == null || donateMoney == undefined || donateMoney == ''){
             	alert("请输入捐款金额！");
             	return;
-            }
-            if(!isMoney(donateMoney)){
-                alert("输入金额格式不正确！");
-                return;
             }
         }
 
@@ -100,9 +104,11 @@ app.controller(ngControllerName,function($scope) {
                     "projectId": projectId,
 					"donateAmount": donateMoney,
 					"donateName": realName,
+                    "consigneeName": realName,
 					"mobileNumber": phoneNum,
 					"payType" : 0,     //0微信支付，1银行卡支付
 					"needReceipt":needReceipt,
+                    "country":"中国",
 					"province": sheng,
 					"city": shi,
 					"district": qu,
@@ -116,34 +122,33 @@ app.controller(ngControllerName,function($scope) {
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
-                }else {
-                    alert(result.info);
-                    return;
-                }
-            },
-            error:function(){
-                alert("系统服务内部异常！");
-                return;
-            }
-        });
-
-        $.ajax({
-            url: "/cu//www/wxpay/unifiedorder",
-            type:"post",
-            async:false,
-            data:{
-                fee: orderResultData.donateAmount,
-                body: orderResultData.orderNo,
-                attach: orderResultData.id
-            },
-            success:function(result){
-                if(result.status == 0) {
-                    payData = result.data;
-                    onBridgeReady(payData);
-                    console.log(result);
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
+                    $.ajax({
+                        url: "/cu//www/wxpay/unifiedorder",
+                        type:"post",
+                        async:false,
+                        data:{
+                            fee: orderResultData.donateAmount,
+                            body: orderResultData.orderNo,
+                            attach: orderResultData.id
+                        },
+                        success:function(result){
+                            if(result.status == 0) {
+                                payData = result.data;
+                                onBridgeReady(payData);
+                                console.log(result);
+                                if (!$scope.$$phase) {
+                                    $scope.$apply();
+                                }
+                            }else {
+                                alert(result.info);
+                                return;
+                            }
+                        },
+                        error:function(){
+                            alert("系统服务内部异常！");
+                            return;
+                        }
+                    });
                 }else {
                     alert(result.info);
                     return;
@@ -200,7 +205,6 @@ function selectMoney(obj, amount) {
 	$(obj).addClass("lightborder");
 	$(obj).siblings().removeClass("lightborder");
 	$(obj).parent().siblings(".money_02").find("span").removeClass("lightborder");
-	$("#amountMoney").hide();
     donateMoney = amount;
     console.log(donateMoney);
     isCustom = false;

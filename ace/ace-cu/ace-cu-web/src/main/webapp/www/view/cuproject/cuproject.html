@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<div class="cubox">
-			<div class="project_title">凝聚 <span class="project_title01">468.060.208 </span>份爱心</div>
+			<!--<div class="project_title">凝聚 <span class="project_title01">468.060.208 </span>份爱心</div>-->
 			<div class="projectlist" ng-repeat="item in items">
 				<div class="project_item">
 					<div class="project_image">
@@ -21,9 +21,7 @@
 					</div>
 					<div class="slogan" ng-bind="item.projectName"></div>
 					<div class="slogan01" ng-bind="item.title">为贫困学子点燃希望，筑梦前行</div>
-					<div class="operation">
-						<button ng-click="help(item.id)">给予帮助</button>
-					</div>
+					<button class="operation"  ng-click="help(item.id)">给予帮助</button>
 				</div>
 			</div>
 		</div>
