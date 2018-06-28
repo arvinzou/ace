@@ -1020,6 +1020,10 @@ input[type="checkbox"] {
     max-height: 1400px;
 }
 
+.searchTable table {
+    table-layout: fixed;
+}
+
 #paganation {
     padding-bottom: 25px;
 }
@@ -1178,6 +1182,7 @@ input[type="checkbox"] {
     white-space:nowrap;
     text-overflow:ellipsis;
     overflow: hidden;
+    padding-right: 30px;
 }
 
 .searchTable td:hover {

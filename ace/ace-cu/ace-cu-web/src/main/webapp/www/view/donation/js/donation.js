@@ -2,11 +2,27 @@ var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
 var recordList = [];
+var type = "";
+var status = null;
 app.controller(ngControllerName,function($scope){
-	console.log(window.location.href);
-    var url = window.location.href.substring(1);
-    var primaryId = url.substring(url.indexOf('=')+1);
-    console.log(primaryId);
+	var locaUrl = window.location.href;
+    var url = window.location.href.substring(locaUrl.indexOf("?")+1);
+    var primaryId = null;
+    var paramArr = url.split("&");
+    for(var i=0;i < paramArr.length;i++){
+        num=paramArr[i].indexOf("=");
+        if(num>0){
+            name=paramArr[i].substring(0,num);
+            value=paramArr[i].substr(num+1);
+            if(name == "type"){
+                type = value;
+                $scope.type = type;
+            }
+            if(name == "projectId"){
+                primaryId = value;
+            }
+        }
+    }
     
     /**
      * 项目详情
@@ -20,11 +36,12 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 $scope.projectInfo = result.data;
                 $("#projectDetail").html(result.data.description);
+                status = result.data.status;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
             }else {
-                alert(errorMessage);
+                alert(result.info);
             }
         },
         error:function(){
@@ -79,7 +96,7 @@ app.controller(ngControllerName,function($scope){
                     $scope.$apply();
                 }
             }else {
-                alert(errorMessage);
+                alert(result.info);
             }
         },
         error:function(){
@@ -95,7 +112,11 @@ app.controller(ngControllerName,function($scope){
     });
 
     $scope.donate = function(){
-        window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
+        if(status != '2'){
+            alert("该项目未审核通过！")
+        }else{
+            window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
+        }
     }
 });
 app.filter('to_trusted', function ($sce) {
@@ -117,6 +138,12 @@ app.directive('onFinishRenderFilters', function ($timeout) {
         }
     };
 });
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        return text.substring(0,10);
+    }
+});
+
 function hoverli(divId){
 	$("#"+divId).removeClass('undis').addClass('dis');
 	$("#"+divId).siblings().removeClass('dis').addClass('undis');

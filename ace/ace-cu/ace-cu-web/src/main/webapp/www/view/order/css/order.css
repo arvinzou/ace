@@ -59,6 +59,7 @@ input,textarea{
 .money_02{
 	width: 100%;
 	height: 1.6rem;
+	line-height: 1.6rem;
 	border-bottom: 1px solid #E4E6E9;
 }
 .other_amount{
@@ -66,7 +67,6 @@ input,textarea{
 	height: 1rem;
 	display: block;
 	float: left;
-	line-height: 1rem;
 	text-align: center;
 	background-color: #FBDAD7;
 	border-radius: 0.2rem;

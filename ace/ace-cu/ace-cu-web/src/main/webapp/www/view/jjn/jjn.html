@@ -14,21 +14,24 @@
 	<body>
 		<div class="mainbox">
 			<div class="banner">
-				<div class="banner_title">特别求助</div>
-				<div class="banner_info">爱的帮助，见证爱心奇迹</div>
+				<!--<div class="banner_title">特别求助</div>
+				<div class="banner_info">爱的帮助，见证爱心奇迹</div>-->
+                <img src="img/default.png" style="width: 100%;height: 100%;"/>
 			</div>
 			<div class="raisebox">
 				<div class="raise_item" ng-repeat="item in items" ng-click="showProjectInfo(item.id)">
 					<div class="raise_item_image">
-						<img ng-src="{{item.coverUrl}}" width="100%" height="100%"/>
+						<img ng-if="item.coverUrl!=''&&item.coverUrl!=undefined&&item.coverUrl!=null" ng-src="{{item.coverUrl}}" width="100%" height="100%"/>
+						<img ng-if="item.coverUrl==''||item.coverUrl==undefined||item.coverUrl==null" ng-src="img/project_default.png" width="100%" height="100%"/>
 					</div>
 					<div class="raise_item_cnt">
 						<div class="raise_item_title" ng-bind="item.projectName"></div>
 						<div class="raise_item_info" ng-bind="item.title"></div>
 						<div class="raise_item_detail">
 							<div class="detail01">已募集<span ng-bind="item.collectAmount"></span>元</div>
-							<div class="detail02" ng-if="item.balanceDays != '0'">剩余<span  ng-bind="item.balanceDays"></span>天</div>
-							<div class="detail02" ng-if="item.balanceDays == '0'">已结束</div>
+							<div class="detail02" ng-if="item.balanceDays != '0'&&item.status=='2'">剩余<span  ng-bind="item.balanceDays"></span>天</div>
+							<div class="detail02" ng-if="item.balanceDays == '0'&&item.status=='2'">已结束</div>
+							<div class="detail02" ng-if="item.status=='1'">待审核</div>
 							<div style="clear: both;"></div>
 						</div>
 					</div>

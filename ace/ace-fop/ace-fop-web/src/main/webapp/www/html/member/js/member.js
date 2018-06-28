@@ -1,6 +1,7 @@
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var userStatus = null;
+var dataType = "";
 
 var app =angular.module(ngAppName, []);
 
@@ -79,46 +80,45 @@ app.controller(ngControllerName,function($scope){
         }
     });
 
-
-
-    $scope.writeInfo = function(){
-        var dataType = "";
-        $.ajax({
-            url: "/fop/www/organizationType",
-            type:"post",
-            async:false,
-            data:{},
-            success:function(result){
-                if(result.status == 0) {
-                    console.log(result);
-                    dataType = result.data;       //dataType:1表示团体会员，2表示企业会员
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
-                    if(dataType == "1"){
-                        window.open("pinformation/group.html");
-                    }else if(dataType == "2"){
-                        window.open("pinformation/company.html");
-                    }else{
-                        layer.alert("对不起，您没有登录！", {
-                            icon: 5,
-                            skin: 'myskin'
-                        });
-                    }
-                }else {
-                    layer.alert(result.errorMessage, {
-                        icon: 5,
-                        skin: 'myskin'
-                    });
+    $.ajax({
+        url: "/fop/www/organizationType",
+        type:"post",
+        async:false,
+        data:{},
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                dataType = result.data;       //dataType:1表示团体会员，2表示企业会员
+                $scope.dataType = dataType;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
                 }
-            },
-            error:function(){
-                layer.alert("系统服务内部异常！", {
+            }else {
+                layer.alert(result.errorMessage, {
                     icon: 5,
                     skin: 'myskin'
                 });
             }
-        });
+        },
+        error:function(){
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    });
+
+    $scope.writeInfo = function(){
+        if(dataType == "1"){
+            window.open("pinformation/group.html");
+        }else if(dataType == "2"){
+            window.open("pinformation/company.html");
+        }else{
+            layer.alert("对不起，获取会员信息失败！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
     }
 
     $scope.checkUserUrl = function($event, url){

@@ -45,8 +45,14 @@
 				<div class="company_info">
 					<div class="row company_info_title"><h4 ng-cloak>{{companyInfo.fullName}}</h4></div>
 					<div class="row company_info_content" id="types">
-						<div class="col-sm-6 col-xs-12"><span>企业性质：</span><span ng-cloak>{{companyInfo.companyProperty}}</span></div>
-						<div class="col-sm-6 col-xs-12"><span>企业法人代表：</span><span ng-cloak>{{companyInfo.realName}}</span></div>
+						<div class="col-sm-6 col-xs-12">
+							<span ng-if="dataType == '2'">企业性质：</span><span ng-cloak>{{companyInfo.companyPropertyName}}</span>
+							<span ng-if="dataType == '1'" ng-cloak>{{(companyInfo.list)[0].assPost}}：</span><span ng-cloak>{{(companyInfo.list)[0].pname}}</span>
+						</div>
+						<div class="col-sm-6 col-xs-12">
+							<span ng-if="dataType == '2'">企业法人代表：</span><span ng-cloak>{{companyInfo.realName}}</span>
+							<span ng-if="dataType == '1'">办公电话：</span><span ng-cloak>{{(companyInfo.list)[0].phoneNum}}</span>
+						</div>
 					</div>
 					<div class="row company_info_content">
 						<div class="col-sm-6 col-xs-12"><span>成立时间：</span><span ng-cloak>{{companyInfo.establishDate | formatDate}}</span></div>
