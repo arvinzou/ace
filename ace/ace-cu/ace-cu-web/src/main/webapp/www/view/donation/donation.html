@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
-		<title>我要捐款</title>
+		<title ng-bind="projectInfo.projectName"></title>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/nav.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
@@ -20,24 +20,31 @@
 		<div class="projectbox">
 			<div class="project_item">
 				<div class="project_item_image">
-					<img src="img/project.png" width="100%" height="100%" />
+					<img ng-if="projectInfo.coverUrl!=''&&projectInfo.coverUrl!=undefined&&projectInfo.coverUrl!=null" ng-src="{{projectInfo.coverUrl}}" width="100%" height="100%" />
+					<img ng-if="projectInfo.coverUrl==''||projectInfo.coverUrl==undefined||projectInfo.coverUrl==null" ng-src="img/project_default.png" width="100%" height="100%" />
 				</div>
 				<div class="project_item_name">
 					<p class="name_01" ng-bind="projectInfo.projectName"></p>
-					<p class="name_02" ng-bind="projectInfo.title"></p>
+					<p ng-if="type != 2" class="name_02" ng-bind="projectInfo.title"></p>
 				</div>
 				<div class="project_item_raise">
 					<div class="raise_01">
-						<p class="raise_money" ng-bind="projectInfo.collectAmount"></p>
-						<p class="raise_price">已募集(元)</p>
+						<p ng-if="type != 2" class="raise_money" ng-bind="projectInfo.collectAmount"></p>
+						<p ng-if="type != 2" class="raise_price">已募集(元)</p>
+						<p ng-if="type == 2" class="raise_money" ng-bind="projectInfo.targetAmount"></p>
+						<p ng-if="type == 2" class="raise_price">目标金额(元)</p>
 					</div>
 					<div class="raise_01">
-						<p class="raise_money" ng-bind="projectInfo.payoutAmount"></p>
-						<p class="raise_price">已支出(元)</p>
+						<p ng-if="type != 2" class="raise_money" ng-bind="projectInfo.payoutAmount"></p>
+						<p ng-if="type != 2" class="raise_price">已支出(元)</p>
+						<p ng-if="type == 2" class="raise_money" ng-bind="projectInfo.collectAmount"></p>
+						<p ng-if="type == 2" class="raise_price">已筹集(元)</p>
 					</div>
 					<div class="raise_01">
-						<p class="raise_money" ng-bind="projectInfo.balanceAmount">28888,88</p>
-						<p class="raise_price">结余(元)</p>
+						<p ng-if="type != 2" class="raise_money" ng-bind="projectInfo.balanceAmount"></p>
+						<p ng-if="type != 2" class="raise_price">结余(元)</p>
+						<p ng-if="type == 2" class="raise_money" ng-bind="projectInfo.endDate | formatDate"></p>
+						<p ng-if="type == 2" class="raise_price">截止时间</p>
 					</div>
 					<div style="clear: both;"></div>
 				</div>
