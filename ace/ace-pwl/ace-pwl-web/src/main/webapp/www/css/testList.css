@@ -1,19 +1,54 @@
-* {
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
+body .test_list div {
+    font-size: 1rem !important;
 }
 
-html, body {
-    font-size: 0.1333333333vw;
+.test_list .test {
+    width: 92.6vw;
+    margin: 0 3.7vw 0;
+    height: 11.5vh;
+    border-bottom: 0.0725rem solid #ededed;
 }
 
-body {
-    width: 750rem;
+.test_list .test div {
+    float: left;
+
 }
 
-.content {
-    width: 750rem;
-    border: 1px solid red;
-    font-size: 16rem;
+.test_list .test:after {
+    content: "";
+    clear: both;
+    display: block;
 }
+
+.test_list .test .title {
+    width: 85.7vw;
+    line-height: 4vh;
+    margin-top: 2vh;
+}
+
+.test_list .test .title p {
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.test_list .test .title .number {
+    font-size: 0.85rem;
+    color: #9a9a9a;
+}
+
+.test_list .test .pen_icon {
+    width: 6.9vw;
+    height: 6vh;
+    margin-top: 2.3vh;
+
+}
+
+.test_list .test .pen_icon .iconfont {
+    font-size: 1.5625rem;
+    color: #4380db;
+}
+
+
+
