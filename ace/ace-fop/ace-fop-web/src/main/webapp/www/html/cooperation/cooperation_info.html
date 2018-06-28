@@ -61,7 +61,7 @@
 				line-height: 30px;
 			}
 			.finance_table{
-				width: 60%;
+				width: 90%;
 				margin: auto;
 				color: #657180;
 			}
@@ -182,19 +182,19 @@
 					<tr>
 						<td width="15%" align="right">合作方式：</td>
 						<td width="35%" class="" ng-bind="projectInfo.coopTypeName"></td>
-						<td width="15%" align="right">企业名称：</td>
+						<td width="15%" align="left">企业名称：</td>
 						<td width="35%" ng-bind="projectInfo.displayName"></td>
 					</tr>
 					<tr>
 						<td width="15%" align="right">所属区域：</td>
 						<td width="35%" ng-bind="projectInfo.codeFullName"></td>
-						<td width="15%" align="right">企业性质：</td>
+						<td width="15%" align="left">企业性质：</td>
 						<td width="35%" ng-bind="projectInfo.companyProperty"></td>
 					</tr>
 					<tr>
 						<td width="15%" align="right">项目类型：</td>
 						<td width="35%" class="" ng-bind="projectInfo.projectType"></td>
-						<td width="15%" align="right">企业通讯地址：</td>
+						<td width="15%" align="left">企业通讯地址：</td>
 						<td width="35%" ng-bind="projectInfo.address"></td>
 					</tr>
 				</table>
@@ -238,22 +238,21 @@
 						</td>
 					</tr>
 				</table>
-				<!-- 分页位置 -->
-				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 30px;">
-					<tbody>
-					<tr>
-						<td class="custom_layper_page_info"></td>
-						<td>
-							<div style="padding: 10px 0; float: right;">
-								<div class="custom_page_box" id="layper_page_box" style="margin-right: 0px"></div>
-							</div>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-				<!-- 分页位置 -->
 			</div>
-
+			<!-- 分页位置 -->
+			<table width="90%" border="0" cellspacing="0" cellpadding="0" style="margin: 30px auto;">
+				<tbody>
+				<tr>
+					<td class="custom_layper_page_info"></td>
+					<td>
+						<div style="padding: 10px 0; float: right;">
+							<div class="custom_page_box" id="layper_page_box" style="margin-right: 0px"></div>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<!-- 分页位置 -->
 		</div>
 	</body>
 

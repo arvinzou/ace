@@ -20,6 +20,7 @@ app.controller(ngControllerName,function($scope){
                 if(result.status == 0) {
                     $scope.financeInfo = result.data;
                     $scope.comments = result.data.comments;
+                    $(".content_info").html(result.data.financeContent);
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }

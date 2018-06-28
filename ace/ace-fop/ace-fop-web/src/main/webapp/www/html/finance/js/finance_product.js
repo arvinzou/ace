@@ -1,4 +1,4 @@
-var pageSize=5;
+var pageSize=10;
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var currentPage = 1;

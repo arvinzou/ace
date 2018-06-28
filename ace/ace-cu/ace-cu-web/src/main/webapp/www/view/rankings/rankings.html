@@ -18,9 +18,12 @@
 				<span class="title_bottom"></span>
 			</div>
 			<div class="rankings_list" ng-repeat="item in rankList">
-				<div class="list_img"><img ng-src="{{item.headimgurl}}"/></div>
-				<div class="list_name" ng-bind="item.nickname"></div>
-				<div class="contribution">共捐款<span class="money" ng-bind="item.totalDonateAmount"></span>元</div>
+				<div class="list_img" ng-bind="$index+1"><!--<img ng-src="{{item.headimgurl}}"/>--></div>
+				<div class="list_name" >
+					<p ng-bind="item.nickname"></p>
+					<p class="times">共贡献了次爱心</p>
+				</div>
+				<div class="contribution"><span class="money" ng-bind="item.totalDonateAmount"></span>元</div>
 			</div>
 		</div>
 	</body>

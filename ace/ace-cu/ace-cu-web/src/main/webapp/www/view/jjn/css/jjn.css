@@ -99,3 +99,23 @@
 	font-size: 0.45rem;
 	color: #FFFFFF;
 }
+#warning{
+	width: 9rem;
+	height: auto;
+	border-radius: 0.2rem;
+}
+
+.warn_content{
+	width: 90%;
+	margin:auto;
+	font-size: 0.35rem;
+	color: #666666;
+}
+.warn_title{
+	text-align: center;
+    color: #333333;
+    font-size: 0.45rem;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
