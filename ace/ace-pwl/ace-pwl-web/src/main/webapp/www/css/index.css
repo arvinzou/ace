@@ -342,7 +342,7 @@ border-right: 1p solid;*/
 }
 
 .model_testlist .model_tool {
-    position: fixed;
+    position: absolute;
     bottom: 0rem;
     width: 100vw;
     height: 7.5vh;

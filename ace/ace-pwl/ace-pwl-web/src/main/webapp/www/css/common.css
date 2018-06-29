@@ -1,10 +1,10 @@
 @font-face {
     font-family: myFirstFont;
     src: url('../font/SourceHanSansCN-Normal.eot'),
-    url('../font/SourceHanSansCN-Normal.otf'),
     url('../font/SourceHanSansCN-Normal.woff'),
-    url('../font/SourceHanSansCN-Normal.svg'),
     url('../font/SourceHanSansCN-Normal.woff2'),
+    url('../font/SourceHanSansCN-Normal.svg'),
+    url('../font/SourceHanSansCN-Normal.otf'),
     url('../font/SourceHanSansCN-Normal.ttf');
 }
 
