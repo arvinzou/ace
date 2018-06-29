@@ -47,11 +47,13 @@ app.controller(ngControllerName,function($scope) {
         $(this).hide();
         $(this).siblings().show();
         isName = true;
+        $("#userInfo").hide();
     });
     $("#yes").click(function(){
         $(this).hide();
         $(this).siblings().show();
         isName = false;
+        $("#userInfo").show();
     });
 
     $scope.donateMoney = function(){
@@ -67,6 +69,7 @@ app.controller(ngControllerName,function($scope) {
             largeAddress = $("#demo1").val();
             smallAddress = $("#detailAddress").val();
             var billName = $("#billName").val();
+            var billphoneNumber = $("#billphoneNumber").val();
             if(billName == null || billName == undefined || billName == ''){
                 alert("请输入收货人姓名！");
                 return;
@@ -83,8 +86,8 @@ app.controller(ngControllerName,function($scope) {
             	alert("请输入详细地址！");
             	return;
 			}
-            if(phoneNum == null || phoneNum == undefined || phoneNum ==''){
-                alert("联系电话不能为空！");
+            if(billphoneNumber == null || billphoneNumber ==undefined || billphoneNumber ==''){
+                alert("收货人联系电话不能为空！");
                 return;
             }
             needReceipt = 1;
@@ -92,6 +95,10 @@ app.controller(ngControllerName,function($scope) {
 		if(isName){
             if(realName == null || realName == undefined || realName ==''){
                 alert("捐款人姓名不能为空！");
+                return;
+            }
+            if(phoneNum == null || phoneNum == undefined || phoneNum ==''){
+                alert("联系电话不能为空！");
                 return;
             }
         }
@@ -121,7 +128,8 @@ app.controller(ngControllerName,function($scope) {
 					"city": shi,
 					"district": qu,
 					"address":smallAddress,
-					"remark": message
+					"remark": message,
+                    "consigneeMobileNumber":billphoneNumber
 				})
 			    },
             success:function(result){
