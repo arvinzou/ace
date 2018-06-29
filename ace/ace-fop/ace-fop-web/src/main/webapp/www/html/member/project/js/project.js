@@ -150,7 +150,9 @@ app.controller(ngControllerName,function($scope){
         });
     }
 
+    var rowIndex = 0;
     $scope.update_click = function(index){
+        rowIndex = index;
         var info = $scope.items[index];
         $scope.infoData = info;
         var editor = new Simditor({
@@ -160,6 +162,7 @@ app.controller(ngControllerName,function($scope){
     }
     $scope.update = function(id){
         var content = $("#editor").val();
+        $scope.items[rowIndex].coopDesc = content;
         $.ajax({
             url: "/fop/www/updateProject",
             type:"post",

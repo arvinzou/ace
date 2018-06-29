@@ -146,7 +146,9 @@ app.controller(ngControllerName,function($scope){
         });
     }
 
+    var rowIndex = 0;
     $scope.update_click = function(index){
+        rowIndex = index;
         var info = $scope.items[index];
         $scope.infoData = info;
         //初始化文本框
@@ -165,6 +167,7 @@ app.controller(ngControllerName,function($scope){
     }
     $scope.update = function(id){
         var content = $("textarea[name='content']").val();
+        $scope.items[rowIndex].content = content;
         $.ajax({
             url: "/fop/www/updateInformationServiceDo",
             type:"post",

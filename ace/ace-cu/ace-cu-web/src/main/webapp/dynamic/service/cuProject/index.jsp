@@ -223,6 +223,7 @@
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>

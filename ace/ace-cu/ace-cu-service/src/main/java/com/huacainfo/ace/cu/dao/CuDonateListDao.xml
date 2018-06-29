@@ -215,10 +215,13 @@
         <result column="points" jdbcType="DECIMAL" property="points"/>
         <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
         <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="anonymity" jdbcType="VARCHAR" property="anonymity"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
-        p.projectName, o.points, u.nickname, u.headimgurl,
+        IFNULL(o.points,0) AS points,
+        IFNULL(o.anonymity,'0') AS anonymity,
+        p.projectName, u.nickname, u.headimgurl,
         t.id, t.projectId, t.userId, t.orderId, t.openId, t.donateAmount, t.donateDate, t.remark, t.status,
         t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
