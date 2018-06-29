@@ -16,6 +16,7 @@ app.controller(ngControllerName,function($scope) {
             if (result.status == 0) {
                 $scope.apealData = result.data;
                 $scope.process = result.data.process;
+                $(".appeal_info").html(result.data.content);
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
