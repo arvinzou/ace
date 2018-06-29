@@ -219,3 +219,7 @@
 	background-color: #1A56A8;
 	color: #FFFFFF;
 }
+.search_box{
+	height: 62px;
+	line-height: 62px;
+}
