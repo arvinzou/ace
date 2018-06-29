@@ -27,6 +27,10 @@ public interface FopQuestionDao {
                                  @Param("start") int start, @Param("limit") int limit,
                                  @Param("orderBy") String orderBy);
 
+    List<FopQuestionVo> findListVo(@Param("condition") FopQuestionQVo condition,
+                                   @Param("start") int start, @Param("limit") int limit,
+                                   @Param("orderBy") String orderBy);
+
     List<FopQuestionVo> findCommentList(@Param("parentId") String parentId);
 
     int findCount(@Param("condition") FopQuestionQVo condition);

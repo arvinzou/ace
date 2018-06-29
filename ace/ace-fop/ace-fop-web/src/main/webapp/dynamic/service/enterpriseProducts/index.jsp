@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>企业风采</title>
+    <title>企业产品</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
@@ -114,12 +114,6 @@
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">
-备注</span>
-            <br>
-            <span id="remark">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
 状态</span>
             <br>
             <span id="status">
@@ -131,6 +125,9 @@
     </div>
     <h5 class="header-title">详细情况</h5>
     <div class="row" style="padding:10px" id="content">
+    </div>
+    <h5 class="header-title">备注</h5>
+    <div class="row" style="padding:10px" id="remark">
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
