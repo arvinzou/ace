@@ -32,4 +32,8 @@ public interface CuProjectApplyResDao {
 
     int isExit(CuProjectApplyRes record);
 
+
+    List<CuProjectApplyRes> findListByTypes(@Param("applyId") String applyId,
+                                            @Param("types") String[] types);
+
 }

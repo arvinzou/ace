@@ -8,6 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>救急难申请表</title>
+    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -24,15 +25,15 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-                    类别：<input name="category" class="easyui-combobox" style="width: 200px"
-                              data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
+                    <%--类别：<input name="category" class="easyui-combobox" style="width: 200px"--%>
+                    <%--data-options="--%>
+                    <%--url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',--%>
+                    <%--method:'get',--%>
+                    <%--valueField:'code',--%>
+                    <%--textField:'name',--%>
+                    <%--panelHeight:'auto'">--%>
 
-                    名称： <input name="name" type="text" style="width: 200px;"/>
+                    微信名称： <input name="name" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/cuProjectApply/findCuProjectApplyList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
@@ -41,19 +42,23 @@
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
 
-                    <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/cuProjectApply/insertCuProjectApply">
-                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+                    <%--<button class="btn btn-info" id="btn-view-add"--%>
+                    <%--authority="${pageContext.request.contextPath}/cuProjectApply/insertCuProjectApply">--%>
+                    <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
                     <button class="btn btn-info" id="btn-view-edit"
                             authority="${pageContext.request.contextPath}/cuProjectApply/updateCuProjectApply">
                         <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
                     </button>
-                    <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/cuProjectApply/deleteCuProjectApplyByCuProjectApplyId">
+                    <%--<button class="btn btn-warning" id="btn-view-del"--%>
+                    <%--authority="${pageContext.request.contextPath}/cuProjectApply/deleteCuProjectApplyByCuProjectApplyId">--%>
+                    <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
+                    <%--审核--%>
+                    <button class="btn btn-purple" id="btn-view-audit"
+                            authority="${pageContext.request.contextPath}/cuProjectApply/audit">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
                 </div>
             </div>
         </div>
@@ -63,7 +68,19 @@
 
     <div id="grid-pager"></div>
 
-
+    <div id="dialog-message-audit" class="hide">
+        <form action="/cuProject/audit" id="fm-audit">
+            <fieldset>
+                审核结果：
+                <input id="audit_pass" name="audit_result" type="radio" value="0"/> 通过
+                <input id="audit_unpass" name="audit_result" type="radio" value="1"/> 不通过
+            </fieldset>
+            <div class="space-6"></div>
+            <fieldset>
+                审核备注： <textarea id="audit_opinion" cols="30" rows="10"></textarea>
+            </fieldset>
+        </form>
+    </div>
 </div>
 <div id="dialog-message" class="hide">
     <div id="uploader">
@@ -75,106 +92,94 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
+    <h5 class="header-title">筹款标题</h5>
+    <div class="row" style="padding:10px" id="title">
+    </div>
+    <h5 class="header-title">筹款说明</h5>
+    <div class="row" style="padding:10px" id="description">
+    </div>
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-主键</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">主键</span>
             <br>
-            <span id="id">
-</span>
+            <span id="id"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-申请人ID</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">申请人ID</span>
             <br>
-            <span id="applyUserId">
-</span>
+            <span id="applyUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-申请人微信openId</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">申请人微信openId</span>
             <br>
-            <span id="applyOpenId">
-</span>
+            <span id="applyOpenId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-目标金额</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">目标金额(元)</span>
             <br>
-            <span id="targetAmount">
-</span>
+            <span id="targetAmount"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-受益人真实姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">受益人真实姓名</span>
             <br>
-            <span id="realName">
-</span>
+            <span id="realName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-受益人联系号码</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">受益人联系号码</span>
             <br>
-            <span id="mobileNumber">
-</span>
+            <span id="mobileNumber"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-受益人身份证号码</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">受益人身份证号码</span>
             <br>
-            <span id="idCard">
-</span>
+            <span id="idCard"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-求助说明</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">备注</span>
             <br>
-            <span id="description">
-</span>
+            <span id="remark"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-备注</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">状态</span>
             <br>
-            <span id="remark">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
-            <br>
-            <span id="status">
-</span>
+            <span id="status"></span>
         </div>
     </div>
+    <h5 class="header-title">上传资料</h5>
+
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-创建人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">创建人编号</span>
             <br>
-            <span id="createUserId">
-</span>
+            <span id="createUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-创建人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">创建人姓名</span>
             <br>
-            <span id="createUserName">
-</span>
+            <span id="createUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-入库日期</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">入库日期</span>
             <br>
-            <span id="createDate">
-</span>
+            <span id="createDate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">最后更新人编号</span>
             <br>
-            <span id="lastModifyUserId">
-</span>
+            <span id="lastModifyUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新人姓名</span>
             <br>
-            <span id="lastModifyUserName">
-</span>
+            <span id="lastModifyUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新时间</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新时间</span>
             <br>
-            <span id="lastModifyDate">
-</span>
+            <span id="lastModifyDate"></span>
         </div>
     </div>
 
@@ -184,6 +189,11 @@
 <script src="${pageContext.request.contextPath}/content/service/cuProjectApply/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/cuProjectApply/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/cuProjectApply/view.js?version=${cfg.version}"></script>
+
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

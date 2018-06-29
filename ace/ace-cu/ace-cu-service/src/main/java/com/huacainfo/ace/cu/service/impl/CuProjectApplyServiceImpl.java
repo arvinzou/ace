@@ -11,11 +11,15 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
+import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuProjectApplyDao;
 import com.huacainfo.ace.cu.dao.CuProjectApplyResDao;
+import com.huacainfo.ace.cu.dao.CuProjectDao;
+import com.huacainfo.ace.cu.model.CuProject;
 import com.huacainfo.ace.cu.model.CuProjectApply;
 import com.huacainfo.ace.cu.model.CuProjectApplyRes;
 import com.huacainfo.ace.cu.service.CuProjectApplyService;
+import com.huacainfo.ace.cu.service.CuProjectService;
 import com.huacainfo.ace.cu.service.CuUserService;
 import com.huacainfo.ace.cu.vo.CuProjectApplyQVo;
 import com.huacainfo.ace.cu.vo.CuProjectApplyVo;
@@ -45,6 +49,10 @@ public class CuProjectApplyServiceImpl implements CuProjectApplyService {
     private CuUserService cuUserService;
     @Autowired
     private CuProjectApplyResDao cuProjectApplyResDao;
+    @Autowired
+    private CuProjectService cuProjectService;
+    @Autowired
+    private CuProjectDao cuProjectDao;
 
     /**
      * @throws
@@ -259,6 +267,73 @@ public class CuProjectApplyServiceImpl implements CuProjectApplyService {
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "添加成功", vo);
+    }
+
+    /**
+     * 功能描述:  "救急难"审核
+     *
+     * @param id
+     * @param auditResult
+     * @param auditOpinion
+     * @param curUserProp
+     * @param: id cu_project_apply.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @Override
+    public MessageResponse audit(String id, String auditResult, String auditOpinion,
+                                 UserProp curUserProp) throws Exception {
+        CuProjectApply apply = cuProjectApplyDao.selectByPrimaryKey(id);
+        if (null == apply) {
+            return new MessageResponse(ResultCode.FAIL, "申请资料丢失");
+        }
+        //审核通过，生成“未审核项目”
+        if ("0".equals(auditResult)) {
+            CuProject project = new CuProject();
+            project.setProjectName(apply.getTitle());
+            project.setTitle(apply.getTitle());
+            project.setDescription(apply.getDescription());
+            project.setType(ProjectConstant.P_TYPE_PERSONAL);
+            project.setStartDate(DateUtil.getNowDate());
+            project.setEndDate(DateUtil.getNowDate());
+            project.setId(GUIDUtil.getGUID());
+            project.setParentId("0");
+            project.setStatus("1");
+            project.setCreateDate(DateUtil.getNowDate());
+            project.setCreateUserName(curUserProp.getName());
+            project.setCreateUserId(curUserProp.getUserId());
+            project.setLastModifyDate(DateUtil.getNowDate());
+            project.setTargetAmount(apply.getTargetAmount());
+
+            cuProjectDao.insertSelective(project);
+            apply.setProjectId(project.getId());
+        }
+        String status = "0".equals(auditResult.trim()) ?
+                ProjectConstant.P_STATUS_PASSED : ProjectConstant.P_STATUS_REJECTED;
+        apply.setStatus(status);
+        apply.setLastModifyDate(DateUtil.getNowDate());
+        apply.setLastModifyUserId(curUserProp.getUserId());
+        apply.setLastModifyUserName(curUserProp.getName());
+        cuProjectApplyDao.updateByPrimaryKeySelective(apply);
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核完成");
+    }
+
+    /**
+     * 功能描述: 查询救助资料列表
+     *
+     * @param applyId
+     * @param resTypes
+     * @param curUserProp
+     * @param: resTypes ","分割多种类型 0-身份证正面 1-身份证反面 2-其他证明图片
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/6/27 17:16
+     */
+    @Override
+    public List<CuProjectApplyRes> findResList(String applyId, String resTypes, UserProp curUserProp) {
+        return cuProjectApplyResDao.findListByTypes(applyId, resTypes.split(","));
     }
 
 }

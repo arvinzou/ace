@@ -15,6 +15,11 @@ public class CuDonateOrder implements Serializable {
 
     private String openId;
 
+    /**
+     * 匿名选项  -- 0-否，1-是
+     */
+    private String anonymity;
+
     private String donateName;
 
     private String mobileNumber;
@@ -41,6 +46,11 @@ public class CuDonateOrder implements Serializable {
     private String needReceipt;
 
     private String consigneeName;
+
+    /**
+     * 收货人号码
+     */
+    private String consigneeMobileNumber;
 
     private String country;
 
@@ -69,6 +79,22 @@ public class CuDonateOrder implements Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getAnonymity() {
+        return anonymity;
+    }
+
+    public void setAnonymity(String anonymity) {
+        this.anonymity = anonymity;
+    }
+
+    public String getConsigneeMobileNumber() {
+        return consigneeMobileNumber;
+    }
+
+    public void setConsigneeMobileNumber(String consigneeMobileNumber) {
+        this.consigneeMobileNumber = consigneeMobileNumber;
+    }
 
     public String getId() {
         return id;

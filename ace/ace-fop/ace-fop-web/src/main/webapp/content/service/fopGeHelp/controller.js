@@ -46,6 +46,8 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        initSimditor($("textarea[name=content]"), null);
+                        $('.simditor .simditor-body').prop('contenteditable', false);
                     }
                 })
         });
@@ -71,8 +73,12 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
+                        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+                        var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+                        loadText(gd.id);
                     }
-                })
+                });
         });
     $('#btn-view-del').on(
         'click',
@@ -278,4 +284,35 @@ function sb(btnId, status, iconCss) {
         btn.find('i').addClass(iconCss);
         btn.removeAttr("disabled");
     }
+}
+
+function initSimditor(textarea, text) {
+    editor = new Simditor({
+        toolbar: false,
+        toolbarHidden: true,
+        textarea: textarea,//jQuery对象，HTML元素或选择器字符串可以传递给这个选项
+        params: {},// 在textarea中插入隐藏的输入来存储参数（键值对）。
+    });
+    if (text) {
+        editor.setValue(text);
+        $('.simditor .simditor-body').prop('contenteditable', false);
+    }
+}
+
+function loadText(id) {
+    $.ajax({
+        type: "post",
+        url: cfg.view_load_data_url,
+        data: {
+            id: id
+        },
+        beforeSend: function (XMLHttpRequest) {
+        },
+        success: function (rst, textStatus) {
+            initSimditor($("textarea[name=content]"), rst.value.content);
+        },
+        error: function () {
+            alert("加载错误！");
+        }
+    });
 }

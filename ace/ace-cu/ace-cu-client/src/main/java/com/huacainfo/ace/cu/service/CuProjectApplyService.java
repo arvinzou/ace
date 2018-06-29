@@ -6,8 +6,11 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.cu.model.CuProjectApply;
+import com.huacainfo.ace.cu.model.CuProjectApplyRes;
 import com.huacainfo.ace.cu.vo.CuProjectApplyQVo;
 import com.huacainfo.ace.cu.vo.CuProjectApplyVo;
+
+import java.util.List;
 
 /**
  * @author: Arvin
@@ -91,4 +94,24 @@ public interface CuProjectApplyService {
      * @throws Exception
      */
     ResultResponse applyProject(CuProjectApplyVo vo);
+
+    /**
+     * 功能描述:  "救急难"审核
+     *
+     * @param: id cu_project_apply.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    MessageResponse audit(String id, String auditResult, String auditOpinion, UserProp curUserProp) throws Exception;
+
+    /**
+     * 功能描述: 查询救助资料列表
+     *
+     * @param: resTypes ","分割多种类型 0-身份证正面 1-身份证反面 2-其他证明图片
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/6/27 17:16
+     */
+    List<CuProjectApplyRes> findResList(String applyId, String resTypes, UserProp curUserProp);
 }
