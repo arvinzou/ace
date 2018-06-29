@@ -171,8 +171,9 @@ input[type="checkbox"] {
 }
 
 .bodybg {
-    /*padding-top: 30px;*/
+    padding-top: 30px;
     padding-bottom: 30px;
+    background-color: #F4F4F4;
 }
 
 .juz {
@@ -1054,15 +1055,15 @@ input[type="checkbox"] {
     color: #313131;
     height: 32px;
     padding: 0px 5px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .searchbox .searchTable td span {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .searchTable td a {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .searchbox .searchTrColor {
@@ -1089,7 +1090,7 @@ input[type="checkbox"] {
 
 .searchCriteria {
     margin: 2px 0 10px 0;
-    font-size: 12px;
+    font-size: 14px;
     border-bottom: 1px solid #ddd;
     padding: 0px 0 10px 0;
     position: relative;
@@ -1190,7 +1191,7 @@ input[type="checkbox"] {
 }
 
 .searchTable tr > .time {
-    font-size: 12px;
+    font-size: 14px;
     text-align: right;
     color: #999;
 }
@@ -1277,7 +1278,7 @@ input[type="checkbox"] {
     color: #333;
     display: block;
     float: left;
-    font-size: 12px;
+    font-size: 14px;
     margin: 0 2px;
 }
 
@@ -1293,7 +1294,7 @@ input[type="checkbox"] {
     color: #333;
     display: block;
     float: left;
-    font-size: 12px;
+    font-size: 14px;
     margin: 0 2px;
 }
 
