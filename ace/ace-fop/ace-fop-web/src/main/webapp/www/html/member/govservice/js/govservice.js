@@ -171,10 +171,10 @@ app.controller(ngControllerName,function($scope){
             $scope.$apply();
         }
         $.ajax({
-            url: "/fop/www/updateInformationServiceDo",
+            url: "/fop/www/updateGeHelp",
             type:"post",
             async:false,
-            data:{modules: "3", id: id, title: $scope.infoData.title, content: $("#updateContent").val()},
+            data:{id: id, title: $scope.infoData.title, content: $("#updateContent").val()},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);
