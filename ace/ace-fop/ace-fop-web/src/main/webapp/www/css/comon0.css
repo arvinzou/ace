@@ -1184,6 +1184,7 @@ input[type="checkbox"] {
     text-overflow:ellipsis;
     overflow: hidden;
     padding-right: 30px;
+    color: #1a56a8;
 }
 
 .searchTable td:hover {
