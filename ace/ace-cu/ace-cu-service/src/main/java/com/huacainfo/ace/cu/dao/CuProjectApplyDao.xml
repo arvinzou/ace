@@ -250,9 +250,12 @@
         <result column="collectAmount" jdbcType="DECIMAL" property="collectAmount"/>
         <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
         <result column="coverUrl" jdbcType="VARCHAR" property="coverUrl"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
+        u.nickname, u.headimgurl,
         p.projectName, p.collectAmount, p.endDate, p.coverUrl,
         CASE when t.`status`=2 THEN p.title else t.title END as title,
         CASE when t.`status`=2 then p.description ELSE t.description end as description,
@@ -265,6 +268,8 @@
         select
         <include refid="Vo_Column_List"/>
         from cu_project_apply t
+        left join cu_project p on t.projectId = p.id
+        LEFT JOIN portal.userinfo u on t.applyOpenId = u.openid
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -286,6 +291,7 @@
     <sql id="whereCondition">
         from cu_project_apply t
         left join cu_project p on t.projectId = p.id
+        LEFT JOIN portal.userinfo u on t.applyOpenId = u.openid
         where 1=1
         <if test="condition.applyOpenId!=null and condition.applyOpenId!=&quot;&quot;">
             and t.applyOpenId = #{condition.applyOpenId,jdbcType=VARCHAR}

@@ -2,11 +2,15 @@ package com.huacainfo.ace.cu.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.cu.model.CuProjectApply;
+import com.huacainfo.ace.cu.model.CuProjectApplyRes;
 import com.huacainfo.ace.cu.service.CuProjectApplyService;
 import com.huacainfo.ace.cu.vo.CuProjectApplyQVo;
 import com.huacainfo.ace.cu.vo.CuProjectApplyVo;
@@ -16,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/cuProjectApply")
@@ -47,7 +53,8 @@ public class CuProjectApplyController extends CuBaseController {
      */
     @RequestMapping(value = "/findCuProjectApplyList")
     @ResponseBody
-    public PageResult<CuProjectApplyVo> findCuProjectApplyList(CuProjectApplyQVo condition, PageParamNoChangeSord page) throws Exception {
+    public PageResult<CuProjectApplyVo> findCuProjectApplyList(CuProjectApplyQVo condition,
+                                                               PageParamNoChangeSord page) throws Exception {
         PageResult<CuProjectApplyVo> rst = this.cuProjectApplyService
                 .findCuProjectApplyList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
@@ -123,5 +130,44 @@ public class CuProjectApplyController extends CuBaseController {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
         return this.cuProjectApplyService.deleteCuProjectApplyByCuProjectApplyId(id, this.getCurUserProp());
+    }
+
+
+    /**
+     * 功能描述:  "救急难"审核
+     *
+     * @param: id cu_project_apply.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @RequestMapping(value = "/audit")
+    @ResponseBody
+    public MessageResponse audit(String id, String auditResult, String auditOpinion) throws Exception {
+        if (CommonUtils.isEmpty(id)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必备参数");
+        }
+
+        return cuProjectApplyService.audit(id, auditResult, auditOpinion, getCurUserProp());
+    }
+
+
+    /**
+     * 功能描述: 查询救助资料列表
+     *
+     * @param: resTypes ","分割多种类型 0-身份证正面 1-身份证反面 2-其他证明图片
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/6/27 17:16
+     */
+    @RequestMapping(value = "/findResList")
+    @ResponseBody
+    public ResultResponse findResList(String applyId, String resTypes) {
+        if (CommonUtils.isEmpty(applyId) || CommonUtils.isEmpty(resTypes)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必备参数");
+        }
+
+        List<CuProjectApplyRes> resList = cuProjectApplyService.findResList(applyId, resTypes, getCurUserProp());
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", resList);
     }
 }

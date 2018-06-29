@@ -16,6 +16,7 @@ import com.huacainfo.ace.cu.common.constant.OrderConstant;
 import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuDonateOrderDao;
 import com.huacainfo.ace.cu.dao.CuUserDao;
+import com.huacainfo.ace.cu.dao.WxPayLogDao;
 import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.model.CuUser;
 import com.huacainfo.ace.cu.model.WxPayLog;
@@ -58,6 +59,8 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     private CuDonateListService cuDonateListService;
     @Autowired
     private CuUserDao cuUserDao;
+    @Autowired
+    private WxPayLogDao wxPayLogDao;
 
 
     /**
@@ -101,7 +104,6 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
      */
     @Override
     public MessageResponse insertCuDonateOrder(CuDonateOrder o, UserProp userProp) throws Exception {
-
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -139,6 +141,8 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
             return new MessageResponse(1, "捐款支付订单名称重复！");
         }
 
+
+        o.setAnonymity(StringUtil.isEmpty(o.getAnonymity()) ? "0" : o.getAnonymity());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -274,13 +278,14 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         }
         if ("1".equals(data.getNeedReceipt()) &&
                 !StringUtil.areNotEmpty(data.getConsigneeName(), data.getCountry(), data.getProvince(),
-                        data.getCity(), data.getDistrict(), data.getAddress())) {
+                        data.getCity(), data.getDistrict(), data.getAddress(), data.getConsigneeMobileNumber())) {
             return new ResultResponse(ResultCode.FAIL, "收货信息不全！");
         }
 
         data.setPoints(new BigDecimal(data.getDonateAmount().intValue()));//1块钱=1积分,无小数
         data.setOrderNo(generateOrderNo());
         data.setUserId(userVo.getId());
+        data.setAnonymity(StringUtil.isEmpty(data.getAnonymity()) ? "0" : data.getAnonymity());
         data.setId(GUIDUtil.getGUID());
         data.setStatus("1");
         data.setLastModifyDate(new Date());
@@ -367,6 +372,17 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         cuDonateOrderDao.updateByPrimaryKey(order);
 
         return new ResultResponse(ResultCode.SUCCESS, "订单支付处理成功");
+    }
+
+    @Override
+    public int insertWxPayLog(WxPayLog wxPayLog) {
+        wxPayLog.setId(GUIDUtil.getGUID());
+        wxPayLog.setStatus("1");
+        wxPayLog.setCreateUserId("0000-0000");
+        wxPayLog.setCreateUserName("system");
+        wxPayLog.setCreateDate(DateUtil.getNowDate());
+        wxPayLog.setLastModifyDate(DateUtil.getNowDate());
+        return wxPayLogDao.insert(wxPayLog);
     }
 
     private ResultResponse updateUserPoints(CuDonateOrder order) {

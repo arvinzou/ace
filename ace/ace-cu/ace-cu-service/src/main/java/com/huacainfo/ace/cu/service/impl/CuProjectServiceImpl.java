@@ -110,7 +110,7 @@ public class CuProjectServiceImpl implements CuProjectService {
         }
 
         o.setId(GUIDUtil.getGUID());
-        o.setParentId("0");
+        o.setParentId(CommonUtils.isEmpty(o.getParentId()) ? "0" : o.getParentId());
         o.setStatus("1");
         o.setCreateDate(DateUtil.getNowDate());
         o.setCreateUserName(userProp.getName());
@@ -221,6 +221,7 @@ public class CuProjectServiceImpl implements CuProjectService {
     public ResultResponse findList(String type, int start, int limit, String orderBy) throws Exception {
         CuProjectQVo condition = new CuProjectQVo();
         condition.setType(type);
+        condition.setStatus("2");//'2' : "通过";
 
         PageResult<CuProjectVo> rs = findCuProjectList(condition, start, limit, orderBy);
         List<CuProjectVo> list = rs.getRows();

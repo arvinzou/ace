@@ -111,4 +111,6 @@ public interface CuDonateOrderService {
      * @return
      */
     ResultResponse pay(WxPayLog wxPayLog, String payType);
+
+    int insertWxPayLog(WxPayLog wxPayLog);
 }
