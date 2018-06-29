@@ -34,6 +34,7 @@ body{
 	margin-right: 0.5rem;
 	height: 1.5rem;
 	margin-bottom: 0.5rem;
+	border-bottom: 1px solid #E4E6E9;
 }
 .money{
 	font-size: 0.4rem;
@@ -43,8 +44,11 @@ body{
 .list_img{
 	width: 1.5rem;
 	height: 1.5rem;
+	line-height: 1.5rem;
+	text-align: center;
 	float: left;
 	border-radius: 50%;
+	font-size: 0.35rem;
 }
 .list_img img{
 	width: 1.5rem;
@@ -54,11 +58,15 @@ body{
 .list_name{
 	width: 3.3rem;
 	height: 1.5rem;
-	line-height: 1.5rem;
 	float: left;
 	font-size: 0.35rem;
 	color: #333333;
 	padding-left: 0.2rem;
+	padding-top: 0.3rem;
+}
+.times{
+	color: #999999;
+	font-size: 0.3rem;
 }
 .contribution{
 	width: 3rem;

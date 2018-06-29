@@ -6,6 +6,13 @@ var pageSize = 9999;
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
+    layer.open({
+        type:1,
+        content: $("#warning").html(),
+        btn: '我知道了',
+        shadeClose:false
+    });
+
 	$.ajax({
         url: "/cu/www/project/findList",
         type:"post",

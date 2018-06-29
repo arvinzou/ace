@@ -7,6 +7,7 @@ var donateMoney = 10;       //捐款金额，初始化默认选择10元
 var needReceipt = 0;       //是否需要票据，0不需要，1是需要
 var orderResultData = null;
 var payData = null;
+var isName = false;
 
 app.controller(ngControllerName,function($scope) {
 
@@ -42,7 +43,7 @@ app.controller(ngControllerName,function($scope) {
     });
     area1.value = [1, 13, 3]; //控制初始位置，注意：该方法并不会影响到input的value
 
-   /* $("#no").click(function(){
+    $("#no").click(function(){
         $(this).hide();
         $(this).siblings().show();
         isName = true;
@@ -51,7 +52,7 @@ app.controller(ngControllerName,function($scope) {
         $(this).hide();
         $(this).siblings().show();
         isName = false;
-    });*/
+    });
 
     $scope.donateMoney = function(){
     	var realName = $("#realName").val();    //捐款人姓名
@@ -65,6 +66,11 @@ app.controller(ngControllerName,function($scope) {
 		if(isBill){
             largeAddress = $("#demo1").val();
             smallAddress = $("#detailAddress").val();
+            var billName = $("#billName").val();
+            if(billName == null || billName == undefined || billName == ''){
+                alert("请输入收货人姓名！");
+                return;
+            }
             if(largeAddress == null || largeAddress == undefined || largeAddress == ''){
             	alert("请选择地址！");
             	return;
@@ -77,16 +83,18 @@ app.controller(ngControllerName,function($scope) {
             	alert("请输入详细地址！");
             	return;
 			}
-			if(realName == null || realName == undefined || realName ==''){
-                alert("收货人姓名不能为空！");
-                return;
-            }
             if(phoneNum == null || phoneNum == undefined || phoneNum ==''){
                 alert("联系电话不能为空！");
                 return;
             }
             needReceipt = 1;
 		}
+		if(isName){
+            if(realName == null || realName == undefined || realName ==''){
+                alert("捐款人姓名不能为空！");
+                return;
+            }
+        }
 		if(isCustom){
             donateMoney = $("#amountMoney").val();
             if(donateMoney == null || donateMoney == undefined || donateMoney == ''){
@@ -104,7 +112,7 @@ app.controller(ngControllerName,function($scope) {
                     "projectId": projectId,
 					"donateAmount": donateMoney,
 					"donateName": realName,
-                    "consigneeName": realName,
+                    "consigneeName": billName,
 					"mobileNumber": phoneNum,
 					"payType" : 0,     //0微信支付，1银行卡支付
 					"needReceipt":needReceipt,
