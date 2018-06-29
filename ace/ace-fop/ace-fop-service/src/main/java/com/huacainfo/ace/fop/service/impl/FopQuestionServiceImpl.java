@@ -15,13 +15,8 @@ import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
-import com.huacainfo.ace.fop.dao.FopAssociationDao;
-import com.huacainfo.ace.fop.dao.FopCompanyDao;
-import com.huacainfo.ace.fop.dao.FopQuestionDao;
-import com.huacainfo.ace.fop.model.FopAssociation;
-import com.huacainfo.ace.fop.model.FopCompany;
-import com.huacainfo.ace.fop.model.FopFlowRecord;
-import com.huacainfo.ace.fop.model.FopQuestion;
+import com.huacainfo.ace.fop.dao.*;
+import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopQuestionService;
 import com.huacainfo.ace.fop.service.SysAccountService;
@@ -66,6 +61,18 @@ public class FopQuestionServiceImpl implements FopQuestionService {
     @Autowired
     private FopFlowRecordService fopFlowRecordService;
 
+    @Autowired
+    private FopFinanceProjectDao fopFinanceProjectDao;
+
+    @Autowired
+    private FopLoanProductDao fopLoanProductDao;
+
+    @Autowired
+    private InformationServiceDao informationServiceDao;
+
+    @Autowired
+    private FopProjectDao fopProjectDao;
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -84,7 +91,13 @@ public class FopQuestionServiceImpl implements FopQuestionService {
     public PageResult<FopQuestionVo> findFopQuestionList(FopQuestionQVo condition,
                                                          int start, int limit, String orderBy) throws Exception {
         PageResult<FopQuestionVo> rst = new PageResult<FopQuestionVo>();
-        List<FopQuestionVo> list = this.fopQuestionDao.findList(condition, start, start + limit, orderBy);
+        List<FopQuestionVo> list;
+        if (CommonUtils.isBlank(condition.getSourceType())) {
+            list = this.fopQuestionDao.findListVo(condition, start, limit, orderBy);
+        } else {
+            list = this.fopQuestionDao.findList(condition, start, limit, orderBy);
+        }
+
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.fopQuestionDao.findCount(condition);
@@ -187,6 +200,12 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         if (CommonUtils.isBlank(o.getReply())) {
             return new MessageResponse(1, "留言不能为空");
         }
+        if (CommonUtils.isBlank(o.getParentId())) {
+            return new MessageResponse(1, "评论对象ID不能为空");
+        }
+        if (CommonUtils.isBlank(o.getSourceType())) {
+            return new MessageResponse(1, "评论类型不能为空");
+        }
         SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
         UsersVo user = singleResult.getValue();
         if (null == user) {
@@ -207,6 +226,23 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         } else {
             o.setRelationId(fc.getId());
             o.setRelationType(FopConstant.COMPANY);
+        }
+        if ("2".equals(o.getSourceType())) {
+            FopFinanceProject fopFinanceProject = fopFinanceProjectDao.selectByPrimaryKey(o.getParentId());
+            o.setTitle(fopFinanceProject.getFinanceTitle());
+            o.setContent(fopFinanceProject.getFinanceContent());
+        } else if ("3".equals(o.getSourceType())) {
+            FopLoanProduct fopLoanProduct = fopLoanProductDao.selectByPrimaryKey(o.getParentId());
+            o.setTitle(fopLoanProduct.getProductName());
+            o.setContent(fopLoanProduct.getDescription());
+        } else if ("4".equals(o.getSourceType())) {
+            FopProject fopProject = fopProjectDao.selectByPrimaryKey(o.getParentId());
+            o.setTitle(fopProject.getProjectName());
+            o.setContent(fopProject.getCoopDesc());
+        } else if ("5".equals(o.getSourceType())) {
+            InformationService informationService = informationServiceDao.selectByPrimaryKey(o.getParentId());
+            o.setTitle(informationService.getTitle());
+            o.setContent(informationService.getContent());
         }
         o.setCreateDate(new Date());
         o.setReleaseDate(new Date());
