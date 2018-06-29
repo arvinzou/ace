@@ -95,7 +95,7 @@ public class ValidateUtils {
     /**
      * 手机
      */
-    private static final String V_MOBILE = "^(1)[0-9]{10}$";
+    private static final String V_MOBILE = "^((13[0-9])|(14[5,7,9])|(16[0-9])|(15([0-3]|[5-9]))|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
 
     /**
      * ip地址
