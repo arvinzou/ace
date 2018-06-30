@@ -5,7 +5,7 @@ var ngAppName = "angularjsApp";
 var currentPage = 1;
 //angularjs Controller初始化
 var app =angular.module(ngAppName, []);
-
+var isCompany = true;
 var companyProperty = null;
 //企业类型
 var data = [{
@@ -42,6 +42,17 @@ var data = [{
     }
 ];
 
+var memberType =[
+    {
+        "id": "1",
+        "text":"团体会员"
+    },
+    {
+        "id": "2",
+        "text":"企业会员"
+    }
+]
+
 app.controller(ngControllerName,function($scope){
     try{
         $scope.userProp = userProp;
@@ -60,7 +71,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findCompanyList",
         type:"post",
         async:false,
-        data:{page:currentPage, limit: pageSize},
+        data:{page:currentPage, limit: pageSize, isCompany: isCompany},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -108,11 +119,17 @@ app.controller(ngControllerName,function($scope){
     $scope.searchList = function(currentPage, pageSize){
         var key_word = $("#key_word").val();
         var areaCode = $("#areaCode option:checked").val();
+        var memberType = $("#memberType option:checked").val();
+        if(memberType == "1"){
+            isCompany = true;
+        }else if(memberType =="2"){
+            isCompany = false;
+        }
         $.ajax({
             url: "/fop/www/findCompanyList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, fullName: key_word , areaCode: areaCode, companyProperty: companyProperty},
+            data:{page:currentPage, limit: pageSize, fullName: key_word , areaCode: areaCode, companyProperty: companyProperty, isCompany: isCompany},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {
@@ -143,12 +160,18 @@ app.controller(ngControllerName,function($scope){
     $scope.search = function(){
         var key_word = $("#key_word").val();
         var areaCode = $("#areaCode option:checked").val();
+        var memberType = $("#memberType option:checked").val();
+        if(memberType == "1"){
+            isCompany = true;
+        }else if(memberType =="2"){
+            isCompany = false;
+        }
         console.log("地区代码：",areaCode);
         $.ajax({
             url: "/fop/www/findCompanyList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, fullName: key_word , areaCode: areaCode, companyProperty: companyProperty},
+            data:{page:currentPage, limit: pageSize, fullName: key_word , areaCode: areaCode, companyProperty: companyProperty, isCompany: isCompany},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
