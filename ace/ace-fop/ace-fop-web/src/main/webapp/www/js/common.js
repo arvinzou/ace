@@ -47,7 +47,7 @@ html.push("</li>");
 html.push("<li>");
 html.push("<a href=\"#\">信息服务<span class=\"trig\"></span></a>");
 html.push("<ul>");
-html.push("<li><a href=\"/fop/www/html/policy/policy.html\">政策文件</a></li>");
+html.push("<li><a href=\"/fop/www/html/policy/policy.html\">政策信息</a></li>");
 html.push("<li><a href=\"/fop/www/html/investment/investment.html\">招商信息</a></li>");
 html.push("<li><a href=\"/fop/www/html/personnel/personnel.html\">人才信息</a></li>");
 html.push("<li><a href=\"/fop/www/html/cooperation/cooperation_index.html\">项目信息</a></li>");
