@@ -435,7 +435,9 @@
         select
         <include refid="Base_Column_List"/>
         FROM fop_question t
-        WHERE parentId = #{parentId,jdbcType=VARCHAR}
+        WHERE
+        t.status ='2'
+        and parentId = #{parentId,jdbcType=VARCHAR}
         ) m
         ORDER BY m.releaseDate DESC
     </select>
