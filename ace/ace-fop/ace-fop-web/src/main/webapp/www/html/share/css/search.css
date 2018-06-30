@@ -14,7 +14,6 @@
 }
 .criteria{
     width: 800px;
-    height: 35px;
     margin: 15px auto;
     padding-top: 30px;
 }
@@ -29,6 +28,10 @@
 .search_opt{
     width: 100%;
 }
+radio:checked {
+    background-color: #1A56A8;
+    color: #1A56A8;
+}
 .operation{
     width: 665px;
     height: 42px;
@@ -36,6 +39,14 @@
     margin: 60px auto;
     border: 1px solid #1A56A8;
     position: relative;
+}
+.optinfo{
+    width: 665px;
+    margin: 30px auto;
+    padding: 15px;
+    background-color: #E1E5ED;
+    color: #666666;
+    line-height: 28px;
 }
 .search_opt input{
     width: 580px;

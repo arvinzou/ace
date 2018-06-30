@@ -9,6 +9,8 @@ var coverImg_edit = null;
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
+
+    var relationId = parent.userId;
     //初始化文本框
     var editor = new Simditor({
         textarea: $('#editor'),
@@ -26,7 +28,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findInformationServiceListDo",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, modules: "2"},
+        data:{limit:pageSize, page: currentPage, modules: "2", relationId: relationId},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -44,7 +46,7 @@ app.controller(ngControllerName,function($scope){
                     cont: $("#paganation"),   //容器名
                     pages: totalPage,           //总页数
                     curr: currentPage,         //当前页
-                    skip: true,
+                    //skip: true,
                     skin: '#1A56A8',
                     groups: 5,                  //连续显示分页数
                     jump: function(obj, first){ //触发分页后的回调
@@ -78,7 +80,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, status: status,modules: "2"},
+            data:{limit:pageSize, page: currentPage, status: status,modules: "2", relationId: relationId},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -110,7 +112,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status, modules: "2"},
+            data:{limit:pageSize, page: 1, status: status, modules: "2", relationId: relationId},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -128,7 +130,7 @@ app.controller(ngControllerName,function($scope){
                         cont: $("#paganation"),   //容器名
                         pages: totalPage,           //总页数
                         curr: currentPage,         //当前页
-                        skip: true,
+                        //skip: true,
                         skin: '#1A56A8',
                         groups: 5,                  //连续显示分页数
                         jump: function(obj, first){ //触发分页后的回调

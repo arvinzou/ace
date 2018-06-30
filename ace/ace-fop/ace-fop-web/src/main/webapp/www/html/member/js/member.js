@@ -2,6 +2,7 @@ var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var userStatus = null;
 var dataType = "";
+var userId = null;
 
 var app =angular.module(ngAppName, []);
 
@@ -55,6 +56,7 @@ app.controller(ngControllerName,function($scope){
                 $scope.companyInfo = result.data.data;
                 $scope.companyType = result.data.data.companyType;
                 userStatus = result.data.data.status;
+                userId = result.data.data.id;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
@@ -135,7 +137,7 @@ app.controller(ngControllerName,function($scope){
 
 app.filter('formatDate', function() { //可以注入依赖
     return function(text) {
-        if(text != ''){
+        if(text!=undefined && text.length>10){
             return text.substring(0,10);
         }else{
             return text;

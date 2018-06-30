@@ -6,6 +6,8 @@ var status = null;
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
+
+    var relationId = parent.userId;
     var editor = new Simditor({
         textarea: $('#appealContent'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
@@ -22,7 +24,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findGeHelpList",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage},
+        data:{limit:pageSize, page: currentPage, requestId: relationId},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -40,7 +42,7 @@ app.controller(ngControllerName,function($scope){
                     cont: $("#paganation"),   //容器名
                     pages: totalPage,           //总页数
                     curr: currentPage,         //当前页
-                    skip: true,
+                    //skip: true,
                     skin: '#1A56A8',
                     groups: 5,                  //连续显示分页数
                     jump: function(obj, first){ //触发分页后的回调
@@ -72,7 +74,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findGeHelpList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, status: status},
+            data:{limit:pageSize, page: currentPage, status: status, requestId: relationId},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -102,7 +104,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findGeHelpList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status},
+            data:{limit:pageSize, page: 1, status: status, requestId: relationId},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -120,7 +122,7 @@ app.controller(ngControllerName,function($scope){
                         cont: $("#paganation"),   //容器名
                         pages: totalPage,           //总页数
                         curr: currentPage,         //当前页
-                        skip: true,
+                       // skip: true,
                         skin: '#1A56A8',
                         groups: 5,                  //连续显示分页数
                         jump: function(obj, first){ //触发分页后的回调

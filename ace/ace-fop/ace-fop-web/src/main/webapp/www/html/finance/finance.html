@@ -69,19 +69,17 @@
                         <div class="table_div" ng-repeat="item in items" ng-click="showFinanceInfo($index);">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td colspan="2" class="project_title" ng-bind="item.financeTitle"></td>
-                                    <td><span class="income_title" ng-cloak>预计年收益：</span><span class="income">{{item.yearYield}}%</span>
-                                    </td>
+                                    <td colspan="3" class="project_title" ng-bind="item.financeTitle"></td>
                                 </tr>
                                 <tr>
                                     <td width="30%" ng-cloak>企业名称：{{item.companyName}}</td>
                                     <td width="30%" ng-cloak>企业性质：{{item.companyProperty}}</td>
-                                    <td width="40%" ng-cloak>企业地址：{{item.address}}</td>
+                                    <td width="40%" ng-cloak><span class="income_title" ng-cloak>预计年收益：</span><span class="income">{{item.yearYield}}%</span></td>
                                 </tr>
                                 <tr>
                                     <td width="30%" ng-cloak>融资金额：{{item.financeAmount}}万元</td>
                                     <td width="30%" ng-cloak>融资年限：{{item.financeYear}}年</td>
-                                    <td width="40%">&nbsp;</td>
+                                    <td width="40%">企业地址：{{item.address}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3" ng-bind="item.remark"
