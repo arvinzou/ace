@@ -85,7 +85,7 @@
 
         </div>
         <div class="logo_title">
-            <div class="title">常德市非公经济公共服务平台</div>
+            <div class="title">常德市非公有制经济公共服务平台</div>
             <div class="sub_title">Chang De city non-public economic public service platform</div>
         </div>
     </div>
@@ -197,7 +197,7 @@
             </div>
         </div>
     </div>
-    <div class="login_footer">技术支持：湖南华彩伟业网络科技有限公司</div>
+    <div class="login_footer">版权所有：常德市工商联</div>
 </div>
 
 
