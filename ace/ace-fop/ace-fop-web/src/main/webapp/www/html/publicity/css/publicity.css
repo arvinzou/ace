@@ -3,7 +3,7 @@ body {
     min-width: 900px;
 }
 .index {
-    width: 1280px;
+    width: 1100px;
     margin: auto;
     background-color: #ffffff;
     padding-left: 20px;
@@ -37,7 +37,7 @@ body {
 .table_div tr {
     height: 45px;
     line-height: 45px;
-    border-bottom: 1px solid #E1E5ED;
+    border-bottom: 1px dashed #E1E5ED;
 }
 
 .search {
@@ -166,6 +166,8 @@ textarea {
 #key_word{
     width: 200px;
     height: 35px;
+    float: left;
+    background-color: #fff;
 }
 .searchButton{
     padding-top: 0;
@@ -175,10 +177,14 @@ textarea {
     background-color: #1A56A8;
     color: #FFFFFF;
 }
+.search_box{
+    height: 62px;
+    line-height: 62px;
+}
 * { -ms-word-wrap: break-word; word-wrap: break-word; }
 html { -webkit-text-size-adjust: none; text-size-adjust: none; }
 html, body {height:100%;width:100%; }
-.wrap{width:88%;height:62px;margin-top:13.5px;border:0;position:relative;float: right;}
+.wrap{width:88%;margin-top:13.5px;border:0;position:relative;float: right;}
 .input{position:absolute;top:0;left:0;width:457px;margin:0;padding-left:5px;height:35px;line-height:30px;font-size:12px;border:1px solid #c9cacb;}
 /*s{position:absolute;top:1px;right:0;width:32px;height:32px;background:url("../../images/icons/arrow.png") no-repeat;}*/
 ._citys { width: 450px; display: inline-block; border: 2px solid #eee; padding: 5px; position: relative; }

@@ -86,7 +86,8 @@ app.controller(ngControllerName,function($scope){
         success:function(result){
             if(result.status == 0) {
                 var datas = result.data;
-                var item = {id : "", value: ""};
+                var item = {id: null, value: "全部"};
+                project.push(item);
                 for(var i=0; i<datas.length; i++){
                     item.id = datas[i].id;
                     item.value = datas[i].projectName;

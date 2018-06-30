@@ -1,11 +1,10 @@
-// var serviceUrl = "http://localhost/portal";
 var serviceImg = "http://zx.huacainfo.com/";
 var syid = 'pwl';
 
 $(function () {
     loadTestList();
-    $('.test_list').on('click', 'li', enterTest);
-});
+    $('.test_list').on('click', '.test', enterTest);
+})
 
 function enterTest() {
     var $this = $(this);
@@ -41,18 +40,17 @@ function viewList(data) {
 
 function replaceStr(data) {
     var itmp = listTemplate;
-    itmp = itmp.replace('#imgUrl#', data.cover);
     itmp = itmp.replace('#name#', data.name);
-    itmp = itmp.replace('#introduce#', data.introduce);
+    //itmp = itmp.replace('#introduce#', data.introduce);
     return $(itmp).data('id', data.id);
 }
 
-var listTemplate = '<li>' +
-    '					<div class="img">' +
-    '						<img src="' + serviceImg + '#imgUrl#"/>' +
-    '					</div>' +
-    '					<div class="text"  >' +
-    '						<p class="title">#name#</p>' +
-    '						<p class="remark">#introduce#</p>' +
-    '					</div>' +
-    '				</li>';
+var listTemplate = '<div class="test">' +
+    '						<div class="title">' +
+    '							<p>#name#</p>' +
+    '							<p class="number">1次</p>' +
+    '						</div>' +
+    '						<div class="pen_icon">' +
+    '							<i class="iconfont">&#xe63c;</i>' +
+    '						</div>' +
+    '			     </div>';

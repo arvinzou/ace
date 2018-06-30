@@ -41,13 +41,13 @@
         </div>
     </div>
     <div class="search">
-        <div class="finance_list_title">
-            精选金融产品信息
-        </div>
         <div class="search_combox">
             <div class="search_box">
-                <div style="width: 12%;float: left;height: 35px;">精准搜索：</div>
-                <div style="width: 88%;float: left;height: 35px;"><input type="text" id="financeTitle"
+                <div style="width: 8%;
+    float: left;
+    height: 35px;">精准搜索：
+                </div>
+                <div style="width: 88%;float: left;height: 35px;line-height: 35px;padding-top: 12px;"><input type="text" id="financeTitle"
                                                                          placeholder="请输入关键字搜索"/>
                     <button class="searchButton" ng-click="searchByParam();">搜索</button>
                 </div>
@@ -64,7 +64,7 @@
                     <tr>
                         <td ng-bind="item.productName"></td>
                         <td width="20%" ng-bind="item.companyName"></td>
-                        <td width="15%" ng-bind="item.createDate"></td>
+                        <td width="15%" ng-bind="item.createDate | formatDate"></td>
                     </tr>
                 </table>
             </div>

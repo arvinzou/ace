@@ -90,7 +90,6 @@ app.controller(ngControllerName,function($scope) {
     });
     var i = 0, page = 4;
     setInterval(function(){
-
         var arr = $scope.brandHover();
         if(i <= page-4 && page <arr.length){
             i ++;

@@ -1,4 +1,4 @@
-var pageSize=5;
+var pageSize=10;
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var currentPage = 1;
@@ -246,4 +246,12 @@ app.controller(ngControllerName,function($scope){
     }
 });
 
-	
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        if(text.length >10){
+            return text.substring(0,10);
+        }else{
+            return text;
+        }
+    }
+});

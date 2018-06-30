@@ -27,6 +27,19 @@ public class CuDonateListVo extends CuDonateList {
      */
     private String nickname;
 
+    /**
+     * 匿名选项  -- 0-否，1-是
+     */
+    private String anonymity;
+
+    public String getAnonymity() {
+        return anonymity;
+    }
+
+    public void setAnonymity(String anonymity) {
+        this.anonymity = anonymity;
+    }
+
     public String getHeadimgurl() {
         return headimgurl;
     }

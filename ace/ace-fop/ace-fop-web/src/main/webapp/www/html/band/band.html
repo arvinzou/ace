@@ -28,7 +28,7 @@
     <div class="juz">
         <div class="main">
             <div class="title01">
-                <span class="title_lager">品牌推广</span><span class="title_small">/&nbsp;Brand promotion</span>
+                <span class="title_lager">品牌推广</span><span class="title_small">/&nbsp;Brand Promotion</span>
             </div>
             <div class="product_container" ng-repeat="item in items" ng-click="showBrand($index);">
                 <div class="content_container">
@@ -37,6 +37,7 @@
                     </div>
                     <div class="words_container">
                         <h3 ng-bind="item.title"></h3>
+                        <span class="cp_remark" ng-bind="item.remark"></span>
                         <p class="createDate" ng-bind="item.releaseDate"></p>
                     </div>
                 </div>

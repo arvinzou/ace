@@ -181,7 +181,10 @@ ul,li{
 	font-size: 0.35rem;
 	color: #999999;
 	padding-bottom: 0.1rem;
-	padding-left:0.5rem
+	padding-left:0.5rem;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
 }
 .help_info{
 	font-size: 0.35rem;

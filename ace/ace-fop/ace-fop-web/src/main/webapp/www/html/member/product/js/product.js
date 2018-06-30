@@ -157,7 +157,9 @@ app.controller(ngControllerName,function($scope){
         });
     }
 
+    var rowIndex = 0;
     $scope.update_click = function(index){
+        rowIndex = index;
         var info = $scope.items[index];
         $scope.infoData = info;
         //初始化文本框
@@ -181,11 +183,12 @@ app.controller(ngControllerName,function($scope){
         }else{
             fileUrl = $scope.infoData.fileUrl;
         }
+        $scope.items[rowIndex].content = $('#pcontent').val();
         $.ajax({
             url: "/fop/www/updateInformationServiceDo",
             type:"post",
             async:false,
-            data:{modules: "2", id: id, title: $scope.infoData.title, content: $scope.infoData.content, fileUrl: fileUrl},
+            data:{modules: "2", id: id, title: $scope.infoData.title, content: $("#pcontent").val(), fileUrl: fileUrl},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);

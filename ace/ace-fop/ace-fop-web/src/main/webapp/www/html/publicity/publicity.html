@@ -22,7 +22,27 @@
 		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
 		<script type="text/javascript" src="js/publicity.js"></script>
 		<link rel="shortcut icon" href="../../images/favicon.ico">
+		<style>
+			li {
+				cursor: pointer;
+			}
+
+			table {
+				table-layout: fixed;
+			}
+
+			td {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+
+			ul, li {
+				text-decoration: none;
+			}
+		</style>
 	</head>
+
 
 	<body>
 	    <div id="header"></div>
@@ -36,7 +56,7 @@
 						<div class="search_combox">
 							<div class="search_box">
 								<div style="width: 100px;float: left;">精准搜索：</div>
-								<div style="width: 400px;float: left;"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button class="searchButton" ng-click="search();">搜索</button></div>
+								<div style="width: 400px;float: left;height: 35px;line-height: 35px;padding-top: 12px"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button class="searchButton" ng-click="search();">搜索</button></div>
 							</div>
 							<div style="clear: both;"></div>
 							<div class="search_filter2">
@@ -50,13 +70,10 @@
 									<select id="areaCode" ng-click="search();">
 										<option value="">请选择</option>
 										<option value="430702">武陵区</option>
-										<option value="43070201">东江街道</option>
-										<option value="43070202">启明街道</option>
-										<option value="43070203">永安街道</option>
+										<option value="430703">鼎城区</option>
 										<option value="430721">安乡县</option>
 										<option value="430722">汉寿县</option>
 										<option value="430723">澧县</option>
-										<option value="43072301">大堰垱镇</option>
 										<option value="430724">临澧县</option>
 										<option value="430725">桃源县</option>
 										<option value="430725">石门县</option>
@@ -79,14 +96,14 @@
 										<td width="15%" align="left">企业法人</td>
 										<td width="15%" align="left">企业性质</td>
 										<td width="15%" align="left">所属区域</td>
-										<td width="25%" align="right">企业地址</td>
+										<td width="25%" align="left">企业地址</td>
 									</tr>
 									<tr ng-repeat="item in items">
-										<td width="35%" ng-bind="item.fullName"></td>
+										<td width="30%" ng-bind="item.fullName"></td>
 										<td width="15%" ng-bind="item.realName"></td>
 										<td width="15%" ng-bind="item.companyPropertyName"></td>
-										<td width="35%" ng-bind="item.areaCodeName"></td>
-										<td width="15%" align="right" ng-bind="item.address"></td>
+										<td width="15%" ng-bind="item.areaCodeName"></td>
+										<td width="25%" ng-bind="item.address"></td>
 									</tr>
 								</table>
 							</div>

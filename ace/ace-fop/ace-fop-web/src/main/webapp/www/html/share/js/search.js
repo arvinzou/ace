@@ -30,7 +30,6 @@ $(function(){
             success:function(result){
                 var data = result.data;
                 if(data != null){
-                    layer.close(layerIndex);
                     flag=true;
                 }else{
                     layer.alert("未查询到数据！", {
@@ -51,6 +50,7 @@ $(function(){
             }
         });
         if(flag){
+            layer.close(layerIndex);
             window.open('searchRet.html?type='+type+'&keyword='+keyword);
         }
     });

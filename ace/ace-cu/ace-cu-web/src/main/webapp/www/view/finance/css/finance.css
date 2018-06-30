@@ -98,6 +98,7 @@ ul, li{
 	height: 1rem;
 	line-height: 1rem;
 	color: #999999;
+	text-align: center;
 	font-size: 0.3rem;
 	overflow: hidden;  /*溢出隐藏*/
 	text-overflow: ellipsis; /*以省略号...显示*/
@@ -111,6 +112,8 @@ ul, li{
 	height: 1rem;
 	display: block;
 	float: left;
+}
+.raise_title{
 	font-size: 0.4rem;
 	color: #333333;
 	font-weight: bold;

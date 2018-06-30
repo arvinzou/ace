@@ -21,15 +21,15 @@
 			}
 			
 			.appeal_index {
-				width: 1280px;
-				background-color: #FBFCFD;
+                width: 1100px;
+                background-color: #fff;
 				margin: auto;
 				padding-bottom: 30px;
 				margin-bottom: 62px;
 			}
 			
 			.current_site {
-				width: 1280px;
+                width: 1100px;
 				background-color: #F4F4F4;
 				margin: auto;
 				margin-top: 20px;
@@ -38,13 +38,12 @@
 			
 			.appeal_title {
 				text-align: center;
-				padding-top: 20px;
+                padding-top: 30px;
 				margin-bottom: 20px;
 			}
 			
 			.appeal_title h3 {
-				font-size: 24px;
-				font-weight: bolder;
+                font-size: 22px;
 				color: #1A56A8;
 			}
 			
@@ -53,36 +52,35 @@
 				color: #9EA7B4;
 			}
 			
-			.appeal_info p {
-				padding-left: 20px;
-				padding-right: 20px;
+			.appeal_info{
+				width: 90%;
+				margin: auto;
 				text-indent: 2em;
 				color: #31364B;
 				line-height: 30px;
 			}
 			.progress_title{
-				margin-top: 30px;
+				width: 90%;
+				margin: 30px auto;
 				border-top: 1px solid #E1E5ED;
 				font-size: 18px;
 				font-weight: bolder;
 				color: #31364B;
-				padding-left: 20px;
 				padding-top: 30px;
 			}
 			.peogress_info{
-				margin-top: 30px;
-				padding-left: 20px;
-				padding-right: 20px;
+				width: 90%;
+				margin: 30px auto;
 			}
 			.handle_result{
-				margin-top: 30px;
+				width: 90%;
+				margin: 30px auto;
 				border-top: 1px solid #E1E5ED;
 			}
 			.handle_title{
 				font-size: 18px;
 				font-weight: bolder;
 				color: #31364B;
-				padding-left: 20px;
 				padding-top: 30px;
 			}
 			.handle_info p {
@@ -136,7 +134,7 @@
 
 	<body>
 	<div id="header"></div>
-		<div class="current_site" ng-cloak>当前位置：政企服务 >> {{apealData.title}}</div>
+		<div class="current_site" ng-cloak>当前位置：诉求详情 >> {{apealData.title}}</div>
 		<div class="appeal_index">
 			<div class="appeal_doc">
 				<div class="appeal_title">
@@ -145,7 +143,7 @@
 				</div>
 			</div>
 			<div class="appeal_info">
-				<p ng-cloak>{{apealData.content}}</p>
+				<!--<p ng-cloak>{{apealData.content}}</p>-->
 			</div>
             <div class="progress">
                 <div class="progress_title">

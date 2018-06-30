@@ -1,100 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta content="yes" name="apple-mobile-web-app-capable"/>
-    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="format-detection" content="email=no"/>
-    <link rel="stylesheet" href="./css/swiper.min.css">
-    <link rel="stylesheet" href="./css/character-test.css"/>
-    <script src="js/jquery.min.js"></script>
-    <!--<script src="js/index.js"></script>-->
-    <script src="js/swiper.min.js"></script>
-    <title>理论测试</title>
-
+	<meta charset="utf-8">
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+	<link rel="stylesheet" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+	<link rel="stylesheet" href="css/index.css"/>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	<title></title>
 </head>
 
 <body>
-<div class="introduction">
-    <div style="overflow-y: scroll;">
-        <div class="cover">
-            <img src="image/1040X585.jpg">
-        </div>
-        <div class="contents">
-            <div class="title">
-                <h3 class="info_name"></h3>
-            </div>
-            <div class="remark">
-                <ul>
-                    <li><span class="info_total"></span>道题</li>
-                    <li>总分<span class="info_score"></span>分</li>
-                    <li></li>
-                </ul>
-            </div>
-            <div class="content_text">
-                <h3>介绍：</h3>
-                <p class="info_introduce">
-                </p>
-            </div>
-            <div class="button">
-                <div>
-                    <button class="noDo">不想测试</button>
-                </div>
-                <div>
-                    <button class="yesDo">开始测试</button>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="head">
+	<div class="content">
+		<div class="test_type">选择题</div>
+		<div class="swiper-pagination test_pagination"></div>
+	</div>
+</div>
 
-</div>
-<div class="progress">
-    <progress value="0" max="0"></progress>
-</div>
-<!-- Swiper -->
 <div class="swiper-container">
-    <div class="swiper-bg" data-swiper-parallax="-30%" data-swiper-parallax-duration="1000"></div>
-    <div class="swiper-wrapper">
-
-    </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination">
-
-    </div>
-    <!-- Add Arrows -->
-    <botton class="swiper-button-next swiper-btn"></botton>
-    <botton class="swiper-button-prev swiper-btn"></botton>
+	<div class="swiper-wrapper">
+	</div>
 </div>
-<div class="remind-bg">
-    <div class="remind-content">
-        <h3>提示：</h3>
-        <h4></h4>
-        <div class="btn-bg">
-            <!-- <button class="defult-btn btn-1">提交</button>
-                <button class="defult-btn btn-2">再看看</button> -->
-        </div>
-    </div>
+<div class="footer">
+	<div class="menuList">
+		<i class="iconfont show_testlist">&#xe610;</i>
+		<i class="iconfont timer">00:00</i>
+	</div>
 </div>
 
-<script src="js/character-test.js"></script>
-<script src="js/test.js"></script>
-<script>
-    //设置token
-    function SetToken(token) {
-        Token = token;
-        if (Token != null) {
-            console.log("获得token");
-            $(".remind-content").find("h3").html("获得token:" + Token);
-            ShowRemind(3);
-        }
-        if (Browser() == 'android') {
-            window.control.SetToken(token);
-        }
-    }
-</script>
+<div class="model_testlist">
+	<div class="model_list">
+		<p class="model_list_title">题目列表</p>
+		<div class="show_score">
+			<div class="top">
+				<span class="total"></span>/<span class="info_score"></span>
+			</div>
+			<div class="bottom">
+				<span class="time_end">用时:00:00</span>
+			</div>
+		</div>
+		<div class="model_list_lists">
+			<ul>
+			</ul>
+		</div>
+	</div>
+	<div class="model_tool">
+		<button class="goon">继续答题</button>
+		<button class="over">交 卷</button>
+	</div>
+</div>
 </body>
+<script src="js/index.js"></script>
 
 </html>

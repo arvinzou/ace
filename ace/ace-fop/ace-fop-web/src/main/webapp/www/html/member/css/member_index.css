@@ -2,6 +2,7 @@
 	margin: 0px;
 	padding: 0px;
 }
+
 .content{
 	width: 100%;
 }
@@ -18,13 +19,13 @@
 }
 
 .menu .menu_li {
-	width: 235px;
+	width: 186px;
 	display: block;
 	height: 80px;
 	float: left;
 	margin-bottom: 20px;
 	padding-top: 15px;
-	margin-right: 20px;
+	margin-right: 24px;
 	background-color: #fff;
 }
 
@@ -45,8 +46,8 @@
 }
 .content_top{
     width: 100%;
-	height: 212px;
-    padding: 0 100px 0 30px;
+	height: auto;
+	padding: 0 34px 0 30px;
     background-color: #fff;
 }
 .title{

@@ -6,11 +6,18 @@ var pageSize = 9999;
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
+    layer.open({
+        type:1,
+        content: $("#warning").html(),
+        btn: '我知道了',
+        shadeClose:false
+    });
+
 	$.ajax({
         url: "/cu/www/project/findList",
         type:"post",
         async:false,
-        data:{start: page, limit: pageSize, type: "0"},
+        data:{start: page, limit: pageSize, type: "2"},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.rows;
@@ -30,7 +37,7 @@ app.controller(ngControllerName,function($scope){
     * 查看救急难项目详情
     */
    $scope.showProjectInfo = function(id){
-   		window.location.href = '../donation/donation.html?projectId='+id;
+   		window.location.href = '../donation/donation.html?projectId='+id+'&type=2';
    }
    
    /**

@@ -42,25 +42,22 @@
         <div id="myTabContent" class="tab-content">
             <div style="background-color: #ffffff">
                 <div class="search">
-                    <div class="finance_list_title">
-                        精选企业融资信息
-                    </div>
                     <div class="search_combox">
                         <div class="search_box">
                             <div style="width: 12%;float: left;height: 35px;">精准搜索：</div>
-                            <div style="width: 88%;float: left;height: 35px;"><input type="text" id="financeTitle"
+                            <div style="width: 88%;float: left;height: 35px;line-height: 35px;padding-top: 12px;"><input type="text" id="financeTitle"
                                                                                      placeholder="请输入关键字搜索"/>
                                 <button class="searchButton" ng-click="searchByParam();">搜索</button>
                             </div>
                         </div>
                         <div class="search_filter1">
                             <div class="filter_title1">预期年收益：</div>
-                            <div id="demo1"></div>
+                            <div id="demo1" ng-click="searchByParam();"></div>
                         </div>
                         <div style="clear: both;"></div>
                         <div class="search_filter2">
                             <div class="filter_title2">融资年限：</div>
-                            <div id="demo2"></div>
+                            <div id="demo2" ng-click="searchByParam();"></div>
                         </div>
                     </div>
                 </div>
@@ -72,31 +69,27 @@
                         <div class="table_div" ng-repeat="item in items" ng-click="showFinanceInfo($index);">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td colspan="3" class="project_title" ng-bind="item.financeTitle"></td>
-                                    <td>&nbsp;</td>
+                                    <td colspan="2" class="project_title" ng-bind="item.financeTitle"></td>
                                     <td><span class="income_title" ng-cloak>预计年收益：</span><span class="income">{{item.yearYield}}%</span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td ng-cloak>企业名称：{{item.companyName}}</td>
-                                    <td ng-cloak>企业性质：{{item.companyProperty}}</td>
-                                    <td>&nbsp;</td>
-                                    <td colspan="2" ng-cloak>企业地址：{{item.address}}</td>
+                                    <td width="30%" ng-cloak>企业名称：{{item.companyName}}</td>
+                                    <td width="30%" ng-cloak>企业性质：{{item.companyProperty}}</td>
+                                    <td width="40%" ng-cloak>企业地址：{{item.address}}</td>
                                 </tr>
                                 <tr>
-                                    <td ng-cloak>融资金额：{{item.financeAmount}}</td>
-                                    <td ng-cloak>融资年限：{{item.financeYear}}年</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
+                                    <td width="30%" ng-cloak>融资金额：{{item.financeAmount}}万元</td>
+                                    <td width="30%" ng-cloak>融资年限：{{item.financeYear}}年</td>
+                                    <td width="40%">&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" ng-bind="item.financeContent"
+                                    <td colspan="3" ng-bind="item.remark"
                                         style="word-break: break-all; word-wrap:break-word;">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" ng-cloak style="color: #9EA7B4">发布时间：{{item.releaseDate}}</td>
+                                    <td colspan="3" ng-cloak style="color: #9EA7B4">发布时间：{{item.releaseDate | formatDate}}</td>
                                 </tr>
                             </table>
                         </div>

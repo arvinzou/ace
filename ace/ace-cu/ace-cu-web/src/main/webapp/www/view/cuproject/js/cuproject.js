@@ -10,7 +10,7 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/project/findList",
         type:"post",
         async:false,
-        data:{start: page, limit: pageSize, type: "0"},
+        data:{start: page, limit: pageSize, type: "0", orderBy: "sequence"},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.rows;

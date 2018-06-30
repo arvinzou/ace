@@ -8,7 +8,7 @@ html{
 	background-color: #ffffff;
 }
 .index {
-	width: 1280px;
+	width: 1100px;
 	margin: auto;
 	padding-left: 30px;
 	padding-right: 30px;
@@ -39,20 +39,15 @@ html{
 }
 
 .table_div {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px dashed #E1E5ED;
 }
 
 .table_div tr {
 	height: 30px;
 }
 
-.search {
-	margin-top: 30px;
-}
-
-.search_list {
-	margin-top: 30px;
-}
 
 .search_filter1 {
 	width: 100%;
@@ -170,10 +165,10 @@ html{
 }
 
 .finance_list_title {
-	height: 62px;
-	line-height: 62px;
-	margin-bottom: 30px;
-	border-bottom: 1px solid #E1E5ED;
+	height: 54px;
+	line-height: 54px;
+	border-bottom: 1px dashed #E1E5ED;
+	margin-bottom: 20px;
 }
 
 /*.table_div table:hover {*/
@@ -181,14 +176,13 @@ html{
 /*}*/
 
 .table_div table{
-	border-bottom: 1px solid #E1E5ED;
 	cursor: pointer;
 }
 .title_lager {
 	color: #565B70;
 	font-weight: bolder;
 	font-size: 18px;
-	width: 12%;
+	width: 8%;
 	display: inline-block;
 	border-bottom: 3px solid #FF9F00;
 	height: 62px;
@@ -198,7 +192,7 @@ html{
 .title_small {
 	color: #C3CBD6;
 	display: inline-block;
-	width: 88%;
+	width: 92%;
 	border-bottom: 1px solid #E1E5ED;
 	height: 62px;
 	line-height: 62px;
@@ -207,7 +201,7 @@ html{
 	width: 100px;
 	float: left;
 	height: 30px;
-	line-height: 35px;
+	line-height: 29px;
 	text-align: center;
 	border: 1px solid #E1E5ED;
 	margin-top: 16px;
@@ -229,10 +223,23 @@ html{
 	background-color: #1A56A8;
 	color: #FFFFFF;
 }
+.search_box{
+	height: 62px;
+	line-height: 62px;
+}
+.search_box > div {
+	vertical-align: middle;
+}
+
+.financeTitle {
+	border: 1px #E1E5ED solid;
+	padding: 0 0 0 8px;
+}
+
 * { -ms-word-wrap: break-word; word-wrap: break-word; }
 html { -webkit-text-size-adjust: none; text-size-adjust: none; }
 html, body {width:100%; }
-.wrap{width:400px;height:62px;margin-top:13.5px;border:0;position:relative;float: left;}
+.wrap{width:400px;margin-top:13.5px;border:0;position:relative;float: left;}
 .input{position:absolute;top:0;left:0;width:457px;margin:0;padding-left:5px;height:35px;line-height:30px;font-size:12px;border:1px solid #c9cacb;}
 /*s{position:absolute;top:1px;right:0;width:32px;height:32px;background:url("../../images/icons/arrow.png") no-repeat;}*/
 ._citys { width: 450px; display: inline-block; border: 2px solid #eee; padding: 5px; position: relative; }

@@ -26,7 +26,6 @@
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/Popt.js"></script>
     <script type="text/javascript" src="js/city.json.js"></script>
-    <script type="text/javascript" src="js/citySet.js"></script>
     <script type="text/javascript" src="js/citySet_modal.js"></script>
     <script type="text/javascript" src="js/cooperation.js"></script>
 </head>
@@ -52,14 +51,14 @@
     <div id="myTabContent" class="tab-content">
         <div style="background-color: #ffffff;">
             <div class="search">
-                <div class="finance_list_title">
+               <!-- <div class="finance_list_title">
                     精选项目信息
                 </div>
-
+-->
                 <div class="search_combox">
                     <div class="search_box">
                         <div style="width: 100px;float: left;">精准搜索：</div>
-                        <div style="width: 300px;float: left;height: 35px;">
+                        <div style="width: 300px;float: left;height: 35px;line-height: 35px;padding-top: 12px">
                             <input type="text" id="financeTitle" placeholder="请输入关键字搜索"/>
                             <button class="searchButton" ng-click="searchByParam();">搜索</button>
                         </div>
@@ -73,7 +72,7 @@
                     <div class="search_filter2">
                         <div class="filter_title2">所属区域：</div>
                         <div class="wrap"><input class="input" name="" id="city" type="text" placeholder="请选择"
-                                                 autocomplete="off" readonly="true"/></div>
+                                                 autocomplete="off" readonly="true" oninput="OnInput(event);" onpropertychange="OnPropChanged(event);"/></div>
                     </div>
                     <div style="clear: both;"></div>
                     <div class="search_filter2">
@@ -95,23 +94,19 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td colspan="3" class="project_title" ng-bind="item.projectName"></td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td ng-cloak>企业名称:{{item.displayName}}</td>
-                                <td ng-cloak>企业性质：{{item.companyProperty}}</td>
-                                <td ng-cloak>&nbsp;</td>
-                                <td colspan="2"  ng-cloak>企业通讯地址：{{item.address}}</td>
+                                <td ng-cloak width="30%">企业名称:{{item.displayName}}</td>
+                                <td ng-cloak width="30%">企业性质：{{item.companyProperty}}</td>
+                                <td ng-cloak width="40%">企业通讯地址：{{item.address}}</td>
                             </tr>
                             <tr>
-                                <td ng-cloak>合作方式：{{item.coopTypeName}}</td>
-                                <td ng-cloak>所属区域：{{item.codeFullName}}</td>
-                                <td>&nbsp;</td>
-                                <td  colspan="2" ng-cloak>项目类型：{{item.projectType}}</td>
+                                <td ng-cloak width="30%">合作方式：{{item.coopTypeName}}</td>
+                                <td ng-cloak width="30%">所属区域：{{item.codeFullName}}</td>
+                                <td ng-cloak width="40%">项目类型：{{item.projectType}}</td>
                             </tr>
                             <tr>
-                                <td colspan="5" ng-cloak style="color: #9EA7B4">发布时间：{{item.releaseDate}}</td>
+                                <td colspan="3" ng-cloak style="color: #9EA7B4">发布时间：{{item.releaseDate | formatDate}}</td>
                             </tr>
                         </table>
                     </div>

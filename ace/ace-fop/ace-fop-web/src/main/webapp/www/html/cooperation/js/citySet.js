@@ -29,6 +29,7 @@ function SelCity(obj, e) {
         var lev = $(this).data("name");
         ths.value = $(this).data("name");
         areaCode = $(this).data("id");
+        console.log(areaCode);
         if (document.getElementById("hcity") == null) {
             var hcitys = $('<input>', {
                 type: 'hidden',
