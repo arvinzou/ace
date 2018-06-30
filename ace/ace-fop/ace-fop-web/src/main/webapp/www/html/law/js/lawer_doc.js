@@ -20,7 +20,7 @@ app.controller(ngControllerName,function($scope){
         $(".title_lager").text("法律公益");
         $(".title_small").html("The law of public");
     }else{
-        $(".title_lager").text("法律文书");
+        $(".title_lager").text("法律诉求");
         $(".title_small").html("Law Demands");
     }
 
