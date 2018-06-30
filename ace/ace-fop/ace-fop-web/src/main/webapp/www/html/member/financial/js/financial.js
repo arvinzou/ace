@@ -8,6 +8,7 @@ var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
     //初始化文本框
 
+    var relationId = parent.userId;
     var editor = new Simditor({
         textarea: $('#editor_release'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
@@ -23,7 +24,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findFinanceProjectList",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage},
+        data:{limit:pageSize, page: currentPage, relationId: relationId},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -73,7 +74,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findFinanceProjectList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, status: status},
+            data:{limit:pageSize, page: currentPage, status: status, relationId: relationId},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -103,7 +104,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findFinanceProjectList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status},
+            data:{limit:pageSize, page: 1, status: status, relationId: relationId},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;

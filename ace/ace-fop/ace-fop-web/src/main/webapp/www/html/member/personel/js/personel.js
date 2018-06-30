@@ -6,6 +6,7 @@ var status = null;
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
+    var relationId = parent.userId;
     var editor2 = new Simditor({
         textarea: $('#editor_release'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
@@ -21,7 +22,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findInformationServiceListDo",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, modules: "3"},
+        data:{limit:pageSize, page: currentPage, modules: "3", relationId: relationId},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -71,7 +72,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, modules: "3", status: status},
+            data:{limit:pageSize, page: currentPage, modules: "3", status: status, relationId: relationId},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -101,7 +102,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, modules: "3", status: status},
+            data:{limit:pageSize, page: 1, modules: "3", status: status, relationId: relationId},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;

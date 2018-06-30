@@ -7,11 +7,12 @@ var status = null;
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
+    var relationId = parent.userId;
     $.ajax({
         url: "/fop/www/findLawQuestionList",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage},
+        data:{limit:pageSize, page: currentPage, relationId: relationId},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -35,7 +36,7 @@ app.controller(ngControllerName,function($scope){
                     jump: function(obj, first){ //触发分页后的回调
                         if(!first){
                             currentPage = obj.curr;
-                            $scope.searchList(currentPage, pageSize);
+                            $scope.searchList(currentPage, pageSize, relationId);
                         }
                     }
 
@@ -55,7 +56,7 @@ app.controller(ngControllerName,function($scope){
         }
     });
 
-    $scope.searchList = function(currentPage, pageSize, status){
+    $scope.searchList = function(currentPage, pageSize, status, relationId){
         var key_word = $("#key_word").val();
         $.ajax({
             url: "/fop/www/findLawQuestionList",
@@ -91,7 +92,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findLawQuestionList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status},
+            data:{limit:pageSize, page: 1, status: status, relationId: relationId},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -115,7 +116,7 @@ app.controller(ngControllerName,function($scope){
                         jump: function(obj, first){ //触发分页后的回调
                             if(!first){
                                 currentPage = obj.curr;
-                                $scope.searchList(currentPage, pageSize, status);
+                                $scope.searchList(currentPage, pageSize, status, relationId);
                             }
                         }
 
