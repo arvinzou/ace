@@ -266,3 +266,13 @@ function showUploadImg(imgpath) {
     $('.viewPicture img').prop('src',imgpath);
     $('.uploadText').hide();
 }
+
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        if(text.length >10){
+            return text.substring(0,10);
+        }else{
+            return text;
+        }
+    }
+});
