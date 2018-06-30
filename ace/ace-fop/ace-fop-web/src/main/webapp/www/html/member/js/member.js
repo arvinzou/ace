@@ -135,7 +135,7 @@ app.controller(ngControllerName,function($scope){
 
 app.filter('formatDate', function() { //可以注入依赖
     return function(text) {
-        if(text != ''){
+        if(text!=undefined && text.length>10){
             return text.substring(0,10);
         }else{
             return text;

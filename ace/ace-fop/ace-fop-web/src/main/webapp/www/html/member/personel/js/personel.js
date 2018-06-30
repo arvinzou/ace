@@ -39,7 +39,7 @@ app.controller(ngControllerName,function($scope){
                     cont: $("#paganation"),   //容器名
                     pages: totalPage,           //总页数
                     curr: currentPage,         //当前页
-                    skip: true,
+                    //skip: true,
                     skin: '#1A56A8',
                     groups: 5,                  //连续显示分页数
                     jump: function(obj, first){ //触发分页后的回调
@@ -119,7 +119,7 @@ app.controller(ngControllerName,function($scope){
                         cont: $("#paganation"),   //容器名
                         pages: totalPage,           //总页数
                         curr: currentPage,         //当前页
-                        skip: true,
+                        //skip: true,
                         skin: '#1A56A8',
                         groups: 5,                  //连续显示分页数
                         jump: function(obj, first){ //触发分页后的回调
