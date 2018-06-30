@@ -36,7 +36,7 @@ radio:checked {
     width: 665px;
     height: 42px;
     line-height: 40px;
-    margin: 60px auto;
+    margin: 60px auto 40px;
     border: 1px solid #1A56A8;
     position: relative;
 }
@@ -44,7 +44,7 @@ radio:checked {
     width: 665px;
     margin: 30px auto;
     padding: 15px;
-    background-color: #E1E5ED;
+    background-color: rgba(247, 247, 247, 1);;
     color: #666666;
     line-height: 28px;
 }
@@ -53,6 +53,7 @@ radio:checked {
     height: 40px;
     line-height: 40px;
     border: none;
+    padding-left: 18px;
 }
 .search_opt button{
     width: 80px;

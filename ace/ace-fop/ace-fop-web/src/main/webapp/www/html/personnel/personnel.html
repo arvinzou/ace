@@ -36,7 +36,7 @@
         <div class="main">
             <div class="title01">
                 <span class="title_lager">人才信息</span><span
-                    class="title_small">/&nbsp;Talent information</span>
+                    class="title_small">/&nbsp;Talent Information</span>
                 <button class="law_help" data-toggle="modal" data-target=""
                          ng-click="before_release($event);">发布招聘
                  </button>
@@ -45,16 +45,12 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tbody>
                     <tr style="font-weight: bolder;">
-                        <td width="15px"></td>
                         <td align="left" style="color: #565B70;">岗位名称</td>
                         <td width="40%" align="left" style="color: #565B70;">发布公司</td>
                         <td width="20%" align="right" style="color: #565B70;">发布时间</td>
                     </tr>
                     <tr class="tr_bottom" style="line-height: 15px" ng-repeat="item in items"
                         ng-click="showInfo($index)">
-                        <td align="center" width="15px">
-                            <div class="dot"></div>
-                        </td>
                         <td ng-bind="item.title"></td>
                         <td width="40%" ng-bind="item.companyName"></td>
                         <td align="right" style="color: #999;" width="20%" ng-bind="item.releaseDate | formatDate"></td>
