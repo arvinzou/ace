@@ -3,6 +3,7 @@ var totalScore = 0;
 var minute = 0;
 var second = 0;
 var dingshiqi;
+var sumTest;
 
 $(function () {
     loadTestInfo();
@@ -12,9 +13,11 @@ $(function () {
     $('.footer').on('click', '.show_testlist', showTestList);
     $('.model_testlist .model_tool').on('click', '.goon', hiddenTestList);
     $('.model_testlist .model_tool').on('click', '.over', testDone);
+    $('.prompt_box  .content').on('click', '.isover', testDone);
     $('.model_testlist .model_list_lists').on('click', 'li', slideToTest);
     $('.swiper-wrapper').on('click', '.options', selectiOption);
 });
+
 
 function starttimer() {
     dingshiqi = setInterval(timer, 1000);
@@ -112,7 +115,8 @@ function loadTest() {
 function viewTest(data) {
     $('.swiper-wrapper').empty();
     $('.model_list_lists ul').empty();
-    for (var i = 0; i < data.length; i++) {
+    sumTest = data.length
+    for (var i = 0; i < sumTest; i++) {
         $('.swiper-wrapper').append(replaceTestStr(data[i]));
         $('.model_list_lists ul').append('<li>' + (i + 1) + '</li>');
     }
@@ -167,16 +171,76 @@ function initWeb() {
             el: '.swiper-pagination',
             type: 'fraction',
         },
+        on: {
+            slideChangeTransitionEnd: function () {
+                console.log(2);
+                if ((sumTest - 1) == this.activeIndex) {
+                    console.log(2);
+                    endingCheck();
+                }
+            },
+        },
     })
+}
+
+function endingCheck() {
+    var awer = checkDone();
+    if (awer === undefined) {
+        //弹出题目没有做完，是否提交
+        return
+    }
+    if (awer) {
+        promptBox(true);//做完。
+        return;
+    }
+    promptBox(false);//没做完。
+}
+
+
+function promptBox(flag) {
+    var msg;
+    var btnText;
+    $('.prompt_box  .content .istool').off('click');
+    if (flag) {
+        msg = "题目已经全部做完。";
+        btnText = "再看看";
+        $('.prompt_box  .content').on('click', '.istool', continueto);
+    } else {
+        msg = "注意！还有题目没有做完。";
+        btnText = "继续测试";
+        $('.prompt_box  .content').on('click', '.istool', showTestList);
+    }
+    $('.prompt_work').text(msg);
+    $('.istool').text(btnText);
+    $('.prompt_box').show();
+}
+
+//继续看看
+function continueto() {
+    $('.prompt_box').hide();
+}
+
+function checkDone() {
+    var $tests = $('.swiper-wrapper .swiper-slide');
+    if (!$tests.eq(sumTest - 1).find(".options_done").length) {
+        return undefined;
+    }
+    for (var i = 0; i < $tests.length; i++) {
+        if (!$tests.eq(i).find(".options_done").length) {
+            return false;//题目没做完。。是否提交
+        }
+    }
+    return true;
 }
 
 function selectiOption(e) {
     var $this = $(this);
     var index = mySwiper.activeIndex;
     if ($this.is('.onlyOne')) {
+        console.log('select');
         $this.siblings().children("div.icon").removeClass('options_done');
         $this.children("div.icon").addClass('options_done');
-        mySwiper.slideTo(index + 1, 1000, false);
+        mySwiper.slideTo(index + 1, 700, false);
     } else {
         if ($this.children("div.icon").is('.options_done')) {
             $this.children("div.icon").removeClass('options_done');
@@ -184,12 +248,18 @@ function selectiOption(e) {
             $this.children("div.icon").addClass('options_done');
         }
     }
+    if (index == (sumTest - 1)) {
+        endingCheck();
+    }
+    /*标记题目列表状态*/
     if ($this.parent().find('.options_done').length >= 1) {
         $('.model_list_lists ul li').eq(index).addClass('test_done');
     }
 }
 
 function showTestList() {
+    console.log(4);
+    $('.prompt_box').hide();
     $('.model_testlist').removeClass('model_testlist_action');
     $('.model_testlist').removeClass('model_testlist_feaction');
     $('.model_testlist').addClass('model_testlist_action');
