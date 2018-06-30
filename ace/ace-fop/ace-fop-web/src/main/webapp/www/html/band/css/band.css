@@ -12,6 +12,7 @@ body{
 .content_container{
     width: 94%;
     height: 100%;
+    cursor: pointer;
 }
 .img_container{
     width: 25%;

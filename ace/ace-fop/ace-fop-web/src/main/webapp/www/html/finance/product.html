@@ -64,12 +64,12 @@
                     <tr>
                         <td ng-bind="item.productName"></td>
                         <td width="20%" ng-bind="item.companyName"></td>
-                        <td width="15%" ng-bind="item.createDate"></td>
+                        <td width="15%" ng-bind="item.createDate | formatDate"></td>
                     </tr>
                 </table>
             </div>
-            <div id="paganation"></div>
         </div>
+        <div id="paganation"></div>
     </div>
 </div>
 </body>

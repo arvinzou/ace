@@ -25,6 +25,8 @@
 }
 .project_list {
 	color: #657180;
+	min-height: 600px;
+	max-height: 1200px;
 }
 
 .search {
