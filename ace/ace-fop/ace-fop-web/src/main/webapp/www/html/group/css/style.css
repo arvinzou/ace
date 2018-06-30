@@ -37,6 +37,8 @@ p {
     height: auto;
     text-align: center;
     border-bottom: 1px solid #E1E5ED;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .leaderItem .headimg {
@@ -49,4 +51,7 @@ p {
 .leaderItem .headimg img {
     width: 100%;
     object-fit: cover;
+}
+.leaderList{
+    margin-bottom: 62px;
 }
