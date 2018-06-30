@@ -9,6 +9,8 @@ var coverImg_edit = null;
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
+
+    var relationId = parent.userId;
     //初始化文本框
     var editor = new Simditor({
         textarea: $('#editor'),
@@ -26,7 +28,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findInformationServiceListDo",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, modules: "2"},
+        data:{limit:pageSize, page: currentPage, modules: "2", relationId: relationId},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -78,7 +80,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, status: status,modules: "2"},
+            data:{limit:pageSize, page: currentPage, status: status,modules: "2", relationId: relationId},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -110,7 +112,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status, modules: "2"},
+            data:{limit:pageSize, page: 1, status: status, modules: "2", relationId: relationId},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
