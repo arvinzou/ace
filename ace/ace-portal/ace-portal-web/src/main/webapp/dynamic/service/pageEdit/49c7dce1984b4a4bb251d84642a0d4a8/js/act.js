@@ -60,6 +60,7 @@ function App() {
     });
 
     getPageList(pageId);
+    getCover(pageId);
 }
 
 function getCategoryItemsList(pageId) {
@@ -343,6 +344,19 @@ function initEvents() {
         $("#modify_title_box").css("display", 'block');
     });
 
+    $('#img-uploader').on('show.bs.modal', function (event) {
+        console.log("=============================================");
+        var button = $(event.relatedTarget);
+        xsize = button.data('xsize');
+        ysize = button.data('ysize');
+        cover= button.data('cover');
+        console.log(xsize+"/"+ysize);
+        console.log(cover);
+        preImg('img/left_pic_two.jpg');
+
+    });
+
+
 }
 
 function cancel_modify_title() {
@@ -488,6 +502,102 @@ function delCatadory(){
                 $('#model1').modal('hide');
                 getCategoryItemsList(pageId);
                 ifr.window.location.reload()
+            } else {
+                alert(data.errorMessage);
+            }
+        }
+    });
+}
+function delCover(){
+ var url = contextPath + '/tplPage/updateCoverById.do';
+    $.ajax({
+        url: url,
+        type: 'POST',
+        timeout: 30000,
+        dataType: 'json',
+        data: {
+            id:pageId,
+            cover:null
+        },
+        beforeSend: function () {
+            try {
+                loading = startLoading();
+            } catch (e) {};
+            if (loading) {
+                loading.settext("请求中，请稍后......");
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (loading) {
+                loading.remove();
+            }
+            if (data.status == 0) {
+                getCover(pageId);
+                ifr.window.location.reload()
+            } else {
+                alert(data.errorMessage);
+            }
+        }
+    });
+}
+function updateCover(){
+ var url = contextPath + '/tplPage/updateCoverById.do';
+ var cover=$("#cover-img1").attr("src");
+    $.ajax({
+        url: url,
+        type: 'POST',
+        timeout: 30000,
+        dataType: 'json',
+        data: {
+            id:pageId,
+            cover:cover
+        },
+        beforeSend: function () {
+            try {
+                loading = startLoading();
+            } catch (e) {};
+            if (loading) {
+                loading.settext("请求中，请稍后......");
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (loading) {
+                loading.remove();
+            }
+            if (data.status == 0) {
+                getCover(pageId);
+                ifr.window.location.reload()
+            } else {
+                alert(data.errorMessage);
+            }
+        }
+    });
+}
+function getCover(pageId){
+ var url = contextPath + '/www/getById.do';
+    $.ajax({
+        url: url,
+        type: 'POST',
+        timeout: 30000,
+        dataType: 'json',
+        data: {
+            id:pageId
+        },
+        beforeSend: function () {
+        },
+        success: function (data) {
+            console.log(data);
+            if (data.status == 0) {
+              if(data.data.cover){
+                            var img="#cover-img1";
+                            $(img).attr("src",data.data.cover);
+                            $(img).css("display","block");
+                            $(img).css("max-width",300);
+                            $(img).css("max-height",169);
+              }
+
             } else {
                 alert(data.errorMessage);
             }

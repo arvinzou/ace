@@ -8,7 +8,9 @@
       $pimg,
 	  global_api,
       xsize,
-      ysize;
+      ysize,
+      cover;
+
 	  
   jQuery(function ($) {
       $target = $('#target');
@@ -160,10 +162,11 @@
       //图片上传成功触发，ps:data是返回值（第三个参数是返回值）
       uploader.bind('FileUploaded', function (uploader, files, res) {
 		  var data=JSON.parse(res.response);
-		  $("#cover-img").attr("src",data.file_path);
-		  $("#cover-img").css("display","block");
-		  $("#cover-img").css("max-width",300);
-		  $("#cover-img").css("max-height",300);
+		  var img="#"+cover;
+		  $(img).attr("src",data.file_path);
+		  $(img).css("display","block");
+		  $(img).css("max-width",xsize);
+		  $(img).css("max-height",ysize);
 		  $('#img-uploader').modal('hide');
 
       });
@@ -187,7 +190,7 @@
       });
       $('#img-uploader .btn-success').on('click', function () {
           uploader.setOption({
-              multipart_params: {x:global_api.x,y:global_api.y,desWidth:global_api.w,desHeight:global_api.h,srcWidth:boundx,srcHeight:boundy}
+              multipart_params: {x:parseInt(global_api.x),y:parseInt(global_api.y),desWidth:parseInt(global_api.w),desHeight:parseInt(global_api.h),srcWidth:parseInt(boundx),srcHeight:parseInt(boundy)}
           });
           uploader.start();
       });

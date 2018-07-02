@@ -74,4 +74,11 @@ public class WWWPageController extends PortalBaseController {
 	public  Map<String, java.lang.Object> getTplPageById(String id) throws Exception{
 		return tplPageService.getTplPageById(id);
 	}
+
+
+	@RequestMapping(value = "/getById.do")
+	@ResponseBody
+	public  Map<String, java.lang.Object> getById(String id) throws Exception{
+		return tplPageService.getById(id);
+	}
 }
