@@ -57,7 +57,9 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <nav class="col-md-8">
+
+
                                             <nav id="navbar-example" class="navbar navbar-default navbar-static">
                                                 <div class="row">
                                                     <div class="col-md-8" id="categoryItems">
@@ -92,7 +94,40 @@
 
                                             </nav>
 
-                                            <div>
+
+                                            <nav class="navbar navbar-default navbar-static">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="collapse navbar-collapse" style="float:right">
+                                                            <ul class="nav navbar-nav">
+                                                                <li class="dropdown">
+                                                                    <a id="cover1" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                                        封面管理
+                                                                        <span class="caret"></span>
+                                                                    </a>
+                                                                    <ul class="dropdown-menu" aria-labelledby="cover1">
+                                                                        <li data-toggle="modal" data-action="upload" data-target="#model2">
+                                                                            <a href="#">上传</a>
+                                                                        </li>
+
+                                                                        <li data-action="del" onclick="delCover();">
+                                                                            <a href="#">删除</a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div id="cover">
+
+                                                </div>
+
+                                            </nav>
                                                 <nav class="navbar navbar-default navbar-static">
                                                     <div class="row">
                                                         <div class="col-md-8">
@@ -126,11 +161,12 @@
                                                     <div id="navitem">
 
                                                     </div>
-                                            </div>
+
+                                                </nav>
 
                                             <!--=======================================-->
 
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
