@@ -139,5 +139,20 @@ public interface TplPageService {
 	 */
 	public abstract MessageResponse updateNameById(String id,String name) throws Exception;
 
+
+	/**
+	 *
+	 * @Title:updateNameById
+	 * @Description:  TODO(根据页面ID更新封面)
+	 * @param:        @param id
+	 * @param:        @param cover
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-07-02
+	 */
+	public abstract MessageResponse updateCoverById(String id,String cover) throws Exception;
+
 	
 }

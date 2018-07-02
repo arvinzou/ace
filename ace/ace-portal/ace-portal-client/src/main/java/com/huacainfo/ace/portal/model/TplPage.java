@@ -9,6 +9,8 @@ public class TplPage {
 
     private String name;
 
+    private String cover;
+
     private String domainName;
 
     private String shareName;
@@ -47,6 +49,14 @@ public class TplPage {
 
     public void setTplId(String tplId) {
         this.tplId = tplId == null ? null : tplId.trim();
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     public String getName() {
