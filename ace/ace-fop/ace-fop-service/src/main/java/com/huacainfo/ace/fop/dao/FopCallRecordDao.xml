@@ -259,6 +259,7 @@
         FROM fop_company t
         LEFT JOIN fop_person p ON t.personId = p.id
         WHERE p.mobileNumer IS NOT NULL
+        and t.status='2'
         UNION ALL
         SELECT
             t.id AS toUserId,
@@ -267,5 +268,6 @@
             t.fullName AS nickName
         FROM fop_association t
         WHERE t.phoneNumber IS NOT NULL
+        and t.status='2'
     </select>
 </mapper>

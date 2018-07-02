@@ -5,7 +5,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopCallRecord;
-import com.huacainfo.ace.fop.vo.FopCallRecordDetailVo;
+import com.huacainfo.ace.fop.model.FopCallRecordDetail;
 import com.huacainfo.ace.fop.vo.FopCallRecordQVo;
 import com.huacainfo.ace.fop.vo.FopCallRecordVo;
 
@@ -112,5 +112,7 @@ public interface FopCallRecordService {
      * @param recordId fop_call_record.id
      * @return
      */
-    List<FopCallRecordDetailVo> findCallRecordDetail(String recordId);
+    List<FopCallRecordDetail> findCallRecordDetail(String recordId);
+
+    MessageResponse test2(Map<String, Object> data) throws Exception;
 }

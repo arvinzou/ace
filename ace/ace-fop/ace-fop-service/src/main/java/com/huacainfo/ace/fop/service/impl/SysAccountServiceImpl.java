@@ -178,12 +178,13 @@ public class SysAccountServiceImpl implements SysAccountService {
     /**
      * 初始化系统用户
      *
+     * @param s
      * @param userProp
      * @return
      */
     @Override
-    public ResultResponse initSysUser(String deptName, String account, String logTag,
-                                      UserProp userProp) throws Exception {
+    public ResultResponse initSysUser(String deptName, String account, String password,
+                                      String logTag, UserProp userProp) throws Exception {
         //portal.department
         Department department = new Department();
         department.setDepartmentId(GUIDUtil.getGUID());
@@ -200,8 +201,9 @@ public class SysAccountServiceImpl implements SysAccountService {
         Users initUser = new Users();
         initUser.setDepartmentId(department.getDepartmentId());
         initUser.setAccount(account);
+        initUser.setMobile(account);
         initUser.setName(deptName);
-        initUser.setPassword("123456");
+        initUser.setPassword(password);
         initUser.setSex("1");
         initUser.setUserLevel("1");
         ResultResponse rs2 = insertUsersRecord(initUser, userProp, logTag);
@@ -224,7 +226,6 @@ public class SysAccountServiceImpl implements SysAccountService {
         cfgList.add(userCfg);
         saveOrUpdateUserCfg(cfgList, userProp);
 
-        //TODO 分配成功通知
         return new ResultResponse(ResultCode.SUCCESS, "初始化系统用户成功", department);
     }
 

@@ -7,12 +7,11 @@ import com.alibaba.fastjson.TypeReference;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
@@ -663,6 +662,11 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/sign")
     @ResponseBody
     public MessageResponse signUp(String name, String phoneNumber, boolean isCompany) throws Exception {
+        String code = (String) this.getRequest().getSession().getAttribute("j_captcha_cmcc_" + phoneNumber);
+        if (StringUtil.isEmpty(code)) {
+            return new MessageResponse(ResultCode.FAIL, "验证码输入有误");
+        }
+
         if (isCompany) {
             return this.fopCompanyService.insertCompany(name, phoneNumber);
         }

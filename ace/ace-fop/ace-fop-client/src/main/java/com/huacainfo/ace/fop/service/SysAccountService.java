@@ -54,7 +54,7 @@ public interface SysAccountService {
      */
     MessageResponse saveOrUpdateUserCfg(List<UserCfg> list, UserProp userProp) throws Exception;
 
-    ResultResponse initSysUser(String deptName, String account, String logTag,
+    ResultResponse initSysUser(String deptName, String account, String password, String logTag,
                                UserProp userProp) throws Exception;
 
     String getAccount(String relationType, String relationId);

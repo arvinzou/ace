@@ -1,7 +1,6 @@
 package com.huacainfo.ace.fop.dao;
 
 import com.huacainfo.ace.fop.model.FopCallRecordDetail;
-import com.huacainfo.ace.fop.vo.FopCallRecordDetailVo;
 
 import java.util.List;
 
@@ -20,5 +19,5 @@ public interface FopCallRecordDetailDao {
 
     int deleteByRecordId(String recordId);
 
-    List<FopCallRecordDetailVo> findByRecordId(String recordId);
+    List<FopCallRecordDetail> findByRecordId(String recordId);
 }

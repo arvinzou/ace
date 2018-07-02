@@ -2,16 +2,14 @@ package com.huacainfo.ace.fop.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.fop.common.constant.AuditResult;
-import com.huacainfo.ace.fop.common.constant.FlowType;
-import com.huacainfo.ace.fop.common.constant.FopConstant;
-import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
+import com.huacainfo.ace.fop.common.constant.*;
 import com.huacainfo.ace.fop.dao.*;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
@@ -19,7 +17,10 @@ import com.huacainfo.ace.fop.vo.FopFlowRecordQVo;
 import com.huacainfo.ace.fop.vo.FopFlowRecordVo;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.MessageTemplateService;
+import com.huacainfo.ace.portal.service.UserinfoService;
 import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.UserinfoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,12 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     private SysAccountService sysAccountService;
     @Autowired
     private UsersService usersService;
-
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
+    @Autowired
+    private UserinfoService userinfoService;
+    @Autowired
+    private MessageTemplateService messageTemplateService;
 
     /**
      * @throws
@@ -293,9 +299,7 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         if (CommonUtils.isBlank(record.getAuditResult())) {
             return new MessageResponse(1, "审核结果不能为空！");
         }
-        if (CommonUtils.isBlank(record.getAuditOpinion())) {
-            return new MessageResponse(1, "审核意见不能为空！");
-        }
+
         //补全资料
         FopFlowRecord db = fopFlowRecordDao.selectByPrimaryKey(record.getId());
         if (null == db) {
@@ -584,6 +588,19 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         return fopFlowRecordDao.selectByPrimaryKey(flowId);
     }
 
+    @Override
+    public MessageResponse test(String id) throws Exception {
+        UserProp userProp = new UserProp();
+        userProp.setName("system-test");
+        userProp.setUserId("8888");
+
+        FopFlowRecord record = fopFlowRecordDao.selectByPrimaryKey(id);
+        if (null == record) {
+            return new MessageResponse(ResultCode.FAIL, "***************NPE******************");
+        }
+        return memberJoinAudit(record, userProp);
+    }
+
     /**
      * 会员申请审核
      *
@@ -656,8 +673,10 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         try {
             String account = sysAccountService.getAccount(relationType, relationId);
             Users users = usersService.selectByAccount(account);
+            //此处逻辑绑定为unionid
+            UserinfoVo uVo = userinfoService.selectUserinfoByPrimaryKey(users.getOpenId()).getValue();
+            String openid = uVo.getOpenid();
 
-            String openid = users.getOpenId();
             String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
             Map<String, Object> params = new HashMap<>();
             //kafka所需内容
@@ -675,9 +694,13 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
             params.put("content", "会员资质审核\n" +
                     "审核结果：" + rs + "\n" +
                     "审核意见：" + (CommonUtils.isEmpty(record.getAuditOpinion()) ? "" : record.getAuditOpinion()));
+            //kafka消息推送
+            kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, params);
+//            ResultResponse r = messageTemplateService.send("fop", tmplCode, params);
+//            logger.debug("********************************\n" +  JsonUtil.toJson(r));
 
         } catch (Exception e) {
-            logger.error("会员资质审核 -[{}]- 审核 - 消息推送失败", relationId);
+            logger.error("会员资质审核 -[{}]- 审核 - 消息推送失败：{}", relationId, e);
         }
     }
 
