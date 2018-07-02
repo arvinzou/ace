@@ -90,7 +90,7 @@ app.controller(ngControllerName, function ($scope) {
                     jump: function (obj, first) { //触发分页后的回调
                         if (!first) {
                             currentPage = obj.curr;
-                            $scope.searchList(currentPage, pageSize);
+                            $scope.searchList(currentPage, pageSize, "1");
                         }
                     }
 
@@ -110,12 +110,12 @@ app.controller(ngControllerName, function ($scope) {
         }
     });
 
-    $scope.searchList = function (currentPage, pageSize) {
+    $scope.searchList = function (currentPage, pageSize, category) {
         $.ajax({
             url: "/fop/www/findInformationServiceListDo",
             type: "post",
             async: false,
-            data: {limit: pageSize, page: currentPage, modules: "1",  status: "2"},
+            data: {limit: pageSize, page: currentPage, modules: "1",  status: "2", category: category},
             success: $scope.responseHandle,
             error: function () {
                 layer.alert("系统内部服务异常！", {
@@ -278,7 +278,7 @@ app.controller(ngControllerName, function ($scope) {
                         jump: function (obj, first) { //触发分页后的回调
                             if (!first) {
                                 currentPage = obj.curr;
-                                $scope.searchList(currentPage, pageSize);
+                                $scope.searchList(currentPage, pageSize, category);
                             }
                         }
 
