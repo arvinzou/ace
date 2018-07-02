@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.RandomValidateCode;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -32,7 +33,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("fopAssociationService")
 /**
@@ -63,6 +66,8 @@ public class FopAssociationServiceImpl implements FopAssociationService {
 
     @Autowired
     private UsersService usersService;
+    @Autowired
+    private MessageService messageService;
 
     /**
      * @author: Arvin
@@ -109,8 +114,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
             return new MessageResponse(1, "协会名称/办公号码重复！");
         }
         //初始化系统用户
+        String password = RandomValidateCode.CreateRadom(8, 2);
         ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getPhoneNumber(),
-                "市工商联 -- 团体注册", userProp);
+                password, "市工商联 -- 团体注册", userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
         }
@@ -139,8 +145,21 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         if (ResultCode.FAIL == rs4.getStatus()) {
             return rs4;
         }
+        //注册成功消息推送
+        sendRegisterMessage(o.getPhoneNumber(), o.getFullName(), password);
 
         return new MessageResponse(0, "添加商协会完成");
+    }
+
+    private void sendRegisterMessage(String phoneNumber, String fullName, String password) {
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("name", fullName);
+            params.put("password", password);
+            messageService.registerMessage(true, phoneNumber, params);
+        } catch (Exception e) {
+            logger.error("注册成功消息推送失败:\n {}", e);
+        }
     }
 
     /**
@@ -273,8 +292,9 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         userProp.setName("工商联管理员");
         userProp.setUserId("1522198886381");
         //初始化系统用户
+        String password = RandomValidateCode.CreateRadom(8, 2);
         ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getPhoneNumber(),
-                "市工商联 -- 团体注册", userProp);
+                password, "市工商联 -- 企业注册", userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
         }
@@ -302,6 +322,8 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         if (ResultCode.FAIL == rs4.getStatus()) {
             return rs4;
         }
+        //注册成成功，账号信息推送
+        sendRegisterMessage(o.getPhoneNumber(), o.getFullName(), password);
 
         return new MessageResponse(0, "添加商协会完成");
     }

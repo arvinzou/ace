@@ -2,6 +2,7 @@ var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
 var flag = null;      //用来标注是企业用户还是团体用户
+var countdown = 50;
 
 app.controller(ngControllerName,function($scope) {
 
@@ -93,4 +94,43 @@ app.controller(ngControllerName,function($scope) {
             });
         }
     }
+
+    $scope.getNumFun = function(){
+        var mobile = $("input[name = 'regist_num']").val();
+        if(mobile == '' || mobile == undefined){
+            alert("请输入手机号码！");
+        }else{
+            $.post("/fop/www/sms/sendCode",{mobile:mobile},function(result){
+                console.log(result);
+                layer.alert(result.info, {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+            });
+            settime();
+        }
+    }
 });
+
+
+function settime(){
+    var btnName = "获取验证码";
+    if (countdown == 0) {
+        btnName = "获取验证码";
+        countdown = 50;
+        stop = true;
+    } else {
+        stop = false;
+        btnName = "重新发送 " + countdown + "";
+        countdown--;
+    }
+
+    stop = stop;
+    countdown = countdown;
+    $('#getCode').text(btnName);
+    if (!stop) {
+        setTimeout(function () {
+            this.settime()
+        }, 1000)
+    }
+}

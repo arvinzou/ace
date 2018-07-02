@@ -147,4 +147,5 @@ public class FopFlowRecordController extends FopBaseController {
         return fopFlowRecordService.audit(record, this.getCurUserProp());
 
     }
+
 }

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.RandomValidateCode;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -72,6 +73,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
     @Autowired
     private UsersService usersService;
+    @Autowired
+    private MessageService messageService;
 
     /**
      * @throws
@@ -191,8 +194,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return mm;
         }
         //初始化系统用户
+        String password = RandomValidateCode.CreateRadom(8, 2);
         ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getLpMobile(),
-                "市工商联 -- 企业注册", userProp);
+                password, "市工商联 -- 企业注册", userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
         }
@@ -229,6 +233,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 //        if (ResultCode.FAIL == rs4.getStatus()) {
 //            return rs4;
 //        }
+        //注册成功消息推送
+        sendRegisterMessage(o.getLpMobile(), o.getFullName(), password);
+
         return new MessageResponse(0, "添加企业管理完成！");
     }
 
@@ -256,7 +263,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new MessageResponse(ResultCode.FAIL, "企业名称重复！");
         }
         //初始化系统用户
-        ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getLpMobile(),
+        String password = RandomValidateCode.CreateRadom(8, 2);
+        ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getLpMobile(), password,
                 "市工商联 -- 企业注册", userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
             return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
@@ -293,7 +301,21 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (ResultCode.FAIL == rs4.getStatus()) {
             return rs4;
         }
+        //注册成成功，账号信息推送
+        sendRegisterMessage(lpMobile, fullName, password);
+
         return new MessageResponse(0, "添加企业管理完成！");
+    }
+
+    private void sendRegisterMessage(String lpMobile, String fullName, String password) {
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("name", fullName);
+            params.put("password", password);
+            messageService.registerMessage(true, lpMobile, params);
+        } catch (Exception e) {
+            logger.error("注册成功消息推送失败:\n {}", e);
+        }
     }
 
 

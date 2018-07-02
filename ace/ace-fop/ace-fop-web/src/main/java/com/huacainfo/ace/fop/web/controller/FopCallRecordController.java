@@ -11,8 +11,8 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.fop.model.FopCallRecord;
+import com.huacainfo.ace.fop.model.FopCallRecordDetail;
 import com.huacainfo.ace.fop.service.FopCallRecordService;
-import com.huacainfo.ace.fop.vo.FopCallRecordDetailVo;
 import com.huacainfo.ace.fop.vo.FopCallRecordQVo;
 import com.huacainfo.ace.fop.vo.FopCallRecordVo;
 import org.slf4j.Logger;
@@ -184,7 +184,7 @@ public class FopCallRecordController extends FopBaseController {
         if (CommonUtils.isEmpty(recordId)) {
             return new ResultResponse(ResultCode.FAIL, "缺少参数");
         }
-        List<FopCallRecordDetailVo> list = fopCallRecordService.findCallRecordDetail(recordId);
+        List<FopCallRecordDetail> list = fopCallRecordService.findCallRecordDetail(recordId);
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
     }

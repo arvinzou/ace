@@ -7,8 +7,9 @@
     height: 62px;
     line-height: 62px;
 }
+
 .row select,input{
-    width: 100%;
+    width: 80%;
     height: 28px;
 }
 .row textarea{
@@ -21,6 +22,7 @@
     background-color: #FFFFFF;
     padding-left: 30px;
     padding-right: 30px;
+    padding-bottom: 30px;
 }
 .row{
     height: 30px;
@@ -92,4 +94,24 @@
     display: block;
     float: right;
     cursor: pointer;
+}
+.form_info{
+    width: 90%;
+    margin: auto;
+}
+.form_info td{
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 1px solid #E1E5ED;
+}
+.form_info tr{
+    height: 30px;
+    line-height: 30px;
+}
+.form_info textarea, input,select{
+    border: none;
+    outline: none;
+}
+.maper{
+    color: #1A56A8;
 }

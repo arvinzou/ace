@@ -107,7 +107,27 @@ app.controller(ngControllerName,function($scope){
             });
         }
     });
+    /**
+     * 查询民族信息
+     */
+    $.post("/portal/dict/findListByCategoryId.do?categoryId=09",{},function(result){
+        console.log(result);
+        $scope.nationData = result;
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+    });
 
+    /**
+     * 查询学历
+     */
+    $.post("/portal/dict/findListByCategoryId.do?categoryId=10",{},function(result){
+        console.log(result);
+        $scope.education = result;
+        if (!$scope.$$phase) {
+            $scope.$apply();
+        }
+    });
     /**
      * 完善企业信息
      */
@@ -129,10 +149,10 @@ app.controller(ngControllerName,function($scope){
         var sex = $("#sex option:checked").val();
         var birthDate = $("input[name='birthDate']").val();
         var nativePlace = $("input[name='nativePlace']").val();
-        var nationality = $("input[name='nationality']").val();
+        var nationality = $("#nationality option:checked").val();
         var political = $("input[name='political']").val();
         var recruitmentDate = $("input[name='recruitmentDate']").val();
-        var education = $("input[name='education']").val();
+        var education = $("#education option:checked").val();
         var skillJobTitle = $("input[name='skillJobTitle']").val();
         var deptPost = $("input[name='deptPost']").val();
         var societyPost = $("input[name='societyPost']").val();

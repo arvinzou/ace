@@ -112,4 +112,6 @@ public interface FopFlowRecordService {
     FopFlowRecord findByFromId(String fromId, String flowType);
 
     FopFlowRecord selectByPrimaryKey(String flowId);
+
+    MessageResponse test(String id) throws Exception;
 }

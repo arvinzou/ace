@@ -19,9 +19,13 @@ import com.huacainfo.ace.fop.model.FopCallRecordDetail;
 import com.huacainfo.ace.fop.service.FopAssociationService;
 import com.huacainfo.ace.fop.service.FopCallRecordService;
 import com.huacainfo.ace.fop.service.FopCompanyService;
-import com.huacainfo.ace.fop.vo.*;
+import com.huacainfo.ace.fop.vo.FopAssociationVo;
+import com.huacainfo.ace.fop.vo.FopCallRecordQVo;
+import com.huacainfo.ace.fop.vo.FopCallRecordVo;
+import com.huacainfo.ace.fop.vo.FopCompanyVo;
 import com.huacainfo.ace.portal.service.BackendService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.MessageTemplateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +56,8 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
     private FopCompanyService companyService;
     @Autowired
     private FopAssociationService associationService;
+    @Autowired
+    private MessageTemplateService messageTemplateService;
 
     /**
      * @throws
@@ -296,8 +302,13 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
      * @return
      */
     @Override
-    public List<FopCallRecordDetailVo> findCallRecordDetail(String recordId) {
+    public List<FopCallRecordDetail> findCallRecordDetail(String recordId) {
         return fopCallRecordDetailDao.findByRecordId(recordId);
+    }
+
+    @Override
+    public MessageResponse test2(Map<String, Object> data) throws Exception {
+        return service(data);
     }
 
     /**
@@ -318,11 +329,11 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
 
         String sysId = (String) data.get("sysId");
         String tmplCode = callRecord.getMsgTmplCode();
-        List<FopCallRecordDetailVo> sendList = findCallRecordDetail(recordId);
+        List<FopCallRecordDetail> sendList = findCallRecordDetail(recordId);
         FopCompanyVo company;
         FopAssociationVo association;
         Map<String, Object> params;
-        for (FopCallRecordDetailVo item : sendList) {
+        for (FopCallRecordDetail item : sendList) {
             params = new HashMap<>();
             //企业
             if (FopConstant.COMPANY.equals(item.getToUserType())) {
@@ -352,7 +363,7 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
      * @param sysId    系统识别id
      * @param params   参数列表
      */
-    private void sendNotice(String openid, String mobile, String tmplCode, String sysId, Map<String, Object> params) {
+    private void sendNotice(String openid, String mobile, String tmplCode, String sysId, Map<String, Object> params) throws Exception {
         if (CommonUtils.isValidMobile(mobile)) {
             params.put("mobile", mobile);
         }
@@ -363,6 +374,10 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
         params.put("service", "messageTemplateService");
         params.put("tmplCode", tmplCode);
         params.put("sysId", sysId);
+        //service send
+//        ResultResponse rs = messageTemplateService.send(sysId, tmplCode, params);
+//        logger.debug("***********sendNotice.ResultResponse: \n{}", JsonUtil.toJson(rs));
+        //kafka send
         kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, params);
     }
 }

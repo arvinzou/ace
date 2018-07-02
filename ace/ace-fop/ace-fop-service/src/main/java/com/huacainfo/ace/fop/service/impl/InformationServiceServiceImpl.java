@@ -181,7 +181,9 @@ public class InformationServiceServiceImpl implements InformationServiceService 
                 o.getId(), o.getId(), userProp);
 
         //招商信息自动审核通过
-        audit(o.getId(), "0", "自动审核通过", userProp);
+        if ("4".equals(o.getModules())) {
+            audit(o.getId(), "0", "自动审核通过", userProp);
+        }
 
         return new MessageResponse(0, "添加信息服务完成！");
     }
