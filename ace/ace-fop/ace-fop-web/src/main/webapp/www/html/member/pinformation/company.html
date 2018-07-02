@@ -125,7 +125,11 @@
                         <td width="15%" align="right">参加工作时间</td>
                         <td width="35%"><input ng-model="person.recruitmentDate" name="recruitmentDate" id="recruitmentDate" type="text" placeholder="选择时间" onfocus="this.placeholder=''" onblur="this.placeholder='选择时间'"/></td>
                         <td width="15%" align="right">文化程度</td>
-                        <td width="35%"><input ng-model="person.education" name="education" type="text" placeholder="输入文化程度" onfocus="this.placeholder=''" onblur="this.placeholder='输入文化程度'"/></td>
+                        <td width="35%"><!--<input ng-model="person.education" name="education" type="text" placeholder="输入文化程度" onfocus="this.placeholder=''" onblur="this.placeholder='输入文化程度'"/>-->
+                            <select id="education" ng-options="e as e.name for e in education track by e.code" ng-model="person.education">
+                                <option value="">请选择</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td width="15%" align="right">技术职称</td>
