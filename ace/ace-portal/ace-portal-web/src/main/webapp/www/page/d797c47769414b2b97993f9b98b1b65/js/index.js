@@ -113,6 +113,9 @@ function getList() {
             if(data.data.categorys){
                 var len=data.data.categorys.length;
                 $(".news-module li").css("width",(100/len)+"%");
+                if(len==1){
+                    $(".navigation").css("display",'none');
+                }
             }
             initTabs();
             if (loading) {
