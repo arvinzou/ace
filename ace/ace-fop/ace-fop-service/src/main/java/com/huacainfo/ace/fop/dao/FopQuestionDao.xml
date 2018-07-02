@@ -321,7 +321,7 @@
         select m.* from(
         select
         <include refid="Base_Column_List"/>
-        <include refid="whereConditionVo"/>
+        <include refid="whereCondition"/>
         ) m
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -347,49 +347,6 @@
     </select>
 
 
-    <sql id="whereConditionVo">
-        from fop_question t
-        where t.status in ('1','2','3')
-        <if test='condition.title!=null and condition.title!=""'>
-            and t.title like
-            concat('%',#{condition.title,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.replied!=null and condition.replied!=&quot;&quot;">
-            <if test="condition.replied!='true'">
-                and t.reply is not null
-            </if>
-            <if test="condition.replied!='false'">
-                and t.reply is null
-            </if>
-        </if>
-        <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and t.status = #{condition.status,jdbcType=CHAR}
-        </if>
-        <if test="condition.relationId!=null and condition.relationId!=&quot;&quot;">
-            and t.relationId = #{condition.relationId,jdbcType=CHAR}
-        </if>
-
-        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-
-        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-        <!--<if test="condition.top!=null and condition.top!=&quot;&quot;">-->
-        <!--and top =#{condition.top,jdbcType=CHAR}-->
-        <!--</if>-->
-        <if test="condition.sourceType==null and condition.sourceType==&quot;&quot;">
-            and t.sourceType in('2','3','4','5')
-        </if>
-        <if test="condition.sourceType!=null and condition.sourceType!=&quot;&quot;">
-            and sourceType =#{condition.sourceType,jdbcType=CHAR}
-        </if>
-    </sql>
-
-
     <sql id="whereCondition">
         from fop_question t
         where t.status in ('1','2','3')
@@ -411,34 +368,25 @@
         <if test="condition.relationId!=null and condition.relationId!=&quot;&quot;">
             and t.relationId = #{condition.relationId,jdbcType=CHAR}
         </if>
+        <choose>
+            <when test="condition.sourceType!=null and condition.sourceType!=&quot;&quot;">
+                and t.sourceType =#{condition.sourceType,jdbcType=CHAR}
+            </when>
+            <otherwise>
+                and t.sourceType in('2','3','4','5')
+            </otherwise>
+        </choose>
 
-        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
 
-        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
-        <!--and name like-->
-        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
-        <!--</if>-->
-        <!--<if test="condition.top!=null and condition.top!=&quot;&quot;">-->
-        <!--and top =#{condition.top,jdbcType=CHAR}-->
-        <!--</if>-->
-        <if test="condition.sourceType!=null and condition.sourceType!=&quot;&quot;">
-            and sourceType =#{condition.sourceType,jdbcType=CHAR}
-        </if>
     </sql>
 
 
     <select id="findCommentList" resultMap="VoResultMap">
-        select m.* from(
         select
         <include refid="Base_Column_List"/>
         FROM fop_question t
-        WHERE
-        t.status ='2'
-        and parentId = #{parentId,jdbcType=VARCHAR}
-        ) m
-        ORDER BY m.releaseDate DESC
+        WHERE t.status ='2'
+        and t.parentId = #{parentId,jdbcType=VARCHAR}
+        ORDER BY t.releaseDate DESC
     </select>
 </mapper>

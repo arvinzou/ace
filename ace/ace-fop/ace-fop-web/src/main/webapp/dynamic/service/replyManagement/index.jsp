@@ -117,13 +117,13 @@
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script
-        src="${pageContext.request.contextPath}/content/service/question/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/replyManagement/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/question/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/replyManagement/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/question/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/replyManagement/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/question/view.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/replyManagement/view.js?version=${cfg.version}"></script>
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {
