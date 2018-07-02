@@ -4,6 +4,7 @@ var ngAppName = "angularjsApp";
 var currentPage = 1;
 //angularjs Controller初始化
 var app =angular.module(ngAppName, []);
+var myChart1, myChart2;
 
 
 // 使用刚指定的配置项和数据显示图表。
@@ -490,26 +491,29 @@ app.filter('formatDate', function() { //可以注入依赖
 
 
 $(function () {
-    var myChart = echarts.init(document.getElementById('appeal'));
-    myChart.setOption(option);
+    myChart1 = echarts.init(document.getElementById('appeal'));
+    myChart2 = echarts.init(document.getElementById('react'));
+    myChart1.setOption(option1);
+    myChart2.setOption(option2);
+    viewChart();
 })
 
 
-var option = {
+var option1 = {
     title: {
         text: '在线诉求满意度',
         left: 'center'
     },
     tooltip: {
         trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        formatter: "{b} : ({d}%)"
     },
     legend: {
         // orient: 'vertical',
         // top: 'middle',
         bottom: 10,
         left: 'center',
-        data: ['西凉', '益州', '兖州', '荆州', '幽州']
+        data: ['很满意', '一般', '不满意']
     },
     series: [
         {
@@ -518,10 +522,6 @@ var option = {
             center: ['50%', '50%'],
             selectedMode: 'single',
             data: [
-                {value: 535, name: '荆州'},
-                {value: 510, name: '兖州'},
-                {value: 634, name: '益州'},
-                {value: 735, name: '西凉'}
             ],
             itemStyle: {
                 emphasis: {
@@ -533,3 +533,50 @@ var option = {
         }
     ]
 };
+
+var option2 = {
+    title: {
+        text: '在线诉求满意度',
+        left: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{b} : ({d}%)"
+    },
+    legend: {
+        // orient: 'vertical',
+        // top: 'middle',
+        bottom: 10,
+        left: 'center',
+        data: ['很满意', '一般', '不满意']
+    },
+    series: [
+        {
+            type: 'pie',
+            radius: '65%',
+            center: ['50%', '50%'],
+            selectedMode: 'single',
+            data: [],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+function viewChart() {
+    var url = "/fop/www/statisticalData";
+    $.getJSON(url, function (result) {
+        if (result.status == 0) {
+            option1.series[0].data = result.data.suqiu;
+            option2.series[0].data = result.data.hezuo;
+            myChart1.setOption(option1);
+            myChart2.setOption(option2);
+
+        }
+    })
+}
