@@ -113,7 +113,11 @@
                     </tr>
                     <tr>
                         <td width="15%" align="right">民族</td>
-                        <td width="35%"><input ng-model="person.nationality" name="nationality" type="text" placeholder="输入民族" onfocus="this.placeholder=''" onblur="this.placeholder='输入民族'"/></td>
+                        <td width="35%"><!--<input ng-model="person.nationality" name="nationality" type="text" placeholder="输入民族" onfocus="this.placeholder=''" onblur="this.placeholder='输入民族'"/>-->
+                            <select id="nationality" ng-options="nation as nation.name for nation in nationData track by nation.code" ng-model="person.nationality" >
+                                <option value="">请选择</option>
+                            </select>
+                        </td>
                         <td width="15%" align="right">政治面貌</td>
                         <td width="35%"><input ng-model="person.political" name="political" type="text" placeholder="输入政治面貌" onfocus="this.placeholder=''" onblur="this.placeholder='输入政治面貌'"/></td>
                     </tr>
