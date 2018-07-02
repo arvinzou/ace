@@ -524,19 +524,22 @@ var option1 = {
             data: [
             ],
             itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                normal: {
+                    color: function (params) {
+                        var colorList = [
+                            '#4167E2', '#1D60BC', '#5C7DEE'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
                 }
-            }
+            },
         }
     ]
 };
 
 var option2 = {
     title: {
-        text: '在线诉求满意度',
+        text: '平台服务满意度',
         left: 'center'
     },
     tooltip: {
@@ -558,12 +561,15 @@ var option2 = {
             selectedMode: 'single',
             data: [],
             itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                normal: {
+                    color: function (params) {
+                        var colorList = [
+                            '#FF9F00', '#FA8C35', '#FFBC4C'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
                 }
-            }
+            },
         }
     ]
 };
@@ -576,7 +582,6 @@ function viewChart() {
             option2.series[0].data = result.data.hezuo;
             myChart1.setOption(option1);
             myChart2.setOption(option2);
-
         }
     })
 }
