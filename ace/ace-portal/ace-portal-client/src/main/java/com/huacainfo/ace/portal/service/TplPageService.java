@@ -154,5 +154,20 @@ public interface TplPageService {
 	 */
 	public abstract MessageResponse updateCoverById(String id,String cover) throws Exception;
 
+
+
+	/**
+	 *
+	 * @Title:getById
+	 * @Description:  TODO(根据页面ID获取页面所有数据)
+	 * @param:        @param id
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-07-02
+	 */
+	public abstract Map<String,Object> getById(String id) throws Exception;
+
 	
 }
