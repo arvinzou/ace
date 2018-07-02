@@ -89,6 +89,11 @@ public class UsersServiceImpl implements UsersService {
 
             return new MessageResponse(1, "性别不能为空!");
         }
+        if (CommonUtils.isNotEmpty(users.getMobile())) {
+            if(this.usersDao.isExitByTel(users.getMobile())>0){
+                return new MessageResponse(1, "手机号已注册过，请重新填写另一新的手机号!");
+            }
+        }
         DepartmentVo dept = departmentDao.selectDepartmentVoByPrimaryKey(users.getDepartmentId());
         if (CommonUtils.isBlank(dept)) {
             return new MessageResponse(1, "归属部门不存在!");

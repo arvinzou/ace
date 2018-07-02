@@ -5,6 +5,7 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="tplId" jdbcType="VARCHAR" property="tplId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="domainName" jdbcType="VARCHAR" property="domainName" />
     <result column="shareName" jdbcType="VARCHAR" property="shareName" />
     <result column="shareCover" jdbcType="VARCHAR" property="shareCover" />
@@ -22,7 +23,7 @@
              extends="BaseResultMap">
   </resultMap>
   <sql id="Base_Column_List">
-    id, tplId, name, domainName, shareName, shareCover, shareContent, remark, status, 
+    id, tplId, name,cover, domainName, shareName, shareCover, shareContent, remark, status,
     createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
@@ -117,7 +118,7 @@
   </select>
 
   <select id="getById" resultType="map">
-    select id, tplId, name, domainName, shareName, shareCover, shareContent, remark,DATE_FORMAT(lastModifyDate,'%Y-%m-%d %T') lastModifyDate
+    select id, tplId, name,cover, domainName, shareName, shareCover, shareContent, remark,DATE_FORMAT(lastModifyDate,'%Y-%m-%d %T') lastModifyDate
     from
     tpl_page where
     id =#{id,jdbcType=VARCHAR}
@@ -163,5 +164,9 @@
   </select>
   <update id="updateNameById">
     update tpl_page set name=#{name} where id=#{id}
+  </update>
+
+  <update id="updateCoverById">
+    update tpl_page set cover=#{cover} where id=#{id}
   </update>
 </mapper>

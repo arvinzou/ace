@@ -480,4 +480,10 @@
 
     </select>
 
+
+    <select id="isExitByTel" resultType="int">
+        select count(*) from users where mobile=#{tel}
+
+    </select>
+
 </mapper>

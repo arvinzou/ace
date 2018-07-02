@@ -38,4 +38,6 @@ public interface TplPageDao {
 
     int updateNameById(@Param("id")String id,@Param("name")String name);
 
+    int updateCoverById(@Param("id")String id,@Param("cover")String cover);
+
 }

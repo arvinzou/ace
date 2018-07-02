@@ -14,7 +14,6 @@ request.setAttribute("now", CommonUtils.formatDate(new Date()));
 	var default_page_list=[${cfg.default_page_list}];
 	var now='${now}';
 	var portalType='${SESSION_USERPROP_KEY.cfg.portalType}';
-
 </script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/system/getButtonAuthority.do?id=${param.id}"></script>

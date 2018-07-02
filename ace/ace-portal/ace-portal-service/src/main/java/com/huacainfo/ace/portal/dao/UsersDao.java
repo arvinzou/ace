@@ -113,4 +113,6 @@ public interface UsersDao {
 
 
     UsersVo selectByAccount(String account);
+
+    int isExitByTel(@Param("tel")String tel);
 }
