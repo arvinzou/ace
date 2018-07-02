@@ -59,6 +59,15 @@ app.controller(ngControllerName,function($scope){
         success:function(result){
             if(result.status == 0) {
                 console.log(result);
+                if(result.data.status == '2'){
+                    layer.alert("已经审核过的信息不能修改！", {
+                        icon: 1,
+                        skin: 'myskin',
+                        offset:'400px'
+                    });
+                    $('input,select,textarea,button').attr('readonly',true);
+                    $('input,select,textarea,button').attr('disabled',true);
+                }
                 $scope.companyInfo = result.data;
                 $scope.person = result.data.person;
                 var clistObj= result.data.clist;
@@ -187,7 +196,7 @@ app.controller(ngControllerName,function($scope){
 
         /*对社会公益事业做过何种贡献*/
         var xg_work = $("textarea[name='xg_work']").val();     //安排下岗职工再就业
-        var education = $("textarea[name='education']").val(); //助学兴教
+        var education_text = $("textarea[name='education']").val(); //助学兴教
         var poverty = $("textarea[name='poverty']").val();     //帮困扶贫
         var others = $("textarea[name='others']").val();       //其他
 
@@ -266,7 +275,7 @@ app.controller(ngControllerName,function($scope){
                 {
                     "itemCode": "2",
                     "itemName":"助学兴教",
-                    "itemValue":education
+                    "itemValue":education_text
                 },
                 {
                     "itemCode": "3",
