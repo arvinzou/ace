@@ -14,7 +14,6 @@
 }
 .criteria{
     width: 800px;
-    height: 35px;
     margin: 15px auto;
     padding-top: 30px;
 }
@@ -29,19 +28,32 @@
 .search_opt{
     width: 100%;
 }
+radio:checked {
+    background-color: #1A56A8;
+    color: #1A56A8;
+}
 .operation{
     width: 665px;
     height: 42px;
     line-height: 40px;
-    margin: 60px auto;
+    margin: 60px auto 40px;
     border: 1px solid #1A56A8;
     position: relative;
+}
+.optinfo{
+    width: 665px;
+    margin: 30px auto;
+    padding: 15px;
+    background-color: rgba(247, 247, 247, 1);;
+    color: #666666;
+    line-height: 28px;
 }
 .search_opt input{
     width: 580px;
     height: 40px;
     line-height: 40px;
     border: none;
+    padding-left: 18px;
 }
 .search_opt button{
     width: 80px;

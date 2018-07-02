@@ -17,16 +17,33 @@
     <div id="header"></div>
     <div class="search_box">
         <div class="criteria">
-            <span><input type="radio" name="radio" value="0"/>主体身份代码</span>
-            <span><input type="radio" name="radio" value="1"/>统一社会信用代码</span>
-            <span><input type="radio" name="radio" value="2"/>纳税人识别号</span>
-            <span><input type="radio" name="radio" value="3"/>组织机构代码</span>
-            <span style="clear: both;"></span>
+            <span><input type="radio" name="radio" value="0" onclick="checkParam(this);" checked/>主体身份代码</span>
+            <span><input type="radio" name="radio" value="1" onclick="checkParam(this);"/>统一社会信用代码</span>
+            <span><input type="radio" name="radio" value="2" onclick="checkParam(this);"/>纳税人识别号</span>
+            <span><input type="radio" name="radio" value="3" onclick="checkParam(this);"/>组织机构代码</span>
+            <!--<span style="clear: both;"></span>-->
         </div>
         <div class="search_opt">
             <div class="operation">
-                <input type="text" name="keyword"/>
+                <input id="keyword" type="text" name="keyword" placeholder="请输入主体身份代码查询相关信息"/>
                 <button id="searchBtn">查&nbsp;询</button>
+            </div>
+            <div class="optinfo">
+                <p>
+                    1、目前平台已对接常德市政府数据共享平台，已开通工商数据、税务数据、科技数据、人社数据，请选择相关搜索类型，填入正确数据后进行搜索查询。
+                </p>
+                <p>
+                    2、可查询的工商信息：非公经济企业注册信息、非公经济企业变更信息、非公经济企业年审信息、非公经济企业处罚信息、动产抵押信息、投资人股权质押信息、企业经营异常信息、失信记录信息。
+                </p>
+                <p>
+                    3、可查询的税务信息：非公经济企业纳税信息、纳税处罚信息。
+                </p>
+                <p>
+                    4、可查询的科技信息：专利登记信息。
+                </p>
+                <p>
+                    5、可查询的人社信息：从业人员登记信息、从业人员社保信息。
+                </p>
             </div>
         </div>
     </div>

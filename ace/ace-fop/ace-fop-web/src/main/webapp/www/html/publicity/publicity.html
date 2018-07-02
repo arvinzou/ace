@@ -51,7 +51,7 @@
 				<div class="tab-pane fade in active" id="finance">
 					<div class="search">
 						<div class="finance_list_title">
-							精选企业信息
+                            会员信息筛选
 						</div>
 						<div class="search_combox">
 							<div class="search_box">
@@ -62,6 +62,16 @@
 							<div class="search_filter2">
 								<div class="filter_title2">企业性质：</div>
 								<div id="demo2" ng-click="search();"></div>
+							</div>
+							<div style="clear: both;"></div>
+							<div class="search_filter1">
+								<div style="width: 100px;float: left;">会员类型：</div>
+								<div style="width: 400px;float: left;height: 30px;">
+									<select id="memberType" ng-click="search();">
+										<option value="1" selected>企业会员</option>
+										<option value="2">团体会员</option>
+									</select>
+								</div>
 							</div>
                             <div style="clear: both;"></div>
                             <div class="search_filter1">
@@ -86,24 +96,24 @@
 					</div>
 					<div class="search_list">
 						<div class="finance_list_title">
-							共{{totalCount}}条企业信息
+                            共{{totalCount}}条会员信息
 						</div>
 						<div class="project_list">
 							<div class="table_div">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr style="font-weight: bolder;">
-										<td width="30%" align="left">企业名称</td>
-										<td width="15%" align="left">企业法人</td>
+                                        <td width="35%" align="left">企业名称</td>
+                                        <td width="10%" align="left">企业法人</td>
 										<td width="15%" align="left">企业性质</td>
-										<td width="15%" align="left">所属区域</td>
-										<td width="25%" align="left">企业地址</td>
+                                        <td width="10%" align="left">所属区域</td>
+                                        <td width="30%" align="left">企业地址</td>
 									</tr>
 									<tr ng-repeat="item in items">
-										<td width="30%" ng-bind="item.fullName"></td>
-										<td width="15%" ng-bind="item.realName"></td>
+                                        <td width="35%" ng-bind="item.fullName"></td>
+                                        <td width="10%" ng-bind="item.realName"></td>
 										<td width="15%" ng-bind="item.companyPropertyName"></td>
-										<td width="15%" ng-bind="item.areaCodeName"></td>
-										<td width="25%" ng-bind="item.address"></td>
+                                        <td width="10%" ng-bind="item.areaCodeName"></td>
+                                        <td width="30%" ng-bind="item.address"></td>
 									</tr>
 								</table>
 							</div>
@@ -118,75 +128,4 @@
 			</div>
 		</div>
 	</body>
-
-	<!--发布融资模态框-->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">发布融资</h4>
-				</div>
-				<div class="modal-body">
-					<div class="product_form">
-						<table class="product_table" cellpadding="0" cellspacing="0" border="0">
-							<tr>
-								<td width="15%" align="right"><span class="required">*</span><span>产品名称</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入产品名称" name="productName"  onfocus="this.placeholder=''" onblur="this.placeholder='请输入产品名称'"/></td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span class="required">*</span><span>产品额度</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入产品金额" name="productMoney" onfocus="this.placeholder=''" onblur="this.placeholder='请输入产品金额'"/></td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span class="required">*</span><span>贷款用途</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入贷款用途" name="usage" onfocus="this.placeholder=''" onblur="this.placeholder='请输入贷款用途'"/></td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span class="required">*</span><span>担保方式</span></td>
-								<td width="5%"></td>
-								<td>
-									<select name="method">
-										<option value="" selected="selected">请选择担保方式</option>
-										<option value="信用贷">信用贷</option>
-										<option value="抵押贷">抵押贷</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span>贷款年限</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入贷款年限" name="year" onfocus="this.placeholder=''" onblur="this.placeholder='请输入贷款年限'"/></td>
-							</tr>
-							<tr>
-								<td width="15%" align="right"><span>贷款利率</span></td>
-								<td width="5%"></td>
-								<td><input type="text" placeholder="请输入贷款利率" name="rate" onfocus="this.placeholder=''" onblur="this.placeholder='请输入贷款利率'"/></td>
-							</tr>
-							<tr style="height: 186px;">
-								<td width="15%" align="right" style="height: 186px;"><span>内容</span></td>
-								<td width="5%" style="height: 186px;"></td>
-								<td style="height: 186px;">
-									<textarea name="content" placeholder="描述融资项目" onfocus="this.placeholder=''" onblur="this.placeholder='描述融资项目'"></textarea>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3" align="center">
-									<button class="submit" data-dismiss="modal" onclick="submitForm();">提交</button>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-				<!--<div class="modal-footer">
-                <button type="button" class="btn btn-primary">提交</button>
-            </div>-->
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
 </html>

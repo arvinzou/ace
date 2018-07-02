@@ -45,7 +45,7 @@ body {
 }
 
 .search_list {
-    margin-top: 30px;
+    margin-top: 8px;
 }
 
 .search_filter1 {
@@ -129,7 +129,7 @@ body {
 select,
 textarea {
     /*color: #E1E5ED;*/
-    width: 80%;
+    width: 30%;
     height: 100%;
 }
 
@@ -160,13 +160,14 @@ textarea {
 .finance_list_title{
     height: 62px;
     line-height: 62px;
-    margin-bottom: 30px;
     border-bottom: 1px solid #E1E5ED;
 }
+
 #key_word{
     width: 200px;
     height: 35px;
     float: left;
+    padding-left: 10px;
     background-color: #fff;
 }
 .searchButton{

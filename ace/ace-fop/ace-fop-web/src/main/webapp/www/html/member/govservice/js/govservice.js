@@ -24,7 +24,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findGeHelpList",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, relationId: relationId},
+        data:{limit:pageSize, page: currentPage, requestId: relationId},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -74,7 +74,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findGeHelpList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, status: status, relationId: relationId},
+            data:{limit:pageSize, page: currentPage, status: status, requestId: relationId},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -104,7 +104,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findGeHelpList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status, relationId: relationId},
+            data:{limit:pageSize, page: 1, status: status, requestId: relationId},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;

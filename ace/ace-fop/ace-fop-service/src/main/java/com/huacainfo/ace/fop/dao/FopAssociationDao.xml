@@ -303,9 +303,11 @@
 
 
     <sql id="Vo_Column_List">
-        id, fullName, shortName, abcCode, address, phoneNumber, establishDate, pseronId,
-        directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId, areaCode
+        c.id, c.fullName, c.shortName, c.abcCode, c.address, c.phoneNumber, c.establishDate, c.pseronId,
+        c.directorNum, c.viceNum, c.remark, c.status, c.createUserId, c.createUserName, c.createDate,
+        c.lastModifyUserId,
+        c.lastModifyUserName, c.lastModifyDate, c.latitude ,c.longitude, c.departmentId, c.areaCode,
+        p.realName,pp.name as areaCodeName
     </sql>
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopAssociationVo">
 
@@ -317,33 +319,35 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <sql id="whereCondition">
-        from fop_association
-        where status != 0
+        where c.status <![CDATA[ <> ]]> 0
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
-            and id = #{condition.id,jdbcType=VARCHAR}
+            and c.id = #{condition.id,jdbcType=VARCHAR}
         </if>
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and status = #{condition.status,jdbcType=CHAR}
+            and c.status = #{condition.status,jdbcType=CHAR}
         </if>
         <if test="condition.fullName!=null and condition.fullName!=&quot;&quot;">
-            and fullName like
+            and c.fullName like
             concat('%',#{condition.fullName,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.phoneNumber!=null and condition.phoneNumber!=&quot;&quot;">
-            and phoneNumber = #{condition.phoneNumber,jdbcType=CHAR}
+            and c.phoneNumber = #{condition.phoneNumber,jdbcType=CHAR}
         </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
+        from fop_association c
+        left join fop_person p on p.id=c.pseronId
+        left join portal.province pp on pp.code=c.areaCode
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY createDate
+                ORDER BY c.createDate
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -358,6 +362,7 @@
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
+        FROM fop_association c
         <include refid="whereCondition"/>
     </select>
 </mapper>

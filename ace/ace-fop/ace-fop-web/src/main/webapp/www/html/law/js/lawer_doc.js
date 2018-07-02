@@ -12,13 +12,18 @@ app.controller(ngControllerName,function($scope){
     console.log(docType);
     if(docType == "0"){
         $(".title_lager").text("法律规范");
+        $(".title_small").html("Legal Norms");
     }else if(docType == "1"){
         $(".title_lager").text("案例指导");
+        $(".title_small").html("Case Instruction");
     }else if(docType == "2"){
         $(".title_lager").text("法律公益");
+        $(".title_small").html("The law of public");
     }else{
-        $(".title_lager").text("法律文书");
+        $(".title_lager").text("法律诉求");
+        $(".title_small").html("Law Demands");
     }
+
     $.ajax({
         url: "/fop/www/findLawPaperList",
         type:"post",
@@ -140,9 +145,11 @@ app.controller(ngControllerName,function($scope){
      * 法律文书下载
      */
     $scope.download = function($event, file, title){
+        var lurl = window.location.href;
+        var hostUrl = lurl.substring(0,lurl.indexOf("/fop")+1);
         if(file != '' && file != null){
             $event.target.download = title;
-            $event.target.href="http://zx.huacainfo.com/"+file;
+            $event.target.href=hostUrl+file;
         }else{
             layer.alert("对不起，该政策没有可下载的附件！", {
                 icon: 5,

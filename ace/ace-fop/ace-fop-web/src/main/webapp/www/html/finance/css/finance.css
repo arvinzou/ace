@@ -212,6 +212,7 @@
 	width: 200px;
 	height: 35px;
     float: left;
+    padding-left: 10px;
     background-color: #fff;
 }
 .searchButton{

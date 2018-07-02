@@ -277,7 +277,7 @@
     </select>
 
     <select id="statisticalData" parameterType="java.lang.String" resultType="java.util.Map">
-        select (case when t.result=1 then '很满意' when t.result=2 then '一般' else '不满意' end) as result , count(*) as count
+        select (case when t.result=1 then '很满意' when t.result=2 then '一般' else '不满意' end) as name , count(*) as value
         from (
         select opinionType,result
         from fop_questionnaire_result

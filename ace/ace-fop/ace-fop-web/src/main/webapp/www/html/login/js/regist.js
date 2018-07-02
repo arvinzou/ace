@@ -59,19 +59,29 @@ app.controller(ngControllerName,function($scope) {
                 success: function (result) {
                     if (result.status == 0) {
                        console.log(result);
-                        layer.alert("注册成功,"+t+"秒后将跳转登录页面！", {
+                        layer.alert("注册成功！", {
                             icon: 1,
                             skin: 'myskin'
+                        },function(){
+                            location.href = "/portal/dynamic/portal/security/login_fop.jsp";
                         });
-                        showTime();
                         if (!$scope.$$phase) {
                             $scope.$apply();
                         }
                     } else {
-                        layer.alert(result.detail, {
-                            icon: 5,
-                            skin: 'myskin'
-                        });
+                        if(result.detail){
+                            layer.alert(result.detail, {
+                                icon: 5,
+                                skin: 'myskin'
+                            });
+                        }else{
+
+                            layer.alert(result.errorMessage, {
+                                icon: 5,
+                                skin: 'myskin'
+                            });
+                        }
+
                     }
                 },
                 error: function () {
@@ -84,11 +94,3 @@ app.controller(ngControllerName,function($scope) {
         }
     }
 });
-var t = 5;
-function showTime(){
-    t -= 1;
-    if(t == 0){
-        location.href = "/portal/dynamic/portal/security/login_fop.jsp";
-    }
-    setTimeout("showTime()",1000);
-}

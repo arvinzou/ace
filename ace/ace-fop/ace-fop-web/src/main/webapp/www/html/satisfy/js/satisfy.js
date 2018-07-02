@@ -4,39 +4,45 @@ var ngAppName = "angularjsApp";
 var currentPage = 1;
 //angularjs Controller初始化
 var app =angular.module(ngAppName, []);
- var drawCircle = function(canvasId, data_arr, color_arr, text_arr){
-            var drawing = document.getElementById(canvasId);
-            if(drawing.getContext) {
-                var context = drawing.getContext('2d');
-                var radius = drawing.height/2 -20,//半径
-                    ox = radius +20, oy = radius +20;//圆心
-                var width = 15, height = 10, //图例宽高
-                    posX = ox * 2 +20, posY = 30;//图例位置
-                var textX = posX + width + 5, textY = posY + 10;//文本位置
-                var startAngle = 0, endAngle = 0;//起始、结束弧度
-               /* context.strokeStyle = 'Purple';
-                context.lineWidth = 3*/;
-//              context.strokeRect(0, 0, drawing.width, drawing.height);
-                for(var i=0, len=data_arr.length; i<len; i++) {
-                    //绘制饼图
-                    endAngle += data_arr[i] * 2*Math.PI;
-                    context.fillStyle = color_arr[i];
-                    context.beginPath();
-                    context.moveTo(ox, oy);
-                    context.arc(ox, oy, radius, startAngle, endAngle, false);
-                    context.closePath();
-                    context.fill();
-                    startAngle = endAngle;
-                    //绘制图例
-                    context.fillRect(posX, posY + 20 * i, width, height);
-                    context.moveTo(posX, posY + 20 * i);
-                    context.font = 'bold 12px Arial';
-                    var percent = text_arr[i] + ' : ' + data_arr[i]*100 + '%';
-                    context.fillText(percent, textX, textY + 20 * i);
-                }
+var myChart1, myChart2;
 
-            }
-    };
+
+// 使用刚指定的配置项和数据显示图表。
+
+
+//  var drawCircle = function(canvasId, data_arr, color_arr, text_arr){
+//             var drawing = document.getElementById(canvasId);
+//             if(drawing.getContext) {
+//                 var context = drawing.getContext('2d');
+//                 var radius = drawing.height/2 -20,//半径
+//                     ox = radius +20, oy = radius +20;//圆心
+//                 var width = 15, height = 10, //图例宽高
+//                     posX = ox * 2 +20, posY = 30;//图例位置
+//                 var textX = posX + width + 5, textY = posY + 10;//文本位置
+//                 var startAngle = 0, endAngle = 0;//起始、结束弧度
+//                /* context.strokeStyle = 'Purple';
+//                 context.lineWidth = 3*/;
+// //              context.strokeRect(0, 0, drawing.width, drawing.height);
+//                 for(var i=0, len=data_arr.length; i<len; i++) {
+//                     //绘制饼图
+//                     endAngle += data_arr[i] * 2*Math.PI;
+//                     context.fillStyle = color_arr[i];
+//                     context.beginPath();
+//                     context.moveTo(ox, oy);
+//                     context.arc(ox, oy, radius, startAngle, endAngle, false);
+//                     context.closePath();
+//                     context.fill();
+//                     startAngle = endAngle;
+//                     //绘制图例
+//                     context.fillRect(posX, posY + 20 * i, width, height);
+//                     context.moveTo(posX, posY + 20 * i);
+//                     context.font = 'bold 12px Arial';
+//                     var percent = text_arr[i] + ' : ' + data_arr[i]*100 + '%';
+//                     context.fillText(percent, textX, textY + 20 * i);
+//                 }
+//
+//             }
+//     };
 app.controller(ngControllerName,function($scope) {
 
     try{
@@ -99,122 +105,122 @@ app.controller(ngControllerName,function($scope) {
         }
     });
 
-    //统计意见图表
-    $.ajax({
-        url: "/fop/www/statisticalData",
-        type: "post",
-        async: false,
-        data: {},
-        success: function (result) {
-            if (result.status == 0) {
-                console.log(result);
-                var text_suqiu = [];
-                var data_suqiu = [];
-                var color_suqiu = ['#1D60BC', '#4167E2', '#5C7DEE'];
-                var suqiu_list = result.data.suqiu;
-                var hezuo_list = result.data.hezuo;
-                var suqiu_sum = 0;
-                for (var i = 0; i < suqiu_list.length; i++) {
-                    suqiu_sum += suqiu_list[i].count;
-                    text_suqiu[i] = suqiu_list[i].result;
-                }
-                for (var i = 0; i < suqiu_list.length; i++) {
-                    if (suqiu_sum > 0) {
-                        data_suqiu[i] = ((suqiu_list[i].count) / suqiu_sum).toFixed(3);
-                    }
-                }
-                drawCircle('appeal', data_suqiu, color_suqiu, text_suqiu);
+    // //统计意见图表
+    // $.ajax({
+    //     url: "/fop/www/statisticalData",
+    //     type: "post",
+    //     async: false,
+    //     data: {},
+    //     success: function (result) {
+    //         if (result.status == 0) {
+    //             console.log(result);
+    //             var text_suqiu = [];
+    //             var data_suqiu = [];
+    //             var color_suqiu = ['#1D60BC', '#4167E2', '#5C7DEE'];
+    //             var suqiu_list = result.data.suqiu;
+    //             var hezuo_list = result.data.hezuo;
+    //             var suqiu_sum = 0;
+    //             for (var i = 0; i < suqiu_list.length; i++) {
+    //                 suqiu_sum += suqiu_list[i].count;
+    //                 text_suqiu[i] = suqiu_list[i].result;
+    //             }
+    //             for (var i = 0; i < suqiu_list.length; i++) {
+    //                 if (suqiu_sum > 0) {
+    //                     data_suqiu[i] = ((suqiu_list[i].count) / suqiu_sum).toFixed(3);
+    //                 }
+    //             }
+    //             drawCircle('appeal', data_suqiu, color_suqiu, text_suqiu);
+    //
+    //             var text_hezuo = [];
+    //             var data_hezuo = [];
+    //             var color_hezuo = ['#FF9F00', '#FA8C35', '#FFBC4C'];
+    //             var hezuo_sum = 0;
+    //             for (var i = 0; i < hezuo_list.length; i++) {
+    //                 hezuo_sum += hezuo_list[i].count;
+    //                 text_hezuo[i] = hezuo_list[i].result;
+    //             }
+    //             for (var i = 0; i < hezuo_list.length; i++) {
+    //                 if (hezuo_sum > 0) {
+    //                     data_hezuo[i] = ((hezuo_list[i].count) / hezuo_sum).toFixed(2);
+    //                 }
+    //             }
+    //             drawCircle('react', data_hezuo, color_hezuo, text_hezuo);
+    //             if (!$scope.$$phase) {
+    //                 $scope.$apply();
+    //             }
+    //         } else {
+    //             layer.alert(result.errorMessage, {
+    //                 icon: 5,
+    //                 skin: 'myskin'
+    //             });
+    //         }
+    //     },
+    //     error: function () {
+    //         layer.alert("系统内部服务异常！", {
+    //             icon: 5,
+    //             skin: 'myskin'
+    //         });
+    //     }
+    // });
 
-                var text_hezuo = [];
-                var data_hezuo = [];
-                var color_hezuo = ['#FF9F00', '#FA8C35', '#FFBC4C'];
-                var hezuo_sum = 0;
-                for (var i = 0; i < hezuo_list.length; i++) {
-                    hezuo_sum += hezuo_list[i].count;
-                    text_hezuo[i] = hezuo_list[i].result;
-                }
-                for (var i = 0; i < hezuo_list.length; i++) {
-                    if (hezuo_sum > 0) {
-                        data_hezuo[i] = ((hezuo_list[i].count) / hezuo_sum).toFixed(2);
-                    }
-                }
-                drawCircle('react', data_hezuo, color_hezuo, text_hezuo);
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            } else {
-                layer.alert(result.errorMessage, {
-                    icon: 5,
-                    skin: 'myskin'
-                });
-            }
-        },
-        error: function () {
-            layer.alert("系统内部服务异常！", {
-                icon: 5,
-                skin: 'myskin'
-            });
-        }
-    });
-
-    $scope.initChart = function(){
-        $.ajax({
-            url: "/fop/www/statisticalData",
-            type: "post",
-            async: false,
-            data: {},
-            success: function (result) {
-                if (result.status == 0) {
-                    console.log(result);
-                    var text_suqiu = [];
-                    var data_suqiu = [];
-                    var color_suqiu = ['#1D60BC', '#4167E2', '#5C7DEE'];
-                    var suqiu_list = result.data.suqiu;
-                    var hezuo_list = result.data.hezuo;
-                    var suqiu_sum = 0;
-                    for (var i = 0; i < suqiu_list.length; i++) {
-                        suqiu_sum += suqiu_list[i].count;
-                        text_suqiu[i] = suqiu_list[i].result;
-                    }
-                    for (var i = 0; i < suqiu_list.length; i++) {
-                        if (suqiu_sum > 0) {
-                            data_suqiu[i] = ((suqiu_list[i].count) / suqiu_sum).toFixed(3);
-                        }
-                    }
-                    drawCircle('appeal', data_suqiu, color_suqiu, text_suqiu);
-
-                    var text_hezuo = [];
-                    var data_hezuo = [];
-                    var color_hezuo = ['#FF9F00', '#FA8C35', '#FFBC4C'];
-                    var hezuo_sum = 0;
-                    for (var i = 0; i < hezuo_list.length; i++) {
-                        hezuo_sum += hezuo_list[i].count;
-                        text_hezuo[i] = hezuo_list[i].result;
-                    }
-                    for (var i = 0; i < hezuo_list.length; i++) {
-                        if (hezuo_sum > 0) {
-                            data_hezuo[i] = ((hezuo_list[i].count) / hezuo_sum).toFixed(2);
-                        }
-                    }
-                    drawCircle('react', data_hezuo, color_hezuo, text_hezuo);
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
-                } else {
-                    layer.alert(result.errorMessage, {
-                        icon: 5,
-                        skin: 'myskin'
-                    });
-                }
-            },
-            error: function () {
-                layer.alert("系统内部服务异常！", {
-                    icon: 5,
-                    skin: 'myskin'
-                });
-            }
-        });
-    }
+    // $scope.initChart = function(){
+    //     $.ajax({
+    //         url: "/fop/www/statisticalData",
+    //         type: "post",
+    //         async: false,
+    //         data: {},
+    //         success: function (result) {
+    //             if (result.status == 0) {
+    //                 console.log(result);
+    //                 var text_suqiu = [];
+    //                 var data_suqiu = [];
+    //                 var color_suqiu = ['#1D60BC', '#4167E2', '#5C7DEE'];
+    //                 var suqiu_list = result.data.suqiu;
+    //                 var hezuo_list = result.data.hezuo;
+    //                 var suqiu_sum = 0;
+    //                 for (var i = 0; i < suqiu_list.length; i++) {
+    //                     suqiu_sum += suqiu_list[i].count;
+    //                     text_suqiu[i] = suqiu_list[i].result;
+    //                 }
+    //                 for (var i = 0; i < suqiu_list.length; i++) {
+    //                     if (suqiu_sum > 0) {
+    //                         data_suqiu[i] = ((suqiu_list[i].count) / suqiu_sum).toFixed(3);
+    //                     }
+    //                 }
+    //                 drawCircle('appeal', data_suqiu, color_suqiu, text_suqiu);
+    //
+    //                 var text_hezuo = [];
+    //                 var data_hezuo = [];
+    //                 var color_hezuo = ['#FF9F00', '#FA8C35', '#FFBC4C'];
+    //                 var hezuo_sum = 0;
+    //                 for (var i = 0; i < hezuo_list.length; i++) {
+    //                     hezuo_sum += hezuo_list[i].count;
+    //                     text_hezuo[i] = hezuo_list[i].result;
+    //                 }
+    //                 for (var i = 0; i < hezuo_list.length; i++) {
+    //                     if (hezuo_sum > 0) {
+    //                         data_hezuo[i] = ((hezuo_list[i].count) / hezuo_sum).toFixed(2);
+    //                     }
+    //                 }
+    //                 drawCircle('react', data_hezuo, color_hezuo, text_hezuo);
+    //                 if (!$scope.$$phase) {
+    //                     $scope.$apply();
+    //                 }
+    //             } else {
+    //                 layer.alert(result.errorMessage, {
+    //                     icon: 5,
+    //                     skin: 'myskin'
+    //                 });
+    //             }
+    //         },
+    //         error: function () {
+    //             layer.alert("系统内部服务异常！", {
+    //                 icon: 5,
+    //                 skin: 'myskin'
+    //             });
+    //         }
+    //     });
+    // }
 
     $scope.searchList = function (currentPage, pageSize) {
         var key_word = $("#key_word").val();
@@ -482,3 +488,95 @@ app.filter('formatDate', function() { //可以注入依赖
         }
     }
 });
+
+
+$(function () {
+    myChart1 = echarts.init(document.getElementById('appeal'));
+    myChart2 = echarts.init(document.getElementById('react'));
+    myChart1.setOption(option1);
+    myChart2.setOption(option2);
+    viewChart();
+})
+
+
+var option1 = {
+    title: {
+        text: '在线诉求满意度',
+        left: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{b} : ({d}%)"
+    },
+    legend: {
+        // orient: 'vertical',
+        // top: 'middle',
+        bottom: 10,
+        left: 'center',
+        data: ['很满意', '一般', '不满意']
+    },
+    series: [
+        {
+            type: 'pie',
+            radius: '65%',
+            center: ['50%', '50%'],
+            selectedMode: 'single',
+            data: [
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+var option2 = {
+    title: {
+        text: '在线诉求满意度',
+        left: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{b} : ({d}%)"
+    },
+    legend: {
+        // orient: 'vertical',
+        // top: 'middle',
+        bottom: 10,
+        left: 'center',
+        data: ['很满意', '一般', '不满意']
+    },
+    series: [
+        {
+            type: 'pie',
+            radius: '65%',
+            center: ['50%', '50%'],
+            selectedMode: 'single',
+            data: [],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+function viewChart() {
+    var url = "/fop/www/statisticalData";
+    $.getJSON(url, function (result) {
+        if (result.status == 0) {
+            option1.series[0].data = result.data.suqiu;
+            option2.series[0].data = result.data.hezuo;
+            myChart1.setOption(option1);
+            myChart2.setOption(option2);
+
+        }
+    })
+}

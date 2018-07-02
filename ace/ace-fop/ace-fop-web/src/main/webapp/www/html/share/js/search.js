@@ -1,5 +1,6 @@
 $(function(){
     var flag = false;
+
     $("#searchBtn").click(function(){
         var layerIndex = layer.load(1);
         var type = $('input:radio[name="radio"]:checked').val();
@@ -55,3 +56,14 @@ $(function(){
         }
     });
 });
+function checkParam(obj){
+    if($(obj).val() == '0'){
+        $("#keyword").attr("placeholder","请输入主体身份代码查询相关信息");
+    }else if($(obj).val() == '1'){
+        $("#keyword").attr("placeholder","请输入统一社会信用代码查询相关信息");
+    }else if($(obj).val() == '2'){
+        $("#keyword").attr("placeholder","请输入纳税人识别号查询相关信息");
+    }else if($(obj).val() == '3'){
+        $("#keyword").attr("placeholder","请输入组织机构代码查询相关信息");
+    }
+}
