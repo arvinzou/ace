@@ -109,7 +109,7 @@
                                                                         <span class="caret"></span>
                                                                     </a>
                                                                     <ul class="dropdown-menu" aria-labelledby="cover1">
-                                                                        <li data-toggle="modal" data-action="upload" data-target="#model2">
+                                                                        <li data-toggle="modal" data-xsize="300" data-ysize="169" data-cover="cover-img1" data-target="#img-uploader">
                                                                             <a href="#">上传</a>
                                                                         </li>
 
@@ -123,7 +123,24 @@
                                                     </div>
 
                                                 </div>
-                                                <div id="cover">
+                                                <div id="cover" style="padding:.45rem">
+                                                    <div class="row">
+
+
+
+                                                        <span>封面:</span>
+
+
+
+                                                        <em>推荐尺寸: 1138*640</em>
+                                                    </div>
+                                                    <div class="row">
+                                                        <img src="" style="display: none;padding-top:15px;padding-bottom:15px;" id="cover-img1"/>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <button type="button" class="btn btn-primary" onclick="updateCover()">保存</button>
+                                                    </div>
 
                                                 </div>
 
@@ -194,7 +211,7 @@
 
             </script>
             <script id="tpl-navitem" type="text/template">
-                {@each data.data.categorys as item,index} {@if index==0}aaaaa
+                {@each data.data.categorys as item,index} {@if index==0}
                 <div class="navitem" data-id="\${item.id}" style="display: block;" id="\${item.id}">
                     {@else}
                     <div class="navitem" data-id="\${item.id}"  style="display: none;" id="\${item.id}" >
@@ -269,11 +286,11 @@
                                     <span>封面:</span>
 																		
 																		
-                                    <img class="select_img" data-toggle="modal" data-target="#img-uploader" src="img/no-img2.jpg">
+                                    <img class="select_img" data-toggle="modal" data-xsize="300" data-ysize="300" data-cover="cover-img0" data-target="#img-uploader" src="img/no-img2.jpg">
                                     <em>推荐尺寸: 640*640</em>
                                 </div>
 																<div class="form-group">
-                                   <img src="" style="display: none;padding-left:60px;" id="cover-img"/>
+                                   <img src="" style="display: none;padding-left:60px;" id="cover-img0"/>
                                 </div>
                                 <div class="form-group">
                                     <span>标题:</span>

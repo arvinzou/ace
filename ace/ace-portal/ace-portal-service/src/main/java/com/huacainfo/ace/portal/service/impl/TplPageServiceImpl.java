@@ -343,4 +343,23 @@ public class TplPageServiceImpl implements TplPageService {
 		this.tplPageDao.updateCoverById(id,cover);
 		return new MessageResponse(0, "OK！");
 	}
+	/**
+	 *
+	 * @Title:getById
+	 * @Description:  TODO(根据页面ID获取页面所有数据)
+	 * @param:        @param id
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: 陈晓克
+	 * @version: 2018-07-02
+	 */
+	@Override
+	public  Map<String,Object> getById(String id) throws Exception{
+
+		Map<String,Object> rst=new HashMap<>();
+		rst.put("status",0);
+		rst.put("data",this.tplPageDao.getById(id));
+		return rst;
+	}
 }
