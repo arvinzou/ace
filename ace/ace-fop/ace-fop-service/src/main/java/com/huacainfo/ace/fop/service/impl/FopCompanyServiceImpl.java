@@ -16,6 +16,7 @@ import com.huacainfo.ace.common.tools.ValidateUtils;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.common.constant.PayType;
+import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopPayRecord;
@@ -32,10 +33,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("fopCompanyService")
 /**
@@ -69,6 +67,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
     @Autowired
     private SysAccountService sysAccountService;
+    @Autowired
+    private FopAssociationDao fopAssociationDao;
 
     @Autowired
     private UsersService usersService;
@@ -104,10 +104,33 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     @Override
     public ResultResponse findCompanyList(FopCompanyQVo condition, int page, int limit, String orderBy) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("list", this.fopCompanyDao.findList(condition, (page - 1) * limit, limit, orderBy));
-        map.put("total", this.fopCompanyDao.findCount(condition));
-        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "企业列表", map);
+        condition.setStatus("2");
+        if (condition.getIsCompany()) {
+            map.put("list", this.fopCompanyDao.findList(condition, (page - 1) * limit, limit, orderBy));
+            map.put("total", this.fopCompanyDao.findCount(condition));
+            ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "企业列表", map);
+            return rst;
+        }
+        FopAssociationQVo fopAssociationQVo = new FopAssociationQVo();
+        fopAssociationQVo.setFullName(condition.getFullName());
+        fopAssociationQVo.setAreaCode(condition.getAreaCode());
+        fopAssociationQVo.setStatus("2");
+        List<FopAssociationVo> list = fopAssociationDao.findList(fopAssociationQVo, (page - 1) * limit, limit, orderBy);
+        List<FopCompanyVo> clist = new ArrayList<FopCompanyVo>();
+        for (FopAssociationVo item : list) {
+            FopCompanyVo f = new FopCompanyVo();
+            f.setFullName(item.getFullName());
+            f.setRealName(item.getRealName());
+            f.setAreaCodeName(item.getAreaCodeName());
+            f.setAddress(item.getAddress());
+            f.setCompanyProperty("-");
+            clist.add(f);
+        }
+        map.put("list", clist);
+        map.put("total", this.fopAssociationDao.findCount(fopAssociationQVo));
+        ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "团体列表", map);
         return rst;
+
     }
 
     @Override
