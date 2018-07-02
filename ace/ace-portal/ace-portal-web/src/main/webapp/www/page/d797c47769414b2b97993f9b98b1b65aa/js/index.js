@@ -46,6 +46,10 @@ function getList() {
             $("#navitem").append(html);
             $('.carousel').carousel();
             $("title").html(data.data.page.name);
+            if(data.data.categorys){
+                var len=data.data.categorys.length;
+                $(".news-module li").css("width",(100/len)+"%");
+            }
             initTabs();
             if (loading) {
                 loading.remove();
