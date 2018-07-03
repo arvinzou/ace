@@ -68,8 +68,10 @@ app.controller(ngControllerName,function($scope){
                     $('input,select,textarea,button').attr('readonly',true);
                     $('input,select,textarea,button').attr('disabled',true);
                 }
-                $scope.companyInfo = result.data;
-                $scope.person = result.data.person;
+
+
+                $scope.companyInfo = dataFormat(result.data, 'establishDate');
+                $scope.person = dataFormat(result.data.person, 'birthDate');
                 var clistObj= result.data.clist;
                 for(var i=0; i< clistObj.length; i++){
                     if(clistObj[i].itemCode == "1"){ //安排下岗职工再就业
@@ -344,4 +346,12 @@ function divtoggle(div, obj){
     var down ="展开<i class='glyphicon glyphicon-chevron-down'></i>";
     obj.innerHTML = spread.is(":hidden") ? up : down;
     spread.slideToggle();
+}
+
+function dataFormat(data, str) {
+    var d = data[str];
+    if (d) {
+        data[str] = d.substring(0, 10);
+    }
+    return data
 }
