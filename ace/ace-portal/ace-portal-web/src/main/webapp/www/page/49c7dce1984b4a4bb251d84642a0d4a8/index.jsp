@@ -123,13 +123,17 @@
             {@each item.articles as o}
             <a class="list_item" href="{@if o.hrefUrl!=null}\${o.hrefUrl}{@else}preview.jsp?id=\${o.id}{@/if}">
                 <h2 class="title">\${o.title}</h2>
-                <div class="cover ">
+                {@if o.cover}
+                <div class="cover">
                     <img class="img js_img" src="\${o.cover}">
                 </div>
+                {@/if}
+                {@if o.remark}
                 <div class="cont">
 
                     <p class="desc">\${o.remark}</p>
                 </div>
+                {@/if}
                 <p>
                     {@each o.tags.split(',') as tag,num}
                     <span style="background-color:#21b080;color:#FFFFFF">\${tag}</span>
@@ -153,13 +157,17 @@
             {@each item.articles as o}
             <a class="list_item" href="{@if o.hrefUrl!=null}\${o.hrefUrl}{@else}preview.jsp?id=\${o.id}{@/if}">
                 <h2 class="title">\${o.title}</h2>
-                <div class="cover ">
+                {@if o.cover}
+                <div class="cover">
                     <img class="img js_img" src="\${o.cover}">
                 </div>
+                {@/if}
+                {@if o.remark}
                 <div class="cont">
 
                     <p class="desc">\${o.remark}</p>
                 </div>
+                {@/if}
                 <p>
                     {@each o.tags.split(',') as tag,num}
                     <span style="background-color:#21b080;color:#FFFFFF">\${tag}</span>

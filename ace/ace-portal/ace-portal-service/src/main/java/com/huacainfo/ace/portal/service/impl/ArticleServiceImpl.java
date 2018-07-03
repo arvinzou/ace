@@ -91,7 +91,7 @@ public class ArticleServiceImpl implements ArticleService {
 			return new MessageResponse(1, "标题不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getCover())) {
-			return new MessageResponse(1, "封面不能为空！");
+			//return new MessageResponse(1, "封面不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getMediType())) {
 			return new MessageResponse(1, "媒体类型不能为空！");
@@ -144,7 +144,7 @@ public class ArticleServiceImpl implements ArticleService {
 			return new MessageResponse(1, "标题不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getCover())) {
-			return new MessageResponse(1, "封面不能为空！");
+			//return new MessageResponse(1, "封面不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getMediType())) {
 			return new MessageResponse(1, "媒体类型不能为空！");
