@@ -1,7 +1,4 @@
 $(function(){
-    parent.document.getElementById("iframe").height= 700;
-    parent.document.getElementById("iframe").height=document.documentElement.scrollHeight;
-
     $(".menu-nav ul li a").eq(0).addClass("checked");
     $(".menu-nav ul li").click(function () {
         $(this).find("a").addClass("checked");
