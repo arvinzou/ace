@@ -11,18 +11,16 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
-import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
 import com.huacainfo.ace.fop.dao.*;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopQuestionService;
+import com.huacainfo.ace.fop.service.MessageService;
 import com.huacainfo.ace.fop.service.SysAccountService;
 import com.huacainfo.ace.fop.vo.FopQuestionQVo;
 import com.huacainfo.ace.fop.vo.FopQuestionVo;
-import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
@@ -72,6 +70,8 @@ public class FopQuestionServiceImpl implements FopQuestionService {
 
     @Autowired
     private FopProjectDao fopProjectDao;
+    @Autowired
+    private MessageService messageService;
 
     /**
      * @throws
@@ -335,7 +335,6 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         return new MessageResponse(0, "法律帮助/政府诉求删除完成！");
     }
 
-
     @Override
     public List<FopQuestionVo> findCommentList(String parentId) throws Exception {
         List<FopQuestionVo> list = this.fopQuestionDao.findCommentList(parentId);
@@ -374,43 +373,15 @@ public class FopQuestionServiceImpl implements FopQuestionService {
             throw new CustomException(rs1.getErrorMessage());
         }
         //审核结果推送给客户
-        sendNoticeToUser("", obj, record, userProp);
+        //消息提醒
+        sendMessageNotice(obj, auditResult, auditOpinion);
 
         return new MessageResponse(ResultCode.SUCCESS, "发布成功");
     }
 
-    /**
-     * 推送通知给用户
-     *
-     * @param nickName
-     * @param obj
-     * @param record
-     * @param userProp
-     */
-    private void sendNoticeToUser(String nickName, FopQuestion obj, FopFlowRecord record, UserProp userProp) {
+    private void sendMessageNotice(FopQuestion obj, String auditResult, String auditOpinion) {
         try {
-            String account = sysAccountService.getAccount(obj.getRelationType(), obj.getRelationId());
-            Users users = usersService.selectByAccount(account);
-
-            String openid = users.getOpenId();
-            String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
-            Map<String, Object> params = new HashMap<>();
-            //kafka所需内容
-            params.put("service", "messageTemplateService");
-            params.put("sysId", "fop");
-            params.put("tmplCode", tmplCode);
-            //发送消息内容
-            params.put("openid", openid);
-            params.put("url", "www.baidu.com");
-//        params.put("first", "哈哈哈哈哈");
-            //data
-            params.put("name", nickName);
-            params.put("title", obj.getTitle());
-            String rs = AuditResult.PASS.equals(record.getAuditResult()) ? "已通过" : "被驳回";
-            params.put("content", "法律帮助审核\n" +
-                    "审核结果：" + rs + "\n" +
-                    "审核意见：" + (CommonUtils.isEmpty(record.getAuditOpinion()) ? "" : record.getAuditOpinion()));
-
+            messageService.lawQuestionAuditMessage(obj, auditResult, auditOpinion);
         } catch (Exception e) {
             logger.error("法律帮助 -[{}]- 审核 - 消息推送失败", obj.getId());
         }

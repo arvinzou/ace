@@ -121,7 +121,7 @@
         <div class="labelItem">
             <span class="labelItemHeader">所在地区</span>
             <br>
-            <span id="areaCode"></span>
+            <span id="areaCodeName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">企业性质</span>
@@ -334,12 +334,12 @@
     <h5 class="header-title">纳税信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem">
-            <span class="labelItemHeader">累计纳税</span>
+            <span class="labelItemHeader">累计纳税（万元）</span>
             <br>
             <span id="accTaxAmount"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">当年纳税</span>
+            <span class="labelItemHeader">当年纳税（万元）</span>
             <br>
             <span id="yearTaxAmount"></span>
         </div>
@@ -361,8 +361,8 @@
 
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem">
-            <span class="labelItemHeader hide">创建人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">创建人编号</span>
             <br>
             <span id="createUserId"></span>
         </div>
@@ -376,8 +376,8 @@
             <br>
             <span id="createDate"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader hide">最后更新人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">最后更新人编号</span>
             <br>
             <span id="lastModifyUserId"></span>
         </div>

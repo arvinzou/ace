@@ -1,8 +1,10 @@
 package com.huacainfo.ace.fop.web.controller;
 
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.fop.service.FopCallRecordService;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
+import com.huacainfo.ace.fop.service.SysAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,8 @@ public class WWWTestController {
     private FopFlowRecordService fopFlowRecordService;
     @Autowired
     private FopCallRecordService fopCallRecordService;
+    @Autowired
+    private SysAccountService sysAccountService;
 
     @RequestMapping(value = "/send1")
     @ResponseBody
@@ -40,5 +44,11 @@ public class WWWTestController {
         return fopCallRecordService.test2(data);
     }
 
+
+    @RequestMapping(value = "/destoryAccount")
+    @ResponseBody
+    public ResultResponse destoryAccount(String account) throws Exception {
+        return sysAccountService.destoryAccount(account);
+    }
 
 }

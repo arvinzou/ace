@@ -22,6 +22,7 @@ import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopGeHelpService;
+import com.huacainfo.ace.fop.service.MessageService;
 import com.huacainfo.ace.fop.vo.FopGeHelpQVo;
 import com.huacainfo.ace.fop.vo.FopGeHelpVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -59,6 +60,8 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
     private FopFlowRecordService fopFlowRecordService;
     @Autowired
     private UsersService usersService;
+    @Autowired
+    private MessageService messageService;
 
     /**
      * @throws
@@ -430,8 +433,18 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         if (ResultCode.FAIL == rs1.getStatus()) {
             throw new CustomException(rs1.getErrorMessage());
         }
+        //消息提醒
+        sendMessageNotice(fopGeHelp, auditResult, auditOpinion);
 
         return new MessageResponse(ResultCode.SUCCESS, "发布成功");
+    }
+
+    private void sendMessageNotice(FopGeHelp fopGeHelp, String auditResult, String auditOpinion) {
+        try {
+            messageService.geHelpAuditMessage(fopGeHelp, auditResult, auditOpinion);
+        } catch (Exception e) {
+            logger.error("政企服务审核消息发送异常[" + fopGeHelp.getId() + "]：{}", e);
+        }
     }
 
     @Override

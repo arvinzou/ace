@@ -194,7 +194,7 @@
         <div class="labelItem">
             <span class="labelItemHeader">所在地区</span>
             <br>
-            <span name="areaCode"></span>
+            <span name="areaCodeName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">企业性质</span>
@@ -385,34 +385,34 @@
         <div class="labelItem">
             <span class="labelItemHeader">劳动合同签订人数</span>
             <br>
-            <span id="laborContractNum"></span>
+            <span name="laborContractNum"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">是否建立劳动关系三方协调机制</span>
             <br>
-            <span id="thirdLaborRelation"></span>
+            <span name="thirdLaborRelation"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">社会保险参保地</span>
             <br>
-            <span id="socialInsuranceAddr"></span>
+            <span name="socialInsuranceAddr"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">社会保险登记证号</span>
             <br>
-            <span id="socialInsuranceNum"></span>
+            <span name="socialInsuranceNum"></span>
         </div>
     </div>
 
     <h5 class="header-title">纳税信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem">
-            <span class="labelItemHeader">累计纳税</span>
+            <span class="labelItemHeader">累计纳税（万元）</span>
             <br>
             <span name="accTaxAmount"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">当年纳税</span>
+            <span class="labelItemHeader">当年纳税（万元）</span>
             <br>
             <span name="yearTaxAmount"></span>
         </div>
@@ -434,35 +434,35 @@
 
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem">
-            <span class="labelItemHeader hide">创建人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">创建人编号</span>
             <br>
-            <span id="createUserId"></span>
+            <span name="createUserId"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">创建人姓名</span>
             <br>
-            <span id="createUserName"></span>
+            <span name="createUserName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">入库日期</span>
             <br>
-            <span id="createDate"></span>
+            <span name="createDate"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader hide">最后更新人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">最后更新人编号</span>
             <br>
-            <span id="lastModifyUserId"></span>
+            <span name="lastModifyUserId"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">最后更新人姓名</span>
             <br>
-            <span id="lastModifyUserName"></span>
+            <span name="lastModifyUserName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">最后更新时间</span>
             <br>
-            <span id="lastModifyDate"></span>
+            <span name="lastModifyDate"></span>
         </div>
     </div>
 </div>
@@ -484,6 +484,11 @@
             <span class="labelItemHeader">拼音代码</span>
             <br>
             <span name="abcCode"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">所在地区</span>
+            <br>
+            <span id="areaCodeName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">协会地址</span>

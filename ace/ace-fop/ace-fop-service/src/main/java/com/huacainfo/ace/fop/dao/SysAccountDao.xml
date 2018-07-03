@@ -188,7 +188,6 @@
     </insert>
 
     <insert id="insertUsersRole">
-
         update portal.USERS_ROLE set role_id='0' where 0=1;
         <if test="userId!=null and userId!=''">
             delete from portal.users_role where user_id=#{userId};
@@ -224,7 +223,6 @@
         </foreach>
     </select>
 
-
     <update id="updateUserCfgByPKey" parameterType="com.huacainfo.ace.portal.model.UserCfg">
         update portal.user_cfg
         set cfgValue = #{cfgValue,jdbcType=VARCHAR}
@@ -238,5 +236,31 @@
           #{cfgKey,jdbcType=VARCHAR}, #{cfgValue,jdbcType=VARCHAR}
          )
     </insert>
+
+    <delete id="deleteUsersRole" parameterType="java.lang.String">
+        DELETE from portal.users_role
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteUserCfg" parameterType="java.lang.String">
+        DELETE from portal.user_cfg
+        where userId = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteUsers" parameterType="java.lang.String">
+        DELETE from portal.users
+        where account =  #{account,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteDepartment" parameterType="java.lang.String">
+        DELETE from portal.department
+        WHERE department_id = #{depId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteFopCompany" parameterType="java.lang.String">
+        DELETE from fop.fop_company
+        where departmentId = #{depId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteFopPerson" parameterType="java.lang.String">
+        DELETE from fop.fop_person
+        where mobileNumer= #{mobile,jdbcType=VARCHAR}
+    </delete>
 
 </mapper>

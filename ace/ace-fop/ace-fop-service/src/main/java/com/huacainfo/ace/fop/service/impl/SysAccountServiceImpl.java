@@ -22,6 +22,7 @@ import com.huacainfo.ace.portal.model.UserCfg;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.ResourcesService;
+import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.DepartmentVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,8 @@ public class SysAccountServiceImpl implements SysAccountService {
     private FopCompanyDao fopCompanyDao;
     @Autowired
     private FopAssociationDao fopAssociationDao;
+    @Autowired
+    private UsersService usersService;
 
     /**
      * 新增部门
@@ -178,7 +181,7 @@ public class SysAccountServiceImpl implements SysAccountService {
     /**
      * 初始化系统用户
      *
-     * @param s
+     * @param password
      * @param userProp
      * @return
      */
@@ -239,6 +242,41 @@ public class SysAccountServiceImpl implements SysAccountService {
 
             return null == association ? "" : association.getPhoneNumber();
         }
+    }
+
+    @Override
+    public ResultResponse destoryAccount(String account) {
+        Users users = usersService.selectByAccount(account);
+        if (null == users) {
+            return new ResultResponse(ResultCode.FAIL, "无当前账号信息：" + account);
+        }
+
+        int i1 = sysAccountDao.deleteUserCfg(users.getUserId());
+        int i2 = sysAccountDao.deleteUsersRole(users.getUserId());
+        int i3 = sysAccountDao.deleteFopCompany(users.getDepartmentId());
+        int i4 = sysAccountDao.deleteFopPerson(account);
+        int i5 = sysAccountDao.deleteUsers(account);
+        int i6 = sysAccountDao.deleteDepartment(users.getDepartmentId());
+
+        return new ResultResponse(ResultCode.SUCCESS,
+                "删除成功：" + i1 + "|" + i2 + "|" + i3 + "|" + i4 + "|" + i5 + "|" + i6);
+    }
+
+    @Override
+    public Map<String, Object> getAccountInfo(String relationId, String relationType) {
+        Map<String, Object> rtn = new HashMap<>();
+        if (FopConstant.COMPANY.equals(relationType)) {
+            FopCompanyVo company = fopCompanyDao.selectVoByPrimaryKey(relationId);
+            rtn.put("account", null == company ? "" : company.getLpMobile());
+            rtn.put("name", company.getFullName());
+        } else {
+            FopAssociation association = fopAssociationDao.selectByPrimaryKey(relationId);
+
+            rtn.put("account", null == association ? "" : association.getPhoneNumber());
+            rtn.put("name", association.getFullName());
+        }
+
+        return rtn;
     }
 
 

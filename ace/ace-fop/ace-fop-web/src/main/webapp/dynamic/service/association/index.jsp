@@ -89,7 +89,7 @@
         <div class="labelItem hide">
             <span class="labelItemHeader">所在地区</span>
             <br>
-            <span id="areaCode"></span>
+            <span id="areaCodeName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">协会地址</span>

@@ -11,20 +11,14 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.ValidateUtils;
-import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
-import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
-import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopFinanceProjectDao;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFinanceProject;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
-import com.huacainfo.ace.fop.service.FopFinanceProjectService;
-import com.huacainfo.ace.fop.service.FopFlowRecordService;
-import com.huacainfo.ace.fop.service.FopQuestionService;
-import com.huacainfo.ace.fop.service.SysAccountService;
+import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.FopFinanceProjectQVo;
 import com.huacainfo.ace.fop.vo.FopFinanceProjectVo;
 import com.huacainfo.ace.portal.model.Users;
@@ -64,11 +58,11 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
     private FopCompanyDao fopCompanyDao;
 
     @Autowired
-    private FopAssociationDao fopAssociationDao;
-    @Autowired
     private FopFlowRecordService fopFlowRecordService;
     @Autowired
     private SysAccountService sysAccountService;
+    @Autowired
+    private MessageService messageService;
 
     /**
      * @throws
@@ -395,8 +389,8 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (ResultCode.FAIL == rs1.getStatus()) {
             throw new CustomException(rs1.getErrorMessage());
         }
-        //
-        sendNoticeToUser("", obj, record, userProp);
+        //消息推送
+        sendNoticeToUser(obj, auditResult, auditOpinion);
 
         return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
@@ -409,30 +403,9 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
      * @param record
      * @param userProp
      */
-    private void sendNoticeToUser(String nickName, FopFinanceProject obj, FopFlowRecord record, UserProp userProp) {
+    private void sendNoticeToUser(FopFinanceProject obj, String auditResult, String auditOpinion) {
         try {
-            String account = sysAccountService.getAccount(FopConstant.COMPANY, obj.getCompanyId());
-            Users users = usersService.selectByAccount(account);
-
-            String openid = users.getOpenId();
-            String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
-            Map<String, Object> params = new HashMap<>();
-            //kafka所需内容
-            params.put("service", "messageTemplateService");
-            params.put("sysId", "fop");
-            params.put("tmplCode", tmplCode);
-            //发送消息内容
-            params.put("openid", openid);
-            params.put("url", "www.baidu.com");
-//        params.put("first", "哈哈哈哈哈");
-            //data
-            params.put("name", nickName);
-            params.put("title", obj.getFinanceTitle());
-            String rs = AuditResult.PASS.equals(record.getAuditResult()) ? "已通过" : "被驳回";
-            params.put("content", "银企服务 - 审核\n" +
-                    "审核结果：" + rs + "\n" +
-                    "审核意见：" + (CommonUtils.isEmpty(record.getAuditOpinion()) ? "" : record.getAuditOpinion()));
-
+            messageService.financeHelpAuditMessage(obj, auditResult, auditOpinion);
         } catch (Exception e) {
             logger.error("银企服务 -[{}]- 审核 - 消息推送失败", obj.getId());
         }
