@@ -1018,3 +1018,36 @@ a:active {
     line-height: 1.8rem;
     letter-spacing: 1.1px;
 }
+#editMsg{
+    width: 100%;
+    height: 100%;
+}
+#editMsg p{
+    height: 35px;
+    line-height: 35px;
+}
+.editForm{
+    width: 400px;
+    height: 200px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+.edit_title{
+    width: 100px;
+    height: 30px;
+    float: left;
+    text-align: right;
+}
+.edit_input{
+    width: 300px;
+    height: 30px;
+    float: left;
+}
+.edit_input input{
+    width: 100%;
+    height: 100%;
+}
+.layui-layer-btn0 {
+    border-color: #1A56A8 !important;
+    background-color: #1A56A8 !important;
+}
