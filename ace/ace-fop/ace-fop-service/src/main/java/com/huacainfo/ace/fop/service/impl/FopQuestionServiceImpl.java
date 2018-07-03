@@ -4,6 +4,7 @@ package com.huacainfo.ace.fop.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -296,7 +297,9 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         SingleResult
                 <FopQuestionVo> rst = new SingleResult
                 <FopQuestionVo>();
-        rst.setValue(this.fopQuestionDao.selectByPrimaryKey(id));
+        FopQuestionVo vo = this.fopQuestionDao.selectByPrimaryKey(id);
+        vo.setReply(StringUtil.isEmpty(vo.getReply()) ? "" : vo.getReply());
+        rst.setValue(vo);
         return rst;
     }
 
