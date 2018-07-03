@@ -13,8 +13,8 @@ a:visited{text-decoration:none; }
 a:hover{text-decoration:none;}
 a:active{text-decoration:none;}
 .box{
-    width: 90%;
-    margin: auto;
+    padding:20px;
+    background:#fff
 }
 .child_title{
     width: 100%;
