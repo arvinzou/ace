@@ -329,16 +329,6 @@
             <span name="address"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">维度</span>
-            <br>
-            <span name="latitude"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">经度</span>
-            <br>
-            <span name="longitude"></span>
-        </div>
-        <div class="labelItem">
             <span class="labelItemHeader">第一联系人</span>
             <br>
             <span name="firstPersonId"></span>
@@ -494,16 +484,6 @@
             <span class="labelItemHeader">协会地址</span>
             <br>
             <span name="address"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">维度</span>
-            <br>
-            <span name="latitude"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">经度</span>
-            <br>
-            <span name="longitude"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">办公电话</span>
