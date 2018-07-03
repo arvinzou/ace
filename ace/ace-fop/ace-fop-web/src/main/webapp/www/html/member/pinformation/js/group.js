@@ -21,15 +21,15 @@ app.controller(ngControllerName,function($scope){
         data:{},
         success:function(result){
             if(result.status == 0) {
-                if(result.data.status == '2'){
-                    layer.alert("已经审核过的信息不能修改！", {
-                        icon: 1,
-                        skin: 'myskin',
-                        offset:'400px'
-                    });
-                    $('input,select,textarea,button').attr('readonly',true);
-                    $('input,select,textarea,button').attr('disabled',true);
-                }
+                // if(result.data.status == '2'){
+                //     layer.alert("已经审核过的信息不能修改！", {
+                //         icon: 1,
+                //         skin: 'myskin',
+                //         offset:'400px'
+                //     });
+                //     $('input,select,textarea,button').attr('readonly',true);
+                //     $('input,select,textarea,button').attr('disabled',true);
+                // }
                 console.log(result);
                 $scope.information = result.data;
                 if(result.data.establishDate != '' && result.data.establishDate != null){
