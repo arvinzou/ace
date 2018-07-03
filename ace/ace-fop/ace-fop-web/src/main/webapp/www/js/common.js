@@ -88,22 +88,27 @@ html.push("</div>");
 html.push("<div class=\"second-bg\"></div>");
 html.push("</div>");
 
-html.push("<div id=\"editMsg\" style=\"display: none;\">");
-html.push("<div class='editForm'>");
-html.push("<p>");
-html.push("<span class='edit_title'>用户名：</span>");
-html.push("<span class='edit_input'><input name=\"edit_name\" type=\"text\" value='"+userProp.username+"' disabled/></span>");
-html.push("</p>");
-html.push("<p>");
-html.push("<span class='edit_title'>密码：</span>");
-html.push("<span class='edit_input'><input name=\"edit_pwd\" type=\"password\"/></span>");
-html.push("</p>");
-html.push("<p>");
-html.push("<span class='edit_title'>请重复密码：</span>");
-html.push("<span class='edit_input'><input name=\"edit_pwdsec\" type=\"password\"/></span>");
-html.push("</p>");
-html.push("</div>");
-html.push("</div>");
+try {
+    if (userProp) {
+        html.push("<div id=\"editMsg\" style=\"display: none;\">");
+        html.push("<div class='editForm'>");
+        html.push("<p>");
+        html.push("<span class='edit_title'>用户名：</span>");
+        html.push("<span class='edit_input'><input name=\"edit_name\" type=\"text\" value='" + userProp.username + "' disabled/></span>");
+        html.push("</p>");
+        html.push("<p>");
+        html.push("<span class='edit_title'>密码：</span>");
+        html.push("<span class='edit_input'><input name=\"edit_pwd\" type=\"password\"/></span>");
+        html.push("</p>");
+        html.push("<p>");
+        html.push("<span class='edit_title'>请重复密码：</span>");
+        html.push("<span class='edit_input'><input name=\"edit_pwdsec\" type=\"password\"/></span>");
+        html.push("</p>");
+        html.push("</div>");
+        html.push("</div>");
+    }
+}catch(e){
+}
 
 var text=html.join("\n");
 
