@@ -72,7 +72,7 @@ ul{
 }
 .list_item {
     display: block;
-    padding: 0.2rem 0.2rem 0.15rem 0.15rem;
+    padding: 0.1rem 0.2rem 0.15rem 0.15rem;
     overflow: hidden;
     position: relative;
     text-decoration: none;
@@ -103,7 +103,7 @@ ul{
     width: 100%;
 }
 .list_item .cover {
-     margin-top: 0.16rem;
+     margin-top: 0rem;
 }
 .list_item .cover .img {
     display: block;
