@@ -8,6 +8,7 @@ import com.huacainfo.ace.portal.model.UserCfg;
 import com.huacainfo.ace.portal.model.Users;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by HuaCai008 on 2018/6/4.
@@ -59,4 +60,14 @@ public interface SysAccountService {
 
     String getAccount(String relationType, String relationId);
 
+
+    /**
+     * 便利工具，彻底销毁账号
+     *
+     * @param account
+     * @return
+     */
+    ResultResponse destoryAccount(String account);
+
+    Map<String, Object> getAccountInfo(String relationId, String relationType);
 }

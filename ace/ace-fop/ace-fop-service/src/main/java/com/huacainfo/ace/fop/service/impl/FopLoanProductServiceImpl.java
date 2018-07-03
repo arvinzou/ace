@@ -191,6 +191,7 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         if (CommonUtils.isBlank(o.getDescription())) {
             return new MessageResponse(1, "产品内容不能为空！");
         }
+        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());

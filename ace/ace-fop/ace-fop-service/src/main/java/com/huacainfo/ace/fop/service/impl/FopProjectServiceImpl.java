@@ -11,7 +11,6 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.fop.common.constant.AuditResult;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
@@ -22,10 +21,7 @@ import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopProject;
-import com.huacainfo.ace.fop.service.FopFlowRecordService;
-import com.huacainfo.ace.fop.service.FopProjectService;
-import com.huacainfo.ace.fop.service.FopQuestionService;
-import com.huacainfo.ace.fop.service.SysAccountService;
+import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.FopProjectQVo;
 import com.huacainfo.ace.fop.vo.FopProjectVo;
 import com.huacainfo.ace.portal.model.Users;
@@ -67,6 +63,8 @@ public class FopProjectServiceImpl implements FopProjectService {
     private FopQuestionService fopQuestionService;
     @Autowired
     private SysAccountService sysAccountService;
+    @Autowired
+    private MessageService messageService;
 
     /**
      * @throws
@@ -255,7 +253,7 @@ public class FopProjectServiceImpl implements FopProjectService {
         if (CommonUtils.isBlank(o.getCoopType())) {
             return new MessageResponse(1, "合作方式不能为空！");
         }
-
+        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -353,9 +351,8 @@ public class FopProjectServiceImpl implements FopProjectService {
             throw new CustomException(rs1.getErrorMessage());
         }
 
-        String nickName = "";
-        //
-        sendNoticeToUser(nickName, fopProject, record, userProp);
+        //消息反馈
+        sendMessageNotice(fopProject, auditResult, auditOpinion);
 
         return new MessageResponse(ResultCode.SUCCESS, "发布成功");
     }
@@ -368,30 +365,9 @@ public class FopProjectServiceImpl implements FopProjectService {
      * @param record
      * @param userProp
      */
-    private void sendNoticeToUser(String nickName, FopProject fopProject, FopFlowRecord record, UserProp userProp) {
+    private void sendMessageNotice(FopProject fopProject, String auditResult, String auditOpinion) {
         try {
-            String account = sysAccountService.getAccount(fopProject.getRelationType(), fopProject.getRelationId());
-            Users users = usersService.selectByAccount(account);
-
-            String openid = users.getOpenId();
-            String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
-            Map<String, Object> params = new HashMap<>();
-            //kafka所需内容
-            params.put("service", "messageTemplateService");
-            params.put("sysId", "fop");
-            params.put("tmplCode", tmplCode);
-            //发送消息内容
-            params.put("openid", openid);
-            params.put("url", "www.baidu.com");
-//        params.put("first", "哈哈哈哈哈");
-            //data
-            params.put("name", nickName);
-            params.put("title", fopProject.getProjectName());
-            String rs = AuditResult.PASS.equals(record.getAuditResult()) ? "已通过" : "被驳回";
-            params.put("content", "项目信息审核\n" +
-                    "审核结果：" + rs + "\n" +
-                    "审核意见：" + (CommonUtils.isEmpty(record.getAuditOpinion()) ? "" : record.getAuditOpinion()));
-
+            messageService.projectAuditMessage(fopProject, auditResult, auditOpinion);
         } catch (Exception e) {
             logger.error("项目信息 -[{}]- 审核 - 消息推送失败", fopProject.getId());
         }

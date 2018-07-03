@@ -34,5 +34,15 @@ public interface SysAccountDao {
     List<Map<String, Object>> selectRoleList(@Param("activeSyId") String activeSyId,
                                              @Param("roleTypes") String[] roleTypes);
 
+    int deleteUsersRole(String userId);
 
+    int deleteUserCfg(String userId);
+
+    int deleteUsers(String account);
+
+    int deleteDepartment(String depId);
+
+    int deleteFopCompany(String depId);
+
+    int deleteFopPerson(String mobile);
 }

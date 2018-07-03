@@ -22,6 +22,7 @@ import com.huacainfo.ace.fop.model.InformationService;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.FopQuestionService;
 import com.huacainfo.ace.fop.service.InformationServiceService;
+import com.huacainfo.ace.fop.service.MessageService;
 import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
@@ -78,6 +79,8 @@ public class InformationServiceServiceImpl implements InformationServiceService 
 
     @Autowired
     private FopLoanProductDao fopLoanProductDao;
+    @Autowired
+    private MessageService messageService;
 
     /**
      * @throws
@@ -211,6 +214,7 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "内容不能为空！");
         }
+        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -308,8 +312,53 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         if (ResultCode.FAIL == rs1.getStatus()) {
             throw new CustomException(rs1.getErrorMessage());
         }
+        //审核消息反馈
+        //消息提醒
+        sendMessageNotice(obj, auditResult, auditOpinion);
 
         return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+    }
+
+    private void sendMessageNotice(InformationService info, String auditResult, String auditOpinion) {
+        try {
+
+            //暂定只有“人才信息”才有消息反馈
+            if (ModulesType.TALENT_INFO.equals(info.getModules())) {
+                String moduleName = getModuleName(info.getModules());
+                messageService.informationAuditMessage(info, moduleName, auditResult, auditOpinion);
+            }
+
+        } catch (Exception e) {
+            logger.error("政企服务审核消息发送异常[" + info.getId() + "]：{}", e);
+        }
+    }
+
+    /**
+     * modules:模块分类
+     * 1、风采展示
+     * 2、企业产品
+     * 3、人才信息
+     * 4、招商信息
+     * 5、政策信息
+     * 6、品牌推广
+     */
+    private String getModuleName(String modules) {
+        switch (modules) {
+            case "1":
+                return "风采展示";
+            case "2":
+                return "企业产品";
+            case "3":
+                return "人才信息";
+            case "4":
+                return "招商信息";
+            case "5":
+                return "政策信息";
+            case "6":
+                return "品牌推广";
+            default:
+                return "未知模块";
+        }
     }
 
     @Override

@@ -29,12 +29,12 @@
     line-height: 30px;
 }
 .info_title{
-    width: 100%;
+    width: 90%;
     height: 35px;
     line-height: 35px;
     font-size: 16px;
     border-bottom: 2px solid #E1E5ED;
-    margin-bottom: 15px;
+    margin: 15px auto;
 }
 .info{
     margin-bottom: 30px;
@@ -115,4 +115,7 @@
 }
 .maper{
     color: #1A56A8;
+}
+.tdbg{
+    background-color: #FBFCFD;
 }
