@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>慈善榜单</title>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../js/init-rem.js"></script>
+    <script type="text/javascript" src="../js/angular/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/rankings.css"/>
+    <script type="text/javascript" src="js/ranking.js"></script>
+</head>
+<body>
+<div class="rankings_box">
+    <div class="title">
+        <p>慈善榜单</p>
+        <span class="title_bottom"></span>
+    </div>
+    <div class="ranking_list_title">
+        <ul>
+            <li style="width: 10%;">排名</li>
+            <li style="width: 30%;">慈善人</li>
+            <li style="width: 30%;">捐助次数</li>
+            <li style="width: 30%;">捐助总金额</li>
+        </ul>
+    </div>
+    <div class="rank_list">
+        <ul ng-repeat="item in rankList">
+            <li style="width: 10%;" ng-bind="$index+1"></li>
+            <li style="width: 30%;" ng-bind="item.nickname"></li>
+            <li style="width: 30%;" ng-bind="item.donateCount"></li>
+            <li style="width: 30%;" ng-cloak>{{item.totalDonateAmount}}元</li>
+        </ul>
+    </div>
+    <!--<div class="rankings_list" ng-repeat="item in rankList">
+        <div class="list_img" ng-bind="$index+1">&lt;!&ndash;<img ng-src="{{item.headimgurl}}"/>&ndash;&gt;</div>
+        <div class="list_name" >
+            <p ng-bind="item.nickname"></p>
+            <p class="times">共贡献了次爱心</p>
+        </div>
+        <div class="contribution"><span class="money" ng-bind="item.totalDonateAmount"></span>元</div>
+    </div>-->
+</div>
+</body>
+</html>
