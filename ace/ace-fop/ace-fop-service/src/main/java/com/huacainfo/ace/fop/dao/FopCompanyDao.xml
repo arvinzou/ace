@@ -623,15 +623,21 @@
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
             and c.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
-        <if test='condition.companyType!=null and condition.companyType!=""'>
-            and c.companyType = #{condition.companyType,jdbcType=CHAR}
-        </if>
         <if test='condition.companyProperty!=null and condition.companyProperty!=""'>
             and c.companyProperty=#{condition.companyProperty,jdbcType=CHAR}
         </if>
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and c.status = #{condition.status,jdbcType=CHAR}
         </if>
+
+        <choose>
+            <when test='condition.companyType=="w"'>
+                and c.companyType <![CDATA[ <> ]]> '3'
+            </when>
+            <otherwise>
+                and c.companyType = #{condition.companyType,jdbcType=CHAR}
+            </otherwise>
+        </choose>
     </sql>
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopCompany">
