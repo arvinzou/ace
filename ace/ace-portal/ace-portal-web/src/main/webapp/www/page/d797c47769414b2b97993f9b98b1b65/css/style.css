@@ -94,10 +94,10 @@ ul{
     left: 0.15rem;
 }
 .title {
-	
-     font-weight: 800;
+	text-align: left;
+    font-weight: 800;
     color: black;
-    margin: 0rem 0.07rem 0.02rem 0.12rem;
+    margin: 0rem 0.07rem 0.02rem 0rem;
     font-size: 0.4rem;
     overflow: hidden;
     width: 100%;

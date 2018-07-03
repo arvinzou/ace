@@ -144,7 +144,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 				user.setName((String) userProp.get("name"));
 				user.setMobile((String) userProp.get("tel"));
 				this.wxUserDao.updateReg(user);
-				this.wxUserDao.updateBindMiniApp(user.getOpenId(),(String) userProp.get("userId"));
+				this.wxUserDao.updateBindMiniApp(user.getUnionId(),(String) userProp.get("userId"));
 				user.setUserProp(userProp);
 				o.put("status","0");
 				o.put("userProp",userProp);
