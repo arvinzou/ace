@@ -4,7 +4,7 @@ html.push("<div class=\"login_box\">");
 html.push("<div class=\"login\">");
 try{
     if(userProp){
-        html.push("<span class=\"companyName\" title='"+userProp.name+"' ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" target=\"_blank\">"+userProp.name+"</a><i style='padding-left: 10px;' id='editUserInfo' class='glyphicon glyphicon-edit'></i></span>");
+        html.push("<span class=\"companyName\"  ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" title='"+userProp.name+"' target=\"_blank\">"+userProp.name+"</a><i title='修改密码' style='padding-left: 10px;' id='editUserInfo' class='glyphicon glyphicon-edit'></i></span>");
         html.push("<span class=\"userNav\" ng-if=\"userProp\"><a href=\"/portal/dynamic/portal/security/loginOut_fop.jsp\">退出</a></span>");
     }else{
         html.push("<span class=\"userNav\" ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
