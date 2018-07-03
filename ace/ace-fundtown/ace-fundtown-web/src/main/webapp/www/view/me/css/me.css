@@ -1,0 +1,243 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #ffffff;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.contactbox {
+    position: fixed;
+    width: 2rem;
+    height: 0.8rem;
+    top: 1rem;
+    right: 0;
+}
+
+.bg {
+    width: 10rem;
+    height: 5rem;
+    background: url(../img/bg.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.userinfo {
+    width: 9rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+.userimg {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    float: left;
+    border: 2px solid #FFFFFF;
+}
+
+.userimg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.username {
+    width: 5.5rem;
+    height: 2rem;
+    line-height: 2rem;
+    float: left;
+    font-size: 0.4rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    padding-left: 0.5rem;
+}
+
+.statics {
+    width: 9rem;
+    height: 2rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.statics01 {
+    width: 3rem;
+    height: 2rem;
+    float: left;
+    text-align: center;
+    font-size: 0.4rem;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.me_nav_box {
+    width: 10rem;
+    height: 1rem;
+}
+
+.nav_box_ul {
+    width: 9rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.nav_box_ul li {
+    width: 3rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    float: left;
+    font-size: 0.4rem;
+    font-weight: bold;
+    color: #666666;
+}
+
+.dis {
+    display: block;
+}
+
+.undis {
+    display: none;
+}
+
+.content {
+    width: 9rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.money {
+    color: #EA4436;
+    font-size: 0.35rem;
+    font-weight: bold;
+}
+
+.content_01 {
+    color: #333333;
+    font-size: 0.4rem;
+}
+
+.content_02 {
+    color: #999999;
+    font-size: 0.35rem;
+}
+
+.dotime {
+    color: #999999;
+    font-size: 0.35rem;
+    padding-left: 1.5rem;
+}
+
+.scores_box {
+    width: 9rem;
+    margin: auto;
+}
+
+.score_list {
+    width: 100%;
+    height: 1.8rem;
+    border-bottom: 1px solid #E4E6E9;
+}
+
+.score_name {
+    padding-left: 0.5rem;
+    font-size: 0.4rem;
+    color: #333333;
+    padding-top: 0.6rem;
+}
+
+.score_time {
+    padding-left: 0.5rem;
+    font-size: 0.35rem;
+    color: #999999;
+}
+
+.score_list_right p {
+    font-size: 0.4rem;
+    color: #EA4436;
+    padding-right: 0.5rem;
+    line-height: 1.8rem;
+}
+
+.score_list_left {
+    width: 70%;
+    float: left;
+}
+
+.score_list_right {
+    width: 30%;
+    float: left;
+}
+
+.help_list {
+    width: 9rem;
+    height: 2.6rem;
+    margin-right: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: 1px solid #E4E6E9;
+}
+
+.help_list_left {
+    width: 2.5rem;
+    height: 1.6rem;
+    float: left;
+}
+
+.help_box {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.help_list_right {
+    width: 6.5rem;
+    float: left;
+    height: 1.6rem;
+}
+
+.help_title {
+    font-size: 0.4rem;
+    color: #333333;
+    font-weight: bold;
+    padding-bottom: 0.1rem;
+    padding-left: 0.5rem;
+}
+
+.help_remark {
+    font-size: 0.35rem;
+    color: #999999;
+    padding-bottom: 0.1rem;
+    padding-left: 0.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.help_info {
+    font-size: 0.35rem;
+    color: #999999;
+    padding-left: 0.5rem
+}
+
+.raise_btn {
+    width: 9rem;
+    height: 1rem;
+    text-align: center;
+    margin: 0.5rem auto;
+}
+
+.raise_btn button {
+    width: 6rem;
+    height: 1rem;
+    border-radius: 0.2rem;
+    border: none;
+    color: #FFFFFF;
+    background-color: #EA4436;
+}

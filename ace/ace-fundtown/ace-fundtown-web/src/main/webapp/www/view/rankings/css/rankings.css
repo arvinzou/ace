@@ -1,0 +1,118 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.rankings_box {
+    width: 9rem;
+    margin: 0.8rem 0.5rem;
+    border-radius: 0.3rem;
+}
+
+.title {
+    width: 9rem;
+    height: 1.5rem;
+    line-height: 1rem;
+    text-align: center;
+    font-size: 0.5rem;
+    font-weight: bold;
+    color: #333333;
+}
+
+.title_bottom {
+    width: 1rem;
+    height: 0.08rem;
+    display: block;
+    margin: auto;
+    background-color: #EA4436;
+    border-radius: 0.1rem;
+}
+
+.rankings_list {
+    width: 8rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    height: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #E4E6E9;
+}
+
+.money {
+    font-size: 0.4rem;
+    font-weight: bold;
+    color: #EA4436;
+}
+
+.list_img {
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    float: left;
+    border-radius: 50%;
+    font-size: 0.35rem;
+}
+
+.list_img img {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
+.list_name {
+    width: 3.3rem;
+    height: 1.5rem;
+    float: left;
+    font-size: 0.35rem;
+    color: #333333;
+    padding-left: 0.2rem;
+    padding-top: 0.3rem;
+}
+
+.times {
+    color: #999999;
+    font-size: 0.3rem;
+}
+
+.contribution {
+    width: 3rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 0.35rem;
+    color: #999999;
+    text-align: right;
+    float: left;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.ranking_list_title {
+    width: 90%;
+    margin: auto;
+}
+
+.ranking_list_title li {
+    text-align: center;
+    height: 1rem;
+    line-height: 1rem;
+    display: block;
+    float: left;
+    font-size: 0.4rem;
+}
+
+.rank_list {
+    width: 90%;
+    margin: auto;
+}
+
+.rank_list li {
+    text-align: center;
+    height: 1rem;
+    line-height: 1rem;
+    display: block;
+    float: left;
+    font-size: 0.35rem;
+    color: #666666;
+}

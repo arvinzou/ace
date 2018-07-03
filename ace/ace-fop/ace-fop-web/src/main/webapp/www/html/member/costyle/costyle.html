@@ -2,75 +2,141 @@
 <html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 <head>
     <meta charset="UTF-8">
-    <title>会员中心-法律帮助</title>
+    <title>会员中心-企业风采</title>
     <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../../css/comon0.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/common_index.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/member.css"/>
     <link rel="stylesheet" type="text/css" href="../css/childlist.css"/>
     <SCRIPT language=JavaScript src="../../../js/jquery-3.2.1.min.js"></SCRIPT>
     <script type="text/javascript" src="../../../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../js/angular/angular.min.js"></script>
     <script type="text/javascript" src="../../../js/laypage-v1.3/laypage/laypage.js"></script>
     <script type="text/javascript" src="../../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../../js/common.js"></script>
     <script type="text/javascript" src="/portal/content/common/simditor/scripts/module.js"></script>
     <script type="text/javascript" src="/portal/content/common/simditor/scripts/hotkeys.js"></script>
     <script type="text/javascript" src="/portal/content/common/simditor/scripts/uploader.js"></script>
     <script type="text/javascript" src="/portal/content/common/simditor/scripts/simditor.js"></script>
     <link rel="stylesheet" type="text/css" href="/portal/content/common/simditor/styles/simditor.css"/>
     <script type="text/javascript" src="../../../js/plupload/plupload.full.min.js"></script>
+    <SCRIPT language=JavaScript src="../js/member.js"></SCRIPT>
     <script type="text/javascript" src="js/costyle.js"></script>
     <link rel="shortcut icon" href="../../../images/favicon.ico">
 </head>
 <body>
-<div class="box">
-    <div class="child_title">
-        <span class="child_title_1">我发布的企业风采</span>
-        <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release"
-                                       ng-click="init_release();">发布</a> </span>
-    </div>
-    <div style="clear: both;"></div>
-    <div class="menu-nav">
-        <ul>
-            <li><a href="#" ng-click="search();">全部</a></li>
-            <li><a href="#" ng-click="search('1');">审核中</a></li>
-            <li><a href="#" ng-click="search('2');">审核通过</a></li>
-            <li><a href="#" ng-click="search('3');">审核未通过</a></li>
-        </ul>
-        <div id="nav-content">
-            <div class="table-div" ng-repeat="item in items">
-                <table class="info_list" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed">
-                    <tr class="tr_title">
-                        <td width="30%" class="info_title" ng-bind="item.title"></td>
-                        <td width="20%">
-                            <span class="info_status info_status2" ng-if="item.status == '1'">审核中</span>
-                            <span class="info_status info_status1" ng-if="item.status == '2'">审核通过</span>
-                            <span class="info_status info_status3" ng-if="item.status == '3'">审核未通过</span>
-                        </td>
-                        <td>&nbsp;</td>
-                        <td align="right" width="15%">
-                            <button id="update" data-toggle="modal" data-target="#myModal"
-                                    ng-click="update_click($index);init_update();">编辑
-                            </button>
-                            <button id="delete" ng-click="delete($index);">删除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" id="content">
-                            <div class="content_container">
-                                <div class="img_container">
-                                    <img ng-src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
-                                </div>
+<div id="header"></div>
+<div class="bodybg">
+<div class="juz1">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="left_box" style="min-height: 700px;max-height: 900px;background-color: #ffffff;"
+                valign="top">
+                <div class="member_center_title01">会员中心<span>/ Member Center</span></div>
+                <div class="member_menu">
+                    <ul class=""><span class="member_center_title02"><a href="/fop/www/index.html">我的首页</a></span>
+                    </ul>
+                </div>
+                <div class="member_menu">
+                    <ul class="member_menu_ul">
+									<span class="member_center_title02"><a href="member_index.html"
+                                                                           target="allbox">会员服务</a></span>
+                        <li ng-if="companyType != '3'">
+                            <a href="javascript:void(0);" target="allbox"
+                               ng-click="checkUserUrl($event,'personel/personel.html');">人才信息</a>
+                        </li>
+                        <li ng-if="companyType != '3'">
+                            <a href="javascript:void(0);" target="allbox"
+                               ng-click="checkUserUrl($event,'project/project.html');">项目信息</a>
+                        </li>
+                        <li ng-if="companyType != '3'">
+                            <a href="javascript:void(0);" target="allbox"
+                               ng-click="checkUserUrl($event,'product/product.html');">企业产品</a>
+                        </li>
+                        <li ng-if="companyType != '3'">
+                            <a href="javascript:void(0);" target="allbox"
+                               ng-click="checkUserUrl($event,'costyle/costyle.html');">风采展示</a>
+                        </li>
+                        <li ng-if="companyType != '3'">
+                            <a href="javascript:void(0);" target="allbox"
+                               ng-click="checkUserUrl($event,'govservice/govservice.html');">政企服务</a>
+                        </li>
+                        <li ng-if="companyType != '3'">
+                            <a href="javascript:void(0);" target="allbox"
+                               ng-click="checkUserUrl($event,'law/law.html');">法律诉求</a>
+                        </li>
+                        <li ng-if="companyType == '3'">
+                            <a href="javascript:void(0);" target="allbox"
+                               ng-click="checkUserUrl($event,'financial/financial.html');">银企服务</a>
+                        </li>
+                        <li ng-if="companyType == '3'">
+                            <a href="javascript:void(0);" target="allbox"
+                               ng-click="checkUserUrl($event,'financial_product/financial_product.html');">金融产品</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            <td class="right_box" valign="top">
+                <div class="box">
+                    <div class="child_title">
+                        <span class="child_title_1">我发布的企业风采</span>
+                        <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release"
+                                                       ng-click="init_release();">发布</a> </span>
+                    </div>
+                    <div style="clear: both;"></div>
+                    <div class="menu-nav">
+                        <ul>
+                            <li><a href="#" ng-click="search();">全部</a></li>
+                            <li><a href="#" ng-click="search('1');">审核中</a></li>
+                            <li><a href="#" ng-click="search('2');">审核通过</a></li>
+                            <li><a href="#" ng-click="search('3');">审核未通过</a></li>
+                        </ul>
+                        <div id="nav-content">
+                            <div class="table-div" ng-repeat="item in items">
+                                <table class="info_list" border="0" cellspacing="0" cellpadding="0"
+                                       style="table-layout:fixed">
+                                    <tr class="tr_title">
+                                        <td width="30%" class="info_title" ng-bind="item.title"></td>
+                                        <td width="20%">
+                                            <span class="info_status info_status2" ng-if="item.status == '1'">审核中</span>
+                                            <span class="info_status info_status1"
+                                                  ng-if="item.status == '2'">审核通过</span>
+                                            <span class="info_status info_status3"
+                                                  ng-if="item.status == '3'">审核未通过</span>
+                                        </td>
+                                        <td>&nbsp;</td>
+                                        <td align="right" width="15%">
+                                            <button id="update" data-toggle="modal" data-target="#myModal"
+                                                    ng-click="update_click($index);init_update();">编辑
+                                            </button>
+                                            <button id="delete" ng-click="delete($index);">删除</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" id="content">
+                                            <div class="content_container">
+                                                <div class="img_container">
+                                                    <img ng-src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="tr_date" ng-bind="item.releaseDate"></td>
+                                    </tr>
+                                </table>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" class="tr_date" ng-bind="item.releaseDate"></td>
-                    </tr>
-                </table>
-            </div>
-            <div id="paganation"></div>
-        </div>
-    </div>
+                            <div id="paganation"></div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
+</div>
+<div ng-include="'../../common/footer.html'"></div>
 </body>
 
 <!--编辑模态框-->
@@ -89,7 +155,7 @@
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入产品标题 '"/>
                 </div>
                 <div><label>类型</label><br>
-                    <select  class="input_style" ng-model="infoData.category">
+                    <select class="input_style" ng-model="infoData.category">
                         <option value="">请选择</option>
                         <option value="1">非公党建</option>
                         <option value="2">光彩事业</option>
@@ -111,7 +177,8 @@
                 </div>
 
                 <div><label>具体内容</label><br>
-                    <textarea id="pcontent" ng-model="infoData.content" placeholder="请描述产品具体内容" onfocus="this.placeholder=''"
+                    <textarea id="pcontent" ng-model="infoData.content" placeholder="请描述产品具体内容"
+                              onfocus="this.placeholder=''"
                               onblur="this.placeholder='请描述产品具体内容'"></textarea>
                 </div>
             </div>
@@ -136,44 +203,44 @@
                 <h4 class="modal-title" id="myModalLabel_release">发布企业风采</h4>
             </div>
             <div class="modal-body">
-                    <div><label>标题</label><br>
-                        <input class="input_style" type="text" placeholder="请输入标题" name="name"
-                               onfocus="this.placeholder=''"
-                               onblur="this.placeholder='请输入标题 '"/>
-                    </div>
-                    <div><label>类型</label><br>
-                        <select id="categoryType"  class="input_style">
-                            <option value="">请选择</option>
-                            <option value="1">非公党建</option>
-                            <option value="2">光彩事业</option>
-                            <option value="3">德诚德星</option>
-                            <option value="4">其他</option>
-                        </select>
-                    </div>
-                    <div><label>封面</label><br>
-                        <div class="pictureContainer2" id="upbtn">
-                            <div class="viewPicture2">
-                                <img class="hidder" src="" style="width: 100%;height: 100%;object-fit: cover;">
-                            </div>
-                            <div class="uploadText2">
-                                <img ng-src="../../../images/icons/upload_img_2.png" style="width: 100px;height: auto;"/>
-                                <p class="uploadPloadprogress">点击上传封面</p>
-                            </div>
+                <div><label>标题</label><br>
+                    <input class="input_style" type="text" placeholder="请输入标题" name="name"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='请输入标题 '"/>
+                </div>
+                <div><label>类型</label><br>
+                    <select id="categoryType" class="input_style">
+                        <option value="">请选择</option>
+                        <option value="1">非公党建</option>
+                        <option value="2">光彩事业</option>
+                        <option value="3">德诚德星</option>
+                        <option value="4">其他</option>
+                    </select>
+                </div>
+                <div><label>封面</label><br>
+                    <div class="pictureContainer2" id="upbtn">
+                        <div class="viewPicture2">
+                            <img class="hidder" src="" style="width: 100%;height: 100%;object-fit: cover;">
+                        </div>
+                        <div class="uploadText2">
+                            <img ng-src="../../../images/icons/upload_img_2.png" style="width: 100px;height: auto;"/>
+                            <p class="uploadPloadprogress">点击上传封面</p>
                         </div>
                     </div>
+                </div>
 
-                    <div><label>具体内容</label><br>
-                        <textarea  name="pcontent" id="editor"></textarea>
-                    </div>
+                <div><label>具体内容</label><br>
+                    <textarea name="pcontent" id="editor"></textarea>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="submit btn btn-primary" data-dismiss="modal" ng-click="release();">提交
-                    </button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="submit btn btn-primary" data-dismiss="modal" ng-click="release();">提交
+                </button>
             </div>
         </div>
     </div>
+</div>
 </div>
 <script type="text/javascript" src="../js/childlist.js"></script>
 </html>

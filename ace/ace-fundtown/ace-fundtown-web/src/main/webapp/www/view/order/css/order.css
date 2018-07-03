@@ -1,0 +1,205 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #F7F9FC;
+}
+
+input, textarea {
+    outline: none;
+}
+
+.order_box {
+    width: 10rem;
+}
+
+.order_content {
+    width: 9rem;
+    margin: 0.8rem 0.5rem;
+    background-color: #FFFFFF;
+}
+
+.order_form {
+    width: 8rem;
+    margin: 0 0.5rem;
+}
+
+.title_01 {
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 0.45rem;
+    font-weight: bold;
+    color: #333333;
+}
+
+.other_amount::-webkit-input-placeholder { /* WebKit browsers */
+    color: #EA4436;
+}
+
+.other_amount:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #EA4436;
+}
+
+.other_amount::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #EA4436;
+}
+
+.other_amount:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #EA4436;
+}
+
+.money_01 {
+    width: 100%;
+    height: 1.6rem;
+}
+
+.money_01 span {
+    width: 2.35rem;
+    height: 1rem;
+    line-height: 1rem;
+    background: rgba(251, 218, 215, .4);
+    display: block;
+    text-align: center;
+    float: left;
+    border-radius: 0.2rem;
+    font-size: 0.4rem;
+    color: #EA4436;
+}
+
+.money_02 {
+    width: 100%;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    border-bottom: 1px solid #E4E6E9;
+}
+
+.other_amount {
+    width: 3rem;
+    height: 1rem;
+    display: block;
+    float: left;
+    text-align: center;
+    background: rgba(251, 218, 215, .4);
+    border-radius: 0.2rem;
+    font-size: 0.4rem;
+    color: #EA4436;
+    margin-right: 0.2rem;
+    border: none;
+    outline: none;
+}
+
+.amount {
+    width: 4.6rem;
+    height: 1rem;
+    display: block;
+
+}
+
+.form {
+    width: 8rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border-bottom: 1px solid #E4E6E9;
+    font-size: 0.4rem;
+}
+
+.form_max {
+    font-size: 0.4rem;
+    height: 3rem;
+}
+
+.form_max textarea {
+    width: 100%;
+    height: 2rem;
+    font-size: 0.4rem;
+    border: none;
+    outline: none;
+    background-color: #FDF0EF;
+    padding-left: 0.2rem;
+    padding-top: 0.1rem;
+}
+
+.form_title {
+    display: inline-block;
+    width: 2.5rem;
+    text-align: left;
+    font-size: 0.4rem;
+}
+
+.form_text {
+    width: 5rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    font-size: 0.4rem;
+    border: none;
+}
+
+.switch_title {
+    width: 3rem;
+    height: 1rem;
+    float: left;
+}
+
+.testswitch {
+    width: 5rem;
+    height: 1rem;
+    float: left;
+}
+
+.lightborder {
+    border: 2px solid #EA4436;
+}
+
+.undis {
+    display: none;
+}
+
+.dis {
+    display: block;
+}
+
+.left_box {
+    width: 2.5rem;
+    height: 1rem;
+    float: left;
+}
+
+.right_box {
+    width: 5.5rem;
+    height: 1rem;
+    float: left;
+}
+
+.left_none {
+    width: 2rem;
+    height: 1rem;
+    float: left;
+}
+
+.right_none {
+    width: 6rem;
+    height: 1.5rem;
+    float: left;
+    padding-top: 0.1rem;
+}
+
+.btnDiv {
+    width: 10rem;
+    height: 1.5rem;
+    margin-top: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.donateBtn {
+    width: 6rem;
+    height: 1rem;
+    border-radius: 0.2rem;
+    color: #ffffff;
+    background-color: #EA4436;
+    border: none;
+    font-size: 0.4rem;
+}
