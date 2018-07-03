@@ -1,5 +1,19 @@
 var shareJson = [
     {
+        "id": "01",
+        "title": "统战部",
+        "child": [
+            {
+                "content": "非公经济",
+                "url": "http://tzb.changde.gov.cn/col/col16109/index.html"
+            },
+            {
+                "content": "统战文化",
+                "url": "http://tzb.changde.gov.cn/col/col16123/index.html"
+            }
+        ]
+    },
+    {
         "id":"24",
         "title":"经开区",
         "child":[
@@ -48,20 +62,6 @@ var shareJson = [
             {
                 "content":"柳叶湖旅游度假区管理委员会",
                 "url":"http://cdlyh.changde.gov.cn/"
-            }
-        ]
-    },
-    {
-        "id":"01",
-        "title":"统战部",
-        "child":[
-            {
-                "content":"非公经济",
-                "url":"http://tzb.changde.gov.cn/col/col16109/index.html"
-             },
-            {
-                "content":"统战文化",
-                "url":"http://tzb.changde.gov.cn/col/col16123/index.html"
             }
         ]
     },
@@ -237,6 +237,25 @@ var shareJson = [
                 "content":"信用等级查询",
                 "url":"http://www.hnds.gov.cn/hnmh/bsfw/zxcx/djcx/default.htm"
             }
+        ]
+    },
+    {
+        "id": "18",
+        "title": "人社局",
+        "child": [
+            {
+                "content": "人社政策解读",
+                "url": "http://mohrss.changde.gov.cn/col/col17951/index.html"
+            },
+            {
+                "content": "就业创业政策",
+                "url": "http://mohrss.changde.gov.cn/col/col16761/index.html"
+            },
+            {
+                "content": "湘西北人力资源",
+                "url": "http://www.xxbrc.com/"
+            }
+
         ]
     },
     {
@@ -419,25 +438,6 @@ var shareJson = [
                 "content":"政策法规",
                 "url":"http://mzj.changde.gov.cn/col/col17521/index.html"
             }
-        ]
-    },
-    {
-        "id":"18",
-        "title":"人社局",
-        "child":[
-            {
-                "content":"人社政策解读",
-                "url":"http://mohrss.changde.gov.cn/col/col17951/index.html"
-            },
-            {
-                "content":"就业创业政策",
-                "url":"http://mohrss.changde.gov.cn/col/col16761/index.html"
-            },
-            {
-                "content":"湘西北人力资源",
-                "url":"http://www.xxbrc.com/"
-            }
-
         ]
     },
     {
