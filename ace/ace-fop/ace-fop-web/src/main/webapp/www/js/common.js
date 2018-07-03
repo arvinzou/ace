@@ -4,7 +4,7 @@ html.push("<div class=\"login_box\">");
 html.push("<div class=\"login\">");
 try{
     if(userProp){
-        html.push("<span class=\"companyName\" title='"+userProp.name+"' ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" target=\"_blank\">"+userProp.name+"</a></span>");
+        html.push("<span class=\"companyName\" title='"+userProp.name+"' ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" target=\"_blank\">"+userProp.name+"</a><i style='padding-left: 10px;' id='editUserInfo' class='glyphicon glyphicon-edit'></i></span>");
         html.push("<span class=\"userNav\" ng-if=\"userProp\"><a href=\"/portal/dynamic/portal/security/loginOut_fop.jsp\">退出</a></span>");
     }else{
         html.push("<span class=\"userNav\" ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
@@ -87,6 +87,24 @@ html.push("</ul>");
 html.push("</div>");
 html.push("<div class=\"second-bg\"></div>");
 html.push("</div>");
+
+html.push("<div id=\"editMsg\" style=\"display: none;\">");
+html.push("<div class='editForm'>");
+html.push("<p>");
+html.push("<span class='edit_title'>用户名：</span>");
+html.push("<span class='edit_input'><input name=\"edit_name\" type=\"text\" value='"+userProp.username+"' disabled/></span>");
+html.push("</p>");
+html.push("<p>");
+html.push("<span class='edit_title'>密码：</span>");
+html.push("<span class='edit_input'><input name=\"edit_pwd\" type=\"password\"/></span>");
+html.push("</p>");
+html.push("<p>");
+html.push("<span class='edit_title'>请重复密码：</span>");
+html.push("<span class='edit_input'><input name=\"edit_pwdsec\" type=\"password\"/></span>");
+html.push("</p>");
+html.push("</div>");
+html.push("</div>");
+
 var text=html.join("\n");
 
 $(function(){
@@ -130,46 +148,76 @@ $(function(){
         $(this).find('.trig').hide();
     });
 
-    // change();
-    // $(window).resize(function(){  //窗口大小改变时进行改变
-    //     change();
-    // })
+    $("#editUserInfo").click(function() {
+        layer.open({
+            type: 1,
+            title:"密码修改",
+            content: $("#editMsg"),
+            btn: '保存修改',
+            shadeClose: false,
+            skin: 'myskin',
+            area:['500px','400px'],
+            yes: function (index) {
+                var edit_name = $("input[name='edit_name']").val();
+                var edit_pwd = $("input[name='edit_pwd']").val();
+                var edit_pwdsec = $("input[name='edit_pwdsec']").val();
+                if (edit_pwd == '' || edit_pwd == undefined) {
+                    layer.alert("请输入密码！", {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                    return;
+                }
+                if (edit_pwdsec == '' || edit_pwdsec == undefined) {
+                    layer.alert("请重复密码！", {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                    return;
+                }
+                if (edit_pwd != edit_pwdsec) {
+                    layer.alert("两次输入的密码不一致！", {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                    return;
+                }
+                if (confirm("确定要修改吗？")) {
+                    $.ajax({
+                        type: "post",
+                        url: "/portal/system/updatePassword.do",
+                        data: {
+                            password: edit_pwd,
+                            repassword: edit_pwdsec
+                        },
+                        beforeSend: function (XMLHttpRequest) {
+
+                        },
+                        success: function (rst, textStatus) {
+                            if (rst.state) {
+                                layer.alert(rst.errorMessage, {
+                                    icon: 1,
+                                    skin: 'myskin'
+                                });
+                                layer.close(index);
+                            } else {
+                                layer.alert(rst.errorMessage, {
+                                    icon: 5,
+                                    skin: 'myskin'
+                                });
+                            }
+                        },
+                        complete: function (XMLHttpRequest, textStatus) {
+
+                        },
+                        error: function () {
+
+                        }
+                    });
+                }
+            }
+        });
+    });
 });
 
-// /**
-//  * 底部绝对定位，当页面的高度撑开页面时，去掉绝对定位
-//  */
-// function change() {
-//     var $body = $('body');
-//     var $footer = $('.footer');
-//
-//     var bodyHeight = $body.height();  //网页可见元素的高度
-//
-//     var allHeight = bodyHeight;
-//
-//     var isAbsExist = false;
-//
-//     if($footer.hasClass('abs-bottom')){  //如果尾部存在绝对定位,网页总高度要加上尾部的高度
-//         isAbsExist = true;
-//         allHeight += $footer.height();
-//     }
-//
-//     if(getWinHeight() < allHeight){  //窗口高度小于网页总高度时
-//         if(isAbsExist){
-//             $('.footer').removeClass("abs-bottom");
-//         }
-//     }else {  //当窗口高度大于网页总高度时
-//         if(!isAbsExist){
-//             $('.footer').addClass("abs-bottom");
-//         }
-//     }
-// }
-// function getWinHeight(){ //获取窗口高度的函数。
-//     var e = window,
-//         a = 'inner';
-//     if (!('innerWidth' in window )){
-//         a = 'client';
-//         e = document.documentElement || document.body;
-//     }
-//     return e[ a+'Height'];
-// }
+
