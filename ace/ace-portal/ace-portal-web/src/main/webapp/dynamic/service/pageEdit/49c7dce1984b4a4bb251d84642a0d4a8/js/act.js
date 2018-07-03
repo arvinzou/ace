@@ -291,7 +291,7 @@ function initEvents() {
             $.extend(data, {
                 tplPageId: pageId,
                 articleCategory: $("#bar").find(".actives").data("id"),
-                cover: $("#cover-img").attr("src"),
+                cover: $("#cover-img0").attr("src"),
                 mediType: '1',
                 likeNum: 0,
                 hitNum: 0
