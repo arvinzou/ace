@@ -111,6 +111,7 @@
 .form_info textarea, input,select{
     border: none;
     outline: none;
+    background-color: #fff;
 }
 .maper{
     color: #1A56A8;
