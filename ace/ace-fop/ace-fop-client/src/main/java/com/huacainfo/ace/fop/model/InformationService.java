@@ -43,11 +43,11 @@ public class InformationService implements Serializable {
     private String content;
     /**
      * modules:模块分类
-     * 1、企业风采
+     * 1、风采展示
      * 2、企业产品
      * 3、人才信息
      * 4、招商信息
-     * 5、政策文件
+     * 5、政策信息
      * 6、品牌推广
      */
     private String modules;
