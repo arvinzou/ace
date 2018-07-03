@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    color: #657180;
 }
 .simditor-toolbar{
     width: 100% !important;
@@ -14,8 +13,8 @@ a:visited{text-decoration:none; }
 a:hover{text-decoration:none;}
 a:active{text-decoration:none;}
 .box{
-    width: 90%;
-    margin: auto;
+    padding:20px;
+    background:#fff
 }
 .child_title{
     width: 100%;
@@ -289,6 +288,4 @@ textarea {
     font-size: 12px;
     color: #657180;
 }
-.modal-dialog{
-    width: 90% !important;
-}
+

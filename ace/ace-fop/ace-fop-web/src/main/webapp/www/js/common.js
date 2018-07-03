@@ -161,7 +161,7 @@ $(function(){
             btn: '保存修改',
             shadeClose: false,
             skin: 'myskin',
-            area:['500px','400px'],
+            area:['500px','300px'],
             yes: function (index) {
                 var edit_name = $("input[name='edit_name']").val();
                 var edit_pwd = $("input[name='edit_pwd']").val();

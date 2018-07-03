@@ -1,0 +1,192 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.financebox {
+    width: 10rem;
+}
+
+.finance_total {
+    width: 10rem;
+    margin-top: 0.5rem;
+    border-bottom: 1px solid #E4E6E9;
+}
+
+.finance_total_01 {
+    width: 10rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    color: #EA4436;
+    font-size: 0.5rem;
+    font-weight: bold;
+}
+
+.finance_total_02 {
+    width: 10rem;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    text-align: center;
+    font-size: 0.35rem;
+    color: #999999;
+    margin-bottom: 0.5rem;
+}
+
+.finance_nav {
+    width: 8rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    height: 1rem;
+}
+
+.finance_title_nav {
+    width: 10rem;
+    height: 1.5rem;
+    /*border-bottom: 1px solid #E4E6E9;*/
+}
+
+.finance_nav_ul li {
+    width: 5rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    display: block;
+    float: left;
+    font-size: 0.4rem;
+    font-weight: bold;
+    color: #666666;
+}
+
+.dis {
+    display: block;
+}
+
+.undis {
+    display: none;
+}
+
+.raise_list {
+    width: 9rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    border-bottom: 1px solid #E4E6E9;
+}
+
+.pay_list {
+    width: 9rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    border-bottom: 1px solid #E4E6E9;
+}
+
+.raise_left {
+    width: 1rem;
+    height: 2rem;
+    float: left;
+}
+
+.raise_right {
+    width: 8rem;
+    height: 2rem;
+    float: left;
+}
+
+.raise_left_image {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+}
+
+.raise_left_image img {
+    border-radius: 50%;
+}
+
+.raise_left_name {
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    color: #999999;
+    text-align: center;
+    font-size: 0.3rem;
+    overflow: hidden; /*溢出隐藏*/
+    text-overflow: ellipsis; /*以省略号...显示*/
+    white-space: nowrap; /*强制不换行*/
+}
+
+.raise_right01, .raise_right02 {
+    padding-left: 0.5rem;
+}
+
+.raise_right01_title {
+    width: 5rem;
+    height: 1rem;
+    display: block;
+    float: left;
+}
+
+.raise_title {
+    font-size: 0.4rem;
+    color: #333333;
+    font-weight: bold;
+}
+
+.raise_right01_time {
+    width: 2.5rem;
+    height: 1rem;
+    display: block;
+    float: right;
+    text-align: right;
+    font-size: 0.35rem;
+    color: #999999;
+    padding-right: 0;
+}
+
+.raise_right02 {
+    color: #999999;
+    font-size: 0.4rem;
+}
+
+.raise_money {
+    color: #EA4436;
+    font-size: 0.4rem;
+    font-weight: bold;
+}
+
+.pay_list_01 {
+    width: 9rem;
+    height: 1rem;
+    font-size: 0.4rem;
+}
+
+.pay_list_left {
+    width: 6rem;
+    height: 1rem;
+    float: left;
+    font-size: 0.4rem;
+    color: #333333;
+    overflow: hidden; /*溢出隐藏*/
+    text-overflow: ellipsis; /*以省略号...显示*/
+    white-space: nowrap; /*强制不换行*/
+}
+
+.pay_list_right {
+    width: 3rem;
+    height: 1rem;
+    float: right;
+    text-align: right;
+    font-size: 0.4rem;
+    color: #999999;
+}
+
+.gray {
+    color: #999999;
+}
