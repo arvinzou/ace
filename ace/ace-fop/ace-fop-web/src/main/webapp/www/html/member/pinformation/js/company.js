@@ -59,15 +59,15 @@ app.controller(ngControllerName,function($scope){
         success:function(result){
             if(result.status == 0) {
                 console.log(result);
-                if(result.data.status == '2'){
-                    layer.alert("已经审核过的信息不能修改！", {
-                        icon: 1,
-                        skin: 'myskin',
-                        offset:'400px'
-                    });
-                    $('input,select,textarea,button').attr('readonly',true);
-                    $('input,select,textarea,button').attr('disabled',true);
-                }
+                // if(result.data.status == '2'){
+                //     layer.alert("已经审核过的信息不能修改！", {
+                //         icon: 1,
+                //         skin: 'myskin',
+                //         offset:'400px'
+                //     });
+                //     $('input,select,textarea,button').attr('readonly',true);
+                //     $('input,select,textarea,button').attr('disabled',true);
+                // }
 
 
                 $scope.companyInfo = dataFormat(result.data, 'establishDate');

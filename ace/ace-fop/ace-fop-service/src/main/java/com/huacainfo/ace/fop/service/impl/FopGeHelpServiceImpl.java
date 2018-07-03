@@ -296,6 +296,7 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "内容不能为空！");
         }
+        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setReleaseDate(new Date());
         o.setLastModifyUserName(userProp.getName());
