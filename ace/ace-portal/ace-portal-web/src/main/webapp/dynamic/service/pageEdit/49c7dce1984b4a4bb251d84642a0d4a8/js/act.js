@@ -269,17 +269,19 @@ function initEvents() {
             modal.find('.modal-body input[name=title]').val($(o).find(".title").html());
             modal.find('.modal-body textarea[name=remark]').val($(o).find(".desc").html());
             modal.find('.modal-body input[name=tags]').val($(o).data("tags"));
-            $("#cover-img").attr("src", $(o).find("img").attr("src"));
-            $("#cover-img").css("display", "block");
-            $("#cover-img").css("max-width", 300);
-            $("#cover-img").css("max-height", 300);
+            $("#cover-img0").attr("src", $(o).find("img").attr("src"));
+            $("#cover-img0").css("display", "block");
+            $("#cover-img0").css("max-width", 300);
+            $("#cover-img0").css("max-height", 300);
+            modal.find('.type'+$(o).data("type")).prop('checked',true);
         }else{
-						modal.find('.modal-body input[name=hrefUrl]').val("");
+			modal.find('.modal-body input[name=hrefUrl]').val("");
             modal.find('.modal-body input[name=title]').val("");
             modal.find('.modal-body textarea[name=remark]').val("");
             modal.find('.modal-body input[name=tags]').val("");
             $("#cover-img").css("display", "none");
-				}
+            modal.find('.type1').prop('checked',true);
+		}
 
     });
     $('#model2 form').ajaxForm({
@@ -403,7 +405,8 @@ function getPageList(pageId) {
         type: 'POST',
         timeout: 30000,
         data: {
-            id: pageId
+            id: pageId,
+            type:'all'
         },
         dataType: 'json',
         beforeSend: function () {

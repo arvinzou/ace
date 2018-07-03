@@ -140,27 +140,37 @@
       <result column="likeNum" jdbcType="BIGINT" property="likeNum" />
       <result column="hitNum" jdbcType="BIGINT" property="hitNum" />
       <result column="sort" jdbcType="INTEGER" property="sort" />
+      <result column="type" jdbcType="VARCHAR" property="type" />
     </collection>
   </resultMap>
   <select id="getPageData" resultMap="pageData">
     select t.id,t.name,
     a.id articleId,a.title, a.cover, a.remark, a.hrefUrl, a.tags, a.mediType, a.mediUrl,
-    a.bgMusicUrl, a.likeNum, a.hitNum, a.sort
+    a.bgMusicUrl, a.likeNum, a.hitNum, a.sort,a.type
     from
     article_category t
     left join article a on t.id=a.articleCategory
     where
     t.tplPageId =#{pageId,jdbcType=VARCHAR}
     and a.tplPageId =#{pageId,jdbcType=VARCHAR}
+    <choose>
+      <when test='type!=null and type!=""'>
+        and 0=0
+      </when>
+      <otherwise>
+        and a.type='1'
+      </otherwise>
+    </choose>
+
     ORDER BY t.sort,t.createDate desc,a.sort,a.createDate desc
   </select>
   <select id="getArticleTopListByPageId" resultType="map">
     select id,title, cover, remark, hrefUrl
     from
     article where
-    tplPageId =#{pageId,jdbcType=VARCHAR} and cover is not null
+    tplPageId =#{pageId,jdbcType=VARCHAR} and cover is not null and type='2'
     ORDER BY sort,createDate desc
-    limit 0, 3
+    limit 0, 10
   </select>
   <update id="updateNameById">
     update tpl_page set name=#{name} where id=#{id}

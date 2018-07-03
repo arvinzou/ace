@@ -216,7 +216,7 @@
                     {@else}
                     <div class="navitem" data-id="\${item.id}"  style="display: none;" id="\${item.id}" >
                         {@/if} {@each item.articles as o}
-                        <div class="list_item" data-id="\${o.id}" data-tags="\${o.tags}" data-category="\${item.id}" data-hrefurl="\${o.hrefUrl}">
+                        <div class="list_item" data-id="\${o.id}" data-tags="\${o.tags}" data-type="\${o.type}" data-category="\${item.id}" data-hrefurl="\${o.hrefUrl}">
                             <h2 class="title">\${o.title}</h2>
                             <div class="cover ">
                                 <img class="img js_img" src="\${o.cover}">
@@ -307,6 +307,18 @@
                                     <span>标签:</span>
                                     <input type="text" name="tags" placeholder="请输入文章标签最多3个,请以英文的逗号隔开">
 
+                                </div>
+
+                                <div class="form-group">
+                                    <span>封面:</span>
+                                    <div class="btn-group">
+                                        <label class="radio-inline">
+                                            <input type="radio"  value="1" class="type1" name="type">否
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio"  value="2" class="type2" name="type">是
+                                        </label>
+                                    </div>
                                 </div>
                             </form>
                         </div>

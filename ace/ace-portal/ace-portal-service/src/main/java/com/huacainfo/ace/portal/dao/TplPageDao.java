@@ -32,7 +32,7 @@ public interface TplPageDao {
 
     Map<String,Object> getById(String id);
 
-    List<PageData> getPageData(String pageId);
+    List<PageData> getPageData(@Param("pageId")String pageId,@Param("type")String type);
 
     List<Map<String,Object>> getArticleTopListByPageId(String pageId);
 

@@ -28,11 +28,7 @@ function getList() {
             console.log(data);
             var carousel = document.getElementById('tpl-carousel').innerHTML;
             var covers = data.data.covers;
-            var newcovers = [];
-            for(var i=2; i>=0; i--){
-                newcovers.push(covers[i]);
-            }
-            data.data.covers = newcovers;
+
             data.data.category=category;
             var html = juicer(carousel, {
                 data: data
@@ -129,7 +125,7 @@ function getCover(){
                     var html = juicer(baner, {
                         data: data
                     });
-                    $("#myCarousel").html(html);
+                   // $("#myCarousel").html(html);
               }else{
 
               }

@@ -16,6 +16,7 @@
     <result column="likeNum" jdbcType="BIGINT" property="likeNum" />
     <result column="hitNum" jdbcType="BIGINT" property="hitNum" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="type" jdbcType="CHAR" property="type" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
     <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
@@ -31,7 +32,7 @@
 
   <sql id="Base_Column_List">
     id, tplPageId, articleCategory, title, cover, remark, hrefUrl, tags, mediType, mediUrl, 
-    bgMusicUrl, likeNum, hitNum, sort, status, createUserId, createUserName, createDate, 
+    bgMusicUrl, likeNum, hitNum, sort, type,status, createUserId, createUserName, createDate,
     lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
   <sql id="Blob_Column_List">
@@ -56,7 +57,7 @@
       mediUrl, bgMusicUrl, likeNum, 
       hitNum, sort, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate, content
+      lastModifyUserName, lastModifyDate, content,type
       )
     values (#{id,jdbcType=VARCHAR}, #{tplPageId,jdbcType=VARCHAR}, #{articleCategory,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
@@ -64,7 +65,7 @@
       #{mediUrl,jdbcType=VARCHAR}, #{bgMusicUrl,jdbcType=VARCHAR}, #{likeNum,jdbcType=BIGINT}, 
       #{hitNum,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR},#{type}
       )
   </insert>
   
@@ -76,6 +77,7 @@
       remark = #{remark,jdbcType=VARCHAR},
       hrefUrl = #{hrefUrl,jdbcType=VARCHAR},
       tags = #{tags,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
       mediType = #{mediType,jdbcType=VARCHAR},
       mediUrl = #{mediUrl,jdbcType=VARCHAR},
       bgMusicUrl = #{bgMusicUrl,jdbcType=VARCHAR},
@@ -130,7 +132,7 @@
 
   <select id="getList" resultType="map">
     select id, tplPageId, articleCategory, title, cover, remark, hrefUrl, tags, mediType, mediUrl,
-    bgMusicUrl, likeNum, hitNum, sort
+    bgMusicUrl, likeNum, hitNum, sort,type
     from
     article where
     tplPageId =#{pageId,jdbcType=VARCHAR}
@@ -142,7 +144,7 @@
 
   <select id="getListById" resultType="map">
     select id,title, cover, remark, hrefUrl, tags, mediType, mediUrl,
-    bgMusicUrl, likeNum, hitNum, sort
+    bgMusicUrl, likeNum, hitNum, sort,type
     from
     article where
     tplPageId =#{pageId,jdbcType=VARCHAR}

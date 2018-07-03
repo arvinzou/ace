@@ -32,6 +32,8 @@ public class Article implements java.io.Serializable {
 
     private Integer sort;
 
+    private String type;
+
     private String status;
 
     private String createUserId;
@@ -222,5 +224,14 @@ public class Article implements java.io.Serializable {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

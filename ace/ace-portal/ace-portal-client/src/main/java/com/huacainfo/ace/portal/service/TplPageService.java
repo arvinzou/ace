@@ -123,7 +123,7 @@ public interface TplPageService {
 	 * @author: 陈晓克
 	 * @version: 2018-05-07
 	 */
-	public abstract Map<String,Object> getTplPageById(String id) throws Exception;
+	public abstract Map<String,Object> getTplPageById(String id,String type) throws Exception;
 
 	/**
 	 *

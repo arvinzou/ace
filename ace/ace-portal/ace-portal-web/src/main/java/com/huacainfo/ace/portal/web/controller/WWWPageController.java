@@ -71,8 +71,8 @@ public class WWWPageController extends PortalBaseController {
 	 */
 	@RequestMapping(value = "/getTplPageById.do")
 	@ResponseBody
-	public  Map<String, java.lang.Object> getTplPageById(String id) throws Exception{
-		return tplPageService.getTplPageById(id);
+	public  Map<String, java.lang.Object> getTplPageById(String id,String type) throws Exception{
+		return tplPageService.getTplPageById(id,type);
 	}
 
 
