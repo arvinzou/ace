@@ -57,7 +57,7 @@
         {@each data.data.covers as item,index}
         {@if index==0}
         <div class="item active">
-            {@if item.hrefUrl!=null}
+            {@if item.hrefUrl}
             <a href="\${item.hrefUrl}">
                 <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
             </a>
@@ -67,7 +67,7 @@
         </div>
         {@else}
         <div class="item">
-            {@if item.hrefUrl!=null}
+            {@if item.hrefUrl}
             <a href="\${item.hrefUrl}">
                 <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
             </a>
