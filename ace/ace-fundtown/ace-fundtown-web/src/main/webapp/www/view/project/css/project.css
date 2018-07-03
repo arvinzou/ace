@@ -1,0 +1,273 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #ffffff;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.layui-timeline-title {
+    background-color: #F7F9FC;
+}
+
+.projectbox {
+    width: 10rem;
+}
+
+.project_title {
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    color: #666666;
+    font-size: 0.4rem;
+    font-weight: bold;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.project_title span {
+    text-align: center;
+    width: 5rem;
+    display: block;
+    float: left;
+}
+
+.project_item {
+    width: 100%;
+}
+
+.project_item_image {
+    width: 100%;
+    height: 5rem;
+}
+
+.project_item_raise {
+    width: 9rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+}
+
+.raise_01 {
+    width: 3rem;
+    height: 1.4rem;
+    text-align: center;
+    float: left;
+    padding-top: 0.5rem;
+}
+
+.raise_money {
+    font-size: 0.45rem;
+    font-weight: bold;
+    color: #EA4436;
+}
+
+.raise_price {
+    font-size: 0.35rem;
+    color: #666666;
+}
+
+.project_nav {
+    width: 100%;
+    height: 1.5rem;
+}
+
+.project_nav_ul {
+    width: 9rem;
+    margin-left: 0.5rem;
+}
+
+.project_nav_ul li {
+    display: block;
+    float: left;
+    width: 3rem;
+    height: 1rem;
+    text-align: center;
+    font-size: 0.4rem;
+    font-weight: bold;
+    line-height: 1rem;
+    color: #666666;
+    cursor: pointer;
+}
+
+.dis {
+    display: block;
+}
+
+.undis {
+    display: none;
+}
+
+#nav_info01 {
+    width: 9rem;
+    margin-left: 0.5rem;
+    line-height: 0.65rem;
+    margin-bottom: 1rem;
+}
+
+#nav_info02 {
+    width: 9rem;
+    margin-left: 0.5rem;
+    line-height: 0.65rem;
+    margin-bottom: 1rem;
+}
+
+#nav_info03 {
+    width: 9rem;
+    margin-left: 0.5rem;
+    line-height: 0.65rem;
+    margin-bottom: 1rem;
+}
+
+.nav_info_content p {
+    font-size: 0.35rem;
+    color: #666666;
+}
+
+.donation_list {
+    width: 100%;
+}
+
+.donation_item {
+    width: 9rem;
+    height: 3rem;
+    border-bottom: 1px solid #E4E6E9;
+    margin-top: 0.5rem;
+}
+
+.donation_user_image {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    float: left;
+}
+
+.donation_user_image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.donation_user_info {
+    width: 7.5rem;
+    height: 3rem;
+    float: left;
+}
+
+.donation_user_info {
+    font-size: 0.35rem;
+    color: #666666;
+}
+
+.username {
+    color: #333333;
+    font-size: 0.35rem;
+    padding-right: 0.2rem;
+}
+
+.donation_users {
+    width: 7rem;
+    height: 0.6rem;
+    padding-left: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.donation_money {
+
+    color: #EA4436;
+}
+
+.donation_msg {
+    width: 7rem;
+    padding-left: 0.5rem;
+    margin-bottom: 0.2rem;
+    color: #333333;
+}
+
+.donation_time {
+    width: 7rem;
+    height: 0.6rem;
+    color: #666666;
+    padding-left: 0.5rem;
+    font-size: 0.3rem;
+}
+
+.project_record {
+    width: 9rem;
+}
+
+.project_record_title {
+    width: 9rem;
+    height: 1.2rem;
+}
+
+.project_record_title01 {
+    width: 100%;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    font-size: 0.35rem;
+    color: #333333;
+    font-weight: bold;
+}
+
+.project_record_title02 {
+    width: 100%;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    font-size: 0.3rem;
+    color: #333333;
+    font-weight: bold;
+}
+
+.project_record_info {
+    width: 100%;
+    font-size: 0.3rem;
+    line-height: 0.6rem;
+    color: #666666;
+}
+
+.donation_btn {
+    width: 2rem;
+    height: 1rem;
+    position: fixed;
+    right: 0;
+    bottom: 3rem;
+    cursor: pointer;
+}
+
+.titleActive {
+    color: #EA4436;
+}
+
+.nav_box_ul {
+    width: 10rem;
+    line-height: 1.5rem;
+}
+
+.nav_box_ul li {
+    width: 5rem;
+    height: 1rem;
+    text-align: center;
+}
+
+.troggle {
+    height: 1.8rem;
+    overflow: hidden;
+}
+
+.upordown {
+    width: 100%;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: center;
+}
+
+.opt {
+    font-size: 0.35rem;
+    color: #2AAB6A;
+    padding-right: 0.2rem;
+}

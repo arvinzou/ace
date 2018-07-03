@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fundtown.dao.ProcessNodeDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fundtown.model.ProcessNode">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="curNodeName" jdbcType="VARCHAR" property="curNodeName"/>
+        <result column="nodeIcon" jdbcType="VARCHAR" property="nodeIcon"/>
+        <result column="sequence" jdbcType="INTEGER" property="sequence"/>
+        <result column="coverImage" jdbcType="VARCHAR" property="coverImage"/>
+        <result column="priorNodeId" jdbcType="VARCHAR" property="priorNodeId"/>
+        <result column="nextNodeId" jdbcType="VARCHAR" property="nextNodeId"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, curNodeName, nodeIcon, sequence, coverImage, priorNodeId, nextNodeId, remark, status,
+    createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from process_node
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from process_node
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fundtown.model.ProcessNode">
+    insert into process_node (id, curNodeName, nodeIcon,
+      sequence, coverImage, priorNodeId, 
+      nextNodeId, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{curNodeName,jdbcType=VARCHAR}, #{nodeIcon,jdbcType=VARCHAR},
+      #{sequence,jdbcType=INTEGER}, #{coverImage,jdbcType=VARCHAR}, #{priorNodeId,jdbcType=VARCHAR}, 
+      #{nextNodeId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fundtown.model.ProcessNode">
+        insert into process_node
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="curNodeName != null">
+                curNodeName,
+            </if>
+            <if test="nodeIcon != null">
+                nodeIcon,
+            </if>
+            <if test="sequence != null">
+                sequence,
+            </if>
+            <if test="coverImage != null">
+                coverImage,
+            </if>
+            <if test="priorNodeId != null">
+                priorNodeId,
+            </if>
+            <if test="nextNodeId != null">
+                nextNodeId,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="curNodeName != null">
+                #{curNodeName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeIcon != null">
+                #{nodeIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="sequence != null">
+                #{sequence,jdbcType=INTEGER},
+            </if>
+            <if test="coverImage != null">
+                #{coverImage,jdbcType=VARCHAR},
+            </if>
+            <if test="priorNodeId != null">
+                #{priorNodeId,jdbcType=VARCHAR},
+            </if>
+            <if test="nextNodeId != null">
+                #{nextNodeId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fundtown.model.ProcessNode">
+        update process_node
+        <set>
+            <if test="curNodeName != null">
+                curNodeName = #{curNodeName,jdbcType=VARCHAR},
+            </if>
+            <if test="nodeIcon != null">
+                nodeIcon = #{nodeIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="sequence != null">
+                sequence = #{sequence,jdbcType=INTEGER},
+            </if>
+            <if test="coverImage != null">
+                coverImage = #{coverImage,jdbcType=VARCHAR},
+            </if>
+            <if test="priorNodeId != null">
+                priorNodeId = #{priorNodeId,jdbcType=VARCHAR},
+            </if>
+            <if test="nextNodeId != null">
+                nextNodeId = #{nextNodeId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fundtown.model.ProcessNode">
+    update process_node
+    set curNodeName = #{curNodeName,jdbcType=VARCHAR},
+      nodeIcon = #{nodeIcon,jdbcType=VARCHAR},
+      sequence = #{sequence,jdbcType=INTEGER},
+      coverImage = #{coverImage,jdbcType=VARCHAR},
+      priorNodeId = #{priorNodeId,jdbcType=VARCHAR},
+      nextNodeId = #{nextNodeId,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fundtown.vo.ProcessNodeVo">
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        id, curNodeName, nodeIcon, sequence, coverImage, priorNodeId, nextNodeId, remark, status,
+        createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from process_node t
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.sequence
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from process_node t
+        where 1=1
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fundtown.model.ProcessNode">
+        select count(1)
+        from process_node
+        where curNodeName = #{curNodeName,jdbcType=VARCHAR}
+          and id != #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>
