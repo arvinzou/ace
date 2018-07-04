@@ -149,6 +149,7 @@ public class FopPersonServiceImpl implements FopPersonService {
         this.dataBaseLogService.log("变更企业管理", "企业管理", "", o.getId(),
                 o.getId(), userProp);
         return new MessageResponse(0, "变更企业管理完成！");
+
     }
 
     /**
