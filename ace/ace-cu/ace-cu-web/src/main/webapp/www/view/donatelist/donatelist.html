@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="../js/init-rem.js"></script>
 		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/donatelist.css"/>
+		<script type="text/javascript" src="js/donatelist.js"></script>
 	</head>
 	<body>
 		<div class="list_box">
@@ -32,74 +33,16 @@
 				</div>
 			</div>
 			<div class="list">
-				<div class="listItem">
-					<div class="topnum">
-						803
-					</div>
+				<div class="listItem" ng-repeat="rank in rankList">
+					<div class="topnum" ng-bind="$index+1"></div>
 					<div class="headImg">
-						<img src="img/headUrl.png" />
+						<img ng-src="{{rank.headimgurl}}" />
 					</div>
 					<div class="detail">
-						<p class="user">我</p>
-						<p class="user_detail">捐赠<span class="unit">1</span>天</p>
+						<p class="user" ng-bind="rank.nickname"></p>
+						<p class="user_detail">捐赠<span class="unit" ng-bind="rank.donateCount"></span>次</p>
 					</div>
-					<div class="money"><span class="money_amount">100</span><span class="unit">元</span></div>
-					<div style="clear: both;"></div>
-				</div>
-				<div class="listItem">
-					<div class="topnum">
-						803
-					</div>
-					<div class="headImg">
-						<img src="img/headUrl.png" />
-					</div>
-					<div class="detail">
-						<p class="user">我</p>
-						<p class="user_detail">捐赠<span class="unit">1</span>天</p>
-					</div>
-					<div class="money"><span class="money_amount">100</span><span class="unit">元</span></div>
-					<div style="clear: both;"></div>
-				</div>
-				<div class="listItem">
-					<div class="topnum">
-						803
-					</div>
-					<div class="headImg">
-						<img src="img/headUrl.png" />
-					</div>
-					<div class="detail">
-						<p class="user">我</p>
-						<p class="user_detail">捐赠<span class="unit">1</span>天</p>
-					</div>
-					<div class="money"><span class="money_amount">100</span><span class="unit">元</span></div>
-					<div style="clear: both;"></div>
-				</div>
-				<div class="listItem">
-					<div class="topnum">
-						803
-					</div>
-					<div class="headImg">
-						<img src="img/headUrl.png" />
-					</div>
-					<div class="detail">
-						<p class="user">我</p>
-						<p class="user_detail">捐赠<span class="unit">1</span>天</p>
-					</div>
-					<div class="money"><span class="money_amount">100</span><span class="unit">元</span></div>
-					<div style="clear: both;"></div>
-				</div>
-				<div class="listItem">
-					<div class="topnum">
-						803
-					</div>
-					<div class="headImg">
-						<img src="img/headUrl.png" />
-					</div>
-					<div class="detail">
-						<p class="user">我</p>
-						<p class="user_detail">捐赠<span class="unit">1</span>天</p>
-					</div>
-					<div class="money"><span class="money_amount">100</span><span class="unit">元</span></div>
+					<div class="money"><span class="money_amount" ng-bind="rank.totalDonateAmount"></span><span class="unit">元</span></div>
 					<div style="clear: both;"></div>
 				</div>
 			</div>
