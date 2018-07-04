@@ -12,11 +12,8 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.FlowType;
-import com.huacainfo.ace.fop.common.constant.FopConstant;
-import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopLoanProductDao;
-import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.model.FopLoanProduct;
@@ -191,7 +188,7 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         if (CommonUtils.isBlank(o.getDescription())) {
             return new MessageResponse(1, "产品内容不能为空！");
         }
-        o.setStatus("1");
+//        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
