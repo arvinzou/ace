@@ -84,6 +84,8 @@
               marginLeft: '-' + Math.round(rx * c.x) + 'px',
               marginTop: '-' + Math.round(ry * c.y) + 'px'
           });
+          $(".preview-pane").css("width",xsize +'px');
+          $(".preview-pane").css("height",ysize +  'px');
       }
   }
 
@@ -99,8 +101,8 @@
   function initPreview() {
       $pimg.removeAttr("style"); //清空上一次初始化设置的样式
       $pimg.css({
-          maxWidth: xsize + 'px',
-          maxHeight: ysize + 'px'
+         maxWidth: xsize + 'px',
+         maxHeight: ysize + 'px'
       });
   }
 
