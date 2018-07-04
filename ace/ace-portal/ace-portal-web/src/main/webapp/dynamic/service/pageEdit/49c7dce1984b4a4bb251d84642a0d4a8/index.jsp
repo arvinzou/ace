@@ -224,8 +224,10 @@
                             <div class="cont">
 
                                 <p class="desc">\${o.remark}</p>
+
                             </div>
                             <p>
+                                {@if o.type=='2'}<span class="label label-danger">封面</span>{@/if}
                                 {@each o.tags.split(',') as tag,num}
                                 <span style="background-color:#21b080;color:#FFFFFF">\${tag}</span>
                                 {@/each}
