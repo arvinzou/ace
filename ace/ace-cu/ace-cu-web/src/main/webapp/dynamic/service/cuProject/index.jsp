@@ -107,7 +107,7 @@
             <span id="id"></span>
         </div>
         <div class="labelItem hide">
-            <span class="labelItemHeader">父级项目ID</span>
+            <span class="labelItemHeader">隶属于</span>
             <br>
             <span id="parentId"></span>
         </div>
