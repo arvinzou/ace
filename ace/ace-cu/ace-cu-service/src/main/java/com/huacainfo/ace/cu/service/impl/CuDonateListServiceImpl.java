@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service("cuDonateListService")
 /**
@@ -269,6 +270,27 @@ public class CuDonateListServiceImpl implements CuDonateListService {
         return cuDonateListDao.getAccDonateCount(openId);
     }
 
+    /**
+     * 根据条件统计捐款金额
+     *
+     * @param condition
+     * @return
+     */
+    @Override
+    public BigDecimal findDonateAmount(Map<String, Object> condition) {
+        return cuDonateListDao.findDonateAmount(condition);
+    }
+
+    /**
+     * 根据条件统计捐款次数
+     *
+     * @param condition
+     * @return
+     */
+    @Override
+    public int findDonateCount(Map<String, Object> condition) {
+        return cuDonateListDao.findDonateCount(condition);
+    }
 
 
 }

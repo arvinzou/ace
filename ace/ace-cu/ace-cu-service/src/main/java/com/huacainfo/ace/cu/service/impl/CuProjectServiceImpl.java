@@ -28,7 +28,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("cuProjectService")
 /**
@@ -227,9 +229,34 @@ public class CuProjectServiceImpl implements CuProjectService {
         List<CuProjectVo> list = rs.getRows();
         for (CuProjectVo projectVo : list) {
             setBalanceDays(projectVo);
+            //统计 今日募集、今日捐赠人数
+            if (ProjectConstant.P_TYPE_SPECIAL.equals(projectVo.getType())) {
+                dataStatistics(projectVo);
+            }
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rs);
+    }
+
+    /**
+     * 数据统计
+     *
+     * @param projectVo
+     */
+    private void dataStatistics(CuProjectVo projectVo) {
+        //今日时间
+        Map<String, String> dateMap = DateUtil.getDateMap(DateUtil.getNow());
+        String today = dateMap.get("year") + "-" + dateMap.get("month") + "-" + dateMap.get("day");
+        //查询条件
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("projectId", projectVo.getId());
+        condition.put("startDate", today + " 00:00:00");
+        condition.put("endDate", today + " 23:59:59");
+        //数值录入
+        BigDecimal todayDonateAmount = cuDonateListService.findDonateAmount(condition);
+        int todayDonateCount = cuDonateListService.findDonateCount(condition);
+        projectVo.setTodayDonateAmount(null == todayDonateAmount ? BigDecimal.ZERO : todayDonateAmount);
+        projectVo.setTodayDonateCount(todayDonateCount);
     }
 
     /**
