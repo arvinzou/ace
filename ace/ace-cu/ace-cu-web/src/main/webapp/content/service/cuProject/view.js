@@ -283,7 +283,7 @@ function style_edit_form(form) {
     form.find('input[name=sdate]').datepicker({
         format: 'yyyy-mm-dd',
         autoclose: true
-    }).end().find('input[name=status]')
+    }).end().find('input[name=started]')
         .addClass('ace ace-switch ace-switch-5')
         .after('<span class="lbl"></span>');
     var buttons = form.next().find('.EditButton .fm-button');

@@ -157,6 +157,13 @@ public class CuProjectServiceImpl implements CuProjectService {
             return new MessageResponse(1, "项目结束时间不能为空！");
         }
 
+        if (ProjectConstant.P_TYPE_PAY_OUT.equals(o.getType())) {
+            CuProject p = cuProjectDao.selectByPrimaryKey(o.getId());
+            if (o.getTargetAmount().compareTo(p.getTargetAmount()) != 0) {
+                return new MessageResponse(1, "支出项目，支出金额不得调整！");
+            }
+        }
+
         int temp = this.cuProjectDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "慈善项目名称重复！");
@@ -224,6 +231,7 @@ public class CuProjectServiceImpl implements CuProjectService {
         CuProjectQVo condition = new CuProjectQVo();
         condition.setType(type);
         condition.setStatus("2");//'2' : "通过";
+        condition.setStarted("1");//项目是否启动  0-否 1-true
 
         PageResult<CuProjectVo> rs = findCuProjectList(condition, start, limit, orderBy);
         List<CuProjectVo> list = rs.getRows();

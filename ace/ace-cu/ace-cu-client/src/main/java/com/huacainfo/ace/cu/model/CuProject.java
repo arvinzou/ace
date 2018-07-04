@@ -14,11 +14,6 @@ public class CuProject implements Serializable {
      */
     private String parentId;
 
-    /**
-     * 父类项目名称
-     */
-    private String parentProjectName;
-
     private String projectName;
 
     private String title;
@@ -66,12 +61,27 @@ public class CuProject implements Serializable {
 
     private String description;
 
-    public String getParentProjectName() {
-        return parentProjectName;
+    private int sequence;
+
+    /**
+     * 0-否 1-true
+     */
+    private String started;
+
+    public int getSequence() {
+        return sequence;
     }
 
-    public void setParentProjectName(String parentProjectName) {
-        this.parentProjectName = parentProjectName;
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
+
+    public String getStarted() {
+        return started;
+    }
+
+    public void setStarted(String started) {
+        this.started = started;
     }
 
     public String getId() {
