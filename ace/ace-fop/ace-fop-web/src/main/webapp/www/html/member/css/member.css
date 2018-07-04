@@ -27,14 +27,20 @@ body {
 	display: block;
 }
 
-.member_menu li:hover, .member_menu li:hover a {
+/*.member_menu li:hover, .member_menu li:hover a {
 	background-color: #1A56A8;
 	color: #FFFFFF;
 }
-
+*/
+.menua{
+	color: #31364B;
+}
 .hover_li {
 	background-color: #1A56A8;
-
+	color: #ffffff;
+}
+.hover_li a{
+	color: #ffffff;
 }
 
 .hover_li >a{

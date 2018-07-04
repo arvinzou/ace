@@ -6261,7 +6261,7 @@ button.close {
 }
 
 .modal.fade .modal-dialog {
-    width: 50%;
+    width: 60%;
     -webkit-transition: -webkit-transform .3s ease-out;
     -o-transition: -o-transform .3s ease-out;
     transition: transform .3s ease-out;

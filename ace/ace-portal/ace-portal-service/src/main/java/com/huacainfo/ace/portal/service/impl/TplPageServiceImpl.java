@@ -282,7 +282,7 @@ public class TplPageServiceImpl implements TplPageService {
 	 * @version: 2018-05-07
 	 */
 	@Override
-	public  Map<String, java.lang.Object>  getTplPageById(String id) throws Exception{
+	public  Map<String, java.lang.Object>  getTplPageById(String id,String type) throws Exception{
 
 		SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
 		Configuration configuration = session.getConfiguration();
@@ -293,7 +293,7 @@ public class TplPageServiceImpl implements TplPageService {
 		Map<String,java.lang.Object> data=new HashedMap();
 		try {
 			data.put("page", dao.getById(id));
-			data.put("categorys", dao.getPageData(id));
+			data.put("categorys", dao.getPageData(id,type));
 			data.put("covers", dao.getArticleTopListByPageId(id));
 			rst.put("data", data);
 		}catch (Exception e){

@@ -128,9 +128,14 @@ function settime(){
     stop = stop;
     countdown = countdown;
     $('#getCode').text(btnName);
+    $('#getCode').attr("disabled", true);
+    $('#getCode').css({'background-color':'#E1E5ED'},{'color':'#666666'});
     if (!stop) {
         setTimeout(function () {
             this.settime()
         }, 1000)
+    }else{
+        $('#getCode').attr("disabled", false);
+        $('#getCode').css({'background-color':'#1A56A8'},{'color':'#FFFFFF'});
     }
 }

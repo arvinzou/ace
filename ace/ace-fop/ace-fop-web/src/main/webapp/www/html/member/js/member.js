@@ -7,10 +7,6 @@ var userId = null;
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
-    var iframe = $("#iframe");
-    if (iframe.readyState == "complete"){
-        setIframeHeight(iframe);
-    }
 
     /**
      * 查询统计信息

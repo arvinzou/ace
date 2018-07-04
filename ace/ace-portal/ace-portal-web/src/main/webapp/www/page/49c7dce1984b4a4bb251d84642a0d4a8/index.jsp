@@ -56,20 +56,24 @@
     <div class="carousel-inner" id="sliceImgContainer">
         {@each data.data.covers as item,index}
         {@if index==0}
-
         <div class="item active">
-            <a href="{@if item.hrefUrl!=null}\${item.hrefUrl}{@else}preview.jsp?id=\${item.id}{@/if}">
+            {@if item.hrefUrl}
+            <a href="\${item.hrefUrl}">
                 <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
             </a>
-            <%--
-            <div class="carousel-caption">\${item.title}</div>
-            --%>
+            {@else}
+            <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
+            {@/if}
         </div>
         {@else}
         <div class="item">
-            <a href="{@if item.hrefUrl!=null}\${item.hrefUrl}{@else}preview.jsp?id=\${item.id}{@/if}">
+            {@if item.hrefUrl}
+            <a href="\${item.hrefUrl}">
                 <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
             </a>
+            {@else}
+            <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
+            {@/if}
         </div>
         {@/if}
         {@/each}

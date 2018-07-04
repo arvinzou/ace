@@ -9,7 +9,7 @@ input,textarea,button{
 	outline: none;
 }
 .regist_div{
-	width: 60%;
+	width: 1100px;
 	min-width: 900px;
 	height: auto;
 	margin: auto;
@@ -23,10 +23,11 @@ input,textarea,button{
 	margin: auto;
 }
 .regist_title_01{
-	width: 10%;
+	width: 8%;
 	height: 62px;
 	line-height: 62px;
-	display: inline-block;
+	display: block;
+	float: left;
 	border-bottom: 3px solid #1A56A8;
 	color: #565B70;
 	font-size: 16px;
@@ -34,10 +35,11 @@ input,textarea,button{
 	overflow:hidden;
 }
 .regist_title_02{
-	width: 89%;
+	width: 92%;
 	height: 62px;
 	line-height: 62px;
-	display: inline-block;
+	display: block;
+	float: left;
 	border-bottom: 1px solid #E1E5ED;
 	text-align: right;
 	
@@ -129,7 +131,7 @@ input,textarea,button{
 	border: #E1E5ED 1px solid;
 }
 .form_text button{
-	width: 70%;
+	width: 150px;
 	height: 40px;
 	color: #FFFFFF;
 	background-color: #1A56A8;
@@ -158,6 +160,7 @@ input,textarea,button{
 	width: 70%;
 	height: 100%;
 	border: #E1E5ED 1px solid;
+	padding-left: 10px;
 }
 .form_text01 button{
 	width: 25%;
