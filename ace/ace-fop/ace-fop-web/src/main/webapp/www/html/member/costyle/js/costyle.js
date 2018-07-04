@@ -6,13 +6,14 @@ var status = null;
 var imgHost = "http://zx.huacainfo.com/";
 var coverImg = null;
 var coverImg_edit = null;
+var userStatus = null;
+var userId = null;
 
 
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
 
-    var relationId = parent.userId;
     //初始化文本框
     var editor = new Simditor({
         textarea: $('#editor'),
@@ -26,11 +27,50 @@ app.controller(ngControllerName,function($scope){
         }
     });
 
+    /**
+     * 查询企业信息
+     */
+    $.ajax({
+        url: "/fop/www/getUserInfo",
+        type:"post",
+        async:false,
+        data:{},
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                $scope.companyInfo = result.data.data;
+                userStatus = result.data.data.status;
+                userId = result.data.data.id;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            }else {
+                if(result.errorMessage != '' && result.errorMessage != undefined){
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }else{
+                    layer.alert(result.info, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            }
+        },
+        error:function(){
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    });
+
     $.ajax({
         url: "/fop/www/findInformationServiceListDo",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, modules: "1", relationId: relationId},
+        data:{limit:pageSize, page: currentPage, modules: "1", relationId: userId},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -114,7 +154,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status, modules: "1", relationId: relationId},
+            data:{limit:pageSize, page: 1, status: status, modules: "1", relationId: userId},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
