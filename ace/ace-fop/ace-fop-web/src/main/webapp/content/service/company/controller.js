@@ -144,13 +144,45 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                if (key == 'category') {
-                    value = rsd(value, '83');
+                //企业性质
+                if (key == "companyProperty") {
+                    value = rsd(value, "134");
                 }
-                if (key == 'status') {
-                    value == "1" ? "正常" : "关闭";
+                //status
+                if (key == "status") {
+                    if ("1" == value) {
+                        value = "非会员";
+                    }
+                    if ("2" == value) {
+                        value = "会员";
+                    }
                 }
-                if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
+                //文化程度
+                if (key == "lpEducation") {
+                    value = rsd(value, "10");
+                }
+                //民族
+                if (key == "lpNationality") {
+                    value = rsd(value, "09");
+                }
+                //性别
+                if (key == "lpSex") {
+                    value = rsd(value, "01");
+                }
+                //所在地区
+                if (key == "areaCode") {
+                    value = "areaCode";//rsd(value, "134");
+                }
+                //企业性质
+                if (key == "companyProperty") {
+                    value = rsd(value, "134");
+                }
+                //日期格式化
+                if (key.indexOf('Dt') != -1 ||
+                    key.indexOf('Date') != -1 ||
+                    key.indexOf('time') != -1 ||
+                    key.indexOf('Time') != -1 ||
+                    key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
                 $("#dialog-message-view").find('#' + key).html(value);

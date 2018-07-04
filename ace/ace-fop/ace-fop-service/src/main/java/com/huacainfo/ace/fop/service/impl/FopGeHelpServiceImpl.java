@@ -296,7 +296,7 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "内容不能为空！");
         }
-        o.setStatus("1");
+//        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setReleaseDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -442,7 +442,8 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
 
     private void sendMessageNotice(FopGeHelp fopGeHelp, String auditResult, String auditOpinion) {
         try {
-            messageService.geHelpAuditMessage(fopGeHelp, auditResult, auditOpinion);
+            ResultResponse response = messageService.geHelpAuditMessage(fopGeHelp, auditResult, auditOpinion);
+            logger.debug("政企服务审核消息发送结果[" + fopGeHelp.getId() + "]:" + response.getInfo());
         } catch (Exception e) {
             logger.error("政企服务审核消息发送异常[" + fopGeHelp.getId() + "]：{}", e);
         }
