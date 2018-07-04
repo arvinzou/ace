@@ -62,7 +62,205 @@
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
 
+    <style>
+        .login .logo {
+            margin: 0px auto 0;
+            padding: 15px;
+            text-align: left;
+            height: 150px;
 
+        }
+
+        .login .content {
+            margin: 10px auto;
+        }
+        a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            border-radius: 2px !important;
+        }
+
+        .login .content .form-actions {
+            background-color: #fff;
+            clear: both;
+            border: 0;
+            border-bottom: 1px solid #eee;
+            padding: 15px 35px 15px;
+            margin-left: -30px;
+            margin-right: -30px;
+
+        }
+        .form-actions{
+            margin-bottom: 15px;
+        }
+        .login .content .form-actions .rememberme {
+            margin-top: 0px;
+            display: inline-block;
+        }
+        .mt-checkbox, .mt-radio {
+            margin-bottom: 0px;
+        }
+        .form-group-captcha {
+            margin-bottom: 5px;
+        }
+        .content {
+            border: 1px solid #eee;
+        }
+        .progress-bar-box {
+            text-align:center;
+        }
+
+        @font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_1451959379_8626566.eot);src:url(//at.alicdn.com/t/font_1451959379_8626566.eot?#iefix) format('embedded-opentype'),url(//at.alicdn.com/t/font_1451959379_8626566.woff) format('woff'),url(//at.alicdn.com/t/font_1451959379_8626566.ttf) format('truetype'),url(//at.alicdn.com/t/font_1451959379_8626566.svg#iconfont) format('svg')}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}
+        .login-box {
+            width: 300px;
+            color: #6c6c6c;
+            background: #fff;
+            position: relative;
+            margin: 0 auto;
+        }
+        .login-switch {
+            width: 52px;
+            position: absolute;
+            right: 5px;
+            -moz-user-select: none;
+        }
+
+        .login-switch .iconfont {
+            font-size: 52px;
+            cursor: pointer;
+            color: #1A56A8;
+        }
+        .iconfont {
+            font-family: iconfont!important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: .2px;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        *, :after, :before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        user agent stylesheet
+        i, cite, em, var, address, dfn {
+            font-style: italic;
+        }
+        .qrcode{
+            max-width:250px;
+            padding-bottom:40px;
+        }
+        *{
+            margin: 0;
+        }
+        body{
+            width: 100%;
+        }
+        .login_index{
+            width: 100%;
+        }
+
+        .login_logo_temp {
+            max-width: 1200px;
+            min-width: 900px;
+            height: 100px;
+            padding-top: 10px;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+
+        .login_logo_temp > div {
+            float: left;
+        }
+
+        .login_logo_temp .logo_img {
+            width: 80px;
+            height: 80px;
+            background-image: url("image/logo.png");
+            background-size:100% 100%;
+        }
+
+        .login_logo_temp .logo_title {
+            margin-left: 20px;
+            color: #000;
+            font-family: "Microsoft YaHei";
+            font-weight: bolder;
+        }
+
+        .login_logo_temp .logo_title .title {
+            font-size: 35px;
+            height: 50px;
+            line-height: 50px;
+
+        }
+
+        .login_logo_temp .logo_title .sub_title {
+            font-size: 15px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .login_body{
+            min-width: 100%;
+            background: -moz-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
+            background: -webkit-gradient(linear, left top, left bottom, from(#1A56A8), color-stop(36%, #1A56A8), to(#6FDFF6));
+            background: -webkit-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
+            background: -o-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
+            background: -ms-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
+            background: linear-gradient(to right, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
+            background-size:100% 100%;
+            position: absolute;
+            top: 100px;
+            bottom: 150px;
+        }
+
+        .login_body .login_body_temp {
+            max-width: 1200px;
+            min-width: 900px;
+            margin: 120px auto 0 auto;
+            background: url("image/body.png") no-repeat;
+            height: 460px;
+            background-size: auto 100%;
+        }
+
+        .login_footer{
+            height: 150px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            color: #657180;
+            text-align: center;
+            line-height: 150px;
+        }
+        .login_panel{
+            float: right;
+            width: 350px;
+            min-height: 400px;
+            max-height: 600px;
+            background-color: #fff;
+        }
+        .login_form{
+            width: 80%;
+            margin-left: 10%;
+            margin-top: 40px;
+        }
+        a{
+            text-decoration:none;
+        }
+        .login{
+            width: 100%;
+            height: 35px;
+            background-color: #1A56A8;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .btn.red:not(.btn-outline) {
+            color: #fff;
+            background-color: #1A56A8 !important;
+            border-color: #1A56A8 !important;
+        }
+    </style>
 </head>
 <!-- END HEAD -->
 <script type="text/javascript">
@@ -435,206 +633,5 @@
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <!-- END THEME LAYOUT SCRIPTS -->
 </body>
-<style>
-    .login .logo {
-        margin: 0px auto 0;
-        padding: 15px;
-        text-align: left;
-        height: 150px;
 
-    }
-
-    .login .content {
-        margin: 10px auto;
-    }
-    a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
-        -webkit-border-radius: 0 !important;
-        -moz-border-radius: 0 !important;
-        border-radius: 2px !important;
-    }
-
-    .login .content .form-actions {
-        background-color: #fff;
-        clear: both;
-        border: 0;
-        border-bottom: 1px solid #eee;
-        padding: 15px 35px 15px;
-        margin-left: -30px;
-        margin-right: -30px;
-
-    }
-    .form-actions{
-        margin-bottom: 15px;
-    }
-    .login .content .form-actions .rememberme {
-        margin-top: 0px;
-        display: inline-block;
-    }
-    .mt-checkbox, .mt-radio {
-        margin-bottom: 0px;
-    }
-    .form-group-captcha {
-        margin-bottom: 5px;
-    }
-    .content {
-        border: 1px solid #eee;
-    }
-    .progress-bar-box {
-        text-align:center;
-    }
-
-@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_1451959379_8626566.eot);src:url(//at.alicdn.com/t/font_1451959379_8626566.eot?#iefix) format('embedded-opentype'),url(//at.alicdn.com/t/font_1451959379_8626566.woff) format('woff'),url(//at.alicdn.com/t/font_1451959379_8626566.ttf) format('truetype'),url(//at.alicdn.com/t/font_1451959379_8626566.svg#iconfont) format('svg')}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}
-.login-box {
-    width: 300px;
-    color: #6c6c6c;
-    background: #fff;
-    position: relative;
-    margin: 0 auto;
-}
-.login-switch {
-    width: 52px;
-    position: absolute;
-    right: 5px;
-    -moz-user-select: none;
-}
-
-.login-switch .iconfont {
-    font-size: 52px;
-    cursor: pointer;
-    color: #1A56A8;
-}
-.iconfont {
-    font-family: iconfont!important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: .2px;
-    -moz-osx-font-smoothing: grayscale;
-}
-*, :after, :before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-user agent stylesheet
-i, cite, em, var, address, dfn {
-    font-style: italic;
-}
-.qrcode{
-    max-width:250px;
-    padding-bottom:40px;
-}
-    *{
-        margin: 0;
-    }
-    body{
-        width: 100%;
-    }
-    .login_index{
-        width: 100%;
-    }
-
-    .login_logo_temp {
-        max-width: 1200px;
-        min-width: 900px;
-        height: 100px;
-        padding-top: 10px;
-        margin: 0 auto;
-        background-color: #fff;
-    }
-
-    .login_logo_temp > div {
-        float: left;
-    }
-
-    .login_logo_temp .logo_img {
-        width: 80px;
-        height: 80px;
-        background-image: url("image/logo.png");
-        background-size:100% 100%;
-    }
-
-    .login_logo_temp .logo_title {
-        margin-left: 20px;
-        color: #000;
-        font-family: "Microsoft YaHei";
-        font-weight: bolder;
-    }
-
-    .login_logo_temp .logo_title .title {
-        font-size: 35px;
-        height: 50px;
-        line-height: 50px;
-
-    }
-
-    .login_logo_temp .logo_title .sub_title {
-        font-size: 15px;
-        height: 30px;
-        line-height: 30px;
-    }
-    .login_body{
-        min-width: 100%;
-        background: -moz-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
-        background: -webkit-gradient(linear, left top, left bottom, from(#1A56A8), color-stop(36%, #1A56A8), to(#6FDFF6));
-        background: -webkit-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
-        background: -o-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
-        background: -ms-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
-        background: linear-gradient(to right, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
-        background-size:100% 100%;
-        position: absolute;
-        top: 100px;
-        bottom: 150px;
-    }
-
-    .login_body .login_body_temp {
-        max-width: 1200px;
-        min-width: 900px;
-        margin: 120px auto 0 auto;
-        background: url("image/body.png") no-repeat;
-        height: 460px;
-        background-size: auto 100%;
-    }
-
-    .login_footer{
-        height: 150px;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        color: #657180;
-        text-align: center;
-        line-height: 150px;
-    }
-    .login_panel{
-        float: right;
-        width: 350px;
-        min-height: 400px;
-        max-height: 600px;
-        background-color: #fff;
-    }
-    .login_form{
-        width: 80%;
-        margin-left: 10%;
-        margin-top: 40px;
-    }
-    a{
-        text-decoration:none;
-    }
-    .login{
-        width: 100%;
-        height: 35px;
-        background-color: #1A56A8;
-        border-radius: 5px;
-        border: none;
-    }
-
-    .btn.red:not(.btn-outline) {
-        color: #fff;
-        background-color: #1A56A8 !important;
-        border-color: #1A56A8 !important;
-    }
-
-
-
-</style>
 </html>
