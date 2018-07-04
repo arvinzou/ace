@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>流程记录</title>
+    <title>银企服务</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -123,7 +123,7 @@
         <div class="labelItem"><span class="labelItemHeader">
 所属区域</span>
             <br>
-            <span id="areaCode">
+            <span id="areaCodeName">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">

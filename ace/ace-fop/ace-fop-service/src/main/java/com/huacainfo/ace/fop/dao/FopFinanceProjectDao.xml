@@ -31,9 +31,10 @@
         f.lastModifyDate, f.financeContent
   </sql>
     <sql id="Base_Column_List_Vo">
+        p.`name` as areaCodeName,
         f.id, f.financeTitle, f.financeCode, f.areaCode, f.companyId, f.releaseDate, f.financeAmount,
         f.financeYear, f.yearYield, f.clicks, f.likes, f.remark,
-    f.status, f.createUserId, f.createUserName, f.createDate, f.lastModifyUserId, f.lastModifyUserName,
+        f.status, f.createUserId, f.createUserName, f.createDate, f.lastModifyUserId, f.lastModifyUserName,
         f.lastModifyDate, f.financeContent,c.fullName as companyName,c.address,d.name as companyProperty
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -280,7 +281,7 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopFinanceProjectVo">
-
+        <result column="areaCodeName" jdbcType="VARCHAR" property="areaCodeName"/>
     </resultMap>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
@@ -343,6 +344,7 @@
         from fop_finance_project f
         left join fop_company c on f.companyId=c.id
         left join (SELECT * FROM portal.dict where category_id="134") d on c.companyProperty=d.code
+        left join portal.province p on p.code = f.areaCode
     </sql>
     <sql id="whereCondition">
         where f.status <![CDATA[ <> ]]> 0
