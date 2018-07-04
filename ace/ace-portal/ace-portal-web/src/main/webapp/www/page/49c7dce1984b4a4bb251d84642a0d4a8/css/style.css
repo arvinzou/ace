@@ -97,7 +97,7 @@ ul{
     font-weight: 800;
     color: black;
     margin: 0rem 0.07rem 0.02rem 0rem;
-    font-size: 0.38rem;
+    font-size: 0.35rem;
     overflow: hidden;
     width: 100%;
     line-height: 0.5rem;
@@ -120,7 +120,7 @@ ul{
 .list_item .cont .desc {
     margin-top: 0.20rem;
     -webkit-line-clamp: 3;
-    font-size: 0.31rem;
+    font-size: 0.28rem;
     color: #999;
     overflow: hidden;
     text-overflow: ellipsis;

@@ -164,7 +164,7 @@
         .login_logo_temp {
             max-width: 1200px;
             min-width: 900px;
-            height: 100px;
+            /*height: 100px;*/
             padding-top: 10px;
             margin: 0 auto;
             background-color: #fff;
@@ -209,10 +209,10 @@
             background: -ms-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
             background: linear-gradient(to right, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
             background-size:100% 100%;
-            position: absolute;
-            top: 100px;
-            bottom: 150px;
-            min-height: 500px;
+            min-height: 750px;
+           /* position: absolute;*/
+           /* top: 100px;*/
+            /*bottom: 150px;*/
         }
 
         .login_body .login_body_temp {
@@ -225,13 +225,13 @@
         }
 
         .login_footer{
-            height: 150px;
+            height: 60px;
             width: 100%;
-            position: absolute;
-            bottom: 0;
+           /* position: absolute;
+            bottom: 0;*/
             color: #657180;
             text-align: center;
-            line-height: 150px;
+            line-height: 60px;
         }
         .login_panel{
             float: right;
@@ -239,6 +239,7 @@
             min-height: 400px;
             max-height: 600px;
             background-color: #fff;
+            margin-top: 100px;
         }
         .login_form{
             width: 80%;
