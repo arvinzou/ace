@@ -300,7 +300,6 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
         if (ResultCode.FAIL == mm.getStatus()) {
             return mm;
         }
-        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
