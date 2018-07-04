@@ -195,3 +195,9 @@
           uploader.start();
       });
   }
+function resetSize(x,y){
+    xsize = x;
+    ysize = y;
+    console.log(xsize+"/"+ysize);
+    preImg('img/left_pic_two.jpg');
+}

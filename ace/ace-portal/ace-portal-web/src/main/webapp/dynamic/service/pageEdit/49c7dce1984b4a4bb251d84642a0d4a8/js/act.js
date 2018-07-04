@@ -607,3 +607,4 @@ function getCover(pageId){
         }
     });
 }
+
