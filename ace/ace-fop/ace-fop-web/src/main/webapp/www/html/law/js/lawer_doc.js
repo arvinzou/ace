@@ -12,16 +12,16 @@ app.controller(ngControllerName,function($scope){
     console.log(docType);
     if(docType == "0"){
         $(".title_lager").text("法律规范");
-        $(".title_small").html("Legal Norms");
+        $(".title_small").html("&nbsp;/Legal Norms");
     }else if(docType == "1"){
         $(".title_lager").text("案例指导");
-        $(".title_small").html("Case Instruction");
+        $(".title_small").html("&nbsp;/Case Instruction");
     }else if(docType == "2"){
         $(".title_lager").text("法律公益");
-        $(".title_small").html("The law of public");
+        $(".title_small").html("&nbsp;/The law of public");
     }else{
         $(".title_lager").text("法律诉求");
-        $(".title_small").html("Law Demands");
+        $(".title_small").html("&nbsp;/Law Demands");
     }
 
     $.ajax({
