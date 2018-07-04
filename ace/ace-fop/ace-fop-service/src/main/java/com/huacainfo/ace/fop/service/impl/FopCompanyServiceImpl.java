@@ -108,8 +108,12 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     public ResultResponse findCompanyList(FopCompanyQVo condition, int page, int limit, String orderBy) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
         condition.setStatus("2");
-        condition.setCompanyType("w");
-        if (condition.getIsCompany()) {
+        if (!condition.getIsCompany().equals("2")) {
+            if (condition.getIsCompany().equals("1")) {
+                condition.setCompanyType("w");
+            } else {
+                condition.setCompanyType(condition.getIsCompany());
+            }
             map.put("list", this.fopCompanyDao.findList(condition, (page - 1) * limit, limit, orderBy));
             map.put("total", this.fopCompanyDao.findCount(condition));
             ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "企业列表", map);
