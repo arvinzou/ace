@@ -245,13 +245,14 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     @Override
-    public MessageResponse insertCompany(String fullName, String lpMobile) throws Exception {
+    public MessageResponse insertCompany(String fullName, String lpMobile, String companyType) throws Exception {
         if (!CommonUtils.isValidMobile(lpMobile)) {
             return new MessageResponse(ResultCode.FAIL, "不是手机号码");
         }
         FopCompanyVo o = new FopCompanyVo();
         o.setFullName(fullName);
         o.setLpMobile(lpMobile);
+        o.setCompanyType(companyType);
         UserProp userProp = new UserProp();
         o.setLpSex("1");
         userProp.setActiveSyId("fop");

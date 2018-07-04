@@ -23,7 +23,7 @@ html.push("<div class=\"logo_image\"><img src=\"/fop/www/images/logo.png\" /></d
 html.push("<div class=\"logo_word\">承办单位：常德市工商业联合会·总商会</div>");
 html.push("</div>");
 html.push("<div class=\"words\">");
-html.push("<p id=\"effect\"><span>常</span><span>德</span><span>市</span><span>工</span><span>商</span><span>联</span></p>");
+html.push("<p id=\"effect\"><span>开</span><span>放</span><span>强</span><span>市</span></p>");
 html.push("</div>");
 html.push("</div>");
 html.push("<div class=\"header-nav\">");
@@ -122,7 +122,7 @@ $(function(){
         var oNavListL=$('.nav-list').offset().left;
         var oTL=$(this).offset().left-oNavListL;//距离最左边的距离
         var oTR=$('.nav-list').width()-oTL-oW;//距离最右边的距离
-        console.log(oNavListL+":"+oTL);
+        // console.log(oNavListL+":"+oTL);
 
         if($ul.find('li').length>0){
             $('.second-bg').show();
@@ -1348,8 +1348,8 @@ jQuery.extend(jQuery.easing,
         speed: 1000,
         sequenceDelay: 100,
         startDelay: 0,
-        offsetX: 100,
-        offsetY: 50,
+        offsetX: 200,
+        offsetY: 100,
         onComplete: fireThis,
         restoreHTML: true
     };
@@ -1361,16 +1361,16 @@ jQuery.extend(jQuery.easing,
     });
 
     function fireThis() {
-        if (isOn === 12) return;
-        (isOn < 12) ? isOn++ : isOn = 0;
-
+        if (isOn === 9) return;
+        (isOn < 9) ? isOn++ : isOn = 0;
+        // console.log(isOn);
         switch (isOn) {
             case 1:
                 sets = {animation: 8, animationType: "out", restoreHTML: false};
                 break;
 
             case 2:
-                fx.html("开放强市");
+                fx.html("产业立市");
                 sets = {animation: 11};
                 break;
 
@@ -1379,7 +1379,7 @@ jQuery.extend(jQuery.easing,
                 break;
 
             case 4:
-                fx.html("产业立市");
+                fx.html("成就企业家");
                 sets = {animation: 1};
                 break;
 
@@ -1388,7 +1388,7 @@ jQuery.extend(jQuery.easing,
                 break;
 
             case 6:
-                fx.html("成就企业家");
+                fx.html("厚待投资者");
                 sets = {animation: 6, backwards: true};
                 break;
 
@@ -1397,15 +1397,11 @@ jQuery.extend(jQuery.easing,
                 break;
 
             case 8:
-                fx.html("厚待投资者");
+                fx.html("开放强市");
                 sets = {animation: 2, easing: "easeOutBounce"};
                 break;
 
-            /*case 9:
-                sets = {animation: 2, animationType: "out", speed: 500, easing: "easeInBack", restoreHTML: false};
-            break;
-
-            case 10:
+            /*case 10:
                 fx.html("文字效果6");
                 sets = {animation: 14, startDelay: 1000, easing: "easeInBack", restoreHTML: false};
             break;
@@ -1416,13 +1412,12 @@ jQuery.extend(jQuery.easing,
 
 
             default :
-                isOn = 2;//在这设定返回从头开始
+                sets = {animation: 2, animationType: "out", speed: 500, easing: "easeInBack", restoreHTML: false};
+                isOn = 1;//在这设定返回从头开始
                 break;
 
 
         }
-
-
         jQuery.cjTextFx.animate(toAnimate, sets);
     }
 
