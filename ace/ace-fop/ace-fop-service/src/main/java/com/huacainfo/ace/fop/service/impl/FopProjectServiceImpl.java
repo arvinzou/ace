@@ -367,7 +367,8 @@ public class FopProjectServiceImpl implements FopProjectService {
      */
     private void sendMessageNotice(FopProject fopProject, String auditResult, String auditOpinion) {
         try {
-            messageService.projectAuditMessage(fopProject, auditResult, auditOpinion);
+            ResultResponse response = messageService.projectAuditMessage(fopProject, auditResult, auditOpinion);
+            logger.debug("项目信息" + "审核消息发送结果[" + fopProject.getId() + "]:" + response.getInfo());
         } catch (Exception e) {
             logger.error("项目信息 -[{}]- 审核 - 消息推送失败", fopProject.getId());
         }

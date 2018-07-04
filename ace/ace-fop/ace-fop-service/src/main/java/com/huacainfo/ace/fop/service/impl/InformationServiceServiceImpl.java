@@ -324,11 +324,14 @@ public class InformationServiceServiceImpl implements InformationServiceService 
             //暂定只有“人才信息”才有消息反馈
             if (ModulesType.TALENT_INFO.equals(info.getModules())) {
                 String moduleName = getModuleName(info.getModules());
-                messageService.informationAuditMessage(info, moduleName, auditResult, auditOpinion);
+                ResultResponse response =
+                        messageService.informationAuditMessage(info, moduleName, auditResult, auditOpinion);
+                logger.debug("信息服务审核消息发送结果[" + info.getId() + "]:" + response.getInfo());
+
             }
 
         } catch (Exception e) {
-            logger.error("政企服务审核消息发送异常[" + info.getId() + "]：{}", e);
+            logger.error("信息服务审核消息发送异常[" + info.getId() + "]：{}", e);
         }
     }
 

@@ -222,6 +222,11 @@ public class FopPersonServiceImpl implements FopPersonService {
         return new ResultResponse(ResultCode.SUCCESS, "添加个人档案完成", person);
     }
 
+    @Override
+    public FopPerson selectByMobile(String mobileNumber) {
+        return fopPersonDao.selectByMobile(mobileNumber);
+    }
+
     private MessageResponse validate(FopPerson o) throws Exception {
         if (!CommonUtils.isBlank(o.getRealName())) {
             if (!ValidateUtils.Chinese(o.getRealName())) {

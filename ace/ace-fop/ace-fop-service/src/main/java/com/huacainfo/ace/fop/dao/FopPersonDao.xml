@@ -409,4 +409,11 @@
         from fop_person
         where mobileNumer = #{mobileNumer,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_person
+        where mobileNumer = #{mobileNumber,jdbcType=VARCHAR}
+    </select>
 </mapper>
