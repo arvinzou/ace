@@ -85,8 +85,14 @@ public class MessageServiceImpl implements MessageService {
         Map<String, Object> accountInfo =
                 sysAccountService.getAccountInfo(fopGeHelp.getRequestId(), fopGeHelp.getRequestType());
         Users users = usersService.selectByAccount((String) accountInfo.get("acount"));
+        if (null == users) {
+            return new ResultResponse(ResultCode.FAIL, "未找到相关绑定关系");
+        }
         //此处逻辑绑定为unionid
         UserinfoVo uVo = userinfoService.selectUserinfoByPrimaryKey(users.getOpenId()).getValue();
+        if (null == uVo) {
+            return new ResultResponse(ResultCode.FAIL, "微信用户信息不存在");
+        }
         String openid = uVo.getOpenid();
 
         String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
@@ -121,10 +127,16 @@ public class MessageServiceImpl implements MessageService {
             throws Exception {
         Map<String, Object> accountInfo = sysAccountService.getAccountInfo(obj.getCompanyId(), FopConstant.COMPANY);
         Users users = usersService.selectByAccount((String) accountInfo.get("account"));
+        if (null == users) {
+            return new ResultResponse(ResultCode.FAIL, "未找到相关绑定关系");
+        }
         //此处逻辑绑定为unionid
         UserinfoVo uVo = userinfoService.selectUserinfoByPrimaryKey(users.getOpenId()).getValue();
-        String openid = uVo.getOpenid();
+        if (null == uVo) {
+            return new ResultResponse(ResultCode.FAIL, "微信用户信息不存在");
+        }
 
+        String openid = uVo.getOpenid();
         String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
         Map<String, Object> params = new HashMap<>();
         //kafka所需内容
@@ -152,11 +164,18 @@ public class MessageServiceImpl implements MessageService {
      * 法律诉求消息反馈
      */
     @Override
-    public ResultResponse lawQuestionAuditMessage(FopQuestion obj, String auditResult, String auditOpinion) throws Exception {
+    public ResultResponse lawQuestionAuditMessage(FopQuestion obj,
+                                                  String auditResult, String auditOpinion) throws Exception {
         Map<String, Object> accountInfo = sysAccountService.getAccountInfo(obj.getRelationId(), obj.getRelationType());
         Users users = usersService.selectByAccount((String) accountInfo.get("account"));
+        if (null == users) {
+            return new ResultResponse(ResultCode.FAIL, "未找到相关绑定关系");
+        }
         //此处逻辑绑定为unionid
         UserinfoVo uVo = userinfoService.selectUserinfoByPrimaryKey(users.getOpenId()).getValue();
+        if (null == uVo) {
+            return new ResultResponse(ResultCode.FAIL, "微信用户信息不存在");
+        }
 
         String openid = uVo.getOpenid();
         String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
@@ -187,12 +206,19 @@ public class MessageServiceImpl implements MessageService {
      * 项目信息审核消息反馈
      */
     @Override
-    public ResultResponse projectAuditMessage(FopProject fopProject, String auditResult, String auditOpinion) throws Exception {
+    public ResultResponse projectAuditMessage(FopProject fopProject,
+                                              String auditResult, String auditOpinion) throws Exception {
         Map<String, Object> accountInfo =
                 sysAccountService.getAccountInfo(fopProject.getRelationId(), fopProject.getRelationType());
         Users users = usersService.selectByAccount((String) accountInfo.get("account"));
+        if (null == users) {
+            return new ResultResponse(ResultCode.FAIL, "未找到相关绑定关系");
+        }
         //此处逻辑绑定为unionid
         UserinfoVo uVo = userinfoService.selectUserinfoByPrimaryKey(users.getOpenId()).getValue();
+        if (null == uVo) {
+            return new ResultResponse(ResultCode.FAIL, "微信用户信息不存在");
+        }
 
         String openid = uVo.getOpenid();
         String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
@@ -228,8 +254,14 @@ public class MessageServiceImpl implements MessageService {
         Map<String, Object> accountInfo =
                 sysAccountService.getAccountInfo(info.getRelationId(), info.getRelationType());
         Users users = usersService.selectByAccount((String) accountInfo.get("account"));
+        if (null == users) {
+            return new ResultResponse(ResultCode.FAIL, "未找到相关绑定关系");
+        }
         //此处逻辑绑定为unionid
         UserinfoVo uVo = userinfoService.selectUserinfoByPrimaryKey(users.getOpenId()).getValue();
+        if (null == uVo) {
+            return new ResultResponse(ResultCode.FAIL, "微信用户信息不存在");
+        }
 
         String openid = uVo.getOpenid();
         String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;

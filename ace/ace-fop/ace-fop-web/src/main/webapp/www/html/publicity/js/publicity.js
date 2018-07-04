@@ -5,7 +5,7 @@ var ngAppName = "angularjsApp";
 var currentPage = 1;
 //angularjs Controller初始化
 var app =angular.module(ngAppName, []);
-var isCompany = true;
+var isCompany = null;
 var companyProperty = null;
 //企业类型
 var data = [{
@@ -41,17 +41,6 @@ var data = [{
         "text": "其他企业"
     }
 ];
-
-var memberType =[
-    {
-        "id": "1",
-        "text":"团体会员"
-    },
-    {
-        "id": "2",
-        "text":"企业会员"
-    }
-]
 
 app.controller(ngControllerName,function($scope){
     try{
@@ -121,9 +110,11 @@ app.controller(ngControllerName,function($scope){
         var areaCode = $("#areaCode option:checked").val();
         var memberType = $("#memberType option:checked").val();
         if(memberType == "1"){
-            isCompany = true;
+            isCompany = "1";
         }else if(memberType =="2"){
-            isCompany = false;
+            isCompany = "2";
+        }else if(memberType =="4"){
+            isCompany = "4";
         }
         $.ajax({
             url: "/fop/www/findCompanyList",
@@ -153,7 +144,6 @@ app.controller(ngControllerName,function($scope){
             });
         }
     }
-
     /**
      * 根据企业性质，地区，关键字去查询企业公示
      */
@@ -162,9 +152,14 @@ app.controller(ngControllerName,function($scope){
         var areaCode = $("#areaCode option:checked").val();
         var memberType = $("#memberType option:checked").val();
         if(memberType == "1"){
-            isCompany = true;
+            isCompany = "1";
+            $(".search_filter2").show();
         }else if(memberType =="2"){
-            isCompany = false;
+            isCompany = "2";
+            $(".search_filter2").hide();
+        }else if(memberType == "4"){
+            isCompany = "4"
+            $(".search_filter2").show();
         }
         console.log("地区代码：",areaCode);
         $.ajax({

@@ -149,6 +149,7 @@ public class FopPersonServiceImpl implements FopPersonService {
         this.dataBaseLogService.log("变更企业管理", "企业管理", "", o.getId(),
                 o.getId(), userProp);
         return new MessageResponse(0, "变更企业管理完成！");
+
     }
 
     /**
@@ -220,6 +221,11 @@ public class FopPersonServiceImpl implements FopPersonService {
         dataBaseLogService.log("添加个人档案", "企业注册-自动插入", "", person.getId(),
                 person.getId(), userProp);
         return new ResultResponse(ResultCode.SUCCESS, "添加个人档案完成", person);
+    }
+
+    @Override
+    public FopPerson selectByMobile(String mobileNumber) {
+        return fopPersonDao.selectByMobile(mobileNumber);
     }
 
     private MessageResponse validate(FopPerson o) throws Exception {

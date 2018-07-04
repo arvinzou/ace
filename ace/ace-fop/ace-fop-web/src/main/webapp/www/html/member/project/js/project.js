@@ -3,11 +3,12 @@ var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var currentPage = 1;
 var status = null;
+var userStatus = null;
+var userId = null;
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
-    var relationId = parent.userId;
     //初始化文本框
     var editor = new Simditor({
         textarea: $('#editor_release')
@@ -24,11 +25,51 @@ app.controller(ngControllerName,function($scope){
         SelCity(document.getElementById("city"), e);
     });
 
+    /**
+     * 查询企业信息
+     */
+    $.ajax({
+        url: "/fop/www/getUserInfo",
+        type:"post",
+        async:false,
+        data:{},
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                $scope.companyInfo = result.data.data;
+                userStatus = result.data.data.status;
+                userId = result.data.data.id;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            }else {
+                if(result.errorMessage != '' && result.errorMessage != undefined){
+                    layer.alert(result.errorMessage, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }else{
+                    layer.alert(result.info, {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            }
+        },
+        error:function(){
+            layer.alert("系统服务内部异常！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    });
+
+
     $.ajax({
         url: "/fop/www/findProjectList",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, relationId: relationId},
+        data:{limit:pageSize, page: currentPage, relationId: userId},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -77,7 +118,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findProjectList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, status: status, relationId: relationId},
+            data:{limit:pageSize, page: currentPage, status: status, relationId: userId},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -107,7 +148,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findProjectList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status, relationId: relationId},
+            data:{limit:pageSize, page: 1, status: status, relationId: userId},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;

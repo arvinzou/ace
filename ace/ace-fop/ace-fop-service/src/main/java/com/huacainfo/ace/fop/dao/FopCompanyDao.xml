@@ -632,7 +632,7 @@
 
         <choose>
             <when test='condition.companyType=="w"'>
-                and c.companyType <![CDATA[ <> ]]> '3'
+                and c.companyType not in('3','4')
             </when>
             <otherwise>
                 and c.companyType = #{condition.companyType,jdbcType=CHAR}

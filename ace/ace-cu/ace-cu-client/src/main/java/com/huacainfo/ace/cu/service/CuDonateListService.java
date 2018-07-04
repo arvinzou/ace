@@ -11,6 +11,7 @@ import com.huacainfo.ace.cu.vo.CuDonateListQVo;
 import com.huacainfo.ace.cu.vo.CuDonateListVo;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -111,4 +112,19 @@ public interface CuDonateListService {
     int getAccDonateCount(String openId);
 
 
+    /**
+     * 根据条件统计捐款金额
+     *
+     * @param condition
+     * @return
+     */
+    BigDecimal findDonateAmount(Map<String, Object> condition);
+
+    /**
+     * 根据条件统计捐款次数
+     *
+     * @param condition
+     * @return
+     */
+    int findDonateCount(Map<String, Object> condition);
 }

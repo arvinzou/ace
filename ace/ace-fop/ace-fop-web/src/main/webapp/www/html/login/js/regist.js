@@ -98,12 +98,15 @@ app.controller(ngControllerName,function($scope) {
     $scope.getNumFun = function(){
         var mobile = $("input[name = 'regist_num']").val();
         if(mobile == '' || mobile == undefined){
-            alert("请输入手机号码！");
+            layer.alert("请输入手机号码！", {
+                icon: 5,
+                skin: 'myskin'
+            });
         }else{
             $.post("/fop/www/sms/sendCode",{mobile:mobile},function(result){
                 console.log(result);
                 layer.alert(result.info, {
-                    icon: 5,
+                    icon: 1,
                     skin: 'myskin'
                 });
             });
@@ -128,9 +131,14 @@ function settime(){
     stop = stop;
     countdown = countdown;
     $('#getCode').text(btnName);
+    $('#getCode').attr("disabled", true);
+    $('#getCode').css({'background-color':'#E1E5ED'},{'color':'#666666'});
     if (!stop) {
         setTimeout(function () {
             this.settime()
         }, 1000)
+    }else{
+        $('#getCode').attr("disabled", false);
+        $('#getCode').css({'background-color':'#1A56A8'},{'color':'#FFFFFF'});
     }
 }

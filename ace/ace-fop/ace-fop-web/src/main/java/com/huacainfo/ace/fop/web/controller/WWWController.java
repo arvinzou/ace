@@ -233,6 +233,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/updateFinanceProject")
     @ResponseBody
     public MessageResponse updateFopFinanceProject(FopFinanceProject obj) throws Exception {
+        obj.setStatus("1");
         return this.fopFinanceProjectService.updateFopFinanceProject(obj, this.getCurUserProp());
     }
 
@@ -334,6 +335,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/updateLoanProduct")
     @ResponseBody
     public MessageResponse updateFopLoanProduct(FopLoanProduct obj) throws Exception {
+        obj.setStatus("1");
         return this.fopLoanProductService.updateFopLoanProduct(obj, this.getCurUserProp());
     }
 
@@ -384,6 +386,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/updateGeHelp")
     @ResponseBody
     public MessageResponse updateGeHelp(FopGeHelp fg) throws Exception {
+        fg.setStatus("1");
         return this.fopGeHelpService.updateFopGeHelp(fg, this.getCurUserProp());
     }
 
@@ -514,8 +517,8 @@ public class WWWController extends FopBaseController {
     @ResponseBody
     public MessageResponse updateFopQuestion(String jsons) throws Exception {
         FopQuestion obj = JSON.parseObject(jsons, FopQuestion.class);
-        return this.fopQuestionService
-                .updateFopQuestion(obj, this.getCurUserProp());
+        obj.setStatus("1");
+        return this.fopQuestionService.updateFopQuestion(obj, this.getCurUserProp());
     }
 
 
@@ -634,6 +637,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/updateProject")
     @ResponseBody
     public MessageResponse updateProject(FopProject obj) throws Exception {
+        obj.setStatus("1");
         return this.fopProjectService.updateFopProject(obj, this.getCurUserProp());
     }
 
@@ -762,6 +766,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/updateInformationServiceDo")
     @ResponseBody
     public MessageResponse updateInformationService(InformationService condition) throws Exception {
+        condition.setStatus("1");
         return this.informationServiceService.updateInformationService(condition, this.getCurUserProp());
     }
 

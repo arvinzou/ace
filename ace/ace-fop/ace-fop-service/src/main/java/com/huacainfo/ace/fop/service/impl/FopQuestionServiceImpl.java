@@ -271,7 +271,7 @@ public class FopQuestionServiceImpl implements FopQuestionService {
     public MessageResponse updateFopQuestion(FopQuestion o, UserProp userProp)
             throws Exception {
 
-        o.setStatus("1");
+//        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());

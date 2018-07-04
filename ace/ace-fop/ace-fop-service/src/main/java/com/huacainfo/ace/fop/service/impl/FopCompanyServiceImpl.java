@@ -108,8 +108,12 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     public ResultResponse findCompanyList(FopCompanyQVo condition, int page, int limit, String orderBy) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
         condition.setStatus("2");
-        condition.setCompanyType("w");
-        if (condition.getIsCompany()) {
+        if (!condition.getIsCompany().equals("2")) {
+            if (condition.getIsCompany().equals("1")) {
+                condition.setCompanyType("w");
+            } else {
+                condition.setCompanyType(condition.getIsCompany());
+            }
             map.put("list", this.fopCompanyDao.findList(condition, (page - 1) * limit, limit, orderBy));
             map.put("total", this.fopCompanyDao.findCount(condition));
             ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "企业列表", map);
@@ -372,6 +376,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (temp > 0) {
             return new MessageResponse(ResultCode.FAIL, "企业/机构名称重复！");
         }
+        //修改法人信息
+        updatePersonInfo(o, userProp);
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -379,6 +385,27 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         this.fopCompanyDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更企业/机构管理", "企业/机构管理", "", o.getId(),
                 o.getId(), userProp);
+        return new MessageResponse(0, "变更企业/机构管理完成！");
+    }
+
+    private MessageResponse updatePersonInfo(FopCompanyVo o, UserProp userProp) throws Exception {
+        FopPerson person = fopPersonService.selectByMobile(o.getLpMobile());
+        if (null != person) {
+            person.setSex(o.getLpSex());
+            person.setBirthDate(o.getLpBirthDt());
+            person.setNativePlace(o.getLpNativePlace());
+            person.setNationality(o.getLpNationality());
+            person.setPolitical(o.getLpPolitical());
+            person.setRecruitmentDate(o.getLpRecruitmentDate());
+            person.setEducation(o.getLpEducation());
+            person.setSkillJobTitle(o.getLpSkillJobTitle());
+            person.setDeptPost(o.getLpDeptPost());
+            person.setIdentityCard(o.getLpIdentityCard());
+            person.setSocietyPost(o.getLpSocietyPost());
+
+            fopPersonService.updateFopPerson(person, userProp);
+        }
+
         return new MessageResponse(0, "变更企业/机构管理完成！");
     }
 
