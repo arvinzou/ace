@@ -212,6 +212,7 @@
             position: absolute;
             top: 100px;
             bottom: 150px;
+            min-height: 500px;
         }
 
         .login_body .login_body_temp {
@@ -477,8 +478,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/login.min.js"
         type="text/javascript"></script>
-<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"
-        type="text/javascript"></script>
+
 
 
 
@@ -628,6 +628,10 @@
         href: ""
     });
 
+</script>
+<script type="text/javascript">
+
+    !function(a,b,c){function d(a){var c="default";a.self_redirect===!0?c="true":a.self_redirect===!1&&(c="false");var d=b.createElement("iframe"),e="https://open.weixin.qq.com/connect/qrconnect?appid="+a.appid+"&scope="+a.scope+"&redirect_uri="+a.redirect_uri+"&state="+a.state+"&login_type=jssdk&self_redirect="+c;e+=a.style?"&style="+a.style:"",e+=a.href?"&href="+a.href:"",d.src=e,d.frameBorder="0",d.allowTransparency="true",d.scrolling="no",d.width="300px",d.height="400px";var f=b.getElementById(a.id);f.innerHTML="",f.appendChild(d)}a.WxLogin=d}(window,document);
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
