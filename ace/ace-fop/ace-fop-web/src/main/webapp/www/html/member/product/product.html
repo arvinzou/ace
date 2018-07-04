@@ -34,44 +34,29 @@
                     valign="top">
                     <div class="member_center_title01">会员中心<span>/ Member Center</span></div>
                     <div class="member_menu">
-                        <ul class=""><span class="member_center_title02"><a href="/fop/www/index.html">我的首页</a></span>
+                        <ul class=""><span class="member_center_title02"><a class="menua" href="/fop/www/index.html">我的首页</a></span>
                         </ul>
                     </div>
                     <div class="member_menu">
                         <ul class="member_menu_ul">
-									<span class="member_center_title02"><a href="member_index.html"
-                                                                           target="allbox">会员服务</a></span>
-                            <li ng-if="companyType != '3'">
-                                <a href="javascript:void(0);" target="allbox"
-                                   ng-click="checkUserUrl($event,'personel/personel.html');">人才信息</a>
+									<span class="member_center_title02"><a class="menua" href="/fop/www/html/member/member.html">会员服务</a></span>
+                            <li>
+                                <a class="menua" href="/fop/www/html/member/personel/personel.html">人才信息</a>
                             </li>
-                            <li ng-if="companyType != '3'">
-                                <a href="javascript:void(0);" target="allbox"
-                                   ng-click="checkUserUrl($event,'project/project.html');">项目信息</a>
+                            <li>
+                                <a class="menua" href="/fop/www/html/member/project/project.html">项目信息</a>
                             </li>
-                            <li ng-if="companyType != '3'">
-                                <a href="javascript:void(0);" target="allbox"
-                                   ng-click="checkUserUrl($event,'product/product.html');">企业产品</a>
+                            <li class="hover_li">
+                                <a href="/fop/www/html/member/product/product.html">企业产品</a>
                             </li>
-                            <li ng-if="companyType != '3'">
-                                <a href="javascript:void(0);" target="allbox"
-                                   ng-click="checkUserUrl($event,'costyle/costyle.html');">风采展示</a>
+                            <li>
+                                <a class="menua" href="/fop/www/html/member/costyle/costyle.html">风采展示</a>
                             </li>
-                            <li ng-if="companyType != '3'">
-                                <a href="javascript:void(0);" target="allbox"
-                                   ng-click="checkUserUrl($event,'govservice/govservice.html');">政企服务</a>
+                            <li>
+                                <a class="menua" href="/fop/www/html/member/govservice/govservice.html">政企服务</a>
                             </li>
-                            <li ng-if="companyType != '3'">
-                                <a href="javascript:void(0);" target="allbox"
-                                   ng-click="checkUserUrl($event,'law/law.html');">法律诉求</a>
-                            </li>
-                            <li ng-if="companyType == '3'">
-                                <a href="javascript:void(0);" target="allbox"
-                                   ng-click="checkUserUrl($event,'financial/financial.html');">银企服务</a>
-                            </li>
-                            <li ng-if="companyType == '3'">
-                                <a href="javascript:void(0);" target="allbox"
-                                   ng-click="checkUserUrl($event,'financial_product/financial_product.html');">金融产品</a>
+                            <li>
+                                <a class="menua" href="/fop/www/html/member/law/law.html">法律诉求</a>
                             </li>
                         </ul>
                     </div>

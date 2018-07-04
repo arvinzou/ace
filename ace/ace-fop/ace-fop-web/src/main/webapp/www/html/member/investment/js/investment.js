@@ -20,6 +20,7 @@ app.controller(ngControllerName,function($scope){
             leaveConfirm: '正在上传文件'
         }
     });
+
     $.ajax({
         url: "/fop/www/findInformationServiceListDo",
         type:"post",

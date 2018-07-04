@@ -7,6 +7,7 @@ var imgHost = "http://zx.huacainfo.com/";
 var coverImg = null;
 var coverImg_edit = null;
 
+
 var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
@@ -24,6 +25,7 @@ app.controller(ngControllerName,function($scope){
             leaveConfirm: '正在上传文件'
         }
     });
+
     $.ajax({
         url: "/fop/www/findInformationServiceListDo",
         type:"post",

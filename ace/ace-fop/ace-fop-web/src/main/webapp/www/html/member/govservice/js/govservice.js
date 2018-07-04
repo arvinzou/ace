@@ -20,6 +20,7 @@ app.controller(ngControllerName,function($scope){
         }
     });
 
+
     $.ajax({
         url: "/fop/www/findGeHelpList",
         type:"post",
