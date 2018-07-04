@@ -23,16 +23,7 @@ html.push("<div class=\"logo_image\"><img src=\"/fop/www/images/logo.png\" /></d
 html.push("<div class=\"logo_word\">承办单位：常德市工商业联合会·总商会</div>");
 html.push("</div>");
 html.push("<div class=\"words\">");
-html.push("<div class=\"container\">\n" +
-    "\t<h3 id=\"effect\">\n" +
-    "\t\t<span>常</span>\n" +
-    "\t\t<span>德</span>\n" +
-    "\t\t<span>市</span>\n" +
-    "\t\t<span>工</span>\n" +
-    "\t\t<span>商</span>\n" +
-    "\t\t<span>联</span>\n" +
-    "\t</h3>\n" +
-    "</div>");
+html.push("<p id=\"effect\"><span>常</span><span>德</span><span>市</span><span>工</span><span>商</span><span>联</span></p>");
 html.push("</div>");
 html.push("</div>");
 html.push("<div class=\"header-nav\">");
@@ -1374,7 +1365,6 @@ jQuery.extend(jQuery.easing,
         (isOn < 12) ? isOn++ : isOn = 0;
 
         switch (isOn) {
-
             case 1:
                 sets = {animation: 8, animationType: "out", restoreHTML: false};
                 break;
