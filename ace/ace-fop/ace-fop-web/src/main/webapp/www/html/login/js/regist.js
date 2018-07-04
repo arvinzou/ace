@@ -98,12 +98,15 @@ app.controller(ngControllerName,function($scope) {
     $scope.getNumFun = function(){
         var mobile = $("input[name = 'regist_num']").val();
         if(mobile == '' || mobile == undefined){
-            alert("请输入手机号码！");
+            layer.alert("请输入手机号码！", {
+                icon: 5,
+                skin: 'myskin'
+            });
         }else{
             $.post("/fop/www/sms/sendCode",{mobile:mobile},function(result){
                 console.log(result);
                 layer.alert(result.info, {
-                    icon: 5,
+                    icon: 1,
                     skin: 'myskin'
                 });
             });
