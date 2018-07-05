@@ -109,7 +109,8 @@
     line-height: 30px;
 }
 .form_info textarea{
-
+    border: none;
+    outline: none;
 }
 .form_info  input{
     border: none;
