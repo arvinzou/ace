@@ -2,19 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.cu.dao.report.DonateRank">
     <select id="query" resultType="map">
-        select a.nickname,a.headimgurl,a.openid,a.totalDonateAmount,a.donateCount
+        select a.nickname, a.headimgurl, a.openid,
+        a.totalDonateAmount, a.donateCount, a.donateDays
         FROM (
         SELECT u.nickname,u.headimgurl,u.openid,
-        sum(t.donateAmount) as totalDonateAmount, c.donateCount
+        sum(t.donateAmount) as totalDonateAmount,
+        c.donateCount,
+        d.donateDays
         FROM cu.cu_donate_list t
         LEFT JOIN portal.userinfo u on t.openId = u.openid
-        left join (select b.openId, count(1) as donateCount
-        from cu_donate_list b
-        where b.openId = b.openId
-        GROUP BY b.openId)c on c.openId = t.openId
+        LEFT JOIN ( select b.openId, count(1) as donateCount
+        from cu.cu_donate_list b
+        where 1=1
+        <if test="projectId!=null and projectId!=&quot;&quot;">
+            and b.projectId = #{projectId,jdbcType=VARCHAR}
+        </if>
+        <if test="openId!=null and openId!=&quot;&quot;">
+            and b.openId = #{openId,jdbcType=VARCHAR}
+        </if>
+        GROUP BY b.openId
+        ) c on c.openId = t.openId
+        LEFT JOIN ( select c.openId,count(c.days) as donateDays
+        from (
+        SELECT DISTINCT
+        b.openId,
+        substr(b.donateDate, 1, 10) AS days
+        FROM
+        cu.cu_donate_list b
+        WHERE 1=1
+        <if test="projectId!=null and projectId!=&quot;&quot;">
+            and b.projectId = #{projectId,jdbcType=VARCHAR}
+        </if>
+        <if test="openId!=null and openId!=&quot;&quot;">
+            and b.openId = #{openId,jdbcType=VARCHAR}
+        </if>
+        )c GROUP BY c.openId
+        ) d on d.openId = t.openId
+        -- ======================================================================================
         WHERE u.appid = #{appid,jdbcType=VARCHAR}
         <if test="projectId!=null and projectId!=&quot;&quot;">
             and t.projectId = #{projectId,jdbcType=VARCHAR}
+        </if>
+        <if test="openId!=null and openId!=&quot;&quot;">
+            and t..openId = #{openId,jdbcType=VARCHAR}
         </if>
         GROUP BY u.nickname,u.headimgurl,u.openid
         ) a

@@ -20,12 +20,18 @@ public interface AnalysisService {
     /**
      * 慈善榜单
      *
-     *
-     * @param projectId
-     * @param start
-     * @param limit
+     * @param projectId 项目ID
+     * @param openId    微信openid
+     * @param start     页码
+     * @param limit     页数
      * @param orderBy
      * @return
      */
-    List<Map<String, Object>> donateRank(String projectId, int start, int limit, String orderBy);
+    List<Map<String, Object>> donateRank(String projectId, String openId, int start, int limit, String orderBy);
+
+    /**
+     * 慈善榜单
+     */
+    Map<String, Object> donateRank(String projectId, String needOpenId, String openId,
+                                   int start, int limit, String orderBy);
 }

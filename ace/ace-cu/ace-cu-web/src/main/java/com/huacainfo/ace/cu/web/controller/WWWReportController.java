@@ -1,6 +1,8 @@
 package com.huacainfo.ace.cu.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
@@ -87,15 +89,35 @@ public class WWWReportController extends CuBaseController {
     /**
      * 慈善榜单
      *
+     * @param needOpenId 必传 0-否，1-是
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/donateRank")
-    public ResultResponse donateRank(String projectId,
+    public ResultResponse donateRank(String projectId, String needOpenId, String openId,
                                      int start, int limit, String orderBy) throws Exception {
+        if (StringUtil.isEmpty(needOpenId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        //慈善一日捐页面使用
+        if ("1".equals(needOpenId)) {
+            //公众号用户信息
+            Userinfo userinfo = getCurUserinfo();
+            if (null == userinfo && StringUtil.isEmpty(openId)) {
+                return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+            }
+            openId = StringUtil.isEmpty(openId) ? userinfo.getOpenid() : openId;
 
-        List<Map<String, Object>> list = analysisService.donateRank(projectId, start, limit, orderBy);
-        return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
+            Map<String, Object> respMap = analysisService.donateRank(projectId, needOpenId, openId,
+                    start, limit, orderBy);
+            return new ResultResponse(ResultCode.SUCCESS, "查询成功", respMap);
+        } else {
+            openId = "";
+            //数据查询
+            List<Map<String, Object>> list = analysisService.donateRank(projectId, openId, start, limit, orderBy);
+
+            return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
+        }
     }
 
     /**
