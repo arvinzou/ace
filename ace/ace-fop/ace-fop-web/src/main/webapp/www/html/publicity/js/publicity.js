@@ -5,7 +5,7 @@ var ngAppName = "angularjsApp";
 var currentPage = 1;
 //angularjs Controller初始化
 var app =angular.module(ngAppName, []);
-var isCompany = null;
+var isCompany = 1;
 var companyProperty = null;
 //企业类型
 var data = [{
