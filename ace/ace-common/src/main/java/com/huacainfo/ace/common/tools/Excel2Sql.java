@@ -19,7 +19,7 @@ import java.util.Map;
 public class Excel2Sql {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Excel2Sql.class);
 
-    private static final String SRC_FILE_PATH = "C:\\Users\\HuaCai008\\Desktop\\慈善总会数据模型v1.3.xls";
+    private static final String SRC_FILE_PATH = "C:\\Users\\HuaCai008\\Desktop\\慈善总会数据模型v1.4.xls";
     private static final String OUT_FILE_PATH = "C:\\Users\\HuaCai008\\Desktop\\cu.sql";
 
     public static void main(String[] args) throws Exception {
