@@ -18,21 +18,22 @@ app.controller(ngControllerName,function($scope){
             }
         }
     }
-
+    /**
+     * 使用记录列表
+     */
     $.ajax({
-        url: "/cu/www/report/donateRank",
+        url: "/cu/www/project/findUsedRecordList",
         type:"post",
         async:false,
-        data:{start:0, limit: 999999, projectId: primaryId, needOpenId: "1"},
+        data:{projectId: primaryId, start: 0, limit: 99999},
         success:function(result){
             if(result.status == 0) {
-                $scope.rankList = result.data.list;
-                $scope.own = result.data.own;
+                $scope.useRecords = result.data.rows;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
             }else {
-                alert(result.info);
+                alert(result.errorMessage);
             }
         },
         error:function(){
@@ -40,3 +41,10 @@ app.controller(ngControllerName,function($scope){
         }
     });
 });
+
+app.filter('to_trusted', function ($sce) {
+        return function (text) {
+            return $sce.trustAsHtml(text);
+        }
+    }
+);

@@ -159,7 +159,7 @@ app.controller(ngControllerName,function($scope){
             $(".search_filter2").hide();
         }else if(memberType == "4"){
             isCompany = "4"
-            $(".search_filter2").show();
+            $(".search_filter2").hide();
         }
         console.log("地区代码：",areaCode);
         $.ajax({
