@@ -104,6 +104,12 @@ jQuery(function ($) {
                         loadText(gd.id);
                         //封面上传
                         appendUploadBtn("coverUrl");
+                        //支出项目调整
+                        if (gd.type == '3') {
+                            //重设控件属性
+                            retSetWidgetAttr(gd);
+                            $('#targetAmount').attr("disabled", "disabled");
+                        }
                     }
                 })
         });

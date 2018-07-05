@@ -80,8 +80,7 @@ public class MessageServiceImpl implements MessageService {
      * @return
      */
     @Override
-    public ResultResponse geHelpAuditMessage(FopGeHelp fopGeHelp, String auditResult, String auditOpinion)
-            throws Exception {
+    public ResultResponse geHelpAuditMessage(FopGeHelp fopGeHelp, String auditResult, String auditOpinion) throws Exception {
         Map<String, Object> accountInfo =
                 sysAccountService.getAccountInfo(fopGeHelp.getRequestId(), fopGeHelp.getRequestType());
         Users users = usersService.selectByAccount((String) accountInfo.get("acount"));
@@ -93,8 +92,8 @@ public class MessageServiceImpl implements MessageService {
         if (null == uVo) {
             return new ResultResponse(ResultCode.FAIL, "微信用户信息不存在");
         }
-        String openid = uVo.getOpenid();
 
+        String openid = uVo.getOpenid();
         String tmplCode = MsgTmplCode.BIS_CONFIRM_NOTICE;
         Map<String, Object> params = new HashMap<>();
         //kafka所需内容

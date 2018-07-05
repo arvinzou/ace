@@ -68,7 +68,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findInformationServiceListDo",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, modules: "2", relationId: userId},
+        data: {limit: pageSize, page: currentPage, modules: "2", iself: true},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -120,7 +120,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, status: status,modules: "2", relationId: userId},
+            data: {limit: pageSize, page: currentPage, status: status, modules: "2", iself: true},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -152,7 +152,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status, modules: "2", relationId: userId},
+            data: {limit: pageSize, page: 1, status: status, modules: "2", iself: true},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;

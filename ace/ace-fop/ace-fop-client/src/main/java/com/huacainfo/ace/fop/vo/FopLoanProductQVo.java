@@ -48,4 +48,13 @@ public class FopLoanProductQVo extends FopLoanProduct {
     }
 
 
+    private boolean iself;
+
+    public boolean getIself() {
+        return iself;
+    }
+
+    public void setIself(boolean iself) {
+        this.iself = iself;
+    }
 }

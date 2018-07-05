@@ -15,4 +15,14 @@ public class FopQuestionQVo extends FopQuestion {
     public void setReplied(String replied) {
         this.replied = replied;
     }
+
+    private boolean iself;
+
+    public boolean getIself() {
+        return iself;
+    }
+
+    public void setIself(boolean iself) {
+        this.iself = iself;
+    }
 }
