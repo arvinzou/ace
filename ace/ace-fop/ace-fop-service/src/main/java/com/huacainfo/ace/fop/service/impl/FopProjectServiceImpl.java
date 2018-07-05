@@ -94,8 +94,30 @@ public class FopProjectServiceImpl implements FopProjectService {
     }
 
     @Override
-    public ResultResponse findProjectList(FopProjectQVo condition, int page, int limit, String orderBy) throws Exception {
+    public ResultResponse findProjectList(FopProjectQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
+        if (condition.getIself()) {
+            SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+            UsersVo user = singleResult.getValue();
+            if (null == user) {
+                return new ResultResponse(1, "没有注册");
+            }
+            if (CommonUtils.isBlank(user.getDepartmentId())) {
+                return new ResultResponse(1, "账户没有绑定企业！");
+            }
+            FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+            FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+            if (null == fc) {
+                if (null == fa) {
+                    return new ResultResponse(1, "账户没有绑定企业！");
+                }
+                condition.setRelationId(fa.getId());
+            } else {
+                condition.setRelationId(fc.getId());
+            }
+        } else {
+            condition.setStatus("2");
+        }
         map.put("list", this.fopProjectDao.findList(condition, (page - 1) * limit, limit, orderBy));
         map.put("total", this.fopProjectDao.findCount(condition));
         ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "项目列表", map);
@@ -116,7 +138,6 @@ public class FopProjectServiceImpl implements FopProjectService {
     @Override
     public MessageResponse insertFopProject(FopProject o, UserProp userProp)
             throws Exception {
-
         if (CommonUtils.isBlank(o.getProjectName())) {
             return new MessageResponse(1, "项目名称不能为空！");
         }

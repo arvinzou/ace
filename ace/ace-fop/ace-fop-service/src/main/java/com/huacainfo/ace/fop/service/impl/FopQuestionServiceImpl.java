@@ -108,9 +108,31 @@ public class FopQuestionServiceImpl implements FopQuestionService {
     }
 
     @Override
-    public ResultResponse findQuestionList(FopQuestionQVo condition, int page, int limit, String orderBy) throws Exception {
+    public ResultResponse findQuestionList(FopQuestionQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception {
         condition.setSourceType("0");
         Map<String, Object> map = new HashMap<String, Object>();
+        if (condition.getIself()) {
+            SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+            UsersVo user = singleResult.getValue();
+            if (null == user) {
+                return new ResultResponse(1, "没有注册");
+            }
+            if (CommonUtils.isBlank(user.getDepartmentId())) {
+                return new ResultResponse(1, "账户没有绑定企业！");
+            }
+            FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+            FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+            if (null == fc) {
+                if (null == fa) {
+                    return new ResultResponse(1, "账户没有绑定企业！");
+                }
+                condition.setRelationId(fa.getId());
+            } else {
+                condition.setRelationId(fc.getId());
+            }
+        } else {
+            condition.setStatus("2");
+        }
         map.put("list", this.fopQuestionDao.findList(condition, (page - 1) * limit, limit, orderBy));
         map.put("total", this.fopQuestionDao.findCount(condition));
         ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "法律帮助列表", map);

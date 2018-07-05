@@ -30,7 +30,7 @@ public interface FopLoanProductService {
      */
     public abstract PageResult<FopLoanProductVo> findFopLoanProductList(FopLoanProductQVo condition, int start, int limit, String orderBy) throws Exception;
 
-    public abstract ResultResponse findLoanProductList(FopLoanProductQVo condition, int page, int limit, String orderBy) throws Exception;
+    public abstract ResultResponse findLoanProductList(FopLoanProductQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception;
 
     /**
      * @throws

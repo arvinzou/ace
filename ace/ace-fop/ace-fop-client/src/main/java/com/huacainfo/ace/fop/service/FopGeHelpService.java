@@ -34,7 +34,7 @@ public interface FopGeHelpService {
     PageResult<FopGeHelpVo> findFopGeHelpListVo(FopGeHelpQVo condition, int start, int limit, String orderBy) throws Exception;
 
 
-    ResultResponse findGeHelpList(FopGeHelpQVo condition, int page, int limit, String orderBy) throws Exception;
+    ResultResponse findGeHelpList(FopGeHelpQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception;
 
     /**
      * @throws

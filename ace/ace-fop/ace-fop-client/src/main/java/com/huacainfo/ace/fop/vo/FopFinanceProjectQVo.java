@@ -27,4 +27,14 @@ public class FopFinanceProjectQVo extends FopFinanceProject {
     public void setTopYield(BigDecimal topYield) {
         this.topYield = topYield;
     }
+
+    private boolean iself;
+
+    public boolean getIself() {
+        return iself;
+    }
+
+    public void setIself(boolean iself) {
+        this.iself = iself;
+    }
 }
