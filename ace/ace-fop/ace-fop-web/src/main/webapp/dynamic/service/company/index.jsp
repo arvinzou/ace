@@ -249,7 +249,7 @@
     </div>
 
     <h5 class="header-title">企业通讯地址</h5>
-    <div class="row" style="padding:10px" name="address"></div>
+    <div class="row" style="padding:10px" id="address"></div>
 
     <h5 class="header-title">企业联系方式</h5>
     <div class="row" style="padding:10px">
@@ -300,7 +300,7 @@
         </div>
     </div>
     <h5 class="header-title">企业生产（经营）主要品种</h5>
-    <div class="row" style="padding:10px" name="majorVariety">
+    <div class="row" style="padding:10px" id="majorVariety">
     </div>
 
 
