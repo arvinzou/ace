@@ -200,6 +200,8 @@ function loadView(id, postUrl, dialogId) {
                 }
                 // $(dialogId).find('#' + key).html(value);
                 $(dialogId).find('span[name=' + key + ']').html(value);
+                $(dialogId).find('div[name=' + key + ']').html(value);
+
             });
         },
         error: function () {
