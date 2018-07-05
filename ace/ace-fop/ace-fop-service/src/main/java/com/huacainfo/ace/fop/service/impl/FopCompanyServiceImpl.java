@@ -264,6 +264,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (CommonUtils.isBlank(o.getLpMobile())) {
             return new MessageResponse(ResultCode.FAIL, "企业法人联系方式不能为空!");
         }
+        if (CommonUtils.isBlank(o.getCompanyType())) {
+            return new MessageResponse(ResultCode.FAIL, "注册会员类型不能为空!");
+        }
         int temp = this.fopCompanyDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(ResultCode.FAIL, "企业名称重复！");
@@ -285,7 +288,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
         Department department = (Department) rs1.getData();
         o.setDepartmentId(department.getDepartmentId());
-        o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
+//        o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
