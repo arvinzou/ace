@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,18 +103,18 @@ public class AnslysisServiceImpl implements AnalysisService {
                                           int start, int limit, String orderBy) {
         Map<String, Object> respMap = new HashMap<>();
 
+
         if ("1".equals(needOpenId)) {
             //数据查询
             List<Map<String, Object>> list = donateRank(projectId, "", start, limit, orderBy);
             //筛选过滤
             if (StringUtil.isNotEmpty(openId)) {
                 Map<String, Object> ownData = new HashMap<>();
-//                List<Map<String, Object>> removeList = new ArrayList<>();
+                List<Map<String, Object>> removeList = new ArrayList<>();
                 for (Map<String, Object> map : list) {
                     if (openId.equals(String.valueOf(map.get("openid")))) {
                         ownData.putAll(map);
 //                        removeList.add(map);
-                        break;
                     }
                 }
 //                list.removeAll(removeList);
