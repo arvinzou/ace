@@ -234,13 +234,55 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
+                //合作方式
+                if (key == 'coopType') {
+
+
+                    var rst = "";
+                    switch (value) {
+                        case '1' :
+                            rst = "投资合作";
+                            break;
+                        case '2' :
+                            rst = "合作开发";
+                            break;
+                        case '3' :
+                            rst = "出资+资源合作";
+                            break;
+                        case '4' :
+                            rst = "其他";
+                            break;
+                        default :
+                            rst = "N/A";
+                    }
+                    value = rst;
+                    // value = rsd(value, '83');
+                }
                 if (key == 'category') {
                     value = rsd(value, '83');
                 }
                 if (key == 'status') {
-                    value == "1" ? "正常" : "关闭";
+                    var rst = "";
+                    switch (value) {
+                        case '1' :
+                            rst = "审核中";
+                            break;
+                        case '2' :
+                            rst = "审核通过";
+                            break;
+                        case '3' :
+                            rst = "驳回";
+                            break;
+                        default :
+                            rst = "N/A";
+                    }
+                    value = rst;
+                    // value == "1" ? "正常" : "关闭";
                 }
-                if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
+                if (key.indexOf('Date') != -1 ||
+                    key.indexOf('time') != -1 ||
+                    key.indexOf('Time') != -1 ||
+                    key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
                 $("#dialog-message-view").find('#' + key).html(value);

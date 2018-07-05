@@ -665,14 +665,13 @@ public class WWWController extends FopBaseController {
 
     @RequestMapping(value = "/sign")
     @ResponseBody
-    public MessageResponse signUp(String name, String phoneNumber, boolean isCompany) throws Exception {
-        String code = (String) this.getRequest().getSession().getAttribute("j_captcha_cmcc_" + phoneNumber);
-        if (StringUtil.isEmpty(code)) {
-            return new MessageResponse(ResultCode.FAIL, "验证码输入有误");
-        }
-
-        if (isCompany) {
-            return this.fopCompanyService.insertCompany(name, phoneNumber);
+    public MessageResponse signUp(String name, String phoneNumber, String isCompany, String code) throws Exception {
+        String rcode = (String) this.getRequest().getSession().getAttribute("j_captcha_cmcc_" + phoneNumber);
+//        if (StringUtil.isEmpty(code)&&code.equals(rcode)) {
+//            return new MessageResponse(ResultCode.FAIL, "验证码输入有误");
+//        }
+        if (!"2".equals(isCompany)) {
+            return this.fopCompanyService.insertCompany(name, phoneNumber, isCompany);
         }
         return this.fopAssociationService.insertAssociation(name, phoneNumber);
     }

@@ -245,13 +245,14 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     @Override
-    public MessageResponse insertCompany(String fullName, String lpMobile) throws Exception {
+    public MessageResponse insertCompany(String fullName, String lpMobile, String companyType) throws Exception {
         if (!CommonUtils.isValidMobile(lpMobile)) {
             return new MessageResponse(ResultCode.FAIL, "不是手机号码");
         }
         FopCompanyVo o = new FopCompanyVo();
         o.setFullName(fullName);
         o.setLpMobile(lpMobile);
+        o.setCompanyType(companyType);
         UserProp userProp = new UserProp();
         o.setLpSex("1");
         userProp.setActiveSyId("fop");
@@ -262,6 +263,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         }
         if (CommonUtils.isBlank(o.getLpMobile())) {
             return new MessageResponse(ResultCode.FAIL, "企业法人联系方式不能为空!");
+        }
+        if (CommonUtils.isBlank(o.getCompanyType())) {
+            return new MessageResponse(ResultCode.FAIL, "注册会员类型不能为空!");
         }
         int temp = this.fopCompanyDao.isExit(o);
         if (temp > 0) {
@@ -284,7 +288,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
         Department department = (Department) rs1.getData();
         o.setDepartmentId(department.getDepartmentId());
-        o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
+//        o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");

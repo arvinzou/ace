@@ -15,10 +15,12 @@ app.controller(ngControllerName,function($scope) {
         ($event.target).checked = true;
         $($event.target).children("div[name='check']").removeClass("default");
         console.log(param);
-        if(param){
+        if (param === 1) {
             $("#name").text("企业名称");
-        }else{
+        } else if (param === 2) {
             $("#name").text("团体名称");
+        } else {
+            $("#name").text("个人名称");
         }
         flag = param;
     }
@@ -27,6 +29,7 @@ app.controller(ngControllerName,function($scope) {
         var regist_flag = true;
         var regist_name = $("input[name='regist_name']").val();
         var regist_num = $("input[name='regist_num']").val();
+        var code = $("input[name='checkNum']").val();
         if(flag == null){
             regist_flag = false;
             layer.alert("会员类型未选择！", {
@@ -56,7 +59,7 @@ app.controller(ngControllerName,function($scope) {
                 url: "/fop/www/sign",
                 type: "post",
                 async: false,
-                data: {name: regist_name, phoneNumber: regist_num, isCompany: flag},
+                data: {name: regist_name, phoneNumber: regist_num, isCompany: flag, code: code},
                 success: function (result) {
                     if (result.status == 0) {
                        console.log(result);

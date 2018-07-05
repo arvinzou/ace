@@ -30,12 +30,23 @@
 				<div class="regist_form">
 					<div class="regist_form_title"><i>*</i><span>选择会员类型</span></div>
 					<div class="regist_type">
-						<div class="company_member unhover_border companyType" data-name="企业会员" ng-click="changeType($event,true);">
+                        <div class="company_member unhover_border companyType" data-name="企业会员"
+                             ng-click="changeType($event,1);">
 							<div class="image"><img src="../../images/login/company@3x.png" /></div>
 							<span>企业会员</span>
 							<div name="check" class="check default"><img src="../../images/login/check@3x.png"/></div>
 						</div>
-						<div class="group_member unhover_border companyType" data-name="团体会员"  ng-click="changeType($event,false);">
+
+                        <div class="company_member unhover_border companyType" data-name="个人会员"
+                             ng-click="changeType($event,4);">
+                            <div class="image"><img src="../../images/login/company@3x.png"/></div>
+                            <span>个人会员</span>
+                            <div name="check" class="check default"><img src="../../images/login/check@3x.png"/></div>
+                        </div>
+
+
+                        <div class="group_member unhover_border companyType" data-name="团体会员"
+                             ng-click="changeType($event,2);">
 							<div class="image"><img src="../../images/login/group@3x.png" /></div>
 							<span>团体会员</span>
 							<div name="check" class="check default"><img src="../../images/login/check@3x.png"/></div>
