@@ -12,8 +12,8 @@ app.controller(ngControllerName,function($scope) {
             typeDiv[i].checked  = false;
             $(typeDiv[i]).children("div[name='check']").addClass("default");
         }
-        ($event.target).checked = true;
-        $($event.target).children("div[name='check']").removeClass("default");
+        ($event.currentTarget).checked = true;
+        $($event.currentTarget).children("div[name='check']").removeClass("default");
         console.log(param);
         if (param === 1) {
             $("#name").text("企业名称");
