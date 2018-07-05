@@ -8,7 +8,7 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/report/donateRank",
         type:"post",
         async:false,
-        data:{start:0, limit: 999999},
+        data:{start:0, limit: 999999, needOpenId: "2"},
         success:function(result){
             if(result.status == 0) {
                 $scope.rankList = result.data;

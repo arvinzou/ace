@@ -81,11 +81,11 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/report/donateRank",
         type:"post",
         async:false,
-        data:{start:0, limit: 999999, projectId: projectId},
+        data:{start:0, limit: 999999, projectId: projectId, needOpenId: "1"},
         success:function(result){
             if(result.status == 0) {
-                $scope.rankList = result.data;
-                $scope.totalAmount =result.data.length;
+                $scope.rankList = result.data.list;
+                $scope.totalAmount =result.data.list.length;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
