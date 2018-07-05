@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.report.Pwl">
+  <select id="query" resultType="map">
+    SELECT
+    'tpl' id,
+    count(DISTINCT(tplId)) value FROM tpl_page where createUserId=#{userId}
+    union all
+    SELECT
+    'page' id,
+    count(1) value FROM tpl_page where createUserId=#{userId}
+    union all
+    SELECT
+    'category' id,
+    count(1) value FROM article_category where createUserId=#{userId}
+    union all
+    SELECT
+    'article' id,
+    count(1) value FROM article where createUserId=#{userId}
+  </select>
+</mapper>
