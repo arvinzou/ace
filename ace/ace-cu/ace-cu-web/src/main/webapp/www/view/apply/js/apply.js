@@ -165,7 +165,7 @@ app.controller(ngControllerName,function($scope){
          * 发起申请
          */
 	$scope.applyProject = function(){
-		var realName = $("input[name='realName']").val();
+        var realName = $("input[name='realName']").val();
 		var idCard = $("input[name='idCard']").val();
 		var phoneNum = $("input[name='phoneNum']").val();
 		var flagAmount = $("input[name='flagAmount']").val();
@@ -250,7 +250,11 @@ app.controller(ngControllerName,function($scope){
         },
         success:function(result){
             if(result.status == 0) {
-               alert(result.info);
+                layer.open({
+                    type:1,
+                    content: $("#success_box").html(),
+                    shadeClose:false
+                });
             }else {
                 alert(result.info);
             }
