@@ -5,7 +5,9 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.model.TaskCmcc;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.TaskCmccService;
+import com.huacainfo.ace.portal.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,17 @@ public class WWWSmsController extends FopBaseController {
 
     @Autowired
     private TaskCmccService taskCmccService;
+    @Autowired
+    private UsersService usersService;
 
     @RequestMapping("/sendCode")
     public ResultResponse sendCode(String mobile) throws Exception {
+        //账号重复验证
+        Users users = usersService.selectByAccount(mobile);
+        if (null != users) {
+            return new ResultResponse(ResultCode.FAIL, "该手机号码已注册");
+        }
+
         String sRand = getRandCode();
         // 保存进session
         this.getRequest().getSession().setAttribute("j_captcha_cmcc_" + mobile, sRand);

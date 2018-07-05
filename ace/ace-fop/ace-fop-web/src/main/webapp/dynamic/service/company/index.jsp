@@ -248,19 +248,17 @@
         </div>
     </div>
 
+    <h5 class="header-title">企业通讯地址</h5>
+    <div class="row" style="padding:10px" name="address"></div>
+
     <h5 class="header-title">企业联系方式</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem">
-            <span class="labelItemHeader">企业通讯地址</span>
-            <br>
-            <span id="address"></span>
-        </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">维度</span>
             <br>
             <span id="latitude"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">经度</span>
             <br>
             <span id="longitude"></span>
@@ -300,12 +298,11 @@
             <br>
             <span id="email"></span>
         </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">企业生产（经营）主要品种</span>
-            <br>
-            <span id="majorVariety"></span>
-        </div>
     </div>
+    <h5 class="header-title">企业生产（经营）主要品种</h5>
+    <div class="row" style="padding:10px" name="majorVariety">
+    </div>
+
 
     <h5 class="header-title">劳动关系信息</h5>
     <div class="row" style="padding:10px">

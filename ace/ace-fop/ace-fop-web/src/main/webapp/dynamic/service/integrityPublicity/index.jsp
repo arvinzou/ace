@@ -72,49 +72,40 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
+    <h5 class="header-title">标题</h5>
+    <div class="row" style="padding:10px" id="title">
+    </div>
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-关联ID</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">关联ID</span>
             <br>
-            <span id="relationId">
-</span>
+            <span id="relationId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-关联类型</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">关联类型</span>
             <br>
-            <span id="relationType">
-</span>
+            <span id="relationType"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-标题</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">类别</span>
             <br>
-            <span id="title">
-</span>
+            <span id="category"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-类别</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">发布时间</span>
             <br>
-            <span id="category">
-</span>
+            <span id="releaseDate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-发布时间</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">备注</span>
             <br>
-            <span id="releaseDate">
-</span>
+            <span id="remark"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-备注</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">状态</span>
             <br>
-            <span id="remark">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
-            <br>
-            <span id="status">
-</span>
+            <span id="status"></span>
         </div>
     </div>
 
@@ -124,41 +115,35 @@
 
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-创建人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">创建人编号</span>
             <br>
-            <span id="createUserId">
-</span>
+            <span id="createUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-创建人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">创建人姓名</span>
             <br>
-            <span id="createUserName">
-</span>
+            <span id="createUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-入库日期</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">入库日期</span>
             <br>
-            <span id="createDate">
-</span>
+            <span id="createDate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">最后更新人编号</span>
             <br>
-            <span id="lastModifyUserId">
-</span>
+            <span id="lastModifyUserId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人姓名</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新人姓名</span>
             <br>
-            <span id="lastModifyUserName">
-</span>
+            <span id="lastModifyUserName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新时间</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后更新时间</span>
             <br>
-            <span id="lastModifyDate">
-</span>
+            <span id="lastModifyDate"></span>
         </div>
     </div>
 

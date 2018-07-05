@@ -123,7 +123,7 @@
         <div class="labelItem">
             <span class="labelItemHeader">所属区域</span>
             <br>
-            <span id="areaCode"></span>
+            <span id="areaCodeName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">所属领域</span>
