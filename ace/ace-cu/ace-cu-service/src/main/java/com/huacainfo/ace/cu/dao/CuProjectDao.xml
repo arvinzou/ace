@@ -14,6 +14,8 @@
         <result column="collectAmount" jdbcType="DECIMAL" property="collectAmount"/>
         <result column="payoutAmount" jdbcType="DECIMAL" property="payoutAmount"/>
         <result column="balanceAmount" jdbcType="DECIMAL" property="balanceAmount"/>
+        <result column="sequence" jdbcType="INTEGER" property="sequence"/>
+        <result column="started" jdbcType="CHAR" property="started"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -24,12 +26,11 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
         <result column="description" jdbcType="LONGVARCHAR" property="description"/>
     </resultMap>
-
     <sql id="Base_Column_List">
-    id, parentId, projectName, title, type, coverUrl, startDate, endDate, targetAmount, 
-    collectAmount, payoutAmount, balanceAmount, remark, status, createUserId, createUserName, 
-    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
-  </sql>
+        id, parentId, projectName, title, type, coverUrl, startDate, endDate, targetAmount,
+        collectAmount, payoutAmount, balanceAmount, sequence, started, remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -37,27 +38,27 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from cu_project
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
+        delete from cu_project
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.cu.model.CuProject">
-    insert into cu_project (id, parentId, projectName, 
-      title, type, coverUrl, 
-      startDate, endDate, targetAmount, 
-      collectAmount, payoutAmount, balanceAmount, 
-      remark, status, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate, description
-      )
-    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{coverUrl,jdbcType=VARCHAR}, 
-      #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{targetAmount,jdbcType=DECIMAL}, 
-      #{collectAmount,jdbcType=DECIMAL}, #{payoutAmount,jdbcType=DECIMAL}, #{balanceAmount,jdbcType=DECIMAL}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
-      )
-  </insert>
+        insert into cu_project (id, parentId, projectName,
+        title, type, coverUrl,
+        startDate, endDate, targetAmount,
+        collectAmount, payoutAmount, balanceAmount,
+        sequence, started, remark,
+        status, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate, description)
+        values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR},
+        #{title,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{coverUrl,jdbcType=VARCHAR},
+        #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{targetAmount,jdbcType=DECIMAL},
+        #{collectAmount,jdbcType=DECIMAL}, #{payoutAmount,jdbcType=DECIMAL}, #{balanceAmount,jdbcType=DECIMAL},
+        #{sequence,jdbcType=INTEGER}, #{started,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.cu.model.CuProject">
         insert into cu_project
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -96,6 +97,12 @@
             </if>
             <if test="balanceAmount != null">
                 balanceAmount,
+            </if>
+            <if test="sequence != null">
+                sequence,
+            </if>
+            <if test="started != null">
+                started,
             </if>
             <if test="remark != null">
                 remark,
@@ -162,6 +169,12 @@
             <if test="balanceAmount != null">
                 #{balanceAmount,jdbcType=DECIMAL},
             </if>
+            <if test="sequence != null">
+                #{sequence,jdbcType=INTEGER},
+            </if>
+            <if test="started != null">
+                #{started,jdbcType=CHAR},
+            </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
@@ -227,6 +240,12 @@
             <if test="balanceAmount != null">
                 balanceAmount = #{balanceAmount,jdbcType=DECIMAL},
             </if>
+            <if test="sequence != null">
+                sequence = #{sequence,jdbcType=INTEGER},
+            </if>
+            <if test="started != null">
+                started = #{started,jdbcType=CHAR},
+            </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
@@ -258,42 +277,46 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.cu.model.CuProject">
-    update cu_project
-    set parentId = #{parentId,jdbcType=VARCHAR},
-      projectName = #{projectName,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      type = #{type,jdbcType=CHAR},
-      coverUrl = #{coverUrl,jdbcType=VARCHAR},
-      startDate = #{startDate,jdbcType=TIMESTAMP},
-      endDate = #{endDate,jdbcType=TIMESTAMP},
-      targetAmount = #{targetAmount,jdbcType=DECIMAL},
-      collectAmount = #{collectAmount,jdbcType=DECIMAL},
-      payoutAmount = #{payoutAmount,jdbcType=DECIMAL},
-      balanceAmount = #{balanceAmount,jdbcType=DECIMAL},
-      remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-
+        update cu_project
+        set parentId = #{parentId,jdbcType=VARCHAR},
+        projectName = #{projectName,jdbcType=VARCHAR},
+        title = #{title,jdbcType=VARCHAR},
+        type = #{type,jdbcType=CHAR},
+        coverUrl = #{coverUrl,jdbcType=VARCHAR},
+        startDate = #{startDate,jdbcType=TIMESTAMP},
+        endDate = #{endDate,jdbcType=TIMESTAMP},
+        targetAmount = #{targetAmount,jdbcType=DECIMAL},
+        collectAmount = #{collectAmount,jdbcType=DECIMAL},
+        payoutAmount = #{payoutAmount,jdbcType=DECIMAL},
+        balanceAmount = #{balanceAmount,jdbcType=DECIMAL},
+        sequence = #{sequence,jdbcType=INTEGER},
+        started = #{started,jdbcType=CHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.cu.vo.CuProjectVo">
+        <result column="parentProjectName" jdbcType="VARCHAR" property="parentProjectName"/>
 
     </resultMap>
     <sql id="Vo_Column_List">
-        id, parentId, projectName, title, type, coverUrl, startDate, endDate, targetAmount,
-        collectAmount, payoutAmount, balanceAmount, remark, status, createUserId, createUserName,
-        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
+        p.projectName as parentProjectName,
+        t.id, t.parentId, t.projectName, t.title, t.type, t.coverUrl, t.startDate, t.endDate, t.targetAmount,
+        t.collectAmount, t.payoutAmount, t.balanceAmount, t.remark, t.status, t.createUserId, t.createUserName,
+        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate, t.description, t.sequence, t.started
     </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
-        from cu_project
-        where id = #{id,jdbcType=VARCHAR}
+        from cu_project t
+        left join cu_project p on t.parentId = p.id
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" resultMap="VoResultMap">
@@ -313,6 +336,7 @@
 
     <sql id="whereCondition">
         from cu_project t
+        left join cu_project p on t.parentId = p.id
         where 1=1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
@@ -322,6 +346,9 @@
         </if>
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.started!=null and condition.started!=&quot;&quot;">
+            and t.started = #{condition.started,jdbcType=VARCHAR}
         </if>
     </sql>
 

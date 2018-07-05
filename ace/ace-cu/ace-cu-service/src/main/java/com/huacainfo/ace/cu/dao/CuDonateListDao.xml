@@ -276,17 +276,45 @@
     <select id="getAccDonateCount" resultType="int" parameterType="java.lang.String">
         SELECT
             count(1)
-        FROM
-            cu.cu_donate_list t
+        FROM cu.cu_donate_list t
         WHERE
             t.openId =  #{openId,jdbcType=VARCHAR}
     </select>
     <select id="getAccDonateAmount" resultType="java.math.BigDecimal" parameterType="java.lang.String">
         SELECT
             sum(donateAmount)
-        FROM
-            cu.cu_donate_list t
-        WHERE
-            t.openId= #{openId,jdbcType=VARCHAR}
+        FROM cu.cu_donate_list t
+        WHERE t.openId= #{openId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findDonateCount" resultType="int" parameterType="map">
+        SELECT
+        count(1)
+        FROM cu.cu_donate_list t
+        WHERE 1=1
+        <if test="projectId!=null and projectId!=&quot;&quot;">
+            and t.projectId = #{projectId,jdbcType=VARCHAR}
+        </if>
+        <if test="startDate!=null and startDate!=&quot;&quot;">
+            and t.donateDate >= #{startDate,jdbcType=VARCHAR}
+        </if>
+        <if test="endDate!=null and endDate!=&quot;&quot;">
+            and t.donateDate &lt;= #{endDate,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="findDonateAmount" resultType="java.math.BigDecimal" parameterType="map">
+        SELECT
+        sum(donateAmount)
+        FROM cu.cu_donate_list t
+        WHERE 1=1
+        <if test="projectId!=null and projectId!=&quot;&quot;">
+            and t.projectId = #{projectId,jdbcType=VARCHAR}
+        </if>
+        <if test="startDate!=null and startDate!=&quot;&quot;">
+            and t.donateDate >= #{startDate,jdbcType=VARCHAR}
+        </if>
+        <if test="endDate!=null and endDate!=&quot;&quot;">
+            and t.donateDate &lt;= #{endDate,jdbcType=VARCHAR}
+        </if>
     </select>
 </mapper>

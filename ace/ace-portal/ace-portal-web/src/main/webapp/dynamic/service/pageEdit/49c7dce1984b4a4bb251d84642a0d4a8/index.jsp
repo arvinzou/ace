@@ -345,6 +345,10 @@
                             <!-- 原图 -->
                             <div class="col-md-6 original-pane">
                                 <img src="img/left_pic_two.jpg" id="target" alt="原图" />
+                                <div class="btn-group" style="padding-top:10px">
+                                    <button class="btn btn-default" type="button" onclick="resetSize(300,300)">16:16</button>
+                                    <button class="btn btn-default" type="button" onclick="resetSize(300,169)">16:9</button>
+                                </div>
                             </div>
                             <!-- 预览盒子 -->
                             <div class="col-md-6">

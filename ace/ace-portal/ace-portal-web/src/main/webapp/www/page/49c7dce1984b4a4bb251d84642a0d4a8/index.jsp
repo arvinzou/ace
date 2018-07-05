@@ -59,20 +59,20 @@
         <div class="item active">
             {@if item.hrefUrl}
             <a href="\${item.hrefUrl}">
-                <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
+                <img src="\${item.cover}" alt="\${item.title}" style="height: 5rem; width: 100%; object-fit: cover;"/>
             </a>
             {@else}
-            <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
+            <img src="\${item.cover}" alt="\${item.title}" style="height: 5rem; width: 100%; object-fit: cover;"/>
             {@/if}
         </div>
         {@else}
         <div class="item">
             {@if item.hrefUrl}
             <a href="\${item.hrefUrl}">
-                <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
+                <img src="\${item.cover}" alt="\${item.title}" style="height: 5rem; width: 100%; object-fit: cover;"/>
             </a>
             {@else}
-            <img src="\${item.cover}" alt="\${item.title}" style="height: 4rem; width: 100%; object-fit: cover;"/>
+            <img src="\${item.cover}" alt="\${item.title}" style="height: 5rem; width: 100%; object-fit: cover;"/>
             {@/if}
         </div>
         {@/if}
@@ -84,7 +84,7 @@
 
 
 <script id="tpl-baner" type="text/template">
-    <img src="\${data.data.cover}" alt="\${data.data.name}" style="height: 4rem; width: 100%; object-fit: cover;"/>
+    <img src="\${data.data.cover}" alt="\${data.data.name}" style="height: 5rem; width: 100%; object-fit: cover;"/>
 </script>
 
 <script id="tpl-navigation" type="text/template">

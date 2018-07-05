@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface CuDonateListDao {
 
@@ -38,4 +39,7 @@ public interface CuDonateListDao {
     int getAccDonateCount(String openId);
 
 
+    int findDonateCount(Map<String, Object> condition);
+
+    BigDecimal findDonateAmount(Map<String, Object> condition);
 }

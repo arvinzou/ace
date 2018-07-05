@@ -29,7 +29,7 @@
             table-layout: fixed;
         }
 
-        td {
+        td{
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -109,7 +109,7 @@
                                 <div class="row company_info_content">
                                     <div class="col-sm-6 col-xs-12"><span>成立时间：</span><span ng-cloak>{{companyInfo.establishDate | formatDate}}</span>
                                     </div>
-                                    <div class="col-sm-6 col-xs-12"><span>企业通讯地址：</span><span ng-cloak>{{companyInfo.address}}</span>
+                                    <div class="col-sm-6 col-xs-12" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" title="{{companyInfo.address}}"><span>企业通讯地址：</span><span ng-cloak>{{companyInfo.address}}</span>
                                     </div>
                                 </div>
                             </div>

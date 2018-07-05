@@ -28,7 +28,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("cuProjectService")
 /**
@@ -155,6 +157,13 @@ public class CuProjectServiceImpl implements CuProjectService {
             return new MessageResponse(1, "项目结束时间不能为空！");
         }
 
+        if (ProjectConstant.P_TYPE_PAY_OUT.equals(o.getType())) {
+            CuProject p = cuProjectDao.selectByPrimaryKey(o.getId());
+            if (o.getTargetAmount().compareTo(p.getTargetAmount()) != 0) {
+                return new MessageResponse(1, "支出项目，支出金额不得调整！");
+            }
+        }
+
         int temp = this.cuProjectDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "慈善项目名称重复！");
@@ -222,14 +231,40 @@ public class CuProjectServiceImpl implements CuProjectService {
         CuProjectQVo condition = new CuProjectQVo();
         condition.setType(type);
         condition.setStatus("2");//'2' : "通过";
+        condition.setStarted("1");//项目是否启动  0-否 1-true
 
         PageResult<CuProjectVo> rs = findCuProjectList(condition, start, limit, orderBy);
         List<CuProjectVo> list = rs.getRows();
         for (CuProjectVo projectVo : list) {
             setBalanceDays(projectVo);
+            //统计 今日募集、今日捐赠人数
+            if (ProjectConstant.P_TYPE_SPECIAL.equals(projectVo.getType())) {
+                dataStatistics(projectVo);
+            }
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rs);
+    }
+
+    /**
+     * 数据统计
+     *
+     * @param projectVo
+     */
+    private void dataStatistics(CuProjectVo projectVo) {
+        //今日时间
+        Map<String, String> dateMap = DateUtil.getDateMap(DateUtil.getNow());
+        String today = dateMap.get("year") + "-" + dateMap.get("month") + "-" + dateMap.get("day");
+        //查询条件
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("projectId", projectVo.getId());
+        condition.put("startDate", today + " 00:00:00");
+        condition.put("endDate", today + " 23:59:59");
+        //数值录入
+        BigDecimal todayDonateAmount = cuDonateListService.findDonateAmount(condition);
+        int todayDonateCount = cuDonateListService.findDonateCount(condition);
+        projectVo.setTodayDonateAmount(null == todayDonateAmount ? BigDecimal.ZERO : todayDonateAmount);
+        projectVo.setTodayDonateCount(todayDonateCount);
     }
 
     /**
