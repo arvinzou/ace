@@ -125,7 +125,7 @@
 </body>
 
 
-<!--编辑模态框-->
+编辑模态框
 <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      data-backdrop="false">
     <div class="modal-dialog modal-lg" role="document">
@@ -153,7 +153,11 @@
                         </div>
                     </div>
                 </div>
-
+                <div><label>描述</label><br>
+                    <textarea placeholder="简要描述下产品"
+                              onfocus="this.placeholder=''"
+                              onblur="this.placeholder='简要描述下产品'" ng-model="infoData.remark"></textarea>
+                </div>
                 <div><label>具体内容</label><br>
                     <textarea id="pcontent" ng-model="infoData.content" placeholder="请描述产品具体内容" onfocus="this.placeholder=''"
                               onblur="this.placeholder='请描述产品具体内容'"></textarea>
@@ -198,7 +202,11 @@
                             </div>
                         </div>
                     </div>
-
+                    <div><label>描述</label><br>
+                        <textarea name="remark" id="remark" placeholder="简要描述下产品"
+                                  onfocus="this.placeholder=''"
+                                  onblur="this.placeholder='简要描述下产品'"></textarea>
+                    </div>
                     <div><label>具体内容</label><br>
                         <textarea name="pcontent" id="editor"></textarea>
                     </div>

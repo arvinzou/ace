@@ -5,10 +5,12 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>申请</title>
+		<link rel="stylesheet" type="text/css" href="../js/layer.mobile-v2.0/layer_mobile/need/layer.css"/>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
 		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="../js/plupload/plupload.full.min.js"></script>
+		<script type="text/javascript" src="../js/layer.mobile-v2.0/layer_mobile/layer.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/apply.css" />
 		<script type="text/javascript" src="js/apply.js"></script>
 	</head>
@@ -147,4 +149,17 @@
 		</div>
 	</body>
 
+	<!--申请成功提示框-->
+	<div id="success_box" class="success_box" style="display: none;">
+		<div class="sbanner">
+			<img src="img/success_banner.png"/>
+		</div>
+		<div class="sinfo">
+			<p>申请提交成功~</p>
+		</div>
+		<div class="sdetail">
+			<p>资料审核中，请耐心等待</p>
+			<p>可前往<a href="/cu/www/view/me/apply_progress.html">个人中心</a>查看审核状态</p>
+		</div>
+	</div>
 </html>

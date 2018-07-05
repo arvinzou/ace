@@ -74,6 +74,30 @@ app.controller(ngControllerName,function($scope){
         }
     });
 
+    /**
+     * 一日捐榜单
+     */
+    $.ajax({
+        url: "/cu/www/report/donateRank",
+        type:"post",
+        async:false,
+        data:{start:0, limit: 999999, projectId: projectId, needOpenId: "1"},
+        success:function(result){
+            if(result.status == 0) {
+                $scope.rankList = result.data.list;
+                $scope.totalAmount =result.data.list.length;
+                if (!$scope.$$phase) {
+                    $scope.$apply();
+                }
+            }else {
+                alert(result.info);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+
     $scope.donate = function(){
         if(status != '2'){
             alert("该项目未审核通过！")
@@ -87,6 +111,13 @@ app.controller(ngControllerName,function($scope){
      */
     $scope.donateRank = function(){
         window.location.href = '/cu/www/view/donatelist/donatelist.html?projectId='+projectId;
+    }
+
+    /**
+     * 使用记录查看更多
+     */
+    $scope.showMore = function(){
+        window.location.href = '/cu/www/view/daydonation/recordlist.html?projectId='+projectId;
     }
 });
 app.filter('to_trusted', function ($sce) {
@@ -104,3 +135,14 @@ app.filter('formatDate', function() { //可以注入依赖
         }
     }
 });
+function troggle(obj, clazz){
+    if($(obj).attr("name") == "down"){   //down展开，up收起
+        $(obj).parent().siblings(clazz).removeClass("troggle");
+        $(obj).html("<span class=\"opt\">收起</span><img src=\"img/up.png\" style=\"width: 0.3rem;height: 0.2rem;\">");
+        $(obj).attr("name", "up");
+    }else{
+        $(obj).parent().siblings(clazz).addClass("troggle");
+        $(obj).html("<span class=\"opt\">展开</span><img  src=\"img/down.png\" style=\"width: 0.3rem;height: 0.2rem;\">");
+        $(obj).attr("name", "down");
+    }
+}
