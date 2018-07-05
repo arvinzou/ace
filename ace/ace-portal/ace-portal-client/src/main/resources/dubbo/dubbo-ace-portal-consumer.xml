@@ -134,4 +134,9 @@
     <dubbo:reference interface="com.huacainfo.ace.portal.service.EvaluatDataService"
                      id="evaluatDataService"/>
 
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.CanvasTmplService"
+                     id="canvasTmplService"/>
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.CanvasTmplItemService"
+                     id="canvasTmplItemService"/>
+
 </beans>
