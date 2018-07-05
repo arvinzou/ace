@@ -36,18 +36,20 @@
 					</div>
 					<div style="clear: both;"></div>
 				</div>
-				<div class="donate_list">
+				<div class="donate_list marquee">
 					<ul>
+						<marquee scrollamount="2" direction="up" behaviour="scroll">
 						<li ng-repeat="dua in donationList">
 							<span class="list_left" ng-cloak>{{dua.nickname}}&nbsp;捐赠<span class="money_default" ng-bind="dua.donateAmount"></span>元</span>
 							<span class="list_right" ng-bind="dua.donateDate | formatDate"></span>
 						</li>
+						</marquee>
 					</ul>
 				</div>
 			</div>
 			<div class="content_02">
-				<div class="content_title">
-					16580人参与一日捐
+				<div class="content_title" ng-cloak>
+					{{totalAmount}}人参与一日捐
 				</div>
 				<div class="donate_rank">
 					<div class="donate_rank_title">
@@ -58,17 +60,17 @@
 					</div>
 					<div class="donate_rank_list">
 						<ul>
-							<li class="topone">
-								<img src="img/headUrl.png"/>
+							<li class="topone" ng-if="rankList[0]!=undefined &&rankList[0]!=null">
+								<img ng-src="{{rankList[0].headimgurl}}"/>
 							</li>
-							<li class="toptwo">
-								<img src="img/headUrl.png" />
+							<li class="toptwo" ng-if="rankList[1]!=undefined &&rankList[1]!=null">
+								<img ng-src="{{rankList[1].headimgurl}}" />
 							</li>
-							<li class="topthree">
-								<img src="img/headUrl.png" />
+							<li class="topthree" ng-if="rankList[2]!=undefined &&rankList[2]!=null">
+								<img ng-src="{{rankList[2].headimgurl}}" />
 							</li>
-							<li class="topfour">
-								<img src="img/headUrl.png" />
+							<li class="topfour" ng-if="rankList[3]!=undefined &&rankList[3]!=null">
+								<img ng-src="{{rankList[3].headimgurl}}" />
 							</li>
 							<li>
 								<a href="#" ng-click="donateRank();">...</a>
@@ -79,8 +81,9 @@
 			</div>
 			<div class="content_03">
 				<div class="project_title">项目详情</div>
-				<div class="project_content"  ng-bind-html="projectInfo.description | to_trusted">
+				<div class="project_content troggle"  ng-bind-html="projectInfo.description | to_trusted">
 				</div>
+				<div class="upordown"><p name="down" onclick="troggle(this, '.project_content');"><span class="opt">展开</span><img src="img/down.png" style="width: 0.3rem;height: 0.2rem;"></p></div>
 			</div>
 			
 			<div class="content_03">
@@ -104,7 +107,10 @@
 			</div>
 			
 			<div class="content_03">
-				<div class="project_title">使用记录</div>
+				<div class="project_title">
+					<span class="project_title_left">使用记录</span>
+					<span class="project_title_right"><a href="#" ng-click="showMore();">查看全部</a></span>
+				</div>
 				<div class="project_content">
 					<ul class="layui-timeline">
 						<li class="layui-timeline-item" ng-repeat="record in useRecords">
@@ -115,8 +121,9 @@
 										<div class="project_record_title01" ng-bind="record.useToProjectName"></div>
 										<div class="project_record_title02">使用资金：<span class="money_default" ng-bind="record.useAmount"></span></div>
 									</div>
-									<div class="project_record_info" ng-bind-html="record.useToProjectDesc | to_trusted">
+									<div class="project_record_info troggle" ng-bind-html="record.useToProjectDesc | to_trusted">
 									</div>
+									<div class="upordown"><p name="down" onclick="troggle(this,'.project_record_info');"><span class="opt">展开</span><img src="img/down.png" style="width: 0.3rem;height: 0.2rem;"></p></div>
 								</div>
 							</div>
 						</li>
