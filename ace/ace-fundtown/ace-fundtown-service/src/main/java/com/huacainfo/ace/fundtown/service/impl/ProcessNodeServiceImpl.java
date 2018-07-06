@@ -9,7 +9,9 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fundtown.dao.ProcessNodeDao;
+import com.huacainfo.ace.fundtown.dao.ProcessNodeResDao;
 import com.huacainfo.ace.fundtown.model.ProcessNode;
+import com.huacainfo.ace.fundtown.model.ProcessNodeRes;
 import com.huacainfo.ace.fundtown.service.ProcessNodeService;
 import com.huacainfo.ace.fundtown.vo.ProcessNodeQVo;
 import com.huacainfo.ace.fundtown.vo.ProcessNodeVo;
@@ -18,9 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service("processNodeService")
 /**
@@ -34,6 +36,8 @@ public class ProcessNodeServiceImpl implements ProcessNodeService {
     private ProcessNodeDao processNodeDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private ProcessNodeResDao processNodeResDao;
 
     /**
      * @throws
@@ -166,6 +170,50 @@ public class ProcessNodeServiceImpl implements ProcessNodeService {
                 String.valueOf(id),
                 String.valueOf(id), "入驻流程节点", userProp);
         return new MessageResponse(0, "入驻流程节点删除完成！");
+    }
+
+    /**
+     * 获取入驻流程节点
+     *
+     * @return
+     */
+    @Override
+    public List<ProcessNode> findNodeList() {
+
+        return processNodeDao.findNodeList();
+    }
+
+    /**
+     * 获取节点文件资源
+     *
+     * @param nodeId 节点ID  fundtown.process_node.id
+     * @return
+     */
+    @Override
+    public Map<String, List<ProcessNodeRes>> getNodeResList(String nodeId) {
+
+        List<ProcessNodeRes> allList = processNodeResDao.findByNodeId(nodeId);
+        if (!CollectionUtils.isEmpty(allList)) {
+            Map<String, List<ProcessNodeRes>> rtnMap = new HashMap<>();
+            List<ProcessNodeRes> temp;
+            String categoryKey;
+            for (ProcessNodeRes res : allList) {
+                categoryKey = res.getCategory();
+                if (rtnMap.containsKey(categoryKey)) {
+                    temp = rtnMap.get(categoryKey);
+                    temp.add(res);
+                } else {
+                    temp = new LinkedList<>();
+                    temp.add(res);
+                }
+
+                rtnMap.put(categoryKey, temp);
+            }
+
+            return rtnMap;
+        }
+
+        return new HashMap<>();
     }
 
 }

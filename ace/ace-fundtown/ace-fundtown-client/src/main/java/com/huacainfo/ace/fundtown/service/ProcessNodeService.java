@@ -5,8 +5,12 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fundtown.model.ProcessNode;
+import com.huacainfo.ace.fundtown.model.ProcessNodeRes;
 import com.huacainfo.ace.fundtown.vo.ProcessNodeQVo;
 import com.huacainfo.ace.fundtown.vo.ProcessNodeVo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -82,4 +86,18 @@ public interface ProcessNodeService {
      */
     MessageResponse deleteProcessNodeByProcessNodeId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 获取入驻流程节点
+     *
+     * @return
+     */
+    List<ProcessNode> findNodeList();
+
+    /**
+     * 获取节点文件资源
+     *
+     * @param nodeId 节点ID  fundtown.process_node.id
+     * @return
+     */
+    Map<String, List<ProcessNodeRes>> getNodeResList(String nodeId);
 }

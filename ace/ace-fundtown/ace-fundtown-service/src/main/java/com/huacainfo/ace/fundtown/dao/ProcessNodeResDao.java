@@ -32,4 +32,5 @@ public interface ProcessNodeResDao {
 
     int isExit(ProcessNodeRes record);
 
+    List<ProcessNodeRes> findByNodeId(String nodeId);
 }

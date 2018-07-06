@@ -259,4 +259,12 @@
         where curNodeName = #{curNodeName,jdbcType=VARCHAR}
           and id != #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="findNodeList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from process_node
+        where 1=1
+        order by sequence
+    </select>
 </mapper>

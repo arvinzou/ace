@@ -32,4 +32,5 @@ public interface VipPublicityDao {
 
     int isExit(VipPublicity record);
 
+    VipPublicityVo findByDeptId(String deptId);
 }

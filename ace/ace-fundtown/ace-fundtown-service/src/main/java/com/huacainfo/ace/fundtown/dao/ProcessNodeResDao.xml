@@ -196,4 +196,12 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="findByNodeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from process_node_res
+        where nodeId = #{nodeId,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

@@ -11,6 +11,9 @@ public class VipPublicity {
 
     private String belongDeptName;
 
+    /**
+     * 法定代表/执行事务合伙人/委派代表
+     */
     private String delegate;
 
     private String creditNo;
