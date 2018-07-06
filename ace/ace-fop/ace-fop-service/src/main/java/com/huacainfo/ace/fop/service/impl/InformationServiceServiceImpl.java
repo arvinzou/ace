@@ -138,7 +138,9 @@ public class InformationServiceServiceImpl implements InformationServiceService 
                 condition.setRelationId(fc.getId());
             }
         } else {
-            condition.setStatus("2");
+            if (!condition.getModules().equals(ModulesType.BRAND_PROMOTION)) {
+                condition.setStatus("2");
+            }
         }
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("list", this.informationServiceDao.findList(condition, (page - 1) * limit, limit, orderBy));
