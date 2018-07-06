@@ -51,7 +51,7 @@ input,textarea,button{
 	width: 50%;
 	margin-left: 25%;
 	margin-right: 25%;
-	margin-top: 50px;
+    margin-top: 18px;
 }
 .regist_form_title{
 	width: 100%;
@@ -115,8 +115,8 @@ input,textarea,button{
 }
 .form_text{
 	width: 90%;
-	height: 30px;
-	margin-bottom: 30px;
+    height: 46px;
+    margin-bottom: 20px;
 	margin-left: 10px;
 
 }
@@ -148,9 +148,10 @@ input,textarea,button{
 }
 .form_text01 {
 	width: 90%;
-	height: 30px;
+    height: 46px;
 	margin-bottom: 30px;
 	margin-left: 10px;
+    margin-top: 46px;
 }
 .form_text01 input{
 	width: 70%;
