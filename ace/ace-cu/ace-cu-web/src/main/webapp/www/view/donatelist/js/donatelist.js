@@ -23,10 +23,11 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/report/donateRank",
         type:"post",
         async:false,
-        data:{start:0, limit: 999999, projectId: primaryId},
+        data:{start:0, limit: 999999, projectId: primaryId, needOpenId: "1"},
         success:function(result){
             if(result.status == 0) {
-                $scope.rankList = result.data;
+                $scope.rankList = result.data.list;
+                $scope.own = result.data.own;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }

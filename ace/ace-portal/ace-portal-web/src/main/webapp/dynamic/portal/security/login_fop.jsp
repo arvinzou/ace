@@ -61,7 +61,6 @@
     <!-- BEGIN THEME LAYOUT STYLES -->
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
-
     <style>
         .login .logo {
             margin: 0px auto 0;
@@ -74,6 +73,7 @@
         .login .content {
             margin: 10px auto;
         }
+
         a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
             -webkit-border-radius: 0 !important;
             -moz-border-radius: 0 !important;
@@ -90,27 +90,47 @@
             margin-right: -30px;
 
         }
-        .form-actions{
+
+        .form-actions {
             margin-bottom: 15px;
         }
+
         .login .content .form-actions .rememberme {
             margin-top: 0px;
             display: inline-block;
         }
+
         .mt-checkbox, .mt-radio {
             margin-bottom: 0px;
         }
+
         .form-group-captcha {
             margin-bottom: 5px;
         }
+
         .content {
             border: 1px solid #eee;
         }
+
         .progress-bar-box {
-            text-align:center;
+            text-align: center;
         }
 
-        @font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_1451959379_8626566.eot);src:url(//at.alicdn.com/t/font_1451959379_8626566.eot?#iefix) format('embedded-opentype'),url(//at.alicdn.com/t/font_1451959379_8626566.woff) format('woff'),url(//at.alicdn.com/t/font_1451959379_8626566.ttf) format('truetype'),url(//at.alicdn.com/t/font_1451959379_8626566.svg#iconfont) format('svg')}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}
+        @font-face {
+            font-family: iconfont;
+            src: url(//at.alicdn.com/t/font_1451959379_8626566.eot);
+            src: url(//at.alicdn.com/t/font_1451959379_8626566.eot?#iefix) format('embedded-opentype'), url(//at.alicdn.com/t/font_1451959379_8626566.woff) format('woff'), url(//at.alicdn.com/t/font_1451959379_8626566.ttf) format('truetype'), url(//at.alicdn.com/t/font_1451959379_8626566.svg#iconfont) format('svg')
+        }
+
+        .iconfont {
+            font-family: iconfont !important;
+            font-size: 16px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: .2px;
+            -moz-osx-font-smoothing: grayscale
+        }
+
         .login-box {
             width: 300px;
             color: #6c6c6c;
@@ -118,6 +138,7 @@
             position: relative;
             margin: 0 auto;
         }
+
         .login-switch {
             width: 52px;
             position: absolute;
@@ -130,44 +151,67 @@
             cursor: pointer;
             color: #1A56A8;
         }
+
         .iconfont {
-            font-family: iconfont!important;
+            font-family: iconfont !important;
             font-size: 16px;
             font-style: normal;
             -webkit-font-smoothing: antialiased;
             -webkit-text-stroke-width: .2px;
             -moz-osx-font-smoothing: grayscale;
         }
+
         *, :after, :before {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
+
         user agent stylesheet
         i, cite, em, var, address, dfn {
             font-style: italic;
         }
-        .qrcode{
-            max-width:250px;
-            padding-bottom:40px;
+
+        .qrcode {
+            max-width: 250px;
+            padding-bottom: 40px;
         }
-        *{
+
+        html {
+            height: 100%;
+        }
+
+        * {
             margin: 0;
+
         }
-        body{
+
+        body {
             width: 100%;
+            height: 100%;
         }
-        .login_index{
+
+        .login_index {
             width: 100%;
+            min-height: 100%;
+            position: relative;
+        }
+
+        .fop_head {
+            width: 100%;
+            background-color: #fff;
+            height: 100px;
+
+            position: absolute;
+            top: 0;
+
         }
 
         .login_logo_temp {
             max-width: 1200px;
             min-width: 900px;
-            /*height: 100px;*/
             padding-top: 10px;
             margin: 0 auto;
-            background-color: #fff;
         }
 
         .login_logo_temp > div {
@@ -178,7 +222,7 @@
             width: 80px;
             height: 80px;
             background-image: url("image/logo.png");
-            background-size:100% 100%;
+            background-size: 100% 100%;
         }
 
         .login_logo_temp .logo_title {
@@ -200,7 +244,8 @@
             height: 30px;
             line-height: 30px;
         }
-        .login_body{
+
+        .login_body {
             min-width: 100%;
             background: -moz-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
             background: -webkit-gradient(linear, left top, left bottom, from(#1A56A8), color-stop(36%, #1A56A8), to(#6FDFF6));
@@ -208,11 +253,12 @@
             background: -o-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
             background: -ms-linear-gradient(left, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
             background: linear-gradient(to right, #1A56A8 0%, #1A56A8 36%, #6FDFF6 100%);
-            background-size:100% 100%;
-            min-height: 750px;
-           /* position: absolute;*/
-           /* top: 100px;*/
-            /*bottom: 150px;*/
+            width: 100%;
+            min-height: 700px;
+            max-height: 100%;
+            padding: 100px 0px 150px;
+            box-sizing: border-box;
+
         }
 
         .login_body .login_body_temp {
@@ -224,32 +270,36 @@
             background-size: auto 100%;
         }
 
-        .login_footer{
-            height: 60px;
+        .login_footer {
+            height: 150px;
             width: 100%;
-           /* position: absolute;
-            bottom: 0;*/
+            position: absolute;
+            bottom: 0;
             color: #657180;
             text-align: center;
-            line-height: 60px;
+            line-height: 150px;
+            background-color: #fff;
         }
-        .login_panel{
+
+        .login_panel {
             float: right;
             width: 350px;
             min-height: 400px;
             max-height: 600px;
             background-color: #fff;
-            margin-top: 100px;
         }
-        .login_form{
+
+        .login_form {
             width: 80%;
             margin-left: 10%;
             margin-top: 40px;
         }
-        a{
-            text-decoration:none;
+
+        a {
+            text-decoration: none;
         }
-        .login{
+
+        .login {
             width: 100%;
             height: 35px;
             background-color: #1A56A8;
@@ -262,7 +312,10 @@
             background-color: #1A56A8 !important;
             border-color: #1A56A8 !important;
         }
+
+
     </style>
+
 </head>
 <!-- END HEAD -->
 <script type="text/javascript">
@@ -280,13 +333,15 @@
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
 <div class="login_index">
-    <div class="login_logo_temp">
-        <div class="logo_img">
+    <div class="fop_head">
+        <div class="login_logo_temp">
+            <div class="logo_img">
 
-        </div>
-        <div class="logo_title">
-            <div class="title">常德市非公有制经济公共服务平台</div>
-            <div class="sub_title">Chang De city non-public economic public service platform</div>
+            </div>
+            <div class="logo_title">
+                <div class="title">常德市非公有制经济公共服务平台</div>
+                <div class="sub_title">Chang De city non-public economic public service platform</div>
+            </div>
         </div>
     </div>
     <div class="login_body">
@@ -479,7 +534,8 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/login.min.js"
         type="text/javascript"></script>
-
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"
+        type="text/javascript"></script>
 
 
 
@@ -629,10 +685,6 @@
         href: ""
     });
 
-</script>
-<script type="text/javascript">
-
-    !function(a,b,c){function d(a){var c="default";a.self_redirect===!0?c="true":a.self_redirect===!1&&(c="false");var d=b.createElement("iframe"),e="https://open.weixin.qq.com/connect/qrconnect?appid="+a.appid+"&scope="+a.scope+"&redirect_uri="+a.redirect_uri+"&state="+a.state+"&login_type=jssdk&self_redirect="+c;e+=a.style?"&style="+a.style:"",e+=a.href?"&href="+a.href:"",d.src=e,d.frameBorder="0",d.allowTransparency="true",d.scrolling="no",d.width="300px",d.height="400px";var f=b.getElementById(a.id);f.innerHTML="",f.appendChild(d)}a.WxLogin=d}(window,document);
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->

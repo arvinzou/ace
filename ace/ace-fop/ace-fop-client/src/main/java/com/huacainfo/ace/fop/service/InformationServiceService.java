@@ -31,7 +31,7 @@ public interface InformationServiceService {
      */
     PageResult<InformationServiceVo> findInformationServiceList(InformationServiceQVo condition, int start, int limit, String orderBy) throws Exception;
 
-    ResultResponse InformationServiceList(InformationServiceQVo condition, int page, int limit, String orderBy) throws Exception;
+    ResultResponse InformationServiceList(InformationServiceQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception;
 
     /**
      * @throws

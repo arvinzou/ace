@@ -15,6 +15,7 @@ import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopFinanceProjectDao;
+import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.model.FopCompany;
 import com.huacainfo.ace.fop.model.FopFinanceProject;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
@@ -106,8 +107,25 @@ public class FopFinanceProjectServiceImpl implements FopFinanceProjectService {
      * @version: 2018-05-02
      */
     @Override
-    public ResultResponse findFinanceProjectList(FopFinanceProjectQVo condition, int page, int limit, String orderBy) throws Exception {
+    public ResultResponse findFinanceProjectList(FopFinanceProjectQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
+        if (condition.getIself()) {
+            SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+            UsersVo user = singleResult.getValue();
+            if (null == user) {
+                return new ResultResponse(1, "没有注册");
+            }
+            if (CommonUtils.isBlank(user.getDepartmentId())) {
+                return new ResultResponse(1, "账户没有绑定企业！");
+            }
+            FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+            if (null == fc) {
+                return new ResultResponse(1, "账户没有绑定企业！");
+            }
+            condition.setCompanyId(fc.getId());
+        } else {
+            condition.setStatus("2");
+        }
         map.put("list", this.fopFinanceProjectDao.findListVo(condition, (page - 1) * limit, limit, orderBy));
         map.put("total", this.fopFinanceProjectDao.findCount(condition));
         ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "融资列表", map);

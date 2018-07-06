@@ -68,7 +68,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findInformationServiceListDo",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, modules: "2", relationId: userId},
+        data: {limit: pageSize, page: currentPage, modules: "2", iself: true},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -120,7 +120,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, status: status,modules: "2", relationId: userId},
+            data: {limit: pageSize, page: currentPage, status: status, modules: "2", iself: true},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -152,7 +152,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status, modules: "2", relationId: userId},
+            data: {limit: pageSize, page: 1, status: status, modules: "2", iself: true},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
@@ -379,6 +379,7 @@ app.controller(ngControllerName,function($scope){
     $scope.release = function(){
         var title = $("input[name='name']").val();
         var content = $("textarea[name='pcontent']").val();
+        var remark = $("textarea[name='remark']").val();
         if(title == '' || title == undefined){
             layer.alert("标题不能为空！", {
                 icon: 5,
@@ -403,11 +404,18 @@ app.controller(ngControllerName,function($scope){
             });
             return;
         }
+        if (remark == '' || remark == undefined) {
+            layer.alert("产品简介不能为空！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
         $.ajax({
             url: "/fop/www/insertInformationServiceDo",
             type:"post",
             async:false,
-            data:{title: title, content: content, fileUrl: coverImg, modules: "2"},
+            data: {title: title, content: content, fileUrl: coverImg, modules: "2", remark: remark},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);

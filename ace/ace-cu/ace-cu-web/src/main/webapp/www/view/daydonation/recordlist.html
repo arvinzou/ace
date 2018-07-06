@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>使用记录</title>
+		<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" />
+		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../js/init-rem.js"></script>
+		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/daydonation.css" />
+		<script type="text/javascript" src="js/recordlist.js"></script>
+	</head>
+
+	<body>
+		<div class="record_box">
+			<div class="record_more">
+				<div class="project_title">使用记录</div>
+				<div class="project_content">
+					<ul class="layui-timeline">
+						<li class="layui-timeline-item" ng-repeat="record in useRecords">
+							<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+							<div class="layui-timeline-content layui-text">
+								<div class="layui-timeline-title">
+									<div class="project_record_title">
+										<div class="project_record_title01" ng-bind="record.useToProjectName"></div>
+										<div class="project_record_title02">使用资金：<span class="money_default" ng-bind="record.useAmount"></span></div>
+									</div>
+									<div class="project_record_info" ng-bind-html="record.useToProjectDesc | to_trusted">
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

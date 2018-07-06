@@ -30,7 +30,7 @@ public interface FopProjectService {
      */
     public abstract PageResult<FopProjectVo> findFopProjectList(FopProjectQVo condition, int start, int limit, String orderBy) throws Exception;
 
-    public abstract ResultResponse findProjectList(FopProjectQVo condition, int page, int limit, String orderBy) throws Exception;
+    public abstract ResultResponse findProjectList(FopProjectQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception;
 
     /**
      * @throws

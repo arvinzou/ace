@@ -97,9 +97,10 @@ ul,li{
 }
 .donate_list{
 	width: 100%;
-	height: 1.6rem;
+	height: 1.2rem;
 	font-size: 0.35rem;
 	color: #999999;
+	overflow: hidden;
 }
 .donate_list li{
 	width: 100%;
@@ -152,21 +153,25 @@ ul,li{
 	float: left;
 	font-size: 0.35rem;
 	color: #666666;
-	margin-top: 0.1rem;
+	margin-top: 0.3rem;
 }
 .donate_rank_list{
-	width: 5.5rem;
+	width: 5.2rem;
 	height: 1rem;
 	line-height: 1rem;
 	float: left;
 	margin-top: 0.3rem;
+	padding-left: 0.3rem;
 }
 .donate_rank_list li{
-	width: 1.2rem;
-	height: 1.2rem;
+	width: 1rem;
+	height: 1rem;
 	display: block;
 	float: left;
 	border-radius: 50%;
+	text-align: center;
+	font-size: 0.5rem;
+	color: #E2E2E2;
 }
 .topone{
 	background: url(../img/topone.png) no-repeat;
@@ -208,6 +213,8 @@ ul,li{
 	background-color: #FFFFFF;
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
+	margin-bottom: 0.3rem;
+	padding-top: 0.2rem;
 }
 .project_title{
 	width: 8.5rem;
@@ -292,4 +299,123 @@ ul,li{
 	font-size: 0.45rem;
 	font-weight: bold;
 	color: #333333;
+}
+.troggle{
+	height: 1.6rem;
+	overflow: hidden;
+}
+.upordown{
+	width: 100%;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	text-align: center;
+}
+.project_title_left{
+	width: 5rem;
+	height: 100%;
+	display: block;
+	float: left;
+}
+.project_title_right{
+	width: 3rem;
+	height: 100%;
+	display: block;
+	float: left;
+	color: #666666;
+	font-size: 0.3rem;
+	text-align: right;
+}
+.project_title_right a {
+	color: #666666 !important;
+}
+.record_box{
+	width: 10rem;
+}
+.record_more{
+	width: 9rem;
+	margin: 0 auto;
+	padding-top: 0.5rem;
+}
+.layui-m-layer1 .layui-m-layerchild{
+	width: 9rem!important;
+	height: 12rem!important;
+}
+
+/**
+分享页面样式
+ */
+.share_box{
+	width: 9rem;
+	height: 12rem;
+	margin: 0 auto;
+	background: url(../img/layer_bg.png) no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+}
+.head_img_box{
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	position: relative;
+}
+.head_img_box img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	position: absolute;
+	left: 3.5rem;
+	top: 3rem;
+}
+.dua_user_info{
+	width: 100%;
+	height: 1.5rem;
+	line-height: 0.8rem;
+	text-align: center;
+	margin-top: 3.5rem;
+	font-size: 0.4rem;
+	color: #333333;
+}
+.dua_statics{
+	width: 6rem;
+	height: 1.5rem;
+	font-size: 0.4rem;
+	color: #999999;
+	margin-left: 1.5rem;
+}
+.dua_statics01{
+	width: 3rem;
+	height: 100%;
+	float: left;
+	display: block;
+	text-align: center;
+	line-height: 0.8rem;
+}
+.dua_number{
+	font-size: 0.6rem;
+	color: #EA4436;
+	font-weight: bold;
+}
+.dua_footer{
+	width: 8rem;
+	height: 2rem;
+	position: absolute;
+	bottom: 0.5rem;
+}
+.dua_left{
+	width: 2rem;
+	height: 2rem;
+	float: left;
+}
+.dua_left img{
+	width: 100%;
+	height: 100%;
+}
+.dua_right{
+	width: 5rem;
+	height: 2rem;
+	float: left;
+	padding-left: 0.5rem;
+	font-size: 0.4rem;
+	color: #999999;
+	padding-top: 0.5rem;
 }

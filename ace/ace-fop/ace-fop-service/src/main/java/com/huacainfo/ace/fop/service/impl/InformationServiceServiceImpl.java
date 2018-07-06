@@ -117,7 +117,31 @@ public class InformationServiceServiceImpl implements InformationServiceService 
      * @throws Exception
      */
     @Override
-    public ResultResponse InformationServiceList(InformationServiceQVo condition, int page, int limit, String orderBy) throws Exception {
+    public ResultResponse InformationServiceList(InformationServiceQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception {
+        if (condition.getIself()) {
+            SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+            UsersVo user = singleResult.getValue();
+            if (null == user) {
+                return new ResultResponse(1, "没有注册");
+            }
+            if (CommonUtils.isBlank(user.getDepartmentId())) {
+                return new ResultResponse(1, "账户没有绑定企业！");
+            }
+            FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+            FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+            if (null == fc) {
+                if (null == fa) {
+                    return new ResultResponse(1, "账户没有绑定企业！");
+                }
+                condition.setRelationId(fa.getId());
+            } else {
+                condition.setRelationId(fc.getId());
+            }
+        } else {
+            if (!condition.getModules().equals(ModulesType.BRAND_PROMOTION) && !condition.getModules().equals(ModulesType.POLICY_DOCUMENTS)) {
+                condition.setStatus("2");
+            }
+        }
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("list", this.informationServiceDao.findList(condition, (page - 1) * limit, limit, orderBy));
         map.put("total", this.informationServiceDao.findCount(condition));

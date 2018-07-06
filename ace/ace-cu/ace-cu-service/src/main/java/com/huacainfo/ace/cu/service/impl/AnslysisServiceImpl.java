@@ -1,5 +1,6 @@
 package com.huacainfo.ace.cu.service.impl;
 
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.PropertyUtil;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,24 +61,77 @@ public class AnslysisServiceImpl implements AnalysisService {
     /**
      * 慈善榜单
      *
-     * @param projectId
-     * @param start
-     * @param limit
+     * @param projectId 项目ID
+     * @param openId    微信openid
+     * @param start     页码
+     * @param limit     页数
      * @param orderBy
      * @return
      */
     @Override
-    public List<Map<String, Object>> donateRank(String projectId, int start, int limit, String orderBy) {
+    public List<Map<String, Object>> donateRank(String projectId, String openId, int start, int limit, String orderBy) {
         ReportDao dao = (ReportDao) SpringUtils.getBean("donateRank");
 
         Map<String, Object> condition = new HashMap<>();
-        condition.put("projectId", projectId);
         condition.put("start", start);
         condition.put("limit", limit);
         condition.put("orderBy", orderBy);
         condition.put("appid", PropertyUtil.getProperty("appid"));
+        if (StringUtil.isNotEmpty(projectId)) {
+            condition.put("projectId", projectId);
+        }
+        if (StringUtil.isNotEmpty(openId)) {
+            condition.put("openId", openId);
+        }
+
         List<Map<String, Object>> mapList = dao.query(condition);
         return mapList;
+    }
+
+    /**
+     * 慈善榜单 - 2
+     *
+     * @param projectId
+     * @param needOpenId
+     * @param openId
+     * @param start
+     * @param limit
+     * @param orderBy
+     */
+    @Override
+    public Map<String, Object> donateRank(String projectId, String needOpenId, String openId,
+                                          int start, int limit, String orderBy) {
+        Map<String, Object> respMap = new HashMap<>();
+
+
+        if ("1".equals(needOpenId)) {
+            //数据查询
+            List<Map<String, Object>> list = donateRank(projectId, "", start, limit, orderBy);
+            //筛选过滤
+            if (StringUtil.isNotEmpty(openId)) {
+                Map<String, Object> ownData = new HashMap<>();
+                List<Map<String, Object>> removeList = new ArrayList<>();
+                for (Map<String, Object> map : list) {
+                    if (openId.equals(String.valueOf(map.get("openid")))) {
+                        ownData.putAll(map);
+//                        removeList.add(map);
+                    }
+                }
+//                list.removeAll(removeList);
+                //第一次查询集合不包含自己时，查询指定openid一次看是否有相关结果
+                if (ownData.size() == 0) {
+                    List<Map<String, Object>> ownList = donateRank(projectId, openId, start, limit, orderBy);
+                    ownData = CollectionUtils.isEmpty(ownList) ? null : ownList.get(0);
+                }
+                respMap.put("own", ownData);
+                respMap.put("list", list);
+            }
+        } else {
+            respMap.put("own", null);
+            respMap.put("list", null);
+        }
+
+        return respMap;
     }
 
 

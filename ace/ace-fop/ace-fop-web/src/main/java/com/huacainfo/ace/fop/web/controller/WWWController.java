@@ -190,7 +190,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/findFinanceProjectList")
     @ResponseBody
     public ResultResponse findFinanceProjectList(FopFinanceProjectQVo condition, PageParamNoChangeSord page) throws Exception {
-        ResultResponse rst = this.fopFinanceProjectService.findFinanceProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        ResultResponse rst = this.fopFinanceProjectService.findFinanceProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
         return rst;
     }
 
@@ -267,7 +267,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/findLoanProductList")
     @ResponseBody
     public ResultResponse findLoanProductList(FopLoanProductQVo condition, PageParamNoChangeSord page) throws Exception {
-        ResultResponse rst = this.fopLoanProductService.findLoanProductList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        ResultResponse rst = this.fopLoanProductService.findLoanProductList(condition, page.getPage(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
         return rst;
     }
 
@@ -356,7 +356,7 @@ public class WWWController extends FopBaseController {
         if ("asc".equals(page.getSord())) {
             page.setOrderBy("releaseDate");
         }
-        ResultResponse rst = this.fopGeHelpService.findGeHelpList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        ResultResponse rst = this.fopGeHelpService.findGeHelpList(condition, page.getPage(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
         return rst;
     }
 
@@ -447,7 +447,7 @@ public class WWWController extends FopBaseController {
         if ("asc".equals(page.getSord())) {
             page.setOrderBy("releaseDate");
         }
-        ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
         return rst;
     }
 
@@ -470,7 +470,7 @@ public class WWWController extends FopBaseController {
     @RequestMapping(value = "/findCommentList")
     @ResponseBody
     public ResultResponse findCommentList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
-        ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        ResultResponse rst = this.fopQuestionService.findQuestionList(condition, page.getPage(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
         return rst;
     }
 
@@ -588,7 +588,7 @@ public class WWWController extends FopBaseController {
         if ("asc".equals(page.getSord())) {
             page.setOrderBy("releaseDate");
         }
-        ResultResponse rst = this.fopProjectService.findProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        ResultResponse rst = this.fopProjectService.findProjectList(condition, page.getPage(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
         return rst;
     }
 
@@ -667,9 +667,9 @@ public class WWWController extends FopBaseController {
     @ResponseBody
     public MessageResponse signUp(String name, String phoneNumber, String isCompany, String code) throws Exception {
         String rcode = (String) this.getRequest().getSession().getAttribute("j_captcha_cmcc_" + phoneNumber);
-//        if (StringUtil.isEmpty(code)&&code.equals(rcode)) {
-//            return new MessageResponse(ResultCode.FAIL, "验证码输入有误");
-//        }
+        if (StringUtil.isEmpty(code) && code.equals(rcode)) {
+            return new MessageResponse(ResultCode.FAIL, "验证码输入有误");
+        }
         if (!"2".equals(isCompany)) {
             return this.fopCompanyService.insertCompany(name, phoneNumber, isCompany);
         }
@@ -728,7 +728,7 @@ public class WWWController extends FopBaseController {
         if ("asc".equals(page.getSord())) {
             page.setOrderBy("releaseDate");
         }
-        ResultResponse rst = this.informationServiceService.InformationServiceList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+        ResultResponse rst = this.informationServiceService.InformationServiceList(condition, page.getPage(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
         return rst;
     }
 
@@ -857,11 +857,11 @@ public class WWWController extends FopBaseController {
             return new MessageResponse(ResultCode.FAIL, "id不能为空");
         }
         fopAssociation.setId(fopAssMember.getAssId());
+        fopAssociation.setPseronId(fopAssMember.getPname());
         MessageResponse result = fopAssociationService.updateFopAssociation(fopAssociation, this.getCurUserProp());
         if (ResultCode.FAIL == result.getStatus()) {
             throw new CustomException(result.getErrorMessage());
         }
-
          /*更新用户信息*/
         Users user = new Users();
         user.setUserId(this.getCurUserProp().getUserId());

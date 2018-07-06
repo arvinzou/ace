@@ -12,8 +12,8 @@ app.controller(ngControllerName,function($scope) {
             typeDiv[i].checked  = false;
             $(typeDiv[i]).children("div[name='check']").addClass("default");
         }
-        ($event.target).checked = true;
-        $($event.target).children("div[name='check']").removeClass("default");
+        ($event.currentTarget).checked = true;
+        $($event.currentTarget).children("div[name='check']").removeClass("default");
         console.log(param);
         if (param === 1) {
             $("#name").text("企业名称");
@@ -107,11 +107,28 @@ app.controller(ngControllerName,function($scope) {
             });
         }else{
             $.post("/fop/www/sms/sendCode",{mobile:mobile},function(result){
-                console.log(result);
-                layer.alert(result.info, {
-                    icon: 1,
-                    skin: 'myskin'
-                });
+                if(result.status == 0){
+                    console.log(result);
+                    layer.alert(result.info, {
+                        icon: 1,
+                        skin: 'myskin'
+                    });
+                }else{
+                    if(!result.inifo){
+                        layer.alert(result.info, {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
+                    }else{
+                        layer.alert(result.errorMessage, {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
+                    }
+
+                    return;
+                }
+
             });
             settime();
         }

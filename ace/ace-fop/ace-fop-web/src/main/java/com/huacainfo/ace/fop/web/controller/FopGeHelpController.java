@@ -12,8 +12,6 @@ import com.huacainfo.ace.fop.model.FopGeHelp;
 import com.huacainfo.ace.fop.service.FopGeHelpService;
 import com.huacainfo.ace.fop.vo.FopGeHelpQVo;
 import com.huacainfo.ace.fop.vo.FopGeHelpVo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +28,6 @@ public class FopGeHelpController extends FopBaseController {
 
 
     private static final long serialVersionUID = 1L;
-    Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private FopGeHelpService fopGeHelpService;
 

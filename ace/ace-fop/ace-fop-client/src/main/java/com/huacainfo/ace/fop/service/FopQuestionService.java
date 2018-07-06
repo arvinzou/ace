@@ -33,7 +33,7 @@ public interface FopQuestionService {
      */
     public abstract PageResult<FopQuestionVo> findFopQuestionList(FopQuestionQVo condition, int start, int limit, String orderBy) throws Exception;
 
-    public abstract ResultResponse findQuestionList(FopQuestionQVo condition, int page, int limit, String orderBy) throws Exception;
+    public abstract ResultResponse findQuestionList(FopQuestionQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception;
 
     /**
      * @throws

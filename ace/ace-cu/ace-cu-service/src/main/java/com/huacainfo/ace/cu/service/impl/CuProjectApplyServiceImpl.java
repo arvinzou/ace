@@ -11,6 +11,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
+import com.huacainfo.ace.cu.common.constant.ProcessRecordConstant;
 import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuProjectApplyDao;
 import com.huacainfo.ace.cu.dao.CuProjectApplyResDao;
@@ -18,8 +19,8 @@ import com.huacainfo.ace.cu.dao.CuProjectDao;
 import com.huacainfo.ace.cu.model.CuProject;
 import com.huacainfo.ace.cu.model.CuProjectApply;
 import com.huacainfo.ace.cu.model.CuProjectApplyRes;
+import com.huacainfo.ace.cu.service.CuProcessRecordService;
 import com.huacainfo.ace.cu.service.CuProjectApplyService;
-import com.huacainfo.ace.cu.service.CuProjectService;
 import com.huacainfo.ace.cu.service.CuUserService;
 import com.huacainfo.ace.cu.vo.CuProjectApplyQVo;
 import com.huacainfo.ace.cu.vo.CuProjectApplyVo;
@@ -50,9 +51,9 @@ public class CuProjectApplyServiceImpl implements CuProjectApplyService {
     @Autowired
     private CuProjectApplyResDao cuProjectApplyResDao;
     @Autowired
-    private CuProjectService cuProjectService;
-    @Autowired
     private CuProjectDao cuProjectDao;
+    @Autowired
+    private CuProcessRecordService cuProcessRecordService;
 
     /**
      * @throws
@@ -265,8 +266,17 @@ public class CuProjectApplyServiceImpl implements CuProjectApplyService {
             res.setLastModifyDate(DateUtil.getNowDate());
             cuProjectApplyResDao.insertSelective(res);
         }
+        //流程记录
+        processRecord(vo);
 
         return new ResultResponse(ResultCode.SUCCESS, "添加成功", vo);
+    }
+
+    private ResultResponse processRecord(CuProjectApplyVo vo) {
+
+        return cuProcessRecordService.insertRecord(vo.getApplyUserId(), vo.getApplyOpenId(), vo.getId(),
+                ProcessRecordConstant.INDEX_0_SUBMIT, ProcessRecordConstant.DESC_0_SUBMIT,
+                DateUtil.getNowDate());
     }
 
     /**

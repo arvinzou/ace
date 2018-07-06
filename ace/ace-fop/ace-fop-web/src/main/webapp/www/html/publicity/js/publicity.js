@@ -5,7 +5,7 @@ var ngAppName = "angularjsApp";
 var currentPage = 1;
 //angularjs Controller初始化
 var app =angular.module(ngAppName, []);
-var isCompany = null;
+var isCompany = 1;
 var companyProperty = null;
 //企业类型
 var data = [{
@@ -159,7 +159,7 @@ app.controller(ngControllerName,function($scope){
             $(".search_filter2").hide();
         }else if(memberType == "4"){
             isCompany = "4"
-            $(".search_filter2").show();
+            $(".search_filter2").hide();
         }
         console.log("地区代码：",areaCode);
         $.ajax({

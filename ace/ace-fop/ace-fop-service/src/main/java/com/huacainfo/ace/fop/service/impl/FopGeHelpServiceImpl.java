@@ -112,8 +112,30 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
     }
 
     @Override
-    public ResultResponse findGeHelpList(FopGeHelpQVo condition, int page, int limit, String orderBy) throws Exception {
+    public ResultResponse findGeHelpList(FopGeHelpQVo condition, int page, int limit, String orderBy, UserProp userProp) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
+        if (condition.getIself()) {
+            SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
+            UsersVo user = singleResult.getValue();
+            if (null == user) {
+                return new ResultResponse(1, "没有注册");
+            }
+            if (CommonUtils.isBlank(user.getDepartmentId())) {
+                return new ResultResponse(1, "账户没有绑定企业！");
+            }
+            FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+            FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+            if (null == fc) {
+                if (null == fa) {
+                    return new ResultResponse(1, "账户没有绑定企业！");
+                }
+                condition.setRequestId(fa.getId());
+            } else {
+                condition.setRequestId(fc.getId());
+            }
+        } else {
+            condition.setStatus("2");
+        }
         map.put("list", this.fopGeHelpDao.findList(condition, (page - 1) * limit, limit, orderBy));
         map.put("total", this.fopGeHelpDao.findCount(condition));
         ResultResponse rst = new ResultResponse(ResultCode.SUCCESS, "政企服务列表", map);
@@ -439,11 +461,12 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         return new MessageResponse(ResultCode.SUCCESS, "发布成功");
     }
 
-    private void sendMessageNotice(FopGeHelp fopGeHelp, String auditResult, String auditOpinion) {
+    private void sendMessageNotice(FopGeHelp obj, String auditResult, String auditOpinion) {
         try {
-            messageService.geHelpAuditMessage(fopGeHelp, auditResult, auditOpinion);
+            ResultResponse response = messageService.geHelpAuditMessage(obj, auditResult, auditOpinion);
+            logger.debug("政企服务" + "审核消息发送结果[" + obj.getId() + "]:" + response.getInfo());
         } catch (Exception e) {
-            logger.error("政企服务审核消息发送异常[" + fopGeHelp.getId() + "]：{}", e);
+            logger.error("政企服务" + "审核消息发送异常[" + obj.getId() + "]：{}", e);
         }
     }
 

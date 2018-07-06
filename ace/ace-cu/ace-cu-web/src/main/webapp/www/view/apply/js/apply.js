@@ -7,6 +7,7 @@ var coverUrl01 = null;
 var coverUrl02 = null;
 var coverUrl03 = null;
 var coverUrl04 = null;
+var coverUrl05 = null;
 app.controller(ngControllerName,function($scope){
 	var uploader1 = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
@@ -160,12 +161,49 @@ app.controller(ngControllerName,function($scope){
             }
         });
         uploader4.init();
-        
+
+    var uploader5 = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'handIdentity',
+        url: '/portal/www/upload.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        resize: {
+            width: 1024,
+            height: 1024,
+            crop: true,
+            quality: 60,
+            preserve_headers: false
+        },
+        filters: {
+            max_file_size: '2048mb',
+            mime_types: [
+                /* {title: "Image files", extensions: "jpg,gif,png,jpeg"}*/
+            ]
+        },
+        init: {
+            FileFiltered: function (up, files) {
+                showUploadText('.picture_05 img', '.text_05');
+                up.start();
+                return false;
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".progress_05").html("开始上传（" + r + "%）")
+            },
+            FileUploaded: function (uploader, file, responseObject) {
+                var rst = JSON.parse(responseObject.response);
+                viewCover(rst.file_path, '.container_05','.picture_05 img', '.text_05');
+                coverUrl05 = rst.file_path;
+            }
+        }
+    });
+    uploader5.init();
         /**
          * 发起申请
          */
 	$scope.applyProject = function(){
-		var realName = $("input[name='realName']").val();
+        var realName = $("input[name='realName']").val();
 		var idCard = $("input[name='idCard']").val();
 		var phoneNum = $("input[name='phoneNum']").val();
 		var flagAmount = $("input[name='flagAmount']").val();
@@ -188,6 +226,10 @@ app.controller(ngControllerName,function($scope){
 			alert("身份证照未上传！");
 			return;
 		}
+		if(coverUrl05 == null || coverUrl05 == undefined){
+            alert("手持身份证照未上传！");
+            return;
+        }
 		if(flagAmount == '' || flagAmount == undefined){
 			alert("目标金额不能为空！");
 			return
@@ -215,6 +257,11 @@ app.controller(ngControllerName,function($scope){
 				"resUrl":coverUrl02,
 				"type":"1"
 			},
+            {
+                "resName":"手持身份证照",
+                "resUrl":coverUrl05,
+                "type":"2"
+            }
 		];
 		if(coverUrl03 != null && coverUrl03 != undefined){
 			var temp = {
@@ -250,7 +297,11 @@ app.controller(ngControllerName,function($scope){
         },
         success:function(result){
             if(result.status == 0) {
-               alert(result.info);
+                layer.open({
+                    type:1,
+                    content: $("#success_box").html(),
+                    shadeClose:false
+                });
             }else {
                 alert(result.info);
             }

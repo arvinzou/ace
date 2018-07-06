@@ -52,7 +52,7 @@ app.controller(ngControllerName,function($scope){
         url: "/fop/www/findLawQuestionList",
         type:"post",
         async:false,
-        data:{limit:pageSize, page: currentPage, relationId: userId},
+        data: {limit: pageSize, page: currentPage, iself: true},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
@@ -96,13 +96,13 @@ app.controller(ngControllerName,function($scope){
         }
     });
 
-    $scope.searchList = function(currentPage, pageSize, status, relationId){
+    $scope.searchList = function (currentPage, pageSize, status) {
         var key_word = $("#key_word").val();
         $.ajax({
             url: "/fop/www/findLawQuestionList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: currentPage, status: status, relationId: relationId},
+            data: {limit: pageSize, page: currentPage, status: status, iself: true},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统服务内部异常！", {
@@ -132,7 +132,7 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findLawQuestionList",
             type:"post",
             async:false,
-            data:{limit:pageSize, page: 1, status: status, relationId: userId},
+            data: {limit: pageSize, page: 1, status: status, iself: true},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
