@@ -128,7 +128,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         for (FopAssociationVo item : list) {
             FopCompanyVo f = new FopCompanyVo();
             f.setFullName(item.getFullName());
-            f.setRealName(item.getRealName());
+//            f.setRealName(item.getRealName());
             f.setAreaCodeName(item.getAreaCodeName());
             f.setAddress(item.getAddress());
             f.setCompanyProperty("-");
