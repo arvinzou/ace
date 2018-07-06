@@ -14,10 +14,13 @@ import com.huacainfo.ace.fop.service.MessageService;
 import com.huacainfo.ace.fop.service.SysAccountService;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
+import com.huacainfo.ace.portal.service.MessageTemplateService;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import com.huacainfo.ace.portal.service.UserinfoService;
 import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UserinfoVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +34,7 @@ import java.util.Map;
  */
 @Service("messageService")
 public class MessageServiceImpl implements MessageService {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private TaskCmccService taskCmccService;
@@ -42,6 +46,8 @@ public class MessageServiceImpl implements MessageService {
     private KafkaProducerService kafkaProducerService;
     @Autowired
     private UserinfoService userinfoService;
+    @Autowired
+    private MessageTemplateService messageTemplateService;
 
     /**
      * 注册结果通知
@@ -83,7 +89,7 @@ public class MessageServiceImpl implements MessageService {
     public ResultResponse geHelpAuditMessage(FopGeHelp fopGeHelp, String auditResult, String auditOpinion) throws Exception {
         Map<String, Object> accountInfo =
                 sysAccountService.getAccountInfo(fopGeHelp.getRequestId(), fopGeHelp.getRequestType());
-        Users users = usersService.selectByAccount((String) accountInfo.get("acount"));
+        Users users = usersService.selectByAccount((String) accountInfo.get("account"));
         if (null == users) {
             return new ResultResponse(ResultCode.FAIL, "未找到相关绑定关系");
         }
@@ -114,6 +120,8 @@ public class MessageServiceImpl implements MessageService {
         );
         //kafka消息推送
         kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, params);
+//        ResultResponse rs1 = messageTemplateService.send("fop", tmplCode, params);
+//        logger.debug("*****************geHelpAuditMessage:\n{}", rs1);
 
         return new ResultResponse(ResultCode.SUCCESS, "消息发送成功");
     }
