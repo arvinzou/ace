@@ -336,3 +336,86 @@ ul,li{
 	margin: 0 auto;
 	padding-top: 0.5rem;
 }
+.layui-m-layer1 .layui-m-layerchild{
+	width: 9rem!important;
+	height: 12rem!important;
+}
+
+/**
+分享页面样式
+ */
+.share_box{
+	width: 9rem;
+	height: 12rem;
+	margin: 0 auto;
+	background: url(../img/layer_bg.png) no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+}
+.head_img_box{
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	position: relative;
+}
+.head_img_box img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	position: absolute;
+	left: 3.5rem;
+	top: 3rem;
+}
+.dua_user_info{
+	width: 100%;
+	height: 1.5rem;
+	line-height: 0.8rem;
+	text-align: center;
+	margin-top: 3.5rem;
+	font-size: 0.4rem;
+	color: #333333;
+}
+.dua_statics{
+	width: 6rem;
+	height: 1.5rem;
+	font-size: 0.4rem;
+	color: #999999;
+	margin-left: 1.5rem;
+}
+.dua_statics01{
+	width: 3rem;
+	height: 100%;
+	float: left;
+	display: block;
+	text-align: center;
+	line-height: 0.8rem;
+}
+.dua_number{
+	font-size: 0.6rem;
+	color: #EA4436;
+	font-weight: bold;
+}
+.dua_footer{
+	width: 8rem;
+	height: 2rem;
+	position: absolute;
+	bottom: 0.5rem;
+}
+.dua_left{
+	width: 2rem;
+	height: 2rem;
+	float: left;
+}
+.dua_left img{
+	width: 100%;
+	height: 100%;
+}
+.dua_right{
+	width: 5rem;
+	height: 2rem;
+	float: left;
+	padding-left: 0.5rem;
+	font-size: 0.4rem;
+	color: #999999;
+	padding-top: 0.5rem;
+}
