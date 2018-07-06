@@ -857,11 +857,11 @@ public class WWWController extends FopBaseController {
             return new MessageResponse(ResultCode.FAIL, "id不能为空");
         }
         fopAssociation.setId(fopAssMember.getAssId());
+        fopAssociation.setPseronId(fopAssMember.getPname());
         MessageResponse result = fopAssociationService.updateFopAssociation(fopAssociation, this.getCurUserProp());
         if (ResultCode.FAIL == result.getStatus()) {
             throw new CustomException(result.getErrorMessage());
         }
-
          /*更新用户信息*/
         Users user = new Users();
         user.setUserId(this.getCurUserProp().getUserId());

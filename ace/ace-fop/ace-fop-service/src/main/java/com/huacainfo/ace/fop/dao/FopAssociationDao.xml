@@ -307,7 +307,7 @@
         c.directorNum, c.viceNum, c.remark, c.status, c.createUserId, c.createUserName, c.createDate,
         c.lastModifyUserId,
         c.lastModifyUserName, c.lastModifyDate, c.latitude ,c.longitude, c.departmentId, c.areaCode,
-        p.realName,pp.name as areaCodeName
+        pp.name as areaCodeName
     </sql>
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopAssociationVo">
 
@@ -333,13 +333,15 @@
         <if test="condition.phoneNumber!=null and condition.phoneNumber!=&quot;&quot;">
             and c.phoneNumber = #{condition.phoneNumber,jdbcType=CHAR}
         </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and c.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
     <select id="findList" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
         from fop_association c
-        left join fop_person p on p.id=c.pseronId
         left join portal.province pp on pp.code=c.areaCode
         <include refid="whereCondition"/>
         <choose>
