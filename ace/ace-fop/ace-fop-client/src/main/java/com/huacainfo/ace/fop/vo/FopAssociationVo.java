@@ -11,17 +11,9 @@ public class FopAssociationVo extends FopAssociation {
 
     private List<FopAssMemberVo> list;
 
-    private String realName;
 
     private String areaCodeName;
 
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
 
     public String getAreaCodeName() {
         return areaCodeName;
