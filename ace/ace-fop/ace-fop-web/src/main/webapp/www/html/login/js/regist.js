@@ -107,11 +107,28 @@ app.controller(ngControllerName,function($scope) {
             });
         }else{
             $.post("/fop/www/sms/sendCode",{mobile:mobile},function(result){
-                console.log(result);
-                layer.alert(result.info, {
-                    icon: 1,
-                    skin: 'myskin'
-                });
+                if(result.status == 0){
+                    console.log(result);
+                    layer.alert(result.info, {
+                        icon: 1,
+                        skin: 'myskin'
+                    });
+                }else{
+                    if(!result.inifo){
+                        layer.alert(result.info, {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
+                    }else{
+                        layer.alert(result.errorMessage, {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
+                    }
+
+                    return;
+                }
+
             });
             settime();
         }
