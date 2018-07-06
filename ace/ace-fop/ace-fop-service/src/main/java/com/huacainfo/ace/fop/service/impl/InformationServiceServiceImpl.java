@@ -138,7 +138,7 @@ public class InformationServiceServiceImpl implements InformationServiceService 
                 condition.setRelationId(fc.getId());
             }
         } else {
-            if (!condition.getModules().equals(ModulesType.BRAND_PROMOTION) || !condition.getModules().equals(ModulesType.POLICY_DOCUMENTS)) {
+            if (!condition.getModules().equals(ModulesType.BRAND_PROMOTION) && !condition.getModules().equals(ModulesType.POLICY_DOCUMENTS)) {
                 condition.setStatus("2");
             }
         }

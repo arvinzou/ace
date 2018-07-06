@@ -4,9 +4,7 @@
 }
 
 .rankings_box{
-	width: 9rem;
-	margin: 0.8rem 0.5rem;
-	border-radius: 0.3rem;
+	width: 10rem;
 }
 .title{
 	width: 9rem;
@@ -78,19 +76,20 @@ ul,li{
 	list-style: none;
 }
 .ranking_list_title{
-	width: 90%;
+	width: 100%;
 	margin: auto;
 }
 .ranking_list_title li{
 	text-align: center;
 	height: 1rem;
-	line-height: 1rem;
 	display: block;
 	float: left;
 	font-size: 0.4rem;
+	padding-top: 0.3rem;
+	box-sizing: border-box;
 }
 .rank_list{
-	width: 90%;
+	width: 100%;
 	margin: auto;
 }
 .rank_list li{
@@ -101,4 +100,18 @@ ul,li{
 	float: left;
 	font-size: 0.35rem;
 	color: #666666;
+}
+.ranking_list_title span{
+	width: 100%;
+	height: 0.6rem;
+	display: block;
+}
+.sborder{
+	border-right: 1px solid #E4E6E9;
+}
+.rank_list ul:nth-child(even){
+	background:#ffffff;
+}
+.rank_list ul:nth-child(odd){
+	background:#F7F9FC;
 }

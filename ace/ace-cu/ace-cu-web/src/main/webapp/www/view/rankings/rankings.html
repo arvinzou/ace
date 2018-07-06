@@ -13,16 +13,17 @@
 	</head>
 	<body>
 		<div class="rankings_box">
-			<div class="title">
+			<!--<div class="title">
 				<p>慈善榜单</p>
 				<span class="title_bottom"></span>
-			</div>
+			</div>-->
 			<div class="ranking_list_title">
 				<ul>
-					<li style="width: 10%;">排名</li>
-					<li style="width: 30%;">慈善人</li>
-					<li style="width: 30%;">捐助次数</li>
-					<li style="width: 30%;">捐助总金额</li>
+					<li style="width: 15%;"><span class="sborder">排名</span></li>
+					<li style="width: 30%;"><span class="sborder">慈善人</span></li>
+					<li style="width: 25%;"><span class="sborder">捐助次数</span></li>
+					<li style="width: 30%;"><span>捐助总金额(元)</span></li>
+					<div style="clear: both;"></div>
 				</ul>
 			</div>
 			<div class="rank_list">
@@ -30,17 +31,10 @@
 					<li style="width: 10%;" ng-bind="$index+1"></li>
 					<li style="width: 30%;" ng-bind="item.nickname"></li>
 					<li style="width: 30%;" ng-bind="item.donateCount"></li>
-					<li style="width: 30%;" ng-cloak>{{item.totalDonateAmount}}元</li>
+					<li style="width: 30%;color: #EA4436;" ng-cloak>{{item.totalDonateAmount}}</li>
+					<div style="clear: both;"></div>
 				</ul>
 			</div>
-			<!--<div class="rankings_list" ng-repeat="item in rankList">
-				<div class="list_img" ng-bind="$index+1">&lt;!&ndash;<img ng-src="{{item.headimgurl}}"/>&ndash;&gt;</div>
-				<div class="list_name" >
-					<p ng-bind="item.nickname"></p>
-					<p class="times">共贡献了次爱心</p>
-				</div>
-				<div class="contribution"><span class="money" ng-bind="item.totalDonateAmount"></span>元</div>
-			</div>-->
 		</div>
 	</body>
 </html>

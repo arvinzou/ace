@@ -281,6 +281,7 @@ function initEvents() {
 				}
 
     });
+
     $('#model2 form').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var data = {};
@@ -291,6 +292,7 @@ function initEvents() {
                 tplPageId: pageId,
                 articleCategory: $("#bar").find(".actives").data("id"),
                 cover: $("#cover-img").attr("src"),
+                type:'1',
                 mediType: '1',
                 likeNum: 0,
                 hitNum: 0
