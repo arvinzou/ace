@@ -281,6 +281,7 @@ function initEvents() {
 				}
 
     });
+
     $('#model2 form').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var data = {};
