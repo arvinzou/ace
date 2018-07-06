@@ -86,6 +86,7 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 $scope.rankList = result.data.list;
                 $scope.totalAmount =result.data.list.length;
+                $scope.own = result.data.own;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
@@ -118,6 +119,17 @@ app.controller(ngControllerName,function($scope){
      */
     $scope.showMore = function(){
         window.location.href = '/cu/www/view/daydonation/recordlist.html?projectId='+projectId;
+    }
+
+    /**
+     * 传递爱心
+     */
+    $scope.transmit = function(){
+        layer.open({
+            type:1,
+            content: $("#share_box").html(),
+            shadeClose:true
+        });
     }
 });
 app.filter('to_trusted', function ($sce) {

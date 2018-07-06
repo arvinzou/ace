@@ -5,10 +5,12 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>慈善一日捐</title>
+		<link rel="stylesheet" type="text/css" href="../js/layer.mobile-v2.0/layer_mobile/need/layer.css"/>
 		<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" />
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
 		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../js/layer.mobile-v2.0/layer_mobile/layer.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/daydonation.css" />
 		<script type="text/javascript" src="js/daydonation.js"></script>
 	</head>
@@ -134,7 +136,7 @@
 			<div class="footer">
 				<div class="footer_left">
 					<p style="padding-top: 0.3rem;">
-						<img src="img/share.png" style="width: 0.8rem;height: 0.6rem;"/>
+						<img src="img/share.png" style="width: 0.8rem;height: 0.6rem;" ng-click="transmit();"/>
 					</p>
 					<p>传递爱心</p>
 				</div>
@@ -145,4 +147,37 @@
 		</div>
 	</body>
 
+<!--分享页面-->
+	<div id="share_box" style="display: none;">
+	<div  class="share_box">
+		<div class="head_img_box">
+			<img ng-src="{{own.headimgurl}}" />
+		</div>
+		<div class="dua_user_info">
+			<p ng-bind="own.nickname"></p>
+			<p ng-cloak>感谢你的第{{own.donateCount}}次捐赠，你已经</p>
+		</div>
+		<div class="dua_statics">
+				<span class="dua_statics01">
+					<p>捐赠天数</p>
+					<p><span class="dua_number" ng-bind="own.donateDays"></span>天</p>
+				</span>
+			<span class="dua_statics01">
+					<p>捐赠金额</p>
+					<p><span class="dua_number" ng-bind="own.totalDonateAmount"></span>元</p>
+				</span>
+			<span style="clear: both;"></span>
+		</div>
+		<div class="dua_footer">
+			<div class="dua_left">
+				<img src="img/weixin.png" />
+			</div>
+			<div class="dua_right">
+				<p>长按识别二维码</p>
+				<p>关注常德慈善</p>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+	</div>
 </html>
