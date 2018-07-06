@@ -119,7 +119,7 @@
         <div class="labelItem">
             <span class="labelItemHeader">会长姓名</span>
             <br>
-            <span id="pseronId"></span>
+            <span id="realName"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">理事数量</span>

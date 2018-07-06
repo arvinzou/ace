@@ -395,6 +395,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     private MessageResponse updatePersonInfo(FopCompanyVo o, UserProp userProp) throws Exception {
         FopPerson person = fopPersonService.selectByMobile(o.getLpMobile());
         if (null != person) {
+            person.setRealName(o.getRealName());
             person.setSex(o.getLpSex());
             person.setBirthDate(o.getLpBirthDt());
             person.setNativePlace(o.getLpNativePlace());

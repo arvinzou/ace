@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.cu.dao.report.DonateRank">
     <select id="query" resultType="map">
-        select a.nickname, a.headimgurl, a.openid,
+        select (@i:=@i+1) as indexNum,
+        a.nickname, a.headimgurl, a.openid,
         a.totalDonateAmount, a.donateCount, a.donateDays
         FROM (
         SELECT u.nickname,u.headimgurl,u.openid,
@@ -47,7 +48,7 @@
             and t..openId = #{openId,jdbcType=VARCHAR}
         </if>
         GROUP BY u.nickname,u.headimgurl,u.openid
-        ) a
+        ) a ,(select @i:=0) t2
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}

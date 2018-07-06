@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.CanvasTmplItemDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.CanvasTmplItem">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="tmplId" jdbcType="VARCHAR" property="tmplId"/>
+        <result column="itemType" jdbcType="VARCHAR" property="itemType"/>
+        <result column="itemName" jdbcType="VARCHAR" property="itemName"/>
+        <result column="itemCode" jdbcType="VARCHAR" property="itemCode"/>
+        <result column="itemValue" jdbcType="VARCHAR" property="itemValue"/>
+        <result column="positionX" jdbcType="INTEGER" property="positionX"/>
+        <result column="positionY" jdbcType="INTEGER" property="positionY"/>
+        <result column="width" jdbcType="INTEGER" property="width"/>
+        <result column="height" jdbcType="INTEGER" property="height"/>
+        <result column="font" jdbcType="VARCHAR" property="font"/>
+        <result column="color" jdbcType="VARCHAR" property="color"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, tmplId, itemType, itemName, itemCode, itemValue, positionX, positionY, width, 
+    height, font, color, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
+    lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from canvas_tmpl_item
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from canvas_tmpl_item
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.portal.model.CanvasTmplItem">
+    insert into canvas_tmpl_item (id, tmplId, itemType, 
+      itemName, itemCode, itemValue, 
+      positionX, positionY, width, 
+      height, font, color, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{tmplId,jdbcType=VARCHAR}, #{itemType,jdbcType=VARCHAR}, 
+      #{itemName,jdbcType=VARCHAR}, #{itemCode,jdbcType=VARCHAR}, #{itemValue,jdbcType=VARCHAR}, 
+      #{positionX,jdbcType=INTEGER}, #{positionY,jdbcType=INTEGER}, #{width,jdbcType=INTEGER}, 
+      #{height,jdbcType=INTEGER}, #{font,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.portal.model.CanvasTmplItem">
+        insert into canvas_tmpl_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tmplId != null">
+                tmplId,
+            </if>
+            <if test="itemType != null">
+                itemType,
+            </if>
+            <if test="itemName != null">
+                itemName,
+            </if>
+            <if test="itemCode != null">
+                itemCode,
+            </if>
+            <if test="itemValue != null">
+                itemValue,
+            </if>
+            <if test="positionX != null">
+                positionX,
+            </if>
+            <if test="positionY != null">
+                positionY,
+            </if>
+            <if test="width != null">
+                width,
+            </if>
+            <if test="height != null">
+                height,
+            </if>
+            <if test="font != null">
+                font,
+            </if>
+            <if test="color != null">
+                color,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="tmplId != null">
+                #{tmplId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemType != null">
+                #{itemType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemName != null">
+                #{itemName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCode != null">
+                #{itemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemValue != null">
+                #{itemValue,jdbcType=VARCHAR},
+            </if>
+            <if test="positionX != null">
+                #{positionX,jdbcType=INTEGER},
+            </if>
+            <if test="positionY != null">
+                #{positionY,jdbcType=INTEGER},
+            </if>
+            <if test="width != null">
+                #{width,jdbcType=INTEGER},
+            </if>
+            <if test="height != null">
+                #{height,jdbcType=INTEGER},
+            </if>
+            <if test="font != null">
+                #{font,jdbcType=VARCHAR},
+            </if>
+            <if test="color != null">
+                #{color,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.portal.model.CanvasTmplItem">
+        update canvas_tmpl_item
+        <set>
+            <if test="tmplId != null">
+                tmplId = #{tmplId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemType != null">
+                itemType = #{itemType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemName != null">
+                itemName = #{itemName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCode != null">
+                itemCode = #{itemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemValue != null">
+                itemValue = #{itemValue,jdbcType=VARCHAR},
+            </if>
+            <if test="positionX != null">
+                positionX = #{positionX,jdbcType=INTEGER},
+            </if>
+            <if test="positionY != null">
+                positionY = #{positionY,jdbcType=INTEGER},
+            </if>
+            <if test="width != null">
+                width = #{width,jdbcType=INTEGER},
+            </if>
+            <if test="height != null">
+                height = #{height,jdbcType=INTEGER},
+            </if>
+            <if test="font != null">
+                font = #{font,jdbcType=VARCHAR},
+            </if>
+            <if test="color != null">
+                color = #{color,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.CanvasTmplItem">
+    update canvas_tmpl_item
+    set tmplId = #{tmplId,jdbcType=VARCHAR},
+      itemType = #{itemType,jdbcType=VARCHAR},
+      itemName = #{itemName,jdbcType=VARCHAR},
+      itemCode = #{itemCode,jdbcType=VARCHAR},
+      itemValue = #{itemValue,jdbcType=VARCHAR},
+      positionX = #{positionX,jdbcType=INTEGER},
+      positionY = #{positionY,jdbcType=INTEGER},
+      width = #{width,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      font = #{font,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
