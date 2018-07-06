@@ -213,6 +213,8 @@ ul,li{
 	background-color: #FFFFFF;
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
+	margin-bottom: 0.3rem;
+	padding-top: 0.2rem;
 }
 .project_title{
 	width: 8.5rem;
@@ -299,7 +301,7 @@ ul,li{
 	color: #333333;
 }
 .troggle{
-	height: 1.8rem;
+	height: 1.6rem;
 	overflow: hidden;
 }
 .upordown{
@@ -322,6 +324,9 @@ ul,li{
 	color: #666666;
 	font-size: 0.3rem;
 	text-align: right;
+}
+.project_title_right a {
+	color: #666666 !important;
 }
 .record_box{
 	width: 10rem;

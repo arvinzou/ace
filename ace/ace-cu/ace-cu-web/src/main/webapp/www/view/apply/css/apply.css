@@ -98,25 +98,34 @@ input, textarea{
 	font-size: 0.4rem;
 }
 .positive{
-	width: 3.4rem;
-	height: 2.6rem;
+	width: 2.5rem;
+	height: 2rem;
 	border: 1px dotted #CCCCCC;
 	float: left;
-	margin-left: 0.5rem;
+	margin-left: 0.125rem;
 	margin-top: 0.5rem;
 }
 .unpositive{
-	width: 3.4rem;
-	height: 2.6rem;
+	width: 2.5rem;
+	height: 2rem;
 	border: 1px dotted #CCCCCC;
-	float: right;
-	margin-right: 0.5rem;
+	float: left;
+	margin-left: 0.125rem;
+	margin-right: 0.125rem;
+	margin-top: 0.5rem;
+}
+.handIdentity{
+	width: 2.5rem;
+	height: 2rem;
+	border: 1px dotted #CCCCCC;
+	float: left;
+	margin-right: 0.125rem;
 	margin-top: 0.5rem;
 }
 .pictureContainer{
     position: relative;
-    width: 3.4rem;
-    height: 2.6rem;
+    width: 2.5rem;
+    height: 2rem;
     cursor: pointer;
     background-color: #FFFFFF;
 }
@@ -140,7 +149,7 @@ input, textarea{
     color: #999999;
 }
 .uploadText img{
-    margin-top: 1.2rem;
+    margin-top: 0.8rem;
     margin-bottom: 0.8rem;
     margin-left: 0.7rem;
     margin-right: 0.7rem;
