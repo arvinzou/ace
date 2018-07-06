@@ -119,3 +119,15 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
+.layui-m-layer1 .layui-m-layerchild{
+	width: 9rem!important;
+	height: 13rem!important;
+}
+.layui-m-layercont{
+	width: 100%;
+	height: 12rem;
+	overflow-y:auto;
+}
+.layui-m-layerbtn span[yes]{
+	height: 1rem;
+}
