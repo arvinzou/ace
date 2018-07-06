@@ -461,11 +461,12 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
         return new MessageResponse(ResultCode.SUCCESS, "发布成功");
     }
 
-    private void sendMessageNotice(FopGeHelp fopGeHelp, String auditResult, String auditOpinion) {
+    private void sendMessageNotice(FopGeHelp obj, String auditResult, String auditOpinion) {
         try {
-            messageService.geHelpAuditMessage(fopGeHelp, auditResult, auditOpinion);
+            ResultResponse response = messageService.geHelpAuditMessage(obj, auditResult, auditOpinion);
+            logger.debug("政企服务" + "审核消息发送结果[" + obj.getId() + "]:" + response.getInfo());
         } catch (Exception e) {
-            logger.error("政企服务审核消息发送异常[" + fopGeHelp.getId() + "]：{}", e);
+            logger.error("政企服务" + "审核消息发送异常[" + obj.getId() + "]：{}", e);
         }
     }
 

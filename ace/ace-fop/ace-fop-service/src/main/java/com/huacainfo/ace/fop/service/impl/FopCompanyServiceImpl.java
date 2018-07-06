@@ -381,7 +381,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new MessageResponse(ResultCode.FAIL, "企业/机构名称重复！");
         }
         //修改法人信息
-        updatePersonInfo(o, userProp);
+        MessageResponse pResp = updatePersonInfo(o, userProp);
+        if (pResp.getStatus() == ResultCode.FAIL) {
+            return pResp;
+        }
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -408,10 +411,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             person.setIdentityCard(o.getLpIdentityCard());
             person.setSocietyPost(o.getLpSocietyPost());
 
-            fopPersonService.updateFopPerson(person, userProp);
+            return fopPersonService.updateFopPerson(person, userProp);
         }
 
-        return new MessageResponse(0, "变更企业/机构管理完成！");
+        return new MessageResponse(ResultCode.SUCCESS, "变更法人信息完成！");
     }
 
     /**
