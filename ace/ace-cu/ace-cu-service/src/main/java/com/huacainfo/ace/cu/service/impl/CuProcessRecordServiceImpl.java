@@ -237,4 +237,15 @@ public class CuProcessRecordServiceImpl implements CuProcessRecordService {
         return new ResultResponse(ResultCode.SUCCESS, "记录成功", record);
     }
 
+    /**
+     * 获取“救急难” 处理详情
+     *
+     * @param applyId 申请资料ID cu_process_record.id
+     * @return
+     */
+    @Override
+    public List<CuProcessRecord> findList(String applyId) {
+        return cuProcessRecordDao.findListByApplyId(applyId);
+    }
+
 }

@@ -10,6 +10,7 @@ import com.huacainfo.ace.cu.vo.CuProcessRecordQVo;
 import com.huacainfo.ace.cu.vo.CuProcessRecordVo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: Arvin
@@ -96,4 +97,12 @@ public interface CuProcessRecordService {
      */
     ResultResponse insertRecord(String userId, String openId, String resId,
                                 int nodeIndex, String nodeDesc, Date recordDate);
+
+    /**
+     * 获取“救急难” 处理详情
+     *
+     * @param applyId
+     * @return
+     */
+    List<CuProcessRecord> findList(String applyId);
 }

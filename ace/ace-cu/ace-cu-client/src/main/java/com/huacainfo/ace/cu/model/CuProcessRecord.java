@@ -10,15 +10,27 @@ public class CuProcessRecord {
     private String applyOpenId;
 
     private String applyResId;
-
+    /**
+     * 0;//成功提交
+     * 1;//审核中
+     * 2;//审核通过
+     * 3;//筹款中
+     * 4;//筹款结束
+     */
     private Integer nodeIndex;
 
     private String nodeDesc;
 
     private Date recordDate;
 
+    /**
+     * 审核备注
+     */
     private String remark;
 
+    /**
+     * 1 - 通过，2-拒绝
+     */
     private String status;
 
     private String createUserId;
