@@ -210,4 +210,12 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="findListByApplyId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cu_process_record
+        where applyResId = #{applyId,jdbcType=VARCHAR}
+        order by nodeIndex
+    </select>
 </mapper>
