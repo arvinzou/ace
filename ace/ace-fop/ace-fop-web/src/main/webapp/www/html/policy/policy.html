@@ -18,6 +18,17 @@
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/policy.js"></script>
     <link rel="shortcut icon" href="../../images/favicon.ico">
+    <style>
+        .title01{
+            position: relative;
+        }
+        .poblicSearch{
+            width: 250px;
+            position: absolute;
+            right: 30px;
+            bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,6 +41,7 @@
                     <div class="main">
                         <div class="title01">
                             <span class="title_lager">政策信息</span><span class="title_small">/&nbsp;Policy Information</span>
+                            <span class="s_title poblicSearch"><input type="text" id="key_word" placeholder="请输入关键字搜索"/><button class="glyphicon glyphicon-search" ng-click="search();"></button></span>
                         </div>
                         <div class="searchTable">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
