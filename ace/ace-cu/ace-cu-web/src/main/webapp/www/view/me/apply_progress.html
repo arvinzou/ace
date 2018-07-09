@@ -17,57 +17,13 @@
 		<div class="progress_box">
 			<div class="progress_content">
 				<ul class="layui-timeline">
-					<li class="layui-timeline-item">
+					<li class="layui-timeline-item" ng-repeat="item in progressList">
 						<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
 						<div class="layui-timeline-content layui-text">
 							<div class="layui-timeline-title">
 								<div class="project_record_title">
-									<div class="project_record_title01">您发布的救急难已成功提交</div>
-									<div class="project_record_title02">2018-06-24 08:28:48</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="layui-timeline-item">
-						<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-						<div class="layui-timeline-content layui-text">
-							<div class="layui-timeline-title">
-								<div class="project_record_title">
-									<div class="project_record_title01">资料审核中，请您耐心等待，我们会联系您进行相关信息核实</div>
-									<div class="project_record_title02">2018-06-24 08:28:48</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="layui-timeline-item">
-						<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-						<div class="layui-timeline-content layui-text">
-							<div class="layui-timeline-title">
-								<div class="project_record_title">
-									<div class="project_record_title01">审核通过</div>
-									<div class="project_record_title02">2018-06-24 08:28:48</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="layui-timeline-item">
-						<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-						<div class="layui-timeline-content layui-text">
-							<div class="layui-timeline-title">
-								<div class="project_record_title">
-									<div class="project_record_title01">正在筹款中</div>
-									<div class="project_record_title02">2018-06-24 08:28:48</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="layui-timeline-item">
-						<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-						<div class="layui-timeline-content layui-text">
-							<div class="layui-timeline-title">
-								<div class="project_record_title">
-									<div class="project_record_title01">筹款已结束，我们会联系您为您提取善款</div>
-									<div class="project_record_title02">2018-06-24 08:28:48</div>
+									<div class="project_record_title01" ng-bind="item.nodeDesc"></div>
+									<div class="project_record_title02" ng-bind="item.recordDate"></div>
 								</div>
 							</div>
 						</div>
