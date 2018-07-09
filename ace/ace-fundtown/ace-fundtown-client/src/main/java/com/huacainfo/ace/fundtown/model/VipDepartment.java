@@ -84,6 +84,9 @@ public class VipDepartment implements java.io.Serializable {
 
     private Integer licensedDriverNum;
 
+    /**
+     * 1-申请中 2-vip
+     */
     private String status;
 
     private String type;

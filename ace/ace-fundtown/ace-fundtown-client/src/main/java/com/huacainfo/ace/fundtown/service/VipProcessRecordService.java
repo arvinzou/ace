@@ -8,6 +8,8 @@ import com.huacainfo.ace.fundtown.model.VipProcessRecord;
 import com.huacainfo.ace.fundtown.vo.VipProcessRecordQVo;
 import com.huacainfo.ace.fundtown.vo.VipProcessRecordVo;
 
+import java.util.List;
+
 /**
  * @author: Arvin
  * @version: 2018-07-03
@@ -82,4 +84,5 @@ public interface VipProcessRecordService {
      */
     MessageResponse deleteVipProcessRecordByVipProcessRecordId(String id, UserProp userProp) throws Exception;
 
+    List<VipProcessRecordVo> findByDeptId(String deptId);
 }

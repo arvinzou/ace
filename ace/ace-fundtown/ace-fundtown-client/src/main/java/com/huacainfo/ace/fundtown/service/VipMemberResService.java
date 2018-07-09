@@ -8,6 +8,8 @@ import com.huacainfo.ace.fundtown.model.VipMemberRes;
 import com.huacainfo.ace.fundtown.vo.VipMemberResQVo;
 import com.huacainfo.ace.fundtown.vo.VipMemberResVo;
 
+import java.util.List;
+
 /**
  * @author: Arvin
  * @version: 2018-07-03
@@ -82,4 +84,5 @@ public interface VipMemberResService {
      */
     MessageResponse deleteVipMemberResByVipMemberResId(String id, UserProp userProp) throws Exception;
 
+    List<VipMemberRes> findByDeptId(String deptId);
 }

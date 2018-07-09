@@ -188,4 +188,9 @@ public class VipProcessRecordServiceImpl implements VipProcessRecordService {
         return new MessageResponse(0, "入驻成员-流程节点记录删除完成！");
     }
 
+    @Override
+    public List<VipProcessRecordVo> findByDeptId(String deptId) {
+        return vipProcessRecordDao.findByDeptId(deptId);
+    }
+
 }

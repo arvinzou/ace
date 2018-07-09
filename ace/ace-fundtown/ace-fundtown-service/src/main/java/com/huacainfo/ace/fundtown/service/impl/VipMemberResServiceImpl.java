@@ -200,4 +200,9 @@ public class VipMemberResServiceImpl implements VipMemberResService {
         return new MessageResponse(0, "入驻成员-资源/附件删除完成！");
     }
 
+    @Override
+    public List<VipMemberRes> findByDeptId(String deptId) {
+        return vipMemberResDao.findByDeptId(deptId);
+    }
+
 }
