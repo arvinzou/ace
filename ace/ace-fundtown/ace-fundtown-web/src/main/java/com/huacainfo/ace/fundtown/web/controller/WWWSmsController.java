@@ -4,10 +4,10 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.fundtown.model.VipDepartment;
+import com.huacainfo.ace.fundtown.service.VipDepartmentService;
 import com.huacainfo.ace.portal.model.TaskCmcc;
-import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.TaskCmccService;
-import com.huacainfo.ace.portal.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +31,14 @@ public class WWWSmsController extends BisBaseController {
     @Autowired
     private TaskCmccService taskCmccService;
     @Autowired
-    private UsersService usersService;
+    private VipDepartmentService vipDepartmentService;
 
     @RequestMapping("/sendCode")
     public ResultResponse sendCode(String mobile) throws Exception {
         //账号重复验证
-        Users users = usersService.selectByAccount(mobile);
-        if (null != users) {
-            return new ResultResponse(ResultCode.FAIL, "该手机号码已注册");
+        VipDepartment d = vipDepartmentService.findByMobile(mobile);
+        if (null != d) {
+            return new ResultResponse(ResultCode.FAIL, "该手机号码已被注册");
         }
 
         String randCode = getRandCode();

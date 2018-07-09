@@ -87,8 +87,41 @@ public interface VipDepartmentService {
      * 入驻申请
      *
      * @param vipVo  入驻申请数据
+     *               Demo:{"contactEmail":"30123@qq.com","contactMobile":"18570629027","departmentName":"华彩伟业"}
      * @param openId 入驻用户身份识别ID
      * @return 入驻申请结果
      */
-    ResultResponse vipApply(String openId, VipDepartmentVo vipVo);
+    ResultResponse vipApply(String openId, VipDepartmentVo vipVo) throws Exception;
+
+    /**
+     * 获取我的vip信息
+     *
+     * @param openId 调试时使用，调接口时可以不用理会此参数
+     * @return
+     */
+    ResultResponse getMyVipInfo(String openId);
+
+    /**
+     * 通过手机号码获取部门信息
+     *
+     * @param mobile portal.department.contact_mobile
+     * @return
+     */
+    VipDepartment findByMobile(String mobile);
+
+    /**
+     * 获取我的视频信息
+     *
+     * @param deptId
+     * @return
+     */
+    ResultResponse getMyVideo(String deptId);
+
+    /**
+     * 获取我的流程处理信息
+     *
+     * @param deptId
+     * @return
+     */
+    ResultResponse getMyProcess(String deptId);
 }

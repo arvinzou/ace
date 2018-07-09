@@ -61,17 +61,36 @@ public class WWWProcessController extends BisBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", nodeListMap);
     }
 
+    /**
+     * 获取我的vip信息
+     *
+     * @param openId 调试时使用，调接口时可以不用理会此参数
+     * @return
+     */
+    @RequestMapping("/getMyVipInfo")
+    public ResultResponse getMyVipInfo(String openId) throws Exception {
+
+        //公众号用户信息
+        Userinfo userinfo = getCurUserinfo();
+        if (null == userinfo && StringUtil.isEmpty(openId)) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
+        openId = StringUtil.isEmpty(openId) ? userinfo.getOpenid() : openId;
+
+        return vipDepartmentService.getMyVipInfo(openId);
+    }
 
     /**
      * 入驻申请
      *
-     * @param json   入驻申请数据  Demo:{"contactEmail":"30123@qq.com","contactMobile":"18570629027","departmentName":"华彩伟业"}
+     * @param json   入驻申请数据
+     *               Demo:{"contactEmail":"30123@qq.com","contactMobile":"18570629027","departmentName":"华彩伟业"}
      * @param openId 调试时使用，调接口时可以不用理会此参数
      * @param code   手机验证码  -- 必传
      * @return
      */
     @RequestMapping("/vipApply")
-    public ResultResponse vipApply(String code, String openId, String json) {
+    public ResultResponse vipApply(String code, String openId, String json) throws Exception {
         if (!StringUtil.areNotEmpty(code, json)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
@@ -91,5 +110,39 @@ public class WWWProcessController extends BisBaseController {
         }
 
         return vipDepartmentService.vipApply(openId, vipVo);
+    }
+
+
+    /**
+     * 获取我的视频信息
+     *
+     * @param deptId
+     * @return
+     */
+    @RequestMapping("/getMyVideo")
+    public ResultResponse getMyVideo(String deptId) throws Exception {
+
+        if (StringUtil.isEmpty(deptId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return vipDepartmentService.getMyVideo(deptId);
+    }
+
+
+    /**
+     * 获取我的流程处理信息
+     *
+     * @param deptId
+     * @return
+     */
+    @RequestMapping("/getMyProcess")
+    public ResultResponse getMyProcess(String deptId) throws Exception {
+
+        if (StringUtil.isEmpty(deptId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return vipDepartmentService.getMyProcess(deptId);
     }
 }

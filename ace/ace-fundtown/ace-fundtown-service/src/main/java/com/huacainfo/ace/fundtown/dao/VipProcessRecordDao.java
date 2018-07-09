@@ -32,4 +32,5 @@ public interface VipProcessRecordDao {
 
     int isExit(VipProcessRecord record);
 
+    List<VipProcessRecordVo> findByDeptId(String deptId);
 }
