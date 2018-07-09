@@ -18,6 +18,14 @@
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/sincerity.js"></script>
     <link rel="shortcut icon" href="../../images/favicon.ico">
+    <style>
+        .poblicSearch{
+            width: 250px;
+            position: absolute;
+            right: 0px;
+            bottom: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,6 +45,7 @@
                                         ng-options="s.id as s.name for s in categorys" ng-change="change();">
                                 </select>
                             </div>
+                            <span class="s_title poblicSearch"><input type="text" id="key_word" placeholder="请输入关键字搜索"/><button class="glyphicon glyphicon-search" ng-click="search();"></button></span>
                         </div>
                         <div class="searchTable">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">

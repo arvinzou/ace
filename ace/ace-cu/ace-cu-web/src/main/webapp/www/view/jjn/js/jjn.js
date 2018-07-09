@@ -37,6 +37,7 @@ app.controller(ngControllerName,function($scope){
     * 查看救急难项目详情
     */
    $scope.showProjectInfo = function(id){
+
    		window.location.href = '../donation/donation.html?projectId='+id+'&type=2';
    }
    

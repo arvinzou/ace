@@ -93,6 +93,10 @@ app.controller(ngControllerName,function($scope){
     $scope.apply = function(){
         window.location.href = '/cu/www/view/apply/apply.html';
     }
+
+    $scope.showProgress = function(id){
+        window.location.href = '/cu/www/view/me/apply_progress.html?projectId='+id;
+    }
 });
 
 function hoverli(divId){
