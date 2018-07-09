@@ -11,58 +11,67 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/project/findList",
         type:"post",
         async:false,
-        data:{start: page, limit: pageSize, type: "1"},
+        data:{start: page, limit: pageSize, type: "4"},
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.rows;
-                $scope.projectInfo = result.data.rows[0];
-                defaultProjectId = result.data.rows[0].id;
-    			$("#projectDetail").html(result.data.rows[0].description);
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            }else {
-                alert(errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+                if(result.data.rows.length < 1){
+                    layer.open({
+                        type:1,
+                        content: $("#warning").html(),
+                        shadeClose:false
+                    });
+                    return;
+                }else{
+                    $scope.projectInfo = result.data.rows[0];
+                    defaultProjectId = result.data.rows[0].id;
+                    $("#projectDetail").html(result.data.rows[0].description);
 
-    $.ajax({
-        url: "/cu/www/project/findUsedRecordList",
-        type:"post",
-        async:false,
-        data:{projectId: defaultProjectId, start: 0, limit: 9999},
-        success:function(result){
-            if(result.status == 0) {
-                $scope.useRecords = result.data.rows;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
-            }else {
-                alert(errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+                    $.ajax({
+                        url: "/cu/www/project/findUsedRecordList",
+                        type:"post",
+                        async:false,
+                        data:{projectId: defaultProjectId, start: 0, limit: 9999},
+                        success:function(result){
+                            if(result.status == 0) {
+                                $scope.useRecords = result.data.rows;
+                                if (!$scope.$$phase) {
+                                    $scope.$apply();
+                                }
+                            }else {
+                                alert(result.errorMessage);
+                            }
+                        },
+                        error:function(){
+                            alert("系统服务内部异常！");
+                        }
+                    });
 
-    $.ajax({
-        url:"/cu/www/project/findDonateList",
-        type:"post",
-        async:false,
-        data:{projectId: defaultProjectId, start: 0, limit: 9999},
-        success:function(result){
-            if(result.status == 0) {
-                $scope.donationList = result.data.rows;
+                    $.ajax({
+                        url:"/cu/www/project/findDonateList",
+                        type:"post",
+                        async:false,
+                        data:{projectId: defaultProjectId, start: 0, limit: 9999},
+                        success:function(result){
+                            if(result.status == 0) {
+                                $scope.donationList = result.data.rows;
+                                if (!$scope.$$phase) {
+                                    $scope.$apply();
+                                }
+                            }else {
+                                alert(result.errorMessage);
+                            }
+                        },
+                        error:function(){
+                            alert("系统服务内部异常！");
+                        }
+                    });
+                }
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
             }else {
-                alert(errorMessage);
+                alert(result.errorMessage);
             }
         },
         error:function(){
@@ -94,7 +103,7 @@ app.controller(ngControllerName,function($scope){
 			                    $scope.$apply();
 			                }
 			            }else {
-			                alert(errorMessage);
+			                alert(result.errorMessage);
 			            }
 			        },
 			        error:function(){
@@ -117,7 +126,7 @@ app.controller(ngControllerName,function($scope){
 			                    $scope.$apply();
 			                }
 			            }else {
-			                alert(errorMessage);
+			                alert(result.errorMessage);
 			            }
 			        },
 			        error:function(){
