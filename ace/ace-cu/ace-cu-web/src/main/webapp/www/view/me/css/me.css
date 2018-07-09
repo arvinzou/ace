@@ -16,16 +16,16 @@ ul,li{
 	right: 0;
 }
 .bg{
-	width: 10rem;
+	width: 100%;
 	height: 5rem;
 	background: url(../img/bg.png)no-repeat;
 	background-size: 100% 100%;
 }
 .userinfo{
-	width: 9rem;
+	width: 90%;
 	height: 2rem;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
+	margin-left: 5%;
+	margin-right: 5%;
 	padding-top: 0.5rem;
 }
 .userimg{
@@ -52,13 +52,13 @@ ul,li{
 	padding-left: 0.5rem;
 }
 .statics{
-	width:9rem;
+	width:90%;
 	height: 2rem;
-	margin-top: 0.5rem;
-	margin-left: 0.5rem;
+	margin-top: 5%;
+	margin-left: 5%;
 }
 .statics01{
-	width: 3rem;
+	width: 33.33%;
 	height: 2rem;
 	float: left;
 	text-align: center;
@@ -67,16 +67,16 @@ ul,li{
 	font-weight: bold;
 }
 .me_nav_box{
-	width: 10rem;
+	width: 100%;
 	height: 1rem;
 }
 .nav_box_ul{
-	width: 9rem;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
 }
 .nav_box_ul li{
-	width: 3rem;
+	width: 33.33%;
 	height: 1rem;
 	line-height: 1rem;
 	text-align: center;
@@ -92,9 +92,9 @@ ul,li{
 	display: none;
 }
 .content{
-	width: 9rem;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
+	width: 90%;
+	margin-left: 5%;
+	margin-right: 5%;
 	margin-top: 0.5rem;
 }
 .money{
@@ -116,7 +116,7 @@ ul,li{
 	padding-left: 1.5rem;
 }
 .scores_box{
-	width: 9rem;
+	width: 90%;
 	margin: auto;
 }
 .score_list{
@@ -144,20 +144,24 @@ ul,li{
 .score_list_left{
 	width: 70%;
 	float: left;
+	overflow: hidden;  /*溢出隐藏*/
+	text-overflow: ellipsis; /*以省略号...显示*/
+	white-space: nowrap;  /*强制不换行*/
 }
 .score_list_right{
 	width: 30%;
 	float: left;
+	text-align: right;
 }
 .help_list{
-	width: 9rem;
+	width: 90%;
 	height: 2.6rem;
-	margin-right: 0.5rem;
+	margin-right: 5%;
 	padding-top: 0.5rem;
 	border-bottom: 1px solid #E4E6E9;
 }
 .help_list_left{
-	width: 2.5rem;
+	width: 30%;
 	height: 1.6rem;
 	float: left;
 }
@@ -166,7 +170,7 @@ ul,li{
 	margin-bottom: 1rem;
 }
 .help_list_right{
-	width: 6.5rem;
+	width: 70%;
 	float: left;
 	height: 1.6rem;
 }
@@ -192,10 +196,10 @@ ul,li{
 	padding-left:0.5rem
 }
 .raise_btn{
-	width: 9rem;
+	width: 90%;
 	height: 1rem;
 	text-align: center;
-	margin: 0.5rem auto;
+	margin: 5% auto;
 }
 .raise_btn button{
 	width: 6rem;

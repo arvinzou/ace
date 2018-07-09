@@ -3,11 +3,11 @@
 	margin: 0;
 }
 .progress_box{
-	width:10rem;
+	width:100%;
 }
 .progress_content{
-	width: 9rem;
-	margin:0.5rem auto;
+	width: 90%;
+	margin:5% auto;
 }
 .project_record_title01{
 	font-size: 0.4rem;

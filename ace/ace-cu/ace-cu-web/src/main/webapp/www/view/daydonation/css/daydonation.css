@@ -9,7 +9,7 @@ ul,li{
 	list-style: none;
 }
 .dua_box{
-	width: 10rem;
+	width: 100%;
 }
 .dua_banner{
 	width: 100%;
@@ -22,12 +22,12 @@ ul,li{
 	object-fit: cover;
 }
 .banner_words{
-	width: 9rem;
+	width: 90%;
 	height: 2.2rem;
 	position: absolute;
 	top: 5rem;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
+	margin-left: 5%;
+	margin-right: 5%;
 	background: url(../img/banner_box.png) no-repeat;
 	background-size: 100% 100%;
 }
@@ -49,12 +49,12 @@ ul,li{
 	width: 6rem;
 }
 .content_01{
-	width: 9rem;
+	width: 90%;
 	height: 3.6rem;
 	margin-top: 1.5rem;
 	margin-bottom: 0.3rem;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
+	margin-left: 5%;
+	margin-right: 5%;
 	background-color: #FFFFFF;
 }
 .statistics{
@@ -77,18 +77,22 @@ ul,li{
 	font-size: 0.5rem;
 	font-weight: bold;
 	color: #EA4436;
-	padding-left: 0.3rem;
 }
 .times_larger{
 	font-size: 0.5rem;
 	font-weight: bold;
 	color: #2AAB6A;
-	padding-left: 0.3rem;
 }
 .statics01{
 	width: 100%;
 	height: 1rem;
 	line-height: 1rem;
+}
+.statics01 span{
+	width: 0.8rem;
+	height: 0.5rem;
+	display: block;
+	float: left;
 }
 .statics02{
 	width: 100%;
@@ -113,14 +117,14 @@ ul,li{
 	color: #EA4436;
 }
 .list_left{
-	width: 5rem;
+	width: 70%;
 	height: 0.6rem;
 	display: block;
 	float: left;
 	padding-left: 0.5rem;
 }
 .list_right{
-	width: 3rem;
+	width: 30%;
 	height: 0.6rem;
 	display: block;
 	float: left;
@@ -128,13 +132,13 @@ ul,li{
 	padding-right: 0.5rem;
 }
 .content_02{
-	width: 9rem;
+	width: 90%;
 	height: 2.6rem;
 	background-color: #FFFFFF;
 	margin: 0.3rem auto;
 }
 .content_title{
-	width: 8rem;
+	width: 90%;
 	height: 1rem;
 	line-height: 1rem;
 	margin: 0 auto;
@@ -144,7 +148,7 @@ ul,li{
 	border-bottom: 1px solid #E4E6E9;
 }
 .donate_rank{
-	width: 8rem;
+	width: 90%;
 	height: 1rem;
 	margin: 0 auto;
 	line-height: 1rem;
@@ -174,6 +178,8 @@ ul,li{
 	text-align: center;
 	font-size: 0.5rem;
 	color: #E2E2E2;
+	padding-top: 0.05714rem;
+	padding-left: 0.05714rem;
 }
 .topone{
 	background: url(../img/topone.png) no-repeat;
@@ -191,19 +197,22 @@ ul,li{
 	text-align: center;
 }
 .topone img{
-	width: 0.8rem;
-	height: 0.8rem;
+	width: 1rem;
+	height: 1rem;
 	border-radius: 50%;
+	border: 1px solid #FBE34F;
 }
 .toptwo img{
-	width: 0.8rem;
-	height: 0.8rem;
+	width: 1rem;
+	height: 1rem;
 	border-radius: 50%;
+	border: 1px solid #FCB560;
 }
 .topthree img{
-	width: 0.8rem;
-	height: 0.8rem;
+	width: 1rem;
+	height: 1rem;
 	border-radius: 50%;
+	border: 1px solid #B4D2DD;
 }
 .topfour img{
 	width: 0.8rem;
@@ -211,31 +220,31 @@ ul,li{
 	border-radius: 50%;
 }
 .content_03{
-	width: 9rem;
+	width: 90%;
 	background-color: #FFFFFF;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
+	margin-left: 5%;
+	margin-right: 5%;
 	margin-bottom: 0.3rem;
 	padding-top: 0.2rem;
+	padding-bottom: 0.3rem;
 }
 .project_title{
-	width: 8.5rem;
+	width: 90%;
 	height: 0.4rem;
 	line-height: 0.4rem;
-	padding-left: 0.5rem;
+	padding-left: 5%;
 	color: #333333;
 	font-size: 0.4rem;
 	font-weight: bold;
 	border-left:3px solid #EA4436;;
 }
 .project_content{
-	width: 8rem;
+	width: 90%;
 	color: #666666;
 	font-size: 0.35rem;
 	padding-top: 0.2rem;
 	margin: 0.2rem auto;
 	border-top: 1px solid #E4E6E9;
-	padding-bottom: 0.3rem;
 }
 .project_record_title{
 	width: 7rem;
@@ -258,11 +267,11 @@ ul,li{
 	font-weight: bold;
 }
 .footer{
-	width: 9rem;
+	width: 90%;
 	height: 1.5rem;
 	margin-top: 1rem;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
+	margin-left: 5%;
+	margin-right: 5%;
 	background-color: #FFFFFF;
 }
 .footer_left{
@@ -287,8 +296,8 @@ ul,li{
 	cursor: pointer;
 }
 .raise_01{
-	width: 2.6rem;
-	height: 1.4rem;
+	width: 33.33%;
+	height: 1.8rem;
 	text-align: center;
 	float: left;
 	padding-top: 0.5rem;
@@ -311,9 +320,10 @@ ul,li{
 	height: 0.5rem;
 	line-height: 0.5rem;
 	text-align: center;
+	margin-top: 0.3rem;
 }
 .project_title_left{
-	width: 5rem;
+	width: 4.5rem;
 	height: 100%;
 	display: block;
 	float: left;
@@ -331,10 +341,10 @@ ul,li{
 	color: #666666 !important;
 }
 .record_box{
-	width: 10rem;
+	width: 100%;
 }
 .record_more{
-	width: 9rem;
+	width: 90%;
 	margin: 0 auto;
 	padding-top: 0.5rem;
 }
@@ -420,4 +430,7 @@ ul,li{
 	font-size: 0.4rem;
 	color: #999999;
 	padding-top: 0.5rem;
+}
+.layui-timeline-item{
+	padding-bottom: 0 !important;
 }
