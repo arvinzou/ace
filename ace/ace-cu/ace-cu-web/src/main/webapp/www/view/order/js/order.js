@@ -198,19 +198,19 @@ function onBridgeReady(obj){
             complete: function (res) {
                 window.pay_tag = true;
                 if (res.errMsg == "chooseWXPay:ok") {
-                    // 支付成功后的回调函数
-                   /* if (typeof successCB == 'function') {
-                        //successCB();
-                        console.log('success');
-                    }*/
-                   alert("支付成功！");
+                   alert("捐款成功！");
+                    WeixinJSBridge.invoke('closeWindow', {}, function (res) {
+                        if (res.err_msg =="get_brand_wcpay_request:ok")
+                        {
+                            //  alert("支付成功err_code=" + res.err_code + ",err_desc=" + res.err_desc + ",err_msg=" + res.err_msg);
+                            WeixinJSBridge.invoke('closeWindow', {}, function (res) {
+                            });
+                        }
+                    });
+
                 } else {
-                    // 处理调用失败逻辑
-                  /*  if (typeof successCB == 'function') {
-                        //failCB();
-                        console.log('fail');
-                    }*/
-                    alert("支付失败！");
+
+                    alert("操作失败！");
                 }
             }
         });
