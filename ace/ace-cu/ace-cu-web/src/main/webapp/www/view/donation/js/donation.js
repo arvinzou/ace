@@ -23,7 +23,6 @@ app.controller(ngControllerName,function($scope){
             }
         }
     }
-    
     /**
      * 项目详情
      */
@@ -75,13 +74,8 @@ app.controller(ngControllerName,function($scope){
         }
     });
 
- /*  $scope.callMethod = function(){
-        for(var i=0; i< $scope.useRecords.length; i++){
-            $("#record"+i).html($scope.useRecords[i].useToProjectDesc);
-        }
-    }*/
-    
-    /**
+
+   /**
      * 捐赠列表
      */
     $.ajax({

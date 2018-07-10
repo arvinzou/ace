@@ -5,10 +5,12 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>爱心贡献榜</title>
+		<link rel="stylesheet" type="text/css" href="../js/dropload/dropload.css"/>
+		<link rel="stylesheet" type="text/css" href="css/donatelist.css"/>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
+		<script type="text/javascript" src="../js/dropload/dropload.js"></script>
 		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/donatelist.css"/>
 		<script type="text/javascript" src="js/donatelist.js"></script>
 	</head>
 	<body>
@@ -33,7 +35,10 @@
 			</div>
 			<div class="list">
 				<div class="listItem" ng-repeat="rank in rankList">
-					<div class="topnum" ng-bind="rank.indexNum"></div>
+					<div class="topnum" ng-cloak ng-if="rank.indexNum=='1'"><img src="img/no1.png" style="width: 0.6rem;height: 0.8rem;padding-top: 0.1rem;"/></div>
+					<div class="topnum" ng-cloak ng-if="rank.indexNum=='2'"><img src="img/no2.png" style="width: 0.6rem;height: 0.8rem;padding-top: 0.1rem;"/></div>
+					<div class="topnum" ng-cloak ng-if="rank.indexNum=='3'"><img src="img/no3.png" style="width: 0.6rem;height: 0.8rem;padding-top: 0.1rem;"/></div>
+					<div class="topnum" ng-cloak ng-if="rank.indexNum!='1'&&rank.indexNum!='2'&&rank.indexNum!='3'">{{rank.indexNum}}</div>
 					<div class="headImg">
 						<img ng-src="{{rank.headimgurl}}" />
 					</div>

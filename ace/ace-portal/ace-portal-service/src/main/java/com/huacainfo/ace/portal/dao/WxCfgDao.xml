@@ -108,5 +108,10 @@
          #{params.lastModifyDate,jdbcType=VARCHAR}, 1)
     </insert>
 
-
+    <select id="findBySysId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wx_cfg
+        where sysId = #{sysId,jdbcType=VARCHAR}
+    </select>
 </mapper>

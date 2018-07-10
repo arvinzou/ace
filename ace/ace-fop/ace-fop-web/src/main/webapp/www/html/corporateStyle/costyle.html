@@ -52,6 +52,10 @@
                 <span id="span3" class="unactive" ng-click="change($event,'3')">德城德星</span>
                 <span id="span4" class="unactive" ng-click="change($event,'4')">其他</span>
             </div>
+            <div style="width: 250px;height: 30px;float: right;">
+                <span class="s_title poblicSearch"><input type="text" id="key_word" placeholder="请输入关键字搜索"/><button class="glyphicon glyphicon-search" ng-click="search();"></button></span>
+            </div>
+            <div style="clear: both;"></div>
             <div class="cooperate">
                 <ul>
                     <li ng-repeat="item in items" ng-click="showInfo($index);">

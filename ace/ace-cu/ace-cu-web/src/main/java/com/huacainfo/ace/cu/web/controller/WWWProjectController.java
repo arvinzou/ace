@@ -5,7 +5,9 @@ import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.cu.model.CuProcessRecord;
 import com.huacainfo.ace.cu.service.CuDonateOrderService;
+import com.huacainfo.ace.cu.service.CuProcessRecordService;
 import com.huacainfo.ace.cu.service.CuProjectApplyService;
 import com.huacainfo.ace.cu.service.CuProjectService;
 import com.huacainfo.ace.cu.vo.CuDonateOrderVo;
@@ -14,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Created by HuaCai008 on 2018/6/14.
@@ -28,6 +32,8 @@ public class WWWProjectController extends CuBaseController {
     private CuProjectApplyService cuProjectApplyService;
     @Autowired
     private CuDonateOrderService cuDonateOrderService;
+    @Autowired
+    private CuProcessRecordService cuProcessRecordService;
 
     /**
      * 查询项目列表
@@ -154,5 +160,36 @@ public class WWWProjectController extends CuBaseController {
         data.setOpenId(userinfo.getOpenid());
 
         return cuDonateOrderService.createDonateOrder(data);
+    }
+
+    /**
+     * 查询 “救急难” -  处理过程
+     */
+    @RequestMapping(value = "/getApplyProcess")
+    @ResponseBody
+    public ResultResponse getApplyProcess(String applyId) throws Exception {
+        List<CuProcessRecord> list = cuProcessRecordService.findList(applyId);
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
+    }
+
+    /**
+     * 查询项目 - 捐赠列表 -- 当日一天内的数据结果
+     *
+     * @param projectId 慈善项目ID
+     * @param start     分页开始位置  --  必选
+     * @param limit     页数  --  必选
+     * @param orderBy   排序条件   --  可选，默认时间倒叙
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findDonateListToday")
+    @ResponseBody
+    public ResultResponse findDonateListToday(String projectId, int start, int limit, String orderBy) throws Exception {
+        if (StringUtil.isEmpty(projectId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return cuProjectService.findDonateListToday(projectId, start, limit, orderBy);
     }
 }

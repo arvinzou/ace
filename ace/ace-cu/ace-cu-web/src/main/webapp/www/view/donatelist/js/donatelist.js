@@ -4,6 +4,7 @@ var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
 
+
     var locaUrl = window.location.href;
     var url = window.location.href.substring(locaUrl.indexOf("?")+1);
     var primaryId = null;
@@ -23,11 +24,11 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/report/donateRank",
         type:"post",
         async:false,
-        data:{start:0, limit: 999999, projectId: primaryId, needOpenId: "1"},
+        data:{start:0, limit: 9999, projectId: primaryId, needOpenId: "1"},
         success:function(result){
             if(result.status == 0) {
-                $scope.rankList = result.data.list;
                 $scope.own = result.data.own;
+                $scope.rankList = result.data.list;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }

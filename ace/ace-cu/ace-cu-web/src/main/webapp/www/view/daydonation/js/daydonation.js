@@ -55,13 +55,18 @@ app.controller(ngControllerName,function($scope){
      * 捐赠列表
      */
     $.ajax({
-        url: "/cu/www/project/findDonateList",
+        url: "/cu/www/project/findDonateListToday",
         type:"post",
         async:false,
         data:{projectId: projectId, start: 0, limit: 99999},
         success:function(result){
             if(result.status == 0) {
                 $scope.donationList = result.data.rows;
+                if(result.data.rows.length < 1){
+                    $(".donate_list").hide();
+                }else{
+                    $(".donate_list").show();
+                }
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }

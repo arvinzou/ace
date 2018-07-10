@@ -115,12 +115,12 @@
 					</div>
 					<div class="form">
 						<p>
-							<span class="form_title">相关证明</span>
+							<span class="form_title01">相关证明(最多上传3张)</span>
 						</p>
 					</div>
 					<div class="identify">
 						<!--证明-->
-						<div class="positive">
+						<div class="positive" id="datum01">
 							<div class="pictureContainer container_03" id="prove1">
 								<div class="viewPicture picture_03">
 									<img class="undis" src="" style="width: 100%;height: 100%;object-fit: cover;">
@@ -132,7 +132,7 @@
 							</div>
 						</div>
 						<!--证明-->
-						<div class="unpositive">
+						<div class="unpositive" id="datum02" style="display: none;">
 							<div class="pictureContainer container_04" id="prove2">
 								<div class="viewPicture picture_04">
 									<img class="undis" src="" style="width: 100%;height: 100%;object-fit: cover;">
@@ -140,6 +140,18 @@
 								<div class="uploadText text_04">
 									<img src="img/add.png" style="width:0.5rem;height:0.5rem" />
 									<p class="uploadPloadprogress progress_04">上传证明</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="handIdentity" id="datum03" style="display: none;">
+							<div class="pictureContainer container_06" id="prove3">
+								<div class="viewPicture picture_06">
+									<img class="undis" src="" style="width: 100%;height: 100%;object-fit: cover;">
+								</div>
+								<div class="uploadText text_06">
+									<img src="img/add.png" style="width:0.5rem;height:0.5rem" />
+									<p class="uploadPloadprogress progress_06">上传证明</p>
 								</div>
 							</div>
 						</div>
@@ -171,7 +183,7 @@
 		</div>
 		<div class="sdetail">
 			<p>资料审核中，请耐心等待</p>
-			<p>可前往<a href="/cu/www/view/me/apply_progress.html">个人中心</a>查看审核状态</p>
+			<p>可前往<a href="javascript:void(0)" onclick="showProjectProgress();">个人中心</a>查看审核状态</p>
 		</div>
 	</div>
 </html>

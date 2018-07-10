@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>入驻成员-资源/附件</title>
+    <title>入驻流程节点管理</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">

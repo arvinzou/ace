@@ -221,4 +221,78 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fundtown.vo.VipPublicityVo">
+        <result column="parent_department_id" jdbcType="VARCHAR" property="pid"/>
+        <result column="pName" jdbcType="VARCHAR" property="pName"/>
+        <result column="department_name" jdbcType="VARCHAR" property="departmentName"/>
+        <result column="legal_person_name" jdbcType="VARCHAR" property="legalPersonName"/>
+        <result column="reg_capital" jdbcType="VARCHAR" property="regCapital"/>
+        <result column="reg_addr" jdbcType="VARCHAR" property="regAddr"/>
+    </resultMap>
+    <sql id="Vo_Column_List">
+		d.parent_department_id,d1.department_name as pName,
+        d.department_name, d.legal_person_name, d.reg_capital, d.reg_addr,
+        t.id, t.deptId, t.belongDeptId, t.belongDeptName, t.delegate,
+        t.creditNo, t.zjxRecordDate, t.zjxRecordNo,t.remark, t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
+        t.lastModifyUserName, t.lastModifyDate
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from vip_publicity t
+        left join portal.department d on d.department_id = t.deptId
+        left join portal.department d1 on d.parent_department_id = d1.department_id
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from vip_publicity t
+        left join portal.department d on d.department_id = t.deptId
+        left join portal.department d1 on d.parent_department_id = d1.department_id
+        where 1=1
+        <if test="condition.type!=null and condition.type!=&quot;&quot;">
+            and d.type = #{condition.type,jdbcType=VARCHAR}
+        </if>
+
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fundtown.model.VipPublicity">
+        select count(1)
+        from cu_donate_list
+        where 1=1
+    </select>
+
+    <select id="findByDeptId" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from vip_publicity t
+        left join portal.department d on d.department_id = t.deptId
+        left join portal.department d1 on d.parent_department_id = d1.department_id
+        where
+        t.deptId = #{deptId,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

@@ -4,7 +4,7 @@
 
 /* 最小高度 */
 .hotel-filter-list-min {
-	/*height: 84px;*/
+	height: 62px;
 }
 
 /* 筛选外容器 */
@@ -93,6 +93,7 @@
 	height: 35px;
 	margin-top: 6px;
 	line-height: 35px;
+	cursor: pointer;
 }
 
 .hotel-filter-list .con .any li {

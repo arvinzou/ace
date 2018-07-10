@@ -182,4 +182,16 @@ public class VipPublicityServiceImpl implements VipPublicityService {
         return new MessageResponse(0, "入驻成员公示列表删除完成！");
     }
 
+
+    /**
+     * 获取机构/基金详情
+     *
+     * @param deptId 企业department.id
+     * @return list
+     */
+    @Override
+    public VipPublicityVo getVipInfo(String deptId) {
+        return vipPublicityDao.findByDeptId(deptId);//.selectVoByPrimaryKey(deptId);
+    }
+
 }

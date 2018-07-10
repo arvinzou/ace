@@ -32,4 +32,5 @@ public interface CuProjectApplyDao {
 
     int isExit(CuProjectApply record);
 
+    CuProjectApply findByProjectId(String projectId);
 }

@@ -19,7 +19,8 @@
 		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
-		<SCRIPT language=JavaScript src="../../js/js.js"></SCRIPT>
+		<script type="text/javascript" src="js/Popt.js"></script>
+		<script type="text/javascript" src="js/city.json.js"></script>
 		<script type="text/javascript" src="js/publicity.js"></script>
 		<link rel="shortcut icon" href="../../images/favicon.ico">
 		<style>
@@ -77,21 +78,8 @@
                             <div style="clear: both;"></div>
                             <div class="search_filter1">
 								<div style="width: 100px;float: left;">所属区域：</div>
-								<div style="width: 400px;float: left;height: 30px;">
-									<select id="areaCode" ng-click="search();">
-										<option value="">请选择</option>
-										<option value="430702">武陵区</option>
-										<option value="430703">鼎城区</option>
-										<option value="430721">安乡县</option>
-										<option value="430722">汉寿县</option>
-										<option value="430723">澧县</option>
-										<option value="430724">临澧县</option>
-										<option value="430725">桃源县</option>
-										<option value="430725">石门县</option>
-										<option value="430725">津市市</option>
-										<option value="430782">其他</option>
-									</select>
-								</div>
+								<div class="wrap"><input class="input" name="" id="city" type="text" placeholder="请选择"
+														 autocomplete="off"  onchange="search();"/></div>
                             </div>
 						</div>
 					</div>

@@ -1,0 +1,47 @@
+body {
+    background-color: #F7F9FC;
+    font-size: 3.7vw;
+    color: #8B8AA6;
+    line-height: 3.4vh;
+}
+
+.top_card {
+    width: 100vw;
+    margin-top: 2.4vh;
+    height: 69.3vh;
+    background: url(../image/card3.png);
+    background-size: 100% 100%;
+    padding: 8.2vh 9.3vw 0;
+}
+
+.top_card .btn {
+    width: 56.9vw;
+    height: 10.1vh;
+    background: url(../image/button1.png) no-repeat;
+    background-size: 100% 100%;
+    margin: auto;
+    margin-bottom: 3vh;
+}
+
+.bottom_card {
+    width: 97.2vw;
+    height: 30.7vh;
+    background: url(../image/card4.png) no-repeat;
+    background-size: 100% 100%;
+    margin: 0.8vh auto 4vh;
+    padding: 9.2vh 0 0 34.7vw;
+    font-size: 3.3vw;
+    line-height: 3vh;
+}
+
+.bottom_card .point {
+    color: #5C6681;
+    font-size: 3.2vw;
+    margin-top: 1.2vh;
+    font-weight: bold;
+}
+
+.bottom_text .margin {
+    margin-bottom: 3vh;
+}
+

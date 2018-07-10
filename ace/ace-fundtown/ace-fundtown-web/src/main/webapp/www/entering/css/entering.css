@@ -1,0 +1,94 @@
+body {
+    background: url(../image/bg.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 27.866666rem;
+    padding: 8.666666rem 0.733333rem 0;
+    color: #fff;
+    position: relative;
+}
+
+.text {
+    font-size: 0.373333rem;
+}
+
+.text .iconfont {
+    margin-right: 0.306666rem;
+    font-size: 0.48rem;
+}
+
+.btn_list li {
+    display: block;
+    width: 100%;
+    height: 1.493333rem;
+    border-radius: 0.746666rem;
+    background-color: #fff;
+    margin-top: 0.4rem;
+}
+
+.btn_list li .left {
+    width: 7rem;
+    padding-left: 0.5rem;
+    float: left;
+    height: 1.493333rem;
+    color: #8B8AA6;
+}
+
+.btn_list li .left .num {
+    font-family: BAHNSCHRIFT;
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+}
+
+.btn_list li .left .name {
+    font-size: 0.4rem;
+
+}
+
+.btn_list li .left span {
+    float: left;
+    line-height: 1.493333rem;
+}
+
+.btn_list li .right {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background-color: #FF4F51;
+    float: right;
+    margin: 0.146666rem 0.146666rem 0 0;
+    text-align: center;
+    font-size: 0.32rem;
+    line-height: 1.2rem;
+}
+
+.footer {
+    width: 100%;
+    height: 3.12rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #1534A6;
+    padding: 0.56rem 0.36rem;
+}
+
+.footer > div {
+    float: left;
+}
+
+.footer .code {
+    height: 2.04rem;
+    width: 2.04rem;
+    background: url(../image/code.png) no-repeat;
+    background-size: 100% 100%;
+    margin-right: 0.333333rem;
+}
+
+.footer .info {
+    font-size: 0.333333rem;
+    line-height: 0.573333rem;
+}
+
+.footer .info .phoneNum {
+    margin-top: 0.1rem;
+}

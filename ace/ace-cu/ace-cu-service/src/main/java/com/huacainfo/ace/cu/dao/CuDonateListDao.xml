@@ -260,6 +260,9 @@
         <if test="condition.projectId!=null and condition.projectId!=&quot;&quot;">
             and t.projectId = #{condition.projectId,jdbcType=VARCHAR}
         </if>
+        <if test="condition.todayDate!=null and condition.todayDate!=&quot;&quot;">
+            and t.donateDate like concat(#{condition.todayDate,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">

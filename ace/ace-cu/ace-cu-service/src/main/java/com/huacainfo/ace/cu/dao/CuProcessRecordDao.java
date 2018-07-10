@@ -33,4 +33,5 @@ public interface CuProcessRecordDao {
 
     int isExit(CuProcessRecord record);
 
+    List<CuProcessRecord> findListByApplyId(String applyId);
 }

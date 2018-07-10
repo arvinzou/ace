@@ -7,8 +7,11 @@ import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.cu.dao.report.ReportDao;
 import com.huacainfo.ace.cu.service.AnalysisService;
+import com.huacainfo.ace.cu.service.CuUserService;
+import com.huacainfo.ace.cu.vo.CuUserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -20,6 +23,8 @@ import java.util.Map;
 @Service("analysisService")
 public class AnslysisServiceImpl implements AnalysisService {
     private static final Logger logger = LoggerFactory.getLogger(AnslysisServiceImpl.class);
+    @Autowired
+    private CuUserService cuUserService;
 
     @Override
     public ListResult<Map<String, Object>> query(Map<String, Object> condition,
@@ -123,7 +128,7 @@ public class AnslysisServiceImpl implements AnalysisService {
                     List<Map<String, Object>> ownList = donateRank(projectId, openId, start, limit, orderBy);
                     ownData = CollectionUtils.isEmpty(ownList) ? null : ownList.get(0);
                 }
-                respMap.put("own", ownData);
+                respMap.put("own", null == ownData ? getDefaultOwnData(openId) : ownData);
                 respMap.put("list", list);
             }
         } else {
@@ -132,6 +137,20 @@ public class AnslysisServiceImpl implements AnalysisService {
         }
 
         return respMap;
+    }
+
+    private Map<String, Object> getDefaultOwnData(String openId) {
+        CuUserVo vo = cuUserService.findByOpenId(openId);
+
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("nickname", null == vo ? "-" : vo.getNickname());
+        rtnMap.put("headimgurl", null == vo ? "-" : vo.getHeadimgurl());
+        rtnMap.put("openid", null == vo ? "-" : vo.getOpenId());
+        rtnMap.put("totalDonateAmount", 0);
+        rtnMap.put("donateCount", 0);
+        rtnMap.put("donateDays", 0);
+
+        return rtnMap;
     }
 
 

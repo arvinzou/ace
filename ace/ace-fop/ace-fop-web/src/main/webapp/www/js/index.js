@@ -88,7 +88,7 @@ app.controller(ngControllerName,function($scope) {
             });
         }
     });
-    var i = 0, page = 4;
+   /* var i = 0, page = 4;
     setInterval(function(){
         var arr = $scope.brandHover();
         if(i <= page-4 && page <arr.length){
@@ -109,7 +109,7 @@ app.controller(ngControllerName,function($scope) {
         }
 
     },2000);
-
+*/
     myMap = echarts.init(document.getElementById('mapgis'));
     var url = "/fop/www/companyGis";
     $.getJSON(url, function (result) {

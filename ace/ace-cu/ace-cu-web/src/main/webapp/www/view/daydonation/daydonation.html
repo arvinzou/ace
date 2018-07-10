@@ -7,7 +7,9 @@
 		<title>慈善一日捐</title>
 		<link rel="stylesheet" type="text/css" href="../js/layer.mobile-v2.0/layer_mobile/need/layer.css"/>
 		<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
 		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="../js/layer.mobile-v2.0/layer_mobile/layer.js"></script>
@@ -18,7 +20,27 @@
 	<body>
 		<div class="dua_box">
 			<div class="dua_banner">
-				<img src="img/banner.png" />
+				<!--<img src="img/banner.png" />-->
+				<div style="width: 100%;height: 100%;" id="myCarousel" class="carousel slide" data-ride="carousel">
+					<!-- 轮播（Carousel）指标 -->
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="1"></li>
+						<li data-target="#myCarousel" data-slide-to="2"></li>
+					</ol>
+					<!-- 轮播（Carousel）项目 -->
+					<div class="carousel-inner">
+						<div class="item active">
+							<img class="slideImg" src="img/banner.png" alt="First slide">
+						</div>
+						<div class="item">
+							<img class="slideImg" src="img/banner1.png" alt="Second slide">
+						</div>
+						<div class="item">
+							<img class="slideImg" src="img/banner2.png" alt="Third slide">
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="banner_words">
 				<div class="words">
@@ -29,18 +51,30 @@
 			<div class="content_01">
 				<div class="statistics">
 					<div class="statistics_left">
-						<div class="statics01"><span><img src="img/statics02.png" style="width: 0.5rem;height: 0.4rem;"/></span><span class="money_larger" ng-bind="projectInfo.todayDonateAmount"></span></div>
+						<div style="width: 1.6rem;height: 1rem;margin: 0 auto;">
+							<div class="statics01">
+								<span><img src="img/statics02.png" style="width: 0.5rem;height: 0.4rem;"/></span>
+								<span class="money_larger" ng-bind="projectInfo.todayDonateAmount"></span>
+								<div style="clear: both;"></div>
+							</div>
+						</div>
 						<div class="statics02">今日捐款数(元)</div>
 					</div>
 					<div class="statistics_right">
-						<div class="statics01"><span><img src="img/statics01.png" style="width: 0.5rem;height: 0.5rem;"/></span><span class="times_larger" ng-bind="projectInfo.todayDonateCount"></span></div>
+						<div  style="width: 1.6rem;height: 1rem;margin: 0 auto;">
+							<div class="statics01">
+								<span><img src="img/statics01.png" style="width: 0.5rem;height: 0.5rem;"/></span>
+								<span class="times_larger" ng-bind="projectInfo.todayDonateCount"></span>
+								<div style="clear: both;"></div>
+							</div>
+						</div>
 						<div class="statics02">今日捐款次数</div>
 					</div>
 					<div style="clear: both;"></div>
 				</div>
 				<div class="donate_list marquee">
-					<ul>
-						<marquee scrollamount="2" direction="up" behaviour="scroll">
+					<ul style="height: 1.2rem;">
+						<marquee scrollamount="2" direction="up" behaviour="scroll" style="height: 1.2rem;">
 						<li ng-repeat="dua in donationList">
 							<span class="list_left" ng-cloak>{{dua.nickname}}&nbsp;捐赠<span class="money_default" ng-bind="dua.donateAmount"></span>元</span>
 							<span class="list_right" ng-bind="dua.donateDate | formatDate"></span>
@@ -61,7 +95,7 @@
 						</span>
 					</div>
 					<div class="donate_rank_list">
-						<ul>
+						<ul style="width: 5.2rem;">
 							<li class="topone" ng-if="rankList[0]!=undefined &&rankList[0]!=null">
 								<img ng-src="{{rankList[0].headimgurl}}"/>
 							</li>
@@ -75,7 +109,7 @@
 								<img ng-src="{{rankList[3].headimgurl}}" />
 							</li>
 							<li>
-								<a href="#" ng-click="donateRank();">...</a>
+								<a href="#" ng-click="donateRank();" style="color: #E2E2E2;">...</a>
 							</li>
 						</ul>
 					</div>

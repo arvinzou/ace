@@ -18,17 +18,18 @@ public interface WxCfgDao {
 
 
     int updateByPrimaryKey(WxCfg record);
-    
+
     List<WxCfgVo> findList(@Param("condition") WxCfgQVo condition,
-			@Param("start") int start, @Param("limit") int limit,
-			@Param("orderBy") String orderBy);
+                           @Param("start") int start, @Param("limit") int limit,
+                           @Param("orderBy") String orderBy);
 
-	int findCount(@Param("condition") WxCfgQVo condition);
+    int findCount(@Param("condition") WxCfgQVo condition);
 
-	int isExit(WxCfg record);
+    int isExit(WxCfg record);
 
     int updateAccessTokenTicket(@Param("appId") String appId, @Param("accessToken") String accessToken, @Param("expiresIn") int expiresIn, @Param("ticket") String ticket);
-    List<Map<String,Object>> selectAppList();
+
+    List<Map<String, Object>> selectAppList();
 
     Map<String, String> selectAccessTokenAndTicketByDeptId(String id);
 
@@ -55,4 +56,6 @@ public interface WxCfgDao {
     List<Map<String, Object>> selectQuestion(String keyWord);
 
     int insertQuestion(@Param("params") Map<String, Object> params);
+
+    WxCfg findBySysId(String sysId);
 }

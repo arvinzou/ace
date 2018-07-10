@@ -8,6 +8,8 @@ var coverUrl02 = null;
 var coverUrl03 = null;
 var coverUrl04 = null;
 var coverUrl05 = null;
+var coverUrl06 = null;
+var id = "";
 app.controller(ngControllerName,function($scope){
 	var uploader1 = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
@@ -119,6 +121,8 @@ app.controller(ngControllerName,function($scope){
                     var rst = JSON.parse(responseObject.response);
                     viewCover(rst.file_path, '.container_03','.picture_03 img', '.text_03');
                     coverUrl03 = rst.file_path;
+                    uploader4.init();
+                    $("#datum02").show();
                 }
             }
         });
@@ -157,10 +161,11 @@ app.controller(ngControllerName,function($scope){
                     var rst = JSON.parse(responseObject.response);
                     viewCover(rst.file_path, '.container_04','.picture_04 img', '.text_04');
                     coverUrl04 = rst.file_path;
+                    uploader6.init();
+                    $("#datum03").show();
                 }
             }
         });
-        uploader4.init();
 
     var uploader5 = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
@@ -199,6 +204,44 @@ app.controller(ngControllerName,function($scope){
         }
     });
     uploader5.init();
+
+    var uploader6 = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'prove3',
+        url: '/portal/www/upload.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        resize: {
+            width: 1024,
+            height: 1024,
+            crop: true,
+            quality: 60,
+            preserve_headers: false
+        },
+        filters: {
+            max_file_size: '2048mb',
+            mime_types: [
+                /* {title: "Image files", extensions: "jpg,gif,png,jpeg"}*/
+            ]
+        },
+        init: {
+            FileFiltered: function (up, files) {
+                showUploadText('.picture_06 img', '.text_06');
+                up.start();
+                return false;
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".progress_06").html("开始上传（" + r + "%）")
+            },
+            FileUploaded: function (uploader, file, responseObject) {
+                var rst = JSON.parse(responseObject.response);
+                viewCover(rst.file_path, '.container_06','.picture_06 img', '.text_06');
+                coverUrl06 = rst.file_path;
+            }
+        }
+    });
+
         /**
          * 发起申请
          */
@@ -279,6 +322,14 @@ app.controller(ngControllerName,function($scope){
 			}
 			list.push(temp);
 		}
+		if(coverUrl06 !=null && coverUrl06!= undefined){
+            var temp = {
+                "resName":"证明文件",
+                "resUrl":coverUrl06,
+                "type":"2"
+            }
+            list.push(temp);
+        }
 		
 		$.ajax({
         url: "/cu/www/project/applyProject",
@@ -297,6 +348,8 @@ app.controller(ngControllerName,function($scope){
         },
         success:function(result){
             if(result.status == 0) {
+                id = result.data.id;
+                $scope.projectId = id;
                 layer.open({
                     type:1,
                     content: $("#success_box").html(),
@@ -314,7 +367,9 @@ app.controller(ngControllerName,function($scope){
 	}
 });
 
-
+function showProjectProgress(){
+    window.location.href = '/cu/www/view/me/apply_progress.html?projectId='+id;
+}
 /*图片上传成功后*/
 function viewCover(img, clazz, imgClazz, textClazz) {
     $(clazz).data('imgSrc',img);

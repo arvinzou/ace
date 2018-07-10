@@ -232,4 +232,15 @@ public class WxCfgServiceImpl implements WxCfgService {
         int a = wxCfgDao.insertQuestion(params);
         return new MessageResponse(ResultCode.SUCCESS, "插入成功");
     }
+
+    /**
+     * 根据系统ID，查询微信相关配置
+     *
+     * @param sysId 系统ID
+     * @return 配置项
+     */
+    @Override
+    public WxCfg findBySysId(String sysId) {
+        return wxCfgDao.findBySysId(sysId);
+    }
 }

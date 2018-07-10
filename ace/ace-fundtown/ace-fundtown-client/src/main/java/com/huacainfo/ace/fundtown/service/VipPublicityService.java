@@ -82,4 +82,12 @@ public interface VipPublicityService {
      */
     MessageResponse deleteVipPublicityByVipPublicityId(String id, UserProp userProp) throws Exception;
 
+
+    /**
+     * 获取机构/基金详情
+     *
+     * @param deptId 企业department.id
+     * @return list
+     */
+    VipPublicityVo getVipInfo(String deptId);
 }
