@@ -59,4 +59,6 @@ public interface WxCfgService {
     List<Map<String, Object>> selectQuestion(String keyWord);
 
     MessageResponse insertQuestion(Map<String, Object> params);
+
+    WxCfg findBySysId(String sysId);
 }
