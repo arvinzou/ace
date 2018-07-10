@@ -64,7 +64,7 @@ public class CuProject implements Serializable {
     private int sequence;
 
     /**
-     * 0-否 1-true
+     * 0-下线 1-上线
      */
     private String started;
 

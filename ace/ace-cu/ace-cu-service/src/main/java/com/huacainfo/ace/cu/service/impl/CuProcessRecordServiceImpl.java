@@ -10,11 +10,17 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.cu.common.constant.ProcessRecordConstant;
+import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuProcessRecordDao;
+import com.huacainfo.ace.cu.dao.CuProjectApplyDao;
 import com.huacainfo.ace.cu.model.CuProcessRecord;
+import com.huacainfo.ace.cu.model.CuProject;
+import com.huacainfo.ace.cu.model.CuProjectApply;
 import com.huacainfo.ace.cu.service.CuProcessRecordService;
 import com.huacainfo.ace.cu.vo.CuProcessRecordQVo;
 import com.huacainfo.ace.cu.vo.CuProcessRecordVo;
+import com.huacainfo.ace.cu.vo.CuProjectApplyVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +42,8 @@ public class CuProcessRecordServiceImpl implements CuProcessRecordService {
     private CuProcessRecordDao cuProcessRecordDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private CuProjectApplyDao cuProjectApplyDao;
 
     /**
      * @throws
@@ -226,7 +234,7 @@ public class CuProcessRecordServiceImpl implements CuProcessRecordService {
         record.setNodeIndex(nodeIndex);
         record.setNodeDesc(nodeDesc);
         record.setRecordDate(recordDate);
-        record.setStatus("1");
+        record.setStatus("2");
         record.setCreateUserId("system");
         record.setCreateUserName("系统用户");
         record.setCreateDate(DateUtil.getNowDate());
@@ -246,6 +254,140 @@ public class CuProcessRecordServiceImpl implements CuProcessRecordService {
     @Override
     public List<CuProcessRecord> findList(String applyId) {
         return cuProcessRecordDao.findListByApplyId(applyId);
+    }
+
+    @Override
+    public ResultResponse recordSubmit(CuProjectApplyVo vo) {
+
+        return insertRecord(vo.getApplyUserId(), vo.getApplyOpenId(), vo.getId(),
+                ProcessRecordConstant.INDEX_0_SUBMIT, ProcessRecordConstant.DESC_0_SUBMIT,
+                DateUtil.getNowDate());
+    }
+
+    /**
+     * 受理申请
+     *
+     * @param auditResult  受理结果
+     * @param auditOpinion 受理意见
+     * @param apply        受理资料
+     * @return
+     */
+    @Override
+    public ResultResponse recordAccept(String auditResult, String auditOpinion, CuProjectApply apply) {
+        String status = "0".equals(auditResult.trim()) ?
+                ProjectConstant.P_STATUS_PASSED : ProjectConstant.P_STATUS_REJECTED;
+
+        CuProcessRecord record = new CuProcessRecord();
+        record.setId(GUIDUtil.getGUID());
+        record.setApplyUserId(apply.getApplyUserId());
+        record.setApplyOpenId(apply.getApplyOpenId());
+        record.setApplyResId(apply.getId());
+        record.setNodeIndex(ProcessRecordConstant.INDEX_1_ACCEPT);
+        record.setNodeDesc(ProcessRecordConstant.DESC_1_ACCEPT);
+        record.setRecordDate(DateUtil.getNowDate());
+        record.setStatus(status);
+        record.setRemark(auditOpinion);
+        record.setCreateUserId("system");
+        record.setCreateUserName("系统用户");
+        record.setCreateDate(DateUtil.getNowDate());
+        record.setLastModifyDate(DateUtil.getNowDate());
+
+        cuProcessRecordDao.insertSelective(record);
+
+        return new ResultResponse(ResultCode.SUCCESS, "记录成功", record);
+    }
+
+    /**
+     * 项目审核
+     */
+    @Override
+    public ResultResponse recordProjectAudit(String auditResult, String auditOpinion, CuProject project) {
+        String status = "0".equals(auditResult.trim()) ?
+                ProjectConstant.P_STATUS_PASSED : ProjectConstant.P_STATUS_REJECTED;
+
+        CuProjectApply apply = cuProjectApplyDao.findByProjectId(project.getId());
+        if (null == apply) {
+            return new ResultResponse(ResultCode.FAIL, "申请资料丢失");
+        }
+
+        CuProcessRecord record = new CuProcessRecord();
+        record.setId(GUIDUtil.getGUID());
+        record.setApplyUserId(apply.getApplyUserId());
+        record.setApplyOpenId(apply.getApplyOpenId());
+        record.setApplyResId(apply.getId());
+        record.setNodeIndex(ProcessRecordConstant.INDEX_2_AUDITED);
+        record.setNodeDesc(ProcessRecordConstant.DESC_2_AUDITED);
+        record.setRecordDate(DateUtil.getNowDate());
+        record.setStatus(status);
+        record.setRemark(auditOpinion);
+        record.setCreateUserId("system");
+        record.setCreateUserName("系统用户");
+        record.setCreateDate(DateUtil.getNowDate());
+        record.setLastModifyDate(DateUtil.getNowDate());
+        cuProcessRecordDao.insertSelective(record);
+
+        return new ResultResponse(ResultCode.SUCCESS, "记录成功", record);
+    }
+
+    /**
+     * 项目上线
+     */
+    @Override
+    public ResultResponse recordProjectSetup(CuProject project) {
+        CuProjectApply apply = cuProjectApplyDao.findByProjectId(project.getId());
+        if (null == apply) {
+            return new ResultResponse(ResultCode.FAIL, "申请资料丢失");
+        }
+
+        CuProcessRecord record = new CuProcessRecord();
+        record.setId(GUIDUtil.getGUID());
+        record.setApplyUserId(apply.getApplyUserId());
+        record.setApplyOpenId(apply.getApplyOpenId());
+        record.setApplyResId(apply.getId());
+        record.setNodeIndex(ProcessRecordConstant.INDEX_3_COLLECTING);
+        record.setNodeDesc(ProcessRecordConstant.DESC_3_COLLECTING);
+        record.setRecordDate(DateUtil.getNowDate());
+        record.setStatus("2");
+        record.setRemark("");
+        record.setCreateUserId("system");
+        record.setCreateUserName("系统用户");
+        record.setCreateDate(DateUtil.getNowDate());
+        record.setLastModifyDate(DateUtil.getNowDate());
+        cuProcessRecordDao.insertSelective(record);
+
+        return new ResultResponse(ResultCode.SUCCESS, "记录成功", record);
+    }
+
+    /**
+     * 项目关闭
+     *
+     * @param reason  关闭原因
+     * @param project
+     */
+    @Override
+    public ResultResponse recordProjectShutDown(String reason, CuProject project) {
+        CuProjectApply apply = cuProjectApplyDao.findByProjectId(project.getId());
+        if (null == apply) {
+            return new ResultResponse(ResultCode.FAIL, "申请资料丢失");
+        }
+
+        CuProcessRecord record = new CuProcessRecord();
+        record.setId(GUIDUtil.getGUID());
+        record.setApplyUserId(apply.getApplyUserId());
+        record.setApplyOpenId(apply.getApplyOpenId());
+        record.setApplyResId(apply.getId());
+        record.setNodeIndex(ProcessRecordConstant.INDEX_4_END);
+        record.setNodeDesc(ProcessRecordConstant.DESC_4_END);
+        record.setRecordDate(DateUtil.getNowDate());
+        record.setStatus("2");
+        record.setRemark(reason);
+        record.setCreateUserId("system");
+        record.setCreateUserName("系统用户");
+        record.setCreateDate(DateUtil.getNowDate());
+        record.setLastModifyDate(DateUtil.getNowDate());
+        cuProcessRecordDao.insertSelective(record);
+
+        return new ResultResponse(ResultCode.SUCCESS, "记录成功", record);
     }
 
 }

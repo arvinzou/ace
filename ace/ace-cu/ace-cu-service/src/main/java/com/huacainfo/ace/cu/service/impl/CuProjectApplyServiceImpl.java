@@ -11,7 +11,6 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
-import com.huacainfo.ace.cu.common.constant.ProcessRecordConstant;
 import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuProjectApplyDao;
 import com.huacainfo.ace.cu.dao.CuProjectApplyResDao;
@@ -267,17 +266,11 @@ public class CuProjectApplyServiceImpl implements CuProjectApplyService {
             cuProjectApplyResDao.insertSelective(res);
         }
         //流程记录
-        processRecord(vo);
+        cuProcessRecordService.recordSubmit(vo);
 
         return new ResultResponse(ResultCode.SUCCESS, "添加成功", vo);
     }
 
-    private ResultResponse processRecord(CuProjectApplyVo vo) {
-
-        return cuProcessRecordService.insertRecord(vo.getApplyUserId(), vo.getApplyOpenId(), vo.getId(),
-                ProcessRecordConstant.INDEX_0_SUBMIT, ProcessRecordConstant.DESC_0_SUBMIT,
-                DateUtil.getNowDate());
-    }
 
     /**
      * 功能描述:  "救急难"审核
@@ -307,6 +300,7 @@ public class CuProjectApplyServiceImpl implements CuProjectApplyService {
             project.setType(ProjectConstant.P_TYPE_PERSONAL);
             project.setStartDate(DateUtil.getNowDate());
             project.setEndDate(DateUtil.getNowDate());
+            //
             project.setId(GUIDUtil.getGUID());
             project.setParentId("0");
             project.setStatus("1");
@@ -326,6 +320,9 @@ public class CuProjectApplyServiceImpl implements CuProjectApplyService {
         apply.setLastModifyUserId(curUserProp.getUserId());
         apply.setLastModifyUserName(curUserProp.getName());
         cuProjectApplyDao.updateByPrimaryKeySelective(apply);
+
+        //流程记录
+        cuProcessRecordService.recordAccept(auditResult, auditOpinion, apply);
 
         return new MessageResponse(ResultCode.SUCCESS, "审核完成");
     }

@@ -17,6 +17,7 @@ import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.model.CuProject;
 import com.huacainfo.ace.cu.model.CuProjectUseRecord;
 import com.huacainfo.ace.cu.service.CuDonateListService;
+import com.huacainfo.ace.cu.service.CuProcessRecordService;
 import com.huacainfo.ace.cu.service.CuProjectService;
 import com.huacainfo.ace.cu.service.CuProjectUseRecordService;
 import com.huacainfo.ace.cu.vo.*;
@@ -48,6 +49,8 @@ public class CuProjectServiceImpl implements CuProjectService {
     private CuProjectUseRecordService cuProjectUseRecordService;
     @Autowired
     private CuDonateListService cuDonateListService;
+    @Autowired
+    private CuProcessRecordService cuProcessRecordService;
 
     /**
      * @throws
@@ -377,6 +380,11 @@ public class CuProjectServiceImpl implements CuProjectService {
         project.setLastModifyUserName(userProp.getName());
         cuProjectDao.updateByPrimaryKeySelective(project);
 
+        //个人项目流程记录
+        if (ProjectConstant.P_TYPE_PERSONAL.equals(project.getType())) {
+            cuProcessRecordService.recordProjectAudit(auditResult, auditOpinion, project);
+        }
+
 
         return new MessageResponse(ResultCode.FAIL, "审核成功!");
     }
@@ -401,6 +409,57 @@ public class CuProjectServiceImpl implements CuProjectService {
     public List<CuProject> findAllProjectList(String projectType) {
 
         return cuProjectDao.findListByType(projectType.split(","));
+    }
+
+    /**
+     * 项目启动/上线
+     *
+     * @param projectId
+     * @return
+     */
+    @Override
+    public MessageResponse setup(String projectId, UserProp userProp) {
+        CuProject project = cuProjectDao.selectByPrimaryKey(projectId);
+        if (null == project) {
+            return new MessageResponse(ResultCode.FAIL, "项目资料丢失");
+        }
+
+        project.setStarted("1");//0-下线 1-上线
+        project.setLastModifyDate(DateUtil.getNowDate());
+        project.setLastModifyUserId(userProp.getUserId());
+        project.setLastModifyUserName(userProp.getName());
+        cuProjectDao.updateByPrimaryKeySelective(project);
+
+        //个人项目流程记录
+        if (ProjectConstant.P_TYPE_PERSONAL.equals(project.getType())) {
+            cuProcessRecordService.recordProjectSetup(project);
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "上线成功");
+    }
+
+    /**
+     * 项目关闭
+     *
+     * @param projectId
+     */
+    @Override
+    public MessageResponse shutDown(String projectId, String reason, UserProp userProp) {
+        CuProject project = cuProjectDao.selectByPrimaryKey(projectId);
+        if (null == project) {
+            return new MessageResponse(ResultCode.FAIL, "项目资料丢失");
+        }
+
+        project.setStarted("0");//0-下线 1-上线
+        project.setLastModifyDate(DateUtil.getNowDate());
+        project.setLastModifyUserId(userProp.getUserId());
+        project.setLastModifyUserName(userProp.getName());
+        cuProjectDao.updateByPrimaryKeySelective(project);
+
+        //个人项目流程记录
+        if (ProjectConstant.P_TYPE_PERSONAL.equals(project.getType())) {
+            cuProcessRecordService.recordProjectShutDown(reason, project);
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "关闭成功");
     }
 
     /**
