@@ -79,9 +79,7 @@ var massage = {
     欢乐水世界: {
         address: '常德市武陵区环湖路',
         images: [
-            'img/ssj/1.jpg',
-            'img/demo/微信截图_20180202130818.png',
-            'img/demo/05620f7fd5d8f33f5bf0da215d49abce.jpg'
+            'img/ssj/1.jpg'
         ]
     },
     沙滩公园: {
@@ -158,7 +156,7 @@ var massage = {
     华尔夫酒店: {
         address: '常德市武陵区环湖路',
         images: [
-            'img/hf/1.jpg'
+            'img/hf/1.png'
         ]
     },
     柳园锦江酒店: {
@@ -173,14 +171,6 @@ var massage = {
             'img/xyyy/1.png',
             'img/xyyy/2.png',
             'img/xyyy/3.png'
-        ]
-    },
-    欢乐水世界: {
-        address: '常德市武陵区环湖路',
-        images: [
-            'img/ssj/1.jpg',
-            'img/demo/微信截图_20180202130818.png',
-            'img/demo/05620f7fd5d8f33f5bf0da215d49abce.jpg'
         ]
     },
     柳叶湖学校: {
