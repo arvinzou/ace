@@ -95,9 +95,10 @@ ul,li{
 }
 .donation_item{
 	width: 100%;
-	height: 3rem;
+	/*height: 3rem;*/
 	border-bottom: 1px solid #E4E6E9;
 	margin-top: 0.5rem;
+	padding-bottom: 0.3rem;
 }
 .donation_user_image{
 	width: 1.5rem;
@@ -112,7 +113,7 @@ ul,li{
 }
 .donation_user_info{
 	width: 7.5rem;
-	height: 3rem;
+	/*height: 3rem;*/
 	float: left;
 }
 .donation_user_info{
