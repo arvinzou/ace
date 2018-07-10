@@ -17,6 +17,8 @@ public class ProcessNode {
 
     private String nextNodeId;
 
+    private String linkUrl;
+
     private String remark;
 
     private String status;
@@ -32,6 +34,14 @@ public class ProcessNode {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getLinkUrl() {
+        return linkUrl;
+    }
+
+    public void setLinkUrl(String linkUrl) {
+        this.linkUrl = linkUrl;
+    }
 
     public String getId() {
         return id;
