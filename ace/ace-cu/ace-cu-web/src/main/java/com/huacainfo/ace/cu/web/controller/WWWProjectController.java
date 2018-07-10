@@ -173,5 +173,23 @@ public class WWWProjectController extends CuBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
     }
 
+    /**
+     * 查询项目 - 捐赠列表 -- 当日一天内的数据结果
+     *
+     * @param projectId 慈善项目ID
+     * @param start     分页开始位置  --  必选
+     * @param limit     页数  --  必选
+     * @param orderBy   排序条件   --  可选，默认时间倒叙
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findDonateListToday")
+    @ResponseBody
+    public ResultResponse findDonateListToday(String projectId, int start, int limit, String orderBy) throws Exception {
+        if (StringUtil.isEmpty(projectId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
 
+        return cuProjectService.findDonateListToday(projectId, start, limit, orderBy);
+    }
 }

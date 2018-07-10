@@ -169,4 +169,16 @@ public interface CuProjectService {
      * 项目关闭
      */
     MessageResponse shutDown(String projectId, String reason, UserProp userProp);
+
+    /**
+     * 查询项目 - 捐赠列表 -- 当日一天内的数据结果
+     *
+     * @param projectId 慈善项目ID
+     * @param start     分页开始位置  --  必选
+     * @param limit     页数  --  必选
+     * @param orderBy   排序条件   --  可选，默认时间倒叙
+     * @return
+     * @throws Exception
+     */
+    ResultResponse findDonateListToday(String projectId, int start, int limit, String orderBy) throws Exception;
 }
