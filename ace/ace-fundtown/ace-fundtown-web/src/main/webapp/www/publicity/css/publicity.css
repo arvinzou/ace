@@ -1,0 +1,59 @@
+body {
+    font-size: 2.2vh;
+    color: #fff;
+    line-height: 3.4vh;
+    padding: 1.9vh 0 5.5vh;
+    position: relative;
+    min-height: 100vh;
+}
+
+.bottom_div {
+    text-align: center;
+    line-height: 5.5vh;
+    height: 5.5vh;
+    color: #8B8AA6;
+    font-size: 1.6vh;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.content {
+    width: 86.7vw;
+    margin: auto;
+}
+
+.content .button {
+    width: 86.7vw;
+    margin: 1.6vh auto 2.7vh;
+}
+
+.content .button:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.content .button > div {
+    width: 42vw;
+    height: 6vh;
+    float: left;
+    color: #5C6681;
+    text-align: center;
+    line-height: 6vh;
+    background: rgba(247, 249, 252, 1);
+}
+
+.content .list ul li {
+    padding: 2.4vh 0;
+    border-bottom: 0.1vh #E4E6E9 solid;
+}
+
+.content .button .left_btn {
+    margin-right: 2.7vw;
+}
+
+.active {
+    background-color: #3283F9 !important;
+    color: #fff !important;
+}

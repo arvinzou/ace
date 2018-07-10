@@ -73,8 +73,8 @@
 					<div style="clear: both;"></div>
 				</div>
 				<div class="donate_list marquee">
-					<ul>
-						<marquee scrollamount="2" direction="up" behaviour="scroll">
+					<ul style="height: 1.2rem;">
+						<marquee scrollamount="2" direction="up" behaviour="scroll" style="height: 1.2rem;">
 						<li ng-repeat="dua in donationList">
 							<span class="list_left" ng-cloak>{{dua.nickname}}&nbsp;捐赠<span class="money_default" ng-bind="dua.donateAmount"></span>元</span>
 							<span class="list_right" ng-bind="dua.donateDate | formatDate"></span>

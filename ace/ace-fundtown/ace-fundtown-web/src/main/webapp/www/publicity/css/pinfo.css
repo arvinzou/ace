@@ -1,0 +1,33 @@
+body {
+    font-size: 2.2vh;
+    color: #5C6681;
+    line-height: 3.4vh;
+    position: relative;
+    min-height: 100vh;
+}
+
+.content {
+    width: 90.4vw;
+    margin: auto;
+}
+
+.content .title {
+    font-size: 2.5vh;
+    color: #19144C;
+    text-align: center;
+    line-height: 3.8vh;
+    margin: 3.1vh 0;
+    font-weight: bold;
+}
+
+.form_box {
+    width: 100%;
+    color: #5C6681;
+}
+
+.form_box td {
+    padding: 2.2vh 3.6vw;
+    background-color: #F7F9FC;
+    border: 2px solid #FFFFFF;
+    font-size: 3.5vw;
+}
