@@ -16,6 +16,10 @@
     border-bottom: 1px solid #E5E5E5;
 }
 
+.success {
+    border-bottom: 1px solid #E5E5E5;
+}
+
 .content .get_code {
     float: right;
     width: 2.26666rem;
