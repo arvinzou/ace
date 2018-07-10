@@ -1,0 +1,58 @@
+.content {
+    padding: 0.64rem 0.666666rem 0;
+    width: 100vw;
+}
+
+.content .head {
+    margin-bottom: 0.5rem;
+}
+
+.content .head .img {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: auto;
+}
+
+.content .head .img img {
+    height: 100%;
+    width: auto;
+}
+
+.content .head .text {
+    margin-top: 0.426666rem;
+    width: 100%;
+}
+
+.content .head .text .name {
+    font-size: 0.426666rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+    color: rgba(51, 51, 51, 1);
+}
+
+.content .list {
+    font-size: 0.426666rem;
+    color: #19144C;
+}
+
+.content .list img {
+    height: 3vh;
+    width: auto;
+    margin-right: 2.9vw;
+    vertical-align: middle;
+
+}
+
+.content .list li {
+    padding: 2.5vh 0;
+}
+
+.content .list .icon_right {
+    float: right;
+    color: #E5E5E5;
+}
+
