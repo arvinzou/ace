@@ -80,6 +80,7 @@ body {
 #demo2 {
     width: 600px;
     float: left;
+    height: auto;
 }
 
 .main {
