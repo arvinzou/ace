@@ -308,4 +308,11 @@
         from cu_project_apply
         where 1=1
     </select>
+
+    <select id="findByProjectId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cu_project_apply
+        where projectId = #{projectId,jdbcType=VARCHAR}
+    </select>
 </mapper>

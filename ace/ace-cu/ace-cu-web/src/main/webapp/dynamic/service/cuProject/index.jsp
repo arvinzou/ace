@@ -55,16 +55,26 @@
                             authority="${pageContext.request.contextPath}/cuProject/deleteCuProjectByCuProjectId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
+                    <%--添加使用记录--%>
+                    <button class="btn btn-info" id="btn-view-add-use-record"
+                            authority="${pageContext.request.contextPath}/cuProject/addUseRecord">
+                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                    </button>
 
                     <%--审核--%>
                     <button class="btn btn-purple" id="btn-view-audit"
                             authority="${pageContext.request.contextPath}/cuProject/audit">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-                    <%--添加使用记录--%>
-                    <button class="btn btn-info" id="btn-view-add-use-record"
-                            authority="${pageContext.request.contextPath}/cuProject/addUseRecord">
-                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                    <%--确认上线--%>
+                    <button class="btn btn-purple" id="btn-view-setup"
+                            authority="${pageContext.request.contextPath}/cuProject/setup">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <%--强制下线--%>
+                    <button class="btn btn-purple" id="btn-view-shutDown"
+                            authority="${pageContext.request.contextPath}/cuProject/shutDown">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
                 </div>
             </div>
@@ -85,6 +95,14 @@
             <div class="space-6"></div>
             <fieldset>
                 审核备注： <textarea id="audit_opinion" cols="30" rows="10"></textarea>
+            </fieldset>
+        </form>
+    </div>
+    <div id="dialog-message-showDown" class="hide">
+        <form action="/cuProject/showDown" id="fm-showDown">
+            <fieldset>
+                下线缘由： <textarea id="shutdown_reason" cols="30" rows="10"></textarea><span
+                    style="color:red;font-size:16px;font-weight:800">*</span>
             </fieldset>
         </form>
     </div>

@@ -146,4 +146,40 @@ public class CuProjectController extends CuBaseController {
 
         return cuProjectService.audit(id, auditResult, auditOpinion, getCurUserProp());
     }
+
+    /**
+     * 功能描述:  确认上线
+     *
+     * @param: id cu_project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @RequestMapping(value = "/setup")
+    @ResponseBody
+    public MessageResponse setup(String id, String reason) throws Exception {
+        if (CommonUtils.isEmpty(id)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必备参数");
+        }
+
+        return cuProjectService.setup(id, getCurUserProp());
+    }
+
+    /**
+     * 功能描述:  强制下线
+     *
+     * @param: id cu_project.id
+     * @return:
+     * @auther: Arvin Zou
+     * @date: 2018/5/8 18:19
+     */
+    @RequestMapping(value = "/shutDown")
+    @ResponseBody
+    public MessageResponse shutDown(String id, String reason) throws Exception {
+        if (CommonUtils.isEmpty(id)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必备参数");
+        }
+
+        return cuProjectService.shutDown(id, reason, getCurUserProp());
+    }
 }

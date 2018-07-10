@@ -43,7 +43,7 @@ jQuery(function ($) {
                     beforeSubmit: function (postdata) {
                         postdata.description = editor.getValue();
                         var coverUrl = postdata.coverUrl;
-                        if (!coverUrl.startWith("http")) {
+                        if (!isNull(coverUrl) && !coverUrl.startWith("http")) {
                             coverUrl = fastdfs_server + coverUrl;
                         }
                         postdata.coverUrl = coverUrl;
@@ -284,6 +284,144 @@ jQuery(function ($) {
                         retSetWidgetAttr(rowData);
                     }
                 })
+        });
+
+    //确认上线
+    $('#btn-view-setup').on(
+        'click',
+        function (e) {
+            e.preventDefault();
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+            if (!gr) {
+                $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                    $.jgrid.nav.alerttext);
+                return;
+            }
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            if (rowData.started == "1") {
+                alert("项目已上线，请勿重复操作")
+                return;
+            }
+
+            $.ajax({
+                type: "post",
+                url: contextPath + "/cuProject/setup",
+                data: {id: rowData.id},
+                beforeSend: function (XMLHttpRequest) {
+                    style_ajax_button('ajax_button_audit', true);
+                },
+                success: function (rst, textStatus) {
+                    style_ajax_button('ajax_button_audit', false);
+                    if (rst) {
+                        bootbox.dialog({
+                            title: '系统提示',
+                            message: rst.errorMessage,
+                            buttons: {
+                                "success": {
+                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                    "className": "btn-sm btn-success",
+                                    "callback": function () {
+                                        //重载数据
+                                        jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                                            page: 1
+                                        }).trigger("reloadGrid");
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    style_ajax_button('ajax_button_audit', false);
+                },
+                error: function () {
+                    style_ajax_button('ajax_button_audit', true);
+                }
+            });
+
+        });
+
+    //强制下线
+    $('#btn-view-shutDown').on(
+        'click',
+        function (e) {
+            e.preventDefault();
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+            if (!gr) {
+                $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                    $.jgrid.nav.alerttext);
+                return;
+            }
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            if (rowData.status == "0") {
+                alert("项目已下线，请勿重复操作")
+                return;
+            }
+            var dialog = $("#dialog-message-showDown").removeClass('hide').dialog({
+                modal: true,
+                width: 380,
+                title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-cog'></i> " + rowData.title + "</h4></div>",
+                title_html: true,
+                buttons: [
+                    {
+                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+                        "class": "btn btn-info btn-xs",
+                        id: 'ajax_button_audit',
+                        click: function () {
+                            //for testing
+                            var shutdown_reason = $('#shutdown_reason').val();
+                            if (isNull(shutdown_reason)) {
+                                alert("请填写下线缘由!");
+                                return;
+                            }
+                            $(this).dialog("close");
+                            $.ajax({
+                                type: "post",
+                                url: contextPath + "/cuProject/shutDown",
+                                data: {id: rowData.id, reason: shutdown_reason},
+                                beforeSend: function (XMLHttpRequest) {
+                                    style_ajax_button('ajax_button_audit', true);
+                                },
+                                success: function (rst, textStatus) {
+                                    style_ajax_button('ajax_button_audit', false);
+                                    if (rst) {
+                                        bootbox.dialog({
+                                            title: '系统提示',
+                                            message: rst.errorMessage,
+                                            buttons: {
+                                                "success": {
+                                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                                    "className": "btn-sm btn-success",
+                                                    "callback": function () {
+                                                        dialog.dialog("close");
+                                                        //重载数据
+                                                        jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                                                            page: 1
+                                                        }).trigger("reloadGrid");
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+                                },
+                                complete: function (XMLHttpRequest, textStatus) {
+                                    style_ajax_button('ajax_button_audit', false);
+                                },
+                                error: function () {
+                                    style_ajax_button('ajax_button_audit', true);
+                                }
+                            });
+                        }
+                    },
+                    {
+                        html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
+                        "class": "btn btn-xs",
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
         });
 });
 

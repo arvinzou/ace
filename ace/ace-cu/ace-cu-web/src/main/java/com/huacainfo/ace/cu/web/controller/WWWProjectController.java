@@ -168,7 +168,6 @@ public class WWWProjectController extends CuBaseController {
     @RequestMapping(value = "/getApplyProcess")
     @ResponseBody
     public ResultResponse getApplyProcess(String applyId) throws Exception {
-        //公众号用户信息
         List<CuProcessRecord> list = cuProcessRecordService.findList(applyId);
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
