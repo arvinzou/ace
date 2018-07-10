@@ -9,6 +9,7 @@
         <result column="coverImage" jdbcType="VARCHAR" property="coverImage"/>
         <result column="priorNodeId" jdbcType="VARCHAR" property="priorNodeId"/>
         <result column="nextNodeId" jdbcType="VARCHAR" property="nextNodeId"/>
+        <result column="linkUrl" jdbcType="VARCHAR" property="linkUrl"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -19,9 +20,10 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, curNodeName, nodeIcon, sequence, coverImage, priorNodeId, nextNodeId, remark, status,
-    createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
-  </sql>
+        id, curNodeName, nodeIcon, sequence, coverImage, priorNodeId, nextNodeId, linkUrl,
+        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -29,23 +31,23 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from process_node
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
+        delete from process_node
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fundtown.model.ProcessNode">
-    insert into process_node (id, curNodeName, nodeIcon,
-      sequence, coverImage, priorNodeId, 
-      nextNodeId, remark, status, 
-      createUserId, createUserName, createDate, 
-      lastModifyUserId, lastModifyUserName, lastModifyDate
-      )
-    values (#{id,jdbcType=VARCHAR}, #{curNodeName,jdbcType=VARCHAR}, #{nodeIcon,jdbcType=VARCHAR},
-      #{sequence,jdbcType=INTEGER}, #{coverImage,jdbcType=VARCHAR}, #{priorNodeId,jdbcType=VARCHAR}, 
-      #{nextNodeId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
-      )
-  </insert>
+        insert into process_node (id, curNodeName, nodeIcon,
+        sequence, coverImage, priorNodeId,
+        nextNodeId, linkUrl, remark,
+        status, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate)
+        values (#{id,jdbcType=VARCHAR}, #{curNodeName,jdbcType=VARCHAR}, #{nodeIcon,jdbcType=VARCHAR},
+        #{sequence,jdbcType=INTEGER}, #{coverImage,jdbcType=VARCHAR}, #{priorNodeId,jdbcType=VARCHAR},
+        #{nextNodeId,jdbcType=VARCHAR}, #{linkUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fundtown.model.ProcessNode">
         insert into process_node
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -69,6 +71,9 @@
             </if>
             <if test="nextNodeId != null">
                 nextNodeId,
+            </if>
+            <if test="linkUrl != null">
+                linkUrl,
             </if>
             <if test="remark != null">
                 remark,
@@ -117,6 +122,9 @@
             <if test="nextNodeId != null">
                 #{nextNodeId,jdbcType=VARCHAR},
             </if>
+            <if test="linkUrl != null">
+                #{linkUrl,jdbcType=VARCHAR},
+            </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
@@ -164,6 +172,9 @@
             <if test="nextNodeId != null">
                 nextNodeId = #{nextNodeId,jdbcType=VARCHAR},
             </if>
+            <if test="linkUrl != null">
+                linkUrl = #{linkUrl,jdbcType=VARCHAR},
+            </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
@@ -199,6 +210,7 @@
       coverImage = #{coverImage,jdbcType=VARCHAR},
       priorNodeId = #{priorNodeId,jdbcType=VARCHAR},
       nextNodeId = #{nextNodeId,jdbcType=VARCHAR},
+      linkUrl = #{linkUrl,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -214,8 +226,9 @@
     </resultMap>
 
     <sql id="Vo_Column_List">
-        id, curNodeName, nodeIcon, sequence, coverImage, priorNodeId, nextNodeId, remark, status,
-        createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+         id, curNodeName, nodeIcon, sequence, coverImage, priorNodeId, nextNodeId, linkUrl,
+        remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
