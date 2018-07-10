@@ -143,9 +143,9 @@ public class AnslysisServiceImpl implements AnalysisService {
         CuUserVo vo = cuUserService.findByOpenId(openId);
 
         Map<String, Object> rtnMap = new HashMap<>();
-        rtnMap.put("nickname", vo.getNickname());
-        rtnMap.put("headimgurl", vo.getNickname());
-        rtnMap.put("openid", vo.getOpenId());
+        rtnMap.put("nickname", null == vo ? "-" : vo.getNickname());
+        rtnMap.put("headimgurl", null == vo ? "-" : vo.getHeadimgurl());
+        rtnMap.put("openid", null == vo ? "-" : vo.getOpenId());
         rtnMap.put("totalDonateAmount", 0);
         rtnMap.put("donateCount", 0);
         rtnMap.put("donateDays", 0);

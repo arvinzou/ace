@@ -6,8 +6,11 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.cu.model.CuProcessRecord;
+import com.huacainfo.ace.cu.model.CuProject;
+import com.huacainfo.ace.cu.model.CuProjectApply;
 import com.huacainfo.ace.cu.vo.CuProcessRecordQVo;
 import com.huacainfo.ace.cu.vo.CuProcessRecordVo;
+import com.huacainfo.ace.cu.vo.CuProjectApplyVo;
 
 import java.util.Date;
 import java.util.List;
@@ -105,4 +108,36 @@ public interface CuProcessRecordService {
      * @return
      */
     List<CuProcessRecord> findList(String applyId);
+
+    /***
+     * 提交申请
+     * @param vo
+     * @return
+     */
+    ResultResponse recordSubmit(CuProjectApplyVo vo);
+
+    /**
+     * 受理申请
+     *
+     * @param auditResult  受理结果
+     * @param auditOpinion 受理意见
+     * @param apply        受理资料
+     * @return
+     */
+    ResultResponse recordAccept(String auditResult, String auditOpinion, CuProjectApply apply);
+
+    /**
+     * 项目审核
+     */
+    ResultResponse recordProjectAudit(String auditResult, String auditOpinion, CuProject project);
+
+    /**
+     * 项目上线
+     */
+    ResultResponse recordProjectSetup(CuProject project);
+
+    /**
+     * 项目关闭
+     */
+    ResultResponse recordProjectShutDown(String reason, CuProject project);
 }

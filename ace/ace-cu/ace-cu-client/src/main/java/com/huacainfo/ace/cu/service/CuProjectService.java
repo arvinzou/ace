@@ -157,4 +157,16 @@ public interface CuProjectService {
     MessageResponse insertCuProjectByType(CuProject obj, String type, UserProp curUserProp) throws Exception;
 
     List<CuProject> findAllProjectList(String projectType);
+
+    /**
+     * 项目启动/上线
+     *
+     * @return
+     */
+    MessageResponse setup(String projectId, UserProp userProp);
+
+    /**
+     * 项目关闭
+     */
+    MessageResponse shutDown(String projectId, String reason, UserProp userProp);
 }

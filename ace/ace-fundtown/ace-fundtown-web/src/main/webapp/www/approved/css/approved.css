@@ -1,0 +1,104 @@
+body {
+    background-color: #F7F9FC;
+    font-size: 3.7vw;
+    color: #8B8AA6;
+    line-height: 4vh;
+    padding: 2.4vh 0 10.2vh;
+    position: relative;
+    min-height: 100vh;
+}
+
+.top_card {
+    height: 64.6vh;
+    background: url(../image/card1.png) no-repeat;
+}
+
+.filing_card {
+    height: 64.6vh;
+    background: url(../image/card5.png) no-repeat;
+}
+
+.bank_content {
+    height: 68.9vh;
+    background: url(../image/card6.png) no-repeat;
+}
+
+.tax_content {
+    height: 69.5vh;
+    background: url(../image/card7.png) no-repeat;
+}
+
+.top_card_seven {
+    height: 69.6vh;
+    background: url(../image/card8.png) no-repeat;
+}
+
+.top_card, .top_card_long, .filing_card, .bank_content, .tax_content, .top_card_seven {
+    width: 100vw;
+    background-size: 100% 100%;
+    padding: 20.2vh 9.3vw 0;
+}
+
+.top_card_long {
+    height: 152.2vh;
+    background: url(../image/card2.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.top_card_long .title, .top_card_seven .title {
+    color: #5C6681;
+    font-size: 4vw;
+    line-height: 3.7vh;
+    margin-top: 2vh;
+}
+
+.bottom_div {
+    text-align: center;
+    line-height: 10.2vh;
+    height: 10.2vh;
+    color: #8B8AA6;
+    font-size: 3.2vw;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.file_list {
+    padding-left: 5vw;
+    position: relative
+}
+
+.file_list1:before {
+    content: "1、";
+}
+
+.file_list2:before {
+    content: "2、";
+}
+
+.file_list3:before {
+    content: "3、";
+}
+
+.file_list4:before {
+    content: "4、";
+}
+
+.file_list5:before {
+    content: "5、";
+}
+
+.file_list6:before {
+    content: "6、";
+}
+
+.file_list:before {
+    color: #3283F9;
+    position: absolute;
+    left: 0;
+}
+
+.bottom_text .margin {
+    margin-bottom: 2.5vh;
+}
+
