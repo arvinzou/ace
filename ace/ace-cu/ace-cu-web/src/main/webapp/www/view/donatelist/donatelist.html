@@ -33,7 +33,10 @@
 			</div>
 			<div class="list">
 				<div class="listItem" ng-repeat="rank in rankList">
-					<div class="topnum" ng-bind="rank.indexNum"></div>
+					<div class="topnum" ng-cloak ng-if="rank.indexNum=='1'"><img src="img/no1.png" style="width: 0.6rem;height: 0.8rem;padding-top: 0.1rem;"/></div>
+					<div class="topnum" ng-cloak ng-if="rank.indexNum=='2'"><img src="img/no2.png" style="width: 0.6rem;height: 0.8rem;padding-top: 0.1rem;"/></div>
+					<div class="topnum" ng-cloak ng-if="rank.indexNum=='3'"><img src="img/no3.png" style="width: 0.6rem;height: 0.8rem;padding-top: 0.1rem;"/></div>
+					<div class="topnum" ng-cloak ng-if="rank.indexNum!='1'&&rank.indexNum!='2'&&rank.indexNum!='3'">{{rank.indexNum}}</div>
 					<div class="headImg">
 						<img ng-src="{{rank.headimgurl}}" />
 					</div>

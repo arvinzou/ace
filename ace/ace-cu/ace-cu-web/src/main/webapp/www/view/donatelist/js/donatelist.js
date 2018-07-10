@@ -4,6 +4,7 @@ var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
 
+
     var locaUrl = window.location.href;
     var url = window.location.href.substring(locaUrl.indexOf("?")+1);
     var primaryId = null;
