@@ -9,6 +9,7 @@ var coverUrl03 = null;
 var coverUrl04 = null;
 var coverUrl05 = null;
 var coverUrl06 = null;
+var id = "";
 app.controller(ngControllerName,function($scope){
 	var uploader1 = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
@@ -347,6 +348,8 @@ app.controller(ngControllerName,function($scope){
         },
         success:function(result){
             if(result.status == 0) {
+                id = result.data.id;
+                $scope.projectId = id;
                 layer.open({
                     type:1,
                     content: $("#success_box").html(),
@@ -364,7 +367,9 @@ app.controller(ngControllerName,function($scope){
 	}
 });
 
-
+function showProjectProgress(){
+    window.location.href = '/cu/www/view/me/apply_progress.html?projectId='+id;
+}
 /*图片上传成功后*/
 function viewCover(img, clazz, imgClazz, textClazz) {
     $(clazz).data('imgSrc',img);
