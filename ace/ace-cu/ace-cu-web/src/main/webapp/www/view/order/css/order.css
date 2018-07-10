@@ -9,16 +9,16 @@ input,textarea{
 	outline: none;
 }
 .order_box{
-	width: 10rem;
+	width: 100%;
 }
 .order_content{
-	width: 9rem;
-	margin: 0.8rem 0.5rem;
+	width: 90%;
+	margin: 0.8rem 5%;
 	background-color: #FFFFFF;
 }
 .order_form{
-	width: 8rem;
-	margin: 0 0.5rem;
+	width: 90%;
+	margin: 0 5%;
 }
 .title_01{
 	width: 100%;
@@ -83,7 +83,7 @@ input,textarea{
 	
 }
 .form{
-	width: 8rem;
+	width: 100%;
 	height: 1.5rem;
 	line-height: 1.5rem;
 	border-bottom: 1px solid #E4E6E9;
@@ -158,7 +158,7 @@ input,textarea{
 	padding-top: 0.1rem;
 }
 .btnDiv{
-	width: 10rem;
+	width: 100%;
 	height: 1.5rem;
 	margin-top: 1rem;
 	text-align: center;

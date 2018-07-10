@@ -3,7 +3,7 @@
 	margin: 0;
 }
 .mainbox{
-	width: 10rem;
+	width: 100%;
 }
 .banner{
 	width: 100%;
@@ -30,17 +30,17 @@
 	width: 100%;
 }
 .raise_item{
-	width: 9rem;
-	margin: 1rem .5rem;
+	width: 90%;
+	margin: 1rem 5%;
 	height: 2.5rem;
 }
 .raise_item_image{
-	width: 3rem;
+	width: 35%;
 	height: 2.5rem;
 	float: left;
 }
 .raise_item_cnt{
-	width: 6rem;
+	width: 65%;
 	height: 2.5rem;
 	float: right;
 }
@@ -75,13 +75,13 @@
 	color: #EA4436;
 }
 .detail01{
-	width: 3.5rem;
+	width: 60%;
 	height: 0.6rem;
 	float: left;
 	padding-left: 0.5rem;
 }
 .detail02{
-	width: 2rem;
+	width: 30%;
 	height: 0.6rem;
 	float: right;
 }
@@ -100,7 +100,7 @@
 	color: #FFFFFF;
 }
 #warning{
-	width: 9rem;
+	width: 100%;
 	height: auto;
 	border-radius: 0.2rem;
 }

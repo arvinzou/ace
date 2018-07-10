@@ -92,7 +92,7 @@ app.controller(ngControllerName,function($scope) {
             }
             needReceipt = 1;
 		}
-		if(isName){
+		if(!isName){
             if(realName == null || realName == undefined || realName ==''){
                 alert("捐款人姓名不能为空！");
                 return;
