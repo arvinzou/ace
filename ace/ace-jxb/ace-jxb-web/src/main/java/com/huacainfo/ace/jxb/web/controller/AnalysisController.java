@@ -15,13 +15,13 @@ import com.huacainfo.ace.jxb.service.AnalysisService;
 
 @Controller
 @RequestMapping("/anslysis")
-public class AnalysisController extends LiveBaseController {
+public class AnalysisController extends JxbBaseController {
 	private static final long serialVersionUID = 1L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private AnalysisService analysisService;
 
-	@RequestMapping(value = "/query.do")
+	@RequestMapping(value = "/query")
 	@ResponseBody
 	public ListResult<Map<String,Object>> query(
 			 String reportId)
