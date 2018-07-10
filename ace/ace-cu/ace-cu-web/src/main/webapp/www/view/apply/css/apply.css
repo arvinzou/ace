@@ -87,16 +87,22 @@ input, textarea{
 
 .form_title{
 	display:inline-block;
-	width:2rem;
+	width:30%;
 	text-align:left;
 	font-size: 0.4rem;
 }
 
 .form_text{
-	width: 5.5rem;
+	width: 60%;
 	height: 0.6rem;
 	line-height: 0.6rem;
 	border: none;
+	font-size: 0.4rem;
+}
+.form_title01{
+	display:inline-block;
+	width:100%;
+	text-align:left;
 	font-size: 0.4rem;
 }
 .positive{
@@ -147,7 +153,7 @@ input, textarea{
     height: 100%;
     margin: 0 auto;
     text-align: center;
-    font-size: 0.4rem;
+    font-size: 0.3rem;
     color: #999999;
 }
 .uploadText img{
