@@ -36,17 +36,25 @@ app.controller(ngControllerName,function($scope){
             async:false,
             data:{keyword: keyword, type: type},
             success:function(result){
-                var data = result.data;
-                if(data != null){
-                    flag=true;
+                if(result.status == 0){
+                    var data = result.data;
+                    if(data != null){
+                        flag=true;
+                    }else{
+                        layer.alert("未查询到数据！", {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
+                        layer.close(layerIndex);
+                        return;
+                    }
                 }else{
-                    layer.alert("未查询到数据！", {
+                    layer.alert("系统服务内部异常！", {
                         icon: 5,
                         skin: 'myskin'
                     });
-                    layer.close(layerIndex);
-                    return;
                 }
+
             },
             error:function(){
                 layer.alert("系统内部服务异常！", {

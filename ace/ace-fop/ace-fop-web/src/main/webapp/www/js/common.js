@@ -5,12 +5,12 @@ html.push("<div class=\"login\">");
 try{
     if(userProp){
         html.push("<span class=\"companyName\"  ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" title='"+userProp.name+"' target=\"_blank\">"+userProp.name+"</a><i title='修改密码' style='padding-left: 10px;' id='editUserInfo' class='glyphicon glyphicon-edit'></i></span>");
-        html.push("<span class=\"userNav\" ng-if=\"userProp\"><a href=\"/portal/dynamic/portal/security/loginOut_fop.jsp\">退出</a></span>");
+        html.push("<span class=\"userNav\" ng-if=\"userProp\"><a href=\"/portal/dynamic/portal/security/loginOut.jsp\">退出</a></span>");
     }else{
-        html.push("<span class=\"userNav\" ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
+        html.push("<span class=\"userNav\" ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login.jsp\">登录</a></span>");
     }
 }catch(e){
-    html.push("<span class=\"userNav\" ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login_fop.jsp\">登录</a></span>");
+    html.push("<span class=\"userNav\" ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login.jsp\">登录</a></span>");
 }
 
 html.push("<span>|</span>");
@@ -23,7 +23,10 @@ html.push("<div class=\"logo_image\"><img src=\"/fop/www/images/logo.png\" /></d
 html.push("<div class=\"logo_word\">承办单位：常德市工商业联合会·总商会</div>");
 html.push("</div>");
 html.push("<div class=\"words\">");
-html.push("<p id=\"effect\"><span>开</span><span>放</span><span>强</span><span>市</span></p>");
+html.push("<marquee id='Marquee'>");
+html.push("<p id=\"effect\" style='font-size: 36px;'>开放强市&nbsp;&nbsp;产业立市</p>");
+html.push("<p id=\"effect01\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成就企业家&nbsp;&nbsp;厚待投资者</p>");
+html.push("</marquee>");
 html.push("</div>");
 html.push("</div>");
 html.push("<div class=\"header-nav\">");
@@ -153,6 +156,61 @@ $(function(){
         $(this).find('.trig').hide();
     });
 
+    /**
+     * 滚动字幕开始
+     */
+   /* var Mar = document.getElementById("Marquee");
+    var child_div = Mar.getElementsByTagName("div")
+    var picH = 60; //移动高度
+    var scrollstep = 5; //移动步幅,越大越快
+    var scrolltime = 20; //移动频度(毫秒)越大越慢
+    var stoptime = 2000; //间断时间(毫秒)
+    var tmpH = 0;
+    Mar.innerHTML += Mar.innerHTML;
+
+    function start() {
+        if(tmpH < picH) {
+            tmpH += scrollstep;
+            if(tmpH > picH) tmpH = picH;
+            Mar.scrollTop = tmpH;
+            setTimeout(start, scrolltime);
+        } else {
+            tmpH = 0;
+            Mar.appendChild(child_div[0]);
+            Mar.scrollTop = 0;
+            setTimeout(start, stoptime);
+        }
+    }
+
+    setTimeout(start, stoptime);
+    var Mar = document.getElementById("Marquee");
+    var child_div = Mar.getElementsByTagName("div")
+    var picH = 60; //移动高度
+    var scrollstep = 3; //移动步幅,越大越快
+    var scrolltime = 20; //移动频度(毫秒)越大越慢
+    var stoptime = 3000; //间断时间(毫秒)
+    var tmpH = 0;
+    Mar.innerHTML += Mar.innerHTML;
+
+    function start() {
+        if(tmpH < picH) {
+            tmpH += scrollstep;
+            if(tmpH > picH) tmpH = picH;
+            Mar.scrollTop = tmpH;
+            setTimeout(start, scrolltime);
+        } else {
+            tmpH = 0;
+            Mar.appendChild(child_div[0]);
+            Mar.scrollTop = 0;
+            setTimeout(start, stoptime);
+        }
+    }
+
+    setTimeout(start, stoptime)*/
+    /**
+     * 滚动字幕结束
+     */
+
     $("#editUserInfo").click(function() {
         layer.open({
             type: 1,
@@ -226,7 +284,7 @@ $(function(){
 });
 
 
-jQuery.easing['jswing'] = jQuery.easing['swing'];
+/*jQuery.easing['jswing'] = jQuery.easing['swing'];
 
 jQuery.extend(jQuery.easing,
     {
@@ -1401,14 +1459,14 @@ jQuery.extend(jQuery.easing,
                 sets = {animation: 2, easing: "easeOutBounce"};
                 break;
 
-            /*case 10:
+            /!*case 10:
                 fx.html("文字效果6");
                 sets = {animation: 14, startDelay: 1000, easing: "easeInBack", restoreHTML: false};
             break;
 
             case 11:
                 sets = {animation: 6, animationType: "out", speed: 500, easing: "easeInBack", restoreHTML: false};
-            break;*/
+            break;*!/
 
 
             default :
@@ -1421,6 +1479,6 @@ jQuery.extend(jQuery.easing,
         jQuery.cjTextFx.animate(toAnimate, sets);
     }
 
-})(jQuery);
+})(jQuery);*/
 
 
