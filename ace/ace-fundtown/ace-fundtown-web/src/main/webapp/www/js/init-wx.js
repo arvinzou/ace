@@ -1,7 +1,8 @@
 $(function () {
     var url = '/portal/www/wx/jsapi/getConfig';
+    var urls = window.location.href;
     var data = {
-        url: "http://zx.huacainfo.com/fundtown/www/map/map.html",
+        url: urls,
         sysId: 'fundtown'
     }
     $.getJSON(url, data, function (result) {
@@ -11,7 +12,7 @@ $(function () {
             timestamp: result.data.timestamp,
             nonceStr: result.data.noncestr,
             signature: result.data.signature,
-            jsApiList: ["openLocation"]
+            jsApiList: ["openLocation", '']
         })
     });
 })
@@ -24,4 +25,3 @@ wx.error(function (res) {
     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
     console.log("wx_config_error:" + res);
 });
-

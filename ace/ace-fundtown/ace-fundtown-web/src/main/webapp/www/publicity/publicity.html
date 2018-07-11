@@ -1,36 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
     <link rel="stylesheet" href="../css/common.css"/>
     <link rel="stylesheet" href="css/publicity.css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/angular.min.js"></script>
+    <script type="text/javascript" src="js/publicity.js"></script>
     <title>信息公示</title>
 </head>
 <body>
 <div class="content">
     <div class="button">
-        <div class="left_btn active">基金管理机构</div>
-        <div class="right_btn">基金</div>
+        <div class="left_btn active" ng-click="changeTab('0','.left_btn');">基金管理机构</div>
+        <div class="right_btn" ng-click="changeTab('1','.right_btn');">基金</div>
     </div>
     <div class="list">
         <ul>
-            <li><a>常德易津沅澧私募股权基金管理有限公司常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
-            <li><a>常德易津沅澧私募股权基金管理有限公司</a></li>
+            <li ng-repeat="item in vipList">
+                <a href="#" ng-bind="item.departmentName" ng-click="showVipInfo(item.deptId)"></a>
+            </li>
         </ul>
     </div>
 </div>

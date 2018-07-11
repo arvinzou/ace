@@ -32,9 +32,10 @@ function viewNodeList(datas) {
 function linkurl() {
     var $that = $(this);
     var obj = $that.data();
+    console.log(obj);
     if (window.localStorage) {
         //存储变量的值
-        localStorage.id = obj['id'];
+        localStorage.nodeId = obj['id'];
         location.href = '../approved/' + obj['linkUrl'];
     } else {
         alert("NOT SUPPORT");
