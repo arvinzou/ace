@@ -2,7 +2,27 @@ $(function () {
     $('.push_data').on('click', submitForm);
     $('.content').on('blur', 'input', validateInput);
     $('.content').on('focus', 'input', clearStyle);
+    $('.content').on('click', '.get_code', sendcode);
 })
+
+
+function sendcode() {
+    var result = validateform('mobilePhone');
+    if (result.status == 1) {
+        $input.eq(i).parent().css({'border-bottom': '1px solid red'});
+        return
+    }
+    var url = '/fundtown/www/sms/sendCode';
+    var data = {
+        mobile: result.message,
+    }
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+
+        }
+    })
+
+}
 
 
 function clearStyle() {
