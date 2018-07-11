@@ -8,9 +8,11 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.fundtown.dao.VipDepartmentDao;
+import com.huacainfo.ace.fundtown.dao.VipMemberResDao;
 import com.huacainfo.ace.fundtown.model.VipDepartment;
 import com.huacainfo.ace.fundtown.model.VipMemberRes;
 import com.huacainfo.ace.fundtown.service.VipDepartmentService;
@@ -44,6 +46,8 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     private VipMemberResService vipMemberResService;
     @Autowired
     private VipProcessRecordService vipProcessRecordService;
+    @Autowired
+    private VipMemberResDao vipMemberResDao;
 
 
     @Override
@@ -228,5 +232,34 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     public ResultResponse getMyProcess(String deptId) {
         List<VipProcessRecordVo> list = vipProcessRecordService.findByDeptId(deptId);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
+    }
+
+
+    /**
+     * vip会员资源文件上传
+     *
+     * @param deptId   企业ID
+     * @param fileName 文件名称
+     * @param fileSize 文件大小
+     * @param fileUrl  文件资源地址
+     */
+    @Override
+    public VipMemberRes insertVipMemberRes(String deptId, String fileName, long fileSize, String fileUrl) {
+
+        VipMemberRes res = new VipMemberRes();
+        res.setId(GUIDUtil.getGUID());
+        res.setDeptId(deptId);
+        res.setCategory("0");
+        res.setResName(fileName);
+        res.setResSize(fileSize + "");
+        res.setResUrl(fileUrl);
+        res.setStatus("1");
+        res.setCreateUserId("00001");
+        res.setCreateUserName("system");
+        res.setCreateDate(DateUtil.getNowDate());
+        res.setLastModifyDate(DateUtil.getNowDate());
+
+        vipMemberResDao.insertSelective(res);
+        return res;
     }
 }

@@ -1,5 +1,4 @@
-import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.fundtown.vo.VipDepartmentVo;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
 /**
@@ -10,12 +9,12 @@ public class TestDemo {
 
     @Test
     public void test() {
-        VipDepartmentVo vo = new VipDepartmentVo();
-        vo.setDepartmentName("华彩伟业");
-        vo.setContactEmail("30123@qq.com");
-        vo.setContactMobile("18570629027");
 
-        System.out.println(JsonUtil.toJson(vo));
+        for (int i = 0; i < 4; i++) {
+            System.out.println(GUIDUtil.getGUID());
+        }
+
+
     }
 
 }
