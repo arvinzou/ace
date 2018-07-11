@@ -1,6 +1,13 @@
-$(function(){
-    var flag = false;
+var ngControllerName = "angularjsCtrl";
+var ngAppName = "angularjsApp";
 
+var app =angular.module(ngAppName, []);
+
+app.controller(ngControllerName,function($scope){
+    try{
+        $scope.userProp = userProp;
+    }catch(e){}
+    var flag = false;
     $("#searchBtn").click(function(){
         var layerIndex = layer.load(1);
         var type = $('input:radio[name="radio"]:checked').val();

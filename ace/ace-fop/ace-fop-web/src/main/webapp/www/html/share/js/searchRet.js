@@ -5,6 +5,10 @@ var type = null;
 var keyword = null;
 var layerIndex = null;
 app.controller(ngControllerName,function($scope){
+    try{
+        $scope.userProp = userProp;
+    }catch(e){}
+
     layerIndex = layer.load(1);
     console.log(window.location.search);
     var url =   window.location.search.substring(1);
