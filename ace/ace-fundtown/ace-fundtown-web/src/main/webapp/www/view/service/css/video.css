@@ -33,6 +33,12 @@
     margin-top: 0.4rem;
     border: 1px dotted #CCCCCC;
     margin-right: 0.63rem;
+    overflow: hidden;
+}
+
+.content .up_video video {
+    width: 100%;
+    height: auto;
 }
 
 .content .up_video ul li:nth-child(2n) {
