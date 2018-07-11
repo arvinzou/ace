@@ -67,7 +67,7 @@ app.controller(ngControllerName,function($scope) {
                             icon: 1,
                             skin: 'myskin'
                         },function(){
-                            location.href = "/portal/dynamic/portal/security/login_fop.jsp";
+                            location.href = "/portal/dynamic/portal/security/login.jsp";
                         });
                         if (!$scope.$$phase) {
                             $scope.$apply();
