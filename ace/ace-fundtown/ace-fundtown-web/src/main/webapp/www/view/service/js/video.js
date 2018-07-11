@@ -8,8 +8,9 @@ function userInfo() {
     var url = "/fundtown/www/process/getMyVipInfo";
     $.ajaxSettings.async = false;
     $.getJSON(url, function (result) {
-        uploader.init();
         deptID = result.data.deptId;
+        uploader.init();
+
         // if(result.data.vipStatus==2){
         //     uploader.init();
         //     deptID=result.data.deptId;
@@ -55,7 +56,12 @@ var uploader = new plupload.Uploader({
         },
         FileUploaded: function (uploader, file, responseObject) {
             var rst = JSON.parse(responseObject.response);
-            console.log(rst);
+            viewVideo(data);
         }
     }
 });
+
+function viewVideo(data) {
+    var videoUrl = "http:zx.huacainfo.com/" + data;
+    $('upbtn').before($('<li><video src="' + videoUrl + '"></video></li>'));
+}
