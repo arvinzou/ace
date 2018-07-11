@@ -98,4 +98,5 @@ public class OAuth2Controller extends BaseController {
         mav.addObject("js", sb.toString());
         return mav;
     }
+
 }
