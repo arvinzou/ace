@@ -92,9 +92,6 @@ public class MyWebSocket {
         addOnlineCount();           //在线数加1
         logger.debug("有新连接加入！当前在线人数为{}", getOnlineCount());
         logger.debug("rid:{} uid:{}", rid, uid);
-
-
-
     }
 
     /**
