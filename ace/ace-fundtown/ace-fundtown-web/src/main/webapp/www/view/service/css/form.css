@@ -24,14 +24,18 @@
     float: right;
     width: 2.26666rem;
     height: 0.64rem;
-    background-color: rgba(229, 229, 229, 1);
     font-size: 0.293333333rem;
-    color: #9EA7B4;
     text-align: center;
     line-height: 0.64rem;
     border-radius: 6px;
 }
-
+.active{
+    background-color: rgba(50, 131, 249, 0.86);;
+    color: #FFFFFF;
+}
+.unactive{
+    background-color: rgba(229, 229, 229, 1);
+}
 .content input {
     border: none;
     line-height: 0.64rem;
