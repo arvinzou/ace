@@ -8,7 +8,7 @@ function userInfo() {
     var url = "/fundtown/www/process/getMyVipInfo";
     $.ajaxSettings.async = false;
     $.getJSON(url, function (result) {
-        status = result.status;
+        status = result.data.vipStatus;
     });
     $.ajaxSettings.async = true;
 }
