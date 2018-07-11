@@ -116,9 +116,9 @@ public class OAuth2Controller extends PortalBaseController {
     }
 
 
-    @RequestMapping(value = "/getUsersByCode.do")
+    @RequestMapping(value = "/getUserinfoByCode.do")
     @ResponseBody
-    public SingleResult getUsersByCode(String code, String state) throws Exception{
+    public SingleResult getUserinfoByCode(String code, String state) throws Exception{
         this.logger.info("code-> {}", code);
         SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);
         this.logger.info("===============>unionid-> {}",rst.getValue().getUnionid());
