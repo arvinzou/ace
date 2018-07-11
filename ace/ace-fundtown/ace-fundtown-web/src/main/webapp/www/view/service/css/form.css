@@ -12,6 +12,8 @@
 
 .content > div {
     width: 100%;
+    height: 1.54rem;
+    line-height: 1.8rem;
     padding: 0.45rem 0;
     border-bottom: 1px solid #E5E5E5;
 }
@@ -41,6 +43,7 @@
     line-height: 0.64rem;
     color: #757575;
     font-size: 0.373333rem;
+    float: left;
 }
 
 .content input:focus {
