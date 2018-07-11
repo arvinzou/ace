@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.model.TaskCmcc;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.OAuth2Service;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import org.slf4j.Logger;
@@ -36,6 +37,11 @@ public class OAuth2Controller extends PortalBaseController {
 
     @Autowired
     private TaskCmccService taskCmccService;
+
+    @Value("#{config[appid]}")
+    private String appid;
+    @Value("#{config[secret]}")
+    private String secret;
 
     @RequestMapping(value = "/bind.do")
     @ResponseBody
@@ -107,5 +113,15 @@ public class OAuth2Controller extends PortalBaseController {
     @ResponseBody
     public Object userinfo()throws Exception {
         return this.getRequest().getSession().getAttribute(CommonKeys.SESSION_USERINFO_KEY);
+    }
+
+
+    @RequestMapping(value = "/getUserinfoByCode.do")
+    @ResponseBody
+    public SingleResult getUserinfoByCode(String code, String state) throws Exception{
+        this.logger.info("code-> {}", code);
+        SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);
+        this.logger.info("===============>unionid-> {}",rst.getValue().getUnionid());
+        return rst;
     }
 }
