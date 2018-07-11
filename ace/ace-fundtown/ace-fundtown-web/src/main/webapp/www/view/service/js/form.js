@@ -5,7 +5,7 @@ $(function () {
     $('.content').on('click', '.get_code', sendcode);
 })
 
-
+var countdown = 50;
 function sendcode() {
     var result = validateform('mobilePhone');
     if (result.status == 1) {
@@ -20,8 +20,35 @@ function sendcode() {
         if (result.status == 0) {
 
         }
-    })
+    });
+    settime();
+}
 
+function settime(){
+    var btnName = "获取验证码";
+    if (countdown == 0) {
+        btnName = "获取验证码";
+        countdown = 50;
+        stop = true;
+    } else {
+        stop = false;
+        btnName = "重新发送 " + countdown + "";
+        countdown--;
+    }
+
+    stop = stop;
+    countdown = countdown;
+    $('.get_code').text(btnName);
+    $('.get_code').attr("disabled", true);
+    $('.get_code').css({'background-color':'#E1E5ED'},{'color':'#666666'});
+    if (!stop) {
+        setTimeout(function () {
+            this.settime()
+        }, 1000)
+    }else{
+        $('.get_code').attr("disabled", false);
+        $('.get_code').css({'background-color':'#3283F9'},{'color':'#FFFFFF'});
+    }
 }
 
 
