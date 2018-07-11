@@ -38,3 +38,18 @@
 .content .up_video ul li:nth-child(2n) {
     margin-right: 0;
 }
+
+#upbtn {
+    padding-top: 0.3rem;
+    text-align: center;
+}
+
+#upbtn p {
+    font-size: 0.4rem;
+    color: #798092;
+}
+
+#upbtn .iconimg {
+    font-size: 1rem;
+
+}

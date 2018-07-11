@@ -36,7 +36,7 @@ function linkurl() {
     if (window.localStorage) {
         //存储变量的值
         localStorage.nodeId = obj['id'];
-        location.href = '../approved/' + obj['linkUrl'];
+        location.href = '../view/approved/' + obj['linkUrl'];
     } else {
         alert("NOT SUPPORT");
     }

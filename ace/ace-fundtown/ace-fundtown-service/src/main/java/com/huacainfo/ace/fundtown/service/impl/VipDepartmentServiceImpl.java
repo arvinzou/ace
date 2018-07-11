@@ -179,17 +179,18 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
             return new ResultResponse(ResultCode.FAIL, "查询微信授权信息失败");
         }
         VipDepartmentVo vo = vipDepartmentDao.findByMobile(userinfo.getMobile());
-        if (null == vo) {
-            return new ResultResponse(ResultCode.FAIL, "查询企业信息失败");
-        }
+//        if (null == vo) {
+//            return new ResultResponse(ResultCode.FAIL, "查询企业信息失败");
+//        }
         //response
         Map<String, Object> data = new HashMap<>();
         data.put("nickName", userinfo.getNickname());
         data.put("headimgUrl", userinfo.getHeadimgurl());
-        data.put("deptId", vo.getDepartmentId());
-        data.put("deptName", vo.getDepartmentName());
-        data.put("mobile", vo.getContactMobile());
-        data.put("email", vo.getContactEmail());
+        data.put("deptId", null == vo ? "" : vo.getDepartmentId());
+        data.put("deptName", null == vo ? "" : vo.getDepartmentName());
+        data.put("mobile", null == vo ? "" : vo.getContactMobile());
+        data.put("email", null == vo ? "" : vo.getContactEmail());
+        data.put("vipStatus", null == vo ? "1" : vo.getStatus());
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", data);
     }

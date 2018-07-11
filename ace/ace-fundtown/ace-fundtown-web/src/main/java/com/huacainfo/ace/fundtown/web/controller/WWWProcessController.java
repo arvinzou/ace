@@ -69,7 +69,6 @@ public class WWWProcessController extends BisBaseController {
      */
     @RequestMapping("/getMyVipInfo")
     public ResultResponse getMyVipInfo(String openId) throws Exception {
-
         //公众号用户信息
         Userinfo userinfo = getCurUserinfo();
         if (null == userinfo && StringUtil.isEmpty(openId)) {
