@@ -1,7 +1,7 @@
 $(function () {
     var url = '/portal/www/wx/jsapi/getConfig';
     var data = {
-        url: "http://zx.huacainfo.com/fundtown/www/map/map.html",
+        url: self.location.href,
         sysId: 'fundtown'
     }
     $.getJSON(url, data, function (result) {
@@ -11,7 +11,7 @@ $(function () {
             timestamp: result.data.timestamp,
             nonceStr: result.data.noncestr,
             signature: result.data.signature,
-            jsApiList: ["openLocation"]
+            jsApiList: ["openLocation", '']
         })
     });
 })
