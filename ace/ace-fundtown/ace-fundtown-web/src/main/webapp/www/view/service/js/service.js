@@ -3,15 +3,21 @@ $(function () {
     $('.list').on('click', 'li', enter);
 })
 
-var status;
+
+var deptID;
 
 
 function userInfo() {
     var url = "/fundtown/www/process/getMyVipInfo";
     $.ajaxSettings.async = false;
     $.getJSON(url, function (result) {
-        status = result.data.vipStatus;
-        viewInfo(result.data);
+        if (result.status == 0) {
+            deptID = result.data.deptId;
+            viewInfo(result.data);
+        }
+        else {
+            alert("网络异常");
+        }
     });
     $.ajaxSettings.async = true;
 }
@@ -27,6 +33,10 @@ function enter() {
     var index = $that.index();
     switch (index) {
         case 0:
+            if (deptID) {
+                window.location.href = 'schedule.html';
+                break;
+            }
             window.location.href = 'form.html';
             break;
         case 1:
