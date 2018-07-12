@@ -1,5 +1,6 @@
 package com.huacainfo.ace.cu.vo;
 
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.cu.model.CuDonateList;
 
 import java.math.BigDecimal;
@@ -31,6 +32,106 @@ public class CuDonateListVo extends CuDonateList {
      * 匿名选项  -- 0-否，1-是
      */
     private String anonymity;
+
+    /**
+     * 是否需要收据
+     * 0-不需要 1-需要
+     */
+    private String needReceipt;
+
+    private String consigneeName;
+
+    /**
+     * 收货人号码
+     */
+    private String consigneeMobileNumber;
+
+    private String country;
+
+    private String province;
+
+    private String city;
+
+    private String district;
+
+    private String address;
+
+    private String consigneeAddr;
+
+    public String getNeedReceipt() {
+        return needReceipt;
+    }
+
+    public void setNeedReceipt(String needReceipt) {
+        this.needReceipt = needReceipt;
+    }
+
+    public String getConsigneeName() {
+        return consigneeName;
+    }
+
+    public void setConsigneeName(String consigneeName) {
+        this.consigneeName = consigneeName;
+    }
+
+    public String getConsigneeMobileNumber() {
+        return consigneeMobileNumber;
+    }
+
+    public void setConsigneeMobileNumber(String consigneeMobileNumber) {
+        this.consigneeMobileNumber = consigneeMobileNumber;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getConsigneeAddr() {
+        return (StringUtil.isEmpty(getProvince()) ? "" : getProvince())
+                + (StringUtil.isEmpty(getCity()) ? "" : getCity())
+                + (StringUtil.isEmpty(getDistrict()) ? "" : getDistrict())
+                + (StringUtil.isEmpty(getAddress()) ? "" : getAddress());
+    }
+
+    public void setConsigneeAddr(String consigneeAddr) {
+        this.consigneeAddr = consigneeAddr;
+    }
 
     public String getAnonymity() {
         return anonymity;

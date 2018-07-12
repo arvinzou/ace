@@ -58,11 +58,10 @@ public class CuDonateListServiceImpl implements CuDonateListService {
     public PageResult<CuDonateListVo> findCuDonateListList(CuDonateListQVo condition, int start,
                                                            int limit, String orderBy) throws Exception {
         PageResult<CuDonateListVo> rst = new PageResult<>();
-        List<CuDonateListVo> list = this.cuDonateListDao.findList(condition,
-                start, start + limit, orderBy);
+        List<CuDonateListVo> list = cuDonateListDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.cuDonateListDao.findCount(condition);
+            int allRows = cuDonateListDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
