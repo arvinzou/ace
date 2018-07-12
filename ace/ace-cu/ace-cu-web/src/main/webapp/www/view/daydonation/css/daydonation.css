@@ -440,3 +440,6 @@ ul,li{
 	color: #666666;
 	font-size: 0.35rem;
 }
+.layui-timeline-item:first-child:before{
+	display: block !important;
+}
