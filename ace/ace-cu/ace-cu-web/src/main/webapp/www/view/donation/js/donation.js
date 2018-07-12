@@ -61,6 +61,7 @@ app.controller(ngControllerName,function($scope){
             if(result.status == 0) {
                 $scope.useRecords = result.data.rows;
                 recordList = result.data.rows;
+                $scope.totalProject = result.data.total;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
