@@ -394,6 +394,7 @@ ul,li{
 	font-size: 0.4rem;
 	color: #999999;
 	margin-left: 1.5rem;
+	margin-top: 0.3rem;
 }
 .dua_statics01{
 	width: 3rem;
@@ -401,7 +402,7 @@ ul,li{
 	float: left;
 	display: block;
 	text-align: center;
-	line-height: 0.8rem;
+	line-height: 0.6rem;
 }
 .dua_number{
 	font-size: 0.6rem;
