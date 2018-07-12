@@ -36,12 +36,12 @@ ul,li{
 	height: 1.8rem;
 	line-height: 0.6rem;
 	padding-left: 2.5rem;
-	padding-top: 0.3rem;
 }
 .title_01{
 	font-size: 0.5rem;
 	font-weight: bold;
 	color: #333333;
+	padding-top: 0.2rem;
 }
 .title_small{
 	font-size: 0.3rem;
