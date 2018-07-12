@@ -83,52 +83,52 @@ var massage = {
         ]
     },
     沙滩公园: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区柳叶湖旅游度假区渔樵村景区',
         images: [
             'img/stgy/1.jpg',
             'img/stgy/2.jpg'
         ]
     },
     游船码头: {
-        address: '常德市武陵区环湖路',
+        address: '常德市柳溪路与环湖路交叉口东南',
         images: [
             'img/ytmt/1.jpg',
             'img/ytmt/2.jpg'
         ]
     },
     司马楼: {
-        address: '常德市武陵区环湖路',
+        address: '常德市司马路与环湖路交叉口东北150米',
         images: [
             'img/sml/1.jpg',
             'img/sml/2.jpg'
         ]
     },
     柳叶风帆: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区柳叶湖旅游度假区',
         images: [
             'img/lyff/1.jpg'
         ]
     },
     湖仙岛: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区柳叶湖旅游度假区',
         images: [
             'img/hxd/1.png'
         ]
     },
     常德体育生态园: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区朗州路3333号',
         images: [
             'img/tyst/1.jpg'
         ]
     },
     太阳山森林公园: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区',
         images: [
             'img/tys/1.jpg'
         ]
     },
     河街: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区七里桥路',
         images: [
             'img/hj/1.jpg',
             'img/hj/2.png',
@@ -136,37 +136,37 @@ var massage = {
         ]
     },
     德国风情街: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区柳叶大道278号附近',
         images: [
             'img/fqj/1.jpg'
         ]
     },
     湖南桃花源国际高尔夫俱乐部: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区朗州路3333号',
         images: [
             'img/gef/1.jpg'
         ]
     },
     共和酒店: {
-        address: '常德市武陵区环湖路',
+        address: '常德柳叶大道东段环湖路88号柳叶湖旅游度假区',
         images: [
             'img/gh/1.jpg'
         ]
     },
     华尔夫酒店: {
-        address: '常德市武陵区环湖路',
+        address: '常德市柳叶大道东段(近天主堂)',
         images: [
             'img/hf/1.png'
         ]
     },
     柳园锦江酒店: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区泉水路198号',
         images: [
             'img/jj/1.jpg'
         ]
     },
     常德湘雅医院: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区月亮大道1688号',
         images: [
             'img/xyyy/1.png',
             'img/xyyy/2.png',
@@ -174,7 +174,7 @@ var massage = {
         ]
     },
     柳叶湖学校: {
-        address: '常德市武陵区环湖路',
+        address: '常德市武陵区柳泉路',
         images: [
             'img/lyh/1.png'
         ]

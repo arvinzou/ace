@@ -39,6 +39,7 @@ app.controller(ngControllerName,function($scope){
         success:function(result){
             if(result.status == 0) {
                 $scope.useRecords = result.data.rows;
+                $scope.useTotal = result.data.total;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }

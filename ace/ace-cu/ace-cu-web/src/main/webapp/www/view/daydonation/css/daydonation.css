@@ -23,9 +23,9 @@ ul,li{
 }
 .banner_words{
 	width: 90%;
-	height: 2.2rem;
+	height: 1.8rem;
 	position: absolute;
-	top: 5rem;
+	top: 5.4rem;
 	margin-left: 5%;
 	margin-right: 5%;
 	background: url(../img/banner_box.png) no-repeat;
@@ -33,15 +33,15 @@ ul,li{
 }
 .words{
 	width: 6rem;
-	height: 1.4rem;
-	line-height: 0.8rem;
+	height: 1.8rem;
+	line-height: 0.6rem;
 	padding-left: 2.5rem;
-	padding-top: 0.3rem;
 }
 .title_01{
 	font-size: 0.5rem;
 	font-weight: bold;
 	color: #333333;
+	padding-top: 0.3rem;
 }
 .title_small{
 	font-size: 0.3rem;
@@ -298,10 +298,10 @@ ul,li{
 }
 .raise_01{
 	width: 33.33%;
-	height: 1.8rem;
+	height: 1.2rem;
 	text-align: center;
 	float: left;
-	padding-top: 0.5rem;
+	padding-top: 0.3rem;
 }
 .raise_price{
 	font-size: 0.35rem;
@@ -394,6 +394,7 @@ ul,li{
 	font-size: 0.4rem;
 	color: #999999;
 	margin-left: 1.5rem;
+	margin-top: 0.3rem;
 }
 .dua_statics01{
 	width: 3rem;
@@ -401,7 +402,7 @@ ul,li{
 	float: left;
 	display: block;
 	text-align: center;
-	line-height: 0.8rem;
+	line-height: 0.6rem;
 }
 .dua_number{
 	font-size: 0.6rem;
@@ -434,4 +435,11 @@ ul,li{
 }
 .layui-timeline-item{
 	padding-bottom: 0 !important;
+}
+.love_cmt_01{
+	color: #666666;
+	font-size: 0.35rem;
+}
+.layui-timeline-item:first-child:before{
+	display: block !important;
 }

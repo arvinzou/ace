@@ -44,11 +44,6 @@
 				</div>
 			</div>
 			<div class="me_nav_box">
-					<!--<ul class="nav_box_ul">
-						<li onclick="hoverli('nav_record');">爱心记录</li>
-						<li onclick="hoverli('nav_help');">我的求助</li>
-						<li onclick="hoverli('nav_score');">爱心积分</li>
-					</ul>-->
 					<div class="navigation">
 						<div class="news-title">
 							<ul class="news-module nav_box_ul clear">
@@ -63,11 +58,11 @@
 			<div class="content">
 				<div class="dis" id="nav_record">
 					<ul class="layui-timeline">
-							<li class="layui-timeline-item" ng-repeat="record in useRecords">
-								<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+							<li class="layui-timeline-item">
+								<i class="layui-icon layui-timeline-axis"><img src="img/love_icon.png" style="width:20px; height: 15px;"/></i>
 								<div class="layui-timeline-content layui-text">
 									<div class="layui-timeline-title">
-										<div class="love_cmt">
+										<div class="love_title">
 											<div class="love_cmt_01" ng-cloak>共献爱心{{times}}次，累计金额{{totalAmount}}元</div>
 										</div>
 									</div>

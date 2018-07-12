@@ -1,7 +1,7 @@
 .testswitch {
 	position: relative;
 	float: left;
-	width: 2rem;
+	width: 1.5rem;
 	margin: 0;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -17,7 +17,6 @@
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
-	border: 1px solid #999999;
 	border-radius: 20px;
 }
 
@@ -46,7 +45,7 @@
 .testswitch-inner::after {
 	content: attr(data-on);
 	padding-left: 0.2rem;
-	background-color: #EEEEEE;
+	background-color: #FDF0EF;
 	color: #999999;
 }
 
@@ -60,17 +59,24 @@
 .testswitch-switch {
 	position: absolute;
 	display: block;
-	width: 0.5rem;
-	height: 0.5rem;
-	margin: 0.1rem;
-	background: #EA4436;
+	width: 0.6rem;
+	height: 0.6rem;
+	/* margin: 0.1rem; */
 	top: 0;
 	bottom: 0;
-	right: 1.2rem;
-	/*border: 2px solid #999999;*/
+	/*right: 1.2rem;*/
+	/* border: 2px solid #999999; */
 	border-radius: 0.5rem;
 	transition: all 0.3s ease-in 0s;
 }
+
+.switchon{
+	background-color: #EA4436;
+}
+.switchoff{
+	background-color: #999999;
+}
+
 
 .testswitch-checkbox:checked+.testswitch-label .testswitch-inner {
 	margin-left: 0;

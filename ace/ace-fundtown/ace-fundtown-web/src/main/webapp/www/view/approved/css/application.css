@@ -1,0 +1,45 @@
+body {
+    background-color: #F7F9FC;
+    color: #8B8AA6;
+}
+
+.top_card {
+    font-size: 0.373333rem;
+    line-height: 0.6rem;
+    width: 10rem;
+    margin-top: 0.426666rem;
+    height: 12.333333rem;
+    background: url(../image/card3.png);
+    background-size: 100% 100%;
+    padding: 1.466666rem 0.933333rem 0;
+}
+
+.top_card .btn {
+    width: 5.693333rem;
+    height: 1.8rem;
+    background: url(../image/button1.png) no-repeat;
+    background-size: 100% 100%;
+    margin: auto;
+    margin-bottom: 0.533333rem;
+}
+
+.bottom_card {
+    width: 9.72rem;
+    height: 5.466666rem;
+    background: url(../image/card4.png) no-repeat;
+    background-size: 100% 100%;
+    margin: 0.146666rem auto 0.666666rem;
+    padding: 1.64rem 0 0 3.466666rem;
+    font-size: 0.333333rem;
+    line-height: 0.533333rem;
+}
+
+.bottom_card .point {
+    color: #5C6681;
+    font-size: 0.32rem;
+    margin-top: 0.266666rem;
+    font-weight: bold;
+}
+
+
+

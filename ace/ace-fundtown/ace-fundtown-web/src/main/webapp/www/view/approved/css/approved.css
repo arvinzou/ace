@@ -1,0 +1,104 @@
+body {
+    background-color: #F7F9FC;
+    color: #8B8AA6;
+    padding: 0.426666rem 0 1.813333rem;
+    position: relative;
+    min-height: 100vh;
+}
+
+.top_card {
+    height: 11.493333rem;
+    background: url(../image/card1.png) no-repeat;
+}
+
+.filing_card {
+    height: 11.493333rem;
+    background: url(../image/card5.png) no-repeat;
+}
+
+.bank_content {
+    height: 12.253333rem;
+    background: url(../image/card6.png) no-repeat;
+}
+
+.tax_content {
+    height: 12.36rem;
+    background: url(../image/card7.png) no-repeat;
+}
+
+.top_card_seven {
+    height: 12.386666rem;
+    background: url(../image/card8.png) no-repeat;
+}
+
+.top_card, .top_card_long, .filing_card, .bank_content, .tax_content, .top_card_seven {
+    width: 10rem;
+    font-size: 0.37rem;
+    line-height: 0.693333rem;
+    background-size: 100% 100%;
+    padding: 3.6rem 0.93rem 0;
+}
+
+.top_card_long {
+    height: 26.08rem;
+    background: url(../image/card2.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.top_card_long .title, .top_card_seven .title {
+    color: #5C6681;
+    font-size: 0.4rem;
+    line-height: 0.666666rem;
+    margin-top: 0.346666rem;
+}
+
+.bottom_div {
+    text-align: center;
+    line-height: 1.813333rem;
+    height: 1.813333rem;
+    color: #8B8AA6;
+    font-size: 0.32rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.file_list {
+    padding-left: 0.5rem;
+    position: relative
+}
+
+.file_list1:before {
+    content: "1、";
+}
+
+.file_list2:before {
+    content: "2、";
+}
+
+.file_list3:before {
+    content: "3、";
+}
+
+.file_list4:before {
+    content: "4、";
+}
+
+.file_list5:before {
+    content: "5、";
+}
+
+.file_list6:before {
+    content: "6、";
+}
+
+.file_list:before {
+    color: #3283F9;
+    position: absolute;
+    left: 0;
+}
+
+.bottom_text .margin {
+    margin-bottom: 0.533333rem;
+}
+

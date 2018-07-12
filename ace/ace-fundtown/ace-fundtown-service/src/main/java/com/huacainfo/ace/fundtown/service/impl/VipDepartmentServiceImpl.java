@@ -8,9 +8,11 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.fundtown.dao.VipDepartmentDao;
+import com.huacainfo.ace.fundtown.dao.VipMemberResDao;
 import com.huacainfo.ace.fundtown.model.VipDepartment;
 import com.huacainfo.ace.fundtown.model.VipMemberRes;
 import com.huacainfo.ace.fundtown.service.VipDepartmentService;
@@ -44,6 +46,8 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     private VipMemberResService vipMemberResService;
     @Autowired
     private VipProcessRecordService vipProcessRecordService;
+    @Autowired
+    private VipMemberResDao vipMemberResDao;
 
 
     @Override
@@ -179,17 +183,18 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
             return new ResultResponse(ResultCode.FAIL, "查询微信授权信息失败");
         }
         VipDepartmentVo vo = vipDepartmentDao.findByMobile(userinfo.getMobile());
-        if (null == vo) {
-            return new ResultResponse(ResultCode.FAIL, "查询企业信息失败");
-        }
+//        if (null == vo) {
+//            return new ResultResponse(ResultCode.FAIL, "查询企业信息失败");
+//        }
         //response
         Map<String, Object> data = new HashMap<>();
         data.put("nickName", userinfo.getNickname());
         data.put("headimgUrl", userinfo.getHeadimgurl());
-        data.put("deptId", vo.getDepartmentId());
-        data.put("deptName", vo.getDepartmentName());
-        data.put("mobile", vo.getContactMobile());
-        data.put("email", vo.getContactEmail());
+        data.put("deptId", null == vo ? "" : vo.getDepartmentId());
+        data.put("deptName", null == vo ? "" : vo.getDepartmentName());
+        data.put("mobile", null == vo ? "" : vo.getContactMobile());
+        data.put("email", null == vo ? "" : vo.getContactEmail());
+        data.put("vipStatus", null == vo ? "1" : vo.getStatus());
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", data);
     }
@@ -227,5 +232,34 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     public ResultResponse getMyProcess(String deptId) {
         List<VipProcessRecordVo> list = vipProcessRecordService.findByDeptId(deptId);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
+    }
+
+
+    /**
+     * vip会员资源文件上传
+     *
+     * @param deptId   企业ID
+     * @param fileName 文件名称
+     * @param fileSize 文件大小
+     * @param fileUrl  文件资源地址
+     */
+    @Override
+    public VipMemberRes insertVipMemberRes(String deptId, String fileName, long fileSize, String fileUrl) {
+
+        VipMemberRes res = new VipMemberRes();
+        res.setId(GUIDUtil.getGUID());
+        res.setDeptId(deptId);
+        res.setCategory("0");
+        res.setResName(fileName);
+        res.setResSize(fileSize + "");
+        res.setResUrl(fileUrl);
+        res.setStatus("1");
+        res.setCreateUserId("00001");
+        res.setCreateUserName("system");
+        res.setCreateDate(DateUtil.getNowDate());
+        res.setLastModifyDate(DateUtil.getNowDate());
+
+        vipMemberResDao.insertSelective(res);
+        return res;
     }
 }

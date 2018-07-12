@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fundtown.model.VipDepartment;
+import com.huacainfo.ace.fundtown.model.VipMemberRes;
 import com.huacainfo.ace.fundtown.vo.VipDepartmentQVo;
 import com.huacainfo.ace.fundtown.vo.VipDepartmentVo;
 
@@ -124,4 +125,14 @@ public interface VipDepartmentService {
      * @return
      */
     ResultResponse getMyProcess(String deptId);
+
+    /**
+     * vip会员资源文件上传
+     *
+     * @param deptId   企业ID
+     * @param fileName 文件名称
+     * @param fileSize 文件大小
+     * @param fileUrl  文件资源地址
+     */
+    VipMemberRes insertVipMemberRes(String deptId, String fileName, long fileSize, String fileUrl);
 }

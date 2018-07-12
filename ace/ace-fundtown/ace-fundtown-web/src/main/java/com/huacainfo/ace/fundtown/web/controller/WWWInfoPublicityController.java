@@ -33,9 +33,13 @@ public class WWWInfoPublicityController extends BisBaseController {
      * @return ResultResponse
      */
     @RequestMapping("/vipList")
-    public ResultResponse getVipList(int type, int start, int limit, String orderBy) throws Exception {
+    public ResultResponse getVipList(String type, int start, int limit, String orderBy) throws Exception {
+        if (StringUtil.isEmpty(type)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
         VipPublicityQVo condition = new VipPublicityQVo();
-        condition.setType(Integer.valueOf(type));
+        condition.setType(type);
 
         PageResult<VipPublicityVo> vipList = vipPublicityService.findVipPublicityList(condition, start, limit, orderBy);
 

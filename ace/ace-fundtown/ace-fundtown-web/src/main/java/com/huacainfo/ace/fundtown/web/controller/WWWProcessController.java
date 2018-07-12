@@ -1,19 +1,25 @@
 package com.huacainfo.ace.fundtown.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.fundtown.model.ProcessNode;
 import com.huacainfo.ace.fundtown.model.ProcessNodeRes;
+import com.huacainfo.ace.fundtown.model.VipMemberRes;
 import com.huacainfo.ace.fundtown.service.ProcessNodeService;
 import com.huacainfo.ace.fundtown.service.VipDepartmentService;
 import com.huacainfo.ace.fundtown.vo.VipDepartmentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +36,8 @@ public class WWWProcessController extends BisBaseController {
     private ProcessNodeService processNodeService;
     @Autowired
     private VipDepartmentService vipDepartmentService;
+    @Autowired
+    private IFile fileSaver;
 
     /**
      * 获取入驻流程节点
@@ -69,7 +77,6 @@ public class WWWProcessController extends BisBaseController {
      */
     @RequestMapping("/getMyVipInfo")
     public ResultResponse getMyVipInfo(String openId) throws Exception {
-
         //公众号用户信息
         Userinfo userinfo = getCurUserinfo();
         if (null == userinfo && StringUtil.isEmpty(openId)) {
@@ -144,5 +151,41 @@ public class WWWProcessController extends BisBaseController {
         }
 
         return vipDepartmentService.getMyProcess(deptId);
+    }
+
+
+    /**
+     * vip会员资源文件上传
+     *
+     * @param file
+     * @param deptId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/uploadFile")
+    public ResultResponse uploadFile(@RequestParam("file") MultipartFile file, String deptId) throws Exception {
+        if (StringUtil.isEmpty(deptId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必备参数");
+        }
+        //TODO 企业资料有效性验证
+
+        String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+        File tmp = new File(dir);
+        if (!tmp.exists()) {
+            tmp.mkdirs();
+        }
+        File dest = new File(dir + File.separator + file.getName());
+        file.transferTo(dest);
+        String fileUrl = PropertyUtil.getProperty("fastdfs_server")
+                + fileSaver.saveFile(dest, file.getOriginalFilename());
+        dest.delete();
+
+        VipMemberRes res = vipDepartmentService.insertVipMemberRes(deptId,
+                file.getOriginalFilename(), file.getSize(), fileUrl);
+//        Map<String, Object> rtnMap = new HashMap<String, Object>();
+//        rtnMap.put("fileName", file.getOriginalFilename());
+//        rtnMap.put("fileSize", file.getSize());
+//        rtnMap.put("fileUrl", fileUrl);
+        return new ResultResponse(ResultCode.SUCCESS, "上传成功", res);
     }
 }
