@@ -1,16 +1,20 @@
+var deptID;
+
 $(function () {
     userInfo();
 })
 
-var deptID;
 
 function userInfo() {
     var url = "/fundtown/www/process/getMyVipInfo";
     $.ajaxSettings.async = false;
     $.getJSON(url, function (result) {
         deptID = result.data.deptId;
-        uploader.init();
+        console.log(deptID);
+        initVideo(deptID);
 
+        // uploader.settings.multipart_params.deptId = deptID;
+        uploader.init();
         // if(result.data.vipStatus==2){
         //     uploader.init();
         //     deptID=result.data.deptId;
@@ -19,6 +23,31 @@ function userInfo() {
         // }
     });
     $.ajaxSettings.async = true;
+}
+
+
+function initVideo(deptID) {
+    var url = '/fundtown/www/process/getMyVideo';
+    var data = {
+        deptId: 'ccdf82ffe7024a47bcdeb2e4fbe1c4c1'
+    };
+
+    var url1 = '/fundtown/www/process/getMyProcess';
+    $.getJSON(url1, data, function (result) {
+        console.log(result);
+    });
+
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            addVideo(result.data);
+        }
+    })
+}
+
+function addVideo(data) {
+    for (var i = 0; i < data.length; i++) {
+        viewVideo(data[i].resUrl);
+    }
 }
 
 
@@ -37,7 +66,7 @@ var uploader = new plupload.Uploader({
         preserve_headers: false
     },
     multipart_params: {
-        deptId: deptID
+        deptId: 'ccdf82ffe7024a47bcdeb2e4fbe1c4c1'
     },
     filters: {
         max_file_size: '204800mb',
@@ -56,12 +85,17 @@ var uploader = new plupload.Uploader({
         },
         FileUploaded: function (uploader, file, responseObject) {
             var rst = JSON.parse(responseObject.response);
-            viewVideo(data);
+            if (rst.status == 0) {
+                viewVideo(rst.data.resUrl);
+                return;
+            }
+            $(".uploadPloadprogress").html("上传失败");
+
         }
     }
 });
 
-function viewVideo(data) {
-    var videoUrl = "http:zx.huacainfo.com/" + data;
-    $('upbtn').before($('<li><video src="' + videoUrl + '"></video></li>'));
+function viewVideo(videoUrl) {
+    $('#upbtn').before($('<li><video src="' + videoUrl + '"></video></li>'));
+    $(".uploadPloadprogress").html("上传视频");
 }

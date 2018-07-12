@@ -19,7 +19,6 @@ function userInfo() {
 
 function viewInfo(data) {
     $('.name').text(data.nickName);
-    console.log(data.headimgUrl);
     $('.headimgUrl').prop('src', data.headimgUrl);
 }
 

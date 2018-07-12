@@ -1,8 +1,17 @@
+var status;
+
 $(function () {
     userInfo();
     initweb();
+    $('.top_card').on('click', '.btn', zhuce);
+
 })
-var status;
+
+
+function zhuce() {
+
+    window.location.href = '../service/form.html';
+}
 
 function userInfo() {
     var url = "/fundtown/www/process/getMyVipInfo";
