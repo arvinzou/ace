@@ -10,33 +10,26 @@ function userInfo() {
     $.ajaxSettings.async = false;
     $.getJSON(url, function (result) {
         deptID = result.data.deptId;
-        console.log(deptID);
         initVideo(deptID);
-
-        // uploader.settings.multipart_params.deptId = deptID;
-        uploader.init();
-        // if(result.data.vipStatus==2){
-        //     uploader.init();
-        //     deptID=result.data.deptId;
-        // }else {
-        //     alert('注册并审核通过之后才能上传视频','注册并审核通过之后才能上传视频');
-        // }
+        if (result.data.vipStatus == 2) {
+            uploader.settings.multipart_params.deptId = deptID;
+            uploader.init();
+        } else {
+            alert('注册并审核通过之后才能上传视频', '注册并审核通过之后才能上传视频');
+        }
     });
     $.ajaxSettings.async = true;
 }
 
 
 function initVideo(deptID) {
+    if (!deptID) {
+        return;
+    }
     var url = '/fundtown/www/process/getMyVideo';
     var data = {
-        deptId: 'ccdf82ffe7024a47bcdeb2e4fbe1c4c1'
+        deptId: deptID
     };
-
-    var url1 = '/fundtown/www/process/getMyProcess';
-    $.getJSON(url1, data, function (result) {
-        console.log(result);
-    });
-
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
             addVideo(result.data);
@@ -66,7 +59,7 @@ var uploader = new plupload.Uploader({
         preserve_headers: false
     },
     multipart_params: {
-        deptId: 'ccdf82ffe7024a47bcdeb2e4fbe1c4c1'
+        deptId: ''
     },
     filters: {
         max_file_size: '204800mb',

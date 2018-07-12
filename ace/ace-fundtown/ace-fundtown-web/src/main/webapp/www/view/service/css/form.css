@@ -44,6 +44,11 @@
     color: #757575;
     font-size: 0.373333rem;
     float: left;
+    width: 100%;
+}
+
+#mobilePhone {
+    width: 65%;
 }
 
 .content input:focus {

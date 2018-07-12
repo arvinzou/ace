@@ -9,7 +9,7 @@ var countdown = 50;
 function sendcode() {
     var result = validateform('mobilePhone');
     if (result.status == 1) {
-        $input.eq(i).parent().css({'border-bottom': '1px solid red'});
+        $('#mobilePhone').parent().css({'border-bottom': '1px solid red'});
         return
     }
     var url = '/fundtown/www/sms/sendCode';
@@ -17,8 +17,8 @@ function sendcode() {
         mobile: result.message,
     }
     $.post(url, data, function (result) {
-        if (result.status == 0) {
-
+        if (result.status != 0) {
+            alert(result.info);
         }
     });
     settime();
@@ -73,10 +73,14 @@ function submitForm() {
     var url = '/fundtown/www/process/vipApply';
     var datas = {
         code: data.code,
-        json: JSON.stringify(data),
+        json: JSON.stringify(data)
     }
-    $.post(url, datas, function () {
-
+    $.post(url, datas, function (result) {
+        if (result.status == 0) {
+            window.location.href = 'schedule.html';
+        } else {
+            alert("入驻申请失败");
+        }
     })
 }
 
@@ -91,7 +95,6 @@ function validateInput() {
         return;
     }
     var result = validateform(idName);
-    console.log(result);
     if (result.status == 0) {
         $that.parent().css({'border-bottom': '1px solid green'});
     } else {
