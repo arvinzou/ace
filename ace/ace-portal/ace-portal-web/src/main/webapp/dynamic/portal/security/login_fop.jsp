@@ -426,7 +426,7 @@
                                     <span></span>
                                 </label>
                                 <div class="pull-right forget-password-block">
-                                    <a data-target="#stack1" data-toggle="modal" class="forget-password">忘记密码了</a>
+                                    <a style="display: none;" data-target="#stack1" data-toggle="modal" class="forget-password">忘记密码了</a>
                                 </div>
                             </div>
 
@@ -441,7 +441,7 @@
                     <div align="center">
                         <h6>
                             <span style="font-family: '微软雅黑'">建议WIN7以上系统使用IE9以上浏览器，XP、MAC系统使用</span><a
-                                href="http://rj.baidu.com/soft/detail/14744.html?ald"
+                                href="https://rj.baidu.com/soft/detail/14744.html?ald"
                                 target="_blank" style="font-family: '微软雅黑'">谷歌浏览器</a> <span
                                 style="font-family: '微软雅黑'">分辨率1024*768以上为佳</span>
                         </h6>
@@ -534,7 +534,7 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/login.min.js"
         type="text/javascript"></script>
-<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"
+<script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"
         type="text/javascript"></script>
 
 
@@ -679,7 +679,7 @@
         id:"J_Static2Quick_box",
         appid: "wx8571545c5cc9d78c",
         scope: "snsapi_login",
-        redirect_uri: encodeURI('http://zx.huacainfo.com/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
+        redirect_uri: encodeURI('https://zx.huacainfo.com/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
         state: "huacai",
         style: "",
         href: ""

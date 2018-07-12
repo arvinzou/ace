@@ -32,6 +32,7 @@
     white-space: nowrap;
     font-weight: bold;
     color: rgba(51, 51, 51, 1);
+    text-align: center;
 }
 
 .content .list {
@@ -40,9 +41,9 @@
 }
 
 .content .list img {
-    height: 3vh;
+    height: 0.533333rem;
     width: auto;
-    margin-right: 2.9vw;
+    margin-right: 0.293333rem;
     vertical-align: middle;
 
 }
@@ -54,5 +55,10 @@
 .content .list .icon_right {
     float: right;
     color: #E5E5E5;
+
+}
+
+.content .list .icon_right .iconfont {
+    font-size: 0.533333rem;
 }
 

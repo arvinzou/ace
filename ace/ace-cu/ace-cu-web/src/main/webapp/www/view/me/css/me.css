@@ -209,3 +209,10 @@ ul,li{
 	color: #FFFFFF;
 	background-color: #EA4436;
 }
+.love_cmt{
+	width:fit-content;
+	width:-moz-fit-content;
+	padding: 0.2rem;
+	background: rgba(234,68,54,0.1);
+	border-radius: 0.2rem;
+}

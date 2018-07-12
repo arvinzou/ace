@@ -2,5 +2,5 @@
 	pageEncoding="utf-8"%>
 <%
 	session.invalidate();
-	response.sendRedirect("/portal/dynamic/portal/security/login_fop.jsp");
+	response.sendRedirect("/portal/dynamic/portal/security/login.jsp");
 %>

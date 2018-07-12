@@ -12,6 +12,8 @@
 
 .content > div {
     width: 100%;
+    height: 1.54rem;
+    line-height: 1.8rem;
     padding: 0.45rem 0;
     border-bottom: 1px solid #E5E5E5;
 }
@@ -24,19 +26,29 @@
     float: right;
     width: 2.26666rem;
     height: 0.64rem;
-    background-color: rgba(229, 229, 229, 1);
     font-size: 0.293333333rem;
-    color: #9EA7B4;
     text-align: center;
     line-height: 0.64rem;
     border-radius: 6px;
 }
-
+.active{
+    background-color: rgba(50, 131, 249, 0.86);;
+    color: #FFFFFF;
+}
+.unactive{
+    background-color: rgba(229, 229, 229, 1);
+}
 .content input {
     border: none;
     line-height: 0.64rem;
     color: #757575;
     font-size: 0.373333rem;
+    float: left;
+    width: 100%;
+}
+
+#mobilePhone {
+    width: 65%;
 }
 
 .content input:focus {

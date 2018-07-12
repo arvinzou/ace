@@ -5,11 +5,11 @@ $(function () {
     $('.content').on('click', '.get_code', sendcode);
 })
 
-
+var countdown = 50;
 function sendcode() {
     var result = validateform('mobilePhone');
     if (result.status == 1) {
-        $input.eq(i).parent().css({'border-bottom': '1px solid red'});
+        $('#mobilePhone').parent().css({'border-bottom': '1px solid red'});
         return
     }
     var url = '/fundtown/www/sms/sendCode';
@@ -17,11 +17,38 @@ function sendcode() {
         mobile: result.message,
     }
     $.post(url, data, function (result) {
-        if (result.status == 0) {
-
+        if (result.status != 0) {
+            alert(result.info);
         }
-    })
+    });
+    settime();
+}
 
+function settime(){
+    var btnName = "获取验证码";
+    if (countdown == 0) {
+        btnName = "获取验证码";
+        countdown = 50;
+        stop = true;
+    } else {
+        stop = false;
+        btnName = "重新发送 " + countdown + "";
+        countdown--;
+    }
+
+    stop = stop;
+    countdown = countdown;
+    $('.get_code').text(btnName);
+    $('.get_code').attr("disabled", true);
+    $('.get_code').css({'background-color':'#E1E5ED'},{'color':'#666666'});
+    if (!stop) {
+        setTimeout(function () {
+            this.settime()
+        }, 1000)
+    }else{
+        $('.get_code').attr("disabled", false);
+        $('.get_code').css({'background-color':'#3283F9'},{'color':'#FFFFFF'});
+    }
 }
 
 
@@ -46,10 +73,14 @@ function submitForm() {
     var url = '/fundtown/www/process/vipApply';
     var datas = {
         code: data.code,
-        json: JSON.stringify(data),
+        json: JSON.stringify(data)
     }
-    $.post(url, datas, function () {
-
+    $.post(url, datas, function (result) {
+        if (result.status == 0) {
+            window.location.href = 'schedule.html';
+        } else {
+            alert("入驻申请失败");
+        }
     })
 }
 
@@ -64,7 +95,6 @@ function validateInput() {
         return;
     }
     var result = validateform(idName);
-    console.log(result);
     if (result.status == 0) {
         $that.parent().css({'border-bottom': '1px solid green'});
     } else {

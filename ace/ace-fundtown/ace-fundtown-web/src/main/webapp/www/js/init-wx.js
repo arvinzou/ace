@@ -7,7 +7,7 @@ $(function () {
     }
     $.getJSON(url, data, function (result) {
         wx.config({
-            debug: true,
+            debug: false,
             appId: result.data.appId,
             timestamp: result.data.timestamp,
             nonceStr: result.data.noncestr,
