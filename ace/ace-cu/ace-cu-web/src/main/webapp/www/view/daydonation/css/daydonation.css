@@ -41,7 +41,7 @@ ul,li{
 	font-size: 0.5rem;
 	font-weight: bold;
 	color: #333333;
-	padding-top: 0.2rem;
+	padding-top: 0.3rem;
 }
 .title_small{
 	font-size: 0.3rem;
@@ -435,4 +435,8 @@ ul,li{
 }
 .layui-timeline-item{
 	padding-bottom: 0 !important;
+}
+.love_cmt_01{
+	color: #666666;
+	font-size: 0.35rem;
 }
