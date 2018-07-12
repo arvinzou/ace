@@ -22,9 +22,11 @@ app.controller(ngControllerName,function($scope) {
 
     var clickSwitch = function() {
         if($("#onoffswitch").is(':checked')) {
+            $(".testswitch-switch").removeClass("switchoff").addClass("switchon");
             $("#bill_information").show();
             isBill = true;
         } else {
+            $(".testswitch-switch").removeClass("switchon").addClass("switchoff");
             $("#bill_information").hide();
             isBill = false;
         }
