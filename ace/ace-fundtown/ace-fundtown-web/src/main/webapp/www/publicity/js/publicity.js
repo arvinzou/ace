@@ -35,6 +35,11 @@ app.controller(ngControllerName,function($scope){
     $scope.changeTab = function(type, clazz){
         $(clazz).addClass("active");
         $(clazz).siblings().removeClass("active");
+        if(type == '0'){
+            $(".list_title").html("私募股权投资基金管理机构公示");
+        }else if(type == '1'){
+            $(".list_title").html("私募股权投资基金公示");
+        }
         $.ajax({
             url: "/fundtown/www/info/vipList",
             type:"post",
