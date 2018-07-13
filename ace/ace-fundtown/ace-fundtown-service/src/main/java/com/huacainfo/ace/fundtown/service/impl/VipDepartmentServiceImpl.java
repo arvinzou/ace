@@ -155,6 +155,7 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
 //        vip.setAreaCode(userProp.getAreaCode());
         vip.setParentDepartmentId("0");
         vip.setStatus("1");//1-申请中 2-vip
+        vip.setType("0");
         int insertCount = vipDepartmentDao.insertDepartment(vip);
         if (insertCount <= 0) {
             return new ResultResponse(ResultCode.FAIL, "企业信息注册失败");
@@ -164,7 +165,13 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
         userProp.setUserId("0000");
         userProp.setName("system");
         userinfo.setMobile(vipVo.getContactMobile());
-        userinfoService.updateUserinfo(userinfo, userProp);
+        MessageResponse rs = userinfoService.updateUserinfo(userinfo, userProp);
+        if (rs.getStatus() != 0) {
+            return new ResultResponse(rs);
+        }
+        //流程记录
+        vipProcessRecordService.insertVipProcessRecord(vip, "ALL");
+
 
         return new ResultResponse(ResultCode.SUCCESS, "企业注册成功");
 
@@ -261,5 +268,33 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
 
         vipMemberResDao.insertSelective(res);
         return res;
+    }
+
+    /**
+     * 信息公示
+     *
+     * @param deptId      企业ID
+     * @param curUserProp
+     * @return
+     */
+    @Override
+    public MessageResponse publicity(String deptId, UserProp curUserProp) {
+        return null;
+    }
+
+    /**
+     * 企业入驻流程审核
+     *
+     * @param deptId       企业ID
+     * @param nodeId       流程节点ID
+     * @param auditResult  审核结果
+     * @param auditOpinion 审核意见
+     * @param curUserProp
+     * @return
+     */
+    @Override
+    public MessageResponse audit(String deptId, String nodeId,
+                                 String auditResult, String auditOpinion, UserProp curUserProp) {
+        return null;
     }
 }

@@ -16,67 +16,6 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 	http://code.alibabatech.com/schema/dubbo  http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <import resource="classpath:dubbo/dubbo-ace-common-provider.xml"/>
-
-
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.AnalysisService"
-                   ref="analysisService"/>
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveService"
-                   ref="liveService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveRptService"
-                   ref="liveRptService"/>
-
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveMsgService"
-                   ref="liveMsgService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.WWWService"
-                   ref="wwwService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveImgService"
-                   ref="liveImgService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.LiveCmtService"
-                   ref="liveCmtService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.ConsultService"
-                   ref="consultService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.CourseAuditService"
-                   ref="courseAuditService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.CourseCmtService"
-                   ref="courseCmtService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.ExamScoreService"
-                   ref="examScoreService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.CourseService"
-                   ref="courseService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.ExamScoreSubService"
-                   ref="examScoreSubService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.MemberService"
-                   ref="memberService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.OptionsService"
-                   ref="optionsService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.OrderService"
-                   ref="orderService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.QuestionService"
-                   ref="questionService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.TeacherAuditService"
-                   ref="teacherAuditService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.TeacherService"
-                   ref="teacherService"/>
-
-    <dubbo:service interface="com.huacainfo.ace.jxb.service.TestPaperService"
-                   ref="testPaperService"/>
-
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.AnalysisService" ref="analysisService"/>
+    <dubbo:service interface="com.huacainfo.ace.jxb.service.RegService" ref="regService"/>
 </beans>

@@ -216,9 +216,19 @@
         <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
         <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
         <result column="anonymity" jdbcType="VARCHAR" property="anonymity"/>
+        <result column="needReceipt" jdbcType="VARCHAR" property="needReceipt"/>
+        <result column="consigneeName" jdbcType="VARCHAR" property="consigneeName"/>
+        <result column="consigneeMobileNumber" jdbcType="VARCHAR" property="consigneeMobileNumber"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
+        o.needReceipt, o.consigneeName, o.consigneeMobileNumber,
+        o.country, o.province, o.city, o.district, o.address,
         IFNULL(o.points,0) AS points,
         IFNULL(o.anonymity,'0') AS anonymity,
         p.projectName, u.nickname, u.headimgurl,
@@ -230,6 +240,9 @@
         select
         <include refid="Vo_Column_List"/>
         from cu_donate_list t
+        left join cu.cu_project p on t.projectId = p.id
+        left join cu_donate_order o on o.id = t.orderId
+        left join portal.userinfo u on u.openid = t.openId
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -262,6 +275,21 @@
         </if>
         <if test="condition.todayDate!=null and condition.todayDate!=&quot;&quot;">
             and t.donateDate like concat(#{condition.todayDate,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
+            and t.donateDate >= #{condition.startDate,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.endDate!=null and condition.endDate!=&quot;&quot;">
+            and t.donateDate &lt;= #{condition.endDate,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.needReceipt!=null and condition.needReceipt!=&quot;&quot;">
+            and o.needReceipt = #{condition.needReceipt,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.nickname!=null and condition.nickname!=&quot;&quot;">
+            and u.nickname like concat('%',#{condition.nickname,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.projectName!=null and condition.projectName!=&quot;&quot;">
+            and p.projectName like concat('%',#{condition.projectName,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 

@@ -20,7 +20,6 @@ jQuery(function ($) {
                 $.extend(params, {
                     time: new Date()
                 });
-                // console.log("====================");
                 // console.log(params);
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {
                     page: 1,
@@ -53,11 +52,12 @@ jQuery(function ($) {
     $('#btn-view-edit').on(
         'click',
         function () {
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
+                'selrow');
             if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext)
+                $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                    $.jgrid.nav.alerttext)
             }
-            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
                 gr,
@@ -65,10 +65,6 @@ jQuery(function ($) {
                     closeAfterAdd: true,
                     recreateForm: true,
                     viewPagerButtons: true,
-                    beforeSubmit: function (postdata) {
-                        postdata.departmentId = rowData.departmentId;
-                        return [true, "", ""];
-                    },
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
                         form.closest('.ui-jqdialog').find(
@@ -82,18 +78,17 @@ jQuery(function ($) {
         'click',
         function () {
 
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
+                'selrow');
             if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
+                $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                    $.jgrid.nav.alerttext);
                 return;
             }
-            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            jQuery(cfg.grid_selector).jqGrid('delGridRow', gr,
+            jQuery(cfg.grid_selector).jqGrid(
+                'delGridRow',
+                gr,
                 {
-                    beforeSubmit: function (postdata) {
-                        postdata.departmentId = rowData.departmentId;
-                        return [true, "", ""];
-                    },
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
                         form.closest('.ui-jqdialog').find(
@@ -101,62 +96,7 @@ jQuery(function ($) {
                             '<div class="widget-header" />')
                         style_edit_form(form);
                     }
-                });
-        });
-
-    //信息公示
-    $('#btn-view-publicity').on(
-        'click',
-        function (e) {
-            e.preventDefault();
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext);
-                return;
-            }
-            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            // if (rowData.started == "1") {
-            //     alert("项目已上线，请勿重复操作")
-            //     return;
-            // }
-
-            $.ajax({
-                type: "post",
-                url: contextPath + "/vipDepartment/publicity",
-                data: {deptId: rowData.departmentId},
-                beforeSend: function (XMLHttpRequest) {
-                    style_ajax_button('ajax_button_audit', true);
-                },
-                success: function (rst, textStatus) {
-                    style_ajax_button('ajax_button_audit', false);
-                    if (rst) {
-                        bootbox.dialog({
-                            title: '系统提示',
-                            message: rst.errorMessage,
-                            buttons: {
-                                "success": {
-                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
-                                    "className": "btn-sm btn-success",
-                                    "callback": function () {
-                                        //重载数据
-                                        jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                                            page: 1
-                                        }).trigger("reloadGrid");
-                                    }
-                                }
-                            }
-                        });
-                    }
-                },
-                complete: function (XMLHttpRequest, textStatus) {
-                    style_ajax_button('ajax_button_audit', false);
-                },
-                error: function () {
-                    style_ajax_button('ajax_button_audit', true);
-                }
-            });
-
+                })
         });
 });
 
@@ -209,12 +149,22 @@ function loadView(id) {
                     key.indexOf('time') != -1 ||
                     key.indexOf('Time') != -1 ||
                     key.indexOf('birthday') != -1) {
-                    value = Common.DateFormatter(value);
+                    //value = Common.DateFormatter(value);
                 }
-                if (key == 'type') {
-                    value = rsd(value, '147');
+                if (key == 'needReceipt') {
+                    var rst = "";
+                    switch (value) {
+                        case '1' :
+                            rst = "开票";
+                            break;
+                        case '0' :
+                            rst = "不开票";
+                            break;
+                        default :
+                            rst = "不开票";
+                    }
+                    value = rst;
                 }
-
                 $("#dialog-message-view").find('#' + key).html(value);
             });
         },
