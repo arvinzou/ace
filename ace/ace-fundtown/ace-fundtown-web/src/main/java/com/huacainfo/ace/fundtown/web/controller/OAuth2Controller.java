@@ -53,7 +53,8 @@ public class OAuth2Controller extends BaseController {
     private TaskCmccService taskCmccService;
 
     @RequestMapping(value = "/redirect.do")
-    public void redirect(String code, String state, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void redirect(String code, String state,
+                         HttpServletRequest request, HttpServletResponse response) throws Exception {
         this.logger.info("code->{} state -> {}", code, state);
 //        String referer = request.getHeader("referer");
         logger.info("=========================  start get Userinfo from weixin pltfrom======================");

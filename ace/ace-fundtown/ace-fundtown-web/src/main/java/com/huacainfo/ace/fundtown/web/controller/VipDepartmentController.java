@@ -2,7 +2,9 @@ package com.huacainfo.ace.fundtown.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -119,7 +121,44 @@ public class VipDepartmentController extends BaseController {
     @ResponseBody
     public MessageResponse deleteVipDepartmentByVipDepartmentId(String jsons) throws Exception {
         JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
+        String id = json.getString("departmentId");
         return vipDepartmentService.delDepartmentByPrimaryKey(id, getCurUserProp());
+    }
+
+    /**
+     * 企业入驻流程审核
+     *
+     * @param deptId       企业ID
+     * @param nodeId       流程节点ID
+     * @param auditResult  审核结果
+     * @param auditOpinion 审核意见
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/audit")
+    public MessageResponse audit(String deptId, String nodeId,
+                                 String auditResult, String auditOpinion) {
+        if (StringUtil.areNotEmpty(deptId, nodeId)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return vipDepartmentService.audit(deptId, nodeId, auditResult, auditOpinion, getCurUserProp());
+    }
+
+
+    /**
+     * 信息公示
+     *
+     * @param deptId 企业ID
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/publicity")
+    public MessageResponse publicity(String deptId) {
+        if (StringUtil.isEmpty(deptId)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return vipDepartmentService.publicity(deptId, getCurUserProp());
     }
 }

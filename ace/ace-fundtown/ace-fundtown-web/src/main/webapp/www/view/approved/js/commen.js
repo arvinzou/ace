@@ -3,14 +3,13 @@ var status;
 $(function () {
     userInfo();
     initweb();
-    $('.top_card').on('click', '.btn', zhuce);
-
+    $('body').on('click', '.file_p', downloadFile);
 })
 
-
-function zhuce() {
-
-    window.location.href = '../service/form.html';
+function downloadFile() {
+    if (status != 2) {
+        alert("申请入驻成功才能下载。")
+    }
 }
 
 function userInfo() {
@@ -27,10 +26,9 @@ function initweb() {
     var url = "/fundtown/www/process/getNodeResList";
     var data = {
         nodeId: nodeId,
-    }
+    };
     $.getJSON(url, data, function (result) {
         console.log(result);
-        viewFileListFree(result.data['0']);
         viewFileList(result.data['0'], '.fileList');
         viewFileList(result.data['1'], '.fileListTwo');
     });
@@ -38,36 +36,16 @@ function initweb() {
 
 
 function viewFileList(data, className) {
-    if (!className) {
+    if (!data) {
         return;
     }
     $(className).empty();
     for (var i = 0; i < data.length; i++) {
         var p = fileTemplate;
-        p = p.replace('[resName]', data[i].resName).replace('[resName]', data[i].resName);
-        console.log(status);
-        if (status == 0) {
-            p = p.replace('[resUrl]', data[i].resUrl);
-        } else if (status == 1) {
-            p = p.replace('[resUrl]', "");
-        }
+        p = p.replace('[resName]', data[i].resName)
+            .replace('[id]', status == 2 ? data[i].id : '');
         $(className).append($(p));
     }
 }
 
-function viewFileListFree(data, className) {
-    if (className) {
-        return;
-    }
-    $('.fileList_free').empty();
-    for (var i = 0; i < data.length; i++) {
-        var p = fileTemplate;
-        p = p.replace('[resName]', data[i].resName)
-            .replace('[resName1]', data[i].resName)
-            .replace('[resUrl]', data[i].resUrl);
-        $('.fileList_free').append($(p));
-    }
-}
-
-
-var fileTemplate = '<p><a class="downFile" href="[resUrl]" download="[resName1]">[resName]</a></p>';
+var fileTemplate = '<p><a class="file_p" href="/fundtown/www/download/file?id=[id]">[resName]</a></p>';

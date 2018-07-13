@@ -89,6 +89,9 @@ public class VipDepartment implements java.io.Serializable {
      */
     private String status;
 
+    /**
+     * 0-管理结构 1-基金
+     */
     private String type;
 
     private String simage;

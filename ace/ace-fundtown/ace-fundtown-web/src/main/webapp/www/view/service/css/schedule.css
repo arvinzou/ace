@@ -16,7 +16,7 @@ body {
 }
 
 .content .schedule .text {
-    padding-left: 0.24rem;
+    padding: 0 0.24rem;
     font-size: 0.373333rem;
     width: 100%;
     height: 100%;
@@ -60,9 +60,33 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.content .undo:before {
-    background-color: #E4E6E9 !important;
-    border-color: #F6F7F8 !important;
+.content .blue:before {
+    /*background-color: #E4E6E9 !important;*/
+    /*border-color: #F6F7F8 !important;*/
 
+}
+
+.content .green:before {
+    background-color: #0DD955 !important;
+    border-color: #0DD955 !important;
+
+}
+
+.content .red:before {
+    background-color: #FF4F51 !important;
+    border-color: #FF4F51 !important;
+
+}
+
+.blue {
+    color: #3283F9 !important;
+}
+
+.green {
+    color: #0DD955 !important;
+}
+
+.red {
+    color: #FF4F51 !important;
 }
 

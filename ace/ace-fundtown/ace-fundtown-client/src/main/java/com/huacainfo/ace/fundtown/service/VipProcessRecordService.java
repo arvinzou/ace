@@ -3,7 +3,9 @@ package com.huacainfo.ace.fundtown.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.fundtown.model.VipDepartment;
 import com.huacainfo.ace.fundtown.model.VipProcessRecord;
 import com.huacainfo.ace.fundtown.vo.VipProcessRecordQVo;
 import com.huacainfo.ace.fundtown.vo.VipProcessRecordVo;
@@ -85,4 +87,6 @@ public interface VipProcessRecordService {
     MessageResponse deleteVipProcessRecordByVipProcessRecordId(String id, UserProp userProp) throws Exception;
 
     List<VipProcessRecordVo> findByDeptId(String deptId);
+
+    ResultResponse insertVipProcessRecord(VipDepartment vip, String index);
 }

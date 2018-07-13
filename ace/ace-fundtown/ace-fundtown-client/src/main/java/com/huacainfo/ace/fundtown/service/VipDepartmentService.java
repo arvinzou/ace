@@ -135,4 +135,24 @@ public interface VipDepartmentService {
      * @param fileUrl  文件资源地址
      */
     VipMemberRes insertVipMemberRes(String deptId, String fileName, long fileSize, String fileUrl);
+
+    /**
+     * 信息公示
+     *
+     * @param deptId 企业ID
+     * @return
+     */
+    MessageResponse publicity(String deptId, UserProp curUserProp);
+
+    /**
+     * 企业入驻流程审核
+     *
+     * @param deptId       企业ID
+     * @param nodeId       流程节点ID
+     * @param auditResult  审核结果
+     * @param auditOpinion 审核意见
+     * @return
+     */
+    MessageResponse audit(String deptId, String nodeId,
+                          String auditResult, String auditOpinion, UserProp curUserProp);
 }
