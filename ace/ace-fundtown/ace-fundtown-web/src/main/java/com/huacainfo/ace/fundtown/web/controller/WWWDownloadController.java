@@ -63,16 +63,11 @@ public class WWWDownloadController extends BisBaseController {
             String fileName = downLoadPath.substring(downLoadPath.indexOf("filename=") + 9);
             logger.info("-------------------------fileName--------------------------------");
             logger.info(fileName);
-            String os = System.getProperty("os.name");
-            if (os.toLowerCase().indexOf("windows") != -1) {
-                fileName = new String(fileName.getBytes("GBK"), "iso-8859-1");
-            } else {
-                //判断浏览器
-                String userAgent = request.getHeader("User-Agent").toLowerCase();
-                if (userAgent.indexOf("msie") > 0) {
-                    fileName = URLEncoder.encode(fileName, "iso-8859-1");
-                }
-            }
+
+            // fileName = new String(fileName.getBytes(), "ISO-8859-1");
+
+            fileName = URLEncoder.encode(fileName, "UTF-8");
+            //response.setHeader("Content-Disposition","attachment;filename="+fileName);
             //判断服务器操作系统，本地开发使用windows
 
             //响应二进制流
