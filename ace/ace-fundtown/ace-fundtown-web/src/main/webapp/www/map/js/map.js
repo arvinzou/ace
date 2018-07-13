@@ -3,10 +3,19 @@ $(function () {
     myChart = echarts.init(document.getElementById('main'));
     myChart.setOption(option);
     myChart.on('click', function (parmas) {
+        console.log(parmas);
         viewinfo(parmas.data);
-        return false;
     });
-    $('body').on('click', hideinfo);
+    $('body').on('click', '#main', hideinfo);
+    myChart.on('dbclick', function (parmas) {
+        console.log(parmas);
+        //viewinfo(parmas.data);
+    });
+
+    var canvas = document.getElementsByTagName('canvas');
+    canvas.addEventListener('click', function (e) {
+        console.log(e);
+    }, false);
 })
 
 function hideinfo() {
@@ -54,7 +63,7 @@ var option = {
         },
         itemStyle: {
             normal: {
-                color: '#ff0000'
+                color: '#03f'
             }
         }
     },
