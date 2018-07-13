@@ -3,7 +3,6 @@ package com.huacainfo.ace.jxb.service.impl;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.RegDao;
 import com.huacainfo.ace.jxb.model.Reg;
 import com.huacainfo.ace.jxb.service.RegService;
