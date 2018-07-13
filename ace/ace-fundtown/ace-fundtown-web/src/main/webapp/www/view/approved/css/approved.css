@@ -94,12 +94,11 @@ body {
 }
 
 .file_list:before {
-    color: #3283F9;
     position: absolute;
     left: 0;
 }
 
 .bottom_text .margin {
-    margin-bottom: 0.533333rem;
+    margin-bottom: 0.3rem;
 }
 

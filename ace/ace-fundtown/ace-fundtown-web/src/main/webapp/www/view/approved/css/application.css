@@ -6,12 +6,13 @@ body {
 .top_card {
     font-size: 0.373333rem;
     line-height: 0.6rem;
-    width: 10rem;
-    margin-top: 0.426666rem;
+    width: 100vw;
+    margin: 0.426666rem auto 0;
     height: 12.333333rem;
     background: url(../image/card3.png);
     background-size: 100% 100%;
     padding: 1.466666rem 0.933333rem 0;
+
 }
 
 .top_card .btn {

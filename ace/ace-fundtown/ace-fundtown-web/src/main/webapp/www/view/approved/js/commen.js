@@ -3,8 +3,14 @@ var status;
 $(function () {
     userInfo();
     initweb();
+    $('body').on('click', '.file_p', downloadFile);
 })
 
+function downloadFile() {
+    if (status != 2) {
+        alert("申请入驻成功才能下载。")
+    }
+}
 
 function userInfo() {
     var url = "/fundtown/www/process/getMyVipInfo";
@@ -42,5 +48,4 @@ function viewFileList(data, className) {
     }
 }
 
-
-var fileTemplate = '<p><a class="" href="/fundtown/www/download/file?id=[id]">[resName]</a></p>';
+var fileTemplate = '<p><a class="file_p" href="/fundtown/www/download/file?id=[id]">[resName]</a></p>';

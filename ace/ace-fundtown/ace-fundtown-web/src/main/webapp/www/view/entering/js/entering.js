@@ -16,8 +16,9 @@ function initWeb() {
 
 function viewNodeList(datas) {
     $('#node_list').empty();
+    var temp = nodeTemplate1;
     for (var i = 0; i < datas.length; i++) {
-        var temp = nodeTemplate;
+
         var data = datas[i];
         temp = temp.replace('[sequence]', data.sequence)
             .replace('[curNodeName]', data.curNodeName);
@@ -26,6 +27,7 @@ function viewNodeList(datas) {
             linkUrl: data.linkUrl
         }
         $('#node_list').append($(temp).data(obj));
+        temp = nodeTemplate;
     }
 }
 
@@ -47,5 +49,13 @@ var nodeTemplate = '<li>' +
     '                <span class="num">0[sequence]</span>' +
     '                <span class="name">[curNodeName]</span>' +
     '            </div>' +
-    '            <div class="right">查看</div>' +
+    '            <div class="right yellow">查看</div>' +
+    '        </li>';
+
+var nodeTemplate1 = '<li>' +
+    '            <div class="left">' +
+    '                <span class="num">0[sequence]</span>' +
+    '                <span class="name">[curNodeName]</span>' +
+    '            </div>' +
+    '            <div class="right">申请</div>' +
     '        </li>';
