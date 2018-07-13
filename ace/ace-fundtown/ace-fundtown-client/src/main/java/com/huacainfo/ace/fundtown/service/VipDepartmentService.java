@@ -149,7 +149,7 @@ public interface VipDepartmentService {
      *
      * @param deptId       企业ID
      * @param nodeId       流程节点ID
-     * @param auditResult  审核结果
+     * @param auditResult  审核结果 0-待审核 1-审核通过，2-审核拒绝
      * @param auditOpinion 审核意见
      * @return
      */

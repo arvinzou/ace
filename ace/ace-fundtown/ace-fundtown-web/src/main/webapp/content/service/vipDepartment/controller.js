@@ -104,6 +104,61 @@ jQuery(function ($) {
                 });
         });
 
+    //入驻审核
+    $('#btn-view-audit').on(
+        'click',
+        function (e) {
+            e.preventDefault();
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+            if (!gr) {
+                $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                    $.jgrid.nav.alerttext);
+                return;
+            }
+            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            // if (rowData.started == "1") {
+            //     alert("项目已上线，请勿重复操作")
+            //     return;
+            // }
+
+            $.ajax({
+                type: "post",
+                url: contextPath + "/vipDepartment/audit",
+                data: {deptId: rowData.departmentId, nodeId: "245cef5c366249019b490d2f7f42b5aa", auditResult: "1"},
+                beforeSend: function (XMLHttpRequest) {
+                    style_ajax_button('ajax_button_audit', true);
+                },
+                success: function (rst, textStatus) {
+                    style_ajax_button('ajax_button_audit', false);
+                    if (rst) {
+                        bootbox.dialog({
+                            title: '系统提示',
+                            message: rst.errorMessage,
+                            buttons: {
+                                "success": {
+                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                    "className": "btn-sm btn-success",
+                                    "callback": function () {
+                                        //重载数据
+                                        jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                                            page: 1
+                                        }).trigger("reloadGrid");
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+                complete: function (XMLHttpRequest, textStatus) {
+                    style_ajax_button('ajax_button_audit', false);
+                },
+                error: function () {
+                    style_ajax_button('ajax_button_audit', true);
+                }
+            });
+
+        });
+
     //信息公示
     $('#btn-view-publicity').on(
         'click',

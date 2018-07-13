@@ -138,7 +138,7 @@ public class VipDepartmentController extends BaseController {
     @RequestMapping(value = "/audit")
     public MessageResponse audit(String deptId, String nodeId,
                                  String auditResult, String auditOpinion) {
-        if (StringUtil.areNotEmpty(deptId, nodeId)) {
+        if (!StringUtil.areNotEmpty(deptId, nodeId)) {
             return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
         }
 

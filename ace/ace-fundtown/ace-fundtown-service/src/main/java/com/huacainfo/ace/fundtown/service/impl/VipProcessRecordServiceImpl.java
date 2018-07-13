@@ -227,4 +227,9 @@ public class VipProcessRecordServiceImpl implements VipProcessRecordService {
         return new ResultResponse(ResultCode.SUCCESS, "记录成功");
     }
 
+    @Override
+    public VipProcessRecord findRecord(String deptId, String nodeId) {
+        return vipProcessRecordDao.findRecord(deptId, nodeId);
+    }
+
 }

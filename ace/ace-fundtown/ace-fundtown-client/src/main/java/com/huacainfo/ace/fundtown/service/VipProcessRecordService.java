@@ -89,4 +89,6 @@ public interface VipProcessRecordService {
     List<VipProcessRecordVo> findByDeptId(String deptId);
 
     ResultResponse insertVipProcessRecord(VipDepartment vip, String index);
+
+    VipProcessRecord findRecord(String deptId, String nodeId);
 }

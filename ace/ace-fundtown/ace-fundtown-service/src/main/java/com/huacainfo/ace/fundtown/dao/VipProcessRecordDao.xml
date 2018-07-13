@@ -257,5 +257,14 @@
         from vip_process_record t
         left join fundtown.process_node n on t.nodeId =n.id
         where t.deptId = #{deptId,jdbcType=VARCHAR}
+        order by n.sequence
+    </select>
+
+    <select id="findRecord" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from vip_process_record
+        where deptId = #{deptId,jdbcType=VARCHAR}
+        and nodeId= #{nodeId,jdbcType=VARCHAR}
     </select>
 </mapper>

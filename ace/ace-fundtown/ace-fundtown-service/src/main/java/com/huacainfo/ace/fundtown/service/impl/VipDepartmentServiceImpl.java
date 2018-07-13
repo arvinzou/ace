@@ -13,8 +13,10 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.fundtown.dao.VipDepartmentDao;
 import com.huacainfo.ace.fundtown.dao.VipMemberResDao;
+import com.huacainfo.ace.fundtown.dao.VipProcessRecordDao;
 import com.huacainfo.ace.fundtown.model.VipDepartment;
 import com.huacainfo.ace.fundtown.model.VipMemberRes;
+import com.huacainfo.ace.fundtown.model.VipProcessRecord;
 import com.huacainfo.ace.fundtown.service.VipDepartmentService;
 import com.huacainfo.ace.fundtown.service.VipMemberResService;
 import com.huacainfo.ace.fundtown.service.VipProcessRecordService;
@@ -48,6 +50,8 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     private VipProcessRecordService vipProcessRecordService;
     @Autowired
     private VipMemberResDao vipMemberResDao;
+    @Autowired
+    private VipProcessRecordDao vipProcessRecordDao;
 
 
     @Override
@@ -287,7 +291,7 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
      *
      * @param deptId       企业ID
      * @param nodeId       流程节点ID
-     * @param auditResult  审核结果
+     * @param auditResult  审核结果 审核结果 0-待审核 1-审核通过，2-审核拒绝
      * @param auditOpinion 审核意见
      * @param curUserProp
      * @return
@@ -295,6 +299,26 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     @Override
     public MessageResponse audit(String deptId, String nodeId,
                                  String auditResult, String auditOpinion, UserProp curUserProp) {
-        return null;
+        VipDepartment vip = vipDepartmentDao.selectDepartmentVoByPrimaryKey(deptId);
+        if (vip == null) {
+            return new MessageResponse(ResultCode.FAIL, "企业资料丢失");
+        }
+
+        VipProcessRecord record = vipProcessRecordService.findRecord(deptId, nodeId);
+        if (null != record) {
+            record.setAuditResult(auditResult);
+            record.setAuditDate(DateUtil.getNowDate());
+            record.setAuditOpinion(auditOpinion);
+            record.setLastModifyDate(DateUtil.getNowDate());
+            vipProcessRecordDao.updateByPrimaryKeySelective(record);
+        } else {
+            //todo insert record
+        }
+        //update vip info
+        vip.setStatus("2");
+        vip.setLastModifyTime(DateUtil.getNowDate());
+        vipDepartmentDao.updateDepartmentByPrimaryKey(vip);
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 }

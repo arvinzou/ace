@@ -33,4 +33,7 @@ public interface VipProcessRecordDao {
     int isExit(VipProcessRecord record);
 
     List<VipProcessRecordVo> findByDeptId(String deptId);
+
+    VipProcessRecord findRecord(@Param("deptId") String deptId,
+                                @Param("nodeId") String nodeId);
 }
