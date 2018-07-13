@@ -33,4 +33,6 @@ public interface ProcessNodeDao {
     int isExit(ProcessNode record);
 
     List<ProcessNode> findNodeList();
+
+    ProcessNode findBySequence(String sequence);
 }

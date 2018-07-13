@@ -53,7 +53,16 @@
                             authority="${pageContext.request.contextPath}/vipDepartment/deleteVipDepartmentByVipDepartmentId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
+                    <%--入驻审核--%>
+                    <button class="btn btn-purple" id="btn-view-audit"
+                            authority="${pageContext.request.contextPath}/vipDepartment/audit">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <%--信息公示--%>
+                    <button class="btn btn-purple" id="btn-view-publicity"
+                            authority="${pageContext.request.contextPath}/vipDepartment/publicity">
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -64,6 +73,22 @@
     <div id="grid-pager"></div>
 
 
+    <div id="dialog-message-audit" class="hide">
+        <%--个人流程节点展示--%>
+        <%--流程选项--%>
+        <%--审核选项--%>
+        <form action="/vipDepartment/audit" id="fm-audit">
+            <fieldset>
+                审核结果：
+                <input id="audit_pass" name="audit_result" type="radio" value="0"/> 通过
+                <input id="audit_unpass" name="audit_result" type="radio" value="1"/> 不通过
+            </fieldset>
+            <div class="space-6"></div>
+            <fieldset>
+                审核备注： <textarea id="audit_opinion" cols="30" rows="10"></textarea>
+            </fieldset>
+        </form>
+    </div>
 </div>
 <div id="dialog-message" class="hide">
     <div id="uploader">
@@ -77,369 +102,94 @@
 <div id="dialog-message-view" class="hide">
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-编号</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">编号</span>
             <br>
-            <span id="departmentId">
-</span>
+            <span id="departmentId"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">企业名称</span>
             <br>
-            <span id="id">
-</span>
+            <span id="departmentName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-所属协会</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">企业类型</span>
             <br>
-            <span id="parentDepartmentId">
-</span>
+            <span id="type"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-企业名称</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">所属机构名称</span>
             <br>
-            <span id="departmentName">
-</span>
+            <span id="parentDepartmentName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-简称</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">联系人手机号</span>
             <br>
-            <span id="shortName">
-</span>
+            <span id="contactMobile"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-类型</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">法人代表</span>
             <br>
-            <span id="category">
-</span>
+            <span id="legalPersonName"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-所属地区</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">注册时间</span>
             <br>
-            <span id="areaCode">
-</span>
+            <span id="regDate"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-名称简拼</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">注册资本(万元)</span>
             <br>
-            <span id="pcode">
-</span>
+            <span id="regCapital"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-联系人姓名</span>
+        <div class="labelItem ">
+            <span class="labelItemHeader">入驻状态</span>
             <br>
-            <span id="contactName">
-</span>
+            <%--1=入驻中、2=vip--%>
+            <span id="status"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-联系人电话</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">系统标示</span>
             <br>
-            <span id="contactTel">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-联系人手机号</span>
-            <br>
-            <span id="contactMobile">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-联系人QQ</span>
-            <br>
-            <span id="contactQq">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-联系人电子邮箱</span>
-            <br>
-            <span id="contactEmail">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-联系人传真</span>
-            <br>
-            <span id="contactFax">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-法定联系人</span>
-            <br>
-            <span id="legalPersonName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-法人证件类型</span>
-            <br>
-            <span id="legalPersonIdType">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-法定人证件号</span>
-            <br>
-            <span id="legalPersonIdNo">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-法人联系人电话</span>
-            <br>
-            <span id="legalPersonTel">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-法人联系人手机号</span>
-            <br>
-            <span id="legalPersonMobile">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
-            <br>
-            <span id="legalPersonAddr">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-注册时间</span>
-            <br>
-            <span id="regDate">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-注册资本</span>
-            <br>
-            <span id="regCapital">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-注册区号</span>
-            <br>
-            <span id="regAreaCode">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-注册地址</span>
-            <br>
-            <span id="regAddr">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-经济性质[国有、集体、私营、联营、三资、其他]</span>
-            <br>
-            <span id="nature">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-营业执照号</span>
-            <br>
-            <span id="bussLicenseNo">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-经营地址</span>
-            <br>
-            <span id="bussAddr">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-经营区号</span>
-            <br>
-            <span id="bussAreaCode">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-传真</span>
-            <br>
-            <span id="fax">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-公司邮箱</span>
-            <br>
-            <span id="email">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-交通部门批文号</span>
-            <br>
-            <span id="transDepartApprovalNo">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-道路运输经营许可证号</span>
-            <br>
-            <span id="transBussLicenseNo">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-许可证有效日期</span>
-            <br>
-            <span id="transBussLicenseValidDate">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-道路运输经营许可证经营范围[普通货运货物专用运输(集装箱)货物专用运输(冷藏保鲜)货物专用运输(罐式)</span>
-            <br>
-            <span id="transBussScope">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-从业人员数</span>
-            <br>
-            <span id="employeesNum">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-驾驶员数</span>
-            <br>
-            <span id="driverNum">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-无证人数</span>
-            <br>
-            <span id="unlicensedDriverNum">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-持证人数</span>
-            <br>
-            <span id="licensedDriverNum">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-本年度安全事故情况</span>
-            <br>
-            <span id="accidentOfYear">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-有无投诉处罚情况</span>
-            <br>
-            <span id="complaintsRemark">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-是状态：1=正常、2=注销</span>
-            <br>
-            <span id="status">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-企业类型</span>
-            <br>
-            <span id="type">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-小图片</span>
-            <br>
-            <span id="simage">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-大图片</span>
-            <br>
-            <span id="bimage">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
-            <br>
-            <span id="createUserId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-创建的用户名</span>
-            <br>
-            <span id="createUserName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
-            <br>
-            <span id="createTime">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后修改时间</span>
-            <br>
-            <span id="lastModifyTime">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后修改用户ID</span>
-            <br>
-            <span id="lastModifyUserId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后修改用户名</span>
-            <br>
-            <span id="lastModifyUserName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
-            <br>
-            <span id="latitude">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
-            <br>
-            <span id="longitude">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
-            <br>
-            <span id="serviceTimeStart">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
-            <br>
-            <span id="serviceTimeEnd">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
-            <br>
-            <span id="qrcode">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-</span>
-            <br>
-            <span id="serviceWay">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-系统标示</span>
-            <br>
-            <span id="syid">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-LOGO</span>
-            <br>
-            <span id="logo">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-水印1</span>
-            <br>
-            <span id="watermark1">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-水印2</span>
-            <br>
-            <span id="watermark2">
-</span>
+            <span id="syid"></span>
         </div>
     </div>
+    <h5 class="header-title">注册地址</h5>
+    <div id="regAddr" class="row" style="padding:10px">
+    </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
+        <div class="labelItem hide">
+            <span class="labelItemHeader"></span>
+            <br>
+            <span id="createUserId"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">创建的用户名</span>
+            <br>
+            <span id="createUserName"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader"></span>
+            <br>
+            <span id="createTime"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">最后修改时间</span>
+            <br>
+            <span id="lastModifyTime"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">最后修改用户ID</span>
+            <br>
+            <span id="lastModifyUserId"></span>
+        </div>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">最后修改用户名</span>
+            <br>
+            <span id="lastModifyUserName"></span>
+        </div>
     </div>
 
 </div>

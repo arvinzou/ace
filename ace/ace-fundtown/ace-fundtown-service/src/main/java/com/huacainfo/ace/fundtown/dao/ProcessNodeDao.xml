@@ -280,4 +280,11 @@
         where 1=1
         order by sequence
     </select>
+
+    <select id="findBySequence" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from process_node
+        where sequence = #{sequence,jdbcType=VARCHAR}
+    </select>
 </mapper>

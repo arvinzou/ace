@@ -1,14 +1,20 @@
 package com.huacainfo.ace.fundtown.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.fundtown.dao.ProcessNodeDao;
 import com.huacainfo.ace.fundtown.dao.VipProcessRecordDao;
+import com.huacainfo.ace.fundtown.model.ProcessNode;
+import com.huacainfo.ace.fundtown.model.VipDepartment;
 import com.huacainfo.ace.fundtown.model.VipProcessRecord;
+import com.huacainfo.ace.fundtown.service.ProcessNodeService;
 import com.huacainfo.ace.fundtown.service.VipProcessRecordService;
 import com.huacainfo.ace.fundtown.vo.VipProcessRecordQVo;
 import com.huacainfo.ace.fundtown.vo.VipProcessRecordVo;
@@ -33,6 +39,10 @@ public class VipProcessRecordServiceImpl implements VipProcessRecordService {
     private VipProcessRecordDao vipProcessRecordDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private ProcessNodeDao processNodeDao;
+    @Autowired
+    private ProcessNodeService processNodeService;
 
     /**
      * @throws
@@ -191,6 +201,30 @@ public class VipProcessRecordServiceImpl implements VipProcessRecordService {
     @Override
     public List<VipProcessRecordVo> findByDeptId(String deptId) {
         return vipProcessRecordDao.findByDeptId(deptId);
+    }
+
+    @Override
+    public ResultResponse insertVipProcessRecord(VipDepartment vip, String index) {
+        List<ProcessNode> nodeList = processNodeService.findNodeList();
+//        ProcessNode node = processNodeDao.findBySequence(index);
+
+        VipProcessRecord record;
+        for (ProcessNode node : nodeList) {
+            record = new VipProcessRecord();
+            record.setDeptId(vip.getDepartmentId());
+            record.setNodeId(node.getId());
+            record.setAuditResult("0");//0-待审核 1-审核通过，2-审核拒绝
+
+            record.setId(GUIDUtil.getGUID());
+            record.setStatus("1");
+            record.setCreateUserName("system");
+            record.setCreateUserId("000001");
+            record.setCreateDate(new Date());
+            record.setLastModifyDate(new Date());
+            vipProcessRecordDao.insert(record);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "记录成功");
     }
 
 }
