@@ -56,4 +56,6 @@ public interface UserinfoDao {
      */
     Userinfo findByOpenId(@Param("openid") String openid,
                           @Param("appid") String appid);
+
+    int updateByPrimaryKeySelective(Userinfo record);
 }

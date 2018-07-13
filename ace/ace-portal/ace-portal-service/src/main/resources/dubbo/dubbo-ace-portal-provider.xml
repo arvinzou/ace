@@ -140,4 +140,6 @@
                    ref="canvasTmplService"/>
     <dubbo:service interface="com.huacainfo.ace.portal.service.CanvasTmplItemService"
                    ref="canvasTmplItemService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.WeChatAuthorizeService"
+                   ref="weChatAuthorizeService"/>
 </beans>
