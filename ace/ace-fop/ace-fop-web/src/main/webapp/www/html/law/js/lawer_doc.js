@@ -145,11 +145,11 @@ app.controller(ngControllerName,function($scope){
      * 法律文书下载
      */
     $scope.download = function($event, file, title){
-        var lurl = window.location.href;
-        var hostUrl = lurl.substring(0,lurl.indexOf("/fop")+1);
+       /* var lurl = window.location.href;
+        var hostUrl = lurl.substring(0,lurl.indexOf("/fop")+1);*/
         if(file != '' && file != null){
             $event.target.download = title;
-            $event.target.href=hostUrl+file;
+            $event.target.href="http://zx.huacainfo.com/"+file;
         }else{
             layer.alert("对不起，该政策没有可下载的附件！", {
                 icon: 5,
