@@ -12,6 +12,7 @@ import com.huacainfo.ace.fundtown.service.ProcessNodeResService;
 import com.huacainfo.ace.fundtown.service.ProcessNodeService;
 import com.huacainfo.ace.fundtown.service.VipDepartmentService;
 import com.huacainfo.ace.fundtown.vo.ProcessNodeResVo;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,8 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import org.slf4j.Logger;
+
 @Controller
 @RequestMapping("/www/download")
 public class WWWDownloadController extends BisBaseController {
@@ -36,6 +39,8 @@ public class WWWDownloadController extends BisBaseController {
     private VipDepartmentService vipDepartmentService;
     @Autowired
     private ProcessNodeResService processNodeResService;
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping("/file")
     @ResponseBody
@@ -56,6 +61,8 @@ public class WWWDownloadController extends BisBaseController {
         try {
 
             String fileName = downLoadPath.substring(downLoadPath.indexOf("filename=") + 9);
+            logger.info("-------------------------fileName--------------------------------");
+            logger.info(fileName);
             String os = System.getProperty("os.name");
             if (os.toLowerCase().indexOf("windows") != -1) {
                 fileName = new String(fileName.getBytes("GBK"), "iso-8859-1");
