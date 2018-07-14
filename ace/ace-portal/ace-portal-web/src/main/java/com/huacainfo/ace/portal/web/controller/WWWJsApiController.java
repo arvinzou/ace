@@ -48,7 +48,7 @@ public class WWWJsApiController {
         SortedMap<String, Object> map = new TreeMap<>();
         map.put("url", url);
         map.put("timestamp", DateUtil.getDateTime());
-        map.put("nonceStr", RandomValidateCode.CreateRadom(32, 2));
+        map.put("noncestr", RandomValidateCode.CreateRadom(32, 2));
         map.put("jsapi_ticket", wxCfg.getTicket());
 
         String sign = WeChatPayUtil.createSign("SHA1", "utf-8", map, null);
@@ -56,8 +56,10 @@ public class WWWJsApiController {
         map.put("appId", wxCfg.getAppId());
 
         //return
+        map.put("nonceStr", map.get("noncestr"));
         map.remove("url");
         map.remove("jsapi_ticket");
+        map.remove("noncestr");
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", map);
     }
 }
