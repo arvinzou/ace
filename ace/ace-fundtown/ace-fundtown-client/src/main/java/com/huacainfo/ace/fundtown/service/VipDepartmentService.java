@@ -133,8 +133,10 @@ public interface VipDepartmentService {
      * @param fileName 文件名称
      * @param fileSize 文件大小
      * @param fileUrl  文件资源地址
+     * @param category 附件类型 0-视频，1-其他类型文件
      */
-    VipMemberRes insertVipMemberRes(String deptId, String fileName, long fileSize, String fileUrl);
+    VipMemberRes insertVipMemberRes(String deptId, String category,
+                                    String fileName, long fileSize, String fileUrl);
 
     /**
      * 信息公示
@@ -142,7 +144,7 @@ public interface VipDepartmentService {
      * @param deptId 企业ID
      * @return
      */
-    MessageResponse publicity(String deptId, UserProp curUserProp);
+    MessageResponse publicity(String deptId, UserProp curUserProp) throws Exception;
 
     /**
      * 企业入驻流程审核

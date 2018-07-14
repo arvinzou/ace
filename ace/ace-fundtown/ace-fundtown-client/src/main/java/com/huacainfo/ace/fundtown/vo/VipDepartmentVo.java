@@ -12,6 +12,19 @@ public class VipDepartmentVo extends VipDepartment {
 
     private String areaName;
 
+    /**
+     * 公示状态  0 -未公示 1-已公示
+     */
+    private String publicStatus;
+
+    public String getPublicStatus() {
+        return publicStatus;
+    }
+
+    public void setPublicStatus(String publicStatus) {
+        this.publicStatus = publicStatus;
+    }
+
     public String getUserName() {
         return userName;
     }

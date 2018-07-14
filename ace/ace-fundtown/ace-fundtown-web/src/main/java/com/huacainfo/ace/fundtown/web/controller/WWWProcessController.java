@@ -180,7 +180,7 @@ public class WWWProcessController extends BisBaseController {
                 + fileSaver.saveFile(dest, file.getOriginalFilename());
         dest.delete();
 
-        VipMemberRes res = vipDepartmentService.insertVipMemberRes(deptId,
+        VipMemberRes res = vipDepartmentService.insertVipMemberRes(deptId, "0",
                 file.getOriginalFilename(), file.getSize(), fileUrl);
 //        Map<String, Object> rtnMap = new HashMap<String, Object>();
 //        rtnMap.put("fileName", file.getOriginalFilename());

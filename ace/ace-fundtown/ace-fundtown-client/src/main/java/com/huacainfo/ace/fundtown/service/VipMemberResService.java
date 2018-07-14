@@ -84,5 +84,10 @@ public interface VipMemberResService {
      */
     MessageResponse deleteVipMemberResByVipMemberResId(String id, UserProp userProp) throws Exception;
 
-    List<VipMemberRes> findByDeptId(String deptId);
+    /**
+     * @param deptId   企业id
+     * @param category 资源分类
+     * @return
+     */
+    List<VipMemberRes> findByDeptId(String deptId, String[] category);
 }

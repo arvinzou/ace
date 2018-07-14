@@ -62,6 +62,7 @@
     <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.fundtown.vo.VipDepartmentVo">
         <result column="parent_department_name" property="parentDepartmentName" jdbcType="VARCHAR"/>
         <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
+        <result column="publicStatus" property="publicStatus" jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="insertDepartment" parameterType="com.huacainfo.ace.fundtown.model.VipDepartment">
     insert into portal.department (department_id, parent_department_id,
@@ -336,6 +337,7 @@
     </select>
     <select id="findDepartmentList" resultMap="BaseResultMapVo">
         select
+        IFNULL((select 1 from fundtown.vip_publicity vp where vp.deptId=t.department_id),'0') as publicStatus,
         d.department_name as parent_department_name,
         t.department_id, t.parent_department_id, t.department_name,
         t.short_name, t.create_time, t.create_user_id,
@@ -409,6 +411,7 @@
 
     <select id="findByMobile" resultMap="BaseResultMapVo" parameterType="java.lang.String">
         select
+        IFNULL((select 1 from fundtown.vip_publicity vp where vp.deptId=t.department_id),'0') as publicStatus,
         t.department_id, t.parent_department_id,
         t.department_name, t.short_name, t.create_time, t.create_user_id, t.status, t.category,
         t.area_code, a.fullname area_name, t.pcode, t.contact_name, t.contact_tel,
@@ -417,7 +420,7 @@
         t.legal_person_tel, t.legal_person_mobile, t.legal_person_addr, t.reg_date,
         t.reg_capital, t.reg_area_code, t.reg_addr, t.nature, t.buss_license_no,
         t.buss_addr, t.buss_area_code, t.fax, t.email,
-        t.trans_depart_approval_no,	 t.trans_buss_license_no,
+        t.trans_depart_approval_no, t.trans_buss_license_no,
         t.trans_buss_license_valid_date, t.trans_buss_scope, t.employees_num,
         t.driver_num, t.unlicensed_driver_num, t.licensed_driver_num, t.type,
         t.simage, t.bimage, t.create_user_id, t.create_user_name,
