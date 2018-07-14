@@ -52,7 +52,8 @@ public class OAuth2Controller extends CuBaseController {
     private TaskCmccService taskCmccService;
 
     @RequestMapping(value = "/redirect.do")
-    public void redirect(String code, String state, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void redirect(String code, String state,
+                         HttpServletRequest request, HttpServletResponse response) throws Exception {
         this.logger.info("code->{} state -> {}", code, state);
 //        String referer = request.getHeader("referer");
         logger.info("=========================  start get Userinfo from weixin pltfrom======================");
@@ -62,7 +63,7 @@ public class OAuth2Controller extends CuBaseController {
             this.logger.info("==================={}  in session ======================", rst.getValue().getNickname());
             this.getRequest().getSession().setAttribute(CommonKeys.SESSION_USERINFO_KEY, rst.getValue());
 //            response.sendRedirect(request.getContextPath()+"/www/view/me/index.jsp");
-            response.sendRedirect(request.getHeader("referer"));
+            response.sendRedirect(state);
         } else {
             response.sendRedirect(request.getContextPath() + "/www/view/me/error.jsp");
         }
