@@ -16,7 +16,7 @@ function userInfo() {
             viewInfo(result.data);
         }
         else {
-            alert("网络异常");
+            alert("没有获取到用户信息。");
         }
     });
     $.ajaxSettings.async = true;
