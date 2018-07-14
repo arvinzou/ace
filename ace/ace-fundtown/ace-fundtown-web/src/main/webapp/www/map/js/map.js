@@ -6,17 +6,9 @@ $(function () {
         console.log(parmas);
         viewinfo(parmas.data);
     });
-    $('body').on('click', '#main', hideinfo);
-    myChart.on('dbclick', function (parmas) {
-        console.log(parmas);
-        //viewinfo(parmas.data);
-    });
-
-    var canvas = document.getElementsByTagName('canvas');
-    canvas.addEventListener('click', function (e) {
-        console.log(e);
-    }, false);
+    $('body').on('click', hideinfo);
 })
+
 
 function hideinfo() {
     $('#main').removeClass('mapinfo');
@@ -119,7 +111,9 @@ var option = {
 }
 
 $('.btn_navigation').click(function () {
+    console.log(1111111111111);
     var data = $(this).data();
+    console.log(data);
     wx.openLocation({
         latitude: data.value[1], // 纬度，浮点数，范围为90 ~ -90
         longitude: data.value[0], // 经度，浮点数，范围为180 ~ -180。

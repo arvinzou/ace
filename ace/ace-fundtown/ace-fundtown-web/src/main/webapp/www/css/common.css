@@ -99,3 +99,38 @@ a {
     background-color: #E4E6E9;
     margin: 0.533333rem 0;
 }
+
+.file_list {
+    padding-left: 0.5rem;
+    position: relative
+}
+
+.file_list1:before {
+    content: "1、";
+}
+
+.file_list2:before {
+    content: "2、";
+}
+
+.file_list3:before {
+    content: "3、";
+}
+
+.file_list4:before {
+    content: "4、";
+}
+
+.file_list5:before {
+    content: "5、";
+}
+
+.file_list6:before {
+    content: "6、";
+}
+
+.file_list:before {
+    position: absolute;
+    left: 0;
+}
+

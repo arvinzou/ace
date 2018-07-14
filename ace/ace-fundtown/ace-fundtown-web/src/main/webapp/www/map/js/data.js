@@ -89,6 +89,16 @@ var massage = {
             'img/stgy/2.jpg'
         ]
     },
+    清科小镇: {
+        address: '常德武陵区柳叶湖度假区维一柳岸小区',
+        images: [
+            'img/qkxz/1.jpg',
+            'img/qkxz/2.jpg',
+            'img/qkxz/3.jpg',
+            'img/qkxz/4.jpg',
+            'img/qkxz/5.jpg'
+        ]
+    },
     游船码头: {
         address: '常德市柳溪路与环湖路交叉口东南',
         images: [

@@ -43,9 +43,9 @@ function viewFileList(data, className) {
     for (var i = 0; i < data.length; i++) {
         var p = fileTemplate;
         p = p.replace('[resName]', data[i].resName)
-            .replace('[id]', status == 2 ? data[i].id : '');
+            .replace('[id]', status == 2 ? '/fundtown/www/download/file?id=' + data[i].id : '#');
         $(className).append($(p));
     }
 }
 
-var fileTemplate = '<p><a class="file_p" href="/fundtown/www/download/file?id=[id]">[resName]</a></p>';
+var fileTemplate = '<p><a class="file_p" href="[id]">[resName]</a></p>';

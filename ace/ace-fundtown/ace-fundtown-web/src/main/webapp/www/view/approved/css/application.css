@@ -12,7 +12,6 @@ body {
     background: url(../image/card3.png);
     background-size: 100% 100%;
     padding: 1.466666rem 0.933333rem 0;
-
 }
 
 .top_card .btn {
@@ -25,7 +24,7 @@ body {
 }
 
 .bottom_card {
-    width: 9.72rem;
+    width: 97.2vw;
     height: 5.466666rem;
     background: url(../image/card4.png) no-repeat;
     background-size: 100% 100%;
