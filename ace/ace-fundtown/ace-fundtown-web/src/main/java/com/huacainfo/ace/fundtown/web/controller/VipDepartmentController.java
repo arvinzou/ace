@@ -3,32 +3,49 @@ package com.huacainfo.ace.fundtown.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.web.controller.BaseController;
 import com.huacainfo.ace.fundtown.model.VipDepartment;
+import com.huacainfo.ace.fundtown.model.VipMemberRes;
 import com.huacainfo.ace.fundtown.service.VipDepartmentService;
+import com.huacainfo.ace.fundtown.service.VipMemberResService;
 import com.huacainfo.ace.fundtown.vo.VipDepartmentQVo;
 import com.huacainfo.ace.fundtown.vo.VipDepartmentVo;
+import com.huacainfo.ace.portal.service.FilesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/vipDepartment")
 /**
  * @author: Arvin
  * @version: 2018-07-04
- * @Description: TODO(入驻成员列表)
+ * @Description: (入驻成员列表)
  */
 public class VipDepartmentController extends BaseController {
 
     @Autowired
     private VipDepartmentService vipDepartmentService;
+    @Autowired
+    private VipMemberResService vipMemberResService;
+    @Autowired
+    private IFile fileSaver;
+    @Autowired
+    private FilesService filesService;
 
     /**
      * @throws
@@ -130,7 +147,7 @@ public class VipDepartmentController extends BaseController {
      *
      * @param deptId       企业ID
      * @param nodeId       流程节点ID
-     * @param auditResult  审核结果
+     * @param auditResult  审核结果 0-待审核 1-审核通过，2-审核拒绝
      * @param auditOpinion 审核意见
      * @return
      */
@@ -154,11 +171,72 @@ public class VipDepartmentController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/publicity")
-    public MessageResponse publicity(String deptId) {
+    public MessageResponse publicity(String deptId) throws Exception {
         if (StringUtil.isEmpty(deptId)) {
             return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
         }
 
         return vipDepartmentService.publicity(deptId, getCurUserProp());
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/findVipResList")
+    public ResultResponse findVipResList(String deptId) throws Exception {
+        if (StringUtil.isEmpty(deptId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        List<VipMemberRes> list = vipMemberResService.findByDeptId(deptId, new String[]{"0", "1"});
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", list);
+    }
+
+    /**
+     * @param file
+     * @param deptId
+     * @param domain
+     * @return
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/uploadVipRes")
+    public SingleResult<List<VipMemberRes>> uploadFile(@RequestParam MultipartFile[] file,
+                                                       String deptId, String domain) throws Exception {
+        String tempDir = getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+        File tmp = new File(tempDir);
+        if (!tmp.exists()) {
+            tmp.mkdirs();
+        }
+
+        String url;
+        List<VipMemberRes> resList = new ArrayList<>();
+        VipMemberRes res;
+        for (MultipartFile o : file) {
+            File dest = new File(tempDir + File.separator + o.getName());
+            o.transferTo(dest);
+            url = domain + this.fileSaver.saveFile(dest,
+                    o.getOriginalFilename());
+            dest.delete();
+            filesService.insertFiles(url, this.getCurUserProp());
+
+
+            res = vipDepartmentService.insertVipMemberRes(deptId, "1",
+                    o.getOriginalFilename(), o.getSize(), url);
+            resList.add(res);
+        }
+
+        SingleResult<List<VipMemberRes>> rst = new SingleResult<>(0, "上传成功！");
+        rst.setValue(resList);
+        return rst;
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteAttach")
+    public MessageResponse deleteAttach(String resId) throws Exception {
+        if (StringUtil.isEmpty(resId)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return vipMemberResService.deleteVipMemberResByVipMemberResId(resId, getCurUserProp());
     }
 }

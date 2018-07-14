@@ -202,5 +202,9 @@
         <include refid="Base_Column_List"/>
         from vip_member_res
         where deptId = #{deptId,jdbcType=VARCHAR}
+        and category in
+        <foreach collection="category" open="(" separator="," close=")" item="item">
+            #{item}
+        </foreach>
     </select>
 </mapper>

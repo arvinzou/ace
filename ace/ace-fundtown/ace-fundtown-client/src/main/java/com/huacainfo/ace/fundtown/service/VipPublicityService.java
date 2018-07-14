@@ -90,4 +90,6 @@ public interface VipPublicityService {
      * @return list
      */
     VipPublicityVo getVipInfo(String deptId);
+
+
 }
