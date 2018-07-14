@@ -39,6 +39,7 @@
 .content .up_video video {
     width: 100%;
     height: auto;
+    background-color: #000;
 }
 
 .content .up_video ul li:nth-child(2n) {
@@ -58,4 +59,8 @@
 #upbtn .iconimg {
     font-size: 1rem;
 
+}
+
+.video_content {
+    background-color: #e1e1e1;
 }

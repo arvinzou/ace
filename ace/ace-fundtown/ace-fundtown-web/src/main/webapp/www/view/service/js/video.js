@@ -51,20 +51,13 @@ var uploader = new plupload.Uploader({
     url: '/fundtown/www/process/uploadFile',
     file_data_name: 'file',
     multi_selection: false,
-    resize: {
-        width: 1024,
-        height: 1024,
-        crop: true,
-        quality: 60,
-        preserve_headers: false
-    },
     multipart_params: {
         deptId: ''
     },
     filters: {
         max_file_size: '204800mb',
         mime_types: [
-            {title: "Video files", extensions: "mp4"}
+            {title: "Video files", extensions: "3gp,mp4,m3u8,wmv,webm,mov,avi,mpg,mpeg,mpeg1,mpeg4,mkv,flv,mp3,acc,wav"}
         ]
     },
     init: {
@@ -89,6 +82,6 @@ var uploader = new plupload.Uploader({
 });
 
 function viewVideo(videoUrl) {
-    $('#upbtn').before($('<li><video src="' + videoUrl + '"></video></li>'));
+    $('#upbtn').before($('<li class="video_content"><video  controls="controls" src="' + videoUrl + '"></video></li>'));
     $(".uploadPloadprogress").html("上传视频");
 }

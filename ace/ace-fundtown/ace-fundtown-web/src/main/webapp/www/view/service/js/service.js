@@ -1,6 +1,6 @@
 $(function () {
     userInfo();
-    $('.list').on('click', 'li', enter);
+    $('li').on('click', enter);
 })
 
 
