@@ -9,11 +9,11 @@ pageEncoding="utf-8"%>
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>地图</title>
 </head>
-<link rel="stylesheet" href="http://lbs.qq.com/tool/getpoint/common.css">
-<script src="http://lbs.qq.com/tool/getpoint/jquery-1.9.1.min.js"></script>
-<link rel="stylesheet" href="http://lbs.qq.com/tool/getpoint/jquery-ui.min.css">
-<script src="http://lbs.qq.com/tool/getpoint/jquery-ui-1.10.4.min.js"></script>
-<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+<link rel="stylesheet" href="https://lbs.qq.com/tool/getpoint/common.css">
+<script src="https://lbs.qq.com/tool/getpoint/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="https://lbs.qq.com/tool/getpoint/jquery-ui.min.css">
+<script src="https://lbs.qq.com/tool/getpoint/jquery-ui-1.10.4.min.js"></script>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
 <style type="text/css">
 * {
     margin: 0px;
@@ -89,14 +89,14 @@ pageEncoding="utf-8"%>
     line-height: 24px;
     font-size: 14px;
     float: left;
-    background: url(http://lbs.qq.com/tool/getpoint/img/btn.png);
+    background: url(https://lbs.qq.com/tool/getpoint/img/btn.png);
     margin-top: 14px;
     text-align: center;
     cursor: pointer;
 }
 
 .btn_active {
-    background: url(http://lbs.qq.com/tool/getpoint/img/btn.png) -49px 0px;
+    background: url(https://lbs.qq.com/tool/getpoint/img/btn.png) -49px 0px;
 }
 
 .poi {
@@ -138,7 +138,7 @@ pageEncoding="utf-8"%>
 .btn_copy {
     width: 49px;
     height: 24px;
-    background: url(http://lbs.qq.com/tool/getpoint//img/btn_cpoy.png) 0px 0px;
+    background: url(https://lbs.qq.com/tool/getpoint//img/btn_cpoy.png) 0px 0px;
     float: left;
 }
 
@@ -858,7 +858,7 @@ qq.maps.event.addListener(map, "click", function (e) {
     document.getElementById("poi_cur").value = e.latLng.getLat().toFixed(6) + "," + e.latLng.getLng().toFixed(6);
     window.opener.latitude(e.latLng.getLat().toFixed(6));
     window.opener.longitude(e.latLng.getLng().toFixed(6));
-    url3 = encodeURI("http://apis.map.qq.com/ws/geocoder/v1/?location=" + e.latLng.getLat() + "," + e.latLng.getLng() + "&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB&output=jsonp&&callback=?");
+    url3 = encodeURI("https://apis.map.qq.com/ws/geocoder/v1/?location=" + e.latLng.getLat() + "," + e.latLng.getLng() + "&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB&output=jsonp&&callback=?");
     $.getJSON(url3, function (result) {
     console.log(result);
         if(result.result!=undefined){
@@ -884,7 +884,7 @@ qq.maps.event.addDomListener(btnSearch, 'click', function () {
     }
     listener_arr.length = 0;
     query_city = curCity.children[0].innerHTML;
-    url = encodeURI("http://apis.map.qq.com/ws/place/v1/search?keyword=" + value + "&boundary=region(" + query_city + ",0)&page_size=9&page_index=1&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB&output=jsonp&&callback=?");
+    url = encodeURI("https://apis.map.qq.com/ws/place/v1/search?keyword=" + value + "&boundary=region(" + query_city + ",0)&page_size=9&page_index=1&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB&output=jsonp&&callback=?");
     $.getJSON(url, function (result) {
     console.log(url);
      console.log(result);
@@ -1024,13 +1024,13 @@ function setAnchor(marker, flag) {
         var anchor = new qq.maps.Point(10, 30),
                 origin = new qq.maps.Point(left, 0),
                 size = new qq.maps.Size(27, 33),
-                icon = new qq.maps.MarkerImage("http://lbs.qq.com/tool/getpoint//img/marker10.png", size, origin, anchor);
+                icon = new qq.maps.MarkerImage("https://lbs.qq.com/tool/getpoint//img/marker10.png", size, origin, anchor);
         marker.setIcon(icon);
     } else {
         var anchor = new qq.maps.Point(10, 30),
                 origin = new qq.maps.Point(left, 35),
                 size = new qq.maps.Size(27, 33),
-                icon = new qq.maps.MarkerImage("http://lbs.qq.com/tool/getpoint//img/marker10.png", size, origin, anchor);
+                icon = new qq.maps.MarkerImage("https://lbs.qq.com/tool/getpoint//img/marker10.png", size, origin, anchor);
         marker.setIcon(icon);
     }
 }
@@ -1102,7 +1102,7 @@ city.onclick = function (e) {
 
             curCity.children[0].innerHTML = target.innerHTML;
 
-        url2 = encodeURI("http://apis.map.qq.com/ws/geocoder/v1/?region=" + curCity.children[0].innerHTML + "&address=" + curCity.children[0].innerHTML + "&key=K76BZ-W3O2Q-RFL5S-GXOPR-3ARIT-6KFE5&output=jsonp&&callback=?");
+        url2 = encodeURI("https://apis.map.qq.com/ws/geocoder/v1/?region=" + curCity.children[0].innerHTML + "&address=" + curCity.children[0].innerHTML + "&key=K76BZ-W3O2Q-RFL5S-GXOPR-3ARIT-6KFE5&output=jsonp&&callback=?");
         $.getJSON(url2, function (result) {
             map.setCenter(new qq.maps.LatLng(result.result.location.lat, result.result.location.lng));
             map.setZoom(10);
@@ -1114,7 +1114,7 @@ city.onclick = function (e) {
 var url4;
 $(".search_t").autocomplete({
     source:function(request,response){
-        url4 = encodeURI("http://apis.map.qq.com/ws/place/v1/suggestion/?keyword=" + request.term + "&region=" + curCity.children[0].innerHTML + "&key=K76BZ-W3O2Q-RFL5S-GXOPR-3ARIT-6KFE5&output=jsonp&&callback=?");
+        url4 = encodeURI("https://apis.map.qq.com/ws/place/v1/suggestion/?keyword=" + request.term + "&region=" + curCity.children[0].innerHTML + "&key=K76BZ-W3O2Q-RFL5S-GXOPR-3ARIT-6KFE5&output=jsonp&&callback=?");
         $.getJSON(url4,function(result){
 
             response($.map(result.data,function(item){

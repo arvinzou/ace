@@ -45,7 +45,7 @@ app.controller(ngControllerName,function($scope){
     * 发起筹款
     */
    $scope.raiseMoney = function(){
-   		window.location.href = '../apply/apply.html';
+   		window.location.href = '../apply/read.html';
    }
 });
 

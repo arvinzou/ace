@@ -242,3 +242,26 @@ input, textarea{
 	width: 9rem!important;
 	height: 10rem!important;
 }
+#warning{
+	width: 100%;
+	height: auto;
+	border-radius: 0.2rem;
+}
+
+.warn_content{
+	width: 90%;
+	margin:auto;
+	font-size: 0.35rem;
+	color: #666666;
+}
+.warn_title{
+	text-align: center;
+	color: #333333;
+	font-size: 0.45rem;
+	font-weight: bold;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+.layui-m-layerbtn span[yes]{
+	height: 1rem;
+}

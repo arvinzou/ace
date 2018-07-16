@@ -149,7 +149,7 @@ app.controller(ngControllerName,function($scope){
         var hostUrl = lurl.substring(0,lurl.indexOf("/fop")+1);*/
         if(file != '' && file != null){
             $event.target.download = title;
-            $event.target.href="http://zx.huacainfo.com/"+file;
+            $event.target.href="https://zx.huacainfo.com/"+file;
         }else{
             layer.alert("对不起，该政策没有可下载的附件！", {
                 icon: 5,
