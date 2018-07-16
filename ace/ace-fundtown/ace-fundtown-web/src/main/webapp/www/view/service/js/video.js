@@ -50,14 +50,12 @@ var uploader = new plupload.Uploader({
     browse_button: 'upbtn',
     url: '/fundtown/www/process/uploadFile',
     file_data_name: 'file',
-    max_retries: 3,     //允许重试次数
-    chunk_size: '5mb', //分块大小
     multi_selection: false,
     multipart_params: {
         deptId: ''
     },
     filters: {
-        max_file_size: '204800mb',
+        max_file_size: '500mb',
         mime_types: [
             {title: "Video files", extensions: "3gp,mp4,m3u8,wmv,webm,mov,avi,mpg,mpeg,mpeg1,mpeg4,mkv,flv,mp3,acc,wav"}
         ]
