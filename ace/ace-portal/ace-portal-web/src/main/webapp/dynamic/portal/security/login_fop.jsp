@@ -439,7 +439,7 @@
                     </form>
                     <!-- /.main-content -->
                     <div align="center">
-                        <h6>
+                        <h6 style="padding-left: 20px;padding-right: 20px;line-height: 20px;">
                             <span style="font-family: '微软雅黑'">建议WIN7以上系统使用IE9以上浏览器，XP、MAC系统使用</span><a
                                 href="https://rj.baidu.com/soft/detail/14744.html?ald"
                                 target="_blank" style="font-family: '微软雅黑'">谷歌浏览器</a> <span
