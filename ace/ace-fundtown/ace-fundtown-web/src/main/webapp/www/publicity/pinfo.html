@@ -20,6 +20,10 @@
                 <td width="35%">基金管理机构全称</td>
                 <td width="65%" ng-bind="vipInfo.departmentName"></td>
             </tr>
+            <tr id="mechan">
+                <td width="35%">所属机构</td>
+                <td width="65%" ng-bind="vipInfo.pName"></td>
+            </tr>
             <tr>
                 <td width="35%">出资额（万元)</td>
                 <td width="65%" ng-bind="vipInfo.regCapital"></td>
@@ -31,10 +35,6 @@
             <tr>
                 <td width="35%">法定代表/执行事务合伙人</td>
                 <td width="65%" ng-bind="vipInfo.legalPersonName"></td>
-            </tr>
-            <tr id="mechan">
-                <td width="35%">所属机构</td>
-                <td width="65%" ng-bind="vipInfo.pName"></td>
             </tr>
         </table>
     </div>

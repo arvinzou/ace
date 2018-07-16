@@ -27,9 +27,9 @@ app.controller(ngControllerName,function($scope){
 
     if(deptId){
         if(type == "1"){
-            $("#mechan").hide();
-        }else{
             $("#mechan").show();
+        }else{
+            $("#mechan").hide();
         }
         $.ajax({
             url: "/fundtown/www/info/vipInfo",
