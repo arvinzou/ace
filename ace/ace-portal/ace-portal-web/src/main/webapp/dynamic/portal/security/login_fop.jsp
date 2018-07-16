@@ -373,7 +373,6 @@
                         </div>
                         <div id="J_Static2Quick_box" style="display:none;width:100%;text-align:center">
                             <img src="image/weixin.png" class="qrcode"/>
-
                         </div>
                         <div id="J_Quick2Static_box" style="display:block">
                             <div class="alert alert-danger display-hide">
@@ -589,7 +588,7 @@
         document.getElementById("j_username").focus();
         if (window.top != window.self)
             window.top.window.location.href = contextPath
-                + "/dynamic/portal/security/login_fop.jsp";
+                + "/dynamic/portal/security/login.jsp";
 
     }
     jQuery(function ($) {
@@ -677,9 +676,9 @@
     var obj = new WxLogin({
         self_redirect:false,
         id:"J_Static2Quick_box",
-        appid: "wx8571545c5cc9d78c",
+        appid: "wxfdb1e4819dee7b62",
         scope: "snsapi_login",
-        redirect_uri: encodeURI('https://zx.huacainfo.com/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
+        redirect_uri: encodeURI('https://mp.cdsgsl.org.cn/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
         state: "huacai",
         style: "",
         href: ""
