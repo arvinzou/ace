@@ -4,12 +4,33 @@ var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
 
-    console.log(window.location.href);
-    var url = window.location.href.substring(1);
-    var deptId = url.substring(url.indexOf('=')+1);
-    console.log(deptId);
+   var deptId = "";
+   var type = "";
+
+    var locaUrl = window.location.href;
+    var url = window.location.href.substring(locaUrl.indexOf("?")+1);
+    var primaryId = null;
+    var paramArr = url.split("&");
+    for(var i=0;i < paramArr.length;i++){
+        num=paramArr[i].indexOf("=");
+        if(num>0){
+            name=paramArr[i].substring(0,num);
+            value=paramArr[i].substr(num+1);
+            if(name == "deptId"){
+                deptId = value;
+            }
+            if(name == "type"){
+                type = value;
+            }
+        }
+    }
 
     if(deptId){
+        if(type == "1"){
+            $("#mechan").show();
+        }else{
+            $("#mechan").hide();
+        }
         $.ajax({
             url: "/fundtown/www/info/vipInfo",
             type:"post",
