@@ -50,6 +50,8 @@ var uploader = new plupload.Uploader({
     browse_button: 'upbtn',
     url: '/fundtown/www/process/uploadFile',
     file_data_name: 'file',
+    max_retries: 3,     //允许重试次数
+    chunk_size: '5mb', //分块大小
     multi_selection: false,
     multipart_params: {
         deptId: ''
@@ -67,6 +69,7 @@ var uploader = new plupload.Uploader({
         },
         UploadProgress: function (e, t) {
             var r = t.percent;
+            r = r == 0 ? r : r - 1;
             $(".uploadPloadprogress").html("开始上传（" + r + "%）")
         },
         FileUploaded: function (uploader, file, responseObject) {

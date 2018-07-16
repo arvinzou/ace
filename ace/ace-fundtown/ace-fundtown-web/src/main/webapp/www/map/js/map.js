@@ -32,33 +32,11 @@ function viewinfo(data) {
 
 var option = {
     bmap: {
-        center: [111.740883, 29.104013],
+        center: [111.737953, 29.057274],
         zoom: 13,
         roam: true,
     },
-    series: [{
-        name: '本公司',
-        type: 'scatter',
-        coordinateSystem: 'bmap',
-        data: self,
-        symbol: 'image://img/logo.png',
-        symbolSize: 40,
-        label: {
-            normal: {
-                formatter: '{b}',
-                position: 'right',
-                show: false
-            },
-            emphasis: {
-                show: true
-            }
-        },
-        itemStyle: {
-            normal: {
-                color: '#03f'
-            }
-        }
-    },
+    series: [
         {
             name: '游乐',
             type: 'scatter',
@@ -106,14 +84,35 @@ var option = {
             data: yiyuan,
             symbol: 'image://img/yiyuan.png',
             symbolSize: 40,
+        },
+        {
+            name: '本公司',
+            type: 'scatter',
+            coordinateSystem: 'bmap',
+            data: self,
+            symbol: 'image://img/logo.png',
+            symbolSize: 40,
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: false
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#03f'
+                }
+            }
         }
     ]
 }
 
 $('.btn_navigation').click(function () {
-    console.log(1111111111111);
     var data = $(this).data();
-    console.log(data);
     wx.openLocation({
         latitude: data.value[1], // 纬度，浮点数，范围为90 ~ -90
         longitude: data.value[0], // 经度，浮点数，范围为180 ~ -180。

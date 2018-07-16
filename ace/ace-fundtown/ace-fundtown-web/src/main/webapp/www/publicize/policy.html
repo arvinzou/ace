@@ -10,6 +10,7 @@
 
     * {
         margin: 0;
+        text-decoration: none;
     }
 
     body {
@@ -21,8 +22,34 @@
     img {
         width: 100%;
     }
+
+    .photo {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+
+    .telphone {
+        position: absolute;
+        bottom: 4.1vh;
+        width: 50vw;
+        right: 0;
+        height: 4vh;
+    }
+
+    .telphone a {
+        color: transparent;
+        word-break: keep-all; /* 不换行 */
+        white-space: nowrap; /* 不换行 */
+        overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+        text-overflow: ellipsis;
+
+    }
 </style>
 <body>
-<img src="img/policy.png" alt=""/>
+<div class="photo">
+    <div class="telphone"><a href="tel:0736-7708006">号码：0736-77080060736-7708006</a></div>
+    <img src="img/policy.png" alt=""/>
+</div>
 </body>
 </html>
