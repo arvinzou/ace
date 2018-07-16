@@ -1,10 +1,15 @@
 package com.huacainfo.ace.fop.web.controller;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.plugins.wechat.constant.ApiURL;
+import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.fop.service.FopCallRecordService;
 import com.huacainfo.ace.fop.service.FopFlowRecordService;
 import com.huacainfo.ace.fop.service.SysAccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +26,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("/www/test")
 public class WWWTestController {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
     @Autowired
     private FopFlowRecordService fopFlowRecordService;
     @Autowired
@@ -51,4 +59,16 @@ public class WWWTestController {
         return sysAccountService.destoryAccount(account);
     }
 
+
+    @RequestMapping(value = "/accessToken")
+    @ResponseBody
+    public ResultResponse accessToken(String appid, String appSecret) throws Exception {
+        logger.debug("1:" + appid + "||" + appSecret);
+        logger.debug("2:" + ApiURL.ACCESS_TOKEN_API_URL);
+
+        String url = ApiURL.ACCESS_TOKEN_API_URL.replace("#APPID#", appid).replace("#APPSECRET#", appSecret);
+        String respStr = HttpKit.get(url);
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取accessToken", respStr);
+    }
 }

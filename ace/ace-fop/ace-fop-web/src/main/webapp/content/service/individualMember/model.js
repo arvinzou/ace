@@ -82,13 +82,13 @@ var _colModel = function () {
         }
         , {
             name: 'companyType',
-            editable: false,
+            editable: true,
             hidden: true,
             width: 100,
             edittype: "select",
             editoptions: {
                 value: {"0": "企业会员", "4": "个人会员"},//, "1": "团体企业", "2": "律师事务所", "3": "银行机构"
-                // disabled: "disabled"
+                disabled: "disabled"
             },
         }
         , {
