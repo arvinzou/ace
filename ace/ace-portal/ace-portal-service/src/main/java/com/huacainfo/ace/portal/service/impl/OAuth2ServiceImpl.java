@@ -2,32 +2,20 @@ package com.huacainfo.ace.portal.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.HttpUtils;
 import com.huacainfo.ace.portal.dao.UserinfoDao;
-import com.huacainfo.ace.portal.dao.WxUserDao;
-import com.huacainfo.ace.common.model.Userinfo;
-import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.OAuth2Service;
-import org.apache.commons.codec.binary.Base64;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
 import java.net.URLEncoder;
-import java.security.AlgorithmParameters;
-import java.security.Security;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +28,38 @@ public class OAuth2ServiceImpl implements OAuth2Service {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    public static void main(String args[]) throws Exception {
+        String redirect_uri = "https://www.huacainfo.com/live/www/oauth2/redirect.do";
+        String scope = "snsapi_base";
+        String state = "huacai";
+        String appid = "wx29ecb720b03ea466";
+        String secret = "03ea9a47442c14208943043e62114fc6";
+        String code = "001liuuO1jPR631FLowO1bCyuO1liuuC";
+        StringBuffer url = new StringBuffer("https://api.weixin.qq.com/sns/oauth2/access_token");
+        url.append("?appid=");
+        url.append(appid);
+        url.append("&secret=");
+        url.append(secret);
+        url.append("&code=");
+        url.append(code);
+        url.append("&grant_type=authorization_code");
+        System.out.println(url.toString());
+
+        url = new StringBuffer("https://open.weixin.qq.com/connect/oauth2/authorize");
+        url.append("?appid=");
+        url.append(appid);
+        url.append("&redirect_uri=");
+        url.append(URLEncoder.encode(redirect_uri, "utf-8"));
+        url.append("&response_type=code");
+        url.append("&scope=");
+        url.append(scope);
+        url.append("&state=");
+        url.append(state);
+        url.append("#wechat_redirect");
+
+        System.out.println(url.toString());
+
+    }
 
     /**
      * @throws
@@ -128,14 +148,14 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         o.setAccess_token(access_token);
         o.setRefresh_token(refresh_token);
         if (this.userinfoDao.isExit(o) > 0) {
-            this.userinfoDao.updateByPrimaryKey(o);
+            this.userinfoDao.updateByPrimaryKeySelective(o);
         } else {
             this.userinfoDao.insert(o);
         }
         o = this.userinfoDao.selectByPrimaryKey(o.getUnionid());
 
-        Map<String, Object> userProp=this.userinfoDao.selectSysUserByUnionId(o.getUnionid());
-        if(CommonUtils.isNotEmpty(userProp)){
+        Map<String, Object> userProp = this.userinfoDao.selectSysUserByUnionId(o.getUnionid());
+        if (CommonUtils.isNotEmpty(userProp)) {
             o.setUserProp(userProp);
         }
         SingleResult<Userinfo> sr = new SingleResult<Userinfo>(0, "同步微信用户完成！");
@@ -143,66 +163,34 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         return sr;
     }
 
-    public static void main(String args[]) throws Exception {
-        String redirect_uri = "https://www.huacainfo.com/live/www/oauth2/redirect.do";
-        String scope = "snsapi_base";
-        String state = "huacai";
-        String appid = "wx29ecb720b03ea466";
-        String secret = "03ea9a47442c14208943043e62114fc6";
-        String code = "001liuuO1jPR631FLowO1bCyuO1liuuC";
-        StringBuffer url = new StringBuffer("https://api.weixin.qq.com/sns/oauth2/access_token");
-        url.append("?appid=");
-        url.append(appid);
-        url.append("&secret=");
-        url.append(secret);
-        url.append("&code=");
-        url.append(code);
-        url.append("&grant_type=authorization_code");
-        System.out.println(url.toString());
-
-        url = new StringBuffer("https://open.weixin.qq.com/connect/oauth2/authorize");
-        url.append("?appid=");
-        url.append(appid);
-        url.append("&redirect_uri=");
-        url.append(URLEncoder.encode(redirect_uri, "utf-8"));
-        url.append("&response_type=code");
-        url.append("&scope=");
-        url.append(scope);
-        url.append("&state=");
-        url.append(state);
-        url.append("#wechat_redirect");
-
-        System.out.println(url.toString());
-
-    }
-
     @Override
-    public SingleResult<Map<String, Object>> bind(String unionid,String mobile) throws Exception {
+    public SingleResult<Map<String, Object>> bind(String unionid, String mobile) throws Exception {
         SingleResult<Map<String, Object>> rst = new SingleResult<Map<String, Object>>(0, "OK");
         Map<String, Object> o = new HashMap<String, Object>();
-        o.put("status","1");
-        Userinfo user=this.userinfoDao.selectByPrimaryKey(unionid);
+        o.put("status", "1");
+        Userinfo user = this.userinfoDao.selectByPrimaryKey(unionid);
         user.setMobile(mobile);
-        o.put("userinfo",user);
+        o.put("userinfo", user);
         this.userinfoDao.updateReg(user);
-        if(CommonUtils.isNotEmpty(mobile)) {
-            Map<String, Object> userProp=this.userinfoDao.selectSysUserByMobile(mobile);
-            if(CommonUtils.isNotEmpty(userProp)){
+        if (CommonUtils.isNotEmpty(mobile)) {
+            Map<String, Object> userProp = this.userinfoDao.selectSysUserByMobile(mobile);
+            if (CommonUtils.isNotEmpty(userProp)) {
                 user.setMobile((String) userProp.get("tel"));
-                this.userinfoDao.updateBindApp(user.getUnionid(),(String) userProp.get("userId"));
+                this.userinfoDao.updateBindApp(user.getUnionid(), (String) userProp.get("userId"));
                 user.setUserProp(userProp);
-                o.put("status","0");
-                o.put("userinfo",user);
-            }else{
+                o.put("status", "0");
+                o.put("userinfo", user);
+            } else {
                 rst.setErrorMessage("绑定失败，没有找到系统用户，请确认手机号是否已注册为系统用户。");
             }
         }
         rst.setValue(o);
-        return  rst;
+        return rst;
     }
+
     @Override
-    public  MessageResponse unbind(String unionid) throws Exception{
+    public MessageResponse unbind(String unionid) throws Exception {
         this.userinfoDao.updateUnbind(unionid);
-        return new MessageResponse(0,"解除绑定成功。");
+        return new MessageResponse(0, "解除绑定成功。");
     }
 }
