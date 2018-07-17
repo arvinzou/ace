@@ -13,8 +13,8 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://zx.huacainfo.com:3306/portal"
-                        userId="root" password="huacai$2016"><!--数据库连接信息。具体参看mybatis-generator-->
+                        connectionURL="jdbc:mysql://192.168.2.253:3306/jxb"
+                        userId="root" password="123456"><!--数据库连接信息。具体参看mybatis-generator-->
         </jdbcConnection>
 
         <javaTypeResolver><!--具体参看mybatis-generator-->
@@ -42,9 +42,9 @@
 
         <!--与原来mybatis-generator不一样，这个table标签不是必须的。只有对生成的映射有复杂要求时，才需要在这里详细配置-->
 
-        <table tableName="users"
-               domainObjectName="Users"
-               mapperName="UsersDao"
+        <table tableName="course"
+               domainObjectName="Course"
+               mapperName="CourseDao"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

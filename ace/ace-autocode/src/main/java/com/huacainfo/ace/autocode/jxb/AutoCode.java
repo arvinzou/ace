@@ -1,12 +1,16 @@
-package com.huacainfo.ace.autocode.portal;
+package com.huacainfo.ace.autocode.jxb;
 
 import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 
 public class AutoCode {
+
     public static void main(String[] args) throws Exception {
-        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("portal", "绘图模板-子项", "Arvin");
-        Class<?> c = com.huacainfo.ace.portal.model.CanvasTmplItem.class;
+        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("jxb", "课程", "Arvin");
+        Class<?> c = com.huacainfo.ace.jxb.model.Course.class;
+//        Class<?> c = null;
         autoCodeUtils.init(c);
+
+//===================================
         autoCodeUtils.createVO(c);
         autoCodeUtils.createQVO(c);
         autoCodeUtils.createDAO(c);
@@ -18,5 +22,15 @@ public class AutoCode {
         autoCodeUtils.createJsView(c);
         autoCodeUtils.createJsController(c);
         autoCodeUtils.createModel(c);
+
+
+//===================================
+//        autoCodeUtils.createVO(c);
+//        autoCodeUtils.createQVO(c);
+//        autoCodeUtils.createDAO(c);
+//        autoCodeUtils.createService(c);
+//        autoCodeUtils.createServiceImpl(c);
+
     }
+
 }
