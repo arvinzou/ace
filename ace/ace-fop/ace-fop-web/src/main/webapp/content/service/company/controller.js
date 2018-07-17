@@ -169,10 +169,6 @@ function loadView(id) {
                 if (key == "lpSex") {
                     value = rsd(value, "01");
                 }
-                //所在地区
-                if (key == "areaCode") {
-                    value = "areaCode";//rsd(value, "134");
-                }
                 //企业性质
                 if (key == "companyProperty") {
                     value = rsd(value, "134");

@@ -1,14 +1,13 @@
 package com.huacainfo.ace.autocode.base;
 
+import com.huacainfo.ace.common.tools.CommonUtils;
+import org.apache.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import org.apache.log4j.Logger;
-
-import com.huacainfo.ace.common.tools.CommonUtils;
 
 public class DBHelpInfo {
 
@@ -39,11 +38,11 @@ public class DBHelpInfo {
         url = resource.getString("dao.db.url");
     }
 
-    public static void main(String[] args) {
-        DBHelpInfo.getModelJs();
+    public DBHelpInfo() {
     }
 
-    public DBHelpInfo() {
+    public static void main(String[] args) {
+        DBHelpInfo.getModelJs();
     }
 
     public static List<ColumsInfo> getTableInfo(String tableName) {
@@ -233,43 +232,27 @@ public class DBHelpInfo {
     public static String getPreviewJs(String tableName) {
         List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
         StringBuffer html = new StringBuffer();
-        html.append("<h5 class=\"header-title\">基本信息</h5>");
-        html.append("<div  class=\"row\"  style=\"padding:10px\">");
+        html.append("<h5 class=\"header-title\">基本信息</h5>\n");
+        html.append("<div  class=\"row\"  style=\"padding:10px\">\n");
         html.append("\r\n");
 
         int i = 1;
         java.util.Map<String, String> p = new HashMap<String, String>();
-
         p.put("createUserId", "createUserId");
-
         p.put("createUserName", "createUserName");
-
         p.put("createDate", "createDate");
-
         p.put("lastModifyUserId", "lastModifyUserId");
-
         p.put("lastModifyUserName", "lastModifyUserName");
-
         p.put("lastModifyDate", "lastModifyDate");
         for (ColumsInfo o : list) {
             if (!p.containsValue(o.getColumName())) {
-                html.append("<div class=\"labelItem\">");
-                html.append("<span class=\"labelItemHeader\">");
-                html.append("\r\n");
-                html.append(o.getRemarks());
-                html.append("</span>");
-                html.append("\r\n");
-                html.append("<br>");
-                html.append("\r\n");
-
-                html.append("<span id=\"");
-                html.append(CommonUtils.getJavaName(o.getColumName()));
-                html.append("\">");
-                html.append("\r\n");
-                html.append("</span>");
-                html.append("\r\n");
-                html.append("</div>");
-                html.append("\r\n");
+                html.append("<div class=\"labelItem\">\r\n");
+                html.append("<span class=\"labelItemHeader\">").append(o.getRemarks()).append("</span>");
+                html.append("\r\n").append("<br>").append("\r\n");
+                html.append("<span name=\"").append(CommonUtils.getJavaName(o.getColumName())).append("\">");
+                html.append("\\${").append(CommonUtils.getJavaName(o.getColumName())).append("}");
+                html.append("</span>\n");
+                html.append("</div>").append("\r\n");
             }
             i++;
         }
@@ -280,28 +263,19 @@ public class DBHelpInfo {
         html.append("\r\n");
         for (ColumsInfo o : list) {
             if (p.containsValue(o.getColumName())) {
-                html.append("<div class=\"labelItem\">");
-                html.append("<span class=\"labelItemHeader\">");
-                html.append("\r\n");
-                html.append(o.getRemarks());
-                html.append("</span>");
-                html.append("\r\n");
-                html.append("<br>");
-                html.append("\r\n");
+                html.append("<div class=\"labelItem\">\n");
+                html.append("<span class=\"labelItemHeader\">").append(o.getRemarks()).append("</span>");
+                html.append("\r\n").append("<br>").append("\r\n");
 
-                html.append("<span id=\"");
-                html.append(CommonUtils.getJavaName(o.getColumName()));
-                html.append("\">");
-                html.append("\r\n");
-                html.append("</span>");
-                html.append("\r\n");
-                html.append("</div>");
-                html.append("\r\n");
+                html.append("<span name=\"").append(CommonUtils.getJavaName(o.getColumName())).append("\">");
+                html.append("\\${").append(CommonUtils.getJavaName(o.getColumName())).append("}");
+                html.append("</span>").append("\r\n");
+                html.append("</div>").append("\r\n");
             }
             i++;
         }
-        html.append("</div>");
-        html.append("\r\n");
+        html.append("</div>").append("\r\n");
+
         System.out.println(html.toString());
         return html.toString();
     }
