@@ -111,14 +111,17 @@ jQuery(function ($) {
 function preview(id, title, flowType, fromId) {
     var dialogId = "#fc-dialog-message-view";
     var postUrl = cfg.view_load_data_url;
+    var tplId = "";
     if (flowType == '0') {
         id = fromId;
         dialogId = "#c-dialog-message-view";
         postUrl = contextPath + '/fopCompany/selectFopCompanyByPrimaryKey';
+        tplId = 'tpl-company';
     } else if (flowType == '1') {
         id = fromId;
         dialogId = "#a-dialog-message-view";
         postUrl = contextPath + '/fopAssociation/selectFopAssociationByPrimaryKey';
+        tplId = 'tpl-association';
     }
 
     //show dialog
@@ -147,9 +150,9 @@ function preview(id, title, flowType, fromId) {
     $(dialog).parent().css("top", "1px");
     $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
     //render data
-    loadView(id, postUrl, dialogId);
+    loadView(id, postUrl, dialogId, tplId);
 }
-function loadView(id, postUrl, dialogId) {
+function loadView(id, postUrl, dialogId, tplId) {
     $.ajax({
         type: "post",
         url: postUrl,
@@ -159,8 +162,13 @@ function loadView(id, postUrl, dialogId) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
+            // console.log("============================rst.value:" + rst.value)
+            var tpl = document.getElementById(tplId).innerHTML;//'tpl-company'
+            var renderHtml = juicer(tpl, rst.value);
+            // console.log("========================renderHtml:" + renderHtml);
+            $(dialogId).html(renderHtml);
+            //格式化值
             $.each(rst.value, function (key, value) {
-
                 //status
                 if (key == "status") {
                     if ("1" == value) {
