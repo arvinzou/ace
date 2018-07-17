@@ -472,7 +472,17 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     @Override
     public SingleResult<FopCompanyVo> selectFopCompanyByPrimaryKey(String id) throws Exception {
         SingleResult<FopCompanyVo> rst = new SingleResult<>();
-        rst.setValue(this.fopCompanyDao.selectVoByPrimaryKey(id));
+        FopCompanyVo vo = this.fopCompanyDao.selectVoByPrimaryKey(id);
+//        vo.setCreditCode(StringUtil.isEmpty(vo.getCreditCode()) ? "" : vo.getCreditCode());
+//        vo.setFullName(StringUtil.isEmpty(vo.getFullName()) ? "" : vo.getFullName());
+//        vo.setShortName(StringUtil.isEmpty(vo.getShortName()) ? "" : vo.getShortName());
+//        vo.setCompanyCode(StringUtil.isEmpty(vo.getCompanyCode()) ? "" : vo.getCompanyCode());
+//        vo.setCompanyLinkUrl(StringUtil.isEmpty(vo.getCompanyLinkUrl()) ? "" : vo.getCompanyLinkUrl());
+//        vo.setAreaCode(StringUtil.isEmpty(vo.getAreaCode()) ? "" : vo.getAreaCode());
+//        vo.setAreaCodeName(StringUtil.isEmpty(vo.getAreaCodeName()) ? "" : vo.getAreaCodeName());
+//        vo.setCompanyProperty(StringUtil.isEmpty(vo.getCompanyProperty()) ? "" : vo.getCompanyProperty());
+//        vo.setCompanyPropertyName(StringUtil.isEmpty(vo.getCompanyPropertyName()) ? "" : vo.getCompanyPropertyName());
+        rst.setValue(vo);
         return rst;
     }
 
