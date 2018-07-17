@@ -338,6 +338,10 @@
         from cu_project t
         left join cu_project p on t.parentId = p.id
         where 1=1
+        <if test="condition.projectName!=null and condition.projectName!=&quot;&quot;">
+            and t.projectName
+            like concat('%',#{condition.projectName,jdbcType=VARCHAR},'%')
+        </if>
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
