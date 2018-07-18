@@ -79,11 +79,14 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
         EvaluatData evaluatData = new EvaluatData();
         evaluatData.setEvaluatTplId(condition.getEvaluatTplId());
         evaluatData.setScore(condition.getScore());
-        evaluatData.setHeadImgUrl(userinfo.getHeadimgurl());
-        evaluatData.setCreateUserId("1");
+        evaluatData.setCreateUserId(userinfo.getUnionid());
         evaluatDataService.insertData(evaluatData);
+        int ranking = evaluatDataService.getRanking(evaluatData);
         EvaluatGauge list = this.evaluatGaugeDao.getEvaluation(condition);
-        return new ResultResponse(0, "评价获取成功", list);
+        Map map = new HashMap();
+        map.put("evaluatGauge", list);
+        map.put("ranking", ranking + 1);
+        return new ResultResponse(0, "评价获取成功", map);
     }
 
     /**

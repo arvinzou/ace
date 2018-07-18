@@ -49,6 +49,8 @@ public interface EvaluatDataService {
 
     public abstract MessageResponse insertData(EvaluatData obj) throws Exception;
 
+
+    public abstract int getRanking(EvaluatData obj) throws Exception;
     /**
      * @throws
      * @Title:updateEvaluatData
