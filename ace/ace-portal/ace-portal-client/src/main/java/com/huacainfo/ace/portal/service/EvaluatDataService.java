@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.EvaluatData;
 import com.huacainfo.ace.portal.vo.EvaluatDataVo;
@@ -31,6 +32,8 @@ public interface EvaluatDataService {
      */
     public abstract PageResult<EvaluatDataVo> findEvaluatDataList(EvaluatDataQVo condition, int start, int limit, String orderBy) throws Exception;
 
+    public abstract ResultResponse findEvaluatDataLists(EvaluatDataQVo condition, int start, int limit, String orderBy) throws Exception;
+
     /**
      * @throws
      * @Title:insertEvaluatData
@@ -43,6 +46,8 @@ public interface EvaluatDataService {
      * @version: 2018-06-09
      */
     public abstract MessageResponse insertEvaluatData(EvaluatData obj, UserProp userProp) throws Exception;
+
+    public abstract MessageResponse insertData(EvaluatData obj) throws Exception;
 
     /**
      * @throws
