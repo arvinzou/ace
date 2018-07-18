@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.portal.dao.EvaluatDataDao;
 import com.huacainfo.ace.portal.model.EvaluatData;
@@ -73,13 +74,14 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
     }
 
     @Override
-    public ResultResponse getEvaluation(EvaluatGaugeQVo condition, UserProp userProp) throws Exception {
+    public ResultResponse getEvaluation(EvaluatGaugeQVo condition, Userinfo userinfo) throws Exception {
         PageResult<EvaluatGaugeVo> rst = new PageResult<EvaluatGaugeVo>();
-
         EvaluatData evaluatData = new EvaluatData();
         evaluatData.setEvaluatTplId(condition.getEvaluatTplId());
         evaluatData.setScore(condition.getScore());
-        evaluatDataService.insertEvaluatData(evaluatData, userProp);
+        evaluatData.setHeadImgUrl(userinfo.getHeadimgurl());
+        evaluatData.setCreateUserId("1");
+        evaluatDataService.insertData(evaluatData);
         EvaluatGauge list = this.evaluatGaugeDao.getEvaluation(condition);
         return new ResultResponse(0, "评价获取成功", list);
     }

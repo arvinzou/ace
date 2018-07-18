@@ -7,10 +7,11 @@
         <result column="score" jdbcType="DECIMAL" property="score"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="headImgUrl" jdbcType="VARCHAR" property="headImgUrl"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, evaluatTplId, score, status, createUserId, createDate
+        id, evaluatTplId, score, status, createUserId, headImgUrl, createDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -41,6 +42,9 @@
             <if test="createUserId != null">
                 createUserId,
             </if>
+            <if test="headImgUrl != null">
+                headImgUrl,
+            </if>
             <if test="createDate != null">
                 createDate,
             </if>
@@ -61,6 +65,9 @@
             <if test="createUserId != null">
                 #{createUserId,jdbcType=VARCHAR},
             </if>
+            <if test="headImgUrl != null">
+                #{headImgUrl,jdbcType=VARCHAR},
+            </if>
             <if test="createDate != null">
                 #{createDate,jdbcType=TIMESTAMP},
             </if>
@@ -80,6 +87,9 @@
             </if>
             <if test="createUserId != null">
                 createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="headImgUrl != null">
+                headImgUrl = #{headImgUrl,jdbcType=VARCHAR},
             </if>
             <if test="createDate != null">
                 createDate = #{createDate,jdbcType=TIMESTAMP},

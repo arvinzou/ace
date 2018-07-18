@@ -17,6 +17,16 @@ public class EvaluatData implements java.io.Serializable {
 
     private Date createDate;
 
+    private String headImgUrl;
+
+    public String getHeadImgUrl() {
+        return headImgUrl;
+    }
+
+    public void setHeadImgUrl(String headImgUrl) {
+        this.headImgUrl = headImgUrl;
+    }
+
     public String getId() {
         return id;
     }

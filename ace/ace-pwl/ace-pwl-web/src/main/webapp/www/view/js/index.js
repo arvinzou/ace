@@ -16,7 +16,13 @@ $(function () {
     $('.prompt_box  .content').on('click', '.isover', testDone);
     $('.model_testlist .model_list_lists').on('click', 'li', slideToTest);
     $('.swiper-wrapper').on('click', '.options', selectiOption);
+    $('.bottom').on('click', '.show_ranking', ranking);
+    $('.ranking_list').on('click', '.remove', ranking);
 });
+
+function ranking() {
+    $('.ranking_list').toggleClass("ranking_list_hide");
+}
 
 
 function starttimer() {
@@ -24,15 +30,14 @@ function starttimer() {
 }
 
 function timer() {
-    var strSec = "00";
     var strMin = "00";
     second = second + 1;
     strSec = second < 10 ? ('0' + second) : second;
     if (second >= 60) {
         second = 0;
         minute = minute + 1;
-        strMin = minute < 10 ? ('0' + minute) : minute;
     }
+    strMin = minute < 10 ? ('0' + minute) : minute;
     $('.footer .timer').text(strMin + ':' + strSec);
 }
 
@@ -62,8 +67,24 @@ function testDone() {
     window.clearInterval(dingshiqi);
     $('.model_testlist .show_score .time_end').text($('.footer .timer').text());
     $('.model_testlist .show_score').show();
+    $('.prompt_box').hide();
+    pingjia();
+    showTestList();
     $('.model_testlist .model_tool').off('click', '.over', testDone);
     $('.model_testlist .model_tool').on('click', '.over', endTest);
+}
+
+/*评价分数*/
+function pingjia() {
+    var url = "/portal/www/test/getEvaluation.do";
+    var data = {
+        score: totalScore,
+        evaluatTplId: localStorage["id"]
+
+    };
+    $.post(url, data, function (result) {
+
+    });
 }
 
 function endTest() {
@@ -129,6 +150,8 @@ function replaceTestStr(data) {
     itmp = itmp.replace('#options2#', data.aName2);
     itmp = itmp.replace('#options3#', data.aName3);
     itmp = itmp.replace('#options4#', data.aName4);
+    itmp = itmp.replace('#type#', data.solution.length > 1 ? "多选题" : "单选题");
+    itmp = itmp.replace('#score#', data.score);
     itmp = itmp.replace(/\#onlyOne#/g, data.solution.length > 1 ? "" : "onlyOne");
     return $(itmp).data('solution', data.solution).data('score', data.score);
 }
@@ -136,7 +159,7 @@ function replaceTestStr(data) {
 var testCardTemplate = '<div class="swiper-slide">' +
     '					<div class="test">' +
     '						<div class="test_content">' +
-    '							<div class="title">#title#</div>' +
+    '							<div class="title">#title# <span class="remark">（#type#）（#score#分）</span></div>' +
     '							<div class="options #onlyOne#">' +
     '								<div class="icon">' +
     '									A' +

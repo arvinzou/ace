@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.result.ResultResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +67,12 @@ public class EvaluatDataServiceImpl implements EvaluatDataService {
         return rst;
     }
 
+    @Override
+    public ResultResponse findEvaluatDataLists(EvaluatDataQVo condition, int start, int limit, String orderBy) throws Exception {
+        List<EvaluatDataVo> list = this.evaluatDataDao.findList(condition, start, limit, orderBy);
+        return new ResultResponse(ResultCode.SUCCESS, "成绩列表", list);
+    }
+
     /**
      * @throws
      * @Title:insertEvaluatData
@@ -89,9 +97,34 @@ public class EvaluatDataServiceImpl implements EvaluatDataService {
         if (CommonUtils.isBlank(o.getScore())) {
             return new MessageResponse(1, "成绩不能为空！");
         }
+        if (CommonUtils.isBlank(o.getHeadImgUrl())) {
+            return new MessageResponse(1, "头像不能为空！");
+        }
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserId(userProp.getOpenId());
+        this.evaluatDataDao.insertSelective(o);
+        return new MessageResponse(0, "添加测评结果完成！");
+    }
+
+    @Override
+    public MessageResponse insertData(EvaluatData o)
+            throws Exception {
+        o.setId(GUIDUtil.getGUID());
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getEvaluatTplId())) {
+            return new MessageResponse(1, "评测模板不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getScore())) {
+            return new MessageResponse(1, "成绩不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getHeadImgUrl())) {
+            return new MessageResponse(1, "头像不能为空！");
+        }
+        o.setCreateDate(new Date());
+        o.setStatus("1");
         this.evaluatDataDao.insertSelective(o);
         return new MessageResponse(0, "添加测评结果完成！");
     }
