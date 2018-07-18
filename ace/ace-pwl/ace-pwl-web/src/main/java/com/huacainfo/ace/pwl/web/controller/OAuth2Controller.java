@@ -61,7 +61,8 @@ public class OAuth2Controller extends BaseController {
         if (rst.getState()) {
             this.logger.info("==================={}  in session ======================", rst.getValue().getNickname());
             this.getRequest().getSession().setAttribute(CommonKeys.SESSION_USERINFO_KEY, rst.getValue());
-            response.sendRedirect(state + "&sysId=pwl");
+            logger.info("======================response.sendRedirect:{}============", state);
+            response.sendRedirect(state);
         } else {
             response.sendRedirect(request.getContextPath() + "/www/view/me/error.jsp");
         }
