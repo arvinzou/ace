@@ -12,6 +12,7 @@ import com.huacainfo.ace.portal.service.TaskCmccService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,8 @@ import java.util.Random;
 /**
  * Created by chenxiaoke on 2018/7/12.
  */
-public class RegServiceImpl implements RegService{
+@Service("regService")
+public class RegServiceImpl implements RegService {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -28,6 +30,7 @@ public class RegServiceImpl implements RegService{
 
     @Autowired
     private TaskCmccService taskCmccService;
+
     @Override
     public MessageResponse insertReg(Reg reg) throws Exception {
         if (CommonUtils.isBlank(reg.getNickname())) {
@@ -43,8 +46,8 @@ public class RegServiceImpl implements RegService{
         if (temp > 0) {
             return new MessageResponse(1, "手机号已注册过，请重新填写另一新的手机号!");
         }
-        String pwd=getRandCode();
-        Users o=new Users();
+        String pwd = getRandCode();
+        Users o = new Users();
         o.setUserId(reg.getUnionId());
         o.setAccount(reg.getMobile());
         o.setMobile(reg.getMobile());
@@ -56,14 +59,14 @@ public class RegServiceImpl implements RegService{
         o.setOpenId(reg.getUnionId());
         o.setCreateTime(new java.util.Date());
         this.regDao.insertReg(o);
-        TaskCmcc obj=new TaskCmcc();
+        TaskCmcc obj = new TaskCmcc();
         Map<String, Object> msg = new HashMap<String, Object>();
         msg.put("taskName", "账号" + reg.getMobile());
-        msg.put("msg", reg.getNickname()+"你好，注册成功，账号" + reg.getMobile() + "，密码"+pwd+"。【尽心帮】");
+        msg.put("msg", reg.getNickname() + "你好，注册成功，账号" + reg.getMobile() + "，密码" + pwd + "。【尽心帮】");
         msg.put("tel", reg.getMobile() + "," + reg.getMobile());
-        CommonBeanUtils.copyMap2Bean(o,msg);
+        CommonBeanUtils.copyMap2Bean(o, msg);
         this.taskCmccService.insertTaskCmcc(obj);
-        return new MessageResponse(0,"注册成功.");
+        return new MessageResponse(0, "注册成功.");
     }
 
     private String getRandCode() {
