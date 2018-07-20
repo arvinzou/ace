@@ -676,7 +676,7 @@
     var obj = new WxLogin({
         self_redirect:false,
         id:"J_Static2Quick_box",
-        appid: "wxfdb1e4819dee7b62",
+        appid: "wx69aee47b3622886e",
         scope: "snsapi_login",
         redirect_uri: encodeURI('https://mp.cdsgsl.org.cn/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
         state: "huacai",
