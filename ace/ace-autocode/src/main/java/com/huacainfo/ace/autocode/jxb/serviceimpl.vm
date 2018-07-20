@@ -1,4 +1,4 @@
-package com.huacainfo.ace.cu.service.impl;
+package com.huacainfo.ace.jxb.service.impl;
 
 
 import java.util.Date;
@@ -14,12 +14,12 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.cu.dao.$!{bean.name}Dao;
-import com.huacainfo.ace.cu.model.$!{bean.name};
+import com.huacainfo.ace.jxb.dao.$!{bean.name}Dao;
+import com.huacainfo.ace.jxb.model.$!{bean.name};
 import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.cu.service.$!{bean.name}Service;
-import com.huacainfo.ace.cu.vo.$!{bean.name}Vo;
-import com.huacainfo.ace.cu.vo.$!{bean.name}QVo;
+import com.huacainfo.ace.jxb.service.$!{bean.name}Service;
+import com.huacainfo.ace.jxb.vo.$!{bean.name}Vo;
+import com.huacainfo.ace.jxb.vo.$!{bean.name}QVo;
 @Service("$!{bean.lowerName}Service")
 /**
 * @author: $!{annotation.authorName}

@@ -1,7 +1,8 @@
-
 body {
-    width: 100vw;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+    background-color: #444;
 }
 
 .swiper-container {
@@ -10,7 +11,7 @@ body {
 }
 
 .swiper-container .swiper-slide {
-    width: 100vw;
+    width: 750px;
     height: 92.5vh;
     padding-bottom: 7.5vh;
     overflow-y: auto;
@@ -33,6 +34,11 @@ border-right: 1p solid;*/
 .swiper-container .swiper-slide .test .test_content .title {
     color: #4e4e4e;
     margin-top: 2.6vh;
+}
+
+.swiper-container .swiper-slide .test .test_content .remark {
+    color: #ccc;
+    font-size: 0.9rem;
 }
 
 .swiper-container .swiper-slide .test .test_content .options {
@@ -127,10 +133,12 @@ border-right: 1p solid;*/
     color: #9a9a9a;
     line-height: 7.5vh;
     font-size: 3.1vh;
+    padding: 0 3vw;
+    box-sizing: content-box;
 }
 
 .footer .menuList .timer {
-    margin-left: 26vw;
+    margin-left: 18vw;
     font-size: 1.0rem;
     line-height: 7vh;
 }
@@ -146,18 +154,17 @@ border-right: 1p solid;*/
 }
 
 .model_testlist_action {
-    animation: action 0.5s cubic-bezier(1, 0.01, 1, 1);
-    -moz-animation: action 0.5s cubic-bezier(1, 0.01, 1, 1);
+    animation: action 0.45s cubic-bezier(0, -0.01, 1, 1);
+    -moz-animation: action 0.45s cubic-bezier(0, -0.01, 1, 1);
     /* Firefox */
-    -webkit-animation: action 0.5s cubic-bezier(1, 0.01, 1, 1);
+    -webkit-animation: action 0.45s cubic-bezier(0, -0.01, 1, 1);
     /* Safari and Chrome */
-    -o-animation: action 0.5 cubic-bezier(1, 0.01, 1, 1);
+    -o-animation: action 0.45s cubic-bezier(0, -0.01, 1, 1);
     /* Opera */
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     -o-animation-fill-mode: forwards;
     -moz-animation-fill-mode: forwards;
-
 }
 
 @keyframes action {
@@ -208,12 +215,12 @@ border-right: 1p solid;*/
 /************************************************************************************************************/
 
 .model_testlist_feaction {
-    animation: feaction 0.5s cubic-bezier(1, 0.01, 1, 1);
-    -moz-animation: feaction 0.5s cubic-bezier(1, 0.01, 1, 1);
+    animation: feaction 0.45s cubic-bezier(0, -0.01, 1, 1);
+    -moz-animation: feaction 0.45s cubic-bezier(0, -0.01, 1, 1);
     /* Firefox */
-    -webkit-animation: feaction 0.5s cubic-bezier(1, 0.01, 1, 1);
+    -webkit-animation: feaction 0.45s cubic-bezier(0, -0.01, 1, 1);
     /* Safari and Chrome */
-    -o-animation: feaction 0.5s cubic-bezier(1, 0.01, 1, 1);
+    -o-animation: feaction 0.45s cubic-bezier(0, -0.01, 1, 1);
     /* Opera */
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
@@ -270,7 +277,8 @@ border-right: 1p solid;*/
 .model_testlist .show_score {
     background-color: #f5f5f5;
     border-radius: 5vw;
-    margin-bottom: 2vh;
+    margin: 2vh 0;
+
     height: auto;
     text-align: center;
     font-size: 2vh;
@@ -293,10 +301,28 @@ border-right: 1p solid;*/
     color: #333;
 }
 
+.model_testlist .show_score .pingyu {
+    padding: 3vw;
+}
+
+.model_testlist .show_score .pingyu p {
+    font-size: 0.9rem;
+}
+
 .model_testlist .show_score .time_end {
     float: right;
     display: block;
     margin-right: 5vw;
+}
+
+.model_testlist .show_score .ranking {
+    float: left;
+    display: block;
+    margin-left: 5vw;
+}
+
+.model_testlist .show_score .show_ranking {
+    color: #3776ec;
 }
 
 .model_testlist .model_list {
@@ -437,3 +463,151 @@ button {
 .prompt_box .content .istool {
     margin-right: 6vw;
 }
+
+.model_testlist_action + .main {
+    webkit-transform: scale(0.87) translateX(25px);
+    transform: scale(0.87) translateX(25px);
+    animation: backg 0.45s cubic-bezier(0, -0.01, 1, 1);
+    -moz-animation: backg 0.45s cubic-bezier(0, -0.01, 1, 1);
+    /* Firefox */
+    -webkit-animation: backg 0.45s cubic-bezier(0, -0.01, 1, 1);
+    /* Safari and Chrome */
+    -o-animation: backg 0.45s cubic-bezier(0, -0.01, 1, 1);
+    /* Opera */
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    -o-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
+}
+
+@keyframes backg {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+@-moz-keyframes backg
+    /* Firefox */
+
+{
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+@-webkit-keyframes backg
+    /* Safari and Chrome */
+
+{
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+@-o-keyframes backg
+    /* Opera */
+
+{
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.7;
+    }
+}
+
+.main {
+    background-color: #fff;
+    -webkit-transition: .45s;
+    transition: .45s;
+}
+
+.ranking_list {
+    width: 100%;
+    height: 100%;
+    padding: 0 6vw;
+    position: absolute;
+    top: 0;
+    background-color: rgba(255, 255, 255, 1);
+    overflow-y: auto;
+    z-index: 400;
+}
+
+.ranking_list .lists {
+    height: 88vh;
+    overflow-y: auto;
+}
+
+.ranking_list ul li {
+    width: 100%;
+    height: 8vh;
+    overflow: hidden;
+    color: #fff;
+    padding: 0 2vw;
+    background-color: rgba(50, 50, 50, .4);
+    margin-bottom: 2vh;
+    font-size: 2.5vh;
+}
+
+.ranking_list ul li:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.ranking_list ul li > span {
+    float: left;
+    line-height: 8vh;
+}
+
+.ranking_list ul li img {
+    width: 6vh;
+    height: 6vh;
+    vertical-align: middle;
+    margin-right: 2vw;
+}
+
+.ranking_list ul li .number {
+    margin-right: 4vw;
+
+}
+
+.ranking_list ul li .score {
+    float: right;
+}
+
+.ranking_list ul li .user {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 60vw;
+}
+
+.ranking_list .title {
+    font-size: 4vh;
+    height: 12vh;
+    line-height: 12vh;
+    position: relative;
+}
+
+.ranking_list .title .remove {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.ranking_list_hide {
+    display: none;
+}
+
+
+

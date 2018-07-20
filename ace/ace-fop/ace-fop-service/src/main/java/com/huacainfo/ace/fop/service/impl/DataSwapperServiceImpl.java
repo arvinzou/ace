@@ -40,7 +40,7 @@ public class DataSwapperServiceImpl implements DataSwapperService {
             rtnMap.put("市质监局", szjj);
         }
         //市司法局
-        Map<String, List<Map<String, Object>>> ssfj = szjj(keyword, type);
+        Map<String, List<Map<String, Object>>> ssfj = ssfj(keyword, type);
         if (!CollectionUtils.isEmpty(ssfj)) {
             rtnMap.put("市司法局", ssfj);
         }
@@ -108,7 +108,7 @@ public class DataSwapperServiceImpl implements DataSwapperService {
         Map<String, List<Map<String, Object>>> data = new HashMap<>();
 
         //市质监局_名牌产品信息
-        List<Map<String, Object>> mpcpxx = DataSwapperApi.szjj_mpcpxx("常德市先玉网具有限责任公司");
+        List<Map<String, Object>> mpcpxx = DataSwapperApi.szjj_mpcpxx(keyword);//"常德市先玉网具有限责任公司");
         if (!CollectionUtils.isEmpty(mpcpxx)) {
             data.put("名牌产品信息(" + mpcpxx.size() + "条)", mpcpxx);
         }

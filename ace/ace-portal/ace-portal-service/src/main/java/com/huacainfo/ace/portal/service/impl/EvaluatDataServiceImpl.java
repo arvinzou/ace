@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.portal.service.UserinfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +41,9 @@ public class EvaluatDataServiceImpl implements EvaluatDataService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    @Autowired
+    private UserinfoService userinfoService;
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -65,6 +72,23 @@ public class EvaluatDataServiceImpl implements EvaluatDataService {
         return rst;
     }
 
+    @Override
+    public ResultResponse findEvaluatDataLists(EvaluatDataQVo condition, int start, int limit, String orderBy) throws Exception {
+        if (CommonUtils.isBlank(start)) {
+            start = 0;
+        }
+        if (CommonUtils.isBlank(limit)) {
+            start = 100;
+        }
+        List<EvaluatDataVo> list = this.evaluatDataDao.findDataList(condition, start, limit, orderBy);
+        for (EvaluatDataVo item : list) {
+            Userinfo userinfo = userinfoService.selectUserinfoByKey(item.getCreateUserId());
+            item.setHeadimgurl(userinfo.getHeadimgurl());
+            item.setNickname(userinfo.getNickname());
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "成绩列表", list);
+    }
+
     /**
      * @throws
      * @Title:insertEvaluatData
@@ -89,11 +113,40 @@ public class EvaluatDataServiceImpl implements EvaluatDataService {
         if (CommonUtils.isBlank(o.getScore())) {
             return new MessageResponse(1, "成绩不能为空！");
         }
+        if (CommonUtils.isBlank(o.getHeadImgUrl())) {
+            return new MessageResponse(1, "头像不能为空！");
+        }
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserId(userProp.getOpenId());
         this.evaluatDataDao.insertSelective(o);
         return new MessageResponse(0, "添加测评结果完成！");
+    }
+
+    @Override
+    public MessageResponse insertData(EvaluatData o)
+            throws Exception {
+        o.setId(GUIDUtil.getGUID());
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getEvaluatTplId())) {
+            return new MessageResponse(1, "评测模板不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getScore())) {
+            return new MessageResponse(1, "成绩不能为空！");
+        }
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        this.evaluatDataDao.insertSelective(o);
+        return new MessageResponse(0, "添加测评结果完成！");
+    }
+
+
+    @Override
+    public int getRanking(EvaluatData o)
+            throws Exception {
+        return this.evaluatDataDao.getRanking(o);
     }
 
     /**
