@@ -1,6 +1,6 @@
-package com.huacainfo.ace.cu.vo;
+package com.huacainfo.ace.jxb.vo;
 
-import com.huacainfo.ace.cu.model.$!{bean.name};
+import com.huacainfo.ace.jxb.model.$!{bean.name};
 
 
 public class $!{bean.name}Vo extends $!{bean.name} {

@@ -42,9 +42,9 @@
 
         <!--与原来mybatis-generator不一样，这个table标签不是必须的。只有对生成的映射有复杂要求时，才需要在这里详细配置-->
 
-        <table tableName="course"
-               domainObjectName="Course"
-               mapperName="CourseDao"
+        <table tableName="counselor"
+               domainObjectName="Counselor"
+               mapperName="CounselorDao"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

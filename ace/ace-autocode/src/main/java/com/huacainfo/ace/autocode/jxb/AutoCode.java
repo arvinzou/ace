@@ -5,9 +5,9 @@ import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 public class AutoCode {
 
     public static void main(String[] args) throws Exception {
-        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("jxb", "课程", "Arvin");
-        Class<?> c = com.huacainfo.ace.jxb.model.Course.class;
-//        Class<?> c = null;
+        AutoCodeUtils autoCodeUtils = new AutoCodeUtils("jxb", "咨询师", "Arvin");
+//        Class<?> c = com.huacainfo.ace.jxb.model.Counselor.class;
+        Class<?> c = null;
         autoCodeUtils.init(c);
 
 //===================================
