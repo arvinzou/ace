@@ -14,9 +14,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="../../common/base.jsp"/>
+    <jsp:include page="../dynamic/common/base.jsp"/>
     <script src="${portalPath}/content/common/js/loader.js?v=${cfg.version}"></script>
-    <%--<script src="${portalPath}/content/portal/js/main/portal4.js?v=${cfg.version}"></script>--%>
+    <%--<script src="${pageContext.request.contextPath}/content/portal/js/main/portal4.js?v=${cfg.version}"></script>--%>
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                             <div class="page-content-inner">
 
                                 <!---==============================================-->
-                                <h1>我是内容</h1>
+                                <h1>hello world</h1>
                                 <!--=======================================-->
 
                             </div>
