@@ -4,6 +4,8 @@ var minute = 0;
 var second = 0;
 var dingshiqi;
 var sumTest;
+var flag = true;
+var eid;
 
 $(function () {
     loadTestInfo();
@@ -21,8 +23,40 @@ $(function () {
 });
 
 function ranking() {
+    if (flag) {
+        flag = false;
+        var url = "/portal/www/test/findEvaluatDataList.do";
+        var data = {
+            evaluatTplId: eid
+        };
+        $.post(url, data, function (result) {
+            if (result.status == 0) {
+                viewRanking(result.data);
+            }
+        });
+    }
     $('.ranking_list').toggleClass("ranking_list_hide");
 }
+
+
+function viewRanking(data) {
+    $('.ranking_list .lists .list_li').empty();
+    for (var i = 0; i < data.length; i++) {
+        var li = RankingLi;
+        li = li.replace('[index]', i + 1)
+            .replace('[headimgurl]', data[i].headimgurl)
+            .replace('[nickname]', data[i].nickname)
+            .replace('[score]', data[i].score);
+        $('.ranking_list .lists .list_li').append($(li));
+    }
+}
+
+
+var RankingLi = ' <li>' +
+    '                <span class="number">[index]</span><span class="user"><img src="[headimgurl]">[nickname]</span><span' +
+    '                    class="score">[score]</span>\n' +
+    '            </li>';
+
 
 
 function starttimer() {
@@ -42,15 +76,36 @@ function timer() {
 }
 
 function loadTestInfo() {
-    var id = localStorage["id"];
+    var url = window.location.href;//'http://zx.huacainfo.com/fundtown/www/download.html?id=b95afac02ed749589b4595a3388a8afc'//
+    var obj = parseQueryString(url);
+    eid = obj.id;
+    if (!eid) {
+        window.location.href = 'testList.html';
+    }
     var url = "/portal/www/test/getEvaluatTpl.do";
     var data = {
-        id: id,
+        id: eid
     }
     $.getJSON(url, data, function (result) {
         viewInfo(result.data);
     });
 }
+
+
+function parseQueryString(url) {
+    var obj = {};
+    var start = url.indexOf("?") + 1;
+    var str = url.substr(start);
+    var arr = str.split("&");
+    for (var i = 0; i < arr.length; i++) {
+        var arr2 = arr[i].split("=");
+        obj[arr2[0]] = arr2[1];
+    }
+    return obj;
+}
+
+
+
 
 function viewInfo(data) {
     for (var key in data) {
@@ -65,7 +120,7 @@ function testDone() {
     $('.model_testlist .model_tool .goon').text('回顾考题');
     $('.model_testlist .model_tool .over').text('结束测试');
     window.clearInterval(dingshiqi);
-    $('.model_testlist .show_score .time_end').text($('.footer .timer').text());
+    $('.model_testlist .show_score .time_end .zztime').text($('.footer .timer').text());
     $('.model_testlist .show_score').show();
     $('.prompt_box').hide();
     pingjia();
@@ -79,13 +134,15 @@ function pingjia() {
     var url = "/portal/www/test/getEvaluation.do";
     var data = {
         score: totalScore,
-        evaluatTplId: localStorage["id"]
-
+        evaluatTplId: eid
     };
     $.post(url, data, function (result) {
-
+        var data = result.data;
+        $('.pingyu .evaluatGauge').text(data.evaluatGauge["content"]);
+        $('.ranking .ranking_num').text(data.ranking);
     });
 }
+
 
 function endTest() {
     location.href = 'testList.html';
@@ -116,13 +173,9 @@ function statisticsScore() {
 }
 
 function loadTest() {
-    var id = localStorage["id"];
-    if (!id) {
-        location.href = 'testList.html';
-    }
     var url = "/portal/www/test/getEvaluatCaseList.do";
     var data = {
-        evaluatTplId: id,
+        evaluatTplId: eid
     }
     $.ajaxSettings.async = false;
     $.getJSON(url, data, function (result) {
@@ -196,9 +249,7 @@ function initWeb() {
         },
         on: {
             slideChangeTransitionEnd: function () {
-                console.log(2);
                 if ((sumTest - 1) == this.activeIndex) {
-                    console.log(2);
                     endingCheck();
                 }
             },
@@ -260,7 +311,6 @@ function selectiOption(e) {
     var $this = $(this);
     var index = mySwiper.activeIndex;
     if ($this.is('.onlyOne')) {
-        console.log('select');
         $this.siblings().children("div.icon").removeClass('options_done');
         $this.children("div.icon").addClass('options_done');
         mySwiper.slideTo(index + 1, 700, false);
@@ -281,7 +331,6 @@ function selectiOption(e) {
 }
 
 function showTestList() {
-    console.log(4);
     $('.prompt_box').hide();
     $('.model_testlist').removeClass('model_testlist_action');
     $('.model_testlist').removeClass('model_testlist_feaction');

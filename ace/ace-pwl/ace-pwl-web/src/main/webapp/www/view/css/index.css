@@ -307,6 +307,7 @@ border-right: 1p solid;*/
 
 .model_testlist .show_score .pingyu p {
     font-size: 0.9rem;
+    text-align: left;
 }
 
 .model_testlist .show_score .time_end {
@@ -319,6 +320,10 @@ border-right: 1p solid;*/
     float: left;
     display: block;
     margin-left: 5vw;
+}
+
+.model_testlist .show_score .ranking .ranking_num {
+    margin-left: 2vw;
 }
 
 .model_testlist .show_score .show_ranking {
