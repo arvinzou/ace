@@ -75,7 +75,7 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
             @ResponseBody
             public MessageResponse insert$!{bean.name}(String jsons) throws Exception {
             $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
-            return this.$!{bean.lowerName}Service.insert$!{bean.name}(obj, this.getjxbrUserProp());
+            return this.$!{bean.lowerName}Service.insert$!{bean.name}(obj, this.getCurUserProp());
             }
 
             /**
@@ -93,7 +93,7 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
             @ResponseBody
             public MessageResponse update$!{bean.name}(String jsons) throws Exception {
             $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
-            return this.$!{bean.lowerName}Service.update$!{bean.name}(obj, this.getjxbrUserProp());
+            return this.$!{bean.lowerName}Service.update$!{bean.name}(obj, this.getCurUserProp());
             }
 
             /**
@@ -129,6 +129,6 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String jsons) throws Exception {
                 JSONObject json = JSON.parseObject(jsons);
                 String id = json.getString("id");
-                return this.$!{bean.lowerName}Service.delete$!{bean.name}By$!{bean.name}Id(id, this.getjxbrUserProp());
+                return this.$!{bean.lowerName}Service.delete$!{bean.name}By$!{bean.name}Id(id, this.getCurUserProp());
                 }
                 }
