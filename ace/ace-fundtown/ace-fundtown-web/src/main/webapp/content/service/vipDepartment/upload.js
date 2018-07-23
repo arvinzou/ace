@@ -16,7 +16,9 @@ function initUploader(browseBtn, id) {
             mime_types: [
                 {title: "Image files", extensions: "jpg,gif,png"},
                 {title: "Office files", extensions: "txt,xls,xlsx,doc,docx,ppt,pptx,pdf"},
-                {title: "Artive files", extensions: "zip,rar,gzip"}
+                {title: "Artive files", extensions: "zip,rar,gzip"},
+                {title: "Media files", extensions: "mp4,avi,wmv,wav"}
+
             ]
         },
         init: {

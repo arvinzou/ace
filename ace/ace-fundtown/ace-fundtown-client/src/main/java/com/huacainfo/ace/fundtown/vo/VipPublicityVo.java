@@ -31,6 +31,19 @@ public class VipPublicityVo extends VipPublicity {
      */
     private String regAddr;
 
+    /**
+     * 投资方向
+     */
+    private String investDirect;
+
+    public String getInvestDirect() {
+        return investDirect;
+    }
+
+    public void setInvestDirect(String investDirect) {
+        this.investDirect = investDirect;
+    }
+
     public String getPid() {
         return pid;
     }

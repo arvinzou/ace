@@ -229,10 +229,13 @@
         <result column="legal_person_name" jdbcType="VARCHAR" property="legalPersonName"/>
         <result column="reg_capital" jdbcType="VARCHAR" property="regCapital"/>
         <result column="reg_addr" jdbcType="VARCHAR" property="regAddr"/>
+        <result column="reg_area_code" jdbcType="VARCHAR" property="investDirect"/>
+
     </resultMap>
     <sql id="Vo_Column_List">
 		d.parent_department_id,d1.department_name as pName,
         d.department_name, d.legal_person_name, d.reg_capital, d.reg_addr,
+        d.reg_area_code,
         t.id, t.deptId, t.belongDeptId, t.belongDeptName, t.delegate,
         t.creditNo, t.zjxRecordDate, t.zjxRecordNo,t.remark, t.status,
         t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
