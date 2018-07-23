@@ -6,13 +6,12 @@ import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.common.constant.KafkaConstant;
 import com.huacainfo.ace.fop.dao.FopCallRecordDao;
 import com.huacainfo.ace.fop.dao.FopCallRecordDetailDao;
 import com.huacainfo.ace.fop.model.FopCallRecord;
@@ -253,8 +252,8 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
         data.put("recordId", recordId);
         data.put("sysId", userProp.getActiveSyId());
 
-//        kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, data);
-        service(data);
+        kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, data);
+//        service(data);
 
         return new MessageResponse(ResultCode.SUCCESS, "发送成功");
     }
@@ -310,7 +309,17 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
 
     @Override
     public MessageResponse test2(Map<String, Object> data) throws Exception {
-        return service(data);
+        //kafka完成实际催缴业务
+//        Map<String, Object> data = new HashMap<>();
+        data.put("service", "fopCallRecordService");
+//        data.put("recordId", recordId);
+//        data.put("sysId", userProp.getActiveSyId());
+
+        kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, data);
+        return new MessageResponse(ResultCode.SUCCESS, "发送成功");
+
+        //way2
+//        return service(data);
     }
 
     /**
@@ -378,9 +387,9 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
         params.put("tmplCode", tmplCode);
         params.put("sysId", sysId);
         //service send
-        ResultResponse rs = messageTemplateService.send(sysId, tmplCode, params);
-        logger.debug("***********sendNotice.ResultResponse: \n{}", JsonUtil.toJson(rs));
+//        ResultResponse rs = messageTemplateService.send(sysId, tmplCode, params);
+//        logger.debug("***********sendNotice.ResultResponse: \n{}", JsonUtil.toJson(rs));
         //kafka send
-//        kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, params);
+        kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, params);
     }
 }
