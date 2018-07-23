@@ -8,13 +8,9 @@ $(function () {
 
 function enterTest() {
     var $this = $(this);
-    if (window.localStorage) {
         //存储变量的值
-        localStorage.id = $this.data('id');
-        location.href = 'test.html';
-    } else {
-        alert("NOT SUPPORT");
-    }
+    location.href = 'test.html?id=' + $this.data('id');
+
 }
 
 function loadTestList() {
@@ -48,7 +44,7 @@ function replaceStr(data) {
 var listTemplate = '<div class="test">' +
     '						<div class="title">' +
     '							<p>#name#</p>' +
-    '							<p class="number">1次</p>' +
+    // '							<p class="number">1次</p>' +
     '						</div>' +
     '						<div class="pen_icon">' +
     '							<i class="iconfont">&#xe63c;</i>' +
