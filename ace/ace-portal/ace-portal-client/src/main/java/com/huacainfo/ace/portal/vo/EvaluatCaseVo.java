@@ -3,6 +3,8 @@ package com.huacainfo.ace.portal.vo;
 
 import com.huacainfo.ace.portal.model.EvaluatCase;
 
+import java.util.List;
+
 
 public class EvaluatCaseVo extends EvaluatCase {
 	private static final long serialVersionUID = 1L;
@@ -30,6 +32,16 @@ public class EvaluatCaseVo extends EvaluatCase {
     private String aCntImg4;
 
     private String isAnswer4;
+
+    private List<EvaluatCaseSubVo> caseSubData;
+
+    public List<EvaluatCaseSubVo> getCaseSubData() {
+        return caseSubData;
+    }
+
+    public void setCaseSubData(List<EvaluatCaseSubVo> caseSubData) {
+        this.caseSubData = caseSubData;
+    }
 
     public String getaName1() {
         return aName1;

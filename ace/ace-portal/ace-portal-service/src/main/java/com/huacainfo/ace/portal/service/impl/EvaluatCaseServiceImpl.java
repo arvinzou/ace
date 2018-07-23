@@ -8,7 +8,9 @@ import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.dao.EvaluatCaseSubDao;
 import com.huacainfo.ace.portal.model.EvaluatCaseSub;
@@ -101,6 +103,31 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
         }
         return rst;
     }
+
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(题目分页查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult<EvaluatCaseVo>
+     * @author: 陈晓克
+     * @version: 2018-06-09
+     */
+    @Override
+    public ResultResponse findEvaluatCaseListVo(EvaluatCaseQVo condition, int start, int limit, String orderBy) throws Exception {
+        List<EvaluatCaseVo> list = this.evaluatCaseDao.findList(condition, start, limit, orderBy);
+        for (EvaluatCaseVo item : list) {
+            List<EvaluatCaseSubVo> listsub = this.evaluatCaseSubDao.findLists(item.getId());
+            item.setCaseSubData(listsub);
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "题目内容列表", list);
+    }
+
 
     /**
      * @throws
