@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.TeacherAuditDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.TeacherAudit">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="counselorId" jdbcType="VARCHAR" property="counselorId"/>
+        <result column="auditor" jdbcType="VARCHAR" property="auditor"/>
+        <result column="statement" jdbcType="VARCHAR" property="statement"/>
+        <result column="rst" jdbcType="CHAR" property="rst"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, counselorId, auditor, statement, rst, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from teacher_audit
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from teacher_audit
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.TeacherAudit">
+    insert into teacher_audit (id, counselorId, auditor, 
+      statement, rst, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{counselorId,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, 
+      #{statement,jdbcType=VARCHAR}, #{rst,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.TeacherAudit">
+        insert into teacher_audit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="counselorId != null">
+                counselorId,
+            </if>
+            <if test="auditor != null">
+                auditor,
+            </if>
+            <if test="statement != null">
+                statement,
+            </if>
+            <if test="rst != null">
+                rst,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="counselorId != null">
+                #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="auditor != null">
+                #{auditor,jdbcType=VARCHAR},
+            </if>
+            <if test="statement != null">
+                #{statement,jdbcType=VARCHAR},
+            </if>
+            <if test="rst != null">
+                #{rst,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.TeacherAudit">
+        update teacher_audit
+        <set>
+            <if test="counselorId != null">
+                counselorId = #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="auditor != null">
+                auditor = #{auditor,jdbcType=VARCHAR},
+            </if>
+            <if test="statement != null">
+                statement = #{statement,jdbcType=VARCHAR},
+            </if>
+            <if test="rst != null">
+                rst = #{rst,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.TeacherAudit">
+    update teacher_audit
+    set counselorId = #{counselorId,jdbcType=VARCHAR},
+      auditor = #{auditor,jdbcType=VARCHAR},
+      statement = #{statement,jdbcType=VARCHAR},
+      rst = #{rst,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

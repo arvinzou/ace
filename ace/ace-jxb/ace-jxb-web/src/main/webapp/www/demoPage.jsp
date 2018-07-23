@@ -34,13 +34,13 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>demoPage</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
 
                                 <!---==============================================-->
-                                <h1>hello world</h1>
+
                                 <!--=======================================-->
 
                             </div>
@@ -55,5 +55,8 @@
 
 </div>
 
+<script id="counselor-tpl-box" type="text/template">
+
+</script>
 </body>
 </html>

@@ -2,12 +2,17 @@ package com.huacainfo.ace.jxb.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.Counselor;
+import com.huacainfo.ace.jxb.model.TeacherAudit;
 import com.huacainfo.ace.jxb.service.CounselorService;
+import com.huacainfo.ace.jxb.service.TeacherAuditService;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
 import org.slf4j.Logger;
@@ -31,6 +36,8 @@ public class CounselorController extends JxbBaseController {
 
     @Autowired
     private CounselorService counselorService;
+    @Autowired
+    private TeacherAuditService teacherAuditService;
 
     /**
      * @throws
@@ -124,5 +131,23 @@ public class CounselorController extends JxbBaseController {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
         return counselorService.deleteCounselorByCounselorId(id, getCurUserProp());
+    }
+
+    /**
+     * 咨询师资格审核
+     *
+     * @param data
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/audit")
+    @ResponseBody
+    public MessageResponse audit(String data) throws Exception {
+        if (StringUtil.isEmpty(data)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        TeacherAudit record = JsonUtil.toObject(data, TeacherAudit.class);
+
+        return teacherAuditService.insertTeacherAudit(record, getCurUserProp());
     }
 }
