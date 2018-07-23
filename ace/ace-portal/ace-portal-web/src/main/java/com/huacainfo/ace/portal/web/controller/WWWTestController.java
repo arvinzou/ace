@@ -78,6 +78,24 @@ public class WWWTestController extends PortalBaseController {
 
 
     /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(题目分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult<EvaluatCaseVo>
+     * @author: 陈晓克
+     * @version: 2018-06-09
+     */
+    @RequestMapping(value = "/getEvaluatCaseListVo.do")
+    @ResponseBody
+    public ResultResponse findEvaluatCaseListVo(EvaluatCaseQVo condition) throws Exception {
+        return this.evaluatCaseService.findEvaluatCaseListVo(condition, 0, 200, null);
+    }
+
+    /**
      * 成绩评判
      *
      * @param condition
