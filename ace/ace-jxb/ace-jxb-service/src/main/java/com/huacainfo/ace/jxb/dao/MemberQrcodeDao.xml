@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.MemberQrcodeDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.MemberQrcode">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="qrcodeType" jdbcType="VARCHAR" property="qrcodeType"/>
+        <result column="expireDate" jdbcType="VARCHAR" property="expireDate"/>
+        <result column="qrcodeUrl" jdbcType="VARCHAR" property="qrcodeUrl"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, userId, qrcodeType, expireDate, qrcodeUrl, remark, status, createDate, updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from member_qrcode
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from member_qrcode
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.MemberQrcode">
+    insert into member_qrcode (id, userId, qrcodeType, 
+      expireDate, qrcodeUrl, remark, 
+      status, createDate, updateDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{qrcodeType,jdbcType=VARCHAR}, 
+      #{expireDate,jdbcType=VARCHAR}, #{qrcodeUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.MemberQrcode">
+        insert into member_qrcode
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="qrcodeType != null">
+                qrcodeType,
+            </if>
+            <if test="expireDate != null">
+                expireDate,
+            </if>
+            <if test="qrcodeUrl != null">
+                qrcodeUrl,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="updateDate != null">
+                updateDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcodeType != null">
+                #{qrcodeType,jdbcType=VARCHAR},
+            </if>
+            <if test="expireDate != null">
+                #{expireDate,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcodeUrl != null">
+                #{qrcodeUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.MemberQrcode">
+        update member_qrcode
+        <set>
+            <if test="userId != null">
+                userId = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcodeType != null">
+                qrcodeType = #{qrcodeType,jdbcType=VARCHAR},
+            </if>
+            <if test="expireDate != null">
+                expireDate = #{expireDate,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcodeUrl != null">
+                qrcodeUrl = #{qrcodeUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                updateDate = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.MemberQrcode">
+    update member_qrcode
+    set userId = #{userId,jdbcType=VARCHAR},
+      qrcodeType = #{qrcodeType,jdbcType=VARCHAR},
+      expireDate = #{expireDate,jdbcType=VARCHAR},
+      qrcodeUrl = #{qrcodeUrl,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

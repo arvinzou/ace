@@ -1,11 +1,16 @@
 package com.huacainfo.ace.jxb.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.CounselorDao;
 import com.huacainfo.ace.jxb.model.Counselor;
@@ -184,8 +189,7 @@ public class CounselorServiceImpl implements CounselorService {
      * @version: 2018-07-20
      */
     @Override
-    public SingleResult
-            <CounselorVo> selectCounselorByPrimaryKey(String id) throws Exception {
+    public SingleResult<CounselorVo> selectCounselorByPrimaryKey(String id) throws Exception {
         SingleResult
                 <CounselorVo> rst = new SingleResult<>();
         rst.setValue(counselorDao.selectVoByPrimaryKey(id));
@@ -211,6 +215,34 @@ public class CounselorServiceImpl implements CounselorService {
         dataBaseLogService.log("删除咨询师", "咨询师",
                 String.valueOf(id), String.valueOf(id), "咨询师", userProp);
         return new MessageResponse(0, "咨询师删除完成！");
+    }
+
+    /**
+     * 注册老师资料
+     *
+     * @param mobile   手机号码
+     * @param studioId 推荐人userid （portal.users.id）
+     * @param userinfo 微信基本信息
+     * @return
+     */
+    @Override
+    public ResultResponse register(String mobile, String studioId, Userinfo userinfo) {
+        Counselor counselor = counselorDao.selectByPrimaryKey(userinfo.getOpenid());
+        if (null == counselor) {
+            counselor = new Counselor();
+            counselor.setId(userinfo.getOpenid());
+            counselor.setStudioId(studioId);
+            counselor.setName(userinfo.getNickname());
+            counselor.setMobile(mobile);
+            counselor.setLevel("0");
+            counselor.setCreateDate(DateUtil.getNowDate());
+            counselorDao.insertSelective(counselor);
+        } else if (StringUtil.isEmpty(counselor.getMobile())) {
+            counselor.setMobile(mobile);
+            counselorDao.updateByPrimaryKeySelective(counselor);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "注册完成");
     }
 
 }

@@ -1,10 +1,17 @@
 package com.huacainfo.ace.jxb.service.impl;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.jxb.constant.RegType;
+import com.huacainfo.ace.jxb.dao.MemberRelationDao;
 import com.huacainfo.ace.jxb.dao.RegDao;
+import com.huacainfo.ace.jxb.model.MemberRelation;
 import com.huacainfo.ace.jxb.model.Reg;
+import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.RegService;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
@@ -16,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by chenxiaoke on 2018/7/12.
@@ -30,9 +36,66 @@ public class RegServiceImpl implements RegService {
 
     @Autowired
     private TaskCmccService taskCmccService;
+    @Autowired
+    private CounselorService counselorService;
+    @Autowired
+    private MemberRelationDao memberRelationDao;
 
+    /**
+     * 判断该号码是否已经注册过
+     */
     @Override
-    public MessageResponse insertReg(Reg reg) throws Exception {
+    public boolean isExitByTel(String mobile) {
+        int temp = this.regDao.isExitByTel(mobile);
+        if (temp > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 统一注册
+     *
+     * @param regType
+     * @param mobile
+     * @param userinfo
+     * @return
+     */
+    @Override
+    public ResultResponse register(String regType, String mobile, Userinfo userinfo) throws Exception {
+        //查询获取上下级关系
+        MemberRelation relation = memberRelationDao.findByOpenid(userinfo.getOpenid());
+        String studioId = "";
+        if (null != relation) {
+            studioId = relation.getStudioId();
+        }
+        //老师注册流程
+        if (RegType.TEACHER.equals(regType)) {
+            ResultResponse rs1 = counselorService.register(mobile, studioId, userinfo);
+            if (rs1.getStatus() == ResultCode.FAIL) {
+                return rs1;
+            }
+        } else if (RegType.PARENT.equals(regType)) {
+
+        } else {
+            return new ResultResponse(ResultCode.FAIL, "注册失败 - 未知注册身份类型");
+        }
+
+        Reg reg = new Reg();
+        reg.setNickname(userinfo.getNickname());
+        reg.setMobile(mobile);
+        reg.setUnionId(userinfo.getUnionid());
+        return new ResultResponse(insertReg(reg, regType));
+    }
+
+    /**
+     * @param regType 身份标识 1 -- 老师 ，2 - 家长
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse insertReg(Reg reg, String regType) throws Exception {
         if (CommonUtils.isBlank(reg.getNickname())) {
             return new MessageResponse(1, "昵称不能为空！");
         }
@@ -42,11 +105,11 @@ public class RegServiceImpl implements RegService {
         if (CommonUtils.isBlank(reg.getUnionId())) {
             return new MessageResponse(1, "微信UnionId不能为空！");
         }
-        int temp = this.regDao.isExitByTel(reg.getMobile());
-        if (temp > 0) {
+//        int temp = this.regDao.isExitByTel(reg.getMobile());
+        if (isExitByTel(reg.getMobile())) {
             return new MessageResponse(1, "手机号已注册过，请重新填写另一新的手机号!");
         }
-        String pwd = getRandCode();
+        String pwd = CommonUtils.getIdentifyCode(6, 0);
         Users o = new Users();
         o.setUserId(reg.getUnionId());
         o.setAccount(reg.getMobile());
@@ -58,24 +121,18 @@ public class RegServiceImpl implements RegService {
         o.setCurSyid("jxb");
         o.setOpenId(reg.getUnionId());
         o.setCreateTime(new java.util.Date());
+        o.setUserLevel(regType);//身份标识 1 -- 老师 ，2 - 家长
         this.regDao.insertReg(o);
+        //密码短信通知
         TaskCmcc obj = new TaskCmcc();
         Map<String, Object> msg = new HashMap<String, Object>();
         msg.put("taskName", "账号" + reg.getMobile());
-        msg.put("msg", reg.getNickname() + "你好，注册成功，账号" + reg.getMobile() + "，密码" + pwd + "。【尽心帮】");
+        msg.put("msg", reg.getNickname() + "你好，注册成功，账号" + reg.getMobile() + "，密码" + pwd + "。【近心帮】");
         msg.put("tel", reg.getMobile() + "," + reg.getMobile());
         CommonBeanUtils.copyMap2Bean(o, msg);
         this.taskCmccService.insertTaskCmcc(obj);
+        //******************
         return new MessageResponse(0, "注册成功.");
     }
 
-    private String getRandCode() {
-        Random random = new Random();
-        String sRand = "";
-        for (int i = 0; i < 6; i++) {
-            String rand = String.valueOf(random.nextInt(10));
-            sRand += rand;
-        }
-        return sRand;
-    }
 }

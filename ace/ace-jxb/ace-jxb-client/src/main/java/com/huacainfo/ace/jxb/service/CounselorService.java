@@ -1,8 +1,10 @@
 package com.huacainfo.ace.jxb.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
@@ -82,4 +84,13 @@ public interface CounselorService {
      */
     MessageResponse deleteCounselorByCounselorId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 注册老师资料
+     *
+     * @param mobile   手机号码
+     * @param studioId 推荐人userid （portal.users.id）
+     * @param userinfo 微信基本信息
+     * @return
+     */
+    ResultResponse register(String mobile, String studioId, Userinfo userinfo);
 }
