@@ -117,6 +117,7 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
+
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem hide">
@@ -135,24 +136,9 @@
             <span id="projectName"></span>
         </div>
         <div class="labelItem">
-            <span class="labelItemHeader">项目标题</span>
-            <br>
-            <span id="title"></span>
-        </div>
-        <div class="labelItem">
             <span class="labelItemHeader">项目类型</span>
             <br>
             <span id="type"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">项目封面</span>
-            <br>
-            <span id="coverUrl"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">项目详情</span>
-            <br>
-            <span id="description"></span>
         </div>
         <div class="labelItem">
             <span class="labelItemHeader">项目开始时间</span>
@@ -195,6 +181,19 @@
             <span id="status"></span>
         </div>
     </div>
+
+    <h5 class="header-title">项目标题</h5>
+    <div id="title" class="row" style="padding:10px">
+    </div>
+
+    <h5 class="header-title">项目封面</h5>
+    <div id="coverUrl" class="row" style="padding:10px">
+    </div>
+
+    <h5 class="header-title">项目详情</h5>
+    <div id="description" class="row" style="padding:10px">
+    </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem hide">

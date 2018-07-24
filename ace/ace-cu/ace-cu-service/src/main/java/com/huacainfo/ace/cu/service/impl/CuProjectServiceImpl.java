@@ -521,7 +521,7 @@ public class CuProjectServiceImpl implements CuProjectService {
             return new MessageResponse(1, "慈善项目名称重复！");
         }
         o.setId(GUIDUtil.getGUID());
-        o.setParentId("0");
+//        o.setParentId("0");
         o.setStatus("1");
         o.setCreateDate(DateUtil.getNowDate());
         o.setCreateUserName(userProp.getName());
