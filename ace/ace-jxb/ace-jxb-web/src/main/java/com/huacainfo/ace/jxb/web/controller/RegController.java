@@ -84,19 +84,18 @@ public class RegController extends JxbBaseController {
         }
         //验证码校验
         String sessionCode = (String) this.getRequest().getSession().getAttribute("j_captcha_cmcc_" + mobile);
+        logger.debug("[jxb]RegController.register=>mobile:{},code:{}", mobile, code);
         if (!code.equals(sessionCode)) {
             return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
         }
         //获取接口身份
         Userinfo userinfo = getCurUserinfo();
-        if (StringUtil.isEmpty(openId)) {
-            if (null != userinfo) {
-                openId = userinfo.getOpenid();
-            }
-        } else {
+        if (StringUtil.isNotEmpty(openId)) {
             userinfo = new Userinfo();
             userinfo.setUnionid(openId);
             userinfo.setOpenid(openId);
+            userinfo.setNickname("test");
+            userinfo.setSex("1");
         }
         //openid不能为空
         if (StringUtil.isEmpty(openId)) {
@@ -105,4 +104,24 @@ public class RegController extends JxbBaseController {
 
         return regService.register(regType, mobile, userinfo);
     }
+
+    /**
+     * 个人中心数据展示
+     *
+     * @return
+     */
+    @RequestMapping("/findInfo")
+    public ResultResponse findInfo(String openid) throws Exception {
+        Userinfo userinfo = getCurUserinfo();
+        if (StringUtil.isNotEmpty(openid)) {
+            userinfo = new Userinfo();
+            userinfo.setOpenid(openid);
+            userinfo.setUnionid(openid);
+            userinfo.setNickname("test");
+        }
+
+        return regService.findInfo(userinfo);
+
+    }
+
 }

@@ -190,8 +190,7 @@ public class CounselorServiceImpl implements CounselorService {
      */
     @Override
     public SingleResult<CounselorVo> selectCounselorByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <CounselorVo> rst = new SingleResult<>();
+        SingleResult<CounselorVo> rst = new SingleResult<>();
         rst.setValue(counselorDao.selectVoByPrimaryKey(id));
         return rst;
     }
@@ -230,8 +229,8 @@ public class CounselorServiceImpl implements CounselorService {
         Counselor counselor = counselorDao.selectByPrimaryKey(userinfo.getOpenid());
         if (null == counselor) {
             counselor = new Counselor();
-            counselor.setId(userinfo.getOpenid());
-            counselor.setStudioId(studioId);
+            counselor.setId(userinfo.getUnionid());
+            counselor.setStudioId(StringUtil.isEmpty(studioId) ? "0" : studioId);
             counselor.setName(userinfo.getNickname());
             counselor.setMobile(mobile);
             counselor.setLevel("0");

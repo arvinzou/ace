@@ -14,6 +14,16 @@ public class Reg implements java.io.Serializable {
 
     private String mobile;
 
+    private String sex;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public String getNickname() {
         return nickname;
     }

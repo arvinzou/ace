@@ -49,13 +49,10 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
      * @version: 2018-07-23
      */
     @Override
-    public PageResult
-            <MemberQrcodeVo> findMemberQrcodeList(MemberQrcodeQVo condition, int start,
-                                                  int limit, String orderBy) throws Exception {
-        PageResult
-                <MemberQrcodeVo> rst = new PageResult<>();
-        List
-                <MemberQrcodeVo> list = this.memberQrcodeDao.findList(condition,
+    public PageResult<MemberQrcodeVo> findMemberQrcodeList(MemberQrcodeQVo condition, int start,
+                                                           int limit, String orderBy) throws Exception {
+        PageResult<MemberQrcodeVo> rst = new PageResult<>();
+        List<MemberQrcodeVo> list = this.memberQrcodeDao.findList(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
@@ -104,8 +101,8 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
-        o.setCreateUserName(userProp.getName());
-        o.setCreateUserId(userProp.getUserId());
+//        o.setCreateUserName(userProp.getName());
+//        o.setCreateUserId(userProp.getUserId());
         this.memberQrcodeDao.insertSelective(o);
         this.dataBaseLogService.log("添加会员二维码表", "会员二维码表", "",
                 o.getId(), o.getId(), userProp);
@@ -143,9 +140,9 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
         }
 
 
-        o.setLastModifyDate(new Date());
-        o.setLastModifyUserName(userProp.getName());
-        o.setLastModifyUserId(userProp.getUserId());
+//        o.setLastModifyDate(new Date());
+//        o.setLastModifyUserName(userProp.getName());
+//        o.setLastModifyUserId(userProp.getUserId());
         this.memberQrcodeDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更会员二维码表", "会员二维码表", "",
                 o.getId(), o.getId(), userProp);
@@ -164,8 +161,7 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
      * @version: 2018-07-23
      */
     @Override
-    public SingleResult
-            <MemberQrcodeVo> selectMemberQrcodeByPrimaryKey(String id) throws Exception {
+    public SingleResult<MemberQrcodeVo> selectMemberQrcodeByPrimaryKey(String id) throws Exception {
         SingleResult
                 <MemberQrcodeVo> rst = new SingleResult<>();
         rst.setValue(this.memberQrcodeDao.selectVoByPrimaryKey(id));

@@ -49,13 +49,10 @@ public class MemberRelationServiceImpl implements MemberRelationService {
      * @version: 2018-07-23
      */
     @Override
-    public PageResult
-            <MemberRelationVo> findMemberRelationList(MemberRelationQVo condition, int start,
-                                                      int limit, String orderBy) throws Exception {
-        PageResult
-                <MemberRelationVo> rst = new PageResult<>();
-        List
-                <MemberRelationVo> list = this.memberRelationDao.findList(condition,
+    public PageResult<MemberRelationVo> findMemberRelationList(MemberRelationQVo condition, int start,
+                                                               int limit, String orderBy) throws Exception {
+        PageResult<MemberRelationVo> rst = new PageResult<>();
+        List<MemberRelationVo> list = this.memberRelationDao.findList(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
@@ -104,8 +101,8 @@ public class MemberRelationServiceImpl implements MemberRelationService {
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
-        o.setCreateUserName(userProp.getName());
-        o.setCreateUserId(userProp.getUserId());
+//        o.setCreateUserName(userProp.getName());
+//        o.setCreateUserId(userProp.getUserId());
         this.memberRelationDao.insertSelective(o);
         this.dataBaseLogService.log("添加会员关系表", "会员关系表", "",
                 o.getId(), o.getId(), userProp);
@@ -143,9 +140,9 @@ public class MemberRelationServiceImpl implements MemberRelationService {
         }
 
 
-        o.setLastModifyDate(new Date());
-        o.setLastModifyUserName(userProp.getName());
-        o.setLastModifyUserId(userProp.getUserId());
+//        o.setLastModifyDate(new Date());
+//        o.setLastModifyUserName(userProp.getName());
+//        o.setLastModifyUserId(userProp.getUserId());
         this.memberRelationDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更会员关系表", "会员关系表", "",
                 o.getId(), o.getId(), userProp);
@@ -164,10 +161,8 @@ public class MemberRelationServiceImpl implements MemberRelationService {
      * @version: 2018-07-23
      */
     @Override
-    public SingleResult
-            <MemberRelationVo> selectMemberRelationByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <MemberRelationVo> rst = new SingleResult<>();
+    public SingleResult<MemberRelationVo> selectMemberRelationByPrimaryKey(String id) throws Exception {
+        SingleResult<MemberRelationVo> rst = new SingleResult<>();
         rst.setValue(this.memberRelationDao.selectVoByPrimaryKey(id));
         return rst;
     }

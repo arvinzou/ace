@@ -29,4 +29,12 @@ public interface RegService {
      * @return
      */
     ResultResponse register(String regType, String mobile, Userinfo userinfo) throws Exception;
+
+    /**
+     * 查询会员信息
+     *
+     * @param userinfo
+     * @return
+     */
+    ResultResponse findInfo(Userinfo userinfo) throws Exception;
 }

@@ -1,4 +1,4 @@
-import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
 /**
@@ -10,6 +10,6 @@ public class CommonTest {
 
     @Test
     public void test() {
-        System.out.println(CommonUtils.getIdentifyCode(6, 0));
+        System.out.println(GUIDUtil.getGUID());
     }
 }

@@ -271,16 +271,18 @@
 
     </resultMap>
     <sql id="Vo_Column_List">
-        id, studioId, name, certification, tags, years, mobile, imagePhotoUrl, visitCardUrl,
-        idCard, idCardImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm, income,
-        account, level, createDate, profile
+        c.name as rpName,
+        t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
+        t.idCard, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm, t.income,
+        t.account, t.level, t.createDate, t.profile
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from counselor
-        where id = #{id,jdbcType=VARCHAR}
+        <include refid="Vo_Column_List"/>
+        from counselor t
+        left join counselor c on c.id = t.studioId
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -301,6 +303,7 @@
 
     <sql id="whereCondition">
         from counselor t
+        left join counselor c on c.id = t.studioId
         where 1=1
         <if test="condition.id !=null and condition.id !=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
