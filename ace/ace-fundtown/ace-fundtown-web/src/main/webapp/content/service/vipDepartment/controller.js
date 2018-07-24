@@ -34,6 +34,7 @@ jQuery(function ($) {
     $('#btn-view-add').on(
         'click',
         function () {
+            var regAddr = "常德市柳叶湖旅游度假区七里桥街道戴家岗社区清科基金小镇";
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
                 'new',
@@ -47,6 +48,8 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        //默认注册地址
+                        $('#regAddr').val(regAddr);
                     }
                 })
         });
@@ -58,6 +61,10 @@ jQuery(function ($) {
                 $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext)
             }
             var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            var regAddr = rowData.regAddr;
+            if (regAddr == '' || null == regAddr || regAddr == undefined) {
+                regAddr = "常德市柳叶湖旅游度假区七里桥街道戴家岗社区清科基金小镇";
+            }
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
                 gr,
@@ -75,6 +82,8 @@ jQuery(function ($) {
                             '.ui-jqdialog-titlebar').wrapInner(
                             '<div class="widget-header" />')
                         style_edit_form(form);
+                        //默认注册地址
+                        $('#regAddr').val(regAddr);
                     }
                 })
         });
