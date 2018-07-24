@@ -1,88 +1,91 @@
-* {
-    padding: 0;
-    margin: 0;
+*{
+	padding: 0;
+	margin: 0;
 }
-
-body {
-    background: #F7F9FC;
+body{
+	background: #F7F9FC;
 }
-
-.container {
-    margin: 0;
-    padding: 0;
-    background: #FFFFFF;
-    margin-bottom: 0.266666rem;
+.container{
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF;
+	margin-bottom: 0.266666rem;
+	padding-top: 0.586666rem;
+	padding-bottom: 0.44rem;
 }
-
-.row {
-    margin: 0;
-    padding: 0;
+.row{
+	margin: 0;
+	padding: 0;
 }
-
-.row_01 {
-    height: 2rem;
-    padding-top: 0.19333;
+.project_nav_ul li{
+	width: 25%;
+	height: 100%;
+	display: block;
+	float: left;
 }
-
-.head_img {
-    width: 1.613333rem;
-    height: 1.613333rem;
+.project_nav_ul li:after{
+	content: "";
+	clear: both;
 }
-
-.consotor {
-    height: 0.8rem;
+.row_01{
+	height: 2rem;
+	padding-top: 0.19333;
 }
-
-.level {
-    width: 0.32rem;
-    height: 0.306666rem;
+.head_img{
+	width: 1.613333rem;
+	height: 1.613333rem;
 }
-
-.col-xs-6 .col-xs-6 {
-    padding: 0;
+.consotor{
+	height: 0.8rem;
 }
-
-.chat {
-    width: 1.933333rem;
-    height: 0.72rem;
-    line-height: 0.72rem;
-    display: block;
-    text-align: center;
-    border-radius: 0.36rem;
-    color: #A0A7B6;
-    border: none;
-    outline: none;
-    margin-top: 0.45rem;
-    border: 1px solid #A0A7B6;
-    background: #FFFFFF;
+.level{
+	width: 0.32rem;
+	height: 0.306666rem;
+	margin-bottom: 0.1rem;
 }
-
-.dorder {
-    height: 1rem;
-    width: 100%;
-    line-height: 1rem;
-    border-top: 1px solid #F7F8FC;
-    border-bottom: 1px solid #F7F8FC;
+.col-xs-6 .col-xs-6{
+	padding: 0;
 }
-
-.dorder_title {
-    color: #5C6681;
-    font-size: 0.346666rem;
-    font-weight: bold;
+.chat{
+	width: 1.933333rem;
+	height: 0.72rem;
+	line-height: 0.72rem;
+	display: block;
+	text-align: center;
+	border-radius: 0.36rem;
+	color: #A0A7B6;
+	border: none;
+	outline: none;
+	margin-top: 0.45rem;
+	border: 1px solid #A0A7B6;
+	background: #FFFFFF;
 }
-
-.dorder_num {
-    font-size: 0.4rem;
-    color: #FF7C12;
-    font-weight: bold;
+.dorder{
+	height: 1rem;
+	width: 100%;
+	line-height: 1rem;
+	border-top: 1px solid #F7F8FC;
+	border-bottom: 1px solid #F7F8FC;
 }
-
-.order_num {
-    font-size: 0.32rem;
-    color: #A0A7B6;
+.dorder_title{
+	color: #5C6681;
+	font-size:0.346666rem;
+	font-weight: bold;
 }
-
-.order_state {
-    font-size: 0.373333rem;
-    color: #FF7C12;
+.dorder_num{
+	font-size: 0.4rem;
+	color: #FF7C12;
+	font-weight: bold;
+}
+.order_num{
+	font-size: 0.32rem;
+	color: #A0A7B6;
+}
+.unfinished{
+	font-size: 0.373333rem;
+	color:#FF7C12;
+}
+.finished{
+	font-size: 0.373333rem;
+	color:#0EC8C4;
 }
