@@ -23,14 +23,20 @@ public interface MemberQrcodeDao {
 
     MemberQrcodeVo selectVoByPrimaryKey(String id);
 
-    List
-            <MemberQrcodeVo> findList(@Param("condition") MemberQrcodeQVo condition,
-                                      @Param("start") int start,
-                                      @Param("limit") int limit,
-                                      @Param("orderBy") String orderBy);
+    List<MemberQrcodeVo> findList(@Param("condition") MemberQrcodeQVo condition,
+                                  @Param("start") int start,
+                                  @Param("limit") int limit,
+                                  @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") MemberQrcodeQVo condition);
 
     int isExit(MemberQrcode record);
 
+    /**
+     * 根据Userid获取二维码信息
+     *
+     * @param userId userId
+     * @return MemberQrcode
+     */
+    MemberQrcode findByStudioId(String userId);
 }

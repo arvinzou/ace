@@ -1,20 +1,18 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class TeacherAudit {
+public class ConsultProduct {
     private String id;
 
     private String counselorId;
 
-    private String auditor;
+    private String type;
 
-    private String statement;
+    private BigDecimal price;
 
-    /**
-     * 审核结果 0-待审核 1-审核通过 2-审核不通过
-     */
-    private String rst;
+    private String status;
 
     private Date createDate;
 
@@ -34,28 +32,28 @@ public class TeacherAudit {
         this.counselorId = counselorId == null ? null : counselorId.trim();
     }
 
-    public String getAuditor() {
-        return auditor;
+    public String getType() {
+        return type;
     }
 
-    public void setAuditor(String auditor) {
-        this.auditor = auditor == null ? null : auditor.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
-    public String getStatement() {
-        return statement;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setStatement(String statement) {
-        this.statement = statement == null ? null : statement.trim();
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    public String getRst() {
-        return rst;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRst(String rst) {
-        this.rst = rst == null ? null : rst.trim();
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public Date getCreateDate() {

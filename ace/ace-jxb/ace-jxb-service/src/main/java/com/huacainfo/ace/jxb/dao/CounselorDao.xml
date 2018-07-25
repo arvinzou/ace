@@ -268,10 +268,11 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CounselorVo">
-
+        <result column="rpName" jdbcType="VARCHAR" property="studioName"/>
+        <result column="regAuditRst" jdbcType="VARCHAR" property="regAuditRst"/>
     </resultMap>
     <sql id="Vo_Column_List">
-        c.name as rpName,
+        c.name as rpName,IFNULL(ta.rst,'0') as regAuditRst,
         t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
         t.idCard, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm, t.income,
         t.account, t.level, t.createDate, t.profile
@@ -282,12 +283,12 @@
         <include refid="Vo_Column_List"/>
         from counselor t
         left join counselor c on c.id = t.studioId
+        left join teacher_audit ta on ta.counselorId=t.id
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
         <include refid="Vo_Column_List"/>
         <include refid="whereCondition"/>
         <choose>
@@ -304,6 +305,7 @@
     <sql id="whereCondition">
         from counselor t
         left join counselor c on c.id = t.studioId
+        left join teacher_audit ta on ta.counselorId=t.id
         where 1=1
         <if test="condition.id !=null and condition.id !=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}

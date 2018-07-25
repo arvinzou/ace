@@ -5,7 +5,9 @@ import java.util.Date;
 public class MemberQrcode {
     private String id;
 
-    private String userId;
+    private String studioId;
+
+    private String sceneStr;
 
     private String qrcodeType;
 
@@ -29,12 +31,20 @@ public class MemberQrcode {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getUserId() {
-        return userId;
+    public String getStudioId() {
+        return studioId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setStudioId(String studioId) {
+        this.studioId = studioId == null ? null : studioId.trim();
+    }
+
+    public String getSceneStr() {
+        return sceneStr;
+    }
+
+    public void setSceneStr(String sceneStr) {
+        this.sceneStr = sceneStr == null ? null : sceneStr.trim();
     }
 
     public String getQrcodeType() {

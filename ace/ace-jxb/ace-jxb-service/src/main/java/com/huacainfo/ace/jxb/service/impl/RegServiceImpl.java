@@ -114,8 +114,10 @@ public class RegServiceImpl implements RegService {
                 return new ResultResponse(ResultCode.FAIL, "咨询师资料丢失");
             }
             rtnMap.put("counselor", counselor);
+            rtnMap.put("memberType", "1");//1-咨询师 2-家长
         } else if (RegType.PARENT.equals(users.getUserLevel())) {
             // TODO: 2018/7/24 家长身份逻辑待续
+            rtnMap.put("memberType", "2");
         }
 
         rtnMap.put("nickName", userinfo.getNickname());

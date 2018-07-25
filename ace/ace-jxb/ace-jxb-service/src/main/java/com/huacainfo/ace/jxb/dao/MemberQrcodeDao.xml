@@ -3,7 +3,8 @@
 <mapper namespace="com.huacainfo.ace.jxb.dao.MemberQrcodeDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.MemberQrcode">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="studioId" jdbcType="VARCHAR" property="studioId"/>
+        <result column="sceneStr" jdbcType="VARCHAR" property="sceneStr"/>
         <result column="qrcodeType" jdbcType="VARCHAR" property="qrcodeType"/>
         <result column="expireDate" jdbcType="VARCHAR" property="expireDate"/>
         <result column="qrcodeUrl" jdbcType="VARCHAR" property="qrcodeUrl"/>
@@ -13,7 +14,8 @@
         <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, userId, qrcodeType, expireDate, qrcodeUrl, remark, status, createDate, updateDate
+        id, studioId, sceneStr, qrcodeType, expireDate, qrcodeUrl, remark, status,
+        createDate, updateDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -26,14 +28,14 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.MemberQrcode">
-    insert into member_qrcode (id, userId, qrcodeType, 
-      expireDate, qrcodeUrl, remark, 
-      status, createDate, updateDate
-      )
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{qrcodeType,jdbcType=VARCHAR}, 
-      #{expireDate,jdbcType=VARCHAR}, #{qrcodeUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
-      )
+        insert into member_qrcode (id, studioId,
+        sceneStr, qrcodeType, expireDate,
+        qrcodeUrl, remark, status,
+        createDate, updateDate)
+        values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR},
+        #{sceneStr,jdbcType=VARCHAR}, #{qrcodeType,jdbcType=VARCHAR}, #{expireDate,jdbcType=VARCHAR},
+        #{qrcodeUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.MemberQrcode">
         insert into member_qrcode
@@ -41,8 +43,11 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="userId != null">
-                userId,
+            <if test="studioId != null">
+                studioId,
+            </if>
+            <if test="sceneStr != null">
+                sceneStr,
             </if>
             <if test="qrcodeType != null">
                 qrcodeType,
@@ -70,8 +75,11 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="userId != null">
-                #{userId,jdbcType=VARCHAR},
+            <if test="studioId != null">
+                #{studioId,jdbcType=VARCHAR},
+            </if>
+            <if test="sceneStr != null">
+                #{sceneStr,jdbcType=VARCHAR},
             </if>
             <if test="qrcodeType != null">
                 #{qrcodeType,jdbcType=VARCHAR},
@@ -99,8 +107,11 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.MemberQrcode">
         update member_qrcode
         <set>
-            <if test="userId != null">
-                userId = #{userId,jdbcType=VARCHAR},
+            <if test="studioId != null">
+                studioId = #{studioId,jdbcType=VARCHAR},
+            </if>
+            <if test="sceneStr != null">
+                sceneStr = #{sceneStr,jdbcType=VARCHAR},
             </if>
             <if test="qrcodeType != null">
                 qrcodeType = #{qrcodeType,jdbcType=VARCHAR},
@@ -128,7 +139,8 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.MemberQrcode">
     update member_qrcode
-    set userId = #{userId,jdbcType=VARCHAR},
+        set studioId = #{studioId,jdbcType=VARCHAR},
+        sceneStr = #{sceneStr,jdbcType=VARCHAR},
       qrcodeType = #{qrcodeType,jdbcType=VARCHAR},
       expireDate = #{expireDate,jdbcType=VARCHAR},
       qrcodeUrl = #{qrcodeUrl,jdbcType=VARCHAR},
@@ -138,4 +150,12 @@
       updateDate = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+    <select id="findByStudioId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from member_qrcode
+        where studioId = #{studioId,jdbcType=VARCHAR}
+    </select>
 </mapper>

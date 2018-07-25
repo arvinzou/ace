@@ -3,6 +3,7 @@ package com.huacainfo.ace.jxb.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.MemberQrcode;
 import com.huacainfo.ace.jxb.vo.MemberQrcodeQVo;
@@ -28,9 +29,8 @@ public interface MemberQrcodeService {
      * @author: Arvin
      * @version: 2018-07-23
      */
-    PageResult
-            <MemberQrcodeVo> findMemberQrcodeList(MemberQrcodeQVo condition,
-                                                  int start, int limit, String orderBy) throws Exception;
+    PageResult<MemberQrcodeVo> findMemberQrcodeList(MemberQrcodeQVo condition,
+                                                    int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,8 +68,7 @@ public interface MemberQrcodeService {
      * @author: Arvin
      * @version: 2018-07-23
      */
-    SingleResult
-            <MemberQrcodeVo> selectMemberQrcodeByPrimaryKey(String id) throws Exception;
+    SingleResult<MemberQrcodeVo> selectMemberQrcodeByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -84,4 +83,13 @@ public interface MemberQrcodeService {
      */
     MessageResponse deleteMemberQrcodeByMemberQrcodeId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 获取咨询师推广二维码
+     *
+     * @param studioId 工作室ID
+     * @param type     二维码时效类型 0-临时 1-永久
+     * @param refresh  强制刷新条件 0-正常获取 1 - 强制刷新
+     * @return ResultResponse
+     */
+    ResultResponse getQRCode(String studioId, String type, String refresh) throws Exception;
 }

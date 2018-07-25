@@ -6,7 +6,7 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.PropertyUtil;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.service.RegService;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.service.TaskCmccService;
@@ -56,11 +56,9 @@ public class RegController extends JxbBaseController {
         if (!CommonUtils.isValidMobile(mobile)) {
             return new ResultResponse(ResultCode.FAIL, "手机号格式错误");
         }
-        String smsSign = StringUtil.isEmpty(PropertyUtil.getProperty("sms.sign")) ?
-                "【华彩伟业】" : PropertyUtil.getProperty("sms.sign");
         Map<String, Object> msg = new HashMap<>();
         msg.put("taskName", "验证码" + mobile);
-        msg.put("msg", "本次提交验证码为" + randCode + "，请及时输入。" + smsSign);
+        msg.put("msg", "本次提交验证码为" + randCode + "，请及时输入。" + "【近心帮】");
         msg.put("tel", mobile + "," + mobile + ";");
         CommonBeanUtils.copyMap2Bean(o, msg);
         logger.debug(mobile + "=>j_captcha_cmcc:{}",
@@ -96,7 +94,10 @@ public class RegController extends JxbBaseController {
             userinfo.setOpenid(openId);
             userinfo.setNickname("test");
             userinfo.setSex("1");
+        } else {
+            openId = userinfo.getOpenid();
         }
+        logger.debug("RegController.register[userinfo]:{}", JsonUtil.toJson(userinfo));
         //openid不能为空
         if (StringUtil.isEmpty(openId)) {
             return new ResultResponse(ResultCode.FAIL, "获取微信身份失败");
@@ -111,14 +112,16 @@ public class RegController extends JxbBaseController {
      * @return
      */
     @RequestMapping("/findInfo")
-    public ResultResponse findInfo(String openid) throws Exception {
+    public ResultResponse findInfo(String openId) throws Exception {
         Userinfo userinfo = getCurUserinfo();
-        if (StringUtil.isNotEmpty(openid)) {
+        if (StringUtil.isNotEmpty(openId)) {
             userinfo = new Userinfo();
-            userinfo.setOpenid(openid);
-            userinfo.setUnionid(openid);
+            userinfo.setOpenid(openId);
+            userinfo.setUnionid(openId);
             userinfo.setNickname("test");
+            userinfo.setSex("1");
         }
+        logger.debug("RegController.findInfo[userinfo]:{}", JsonUtil.toJson(userinfo));
 
         return regService.findInfo(userinfo);
 

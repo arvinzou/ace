@@ -26,7 +26,7 @@ import java.util.TreeMap;
  */
 @Controller
 @RequestMapping("/www/wxpay")
-public class WWWWxPayController extends JxbBaseController {
+public class WWxPayController extends JxbBaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 

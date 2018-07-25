@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.StudioDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.Studio">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="studioId" jdbcType="VARCHAR" property="studioId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="level" jdbcType="VARCHAR" property="level"/>
+        <result column="counselorId" jdbcType="VARCHAR" property="counselorId"/>
+        <result column="logoImgUrl" jdbcType="VARCHAR" property="logoImgUrl"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.jxb.model.Studio">
+        <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, studioId, name, level, counselorId, logoImgUrl, status, createDate
+  </sql>
+    <sql id="Blob_Column_List">
+    introduce
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from studio
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from studio
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Studio">
+    insert into studio (id, studioId, name, 
+      level, counselorId, logoImgUrl, 
+      status, createDate, introduce
+      )
+    values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{counselorId,jdbcType=VARCHAR}, #{logoImgUrl,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Studio">
+        insert into studio
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="studioId != null">
+                studioId,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="counselorId != null">
+                counselorId,
+            </if>
+            <if test="logoImgUrl != null">
+                logoImgUrl,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="introduce != null">
+                introduce,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="studioId != null">
+                #{studioId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=VARCHAR},
+            </if>
+            <if test="counselorId != null">
+                #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="logoImgUrl != null">
+                #{logoImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="introduce != null">
+                #{introduce,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.Studio">
+        update studio
+        <set>
+            <if test="studioId != null">
+                studioId = #{studioId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=VARCHAR},
+            </if>
+            <if test="counselorId != null">
+                counselorId = #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="logoImgUrl != null">
+                logoImgUrl = #{logoImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="introduce != null">
+                introduce = #{introduce,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.jxb.model.Studio">
+    update studio
+    set studioId = #{studioId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      counselorId = #{counselorId,jdbcType=VARCHAR},
+      logoImgUrl = #{logoImgUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      introduce = #{introduce,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Studio">
+    update studio
+    set studioId = #{studioId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      counselorId = #{counselorId,jdbcType=VARCHAR},
+      logoImgUrl = #{logoImgUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

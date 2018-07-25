@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.StudioImgDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.StudioImg">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="studioId" jdbcType="VARCHAR" property="studioId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="imgUrl" jdbcType="VARCHAR" property="imgUrl"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, studioId, name, imgUrl, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from studio_img
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from studio_img
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.StudioImg">
+    insert into studio_img (id, studioId, name, 
+      imgUrl, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.StudioImg">
+        insert into studio_img
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="studioId != null">
+                studioId,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="imgUrl != null">
+                imgUrl,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="studioId != null">
+                #{studioId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.StudioImg">
+        update studio_img
+        <set>
+            <if test="studioId != null">
+                studioId = #{studioId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                imgUrl = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.StudioImg">
+    update studio_img
+    set studioId = #{studioId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      imgUrl = #{imgUrl,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

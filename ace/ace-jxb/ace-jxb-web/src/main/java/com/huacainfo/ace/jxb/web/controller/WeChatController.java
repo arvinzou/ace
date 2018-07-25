@@ -175,13 +175,13 @@ public class WeChatController extends MsgControllerAdapter {
     @Override
     protected String processInQrCodeEvent(InQrCodeEvent inQrCodeEvent) {
         //scene场景值，被推荐人fromusername，原始id：tousername(进一步得到sysAccount)
-        String scene = inQrCodeEvent.getEventKey();
+        String scene = inQrCodeEvent.getEventKey();//qrscene_
         if (scene.startsWith("qrscene")) {
             scene = scene.substring(scene.indexOf('_') + 1);
         }
         String openid = inQrCodeEvent.getFromUserName();
-        logger.debug(" ===================processInQrCodeEvent[jxb]===================\n" +
-                " scene:{},openid={}", scene, openid);
+        logger.debug("===================processInQrCodeEvent[jxb]===================\n" +
+                "=======================scene:{},openid={}", scene, openid);
         // 1. 用户未关注时，进行关注后的事件推送： subscribe
         if (InQrCodeEvent.EVENT_INQRCODE_SUBSCRIBE.equals(inQrCodeEvent.getEvent())) {
             weChatService.qrCodeSubscribe(scene, openid);
@@ -191,8 +191,10 @@ public class WeChatController extends MsgControllerAdapter {
             weChatService.qrCodeScan(scene, openid);
         }
 
-        OutTextMsg outMsg = new OutTextMsg(inQrCodeEvent);
-        outMsg.setContent("hello world!,eventKey:" + inQrCodeEvent.getEventKey());
-        return render(outMsg);
+//        OutTextMsg outMsg = new OutTextMsg(inQrCodeEvent);
+//        outMsg.setContent("hello world!,eventKey:" + inQrCodeEvent.getEventKey());
+//        return render(outMsg);
+
+        return "success";
     }
 }

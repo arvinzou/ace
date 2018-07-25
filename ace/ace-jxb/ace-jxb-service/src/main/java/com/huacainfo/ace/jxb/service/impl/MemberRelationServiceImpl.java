@@ -102,7 +102,7 @@ public class MemberRelationServiceImpl implements MemberRelationService {
         o.setCreateDate(new Date());
         o.setStatus("1");
 //        o.setCreateUserName(userProp.getName());
-//        o.setCreateUserId(userProp.getUserId());
+//        o.setCreateUserId(userProp.getStudioId());
         this.memberRelationDao.insertSelective(o);
         this.dataBaseLogService.log("添加会员关系表", "会员关系表", "",
                 o.getId(), o.getId(), userProp);
@@ -142,7 +142,7 @@ public class MemberRelationServiceImpl implements MemberRelationService {
 
 //        o.setLastModifyDate(new Date());
 //        o.setLastModifyUserName(userProp.getName());
-//        o.setLastModifyUserId(userProp.getUserId());
+//        o.setLastModifyUserId(userProp.getStudioId());
         this.memberRelationDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更会员关系表", "会员关系表", "",
                 o.getId(), o.getId(), userProp);

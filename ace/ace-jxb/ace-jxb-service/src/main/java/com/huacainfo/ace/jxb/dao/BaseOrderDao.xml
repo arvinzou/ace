@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.BaseOrderDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.BaseOrder">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="consumerId" jdbcType="VARCHAR" property="consumerId"/>
+        <result column="commodityId" jdbcType="VARCHAR" property="commodityId"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="businessId" jdbcType="VARCHAR" property="businessId"/>
+        <result column="commodityName" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="businessName" jdbcType="VARCHAR" property="businessName"/>
+        <result column="amount" jdbcType="INTEGER" property="amount"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="payMoney" jdbcType="DECIMAL" property="payMoney"/>
+        <result column="payStatus" jdbcType="CHAR" property="payStatus"/>
+        <result column="payTime" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, consumerId, commodityId, category, businessId, commodityName, businessName, amount, 
+    price, payMoney, payStatus, payTime, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from base_order
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from base_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
+    insert into base_order (id, consumerId, commodityId, 
+      category, businessId, commodityName, 
+      businessName, amount, price, 
+      payMoney, payStatus, payTime, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{consumerId,jdbcType=VARCHAR}, #{commodityId,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{businessId,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{businessName,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{payMoney,jdbcType=DECIMAL}, #{payStatus,jdbcType=CHAR}, #{payTime,jdbcType=TIMESTAMP}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
+        insert into base_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="consumerId != null">
+                consumerId,
+            </if>
+            <if test="commodityId != null">
+                commodityId,
+            </if>
+            <if test="category != null">
+                category,
+            </if>
+            <if test="businessId != null">
+                businessId,
+            </if>
+            <if test="commodityName != null">
+                commodityName,
+            </if>
+            <if test="businessName != null">
+                businessName,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="payMoney != null">
+                payMoney,
+            </if>
+            <if test="payStatus != null">
+                payStatus,
+            </if>
+            <if test="payTime != null">
+                payTime,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="consumerId != null">
+                #{consumerId,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityId != null">
+                #{commodityId,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="businessId != null">
+                #{businessId,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessName != null">
+                #{businessName,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="payMoney != null">
+                #{payMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="payStatus != null">
+                #{payStatus,jdbcType=CHAR},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
+        update base_order
+        <set>
+            <if test="consumerId != null">
+                consumerId = #{consumerId,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityId != null">
+                commodityId = #{commodityId,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="businessId != null">
+                businessId = #{businessId,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                commodityName = #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessName != null">
+                businessName = #{businessName,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="payMoney != null">
+                payMoney = #{payMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="payStatus != null">
+                payStatus = #{payStatus,jdbcType=CHAR},
+            </if>
+            <if test="payTime != null">
+                payTime = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
+    update base_order
+    set consumerId = #{consumerId,jdbcType=VARCHAR},
+      commodityId = #{commodityId,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      businessId = #{businessId,jdbcType=VARCHAR},
+      commodityName = #{commodityName,jdbcType=VARCHAR},
+      businessName = #{businessName,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      payMoney = #{payMoney,jdbcType=DECIMAL},
+      payStatus = #{payStatus,jdbcType=CHAR},
+      payTime = #{payTime,jdbcType=TIMESTAMP},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
