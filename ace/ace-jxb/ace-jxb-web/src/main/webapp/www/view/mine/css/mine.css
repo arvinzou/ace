@@ -1,0 +1,109 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background: #F7F9FC;
+}
+.row{
+	padding: 0;
+	margin: 0;
+}
+.box{
+	background: #FFFFFF;
+	margin-bottom: 0.266666rem;
+}
+.img_box{
+	width: 0.826666rem;
+	height: 0.826666rem;
+}
+.img_box img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.myindex{
+	width: 1.973333rem;
+	height: 0.64rem;
+	line-height: 0.64rem;
+	text-align: center;
+	display: block;
+	border-radius: 0.32rem;
+	background:rgba(252,245,240,1);
+	color: #FF7C12;
+	font-size: 0.373333rem;
+	font-weight: bold;
+}
+.content{
+	color: #5C6681;
+	font-size: 0.293333rem;
+}
+.level{
+	width: 0.373333rem;
+	height: 0.373333rem;
+}
+.title01{
+	font-size: 0.426666rem;
+	color: #1C2843;
+	font-weight: bold;
+}
+.banner{
+	width: 90%;
+	height: 3.773333rem;
+	margin: 0.24rem auto;
+	border-radius: 0.32rem;
+	background: #5CE1D6;
+	color: #FFFFFF;
+}
+.title02{
+	font-size: 0.32rem;
+	padding-left: 0.866666rem;
+}
+.statics{
+	font-size: 0.906666rem;
+	font-weight: bold;
+	padding-left: 0.866666rem;
+}
+.statics_detail{
+	text-align: center;
+}
+.statics_num{
+	color: #1C2843;
+	font-size: 0.48rem;
+	font-weight: bold;
+}
+.statics_title{
+	color: #798092;
+	font-size: 0.32rem;
+	padding-bottom: 0.533333rem;
+}
+.next{
+	width: 0.186666rem;
+	height: 0.293333rem;
+}
+.menu_title{
+	font-size: 0.4rem;
+	color: #5C6681;
+}
+.menu-li{
+	height: 1.44rem;
+	line-height: 1.44rem;
+	padding-left: 0.4rem;
+}
+.sign_info{
+	color: #A0A7B6;
+	font-size: 0.32rem;
+}
+.sign_btn{
+	width: 2.133333rem;
+	height: 0.8rem;
+	display: block;
+	border-radius: 0.4rem;
+	text-align: center;
+	line-height: 0.8rem;
+	background: #FF7C12;
+	color: #FFFFFF;
+	font-size: 0.373333rem;
+	font-weight: bold;
+	margin-top: 0.32rem;
+}

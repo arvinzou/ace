@@ -1,3 +1,5 @@
+<%@page language="java" contentType="text/html; charset=utf-8"
+        pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html>
 
@@ -6,16 +8,12 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>私信</title>
-		<link rel="stylesheet" type="text/css" href="../common/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/chat.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css"/>
-		<script type="text/javascript" src="../common/js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../common/js/init-rem.js"></script>
+		<jsp:include page="../../dynamic/common/base.jsp" />
 		<script type="text/javascript" src="js/chat.js"></script>
+		<script type="text/javascript" src="../common/js/loader.js"></script>
 	</head>
 
 	<body>
-		<div class="main_box">
 			<div class="container" style="background-color: #FFFFFF;">
 				<div class="row content_01">
 					<div class="col-xs-3 col-sm-2 row_01">
@@ -35,7 +33,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="container">
+			<div class="body">
 				<div id="convo" data-from="Sonu Joshi">
 					<ul class="chat-thread">
 						<li class="left">
@@ -43,18 +41,17 @@
 							您好，有什么可以帮到您的吗？
 						</li>
 					</ul>
-					<div class="formstyle">
-						<form class="bs-example bs-example-form" role="form">
-							<div class="input-group input-group-lg">
-								<input type="text" class="form-control" placeholder="点击输入">
-								<span id="button" class="input-group-addon">发送</span>
-							</div>
-							<br>
-							<input type="text" style="display:none;">
-						</form>
-					</div>
 				</div>
 			</div>
+		<div class="formstyle">
+			<form class="bs-example bs-example-form" role="form">
+				<div class="input-group input-group-lg">
+					<input type="text" class="form-control" style="border-radius: unset;" placeholder="点击输入" onfocus="inputFocus();">
+					<span id="button" class="input-group-addon" style="border-radius: unset;">发送</span>
+				</div>
+				<br>
+				<input type="text" style="display:none;">
+			</form>
 		</div>
 	</body>
 

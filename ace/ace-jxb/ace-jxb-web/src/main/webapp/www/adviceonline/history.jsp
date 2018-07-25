@@ -1,3 +1,5 @@
+<%@page language="java" contentType="text/html; charset=utf-8"
+		pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,12 +7,9 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>我的咨询</title>
-		<link rel="stylesheet" type="text/css" href="../common/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/history.css"/>
-		<link rel="stylesheet" type="text/css" href="../common/css/nav.css"/>
-		<script type="text/javascript" src="../common/js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../common/js/init-rem.js"></script>
-		<script type="text/javascript" src="../common/js/nav.js"></script>
+		<jsp:include page="../../dynamic/common/base.jsp" />
+		<script type="text/javascript" src="js/history.js"></script>
+		<script type="text/javascript" src="../common/js/loader.js"></script>
 	</head>
 	<body>
 		<div class="nav_box">
@@ -99,7 +98,7 @@
 					</div>
 				</div>
 				<div class="col-xs-3 col-sm-2 row_01">
-					<button class="chat" onclick="window.location.href='consultDetail.html'">查看详情</button>
+					<button class="chat" onclick="window.location.href='consultDetail.jsp'">查看详情</button>
 				</div>
 			</div>
 			<div class="row dorder">

@@ -6,12 +6,12 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>心阳光联盟</title>
-		<link rel="stylesheet" type="text/css" href="../common/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="../common/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
+		<link rel="stylesheet" type="text/css" href="../../common/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../common/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css" />
 		<link rel="stylesheet" type="text/css" href="css/regist.css" />
-		<script type="text/javascript" src="../common/js/jquery.min.js"></script>
-		<script type="text/javascript" src="../common/js/init-rem.js"></script>
-		<script type="text/javascript" src="../common/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+		<script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+		<script type="text/javascript" src="../../common/js/init-rem.js"></script>
+		<script type="text/javascript" src="../../common/js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 		<script type="text/javascript" src="js/regist.js"></script>
 	</head>
 
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div role="main" class="ui-content">
-				<a href="#page2" data-transition="slide" id="nextStep" class="next">
+				<a href="javascript:void(0)" data-transition="slide" id="nextStep" class="next">
 					<img src="img/next_unactive.png" />
 				</a>
 			</div>
@@ -46,12 +46,12 @@
 					<p class="hello_detail">欢迎来到贴身家庭顾问，心阳光联盟</p>
 				</div>
 				<div class="row">
-					<div class="phoneNum"><input name="phoneNum" type="text" placeholder="请输入您的手机号码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的手机号码'" onchange="phoneInput();"/></div>
+					<div class="phoneNum"><input name="phoneNum" type="number" maxlength="11" placeholder="请输入您的手机号码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的手机号码'" onchange="phoneInput();"/></div>
 				</div>
 			</div>
 			<div role="main" class="ui-content">
-				<a href="#page3" data-transition="slide" class="next">
-					<img id="confirm" src="img/confirm_unactive.png" />
+				<a href="javascript:void(0)" data-transition="slide" id="sendCode" class="next">
+					<img id="confirm" src="img/confirm_unactive.png" onclick="sendCode();"/>
 				</a>
 			</div>
 		</div>
@@ -59,19 +59,19 @@
 		<div class="ui-page" data-role="page" id="page3" data-title="心阳光联盟" data-prev="page1">
 			<div class="container">
 				<div class="row">
-					<h1 class="title">验证码已发送至</h1>
+					<h1 class="title" id="codeTips">验证码已发送至</h1>
 				</div>
 				<div class="row">
-					<div class="col-xs-9 col-sm-9" style="padding-left: 0;"><span class="hello_detail">+86 176 8887 0815</span></div>
-					<div class="col-xs-3 col-sm-3"><span class="timeleft">(20秒)</span></div>
+					<div class="col-xs-8 col-sm-8" style="padding-left: 0;"><span class="hello_detail telphone"></span></div>
+					<div class="col-xs-4 col-sm-4"><span class="timeleft"></span></div>
 				</div>
 				<div class="row">
-					<div class="phoneNum"><input name="code" type="text" placeholder="请输入手机验证码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入手机验证码'"  onchange="codeInput();"/></div>
+					<div class="phoneNum"><input name="code" type="number" maxlength="4" placeholder="请输入手机验证码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入手机验证码'"/></div>
 				</div>
 			</div>
 			<div role="main" class="ui-content">
-				<a href="javascript:void(0)" data-transition="slide" class="next">
-					<img id="login" src="img/login_unactive.png" />
+				<a href="javascript:void(0)" data-transition="slide" id="lastStep" class="next">
+					<img id="login" src="img/login_active.png"  onclick="registon();"/>
 				</a>
 			</div>
 		</div>

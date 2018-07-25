@@ -1,3 +1,5 @@
+<%@page language="java" contentType="text/html; charset=utf-8"
+		pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html>
 
@@ -6,13 +8,9 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>预约咨询</title>
-		<link rel="stylesheet" type="text/css" href="../common/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/order.css" />
-		<link rel="stylesheet" type="text/css" href="../common/js/layer.mobile-v2.0/layer_mobile/need/layer.css"/>
-		<script type="text/javascript" src="../common/js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../common/js/init-rem.js"></script>
-		<script type="text/javascript" src="../common/js/layer.mobile-v2.0/layer_mobile/layer.js"></script>
+		<jsp:include page="../../dynamic/common/base.jsp" />
 		<script type="text/javascript" src="js/order.js"></script>
+		<script type="text/javascript" src="../common/js/loader.js"></script>
 	</head>
 
 	<body>
@@ -32,7 +30,7 @@
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-2 row_01">
-						<button class="chat">聊一聊</button>
+						<button class="chat" ng-click="window.location.href='chat.jsp'">聊一聊</button>
 					</div>
 				</div>
 				<div class="row method">
@@ -41,19 +39,19 @@
 				</div>
 				<div class="row content_02">
 					<div class="col-xs-4 col-sm-4">
-						<span class="active">
+						<span class="active" onclick="changeType(this);">
 						<p class="words_01"><span class="money">100</span>元/次</p>
 						<p class="words_02">语音咨询</p>
 						</span>
 					</div>
-					<div class="col-xs-4 col-sm-4" style="padding-left: 0;">
-						<span class="unactive">
+					<div class="col-xs-4 col-sm-4 panelbox" style="padding-left: 0;">
+						<span class="unactive" onclick="changeType(this);">
 						<p class="words_01"><span class="money">200</span>元/次</p>
 						<p class="words_02">视频咨询</p>
 						</span>
 					</div>
-					<div class="col-xs-4 col-sm-4" style="padding-left: 0;">
-						<span class="unactive">
+					<div class="col-xs-4 col-sm-4 panelbox" style="padding-left: 0;">
+						<span class="unactive" onclick="changeType(this);">
 						<p class="words_01"><span class="money">400</span>元/次</p>
 						<p class="words_02">面对面咨询</p>
 						</span>
@@ -88,23 +86,23 @@
 					<div class="col-xs-4 col-sm-4">
 						<span class="form_title">姓名</span>
 					</div>
-					<div class="col-xs-8 col-sm-8" style="padding-left: 0;">
-						<input type="text" placeholder="请输入姓名" onblur="this.placeholder='请输入姓名'" onfocus="this.placeholder=''" />
+					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
+						<input class="form_input" type="text" placeholder="请输入姓名" onblur="this.placeholder='请输入姓名'" onfocus="this.placeholder=''" />
 					</div>
 				</div>
 				<div class="row form">
 					<div class="col-xs-4 col-sm-4">
 						<span class="form_title">年龄</span>
 					</div>
-					<div class="col-xs-8 col-sm-8" style="padding-left: 0;">
-						<input type="text" placeholder="请输入您孩子的年龄" onblur="this.placeholder='请输入您孩子的年龄'" onfocus="this.placeholder=''" />
+					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
+						<input class="form_input" type="text" placeholder="请输入您孩子的年龄" onblur="this.placeholder='请输入您孩子的年龄'" onfocus="this.placeholder=''" />
 					</div>
 				</div>
 				<div class="row form">
 					<div class="col-xs-4 col-sm-4">
 						<span class="form_title">性别</span>
 					</div>
-					<div class="col-xs-8 col-sm-8" style="padding-left: 0;">
+					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
 						<span class="sex checked" onclick="changeSex(this);">男生</span>
 						<span class="sex unchecked" onclick="changeSex(this);">女生</span>
 					</div>
@@ -113,8 +111,8 @@
 					<div class="col-xs-4 col-sm-4">
 						<span class="form_title">联系方式</span>
 					</div>
-					<div class="col-xs-8 col-sm-8" style="padding-left: 0;">
-						<input type="text" placeholder="请输入联系方式" onblur="this.placeholder='请输入联系方式'" onfocus="this.placeholder=''" />
+					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
+						<input class="form_input" type="text" placeholder="请输入联系方式" onblur="this.placeholder='请输入联系方式'" onfocus="this.placeholder=''" />
 					</div>
 				</div>
 			</div>
@@ -175,30 +173,30 @@
 					<div class="col-xs-4 col-sm-4">
 						<span class="form_title">姓名</span>
 					</div>
-					<div class="col-xs-8 col-sm-8" style="padding-left: 0;">
-						<input type="text" placeholder="请输入紧急联系人姓名" onblur="this.placeholder='请输入紧急联系人姓名'" onfocus="this.placeholder=''" />
+					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
+						<input class="form_input" type="text" placeholder="请输入紧急联系人姓名" onblur="this.placeholder='请输入紧急联系人姓名'" onfocus="this.placeholder=''" />
 					</div>
 				</div>
 				<div class="row form">
 					<div class="col-xs-4 col-sm-4">
 						<span class="form_title">关系</span>
 					</div>
-					<div class="col-xs-8 col-sm-8" style="padding-left: 0;">
-						<input type="text" placeholder="请输入紧急联系人关系" onblur="this.placeholder='请输入紧急联系人关系'" onfocus="this.placeholder=''" />
+					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
+						<input  class="form_input" type="text" placeholder="请输入紧急联系人关系" onblur="this.placeholder='请输入紧急联系人关系'" onfocus="this.placeholder=''" />
 					</div>
 				</div>
 				<div class="row form">
 					<div class="col-xs-4 col-sm-4">
 						<span class="form_title">联系方式</span>
 					</div>
-					<div class="col-xs-8 col-sm-8" style="padding-left: 0;">
-						<input type="text" placeholder="该联系方式用于紧急情况" onblur="this.placeholder='该联系方式用于紧急情况'" onfocus="this.placeholder=''" />
+					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
+						<input class="form_input" type="text" placeholder="该联系方式用于紧急情况" onblur="this.placeholder='该联系方式用于紧急情况'" onfocus="this.placeholder=''" />
 					</div>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-xs-1 col-sm-1"><img class="read" src="img/no.png"/></div>
+				<div class="col-xs-1 col-sm-1"><img id="read" class="read" src="img/no.png"/></div>
 				<div class="col-xs-11 col-sm-11"><span class="read_01">我已阅读并同意</span><span class="read_02">《顾问在线服务协议》</span></div>
 			</div>
 		</div>
@@ -208,7 +206,7 @@
 				<span class="amount_01">共计</span><span class="amount_02">¥</span><span class="amount_03">100</span>
 			</div>
 			<div class="col-xs-6 col-sm-6">
-				<button class="appointment" onclick="window.location.href='success.html'">立即预约</button>
+				<button class="appointment" onclick="window.location.href='success.jsp'">立即预约</button>
 			</div>
 		</div>
 	</body>
@@ -219,7 +217,7 @@
 			<p class="ftitle">预约肖海平老师须知</p>
 		</div>
 		<div class="row">
-			<p class="stitle">回应时长</p>
+			<p class="stitle"><span class="dot"></span><span>回应时长</span></p>
 		</div>
 		<div class="row">
 			<p class="note_content">
@@ -227,7 +225,7 @@
 			</p>
 		</div>
 		<div class="row">
-			<p class="stitle">若变更预约</p>
+			<p class="stitle"><span class="dot"></span><span>若变更预约</span></p>
 		</div>
 		<div class="row">
 			<p class="note_content">
@@ -235,7 +233,7 @@
 			</p>
 		</div>
 		<div class="row">
-			<p class="stitle">爽约/迟到</p>
+			<p class="stitle"><span class="dot"></span><span>爽约/迟到</span></p>
 		</div>
 		<div class="row">
 			<p class="note_content">咨询结束的时间不变，请留意时间哦~</p>

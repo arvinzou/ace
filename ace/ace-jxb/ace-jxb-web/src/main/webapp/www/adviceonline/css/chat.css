@@ -13,6 +13,11 @@ body{
 	margin-right: 0;
 	margin-bottom: 0.266666rem;
 	padding-bottom: 0.4rem;
+    height: 3rem;
+}
+.body{
+    width: 100%;
+    overflow: auto;
 }
 .row{
 	margin: 0;
@@ -25,7 +30,7 @@ body{
 
 .row_01{
 	height: 2rem;
-	padding-top: 0.19333;
+	padding-top: 0.19333rem;
 }
 .head_img{
 	width: 1.613333rem;

@@ -1,3 +1,5 @@
+<%@page language="java" contentType="text/html; charset=utf-8"
+		pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html>
 
@@ -6,12 +8,9 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>咨询师列表</title>
-		<link rel="stylesheet" type="text/css" href="../common/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/consultant.css" />
-		<link rel="stylesheet" type="text/css" href="css/base.css" />
-		<script type="text/javascript" src="../common/js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="../common/js/init-rem.js"></script>
+		<jsp:include page="../../dynamic/common/base.jsp" />
 		<script type="text/javascript" src="js/consultant.js"></script>
+		<script type="text/javascript" src="../common/js/loader.js"></script>
 	</head>
 
 	<body>
@@ -111,11 +110,11 @@
 					<div class="col-xs-9 col-sm-9">
 						<div class="row content_01">
 							<div class="col-xs-6 col-sm-6 left">肖海平</div>
-							<div class="col-xs-6 col-sm-6 right online" onclick="window.location.href='order.html'">
+							<div class="col-xs-6 col-sm-6 right online" onclick="window.location.href='order.jsp'">
 								<img src="img/online.png" />预约咨询
 							</div>
 						</div>
-						<div class="row content_02" onclick="window.location.href='counselor.html'">
+						<div class="row content_02" onclick="window.location.href='counselor.jsp'">
 							<p>
 								应用心理学学士，湖南省心理咨询鉴定中心考评员，近心帮技术总监，近心帮职业培训学校校长…
 							</p>
@@ -139,7 +138,7 @@
 					</div>
 				</div>
 
-				<div class="row consulelist"  onclick="window.location.href='counselor.html'">
+				<div class="row consulelist"  onclick="window.location.href='counselor.jsp'">
 					<div class="col-xs-3 col-sm-3 imgbox">
 						<img src="img/headImg.png" />
 					</div>
@@ -150,7 +149,7 @@
 								<img src="img/online.png" />预约咨询
 							</div>
 						</div>
-						<div class="row content_02" onclick="window.location.href='order.html'">
+						<div class="row content_02" onclick="window.location.href='order.jsp'">
 							<p>
 								应用心理学学士，湖南省心理咨询鉴定中心考评员，近心帮技术总监，近心帮职业培训学校校长…
 							</p>
@@ -185,7 +184,7 @@
 								<img src="img/offline.png" />预约咨询
 							</div>
 						</div>
-						<div class="row content_02" onclick="window.location.href='counselor.html'">
+						<div class="row content_02" onclick="window.location.href='counselor.jsp'">
 							<p>
 								应用心理学学士，湖南省心理咨询鉴定中心考评员，近心帮技术总监，近心帮职业培训学校校长…
 							</p>
