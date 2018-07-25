@@ -26,7 +26,7 @@ body{
 
 .row_01{
 	height: 2rem;
-	padding-top: 0.19333;
+	padding-top: 0.19333rem;
 }
 .head_img{
 	width: 1.613333rem;
@@ -71,6 +71,7 @@ body{
 	border: 1px solid #49D0C5;
 	margin-top: 0.45rem;
 	background:rgba(73,208,197,0.1);
+	outline: none;
 }
 .method_01{
 	line-height: 1rem;
