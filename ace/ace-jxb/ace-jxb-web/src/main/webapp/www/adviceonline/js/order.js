@@ -1,21 +1,39 @@
 var index = null;
-$(function() {
-	index = layer.open({
-		type: 1,
-		content: $("#notes").html(),
-		shadeClose: false,
-	});
+function App() {
+    console.log("=============================App Start==============================");
+    loader({
+        path: contextPath,
+        url: '/www/common/js/layer.mobile-v2.0/layer_mobile/need/layer.css',
+        type: 'css'
+    });
+    loader({
+        path: contextPath,
+        url: '/www/adviceonline/css/order.css',
+        type: 'css'
+    });
+    loader({
+        path: contextPath,
+        url: '/www/common/js/layer.mobile-v2.0/layer_mobile/layer.js',
+        type: 'js'
+    });
+}
+window.onload = function(){
+    index = layer.open({
+        type: 1,
+        content: $("#notes").html(),
+        shadeClose: false,
+    });
 
-	$("#read").click(function(){
-		var content = $("#read").attr("src");
-		if(content.indexOf("yes") > 0){
-			$("#read").attr('src','img/no.png');
-		}else {
+    $("#read").click(function(){
+        var content = $("#read").attr("src");
+        if(content.indexOf("yes") > 0){
+            $("#read").attr('src','img/no.png');
+        }else {
             $("#read").attr('src','img/yes.png');
-		}
-	});
+        }
+    });
+}
 
-});
 
 function closeTips() {
 	layer.close(index);

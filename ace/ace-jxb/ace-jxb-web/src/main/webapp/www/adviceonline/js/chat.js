@@ -1,4 +1,16 @@
-$(function() {
+function App() {
+    console.log("=============================App Start==============================");
+    loader({
+        path: contextPath,
+        url: '/www/adviceonline/css/chat.css',
+        type: 'css'
+    });
+    loader({
+        path: contextPath,
+        url: '/www/adviceonline/css/style.css',
+        type: 'css'
+    });
+
     $('#button').click(function () {
         var form_val = $('.form-control').val();
         $('.chat-thread').append('<li class="right"><span class="headright"><img src="img/test.png"/></span>' + form_val + '</li>');
@@ -11,9 +23,7 @@ $(function() {
 
         $('.chat-thread').scrollTop($('.chat-thread')[0].scrollHeight);
     });
-
-
-});
+}
 
 function  inputFocus () {
     var winobj = $(window),
