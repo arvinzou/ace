@@ -24,7 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("counselorService")
 /**
@@ -242,6 +244,44 @@ public class CounselorServiceImpl implements CounselorService {
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "注册完成");
+    }
+
+    /**
+     * 获取咨询师统计数据
+     *
+     * @param counselorId 咨询师ID
+     * @return map
+     */
+    @Override
+    public Map<String, Object> statistic(String counselorId) {
+
+
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("consultCount", 128);
+        rtnMap.put("courseCount", 268);
+        rtnMap.put("liveCount", 212);
+        rtnMap.put("teacherCount", 2680);
+        rtnMap.put("parentCount", 188);
+        return rtnMap;
+    }
+
+    /**
+     * 咨询师"我"的账户信息
+     *
+     * @param counselorId 咨询师id
+     * @return ResultResponse data=>Map
+     */
+    @Override
+    public ResultResponse accountInfo(String counselorId) {
+
+
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("monthIncome", 168);
+        rtnMap.put("consultIncome", 800);
+        rtnMap.put("courseIncome", 666);
+        rtnMap.put("underlingIncome", 288.88);
+        rtnMap.put("rewardIncome", 66.66);
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtnMap);
     }
 
 }

@@ -10,6 +10,8 @@ import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
 
+import java.util.Map;
+
 /**
  * @author: Arvin
  * @version: 2018-07-20
@@ -93,4 +95,20 @@ public interface CounselorService {
      * @return
      */
     ResultResponse register(String mobile, String studioId, Userinfo userinfo);
+
+    /**
+     * 获取咨询师统计数据
+     *
+     * @param counselorId 咨询师ID
+     * @return map
+     */
+    Map<String, Object> statistic(String counselorId);
+
+    /**
+     * 咨询师"我"的账户信息
+     *
+     * @param counselorId 咨询师id
+     * @return ResultResponse data=>Map
+     */
+    ResultResponse accountInfo(String counselorId);
 }
