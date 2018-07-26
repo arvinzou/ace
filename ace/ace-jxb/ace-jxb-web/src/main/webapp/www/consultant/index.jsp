@@ -104,113 +104,44 @@
 					</dl>
 				</section>
 			</div>
-			<div class="container">
-				<div class="row consulelist">
-					<div class="col-xs-3 col-sm-3 imgbox">
-						<img src="img/headImg.png" />
-					</div>
-					<div class="col-xs-9 col-sm-9">
-						<div class="row content_01">
-							<div class="col-xs-6 col-sm-6 left">肖海平</div>
-							<div class="col-xs-6 col-sm-6 right online" onclick="window.location.href='order.jsp'">
-								<img src="img/online.png" />预约咨询
-							</div>
-						</div>
-						<div class="row content_02" onclick="window.location.href='counselor.jsp'">
-							<p>
-								应用心理学学士，湖南省心理咨询鉴定中心考评员，近心帮技术总监，近心帮职业培训学校校长…
-							</p>
-						</div>
-						<div class="row content_03">
-							<span class="money">¥100-500</span>
-							<span class="help_times">帮助过23次</span>
-						</div>
-						<div class="row content_04">
-							<!--<span class="clabel">儿童发展</span>
-							<span class="clabel">亲子关系</span>
-							<span class="clabel">家庭关系</span>
-							<span class="clabel">沟通问题</span>-->
-							<ul class="clabel">
-								<li>儿童发展</li>
-								<li>亲子关系</li>
-								<li>家庭关系</li>
-								<li>沟通问题</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+			<div class="container" id="list">
 
-				<div class="row consulelist"  onclick="window.location.href='counselor.jsp'">
-					<div class="col-xs-3 col-sm-3 imgbox">
-						<img src="img/headImg.png" />
-					</div>
-					<div class="col-xs-9 col-sm-9">
-						<div class="row content_01">
-							<div class="col-xs-6 col-sm-6 left">肖海平</div>
-							<div class="col-xs-6 col-sm-6 right online">
-								<img src="img/online.png" />预约咨询
-							</div>
-						</div>
-						<div class="row content_02" onclick="window.location.href='order.jsp'">
-							<p>
-								应用心理学学士，湖南省心理咨询鉴定中心考评员，近心帮技术总监，近心帮职业培训学校校长…
-							</p>
-						</div>
-						<div class="row content_03">
-							<span class="money">¥100-500</span>
-							<span class="help_times">帮助过23次</span>
-						</div>
-						<div class="row content_04">
-							<!--<span class="clabel">儿童发展</span>
-							<span class="clabel">亲子关系</span>
-							<span class="clabel">家庭关系</span>
-							<span class="clabel">沟通问题</span>-->
-							<ul class="clabel">
-								<li>儿童发展</li>
-								<li>亲子关系</li>
-								<li>家庭关系</li>
-								<li>沟通问题</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				<div class="row consulelist">
-					<div class="col-xs-3 col-sm-3 imgbox">
-						<img src="img/headImg.png" />
-					</div>
-					<div class="col-xs-9 col-sm-9">
-						<div class="row content_01">
-							<div class="col-xs-6 col-sm-6 left">肖海平</div>
-							<div class="col-xs-6 col-sm-6 right offline">
-								<img src="img/offline.png" />预约咨询
-							</div>
-						</div>
-						<div class="row content_02" onclick="window.location.href='counselor.jsp'">
-							<p>
-								应用心理学学士，湖南省心理咨询鉴定中心考评员，近心帮技术总监，近心帮职业培训学校校长…
-							</p>
-						</div>
-						<div class="row content_03">
-							<span class="money">¥100-500</span>
-							<span class="help_times">帮助过23次</span>
-						</div>
-						<div class="row content_04">
-							<!--<span class="clabel">儿童发展</span>
-							<span class="clabel">亲子关系</span>
-							<span class="clabel">家庭关系</span>
-							<span class="clabel">沟通问题</span>-->
-							<ul class="clabel">
-								<li>儿童发展</li>
-								<li>亲子关系</li>
-								<li>家庭关系</li>
-								<li>沟通问题</li>
-							</ul>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
+
+		<script id="consultant" type="text/template">
+			{@each data as item,index}
+				<div class="row consulelist">
+					<div class="col-xs-3 col-sm-3 imgbox">
+					<img src="\${item.imagePhotoUrl}" />
+					</div>
+					<div class="col-xs-9 col-sm-9">
+					<div class="row content_01">
+					<div class="col-xs-6 col-sm-6 left">\${item.name}</div>
+					<div class="col-xs-6 col-sm-6 right online" onclick="window.location.href='/jxb/www/order/index.jsp'">
+					<img src="img/online.png" />预约咨询
+					</div>
+					</div>
+					<div class="row content_02" onclick="showInfo(this);">
+					<p>
+					\${item.profile}
+					</p>
+				</div>
+				<div class="row content_03">
+					<span class="money">¥100-500</span>
+					<span class="help_times">帮助过23次</span>
+					</div>
+					<div class="row content_04">
+					<ul class="clabel">
+						{@each item.tags.split('，') as tag,num}
+						<li>\${tag}</li>
+						{@/each}
+					</ul>
+					</div>
+					</div>
+					</div>
+			{@/each}
+		</script>
 		<div hidden class="lode" style="position: absolute; top :0;width: 100%;height: 100%; z-index:200; background-color: rgba(60,60,60,0.8);"></div>
 	</body>
 
