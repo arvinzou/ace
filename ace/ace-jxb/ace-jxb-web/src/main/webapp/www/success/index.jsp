@@ -10,7 +10,7 @@
 		<title>预约成功</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
 		<jsp:include page="../../dynamic/common/base.jsp" />
-		<script type="text/javascript" src="js/success.js"></script>
+		<script type="text/javascript" src="js/act.js"></script>
 		<script type="text/javascript" src="../common/js/loader.js"></script>
 	</head>
 
