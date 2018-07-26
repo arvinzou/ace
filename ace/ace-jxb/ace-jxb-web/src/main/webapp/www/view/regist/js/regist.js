@@ -125,6 +125,7 @@ function registon(){
                 if(result.status == 0) {
                     console.log(result);
                     alert("注册成功！");
+                    window.location.href = '/jxb/www/view/mine/mine.jsp';
                 }else {
                     alert(result.info);
                     return;
