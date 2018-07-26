@@ -62,10 +62,10 @@
 						<dd class="wage">
 							<ul class="slide downlist"  id="field02">
 								<li class="mt_01 mb" style="margin-right: 0.746666rem;margin-left: 0.746666rem;" onclick="screen02(this);">
-									<a href="#">语音咨询</a>
+									<a href="#">电话咨询</a>
 								</li>
 								<li class="mt_01 mb" style="margin-right: 0.746666rem;" onclick="screen02(this);">
-									<a href="#">视频咨询</a>
+									<a href="#">微信咨询</a>
 								</li>
 								<li class="mt_01 mb" onclick="screen02(this);">
 									<a href="#">面对面咨询</a>
