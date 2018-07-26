@@ -49,4 +49,5 @@ public class WCounselorController extends JxbBaseController {
 
         return counselorService.accountInfo(counselorId);
     }
+
 }
