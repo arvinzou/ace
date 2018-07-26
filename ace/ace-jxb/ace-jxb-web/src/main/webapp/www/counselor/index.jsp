@@ -65,22 +65,22 @@
 					</p>
 				</div>
 				<div class="row">
-					<h3 class="sec_title">咨询须知</h3>
+					<h3 class="sec_title">咨询方式</h3>
 				</div>
 				<div class="row">
 					<div class="col-xs-4 col-sm-4 statics">
 						<p class="case_num">100</p>
-						<p><span class="unit">（元/时）</span></p>
+						<p><span class="unit">（元/次）</span></p>
 						<p class="case_title">语音咨询</p>
 					</div>
 					<div class="col-xs-4 col-sm-4 statics">
 						<p class="course_num">200</p>
-						<p><span class="unit">（元/时）</span></p>
+						<p><span class="unit">（元/次）</span></p>
 						<p class="course_title">视频咨询</p>
 					</div>
 					<div class="col-xs-4 col-sm-4 statics">
 						<p class="score_num">400</p>
-						<p><span class="unit">（元/时）</span></p>
+						<p><span class="unit">（元/次）</span></p>
 						<p class="score_title">面对面咨询</p>
 					</div>
 				</div>
