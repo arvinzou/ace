@@ -9,11 +9,11 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.jxb.constant.RegType;
 import com.huacainfo.ace.jxb.dao.MemberRelationDao;
 import com.huacainfo.ace.jxb.dao.RegDao;
-import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.model.MemberRelation;
 import com.huacainfo.ace.jxb.model.Reg;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.RegService;
+import com.huacainfo.ace.jxb.vo.CounselorVo;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.TaskCmccService;
@@ -109,12 +109,18 @@ public class RegServiceImpl implements RegService {
         Map<String, Object> rtnMap = new HashMap<>();
         //老师身份
         if (RegType.TEACHER.equals(users.getUserLevel())) {
-            Counselor counselor = counselorService.selectCounselorByPrimaryKey(userinfo.getUnionid()).getValue();
+            CounselorVo counselor = counselorService.selectCounselorByPrimaryKey(userinfo.getUnionid()).getValue();
             if (null == counselor) {
                 return new ResultResponse(ResultCode.FAIL, "咨询师资料丢失");
             }
-            rtnMap.put("counselor", counselor);
+            //报表统计数据
+            Map<String, Object> statistic = counselorService.statistic(counselor.getId());
+            //签到信息
+            Map<String, Object> signInfo = getSignInfo(counselor.getId());
             rtnMap.put("memberType", "1");//1-咨询师 2-家长
+            rtnMap.put("counselor", counselor);//咨询师基本信息
+            rtnMap.put("statistic", statistic);//咨询师统计数据
+            rtnMap.put("signInfo", signInfo);//签到信息
         } else if (RegType.PARENT.equals(users.getUserLevel())) {
             // TODO: 2018/7/24 家长身份逻辑待续
             rtnMap.put("memberType", "2");
@@ -123,6 +129,21 @@ public class RegServiceImpl implements RegService {
         rtnMap.put("nickName", userinfo.getNickname());
         rtnMap.put("headimgurl", userinfo.getHeadimgurl());
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtnMap);
+    }
+
+    /**
+     * 获取老师签到信息
+     *
+     * @param counselorId 咨询师id
+     * @return Map
+     */
+    private Map<String, Object> getSignInfo(String counselorId) {
+
+
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("signCount", 10);//本月已签到天数
+        rtnMap.put("status", 0);//签到状态 0-未签到 1-已签到
+        return rtnMap;
     }
 
     /**

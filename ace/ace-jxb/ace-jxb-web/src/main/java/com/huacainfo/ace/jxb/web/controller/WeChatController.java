@@ -190,11 +190,14 @@ public class WeChatController extends MsgControllerAdapter {
         else if (InQrCodeEvent.EVENT_INQRCODE_SCAN.equals(inQrCodeEvent.getEvent())) {
             weChatService.qrCodeScan(scene, openid);
         }
+        //debug
+        OutTextMsg outMsg = new OutTextMsg(inQrCodeEvent);
+        outMsg.setContent("Debug：\n" +
+                "eventKey=" + inQrCodeEvent.getEventKey() + "\n" +
+                "scene=" + scene
+        );
+        return render(outMsg);
 
-//        OutTextMsg outMsg = new OutTextMsg(inQrCodeEvent);
-//        outMsg.setContent("hello world!,eventKey:" + inQrCodeEvent.getEventKey());
-//        return render(outMsg);
-
-        return "success";
+//        return "success";
     }
 }
