@@ -103,4 +103,11 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="findPList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from consult_product
+        where counselorId = #{counselorId,jdbcType=VARCHAR}
+    </select>
 </mapper>

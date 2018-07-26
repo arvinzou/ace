@@ -3,6 +3,7 @@ package com.huacainfo.ace.jxb.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.Consult;
 import com.huacainfo.ace.jxb.vo.ConsultQVo;
@@ -28,9 +29,8 @@ public interface ConsultService {
      * @author: Arvin
      * @version: 2018-07-25
      */
-    PageResult
-            <ConsultVo> findConsultList(ConsultQVo condition,
-                                        int start, int limit, String orderBy) throws Exception;
+    PageResult<ConsultVo> findConsultList(ConsultQVo condition,
+                                          int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,8 +68,7 @@ public interface ConsultService {
      * @author: Arvin
      * @version: 2018-07-25
      */
-    SingleResult
-            <ConsultVo> selectConsultByPrimaryKey(String id) throws Exception;
+    SingleResult<ConsultVo> selectConsultByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -84,4 +83,11 @@ public interface ConsultService {
      */
     MessageResponse deleteConsultByConsultId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 获取咨询师主页
+     *
+     * @param counselorId 咨询师id
+     * @return ResultResponse
+     */
+    ResultResponse getCounselorDetail(String counselorId) throws Exception;
 }

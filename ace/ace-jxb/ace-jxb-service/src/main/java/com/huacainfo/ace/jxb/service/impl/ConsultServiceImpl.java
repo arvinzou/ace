@@ -1,17 +1,22 @@
 package com.huacainfo.ace.jxb.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.ConsultDao;
+import com.huacainfo.ace.jxb.dao.ConsultProductDao;
 import com.huacainfo.ace.jxb.model.Consult;
 import com.huacainfo.ace.jxb.service.ConsultService;
+import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.vo.ConsultQVo;
 import com.huacainfo.ace.jxb.vo.ConsultVo;
+import com.huacainfo.ace.jxb.vo.CounselorVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("consultService")
 /**
@@ -33,6 +40,12 @@ public class ConsultServiceImpl implements ConsultService {
     private ConsultDao consultDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private CounselorService counselorService;
+    @Autowired
+    private ConsultProductDao consultProductDao;
+
 
     /**
      * @throws
@@ -193,6 +206,30 @@ public class ConsultServiceImpl implements ConsultService {
                 String.valueOf(id),
                 String.valueOf(id), "咨询师-咨询预约介绍", userProp);
         return new MessageResponse(0, "咨询师-咨询预约介绍删除完成！");
+    }
+
+    /**
+     * 获取咨询师主页
+     *
+     * @param counselorId 咨询师id
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse getCounselorDetail(String counselorId) throws Exception {
+        CounselorVo counselorVo = counselorService.selectCounselorByPrimaryKey(counselorId).getValue();
+        if (null == counselorVo) {
+            return new ResultResponse(ResultCode.FAIL, "咨询师资料丢失");
+        }
+        ConsultVo consultVo = selectConsultByPrimaryKey(counselorId).getValue();
+        if (null == consultVo) {
+            return new ResultResponse(ResultCode.FAIL, "未设置咨询产品信息");
+        }
+        consultVo.setProductList(consultProductDao.findPList(counselorId));
+
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("counselorVo", counselorVo);
+        rtnMap.put("consultVo", consultVo);
+        return new ResultResponse(ResultCode.SUCCESS, "咨询成功", rtnMap);
     }
 
 }

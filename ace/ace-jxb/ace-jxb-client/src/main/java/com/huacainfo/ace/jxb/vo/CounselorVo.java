@@ -15,6 +15,7 @@ public class CounselorVo extends Counselor {
      */
     private String regAuditRst;
 
+
     public String getStudioName() {
         return studioName;
     }

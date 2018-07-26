@@ -32,4 +32,5 @@ public interface ConsultProductDao {
 
     int isExit(ConsultProduct record);
 
+    List<ConsultProduct> findPList(String counselorId);
 }

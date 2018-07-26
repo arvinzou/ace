@@ -5,43 +5,81 @@ import java.util.Date;
 
 public class Counselor {
     private String id;
-
+    /**
+     * 所属工作室
+     */
     private String studioId;
-
+    /**
+     * 姓名
+     */
     private String name;
-
+    /**
+     * 职业名称
+     */
     private String certification;
-
+    /**
+     * 擅长领域
+     */
     private String tags;
-
+    /**
+     * 从业资质
+     */
     private String years;
-
+    /**
+     * 手机号
+     */
     private String mobile;
-
+    /**
+     * 形象照
+     */
     private String imagePhotoUrl;
-
+    /**
+     * 电子名片
+     */
     private String visitCardUrl;
-
+    /**
+     * 身份证号
+     */
     private String idCard;
-
+    /**
+     * 身份证件电子档
+     */
     private String idCardImgUrl;
-
+    /**
+     * 资格从业证书号
+     */
     private String certificateNo;
-
+    /**
+     * 资格从业证书电子档
+     */
     private String certificateImgUrl;
-
+    /**
+     * 身份证持胸前自拍照
+     */
     private String evidenceImgUrl;
-
+    /**
+     * 爱心币
+     */
     private Integer lm;
-
+    /**
+     * 累计收益
+     */
     private BigDecimal income;
-
+    /**
+     * 账户余额
+     */
     private BigDecimal account;
-
+    /**
+     * 级别
+     */
     private String level;
-
+    /**
+     * 入库日期
+     */
     private Date createDate;
-
+    /**
+     * 个人简介
+     */
     private String profile;
 
     public String getId() {
