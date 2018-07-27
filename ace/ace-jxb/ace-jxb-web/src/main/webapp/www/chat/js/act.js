@@ -2,12 +2,7 @@ function App() {
     console.log("=============================App Start==============================");
     loader({
         path: contextPath,
-        url: '/www/adviceonline/css/chat.css',
-        type: 'css'
-    });
-    loader({
-        path: contextPath,
-        url: '/www/adviceonline/css/style.css',
+        url: '/www/chat/css/style.css',
         type: 'css'
     });
 
