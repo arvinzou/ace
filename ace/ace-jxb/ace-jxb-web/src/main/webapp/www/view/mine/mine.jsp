@@ -73,12 +73,12 @@
 				<div class="col-xs-5 col-sm-5"><p class="sign_info">本月已打卡10天</p></div>
 				<div class="col-xs-4 col-sm-4"><span class="sign_btn">立即签到</span></div>
 			</div>
-			<div class="row menu-li">
+			<div class="row menu-li" onclick="window.location.href='mycount.jsp'">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的账户</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
 			<div class="row menu-li">
-				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的工作室</p></div>
+				<div class="col-xs-10 col-sm-10"><p class="menu_title" onclick="window.location.href='../workroom/index.jsp'">我的工作室</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
 			<div class="row menu-li">

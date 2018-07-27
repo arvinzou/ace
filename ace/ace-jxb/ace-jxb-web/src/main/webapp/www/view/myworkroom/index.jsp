@@ -9,6 +9,8 @@
 		<meta name="format-detection" content="telephone=no" />
 		<title>我的工作室</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+        <jsp:include page="../../../dynamic/common/base.jsp" />
+        <script type="text/javascript" src="../../common/js/loader.js"></script>
 	</head>
 
 	<body>
@@ -64,7 +66,7 @@
 						<img class="member_head overlay" src="img/headImg.png" />
 						<img class="member_head overlay" src="img/headImg.png" />
 					</div>
-					<div class="col-xs-2 col-sm-2 more">
+					<div class="col-xs-2 col-sm-2 more" onclick="window.location.href='../workmember/index.jsp'">
 						...
 					</div>
 				</div>
@@ -91,7 +93,7 @@
 		<div class="footer">邀请老师加入</div>
 		
 		<!--工作室详情-->
-		<div id="workroomDetail">
+		<div id="workroomDetail" style="display: none;">
 			心阳光团队集结行业内大量优质咨询师——近心帮协会的优秀团队，高歌进军家庭教育市场，致力于打造家庭贴身家心阳光团队集结行业内大量优质咨询师——近心帮协会的优秀团队，高歌进军家庭教育市场，致力于打造家庭贴心阳光团队集结行业内大量优质咨询师——近心帮协会的优秀团队，高歌进军家庭教育市场，致力于打造家庭贴心阳光团队集结行业内大量优质咨询师——近心帮协会的优秀团队，高歌进军家庭教育市场，致力于打造家庭贴心阳光团队集结行业内大量优质咨询师——近心帮协会的优秀团队，高歌进军家庭教育市场，致力于打造家庭贴身家心阳光团队集结行业内大量优质咨询师——近的优秀团队，高歌进军家庭教育市场打造家庭贴
 		</div>
 	</body>
