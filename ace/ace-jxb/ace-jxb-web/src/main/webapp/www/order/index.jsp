@@ -31,7 +31,7 @@
 						</div>
 					</div>
 					<div class="col-xs-3 col-sm-2 row_01">
-						<button class="chat" ng-click="window.location.href='chat.jsp'">聊一聊</button>
+						<button class="chat" onclick="window.location.href='../chat/index.jsp'">聊一聊</button>
 					</div>
 				</div>
 				<div class="row method">
@@ -207,7 +207,7 @@
 				<span class="amount_01">共计</span><span class="amount_02">¥</span><span class="amount_03">100</span>
 			</div>
 			<div class="col-xs-6 col-sm-6">
-				<button class="appointment" onclick="window.location.href='success.jsp'">立即预约</button>
+				<button class="appointment" onclick="window.location.href='../success/index.jsp'">立即预约</button>
 			</div>
 		</div>
 	</body>
