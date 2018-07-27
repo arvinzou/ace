@@ -30,6 +30,7 @@ $(function(){
         success:function(result){
             if(result.status == 0) {
                console.log(result);
+                window.location.href = '/jxb/www/view/mine/mine.jsp';
             }else {
                 if(result.data == 'unregister'){   //当前用户尚未注册
                     alert(result.info);

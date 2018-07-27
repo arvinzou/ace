@@ -14,7 +14,7 @@
 	<body>
 		<div class="box">
 			<div class="row"><p class="title">我加入/创建的工作室</p></div>
-			<div class="row roomlist">
+			<div class="row roomlist" onclick="window.location.href='../myworkroom/index.jsp'">
 				<div class="room">
 					<div class="col-xs-3 col-sm-3 topsize">
 						<div class="img_box"><img src="img/headImg.png"/></div>
@@ -29,7 +29,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row roomlist">
+			<div class="row roomlist"  onclick="window.location.href='../myworkroom/index.jsp'">
 				<div class="room">
 					<div class="col-xs-3 col-sm-3 topsize">
 						<div class="img_box"><img src="img/headImg.png"/></div>

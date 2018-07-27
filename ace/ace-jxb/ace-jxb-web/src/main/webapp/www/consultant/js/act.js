@@ -70,6 +70,6 @@ function consultantList(){
     });
 }
 
-function showInfo(obj){
-    window.location.href = contextPath + '/www/counselor/index.jsp?id=o6qFn1EofA_YlWe0h4rUjF5Ksopk';
+function showInfo(id){
+    window.location.href = contextPath + '/www/counselor/index.jsp?id='+id;
 }

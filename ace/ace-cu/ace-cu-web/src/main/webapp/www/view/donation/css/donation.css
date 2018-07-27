@@ -3,7 +3,7 @@
 	margin: 0;
 }
 body{
-    background-color: #ffffff;
+    background-color: #F7F9FC;
 }
 ul,li{
 	list-style: none;
@@ -16,6 +16,8 @@ ul,li{
 }
 .project_item{
 	width: 100%;
+	background: #ffffff;
+	margin-bottom: 0.266666rem;
 }
 .project_item_image{
 	width: 100%;
@@ -45,6 +47,7 @@ ul,li{
 .project_nav{
 	width: 100%;
 	height: 1.5rem;
+	background: #ffffff;
 }
 .project_nav_ul{
 	width: 90%;
@@ -67,6 +70,9 @@ ul,li{
 }
 .undis{
 	display: none;
+}
+.nav_info{
+	background: #ffffff;
 }
 #nav_info01{
 	width: 90%;
@@ -155,6 +161,7 @@ ul,li{
 .project_record_title{
 	width: 90%;
 	height: 1.2rem;
+	padding: 0.15rem;
 }
 .project_record_title01{
 	width: 100%;
@@ -177,6 +184,7 @@ ul,li{
 	font-size: 0.3rem;
 	line-height: 0.6rem;
 	color: #666666;
+	padding: 0.15rem;
 }
 .donation_btn{
 	width: 2rem;

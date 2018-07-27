@@ -122,7 +122,7 @@
 					<img src="img/online.png" />预约咨询
 					</div>
 					</div>
-					<div class="row content_02" onclick="showInfo(this);">
+					<div class="row content_02" onclick="showInfo('\${item.id}');">
 					<p>
 					\${item.profile}
 					</p>
