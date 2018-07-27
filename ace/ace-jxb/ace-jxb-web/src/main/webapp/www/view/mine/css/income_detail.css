@@ -1,0 +1,29 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.row{
+	padding: 0;
+	margin: 0;
+}
+.listItem{
+	width: 90%;
+	height: 1.773333rem;
+	margin: 0 auto;
+	border-bottom: 1px solid #F7F9FC;
+}
+.income_title{
+	color: #1C2843;
+	font-size: 0.4rem;
+	padding-top: 0.426666rem;
+}
+.income_time{
+	color: #A0A7B6;
+	font-size: 0.32rem;
+	padding-top: 0.16rem;
+}
+.income{
+	color: #0EC8C4;
+	font-size: 0.426666rem;
+	padding-top: 0.626666rem;
+}

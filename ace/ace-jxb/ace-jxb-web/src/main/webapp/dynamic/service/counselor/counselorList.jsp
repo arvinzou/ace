@@ -18,6 +18,21 @@
     <script src="${portalPath}/content/common/js/loader.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/service/counselor/counselor.js?v=${cfg.version}"></script>
 </head>
+<style>
+    .counselor-list {
+
+    }
+
+    .counselor-box {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .uc-recomend-counselor-img {
+        width: 40px;
+        height: 40px;
+    }
+</style>
 
 <body>
 <div class="page-wrapper">
@@ -83,25 +98,10 @@
     <div class="bottom"></div>
 
 </div>
-<style>
-    .counselor-list {
-
-    }
-
-    .counselor-box {
-        float: left;
-        margin-right: 20px;
-    }
-
-    .uc-recomend-counselor-img {
-        width: 40px;
-        height: 40px;
-    }
-</style>
 
 <script id="tpl-counselor-box" type="text/template">
     {@each rows as item}
-    <div class="m-grid-col-md-3" data-log-act="click" data-log-id="expertCard"
+    <div class="counselor-box" data-log-act="click" data-log-id="expertCard"
          data-log-data="">
         <a target="_blank" class="j-href" href="">
             <div class="uc-recomend-counselor-img">

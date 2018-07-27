@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.ConsultDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.Consult">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="objects" jdbcType="VARCHAR" property="objects"/>
+        <result column="field" jdbcType="VARCHAR" property="field"/>
+        <result column="procTime" jdbcType="VARCHAR" property="procTime"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.jxb.model.Consult">
+        <result column="info" jdbcType="LONGVARCHAR" property="info"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, objects, field, procTime, city, status, createDate
+  </sql>
+    <sql id="Blob_Column_List">
+    info
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from consult
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from consult
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Consult">
+    insert into consult (id, objects, field, 
+      procTime, city, status, 
+      createDate, info)
+    values (#{id,jdbcType=VARCHAR}, #{objects,jdbcType=VARCHAR}, #{field,jdbcType=VARCHAR}, 
+      #{procTime,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{info,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Consult">
+        insert into consult
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="objects != null">
+                objects,
+            </if>
+            <if test="field != null">
+                field,
+            </if>
+            <if test="procTime != null">
+                procTime,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="info != null">
+                info,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="objects != null">
+                #{objects,jdbcType=VARCHAR},
+            </if>
+            <if test="field != null">
+                #{field,jdbcType=VARCHAR},
+            </if>
+            <if test="procTime != null">
+                #{procTime,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="info != null">
+                #{info,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.Consult">
+        update consult
+        <set>
+            <if test="objects != null">
+                objects = #{objects,jdbcType=VARCHAR},
+            </if>
+            <if test="field != null">
+                field = #{field,jdbcType=VARCHAR},
+            </if>
+            <if test="procTime != null">
+                procTime = #{procTime,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="info != null">
+                info = #{info,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.jxb.model.Consult">
+    update consult
+    set objects = #{objects,jdbcType=VARCHAR},
+      field = #{field,jdbcType=VARCHAR},
+      procTime = #{procTime,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      info = #{info,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Consult">
+    update consult
+    set objects = #{objects,jdbcType=VARCHAR},
+      field = #{field,jdbcType=VARCHAR},
+      procTime = #{procTime,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

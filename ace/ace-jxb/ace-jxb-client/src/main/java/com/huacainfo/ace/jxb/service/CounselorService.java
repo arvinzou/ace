@@ -1,12 +1,16 @@
 package com.huacainfo.ace.jxb.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
+
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -82,4 +86,29 @@ public interface CounselorService {
      */
     MessageResponse deleteCounselorByCounselorId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 注册老师资料
+     *
+     * @param mobile   手机号码
+     * @param studioId 推荐人userid （portal.users.id）
+     * @param userinfo 微信基本信息
+     * @return
+     */
+    ResultResponse register(String mobile, String studioId, Userinfo userinfo);
+
+    /**
+     * 获取咨询师统计数据
+     *
+     * @param counselorId 咨询师ID
+     * @return map
+     */
+    Map<String, Object> statistic(String counselorId);
+
+    /**
+     * 咨询师"我"的账户信息
+     *
+     * @param counselorId 咨询师id
+     * @return ResultResponse data=>Map
+     */
+    ResultResponse accountInfo(String counselorId);
 }

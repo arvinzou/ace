@@ -18,10 +18,12 @@
         #{email,jdbcType=VARCHAR}, #{seat,jdbcType=VARCHAR}, #{userLevel,jdbcType=VARCHAR},
         #{createTime,jdbcType=TIMESTAMP}, #{fax,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR},
         #{qq,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{curSyid,jdbcType=VARCHAR},
-        #{appOpenId,jdbcType=VARCHAR});
+        #{appOpenId,jdbcType=VARCHAR})
+        ;
         insert into portal.users_role
         (user_id, role_id, create_time)
-        values(#{userId,jdbcType=VARCHAR}, '862608d2-30c2-11e8-b712-00163e00fea1', now());
+        values(#{userId,jdbcType=VARCHAR}, '862608d2-30c2-11e8-b712-00163e00fea1', now())
+        ;
         insert into portal.user_cfg (id, userId, cfgKey,cfgValue)
         values (#{userId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 'portalType','5');
     </insert>

@@ -268,24 +268,28 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CounselorVo">
-
+        <result column="studioName" jdbcType="VARCHAR" property="studioName"/>
+        <result column="regAuditRst" jdbcType="VARCHAR" property="regAuditRst"/>
     </resultMap>
     <sql id="Vo_Column_List">
-        id, studioId, name, certification, tags, years, mobile, imagePhotoUrl, visitCardUrl,
-        idCard, idCardImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm, income,
-        account, level, createDate, profile
+        s.`name` as studioName,
+        IFNULL(ta.rst,'0') as regAuditRst,
+        t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
+        t.idCard, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm, t.income,
+        t.account, t.level, t.createDate, t.profile
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from counselor
-        where id = #{id,jdbcType=VARCHAR}
+        <include refid="Vo_Column_List"/>
+        from counselor t
+        left join studio s on s.id = t.studioId
+        left join teacher_audit ta on ta.counselorId=t.id
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
         <include refid="Vo_Column_List"/>
         <include refid="whereCondition"/>
         <choose>
@@ -301,14 +305,32 @@
 
     <sql id="whereCondition">
         from counselor t
+        left join studio s on s.id = t.studioId
+        left join teacher_audit ta on ta.counselorId=t.id
         where 1=1
         <if test="condition.id !=null and condition.id !=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
-            and t.name
-            like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.regAuditRst !=null and condition.regAuditRst !=&quot;&quot;">
+            and IFNULL(ta.rst,'0') = #{condition.regAuditRst,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.tags !=null and condition.tags !=&quot;&quot;">
+            and t.tags like concat('%',#{condition.tags,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.consultTypeArray !=null ">
+            and EXISTS (
+            select 1 from consult_product cp
+            where cp.counselorId = t.id
+            and cp.type in
+            <foreach collection="condition.consultTypeArray" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+            )
+        </if>
+
     </sql>
 
     <select id="findCount" resultType="int">
