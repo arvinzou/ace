@@ -11,9 +11,15 @@ public class FopCompanyContribution implements Serializable {
     private String id;
 
     private String companyId;
-
+    /**
+     * 0 - 对社会公益事业做过何种贡献
+     */
     private String contributionType;
 
+    /**
+     * when :contributionType=0
+     * then :  1-安排下岗职工再就业  2-助学兴教  3-帮困扶贫  4-其他
+     */
     private String itemCode;
 
     private String itemName;

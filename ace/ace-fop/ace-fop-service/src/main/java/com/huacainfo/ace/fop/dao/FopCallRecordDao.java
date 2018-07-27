@@ -34,4 +34,8 @@ public interface FopCallRecordDao {
     int isExit(FopCallRecord record);
 
     List<Map<String, Object>> selectAllSendObject();
+
+    List<Map<String, Object>> selectMemberCheckTreeList();
+
+    List<Map<String, Object>> selectSendList(@Param("q") String q);
 }

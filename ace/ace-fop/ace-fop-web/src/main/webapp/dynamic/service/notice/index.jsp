@@ -101,17 +101,15 @@
             <span id="releaseDate">
 </span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-备注</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">备注</span>
             <br>
-            <span id="remark">
-</span>
+            <span id="remark"></span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
+        <div class="labelItem hide">
+            <span class="labelItemHeader">状态</span>
             <br>
-            <span id="status">
-</span>
+            <span id="status"></span>
         </div>
     </div>
 

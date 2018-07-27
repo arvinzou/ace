@@ -141,7 +141,17 @@ function loadView(id) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
+
             $.each(rst.value, function (key, value) {
+                //status
+                if (key == "status") {
+                    if ("1" == value) {
+                        value = "非会员";
+                    }
+                    if ("2" == value) {
+                        value = "会员";
+                    }
+                }
                 if (key == 'category') {
                     value = rsd(value, '83');
                 }

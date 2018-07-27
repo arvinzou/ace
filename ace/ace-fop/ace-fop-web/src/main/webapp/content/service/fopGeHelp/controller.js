@@ -47,7 +47,7 @@ jQuery(function ($) {
                             '<div class="widget-header" />')
                         style_edit_form(form);
                         initSimditor($("textarea[name=content]"), null);
-                        $('.simditor .simditor-body').prop('contenteditable', false);
+                        // $('.simditor .simditor-body').prop('contenteditable', true);
                     }
                 })
         });

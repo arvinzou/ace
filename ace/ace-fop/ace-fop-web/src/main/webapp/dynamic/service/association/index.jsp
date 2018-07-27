@@ -76,7 +76,7 @@
             <br>
             <span id="fullName"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">协会简称</span>
             <br>
             <span id="shortName"></span>
@@ -96,12 +96,12 @@
             <br>
             <span id="address"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">维度</span>
             <br>
             <span id="latitude"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">经度</span>
             <br>
             <span id="longitude"></span>
