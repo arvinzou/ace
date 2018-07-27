@@ -24,8 +24,8 @@
 			<div class="raisebox">
 				<div class="raise_item" ng-repeat="item in items" ng-click="showProjectInfo(item.id)">
 					<div class="raise_item_image">
-						<img ng-if="item.coverUrl!=''&&item.coverUrl!=undefined&&item.coverUrl!=null" ng-src="{{item.coverUrl}}" width="100%" height="100%"/>
-						<img ng-if="item.coverUrl==''||item.coverUrl==undefined||item.coverUrl==null" ng-src="img/project_default.png" width="100%" height="100%"/>
+						<img ng-if="item.coverUrl!=''&&item.coverUrl!=undefined&&item.coverUrl!=null" ng-src="{{item.coverUrl}}"/>
+						<img ng-if="item.coverUrl==''||item.coverUrl==undefined||item.coverUrl==null" ng-src="img/project_default.png"/>
 					</div>
 					<div class="raise_item_cnt">
 						<div class="raise_item_title" ng-bind="item.projectName"></div>
