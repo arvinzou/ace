@@ -161,6 +161,7 @@ ul,li{
 .project_record_title{
 	width: 90%;
 	height: 1.2rem;
+	padding: 0.15rem;
 }
 .project_record_title01{
 	width: 100%;
@@ -183,6 +184,7 @@ ul,li{
 	font-size: 0.3rem;
 	line-height: 0.6rem;
 	color: #666666;
+	padding: 0.15rem;
 }
 .donation_btn{
 	width: 2rem;

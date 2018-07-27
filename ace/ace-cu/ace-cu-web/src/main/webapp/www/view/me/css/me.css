@@ -29,11 +29,11 @@ ul,li{
 	padding-top: 0.5rem;
 }
 .userimg{
-	width: 2rem;
-	height: 2rem;
-	border-radius: 1rem;
+	width: 1.6rem;
+	height: 1.6rem;
+	border-radius: 50%;
 	float: left;
-	border: 2px solid #FFFFFF;
+	border: 2px solid #F7F9FC;
 }
 .userimg img{
 	width: 100%;
