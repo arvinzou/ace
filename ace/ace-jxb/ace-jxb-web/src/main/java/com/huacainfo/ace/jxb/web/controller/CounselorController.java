@@ -5,9 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.model.TeacherAudit;
@@ -57,7 +59,7 @@ public class CounselorController extends JxbBaseController {
     public PageResult<CounselorVo> findCounselorList(CounselorQVo condition,
                                                      PageParamNoChangeSord page) throws Exception {
         PageResult<CounselorVo> rst = counselorService
-                .findCounselorList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+                .findCounselorList(condition, (page.getPage() - 1) * page.getLimit(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -101,6 +103,23 @@ public class CounselorController extends JxbBaseController {
 
     /**
      * @throws
+     * @Title:updateCounselor
+     * @Description: TODO(更新咨询师)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-07-20
+     */
+    @RequestMapping(value = "/updateUserinfo")
+    @ResponseBody
+    public MessageResponse updateUserinfo(Counselor obj) throws Exception {
+        obj.setId(this.getCurUserProp().getUserId());
+        return counselorService.updateCounselor(obj, getCurUserProp());
+    }
+
+    /**
+     * @throws
      * @Title:selectCounselorByPrimaryKey
      * @Description: TODO(获取咨询师)
      * @param: @param id
@@ -113,6 +132,22 @@ public class CounselorController extends JxbBaseController {
     @ResponseBody
     public SingleResult<CounselorVo> selectCounselorByPrimaryKey(String id) throws Exception {
         return counselorService.selectCounselorByPrimaryKey(id);
+    }
+
+    /**
+     * @throws
+     * @Title:selectCounselorByPrimaryKey
+     * @Description: TODO(获取自己的账号)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Counselor>
+     * @author: Arvin
+     * @version: 2018-07-20
+     */
+    @RequestMapping(value = "/getMyinfo")
+    @ResponseBody
+    public SingleResult<CounselorVo> getMyinfo() throws Exception {
+        return counselorService.selectCounselorByPrimaryKey(this.getCurUserProp().getUserId());
     }
 
     /**
@@ -151,3 +186,5 @@ public class CounselorController extends JxbBaseController {
         return teacherAuditService.insertTeacherAudit(record, getCurUserProp());
     }
 }
+
+
