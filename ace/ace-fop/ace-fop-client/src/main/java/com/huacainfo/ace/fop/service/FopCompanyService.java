@@ -49,7 +49,7 @@ public interface FopCompanyService {
      */
     MessageResponse insertFopCompany(FopCompanyVo obj, UserProp userProp) throws Exception;
 
-    MessageResponse insertCompany(String fullName, String lpMobile, String companyType) throws Exception;
+    MessageResponse insertCompany(String fullName, String lpMobile) throws Exception;
 
     /**
      * @throws
