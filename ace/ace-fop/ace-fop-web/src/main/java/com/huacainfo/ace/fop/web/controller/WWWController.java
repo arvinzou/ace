@@ -671,7 +671,7 @@ public class WWWController extends FopBaseController {
             return new MessageResponse(ResultCode.FAIL, "验证码输入有误");
         }
         if (!"2".equals(isCompany)) {
-            return this.fopCompanyService.insertCompany(name, phoneNumber, isCompany);
+            return this.fopCompanyService.insertCompany(name, phoneNumber);
         }
         return this.fopAssociationService.insertAssociation(name, phoneNumber);
     }
