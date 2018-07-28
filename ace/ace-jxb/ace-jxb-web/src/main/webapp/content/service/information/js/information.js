@@ -29,10 +29,39 @@ function getUserinfo() {
     var url = "/jxb/counselor/getMyinfo"
     $.getJSON(url, function (result) {
         if (result.status == 0) {
-            viewUserinfo(result.value)
+            viewUserinfo(result.value);
+            fillForm(result.value)
         }
     })
 }
+
+function fillForm(data) {
+    for (key in data) {
+        if (key.indexOf("Url") != -1) {
+            $('.form_' + key).prop("src", data[key]);
+            continue
+        }
+        $('[name=form_' + key + ']').val(data[key]);
+    }
+    var tag = $('#tags .md-checkbox');
+    var tags = data["tags"];
+    filloption(tag, tags)
+    tag = $('#certification .md-radio');
+    tags = data["certification"];
+    filloption(tag, tags)
+
+}
+
+function filloption(tag, tags) {
+    for (var i = 0; i < tag.length; i++) {
+        var text = tag.eq(i).find('label').text().trim();
+        if (tags.indexOf(text) != -1) {
+            tag.eq(i).find('input').attr('checked', true)
+        }
+    }
+    ;
+}
+
 
 
 function viewUserinfo(data) {
@@ -62,7 +91,7 @@ function submitForm() {
         }
     }
     ;
-    var sex = $('input:radio[name="sex"]:checked').val();
+    var sex = $('input:radio[name="form_sex"]:checked').val();
     formObject.sex = sex;
     var imagePhotoUrl = $('#headimg1').prop('src');
     if (imagePhotoUrl.indexOf("zx.huacainfo.com") == -1) {
@@ -97,7 +126,7 @@ function submitForm() {
     formObject.evidenceImgUrl = evidenceImgUrl;
 
 
-    var certification = $('input:radio[name="certification"]:checked').next().text();
+    var certification = $('input:radio[name="form_certification"]:checked').next().text();
     formObject.certification = certification.trim();
 
 
