@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.view.CheckTree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -189,4 +190,21 @@ public class FopCallRecordController extends FopBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
     }
 
+
+    @RequestMapping(value = "/selectMemberCheckTreeList")
+    @ResponseBody
+    public List<CheckTree> selectMemberCheckTreeList() throws Exception {
+        return fopCallRecordService.selectMemberCheckTreeList();
+    }
+
+
+    @RequestMapping(value = "/selectSendList")
+    @ResponseBody
+    public Map<String, Object> selectPersonage(String q, String id) throws Exception {
+        if (CommonUtils.isNotBlank(id)) {
+            q = id;
+        }
+
+        return fopCallRecordService.selectSendList(q);
+    }
 }

@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopCompany">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="departmentId" jdbcType="VARCHAR" property="departmentId"/>
+        <result column="belongTo" jdbcType="VARCHAR" property="belongTo"/>
         <result column="creditCode" jdbcType="VARCHAR" property="creditCode"/>
         <result column="companyType" jdbcType="CHAR" property="companyType"/>
         <result column="fullName" jdbcType="VARCHAR" property="fullName"/>
@@ -51,8 +52,8 @@
         fixedAssets, workingCapital, ownSpace, tenancySpace, personId, address, latitude,
     longitude, firstPersonId, secPersonId, postcode, fax, email, majorVariety, laborContractNum, 
     thirdLaborRelation, socialInsuranceAddr, socialInsuranceNum, accTaxAmount, yearTaxAmount, 
-    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
-    lastModifyDate
+    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate, belongTo
   </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -88,8 +89,8 @@
         socialInsuranceAddr, socialInsuranceNum,
         accTaxAmount, yearTaxAmount, remark,
         status, createUserId, createUserName,
-        createDate, lastModifyUserId, lastModifyUserName,
-      lastModifyDate)
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
+        belongTo)
         values (#{id,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR},
         #{companyType,jdbcType=CHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
         #{companyCode,jdbcType=VARCHAR}, #{companyLogo,jdbcType=VARCHAR}, #{companyLinkUrl,jdbcType=VARCHAR},
@@ -104,7 +105,7 @@
         #{accTaxAmount,jdbcType=DECIMAL}, #{yearTaxAmount,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR},
         #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
         #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
-      #{lastModifyDate,jdbcType=TIMESTAMP})
+        #{lastModifyDate,jdbcType=TIMESTAMP}, #{belongTo,jdbcType=VARCHAR})
   </insert>
 
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopCompany">
@@ -236,6 +237,9 @@
             <if test="lastModifyDate != null">
                 lastModifyDate,
             </if>
+            <if test="belongTo != null">
+                belongTo,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -363,6 +367,9 @@
             </if>
             <if test="lastModifyDate != null">
                 #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="belongTo != null">
+                #{belongTo,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -493,6 +500,9 @@
             <if test="lastModifyDate != null">
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="belongTo != null">
+                belongTo = #{belongTo,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -539,13 +549,14 @@
       createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+        belongTo = #{belongTo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopCompanyVo">
         <result column="realName" jdbcType="VARCHAR" property="realName"/>
-
+        <!--法人信息-->
         <result column="lpSex" jdbcType="VARCHAR" property="lpSex"/>
         <result column="lpBirthDt" jdbcType="TIMESTAMP" property="lpBirthDt"/>
         <result column="lpNativePlace" jdbcType="VARCHAR" property="lpNativePlace"/>
@@ -557,9 +568,31 @@
         <result column="lpDeptPost" jdbcType="VARCHAR" property="lpDeptPost"/>
         <result column="lpIdentityCard" jdbcType="VARCHAR" property="lpIdentityCard"/>
         <result column="lpSocietyPost" jdbcType="VARCHAR" property="lpSocietyPost"/>
+        <result column="lpResume" jdbcType="VARCHAR" property="lpResume"/>
+        <result column="lpAchievement" jdbcType="VARCHAR" property="lpAchievement"/>
+        <!--党组织建立情况-->
+        <result column="partyCategory" jdbcType="VARCHAR" property="partyCategory"/>
+        <result column="partyCrtDt" jdbcType="VARCHAR" property="partyCrtDt"/>
+        <result column="partyPeoples" jdbcType="VARCHAR" property="partyPeoples"/>
+        <result column="partyDutyMan" jdbcType="VARCHAR" property="partyDutyMan"/>
+        <result column="partyPhone" jdbcType="VARCHAR" property="partyPhone"/>
+        <!--工会组织建立情况-->
+        <result column="unionCrtDt" jdbcType="VARCHAR" property="unionCrtDt"/>
+        <result column="unionDutyMan" jdbcType="VARCHAR" property="unionDutyMan"/>
+        <result column="unionPhone" jdbcType="VARCHAR" property="unionPhone"/>
+        <!--对社会公益事业做过何种贡献-->
+        <result column="reemployContribution" jdbcType="VARCHAR" property="reemployContribution"/>
+        <result column="educationContribution" jdbcType="VARCHAR" property="educationContribution"/>
+        <result column="helpPoorContribution" jdbcType="VARCHAR" property="helpPoorContribution"/>
+        <result column="otherContribution" jdbcType="VARCHAR" property="otherContribution"/>
     </resultMap>
 
     <sql id="column_List_Vo">
+        c.belongTo,
+        porg.orgType as partyCategory, porg.establishDate as partyCrtDt, porg.peopleNum as partyPeoples,
+        porg.dutyPersonName as partyDutyMan, porg.dutyPersonPhone as partyPhone,
+        uorg.establishDate as unionCrtDt, uorg.dutyPersonName as unionDutyMan, uorg.dutyPersonPhone as unionPhone,
+        a.reemployContribution, a.educationContribution, a.helpPoorContribution, a.otherContribution,
         c.id, c.departmentId, c.creditCode, c.companyType, c.fullName, c.shortName, c.companyCode, c.companyLogo,
         c.companyLinkUrl, c.areaCode, c.companyProperty, c.establishDate, c.crewSize, c.registeredCapital,
         c.fixedAssets, c.workingCapital, c.ownSpace, c.tenancySpace, c.personId, c.address, c.latitude,
@@ -570,8 +603,9 @@
         p.mobileNumer AS lpMobile, p.sex AS lpSex, p.birthDate AS lpBirthDt,
         p.nationality as lpNationality, p.nativePlace AS lpNativePlace,p.political AS lpPolitical,
         p.recruitmentDate AS lpRecruitmentDate,p.education AS lpEducation,p.skillJobTitle AS lpSkillJobTitle,
-        p.deptPost AS lpDeptPost,p.identityCard AS lpIdentityCard,p.societyPost AS lpSocietyPost,z.name as
-        companyPropertyName
+        p.deptPost AS lpDeptPost,p.identityCard AS lpIdentityCard,p.societyPost AS lpSocietyPost,
+        p.resume as lpResume, p.achievement as lpAchievement,
+        z.name as companyPropertyName
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -608,7 +642,22 @@
         from fop_company c
         left join fop_person p on p.id=c.personId
         left join portal.province pp on pp.code=c.areaCode
-        LEFT JOIN (SELECT *FROM portal.dict where category_id="134") z on z.code=c.companyProperty
+        LEFT JOIN (SELECT *FROM portal.dict where category_id='134') z on z.code=c.companyProperty
+        left join (select
+        companyId, orgType, establishDate,
+        peopleNum, dutyPersonName, dutyPersonPhone
+        from fop_company_org po where po.companyOrgType = 1 ) porg on c.id = porg.companyId
+        left join (select
+        companyId, establishDate, dutyPersonName, dutyPersonPhone
+        from fop_company_org po where po.companyOrgType = 2 ) uorg on c.id = uorg.companyId
+        LEFT JOIN (select
+        companyId,
+        MAX( case itemCode when '1' then itemValue else '' end) 'reemployContribution' ,
+        MAX( case itemCode when '2' then itemValue else '' end) 'educationContribution' ,
+        MAX( case itemCode when '3' then itemValue else '' end) 'helpPoorContribution' ,
+        MAX( case itemCode when '4' then itemValue else '' end) 'otherContribution'
+        from fop_company_contribution
+        group by companyId )a on a.companyId = c.id
     </sql>
 
     <sql id="whereCondition">
@@ -629,7 +678,9 @@
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and c.status = #{condition.status,jdbcType=CHAR}
         </if>
-
+        <if test="condition.belongTo!=null and condition.belongTo!=&quot;&quot;">
+            and c.belongTo = #{condition.belongTo,jdbcType=CHAR}
+        </if>
         <choose>
             <when test='condition.companyType=="w"'>
                 and c.companyType not in('3','4')

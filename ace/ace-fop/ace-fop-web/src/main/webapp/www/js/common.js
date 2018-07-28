@@ -24,8 +24,8 @@ html.push("<div class=\"logo_word\">承办单位：常德市工商业联合会·
 html.push("</div>");
 html.push("<div class=\"words\">");
 html.push("<marquee id='Marquee'>");
-html.push("<p id=\"effect\" style='font-size: 36px;'>开放强市&nbsp;&nbsp;产业立市</p>");
-html.push("<p id=\"effect01\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成就企业家&nbsp;&nbsp;厚待投资者</p>");
+html.push("<span id=\"effect\" style='font-size: 38px;'>开放强市&nbsp;&nbsp;产业立市</span>");
+html.push("<span id=\"effect01\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成就企业家&nbsp;&nbsp;厚待投资者</span>");
 html.push("</marquee>");
 html.push("</div>");
 html.push("</div>");

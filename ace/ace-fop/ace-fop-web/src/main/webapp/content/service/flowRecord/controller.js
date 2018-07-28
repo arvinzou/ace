@@ -169,6 +169,30 @@ function loadView(id, postUrl, dialogId, tplId) {
             $(dialogId).html(renderHtml);
             //格式化值
             $.each(rst.value, function (key, value) {
+                //企业类型 "0": "企业会员", "4": "个人会员"},//, "1": "团体企业", "2": "律师事务所", "3": "银行机构"
+                if (key == "companyType") {
+                    var rst = "";
+                    switch (value) {
+                        case '0' :
+                            rst = "企业会员";
+                            break;
+                        case '1' :
+                            rst = "团体企业";
+                            break;
+                        case '2' :
+                            rst = "律师事务所";
+                            break;
+                        case '3' :
+                            rst = "银行机构";
+                            break;
+                        case '4' :
+                            rst = "个人会员";
+                            break;
+                        default :
+                            rst = "N/A";
+                    }
+                    value = rst;
+                }
                 //status
                 if (key == "status") {
                     if ("1" == value) {

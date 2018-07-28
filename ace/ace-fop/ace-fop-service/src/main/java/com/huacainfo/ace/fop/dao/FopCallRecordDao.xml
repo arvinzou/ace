@@ -270,4 +270,79 @@
         WHERE t.phoneNumber IS NOT NULL
         and t.status='2'
     </select>
+
+    <select id="selectMemberCheckTreeList" resultType="map">
+        select
+            t.id ID,
+            '0' PID,
+            t.fullName TEXT,
+            'closed' STATE,
+            'SRC' SRC,
+            'ICON' ICON,
+            p.mobileNumer HREF,
+            p.mobileNumer ICONCLS,
+            0 CHILD_COUNT
+        from fop.fop_company t
+        left join fop.fop_person p on t.personId = p.id
+        where t.`status` = 2
+        and t.companyType = 0
+        UNION ALL
+        select
+            t.id ID,
+            '4' PID,
+            t.fullName TEXT,
+            'closed' STATE,
+            'SRC' SRC,
+            'ICON' ICON,
+            p.mobileNumer HREF,
+            p.mobileNumer ICONCLS,
+            0 CHILD_COUNT
+        from fop.fop_company t
+        left join fop.fop_person p on t.personId = p.id
+        where t.`status` = 2
+        and t.companyType = 4
+        UNION ALL
+        select
+            a.id ID,
+            '1' PID,
+            a.fullName TEXT,
+            'closed' STATE,
+            'SRC' SRC,
+            'ICON' ICON,
+            a.phoneNumber HREF,
+            a.phoneNumber ICONCLS,
+            0 CHILD_COUNT
+        from fop.fop_association a
+        where a.`status` = 2
+    </select>
+
+    <select id="selectSendList" resultType="java.util.Map">
+        select *
+        from (
+        SELECT
+        t.id,
+        '0' AS toUserType,
+        p.mobileNumer AS mobile,
+        t.fullName
+        FROM fop_company t
+        LEFT JOIN fop_person p ON t.personId = p.id
+        WHERE p.mobileNumer IS NOT NULL
+        and t.status='2'
+        UNION ALL
+        SELECT
+        t.id ,
+        '1' AS toUserType,
+        t.phoneNumber AS mobile,
+        t.fullName
+        FROM fop_association t
+        WHERE t.phoneNumber IS NOT NULL
+        and t.status='2'
+        )a
+        where 1=1
+        <if test='q!=null and q!=""'>
+            and a.fullName like concat('%',#{q,jdbcType=VARCHAR},'%')
+            or a.mobile like concat('%',#{q,jdbcType=VARCHAR},'%')
+        </if>
+
+    </select>
 </mapper>

@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.RandomValidateCode;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -19,7 +20,9 @@ import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
+import com.huacainfo.ace.fop.dao.FopCompanyOrgDao;
 import com.huacainfo.ace.fop.model.FopCompany;
+import com.huacainfo.ace.fop.model.FopCompanyContribution;
 import com.huacainfo.ace.fop.model.FopPayRecord;
 import com.huacainfo.ace.fop.model.FopPerson;
 import com.huacainfo.ace.fop.service.*;
@@ -75,6 +78,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     private UsersService usersService;
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private FopCompanyOrgDao fopCompanyOrgDao;
 
     /**
      * @throws
@@ -212,6 +217,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             throw new CustomException(rs2.getInfo());
         }
         FopPerson person = (FopPerson) rs2.getData();
+        //公司组织信息
+        insertOrUpdateCompanyOrgInfo(o, userProp);
+        //对社会公益事业做过何种贡献信息
+        insertOrUpdateContribution(o, userProp);
         //入库企业信息
         o.setPersonId(person.getId());
         o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
@@ -233,15 +242,122 @@ public class FopCompanyServiceImpl implements FopCompanyService {
                 return rs3;
             }
         }
-        //自动提交缴费记录
-//        MessageResponse rs4 = submitPayRecord(o, userProp);
-//        if (ResultCode.FAIL == rs4.getStatus()) {
-//            return rs4;
-//        }
+
         //注册成功消息推送
         sendRegisterMessage(o.getLpMobile(), o.getFullName(), password);
 
         return new MessageResponse(0, "添加企业管理完成！");
+    }
+
+    /**
+     * 存储 对社会公益事业做过何种贡献信息
+     *
+     * @param o
+     * @param userProp
+     */
+    private void insertOrUpdateContribution(FopCompanyVo o, UserProp userProp) throws Exception {
+        //后台管理端更新逻辑
+        if (StringUtil.oneIsNotEmty(o.getReemployContribution(), o.getEducationContribution(),
+                o.getHelpPoorContribution(), o.getOtherContribution())) {
+            String cid = o.getId();
+            List<FopCompanyContribution> contributes = new ArrayList<>();
+            FopCompanyContribution c1 = new FopCompanyContribution(cid, "0",
+                    "1", "安排下岗职工再就业", o.getReemployContribution(), 1);
+            FopCompanyContribution c2 = new FopCompanyContribution(cid, "0",
+                    "2", "助学兴教", o.getEducationContribution(), 2);
+            FopCompanyContribution c3 = new FopCompanyContribution(cid, "0",
+                    "3", "帮困扶贫", o.getHelpPoorContribution(), 3);
+            FopCompanyContribution c4 = new FopCompanyContribution(cid, "0",
+                    "4", "其他", o.getOtherContribution(), 4);
+            contributes.add(c1);
+            contributes.add(c2);
+            contributes.add(c3);
+            contributes.add(c4);
+
+         /*删除贡献*/
+            MessageResponse rs3 = fopCompanyContributionService.deleteFopCompanyContributionByCID(cid, userProp);
+            if (ResultCode.FAIL == rs3.getStatus()) {
+                throw new CustomException(rs3.getErrorMessage());
+            }
+        /*插入贡献*/
+            for (FopCompanyContribution contribute : contributes) {
+                contribute.setCompanyId(cid);
+                MessageResponse rs4 = fopCompanyContributionService.insertFopCompanyContribution(contribute, userProp);
+                if (ResultCode.FAIL == rs4.getStatus()) {
+                    throw new CustomException(rs4.getErrorMessage());
+                }
+            }
+        }
+    }
+
+    /**
+     * 存储公司组织信息
+     *
+     * @param o
+     * @param userProp
+     */
+    private void insertOrUpdateCompanyOrgInfo(FopCompanyVo o, UserProp userProp) {
+        String companyId = o.getId();
+        FopCompanyOrgVo party = fopCompanyOrgDao.findCompayOrgType(companyId, "1");//党组织
+        if (StringUtil.oneIsNotEmty(o.getPartyCategory(), o.getPartyDutyMan(), o.getPartyPhone(), o.getPartyPeoples() + "")
+                || o.getPartyCrtDt() != null) {
+            if (null == party) {
+                party = new FopCompanyOrgVo();
+                party.setId(GUIDUtil.getGUID());
+                party.setCompanyId(companyId);
+                party.setCompanyOrgType("1");
+                party.setOrgName("党组织");
+                party.setOrgType(o.getPartyCategory());
+                party.setPeopleNum(o.getPartyPeoples());
+                party.setEstablishDate(o.getPartyCrtDt());
+                party.setDutyPersonName(o.getPartyDutyMan());
+                party.setDutyPersonPhone(o.getPartyPhone());
+                party.setStatus("1");
+                party.setCreateUserId(userProp.getUserId());
+                party.setCreateUserName(userProp.getName());
+                party.setCreateDate(DateUtil.getNowDate());
+                party.setLastModifyDate(DateUtil.getNowDate());
+                fopCompanyOrgDao.insertSelective(party);
+            } else {
+                party.setOrgType(o.getPartyCategory());
+                party.setPeopleNum(o.getPartyPeoples());
+                party.setEstablishDate(o.getPartyCrtDt());
+                party.setDutyPersonName(o.getPartyDutyMan());
+                party.setDutyPersonPhone(o.getPartyPhone());
+                party.setLastModifyUserId(userProp.getUserId());
+                party.setLastModifyUserName(userProp.getName());
+                party.setLastModifyDate(DateUtil.getNowDate());
+                fopCompanyOrgDao.updateByPrimaryKeySelective(party);
+            }
+        }
+        //工会组织
+        FopCompanyOrgVo union = fopCompanyOrgDao.findCompayOrgType(o.getId(), "2");//工会组织
+        if (StringUtil.oneIsNotEmty(o.getUnionDutyMan(), o.getUnionPhone()) || o.getUnionCrtDt() != null) {
+            if (null == union) {
+                union = new FopCompanyOrgVo();
+                union.setId(GUIDUtil.getGUID());
+                union.setCompanyId(companyId);
+                union.setCompanyOrgType("2");
+                union.setOrgName("工会组织");
+                union.setEstablishDate(o.getUnionCrtDt());
+                union.setDutyPersonName(o.getUnionDutyMan());
+                union.setDutyPersonPhone(o.getUnionPhone());
+                union.setStatus("1");
+                union.setCreateUserId(userProp.getUserId());
+                union.setCreateUserName(userProp.getName());
+                union.setCreateDate(DateUtil.getNowDate());
+                union.setLastModifyDate(DateUtil.getNowDate());
+                fopCompanyOrgDao.insertSelective(union);
+            } else {
+                union.setEstablishDate(o.getUnionCrtDt());
+                union.setDutyPersonName(o.getUnionDutyMan());
+                union.setDutyPersonPhone(o.getUnionPhone());
+                union.setLastModifyUserId(userProp.getUserId());
+                union.setLastModifyUserName(userProp.getName());
+                union.setLastModifyDate(DateUtil.getNowDate());
+                fopCompanyOrgDao.updateByPrimaryKeySelective(union);
+            }
+        }
     }
 
     @Override
@@ -385,6 +501,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (pResp.getStatus() == ResultCode.FAIL) {
             return pResp;
         }
+        //公司组织信息
+        insertOrUpdateCompanyOrgInfo(o, userProp);
+        //对社会公益事业做过何种贡献信息
+        insertOrUpdateContribution(o, userProp);
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());

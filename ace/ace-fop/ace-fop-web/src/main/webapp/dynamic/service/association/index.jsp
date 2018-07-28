@@ -28,6 +28,7 @@
                 <form action="#" id="fm-search">
                     名称： <input name="fullName" type="text" style="width: 200px;"/>
                     电话： <input name="phoneNumber" type="text" style="width: 200px;"/>
+                    test： <input name="belongTo" type="text" style="width: 200px;"/>
 
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopAssociation/findFopAssociationList">
@@ -76,7 +77,7 @@
             <br>
             <span id="fullName"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">协会简称</span>
             <br>
             <span id="shortName"></span>
@@ -96,12 +97,12 @@
             <br>
             <span id="address"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">维度</span>
             <br>
             <span id="latitude"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">经度</span>
             <br>
             <span id="longitude"></span>

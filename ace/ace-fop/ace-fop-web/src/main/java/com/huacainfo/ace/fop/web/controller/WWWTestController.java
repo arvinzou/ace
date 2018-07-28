@@ -53,7 +53,7 @@ public class WWWTestController {
     }
 
 
-    @RequestMapping(value = "/destoryAccount")
+    @RequestMapping(value = "/destroyOne")
     @ResponseBody
     public ResultResponse destoryAccount(String account) throws Exception {
         return sysAccountService.destoryAccount(account);
@@ -70,5 +70,13 @@ public class WWWTestController {
         String respStr = HttpKit.get(url);
 
         return new ResultResponse(ResultCode.SUCCESS, "获取accessToken", respStr);
+    }
+
+
+    @RequestMapping(value = "/destroyAll")
+    @ResponseBody
+    public ResultResponse destroyAll() throws Exception {
+
+        return sysAccountService.destroyAll();
     }
 }

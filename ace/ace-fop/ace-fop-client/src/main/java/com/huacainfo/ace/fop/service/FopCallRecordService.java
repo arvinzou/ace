@@ -1,6 +1,7 @@
 package com.huacainfo.ace.fop.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.view.CheckTree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -115,4 +116,8 @@ public interface FopCallRecordService {
     List<FopCallRecordDetail> findCallRecordDetail(String recordId);
 
     MessageResponse test2(Map<String, Object> data) throws Exception;
+
+    List<CheckTree> selectMemberCheckTreeList();
+
+    Map<String, Object> selectSendList(String q);
 }

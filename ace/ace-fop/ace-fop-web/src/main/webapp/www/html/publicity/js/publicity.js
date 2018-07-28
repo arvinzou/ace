@@ -154,6 +154,7 @@ app.controller(ngControllerName,function($scope){
     $scope.search = function(){
         var key_word = $("#key_word").val();
         var memberType = $("#memberType option:checked").val();
+        var belongTo = $("#belongTo option:checked").val();   //所属工商联
         if(memberType == "1"){
             isCompany = "1";
             $(".search_filter2").show();
@@ -169,7 +170,8 @@ app.controller(ngControllerName,function($scope){
             url: "/fop/www/findCompanyList",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, fullName: key_word , areaCode: areaCode, companyProperty: companyProperty, isCompany: isCompany},
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:{page:currentPage, limit: pageSize, fullName: key_word , areaCode: areaCode, companyProperty: companyProperty, isCompany: isCompany, belongTo: belongTo},
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;

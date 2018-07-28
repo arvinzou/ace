@@ -14,12 +14,28 @@ public class MenuCreate {
 
 
     public static void main(String[] args) {
-        Menu m = fopMenu();
-        String accessToken = "11_BtCufjT5r0_Bw7I-MB3WHGCSz05xcjFyIv3217hAC9hCeNAZvs__-WgWaZAv9oJyEhnXOlrPIoZmm_qtw5nIivFr5ghZTbFufVwMUMhYIUdUynpDioHraTxDLe4tIzYx08JGcvQ1Z5PGXD4cUVBeABAIJP";
+        Menu m = jxbMenu();
+        String accessToken = "12_2j2USk-OQsbUSMwcoIxhcf3gCGWOvD0if6PHwG2xnAy5rYKjuPLuwbQZvmHXzydiyt-BI2tAgkyZ1Ctd2ec5J7aivZHGVlsMYMHDN9Q1GoZqmJYuGg8KSWa-JMzkjjNJhWVTy9rkCWHcNaH_KUMdAHARBT";
         // getAccessToken("wxfdb1e4819dee7b62", "dc51907c900e5bcb9527daec79d05e61");
         System.out.println(createMenu(accessToken, m));
+    }
 
-//        hcwyMenu();
+    public static Menu jxbMenu() {
+        //顾问在线
+        Button btn1 = new Button(MenuButtonType.VIEW, "顾问在线",
+                "http://zx.huacainfo.com/jxb/www/consultant/index.jsp");
+        //心理测评
+        Button btn2 = new Button(MenuButtonType.VIEW, "心理测评",
+                "http://zx.huacainfo.com/jxb/www/consultant/index.jsp");
+        //个人中心
+        Button btn3 = new Button(MenuButtonType.VIEW, "个人中心",
+                "http://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
+
+        //菜单json
+        Menu menu = new Menu();
+        menu.setButton(new Button[]{btn1, btn2, btn3});
+        System.out.println(JsonUtil.toJson(menu));
+        return menu;
     }
 
     public static Menu fopMenu() {

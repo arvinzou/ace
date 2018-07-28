@@ -246,4 +246,12 @@
         from fop_company_org
         WHERE companyId = #{companyId,jdbcType=VARCHAR}
     </select>
+
+    <select id="findCompayOrgType" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_company_org
+        WHERE companyId = #{companyId,jdbcType=VARCHAR}
+        and companyOrgType = #{companyOrgType,jdbcType=VARCHAR}
+    </select>
 </mapper>

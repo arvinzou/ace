@@ -16,6 +16,8 @@ public class FopAssociation {
 
     private String fullName;
 
+    private String belongTo;
+
     private String shortName;
 
     private String abcCode;
@@ -56,6 +58,14 @@ public class FopAssociation {
     private BigDecimal latitude;
 
     private BigDecimal longitude;
+
+    public String getBelongTo() {
+        return belongTo;
+    }
+
+    public void setBelongTo(String belongTo) {
+        this.belongTo = belongTo;
+    }
 
     public String getAreaCode() {
         return areaCode;

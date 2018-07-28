@@ -8,7 +8,9 @@ public class FopCompanyOrg implements Serializable {
     private String id;
 
     private String companyId;
-
+    /**
+     * 1-党组织 2-工会组织
+     */
     private String companyOrgType;
 
     private String orgName;
