@@ -84,4 +84,12 @@ public interface StudioService {
      */
     MessageResponse deleteStudioByStudioId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 工作室审核
+     *
+     * @param studioId
+     * @param auditRs
+     * @param curUserProp @return
+     */
+    MessageResponse audit(String studioId, String auditRs, UserProp curUserProp) throws Exception;
 }

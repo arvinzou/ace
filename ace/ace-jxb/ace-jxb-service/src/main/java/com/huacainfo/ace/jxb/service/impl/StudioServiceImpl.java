@@ -1,6 +1,7 @@
 package com.huacainfo.ace.jxb.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -100,7 +101,7 @@ public class StudioServiceImpl implements StudioService {
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setStatus("0");
         this.studioDao.insertSelective(o);
         this.dataBaseLogService.log("添加工作室", "工作室", "",
                 o.getId(), o.getId(), userProp);
@@ -174,13 +175,31 @@ public class StudioServiceImpl implements StudioService {
      * @version: 2018-07-25
      */
     @Override
-    public MessageResponse deleteStudioByStudioId(String id, UserProp userProp) throws
-            Exception {
+    public MessageResponse deleteStudioByStudioId(String id, UserProp userProp) throws Exception {
         this.studioDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除工作室", "工作室",
                 String.valueOf(id),
                 String.valueOf(id), "工作室", userProp);
         return new MessageResponse(0, "工作室删除完成！");
+    }
+
+    /**
+     * 工作室审核
+     *
+     * @param studioId
+     * @param auditRs     审核结果 1-审核通过 2-审核拒绝
+     * @param curUserProp
+     * @return
+     */
+    @Override
+    public MessageResponse audit(String studioId, String auditRs, UserProp curUserProp) throws Exception {
+        StudioVo studioVo = studioDao.selectVoByPrimaryKey(studioId);
+        if (null == studioVo) {
+            return new MessageResponse(ResultCode.FAIL, "工作室资料丢失");
+        }
+
+        studioVo.setStatus(auditRs);
+        return updateStudio(studioVo, curUserProp);
     }
 
 }
