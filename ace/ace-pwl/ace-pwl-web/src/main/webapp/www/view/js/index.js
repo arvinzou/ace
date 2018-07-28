@@ -4,7 +4,6 @@ var minute = 0;
 var second = 0;
 var dingshiqi;
 var sumTest;
-var flag = true;
 var eid;
 
 $(function () {
@@ -17,27 +16,64 @@ $(function () {
     $('.model_testlist .model_tool').on('click', '.over', testDone);
     $('.prompt_box  .content').on('click', '.isover', testDone);
     $('.model_testlist .model_list_lists').on('click', 'li', slideToTest);
-    $('.swiper-wrapper').on('click', '.options', selectiOption);
+    $('.swiper-wrapper').on('click', '.options_text', selectiOption);
     $('.bottom').on('click', '.show_ranking', ranking);
-    $('.ranking_list').on('click', '.remove', ranking);
+    $('.ranking_list').on('click', '.ranking_btn', hideranking);
 });
 
-function ranking() {
-    if (flag) {
-        flag = false;
-        var url = "/portal/www/test/findEvaluatDataList.do";
-        var data = {
-            evaluatTplId: eid
-        };
-        $.post(url, data, function (result) {
-            if (result.status == 0) {
-                viewRanking(result.data);
-            }
-        });
-    }
+function hideranking() {
     $('.ranking_list').toggleClass("ranking_list_hide");
 }
 
+function ranking() {
+    var url = "/portal/www/test/findEvaluatDataList.do";
+    var data = {
+        evaluatTplId: eid
+    };
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+            vueapp.ranking = result.data;
+        }
+    });
+    hideranking();
+}
+
+var vueapp = new Vue({
+    el: "#vue-app",
+    data: {
+        ranking: '',
+    },
+    filters: {
+        getclass: function (value) {
+            if (value > 2) {
+                return 'item-icon004';
+            }
+            else if (value == 0) {
+                return 'item-icon001';
+            }
+            else if (value == 1) {
+                return 'item-icon002';
+            }
+            else {
+                return 'item-icon003';
+            }
+        },
+        getClass1: function (value) {
+            if (value > 2) {
+                return '';
+            }
+            else if (value == 0) {
+                return 'ques-card-list-noe';
+            }
+            else if (value == 1) {
+                return 'ques-card-list-two';
+            }
+            else {
+                return 'ques-card-list-three';
+            }
+        }
+    }
+});
 
 function viewRanking(data) {
     $('.ranking_list .lists .list_li').empty();
@@ -51,13 +87,10 @@ function viewRanking(data) {
     }
 }
 
-
 var RankingLi = ' <li>' +
     '                <span class="number">[index]</span><span class="user"><img src="[headimgurl]">[nickname]</span><span' +
     '                    class="score">[score]</span>\n' +
     '            </li>';
-
-
 
 function starttimer() {
     dingshiqi = setInterval(timer, 1000);
@@ -76,7 +109,7 @@ function timer() {
 }
 
 function loadTestInfo() {
-    var url = window.location.href;//'http://zx.huacainfo.com/fundtown/www/download.html?id=b95afac02ed749589b4595a3388a8afc'//
+    var url = window.location.href; //'http://zx.huacainfo.com/fundtown/www/download.html?id=b95afac02ed749589b4595a3388a8afc'//
     var obj = parseQueryString(url);
     eid = obj.id;
     if (!eid) {
@@ -91,7 +124,6 @@ function loadTestInfo() {
     });
 }
 
-
 function parseQueryString(url) {
     var obj = {};
     var start = url.indexOf("?") + 1;
@@ -103,9 +135,6 @@ function parseQueryString(url) {
     }
     return obj;
 }
-
-
-
 
 function viewInfo(data) {
     for (var key in data) {
@@ -143,7 +172,6 @@ function pingjia() {
     });
 }
 
-
 function endTest() {
     location.href = 'testList.html';
 }
@@ -159,8 +187,8 @@ function statisticsScore() {
         flag = true;
         $test.find('.options_done').addClass('error');
         for (var j = 0; j < answerArray.length; j++) {
-            $test.find('.icon').eq(answerArray[j] - 1).removeClass('error').addClass('right');
-            if (!($test.find('.icon').eq(answerArray[j] - 1)).is('.options_done')) {
+            $test.find('.options_text').eq(answerArray[j] - 1).removeClass('error').addClass('right');
+            if (!($test.find('.options_text').eq(answerArray[j] - 1)).is('.options_done')) {
                 flag = false;
                 continue;
             }
@@ -173,20 +201,21 @@ function statisticsScore() {
 }
 
 function loadTest() {
-    var url = "/portal/www/test/getEvaluatCaseList.do";
+    var url = "/portal/www/test/getEvaluatCaseListVo.do";
     var data = {
         evaluatTplId: eid
     }
     $.ajaxSettings.async = false;
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            viewTest(result.rows);
+            viewTest(result.data);
         }
     });
     $.ajaxSettings.async = true;
 }
 
 function viewTest(data) {
+    console.log(data);
     $('.swiper-wrapper').empty();
     $('.model_list_lists ul').empty();
     sumTest = data.length
@@ -199,47 +228,30 @@ function viewTest(data) {
 function replaceTestStr(data) {
     var itmp = testCardTemplate;
     itmp = itmp.replace('#title#', data.title);
-    itmp = itmp.replace('#options1#', data.aName1);
-    itmp = itmp.replace('#options2#', data.aName2);
-    itmp = itmp.replace('#options3#', data.aName3);
-    itmp = itmp.replace('#options4#', data.aName4);
-    itmp = itmp.replace('#type#', data.solution.length > 1 ? "多选题" : "单选题");
+    itmp = itmp.replace('#type#', data.solution.length > 1 ? "多选" : "单选");
     itmp = itmp.replace('#score#', data.score);
     itmp = itmp.replace(/\#onlyOne#/g, data.solution.length > 1 ? "" : "onlyOne");
-    return $(itmp).data('solution', data.solution).data('score', data.score);
+    var $itmp = $(itmp).data('solution', data.solution).data('score', data.score);
+    var options = data.caseSubData;
+    for (var i = 0; i < options.length; i++) {
+        var option = optionTemplate;
+        option = option.replace('#options#', options[i].name);
+        option = option.replace('#onlyOne#', data.solution.length > 1 ? "" : "onlyOne");
+        $itmp.find('.option_list').append($(option));
+    }
+    return $itmp
 }
 
-var testCardTemplate = '<div class="swiper-slide">' +
-    '					<div class="test">' +
-    '						<div class="test_content">' +
-    '							<div class="title">#title# <span class="remark">（#type#）（#score#分）</span></div>' +
-    '							<div class="options #onlyOne#">' +
-    '								<div class="icon">' +
-    '									A' +
+var testCardTemplate = '<div class="swiper-slide"><div class="test">' +
+    '							<div class="test_content">' +
+    '								<div class="title">#title#<span class="remark">（#type#题）（#score#分）</span>' +
     '								</div>' +
-    '								<div class="options_text">#options1#</div>' +
+    '								<ul class="option_list">' +
+    '								</ul>' +
     '							</div>' +
-    '							<div class="options #onlyOne#">' +
-    '								<div class="icon">' +
-    '									B' +
-    '								</div>' +
-    '								<div class="options_text">#options2#</div>' +
-    '							</div>' +
-    '							<div class="options #onlyOne#">' +
-    '								<div class="icon">' +
-    '									C' +
-    '								</div>' +
-    '								<div class="options_text">#options3#</div>' +
-    '							</div>' +
-    '							<div class="options #onlyOne#">' +
-    '								<div class="icon">' +
-    '									D' +
-    '								</div>' +
-    '								<div class="options_text">#options4#</div>' +
-    '							</div>' +
-    '						</div>' +
-    '					</div>' +
-    '				</div>';
+    '						</div></div>';
+
+var optionTemplate = '<li class="options_text #onlyOne#">#options#</li>'
 
 function initWeb() {
     mySwiper = new Swiper('.swiper-container', {
@@ -264,12 +276,11 @@ function endingCheck() {
         return
     }
     if (awer) {
-        promptBox(true);//做完。
+        promptBox(true); //做完。
         return;
     }
-    promptBox(false);//没做完。
+    promptBox(false); //没做完。
 }
-
 
 function promptBox(flag) {
     var msg;
@@ -301,7 +312,7 @@ function checkDone() {
     }
     for (var i = 0; i < $tests.length; i++) {
         if (!$tests.eq(i).find(".options_done").length) {
-            return false;//题目没做完。。是否提交
+            return false; //题目没做完。。是否提交
         }
     }
     return true;
@@ -311,14 +322,14 @@ function selectiOption(e) {
     var $this = $(this);
     var index = mySwiper.activeIndex;
     if ($this.is('.onlyOne')) {
-        $this.siblings().children("div.icon").removeClass('options_done');
-        $this.children("div.icon").addClass('options_done');
+        $this.siblings().removeClass('options_done');
+        $this.addClass('options_done');
         mySwiper.slideTo(index + 1, 700, false);
     } else {
-        if ($this.children("div.icon").is('.options_done')) {
-            $this.children("div.icon").removeClass('options_done');
+        if ($this.is('.options_done')) {
+            $this.removeClass('options_done');
         } else {
-            $this.children("div.icon").addClass('options_done');
+            $this.addClass('options_done');
         }
     }
     if (index == (sumTest - 1)) {

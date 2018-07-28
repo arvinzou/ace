@@ -17,11 +17,15 @@
     url('//at.alicdn.com/t/font_723912_9x5e89mqwc.svg#iconfont') format('svg');
 }
 
+html {
+    height: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 1.1rem;
+    font-size: 0.426666rem;
     font-family: myFirstFont;
     box-sizing: border-box;
 }

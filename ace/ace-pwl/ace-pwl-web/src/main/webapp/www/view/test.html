@@ -7,7 +7,9 @@
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
     <link rel="stylesheet" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" href="css/index.css"/>
+    <script src="js/init_rem.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
     <title></title>
@@ -15,22 +17,22 @@
 
 <body>
 
-
 <div class="model_testlist">
     <div class="model_list">
-        <p class="model_list_title">题目列表</p>
         <div class="show_score">
+            <p>哇~恭喜你完成了答题！</p>
             <div class="top">
-                <span class="total">20</span>/<span class="info_score"></span>
-            </div>
-            <div class="bottom">
-                <span class="ranking"><i class="iconfont">&#xe619;</i><span class="ranking_num"></span></span>
-                <span class="show_ranking">查看排名</span>
-                <span class="time_end"><i class="iconfont">&#xeae5;</i><span class="zztime">00:00</span></span>
+                <span class="total"></span>分
             </div>
             <div class="pingyu">
                 <p class="evaluatGauge"></p>
             </div>
+            <div class="bottom">
+                <span class="ranking show_ranking"><i class="iconfont">&#xe619;</i><span
+                        class="ranking_num"></span></span>
+                <span class="time_end"><i class="iconfont">&#xeae5;</i><span class="zztime">00:00</span></span>
+            </div>
+
         </div>
         <div class="model_list_lists">
             <ul>
@@ -46,13 +48,13 @@
 <div class="main">
     <div class="head">
         <div class="content">
-            <div class="test_type">选择题</div>
             <div class="swiper-pagination test_pagination"></div>
         </div>
     </div>
 
     <div class="swiper-container">
         <div class="swiper-wrapper">
+
         </div>
     </div>
     <div class="footer">
@@ -70,17 +72,49 @@
     </div>
 </div>
 <div class="ranking_list ranking_list_hide">
-    <div class="title">
-        成绩排名
-        <div class="remove"><i class="iconfont">&#xe708;</i></div>
+    <button class="ranking_btn">返 回</button>
+    <div class="ques-section-item">
+        <div class="ques-section-card">
+            <div class="ques-card-head ques-card-bul">
+                <svg xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100%" height="0.8rem" xml:space="preserve">
+                            <defs>
+                                <pattern id="water" width=".25" height="1.1" patternContentUnits="objectBoundingBox">
+                                    <path fill="#fff" d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"></path>
+                                </pattern>
+                                <g id="eff">
+                                    <rect fill="url(#water)" x="-248.993" y="0" width="1200" height="120" opacity="0.3">
+                                        <animate attributeType="xml" attributeName="x" from="-300" to="0" repeatCount="indefinite" dur="10s"></animate>
+                                    </rect>
+                                    <rect fill="url(#water)" y="5" width="1600" height="125" opacity="0.3" x="-70.7616">
+                                        <animate attributeType="xml" attributeName="x" from="-400" to="0" repeatCount="indefinite" dur="13s"></animate>
+                                    </rect>
+                                </g>
+                            </defs>
+                            <use xlink:href="#eff" opacity="1" style="mix-blend-mode:normal;"></use>
+                        </svg>
+            </div>
+            <div class="ques-card-title ques-card-title-top">测试成绩排行榜</div>
+            <ul class="ques-card-list" id="vue-app">
+                <li :class="index | getClass1" v-for="item,index in ranking">
+                    <div class="ques-list-box clearfix">
+                        <div class="ques-list-head">
+                            <div class="ques-list-image">
+                                <img :src="item.headimgurl" alt="">
+                            </div>
+                        </div>
+                        <div class="ques-list-name">
+                            <div class="ques-list-name-head">{{item.nickname}}</div>
+                            <div class="ques-list-name-text"> 得分: {{item.score}}</div>
+                        </div>
+                        <span class="ques-list-name-icon item-icon001" :class="index | getclass">{{index+1}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="lists">
-        <ul class="list_li">
-        </ul>
-    </div>
-
 </div>
 </body>
+<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/index.js"></script>
 
 </html>

@@ -1,15 +1,16 @@
-var serviceImg = "http://zx.huacainfo.com/";
+
 var syid = 'pwl';
 
 $(function () {
     loadTestList();
-    $('.test_list').on('click', '.test', enterTest);
+    $('.test_list').on('click', '.buttom', enterTest);
 })
 
 function enterTest() {
-    var $this = $(this);
+    var $that = $(this);
+    var id = $that.parent().data("id");
         //存储变量的值
-    location.href = 'test.html?id=' + $this.data('id');
+    location.href = 'test.html?id=' + id;
 
 }
 
@@ -22,7 +23,7 @@ function loadTestList() {
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            viewList(result.data);
+            vue1.testlist = result.data;
         }
     });
 }
@@ -41,12 +42,10 @@ function replaceStr(data) {
     return $(itmp).data('id', data.id);
 }
 
-var listTemplate = '<div class="test">' +
-    '						<div class="title">' +
-    '							<p>#name#</p>' +
-    // '							<p class="number">1次</p>' +
-    '						</div>' +
-    '						<div class="pen_icon">' +
-    '							<i class="iconfont">&#xe63c;</i>' +
-    '						</div>' +
-    '			     </div>';
+var vue1 = new Vue({
+    el: "#vue_test",
+    data: {
+        testlist: ""
+    }
+})
+
