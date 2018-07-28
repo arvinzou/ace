@@ -124,7 +124,7 @@
     <include refid="Base_Column_List"/>
     FROM evaluat_gauge
     WHERE evaluatTplId = #{evaluatTplId}
-    ORDER BY scoreStart
+      ORDER BY scoreStart desc
   </select>
 
   <select id="getEvaluation" resultMap="BaseResultMap">
@@ -139,5 +139,4 @@
     and scoreEnd <![CDATA[ <= ]]> #{condition.score,jdbcType=INTEGER}
     and scoreStart <![CDATA[ > ]]> #{condition.score,jdbcType=INTEGER}
   </sql>
-
 </mapper>

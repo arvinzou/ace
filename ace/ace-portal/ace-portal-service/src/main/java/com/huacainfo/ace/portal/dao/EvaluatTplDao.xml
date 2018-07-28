@@ -23,15 +23,16 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, name, category, cover, qrcoteUrl, originalCost, discountCost, score, status,
-      syid,introduce, notice,createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
-      lastModifyDate
+      c.id, c.name, c.category, c.cover, c.qrcoteUrl, c.originalCost, c.discountCost, c.score, c.status,
+      c.syid,c.introduce,c.notice,c.createUserId, c.createUserName, c.createDate, c.lastModifyUserId,
+      c.lastModifyUserName,
+      c.lastModifyDate,t.name as categoryName
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
     select 
     <include refid="Base_Column_List" />
-    from evaluat_tpl
-    where id = #{id,jdbcType=VARCHAR}
+        from evaluat_tpl c
+        where c.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from evaluat_tpl
@@ -267,21 +268,24 @@
       </update>-->
 
     <sql id="whereCondition">
-        from evaluat_tpl where (syid =#{condition.syid})
+        where (c.syid =#{condition.syid})
         <if test='condition.name!=null and condition.name!=""'>
-            and name like
+            and c.name like
             concat(#{condition.name,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
+        from evaluat_tpl c
         <include refid="whereCondition"/>
     </select>
 
     <select id="findList" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
+        from evaluat_tpl c
+        left join evaluat_type t on t.id=c.category
         <include refid="whereCondition"/>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>

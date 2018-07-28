@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.dao.EvaluatCaseSubDao;
@@ -68,6 +69,9 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
     @Override
     public PageResult<EvaluatCaseVo> findEvaluatCaseList(EvaluatCaseQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<EvaluatCaseVo> rst = new PageResult<EvaluatCaseVo>();
+        if (CommonUtils.isBlank(condition.getEvaluatTplId())) {
+            return rst;
+        }
         List<EvaluatCaseVo> list = this.evaluatCaseDao.findList(condition, start, limit, orderBy);
         for (EvaluatCaseVo item : list) {
             List<EvaluatCaseSubVo> listsub = this.evaluatCaseSubDao.findLists(item.getId());
