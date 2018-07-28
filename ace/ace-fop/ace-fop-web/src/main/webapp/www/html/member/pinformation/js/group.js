@@ -57,7 +57,10 @@ app.controller(ngControllerName,function($scope){
 
     $scope.insertInformation = function(){
         var fullName = $("input[name='fullName']").val();
-        var establishDate = $("input[name='establishDate']").val()+" 00:00:00";
+        var establishDate = '';
+        if($("input[name='establishDate']").val() != ''){
+            establishDate = $("input[name='establishDate']").val()+" 00:00:00";
+        }
         var formatDate = new Date(establishDate.replace(/-/,"/"))
         var phoneNumber = $("input[name='phoneNumber']").val();
         var address = $("input[name='address']").val();
@@ -69,13 +72,14 @@ app.controller(ngControllerName,function($scope){
         var companyName = $("input[name='companyName']").val();
         var latitude = $("#latitude").val();
         var longitude = $("#longitude").val();
+        var belongTo = $("#belongTo option:checked").val();
 
         $.ajax({
             url: "/fop/www/insertAssociationInfo",
             type:"post",
             async:false,
             data:{assId: assId,fullName:fullName,establishDate: formatDate, phoneNumber:phoneNumber, address: address, directorNum: directorNum,
-                    viceNum :viceNum, pname: pname, assPost: assPost, phoneNum: phoneNum, companyName: companyName, latitude: latitude, longitude: longitude},
+                    viceNum :viceNum, pname: pname, assPost: assPost, phoneNum: phoneNum, companyName: companyName, latitude: latitude, longitude: longitude, belongTo: belongTo},
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);

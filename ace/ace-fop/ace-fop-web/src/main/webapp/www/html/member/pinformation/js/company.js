@@ -298,6 +298,7 @@ app.controller(ngControllerName,function($scope){
             type:"post",
             async:false,
             dataType:"json",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
             data:{json:JSON.stringify(json)},
             success:function(result){
                 if(result.status == 0) {
