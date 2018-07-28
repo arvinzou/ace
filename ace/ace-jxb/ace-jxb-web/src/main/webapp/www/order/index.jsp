@@ -160,7 +160,7 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12">
-						<textarea placeholder="请详细描述您遇到的问题，更有助于咨询师帮助您哦~"></textarea>
+						<textarea class="form_input"  placeholder="请详细描述您遇到的问题，更有助于咨询师帮助您哦~"></textarea>
 					</div>
 				</div>
 			</div>
