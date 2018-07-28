@@ -678,7 +678,9 @@
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and c.status = #{condition.status,jdbcType=CHAR}
         </if>
-
+        <if test="condition.belongTo!=null and condition.belongTo!=&quot;&quot;">
+            and c.belongTo = #{condition.belongTo,jdbcType=CHAR}
+        </if>
         <choose>
             <when test='condition.companyType=="w"'>
                 and c.companyType not in('3','4')

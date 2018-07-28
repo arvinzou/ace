@@ -39,8 +39,7 @@
                     <%--textField:'name',--%>
                     <%--panelHeight:'auto'">--%>
 
-                    名称： <input name="fullName" type="text"
-                               style="width: 200px;"/>
+                    名称： <input name="fullName" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopCompany/findFopCompanyList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>

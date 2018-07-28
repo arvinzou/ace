@@ -28,6 +28,7 @@
                 <form action="#" id="fm-search">
                     名称： <input name="fullName" type="text" style="width: 200px;"/>
                     电话： <input name="phoneNumber" type="text" style="width: 200px;"/>
+                    test： <input name="belongTo" type="text" style="width: 200px;"/>
 
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopAssociation/findFopAssociationList">
