@@ -79,10 +79,24 @@
                         <td width="35%">
                             <input type="text" id="address" ng-model="companyInfo.address" name="address"/>
                             <a class="maper" href="/portal/dynamic/common/map.jsp" target="_blank"><span class="glyphicon glyphicon-map-marker"></span>选取</a>
-                        </td>
-                        <td colspan="2">
                             <input type="text" id="latitude" style="display: none;"/>
                             <input type="text" id="longitude" style="display: none;"/>
+                        </td>
+                        <td width="15%" align="right">所属工商联</td>
+                        <td width="35%">
+                            <select id="belongTo" ng-model="companyInfo.belongTo">
+                                <option value="">请选择</option>
+                                <option value="常德市工商联">常德市工商联</option>
+                                <option value="武陵区工商联">武陵区工商联</option>
+                                <option value="鼎城区工商联">鼎城区工商联</option>
+                                <option value="汉寿县工商联">汉寿县工商联</option>
+                                <option value="桃源县工商联">桃源县工商联</option>
+                                <option value="临澧县工商联">临澧县工商联</option>
+                                <option value="澧县工商联">澧县工商联</option>
+                                <option value="津市市工商联">津市市工商联</option>
+                                <option value="石门县工商联">石门县工商联</option>
+                                <option value="安乡县工商联">安乡县工商联</option>
+                            </select>
                         </td>
                     </tr>
                 </table>

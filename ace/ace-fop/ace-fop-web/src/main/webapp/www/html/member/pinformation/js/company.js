@@ -155,6 +155,7 @@ app.controller(ngControllerName,function($scope){
         var address = $("input[name='address']").val();
         var latitude = $("#latitude").val();
         var longitude = $("#longitude").val();
+        var belongTo = $("#belongTo option:checked").val();
 
         /*法人代表*/
         var sex = $("#sex option:checked").val();
@@ -231,7 +232,8 @@ app.controller(ngControllerName,function($scope){
                 "yearTaxAmount":yearTaxAmount,
                 "latitude": latitude,
                 "longitude": longitude,
-                "realName": realName
+                "realName": realName,
+                "belongTo": belongTo
             },
             "legalPerson":{
                 "identityCard":identityCard,
