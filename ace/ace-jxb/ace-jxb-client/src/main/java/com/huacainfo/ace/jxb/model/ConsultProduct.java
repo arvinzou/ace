@@ -7,11 +7,17 @@ public class ConsultProduct {
     private String id;
 
     private String counselorId;
-
+    /**
+     * 咨询类型(1语音2视频3面对面)
+     */
     private String type;
-
+    /**
+     * 价格
+     */
     private BigDecimal price;
-
+    /**
+     * 是否接收咨询 0-否 1-是
+     */
     private String status;
 
     private Date createDate;
