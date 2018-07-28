@@ -262,6 +262,7 @@ border-right: 1p solid;*/
     background: url(../img/resultBG.png) no-repeat;
     background-size: 100% auto;
     padding: 0 0.8rem;
+    visibility: hidden;
 }
 
 .model_testlist .show_score > p {
