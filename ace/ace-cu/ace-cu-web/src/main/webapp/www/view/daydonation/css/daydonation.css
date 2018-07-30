@@ -424,6 +424,7 @@ ul,li{
 	width: 2rem;
 	height: 2rem;
 	float: left;
+    margin-left: 0.5rem;
 }
 .dua_left img{
 	width: 100%;
