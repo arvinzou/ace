@@ -28,9 +28,8 @@ public interface StudioService {
      * @author: Arvin
      * @version: 2018-07-25
      */
-    PageResult
-            <StudioVo> findStudioList(StudioQVo condition,
-                                      int start, int limit, String orderBy) throws Exception;
+    PageResult<StudioVo> findStudioList(StudioQVo condition,
+                                        int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,8 +67,7 @@ public interface StudioService {
      * @author: Arvin
      * @version: 2018-07-25
      */
-    SingleResult
-            <StudioVo> selectStudioByPrimaryKey(String id) throws Exception;
+    SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
