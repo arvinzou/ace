@@ -67,11 +67,16 @@
 				</div>
 			</div>
 		</script>
+		<script id="signInfo">
+            本月已签到
+            \${signCount}
+			天
+		</script>
 		<div class="box">
 			<div class="row menu-li">
 				<div class="col-xs-3 col-sm-3"><p class="menu_title">每日签到</p></div>
-				<div class="col-xs-5 col-sm-5"><p class="sign_info">本月已签到10天</p></div>
-				<div class="col-xs-4 col-sm-4"><span class="sign_btn">立即签到</span></div>
+				<div class="col-xs-5 col-sm-5"><p class="sign_info"></p></div>
+				<div class="col-xs-4 col-sm-4"><span class="sign_btn" onclick="sign();">立即签到</span></div>
 			</div>
 			<div class="row menu-li" onclick="window.location.href='mycount.jsp'">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的账户</p></div>
