@@ -150,7 +150,8 @@ function testDone() {
     $('.model_testlist .model_tool .over').text('结束测试');
     window.clearInterval(dingshiqi);
     $('.model_testlist .show_score .time_end .zztime').text($('.footer .timer').text());
-    $('.model_testlist .show_score').css("visibility", "visible");
+    $('.model_testlist .model_list').css('padding-top', '6.87rem');
+    $('.model_testlist .show_score').show();
     $('.prompt_box').hide();
     pingjia();
     showTestList();

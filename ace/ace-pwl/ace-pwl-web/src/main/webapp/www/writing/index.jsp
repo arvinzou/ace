@@ -17,15 +17,15 @@
         var fastdfs_server = 'http://zx.huacainfo.com/';
     </script>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/lib/weui.min.css?version=${cfg.version}"/>
+          href="${pageContext.request.contextPath}/www/writing/css/weui.min.css?version=${cfg.version}"/>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/lib/weui.css?version=${cfg.version}"/>
+          href="${pageContext.request.contextPath}/www/writing/css/weui.css?version=${cfg.version}"/>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/lib/weui2.css?version=${cfg.version}"/>
+          href="${pageContext.request.contextPath}/www/writing/css/weui2.css?version=${cfg.version}"/>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/lib/weui3.css?version=${cfg.version}"/>
+          href="${pageContext.request.contextPath}/www/writing/css/weui3.css?version=${cfg.version}"/>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/css/jquery-weui.min.css?version=${cfg.version}"/>
+          href="${pageContext.request.contextPath}/www/writing/css/jquery-weui.min.css?version=${cfg.version}"/>
 </head>
 <script>
     var author = '${param.id}';
@@ -69,9 +69,11 @@
 </div>
 
 
-<jsp:include page="../../common/footer-1-www1.jsp"/>
-<script src="${pageContext.request.contextPath}/content/common/lib/fastclick.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/writing/controller.js"></script>
+<%--<jsp:include page="../../dynamic/common/footer-1-www1.jsp"/>--%>
+<script src="${pageContext.request.contextPath}/www/writing/js/jquery-2.1.4.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/www/writing/js/jquery-weui.min.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/www/writing/js/fastclick.js"></script>
+<script src="${pageContext.request.contextPath}/www/writing/js/controller.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);

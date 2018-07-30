@@ -7,7 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>作品信息</title>
-    <jsp:include page="../../common/common-www1.jsp"/>
+    <jsp:include page="../../dynamic/common/common-www1.jsp"/>
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/www/writing/css/weui.min.css?version=${cfg.version}"/>
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/www/writing/css/jquery-weui.min.css?version=${cfg.version}"/>
     <script>
         var id = '${param.id}';
     </script>
@@ -105,22 +109,17 @@
          alt="">
 </div>
 
-<link rel="stylesheet prefetch" href="${pageContext.request.contextPath}/content/common/photoview/photoswipe.css">
+<link rel="stylesheet prefetch" href="${pageContext.request.contextPath}/www/writing/photoview/photoswipe.css">
 <link rel="stylesheet prefetch"
-      href="${pageContext.request.contextPath}/content/common/photoview/default-skin/default-skin.css">
-<script src="${pageContext.request.contextPath}/content/common/photoview/photoswipe.js"></script>
-<script src="${pageContext.request.contextPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
-<script src="${pageContext.request.contextPath}/content/common/lib/fastclick.js"></script>
+      href="${pageContext.request.contextPath}/www/writing/photoview/default-skin/default-skin.css">
+<script src="${pageContext.request.contextPath}/www/writing/photoview/photoswipe.js"></script>
+<script src="${pageContext.request.contextPath}/www/writing/photoview/photoswipe-ui-default.min.js"></script>
 
-<link rel="stylesheet prefetch" href="${pageContext.request.contextPath}/content/common/photoview/photoswipe.css">
-<link rel="stylesheet prefetch"
-      href="${pageContext.request.contextPath}/content/common/photoview/default-skin/default-skin.css">
-<script src="${pageContext.request.contextPath}/content/common/photoview/photoswipe.js"></script>
-<script src="${pageContext.request.contextPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
-
-<jsp:include page="../../common/footer-1-www1.jsp"/>
-<script src="${pageContext.request.contextPath}/content/common/lib/fastclick.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/writing/preview.js"></script>
+<%--<jsp:include page="../../dynamic/common/footer-1-www1.jsp"/>--%>
+<script src="${pageContext.request.contextPath}/www/writing/js/jquery-2.1.4.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/www/writing/js/jquery-weui.min.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/www/writing/js/fastclick.js"></script>
+<script src="${pageContext.request.contextPath}/www/writing/js/preview.js"></script>
 
 <style>
     .like_btn {
