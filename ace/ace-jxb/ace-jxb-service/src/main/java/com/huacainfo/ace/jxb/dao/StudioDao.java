@@ -23,14 +23,13 @@ public interface StudioDao {
 
     StudioVo selectVoByPrimaryKey(String id);
 
-    List
-            <StudioVo> findList(@Param("condition") StudioQVo condition,
-                                @Param("start") int start,
-                                @Param("limit") int limit,
-                                @Param("orderBy") String orderBy);
+    List<StudioVo> findList(@Param("condition") StudioQVo condition,
+                            @Param("start") int start,
+                            @Param("limit") int limit,
+                            @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") StudioQVo condition);
 
-    int isExit(Studio record);
+    List<Studio> isExit(Studio record);
 
 }

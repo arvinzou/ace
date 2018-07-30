@@ -8,6 +8,8 @@ import com.huacainfo.ace.jxb.model.Studio;
 import com.huacainfo.ace.jxb.vo.StudioQVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 
+import java.util.List;
+
 /**
  * @author: Arvin
  * @version: 2018-07-25
@@ -28,9 +30,8 @@ public interface StudioService {
      * @author: Arvin
      * @version: 2018-07-25
      */
-    PageResult
-            <StudioVo> findStudioList(StudioQVo condition,
-                                      int start, int limit, String orderBy) throws Exception;
+    PageResult<StudioVo> findStudioList(StudioQVo condition,
+                                        int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,8 +69,7 @@ public interface StudioService {
      * @author: Arvin
      * @version: 2018-07-25
      */
-    SingleResult
-            <StudioVo> selectStudioByPrimaryKey(String id) throws Exception;
+    SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -87,9 +87,25 @@ public interface StudioService {
     /**
      * 工作室审核
      *
-     * @param studioId
-     * @param auditRs
+     * @param studioId    工作室ID
+     * @param auditRs     0- 待审核 1-审核通过 2-审核拒绝
      * @param curUserProp @return
      */
     MessageResponse audit(String studioId, String auditRs, UserProp curUserProp) throws Exception;
+
+    /**
+     * 获取我的工作室列表
+     *
+     * @param counselorId 咨询师主键id
+     * @return List<StudioVo>
+     */
+    List<StudioVo> getStudioList(String counselorId);
+
+    /**
+     * 获取工作室详情
+     *
+     * @param studioId 工作室ID
+     * @return StudioVo
+     */
+    StudioVo getStudioDetail(String studioId) throws Exception;
 }

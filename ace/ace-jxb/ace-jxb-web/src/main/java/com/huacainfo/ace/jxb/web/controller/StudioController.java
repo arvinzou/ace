@@ -49,7 +49,7 @@ public class StudioController extends JxbBaseController {
     @ResponseBody
     public PageResult<StudioVo> findStudioList(StudioQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<StudioVo> rst = this.studioService
-                .findStudioList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+                .findStudioList(condition, (page.getPage()-1)*page.getLimit(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -129,7 +129,7 @@ public class StudioController extends JxbBaseController {
     /***
      *
      * @param studioId 工作室ID
-     * @param auditRs 审核结果 1-审核通过 2-审核拒绝
+     * @param auditRs 审核结果  0- 待审核 1-审核通过 2-审核拒绝
      * @return
      * @throws Exception
      */
