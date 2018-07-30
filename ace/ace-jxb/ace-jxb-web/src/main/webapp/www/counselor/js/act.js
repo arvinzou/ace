@@ -18,6 +18,16 @@ function findDetail(id){
         success:function(result){
             if(result.status == 0) {
                 console.log(result);
+                var head = document.getElementById('headTemp').innerHTML;
+                var headhtml = juicer(head, {
+                    headData: result.data.counselorVo,
+                });
+                $(".chead").html(headhtml);
+                var navitem = document.getElementById('consulorTemp').innerHTML;
+                var html = juicer(navitem, {
+                    data: result.data,
+                });
+                $("#consulor").html(html);
             }else {
                 alert(result.info);
                 return;

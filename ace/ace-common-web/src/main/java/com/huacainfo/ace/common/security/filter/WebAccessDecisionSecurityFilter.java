@@ -64,6 +64,7 @@ public class WebAccessDecisionSecurityFilter implements Filter {
         HttpSession session = httpReq.getSession();
         Object object = session.getAttribute(CommonKeys.SESSION_USERPROP_KEY);
         boolean accessable = false;
+        redirectPage = "/portal/dynamic/portal/security/login.jsp";
         if (object != null) {
             BasicUsers basicUsers = (BasicUsers) object;
             accessable = checkAccessable(httpReq.getRequestURI(), basicUsers);

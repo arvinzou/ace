@@ -3,22 +3,28 @@
 <mapper namespace="com.huacainfo.ace.jxb.dao.StudioDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.Studio">
         <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="studioId" jdbcType="VARCHAR" property="studioId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="level" jdbcType="VARCHAR" property="level"/>
         <result column="counselorId" jdbcType="VARCHAR" property="counselorId"/>
         <result column="logoImgUrl" jdbcType="VARCHAR" property="logoImgUrl"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.jxb.model.Studio">
         <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
-
     </resultMap>
     <sql id="Base_Column_List">
-        id, `name`, `level`, counselorId, logoImgUrl, status, createDate, introduce
+    id, studioId, name, level, counselorId, logoImgUrl, status, createDate
   </sql>
-
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <sql id="Blob_Column_List">
+    introduce
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
         from studio
         where id = #{id,jdbcType=VARCHAR}
     </select>
@@ -27,11 +33,11 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Studio">
-        insert into studio (id, name,
+    insert into studio (id, studioId, name, 
       level, counselorId, logoImgUrl, 
       status, createDate, introduce
       )
-        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+    values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{level,jdbcType=VARCHAR}, #{counselorId,jdbcType=VARCHAR}, #{logoImgUrl,jdbcType=VARCHAR}, 
       #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR}
       )
@@ -41,6 +47,9 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
+            </if>
+            <if test="studioId != null">
+                studioId,
             </if>
             <if test="name != null">
                 name,
@@ -68,6 +77,9 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
+            <if test="studioId != null">
+                #{studioId,jdbcType=VARCHAR},
+            </if>
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
@@ -94,6 +106,9 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.Studio">
         update studio
         <set>
+            <if test="studioId != null">
+                studioId = #{studioId,jdbcType=VARCHAR},
+            </if>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
@@ -118,7 +133,18 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.jxb.model.Studio">
+    update studio
+    set studioId = #{studioId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      counselorId = #{counselorId,jdbcType=VARCHAR},
+      logoImgUrl = #{logoImgUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      introduce = #{introduce,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Studio">
     update studio
     set studioId = #{studioId,jdbcType=VARCHAR},
@@ -131,55 +157,14 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.StudioVo">
-        <result column="dutyName" jdbcType="VARCHAR" property="dutyName"/>
-        <result column="dutyHeadImg" jdbcType="VARCHAR" property="dutyHeadImg"/>
-    </resultMap>
-    <sql id="Vo_Column_List">
-        c.`name` as dutyName, c.imagePhotoUrl as dutyHeadImg,
-        t.id, t.`name`, t.`level`, t.counselorId, t.logoImgUrl, t.status, t.createDate, t.introduce
-    </sql>
-
-    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    <select id="isExit" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
         select
-        <include refid="Vo_Column_List"/>
-        from studio t
-        left join counselor c on t.counselorId =c.id
-        where t.id = #{id,jdbcType=VARCHAR}
-    </select>
-
-    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
-        select
-        <include refid="Vo_Column_List"/>
-        <include refid="whereCondition"/>
-        <choose>
-            <when test="orderBy!=null and orderBy!=&quot;&quot;">
-                ORDER BY ${orderBy}
-            </when>
-            <otherwise>
-                ORDER BY t.createDate desc
-            </otherwise>
-        </choose>
-        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-    </select>
-
-    <sql id="whereCondition">
-        from studio t
-        left join counselor c on t.counselorId =c.id
-        where 1=1
-        <if test="condition.counselorId !=null and condition.counselorId !=&quot;&quot;">
-            and t.counselorId = #{condition.counselorId,jdbcType=VARCHAR}
-        </if>
-    </sql>
-
-    <select id="findCount" resultType="int">
-        SELECT COUNT(*)
-        <include refid="whereCondition"/>
-    </select>
-
-    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.Consult">
-        select count(1)
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
         from studio
-        where 1=1
+        where name =#{name,jdbcType=VARCHAR}
+        or
     </select>
+
 </mapper>
