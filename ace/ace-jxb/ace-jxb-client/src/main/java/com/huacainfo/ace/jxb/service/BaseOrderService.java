@@ -3,6 +3,7 @@ package com.huacainfo.ace.jxb.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
@@ -28,9 +29,8 @@ public interface BaseOrderService {
      * @author: Arvin
      * @version: 2018-07-25
      */
-    PageResult
-            <BaseOrderVo> findBaseOrderList(BaseOrderQVo condition,
-                                            int start, int limit, String orderBy) throws Exception;
+    PageResult<BaseOrderVo> findBaseOrderList(BaseOrderQVo condition,
+                                              int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,8 +68,7 @@ public interface BaseOrderService {
      * @author: Arvin
      * @version: 2018-07-25
      */
-    SingleResult
-            <BaseOrderVo> selectBaseOrderByPrimaryKey(String id) throws Exception;
+    SingleResult<BaseOrderVo> selectBaseOrderByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -84,4 +83,31 @@ public interface BaseOrderService {
      */
     MessageResponse deleteBaseOrderByBaseOrderId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 创建订单
+     *
+     * @param data 数据示例：
+     *             {
+     *             --订单基本情况  参考 BaseOrder.java
+     *             "base": {
+     *             "businessId": "businessId",
+     *             "category": "1",
+     *             "commodityId": "commodityId",
+     *             "consumerId": "consumerId"
+     *             },
+     *             --预约详情 参考 ConsultOrder.java
+     *             "consult": {
+     *             "age": 1,
+     *             "info": "Info",
+     *             "name": "Name",
+     *             "relationship": "Relationship",
+     *             "secName": "SecName",
+     *             "secTel": "SecTel",
+     *             "sex": "Sex",
+     *             "tel": "Tel18000"
+     *             }
+     *             }
+     * @return ResultResponse
+     */
+    ResultResponse create(String data) throws Exception;
 }

@@ -1,0 +1,16 @@
+#operation{
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+}
+#info table{
+    width: 100%;
+    padding-left: 10px;
+}
+
+.commontr{
+    height: 30px;
+}
+.str{
+    height: 80px;
+}

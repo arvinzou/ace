@@ -65,7 +65,7 @@ public class WStudioController extends JxbBaseController {
 
 
     /**
-     * 获取我的工作室列表
+     * 获取我的工作室详情
      */
     @RequestMapping("/getStudioDetail")
     public ResultResponse getStudioDetail(String studioId) throws Exception {

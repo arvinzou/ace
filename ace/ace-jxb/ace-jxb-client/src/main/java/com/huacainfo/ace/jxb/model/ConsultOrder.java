@@ -3,26 +3,49 @@ package com.huacainfo.ace.jxb.model;
 import java.util.Date;
 
 public class ConsultOrder {
+    /**
+     * 订单主键
+     */
     private String id;
-
+    /**
+     * 联系方式
+     */
     private String tel;
-
+    /**
+     * 姓名
+     */
     private String name;
-
+    /**
+     * 年龄
+     */
     private Integer age;
-
+    /**
+     * 性别
+     */
     private String sex;
-
+    /**
+     * 问题类型及描述
+     */
     private String info;
-
+    /**
+     * 紧急联系人
+     */
     private String secName;
-
+    /**
+     * 关系
+     */
     private String relationship;
-
+    /**
+     * 联系电话
+     */
     private String secTel;
-
+    /**
+     * 状态
+     */
     private String status;
-
+    /**
+     * 入库日期
+     */
     private Date createDate;
 
     public String getId() {
