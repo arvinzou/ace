@@ -70,6 +70,9 @@ public class FopGeHelpController extends FopBaseController {
     @ResponseBody
     public MessageResponse insertFopGeHelp(String jsons) throws Exception {
         FopGeHelp obj = JSON.parseObject(jsons, FopGeHelp.class);
+        obj.setRequestId(getCurUserProp().getUserId());
+        obj.setRequestType("f");
+        obj.setParentId("0");
         return this.fopGeHelpService.insertFopGeHelp(obj, this.getCurUserProp());
     }
 

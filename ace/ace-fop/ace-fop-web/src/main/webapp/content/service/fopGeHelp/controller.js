@@ -40,6 +40,11 @@ jQuery(function ($) {
                     closeAfterAdd: true,
                     recreateForm: true,
                     viewPagerButtons: false,
+                    beforeSubmit: function (postdata) {
+                        postdata.content = editor.getValue();
+                        return [true, "", ""];
+
+                    },
                     beforeShowForm: function (e) {
                         var form = $(e[0]);
                         form.closest('.ui-jqdialog').find(
@@ -47,7 +52,9 @@ jQuery(function ($) {
                             '<div class="widget-header" />')
                         style_edit_form(form);
                         initSimditor($("textarea[name=content]"), null);
-                        // $('.simditor .simditor-body').prop('contenteditable', true);
+                        $('.simditor .simditor-body').prop('contenteditable', true);
+
+
                     }
                 })
         });

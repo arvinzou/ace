@@ -74,8 +74,9 @@ public class FopProjectController extends FopBaseController {
     @ResponseBody
     public MessageResponse insertFopProject(String jsons) throws Exception {
         FopProject obj = JSON.parseObject(jsons, FopProject.class);
-        return this.fopProjectService
-                .insertFopProject(obj, this.getCurUserProp());
+        obj.setRelationId(getCurUserProp().getUserId());
+        obj.setRelationType("f");
+        return fopProjectService.insertFopProject(obj, this.getCurUserProp());
     }
 
     /**

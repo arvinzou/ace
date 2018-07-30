@@ -47,13 +47,12 @@
             <div class="widget-main padding-6">
 
                 <input type="hidden" name="taskId" value="${taskId }">
-                <div class="profile-info-row">
+                <div class="profile-info-row hide">
                     <div class="profile-info-name">任务名称：</div>
 
                     <div class="profile-info-value">
-                        <input style="width: 600px; height: 25px; line-height: 25px;"
-                               id="taskName" maxLength="20"/><span
-                            style='color:red;font-size:16px;font-weight:800'>*</span>
+                        <input style="width: 600px; height: 25px; line-height: 25px;" id="taskName" maxLength="20"/>
+                        <span style='color:red;font-size:16px;font-weight:800'>*</span>
                     </div>
                 </div>
                 <div class="profile-info-row">
@@ -63,7 +62,6 @@
                         <div id="task-content" class="easyui-panel"
                              style="padding: 5px; width: 600px; height: 100px"></div>
                         <span style='color:red;font-size:16px;font-weight:800'>*</span>
-
                     </div>
                 </div>
                 <div class="profile-info-row">
@@ -84,7 +82,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="profile-info-row">
+                <div class="profile-info-row hide">
                     <div class="profile-info-name">发送给：</div>
 
                     <div class="profile-info-value">

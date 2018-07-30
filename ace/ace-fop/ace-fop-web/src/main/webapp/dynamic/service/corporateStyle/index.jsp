@@ -133,7 +133,7 @@
             <span id="remark">
 </span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
+        <div class="labelItem hide"><span class="labelItemHeader">
 状态</span>
             <br>
             <span id="status">

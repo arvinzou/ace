@@ -406,7 +406,9 @@ public class FopQuestionServiceImpl implements FopQuestionService {
 
     private void sendMessageNotice(FopQuestion obj, String auditResult, String auditOpinion) {
         try {
-            messageService.lawQuestionAuditMessage(obj, auditResult, auditOpinion);
+            if (StringUtil.isNotEmpty(obj.getRelationId())) {
+                messageService.lawQuestionAuditMessage(obj, auditResult, auditOpinion);
+            }
         } catch (Exception e) {
             logger.error("法律帮助 -[{}]- 审核 - 消息推送失败", obj.getId());
         }
