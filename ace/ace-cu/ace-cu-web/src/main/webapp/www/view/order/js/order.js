@@ -158,7 +158,11 @@ app.controller(ngControllerName,function($scope) {
                                     $scope.$apply();
                                 }
                             }else {
-                                alert(result.info);
+                                if(result.info){
+                                    alert(result.info);
+                                }else if(result.errorMessage){
+                                    alert(result.errorMessage);
+                                }
                                 return;
                             }
                         },
