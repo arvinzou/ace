@@ -85,7 +85,7 @@
                                 <script id="list" type="text/template">
                                     {@each data as item,index}
                                     <tr>
-                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${index}</font></font></td>
+                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${parseInt(index)+1}</font></font></td>
                                         <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.name} </font></font></td>
                                         <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.dutyName} </font></font></td>
                                         <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.level} </font></font></td>
