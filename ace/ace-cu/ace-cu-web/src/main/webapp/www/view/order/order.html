@@ -43,7 +43,7 @@
 						<div class="form">
 							<p>
 								<span class="form_title">联系电话</span>
-								<input id="phoneNum" maxlength="11" class="form_text" type="number" placeholder="请输入联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入联系电话'" />
+								<input id="phoneNum" maxlength="11" class="form_text" type="text" placeholder="请输入联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入联系电话'"  onchange="if(/\D/.test(this.value)){alert('联系电话格式不正确！');this.value='';}"/>
 							</p>
 						</div>
 					</div>
@@ -81,7 +81,7 @@
 						<div class="form">
 							<p>
 								<span class="form_title">联系电话</span>
-								<input id="billphoneNumber" class="form_text" type="number" maxlength="11" placeholder="请输入收货人联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入收货人联系电话'" />
+								<input id="billphoneNumber" class="form_text" type="text" maxlength="11" placeholder="请输入收货人联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入收货人联系电话'" onchange="if(/\D/.test(this.value)){alert('联系电话格式不正确！');this.value='';}"/>
 							</p>
 						</div>
 						<div class="form">
